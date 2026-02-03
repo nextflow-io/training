@@ -36,6 +36,7 @@ from rich.progress import Progress, SpinnerColumn, TextColumn
 
 app = typer.Typer(help="Translation tools for Nextflow training docs")
 console = Console()
+console_err = Console(stderr=True)
 
 # Must be run from repo root
 REPO_ROOT = Path(__file__).parent.parent
@@ -275,22 +276,7 @@ def list_missing(language: str):
 @app.command()
 def list_outdated(language: str):
     """List translations older than their English source (by git commit time)."""
-    repo = git.Repo(REPO_ROOT)
-    outdated = []
-
-    for en_path in iter_en_docs():
-        lang_path = to_lang_path(en_path, language)
-        if not lang_path.exists():
-            continue
-
-        en_commits = list(repo.iter_commits(paths=str(en_path), max_count=1))
-        lang_commits = list(repo.iter_commits(paths=str(lang_path), max_count=1))
-
-        if not en_commits or not lang_commits:
-            continue
-
-        if lang_commits[0].committed_datetime < en_commits[0].committed_datetime:
-            outdated.append(en_path)
+    outdated = get_outdated_files(language)
 
     if not outdated:
         console.print(f"[green]All translations up to date for {language}[/green]")
@@ -342,20 +328,7 @@ def update_outdated(
     ),
 ):
     """Update all outdated translations for a language."""
-    repo = git.Repo(REPO_ROOT)
-    outdated = []
-
-    for en_path in iter_en_docs():
-        lang_path = to_lang_path(en_path, language)
-        if not lang_path.exists():
-            continue
-
-        en_commits = list(repo.iter_commits(paths=str(en_path), max_count=1))
-        lang_commits = list(repo.iter_commits(paths=str(lang_path), max_count=1))
-
-        if en_commits and lang_commits:
-            if lang_commits[0].committed_datetime < en_commits[0].committed_datetime:
-                outdated.append(en_path)
+    outdated = get_outdated_files(language)
 
     if not outdated:
         console.print(f"[green]All translations up to date for {language}[/green]")
@@ -694,6 +667,254 @@ def fix_translations(
     console.print(f"\n[yellow]Max iterations ({max_iterations}) reached.[/yellow]")
     console.print(f"Total changes: {total_changes}")
     console.print("Some issues may remain - consider running again or manual review.")
+
+
+def get_all_languages() -> list[str]:
+    """Get all translation language codes (excludes 'en')."""
+    langs = []
+    for mkdocs_yml in DOCS_PATH.glob("*/mkdocs.yml"):
+        lang = mkdocs_yml.parent.name
+        if lang != "en":
+            langs.append(lang)
+    return sorted(langs)
+
+
+def get_outdated_files(language: str) -> list[Path]:
+    """Get list of outdated translation files for a language."""
+    repo = git.Repo(REPO_ROOT)
+    outdated = []
+
+    for en_path in iter_en_docs():
+        lang_path = to_lang_path(en_path, language)
+        if not lang_path.exists():
+            continue
+
+        en_commits = list(repo.iter_commits(paths=str(en_path), max_count=1))
+        lang_commits = list(repo.iter_commits(paths=str(lang_path), max_count=1))
+
+        if en_commits and lang_commits:
+            if lang_commits[0].committed_datetime < en_commits[0].committed_datetime:
+                outdated.append(en_path)
+
+    return outdated
+
+
+@app.command()
+def detect_work(
+    event_name: str = typer.Option(
+        ..., "--event-name", help="GitHub event name (push/workflow_dispatch)"
+    ),
+    command: str = typer.Option("auto", "--command", "-c", help="Command to run"),
+    language: str = typer.Option(None, "--language", "-l", help="Specific language"),
+    before_sha: str = typer.Option(None, "--before-sha", help="Git SHA before push"),
+    after_sha: str = typer.Option(None, "--after-sha", help="Git SHA after push"),
+):
+    """
+    Detect what translation work needs to be done.
+
+    Outputs GitHub Actions-compatible key=value pairs for workflow outputs.
+    """
+    all_languages = get_all_languages()
+
+    # Validate language if specified
+    if language:
+        if language not in all_languages:
+            console.print(f"[red]Error:[/red] Language '{language}' not found")
+            console.print(f"Available: {', '.join(all_languages)}")
+            raise typer.Exit(code=1)
+
+    # For list-* commands, just pass through the language(s)
+    if command.startswith("list-"):
+        langs = [language] if language else all_languages
+        print(f"languages_outdated={json.dumps(langs)}")
+        print("languages_fix=[]")
+        print("has_work=true")
+        print(f"command={command}")
+        return
+
+    # For fix-translations command
+    if command == "fix-translations":
+        langs = [language] if language else all_languages
+        print("languages_outdated=[]")
+        print(f"languages_fix={json.dumps(langs)}")
+        print("has_work=true")
+        print(f"command={command}")
+        return
+
+    # For specific language with non-list command
+    if language:
+        if command == "auto":
+            # Check if this language has outdated files
+            outdated = get_outdated_files(language)
+            if outdated:
+                print(f"languages_outdated={json.dumps([language])}")
+                print("has_work=true")
+            else:
+                print("languages_outdated=[]")
+                print("has_work=false")
+            print("languages_fix=[]")
+        else:
+            # Specific command with specific language
+            print(f"languages_outdated={json.dumps([language])}")
+            print("languages_fix=[]")
+            print("has_work=true")
+        print(f"command={command}")
+        return
+
+    # Auto-detect mode: check all languages
+    languages_outdated = []
+    languages_fix = []
+
+    # Check for prompt changes (on push events)
+    if event_name == "push" and before_sha and after_sha:
+        repo = git.Repo(REPO_ROOT)
+        try:
+            diff = repo.git.diff("--name-only", before_sha, after_sha)
+            changed_files = diff.split("\n") if diff else []
+
+            # Check if general prompt changed (affects all languages)
+            if "_scripts/general-llm-prompt.md" in changed_files:
+                console_err.print(
+                    "[dim]General prompt changed - all languages need fixing[/dim]"
+                )
+                languages_fix = all_languages.copy()
+            else:
+                # Check which language-specific prompts changed
+                for lang in all_languages:
+                    if f"docs/{lang}/llm-prompt.md" in changed_files:
+                        console_err.print(f"[dim]Prompt changed for {lang}[/dim]")
+                        languages_fix.append(lang)
+        except git.GitCommandError:
+            # Git diff failed (e.g., shallow clone), skip prompt detection
+            pass
+
+    # Check each language for outdated translations
+    for lang in all_languages:
+        outdated = get_outdated_files(lang)
+        if outdated:
+            console_err.print(
+                f"[dim]Found {len(outdated)} outdated files for {lang}[/dim]"
+            )
+            languages_outdated.append(lang)
+
+    has_work = bool(languages_outdated or languages_fix)
+
+    print(f"languages_outdated={json.dumps(languages_outdated)}")
+    print(f"languages_fix={json.dumps(languages_fix)}")
+    print(f"has_work={'true' if has_work else 'false'}")
+    print(f"command={command}")
+
+    if not has_work:
+        console_err.print("[dim]No languages need updates[/dim]")
+
+
+@app.command()
+def run_batch(
+    command: str = typer.Option("auto", "--command", "-c", help="Command to run"),
+    languages_outdated: str = typer.Option(
+        "[]", "--languages-outdated", help="JSON array of languages needing update"
+    ),
+    languages_fix: str = typer.Option(
+        "[]", "--languages-fix", help="JSON array of languages needing fix"
+    ),
+):
+    """
+    Run translation commands for multiple languages (for CI use).
+
+    This command dispatches the appropriate translation commands based on
+    the detected work from detect-work.
+    """
+    outdated_list: list[str] = json.loads(languages_outdated)
+    fix_list: list[str] = json.loads(languages_fix)
+
+    console.print(f"[bold]Command:[/bold] {command}")
+    console.print(f"[bold]Languages (outdated):[/bold] {outdated_list}")
+    console.print(f"[bold]Languages (fix):[/bold] {fix_list}")
+
+    # Handle explicit commands (non-auto)
+    if command != "auto":
+        # Use outdated list for most commands, fix list for fix-translations
+        lang_list = fix_list if command == "fix-translations" else outdated_list
+
+        for lang in lang_list:
+            console.print(f"\n{'=' * 42}")
+            console.print(f"Processing language: {lang} (command: {command})")
+            console.print("=" * 42)
+
+            if command == "list-outdated":
+                list_outdated(lang)
+            elif command == "list-missing":
+                list_missing(lang)
+            elif command == "update-outdated":
+                update_outdated(language=lang, verify=False, verify_iterations=2)
+            elif command == "add-missing":
+                add_missing(
+                    language=lang, include=None, verify=False, verify_iterations=2
+                )
+            elif command == "update-and-add":
+                update_and_add(
+                    language=lang, include=None, verify=False, verify_iterations=2
+                )
+            elif command == "fix-translations":
+                fix_translations(
+                    language=lang, max_iterations=8, files=None, dry_run=False
+                )
+        return
+
+    # Auto mode: run appropriate command per language
+    # First, update outdated translations
+    for lang in outdated_list:
+        console.print(f"\n{'=' * 42}")
+        console.print(f"Updating outdated translations: {lang}")
+        console.print("=" * 42)
+        update_outdated(language=lang, verify=False, verify_iterations=2)
+
+    # Then, fix translations for languages with prompt changes
+    for lang in fix_list:
+        console.print(f"\n{'=' * 42}")
+        console.print(f"Fixing translations (prompt changed): {lang}")
+        console.print("=" * 42)
+        fix_translations(language=lang, max_iterations=8, files=None, dry_run=False)
+
+
+@app.command()
+def run_post_fix(
+    languages_outdated: str = typer.Option(
+        "[]", "--languages-outdated", help="JSON array of languages that were updated"
+    ),
+    languages_fix: str = typer.Option(
+        "[]", "--languages-fix", help="JSON array of languages that were fixed"
+    ),
+):
+    """
+    Run post-processing fixer for translated languages (for CI use).
+
+    Combines and deduplicates the language lists and runs translation_fixer.
+    """
+    from translation_fixer import fix_one_page
+
+    outdated_list: list[str] = json.loads(languages_outdated)
+    fix_list: list[str] = json.loads(languages_fix)
+
+    # Combine and dedupe
+    all_langs = sorted(set(outdated_list + fix_list))
+
+    for lang in all_langs:
+        lang_docs = DOCS_PATH / lang / "docs"
+        if not lang_docs.exists():
+            console.print(f"[yellow]Warning:[/yellow] Language docs not found: {lang}")
+            continue
+
+        files = list(lang_docs.rglob("*.md"))
+        console.print(f"Post-processing {len(files)} files for {lang}...")
+
+        for path in files:
+            console.print(f"  {path.name}", end=" ")
+            try:
+                fix_one_page(path)
+                console.print("[green]OK[/green]")
+            except ValueError as e:
+                console.print(f"[yellow]Warning:[/yellow] {e}")
 
 
 @app.command()
