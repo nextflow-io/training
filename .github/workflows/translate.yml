@@ -129,5 +129,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         working-directory: _scripts
-        run: uv run -q translate.py ci-pr
+        run: |
+          # Determine trigger description
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TRIGGER="manual"
+          else
+            # Get first line of commit message for title
+            TRIGGER=$(git log -1 --format=%s ${{ github.sha }})
+            # Get full commit message for body (passed via env var to handle multi-line)
+            export TRIGGER_COMMIT_MESSAGE=$(git log -1 --format=%B ${{ github.sha }})
+          fi
+          uv run -q translate.py ci-pr --trigger "$TRIGGER"

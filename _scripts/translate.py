@@ -51,7 +51,7 @@ EN_DOCS = DOCS_ROOT / "en" / "docs"
 SCRIPTS_DIR = REPO_ROOT / "_scripts"
 
 MODEL = "claude-sonnet-4-5"
-MAX_TOKENS = 16384
+MAX_TOKENS = 32768  # Large enough for biggest docs (~60KB source)
 REQUEST_TIMEOUT = 600.0  # 10 minute timeout per API request
 
 # Retry configuration for transient API errors
@@ -310,23 +310,26 @@ def check_api_key() -> None:
         )
 
 
-def call_claude(prompt: str, console: Console | None = None) -> str:
-    """Call Claude API with retry logic and exponential backoff.
+MAX_CONTINUATIONS = 5  # Max continuation requests for very large files
 
-    Retries on transient errors (connection, timeout, rate limit, server errors)
-    with exponential backoff: 2s, 4s, 8s, 16s, 32s, 64s, 128s, 256s (~8.5 min total).
+
+def _call_claude_once(
+    client: anthropic.Anthropic,
+    messages: list[dict],
+    console: Console | None = None,
+) -> anthropic.types.Message:
+    """Make a single Claude API call with retry logic for transient errors.
+
+    Returns the raw Message object so caller can check stop_reason.
     """
-    client = anthropic.Anthropic()
-
     for attempt in range(MAX_RETRIES + 1):
         try:
-            message = client.messages.create(
+            return client.messages.create(
                 model=MODEL,
                 max_tokens=MAX_TOKENS,
                 timeout=REQUEST_TIMEOUT,
-                messages=[{"role": "user", "content": prompt}],
+                messages=messages,
             )
-            return message.content[0].text.strip()
         except (
             anthropic.APIConnectionError,
             anthropic.APITimeoutError,
@@ -344,6 +347,47 @@ def call_claude(prompt: str, console: Console | None = None) -> str:
             time.sleep(delay)
 
     raise RuntimeError("Unreachable")
+
+
+def call_claude(prompt: str, console: Console | None = None) -> str:
+    """Call Claude API with automatic continuation for large responses.
+
+    If the response hits max_tokens, automatically continues the conversation
+    to get the complete output. Includes retry logic with exponential backoff
+    for transient errors.
+    """
+    client = anthropic.Anthropic()
+    messages: list[dict] = [{"role": "user", "content": prompt}]
+
+    # Initial request
+    message = _call_claude_once(client, messages, console)
+    result_parts = [message.content[0].text]
+
+    # Handle continuations if response was truncated
+    continuation = 0
+    while message.stop_reason == "max_tokens":
+        continuation += 1
+        if continuation > MAX_CONTINUATIONS:
+            raise TranslationError(
+                f"Response still incomplete after {MAX_CONTINUATIONS} continuations. "
+                f"File may be too large to translate."
+            )
+        if console:
+            console.print(
+                f"    [yellow]Response truncated, requesting continuation "
+                f"{continuation}/{MAX_CONTINUATIONS}...[/yellow]"
+            )
+
+        # Append assistant response and continuation request to conversation history
+        messages.append({"role": "assistant", "content": message.content[0].text})
+        messages.append(
+            {"role": "user", "content": "Continue exactly where you left off."}
+        )
+
+        message = _call_claude_once(client, messages, console)
+        result_parts.append(message.content[0].text)
+
+    return "".join(result_parts).strip()
 
 
 def translate_file(tf: TranslationFile, console: Console) -> None:
@@ -793,6 +837,20 @@ def ci_run(
 def ci_pr(
     github_token: str = typer.Option(..., envvar="GITHUB_TOKEN"),
     github_repository: str = typer.Option(..., envvar="GITHUB_REPOSITORY"),
+    run_url: str = typer.Option(
+        "", envvar="GITHUB_RUN_URL", help="GitHub Actions run URL"
+    ),
+    trigger: str = typer.Option(
+        "", help="What triggered this run (commit subject or 'manual')"
+    ),
+    commit_sha: str = typer.Option(
+        "", envvar="GITHUB_SHA", help="Git commit SHA that triggered this run"
+    ),
+    commit_message: str = typer.Option(
+        "",
+        envvar="TRIGGER_COMMIT_MESSAGE",
+        help="Full commit message that triggered this run",
+    ),
 ):
     """Create PR with translation changes (CI)."""
     from github import Github
@@ -819,11 +877,38 @@ def ci_pr(
     )
     subprocess.run(["git", "push", "origin", branch], check=True, cwd=REPO_ROOT)
 
+    # Build PR title
+    title = "Update translations"
+    if trigger:
+        # Truncate long commit messages
+        trigger_short = trigger[:50] + "..." if len(trigger) > 50 else trigger
+        title = f"Update translations ({trigger_short})"
+
+    # Build PR body
+    body_parts = ["Automated translation update."]
+    if run_url:
+        body_parts.append(f"**Workflow run:** {run_url}")
+    body_parts.append(
+        "\nTo improve translations, see "
+        f"[TRANSLATING.md](https://github.com/{github_repository}/blob/master/TRANSLATING.md) "
+        "or edit prompt files:\n"
+        "- `_scripts/general-llm-prompt.md`\n"
+        "- `docs/*/llm-prompt.md`"
+    )
+    # Add trigger commit details at the end
+    if commit_sha or commit_message:
+        trigger_parts = ["---", "**Triggered by:**"]
+        if commit_sha:
+            trigger_parts.append(f"Commit: `{commit_sha[:10]}`")
+        if commit_message:
+            trigger_parts.append(f"```\n{commit_message}\n```")
+        body_parts.append("\n".join(trigger_parts))
+    body = "\n\n".join(body_parts)
+
     gh = Github(github_token)
     pr = gh.get_repo(github_repository).create_pull(
-        title="Update translations",
-        body="Automated translation update.\n\nTo improve translations, edit prompt files:\n"
-        "- `_scripts/general-llm-prompt.md`\n- `docs/*/llm-prompt.md`",
+        title=title,
+        body=body,
         base="master",
         head=branch,
     )
