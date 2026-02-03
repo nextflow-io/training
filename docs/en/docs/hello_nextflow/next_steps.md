@@ -54,7 +54,7 @@ You're now equipped with the foundational knowledge to start developing your own
 Here are our top 3 suggestions for what to do next:
 
 - Apply Nextflow to a scientific analysis use case with [Nextflow for Science](../nf4_science/index.md)
-- Get started with nf-core with [Hello nf-core](../../hello_nf-core/index.md)
+- Get started with nf-core with [Hello nf-core](../hello_nf-core/index.md)
 - Explore more advanced Nextflow features with the [Side Quests](../side_quests/index.md)
 
 Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io/), a cloud-based platform developed by the creators of Nextflow that makes it even easier to launch and manage your workflows, as well as manage your data and run analyses interactively in any environment.
