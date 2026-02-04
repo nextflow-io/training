@@ -603,36 +603,45 @@ Note: Keep parameter names (like `--reads`) in English as they are code.
 
 ## Common Mistakes to Avoid
 
-1. **Translating code syntax**
+1. **Inconsistent terminology for Nextflow concepts**
+
+   When the English source introduces a Nextflow concept as a **bold keyword** (especially with a documentation link), keep that same English term throughout the surrounding context for consistency. Do not mix English and translated terms for the same concept in the same paragraph or section.
+
+   - Wrong: First sentence uses bold **process** with a link, then the next sentence uses the translated term for "process"
+   - Right: Keep **process** in English throughout that paragraph/section when it was introduced as a keyword
+
+   When a term appears as a bold keyword being introduced or defined (often with a link to documentation), keep it in English. When the same term appears in general prose discussion in a different section, translation may be acceptable per the language glossary.
+
+2. **Translating code syntax**
 
    - Wrong: `Canal.fromPath(...)`
    - Right: `Channel.fromPath(...)`
 
-2. **Translating URLs or anchors**
+3. **Translating URLs or anchors**
 
    - Wrong: `[texto](../configuracao/instalar.md#docker)`
    - Right: `[texto](../setup/install.md#docker)`
 
-3. **Translating console output**
+4. **Translating console output**
 
    - Keep exactly as shown in English
 
-4. **Translating placeholder syntax**
+5. **Translating placeholder syntax**
 
    - Wrong: `<nome-de-usuario>`
    - Right: `<username>`
 
-5. **Breaking admonition syntax**
+6. **Breaking admonition syntax**
 
    - Wrong: `!!! nota "Título"`
    - Right: `!!! note "Título"`
 
-6. **Modifying heading anchors**
+7. **Modifying heading anchors**
 
    - Wrong: `## Título { #titulo }`
    - Right: `## Título { #original-anchor }`
 
-7. **Inconsistent terminology**
+8. **Inconsistent terminology**
    - Always use the same translation for a term throughout
    - Follow the glossary in `llm-prompt.md`
 

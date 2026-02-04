@@ -126,7 +126,7 @@ Vous trouverez le script `hello-world.nf` dans votre répertoire actuel, qui dev
 
 Un script de workflow Nextflow comprend généralement une ou plusieurs définitions de [**process**](https://nextflow.io/docs/latest/process.html) et le [**workflow**](https://nextflow.io/docs/latest/workflow.html) lui-même, plus quelques blocs optionnels (non présents ici) que nous présenterons plus tard.
 
-Chaque **processus** décrit quelle(s) opération(s) l'étape correspondante dans le pipeline devrait accomplir, tandis que le **workflow** décrit la logique de flux de données qui connecte les différentes étapes.
+Chaque **process** décrit quelle(s) opération(s) l'étape correspondante dans le pipeline devrait accomplir, tandis que le **workflow** décrit la logique de flux de données qui connecte les différentes étapes.
 
 Nous allons d'abord examiner de plus près le bloc **process**, puis nous examinerons le bloc **workflow**.
 
