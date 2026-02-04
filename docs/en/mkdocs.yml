@@ -135,7 +135,6 @@ extra_css:
   - assets/stylesheets/extra.css
 
 extra_javascript:
-  - assets/javascripts/consent-sync.js
   - assets/javascripts/posthog.js
   - assets/javascripts/language-picker.js
 
@@ -144,6 +143,8 @@ extra_javascript:
 # copyright: Seqera
 
 extra:
+  # Use root path for localStorage keys so consent/palette work across all versions and languages
+  scope: /
   # Announcement banner for upcoming training
   announcement:
     active: true
