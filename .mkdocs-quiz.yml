@@ -1,0 +1,12 @@
+cli_run:
+  "Nextflow Run":
+    "Basics": nextflow_run/01_basics.md
+    "Pipeline": nextflow_run/02_pipeline.md
+    "Config": nextflow_run/03_config.md
+  "Hello Nextflow":
+    "Hello World": hello_nextflow/01_hello_world.md
+    "Hello Channels": hello_nextflow/02_hello_channels.md
+    "Hello Workflow": hello_nextflow/03_hello_workflow.md
+    "Hello Modules": hello_nextflow/04_hello_modules.md
+    "Hello Containers": hello_nextflow/05_hello_containers.md
+    "Hello Config": hello_nextflow/06_hello_config.md
