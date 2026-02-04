@@ -3629,11 +3629,11 @@
 -->
 
 <h2 id="il-vostro-percorso">Il vostro percorso<a class="headerlink" href="#il-vostro-percorso" title="Permanent link">&para;</a></h2>
-<p>Avete iniziato con un workflow molto semplice che eseguiva un comando codificato in modo fisso.
-Nel corso delle sei parti, avete trasformato quel workflow di base in una pipeline modulare multi-step che esercita le funzionalità chiave di Nextflow inclusi channel, operatori, supporto integrato per container e opzioni di configurazione.</p>
+<p>Avete iniziato con un flusso di lavoro molto semplice che eseguiva un comando codificato in modo fisso.
+Nel corso delle sei parti, avete trasformato quel flusso di lavoro di base in una pipeline modulare multi-step che esercita le funzionalità chiave di Nextflow inclusi canali, operatori, supporto integrato per container e opzioni di configurazione.</p>
 <h3 id="cosa-avete-costruito">Cosa avete costruito<a class="headerlink" href="#cosa-avete-costruito" title="Permanent link">&para;</a></h3>
 <ul>
-<li>La forma finale del workflow Hello prende come input un file CSV contenente saluti testuali.</li>
+<li>La forma finale del flusso di lavoro Hello prende come input un file CSV contenente saluti testuali.</li>
 <li>I quattro step sono implementati come processi Nextflow (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> e <code>cowpy</code>) memorizzati in file di modulo separati.</li>
 <li>I risultati vengono pubblicati in una directory chiamata <code>results/</code>.</li>
 <li>L'output finale della pipeline è un file di testo semplice contenente arte ASCII di un personaggio che dice i saluti in maiuscolo.</li>
@@ -3648,18 +3648,18 @@ Nel corso delle sei parti, avete trasformato quel workflow di base in una pipeli
 </figure>
 
 <ol>
-<li><strong><code>sayHello</code>:</strong> Scrive ogni saluto nel proprio file di output (ad es. "Hello-output.txt")</li>
-<li><strong><code>convertToUpper</code>:</strong> Converte ogni saluto in maiuscolo (ad es. "HELLO")</li>
+<li><strong><code>sayHello</code>:</strong> Scrive ogni saluto nel proprio file di output (<em>ad es.</em> "Hello-output.txt")</li>
+<li><strong><code>convertToUpper</code>:</strong> Converte ogni saluto in maiuscolo (<em>ad es.</em> "HELLO")</li>
 <li><strong><code>collectGreetings</code>:</strong> Raccoglie tutti i saluti in maiuscolo in un singolo file batch</li>
 <li><strong><code>cowpy</code>:</strong> Genera arte ASCII utilizzando lo strumento <code>cowpy</code></li>
 </ol>
-<p>La configurazione del workflow supporta la fornitura di input e parametri in modo flessibile e riproducibile.</p>
+<p>La configurazione del flusso di lavoro supporta la fornitura di input e parametri in modo flessibile e riproducibile.</p>
 <h3 id="competenze-acquisite">Competenze acquisite<a class="headerlink" href="#competenze-acquisite" title="Permanent link">&para;</a></h3>
 <p>Attraverso questo corso pratico, avete imparato a:</p>
 <ul>
-<li>Descrivere e utilizzare i componenti fondamentali di Nextflow sufficienti per costruire un workflow multi-step semplice</li>
-<li>Descrivere concetti successivi come operatori e channel factory</li>
-<li>Avviare un workflow Nextflow localmente</li>
+<li>Descrivere e utilizzare i componenti fondamentali di Nextflow sufficienti per costruire un flusso di lavoro multi-step semplice</li>
+<li>Descrivere concetti successivi come operatori e fabbriche di canali</li>
+<li>Avviare un flusso di lavoro Nextflow localmente</li>
 <li>Trovare e interpretare output (risultati) e file di log generati da Nextflow</li>
 <li>Risolvere problemi di base</li>
 </ul>
@@ -3668,10 +3668,10 @@ Nel corso delle sei parti, avete trasformato quel workflow di base in una pipeli
 <p>Ecco i nostri 3 principali suggerimenti su cosa fare dopo:</p>
 <ul>
 <li>Applicare Nextflow a un caso d'uso di analisi scientifica con <a href="../../nf4_science/">Nextflow for Science</a></li>
-<li>Iniziare con nf-core con <a href="../../hello_nf-core/index.md">Hello nf-core</a></li>
+<li>Iniziare con nf-core con <a href="../../hello_nf-core/">Hello nf-core</a></li>
 <li>Esplorare funzionalità Nextflow più avanzate con le <a href="../../side_quests/">Side Quests</a></li>
 </ul>
-<p>Infine, vi consigliamo di dare un'occhiata a <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, una piattaforma basata su cloud sviluppata dai creatori di Nextflow che rende ancora più facile avviare e gestire i workflow, oltre a gestire i dati ed eseguire analisi in modo interattivo in qualsiasi ambiente.</p>
+<p>Infine, vi consigliamo di dare un'occhiata a <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, una piattaforma basata su cloud sviluppata dai creatori di Nextflow che rende ancora più facile avviare e gestire i vostri flussi di lavoro, oltre a gestire i dati ed eseguire analisi in modo interattivo in qualsiasi ambiente.</p>
 <h2 id="sondaggio-di-feedback">Sondaggio di feedback<a class="headerlink" href="#sondaggio-di-feedback" title="Permanent link">&para;</a></h2>
 <p>Prima di procedere, dedicate un minuto per completare il sondaggio del corso! Il vostro feedback ci aiuta a migliorare i nostri materiali formativi per tutti.</p>
 <p><a class="md-button md-button--primary" href="../survey/">Vai al sondaggio <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
