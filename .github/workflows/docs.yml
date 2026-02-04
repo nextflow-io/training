@@ -181,17 +181,11 @@ jobs:
           }
 
           if is_release:
-              # Insert after any dev versions
-              insert_idx = 0
-              for i, v in enumerate(versions):
-                  if v.get("version", "").endswith(".dev"):
-                      insert_idx = i + 1
-                  else:
-                      break
-              versions.insert(insert_idx, new_entry)
-          else:
-              # Dev version goes at the beginning
+              # Insert at the beginning (most recent release first)
               versions.insert(0, new_entry)
+          else:
+              # Dev version goes at the end
+              versions.append(new_entry)
 
           versions_file.write_text(json.dumps(versions, indent=2))
           EOF
