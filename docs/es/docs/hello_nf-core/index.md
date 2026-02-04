@@ -53,8 +53,8 @@ En su lugar, nos centraremos en los conceptos esenciales que le ayudarán a come
 
 Hemos dividido esto en cinco partes que se enfocarán cada una en aspectos específicos del uso de recursos de nf-core.
 
-| Capítulo del curso                                                 | Resumen                                                                                                                                                                           | Duración estimada |
-| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| Capítulo del curso                                                | Resumen                                                                                                                                                                           | Duración estimada |
+| ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
 | [Parte 1: Ejecutar un pipeline de demostración](./01_run_demo.md) | Ejecutar un pipeline existente de nf-core y examinar su estructura de código para tener una idea de lo que hace diferentes a estos pipelines de los workflows básicos de Nextflow | 30 mins           |
 | [Parte 2: Reescribir Hello para nf-core](./02_rewrite_hello.md)   | Adaptar un workflow existente a la estructura de plantilla de nf-core, comenzando desde el workflow simple producido en el curso [Hello Nextflow](../hello_nextflow/index.md)     | 60 mins           |
 | [Parte 3: Usar un módulo de nf-core](./03_use_module.md)          | Explorar la biblioteca de módulos de la comunidad y aprender a integrar módulos preconstruidos y probados que envuelven herramientas bioinformáticas comunes                      | 30 mins           |

@@ -1008,7 +1008,7 @@ Başlamak için, betikte iki önemli değişiklik yapmamız gerekecek:
 #### 4.1.1. Girdi parametresini CSV dosyasına işaret edecek şekilde değiştirin
 
 1. Bölümde kurduğumuz `params.input` parametresini hatırlıyor musunuz?
-Selamlamalarımızı içeren CSV dosyasına işaret edecek şekilde güncelleyeceğiz.
+   Selamlamalarımızı içeren CSV dosyasına işaret edecek şekilde güncelleyeceğiz.
 
 Parametre tanımlamasında aşağıdaki düzenlemeyi yapın:
 
