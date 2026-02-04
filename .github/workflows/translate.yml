@@ -124,6 +124,12 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         if: steps.check.outputs.has_artifacts == 'true'
 
+      - name: Run pre-commit on translations
+        if: steps.check.outputs.has_artifacts == 'true'
+        run: |
+          pip install pre-commit
+          pre-commit run --files docs/*/docs/**/*.md || true
+
       - name: Create PR
         if: steps.check.outputs.has_artifacts == 'true'
         env:
