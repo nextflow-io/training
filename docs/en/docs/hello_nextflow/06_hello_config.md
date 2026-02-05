@@ -749,12 +749,7 @@ Make the following changes in the workflow file:
 
 === "After"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20 24"
-    /*
-    * Output settings
-    */
-    outputDir = "config_results/"
-
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
             path { "${params.batch}/intermediates/${sayHello.name}" }
@@ -781,12 +776,7 @@ Make the following changes in the workflow file:
 
 === "Before"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20 24"
-    /*
-    * Output settings
-    */
-    outputDir = "config_results/${params.batch}"
-
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
             path { sayHello.name }
