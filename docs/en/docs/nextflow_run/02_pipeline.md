@@ -1223,9 +1223,9 @@ The workflow is very similar to the previous one, plus the extra step to run `co
 
 You see that this workflow imports a `cowpy` process from a module file, and calls it on the output of the `collectGreetings()` call, plus an input parameter called `params.character`.
 
-```groovy title="2d-container.nf" linenums="25"
-// generate ASCII art with cowpy
-cowpy(collectGreetings.out, params.character)
+```groovy title="2d-container.nf" linenums="31"
+// generate ASCII art of the greetings with cowpy
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 The `cowpy` process, which wraps the cowpy command to generate ASCII art, is defined in the `cowpy.nf` module.
