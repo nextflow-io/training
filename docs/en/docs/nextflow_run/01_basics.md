@@ -204,6 +204,16 @@ Let's take a look at what's in there.
 
     ```console
     work
+    ├── cc
+    │   └── 9412014740f0d0b90e6600b85fcd78
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
     └── a3
         └── 7be2fad5e71e5f49998f795677fd68
             ├── .command.begin
@@ -226,6 +236,10 @@ Let's take a look at what's in there.
     ```bash
     tree -a work
     ```
+
+There are two sets of directories in `work/`, from the two different pipeline runs that we have done.
+Each task execution gets its own, isolated, directory to work in.
+In this case the pipeline did the same thing both times, so the contents of each task directory are identical
 
 You should immediately recognize the `output.txt` file, which is in fact the original output of the `sayHello` process that got published to the `results` directory.
 If you open it, you will find the `Hello World!` greeting again.
