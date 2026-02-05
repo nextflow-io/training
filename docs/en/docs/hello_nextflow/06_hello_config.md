@@ -880,19 +880,19 @@ Make the following changes in the workflow file:
     ```groovy title="hello-config.nf" linenums="42"
     output {
         first_output {
-            path { sayHello.process }
+            path { sayHello.name }
         }
         uppercased {
-            path { convertToUpper.process }
+            path { convertToUpper.name }
         }
         collected {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
         }
         batch_report {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
         }
         cowpy_art {
-            path { cowpy.process }
+            path { cowpy.name }
         }
     }
     ```
@@ -902,23 +902,23 @@ Make the following changes in the workflow file:
     ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20"
     output {
         first_output {
-            path { sayHello.process }
+            path { sayHello.name }
             mode 'copy'
         }
         uppercased {
-            path { convertToUpper.process }
+            path { convertToUpper.name }
             mode 'copy'
         }
         collected {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
             mode 'copy'
         }
         batch_report {
-            path { collectGreetings.process }
+            path { collectGreetings.name }
             mode 'copy'
         }
         cowpy_art {
-            path { cowpy.process }
+            path { cowpy.name }
             mode 'copy'
         }
     }
@@ -1453,7 +1453,7 @@ profiles {
         ]
     }
     test {
-        params.greeting = 'greetings.csv'
+        params.input = 'data/greetings.csv'
         params.batch = 'test'
         params.character = 'dragonandcow'
     }
@@ -1567,7 +1567,7 @@ nextflow config
     }
 
     params {
-      input = 'greetings.csv'
+      input = 'data/greetings.csv'
       batch = 'batch'
       character = 'turkey'
     }
@@ -1604,7 +1604,7 @@ nextflow config -profile my_laptop,test
     }
 
     params {
-      input = 'greetings.csv'
+      input = 'data/greetings.csv'
       batch = 'test'
       character = 'dragonandcow'
     }
