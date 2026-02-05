@@ -624,7 +624,7 @@ Now the outputs are published directly under `even_newer_results/`, without the 
 
 ### 2.2. Dynamic output paths
 
-In addition to changing the output directory via the CLI, we can also set it within a Nextflow config file using `outputDir`.
+In addition to changing the output directory via the CLI, we can also set a custom default value in the config file using `outputDir`.
 This allows us to set the directory path dynamically - not just using static strings.
 
 #### 2.2.1. Set `outputDir` in the configuration file
