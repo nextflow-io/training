@@ -454,7 +454,7 @@ When you're ready, move on to [**Part 5: Hello Containers**](./05_hello_containe
 <quiz>
 What is a module in Nextflow?
 - [ ] A configuration file
-- [x] A standalone file containing a single process definition
+- [x] A standalone file that can contain process definitions
 - [ ] A workflow definition
 - [ ] A channel operator
 
@@ -462,15 +462,7 @@ Learn more: [2. Create a module for `sayHello()`](#2-create-a-module-for-sayhell
 </quiz>
 
 <quiz>
-What is the recommended naming convention for module files?
-- [ ] `module_processName.nf`
-- [ ] `processName_module.nf`
-- [x] `processName.nf`
-- [ ] `mod_processName.nf`
-</quiz>
-
-<quiz>
-Where should module files be stored?
+What convention is typically used for storing module files?
 - [ ] In the same directory as the workflow
 - [ ] In a `bin/` directory
 - [x] In a `modules/` directory
