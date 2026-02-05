@@ -621,7 +621,7 @@ Output directories don't have to just use static strings, we can set them dynami
 #### 2.2.1. Set `outputDir` in the configuration file
 
 You can change the default base output directory in the configuration file as well as overwriting on the CLI.
-This is paricularly useful when you want to programmatically construct the output path based on other dynamic variables, such as reusing parameter values.
+This is particularly useful when you want to programmatically construct the output path based on other dynamic variables, such as reusing parameter values.
 
 Add the following code to the `nextflow.config` file:
 
@@ -788,7 +788,7 @@ Make the following changes in the workflow file:
 
 === "After"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20 24"
     /*
     * Output settings
     */
@@ -820,7 +820,7 @@ Make the following changes in the workflow file:
 
 === "Before"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20 24"
     /*
     * Output settings
     */
@@ -879,18 +879,20 @@ This publishes outputs to `cleverconfig/perfection/`, with the specified base pa
     ```console
     cleverconfig/perfection/
     ├── collectGreetings
-    │   ├── COLLECTED-pnames-output.txt
-    │   └── pnames-report.txt
-    ├── convertToUpper
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
+    │   └── perfection-report.txt
     ├── cowpy
-    │   └── cowpy-COLLECTED-pnames-output.txt
-    └── sayHello
-        ├── Bonjour-output.txt
-        ├── Hello-output.txt
-        └── Holà-output.txt
+    │   └── cowpy-COLLECTED-perfection-output.txt
+    └── intermediates
+        ├── collectGreetings
+        │   └── COLLECTED-perfection-output.txt
+        ├── convertToUpper
+        │   ├── UPPER-Bonjour-output.txt
+        │   ├── UPPER-Hello-output.txt
+        │   └── UPPER-Holà-output.txt
+        └── sayHello
+            ├── Bonjour-output.txt
+            ├── Hello-output.txt
+            └── Holà-output.txt
     ```
 
 ### 2.3. Set the publish mode at the workflow level
