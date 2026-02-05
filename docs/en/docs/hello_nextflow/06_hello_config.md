@@ -547,10 +547,10 @@ Make the following code changes in the workflow file:
     }
     ```
 
-Now run the pipeline with `-output-dir` to specify the output location:
+Now run the pipeline with `-output-dir`, or `-o` for short, to specify the output location:
 
 ```bash
-nextflow run hello-config.nf -output-dir results/outdir
+nextflow run hello-config.nf -output-dir new_results
 ```
 
 ??? success "Command output"
@@ -567,12 +567,12 @@ nextflow run hello-config.nf -output-dir results/outdir
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This publishes outputs to `results/outdir/`:
+This publishes outputs to `new_results/`:
 
 ??? abstract "Directory contents"
 
     ```console
-    results/outdir/
+    new_results/
     ├── cowpy-COLLECTED-batch-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -585,9 +585,9 @@ This publishes outputs to `results/outdir/`:
     └── batch-report.txt
     ```
 
-#### 2.1.2. Set `outputDir` in the configuration file (alternative)
+#### 2.1.2. Set `outputDir` in the configuration file
 
-For persistent configuration or when you want to tie the output directory to pipeline parameters, you can set `outputDir` in the configuration file.
+For persistent configuration or when you want to use a dynamic output directory, you can set `outputDir` in the configuration file.
 
 This is useful when you want to programmatically construct the output path based on parameter values.
 
@@ -608,7 +608,7 @@ Add the following code to the `nextflow.config` file:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "config_results/${params.batch}"
     ```
 
 === "Before"
@@ -624,19 +624,19 @@ Add the following code to the `nextflow.config` file:
     }
     ```
 
-This sets the output directory to `results/` plus the value of the `batch` parameter as a subdirectory.
+This sets the output directory to `config_results/` plus the value of the `batch` parameter as a subdirectory.
 Now you can change the output location by setting the `--batch` parameter:
 
 ```bash
 nextflow run hello-config.nf --batch my_run
 ```
 
-This publishes outputs to `results/my_run/`.
+This publishes outputs to `config_results/my_run/`.
 
 !!! note
 
     The `-output-dir` CLI option takes precedence over the `outputDir` configuration setting.
-    Use `-output-dir` for one-off changes; use the config file when you want the path tied to other pipeline parameters.
+    Use `-output-dir` for one-off changes; use the config file when you want persistent defaults or the path tied to other pipeline parameters.
 
 ### 2.2. Organize outputs by process
 
@@ -644,7 +644,7 @@ One popular way to organize outputs further is to do it by process, _i.e._ creat
 
 #### 2.2.1. Replace the output paths by a reference to process names
 
-All you need to do is reference the name of the process as `<task>.name` in the output path declaration.
+All you need to do is reference the name of the process as `<process>.name` in the output path declaration.
 
 Make the following changes in the workflow file:
 
@@ -706,10 +706,10 @@ This removes the remaining hardcoded elements from the output path configuration
 
 #### 2.2.2. Run the pipeline
 
-Let's test that it works correctly, using `-output-dir` to specify the output directory:
+Let's test that it works correctly, setting the batch name to `pnames` from the command line.
 
 ```bash
-nextflow run hello-config.nf -output-dir results/pnames
+nextflow run hello-config.nf --batch pnames
 ```
 
 ??? success "Command output"
@@ -726,21 +726,21 @@ nextflow run hello-config.nf -output-dir results/pnames
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This publishes outputs to `results/pnames/`, grouped by process:
+This still produces the same output as previously, except this time we find our outputs under `config_results/pnames/`, and they are grouped by process.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/pnames/
+    config_results/pnames/
     ├── collectGreetings
-    │   ├── COLLECTED-batch-output.txt
-    │   └── batch-report.txt
+    │   ├── COLLECTED-pnames-output.txt
+    │   └── pnames-report.txt
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
     │   └── UPPER-Holà-output.txt
     ├── cowpy
-    │   └── cowpy-COLLECTED-batch-output.txt
+    │   └── cowpy-COLLECTED-pnames-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
