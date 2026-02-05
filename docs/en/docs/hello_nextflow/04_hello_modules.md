@@ -15,7 +15,7 @@
 This section covers how to organize your workflow code to make development and maintenance of your pipeline more efficient and sustainable.
 Specifically, we are going to demonstrate how to use [**modules**](https://nextflow.io/docs/latest/module.html).
 
-In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
+In Nextflow, a **module** is a standalone code file, often encapsulating a single process definition.
 To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
 That makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 
@@ -156,10 +156,10 @@ Once that is done, delete the process definition from the workflow file, but mak
 
 ### 2.3. Add an import declaration before the workflow block
 
-The syntax for importing a local module is fairly straightforward:
+The syntax for importing a process from a module is fairly straightforward:
 
 ```groovy title="Syntax: Import declaration"
-include { <MODULE_NAME> } from '<path_to_module>'
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Let's insert that above the `params` block and fill it out appropriately.
@@ -191,7 +191,7 @@ Let's insert that above the `params` block and fill it out appropriately.
     }
     ```
 
-You see we've filled in the module name, `sayHello`, and the path to the file containing the module code, `./modules/sayHello.nf`.
+You see we've filled in the process name, `sayHello`, and the path to the file containing the module code, `./modules/sayHello.nf`.
 
 ### 2.4. Run the workflow
 
