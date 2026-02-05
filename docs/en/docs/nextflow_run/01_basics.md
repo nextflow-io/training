@@ -148,10 +148,10 @@ nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+    Launching `1-hello.nf` [cheesy_curie] DSL2 - revision: c33d41f479
 
     executor >  local (1)
-    [a3/7be2fa] sayHello | 1 of 1 ✔
+    [cc/941201] sayHello | 1 of 1 ✔
     ```
 
 You should see that your outputs are now published to a directory called `hello_results` instead of `results`:
