@@ -480,10 +480,10 @@ Let's look at a few common ways you might configure this to be more flexible.
 
 ### 2.1. Customize the output directory with `-output-dir`
 
-When we're controlling how our 'published' output are organised we have two distinct priorities:
+When we're controlling how our 'published' output are organized we have two distinct priorities:
 
 - The top-level output directory
-- How files are organised within this directory
+- How files are organized within this directory
 
 We've been using the default top-level directory until now: `results`.
 Let's start by customising that, using the `-output-dir` CLI option.
