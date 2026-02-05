@@ -1545,7 +1545,7 @@ Learn more: [2.1. Customize the outputDir directory name](#21-customize-the-outp
 How do you reference a process name dynamically in output path configuration?
 - [ ] `#!groovy ${processName}`
 - [ ] `process.name`
-- [x] `#!groovy { meta.id }`
+- [x] `#!groovy { processName.name }`
 - [ ] `@processName`
 
 Learn more: [2.2. Organize outputs by process](#22-organize-outputs-by-process)
