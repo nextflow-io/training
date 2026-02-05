@@ -484,10 +484,54 @@ For each chapter of this course, we've been publishing outputs to a different su
 
 Let's change that to be more flexible using the `-output-dir` CLI option.
 
-#### 2.1.1. Remove hardcoded paths from the output block
+#### 2.1.1. Run the pipeline with `-output-dir`
 
-First, let's remove the hardcoded subdirectory from the output paths.
-We'll control the base output directory from the command line instead.
+The `-output-dir` option (shorthand: `-o`) overrides the default output directory (`results/`) for all workflow outputs.
+This is the recommended way to control where outputs are published.
+
+```bash
+nextflow run hello-config.nf -output-dir results/my_batch
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+
+    executor >  local (8)
+    [f0/35723c] sayHello (2)       | 3 of 3 ✔
+    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
+    [17/e97d32] collectGreetings   | 1 of 1 ✔
+    [98/c6b57b] cowpy              | 1 of 1 ✔
+    ```
+
+This publishes outputs to `results/my_batch/` instead of `results/`:
+
+??? abstract "Directory contents"
+
+    ```console
+    results/my_batch/
+    ├── hello_config
+    │   ├── cowpy-COLLECTED-batch-output.txt
+    │   ├── batch-report.txt
+    │   └── intermediates
+    │       ├── Bonjour-output.txt
+    │       ├── COLLECTED-batch-output.txt
+    │       ├── Hello-output.txt
+    │       ├── Holà-output.txt
+    │       ├── UPPER-Bonjour-output.txt
+    │       ├── UPPER-Hello-output.txt
+    │       └── UPPER-Holà-output.txt
+    ```
+
+Notice we still have the `hello_config` subdirectory from the hardcoded paths in the output block.
+Let's clean that up.
+
+#### 2.1.2. Remove hardcoded paths from the output block
+
+Now that we control the base output directory from the command line, we can remove the redundant `hello_config/` prefix from the output paths.
 
 Make the following code changes in the workflow file:
 
@@ -545,32 +589,13 @@ Make the following code changes in the workflow file:
     }
     ```
 
-The output paths now define only the subdirectory structure within whatever base directory we specify.
-
-#### 2.1.2. Run the pipeline with `-output-dir`
-
-The `-output-dir` option (shorthand: `-o`) sets the base directory for all workflow outputs.
-This is the recommended way to control where outputs are published.
+Run the pipeline again:
 
 ```bash
 nextflow run hello-config.nf -output-dir results/my_batch
 ```
 
-??? success "Command output"
-
-    ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
-
-    executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
-    ```
-
-This publishes outputs to `results/my_batch/`:
+Now the outputs are published directly under `results/my_batch/`:
 
 ??? abstract "Directory contents"
 
