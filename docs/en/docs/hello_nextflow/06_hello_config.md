@@ -478,59 +478,16 @@ So far we've been hardcoding all the paths for workflow-level output declaration
 
 Let's look at a few common ways you might configure this to be more flexible.
 
-### 2.1. Customize the `outputDir` directory name
+### 2.1. Customize the output directory with `-output-dir`
 
 For each chapter of this course, we've been publishing outputs to a different subdirectory hardcoded into the output definitions.
 
-Let's change that to use a user-configurable parameter.
-We could create a whole new parameter for this, but let's use the `batch` parameter since it's right there.
+Let's change that to be more flexible using the `-output-dir` CLI option.
 
-#### 2.1.1. Set a value for `outputDir` in the configuration file
+#### 2.1.1. Remove hardcoded paths from the output block
 
-The path Nextflow uses for publishing outputs is controlled by the `outputDir` option.
-To change the path for all outputs, you can set a value for this option in the `nextflow.config` configuration file.
-
-Add the following code to the `nextflow.config` file:
-
-=== "After"
-
-    ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
-    /*
-    * Pipeline parameters
-    */
-    params {
-        input = 'data/greetings.csv'
-        batch = 'batch'
-        character = 'turkey'
-    }
-
-    /*
-    * Output settings
-    */
-    outputDir = "results/${params.batch}"
-    ```
-
-=== "Before"
-
-    ```groovy title="nextflow.config" linenums="9"
-    /*
-    * Pipeline parameters
-    */
-    params {
-        input = 'data/greetings.csv'
-        batch = 'batch'
-        character = 'turkey'
-    }
-    ```
-
-This will replace the built-in default path, `results/`, with `results/` plus the value of the `batch` parameter as subdirectory.
-You could also change the `results` part if you wanted.
-
-For a temporary change, you could set this option from the command-line using the `-output-dir` parameter in your command (but then you couldn't use the `batch` parameter value).
-
-#### 2.1.2. Remove the repeated part of the hardcoded path
-
-We still have a subdirectory hardcoded in the output options, so let's get rid of that now.
+First, let's remove the hardcoded subdirectory from the output paths.
+We'll control the base output directory from the command line instead.
 
 Make the following code changes in the workflow file:
 
@@ -588,14 +545,15 @@ Make the following code changes in the workflow file:
     }
     ```
 
-We could also have just added `${params.batch}` to each path instead of modifying the `outputDir` default, but this is more concise.
+The output paths now define only the subdirectory structure within whatever base directory we specify.
 
-#### 2.1.3. Run the pipeline
+#### 2.1.2. Run the pipeline with `-output-dir`
 
-Let's test that it works correctly, setting the batch name to `outdir` from the command line.
+The `-output-dir` option (shorthand: `-o`) sets the base directory for all workflow outputs.
+This is the recommended way to control where outputs are published.
 
 ```bash
-nextflow run hello-config.nf --batch outdir
+nextflow run hello-config.nf -output-dir results/my_batch
 ```
 
 ??? success "Command output"
@@ -612,25 +570,25 @@ nextflow run hello-config.nf --batch outdir
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/outdir/`.
+This publishes outputs to `results/my_batch/`:
 
 ??? abstract "Directory contents"
 
     ```console
-    results/outdir/
-    ├── cowpy-COLLECTED-outdir-output.txt
+    results/my_batch/
+    ├── cowpy-COLLECTED-batch-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
-    │   ├── COLLECTED-outdir-output.txt
+    │   ├── COLLECTED-batch-output.txt
     │   ├── Hello-output.txt
     │   ├── Holà-output.txt
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
     │   └── UPPER-Holà-output.txt
-    └── outdir-report.txt
+    └── batch-report.txt
     ```
 
-You can combine this approach with custom path definitions to construct any directory hierarchy you like.
+The `-output-dir` option provides a clear separation of concerns: use it to control _where_ outputs go, and use the `path` directive in the output block to control the _subdirectory structure_.
 
 ### 2.2. Organize outputs by process
 
@@ -700,10 +658,10 @@ This removes the remaining hardcoded elements from the output path configuration
 
 #### 2.2.2. Run the pipeline
 
-Let's test that it works correctly, setting the batch name to `pnames` from the command line.
+Let's test that it works correctly:
 
 ```bash
-nextflow run hello-config.nf --batch pnames
+nextflow run hello-config.nf -output-dir results/pnames
 ```
 
 ??? success "Command output"
@@ -720,21 +678,21 @@ nextflow run hello-config.nf --batch pnames
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/pnames/`, and they are grouped by process.
+This publishes outputs to `results/pnames/`, grouped by process:
 
 ??? abstract "Directory contents"
 
     ```console
     results/pnames/
     ├── collectGreetings
-    │   ├── COLLECTED-pnames-output.txt
-    │   └── pnames-report.txt
+    │   ├── COLLECTED-batch-output.txt
+    │   └── batch-report.txt
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
     │   └── UPPER-Holà-output.txt
     ├── cowpy
-    │   └── cowpy-COLLECTED-pnames-output.txt
+    │   └── cowpy-COLLECTED-batch-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
@@ -742,7 +700,7 @@ This still produces the same output as previously, except this time we find our 
     ```
 
 Note that here we've erased the distinction between `intermediates` versus final outputs being at the top level.
-You could of course mix and match these approaches, for example by setting the first output's path as `intermediates/${sayHello.process}`
+You can mix and match these approaches; for example, set the first output's path as `"intermediates/${sayHello.name}"`.
 
 ### 2.3. Set the publish mode at the workflow level
 
@@ -754,24 +712,20 @@ Add the following code to the `nextflow.config` file:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="2" hl_lines="5"
+    ```groovy title="nextflow.config" linenums="2" hl_lines="4"
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
     workflow.output.mode = 'copy'
     ```
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="12"
-    /*
-    * Output settings
-    */
-    outputDir = "results/${params.batch}"
+    ```groovy title="nextflow.config"
+    // (no output settings yet)
     ```
 
-Just like the `outputDir` option, giving `workflow.output.mode` a value in the configuration file would be sufficient to override what is set in the workflow file, but let's remove the unnecessary code anyway.
+Setting `workflow.output.mode` in the configuration file is sufficient to override what is set in the workflow file, but let's remove the unnecessary code anyway.
 
 #### 2.3.2. Remove output mode from the workflow file
 
@@ -830,10 +784,10 @@ That's more concise, isn't it?
 
 #### 2.3.3. Run the pipeline
 
-Let's test that it works correctly, setting the batch name to `outmode` from the command line.
+Let's test that it works correctly:
 
 ```bash
-nextflow run hello-config.nf --batch outmode
+nextflow run hello-config.nf -output-dir results/outmode
 ```
 
 ??? success "Command output"
@@ -850,22 +804,21 @@ nextflow run hello-config.nf --batch outmode
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/outmode/`.
-They are still all proper copies, not symlinks.
+This publishes outputs to `results/outmode/`, and they are still all proper copies, not symlinks.
 
 ??? abstract "Directory contents"
 
     ```console
     results/outmode/
     ├── collectGreetings
-    │   ├── COLLECTED-outmode-output.txt
-    │   └── outmode-report.txt
+    │   ├── COLLECTED-batch-output.txt
+    │   └── batch-report.txt
     ├── convertToUpper
     │   ├── UPPER-Bonjour-output.txt
     │   ├── UPPER-Hello-output.txt
     │   └── UPPER-Holà-output.txt
     ├── cowpy
-    │   └── cowpy-COLLECTED-outmode-output.txt
+    │   └── cowpy-COLLECTED-batch-output.txt
     └── sayHello
         ├── Bonjour-output.txt
         ├── Hello-output.txt
