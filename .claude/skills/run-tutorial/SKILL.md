@@ -133,10 +133,19 @@ When verifying documentation (especially in Mode B), watch for these frequent pr
 
 ### Terminal Output Examples
 
-- Version numbers (acceptable to differ)
-- Work directory hashes (acceptable to differ)
+- Version numbers (acceptable to differ from your run)
+- Work directory hashes (acceptable to differ from your run)
 - Process execution order (acceptable to differ)
 - **Error messages** (must match if showing expected errors)
+
+### Work Directory Hashes (within docs - CRITICAL)
+
+While your actual hashes will differ from documented ones, check that docs are internally consistent:
+
+- **Invalid hex**: Hashes like `[j6/abc123]` contain invalid characters (only 0-9, a-f allowed)
+- **Copy-paste duplicates**: Multiple different `nextflow run` commands showing identical hashes (unless cached)
+- **Prose mismatch**: Text referencing a hash that doesn't appear in nearby output
+- **Cache confusion**: Non-cached processes (no "cached: N") should have unique hashes per run
 
 ### Before/After Code Blocks
 
@@ -245,6 +254,26 @@ For each documented output block:
 3. Compare actual vs documented output
 4. Flag discrepancies (use acceptable-differences.md to filter noise)
 
+#### 2B.5 Verify Hash Consistency (MANDATORY)
+
+Run these checks on ALL documentation files in scope:
+
+```bash
+# 1. Check for invalid hex characters in hashes
+grep -oE '\[[^]]+\]' docs/path/to/*.md | grep -E '\[[^0-9a-f/\]]' | head -20
+
+# 2. Find duplicate hashes (may indicate copy-paste errors)
+grep -oE '\[[a-z0-9]{2}/[a-z0-9]{6}\]' docs/path/to/*.md | sort | uniq -c | sort -rn | head -20
+```
+
+For any duplicates found, verify they are legitimate:
+- Same output shown twice (acceptable)
+- `-resume` showing cached results from earlier in same lesson (acceptable)
+- Prose reference to nearby terminal output (acceptable)
+- Different `nextflow run` commands without `-resume` (NOT acceptable - flag as issue)
+
+See [references/acceptable-differences.md](references/acceptable-differences.md) for detailed hash validation rules.
+
 ### Phase 3: Final Verification
 
 After completing all sections:
@@ -330,6 +359,11 @@ Container name, Nextflow version, working directory
 | 1-hello-world | ✓ | N/A | None |
 | 6-hello-config | ✓ | ✓ test | Fixed: .process→.name |
 
+## Hash Consistency Check
+- Invalid hex characters found: [list or "None"]
+- Duplicate hashes across different runs: [list or "None - all legitimate"]
+- Prose/output mismatches: [list or "None"]
+
 ## Documentation Issues Found
 
 ### Critical (breaks functionality)
@@ -345,6 +379,7 @@ Container name, Nextflow version, working directory
 |------|--------|--------|
 | docs/.../06_hello_config.md | `.process` → `.name` | Property doesn't exist |
 | solutions/.../nextflow.config | `params.greeting` → `params.input` | Wrong parameter name |
+| docs/.../03_config.md | `[f0/35723c]` → `[2b/9a7d1e]` | Duplicate hash for different run |
 ```
 
 ---
