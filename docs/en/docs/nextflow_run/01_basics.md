@@ -130,7 +130,7 @@ That's great, our workflow did what it was supposed to do!
 
 ### 2.3. Save the results to a different directory
 
-My default, nextflow will save pipeline outputs to a directory called `results` in your current path.
+By default, Nextflow will save pipeline outputs to a directory called `results` in your current path.
 To change where your files are published to, use the `-output-dir` CLI flag (or `-o` for short`)
 
 !!! danger
