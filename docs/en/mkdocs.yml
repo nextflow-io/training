@@ -39,10 +39,12 @@ nav:
       - Genomics:
           - nf4_science/genomics/index.md
           - nf4_science/genomics/00_orientation.md
-          - nf4_science/genomics/01_per_sample_variant_calling.md
-          - nf4_science/genomics/02_joint_calling.md
-          - nf4_science/genomics/03_modules.md
+          - nf4_science/genomics/01_method.md
+          - nf4_science/genomics/02_per_sample_variant_calling.md
+          - nf4_science/genomics/03_joint_calling.md
           - nf4_science/genomics/04_testing.md
+          - nf4_science/genomics/05_configuration.md
+          - nf4_science/genomics/06_nf-core_sarek.md
           - nf4_science/genomics/survey.md
           - nf4_science/genomics/next_steps.md
       - RNAseq:

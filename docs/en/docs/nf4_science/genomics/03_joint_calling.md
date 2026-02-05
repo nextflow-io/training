@@ -1,13 +1,13 @@
-# Part 2: Joint calling on a cohort
+# Part 3: Joint calling on a cohort
 
-In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
+In Part 2, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
 However, in a real genomics use case, you'll typically need to look at the variant calls of multiple samples together.
 
-In this second part, we show you how to use channels and channel operators to implement joint variant calling with GATK, building on the pipeline from Part 1.
+In this part, we show you how to use channels and channel operators to implement joint variant calling with GATK, building on the pipeline from Part 2.
 
 ### Method overview
 
-The GATK variant calling method we used in first part of this course simply generated variant calls per sample.
+The GATK variant calling method we used in Part 2 simply generated variant calls per sample.
 That's fine if you only want to look at the variants from each sample in isolation, but that yields limited information.
 It's often more interesting to look at how variant calls differ across multiple samples, and to do so, GATK offers an alternative method called joint variant calling, which we demonstrate here.
 
@@ -18,7 +18,7 @@ Joint variant calling involves generating a special kind of variant output calle
 What's special about a sample's GVCF is that it contains records summarizing sequence data statistics about all positions in the targeted area of the genome, not just the positions where the program found evidence of variation.
 This is critical for the joint genotyping calculation ([further reading](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
 
-The GVCF is produced by GATK HaplotypeCaller, the same tool we used in Part 1, with an additional parameter (`-ERC GVCF`).
+The GVCF is produced by GATK HaplotypeCaller, the same tool we tested in Part 1, with an additional parameter (`-ERC GVCF`).
 Combining the GVCFs is done with GATK GenomicsDBImport, which combines the per-sample calls into a data store (analogous to a database), then the actual 'joint genotyping' analysis is done with GATK GenotypeGVCFs.
 
 ### Workflow
@@ -34,271 +34,24 @@ So to recap, in this part of the course, we're going to develop a workflow that 
 3. Collect all the GVCFs and combine them into a GenomicsDB data store
 4. Run joint genotyping on the combined GVCF data store to produce a cohort-level VCF
 
-We'll apply this to the same dataset as in Part 1.
-
----
-
-## 0. Warmup: Run Samtools and GATK directly
-
-Just like previously, we want to try out the commands manually before we attempt to wrap them in a workflow.
+We'll apply this to the same dataset as in Parts 1 and 2.
 
 !!! note
 
      Make sure you're in the correct working directory:
      `cd /workspaces/training/nf4-science/genomics`
 
-### 0.1. Index a BAM input file with Samtools
-
-This first step is the same as in Part 1, so it should feel very familiar, but this time we need to do it for all three samples.
-
-!!! note
-
-    We've technically already generated index files for the three samples through our pipeline, so we could go fish those out of the results directory. However, it's cleaner to just redo this manually, and it'll only take a minute.
-
-#### 0.1.1. Spin up the Samtools container interactively
-
-```bash
-docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
-```
-
-<!--
-??? success "Command output"
-
-    ```console
-
-    ```
--->
-
-#### 0.1.2. Run the indexing command for the three samples
-
-```bash
-samtools index /data/bam/reads_mother.bam
-samtools index /data/bam/reads_father.bam
-samtools index /data/bam/reads_son.bam
-```
-
-Just like previously, this should produce the index files in the same directory as the corresponding BAM files.
-
-??? abstract "Directory contents"
-
-    ```console
-    data/bam/
-    ├── reads_father.bam
-    ├── reads_father.bam.bai
-    ├── reads_mother.bam
-    ├── reads_mother.bam.bai
-    ├── reads_son.bam
-    └── reads_son.bam.bai
-    ```
-
-Now that we have index files for all three samples, we can proceed to generating the GVCFs for each of them.
-
-#### 0.1.3. Exit the Samtools container
-
-```bash
-exit
-```
-
-### 0.2. Call variants with GATK HaplotypeCaller in GVCF mode
-
-This second step is very similar to what we did Part 1: Hello Genomics, but we are now going to run GATK in 'GVCF mode'.
-
-#### 0.2.1. Spin up the GATK container interactively
-
-```bash
-docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
-```
-
-<!--
-??? success "Command output"
-
-    ```console
-
-    ```
--->
-
-#### 0.2.2. Run the variant calling command with the GVCF option
-
-In order to produce a genomic VCF (GVCF), we add the `-ERC GVCF` option to the base command, which switches on the HaplotypeCaller's GVCF mode.
-
-We also change the file extension for the output file from `.vcf` to `.g.vcf`.
-This is technically not a requirement, but it is a strongly recommended convention.
-
-```bash
-gatk HaplotypeCaller \
-        -R /data/ref/ref.fasta \
-        -I /data/bam/reads_mother.bam \
-        -O reads_mother.g.vcf \
-        -L /data/ref/intervals.bed \
-        -ERC GVCF
-```
-
-<!--
-??? success "Command output"
-
-    ```console
-
-    ```
--->
-
-This creates the GVCF output file `reads_mother.g.vcf` in the current working directory in the container.
-
-If you `cat` it to view the contents, you'll see it's much longer than the equivalent VCF we generated in Part 1. You can't even scroll up to the start of the file, and most of the lines look quite different from what we saw in the VCF in Part 1.
-
-```console title="Output" linenums="1674"
-20_10037292_10066351    14714   .       T       <NON_REF>       .       .       END=14718       GT:DP:GQ:MIN_DP:PL       0/0:37:99:37:0,99,1192
-20_10037292_10066351    14719   .       T       <NON_REF>       .       .       END=14719       GT:DP:GQ:MIN_DP:PL       0/0:36:82:36:0,82,1087
-20_10037292_10066351    14720   .       T       <NON_REF>       .       .       END=14737       GT:DP:GQ:MIN_DP:PL       0/0:42:99:37:0,100,1160
-```
-
-These represent non-variant regions where the variant caller found no evidence of variation, so it captured some statistics describing its level of confidence in the absence of variation. This makes it possible to distinguish between two very different case figures: (1) there is good quality data showing that the sample is homozygous-reference, and (2) there is not enough good data available to make a determination either way.
-
-In a GVCF, there are typically lots of such non-variant lines, with a smaller number of variant records sprinkled among them. Try running `head -176` on the GVCF to load in just the first 176 lines of the file to find an actual variant call.
-
-```console title="Output" linenums="174"
-20_10037292_10066351    3479    .       T       <NON_REF>       .       .       END=3479        GT:DP:GQ:MIN_DP:PL       0/0:34:36:34:0,36,906
-20_10037292_10066351    3480    .       C       CT,<NON_REF>    503.03  .       DP=23;ExcessHet=0.0000;MLEAC=2,0;MLEAF=1.00,0.00;RAW_MQandDP=82800,23    GT:AD:DP:GQ:PL:SB       1/1:0,18,0:18:54:517,54,0,517,54,517:0,0,7,11
-20_10037292_10066351    3481    .       T       <NON_REF>       .       .       END=3481        GT:DP:GQ:MIN_DP:PL       0/0:21:51:21:0,51,765
-```
-
-The second line shows the first variant record in the file, which corresponds to the first variant in the VCF file we looked at in Part 1.
-
-Just like the original VCF was, the output GVCF file is also accompanied by an index file, called `reads_mother.g.vcf.idx`.
-
-#### 0.2.3. Repeat the process on the other two samples
-
-In order to test the joint genotyping step, we need GVCFs for all three samples, so let's generate those manually now.
-
-```bash
-gatk HaplotypeCaller \
-        -R /data/ref/ref.fasta \
-        -I /data/bam/reads_father.bam \
-        -O reads_father.g.vcf \
-        -L /data/ref/intervals.bed \
-        -ERC GVCF
-```
-
-<!--
-??? success "Command output"
-
-    ```console
-
-    ```
--->
-
-```bash
-gatk HaplotypeCaller \
-        -R /data/ref/ref.fasta \
-        -I /data/bam/reads_son.bam \
-        -O reads_son.g.vcf \
-        -L /data/ref/intervals.bed \
-        -ERC GVCF
-```
-
-<!--
-??? success "Command output"
-
-    ```console
-
-    ```
--->
-
-Once this completes, you should have three files ending in `.g.vcf` in your current directory (one per sample) and their respective index files ending in `.g.vcf.idx`.
-
-### 0.3. Run joint genotyping
-
-Now that we have all the GVCFs, we can finally try out the joint genotyping approach to generating variant calls for a cohort of samples.
-As a reminder, it's a two-step method that consists of combining the data from all the GVCFs into a data store, then running the joint genotyping analysis proper to generate the final VCF of joint-called variants.
-
-#### 0.3.1. Combine all the per-sample GVCFs
-
-This first step uses another GATK tool, called GenomicsDBImport, to combine the data from all the GVCFs into a GenomicsDB data store.
-
-```bash
-gatk GenomicsDBImport \
-    -V reads_mother.g.vcf \
-    -V reads_father.g.vcf \
-    -V reads_son.g.vcf \
-    -L /data/ref/intervals.bed \
-    --genomicsdb-workspace-path family_trio_gdb
-```
-
-<!--
-??? success "Command output"
-
-    ```console
-
-    ```
--->
-
-The output of this step is effectively a directory containing a set of further nested directories holding the combined variant data in the form of multiple different files.
-You can poke around it but you'll quickly see this data store format is not intended to be read directly by humans.
-
-!!! note
-
-    GATK includes tools that make it possible to inspect and extract variant call data from the data store as needed.
-
-#### 0.3.2. Run the joint genotyping analysis proper
-
-This second step uses yet another GATK tool, called GenotypeGVCFs, to recalculate variant statistics and individual genotypes in light of the data available across all samples in the cohort.
-
-```bash
-gatk GenotypeGVCFs \
-    -R /data/ref/ref.fasta \
-    -V gendb://family_trio_gdb \
-    -O family_trio.vcf
-```
-
-<!--
-??? success "Command output"
-
-    ```console
-
-    ```
--->
-
-This creates the VCF output file `family_trio.vcf` in the current working directory in the container.
-It's another reasonably small file so you can `cat` this file to view its contents, and scroll up to find the first few variant lines.
-
-```console title="family_trio.vcf" linenums="40"
-#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  reads_father    reads_mother    reads_son
-20_10037292_10066351    3480    .       C       CT      1625.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487    GT:AD:DP:GQ:PL  0/1:15,16:31:99:367,0,375       1/1:0,18:18:54:517,54,0 1/1:0,26:26:78:756,78,0
-20_10037292_10066351    3520    .       AT      A       1678.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=1.03;DP=80;ExcessHet=0.0000;FS=2.290;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=22.39;ReadPosRankSum=0.701;SOR=0.730 GT:AD:DP:GQ:PL   0/1:18,13:31:99:296,0,424       1/1:0,18:18:54:623,54,0 1/1:0,26:26:78:774,78,0
-20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194
-```
-
-This looks more like the original VCF we generated in Part 1, except this time we have genotype-level information for all three samples.
-The last three columns in the file are the genotype blocks for the samples, listed in alphabetical order.
-
-If we look at the genotypes called for our test family trio for the very first variant, we see that the father is heterozygous-variant (`0/1`), and the mother and son are both homozygous-variant (`1/1`).
-
-That is ultimately the information we're looking to extract from the dataset! So let's go wrap all this into a Nextflow workflow so we can do this at scale.
-
-#### 0.3.3. Exit the GATK container
-
-```bash
-exit
-```
-
-### Takeaway
-
-You know how to run the individual commands involved in joint variant calling in the terminal to verify that they will produce the information you want.
-
-### What's next?
-
-Wrap these commands into an actual pipeline.
-
 ---
 
 ## 1. Modify the per-sample variant calling step to produce a GVCF
 
-The good news is that we don't need to start all over, since we already wrote a workflow that does some of this work in Part 1.
+The good news is that we don't need to start all over, since we already wrote a workflow that does some of this work in Part 2.
 However, that pipeline produces VCF files, whereas now we want GVCF files in order to do the joint genotyping.
 So we need to start by switching on the GVCF variant calling mode and updating the output file extension.
 
 !!! note
 
-    For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 1, but under a different name: `genomics-2.nf`.
+    For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 2, but under a different name: `genomics-2.nf`.
 
 ### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output extension
 
@@ -515,13 +268,19 @@ Learn to collect the contents of a channel and pass them on to the next process 
 
 We now need to combine the data from all the per-sample GVCFs into a form that supports the joint genotyping analysis we want to do.
 
-### 2.1. Define the process that will combine the GVCFs
+### 2.1. Create a module for the process that will combine the GVCFs
 
-As a reminder of what we did earlier in the warmup section, combining the GVCFs is a job for the GATK tool GenomicsDBImport, which will produce a data store in the so-called GenomicsDB format.
+As a reminder of what we covered earlier in Part 1, combining the GVCFs is a job for the GATK tool GenomicsDBImport, which will produce a data store in the so-called GenomicsDB format.
 
-Let's write a new process to define how that's going to work, based on the command we used earlier in the warmup section.
+Following the same pattern we used in Part 2, we'll create this as a module file.
 
-```groovy title="genomics-2.nf" linenums="66"
+```bash
+mkdir -p modules/gatk/genomicsdb
+```
+
+Now create the module file:
+
+```groovy title="modules/gatk/genomicsdb/main.nf"
 /*
  * Combine GVCFs into GenomicsDB datastore
  */
@@ -550,9 +309,17 @@ process GATK_GENOMICSDB {
 
 What do you think, looks reasonable?
 
-Let's wire it up and see what happens.
+### 2.2. Import the module into the workflow
 
-### 2.2. Add a `cohort_name` parameter with a default value
+Add the import statement to `genomics-2.nf`, below the existing import statements:
+
+```groovy title="genomics-2.nf" linenums="10"
+include { GATK_GENOMICSDB } from './modules/gatk/genomicsdb/main.nf'
+```
+
+Now we can wire it up and see what happens.
+
+### 2.3. Add a `cohort_name` parameter with a default value
 
 We need to provide an arbitrary name for the cohort.
 Later in the training series you'll learn how to use sample metadata for this sort of thing, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
@@ -562,7 +329,7 @@ Later in the training series you'll learn how to use sample metadata for this so
     cohort_name: String = "family_trio"
 ```
 
-### 2.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples
+### 2.4. Gather the outputs of GATK_HAPLOTYPECALLER across samples
 
 If we were to just plug the output channel from the `GATK_HAPLOTYPECALLER` process as is, Nextflow would call the process on each sample GVCF separately.
 However, we want to bundle all three GVCFs (and their index files) in such a way that Nextflow hands all of them together to a single process call.
@@ -591,7 +358,7 @@ The resulting `all_gvcfs_ch` and `all_idxs_ch` channels are what we're going to 
 
     In case you were wondering, we collect the GVCFs and their index files separately because the GATK GenomicsDBImport command only wants to see the GVCF file paths. Fortunately, since Nextflow will stage all the files together for execution, we don't have to worry about the order of files like we did for BAMs and their index in Part 1.
 
-### 2.4. Add a call to the workflow block to run GATK_GENOMICSDB
+### 2.5. Add a call to the workflow block to run GATK_GENOMICSDB
 
 We've got a process, and we've got input channels. We just need to add the process call.
 
@@ -607,7 +374,7 @@ We've got a process, and we've got input channels. We just need to add the proce
 
 Ok, everything is wired up.
 
-### 2.5. Run the workflow
+### 2.6. Run the workflow
 
 Let's see if this works.
 
@@ -662,7 +429,7 @@ gatk GenomicsDBImport \
 
 So that means we need to somehow transform our bundle of GVCF files into a properly formatted command string.
 
-### 2.6. Construct a command line with a separate `-V` argument for each input GVCF
+### 2.7. Construct a command line with a separate `-V` argument for each input GVCF
 
 This is where Nextflow being based on Groovy comes in handy, because it's going to allow us to use some fairly straightforward string manipulations to construct the necessary command string.
 
@@ -706,7 +473,7 @@ Great, let's add our string manipulation line there then, and update the `gatk G
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="87"  hl_lines="2 5"
+    ```groovy title="modules/gatk/genomicsdb/main.nf" linenums="17"  hl_lines="2 5"
         script:
         def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
         """
@@ -719,7 +486,7 @@ Great, let's add our string manipulation line there then, and update the `gatk G
 
 === "Before"
 
-    ```groovy title="genomics-2.nf" linenums="87"  hl_lines="4"
+    ```groovy title="modules/gatk/genomicsdb/main.nf" linenums="17"  hl_lines="4"
         script:
         """
         gatk GenomicsDBImport \
@@ -735,7 +502,7 @@ That should be all that's needed to provide the inputs to `gatk GenomicsDBImport
 
     When you update the `gatk GenomicsDBImport` command, make sure to remove the `-V ` prefix when you swap in the `${gvcfs_line}` variable.
 
-### 2.7. Run the workflow to verify that it generates the GenomicsDB output as expected
+### 2.8. Run the workflow to verify that it generates the GenomicsDB output as expected
 
 Alright, let's see if that addressed the issue.
 
@@ -780,13 +547,22 @@ Now that we have the combined genomic variant calls, we can run the joint genoty
 
 For logistical reasons, we decide to include the joint genotyping inside the same process.
 
-### 3.1. Rename the process from GATK_GENOMICSDB to GATK_JOINTGENOTYPING
+### 3.1. Rename the module from GATK_GENOMICSDB to GATK_JOINTGENOTYPING
 
 Since the process will be running more than one tool, we change its name to refer to the overall operation rather than a single tool name.
+This means renaming both the module directory and the process inside it.
+
+First, rename the module directory:
+
+```bash
+mv modules/gatk/genomicsdb modules/gatk/jointgenotyping
+```
+
+Then update the process name in the module file:
 
 === "After"
 
-    ```groovy title="genomics-2.nf"
+    ```groovy title="modules/gatk/jointgenotyping/main.nf"
     /*
      * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
      */
@@ -795,22 +571,36 @@ Since the process will be running more than one tool, we change its name to refe
 
 === "Before"
 
-    ```groovy title="genomics-2.nf"
+    ```groovy title="modules/gatk/jointgenotyping/main.nf"
     /*
      * Combine GVCFs into GenomicsDB datastore
      */
     process GATK_GENOMICSDB {
     ```
 
-Remember to keep your process names as descriptive as possible, to maximize readability for your colleagues —and your future self!
-
-### 3.2. Add the joint genotyping command to the GATK_JOINTGENOTYPING process
-
-Simply add the second command after the first one inside the script section.
+Finally, update the import statement in `genomics-2.nf`:
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="89"  hl_lines="6-10"
+    ```groovy title="genomics-2.nf" linenums="10"
+    include { GATK_JOINTGENOTYPING } from './modules/gatk/jointgenotyping/main.nf'
+    ```
+
+=== "Before"
+
+    ```groovy title="genomics-2.nf" linenums="10"
+    include { GATK_GENOMICSDB } from './modules/gatk/genomicsdb/main.nf'
+    ```
+
+Remember to keep your process names as descriptive as possible, to maximize readability for your colleagues —and your future self!
+
+### 3.2. Add the joint genotyping command to the GATK_JOINTGENOTYPING module
+
+Simply add the second command after the first one inside the script section of the module file.
+
+=== "After"
+
+    ```groovy title="modules/gatk/jointgenotyping/main.nf" linenums="19"  hl_lines="6-10"
         """
         gatk GenomicsDBImport \
             ${gvcfs_line} \
@@ -827,7 +617,7 @@ Simply add the second command after the first one inside the script section.
 
 === "Before"
 
-    ```groovy title="genomics-2.nf" linenums="89"
+    ```groovy title="modules/gatk/jointgenotyping/main.nf" linenums="19"
         """
         gatk GenomicsDBImport \
             ${gvcfs_line} \
@@ -838,13 +628,13 @@ Simply add the second command after the first one inside the script section.
 
 The two commands will be run in serial, in the same way that they would if we were to run them manually in the terminal.
 
-### 3.3. Add the reference genome files to the GATK_JOINTGENOTYPING process input definitions
+### 3.3. Add the reference genome files to the GATK_JOINTGENOTYPING module input definitions
 
-The second command requires the reference genome files, so we need to add those to the process inputs.
+The second command requires the reference genome files, so we need to add those to the module's input block.
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="78"  hl_lines="6-8"
+    ```groovy title="modules/gatk/jointgenotyping/main.nf" linenums="8"  hl_lines="6-8"
         input:
         path all_gvcfs
         path all_idxs
@@ -857,7 +647,7 @@ The second command requires the reference genome files, so we need to add those 
 
 === "Before"
 
-    ```groovy title="genomics-2.nf" linenums="78"
+    ```groovy title="modules/gatk/jointgenotyping/main.nf" linenums="8"
         input:
         path all_gvcfs
         path all_idxs
@@ -867,7 +657,7 @@ The second command requires the reference genome files, so we need to add those 
 
 It may seem annoying to type these out, but remember, you only type them once, and then you can run the workflow a million times. Worth it?
 
-### 3.4. Update the process output definition to emit the VCF of cohort-level variant calls
+### 3.4. Update the module output definition to emit the VCF of cohort-level variant calls
 
 We don't really care about saving the GenomicsDB datastore, which is just an intermediate format that only exists for logistical reasons, so we can just remove it from the output block if we want.
 
@@ -875,7 +665,7 @@ The output we're actually interested in is the VCF produced by the joint genotyp
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="87" hl_lines="2 3"
+    ```groovy title="modules/gatk/jointgenotyping/main.nf" linenums="17" hl_lines="2 3"
         output:
         path "${cohort_name}.joint.vcf"     , emit: vcf
         path "${cohort_name}.joint.vcf.idx" , emit: idx
@@ -883,16 +673,17 @@ The output we're actually interested in is the VCF produced by the joint genotyp
 
 === "Before"
 
-    ```groovy title="genomics-2.nf" linenums="87"
+    ```groovy title="modules/gatk/jointgenotyping/main.nf" linenums="17"
         output:
         path "${cohort_name}_gdb"
     ```
 
 We're almost done!
 
-### 3.5. Update the process call from GATK_GENOMICSDB to GATK_JOINTGENOTYPING
+### 3.5. Update the process call to use the renamed module
 
-Let's not forget to rename the process call in the workflow body from GATK_GENOMICSDB to GATK_JOINTGENOTYPING. And while we're at it, we should also add the reference genome files as inputs, since we need to provide them to the joint genotyping tool.
+We already updated the import statement in section 3.1.
+Now we need to rename the process call in the workflow body and add the reference genome files as inputs, since we need to provide them to the joint genotyping tool.
 
 === "After"
 
@@ -1021,4 +812,4 @@ You know how to use some common operators as well as Groovy closures to control 
 
 Celebrate your success and take a well-deserved break.
 
-In the next part of this course, you'll learn how to modularize your workflow by extracting process definitions into reusable modules.
+In the next part of this course, you'll learn how to add automated testing to verify that your pipeline produces correct outputs.

@@ -1,12 +1,10 @@
 # Part 4: Adding tests
 
-In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
+In Part 2, you built a modular variant calling pipeline that processed each sample's data independently.
 
-In the second part, we showed you how to use channels and channel operators to implement joint variant calling with GATK.
+In Part 3, we extended the pipeline to implement joint variant calling with GATK.
 
-In the third part, we modularized the pipeline.
-
-In this part of the training, we're going to show you how to use [**nf-test**](https://www.nf-test.com/), a testing framework that integrates well with Nextflow and makes it straightforward to add both module-level and workflow-level tests to your pipeline. To follow this part of the training, you should have completed Part 1, Part 2, and Part 3, as well as the [nf-test side quest](../../side_quests/nf-test.md), which covers the basics of nf-test, and why testing is important.
+In this part of the training, we're going to show you how to use [**nf-test**](https://www.nf-test.com/), a testing framework that integrates well with Nextflow and makes it straightforward to add both module-level and workflow-level tests to your pipeline. To follow this part of the training, you should have completed Parts 2 and 3, as well as the [nf-test side quest](../../side_quests/nf-test.md), which covers the basics of nf-test, and why testing is important.
 
 ---
 

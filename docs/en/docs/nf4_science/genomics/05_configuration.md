@@ -1,4 +1,4 @@
-# Part 3: Resource profiling and optimization
+# Part 5: Resource profiling and optimization
 
 THIS IS A PLACEHOLDER
 
@@ -87,3 +87,12 @@ As you can see, this approach is useful when your processes have different resou
     We'll cover both of those approaches in an upcoming part of this training course.
 
 That being said, there may be some constraints on what you can (or must) allocate depending on what computing executor and compute infrastructure you're using. For example, your cluster may require you to stay within certain limits that don't apply when you're running elsewhere.
+
+### Takeaway
+
+You know how to generate execution reports and use them to identify opportunities for resource optimization.
+Process selectors like `withName` allow you to customize resource allocations for specific processes.
+
+### What's next?
+
+Learn how to run a production-ready variant calling pipeline from nf-core and compare it to the pipeline you built manually.
