@@ -480,14 +480,15 @@ Let's look at a few common ways you might configure this to be more flexible.
 
 ### 2.1. Customize the output directory with `-output-dir`
 
-For each chapter of this course, we've been publishing outputs to a different subdirectory hardcoded into the output definitions.
+When we're controlling how our 'published' output are organised we have two distinct priorities: the top-level output directory and how files are organised below that.
 
+For each chapter of this course, we've been publishing outputs to the default top-level directory: `results`.
 Let's change that to be more flexible using the `-output-dir` CLI option.
 
 #### 2.1.1. Run the pipeline with `-output-dir`
 
 The `-output-dir` option (shorthand: `-o`) overrides the default output directory (`results/`) for all workflow outputs.
-This is the recommended way to control where outputs are published.
+This is the recommended way to control the root path where outputs are published.
 
 ```bash
 nextflow run hello-config.nf -output-dir new_results/
@@ -531,8 +532,8 @@ Let's clean that up.
 
 #### 2.1.2. Remove hardcoded paths from the output block
 
-Now that we control the base output directory from the command line, we can remove the redundant `hello_config/` prefix from the output paths.
-If no subdirectory is needed, we can remove `path` completely, or set to an empty string.
+The `hello_config/` prefix was hardcoded in earlier chapters, but since we're now learning to configure output paths flexibly, we can remove this hardcoding.
+For outputs that don't need a subdirectory we can set the `path` directive to an empty string, or remove it entirely.
 
 Make the following code changes in the workflow file:
 
