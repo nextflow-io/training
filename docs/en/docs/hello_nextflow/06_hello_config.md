@@ -680,7 +680,7 @@ This publishes outputs to `config_results/my_run/`.
 
 We can also set subdirectory output `path` declarations dynamically, on a per-output basis.
 
-For example, we can organize out outputs by process by referencing `<process>.name` in the output path declaration:
+For example, we can organize our outputs by process by referencing `<process>.name` in the output path declaration:
 
 === "After"
 
