@@ -16,7 +16,7 @@ This section covers how to organize your workflow code to make development and m
 Specifically, we are going to demonstrate how to use [**modules**](https://nextflow.io/docs/latest/module.html).
 
 In Nextflow, a **module** is a standalone code file, often encapsulating a single process definition.
-To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
+To use a module in a workflow, you just add a single-line `include` statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
 That makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 
 When we started developing our workflow, we wrote everything in one single code file.
@@ -115,7 +115,7 @@ mkdir modules
 In its simplest form, turning an existing process into a module is little more than a copy-paste operation.
 We're going to create a file stub for the module, copy the relevant code over then delete it from the main workflow file.
 
-Then all we'll need to do is add an import statement so that Nextflow will know to pull in the relevant code at runtime.
+Then all we'll need to do is add an `include` statement so that Nextflow will know to pull in the relevant code at runtime.
 
 ### 2.1. Create a file stub for the new module
 
@@ -154,11 +154,11 @@ process sayHello {
 
 Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
 
-### 2.3. Add an import declaration before the workflow block
+### 2.3. Add an include declaration before the workflow block
 
-The syntax for importing a process from a module is fairly straightforward:
+The syntax for including a process from a module is fairly straightforward:
 
-```groovy title="Syntax: Import declaration"
+```groovy title="Syntax: include declaration"
 include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
@@ -267,9 +267,9 @@ process convertToUpper {
 
 Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
 
-### 3.3. Add an import declaration before the `params` block
+### 3.3. Add an include declaration before the `params` block
 
-Insert the import declaration above the `params` block and fill it out appropriately.
+Insert the include declaration above the `params` block and fill it out appropriately.
 
 === "After"
 
@@ -371,9 +371,9 @@ process collectGreetings {
 
 Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
 
-### 4.3. Add an import declaration before the `params` block
+### 4.3. Add an include declaration before the `params` block
 
-Insert the import declaration above the `params` block and fill it out appropriately.
+Insert the include declaration above the `params` block and fill it out appropriately.
 
 === "After"
 
@@ -438,7 +438,7 @@ You know how to modularize multiple processes in a workflow.
 
 Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works!
 
-Jokes aside, now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short import statement to use the relevant module.
+Jokes aside, now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short `include` statement to use the relevant module.
 This is better than copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvements.
 
 ### What's next?
@@ -480,14 +480,14 @@ Learn more: [1. Create a directory to store modules](#1-create-a-directory-to-st
 </quiz>
 
 <quiz>
-What is the correct syntax to import a module?
+What is the correct syntax to use a module?
 
 - [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Learn more: [2.3. Add an import declaration](#23-add-an-import-declaration-before-the-workflow-block)
+Learn more: [2.3. Add an include declaration](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>
