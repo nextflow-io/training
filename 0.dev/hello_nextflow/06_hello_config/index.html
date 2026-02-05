@@ -5347,13 +5347,9 @@ There's a simpler approach for when you want to run your pipeline with a specifi
 <p>To demonstrate this, we provide an example parameter file in the current directory, called <code>test-params.yaml</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test-params.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
-<span class="normal"><a href="#__codelineno-20-3">3</a></span>
-<span class="normal"><a href="#__codelineno-20-4">4</a></span>
-<span class="normal"><a href="#__codelineno-20-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="p p-Indicator">{</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">  input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;greetings.csv&quot;</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">  batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="nt">  character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="p p-Indicator">}</span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/greetings.csv&quot;</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>This parameter file contains a key-value pair for each of the inputs that we want to specify.
 Note the use of colons (<code>:</code>) instead of equal signs (<code>=</code>) if you compare the syntax to the configuration file.
