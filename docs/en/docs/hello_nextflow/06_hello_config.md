@@ -490,7 +490,7 @@ The `-output-dir` option (shorthand: `-o`) overrides the default output director
 This is the recommended way to control where outputs are published.
 
 ```bash
-nextflow run hello-config.nf -output-dir results/my_batch
+nextflow run hello-config.nf -output-dir new_results/
 ```
 
 ??? success "Command output"
@@ -507,12 +507,12 @@ nextflow run hello-config.nf -output-dir results/my_batch
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This publishes outputs to `results/my_batch/` instead of `results/`:
+This publishes outputs to `new_results/` instead of `results/`:
 
 ??? abstract "Directory contents"
 
     ```console
-    results/my_batch/
+    new_results/
     ├── hello_config
     │   ├── cowpy-COLLECTED-batch-output.txt
     │   ├── batch-report.txt
@@ -526,12 +526,13 @@ This publishes outputs to `results/my_batch/` instead of `results/`:
     │       └── UPPER-Holà-output.txt
     ```
 
-Notice we still have the `hello_config` subdirectory from the hardcoded paths in the output block.
+Notice we still have the `hello_config` subdirectory from the `path` declarations in the output block.
 Let's clean that up.
 
 #### 2.1.2. Remove hardcoded paths from the output block
 
 Now that we control the base output directory from the command line, we can remove the redundant `hello_config/` prefix from the output paths.
+If no subdirectory is needed, we can remove `path` completely, or set to an empty string.
 
 Make the following code changes in the workflow file:
 
@@ -552,11 +553,9 @@ Make the following code changes in the workflow file:
             mode 'copy'
         }
         batch_report {
-            path ''
             mode 'copy'
         }
         cowpy_art {
-            path ''
             mode 'copy'
         }
     }
@@ -592,15 +591,15 @@ Make the following code changes in the workflow file:
 Run the pipeline again:
 
 ```bash
-nextflow run hello-config.nf -output-dir results/my_batch
+nextflow run hello-config.nf -output-dir even_newer_results/
 ```
 
-Now the outputs are published directly under `results/my_batch/`:
+Now the outputs are published directly under `even_newer_results/`:
 
 ??? abstract "Directory contents"
 
     ```console
-    results/my_batch/
+    even_newer_results/
     ├── cowpy-COLLECTED-batch-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -615,13 +614,14 @@ Now the outputs are published directly under `results/my_batch/`:
 
 The `-output-dir` option provides a clear separation of concerns: use it to control _where_ outputs go, and use the `path` directive in the output block to control the _subdirectory structure_.
 
-### 2.2. Organize outputs by process
+### 2.2. Dynamic output paths
 
-One popular way to organize outputs further is to do it by process, _i.e._ create subdirectories for each process run in the pipeline.
+Output directories don't have to just use static strings, we can set them dynamically.
+One popular way to organize outputs further is to do it by process, _i.e._ create subdirectories for each process in the pipeline.
 
 #### 2.2.1. Replace the output paths by a reference to process names
 
-All you need to do is reference the name of the process as `<task>.name` in the output path declaration.
+All you need to do is reference the name of the process as `<process>.name` in the output path declaration.
 
 Make the following changes in the workflow file:
 
@@ -654,7 +654,7 @@ Make the following changes in the workflow file:
 
 === "Before"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11"
     output {
         first_output {
             path 'intermediates'
@@ -669,11 +669,9 @@ Make the following changes in the workflow file:
             mode 'copy'
         }
         batch_report {
-            path ''
             mode 'copy'
         }
         cowpy_art {
-            path ''
             mode 'copy'
         }
     }
