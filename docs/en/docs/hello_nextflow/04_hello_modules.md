@@ -108,11 +108,6 @@ You can call that directory anything you want, but the convention is to call it 
 mkdir modules
 ```
 
-!!! tip
-
-    Here we are showing you how to use **local modules**, meaning modules stored locally in the same repository as the rest of the workflow code, in contrast to remote modules, which are stored in other (remote) repositories.
-    For more information about **remote modules**, see the [module documentation](https://nextflow.io/docs/latest/module.html).
-
 ---
 
 ## 2. Create a module for `sayHello()`
