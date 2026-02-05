@@ -620,7 +620,7 @@ Now the outputs are published directly under `even_newer_results/`, without the 
 
 !!! tip
 
-    The `-output-dir` option is used to control _where_ outputs go, and use the `path` directive in the output block to control the _subdirectory structure_.
+    The `-output-dir` option is used to control _where_ outputs go, whereas the `path` directive in the output block controls the _subdirectory structure_.
 
 ### 2.2. Dynamic output paths
 
