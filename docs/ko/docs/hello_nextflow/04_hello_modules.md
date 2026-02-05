@@ -15,10 +15,10 @@
 -->
 
 이 섹션에서는 파이프라인의 개발 및 유지보수를 더 효율적이고 지속 가능하게 만들기 위해 workflow 코드를 구성하는 방법을 다룹니다.
-구체적으로, **모듈**을 사용하는 방법을 시연할 것입니다.
+구체적으로, [**모듈**](https://nextflow.io/docs/latest/module.html)을 사용하는 방법을 시연할 것입니다.
 
-Nextflow에서 **모듈**은 독립적인 코드 파일에 캡슐화된 단일 process 정의입니다.
-Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 import 문만 추가하면 됩니다; 그런 다음 일반적으로 하는 것과 같은 방식으로 process를 workflow에 통합할 수 있습니다.
+Nextflow에서 **모듈**은 독립적인 코드 파일이며, 종종 단일 process 정의를 캡슐화합니다.
+Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 `include` 문만 추가하면 됩니다. 그런 다음 일반적으로 하는 것과 같은 방식으로 process를 workflow에 통합할 수 있습니다.
 이렇게 하면 코드의 여러 복사본을 생성하지 않고도 여러 workflow에서 process 정의를 재사용할 수 있습니다.
 
 Workflow 개발을 시작했을 때, 우리는 모든 것을 하나의 단일 코드 파일에 작성했습니다.
@@ -36,7 +36,7 @@ Workflow 개발을 시작했을 때, 우리는 모든 것을 하나의 단일 �
 
 ---
 
-## 0. 워밍업: `hello-modules.nf` 실행
+## 0. 준비 운동: `hello-modules.nf` 실행
 
 시작점으로 workflow 스크립트 `hello-modules.nf`를 사용할 것입니다.
 이 스크립트는 이 교육 과정의 파트 3을 완료하여 생성된 스크립트와 동일하지만, 출력 대상을 변경했습니다:
@@ -110,11 +110,6 @@ nextflow run hello-modules.nf
 mkdir modules
 ```
 
-!!! tip "팁"
-
-    여기서는 **로컬 모듈**을 사용하는 방법을 보여드리고 있습니다. 이는 workflow 코드의 나머지 부분과 동일한 저장소에 로컬로 저장된 모듈을 의미하며, 다른 (원격) 저장소에 저장된 원격 모듈과 대조됩니다.
-    **원격 모듈**에 대한 자세한 내용은 [문서](https://www.nextflow.io/docs/latest/module.html)를 참조하십시오.
-
 ---
 
 ## 2. `sayHello()`용 모듈 생성
@@ -122,7 +117,7 @@ mkdir modules
 가장 간단한 형태에서, 기존 process를 모듈로 전환하는 것은 복사-붙여넣기 작업에 불과합니다.
 모듈에 대한 파일 스텁을 생성하고, 관련 코드를 복사한 다음 메인 workflow 파일에서 삭제할 것입니다.
 
-그런 다음 import 문만 추가하면 Nextflow가 런타임에 관련 코드를 가져올 것입니다.
+그런 다음 `include` 문만 추가하면 Nextflow가 런타임에 관련 코드를 가져올 것입니다.
 
 ### 2.1. 새 모듈에 대한 파일 스텁 생성
 
@@ -161,12 +156,12 @@ process sayHello {
 
 완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.
 
-### 2.3. Workflow 블록 전에 import 선언 추가
+### 2.3. Workflow 블록 전에 include 선언 추가
 
-로컬 모듈을 가져오는 구문은 매우 간단합니다:
+모듈에서 process를 가져오는 구문은 매우 간단합니다:
 
-```groovy title="구문: Import 선언"
-include { <MODULE_NAME> } from '<path_to_module>'
+```groovy title="구문: Include 선언"
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 `params` 블록 위에 이것을 삽입하고 적절하게 채웁시다.
@@ -198,7 +193,7 @@ include { <MODULE_NAME> } from '<path_to_module>'
     }
     ```
 
-모듈 이름인 `sayHello`와 모듈 코드가 포함된 파일 경로인 `./modules/sayHello.nf`를 채웠습니다.
+process 이름인 `sayHello`와 모듈 코드가 포함된 파일 경로인 `./modules/sayHello.nf`를 채웠습니다.
 
 ### 2.4. Workflow 실행
 
@@ -225,7 +220,7 @@ nextflow run hello-modules.nf -resume
 
 Nextflow는 코드가 여러 파일로 분할되어 있더라도 여전히 동일한 작업이 수행되어야 함을 인식했습니다.
 
-### 핵심 내용
+### 핵심 정리
 
 Process를 로컬 모듈로 추출하는 방법과 이렇게 해도 workflow의 재개 가능성이 깨지지 않는다는 것을 알게 되었습니다.
 
@@ -274,9 +269,9 @@ process convertToUpper {
 
 완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.
 
-### 3.3. `params` 블록 전에 import 선언 추가
+### 3.3. `params` 블록 전에 include 선언 추가
 
-`params` 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.
+`params` 블록 위에 include 선언을 삽입하고 적절하게 채웁니다.
 
 === "수정 후"
 
@@ -378,9 +373,9 @@ process collectGreetings {
 
 완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.
 
-### 4.3. `params` 블록 전에 import 선언 추가
+### 4.3. `params` 블록 전에 include 선언 추가
 
-`params` 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.
+`params` 블록 위에 include 선언을 삽입하고 적절하게 채웁니다.
 
 === "수정 후"
 
@@ -439,13 +434,13 @@ nextflow run hello-modules.nf -resume
 
 이것은 여전히 이전과 동일한 출력을 생성해야 합니다.
 
-### 핵심 내용
+### 핵심 정리
 
 Workflow에서 여러 process를 모듈화하는 방법을 알게 되었습니다.
 
 축하합니다, 이 모든 작업을 수행했지만 파이프라인 작동 방식에는 아무것도 변경되지 않았습니다!
 
-농담은 제쳐두고, 이제 코드가 더 모듈화되었으며, 해당 process 중 하나를 호출하는 다른 파이프라인을 작성하기로 결정하면 관련 모듈을 사용하기 위해 짧은 import 문 하나만 입력하면 됩니다.
+농담은 제쳐두고, 이제 코드가 더 모듈화되었으며, 해당 process 중 하나를 호출하는 다른 파이프라인을 작성하기로 결정하면 관련 모듈을 사용하기 위해 짧은 `include` 문 하나만 입력하면 됩니다.
 이것은 코드를 복사-붙여넣기하는 것보다 낫습니다. 나중에 모듈을 개선하기로 결정하면 모든 파이프라인이 개선 사항을 상속받기 때문입니다.
 
 ### 다음 단계
@@ -461,7 +456,7 @@ Workflow에서 여러 process를 모듈화하는 방법을 알게 되었습니�
 <quiz>
 Nextflow에서 모듈이란 무엇입니까?
 - [ ] 구성 파일
-- [x] 단일 process 정의가 포함된 독립 파일
+- [x] Process 정의를 포함할 수 있는 독립 파일
 - [ ] Workflow 정의
 - [ ] Channel 연산자
 
@@ -469,15 +464,7 @@ Nextflow에서 모듈이란 무엇입니까?
 </quiz>
 
 <quiz>
-모듈 파일에 권장되는 명명 규칙은 무엇입니까?
-- [ ] `module_processName.nf`
-- [ ] `processName_module.nf`
-- [x] `processName.nf`
-- [ ] `mod_processName.nf`
-</quiz>
-
-<quiz>
-모듈 파일은 어디에 저장해야 합니까?
+모듈 파일을 저장하는 데 일반적으로 사용되는 규칙은 무엇입니까?
 - [ ] Workflow와 같은 디렉토리에
 - [ ] `bin/` 디렉토리에
 - [x] `modules/` 디렉토리에
@@ -487,14 +474,14 @@ Nextflow에서 모듈이란 무엇입니까?
 </quiz>
 
 <quiz>
-모듈을 가져오는 올바른 구문은 무엇입니까?
+모듈을 사용하는 올바른 구문은 무엇입니까?
 
 - [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-자세히 알아보기: [2.3. import 선언 추가](#23-workflow-블록-전에-import-선언-추가)
+자세히 알아보기: [2.3. include 선언 추가](#23-workflow-블록-전에-include-선언-추가)
 </quiz>
 
 <quiz>

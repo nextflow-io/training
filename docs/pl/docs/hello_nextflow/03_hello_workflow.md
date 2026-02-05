@@ -19,7 +19,7 @@ W tym module szkoleniowym nauczysz się łączyć procesy w wieloetapowy workflo
 
 Poznasz następujące techniki Nextflow'a:
 
-1. Przekazywanie danych z jednego procesu do następnego
+1. Przepływ danych z jednego procesu do następnego
 2. Zbieranie wyjść z wielu wywołań procesu do pojedynczego wywołania
 3. Przekazywanie dodatkowych parametrów do procesu
 4. Obsługę wielu wyjść pochodzących z procesu
@@ -27,8 +27,8 @@ Poznasz następujące techniki Nextflow'a:
 Dla demonstracji będziemy kontynuować rozbudowę domenowo-agnostycznego przykładu Hello World z Części 1 i 2.
 Tym razem wprowadzimy następujące zmiany w naszym workflow, aby lepiej odzwierciedlić sposób budowania rzeczywistych workflow:
 
-1. Dodamy drugi krok, który konwertuje pozdrowienie na wielkie litery.
-2. Dodamy trzeci krok, który zbiera wszystkie przekształcone pozdrowienia i zapisuje je do pojedynczego pliku.
+1. Dodamy drugi krok konwertujący pozdrowienie na wielkie litery.
+2. Dodamy trzeci krok zbierający wszystkie przekształcone pozdrowienia i zapisujący je do pojedynczego pliku.
 3. Dodamy parametr do nazwania końcowego pliku wyjściowego i przekażemy go jako dodatkowe wejście do kroku zbierania.
 4. Sprawimy, że krok zbierania będzie również raportował prostą statystykę o tym, co zostało przetworzone.
 
@@ -40,7 +40,7 @@ Tym razem wprowadzimy następujące zmiany w naszym workflow, aby lepiej odzwier
 
 ## 0. Rozgrzewka: Uruchom `hello-workflow.nf`
 
-Użyjemy skryptu workflow `hello-workflow.nf` jako punktu wyjścia.
+Użyjemy skryptu workflow'a `hello-workflow.nf` jako punktu wyjścia.
 Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 2 tego szkolenia, z tą różnicą, że usunęliśmy instrukcje `view()` i zmieniliśmy miejsce docelowe wyjścia:
 
 ```groovy title="hello-workflow.nf" linenums="37" hl_lines="3"
@@ -115,7 +115,7 @@ Do konwersji pozdrowień na wielkie litery użyjemy klasycznego narzędzia UNIX 
 tr '[a-z]' '[A-Z]'
 ```
 
-Jest to bardzo prosty one-liner do zamiany tekstu, który nie uwzględnia liter z akcentami, więc na przykład 'Holà' zostanie zamienione na 'HOLà', ale wystarczająco dobrze posłuży do demonstracji koncepcji Nextflow'a i to jest najważniejsze.
+To bardzo naiwny one-liner do zamiany tekstu, który nie uwzględnia liter z akcentami, więc na przykład 'Holà' zostanie zamienione na 'HOLà', ale wystarczająco dobrze posłuży do demonstracji koncepcji Nextflow'a i to jest najważniejsze.
 
 Aby to przetestować, możemy uruchomić polecenie `echo 'Hello World'` i przekierować jego wyjście do polecenia `tr`:
 
@@ -153,7 +153,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 ```
@@ -235,7 +235,7 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
         convertToUpper()
     ```
 
-Dla prostego przypadku takiego jak ten (jedno wyjście do jednego wejścia), to wszystko, co musimy zrobić, aby połączyć dwa procesy!
+W prostym przypadku takim jak ten (jedno wyjście do jednego wejścia), to wszystko, co musimy zrobić, aby połączyć dwa procesy!
 
 ### 1.5. Skonfiguruj publikowanie wyjść workflow'a
 
@@ -1216,5 +1216,5 @@ Przy dostarczaniu wielu wejść do procesu, co musi być prawdą?
 - [x] Kolejność wejść musi odpowiadać kolejności zdefiniowanej w bloku input
 - [ ] Tylko dwa wejścia mogą być podane jednocześnie
 
-Dowiedz się więcej: [3. Przekaż więcej niż jedno wejście do procesu](#3-przekaz-wiecej-niz-jedno-wejscie-do-procesu)
+Dowiedz się więcej: [3. Przekaż dodatkowe parametry do procesu](#3-przekaz-dodatkowe-parametry-do-procesu)
 </quiz>

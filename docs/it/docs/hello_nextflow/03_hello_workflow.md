@@ -111,7 +111,7 @@ A tal fine, dobbiamo fare tre cose:
 
 Per effettuare la conversione dei saluti in maiuscolo, useremo un classico strumento UNIX chiamato `tr` per 'text replacement' (sostituzione di testo), con la seguente sintassi:
 
-```bash title="Syntax"
+```bash title="Sintassi"
 tr '[a-z]' '[A-Z]'
 ```
 
@@ -153,7 +153,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 ```
@@ -621,9 +621,9 @@ Includiamo anche un paio di istruzioni `view()` per visualizzare gli stati prima
         // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+        // istruzioni view opzionali
+        convertToUpper.out.view { contents -> "Prima di collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "Dopo collect: $contents" }
     }
     ```
 
@@ -655,10 +655,10 @@ nextflow run hello-workflow.nf -resume
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
-    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Prima di collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+    Prima di collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+    Prima di collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+    Dopo collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
     ```
 
 Viene eseguito con successo, anche se l'output del log potrebbe apparire un po' più disordinato di questo (lo abbiamo ripulito per leggibilità).
@@ -666,8 +666,8 @@ Viene eseguito con successo, anche se l'output del log potrebbe apparire un po' 
 Questa volta il terzo passaggio è stato chiamato solo una volta!
 Guardando l'output delle istruzioni `view()`, vediamo quanto segue:
 
-- Tre istruzioni `Before collect:`, una per ogni saluto: a quel punto i percorsi dei file sono elementi individuali nel canale.
-- Una singola istruzione `After collect:`: i tre percorsi dei file sono ora impacchettati in un singolo elemento.
+- Tre istruzioni `Prima di collect:`, una per ogni saluto: a quel punto i percorsi dei file sono elementi individuali nel canale.
+- Una singola istruzione `Dopo collect:`: i tre percorsi dei file sono ora impacchettati in un singolo elemento.
 
 Possiamo riassumere questo con il seguente diagramma:
 
@@ -709,9 +709,9 @@ Prima di passare alla prossima sezione, raccomandiamo di cancellare le istruzion
         // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+        // istruzioni view opzionali
+        convertToUpper.out.view { contents -> "Prima di collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "Dopo collect: $contents" }
     ```
 
 Questa è fondamentalmente l'operazione inversa dal punto 2.4.2.

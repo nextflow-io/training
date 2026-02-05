@@ -18,7 +18,7 @@ Bu bölüm, _iş akışı kodunun tek bir satırını değiştirmeden_ davranı�
 
 Bunu yapmanın birden fazla yolu vardır; bunlar birlikte kullanılabilir ve [burada](https://www.nextflow.io/docs/latest/config.html) açıklanan öncelik sırasına göre yorumlanır.
 
-Bu kursun bu bölümünde, Bölüm 5: Merhaba Konteynerler'de zaten karşılaştığınız en basit ve en yaygın yapılandırma dosyası mekanizması olan `nextflow.config` dosyasını göstereceğiz.
+Bu kursun bu bölümünde, Bölüm 5: Hello Containers'da zaten karşılaştığınız en basit ve en yaygın yapılandırma dosyası mekanizması olan [`nextflow.config`](https://www.nextflow.io/docs/latest/config.html) dosyasını göstereceğiz.
 
 Süreç yönergeleri, yürütücüler, profiller ve parametre dosyaları gibi Nextflow yapılandırmasının temel bileşenlerini gözden geçireceğiz.
 Bu yapılandırma seçeneklerini etkin bir şekilde kullanmayı öğrenerek, pipeline'larınızın esnekliğini, ölçeklenebilirliğini ve performansını artırabilirsiniz.
@@ -389,18 +389,16 @@ Son çıktı dosyası, tux karakterinin selamlamaları söylediğini içermelidi
 Alt dizin yaklaşımı deney yapmak için harika çalışır, ancak biraz kurulum gerektirir ve yolları buna göre uyarlamanızı gerektirir.
 Pipeline'ınızı belirli bir değer kümesiyle çalıştırmak veya başkasının minimum çabayla yapmasını sağlamak istediğinizde daha basit bir yaklaşım vardır.
 
-Nextflow, parametreleri YAML veya JSON formatında bir parametre dosyası aracılığıyla belirtmemize olanak tanır; bu, örneğin alternatif varsayılan değer kümelerini ve çalıştırmaya özgü parametre değerlerini yönetmeyi ve dağıtmayı çok kullanışlı hale getirir.
+Nextflow, parametreleri YAML veya JSON formatında bir [parametre dosyası](https://nextflow.io/docs/latest/config.html#params-file) aracılığıyla belirtmemize olanak tanır; bu, örneğin alternatif varsayılan değer kümelerini ve çalıştırmaya özgü parametre değerlerini yönetmeyi ve dağıtmayı çok kullanışlı hale getirir.
 
 #### 1.3.1. Örnek parametre dosyasını inceleyin
 
 Bunu göstermek için, mevcut dizinde `test-params.yaml` adında bir örnek parametre dosyası sağlıyoruz:
 
 ```yaml title="test-params.yaml" linenums="1"
-{
-  input: "greetings.csv"
-  batch: "yaml"
-  character: "stegosaurus"
-}
+input: "data/greetings.csv"
+batch: "yaml"
+character: "stegosaurus"
 ```
 
 Bu parametre dosyası, belirtmek istediğimiz girdilerin her biri için bir anahtar-değer çifti içerir.
@@ -909,7 +907,7 @@ Ardından Bölüm 5'te, Docker konteynerlerini ve Docker konteynerlerinin kullan
 Bir HPC kümesinde çalıştığımızı ve yöneticinin güvenlik nedeniyle Docker kullanımına izin vermediğini varsayalım.
 Neyse ki bizim için, Nextflow, Singularity (HPC'de daha yaygın olarak kullanılır) gibi birden fazla başka konteyner teknolojisini ve Conda gibi yazılım paket yöneticilerini destekler.
 
-Yapılandırma dosyamızı Docker yerine Conda kullanacak şekilde değiştirebiliriz.
+Yapılandırma dosyamızı Docker yerine [Conda](https://nextflow.io/docs/latest/conda.html) kullanacak şekilde değiştirebiliriz.
 Bunu yapmak için, `docker.enabled` değerini `false` olarak değiştirelim ve Conda kullanımını etkinleştiren bir yönerge ekleyelim:
 
 === "Sonra"
@@ -1037,7 +1035,7 @@ process {
 }
 ```
 
-Yürütücüyü farklı bir arka ucu hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklandığı gibi benzer sözdizimi kullanarak istediğiniz yürütücüyü belirtmeniz yeterlidir (tüm seçenekler için [dokümantasyona](https://www.nextflow.io/docs/latest/executor.html) bakın).
+Yürütücüyü farklı bir arka ucu hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklandığı gibi benzer sözdizimi kullanarak istediğiniz yürütücüyü belirtmeniz yeterlidir (tüm seçenekler için [yürütücü dokümantasyonuna](https://www.nextflow.io/docs/latest/executor.html) bakın).
 
 ```groovy title="nextflow.config"
 process {
@@ -1053,7 +1051,7 @@ process {
 
 Çoğu yüksek performanslı hesaplama platformu, kaynak tahsisi istekleri ve sınırlamaları (örn. CPU sayısı ve bellek) ve kullanılacak iş kuyruğunun adı gibi belirli parametreleri belirtmenize izin verir (ve bazen gerektirir).
 
-Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili zamanlayıcıya nasıl gönderilmesi gerektiğini belirlemek için farklı teknolojiler, sözdizimiler ve yapılandırmalar kullanır.
+Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili zamanlayıcıya nasıl gönderilmesi gerektiğini belirlemek için farklı teknolojiler, sözdizimler ve yapılandırmalar kullanır.
 
 ??? abstract "Örnekler"
 
@@ -1086,7 +1084,7 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
     ```
 
 Neyse ki, Nextflow tüm bunları basitleştirir.
-`cpus`, `memory` ve `queue` gibi ilgili özellikleri (diğer özellikler için dokümantasyona bakın) yalnızca bir kez belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar.
+[`cpus`](https://nextflow.io/docs/latest/reference/process.html#cpus), [`memory`](https://nextflow.io/docs/latest/reference/process.html#memory) ve [`queue`](https://nextflow.io/docs/latest/reference/process.html#queue) gibi ilgili özellikleri (diğer özellikler için [süreç yönergelerine](https://nextflow.io/docs/latest/reference/process.html#process-directives) bakın) yalnızca bir kez belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar.
 Ardından, çalışma zamanında, Nextflow bu ayarları kullanarak yürütücü ayarına dayalı olarak uygun arka uca özgü betikleri oluşturacaktır.
 
 Bu standartlaştırılmış sözdizimini bir sonraki bölümde ele alacağız.
@@ -1136,7 +1134,8 @@ Rapor, tarayıcınızda indirip açabileceğiniz bir html dosyasıdır. Eğitim 
 
 Raporu incelemek ve kaynakları ayarlama fırsatlarını belirleyip belirleyemeyeceğinizi görmek için birkaç dakika ayırın.
 Kullanım sonuçlarını tahsis edilenin yüzdesi olarak gösteren sekmelere tıkladığınızdan emin olun.
-Mevcut tüm özellikleri açıklayan bazı [dokümantasyon](https://www.nextflow.io/docs/latest/reports.html) var.
+
+Mevcut tüm özellikleri açıklayan [Raporlar](https://nextflow.io/docs/latest/reports.html) dokümantasyonuna bakın.
 
 ### 5.2. Tüm süreçler için kaynak tahsisleri ayarlayın
 
@@ -1207,7 +1206,7 @@ Süreçlerinizin farklı kaynak gereksinimleri olduğunda çok faydalıdır. Tah
 !!! tip "İpucu"
 
     Bu, kaynak kullanımınızı optimize etmek için yapabileceklerinizin sadece küçük bir tadımıdır.
-    Nextflow'un kendisi, kaynak sınırlamaları nedeniyle başarısız olan işleri yeniden denemek için gerçekten zarif [dinamik yeniden deneme mantığı](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) yerleşik olarak içerir.
+    Nextflow'un kendisi, kaynak sınırlamaları nedeniyle başarısız olan işleri yeniden denemek için gerçekten zarif [dinamik yeniden deneme mantığı](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) yerleşik olarak içerir.
     Ek olarak, Seqera Platform kaynak tahsislerinizi otomatik olarak optimize etmek için yapay zeka destekli araçlar da sunmaktadır.
 
 ### 5.5. Kaynak sınırları ekleyin
@@ -1254,7 +1253,7 @@ Size, üzerinde çalıştığınız projeye veya kullandığınız hesaplama ort
 
 Hangi hesaplama altyapısını kullandığınıza bağlı olarak alternatif ayarlar arasında geçiş yapmak isteyebilirsiniz. Örneğin, dizüstü bilgisayarınızda yerel olarak geliştirip küçük ölçekli testler yapmak, ardından tam ölçekli iş yüklerini HPC veya bulutta çalıştırmak isteyebilirsiniz.
 
-Nextflow, farklı yapılandırmaları tanımlayan herhangi bir sayıda profil ayarlamanıza olanak tanır; bunları yapılandırma dosyasını değiştirmek yerine bir komut satırı argümanı kullanarak çalışma zamanında seçebilirsiniz.
+Nextflow, farklı yapılandırmaları tanımlayan herhangi bir sayıda [profil](https://nextflow.io/docs/latest/config.html#config-profiles) ayarlamanıza olanak tanır; bunları yapılandırma dosyasını değiştirmek yerine bir komut satırı argümanı kullanarak çalışma zamanında seçebilirsiniz.
 
 ### 6.1. Yerel geliştirme ve HPC'de yürütme arasında geçiş yapmak için profiller oluşturun
 

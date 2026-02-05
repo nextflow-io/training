@@ -38,7 +38,7 @@ Demonstrate करने के लिए, हम Parts 1 और 2 के domain
 
 ---
 
-## 0. Warmup: `hello-workflow.nf` चलाएं
+## 0. वार्मअप: `hello-workflow.nf` चलाएं
 
 हम starting point के रूप में workflow script `hello-workflow.nf` use करेंगे।
 यह इस training course के Part 2 में काम करके produce की गई script के equivalent है, सिवाय इसके कि हमने `view()` statements remove कर दिए हैं और output destination बदल दी है:
@@ -153,7 +153,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 ```
@@ -360,11 +360,11 @@ Nextflow ने individual input और output files handle करने और 
 
 यह एक कारण है कि Nextflow channels इतने powerful हैं: वे workflow steps को एक साथ connect करने में involved busywork का ख्याल रखते हैं।
 
-### सीख
+### सारांश
 
 तुम जानते हो कि एक step का output अगले step को input के रूप में provide करके processes को chain कैसे करें।
 
-### आगे क्या?
+### आगे क्या है?
 
 सीखो कि batched process calls से outputs collect करके एक single process में कैसे feed करें।
 
@@ -716,7 +716,7 @@ Finally, तुम output file की contents पर नज़र डाल स
 
 यह basically point 2.4.2 का reverse operation है।
 
-### सीख
+### सारांश
 
 तुम जानते हो कि batch of process calls से outputs collect करके joint analysis या summation step में कैसे feed करें।
 
@@ -726,7 +726,7 @@ Recap करने के लिए, यह है जो तुमने अब
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
 </figure>
 
-### आगे क्या?
+### आगे क्या है?
 
 सीखो कि process को एक से अधिक input कैसे pass करें।
 
@@ -903,11 +903,11 @@ nextflow run hello-workflow.nf -resume --batch trio
 
 अब, जब तक हम parameter को appropriately specify करते हैं, inputs के other batches पर subsequent runs previous results को clobber नहीं करेंगी।
 
-### सीख
+### सारांश
 
 तुम जानते हो कि process को एक से अधिक input कैसे pass करें।
 
-### आगे क्या?
+### आगे क्या है?
 
 सीखो कि multiple outputs कैसे emit करें और उन्हें conveniently कैसे handle करें।
 
@@ -1122,13 +1122,13 @@ nextflow run hello-workflow.nf -resume --batch trio
 
 CSV में और greetings add करके test करने में feel free करो कि क्या होता है।
 
-### सीख
+### सारांश
 
 तुम जानते हो कि process को multiple named outputs emit करवाना और उन्हें workflow level पर appropriately handle करना।
 
 अधिक generally, तुम common ways में processes को एक साथ connect करने में involved key principles समझते हो।
 
-### आगे क्या?
+### आगे क्या है?
 
 Extra long break लो, तुमने इसे earn किया है।
 
@@ -1145,7 +1145,7 @@ Workflow block में process का output कैसे access करते 
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-और जानें: [1.4. Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
+और जानें: [1.4. Pass the output of the first process to the second process](#14-first-process-का-output-second-process-को-pass-करें)
 </quiz>
 
 <quiz>
@@ -1155,7 +1155,7 @@ Nextflow में process execution का order क्या determine कर�
 - [x] Processes के बीच data dependencies
 - [ ] Parallel execution के लिए random order
 
-और जानें: [1.4. Pass the output of the first process to the second process](#14-pass-the-output-of-the-first-process-to-the-second-process)
+और जानें: [1.4. Pass the output of the first process to the second process](#14-first-process-का-output-second-process-को-pass-करें)
 </quiz>
 
 <quiz>
@@ -1174,7 +1174,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-और जानें: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
+और जानें: [2.4. Use an operator to collect the greetings into a single input](#24-greetings-को-single-input-में-collect-करने-के-लिए-operator-use-करें)
 </quiz>
 
 <quiz>
@@ -1184,7 +1184,7 @@ workflow {
 - [x] जब downstream process को upstream process से सभी items की जरूरत हो
 - [ ] जब तुम data को multiple processes में split करना चाहते हो
 
-और जानें: [2.4. Use an operator to collect the greetings into a single input](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
+और जानें: [2.4. Use an operator to collect the greetings into a single input](#24-greetings-को-single-input-में-collect-करने-के-लिए-operator-use-करें)
 </quiz>
 
 <quiz>
@@ -1194,7 +1194,7 @@ Process से named output कैसे access करते हो?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-और जानें: [4.1.2. Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
+और जानें: [4.1.2. Emit the report file and name outputs](#412-report-file-emit-करें-और-outputs-name-करें)
 </quiz>
 
 <quiz>
@@ -1204,7 +1204,7 @@ Process में output name करने के लिए correct syntax क�
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-और जानें: [4.1.2. Emit the report file and name outputs](#412-emit-the-report-file-and-name-outputs)
+और जानें: [4.1.2. Emit the report file and name outputs](#412-report-file-emit-करें-और-outputs-name-करें)
 </quiz>
 
 <quiz>
@@ -1214,5 +1214,5 @@ Process को multiple inputs provide करते समय क्या true 
 - [x] Inputs का order input block में defined order से match होना चाहिए
 - [ ] एक बार में केवल दो inputs provide किए जा सकते हैं
 
-और जानें: [3. Pass more than one input to a process](#3-pass-additional-parameters-to-a-process)
+और जानें: [3. Pass more than one input to a process](#3-process-को-additional-parameters-pass-करें)
 </quiz>

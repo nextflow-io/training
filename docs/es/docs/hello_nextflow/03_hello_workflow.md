@@ -15,7 +15,7 @@
 -->
 
 La mayoría de los flujos de trabajo del mundo real involucran más de un paso.
-En este módulo de entrenamiento, aprenderá cómo conectar procesos juntos en un flujo de trabajo de múltiples pasos.
+En este módulo de capacitación, aprenderá cómo conectar procesos juntos en un workflow de múltiples pasos.
 
 Esto le enseñará la manera de Nextflow de lograr lo siguiente:
 
@@ -25,7 +25,7 @@ Esto le enseñará la manera de Nextflow de lograr lo siguiente:
 4. Manejar múltiples salidas que salen de un proceso
 
 Para demostrar, continuaremos construyendo sobre el ejemplo Hello World agnóstico de dominio de las Partes 1 y 2.
-Esta vez, vamos a hacer los siguientes cambios a nuestro flujo de trabajo para reflejar mejor cómo las personas construyen flujos de trabajo reales:
+Esta vez, vamos a hacer los siguientes cambios a nuestro workflow para reflejar mejor cómo las personas construyen workflows reales:
 
 1. Agregar un segundo paso que convierte el saludo a mayúsculas.
 2. Agregar un tercer paso que recopila todos los saludos transformados y los escribe en un único archivo.
@@ -41,7 +41,7 @@ Esta vez, vamos a hacer los siguientes cambios a nuestro flujo de trabajo para r
 ## 0. Calentamiento: Ejecutar `hello-workflow.nf`
 
 Vamos a usar el script de workflow `hello-workflow.nf` como punto de partida.
-Es equivalente al script producido al trabajar en la Parte 2 de este curso de entrenamiento, excepto que hemos eliminado las declaraciones `view()` y cambiado el destino de salida:
+Es equivalente al script producido al trabajar en la Parte 2 de este curso de capacitación, excepto que hemos eliminado las declaraciones `view()` y cambiado el destino de salida:
 
 ```groovy title="hello-workflow.nf" linenums="37" hl_lines="3"
 output {
@@ -52,7 +52,7 @@ output {
 }
 ```
 
-Este diagrama resume la operación actual del flujo de trabajo.
+Este diagrama resume la operación actual del workflow.
 Debería verse familiar, excepto que ahora estamos mostrando explícitamente que las salidas del proceso están empaquetadas en un canal, al igual que las entradas.
 Vamos a poner ese canal de salida a buen uso en un minuto.
 
@@ -89,11 +89,11 @@ Para este capítulo, está bajo `results/hello_workflow/`.
     └── Holà-output.txt
     ```
 
-Si eso funcionó para usted, está listo para aprender cómo ensamblar un flujo de trabajo de múltiples pasos.
+Si eso funcionó para usted, está listo para aprender cómo ensamblar un workflow de múltiples pasos.
 
 ---
 
-## 1. Agregar un segundo paso al flujo de trabajo
+## 1. Agregar un segundo paso al workflow
 
 Vamos a agregar un paso para convertir cada saludo a mayúsculas.
 
@@ -131,7 +131,7 @@ La salida es un archivo de texto llamado `UPPER-output.txt` que contiene la vers
     HELLO WORLD
     ```
 
-Eso es básicamente lo que vamos a intentar hacer con nuestro flujo de trabajo.
+Eso es básicamente lo que vamos a intentar hacer con nuestro workflow.
 
 ### 1.2. Escribir el paso de mayúsculas como un proceso de Nextflow
 
@@ -153,7 +153,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 ```
@@ -237,9 +237,9 @@ En el bloque workflow, haga el siguiente cambio de código:
 
 Para un caso simple como este (una salida a una entrada), ¡eso es todo lo que necesitamos hacer para conectar dos procesos!
 
-### 1.5. Configurar la publicación de salida del flujo de trabajo
+### 1.5. Configurar la publicación de salida del workflow
 
-Finalmente, actualicemos las salidas del flujo de trabajo para publicar también los resultados del segundo proceso.
+Finalmente, actualicemos las salidas del workflow para publicar también los resultados del segundo proceso.
 
 #### 1.5.1. Actualizar la sección `publish:` del bloque `workflow`
 
@@ -302,9 +302,9 @@ Siéntase libre de intentar cambiar las rutas o el modo de publicación para uno
 Por supuesto, eso significa que estamos repitiendo alguna información aquí, lo que podría volverse inconveniente si quisiéramos actualizar la ubicación para todas las salidas de la misma manera.
 Más adelante en el curso, aprenderá cómo configurar estos ajustes para múltiples salidas de manera estructurada.
 
-### 1.6. Ejecutar el flujo de trabajo con `-resume`
+### 1.6. Ejecutar el workflow con `-resume`
 
-Probemos esto usando la bandera `-resume`, ya que hemos ejecutado exitosamente el primer paso del flujo de trabajo.
+Probemos esto usando la bandera `-resume`, ya que hemos ejecutado exitosamente el primer paso del workflow.
 
 ```bash
 nextflow run hello-workflow.nf -resume
@@ -358,7 +358,7 @@ Por defecto, cuando se ejecuta en una sola máquina como estamos haciendo aquí,
 Ahora, antes de continuar, piense en cómo todo lo que hicimos fue conectar la salida de `sayHello` a la entrada de `convertToUpper` y los dos procesos pudieron ejecutarse en serie.
 Nextflow hizo el trabajo duro de manejar archivos de entrada y salida individuales y pasarlos entre los dos comandos por nosotros.
 
-Esta es una de las razones por las que los canales de Nextflow son tan poderosos: se encargan del trabajo tedioso involucrado en conectar pasos del flujo de trabajo.
+Esta es una de las razones por las que los canales de Nextflow son tan poderosos: se encargan del trabajo tedioso involucrado en conectar pasos del workflow.
 
 ### Conclusión
 
@@ -384,7 +384,7 @@ Sin arruinar la sorpresa, esto va a involucrar un operador muy útil.
 
 ### 2.1. Definir el comando de recopilación y probarlo en la terminal
 
-El paso de recopilación que queremos agregar a nuestro flujo de trabajo usará el comando `cat` para concatenar múltiples saludos en mayúsculas en un único archivo.
+El paso de recopilación que queremos agregar a nuestro workflow usará el comando `cat` para concatenar múltiples saludos en mayúsculas en un único archivo.
 
 Ejecutemos el comando por sí solo en la terminal para verificar que funciona como se espera, tal como hemos hecho anteriormente.
 
@@ -407,7 +407,7 @@ La salida es un archivo de texto llamado `COLLECTED-output.txt` que contiene las
     HOLà
     ```
 
-Ese es el resultado que queremos lograr con nuestro flujo de trabajo.
+Ese es el resultado que queremos lograr con nuestro workflow.
 
 ### 2.2. Crear un nuevo proceso para hacer el paso de recopilación
 
@@ -444,7 +444,7 @@ Deja fuera la(s) definición(es) de entrada y la primera mitad del comando scrip
 #### 2.2.2. Definir entradas a `collectGreetings()`
 
 Necesitamos recopilar los saludos de todas las llamadas al proceso `convertToUpper()`.
-¿Qué sabemos que podemos obtener del paso anterior en el flujo de trabajo?
+¿Qué sabemos que podemos obtener del paso anterior en el workflow?
 
 El canal producido por `convertToUpper()` contendrá las rutas a los archivos individuales que contienen los saludos en mayúsculas.
 Eso equivale a un slot de entrada; llamémoslo `input_files` por simplicidad.
@@ -502,9 +502,9 @@ En teoría esto debería manejar cualquier número arbitrario de archivos de ent
 
     Algunas herramientas de línea de comandos requieren proporcionar un argumento (como `-input`) para cada archivo de entrada.
     En ese caso, tendríamos que hacer un poco de trabajo extra para componer el comando.
-    Puede ver un ejemplo de esto en el curso de entrenamiento [Nextflow para Genómica](../../nf4_science/genomics/).
+    Puede ver un ejemplo de esto en el curso de capacitación [Nextflow para Genómica](../../nf4_science/genomics/).
 
-### 2.3. Agregar el paso de recopilación al flujo de trabajo
+### 2.3. Agregar el paso de recopilación al workflow
 
 Ahora deberíamos solo necesitar llamar al proceso de recopilación sobre la salida del paso de mayúsculas.
 Ese también es un canal, llamado `convertToUpper.out`.
@@ -538,7 +538,7 @@ En el bloque workflow, haga el siguiente cambio de código:
 
 Esto conecta la salida de `convertToUpper()` a la entrada de `collectGreetings()`.
 
-#### 2.3.2. Ejecutar el flujo de trabajo con `-resume`
+#### 2.3.2. Ejecutar el workflow con `-resume`
 
 Probémoslo.
 
@@ -637,7 +637,7 @@ También incluyamos un par de declaraciones `view()` para visualizar los estados
 
 Las declaraciones `view()` pueden ir donde quiera; las pusimos justo después de la llamada para legibilidad.
 
-#### 2.4.3. Ejecutar el flujo de trabajo nuevamente con `-resume`
+#### 2.4.3. Ejecutar el workflow nuevamente con `-resume`
 
 Probémoslo:
 
@@ -736,10 +736,10 @@ Aprender cómo pasar más de una entrada a un proceso.
 
 Queremos poder nombrar el archivo de salida final con algo específico para poder procesar lotes subsiguientes de saludos sin sobrescribir los resultados finales.
 
-Para ese fin, vamos a hacer los siguientes refinamientos al flujo de trabajo:
+Para ese fin, vamos a hacer los siguientes refinamientos al workflow:
 
 - Modificar el proceso recopilador para aceptar un nombre definido por el usuario para el archivo de salida (`batch_name`)
-- Agregar un parámetro de línea de comandos al flujo de trabajo (`--batch`) y pasarlo al proceso recopilador
+- Agregar un parámetro de línea de comandos al workflow (`--batch`) y pasarlo al proceso recopilador
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
@@ -772,7 +772,7 @@ En el bloque process, haga el siguiente cambio de código:
     ```
 
 Puede configurar sus procesos para esperar tantas entradas como quiera.
-Ahora mismo, todas estas están configuradas como entradas requeridas; _debe_ proporcionar un valor para que el flujo de trabajo funcione.
+Ahora mismo, todas estas están configuradas como entradas requeridas; _debe_ proporcionar un valor para que el workflow funcione.
 
 Aprenderá cómo gestionar entradas requeridas vs. opcionales más adelante en su viaje con Nextflow.
 
@@ -806,7 +806,7 @@ En el bloque process, haga el siguiente cambio de código:
         """
     ```
 
-Esto configura el proceso para usar el valor `batch_name` para generar un nombre de archivo específico para la salida final del flujo de trabajo.
+Esto configura el proceso para usar el valor `batch_name` para generar un nombre de archivo específico para la salida final del workflow.
 
 ### 3.2. Agregar un parámetro de línea de comandos `batch`
 
@@ -870,7 +870,7 @@ Verá que para proporcionar múltiples entradas a un proceso, simplemente las li
 
     DEBE proporcionar las entradas al proceso en el MISMO ORDEN EXACTO en que están listadas en el bloque de definición de entrada del proceso.
 
-### 3.3. Ejecutar el flujo de trabajo
+### 3.3. Ejecutar el workflow
 
 Intentemos ejecutar esto con un nombre de lote en la línea de comandos.
 
@@ -996,7 +996,7 @@ Pero como dice el dicho, ¿por qué no ambas?
 
     Preferimos nombrar las salidas porque de otra manera, es demasiado fácil tomar el índice incorrecto por error, especialmente cuando el proceso produce muchas salidas.
 
-### 4.2. Actualizar las salidas del flujo de trabajo
+### 4.2. Actualizar las salidas del workflow
 
 Ahora que tenemos dos salidas saliendo del proceso `collectGreetings`, la salida `collectGreetings.out` contiene dos canales:
 
@@ -1007,7 +1007,7 @@ Ahora que tenemos dos salidas saliendo del proceso `collectGreetings`, la salida
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
 </figure>
 
-Necesitamos actualizar las salidas del flujo de trabajo en consecuencia.
+Necesitamos actualizar las salidas del workflow en consecuencia.
 
 #### 4.2.1. Actualizar la sección `publish:`
 
@@ -1035,7 +1035,7 @@ En el bloque `workflow`, haga el siguiente cambio de código:
 Como puede ver, referirse a salidas específicas de proceso ahora es trivial.
 Cuando vayamos a agregar un paso más a nuestro pipeline en la Parte 5 (Contenedores), podremos referirnos fácilmente a `collectGreetings.out.outfile` y pasarlo al nuevo proceso (spoiler: el nuevo proceso se llama `cowpy`).
 
-Pero por ahora, terminemos de actualizar las salidas a nivel de flujo de trabajo.
+Pero por ahora, terminemos de actualizar las salidas a nivel de workflow.
 
 #### 4.2.2. Actualizar el bloque `output`
 
@@ -1086,7 +1086,7 @@ En el bloque `output`, haga el siguiente cambio de código:
 No necesitamos actualizar la definición de salida `collected` ya que ese nombre no ha cambiado.
 Solo necesitamos agregar la nueva salida.
 
-### 4.3. Ejecutar el flujo de trabajo
+### 4.3. Ejecutar el workflow
 
 Intentemos ejecutar esto con el lote actual de saludos.
 
@@ -1108,7 +1108,7 @@ nextflow run hello-workflow.nf -resume --batch trio
     ```
 
 Si mira en el directorio `results/hello_workflow/`, encontrará el nuevo archivo de reporte, `trio-report.txt`.
-Ábralo para verificar que el flujo de trabajo reportó correctamente el conteo de saludos que fueron procesados.
+Ábralo para verificar que el workflow reportó correctamente el conteo de saludos que fueron procesados.
 
 ??? abstract "Contenido del archivo"
 
@@ -1124,7 +1124,7 @@ Siéntase libre de agregar más saludos al CSV y probar qué sucede.
 
 ### Conclusión
 
-Sabe cómo hacer que un proceso emita múltiples salidas nombradas y cómo manejarlas apropiadamente a nivel de flujo de trabajo.
+Sabe cómo hacer que un proceso emita múltiples salidas nombradas y cómo manejarlas apropiadamente a nivel de workflow.
 
 Más generalmente, entiende los principios clave involucrados en conectar procesos juntos de maneras comunes.
 

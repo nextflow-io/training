@@ -153,7 +153,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 ```
@@ -1068,7 +1068,7 @@ Ama şimdilik, iş akışı düzeyindeki çıktıları güncellemeyi bitirelim.
 
 === "Önce"
 
-    ```groovy title="hello-workflow.nf" linenums="80"
+    ```groovy title="hello-workflow.nf" linenums="86"
     output {
         first_output {
             path 'hello_workflow'
@@ -1216,5 +1216,5 @@ Bir sürece birden fazla girdi sağlarken ne doğru olmalıdır?
 - [x] Girdilerin sırası girdi bloğunda tanımlanan sırayla eşleşmelidir
 - [ ] Aynı anda yalnızca iki girdi sağlanabilir
 
-Daha fazla bilgi: [3. Bir sürece birden fazla girdi iletin](#3-bir-surece-birden-fazla-girdi-iletin)
+Daha fazla bilgi: [3. Bir sürece ek parametreler iletin](#3-bir-surece-ek-parametreler-iletin)
 </quiz>

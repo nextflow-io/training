@@ -15,14 +15,14 @@
 -->
 
 Cette section couvre comment organiser votre code de workflow pour rendre le développement et la maintenance de votre pipeline plus efficaces et durables.
-Plus précisément, nous allons démontrer comment utiliser des **modules**.
+Plus précisément, nous allons démontrer comment utiliser des [**modules**](https://nextflow.io/docs/latest/module.html).
 
-Dans Nextflow, un **module** est une définition de processus unique qui est encapsulée par elle-même dans un fichier de code autonome.
-Pour utiliser un module dans un workflow, vous ajoutez simplement une instruction d'importation sur une seule ligne à votre fichier de code de workflow ; ensuite vous pouvez intégrer le processus dans le workflow de la même manière que vous le feriez normalement.
-Cela permet de réutiliser des définitions de processus dans plusieurs workflows sans produire plusieurs copies du code.
+Dans Nextflow, un **module** est un fichier de code autonome, encapsulant souvent une définition de processus unique.
+Pour utiliser un **module** dans un workflow, vous ajoutez simplement une instruction `include` sur une seule ligne à votre fichier de code de workflow ; ensuite vous pouvez intégrer le **process** dans le workflow de la même manière que vous le feriez normalement.
+Cela permet de réutiliser des définitions de **process** dans plusieurs workflows sans produire plusieurs copies du code.
 
 Quand nous avons commencé à développer notre workflow, nous avons tout écrit dans un seul fichier de code.
-Maintenant, nous allons déplacer les processus dans des modules individuels.
+Maintenant, nous allons déplacer les **process** dans des **modules** individuels.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
@@ -103,40 +103,35 @@ Si cela a fonctionné pour vous, vous êtes prêt·e à apprendre comment modula
 
 ## 1. Créer un répertoire pour stocker les modules
 
-Il est recommandé de stocker vos modules dans un répertoire spécifique.
+Il est recommandé de stocker vos **modules** dans un répertoire spécifique.
 Vous pouvez appeler ce répertoire comme vous le souhaitez, mais la convention est de l'appeler `modules/`.
 
 ```bash
 mkdir modules
 ```
 
-!!! tip "Astuce"
-
-    Ici, nous vous montrons comment utiliser des **modules locaux**, c'est-à-dire des modules stockés localement dans le même dépôt que le reste du code du workflow, par opposition aux modules distants, qui sont stockés dans d'autres dépôts (distants).
-    Pour plus d'informations sur les **modules distants**, consultez la [documentation](https://www.nextflow.io/docs/latest/module.html).
-
 ---
 
 ## 2. Créer un module pour `sayHello()`
 
-Dans sa forme la plus simple, transformer un processus existant en module n'est guère plus qu'une opération de copier-coller.
-Nous allons créer un fichier stub pour le module, copier le code pertinent puis le supprimer du fichier de workflow principal.
+Dans sa forme la plus simple, transformer un **process** existant en **module** n'est guère plus qu'une opération de copier-coller.
+Nous allons créer un fichier stub pour le **module**, copier le code pertinent puis le supprimer du fichier de workflow principal.
 
-Ensuite, tout ce que nous aurons à faire est d'ajouter une instruction d'importation pour que Nextflow sache récupérer le code pertinent à l'exécution.
+Ensuite, tout ce que nous aurons à faire est d'ajouter une instruction `include` pour que Nextflow sache récupérer le code pertinent à l'exécution.
 
 ### 2.1. Créer un fichier stub pour le nouveau module
 
-Créons un fichier vide pour le module appelé `sayHello.nf`.
+Créons un fichier vide pour le **module** appelé `sayHello.nf`.
 
 ```bash
 touch modules/sayHello.nf
 ```
 
-Cela nous donne un endroit pour mettre le code du processus.
+Cela nous donne un endroit pour mettre le code du **process**.
 
 ### 2.2. Déplacer le code du processus `sayHello` vers le fichier module
 
-Copiez l'ensemble de la définition du processus du fichier de workflow vers le fichier module, en vous assurant de copier également le shebang `#!/usr/bin/env nextflow`.
+Copiez l'ensemble de la définition du **process** du fichier de workflow vers le fichier **module**, en vous assurant de copier également le shebang `#!/usr/bin/env nextflow`.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -159,14 +154,14 @@ process sayHello {
 }
 ```
 
-Une fois cela fait, supprimez la définition du processus du fichier de workflow, mais assurez-vous de laisser le shebang en place.
+Une fois cela fait, supprimez la définition du **process** du fichier de workflow, mais assurez-vous de laisser le shebang en place.
 
 ### 2.3. Ajouter une déclaration d'importation avant le bloc workflow
 
-La syntaxe pour importer un module local est assez simple :
+La syntaxe pour inclure un **process** depuis un **module** est assez simple :
 
 ```groovy title="Syntaxe : Déclaration d'importation"
-include { <NOM_DU_MODULE> } from '<chemin_vers_le_module>'
+include { <NOM_DU_PROCESS> } from '<chemin_vers_le_module>'
 ```
 
 Insérons cela au-dessus du bloc `params` et remplissons-le de manière appropriée.
@@ -198,7 +193,7 @@ Insérons cela au-dessus du bloc `params` et remplissons-le de manière appropri
     }
     ```
 
-Vous voyez que nous avons renseigné le nom du module, `sayHello`, et le chemin vers le fichier contenant le code du module, `./modules/sayHello.nf`.
+Vous voyez que nous avons renseigné le nom du **process**, `sayHello`, et le chemin vers le fichier contenant le code du **module**, `./modules/sayHello.nf`.
 
 ### 2.4. Exécuter le workflow
 
@@ -227,11 +222,11 @@ Nextflow a reconnu que c'est toujours le même travail à faire, même si le cod
 
 ### À retenir
 
-Vous savez comment extraire un processus dans un module local et vous savez que faire cela ne casse pas la reprise du workflow.
+Vous savez comment extraire un **process** dans un **module** local et vous savez que faire cela ne casse pas la reprise du workflow.
 
 ### Et ensuite ?
 
-Pratiquez la création de plus de modules.
+Pratiquez la création de plus de **modules**.
 Une fois que vous en avez fait un, vous pouvez en faire un million de plus...
 Mais faisons-en juste deux de plus pour l'instant.
 
@@ -241,7 +236,7 @@ Mais faisons-en juste deux de plus pour l'instant.
 
 ### 3.1. Créer un fichier stub pour le nouveau module
 
-Créez un fichier vide pour le module appelé `convertToUpper.nf`.
+Créez un fichier vide pour le **module** appelé `convertToUpper.nf`.
 
 ```bash
 touch modules/convertToUpper.nf
@@ -249,7 +244,7 @@ touch modules/convertToUpper.nf
 
 ### 3.2. Déplacer le code du processus `convertToUpper` vers le fichier module
 
-Copiez l'ensemble de la définition du processus du fichier de workflow vers le fichier module, en vous assurant de copier également le shebang `#!/usr/bin/env nextflow`.
+Copiez l'ensemble de la définition du **process** du fichier de workflow vers le fichier **module**, en vous assurant de copier également le shebang `#!/usr/bin/env nextflow`.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -272,7 +267,7 @@ process convertToUpper {
 }
 ```
 
-Une fois cela fait, supprimez la définition du processus du fichier de workflow, mais assurez-vous de laisser le shebang en place.
+Une fois cela fait, supprimez la définition du **process** du fichier de workflow, mais assurez-vous de laisser le shebang en place.
 
 ### 3.3. Ajouter une déclaration d'importation avant le bloc `params`
 
@@ -341,7 +336,7 @@ Deux de faits, plus qu'un !
 
 ### 4.1. Créer un fichier stub pour le nouveau module
 
-Créez un fichier vide pour le module appelé `collectGreetings.nf`.
+Créez un fichier vide pour le **module** appelé `collectGreetings.nf`.
 
 ```bash
 touch modules/collectGreetings.nf
@@ -349,7 +344,7 @@ touch modules/collectGreetings.nf
 
 ### 4.2. Déplacer le code du processus `collectGreetings` vers le fichier module
 
-Copiez l'ensemble de la définition du processus du fichier de workflow vers le fichier module, en vous assurant de copier également le shebang `#!/usr/bin/env nextflow`.
+Copiez l'ensemble de la définition du **process** du fichier de workflow vers le fichier **module**, en vous assurant de copier également le shebang `#!/usr/bin/env nextflow`.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -376,7 +371,7 @@ process collectGreetings {
 }
 ```
 
-Une fois cela fait, supprimez la définition du processus du fichier de workflow, mais assurez-vous de laisser le shebang en place.
+Une fois cela fait, supprimez la définition du **process** du fichier de workflow, mais assurez-vous de laisser le shebang en place.
 
 ### 4.3. Ajouter une déclaration d'importation avant le bloc `params`
 
@@ -441,12 +436,12 @@ Cela devrait toujours produire la même sortie que précédemment.
 
 ### À retenir
 
-Vous savez comment modulariser plusieurs processus dans un workflow.
+Vous savez comment modulariser plusieurs **process** dans un workflow.
 
 Félicitations, vous avez fait tout ce travail et absolument rien n'a changé dans le fonctionnement du pipeline !
 
-Blague à part, maintenant votre code est plus modulaire, et si vous décidez d'écrire un autre pipeline qui fait appel à l'un de ces processus, vous n'avez qu'à taper une courte instruction d'importation pour utiliser le module pertinent.
-C'est mieux que de copier-coller le code, parce que si plus tard vous décidez d'améliorer le module, tous vos pipelines hériteront des améliorations.
+Blague à part, maintenant votre code est plus modulaire, et si vous décidez d'écrire un autre pipeline qui fait appel à l'un de ces **process**, vous n'avez qu'à taper une courte instruction `include` pour utiliser le **module** pertinent.
+C'est mieux que de copier-coller le code, parce que si plus tard vous décidez d'améliorer le **module**, tous vos pipelines hériteront des améliorations.
 
 ### Et ensuite ?
 
@@ -461,7 +456,7 @@ Quand vous êtes prêt·e, passez à la [**Partie 5 : Hello Containers**](./05_h
 <quiz>
 Qu'est-ce qu'un module dans Nextflow ?
 - [ ] Un fichier de configuration
-- [x] Un fichier autonome contenant une définition de processus unique
+- [x] Un fichier autonome pouvant contenir des définitions de processus
 - [ ] Une définition de workflow
 - [ ] Un opérateur de canal
 
@@ -469,15 +464,7 @@ En savoir plus : [2. Créer un module pour `sayHello()`](#2-creer-un-module-pour
 </quiz>
 
 <quiz>
-Quelle est la convention de nommage recommandée pour les fichiers de module ?
-- [ ] `module_processName.nf`
-- [ ] `processName_module.nf`
-- [x] `processName.nf`
-- [ ] `mod_processName.nf`
-</quiz>
-
-<quiz>
-Où les fichiers de module doivent-ils être stockés ?
+Quelle convention est généralement utilisée pour stocker les fichiers de modules ?
 - [ ] Dans le même répertoire que le workflow
 - [ ] Dans un répertoire `bin/`
 - [x] Dans un répertoire `modules/`
@@ -487,7 +474,7 @@ En savoir plus : [1. Créer un répertoire pour stocker les modules](#1-creer-un
 </quiz>
 
 <quiz>
-Quelle est la syntaxe correcte pour importer un module ?
+Quelle est la syntaxe correcte pour utiliser un module ?
 
 - [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
