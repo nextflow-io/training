@@ -129,11 +129,9 @@ This gives us a place to put the process code.
 
 ### 2.2. Move the `sayHello` process code to the module file
 
-Copy the whole process definition over from the workflow file to the module file, making sure to copy over the `#!/usr/bin/env nextflow` shebang too.
+Copy the whole process definition over from the workflow file to the module file.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Use echo to print 'Hello World!' to a file
  */
@@ -152,7 +150,7 @@ process sayHello {
 }
 ```
 
-Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
+Once that is done, delete the process definition from the workflow file.
 
 ### 2.3. Add an include declaration before the workflow block
 
@@ -242,11 +240,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. Move the `convertToUpper` process code to the module file
 
-Copy the whole process definition over from the workflow file to the module file, making sure to copy over the `#!/usr/bin/env nextflow` shebang too.
+Copy the whole process definition over from the workflow file to the module file.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Use a text replacement tool to convert the greeting to uppercase
  */
@@ -265,7 +261,7 @@ process convertToUpper {
 }
 ```
 
-Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
+Once that is done, delete the process definition from the workflow file.
 
 ### 3.3. Add an include declaration before the `params` block
 
@@ -342,11 +338,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. Move the `collectGreetings` process code to the module file
 
-Copy the whole process definition over from the workflow file to the module file, making sure to copy over the `#!/usr/bin/env nextflow` shebang too.
+Copy the whole process definition over from the workflow file to the module file.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Collect uppercase greetings into a single output file
  */
@@ -369,7 +363,7 @@ process collectGreetings {
 }
 ```
 
-Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
+Once that is done, delete the process definition from the workflow file.
 
 ### 4.3. Add an include declaration before the `params` block
 

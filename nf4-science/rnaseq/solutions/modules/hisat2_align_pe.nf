@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 process HISAT2_ALIGN {
 
     container "community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"

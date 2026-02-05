@@ -165,7 +165,8 @@ Claude will automatically use these skills when appropriate, or you can mention 
 
 - DSL2 syntax only
 - UPPERCASE process names
-- Always include shebang: `#!/usr/bin/env nextflow`
+- Always include shebang: `#!/usr/bin/env nextflow` in scripts with an entry workflow
+- Do not include shebang in module files, i.e. `**/modules/*.nf`
 - Use params for configurable values: `params.input = 'default'`
 
 ### Code Blocks
