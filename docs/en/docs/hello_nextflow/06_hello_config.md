@@ -833,7 +833,7 @@ nextflow run hello-config.nf -output-dir cleverconfig --batch perfection
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This publishes outputs to `cleverconfig/perfection/`, with the specified base path _and_ the batch name subdirecory _and_ results grouped by process:
+This publishes outputs to `cleverconfig/perfection/`, with the specified base path _and_ the batch name subdirectory _and_ results grouped by process:
 
 ??? abstract "Directory contents"
 
