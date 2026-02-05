@@ -372,7 +372,8 @@ Let's look at a few common ways you might configure this to be more flexible.
 
 Each version of the workflow we've run so far has published its outputs to a different subdirectory hardcoded into the output definitions.
 
-Let's change that to use a user-configurable parameter.
+We changed where that subdirectory was in Part 1 by using the `-output-dir` CLI flag, but that's still just a static string.
+Let's instead configure this in a config file, where we can define more complex dynamic paths.
 We could create a whole new parameter for this, but let's use the `batch` parameter since it's right there.
 
 #### 2.1.1. Set a value for `outputDir` in the configuration file
@@ -397,7 +398,7 @@ Add the following code to the `nextflow.config` file:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 === "Before"
@@ -413,10 +414,10 @@ Add the following code to the `nextflow.config` file:
     }
     ```
 
-This will replace the built-in default path, `results/`, with `results/` plus the value of the `batch` parameter as subdirectory.
-You could also change the `results` part if you wanted.
+This will replace the built-in default path, `results/`, with `results_config/` plus the value of the `batch` parameter as subdirectory.
 
-For a temporary change, you could set this option from the command-line using the `-output-dir` parameter in your command (but then you couldn't use the `batch` parameter value).
+Remember that you can also set this option from the command-line using the `-output-dir` parameter in your command (`-o` for short), but then you couldn't use the `batch` parameter value.
+Using the CLI flag will overwrite `outputDir` in the config if it is set.
 
 #### 2.1.2. Remove the repeated part of the hardcoded path
 
@@ -502,12 +503,12 @@ nextflow run 3-main.nf --batch outdir
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/outdir/`.
+This still produces the same output as previously, except this time we find our outputs under `results_config/outdir/`.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/outdir/
+    results_config/outdir/
     ├── cowpy-COLLECTED-outdir-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -528,7 +529,7 @@ One popular way to organize outputs further is to do it by process, _i.e._ creat
 
 #### 2.2.1. Replace the output paths by a reference to process names
 
-All you need to do is reference the name of the process as `<task>.name` in the output path declaration.
+All you need to do is reference the name of the process as `<process>.name` in the output path declaration.
 
 Make the following changes in the workflow file:
 
@@ -610,12 +611,12 @@ nextflow run 3-main.nf --batch pnames
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/pnames/`, and they are grouped by process.
+This still produces the same output as previously, except this time we find our outputs under `results_config/pnames/`, and they are grouped by process.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/pnames/
+    results_config/pnames/
     ├── collectGreetings
     │   ├── COLLECTED-pnames-output.txt
     │   └── pnames-report.txt
@@ -631,8 +632,10 @@ This still produces the same output as previously, except this time we find our 
         └── Holà-output.txt
     ```
 
-Note that here we've erased the distinction between `intermediates` versus final outputs being at the top level.
-You could of course mix and match these approaches, for example by setting the first output's path as `intermediates/${sayHello.name}`
+!!! note
+
+    Note that here we've erased the distinction between `intermediates` versus final outputs being at the top level.
+    You can mix and match these approaches and even include multiple variables, for example by setting the first output's path as `#!groovy "${params.batch}/intermediates/${sayHello.name}"`
 
 ### 2.3. Set the publish mode at the workflow level
 

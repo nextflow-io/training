@@ -128,7 +128,42 @@ Hello World!
 
 That's great, our workflow did what it was supposed to do!
 
-However, be aware that the 'published' result is a copy (or in some cases a symbolic link) of the actual output produced by Nextflow when it executed the workflow.
+### 2.3. Save the results to a different directory
+
+My default, nextflow will save pipeline outputs to a directory called `results` in your current path.
+To change where your files are published to, use the `-output-dir` CLI flag (or `-o` for short`)
+
+!!! danger
+
+    Note that `--input` has two hyphens and `-output-dir` has one!
+    This is because `--input` is a pipeline _parameter_  and `-output-dir` is a core Nextflow CLI flag.
+    More on these later.
+
+```bash
+nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
+```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+
+    executor >  local (1)
+    [a3/7be2fa] sayHello | 1 of 1 ✔
+    ```
+
+You should see that your outputs are now published to a directory called `hello_results` instead of `results`:
+
+```console title="hello_results/"
+hello_results/
+└── 1-hello
+    └── output.txt
+```
+
+The files within this directory are just the same as before, it's just the top-level directory that's different.
+However, be aware in both cases that the 'published' result is a copy (or in some cases a symbolic link) of the actual output produced by Nextflow when it executed the workflow.
 
 So now, we are going to peek under the hood to see where Nextflow actually executed the work.
 
@@ -137,7 +172,7 @@ So now, we are going to peek under the hood to see where Nextflow actually execu
     Not all workflows will be set up to publish outputs to a results directory, and/or the directory names and structure may be different.
     A little further in this section, we will show you how to find out where this behavior is specified.
 
-### 2.3. Find the original output and logs in the `work/` directory
+### 2.4. Find the original output and logs in the `work/` directory
 
 When you run a workflow, Nextflow creates a distinct 'task directory' for every single invocation of each process in the workflow (=every step in the pipeline).
 For each one, it will stage the necessary inputs, execute the relevant instruction(s) and write outputs and log files within that one directory, which is named automatically using a hash in order to make it unique.
@@ -223,7 +258,7 @@ So this confirms that the workflow composed the same command we ran directly on 
 
 When something goes wrong and you need to troubleshoot what happened, it can be useful to look at the `command.sh` script to check exactly what command Nextflow composed based on the workflow instructions, variable interpolation and so on.
 
-### 2.4. Re-run the workflow with different greetings
+### 2.5. Re-run the workflow with different greetings
 
 Try re-running the workflow a few times with different values for the `--input` argument, then look at the task directories.
 
