@@ -511,8 +511,8 @@ To learn more, see [Workflow parameters](https://nextflow.io/docs/latest/config.
 
 !!! tip
 
-    Workflow parameters declared using the `params` system always take two dashes on the command line (`--`).
-    This distinguishes them from Nextflow-level parameters, which only take one dash (`-`).
+    Remember that _workflow_ parameters declared using the `params` system always take two dashes on the command line (`--`).
+    This distinguishes them from _Nextflow-level_ CLI flags, which only take one dash (`-`).
 
 ### 3.5. The `publish` directive
 
