@@ -394,11 +394,9 @@ Nextflow allows us to specify parameters via a [parameter file](https://nextflow
 To demonstrate this, we provide an example parameter file in the current directory, called `test-params.yaml`:
 
 ```yaml title="test-params.yaml" linenums="1"
-{
-  input: "greetings.csv"
-  batch: "yaml"
-  character: "stegosaurus"
-}
+input: "data/greetings.csv"
+batch: "yaml"
+character: "stegosaurus"
 ```
 
 This parameter file contains a key-value pair for each of the inputs that we want to specify.
