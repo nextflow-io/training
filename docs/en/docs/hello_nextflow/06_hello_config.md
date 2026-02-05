@@ -745,7 +745,27 @@ Let's put that back, and also put the files in a `params.batch` subdirectory.
 
     Including `params.batch` in the output block `path`, instead of the `outputDir` config, means that it won't be overwritten with `-output-dir` on the CLI.
 
-Make the following changes in the workflow file:
+First, update the config file to remove `${params.batch}` from `outputDir` (since we're moving it to the path declarations):
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="12"
+    /*
+    * Output settings
+    */
+    outputDir = "config_results/"
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="12"
+    /*
+    * Output settings
+    */
+    outputDir = "config_results/${params.batch}"
+    ```
+
+Then, make the following changes in the workflow file:
 
 === "After"
 
