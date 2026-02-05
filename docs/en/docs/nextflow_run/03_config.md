@@ -694,7 +694,7 @@ Make the following changes in the workflow file:
 
 === "Before"
 
-    ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="3-main.nf" linenums="42" hl_lines="4 8 12 16 20"
     output {
         first_output {
             path { sayHello.name }
