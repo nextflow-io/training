@@ -480,10 +480,13 @@ Let's look at a few common ways you might configure this to be more flexible.
 
 ### 2.1. Customize the output directory with `-output-dir`
 
-When we're controlling how our 'published' output are organised we have two distinct priorities: the top-level output directory and how files are organised below that.
+When we're controlling how our 'published' output are organised we have two distinct priorities:
 
-For each chapter of this course, we've been publishing outputs to the default top-level directory: `results`.
-Let's change that to be more flexible using the `-output-dir` CLI option.
+- The top-level output directory
+- How files are organised within this directory
+
+We've been using the default top-level directory until now: `results`.
+Let's start by customising that, using the `-output-dir` CLI option.
 
 #### 2.1.1. Run the pipeline with `-output-dir`
 
@@ -554,9 +557,11 @@ Make the following code changes in the workflow file:
             mode 'copy'
         }
         batch_report {
+            path ''
             mode 'copy'
         }
         cowpy_art {
+            path ''
             mode 'copy'
         }
     }
@@ -595,7 +600,7 @@ Run the pipeline again:
 nextflow run hello-config.nf -output-dir even_newer_results/
 ```
 
-Now the outputs are published directly under `even_newer_results/`:
+Now the outputs are published directly under `even_newer_results/`, without the `hello_config` subdirectory:
 
 ??? abstract "Directory contents"
 
@@ -613,16 +618,16 @@ Now the outputs are published directly under `even_newer_results/`:
     └── batch-report.txt
     ```
 
-The `-output-dir` option provides a clear separation of concerns: use it to control _where_ outputs go, and use the `path` directive in the output block to control the _subdirectory structure_.
+!!! tip
+
+    The `-output-dir` option is used to control _where_ outputs go, and use the `path` directive in the output block to control the _subdirectory structure_.
 
 ### 2.2. Dynamic output paths
 
-Output directories don't have to just use static strings, we can set them dynamically in the config.
+In addition to changing the output directory via the CLI, we can also set it within a Nextflow config file using `outputDir`.
+This allows us to set the directory path dynamically - not just using static strings.
 
 #### 2.2.1. Set `outputDir` in the configuration file
-
-You can change the default base output directory in the configuration file as well as overwriting on the CLI.
-This is particularly useful when you want to programmatically construct the output path based on other dynamic variables, such as reusing parameter values.
 
 Add the following code to the `nextflow.config` file:
 
@@ -671,14 +676,11 @@ This publishes outputs to `config_results/my_run/`.
     The `-output-dir` CLI option takes precedence over the `outputDir` configuration setting.
     If it is set, the config option will be ignored entirely.
 
-#### 2.2.2. Replace the output paths by a reference to process names
+#### 2.2.2. Subdirectories with batch and process names
 
-We can also set paths dynamically on a per-output basis.
-One popular way to organize outputs further is to do it by process, _i.e._ create subdirectories for each process in the pipeline.
+We can also set subdirectory output `path` declarations dynamically, on a per-output basis.
 
-All you need to do is reference the name of the process as `<process>.name` in the output path declaration.
-
-Make the following changes in the workflow file:
+For example, we can organize out outputs by process by referencing `<process>.name` in the output path declaration:
 
 === "After"
 
@@ -709,7 +711,7 @@ Make the following changes in the workflow file:
 
 === "Before"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11"
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
         first_output {
             path 'intermediates'
@@ -724,66 +726,24 @@ Make the following changes in the workflow file:
             mode 'copy'
         }
         batch_report {
+            path ''
             mode 'copy'
         }
         cowpy_art {
+            path ''
             mode 'copy'
         }
     }
     ```
 
-This removes the remaining hardcoded elements from the output path configuration.
+We can go further and compose more complex subdirectory paths.
 
-#### 2.2.3. Run the pipeline
+In the above edit we erased the distinction between `intermediates` versus final outputs being at the top level.
+Let's put that back, and also put the files in a `params.batch` subdirectory.
 
-Let's test that it works correctly, setting the batch name to `pnames` from the command line:
+!!! tip
 
-```bash
-nextflow run hello-config.nf --batch pnames
-```
-
-??? success "Command output"
-
-    ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `hello-config.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
-
-    executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
-    ```
-
-This publishes outputs to `config_results/pnames/`, grouped by process:
-
-??? abstract "Directory contents"
-
-    ```console
-    config_results/pnames/
-    ├── collectGreetings
-    │   ├── COLLECTED-pnames-output.txt
-    │   └── pnames-report.txt
-    ├── convertToUpper
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
-    ├── cowpy
-    │   └── cowpy-COLLECTED-pnames-output.txt
-    └── sayHello
-        ├── Bonjour-output.txt
-        ├── Hello-output.txt
-        └── Holà-output.txt
-    ```
-
-#### 2.2.4. Output paths with multiple variables
-
-Note that here we've erased the distinction between `intermediates` versus final outputs being at the top level.
-To keep the subdirectory we use a double-quoted string with the variable, just as we did within processes.
-
-We can go even further and also include the `params.batch` in the output `path` declaration.
-Including it here means that it won't be overwritten with `-output-dir` on the CLI.
+    Including `params.batch` in the output block `path`, instead of the `outputDir` config, means that it won't be overwritten with `-output-dir` on the CLI.
 
 Make the following changes in the workflow file:
 
@@ -851,7 +811,7 @@ Make the following changes in the workflow file:
     }
     ```
 
-#### 2.2.5. Run the pipeline
+#### 2.2.3. Run the pipeline
 
 Let's see how that works in practice, setting both `-output-dir` (or `-o` for short) to `cleverconfig` and the batch name to `perfection` from the command line:
 
@@ -949,7 +909,7 @@ Make the following changes in the workflow file:
 
 === "Before"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20"
     output {
         first_output {
             path { sayHello.process }
