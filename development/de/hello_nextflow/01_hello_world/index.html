@@ -5130,7 +5130,7 @@ Das macht es jedoch unpraktisch, Ausgaben abzurufen, die uns wichtig sind.</p>
 <h4 id="211-die-ausgabe-des-sayhello-prozesses-deklarieren">2.1.1. Die Ausgabe des <code>sayHello</code>-Prozesses deklarieren<a class="headerlink" href="#211-die-ausgabe-des-sayhello-prozesses-deklarieren" title="Permanent link">&para;</a></h4>
 <p>Wir müssen einen <code>publish:</code>-Block zum Workflow-Körper hinzufügen (dasselbe Code-Element wie der <code>main:</code>-Block) und die Ausgabe des <code>sayHello()</code>-Prozesses auflisten.</p>
 <p>Füge in der Workflow-Skriptdatei <code>hello-world.nf</code> die folgenden Codezeilen hinzu:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Nachher</label><label for="__tabbed_1_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Danach</label><label for="__tabbed_1_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-17">17</a></span>
@@ -5172,7 +5172,7 @@ Das macht es jedoch unpraktisch, Ausgaben abzurufen, die uns wichtig sind.</p>
 <h4 id="212-einen-output-block-zum-skript-hinzufugen">2.1.2. Einen <code>output:</code>-Block zum Skript hinzufügen<a class="headerlink" href="#212-einen-output-block-zum-skript-hinzufugen" title="Permanent link">&para;</a></h4>
 <p>Jetzt müssen wir nur noch den <code>output:</code>-Block hinzufügen, in dem der Pfad des Ausgabeverzeichnisses angegeben wird. Beachte, dass dieser neue Block <strong>außerhalb</strong> und <strong>unterhalb</strong> des <code>workflow</code>-Blocks innerhalb des Skripts sitzt.</p>
 <p>Füge in der Workflow-Skriptdatei <code>hello-world.nf</code> die folgenden Codezeilen hinzu:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Nachher</label><label for="__tabbed_2_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Danach</label><label for="__tabbed_2_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-17">17</a></span>
@@ -5281,7 +5281,7 @@ Der einfachste Weg, das zu tun, ist, pro Ausgabe einen spezifischen Ausgabepfad 
 <h4 id="221-den-ausgabepfad-modifizieren">2.2.1. Den Ausgabepfad modifizieren<a class="headerlink" href="#221-den-ausgabepfad-modifizieren" title="Permanent link">&para;</a></h4>
 <p>Auch hier ist das Modifizieren des Veröffentlichungsverhaltens für eine bestimmte Ausgabe wirklich einfach.
 Um einen benutzerdefinierten Speicherort festzulegen, bearbeite einfach den <code>path</code> entsprechend:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Nachher</label><label for="__tabbed_3_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Danach</label><label for="__tabbed_3_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-27">27</a></span>
@@ -5342,8 +5342,8 @@ Um einen benutzerdefinierten Speicherort festzulegen, bearbeite einfach den <cod
 </figure>
 
 <p>Du kannst so viele Verschachtelungsebenen verwenden, wie du möchtest.
-Es ist auch möglich, den Prozessnamen oder andere Variablen zu verwenden, um die Verzeichnisse zu benennen, die zur Organisation der Ergebnisse verwendet werden, und es ist möglich, den Standardnamen des Ausgabeverzeichnisses der obersten Ebene zu ändern (der durch die spezielle Variable <code>outputDir</code> gesteuert wird).
-Wir werden diese Optionen in späteren Trainings behandeln.</p>
+Es ist auch möglich, den Prozessnamen oder andere Variablen zu verwenden, um die Verzeichnisse zu benennen, die zur Organisation der Ergebnisse verwendet werden, und es ist möglich, den Standardnamen des Ausgabeverzeichnisses der obersten Ebene zu ändern (der durch das <code>-o</code>-CLI-Flag oder die Konfigurationsvariable <code>outputDir</code> gesteuert wird).
+Wir werden diese Optionen später im Training behandeln.</p>
 <h3 id="23-den-veroffentlichungsmodus-auf-kopieren-setzen">2.3. Den Veröffentlichungsmodus auf Kopieren setzen<a class="headerlink" href="#23-den-veroffentlichungsmodus-auf-kopieren-setzen" title="Permanent link">&para;</a></h3>
 <p>Standardmäßig werden die Ausgaben als symbolische Links aus dem <code>work</code>-Verzeichnis veröffentlicht.
 Das bedeutet, dass es nur eine einzige Datei im Dateisystem gibt.</p>
@@ -5354,7 +5354,7 @@ Du musst also einen Plan haben, um Kopien aller wichtigen Dateien an einem siche
 <h4 id="231-die-mode-direktive-hinzufugen">2.3.1. Die mode-Direktive hinzufügen<a class="headerlink" href="#231-die-mode-direktive-hinzufugen" title="Permanent link">&para;</a></h4>
 <p>Dieser Teil ist wirklich einfach.
 Füge einfach <code>mode 'copy'</code> zur relevanten Workflow-Output-Definition hinzu:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Nachher</label><label for="__tabbed_4_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Danach</label><label for="__tabbed_4_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-27">27</a></span>
@@ -5461,7 +5461,7 @@ Wir möchten etwas Flexibilität hinzufügen, indem wir eine Eingabevariable ver
 <h4 id="311-einen-input-block-zur-prozessdefinition-hinzufugen">3.1.1. Einen input-Block zur Prozessdefinition hinzufügen<a class="headerlink" href="#311-einen-input-block-zur-prozessdefinition-hinzufugen" title="Permanent link">&para;</a></h4>
 <p>Zuerst passen wir die Prozessdefinition an, um eine Eingabe namens <code>greeting</code> zu akzeptieren.</p>
 <p>Nimm im Prozessblock die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Nachher</label><label for="__tabbed_5_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Danach</label><label for="__tabbed_5_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-6"> 6</a></span>
@@ -5495,7 +5495,7 @@ Wir möchten etwas Flexibilität hinzufügen, indem wir eine Eingabevariable ver
 <h4 id="312-den-prozessbefehl-bearbeiten-um-die-eingabevariable-zu-verwenden">3.1.2. Den Prozessbefehl bearbeiten, um die Eingabevariable zu verwenden<a class="headerlink" href="#312-den-prozessbefehl-bearbeiten-um-die-eingabevariable-zu-verwenden" title="Permanent link">&para;</a></h4>
 <p>Jetzt tauschen wir den ursprünglichen fest eincodierten Wert gegen den Wert der Eingabevariable aus, die wir erwarten zu erhalten.</p>
 <p>Nimm im Prozessblock die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Nachher</label><label for="__tabbed_6_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Danach</label><label for="__tabbed_6_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-14">14</a></span>
@@ -5540,7 +5540,7 @@ Wenn wir jedoch echte Arbeit mit unserem Workflow erledigen, werden wir seine Ei
 <p>Hier wollen wir einen Parameter namens <code>--input</code> erstellen, also müssen wir irgendwo im Workflow <code>params.input</code> deklarieren.
 Im Prinzip können wir es überall hinschreiben; aber da wir es dem <code>sayHello()</code>-Prozessaufruf geben wollen, können wir es dort direkt einfügen, indem wir <code>sayHello(params.input)</code> schreiben.</p>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Nachher</label><label for="__tabbed_7_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Danach</label><label for="__tabbed_7_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-23">23</a></span>

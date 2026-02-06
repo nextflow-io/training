@@ -732,15 +732,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-zbadaj-kod-workflow" class="md-nav__link">
+  <a href="#14-zbadaj-kod-workflowu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Zbadaj kod workflow
+        1.4. Zbadaj kod workflow'u
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1.4. Zbadaj kod workflow">
+    <nav class="md-nav" aria-label="1.4. Zbadaj kod workflow&#39;u">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1081,15 +1081,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-uzyj-kontenera-w-workflow" class="md-nav__link">
+  <a href="#42-uzyj-kontenera-w-workflowie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Użyj kontenera w workflow
+        4.2. Użyj kontenera w workflow'ie
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4.2. Użyj kontenera w workflow">
+    <nav class="md-nav" aria-label="4.2. Użyj kontenera w workflow&#39;ie">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3836,15 +3836,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-zbadaj-kod-workflow" class="md-nav__link">
+  <a href="#14-zbadaj-kod-workflowu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Zbadaj kod workflow
+        1.4. Zbadaj kod workflow'u
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1.4. Zbadaj kod workflow">
+    <nav class="md-nav" aria-label="1.4. Zbadaj kod workflow&#39;u">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4185,15 +4185,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-uzyj-kontenera-w-workflow" class="md-nav__link">
+  <a href="#42-uzyj-kontenera-w-workflowie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.2. Użyj kontenera w workflow
+        4.2. Użyj kontenera w workflow'ie
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4.2. Użyj kontenera w workflow">
+    <nav class="md-nav" aria-label="4.2. Użyj kontenera w workflow&#39;ie">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4668,7 +4668,7 @@ Ma to wiele zalet, w tym unikanie kolizji, jeśli proces produkuje jakieś pliki
 <p class="admonition-title">Wskazówka</p>
 <p>Dla złożonego workflow'u lub dużej liczby danych wejściowych wyświetlanie pełnej listy do terminala może być nieco przytłaczające, więc ludzie normalnie nie używają <code>-ansi-log false</code> w rutynowym użyciu.</p>
 </div>
-<h3 id="14-zbadaj-kod-workflow">1.4. Zbadaj kod workflow<a class="headerlink" href="#14-zbadaj-kod-workflow" title="Permanent link">&para;</a></h3>
+<h3 id="14-zbadaj-kod-workflowu">1.4. Zbadaj kod workflow'u<a class="headerlink" href="#14-zbadaj-kod-workflowu" title="Permanent link">&para;</a></h3>
 <p>Więc ta wersja workflow'u jest w stanie odczytać plik CSV z danymi wejściowymi, przetwarzać dane wejściowe osobno i nazywać wyjścia unikalnie.</p>
 <p>Przyjrzyjmy się, co to umożliwia w kodzie workflow'u.</p>
 <details class="full-code">
@@ -4751,7 +4751,7 @@ Ma to wiele zalet, w tym unikanie kolizji, jeśli proces produkuje jakieś pliki
 <a id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span><a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="hll"><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 </span><a id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="hll"><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+</span><a id="__codelineno-13-34" name="__codelineno-13-34"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-13-35" name="__codelineno-13-35"></a><span class="hll"><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </span><a id="__codelineno-13-36" name="__codelineno-13-36"></a>
 <a id="__codelineno-13-37" name="__codelineno-13-37"></a><span class="w">    </span><span class="nl">publish:</span>
@@ -4769,7 +4769,7 @@ Ma to wiele zalet, w tym unikanie kolizji, jeśli proces produkuje jakieś pliki
 <p>Ponownie, nie musisz zapamiętywać składni kodu, ale dobrze jest nauczyć się rozpoznawać kluczowe komponenty workflow'u, które zapewniają ważną funkcjonalność.</p>
 <h4 id="141-adowanie-danych-wejsciowych-z-csv">1.4.1. Ładowanie danych wejściowych z CSV<a class="headerlink" href="#141-adowanie-danych-wejsciowych-z-csv" title="Permanent link">&para;</a></h4>
 <p>To jest najciekawsza część: jak przeszliśmy od pobierania pojedynczej wartości z wiersza poleceń do wczytywania pliku CSV, parsowania go i obsługi zawartych w nim pojedynczych powitań?</p>
-<p>W Nextflow robimy to za pomocą <a href="https://nextflow.io/docs/latest/channel.html"><strong>kanału</strong></a>: konstrukcji kolejki zaprojektowanej do efektywnego zarządzania danymi wejściowymi i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną równoległość i wiele dodatkowych korzyści.</p>
+<p>W Nextflow robimy to za pomocą <a href="https://nextflow.io/docs/latest/channel.html"><strong>kanału</strong></a>: konstrukcji kolejki zaprojektowanej do efektywnego zarządzania danymi wejściowymi i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną paralelizację i wiele dodatkowych korzyści.</p>
 <p>Rozłóżmy to na czynniki.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2a-inputs.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-29">29</a></span>
 <span class="normal"><a href="#__codelineno-14-30">30</a></span>
@@ -4782,7 +4782,7 @@ Ma to wiele zalet, w tym unikanie kolizji, jeśli proces produkuje jakieś pliki
 <a id="__codelineno-14-31" name="__codelineno-14-31"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span><a id="__codelineno-14-32" name="__codelineno-14-32"></a><span class="hll"><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 </span><a id="__codelineno-14-33" name="__codelineno-14-33"></a><span class="hll"><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-14-34" name="__codelineno-14-34"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+</span><a id="__codelineno-14-34" name="__codelineno-14-34"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-14-35" name="__codelineno-14-35"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Ten kod tworzy kanał o nazwie <code>greeting_ch</code>, który odczytuje plik CSV, parsuje go i wyodrębnia pierwszą kolumnę z każdego wiersza.
@@ -4826,7 +4826,7 @@ Wynikiem jest kanał zawierający <code>Hello</code>, <code>Bonjour</code> i <co
 <a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-17-32" name="__codelineno-17-32"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-17-33" name="__codelineno-17-33"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-17-34" name="__codelineno-17-34"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-17-34" name="__codelineno-17-34"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-17-35" name="__codelineno-17-35"></a><span class="hll"><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 <p>To mówi Nextflow, aby uruchomił proces indywidualnie na każdym elemencie w kanale, <em>tzn.</em> na każdym powitaniu.
@@ -4906,7 +4906,7 @@ Opierając się na tym, czego właśnie nauczyliśmy się o kanałach, przyjrzyj
 <a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="go">[1e/83586c] collectGreetings   | 1 of 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>Widzisz, że zgodnie z obietnicą, wiele kroków zostało uruchomionych jako część workflow; pierwsze dwa (<code>sayHello</code> i <code>convertToUpper</code>) były prawdopodobnie uruchomione na każdym indywidualnym powitaniu, a trzeci (<code>collectGreetings</code>) został uruchomiony tylko raz, na wyjściach wszystkich trzech wywołań <code>convertToUpper</code>.</p>
+<p>Widzisz, że zgodnie z obietnicą, wiele kroków zostało uruchomionych jako część workflow'u; pierwsze dwa (<code>sayHello</code> i <code>convertToUpper</code>) były prawdopodobnie uruchomione na każdym indywidualnym powitaniu, a trzeci (<code>collectGreetings</code>) został uruchomiony tylko raz, na wyjściach wszystkich trzech wywołań <code>convertToUpper</code>.</p>
 <h3 id="22-znajdz-wyjscia">2.2. Znajdź wyjścia<a class="headerlink" href="#22-znajdz-wyjscia" title="Permanent link">&para;</a></h3>
 <p>Zweryfikujmy, że to faktycznie się stało, patrząc na katalog <code>results</code>.</p>
 <details class="abstract">
@@ -4948,7 +4948,7 @@ Opierając się na tym, czego właśnie nauczyliśmy się o kanałach, przyjrzyj
 </details>
 <p>Jak widzisz, mamy nowy katalog o nazwie <code>2b-multistep</code> i zawiera znacznie więcej plików niż wcześniej.
 Niektóre pliki zostały zgrupowane w podkatalogu o nazwie <code>intermediates</code>, podczas gdy dwa pliki znajdują się na najwyższym poziomie.</p>
-<p>Te dwa to końcowe wyniki wieloetapowego workflow.
+<p>Te dwa to końcowe wyniki wieloetapowego workflow'u.
 Poświęć chwilę, aby spojrzeć na nazwy plików i sprawdzić ich zawartość, aby potwierdzić, że są takie, jakich oczekujesz.</p>
 <details class="abstract">
 <summary>Zawartość plików</summary>
@@ -4962,7 +4962,7 @@ Poświęć chwilę, aby spojrzeć na nazwy plików i sprawdzić ich zawartość,
 <p>Pierwszy zawiera nasze trzy powitania, wielkimi literami i zebrane z powrotem do jednego pliku, zgodnie z obietnicą.
 Drugi to plik raportu, który podsumowuje pewne informacje o uruchomieniu.</p>
 <h3 id="23-zbadaj-kod">2.3. Zbadaj kod<a class="headerlink" href="#23-zbadaj-kod" title="Permanent link">&para;</a></h3>
-<p>Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych workflow.</p>
+<p>Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych workflow'ów.</p>
 <details class="full-code">
 <summary>Pełny plik kodu</summary>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2b-multistep.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">  1</a></span>
@@ -5140,11 +5140,11 @@ Drugi to plik raportu, który podsumowuje pewne informacje o uruchomieniu.</p>
 <a id="__codelineno-24-70" name="__codelineno-24-70"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-24-71" name="__codelineno-24-71"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-24-72" name="__codelineno-24-72"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-24-73" name="__codelineno-24-73"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-24-73" name="__codelineno-24-73"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-24-74" name="__codelineno-24-74"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
-<a id="__codelineno-24-75" name="__codelineno-24-75"></a><span class="hll"><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-24-75" name="__codelineno-24-75"></a><span class="hll"><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 </span><a id="__codelineno-24-76" name="__codelineno-24-76"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
-</span><a id="__codelineno-24-77" name="__codelineno-24-77"></a><span class="hll"><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+</span><a id="__codelineno-24-77" name="__codelineno-24-77"></a><span class="hll"><span class="w">    </span><span class="c1">// zbierz wszystkie powitania do jednego pliku</span>
 </span><a id="__codelineno-24-78" name="__codelineno-24-78"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 </span><a id="__codelineno-24-79" name="__codelineno-24-79"></a>
 <a id="__codelineno-24-80" name="__codelineno-24-80"></a><span class="w">    </span><span class="nl">publish:</span>
@@ -5204,11 +5204,11 @@ Dwie nowe definicje procesów są zbudowane w ten sam sposób co proces <code>sa
 <a id="__codelineno-25-70" name="__codelineno-25-70"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-25-71" name="__codelineno-25-71"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-25-72" name="__codelineno-25-72"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-25-73" name="__codelineno-25-73"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-25-73" name="__codelineno-25-73"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-25-74" name="__codelineno-25-74"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
-<a id="__codelineno-25-75" name="__codelineno-25-75"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-25-75" name="__codelineno-25-75"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-25-76" name="__codelineno-25-76"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
-</span><a id="__codelineno-25-77" name="__codelineno-25-77"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+</span><a id="__codelineno-25-77" name="__codelineno-25-77"></a><span class="w">    </span><span class="c1">// zbierz wszystkie powitania do jednego pliku</span>
 <a id="__codelineno-25-78" name="__codelineno-25-78"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Widzisz, że pierwsze wywołanie procesu, <code>sayHello(greeting_ch)</code>, jest niezmienione.
@@ -5218,7 +5218,7 @@ W ten sposób przekazujemy dane z jednego kroku do następnego w Nextflow.</p>
 <h4 id="233-proces-moze-przyjmowac-wiele-danych-wejsciowych">2.3.3. Proces może przyjmować wiele danych wejściowych<a class="headerlink" href="#233-proces-moze-przyjmowac-wiele-danych-wejsciowych" title="Permanent link">&para;</a></h4>
 <p>Trzecie wywołanie procesu, do <code>collectGreetings</code>, jest nieco inne.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2b-multistep.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-77">77</a></span>
-<span class="normal"><a href="#__codelineno-26-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-77" name="__codelineno-26-77"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-26-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-77" name="__codelineno-26-77"></a><span class="w">    </span><span class="c1">// zbierz wszystkie powitania do jednego pliku</span>
 <a id="__codelineno-26-78" name="__codelineno-26-78"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Widzisz, że to wywołanie otrzymuje dwa dane wejściowe, <code>convertToUpper.out.collect()</code> i <code>params.batch</code>.
@@ -5266,10 +5266,10 @@ Wadą jest to, że czasami może to utrudnić rozszyfrowanie tego, co pipeline r
 <h4 id="235-parametr-wejsciowy-moze-miec-wartosc-domyslna">2.3.5. Parametr wejściowy może mieć wartość domyślną<a class="headerlink" href="#235-parametr-wejsciowy-moze-miec-wartosc-domyslna" title="Permanent link">&para;</a></h4>
 <p>Być może zauważyłeś, że <code>collectGreetings</code> przyjmuje drugie wejście, <code>params.batch</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2b-multistep.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-77">77</a></span>
-<span class="normal"><a href="#__codelineno-28-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-77" name="__codelineno-28-77"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-28-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-77" name="__codelineno-28-77"></a><span class="w">    </span><span class="c1">// zbierz wszystkie powitania do jednego pliku</span>
 <a id="__codelineno-28-78" name="__codelineno-28-78"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
-<p>To przekazuje parametr CLI o nazwie <code>--batch</code> do workflow.
+<p>To przekazuje parametr CLI o nazwie <code>--batch</code> do workflow'u.
 Jednak gdy uruchomiliśmy workflow wcześniej, nie określiliśmy parametru <code>--batch</code>.</p>
 <p>Co się dzieje?
 Przyjrzyj się blokowi <code>params</code>:</p>
@@ -5525,11 +5525,11 @@ Zacznij od otwarcia pliku workflow <code>2c-modules.nf</code>.</p>
 <a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-37-22" name="__codelineno-37-22"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-37-23" name="__codelineno-37-23"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-37-23" name="__codelineno-37-23"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-37-24" name="__codelineno-37-24"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
-<a id="__codelineno-37-25" name="__codelineno-37-25"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-37-25" name="__codelineno-37-25"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-37-26" name="__codelineno-37-26"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
-<a id="__codelineno-37-27" name="__codelineno-37-27"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<a id="__codelineno-37-27" name="__codelineno-37-27"></a><span class="w">    </span><span class="c1">// zbierz wszystkie powitania do jednego pliku</span>
 <a id="__codelineno-37-28" name="__codelineno-37-28"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 <a id="__codelineno-37-29" name="__codelineno-37-29"></a>
 <a id="__codelineno-37-30" name="__codelineno-37-30"></a><span class="w">    </span><span class="nl">publish:</span>
@@ -5622,9 +5622,9 @@ To samo dotyczy pozostałych dwóch procesów.</p>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
-<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">[j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔</span>
-<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[95/79484f] convertToUpper (2) | 3 of 3, cached: ✔</span>
-<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="go">[5e/4358gc] collectGreetings   | 1 of 1, cached: ✔</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[99/79484f] convertToUpper (2) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="go">[1e/4358gc] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
 <p>Zauważysz, że wykonania procesu wszystkie pomyślnie użyły pamięci podręcznej, co oznacza, że Nextflow rozpoznał, że już wykonał żądaną pracę, mimo że kod został podzielony, a główny plik workflow'u został przemianowany.</p>
@@ -5773,7 +5773,7 @@ Gdy skończysz, wyjdź z kontenera używając polecenia <code>exit</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="nb">exit</span>
 </code></pre></div>
 <p>Znajdziesz się z powrotem w normalnej powłoce.</p>
-<h3 id="42-uzyj-kontenera-w-workflow">4.2. Użyj kontenera w workflow<a class="headerlink" href="#42-uzyj-kontenera-w-workflow" title="Permanent link">&para;</a></h3>
+<h3 id="42-uzyj-kontenera-w-workflowie">4.2. Użyj kontenera w workflow'ie<a class="headerlink" href="#42-uzyj-kontenera-w-workflowie" title="Permanent link">&para;</a></h3>
 <p>Gdy uruchamiamy pipeline, chcemy wskazać Nextflow, jakiego obrazu użyć w każdym kroku, a co ważne, oczekujemy też, że automatycznie obsłuży całą tę pracę: pobierze obraz, uruchomi instancję, wykona polecenie i usunie ją po zakończeniu.</p>
 <p>Dobra wiadomość: to dokładnie to, co Nextflow zrobi za nas.
 Musimy tylko określić kontener dla każdego procesu.</p>
@@ -5878,11 +5878,11 @@ Musimy tylko określić kontener dla każdego procesu.</p>
 <a id="__codelineno-55-22" name="__codelineno-55-22"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-55-23" name="__codelineno-55-23"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-55-24" name="__codelineno-55-24"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-55-25" name="__codelineno-55-25"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-55-25" name="__codelineno-55-25"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-55-26" name="__codelineno-55-26"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
-<a id="__codelineno-55-27" name="__codelineno-55-27"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-55-27" name="__codelineno-55-27"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-55-28" name="__codelineno-55-28"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
-<a id="__codelineno-55-29" name="__codelineno-55-29"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<a id="__codelineno-55-29" name="__codelineno-55-29"></a><span class="w">    </span><span class="c1">// zbierz wszystkie powitania do jednego pliku</span>
 <a id="__codelineno-55-30" name="__codelineno-55-30"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 <a id="__codelineno-55-31" name="__codelineno-55-31"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII powitań za pomocą cowpy</span>
 <a id="__codelineno-55-32" name="__codelineno-55-32"></a><span class="hll"><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
@@ -5920,9 +5920,9 @@ Musimy tylko określić kontener dla każdego procesu.</p>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Widzisz, że ten workflow importuje proces <code>cowpy</code> z pliku modułu i wywołuje go na wyjściu wywołania <code>collectGreetings()</code>, plus parametr wejściowy o nazwie <code>params.character</code>.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2d-container.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-25">25</a></span>
-<span class="normal"><a href="#__codelineno-56-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="c1">// wygeneruj grafikę ASCII za pomocą cowpy</span>
-<a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2d-container.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-31">31</a></span>
+<span class="normal"><a href="#__codelineno-56-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-31" name="__codelineno-56-31"></a><span class="c1">// wygeneruj grafikę ASCII powitań za pomocą cowpy</span>
+<a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Proces <code>cowpy</code>, który opakowuje polecenie cowpy do generowania grafiki ASCII, jest zdefiniowany w module <code>cowpy.nf</code>.</p>
 <details class="full-code">
@@ -6042,14 +6042,14 @@ To drugie jest znacznie lepsze dla modułowości, konserwacji kodu i odtwarzalno
 </code></pre></div>
 </details>
 <p>Widzisz, że postać mówi wszystkie powitania, ponieważ uruchomiła się na pliku zebranych powitań wielkimi literami.</p>
-<p>Co ważniejsze, mogliśmy to uruchomić jako część naszego pipeline bez konieczności prawidłowej instalacji cowpy i wszystkich jego zależności.
+<p>Co ważniejsze, mogliśmy to uruchomić jako część naszego pipeline'u bez konieczności prawidłowej instalacji cowpy i wszystkich jego zależności.
 I teraz możemy udostępnić pipeline współpracownikom i sprawić, że uruchomią go na swojej infrastrukturze bez konieczności instalowania czegokolwiek, poza Docker lub jedną z jego alternatyw (taką jak Singularity/Apptainer) jak wspomniano powyżej.</p>
 <h4 id="424-sprawdz-jak-nextflow-uruchomi-konteneryzowane-zadanie">4.2.4. Sprawdź, jak Nextflow uruchomił konteneryzowane zadanie<a class="headerlink" href="#424-sprawdz-jak-nextflow-uruchomi-konteneryzowane-zadanie" title="Permanent link">&para;</a></h4>
 <p>Na zakończenie tej sekcji przyjrzyjmy się podkatalogowi roboczemu dla jednego z wywołań procesu <code>cowpy</code>, aby uzyskać nieco więcej wglądu w to, jak Nextflow pracuje z kontenerami pod maską.</p>
 <p>Sprawdź wyjście z polecenia <code>nextflow run</code>, aby znaleźć ścieżkę do podkatalogu roboczego dla procesu <code>cowpy</code>.
 Patrząc na to, co otrzymaliśmy dla uruchomienia pokazanego powyżej, linia dziennika konsoli dla procesu <code>cowpy</code> zaczyna się od <code>[7f/caf718]</code>.
 To odpowiada następującej skróconej ścieżce katalogu: <code>work/7f/caf718</code>.</p>
-<p>W tym katalogu znajdziesz plik <code>.command.run</code>, który zawiera wszystkie polecenia, które Nextflow uruchomił w Twoim imieniu w trakcie wykonywania pipeline.</p>
+<p>W tym katalogu znajdziesz plik <code>.command.run</code>, który zawiera wszystkie polecenia, które Nextflow uruchomił w Twoim imieniu w trakcie wykonywania pipeline'u.</p>
 <details class="abstract">
 <summary>Zawartość pliku</summary>
 <div class="highlight"><span class="filename">work/7f/caf71890cce1667c094d880f4b6dcc/.command.run</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="gp">#</span>!/bin/bash
@@ -6338,7 +6338,7 @@ Dowiedz się więcej: [1.4.3. Jak nazywane są wyjścia](#143-jak-nazywane-są-w
 
 <!-- mkdocs-quiz-source
 <quiz>
-Jaki jest cel instrukcji `include` w zmodularyzowanym workflow'ie?
+Jaki jest cel instrukcji `include` w zmodularizowanym workflow'ie?
 - [ ] Aby skopiować kod procesu do pliku workflow'u
 - [x] Aby zaimportować definicję procesu z zewnętrznego pliku modułu
 - [ ] Aby dołączyć ustawienia konfiguracji
@@ -6351,7 +6351,7 @@ Dowiedz się więcej: [3. Uruchamianie zmodularyzowanych pipeline'ów](#3-urucha
     <a href="#quiz-4" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Jaki jest cel instrukcji <code>include</code> w zmodularyzowanym workflow'ie?</p>
+        <p>Jaki jest cel instrukcji <code>include</code> w zmodularizowanym workflow'ie?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
         <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0">Aby skopiować kod procesu do pliku workflow'u</label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" correct><label for="quiz-4-1">Aby zaimportować definicję procesu z zewnętrznego pliku modułu</label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" ><label for="quiz-4-2">Aby dołączyć ustawienia konfiguracji</label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">Aby dodać komentarze dokumentacji</label></div></fieldset>
@@ -6394,7 +6394,7 @@ Co określa dyrektywa `container` w definicji procesu?
 - [x] URI obrazu kontenera do użycia podczas uruchamiania procesu
 - [ ] Format pliku wyjściowego
 
-Dowiedz się więcej: [4.2. Użyj kontenera w workflow](#42-użyj-kontenera-w-workflow)
+Dowiedz się więcej: [4.2. Użyj kontenera w workflow'ie](#42-użyj-kontenera-w-workflow)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6408,7 +6408,7 @@ Dowiedz się więcej: [4.2. Użyj kontenera w workflow](#42-użyj-kontenera-w-wo
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#42-użyj-kontenera-w-workflow">4.2. Użyj kontenera w workflow</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#42-użyj-kontenera-w-workflow">4.2. Użyj kontenera w workflow'ie</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

@@ -782,10 +782,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -935,10 +935,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_1" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -994,10 +994,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_2" class="md-nav__link">
+  <a href="#takeaway_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -1142,10 +1142,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_3" class="md-nav__link">
+  <a href="#takeaway_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -1385,7 +1385,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 3: Configurazione
+    Parte 3: Configurazione dell'esecuzione
   
 
     
@@ -3886,10 +3886,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo" class="md-nav__link">
+  <a href="#takeaway" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -4039,10 +4039,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_1" class="md-nav__link">
+  <a href="#takeaway_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -4098,10 +4098,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_2" class="md-nav__link">
+  <a href="#takeaway_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -4246,10 +4246,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#riepilogo_3" class="md-nav__link">
+  <a href="#takeaway_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riepilogo
+        Takeaway
       
     </span>
   </a>
@@ -4863,7 +4863,7 @@ E poiché Nextflow è intelligente così, eseguirà queste chiamate al process i
 <p>Vedi che, rispetto alla versione di questo process in <code>1-hello.nf</code>, la dichiarazione dell'output e la parte rilevante del comando sono cambiate per includere il valore del saluto nel nome del file di output.</p>
 <p>Questo è un modo per assicurarsi che i nomi dei file di output non collideranno quando vengono pubblicati nella directory dei risultati comune.</p>
 <p>E questa è l'unica modifica che abbiamo dovuto fare dentro la dichiarazione del process!</p>
-<h3 id="riepilogo">Riepilogo<a class="headerlink" href="#riepilogo" title="Permanent link">&para;</a></h3>
+<h3 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h3>
 <p>Capisci a livello base come i canali e gli operatori ci permettono di elaborare input multipli efficientemente.</p>
 <h3 id="cosa-ce-dopo">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo" title="Permanent link">&para;</a></h3>
 <p>Scopri come sono costruiti i workflow multi-step e come operano.</p>
@@ -5243,7 +5243,7 @@ Ignorando la parte <code>.collect()</code> per ora, possiamo generalizzare quest
 <p>È un operatore, naturalmente. Proprio come gli operatori <code>splitCsv</code> e <code>map</code> che abbiamo incontrato prima.
 Questa volta l'operatore si chiama <code>collect</code>, ed è applicato al canale di output prodotto da <code>convertToUpper</code>.</p>
 <p>L'operatore <code>collect</code> è usato per raccogliere gli output da chiamate multiple allo stesso process e impacchettarli in un singolo elemento del canale.</p>
-<p>Nel contesto di questo workflow, sta prendendo i tre saluti maiuscoli nel canale <code>convertToUpper.out</code> --che sono tre elementi separati del canale, e normalmente verrebbero gestiti in chiamate separate dal process successivo-- e li impacchetta in un singolo elemento.
+<p>Nel contesto di questo workflow, sta prendendo i tre saluti maiuscoli nel canale <code>convertToUpper.out</code> (che sono tre elementi separati del canale, e normalmente verrebbero gestiti in chiamate separate dal process successivo) e li impacchetta in un singolo elemento.
 È così che otteniamo tutti i saluti di nuovo nello stesso file.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
@@ -5409,7 +5409,7 @@ Ma se ne forniamo uno sulla riga di comando, il valore che specifichiamo verrà 
 <p class="admonition-title">Vuoi saperne di più sulla costruzione di workflow?</p>
 <p>Per una copertura dettagliata sulla costruzione di workflow multi-step, vedi <a href="../../hello_nextflow/03_hello_workflow/">Hello Nextflow Parte 3: Hello Workflow</a>.</p>
 </div>
-<h3 id="riepilogo_1">Riepilogo<a class="headerlink" href="#riepilogo_1" title="Permanent link">&para;</a></h3>
+<h3 id="takeaway_1">Takeaway<a class="headerlink" href="#takeaway_1" title="Permanent link">&para;</a></h3>
 <p>Capisci a livello base come i workflow multi-step sono costruiti usando canali e operatori e come operano.
 Hai anche visto che i process possono prendere input multipli e produrre output multipli, e che questi possono essere pubblicati in modo strutturato.</p>
 <h3 id="cosa-ce-dopo_1">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo_1" title="Permanent link">&para;</a></h3>
@@ -5622,9 +5622,9 @@ Lo stesso vale per gli altri due process.</p>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
-<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">[j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔</span>
-<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[95/79484f] convertToUpper (2) | 3 of 3, cached: ✔</span>
-<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="go">[5e/4358gc] collectGreetings   | 1 of 1, cached: ✔</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="go">[1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
 <p>Noterai che le esecuzioni dei process sono state tutte salvate nella cache con successo, il che significa che Nextflow ha riconosciuto che ha già fatto il lavoro richiesto, anche se il codice è stato diviso e il file del workflow principale è stato rinominato.</p>
@@ -5634,7 +5634,7 @@ Lo stesso vale per gli altri due process.</p>
 <p>È anche possibile incapsulare una sezione di un workflow come un 'subworkflow' che può essere importato in una pipeline più grande, ma questo è al di fuori dello scopo di questo corso.</p>
 <p>Puoi saperne di più sullo sviluppo di workflow componibili nella Side Quest su <a href="https://training.nextflow.io/latest/side_quests/workflows_of_workflows/">Workflows of Workflows</a>.</p>
 </div>
-<h3 id="riepilogo_2">Riepilogo<a class="headerlink" href="#riepilogo_2" title="Permanent link">&para;</a></h3>
+<h3 id="takeaway_2">Takeaway<a class="headerlink" href="#takeaway_2" title="Permanent link">&para;</a></h3>
 <p>Sai come i process possono essere memorizzati in moduli standalone per promuovere il riuso del codice e migliorare la manutenibilità.</p>
 <h3 id="cosa-ce-dopo_2">Cosa c'è dopo?<a class="headerlink" href="#cosa-ce-dopo_2" title="Permanent link">&para;</a></h3>
 <p>Impara a usare i container per gestire le dipendenze software.</p>
@@ -5920,9 +5920,9 @@ Dobbiamo solo specificare un container per ogni process.</p>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Vedi che questo workflow importa un process <code>cowpy</code> da un file modulo, e lo chiama sull'output della chiamata <code>collectGreetings()</code>, più un parametro di input chiamato <code>params.character</code>.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2d-container.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-25">25</a></span>
-<span class="normal"><a href="#__codelineno-56-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="c1">// genera arte ASCII con cowpy</span>
-<a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2d-container.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-31">31</a></span>
+<span class="normal"><a href="#__codelineno-56-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-31" name="__codelineno-56-31"></a><span class="c1">// genera arte ASCII dei saluti con cowpy</span>
+<a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Il process <code>cowpy</code>, che incapsula il comando cowpy per generare arte ASCII, è definito nel modulo <code>cowpy.nf</code>.</p>
 <details class="full-code">
@@ -6109,7 +6109,7 @@ Questo corrisponde al seguente percorso di directory troncato: <code>work/7f/caf
 <p>Questo comando di lancio mostra che Nextflow sta usando un comando <code>docker run</code> molto simile per lanciare la chiamata al process come abbiamo fatto quando l'abbiamo eseguito manualmente.
 Monta anche la corrispondente sottodirectory di lavoro nel container, imposta la directory di lavoro all'interno del container di conseguenza, e esegue il nostro script bash templato nel file <code>.command.sh</code>.</p>
 <p>Questo conferma che tutto il duro lavoro che abbiamo dovuto fare manualmente nella sezione precedente viene ora fatto per noi da Nextflow!</p>
-<h3 id="riepilogo_3">Riepilogo<a class="headerlink" href="#riepilogo_3" title="Permanent link">&para;</a></h3>
+<h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
 <p>Capisci quale ruolo giocano i container nella gestione delle versioni degli strumenti software e nell'assicurare la riproducibilità.</p>
 <p>Più in generale, hai una comprensione di base di quali sono i componenti principali delle pipeline Nextflow del mondo reale e come sono organizzati.
 Conosci i fondamenti di come Nextflow può elaborare input multipli efficientemente, eseguire workflow composti da step multipli connessi insieme, sfruttare componenti di codice modulari, e utilizzare container per una maggiore riproducibilità e portabilità.</p>
@@ -7923,13 +7923,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="../03_config/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Parte 3: Configurazione">
+          <a href="../03_config/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Parte 3: Configurazione dell&#39;esecuzione">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Successivo
               </span>
               <div class="md-ellipsis">
-                Parte 3: Configurazione
+                Parte 3: Configurazione dell'esecuzione
               </div>
             </div>
             <div class="md-footer__button md-icon">

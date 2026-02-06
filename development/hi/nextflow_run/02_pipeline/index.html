@@ -5088,7 +5088,7 @@ Condensed mode में, Nextflow report करता है कि calls स�
 <a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="o">}</span>
 <a id="__codelineno-24-19" name="__codelineno-24-19"></a>
 <a id="__codelineno-24-20" name="__codelineno-24-20"></a><span class="cm">/*</span>
-<a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="cm">* Use a text replacement tool to convert the greeting to uppercase</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="cm">* अभिवादन को uppercase में बदलने के लिए एक text replacement tool का उपयोग करें</span>
 <a id="__codelineno-24-22" name="__codelineno-24-22"></a><span class="cm">*/</span>
 <a id="__codelineno-24-23" name="__codelineno-24-23"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-24" name="__codelineno-24-24"></a>
@@ -5105,7 +5105,7 @@ Condensed mode में, Nextflow report करता है कि calls स�
 <a id="__codelineno-24-35" name="__codelineno-24-35"></a><span class="o">}</span>
 <a id="__codelineno-24-36" name="__codelineno-24-36"></a>
 <a id="__codelineno-24-37" name="__codelineno-24-37"></a><span class="cm">/*</span>
-<a id="__codelineno-24-38" name="__codelineno-24-38"></a><span class="cm">* Collect uppercase greetings into a single output file</span>
+<a id="__codelineno-24-38" name="__codelineno-24-38"></a><span class="cm">* Uppercase greetings को एक single output फ़ाइल में collect करें</span>
 <a id="__codelineno-24-39" name="__codelineno-24-39"></a><span class="cm">*/</span>
 <a id="__codelineno-24-40" name="__codelineno-24-40"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-41" name="__codelineno-24-41"></a>
@@ -5560,7 +5560,7 @@ Workflow में module use करने के लिए, तुम बस �
 </details>
 <p>तुम देखते हो कि workflow logic पिछले workflow version के exactly same है।
 हालांकि, process code workflow फ़ाइल से गायब है, और इसके बजाय <code>modules</code> के अंतर्गत अलग फ़ाइलों की ओर point करने वाले <code>include</code> statements हैं।</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-3">3</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2c-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-3">3</a></span>
 <span class="normal"><a href="#__codelineno-38-4">4</a></span>
 <span class="normal"><a href="#__codelineno-38-5">5</a></span>
 <span class="normal"><a href="#__codelineno-38-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="c1">// Modules को include करें</span>
@@ -5621,9 +5621,9 @@ Workflow में module use करने के लिए, तुम बस �
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
-<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">[j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔</span>
-<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[95/79484f] convertToUpper (2) | 3 of 3, cached: ✔</span>
-<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="go">[5e/4358gc] collectGreetings   | 1 of 1, cached: ✔</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="go">[1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
 <p>तुम देखोगे कि सभी process executions successfully cached हुए, मतलब Nextflow ने recognize किया कि यह requested work पहले ही कर चुका है, भले ही code split हो गया है और main workflow फ़ाइल का नाम बदल गया है।</p>
@@ -5918,9 +5918,9 @@ Download complete होने के बाद, तुम्हारे पा
 </code></pre></div></td></tr></table></div>
 </details>
 <p>तुम देखते हो कि यह workflow एक module फ़ाइल से <code>cowpy</code> process import करती है, और इसे <code>collectGreetings()</code> call के output पर call करती है, plus <code>params.character</code> नाम का एक input parameter।</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2d-container.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-25">25</a></span>
-<span class="normal"><a href="#__codelineno-56-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="c1">// cowpy के साथ ASCII art जनरेट करें</span>
-<a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2d-container.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-31">31</a></span>
+<span class="normal"><a href="#__codelineno-56-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-31" name="__codelineno-56-31"></a><span class="c1">// cowpy के साथ ASCII art जनरेट करें</span>
+<a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p><code>cowpy</code> process, जो ASCII art generate करने के लिए cowpy कमांड wrap करता है, <code>cowpy.nf</code> module में defined है।</p>
 <details class="full-code">

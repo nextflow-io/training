@@ -4897,9 +4897,9 @@ Ensuite, nous l'exécuterons et chercherons ses sorties.</p>
 <p>Chaque <strong>process</strong> décrit quelle(s) opération(s) l'étape correspondante dans le pipeline devrait accomplir, tandis que le <strong>workflow</strong> décrit la logique de flux de données qui connecte les différentes étapes.</p>
 <p>Nous allons d'abord examiner de plus près le bloc <strong>process</strong>, puis nous examinerons le bloc <strong>workflow</strong>.</p>
 <h4 id="111-la-definition-du-process">1.1.1. La définition du <code>process</code><a class="headerlink" href="#111-la-definition-du-process" title="Permanent link">&para;</a></h4>
-<p>Le premier bloc de code décrit un <strong>processus</strong>.</p>
-<p>La définition du processus commence par le mot-clé <code>process</code>, suivi du nom du processus et enfin du corps du processus délimité par des accolades.
-Le corps du processus doit contenir un bloc script qui spécifie la commande à exécuter, qui peut être n'importe quoi que vous pourriez exécuter dans un terminal de ligne de commande.</p>
+<p>Le premier bloc de code décrit un <strong>process</strong>.</p>
+<p>La définition du <strong>process</strong> commence par le mot-clé <code>process</code>, suivi du nom du <strong>process</strong> et enfin du corps du <strong>process</strong> délimité par des accolades.
+Le corps du <strong>process</strong> doit contenir un bloc script qui spécifie la commande à exécuter, qui peut être n'importe quoi que vous pourriez exécuter dans un terminal de ligne de commande.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
 <span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
@@ -4926,7 +4926,7 @@ Le corps du processus doit contenir un bloc script qui spécifie la commande à 
 <a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Ici, nous avons un <strong>processus</strong> appelé <code>sayHello</code> qui écrit sa <strong>sortie</strong> dans un fichier nommé <code>output.txt</code>.</p>
+<p>Ici, nous avons un <strong>process</strong> appelé <code>sayHello</code> qui écrit sa sortie dans un fichier nommé <code>output.txt</code>.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -4934,23 +4934,23 @@ Le corps du processus doit contenir un bloc script qui spécifie la commande à 
       @font-face { font-family: Excalifont; src: url(data:font/woff2;base64,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); }</style></defs><rect x="0" y="0" width="633.6089540679221" height="155.27090283070174" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(10 10) rotate(0 109.333984375 41.830078125)"><path d="M20.92 0 C61.38 -1.66, 97.51 -0.4, 197.75 0 C208.18 2.6, 216.56 6.78, 218.67 20.92 C221.4 32.75, 217.62 42.92, 218.67 62.75 C216.35 76.4, 212.45 82.11, 197.75 83.66 C129.89 84.43, 59.59 79.6, 20.92 83.66 C3.59 82.34, 0.34 77.14, 0 62.75 C-1.83 56.98, 1.76 41.54, 0 20.92 C0.6 8.49, 6.44 -0.87, 20.92 0" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M20.92 0 C76.76 2.71, 135.89 0.77, 197.75 0 M20.92 0 C73.22 1.56, 127.53 1.41, 197.75 0 M197.75 0 C210.28 1.54, 218.05 5.3, 218.67 20.92 M197.75 0 C211.6 1.44, 219.07 4.78, 218.67 20.92 M218.67 20.92 C219.28 37.45, 219.05 51.82, 218.67 62.75 M218.67 20.92 C219.15 29.75, 218.04 38.78, 218.67 62.75 M218.67 62.75 C217.21 77.94, 211.17 84.82, 197.75 83.66 M218.67 62.75 C220.6 78.38, 212.13 84.32, 197.75 83.66 M197.75 83.66 C128.76 82.41, 61.92 84.21, 20.92 83.66 M197.75 83.66 C129.27 84.31, 61.35 83.67, 20.92 83.66 M20.92 83.66 C8.9 83.38, 0.9 76.97, 0 62.75 M20.92 83.66 C6.24 84.48, 2.11 76.4, 0 62.75 M0 62.75 C0.7 53.46, -0.78 43.74, 0 20.92 M0 62.75 C0.11 47.82, -0.04 32.64, 0 20.92 M0 20.92 C-1.7 7.33, 7.4 0.52, 20.92 0 M0 20.92 C1.97 7.5, 4.9 1.17, 20.92 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(66.00801849365234 34.330078125) rotate(0 53.325965881347656 17.5)"><text x="53.325965881347656" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">sayHello</text></g><g stroke-linecap="round" transform="translate(351.465431113068 10.234496769468933) rotate(0 111.85377038122097 41.830078125)"><path d="M20.92 0 C55.27 4.46, 94.56 1.66, 202.79 0 C214.94 -3.49, 226.75 10.44, 223.71 20.92 C221.32 34.76, 224.4 47.64, 223.71 62.75 C227.1 78.3, 215.69 85.52, 202.79 83.66 C136.26 79.49, 76.83 81.26, 20.92 83.66 C4.04 80.25, 0.65 74.15, 0 62.75 C0.38 47.8, -0.75 28.94, 0 20.92 C-2.83 6.3, 4 2.13, 20.92 0" stroke="none" stroke-width="0" fill="#a5d8ff"></path><path d="M20.92 0 C88.05 1.91, 153.63 -0.9, 202.79 0 M20.92 0 C78.21 0.71, 136.61 -0.89, 202.79 0 M202.79 0 C216.65 1.25, 224.05 5.06, 223.71 20.92 M202.79 0 C217.84 1.64, 221.89 7.33, 223.71 20.92 M223.71 20.92 C221.8 38.68, 223.11 54.79, 223.71 62.75 M223.71 20.92 C222.62 35.37, 223.09 49.16, 223.71 62.75 M223.71 62.75 C225.39 78.16, 217.11 84.23, 202.79 83.66 M223.71 62.75 C225.58 75.37, 215.17 81.92, 202.79 83.66 M202.79 83.66 C150.37 85.33, 94.67 84.35, 20.92 83.66 M202.79 83.66 C139.25 83.34, 74.22 83.62, 20.92 83.66 M20.92 83.66 C6.34 84.37, 1.84 76.44, 0 62.75 M20.92 83.66 C5.16 82.94, 1.26 77.34, 0 62.75 M0 62.75 C1.38 49.02, -0.42 37.49, 0 20.92 M0 62.75 C-0.73 49.93, 0.34 37, 0 20.92 M0 20.92 C1.72 7.44, 5.17 1.02, 20.92 0 M0 20.92 C-1.98 6.39, 5.79 1.7, 20.92 0" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(388.9792356739765 34.56457489446893) rotate(0 74.3399658203125 17.5)"><text x="74.3399658203125" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="middle" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">output.txt</text></g><g stroke-linecap="round"><g transform="translate(253.28004843549724 55.357244498881414) rotate(0 36.71671059607485 -0.5825224357699881)"><path d="M-1.17 0.22 C11.1 -0.12, 60.24 -1.27, 72.51 -1.38 M0.42 -0.72 C13.14 -0.97, 62.21 -0.49, 74.6 -0.21" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(253.28004843549724 55.357244498881414) rotate(0 36.71671059607485 -0.5825224357699881)"><path d="M50.99 7.99 C56.16 4.56, 59.5 2.85, 74.6 -0.21 M50.99 7.99 C59.49 5.69, 65.41 1.99, 74.6 -0.21" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g><g transform="translate(253.28004843549724 55.357244498881414) rotate(0 36.71671059607485 -0.5825224357699881)"><path d="M51.24 -9.11 C56.45 -9.03, 59.74 -7.22, 74.6 -0.21 M51.24 -9.11 C59.69 -5.95, 65.53 -4.19, 74.6 -0.21" stroke="#1e1e1e" stroke-width="2" fill="none"></path></g></g><mask></mask><g transform="translate(399.24216724302005 115.48259513616495) rotate(0 112.18339341245105 14.894153847268399)"><text x="0" y="20.994799263109506" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="23.830646155629402px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Hello World!</text></g></svg>
 </figure>
 
-<p>C'est une définition de processus très minimale qui contient juste une définition de <code>output</code> et le <code>script</code> à exécuter.</p>
+<p>C'est une définition de <strong>process</strong> très minimale qui contient juste une définition de <code>output</code> et le <code>script</code> à exécuter.</p>
 <p>La définition de <code>output</code> inclut le qualificateur <code>path</code>, qui indique à Nextflow que cela doit être traité comme un chemin (inclut à la fois les chemins de répertoires et les fichiers).
 Un autre qualificateur courant est <code>val</code>.</p>
 <p>Il est important de noter que la définition de sortie ne <em>détermine</em> pas quelle sortie sera créée.
 Elle <em>déclare</em> simplement quelle est la sortie attendue, afin que Nextflow puisse la rechercher une fois l'exécution terminée.
-Ceci est nécessaire pour vérifier que la commande a été exécutée avec succès et pour transmettre la sortie aux processus en aval si nécessaire. Les sorties produites qui ne correspondent pas à ce qui est déclaré dans le bloc output ne seront pas transmises aux processus en aval.</p>
+Ceci est nécessaire pour vérifier que la commande a été exécutée avec succès et pour transmettre la sortie aux <strong>processus</strong> en aval si nécessaire. Les sorties produites qui ne correspondent pas à ce qui est déclaré dans le bloc output ne seront pas transmises aux <strong>processus</strong> en aval.</p>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
 <p>Cet exemple est fragile car nous avons codé en dur le nom du fichier de sortie à deux endroits séparés (les blocs script et output).
 Si nous changeons l'un mais pas l'autre, le script ne fonctionnera plus.
 Plus tard, vous apprendrez des moyens d'utiliser des variables pour atténuer ce problème.</p>
 </div>
-<p>Dans un pipeline réel, un processus contient généralement des blocs supplémentaires tels que des directives et des entrées, que nous présenterons dans un instant.</p>
+<p>Dans un pipeline réel, un <strong>process</strong> contient généralement des blocs supplémentaires tels que des directives et des entrées, que nous présenterons dans un instant.</p>
 <h4 id="112-la-definition-du-workflow">1.1.2. La définition du <code>workflow</code><a class="headerlink" href="#112-la-definition-du-workflow" title="Permanent link">&para;</a></h4>
 <p>Le deuxième bloc de code décrit le <strong>workflow</strong> lui-même.
-La définition du workflow commence par le mot-clé <code>workflow</code>, suivi d'un nom optionnel, puis du corps du workflow délimité par des accolades.</p>
-<p>Ici, nous avons un <strong>workflow</strong> qui consiste en un bloc <code>main:</code> (qui dit « ceci est le corps principal du workflow ») contenant un appel au processus <code>sayHello</code>.</p>
+La définition du <strong>workflow</strong> commence par le mot-clé <code>workflow</code>, suivi d'un nom optionnel, puis du corps du <strong>workflow</strong> délimité par des accolades.</p>
+<p>Ici, nous avons un <strong>workflow</strong> qui consiste en un bloc <code>main:</code> (qui dit « ceci est le corps principal du workflow ») contenant un appel au <strong>process</strong> <code>sayHello</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-17">17</a></span>
 <span class="normal"><a href="#__codelineno-7-18">18</a></span>
 <span class="normal"><a href="#__codelineno-7-19">19</a></span>
@@ -4964,8 +4964,8 @@ La définition du workflow commence par le mot-clé <code>workflow</code>, suivi
 <a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>C'est une définition de <strong>workflow</strong> très minimale.
-Dans un pipeline réel, le workflow contient généralement plusieurs appels à des <strong>processus</strong> connectés par des <strong>canaux</strong>, et les processus attendent une ou plusieurs <strong>entrée(s)</strong> variable(s).</p>
-<p>Vous apprendrez comment ajouter des entrées variables plus tard dans ce module de formation ; et vous apprendrez comment ajouter plus de processus et les connecter par des canaux dans la Partie 3 de ce cours.</p>
+Dans un pipeline réel, le <strong>workflow</strong> contient généralement plusieurs appels à des <strong>processus</strong> connectés par des canaux, et les <strong>processus</strong> attendent une ou plusieurs entrée(s) variable(s).</p>
+<p>Vous apprendrez comment ajouter des entrées variables plus tard dans ce module de formation ; et vous apprendrez comment ajouter plus de <strong>processus</strong> et les connecter par des canaux dans la Partie 3 de ce cours.</p>
 <div class="admonition tip">
 <p class="admonition-title">Astuce</p>
 <p>Techniquement, la ligne <code>main:</code> n'est pas requise pour les workflows simples comme celui-ci, vous pouvez donc rencontrer des workflows qui ne l'ont pas.
@@ -4991,15 +4991,15 @@ Mais nous en aurons besoin pour profiter des sorties au niveau du workflow, donc
 <p>La sortie la plus importante ici est la dernière ligne, qui est mise en évidence dans la sortie ci-dessus :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
-<p>Cela nous indique que le processus <code>sayHello</code> a été exécuté avec succès une fois (<code>1 of 1 ✔</code>).</p>
-<p>De manière importante, cette ligne vous indique également où trouver la sortie de l'appel au processus <code>sayHello</code>.
+<p>Cela nous indique que le <strong>process</strong> <code>sayHello</code> a été exécuté avec succès une fois (<code>1 of 1 ✔</code>).</p>
+<p>De manière importante, cette ligne vous indique également où trouver la sortie de l'appel au <strong>process</strong> <code>sayHello</code>.
 Examinons cela maintenant.</p>
 <h4 id="122-trouver-la-sortie-et-les-logs-dans-le-repertoire-work">1.2.2. Trouver la sortie et les logs dans le répertoire <code>work</code><a class="headerlink" href="#122-trouver-la-sortie-et-les-logs-dans-le-repertoire-work" title="Permanent link">&para;</a></h4>
 <p>Lorsque vous exécutez Nextflow pour la première fois dans un répertoire donné, il crée un répertoire appelé <code>work</code> où il écrira tous les fichiers (et tous les liens symboliques) générés au cours de l'exécution.</p>
-<p>Dans le répertoire <code>work</code>, Nextflow organise les sorties et les logs par appel de processus.
-Pour chaque appel de processus, Nextflow crée un sous-répertoire imbriqué, nommé avec un hash pour le rendre unique, où il préparera toutes les entrées nécessaires (en utilisant des liens symboliques par défaut), écrira les fichiers d'aide, et écrira les logs et toutes les sorties du processus.</p>
+<p>Dans le répertoire <code>work</code>, Nextflow organise les sorties et les logs par appel de <strong>process</strong>.
+Pour chaque appel de <strong>process</strong>, Nextflow crée un sous-répertoire imbriqué, nommé avec un hash pour le rendre unique, où il préparera toutes les entrées nécessaires (en utilisant des liens symboliques par défaut), écrira les fichiers d'aide, et écrira les logs et toutes les sorties du <strong>process</strong>.</p>
 <p>Le chemin vers ce sous-répertoire est affiché sous forme tronquée entre crochets dans la sortie console.
-En regardant ce que nous avons obtenu pour l'exécution montrée ci-dessus, la ligne de log console pour le processus sayHello commence par <code>[65/7be2fa]</code>. Cela correspond au chemin de répertoire suivant : <code>work/65/7be2fad5e71e5f49998f795677fd68</code></p>
+En regardant ce que nous avons obtenu pour l'exécution montrée ci-dessus, la ligne de log console pour le <strong>process</strong> sayHello commence par <code>[65/7be2fa]</code>. Cela correspond au chemin de répertoire suivant : <code>work/65/7be2fad5e71e5f49998f795677fd68</code></p>
 <p>Voyons ce qu'il y a dedans.</p>
 <details class="abstract">
 <summary>Contenu du répertoire</summary>
@@ -5024,7 +5024,7 @@ Cependant, les fichiers de log sont configurés pour être invisibles dans le te
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
 </code></pre></div>
 </details>
-<p>La première chose que vous voulez regarder est la sortie réelle du workflow, c'est-à-dire le fichier <code>output.txt</code> produit par le processus <code>sayHello</code>.
+<p>La première chose que vous voulez regarder est la sortie réelle du workflow, c'est-à-dire le fichier <code>output.txt</code> produit par le <strong>process</strong> <code>sayHello</code>.
 Ouvrez-le et vous trouverez la salutation <code>Hello World!</code>, qui était le but de notre workflow minimaliste.</p>
 <details class="abstract">
 <summary>Contenu du fichier</summary>
@@ -5035,12 +5035,12 @@ Ouvrez-le et vous trouverez la salutation <code>Hello World!</code>, qui était 
 <p>Certes, cela peut sembler beaucoup de code d'enveloppe pour un si petit résultat, mais la valeur de tout ce code d'enveloppe deviendra plus évidente une fois que nous commencerons à lire des fichiers d'entrée et à enchaîner plusieurs étapes.</p>
 <p>Cela dit, examinons également les autres fichiers dans ce répertoire. Ce sont des fichiers d'aide et de log produits par Nextflow dans le cadre de l'exécution de la tâche.</p>
 <ul>
-<li><strong><code>.command.begin</code></strong> : Métadonnées liées au début de l'exécution de l'appel de processus</li>
-<li><strong><code>.command.err</code></strong> : Messages d'erreur (<code>stderr</code>) émis par l'appel de processus</li>
-<li><strong><code>.command.log</code></strong> : Sortie de log complète émise par l'appel de processus</li>
-<li><strong><code>.command.out</code></strong> : Sortie régulière (<code>stdout</code>) de l'appel de processus</li>
-<li><strong><code>.command.run</code></strong> : Script complet exécuté par Nextflow pour exécuter l'appel de processus</li>
-<li><strong><code>.command.sh</code></strong> : La commande qui a été réellement exécutée par l'appel de processus</li>
+<li><strong><code>.command.begin</code></strong> : Métadonnées liées au début de l'exécution de l'appel de <strong>process</strong></li>
+<li><strong><code>.command.err</code></strong> : Messages d'erreur (<code>stderr</code>) émis par l'appel de <strong>process</strong></li>
+<li><strong><code>.command.log</code></strong> : Sortie de log complète émise par l'appel de <strong>process</strong></li>
+<li><strong><code>.command.out</code></strong> : Sortie régulière (<code>stdout</code>) de l'appel de <strong>process</strong></li>
+<li><strong><code>.command.run</code></strong> : Script complet exécuté par Nextflow pour exécuter l'appel de <strong>process</strong></li>
+<li><strong><code>.command.sh</code></strong> : La commande qui a été réellement exécutée par l'appel de <strong>process</strong></li>
 <li><strong><code>.exitcode</code></strong> : Le code de sortie résultant de la commande</li>
 </ul>
 <p>Le fichier <code>.command.sh</code> est particulièrement utile car il vous indique la commande principale que Nextflow a exécutée, sans inclure toute la comptabilité et la configuration de la tâche/de l'environnement.</p>
@@ -5051,7 +5051,7 @@ Ouvrez-le et vous trouverez la salutation <code>Hello World!</code>, qui était 
 </code></pre></div>
 </details>
 <p>Cela correspond à ce que nous avons exécuté manuellement plus tôt.</p>
-<p>Dans ce cas, c'est très simple car la commande du processus était codée en dur, mais plus tard dans le cours, vous verrez des commandes de processus qui impliquent une interpolation de variables.
+<p>Dans ce cas, c'est très simple car la commande du <strong>process</strong> était codée en dur, mais plus tard dans le cours, vous verrez des commandes de <strong>process</strong> qui impliquent une interpolation de variables.
 Cela rend particulièrement précieux de pouvoir voir exactement comment Nextflow a interprété le code et quelle commande a été produite lorsque vous dépannez une exécution échouée.</p>
 <h3 id="13-executer-a-nouveau-le-workflow">1.3. Exécuter à nouveau le workflow<a class="headerlink" href="#13-executer-a-nouveau-le-workflow" title="Permanent link">&para;</a></h3>
 <p>Essayez de ré-exécuter le workflow plusieurs fois, puis regardez les répertoires de tâches sous <code>work/</code>.</p>
@@ -5124,11 +5124,11 @@ Cependant, cela rend peu pratique la récupération des sorties qui nous importe
 <h3 id="21-utilisation-de-base">2.1. Utilisation de base<a class="headerlink" href="#21-utilisation-de-base" title="Permanent link">&para;</a></h3>
 <p>Cela va impliquer deux nouveaux morceaux de code :</p>
 <ol>
-<li>Un bloc <code>publish:</code> à l'intérieur du corps du <code>workflow</code>, déclarant les sorties de processus.</li>
+<li>Un bloc <code>publish:</code> à l'intérieur du corps du <code>workflow</code>, déclarant les sorties de <strong>process</strong>.</li>
 <li>Un bloc <code>output</code> au script spécifiant les options de sortie telles que le mode et l'emplacement.</li>
 </ol>
 <h4 id="211-declarer-la-sortie-du-processus-sayhello">2.1.1. Déclarer la sortie du processus <code>sayHello</code><a class="headerlink" href="#211-declarer-la-sortie-du-processus-sayhello" title="Permanent link">&para;</a></h4>
-<p>Nous devons ajouter un bloc <code>publish:</code> au corps du workflow (même type d'élément de code que le bloc <code>main:</code>) et lister la sortie du processus <code>sayHello()</code>.</p>
+<p>Nous devons ajouter un bloc <code>publish:</code> au corps du workflow (même type d'élément de code que le bloc <code>main:</code>) et lister la sortie du <strong>process</strong> <code>sayHello()</code>.</p>
 <p>Dans le fichier de script de workflow <code>hello-world.nf</code>, ajoutez les lignes de code suivantes :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Après</label><label for="__tabbed_1_2">Avant</label></div>
 <div class="tabbed-content">
@@ -5168,7 +5168,7 @@ Cependant, cela rend peu pratique la récupération des sorties qui nous importe
 </div>
 </div>
 </div>
-<p>Vous voyez que nous pouvons faire référence à la sortie du processus simplement en faisant <code>sayHello().out</code>, et lui attribuer un nom arbitraire, <code>first_output</code>.</p>
+<p>Vous voyez que nous pouvons faire référence à la sortie du <strong>process</strong> simplement en faisant <code>sayHello().out</code>, et lui attribuer un nom arbitraire, <code>first_output</code>.</p>
 <h4 id="212-ajouter-un-bloc-output-au-script">2.1.2. Ajouter un bloc <code>output:</code> au script<a class="headerlink" href="#212-ajouter-un-bloc-output-au-script" title="Permanent link">&para;</a></h4>
 <p>Maintenant nous avons juste besoin d'ajouter le bloc <code>output:</code> où le chemin du répertoire de sortie sera spécifié. Notez que ce nouveau bloc se situe <strong>en dehors</strong> et <strong>en dessous</strong> du bloc <code>workflow</code> dans le script.</p>
 <p>Dans le fichier de script de workflow <code>hello-world.nf</code>, ajoutez les lignes de code suivantes :</p>
@@ -5228,7 +5228,7 @@ Cependant, cela rend peu pratique la récupération des sorties qui nous importe
 </div>
 </div>
 </div>
-<p>Nous pouvons utiliser ceci pour attribuer des chemins spécifiques à toutes les sorties de processus déclarées dans le bloc <code>workflow</code>.
+<p>Nous pouvons utiliser ceci pour attribuer des chemins spécifiques à toutes les sorties de <strong>process</strong> déclarées dans le bloc <code>workflow</code>.
 Plus tard, vous apprendrez des moyens de générer des structures de répertoires de sortie sophistiquées, mais pour l'instant, nous codons juste en dur un chemin minimal pour plus de simplicité.</p>
 <h4 id="213-executer-le-workflow">2.1.3. Exécuter le workflow<a class="headerlink" href="#213-executer-le-workflow" title="Permanent link">&para;</a></h4>
 <p>Maintenant exécutez le script de workflow modifié :</p>
@@ -5342,8 +5342,8 @@ Pour définir un emplacement personnalisé, modifiez simplement le <code>path</c
 </figure>
 
 <p>Vous pouvez utiliser autant de niveaux d'imbrication que vous le souhaitez.
-Il est également possible d'utiliser le nom du processus ou d'autres variables pour nommer les répertoires utilisés pour organiser les résultats, et il est possible de changer le nom par défaut du répertoire de sortie de niveau supérieur (qui est contrôlé par la variable spéciale <code>outputDir</code>).
-Nous couvrirons ces options dans des formations ultérieures.</p>
+Il est également possible d'utiliser le nom du <strong>process</strong> ou d'autres variables pour nommer les répertoires utilisés pour organiser les résultats, et il est possible de changer le nom par défaut du répertoire de sortie de niveau supérieur (qui est contrôlé par le drapeau CLI <code>-o</code> ou la variable de configuration <code>outputDir</code>).
+Nous couvrirons ces options plus tard dans la formation.</p>
 <h3 id="23-definir-le-mode-de-publication-sur-copy">2.3. Définir le mode de publication sur copy<a class="headerlink" href="#23-definir-le-mode-de-publication-sur-copy" title="Permanent link">&para;</a></h3>
 <p>Par défaut, les sorties sont publiées comme des liens symboliques depuis le répertoire <code>work</code>.
 Cela signifie qu'il n'y a qu'un seul fichier sur le système de fichiers.</p>
@@ -5413,8 +5413,8 @@ Cela sera particulièrement pratique plus tard lorsque nous passerons à des pip
 <p>Comme noté précédemment, il existe d'autres options plus sophistiquées pour contrôler comment les sorties sont publiées.
 Nous vous montrerons comment les utiliser en temps voulu dans votre parcours Nextflow.</p>
 <h3 id="24-note-sur-les-directives-publishdir-au-niveau-du-processus">2.4. Note sur les directives <code>publishDir</code> au niveau du processus<a class="headerlink" href="#24-note-sur-les-directives-publishdir-au-niveau-du-processus" title="Permanent link">&para;</a></h3>
-<p>Jusqu'à très récemment, la façon établie de publier les sorties était de le faire au niveau de chaque processus individuel en utilisant une directive <code>publishDir</code>.</p>
-<p>Pour obtenir ce que nous venons de faire pour les sorties du processus <code>sayHello</code>, nous aurions plutôt ajouté la ligne suivante à la définition du processus :</p>
+<p>Jusqu'à très récemment, la façon établie de publier les sorties était de le faire au niveau de chaque <strong>process</strong> individuel en utilisant une directive <code>publishDir</code>.</p>
+<p>Pour obtenir ce que nous venons de faire pour les sorties du <strong>process</strong> <code>sayHello</code>, nous aurions plutôt ajouté la ligne suivante à la définition du <strong>process</strong> :</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-6"> 6</a></span>
 <span class="normal"><a href="#__codelineno-33-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-33-8"> 8</a></span>
@@ -5439,7 +5439,7 @@ Nous vous montrerons comment les utiliser en temps voulu dans votre parcours Nex
 <a id="__codelineno-33-16" name="__codelineno-33-16"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-33-17" name="__codelineno-33-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Vous trouverez encore ce modèle de code partout dans les anciens pipelines Nextflow et modules de processus, il est donc important d'en être conscient.
+<p>Vous trouverez encore ce modèle de code partout dans les anciens pipelines Nextflow et modules de <strong>processus</strong>, il est donc important d'en être conscient·e.
 Cependant, nous ne recommandons pas de l'utiliser dans tout nouveau travail car il sera éventuellement interdit dans les futures versions du langage Nextflow.</p>
 <h3 id="a-retenir_2">À retenir<a class="headerlink" href="#a-retenir_2" title="Permanent link">&para;</a></h3>
 <p>Vous savez comment publier les sorties du workflow dans un emplacement plus pratique.</p>
@@ -5447,19 +5447,19 @@ Cependant, nous ne recommandons pas de l'utiliser dans tout nouveau travail car 
 <p>Apprendre à fournir une entrée variable via un paramètre de ligne de commande et utiliser efficacement les valeurs par défaut.</p>
 <hr />
 <h2 id="3-utiliser-une-entree-variable-passee-en-ligne-de-commande">3. Utiliser une entrée variable passée en ligne de commande<a class="headerlink" href="#3-utiliser-une-entree-variable-passee-en-ligne-de-commande" title="Permanent link">&para;</a></h2>
-<p>Dans son état actuel, notre workflow utilise une salutation codée en dur dans la commande du processus.
+<p>Dans son état actuel, notre workflow utilise une salutation codée en dur dans la commande du <strong>process</strong>.
 Nous voulons ajouter de la flexibilité en utilisant une variable d'entrée, afin de pouvoir plus facilement changer la salutation au moment de l'exécution.</p>
 <p>Cela nécessite que nous apportions trois ensembles de modifications à notre script :</p>
 <ol>
-<li>Modifier le processus pour attendre une entrée variable</li>
+<li>Modifier le <strong>process</strong> pour attendre une entrée variable</li>
 <li>Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur</li>
-<li>Passer l'entrée au processus dans le corps du workflow</li>
+<li>Passer l'entrée au <strong>process</strong> dans le corps du workflow</li>
 </ol>
 <p>Faisons ces modifications une à la fois.</p>
 <h3 id="31-modifier-le-processus-sayhello-pour-attendre-une-entree-variable">3.1. Modifier le processus <code>sayHello</code> pour attendre une entrée variable<a class="headerlink" href="#31-modifier-le-processus-sayhello-pour-attendre-une-entree-variable" title="Permanent link">&para;</a></h3>
-<p>Nous devons modifier la définition du processus pour (1) accepter une variable d'entrée et (2) utiliser cette variable dans la ligne de commande.</p>
+<p>Nous devons modifier la définition du <strong>process</strong> pour (1) accepter une variable d'entrée et (2) utiliser cette variable dans la ligne de commande.</p>
 <h4 id="311-ajouter-un-bloc-input-a-la-definition-du-processus">3.1.1. Ajouter un bloc input à la définition du processus<a class="headerlink" href="#311-ajouter-un-bloc-input-a-la-definition-du-processus" title="Permanent link">&para;</a></h4>
-<p>D'abord, adaptons la définition du processus pour accepter une entrée appelée <code>greeting</code>.</p>
+<p>D'abord, adaptons la définition du <strong>process</strong> pour accepter une entrée appelée <code>greeting</code>.</p>
 <p>Dans le bloc process, faites la modification de code suivante :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Après</label><label for="__tabbed_5_2">Avant</label></div>
 <div class="tabbed-content">
@@ -5524,9 +5524,9 @@ Nous voulons ajouter de la flexibilité en utilisant une variable d'entrée, afi
 <p class="admonition-title">Astuce</p>
 <p>Les accolades (<code>{ }</code>) étaient techniquement optionnelles dans les versions précédentes de Nextflow, vous pourriez donc voir des anciens workflows où ceci est écrit comme <code>echo '$greeting' &gt; output.txt</code>.</p>
 </div>
-<p>Maintenant que le processus <code>sayHello()</code> est prêt à accepter une entrée variable, nous avons besoin d'un moyen de fournir une valeur d'entrée à l'appel du processus au niveau du workflow.</p>
+<p>Maintenant que le <strong>process</strong> <code>sayHello()</code> est prêt à accepter une entrée variable, nous avons besoin d'un moyen de fournir une valeur d'entrée à l'appel du <strong>process</strong> au niveau du workflow.</p>
 <h3 id="32-configurer-un-parametre-de-ligne-de-commande-pour-capturer-lentree-utilisateur">3.2. Configurer un paramètre de ligne de commande pour capturer l'entrée utilisateur<a class="headerlink" href="#32-configurer-un-parametre-de-ligne-de-commande-pour-capturer-lentree-utilisateur" title="Permanent link">&para;</a></h3>
-<p>Nous pourrions simplement coder en dur une entrée directement en faisant l'appel de processus <code>sayHello('Hello World!')</code>.
+<p>Nous pourrions simplement coder en dur une entrée directement en faisant l'appel de <strong>process</strong> <code>sayHello('Hello World!')</code>.
 Cependant, lorsque nous faisons un vrai travail avec notre workflow, nous allons vouloir pouvoir contrôler ses entrées depuis la ligne de commande, afin de pouvoir faire quelque chose comme ceci :</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
@@ -5538,7 +5538,7 @@ Cependant, lorsque nous faisons un vrai travail avec notre workflow, nous allons
 <p>Bonne nouvelle : Nextflow dispose d'un système de paramètres de workflow intégré appelé <a href="https://nextflow.io/docs/latest/config.html#params"><code>params</code></a> qui facilite la déclaration et l'utilisation des paramètres CLI.</p>
 <p>La syntaxe générale est de déclarer <code>params.&lt;nom_paramètre&gt;</code> pour indiquer à Nextflow d'attendre un paramètre <code>--&lt;nom_paramètre&gt;</code> sur la ligne de commande.</p>
 <p>Ici, nous voulons créer un paramètre appelé <code>--input</code>, donc nous devons déclarer <code>params.input</code> quelque part dans le workflow.
-En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vouloir le donner à l'appel du processus <code>sayHello()</code>, nous pouvons le brancher directement là en écrivant <code>sayHello(params.input)</code>.</p>
+En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vouloir le donner à l'appel du <strong>process</strong> <code>sayHello()</code>, nous pouvons le brancher directement là en écrivant <code>sayHello(params.input)</code>.</p>
 <p>Dans le bloc workflow, faites la modification de code suivante :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Après</label><label for="__tabbed_7_2">Avant</label></div>
 <div class="tabbed-content">
@@ -5556,7 +5556,7 @@ En principe, nous pouvons l'écrire n'importe où ; mais puisque nous allons vou
 </div>
 </div>
 </div>
-<p>Cela indique à Nextflow d'exécuter le processus <code>sayHello</code> sur la valeur fournie via le paramètre <code>--input</code>.</p>
+<p>Cela indique à Nextflow d'exécuter le <strong>process</strong> <code>sayHello</code> sur la valeur fournie via le paramètre <code>--input</code>.</p>
 <p>En effet, nous avons accompli les étapes (2) et (3) décrites au début de la section en une seule fois.</p>
 <h3 id="33-executer-la-commande-du-workflow">3.3. Exécuter la commande du workflow<a class="headerlink" href="#33-executer-la-commande-du-workflow" title="Permanent link">&para;</a></h3>
 <p>Exécutons-le !</p>
@@ -5676,11 +5676,11 @@ Si le même paramètre est défini à des valeurs différentes à plusieurs endr
 <h3 id="41-relancer-un-workflow-avec-resume">4.1. Relancer un workflow avec <code>-resume</code><a class="headerlink" href="#41-relancer-un-workflow-avec-resume" title="Permanent link">&para;</a></h3>
 <p>Parfois, vous allez vouloir relancer un pipeline que vous avez déjà lancé précédemment sans refaire les étapes qui se sont déjà terminées avec succès.</p>
 <p>Nextflow a une option appelée <a href="https://nextflow.io/docs/latest/cache-and-resume.html"><code>-resume</code></a> qui vous permet de faire cela.
-Spécifiquement, dans ce mode, tous les processus qui ont déjà été exécutés avec exactement le même code, les mêmes paramètres et les mêmes entrées seront ignorés.
-Cela signifie que Nextflow n'exécutera que les processus que vous avez ajoutés ou modifiés depuis la dernière exécution, ou ceux auxquels vous fournissez de nouveaux paramètres ou entrées.</p>
+Spécifiquement, dans ce mode, tous les <strong>processus</strong> qui ont déjà été exécutés avec exactement le même code, les mêmes paramètres et les mêmes entrées seront ignorés.
+Cela signifie que Nextflow n'exécutera que les <strong>processus</strong> que vous avez ajoutés ou modifiés depuis la dernière exécution, ou ceux auxquels vous fournissez de nouveaux paramètres ou entrées.</p>
 <p>Il y a deux avantages clés à faire cela :</p>
 <ul>
-<li>Si vous êtes en train de développer votre pipeline, vous pouvez itérer plus rapidement puisque vous n'avez qu'à exécuter le(s) processus sur le(s)quel(s) vous travaillez activement pour tester vos modifications.</li>
+<li>Si vous êtes en train de développer votre pipeline, vous pouvez itérer plus rapidement puisque vous n'avez qu'à exécuter le(s) <strong>processus</strong> sur le(s)quel(s) vous travaillez activement pour tester vos modifications.</li>
 <li>Si vous exécutez un pipeline en production et que quelque chose se passe mal, dans de nombreux cas vous pouvez corriger le problème et relancer le pipeline, et il reprendra l'exécution à partir du point d'échec, ce qui peut vous faire gagner beaucoup de temps et de calcul.</li>
 </ul>
 <p>Pour l'utiliser, ajoutez simplement <code>-resume</code> à votre commande et exécutez-la :</p>
@@ -5696,7 +5696,7 @@ Cela signifie que Nextflow n'exécutera que les processus que vous avez ajoutés
 </span></code></pre></div>
 </details>
 <p>La sortie console devrait sembler familière, mais il y a une chose qui est un peu différente par rapport à avant.</p>
-<p>Cherchez la partie <code>cached:</code> qui a été ajoutée dans la ligne d'état du processus (ligne 5), ce qui signifie que Nextflow a reconnu qu'il a déjà fait ce travail et a simplement réutilisé le résultat de l'exécution réussie précédente.</p>
+<p>Cherchez la partie <code>cached:</code> qui a été ajoutée dans la ligne d'état du <strong>process</strong> (ligne 5), ce qui signifie que Nextflow a reconnu qu'il a déjà fait ce travail et a simplement réutilisé le résultat de l'exécution réussie précédente.</p>
 <p>Vous pouvez également voir que le hash du sous-répertoire work est le même que lors de l'exécution précédente.
 Nextflow vous indique littéralement l'exécution précédente et dit « J'ai déjà fait cela là-bas. »</p>
 <div class="admonition tip">
@@ -5777,7 +5777,7 @@ Notez que cela ne supprime pas les sous-répertoires à deux caractères (comme 
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
 <p>La suppression des sous-répertoires de travail des exécutions passées les supprime du cache de Nextflow et supprime toutes les sorties qui étaient stockées dans ces répertoires.
-Cela signifie que cela brise la capacité de Nextflow à reprendre l'exécution sans relancer les processus correspondants.</p>
+Cela signifie que cela brise la capacité de Nextflow à reprendre l'exécution sans relancer les <strong>processus</strong> correspondants.</p>
 <p>Vous êtes responsable de sauvegarder toutes les sorties qui vous importent ou sur lesquelles vous prévoyez de compter ! C'est la principale raison pour laquelle nous préférons utiliser le mode <code>copy</code> plutôt que le mode <code>symlink</code> pour la directive <code>publish</code>.</p>
 </div>
 <h3 id="a-retenir_4">À retenir<a class="headerlink" href="#a-retenir_4" title="Permanent link">&para;</a></h3>
@@ -5917,7 +5917,7 @@ Que fait le drapeau `-resume` ?
 - [x] Ignore les processus qui se sont déjà terminés avec succès
 - [ ] Crée une sauvegarde du workflow
 
-En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-relancer-un-flux-de-travail-avec--resume)
+En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-relancer-un-workflow-avec--resume)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5931,7 +5931,7 @@ En savoir plus : [4.1. Relancer un workflow avec `-resume`](#41-relancer-un-flux
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#41-relancer-un-flux-de-travail-avec--resume">4.1. Relancer un workflow avec <code>-resume</code></a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#41-relancer-un-workflow-avec--resume">4.1. Relancer un workflow avec <code>-resume</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
