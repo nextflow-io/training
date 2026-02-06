@@ -1046,11 +1046,6 @@ def ci_pr(
     """Create PR with translation changes (CI)."""
     from github import Github
 
-    repo = _get_repo()
-    if not repo.is_dirty(untracked_files=True):
-        print("No changes to commit")
-        return
-
     subprocess.run(
         ["git", "config", "user.name", "github-actions[bot]"], check=True, cwd=REPO_ROOT
     )
@@ -1060,9 +1055,19 @@ def ci_pr(
         cwd=REPO_ROOT,
     )
 
+    # Stage docs/ and check if anything was actually added
+    subprocess.run(["git", "add", "docs/"], check=True, cwd=REPO_ROOT)
+    result = subprocess.run(
+        ["git", "diff", "--cached", "--quiet"],
+        cwd=REPO_ROOT,
+    )
+    if result.returncode == 0:
+        # Nothing staged - exit cleanly
+        print("No changes to commit")
+        return
+
     branch = f"translate-{secrets.token_hex(4)}"
     subprocess.run(["git", "checkout", "-b", branch], check=True, cwd=REPO_ROOT)
-    subprocess.run(["git", "add", "docs/"], check=True, cwd=REPO_ROOT)
     subprocess.run(
         ["git", "commit", "-m", "Update translations"], check=True, cwd=REPO_ROOT
     )

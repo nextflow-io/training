@@ -72,11 +72,16 @@ jobs:
         if: ${{ !inputs.dry_run }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: _scripts
         run: uv run -q translate.py sync ${{ matrix.language }}
 
       - name: Dry run ${{ matrix.language }}
         if: ${{ inputs.dry_run }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: _scripts
         run: uv run -q translate.py sync ${{ matrix.language }} --dry-run
 
