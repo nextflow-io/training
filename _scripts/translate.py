@@ -352,6 +352,23 @@ def get_translation_baseline(
     )
 
 
+def prompt_changed_since(lang: str, baseline: str) -> bool:
+    """Check if any prompt files affecting this language changed since baseline.
+
+    Returns True if either:
+    - The general prompt (_scripts/general-llm-prompt.md) changed
+    - The language-specific prompt (docs/{lang}/llm-prompt.md) changed
+    """
+    general_prompt = SCRIPTS_DIR / "general-llm-prompt.md"
+    lang_prompt = DOCS_ROOT / lang / "llm-prompt.md"
+
+    if file_changed_since(general_prompt, baseline):
+        return True
+    if file_changed_since(lang_prompt, baseline):
+        return True
+    return False
+
+
 def get_outdated_files(lang: str, baseline: str | None = None) -> list[TranslationFile]:
     """Find translations needing updates.
 
@@ -363,14 +380,25 @@ def get_outdated_files(lang: str, baseline: str | None = None) -> list[Translati
 
     Returns:
         List of TranslationFile objects needing updates
+
+    Note:
+        If prompt files (general or language-specific) changed since baseline,
+        ALL existing translations for that language are considered outdated.
     """
     outdated = []
+
+    # Check if prompts changed - if so, all existing translations are outdated
+    prompts_changed = baseline and prompt_changed_since(lang, baseline)
+
     for en_path in iter_en_docs():
         lang_path = en_to_lang_path(en_path, lang)
         if not lang_path.exists():
             continue
 
-        if baseline:
+        if prompts_changed:
+            # Prompt changed: all existing translations need re-translation
+            outdated.append(TranslationFile(en_path, lang_path, lang))
+        elif baseline:
             # Check if English file changed since baseline
             if file_changed_since(en_path, baseline):
                 outdated.append(TranslationFile(en_path, lang_path, lang))
@@ -849,6 +877,13 @@ def sync(
     outdated = get_outdated_files(lang, baseline=baseline)
     missing = get_missing_files(lang)
 
+    # Check if prompt changed (for informational output)
+    prompts_changed = baseline and prompt_changed_since(lang, baseline)
+    if prompts_changed:
+        console.print(
+            f"[magenta]Prompt changed:[/magenta] all {lang} translations will be updated"
+        )
+
     if include:
         outdated = [tf for tf in outdated if include in str(tf.en_path)]
         missing = [tf for tf in missing if include in str(tf.en_path)]
@@ -861,8 +896,9 @@ def sync(
                 console.print(f"  {p.relative_to(REPO_ROOT)}")
         if outdated:
             console.print(f"[yellow]Would update {len(outdated)} outdated:[/yellow]")
-            for tf in outdated:
-                console.print(f"  {tf.relative_path}")
+            if not prompts_changed:
+                for tf in outdated:
+                    console.print(f"  {tf.relative_path}")
         if missing:
             console.print(f"[blue]Would add {len(missing)} missing:[/blue]")
             for tf in missing:
@@ -947,13 +983,22 @@ def ci_detect(
         outdated = get_outdated_files(lang, baseline=baseline)
         orphaned = get_orphaned_files(lang)
 
+        # Check if prompt changed (for informational output)
+        prompts_changed = baseline and prompt_changed_since(lang, baseline)
+
         if missing or outdated or orphaned:
             need_sync.append(lang)
             console.print(f"[bold cyan]{lang}[/bold cyan]:")
+            if prompts_changed:
+                console.print(
+                    f"  [magenta]Prompt changed:[/magenta] all translations will be updated"
+                )
             if outdated:
                 console.print(f"  [yellow]Outdated:[/yellow] {len(outdated)}")
-                for f in outdated:
-                    console.print(f"    {f.relative_path}")
+                if not prompts_changed:
+                    # Only list individual files if not all files are outdated due to prompt change
+                    for f in outdated:
+                        console.print(f"    {f.relative_path}")
             if missing:
                 console.print(f"  [green]Missing:[/green] {len(missing)}")
                 for f in missing:
