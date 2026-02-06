@@ -494,7 +494,7 @@ The `-output-dir` option (shorthand: `-o`) overrides the default output director
 This is the recommended way to control the root path where outputs are published.
 
 ```bash
-nextflow run hello-config.nf -output-dir new_results/
+nextflow run hello-config.nf -output-dir custom-outdir-cli/
 ```
 
 ??? success "Command output"
@@ -511,12 +511,12 @@ nextflow run hello-config.nf -output-dir new_results/
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This publishes outputs to `new_results/` instead of `results/`:
+This publishes outputs to `custom-outdir-cli/` instead of `results/`:
 
 ??? abstract "Directory contents"
 
     ```console
-    new_results/
+    custom-outdir-cli/
     ├── hello_config
     │   ├── cowpy-COLLECTED-batch-output.txt
     │   ├── batch-report.txt
@@ -597,15 +597,15 @@ Make the following code changes in the workflow file:
 Run the pipeline again:
 
 ```bash
-nextflow run hello-config.nf -output-dir even_newer_results/
+nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 ```
 
-Now the outputs are published directly under `even_newer_results/`, without the `hello_config` subdirectory:
+Now the outputs are published directly under `custom-outdir-cli-2/`, without the `hello_config` subdirectory:
 
 ??? abstract "Directory contents"
 
     ```console
-    even_newer_results/
+    custom-outdir-cli-2/
     ├── cowpy-COLLECTED-batch-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -646,7 +646,7 @@ Add the following code to the `nextflow.config` file:
     /*
     * Output settings
     */
-    outputDir = "config_results/${params.batch}"
+    outputDir = "custom-outdir-config/${params.batch}"
     ```
 
 === "Before"
@@ -662,14 +662,14 @@ Add the following code to the `nextflow.config` file:
     }
     ```
 
-This sets the output directory to `config_results/` plus the value of the `batch` parameter as a subdirectory.
+This sets the output directory to `custom-outdir-config/` plus the value of the `batch` parameter as a subdirectory.
 Now you can change the output location by setting the `--batch` parameter:
 
 ```bash
 nextflow run hello-config.nf --batch my_run
 ```
 
-This publishes outputs to `config_results/my_run/`.
+This publishes outputs to `custom-outdir-config/my_run/`.
 
 !!! note
 
@@ -753,7 +753,7 @@ First, update the config file to remove `${params.batch}` from `outputDir` (sinc
     /*
     * Output settings
     */
-    outputDir = "config_results/"
+    outputDir = "custom-outdir-config/"
     ```
 
 === "Before"
@@ -762,7 +762,7 @@ First, update the config file to remove `${params.batch}` from `outputDir` (sinc
     /*
     * Output settings
     */
-    outputDir = "config_results/${params.batch}"
+    outputDir = "custom-outdir-config/${params.batch}"
     ```
 
 Then, make the following changes in the workflow file:
@@ -823,10 +823,10 @@ Then, make the following changes in the workflow file:
 
 #### 2.2.3. Run the pipeline
 
-Let's see how that works in practice, setting both `-output-dir` (or `-o` for short) to `cleverconfig` and the batch name to `perfection` from the command line:
+Let's see how that works in practice, setting both `-output-dir` (or `-o` for short) to `custom-outdir-config-2` and the batch name to `rep2` from the command line:
 
 ```bash
-nextflow run hello-config.nf -output-dir cleverconfig --batch perfection
+nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ```
 
 ??? success "Command output"
@@ -843,19 +843,19 @@ nextflow run hello-config.nf -output-dir cleverconfig --batch perfection
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-This publishes outputs to `cleverconfig/perfection/`, with the specified base path _and_ the batch name subdirectory _and_ results grouped by process:
+This publishes outputs to `cleverconfig/rep2/`, with the specified base path _and_ the batch name subdirectory _and_ results grouped by process:
 
 ??? abstract "Directory contents"
 
     ```console
-    cleverconfig/perfection/
+    cleverconfig/rep2/
     ├── collectGreetings
-    │   └── perfection-report.txt
+    │   └── rep2-report.txt
     ├── cowpy
-    │   └── cowpy-COLLECTED-perfection-output.txt
+    │   └── cowpy-COLLECTED-rep2-output.txt
     └── intermediates
         ├── collectGreetings
-        │   └── COLLECTED-perfection-output.txt
+        │   └── COLLECTED-rep2-output.txt
         ├── convertToUpper
         │   ├── UPPER-Bonjour-output.txt
         │   ├── UPPER-Hello-output.txt
