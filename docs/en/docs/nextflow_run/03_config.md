@@ -494,13 +494,13 @@ nextflow run 3-main.nf --batch outdir
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
     executor >  local (8)
-    [3d/a8f4c2] sayHello (2)       | 3 of 3 ✔
-    [7e/1b9d5f] convertToUpper (3) | 3 of 3 ✔
-    [c4/7e2a91] collectGreetings   | 1 of 1 ✔
-    [d1/56bc43] cowpy              | 1 of 1 ✔
+    [9c/6a03ea] sayHello (2)       [100%] 3 of 3 ✔
+    [11/9e58a6] convertToUpper (3) [100%] 3 of 3 ✔
+    [c8/1977e5] collectGreetings   [100%] 1 of 1 ✔
+    [38/f01eda] cowpy              [100%] 1 of 1 ✔
     ```
 
 This still produces the same output as previously, except this time we find our outputs under `results_config/outdir/`.
@@ -508,7 +508,7 @@ This still produces the same output as previously, except this time we find our 
 ??? abstract "Directory contents"
 
     ```console
-    results_config/outdir/
+    results_config/outdir
     ├── cowpy-COLLECTED-outdir-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -651,7 +651,7 @@ Add the following code to the `nextflow.config` file:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     workflow.output.mode = 'copy'
     ```
 
@@ -661,7 +661,7 @@ Add the following code to the `nextflow.config` file:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 Just like the `outputDir` option, giving `workflow.output.mode` a value in the configuration file would be sufficient to override what is set in the workflow file, but let's remove the unnecessary code anyway.
@@ -743,13 +743,13 @@ nextflow run 3-main.nf --batch outmode
     [9e/71fb52] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/outmode/`.
+This still produces the same output as previously, except this time we find our outputs under `results_config/outmode/`.
 They are still all proper copies, not symlinks.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/outmode/
+    results_config/outmode/
     ├── collectGreetings
     │   ├── COLLECTED-outmode-output.txt
     │   └── outmode-report.txt
@@ -877,7 +877,7 @@ nextflow run 3-main.nf --batch conda
     [c5/af5f88] cowpy              | 1 of 1 ✔
     ```
 
-This should work without issue and produce the same outputs as previously under `results/conda`.
+This should work without issue and produce the same outputs as previously under `results_config/conda`.
 
 Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
@@ -1312,11 +1312,11 @@ nextflow run 3-main.nf -profile my_laptop,test
     [fd/e84fa9] cowpy              | 1 of 1 ✔
     ```
 
-This will use Docker where possible and produce outputs under `results/test`, and this time the character is the comedic duo `dragonandcow`.
+This will use Docker where possible and produce outputs under `results_config/test`, and this time the character is the comedic duo `dragonandcow`.
 
 ??? abstract "File contents"
 
-    ```console title="results/test/"
+    ```console title="results_config/test/"
      _________
     / HOLà    \
     | HELLO   |
@@ -1373,6 +1373,12 @@ nextflow config
 ??? success "Command output"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'batch'
+      character = 'turkey'
+    }
+
     docker {
       enabled = false
     }
@@ -1389,10 +1395,12 @@ nextflow config
       }
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+    outputDir = 'results_config/batch'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1409,6 +1417,12 @@ nextflow config -profile my_laptop,test
 ??? success "Command output"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'test'
+      character = 'dragonandcow'
+    }
+
     docker {
       enabled = true
     }
@@ -1426,10 +1440,12 @@ nextflow config -profile my_laptop,test
       executor = 'local'
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+    outputDir = 'results_config/test'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1467,17 +1483,55 @@ Try running the official Nextflow "hello" demo pipeline:
 nextflow run nextflow-io/hello
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Pulling nextflow-io/hello ...
+     downloaded from https://github.com/nextflow-io/hello.git
+    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] DSL2 - revision: 2ce0b0e294 [master]
+
+    executor >  local (4)
+    [ba/08236d] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Hello world!
+
+    Bonjour world!
+
+    Hola world!
+    ```
+
 The first time you run a remote pipeline, Nextflow downloads it and caches it locally.
 Subsequent runs use the cached version unless you explicitly request an update.
 
 ### 7.2. Specify a version for reproducibility
 
 By default, Nextflow runs the latest version from the default branch.
-You can specify a particular version, branch, or commit using the `-r` flag:
+You can specify a particular version (tag), branch, or commit using the `-r` flag:
 
 ```bash
-nextflow run nextflow-io/hello -r v1.1
+nextflow run nextflow-io/hello -r v1.3
 ```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
+
+    executor >  local (4)
+    [61/e11f77] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Bonjour world!
+
+    Hello world!
+
+    Hola world!
+    ```
 
 Specifying exact versions is essential for reproducibility.
 
@@ -1544,8 +1598,8 @@ Learn more: [2.1. Customize the outputDir directory name](#21-customize-the-outp
 <quiz>
 How do you reference a process name dynamically in output path configuration?
 - [ ] `#!groovy ${processName}`
-- [ ] `process.name`
-- [x] `#!groovy { meta.id }`
+- [ ] `#!groovy path "<process>.name"`
+- [x] `#!groovy path { <process>.name }`
 - [ ] `@processName`
 
 Learn more: [2.2. Organize outputs by process](#22-organize-outputs-by-process)
