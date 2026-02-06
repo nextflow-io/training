@@ -1017,10 +1017,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-is-aks-blogundan-once-bir-import-tanm-ekleyin" class="md-nav__link">
+  <a href="#23-is-aks-blogundan-once-bir-include-tanm-ekleyin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. İş akışı bloğundan önce bir import tanımı ekleyin
+        2.3. İş akışı bloğundan önce bir include tanımı ekleyin
       
     </span>
   </a>
@@ -1098,10 +1098,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-params-blogundan-once-bir-import-tanm-ekleyin" class="md-nav__link">
+  <a href="#33-params-blogundan-once-bir-include-tanm-ekleyin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. params bloğundan önce bir import tanımı ekleyin
+        3.3. params bloğundan önce bir include tanımı ekleyin
       
     </span>
   </a>
@@ -1157,10 +1157,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-params-blogundan-once-bir-import-tanm-ekleyin" class="md-nav__link">
+  <a href="#43-params-blogundan-once-bir-include-tanm-ekleyin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. params bloğundan önce bir import tanımı ekleyin
+        4.3. params bloğundan önce bir include tanımı ekleyin
       
     </span>
   </a>
@@ -3546,10 +3546,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-is-aks-blogundan-once-bir-import-tanm-ekleyin" class="md-nav__link">
+  <a href="#23-is-aks-blogundan-once-bir-include-tanm-ekleyin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. İş akışı bloğundan önce bir import tanımı ekleyin
+        2.3. İş akışı bloğundan önce bir include tanımı ekleyin
       
     </span>
   </a>
@@ -3627,10 +3627,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-params-blogundan-once-bir-import-tanm-ekleyin" class="md-nav__link">
+  <a href="#33-params-blogundan-once-bir-include-tanm-ekleyin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. params bloğundan önce bir import tanımı ekleyin
+        3.3. params bloğundan önce bir include tanımı ekleyin
       
     </span>
   </a>
@@ -3686,10 +3686,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-params-blogundan-once-bir-import-tanm-ekleyin" class="md-nav__link">
+  <a href="#43-params-blogundan-once-bir-include-tanm-ekleyin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. params bloğundan önce bir import tanımı ekleyin
+        4.3. params bloğundan önce bir include tanımı ekleyin
       
     </span>
   </a>
@@ -4014,9 +4014,9 @@
 -->
 
 <p>Bu bölüm, pipeline'ınızın geliştirilmesini ve bakımını daha verimli ve sürdürülebilir hale getirmek için iş akışı kodunuzu nasıl organize edeceğinizi kapsar.
-Özellikle, <strong>modülleri</strong> nasıl kullanacağınızı göstereceğiz.</p>
-<p>Nextflow'da bir <strong>modül</strong>, bağımsız bir kod dosyasında kendi başına kapsüllenmiş tek bir süreç tanımıdır.
-Bir iş akışında bir modül kullanmak için, iş akışı kod dosyanıza tek satırlık bir import ifadesi eklemeniz yeterlidir; ardından süreci normalde yaptığınız gibi iş akışına entegre edebilirsiniz.
+Özellikle, <a href="https://nextflow.io/docs/latest/module.html"><strong>modülleri</strong></a> nasıl kullanacağınızı göstereceğiz.</p>
+<p>Nextflow'da bir <strong>modül</strong>, genellikle tek bir süreç tanımını kapsülleyen bağımsız bir kod dosyasıdır.
+Bir iş akışında bir modül kullanmak için, iş akışı kod dosyanıza tek satırlık bir <code>include</code> ifadesi eklemeniz yeterlidir; ardından süreci normalde yaptığınız gibi iş akışına entegre edebilirsiniz.
 Bu, kodun birden fazla kopyasını üretmeden süreç tanımlarını birden fazla iş akışında yeniden kullanmayı mümkün kılar.</p>
 <p>İş akışımızı geliştirmeye başladığımızda, her şeyi tek bir kod dosyasına yazdık.
 Şimdi süreçleri bireysel modüllere taşıyacağız.</p>
@@ -4109,16 +4109,11 @@ Bu betik, bu eğitim kursunun 3. Bölümünde üretilen betiğe eşdeğerdir; an
 Bu dizine istediğiniz adı verebilirsiniz, ancak konvansiyon <code>modules/</code> olarak adlandırmaktır.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdir<span class="w"> </span>modules
 </code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">İpucu</p>
-<p>Burada size <strong>yerel modülleri</strong> nasıl kullanacağınızı gösteriyoruz, yani uzak modüllerin aksine iş akışı kodunun geri kalanıyla aynı depoda yerel olarak depolanan modüller; uzak modüller diğer (uzak) depolarda saklanır.
-<strong>Uzak modüller</strong> hakkında daha fazla bilgi için <a href="https://www.nextflow.io/docs/latest/module.html">dokümantasyona</a> bakın.</p>
-</div>
 <hr />
 <h2 id="2-sayhello-icin-bir-modul-olusturun">2. <code>sayHello()</code> için bir modül oluşturun<a class="headerlink" href="#2-sayhello-icin-bir-modul-olusturun" title="Permanent link">&para;</a></h2>
 <p>En basit haliyle, mevcut bir süreci modüle dönüştürmek bir kopyala-yapıştır işleminden biraz fazlasıdır.
 Modül için bir dosya taslağı oluşturacağız, ilgili kodu kopyalayacağız ve ardından ana iş akışı dosyasından sileceğiz.</p>
-<p>Sonra tek yapmamız gereken, Nextflow'un çalışma zamanında ilgili kodu çekmesini bilmesi için bir import ifadesi eklemek.</p>
+<p>Sonra tek yapmamız gereken, Nextflow'un çalışma zamanında ilgili kodu çekmesini bilmesi için bir <code>include</code> ifadesi eklemek.</p>
 <h3 id="21-yeni-modul-icin-bir-dosya-taslag-olusturun">2.1. Yeni modül için bir dosya taslağı oluşturun<a class="headerlink" href="#21-yeni-modul-icin-bir-dosya-taslag-olusturun" title="Permanent link">&para;</a></h3>
 <p><code>sayHello.nf</code> adlı modül için boş bir dosya oluşturalım.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>touch<span class="w"> </span>modules/sayHello.nf
@@ -4163,9 +4158,9 @@ Modül için bir dosya taslağı oluşturacağız, ilgili kodu kopyalayacağız 
 <a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin, ancak shebang'ı yerinde bıraktığınızdan emin olun.</p>
-<h3 id="23-is-aks-blogundan-once-bir-import-tanm-ekleyin">2.3. İş akışı bloğundan önce bir import tanımı ekleyin<a class="headerlink" href="#23-is-aks-blogundan-once-bir-import-tanm-ekleyin" title="Permanent link">&para;</a></h3>
-<p>Yerel bir modülü içe aktarma sözdizimi oldukça basittir:</p>
-<div class="highlight"><span class="filename">Sözdizimi: Import tanımı</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">MODÜL_ADI</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;modül_yolu&gt;&#39;</span>
+<h3 id="23-is-aks-blogundan-once-bir-include-tanm-ekleyin">2.3. İş akışı bloğundan önce bir include tanımı ekleyin<a class="headerlink" href="#23-is-aks-blogundan-once-bir-include-tanm-ekleyin" title="Permanent link">&para;</a></h3>
+<p>Bir modülden süreç dahil etmenin sözdizimi oldukça basittir:</p>
+<div class="highlight"><span class="filename">Sözdizimi: include tanımı</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">SÜREÇ_ADI</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;modül_yolu&gt;&#39;</span>
 </code></pre></div>
 <p>Bunu <code>params</code> bloğunun üstüne ekleyelim ve uygun şekilde dolduralım.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Sonra</label><label for="__tabbed_1_2">Önce</label></div>
@@ -4210,7 +4205,7 @@ Modül için bir dosya taslağı oluşturacağız, ilgili kodu kopyalayacağız 
 </div>
 </div>
 </div>
-<p>Modül adını, <code>sayHello</code>, ve modül kodunu içeren dosyanın yolunu, <code>./modules/sayHello.nf</code>, doldurduğumuzu görüyorsunuz.</p>
+<p>Süreç adını, <code>sayHello</code>, ve modül kodunu içeren dosyanın yolunu, <code>./modules/sayHello.nf</code>, doldurduğumuzu görüyorsunuz.</p>
 <h3 id="24-is-aksn-calstrn">2.4. İş akışını çalıştırın<a class="headerlink" href="#24-is-aksn-calstrn" title="Permanent link">&para;</a></h3>
 <p>İş akışını temelde daha önce olduğu gibi aynı kod ve girdilerle çalıştırıyoruz, bu yüzden <code>-resume</code> bayrağıyla çalıştıralım ve ne olduğunu görelim.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
@@ -4280,8 +4275,8 @@ Ama şimdilik sadece iki tane daha yapalım.</p>
 <a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin, ancak shebang'ı yerinde bıraktığınızdan emin olun.</p>
-<h3 id="33-params-blogundan-once-bir-import-tanm-ekleyin">3.3. <code>params</code> bloğundan önce bir import tanımı ekleyin<a class="headerlink" href="#33-params-blogundan-once-bir-import-tanm-ekleyin" title="Permanent link">&para;</a></h3>
-<p>Import tanımını <code>params</code> bloğunun üstüne ekleyin ve uygun şekilde doldurun.</p>
+<h3 id="33-params-blogundan-once-bir-include-tanm-ekleyin">3.3. <code>params</code> bloğundan önce bir include tanımı ekleyin<a class="headerlink" href="#33-params-blogundan-once-bir-include-tanm-ekleyin" title="Permanent link">&para;</a></h3>
+<p>Include tanımını <code>params</code> bloğunun üstüne ekleyin ve uygun şekilde doldurun.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Sonra</label><label for="__tabbed_2_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -4403,8 +4398,8 @@ Ama şimdilik sadece iki tane daha yapalım.</p>
 <a id="__codelineno-19-22" name="__codelineno-19-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin, ancak shebang'ı yerinde bıraktığınızdan emin olun.</p>
-<h3 id="43-params-blogundan-once-bir-import-tanm-ekleyin">4.3. <code>params</code> bloğundan önce bir import tanımı ekleyin<a class="headerlink" href="#43-params-blogundan-once-bir-import-tanm-ekleyin" title="Permanent link">&para;</a></h3>
-<p>Import tanımını <code>params</code> bloğunun üstüne ekleyin ve uygun şekilde doldurun.</p>
+<h3 id="43-params-blogundan-once-bir-include-tanm-ekleyin">4.3. <code>params</code> bloğundan önce bir include tanımı ekleyin<a class="headerlink" href="#43-params-blogundan-once-bir-include-tanm-ekleyin" title="Permanent link">&para;</a></h3>
+<p>Include tanımını <code>params</code> bloğunun üstüne ekleyin ve uygun şekilde doldurun.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Sonra</label><label for="__tabbed_3_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -4479,7 +4474,7 @@ Ama şimdilik sadece iki tane daha yapalım.</p>
 <h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
 <p>Bir iş akışında birden fazla süreci nasıl modülerleştireceğinizi biliyorsunuz.</p>
 <p>Tebrikler, tüm bu işi yaptınız ve pipeline'ın çalışma şeklinde kesinlikle hiçbir şey değişmedi!</p>
-<p>Şakayı bir kenara bırakırsak, artık kodunuz daha modüler ve bu süreçlerden birini çağıran başka bir pipeline yazmaya karar verirseniz, ilgili modülü kullanmak için yalnızca bir kısa import ifadesi yazmanız gerekiyor.
+<p>Şakayı bir kenara bırakırsak, artık kodunuz daha modüler ve bu süreçlerden birini çağıran başka bir pipeline yazmaya karar verirseniz, ilgili modülü kullanmak için yalnızca bir kısa <code>include</code> ifadesi yazmanız gerekiyor.
 Bu, kodu kopyala-yapıştır yapmaktan daha iyi çünkü daha sonra modülü geliştirmeye karar verirseniz, tüm pipeline'larınız bu iyileştirmeleri miras alacak.</p>
 <h3 id="srada-ne-var_1">Sırada ne var?<a class="headerlink" href="#srada-ne-var_1" title="Permanent link">&para;</a></h3>
 <p>İsterseniz kısa bir mola verin.</p>
@@ -4490,7 +4485,7 @@ Bu, kodu kopyala-yapıştır yapmaktan daha iyi çünkü daha sonra modülü gel
 <quiz>
 Nextflow'da modül nedir?
 - [ ] Bir yapılandırma dosyası
-- [x] Tek bir süreç tanımı içeren bağımsız bir dosya
+- [x] Süreç tanımları içerebilen bağımsız bir dosya
 - [ ] Bir iş akışı tanımı
 - [ ] Bir kanal operatörü
 
@@ -4504,7 +4499,7 @@ Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-sayhello-icin
         <p>Nextflow'da modül nedir?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Bir yapılandırma dosyası</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">Tek bir süreç tanımı içeren bağımsız bir dosya</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Bir iş akışı tanımı</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Bir kanal operatörü</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Bir yapılandırma dosyası</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">Süreç tanımları içerebilen bağımsız bir dosya</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Bir iş akışı tanımı</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Bir kanal operatörü</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4513,30 +4508,7 @@ Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-sayhello-icin
 
 <!-- mkdocs-quiz-source
 <quiz>
-Modül dosyaları için önerilen adlandırma kuralı nedir?
-- [ ] `module_processName.nf`
-- [ ] `processName_module.nf`
-- [x] `processName.nf`
-- [ ] `mod_processName.nf`
-</quiz>
--->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
-    <a href="#quiz-1" class="quiz-header-link">#</a>
-
-    <div class="quiz-question">
-        <p>Modül dosyaları için önerilen adlandırma kuralı nedir?</p>
-    </div>
-    <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0"><code>module_processName.nf</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" ><label for="quiz-1-1"><code>processName_module.nf</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" correct><label for="quiz-1-2"><code>processName.nf</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3"><code>mod_processName.nf</code></label></div></fieldset>
-        <div class="quiz-feedback hidden"></div>
-
-    </form>
-    <section class="content hidden"></section>
-</div>
-
-<!-- mkdocs-quiz-source
-<quiz>
-Modül dosyaları nerede saklanmalıdır?
+Modül dosyaları için genellikle kullanılan konvansiyon nedir?
 - [ ] İş akışıyla aynı dizinde
 - [ ] Bir `bin/` dizininde
 - [x] Bir `modules/` dizininde
@@ -4545,14 +4517,14 @@ Modül dosyaları nerede saklanmalıdır?
 Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-modulleri-depolamak-icin-bir-dizin-olusturun)
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
-    <a href="#quiz-2" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
+    <a href="#quiz-1" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Modül dosyaları nerede saklanmalıdır?</p>
+        <p>Modül dosyaları için genellikle kullanılan konvansiyon nedir?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0">İş akışıyla aynı dizinde</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1">Bir <code>bin/</code> dizininde</label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" correct><label for="quiz-2-2">Bir <code>modules/</code> dizininde</label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3">Bir <code>lib/</code> dizininde</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0">İş akışıyla aynı dizinde</label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" ><label for="quiz-1-1">Bir <code>bin/</code> dizininde</label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" correct><label for="quiz-1-2">Bir <code>modules/</code> dizininde</label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3">Bir <code>lib/</code> dizininde</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4561,28 +4533,28 @@ Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-modull
 
 <!-- mkdocs-quiz-source
 <quiz>
-Bir modülü içe aktarmak için doğru sözdizimi nedir?
+Bir modül kullanmak için doğru sözdizimi nedir?
 
 - [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Daha fazla bilgi: [2.3. Bir import tanımı ekleyin](#23-is-akisi-blogundan-once-bir-import-tanimi-ekleyin)
+Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-is-akisi-blogundan-once-bir-include-tanimi-ekleyin)
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
-    <a href="#quiz-3" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
+    <a href="#quiz-2" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Bir modülü içe aktarmak için doğru sözdizimi nedir?</p>
+        <p>Bir modül kullanmak için doğru sözdizimi nedir?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0"><code class="highlight"><span class="kn">import</span><span class="w"> </span><span class="err">{ </span><span class="nn">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1"><code class="highlight"><span class="n">require</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" correct><label for="quiz-3-2"><code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3"><code class="highlight"><span class="n">load</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0"><code class="highlight"><span class="kn">import</span><span class="w"> </span><span class="err">{ </span><span class="nn">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1"><code class="highlight"><span class="n">require</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" correct><label for="quiz-2-2"><code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3"><code class="highlight"><span class="n">load</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-is-akisi-blogundan-once-bir-import-tanimi-ekleyin">2.3. Bir import tanımı ekleyin</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-is-akisi-blogundan-once-bir-include-tanimi-ekleyin">2.3. Bir include tanımı ekleyin</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -4594,14 +4566,14 @@ Modüller kullanıldığında `-resume` işlevselliğine ne olur?
 - [ ] Yalnızca yerel modüller için çalışır
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
-    <a href="#quiz-4" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
+    <a href="#quiz-3" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
         <p>Modüller kullanıldığında <code>-resume</code> işlevselliğine ne olur?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0">Artık çalışmaz</label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1">Ek yapılandırma gerektirir</label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">Daha önce olduğu gibi çalışır</label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">Yalnızca yerel modüller için çalışır</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0">Artık çalışmaz</label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1">Ek yapılandırma gerektirir</label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" correct><label for="quiz-3-2">Daha önce olduğu gibi çalışır</label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3">Yalnızca yerel modüller için çalışır</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4617,14 +4589,14 @@ Modül kullanmanın faydaları nelerdir? (Uygulanabilen tümünü seçin)
 - [ ] Daha hızlı yürütme hızı
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
-    <a href="#quiz-5" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
+    <a href="#quiz-4" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
         <p>Modül kullanmanın faydaları nelerdir? (Uygulanabilen tümünü seçin)</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-5-0" correct><label for="quiz-5-0">İş akışları arasında kod yeniden kullanılabilirliği</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-5-1" correct><label for="quiz-5-1">Daha kolay bakım</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2">İş akışı kodunun daha iyi organizasyonu</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3">Daha hızlı yürütme hızı</label></div></fieldset>
+        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-4-0" correct><label for="quiz-4-0">İş akışları arasında kod yeniden kullanılabilirliği</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-4-1" correct><label for="quiz-4-1">Daha kolay bakım</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">İş akışı kodunun daha iyi organizasyonu</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">Daha hızlı yürütme hızı</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Submit</button>
     </form>

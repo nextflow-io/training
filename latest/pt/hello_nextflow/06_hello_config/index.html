@@ -1676,13 +1676,94 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#622-execute-o-fluxo-de-trabalho-localmente-com-o-perfil-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.2. Execute o fluxo de trabalho localmente com o perfil de teste
+      
+    </span>
+  </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-use-nextflow-config-para-ver-a-configuracao-resolvida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Use nextflow config para ver a configuração resolvida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3. Use nextflow config para ver a configuração resolvida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631-resolva-a-configuracao-padrao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.1. Resolva a configuração padrão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632-resolva-a-configuracao-com-configuracoes-especificas-ativadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.2. Resolva a configuração com configurações específicas ativadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que vem a seguir?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quiz
+      
+    </span>
+  </a>
   
 </li> 
   </ul>
@@ -4565,13 +4646,94 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#622-execute-o-fluxo-de-trabalho-localmente-com-o-perfil-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.2. Execute o fluxo de trabalho localmente com o perfil de teste
+      
+    </span>
+  </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-use-nextflow-config-para-ver-a-configuracao-resolvida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3. Use nextflow config para ver a configuração resolvida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.3. Use nextflow config para ver a configuração resolvida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#631-resolva-a-configuracao-padrao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.1. Resolva a configuração padrão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#632-resolva-a-configuracao-com-configuracoes-especificas-ativadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3.2. Resolva a configuração com configurações específicas ativadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusão
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        O que vem a seguir?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quiz
+      
+    </span>
+  </a>
   
 </li> 
   </ul>
@@ -4846,8 +5008,8 @@
 -->
 
 <p>Esta seção explorará como configurar e gerenciar a configuração do seu pipeline Nextflow para que você possa personalizar seu comportamento, adaptá-lo a diferentes ambientes e otimizar o uso de recursos <em>sem alterar uma única linha do código do fluxo de trabalho</em>.</p>
-<p>Existem várias maneiras de fazer isso, que podem ser usadas em combinação e são interpretadas de acordo com a ordem de precedência descrita <a href="https://www.nextflow.io/docs/latest/config.html">aqui</a>.</p>
-<p>Nesta parte do curso, vamos mostrar o mecanismo de arquivo de configuração mais simples e comum, o arquivo <code>nextflow.config</code>, que você já encontrou na Parte 5: Hello Containers.</p>
+<p>Existem várias maneiras de fazer isso, que podem ser usadas em combinação e são interpretadas de acordo com a <a href="https://nextflow.io/docs/latest/config.html">ordem de precedência</a> descrita na documentação de configuração.</p>
+<p>Nesta parte do curso, vamos mostrar o mecanismo de arquivo de configuração mais simples e comum, o arquivo <a href="https://nextflow.io/docs/latest/config.html"><code>nextflow.config</code></a>, que você já encontrou na Parte 5: Hello Containers.</p>
 <p>Vamos abordar componentes essenciais da configuração do Nextflow, como diretivas de processos, executores, perfis e arquivos de parâmetros.
 Ao aprender a utilizar essas opções de configuração de forma eficaz, você pode melhorar a flexibilidade, escalabilidade e desempenho dos seus pipelines.</p>
 <details class="info">
@@ -5189,18 +5351,14 @@ Certifique-se de adaptar o caminho adequadamente!</p>
 <h3 id="13-use-um-arquivo-de-parametros">1.3. Use um arquivo de parâmetros<a class="headerlink" href="#13-use-um-arquivo-de-parametros" title="Permanent link">&para;</a></h3>
 <p>A abordagem de subdiretório funciona muito bem para experimentar, mas envolve um pouco de configuração e requer que você adapte os caminhos adequadamente.
 Existe uma abordagem mais simples para quando você quer executar seu pipeline com um conjunto específico de valores, ou permitir que outra pessoa faça isso com o mínimo de esforço.</p>
-<p>O Nextflow nos permite especificar parâmetros via um arquivo de parâmetros no formato YAML ou JSON, o que torna muito conveniente gerenciar e distribuir conjuntos alternativos de valores padrão, por exemplo, assim como valores de parâmetros específicos da execução.</p>
+<p>O Nextflow nos permite especificar parâmetros via um <a href="https://nextflow.io/docs/latest/config.html#params-file">arquivo de parâmetros</a> no formato YAML ou JSON, o que torna muito conveniente gerenciar e distribuir conjuntos alternativos de valores padrão, por exemplo, assim como valores de parâmetros específicos da execução.</p>
 <h4 id="131-examine-o-arquivo-de-parametros-de-exemplo">1.3.1. Examine o arquivo de parâmetros de exemplo<a class="headerlink" href="#131-examine-o-arquivo-de-parametros-de-exemplo" title="Permanent link">&para;</a></h4>
 <p>Para demonstrar isso, fornecemos um arquivo de parâmetros de exemplo no diretório atual, chamado <code>test-params.yaml</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test-params.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
-<span class="normal"><a href="#__codelineno-20-3">3</a></span>
-<span class="normal"><a href="#__codelineno-20-4">4</a></span>
-<span class="normal"><a href="#__codelineno-20-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="p p-Indicator">{</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">  input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;greetings.csv&quot;</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">  batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="nt">  character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="p p-Indicator">}</span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/greetings.csv&quot;</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>Este arquivo de parâmetros contém um par chave-valor para cada uma das entradas que queremos especificar.
 Note o uso de dois pontos (<code>:</code>) em vez de sinais de igual (<code>=</code>) se você comparar a sintaxe com o arquivo de configuração.
@@ -5774,7 +5932,7 @@ Então na Parte 5, introduzimos contêineres Docker e o arquivo <code>nextflow.c
 <h3 id="31-desabilite-o-docker-e-habilite-o-conda-no-arquivo-de-configuracao">3.1. Desabilite o Docker e habilite o Conda no arquivo de configuração<a class="headerlink" href="#31-desabilite-o-docker-e-habilite-o-conda-no-arquivo-de-configuracao" title="Permanent link">&para;</a></h3>
 <p>Vamos fingir que estamos trabalhando em um cluster HPC e o administrador não permite o uso do Docker por razões de segurança.
 Felizmente para nós, o Nextflow suporta múltiplas outras tecnologias de contêineres, incluindo Singularity (que é mais amplamente usado em HPC), e gerenciadores de pacotes de software como Conda.</p>
-<p>Podemos mudar nosso arquivo de configuração para usar Conda em vez de Docker.
+<p>Podemos mudar nosso arquivo de configuração para usar <a href="https://nextflow.io/docs/latest/conda.html">Conda</a> em vez de Docker.
 Para fazer isso, vamos mudar o valor de <code>docker.enabled</code> para <code>false</code>, e adicionar uma diretiva habilitando o uso do Conda:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Depois</label><label for="__tabbed_8_2">Antes</label></div>
 <div class="tabbed-content">
@@ -5837,7 +5995,7 @@ Recomendamos usar a consulta de busca <a href="https://seqera.io/containers/">Se
 </code></pre></div>
 <details class="success">
 <summary>Saída do comando</summary>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">Saída</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>
 <a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="go">Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1</span>
 <a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
@@ -5875,7 +6033,7 @@ Isso executa cada tarefa na máquina em que o Nextflow está sendo executado.
 Quando o Nextflow começa, ele verifica as CPUs e memória disponíveis.
 Se os recursos das tarefas prontas para executar excedem os recursos disponíveis, o Nextflow manterá as últimas tarefas de volta da execução até que uma ou mais das tarefas anteriores tenham terminado, liberando os recursos necessários.</p>
 <p>O executor local é conveniente e eficiente, mas é limitado àquela única máquina. Para cargas de trabalho muito grandes, você pode descobrir que sua máquina local é um gargalo, seja porque você tem uma única tarefa que requer mais recursos do que você tem disponíveis, ou porque você tem tantas tarefas que esperar por uma única máquina para executá-las levaria muito tempo.</p>
-<p>O Nextflow suporta <a href="https://www.nextflow.io/docs/latest/executor.html">muitos backends de execução diferentes</a>, incluindo agendadores HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor e outros), bem como backends de execução em nuvem (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes e mais).</p>
+<p>O Nextflow suporta <a href="https://nextflow.io/docs/latest/executor.html">muitos executores diferentes</a>, incluindo agendadores HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor e outros), bem como backends de execução em nuvem (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes e mais).</p>
 <h3 id="41-direcionando-um-backend-diferente">4.1. Direcionando um backend diferente<a class="headerlink" href="#41-direcionando-um-backend-diferente" title="Permanent link">&para;</a></h3>
 <p>A escolha do executor é definida por uma diretiva de processo chamada <code>executor</code>.
 Por padrão, é definido como <code>local</code>, então a seguinte configuração está implícita:</p>
@@ -5883,7 +6041,7 @@ Por padrão, é definido como <code>local</code>, então a seguinte configuraç�
 <a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
 <a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>Para definir o executor para direcionar um backend diferente, você simplesmente especificaria o executor que deseja usando sintaxe similar à descrita acima para alocações de recursos (veja a <a href="https://www.nextflow.io/docs/latest/executor.html">documentação</a> para todas as opções).</p>
+<p>Para definir o executor para direcionar um backend diferente, você simplesmente especificaria o executor que deseja usando sintaxe similar à descrita acima para alocações de recursos (veja a <a href="https://nextflow.io/docs/latest/executor.html">documentação de executores</a> para todas as opções).</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;slurm&#39;</span>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="o">}</span>
@@ -5920,7 +6078,7 @@ Por padrão, é definido como <code>local</code>, então a seguinte configuraç�
 </code></pre></div>
 </details>
 <p>Felizmente, o Nextflow simplifica tudo isso.
-Ele fornece uma sintaxe padronizada para que você possa especificar as propriedades relevantes como <code>cpus</code>, <code>memory</code> e <code>queue</code> (veja a documentação para outras propriedades) apenas uma vez.
+Ele fornece uma sintaxe padronizada para que você possa especificar as propriedades relevantes como <a href="https://nextflow.io/docs/latest/reference/process.html#cpus"><code>cpus</code></a>, <a href="https://nextflow.io/docs/latest/reference/process.html#memory"><code>memory</code></a> e <a href="https://nextflow.io/docs/latest/reference/process.html#queue"><code>queue</code></a> (veja <a href="https://nextflow.io/docs/latest/reference/process.html#process-directives">diretivas de processo</a> para outras propriedades) apenas uma vez.
 Então, no tempo de execução, o Nextflow usará essas configurações para gerar os scripts específicos do backend apropriados com base na configuração do executor.</p>
 <p>Vamos cobrir essa sintaxe padronizada na próxima seção.</p>
 <h3 id="conclusao_3">Conclusão<a class="headerlink" href="#conclusao_3" title="Permanent link">&para;</a></h3>
@@ -5951,8 +6109,8 @@ O Nextflow os traduzirá nas instruções apropriadas para o executor escolhido.
 </code></pre></div>
 <p>O relatório é um arquivo html, que você pode baixar e abrir no seu navegador. Você também pode clicar com o botão direito nele no explorador de arquivos à esquerda e clicar em <code>Show preview</code> para visualizá-lo no ambiente de treinamento.</p>
 <p>Reserve alguns minutos para examinar o relatório e ver se você consegue identificar algumas oportunidades para ajustar recursos.
-Certifique-se de clicar nas abas que mostram os resultados de utilização como uma porcentagem do que foi alocado.
-Há alguma <a href="https://www.nextflow.io/docs/latest/reports.html">documentação</a> descrevendo todos os recursos disponíveis.</p>
+Certifique-se de clicar nas abas que mostram os resultados de utilização como uma porcentagem do que foi alocado.</p>
+<p>Veja <a href="https://nextflow.io/docs/latest/reports.html">Relatórios</a> para documentação sobre todos os recursos disponíveis.</p>
 <h3 id="52-defina-alocacoes-de-recursos-para-todos-os-processos">5.2. Defina alocações de recursos para todos os processos<a class="headerlink" href="#52-defina-alocacoes-de-recursos-para-todos-os-processos" title="Permanent link">&para;</a></h3>
 <p>O perfil mostra que os processos em nosso fluxo de trabalho de treinamento são muito leves, então vamos reduzir a alocação de memória padrão para 1GB por processo.</p>
 <p>Adicione o seguinte ao seu arquivo <code>nextflow.config</code>, antes da seção de parâmetros do pipeline:</p>
@@ -6026,7 +6184,7 @@ Isso ocorre porque o Nextflow garante que não solicitemos mais CPUs do que as d
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Este é apenas um pequeno aperitivo do que você pode fazer para otimizar seu uso de recursos.
-O próprio Nextflow tem uma <a href="https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources">lógica de repetição dinâmica</a> realmente interessante embutida para repetir trabalhos que falham devido a limitações de recursos.
+O próprio Nextflow tem uma <a href="https://nextflow.io/docs/latest/process.html#dynamic-task-resources">lógica de repetição dinâmica</a> realmente interessante embutida para repetir trabalhos que falham devido a limitações de recursos.
 Além disso, a Seqera Platform oferece ferramentas orientadas por IA para otimizar suas alocações de recursos automaticamente também.</p>
 </div>
 <h3 id="55-adicione-limites-de-recursos">5.5. Adicione limites de recursos<a class="headerlink" href="#55-adicione-limites-de-recursos" title="Permanent link">&para;</a></h3>
@@ -6057,7 +6215,7 @@ No entanto, se você tentasse executar o fluxo de trabalho com alocações de re
 <h2 id="6-use-perfis-para-alternar-entre-configuracoes-predefinidas">6. Use perfis para alternar entre configurações predefinidas<a class="headerlink" href="#6-use-perfis-para-alternar-entre-configuracoes-predefinidas" title="Permanent link">&para;</a></h2>
 <p>Mostramos a você várias maneiras de personalizar a configuração do seu pipeline dependendo do projeto em que você está trabalhando ou do ambiente de computação que está usando.</p>
 <p>Você pode querer alternar entre configurações alternativas dependendo de qual infraestrutura de computação está usando. Por exemplo, você pode querer desenvolver e executar testes em pequena escala localmente no seu laptop, depois executar cargas de trabalho em escala completa em HPC ou nuvem.</p>
-<p>O Nextflow permite que você configure qualquer número de perfis que descrevem diferentes configurações, que você pode então selecionar no tempo de execução usando um argumento de linha de comando, em vez de ter que modificar o arquivo de configuração em si.</p>
+<p>O Nextflow permite que você configure qualquer número de <a href="https://nextflow.io/docs/latest/config.html#config-profiles">perfis</a> que descrevem diferentes configurações, que você pode então selecionar no tempo de execução usando um argumento de linha de comando, em vez de ter que modificar o arquivo de configuração em si.</p>
 <h3 id="61-crie-perfis-para-alternar-entre-desenvolvimento-local-e-execucao-em-hpc">6.1. Crie perfis para alternar entre desenvolvimento local e execução em HPC<a class="headerlink" href="#61-crie-perfis-para-alternar-entre-desenvolvimento-local-e-execucao-em-hpc" title="Permanent link">&para;</a></h3>
 <p>Vamos configurar dois perfis alternativos; um para executar cargas em pequena escala em um computador normal, onde usaremos contêineres Docker, e outro para executar em um HPC universitário com um agendador Slurm, onde usaremos pacotes Conda.</p>
 <h4 id="611-configure-os-perfis">6.1.1. Configure os perfis<a class="headerlink" href="#611-configure-os-perfis" title="Permanent link">&para;</a></h4>
@@ -6183,7 +6341,430 @@ Você pode considerar isso uma alternativa ao uso de um arquivo de parâmetros.<
 <a id="__codelineno-65-45" name="__codelineno-65-45"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-65-46" name="__codelineno-65-46"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Assim como para perfis de configuração técnica, você pode configurar vários perfis diferentes especificando parâmetros sob qualquer</p><style type="text/css">.quiz {
+<p>Assim como para perfis de configuração técnica, você pode configurar vários perfis diferentes especificando parâmetros sob qualquer nome arbitrário que desejar.</p>
+<h4 id="622-execute-o-fluxo-de-trabalho-localmente-com-o-perfil-de-teste">6.2.2. Execute o fluxo de trabalho localmente com o perfil de teste<a class="headerlink" href="#622-execute-o-fluxo-de-trabalho-localmente-com-o-perfil-de-teste" title="Permanent link">&para;</a></h4>
+<p>Convenientemente, perfis não são mutuamente exclusivos, então podemos especificar múltiplos perfis em nossa linha de comando usando a seguinte sintaxe <code>-profile &lt;profile1&gt;,&lt;profile2&gt;</code> (para qualquer número de perfis).</p>
+<p>Se você combinar perfis que definem valores para os mesmos elementos de configuração e estão descritos no mesmo arquivo de configuração, o Nextflow resolverá o conflito usando qualquer valor que ele leu por último (<em>ou seja</em>, o que vem depois no arquivo).
+Se as configurações conflitantes são definidas em diferentes fontes de configuração, a <a href="https://nextflow.io/docs/latest/config.html">ordem de precedência</a> padrão se aplica.</p>
+<p>Vamos tentar adicionar o perfil de teste ao nosso comando anterior:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-config.nf<span class="w"> </span>-profile<span class="w"> </span>my_laptop,test
+</code></pre></div>
+<details class="success">
+<summary>Saída do comando</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
+<a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `hello-config.nf` [jovial_coulomb] DSL2 - revision: 46a6763141</span>
+<a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
+<a id="__codelineno-67-5" name="__codelineno-67-5" href="#__codelineno-67-5"></a><span class="go">executor &gt;  local (8)</span>
+<a id="__codelineno-67-6" name="__codelineno-67-6" href="#__codelineno-67-6"></a><span class="go">[9b/687cdc] sayHello (2)       | 3 of 3 ✔</span>
+<a id="__codelineno-67-7" name="__codelineno-67-7" href="#__codelineno-67-7"></a><span class="go">[ca/552187] convertToUpper (3) | 3 of 3 ✔</span>
+<a id="__codelineno-67-8" name="__codelineno-67-8" href="#__codelineno-67-8"></a><span class="go">[e8/83e306] collectGreetings   | 1 of 1 ✔</span>
+<a id="__codelineno-67-9" name="__codelineno-67-9" href="#__codelineno-67-9"></a><span class="go">[fd/e84fa9] cowpy              | 1 of 1 ✔</span>
+</code></pre></div>
+</details>
+<p>Isso usará Docker onde possível e produzirá saídas em <code>results/test</code>, e desta vez o caractere é a dupla cômica <code>dragonandcow</code>.</p>
+<details class="abstract">
+<summary>Conteúdo do arquivo</summary>
+<div class="highlight"><span class="filename">results/test/</span><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go"> _________</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a><span class="go">/ HOLà    \</span>
+<a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">| HELLO   |</span>
+<a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a><span class="go">\ BONJOUR /</span>
+<a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a><span class="go">---------</span>
+<a id="__codelineno-68-6" name="__codelineno-68-6" href="#__codelineno-68-6"></a><span class="go">            \                    ^    /^</span>
+<a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">              \                  / \  // \</span>
+<a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="go">              \   |\___/|      /   \//  .\</span>
+<a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">                \  /O  O  \__  /    //  | \ \           *----*</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">                  /     /  \/_/    //   |  \  \          \   |</span>
+<a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">                  \@___\@`    \/_   //    |   \   \         \/\ \</span>
+<a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a><span class="go">                0/0/|       \/_ //     |    \    \         \ \</span>
+<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">            0/0/0/0/|        \///      |     \     \       | |</span>
+<a id="__codelineno-68-14" name="__codelineno-68-14" href="#__codelineno-68-14"></a><span class="go">          0/0/0/0/0/_|_ /   (  //       |      \     _\     |  /</span>
+<a id="__codelineno-68-15" name="__codelineno-68-15" href="#__codelineno-68-15"></a><span class="go">      0/0/0/0/0/0/`/,_ _ _/  ) ; -.    |    _ _\.-~       /   /</span>
+<a id="__codelineno-68-16" name="__codelineno-68-16" href="#__codelineno-68-16"></a><span class="go">                  ,-}        _      *-.|.-~-.           .~    ~</span>
+<a id="__codelineno-68-17" name="__codelineno-68-17" href="#__codelineno-68-17"></a><span class="go">  \     \__/        `/\      /                 ~-. _ .-~      /</span>
+<a id="__codelineno-68-18" name="__codelineno-68-18" href="#__codelineno-68-18"></a><span class="go">  \____(oo)           *.   }            {                   /</span>
+<a id="__codelineno-68-19" name="__codelineno-68-19" href="#__codelineno-68-19"></a><span class="go">  (    (--)          .----~-.\        \-`                 .~</span>
+<a id="__codelineno-68-20" name="__codelineno-68-20" href="#__codelineno-68-20"></a><span class="go">  //__\\  \__ Ack!   ///.----..&lt;        \             _ -~</span>
+<a id="__codelineno-68-21" name="__codelineno-68-21" href="#__codelineno-68-21"></a><span class="go">  //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~</span>
+</code></pre></div>
+</details>
+<p>Isso significa que, desde que distribuamos quaisquer arquivos de dados de teste com o código do fluxo de trabalho, qualquer pessoa pode rapidamente experimentar o fluxo de trabalho sem ter que fornecer suas próprias entradas via linha de comando ou arquivo de parâmetros.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Podemos apontar para URLs para arquivos maiores que são armazenados externamente.
+O Nextflow os baixará automaticamente desde que haja uma conexão aberta.</p>
+<p>Para mais detalhes, veja a Side Quest <a href="../../side_quests/working_with_files/">Trabalhando com Arquivos</a></p>
+</div>
+<h3 id="63-use-nextflow-config-para-ver-a-configuracao-resolvida">6.3. Use <code>nextflow config</code> para ver a configuração resolvida<a class="headerlink" href="#63-use-nextflow-config-para-ver-a-configuracao-resolvida" title="Permanent link">&para;</a></h3>
+<p>Como observado acima, às vezes o mesmo parâmetro pode ser definido com valores diferentes em perfis que você deseja combinar.
+E de forma mais geral, existem numerosos lugares onde elementos de configuração podem ser armazenados, e às vezes as mesmas propriedades podem ser definidas com valores diferentes em lugares diferentes.</p>
+<p>O Nextflow aplica uma <a href="https://nextflow.io/docs/latest/config.html">ordem de precedência</a> definida para resolver quaisquer conflitos, mas isso pode ser difícil de determinar por conta própria.
+E mesmo que nada esteja conflitando, pode ser tedioso procurar em todos os lugares possíveis onde as coisas poderiam estar configuradas.</p>
+<p>Felizmente, o Nextflow inclui uma ferramenta de utilitário conveniente chamada <code>config</code> que pode automatizar todo esse processo para você.</p>
+<p>A ferramenta <code>config</code> explorará todo o conteúdo no seu diretório de trabalho atual, coletará quaisquer arquivos de configuração e produzirá a configuração totalmente resolvida que o Nextflow usaria para executar o fluxo de trabalho.
+Isso permite que você descubra quais configurações serão usadas sem ter que lançar nada.</p>
+<h4 id="631-resolva-a-configuracao-padrao">6.3.1. Resolva a configuração padrão<a class="headerlink" href="#631-resolva-a-configuracao-padrao" title="Permanent link">&para;</a></h4>
+<p>Execute este comando para resolver a configuração que seria aplicada por padrão.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>nextflow<span class="w"> </span>config
+</code></pre></div>
+<details class="success">
+<summary>Saída do comando</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-70-3" name="__codelineno-70-3" href="#__codelineno-70-3"></a><span class="o">}</span>
+<a id="__codelineno-70-4" name="__codelineno-70-4" href="#__codelineno-70-4"></a>
+<a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-70-7" name="__codelineno-70-7" href="#__codelineno-70-7"></a><span class="o">}</span>
+<a id="__codelineno-70-8" name="__codelineno-70-8" href="#__codelineno-70-8"></a>
+<a id="__codelineno-70-9" name="__codelineno-70-9" href="#__codelineno-70-9"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-70-10" name="__codelineno-70-10" href="#__codelineno-70-10"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
+<a id="__codelineno-70-11" name="__codelineno-70-11" href="#__codelineno-70-11"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-70-12" name="__codelineno-70-12" href="#__codelineno-70-12"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
+<a id="__codelineno-70-13" name="__codelineno-70-13" href="#__codelineno-70-13"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-70-14" name="__codelineno-70-14" href="#__codelineno-70-14"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-70-15" name="__codelineno-70-15" href="#__codelineno-70-15"></a><span class="o">}</span>
+<a id="__codelineno-70-16" name="__codelineno-70-16" href="#__codelineno-70-16"></a>
+<a id="__codelineno-70-17" name="__codelineno-70-17" href="#__codelineno-70-17"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-70-18" name="__codelineno-70-18" href="#__codelineno-70-18"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
+<a id="__codelineno-70-19" name="__codelineno-70-19" href="#__codelineno-70-19"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
+<a id="__codelineno-70-20" name="__codelineno-70-20" href="#__codelineno-70-20"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<a id="__codelineno-70-21" name="__codelineno-70-21" href="#__codelineno-70-21"></a><span class="o">}</span>
+</code></pre></div>
+</details>
+<p>Isso mostra a configuração base que você obtém se não especificar nada extra na linha de comando.</p>
+<h4 id="632-resolva-a-configuracao-com-configuracoes-especificas-ativadas">6.3.2. Resolva a configuração com configurações específicas ativadas<a class="headerlink" href="#632-resolva-a-configuracao-com-configuracoes-especificas-ativadas" title="Permanent link">&para;</a></h4>
+<p>Se você fornecer parâmetros de linha de comando, por exemplo, habilitando um ou mais perfis ou carregando um arquivo de parâmetros, o comando adicionalmente levará isso em conta.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>nextflow<span class="w"> </span>config<span class="w"> </span>-profile<span class="w"> </span>my_laptop,test
+</code></pre></div>
+<details class="success">
+<summary>Saída do comando</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="o">}</span>
+<a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>
+<a id="__codelineno-72-5" name="__codelineno-72-5" href="#__codelineno-72-5"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-72-6" name="__codelineno-72-6" href="#__codelineno-72-6"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-72-7" name="__codelineno-72-7" href="#__codelineno-72-7"></a><span class="o">}</span>
+<a id="__codelineno-72-8" name="__codelineno-72-8" href="#__codelineno-72-8"></a>
+<a id="__codelineno-72-9" name="__codelineno-72-9" href="#__codelineno-72-9"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-72-10" name="__codelineno-72-10" href="#__codelineno-72-10"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
+<a id="__codelineno-72-11" name="__codelineno-72-11" href="#__codelineno-72-11"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-72-12" name="__codelineno-72-12" href="#__codelineno-72-12"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
+<a id="__codelineno-72-13" name="__codelineno-72-13" href="#__codelineno-72-13"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-72-14" name="__codelineno-72-14" href="#__codelineno-72-14"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-72-15" name="__codelineno-72-15" href="#__codelineno-72-15"></a><span class="w">  </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
+<a id="__codelineno-72-16" name="__codelineno-72-16" href="#__codelineno-72-16"></a><span class="o">}</span>
+<a id="__codelineno-72-17" name="__codelineno-72-17" href="#__codelineno-72-17"></a>
+<a id="__codelineno-72-18" name="__codelineno-72-18" href="#__codelineno-72-18"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-72-19" name="__codelineno-72-19" href="#__codelineno-72-19"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
+<a id="__codelineno-72-20" name="__codelineno-72-20" href="#__codelineno-72-20"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
+<a id="__codelineno-72-21" name="__codelineno-72-21" href="#__codelineno-72-21"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dragonandcow&#39;</span>
+<a id="__codelineno-72-22" name="__codelineno-72-22" href="#__codelineno-72-22"></a><span class="o">}</span>
+</code></pre></div>
+</details>
+<p>Isso fica especialmente útil para projetos complexos que envolvem múltiplas camadas de configuração.</p>
+<h3 id="conclusao_5">Conclusão<a class="headerlink" href="#conclusao_5" title="Permanent link">&para;</a></h3>
+<p>Você sabe como usar perfis para selecionar uma configuração predefinida no tempo de execução com o mínimo de esforço.
+De forma mais geral, você sabe como configurar suas execuções de fluxo de trabalho para se adequar a diferentes plataformas de computação e melhorar a reprodutibilidade de suas análises.</p>
+<h3 id="o-que-vem-a-seguir_5">O que vem a seguir?<a class="headerlink" href="#o-que-vem-a-seguir_5" title="Permanent link">&para;</a></h3>
+<p>Comemore e dê um grande tapinha nas costas! Você completou seu primeiro curso de desenvolvedor Nextflow.</p>
+<p>Vá para o <a href="../next_steps/">resumo final do curso</a> para revisar o que você aprendeu e descobrir o que vem a seguir.</p>
+<hr />
+<h2 id="quiz">Quiz<a class="headerlink" href="#quiz" title="Permanent link">&para;</a></h2>
+<!-- mkdocs-quiz-source
+<quiz>
+Qual é o nome do arquivo de configuração que o Nextflow carrega automaticamente?
+- [ ] `config.nf`
+- [ ] `pipeline.config`
+- [x] `nextflow.config`
+- [ ] `workflow.config`
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
+    <a href="#quiz-0" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Qual é o nome do arquivo de configuração que o Nextflow carrega automaticamente?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0"><code>config.nf</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" ><label for="quiz-0-1"><code>pipeline.config</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" correct><label for="quiz-0-2"><code>nextflow.config</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3"><code>workflow.config</code></label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+O que tem precedência quando o mesmo parâmetro é definido tanto no arquivo de configuração quanto na linha de comando?
+- [ ] O valor do arquivo de configuração
+- [x] O valor da linha de comando
+- [ ] O primeiro valor encontrado
+- [ ] Nenhum; causa um erro
+
+Saiba mais: [1.1. Mova os valores padrão para o `nextflow.config`](#11-mova-os-valores-padrão-para-o-nextflowconfig)
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
+    <a href="#quiz-1" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>O que tem precedência quando o mesmo parâmetro é definido tanto no arquivo de configuração quanto na linha de comando?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0">O valor do arquivo de configuração</label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" correct><label for="quiz-1-1">O valor da linha de comando</label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" ><label for="quiz-1-2">O primeiro valor encontrado</label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3">Nenhum; causa um erro</label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"><p>Saiba mais: <a href="#11-mova-os-valores-padrão-para-o-nextflowconfig">1.1. Mova os valores padrão para o <code>nextflow.config</code></a></p></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+Você pode ter tanto Docker quanto Conda habilitados na mesma configuração?
+- [x] Sim, o Nextflow pode usar ambos dependendo das diretivas de processo
+- [ ] Não, apenas um pode ser habilitado por vez
+- [ ] Sim, mas apenas em perfis
+- [ ] Não, eles são mutuamente exclusivos
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
+    <a href="#quiz-2" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Você pode ter tanto Docker quanto Conda habilitados na mesma configuração?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" correct><label for="quiz-2-0">Sim, o Nextflow pode usar ambos dependendo das diretivas de processo</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1">Não, apenas um pode ser habilitado por vez</label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" ><label for="quiz-2-2">Sim, mas apenas em perfis</label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3">Não, eles são mutuamente exclusivos</label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+Se tanto Docker quanto Conda estão habilitados e um processo tem ambas as diretivas, qual é priorizado?
+- [x] Docker (contêineres)
+- [ ] Conda
+- [ ] O primeiro definido
+- [ ] Causa um erro
+
+Saiba mais: [3. Selecione uma tecnologia de empacotamento de software](#3-selecione-uma-tecnologia-de-empacotamento-de-software)
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
+    <a href="#quiz-3" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Se tanto Docker quanto Conda estão habilitados e um processo tem ambas as diretivas, qual é priorizado?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" correct><label for="quiz-3-0">Docker (contêineres)</label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1">Conda</label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" ><label for="quiz-3-2">O primeiro definido</label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3">Causa um erro</label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"><p>Saiba mais: <a href="#3-selecione-uma-tecnologia-de-empacotamento-de-software">3. Selecione uma tecnologia de empacotamento de software</a></p></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+Qual é a alocação de memória padrão para processos Nextflow?
+- [ ] 1 GB
+- [x] 2 GB
+- [ ] 4 GB
+- [ ] Sem limite
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
+    <a href="#quiz-4" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Qual é a alocação de memória padrão para processos Nextflow?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0">1 GB</label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" correct><label for="quiz-4-1">2 GB</label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" ><label for="quiz-4-2">4 GB</label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">Sem limite</label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+Como você define requisitos de recursos para um processo específico no arquivo de configuração?
+- [ ] `#!groovy processName.memory = '4 GB'`
+- [ ] `#!groovy process.memory.processName = '4 GB'`
+- [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
+- [ ] `#!groovy resources.processName.memory = '4 GB'`
+
+Saiba mais: [5.3. Defina alocações de recursos para um processo específico](#53-defina-alocações-de-recursos-para-um-processo-específico)
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
+    <a href="#quiz-5" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Como você define requisitos de recursos para um processo específico no arquivo de configuração?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-5-0" ><label for="quiz-5-0"><code class="highlight"><span class="n">processName</span><span class="o">.</span><span class="na">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;4 GB&#39;</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-5-1" ><label for="quiz-5-1"><code class="highlight"><span class="n">process</span><span class="o">.</span><span class="na">memory</span><span class="o">.</span><span class="na">processName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;4 GB&#39;</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2"><code class="highlight"><span class="n">process</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;processName&#39;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;4 GB&#39;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3"><code class="highlight"><span class="n">resources</span><span class="o">.</span><span class="na">processName</span><span class="o">.</span><span class="na">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;4 GB&#39;</span></code></label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"><p>Saiba mais: <a href="#53-defina-alocações-de-recursos-para-um-processo-específico">5.3. Defina alocações de recursos para um processo específico</a></p></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+Qual opção de linha de comando gera um relatório de utilização de recursos?
+- [ ] `-with-metrics`
+- [ ] `-with-stats`
+- [x] `-with-report`
+- [ ] `-with-profile`
+
+Saiba mais: [5.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos](#51-execute-o-fluxo-de-trabalho-para-gerar-um-relatório-de-utilização-de-recursos)
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
+    <a href="#quiz-6" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Qual opção de linha de comando gera um relatório de utilização de recursos?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-6-0" ><label for="quiz-6-0"><code>-with-metrics</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-6-1" ><label for="quiz-6-1"><code>-with-stats</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-6-2" correct><label for="quiz-6-2"><code>-with-report</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-6-3" ><label for="quiz-6-3"><code>-with-profile</code></label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"><p>Saiba mais: <a href="#51-execute-o-fluxo-de-trabalho-para-gerar-um-relatório-de-utilização-de-recursos">5.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos</a></p></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+O que a diretiva `resourceLimits` faz?
+- [ ] Define requisitos mínimos de recursos
+- [ ] Aloca recursos aos processos
+- [x] Limita os recursos máximos que podem ser solicitados
+- [ ] Monitora o uso de recursos
+
+Saiba mais: [5.5. Adicione limites de recursos](#55-adicione-limites-de-recursos)
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
+    <a href="#quiz-7" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>O que a diretiva <code>resourceLimits</code> faz?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-7-0" ><label for="quiz-7-0">Define requisitos mínimos de recursos</label></div><div><input type="radio" name="answer" value="1" id="quiz-7-1" ><label for="quiz-7-1">Aloca recursos aos processos</label></div><div><input type="radio" name="answer" value="2" id="quiz-7-2" correct><label for="quiz-7-2">Limita os recursos máximos que podem ser solicitados</label></div><div><input type="radio" name="answer" value="3" id="quiz-7-3" ><label for="quiz-7-3">Monitora o uso de recursos</label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"><p>Saiba mais: <a href="#55-adicione-limites-de-recursos">5.5. Adicione limites de recursos</a></p></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+Qual é o executor padrão no Nextflow?
+- [x] `local`
+- [ ] `slurm`
+- [ ] `kubernetes`
+- [ ] `aws`
+
+Saiba mais: [4. Selecione uma plataforma de execução](#4-selecione-uma-plataforma-de-execução)
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-8">
+    <a href="#quiz-8" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Qual é o executor padrão no Nextflow?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-8-0" correct><label for="quiz-8-0"><code>local</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-8-1" ><label for="quiz-8-1"><code>slurm</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-8-2" ><label for="quiz-8-2"><code>kubernetes</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-8-3" ><label for="quiz-8-3"><code>aws</code></label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"><p>Saiba mais: <a href="#4-selecione-uma-plataforma-de-execução">4. Selecione uma plataforma de execução</a></p></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+Como você especifica um arquivo de parâmetros ao executar o Nextflow?
+- [ ] `--params params.json`
+- [ ] `-config params.json`
+- [x] `-params-file params.json`
+- [ ] `--input params.json`
+
+Saiba mais: [1.3. Use um arquivo de parâmetros](#13-use-um-arquivo-de-parâmetros)
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-9">
+    <a href="#quiz-9" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Como você especifica um arquivo de parâmetros ao executar o Nextflow?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-9-0" ><label for="quiz-9-0"><code>--params params.json</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-9-1" ><label for="quiz-9-1"><code>-config params.json</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-9-2" correct><label for="quiz-9-2"><code>-params-file params.json</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-9-3" ><label for="quiz-9-3"><code>--input params.json</code></label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"><p>Saiba mais: <a href="#13-use-um-arquivo-de-parâmetros">1.3. Use um arquivo de parâmetros</a></p></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+Para que os perfis podem ser usados? (Selecione todas as opções que se aplicam)
+- [x] Definir configurações específicas de infraestrutura
+- [x] Definir limites de recursos para diferentes ambientes
+- [x] Fornecer parâmetros de teste
+- [ ] Definir novos processos
+
+Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-perfis-para-alternar-entre-configurações-predefinidas)
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-10">
+    <a href="#quiz-10" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Para que os perfis podem ser usados? (Selecione todas as opções que se aplicam)</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-10-0" correct><label for="quiz-10-0">Definir configurações específicas de infraestrutura</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-10-1" correct><label for="quiz-10-1">Definir limites de recursos para diferentes ambientes</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-10-2" correct><label for="quiz-10-2">Fornecer parâmetros de teste</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-10-3" ><label for="quiz-10-3">Definir novos processos</label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+        <button type="submit" class="quiz-button">Submit</button>
+    </form>
+    <section class="content hidden"><p>Saiba mais: <a href="#6-use-perfis-para-alternar-entre-configurações-predefinidas">6. Use perfis para alternar entre configurações predefinidas</a></p></section>
+</div>
+
+<!-- mkdocs-quiz-source
+<quiz>
+Como você especifica múltiplos perfis em um único comando?
+- [ ] `-profile profile1 -profile profile2`
+- [ ] `-profiles profile1,profile2`
+- [x] `-profile profile1,profile2`
+- [ ] `--profile profile1 --profile profile2`
+
+Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-perfis-para-alternar-entre-configurações-predefinidas)
+</quiz>
+-->
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-11">
+    <a href="#quiz-11" class="quiz-header-link">#</a>
+
+    <div class="quiz-question">
+        <p>Como você especifica múltiplos perfis em um único comando?</p>
+    </div>
+    <form action="javascript:void(0);" onsubmit="return false;">
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-11-0" ><label for="quiz-11-0"><code>-profile profile1 -profile profile2</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-11-1" ><label for="quiz-11-1"><code>-profiles profile1,profile2</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-11-2" correct><label for="quiz-11-2"><code>-profile profile1,profile2</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-11-3" ><label for="quiz-11-3"><code>--profile profile1 --profile profile2</code></label></div></fieldset>
+        <div class="quiz-feedback hidden"></div>
+
+    </form>
+    <section class="content hidden"><p>Saiba mais: <a href="#6-use-perfis-para-alternar-entre-configurações-predefinidas">6. Use perfis para alternar entre configurações predefinidas</a></p></section>
+</div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

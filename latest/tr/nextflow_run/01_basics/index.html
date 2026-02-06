@@ -735,10 +735,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-orijinal-ckty-ve-loglar-work-dizininde-bulun" class="md-nav__link">
+  <a href="#23-sonuclar-farkl-bir-dizine-kaydedin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Orijinal çıktıyı ve logları work/ dizininde bulun
+        2.3. Sonuçları farklı bir dizine kaydedin
       
     </span>
   </a>
@@ -746,10 +746,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-workflowu-farkl-selamlamalarla-yeniden-calstrn" class="md-nav__link">
+  <a href="#24-orijinal-ckty-ve-loglar-work-dizininde-bulun" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın
+        2.4. Orijinal çıktıyı ve logları work/ dizininde bulun
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-workflowu-farkl-selamlamalarla-yeniden-calstrn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın
       
     </span>
   </a>
@@ -3711,10 +3722,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-orijinal-ckty-ve-loglar-work-dizininde-bulun" class="md-nav__link">
+  <a href="#23-sonuclar-farkl-bir-dizine-kaydedin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Orijinal çıktıyı ve logları work/ dizininde bulun
+        2.3. Sonuçları farklı bir dizine kaydedin
       
     </span>
   </a>
@@ -3722,10 +3733,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#24-workflowu-farkl-selamlamalarla-yeniden-calstrn" class="md-nav__link">
+  <a href="#24-orijinal-ckty-ve-loglar-work-dizininde-bulun" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın
+        2.4. Orijinal çıktıyı ve logları work/ dizininde bulun
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-workflowu-farkl-selamlamalarla-yeniden-calstrn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın
       
     </span>
   </a>
@@ -4295,7 +4317,7 @@ Dosya gezgininde açabilir veya örneğin <code>cat</code> yardımcı programın
 <p>Buradaki en önemli çıktı, yukarıdaki çıktıda vurgulanan son satırdır:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
-<p>Bu bize <code>sayHello</code> process'inin bir kez başarıyla çalıştırıldığını söyler (<code>1 of 1 ✔</code>).</p>
+<p>Bu bize <code>sayHello</code> sürecinin bir kez başarıyla çalıştırıldığını söyler (<code>1 of 1 ✔</code>).</p>
 <p>Bu harika, ama merak ediyor olabilirsiniz: çıktı nerede?</p>
 <h3 id="22-ckt-dosyasn-results-dizininde-bulun">2.2. Çıktı dosyasını <code>results</code> dizininde bulun<a class="headerlink" href="#22-ckt-dosyasn-results-dizininde-bulun" title="Permanent link">&para;</a></h3>
 <p>Bu workflow, çıktısını bir results dizinine yayınlamak üzere yapılandırılmıştır.
@@ -4308,41 +4330,78 @@ Geçerli dizininize bakarsanız, workflow'u çalıştırdığınızda Nextflow'u
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">results/1-hello/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 <p>Harika, workflow'umuz yapması gerekeni yaptı!</p>
-<p>Ancak, 'yayınlanan' sonucun, Nextflow'un workflow'u çalıştırırken ürettiği gerçek çıktının bir kopyası (veya bazı durumlarda sembolik bir bağlantı) olduğunu unutmayın.</p>
+<h3 id="23-sonuclar-farkl-bir-dizine-kaydedin">2.3. Sonuçları farklı bir dizine kaydedin<a class="headerlink" href="#23-sonuclar-farkl-bir-dizine-kaydedin" title="Permanent link">&para;</a></h3>
+<p>Varsayılan olarak, Nextflow pipeline çıktılarını geçerli yolunuzda <code>results</code> adlı bir dizine kaydeder.
+Dosyalarınızın nereye yayınlanacağını değiştirmek için <code>-output-dir</code> CLI bayrağını (veya kısaca <code>-o</code>) kullanın.</p>
+<div class="admonition danger">
+<p class="admonition-title">Dikkat</p>
+<p><code>--input</code>'un iki tire, <code>-output-dir</code>'in bir tire aldığını unutmayın!
+Bunun nedeni <code>--input</code>'un bir pipeline <em>parametresi</em> ve <code>-output-dir</code>'in çekirdek bir Nextflow CLI bayrağı olmasıdır.
+Bunlar hakkında daha sonra daha fazla bilgi.</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-output-dir<span class="w"> </span>hello_results
+</code></pre></div>
+<details class="success">
+<summary>Komut çıktısı</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+</code></pre></div>
+</details>
+<p>Artık çıktılarınızın <code>results</code> yerine <code>hello_results</code> adlı bir dizine yayınlandığını görmelisiniz:</p>
+<div class="highlight"><span class="filename">hello_results/</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">hello_results</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── 1-hello</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">    └── output.txt</span>
+</code></pre></div>
+<p>Bu dizindeki dosyalar öncekiyle aynıdır, sadece üst düzey dizin farklıdır.
+Ancak, her iki durumda da 'yayınlanan' sonucun, Nextflow workflow'u çalıştırdığında ürettiği gerçek çıktının bir kopyası (veya bazı durumlarda sembolik bir bağlantı) olduğunu unutmayın.</p>
 <p>Şimdi, Nextflow'un işi gerçekte nerede yaptığını görmek için kaputun altına bir göz atacağız.</p>
 <div class="admonition warning">
 <p class="admonition-title">Uyarı</p>
 <p>Tüm workflow'lar çıktıları bir results dizinine yayınlamak üzere ayarlanmayacaktır ve/veya dizin adları ve yapısı farklı olabilir.
 Bu bölümde biraz ileride, bu davranışın nerede belirtildiğini nasıl bulacağınızı göstereceğiz.</p>
 </div>
-<h3 id="23-orijinal-ckty-ve-loglar-work-dizininde-bulun">2.3. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun<a class="headerlink" href="#23-orijinal-ckty-ve-loglar-work-dizininde-bulun" title="Permanent link">&para;</a></h3>
-<p>Bir workflow çalıştırdığınızda, Nextflow workflow'daki her bir process'in her çağrısı için (=pipeline'daki her adım) ayrı bir 'görev dizini' oluşturur.
+<h3 id="24-orijinal-ckty-ve-loglar-work-dizininde-bulun">2.4. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun<a class="headerlink" href="#24-orijinal-ckty-ve-loglar-work-dizininde-bulun" title="Permanent link">&para;</a></h3>
+<p>Bir workflow çalıştırdığınızda, Nextflow workflow'daki her bir sürecin her çağrısı için (=pipeline'daki her adım) ayrı bir 'görev dizini' oluşturur.
 Her biri için gerekli girdileri hazırlar, ilgili talimatları yürütür ve çıktıları ve log dosyalarını, benzersiz hale getirmek için otomatik olarak bir hash kullanılarak adlandırılan bu tek dizine yazar.</p>
 <p>Bu görev dizinlerinin tümü, geçerli dizininizdeki (komutu çalıştırdığınız yer) <code>work</code> adlı bir dizin altında yaşayacaktır.</p>
 <p>Bu karmaşık gelebilir, bu yüzden pratikte nasıl göründüğüne bakalım.</p>
 <p>Daha önce çalıştırdığımız workflow için konsol çıktısına geri dönersek, şu satır vardı:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
 </code></pre></div>
-<p>Satırın <code>[a3/7be2fa]</code> ile nasıl başladığını görüyor musunuz?
-Bu, o process çağrısı için görev dizini yolunun kısaltılmış halidir ve <code>work/</code> dizin yolu içinde <code>sayHello</code> process çağrısının çıktısını nerede bulacağınızı söyler.</p>
-<p>Aşağıdaki komutu yazarak (kendi terminalinizde gördüğünüzle <code>a3/7be2fa</code>yı değiştirerek) ve tab tuşuna basarak yolu otomatik tamamlayarak veya bir yıldız işareti ekleyerek tam yolu bulabilirsiniz:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ls<span class="w"> </span>work/a3/7be2fa*
+<p>Satırın <code>[a3/1e1535]</code> ile nasıl başladığını görüyor musunuz?
+Bu, o süreç çağrısı için görev dizini yolunun kısaltılmış halidir ve <code>work/</code> dizin yolu içinde <code>sayHello</code> süreç çağrısının çıktısını nerede bulacağınızı söyler.</p>
+<p>Aşağıdaki komutu yazarak (kendi terminalinizde gördüğünüzle <code>a3/1e1535</code>'i değiştirerek) ve tab tuşuna basarak yolu otomatik tamamlayarak veya bir yıldız işareti ekleyerek tam yolu bulabilirsiniz:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ls<span class="w"> </span>work/a3/1e1535*
 </code></pre></div>
-<p>Bu, tam dizin yolunu vermeli: <code>work/a3/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
+<p>Bu, tam dizin yolunu vermeli: <code>work/a3/1e153543b0a7f9d2c4735ddb4ab231</code></p>
 <p>İçinde ne olduğuna bir göz atalım.</p>
 <details class="abstract">
 <summary>Dizin içeriği</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">work</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── a3</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">    └── 7be2fad5e71e5f49998f795677fd68</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="go">        ├── .command.begin</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="go">        ├── .command.err</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="go">        ├── .command.log</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="go">        ├── .command.out</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="go">        ├── .command.run</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="go">        ├── .command.sh</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="go">        ├── .exitcode</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="go">        └── output.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">work</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="go">├── a3</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">│   └── 1e153543b0a7f9d2c4735ddb4ab231</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="go">└── a4</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="go">    └── aa3694b8808bdcc1135ef4a1187a4d</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="go">        ├── .command.begin</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="go">        ├── .command.err</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="go">        ├── .command.log</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="go">        ├── .command.out</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="go">        ├── .command.run</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="go">        ├── .command.sh</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="go">        ├── .exitcode</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="go">        └── output.txt</span>
 </code></pre></div>
 </details>
 <details class="question">
@@ -4350,93 +4409,97 @@ Bu, o process çağrısı için görev dizini yolunun kısaltılmış halidir ve
 <p>Tam alt dizin adları sisteminizde farklı olacaktır.</p>
 <p>VSCode dosya gezgininde görev alt dizininin içeriğine göz atarsanız, tüm dosyaları hemen göreceksiniz.
 Ancak, log dosyaları terminalde görünmez olarak ayarlanmıştır, bu nedenle <code>ls</code> veya <code>tree</code> kullanarak görüntülemek istiyorsanız, görünmez dosyaları görüntülemek için ilgili seçeneği ayarlamanız gerekir.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
 </code></pre></div>
 </details>
-<p><code>output.txt</code> dosyasını hemen tanımalısınız, bu aslında <code>results</code> dizinine yayınlanan <code>sayHello</code> process'inin orijinal çıktısıdır.
+<p><code>work/</code>'de yaptığımız iki farklı pipeline çalıştırmasından iki dizin seti vardır.
+Her görev yürütmesi, üzerinde çalışmak için kendi izole dizinini alır.
+Bu durumda pipeline her iki seferde de aynı şeyi yaptı, bu nedenle her görev dizininin içeriği özdeştir.</p>
+<p><code>output.txt</code> dosyasını hemen tanımalısınız, bu aslında <code>results</code> dizinine yayınlanan <code>sayHello</code> sürecinin orijinal çıktısıdır.
 Açarsanız, <code>Hello World!</code> selamlamasını tekrar bulacaksınız.</p>
-<div class="highlight"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">Hello World!</span>
+<div class="highlight"><span class="filename">work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">Hello World!</span>
 </code></pre></div>
 <p>Peki ya diğer tüm dosyalar?</p>
 <p>Bunlar, Nextflow'un görev yürütmesinin bir parçası olarak yazdığı yardımcı ve log dosyalarıdır:</p>
 <ul>
 <li><strong><code>.command.begin</code></strong>: Görev başlatıldığında oluşturulan sentinel dosyası.</li>
-<li><strong><code>.command.err</code></strong>: Process çağrısı tarafından yayılan hata mesajları (<code>stderr</code>)</li>
-<li><strong><code>.command.log</code></strong>: Process çağrısı tarafından yayılan tam log çıktısı</li>
-<li><strong><code>.command.out</code></strong>: Process çağrısı tarafından normal çıktı (<code>stdout</code>)</li>
-<li><strong><code>.command.run</code></strong>: Nextflow tarafından process çağrısını yürütmek için çalıştırılan tam betik</li>
-<li><strong><code>.command.sh</code></strong>: Process çağrısı tarafından gerçekte çalıştırılan komut</li>
+<li><strong><code>.command.err</code></strong>: Süreç çağrısı tarafından yayılan hata mesajları (<code>stderr</code>)</li>
+<li><strong><code>.command.log</code></strong>: Süreç çağrısı tarafından yayılan tam log çıktısı</li>
+<li><strong><code>.command.out</code></strong>: Süreç çağrısı tarafından normal çıktı (<code>stdout</code>)</li>
+<li><strong><code>.command.run</code></strong>: Nextflow tarafından süreç çağrısını yürütmek için çalıştırılan tam betik</li>
+<li><strong><code>.command.sh</code></strong>: Süreç çağrısı tarafından gerçekte çalıştırılan komut</li>
 <li><strong><code>.exitcode</code></strong>: Komuttan kaynaklanan çıkış kodu</li>
 </ul>
 <p><code>.command.sh</code> dosyası özellikle yararlıdır çünkü size Nextflow'un yürüttüğü ana komutu gösterir, tüm defter tutma ve görev/ortam kurulumu dahil değildir.</p>
-<div class="highlight"><span class="filename">work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/command.sh</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
+<div class="highlight"><span class="filename">work/a3/1e153543b0a7f9d2c4735ddb4ab231/.command.sh</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
 </code></pre></div>
 <p>Bu, workflow'un daha önce doğrudan komut satırında çalıştırdığımız aynı komutu oluşturduğunu doğrular.</p>
 <p>Bir şeyler ters gittiğinde ve ne olduğunu gidermeniz gerektiğinde, Nextflow'un workflow talimatlarına, değişken enterpolasyonuna vb. göre tam olarak hangi komutu oluşturduğunu kontrol etmek için <code>command.sh</code> betiğine bakmak yararlı olabilir.</p>
-<h3 id="24-workflowu-farkl-selamlamalarla-yeniden-calstrn">2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın<a class="headerlink" href="#24-workflowu-farkl-selamlamalarla-yeniden-calstrn" title="Permanent link">&para;</a></h3>
+<h3 id="25-workflowu-farkl-selamlamalarla-yeniden-calstrn">2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın<a class="headerlink" href="#25-workflowu-farkl-selamlamalarla-yeniden-calstrn" title="Permanent link">&para;</a></h3>
 <p>Workflow'u <code>--input</code> argümanı için farklı değerlerle birkaç kez yeniden çalıştırmayı deneyin, ardından görev dizinlerine bakın.</p>
 <details class="abstract">
 <summary>Dizin içeriği</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">work</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="go">├── 0f</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">│   └── 52b7e07b0e274a80843fca48ed21b8</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="go">│       ├── .command.begin</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="go">│       ├── .command.err</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="go">│       ├── .command.log</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="go">│       ├── .command.out</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="go">│       ├── .command.run</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="go">│       ├── .command.sh</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="go">│       ├── .exitcode</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="go">│       └── output.txt</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="go">├── 67</span>
-<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="go">│   ├── 134e6317f90726c6c17ad53234a32b</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="go">│   │   ├── .command.begin</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="go">│   │   ├── .command.err</span>
-<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="go">│   │   ├── .command.log</span>
-<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="go">│   │   ├── .command.out</span>
-<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="go">│   │   ├── .command.run</span>
-<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="go">│   │   ├── .command.sh</span>
-<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="go">│   │   ├── .exitcode</span>
-<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="go">│   │   └── output.txt</span>
-<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="go">│   └── e029f2e75305874a9ab263d21ebc2c</span>
-<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="go">│       ├── .command.begin</span>
-<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="go">│       ├── .command.err</span>
-<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="go">│       ├── .command.log</span>
-<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a><span class="go">│       ├── .command.out</span>
-<a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a><span class="go">│       ├── .command.run</span>
-<a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a><span class="go">│       ├── .command.sh</span>
-<a id="__codelineno-16-29" name="__codelineno-16-29" href="#__codelineno-16-29"></a><span class="go">│       ├── .exitcode</span>
-<a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a><span class="go">│       └── output.txt</span>
-<a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a><span class="go">├── 6c</span>
-<a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a><span class="go">│   └── d4fd787e0b01b3c82e85696c297500</span>
-<a id="__codelineno-16-33" name="__codelineno-16-33" href="#__codelineno-16-33"></a><span class="go">│       ├── .command.begin</span>
-<a id="__codelineno-16-34" name="__codelineno-16-34" href="#__codelineno-16-34"></a><span class="go">│       ├── .command.err</span>
-<a id="__codelineno-16-35" name="__codelineno-16-35" href="#__codelineno-16-35"></a><span class="go">│       ├── .command.log</span>
-<a id="__codelineno-16-36" name="__codelineno-16-36" href="#__codelineno-16-36"></a><span class="go">│       ├── .command.out</span>
-<a id="__codelineno-16-37" name="__codelineno-16-37" href="#__codelineno-16-37"></a><span class="go">│       ├── .command.run</span>
-<a id="__codelineno-16-38" name="__codelineno-16-38" href="#__codelineno-16-38"></a><span class="go">│       ├── .command.sh</span>
-<a id="__codelineno-16-39" name="__codelineno-16-39" href="#__codelineno-16-39"></a><span class="go">│       ├── .exitcode</span>
-<a id="__codelineno-16-40" name="__codelineno-16-40" href="#__codelineno-16-40"></a><span class="go">│       └── output.txt</span>
-<a id="__codelineno-16-41" name="__codelineno-16-41" href="#__codelineno-16-41"></a><span class="go">└── e8</span>
-<a id="__codelineno-16-42" name="__codelineno-16-42" href="#__codelineno-16-42"></a><span class="go">    └── ab99fad46ade52905ec973ff39bb80</span>
-<a id="__codelineno-16-43" name="__codelineno-16-43" href="#__codelineno-16-43"></a><span class="go">        ├── .command.begin</span>
-<a id="__codelineno-16-44" name="__codelineno-16-44" href="#__codelineno-16-44"></a><span class="go">        ├── .command.err</span>
-<a id="__codelineno-16-45" name="__codelineno-16-45" href="#__codelineno-16-45"></a><span class="go">        ├── .command.log</span>
-<a id="__codelineno-16-46" name="__codelineno-16-46" href="#__codelineno-16-46"></a><span class="go">        ├── .command.out</span>
-<a id="__codelineno-16-47" name="__codelineno-16-47" href="#__codelineno-16-47"></a><span class="go">        ├── .command.run</span>
-<a id="__codelineno-16-48" name="__codelineno-16-48" href="#__codelineno-16-48"></a><span class="go">        ├── .command.sh</span>
-<a id="__codelineno-16-49" name="__codelineno-16-49" href="#__codelineno-16-49"></a><span class="go">        ├── .exitcode</span>
-<a id="__codelineno-16-50" name="__codelineno-16-50" href="#__codelineno-16-50"></a><span class="go">        └── output.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">work/</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="go">├── 09</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">│   └── 5ea8665939daf6f04724286c9b3c8a</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="go">├── 92</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="go">│   └── ceb95e05d87621c92a399da9bd2067</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="go">├── 93</span>
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="go">│   └── 6708dbc20c7efdc6769cbe477061ec</span>
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a><span class="go">├── a3</span>
+<a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a><span class="go">│   └── 1e153543b0a7f9d2c4735ddb4ab231</span>
+<a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-19-42" name="__codelineno-19-42" href="#__codelineno-19-42"></a><span class="go">└── a4</span>
+<a id="__codelineno-19-43" name="__codelineno-19-43" href="#__codelineno-19-43"></a><span class="go">    └── aa3694b8808bdcc1135ef4a1187a4d</span>
+<a id="__codelineno-19-44" name="__codelineno-19-44" href="#__codelineno-19-44"></a><span class="go">        ├── .command.begin</span>
+<a id="__codelineno-19-45" name="__codelineno-19-45" href="#__codelineno-19-45"></a><span class="go">        ├── .command.err</span>
+<a id="__codelineno-19-46" name="__codelineno-19-46" href="#__codelineno-19-46"></a><span class="go">        ├── .command.log</span>
+<a id="__codelineno-19-47" name="__codelineno-19-47" href="#__codelineno-19-47"></a><span class="go">        ├── .command.out</span>
+<a id="__codelineno-19-48" name="__codelineno-19-48" href="#__codelineno-19-48"></a><span class="go">        ├── .command.run</span>
+<a id="__codelineno-19-49" name="__codelineno-19-49" href="#__codelineno-19-49"></a><span class="go">        ├── .command.sh</span>
+<a id="__codelineno-19-50" name="__codelineno-19-50" href="#__codelineno-19-50"></a><span class="go">        ├── .exitcode</span>
+<a id="__codelineno-19-51" name="__codelineno-19-51" href="#__codelineno-19-51"></a><span class="go">        └── output.txt</span>
 </code></pre></div>
 </details>
 <p>Her çalıştırma için tam bir çıktı ve log dosyası seti içeren yeni bir alt dizin oluşturulduğunu görüyorsunuz.</p>
 <p>Buna karşılık, <code>results</code> dizinine bakarsanız, hala yalnızca bir sonuç seti vardır ve çıktı dosyasının içeriği en son çalıştırdığınız şeye karşılık gelir.</p>
 <details class="abstract">
 <summary>Dizin içeriği</summary>
-<div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">results</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">└── 1-hello</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">    └── output.txt</span>
+<div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">results</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">└── 1-hello</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">    └── output.txt</span>
 </code></pre></div>
 </details>
 <p>Bu size yayınlanan sonuçların sonraki çalıştırmalar tarafından üzerine yazılacağını, oysa <code>work/</code> altındaki görev dizinlerinin korunduğunu gösterir.</p>
@@ -4453,129 +4516,129 @@ Açarsanız, <code>Hello World!</code> selamlamasını tekrar bulacaksınız.</p
 <p><code>1-hello.nf</code> betiğini <code>nextflow-run</code> olması gereken geçerli dizininizde bulacaksınız. Editör bölmesinde açın.</p>
 <details class="full-code">
 <summary>Tam kod dosyası</summary>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-18-10">10</a></span>
-<span class="normal"><a href="#__codelineno-18-11">11</a></span>
-<span class="normal"><a href="#__codelineno-18-12">12</a></span>
-<span class="normal"><a href="#__codelineno-18-13">13</a></span>
-<span class="normal"><a href="#__codelineno-18-14">14</a></span>
-<span class="normal"><a href="#__codelineno-18-15">15</a></span>
-<span class="normal"><a href="#__codelineno-18-16">16</a></span>
-<span class="normal"><a href="#__codelineno-18-17">17</a></span>
-<span class="normal"><a href="#__codelineno-18-18">18</a></span>
-<span class="normal"><a href="#__codelineno-18-19">19</a></span>
-<span class="normal"><a href="#__codelineno-18-20">20</a></span>
-<span class="normal"><a href="#__codelineno-18-21">21</a></span>
-<span class="normal"><a href="#__codelineno-18-22">22</a></span>
-<span class="normal"><a href="#__codelineno-18-23">23</a></span>
-<span class="normal"><a href="#__codelineno-18-24">24</a></span>
-<span class="normal"><a href="#__codelineno-18-25">25</a></span>
-<span class="normal"><a href="#__codelineno-18-26">26</a></span>
-<span class="normal"><a href="#__codelineno-18-27">27</a></span>
-<span class="normal"><a href="#__codelineno-18-28">28</a></span>
-<span class="normal"><a href="#__codelineno-18-29">29</a></span>
-<span class="normal"><a href="#__codelineno-18-30">30</a></span>
-<span class="normal"><a href="#__codelineno-18-31">31</a></span>
-<span class="normal"><a href="#__codelineno-18-32">32</a></span>
-<span class="normal"><a href="#__codelineno-18-33">33</a></span>
-<span class="normal"><a href="#__codelineno-18-34">34</a></span>
-<span class="normal"><a href="#__codelineno-18-35">35</a></span>
-<span class="normal"><a href="#__codelineno-18-36">36</a></span>
-<span class="normal"><a href="#__codelineno-18-37">37</a></span>
-<span class="normal"><a href="#__codelineno-18-38">38</a></span>
-<span class="normal"><a href="#__codelineno-18-39">39</a></span>
-<span class="normal"><a href="#__codelineno-18-40">40</a></span>
-<span class="normal"><a href="#__codelineno-18-41">41</a></span>
-<span class="normal"><a href="#__codelineno-18-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2"></a>
-<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="cm">/*</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="cm">* &#39;Hello World!&#39; ifadesini bir dosyaya yazdırmak için echo kullan</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="cm">*/</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7"></a>
-<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-18-10" name="__codelineno-18-10"></a>
-<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
-<a id="__codelineno-18-13" name="__codelineno-18-13"></a>
-<a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
-<a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="o">}</span>
-<a id="__codelineno-18-19" name="__codelineno-18-19"></a>
-<a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="cm">/*</span>
-<a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="cm">* Pipeline parametreleri</span>
-<a id="__codelineno-18-22" name="__codelineno-18-22"></a><span class="cm">*/</span>
-<a id="__codelineno-18-23" name="__codelineno-18-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-24" name="__codelineno-18-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
-<a id="__codelineno-18-25" name="__codelineno-18-25"></a><span class="o">}</span>
-<a id="__codelineno-18-26" name="__codelineno-18-26"></a>
-<a id="__codelineno-18-27" name="__codelineno-18-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-28" name="__codelineno-18-28"></a>
-<a id="__codelineno-18-29" name="__codelineno-18-29"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-18-30" name="__codelineno-18-30"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
-<a id="__codelineno-18-31" name="__codelineno-18-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-18-32" name="__codelineno-18-32"></a>
-<a id="__codelineno-18-33" name="__codelineno-18-33"></a><span class="w">    </span><span class="nl">publish:</span>
-<a id="__codelineno-18-34" name="__codelineno-18-34"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
-<a id="__codelineno-18-35" name="__codelineno-18-35"></a><span class="o">}</span>
-<a id="__codelineno-18-36" name="__codelineno-18-36"></a>
-<a id="__codelineno-18-37" name="__codelineno-18-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-38" name="__codelineno-18-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-39" name="__codelineno-18-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
-<a id="__codelineno-18-40" name="__codelineno-18-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-18-41" name="__codelineno-18-41"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-18-42" name="__codelineno-18-42"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-21-10">10</a></span>
+<span class="normal"><a href="#__codelineno-21-11">11</a></span>
+<span class="normal"><a href="#__codelineno-21-12">12</a></span>
+<span class="normal"><a href="#__codelineno-21-13">13</a></span>
+<span class="normal"><a href="#__codelineno-21-14">14</a></span>
+<span class="normal"><a href="#__codelineno-21-15">15</a></span>
+<span class="normal"><a href="#__codelineno-21-16">16</a></span>
+<span class="normal"><a href="#__codelineno-21-17">17</a></span>
+<span class="normal"><a href="#__codelineno-21-18">18</a></span>
+<span class="normal"><a href="#__codelineno-21-19">19</a></span>
+<span class="normal"><a href="#__codelineno-21-20">20</a></span>
+<span class="normal"><a href="#__codelineno-21-21">21</a></span>
+<span class="normal"><a href="#__codelineno-21-22">22</a></span>
+<span class="normal"><a href="#__codelineno-21-23">23</a></span>
+<span class="normal"><a href="#__codelineno-21-24">24</a></span>
+<span class="normal"><a href="#__codelineno-21-25">25</a></span>
+<span class="normal"><a href="#__codelineno-21-26">26</a></span>
+<span class="normal"><a href="#__codelineno-21-27">27</a></span>
+<span class="normal"><a href="#__codelineno-21-28">28</a></span>
+<span class="normal"><a href="#__codelineno-21-29">29</a></span>
+<span class="normal"><a href="#__codelineno-21-30">30</a></span>
+<span class="normal"><a href="#__codelineno-21-31">31</a></span>
+<span class="normal"><a href="#__codelineno-21-32">32</a></span>
+<span class="normal"><a href="#__codelineno-21-33">33</a></span>
+<span class="normal"><a href="#__codelineno-21-34">34</a></span>
+<span class="normal"><a href="#__codelineno-21-35">35</a></span>
+<span class="normal"><a href="#__codelineno-21-36">36</a></span>
+<span class="normal"><a href="#__codelineno-21-37">37</a></span>
+<span class="normal"><a href="#__codelineno-21-38">38</a></span>
+<span class="normal"><a href="#__codelineno-21-39">39</a></span>
+<span class="normal"><a href="#__codelineno-21-40">40</a></span>
+<span class="normal"><a href="#__codelineno-21-41">41</a></span>
+<span class="normal"><a href="#__codelineno-21-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="cm">/*</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="cm">* &#39;Hello World!&#39; ifadesini bir dosyaya yazdırmak için echo kullan</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="cm">*/</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a>
+<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10"></a>
+<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13"></a>
+<a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
+<a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="o">}</span>
+<a id="__codelineno-21-19" name="__codelineno-21-19"></a>
+<a id="__codelineno-21-20" name="__codelineno-21-20"></a><span class="cm">/*</span>
+<a id="__codelineno-21-21" name="__codelineno-21-21"></a><span class="cm">* Pipeline parametreleri</span>
+<a id="__codelineno-21-22" name="__codelineno-21-22"></a><span class="cm">*/</span>
+<a id="__codelineno-21-23" name="__codelineno-21-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-24" name="__codelineno-21-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
+<a id="__codelineno-21-25" name="__codelineno-21-25"></a><span class="o">}</span>
+<a id="__codelineno-21-26" name="__codelineno-21-26"></a>
+<a id="__codelineno-21-27" name="__codelineno-21-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-28" name="__codelineno-21-28"></a>
+<a id="__codelineno-21-29" name="__codelineno-21-29"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-21-30" name="__codelineno-21-30"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
+<a id="__codelineno-21-31" name="__codelineno-21-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-21-32" name="__codelineno-21-32"></a>
+<a id="__codelineno-21-33" name="__codelineno-21-33"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-21-34" name="__codelineno-21-34"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
+<a id="__codelineno-21-35" name="__codelineno-21-35"></a><span class="o">}</span>
+<a id="__codelineno-21-36" name="__codelineno-21-36"></a>
+<a id="__codelineno-21-37" name="__codelineno-21-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-38" name="__codelineno-21-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-39" name="__codelineno-21-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
+<a id="__codelineno-21-40" name="__codelineno-21-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-21-41" name="__codelineno-21-41"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-21-42" name="__codelineno-21-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Bir Nextflow workflow betiği tipik olarak bir veya daha fazla <strong>process</strong> tanımı, <strong>workflow</strong>'un kendisi ve <strong>params</strong> ve <strong>output</strong> gibi birkaç isteğe bağlı blok içerir.</p>
 <p>Her <strong>process</strong>, pipeline'daki ilgili adımın hangi işlem(ler)i gerçekleştirmesi gerektiğini açıklarken, <strong>workflow</strong> çeşitli adımları birbirine bağlayan veri akışı mantığını tanımlar.</p>
 <p>Önce <strong>process</strong> bloğuna daha yakından bakalım, ardından <strong>workflow</strong> bloğuna bakacağız.</p>
 <h3 id="32-process-tanm">3.2. <code>process</code> tanımı<a class="headerlink" href="#32-process-tanm" title="Permanent link">&para;</a></h3>
-<p>İlk kod bloğu bir <strong>process</strong>'i tanımlar.
+<p>İlk kod bloğu bir <a href="https://nextflow.io/docs/latest/process.html"><strong>process</strong></a>'i tanımlar.
 Process tanımı <code>process</code> anahtar kelimesiyle başlar, ardından process adı ve son olarak süslü parantezlerle sınırlandırılmış process gövdesi gelir.
 Process gövdesi, çalıştırılacak komutu belirten bir script bloğu içermelidir; bu, komut satırı terminalinde çalıştırabileceğiniz herhangi bir şey olabilir.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-19-10">10</a></span>
-<span class="normal"><a href="#__codelineno-19-11">11</a></span>
-<span class="normal"><a href="#__codelineno-19-12">12</a></span>
-<span class="normal"><a href="#__codelineno-19-13">13</a></span>
-<span class="normal"><a href="#__codelineno-19-14">14</a></span>
-<span class="normal"><a href="#__codelineno-19-15">15</a></span>
-<span class="normal"><a href="#__codelineno-19-16">16</a></span>
-<span class="normal"><a href="#__codelineno-19-17">17</a></span>
-<span class="normal"><a href="#__codelineno-19-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="cm">/*</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="cm">* Bir selamlamayı bir dosyaya yazdırmak için echo kullan</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="cm">*/</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7"></a>
-<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10"></a>
-<a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
-<a id="__codelineno-19-13" name="__codelineno-19-13"></a>
-<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
-<a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-22-10">10</a></span>
+<span class="normal"><a href="#__codelineno-22-11">11</a></span>
+<span class="normal"><a href="#__codelineno-22-12">12</a></span>
+<span class="normal"><a href="#__codelineno-22-13">13</a></span>
+<span class="normal"><a href="#__codelineno-22-14">14</a></span>
+<span class="normal"><a href="#__codelineno-22-15">15</a></span>
+<span class="normal"><a href="#__codelineno-22-16">16</a></span>
+<span class="normal"><a href="#__codelineno-22-17">17</a></span>
+<span class="normal"><a href="#__codelineno-22-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="cm">/*</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="cm">* Bir selamlamayı bir dosyaya yazdırmak için echo kullan</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="cm">*/</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7"></a>
+<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10"></a>
+<a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13"></a>
+<a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-22-16" name="__codelineno-22-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
+<a id="__codelineno-22-17" name="__codelineno-22-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-22-18" name="__codelineno-22-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Burada <code>greeting</code> adlı bir <strong>input</strong> değişkeni alan ve <strong>output</strong>'unu <code>output.txt</code> adlı bir dosyaya yazan <code>sayHello</code> adlı bir <strong>process</strong>'imiz var.</p>
 <figure class="excalidraw">
@@ -4589,105 +4652,107 @@ Process gövdesi, çalıştırılacak komutu belirten bir script bloğu içermel
 <p><code>input</code> tanımı, Nextflow'a bir tür değer beklediğini söyleyen <code>val</code> niteleyicisini içerir (bir dize, bir sayı veya herhangi bir şey olabilir).</p>
 <p><code>output</code> tanımı, bunun bir yol olarak işlenmesi gerektiğini söyleyen <code>path</code> niteleyicisini içerir (hem dizin yollarını hem de dosyaları içerir).</p>
 <h3 id="33-workflow-tanm">3.3. <code>workflow</code> tanımı<a class="headerlink" href="#33-workflow-tanm" title="Permanent link">&para;</a></h3>
-<p>İkinci kod bloğu <strong>workflow</strong>'un kendisini tanımlar.
+<p>İkinci kod bloğu <a href="https://nextflow.io/docs/latest/workflow.html"><strong>workflow</strong></a>'un kendisini tanımlar.
 Workflow tanımı <code>workflow</code> anahtar kelimesiyle başlar, ardından isteğe bağlı bir ad ve süslü parantezlerle sınırlandırılmış workflow gövdesi gelir.</p>
 <p>Burada <code>main:</code> bloğu ve <code>publish:</code> bloğundan oluşan bir <strong>workflow</strong>'umuz var.
 <code>main:</code> bloğu workflow'un ana gövdesidir ve <code>publish:</code> bloğu <code>results</code> dizinine yayınlanması gereken çıktıları listeler.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-27">27</a></span>
-<span class="normal"><a href="#__codelineno-20-28">28</a></span>
-<span class="normal"><a href="#__codelineno-20-29">29</a></span>
-<span class="normal"><a href="#__codelineno-20-30">30</a></span>
-<span class="normal"><a href="#__codelineno-20-31">31</a></span>
-<span class="normal"><a href="#__codelineno-20-32">32</a></span>
-<span class="normal"><a href="#__codelineno-20-33">33</a></span>
-<span class="normal"><a href="#__codelineno-20-34">34</a></span>
-<span class="normal"><a href="#__codelineno-20-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-27" name="__codelineno-20-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-20-28" name="__codelineno-20-28"></a>
-<a id="__codelineno-20-29" name="__codelineno-20-29"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-20-30" name="__codelineno-20-30"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
-<a id="__codelineno-20-31" name="__codelineno-20-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-20-32" name="__codelineno-20-32"></a>
-<a id="__codelineno-20-33" name="__codelineno-20-33"></a><span class="w">    </span><span class="nl">publish:</span>
-<a id="__codelineno-20-34" name="__codelineno-20-34"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
-<a id="__codelineno-20-35" name="__codelineno-20-35"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-27">27</a></span>
+<span class="normal"><a href="#__codelineno-23-28">28</a></span>
+<span class="normal"><a href="#__codelineno-23-29">29</a></span>
+<span class="normal"><a href="#__codelineno-23-30">30</a></span>
+<span class="normal"><a href="#__codelineno-23-31">31</a></span>
+<span class="normal"><a href="#__codelineno-23-32">32</a></span>
+<span class="normal"><a href="#__codelineno-23-33">33</a></span>
+<span class="normal"><a href="#__codelineno-23-34">34</a></span>
+<span class="normal"><a href="#__codelineno-23-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-28" name="__codelineno-23-28"></a>
+<a id="__codelineno-23-29" name="__codelineno-23-29"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-23-30" name="__codelineno-23-30"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
+<a id="__codelineno-23-31" name="__codelineno-23-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-23-32" name="__codelineno-23-32"></a>
+<a id="__codelineno-23-33" name="__codelineno-23-33"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-23-34" name="__codelineno-23-34"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
+<a id="__codelineno-23-35" name="__codelineno-23-35"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Bu durumda <code>main:</code> bloğu <code>sayHello</code> process'ine bir çağrı içerir ve selamlama olarak kullanması için <code>params.input</code> adlı bir girdi verir.</p>
+<p>Bu durumda <code>main:</code> bloğu <code>sayHello</code> sürecine bir çağrı içerir ve selamlama olarak kullanması için <code>params.input</code> adlı bir girdi verir.</p>
 <p>Birazdan daha ayrıntılı tartışacağımız gibi, <code>params.input</code> komut satırımızda <code>--input</code> parametresine verdiğimiz değeri tutar.</p>
-<p><code>publish:</code> bloğu, <code>sayHello()</code> process çağrısının çıktısını listeler, buna <code>sayHello.out</code> olarak atıfta bulunur ve <code>first_output</code> adını verir (bu, workflow yazarının istediği herhangi bir şey olabilir).</p>
+<p><code>publish:</code> bloğu, <code>sayHello()</code> süreç çağrısının çıktısını listeler, buna <code>sayHello.out</code> olarak atıfta bulunur ve <code>first_output</code> adını verir (bu, workflow yazarının istediği herhangi bir şey olabilir).</p>
 <p>Bu çok minimal bir <strong>workflow</strong> tanımıdır.
 Gerçek dünya pipeline'larında, workflow tipik olarak <strong>channel</strong>'larla bağlanan birden fazla <strong>process</strong> çağrısı içerir ve değişken girdiler için varsayılan değerler ayarlanmış olabilir.</p>
 <p>Kursun 2. Bölümünde buna gireceğiz.
 Şimdilik, workflow'umuzun girdileri ve çıktıları nasıl işlediğine daha yakından bakalım.</p>
 <h3 id="34-komut-satr-parametreleri-icin-params-sistemi">3.4. Komut satırı parametreleri için <code>params</code> sistemi<a class="headerlink" href="#34-komut-satr-parametreleri-icin-params-sistemi" title="Permanent link">&para;</a></h3>
-<p><code>sayHello()</code> process çağrısına sağladığımız <code>params.input</code>, şık bir Nextflow kod parçasıdır ve üzerinde ekstra bir dakika harcamaya değer.</p>
-<p>Yukarıda belirtildiği gibi, <code>--input</code> komut satırı parametresinin değerini <code>sayHello()</code> process çağrısına bu şekilde geçiriyoruz.
+<p><code>sayHello()</code> süreç çağrısına sağladığımız <code>params.input</code>, şık bir Nextflow kod parçasıdır ve üzerinde ekstra bir dakika harcamaya değer.</p>
+<p>Yukarıda belirtildiği gibi, <code>--input</code> komut satırı parametresinin değerini <code>sayHello()</code> süreç çağrısına bu şekilde geçiriyoruz.
 Aslında, sadece <code>params.someParameterName</code> bildirmek, workflow'a komut satırından <code>--someParameterName</code> adlı bir parametre vermek için yeterlidir.</p>
 <p>Burada bu parametre bildirimini, workflow'un beklediği girdi türünü belirten bir <code>params</code> bloğu kurarak resmileştirdik (Nextflow 25.10.2 ve sonrası).</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-20">20</a></span>
-<span class="normal"><a href="#__codelineno-21-21">21</a></span>
-<span class="normal"><a href="#__codelineno-21-22">22</a></span>
-<span class="normal"><a href="#__codelineno-21-23">23</a></span>
-<span class="normal"><a href="#__codelineno-21-24">24</a></span>
-<span class="normal"><a href="#__codelineno-21-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-20" name="__codelineno-21-20"></a><span class="cm">/*</span>
-<a id="__codelineno-21-21" name="__codelineno-21-21"></a><span class="cm"> * Pipeline parametreleri</span>
-<a id="__codelineno-21-22" name="__codelineno-21-22"></a><span class="cm"> */</span>
-<a id="__codelineno-21-23" name="__codelineno-21-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-21-24" name="__codelineno-21-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
-<a id="__codelineno-21-25" name="__codelineno-21-25"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-20">20</a></span>
+<span class="normal"><a href="#__codelineno-24-21">21</a></span>
+<span class="normal"><a href="#__codelineno-24-22">22</a></span>
+<span class="normal"><a href="#__codelineno-24-23">23</a></span>
+<span class="normal"><a href="#__codelineno-24-24">24</a></span>
+<span class="normal"><a href="#__codelineno-24-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-20" name="__codelineno-24-20"></a><span class="cm">/*</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="cm"> * Pipeline parametreleri</span>
+<a id="__codelineno-24-22" name="__codelineno-24-22"></a><span class="cm"> */</span>
+<a id="__codelineno-24-23" name="__codelineno-24-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-24-24" name="__codelineno-24-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
+<a id="__codelineno-24-25" name="__codelineno-24-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Desteklenen türler arasında <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code> ve <code>Path</code> bulunur.</p>
+<p>Desteklenen türler arasında <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code> ve <code>Path</code> bulunur.
+Daha fazla bilgi için, Nextflow referans dokümantasyonundaki <a href="https://nextflow.io/docs/latest/config.html#workflow-parameters">Workflow parametreleri</a> bölümüne bakın.</p>
 <div class="admonition tip">
 <p class="admonition-title">İpucu</p>
-<p><code>params</code> sistemi kullanılarak bildirilen workflow parametreleri komut satırında her zaman iki tire alır (<code>--</code>).
-Bu, onları yalnızca bir tire alan (<code>-</code>) Nextflow düzeyindeki parametrelerden ayırır.</p>
+<p><code>params</code> sistemi kullanılarak bildirilen <em>workflow</em> parametreleri komut satırında her zaman iki tire alır (<code>--</code>).
+Bu, onları yalnızca bir tire alan (<code>-</code>) Nextflow düzeyindeki CLI bayraklarından ayırır.</p>
 </div>
 <h3 id="35-publish-direktifi">3.5. <code>publish</code> direktifi<a class="headerlink" href="#35-publish-direktifi" title="Permanent link">&para;</a></h3>
 <p>Workflow'un diğer ucunda, <code>publish:</code> bloğuna zaten göz attık.
 Bu, çıktı işleme sisteminin yarısıdır; diğer yarısı aşağıda bulunan <code>output</code> bloğudur.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-37">37</a></span>
-<span class="normal"><a href="#__codelineno-22-38">38</a></span>
-<span class="normal"><a href="#__codelineno-22-39">39</a></span>
-<span class="normal"><a href="#__codelineno-22-40">40</a></span>
-<span class="normal"><a href="#__codelineno-22-41">41</a></span>
-<span class="normal"><a href="#__codelineno-22-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-37" name="__codelineno-22-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-22-38" name="__codelineno-22-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-22-39" name="__codelineno-22-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
-<a id="__codelineno-22-40" name="__codelineno-22-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-22-41" name="__codelineno-22-41"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-22-42" name="__codelineno-22-42"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-37">37</a></span>
+<span class="normal"><a href="#__codelineno-25-38">38</a></span>
+<span class="normal"><a href="#__codelineno-25-39">39</a></span>
+<span class="normal"><a href="#__codelineno-25-40">40</a></span>
+<span class="normal"><a href="#__codelineno-25-41">41</a></span>
+<span class="normal"><a href="#__codelineno-25-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-37" name="__codelineno-25-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-25-38" name="__codelineno-25-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-25-39" name="__codelineno-25-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
+<a id="__codelineno-25-40" name="__codelineno-25-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-25-41" name="__codelineno-25-41"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-25-42" name="__codelineno-25-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu, <code>publish:</code> bloğunda listelenen <code>first_output</code> çıktısının varsayılan <code>results</code> çıktı dizini altında <code>1-hello</code> adlı bir alt dizine kopyalanması gerektiğini belirtir.</p>
 <p><code>mode 'copy'</code> satırı, sistemin varsayılan davranışını geçersiz kılar, bu davranış düzgün bir kopya yerine <code>work/</code> dizinindeki orijinal dosyaya sembolik bir bağlantı (veya symlink) yapmaktır.</p>
 <p>Yayınlama davranışını kontrol etmek için burada gösterilenden daha fazla seçenek vardır; daha sonra birkaçını ele alacağız.
 Bir workflow birden fazla çıktı ürettiğinde, her birinin <code>output</code> bloğunda bu şekilde listelendiğini de göreceksiniz.</p>
+<p>Daha fazla bilgi için, Nextflow referans dokümantasyonundaki <a href="https://nextflow.io/docs/latest/workflow.html#publishing-outputs">Çıktıları yayınlama</a> bölümüne bakın.</p>
 <details class="info">
 <summary><code>publishDir</code> kullanarak çıktıları yayınlamak için eski sözdizimi</summary>
-<p>Çok yakın zamana kadar, çıktıları yayınlamanın yerleşik yolu, <code>publishDir</code> direktifi kullanarak her bir process düzeyinde yapmaktı.</p>
-<p>Bu kod kalıbını eski Nextflow pipeline'larında ve process modüllerinde hala her yerde bulacaksınız, bu yüzden bunun farkında olmak önemlidir.</p>
-<p>Workflow'da <code>publish:</code> bloğu ve üst düzeyde <code>output</code> bloğu yerine, <code>sayHello</code> process tanımında bir <code>publishDir</code> satırı görürdünüz:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Sözdizimi örneği</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-23-10">10</a></span>
-<span class="normal"><a href="#__codelineno-23-11">11</a></span>
-<span class="normal"><a href="#__codelineno-23-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2"></a>
-<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results/1-hello&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-</span><a id="__codelineno-23-4" name="__codelineno-23-4"></a>
-<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7"></a>
-<a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
-<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="o">}</span>
+<p>Çok yakın zamana kadar, çıktıları yayınlamanın yerleşik yolu, <code>publishDir</code> direktifi kullanarak her bir süreç düzeyinde yapmaktı.</p>
+<p>Bu kod kalıbını eski Nextflow pipeline'larında ve süreç modüllerinde hala her yerde bulacaksınız, bu yüzden bunun farkında olmak önemlidir.</p>
+<p>Workflow'da <code>publish:</code> bloğu ve üst düzeyde <code>output</code> bloğu yerine, <code>sayHello</code> süreç tanımında bir <code>publishDir</code> satırı görürdünüz:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Sözdizimi örneği</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results/1-hello&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+</span><a id="__codelineno-26-4" name="__codelineno-26-4"></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7"></a>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Ancak, gelecekteki Nextflow dil sürümlerinde sonunda yasaklanacağı için bunu herhangi bir yeni çalışmada kullanmanızı önermiyoruz.</p>
 </details>
@@ -4702,55 +4767,15 @@ Bir workflow birden fazla çıktı ürettiğinde, her birinin <code>output</code
 <h3 id="41-resume-ile-bir-workflowu-yeniden-baslatn">4.1. <code>-resume</code> ile bir workflow'u yeniden başlatın<a class="headerlink" href="#41-resume-ile-bir-workflowu-yeniden-baslatn" title="Permanent link">&para;</a></h3>
 <p>Bazen, daha önce başlattığınız bir pipeline'ı, önceden başarıyla tamamlanmış herhangi bir işi yeniden yapmadan çalıştırmak isteyeceksiniz.</p>
 <p>Nextflow'un bunu yapmanıza olanak tanıyan <code>-resume</code> adlı bir seçeneği vardır.
-Özellikle, bu modda, tam olarak aynı kod, ayarlar ve girdilerle zaten çalıştırılmış olan tüm process'ler atlanacaktır.
-Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya değiştirdiğiniz ya da yeni ayarlar veya girdiler sağladığınız process'leri çalıştıracağı anlamına gelir.</p>
+Özellikle, bu modda, tam olarak aynı kod, ayarlar ve girdilerle zaten çalıştırılmış olan tüm süreçler atlanacaktır.
+Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya değiştirdiğiniz ya da yeni ayarlar veya girdiler sağladığınız süreçleri çalıştıracağı anlamına gelir.</p>
 <p>Bunu yapmanın iki önemli avantajı vardır:</p>
 <ul>
-<li>Bir pipeline geliştirmenin ortasındaysanız, değişikliklerinizi test etmek için yalnızca aktif olarak üzerinde çalıştığınız process(ler)i çalıştırmanız gerektiğinden daha hızlı iterasyon yapabilirsiniz.</li>
+<li>Bir pipeline geliştirmenin ortasındaysanız, değişikliklerinizi test etmek için yalnızca aktif olarak üzerinde çalıştığınız süreç(ler)i çalıştırmanız gerektiğinden daha hızlı iterasyon yapabilirsiniz.</li>
 <li>Üretimde bir pipeline çalıştırıyorsanız ve bir şeyler ters giderse, birçok durumda sorunu düzeltebilir ve pipeline'ı yeniden başlatabilirsiniz ve başarısızlık noktasından itibaren çalışmaya devam eder, bu da size çok zaman ve hesaplama tasarrufu sağlayabilir.</li>
 </ul>
 <p>Kullanmak için, komutunuza <code>-resume</code> ekleyin ve çalıştırın:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
-</code></pre></div>
-<details class="success">
-<summary>Komut çıktısı</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
-<span class="normal"><a href="#__codelineno-25-2">2</a></span>
-<span class="normal"><a href="#__codelineno-25-3">3</a></span>
-<span class="normal"><a href="#__codelineno-25-4">4</a></span>
-<span class="normal"><a href="#__codelineno-25-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2"></a>
-<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
-<a id="__codelineno-25-4" name="__codelineno-25-4"></a>
-<a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
-</code></pre></div></td></tr></table></div>
-</details>
-<p>Konsol çıktısı tanıdık görünmeli, ancak öncekine kıyasla biraz farklı olan bir şey var.</p>
-<p>Process durum satırında (satır 5) eklenen <code>cached:</code> kısmına bakın, bu Nextflow'un bu işi zaten yaptığını tanıdığı ve önceki başarılı çalıştırmanın sonucunu yeniden kullandığı anlamına gelir.</p>
-<p>Ayrıca çalışma alt dizini hash'inin önceki çalıştırmayla aynı olduğunu görebilirsiniz.
-Nextflow kelimenin tam anlamıyla size önceki çalıştırmayı gösteriyor ve "Bunu zaten orada yaptım" diyor.</p>
-<div class="admonition tip">
-<p class="admonition-title">İpucu</p>
-<p>Bir pipeline'ı <code>resume</code> ile yeniden çalıştırdığınızda, Nextflow daha önce başarıyla çalıştırılan çalıştırmalar tarafından çalışma dizininin dışında yayınlanan hiçbir dosyanın üzerine yazmaz.</p>
-</div>
-<h3 id="42-gecmis-calstrmalarn-logunu-inceleyin">4.2. Geçmiş çalıştırmaların logunu inceleyin<a class="headerlink" href="#42-gecmis-calstrmalarn-logunu-inceleyin" title="Permanent link">&para;</a></h3>
-<p>Bir nextflow workflow'u başlattığınızda, geçerli çalışma dizininde <code>.nextflow</code> adlı gizli bir dizin altında <code>history</code> adlı bir log dosyasına bir satır yazılır.</p>
-<details class="abstract">
-<summary>Dosya içeriği</summary>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
-<span class="normal"><a href="#__codelineno-26-2">2</a></span>
-<span class="normal"><a href="#__codelineno-26-3">3</a></span>
-<span class="normal"><a href="#__codelineno-26-4">4</a></span>
-<span class="normal"><a href="#__codelineno-26-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
-<a id="__codelineno-26-2" name="__codelineno-26-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
-<a id="__codelineno-26-3" name="__codelineno-26-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
-<a id="__codelineno-26-4" name="__codelineno-26-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
-<a id="__codelineno-26-5" name="__codelineno-26-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
-</code></pre></div></td></tr></table></div>
-</details>
-<p>Bu dosya size geçerli çalışma dizininden başlatılan her Nextflow çalıştırması için zaman damgası, çalıştırma adı, durum, revizyon kimliği, oturum kimliği ve tam komut satırını verir.</p>
-<p>Bu bilgilere erişmenin daha uygun bir yolu <code>nextflow log</code> komutunu kullanmaktır.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>nextflow<span class="w"> </span>log
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
@@ -4758,13 +4783,54 @@ Nextflow kelimenin tam anlamıyla size önceki çalıştırmayı gösteriyor ve 
 <span class="normal"><a href="#__codelineno-28-2">2</a></span>
 <span class="normal"><a href="#__codelineno-28-3">3</a></span>
 <span class="normal"><a href="#__codelineno-28-4">4</a></span>
-<span class="normal"><a href="#__codelineno-28-5">5</a></span>
-<span class="normal"><a href="#__codelineno-28-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
-<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
+<span class="normal"><a href="#__codelineno-28-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4"></a>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Konsol çıktısı tanıdık görünmeli, ancak öncekine kıyasla biraz farklı olan bir şey var.</p>
+<p>Süreç durum satırında (satır 5) eklenen <code>cached:</code> kısmına bakın, bu Nextflow'un bu işi zaten yaptığını tanıdığı ve önceki başarılı çalıştırmanın sonucunu yeniden kullandığı anlamına gelir.</p>
+<p>Ayrıca çalışma alt dizini hash'inin önceki çalıştırmayla aynı olduğunu görebilirsiniz.
+Nextflow kelimenin tam anlamıyla size önceki çalıştırmayı gösteriyor ve "Bunu zaten orada yaptım" diyor.</p>
+<div class="admonition tip">
+<p class="admonition-title">İpucu</p>
+<p>Bir pipeline'ı <code>resume</code> ile yeniden çalıştırdığınızda, Nextflow daha önce başarıyla çalıştırılan çalıştırmalar tarafından çalışma dizininin dışında yayınlanan hiçbir dosyanın üzerine yazmaz.</p>
+<p>Daha fazla bilgi için, Nextflow referans dokümantasyonundaki <a href="https://nextflow.io/docs/latest/cache-and-resume.html">Cache ve resume</a> bölümüne bakın.</p>
+</div>
+<h3 id="42-gecmis-calstrmalarn-logunu-inceleyin">4.2. Geçmiş çalıştırmaların logunu inceleyin<a class="headerlink" href="#42-gecmis-calstrmalarn-logunu-inceleyin" title="Permanent link">&para;</a></h3>
+<p>Bir nextflow workflow'u başlattığınızda, geçerli çalışma dizininde <code>.nextflow</code> adlı gizli bir dizin altında <code>history</code> adlı bir log dosyasına bir satır yazılır.</p>
+<details class="abstract">
+<summary>Dosya içeriği</summary>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
+<span class="normal"><a href="#__codelineno-29-2">2</a></span>
+<span class="normal"><a href="#__codelineno-29-3">3</a></span>
+<span class="normal"><a href="#__codelineno-29-4">4</a></span>
+<span class="normal"><a href="#__codelineno-29-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
+<a id="__codelineno-29-2" name="__codelineno-29-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
+<a id="__codelineno-29-3" name="__codelineno-29-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
+<a id="__codelineno-29-4" name="__codelineno-29-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
+<a id="__codelineno-29-5" name="__codelineno-29-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
+</code></pre></div></td></tr></table></div>
+</details>
+<p>Bu dosya size geçerli çalışma dizininden başlatılan her Nextflow çalıştırması için zaman damgası, çalıştırma adı, durum, revizyon kimliği, oturum kimliği ve tam komut satırını verir.</p>
+<p>Bu bilgilere erişmenin daha uygun bir yolu <a href="https://nextflow.io/docs/latest/reference/cli.html#log"><code>nextflow log</code></a> komutunu kullanmaktır.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nextflow<span class="w"> </span>log
+</code></pre></div>
+<details class="success">
+<summary>Komut çıktısı</summary>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span>
+<span class="normal"><a href="#__codelineno-31-3">3</a></span>
+<span class="normal"><a href="#__codelineno-31-4">4</a></span>
+<span class="normal"><a href="#__codelineno-31-5">5</a></span>
+<span class="normal"><a href="#__codelineno-31-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Bu, log dosyasının içeriğini bir başlık satırıyla zenginleştirerek terminale çıktı verecektir.</p>
@@ -4774,35 +4840,35 @@ Bu durumda, oturum kimliği aynı kalır.</p>
 <h3 id="43-eski-calsma-dizinlerini-silin">4.3. Eski çalışma dizinlerini silin<a class="headerlink" href="#43-eski-calsma-dizinlerini-silin" title="Permanent link">&para;</a></h3>
 <p>Çok sayıda pipeline çalıştırırsanız, birçok alt dizin boyunca çok sayıda dosya biriktirebilirsiniz.
 Alt dizinler rastgele adlandırıldığından, adlarından hangilerinin daha eski veya daha yeni çalıştırmalar olduğunu söylemek zordur.</p>
-<p>Neyse ki Nextflow, artık umursamadığınız geçmiş çalıştırmalar için çalışma alt dizinlerini otomatik olarak silebilen yararlı bir <code>clean</code> alt komutu içerir.</p>
+<p>Neyse ki Nextflow, artık umursamadığınız geçmiş çalıştırmalar için çalışma alt dizinlerini otomatik olarak silebilen yararlı bir <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean"><code>nextflow clean</code></a> komutu içerir.</p>
 <h4 id="431-silme-kriterlerini-belirleyin">4.3.1. Silme kriterlerini belirleyin<a class="headerlink" href="#431-silme-kriterlerini-belirleyin" title="Permanent link">&para;</a></h4>
-<p>Neyin silineceğini belirlemek için birden fazla <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">seçenek</a> vardır.</p>
-<p>Burada size belirli bir çalıştırmadan önceki tüm alt dizinleri silen bir örnek gösteriyoruz, çalıştırma adı kullanılarak belirtilir.</p>
+<p>Neyin silineceğini belirlemek için birden fazla seçenek vardır, yukarıda bağlantısı verilen dokümantasyonda bunları keşfedebilirsiniz.
+Burada size belirli bir çalıştırmadan önceki tüm alt dizinleri silen bir örnek gösteriyoruz, çalıştırma adı kullanılarak belirtilir.</p>
 <p><code>-resume</code> kullanmadığınız en son başarılı çalıştırmayı bulun; bizim durumumuzda çalıştırma adı <code>backstabbing_swartz</code> idi.</p>
 <p>Çalıştırma adı, <code>Launching (...)</code> konsol çıktı satırında köşeli parantezler içinde gösterilen makine tarafından oluşturulan iki parçalı dizedir.
 Ayrıca zaman damgası ve/veya komut satırına göre bir çalıştırmayı aramak için Nextflow logunu kullanabilirsiniz.</p>
 <h4 id="432-kuru-calstrma-yapn">4.3.2. Kuru çalıştırma yapın<a class="headerlink" href="#432-kuru-calstrma-yapn" title="Permanent link">&para;</a></h4>
 <p>Önce, komut verildiğinde neyin silineceğini kontrol etmek için kuru çalıştırma bayrağı <code>-n</code> kullanıyoruz:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-n
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-n
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
 </code></pre></div>
 </details>
 <p>Çıktınız farklı görev dizini adlarına sahip olacak ve farklı sayıda satır olabilir, ancak örneğe benzer görünmelidir.</p>
 <p>Herhangi bir satır çıktı görmüyorsanız, ya geçerli bir çalıştırma adı sağlamadınız ya da silecek geçmiş çalıştırma yok. Örnek komuttaki <code>backstabbing_swartz</code>'ı loginizdeki ilgili en son çalıştırma adıyla değiştirdiğinizden emin olun.</p>
 <h4 id="433-silme-islemine-devam-edin">4.3.3. Silme işlemine devam edin<a class="headerlink" href="#433-silme-islemine-devam-edin" title="Permanent link">&para;</a></h4>
 <p>Çıktı beklendiği gibi görünüyorsa ve silme işlemine devam etmek istiyorsanız, <code>-n</code> yerine <code>-f</code> bayrağıyla komutu yeniden çalıştırın:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-f
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-f
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
 </code></pre></div>
 </details>
 <p>Çıktı daha önceye benzer olmalı, ancak şimdi 'Would remove' yerine 'Removed' diyor.
@@ -4810,7 +4876,7 @@ Bunun iki karakterli alt dizinleri (yukarıdaki <code>eb/</code> gibi) kaldırma
 <div class="admonition warning">
 <p class="admonition-title">Uyarı</p>
 <p>Geçmiş çalıştırmalardan çalışma alt dizinlerini silmek, onları Nextflow'un önbelleğinden kaldırır ve bu dizinlerde depolanan tüm çıktıları siler.
-Bu, Nextflow'un ilgili process'leri yeniden çalıştırmadan çalışmaya devam etme yeteneğini bozar.</p>
+Bu, Nextflow'un ilgili süreçleri yeniden çalıştırmadan çalışmaya devam etme yeteneğini bozar.</p>
 <p>Önemsediğiniz çıktıları kaydetmekten siz sorumlusunuz! Bu, <code>publish</code> direktifi için <code>symlink</code> modu yerine <code>copy</code> modunu tercih etmemizin ana nedenidir.</p>
 </div>
 <h3 id="ozet_3">Özet<a class="headerlink" href="#ozet_3" title="Permanent link">&para;</a></h3>
@@ -4823,12 +4889,12 @@ Bu, Nextflow'un ilgili process'leri yeniden çalıştırmadan çalışmaya devam
 <!-- mkdocs-quiz-source
 <quiz>
 `[a3/7be2fa] SAYHELLO | 1 of 1 ✔` konsol çıktı satırında `[a3/7be2fa]` neyi temsil eder?
-- [ ] Process versiyon numarası
+- [ ] Süreç versiyon numarası
 - [ ] Benzersiz bir çalıştırma tanımlayıcısı
 - [x] Görevin çalışma dizinine kısaltılmış yol
 - [ ] Çıktı dosyasının sağlama toplamı
 
-Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun)
+Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun](#24-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -4838,22 +4904,22 @@ Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun
         <p><code>[a3/7be2fa] SAYHELLO | 1 of 1 ✔</code> konsol çıktı satırında <code>[a3/7be2fa]</code> neyi temsil eder?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Process versiyon numarası</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" ><label for="quiz-0-1">Benzersiz bir çalıştırma tanımlayıcısı</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" correct><label for="quiz-0-2">Görevin çalışma dizinine kısaltılmış yol</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Çıktı dosyasının sağlama toplamı</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Süreç versiyon numarası</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" ><label for="quiz-0-1">Benzersiz bir çalıştırma tanımlayıcısı</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" correct><label for="quiz-0-2">Görevin çalışma dizinine kısaltılmış yol</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Çıktı dosyasının sağlama toplamı</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun">2.3. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#24-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun">2.4. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
 <quiz>
 Görev dizinindeki `.command.sh` dosyasının amacı nedir?
 - [ ] Görevin yapılandırma ayarlarını saklar
-- [x] Process tarafından yürütülen gerçek komutu gösterir
+- [x] Süreç tarafından yürütülen gerçek komutu gösterir
 - [ ] Başarısız görevlerden hata mesajlarını içerir
 - [ ] Görev için hazırlanan girdi dosyalarını listeler
 
-Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun)
+Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun](#24-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -4863,11 +4929,11 @@ Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun
         <p>Görev dizinindeki <code>.command.sh</code> dosyasının amacı nedir?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0">Görevin yapılandırma ayarlarını saklar</label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" correct><label for="quiz-1-1">Process tarafından yürütülen gerçek komutu gösterir</label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" ><label for="quiz-1-2">Başarısız görevlerden hata mesajlarını içerir</label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3">Görev için hazırlanan girdi dosyalarını listeler</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0">Görevin yapılandırma ayarlarını saklar</label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" correct><label for="quiz-1-1">Süreç tarafından yürütülen gerçek komutu gösterir</label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" ><label for="quiz-1-2">Başarısız görevlerden hata mesajlarını içerir</label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3">Görev için hazırlanan girdi dosyalarını listeler</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun">2.3. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#24-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun">2.4. Orijinal çıktıyı ve logları <code>work/</code> dizininde bulun</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -4878,7 +4944,7 @@ Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun
 - [ ] Nextflow üzerine yazmayı engeller ve başarısız olur
 - [ ] Otomatik olarak yedeklenirler
 
-Daha fazla bilgi: [2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın](#24-workflowu-farkli-selamlamalarla-yeniden-calistirin)
+Daha fazla bilgi: [2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın](#25-workflowu-farkli-selamlamalarla-yeniden-calistirin)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -4892,7 +4958,7 @@ Daha fazla bilgi: [2.4. Workflow'u farklı selamlamalarla yeniden çalıştırı
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#24-workflowu-farkli-selamlamalarla-yeniden-calistirin">2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#25-workflowu-farkli-selamlamalarla-yeniden-calistirin">2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -4955,7 +5021,7 @@ Daha fazla bilgi: [4.2. Geçmiş çalıştırmaların logunu inceleyin](#42-gecm
 <!-- mkdocs-quiz-source
 <quiz>
 Bir workflow dosyasındaki `params` bloğunun amacı nedir?
-- [ ] Process kaynak gereksinimlerini tanımlamak
+- [ ] Süreç kaynak gereksinimlerini tanımlamak
 - [ ] Executor'ı yapılandırmak
 - [x] Workflow girdi parametrelerini bildirmek ve türünü belirlemek
 - [ ] Çıktı yayınlama seçeneklerini belirtmek
@@ -4970,7 +5036,7 @@ Daha fazla bilgi: [3.4. Komut satırı parametreleri için params sistemi](#34-k
         <p>Bir workflow dosyasındaki <code>params</code> bloğunun amacı nedir?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-5-0" ><label for="quiz-5-0">Process kaynak gereksinimlerini tanımlamak</label></div><div><input type="radio" name="answer" value="1" id="quiz-5-1" ><label for="quiz-5-1">Executor'ı yapılandırmak</label></div><div><input type="radio" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2">Workflow girdi parametrelerini bildirmek ve türünü belirlemek</label></div><div><input type="radio" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3">Çıktı yayınlama seçeneklerini belirtmek</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-5-0" ><label for="quiz-5-0">Süreç kaynak gereksinimlerini tanımlamak</label></div><div><input type="radio" name="answer" value="1" id="quiz-5-1" ><label for="quiz-5-1">Executor'ı yapılandırmak</label></div><div><input type="radio" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2">Workflow girdi parametrelerini bildirmek ve türünü belirlemek</label></div><div><input type="radio" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3">Çıktı yayınlama seçeneklerini belirtmek</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>

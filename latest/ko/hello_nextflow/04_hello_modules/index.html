@@ -968,7 +968,7 @@
   <a href="#0-hello-modulesnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 워밍업: hello-modules.nf 실행
+        0. 준비 운동: hello-modules.nf 실행
       
     </span>
   </a>
@@ -1017,10 +1017,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-workflow-import" class="md-nav__link">
+  <a href="#23-workflow-include" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Workflow 블록 전에 import 선언 추가
+        2.3. Workflow 블록 전에 include 선언 추가
       
     </span>
   </a>
@@ -1042,7 +1042,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 내용
+        핵심 정리
       
     </span>
   </a>
@@ -1098,10 +1098,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-params-import" class="md-nav__link">
+  <a href="#33-params-include" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. params 블록 전에 import 선언 추가
+        3.3. params 블록 전에 include 선언 추가
       
     </span>
   </a>
@@ -1157,10 +1157,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-params-import" class="md-nav__link">
+  <a href="#43-params-include" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. params 블록 전에 import 선언 추가
+        4.3. params 블록 전에 include 선언 추가
       
     </span>
   </a>
@@ -1182,7 +1182,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 내용
+        핵심 정리
       
     </span>
   </a>
@@ -3497,7 +3497,7 @@
   <a href="#0-hello-modulesnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. 워밍업: hello-modules.nf 실행
+        0. 준비 운동: hello-modules.nf 실행
       
     </span>
   </a>
@@ -3546,10 +3546,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#23-workflow-import" class="md-nav__link">
+  <a href="#23-workflow-include" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.3. Workflow 블록 전에 import 선언 추가
+        2.3. Workflow 블록 전에 include 선언 추가
       
     </span>
   </a>
@@ -3571,7 +3571,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 내용
+        핵심 정리
       
     </span>
   </a>
@@ -3627,10 +3627,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-params-import" class="md-nav__link">
+  <a href="#33-params-include" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. params 블록 전에 import 선언 추가
+        3.3. params 블록 전에 include 선언 추가
       
     </span>
   </a>
@@ -3686,10 +3686,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-params-import" class="md-nav__link">
+  <a href="#43-params-include" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. params 블록 전에 import 선언 추가
+        4.3. params 블록 전에 include 선언 추가
       
     </span>
   </a>
@@ -3711,7 +3711,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        핵심 내용
+        핵심 정리
       
     </span>
   </a>
@@ -4014,9 +4014,9 @@
 -->
 
 <p>이 섹션에서는 파이프라인의 개발 및 유지보수를 더 효율적이고 지속 가능하게 만들기 위해 workflow 코드를 구성하는 방법을 다룹니다.
-구체적으로, <strong>모듈</strong>을 사용하는 방법을 시연할 것입니다.</p>
-<p>Nextflow에서 <strong>모듈</strong>은 독립적인 코드 파일에 캡슐화된 단일 process 정의입니다.
-Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 import 문만 추가하면 됩니다; 그런 다음 일반적으로 하는 것과 같은 방식으로 process를 workflow에 통합할 수 있습니다.
+구체적으로, <a href="https://nextflow.io/docs/latest/module.html"><strong>모듈</strong></a>을 사용하는 방법을 시연할 것입니다.</p>
+<p>Nextflow에서 <strong>모듈</strong>은 독립적인 코드 파일이며, 종종 단일 process 정의를 캡슐화합니다.
+Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 <code>include</code> 문만 추가하면 됩니다. 그런 다음 일반적으로 하는 것과 같은 방식으로 process를 workflow에 통합할 수 있습니다.
 이렇게 하면 코드의 여러 복사본을 생성하지 않고도 여러 workflow에서 process 정의를 재사용할 수 있습니다.</p>
 <p>Workflow 개발을 시작했을 때, 우리는 모든 것을 하나의 단일 코드 파일에 작성했습니다.
 이제 process를 개별 모듈로 이동할 것입니다.</p>
@@ -4034,7 +4034,7 @@ Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 im
 <p>이 섹션은 <a href="../">Hello Nextflow</a> 과정의 파트 1-3을 완료했다고 가정하지만, 해당 섹션에서 다룬 기본 사항에 익숙하다면 특별한 준비 없이 여기서 시작할 수 있습니다.</p>
 </details>
 <hr />
-<h2 id="0-hello-modulesnf">0. 워밍업: <code>hello-modules.nf</code> 실행<a class="headerlink" href="#0-hello-modulesnf" title="Permanent link">&para;</a></h2>
+<h2 id="0-hello-modulesnf">0. 준비 운동: <code>hello-modules.nf</code> 실행<a class="headerlink" href="#0-hello-modulesnf" title="Permanent link">&para;</a></h2>
 <p>시작점으로 workflow 스크립트 <code>hello-modules.nf</code>를 사용할 것입니다.
 이 스크립트는 이 교육 과정의 파트 3을 완료하여 생성된 스크립트와 동일하지만, 출력 대상을 변경했습니다:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-37">37</a></span>
@@ -4109,16 +4109,11 @@ Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 im
 해당 디렉토리의 이름은 원하는 대로 지을 수 있지만, 관례상 <code>modules/</code>라고 부릅니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdir<span class="w"> </span>modules
 </code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">팁</p>
-<p>여기서는 <strong>로컬 모듈</strong>을 사용하는 방법을 보여드리고 있습니다. 이는 workflow 코드의 나머지 부분과 동일한 저장소에 로컬로 저장된 모듈을 의미하며, 다른 (원격) 저장소에 저장된 원격 모듈과 대조됩니다.
-<strong>원격 모듈</strong>에 대한 자세한 내용은 <a href="https://www.nextflow.io/docs/latest/module.html">문서</a>를 참조하십시오.</p>
-</div>
 <hr />
 <h2 id="2-sayhello">2. <code>sayHello()</code>용 모듈 생성<a class="headerlink" href="#2-sayhello" title="Permanent link">&para;</a></h2>
 <p>가장 간단한 형태에서, 기존 process를 모듈로 전환하는 것은 복사-붙여넣기 작업에 불과합니다.
 모듈에 대한 파일 스텁을 생성하고, 관련 코드를 복사한 다음 메인 workflow 파일에서 삭제할 것입니다.</p>
-<p>그런 다음 import 문만 추가하면 Nextflow가 런타임에 관련 코드를 가져올 것입니다.</p>
+<p>그런 다음 <code>include</code> 문만 추가하면 Nextflow가 런타임에 관련 코드를 가져올 것입니다.</p>
 <h3 id="21">2.1. 새 모듈에 대한 파일 스텁 생성<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><code>sayHello.nf</code>라는 모듈에 대한 빈 파일을 생성합시다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>touch<span class="w"> </span>modules/sayHello.nf
@@ -4163,9 +4158,9 @@ Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 im
 <a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.</p>
-<h3 id="23-workflow-import">2.3. Workflow 블록 전에 import 선언 추가<a class="headerlink" href="#23-workflow-import" title="Permanent link">&para;</a></h3>
-<p>로컬 모듈을 가져오는 구문은 매우 간단합니다:</p>
-<div class="highlight"><span class="filename">구문: Import 선언</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">MODULE_NAME</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;path_to_module&gt;&#39;</span>
+<h3 id="23-workflow-include">2.3. Workflow 블록 전에 include 선언 추가<a class="headerlink" href="#23-workflow-include" title="Permanent link">&para;</a></h3>
+<p>모듈에서 process를 가져오는 구문은 매우 간단합니다:</p>
+<div class="highlight"><span class="filename">구문: Include 선언</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">PROCESS_NAME</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;path_to_module&gt;&#39;</span>
 </code></pre></div>
 <p><code>params</code> 블록 위에 이것을 삽입하고 적절하게 채웁시다.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">수정 후</label><label for="__tabbed_1_2">수정 전</label></div>
@@ -4210,7 +4205,7 @@ Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 im
 </div>
 </div>
 </div>
-<p>모듈 이름인 <code>sayHello</code>와 모듈 코드가 포함된 파일 경로인 <code>./modules/sayHello.nf</code>를 채웠습니다.</p>
+<p>process 이름인 <code>sayHello</code>와 모듈 코드가 포함된 파일 경로인 <code>./modules/sayHello.nf</code>를 채웠습니다.</p>
 <h3 id="24-workflow">2.4. Workflow 실행<a class="headerlink" href="#24-workflow" title="Permanent link">&para;</a></h3>
 <p>이전과 본질적으로 동일한 코드와 입력으로 workflow를 실행하고 있으므로, <code>-resume</code> 플래그로 실행하고 어떻게 되는지 살펴봅시다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
@@ -4229,7 +4224,7 @@ Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 im
 <p>모든 것이 캐시되어 있으므로 매우 빠르게 실행되어야 합니다.
 게시된 출력을 자유롭게 확인하십시오.</p>
 <p>Nextflow는 코드가 여러 파일로 분할되어 있더라도 여전히 동일한 작업이 수행되어야 함을 인식했습니다.</p>
-<h3 id="_1">핵심 내용<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h3 id="_1">핵심 정리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>Process를 로컬 모듈로 추출하는 방법과 이렇게 해도 workflow의 재개 가능성이 깨지지 않는다는 것을 알게 되었습니다.</p>
 <h3 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>더 많은 모듈을 만드는 연습을 합니다.
@@ -4280,8 +4275,8 @@ Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 im
 <a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.</p>
-<h3 id="33-params-import">3.3. <code>params</code> 블록 전에 import 선언 추가<a class="headerlink" href="#33-params-import" title="Permanent link">&para;</a></h3>
-<p><code>params</code> 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.</p>
+<h3 id="33-params-include">3.3. <code>params</code> 블록 전에 include 선언 추가<a class="headerlink" href="#33-params-include" title="Permanent link">&para;</a></h3>
+<p><code>params</code> 블록 위에 include 선언을 삽입하고 적절하게 채웁니다.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">수정 후</label><label for="__tabbed_2_2">수정 전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -4403,8 +4398,8 @@ Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 im
 <a id="__codelineno-19-22" name="__codelineno-19-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.</p>
-<h3 id="43-params-import">4.3. <code>params</code> 블록 전에 import 선언 추가<a class="headerlink" href="#43-params-import" title="Permanent link">&para;</a></h3>
-<p><code>params</code> 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.</p>
+<h3 id="43-params-include">4.3. <code>params</code> 블록 전에 include 선언 추가<a class="headerlink" href="#43-params-include" title="Permanent link">&para;</a></h3>
+<p><code>params</code> 블록 위에 include 선언을 삽입하고 적절하게 채웁니다.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">수정 후</label><label for="__tabbed_3_2">수정 전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -4476,10 +4471,10 @@ Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 im
 </code></pre></div>
 </details>
 <p>이것은 여전히 이전과 동일한 출력을 생성해야 합니다.</p>
-<h3 id="_3">핵심 내용<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_3">핵심 정리<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>Workflow에서 여러 process를 모듈화하는 방법을 알게 되었습니다.</p>
 <p>축하합니다, 이 모든 작업을 수행했지만 파이프라인 작동 방식에는 아무것도 변경되지 않았습니다!</p>
-<p>농담은 제쳐두고, 이제 코드가 더 모듈화되었으며, 해당 process 중 하나를 호출하는 다른 파이프라인을 작성하기로 결정하면 관련 모듈을 사용하기 위해 짧은 import 문 하나만 입력하면 됩니다.
+<p>농담은 제쳐두고, 이제 코드가 더 모듈화되었으며, 해당 process 중 하나를 호출하는 다른 파이프라인을 작성하기로 결정하면 관련 모듈을 사용하기 위해 짧은 <code>include</code> 문 하나만 입력하면 됩니다.
 이것은 코드를 복사-붙여넣기하는 것보다 낫습니다. 나중에 모듈을 개선하기로 결정하면 모든 파이프라인이 개선 사항을 상속받기 때문입니다.</p>
 <h3 id="_4">다음 단계<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>원한다면 잠시 휴식을 취하십시오.</p>
@@ -4490,7 +4485,7 @@ Workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄의 im
 <quiz>
 Nextflow에서 모듈이란 무엇입니까?
 - [ ] 구성 파일
-- [x] 단일 process 정의가 포함된 독립 파일
+- [x] Process 정의를 포함할 수 있는 독립 파일
 - [ ] Workflow 정의
 - [ ] Channel 연산자
 
@@ -4504,7 +4499,7 @@ Nextflow에서 모듈이란 무엇입니까?
         <p>Nextflow에서 모듈이란 무엇입니까?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">구성 파일</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">단일 process 정의가 포함된 독립 파일</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Workflow 정의</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Channel 연산자</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">구성 파일</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">Process 정의를 포함할 수 있는 독립 파일</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Workflow 정의</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Channel 연산자</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4513,30 +4508,7 @@ Nextflow에서 모듈이란 무엇입니까?
 
 <!-- mkdocs-quiz-source
 <quiz>
-모듈 파일에 권장되는 명명 규칙은 무엇입니까?
-- [ ] `module_processName.nf`
-- [ ] `processName_module.nf`
-- [x] `processName.nf`
-- [ ] `mod_processName.nf`
-</quiz>
--->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
-    <a href="#quiz-1" class="quiz-header-link">#</a>
-
-    <div class="quiz-question">
-        <p>모듈 파일에 권장되는 명명 규칙은 무엇입니까?</p>
-    </div>
-    <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0"><code>module_processName.nf</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" ><label for="quiz-1-1"><code>processName_module.nf</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" correct><label for="quiz-1-2"><code>processName.nf</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3"><code>mod_processName.nf</code></label></div></fieldset>
-        <div class="quiz-feedback hidden"></div>
-
-    </form>
-    <section class="content hidden"></section>
-</div>
-
-<!-- mkdocs-quiz-source
-<quiz>
-모듈 파일은 어디에 저장해야 합니까?
+모듈 파일을 저장하는 데 일반적으로 사용되는 규칙은 무엇입니까?
 - [ ] Workflow와 같은 디렉토리에
 - [ ] `bin/` 디렉토리에
 - [x] `modules/` 디렉토리에
@@ -4545,14 +4517,14 @@ Nextflow에서 모듈이란 무엇입니까?
 자세히 알아보기: [1. 모듈을 저장할 디렉토리 생성](#1-모듈을-저장할-디렉토리-생성)
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
-    <a href="#quiz-2" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
+    <a href="#quiz-1" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>모듈 파일은 어디에 저장해야 합니까?</p>
+        <p>모듈 파일을 저장하는 데 일반적으로 사용되는 규칙은 무엇입니까?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0">Workflow와 같은 디렉토리에</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1"><code>bin/</code> 디렉토리에</label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" correct><label for="quiz-2-2"><code>modules/</code> 디렉토리에</label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3"><code>lib/</code> 디렉토리에</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0">Workflow와 같은 디렉토리에</label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" ><label for="quiz-1-1"><code>bin/</code> 디렉토리에</label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" correct><label for="quiz-1-2"><code>modules/</code> 디렉토리에</label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3"><code>lib/</code> 디렉토리에</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4561,28 +4533,28 @@ Nextflow에서 모듈이란 무엇입니까?
 
 <!-- mkdocs-quiz-source
 <quiz>
-모듈을 가져오는 올바른 구문은 무엇입니까?
+모듈을 사용하는 올바른 구문은 무엇입니까?
 
 - [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-자세히 알아보기: [2.3. import 선언 추가](#23-workflow-블록-전에-import-선언-추가)
+자세히 알아보기: [2.3. include 선언 추가](#23-workflow-블록-전에-include-선언-추가)
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
-    <a href="#quiz-3" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
+    <a href="#quiz-2" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>모듈을 가져오는 올바른 구문은 무엇입니까?</p>
+        <p>모듈을 사용하는 올바른 구문은 무엇입니까?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0"><code class="highlight"><span class="kn">import</span><span class="w"> </span><span class="err">{ </span><span class="nn">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1"><code class="highlight"><span class="n">require</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" correct><label for="quiz-3-2"><code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3"><code class="highlight"><span class="n">load</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0"><code class="highlight"><span class="kn">import</span><span class="w"> </span><span class="err">{ </span><span class="nn">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1"><code class="highlight"><span class="n">require</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" correct><label for="quiz-2-2"><code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3"><code class="highlight"><span class="n">load</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>자세히 알아보기: <a href="#23-workflow-블록-전에-import-선언-추가">2.3. import 선언 추가</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#23-workflow-블록-전에-include-선언-추가">2.3. include 선언 추가</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -4594,14 +4566,14 @@ Nextflow에서 모듈이란 무엇입니까?
 - [ ] 로컬 모듈에서만 작동함
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
-    <a href="#quiz-4" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
+    <a href="#quiz-3" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
         <p>모듈을 사용할 때 <code>-resume</code> 기능은 어떻게 됩니까?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0">더 이상 작동하지 않음</label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1">추가 구성이 필요함</label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">이전과 동일하게 작동함</label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">로컬 모듈에서만 작동함</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0">더 이상 작동하지 않음</label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1">추가 구성이 필요함</label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" correct><label for="quiz-3-2">이전과 동일하게 작동함</label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3">로컬 모듈에서만 작동함</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4617,14 +4589,14 @@ Nextflow에서 모듈이란 무엇입니까?
 - [ ] 더 빠른 실행 속도
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
-    <a href="#quiz-5" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
+    <a href="#quiz-4" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
         <p>모듈 사용의 이점은 무엇입니까? (해당되는 것 모두 선택)</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-5-0" correct><label for="quiz-5-0">Workflow 간 코드 재사용 가능</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-5-1" correct><label for="quiz-5-1">더 쉬운 유지보수</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2">Workflow 코드의 더 나은 구성</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3">더 빠른 실행 속도</label></div></fieldset>
+        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-4-0" correct><label for="quiz-4-0">Workflow 간 코드 재사용 가능</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-4-1" correct><label for="quiz-4-1">더 쉬운 유지보수</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">Workflow 코드의 더 나은 구성</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">더 빠른 실행 속도</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">제출</button>
     </form>

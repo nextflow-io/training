@@ -638,7 +638,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 3: Configurazione
+    Parte 3: Configurazione dell'esecuzione
   
 
     
@@ -5007,9 +5007,9 @@
 ///
 -->
 
-<p>Questa sezione esplorerà come configurare e gestire la configurazione della vostra pipeline Nextflow in modo che possiate personalizzarne il comportamento, adattarla a diversi ambienti e ottimizzare l'uso delle risorse <em>senza modificare una singola riga del codice del workflow stesso</em>.</p>
-<p>Ci sono diversi modi per farlo, che possono essere usati in combinazione e vengono interpretati secondo l'ordine di precedenza descritto <a href="https://www.nextflow.io/docs/latest/config.html">qui</a>.</p>
-<p>In questa parte del corso, vi mostreremo il meccanismo di file di configurazione più semplice e comune, il file <code>nextflow.config</code>, che avete già incontrato nella Parte 5: Hello Containers.</p>
+<p>Questa sezione esplorerà come configurare e gestire la configurazione della vostra pipeline Nextflow in modo da personalizzarne il comportamento, adattarla a diversi ambienti e ottimizzare l'uso delle risorse <em>senza modificare una singola riga del codice del workflow stesso</em>.</p>
+<p>Ci sono diversi modi per farlo, che possono essere usati in combinazione e vengono interpretati secondo l'<a href="https://nextflow.io/docs/latest/config.html">ordine di precedenza</a> descritto nella documentazione sulla configurazione.</p>
+<p>In questa parte del corso, vi mostreremo il meccanismo di configurazione più semplice e comune, il file <a href="https://nextflow.io/docs/latest/config.html"><code>nextflow.config</code></a>, che avete già incontrato nella Parte 5: Hello Containers.</p>
 <p>Esamineremo i componenti essenziali della configurazione di Nextflow come le direttive dei processi, gli executor, i profili e i file di parametri.
 Imparando a utilizzare efficacemente queste opzioni di configurazione, potete migliorare la flessibilità, la scalabilità e le prestazioni delle vostre pipeline.</p>
 <details class="info">
@@ -5284,7 +5284,7 @@ Potete farlo creando un nuovo file <code>nextflow.config</code> in una sottodire
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>tux-run
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">cd</span><span class="w"> </span>tux-run
 </code></pre></div>
-<p>Poi, crei un file di configurazione vuoto in quella directory:</p>
+<p>Poi, create un file di configurazione vuoto in quella directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>touch<span class="w"> </span>nextflow.config
 </code></pre></div>
 <p>Questo produce un file vuoto.</p>
@@ -5351,18 +5351,14 @@ Assicuratevi di adattare il percorso di conseguenza!</p>
 <h3 id="13-usare-un-file-di-parametri">1.3. Usare un file di parametri<a class="headerlink" href="#13-usare-un-file-di-parametri" title="Permanent link">&para;</a></h3>
 <p>L'approccio della sottodirectory funziona benissimo per sperimentare, ma comporta un po' di configurazione e richiede di adattare i percorsi di conseguenza.
 C'è un approccio più semplice per quando volete eseguire la vostra pipeline con un set specifico di valori, o permettere a qualcun altro di farlo con il minimo sforzo.</p>
-<p>Nextflow vi permette di specificare parametri tramite un file di parametri in formato YAML o JSON, il che rende molto conveniente gestire e distribuire set alternativi di valori predefiniti, per esempio, così come valori di parametri specifici per l'esecuzione.</p>
+<p>Nextflow vi permette di specificare parametri tramite un <a href="https://nextflow.io/docs/latest/config.html#params-file">file di parametri</a> in formato YAML o JSON, il che rende molto conveniente gestire e distribuire set alternativi di valori predefiniti, per esempio, così come valori di parametri specifici per l'esecuzione.</p>
 <h4 id="131-esaminare-il-file-di-parametri-di-esempio">1.3.1. Esaminare il file di parametri di esempio<a class="headerlink" href="#131-esaminare-il-file-di-parametri-di-esempio" title="Permanent link">&para;</a></h4>
 <p>Per dimostrare questo, forniamo un file di parametri di esempio nella directory corrente, chiamato <code>test-params.yaml</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test-params.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
-<span class="normal"><a href="#__codelineno-20-3">3</a></span>
-<span class="normal"><a href="#__codelineno-20-4">4</a></span>
-<span class="normal"><a href="#__codelineno-20-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="p p-Indicator">{</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">  input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;greetings.csv&quot;</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">  batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="nt">  character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="p p-Indicator">}</span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/greetings.csv&quot;</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>Questo file di parametri contiene una coppia chiave-valore per ciascuno degli input che vogliamo specificare.
 Nota l'uso dei due punti (<code>:</code>) invece dei segni di uguale (<code>=</code>) se confronta la sintassi con il file di configurazione.
@@ -5373,7 +5369,7 @@ Il file di configurazione è scritto in Groovy, mentre il file di parametri è s
 Sentitevi liberi di provare quella da soli.</p>
 </div>
 <h4 id="132-eseguire-la-pipeline">1.3.2. Eseguire la pipeline<a class="headerlink" href="#132-eseguire-la-pipeline" title="Permanent link">&para;</a></h4>
-<p>Per eseguire il workflow con questo file di parametri, aggiunga semplicemente <code>-params-file &lt;filename&gt;</code> al comando base.</p>
+<p>Per eseguire il workflow con questo file di parametri, aggiungete semplicemente <code>-params-file &lt;filename&gt;</code> al comando base.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-config.nf<span class="w"> </span>-params-file<span class="w"> </span>test-params.yaml
 </code></pre></div>
 <details class="success">
@@ -5925,7 +5921,7 @@ Sono ancora tutte copie appropriate, non symlink.</p>
 <p>Imparare come adattare la configurazione del vostro workflow al vostro ambiente di calcolo, partendo dalla tecnologia di packaging del software.</p>
 <hr />
 <h2 id="3-selezionare-una-tecnologia-di-packaging-del-software">3. Selezionare una tecnologia di packaging del software<a class="headerlink" href="#3-selezionare-una-tecnologia-di-packaging-del-software" title="Permanent link">&para;</a></h2>
-<p>Finora abbiamo esaminato elementi di configurazione che controllano come gli input entrano e dove escono gli output. Ora è il momento di concentrarci più specificamente sull'adattamento della configurazione del vostro workflow al vostro ambiente di calcolo.</p>
+<p>Finora abbiamo esaminato elementi di configurazione che controllano come gli input entrano e dove escono gli output. Ora è il momento di concentrarsi più specificamente sull'adattamento della configurazione del vostro workflow al vostro ambiente di calcolo.</p>
 <p>Il primo passo su quel percorso è specificare da dove provengono i pacchetti software che verranno eseguiti in ogni passaggio.
 Sono già installati nell'ambiente di calcolo locale?
 Dobbiamo recuperare immagini ed eseguirle tramite un sistema container?
@@ -5936,7 +5932,7 @@ Poi nella Parte 5, abbiamo introdotto i container Docker e il file <code>nextflo
 <h3 id="31-disabilitare-docker-e-abilitare-conda-nel-file-di-configurazione">3.1. Disabilitare Docker e abilitare Conda nel file di configurazione<a class="headerlink" href="#31-disabilitare-docker-e-abilitare-conda-nel-file-di-configurazione" title="Permanent link">&para;</a></h3>
 <p>Facciamo finta di lavorare su un cluster HPC e l'amministratore non permette l'uso di Docker per motivi di sicurezza.
 Fortunatamente per noi, Nextflow supporta diverse altre tecnologie container come Singularity (che è più ampiamente usato su HPC), e gestori di pacchetti software come Conda.</p>
-<p>Potete cambiare il vostro file di configurazione per usare Conda invece di Docker.
+<p>Potete cambiare il vostro file di configurazione per usare <a href="https://nextflow.io/docs/latest/conda.html">Conda</a> invece di Docker.
 Per farlo, cambiate il valore di <code>docker.enabled</code> a <code>false</code>, e aggiungete una direttiva che abilita l'uso di Conda:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Dopo</label><label for="__tabbed_8_2">Prima</label></div>
 <div class="tabbed-content">
@@ -6037,7 +6033,7 @@ Questo esegue ogni task sulla macchina su cui è in esecuzione Nextflow.
 Quando Nextflow inizia, guarda le CPU e la memoria disponibili.
 Se le risorse dei task pronti per l'esecuzione superano le risorse disponibili, Nextflow tratterrà gli ultimi task dall'esecuzione fino a quando uno o più dei task precedenti non sono terminati, liberando le risorse necessarie.</p>
 <p>L'executor locale è conveniente ed efficiente, ma è limitato a quella singola macchina. Per carichi di lavoro molto grandi, potreste scoprire che la vostra macchina locale è un collo di bottiglia, sia perché avete un singolo task che richiede più risorse di quelle disponibili, sia perché avete così tanti task che aspettare che una singola macchina li esegua richiederebbe troppo tempo.</p>
-<p>Nextflow supporta <a href="https://www.nextflow.io/docs/latest/executor.html">molti backend di esecuzione diversi</a>, inclusi scheduler HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor e altri) così come backend di esecuzione cloud (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes e altro).</p>
+<p>Nextflow supporta <a href="https://nextflow.io/docs/latest/executor.html">molti executor diversi</a>, inclusi scheduler HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor e altri) così come backend di esecuzione cloud (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes e altro).</p>
 <h3 id="41-puntare-a-un-backend-diverso">4.1. Puntare a un backend diverso<a class="headerlink" href="#41-puntare-a-un-backend-diverso" title="Permanent link">&para;</a></h3>
 <p>La scelta dell'executor è impostata da una direttiva di processo chiamata <code>executor</code>.
 Per impostazione predefinita è impostato su <code>local</code>, quindi la seguente configurazione è implicita:</p>
@@ -6045,7 +6041,7 @@ Per impostazione predefinita è impostato su <code>local</code>, quindi la segue
 <a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
 <a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>Per impostare l'executor per puntare a un backend diverso, specificate semplicemente l'executor che volete usando una sintassi simile a quella descritta sopra per le allocazioni di risorse (vedete la <a href="https://www.nextflow.io/docs/latest/executor.html">documentazione</a> per tutte le opzioni).</p>
+<p>Per impostare l'executor per puntare a un backend diverso, specificate semplicemente l'executor che volete usando una sintassi simile a quella descritta sopra per le allocazioni di risorse (vedete la <a href="https://nextflow.io/docs/latest/executor.html">documentazione sugli executor</a> per tutte le opzioni).</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;slurm&#39;</span>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="o">}</span>
@@ -6082,7 +6078,7 @@ Per impostazione predefinita è impostato su <code>local</code>, quindi la segue
 </code></pre></div>
 </details>
 <p>Fortunatamente, Nextflow semplifica tutto questo.
-Fornisce una sintassi standardizzata in modo che possa specificare le proprietà rilevanti come <code>cpus</code>, <code>memory</code> e <code>queue</code> (veda la documentazione per altre proprietà) una sola volta.
+Fornisce una sintassi standardizzata in modo che possiate specificare le proprietà rilevanti come <a href="https://nextflow.io/docs/latest/reference/process.html#cpus"><code>cpus</code></a>, <a href="https://nextflow.io/docs/latest/reference/process.html#memory"><code>memory</code></a> e <a href="https://nextflow.io/docs/latest/reference/process.html#queue"><code>queue</code></a> (vedete le <a href="https://nextflow.io/docs/latest/reference/process.html#process-directives">direttive di processo</a> per altre proprietà) una sola volta.
 Poi, a runtime, Nextflow userà quelle impostazioni per generare gli script appropriati specifici del backend basandosi sull'impostazione dell'executor.</p>
 <p>Tratteremo quella sintassi standardizzata nella prossima sezione.</p>
 <h3 id="takeaway_3">Takeaway<a class="headerlink" href="#takeaway_3" title="Permanent link">&para;</a></h3>
@@ -6113,8 +6109,8 @@ Nextflow le tradurrà nelle istruzioni appropriate per l'executor scelto.</p>
 </code></pre></div>
 <p>Il report è un file html, che potete scaricare e aprire nel vostro browser. Potete anche fare clic destro su di esso nell'esploratore file a sinistra e cliccare su <code>Show preview</code> per visualizzarlo nell'ambiente di formazione.</p>
 <p>Prendetevi qualche minuto per esaminare il report e vedere se riuscite a identificare alcune opportunità per regolare le risorse.
-Assicuratevi di cliccare sulle schede che mostrano i risultati di utilizzo come percentuale di ciò che è stato allocato.
-C'è della <a href="https://www.nextflow.io/docs/latest/reports.html">documentazione</a> che descrive tutte le funzionalità disponibili.</p>
+Assicuratevi di cliccare sulle schede che mostrano i risultati di utilizzo come percentuale di ciò che è stato allocato.</p>
+<p>Vedete <a href="https://nextflow.io/docs/latest/reports.html">Reports</a> per la documentazione su tutte le funzionalità disponibili.</p>
 <h3 id="52-impostare-allocazioni-di-risorse-per-tutti-i-processi">5.2. Impostare allocazioni di risorse per tutti i processi<a class="headerlink" href="#52-impostare-allocazioni-di-risorse-per-tutti-i-processi" title="Permanent link">&para;</a></h3>
 <p>La profilazione mostra che i processi nel nostro workflow di formazione sono molto leggeri, quindi riduciamo l'allocazione di memoria predefinita a 1GB per processo.</p>
 <p>Aggiungete il seguente al vostro file <code>nextflow.config</code>, prima della sezione dei parametri della pipeline:</p>
@@ -6188,7 +6184,7 @@ Questo perché Nextflow si assicura che non richiediamo più CPU di quelle dispo
 <div class="admonition tip">
 <p class="admonition-title">Suggerimento</p>
 <p>Questo è solo un piccolo assaggio di ciò che potete fare per ottimizzare il vostro uso delle risorse.
-Nextflow stesso ha una <a href="https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources">logica di retry dinamica</a> davvero interessante integrata per riprovare i lavori che falliscono a causa di limitazioni di risorse.
+Nextflow stesso ha una <a href="https://nextflow.io/docs/latest/process.html#dynamic-task-resources">logica di retry dinamica</a> davvero interessante integrata per riprovare i lavori che falliscono a causa di limitazioni di risorse.
 Inoltre, la Piattaforma Seqera offre strumenti guidati dall'AI per ottimizzare le vostre allocazioni di risorse automaticamente.</p>
 </div>
 <h3 id="55-aggiungere-limiti-di-risorse">5.5. Aggiungere limiti di risorse<a class="headerlink" href="#55-aggiungere-limiti-di-risorse" title="Permanent link">&para;</a></h3>
@@ -6219,7 +6215,7 @@ Tuttavia, se provaste a eseguire il workflow con allocazioni di risorse che supe
 <h2 id="6-usare-profili-per-passare-tra-configurazioni-preimpostate">6. Usare profili per passare tra configurazioni preimpostate<a class="headerlink" href="#6-usare-profili-per-passare-tra-configurazioni-preimpostate" title="Permanent link">&para;</a></h2>
 <p>Vi abbiamo mostrato diversi modi in cui potete personalizzare la configurazione della vostra pipeline a seconda del progetto su cui state lavorando o dell'ambiente di calcolo che state usando.</p>
 <p>Potreste voler passare tra impostazioni alternative a seconda di quale infrastruttura di calcolo state usando. Per esempio, potreste voler sviluppare ed eseguire test su piccola scala localmente sul vostro laptop, poi eseguire carichi di lavoro su scala completa su HPC o cloud.</p>
-<p>Nextflow vi permette di configurare qualsiasi numero di profili che descrivono diverse configurazioni, che potete poi selezionare a runtime usando un argomento da riga di comando, piuttosto che dover modificare il file di configurazione stesso.</p>
+<p>Nextflow vi permette di configurare qualsiasi numero di <a href="https://nextflow.io/docs/latest/config.html#config-profiles">profili</a> che descrivono diverse configurazioni, che potete poi selezionare a runtime usando un argomento da riga di comando, piuttosto che dover modificare il file di configurazione stesso.</p>
 <h3 id="61-creare-profili-per-passare-tra-sviluppo-locale-ed-esecuzione-su-hpc">6.1. Creare profili per passare tra sviluppo locale ed esecuzione su HPC<a class="headerlink" href="#61-creare-profili-per-passare-tra-sviluppo-locale-ed-esecuzione-su-hpc" title="Permanent link">&para;</a></h3>
 <p>Configuriamo due profili alternativi; uno per eseguire carichi su piccola scala su un computer normale, dove useremo container Docker, e uno per eseguire su un HPC universitario con uno scheduler Slurm, dove useremo pacchetti Conda.</p>
 <h4 id="611-configurare-i-profili">6.1.1. Configurare i profili<a class="headerlink" href="#611-configurare-i-profili" title="Permanent link">&para;</a></h4>
@@ -6349,7 +6345,7 @@ Potete considerare questo un'alternativa all'uso di un file di parametri.</p>
 <h4 id="622-eseguire-il-workflow-localmente-con-il-profilo-di-test">6.2.2. Eseguire il workflow localmente con il profilo di test<a class="headerlink" href="#622-eseguire-il-workflow-localmente-con-il-profilo-di-test" title="Permanent link">&para;</a></h4>
 <p>Convenientemente, i profili non sono mutuamente esclusivi, quindi possiamo specificare più profili nella nostra riga di comando usando la seguente sintassi <code>-profile &lt;profile1&gt;,&lt;profile2&gt;</code> (per qualsiasi numero di profili).</p>
 <p>Se combinate profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto usando qualsiasi valore abbia letto per ultimo (<em>cioè</em> qualsiasi cosa venga dopo nel file).
-Se le impostazioni in conflitto sono impostate in diverse fonti di configurazione, si applica l'<a href="https://www.nextflow.io/docs/latest/config.html">ordine di precedenza</a> predefinito.</p>
+Se le impostazioni in conflitto sono impostate in diverse fonti di configurazione, si applica l'<a href="https://nextflow.io/docs/latest/config.html">ordine di precedenza</a> predefinito.</p>
 <p>Proviamo ad aggiungere il profilo di test al nostro comando precedente:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-config.nf<span class="w"> </span>-profile<span class="w"> </span>my_laptop,test
 </code></pre></div>
@@ -6402,8 +6398,8 @@ Nextflow li scaricherà automaticamente finché c'è una connessione aperta.</p>
 <h3 id="63-usare-nextflow-config-per-vedere-la-configurazione-risolta">6.3. Usare <code>nextflow config</code> per vedere la configurazione risolta<a class="headerlink" href="#63-usare-nextflow-config-per-vedere-la-configurazione-risolta" title="Permanent link">&para;</a></h3>
 <p>Come notato sopra, a volte lo stesso parametro può essere impostato a valori diversi in profili che volete combinare.
 E più in generale, ci sono numerosi posti dove elementi di configurazione possono essere memorizzati, e a volte le stesse proprietà possono essere impostate a valori diversi in posti diversi.</p>
-<p>Nextflow applica un <a href="https://www.nextflow.io/docs/latest/config.html">ordine di precedenza</a> stabilito per risolvere qualsiasi conflitto, ma può essere complicato da determinare da soli.
-E anche se nulla è in conflitto, può essere tedioso cercare tutti i possibili posti dove le cose potrebbero essere configurate:</p>
+<p>Nextflow applica un <a href="https://nextflow.io/docs/latest/config.html">ordine di precedenza</a> stabilito per risolvere qualsiasi conflitto, ma può essere complicato da determinare da soli.
+E anche se nulla è in conflitto, può essere tedioso cercare tutti i possibili posti dove le cose potrebbero essere configurate.</p>
 <p>Fortunatamente, Nextflow include uno strumento utility conveniente chiamato <code>config</code> che può automatizzare l'intero processo per voi.</p>
 <p>Lo strumento <code>config</code> esplorerà tutti i contenuti nella vostra directory di lavoro corrente, raccoglierà qualsiasi file di configurazione, e produrrà la configurazione completamente risolta che Nextflow userebbe per eseguire il workflow.
 Questo vi permette di scoprire quali impostazioni verranno usate senza dover lanciare nulla.</p>
@@ -6527,7 +6523,7 @@ Per approfondire: [1.1. Spostare i valori predefiniti in `nextflow.config`](#11-
 <!-- mkdocs-quiz-source
 <quiz>
 Si possono avere sia Docker che Conda abilitati nella stessa configurazione?
-- [x] Sì, Nextflow potete usare entrambi a seconda delle direttive del processo
+- [x] Sì, Nextflow può usare entrambi a seconda delle direttive del processo
 - [ ] No, solo uno può essere abilitato alla volta
 - [ ] Sì, ma solo nei profili
 - [ ] No, sono mutuamente esclusivi
@@ -6540,7 +6536,7 @@ Si possono avere sia Docker che Conda abilitati nella stessa configurazione?
         <p>Si possono avere sia Docker che Conda abilitati nella stessa configurazione?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" correct><label for="quiz-2-0">Sì, Nextflow potete usare entrambi a seconda delle direttive del processo</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1">No, solo uno può essere abilitato alla volta</label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" ><label for="quiz-2-2">Sì, ma solo nei profili</label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3">No, sono mutuamente esclusivi</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" correct><label for="quiz-2-0">Sì, Nextflow può usare entrambi a seconda delle direttive del processo</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1">No, solo uno può essere abilitato alla volta</label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" ><label for="quiz-2-2">Sì, ma solo nei profili</label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3">No, sono mutuamente esclusivi</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -6722,7 +6718,7 @@ Per approfondire: [1.3. Usare un file di parametri](#13-usare-un-file-di-paramet
 
 <!-- mkdocs-quiz-source
 <quiz>
-Per cosa possono essere usati i profili? (Selezioni tutte le risposte applicabili)
+Per cosa possono essere usati i profili? (Selezionate tutte le risposte applicabili)
 - [x] Definire impostazioni specifiche dell'infrastruttura
 - [x] Impostare limiti di risorse per ambienti diversi
 - [x] Fornire parametri di test
@@ -6735,7 +6731,7 @@ Per approfondire: [6. Usare profili per passare tra configurazioni preimpostate]
     <a href="#quiz-10" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Per cosa possono essere usati i profili? (Selezioni tutte le risposte applicabili)</p>
+        <p>Per cosa possono essere usati i profili? (Selezionate tutte le risposte applicabili)</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
         <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-10-0" correct><label for="quiz-10-0">Definire impostazioni specifiche dell'infrastruttura</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-10-1" correct><label for="quiz-10-1">Impostare limiti di risorse per ambienti diversi</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-10-2" correct><label for="quiz-10-2">Fornire parametri di test</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-10-3" ><label for="quiz-10-3">Definire nuovi processi</label></div></fieldset>

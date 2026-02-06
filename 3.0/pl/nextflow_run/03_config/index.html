@@ -925,15 +925,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-organizuj-wyjscia-wedug-process" class="md-nav__link">
+  <a href="#22-organizuj-wyjscia-wedug-proces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Organizuj wyjścia według process
+        2.2. Organizuj wyjścia według proces
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2.2. Organizuj wyjścia według process">
+    <nav class="md-nav" aria-label="2.2. Organizuj wyjścia według proces">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4279,15 +4279,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-organizuj-wyjscia-wedug-process" class="md-nav__link">
+  <a href="#22-organizuj-wyjscia-wedug-proces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Organizuj wyjścia według process
+        2.2. Organizuj wyjścia według proces
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2.2. Organizuj wyjścia według process">
+    <nav class="md-nav" aria-label="2.2. Organizuj wyjścia według proces">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -5096,8 +5096,8 @@
 <h1 id="czesc-3-konfiguracja-uruchamiania">Część 3: Konfiguracja uruchamiania<a class="headerlink" href="#czesc-3-konfiguracja-uruchamiania" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
 <p>Ta sekcja zbada, jak zarządzać konfiguracją pipeline'u Nextflow, aby dostosować jego zachowanie, zaadaptować go do różnych środowisk i zoptymalizować wykorzystanie zasobów <em>bez zmieniania ani jednej linii samego kodu workflow'u</em>.</p>
-<p>Istnieje wiele sposobów, aby to osiągnąć. Można je łączyć, a są one interpretowane zgodnie z kolejnością pierwszeństwa opisaną <a href="https://www.nextflow.io/docs/latest/config.html">tutaj</a>.</p>
-<p>W tej części kursu pokażemy najprosts i najpopularniejszy mechanizm pliku konfiguracyjnego, plik <code>nextflow.config</code>, z którym już się spotkałeś w sekcji o kontenerach w Części 2.</p>
+<p>Istnieje wiele sposobów, aby to osiągnąć, które można łączyć i są interpretowane zgodnie z kolejnością pierwszeństwa opisaną w dokumentacji <a href="https://nextflow.io/docs/latest/config.html">Configuration</a>.</p>
+<p>W tej części kursu pokażemy najprostrzy i najpopularniejszy mechanizm pliku konfiguracyjnego, plik <code>nextflow.config</code>, z którym już się spotkałeś w sekcji o kontenerach w Części 2.</p>
 <p>Omówimy podstawowe elementy konfiguracji Nextflow, takie jak dyrektywy procesów, executory, profile i pliki parametrów.
 Ucząc się efektywnie wykorzystywać te opcje konfiguracji, możesz w pełni wykorzystać elastyczność, skalowalność i wydajność pipeline'ów Nextflow.</p>
 <p>Aby przećwiczyć te elementy konfiguracji, będziemy uruchamiać świeżą kopię workflow'u, który ostatnio uruchamialiśmy na końcu Części 2 tego kursu szkoleniowego, przemianowaną na <code>3-main.nf</code>.</p>
@@ -5112,7 +5112,7 @@ Lub może konfigurujesz pipeline dla kolegi, który nie czuje się komfortowo z 
 <p>Zaczniemy od aspektu konfiguracji, który jest po prostu rozszerzeniem tego, nad czym pracowaliśmy do tej pory: zarządzania parametrami wejściowymi.</p>
 <p>Obecnie nasz workflow jest skonfigurowany do przyjmowania kilku wartości parametrów przez wiersz poleceń, zadeklarowanych w bloku <code>params</code> w samym skrypcie workflow'u.
 Jeden ma wartość domyślną ustawioną jako część swojej deklaracji.</p>
-<p>Jednak możesz chcieć ustawić wartości bazowe dla wszystkich z nich lub nadpisać istniejące ustawienie bez konieczności określania parametrów w wierszu poleceń lub modyfikowania oryginalnego pliku skryptu.</p>
+<p>Jednak możesz chcieć ustawić wartości domyślne dla wszystkich z nich lub nadpisać istniejące ustawienie bez konieczności określania parametrów w wierszu poleceń ani modyfikowania oryginalnego pliku skryptu.</p>
 <p>Istnieje wiele sposobów, aby to zrobić; pokażemy trzy podstawowe sposoby, które są bardzo powszechnie używane.</p>
 <h3 id="11-ustaw-wartosci-w-nextflowconfig">1.1. Ustaw wartości w <code>nextflow.config</code><a class="headerlink" href="#11-ustaw-wartosci-w-nextflowconfig" title="Permanent link">&para;</a></h3>
 <p>To najprostsze podejście, choć prawdopodobnie najmniej elastyczne, ponieważ główny plik <code>nextflow.config</code> nie jest czymś, co chcesz edytować przy każdym uruchomieniu.
@@ -5332,7 +5332,7 @@ Upewnij się, że odpowiednio dostosujesz ścieżkę!</p>
 </details>
 <p>Podejście z podkatalogiem działa świetnie do eksperymentowania, ale wymaga trochę konfiguracji i wymaga odpowiedniego dostosowania ścieżek.
 Jest prostsze podejście, gdy chcesz uruchomić pipeline z określonym zestawem wartości lub umożliwić komuś innemu zrobienie tego przy minimalnym wysiłku.</p>
-<p>Nextflow pozwala nam określić parametry za pomocą pliku parametrów w formacie YAML lub JSON, co czyni bardzo wygodnym zarządzanie i dystrybucję alternatywnych zestawów wartości domyślnych, na przykład, a także wartości parametrów specyficznych dla uruchomienia.</p>
+<p>Nextflow pozwala nam określić parametry za pomocą <a href="https://nextflow.io/docs/latest/config.html#parameter-file">pliku parametrów</a> w formacie YAML lub JSON, co czyni bardzo wygodnym zarządzanie i dystrybucję alternatywnych zestawów wartości domyślnych, na przykład, a także wartości parametrów specyficznych dla uruchomienia.</p>
 <h4 id="131-zbadaj-przykadowy-plik-parametrow">1.3.1. Zbadaj przykładowy plik parametrów<a class="headerlink" href="#131-zbadaj-przykadowy-plik-parametrow" title="Permanent link">&para;</a></h4>
 <p>Aby to zademonstrować, dostarczamy przykładowy plik parametrów w bieżącym katalogu, o nazwie <code>test-params.yaml</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test-params.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
@@ -5360,10 +5360,10 @@ Możesz spróbować tego samodzielnie.</p>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
 <a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="go">[f0/35723c] sayHello (2)       | 3 of 3 ✔</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="go">[40/3efd1a] convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="go">[17/e97d32] collectGreetings   | 1 of 1 ✔</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="go">[98/c6b57b] cowpy              | 1 of 1 ✔</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="go">[2b/9a7d1e] sayHello (2)       | 3 of 3 ✔</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="go">[5c/8f3b2a] convertToUpper (3) | 3 of 3 ✔</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="go">[a3/29d8fb] collectGreetings   | 1 of 1 ✔</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="go">[b7/83ef12] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
 <p>Końcowy plik wyjściowy powinien zawierać postać stegosaurus mówiącą powitania.</p>
@@ -5408,7 +5408,8 @@ To czyni Twoją pracę bardziej odtwarzalną przez innych.</p>
 <p>Przyjrzyjmy się kilku typowym sposobom, w jakie możesz to skonfigurować, aby było bardziej elastyczne.</p>
 <h3 id="21-dostosuj-nazwe-katalogu-outputdir">2.1. Dostosuj nazwę katalogu <code>outputDir</code><a class="headerlink" href="#21-dostosuj-nazwe-katalogu-outputdir" title="Permanent link">&para;</a></h3>
 <p>Każda wersja workflow'u, którą do tej pory uruchomiliśmy, publikowała Swoje wyjścia do innego podkatalogu zakodowanego na stałe w definicjach wyjść.</p>
-<p>Zmieńmy to, aby użyć parametru konfigurowalnego przez użytkownika.
+<p>W Części 1 zmieniliśmy lokalizację tego podkatalogu używając flagi CLI <code>-output-dir</code>, ale to nadal jest tylko statyczny ciąg znaków.
+Zamiast tego skonfigurujmy to w pliku konfiguracyjnym, gdzie możemy zdefiniować bardziej złożone dynamiczne ścieżki.
 Moglibyśmy stworzyć zupełnie nowy parametr do tego celu, ale użyjmy parametru <code>batch</code>, ponieważ jest tuż pod ręką.</p>
 <h4 id="211-ustaw-wartosc-dla-outputdir-w-pliku-konfiguracyjnym">2.1.1. Ustaw wartość dla <code>outputDir</code> w pliku konfiguracyjnym<a class="headerlink" href="#211-ustaw-wartosc-dla-outputdir-w-pliku-konfiguracyjnym" title="Permanent link">&para;</a></h4>
 <p>Ścieżka, której Nextflow używa do publikowania wyjść, jest kontrolowana przez opcję <code>outputDir</code>.
@@ -5441,7 +5442,7 @@ Aby zmienić ścieżkę dla wszystkich wyjść, możesz ustawić wartość tej o
 <a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="hll"><span class="cm">/*</span>
 </span><a id="__codelineno-18-19" name="__codelineno-18-19"></a><span class="hll"><span class="cm">* Output settings</span>
 </span><a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="hll"><span class="cm">*/</span>
-</span><a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="hll"><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results/${params.batch}&quot;</span>
+</span><a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="hll"><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results_config/${params.batch}&quot;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5464,9 +5465,9 @@ Aby zmienić ścieżkę dla wszystkich wyjść, możesz ustawić wartość tej o
 </div>
 </div>
 </div>
-<p>To zastąpi wbudowaną domyślną ścieżkę, <code>results/</code>, na <code>results/</code> plus wartość parametru <code>batch</code> jako podkatalog.
-Możesz również zmienić część <code>results</code>, jeśli chcesz.</p>
-<p>Dla tymczasowej zmiany możesz ustawić tę opcję z wiersza poleceń używając parametru <code>-output-dir</code> w poleceniu (ale wtedy nie możesz użyć wartości parametru <code>batch</code>).</p>
+<p>To zastąpi wbudowaną domyślną ścieżkę, <code>results/</code>, na <code>results_config/</code> plus wartość parametru <code>batch</code> jako podkatalog.</p>
+<p>Pamiętaj, że możesz również ustawić tę opcję z wiersza poleceń używając parametru <code>-output-dir</code> w poleceniu (w skrócie <code>-o</code>), ale wtedy nie możesz użyć wartości parametru <code>batch</code>.
+Użycie flagi CLI nadpisze <code>outputDir</code> w konfiguracji, jeśli jest ustawiony.</p>
 <h4 id="212-usun-powtarzajaca-sie-czesc-zakodowanej-na-stae-sciezki">2.1.2. Usuń powtarzającą się część zakodowanej na stałe ścieżki<a class="headerlink" href="#212-usun-powtarzajaca-sie-czesc-zakodowanej-na-stae-sciezki" title="Permanent link">&para;</a></h4>
 <p>Nadal mamy podkatalog zakodowany na stałe w opcjach wyjść, więc pozbądźmy się go teraz.</p>
 <p>Wprowadź następujące zmiany w kodzie w pliku workflow'u:</p>
@@ -5575,19 +5576,19 @@ Możesz również zmienić część <code>results</code>, jeśli chcesz.</p>
 <summary>Wyjście polecenia</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">[f0/35723c] sayHello (2)       | 3 of 3 ✔</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">[40/3efd1a] convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">[17/e97d32] collectGreetings   | 1 of 1 ✔</span>
-<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="go">[98/c6b57b] cowpy              | 1 of 1 ✔</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">[9c/6a03ea] sayHello (2)       [100%] 3 of 3 ✔</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">[11/9e58a6] convertToUpper (3) [100%] 3 of 3 ✔</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">[c8/1977e5] collectGreetings   [100%] 1 of 1 ✔</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="go">[38/f01eda] cowpy              [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym razem znajdujemy nasze wyjścia w <code>results/outdir/</code>.</p>
+<p>To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym razem znajdujemy nasze wyjścia w <code>results_config/outdir/</code>.</p>
 <details class="abstract">
 <summary>Zawartość katalogu</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">results/outdir/</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">results_config/outdir</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="go">├── cowpy-COLLECTED-outdir-output.txt</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="go">├── intermediates</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="go">│   ├── Bonjour-output.txt</span>
@@ -5601,10 +5602,10 @@ Możesz również zmienić część <code>results</code>, jeśli chcesz.</p>
 </code></pre></div>
 </details>
 <p>Możesz połączyć to podejście z niestandardowymi definicjami ścieżek, aby skonstruować dowolną hierarchię katalogów.</p>
-<h3 id="22-organizuj-wyjscia-wedug-process">2.2. Organizuj wyjścia według process<a class="headerlink" href="#22-organizuj-wyjscia-wedug-process" title="Permanent link">&para;</a></h3>
+<h3 id="22-organizuj-wyjscia-wedug-proces">2.2. Organizuj wyjścia według proces<a class="headerlink" href="#22-organizuj-wyjscia-wedug-proces" title="Permanent link">&para;</a></h3>
 <p>Jednym z popularnych sposobów dalszej organizacji wyjść jest robienie tego według procesu, <em>tzn.</em> tworzenie podkatalogów dla każdego procesu uruchomionego w pipeline'ie.</p>
 <h4 id="221-zastap-sciezki-wyjsc-odniesieniem-do-nazw-procesow">2.2.1. Zastąp ścieżki wyjść odniesieniem do nazw procesów<a class="headerlink" href="#221-zastap-sciezki-wyjsc-odniesieniem-do-nazw-procesow" title="Permanent link">&para;</a></h4>
-<p>Wystarczy odwołać się do nazwy procesu jako <code>&lt;task&gt;.name</code> w deklaracji ścieżki wyjścia.</p>
+<p>Wystarczy odwołać się do nazwy procesu jako <code>&lt;proces&gt;.name</code> w deklaracji ścieżki wyjścia.</p>
 <p>Wprowadź następujące zmiany w pliku workflow'u:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Po</label><label for="__tabbed_5_2">Przed</label></div>
 <div class="tabbed-content">
@@ -5714,16 +5715,16 @@ Możesz również zmienić część <code>results</code>, jeśli chcesz.</p>
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="go">Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>
 <a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="go">[f0/35723c] sayHello (2)       | 3 of 3 ✔</span>
-<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="go">[40/3efd1a] convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="go">[17/e97d32] collectGreetings   | 1 of 1 ✔</span>
-<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="go">[98/c6b57b] cowpy              | 1 of 1 ✔</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="go">[4a/c2e6b8] sayHello (2)       | 3 of 3 ✔</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="go">[6f/d4a172] convertToUpper (3) | 3 of 3 ✔</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="go">[e8/4f19d7] collectGreetings   | 1 of 1 ✔</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="go">[f2/a85c36] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym razem znajdujemy nasze wyjścia w <code>results/pnames/</code> i są one pogrupowane według procesu.</p>
+<p>To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym razem znajdujemy nasze wyjścia w <code>results_config/pnames/</code> i są one pogrupowane według procesu.</p>
 <details class="abstract">
 <summary>Zawartość katalogu</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">results/pnames/</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">results_config/pnames/</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="go">├── collectGreetings</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="go">│   ├── COLLECTED-pnames-output.txt</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="go">│   └── pnames-report.txt</span>
@@ -5739,8 +5740,11 @@ Możesz również zmienić część <code>results</code>, jeśli chcesz.</p>
 <a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="go">    └── Holà-output.txt</span>
 </code></pre></div>
 </details>
+<div class="admonition note">
+<p class="admonition-title">Uwaga</p>
 <p>Zauważ, że tutaj zatarliśmy rozróżnienie między <code>intermediates</code> a końcowymi wyjściami na najwyższym poziomie.
-Możesz oczywiście mieszać i łączyć te podejścia, na przykład ustawiając ścieżkę pierwszego wyjścia jako <code>intermediates/${sayHello.name}</code></p>
+Możesz mieszać i łączyć te podejścia oraz uwzględniać wiele zmiennych, na przykład ustawiając ścieżkę pierwszego wyjścia jako <code class="highlight"><span class="s2">&quot;${params.batch}/intermediates/${sayHello.name}&quot;</span></code></p>
+</div>
 <h3 id="23-ustaw-tryb-publikowania-na-poziomie-workflow">2.3. Ustaw tryb publikowania na poziomie workflow<a class="headerlink" href="#23-ustaw-tryb-publikowania-na-poziomie-workflow" title="Permanent link">&para;</a></h3>
 <p>Na koniec, w duchu zmniejszania ilości powtarzającego się kodu, możemy zastąpić deklaracje <code>mode</code> dla każdego wyjścia pojedynczą linią w konfiguracji.</p>
 <h4 id="231-dodaj-workflowoutputmode-do-pliku-konfiguracyjnego">2.3.1. Dodaj <code>workflow.output.mode</code> do pliku konfiguracyjnego<a class="headerlink" href="#231-dodaj-workflowoutputmode-do-pliku-konfiguracyjnego" title="Permanent link">&para;</a></h4>
@@ -5755,7 +5759,7 @@ Możesz oczywiście mieszać i łączyć te podejścia, na przykład ustawiając
 <span class="normal"><a href="#__codelineno-30-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="cm">/*</span>
 <a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="cm">* Output settings</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="cm">*/</span>
-<a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results/${params.batch}&quot;</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results_config/${params.batch}&quot;</span>
 <a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="hll"><span class="n">workflow</span><span class="o">.</span><span class="na">output</span><span class="o">.</span><span class="na">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -5766,7 +5770,7 @@ Możesz oczywiście mieszać i łączyć te podejścia, na przykład ustawiając
 <span class="normal"><a href="#__codelineno-31-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-12" name="__codelineno-31-12"></a><span class="cm">/*</span>
 <a id="__codelineno-31-13" name="__codelineno-31-13"></a><span class="cm">* Output settings</span>
 <a id="__codelineno-31-14" name="__codelineno-31-14"></a><span class="cm">*/</span>
-<a id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results/${params.batch}&quot;</span>
+<a id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results_config/${params.batch}&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5872,17 +5876,17 @@ Możesz oczywiście mieszać i łączyć te podejścia, na przykład ustawiając
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
 <a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="go">[f0/35723c] sayHello (2)       | 3 of 3 ✔</span>
-<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="go">[40/3efd1a] convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">[17/e97d32] collectGreetings   | 1 of 1 ✔</span>
-<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="go">[98/c6b57b] cowpy              | 1 of 1 ✔</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="go">[5b/d91e3c] sayHello (2)       | 3 of 3 ✔</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="go">[8a/f6c241] convertToUpper (3) | 3 of 3 ✔</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">[89/cd3a48] collectGreetings   | 1 of 1 ✔</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="go">[9e/71fb52] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym razem znajdujemy nasze wyjścia w <code>results/outmode/</code>.
+<p>To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym razem znajdujemy nasze wyjścia w <code>results_config/outmode/</code>.
 Wszystkie nadal są właściwymi kopiami, nie symlinkami.</p>
 <details class="abstract">
 <summary>Zawartość katalogu</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go">results/outmode/</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go">results_config/outmode/</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="go">├── collectGreetings</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">│   ├── COLLECTED-outmode-output.txt</span>
 <a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="go">│   └── outmode-report.txt</span>
@@ -5920,7 +5924,7 @@ Następnie w Części 5 wprowadziliśmy kontenery Docker i plik <code>nextflow.c
 <p>Przenosisz Swój pipeline na klaster HPC, gdzie Docker nie jest dozwolony ze względów bezpieczeństwa.
 Klaster obsługuje Singularity i Conda, więc musisz odpowiednio zmienić konfigurację.</p>
 </details>
-<p>Nextflow obsługuje wiele technologii kontenerowych, w tym Singularity (który jest szerzej używany na HPC), a także menedżery pakietów oprogramowania, takie jak Conda.</p>
+<p>Jak wspomniano wcześniej, Nextflow obsługuje wiele technologii kontenerowych, w tym Singularity (który jest szerzej używany na HPC), a także menedżery pakietów oprogramowania, takie jak Conda.</p>
 <p>Możemy zmienić nasz plik konfiguracyjny, aby używał Conda zamiast Docker.
 Aby to zrobić, zmieńmy wartość <code>docker.enabled</code> na <code>false</code> i dodajmy dyrektywę włączającą korzystanie z Conda:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Po</label><label for="__tabbed_8_2">Przed</label></div>
@@ -5995,7 +5999,7 @@ Zalecamy korzystanie z zapytania wyszukiwania <a href="https://seqera.io/contain
 <a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a><span class="go">[c5/af5f88] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>To powinno działać bez problemu i produkować te same wyjścia co poprzednio w <code>results/conda</code>.</p>
+<p>To powinno działać bez problemu i produkować te same wyjścia co poprzednio w <code>results_config/conda</code>.</p>
 <p>Za kulisami Nextflow pobrał pakiety Conda i utworzył środowisko, co normalnie wymaga trochę pracy; więc miło, że nie musimy nic z tego robić sami!</p>
 <div class="admonition info">
 <p class="admonition-title">Informacja</p>
@@ -6025,11 +6029,10 @@ Twoja instytucja ma klaster HPC z harmonogramem Slurm, którego chciałbyś uży
 <p>Do tej pory uruchamialiśmy nasz pipeline z lokalnym executorem.
 Ten wykonuje każde zadanie na maszynie, na której działa Nextflow.
 Gdy Nextflow się uruchamia, sprawdza dostępne procesory i pamięć.
-Jeśli wymagania zadań gotowych do uruchomienia przekraczają to, co jest dostępne, Nextflow wstrzyma ostatnie z nich, dopóki jedno lub więcej wcześniejszych nie zakończy się, zwalniając niezbędne moce obliczeniowe.</p>
+Jeśli wymagania zadań gotowych do uruchomienia przekraczają dostępne zasoby, Nextflow wstrzyma ostatnie z nich, dopóki jedno lub więcej wcześniejszych nie zakończy się, zwalniając niezbędne moce obliczeniowe.</p>
 <p>Lokalny executor jest wygodny i wydajny, ale ograniczony do jednej maszyny.
-Dla bardzo dużych obciążeń możesz odkryć, że Twój komputer jest wąskim gardłem.
-Może to wynikać z pojedynczego zadania wymagającego więcej mocy niż masz do dyspozycji, albo z tak wielu zadań, że oczekiwanie na ich wykonanie zajęłoby zbyt długo.</p>
-<p>Nextflow obsługuje <a href="https://www.nextflow.io/docs/latest/executor.html">wiele różnych backendów wykonawczych</a>, w tym harmonogramy HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor i inne), a także backendy wykonywania w chmurze, takie jak (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes i więcej).</p>
+Dla bardzo dużych obciążeń możesz odkryć, że Twój komputer jest wąskim gardłem, albo dlatego, że masz pojedyncze zadanie wymagające więcej mocy niż masz do dyspozycji, albo dlatego, że masz tak wiele zadań, że oczekiwanie na ich wykonanie przez jedną maszynę zajęłoby zbyt długo.</p>
+<p>Nextflow obsługuje <a href="https://nextflow.io/docs/latest/executor.html">wiele różnych backendów wykonawczych</a>, w tym harmonogramy HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor i inne), a także backendy wykonywania w chmurze (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes i więcej).</p>
 <h3 id="41-celowanie-w-inny-backend">4.1. Celowanie w inny backend<a class="headerlink" href="#41-celowanie-w-inny-backend" title="Permanent link">&para;</a></h3>
 <p>Wybór executora jest ustawiany przez dyrektywę procesu o nazwie <code>executor</code>.
 Domyślnie jest ustawiony na <code>local</code>, więc następująca konfiguracja jest domniemana:</p>
@@ -6037,7 +6040,7 @@ Domyślnie jest ustawiony na <code>local</code>, więc następująca konfiguracj
 <a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
 <a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>Aby ustawić executor do celowania w inny backend, wystarczy określić executor, którego chcesz, używając podobnej składni jak opisano powyżej dla alokacji zasobów (zobacz <a href="https://www.nextflow.io/docs/latest/executor.html">dokumentację</a> dla wszystkich opcji).</p>
+<p>Aby ustawić executor do celowania w inny backend, wystarczy określić executor, którego chcesz, używając podobnej składni jak opisano powyżej dla alokacji zasobów (zobacz dokumentację <a href="https://nextflow.io/docs/latest/executor.html">Executors</a> dla wszystkich opcji).</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;slurm&#39;</span>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="o">}</span>
@@ -6074,7 +6077,7 @@ Domyślnie jest ustawiony na <code>local</code>, więc następująca konfiguracj
 </code></pre></div>
 </details>
 <p>Na szczęście Nextflow to wszystko upraszcza.
-Zapewnia znormalizowaną składnię, dzięki której możesz określić odpowiednie właściwości, takie jak <code>cpus</code>, <code>memory</code> i <code>queue</code> (zobacz dokumentację dla innych właściwości) tylko raz.
+Zapewnia znormalizowaną składnię, dzięki której możesz określić odpowiednie właściwości, takie jak <code>cpus</code>, <code>memory</code> i <code>queue</code> tylko raz (zobacz dokumentację <a href="https://nextflow.io/docs/latest/reference/process.html#process-directives">Process directives</a> dla wszystkich dostępnych opcji).
 Następnie, w czasie wykonania, Nextflow użyje tych ustawień do wygenerowania odpowiednich skryptów specyficznych dla backendu na podstawie ustawienia executora.</p>
 <p>Omówimy tę znormalizowaną składnię w następnej sekcji.</p>
 <h3 id="podsumowanie_3">Podsumowanie<a class="headerlink" href="#podsumowanie_3" title="Permanent link">&para;</a></h3>
@@ -6107,17 +6110,15 @@ Nextflow przetłumaczy je na odpowiednie instrukcje dla wybranego executora.</p>
 <summary>Scenariusz</summary>
 <p>Nie wiesz, ile pamięci lub CPU potrzebują Twoje procesy i chcesz uniknąć marnowania zasobów lub zabijania zadań.</p>
 </details>
-<p>Jeśli nie wiesz z góry, ile CPU i pamięci prawdopodobnie będą potrzebować Twoje procesy, możesz przeprowadzić profilowanie.
-Oznacza to uruchomienie workflow z pewnymi domyślnymi alokacjami i zarejestrowanie, ile każdy proces zużył.
-Na tej podstawie możesz oszacować, jak dostosować bazowe ustawienia.</p>
+<p>Jeśli nie wiesz z góry, ile CPU i pamięci prawdopodobnie będą potrzebować Twoje procesy, możesz przeprowadzić profilowanie, co oznacza uruchomienie workflow z pewnymi domyślnymi alokacjami, zarejestrowanie, ile każdy proces zużył, i na tej podstawie oszacowanie, jak dostosować bazowe alokacje.</p>
 <p>Wygodnie, Nextflow zawiera wbudowane narzędzia do tego i chętnie wygeneruje dla Ciebie raport na żądanie.</p>
 <p>Aby to zrobić, dodaj <code>-with-report &lt;nazwa_pliku&gt;.html</code> do wiersza poleceń.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">3</span>-main.nf<span class="w"> </span>-with-report<span class="w"> </span>report-config-1.html
 </code></pre></div>
 <p>Raport jest plikiem html, który możesz pobrać i otworzyć w przeglądarce. Możesz również kliknąć go prawym przyciskiem myszy w eksploratorze plików po lewej stronie i kliknąć <code>Show preview</code>, aby wyświetlić go w środowisku szkoleniowym.</p>
 <p>Poświęć kilka minut na przejrzenie raportu i sprawdź, czy możesz zidentyfikować jakieś możliwości dostosowania zasobów.
-Upewnij się, że klikasz na karty pokazujące wyniki wykorzystania jako procent tego, co zostało przydzielone.
-Jest <a href="https://www.nextflow.io/docs/latest/reports.html">dokumentacja</a> opisująca wszystkie dostępne funkcje.</p>
+Upewnij się, że klikasz na karty pokazujące wyniki wykorzystania jako procent tego, co zostało przydzielone.</p>
+<p>Zobacz dokumentację <a href="https://nextflow.io/docs/latest/reports.html">Reports</a> opisującą wszystkie dostępne funkcje.</p>
 <h3 id="52-ustaw-alokacje-zasobow-dla-wszystkich-procesow">5.2. Ustaw alokacje zasobów dla wszystkich procesów<a class="headerlink" href="#52-ustaw-alokacje-zasobow-dla-wszystkich-procesow" title="Permanent link">&para;</a></h3>
 <p>Profilowanie pokazuje, że procesy w naszym szkoleniowym workflow'ie są bardzo lekkie, więc zmniejszmy domyślną alokację pamięci do 1GB na proces.</p>
 <p>Dodaj następujący kod do pliku <code>nextflow.config</code>, przed sekcją parametrów pipeline:</p>
@@ -6191,8 +6192,8 @@ To dlatego, że Nextflow zapewnia, że nie żądamy więcej procesorów niż jes
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
 <p>To tylko mały przedsmak tego, co możesz zrobić, aby zoptymalizować wykorzystanie zasobów.
-Sam Nextflow ma wbudowaną naprawdę sprytną <a href="https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources">dynamiczną logikę ponownych prób</a> do ponownego uruchamiania zadań, które nie powiodły się z powodu ograniczeń zasobów.
-Dodatkowo platforma Seqera oferuje narzędzia oparte na sztucznej inteligencji do automatycznej optymalizacji alokacji zasobów.</p>
+Sam Nextflow ma wbudowaną naprawdę sprytną <a href="https://nextflow.io/docs/latest/process.html#dynamic-task-resources">dynamiczną logikę ponownych prób</a> do ponownego uruchamiania zadań, które nie powiodły się z powodu ograniczeń zasobów.
+Dodatkowo Platforma Seqera oferuje narzędzia oparte na sztucznej inteligencji do automatycznej optymalizacji alokacji zasobów.</p>
 </div>
 <h3 id="55-dodaj-limity-zasobow">5.5. Dodaj limity zasobów<a class="headerlink" href="#55-dodaj-limity-zasobow" title="Permanent link">&para;</a></h3>
 <p>W zależności od tego, jakiego executora i infrastruktury obliczeniowej używasz, mogą istnieć pewne ograniczenia dotyczące tego, co możesz (lub musisz) przydzielić.
@@ -6227,8 +6228,8 @@ Masz dość ręcznego zmieniania ustawień konfiguracji za każdym razem, gdy zm
 </details>
 <p>Pokazaliśmy Ci wiele sposobów, w jakie możesz dostosować konfigurację pipeline w zależności od projektu, nad którym pracujesz, lub platformy obliczeniowej, której używasz.</p>
 <p>Być może zechcesz przełączać się między alternatywnymi ustawieniami w zależności od tego, jakiej infrastruktury używasz.
-Na przykład możesz rozwijać i testować lokalnie na laptopie, a następnie wykonywać pełnoskalowe obciążenia na HPC lub w chmurze.</p>
-<p>Nextflow pozwala Ci skonfigurować dowolną liczbę profili, które opisują różne konfiguracje, które możesz następnie wybrać w czasie wykonania używając argumentu wiersza poleceń, zamiast modyfikować sam plik konfiguracyjny.</p>
+Na przykład możesz rozwijać i testować na małą skalę lokalnie na laptopie, a następnie wykonywać pełnoskalowe obciążenia na HPC lub w chmurze.</p>
+<p>Nextflow pozwala Ci skonfigurować dowolną liczbę <a href="https://nextflow.io/docs/latest/config.html#profiles"><strong>profili</strong></a>, które opisują różne konfiguracje, które możesz następnie wybrać w czasie wykonania używając argumentu wiersza poleceń, zamiast modyfikować sam plik konfiguracyjny.</p>
 <h3 id="61-utworz-profile-do-przeaczania-miedzy-lokalnym-rozwojem-a-wykonaniem-na-hpc">6.1. Utwórz profile do przełączania między lokalnym rozwojem a wykonaniem na HPC<a class="headerlink" href="#61-utworz-profile-do-przeaczania-miedzy-lokalnym-rozwojem-a-wykonaniem-na-hpc" title="Permanent link">&para;</a></h3>
 <p>Skonfigurujmy dwa alternatywne profile; jeden do uruchamiania małych obciążeń na zwykłym komputerze, gdzie będziemy używać kontenerów Docker, i jeden do uruchamiania na uniwersyteckim HPC z harmonogramem Slurm, gdzie będziemy używać pakietów Conda.</p>
 <h4 id="611-skonfiguruj-profile">6.1.1. Skonfiguruj profile<a class="headerlink" href="#611-skonfiguruj-profile" title="Permanent link">&para;</a></h4>
@@ -6379,10 +6380,10 @@ Jeśli konfliktujące ustawienia są ustawione w różnych źródłach konfigura
 <a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a><span class="go">[fd/e84fa9] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>To użyje Docker, gdzie to możliwe, i wyprodukuje wyjścia w <code>results/test</code>, a tym razem postacią jest komiczny duet <code>dragonandcow</code>.</p>
+<p>To użyje Docker, gdzie to możliwe, i wyprodukuje wyjścia w <code>results_config/test</code>, a tym razem postacią jest komiczny duet <code>dragonandcow</code>.</p>
 <details class="abstract">
 <summary>Zawartość pliku</summary>
-<div class="highlight"><span class="filename">results/test/</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go"> _________</span>
+<div class="highlight"><span class="filename">results_config/test/</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go"> _________</span>
 <a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="go">/ HOLà    \</span>
 <a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="go">\ BONJOUR /</span>
@@ -6415,7 +6416,7 @@ Nextflow automatycznie je pobierze, o ile istnieje otwarte połączenie.</p>
 <h3 id="63-uzyj-nextflow-config-aby-zobaczyc-rozwiazana-konfiguracje">6.3. Użyj <code>nextflow config</code>, aby zobaczyć rozwiązaną konfigurację<a class="headerlink" href="#63-uzyj-nextflow-config-aby-zobaczyc-rozwiazana-konfiguracje" title="Permanent link">&para;</a></h3>
 <p>Jak zauważono powyżej, czasami ten sam parametr może być ustawiony na różne wartości w profilach, które chcesz połączyć.
 I bardziej ogólnie, jest wiele miejsc, w których mogą być przechowywane elementy konfiguracji, a czasami te same właściwości mogą być ustawione na różne wartości w różnych miejscach.</p>
-<p>Nextflow stosuje ustaloną <a href="https://www.nextflow.io/docs/latest/config.html">kolejność pierwszeństwa</a> do rozwiązywania wszelkich konfliktów, ale może to być trudne do samodzielnego określenia.
+<p>Nextflow stosuje ustaloną <a href="https://nextflow.io/docs/latest/config.html#configuration-file">kolejność pierwszeństwa</a> do rozwiązywania wszelkich konfliktów, ale może to być trudne do samodzielnego określenia.
 I nawet jeśli nic nie jest w konflikcie, może być żmudne sprawdzanie wszystkich możliwych miejsc, gdzie rzeczy mogą być skonfigurowane.</p>
 <p>Na szczęście Nextflow zawiera wygodne narzędzie o nazwie <code>config</code>, które może zautomatyzować cały ten proces za Ciebie.</p>
 <p>Narzędzie <code>config</code> zbada całą zawartość w bieżącym katalogu roboczym, zbierze wszystkie pliki konfiguracyjne i wyprodukuje w pełni rozwiązaną konfigurację, której Nextflow użyłby do uruchomienia workflow'u.
@@ -6426,27 +6427,35 @@ To pozwala Ci dowiedzieć się, jakie ustawienia zostaną użyte bez koniecznoś
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a><span class="o">}</span>
-<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a>
-<a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-6" name="__codelineno-64-6" href="#__codelineno-64-6"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-64-7" name="__codelineno-64-7" href="#__codelineno-64-7"></a><span class="o">}</span>
-<a id="__codelineno-64-8" name="__codelineno-64-8" href="#__codelineno-64-8"></a>
-<a id="__codelineno-64-9" name="__codelineno-64-9" href="#__codelineno-64-9"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-10" name="__codelineno-64-10" href="#__codelineno-64-10"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
-<a id="__codelineno-64-11" name="__codelineno-64-11" href="#__codelineno-64-11"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-12" name="__codelineno-64-12" href="#__codelineno-64-12"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
-<a id="__codelineno-64-13" name="__codelineno-64-13" href="#__codelineno-64-13"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-64-14" name="__codelineno-64-14" href="#__codelineno-64-14"></a><span class="w">  </span><span class="o">}</span>
-<a id="__codelineno-64-15" name="__codelineno-64-15" href="#__codelineno-64-15"></a><span class="o">}</span>
-<a id="__codelineno-64-16" name="__codelineno-64-16" href="#__codelineno-64-16"></a>
-<a id="__codelineno-64-17" name="__codelineno-64-17" href="#__codelineno-64-17"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-18" name="__codelineno-64-18" href="#__codelineno-64-18"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
-<a id="__codelineno-64-19" name="__codelineno-64-19" href="#__codelineno-64-19"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
-<a id="__codelineno-64-20" name="__codelineno-64-20" href="#__codelineno-64-20"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
+<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
+<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a><span class="o">}</span>
+<a id="__codelineno-64-6" name="__codelineno-64-6" href="#__codelineno-64-6"></a>
+<a id="__codelineno-64-7" name="__codelineno-64-7" href="#__codelineno-64-7"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-8" name="__codelineno-64-8" href="#__codelineno-64-8"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-64-9" name="__codelineno-64-9" href="#__codelineno-64-9"></a><span class="o">}</span>
+<a id="__codelineno-64-10" name="__codelineno-64-10" href="#__codelineno-64-10"></a>
+<a id="__codelineno-64-11" name="__codelineno-64-11" href="#__codelineno-64-11"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-12" name="__codelineno-64-12" href="#__codelineno-64-12"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-64-13" name="__codelineno-64-13" href="#__codelineno-64-13"></a><span class="o">}</span>
+<a id="__codelineno-64-14" name="__codelineno-64-14" href="#__codelineno-64-14"></a>
+<a id="__codelineno-64-15" name="__codelineno-64-15" href="#__codelineno-64-15"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-16" name="__codelineno-64-16" href="#__codelineno-64-16"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
+<a id="__codelineno-64-17" name="__codelineno-64-17" href="#__codelineno-64-17"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-18" name="__codelineno-64-18" href="#__codelineno-64-18"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
+<a id="__codelineno-64-19" name="__codelineno-64-19" href="#__codelineno-64-19"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-64-20" name="__codelineno-64-20" href="#__codelineno-64-20"></a><span class="w">  </span><span class="o">}</span>
 <a id="__codelineno-64-21" name="__codelineno-64-21" href="#__codelineno-64-21"></a><span class="o">}</span>
+<a id="__codelineno-64-22" name="__codelineno-64-22" href="#__codelineno-64-22"></a>
+<a id="__codelineno-64-23" name="__codelineno-64-23" href="#__codelineno-64-23"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;results_config/batch&#39;</span>
+<a id="__codelineno-64-24" name="__codelineno-64-24" href="#__codelineno-64-24"></a>
+<a id="__codelineno-64-25" name="__codelineno-64-25" href="#__codelineno-64-25"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-26" name="__codelineno-64-26" href="#__codelineno-64-26"></a><span class="w">  </span><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-27" name="__codelineno-64-27" href="#__codelineno-64-27"></a><span class="w">      </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-64-28" name="__codelineno-64-28" href="#__codelineno-64-28"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-64-29" name="__codelineno-64-29" href="#__codelineno-64-29"></a><span class="o">}</span>
 </code></pre></div>
 </details>
 <p>To pokazuje Ci bazową konfigurację, którą otrzymujesz, jeśli nie określisz niczego dodatkowego w wierszu poleceń.</p>
@@ -6456,28 +6465,36 @@ To pozwala Ci dowiedzieć się, jakie ustawienia zostaną użyte bez koniecznoś
 </code></pre></div>
 <details class="success">
 <summary>Wyjście polecenia</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a><span class="o">}</span>
-<a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a>
-<a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-6" name="__codelineno-66-6" href="#__codelineno-66-6"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-66-7" name="__codelineno-66-7" href="#__codelineno-66-7"></a><span class="o">}</span>
-<a id="__codelineno-66-8" name="__codelineno-66-8" href="#__codelineno-66-8"></a>
-<a id="__codelineno-66-9" name="__codelineno-66-9" href="#__codelineno-66-9"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-10" name="__codelineno-66-10" href="#__codelineno-66-10"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
-<a id="__codelineno-66-11" name="__codelineno-66-11" href="#__codelineno-66-11"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-12" name="__codelineno-66-12" href="#__codelineno-66-12"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
-<a id="__codelineno-66-13" name="__codelineno-66-13" href="#__codelineno-66-13"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-66-14" name="__codelineno-66-14" href="#__codelineno-66-14"></a><span class="w">  </span><span class="o">}</span>
-<a id="__codelineno-66-15" name="__codelineno-66-15" href="#__codelineno-66-15"></a><span class="w">  </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
-<a id="__codelineno-66-16" name="__codelineno-66-16" href="#__codelineno-66-16"></a><span class="o">}</span>
-<a id="__codelineno-66-17" name="__codelineno-66-17" href="#__codelineno-66-17"></a>
-<a id="__codelineno-66-18" name="__codelineno-66-18" href="#__codelineno-66-18"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-19" name="__codelineno-66-19" href="#__codelineno-66-19"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
-<a id="__codelineno-66-20" name="__codelineno-66-20" href="#__codelineno-66-20"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
-<a id="__codelineno-66-21" name="__codelineno-66-21" href="#__codelineno-66-21"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dragonandcow&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
+<a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
+<a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dragonandcow&#39;</span>
+<a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a><span class="o">}</span>
+<a id="__codelineno-66-6" name="__codelineno-66-6" href="#__codelineno-66-6"></a>
+<a id="__codelineno-66-7" name="__codelineno-66-7" href="#__codelineno-66-7"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-8" name="__codelineno-66-8" href="#__codelineno-66-8"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-66-9" name="__codelineno-66-9" href="#__codelineno-66-9"></a><span class="o">}</span>
+<a id="__codelineno-66-10" name="__codelineno-66-10" href="#__codelineno-66-10"></a>
+<a id="__codelineno-66-11" name="__codelineno-66-11" href="#__codelineno-66-11"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-12" name="__codelineno-66-12" href="#__codelineno-66-12"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-66-13" name="__codelineno-66-13" href="#__codelineno-66-13"></a><span class="o">}</span>
+<a id="__codelineno-66-14" name="__codelineno-66-14" href="#__codelineno-66-14"></a>
+<a id="__codelineno-66-15" name="__codelineno-66-15" href="#__codelineno-66-15"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-16" name="__codelineno-66-16" href="#__codelineno-66-16"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
+<a id="__codelineno-66-17" name="__codelineno-66-17" href="#__codelineno-66-17"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-18" name="__codelineno-66-18" href="#__codelineno-66-18"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
+<a id="__codelineno-66-19" name="__codelineno-66-19" href="#__codelineno-66-19"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-66-20" name="__codelineno-66-20" href="#__codelineno-66-20"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-66-21" name="__codelineno-66-21" href="#__codelineno-66-21"></a><span class="w">  </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
 <a id="__codelineno-66-22" name="__codelineno-66-22" href="#__codelineno-66-22"></a><span class="o">}</span>
+<a id="__codelineno-66-23" name="__codelineno-66-23" href="#__codelineno-66-23"></a>
+<a id="__codelineno-66-24" name="__codelineno-66-24" href="#__codelineno-66-24"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;results_config/test&#39;</span>
+<a id="__codelineno-66-25" name="__codelineno-66-25" href="#__codelineno-66-25"></a>
+<a id="__codelineno-66-26" name="__codelineno-66-26" href="#__codelineno-66-26"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-27" name="__codelineno-66-27" href="#__codelineno-66-27"></a><span class="w">  </span><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-28" name="__codelineno-66-28" href="#__codelineno-66-28"></a><span class="w">      </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-66-29" name="__codelineno-66-29" href="#__codelineno-66-29"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-66-30" name="__codelineno-66-30" href="#__codelineno-66-30"></a><span class="o">}</span>
 </code></pre></div>
 </details>
 <p>To jest szczególnie przydatne dla złożonych projektów, które obejmują wiele warstw konfiguracji.</p>
@@ -6500,13 +6517,49 @@ W praktyce często będziesz chciał uruchamiać pipeline'y przechowywane w zdal
 <p>Spróbuj uruchomić oficjalny demo pipeline Nextflow "hello":</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello
 </code></pre></div>
+<details class="success">
+<summary>Wyjście polecenia</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>
+<a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">Pulling nextflow-io/hello ...</span>
+<a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a><span class="go"> downloaded from https://github.com/nextflow-io/hello.git</span>
+<a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] DSL2 - revision: 2ce0b0e294 [master]</span>
+<a id="__codelineno-68-6" name="__codelineno-68-6" href="#__codelineno-68-6"></a>
+<a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">executor &gt;  local (4)</span>
+<a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="go">[ba/08236d] sayHello (4) [100%] 4 of 4 ✔</span>
+<a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">Ciao world!</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a>
+<a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">Hello world!</span>
+<a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a>
+<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">Bonjour world!</span>
+<a id="__codelineno-68-14" name="__codelineno-68-14" href="#__codelineno-68-14"></a>
+<a id="__codelineno-68-15" name="__codelineno-68-15" href="#__codelineno-68-15"></a><span class="go">Hola world!</span>
+</code></pre></div>
+</details>
 <p>Za pierwszym razem, gdy uruchamiasz zdalny pipeline, Nextflow pobiera go i buforuje lokalnie.
 Kolejne uruchomienia używają wersji z pamięci podręcznej, chyba że wyraźnie zażądasz aktualizacji.</p>
 <h3 id="72-okresl-wersje-dla-odtwarzalnosci">7.2. Określ wersję dla odtwarzalności<a class="headerlink" href="#72-okresl-wersje-dla-odtwarzalnosci" title="Permanent link">&para;</a></h3>
 <p>Domyślnie Nextflow uruchamia najnowszą wersję z domyślnej gałęzi.
-Możesz określić konkretną wersję, gałąź lub commit używając flagi <code>-r</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello<span class="w"> </span>-r<span class="w"> </span>v1.1
+Możesz określić konkretną wersję (tag), gałąź lub commit używając flagi <code>-r</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello<span class="w"> </span>-r<span class="w"> </span>v1.3
 </code></pre></div>
+<details class="success">
+<summary>Wyjście polecenia</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>
+<a id="__codelineno-70-3" name="__codelineno-70-3" href="#__codelineno-70-3"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]</span>
+<a id="__codelineno-70-4" name="__codelineno-70-4" href="#__codelineno-70-4"></a>
+<a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a><span class="go">executor &gt;  local (4)</span>
+<a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a><span class="go">[61/e11f77] sayHello (4) [100%] 4 of 4 ✔</span>
+<a id="__codelineno-70-7" name="__codelineno-70-7" href="#__codelineno-70-7"></a><span class="go">Ciao world!</span>
+<a id="__codelineno-70-8" name="__codelineno-70-8" href="#__codelineno-70-8"></a>
+<a id="__codelineno-70-9" name="__codelineno-70-9" href="#__codelineno-70-9"></a><span class="go">Bonjour world!</span>
+<a id="__codelineno-70-10" name="__codelineno-70-10" href="#__codelineno-70-10"></a>
+<a id="__codelineno-70-11" name="__codelineno-70-11" href="#__codelineno-70-11"></a><span class="go">Hello world!</span>
+<a id="__codelineno-70-12" name="__codelineno-70-12" href="#__codelineno-70-12"></a>
+<a id="__codelineno-70-13" name="__codelineno-70-13" href="#__codelineno-70-13"></a><span class="go">Hola world!</span>
+</code></pre></div>
+</details>
 <p>Określanie dokładnych wersji jest niezbędne dla odtwarzalności.</p>
 <h3 id="podsumowanie_6">Podsumowanie<a class="headerlink" href="#podsumowanie_6" title="Permanent link">&para;</a></h3>
 <p>Wiesz, jak uruchamiać pipeline'y bezpośrednio z GitHub i innych zdalnych repozytoriów oraz jak określać wersje dla odtwarzalności.</p>
@@ -6625,11 +6678,11 @@ Dowiedz się więcej: [2.1. Dostosuj nazwę katalogu outputDir](#21-dostosuj-naz
 <quiz>
 Jak odwołujesz się do nazwy procesu dynamicznie w konfiguracji ścieżki wyjścia?
 - [ ] `#!groovy ${processName}`
-- [ ] `process.name`
-- [x] `#!groovy { meta.id }`
+- [ ] `#!groovy path "<process>.name"`
+- [x] `#!groovy path { <process>.name }`
 - [ ] `@processName`
 
-Dowiedz się więcej: [2.2. Organizuj wyjścia według procesu](#22-organizuj-wyjscia-wedlug-process)
+Dowiedz się więcej: [2.2. Organizuj wyjścia według proces](#22-organizuj-wyjscia-wedlug-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -6639,11 +6692,11 @@ Dowiedz się więcej: [2.2. Organizuj wyjścia według procesu](#22-organizuj-wy
         <p>Jak odwołujesz się do nazwy procesu dynamicznie w konfiguracji ścieżki wyjścia?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0"><code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">processName</span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1"><code>process.name</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2"><code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="w"> </span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3"><code>@processName</code></label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0"><code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">processName</span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1"><code class="highlight"><span class="n">path</span><span class="w"> </span><span class="s2">&quot;&lt;process&gt;.name&quot;</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2"><code class="highlight"><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">process</span><span class="o">&gt;.</span><span class="na">name</span><span class="w"> </span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3"><code>@processName</code></label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#22-organizuj-wyjscia-wedlug-process">2.2. Organizuj wyjścia według procesu</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#22-organizuj-wyjscia-wedlug-process">2.2. Organizuj wyjścia według proces</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6729,7 +6782,7 @@ Jak ustawiasz wymagania zasobowe dla konkretnego procesu o nazwie `cowpy` w plik
 - [x] `#!groovy process { withName: 'cowpy' { memory = '2.GB' } }`
 - [ ] `#!groovy resources.cowpy.memory = '2.GB'`
 
-Dowiedz się więcej: [5.3. Ustaw alokacje zasobów dla konkretnego procesu](#53-ustaw-alokacje-zasobow-dla-konkretnego-process)
+Dowiedz się więcej: [5.3. Ustaw alokacje zasobów dla konkretnego proces](#53-ustaw-alokacje-zasobow-dla-konkretnego-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-8">
@@ -6743,7 +6796,7 @@ Dowiedz się więcej: [5.3. Ustaw alokacje zasobów dla konkretnego procesu](#53
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#53-ustaw-alokacje-zasobow-dla-konkretnego-process">5.3. Ustaw alokacje zasobów dla konkretnego procesu</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#53-ustaw-alokacje-zasobow-dla-konkretnego-process">5.3. Ustaw alokacje zasobów dla konkretnego proces</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

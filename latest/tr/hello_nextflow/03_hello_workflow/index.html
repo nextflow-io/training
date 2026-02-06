@@ -4848,7 +4848,7 @@ Bu bölüm için, <code>results/hello_workflow/</code> altında.</p>
 <a id="__codelineno-7-30" name="__codelineno-7-30"></a>
 <a id="__codelineno-7-31" name="__codelineno-7-31"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-7-32" name="__codelineno-7-32"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="s2">    cat &#39;$input_file&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; &#39;UPPER-${input_file}&#39;</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="s2">    cat &#39;${input_file}&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; &#39;UPPER-${input_file}&#39;</span>
 <a id="__codelineno-7-34" name="__codelineno-7-34"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-7-35" name="__codelineno-7-35"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5766,33 +5766,33 @@ Bölüm 5'te (Konteynerler) pipeline'ımıza bir adım daha eklediğimizde, <cod
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-80">80</a></span>
-<span class="normal"><a href="#__codelineno-59-81">81</a></span>
-<span class="normal"><a href="#__codelineno-59-82">82</a></span>
-<span class="normal"><a href="#__codelineno-59-83">83</a></span>
-<span class="normal"><a href="#__codelineno-59-84">84</a></span>
-<span class="normal"><a href="#__codelineno-59-85">85</a></span>
-<span class="normal"><a href="#__codelineno-59-86">86</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-86">86</a></span>
 <span class="normal"><a href="#__codelineno-59-87">87</a></span>
 <span class="normal"><a href="#__codelineno-59-88">88</a></span>
 <span class="normal"><a href="#__codelineno-59-89">89</a></span>
 <span class="normal"><a href="#__codelineno-59-90">90</a></span>
 <span class="normal"><a href="#__codelineno-59-91">91</a></span>
 <span class="normal"><a href="#__codelineno-59-92">92</a></span>
-<span class="normal"><a href="#__codelineno-59-93">93</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-80" name="__codelineno-59-80"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-59-81" name="__codelineno-59-81"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-59-82" name="__codelineno-59-82"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
-<a id="__codelineno-59-83" name="__codelineno-59-83"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-59-84" name="__codelineno-59-84"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-59-85" name="__codelineno-59-85"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-59-86" name="__codelineno-59-86"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
-<a id="__codelineno-59-87" name="__codelineno-59-87"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-59-88" name="__codelineno-59-88"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-59-89" name="__codelineno-59-89"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-59-90" name="__codelineno-59-90"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
-<a id="__codelineno-59-91" name="__codelineno-59-91"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-59-92" name="__codelineno-59-92"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-59-93" name="__codelineno-59-93"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-59-93">93</a></span>
+<span class="normal"><a href="#__codelineno-59-94">94</a></span>
+<span class="normal"><a href="#__codelineno-59-95">95</a></span>
+<span class="normal"><a href="#__codelineno-59-96">96</a></span>
+<span class="normal"><a href="#__codelineno-59-97">97</a></span>
+<span class="normal"><a href="#__codelineno-59-98">98</a></span>
+<span class="normal"><a href="#__codelineno-59-99">99</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-86" name="__codelineno-59-86"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-59-87" name="__codelineno-59-87"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-59-88" name="__codelineno-59-88"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
+<a id="__codelineno-59-89" name="__codelineno-59-89"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-59-90" name="__codelineno-59-90"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-59-91" name="__codelineno-59-91"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-59-92" name="__codelineno-59-92"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
+<a id="__codelineno-59-93" name="__codelineno-59-93"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-59-94" name="__codelineno-59-94"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-59-95" name="__codelineno-59-95"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-59-96" name="__codelineno-59-96"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
+<a id="__codelineno-59-97" name="__codelineno-59-97"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-59-98" name="__codelineno-59-98"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-59-99" name="__codelineno-59-99"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -6012,7 +6012,7 @@ Bir sürece birden fazla girdi sağlarken ne doğru olmalıdır?
 - [x] Girdilerin sırası girdi bloğunda tanımlanan sırayla eşleşmelidir
 - [ ] Aynı anda yalnızca iki girdi sağlanabilir
 
-Daha fazla bilgi: [3. Bir sürece birden fazla girdi iletin](#3-bir-surece-birden-fazla-girdi-iletin)
+Daha fazla bilgi: [3. Bir sürece ek parametreler iletin](#3-bir-surece-ek-parametreler-iletin)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6026,7 +6026,7 @@ Daha fazla bilgi: [3. Bir sürece birden fazla girdi iletin](#3-bir-surece-birde
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#3-bir-surece-birden-fazla-girdi-iletin">3. Bir sürece birden fazla girdi iletin</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#3-bir-surece-ek-parametreler-iletin">3. Bir sürece ek parametreler iletin</a></p></section>
 </div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;

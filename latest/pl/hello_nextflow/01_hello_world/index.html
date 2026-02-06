@@ -4935,11 +4935,11 @@ Ciało procesu musi zawierać blok skryptu określający polecenie do wykonania 
 </figure>
 
 <p>To jest bardzo minimalna definicja procesu, która zawiera tylko definicję <code>output</code> i blok <code>script</code> do wykonania.</p>
-<p>Definicja <code>output</code> zawiera kwalifikator <code>path</code>, który mówi Nextflow, że powinien to traktować jako ścieżkę (obejmuje zarówno ścieżki katalogów, jak i pliki).
+<p>Definicja <code>output</code> zawiera kwalifikator <code>path</code>, który mówi Nextflow'owi, że powinien to traktować jako ścieżkę (obejmuje zarówno ścieżki katalogów, jak i pliki).
 Innym popularnym kwalifikatorem jest <code>val</code>.</p>
 <p>Co ważne, definicja wyjścia nie <em>określa</em>, jakie wyjście zostanie utworzone.
 Po prostu <em>deklaruje</em>, jakie jest oczekiwane wyjście, aby Nextflow mógł go szukać po zakończeniu wykonywania.
-Jest to niezbędne do weryfikacji pomyślnego wykonania polecenia i przekazania wyniku do procesów downstream, jeśli jest to potrzebne. Wyjście utworzone, które nie pasuje do tego, co jest zadeklarowane w bloku output, nie zostanie przekazane do procesów downstream.</p>
+Jest to niezbędne do weryfikacji pomyślnego wykonania polecenia i przekazania wyniku do procesów poniżej, jeśli jest to potrzebne. Wyjście utworzone, które nie pasuje do tego, co jest zadeklarowane w bloku output, nie zostanie przekazane do procesów poniżej.</p>
 <div class="admonition warning">
 <p class="admonition-title">Ostrzeżenie</p>
 <p>Ten przykład jest kruchy, ponieważ zakodowaliśmy na sztywno nazwę pliku wyjściowego w dwóch oddzielnych miejscach (bloki <code>script</code> i <code>output</code>).
@@ -5342,7 +5342,7 @@ Aby ustawić niestandardową lokalizację, po prostu edytuj <code>path</code> od
 </figure>
 
 <p>Możesz użyć tylu poziomów zagnieżdżenia, ile chcesz.
-Możliwe jest również użycie nazwy procesu lub innych zmiennych do nazywania katalogów używanych do organizowania wyników, a także możliwe jest zmienienie domyślnej nazwy katalogu wyjściowego najwyższego poziomu (która jest kontrolowana przez specjalną zmienną <code>outputDir</code>).
+Możliwe jest również użycie nazwy procesu lub innych zmiennych do nazywania katalogów używanych do organizowania wyników, a także możliwe jest zmienienie domyślnej nazwy katalogu wyjściowego najwyższego poziomu (która jest kontrolowana przez flagę CLI <code>-o</code> lub zmienną konfiguracyjną <code>outputDir</code>).
 Omówimy te opcje w późniejszych szkoleniach.</p>
 <h3 id="23-ustaw-tryb-publikowania-na-kopiowanie">2.3. Ustaw tryb publikowania na kopiowanie<a class="headerlink" href="#23-ustaw-tryb-publikowania-na-kopiowanie" title="Permanent link">&para;</a></h3>
 <p>Domyślnie wyjścia są publikowane jako dowiązania symboliczne z katalogu <code>work</code>.
@@ -5491,7 +5491,7 @@ Chcemy dodać elastyczność za pomocą zmiennej wejściowej, co ułatwi zmianę
 </div>
 </div>
 </div>
-<p>Zmienna <code>greeting</code> jest poprzedzona <code>val</code>, aby powiedzieć Nextflow, że to wartość (nie ścieżka).</p>
+<p>Zmienna <code>greeting</code> jest poprzedzona <code>val</code>, aby powiedzieć Nextflow'owi, że to wartość (nie ścieżka).</p>
 <h4 id="312-edytuj-polecenie-procesu-aby-uzywac-zmiennej-wejsciowej">3.1.2. Edytuj polecenie procesu, aby używać zmiennej wejściowej<a class="headerlink" href="#312-edytuj-polecenie-procesu-aby-uzywac-zmiennej-wejsciowej" title="Permanent link">&para;</a></h4>
 <p>Teraz zamieniamy oryginalną wartość zakodowaną na sztywno na wartość zmiennej wejściowej, którą oczekujemy otrzymać.</p>
 <p>W bloku procesu wprowadź następującą zmianę kodu:</p>
@@ -5519,7 +5519,7 @@ Chcemy dodać elastyczność za pomocą zmiennej wejściowej, co ułatwi zmianę
 </div>
 </div>
 </div>
-<p>Symbol <code>$</code> i nawiasy klamrowe (<code>{ }</code>) mówią Nextflow, że to jest nazwa zmiennej, która musi być zastąpiona faktyczną wartością wejściową (=interpolowana).</p>
+<p>Symbol <code>$</code> i nawiasy klamrowe (<code>{ }</code>) mówią Nextflow'owi, że to jest nazwa zmiennej, która musi być zastąpiona faktyczną wartością wejściową (=interpolowana).</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
 <p>Nawiasy klamrowe (<code>{ }</code>) były technicznie opcjonalne w poprzednich wersjach Nextflow, więc możesz zobaczyć starsze workflow'y, gdzie to jest zapisane jako <code>echo '$greeting' &gt; output.txt</code>.</p>
@@ -5536,7 +5536,7 @@ Jednak gdy wykonujemy prawdziwą pracę z naszym workflow'em, będziemy chcieli 
 </figure>
 
 <p>Na szczęście Nextflow ma wbudowany system parametrów workflow'u o nazwie <a href="https://nextflow.io/docs/latest/config.html#params"><code>params</code></a>, który ułatwia deklarowanie i używanie parametrów CLI.</p>
-<p>Ogólna składnia to zadeklarowanie <code>params.&lt;nazwa_parametru&gt;</code>, aby powiedzieć Nextflow, że ma oczekiwać parametru <code>--&lt;nazwa_parametru&gt;</code> w wierszu poleceń.</p>
+<p>Ogólna składnia to zadeklarowanie <code>params.&lt;nazwa_parametru&gt;</code>, aby powiedzieć Nextflow'owi, że ma oczekiwać parametru <code>--&lt;nazwa_parametru&gt;</code> w wierszu poleceń.</p>
 <p>Tutaj chcemy utworzyć parametr o nazwie <code>--input</code>, więc musimy zadeklarować <code>params.input</code> gdzieś w workflow'ie.
 Zasadniczo możemy to napisać gdziekolwiek; ale ponieważ zamierzamy przekazać go do wywołania procesu <code>sayHello()</code>, możemy wstawić go tam bezpośrednio, pisząc <code>sayHello(params.input)</code>.</p>
 <p>W bloku workflow wprowadź następującą zmianę kodu:</p>
@@ -5556,7 +5556,7 @@ Zasadniczo możemy to napisać gdziekolwiek; ale ponieważ zamierzamy przekazać
 </div>
 </div>
 </div>
-<p>To mówi Nextflow, aby uruchomił proces <code>sayHello</code> na wartości dostarczonej przez parametr <code>--input</code>.</p>
+<p>To mówi Nextflow'owi, aby uruchomił proces <code>sayHello</code> na wartości dostarczonej przez parametr <code>--input</code>.</p>
 <p>W efekcie osiągnęliśmy kroki (2) i (3) opisane na początku sekcji za jednym razem.</p>
 <h3 id="33-uruchom-polecenie-workflowu">3.3. Uruchom polecenie workflow'u<a class="headerlink" href="#33-uruchom-polecenie-workflowu" title="Permanent link">&para;</a></h3>
 <p>Uruchommy to!</p>

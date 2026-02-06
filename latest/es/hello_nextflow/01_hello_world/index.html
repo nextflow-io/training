@@ -4893,7 +4893,7 @@ Luego lo ejecutaremos y buscaremos sus salidas.</p>
 <a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>Un script de workflow de Nextflow típicamente incluye una o más definiciones de <a href="https://nextflow.io/docs/latest/process.html"><strong>process</strong></a> y el <a href="https://nextflow.io/docs/latest/workflow.html"><strong>workflow</strong></a> en sí, además de algunos bloques opcionales (no presentes aquí) que introduciremos más adelante.</p>
+<p>Un script de workflow de Nextflow típicamente incluye una o más definiciones de <strong>process</strong> y el <strong>workflow</strong> en sí, además de algunos bloques opcionales (no presentes aquí) que introduciremos más adelante.</p>
 <p>Cada <strong>process</strong> describe qué operación(es) debe realizar el paso correspondiente en el pipeline, mientras que el <strong>workflow</strong> describe la lógica de flujo de datos que conecta los diversos pasos.</p>
 <p>Vamos a examinar más de cerca el bloque <strong>process</strong> primero, luego veremos el bloque <strong>workflow</strong>.</p>
 <h4 id="111-la-definicion-de-process">1.1.1. La definición de <code>process</code><a class="headerlink" href="#111-la-definicion-de-process" title="Permanent link">&para;</a></h4>
@@ -5342,8 +5342,8 @@ Para establecer una ubicación personalizada, simplemente edite el <code>path</c
 </figure>
 
 <p>Puede usar tantos niveles de anidamiento como desee.
-También es posible usar el nombre del proceso u otras variables para nombrar los directorios usados para organizar los resultados, y es posible cambiar el nombre predeterminado del directorio de salida de nivel superior (que es controlado por la variable especial <code>outputDir</code>).
-Cubriremos estas opciones en capacitaciones posteriores.</p>
+También es posible usar el nombre del proceso u otras variables para nombrar los directorios usados para organizar los resultados, y es posible cambiar el nombre predeterminado del directorio de salida de nivel superior (que es controlado por el flag CLI <code>-o</code> o la variable de configuración <code>outputDir</code>).
+Cubriremos estas opciones más adelante en la capacitación.</p>
 <h3 id="23-establecer-el-modo-de-publicacion-a-copia">2.3. Establecer el modo de publicación a copia<a class="headerlink" href="#23-establecer-el-modo-de-publicacion-a-copia" title="Permanent link">&para;</a></h3>
 <p>Por defecto, las salidas se publican como enlaces simbólicos desde el directorio <code>work</code>.
 Eso significa que solo hay un único archivo en el sistema de archivos.</p>
@@ -5666,7 +5666,7 @@ Si el mismo parámetro se establece con diferentes valores en múltiples lugares
 <h3 id="conclusion_3">Conclusión<a class="headerlink" href="#conclusion_3" title="Permanent link">&para;</a></h3>
 <p>Sabe cómo usar una entrada variable simple proporcionada en tiempo de ejecución a través de un parámetro de línea de comandos, así como configurar, usar y sobrescribir valores predeterminados.</p>
 <h3 id="que-sigue_3">¿Qué sigue?<a class="headerlink" href="#que-sigue_3" title="Permanent link">&para;</a></h3>
-<p>Aprenda a gestionar ejecuciones de manera más conveniente.</p>
+<p>Aprenda a gestionar ejecuciones del workflow de manera más conveniente.</p>
 <hr />
 <h2 id="4-gestionar-ejecuciones-del-workflow">4. Gestionar ejecuciones del workflow<a class="headerlink" href="#4-gestionar-ejecuciones-del-workflow" title="Permanent link">&para;</a></h2>
 <p>Saber cómo iniciar workflows y recuperar salidas es genial, pero encontrará rápidamente que hay algunos otros aspectos de la gestión de workflows que harán su vida más fácil, especialmente si está desarrollando sus propios workflows.</p>

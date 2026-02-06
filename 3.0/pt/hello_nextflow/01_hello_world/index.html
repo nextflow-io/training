@@ -4893,11 +4893,11 @@ Então vamos executá-lo e procurar suas saídas.</p>
 <a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>Um script de fluxo de trabalho Nextflow normalmente inclui uma ou mais definições de <a href="https://nextflow.io/docs/latest/process.html"><strong>processo</strong></a> e o <a href="https://nextflow.io/docs/latest/workflow.html"><strong>fluxo de trabalho</strong></a> em si, além de alguns blocos opcionais (não presentes aqui) que apresentaremos mais tarde.</p>
-<p>Cada <strong>processo</strong> descreve quais operações a etapa correspondente no pipeline deve realizar, enquanto o <strong>fluxo de trabalho</strong> descreve a lógica de fluxo de dados que conecta as várias etapas.</p>
-<p>Vamos examinar primeiro o bloco <strong>processo</strong> e depois veremos o bloco <strong>fluxo de trabalho</strong>.</p>
+<p>Um script de fluxo de trabalho Nextflow normalmente inclui uma ou mais definições de <a href="https://nextflow.io/docs/latest/process.html"><strong>process</strong></a> e o <a href="https://nextflow.io/docs/latest/workflow.html"><strong>workflow</strong></a> em si, além de alguns blocos opcionais (não presentes aqui) que apresentaremos mais tarde.</p>
+<p>Cada <strong>process</strong> descreve quais operações a etapa correspondente no pipeline deve realizar, enquanto o <strong>workflow</strong> descreve a lógica de fluxo de dados que conecta as várias etapas.</p>
+<p>Vamos examinar primeiro o bloco <strong>process</strong> e depois veremos o bloco <strong>workflow</strong>.</p>
 <h4 id="111-a-definicao-de-process">1.1.1. A definição de <code>process</code><a class="headerlink" href="#111-a-definicao-de-process" title="Permanent link">&para;</a></h4>
-<p>O primeiro bloco de código descreve um <strong>processo</strong>.</p>
+<p>O primeiro bloco de código descreve um <strong>process</strong>.</p>
 <p>A definição do processo começa com a palavra-chave <code>process</code>, seguida pelo nome do processo e finalmente o corpo do processo delimitado por chaves.
 O corpo do processo deve conter um bloco script que especifica o comando a ser executado, que pode ser qualquer coisa que você seria capaz de executar em um terminal de linha de comando.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -4926,7 +4926,7 @@ O corpo do processo deve conter um bloco script que especifica o comando a ser e
 <a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Aqui temos um <strong>processo</strong> chamado <code>sayHello</code> que escreve sua <strong>saída</strong> em um arquivo chamado <code>output.txt</code>.</p>
+<p>Aqui temos um <strong>process</strong> chamado <code>sayHello</code> que escreve sua <strong>saída</strong> em um arquivo chamado <code>output.txt</code>.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -4948,9 +4948,9 @@ Mais tarde, você aprenderá maneiras de usar variáveis para mitigar esse probl
 </div>
 <p>Em um pipeline do mundo real, um processo geralmente contém blocos adicionais como diretivas e entradas, que apresentaremos em breve.</p>
 <h4 id="112-a-definicao-de-workflow">1.1.2. A definição de <code>workflow</code><a class="headerlink" href="#112-a-definicao-de-workflow" title="Permanent link">&para;</a></h4>
-<p>O segundo bloco de código descreve o <strong>fluxo de trabalho</strong> em si.
+<p>O segundo bloco de código descreve o <strong>workflow</strong> em si.
 A definição de fluxo de trabalho começa com a palavra-chave <code>workflow</code>, seguida por um nome opcional, depois o corpo do fluxo de trabalho delimitado por chaves.</p>
-<p>Aqui temos um <strong>fluxo de trabalho</strong> que consiste em um bloco <code>main:</code> (que diz 'este é o corpo principal do fluxo de trabalho') contendo uma chamada ao processo <code>sayHello</code>.</p>
+<p>Aqui temos um <strong>workflow</strong> que consiste em um bloco <code>main:</code> (que diz 'este é o corpo principal do fluxo de trabalho') contendo uma chamada ao processo <code>sayHello</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-17">17</a></span>
 <span class="normal"><a href="#__codelineno-7-18">18</a></span>
 <span class="normal"><a href="#__codelineno-7-19">19</a></span>
@@ -4963,7 +4963,7 @@ A definição de fluxo de trabalho começa com a palavra-chave <code>workflow</c
 <a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
 <a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Esta é uma definição de <strong>fluxo de trabalho</strong> muito mínima.
+<p>Esta é uma definição de <strong>workflow</strong> muito mínima.
 Em um pipeline do mundo real, o fluxo de trabalho geralmente contém múltiplas chamadas a <strong>processos</strong> conectados por <strong>canais</strong>, e os processos esperam uma ou mais <strong>entradas</strong> variáveis.</p>
 <p>Você aprenderá como adicionar entradas variáveis mais tarde neste módulo de treinamento; e aprenderá como adicionar mais processos e conectá-los por canais na Parte 3 deste curso.</p>
 <div class="admonition tip">
@@ -5342,8 +5342,8 @@ Para definir um local personalizado, basta editar o <code>path</code> de acordo:
 </figure>
 
 <p>Você pode usar quantos níveis de aninhamento desejar.
-Também é possível usar o nome do processo ou outras variáveis para nomear os diretórios usados para organizar resultados, e é possível alterar o nome padrão do diretório de saída de nível superior (que é controlado pela variável especial <code>outputDir</code>).
-Cobriremos essas opções em treinamentos posteriores.</p>
+Também é possível usar o nome do processo ou outras variáveis para nomear os diretórios usados para organizar resultados, e é possível alterar o nome padrão do diretório de saída de nível superior (que é controlado pela flag CLI <code>-o</code> ou variável de configuração <code>outputDir</code>).
+Cobriremos essas opções mais tarde no treinamento.</p>
 <h3 id="23-defina-o-modo-de-publicacao-para-copiar">2.3. Defina o modo de publicação para copiar<a class="headerlink" href="#23-defina-o-modo-de-publicacao-para-copiar" title="Permanent link">&para;</a></h3>
 <p>Por padrão, as saídas são publicadas como links simbólicos do diretório <code>work</code>.
 Isso significa que há apenas um único arquivo no sistema de arquivos.</p>
@@ -5796,7 +5796,7 @@ Quais são os componentes mínimos necessários de um processo Nextflow?
 - [ ] Blocos de entrada, saída e script
 - [ ] Apenas um bloco script
 
-Saiba mais: [1.1.1. A definição de processo](#111-a-definição-de-process)
+Saiba mais: [1.1.1. A definição de `process`](#111-a-definição-de-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5810,7 +5810,7 @@ Saiba mais: [1.1.1. A definição de processo](#111-a-definição-de-process)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#111-a-definição-de-process">1.1.1. A definição de processo</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#111-a-definição-de-process">1.1.1. A definição de <code>process</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5821,7 +5821,7 @@ Qual é o propósito do bloco de saída em um processo?
 - [x] Declarar saídas esperadas do processo
 - [ ] Definir variáveis de ambiente
 
-Saiba mais: [1.1.1. A definição de processo](#111-a-definição-de-process)
+Saiba mais: [1.1.1. A definição de `process`](#111-a-definição-de-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5835,7 +5835,7 @@ Saiba mais: [1.1.1. A definição de processo](#111-a-definição-de-process)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Saiba mais: <a href="#111-a-definição-de-process">1.1.1. A definição de processo</a></p></section>
+    <section class="content hidden"><p>Saiba mais: <a href="#111-a-definição-de-process">1.1.1. A definição de <code>process</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

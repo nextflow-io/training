@@ -841,7 +841,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -1017,7 +1017,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -1087,7 +1087,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -1146,7 +1146,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -1238,7 +1238,7 @@
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -1392,7 +1392,7 @@
   <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -1451,7 +1451,7 @@
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -4195,7 +4195,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -4371,7 +4371,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -4441,7 +4441,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -4500,7 +4500,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -4592,7 +4592,7 @@
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -4746,7 +4746,7 @@
   <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -4805,7 +4805,7 @@
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        요약
+        핵심 정리
       
     </span>
   </a>
@@ -5096,7 +5096,7 @@
 <h1 id="3">파트 3: 실행 구성<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
 <p>이 섹션에서는 <em>workflow 코드 자체를 한 줄도 변경하지 않고</em> pipeline의 동작을 사용자 정의하고, 다양한 환경에 적응시키고, 리소스 사용을 최적화하기 위해 Nextflow pipeline의 구성을 관리하는 방법을 살펴봅니다.</p>
-<p>이를 수행하는 여러 가지 방법이 있으며, 조합하여 사용할 수 있고 <a href="https://www.nextflow.io/docs/latest/config.html">여기</a>에 설명된 우선순위에 따라 해석됩니다.</p>
+<p>이를 수행하는 여러 가지 방법이 있으며, 조합하여 사용할 수 있고 <a href="https://nextflow.io/docs/latest/config.html">Configuration</a> 문서에 설명된 우선순위에 따라 해석됩니다.</p>
 <p>과정의 이 부분에서는 Part 2의 컨테이너 섹션에서 이미 접한 <code>nextflow.config</code> 파일이라는 가장 간단하고 일반적인 구성 파일 메커니즘을 보여드리겠습니다.</p>
 <p>process 지시문, executor, profile 및 매개변수 파일과 같은 Nextflow 구성의 필수 구성 요소를 살펴볼 것입니다.
 이러한 구성 옵션을 효과적으로 활용하는 방법을 배우면 Nextflow pipeline의 유연성, 확장성 및 성능을 최대한 활용할 수 있습니다.</p>
@@ -5332,7 +5332,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 </details>
 <p>하위 디렉토리 접근 방식은 실험에 좋지만, 약간의 설정이 필요하고 그에 따라 경로를 조정해야 합니다.
 특정 값 세트로 pipeline을 실행하거나 다른 사람이 최소한의 노력으로 할 수 있도록 하려는 경우 더 간단한 접근 방식이 있습니다.</p>
-<p>Nextflow를 사용하면 YAML 또는 JSON 형식의 매개변수 파일을 통해 매개변수를 지정할 수 있어 기본값의 대체 세트와 실행별 매개변수 값을 관리하고 배포하기가 매우 편리합니다.</p>
+<p>Nextflow를 사용하면 YAML 또는 JSON 형식의 <a href="https://nextflow.io/docs/latest/config.html#parameter-file">매개변수 파일</a>을 통해 매개변수를 지정할 수 있어 기본값의 대체 세트와 실행별 매개변수 값을 관리하고 배포하기가 매우 편리합니다.</p>
 <h4 id="131">1.3.1. 예제 매개변수 파일 검토<a class="headerlink" href="#131" title="Permanent link">&para;</a></h4>
 <p>이를 시연하기 위해 현재 디렉토리에 <code>test-params.yaml</code>이라는 예제 매개변수 파일을 제공합니다:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test-params.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
@@ -5360,10 +5360,10 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
 <a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="go">[f0/35723c] sayHello (2)       | 3 of 3 ✔</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="go">[40/3efd1a] convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="go">[17/e97d32] collectGreetings   | 1 of 1 ✔</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="go">[98/c6b57b] cowpy              | 1 of 1 ✔</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="go">[2b/9a7d1e] sayHello (2)       | 3 of 3 ✔</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="go">[5c/8f3b2a] convertToUpper (3) | 3 of 3 ✔</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="go">[a3/29d8fb] collectGreetings   | 1 of 1 ✔</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="go">[b7/83ef12] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
 <p>최종 출력 파일에는 인사말을 말하는 stegosaurus 캐릭터가 포함되어야 합니다.</p>
@@ -5394,7 +5394,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 이러한 경우 매개변수 파일을 사용하면 방대한 명령줄을 입력하지 않고 workflow 스크립트를 수정하지 않고도 런타임에 매개변수 값을 제공할 수 있습니다.</p>
 <p>또한 협력자에게 매개변수 세트를 배포하거나 예를 들어 출판물의 보충 정보로 사용하기가 더 쉬워집니다.
 이렇게 하면 다른 사람들이 작업을 더 재현 가능하게 만들 수 있습니다.</p>
-<h3 id="_1">요약<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h3 id="_1">핵심 정리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>workflow 입력 관리를 위한 주요 구성 옵션을 활용하는 방법을 알게 되었습니다.</p>
 <h3 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>workflow 출력이 게시되는 위치와 방법을 관리하는 방법을 배웁니다.</p>
@@ -5408,7 +5408,8 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <p>이를 더 유연하게 구성할 수 있는 몇 가지 일반적인 방법을 살펴보겠습니다.</p>
 <h3 id="21-outputdir">2.1. <code>outputDir</code> 디렉토리 이름 사용자 정의<a class="headerlink" href="#21-outputdir" title="Permanent link">&para;</a></h3>
 <p>지금까지 실행한 workflow의 각 버전은 출력 정의에 하드코딩된 다른 하위 디렉토리에 출력을 게시했습니다.</p>
-<p>사용자가 구성할 수 있는 매개변수를 사용하도록 변경해 보겠습니다.
+<p>Part 1에서 <code>-output-dir</code> CLI 플래그를 사용하여 해당 하위 디렉토리의 위치를 변경했지만, 이것은 여전히 정적 문자열일 뿐입니다.
+대신 구성 파일에서 이를 구성하여 더 복잡한 동적 경로를 정의할 수 있습니다.
 이를 위해 완전히 새로운 매개변수를 만들 수도 있지만, <code>batch</code> 매개변수가 바로 있으니 사용해 보겠습니다.</p>
 <h4 id="211-outputdir">2.1.1. 구성 파일에서 <code>outputDir</code> 값 설정<a class="headerlink" href="#211-outputdir" title="Permanent link">&para;</a></h4>
 <p>Nextflow가 출력을 게시하는 데 사용하는 경로는 <code>outputDir</code> 옵션으로 제어됩니다.
@@ -5441,7 +5442,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <a id="__codelineno-18-18" name="__codelineno-18-18"></a><span class="hll"><span class="cm">/*</span>
 </span><a id="__codelineno-18-19" name="__codelineno-18-19"></a><span class="hll"><span class="cm">* Output settings</span>
 </span><a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="hll"><span class="cm">*/</span>
-</span><a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="hll"><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results/${params.batch}&quot;</span>
+</span><a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="hll"><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results_config/${params.batch}&quot;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5464,9 +5465,9 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 </div>
 </div>
 </div>
-<p>이것은 내장 기본 경로인 <code>results/</code>를 <code>results/</code>에 <code>batch</code> 매개변수의 값을 하위 디렉토리로 더한 것으로 대체합니다.
-원한다면 <code>results</code> 부분도 변경할 수 있습니다.</p>
-<p>일시적인 변경의 경우 명령의 <code>-output-dir</code> 매개변수를 사용하여 명령줄에서 이 옵션을 설정할 수 있습니다(하지만 그러면 <code>batch</code> 매개변수 값을 사용할 수 없습니다).</p>
+<p>이것은 내장 기본 경로인 <code>results/</code>를 <code>results_config/</code>에 <code>batch</code> 매개변수의 값을 하위 디렉토리로 더한 것으로 대체합니다.</p>
+<p>일시적인 변경의 경우 명령의 <code>-output-dir</code> 매개변수(<code>-o</code> 약칭)를 사용하여 명령줄에서 이 옵션을 설정할 수 있습니다(하지만 그러면 <code>batch</code> 매개변수 값을 사용할 수 없습니다).
+CLI 플래그를 사용하면 구성에 설정된 <code>outputDir</code>를 덮어씁니다.</p>
 <h4 id="212">2.1.2. 하드코딩된 경로의 반복 부분 제거<a class="headerlink" href="#212" title="Permanent link">&para;</a></h4>
 <p>출력 옵션에 여전히 하위 디렉토리가 하드코딩되어 있으므로 이제 제거해 보겠습니다.</p>
 <p>workflow 파일에서 다음 코드를 변경하세요:</p>
@@ -5575,19 +5576,19 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <summary>명령 출력</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
 <a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">[f0/35723c] sayHello (2)       | 3 of 3 ✔</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">[40/3efd1a] convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">[17/e97d32] collectGreetings   | 1 of 1 ✔</span>
-<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="go">[98/c6b57b] cowpy              | 1 of 1 ✔</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">[9c/6a03ea] sayHello (2)       [100%] 3 of 3 ✔</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">[11/9e58a6] convertToUpper (3) [100%] 3 of 3 ✔</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">[c8/1977e5] collectGreetings   [100%] 1 of 1 ✔</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="go">[38/f01eda] cowpy              [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 <code>results/outdir/</code> 아래에서 찾을 수 있습니다.</p>
+<p>이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 <code>results_config/outdir/</code> 아래에서 찾을 수 있습니다.</p>
 <details class="abstract">
 <summary>디렉토리 내용</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">results/outdir/</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">results_config/outdir</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="go">├── cowpy-COLLECTED-outdir-output.txt</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="go">├── intermediates</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="go">│   ├── Bonjour-output.txt</span>
@@ -5604,7 +5605,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <h3 id="22-process">2.2. Process별로 출력 구성<a class="headerlink" href="#22-process" title="Permanent link">&para;</a></h3>
 <p>출력을 더 구성하는 인기 있는 방법 중 하나는 process별로 수행하는 것입니다. 즉, pipeline에서 실행된 각 process에 대해 하위 디렉토리를 만드는 것입니다.</p>
 <h4 id="221-process">2.2.1. 출력 경로를 process 이름 참조로 대체<a class="headerlink" href="#221-process" title="Permanent link">&para;</a></h4>
-<p>출력 경로 선언에서 process 이름을 <code>&lt;task&gt;.name</code>으로 참조하기만 하면 됩니다.</p>
+<p>출력 경로 선언에서 process 이름을 <code>&lt;process&gt;.name</code>으로 참조하기만 하면 됩니다.</p>
 <p>workflow 파일에서 다음 변경을 수행하세요:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">변경 후</label><label for="__tabbed_5_2">변경 전</label></div>
 <div class="tabbed-content">
@@ -5714,16 +5715,16 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="go">Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>
 <a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="go">[f0/35723c] sayHello (2)       | 3 of 3 ✔</span>
-<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="go">[40/3efd1a] convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="go">[17/e97d32] collectGreetings   | 1 of 1 ✔</span>
-<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="go">[98/c6b57b] cowpy              | 1 of 1 ✔</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="go">[4a/c2e6b8] sayHello (2)       | 3 of 3 ✔</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="go">[6f/d4a172] convertToUpper (3) | 3 of 3 ✔</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="go">[e8/4f19d7] collectGreetings   | 1 of 1 ✔</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="go">[f2/a85c36] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 <code>results/pnames/</code> 아래에서 찾을 수 있으며 process별로 그룹화됩니다.</p>
+<p>이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 <code>results_config/pnames/</code> 아래에서 찾을 수 있으며 process별로 그룹화됩니다.</p>
 <details class="abstract">
 <summary>디렉토리 내용</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">results/pnames/</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="go">results_config/pnames/</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="go">├── collectGreetings</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="go">│   ├── COLLECTED-pnames-output.txt</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="go">│   └── pnames-report.txt</span>
@@ -5739,8 +5740,11 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="go">    └── Holà-output.txt</span>
 </code></pre></div>
 </details>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>여기서 <code>intermediates</code>와 최상위 수준의 최종 출력 간의 구분을 지웠습니다.
-물론 이러한 접근 방식을 혼합하여 사용할 수 있습니다. 예를 들어 첫 번째 출력의 경로를 <code>intermediates/${sayHello.name}</code>으로 설정할 수 있습니다.</p>
+물론 이러한 접근 방식을 혼합하여 사용할 수 있습니다. 예를 들어 첫 번째 출력의 경로를 <code class="highlight"><span class="s2">&quot;${params.batch}/intermediates/${sayHello.name}&quot;</span></code>으로 설정할 수 있습니다.</p>
+</div>
 <h3 id="23-workflow">2.3. Workflow 수준에서 게시 모드 설정<a class="headerlink" href="#23-workflow" title="Permanent link">&para;</a></h3>
 <p>마지막으로 반복적인 코드의 양을 줄이는 정신으로 출력별 <code>mode</code> 선언을 구성의 단일 줄로 대체할 수 있습니다.</p>
 <h4 id="231-workflowoutputmode">2.3.1. 구성 파일에 <code>workflow.output.mode</code> 추가<a class="headerlink" href="#231-workflowoutputmode" title="Permanent link">&para;</a></h4>
@@ -5755,7 +5759,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <span class="normal"><a href="#__codelineno-30-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="cm">/*</span>
 <a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="cm">* Output settings</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="cm">*/</span>
-<a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results/${params.batch}&quot;</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results_config/${params.batch}&quot;</span>
 <a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="hll"><span class="n">workflow</span><span class="o">.</span><span class="na">output</span><span class="o">.</span><span class="na">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -5766,7 +5770,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <span class="normal"><a href="#__codelineno-31-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-12" name="__codelineno-31-12"></a><span class="cm">/*</span>
 <a id="__codelineno-31-13" name="__codelineno-31-13"></a><span class="cm">* Output settings</span>
 <a id="__codelineno-31-14" name="__codelineno-31-14"></a><span class="cm">*/</span>
-<a id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results/${params.batch}&quot;</span>
+<a id="__codelineno-31-15" name="__codelineno-31-15"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results_config/${params.batch}&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5872,17 +5876,17 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
 <a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="go">[f0/35723c] sayHello (2)       | 3 of 3 ✔</span>
-<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="go">[40/3efd1a] convertToUpper (3) | 3 of 3 ✔</span>
-<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">[17/e97d32] collectGreetings   | 1 of 1 ✔</span>
-<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="go">[98/c6b57b] cowpy              | 1 of 1 ✔</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="go">[5b/d91e3c] sayHello (2)       | 3 of 3 ✔</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="go">[8a/f6c241] convertToUpper (3) | 3 of 3 ✔</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">[89/cd3a48] collectGreetings   | 1 of 1 ✔</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="go">[9e/71fb52] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 <code>results/outmode/</code> 아래에서 찾을 수 있습니다.
+<p>이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 <code>results_config/outmode/</code> 아래에서 찾을 수 있습니다.
 여전히 모두 symlink가 아닌 적절한 복사본입니다.</p>
 <details class="abstract">
 <summary>디렉토리 내용</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go">results/outmode/</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go">results_config/outmode/</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="go">├── collectGreetings</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">│   ├── COLLECTED-outmode-output.txt</span>
 <a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="go">│   └── outmode-report.txt</span>
@@ -5900,7 +5904,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 </details>
 <p>출력별 모드 설정 방식을 여전히 사용하고 싶은 주된 이유는 동일한 workflow 내에서 혼합하여 사용하려는 경우입니다. 즉, 일부 출력은 복사하고 일부는 symlink로 연결하는 경우입니다.</p>
 <p>이 방식으로 사용자 정의할 수 있는 다른 많은 옵션이 있지만, 이를 통해 옵션의 범위와 선호도에 맞게 효과적으로 활용하는 방법에 대한 감각을 얻을 수 있기를 바랍니다.</p>
-<h3 id="_3">요약<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_3">핵심 정리<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>출력이 게시되는 디렉토리의 이름 지정 및 구조와 workflow 출력 게시 모드를 제어하는 방법을 알게 되었습니다.</p>
 <h3 id="_4">다음 단계<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>소프트웨어 패키징 기술부터 시작하여 컴퓨팅 환경에 맞게 workflow 구성을 조정하는 방법을 배웁니다.</p>
@@ -5920,7 +5924,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <p>보안상의 이유로 Docker가 허용되지 않는 HPC 클러스터로 pipeline을 이동하고 있습니다.
 클러스터는 Singularity와 Conda를 지원하므로 그에 맞게 구성을 전환해야 합니다.</p>
 </details>
-<p>Nextflow는 HPC에서 더 널리 사용되는 Singularity와 Conda와 같은 소프트웨어 패키지 관리자를 포함한 여러 컨테이너 기술을 지원합니다.</p>
+<p>앞서 언급했듯이 Nextflow는 HPC에서 더 널리 사용되는 Singularity와 Conda와 같은 소프트웨어 패키지 관리자를 포함한 여러 컨테이너 기술을 지원합니다.</p>
 <p>Docker 대신 Conda를 사용하도록 구성 파일을 변경할 수 있습니다.
 이를 위해 <code>docker.enabled</code>의 값을 <code>false</code>로 전환하고 Conda 사용을 활성화하는 지시문을 추가합니다:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">변경 후</label><label for="__tabbed_8_2">변경 전</label></div>
@@ -5995,7 +5999,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 <a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a><span class="go">[c5/af5f88] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>이것은 문제없이 작동하고 이전과 동일한 출력을 <code>results/conda</code> 아래에 생성해야 합니다.</p>
+<p>이것은 문제없이 작동하고 이전과 동일한 출력을 <code>results_config/conda</code> 아래에 생성해야 합니다.</p>
 <p>백그라운드에서 Nextflow가 Conda 패키지를 검색하고 환경을 생성했으며, 이는 일반적으로 약간의 작업이 필요합니다. 그래서 직접 수행할 필요가 없어서 좋습니다!</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -6011,7 +6015,7 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 주어진 process에 둘 다 사용 가능한 경우 Nextflow는 컨테이너를 우선시합니다.</p>
 <p>그리고 앞서 언급했듯이 Nextflow는 여러 다른 소프트웨어 패키징 및 컨테이너 기술을 지원하므로 이 두 가지에만 제한되지 않습니다.</p>
 </details>
-<h3 id="_5">요약<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h3 id="_5">핵심 정리<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>각 process가 사용해야 하는 소프트웨어 패키지를 구성하고 기술 간에 전환하는 방법을 알게 되었습니다.</p>
 <h3 id="_6">다음 단계<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>Nextflow가 실제로 작업을 수행하는 데 사용하는 실행 플랫폼을 변경하는 방법을 배웁니다.</p>
@@ -6027,22 +6031,22 @@ workflow 파일에서는 타입이 지정된 선언입니다.
 Nextflow가 시작되면 사용 가능한 CPU와 메모리를 확인합니다.
 실행할 준비가 된 작업의 리소스가 사용 가능한 리소스를 초과하면 Nextflow는 하나 이상의 이전 작업이 완료되어 필요한 리소스가 확보될 때까지 마지막 작업의 실행을 보류합니다.</p>
 <p>로컬 executor는 편리하고 효율적이지만 단일 머신으로 제한됩니다. 매우 큰 워크로드의 경우 로컬 머신이 병목 현상이 되는 것을 발견할 수 있습니다. 사용 가능한 것보다 더 많은 리소스가 필요한 단일 작업이 있거나, 단일 머신이 실행하기를 기다리는 데 너무 오래 걸리는 작업이 너무 많기 때문입니다.</p>
-<p>Nextflow는 HPC 스케줄러(Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor 등)와 클라우드 실행 백엔드(AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes 등)를 포함한 <a href="https://www.nextflow.io/docs/latest/executor.html">많은 다른 실행 백엔드</a>를 지원합니다.</p>
+<p>Nextflow는 HPC 스케줄러(Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor 등)와 클라우드 실행 백엔드(AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes 등)를 포함한 <a href="https://nextflow.io/docs/latest/executor.html">많은 다른 실행 백엔드</a>를 지원합니다.</p>
 <h3 id="41">4.1. 다른 백엔드 대상으로 지정<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>executor의 선택은 <code>executor</code>라는 process 지시문으로 설정됩니다.
+<p><strong>executor</strong>의 선택은 <code>executor</code>라는 process 지시문으로 설정됩니다.
 기본적으로 <code>local</code>로 설정되어 있으므로 다음 구성이 암시됩니다:</p>
 <div class="highlight"><span class="filename">내장 구성</span><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
 <a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>다른 백엔드를 대상으로 executor를 설정하려면 리소스 할당에 대해 위에서 설명한 것과 유사한 구문을 사용하여 원하는 executor를 지정하기만 하면 됩니다(모든 옵션은 <a href="https://www.nextflow.io/docs/latest/executor.html">문서</a> 참조).</p>
+<p>다른 백엔드를 대상으로 <strong>executor</strong>를 설정하려면 리소스 할당에 대해 위에서 설명한 것과 유사한 구문을 사용하여 원하는 executor를 지정하기만 하면 됩니다(모든 옵션은 <a href="https://nextflow.io/docs/latest/executor.html">Executors</a> 참조).</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;slurm&#39;</span>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="o">}</span>
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Slurm 스케줄러에 연결하도록 설정되어 있지 않기 때문에 교육 환경에서는 실제로 이것을 테스트할 수 없습니다.</p>
+<p>HPC에 연결하도록 설정되어 있지 않기 때문에 교육 환경에서는 실제로 이것을 테스트할 수 없습니다.</p>
 </div>
 <h3 id="42">4.2. 실행 매개변수에 대한 백엔드별 구문 처리<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>대부분의 고성능 컴퓨팅 플랫폼은 리소스 할당 요청 및 제한(예: CPU 수 및 메모리)과 사용할 작업 대기열 이름과 같은 특정 매개변수를 지정할 수 있습니다(때로는 필수).</p>
@@ -6072,10 +6076,10 @@ Nextflow가 시작되면 사용 가능한 CPU와 메모리를 확인합니다.
 </code></pre></div>
 </details>
 <p>다행히 Nextflow는 이 모든 것을 단순화합니다.
-<code>cpus</code>, <code>memory</code> 및 <code>queue</code>(다른 속성은 문서 참조)와 같은 관련 속성을 한 번만 지정할 수 있도록 표준화된 구문을 제공합니다.
+<code>cpus</code>, <code>memory</code> 및 <code>queue</code>(다른 속성은 <a href="https://nextflow.io/docs/latest/reference/process.html#process-directives">Process directives</a> 참조)와 같은 관련 속성을 한 번만 지정할 수 있도록 표준화된 구문을 제공합니다.
 그런 다음 런타임에 Nextflow는 해당 설정을 사용하여 executor 설정에 따라 적절한 백엔드별 스크립트를 생성합니다.</p>
 <p>다음 섹션에서 해당 표준화된 구문을 다룰 것입니다.</p>
-<h3 id="_7">요약<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h3 id="_7">핵심 정리<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>이제 다양한 종류의 컴퓨팅 인프라를 사용하도록 executor를 변경하는 방법을 알게 되었습니다.</p>
 <h3 id="_8">다음 단계<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>Nextflow에서 리소스 할당 및 제한을 평가하고 표현하는 방법을 배웁니다.</p>
@@ -6105,18 +6109,18 @@ Nextflow는 선택한 executor에 대한 적절한 지침으로 변환합니다.
 <summary>시나리오</summary>
 <p>process에 얼마나 많은 메모리나 CPU가 필요한지 모르며 리소스 낭비나 작업 종료를 피하고 싶습니다.</p>
 </details>
-<p>process에 얼마나 많은 CPU와 메모리가 필요한지 미리 알지 못하는 경우 리소스 프로파일링을 수행할 수 있습니다. 즉, 일부 기본 할당으로 workflow를 실행하고 각 process가 사용한 양을 기록한 다음 거기서 기본 할당을 조정하는 방법을 추정합니다.</p>
+<p>process에 얼마나 많은 CPU와 메모리가 필요한지 미리 알지 못하는 경우 리소스 프로파일링을 수행할 수 있습니다. 즉, 일부 기본 할당으로 workflow를 실행하고 각 process가 사용한 양을 기록한 다음 거기서 기본 할당을 조정하는 방법을 추정하는 것입니다.</p>
 <p>편리하게도 Nextflow에는 이를 수행하기 위한 내장 도구가 포함되어 있으며 요청 시 보고서를 기꺼이 생성합니다.</p>
 <p>이렇게 하려면 명령줄에 <code>-with-report &lt;filename&gt;.html</code>을 추가합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">3</span>-main.nf<span class="w"> </span>-with-report<span class="w"> </span>report-config-1.html
 </code></pre></div>
 <p>보고서는 브라우저에서 다운로드하여 열 수 있는 html 파일입니다. 교육 환경에서 보려면 왼쪽의 파일 탐색기에서 마우스 오른쪽 버튼을 클릭하고 <code>Show preview</code>를 클릭할 수도 있습니다.</p>
 <p>몇 분 동안 보고서를 살펴보고 리소스 조정 기회를 식별할 수 있는지 확인하세요.
-할당된 것의 백분율로 활용 결과를 보여주는 탭을 클릭해야 합니다.
-사용 가능한 모든 기능을 설명하는 <a href="https://www.nextflow.io/docs/latest/reports.html">문서</a>가 있습니다.</p>
+할당된 것의 백분율로 활용 결과를 보여주는 탭을 클릭해야 합니다.</p>
+<p>사용 가능한 모든 기능을 설명하는 <a href="https://nextflow.io/docs/latest/reports.html">Reports</a> 문서를 참조하세요.</p>
 <h3 id="52-process">5.2. 모든 process에 대한 리소스 할당 설정<a class="headerlink" href="#52-process" title="Permanent link">&para;</a></h3>
 <p>프로파일링 결과 교육 workflow의 process가 매우 가볍기 때문에 기본 메모리 할당을 process당 1GB로 줄여 보겠습니다.</p>
-<p><code>nextflow.config</code> 파일의 pipeline 매개변수 섹션 앞에 다음을 추가하세요:</p>
+<p>pipeline 매개변수 섹션 앞에 <code>nextflow.config</code> 파일에 다음을 추가하세요:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-4">4</a></span>
 <span class="normal"><a href="#__codelineno-50-5">5</a></span>
 <span class="normal"><a href="#__codelineno-50-6">6</a></span>
@@ -6187,7 +6191,7 @@ Nextflow는 선택한 executor에 대한 적절한 지침으로 변환합니다.
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>이것은 리소스 사용을 최적화하기 위해 할 수 있는 것의 아주 작은 맛보기입니다.
-Nextflow 자체에는 리소스 제한으로 인해 실패한 작업을 다시 시도하는 정말 멋진 <a href="https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources">동적 재시도 로직</a>이 내장되어 있습니다.
+Nextflow 자체에는 리소스 제한으로 인해 실패한 작업을 다시 시도하는 정말 멋진 <a href="https://nextflow.io/docs/latest/process.html#dynamic-task-resources">동적 재시도 로직</a>이 내장되어 있습니다.
 또한 Seqera Platform은 리소스 할당을 자동으로 최적화하기 위한 AI 기반 도구도 제공합니다.</p>
 </div>
 <h3 id="55">5.5. 리소스 제한 추가<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
@@ -6210,7 +6214,7 @@ Nextflow 자체에는 리소스 제한으로 인해 실패한 작업을 다시 �
 <p>nf-core 프로젝트는 다양한 HPC 및 클라우드 executor를 포괄하는 전 세계 여러 기관에서 공유하는 <a href="https://nf-co.re/configs/">구성 파일 모음</a>을 컴파일했습니다.</p>
 <p>이러한 공유 구성은 해당 기관의 구성을 바로 활용할 수 있는 해당 기관에서 근무하는 사람들과 자체 인프라에 대한 구성을 개발하려는 사람들의 모델로 모두 가치가 있습니다.</p>
 </details>
-<h3 id="_9">요약<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h3 id="_9">핵심 정리<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>리소스 활용을 평가하기 위한 프로파일링 보고서를 생성하고 모든 process 및/또는 개별 process에 대한 리소스 할당을 수정하고 HPC에서 실행하기 위한 리소스 제한을 설정하는 방법을 알게 되었습니다.</p>
 <h3 id="_10">다음 단계<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>사전 설정 구성 프로필을 설정하고 런타임에 전환하는 방법을 배웁니다.</p>
@@ -6223,11 +6227,11 @@ Nextflow 자체에는 리소스 제한으로 인해 실패한 작업을 다시 �
 </details>
 <p>작업 중인 프로젝트나 사용 중인 컴퓨팅 환경에 따라 pipeline 구성을 사용자 정의할 수 있는 여러 가지 방법을 보여드렸습니다.</p>
 <p>사용 중인 컴퓨팅 인프라에 따라 대체 설정 간에 전환하고 싶을 수 있습니다. 예를 들어 노트북에서 로컬로 개발하고 소규모 테스트를 실행한 다음 HPC 또는 클라우드에서 전체 규모 워크로드를 실행할 수 있습니다.</p>
-<p>Nextflow를 사용하면 다양한 구성을 설명하는 프로필을 원하는 수만큼 설정한 다음 구성 파일 자체를 수정하지 않고 명령줄 인수를 사용하여 런타임에 선택할 수 있습니다.</p>
+<p>Nextflow를 사용하면 다양한 구성을 설명하는 <a href="https://nextflow.io/docs/latest/config.html#profiles"><strong>profile</strong></a>을 원하는 수만큼 설정한 다음 구성 파일 자체를 수정하지 않고 명령줄 인수를 사용하여 런타임에 선택할 수 있습니다.</p>
 <h3 id="61-hpc">6.1. 로컬 개발과 HPC 실행 간 전환을 위한 프로필 생성<a class="headerlink" href="#61-hpc" title="Permanent link">&para;</a></h3>
 <p>Docker 컨테이너를 사용하는 일반 컴퓨터에서 소규모 로드를 실행하기 위한 프로필과 Conda 패키지를 사용하는 Slurm 스케줄러가 있는 대학 HPC에서 실행하기 위한 프로필의 두 가지 대체 프로필을 설정해 보겠습니다.</p>
 <h4 id="611">6.1.1. 프로필 설정<a class="headerlink" href="#611" title="Permanent link">&para;</a></h4>
-<p><code>nextflow.config</code> 파일의 pipeline 매개변수 섹션 다음이지만 출력 설정 앞에 다음을 추가하세요:</p>
+<p>pipeline 매개변수 섹션 다음이지만 출력 설정 앞에 <code>nextflow.config</code> 파일에 다음을 추가하세요:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-24">24</a></span>
 <span class="normal"><a href="#__codelineno-55-25">25</a></span>
 <span class="normal"><a href="#__codelineno-55-26">26</a></span>
@@ -6357,7 +6361,7 @@ workflow 매개변수의 기본값을 설정하여 다른 사람들이 적절한
 <h4 id="622-workflow">6.2.2. 테스트 프로필로 로컬에서 workflow 실행<a class="headerlink" href="#622-workflow" title="Permanent link">&para;</a></h4>
 <p>편리하게도 프로필은 상호 배타적이지 않으므로 <code>-profile &lt;profile1&gt;,&lt;profile2&gt;</code> 구문을 사용하여 명령줄에 여러 프로필을 지정할 수 있습니다(프로필 수에 관계없이).</p>
 <p>동일한 구성 요소에 대해 값을 설정하는 프로필을 결합하고 동일한 구성 파일에 설명되어 있는 경우 Nextflow는 마지막으로 읽은 값(즉, 파일에서 나중에 나오는 값)을 사용하여 충돌을 해결합니다.
-충돌하는 설정이 다른 구성 소스에 설정된 경우 기본 <a href="https://www.nextflow.io/docs/latest/config.html">우선순위</a>가 적용됩니다.</p>
+충돌하는 설정이 다른 구성 소스에 설정된 경우 기본 <a href="https://nextflow.io/docs/latest/config.html#configuration-file">우선순위</a>가 적용됩니다.</p>
 <p>이전 명령에 테스트 프로필을 추가해 보겠습니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">3</span>-main.nf<span class="w"> </span>-profile<span class="w"> </span>my_laptop,test
 </code></pre></div>
@@ -6374,10 +6378,10 @@ workflow 매개변수의 기본값을 설정하여 다른 사람들이 적절한
 <a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a><span class="go">[fd/e84fa9] cowpy              | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>이것은 가능한 경우 Docker를 사용하고 <code>results/test</code> 아래에 출력을 생성하며, 이번에는 캐릭터가 코믹 듀오 <code>dragonandcow</code>입니다.</p>
+<p>이것은 가능한 경우 Docker를 사용하고 <code>results_config/test</code> 아래에 출력을 생성하며, 이번에는 캐릭터가 코믹 듀오 <code>dragonandcow</code>입니다.</p>
 <details class="abstract">
 <summary>파일 내용</summary>
-<div class="highlight"><span class="filename">results/test/</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go"> _________</span>
+<div class="highlight"><span class="filename">results_config/test/</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go"> _________</span>
 <a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="go">/ HOLà    \</span>
 <a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="go">| HELLO   |</span>
 <a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="go">\ BONJOUR /</span>
@@ -6410,7 +6414,7 @@ Nextflow는 열린 연결이 있는 한 자동으로 다운로드합니다.</p>
 <h3 id="63-nextflow-config">6.3. <code>nextflow config</code>를 사용하여 해결된 구성 확인<a class="headerlink" href="#63-nextflow-config" title="Permanent link">&para;</a></h3>
 <p>위에서 언급했듯이 때때로 결합하려는 프로필에서 동일한 매개변수를 다른 값으로 설정할 수 있습니다.
 그리고 더 일반적으로 구성 요소를 저장할 수 있는 곳이 많고 때때로 동일한 속성이 다른 곳에서 다른 값으로 설정될 수 있습니다.</p>
-<p>Nextflow는 충돌을 해결하기 위해 설정된 <a href="https://www.nextflow.io/docs/latest/config.html">우선순위</a>를 적용하지만, 직접 결정하기 어려울 수 있습니다.
+<p>Nextflow는 충돌을 해결하기 위해 설정된 <a href="https://nextflow.io/docs/latest/config.html#configuration-file">우선순위</a>를 적용하지만, 직접 결정하기 어려울 수 있습니다.
 그리고 충돌이 없더라도 구성될 수 있는 모든 가능한 장소를 찾는 것은 지루할 수 있습니다.</p>
 <p>다행히 Nextflow에는 전체 프로세스를 자동화할 수 있는 <code>config</code>라는 편리한 유틸리티 도구가 포함되어 있습니다.</p>
 <p><code>config</code> 도구는 현재 작업 디렉토리의 모든 내용을 탐색하고 모든 구성 파일을 수집한 다음 Nextflow가 workflow를 실행하는 데 사용할 완전히 해결된 구성을 생성합니다.
@@ -6421,27 +6425,35 @@ Nextflow는 열린 연결이 있는 한 자동으로 다운로드합니다.</p>
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a><span class="o">}</span>
-<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a>
-<a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-6" name="__codelineno-64-6" href="#__codelineno-64-6"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-64-7" name="__codelineno-64-7" href="#__codelineno-64-7"></a><span class="o">}</span>
-<a id="__codelineno-64-8" name="__codelineno-64-8" href="#__codelineno-64-8"></a>
-<a id="__codelineno-64-9" name="__codelineno-64-9" href="#__codelineno-64-9"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-10" name="__codelineno-64-10" href="#__codelineno-64-10"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
-<a id="__codelineno-64-11" name="__codelineno-64-11" href="#__codelineno-64-11"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-12" name="__codelineno-64-12" href="#__codelineno-64-12"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
-<a id="__codelineno-64-13" name="__codelineno-64-13" href="#__codelineno-64-13"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-64-14" name="__codelineno-64-14" href="#__codelineno-64-14"></a><span class="w">  </span><span class="o">}</span>
-<a id="__codelineno-64-15" name="__codelineno-64-15" href="#__codelineno-64-15"></a><span class="o">}</span>
-<a id="__codelineno-64-16" name="__codelineno-64-16" href="#__codelineno-64-16"></a>
-<a id="__codelineno-64-17" name="__codelineno-64-17" href="#__codelineno-64-17"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-64-18" name="__codelineno-64-18" href="#__codelineno-64-18"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
-<a id="__codelineno-64-19" name="__codelineno-64-19" href="#__codelineno-64-19"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
-<a id="__codelineno-64-20" name="__codelineno-64-20" href="#__codelineno-64-20"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
+<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;batch&#39;</span>
+<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
+<a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a><span class="o">}</span>
+<a id="__codelineno-64-6" name="__codelineno-64-6" href="#__codelineno-64-6"></a>
+<a id="__codelineno-64-7" name="__codelineno-64-7" href="#__codelineno-64-7"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-8" name="__codelineno-64-8" href="#__codelineno-64-8"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-64-9" name="__codelineno-64-9" href="#__codelineno-64-9"></a><span class="o">}</span>
+<a id="__codelineno-64-10" name="__codelineno-64-10" href="#__codelineno-64-10"></a>
+<a id="__codelineno-64-11" name="__codelineno-64-11" href="#__codelineno-64-11"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-12" name="__codelineno-64-12" href="#__codelineno-64-12"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-64-13" name="__codelineno-64-13" href="#__codelineno-64-13"></a><span class="o">}</span>
+<a id="__codelineno-64-14" name="__codelineno-64-14" href="#__codelineno-64-14"></a>
+<a id="__codelineno-64-15" name="__codelineno-64-15" href="#__codelineno-64-15"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-16" name="__codelineno-64-16" href="#__codelineno-64-16"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
+<a id="__codelineno-64-17" name="__codelineno-64-17" href="#__codelineno-64-17"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-18" name="__codelineno-64-18" href="#__codelineno-64-18"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
+<a id="__codelineno-64-19" name="__codelineno-64-19" href="#__codelineno-64-19"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-64-20" name="__codelineno-64-20" href="#__codelineno-64-20"></a><span class="w">  </span><span class="o">}</span>
 <a id="__codelineno-64-21" name="__codelineno-64-21" href="#__codelineno-64-21"></a><span class="o">}</span>
+<a id="__codelineno-64-22" name="__codelineno-64-22" href="#__codelineno-64-22"></a>
+<a id="__codelineno-64-23" name="__codelineno-64-23" href="#__codelineno-64-23"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;results_config/batch&#39;</span>
+<a id="__codelineno-64-24" name="__codelineno-64-24" href="#__codelineno-64-24"></a>
+<a id="__codelineno-64-25" name="__codelineno-64-25" href="#__codelineno-64-25"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-26" name="__codelineno-64-26" href="#__codelineno-64-26"></a><span class="w">  </span><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-27" name="__codelineno-64-27" href="#__codelineno-64-27"></a><span class="w">      </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-64-28" name="__codelineno-64-28" href="#__codelineno-64-28"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-64-29" name="__codelineno-64-29" href="#__codelineno-64-29"></a><span class="o">}</span>
 </code></pre></div>
 </details>
 <p>이것은 명령줄에서 추가로 지정하지 않으면 얻을 수 있는 기본 구성을 보여줍니다.</p>
@@ -6451,32 +6463,40 @@ Nextflow는 열린 연결이 있는 한 자동으로 다운로드합니다.</p>
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a><span class="o">}</span>
-<a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a>
-<a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-6" name="__codelineno-66-6" href="#__codelineno-66-6"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-66-7" name="__codelineno-66-7" href="#__codelineno-66-7"></a><span class="o">}</span>
-<a id="__codelineno-66-8" name="__codelineno-66-8" href="#__codelineno-66-8"></a>
-<a id="__codelineno-66-9" name="__codelineno-66-9" href="#__codelineno-66-9"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-10" name="__codelineno-66-10" href="#__codelineno-66-10"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
-<a id="__codelineno-66-11" name="__codelineno-66-11" href="#__codelineno-66-11"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-12" name="__codelineno-66-12" href="#__codelineno-66-12"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
-<a id="__codelineno-66-13" name="__codelineno-66-13" href="#__codelineno-66-13"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
-<a id="__codelineno-66-14" name="__codelineno-66-14" href="#__codelineno-66-14"></a><span class="w">  </span><span class="o">}</span>
-<a id="__codelineno-66-15" name="__codelineno-66-15" href="#__codelineno-66-15"></a><span class="w">  </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
-<a id="__codelineno-66-16" name="__codelineno-66-16" href="#__codelineno-66-16"></a><span class="o">}</span>
-<a id="__codelineno-66-17" name="__codelineno-66-17" href="#__codelineno-66-17"></a>
-<a id="__codelineno-66-18" name="__codelineno-66-18" href="#__codelineno-66-18"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-66-19" name="__codelineno-66-19" href="#__codelineno-66-19"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
-<a id="__codelineno-66-20" name="__codelineno-66-20" href="#__codelineno-66-20"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
-<a id="__codelineno-66-21" name="__codelineno-66-21" href="#__codelineno-66-21"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dragonandcow&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="w">  </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/greetings.csv&#39;</span>
+<a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a><span class="w">  </span><span class="n">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
+<a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a><span class="w">  </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dragonandcow&#39;</span>
+<a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a><span class="o">}</span>
+<a id="__codelineno-66-6" name="__codelineno-66-6" href="#__codelineno-66-6"></a>
+<a id="__codelineno-66-7" name="__codelineno-66-7" href="#__codelineno-66-7"></a><span class="n">docker</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-8" name="__codelineno-66-8" href="#__codelineno-66-8"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-66-9" name="__codelineno-66-9" href="#__codelineno-66-9"></a><span class="o">}</span>
+<a id="__codelineno-66-10" name="__codelineno-66-10" href="#__codelineno-66-10"></a>
+<a id="__codelineno-66-11" name="__codelineno-66-11" href="#__codelineno-66-11"></a><span class="n">conda</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-12" name="__codelineno-66-12" href="#__codelineno-66-12"></a><span class="w">  </span><span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-66-13" name="__codelineno-66-13" href="#__codelineno-66-13"></a><span class="o">}</span>
+<a id="__codelineno-66-14" name="__codelineno-66-14" href="#__codelineno-66-14"></a>
+<a id="__codelineno-66-15" name="__codelineno-66-15" href="#__codelineno-66-15"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-16" name="__codelineno-66-16" href="#__codelineno-66-16"></a><span class="w">  </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1 GB&#39;</span>
+<a id="__codelineno-66-17" name="__codelineno-66-17" href="#__codelineno-66-17"></a><span class="w">  </span><span class="nl">withName:</span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-18" name="__codelineno-66-18" href="#__codelineno-66-18"></a><span class="w">      </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;2 GB&#39;</span>
+<a id="__codelineno-66-19" name="__codelineno-66-19" href="#__codelineno-66-19"></a><span class="w">      </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-66-20" name="__codelineno-66-20" href="#__codelineno-66-20"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-66-21" name="__codelineno-66-21" href="#__codelineno-66-21"></a><span class="w">  </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
 <a id="__codelineno-66-22" name="__codelineno-66-22" href="#__codelineno-66-22"></a><span class="o">}</span>
+<a id="__codelineno-66-23" name="__codelineno-66-23" href="#__codelineno-66-23"></a>
+<a id="__codelineno-66-24" name="__codelineno-66-24" href="#__codelineno-66-24"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;results_config/test&#39;</span>
+<a id="__codelineno-66-25" name="__codelineno-66-25" href="#__codelineno-66-25"></a>
+<a id="__codelineno-66-26" name="__codelineno-66-26" href="#__codelineno-66-26"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-27" name="__codelineno-66-27" href="#__codelineno-66-27"></a><span class="w">  </span><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-66-28" name="__codelineno-66-28" href="#__codelineno-66-28"></a><span class="w">      </span><span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-66-29" name="__codelineno-66-29" href="#__codelineno-66-29"></a><span class="w">  </span><span class="o">}</span>
+<a id="__codelineno-66-30" name="__codelineno-66-30" href="#__codelineno-66-30"></a><span class="o">}</span>
 </code></pre></div>
 </details>
 <p>이것은 여러 계층의 구성을 포함하는 복잡한 프로젝트에 특히 유용합니다.</p>
-<h3 id="_11">요약<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h3 id="_11">핵심 정리<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>런타임에 최소한의 번거로움으로 사전 설정 구성을 선택하기 위해 프로필을 사용하는 방법을 알게 되었습니다.
 더 일반적으로 다양한 컴퓨팅 플랫폼에 맞게 workflow 실행을 구성하고 분석의 재현성을 향상시키는 방법을 알게 되었습니다.</p>
 <h3 id="_12">다음 단계<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
@@ -6495,15 +6515,51 @@ Nextflow는 열린 연결이 있는 한 자동으로 다운로드합니다.</p>
 <p>공식 Nextflow "hello" 데모 pipeline을 실행해 보세요:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello
 </code></pre></div>
+<details class="success">
+<summary>명령 출력</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>
+<a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">Pulling nextflow-io/hello ...</span>
+<a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a><span class="go"> downloaded from https://github.com/nextflow-io/hello.git</span>
+<a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] DSL2 - revision: 2ce0b0e294 [master]</span>
+<a id="__codelineno-68-6" name="__codelineno-68-6" href="#__codelineno-68-6"></a>
+<a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">executor &gt;  local (4)</span>
+<a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="go">[ba/08236d] sayHello (4) [100%] 4 of 4 ✔</span>
+<a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">Ciao world!</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a>
+<a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">Hello world!</span>
+<a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a>
+<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">Bonjour world!</span>
+<a id="__codelineno-68-14" name="__codelineno-68-14" href="#__codelineno-68-14"></a>
+<a id="__codelineno-68-15" name="__codelineno-68-15" href="#__codelineno-68-15"></a><span class="go">Hola world!</span>
+</code></pre></div>
+</details>
 <p>원격 pipeline을 처음 실행하면 Nextflow가 이를 다운로드하고 로컬에 캐시합니다.
 후속 실행은 업데이트를 명시적으로 요청하지 않는 한 캐시된 버전을 사용합니다.</p>
 <h3 id="72">7.2. 재현성을 위해 버전 지정<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
 <p>기본적으로 Nextflow는 기본 브랜치의 최신 버전을 실행합니다.
-<code>-r</code> 플래그를 사용하여 특정 버전, 브랜치 또는 커밋을 지정할 수 있습니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello<span class="w"> </span>-r<span class="w"> </span>v1.1
+<code>-r</code> 플래그를 사용하여 특정 버전(태그), 브랜치 또는 커밋을 지정할 수 있습니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>nextflow-io/hello<span class="w"> </span>-r<span class="w"> </span>v1.3
 </code></pre></div>
+<details class="success">
+<summary>명령 출력</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>
+<a id="__codelineno-70-3" name="__codelineno-70-3" href="#__codelineno-70-3"></a><span class="go">Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]</span>
+<a id="__codelineno-70-4" name="__codelineno-70-4" href="#__codelineno-70-4"></a>
+<a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a><span class="go">executor &gt;  local (4)</span>
+<a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a><span class="go">[61/e11f77] sayHello (4) [100%] 4 of 4 ✔</span>
+<a id="__codelineno-70-7" name="__codelineno-70-7" href="#__codelineno-70-7"></a><span class="go">Ciao world!</span>
+<a id="__codelineno-70-8" name="__codelineno-70-8" href="#__codelineno-70-8"></a>
+<a id="__codelineno-70-9" name="__codelineno-70-9" href="#__codelineno-70-9"></a><span class="go">Bonjour world!</span>
+<a id="__codelineno-70-10" name="__codelineno-70-10" href="#__codelineno-70-10"></a>
+<a id="__codelineno-70-11" name="__codelineno-70-11" href="#__codelineno-70-11"></a><span class="go">Hello world!</span>
+<a id="__codelineno-70-12" name="__codelineno-70-12" href="#__codelineno-70-12"></a>
+<a id="__codelineno-70-13" name="__codelineno-70-13" href="#__codelineno-70-13"></a><span class="go">Hola world!</span>
+</code></pre></div>
+</details>
 <p>정확한 버전을 지정하는 것은 재현성에 필수적입니다.</p>
-<h3 id="_13">요약<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<h3 id="_13">핵심 정리<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>GitHub 및 기타 원격 저장소에서 직접 pipeline을 실행하는 방법과 재현성을 위해 버전을 지정하는 방법을 알게 되었습니다.</p>
 <h3 id="_14">다음 단계<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>스스로를 크게 칭찬해 주세요!
@@ -6621,7 +6677,7 @@ workflow를 실행할 때 매개변수 파일을 어떻게 지정하나요?
 출력 경로 구성에서 process 이름을 동적으로 참조하는 방법은 무엇인가요?
 - [ ] `#!groovy ${processName}`
 - [ ] `process.name`
-- [x] `#!groovy { meta.id }`
+- [x] `#!groovy { <process>.name }`
 - [ ] `@processName`
 
 자세히 알아보기: [2.2. Process별로 출력 구성](#22-process별로-출력-구성)
@@ -6634,7 +6690,7 @@ workflow를 실행할 때 매개변수 파일을 어떻게 지정하나요?
         <p>출력 경로 구성에서 process 이름을 동적으로 참조하는 방법은 무엇인가요?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0"><code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">processName</span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1"><code>process.name</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2"><code class="highlight"><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="w"> </span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3"><code>@processName</code></label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0"><code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">processName</span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1"><code>process.name</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2"><code class="highlight"><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">process</span><span class="o">&gt;.</span><span class="na">name</span><span class="w"> </span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3"><code>@processName</code></label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>

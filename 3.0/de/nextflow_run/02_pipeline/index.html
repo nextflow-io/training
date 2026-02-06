@@ -4747,7 +4747,7 @@ Das hat viele Vorteile, einschließlich der Vermeidung von Kollisionen, wenn der
 <a id="__codelineno-13-27" name="__codelineno-13-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-28" name="__codelineno-13-28"></a>
 <a id="__codelineno-13-29" name="__codelineno-13-29"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="w">    </span><span class="c1">// Einen Channel für Eingaben aus einer CSV-Datei erstellen</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30"></a><span class="w">    </span><span class="c1">// Einen Kanal für Eingaben aus einer CSV-Datei erstellen</span>
 <a id="__codelineno-13-31" name="__codelineno-13-31"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span><a id="__codelineno-13-32" name="__codelineno-13-32"></a><span class="hll"><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 </span><a id="__codelineno-13-33" name="__codelineno-13-33"></a><span class="hll"><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -4778,20 +4778,20 @@ Das hat viele Vorteile, einschließlich der Vermeidung von Kollisionen, wenn der
 <span class="normal"><a href="#__codelineno-14-33">33</a></span>
 <span class="normal"><a href="#__codelineno-14-34">34</a></span>
 <span class="normal"><a href="#__codelineno-14-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-29" name="__codelineno-14-29"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-14-30" name="__codelineno-14-30"></a><span class="w">    </span><span class="c1">// Einen Channel für Eingaben aus einer CSV-Datei erstellen</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30"></a><span class="w">    </span><span class="c1">// Einen Kanal für Eingaben aus einer CSV-Datei erstellen</span>
 <a id="__codelineno-14-31" name="__codelineno-14-31"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span><a id="__codelineno-14-32" name="__codelineno-14-32"></a><span class="hll"><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 </span><a id="__codelineno-14-33" name="__codelineno-14-33"></a><span class="hll"><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-14-34" name="__codelineno-14-34"></a><span class="w">    </span><span class="c1">// Eine Begrüßung ausgeben</span>
 <a id="__codelineno-14-35" name="__codelineno-14-35"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
-<p>Dieser Code erstellt einen channel namens <code>greeting_ch</code>, der die CSV-Datei liest, sie parst und die erste Spalte aus jeder Zeile extrahiert.
-Das Ergebnis ist ein channel, der <code>Hello</code>, <code>Bonjour</code> und <code>Holà</code> enthält.</p>
+<p>Dieser Code erstellt einen Kanal namens <code>greeting_ch</code>, der die CSV-Datei liest, sie parst und die erste Spalte aus jeder Zeile extrahiert.
+Das Ergebnis ist ein Kanal, der <code>Hello</code>, <code>Bonjour</code> und <code>Holà</code> enthält.</p>
 <details class="tip">
 <summary>Wie funktioniert das?</summary>
 <p>Hier ist, was diese Zeile auf Deutsch bedeutet:</p>
 <ul>
-<li><code>channel.fromPath</code> ist eine <strong>channel factory</strong>, die einen channel aus Dateipfad(en) erstellt</li>
+<li><code>channel.fromPath</code> ist eine <strong>channel factory</strong>, die einen Kanal aus Dateipfad(en) erstellt</li>
 <li><code>(params.input)</code> gibt an, dass der Dateipfad durch <code>--input</code> auf der Kommandozeile bereitgestellt wird</li>
 </ul>
 <p>Mit anderen Worten, diese Zeile sagt Nextflow: Nimm den mit <code>--input</code> angegebenen Dateipfad und bereite dich darauf vor, seinen Inhalt als Eingabedaten zu behandeln.</p>
@@ -4810,11 +4810,11 @@ Das Ergebnis ist ein channel, der <code>Hello</code>, <code>Bonjour</code> und <
 <p>Haben wir das in ein Array transformiert, das so aussieht:</p>
 <div class="highlight"><span class="filename">Array-Inhalte</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
 </code></pre></div>
-<p>Und dann haben wir das erste Element aus jeder der drei Zeilen genommen und sie in einen Nextflow channel geladen, der jetzt enthält: <code>Hello</code>, <code>Bonjour</code> und <code>Holà</code>.</p>
-<p>Wenn du channels und Operatoren im Detail verstehen möchtest, einschließlich wie du sie selbst schreibst, siehe <a href="../../hello_nextflow/02_hello_channels/#4-read-input-values-from-a-csv-file">Hello Nextflow Teil 2: Hello Channels</a>.</p>
+<p>Und dann haben wir das erste Element aus jeder der drei Zeilen genommen und sie in einen Nextflow Kanal geladen, der jetzt enthält: <code>Hello</code>, <code>Bonjour</code> und <code>Holà</code>.</p>
+<p>Wenn du Kanäle und Operatoren im Detail verstehen möchtest, einschließlich wie du sie selbst schreibst, siehe <a href="../../hello_nextflow/02_hello_channels/#4-read-input-values-from-a-csv-file">Hello Nextflow Teil 2: Hello Channels</a>.</p>
 </details>
 <h4 id="142-den-process-fur-jeden-gru-aufrufen">1.4.2. Den process für jeden Gruß aufrufen<a class="headerlink" href="#142-den-process-fur-jeden-gru-aufrufen" title="Permanent link">&para;</a></h4>
-<p>Als nächstes geben wir in der letzten Zeile des <code>main:</code>-Blocks des Workflows den geladenen <code>greeting_ch</code> channel als Eingabe für den <code>sayHello()</code> process an.</p>
+<p>Als nächstes geben wir in der letzten Zeile des <code>main:</code>-Blocks des Workflows den geladenen <code>greeting_ch</code> Kanal als Eingabe für den <code>sayHello()</code> process an.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2a-inputs.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-29">29</a></span>
 <span class="normal"><a href="#__codelineno-17-30">30</a></span>
 <span class="normal"><a href="#__codelineno-17-31">31</a></span>
@@ -4822,14 +4822,14 @@ Das Ergebnis ist ein channel, der <code>Hello</code>, <code>Bonjour</code> und <
 <span class="normal"><a href="#__codelineno-17-33">33</a></span>
 <span class="normal"><a href="#__codelineno-17-34">34</a></span>
 <span class="normal"><a href="#__codelineno-17-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-29" name="__codelineno-17-29"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="w">    </span><span class="c1">// Einen Channel für Eingaben aus einer CSV-Datei erstellen</span>
+<a id="__codelineno-17-30" name="__codelineno-17-30"></a><span class="w">    </span><span class="c1">// Einen Kanal für Eingaben aus einer CSV-Datei erstellen</span>
 <a id="__codelineno-17-31" name="__codelineno-17-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-17-32" name="__codelineno-17-32"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-17-33" name="__codelineno-17-33"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-17-34" name="__codelineno-17-34"></a><span class="w">    </span><span class="c1">// Eine Begrüßung ausgeben</span>
 <a id="__codelineno-17-35" name="__codelineno-17-35"></a><span class="hll"><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
-<p>Dies sagt Nextflow, dass es den process einzeln auf jedes Element im channel ausführen soll, <em>d.h.</em> auf jeden Gruß.
+<p>Dies sagt Nextflow, dass es den process einzeln auf jedes Element im Kanal ausführen soll, <em>d.h.</em> auf jeden Gruß.
 Und weil Nextflow so clever ist, wird es diese process-Aufrufe parallel ausführen, wenn möglich, abhängig von der verfügbaren Recheninfrastruktur.</p>
 <p>So kannst du eine effiziente und skalierbare Verarbeitung vieler Daten (viele Proben oder Datenpunkte, was auch immer deine Forschungseinheit ist) mit vergleichsweise sehr wenig Code erreichen.</p>
 <h4 id="143-wie-die-ausgaben-benannt-werden">1.4.3. Wie die Ausgaben benannt werden<a class="headerlink" href="#143-wie-die-ausgaben-benannt-werden" title="Permanent link">&para;</a></h4>
@@ -4864,13 +4864,13 @@ Und weil Nextflow so clever ist, wird es diese process-Aufrufe parallel ausführ
 <p>Dies ist eine Möglichkeit sicherzustellen, dass die Ausgabedateinamen nicht kollidieren, wenn sie im gemeinsamen results-Verzeichnis veröffentlicht werden.</p>
 <p>Und das ist die einzige Änderung, die wir innerhalb der process-Deklaration vornehmen mussten!</p>
 <h3 id="fazit">Fazit<a class="headerlink" href="#fazit" title="Permanent link">&para;</a></h3>
-<p>Du verstehst auf einem grundlegenden Niveau, wie channels und Operatoren uns ermöglichen, mehrere Eingaben effizient zu verarbeiten.</p>
+<p>Du verstehst auf einem grundlegenden Niveau, wie Kanäle und Operatoren uns ermöglichen, mehrere Eingaben effizient zu verarbeiten.</p>
 <h3 id="wie-geht-es-weiter">Wie geht es weiter?<a class="headerlink" href="#wie-geht-es-weiter" title="Permanent link">&para;</a></h3>
 <p>Entdecke, wie mehrstufige Workflows aufgebaut sind und wie sie funktionieren.</p>
 <hr />
 <h2 id="2-mehrstufige-workflows-ausfuhren">2. Mehrstufige Workflows ausführen<a class="headerlink" href="#2-mehrstufige-workflows-ausfuhren" title="Permanent link">&para;</a></h2>
 <p>Die meisten realen Workflows umfassen mehr als einen Schritt.
-Lass uns auf dem aufbauen, was wir gerade über channels gelernt haben, und schauen, wie Nextflow channels und Operatoren verwendet, um processes in einem mehrstufigen Workflow miteinander zu verbinden.</p>
+Lass uns auf dem aufbauen, was wir gerade über Kanäle gelernt haben, und schauen, wie Nextflow Kanäle und Operatoren verwendet, um processes in einem mehrstufigen Workflow miteinander zu verbinden.</p>
 <p>Zu diesem Zweck stellen wir dir einen Beispiel-Workflow zur Verfügung, der drei separate Schritte miteinander verkettet und Folgendes demonstriert:</p>
 <ol>
 <li>Daten von einem process zum nächsten fließen lassen</li>
@@ -5136,7 +5136,7 @@ Die zweite ist eine Berichtsdatei, die einige Informationen über den Lauf zusam
 <a id="__codelineno-24-66" name="__codelineno-24-66"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-67" name="__codelineno-24-67"></a>
 <a id="__codelineno-24-68" name="__codelineno-24-68"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-24-69" name="__codelineno-24-69"></a><span class="w">    </span><span class="c1">// Einen Channel für Eingaben aus einer CSV-Datei erstellen</span>
+<a id="__codelineno-24-69" name="__codelineno-24-69"></a><span class="w">    </span><span class="c1">// Einen Kanal für Eingaben aus einer CSV-Datei erstellen</span>
 <a id="__codelineno-24-70" name="__codelineno-24-70"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-24-71" name="__codelineno-24-71"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-24-72" name="__codelineno-24-72"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5200,7 +5200,7 @@ Die beiden neuen process-Definitionen sind auf die gleiche Weise strukturiert wi
 <span class="normal"><a href="#__codelineno-25-76">76</a></span>
 <span class="normal"><a href="#__codelineno-25-77">77</a></span>
 <span class="normal"><a href="#__codelineno-25-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-68" name="__codelineno-25-68"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-25-69" name="__codelineno-25-69"></a><span class="w">    </span><span class="c1">// Einen Channel für Eingaben aus einer CSV-Datei erstellen</span>
+<a id="__codelineno-25-69" name="__codelineno-25-69"></a><span class="w">    </span><span class="c1">// Einen Kanal für Eingaben aus einer CSV-Datei erstellen</span>
 <a id="__codelineno-25-70" name="__codelineno-25-70"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-25-71" name="__codelineno-25-71"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-25-72" name="__codelineno-25-72"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5213,7 +5213,7 @@ Die beiden neuen process-Definitionen sind auf die gleiche Weise strukturiert wi
 </span></code></pre></div></td></tr></table></div>
 <p>Du kannst sehen, dass der erste process-Aufruf, <code>sayHello(greeting_ch)</code>, unverändert ist.
 Dann bezieht sich der nächste process-Aufruf, zu <code>convertToUpper</code>, auf die Ausgabe von <code>sayHello</code> als <code>sayHello.out</code>.</p>
-<p>Das Muster ist einfach: <code>processName.out</code> bezieht sich auf den Ausgabe-channel eines process, der direkt an den nächsten process übergeben werden kann.
+<p>Das Muster ist einfach: <code>processName.out</code> bezieht sich auf den Ausgabe-Kanal eines process, der direkt an den nächsten process übergeben werden kann.
 So transportieren wir Daten von einem Schritt zum nächsten in Nextflow.</p>
 <h4 id="233-ein-process-kann-mehrere-eingaben-nehmen">2.3.3. Ein process kann mehrere Eingaben nehmen<a class="headerlink" href="#233-ein-process-kann-mehrere-eingaben-nehmen" title="Permanent link">&para;</a></h4>
 <p>Der dritte process-Aufruf, zu <code>collectGreetings</code>, ist etwas anders.</p>
@@ -5238,12 +5238,12 @@ Wenn wir das <code>.collect()</code>-Teil für jetzt ignorieren, können wir das
 <p>Jetzt weißt du also, dass ein process mehrere Eingaben nehmen kann, und wie der Aufruf im workflow-Block aussieht.</p>
 <p>Lass uns nun einen genaueren Blick auf diese erste Eingabe werfen, <code>convertToUpper.out.collect()</code>.</p>
 <h4 id="234-was-collect-im-collectgreetings-aufruf-tut">2.3.4. Was <code>collect()</code> im <code>collectGreetings</code>-Aufruf tut<a class="headerlink" href="#234-was-collect-im-collectgreetings-aufruf-tut" title="Permanent link">&para;</a></h4>
-<p>Um die Ausgabe von <code>sayHello</code> an <code>convertToUpper</code> zu übergeben, haben wir einfach auf den Ausgabe-channel von <code>sayHello</code> als <code>sayHello.out</code> verwiesen. Aber für den nächsten Schritt sehen wir einen Verweis auf <code>convertToUpper.out.collect()</code>.</p>
+<p>Um die Ausgabe von <code>sayHello</code> an <code>convertToUpper</code> zu übergeben, haben wir einfach auf den Ausgabe-Kanal von <code>sayHello</code> als <code>sayHello.out</code> verwiesen. Aber für den nächsten Schritt sehen wir einen Verweis auf <code>convertToUpper.out.collect()</code>.</p>
 <p>Was ist dieses <code>collect()</code>-Teil und was tut es?</p>
 <p>Es ist natürlich ein Operator. Genau wie die <code>splitCsv</code>- und <code>map</code>-Operatoren, die wir vorher kennengelernt haben.
-Diesmal heißt der Operator <code>collect</code> und wird auf den Ausgabe-channel angewendet, der von <code>convertToUpper</code> produziert wird.</p>
-<p>Der <code>collect</code>-Operator wird verwendet, um die Ausgaben von mehreren Aufrufen desselben process zu sammeln und sie in ein einzelnes channel-Element zu verpacken.</p>
-<p>Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im <code>convertToUpper.out</code> channel (die drei separate channel-Elemente sind und normalerweise in separaten Aufrufen vom nächsten process behandelt würden) und verpackt sie in ein einzelnes Element.</p>
+Diesmal heißt der Operator <code>collect</code> und wird auf den Ausgabe-Kanal angewendet, der von <code>convertToUpper</code> produziert wird.</p>
+<p>Der <code>collect</code>-Operator wird verwendet, um die Ausgaben von mehreren Aufrufen desselben process zu sammeln und sie in ein einzelnes Kanal-Element zu verpacken.</p>
+<p>Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im <code>convertToUpper.out</code> Kanal (die drei separate Kanal-Elemente sind und normalerweise in separaten Aufrufen vom nächsten process behandelt würden) und verpackt sie in ein einzelnes Element.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -5260,7 +5260,7 @@ Diesmal heißt der Operator <code>collect</code> und wird auf den Ausgabe-channe
 </figure>
 
 <p>So bekommen wir alle Grüße zurück in dieselbe Datei.</p>
-<p>Es gibt viele andere <a href="https://www.nextflow.io/docs/latest/reference/operator.html#operator-page">Operatoren</a>, die verfügbar sind, um Transformationen auf den Inhalt von channels zwischen process-Aufrufen anzuwenden.</p>
+<p>Es gibt viele andere <a href="https://www.nextflow.io/docs/latest/reference/operator.html#operator-page">Operatoren</a>, die verfügbar sind, um Transformationen auf den Inhalt von Kanälen zwischen process-Aufrufen anzuwenden.</p>
 <p>Das gibt bei der Pipeline-Entwicklung viel Flexibilität für die Anpassung der Flusslogik.
 Der Nachteil ist, dass es manchmal schwieriger machen kann, zu entziffern, was die Pipeline tut.</p>
 <h4 id="235-ein-eingabe-parameter-kann-einen-standardwert-haben">2.3.5. Ein Eingabe-Parameter kann einen Standardwert haben<a class="headerlink" href="#235-ein-eingabe-parameter-kann-einen-standardwert-haben" title="Permanent link">&para;</a></h4>
@@ -5410,7 +5410,7 @@ Aber wenn wir einen auf der Kommandozeile angeben, wird der von uns angegebene W
 <p>Für eine detaillierte Behandlung des Aufbaus mehrstufiger Workflows, siehe <a href="../../hello_nextflow/03_hello_workflow/">Hello Nextflow Teil 3: Hello Workflow</a>.</p>
 </div>
 <h3 id="fazit_1">Fazit<a class="headerlink" href="#fazit_1" title="Permanent link">&para;</a></h3>
-<p>Du verstehst auf einem grundlegenden Niveau, wie mehrstufige Workflows unter Verwendung von channels und Operatoren aufgebaut werden und wie sie funktionieren.
+<p>Du verstehst auf einem grundlegenden Niveau, wie mehrstufige Workflows unter Verwendung von Kanälen und Operatoren aufgebaut werden und wie sie funktionieren.
 Du hast auch gesehen, dass processes mehrere Eingaben nehmen und mehrere Ausgaben produzieren können, und dass diese auf strukturierte Weise veröffentlicht werden können.</p>
 <h3 id="wie-geht-es-weiter_1">Wie geht es weiter?<a class="headerlink" href="#wie-geht-es-weiter_1" title="Permanent link">&para;</a></h3>
 <p>Lerne, wie Nextflow Pipelines modularisiert werden können, um Code-Wiederverwendung und Wartbarkeit zu fördern.</p>
@@ -5521,7 +5521,7 @@ Beginne damit, die <code>2c-modules.nf</code> Workflow-Datei zu öffnen.</p>
 <a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-17" name="__codelineno-37-17"></a>
 <a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-37-19" name="__codelineno-37-19"></a><span class="w">    </span><span class="c1">// Einen Channel für Eingaben aus einer CSV-Datei erstellen</span>
+<a id="__codelineno-37-19" name="__codelineno-37-19"></a><span class="w">    </span><span class="c1">// Einen Kanal für Eingaben aus einer CSV-Datei erstellen</span>
 <a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-37-22" name="__codelineno-37-22"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5561,7 +5561,7 @@ Beginne damit, die <code>2c-modules.nf</code> Workflow-Datei zu öffnen.</p>
 </details>
 <p>Du siehst, dass die Workflow-Logik genau dieselbe ist wie in der vorherigen Version des Workflows.
 Allerdings ist der process-Code aus der Workflow-Datei verschwunden, und stattdessen gibt es <code>include</code>-Anweisungen, die auf separate Dateien unter <code>modules</code> verweisen.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-3">3</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2c-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-3">3</a></span>
 <span class="normal"><a href="#__codelineno-38-4">4</a></span>
 <span class="normal"><a href="#__codelineno-38-5">5</a></span>
 <span class="normal"><a href="#__codelineno-38-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="c1">// Module einbinden</span>
@@ -5622,9 +5622,9 @@ Das Gleiche gilt für die anderen beiden processes.</p>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="go">Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726</span>
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>
-<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">[j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔</span>
-<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[95/79484f] convertToUpper (2) | 3 of 3, cached: ✔</span>
-<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="go">[5e/4358gc] collectGreetings   | 1 of 1, cached: ✔</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="go">[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="go">[99/79484f] convertToUpper (2) | 3 of 3, cached: 3 ✔</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="go">[1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
 <p>Du wirst bemerken, dass alle process-Ausführungen erfolgreich aus dem cache geladen wurden, was bedeutet, dass Nextflow erkannt hat, dass es die angeforderte Arbeit bereits erledigt hat, obwohl der Code aufgeteilt wurde und die Haupt-Workflow-Datei umbenannt wurde.</p>
@@ -5874,7 +5874,7 @@ Wir müssen nur einen Container für jeden process angeben.</p>
 <a id="__codelineno-55-18" name="__codelineno-55-18"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-55-19" name="__codelineno-55-19"></a>
 <a id="__codelineno-55-20" name="__codelineno-55-20"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-55-21" name="__codelineno-55-21"></a><span class="w">    </span><span class="c1">// Einen Channel für Eingaben aus einer CSV-Datei erstellen</span>
+<a id="__codelineno-55-21" name="__codelineno-55-21"></a><span class="w">    </span><span class="c1">// Einen Kanal für Eingaben aus einer CSV-Datei erstellen</span>
 <a id="__codelineno-55-22" name="__codelineno-55-22"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-55-23" name="__codelineno-55-23"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-55-24" name="__codelineno-55-24"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5920,9 +5920,9 @@ Wir müssen nur einen Container für jeden process angeben.</p>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Du siehst, dass dieser Workflow einen <code>cowpy</code> process aus einer Modul-Datei importiert und ihn auf der Ausgabe des <code>collectGreetings()</code>-Aufrufs ausführt, plus einem Eingabe-Parameter namens <code>params.character</code>.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2d-container.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-25">25</a></span>
-<span class="normal"><a href="#__codelineno-56-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-25" name="__codelineno-56-25"></a><span class="c1">// ASCII-Kunst mit cowpy generieren</span>
-<a id="__codelineno-56-26" name="__codelineno-56-26"></a><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2d-container.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-31">31</a></span>
+<span class="normal"><a href="#__codelineno-56-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-31" name="__codelineno-56-31"></a><span class="c1">// ASCII-Kunst mit cowpy generieren</span>
+<a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Der <code>cowpy</code> process, der den cowpy-Befehl zum Generieren von ASCII-Kunst umhüllt, ist im <code>cowpy.nf</code>-Modul definiert.</p>
 <details class="full-code">

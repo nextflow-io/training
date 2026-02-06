@@ -4013,12 +4013,12 @@
 ///
 -->
 
-<p>Esta sección cubre cómo organizar el código de su flujo de trabajo para hacer el desarrollo y mantenimiento de su pipeline más eficiente y sostenible.
-Específicamente, vamos a demostrar cómo usar <strong>módulos</strong>.</p>
-<p>En Nextflow, un <strong>módulo</strong> es una única definición de proceso que está encapsulada por sí misma en un archivo de código independiente.
-Para usar un módulo en un flujo de trabajo, solo agrega una declaración de importación de una línea a su archivo de código de workflow; luego puede integrar el proceso en el flujo de trabajo de la misma manera que normalmente lo haría.
-Eso hace posible reutilizar definiciones de proceso en múltiples flujos de trabajo sin producir múltiples copias del código.</p>
-<p>Cuando comenzamos a desarrollar nuestro flujo de trabajo, escribimos todo en un único archivo de código.
+<p>Esta sección cubre cómo organizar el código de su workflow para hacer el desarrollo y mantenimiento de su pipeline más eficiente y sostenible.
+Específicamente, vamos a demostrar cómo usar <a href="https://nextflow.io/docs/latest/module.html"><strong>módulos</strong></a>.</p>
+<p>En Nextflow, un <strong>módulo</strong> es un archivo de código independiente, que a menudo encapsula una única definición de proceso.
+Para usar un módulo en un workflow, solo agrega una declaración <code>include</code> de una línea a su archivo de código de workflow; luego puede integrar el proceso en el workflow de la misma manera que normalmente lo haría.
+Eso hace posible reutilizar definiciones de proceso en múltiples workflows sin producir múltiples copias del código.</p>
+<p>Cuando comenzamos a desarrollar nuestro workflow, escribimos todo en un único archivo de código.
 Ahora vamos a mover los procesos a módulos individuales.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
@@ -4036,7 +4036,7 @@ Ahora vamos a mover los procesos a módulos individuales.</p>
 <hr />
 <h2 id="0-calentamiento-ejecutar-hello-modulesnf">0. Calentamiento: Ejecutar <code>hello-modules.nf</code><a class="headerlink" href="#0-calentamiento-ejecutar-hello-modulesnf" title="Permanent link">&para;</a></h2>
 <p>Vamos a usar el script de workflow <code>hello-modules.nf</code> como punto de partida.
-Es equivalente al script producido al trabajar en la Parte 3 de este curso de entrenamiento, excepto que hemos cambiado los destinos de salida:</p>
+Es equivalente al script producido al trabajar en la Parte 3 de este curso de capacitación, excepto que hemos cambiado los destinos de salida:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-37">37</a></span>
 <span class="normal"><a href="#__codelineno-0-38">38</a></span>
 <span class="normal"><a href="#__codelineno-0-39">39</a></span>
@@ -4102,23 +4102,18 @@ Es equivalente al script producido al trabajar en la Parte 3 de este curso de en
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">└── UPPER-Holà-output.txt</span>
 </code></pre></div>
 </details>
-<p>Si eso funcionó para usted, está listo para aprender cómo modularizar el código de su flujo de trabajo.</p>
+<p>Si eso funcionó para usted, está listo para aprender cómo modularizar el código de su workflow.</p>
 <hr />
 <h2 id="1-crear-un-directorio-para-almacenar-modulos">1. Crear un directorio para almacenar módulos<a class="headerlink" href="#1-crear-un-directorio-para-almacenar-modulos" title="Permanent link">&para;</a></h2>
 <p>Es una buena práctica almacenar sus módulos en un directorio específico.
 Puede llamar a ese directorio como quiera, pero la convención es llamarlo <code>modules/</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdir<span class="w"> </span>modules
 </code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Consejo</p>
-<p>Aquí le estamos mostrando cómo usar <strong>módulos locales</strong>, es decir, módulos almacenados localmente en el mismo repositorio que el resto del código del flujo de trabajo, en contraste con módulos remotos, que se almacenan en otros repositorios (remotos).
-Para más información sobre <strong>módulos remotos</strong>, vea la <a href="https://www.nextflow.io/docs/latest/module.html">documentación</a>.</p>
-</div>
 <hr />
 <h2 id="2-crear-un-modulo-para-sayhello">2. Crear un módulo para <code>sayHello()</code><a class="headerlink" href="#2-crear-un-modulo-para-sayhello" title="Permanent link">&para;</a></h2>
 <p>En su forma más simple, convertir un proceso existente en un módulo es poco más que una operación de copiar y pegar.
-Vamos a crear un archivo stub para el módulo, copiar el código relevante y luego eliminarlo del archivo de flujo de trabajo principal.</p>
-<p>Luego todo lo que necesitaremos hacer es agregar una declaración de importación para que Nextflow sepa que debe traer el código relevante en tiempo de ejecución.</p>
+Vamos a crear un archivo stub para el módulo, copiar el código relevante y luego eliminarlo del archivo de workflow principal.</p>
+<p>Luego todo lo que necesitaremos hacer es agregar una declaración <code>include</code> para que Nextflow sepa que debe traer el código relevante en tiempo de ejecución.</p>
 <h3 id="21-crear-un-archivo-stub-para-el-nuevo-modulo">2.1. Crear un archivo stub para el nuevo módulo<a class="headerlink" href="#21-crear-un-archivo-stub-para-el-nuevo-modulo" title="Permanent link">&para;</a></h3>
 <p>Creemos un archivo vacío para el módulo llamado <code>sayHello.nf</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>touch<span class="w"> </span>modules/sayHello.nf
@@ -4164,8 +4159,8 @@ Vamos a crear un archivo stub para el módulo, copiar el código relevante y lue
 </code></pre></div></td></tr></table></div>
 <p>Una vez hecho eso, elimine la definición del proceso del archivo de workflow, pero asegúrese de dejar el shebang en su lugar.</p>
 <h3 id="23-agregar-una-declaracion-de-importacion-antes-del-bloque-workflow">2.3. Agregar una declaración de importación antes del bloque workflow<a class="headerlink" href="#23-agregar-una-declaracion-de-importacion-antes-del-bloque-workflow" title="Permanent link">&para;</a></h3>
-<p>La sintaxis para importar un módulo local es bastante sencilla:</p>
-<div class="highlight"><span class="filename">Sintaxis: Declaración de importación</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">MODULE_NAME</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;path_to_module&gt;&#39;</span>
+<p>La sintaxis para incluir un proceso desde un módulo es bastante sencilla:</p>
+<div class="highlight"><span class="filename">Sintaxis: Declaración de importación</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">PROCESS_NAME</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;path_to_module&gt;&#39;</span>
 </code></pre></div>
 <p>Insertemos eso arriba del bloque <code>params</code> y completémoslo apropiadamente.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Después</label><label for="__tabbed_1_2">Antes</label></div>
@@ -4210,9 +4205,9 @@ Vamos a crear un archivo stub para el módulo, copiar el código relevante y lue
 </div>
 </div>
 </div>
-<p>Verá que hemos completado el nombre del módulo, <code>sayHello</code>, y la ruta al archivo que contiene el código del módulo, <code>./modules/sayHello.nf</code>.</p>
+<p>Verá que hemos completado el nombre del proceso, <code>sayHello</code>, y la ruta al archivo que contiene el código del módulo, <code>./modules/sayHello.nf</code>.</p>
 <h3 id="24-ejecutar-el-flujo-de-trabajo">2.4. Ejecutar el flujo de trabajo<a class="headerlink" href="#24-ejecutar-el-flujo-de-trabajo" title="Permanent link">&para;</a></h3>
-<p>Estamos ejecutando el flujo de trabajo con esencialmente el mismo código y entradas que antes, así que ejecutemos con la bandera <code>-resume</code> y veamos qué sucede.</p>
+<p>Estamos ejecutando el workflow con esencialmente el mismo código y entradas que antes, así que ejecutemos con la bandera <code>-resume</code> y veamos qué sucede.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
@@ -4230,7 +4225,7 @@ Vamos a crear un archivo stub para el módulo, copiar el código relevante y lue
 Siéntase libre de verificar las salidas publicadas.</p>
 <p>Nextflow reconoció que sigue siendo el mismo trabajo por hacer, incluso si el código está dividido en múltiples archivos.</p>
 <h3 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
-<p>Sabe cómo extraer un proceso en un módulo local y sabe que hacer esto no rompe la capacidad de reanudar del flujo de trabajo.</p>
+<p>Sabe cómo extraer un proceso en un módulo local y sabe que hacer esto no rompe la capacidad de reanudar del workflow.</p>
 <h3 id="que-sigue">¿Qué sigue?<a class="headerlink" href="#que-sigue" title="Permanent link">&para;</a></h3>
 <p>Practicar haciendo más módulos.
 Una vez que ha hecho uno, puede hacer un millón más...
@@ -4477,22 +4472,22 @@ Pero por ahora hagamos solo dos más.</p>
 </details>
 <p>Esto debería seguir produciendo la misma salida que anteriormente.</p>
 <h3 id="conclusion_1">Conclusión<a class="headerlink" href="#conclusion_1" title="Permanent link">&para;</a></h3>
-<p>Sabe cómo modularizar múltiples procesos en un flujo de trabajo.</p>
+<p>Sabe cómo modularizar múltiples procesos en un workflow.</p>
 <p>¡Felicitaciones, ha hecho todo este trabajo y absolutamente nada ha cambiado en cómo funciona el pipeline!</p>
-<p>Bromas aparte, ahora su código es más modular, y si decide escribir otro pipeline que llame a uno de esos procesos, solo necesita escribir una corta declaración de importación para usar el módulo relevante.
+<p>Bromas aparte, ahora su código es más modular, y si decide escribir otro pipeline que llame a uno de esos procesos, solo necesita escribir una corta declaración <code>include</code> para usar el módulo relevante.
 Esto es mejor que copiar y pegar el código, porque si más tarde decide mejorar el módulo, todos sus pipelines heredarán las mejoras.</p>
 <h3 id="que-sigue_1">¿Qué sigue?<a class="headerlink" href="#que-sigue_1" title="Permanent link">&para;</a></h3>
 <p>Tome un pequeño descanso si lo desea.</p>
-<p>Cuando esté listo, continúe con <a href="../05_hello_containers/"><strong>Parte 5: Hola Containers</strong></a> para aprender cómo usar contenedores para gestionar dependencias de software de manera más conveniente y reproducible.</p>
+<p>Cuando esté listo, continúe con <a href="../05_hello_containers/"><strong>Parte 5: Hello Containers</strong></a> para aprender cómo usar contenedores para gestionar dependencias de software de manera más conveniente y reproducible.</p>
 <hr />
 <h2 id="cuestionario">Cuestionario<a class="headerlink" href="#cuestionario" title="Permanent link">&para;</a></h2>
 <!-- mkdocs-quiz-source
 <quiz>
 ¿Qué es un módulo en Nextflow?
 - [ ] Un archivo de configuración
-- [x] Un archivo independiente que contiene una única definición de proceso
+- [x] Un archivo independiente que puede contener definiciones de proceso
 - [ ] Una definición de workflow
-- [ ] Un operador de channel
+- [ ] Un operador de canal
 
 Aprenda más: [2. Crear un módulo para `sayHello()`](#2-crear-un-modulo-para-sayhello)
 </quiz>
@@ -4504,7 +4499,7 @@ Aprenda más: [2. Crear un módulo para `sayHello()`](#2-crear-un-modulo-para-sa
         <p>¿Qué es un módulo en Nextflow?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Un archivo de configuración</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">Un archivo independiente que contiene una única definición de proceso</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Una definición de workflow</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Un operador de channel</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Un archivo de configuración</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">Un archivo independiente que puede contener definiciones de proceso</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Una definición de workflow</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Un operador de canal</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4513,30 +4508,7 @@ Aprenda más: [2. Crear un módulo para `sayHello()`](#2-crear-un-modulo-para-sa
 
 <!-- mkdocs-quiz-source
 <quiz>
-¿Cuál es la convención de nombres recomendada para archivos de módulos?
-- [ ] `module_processName.nf`
-- [ ] `processName_module.nf`
-- [x] `processName.nf`
-- [ ] `mod_processName.nf`
-</quiz>
--->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
-    <a href="#quiz-1" class="quiz-header-link">#</a>
-
-    <div class="quiz-question">
-        <p>¿Cuál es la convención de nombres recomendada para archivos de módulos?</p>
-    </div>
-    <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0"><code>module_processName.nf</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" ><label for="quiz-1-1"><code>processName_module.nf</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" correct><label for="quiz-1-2"><code>processName.nf</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3"><code>mod_processName.nf</code></label></div></fieldset>
-        <div class="quiz-feedback hidden"></div>
-
-    </form>
-    <section class="content hidden"></section>
-</div>
-
-<!-- mkdocs-quiz-source
-<quiz>
-¿Dónde deberían almacenarse los archivos de módulos?
+¿Qué convención se usa típicamente para almacenar archivos de módulos?
 - [ ] En el mismo directorio que el workflow
 - [ ] En un directorio `bin/`
 - [x] En un directorio `modules/`
@@ -4545,14 +4517,14 @@ Aprenda más: [2. Crear un módulo para `sayHello()`](#2-crear-un-modulo-para-sa
 Aprenda más: [1. Crear un directorio para almacenar módulos](#1-crear-un-directorio-para-almacenar-modulos)
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
-    <a href="#quiz-2" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
+    <a href="#quiz-1" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>¿Dónde deberían almacenarse los archivos de módulos?</p>
+        <p>¿Qué convención se usa típicamente para almacenar archivos de módulos?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0">En el mismo directorio que el workflow</label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1">En un directorio <code>bin/</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" correct><label for="quiz-2-2">En un directorio <code>modules/</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3">En un directorio <code>lib/</code></label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-1-0" ><label for="quiz-1-0">En el mismo directorio que el workflow</label></div><div><input type="radio" name="answer" value="1" id="quiz-1-1" ><label for="quiz-1-1">En un directorio <code>bin/</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-1-2" correct><label for="quiz-1-2">En un directorio <code>modules/</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-1-3" ><label for="quiz-1-3">En un directorio <code>lib/</code></label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4561,7 +4533,7 @@ Aprenda más: [1. Crear un directorio para almacenar módulos](#1-crear-un-direc
 
 <!-- mkdocs-quiz-source
 <quiz>
-¿Cuál es la sintaxis correcta para importar un módulo?
+¿Cuál es la sintaxis correcta para usar un módulo?
 
 - [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
@@ -4571,14 +4543,14 @@ Aprenda más: [1. Crear un directorio para almacenar módulos](#1-crear-un-direc
 Aprenda más: [2.3. Agregar una declaración de importación](#23-agregar-una-declaracion-de-importacion-antes-del-bloque-workflow)
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
-    <a href="#quiz-3" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
+    <a href="#quiz-2" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>¿Cuál es la sintaxis correcta para importar un módulo?</p>
+        <p>¿Cuál es la sintaxis correcta para usar un módulo?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0"><code class="highlight"><span class="kn">import</span><span class="w"> </span><span class="err">{ </span><span class="nn">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1"><code class="highlight"><span class="n">require</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" correct><label for="quiz-3-2"><code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3"><code class="highlight"><span class="n">load</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0"><code class="highlight"><span class="kn">import</span><span class="w"> </span><span class="err">{ </span><span class="nn">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1"><code class="highlight"><span class="n">require</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" correct><label for="quiz-2-2"><code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3"><code class="highlight"><span class="n">load</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAYHELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayhello.nf&#39;</span></code></label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4594,14 +4566,14 @@ Aprenda más: [2.3. Agregar una declaración de importación](#23-agregar-una-de
 - [ ] Solo funciona para módulos locales
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
-    <a href="#quiz-4" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
+    <a href="#quiz-3" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
         <p>¿Qué sucede con la funcionalidad <code>-resume</code> cuando se usan módulos?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-4-0" ><label for="quiz-4-0">Ya no funciona</label></div><div><input type="radio" name="answer" value="1" id="quiz-4-1" ><label for="quiz-4-1">Requiere configuración adicional</label></div><div><input type="radio" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">Funciona igual que antes</label></div><div><input type="radio" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">Solo funciona para módulos locales</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-3-0" ><label for="quiz-3-0">Ya no funciona</label></div><div><input type="radio" name="answer" value="1" id="quiz-3-1" ><label for="quiz-3-1">Requiere configuración adicional</label></div><div><input type="radio" name="answer" value="2" id="quiz-3-2" correct><label for="quiz-3-2">Funciona igual que antes</label></div><div><input type="radio" name="answer" value="3" id="quiz-3-3" ><label for="quiz-3-3">Solo funciona para módulos locales</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4611,20 +4583,20 @@ Aprenda más: [2.3. Agregar una declaración de importación](#23-agregar-una-de
 <!-- mkdocs-quiz-source
 <quiz>
 ¿Cuáles son los beneficios de usar módulos? (Seleccione todos los que apliquen)
-- [x] Reutilización de código entre flujos de trabajo
+- [x] Reutilización de código entre workflows
 - [x] Mantenimiento más fácil
-- [x] Mejor organización del código del flujo de trabajo
+- [x] Mejor organización del código del workflow
 - [ ] Velocidad de ejecución más rápida
 </quiz>
 -->
-<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
-    <a href="#quiz-5" class="quiz-header-link">#</a>
+<div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
+    <a href="#quiz-4" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
         <p>¿Cuáles son los beneficios de usar módulos? (Seleccione todos los que apliquen)</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-5-0" correct><label for="quiz-5-0">Reutilización de código entre flujos de trabajo</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-5-1" correct><label for="quiz-5-1">Mantenimiento más fácil</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-5-2" correct><label for="quiz-5-2">Mejor organización del código del flujo de trabajo</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-5-3" ><label for="quiz-5-3">Velocidad de ejecución más rápida</label></div></fieldset>
+        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-4-0" correct><label for="quiz-4-0">Reutilización de código entre workflows</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-4-1" correct><label for="quiz-4-1">Mantenimiento más fácil</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">Mejor organización del código del workflow</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">Velocidad de ejecución más rápida</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Enviar</button>
     </form>
