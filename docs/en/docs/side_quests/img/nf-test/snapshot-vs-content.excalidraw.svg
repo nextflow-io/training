@@ -1,0 +1,126 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="960" height="560">
+  <!-- svg-source:excalidraw -->
+  <style>
+    text { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; }
+    .title { font-size: 22px; font-weight: 600; fill: #1e1e1e; }
+    .heading { font-size: 16px; font-weight: 600; }
+    .subheading { font-size: 14px; font-weight: 600; }
+    .code { font-size: 12px; font-family: "SF Mono", "Fira Code", monospace; fill: #333333; }
+    .body { font-size: 12px; fill: #666666; }
+    .vs { font-size: 22px; font-weight: 700; fill: #999999; }
+    .best { font-size: 12px; fill: #666666; }
+  </style>
+
+  <!-- Title -->
+  <text x="480" y="28" text-anchor="middle" class="title">Snapshot vs Content Assertions</text>
+
+  <!-- Divider -->
+  <text x="480" y="310" text-anchor="middle" class="vs">vs</text>
+  <line x1="480" y1="50" x2="480" y2="540" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="6 4"/>
+
+  <!-- === LEFT: Snapshots === -->
+  <rect x="15" y="45" width="445" height="495" rx="10" fill="#dbe4ff" fill-opacity="0.2" stroke="#4a9eed" stroke-width="1.5"/>
+  <text x="237" y="72" text-anchor="middle" class="heading" fill="#4a9eed">Snapshot Assertions</text>
+
+  <!-- Code example -->
+  <rect x="35" y="85" width="405" height="52" rx="6" fill="#f8f9fa" stroke="#4a9eed" stroke-width="1"/>
+  <text x="50" y="106" class="code">assert snapshot(process.out)</text>
+  <text x="70" y="124" class="code">.match()</text>
+
+  <!-- How it works -->
+  <text x="35" y="162" class="subheading" fill="#1e1e1e">How it works</text>
+  <rect x="35" y="172" width="175" height="44" rx="6" fill="#b2f2bb" fill-opacity="0.5" stroke="#22c55e" stroke-width="1"/>
+  <text x="122" y="190" text-anchor="middle" class="body" font-weight="500">First run:</text>
+  <text x="122" y="206" text-anchor="middle" class="body">Save output as .snap</text>
+
+  <line x1="210" y1="194" x2="250" y2="194" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="255" y="172" width="175" height="44" rx="6" fill="#a5d8ff" fill-opacity="0.5" stroke="#4a9eed" stroke-width="1"/>
+  <text x="342" y="190" text-anchor="middle" class="body" font-weight="500">Next runs:</text>
+  <text x="342" y="206" text-anchor="middle" class="body">Compare to .snap file</text>
+
+  <!-- Strengths -->
+  <text x="35" y="244" class="subheading" fill="#22c55e">Strengths</text>
+  <circle cx="45" cy="262" r="3" fill="#22c55e"/>
+  <text x="55" y="266" class="body">Catches ANY change in output</text>
+  <circle cx="45" cy="282" r="3" fill="#22c55e"/>
+  <text x="55" y="286" class="body">Easy to set up (default behavior)</text>
+  <circle cx="45" cy="302" r="3" fill="#22c55e"/>
+  <text x="55" y="306" class="body">Comprehensive coverage</text>
+
+  <!-- Weaknesses -->
+  <text x="35" y="338" class="subheading" fill="#ef4444">Weaknesses</text>
+  <circle cx="45" cy="356" r="3" fill="#ef4444"/>
+  <text x="55" y="360" class="body">Brittle: breaks on ANY change</text>
+  <circle cx="45" cy="376" r="3" fill="#ef4444"/>
+  <text x="55" y="380" class="body">Opaque: unclear what matters in the output</text>
+  <circle cx="45" cy="396" r="3" fill="#ef4444"/>
+  <text x="55" y="400" class="body">Must update snapshots when valid changes occur</text>
+
+  <!-- Best for -->
+  <rect x="35" y="420" width="405" height="48" rx="6" fill="#fff3bf" fill-opacity="0.5" stroke="#f59e0b" stroke-width="1"/>
+  <text x="50" y="441" class="body" font-weight="600" fill="#b45309">Best for:</text>
+  <text x="110" y="441" class="body">Stable outputs where any change</text>
+  <text x="110" y="457" class="body">should be flagged for review</text>
+
+  <!-- Update hint -->
+  <rect x="35" y="480" width="405" height="40" rx="6" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="50" y="501" class="code" fill="#4a9eed">--update-snapshot</text>
+  <text x="210" y="501" class="body">to accept new output as reference</text>
+
+  <!-- === RIGHT: Content === -->
+  <rect x="500" y="45" width="445" height="495" rx="10" fill="#e5dbff" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="722" y="72" text-anchor="middle" class="heading" fill="#8b5cf6">Content Assertions</text>
+
+  <!-- Code example -->
+  <rect x="520" y="85" width="405" height="52" rx="6" fill="#f8f9fa" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="535" y="106" class="code">assert path(process.out[0][0])</text>
+  <text x="555" y="124" class="code">.readLines().contains('hello')</text>
+
+  <!-- How it works -->
+  <text x="520" y="162" class="subheading" fill="#1e1e1e">How it works</text>
+  <rect x="520" y="172" width="185" height="44" rx="6" fill="#d0bfff" fill-opacity="0.5" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="612" y="190" text-anchor="middle" class="body" font-weight="500">Every run:</text>
+  <text x="612" y="206" text-anchor="middle" class="body">Check specific values</text>
+
+  <line x1="705" y1="194" x2="745" y2="194" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <rect x="750" y="172" width="175" height="44" rx="6" fill="#b2f2bb" fill-opacity="0.5" stroke="#22c55e" stroke-width="1"/>
+  <text x="837" y="190" text-anchor="middle" class="body" font-weight="500">No snapshot</text>
+  <text x="837" y="206" text-anchor="middle" class="body">file needed</text>
+
+  <!-- Strengths -->
+  <text x="520" y="244" class="subheading" fill="#22c55e">Strengths</text>
+  <circle cx="530" cy="262" r="3" fill="#22c55e"/>
+  <text x="540" y="266" class="body">Explicit: clear what is being tested</text>
+  <circle cx="530" cy="282" r="3" fill="#22c55e"/>
+  <text x="540" y="286" class="body">Resilient to irrelevant changes</text>
+  <circle cx="530" cy="302" r="3" fill="#22c55e"/>
+  <text x="540" y="306" class="body">Better error messages when tests fail</text>
+
+  <!-- Weaknesses -->
+  <text x="520" y="338" class="subheading" fill="#ef4444">Weaknesses</text>
+  <circle cx="530" cy="356" r="3" fill="#ef4444"/>
+  <text x="540" y="360" class="body">More code to write</text>
+  <circle cx="530" cy="376" r="3" fill="#ef4444"/>
+  <text x="540" y="380" class="body">May miss unexpected changes in output</text>
+  <circle cx="530" cy="396" r="3" fill="#ef4444"/>
+  <text x="540" y="400" class="body">Must know what to check for in advance</text>
+
+  <!-- Best for -->
+  <rect x="520" y="420" width="405" height="48" rx="6" fill="#fff3bf" fill-opacity="0.5" stroke="#f59e0b" stroke-width="1"/>
+  <text x="535" y="441" class="body" font-weight="600" fill="#b45309">Best for:</text>
+  <text x="595" y="441" class="body">Outputs with variable parts</text>
+  <text x="595" y="457" class="body">(timestamps, random IDs, etc.)</text>
+
+  <!-- Methods hint -->
+  <rect x="520" y="480" width="405" height="40" rx="6" fill="#f8f9fa" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="535" y="501" class="code" fill="#8b5cf6">readLines(), contains(), getText()</text>
+  <text x="535" y="515" class="body">and other Groovy/Java methods</text>
+
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e1e1e"/>
+    </marker>
+  </defs>
+</svg>

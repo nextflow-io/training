@@ -1,0 +1,95 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 530" width="1000" height="530">
+  <!-- svg-source:excalidraw -->
+  <style>
+    text { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; }
+    .title { font-size: 22px; font-weight: 600; fill: #1e1e1e; }
+    .heading { font-size: 15px; font-weight: 600; }
+    .label { font-size: 13px; font-weight: 500; fill: #1e1e1e; }
+    .detail { font-size: 11px; fill: #666666; }
+    .code { font-size: 11px; font-family: "SF Mono", "Fira Code", monospace; fill: #444444; }
+    .result { font-size: 18px; font-weight: 600; }
+    .command { font-size: 16px; font-family: "SF Mono", "Fira Code", monospace; fill: #999999; }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e1e1e"/>
+    </marker>
+    <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22c55e"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="500" y="28" text-anchor="middle" class="title">Complete Testing Strategy</text>
+  <text x="500" y="52" text-anchor="middle" class="command">nf-test test .</text>
+
+  <!-- Pipeline-level tests zone -->
+  <rect x="15" y="70" width="970" height="165" rx="10" fill="#dbe4ff" fill-opacity="0.2" stroke="#4a9eed" stroke-width="1.5"/>
+  <text x="35" y="95" class="heading" fill="#4a9eed">Pipeline-level tests</text>
+  <text x="35" y="112" class="code" fill="#4a9eed">tests/main.nf.test</text>
+
+  <!-- Test 1 -->
+  <rect x="35" y="125" width="290" height="90" rx="8" fill="#a5d8ff" fill-opacity="0.5" stroke="#4a9eed" stroke-width="1"/>
+  <text x="50" y="147" class="label">Test 1: Correct process count</text>
+  <text x="50" y="168" class="code">assert workflow.success</text>
+  <text x="50" y="185" class="code">assert workflow.trace.tasks().size() == 6</text>
+
+  <!-- Test 2 -->
+  <rect x="345" y="125" width="290" height="90" rx="8" fill="#a5d8ff" fill-opacity="0.5" stroke="#4a9eed" stroke-width="1"/>
+  <text x="360" y="147" class="label">Test 2: Correct output files</text>
+  <text x="360" y="168" class="code">assert file("$launchDir/results/</text>
+  <text x="370" y="185" class="code">Hello-output.txt").exists()</text>
+  <text x="360" y="202" class="detail">... for all 6 expected files</text>
+
+  <!-- What pipeline tests cover -->
+  <rect x="660" y="125" width="305" height="90" rx="8" fill="#fff3bf" fill-opacity="0.5" stroke="#f59e0b" stroke-width="1"/>
+  <text x="675" y="147" class="label" fill="#b45309">Pipeline tests cover:</text>
+  <text x="685" y="168" class="detail">End-to-end execution</text>
+  <text x="685" y="185" class="detail">File publishing to results/</text>
+  <text x="685" y="202" class="detail">Process orchestration (all 6 tasks)</text>
+
+  <!-- Process-level tests zone -->
+  <rect x="15" y="260" width="970" height="175" rx="10" fill="#e5dbff" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="35" y="285" class="heading" fill="#8b5cf6">Process-level tests</text>
+
+  <!-- sayHello process test -->
+  <rect x="35" y="300" width="455" height="120" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="50" y="320" class="code" fill="#8b5cf6">tests/main.sayhello.nf.test</text>
+
+  <rect x="50" y="330" width="280" height="40" rx="6" fill="#d0bfff" fill-opacity="0.4" stroke="#8b5cf6" stroke-width="0.5"/>
+  <text x="65" y="347" class="label">Test: Expected greeting content</text>
+  <text x="65" y="362" class="detail">Content assertion (readLines, contains)</text>
+
+  <rect x="50" y="380" width="130" height="28" rx="4" fill="#fff3bf" fill-opacity="0.5" stroke="#f59e0b" stroke-width="0.5"/>
+  <text x="65" y="399" class="code">input: "hello"</text>
+
+  <line x1="180" y1="394" x2="200" y2="394" stroke="#1e1e1e" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <rect x="205" y="380" width="150" height="28" rx="4" fill="#b2f2bb" fill-opacity="0.5" stroke="#22c55e" stroke-width="0.5"/>
+  <text x="220" y="399" class="code">hello-output.txt</text>
+
+  <!-- convertToUpper process test -->
+  <rect x="510" y="300" width="455" height="120" rx="8" fill="#ffffff" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="525" y="320" class="code" fill="#8b5cf6">tests/main.converttoupper.nf.test</text>
+
+  <rect x="525" y="330" width="280" height="40" rx="6" fill="#d0bfff" fill-opacity="0.4" stroke="#8b5cf6" stroke-width="0.5"/>
+  <text x="540" y="347" class="label">Test: Correct uppercase output</text>
+  <text x="540" y="362" class="detail">Snapshot assertion (.snap file)</text>
+
+  <rect x="525" y="380" width="155" height="28" rx="4" fill="#fff3bf" fill-opacity="0.5" stroke="#f59e0b" stroke-width="0.5"/>
+  <text x="540" y="399" class="code">input: greetings.csv</text>
+
+  <line x1="680" y1="394" x2="700" y2="394" stroke="#1e1e1e" stroke-width="1" marker-end="url(#arrow)"/>
+
+  <rect x="705" y="380" width="155" height="28" rx="4" fill="#b2f2bb" fill-opacity="0.5" stroke="#22c55e" stroke-width="0.5"/>
+  <text x="720" y="399" class="code">UPPER-*.txt</text>
+
+  <!-- Result -->
+  <line x1="260" y1="435" x2="420" y2="475" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-dash)"/>
+  <line x1="740" y1="435" x2="580" y2="475" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrow-dash)"/>
+
+  <rect x="330" y="468" width="340" height="50" rx="10" fill="#b2f2bb" stroke="#22c55e" stroke-width="2"/>
+  <text x="500" y="491" text-anchor="middle" class="result" fill="#22c55e">SUCCESS: Executed 4 tests</text>
+  <text x="500" y="510" text-anchor="middle" class="detail">2 pipeline + 1 sayHello + 1 convertToUpper</text>
+</svg>

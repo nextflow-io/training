@@ -1,0 +1,100 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 340" width="1100" height="340">
+  <!-- svg-source:excalidraw -->
+  <style>
+    text { font-family: "Segoe UI", system-ui, -apple-system, sans-serif; }
+    .title { font-size: 22px; font-weight: 600; fill: #1e1e1e; }
+    .label { font-size: 14px; font-weight: 500; }
+    .sublabel { font-size: 12px; fill: #888888; }
+    .file-text { font-size: 11px; fill: #444444; }
+  </style>
+
+  <!-- Title -->
+  <text x="550" y="28" text-anchor="middle" class="title">Workflow Data Flow</text>
+
+  <!-- Input: greetings.csv -->
+  <rect x="20" y="60" width="150" height="55" rx="8" fill="#fff3bf" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="95" y="85" text-anchor="middle" class="label" fill="#b45309">greetings.csv</text>
+  <text x="95" y="102" text-anchor="middle" class="sublabel">Hello, Bonjour, Hola</text>
+
+  <!-- Arrow: csv to splitCsv -->
+  <line x1="170" y1="88" x2="210" y2="88" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="190" y="80" text-anchor="middle" class="sublabel">splitCsv</text>
+
+  <!-- Channel items zone -->
+  <rect x="215" y="48" width="120" height="175" rx="8" fill="#dbe4ff" fill-opacity="0.4" stroke="#4a9eed" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="275" y="66" text-anchor="middle" class="sublabel" fill="#4a9eed">Channel</text>
+
+  <rect x="225" y="74" width="100" height="32" rx="6" fill="#a5d8ff" stroke="#4a9eed" stroke-width="1"/>
+  <text x="275" y="95" text-anchor="middle" class="file-text">"Hello"</text>
+
+  <rect x="225" y="114" width="100" height="32" rx="6" fill="#a5d8ff" stroke="#4a9eed" stroke-width="1"/>
+  <text x="275" y="135" text-anchor="middle" class="file-text">"Bonjour"</text>
+
+  <rect x="225" y="154" width="100" height="32" rx="6" fill="#a5d8ff" stroke="#4a9eed" stroke-width="1"/>
+  <text x="275" y="175" text-anchor="middle" class="file-text">"Hola"</text>
+
+  <!-- Arrows: channel to sayHello -->
+  <line x1="325" y1="90" x2="380" y2="90" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="325" y1="130" x2="380" y2="130" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="325" y1="170" x2="380" y2="170" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- sayHello zone -->
+  <rect x="385" y="48" width="175" height="175" rx="8" fill="#d3f9d8" fill-opacity="0.4" stroke="#22c55e" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="472" y="66" text-anchor="middle" class="label" fill="#22c55e">sayHello</text>
+
+  <rect x="395" y="74" width="155" height="32" rx="6" fill="#b2f2bb" stroke="#22c55e" stroke-width="1"/>
+  <text x="472" y="95" text-anchor="middle" class="file-text">Hello-output.txt</text>
+
+  <rect x="395" y="114" width="155" height="32" rx="6" fill="#b2f2bb" stroke="#22c55e" stroke-width="1"/>
+  <text x="472" y="135" text-anchor="middle" class="file-text">Bonjour-output.txt</text>
+
+  <rect x="395" y="154" width="155" height="32" rx="6" fill="#b2f2bb" stroke="#22c55e" stroke-width="1"/>
+  <text x="472" y="175" text-anchor="middle" class="file-text">Hola-output.txt</text>
+
+  <!-- Arrows: sayHello to convertToUpper -->
+  <line x1="550" y1="90" x2="605" y2="90" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="550" y1="130" x2="605" y2="130" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="550" y1="170" x2="605" y2="170" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- convertToUpper zone -->
+  <rect x="610" y="48" width="230" height="175" rx="8" fill="#e5dbff" fill-opacity="0.4" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="725" y="66" text-anchor="middle" class="label" fill="#8b5cf6">convertToUpper</text>
+
+  <rect x="620" y="74" width="210" height="32" rx="6" fill="#d0bfff" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="725" y="95" text-anchor="middle" class="file-text">UPPER-Hello-output.txt</text>
+
+  <rect x="620" y="114" width="210" height="32" rx="6" fill="#d0bfff" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="725" y="135" text-anchor="middle" class="file-text">UPPER-Bonjour-output.txt</text>
+
+  <rect x="620" y="154" width="210" height="32" rx="6" fill="#d0bfff" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="725" y="175" text-anchor="middle" class="file-text">UPPER-Hola-output.txt</text>
+
+  <!-- Arrow: convertToUpper to results -->
+  <line x1="840" y1="130" x2="880" y2="130" stroke="#1e1e1e" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Results directory -->
+  <rect x="885" y="48" width="140" height="175" rx="8" fill="#ffd8a8" fill-opacity="0.5" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="955" y="70" text-anchor="middle" class="label" fill="#b45309">results/</text>
+  <text x="955" y="120" text-anchor="middle" class="sublabel">6 output files</text>
+  <text x="955" y="136" text-anchor="middle" class="sublabel">published here</text>
+
+  <!-- Legend -->
+  <text x="30" y="268" class="label" fill="#1e1e1e">Legend:</text>
+  <rect x="90" y="255" width="16" height="16" rx="3" fill="#fff3bf" stroke="#f59e0b" stroke-width="1"/>
+  <text x="112" y="268" class="sublabel">Input data</text>
+  <rect x="190" y="255" width="16" height="16" rx="3" fill="#a5d8ff" stroke="#4a9eed" stroke-width="1"/>
+  <text x="212" y="268" class="sublabel">Channel items</text>
+  <rect x="310" y="255" width="16" height="16" rx="3" fill="#b2f2bb" stroke="#22c55e" stroke-width="1"/>
+  <text x="332" y="268" class="sublabel">sayHello outputs</text>
+  <rect x="450" y="255" width="16" height="16" rx="3" fill="#d0bfff" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="472" y="268" class="sublabel">convertToUpper outputs</text>
+  <rect x="625" y="255" width="16" height="16" rx="3" fill="#ffd8a8" stroke="#f59e0b" stroke-width="1"/>
+  <text x="647" y="268" class="sublabel">Published results</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e1e1e"/>
+    </marker>
+  </defs>
+</svg>
