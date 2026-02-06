@@ -14,52 +14,9 @@ params {
     intervals: Path = "${projectDir}/data/ref/intervals.bed"
 }
 
-/*
- * Generate BAM index file
- */
-process SAMTOOLS_INDEX {
-
-    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
-
-    input:
-    path input_bam
-
-    output:
-    tuple path(input_bam), path("${input_bam}.bai")
-
-    script:
-    """
-    samtools index '$input_bam'
-    """
-}
-
-/*
- * Call variants with GATK HaplotypeCaller
- */
-process GATK_HAPLOTYPECALLER {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-
-    input:
-    tuple path(input_bam), path(input_bam_index)
-    path ref_fasta
-    path ref_index
-    path ref_dict
-    path interval_list
-
-    output:
-    path "${input_bam}.vcf"     , emit: vcf
-    path "${input_bam}.vcf.idx" , emit: idx
-
-    script:
-    """
-    gatk HaplotypeCaller \
-        -R ${ref_fasta} \
-        -I ${input_bam} \
-        -O ${input_bam}.vcf \
-        -L ${interval_list}
-    """
-}
+// Include modules
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
 
 workflow {
 
@@ -93,12 +50,12 @@ workflow {
 
 output {
     indexed_bam {
-        path '.'
+        path 'bam'
     }
     vcf {
-        path '.'
+        path 'vcf'
     }
     vcf_idx {
-        path '.'
+        path 'vcf'
     }
 }

@@ -1,33 +1,24 @@
 #!/usr/bin/env nextflow
 
+// Module INCLUDE statements
+
 /*
  * Pipeline parameters
  */
 
 // Primary input
 
-/*
- * Generate BAM index file
- */
-process SAMTOOLS_INDEX {
-
-    container
-
-    input:
-
-    output:
-
-    script:
-    """
-
-    """
-
-}
-
 workflow {
 
+    main:
     // Create input channel
 
-    // Create index file for input BAM file
+    // Call processes
 
+    publish:
+    // Declare outputs to publish
+}
+
+output {
+    // Configure publish targets
 }

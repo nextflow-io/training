@@ -34,13 +34,16 @@ If you run this inside `nf4-science/genomics`, you should see the following outp
 ├── genomics-2.nf
 ├── genomics-3.nf
 ├── genomics-4.nf
+├── modules
+│   ├── gatk_haplotypecaller.nf
+│   └── samtools_index.nf
 ├── nextflow.config
 └── solutions
     ├── modules
     ├── nf-test.config
     └── tests
 
-6 directories, 8 files
+7 directories, 10 files
 
 ```
 
@@ -53,12 +56,14 @@ If you run this inside `nf4-science/genomics`, you should see the following outp
 
 - **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
 
+- **The `modules` directory** contains skeleton module files that you'll fill in during the course.
+
 - **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
   You can ignore it for now.
 
 - **The `data` directory** contains input data and related resources, described later in the course.
 
-- **The `solutions` directory** contains module files and test configurations that result from Parts 3 and 4 of the course.
+- **The `solutions` directory** contains completed module files that result from Parts 2 and 3 of the course.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
 
 !!!tip

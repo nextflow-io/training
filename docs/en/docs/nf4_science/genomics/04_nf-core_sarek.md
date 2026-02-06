@@ -1,4 +1,4 @@
-# Part 6: Run nf-core/sarek
+# Part 4: Run nf-core/sarek
 
 In Parts 2 and 3, you built a variant calling pipeline from scratch using GATK tools.
 This gave you a solid understanding of how Nextflow processes work and how to control data flow.
@@ -8,7 +8,7 @@ Sarek implements a more comprehensive version of the variant calling workflow yo
 
 ## 1. Understanding nf-core pipelines
 
-Before we run Sarek, let's understand what nf-core is and why it matters.
+Before we run Sarek, here is some background on what nf-core is and why it matters.
 
 ### 1.1. What is nf-core?
 

@@ -313,9 +313,20 @@ What do you think, looks reasonable?
 
 Add the import statement to `genomics-2.nf`, below the existing import statements:
 
-```groovy title="genomics-2.nf" linenums="10"
-include { GATK_GENOMICSDB } from './modules/gatk/genomicsdb/main.nf'
-```
+=== "After"
+
+    ```groovy title="genomics-2.nf" linenums="8" hl_lines="3"
+    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+    include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+    include { GATK_GENOMICSDB } from './modules/gatk/genomicsdb/main.nf'
+    ```
+
+=== "Before"
+
+    ```groovy title="genomics-2.nf" linenums="8"
+    include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+    include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+    ```
 
 Now we can wire it up and see what happens.
 
@@ -324,23 +335,47 @@ Now we can wire it up and see what happens.
 We need to provide an arbitrary name for the cohort.
 Later in the training series you'll learn how to use sample metadata for this sort of thing, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
 
-```groovy title="genomics-2.nf" linenums="16"
-    // Base name for final output file
-    cohort_name: String = "family_trio"
-```
+=== "After"
+
+    ```groovy title="genomics-2.nf" linenums="18" hl_lines="3-4"
+        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+
+        // Base name for final output file
+        cohort_name: String = "family_trio"
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="genomics-2.nf" linenums="18"
+        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+    }
+    ```
 
 ### 2.4. Gather the outputs of GATK_HAPLOTYPECALLER across samples
 
 If we were to just plug the output channel from the `GATK_HAPLOTYPECALLER` process as is, Nextflow would call the process on each sample GVCF separately.
 However, we want to bundle all three GVCFs (and their index files) in such a way that Nextflow hands all of them together to a single process call.
 
-Good news: we can do that using the `collect()` channel operator. Let's add the following lines to the `workflow` body, right after the call to GATK_HAPLOTYPECALLER:
+Good news: we can do that using the `collect()` channel operator. Add the following lines to the `workflow` body, right after the call to GATK_HAPLOTYPECALLER:
 
-```groovy title="genomics-2.nf" linenums="118"
-// Collect variant calling outputs across samples
-all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
-all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
-```
+=== "After"
+
+    ```groovy title="genomics-2.nf" hl_lines="4-6"
+            intervals_file
+        )
+
+        // Collect variant calling outputs across samples
+        all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
+        all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+    ```
+
+=== "Before"
+
+    ```groovy title="genomics-2.nf"
+            intervals_file
+        )
+    ```
 
 Does that seem a bit complicated? Let's break this down and translate it into plain language.
 
@@ -362,15 +397,25 @@ The resulting `all_gvcfs_ch` and `all_idxs_ch` channels are what we're going to 
 
 We've got a process, and we've got input channels. We just need to add the process call.
 
-```groovy title="genomics-2.nf" linenums="122"
-    // Combine GVCFs into a GenomicsDB datastore
-    GATK_GENOMICSDB(
-        all_gvcfs_ch,
-        all_idxs_ch,
-        intervals_file,
-        params.cohort_name
-    )
-```
+=== "After"
+
+    ```groovy title="genomics-2.nf" hl_lines="3-9"
+        all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+
+        // Combine GVCFs into a GenomicsDB datastore
+        GATK_GENOMICSDB(
+            all_gvcfs_ch,
+            all_idxs_ch,
+            intervals_file,
+            params.cohort_name
+        )
+    ```
+
+=== "Before"
+
+    ```groovy title="genomics-2.nf"
+        all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+    ```
 
 Ok, everything is wired up.
 
@@ -562,7 +607,7 @@ Then update the process name in the module file:
 
 === "After"
 
-    ```groovy title="modules/gatk/jointgenotyping/main.nf"
+    ```groovy title="modules/gatk/jointgenotyping/main.nf" hl_lines="2 4"
     /*
      * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
      */
@@ -582,7 +627,7 @@ Finally, update the import statement in `genomics-2.nf`:
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="10"
+    ```groovy title="genomics-2.nf" linenums="10" hl_lines="1"
     include { GATK_JOINTGENOTYPING } from './modules/gatk/jointgenotyping/main.nf'
     ```
 
@@ -687,7 +732,7 @@ Now we need to rename the process call in the workflow body and add the referenc
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="126"
+    ```groovy title="genomics-2.nf" linenums="126" hl_lines="1-2 6-9"
     // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
     GATK_JOINTGENOTYPING(
         all_gvcfs_ch,
@@ -719,24 +764,68 @@ Now the process is completely wired up.
 We need to publish the joint VCF outputs from the new process.
 Add these lines to the `publish:` section of the workflow:
 
-```groovy title="genomics-2.nf" linenums="145"
-    joint_vcf = GATK_JOINTGENOTYPING.out.vcf
-    joint_vcf_idx = GATK_JOINTGENOTYPING.out.idx
-```
+=== "After"
+
+    ```groovy title="genomics-2.nf" linenums="139" hl_lines="5-6"
+        publish:
+        indexed_bam = SAMTOOLS_INDEX.out
+        gvcf = GATK_HAPLOTYPECALLER.out.vcf
+        gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+        joint_vcf = GATK_JOINTGENOTYPING.out.vcf
+        joint_vcf_idx = GATK_JOINTGENOTYPING.out.idx
+    ```
+
+=== "Before"
+
+    ```groovy title="genomics-2.nf" linenums="139"
+        publish:
+        indexed_bam = SAMTOOLS_INDEX.out
+        gvcf = GATK_HAPLOTYPECALLER.out.vcf
+        gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
+    ```
 
 ### 3.7. Add the joint VCF targets to the output block
 
 Finally, add output targets for the joint VCF files.
 We'll put them at the root of the results directory since this is the final output.
 
-```groovy title="genomics-2.nf" linenums="157"
-    joint_vcf {
-        path '.'
+=== "After"
+
+    ```groovy title="genomics-2.nf" linenums="148" hl_lines="11-16"
+    output {
+        indexed_bam {
+            path 'indexed_bam'
+        }
+        gvcf {
+            path 'gvcf'
+        }
+        gvcf_idx {
+            path 'gvcf'
+        }
+        joint_vcf {
+            path '.'
+        }
+        joint_vcf_idx {
+            path '.'
+        }
     }
-    joint_vcf_idx {
-        path '.'
+    ```
+
+=== "Before"
+
+    ```groovy title="genomics-2.nf" linenums="148"
+    output {
+        indexed_bam {
+            path 'indexed_bam'
+        }
+        gvcf {
+            path 'gvcf'
+        }
+        gvcf_idx {
+            path 'gvcf'
+        }
     }
-```
+    ```
 
 Now everything should be completely wired up.
 
@@ -812,4 +901,4 @@ You know how to use some common operators as well as Groovy closures to control 
 
 Celebrate your success and take a well-deserved break.
 
-In the next part of this course, you'll learn how to add automated testing to verify that your pipeline produces correct outputs.
+In the next part of this course, you'll learn how to run a production-ready variant calling pipeline from nf-core and compare it to the pipeline you built manually.
