@@ -502,13 +502,13 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [9f/332636] sayHello (1)       [100%] 3 of 3 ✔
+    [03/a55991] convertToUpper (3) [100%] 3 of 3 ✔
+    [e5/ab7893] collectGreetings   [100%] 1 of 1 ✔
+    [a8/97338e] cowpy              [100%] 1 of 1 ✔
     ```
 
 This publishes outputs to `custom-outdir-cli/` instead of `results/`:
@@ -517,17 +517,17 @@ This publishes outputs to `custom-outdir-cli/` instead of `results/`:
 
     ```console
     custom-outdir-cli/
-    ├── hello_config
-    │   ├── cowpy-COLLECTED-batch-output.txt
-    │   ├── batch-report.txt
-    │   └── intermediates
-    │       ├── Bonjour-output.txt
-    │       ├── COLLECTED-batch-output.txt
-    │       ├── Hello-output.txt
-    │       ├── Holà-output.txt
-    │       ├── UPPER-Bonjour-output.txt
-    │       ├── UPPER-Hello-output.txt
-    │       └── UPPER-Holà-output.txt
+    └── hello_config
+        ├── batch-report.txt
+        ├── cowpy-COLLECTED-batch-output.txt
+        └── intermediates
+            ├── Bonjour-output.txt
+            ├── COLLECTED-batch-output.txt
+            ├── Hello-output.txt
+            ├── Holà-output.txt
+            ├── UPPER-Bonjour-output.txt
+            ├── UPPER-Hello-output.txt
+            └── UPPER-Holà-output.txt
     ```
 
 Notice we still have the `hello_config` subdirectory from the `path` declarations in the output block.
@@ -606,16 +606,16 @@ Now the outputs are published directly under `custom-outdir-cli-2/`, without the
 
     ```console
     custom-outdir-cli-2/
+    ├── batch-report.txt
     ├── cowpy-COLLECTED-batch-output.txt
-    ├── intermediates
-    │   ├── Bonjour-output.txt
-    │   ├── COLLECTED-batch-output.txt
-    │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
-    └── batch-report.txt
+    └── intermediates
+        ├── Bonjour-output.txt
+        ├── COLLECTED-batch-output.txt
+        ├── Hello-output.txt
+        ├── Holà-output.txt
+        ├── UPPER-Bonjour-output.txt
+        ├── UPPER-Hello-output.txt
+        └── UPPER-Holà-output.txt
     ```
 
 !!! tip
@@ -749,7 +749,7 @@ First, update the config file to remove `${params.batch}` from `outputDir` (sinc
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="12"
+    ```groovy title="nextflow.config" linenums="12" hl_lines="4"
     /*
     * Output settings
     */
@@ -758,7 +758,7 @@ First, update the config file to remove `${params.batch}` from `outputDir` (sinc
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="12"
+    ```groovy title="nextflow.config" linenums="12" hl_lines="4"
     /*
     * Output settings
     */
@@ -834,36 +834,37 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [9e/6095e0] sayHello (1)       [100%] 3 of 3 ✔
+    [05/454d52] convertToUpper (3) [100%] 3 of 3 ✔
+    [ed/e3ddfb] collectGreetings   [100%] 1 of 1 ✔
+    [39/5e063a] cowpy              [100%] 1 of 1 ✔
     ```
 
-This publishes outputs to `cleverconfig/rep2/`, with the specified base path _and_ the batch name subdirectory _and_ results grouped by process:
+This publishes outputs to `custom-outdir-config-2/rep2/`, with the specified base path _and_ the batch name subdirectory _and_ results grouped by process:
 
 ??? abstract "Directory contents"
 
     ```console
-    cleverconfig/rep2/
-    ├── collectGreetings
-    │   └── rep2-report.txt
-    ├── cowpy
-    │   └── cowpy-COLLECTED-rep2-output.txt
-    └── intermediates
+    custom-outdir-config-2
+    └── rep2
         ├── collectGreetings
-        │   └── COLLECTED-rep2-output.txt
-        ├── convertToUpper
-        │   ├── UPPER-Bonjour-output.txt
-        │   ├── UPPER-Hello-output.txt
-        │   └── UPPER-Holà-output.txt
-        └── sayHello
-            ├── Bonjour-output.txt
-            ├── Hello-output.txt
-            └── Holà-output.txt
+        │   └── rep2-report.txt
+        ├── cowpy
+        │   └── cowpy-COLLECTED-rep2-output.txt
+        └── intermediates
+            ├── collectGreetings
+            │   └── COLLECTED-rep2-output.txt
+            ├── convertToUpper
+            │   ├── UPPER-Bonjour-output.txt
+            │   ├── UPPER-Hello-output.txt
+            │   └── UPPER-Holà-output.txt
+            └── sayHello
+                ├── Bonjour-output.txt
+                ├── Hello-output.txt
+                └── Holà-output.txt
     ```
 
 ### 2.3. Set the publish mode at the workflow level
@@ -876,17 +877,21 @@ Add the following code to the `nextflow.config` file:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="2" hl_lines="4"
+    ```groovy title="nextflow.config" linenums="12" hl_lines="5"
     /*
     * Output settings
     */
+    outputDir = "custom-outdir-config/"
     workflow.output.mode = 'copy'
     ```
 
 === "Before"
 
-    ```groovy title="nextflow.config"
-    // (no output settings yet)
+    ```groovy title="nextflow.config" linenums="12"
+    /*
+    * Output settings
+    */
+    outputDir = "custom-outdir-config/"
     ```
 
 Setting `workflow.output.mode` in the configuration file is sufficient to override what is set in the workflow file, but let's remove the unnecessary code anyway.
@@ -900,19 +905,19 @@ Make the following changes in the workflow file:
     ```groovy title="hello-config.nf" linenums="42"
     output {
         first_output {
-            path { sayHello.name }
+            path { "${params.batch}/intermediates/${sayHello.name}" }
         }
         uppercased {
-            path { convertToUpper.name }
+            path { "${params.batch}/intermediates/${convertToUpper.name}" }
         }
         collected {
-            path { collectGreetings.name }
+            path { "${params.batch}/intermediates/${collectGreetings.name}" }
         }
         batch_report {
-            path { collectGreetings.name }
+            path { "${params.batch}/${collectGreetings.name}" }
         }
         cowpy_art {
-            path { cowpy.name }
+            path { "${params.batch}/${cowpy.name}" }
         }
     }
     ```
@@ -922,23 +927,23 @@ Make the following changes in the workflow file:
     ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20"
     output {
         first_output {
-            path { sayHello.name }
+            path { "${params.batch}/intermediates/${sayHello.name}" }
             mode 'copy'
         }
         uppercased {
-            path { convertToUpper.name }
+            path { "${params.batch}/intermediates/${convertToUpper.name}" }
             mode 'copy'
         }
         collected {
-            path { collectGreetings.name }
+            path { "${params.batch}/intermediates/${collectGreetings.name}" }
             mode 'copy'
         }
         batch_report {
-            path { collectGreetings.name }
+            path { "${params.batch}/${collectGreetings.name}" }
             mode 'copy'
         }
         cowpy_art {
-            path { cowpy.name }
+            path { "${params.batch}/${cowpy.name}" }
             mode 'copy'
         }
     }
@@ -951,7 +956,7 @@ That's more concise, isn't it?
 Let's test that it works correctly:
 
 ```bash
-nextflow run hello-config.nf -output-dir results/outmode
+nextflow run hello-config.nf -output-dir config-output-mode
 ```
 
 ??? success "Command output"
@@ -959,34 +964,37 @@ nextflow run hello-config.nf -output-dir results/outmode
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [e8/a0e93e] sayHello (1)       [100%] 3 of 3 ✔
+    [14/176c9d] convertToUpper (3) [100%] 3 of 3 ✔
+    [23/d667ca] collectGreetings   [100%] 1 of 1 ✔
+    [e6/1dc80e] cowpy              [100%] 1 of 1 ✔
     ```
 
-This publishes outputs to `results/outmode/`, and they are still all proper copies, not symlinks.
+This publishes outputs to `config-output-mode/`, and they are still all proper copies, not symlinks.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/outmode/
-    ├── collectGreetings
-    │   ├── COLLECTED-batch-output.txt
-    │   └── batch-report.txt
-    ├── convertToUpper
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
-    ├── cowpy
-    │   └── cowpy-COLLECTED-batch-output.txt
-    └── sayHello
-        ├── Bonjour-output.txt
-        ├── Hello-output.txt
-        └── Holà-output.txt
+    config-output-mode
+    └── batch
+        ├── collectGreetings
+        │   └── batch-report.txt
+        ├── cowpy
+        │   └── cowpy-COLLECTED-batch-output.txt
+        └── intermediates
+            ├── collectGreetings
+            │   └── COLLECTED-batch-output.txt
+            ├── convertToUpper
+            │   ├── UPPER-Bonjour-output.txt
+            │   ├── UPPER-Hello-output.txt
+            │   └── UPPER-Holà-output.txt
+            └── sayHello
+                ├── Bonjour-output.txt
+                ├── Hello-output.txt
+                └── Holà-output.txt
     ```
 
 The main reason you might still want to use the per-output way of setting mode is if you want to mix and match within the same workflow, _i.e._ have some outputs be copied and some be symlinked.
@@ -1088,16 +1096,16 @@ nextflow run hello-config.nf --batch conda
     ```console title="Output"
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
+    Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
-    [20/2596a7] convertToUpper (1) | 3 of 3 ✔
-    [b3/e15de5] collectGreetings   | 1 of 1 ✔
-    [c5/af5f88] cowpy              | 1 of 1 ✔
+    [e8/91c116] sayHello (2)       [100%] 3 of 3 ✔
+    [fe/6a70ce] convertToUpper (3) [100%] 3 of 3 ✔
+    [99/7cc493] collectGreetings   [100%] 1 of 1 ✔
+    [3c/09fb59] cowpy              [100%] 1 of 1 ✔
     ```
 
-This should work without issue and produce the same outputs as previously under `results/conda`.
+This should work without issue and produce the same outputs as previously under `custom-outdir-config/conda`.
 
 Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
@@ -1258,14 +1266,44 @@ The profiling shows that the processes in our training workflow are very lightwe
 
 Add the following to your `nextflow.config` file, before the pipeline parameters section:
 
-```groovy title="nextflow.config" linenums="4"
-/*
-* Process settings
-*/
-process {
-    memory = 1.GB
-}
-```
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="4-9"
+    docker.enabled = false
+    conda.enabled = true
+
+    /*
+    * Process settings
+    */
+    process {
+        memory = 1.GB
+    }
+
+    /*
+    * Pipeline parameters
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = false
+    conda.enabled = true
+
+    /*
+    * Pipeline parameters
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
 
 That will help reduce the amount of compute we consume.
 
@@ -1378,26 +1416,62 @@ Let's set up two alternative profiles; one for running small scale loads on a re
 
 Add the following to your `nextflow.config` file, after the pipeline parameters section but before the output settings:
 
-```groovy title="nextflow.config" linenums="24"
-/*
-* Profiles
-*/
-profiles {
-    my_laptop {
-        process.executor = 'local'
-        docker.enabled = true
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="15" hl_lines="10-27"
+    /*
+    * Pipeline parameters
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
     }
-    univ_hpc {
-        process.executor = 'slurm'
-        conda.enabled = true
-        process.resourceLimits = [
-            memory: 750.GB,
-            cpus: 200,
-            time: 30.d
-        ]
+
+    /*
+    * Profiles
+    */
+    profiles {
+        my_laptop {
+            process.executor = 'local'
+            docker.enabled = true
+        }
+        univ_hpc {
+            process.executor = 'slurm'
+            conda.enabled = true
+            process.resourceLimits = [
+                memory: 750.GB,
+                cpus: 200,
+                time: 30.d
+            ]
+        }
     }
-}
-```
+
+    /*
+    * Output settings
+    */
+    outputDir = "custom-outdir-config/"
+    workflow.output.mode = 'copy'
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="15"
+    /*
+    * Pipeline parameters
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+
+    /*
+    * Output settings
+    */
+    outputDir = "custom-outdir-config/"
+    workflow.output.mode = 'copy'
+    ```
 
 You see that for the university HPC, we're also specifying resource limitations.
 
@@ -1416,13 +1490,13 @@ nextflow run hello-config.nf -profile my_laptop
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [58/da9437] sayHello (3)       | 3 of 3 ✔
-    [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
-    [67/857d05] collectGreetings   | 1 of 1 ✔
-    [37/7b51b5] cowpy              | 1 of 1 ✔
+    [b0/fb2ec9] sayHello (3)       [100%] 3 of 3 ✔
+    [4a/e039f0] convertToUpper (3) [100%] 3 of 3 ✔
+    [6f/408fa9] collectGreetings   [100%] 1 of 1 ✔
+    [f1/fd6520] cowpy              [100%] 1 of 1 ✔
     ```
 
 As you can see, this allows us to toggle between configurations very conveniently at runtime.
@@ -1454,7 +1528,7 @@ The syntax for expressing default values in this context looks like this, for a 
 
 If we add a test profile for our workflow, the `profiles` block becomes:
 
-```groovy title="nextflow.config" linenums="24"
+```groovy title="nextflow.config" linenums="24" hl_lines="18-22"
 /*
 * Profiles
 */
@@ -1500,20 +1574,20 @@ nextflow run hello-config.nf -profile my_laptop,test
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
+    Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [9b/687cdc] sayHello (2)       | 3 of 3 ✔
-    [ca/552187] convertToUpper (3) | 3 of 3 ✔
-    [e8/83e306] collectGreetings   | 1 of 1 ✔
-    [fd/e84fa9] cowpy              | 1 of 1 ✔
+    [4c/fe2580] sayHello (1)       [100%] 3 of 3 ✔
+    [fd/7d9017] convertToUpper (3) [100%] 3 of 3 ✔
+    [13/1523bd] collectGreetings   [100%] 1 of 1 ✔
+    [06/a1ee14] cowpy              [100%] 1 of 1 ✔
     ```
 
-This will use Docker where possible and produce outputs under `results/test`, and this time the character is the comedic duo `dragonandcow`.
+This will use Docker where possible and produce outputs under `custom-outdir-config/test`, and this time the character is the comedic duo `dragonandcow`.
 
 ??? abstract "File contents"
 
-    ```console title="results/test/"
+    ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
     / HOLà    \
     | HELLO   |
@@ -1570,6 +1644,12 @@ nextflow config
 ??? success "Command output"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'batch'
+      character = 'turkey'
+    }
+
     docker {
       enabled = false
     }
@@ -1586,10 +1666,12 @@ nextflow config
       }
     }
 
-    params {
-      input = 'data/greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+    outputDir = 'custom-outdir-config/'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1606,6 +1688,12 @@ nextflow config -profile my_laptop,test
 ??? success "Command output"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'test'
+      character = 'dragonandcow'
+    }
+
     docker {
       enabled = true
     }
@@ -1623,10 +1711,12 @@ nextflow config -profile my_laptop,test
       executor = 'local'
     }
 
-    params {
-      input = 'data/greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+    outputDir = 'custom-outdir-config/'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
