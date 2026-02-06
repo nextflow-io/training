@@ -600,8 +600,8 @@ You see the result from the previous execution is still there.
 </figure>
 
 You can use as many levels of nesting as you'd like.
-It is also possible to use the process name or other variables to name the directories used to organize results, and it is possible to change the default name of the top-level output directory (which is controlled by the special variable `outputDir`).
-We will cover these options in later trainings.
+It is also possible to use the process name or other variables to name the directories used to organize results, and it is possible to change the default name of the top-level output directory (which is controlled by the `-o` CLI flag or config variable `outputDir`).
+We will cover these options later in the training.
 
 ### 2.3. Set the publish mode to copy
 

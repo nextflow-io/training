@@ -923,9 +923,9 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 You'll notice that the process executions all cached successfully, meaning that Nextflow recognized that it has already done the requested work, even though the code has been split up and the main workflow file has been renamed.
@@ -1223,9 +1223,9 @@ The workflow is very similar to the previous one, plus the extra step to run `co
 
 You see that this workflow imports a `cowpy` process from a module file, and calls it on the output of the `collectGreetings()` call, plus an input parameter called `params.character`.
 
-```groovy title="2d-container.nf" linenums="25"
-// generate ASCII art with cowpy
-cowpy(collectGreetings.out, params.character)
+```groovy title="2d-container.nf" linenums="31"
+// generate ASCII art of the greetings with cowpy
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 The `cowpy` process, which wraps the cowpy command to generate ASCII art, is defined in the `cowpy.nf` module.
