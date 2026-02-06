@@ -5008,8 +5008,8 @@
 -->
 
 <p>Cette section explorera comment configurer et gérer la configuration de votre pipeline Nextflow afin que vous puissiez personnaliser son comportement, l'adapter à différents environnements et optimiser l'utilisation des ressources <em>sans modifier une seule ligne du code du workflow lui-même</em>.</p>
-<p>Il existe plusieurs façons de le faire, qui peuvent être utilisées en combinaison et sont interprétées selon l'ordre de priorité décrit <a href="https://www.nextflow.io/docs/latest/config.html">ici</a>.</p>
-<p>Dans cette partie du cours, nous allons vous montrer le mécanisme de fichier de configuration le plus simple et le plus courant, le fichier <code>nextflow.config</code>, que vous avez déjà rencontré dans la Partie 5 : Hello Containers.</p>
+<p>Il existe plusieurs façons de le faire, qui peuvent être utilisées en combinaison et sont interprétées selon l'<a href="https://nextflow.io/docs/latest/config.html">ordre de priorité</a> décrit dans la documentation de configuration.</p>
+<p>Dans cette partie du cours, nous allons vous montrer le mécanisme de fichier de configuration le plus simple et le plus courant, le fichier <a href="https://nextflow.io/docs/latest/config.html"><code>nextflow.config</code></a>, que vous avez déjà rencontré dans la Partie 5 : Hello Containers.</p>
 <p>Nous passerons en revue les composants essentiels de la configuration Nextflow tels que les directives de processus, les exécuteurs, les profils et les fichiers de paramètres.
 En apprenant à utiliser efficacement ces options de configuration, vous pouvez améliorer la flexibilité, l'évolutivité et les performances de vos pipelines.</p>
 <details class="info">
@@ -5020,7 +5020,7 @@ En apprenant à utiliser efficacement ces options de configuration, vous pouvez 
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cp<span class="w"> </span>solutions/5-hello-containers/nextflow.config<span class="w"> </span>.
 </code></pre></div>
 <p>Le fichier <code>nextflow.config</code> contient la ligne <code>docker.enabled = true</code> qui active l'utilisation des conteneurs Docker.</p>
-<p>Si vous n'êtes pas familier avec le pipeline Hello ou si vous avez besoin d'un rappel, consultez <a href="../../info/hello_pipeline/">cette page d'information</a>.</p>
+<p>Si vous n'êtes pas familier·ère avec le pipeline Hello ou si vous avez besoin d'un rappel, consultez <a href="../../info/hello_pipeline/">cette page d'information</a>.</p>
 </details>
 <hr />
 <h2 id="0-echauffement-executer-hello-confignf">0. Échauffement : Exécuter <code>hello-config.nf</code><a class="headerlink" href="#0-echauffement-executer-hello-confignf" title="Permanent link">&para;</a></h2>
@@ -5351,18 +5351,14 @@ Assurez-vous d'adapter le chemin en conséquence !</p>
 <h3 id="13-utiliser-un-fichier-de-parametres">1.3. Utiliser un fichier de paramètres<a class="headerlink" href="#13-utiliser-un-fichier-de-parametres" title="Permanent link">&para;</a></h3>
 <p>L'approche du sous-répertoire fonctionne très bien pour l'expérimentation, mais elle implique un peu de configuration et nécessite que vous adaptiez les chemins en conséquence.
 Il existe une approche plus simple lorsque vous voulez exécuter votre pipeline avec un ensemble spécifique de valeurs, ou permettre à quelqu'un d'autre de le faire avec un minimum d'effort.</p>
-<p>Nextflow nous permet de spécifier des paramètres via un fichier de paramètres au format YAML ou JSON, ce qui rend très pratique la gestion et la distribution d'ensembles alternatifs de valeurs par défaut, par exemple, ainsi que de valeurs de paramètres spécifiques à l'exécution.</p>
+<p>Nextflow nous permet de spécifier des paramètres via un <a href="https://nextflow.io/docs/latest/config.html#params-file">fichier de paramètres</a> au format YAML ou JSON, ce qui rend très pratique la gestion et la distribution d'ensembles alternatifs de valeurs par défaut, par exemple, ainsi que de valeurs de paramètres spécifiques à l'exécution.</p>
 <h4 id="131-examiner-le-fichier-de-parametres-exemple">1.3.1. Examiner le fichier de paramètres exemple<a class="headerlink" href="#131-examiner-le-fichier-de-parametres-exemple" title="Permanent link">&para;</a></h4>
 <p>Pour démontrer ceci, nous fournissons un fichier de paramètres exemple dans le répertoire actuel, appelé <code>test-params.yaml</code> :</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test-params.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
-<span class="normal"><a href="#__codelineno-20-3">3</a></span>
-<span class="normal"><a href="#__codelineno-20-4">4</a></span>
-<span class="normal"><a href="#__codelineno-20-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="p p-Indicator">{</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">  input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;greetings.csv&quot;</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">  batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="nt">  character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="p p-Indicator">}</span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/greetings.csv&quot;</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>Ce fichier de paramètres contient une paire clé-valeur pour chacune des entrées que nous voulons spécifier.
 Notez l'utilisation de deux-points (<code>:</code>) au lieu de signes égal (<code>=</code>) si vous comparez la syntaxe avec le fichier de configuration.
@@ -5415,7 +5411,7 @@ N'hésitez pas à essayer celui-là par vous-même.</p>
 </details>
 <p>Utiliser un fichier de paramètres peut sembler excessif lorsque vous n'avez que quelques paramètres à spécifier, mais certains pipelines attendent des dizaines de paramètres.
 Dans ces cas, utiliser un fichier de paramètres nous permettra de fournir des valeurs de paramètres à l'exécution sans avoir à taper des lignes de commande massives et sans modifier le script de workflow.</p>
-<p>Cela facilite également la distribution d'ensembles de paramètres aux collaborateurs, ou comme information de support pour une publication, par exemple.
+<p>Cela facilite également la distribution d'ensembles de paramètres aux collaborateurs·trices, ou comme information de support pour une publication, par exemple.
 Cela rend votre travail plus reproductible par d'autres.</p>
 <h3 id="a-retenir">À retenir<a class="headerlink" href="#a-retenir" title="Permanent link">&para;</a></h3>
 <p>Vous savez comment tirer parti des options de configuration clés pour gérer les entrées du workflow.</p>
@@ -5427,7 +5423,7 @@ Cela rend votre travail plus reproductible par d'autres.</p>
 <p>Regardons quelques façons courantes de configurer cela pour être plus flexible.</p>
 <h3 id="21-personnaliser-le-nom-du-repertoire-outputdir">2.1. Personnaliser le nom du répertoire <code>outputDir</code><a class="headerlink" href="#21-personnaliser-le-nom-du-repertoire-outputdir" title="Permanent link">&para;</a></h3>
 <p>Pour chaque chapitre de ce cours, nous avons publié les sorties dans un sous-répertoire différent codé en dur dans les définitions de sortie.</p>
-<p>Changeons cela pour utiliser un paramètre configurable par l'utilisateur.
+<p>Changeons cela pour utiliser un paramètre configurable par l'utilisateur·trice.
 Nous pourrions créer un tout nouveau paramètre pour cela, mais utilisons le paramètre <code>batch</code> puisqu'il est juste là.</p>
 <h4 id="211-definir-une-valeur-pour-outputdir-dans-le-fichier-de-configuration">2.1.1. Définir une valeur pour <code>outputDir</code> dans le fichier de configuration<a class="headerlink" href="#211-definir-une-valeur-pour-outputdir-dans-le-fichier-de-configuration" title="Permanent link">&para;</a></h4>
 <p>Le chemin que Nextflow utilise pour publier les sorties est contrôlé par l'option <code>outputDir</code>.
@@ -5458,7 +5454,7 @@ Pour changer le chemin pour toutes les sorties, vous pouvez définir une valeur 
 <a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="o">}</span>
 <a id="__codelineno-24-17" name="__codelineno-24-17"></a>
 <a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="hll"><span class="cm">/*</span>
-</span><a id="__codelineno-24-19" name="__codelineno-24-19"></a><span class="hll"><span class="cm">* Output settings</span>
+</span><a id="__codelineno-24-19" name="__codelineno-24-19"></a><span class="hll"><span class="cm">* Paramètres de sortie</span>
 </span><a id="__codelineno-24-20" name="__codelineno-24-20"></a><span class="hll"><span class="cm">*/</span>
 </span><a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="hll"><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results/${params.batch}&quot;</span>
 </span></code></pre></div></td></tr></table></div>
@@ -5772,7 +5768,7 @@ Vous pourriez bien sûr mélanger et assortir ces approches, par exemple en déf
 <span class="normal"><a href="#__codelineno-36-4">4</a></span>
 <span class="normal"><a href="#__codelineno-36-5">5</a></span>
 <span class="normal"><a href="#__codelineno-36-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="cm">/*</span>
-<a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="cm">* Output settings</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="cm">* Paramètres de sortie</span>
 <a id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="cm">*/</span>
 <a id="__codelineno-36-5" name="__codelineno-36-5"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results/${params.batch}&quot;</span>
 <a id="__codelineno-36-6" name="__codelineno-36-6"></a><span class="hll"><span class="n">workflow</span><span class="o">.</span><span class="na">output</span><span class="o">.</span><span class="na">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
@@ -5783,7 +5779,7 @@ Vous pourriez bien sûr mélanger et assortir ces approches, par exemple en déf
 <span class="normal"><a href="#__codelineno-37-13">13</a></span>
 <span class="normal"><a href="#__codelineno-37-14">14</a></span>
 <span class="normal"><a href="#__codelineno-37-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-12" name="__codelineno-37-12"></a><span class="cm">/*</span>
-<a id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="cm">* Output settings</span>
+<a id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="cm">* Paramètres de sortie</span>
 <a id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="cm">*/</span>
 <a id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results/${params.batch}&quot;</span>
 </code></pre></div></td></tr></table></div>
@@ -5934,9 +5930,9 @@ Ou devons-nous récupérer des packages Conda et construire un environnement Con
 Puis dans la Partie 5, nous avons introduit les conteneurs Docker et le fichier <code>nextflow.config</code>, que nous avons utilisé pour activer l'utilisation des conteneurs Docker.</p>
 <p>Maintenant, voyons comment nous pouvons configurer une option de packaging logiciel alternative via le fichier <code>nextflow.config</code>.</p>
 <h3 id="31-desactiver-docker-et-activer-conda-dans-le-fichier-de-configuration">3.1. Désactiver Docker et activer Conda dans le fichier de configuration<a class="headerlink" href="#31-desactiver-docker-et-activer-conda-dans-le-fichier-de-configuration" title="Permanent link">&para;</a></h3>
-<p>Prétendons que nous travaillons sur un cluster HPC et que l'administrateur n'autorise pas l'utilisation de Docker pour des raisons de sécurité.
+<p>Prétendons que nous travaillons sur un cluster HPC et que l'administrateur·trice n'autorise pas l'utilisation de Docker pour des raisons de sécurité.
 Heureusement pour nous, Nextflow prend en charge plusieurs autres technologies de conteneurs comme Singularity (qui est plus largement utilisé sur HPC), et des gestionnaires de packages logiciels tels que Conda.</p>
-<p>Nous pouvons changer notre fichier de configuration pour utiliser Conda au lieu de Docker.
+<p>Nous pouvons changer notre fichier de configuration pour utiliser <a href="https://nextflow.io/docs/latest/conda.html">Conda</a> au lieu de Docker.
 Pour ce faire, changeons la valeur de <code>docker.enabled</code> à <code>false</code>, et ajoutons une directive activant l'utilisation de Conda :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Après</label><label for="__tabbed_8_2">Avant</label></div>
 <div class="tabbed-content">
@@ -6024,7 +6020,7 @@ C'est normal et c'est dû au travail supplémentaire que fait Nextflow la premi�
 <p>Puisque ces directives sont assignées par processus, il est possible de « mélanger et assortir », <em>c.-à-d.</em> configurer certains des processus de votre workflow pour s'exécuter avec Docker et d'autres avec Conda, par exemple, si l'infrastructure de calcul que vous utilisez prend en charge les deux.
 Dans ce cas, vous activeriez à la fois Docker et Conda dans votre fichier de configuration.
 Si les deux sont disponibles pour un processus donné, Nextflow priorisera les conteneurs.</p>
-<p>Et comme noté précédemment, Nextflow prend en charge plusieurs autres technologies de packaging logiciel et de conteneurs, donc vous n'êtes pas limité à ces deux-là.</p>
+<p>Et comme noté précédemment, Nextflow prend en charge plusieurs autres technologies de packaging logiciel et de conteneurs, donc vous n'êtes pas limité·e à ces deux-là.</p>
 </details>
 <h3 id="a-retenir_2">À retenir<a class="headerlink" href="#a-retenir_2" title="Permanent link">&para;</a></h3>
 <p>Vous savez comment configurer quel package logiciel chaque processus doit utiliser, et comment basculer entre les technologies.</p>
@@ -6037,7 +6033,7 @@ Celui-ci exécute chaque tâche sur la machine sur laquelle Nextflow s'exécute.
 Quand Nextflow démarre, il regarde les CPU et la mémoire disponibles.
 Si les ressources des tâches prêtes à s'exécuter dépassent les ressources disponibles, Nextflow retiendra les dernières tâches de l'exécution jusqu'à ce qu'une ou plusieurs des tâches précédentes soient terminées, libérant les ressources nécessaires.</p>
 <p>L'exécuteur local est pratique et efficace, mais il est limité à cette seule machine. Pour de très grandes charges de travail, vous pourriez découvrir que votre machine locale est un goulot d'étranglement, soit parce que vous avez une seule tâche qui nécessite plus de ressources que ce que vous avez disponible, soit parce que vous avez tellement de tâches qu'attendre qu'une seule machine les exécute prendrait trop de temps.</p>
-<p>Nextflow prend en charge <a href="https://www.nextflow.io/docs/latest/executor.html">de nombreux backends d'exécution différents</a>, y compris les ordonnanceurs HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor et autres) ainsi que les backends d'exécution cloud tels que (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes et plus).</p>
+<p>Nextflow prend en charge <a href="https://nextflow.io/docs/latest/executor.html">de nombreux backends d'exécution différents</a>, y compris les ordonnanceurs HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor et autres) ainsi que les backends d'exécution cloud tels que (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes et plus).</p>
 <h3 id="41-cibler-un-backend-different">4.1. Cibler un backend différent<a class="headerlink" href="#41-cibler-un-backend-different" title="Permanent link">&para;</a></h3>
 <p>Le choix de l'exécuteur est défini par une directive de processus appelée <code>executor</code>.
 Par défaut, elle est définie sur <code>local</code>, donc la configuration suivante est implicite :</p>
@@ -6045,7 +6041,7 @@ Par défaut, elle est définie sur <code>local</code>, donc la configuration sui
 <a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
 <a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>Pour définir l'exécuteur pour cibler un backend différent, vous spécifieriez simplement l'exécuteur que vous voulez en utilisant une syntaxe similaire à celle décrite ci-dessus pour les allocations de ressources (voir la <a href="https://www.nextflow.io/docs/latest/executor.html">documentation</a> pour toutes les options).</p>
+<p>Pour définir l'exécuteur pour cibler un backend différent, vous spécifieriez simplement l'exécuteur que vous voulez en utilisant une syntaxe similaire à celle décrite ci-dessus pour les allocations de ressources (voir la <a href="https://nextflow.io/docs/latest/executor.html">documentation des exécuteurs</a> pour toutes les options).</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;slurm&#39;</span>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="o">}</span>
@@ -6082,7 +6078,7 @@ Par défaut, elle est définie sur <code>local</code>, donc la configuration sui
 </code></pre></div>
 </details>
 <p>Heureusement, Nextflow simplifie tout cela.
-Il fournit une syntaxe standardisée pour que vous puissiez spécifier les propriétés pertinentes telles que <code>cpus</code>, <code>memory</code> et <code>queue</code> (voir la documentation pour d'autres propriétés) une seule fois.
+Il fournit une syntaxe standardisée pour que vous puissiez spécifier les propriétés pertinentes telles que <a href="https://nextflow.io/docs/latest/reference/process.html#cpus"><code>cpus</code></a>, <a href="https://nextflow.io/docs/latest/reference/process.html#memory"><code>memory</code></a> et <a href="https://nextflow.io/docs/latest/reference/process.html#queue"><code>queue</code></a> (voir les <a href="https://nextflow.io/docs/latest/reference/process.html#process-directives">directives de processus</a> pour d'autres propriétés) une seule fois.
 Ensuite, à l'exécution, Nextflow utilisera ces paramètres pour générer les scripts appropriés spécifiques au backend en fonction du paramètre d'exécuteur.</p>
 <p>Nous couvrirons cette syntaxe standardisée dans la section suivante.</p>
 <h3 id="a-retenir_3">À retenir<a class="headerlink" href="#a-retenir_3" title="Permanent link">&para;</a></h3>
@@ -6113,8 +6109,8 @@ Nextflow les traduira en instructions appropriées pour l'exécuteur choisi.</p>
 </code></pre></div>
 <p>Le rapport est un fichier html, que vous pouvez télécharger et ouvrir dans votre navigateur. Vous pouvez également faire un clic droit dessus dans l'explorateur de fichiers à gauche et cliquer sur <code>Show preview</code> pour le visualiser dans l'environnement de formation.</p>
 <p>Prenez quelques minutes pour parcourir le rapport et voir si vous pouvez identifier des opportunités d'ajustement des ressources.
-Assurez-vous de cliquer sur les onglets qui montrent les résultats d'utilisation en pourcentage de ce qui a été alloué.
-Il y a de la <a href="https://www.nextflow.io/docs/latest/reports.html">documentation</a> décrivant toutes les fonctionnalités disponibles.</p>
+Assurez-vous de cliquer sur les onglets qui montrent les résultats d'utilisation en pourcentage de ce qui a été alloué.</p>
+<p>Voir <a href="https://nextflow.io/docs/latest/reports.html">Rapports</a> pour la documentation sur toutes les fonctionnalités disponibles.</p>
 <h3 id="52-definir-les-allocations-de-ressources-pour-tous-les-processus">5.2. Définir les allocations de ressources pour tous les processus<a class="headerlink" href="#52-definir-les-allocations-de-ressources-pour-tous-les-processus" title="Permanent link">&para;</a></h3>
 <p>Le profilage montre que les processus de notre workflow de formation sont très légers, donc réduisons l'allocation de mémoire par défaut à 1 Go par processus.</p>
 <p>Ajoutez ce qui suit à votre fichier <code>nextflow.config</code>, avant la section des paramètres du pipeline :</p>
@@ -6124,7 +6120,7 @@ Il y a de la <a href="https://www.nextflow.io/docs/latest/reports.html">document
 <span class="normal"><a href="#__codelineno-56-7">7</a></span>
 <span class="normal"><a href="#__codelineno-56-8">8</a></span>
 <span class="normal"><a href="#__codelineno-56-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-4" name="__codelineno-56-4"></a><span class="cm">/*</span>
-<a id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="cm">* Process settings</span>
+<a id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="cm">* Paramètres de processus</span>
 <a id="__codelineno-56-6" name="__codelineno-56-6"></a><span class="cm">*/</span>
 <a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span>
@@ -6146,7 +6142,7 @@ Il y a de la <a href="https://www.nextflow.io/docs/latest/reports.html">document
 <span class="normal"><a href="#__codelineno-57-11">11</a></span>
 <span class="normal"><a href="#__codelineno-57-12">12</a></span>
 <span class="normal"><a href="#__codelineno-57-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-57-4" name="__codelineno-57-4"></a><span class="cm">/*</span>
-<a id="__codelineno-57-5" name="__codelineno-57-5"></a><span class="cm">* Process settings</span>
+<a id="__codelineno-57-5" name="__codelineno-57-5"></a><span class="cm">* Paramètres de processus</span>
 <a id="__codelineno-57-6" name="__codelineno-57-6"></a><span class="cm">*/</span>
 <a id="__codelineno-57-7" name="__codelineno-57-7"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-57-8" name="__codelineno-57-8"></a><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span>
@@ -6164,7 +6160,7 @@ Il y a de la <a href="https://www.nextflow.io/docs/latest/reports.html">document
 <span class="normal"><a href="#__codelineno-58-7">7</a></span>
 <span class="normal"><a href="#__codelineno-58-8">8</a></span>
 <span class="normal"><a href="#__codelineno-58-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-4" name="__codelineno-58-4"></a><span class="cm">/*</span>
-<a id="__codelineno-58-5" name="__codelineno-58-5"></a><span class="cm">* Process settings</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5"></a><span class="cm">* Paramètres de processus</span>
 <a id="__codelineno-58-6" name="__codelineno-58-6"></a><span class="cm">*/</span>
 <a id="__codelineno-58-7" name="__codelineno-58-7"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-58-8" name="__codelineno-58-8"></a><span class="w">    </span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">.</span><span class="na">GB</span>
@@ -6188,7 +6184,7 @@ C'est parce que Nextflow s'assure que nous ne demandons pas plus de CPU qu'il n'
 <div class="admonition tip">
 <p class="admonition-title">Astuce</p>
 <p>Ce n'est qu'un petit aperçu de ce que vous pouvez faire pour optimiser votre utilisation des ressources.
-Nextflow lui-même a une <a href="https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources">logique de réessai dynamique</a> vraiment chouette intégrée pour réessayer les jobs qui échouent en raison de limitations de ressources.
+Nextflow lui-même a une <a href="https://nextflow.io/docs/latest/process.html#dynamic-task-resources">logique de réessai dynamique</a> vraiment chouette intégrée pour réessayer les jobs qui échouent en raison de limitations de ressources.
 De plus, la Seqera Platform offre des outils pilotés par l'IA pour optimiser automatiquement vos allocations de ressources également.</p>
 </div>
 <h3 id="55-ajouter-des-limites-de-ressources">5.5. Ajouter des limites de ressources<a class="headerlink" href="#55-ajouter-des-limites-de-ressources" title="Permanent link">&para;</a></h3>
@@ -6219,7 +6215,7 @@ Cependant, si vous essayiez d'exécuter le workflow avec des allocations de ress
 <h2 id="6-utiliser-des-profils-pour-basculer-entre-des-configurations-predefinies">6. Utiliser des profils pour basculer entre des configurations prédéfinies<a class="headerlink" href="#6-utiliser-des-profils-pour-basculer-entre-des-configurations-predefinies" title="Permanent link">&para;</a></h2>
 <p>Nous vous avons montré plusieurs façons de personnaliser la configuration de votre pipeline selon le projet sur lequel vous travaillez ou l'environnement de calcul que vous utilisez.</p>
 <p>Vous pourriez vouloir basculer entre des paramètres alternatifs selon l'infrastructure de calcul que vous utilisez. Par exemple, vous pourriez vouloir développer et exécuter des tests à petite échelle localement sur votre ordinateur portable, puis exécuter des charges de travail à grande échelle sur HPC ou cloud.</p>
-<p>Nextflow vous permet de configurer n'importe quel nombre de profils qui décrivent différentes configurations, que vous pouvez ensuite sélectionner à l'exécution en utilisant un argument de ligne de commande, plutôt que d'avoir à modifier le fichier de configuration lui-même.</p>
+<p>Nextflow vous permet de configurer n'importe quel nombre de <a href="https://nextflow.io/docs/latest/config.html#config-profiles">profils</a> qui décrivent différentes configurations, que vous pouvez ensuite sélectionner à l'exécution en utilisant un argument de ligne de commande, plutôt que d'avoir à modifier le fichier de configuration lui-même.</p>
 <h3 id="61-creer-des-profils-pour-basculer-entre-le-developpement-local-et-lexecution-sur-hpc">6.1. Créer des profils pour basculer entre le développement local et l'exécution sur HPC<a class="headerlink" href="#61-creer-des-profils-pour-basculer-entre-le-developpement-local-et-lexecution-sur-hpc" title="Permanent link">&para;</a></h3>
 <p>Configurons deux profils alternatifs ; un pour exécuter de petites charges sur un ordinateur ordinaire, où nous utiliserons des conteneurs Docker, et un pour l'exécution sur un HPC universitaire avec un ordonnanceur Slurm, où nous utiliserons des packages Conda.</p>
 <h4 id="611-configurer-les-profils">6.1.1. Configurer les profils<a class="headerlink" href="#611-configurer-les-profils" title="Permanent link">&para;</a></h4>
@@ -6242,7 +6238,7 @@ Cependant, si vous essayiez d'exécuter le workflow avec des allocations de ress
 <span class="normal"><a href="#__codelineno-61-39">39</a></span>
 <span class="normal"><a href="#__codelineno-61-40">40</a></span>
 <span class="normal"><a href="#__codelineno-61-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-61-24" name="__codelineno-61-24"></a><span class="cm">/*</span>
-<a id="__codelineno-61-25" name="__codelineno-61-25"></a><span class="cm">* Profiles</span>
+<a id="__codelineno-61-25" name="__codelineno-61-25"></a><span class="cm">* Profils</span>
 <a id="__codelineno-61-26" name="__codelineno-61-26"></a><span class="cm">*/</span>
 <a id="__codelineno-61-27" name="__codelineno-61-27"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-61-28" name="__codelineno-61-28"></a><span class="w">    </span><span class="n">my_laptop</span><span class="w"> </span><span class="o">{</span>
@@ -6288,7 +6284,7 @@ Cependant, si vous essayiez d'exécuter le workflow avec des allocations de ress
 Nous pouvons également créer des profils supplémentaires s'il y a d'autres éléments de configuration que nous voulons regrouper.</p>
 <h3 id="62-creer-un-profil-de-parametres-de-test">6.2. Créer un profil de paramètres de test<a class="headerlink" href="#62-creer-un-profil-de-parametres-de-test" title="Permanent link">&para;</a></h3>
 <p>Les profils ne sont pas seulement pour la configuration de l'infrastructure.
-Nous pouvons également les utiliser pour définir des valeurs par défaut pour les paramètres du workflow, pour faciliter à d'autres d'essayer le workflow sans avoir à rassembler eux-mêmes des valeurs d'entrée appropriées.
+Nous pouvons également les utiliser pour définir des valeurs par défaut pour les paramètres du workflow, pour faciliter à d'autres d'essayer le workflow sans avoir à rassembler eux·elles-mêmes des valeurs d'entrée appropriées.
 Vous pouvez considérer cela comme une alternative à l'utilisation d'un fichier de paramètres.</p>
 <h4 id="621-configurer-le-profil">6.2.1. Configurer le profil<a class="headerlink" href="#621-configurer-le-profil" title="Permanent link">&para;</a></h4>
 <p>La syntaxe pour exprimer les valeurs par défaut dans ce contexte ressemble à ceci, pour un profil que nous nommons <code>test</code> :</p>
@@ -6322,7 +6318,7 @@ Vous pouvez considérer cela comme une alternative à l'utilisation d'un fichier
 <span class="normal"><a href="#__codelineno-65-44">44</a></span>
 <span class="normal"><a href="#__codelineno-65-45">45</a></span>
 <span class="normal"><a href="#__codelineno-65-46">46</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-65-24" name="__codelineno-65-24"></a><span class="cm">/*</span>
-<a id="__codelineno-65-25" name="__codelineno-65-25"></a><span class="cm">* Profiles</span>
+<a id="__codelineno-65-25" name="__codelineno-65-25"></a><span class="cm">* Profils</span>
 <a id="__codelineno-65-26" name="__codelineno-65-26"></a><span class="cm">*/</span>
 <a id="__codelineno-65-27" name="__codelineno-65-27"></a><span class="n">profiles</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-65-28" name="__codelineno-65-28"></a><span class="w">    </span><span class="n">my_laptop</span><span class="w"> </span><span class="o">{</span>
@@ -6349,7 +6345,7 @@ Vous pouvez considérer cela comme une alternative à l'utilisation d'un fichier
 <h4 id="622-executer-le-workflow-localement-avec-le-profil-de-test">6.2.2. Exécuter le workflow localement avec le profil de test<a class="headerlink" href="#622-executer-le-workflow-localement-avec-le-profil-de-test" title="Permanent link">&para;</a></h4>
 <p>De manière pratique, les profils ne sont pas mutuellement exclusifs, donc nous pouvons spécifier plusieurs profils dans notre ligne de commande en utilisant la syntaxe suivante <code>-profile &lt;profile1&gt;,&lt;profile2&gt;</code> (pour n'importe quel nombre de profils).</p>
 <p>Si vous combinez des profils qui définissent des valeurs pour les mêmes éléments de configuration et sont décrits dans le même fichier de configuration, Nextflow résoudra le conflit en utilisant la valeur qu'il a lue en dernier (<em>c.-à-d.</em> ce qui vient plus tard dans le fichier).
-Si les paramètres conflictuels sont définis dans différentes sources de configuration, l'<a href="https://www.nextflow.io/docs/latest/config.html">ordre de priorité</a> par défaut s'applique.</p>
+Si les paramètres conflictuels sont définis dans différentes sources de configuration, l'<a href="https://nextflow.io/docs/latest/config.html">ordre de priorité</a> par défaut s'applique.</p>
 <p>Essayons d'ajouter le profil de test à notre commande précédente :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-config.nf<span class="w"> </span>-profile<span class="w"> </span>my_laptop,test
 </code></pre></div>
@@ -6384,7 +6380,7 @@ Si les paramètres conflictuels sont définis dans différentes sources de confi
 <a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">            0/0/0/0/|        \///      |     \     \       | |</span>
 <a id="__codelineno-68-14" name="__codelineno-68-14" href="#__codelineno-68-14"></a><span class="go">          0/0/0/0/0/_|_ /   (  //       |      \     _\     |  /</span>
 <a id="__codelineno-68-15" name="__codelineno-68-15" href="#__codelineno-68-15"></a><span class="go">      0/0/0/0/0/0/`/,_ _ _/  ) ; -.    |    _ _\.-~       /   /</span>
-<a id="__codelineno-68-16" name="__codelineno-68-16" href="#__codelineno-68-16"></a><span class="go">                      ,-}        _      *-.|.-~-.           .~    ~</span>
+<a id="__codelineno-68-16" name="__codelineno-68-16" href="#__codelineno-68-16"></a><span class="go">                  ,-}        _      *-.|.-~-.           .~    ~</span>
 <a id="__codelineno-68-17" name="__codelineno-68-17" href="#__codelineno-68-17"></a><span class="go">  \     \__/        `/\      /                 ~-. _ .-~      /</span>
 <a id="__codelineno-68-18" name="__codelineno-68-18" href="#__codelineno-68-18"></a><span class="go">  \____(oo)           *.   }            {                   /</span>
 <a id="__codelineno-68-19" name="__codelineno-68-19" href="#__codelineno-68-19"></a><span class="go">  (    (--)          .----~-.\        \-`                 .~</span>
@@ -6397,12 +6393,12 @@ Si les paramètres conflictuels sont définis dans différentes sources de confi
 <p class="admonition-title">Astuce</p>
 <p>Nous pouvons pointer vers des URLs pour des fichiers plus volumineux qui sont stockés à l'extérieur.
 Nextflow les téléchargera automatiquement tant qu'il y a une connexion ouverte.</p>
-<p>Pour plus de détails, voir la Side Quest <a href="../../side_quests/working_with_files/">Working with Files</a></p>
+<p>Pour plus de détails, voir la Quête secondaire <a href="../../side_quests/working_with_files/">Working with Files</a></p>
 </div>
 <h3 id="63-utiliser-nextflow-config-pour-voir-la-configuration-resolue">6.3. Utiliser <code>nextflow config</code> pour voir la configuration résolue<a class="headerlink" href="#63-utiliser-nextflow-config-pour-voir-la-configuration-resolue" title="Permanent link">&para;</a></h3>
 <p>Comme noté ci-dessus, parfois le même paramètre peut être défini à des valeurs différentes dans des profils que vous voulez combiner.
 Et plus généralement, il existe de nombreux endroits où des éléments de configuration peuvent être stockés, et parfois les mêmes propriétés peuvent être définies à des valeurs différentes à différents endroits.</p>
-<p>Nextflow applique un <a href="https://www.nextflow.io/docs/latest/config.html">ordre de priorité</a> défini pour résoudre les conflits, mais cela peut être difficile à déterminer par vous-même.
+<p>Nextflow applique un <a href="https://nextflow.io/docs/latest/config.html">ordre de priorité</a> défini pour résoudre les conflits, mais cela peut être difficile à déterminer par vous-même.
 Et même si rien n'est en conflit, il peut être fastidieux de chercher tous les endroits possibles où les choses pourraient être configurées.</p>
 <p>Heureusement, Nextflow inclut un outil utilitaire pratique appelé <code>config</code> qui peut automatiser tout ce processus pour vous.</p>
 <p>L'outil <code>config</code> explorera tout le contenu de votre répertoire de travail actuel, aspirera tous les fichiers de configuration, et produira la configuration entièrement résolue que Nextflow utiliserait pour exécuter le workflow.
@@ -6472,7 +6468,7 @@ Cela vous permet de savoir quels paramètres seront utilisés sans avoir à lanc
 <p>Vous savez comment utiliser des profils pour sélectionner une configuration prédéfinie à l'exécution avec un minimum de tracas.
 Plus généralement, vous savez comment configurer les exécutions de votre workflow pour s'adapter à différentes plateformes de calcul et améliorer la reproductibilité de vos analyses.</p>
 <h3 id="et-ensuite_5">Et ensuite ?<a class="headerlink" href="#et-ensuite_5" title="Permanent link">&para;</a></h3>
-<p>Célébrez et donnez-vous une grande tape dans le dos ! Vous avez terminé votre tout premier cours de développeur Nextflow.</p>
+<p>Célébrez et donnez-vous une grande tape dans le dos ! Vous avez terminé votre tout premier cours de développeur·se Nextflow.</p>
 <p>Rendez-vous au <a href="../next_steps/">résumé final du cours</a> pour revoir ce que vous avez appris et découvrir ce qui vient ensuite.</p>
 <hr />
 <h2 id="quiz">Quiz<a class="headerlink" href="#quiz" title="Permanent link">&para;</a></h2>

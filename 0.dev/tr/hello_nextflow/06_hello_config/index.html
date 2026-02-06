@@ -5009,7 +5009,7 @@
 
 <p>Bu bölüm, <em>iş akışı kodunun tek bir satırını değiştirmeden</em> davranışını özelleştirebilmeniz, farklı ortamlara uyarlayabilmeniz ve kaynak kullanımını optimize edebilmeniz için Nextflow pipeline'ınızın yapılandırmasını nasıl kuracağınızı ve yöneteceğinizi keşfedecektir.</p>
 <p>Bunu yapmanın birden fazla yolu vardır; bunlar birlikte kullanılabilir ve <a href="https://www.nextflow.io/docs/latest/config.html">burada</a> açıklanan öncelik sırasına göre yorumlanır.</p>
-<p>Bu kursun bu bölümünde, Bölüm 5: Merhaba Konteynerler'de zaten karşılaştığınız en basit ve en yaygın yapılandırma dosyası mekanizması olan <code>nextflow.config</code> dosyasını göstereceğiz.</p>
+<p>Bu kursun bu bölümünde, Bölüm 5: Hello Containers'da zaten karşılaştığınız en basit ve en yaygın yapılandırma dosyası mekanizması olan <a href="https://www.nextflow.io/docs/latest/config.html"><code>nextflow.config</code></a> dosyasını göstereceğiz.</p>
 <p>Süreç yönergeleri, yürütücüler, profiller ve parametre dosyaları gibi Nextflow yapılandırmasının temel bileşenlerini gözden geçireceğiz.
 Bu yapılandırma seçeneklerini etkin bir şekilde kullanmayı öğrenerek, pipeline'larınızın esnekliğini, ölçeklenebilirliğini ve performansını artırabilirsiniz.</p>
 <details class="info">
@@ -5351,18 +5351,14 @@ Yolu buna göre uyarladığınızdan emin olun!</p>
 <h3 id="13-bir-parametre-dosyas-kullann">1.3. Bir parametre dosyası kullanın<a class="headerlink" href="#13-bir-parametre-dosyas-kullann" title="Permanent link">&para;</a></h3>
 <p>Alt dizin yaklaşımı deney yapmak için harika çalışır, ancak biraz kurulum gerektirir ve yolları buna göre uyarlamanızı gerektirir.
 Pipeline'ınızı belirli bir değer kümesiyle çalıştırmak veya başkasının minimum çabayla yapmasını sağlamak istediğinizde daha basit bir yaklaşım vardır.</p>
-<p>Nextflow, parametreleri YAML veya JSON formatında bir parametre dosyası aracılığıyla belirtmemize olanak tanır; bu, örneğin alternatif varsayılan değer kümelerini ve çalıştırmaya özgü parametre değerlerini yönetmeyi ve dağıtmayı çok kullanışlı hale getirir.</p>
+<p>Nextflow, parametreleri YAML veya JSON formatında bir <a href="https://nextflow.io/docs/latest/config.html#params-file">parametre dosyası</a> aracılığıyla belirtmemize olanak tanır; bu, örneğin alternatif varsayılan değer kümelerini ve çalıştırmaya özgü parametre değerlerini yönetmeyi ve dağıtmayı çok kullanışlı hale getirir.</p>
 <h4 id="131-ornek-parametre-dosyasn-inceleyin">1.3.1. Örnek parametre dosyasını inceleyin<a class="headerlink" href="#131-ornek-parametre-dosyasn-inceleyin" title="Permanent link">&para;</a></h4>
 <p>Bunu göstermek için, mevcut dizinde <code>test-params.yaml</code> adında bir örnek parametre dosyası sağlıyoruz:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test-params.yaml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
-<span class="normal"><a href="#__codelineno-20-3">3</a></span>
-<span class="normal"><a href="#__codelineno-20-4">4</a></span>
-<span class="normal"><a href="#__codelineno-20-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="p p-Indicator">{</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">  input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;greetings.csv&quot;</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">  batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="nt">  character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="p p-Indicator">}</span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="nt">input</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;data/greetings.csv&quot;</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="nt">batch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;yaml&quot;</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="nt">character</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stegosaurus&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu parametre dosyası, belirtmek istediğimiz girdilerin her biri için bir anahtar-değer çifti içerir.
 Sözdizimini yapılandırma dosyasıyla karşılaştırırsanız, eşit işaretleri (<code>=</code>) yerine iki nokta üst üste (<code>:</code>) kullanıldığına dikkat edin.
@@ -5936,7 +5932,7 @@ Ardından Bölüm 5'te, Docker konteynerlerini ve Docker konteynerlerinin kullan
 <h3 id="31-yaplandrma-dosyasnda-docker-devre-ds-brakn-ve-conday-etkinlestirin">3.1. Yapılandırma dosyasında Docker'ı devre dışı bırakın ve Conda'yı etkinleştirin<a class="headerlink" href="#31-yaplandrma-dosyasnda-docker-devre-ds-brakn-ve-conday-etkinlestirin" title="Permanent link">&para;</a></h3>
 <p>Bir HPC kümesinde çalıştığımızı ve yöneticinin güvenlik nedeniyle Docker kullanımına izin vermediğini varsayalım.
 Neyse ki bizim için, Nextflow, Singularity (HPC'de daha yaygın olarak kullanılır) gibi birden fazla başka konteyner teknolojisini ve Conda gibi yazılım paket yöneticilerini destekler.</p>
-<p>Yapılandırma dosyamızı Docker yerine Conda kullanacak şekilde değiştirebiliriz.
+<p>Yapılandırma dosyamızı Docker yerine <a href="https://nextflow.io/docs/latest/conda.html">Conda</a> kullanacak şekilde değiştirebiliriz.
 Bunu yapmak için, <code>docker.enabled</code> değerini <code>false</code> olarak değiştirelim ve Conda kullanımını etkinleştiren bir yönerge ekleyelim:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Sonra</label><label for="__tabbed_8_2">Önce</label></div>
 <div class="tabbed-content">
@@ -6045,7 +6041,7 @@ Varsayılan olarak <code>local</code> olarak ayarlanmıştır, bu nedenle aşağ
 <a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;local&#39;</span>
 <a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="o">}</span>
 </code></pre></div>
-<p>Yürütücüyü farklı bir arka ucu hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklandığı gibi benzer sözdizimi kullanarak istediğiniz yürütücüyü belirtmeniz yeterlidir (tüm seçenekler için <a href="https://www.nextflow.io/docs/latest/executor.html">dokümantasyona</a> bakın).</p>
+<p>Yürütücüyü farklı bir arka ucu hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklandığı gibi benzer sözdizimi kullanarak istediğiniz yürütücüyü belirtmeniz yeterlidir (tüm seçenekler için <a href="https://www.nextflow.io/docs/latest/executor.html">yürütücü dokümantasyonuna</a> bakın).</p>
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span><span class="n">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;slurm&#39;</span>
 <a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="o">}</span>
@@ -6056,7 +6052,7 @@ Varsayılan olarak <code>local</code> olarak ayarlanmıştır, bu nedenle aşağ
 </div>
 <h3 id="42-yurutme-parametreleri-icin-arka-uca-ozgu-sozdizimi-ile-basa-ckma">4.2. Yürütme parametreleri için arka uca özgü sözdizimi ile başa çıkma<a class="headerlink" href="#42-yurutme-parametreleri-icin-arka-uca-ozgu-sozdizimi-ile-basa-ckma" title="Permanent link">&para;</a></h3>
 <p>Çoğu yüksek performanslı hesaplama platformu, kaynak tahsisi istekleri ve sınırlamaları (örn. CPU sayısı ve bellek) ve kullanılacak iş kuyruğunun adı gibi belirli parametreleri belirtmenize izin verir (ve bazen gerektirir).</p>
-<p>Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili zamanlayıcıya nasıl gönderilmesi gerektiğini belirlemek için farklı teknolojiler, sözdizimiler ve yapılandırmalar kullanır.</p>
+<p>Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili zamanlayıcıya nasıl gönderilmesi gerektiğini belirlemek için farklı teknolojiler, sözdizimler ve yapılandırmalar kullanır.</p>
 <details class="abstract">
 <summary>Örnekler</summary>
 <p>Örneğin, 8 CPU ve 4GB RAM gerektiren ve "my-science-work" kuyruğunda yürütülecek aynı iş, arka uca bağlı olarak aşağıdaki farklı şekillerde ifade edilmelidir.</p>
@@ -6082,7 +6078,7 @@ Varsayılan olarak <code>local</code> olarak ayarlanmıştır, bu nedenle aşağ
 </code></pre></div>
 </details>
 <p>Neyse ki, Nextflow tüm bunları basitleştirir.
-<code>cpus</code>, <code>memory</code> ve <code>queue</code> gibi ilgili özellikleri (diğer özellikler için dokümantasyona bakın) yalnızca bir kez belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar.
+<a href="https://nextflow.io/docs/latest/reference/process.html#cpus"><code>cpus</code></a>, <a href="https://nextflow.io/docs/latest/reference/process.html#memory"><code>memory</code></a> ve <a href="https://nextflow.io/docs/latest/reference/process.html#queue"><code>queue</code></a> gibi ilgili özellikleri (diğer özellikler için <a href="https://nextflow.io/docs/latest/reference/process.html#process-directives">süreç yönergelerine</a> bakın) yalnızca bir kez belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar.
 Ardından, çalışma zamanında, Nextflow bu ayarları kullanarak yürütücü ayarına dayalı olarak uygun arka uca özgü betikleri oluşturacaktır.</p>
 <p>Bu standartlaştırılmış sözdizimini bir sonraki bölümde ele alacağız.</p>
 <h3 id="ozet_3">Özet<a class="headerlink" href="#ozet_3" title="Permanent link">&para;</a></h3>
@@ -6113,8 +6109,8 @@ Nextflow bunları seçilen yürütücü için uygun talimatlara çevirecektir.</
 </code></pre></div>
 <p>Rapor, tarayıcınızda indirip açabileceğiniz bir html dosyasıdır. Eğitim ortamında görüntülemek için soldaki dosya gezgininde sağ tıklayıp <code>Show preview</code>'a da tıklayabilirsiniz.</p>
 <p>Raporu incelemek ve kaynakları ayarlama fırsatlarını belirleyip belirleyemeyeceğinizi görmek için birkaç dakika ayırın.
-Kullanım sonuçlarını tahsis edilenin yüzdesi olarak gösteren sekmelere tıkladığınızdan emin olun.
-Mevcut tüm özellikleri açıklayan bazı <a href="https://www.nextflow.io/docs/latest/reports.html">dokümantasyon</a> var.</p>
+Kullanım sonuçlarını tahsis edilenin yüzdesi olarak gösteren sekmelere tıkladığınızdan emin olun.</p>
+<p>Mevcut tüm özellikleri açıklayan <a href="https://nextflow.io/docs/latest/reports.html">Raporlar</a> dokümantasyonuna bakın.</p>
 <h3 id="52-tum-surecler-icin-kaynak-tahsisleri-ayarlayn">5.2. Tüm süreçler için kaynak tahsisleri ayarlayın<a class="headerlink" href="#52-tum-surecler-icin-kaynak-tahsisleri-ayarlayn" title="Permanent link">&para;</a></h3>
 <p>Profilleme, eğitim iş akışımızdaki süreçlerin çok hafif olduğunu gösteriyor, bu yüzden varsayılan bellek tahsisini süreç başına 1GB'a düşürelim.</p>
 <p><code>nextflow.config</code> dosyanıza, pipeline parametreleri bölümünden önce aşağıdakileri ekleyin:</p>
@@ -6188,7 +6184,7 @@ Bunun nedeni, Nextflow'un mevcut olandan daha fazla CPU talep etmememizi sağlam
 <div class="admonition tip">
 <p class="admonition-title">İpucu</p>
 <p>Bu, kaynak kullanımınızı optimize etmek için yapabileceklerinizin sadece küçük bir tadımıdır.
-Nextflow'un kendisi, kaynak sınırlamaları nedeniyle başarısız olan işleri yeniden denemek için gerçekten zarif <a href="https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources">dinamik yeniden deneme mantığı</a> yerleşik olarak içerir.
+Nextflow'un kendisi, kaynak sınırlamaları nedeniyle başarısız olan işleri yeniden denemek için gerçekten zarif <a href="https://nextflow.io/docs/latest/process.html#dynamic-task-resources">dinamik yeniden deneme mantığı</a> yerleşik olarak içerir.
 Ek olarak, Seqera Platform kaynak tahsislerinizi otomatik olarak optimize etmek için yapay zeka destekli araçlar da sunmaktadır.</p>
 </div>
 <h3 id="55-kaynak-snrlar-ekleyin">5.5. Kaynak sınırları ekleyin<a class="headerlink" href="#55-kaynak-snrlar-ekleyin" title="Permanent link">&para;</a></h3>
@@ -6219,7 +6215,7 @@ Ancak, bu sınırları aşan kaynak tahsisleriyle iş akışını çalıştırma
 <h2 id="6-onceden-ayarlanms-yaplandrmalar-arasnda-gecis-yapmak-icin-profilleri-kullann">6. Önceden ayarlanmış yapılandırmalar arasında geçiş yapmak için profilleri kullanın<a class="headerlink" href="#6-onceden-ayarlanms-yaplandrmalar-arasnda-gecis-yapmak-icin-profilleri-kullann" title="Permanent link">&para;</a></h2>
 <p>Size, üzerinde çalıştığınız projeye veya kullandığınız hesaplama ortamına bağlı olarak pipeline yapılandırmanızı özelleştirebileceğiniz birkaç yol gösterdik.</p>
 <p>Hangi hesaplama altyapısını kullandığınıza bağlı olarak alternatif ayarlar arasında geçiş yapmak isteyebilirsiniz. Örneğin, dizüstü bilgisayarınızda yerel olarak geliştirip küçük ölçekli testler yapmak, ardından tam ölçekli iş yüklerini HPC veya bulutta çalıştırmak isteyebilirsiniz.</p>
-<p>Nextflow, farklı yapılandırmaları tanımlayan herhangi bir sayıda profil ayarlamanıza olanak tanır; bunları yapılandırma dosyasını değiştirmek yerine bir komut satırı argümanı kullanarak çalışma zamanında seçebilirsiniz.</p>
+<p>Nextflow, farklı yapılandırmaları tanımlayan herhangi bir sayıda <a href="https://nextflow.io/docs/latest/config.html#config-profiles">profil</a> ayarlamanıza olanak tanır; bunları yapılandırma dosyasını değiştirmek yerine bir komut satırı argümanı kullanarak çalışma zamanında seçebilirsiniz.</p>
 <h3 id="61-yerel-gelistirme-ve-hpcde-yurutme-arasnda-gecis-yapmak-icin-profiller-olusturun">6.1. Yerel geliştirme ve HPC'de yürütme arasında geçiş yapmak için profiller oluşturun<a class="headerlink" href="#61-yerel-gelistirme-ve-hpcde-yurutme-arasnda-gecis-yapmak-icin-profiller-olusturun" title="Permanent link">&para;</a></h3>
 <p>İki alternatif profil kuralım; biri normal bir bilgisayarda küçük ölçekli yükler çalıştırmak için, burada Docker konteynerlerini kullanacağız, ve biri Slurm zamanlayıcısına sahip bir üniversite HPC'sinde çalıştırmak için, burada Conda paketlerini kullanacağız.</p>
 <h4 id="611-profilleri-kurun">6.1.1. Profilleri kurun<a class="headerlink" href="#611-profilleri-kurun" title="Permanent link">&para;</a></h4>
