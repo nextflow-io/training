@@ -16,6 +16,9 @@ on:
       language:
         description: "Language code (empty = all)"
         type: string
+      since:
+        description: "Compare since this commit (default: auto-detect from last translation PR)"
+        type: string
       dry_run:
         description: "Dry run (preview only)"
         type: boolean
@@ -41,9 +44,13 @@ jobs:
       - name: Detect work
         id: detect
         working-directory: _scripts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           uv run -q translate.py ci-detect \
             ${{ inputs.language && format('--language "{0}"', inputs.language) || '' }} \
+            ${{ inputs.since && format('--since "{0}"', inputs.since) || '' }} \
             >> $GITHUB_OUTPUT
 
   translate:

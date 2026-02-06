@@ -263,19 +263,124 @@ def get_file_commit_time(path: Path) -> int | None:
         return None
 
 
-def get_outdated_files(lang: str) -> list[TranslationFile]:
-    """Find translations older than their English source."""
+def file_changed_since(path: Path, since_commit: str) -> bool:
+    """Check if file has any commits after the given commit.
+
+    Args:
+        path: File path to check
+        since_commit: Commit SHA to compare against
+
+    Returns:
+        True if the file has commits newer than since_commit
+    """
+    try:
+        # git log since_commit..HEAD -- path
+        commits = list(
+            _get_repo().iter_commits(
+                rev=f"{since_commit}..HEAD", paths=str(path), max_count=1
+            )
+        )
+        return len(commits) > 0
+    except git.GitCommandError:
+        return False
+
+
+def get_translation_baseline(
+    github_token: str | None = None,
+    github_repository: str | None = None,
+) -> str:
+    """Get the commit SHA that the last translation was based on.
+
+    Finds the most recent merged translation PR and extracts the
+    trigger commit from its body.
+
+    Args:
+        github_token: GitHub token for API access (uses GITHUB_TOKEN env if not provided)
+        github_repository: Repository in owner/repo format (uses GITHUB_REPOSITORY env if not provided)
+
+    Returns:
+        The commit SHA that triggered the last translation
+
+    Raises:
+        ConfigError: If no translation PR found or commit cannot be extracted
+    """
+    from github import Github
+
+    token = github_token or os.environ.get("GITHUB_TOKEN")
+    repo_name = github_repository or os.environ.get("GITHUB_REPOSITORY")
+
+    if not token:
+        raise ConfigError(
+            "GITHUB_TOKEN not set. Required to find translation baseline. "
+            "Use --since to specify a commit manually."
+        )
+    if not repo_name:
+        raise ConfigError(
+            "GITHUB_REPOSITORY not set. Required to find translation baseline. "
+            "Use --since to specify a commit manually."
+        )
+
+    from github import Auth
+
+    gh = Github(auth=Auth.Token(token))
+    repo = gh.get_repo(repo_name)
+
+    # Find the most recent merged translation PR
+    # Search for PRs with "Update translations" in title, merged, sorted by updated desc
+    prs = repo.get_pulls(state="closed", sort="updated", direction="desc")
+
+    commit_pattern = re.compile(r"commit:?\s*([a-f0-9]{7,40})")
+
+    for pr in prs:
+        if not pr.merged:
+            continue
+        if "Update translations" not in pr.title:
+            continue
+
+        # Extract commit SHA from PR body
+        if pr.body:
+            match = commit_pattern.search(pr.body)
+            if match:
+                return match.group(1)
+
+        # If we found a translation PR but couldn't extract commit, keep looking
+        # (older PRs might have different format)
+
+    raise ConfigError(
+        "Could not find baseline commit from previous translation PRs. "
+        "Use --since to specify a commit manually."
+    )
+
+
+def get_outdated_files(lang: str, baseline: str | None = None) -> list[TranslationFile]:
+    """Find translations needing updates.
+
+    Args:
+        lang: Target language code
+        baseline: Commit SHA to compare against. If provided, finds files
+            that changed in English since this commit. If None, falls back
+            to timestamp comparison.
+
+    Returns:
+        List of TranslationFile objects needing updates
+    """
     outdated = []
     for en_path in iter_en_docs():
         lang_path = en_to_lang_path(en_path, lang)
         if not lang_path.exists():
             continue
 
-        en_time = get_file_commit_time(en_path)
-        lang_time = get_file_commit_time(lang_path)
+        if baseline:
+            # Check if English file changed since baseline
+            if file_changed_since(en_path, baseline):
+                outdated.append(TranslationFile(en_path, lang_path, lang))
+        else:
+            # Fallback: timestamp comparison
+            en_time = get_file_commit_time(en_path)
+            lang_time = get_file_commit_time(lang_path)
 
-        if en_time and lang_time and lang_time < en_time:
-            outdated.append(TranslationFile(en_path, lang_path, lang))
+            if en_time and lang_time and lang_time < en_time:
+                outdated.append(TranslationFile(en_path, lang_path, lang))
 
     return outdated
 
@@ -714,14 +819,34 @@ def translate(
 def sync(
     lang: str = typer.Argument(..., help="Language code"),
     include: str | None = typer.Option(None, "--include", "-i", help="Filter pattern"),
+    since: str | None = typer.Option(
+        None,
+        "--since",
+        help="Compare since this commit (default: auto-detect from last translation PR)",
+    ),
     dry_run: bool = typer.Option(False, "--dry-run", "-n", help="Preview only"),
 ):
     """Sync translations: update outdated, add missing, remove orphaned."""
     console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
+    # Determine baseline commit
+    baseline: str | None = None
+    if since:
+        baseline = since
+        console.print(f"[cyan]Using baseline commit (manual):[/cyan] {baseline}")
+    else:
+        try:
+            baseline = get_translation_baseline()
+            console.print(
+                f"[cyan]Using baseline commit (from last PR):[/cyan] {baseline}"
+            )
+        except ConfigError as e:
+            console.print(f"[yellow]Warning:[/yellow] {e}")
+            console.print("[yellow]Falling back to timestamp comparison[/yellow]")
+
     # Gather work
     orphaned = get_orphaned_files(lang)
-    outdated = get_outdated_files(lang)
+    outdated = get_outdated_files(lang, baseline=baseline)
     missing = get_missing_files(lang)
 
     if include:
@@ -780,7 +905,14 @@ def sync(
 
 
 @app.command("ci-detect")
-def ci_detect(language: str | None = typer.Option(None, "--language")):
+def ci_detect(
+    language: str | None = typer.Option(None, "--language"),
+    since: str | None = typer.Option(
+        None,
+        "--since",
+        help="Compare since this commit (default: auto-detect from last translation PR)",
+    ),
+):
     """Detect languages needing sync (GitHub Actions output)."""
     console = Console(
         stderr=True, force_terminal=True if os.getenv("GITHUB_ACTIONS") else None
@@ -794,11 +926,25 @@ def ci_detect(language: str | None = typer.Option(None, "--language")):
     else:
         langs = all_langs
 
+    # Determine baseline commit
+    if since:
+        baseline = since
+        console.print(f"[cyan]Using baseline commit (manual):[/cyan] {baseline}")
+    else:
+        try:
+            baseline = get_translation_baseline()
+            console.print(
+                f"[cyan]Using baseline commit (from last PR):[/cyan] {baseline}"
+            )
+        except ConfigError as e:
+            console.print(f"[red]Error:[/red] {e}")
+            raise typer.Exit(1)
+
     # Check which have work and collect details
     need_sync = []
     for lang in langs:
         missing = get_missing_files(lang)
-        outdated = get_outdated_files(lang)
+        outdated = get_outdated_files(lang, baseline=baseline)
         orphaned = get_orphaned_files(lang)
 
         if missing or outdated or orphaned:
@@ -885,7 +1031,12 @@ def ci_pr(
         title = "Update translations"
 
     # Build PR body
-    trigger_line = f"commit {commit_sha[:10]}" if commit_sha else "[manual]"
+    # Always include commit SHA so future runs can detect baseline
+    if not commit_sha:
+        raise ConfigError(
+            "GITHUB_SHA not set. Required to record translation baseline in PR body."
+        )
+    trigger_line = f"commit {commit_sha[:10]}"
     commit_quote = f"\n\n> {commit_message}" if commit_message else ""
 
     body = f"""Automated translation update, generated by workflow run {run_url}
