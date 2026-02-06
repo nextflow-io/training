@@ -124,15 +124,15 @@ Você encontrará o script `hello-world.nf` no seu diretório atual, que deve se
     }
     ```
 
-Um script de fluxo de trabalho Nextflow normalmente inclui uma ou mais definições de [**processo**](https://nextflow.io/docs/latest/process.html) e o [**fluxo de trabalho**](https://nextflow.io/docs/latest/workflow.html) em si, além de alguns blocos opcionais (não presentes aqui) que apresentaremos mais tarde.
+Um script de fluxo de trabalho Nextflow normalmente inclui uma ou mais definições de [**process**](https://nextflow.io/docs/latest/process.html) e o [**workflow**](https://nextflow.io/docs/latest/workflow.html) em si, além de alguns blocos opcionais (não presentes aqui) que apresentaremos mais tarde.
 
-Cada **processo** descreve quais operações a etapa correspondente no pipeline deve realizar, enquanto o **fluxo de trabalho** descreve a lógica de fluxo de dados que conecta as várias etapas.
+Cada **process** descreve quais operações a etapa correspondente no pipeline deve realizar, enquanto o **workflow** descreve a lógica de fluxo de dados que conecta as várias etapas.
 
-Vamos examinar primeiro o bloco **processo** e depois veremos o bloco **fluxo de trabalho**.
+Vamos examinar primeiro o bloco **process** e depois veremos o bloco **workflow**.
 
 #### 1.1.1. A definição de `process`
 
-O primeiro bloco de código descreve um **processo**.
+O primeiro bloco de código descreve um **process**.
 
 A definição do processo começa com a palavra-chave `process`, seguida pelo nome do processo e finalmente o corpo do processo delimitado por chaves.
 O corpo do processo deve conter um bloco script que especifica o comando a ser executado, que pode ser qualquer coisa que você seria capaz de executar em um terminal de linha de comando.
@@ -153,7 +153,7 @@ process sayHello {
 }
 ```
 
-Aqui temos um **processo** chamado `sayHello` que escreve sua **saída** em um arquivo chamado `output.txt`.
+Aqui temos um **process** chamado `sayHello` que escreve sua **saída** em um arquivo chamado `output.txt`.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_world.svg"
@@ -178,10 +178,10 @@ Em um pipeline do mundo real, um processo geralmente contém blocos adicionais c
 
 #### 1.1.2. A definição de `workflow`
 
-O segundo bloco de código descreve o **fluxo de trabalho** em si.
+O segundo bloco de código descreve o **workflow** em si.
 A definição de fluxo de trabalho começa com a palavra-chave `workflow`, seguida por um nome opcional, depois o corpo do fluxo de trabalho delimitado por chaves.
 
-Aqui temos um **fluxo de trabalho** que consiste em um bloco `main:` (que diz 'este é o corpo principal do fluxo de trabalho') contendo uma chamada ao processo `sayHello`.
+Aqui temos um **workflow** que consiste em um bloco `main:` (que diz 'este é o corpo principal do fluxo de trabalho') contendo uma chamada ao processo `sayHello`.
 
 ```groovy title="hello-world.nf" linenums="17"
 workflow {
@@ -192,7 +192,7 @@ workflow {
 }
 ```
 
-Esta é uma definição de **fluxo de trabalho** muito mínima.
+Esta é uma definição de **workflow** muito mínima.
 Em um pipeline do mundo real, o fluxo de trabalho geralmente contém múltiplas chamadas a **processos** conectados por **canais**, e os processos esperam uma ou mais **entradas** variáveis.
 
 Você aprenderá como adicionar entradas variáveis mais tarde neste módulo de treinamento; e aprenderá como adicionar mais processos e conectá-los por canais na Parte 3 deste curso.
@@ -602,8 +602,8 @@ Você vê que o resultado da execução anterior ainda está lá.
 </figure>
 
 Você pode usar quantos níveis de aninhamento desejar.
-Também é possível usar o nome do processo ou outras variáveis para nomear os diretórios usados para organizar resultados, e é possível alterar o nome padrão do diretório de saída de nível superior (que é controlado pela variável especial `outputDir`).
-Cobriremos essas opções em treinamentos posteriores.
+Também é possível usar o nome do processo ou outras variáveis para nomear os diretórios usados para organizar resultados, e é possível alterar o nome padrão do diretório de saída de nível superior (que é controlado pela flag CLI `-o` ou variável de configuração `outputDir`).
+Cobriremos essas opções mais tarde no treinamento.
 
 ### 2.3. Defina o modo de publicação para copiar
 
@@ -1145,7 +1145,7 @@ Quais são os componentes mínimos necessários de um processo Nextflow?
 - [ ] Blocos de entrada, saída e script
 - [ ] Apenas um bloco script
 
-Saiba mais: [1.1.1. A definição de processo](#111-a-definição-de-process)
+Saiba mais: [1.1.1. A definição de `process`](#111-a-definição-de-process)
 </quiz>
 
 <quiz>
@@ -1155,7 +1155,7 @@ Qual é o propósito do bloco de saída em um processo?
 - [x] Declarar saídas esperadas do processo
 - [ ] Definir variáveis de ambiente
 
-Saiba mais: [1.1.1. A definição de processo](#111-a-definição-de-process)
+Saiba mais: [1.1.1. A definição de `process`](#111-a-definição-de-process)
 </quiz>
 
 <quiz>

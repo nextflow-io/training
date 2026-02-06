@@ -161,12 +161,12 @@ Tutaj mamy **process** o nazwie `sayHello`, który zapisuje swoje **wyjście** d
 
 To jest bardzo minimalna definicja procesu, która zawiera tylko definicję `output` i blok `script` do wykonania.
 
-Definicja `output` zawiera kwalifikator `path`, który mówi Nextflow, że powinien to traktować jako ścieżkę (obejmuje zarówno ścieżki katalogów, jak i pliki).
+Definicja `output` zawiera kwalifikator `path`, który mówi Nextflow'owi, że powinien to traktować jako ścieżkę (obejmuje zarówno ścieżki katalogów, jak i pliki).
 Innym popularnym kwalifikatorem jest `val`.
 
 Co ważne, definicja wyjścia nie _określa_, jakie wyjście zostanie utworzone.
 Po prostu _deklaruje_, jakie jest oczekiwane wyjście, aby Nextflow mógł go szukać po zakończeniu wykonywania.
-Jest to niezbędne do weryfikacji pomyślnego wykonania polecenia i przekazania wyniku do procesów downstream, jeśli jest to potrzebne. Wyjście utworzone, które nie pasuje do tego, co jest zadeklarowane w bloku output, nie zostanie przekazane do procesów downstream.
+Jest to niezbędne do weryfikacji pomyślnego wykonania polecenia i przekazania wyniku do procesów poniżej, jeśli jest to potrzebne. Wyjście utworzone, które nie pasuje do tego, co jest zadeklarowane w bloku output, nie zostanie przekazane do procesów poniżej.
 
 !!! warning "Ostrzeżenie"
 
@@ -602,7 +602,7 @@ Widzisz, że wynik z poprzedniego wykonania nadal tam jest.
 </figure>
 
 Możesz użyć tylu poziomów zagnieżdżenia, ile chcesz.
-Możliwe jest również użycie nazwy procesu lub innych zmiennych do nazywania katalogów używanych do organizowania wyników, a także możliwe jest zmienienie domyślnej nazwy katalogu wyjściowego najwyższego poziomu (która jest kontrolowana przez specjalną zmienną `outputDir`).
+Możliwe jest również użycie nazwy procesu lub innych zmiennych do nazywania katalogów używanych do organizowania wyników, a także możliwe jest zmienienie domyślnej nazwy katalogu wyjściowego najwyższego poziomu (która jest kontrolowana przez flagę CLI `-o` lub zmienną konfiguracyjną `outputDir`).
 Omówimy te opcje w późniejszych szkoleniach.
 
 ### 2.3. Ustaw tryb publikowania na kopiowanie
@@ -758,7 +758,7 @@ W bloku procesu wprowadź następującą zmianę kodu:
         path 'output.txt'
     ```
 
-Zmienna `greeting` jest poprzedzona `val`, aby powiedzieć Nextflow, że to wartość (nie ścieżka).
+Zmienna `greeting` jest poprzedzona `val`, aby powiedzieć Nextflow'owi, że to wartość (nie ścieżka).
 
 #### 3.1.2. Edytuj polecenie procesu, aby używać zmiennej wejściowej
 
@@ -784,7 +784,7 @@ W bloku procesu wprowadź następującą zmianę kodu:
     """
     ```
 
-Symbol `$` i nawiasy klamrowe (`{ }`) mówią Nextflow, że to jest nazwa zmiennej, która musi być zastąpiona faktyczną wartością wejściową (=interpolowana).
+Symbol `$` i nawiasy klamrowe (`{ }`) mówią Nextflow'owi, że to jest nazwa zmiennej, która musi być zastąpiona faktyczną wartością wejściową (=interpolowana).
 
 !!! tip "Wskazówka"
 
@@ -803,7 +803,7 @@ Jednak gdy wykonujemy prawdziwą pracę z naszym workflow'em, będziemy chcieli 
 
 Na szczęście Nextflow ma wbudowany system parametrów workflow'u o nazwie [`params`](https://nextflow.io/docs/latest/config.html#params), który ułatwia deklarowanie i używanie parametrów CLI.
 
-Ogólna składnia to zadeklarowanie `params.<nazwa_parametru>`, aby powiedzieć Nextflow, że ma oczekiwać parametru `--<nazwa_parametru>` w wierszu poleceń.
+Ogólna składnia to zadeklarowanie `params.<nazwa_parametru>`, aby powiedzieć Nextflow'owi, że ma oczekiwać parametru `--<nazwa_parametru>` w wierszu poleceń.
 
 Tutaj chcemy utworzyć parametr o nazwie `--input`, więc musimy zadeklarować `params.input` gdzieś w workflow'ie.
 Zasadniczo możemy to napisać gdziekolwiek; ale ponieważ zamierzamy przekazać go do wywołania procesu `sayHello()`, możemy wstawić go tam bezpośrednio, pisząc `sayHello(params.input)`.
@@ -824,7 +824,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
     sayHello()
     ```
 
-To mówi Nextflow, aby uruchomił proces `sayHello` na wartości dostarczonej przez parametr `--input`.
+To mówi Nextflow'owi, aby uruchomił proces `sayHello` na wartości dostarczonej przez parametr `--input`.
 
 W efekcie osiągnęliśmy kroki (2) i (3) opisane na początku sekcji za jednym razem.
 

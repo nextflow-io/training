@@ -602,8 +602,8 @@ Vedete che il risultato dell'esecuzione precedente è ancora lì.
 </figure>
 
 Potete usare quanti livelli di nidificazione desiderate.
-È anche possibile usare il nome del process o altre variabili per nominare le directory usate per organizzare i risultati, ed è possibile cambiare il nome predefinito della directory di output di primo livello (che è controllata dalla variabile speciale `outputDir`).
-Copriremo queste opzioni in formazioni successive.
+È anche possibile usare il nome del process o altre variabili per nominare le directory usate per organizzare i risultati, ed è possibile cambiare il nome predefinito della directory di output di primo livello (che è controllata dal flag CLI `-o` o dalla variabile di configurazione `outputDir`).
+Copriremo queste opzioni più avanti nella formazione.
 
 ### 2.3. Impostare la modalità di pubblicazione su copy
 
@@ -1145,7 +1145,7 @@ Quali sono i componenti minimi richiesti di un process Nextflow?
 - [ ] Blocchi input, output e script
 - [ ] Solo un blocco script
 
-Approfondisci: [1.1.1. La definizione del process](#111-la-definizione-del-process)
+Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
 </quiz>
 
 <quiz>
@@ -1155,7 +1155,7 @@ Qual è lo scopo del blocco output in un process?
 - [x] Dichiarare gli output attesi dal process
 - [ ] Definire variabili d'ambiente
 
-Approfondisci: [1.1.1. La definizione del process](#111-la-definizione-del-process)
+Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
 </quiz>
 
 <quiz>

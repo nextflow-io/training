@@ -64,11 +64,11 @@ Du kannst sie im Datei-Explorer öffnen oder von der Befehlszeile aus mit dem `c
 
 Das ist es, was wir mit unserem allerersten Nextflow-Workflow replizieren werden.
 
-### Erkenntnisse
+### Fazit
 
 Du weißt jetzt, wie man einen einfachen Befehl im Terminal ausführt, der etwas Text ausgibt, und optional, wie man ihn die Ausgabe in eine Datei schreiben lässt.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Finde heraus, was es braucht, um einen Nextflow-Workflow auszuführen, der dasselbe Ergebnis erzielt.
 
@@ -130,7 +130,42 @@ Hello World!
 
 Das ist großartig, unser Workflow hat getan, was er sollte!
 
-Beachte jedoch, dass das 'veröffentlichte' Ergebnis eine Kopie (oder in einigen Fällen ein symbolischer Link) der tatsächlichen Ausgabe ist, die Nextflow produziert hat, als es den Workflow ausführte.
+### 2.3. Die Ergebnisse in ein anderes Verzeichnis speichern
+
+Standardmäßig speichert Nextflow Pipeline-Ausgaben in einem Verzeichnis namens `results` in deinem aktuellen Pfad.
+Um zu ändern, wo deine Dateien veröffentlicht werden, verwende das `-output-dir` CLI-Flag (oder kurz `-o`)
+
+!!! danger
+
+    Beachte, dass `--input` zwei Bindestriche hat und `-output-dir` einen!
+    Das liegt daran, dass `--input` ein Pipeline-_Parameter_ ist und `-output-dir` ein Nextflow-CLI-Flag auf Kernebene.
+    Mehr dazu später.
+
+```bash
+nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
+```
+
+??? success "Befehlsausgabe"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+
+    executor >  local (1)
+    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    ```
+
+Du solltest sehen, dass deine Ausgaben jetzt in ein Verzeichnis namens `hello_results` anstelle von `results` veröffentlicht werden:
+
+```console title="hello_results/"
+hello_results
+└── 1-hello
+    └── output.txt
+```
+
+Die Dateien in diesem Verzeichnis sind genauso wie zuvor, nur das oberste Verzeichnis ist unterschiedlich.
+Beachte jedoch, dass in beiden Fällen das 'veröffentlichte' Ergebnis eine Kopie (oder in einigen Fällen ein symbolischer Link) der tatsächlichen Ausgabe ist, die Nextflow produziert hat, als es den Workflow ausführte.
 
 Also werden wir jetzt unter die Haube schauen, um zu sehen, wo Nextflow die Arbeit tatsächlich ausgeführt hat.
 
@@ -139,7 +174,7 @@ Also werden wir jetzt unter die Haube schauen, um zu sehen, wo Nextflow die Arbe
     Nicht alle Workflows werden so eingerichtet sein, dass sie Ausgaben in ein results-Verzeichnis veröffentlichen, und/oder die Verzeichnisnamen und -struktur können unterschiedlich sein.
     Etwas später in diesem Abschnitt zeigen wir dir, wie du herausfindest, wo dieses Verhalten festgelegt ist.
 
-### 2.3. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden
+### 2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden
 
 Wenn du einen Workflow ausführst, erstellt Nextflow ein eigenes 'Aufgabenverzeichnis' für jeden einzelnen Aufruf jedes Prozesses im Workflow (=jeden Schritt in der Pipeline).
 Für jeden wird es die notwendigen Eingaben bereitstellen, die relevanten Anweisungen ausführen und Ausgaben und Protokolldateien in dieses eine Verzeichnis schreiben, das automatisch mit einem Hash benannt wird, um es einzigartig zu machen.
@@ -151,19 +186,19 @@ Das mag verwirrend klingen, also schauen wir uns an, wie das in der Praxis aussi
 Wenn wir auf die Konsolenausgabe für den zuvor ausgeführten Workflow zurückgehen, hatten wir diese Zeile:
 
 ```console
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[a3/1e1535] sayHello [100%] 1 of 1 ✔
 ```
 
-Siehst du, wie die Zeile mit `[a3/7be2fa]` beginnt?
+Siehst du, wie die Zeile mit `[a3/1e1535]` beginnt?
 Das ist eine abgekürzte Form des Aufgabenverzeichnispfads für diesen einen Prozessaufruf und sagt dir, wo du die Ausgabe des `sayHello`-Prozessaufrufs innerhalb des `work/`-Verzeichnispfads findest.
 
-Du kannst den vollständigen Pfad finden, indem du folgenden Befehl eingibst (ersetze `a3/7be2fa` durch das, was du in deinem eigenen Terminal siehst) und die Tab-Taste drückst, um den Pfad automatisch zu vervollständigen, oder ein Sternchen hinzufügst:
+Du kannst den vollständigen Pfad finden, indem du folgenden Befehl eingibst (ersetze `a3/1e1535` durch das, was du in deinem eigenen Terminal siehst) und die Tab-Taste drückst, um den Pfad automatisch zu vervollständigen, oder ein Sternchen hinzufügst:
 
 ```bash
-ls work/a3/7be2fa*
+ls work/a3/1e1535*
 ```
 
-Dies sollte den vollständigen Verzeichnispfad ergeben: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+Dies sollte den vollständigen Verzeichnispfad ergeben: `work/a3/1e153543b0a7f9d2c4735ddb4ab231`
 
 Schauen wir uns an, was dort drin ist.
 
@@ -171,8 +206,18 @@ Schauen wir uns an, was dort drin ist.
 
     ```console
     work
-    └── a3
-        └── 7be2fad5e71e5f49998f795677fd68
+    ├── a3
+    │   └── 1e153543b0a7f9d2c4735ddb4ab231
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    └── a4
+        └── aa3694b8808bdcc1135ef4a1187a4d
             ├── .command.begin
             ├── .command.err
             ├── .command.log
@@ -194,10 +239,14 @@ Schauen wir uns an, was dort drin ist.
     tree -a work
     ```
 
+Es gibt zwei Verzeichnissätze in `work/`, von den zwei verschiedenen Pipeline-Ausführungen, die wir gemacht haben.
+Jede Aufgabenausführung bekommt ihr eigenes, isoliertes Verzeichnis zum Arbeiten.
+In diesem Fall hat die Pipeline beide Male dasselbe getan, daher sind die Inhalte jedes Aufgabenverzeichnisses identisch.
+
 Du solltest sofort die `output.txt`-Datei erkennen, die tatsächlich die ursprüngliche Ausgabe des `sayHello`-Prozesses ist, die in das `results`-Verzeichnis veröffentlicht wurde.
 Wenn du sie öffnest, wirst du den `Hello World!`-Gruß wieder finden.
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt"
+```console title="work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt"
 Hello World!
 ```
 
@@ -215,7 +264,7 @@ Das sind die Hilfs- und Protokolldateien, die Nextflow als Teil der Aufgabenausf
 
 Die `.command.sh`-Datei ist besonders nützlich, weil sie dir den Hauptbefehl zeigt, den Nextflow ausgeführt hat, ohne die gesamte Buchführung und Aufgaben-/Umgebungseinrichtung.
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/command.sh"
+```console title="work/a3/1e153543b0a7f9d2c4735ddb4ab231/.command.sh"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 
@@ -225,16 +274,16 @@ Das bestätigt also, dass der Workflow denselben Befehl zusammengestellt hat, de
 
 Wenn etwas schief geht und du Fehler beheben musst, kann es nützlich sein, das `command.sh`-Script anzusehen, um genau zu überprüfen, welchen Befehl Nextflow basierend auf den Workflow-Anweisungen, Variableninterpolation usw. zusammengestellt hat.
 
-### 2.4. Den Workflow mit verschiedenen Grüßen erneut ausführen
+### 2.5. Den Workflow mit verschiedenen Grüßen erneut ausführen
 
 Versuche, den Workflow einige Male mit verschiedenen Werten für das `--input`-Argument erneut auszuführen, und schaue dann die Aufgabenverzeichnisse an.
 
 ??? abstract "Verzeichnisinhalt"
 
     ```console
-    work
-    ├── 0f
-    │   └── 52b7e07b0e274a80843fca48ed21b8
+    work/
+    ├── 09
+    │   └── 5ea8665939daf6f04724286c9b3c8a
     │       ├── .command.begin
     │       ├── .command.err
     │       ├── .command.log
@@ -243,14 +292,46 @@ Versuche, den Workflow einige Male mit verschiedenen Werten für das `--input`-A
     │       ├── .command.sh
     │       ├── .exitcode
     │       └── output.txt
-    ├── 67
-    │   ├── 134e6317f90726c6c17ad53234a32b
-    │   │   ├── ...
-    │   │   └── output.txt
-    │   └── e029f2e75305874a9ab263d21ebc2c
-    │       ├── ...
+    ├── 92
+    │   └── ceb95e05d87621c92a399da9bd2067
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
     │       └── output.txt
-    ...
+    ├── 93
+    │   └── 6708dbc20c7efdc6769cbe477061ec
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    ├── a3
+    │   └── 1e153543b0a7f9d2c4735ddb4ab231
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    └── a4
+        └── aa3694b8808bdcc1135ef4a1187a4d
+            ├── .command.begin
+            ├── .command.err
+            ├── .command.log
+            ├── .command.out
+            ├── .command.run
+            ├── .command.sh
+            ├── .exitcode
+            └── output.txt
     ```
 
 Du siehst, dass für jeden Lauf ein neues Unterverzeichnis mit einem vollständigen Satz von Ausgabe- und Protokolldateien erstellt wurde.
@@ -267,11 +348,11 @@ Im Gegensatz dazu, wenn du das `results`-Verzeichnis anschaust, gibt es immer no
 
 Das zeigt dir, dass die veröffentlichten Ergebnisse durch nachfolgende Ausführungen überschrieben werden, während die Aufgabenverzeichnisse unter `work/` erhalten bleiben.
 
-### Erkenntnisse
+### Fazit
 
 Du weißt, wie man ein einfaches Nextflow-Script ausführt, seine Ausführung überwacht und seine Ausgaben findet.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man ein grundlegendes Nextflow-Script liest und identifiziert, wie seine Komponenten mit seiner Funktionalität zusammenhängen.
 
@@ -343,7 +424,7 @@ Schauen wir uns zuerst den **Prozess**-Block genauer an, dann schauen wir uns de
 
 ### 3.2. Die `process`-Definition
 
-Der erste Code-Block beschreibt einen **Prozess**.
+Der erste Code-Block beschreibt einen [**Prozess**](https://nextflow.io/docs/latest/process.html).
 Die Prozessdefinition beginnt mit dem Schlüsselwort `process`, gefolgt vom Prozessnamen und schließlich dem Prozess-Body, der durch geschweifte Klammern begrenzt wird.
 Der Prozess-Body muss einen Script-Block enthalten, der den auszuführenden Befehl angibt, der alles sein kann, was du in einem Befehlszeilen-Terminal ausführen könntest.
 
@@ -380,7 +461,7 @@ Die `output`-Definition enthält den `path`-Qualifier, der Nextflow mitteilt, da
 
 ### 3.3. Die `workflow`-Definition
 
-Der zweite Code-Block beschreibt den **Workflow** selbst.
+Der zweite Code-Block beschreibt den [**Workflow**](https://nextflow.io/docs/latest/workflow.html) selbst.
 Die Workflow-Definition beginnt mit dem Schlüsselwort `workflow`, gefolgt von einem optionalen Namen, dann dem Workflow-Body, der durch geschweifte Klammern begrenzt wird.
 
 Hier haben wir einen **Workflow**, der aus einem `main:`-Block und einem `publish:`-Block besteht.
@@ -429,11 +510,12 @@ params {
 ```
 
 Unterstützte Typen umfassen `String`, `Integer`, `Float`, `Boolean` und `Path`.
+Um mehr zu erfahren, siehe [Workflow parameters](https://nextflow.io/docs/latest/config.html#workflow-parameters) in der Nextflow-Referenzdokumentation.
 
 !!! tip "Tipp"
 
-    Workflow-Parameter, die mit dem `params`-System deklariert werden, nehmen immer zwei Bindestriche auf der Befehlszeile (`--`).
-    Das unterscheidet sie von Nextflow-Level-Parametern, die nur einen Bindestrich nehmen (`-`).
+    Denke daran, dass _Workflow_-Parameter, die mit dem `params`-System deklariert werden, immer zwei Bindestriche auf der Befehlszeile (`--`) nehmen.
+    Das unterscheidet sie von _Nextflow-Level_ CLI-Flags, die nur einen Bindestrich nehmen (`-`).
 
 ### 3.5. Die `publish`-Direktive
 
@@ -455,6 +537,8 @@ Die Zeile `mode 'copy'` überschreibt das Standardverhalten des Systems, das dar
 
 Es gibt mehr Optionen als hier angezeigt, um das Veröffentlichungsverhalten zu steuern; wir werden später einige behandeln.
 Du wirst auch sehen, dass wenn ein Workflow mehrere Ausgaben generiert, jede auf diese Weise im `output`-Block aufgelistet wird.
+
+Um mehr zu erfahren, siehe [Publishing outputs](https://nextflow.io/docs/latest/workflow.html#publishing-outputs) in der Nextflow-Referenzdokumentation.
 
 ??? info "Ältere Syntax zum Veröffentlichen von Ausgaben mit `publishDir`"
 
@@ -481,11 +565,11 @@ Du wirst auch sehen, dass wenn ein Workflow mehrere Ausgaben generiert, jede auf
 
     Wir empfehlen jedoch nicht, dies in neuer Arbeit zu verwenden, da es in zukünftigen Versionen der Nextflow-Sprache irgendwann nicht mehr erlaubt sein wird.
 
-### Erkenntnisse
+### Fazit
 
 Du weißt jetzt, wie ein einfacher Nextflow-Workflow strukturiert ist und wie die grundlegenden Komponenten mit seiner Funktionalität zusammenhängen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, deine Workflow-Ausführungen bequem zu verwalten.
 
@@ -537,6 +621,8 @@ Nextflow zeigt dir buchstäblich auf die vorherige Ausführung und sagt "Das hab
 
     Wenn du eine Pipeline mit `resume` erneut ausführst, überschreibt Nextflow keine Dateien, die außerhalb des Work-Verzeichnisses von Ausführungen veröffentlicht wurden, die zuvor erfolgreich ausgeführt wurden.
 
+    Um mehr zu erfahren, siehe [Cache and resume](https://nextflow.io/docs/latest/cache-and-resume.html) in der Nextflow-Referenzdokumentation.
+
 ### 4.2. Das Protokoll vergangener Ausführungen überprüfen
 
 Immer wenn du einen Nextflow-Workflow startest, wird eine Zeile in eine Protokolldatei namens `history` geschrieben, unter einem versteckten Verzeichnis namens `.nextflow` im aktuellen Arbeitsverzeichnis.
@@ -546,12 +632,14 @@ Immer wenn du einen Nextflow-Workflow startest, wird eine Zeile in eine Protokol
     ```txt title=".nextflow/history" linenums="1"
     2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
     2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
-    ...
+    2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input 'Dobry den'
+    2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
+    2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
     ```
 
 Diese Datei gibt dir den Zeitstempel, Laufnamen, Status, Revisions-ID, Sitzungs-ID und die vollständige Befehlszeile für jeden Nextflow-Lauf, der aus dem aktuellen Arbeitsverzeichnis gestartet wurde.
 
-Eine bequemere Möglichkeit, auf diese Informationen zuzugreifen, ist der Befehl `nextflow log`.
+Eine bequemere Möglichkeit, auf diese Informationen zuzugreifen, ist der Befehl [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log).
 
 ```bash
 nextflow log
@@ -562,7 +650,10 @@ nextflow log
     ```console linenums="1"
     TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
     2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input 'Hello World'
-    ...
+    2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour
+    2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input 'Dobry den'
+    2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa
+    2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume
     ```
 
 Das gibt den Inhalt der Protokolldatei im Terminal aus, ergänzt durch eine Kopfzeile.
@@ -577,12 +668,11 @@ Nextflow verwendet die Sitzungs-ID, um Lauf-Caching-Informationen unter dem `cac
 Wenn du viele Pipelines ausführst, können sich sehr viele Dateien über viele Unterverzeichnisse ansammeln.
 Da die Unterverzeichnisse zufällig benannt sind, ist es schwierig, anhand ihrer Namen zu erkennen, welche älteren gegenüber neueren Läufen entsprechen.
 
-Glücklicherweise enthält Nextflow einen hilfreichen `clean`-Unterbefehl, der automatisch die Work-Unterverzeichnisse für vergangene Läufe löschen kann, die du nicht mehr benötigst.
+Glücklicherweise enthält Nextflow einen hilfreichen Befehl namens [`nextflow clean`](https://www.nextflow.io/docs/latest/reference/cli.html#clean), der automatisch die Work-Unterverzeichnisse für vergangene Läufe löschen kann, die du nicht mehr benötigst.
 
 #### 4.3.1. Löschkriterien festlegen
 
-Es gibt mehrere [Optionen](https://www.nextflow.io/docs/latest/reference/cli.html#clean), um festzulegen, was gelöscht werden soll.
-
+Es gibt mehrere Optionen, um festzulegen, was gelöscht werden soll, die du in der oben verlinkten Dokumentation erkunden kannst.
 Hier zeigen wir dir ein Beispiel, das alle Unterverzeichnisse von Läufen vor einem bestimmten Lauf löscht, der über seinen Laufnamen angegeben wird.
 
 Schau dir den letzten erfolgreichen Lauf an, bei dem du nicht `-resume` verwendet hast; in unserem Fall war der Laufname `backstabbing_swartz`.
@@ -636,11 +726,11 @@ Beachte, dass dies nicht die zweistelligen Unterverzeichnisse (wie `eb/` oben) e
 
     Du bist verantwortlich dafür, alle Ausgaben zu sichern, die dir wichtig sind! Das ist der Hauptgrund, warum wir den `copy`-Modus anstelle des `symlink`-Modus für die `publish`-Direktive bevorzugen.
 
-### Erkenntnisse
+### Fazit
 
 Du weißt, wie du eine Pipeline neu startest, ohne Schritte zu wiederholen, die bereits identisch ausgeführt wurden, das Ausführungsprotokoll überprüfst und den `nextflow clean`-Befehl verwendest, um alte Work-Verzeichnisse zu bereinigen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Mach eine kleine Pause! Du hast gerade die Bausteine der Nextflow-Syntax und grundlegende Nutzungsanweisungen aufgenommen.
 
@@ -657,7 +747,7 @@ Was repräsentiert `[a3/7be2fa]` in der Konsolenausgabezeile `[a3/7be2fa] SAYHEL
 - [x] Der abgekürzte Pfad zum Work-Verzeichnis der Aufgabe
 - [ ] Die Prüfsumme der Ausgabedatei
 
-Mehr erfahren: [2.3. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#23-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden)
+Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#24-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden)
 </quiz>
 
 <quiz>
@@ -667,7 +757,7 @@ Was ist der Zweck der `.command.sh`-Datei in einem Aufgabenverzeichnis?
 - [ ] Sie enthält Fehlermeldungen von fehlgeschlagenen Aufgaben
 - [ ] Sie listet Eingabedateien auf, die für die Aufgabe bereitgestellt wurden
 
-Mehr erfahren: [2.3. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#23-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden)
+Mehr erfahren: [2.4. Die ursprüngliche Ausgabe und Protokolle im `work/`-Verzeichnis finden](#24-die-ursprungliche-ausgabe-und-protokolle-im-work-verzeichnis-finden)
 </quiz>
 
 <quiz>
@@ -677,7 +767,7 @@ Was passiert mit veröffentlichten Ergebnissen, wenn du einen Workflow ohne `-re
 - [ ] Nextflow verhindert das Überschreiben und schlägt fehl
 - [ ] Sie werden automatisch gesichert
 
-Mehr erfahren: [2.4. Den Workflow mit verschiedenen Grüßen erneut ausführen](#24-den-workflow-mit-verschiedenen-grussen-erneut-ausfuhren)
+Mehr erfahren: [2.5. Den Workflow mit verschiedenen Grüßen erneut ausführen](#25-den-workflow-mit-verschiedenen-grussen-erneut-ausfuhren)
 </quiz>
 
 <quiz>

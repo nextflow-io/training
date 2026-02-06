@@ -124,7 +124,7 @@ Encontrará el script `hello-world.nf` en su directorio actual, que debería ser
     }
     ```
 
-Un script de workflow de Nextflow típicamente incluye una o más definiciones de [**process**](https://nextflow.io/docs/latest/process.html) y el [**workflow**](https://nextflow.io/docs/latest/workflow.html) en sí, además de algunos bloques opcionales (no presentes aquí) que introduciremos más adelante.
+Un script de workflow de Nextflow típicamente incluye una o más definiciones de **process** y el **workflow** en sí, además de algunos bloques opcionales (no presentes aquí) que introduciremos más adelante.
 
 Cada **process** describe qué operación(es) debe realizar el paso correspondiente en el pipeline, mientras que el **workflow** describe la lógica de flujo de datos que conecta los diversos pasos.
 
@@ -602,8 +602,8 @@ Ve que el resultado de la ejecución anterior todavía está ahí.
 </figure>
 
 Puede usar tantos niveles de anidamiento como desee.
-También es posible usar el nombre del proceso u otras variables para nombrar los directorios usados para organizar los resultados, y es posible cambiar el nombre predeterminado del directorio de salida de nivel superior (que es controlado por la variable especial `outputDir`).
-Cubriremos estas opciones en capacitaciones posteriores.
+También es posible usar el nombre del proceso u otras variables para nombrar los directorios usados para organizar los resultados, y es posible cambiar el nombre predeterminado del directorio de salida de nivel superior (que es controlado por el flag CLI `-o` o la variable de configuración `outputDir`).
+Cubriremos estas opciones más adelante en la capacitación.
 
 ### 2.3. Establecer el modo de publicación a copia
 
@@ -968,7 +968,7 @@ Sabe cómo usar una entrada variable simple proporcionada en tiempo de ejecució
 
 ### ¿Qué sigue?
 
-Aprenda a gestionar ejecuciones de manera más conveniente.
+Aprenda a gestionar ejecuciones del workflow de manera más conveniente.
 
 ---
 

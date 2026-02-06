@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nextflow Run 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제를 시작하며, 이를 사용하여 필수 작업을 시연하고 해당 Nextflow 코드 구성 요소를 설명합니다.
+Nextflow Run 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 시작하며, 이를 사용하여 필수 작업을 시연하고 해당 Nextflow 코드 구성 요소를 설명합니다.
 
 ??? info "Hello World 예제란 무엇인가요?"
 
@@ -64,7 +64,7 @@ echo 'Hello World!' > output.txt
 
 이것이 우리의 첫 번째 Nextflow workflow로 복제하려는 것입니다.
 
-### 요약
+### 핵심 정리
 
 이제 텍스트를 출력하는 간단한 명령을 터미널에서 실행하는 방법과 선택적으로 출력을 파일에 쓰는 방법을 알게 되었습니다.
 
@@ -82,7 +82,7 @@ echo 'Hello World!' > output.txt
 
 ### 2.1. Workflow 시작 및 실행 모니터링
 
-터미널에서 다음 명령을 실행하세요:
+터미널에서 다음 명령을 실행하세요.
 
 ```bash
 nextflow run 1-hello.nf --input 'Hello World!'
@@ -130,7 +130,42 @@ Hello World!
 
 훌륭합니다. workflow가 해야 할 일을 했습니다!
 
-그러나 '게시된' 결과는 Nextflow가 workflow를 실행할 때 생성한 실제 출력의 사본(또는 경우에 따라 심볼릭 링크)임을 알아두세요.
+### 2.3. 다른 디렉토리에 결과 저장
+
+기본적으로 Nextflow는 pipeline 출력을 현재 경로의 `results`라는 디렉토리에 저장합니다.
+파일이 게시되는 위치를 변경하려면 `-output-dir` CLI 플래그(또는 짧게 `-o`)를 사용하세요.
+
+!!! danger
+
+    `--input`은 두 개의 하이픈이 있고 `-output-dir`은 하나가 있습니다!
+    이것은 `--input`이 pipeline _매개변수_이고 `-output-dir`이 코어 Nextflow CLI 플래그이기 때문입니다.
+    나중에 더 자세히 다룹니다.
+
+```bash
+nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
+```
+
+??? success "명령 출력"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+
+    executor >  local (1)
+    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    ```
+
+이제 출력이 `results` 대신 `hello_results`라는 디렉토리에 게시된 것을 볼 수 있습니다:
+
+```console title="hello_results/"
+hello_results
+└── 1-hello
+    └── output.txt
+```
+
+이 디렉토리 내의 파일은 이전과 동일하며, 최상위 디렉토리만 다릅니다.
+그러나 두 경우 모두 '게시된' 결과는 Nextflow가 workflow를 실행할 때 생성한 실제 출력의 사본(또는 경우에 따라 심볼릭 링크)임을 알아두세요.
 
 이제 Nextflow가 실제로 작업을 실행한 위치를 확인하기 위해 내부를 살펴보겠습니다.
 
@@ -139,7 +174,7 @@ Hello World!
     모든 workflow가 results 디렉토리에 출력을 게시하도록 설정되어 있는 것은 아니며, 디렉토리 이름과 구조가 다를 수 있습니다.
     이 섹션의 조금 더 뒤에서 이 동작이 어디에 지정되어 있는지 확인하는 방법을 보여드리겠습니다.
 
-### 2.3. `work/` 디렉토리에서 원본 출력 및 로그 찾기
+### 2.4. `work/` 디렉토리에서 원본 출력 및 로그 찾기
 
 workflow를 실행할 때 Nextflow는 workflow의 각 process 호출(=pipeline의 각 단계)에 대해 별도의 '작업 디렉토리'를 생성합니다.
 각각에 대해 필요한 입력을 스테이징하고, 관련 명령을 실행하고, 출력과 로그 파일을 해당 디렉토리 내에 작성합니다. 이 디렉토리는 고유하게 만들기 위해 해시를 사용하여 자동으로 이름이 지정됩니다.
@@ -151,19 +186,19 @@ workflow를 실행할 때 Nextflow는 workflow의 각 process 호출(=pipeline�
 앞서 실행한 workflow의 콘솔 출력으로 돌아가면 다음 줄이 있었습니다:
 
 ```console
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[a3/1e1535] sayHello [100%] 1 of 1 ✔
 ```
 
-줄이 `[a3/7be2fa]`로 시작하는 것을 보셨나요?
+줄이 `[a3/1e1535]`로 시작하는 것을 보셨나요?
 이것은 해당 process 호출의 작업 디렉토리 경로의 축약된 형태이며, `work/` 디렉토리 경로 내에서 `sayHello` process 호출의 출력을 찾을 위치를 알려줍니다.
 
-다음 명령을 입력하고(자신의 터미널에 표시된 것으로 `a3/7be2fa`를 대체) Tab 키를 눌러 경로를 자동 완성하거나 별표를 추가하여 전체 경로를 찾을 수 있습니다:
+다음 명령을 입력하고(자신의 터미널에 표시된 것으로 `a3/1e1535`를 대체) Tab 키를 눌러 경로를 자동 완성하거나 별표를 추가하여 전체 경로를 찾을 수 있습니다:
 
 ```bash
-ls work/a3/7be2fa*
+ls work/a3/1e1535*
 ```
 
-이렇게 하면 전체 경로 디렉토리 경로가 표시됩니다: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+이렇게 하면 전체 경로 디렉토리 경로가 표시됩니다: `work/a3/1e153543b0a7f9d2c4735ddb4ab231`
 
 그 안에 무엇이 있는지 살펴보겠습니다.
 
@@ -171,8 +206,18 @@ ls work/a3/7be2fa*
 
     ```console
     work
-    └── a3
-        └── 7be2fad5e71e5f49998f795677fd68
+    ├── a3
+    │   └── 1e153543b0a7f9d2c4735ddb4ab231
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    └── a4
+        └── aa3694b8808bdcc1135ef4a1187a4d
             ├── .command.begin
             ├── .command.err
             ├── .command.log
@@ -194,10 +239,14 @@ ls work/a3/7be2fa*
     tree -a work
     ```
 
+`work/`에는 두 세트의 디렉토리가 있으며, 이는 우리가 수행한 두 가지 다른 pipeline 실행에서 나온 것입니다.
+각 작업 실행은 작업할 자체 격리된 디렉토리를 얻습니다.
+이 경우 pipeline이 두 번 모두 동일한 작업을 수행했으므로 각 작업 디렉토리의 내용은 동일합니다.
+
 `output.txt` 파일을 바로 알아볼 수 있을 것입니다. 이 파일은 실제로 `results` 디렉토리에 게시된 `sayHello` process의 원본 출력입니다.
 열어보면 `Hello World!` 인사말을 다시 찾을 수 있습니다.
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt"
+```console title="work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt"
 Hello World!
 ```
 
@@ -205,7 +254,7 @@ Hello World!
 
 이것들은 Nextflow가 작업 실행의 일부로 작성한 도우미 및 로그 파일입니다:
 
-- **`.command.begin`**: 작업이 시작되자마자 생성되는 센티넬 파일.
+- **`.command.begin`**: 작업이 시작되자마자 생성되는 센티넬 파일
 - **`.command.err`**: process 호출에서 발생한 오류 메시지(`stderr`)
 - **`.command.log`**: process 호출에서 발생한 전체 로그 출력
 - **`.command.out`**: process 호출의 일반 출력(`stdout`)
@@ -215,7 +264,7 @@ Hello World!
 
 `.command.sh` 파일은 모든 부기 및 작업/환경 설정을 포함하지 않고 Nextflow가 실행한 기본 명령을 보여주기 때문에 특히 유용합니다.
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/command.sh"
+```console title="work/a3/1e153543b0a7f9d2c4735ddb4ab231/.command.sh"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 
@@ -223,18 +272,18 @@ echo 'Hello World!' > output.txt
 
 이것은 workflow가 이전에 명령줄에서 직접 실행한 것과 동일한 명령을 구성했음을 확인합니다.
 
-문제가 발생하여 무슨 일이 있었는지 해결해야 할 때, `command.sh` 스크립트를 보고 Nextflow가 workflow 지침, 변수 보간 등을 기반으로 어떤 명령을 구성했는지 정확히 확인하는 것이 유용할 수 있습니다.
+문제가 발생하여 무슨 일이 있었는지 해결해야 할 때, `.command.sh` 스크립트를 보고 Nextflow가 workflow 지침, 변수 보간 등을 기반으로 어떤 명령을 구성했는지 정확히 확인하는 것이 유용할 수 있습니다.
 
-### 2.4. 다른 인사말로 workflow 다시 실행
+### 2.5. 다른 인사말로 workflow 다시 실행
 
 `--input` 인수에 다른 값을 사용하여 workflow를 몇 번 더 실행한 다음 작업 디렉토리를 살펴보세요.
 
 ??? abstract "디렉토리 내용"
 
     ```console
-    work
-    ├── 0f
-    │   └── 52b7e07b0e274a80843fca48ed21b8
+    work/
+    ├── 09
+    │   └── 5ea8665939daf6f04724286c9b3c8a
     │       ├── .command.begin
     │       ├── .command.err
     │       ├── .command.log
@@ -243,17 +292,8 @@ echo 'Hello World!' > output.txt
     │       ├── .command.sh
     │       ├── .exitcode
     │       └── output.txt
-    ├── 67
-    │   ├── 134e6317f90726c6c17ad53234a32b
-    │   │   ├── .command.begin
-    │   │   ├── .command.err
-    │   │   ├── .command.log
-    │   │   ├── .command.out
-    │   │   ├── .command.run
-    │   │   ├── .command.sh
-    │   │   ├── .exitcode
-    │   │   └── output.txt
-    │   └── e029f2e75305874a9ab263d21ebc2c
+    ├── 92
+    │   └── ceb95e05d87621c92a399da9bd2067
     │       ├── .command.begin
     │       ├── .command.err
     │       ├── .command.log
@@ -262,8 +302,8 @@ echo 'Hello World!' > output.txt
     │       ├── .command.sh
     │       ├── .exitcode
     │       └── output.txt
-    ├── 6c
-    │   └── d4fd787e0b01b3c82e85696c297500
+    ├── 93
+    │   └── 6708dbc20c7efdc6769cbe477061ec
     │       ├── .command.begin
     │       ├── .command.err
     │       ├── .command.log
@@ -272,8 +312,18 @@ echo 'Hello World!' > output.txt
     │       ├── .command.sh
     │       ├── .exitcode
     │       └── output.txt
-    └── e8
-        └── ab99fad46ade52905ec973ff39bb80
+    ├── a3
+    │   └── 1e153543b0a7f9d2c4735ddb4ab231
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    └── a4
+        └── aa3694b8808bdcc1135ef4a1187a4d
             ├── .command.begin
             ├── .command.err
             ├── .command.log
@@ -298,7 +348,7 @@ echo 'Hello World!' > output.txt
 
 이것은 게시된 결과가 후속 실행에 의해 덮어쓰여지는 반면, `work/` 아래의 작업 디렉토리는 보존된다는 것을 보여줍니다.
 
-### 요약
+### 핵심 정리
 
 간단한 Nextflow 스크립트를 실행하고 실행을 모니터링하고 출력을 찾는 방법을 알게 되었습니다.
 
@@ -342,7 +392,7 @@ echo 'Hello World!' > output.txt
     }
 
     /*
-    * 파이프라인 매개변수
+    * Pipeline parameters
     */
     params {
         input: String
@@ -351,7 +401,7 @@ echo 'Hello World!' > output.txt
     workflow {
 
         main:
-        // 인사말 출력
+        // emit a greeting
         sayHello(params.input)
 
         publish:
@@ -374,7 +424,7 @@ Nextflow workflow 스크립트는 일반적으로 하나 이상의 **process** �
 
 ### 3.2. `process` 정의
 
-첫 번째 코드 블록은 **process**를 설명합니다.
+첫 번째 코드 블록은 [**process**](https://nextflow.io/docs/latest/process.html)를 설명합니다.
 process 정의는 `process` 키워드로 시작하고 그 뒤에 process 이름이 오고 마지막으로 중괄호로 구분된 process 본문이 옵니다.
 process 본문에는 실행할 명령을 지정하는 script 블록이 포함되어야 하며, 이 명령은 명령줄 터미널에서 실행할 수 있는 모든 것이 될 수 있습니다.
 
@@ -411,7 +461,7 @@ process sayHello {
 
 ### 3.3. `workflow` 정의
 
-두 번째 코드 블록은 **workflow** 자체를 설명합니다.
+두 번째 코드 블록은 [**workflow**](https://nextflow.io/docs/latest/workflow.html) 자체를 설명합니다.
 workflow 정의는 `workflow` 키워드로 시작하고 그 뒤에 선택적 이름이 오고, 그 다음 중괄호로 구분된 workflow 본문이 옵니다.
 
 여기서는 `main:` 블록과 `publish:` 블록으로 구성된 **workflow**가 있습니다.
@@ -421,7 +471,7 @@ workflow 정의는 `workflow` 키워드로 시작하고 그 뒤에 선택적 이
 workflow {
 
     main:
-    // 인사말 출력
+    // 인사말을 내보냅니다
     sayHello(params.input)
 
     publish:
@@ -460,11 +510,12 @@ params {
 ```
 
 지원되는 유형에는 `String`, `Integer`, `Float`, `Boolean` 및 `Path`가 포함됩니다.
+자세히 알아보려면 Nextflow 참조 문서의 [Workflow parameters](https://nextflow.io/docs/latest/config.html#workflow-parameters)를 참조하세요.
 
 !!! tip
 
-    `params` 시스템을 사용하여 선언된 workflow 매개변수는 항상 명령줄에서 두 개의 대시(`--`)를 사용합니다.
-    이것은 하나의 대시(`-`)만 사용하는 Nextflow 수준 매개변수와 구분됩니다.
+    `params` 시스템을 사용하여 선언된 _workflow_ 매개변수는 항상 명령줄에서 두 개의 대시(`--`)를 사용합니다.
+    이것은 하나의 대시(`-`)만 사용하는 _Nextflow 수준_ CLI 플래그와 구분됩니다.
 
 ### 3.5. `publish` 지시문
 
@@ -486,6 +537,8 @@ output {
 
 게시 동작을 제어하기 위한 옵션이 여기에 표시된 것보다 더 많이 있습니다. 나중에 몇 가지를 다룰 것입니다.
 또한 workflow가 여러 출력을 생성할 때 각각이 이 방식으로 `output` 블록에 나열되는 것을 볼 수 있습니다.
+
+자세히 알아보려면 Nextflow 참조 문서의 [Publishing outputs](https://nextflow.io/docs/latest/workflow.html#publishing-outputs)를 참조하세요.
 
 ??? info "`publishDir`을 사용한 출력 게시의 이전 구문"
 
@@ -512,7 +565,7 @@ output {
 
     그러나 향후 Nextflow 언어 버전에서 결국 허용되지 않을 것이므로 새 작업에서 이것을 사용하는 것은 권장하지 않습니다.
 
-### 요약
+### 핵심 정리
 
 이제 간단한 Nextflow workflow가 어떻게 구조화되어 있고 기본 구성 요소가 기능과 어떻게 관련되는지 알게 되었습니다.
 
@@ -568,6 +621,8 @@ Nextflow는 문자 그대로 이전 실행을 가리키며 "저기서 이미 했
 
     `resume`으로 pipeline을 다시 실행할 때 Nextflow는 이전에 성공적으로 실행된 실행에 의해 작업 디렉토리 외부에 게시된 파일을 덮어쓰지 않습니다.
 
+    자세히 알아보려면 Nextflow 참조 문서의 [Cache and resume](https://nextflow.io/docs/latest/cache-and-resume.html)을 참조하세요.
+
 ### 4.2. 과거 실행 로그 검사
 
 nextflow workflow를 시작할 때마다 현재 작업 디렉토리의 `.nextflow`라는 숨겨진 디렉토리 아래에 `history`라는 로그 파일에 줄이 기록됩니다.
@@ -584,7 +639,7 @@ nextflow workflow를 시작할 때마다 현재 작업 디렉토리의 `.nextflo
 
 이 파일은 현재 작업 디렉토리 내에서 시작된 모든 Nextflow 실행에 대한 타임스탬프, 실행 이름, 상태, 리비전 ID, 세션 ID 및 전체 명령줄을 제공합니다.
 
-이 정보에 액세스하는 더 편리한 방법은 `nextflow log` 명령을 사용하는 것입니다.
+이 정보에 액세스하는 더 편리한 방법은 [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log) 명령을 사용하는 것입니다.
 
 ```bash
 nextflow log
@@ -613,12 +668,11 @@ Nextflow는 세션 ID를 사용하여 `.nextflow` 아래에 있는 `cache` 디�
 많은 pipeline을 실행하면 많은 하위 디렉토리에 매우 많은 파일이 축적될 수 있습니다.
 하위 디렉토리는 무작위로 이름이 지정되므로 이름만으로는 이전 실행과 최근 실행을 구분하기 어렵습니다.
 
-다행히 Nextflow에는 더 이상 관심이 없는 과거 실행에 대한 작업 하위 디렉토리를 자동으로 삭제할 수 있는 유용한 `clean` 하위 명령이 포함되어 있습니다.
+다행히 Nextflow에는 더 이상 관심이 없는 과거 실행에 대한 작업 하위 디렉토리를 자동으로 삭제할 수 있는 유용한 [`nextflow clean`](https://www.nextflow.io/docs/latest/reference/cli.html#clean) 하위 명령이 포함되어 있습니다.
 
 #### 4.3.1. 삭제 기준 결정
 
-삭제할 항목을 결정하는 여러 [옵션](https://www.nextflow.io/docs/latest/reference/cli.html#clean)이 있습니다.
-
+삭제할 항목을 결정하는 여러 옵션이 있으며, 위에 링크된 문서에서 탐색할 수 있습니다.
 여기서는 실행 이름을 사용하여 지정된 실행 이전의 모든 하위 디렉토리를 삭제하는 예를 보여드립니다.
 
 `-resume`을 사용하지 않은 가장 최근의 성공적인 실행을 찾아보세요. 우리의 경우 실행 이름은 `backstabbing_swartz`였습니다.
@@ -672,7 +726,7 @@ nextflow clean -before backstabbing_swartz -f
 
     관심 있는 출력을 저장하는 것은 사용자의 책임입니다! 이것이 `publish` 지시문에 `symlink` 모드보다 `copy` 모드를 선호하는 주된 이유입니다.
 
-### 요약
+### 핵심 정리
 
 이미 동일한 방식으로 실행된 단계를 반복하지 않고 pipeline을 다시 시작하는 방법, 실행 로그를 검사하는 방법, `nextflow clean` 명령을 사용하여 이전 작업 디렉토리를 정리하는 방법을 알게 되었습니다.
 
@@ -693,7 +747,7 @@ nextflow clean -before backstabbing_swartz -f
 - [x] 작업의 작업 디렉토리에 대한 축약된 경로
 - [ ] 출력 파일의 체크섬
 
-자세히 알아보기: [2.3. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-work-디렉토리에서-원본-출력-및-로그-찾기)
+자세히 알아보기: [2.4. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#24-work-디렉토리에서-원본-출력-및-로그-찾기)
 </quiz>
 
 <quiz>
@@ -703,7 +757,7 @@ nextflow clean -before backstabbing_swartz -f
 - [ ] 실패한 작업의 오류 메시지를 포함합니다
 - [ ] 작업을 위해 스테이징된 입력 파일을 나열합니다
 
-자세히 알아보기: [2.3. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#23-work-디렉토리에서-원본-출력-및-로그-찾기)
+자세히 알아보기: [2.4. `work/` 디렉토리에서 원본 출력 및 로그 찾기](#24-work-디렉토리에서-원본-출력-및-로그-찾기)
 </quiz>
 
 <quiz>
@@ -713,7 +767,7 @@ nextflow clean -before backstabbing_swartz -f
 - [ ] Nextflow가 덮어쓰기를 방지하고 실패합니다
 - [ ] 자동으로 백업됩니다
 
-자세히 알아보기: [2.4. 다른 인사말로 workflow 다시 실행](#24-다른-인사말로-workflow-다시-실행)
+자세히 알아보기: [2.5. 다른 인사말로 workflow 다시 실행](#25-다른-인사말로-workflow-다시-실행)
 </quiz>
 
 <quiz>
@@ -748,7 +802,7 @@ workflow 파일에서 `params` 블록의 목적은 무엇인가요?
 - [x] workflow 입력 매개변수를 선언하고 유형을 지정합니다
 - [ ] 출력 게시 옵션을 지정합니다
 
-자세히 알아보기: [3.4. 명령줄 매개변수의 params 시스템](#34-명령줄-매개변수의-params-시스템)
+자세히 알아보기: [3.4. 명령줄 매개변수의 `params` 시스템](#34-명령줄-매개변수의-params-시스템)
 </quiz>
 
 <quiz>
@@ -758,7 +812,7 @@ workflow의 `output` 블록에서 `mode 'copy'`는 무엇을 하나요?
 - [ ] workflow 스크립트를 results에 복사합니다
 - [ ] 증분 파일 복사를 활성화합니다
 
-자세히 알아보기: [3.5. publish 지시문](#35-publish-지시문)
+자세히 알아보기: [3.5. `publish` 지시문](#35-publish-지시문)
 </quiz>
 
 <quiz>

@@ -166,7 +166,7 @@ Ma to wiele zalet, w tym unikanie kolizji, jeśli proces produkuje jakieś pliki
 
     Dla złożonego workflow'u lub dużej liczby danych wejściowych wyświetlanie pełnej listy do terminala może być nieco przytłaczające, więc ludzie normalnie nie używają `-ansi-log false` w rutynowym użyciu.
 
-### 1.4. Zbadaj kod workflow
+### 1.4. Zbadaj kod workflow'u
 
 Więc ta wersja workflow'u jest w stanie odczytać plik CSV z danymi wejściowymi, przetwarzać dane wejściowe osobno i nazywać wyjścia unikalnie.
 
@@ -208,7 +208,7 @@ Przyjrzyjmy się, co to umożliwia w kodzie workflow'u.
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(greeting_ch)
 
         publish:
@@ -229,7 +229,7 @@ Ponownie, nie musisz zapamiętywać składni kodu, ale dobrze jest nauczyć się
 
 To jest najciekawsza część: jak przeszliśmy od pobierania pojedynczej wartości z wiersza poleceń do wczytywania pliku CSV, parsowania go i obsługi zawartych w nim pojedynczych powitań?
 
-W Nextflow robimy to za pomocą [**kanału**](https://nextflow.io/docs/latest/channel.html): konstrukcji kolejki zaprojektowanej do efektywnego zarządzania danymi wejściowymi i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną równoległość i wiele dodatkowych korzyści.
+W Nextflow robimy to za pomocą [**kanału**](https://nextflow.io/docs/latest/channel.html): konstrukcji kolejki zaprojektowanej do efektywnego zarządzania danymi wejściowymi i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną paralelizację i wiele dodatkowych korzyści.
 
 Rozłóżmy to na czynniki.
 
@@ -239,7 +239,7 @@ Rozłóżmy to na czynniki.
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // wyemituj pozdrowienie
+    // wyemituj powitanie
     sayHello(greeting_ch)
 ```
 
@@ -288,7 +288,7 @@ Następnie, w ostatniej linii bloku `main:` workflow'u, przekazujemy załadowany
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // wyemituj pozdrowienie
+    // wyemituj powitanie
     sayHello(greeting_ch)
 ```
 
@@ -371,7 +371,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     ```
 
-Widzisz, że zgodnie z obietnicą, wiele kroków zostało uruchomionych jako część workflow; pierwsze dwa (`sayHello` i `convertToUpper`) były prawdopodobnie uruchomione na każdym indywidualnym powitaniu, a trzeci (`collectGreetings`) został uruchomiony tylko raz, na wyjściach wszystkich trzech wywołań `convertToUpper`.
+Widzisz, że zgodnie z obietnicą, wiele kroków zostało uruchomionych jako część workflow'u; pierwsze dwa (`sayHello` i `convertToUpper`) były prawdopodobnie uruchomione na każdym indywidualnym powitaniu, a trzeci (`collectGreetings`) został uruchomiony tylko raz, na wyjściach wszystkich trzech wywołań `convertToUpper`.
 
 ### 2.2. Znajdź wyjścia
 
@@ -403,7 +403,7 @@ Zweryfikujmy, że to faktycznie się stało, patrząc na katalog `results`.
 Jak widzisz, mamy nowy katalog o nazwie `2b-multistep` i zawiera znacznie więcej plików niż wcześniej.
 Niektóre pliki zostały zgrupowane w podkatalogu o nazwie `intermediates`, podczas gdy dwa pliki znajdują się na najwyższym poziomie.
 
-Te dwa to końcowe wyniki wieloetapowego workflow.
+Te dwa to końcowe wyniki wieloetapowego workflow'u.
 Poświęć chwilę, aby spojrzeć na nazwy plików i sprawdzić ich zawartość, aby potwierdzić, że są takie, jakich oczekujesz.
 
 ??? abstract "Zawartość plików"
@@ -423,7 +423,7 @@ Drugi to plik raportu, który podsumowuje pewne informacje o uruchomieniu.
 
 ### 2.3. Zbadaj kod
 
-Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych workflow.
+Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych workflow'ów.
 
 ??? full-code "Pełny plik kodu"
 
@@ -500,11 +500,11 @@ Przyjrzyjmy się kodowi i zidentyfikujmy kluczowe wzorce dla wieloetapowych work
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(greeting_ch)
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // zbierz wszystkie powitania do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -565,11 +565,11 @@ Naprawdę interesującą rzeczą do przyjrzenia się jest to, jak wywołania pro
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
-    // wyemituj pozdrowienie
+    // wyemituj powitanie
     sayHello(greeting_ch)
-    // przekształć pozdrowienie na wielkie litery
+    // przekształć powitanie na wielkie litery
     convertToUpper(sayHello.out)
-    // zbierz wszystkie pozdrowienia do jednego pliku
+    // zbierz wszystkie powitania do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -584,7 +584,7 @@ W ten sposób przekazujemy dane z jednego kroku do następnego w Nextflow.
 Trzecie wywołanie procesu, do `collectGreetings`, jest nieco inne.
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // zbierz wszystkie pozdrowienia do jednego pliku
+    // zbierz wszystkie powitania do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -641,11 +641,11 @@ Wadą jest to, że czasami może to utrudnić rozszyfrowanie tego, co pipeline r
 Być może zauważyłeś, że `collectGreetings` przyjmuje drugie wejście, `params.batch`:
 
 ```groovy title="2b-multistep.nf" linenums="77"
-    // zbierz wszystkie pozdrowienia do jednego pliku
+    // zbierz wszystkie powitania do jednego pliku
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
-To przekazuje parametr CLI o nazwie `--batch` do workflow.
+To przekazuje parametr CLI o nazwie `--batch` do workflow'u.
 Jednak gdy uruchomiliśmy workflow wcześniej, nie określiliśmy parametru `--batch`.
 
 Co się dzieje?
@@ -836,11 +836,11 @@ Zacznij od otwarcia pliku workflow `2c-modules.nf`.
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(greeting_ch)
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // zbierz wszystkie powitania do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         publish:
@@ -925,9 +925,9 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79484f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/4358gc] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 Zauważysz, że wykonania procesu wszystkie pomyślnie użyły pamięci podręcznej, co oznacza, że Nextflow rozpoznał, że już wykonał żądaną pracę, mimo że kod został podzielony, a główny plik workflow'u został przemianowany.
@@ -1136,7 +1136,7 @@ exit
 
 Znajdziesz się z powrotem w normalnej powłoce.
 
-### 4.2. Użyj kontenera w workflow
+### 4.2. Użyj kontenera w workflow'ie
 
 Gdy uruchamiamy pipeline, chcemy wskazać Nextflow, jakiego obrazu użyć w każdym kroku, a co ważne, oczekujemy też, że automatycznie obsłuży całą tę pracę: pobierze obraz, uruchomi instancję, wykona polecenie i usunie ją po zakończeniu.
 
@@ -1182,11 +1182,11 @@ Workflow jest bardzo podobny do poprzedniego, plus dodatkowy krok do uruchomieni
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(greeting_ch)
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // zbierz wszystkie powitania do jednego pliku
         collectGreetings(convertToUpper.out.collect(), params.batch)
         // wygeneruj grafikę ASCII powitań za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
@@ -1225,9 +1225,9 @@ Workflow jest bardzo podobny do poprzedniego, plus dodatkowy krok do uruchomieni
 
 Widzisz, że ten workflow importuje proces `cowpy` z pliku modułu i wywołuje go na wyjściu wywołania `collectGreetings()`, plus parametr wejściowy o nazwie `params.character`.
 
-```groovy title="2d-container.nf" linenums="25"
-// wygeneruj grafikę ASCII za pomocą cowpy
-cowpy(collectGreetings.out, params.character)
+```groovy title="2d-container.nf" linenums="31"
+// wygeneruj grafikę ASCII powitań za pomocą cowpy
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 Proces `cowpy`, który opakowuje polecenie cowpy do generowania grafiki ASCII, jest zdefiniowany w module `cowpy.nf`.
@@ -1346,7 +1346,7 @@ Możesz znaleźć wyjście kroku `cowpy` w katalogu `results`.
 
 Widzisz, że postać mówi wszystkie powitania, ponieważ uruchomiła się na pliku zebranych powitań wielkimi literami.
 
-Co ważniejsze, mogliśmy to uruchomić jako część naszego pipeline bez konieczności prawidłowej instalacji cowpy i wszystkich jego zależności.
+Co ważniejsze, mogliśmy to uruchomić jako część naszego pipeline'u bez konieczności prawidłowej instalacji cowpy i wszystkich jego zależności.
 I teraz możemy udostępnić pipeline współpracownikom i sprawić, że uruchomią go na swojej infrastrukturze bez konieczności instalowania czegokolwiek, poza Docker lub jedną z jego alternatyw (taką jak Singularity/Apptainer) jak wspomniano powyżej.
 
 #### 4.2.4. Sprawdź, jak Nextflow uruchomił konteneryzowane zadanie
@@ -1357,7 +1357,7 @@ Sprawdź wyjście z polecenia `nextflow run`, aby znaleźć ścieżkę do podkat
 Patrząc na to, co otrzymaliśmy dla uruchomienia pokazanego powyżej, linia dziennika konsoli dla procesu `cowpy` zaczyna się od `[7f/caf718]`.
 To odpowiada następującej skróconej ścieżce katalogu: `work/7f/caf718`.
 
-W tym katalogu znajdziesz plik `.command.run`, który zawiera wszystkie polecenia, które Nextflow uruchomił w Twoim imieniu w trakcie wykonywania pipeline.
+W tym katalogu znajdziesz plik `.command.run`, który zawiera wszystkie polecenia, które Nextflow uruchomił w Twoim imieniu w trakcie wykonywania pipeline'u.
 
 ??? abstract "Zawartość pliku"
 
@@ -1595,7 +1595,7 @@ Dowiedz się więcej: [1.4.3. Jak nazywane są wyjścia](#143-jak-nazywane-są-w
 </quiz>
 
 <quiz>
-Jaki jest cel instrukcji `include` w zmodularyzowanym workflow'ie?
+Jaki jest cel instrukcji `include` w zmodularizowanym workflow'ie?
 - [ ] Aby skopiować kod procesu do pliku workflow'u
 - [x] Aby zaimportować definicję procesu z zewnętrznego pliku modułu
 - [ ] Aby dołączyć ustawienia konfiguracji
@@ -1621,7 +1621,7 @@ Co określa dyrektywa `container` w definicji procesu?
 - [x] URI obrazu kontenera do użycia podczas uruchamiania procesu
 - [ ] Format pliku wyjściowego
 
-Dowiedz się więcej: [4.2. Użyj kontenera w workflow](#42-użyj-kontenera-w-workflow)
+Dowiedz się więcej: [4.2. Użyj kontenera w workflow'ie](#42-użyj-kontenera-w-workflow)
 </quiz>
 
 <quiz>

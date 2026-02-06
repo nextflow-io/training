@@ -602,8 +602,8 @@ Bu sefer sonuç belirtilen alt dizine yazılır.
 </figure>
 
 İstediğiniz kadar iç içe geçme seviyesi kullanabilirsiniz.
-Sonuçları düzenlemek için kullanılan dizinleri adlandırmak için süreç adını veya diğer değişkenleri kullanmak ve üst düzey çıktı dizininin varsayılan adını değiştirmek (özel `outputDir` değişkeni tarafından kontrol edilir) de mümkündür.
-Bu seçenekleri sonraki eğitimlerde ele alacağız.
+Sonuçları düzenlemek için kullanılan dizinleri adlandırmak için süreç adını veya diğer değişkenleri kullanmak ve üst düzey çıktı dizininin varsayılan adını değiştirmek (`-o` CLI bayrağı veya config değişkeni `outputDir` tarafından kontrol edilir) de mümkündür.
+Bu seçenekleri eğitimin ilerleyen bölümlerinde ele alacağız.
 
 ### 2.3. Yayınlama modunu kopyalamaya ayarlayın
 

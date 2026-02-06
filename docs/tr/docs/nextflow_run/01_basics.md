@@ -107,7 +107,7 @@ Buradaki en önemli çıktı, yukarıdaki çıktıda vurgulanan son satırdır:
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Bu bize `sayHello` process'inin bir kez başarıyla çalıştırıldığını söyler (`1 of 1 ✔`).
+Bu bize `sayHello` sürecinin bir kez başarıyla çalıştırıldığını söyler (`1 of 1 ✔`).
 
 Bu harika, ama merak ediyor olabilirsiniz: çıktı nerede?
 
@@ -130,7 +130,42 @@ Hello World!
 
 Harika, workflow'umuz yapması gerekeni yaptı!
 
-Ancak, 'yayınlanan' sonucun, Nextflow'un workflow'u çalıştırırken ürettiği gerçek çıktının bir kopyası (veya bazı durumlarda sembolik bir bağlantı) olduğunu unutmayın.
+### 2.3. Sonuçları farklı bir dizine kaydedin
+
+Varsayılan olarak, Nextflow pipeline çıktılarını geçerli yolunuzda `results` adlı bir dizine kaydeder.
+Dosyalarınızın nereye yayınlanacağını değiştirmek için `-output-dir` CLI bayrağını (veya kısaca `-o`) kullanın.
+
+!!! danger "Dikkat"
+
+    `--input`'un iki tire, `-output-dir`'in bir tire aldığını unutmayın!
+    Bunun nedeni `--input`'un bir pipeline _parametresi_ ve `-output-dir`'in çekirdek bir Nextflow CLI bayrağı olmasıdır.
+    Bunlar hakkında daha sonra daha fazla bilgi.
+
+```bash
+nextflow run 1-hello.nf --input 'Hello World!' -output-dir hello_results
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78
+
+    executor >  local (1)
+    [a3/1e1535] sayHello [100%] 1 of 1 ✔
+    ```
+
+Artık çıktılarınızın `results` yerine `hello_results` adlı bir dizine yayınlandığını görmelisiniz:
+
+```console title="hello_results/"
+hello_results
+└── 1-hello
+    └── output.txt
+```
+
+Bu dizindeki dosyalar öncekiyle aynıdır, sadece üst düzey dizin farklıdır.
+Ancak, her iki durumda da 'yayınlanan' sonucun, Nextflow workflow'u çalıştırdığında ürettiği gerçek çıktının bir kopyası (veya bazı durumlarda sembolik bir bağlantı) olduğunu unutmayın.
 
 Şimdi, Nextflow'un işi gerçekte nerede yaptığını görmek için kaputun altına bir göz atacağız.
 
@@ -139,9 +174,9 @@ Ancak, 'yayınlanan' sonucun, Nextflow'un workflow'u çalıştırırken üretti�
     Tüm workflow'lar çıktıları bir results dizinine yayınlamak üzere ayarlanmayacaktır ve/veya dizin adları ve yapısı farklı olabilir.
     Bu bölümde biraz ileride, bu davranışın nerede belirtildiğini nasıl bulacağınızı göstereceğiz.
 
-### 2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun
+### 2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun
 
-Bir workflow çalıştırdığınızda, Nextflow workflow'daki her bir process'in her çağrısı için (=pipeline'daki her adım) ayrı bir 'görev dizini' oluşturur.
+Bir workflow çalıştırdığınızda, Nextflow workflow'daki her bir sürecin her çağrısı için (=pipeline'daki her adım) ayrı bir 'görev dizini' oluşturur.
 Her biri için gerekli girdileri hazırlar, ilgili talimatları yürütür ve çıktıları ve log dosyalarını, benzersiz hale getirmek için otomatik olarak bir hash kullanılarak adlandırılan bu tek dizine yazar.
 
 Bu görev dizinlerinin tümü, geçerli dizininizdeki (komutu çalıştırdığınız yer) `work` adlı bir dizin altında yaşayacaktır.
@@ -151,19 +186,19 @@ Bu karmaşık gelebilir, bu yüzden pratikte nasıl göründüğüne bakalım.
 Daha önce çalıştırdığımız workflow için konsol çıktısına geri dönersek, şu satır vardı:
 
 ```console
-[a3/7be2fa] sayHello | 1 of 1 ✔
+[a3/1e1535] sayHello [100%] 1 of 1 ✔
 ```
 
-Satırın `[a3/7be2fa]` ile nasıl başladığını görüyor musunuz?
-Bu, o process çağrısı için görev dizini yolunun kısaltılmış halidir ve `work/` dizin yolu içinde `sayHello` process çağrısının çıktısını nerede bulacağınızı söyler.
+Satırın `[a3/1e1535]` ile nasıl başladığını görüyor musunuz?
+Bu, o süreç çağrısı için görev dizini yolunun kısaltılmış halidir ve `work/` dizin yolu içinde `sayHello` süreç çağrısının çıktısını nerede bulacağınızı söyler.
 
-Aşağıdaki komutu yazarak (kendi terminalinizde gördüğünüzle `a3/7be2fa`yı değiştirerek) ve tab tuşuna basarak yolu otomatik tamamlayarak veya bir yıldız işareti ekleyerek tam yolu bulabilirsiniz:
+Aşağıdaki komutu yazarak (kendi terminalinizde gördüğünüzle `a3/1e1535`'i değiştirerek) ve tab tuşuna basarak yolu otomatik tamamlayarak veya bir yıldız işareti ekleyerek tam yolu bulabilirsiniz:
 
 ```bash
-ls work/a3/7be2fa*
+ls work/a3/1e1535*
 ```
 
-Bu, tam dizin yolunu vermeli: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
+Bu, tam dizin yolunu vermeli: `work/a3/1e153543b0a7f9d2c4735ddb4ab231`
 
 İçinde ne olduğuna bir göz atalım.
 
@@ -171,8 +206,18 @@ Bu, tam dizin yolunu vermeli: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
 
     ```console
     work
-    └── a3
-        └── 7be2fad5e71e5f49998f795677fd68
+    ├── a3
+    │   └── 1e153543b0a7f9d2c4735ddb4ab231
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    └── a4
+        └── aa3694b8808bdcc1135ef4a1187a4d
             ├── .command.begin
             ├── .command.err
             ├── .command.log
@@ -194,10 +239,14 @@ Bu, tam dizin yolunu vermeli: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
     tree -a work
     ```
 
-`output.txt` dosyasını hemen tanımalısınız, bu aslında `results` dizinine yayınlanan `sayHello` process'inin orijinal çıktısıdır.
+`work/`'de yaptığımız iki farklı pipeline çalıştırmasından iki dizin seti vardır.
+Her görev yürütmesi, üzerinde çalışmak için kendi izole dizinini alır.
+Bu durumda pipeline her iki seferde de aynı şeyi yaptı, bu nedenle her görev dizininin içeriği özdeştir.
+
+`output.txt` dosyasını hemen tanımalısınız, bu aslında `results` dizinine yayınlanan `sayHello` sürecinin orijinal çıktısıdır.
 Açarsanız, `Hello World!` selamlamasını tekrar bulacaksınız.
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt"
+```console title="work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt"
 Hello World!
 ```
 
@@ -206,16 +255,16 @@ Peki ya diğer tüm dosyalar?
 Bunlar, Nextflow'un görev yürütmesinin bir parçası olarak yazdığı yardımcı ve log dosyalarıdır:
 
 - **`.command.begin`**: Görev başlatıldığında oluşturulan sentinel dosyası.
-- **`.command.err`**: Process çağrısı tarafından yayılan hata mesajları (`stderr`)
-- **`.command.log`**: Process çağrısı tarafından yayılan tam log çıktısı
-- **`.command.out`**: Process çağrısı tarafından normal çıktı (`stdout`)
-- **`.command.run`**: Nextflow tarafından process çağrısını yürütmek için çalıştırılan tam betik
-- **`.command.sh`**: Process çağrısı tarafından gerçekte çalıştırılan komut
+- **`.command.err`**: Süreç çağrısı tarafından yayılan hata mesajları (`stderr`)
+- **`.command.log`**: Süreç çağrısı tarafından yayılan tam log çıktısı
+- **`.command.out`**: Süreç çağrısı tarafından normal çıktı (`stdout`)
+- **`.command.run`**: Nextflow tarafından süreç çağrısını yürütmek için çalıştırılan tam betik
+- **`.command.sh`**: Süreç çağrısı tarafından gerçekte çalıştırılan komut
 - **`.exitcode`**: Komuttan kaynaklanan çıkış kodu
 
 `.command.sh` dosyası özellikle yararlıdır çünkü size Nextflow'un yürüttüğü ana komutu gösterir, tüm defter tutma ve görev/ortam kurulumu dahil değildir.
 
-```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/command.sh"
+```console title="work/a3/1e153543b0a7f9d2c4735ddb4ab231/.command.sh"
 #!/bin/bash -ue
 echo 'Hello World!' > output.txt
 
@@ -225,16 +274,16 @@ Bu, workflow'un daha önce doğrudan komut satırında çalıştırdığımız a
 
 Bir şeyler ters gittiğinde ve ne olduğunu gidermeniz gerektiğinde, Nextflow'un workflow talimatlarına, değişken enterpolasyonuna vb. göre tam olarak hangi komutu oluşturduğunu kontrol etmek için `command.sh` betiğine bakmak yararlı olabilir.
 
-### 2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın
+### 2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın
 
 Workflow'u `--input` argümanı için farklı değerlerle birkaç kez yeniden çalıştırmayı deneyin, ardından görev dizinlerine bakın.
 
 ??? abstract "Dizin içeriği"
 
     ```console
-    work
-    ├── 0f
-    │   └── 52b7e07b0e274a80843fca48ed21b8
+    work/
+    ├── 09
+    │   └── 5ea8665939daf6f04724286c9b3c8a
     │       ├── .command.begin
     │       ├── .command.err
     │       ├── .command.log
@@ -243,17 +292,8 @@ Workflow'u `--input` argümanı için farklı değerlerle birkaç kez yeniden ç
     │       ├── .command.sh
     │       ├── .exitcode
     │       └── output.txt
-    ├── 67
-    │   ├── 134e6317f90726c6c17ad53234a32b
-    │   │   ├── .command.begin
-    │   │   ├── .command.err
-    │   │   ├── .command.log
-    │   │   ├── .command.out
-    │   │   ├── .command.run
-    │   │   ├── .command.sh
-    │   │   ├── .exitcode
-    │   │   └── output.txt
-    │   └── e029f2e75305874a9ab263d21ebc2c
+    ├── 92
+    │   └── ceb95e05d87621c92a399da9bd2067
     │       ├── .command.begin
     │       ├── .command.err
     │       ├── .command.log
@@ -262,8 +302,8 @@ Workflow'u `--input` argümanı için farklı değerlerle birkaç kez yeniden ç
     │       ├── .command.sh
     │       ├── .exitcode
     │       └── output.txt
-    ├── 6c
-    │   └── d4fd787e0b01b3c82e85696c297500
+    ├── 93
+    │   └── 6708dbc20c7efdc6769cbe477061ec
     │       ├── .command.begin
     │       ├── .command.err
     │       ├── .command.log
@@ -272,8 +312,18 @@ Workflow'u `--input` argümanı için farklı değerlerle birkaç kez yeniden ç
     │       ├── .command.sh
     │       ├── .exitcode
     │       └── output.txt
-    └── e8
-        └── ab99fad46ade52905ec973ff39bb80
+    ├── a3
+    │   └── 1e153543b0a7f9d2c4735ddb4ab231
+    │       ├── .command.begin
+    │       ├── .command.err
+    │       ├── .command.log
+    │       ├── .command.out
+    │       ├── .command.run
+    │       ├── .command.sh
+    │       ├── .exitcode
+    │       └── output.txt
+    └── a4
+        └── aa3694b8808bdcc1135ef4a1187a4d
             ├── .command.begin
             ├── .command.err
             ├── .command.log
@@ -374,7 +424,7 @@ Her **process**, pipeline'daki ilgili adımın hangi işlem(ler)i gerçekleştir
 
 ### 3.2. `process` tanımı
 
-İlk kod bloğu bir **process**'i tanımlar.
+İlk kod bloğu bir [**process**](https://nextflow.io/docs/latest/process.html)'i tanımlar.
 Process tanımı `process` anahtar kelimesiyle başlar, ardından process adı ve son olarak süslü parantezlerle sınırlandırılmış process gövdesi gelir.
 Process gövdesi, çalıştırılacak komutu belirten bir script bloğu içermelidir; bu, komut satırı terminalinde çalıştırabileceğiniz herhangi bir şey olabilir.
 
@@ -411,7 +461,7 @@ Bu, yalnızca bir `input` tanımı, bir `output` tanımı ve yürütülecek `scr
 
 ### 3.3. `workflow` tanımı
 
-İkinci kod bloğu **workflow**'un kendisini tanımlar.
+İkinci kod bloğu [**workflow**](https://nextflow.io/docs/latest/workflow.html)'un kendisini tanımlar.
 Workflow tanımı `workflow` anahtar kelimesiyle başlar, ardından isteğe bağlı bir ad ve süslü parantezlerle sınırlandırılmış workflow gövdesi gelir.
 
 Burada `main:` bloğu ve `publish:` bloğundan oluşan bir **workflow**'umuz var.
@@ -429,11 +479,11 @@ workflow {
 }
 ```
 
-Bu durumda `main:` bloğu `sayHello` process'ine bir çağrı içerir ve selamlama olarak kullanması için `params.input` adlı bir girdi verir.
+Bu durumda `main:` bloğu `sayHello` sürecine bir çağrı içerir ve selamlama olarak kullanması için `params.input` adlı bir girdi verir.
 
 Birazdan daha ayrıntılı tartışacağımız gibi, `params.input` komut satırımızda `--input` parametresine verdiğimiz değeri tutar.
 
-`publish:` bloğu, `sayHello()` process çağrısının çıktısını listeler, buna `sayHello.out` olarak atıfta bulunur ve `first_output` adını verir (bu, workflow yazarının istediği herhangi bir şey olabilir).
+`publish:` bloğu, `sayHello()` süreç çağrısının çıktısını listeler, buna `sayHello.out` olarak atıfta bulunur ve `first_output` adını verir (bu, workflow yazarının istediği herhangi bir şey olabilir).
 
 Bu çok minimal bir **workflow** tanımıdır.
 Gerçek dünya pipeline'larında, workflow tipik olarak **channel**'larla bağlanan birden fazla **process** çağrısı içerir ve değişken girdiler için varsayılan değerler ayarlanmış olabilir.
@@ -443,9 +493,9 @@ Kursun 2. Bölümünde buna gireceğiz.
 
 ### 3.4. Komut satırı parametreleri için `params` sistemi
 
-`sayHello()` process çağrısına sağladığımız `params.input`, şık bir Nextflow kod parçasıdır ve üzerinde ekstra bir dakika harcamaya değer.
+`sayHello()` süreç çağrısına sağladığımız `params.input`, şık bir Nextflow kod parçasıdır ve üzerinde ekstra bir dakika harcamaya değer.
 
-Yukarıda belirtildiği gibi, `--input` komut satırı parametresinin değerini `sayHello()` process çağrısına bu şekilde geçiriyoruz.
+Yukarıda belirtildiği gibi, `--input` komut satırı parametresinin değerini `sayHello()` süreç çağrısına bu şekilde geçiriyoruz.
 Aslında, sadece `params.someParameterName` bildirmek, workflow'a komut satırından `--someParameterName` adlı bir parametre vermek için yeterlidir.
 
 Burada bu parametre bildirimini, workflow'un beklediği girdi türünü belirten bir `params` bloğu kurarak resmileştirdik (Nextflow 25.10.2 ve sonrası).
@@ -460,11 +510,12 @@ params {
 ```
 
 Desteklenen türler arasında `String`, `Integer`, `Float`, `Boolean` ve `Path` bulunur.
+Daha fazla bilgi için, Nextflow referans dokümantasyonundaki [Workflow parametreleri](https://nextflow.io/docs/latest/config.html#workflow-parameters) bölümüne bakın.
 
 !!! tip "İpucu"
 
-    `params` sistemi kullanılarak bildirilen workflow parametreleri komut satırında her zaman iki tire alır (`--`).
-    Bu, onları yalnızca bir tire alan (`-`) Nextflow düzeyindeki parametrelerden ayırır.
+    `params` sistemi kullanılarak bildirilen _workflow_ parametreleri komut satırında her zaman iki tire alır (`--`).
+    Bu, onları yalnızca bir tire alan (`-`) Nextflow düzeyindeki CLI bayraklarından ayırır.
 
 ### 3.5. `publish` direktifi
 
@@ -487,13 +538,15 @@ Bu, `publish:` bloğunda listelenen `first_output` çıktısının varsayılan `
 Yayınlama davranışını kontrol etmek için burada gösterilenden daha fazla seçenek vardır; daha sonra birkaçını ele alacağız.
 Bir workflow birden fazla çıktı ürettiğinde, her birinin `output` bloğunda bu şekilde listelendiğini de göreceksiniz.
 
+Daha fazla bilgi için, Nextflow referans dokümantasyonundaki [Çıktıları yayınlama](https://nextflow.io/docs/latest/workflow.html#publishing-outputs) bölümüne bakın.
+
 ??? info "`publishDir` kullanarak çıktıları yayınlamak için eski sözdizimi"
 
-    Çok yakın zamana kadar, çıktıları yayınlamanın yerleşik yolu, `publishDir` direktifi kullanarak her bir process düzeyinde yapmaktı.
+    Çok yakın zamana kadar, çıktıları yayınlamanın yerleşik yolu, `publishDir` direktifi kullanarak her bir süreç düzeyinde yapmaktı.
 
-    Bu kod kalıbını eski Nextflow pipeline'larında ve process modüllerinde hala her yerde bulacaksınız, bu yüzden bunun farkında olmak önemlidir.
+    Bu kod kalıbını eski Nextflow pipeline'larında ve süreç modüllerinde hala her yerde bulacaksınız, bu yüzden bunun farkında olmak önemlidir.
 
-    Workflow'da `publish:` bloğu ve üst düzeyde `output` bloğu yerine, `sayHello` process tanımında bir `publishDir` satırı görürdünüz:
+    Workflow'da `publish:` bloğu ve üst düzeyde `output` bloğu yerine, `sayHello` süreç tanımında bir `publishDir` satırı görürdünüz:
 
     ```groovy title="Sözdizimi örneği" linenums="1" hl_lines="3"
     process sayHello {
@@ -533,12 +586,12 @@ Burada size aynı workflow'u yeniden başlatmanız gerektiğinde `resume` özell
 Bazen, daha önce başlattığınız bir pipeline'ı, önceden başarıyla tamamlanmış herhangi bir işi yeniden yapmadan çalıştırmak isteyeceksiniz.
 
 Nextflow'un bunu yapmanıza olanak tanıyan `-resume` adlı bir seçeneği vardır.
-Özellikle, bu modda, tam olarak aynı kod, ayarlar ve girdilerle zaten çalıştırılmış olan tüm process'ler atlanacaktır.
-Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya değiştirdiğiniz ya da yeni ayarlar veya girdiler sağladığınız process'leri çalıştıracağı anlamına gelir.
+Özellikle, bu modda, tam olarak aynı kod, ayarlar ve girdilerle zaten çalıştırılmış olan tüm süreçler atlanacaktır.
+Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya değiştirdiğiniz ya da yeni ayarlar veya girdiler sağladığınız süreçleri çalıştıracağı anlamına gelir.
 
 Bunu yapmanın iki önemli avantajı vardır:
 
-- Bir pipeline geliştirmenin ortasındaysanız, değişikliklerinizi test etmek için yalnızca aktif olarak üzerinde çalıştığınız process(ler)i çalıştırmanız gerektiğinden daha hızlı iterasyon yapabilirsiniz.
+- Bir pipeline geliştirmenin ortasındaysanız, değişikliklerinizi test etmek için yalnızca aktif olarak üzerinde çalıştığınız süreç(ler)i çalıştırmanız gerektiğinden daha hızlı iterasyon yapabilirsiniz.
 - Üretimde bir pipeline çalıştırıyorsanız ve bir şeyler ters giderse, birçok durumda sorunu düzeltebilir ve pipeline'ı yeniden başlatabilirsiniz ve başarısızlık noktasından itibaren çalışmaya devam eder, bu da size çok zaman ve hesaplama tasarrufu sağlayabilir.
 
 Kullanmak için, komutunuza `-resume` ekleyin ve çalıştırın:
@@ -559,7 +612,7 @@ nextflow run 1-hello.nf --input 'Hello World!' -resume
 
 Konsol çıktısı tanıdık görünmeli, ancak öncekine kıyasla biraz farklı olan bir şey var.
 
-Process durum satırında (satır 5) eklenen `cached:` kısmına bakın, bu Nextflow'un bu işi zaten yaptığını tanıdığı ve önceki başarılı çalıştırmanın sonucunu yeniden kullandığı anlamına gelir.
+Süreç durum satırında (satır 5) eklenen `cached:` kısmına bakın, bu Nextflow'un bu işi zaten yaptığını tanıdığı ve önceki başarılı çalıştırmanın sonucunu yeniden kullandığı anlamına gelir.
 
 Ayrıca çalışma alt dizini hash'inin önceki çalıştırmayla aynı olduğunu görebilirsiniz.
 Nextflow kelimenin tam anlamıyla size önceki çalıştırmayı gösteriyor ve "Bunu zaten orada yaptım" diyor.
@@ -567,6 +620,8 @@ Nextflow kelimenin tam anlamıyla size önceki çalıştırmayı gösteriyor ve 
 !!! tip "İpucu"
 
     Bir pipeline'ı `resume` ile yeniden çalıştırdığınızda, Nextflow daha önce başarıyla çalıştırılan çalıştırmalar tarafından çalışma dizininin dışında yayınlanan hiçbir dosyanın üzerine yazmaz.
+
+    Daha fazla bilgi için, Nextflow referans dokümantasyonundaki [Cache ve resume](https://nextflow.io/docs/latest/cache-and-resume.html) bölümüne bakın.
 
 ### 4.2. Geçmiş çalıştırmaların logunu inceleyin
 
@@ -584,7 +639,7 @@ Bir nextflow workflow'u başlattığınızda, geçerli çalışma dizininde `.ne
 
 Bu dosya size geçerli çalışma dizininden başlatılan her Nextflow çalıştırması için zaman damgası, çalıştırma adı, durum, revizyon kimliği, oturum kimliği ve tam komut satırını verir.
 
-Bu bilgilere erişmenin daha uygun bir yolu `nextflow log` komutunu kullanmaktır.
+Bu bilgilere erişmenin daha uygun bir yolu [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log) komutunu kullanmaktır.
 
 ```bash
 nextflow log
@@ -613,12 +668,11 @@ Nextflow, çalıştırma önbellekleme bilgilerini gruplamak için oturum kimli�
 Çok sayıda pipeline çalıştırırsanız, birçok alt dizin boyunca çok sayıda dosya biriktirebilirsiniz.
 Alt dizinler rastgele adlandırıldığından, adlarından hangilerinin daha eski veya daha yeni çalıştırmalar olduğunu söylemek zordur.
 
-Neyse ki Nextflow, artık umursamadığınız geçmiş çalıştırmalar için çalışma alt dizinlerini otomatik olarak silebilen yararlı bir `clean` alt komutu içerir.
+Neyse ki Nextflow, artık umursamadığınız geçmiş çalıştırmalar için çalışma alt dizinlerini otomatik olarak silebilen yararlı bir [`nextflow clean`](https://www.nextflow.io/docs/latest/reference/cli.html#clean) komutu içerir.
 
 #### 4.3.1. Silme kriterlerini belirleyin
 
-Neyin silineceğini belirlemek için birden fazla [seçenek](https://www.nextflow.io/docs/latest/reference/cli.html#clean) vardır.
-
+Neyin silineceğini belirlemek için birden fazla seçenek vardır, yukarıda bağlantısı verilen dokümantasyonda bunları keşfedebilirsiniz.
 Burada size belirli bir çalıştırmadan önceki tüm alt dizinleri silen bir örnek gösteriyoruz, çalıştırma adı kullanılarak belirtilir.
 
 `-resume` kullanmadığınız en son başarılı çalıştırmayı bulun; bizim durumumuzda çalıştırma adı `backstabbing_swartz` idi.
@@ -668,7 +722,7 @@ Bunun iki karakterli alt dizinleri (yukarıdaki `eb/` gibi) kaldırmadığını,
 !!! Warning "Uyarı"
 
     Geçmiş çalıştırmalardan çalışma alt dizinlerini silmek, onları Nextflow'un önbelleğinden kaldırır ve bu dizinlerde depolanan tüm çıktıları siler.
-    Bu, Nextflow'un ilgili process'leri yeniden çalıştırmadan çalışmaya devam etme yeteneğini bozar.
+    Bu, Nextflow'un ilgili süreçleri yeniden çalıştırmadan çalışmaya devam etme yeteneğini bozar.
 
     Önemsediğiniz çıktıları kaydetmekten siz sorumlusunuz! Bu, `publish` direktifi için `symlink` modu yerine `copy` modunu tercih etmemizin ana nedenidir.
 
@@ -688,22 +742,22 @@ Bu eğitimin bir sonraki bölümünde, Nextflow'un birden fazla girdiyi verimli 
 
 <quiz>
 `[a3/7be2fa] SAYHELLO | 1 of 1 ✔` konsol çıktı satırında `[a3/7be2fa]` neyi temsil eder?
-- [ ] Process versiyon numarası
+- [ ] Süreç versiyon numarası
 - [ ] Benzersiz bir çalıştırma tanımlayıcısı
 - [x] Görevin çalışma dizinine kısaltılmış yol
 - [ ] Çıktı dosyasının sağlama toplamı
 
-Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun)
+Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun](#24-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun)
 </quiz>
 
 <quiz>
 Görev dizinindeki `.command.sh` dosyasının amacı nedir?
 - [ ] Görevin yapılandırma ayarlarını saklar
-- [x] Process tarafından yürütülen gerçek komutu gösterir
+- [x] Süreç tarafından yürütülen gerçek komutu gösterir
 - [ ] Başarısız görevlerden hata mesajlarını içerir
 - [ ] Görev için hazırlanan girdi dosyalarını listeler
 
-Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun](#23-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun)
+Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun](#24-orijinal-ciktiyi-ve-loglari-work-dizininde-bulun)
 </quiz>
 
 <quiz>
@@ -713,7 +767,7 @@ Daha fazla bilgi: [2.3. Orijinal çıktıyı ve logları `work/` dizininde bulun
 - [ ] Nextflow üzerine yazmayı engeller ve başarısız olur
 - [ ] Otomatik olarak yedeklenirler
 
-Daha fazla bilgi: [2.4. Workflow'u farklı selamlamalarla yeniden çalıştırın](#24-workflowu-farkli-selamlamalarla-yeniden-calistirin)
+Daha fazla bilgi: [2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın](#25-workflowu-farkli-selamlamalarla-yeniden-calistirin)
 </quiz>
 
 <quiz>
@@ -743,7 +797,7 @@ Daha fazla bilgi: [4.2. Geçmiş çalıştırmaların logunu inceleyin](#42-gecm
 
 <quiz>
 Bir workflow dosyasındaki `params` bloğunun amacı nedir?
-- [ ] Process kaynak gereksinimlerini tanımlamak
+- [ ] Süreç kaynak gereksinimlerini tanımlamak
 - [ ] Executor'ı yapılandırmak
 - [x] Workflow girdi parametrelerini bildirmek ve türünü belirlemek
 - [ ] Çıktı yayınlama seçeneklerini belirtmek
