@@ -254,15 +254,6 @@ def _get_repo() -> git.Repo:
     return git.Repo(REPO_ROOT)
 
 
-def get_file_commit_time(path: Path) -> int | None:
-    """Get timestamp of last commit affecting a file."""
-    try:
-        commits = list(_get_repo().iter_commits(paths=str(path), max_count=1))
-        return commits[0].committed_date if commits else None
-    except git.GitCommandError:
-        return None
-
-
 def file_changed_since(path: Path, since_commit: str) -> bool:
     """Check if file has any commits after the given commit.
 
@@ -374,9 +365,8 @@ def get_outdated_files(lang: str, baseline: str | None = None) -> list[Translati
 
     Args:
         lang: Target language code
-        baseline: Commit SHA to compare against. If provided, finds files
-            that changed in English since this commit. If None, falls back
-            to timestamp comparison.
+        baseline: Commit SHA to compare against. Finds files that changed
+            in English since this commit. If None, returns empty list.
 
     Returns:
         List of TranslationFile objects needing updates
@@ -385,10 +375,13 @@ def get_outdated_files(lang: str, baseline: str | None = None) -> list[Translati
         If prompt files (general or language-specific) changed since baseline,
         ALL existing translations for that language are considered outdated.
     """
+    if not baseline:
+        return []
+
     outdated = []
 
     # Check if prompts changed - if so, all existing translations are outdated
-    prompts_changed = baseline and prompt_changed_since(lang, baseline)
+    prompts_changed = prompt_changed_since(lang, baseline)
 
     for en_path in iter_en_docs():
         lang_path = en_to_lang_path(en_path, lang)
@@ -398,17 +391,9 @@ def get_outdated_files(lang: str, baseline: str | None = None) -> list[Translati
         if prompts_changed:
             # Prompt changed: all existing translations need re-translation
             outdated.append(TranslationFile(en_path, lang_path, lang))
-        elif baseline:
+        elif file_changed_since(en_path, baseline):
             # Check if English file changed since baseline
-            if file_changed_since(en_path, baseline):
-                outdated.append(TranslationFile(en_path, lang_path, lang))
-        else:
-            # Fallback: timestamp comparison
-            en_time = get_file_commit_time(en_path)
-            lang_time = get_file_commit_time(lang_path)
-
-            if en_time and lang_time and lang_time < en_time:
-                outdated.append(TranslationFile(en_path, lang_path, lang))
+            outdated.append(TranslationFile(en_path, lang_path, lang))
 
     return outdated
 
@@ -858,7 +843,6 @@ def sync(
     console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
     # Determine baseline commit
-    baseline: str | None = None
     if since:
         baseline = since
         console.print(f"[cyan]Using baseline commit (manual):[/cyan] {baseline}")
@@ -869,8 +853,8 @@ def sync(
                 f"[cyan]Using baseline commit (from last PR):[/cyan] {baseline}"
             )
         except ConfigError as e:
-            console.print(f"[yellow]Warning:[/yellow] {e}")
-            console.print("[yellow]Falling back to timestamp comparison[/yellow]")
+            console.print(f"[red]Error:[/red] {e}")
+            raise typer.Exit(1)
 
     # Gather work
     orphaned = get_orphaned_files(lang)
