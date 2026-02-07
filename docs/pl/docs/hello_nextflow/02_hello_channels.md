@@ -101,7 +101,7 @@ Oto linia kodu, której użyjemy:
 greeting_ch = channel.of('Hello Channels!')
 ```
 
-To tworzy kanał o nazwie `greeting_ch` używając fabryki kanałów `channel.of()`, która konfiguruje prosty kanał kolejki, i ładuje ciąg `'Hello Channels!'` jako wartość pozdrowienia.
+Linia ta tworzy kanał o nazwie `greeting_ch` za pomocą fabryki kanałów `channel.of()`, która konfiguruje prosty kanał kolejki, i ładuje ciąg `'Hello Channels!'` jako wartość pozdrowienia.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
@@ -183,7 +183,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
     }
     ```
 
-To mówi Nextflow'owi, aby uruchomił proces `sayHello` na zawartości kanału `greeting_ch`.
+Linia ta mówi Nextflow'owi, aby uruchomił proces `sayHello` na zawartości kanału `greeting_ch`.
 
 Teraz nasz workflow jest właściwie funkcjonalny; jest jawnym odpowiednikiem napisania `sayHello('Hello Channels!')`.
 
@@ -218,13 +218,13 @@ Możesz sprawdzić katalog wyników, aby upewnić się, że wynik jest nadal tak
 Zwiększyliśmy więc elastyczność workflow'u, osiągając ten sam końcowy wynik.
 Może się wydawać, że piszemy więcej kodu bez wymiernej korzyści, ale wartość stanie się jasna, gdy tylko zaczniemy obsługiwać więcej wejść.
 
-Jako podgląd tego, spójrzmy na jeszcze jedną rzecz przed przejściem dalej: jedną małą, ale wygodną korzyść z używania jawnego kanału do zarządzania wejściem danych.
+Jako podgląd, spójrzmy na jeszcze jedną rzecz przed przejściem dalej: jedną małą, ale wygodną korzyść z używania jawnego kanału do zarządzania wejściem danych.
 
 ### 1.4. Użyj `view()` do inspekcji zawartości kanału
 
 Kanały Nextflow'a są zbudowane w sposób, który pozwala nam operować na ich zawartości za pomocą operatorów, które omówimy szczegółowo później w tym rozdziale.
 
-Na razie pokażemy Ci tylko, jak używać super prostego operatora o nazwie [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) do inspekcji zawartości kanału.
+Na razie pokażemy Ci tylko, jak używać bardzo prostego operatora o nazwie [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) do inspekcji zawartości kanału.
 Możesz myśleć o `view()` jak o narzędziu do debugowania, podobnie jak instrukcja `print()` w Pythonie czy jej odpowiednik w innych językach.
 
 Dodaj tę małą linię do bloku workflow:
@@ -282,7 +282,7 @@ nextflow run hello-channels.nf
     Hello Channels!
     ```
 
-Jak widzisz, to wyświetla zawartość kanału do konsoli.
+Jak widzisz, linia ta wyświetla zawartość kanału do konsoli.
 Tutaj mamy tylko jeden element, ale gdy zaczniemy ładować wiele wartości do kanału w następnej sekcji, zobaczysz, że jest ustawione na wyświetlanie jednego elementu na linię.
 
 ### Podsumowanie
@@ -570,7 +570,7 @@ Upewnij się, że zastąpisz `output.txt` zarówno w definicji `output`, jak i w
 
     W definicji output MUSISZ użyć podwójnych cudzysłowów wokół wyrażenia nazwy pliku wyjściowego (NIE pojedynczych cudzysłowów), w przeciwnym razie to się nie powiedzie.
 
-To powinno generować unikalną nazwę pliku wyjściowego za każdym razem, gdy proces jest wywoływany, tak aby można go było odróżnić od wyjść z innych wywołań tego samego procesu w katalogu wyjściowym.
+Kod ten powinien generować unikalną nazwę pliku wyjściowego za każdym razem, gdy proces jest wywoływany, tak aby można go było odróżnić od wyjść z innych wywołań tego samego procesu w katalogu wyjściowym.
 
 #### 2.2.2. Uruchom workflow
 
@@ -869,7 +869,7 @@ Tutaj dodaliśmy operator w następnej linii dla czytelności, ale możesz doda�
 
 #### 3.2.2. Doprecyzuj instrukcje `view()`
 
-Moglibyśmy uruchomić to od razu, aby sprawdzić, czy działa, ale przy okazji doprecyzujemy sposób, w jaki sprawdzamy zawartość kanału.
+Moglibyśmy uruchomić to od razu, aby sprawdzić, czy działa, ale przy okazji doprecyzujmy sposób, w jaki sprawdzamy zawartość kanału.
 
 Chcemy móc porównać, jak zawartość wygląda przed i po zastosowaniu operatora `flatten()`, więc dodamy drugą instrukcję oraz trochę kodu, aby były wyraźniej oznaczone w wyjściu.
 
@@ -927,8 +927,7 @@ To spowoduje ładnie oznaczone wyjście konsoli.
 !!! info "Informacja"
 
     W niektórych pipeline'ach możesz zobaczyć specjalną zmienną o nazwie `$it` używaną wewnątrz closures operatorów.
-    Jest to _niejawna_ zmienna, która pozwala na skrócony dostęp do wewnętrznej zmiennej
-    bez potrzeby definiowania jej za pomocą `->`.
+    Jest to _niejawna_ zmienna, która pozwala na skrócony dostęp do wewnętrznej zmiennej bez potrzeby definiowania jej za pomocą `->`.
 
     Preferujemy być jawni, aby pomóc w czytelności kodu, więc składnia `$it` jest odradzana i będzie stopniowo wycofywana z języka Nextflow.
 
@@ -1033,7 +1032,7 @@ Wprowadź następującą edycję deklaracji parametru:
     input: String = 'Holà mundo!'
     ```
 
-To zakłada, że plik jest współlokalizowany z kodem workflow'u.
+Edycja ta zakłada, że plik jest współlokalizowany z kodem workflow'u.
 Nauczysz się, jak radzić sobie z innymi lokalizacjami danych później na swojej drodze z Nextflow'em.
 
 #### 4.1.2. Przełącz na fabrykę kanałów zaprojektowaną do obsługi pliku

@@ -9,7 +9,7 @@
 ## 1. Spraw, aby krowa cytowała słynnych naukowców
 
 Ta sekcja zawiera dodatkowe ćwiczenia pozwalające na utrwalenie dotychczas zdobytej wiedzy.
-Wykonanie tych ćwiczeń _nie jest wymagane_ do zrozumienia późniejszych części szkolenia, ale stanowi świetny sposób na utrwalenie wiedzy poprzez sprawdzenie, jak sprawić, aby krowa cytowała słynnych naukowców.
+Wykonanie tych ćwiczeń _nie jest wymagane_ do zrozumienia późniejszych części szkolenia, ale stanowi świetny sposób na sprawdzenie, jak zmusić krowę do cytowania słynnych naukowców.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________
@@ -39,7 +39,7 @@ Na wysokim poziomie, aby wykonać to ćwiczenie, będziesz musiał:
 - Utworzyć proces `getQuote`, który używa kontenera `quote` do pobrania cytatu dla każdego wejścia.
 - Połączyć wyjście procesu `getQuote` z procesem `cowsay`, aby wyświetlić cytat.
 
-Dla obrazu kontenera `quote` możesz użyć albo tego, który sam zbudowałeś w poprzednim dodatkowym ćwiczeniu, albo tego z Seqera Containers.
+Dla obrazu kontenera `quote` możesz użyć albo tego, który sam zbudowałeś w poprzednim dodatkowym ćwiczeniu, albo pobrać gotowy z Seqera Containers.
 
 !!! Hint
 
@@ -58,7 +58,7 @@ Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-cont
 ### 1.2. Zmodyfikuj Swój pipeline Nextflow, aby mógł wykonywać się w trybach `quote` i `sayHello`.
 
 Dodaj logikę rozgałęzień do Swojego pipeline'u, aby mógł akceptować dane wejściowe przeznaczone zarówno dla `quote`, jak i `sayHello`.
-Oto przykład użycia instrukcji `if` w workflow Nextflow:
+Oto przykład użycia instrukcji `if` w workflow'ie Nextflow:
 
 ```groovy title="hello-containers.nf"
 workflow {

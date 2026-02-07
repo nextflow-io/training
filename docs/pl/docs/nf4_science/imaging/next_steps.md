@@ -29,8 +29,8 @@ Jeśli chcesz nauczyć się pisać pipeline'y Nextflow:
 
 ### Dodatkowe zasoby
 
-- **[Nextflow Documentation](https://www.nextflow.io/docs/latest/)**: Kompletna dokumentacja referencyjna
-- **[nf-core Documentation](https://nf-co.re/docs)**: Wytyczne i najlepsze praktyki
+- **[Dokumentacja Nextflow](https://www.nextflow.io/docs/latest/)**: Kompletna dokumentacja referencyjna
+- **[Dokumentacja nf-core](https://nf-co.re/docs)**: Wytyczne i najlepsze praktyki
 
 ## Zaangażuj się
 

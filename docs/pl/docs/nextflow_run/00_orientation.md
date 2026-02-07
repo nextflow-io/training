@@ -6,8 +6,8 @@
 
 Aby skorzystać z gotowego środowiska, które udostępniamy na GitHub Codespaces, kliknij przycisk "Open in GitHub Codespaces" poniżej. Inne opcje znajdziesz w sekcji [Opcje środowiska](../envsetup/index.md).
 
-Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj prawego przycisku myszy, ctrl-click lub cmd-click w zależności od sprzętu), aby móc czytać wskazówki podczas ładowania środowiska.
-Będziesz musiał mieć te informacje otwarte równolegle, aby przejść przez kurs.
+Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj prawego przycisku myszy, ctrl-click lub cmd-click w zależności od sprzętu), aby móc czytać dalej podczas ładowania środowiska.
+Będziesz musiał mieć te instrukcje otwarte równolegle, aby przejść przez kurs.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -27,11 +27,11 @@ Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że u�
 
 ## Przygotuj się do pracy
 
-Po uruchomieniu codespace są dwie rzeczy, które musisz zrobić przed rozpoczęciem szkolenia: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.
+Po uruchomieniu codespace'a musisz wykonać dwie czynności przed rozpoczęciem szkolenia: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.
 
 ### Ustaw katalog roboczy
 
-Domyślnie codespace otwiera się z głównym folderem wszystkich materiałów szkoleniowych, ale dla tego modułu będziemy pracować w podkatalogu `nextflow-run/`.
+Domyślnie codespace otwiera się z katalogiem roboczym ustawionym w głównym folderze wszystkich kursów szkoleniowych, ale w tym kursie będziemy pracować w katalogu `nextflow-run/`.
 
 Zmień katalog teraz, uruchamiając to polecenie w terminalu:
 
@@ -111,7 +111,7 @@ Używamy zwijanych sekcji takich jak ta do wyświetlania oczekiwanego wyjścia p
 
 ## Lista kontrolna gotowości
 
-Myślisz, że jesteś gotowy do rozpoczęcia?
+Myślisz, że jesteś gotowy, aby zacząć?
 
 - [ ] Rozumiem cel tego kursu i jego wymagania wstępne
 - [ ] Moje środowisko jest uruchomione i działa
@@ -119,4 +119,4 @@ Myślisz, że jesteś gotowy do rozpoczęcia?
 
 Jeśli możesz zaznaczyć wszystkie pola, jesteś gotowy do działania.
 
-**Aby przejść do [Części 1: Podstawowe operacje](./01_basics.md), kliknij strzałkę w prawym dolnym rogu tej strony.**
+**Aby przejść do [Części 1: Uruchamianie podstawowych operacji](./01_basics.md), kliknij strzałkę w prawym dolnym rogu tej strony.**

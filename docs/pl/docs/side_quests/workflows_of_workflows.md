@@ -4,7 +4,7 @@
 
 Podczas tworzenia pipeline'u często zdarza się, że tworzysz podobne sekwencje procesów dla różnych typów danych lub etapów analizy. Możesz kończyć kopiując i wklejając te sekwencje procesów, co prowadzi do zduplikowanego kodu, który jest trudny w utrzymaniu; albo możesz stworzyć jeden masywny workflow, który jest trudny do zrozumienia i modyfikacji.
 
-Jedną z najpotężniejszych funkcji Nextflow jest jego zdolność do komponowania złożonych pipeline'ów z mniejszych, wielokrotnego użytku modułów workflow. To modularne podejście sprawia, że pipeline'y są łatwiejsze do rozwijania, testowania i utrzymania.
+Jedną z najpotężniejszych funkcji Nextflow'a jest jego zdolność do komponowania złożonych pipeline'ów z mniejszych, wielokrotnego użytku modułów workflow. To modularne podejście sprawia, że pipeline'y są łatwiejsze do rozwijania, testowania i utrzymania.
 
 ### Cele nauki
 
@@ -25,7 +25,7 @@ Te umiejętności pomogą Ci budować złożone pipeline'y, zachowując czystą,
 Przed podjęciem tej misji pobocznej powinieneś:
 
 - Ukończyć tutorial [Hello Nextflow](../hello_nextflow/README.md) lub równoważny kurs dla początkujących.
-- Swobodnie posługiwać się podstawowymi konceptami i mechanizmami Nextflow (procesy, kanały, operatory, moduły)
+- Swobodnie posługiwać się podstawowymi konceptami i mechanizmami Nextflow'a (procesy, kanały, operatory, moduły)
 
 ---
 
@@ -71,6 +71,8 @@ Twoim wyzwaniem jest złożenie tych modułów w dwa oddzielne workflow'y, któr
 - `GREETING_WORKFLOW`, który waliduje nazwy, tworzy powitania i dodaje znaczniki czasu
 - `TRANSFORM_WORKFLOW`, który konwertuje tekst na wielkie litery i odwraca go
 
+<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
+
 #### Lista gotowości
 
 Myślisz, że jesteś gotowy, aby rozpocząć?
@@ -86,16 +88,16 @@ Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.
 
 ## 1. Utwórz workflow powitania
 
-Zacznijmy od stworzenia workflow, który waliduje nazwy i generuje powitania ze znacznikami czasu.
+Zacznijmy od stworzenia workflow'a, który waliduje nazwy i generuje powitania ze znacznikami czasu.
 
-### 1.1. Utwórz strukturę workflow
+### 1.1. Utwórz strukturę workflow'a
 
 ```bash title="Utwórz katalog i plik workflow"
 mkdir -p workflows
 touch workflows/greeting.nf
 ```
 
-### 1.2. Dodaj kod pierwszego (pod)workflow
+### 1.2. Dodaj kod pierwszego (pod)workflow'a
 
 Dodaj ten kod do `workflows/greeting.nf`:
 
@@ -108,7 +110,7 @@ workflow {
 
     names_ch = channel.of('Alice', 'Bob', 'Charlie')
 
-    // Połącz procesy: waliduj -> utwórz pozdrowienie -> dodaj znacznik czasu
+    // Połącz procesy: waliduj -> utwórz powitanie -> dodaj znacznik czasu
     validated_ch = VALIDATE_NAME(names_ch)
     greetings_ch = SAY_HELLO(validated_ch)
     timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
@@ -140,10 +142,12 @@ Komponowalne workflow'y mają kilka różnic w porównaniu z tymi, które widzia
 
 - Blok workflow musi być nazwany
 - Wejścia są deklarowane za pomocą słowa kluczowego `take:`
-- Zawartość workflow jest umieszczona wewnątrz bloku `main:`
+- Zawartość workflow'a jest umieszczona wewnątrz bloku `main:`
 - Wyjścia są deklarowane za pomocą słowa kluczowego `emit:`
 
 Zaktualizujmy workflow powitania, aby pasował do tej struktury. Zmień kod na następujący:
+
+<!-- TODO: switch to before/after tabs -->
 
 ```groovy title="workflows/greeting.nf" linenums="1" hl_lines="6 7 9 15 16 17"
 include { VALIDATE_NAME } from '../modules/validate_name'
@@ -155,19 +159,19 @@ workflow GREETING_WORKFLOW {
         names_ch        // Kanał wejściowy z imionami
 
     main:
-        // Połącz procesy: waliduj -> utwórz pozdrowienie -> dodaj znacznik czasu
+        // Połącz procesy: waliduj -> utwórz powitanie -> dodaj znacznik czasu
         validated_ch = VALIDATE_NAME(names_ch)
         greetings_ch = SAY_HELLO(validated_ch)
         timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
 
     emit:
-        greetings = greetings_ch      // Oryginalne pozdrowienia
-        timestamped = timestamped_ch  // Pozdrowienia ze znacznikiem czasu
+        greetings = greetings_ch      // Oryginalne powitania
+        timestamped = timestamped_ch  // Powitania ze znacznikiem czasu
 }
 ```
 
-Widać, że workflow jest teraz nazwany i ma bloki `take:` oraz `emit:`, a to są połączenia, których użyjemy do komponowania workflow wyższego poziomu.
-Zawartość workflow jest również umieszczona wewnątrz bloku `main:`. Zauważ również, że usunęliśmy deklarację kanału wejściowego `names_ch`, ponieważ jest on teraz przekazywany jako argument do workflow.
+Widać, że workflow jest teraz nazwany i ma bloki `take:` oraz `emit:`, a to są połączenia, których użyjemy do komponowania workflow'a wyższego poziomu.
+Zawartość workflow'a jest również umieszczona wewnątrz bloku `main:`. Zauważ również, że usunęliśmy deklarację kanału wejściowego `names_ch`, ponieważ jest on teraz przekazywany jako argument do workflow'a.
 
 Przetestujmy workflow ponownie, aby zobaczyć, czy działa zgodnie z oczekiwaniami:
 
@@ -183,13 +187,13 @@ nextflow run workflows/greeting.nf
     No entry workflow specified
     ```
 
-To informuje Cię o kolejnym nowym koncepcie, 'workflow wejściowym'. Workflow wejściowy to workflow, który jest wywoływany po uruchomieniu skryptu Nextflow. Domyślnie Nextflow użyje nienazwanego workflow jako workflow wejściowego, gdy jest obecny, i to robiłeś do tej pory, z blokami workflow zaczynającymi się w ten sposób:
+To informuje Cię o kolejnym nowym koncepcie, 'workflow wejściowym'. Workflow wejściowy to workflow, który jest wywoływany po uruchomieniu skryptu Nextflow'a. Domyślnie Nextflow użyje nienazwanego workflow'a jako workflow'a wejściowego, gdy jest obecny, i to robiłeś do tej pory, z blokami workflow zaczynającymi się w ten sposób:
 
 ```groovy title="hello.nf" linenums="1"
 workflow {
 ```
 
-Ale nasz workflow powitania nie ma nienazwanego workflow, zamiast tego mamy nazwany workflow:
+Ale nasz workflow powitania nie ma nienazwanego workflow'a, zamiast tego mamy nazwany workflow:
 
 ```groovy title="workflows/greeting.nf" linenums="1"
 workflow GREETING_WORKFLOW {
@@ -197,11 +201,11 @@ workflow GREETING_WORKFLOW {
 
 Dlatego Nextflow zgłosił błąd i nie zrobił tego, czego chcieliśmy.
 
-Nie dodaliśmy składni `take:`/`emit:`, abyśmy mogli wywołać workflow bezpośrednio - zrobiliśmy to, abyśmy mogli komponować go z innymi workflow'ami. Rozwiązaniem jest utworzenie głównego skryptu z nienazwanym workflow wejściowym, który importuje i wywołuje nasz nazwany workflow.
+Nie dodaliśmy składni `take:`/`emit:`, abyśmy mogli wywołać workflow bezpośrednio - zrobiliśmy to, abyśmy mogli komponować go z innymi workflow'ami. Rozwiązaniem jest utworzenie głównego skryptu z nienazwanym workflow'em wejściowym, który importuje i wywołuje nasz nazwany workflow.
 
 ### 1.4. Utwórz i przetestuj główny workflow
 
-Teraz utworzymy główny workflow, który importuje i używa workflow `greeting`.
+Teraz utworzymy główny workflow, który importuje i używa workflow'a `greeting`.
 
 Utwórz `main.nf`:
 
@@ -218,7 +222,7 @@ workflow {
 
 ```
 
-Zauważ, że nasz wpis workflow w tym pliku jest nienazwany, i to dlatego, że będziemy go używać jako workflow wejściowego.
+Zauważ, że nasz wpis workflow w tym pliku jest nienazwany, i to dlatego, że będziemy go używać jako workflow'a wejściowego.
 
 Uruchom to i zobacz wyjście:
 
@@ -243,17 +247,17 @@ nextflow run main.nf
     Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/ea/342168d4ba04cc899a89c56cbfd9b0/timestamped_Charlie-output.txt
     ```
 
-Działa! Opakaliśmy nazwany workflow powitania w główny workflow z nienazwanym blokiem wejściowym `workflow`. Główny workflow używa workflow `GREETING_WORKFLOW` prawie (nie całkiem) jak procesu i przekazuje kanał `names` jako argument.
+Działa! Opakaliśmy nazwany workflow powitania w główny workflow z nienazwanym blokiem wejściowym `workflow`. Główny workflow używa workflow'a `GREETING_WORKFLOW` prawie (nie całkiem) jak procesu i przekazuje kanał `names` jako argument.
 
-### Wnioski
+### Podsumowanie
 
 W tej sekcji nauczyłeś się kilku ważnych koncepcji:
 
-- **Nazwane workflow'y**: Tworzenie nazwanego workflow (`GREETING_WORKFLOW`), który można importować i ponownie używać
+- **Nazwane workflow'y**: Tworzenie nazwanego workflow'a (`GREETING_WORKFLOW`), który można importować i ponownie używać
 - **Interfejsy workflow**: Definiowanie jasnych wejść za pomocą `take:` i wyjść za pomocą `emit:`, aby utworzyć komponowalny workflow
-- **Punkty wejścia**: Zrozumienie, że Nextflow potrzebuje nienazwanego workflow wejściowego, aby uruchomić skrypt
-- **Komponowanie workflow**: Importowanie i używanie nazwanego workflow w innym workflow
-- **Przestrzenie nazw workflow**: Dostęp do wyjść workflow za pomocą przestrzeni nazw `.out` (`GREETING_WORKFLOW.out.greetings`)
+- **Punkty wejścia**: Zrozumienie, że Nextflow potrzebuje nienazwanego workflow'a wejściowego, aby uruchomić skrypt
+- **Komponowanie workflow**: Importowanie i używanie nazwanego workflow'a w innym workflow
+- **Przestrzenie nazw workflow**: Dostęp do wyjść workflow'a za pomocą przestrzeni nazw `.out` (`GREETING_WORKFLOW.out.greetings`)
 
 Masz teraz działający workflow powitania, który:
 
@@ -271,13 +275,13 @@ To modularne podejście pozwala testować workflow powitania niezależnie lub u�
 
 Teraz stwórzmy workflow, który stosuje transformacje tekstowe do powitań.
 
-### 2.1. Utwórz plik workflow
+### 2.1. Utwórz plik workflow'a
 
 ```bash
 touch workflows/transform.nf
 ```
 
-### 2.2. Dodaj kod workflow
+### 2.2. Dodaj kod workflow'a
 
 Dodaj ten kod do `workflows/transform.nf`:
 
@@ -295,12 +299,12 @@ workflow TRANSFORM_WORKFLOW {
         reversed_ch = REVERSE_TEXT(upper_ch)
 
     emit:
-        upper = upper_ch        // Pozdrowienia pisane wielkimi literami
-        reversed = reversed_ch  // Odwrócone pozdrowienia pisane wielkimi literami
+        upper = upper_ch        // Powitania pisane wielkimi literami
+        reversed = reversed_ch  // Odwrócone powitania pisane wielkimi literami
 }
 ```
 
-Nie będziemy powtarzać wyjaśnienia składni komponowalnej tutaj, ale zauważ, że nazwany workflow jest ponownie zadeklarowany z blokami `take:` i `emit:`, a zawartość workflow jest umieszczona wewnątrz bloku `main:`.
+Nie będziemy powtarzać wyjaśnienia składni komponowalnej tutaj, ale zauważ, że nazwany workflow jest ponownie zadeklarowany z blokami `take:` i `emit:`, a zawartość workflow'a jest umieszczona wewnątrz bloku `main:`.
 
 ### 2.3. Zaktualizuj główny workflow
 
@@ -361,19 +365,19 @@ cat /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef
 !ECILA ,OLLEH ]04:50:71 60-30-5202[
 ```
 
-### Wnioski
+### Podsumowanie
 
 Powinieneś teraz mieć kompletny pipeline, który:
 
 - Przetwarza nazwy przez workflow powitania
-- Przekazuje powitania ze znacznikami czasu do workflow transformacji
+- Przekazuje powitania ze znacznikami czasu do workflow'a transformacji
 - Produkuje zarówno wersje powitań w wielkich literach, jak i odwrócone
 
 ---
 
 ## Podsumowanie
 
-W tej misji pobocznej zbadaliśmy potężną koncepcję komponowania workflow w Nextflow, która pozwala nam budować złożone pipeline'y z mniejszych, wielokrotnego użytku komponentów.
+W tej misji pobocznej zbadaliśmy potężną koncepcję komponowania workflow'ów w Nextflow'ie, która pozwala nam budować złożone pipeline'y z mniejszych, wielokrotnego użytku komponentów.
 
 To modularne podejście oferuje kilka zalet w porównaniu z monolitycznymi pipeline'ami:
 
@@ -383,13 +387,13 @@ To modularne podejście oferuje kilka zalet w porównaniu z monolitycznymi pipel
 - Zmiany w jednym workflow niekoniecznie wpływają na inne, jeśli interfejsy pozostają spójne
 - Punkty wejścia można skonfigurować do uruchamiania różnych części pipeline'u w razie potrzeby
 
-_Ważne jest jednak, aby zauważyć, że chociaż wywoływanie workflow'ów jest trochę podobne do wywoływania procesów, nie jest to tak naprawdę to samo. Nie możesz na przykład uruchomić workflow N razy, wywołując go z kanałem o rozmiarze N - musiałbyś przekazać kanał o rozmiarze N do workflow i iterować wewnętrznie._
+_Ważne jest jednak, aby zauważyć, że chociaż wywoływanie workflow'ów jest trochę podobne do wywoływania procesów, nie jest to tak naprawdę to samo. Nie możesz na przykład uruchomić workflow'a N razy, wywołując go z kanałem o rozmiarze N - musiałbyś przekazać kanał o rozmiarze N do workflow'a i iterować wewnętrznie._
 
-Stosowanie tych technik w Swojej pracy umożliwi Ci budowanie bardziej wyrafinowanych pipeline'ów Nextflow, które mogą obsługiwać złożone zadania bioinformatyczne, pozostając jednocześnie łatwymi w utrzymaniu i skalowalnymi.
+Stosowanie tych technik w Swojej pracy umożliwi Ci budowanie bardziej wyrafinowanych pipeline'ów Nextflow'a, które mogą obsługiwać złożone zadania bioinformatyczne, pozostając jednocześnie łatwymi w utrzymaniu i skalowalnymi.
 
 ### Kluczowe wzorce
 
-1.  **Struktura workflow**: Zdefiniowaliśmy jasne wejścia i wyjścia dla każdego workflow, używając składni `take:` i `emit:`, tworząc dobrze zdefiniowane interfejsy między komponentami, i opakaliśmy logikę workflow w bloku `main:`.
+1.  **Struktura workflow'a**: Zdefiniowaliśmy jasne wejścia i wyjścia dla każdego workflow'a, używając składni `take:` i `emit:`, tworząc dobrze zdefiniowane interfejsy między komponentami, i opakaliśmy logikę workflow'a w bloku `main:`.
 
     ```groovy
     workflow EXAMPLE_WORKFLOW {
@@ -408,7 +412,7 @@ Stosowanie tych technik w Swojej pracy umożliwi Ci budowanie bardziej wyrafinow
     }
     ```
 
-2.  **Importy workflow:** Zbudowaliśmy dwa niezależne moduły workflow i zaimportowaliśmy je do głównego pipeline'u za pomocą instrukcji include.
+2.  **Importy workflow'ów:** Zbudowaliśmy dwa niezależne moduły workflow i zaimportowaliśmy je do głównego pipeline'u za pomocą instrukcji include.
 
     - Zaimportuj pojedynczy workflow
 
@@ -428,7 +432,7 @@ Stosowanie tych technik w Swojej pracy umożliwi Ci budowanie bardziej wyrafinow
     include { WORKFLOW_A as WORKFLOW_A_ALIAS } from './path/to/workflow'
     ```
 
-3.  **Punkty wejścia**: Nextflow wymaga nienazwanego workflow wejściowego, aby wiedzieć, gdzie rozpocząć wykonanie. Ten workflow wejściowy wywołuje Twoje nazwane workflow'y.
+3.  **Punkty wejścia**: Nextflow wymaga nienazwanego workflow'a wejściowego, aby wiedzieć, gdzie rozpocząć wykonanie. Ten workflow wejściowy wywołuje Twoje nazwane workflow'y.
 
     - Nienazwany workflow (punkt wejścia)
 
@@ -439,15 +443,15 @@ Stosowanie tych technik w Swojej pracy umożliwi Ci budowanie bardziej wyrafinow
     }
     ```
 
-    - Nazwany workflow (wywoływany z workflow wejściowego)
+    - Nazwany workflow (wywoływany z workflow'a wejściowego)
 
     ```groovy
     workflow NAMED_WORKFLOW {
-        // Musi być wywołany z głównego workflow
+        // Musi być wywołany z głównego workflow'a
     }
     ```
 
-4.  **Zarządzanie przepływem danych:** Nauczyliśmy się, jak uzyskać dostęp do wyjść workflow za pomocą notacji przestrzeni nazw (`WORKFLOW_NAME.out.channel_name`) i przekazywać je do innych workflow'ów.
+4.  **Zarządzanie przepływem danych:** Nauczyliśmy się, jak uzyskać dostęp do wyjść workflow'a za pomocą notacji przestrzeni nazw (`WORKFLOW_NAME.out.channel_name`) i przekazywać je do innych workflow'ów.
 
     ```nextflow
     WORKFLOW_A(input_ch)

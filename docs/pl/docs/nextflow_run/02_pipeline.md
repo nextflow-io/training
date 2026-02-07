@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W Części 1 tego kursu (Uruchamianie podstawowych operacji) zaczęliśmy od przykładowego workflow'u, który miał tylko minimalne funkcje, aby utrzymać niską złożoność kodu.
+W Części 1 tego kursu (Uruchamianie podstawowych operacji) zaczęliśmy od przykładowego workflow'a, który miał tylko minimalne funkcje, aby utrzymać niską złożoność kodu.
 Na przykład `1-hello.nf` używał parametru wiersza poleceń (`--input`) do przekazywania pojedynczej wartości na raz.
 
 Jednak większość rzeczywistych pipeline'ów wykorzystuje bardziej zaawansowane funkcje, aby umożliwić efektywne przetwarzanie dużych ilości danych na dużą skalę i stosowanie wielu kroków przetwarzania połączonych czasami złożoną logiką.
@@ -12,7 +12,7 @@ W tej części szkolenia demonstrujemy kluczowe funkcje rzeczywistych pipeline'�
 ## 1. Przetwarzanie danych wejściowych z pliku
 
 W rzeczywistym pipeline'ie zazwyczaj chcemy przetwarzać wiele punktów danych (lub serii danych) zawartych w jednym lub więcej plikach wejściowych.
-I gdziekolwiek to możliwe, chcemy uruchamiać przetwarzanie niezależnych danych równolegle, aby skrócić czas oczekiwania na analizę.
+Wszędzie tam, gdzie to możliwe, chcemy uruchamiać przetwarzanie niezależnych danych równolegle, aby skrócić czas oczekiwania na analizę.
 
 Aby zademonstrować, jak Nextflow to robi, przygotowaliśmy plik CSV o nazwie `greetings.csv`, który zawiera kilka powitań wejściowych, naśladując rodzaj danych kolumnowych, które możesz chcieć przetwarzać w prawdziwej analizie danych.
 Zauważ, że liczby nie mają znaczenia, są tam tylko w celach ilustracyjnych.
@@ -23,7 +23,7 @@ Bonjour,French,456
 Holà,Spanish,789
 ```
 
-Napisaliśmy również ulepszoną wersję oryginalnego workflow'u, teraz o nazwie `2a-inputs.nf`, która odczyta plik CSV, wyodrębni powitania i zapisze każde z nich do oddzielnego pliku.
+Napisaliśmy również ulepszoną wersję oryginalnego workflow'a, teraz o nazwie `2a-inputs.nf`, która odczyta plik CSV, wyodrębni powitania i zapisze każde z nich do oddzielnego pliku.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
@@ -164,11 +164,11 @@ Ma to wiele zalet, w tym unikanie kolizji, jeśli proces produkuje jakieś pliki
 
 !!! tip "Wskazówka"
 
-    Dla złożonego workflow'u lub dużej liczby danych wejściowych wyświetlanie pełnej listy do terminala może być nieco przytłaczające, więc ludzie normalnie nie używają `-ansi-log false` w rutynowym użyciu.
+    Dla złożonego workflow'a lub dużej liczby danych wejściowych wyświetlanie pełnej listy do terminala może być nieco przytłaczające, więc ludzie normalnie nie używają `-ansi-log false` w rutynowym użyciu.
 
 ### 1.4. Zbadaj kod workflow'u
 
-Więc ta wersja workflow'u jest w stanie odczytać plik CSV z danymi wejściowymi, przetwarzać dane wejściowe osobno i nazywać wyjścia unikalnie.
+Więc ta wersja workflow'a jest w stanie odczytać plik CSV z danymi wejściowymi, przetwarzać dane wejściowe osobno i nazywać wyjścia unikalnie.
 
 Przyjrzyjmy się, co to umożliwia w kodzie workflow'u.
 
@@ -295,7 +295,7 @@ Następnie, w ostatniej linii bloku `main:` workflow'u, przekazujemy załadowany
 To mówi Nextflow, aby uruchomił proces indywidualnie na każdym elemencie w kanale, _tzn._ na każdym powitaniu.
 A ponieważ Nextflow jest tak inteligentny, uruchomi te wywołania procesu równolegle, jeśli to możliwe, w zależności od dostępnej infrastruktury obliczeniowej.
 
-To umożliwia efektywne i skalowalne przetwarzanie dużej ilości danych (wielu próbek lub punktów danych, cokolwiek jest Twoją jednostką badawczą) przy stosunkowo niewielkiej ilości kodu.
+W ten sposób można efektywnie i skalowalnie przetwarzać duże ilości danych (wiele próbek lub punktów danych, cokolwiek jest Twoją jednostką badawczą) przy stosunkowo niewielkiej ilości kodu.
 
 #### 1.4.3. Jak nazywane są wyjścia
 
@@ -618,7 +618,7 @@ Tym razem operator nazywa się `collect` i jest stosowany do kanału wyjścioweg
 
 Operator `collect` służy do agregowania wyjść z wielu wywołań tego samego procesu i pakowania ich w pojedynczy element kanału.
 
-W kontekście tego workflow'u pobiera trzy powitania wielkimi literami z `convertToUpper.out` --które są trzema oddzielnymi elementami i normalnie byłyby obsługiwane w oddzielnych wykonaniach przez następny proces-- i łączy je w jeden element.
+W kontekście tego workflow'a pobiera trzy powitania wielkimi literami z `convertToUpper.out` --które są trzema oddzielnymi elementami i normalnie byłyby obsługiwane w oddzielnych wykonaniach przez następny proces-- i łączy je w jeden element.
 To umożliwia zebranie wszystkich powitań z powrotem do tego samego pliku.
 
 <figure class="excalidraw">
@@ -962,7 +962,7 @@ Znacznie lepszym sposobem rozwiązania tego problemu jest użycie **kontenerów*
 
 **Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu** kontenera, która zawiera wszystko, co potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
 
-!!! tip "Wskazówka"
+!!! Tip "Wskazówka"
 
     Uczymy tego przy użyciu technologii [Docker](https://www.docker.com/get-started/), ale Nextflow obsługuje również kilka innych technologii kontenerowych.
     Więcej o wsparciu Nextflow dla kontenerów możesz dowiedzieć się [tutaj](https://nextflow.io/docs/latest/container.html).
@@ -1641,5 +1641,5 @@ Co Nextflow automatycznie obsługuje podczas uruchamiania konteneryzowanego proc
 - [x] Uruchamianie skryptu procesu wewnątrz kontenera
 - [x] Czyszczenie instancji kontenera po wykonaniu
 
-Dowiedz się więcej: [4. Używanie konteneryzowanego oprogramowania](#4-używanie-konteneryzowanego-oprogramowania)
+Dowiedz się więcej: [4. Używanie konteneryzowanego oprogramowania](#4-używanie-kontenerizowanego-oprogramowania)
 </quiz>

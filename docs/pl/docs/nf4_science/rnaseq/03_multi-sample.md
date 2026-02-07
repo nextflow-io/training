@@ -2,18 +2,18 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej ostatniej części kursu zamienimy nasz prosty workflow w potężne narzędzie do automatyzacji wsadowej, które obsłuży dowolną liczbę próbek.
-Przy okazji przełączymy go również na obsługę danych paired-end, które są bardziej powszechne w nowszych badaniach.
+W tej ostatniej części kursu podniesiemy nasz prosty workflow na wyższy poziom, zamieniając go w potężne narzędzie automatyzacji wsadowej obsługujące dowolną liczbę próbek.
+Przy okazji zmienimy go również tak, aby oczekiwał danych paired-end, które są bardziej powszechne we współczesnych badaniach.
 
 Zrobimy to w trzech etapach:
 
-1. Dostosujemy workflow do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
+1. Dostosujemy workflow do akceptowania wielu próbek wejściowych i paralelizacji wykonania
 2. Dodamy kompleksowe generowanie raportów QC
 3. Przełączymy się na dane RNAseq paired-end
 
 ---
 
-## 1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
+## 1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i paralelizacji wykonania
 
 Musimy zmienić sposób zarządzania danymi wejściowymi.
 
@@ -75,21 +75,21 @@ nextflow run rnaseq.nf
     [68/4c27b5] HISAT2_ALIGN (6) [100%] 6 of 6 ✔
     ```
 
-Tym razem widzimy, że każdy krok jest uruchamiany 6 razy, na każdym z 6 dostarczonych plików danych.
+Tym razem widzimy, że każdy krok jest uruchamiany 6 razy – na każdym z 6 dostarczonych plików danych.
 
 To wszystko, czego potrzeba, aby workflow uruchamiał się na wielu plikach!
-Nextflow obsługuje całą równoległość za nas.
+Nextflow obsługuje całą paralelizację za nas.
 
 ---
 
 ## 2. Agregacja metryk QC wstępnego przetwarzania w pojedynczy raport MultiQC
 
-To wszystko generuje wiele raportów QC i nie chcemy musieć przeglądać poszczególnych raportów.
+Generuje to wiele raportów QC i nie chcemy musieć przeglądać poszczególnych raportów.
 To idealny moment, aby dodać krok agregacji raportów MultiQC!
 
 ### 2.1. Utworzenie modułu dla procesu agregacji QC
 
-Stwórzmy plik modułu o nazwie `modules/multiqc.nf`, który będzie zawierał proces `MULTIQC`:
+Stwórzmy plik modułu o nazwie `modules/multiqc.nf`, który będzie zawierał **process** `MULTIQC`:
 
 ```bash
 touch modules/multiqc.nf
@@ -175,7 +175,7 @@ Więc przykładowa składnia staje się:
 ```
 
 To zbierze raporty QC dla każdej próbki.
-Ale ponieważ chcemy je zagregować dla wszystkich próbek, musimy dodać operator `collect()`, aby zebrać raporty dla wszystkich próbek w jedno wywołanie `MULTIQC`.
+Ponieważ jednak chcemy je zagregować dla wszystkich próbek, musimy dodać operator `collect()`, aby zebrać raporty dla wszystkich próbek w jedno wywołanie `MULTIQC`.
 Musimy również przekazać parametr `report_id`.
 
 Daje nam to następujący kod:
@@ -369,7 +369,7 @@ Otwórz nowy plik modułu `fastqc_pe.nf` w edytorze kodu i wprowadź następują
     """
 ```
 
-Technicznie uogólnia to proces `FASTQC` w sposób, który umożliwia mu obsługę zarówno danych RNAseq single-end, jak i paired-end.
+Technicznie uogólnia to **process** `FASTQC` w sposób, który umożliwia mu obsługę zarówno danych RNAseq single-end, jak i paired-end.
 
 Na koniec zaktualizuj instrukcję importu modułu, aby używała wersji paired-end modułu.
 
@@ -389,7 +389,7 @@ Otwórz nowy plik modułu `trim_galore_pe.nf` w edytorze kodu i wprowadź nastę
 
 - Zmień deklarację wejścia z `path reads` na `tuple path(read1), path(read2)`
 - Zaktualizuj polecenie w bloku `script`, zastępując `$reads` przez `--paired ${read1} ${read2}`
-- Zaktualizuj deklaracje wyjścia, aby odzwierciedlały dodane pliki i różne konwencje nazewnictwa, używając symboli wieloznacznych, aby uniknąć konieczności wymieniania wszystkiego.
+- Zaktualizuj deklaracje wyjścia, aby odzwierciedlały dodane pliki i różne konwencje nazewnictwa, używając symboli wieloznacznych.
 
 ```groovy title="modules/trim_galore_pe.nf" linenums="8"
     input:
@@ -415,7 +415,7 @@ include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
 
 ### 3.6. Aktualizacja wywołania procesu MULTIQC, aby oczekiwał dwóch raportów z TRIM_GALORE
 
-Proces `TRIM_GALORE` generuje teraz dodatkowy kanał wyjściowy, więc musimy przekazać go do MultiQC.
+**Process** `TRIM_GALORE` generuje teraz dodatkowy kanał wyjściowy, więc musimy przekazać go do MultiQC.
 
 Zastąp `TRIM_GALORE.out.fastqc_reports,` przez `TRIM_GALORE.out.fastqc_reports_1,` plus `TRIM_GALORE.out.fastqc_reports_2,`:
 
@@ -450,7 +450,7 @@ params {
 
 ### 3.7. Utworzenie wersji paired-end procesu HISAT2_ALIGN
 
-Stwórz kopię modułu, abyśmy mieli obie wersje pod ręką.
+Stwórz kopię modułu, aby zachować obie wersje.
 
 ```bash
 cp modules/hisat2_align.nf modules/hisat2_align_pe.nf
@@ -519,6 +519,6 @@ Wiesz, jak dostosować workflow dla pojedynczej próbki, aby sparalelizować prz
 
 ### Co dalej?
 
-Gratulacje, ukończyłeś mini-kurs Nextflow dla RNAseq! Świętuj Swój sukces i weź zasłużoną przerwę!
+Gratulacje, ukończyłeś mini-kurs Nextflow For RNAseq! Świętuj Swój sukces i weź zasłużoną przerwę!
 
 Następnie prosimy o wypełnienie bardzo krótkiej ankiety dotyczącej Twoich doświadczeń z tym kursem szkoleniowym, a następnie przekierujemy Cię na stronę z linkami do dalszych materiałów szkoleniowych i pomocnych odnośników.

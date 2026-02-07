@@ -16,11 +16,11 @@
 
 Cześć, witamy w piątej części kursu szkoleniowego Hello Nextflow.
 
-Ten rozdział nosi tytuł Hello Containers. Porozmawiamy o tym, jak Nextflow integruje się z narzędziami takimi jak Docker i Singularity, aby używać kontenerów do dostarczania oprogramowania użytkownikom Twojego pipeline'u.
+Ten rozdział nosi tytuł Hello Containers. Porozmawiamy o tym, jak Nextflow integruje się z narzędziami takimi jak Docker i Singularity, aby używać kontenerów oprogramowania do dostarczania narzędzi użytkownikom Twojego pipeline'u.
 
 Oznacza to, że kiedy ludzie uruchamiają Twój pipeline, nie muszą sami instalować wszystkich różnych narzędzi. Nextflow zrobi to za nich.
 
-Kontenery to niezwykle potężna technologia, kluczowa dla powtarzalności i łatwości użycia. Zaczniemy od krótkiego wprowadzenia do samych kontenerów, ręcznego uruchomienia kilku poleceń docker, a następnie użyjemy tych samych kontenerów w naszym pipeline'ie Nextflow.
+Kontenery to niezwykle potężna technologia, kluczowa dla powtarzalności i łatwości użycia. Zaczniemy od krótkiego wprowadzenia do samych kontenerów, ręcznego uruchomienia kilku poleceń docker, a następnie użyjemy tych samych kontenerów w naszym pipeline'ie Nextflow'a.
 
 Dobra. Zaczynajmy.
 
@@ -42,7 +42,7 @@ Na początku tego rozdziału zrobimy podsumowanie technologii kontenerów. Jeśl
 
 Nextflow obsługuje wiele różnych typów technologii kontenerów. Obejmuje to Docker, Singularity, Podman, Shifter, Charliecloud i inne.
 
-W tym szkoleniu skupimy się na Docker. Jest on preinstalowany w code spaces i jest jedną z najpopularniejszych technologii kontenerów, szczególnie jeśli rozwijasz na własnym komputerze lub laptopie.
+W tym szkoleniu skupimy się na Docker. Jest on preinstalowany w code spaces i jest jedną z najpopularniejszych technologii kontenerów, szczególnie jeśli rozwijasz na własnym komputerze.
 
 Jeśli pracujesz w środowisku akademickim na współdzielonym HPC, możesz zauważyć, że dostępny jest Singularity, a nie Docker. To w porządku. Wszystkie koncepcje są dokładnie takie same. Kilka ręcznych poleceń jest różnych, ale jeśli rozumiesz Docker, zrozumiesz także singularity.
 
@@ -132,19 +132,19 @@ Dobra. Wystarczy uruchamiania Docker interaktywnie. Mam nadzieję, że masz tera
 
 ## 2. Użyj kontenerów w Nextflow
 
-Następnie wrócimy do naszego workflow Nextflow i zobaczymy, jak używać tej technologii w pipeline'ie Nextflow.
+Następnie wrócimy do naszego workflow'a Nextflow'a i zobaczymy, jak używać tej technologii w pipeline'ie Nextflow'a.
 
 Zamknijmy terminal i otwórzmy ponownie Hello Containers.
 
 ## 2.1. Napisz moduł cowpy
 
-Aby trzymać się naszego przykładu cowpy, stwórzmy nowy proces w naszym workflow, który używa cowpy. Przejdźmy do modules, utwórzmy nowy plik i nazwijmy go cowpy nf. Teraz trochę oszukam i skopiguję kod z materiału szkoleniowego i nacisnę save. I spójrzmy.
+Aby trzymać się naszego przykładu cowpy, stwórzmy nowy proces w naszym workflow, który używa cowpy. Przejdźmy do modules, utwórzmy nowy plik i nazwijmy go cowpy nf. Teraz trochę oszukam i skopiuję kod z materiału szkoleniowego i nacisnę save. I spójrzmy.
 
 To prosty proces. Mam nadzieję, że teraz rozumiesz, jak wyglądają elementy składowe procesu. Mamy ponownie nasz publishDir, idący do results. Mamy dwa wejścia, plik wejściowy i ciąg znaków o nazwie character. Mamy wyjście cowpy input file i mamy skrypt, który wygląda dokładnie tak samo jak to, co uruchamialiśmy ręcznie wewnątrz naszego obrazu docker przed chwilą: cat do wydrukowania pliku, przekazując to do cowpy, mówiąc, którego typu postaci cowpy chcemy użyć, i wyprowadzając to do pliku wyjściowego, który przekazujemy jako wyjście tutaj.
 
-## 2.2. Dodaj cowpy do workflow
+## 2.2. Dodaj cowpy do workflow'a
 
-Dobra, wróćmy do naszego workflow, zaimportujmy ten nowy proces. Więc cowpy from modules cowpy nf. Stwórzmy nowy parametr, abyśmy mogli określić, którego znaku chcemy. Powiedzmy Turkey domyślnie. A następnie wywołajmy ten nowy proces na końcu workflow,
+Dobra, wróćmy do naszego workflow'a, zaimportujmy ten nowy proces. Więc cowpy from modules cowpy nf. Stwórzmy nowy parametr, abyśmy mogli określić, którego znaku chcemy. Powiedzmy Turkey domyślnie. A następnie wywołajmy ten nowy proces na końcu workflow'a,
 
 cowpy. I użyjmy wyjścia tutaj z Collect Greetings. Więc collect greetings out, out file tutaj. A następnie potrzebujemy drugiego argumentu, którym są nowe params, które właśnie stworzyliśmy. params dot character.
 
@@ -154,11 +154,11 @@ Dobra, zobaczmy, czy nasz nowy proces działa. Nextflow run hello containers. To
 
 Mamy błąd. To, co tutaj mówi, cowpy miało błąd i miało status wyjścia 127 i rzeczywiście, polecenie sh cowpy polecenie nie znalezione.
 
-Nie powiedzieliśmy Nextflow, że mamy dostępny obraz Docker dla cowpy, więc próbował uruchomić to na naszym systemie hosta, a nie mamy cowpy zainstalowanego na naszym systemie hosta, więc wywołało to błąd.
+Nie powiedzieliśmy Nextflow'owi, że mamy dostępny obraz Docker dla cowpy, więc próbował uruchomić to na naszym systemie hosta, a nie mamy cowpy zainstalowanego na naszym systemie hosta, więc wywołało to błąd.
 
 ## 2.3. Użyj kontenera, aby to uruchomić
 
-Więc to, co musimy zrobić, to musimy powiedzieć Nextflow, że mamy dostępny kontener. Przejdźmy do naszego procesu cowpy i dodajmy nową dyrektywę na górze procesu o nazwie container.
+Więc to, co musimy zrobić, to musimy powiedzieć Nextflow'owi, że mamy dostępny kontener. Przejdźmy do naszego procesu cowpy i dodajmy nową dyrektywę na górze procesu o nazwie container.
 
 Następnie znajdujemy nasz obraz, kopiujemy URL i umieszczamy to w ciągu znaków.
 

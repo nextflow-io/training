@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
+Środowisko szkoleniowe zawiera całe oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
 Jednakże potrzebujesz (bezpłatnego) konta, aby się zalogować, i powinieneś/powinnaś poświęcić kilka minut na zapoznanie się z interfejsem.
 
 Jeśli jeszcze tego nie zrobiłeś/zrobiłaś, skorzystaj z [tego linku](../../../envsetup/) przed dalszym przejściem.
@@ -51,7 +51,7 @@ Jeśli uruchomisz to wewnątrz `nf4-science/genomics`, powinieneś/powinnaś zob
     Nie martw się, jeśli wydaje się to dużo; przejdziemy przez odpowiednie elementy na każdym etapie kursu.
     Ma to na celu jedynie dać Ci przegląd.
 
-**Oto podsumowanie tego, co powinieneś wiedzieć, aby rozpocząć:**
+**Oto podsumowanie tego, co powinieneś/powinnaś wiedzieć, aby rozpocząć:**
 
 - **Pliki `.nf`** to skrypty workflow'u, które są nazwane na podstawie tego, w jakiej części kursu są używane.
 

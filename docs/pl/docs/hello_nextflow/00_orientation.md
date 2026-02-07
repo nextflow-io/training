@@ -42,16 +42,16 @@ Jeśli pracujesz z tym kursem samodzielnie, zapoznaj się z [podstawami środowi
 
 ### Wymagania wersji
 
-To szkolenie jest zaprojektowane dla Nextflow 25.10.2 lub nowszego **z WŁĄCZONYM parserem składni v2**.
+To szkolenie jest zaprojektowane dla Nextflow'a 25.10.2 lub nowszego **z WŁĄCZONYM parserem składni v2**.
 Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że używasz prawidłowych ustawień, jak udokumentowano [tutaj](../info/nxf_versions.md).
 
 ## Przygotuj się do pracy
 
-Po uruchomieniu codespace musisz wykonać dwie czynności: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.
+Po uruchomieniu Twojego codespace musisz wykonać dwie czynności zanim zanurzysz się w szkoleniu: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.
 
 ### Ustaw katalog roboczy
 
-Domyślnie codespace otwiera się z główną lokalizacją wszystkich kursów szkoleniowych jako katalogiem roboczym, ale tym razem będziemy pracować w `hello-nextflow/`.
+Domyślnie codespace otwiera się z główną lokalizacją wszystkich kursów szkoleniowych jako katalogiem roboczym, ale tym razem będziemy pracować w katalogu `hello-nextflow/`.
 
 Zmień teraz katalog, uruchamiając to polecenie w terminalu:
 
@@ -125,7 +125,7 @@ Używamy takich rozwijanych sekcji, aby zwięźle włączać oczekiwane wyjście
 - **Pliki `test-params.*`** to pliki konfiguracyjne, których użyjemy w Części 6 (Configuration). Na razie możesz je zignorować.
 
 - **Katalog `solutions`** zawiera ukończone skrypty workflow'ów, które są wynikiem każdego etapu kursu.
-  Służą jako odniesienie do weryfikacji Swojej pracy i rozwiązywania problemów.
+  Służą jako odniesienie do weryfikacji Twojej pracy i rozwiązywania problemów.
 
 ## Lista kontrolna gotowości
 

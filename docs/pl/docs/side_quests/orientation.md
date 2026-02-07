@@ -2,19 +2,19 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Środowisko GitHub Codespaces zawiera wszystkie oprogramowanie, kod i dane niezbędne do przepracowania tego kursu szkoleniowego, więc nie musisz niczego instalować samodzielnie.
-Jednak potrzebujesz (bezpłatnego) konta, aby się zalogować, i powinieneś poświęcić kilka minut na zapoznanie się z interfejsem.
+Środowisko GitHub Codespaces zawiera całe oprogramowanie, kod i dane niezbędne do przepracowania tego kursu, więc nie musisz niczego instalować samodzielnie.
+Potrzebujesz jednak (bezpłatnego) konta, aby się zalogować, i powinieneś poświęcić kilka minut na zapoznanie się z interfejsem.
 
-Jeśli jeszcze tego nie zrobiłeś, proszę kliknij [ten link](../../envsetup/) przed kontynuowaniem.
+Jeśli jeszcze tego nie zrobiłeś, przejdź za [tym linkiem](../../envsetup/) przed kontynuowaniem.
 
 ## Dostarczone materiały
 
-Podczas tego kursu szkoleniowego będziemy pracować w katalogu `side-quests/`.
-Ten katalog zawiera wszystkie pliki kodu, dane testowe i pliki pomocnicze, które będą potrzebne.
+Podczas tego szkolenia będziemy pracować w katalogu `side-quests/`.
+Katalog ten zawiera wszystkie pliki kodu, dane testowe i pliki pomocnicze, które będą potrzebne.
 
-Zachęcamy do zapoznania się z zawartością tego katalogu; najłatwiejszym sposobem jest użycie eksploratora plików po lewej stronie obszaru roboczego GitHub Codespaces.
+Zachęcamy do zapoznania się z jego zawartością; najłatwiej zrobić to przy pomocy eksploratora plików po lewej stronie obszaru roboczego GitHub Codespaces.
 Alternatywnie możesz użyć polecenia `tree`.
-Podczas kursu używamy wyjścia `tree` do przedstawienia struktury i zawartości katalogów w czytelnej formie, czasami z niewielkimi modyfikacjami dla przejrzystości.
+Podczas kursu używamy wyjścia `tree` do przedstawienia struktury katalogów i ich zawartości w czytelnej formie, czasami z niewielkimi modyfikacjami dla przejrzystości.
 
 Tutaj generujemy spis treści do drugiego poziomu w dół:
 
@@ -39,10 +39,10 @@ Jeśli uruchomisz to wewnątrz `side-quests`, powinieneś zobaczyć następując
 - **Każdy katalog odpowiada indywidualnemu zadaniu pobocznemu.**
   Ich zawartość jest szczegółowo opisana na stronie odpowiedniego zadania pobocznego.
 
-- **Katalog `solutions`** zawiera ukończone skrypty workflow i/lub modułów, które powstają w wyniku wykonania różnych kroków każdego zadania pobocznego.
+- **Katalog `solutions`** zawiera ukończone skrypty workflow'ów i/lub modułów, które powstają w wyniku wykonania różnych kroków każdego zadania pobocznego.
   Mają one służyć jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania ewentualnych problemów.
 
-!!!tip "Wskazówka"
+!!!tip
 
     Jeśli z jakiegokolwiek powodu opuścisz ten katalog, zawsze możesz uruchomić to polecenie, aby do niego wrócić:
 
