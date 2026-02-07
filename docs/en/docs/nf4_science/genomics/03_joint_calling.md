@@ -55,10 +55,9 @@ So we need to start by switching on the GVCF variant calling mode and updating t
 
 ### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output extension
 
-Let's open the `genomics-2.nf` file in the code editor.
-It should look very familiar, but feel free to run it if you want to satisfy yourself that it runs as expected.
+The `genomics-2.nf` file should look very familiar; feel free to run it to verify it works as expected.
 
-We're going to start by making two changes:
+Open the `modules/gatk_haplotypecaller.nf` module file to make two changes:
 
 - Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
 - Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
@@ -67,7 +66,7 @@ Make sure you add a backslash (`\`) at the end of the previous line when you add
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="56" hl_lines="4 6"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="22" hl_lines="5 7"
         """
         gatk HaplotypeCaller \
             -R ${ref_fasta} \
@@ -80,7 +79,7 @@ Make sure you add a backslash (`\`) at the end of the previous line when you add
 
 === "Before"
 
-    ```groovy title="genomics-2.nf" linenums="56" hl_lines="4"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="22" hl_lines="5"
         """
         gatk HaplotypeCaller \
             -R ${ref_fasta} \
@@ -134,7 +133,7 @@ Because it's not enough to just change the file extension in the tool command it
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="50" hl_lines="2 3"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="17" hl_lines="2 3"
         output:
         path "${input_bam}.g.vcf"     , emit: vcf
         path "${input_bam}.g.vcf.idx" , emit: idx
@@ -142,7 +141,7 @@ Because it's not enough to just change the file extension in the tool command it
 
 === "Before"
 
-    ```groovy title="genomics-2.nf" linenums="50" hl_lines="2 3"
+    ```groovy title="modules/gatk_haplotypecaller.nf" linenums="17" hl_lines="2 3"
         output:
         path "${input_bam}.vcf"     , emit: vcf
         path "${input_bam}.vcf.idx" , emit: idx
@@ -155,7 +154,7 @@ We'll also organize the GVCF files into their own subdirectory for clarity.
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="88" hl_lines="3 4"
+    ```groovy title="genomics-2.nf" linenums="45" hl_lines="3 4"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -164,7 +163,7 @@ We'll also organize the GVCF files into their own subdirectory for clarity.
 
 === "Before"
 
-    ```groovy title="genomics-2.nf" linenums="88"
+    ```groovy title="genomics-2.nf" linenums="45"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         vcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -177,7 +176,7 @@ We also need to update the `output` block to put the GVCF files in a `gvcf` subd
 
 === "After"
 
-    ```groovy title="genomics-2.nf" linenums="94" hl_lines="3 5 6 8 9"
+    ```groovy title="genomics-2.nf" linenums="51" hl_lines="3 5 6 8 9"
     output {
         indexed_bam {
             path 'indexed_bam'
@@ -193,16 +192,16 @@ We also need to update the `output` block to put the GVCF files in a `gvcf` subd
 
 === "Before"
 
-    ```groovy title="genomics-2.nf" linenums="94"
+    ```groovy title="genomics-2.nf" linenums="51"
     output {
         indexed_bam {
-            path '.'
+            path 'bam'
         }
         vcf {
-            path '.'
+            path 'vcf'
         }
         vcf_idx {
-            path '.'
+            path 'vcf'
         }
     }
     ```
@@ -234,7 +233,7 @@ The Nextflow output itself doesn't look any different (compared to a successful 
 ??? abstract "Directory contents (symlinks shortened)"
 
     ```console
-    results_genomics/
+    results/
     ├── gvcf/
     │   ├── reads_father.bam.g.vcf -> */27/0d7eb9*/reads_father.bam.g.vcf
     │   ├── reads_father.bam.g.vcf.idx -> */27/0d7eb9*/reads_father.bam.g.vcf.idx
@@ -281,6 +280,8 @@ mkdir -p modules/gatk/genomicsdb
 Now create the module file:
 
 ```groovy title="modules/gatk/genomicsdb/main.nf"
+#!/usr/bin/env nextflow
+
 /*
  * Combine GVCFs into GenomicsDB datastore
  */
@@ -857,7 +858,7 @@ You'll find the final output file, `family_trio.joint.vcf` (and its file index),
 ??? abstract "Directory contents (symlinks shortened)"
 
     ```console
-    results_genomics/
+    results/
     ├── family_trio.joint.vcf -> */a6/7cc8ed*/family_trio.joint.vcf
     ├── family_trio.joint.vcf.idx -> */a6/7cc8ed*/family_trio.joint.vcf.idx
     ├── gvcf/

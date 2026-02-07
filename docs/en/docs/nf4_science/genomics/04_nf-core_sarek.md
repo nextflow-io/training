@@ -49,11 +49,6 @@ Key outputs include:
 - Annotated variants
 - MultiQC quality control report
 
-!!! note "Sarek vs. our manual pipeline"
-
-    The pipeline you built in Parts 2-3 implements a simplified version of GATK joint calling.
-    Sarek provides a production-ready implementation with additional preprocessing steps (like BQSR), support for multiple variant callers, and comprehensive quality control.
-
 ---
 
 ## 2. Run Sarek with test data
@@ -429,29 +424,9 @@ In this part, you learned how to run nf-core/sarek, a production-ready variant c
 
 1. **nf-core pipelines** provide standardized, well-tested workflows that follow consistent conventions
 2. **Test profiles** allow quick validation of your environment
-3. **Sarek** implements a comprehensive variant calling workflow similar to what you built manually, but with additional preprocessing, multiple caller support, and quality control
+3. **Sarek** implements a comprehensive variant calling workflow with preprocessing, multiple caller support, and quality control
 4. **Configuration** allows customization for different data types, reference genomes, and compute environments
 5. **Resume capability** helps recover from failures without re-running completed work
-
-### Comparing manual vs. nf-core approaches
-
-| Aspect      | Manual pipeline (Parts 2-3)  | nf-core/sarek                                    |
-| ----------- | ---------------------------- | ------------------------------------------------ |
-| Flexibility | Full control over every step | Configurable via parameters                      |
-| Effort      | Build from scratch           | Ready to use                                     |
-| Features    | Basic variant calling        | Full preprocessing, multiple callers, annotation |
-| Maintenance | You maintain it              | Community maintained                             |
-| Best for    | Learning, custom workflows   | Production use                                   |
-
-### When to use each approach
-
-- **Build your own**: When you need custom logic, are learning Nextflow, or have specialized requirements not covered by existing pipelines
-- **Use nf-core**: When a pipeline exists for your use case and you want production-ready quality with community support
-
-!!! tip "The best of both worlds"
-
-    Many organizations start with nf-core pipelines for standard analyses, then build custom Nextflow workflows for specialized needs.
-    The skills you learned in Parts 2-3 will help you understand, customize, and extend nf-core pipelines.
 
 ### Takeaway
 
