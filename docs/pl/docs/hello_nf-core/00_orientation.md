@@ -4,7 +4,7 @@
 
 ## Uruchomienie środowiska szkoleniowego
 
-Aby skorzystać z przygotowanego przez nas środowiska w GitHub Codespaces, kliknij przycisk "Open in GitHub Codespaces" poniżej. Aby poznać inne opcje, zobacz [Opcje środowiska](../envsetup/index.md).
+Aby skorzystać z przygotowanego przez nas środowiska w GitHub Codespaces, kliknij przycisk „Open in GitHub Codespaces" poniżej. Aby poznać inne opcje, zobacz [Opcje środowiska](../envsetup/index.md).
 
 Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj kliknięcia prawym przyciskiem myszy, ctrl+kliknięcie lub cmd+kliknięcie w zależności od sprzętu), aby móc czytać instrukcje podczas ładowania środowiska.
 Musisz zachować te instrukcje otwarte równolegle, aby przejść przez kurs.
@@ -22,7 +22,7 @@ Jeśli przechodzisz przez ten kurs samodzielnie, zapoznaj się z [podstawami śr
 
 ### Wymagania dotyczące wersji
 
-To szkolenie jest przeznaczone dla **Nextflow 25.10.2** lub nowszego **z WYŁĄCZONYM parserem składni v2**.
+To szkolenie jest przeznaczone dla **Nextflow'a 25.10.2** lub nowszego **z WYŁĄCZONYM parserem składni v2**.
 
 #### Jeśli korzystasz z naszego środowiska szkoleniowego:
 
@@ -36,7 +36,7 @@ export NXF_SYNTAX_PARSER=v1
 
 Upewnij się, że używasz prawidłowych ustawień zgodnie z dokumentacją [tutaj](../info/nxf_versions.md).
 
-Szkolenie dodatkowo wymaga **nf-core tools 3.4.1**.
+Szkolenie dodatkowo wymaga **narzędzi nf-core w wersji 3.4.1**.
 Jeśli używasz innej wersji narzędzi nf-core, możesz mieć trudności z podążaniem za kursem.
 
 Możesz sprawdzić, jaka wersja jest zainstalowana w Twoim środowisku za pomocą polecenia `nf-core --version`.
@@ -47,7 +47,7 @@ Gdy Twój codespace już działa, musisz wykonać dwie rzeczy przed rozpoczęcie
 
 ### Ustawienie katalogu roboczego
 
-Domyślnie codespace otwiera się z lokalizacją główną wszystkich kursów szkoleniowych, ale w tym module będziemy pracować w folderze `hello-nf-core/`.
+Domyślnie codespace otwiera się z katalogiem roboczym ustawionym w głównym katalogu wszystkich kursów szkoleniowych, ale w tym kursie będziemy pracować w katalogu `hello-nf-core/`.
 
 Zmień teraz katalog, uruchamiając to polecenie w terminalu:
 

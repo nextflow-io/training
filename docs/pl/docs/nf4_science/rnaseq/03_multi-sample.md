@@ -2,18 +2,18 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej ostatniej części kursu zamienimy nasz prosty workflow w potężne narzędzie do automatyzacji wsadowej, które obsłuży dowolną liczbę próbek.
+W tej ostatniej części kursu przeniesiemy nasz prosty workflow na nowy poziom, przekształcając go w potężne narzędzie do automatyzacji wsadowej obsługującej dowolną liczbę próbek.
 Przy okazji przełączymy go również na obsługę danych paired-end, które są bardziej powszechne w nowszych badaniach.
 
 Zrobimy to w trzech etapach:
 
-1. Dostosujemy workflow do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
+1. Sprawimy, aby workflow akceptował wiele próbek wejściowych i zrównoleglał wykonanie
 2. Dodamy kompleksowe generowanie raportów QC
 3. Przełączymy się na dane RNAseq paired-end
 
 ---
 
-## 1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
+## 1. Sprawimy, aby workflow akceptował wiele próbek wejściowych i zrównoleglał wykonanie
 
 Musimy zmienić sposób zarządzania danymi wejściowymi.
 
@@ -78,7 +78,7 @@ nextflow run rnaseq.nf
 Tym razem widzimy, że każdy krok jest uruchamiany 6 razy, na każdym z 6 dostarczonych plików danych.
 
 To wszystko, czego potrzeba, aby workflow uruchamiał się na wielu plikach!
-Nextflow obsługuje całą równoległość za nas.
+Nextflow obsługuje całą paralelizację za nas.
 
 ---
 
@@ -344,7 +344,7 @@ Więc `row -> file(row.fastq_path)` staje się `row -> [file(row.fastq_1), file(
 
 ### 3.4. Utworzenie wersji paired-end procesu FASTQC
 
-Utwórzmy kopię modułu, aby zachować obie wersje.
+Utwórzmy kopię modułu, aby mieć obie wersje pod ręką.
 
 ```bash
 cp modules/fastqc.nf modules/fastqc_pe.nf
@@ -379,7 +379,7 @@ include { FASTQC } from './modules/fastqc_pe.nf'
 
 ### 3.5. Utworzenie wersji paired-end procesu TRIM_GALORE
 
-Utwórz kopię modułu, aby zachować obie wersje.
+Utwórz kopię modułu, aby mieć obie wersje pod ręką.
 
 ```bash
 cp modules/trim_galore.nf modules/trim_galore_pe.nf
@@ -417,7 +417,7 @@ include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
 
 Proces `TRIM_GALORE` generuje teraz dodatkowy kanał wyjściowy, więc musimy przekazać go do MultiQC.
 
-Zastąp `TRIM_GALORE.out.fastqc_reports,` przez `TRIM_GALORE.out.fastqc_reports_1,` plus `TRIM_GALORE.out.fastqc_reports_2,`:
+Zastąp `TRIM_GALORE.out.fastqc_reports,` przez `TRIM_GALORE.out.fastqc_reports_1,` oraz `TRIM_GALORE.out.fastqc_reports_2,`:
 
 ```groovy title="rnaseq_pe.nf" linenums="33"
     // Generowanie kompleksowego raportu QC
@@ -450,7 +450,7 @@ params {
 
 ### 3.7. Utworzenie wersji paired-end procesu HISAT2_ALIGN
 
-Stwórz kopię modułu, abyśmy mieli obie wersje pod ręką.
+Stwórz kopię modułu, aby mieć obie wersje pod ręką.
 
 ```bash
 cp modules/hisat2_align.nf modules/hisat2_align_pe.nf
@@ -519,6 +519,6 @@ Wiesz, jak dostosować workflow dla pojedynczej próbki, aby sparalelizować prz
 
 ### Co dalej?
 
-Gratulacje, ukończyłeś mini-kurs Nextflow dla RNAseq! Świętuj Swój sukces i weź zasłużoną przerwę!
+Gratulacje, ukończyłeś mini-kurs Nextflow For RNAseq! Świętuj Swój sukces i weź zasłużoną przerwę!
 
-Następnie prosimy o wypełnienie bardzo krótkiej ankiety dotyczącej Twoich doświadczeń z tym kursem szkoleniowym, a następnie przekierujemy Cię na stronę z linkami do dalszych materiałów szkoleniowych i pomocnych odnośników.
+Następnie prosimy o wypełnienie bardzo krótkiej ankiety dotyczącej Twoich doświadczeń z tym kursem szkoleniowym, a potem przekierujemy Cię na stronę z linkami do dalszych materiałów szkoleniowych i pomocnych odnośników.

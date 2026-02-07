@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W Części 2 uruchomiliśmy molkart z wieloma parametrami w wierszu poleceń.
+W Części 2 uruchomiliśmy molkart, podając wiele parametrów bezpośrednio w wierszu poleceń.
 Teraz poznamy dwa lepsze podejścia do zarządzania wejściami: **pliki parametrów** oraz **arkusze próbek**.
 
 ## 1. Używanie plików parametrów
@@ -22,7 +22,7 @@ nextflow run ./molkart \
   --outdir results
 ```
 
-To działa, ale trudno to odtworzyć, udostępnić lub zmodyfikować.
+To działa, ale trudno odtworzyć, udostępnić lub zmodyfikować takie wywołanie.
 Co jeśli musisz ponownie uruchomić tę samą analizę za miesiąc?
 Co jeśli współpracownik chce użyć dokładnie Twoich ustawień?
 
@@ -40,23 +40,23 @@ clahe_pyramid_tile: 368
 segmentation_method: "cellpose"
 ```
 
-Teraz Twoje polecenie staje się:
+Teraz Twoje polecenie staje się krótkie:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-To wszystko! Plik parametrów dokumentuje dokładną konfigurację i ułatwia ponowne uruchomienie lub udostępnienie.
+To wszystko! Plik parametrów dokumentuje dokładną konfigurację i ułatwia ponowne uruchomienie lub udostępnienie ustawień.
 
 ### 1.3. Nadpisywanie parametrów
 
-Nadal możesz nadpisać konkretne parametry z wiersza poleceń:
+Nadal możesz nadpisać konkretne parametry bezpośrednio z wiersza poleceń:
 
 ```bash
 nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist" --outdir stardist_results -resume
 ```
 
-Powyższa linia zmienia `segmentation_method` na `stardist` oraz nazwę `--outdir` na `stardist_results` zamiast parametrów z pliku `params.yaml`.
+Powyższe polecenie zmienia `segmentation_method` na `stardist`, a nazwę `--outdir` na `stardist_results` zamiast wartości z pliku `params.yaml`.
 Dodatkowo możesz zauważyć, że flaga `-resume` pozwoliła nam ponownie użyć wyników przetwarzania wstępnego z poprzedniego uruchomienia, oszczędzając czas.
 Możesz użyć tego wzorca, aby szybko testować różne warianty pipeline'u.
 
@@ -127,13 +127,13 @@ mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 
 !!! warning "Ostrzeżenie"
 
-    Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, **z którego uruchamiasz** Nextflow, a nie względem miejsca, w którym znajduje się arkusz próbek.
+    Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, **z którego uruchamiasz** Nextflow'a, a nie względem miejsca, w którym znajduje się arkusz próbek.
 
 Na koniec wykonajmy nf-core/molkart jeszcze raz z arkuszem próbek zawierającym lokalne ścieżki do plików:
 
 `nextflow run ./molkart -params-file params.yaml -resume`
 
-Jak widzisz, Nextflow wykonuje to uruchomienie podobnie jak wtedy, gdy pliki były pobierane z Github. To jedna ze świetnych funkcji Nextflow - właściwie przygotowuje dane dla Ciebie, niezależnie od tego, gdzie się znajdują.
+Jak widzisz, Nextflow wykonuje to uruchomienie podobnie jak wtedy, gdy pliki były pobierane z Github. To jedna ze świetnych funkcji Nextflow'a - właściwie przygotowuje dane dla Ciebie, niezależnie od tego, gdzie się znajdują.
 
 ### Podsumowanie
 

@@ -12,7 +12,7 @@ Tutaj użyjemy narzędzi i metod zaprojektowanych do wykrywania krótkich warian
 ![GATK pipeline](img/gatk-pipeline.png)
 
 Pełny pipeline do wykrywania wariantów zazwyczaj obejmuje wiele kroków, w tym mapowanie do referencji (czasami nazywane wyrównaniem do genomu) oraz filtrowanie i priorytetyzację wariantów.
-Dla uproszczenia, w tej części kursu skupimy się tylko na części wykrywania wariantów.
+Dla uproszczenia skupimy się tylko na części wykrywania wariantów.
 
 ### Zestaw danych
 

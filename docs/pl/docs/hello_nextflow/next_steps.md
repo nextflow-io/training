@@ -19,12 +19,12 @@ Gratulacje z okazji ukończenia kursu szkoleniowego Hello Nextflow! 🎉
 ## Twoja droga
 
 Zacząłeś od bardzo prostego workflow'u, który uruchamiał zakodowane na sztywno polecenie.
-W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularny, wieloetapowy pipeline wykorzystujący kluczowe funkcje Nextflow, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.
+W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularny, wieloetapowy pipeline wykorzystujący kluczowe funkcje Nextflow'a, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.
 
 ### Co zbudowałeś
 
 - Ostateczna forma workflow'u Hello przyjmuje jako wejście plik CSV zawierający tekstowe pozdrowienia.
-- Cztery kroki są zaimplementowane jako procesy Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) przechowywane w osobnych plikach modułów.
+- Cztery kroki są zaimplementowane jako procesy Nextflow'a (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) przechowywane w osobnych plikach modułów.
 - Wyniki są publikowane do katalogu o nazwie `results/`.
 - Końcowe wyjście pipeline'u to plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia zapisane wielkimi literami.
 
@@ -43,10 +43,10 @@ Konfiguracja workflow'u wspiera dostarczanie wejść i parametrów w elastyczny,
 
 Dzięki temu praktycznemu kursowi nauczyłeś się:
 
-- Opisywać i wykorzystywać podstawowe komponenty Nextflow wystarczające do budowania prostego, wieloetapowego workflow'u
+- Opisywać i wykorzystywać podstawowe komponenty Nextflow'a wystarczające do zbudowania prostego, wieloetapowego workflow'u
 - Opisywać koncepcje kolejnego kroku, takie jak operatory i fabryki kanałów
-- Uruchamiać workflow Nextflow lokalnie
-- Znajdować i interpretować wyjścia (wyniki) i pliki dziennika generowane przez Nextflow
+- Uruchamiać workflow Nextflow'a lokalnie
+- Znajdować i interpretować wyjścia (wyniki) oraz pliki dziennika generowane przez Nextflow'a
 - Rozwiązywać podstawowe problemy
 
 Jesteś teraz wyposażony w fundamentalną wiedzę, aby zacząć tworzyć własne pipeline'y w Nextflow.
@@ -55,11 +55,11 @@ Jesteś teraz wyposażony w fundamentalną wiedzę, aby zacząć tworzyć własn
 
 Oto nasze 3 najlepsze sugestie, co robić dalej:
 
-- Zastosuj Nextflow do naukowego przypadku analizy z [Nextflow dla nauki](../nf4_science/index.md)
+- Zastosuj Nextflow'a do naukowego przypadku analizy z [Nextflow dla nauki](../nf4_science/index.md)
 - Rozpocznij pracę z nf-core z [Hello nf-core](../hello_nf-core/index.md)
-- Odkryj bardziej zaawansowane funkcje Nextflow z [Side Quests](../side_quests/index.md)
+- Odkryj bardziej zaawansowane funkcje Nextflow'a z [Side Quests](../side_quests/index.md)
 
-Na koniec polecamy zapoznać się z [**Seqera Platform**](https://seqera.io/), platformą chmurową opracowaną przez twórców Nextflow, która jeszcze bardziej ułatwia uruchamianie workflow'ów i zarządzanie nimi, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.
+Na koniec polecamy zapoznać się z [**Seqera Platform**](https://seqera.io/), platformą chmurową opracowaną przez twórców Nextflow'a, która jeszcze bardziej ułatwia uruchamianie workflow'ów, zarządzanie nimi, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.
 
 ## Ankieta zwrotna
 

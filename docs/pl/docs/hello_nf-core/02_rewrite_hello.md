@@ -2,12 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej drugiej części kursu szkoleniowego Hello nf-core pokażemy, jak utworzyć wersję workflow'u kompatybilną z nf-core, opartą na projekcie z kursu dla początkujących [Hello Nextflow](../hello_nextflow/index.md).
+W tej drugiej części kursu szkoleniowego Hello nf-core pokażemy, jak utworzyć wersję pipeline'u kompatybilną z nf-core, opartą na projekcie z kursu dla początkujących [Hello Nextflow](../hello_nextflow/index.md).
 
-Zauważyłeś w pierwszej sekcji szkolenia, że workflow'y nf-core mają dość rozbudowaną strukturę z wieloma plikami pomocniczymi.
+Zauważyłeś w pierwszej sekcji szkolenia, że pipeline'y nf-core mają dość rozbudowaną strukturę z wieloma plikami pomocniczymi.
 Tworzenie tego wszystkiego od zera byłoby bardzo żmudne, dlatego społeczność opracowała narzędzia, które wykorzystują szablon do wygenerowania podstawowej struktury projektu.
 
-Pokażemy, jak użyć tych narzędzi do wygenerowania szkieletu projektu, a następnie zaadaptować istniejący kod 'zwykłego' workflow'u do struktury nf-core.
+Pokażemy, jak użyć tych narzędzi do wygenerowania szkieletu projektu, a następnie zaadaptować istniejący kod 'zwykłego' pipeline'u do struktury nf-core.
 
 Jeśli nie znasz pipeline'u Hello lub potrzebujesz przypomnienia, zobacz [tę stronę informacyjną](../info/hello_pipeline.md).
 
@@ -24,7 +24,7 @@ Najpierw stworzymy szkielet dla nowego pipeline'u.
 ### 1.1. Uruchomienie narzędzia do tworzenia pipeline'u opartego na szablonie
 
 Zacznijmy od stworzenia nowego pipeline'u za pomocą polecenia `nf-core pipelines create`.
-Spowoduje to utworzenie nowego szkieletu pipeline'u przy użyciu podstawowego szablonu nf-core, dostosowanego za pomocą nazwy pipeline'u, opisu i autora.
+Utworzy ono nowy szkielet pipeline'u przy użyciu podstawowego szablonu nf-core, dostosowany za pomocą nazwy pipeline'u, opisu i autora.
 
 ```bash
 nf-core pipelines create
@@ -280,12 +280,12 @@ workflow HELLO {
 
 W porównaniu do podstawowego workflow Nextflow, takiego jak ten opracowany w [Hello Nextflow](../hello_nextflow/index.md), zauważysz kilka nowych rzeczy (podświetlone linie powyżej):
 
-- Blok workflow'u ma nazwę
+- Blok `workflow` ma nazwę
 - Wejścia workflow'u są deklarowane za pomocą słowa kluczowego `take:`, a konstrukcja kanału jest przenoszona do workflow'u nadrzędnego
 - Zawartość workflow'u jest umieszczona w bloku `main:`
 - Wyjścia są deklarowane za pomocą słowa kluczowego `emit:`
 
-Są to opcjonalne funkcje Nextflow, które sprawiają, że workflow jest **kompozycyjny**, co oznacza, że może być wywoływany z innego workflow.
+Są to opcjonalne funkcje Nextflow'a, które sprawiają, że workflow jest **kompozycyjny**, co oznacza, że może być wywoływany z innego workflow'u.
 
 !!! note "Kompozycyjne workflow w szczegółach"
 
@@ -1262,7 +1262,7 @@ Teraz możemy zaktualizować plik `test.config` w następujący sposób:
 
 Kluczowe punkty:
 
-- **Używanie `${projectDir}`**: To jest niejawna zmienna Nextflow, która wskazuje na katalog, w którym znajduje się główny skrypt workflow (katalog główny pipeline'u). Użycie jej zapewnia, że ścieżka działa niezależnie od tego, skąd pipeline jest uruchamiany.
+- **Używanie `${projectDir}`**: To jest niejawna zmienna Nextflow'a, która wskazuje na katalog, w którym znajduje się główny skrypt workflow (katalog główny pipeline'u). Użycie jej zapewnia, że ścieżka działa niezależnie od tego, skąd pipeline jest uruchamiany.
 - **Ścieżki bezwzględne**: Używając `${projectDir}`, tworzymy ścieżkę bezwzględną, co jest ważne dla danych testowych dostarczanych z pipeline'em.
 - **Lokalizacja danych testowych**: Pipeline'y nf-core zazwyczaj przechowują dane testowe w katalogu `assets/` w repozytorium pipeline'u dla małych plików testowych lub odwołują się do zewnętrznych zestawów danych testowych dla większych plików.
 
@@ -1406,3 +1406,29 @@ tree results
     ├── cowpy-COLLECTED-test-output.txt
     ├── Hello-output.txt
     ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+
+    0 directories, 10 files
+    ```
+
+Ach, oto są, zmieszane z wynikami wcześniejszych uruchomień oryginalnego pipeline'u Hello.
+
+Jeśli chcemy, aby były schludnie zorganizowane, tak jak wyniki pipeline'u demo, będziemy musieli zmienić sposób konfigurowania publikowania wyników.
+Pokażemy Ci, jak to zrobić później w tym kursie szkoleniowym.
+
+<!-- TODO: Update this once we've updated Hello Nextflow to use workflow-level outputs -->
+
+I to tyle! Może się wydawać, że to dużo pracy, aby osiągnąć ten sam rezultat co oryginalny pipeline, ale otrzymujesz wszystkie te wspaniałe raporty generowane automatycznie i masz teraz solidne podstawy do korzystania z dodatkowych funkcji nf-core, w tym walidacji wejść i niektórych zgrabnych możliwości obsługi metadanych, które omówimy w późniejszej sekcji.
+
+---
+
+### Podsumowanie
+
+Wiesz, jak przekonwertować zwykły pipeline Nextflow na pipeline w stylu nf-core przy użyciu szablonu nf-core.
+W ramach tego nauczyłeś się, jak uczynić workflow kompozycyjnym oraz jak zidentyfikować elementy szablonu nf-core, które najczęściej wymagają dostosowania podczas tworzenia niestandardowego pipeline'u w stylu nf-core.
+
+### Co dalej?
+
+Zrób przerwę, to była ciężka praca! Kiedy będziesz gotowy, przejdź do [Części 3: Użyj modułu nf-core](./03_use_module.md), aby dowiedzieć się, jak wykorzystać moduły utrzymywane przez społeczność z repozytorium nf-core/modules.

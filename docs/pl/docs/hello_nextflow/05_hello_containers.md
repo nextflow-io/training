@@ -14,7 +14,7 @@
 ///
 -->
 
-W Częściach 1-4 tego kursu nauczyłeś się używać podstawowych elementów budulcowych Nextflow do składania prostego workflow zdolnego do przetwarzania tekstu, równoległego wykonywania wielu wejść i zbierania wyników do dalszego przetwarzania.
+W Częściach 1-4 tego kursu nauczyłeś się używać podstawowych elementów budulcowych Nextflow'a do składania prostego workflow zdolnego do przetwarzania tekstu, równoległego wykonywania wielu wejść i zbierania wyników do dalszego przetwarzania.
 
 Jednak byłeś ograniczony do podstawowych narzędzi UNIX dostępnych w Twoim środowisku.
 Rzeczywiste zadania często wymagają różnych narzędzi i pakietów, które nie są domyślnie dołączone.

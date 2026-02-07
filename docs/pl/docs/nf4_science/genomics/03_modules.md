@@ -15,14 +15,14 @@ W tej części pokażemy, jak przekonwertować kod z tego workflow'u na moduły.
 Kiedy zaczęliśmy rozwijać nasz workflow, umieściliśmy wszystko w jednym pliku kodu.
 Teraz nadszedł czas, aby zająć się **modularyzacją** naszego kodu, _tzn._ wyodrębnieniem definicji procesów do modułów.
 
-Zaczniemy od tego samego workflow co w Części 2, który udostępniliśmy w pliku `genomics-3.nf`.
+Zaczniemy od tego samego workflow co w Części 2, który udostępniliśmy Ci w pliku `genomics-3.nf`.
 
 !!! note "Uwaga"
 
      Upewnij się, że jesteś we właściwym katalogu roboczym:
      `cd /workspaces/training/nf4-science/genomics`
 
-Uruchom workflow, aby zweryfikować punkt wyjścia:
+Uruchom workflow'a, aby zweryfikować punkt wyjścia:
 
 ```bash
 nextflow run genomics-3.nf -resume
@@ -53,9 +53,9 @@ Przenieś procesy workflow'u Genomics do modułów.
 
 ## 1. Przeniesienie procesów do modułów
 
-Jak nauczyłeś się w [Hello Modules](../../../hello_nextflow/hello_modules.md), tworzenie modułu polega na skopiowaniu definicji procesu do osobnego pliku. Plik może znajdować się w wybranym katalogu i mieć wybraną nazwę.
+Jak nauczyłeś się w [Hello Modules](../../../hello_nextflow/hello_modules.md), aby utworzyć moduł, wystarczy skopiować definicję procesu do osobnego pliku, w dowolnym katalogu, z dowolną nazwą.
 
-Z powodów, które staną się jasne później (w szczególności przy testowaniu), w tym szkoleniu stosujemy konwencję nazewnictwa pliku `main.nf` i umieszczania go w strukturze katalogów nazwanej według zestawu narzędzi i polecenia.
+Z powodów, które staną się jasne później (w szczególności przy testowaniu), w tym szkoleniu stosujemy konwencję nazewnictwa pliku jako `main.nf` i umieszczamy go w strukturze katalogów nazwanej według zestawu narzędzi i polecenia.
 
 ### 1.1. Utwórz moduł dla procesu `SAMTOOLS_INDEX`
 
@@ -70,7 +70,7 @@ Otwórz plik `main.nf` i skopiuj do niego definicję procesu `SAMTOOLS_INDEX`.
 
 ```groovy title="modules/samtools/index/main.nf" linenums="1"
 /*
- * Generuje plik indeksu BAM
+ * Generuj plik indeksu BAM
  */
 process SAMTOOLS_INDEX {
 
@@ -112,7 +112,7 @@ Następnie usuń definicję procesu `SAMTOOLS_INDEX` z `genomics-3.nf` i dodaj d
     process GATK_HAPLOTYPECALLER {
     ```
 
-Możesz teraz ponownie uruchomić workflow i powinien działać tak samo jak wcześniej. Jeśli podasz flagę `-resume`, żadne nowe zadania nie powinny być nawet uruchamiane:
+Możesz teraz ponownie uruchomić workflow'a i powinien działać tak samo jak wcześniej. Jeśli podasz flagę `-resume`, żadne nowe zadania nie powinny być nawet uruchamiane:
 
 ```bash
 nextflow run genomics-3.nf -resume
@@ -135,7 +135,7 @@ nextflow run genomics-3.nf -resume
 Powtórz te same kroki dla pozostałych procesów.
 Dla każdego procesu:
 
-1. Utwórz strukturę katalogów (`modules/gatk/haplotypecaller/` i `modules/gatk/jointgenotyping/`)
+1. Utwórz strukturę katalogów (`modules/gatk/haplotypecaller/` oraz `modules/gatk/jointgenotyping/`)
 2. Utwórz plik `main.nf` zawierający definicję procesu
 3. Usuń definicję procesu z `genomics-3.nf`
 4. Dodaj deklarację importu dla modułu
@@ -182,7 +182,7 @@ Przetestuj zmodularyzowany workflow.
 
 ---
 
-## 2. Testowanie zmodularyzowanego workflow
+## 2. Testowanie zmodularyzowanego workflow'u
 
 Uruchom zmodularyzowany workflow, aby zweryfikować, że wszystko nadal działa.
 
@@ -200,7 +200,7 @@ Launching `genomics-3.nf` [astonishing_venter] DSL2 - revision: ca27264c13
 [0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔
 ```
 
-Wszystko nadal działa, w tym możliwość wznowienia pipeline.
+Wszystko nadal działa, w tym możliwość wznowienia pipeline'u.
 Wyniki są nadal publikowane w katalogu `results_genomics`.
 
 ```console title="Zawartość katalogu"
@@ -235,11 +235,11 @@ Przejrzyj to, czego się nauczyłeś i spójrz na testowanie.
 
 ## 3. Podsumowanie
 
-Zmodularyzowałeś workflow i nic nie zmieniło się w sposobie działania pipeline'u.
+Zmodularyzowałeś workflow'a i nic nie zmieniło się w sposobie działania pipeline'u.
 To jest zamierzone: zrestrukturyzowałeś kod bez wpływu na jego funkcjonalność.
 
 Moduły zawierają tylko logikę procesu, co czyni je czystymi i wielokrotnego użytku.
-Główny skrypt kontroluje, co jest publikowane i gdzie, podczas gdy moduły pozostają skoncentrowane na Swoim zadaniu obliczeniowym.
+Główny skrypt kontroluje, co jest publikowane i gdzie, podczas gdy moduły pozostają skoncentrowane na swoim zadaniu obliczeniowym.
 
 Położyłeś fundamenty pod rzeczy, które ułatwią utrzymanie kodu.
 Na przykład możesz teraz dodać testy do Swojego pipeline'u używając frameworka nf-test.

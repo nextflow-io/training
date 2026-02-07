@@ -6,7 +6,7 @@ Ta sekcja zbada, jak zarządzać konfiguracją pipeline'u Nextflow, aby dostosow
 
 Istnieje wiele sposobów, aby to osiągnąć, które można łączyć i są interpretowane zgodnie z kolejnością pierwszeństwa opisaną w dokumentacji [Configuration](https://nextflow.io/docs/latest/config.html).
 
-W tej części kursu pokażemy najprostrzy i najpopularniejszy mechanizm pliku konfiguracyjnego, plik `nextflow.config`, z którym już się spotkałeś w sekcji o kontenerach w Części 2.
+W tej części kursu pokażemy najprostszy i najpopularniejszy mechanizm pliku konfiguracyjnego, plik `nextflow.config`, z którym już się spotkałeś w sekcji o kontenerach w Części 2.
 
 Omówimy podstawowe elementy konfiguracji Nextflow, takie jak dyrektywy procesów, executory, profile i pliki parametrów.
 Ucząc się efektywnie wykorzystywać te opcje konfiguracji, możesz w pełni wykorzystać elastyczność, skalowalność i wydajność pipeline'ów Nextflow.
@@ -142,7 +142,7 @@ Końcowe wyjście grafiki ASCII znajduje się w katalogu `results/3-main/`, pod 
     \ BONJOUR /
     ---------
       \                                  ,+*^^*+___+++_
-      \                           ,*^^^^              )
+      \                           ,*****              )
         \                       _+*                     ^**+_
         \                    +^       _ _++*+_+++_,         )
                   _+^^*+_    (     ,+*^ ^          \+_        )
@@ -525,7 +525,7 @@ To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym ra
 
 Możesz połączyć to podejście z niestandardowymi definicjami ścieżek, aby skonstruować dowolną hierarchię katalogów.
 
-### 2.2. Organizuj wyjścia według proces
+### 2.2. Organizuj wyjścia według procesu
 
 Jednym z popularnych sposobów dalszej organizacji wyjść jest robienie tego według procesu, _tzn._ tworzenie podkatalogów dla każdego procesu uruchomionego w pipeline'ie.
 
@@ -823,7 +823,7 @@ Aby to zrobić, zmieńmy wartość `docker.enabled` na `false` i dodajmy dyrekty
 To pozwoli Nextflow tworzyć i wykorzystywać środowiska Conda dla procesów, które mają określone pakiety Conda.
 Co oznacza, że teraz musimy dodać jeden z nich do naszego procesu `cowpy`!
 
-### 3.2. Określ pakiet Conda w definicji process
+### 3.2. Określ pakiet Conda w definicji procesu
 
 Pobraliśmy już URI dla pakietu Conda zawierającego narzędzie `cowpy`: `conda-forge::cowpy==1.1.5`
 
@@ -1606,7 +1606,7 @@ Jak odwołujesz się do nazwy procesu dynamicznie w konfiguracji ścieżki wyjś
 - [x] `#!groovy path { <process>.name }`
 - [ ] `@processName`
 
-Dowiedz się więcej: [2.2. Organizuj wyjścia według proces](#22-organizuj-wyjscia-wedlug-process)
+Dowiedz się więcej: [2.2. Organizuj wyjścia według procesu](#22-organizuj-wyjscia-wedlug-procesu)
 </quiz>
 
 <quiz>
@@ -1646,7 +1646,7 @@ Jak ustawiasz wymagania zasobowe dla konkretnego procesu o nazwie `cowpy` w plik
 - [x] `#!groovy process { withName: 'cowpy' { memory = '2.GB' } }`
 - [ ] `#!groovy resources.cowpy.memory = '2.GB'`
 
-Dowiedz się więcej: [5.3. Ustaw alokacje zasobów dla konkretnego proces](#53-ustaw-alokacje-zasobow-dla-konkretnego-process)
+Dowiedz się więcej: [5.3. Ustaw alokacje zasobów dla konkretnego procesu](#53-ustaw-alokacje-zasobow-dla-konkretnego-procesu)
 </quiz>
 
 <quiz>

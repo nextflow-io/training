@@ -47,7 +47,8 @@ Jednak możliwe jest dostosowanie środowiska, klikając przycisk "Change option
 
     Pozwala dostosować maszynę wirtualną, której będziesz używać do pracy ze szkoleniem.
 
-    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow do równoległego wykonywania workflow'ów. Jednak zużyje to szybciej Twój darmowy limit. Nie zalecamy zmiany tego ustawienia, chyba że wymaga tego kurs, który zamierzasz realizować.
+    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow'a do równoległego wykonywania workflow'ów.
+    Jednak zużyje to szybciej Twój darmowy limit, więc nie zalecamy zmiany tego ustawienia, chyba że wymaga tego kurs, który zamierzasz realizować.
 
     Zobacz 'Limity GitHub Codespaces' poniżej, aby uzyskać więcej szczegółów o limitach.
 
@@ -64,7 +65,7 @@ Po załadowaniu GitHub Codespaces powinieneś zobaczyć coś podobnego do poniż
 
 To jest interfejs VSCode IDE, popularnej aplikacji do tworzenia kodu, którą polecamy do pracy z Nextflow.
 
-- **Główny edytor** to miejsce, gdzie będą otwierane kod Nextflow i inne pliki tekstowe. Tutaj będziesz edytować kod. Po otwarciu codespace wyświetli podgląd pliku `README.md`.
+- **Główny edytor** to miejsce, gdzie będą otwierane kod Nextflow'a i inne pliki tekstowe. Tutaj będziesz edytować kod. Po otwarciu codespace wyświetli podgląd pliku `README.md`.
 - **Terminal** poniżej głównego edytora pozwala uruchamiać polecenia. Tutaj będziesz uruchamiać wszystkie polecenia podane w instrukcjach kursu.
 - **Pasek boczny** pozwala dostosować środowisko i wykonywać podstawowe zadania (kopiowanie, wklejanie, otwieranie plików, wyszukiwanie, git itp.). Domyślnie jest otwarty na eksploratorze plików, który pozwala przeglądać zawartość repozytorium. Kliknięcie pliku w eksploratorze otworzy go w głównym oknie edytora.
 
@@ -76,7 +77,7 @@ Możesz dostosować względne proporcje paneli okna według własnych upodobań.
 
 ### Wznawianie sesji
 
-Po utworzeniu codespace możesz je łatwo wznowić lub uruchomić ponownie i kontynuować od miejsca, w którym skończyłeś.
+Po utworzeniu środowiska możesz je łatwo wznowić lub uruchomić ponownie i kontynuować od miejsca, w którym skończyłeś.
 Sesja automatycznie zakończy się po 30 minutach bezczynności i zachowa Twoje zmiany przez maksymalnie 2 tygodnie.
 
 Możesz ponownie otworzyć środowisko z <https://github.com/codespaces/>.

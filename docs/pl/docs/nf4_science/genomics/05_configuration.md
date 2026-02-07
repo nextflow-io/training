@@ -28,7 +28,7 @@ Dostępna jest [dokumentacja](https://www.nextflow.io/docs/latest/reports.html) 
 
 <!-- TODO: insert images -->
 
-Jedną z obserwacji jest to, że `GATK_JOINTGENOTYPING` wydaje się być bardzo żądny CPU, co ma sens, ponieważ wykonuje wiele złożonych obliczeń.
+Jedna z obserwacji jest taka, że `GATK_JOINTGENOTYPING` wydaje się być bardzo głodny CPU, co ma sens, ponieważ wykonuje wiele złożonych obliczeń.
 Moglibyśmy więc spróbować zwiększyć to i sprawdzić, czy skróci to czas wykonania.
 
 Jednak wygląda na to, że przesadziliśmy z przydziałem pamięci; wszystkie procesy wykorzystują tylko ułamek tego, co im dajemy.

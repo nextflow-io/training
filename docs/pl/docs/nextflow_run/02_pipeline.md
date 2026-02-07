@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W Części 1 tego kursu (Uruchamianie podstawowych operacji) zaczęliśmy od przykładowego workflow'u, który miał tylko minimalne funkcje, aby utrzymać niską złożoność kodu.
+W Części 1 tego kursu (Uruchamianie podstawowych operacji) zaczęliśmy od przykładowego workflow'a, który miał tylko minimalne funkcje, aby utrzymać niską złożoność kodu.
 Na przykład `1-hello.nf` używał parametru wiersza poleceń (`--input`) do przekazywania pojedynczej wartości na raz.
 
 Jednak większość rzeczywistych pipeline'ów wykorzystuje bardziej zaawansowane funkcje, aby umożliwić efektywne przetwarzanie dużych ilości danych na dużą skalę i stosowanie wielu kroków przetwarzania połączonych czasami złożoną logiką.
@@ -23,7 +23,7 @@ Bonjour,French,456
 Holà,Spanish,789
 ```
 
-Napisaliśmy również ulepszoną wersję oryginalnego workflow'u, teraz o nazwie `2a-inputs.nf`, która odczyta plik CSV, wyodrębni powitania i zapisze każde z nich do oddzielnego pliku.
+Napisaliśmy również ulepszoną wersję oryginalnego workflow'a, teraz o nazwie `2a-inputs.nf`, która odczyta plik CSV, wyodrębni powitania i zapisze każde z nich do oddzielnego pliku.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
@@ -229,7 +229,7 @@ Ponownie, nie musisz zapamiętywać składni kodu, ale dobrze jest nauczyć się
 
 To jest najciekawsza część: jak przeszliśmy od pobierania pojedynczej wartości z wiersza poleceń do wczytywania pliku CSV, parsowania go i obsługi zawartych w nim pojedynczych powitań?
 
-W Nextflow robimy to za pomocą [**kanału**](https://nextflow.io/docs/latest/channel.html): konstrukcji kolejki zaprojektowanej do efektywnego zarządzania danymi wejściowymi i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną paralelizację i wiele dodatkowych korzyści.
+W Nextflow robimy to za pomocą [**kanału**](https://nextflow.io/docs/latest/channel.html): konstrukcji kolejki zaprojektowanej do efektywnego zarządzania danymi wejściowymi i przekazywania ich z jednego kroku do następnego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowaną paralelizację i wiele dodatkowych korzyści.
 
 Rozłóżmy to na czynniki.
 
@@ -962,7 +962,7 @@ Znacznie lepszym sposobem rozwiązania tego problemu jest użycie **kontenerów*
 
 **Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu** kontenera, która zawiera wszystko, co potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
 
-!!! tip "Wskazówka"
+!!! Tip "Wskazówka"
 
     Uczymy tego przy użyciu technologii [Docker](https://www.docker.com/get-started/), ale Nextflow obsługuje również kilka innych technologii kontenerowych.
     Więcej o wsparciu Nextflow dla kontenerów możesz dowiedzieć się [tutaj](https://nextflow.io/docs/latest/container.html).

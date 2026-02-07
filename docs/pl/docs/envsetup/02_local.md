@@ -2,9 +2,9 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Możliwe jest ręczne zainstalowanie wszystkiego, czego potrzebujesz do uruchomienia szkolenia w Twoim własnym lokalnym środowisku.
+Możliwe jest ręczne zainstalowanie wszystkiego, czego potrzebujesz, aby przeprowadzić szkolenie we własnym lokalnym środowisku.
 
-Tutaj udokumentowaliśmy, jak to zrobić na standardowych systemach zgodnych z POSIX (zakładając komputer osobisty, taki jak laptop).
+Poniżej opisaliśmy, jak zrobić to na standardowych systemach zgodnych z POSIX (zakładając komputer osobisty, taki jak laptop).
 Pamiętaj, że niektóre szczegóły mogą się różnić w zależności od Twojego konkretnego systemu.
 
 !!! tip "Wskazówka"
@@ -14,7 +14,7 @@ Pamiętaj, że niektóre szczegóły mogą się różnić w zależności od Twoj
 
 ## Ogólne wymagania programowe
 
-Nextflow może być używany na dowolnym systemie zgodnym z POSIX (Linux, macOS, Windows Subsystem for Linux itp.) z zainstalowaną Javą.
+Nextflow'a można używać na dowolnym systemie zgodnym z POSIX (Linux, macOS, Windows Subsystem for Linux itp.) z zainstalowaną Javą.
 Nasze kursy szkoleniowe mają kilka dodatkowych wymagań.
 
 W sumie będziesz potrzebować następującego oprogramowania:
@@ -26,9 +26,9 @@ W sumie będziesz potrzebować następującego oprogramowania:
 - [Conda](https://conda.io/) 4.5 (lub nowsza)
 - [VSCode](https://code.visualstudio.com) z [rozszerzeniem Nextflow](https://www.nextflow.io/docs/latest/developer-env.html#devenv-nextflow)
 
-Aplikacja VSCode jest technicznie opcjonalna, ale zdecydowanie zalecamy jej użycie zarówno do pracy z kursami, jak i do ogólnej pracy z Nextflow.
+Aplikacja VSCode jest technicznie opcjonalna, ale zdecydowanie zalecamy jej użycie zarówno do pracy z kursami, jak i do ogólnej pracy deweloperskiej z Nextflow'em.
 
-Podręcznik dokumentacji Nextflow zawiera instrukcje instalacji tych zależności w sekcji [Environment setup](https://www.nextflow.io/docs/latest/developer-env.html).
+Podręcznik dokumentacji Nextflow'a zawiera instrukcje instalacji tych zależności w sekcji [Environment setup](https://www.nextflow.io/docs/latest/developer-env.html).
 
 ## Nextflow i narzędzia nf-core
 
@@ -37,7 +37,7 @@ Będziesz musiał zainstalować sam Nextflow oraz narzędzia nf-core, jak opisan
 - [Instalacja Nextflow](https://www.nextflow.io/docs/latest/install.html)
 - [Narzędzia nf-core](https://nf-co.re/docs/nf-core-tools/installation)
 
-Zalecamy użycie opcji samoinstalacji dla Nextflow i opcji PyPI dla narzędzi nf-core.
+Zalecamy użycie opcji samoinstalacji dla Nextflow'a i opcji PyPI dla narzędzi nf-core.
 
 !!! warning "Kompatybilność wersji"
 
@@ -57,6 +57,6 @@ git clone https://github.com/nextflow-io/training.git
 ```
 
 Każdy kurs ma swój własny katalog.
-Aby rozpocząć pracę, otwórz okno terminala (najlepiej z poziomu aplikacji VSCode) i przejdź za pomocą `cd` do odpowiedniego katalogu.
+Aby rozpocząć pracę nad kursem, otwórz okno terminala (najlepiej z poziomu aplikacji VSCode) i przejdź za pomocą `cd` do odpowiedniego katalogu.
 
 Następnie możesz postępować zgodnie z instrukcjami kursu dostarczonymi na stronie internetowej.

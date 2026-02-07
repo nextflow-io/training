@@ -16,19 +16,19 @@
 
 Cześć, witamy w piątej części kursu szkoleniowego Hello Nextflow.
 
-Ten rozdział nosi tytuł Hello Containers. Porozmawiamy o tym, jak Nextflow integruje się z narzędziami takimi jak Docker i Singularity, aby używać kontenerów do dostarczania oprogramowania użytkownikom Twojego pipeline'u.
+Ten rozdział nosi tytuł Hello Containers. Porozmawiamy o tym, jak Nextflow integruje się z narzędziami takimi jak Docker i Singularity, aby używać kontenerów oprogramowania do dostarczania oprogramowania użytkownikom Twojego pipeline'u.
 
 Oznacza to, że kiedy ludzie uruchamiają Twój pipeline, nie muszą sami instalować wszystkich różnych narzędzi. Nextflow zrobi to za nich.
 
-Kontenery to niezwykle potężna technologia, kluczowa dla powtarzalności i łatwości użycia. Zaczniemy od krótkiego wprowadzenia do samych kontenerów, ręcznego uruchomienia kilku poleceń docker, a następnie użyjemy tych samych kontenerów w naszym pipeline'ie Nextflow.
+Kontenery to niezwykle potężna technologia, kluczowa dla powtarzalności i łatwości użycia. Zaczniemy od krótkiego wprowadzenia do samych kontenerów, uruchomimy kilka poleceń docker ręcznie, a następnie weźmiemy te same kontenery i użyjemy ich w naszym pipeline'ie Nextflow.
 
 Dobra. Zaczynajmy.
 
-Tak jak poprzednio, zacznijmy od załadowania materiałów szkoleniowych. Wejdź na training.nextflow.io. Hello Nextflow, Rozdział 5, Hello Containers.
+Tak jak poprzednio, zacznijmy od załadowania materiału szkoleniowego. Wejdź na training.nextflow.io. Hello Nextflow, Rozdział Piąty, Hello Containers.
 
 Przejdę do mojego środowiska Codespaces, a po lewej stronie widzimy hello containers dot nf.
 
-Tak jak poprzednio, jest to ten sam skrypt, którym zakończyliśmy poprzedni rozdział 4, więc powinien wyglądać znajomo.
+Tak jak poprzednio, to ten sam skrypt, którym zakończyliśmy poprzedni, czwarty rozdział, więc powinien wyglądać znajomo.
 
 Mamy nasze parametry wiersza poleceń do określenia pliku wejściowego i nazwy partii. Dołączamy nasze trzy moduły i mamy nasz workflow, w którym uruchamiamy trzy procesy.
 
@@ -38,13 +38,13 @@ Możesz uruchomić ten workflow ponownie i sprawdzić, czy produkuje oczekiwane 
 
 ## 1. Użyj kontenera 'ręcznie'
 
-Na początku tego rozdziału zrobimy podsumowanie technologii kontenerów. Jeśli jesteś bardzo zaznajomiony z docker, singularity lub innymi technologiami kontenerów, potraktuj to jako odświeżenie wiedzy lub pomiń tę część całkowicie.
+Na początku tego rozdziału zrobimy podsumowanie technologii kontenerów. Jeśli jesteś bardzo zaznajomiony z Docker, Singularity lub innymi technologiami kontenerów, potraktuj to jako odświeżenie wiedzy lub pomiń całkowicie.
 
 Nextflow obsługuje wiele różnych typów technologii kontenerów. Obejmuje to Docker, Singularity, Podman, Shifter, Charliecloud i inne.
 
-W tym szkoleniu skupimy się na Docker. Jest on preinstalowany w code spaces i jest jedną z najpopularniejszych technologii kontenerów, szczególnie jeśli rozwijasz na własnym komputerze lub laptopie.
+W tym szkoleniu skupimy się na Docker. Jest preinstalowany w Code Spaces i jest jedną z najpopularniejszych technologii kontenerów, szczególnie jeśli rozwijasz na własnym komputerze lub laptopie.
 
-Jeśli pracujesz w środowisku akademickim na współdzielonym HPC, możesz zauważyć, że dostępny jest Singularity, a nie Docker. To w porządku. Wszystkie koncepcje są dokładnie takie same. Kilka ręcznych poleceń jest różnych, ale jeśli rozumiesz Docker, zrozumiesz także singularity.
+Jeśli pracujesz w środowisku akademickim na współdzielonym HPC, możesz zauważyć, że dostępny jest Singularity, a nie Docker. To w porządku. Wszystkie koncepcje są dokładnie takie same. Kilka poleceń ręcznych jest różnych, ale jeśli rozumiesz Docker, zrozumiesz także Singularity.
 
 W rzeczywistości Singularity jest również zainstalowany w środowisku Code Spaces. Więc jeśli chcesz, możesz spróbować wykonać te same zadania używając Singularity zamiast Docker.
 
@@ -58,9 +58,9 @@ Składnia, której potrzebujemy do pobrania istniejącego obrazu to "docker pull
 
 Możesz budować obrazy samodzielnie. Możesz je znaleźć w publicznych rejestrach takich jak Docker Hub czy quay.io. Ale naprawdę dobrym sposobem na szybkie uzyskanie obrazów jest użycie Seqera Containers.
 
-To darmowa usługa społecznościowa, którą stworzyliśmy w 2024 roku i którą możesz używać bez logowania czy czegokolwiek innego.
+To darmowa usługa społecznościowa, którą stworzyliśmy w 2024 roku i której możesz używać bez logowania czy czegokolwiek innego.
 
-Jeśli przejdziesz na seqera.io/containers lub klikniesz containers na górze, zobaczysz interfejs wyszukiwania i możesz wpisać nazwę dowolnego narzędzia dostępnego w Conda lub Python Package Index.
+Jeśli przejdziesz na seqera.io/containers lub klikniesz containers na górze, zobaczysz interfejs wyszukiwania, gdzie możesz wpisać nazwę dowolnego narzędzia dostępnego w Conda lub Python Package Index.
 
 Domyślnie przeszukuje kanały Bioconda i Conda Forge, ale możesz poprzedzić dowolny kanał Conda, jeśli chcesz.
 
@@ -70,17 +70,17 @@ To buduje dla mnie obraz na żądanie, jeśli nie został jeszcze utworzony, i d
 
 Jeśli jesteś zainteresowany, możesz kliknąć view Build Details, co zabierze Cię na stronę pokazującą plik środowiska conda, który został użyty, oraz kompletny dziennik budowania wraz z wynikami skanowania bezpieczeństwa.
 
-Jeśli wrócę do moich code spaces, mogę teraz wkleić tę nazwę kontenera i nacisnąć enter.
+Jeśli wrócę do moich Code Spaces, mogę teraz wkleić tę nazwę kontenera i nacisnąć enter.
 
 Docker teraz pobiera wszystkie różne warstwy w tym obrazie kontenera i teraz mówi nam, że ten obraz jest dostępny do użycia.
 
 ## Pobieranie obrazu Singularity
 
-Jeśli używasz singularity, proces jest w zasadzie taki sam. Wybieramy nasze pakiety obrazów, wybieramy cowpy. Teraz wybieramy Singularity zamiast Docker i klikamy Get Container. To daje nam URL obrazu używający oras://. Lub jeśli wolisz, możesz użyć https:// zaznaczając to pole. Kopiuję ten URL. Teraz przechodzę do Code Spaces. W rzeczywistości mamy zainstalowany Apptainer w tej przestrzeni, który jest taki sam jak Singularity, ale są do siebie aliasowane. Więc zrobię apptainer pull, a następnie nazwę to cowpy sif, ale możesz nazwać to jak chcesz. Wklejam URL. I to pobierze dla mnie ten obraz.
+Jeśli używasz Singularity, proces jest w zasadzie taki sam. Wybieramy nasze pakiety obrazów, wybieramy cowpy. Teraz wybieramy Singularity zamiast Docker i klikamy Get Container. To daje nam URL obrazu używający oras://. Lub jeśli wolisz, możesz użyć https:// zaznaczając to pole. Kopiuję ten URL. Teraz przechodzę do Code Spaces. W rzeczywistości mamy zainstalowany Apptainer w tej przestrzeni, który jest taki sam jak Singularity, ale są do siebie aliasowane. Więc zrobię apptainer pull, a następnie nazwę to cowpy sif, ale możesz nazwać to jak chcesz. Wklejam URL. I to pobierze dla mnie ten obraz.
 
 Mógłbym zrobić ls -lh i zobaczyć cowpy.sif
 
-Singularity różni się od Docker tym, że singularity przechowuje wszystkie obrazy w płaskich plikach, podczas gdy Docker ma rejestr, gdzie przechowuje wszystkie warstwy oddzielnie na Twojej maszynie hosta i ma działającego demona, aby śledzić to wszystko.
+Singularity różni się od Docker tym, że Singularity przechowuje wszystkie obrazy w płaskich plikach, podczas gdy Docker ma rejestr, gdzie przechowuje wszystkie warstwy oddzielnie na Twojej maszynie hosta i ma działającego demona, aby śledzić to wszystko.
 
 ## 1.2. Użyj kontenera do uruchomienia cowpy jako jednorazowego polecenia
 
@@ -116,7 +116,7 @@ Zróbmy cheese. Wspaniale. Co powiesz na Dragon and Cow? Całkiem dobre.
 
 ## 1.3.3. Wyjdź z kontenera
 
-Dobra. Nie mogę zrobić wiele więcej, ponieważ nie mam żadnych danych w tym kontenerze. Więc wyjdźmy z tego działającego obrazu i zobaczmy, czy możemy zamontować jakieś dane w kontenerze. Mogę to zrobić robiąc control D lub wpisując exit. Dobra, jestem teraz z powrotem w moim zwykłym GitHub code space.
+Dobra. Nie mogę zrobić wiele więcej, ponieważ nie mam żadnych danych w tym kontenerze. Więc wyjdźmy z tego działającego obrazu i zobaczmy, czy możemy zamontować jakieś dane w kontenerze. Mogę to zrobić robiąc control D lub wpisując exit. Dobra, jestem teraz z powrotem w moim zwykłym GitHub Code Space.
 
 ## 1.3.4. Zamontuj dane w kontenerze
 
@@ -126,25 +126,25 @@ Teraz jeśli zrobię LS slash, możemy zobaczyć, że mamy nowy katalog o nazwie
 
 ## 1.3.5. Użyj zamontowanych danych
 
-Teraz możemy zacząć używać niektórych plików, które są w systemie hosta w obrazie Docker. Więc mogę powiedzieć cat data greetings csv. Jeśli pamiętasz, to jest nasz plik CSV z naszymi różnymi powitaniami sprzed chwili, i mogę przekazać to do cowpy. Fantastycznie. Teraz gdzieś docieramy.
+Teraz możemy zacząć używać niektórych plików, które są w systemie hosta, w obrazie Docker. Więc mogę powiedzieć cat data greetings csv. Jeśli pamiętasz, to nasz plik CSV z naszymi różnymi powitaniami sprzed chwili, i mogę przekazać to do cowpy. Fantastycznie. Teraz gdzieś docieramy.
 
-Dobra. Wystarczy uruchamiania Docker interaktywnie. Mam nadzieję, że masz teraz poczucie, czym w przybliżeniu jest Docker i jak go używać zarówno do uruchamiania polecenia jednorazowo, jak i do interaktywnego używania obrazu. Jeśli używasz singularity, polecenia są wszystkie bardzo podobne, z wyjątkiem tego, że robisz rzeczy takie jak apptainer exec lub apptainer run, lub singularity exec lub singularity run.
+Dobra. Wystarczy uruchamiania Docker interaktywnie. Mam nadzieję, że masz teraz poczucie, czym w przybliżeniu jest Docker i jak go używać zarówno do uruchamiania polecenia jednorazowo, jak i do interaktywnego używania obrazu. Jeśli używasz Singularity, polecenia są wszystkie bardzo podobne, z wyjątkiem tego, że robisz rzeczy takie jak apptainer exec lub apptainer run, lub singularity exec lub singularity run.
 
 ## 2. Użyj kontenerów w Nextflow
 
-Następnie wrócimy do naszego workflow Nextflow i zobaczymy, jak używać tej technologii w pipeline'ie Nextflow.
+Następnie wrócimy do naszego workflow'a Nextflow i zobaczymy, jak używać tej technologii w pipeline'ie Nextflow.
 
 Zamknijmy terminal i otwórzmy ponownie Hello Containers.
 
 ## 2.1. Napisz moduł cowpy
 
-Aby trzymać się naszego przykładu cowpy, stwórzmy nowy proces w naszym workflow, który używa cowpy. Przejdźmy do modules, utwórzmy nowy plik i nazwijmy go cowpy nf. Teraz trochę oszukam i skopiguję kod z materiału szkoleniowego i nacisnę save. I spójrzmy.
+Aby trzymać się naszego przykładu cowpy, stwórzmy nowy proces w naszym workflow'ie, który używa cowpy. Przejdźmy do modules, utwórzmy nowy plik i nazwijmy go cowpy nf. Teraz trochę oszukam i skopiguję kod z materiału szkoleniowego i nacisnę save. I spójrzmy.
 
 To prosty proces. Mam nadzieję, że teraz rozumiesz, jak wyglądają elementy składowe procesu. Mamy ponownie nasz publishDir, idący do results. Mamy dwa wejścia, plik wejściowy i ciąg znaków o nazwie character. Mamy wyjście cowpy input file i mamy skrypt, który wygląda dokładnie tak samo jak to, co uruchamialiśmy ręcznie wewnątrz naszego obrazu docker przed chwilą: cat do wydrukowania pliku, przekazując to do cowpy, mówiąc, którego typu postaci cowpy chcemy użyć, i wyprowadzając to do pliku wyjściowego, który przekazujemy jako wyjście tutaj.
 
 ## 2.2. Dodaj cowpy do workflow
 
-Dobra, wróćmy do naszego workflow, zaimportujmy ten nowy proces. Więc cowpy from modules cowpy nf. Stwórzmy nowy parametr, abyśmy mogli określić, którego znaku chcemy. Powiedzmy Turkey domyślnie. A następnie wywołajmy ten nowy proces na końcu workflow,
+Dobra, wróćmy do naszego workflow'a, zaimportujmy ten nowy proces. Więc cowpy from modules cowpy nf. Stwórzmy nowy parametr, abyśmy mogli określić, którego znaku chcemy. Powiedzmy Turkey domyślnie. A następnie wywołajmy ten nowy proces na końcu workflow'a,
 
 cowpy. I użyjmy wyjścia tutaj z Collect Greetings. Więc collect greetings out, out file tutaj. A następnie potrzebujemy drugiego argumentu, którym są nowe params, które właśnie stworzyliśmy. params dot character.
 
@@ -154,15 +154,15 @@ Dobra, zobaczmy, czy nasz nowy proces działa. Nextflow run hello containers. To
 
 Mamy błąd. To, co tutaj mówi, cowpy miało błąd i miało status wyjścia 127 i rzeczywiście, polecenie sh cowpy polecenie nie znalezione.
 
-Nie powiedzieliśmy Nextflow, że mamy dostępny obraz Docker dla cowpy, więc próbował uruchomić to na naszym systemie hosta, a nie mamy cowpy zainstalowanego na naszym systemie hosta, więc wywołało to błąd.
+Nie powiedzieliśmy Nextflow'owi, że mamy dostępny obraz Docker dla cowpy, więc próbował uruchomić to na naszym systemie hosta, a nie mamy cowpy zainstalowanego na naszym systemie hosta, więc wywołało to błąd.
 
 ## 2.3. Użyj kontenera, aby to uruchomić
 
-Więc to, co musimy zrobić, to musimy powiedzieć Nextflow, że mamy dostępny kontener. Przejdźmy do naszego procesu cowpy i dodajmy nową dyrektywę na górze procesu o nazwie container.
+Więc to, co musimy zrobić, to musimy powiedzieć Nextflow'owi, że mamy dostępny kontener. Przejdźmy do naszego procesu cowpy i dodajmy nową dyrektywę na górze procesu o nazwie container.
 
 Następnie znajdujemy nasz obraz, kopiujemy URL i umieszczamy to w ciągu znaków.
 
-To samo w sobie nie wystarcza, ponieważ pipeline X Flow może mieć kilka sposobów określania oprogramowania. Mógłbym również zrobić conda conda-forge cowpy, na przykład. I Nextflow musi wiedzieć, której z tych technologii chcesz użyć.
+To samo w sobie nie wystarcza, ponieważ pipeline Nextflow może mieć kilka sposobów określania oprogramowania. Mógłbym również zrobić conda conda-forge cowpy, na przykład. I Nextflow musi wiedzieć, której z tych technologii chcesz użyć.
 
 ## 2.3.2. Włącz użycie Docker przez plik nextflow.config
 
@@ -182,11 +182,11 @@ Pobrał obraz i uruchomił dla nas polecenia.
 
 Jeśli jesteś ciekawy, możemy faktycznie zobaczyć dokładnie, co to zrobiło, patrząc w katalog work. Jeśli zrobię code work, a następnie hash i następnie command run, który jeśli pamiętasz, to faktyczny plik, który jest wykonywany dla tego zadania, możemy wejść i możemy poszukać funkcji o nazwie NXF launch. I tutaj możesz zobaczyć dokładne polecenie docker, którego użył Nextflow, które wygląda podobnie do tego, co robiliśmy ręcznie w terminalu wcześniej. Docker run. Wiązanie tego katalogu hosta w kontenerze, a następnie określanie URL kontenera.
 
-Więc nie ma tu magii. Po prostu Nextflow automatycznie robi ciężką pracę za Ciebie w sposób, który oznacza, że możesz łatwo określić kontenery w Swoim pipeline'ie, które są następnie łatwo dostępne dla każdego innego, kto uruchamia Twój workflow. I ci ludzie nie muszą już myśleć o zarządzaniu oprogramowaniem, aby uruchomić Twój pipeline analizy.
+Więc nie ma tu magii. Po prostu Nextflow automatycznie robi ciężką pracę za Ciebie w sposób, który oznacza, że możesz łatwo określić kontenery w Twoim pipeline'ie, które są następnie łatwo dostępne dla każdego innego, kto uruchamia Twój workflow. I ci ludzie nie muszą już myśleć o zarządzaniu oprogramowaniem, aby uruchomić Twój pipeline analizy.
 
 Bardzo, bardzo proste, bardzo wygodne, a także naprawdę powtarzalne. Dobre ze wszystkich stron.
 
-Dobra, świetna robota. To koniec rozdziału 5. Dołącz do nas w następnym filmie w części 6, która jest ostatnią częścią tego szkolenia Hello Nextflow, gdzie porozmawiamy o konfiguracji Nextflow bardziej szczegółowo.
+Dobra, świetna robota. To koniec rozdziału piątego. Dołącz do nas w następnym filmie w części szóstej, która jest ostatnią częścią tego szkolenia Hello Nextflow, gdzie porozmawiamy o konfiguracji Nextflow bardziej szczegółowo.
 
 Do zobaczenia w następnym filmie.
 

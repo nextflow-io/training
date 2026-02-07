@@ -993,7 +993,7 @@ Są dwie kluczowe zalety takiego postępowania:
 - Jeśli tworzysz swój pipeline, możesz szybciej iterować, uruchamiając tylko proces(-y), nad którym(-i) aktywnie pracujesz, aby przetestować swoje zmiany.
 - Jeśli uruchamiasz pipeline w produkcji i coś pójdzie nie tak, w wielu przypadkach możesz naprawić problem i ponownie uruchomić pipeline, a wznowi on wykonywanie od punktu awarii, co może zaoszczędzić Ci dużo czasu i zasobów obliczeniowych.
 
-Aby jej użyć, po prostu dodaj `-resume` do Swojego polecenia i uruchom go:
+Aby jej użyć, po prostu dodaj `-resume` do Swojego polecenia i uruchom je:
 
 ```bash
 nextflow run hello-world.nf -resume

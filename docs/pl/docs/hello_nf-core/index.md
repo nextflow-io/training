@@ -30,7 +30,7 @@ additional_information:
 ![nf-core logo](./img/nf-core-logo.png#only-light)
 ![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)
 
-Pracując nad praktycznymi przykładami i prowadzonymi ćwiczeniami, nauczysz się używać i rozwijać moduły i pipeline'y kompatybilne z nf-core oraz efektywnie wykorzystywać narzędzia nf-core.
+Pracując nad praktycznymi przykładami i prowadzonymi ćwiczeniami, nauczysz się używać i rozwijać moduły oraz pipeline'y kompatybilne z nf-core, a także efektywnie wykorzystywać narzędzia nf-core.
 
 Wyniesiesz umiejętności i pewność siebie, aby zacząć rozwijać pipeline'y zgodnie z najlepszymi praktykami nf-core.
 
@@ -40,11 +40,11 @@ Wyniesiesz umiejętności i pewność siebie, aby zacząć rozwijać pipeline'y 
 
 Ten kurs został zaprojektowany jako praktyczny, z ćwiczeniami zorientowanymi na cel, ustrukturyzowanymi tak, aby stopniowo wprowadzać informacje.
 
-Zostaniesz zapoznany z [**nf-core**](https://nf-co.re/), inicjatywą społeczności mającą na celu rozwój i utrzymanie wyselekcjonowanego zestawu naukowych pipeline'ów zbudowanych przy użyciu Nextflow, a także odpowiednich narzędzi i wytycznych promujących otwartą współpracę, testowanie i przeglądy kodu ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
+Zostaniesz zapoznany z [**nf-core**](https://nf-co.re/), inicjatywą społeczności mającą na celu rozwój i utrzymanie wyselekcjonowanego zestawu naukowych pipeline'ów zbudowanych przy użyciu Nextflow, a także odpowiednich narzędzi i wytycznych promujących otwartą współpracę, testowanie i wzajemne recenzowanie ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
 
 Pipeline'y opracowane przez społeczność nf-core zostały zaprojektowane jako modułowe, skalowalne i przenośne, pozwalając badaczom na łatwe dostosowanie i wykonanie ich przy użyciu własnych danych i zasobów obliczeniowych.
-Wytyczne dotyczące najlepszych praktyk egzekwowane przez projekt dodatkowo zapewniają, że te rozwiązania są niezawodne, dobrze udokumentowane i zwalidowane na rzeczywistych zestawach danych.
-Pomaga to zwiększyć niezawodność i odtwarzalność analiz naukowych i ostatecznie umożliwia badaczom przyspieszenie ich odkryć naukowych.
+Wytyczne dotyczące najlepszych praktyk egzekwowane przez projekt dodatkowo zapewniają, że pipeline'y są niezawodne, dobrze udokumentowane i zwalidowane na rzeczywistych zestawach danych.
+Pomaga to zwiększyć wiarygodność i odtwarzalność analiz naukowych, a ostatecznie umożliwia badaczom przyspieszenie odkryć naukowych.
 
 Nie omówimy wszystkiego, co można wiedzieć o pipeline'ach nf-core w tym kursie, ponieważ nf-core obejmuje wiele funkcji i konwencji opracowanych przez społeczność przez lata.
 Zamiast tego skupimy się na podstawowych koncepcjach, które pomogą Ci zacząć i zrozumieć, jak działa nf-core.

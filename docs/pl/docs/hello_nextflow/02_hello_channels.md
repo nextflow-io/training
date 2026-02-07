@@ -14,16 +14,16 @@
 ///
 -->
 
-W Części 1 kursu (Hello World) pokazaliśmy Ci, jak dostarczyć zmienne wejście do procesu, podając je bezpośrednio w wywołaniu procesu: `sayHello(params.input)`.
+W Części 1 kursu (Hello World) pokazaliśmy Ci, jak dostarczyć zmienne wejście do procesu poprzez podanie go bezpośrednio w wywołaniu procesu: `sayHello(params.input)`.
 To było celowo uproszczone podejście.
-W praktyce takie rozwiązanie ma poważne ograniczenia; działa tylko w bardzo prostych przypadkach, gdy chcemy uruchomić proces jednorazowo, na pojedynczej wartości.
+W praktyce takie rozwiązanie ma poważne ograniczenia; działa tylko w bardzo prostych przypadkach, gdy chcemy uruchomić proces jednorazowo na pojedynczej wartości.
 W większości realistycznych przypadków użycia workflow'ów chcemy przetworzyć wiele wartości (na przykład dane eksperymentalne dla wielu próbek), więc potrzebujemy bardziej wyrafinowanego sposobu obsługi wejść.
 
 Do tego służą [**kanały**](https://nextflow.io/docs/latest/channel.html) Nextflow'a.
-Kanały to kolejki zaprojektowane do efektywnej obsługi wejść i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowane przetwarzanie równoległe i wiele dodatkowych korzyści.
+Kanały to kolejki zaprojektowane do efektywnej obsługi wejść i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowane przetwarzanie równoległe i wiele innych korzyści.
 
 W tej części kursu nauczysz się, jak używać kanału do obsługi wielu wejść z różnych źródeł.
-Nauczysz się również używać [**operatorów**](https://nextflow.io/docs/latest/reference/operator.html) do transformowania zawartości kanałów w razie potrzeby.
+Nauczysz się również stosować [**operatory**](https://nextflow.io/docs/latest/reference/operator.html) do transformowania zawartości kanałów w razie potrzeby.
 
 ??? info "Jak zacząć od tej sekcji"
 
@@ -885,9 +885,9 @@ W bloku workflow wprowadź następującą zmianę kodu:
         greetings_array = ['Hello','Bonjour','Holà']
         // utwórz kanał dla danych wejściowych
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Before flatten: $greeting" }
+                             .view { greeting -> "Przed flatten: $greeting" }
                              .flatten()
-                             .view { greeting -> "After flatten: $greeting" }
+                             .view { greeting -> "Po flatten: $greeting" }
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
@@ -916,7 +916,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
     }
     ```
 
-Widzisz, że dodaliśmy drugą instrukcję `.view`, a dla każdej z nich zastąpiliśmy puste nawiasy (`()`) nawiasami klamrowymi zawierającymi kod, taki jak `{ greeting -> "Before flatten: $greeting" }`.
+Widzisz, że dodaliśmy drugą instrukcję `.view`, a dla każdej z nich zastąpiliśmy puste nawiasy (`()`) nawiasami klamrowymi zawierającymi kod, taki jak `{ greeting -> "Przed flatten: $greeting" }`.
 
 Są to tak zwane _closures_. Kod, który zawierają, będzie wykonywany dla każdego elementu w kanale.
 Definiujemy tymczasową zmienną dla wewnętrznej wartości, tutaj nazwaną `greeting` (ale mogłaby mieć dowolną nazwę), która jest używana tylko w zakresie tej closure.
@@ -949,16 +949,16 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Before flatten: [Hello, Bonjour, Holà]
-    After flatten: Hello
-    After flatten: Bonjour
-    After flatten: Holà
+    Przed flatten: [Hello, Bonjour, Holà]
+    Po flatten: Hello
+    Po flatten: Bonjour
+    Po flatten: Holà
     ```
 
 Tym razem działa I daje nam dodatkowy wgląd w to, jak zawartość kanału wygląda przed i po uruchomieniu operatora `flatten()`.
 
-- Pojedyncza instrukcja `Before flatten:`, ponieważ w tym momencie kanał zawiera jeden element, oryginalną tablicę.
-- Trzy oddzielne instrukcje `After flatten:`, jedną dla każdego pozdrowienia, które są teraz pojedynczymi elementami w kanale.
+- Pojedyncza instrukcja `Przed flatten:`, ponieważ w tym momencie kanał zawiera jeden element, oryginalną tablicę.
+- Trzy oddzielne instrukcje `Po flatten:`, jedną dla każdego pozdrowienia, które są teraz pojedynczymi elementami w kanale.
 
 Co ważne, oznacza to, że każdy element może być teraz przetwarzany osobno przez workflow.
 
@@ -1051,9 +1051,9 @@ W bloku workflow wprowadź następującą zmianę kodu:
         main:
         // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Before flatten: $greeting" }
+                             .view { greeting -> "Przed flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
+                             // .view { greeting -> "Po flatten: $greeting" }
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
@@ -1072,9 +1072,9 @@ W bloku workflow wprowadź następującą zmianę kodu:
         greetings_array = ['Hello','Bonjour','Holà']
         // utwórz kanał dla danych wejściowych
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Before flatten: $greeting" }
+                             .view { greeting -> "Przed flatten: $greeting" }
                              .flatten()
-                             .view { greeting -> "After flatten: $greeting" }
+                             .view { greeting -> "Po flatten: $greeting" }
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
@@ -1102,7 +1102,7 @@ nextflow run hello-channels.nf
     Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
 
     [-        ] sayHello [  0%] 0 of 1
-    Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
+    Przed flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
@@ -1156,9 +1156,9 @@ W bloku workflow wprowadź następującą zmianę kodu, aby zastąpić `flatten(
         main:
         // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
+                             .view { csv -> "Przed splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
+                             .view { csv -> "Po splitCsv: $csv" }
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
@@ -1175,9 +1175,9 @@ W bloku workflow wprowadź następującą zmianę kodu, aby zastąpić `flatten(
         main:
         // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Before flatten: $greeting" }
+                             .view { greeting -> "Przed flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
+                             // .view { greeting -> "Po flatten: $greeting" }
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
@@ -1206,10 +1206,10 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
-    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
-    After splitCsv: [Hello, English, 123]
-    After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
+    Przed splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    Po splitCsv: [Hello, English, 123]
+    Po splitCsv: [Bonjour, French, 456]
+    Po splitCsv: [Holà, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1275,11 +1275,11 @@ W bloku workflow wprowadź następującą zmianę kodu:
         main:
         // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
+                             .view { csv -> "Przed splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
+                             .view { csv -> "Po splitCsv: $csv" }
                              .map { item -> item[0] }
-                             .view { csv -> "After map: $csv" }
+                             .view { csv -> "Po map: $csv" }
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
@@ -1296,9 +1296,9 @@ W bloku workflow wprowadź następującą zmianę kodu:
         main:
         // utwórz kanał dla danych wejściowych z pliku CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Before splitCsv: $csv" }
+                             .view { csv -> "Przed splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "After splitCsv: $csv" }
+                             .view { csv -> "Po splitCsv: $csv" }
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
@@ -1326,22 +1326,22 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
-    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
-    After splitCsv: [Hello, English, 123]
-    After splitCsv: [Bonjour, French, 456]
-    After splitCsv: [Holà, Spanish, 789]
-    After map: Hello
-    After map: Bonjour
-    After map: Holà
+    Przed splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    Po splitCsv: [Hello, English, 123]
+    Po splitCsv: [Bonjour, French, 456]
+    Po splitCsv: [Holà, Spanish, 789]
+    Po map: Hello
+    Po map: Bonjour
+    Po map: Holà
     ```
 
 Tym razem powinno się uruchomić bez błędu.
 
 Patrząc na wyjście instrukcji `view()`, widzisz następujące rzeczy:
 
-- Pojedynczą instrukcję `Before splitCsv:`: w tym momencie kanał zawiera jeden element, oryginalną ścieżkę pliku.
-- Trzy oddzielne instrukcje `After splitCsv:`: jedną dla każdego pozdrowienia, ale każde jest zawarte w tablicy odpowiadającej tej linii w pliku.
-- Trzy oddzielne instrukcje `After map:`: jedną dla każdego pozdrowienia, które są teraz pojedynczymi elementami w kanale.
+- Pojedynczą instrukcję `Przed splitCsv:`: w tym momencie kanał zawiera jeden element, oryginalną ścieżkę pliku.
+- Trzy oddzielne instrukcje `Po splitCsv:`: jedną dla każdego pozdrowienia, ale każde jest zawarte w tablicy odpowiadającej tej linii w pliku.
+- Trzy oddzielne instrukcje `Po map:`: jedną dla każdego pozdrowienia, które są teraz pojedynczymi elementami w kanale.
 
 _Zauważ, że linie mogą pojawiać się w innej kolejności w Twoim wyjściu._
 
