@@ -3,6 +3,8 @@
 In Part 1, you tested the Samtools and GATK commands manually in their respective containers.
 Now we're going to wrap those same commands into a Nextflow workflow.
 
+## Assignment
+
 In this part of the course, we're going to develop a workflow that does the following:
 
 1. Generate an index file for each BAM input file using [Samtools](https://www.htslib.org/)
@@ -12,20 +14,93 @@ In this part of the course, we're going to develop a workflow that does the foll
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
-We'll organize our code using **modules** from the start, which is the recommended practice for Nextflow workflows.
-Modules allow you to keep process definitions in separate files, making your code more organized, reusable, and testable.
+[TODO: sentence about how this replicates what we did in section X of Part 1.]
+
+As a starting point, we provide you with a workflow file, `genomics-1.nf`, that outlines the main parts of the workflow, as well as two module files, samtools_index.nf and gatk_haplotypecaller.nf, that outline the structure of the modules.
+These files are not functional; their purpose is just to serve as scaffolds for you to fill in with the interesting parts of the code.
+
+## Lesson plan
+
+In order to make the development process more educational, we've broken this down into four distinct steps:
+
+1. **Write a single-stage workflow that runs Samtools index on a BAM file.**
+   [TODO: single-sentence summary]
+2. **Add a second process to run GATK HaplotypeCaller on the indexed BAM file.**
+   [TODO: single-sentence summary]
+3. **Adapt the workflow to run on a batch of samples.**
+   [TODO: single-sentence summary]
+4. **Make the workflow accept a text file containing a batch of input files.**
+   [TODO: single-sentence summary]
+5. **Adapt the input handling to use an nf-core style samplesheet.**
+   [TODO: single-sentence summary]
+
+[TODO: sentence about how this will allow us to focus on a specific aspect of workflow development.]
 
 ---
 
 ## 1. Write a single-stage workflow that runs Samtools index on a BAM file
 
-We provide you with a workflow file, `genomics-1.nf`, that outlines the main parts of the workflow.
-It's not functional; its purpose is just to serve as a skeleton that you'll use to write the actual workflow.
+[TODO: sentence about what this focuses on, ie getting the basics in place: loading a BAM file and doing something to it.]
 
-### 1.1. Examine the module skeleton for the indexing process
+### 1.1. Set up the inputs
 
-We provide skeleton module files in the `modules/` directory, just like the workflow skeleton in `genomics-1.nf`.
-The first one, `modules/samtools_index.nf`, outlines the `SAMTOOLS_INDEX` process:
+#### 1.1.1. Add an input parameter declaration
+
+In the main workflow file `genomics-1.nf`, under the `Pipeline parameters` section, declare a CLI parameter called `reads_bam`.
+
+[TODO: change `reads_bam` to `input`]
+
+=== "After"
+
+    ```groovy title="genomics-1.nf" linenums="5" hl_lines="4-7"
+    /*
+     * Pipeline parameters
+     */
+    params {
+        // Primary input
+        reads_bam: Path
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="genomics-1.nf" linenums="5"
+    /*
+     * Pipeline parameters
+     */
+
+    // Primary input
+    ```
+
+[TODO: sentence about how we'll set up a default value later in this section]
+
+#### 1.1.2. Create a test profile with default values in `nextflow.config`
+
+[TODO: sentence about purpose of test profile, with link to Part 6 of Hello Nextflow]
+
+[TODO: add instructions for creating a test profile with a value for the reads_bam input parameter, pointing to the 'mother' bam file and using ${projectDir} for the path]
+
+!!! note
+
+    `${projectDir}` is a built-in Nextflow variable that points to the directory where the current Nextflow workflow script (`genomics-1.nf`) is located.
+
+    This makes it easy to reference files, data directories, and other resources included in the workflow repository without hardcoding absolute paths.
+
+#### 1.1.2. Set up the input channel
+
+[TODO: instructions for setting up the input channel]
+
+We're using the same `.fromPath` channel factory as in [Hello Channels](../../hello_nextflow/02_hello_channels.md).
+The difference is that we're telling Nextflow to just load the file path itself into the channel as an input element, rather than reading in its contents.
+
+[TODO: transition sentence saying now we need a process to run indexing on the input]
+
+### 1.2. Set up the indexing step
+
+#### 1.2.1. Fill in the module for the indexing process
+
+Open `modules/samtools_index.nf` and examine the outline of the process definition.
+[TODO: sentence about how you should recognize all the main elements if you worked through the beginner training. If not, consider reading through that for a refresher before continuing.]
 
 ```groovy title="modules/samtools_index.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -48,9 +123,13 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-### 1.2. Fill in the SAMTOOLS_INDEX module
+[TODO: instructions to recall the commands we ran in Part 1 and fill out the process based on that]
 
-Open `modules/samtools_index.nf` and fill in the process definition:
+[TODO: recap the command we used in Part 1]
+
+[TODO: sentence about how you can try to fill out the process definition by yourself if you're feeling confident. If not, take a peek at the solution below]
+
+[TODO: put the before/after below inside an admonition with an appropriate type]
 
 === "After"
 
@@ -100,42 +179,9 @@ Open `modules/samtools_index.nf` and fill in the process definition:
     }
     ```
 
-You should recognize all the pieces from what you learned in the Hello Nextflow training series.
+[TODO: sentence about how the process is now ready, so we need to make it available in the workflow]
 
-### 1.3. Add an input parameter declaration
-
-In the main workflow file `genomics-1.nf`, under the `Pipeline parameters` section, declare a CLI parameter called `reads_bam` and give it a default value.
-That way, we can be lazy and not specify the input when we type the command to launch the pipeline (for development purposes).
-
-=== "After"
-
-    ```groovy title="genomics-1.nf" linenums="5" hl_lines="4-7"
-    /*
-     * Pipeline parameters
-     */
-    params {
-        // Primary input
-        reads_bam: Path = "${projectDir}/data/bam/reads_mother.bam"
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="genomics-1.nf" linenums="5"
-    /*
-     * Pipeline parameters
-     */
-
-    // Primary input
-    ```
-
-!!! note
-
-    `${projectDir}` is a built-in Nextflow variable that points to the directory where the current Nextflow workflow script (`genomics-1.nf`) is located.
-
-    This makes it easy to reference files, data directories, and other resources included in the workflow repository without hardcoding absolute paths.
-
-### 1.4. Import the module and fill in the workflow block
+#### 1.2.2. Include the module
 
 In `genomics-1.nf`, import the module:
 
@@ -152,7 +198,11 @@ In `genomics-1.nf`, import the module:
     // Module INCLUDE statements
     ```
 
-Then fill in the workflow block to call the process:
+[TODO: sentence about how the process is now available, we can call it]
+
+#### 1.2.3. Call the indexing process on the input
+
+[TODO: instructions to add a call in the workflow block under `main:`]
 
 === "After"
 
@@ -196,22 +246,23 @@ Then fill in the workflow block to call the process:
     }
     ```
 
-We're using the same `.fromPath` channel factory as in [Hello Channels](../../hello_nextflow/02_hello_channels.md).
-The difference is that we're telling Nextflow to just load the file path itself into the channel as an input element, rather than reading in its contents.
 
-The workflow block has three sections:
-
-- `main:` contains channel operations and process calls
-- `publish:` declares which outputs to publish, assigning them to named targets
-- The `output {}` block (outside the workflow) specifies the subdirectory where each target is published
-
-!!! note
 
     By default, Nextflow publishes output files as symbolic links, which avoids unnecessary duplication.
     Even though the data files we're using here are very small, in genomics they can get very large.
     Be aware that symlinks will break when you clean up your `work` directory, so for production workflows you may want to override the default publish mode to `'copy'`.
 
-### 1.5. Run the workflow to verify that the indexing step works
+### 1.3. Set up the output handling
+
+#### 1.3.1. Add an output declaration under `publish:`
+
+[TODO: add instructions to add an output declaration in the workflow block]
+
+#### 1.3.2. Specify how the output should be handled in the `output {}` block
+
+[TODO: add instructions to add the output handling in the output block]
+
+### 1.4. Run the workflow to verify that the indexing step works
 
 As a reminder, we don't need to specify an input in the command line because we set up a default value for the input when we declared the input parameter.
 
@@ -253,16 +304,20 @@ There it is!
 ### Takeaway
 
 You know how to create a module containing a process and use it in a Nextflow workflow.
+[TODO: expand this with a bit more detail]
 
 ### What's next?
 
 Add a second step that consumes the output of the first.
+[TODO: expand this with a bit more detail]
 
 ---
 
 ## 2. Add a second process to run GATK HaplotypeCaller on the indexed BAM file
 
 Now that we have an index for our input file, we can move on to setting up the variant calling step, which is the interesting part of the workflow.
+
+[TODO: adapt this section to match the progression used in the previous section]
 
 ### 2.1. Fill in the module for the variant calling process
 
