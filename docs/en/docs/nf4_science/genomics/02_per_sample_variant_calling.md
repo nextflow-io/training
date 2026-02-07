@@ -16,7 +16,7 @@ In this part of the course, we're going to develop a workflow that does the foll
 
 This replicates the steps from Part 1, where you ran these commands manually in their containers.
 
-As a starting point, we provide you with a workflow file, `genomics-1.nf`, that outlines the main parts of the workflow, as well as two module files, samtools_index.nf and gatk_haplotypecaller.nf, that outline the structure of the modules.
+As a starting point, we provide you with a workflow file, `genomics.nf`, that outlines the main parts of the workflow, as well as two module files, samtools_index.nf and gatk_haplotypecaller.nf, that outline the structure of the modules.
 These files are not functional; their purpose is just to serve as scaffolds for you to fill in with the interesting parts of the code.
 
 ## Lesson plan
@@ -61,11 +61,11 @@ We need to declare an input parameter, create a test profile to provide a conven
 
 #### 1.1.1. Add an input parameter declaration
 
-In the main workflow file `genomics-1.nf`, under the `Pipeline parameters` section, declare a CLI parameter called `reads_bam`.
+In the main workflow file `genomics.nf`, under the `Pipeline parameters` section, declare a CLI parameter called `reads_bam`.
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="5" hl_lines="4-7"
+    ```groovy title="genomics.nf" linenums="5" hl_lines="4-7"
     /*
      * Pipeline parameters
      */
@@ -77,7 +77,7 @@ In the main workflow file `genomics-1.nf`, under the `Pipeline parameters` secti
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="5"
+    ```groovy title="genomics.nf" linenums="5"
     /*
      * Pipeline parameters
      */
@@ -122,7 +122,7 @@ In the workflow block, create an input channel from the parameter value using th
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="13" hl_lines="4-5"
+    ```groovy title="genomics.nf" linenums="13" hl_lines="4-5"
     workflow {
 
         main:
@@ -132,7 +132,7 @@ In the workflow block, create an input channel from the parameter value using th
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="13"
+    ```groovy title="genomics.nf" linenums="13"
     workflow {
 
         main:
@@ -205,18 +205,18 @@ To use it in the workflow, you'll need to import the module and add a process ca
 
 #### 1.2.2. Include the module
 
-In `genomics-1.nf`, add an `include` statement to make the process available to the workflow:
+In `genomics.nf`, add an `include` statement to make the process available to the workflow:
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="3" hl_lines="2"
+    ```groovy title="genomics.nf" linenums="3" hl_lines="2"
     // Module INCLUDE statements
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     ```
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="3"
+    ```groovy title="genomics.nf" linenums="3"
     // Module INCLUDE statements
     ```
 
@@ -228,7 +228,7 @@ Now, let's add a call to `SAMTOOLS_INDEX` in the workflow block, passing the inp
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="14" hl_lines="7-8"
+    ```groovy title="genomics.nf" linenums="14" hl_lines="7-8"
     workflow {
 
         main:
@@ -241,7 +241,7 @@ Now, let's add a call to `SAMTOOLS_INDEX` in the workflow block, passing the inp
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="14"
+    ```groovy title="genomics.nf" linenums="14"
     workflow {
 
         main:
@@ -265,7 +265,7 @@ Assign the output of `SAMTOOLS_INDEX` to a named target called `bam_index`.
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="22" hl_lines="2"
+    ```groovy title="genomics.nf" linenums="22" hl_lines="2"
         publish:
         bam_index = SAMTOOLS_INDEX.out
     }
@@ -273,7 +273,7 @@ Assign the output of `SAMTOOLS_INDEX` to a named target called `bam_index`.
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="22"
+    ```groovy title="genomics.nf" linenums="22"
         publish:
         // Declare outputs to publish
     }
@@ -288,7 +288,7 @@ Let's add a target for `bam_index` that publishes into a `bam/` subdirectory.
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="26" hl_lines="2-4"
+    ```groovy title="genomics.nf" linenums="26" hl_lines="2-4"
     output {
         bam_index {
             path 'bam'
@@ -298,7 +298,7 @@ Let's add a target for `bam_index` that publishes into a `bam/` subdirectory.
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="26"
+    ```groovy title="genomics.nf" linenums="26"
     output {
         // Configure publish targets
     }
@@ -317,7 +317,7 @@ At this point, we have a one-step indexing workflow that should be fully functio
 We can run it with `-profile test` to use the default value set up in the test profile and avoid having to write the path on the command line.
 
 ```bash
-nextflow run genomics-1.nf -profile test
+nextflow run genomics.nf -profile test
 ```
 
 ??? success "Command output"
@@ -325,7 +325,7 @@ nextflow run genomics-1.nf -profile test
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-1.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
+    ┃ Launching `genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
     executor >  local (1)
     [2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
@@ -392,11 +392,11 @@ We need to declare parameters for them, add default values to the test profile, 
 
 #### 2.1.1. Add parameter declarations for accessory inputs
 
-Since our new process expects a handful of additional files to be provided, add parameter declarations for them in `genomics-1.nf` under the `Pipeline parameters` section:
+Since our new process expects a handful of additional files to be provided, add parameter declarations for them in `genomics.nf` under the `Pipeline parameters` section:
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="9" hl_lines="5-9"
+    ```groovy title="genomics.nf" linenums="9" hl_lines="5-9"
     params {
         // Primary input
         reads_bam: Path
@@ -411,7 +411,7 @@ Since our new process expects a handful of additional files to be provided, add 
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="9"
+    ```groovy title="genomics.nf" linenums="9"
     params {
         // Primary input
         reads_bam: Path
@@ -452,7 +452,7 @@ Add variables for the accessory file paths inside the workflow block:
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="21" hl_lines="7-11"
+    ```groovy title="genomics.nf" linenums="21" hl_lines="7-11"
     workflow {
 
         main:
@@ -471,7 +471,7 @@ Add variables for the accessory file paths inside the workflow block:
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="21"
+    ```groovy title="genomics.nf" linenums="21"
     workflow {
 
         main:
@@ -565,11 +565,11 @@ To use it in the workflow, you'll need to import the module and add a process ca
 
 #### 2.2.2. Import the new module
 
-Update `genomics-1.nf` to import the new module:
+Update `genomics.nf` to import the new module:
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="3" hl_lines="3"
+    ```groovy title="genomics.nf" linenums="3" hl_lines="3"
     // Module INCLUDE statements
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
@@ -577,7 +577,7 @@ Update `genomics-1.nf` to import the new module:
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="3"
+    ```groovy title="genomics.nf" linenums="3"
     // Module INCLUDE statements
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     ```
@@ -590,7 +590,7 @@ Add the process call in the workflow body, under `main:`:
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="33" hl_lines="4-12"
+    ```groovy title="genomics.nf" linenums="33" hl_lines="4-12"
         // Create index file for input BAM file
         SAMTOOLS_INDEX(reads_ch)
 
@@ -607,7 +607,7 @@ Add the process call in the workflow body, under `main:`:
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="33"
+    ```groovy title="genomics.nf" linenums="33"
         // Create index file for input BAM file
         SAMTOOLS_INDEX(reads_ch)
     ```
@@ -629,7 +629,7 @@ Add the VCF and index outputs to the `publish:` section:
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="45" hl_lines="3-4"
+    ```groovy title="genomics.nf" linenums="45" hl_lines="3-4"
         publish:
         bam_index = SAMTOOLS_INDEX.out
         vcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -639,7 +639,7 @@ Add the VCF and index outputs to the `publish:` section:
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="45"
+    ```groovy title="genomics.nf" linenums="45"
         publish:
         bam_index = SAMTOOLS_INDEX.out
     }
@@ -653,7 +653,7 @@ Add entries for the `vcf` and `vcf_idx` targets in the `output {}` block, publis
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="51" hl_lines="5-10"
+    ```groovy title="genomics.nf" linenums="51" hl_lines="5-10"
     output {
         bam_index {
             path 'bam'
@@ -669,7 +669,7 @@ Add entries for the `vcf` and `vcf_idx` targets in the `output {}` block, publis
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="49"
+    ```groovy title="genomics.nf" linenums="49"
     output {
         bam_index {
             path 'bam'
@@ -684,7 +684,7 @@ The VCF and its index are published as separate targets that both go into the `v
 Run the expanded workflow, adding `-resume` this time so that we don't have to run the indexing step again.
 
 ```bash
-nextflow run genomics-1.nf -profile test -resume
+nextflow run genomics.nf -profile test -resume
 ```
 
 ??? success "Command output"
@@ -692,7 +692,7 @@ nextflow run genomics-1.nf -profile test -resume
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-1.nf` [grave_volta] DSL2 - revision: 4790abc96a
+    ┃ Launching `genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
     executor >  local (1)
     [2a/e69536] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
@@ -755,14 +755,14 @@ First, comment out the type annotation in the parameter declaration, since array
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="10" hl_lines="1-2"
+    ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
         // Primary input (array of three samples)
         reads_bam //: Path
     ```
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="10"
+    ```groovy title="genomics.nf" linenums="10"
         // Primary input
         reads_bam: Path
     ```
@@ -804,7 +804,7 @@ The channel factory in the workflow body (`.fromPath`) accepts multiple file pat
 Try running the workflow now that the plumbing is set up to run on all three test samples.
 
 ```bash
-nextflow run genomics-1.nf -profile test -resume
+nextflow run genomics.nf -profile test -resume
 ```
 
 Funny thing: this _might work_, OR it _might fail_. For example, here's a run that succeeded:
@@ -814,7 +814,7 @@ Funny thing: this _might work_, OR it _might fail_. For example, here's a run th
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-1.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
+    ┃ Launching `genomics.nf` [peaceful_yalow] DSL2 - revision: a256d113ad
 
     executor >  local (6)
     [4f/7071b0] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 1 ✔
@@ -828,7 +828,7 @@ If your workflow run succeeded, run it again until you get an error like this:
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-1.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
+    ┃ Launching `genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
     executor >  local (4)
     [01/eea165] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
@@ -891,7 +891,7 @@ Add these two lines in the workflow body before the `GATK_HAPLOTYPECALLER` proce
 
 === "After"
 
-    ```groovy title="genomics-1.nf" hl_lines="3-5"
+    ```groovy title="genomics.nf" hl_lines="3-5"
         SAMTOOLS_INDEX(reads_ch)
 
         // temporary diagnostics
@@ -904,7 +904,7 @@ Add these two lines in the workflow body before the `GATK_HAPLOTYPECALLER` proce
 
 === "Before"
 
-    ```groovy title="genomics-1.nf"
+    ```groovy title="genomics.nf"
         SAMTOOLS_INDEX(reads_ch)
 
         // Call variants from the indexed BAM file
@@ -914,7 +914,7 @@ Add these two lines in the workflow body before the `GATK_HAPLOTYPECALLER` proce
 Then run the workflow command again.
 
 ```bash
-nextflow run genomics-1.nf -profile test
+nextflow run genomics.nf -profile test
 ```
 
 Once again, this may succeed or fail. Here's what the output of the two `.view()` calls looks like for a failed run:
@@ -1003,18 +1003,18 @@ Now we need to update the workflow to reflect the new tuple structure in the pro
 
 We no longer need to provide the original `reads_ch` to the `GATK_HAPLOTYPECALLER` process, since the BAM file is now bundled into the channel output by `SAMTOOLS_INDEX`.
 
-Update the call in `genomics-1.nf`:
+Update the call in `genomics.nf`:
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="42" hl_lines="2"
+    ```groovy title="genomics.nf" linenums="42" hl_lines="2"
         GATK_HAPLOTYPECALLER(
             SAMTOOLS_INDEX.out,
     ```
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="42"
+    ```groovy title="genomics.nf" linenums="42"
         GATK_HAPLOTYPECALLER(
             reads_ch,
             SAMTOOLS_INDEX.out,
@@ -1028,7 +1028,7 @@ Since the SAMTOOLS_INDEX output is now a tuple containing both the BAM file and 
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="46" hl_lines="2 8"
+    ```groovy title="genomics.nf" linenums="46" hl_lines="2 8"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         vcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -1050,7 +1050,7 @@ Since the SAMTOOLS_INDEX output is now a tuple containing both the BAM file and 
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="46"
+    ```groovy title="genomics.nf" linenums="46"
         publish:
         bam_index = SAMTOOLS_INDEX.out
         vcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -1077,7 +1077,7 @@ With these changes, the BAM and its index are guaranteed to travel together, so 
 Run the workflow again to make sure this will work reliably going forward.
 
 ```bash
-nextflow run genomics-1.nf -profile test
+nextflow run genomics.nf -profile test
 ```
 
 This time (and every time) everything should run correctly:
@@ -1087,7 +1087,7 @@ This time (and every time) everything should run correctly:
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-1.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
+    ┃ Launching `genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
     executor >  local (6)
     [d6/10c2c4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
@@ -1162,14 +1162,14 @@ Restore the type annotation in the params block (since it's a single path again)
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="10" hl_lines="1-2"
+    ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
         // Primary input (file of input files, one per line)
         reads_bam: Path
     ```
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="10"
+    ```groovy title="genomics.nf" linenums="10"
         // Primary input (array of three samples)
         reads_bam
     ```
@@ -1215,14 +1215,14 @@ Fortunately we can do that very simply, just by adding the [`.splitText()` opera
 
 === "After"
 
-    ```groovy title="genomics-1.nf" linenums="24" hl_lines="1-2"
+    ```groovy title="genomics.nf" linenums="24" hl_lines="1-2"
         // Create input channel from a text file listing input file paths
         reads_ch = channel.fromPath(params.reads_bam).splitText()
     ```
 
 === "Before"
 
-    ```groovy title="genomics-1.nf" linenums="24"
+    ```groovy title="genomics.nf" linenums="24"
         // Create input channel (single file via CLI parameter)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
@@ -1236,7 +1236,7 @@ Fortunately we can do that very simply, just by adding the [`.splitText()` opera
 Run the workflow one more time. This should produce the same result as before, right?
 
 ```bash
-nextflow run genomics-1.nf -profile test -resume
+nextflow run genomics.nf -profile test -resume
 ```
 
 ??? success "Command output"
@@ -1244,7 +1244,7 @@ nextflow run genomics-1.nf -profile test -resume
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    ┃ Launching `genomics-1.nf` [sick_albattani] DSL2 - revision: 46d84642f6
+    ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 
     [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
     [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔

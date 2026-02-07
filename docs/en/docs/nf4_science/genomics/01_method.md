@@ -189,7 +189,22 @@ exit
 
 ## 3. Call variants in GVCF mode for joint calling
 
-In Part 3 of this course, we'll implement joint variant calling, which requires a special kind of variant output called GVCF (for Genomic VCF).
+The variant calling approach we just used generates variant calls per sample.
+That's fine for looking at variants from each sample in isolation, but it yields limited information.
+It's often more interesting to look at how variant calls differ across multiple samples.
+GATK offers an alternative method called joint variant calling for this purpose.
+
+Joint variant calling involves generating a special kind of variant output called GVCF (for Genomic VCF) for each sample, then combining the GVCF data from all the samples and running a 'joint genotyping' statistical analysis.
+
+![Joint analysis](img/joint-calling.png)
+
+What's special about a sample's GVCF is that it contains records summarizing sequence data statistics about all positions in the targeted area of the genome, not just the positions where the program found evidence of variation.
+This is critical for the joint genotyping calculation ([further reading](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
+
+The GVCF is produced by GATK HaplotypeCaller, the same tool we just tested, with an additional parameter (`-ERC GVCF`).
+Combining the GVCFs is done with GATK GenomicsDBImport, which combines the per-sample calls into a data store (analogous to a database).
+The actual 'joint genotyping' analysis is then done with GATK GenotypeGVCFs.
+
 Here we test the commands needed to generate GVCFs and run joint genotyping.
 
 ### 3.1. Index BAM files for all three samples

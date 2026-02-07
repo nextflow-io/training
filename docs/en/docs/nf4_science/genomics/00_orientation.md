@@ -75,8 +75,7 @@ tree . -L 2
     │   ├── ref
     │   ├── sample_bams.txt
     │   └── samplesheet.csv
-    ├── genomics-1.nf
-    ├── genomics-2.nf
+    ├── genomics.nf
     ├── modules
     │   ├── gatk_haplotypecaller.nf
     │   └── samtools_index.nf
@@ -84,15 +83,16 @@ tree . -L 2
     └── solutions
         ├── modules
         ├── nf-test.config
+        ├── part2
         └── tests
 
-    7 directories, 10 files
+    8 directories, 8 files
     ```
 
 Click on the colored box to expand the section and view its contents.
 We use collapsible sections like this to display expected command output as well as directory and file contents in a concise way.
 
-- **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
+- **The `genomics.nf` file** is a workflow script that you'll build up over the course.
 
 - **The `modules` directory** contains skeleton module files that you'll fill in during the course.
 
@@ -101,7 +101,7 @@ We use collapsible sections like this to display expected command output as well
 
 - **The `data` directory** contains input data and related resources, described later in the course.
 
-- **The `solutions` directory** contains completed module files that result from Parts 2 and 3 of the course.
+- **The `solutions` directory** contains completed module files and a Part 2 solution that can serve as a starting point for Part 3.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
 
 ## Readiness checklist
