@@ -44,15 +44,15 @@ Oto główne dostępne opcje w zależności od tego, czego szukasz.
 
     ---
 
-    Seqera AI to inteligentny asystent przeszkolony na zasobach Nextflow i nf-core. Może pomóc Ci debugować kod, wyjaśniać koncepcje i szybciej przeszukiwać dokumentację. Potraktuj go jako korepetytora dostępnego 24/7 podczas pracy z kursami.
+    Seqera AI to inteligentny asystent przeszkolony na zasobach Nextflow i nf-core. Może pomóc Ci debugować kod, wyjaśniać koncepcje Nextflow'a i szybciej przeszukiwać dokumentację. Potraktuj go jako korepetytora dostępnego 24/7 podczas pracy z kursami.
 
-    [Zapytaj Seqera AI :material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
+    [Zapytaj Seqera AI :material-arrow-right:](https://seqera.io/ai/){ .md-button .md-button--primary .mt-1 }
 
 -   :material-book-open-variant:{ .lg .middle } __Dokumentacja Nextflow__
 
     ---
 
-    Oficjalna dokumentacja to ostateczny przewodnik po wszystkich funkcjach języka i opcjach konfiguracji. Korzystaj z niej równolegle z tym szkoleniem, aby zgłębiać konkretne tematy. Znajdziesz tam zaawansowane funkcje oraz szczegółowe odniesienia do składni.
+    Oficjalna dokumentacja to ostateczny przewodnik po wszystkich funkcjach języka i opcjach konfiguracji. Korzystaj z niej równolegle z tym szkoleniem, aby zgłębiać konkretne tematy, odkrywać zaawansowane funkcje i znajdować szczegółowe odniesienia do składni.
 
     [Przeglądaj dokumentację :material-arrow-right:](https://www.nextflow.io/docs/latest){ .md-button .md-button--primary .mt-1 }
 
@@ -60,7 +60,7 @@ Oto główne dostępne opcje w zależności od tego, czego szukasz.
 
     ---
 
-    Nextflow to darmowe oprogramowanie open-source tworzone przez [Seqera](https://seqera.io/), firmę z siedzibą w Hiszpanii z biurami satelitarnymi w Wielkiej Brytanii i USA. Oferujemy profesjonalne usługi wsparcia dla Nextflow, w tym szkolenia na zamówienie.
+    Nextflow to darmowe oprogramowanie open-source tworzone przez [Seqera](https://seqera.io/), firmę z siedzibą w Hiszpanii z biurami satelitarnymi w Wielkiej Brytanii i USA. Oferujemy profesjonalne usługi wsparcia dla Nextflow'a, w tym szkolenia na zamówienie.
 
     [Skontaktuj się :material-arrow-right:](https://seqera.io/demo/){ .md-button .md-button--primary .mt-1 }
 

@@ -47,13 +47,14 @@ Jednak możliwe jest dostosowanie środowiska, klikając przycisk "Change option
 
     Pozwala dostosować maszynę wirtualną, której będziesz używać do pracy ze szkoleniem.
 
-    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow do równoległego wykonywania workflow'ów. Jednak zużyje to szybciej Twój darmowy limit. Nie zalecamy zmiany tego ustawienia, chyba że wymaga tego kurs, który zamierzasz realizować.
+    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow'a do paralelizacji wykonywania workflow'ów.
+    Jednak zużyje to szybciej Twój darmowy limit, więc nie zalecamy zmiany tego ustawienia, chyba że wymaga tego kurs, który zamierzasz realizować.
 
     Zobacz 'Limity GitHub Codespaces' poniżej, aby uzyskać więcej szczegółów o limitach.
 
 ### Czas uruchamiania
 
-Otwieranie nowego środowiska GitHub Codespaces po raz pierwszy może zająć kilka minut, ponieważ system musi skonfigurować Twoją maszynę wirtualną, więc nie martw się, jeśli jest czas oczekiwania.
+Otwieranie nowego środowiska GitHub Codespaces po raz pierwszy może zająć kilka minut, ponieważ system musi skonfigurować Twoją maszynę wirtualną, więc nie martw się, jeśli występuje czas oczekiwania.
 Jednak nie powinno to trwać dłużej niż pięć minut.
 
 ## Nawigacja w interfejsie szkoleniowym
@@ -62,9 +63,9 @@ Po załadowaniu GitHub Codespaces powinieneś zobaczyć coś podobnego do poniż
 
 ![GitHub Codespaces welcome](img/codespaces_welcome.png)
 
-To jest interfejs VSCode IDE, popularnej aplikacji do tworzenia kodu, którą polecamy do pracy z Nextflow.
+To jest interfejs VSCode IDE, popularnej aplikacji do tworzenia kodu, którą polecamy do pracy z Nextflow'em.
 
-- **Główny edytor** to miejsce, gdzie będą otwierane kod Nextflow i inne pliki tekstowe. Tutaj będziesz edytować kod. Po otwarciu codespace wyświetli podgląd pliku `README.md`.
+- **Główny edytor** to miejsce, gdzie będą otwierane kod Nextflow'a i inne pliki tekstowe. Tutaj będziesz edytować kod. Po otwarciu codespace wyświetli podgląd pliku `README.md`.
 - **Terminal** poniżej głównego edytora pozwala uruchamiać polecenia. Tutaj będziesz uruchamiać wszystkie polecenia podane w instrukcjach kursu.
 - **Pasek boczny** pozwala dostosować środowisko i wykonywać podstawowe zadania (kopiowanie, wklejanie, otwieranie plików, wyszukiwanie, git itp.). Domyślnie jest otwarty na eksploratorze plików, który pozwala przeglądać zawartość repozytorium. Kliknięcie pliku w eksploratorze otworzy go w głównym oknie edytora.
 
@@ -76,8 +77,8 @@ Możesz dostosować względne proporcje paneli okna według własnych upodobań.
 
 ### Wznawianie sesji
 
-Po utworzeniu codespace możesz je łatwo wznowić lub uruchomić ponownie i kontynuować od miejsca, w którym skończyłeś.
-Sesja automatycznie zakończy się po 30 minutach bezczynności i zachowa Twoje zmiany przez maksymalnie 2 tygodnie.
+Po utworzeniu środowiska możesz je łatwo wznowić lub uruchomić ponownie i kontynuować od miejsca, w którym skończyłeś.
+Twoje środowisko zakończy się automatycznie po 30 minutach bezczynności i zachowa Twoje zmiany przez maksymalnie 2 tygodnie.
 
 Możesz ponownie otworzyć środowisko z <https://github.com/codespaces/>.
 Poprzednie środowiska będą wyświetlone na liście.
@@ -103,7 +104,7 @@ Aby zapisać dowolny plik z panelu eksploratora, kliknij prawym przyciskiem mysz
 GitHub Codespaces daje Ci do 15 GB-miesięcy przestrzeni dyskowej miesięcznie i 120 godzin rdzeniowych miesięcznie.
 Jest to równoważne około 60 godzinom domyślnego czasu działania środowiska przy użyciu standardowej przestrzeni roboczej (2 rdzenie, 8 GB RAM i 32 GB przestrzeni dyskowej).
 
-Możesz tworzyć je z większymi zasobami (patrz wyjaśnienie powyżej), ale spowoduje to szybsze zużycie darmowego limitu i będziesz mieć mniej godzin dostępu do tej przestrzeni.
+Możesz tworzyć je z większymi zasobami (patrz wyjaśnienie powyżej), ale spowoduje to szybsze zużycie Twojego darmowego limitu i będziesz mieć mniej godzin dostępu do tej przestrzeni.
 Na przykład, jeśli wybierzesz maszynę 4-rdzeniową zamiast domyślnej 2-rdzeniowej, Twój limit wyczerpie się o połowę szybciej.
 
 Opcjonalnie możesz zakupić dostęp do większych zasobów.

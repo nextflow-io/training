@@ -4,7 +4,7 @@
 
 ## Uruchomienie środowiska szkoleniowego
 
-Aby skorzystać z przygotowanego przez nas środowiska w GitHub Codespaces, kliknij przycisk "Open in GitHub Codespaces" poniżej. Aby poznać inne opcje, zobacz [Opcje środowiska](../envsetup/index.md).
+Aby skorzystać z przygotowanego przez nas środowiska w GitHub Codespaces, kliknij przycisk "Open in GitHub Codespaces" poniżej. Inne opcje znajdziesz w sekcji [Opcje środowiska](../envsetup/index.md).
 
 Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj kliknięcia prawym przyciskiem myszy, ctrl+kliknięcie lub cmd+kliknięcie w zależności od sprzętu), aby móc czytać instrukcje podczas ładowania środowiska.
 Musisz zachować te instrukcje otwarte równolegle, aby przejść przez kurs.
@@ -13,7 +13,7 @@ Musisz zachować te instrukcje otwarte równolegle, aby przejść przez kurs.
 
 ### Podstawy środowiska
 
-To środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do przejścia przez kurs szkoleniowy, więc nie musisz niczego samodzielnie instalować.
+To środowisko szkoleniowe zawiera całe oprogramowanie, kod i dane niezbędne do przejścia przez kurs, więc nie musisz niczego samodzielnie instalować.
 
 Codespace jest skonfigurowany z interfejsem VSCode, który zawiera eksplorator systemu plików, edytor kodu i powłokę terminala.
 Wszystkie instrukcje podane podczas kursu (np. „otwórz plik", „edytuj kod" lub „uruchom to polecenie") odnoszą się do tych trzech części interfejsu VSCode, chyba że określono inaczej.
@@ -22,7 +22,7 @@ Jeśli przechodzisz przez ten kurs samodzielnie, zapoznaj się z [podstawami śr
 
 ### Wymagania dotyczące wersji
 
-To szkolenie jest przeznaczone dla **Nextflow 25.10.2** lub nowszego **z WYŁĄCZONYM parserem składni v2**.
+To szkolenie jest przeznaczone dla **Nextflow'a 25.10.2** lub nowszego **z WYŁĄCZONYM parserem składni v2**.
 
 #### Jeśli korzystasz z naszego środowiska szkoleniowego:
 
@@ -47,7 +47,7 @@ Gdy Twój codespace już działa, musisz wykonać dwie rzeczy przed rozpoczęcie
 
 ### Ustawienie katalogu roboczego
 
-Domyślnie codespace otwiera się z lokalizacją główną wszystkich kursów szkoleniowych, ale w tym module będziemy pracować w folderze `hello-nf-core/`.
+Domyślnie codespace otwiera się z katalogiem roboczym ustawionym na katalog główny wszystkich kursów szkoleniowych, ale w tym kursie będziemy pracować w katalogu `hello-nf-core/`.
 
 Zmień teraz katalog, uruchamiając to polecenie w terminalu:
 

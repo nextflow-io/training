@@ -14,7 +14,7 @@ Pamiętaj, że niektóre szczegóły mogą się różnić w zależności od Twoj
 
 ## Ogólne wymagania programowe
 
-Nextflow może być używany na dowolnym systemie zgodnym z POSIX (Linux, macOS, Windows Subsystem for Linux itp.) z zainstalowaną Javą.
+Nextflow można używać na dowolnym systemie zgodnym z POSIX (Linux, macOS, Windows Subsystem for Linux itp.) z zainstalowaną Javą.
 Nasze kursy szkoleniowe mają kilka dodatkowych wymagań.
 
 W sumie będziesz potrzebować następującego oprogramowania:
@@ -37,12 +37,12 @@ Będziesz musiał zainstalować sam Nextflow oraz narzędzia nf-core, jak opisan
 - [Instalacja Nextflow](https://www.nextflow.io/docs/latest/install.html)
 - [Narzędzia nf-core](https://nf-co.re/docs/nf-core-tools/installation)
 
-Zalecamy użycie opcji samoinstalacji dla Nextflow i opcji PyPI dla narzędzi nf-core.
+Zalecamy użycie opcji samoinstalacji dla Nextflow'a i opcji PyPI dla narzędzi nf-core.
 
 !!! warning "Kompatybilność wersji"
 
     <!-- Any update to this content needs to be copied to the home page -->
-    **Od stycznia 2026 roku wszystkie nasze kursy szkoleniowe Nextflow wymagają wersji Nextflow 25.10.2 lub nowszej, z włączoną ścisłą składnią v2, chyba że zaznaczono inaczej.**
+    **Od stycznia 2026 roku wszystkie nasze kursy szkoleniowe Nextflow wymagają wersji Nextflow'a 25.10.2 lub nowszej, z włączoną ścisłą składnią v2, chyba że zaznaczono inaczej.**
 
     Więcej informacji o wymaganiach wersji i ścisłej składni v2 znajdziesz w przewodniku [Wersje Nextflow](../info/nxf_versions.md).
 

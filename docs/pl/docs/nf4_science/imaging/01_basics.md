@@ -2,12 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej pierwszej części kursu szkoleniowego Nextflow dla Bioimagingu użyjemy bardzo prostego, niezależnego od dziedziny przykładu Hello World, aby zademonstrować podstawowe operacje i wskazać odpowiednie komponenty kodu Nextflow.
+W pierwszej części kursu szkoleniowego Nextflow dla Bioimagingu użyjemy bardzo prostego, niezależnego od dziedziny przykładu Hello World, aby zademonstrować podstawowe operacje i wskazać odpowiednie komponenty kodu Nextflow.
 
 ## 1. Uruchomienie workflow'u
 
 Udostępniamy skrypt workflow'u o nazwie `hello-world.nf`, który przyjmuje dane wejściowe za pomocą argumentu wiersza poleceń o nazwie `--greeting` i tworzy plik tekstowy zawierający to powitanie.
-Na razie nie będziemy przeglądać kodu; najpierw zobaczmy, jak wygląda jego uruchomienie.
+Nie będziemy jeszcze przeglądać kodu; najpierw zobaczmy, jak wygląda jego uruchomienie.
 
 ### 1.1. Uruchomienie workflow'u i monitorowanie wykonania
 
@@ -36,14 +36,14 @@ Najważniejszym wyjściem jest tutaj ostatnia linia (linia 6):
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-To mówi nam, że proces `sayHello` został pomyślnie wykonany raz (`1 of 1 ✔`).
+Oznacza to, że proces `sayHello` został pomyślnie wykonany raz (`1 of 1 ✔`).
 
 To świetnie, ale możesz się zastanawiać: gdzie jest wyjście?
 
 ### 1.2. Znalezienie pliku wyjściowego w katalogu `results`
 
 Ten workflow jest skonfigurowany do publikowania Swojego wyjścia do katalogu o nazwie `results`.
-Jeśli spojrzysz na Swój bieżący katalog, zobaczysz, że kiedy uruchomiłeś workflow, Nextflow utworzył nowy katalog o nazwie `results`, który zawiera plik o nazwie `output.txt`.
+Jeśli spojrzysz na Swój bieżący katalog, zobaczysz, że kiedy uruchomiłeś workflow'a, Nextflow utworzył nowy katalog o nazwie `results`, który zawiera plik o nazwie `output.txt`.
 
 ```console title="results/" linenums="1"
 results
@@ -63,20 +63,19 @@ Hello World!
 
 Świetnie, nasz workflow zrobił to, co powinien!
 
-Należy jednak pamiętać, że 'opublikowany' wynik jest kopią (lub w niektórych przypadkach dowiązaniem symbolicznym) rzeczywistego wyjścia wygenerowanego przez Nextflow podczas wykonywania workflow'u.
+Należy jednak pamiętać, że 'opublikowany' wynik jest kopią (lub w niektórych przypadkach dowiązaniem symbolicznym) rzeczywistego wyjścia wygenerowanego przez Nextflow'a podczas wykonywania workflow'u.
 
 Teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pracę.
 
 !!! warning "Ostrzeżenie"
 
-    Nie wszystkie workflow'e będą skonfigurowane do publikowania wyjść do katalogu results, i/lub nazwa katalogu może być inna.
+    Nie wszystkie workflow'y będą skonfigurowane do publikowania wyjść do katalogu results, i/lub nazwa katalogu może być inna.
     Nieco dalej w tej sekcji pokażemy, jak dowiedzieć się, gdzie to zachowanie jest określone.
 
 ### 1.3. Znalezienie oryginalnego wyjścia i logów w katalogu `work/`
 
-Kiedy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania procesu (czyli każdego kroku w pipeline'ie).
-Dla każdego z nich przygotuje niezbędne wejścia i wykona odpowiednie instrukcje.
-Wyjścia oraz pliki logów trafiają do tego samego katalogu, automatycznie nazwanego przy użyciu hasha w celu zapewnienia unikalności.
+Kiedy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania każdego procesu w workflow'ie (czyli każdego kroku w pipeline'ie).
+Dla każdego z nich przygotuje niezbędne wejścia, wykona odpowiednie instrukcje i zapisze wyjścia oraz pliki logów w tym jednym katalogu, który jest automatycznie nazywany przy użyciu hasha w celu zapewnienia unikalności.
 
 Wszystkie te katalogi zadań będą znajdować się w katalogu o nazwie `work` w Twoim bieżącym katalogu (gdzie uruchamiasz polecenie).
 
@@ -145,13 +144,13 @@ Hello World!
 
 Co więc z tymi wszystkimi innymi plikami?
 
-To są pliki pomocnicze i logi, które Nextflow zapisał jako część wykonania zadania:
+To pliki pomocnicze i logi, które Nextflow zapisał jako część wykonania zadania:
 
 - **`.command.begin`**: Plik wartowniczy utworzony natychmiast po uruchomieniu zadania.
 - **`.command.err`**: Komunikaty o błędach (`stderr`) emitowane przez wywołanie procesu
 - **`.command.log`**: Kompletny log wyjścia emitowany przez wywołanie procesu
 - **`.command.out`**: Regularne wyjście (`stdout`) wywołania procesu
-- **`.command.run`**: Pełny skrypt uruchomiony przez Nextflow w celu wykonania wywołania procesu
+- **`.command.run`**: Pełny skrypt uruchomiony przez Nextflow'a w celu wykonania wywołania procesu
 - **`.command.sh`**: Polecenie, które faktycznie zostało uruchomione przez wywołanie procesu
 - **`.exitcode`**: Kod wyjścia wynikający z polecenia
 
@@ -272,11 +271,11 @@ process sayHello {
 
 </details>
 
-To bardzo minimalna definicja procesu, która zawiera tylko definicję `input`, definicję `output` oraz skrypt do wykonania.
+To bardzo minimalna definicja procesu, która zawiera tylko definicję `input`, definicję `output` oraz `script` do wykonania.
 
-Definicja `input` zawiera kwalifikator `val`, który mówi Nextflow, aby spodziewał się wartości jakiegoś rodzaju (może to być ciąg znaków, liczba, cokolwiek).
+Definicja `input` zawiera kwalifikator `val`, który mówi Nextflow'owi, aby spodziewał się wartości jakiegoś rodzaju (może to być ciąg znaków, liczba, cokolwiek).
 
-Definicja `output` zawiera kwalifikator `path`, który mówi Nextflow, że powinno to być traktowane jako ścieżka (obejmuje zarówno ścieżki katalogów, jak i pliki).
+Definicja `output` zawiera kwalifikator `path`, który mówi Nextflow'owi, że powinno to być traktowane jako ścieżka (obejmuje zarówno ścieżki katalogów, jak i pliki).
 
 !!! Tip "Wskazówka"
 
@@ -304,7 +303,7 @@ workflow {
 ```
 
 To bardzo minimalna definicja **workflow'u**.
-W rzeczywistym pipeline'ie, workflow zazwyczaj zawiera wiele wywołań **procesów** połączonych **kanałami**, i mogą być ustawione domyślne wartości dla zmiennych wejściowych.
+W rzeczywistym pipeline'ie, **workflow** zazwyczaj zawiera wiele wywołań **procesów** połączonych **kanałami**, i mogą być ustawione domyślne wartości dla zmiennych wejściowych.
 
 Zobaczymy to w akcji, gdy uruchomimy nf-core/molkart w Części 2 kursu.
 
@@ -397,8 +396,8 @@ Możesz użyć logu Nextflow, aby wyszukać uruchomienie na podstawie jego znacz
 
 !!! Warning "Ostrzeżenie"
 
-    Usuwanie podkatalogów roboczych z wcześniejszych uruchomień usuwa je z pamięci podręcznej Nextflow i usuwa wszystkie wyjścia, które były przechowywane w tych katalogach.
-    Oznacza to, że przerywa zdolność Nextflow do wznowienia wykonania bez ponownego uruchamiania odpowiednich procesów.
+    Usuwanie podkatalogów roboczych z wcześniejszych uruchomień usuwa je z pamięci podręcznej Nextflow'a i usuwa wszystkie wyjścia, które były przechowywane w tych katalogach.
+    Oznacza to, że przerywa zdolność Nextflow'a do wznowienia wykonania bez ponownego uruchamiania odpowiednich procesów.
 
     Jesteś odpowiedzialny za zapisanie wszelkich wyjść, na których Ci zależy lub na których planujesz polegać! Jeśli używasz dyrektywy `publishDir` w tym celu, upewnij się, że używasz trybu `copy`, a nie trybu `symlink`.
 

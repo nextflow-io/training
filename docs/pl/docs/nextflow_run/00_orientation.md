@@ -31,7 +31,7 @@ Po uruchomieniu codespace są dwie rzeczy, które musisz zrobić przed rozpoczę
 
 ### Ustaw katalog roboczy
 
-Domyślnie codespace otwiera się z głównym folderem wszystkich materiałów szkoleniowych, ale dla tego modułu będziemy pracować w podkatalogu `nextflow-run/`.
+Domyślnie codespace otwiera się z katalogiem roboczym ustawionym na główny folder wszystkich kursów szkoleniowych, ale dla tego kursu będziemy pracować w katalogu `nextflow-run/`.
 
 Zmień katalog teraz, uruchamiając to polecenie w terminalu:
 
@@ -115,7 +115,7 @@ Myślisz, że jesteś gotowy do rozpoczęcia?
 
 - [ ] Rozumiem cel tego kursu i jego wymagania wstępne
 - [ ] Moje środowisko jest uruchomione i działa
-- [ ] Ustawiłem odpowiednio Swój katalog roboczy
+- [ ] Ustawiłem odpowiednio swój katalog roboczy
 
 Jeśli możesz zaznaczyć wszystkie pola, jesteś gotowy do działania.
 

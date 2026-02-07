@@ -12,7 +12,7 @@ Ta sekcja zawiera wyselekcjonowane kolekcje modułów szkoleniowych zwanych [Sid
 
 ## Wymagania wstępne
 
-Każda z nich ma określone wymagania wstępne udokumentowane na swojej stronie indeksu. Jednak większość kolekcji zakłada:
+Każda kolekcja ma określone wymagania wstępne udokumentowane na swojej stronie indeksu. Jednak większość kolekcji zakłada:
 
 - Doświadczenie z linią poleceń
 - Podstawowe koncepcje Nextflow i narzędzia omówione w kursie szkoleniowym dla początkujących [Hello Nextflow](../../hello_nextflow/)
@@ -26,4 +26,4 @@ Wymagania techniczne i konfigurację środowiska można znaleźć w mini-kursie 
 ## Sugerowanie nowych kolekcji
 
 Aktywnie pracujemy nad rozwojem dodatkowych Side Quests i Kolekcji.
-Prosimy o sugerowanie tematów, które Twoim zdaniem warto byłoby uwzględnić w Kolekcji, poprzez publikację na [forum społeczności w sekcji Szkolenia](https://community.seqera.io/c/training/).
+Zachęcamy do sugerowania tematów, które Twoim zdaniem warto byłoby uwzględnić w Kolekcji, poprzez publikację w [sekcji Szkolenia](https://community.seqera.io/c/training/) na forum społeczności.

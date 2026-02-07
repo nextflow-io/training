@@ -47,7 +47,7 @@ Zanim zaczniemy dodawać testy, upewnij się, że workflow działa zgodnie z ocz
 nextflow run genomics-4.nf -resume
 ```
 
-To wygląda znajomo, jeśli pracowałeś nad tym kursem szkoleniowym od początku.
+To powinno wyglądać znajomo, jeśli pracowałeś nad tym kursem szkoleniowym od początku.
 
 ??? success "Wynik polecenia"
 
@@ -62,7 +62,7 @@ To wygląda znajomo, jeśli pracowałeś nad tym kursem szkoleniowym od początk
     [a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1 ✔
     ```
 
-Jak poprzednio, w Twoim katalogu projektu znajdzie się teraz katalog `work` i katalog `results_genomics`. Faktycznie wykorzystamy te wyniki później w naszych testach. Ale od teraz będziemy używać pakietu `nf-test` do testowania pipeline.
+Jak poprzednio, w Twoim katalogu projektu znajdzie się teraz katalog `work` i katalog `results_genomics`. Faktycznie wykorzystamy te wyniki później w naszych testach. Ale od teraz będziemy używać pakietu `nf-test` do testowania pipeline'u.
 
 ### 0.2. Zainicjuj `nf-test`
 
@@ -99,7 +99,7 @@ Tworzy to również katalog `tests` zawierający szkielet pliku konfiguracyjnego
 
 ### Podsumowanie
 
-Teraz jesteśmy gotowi, aby zacząć pisać testy dla naszego pipeline genomiki.
+Teraz jesteśmy gotowi, aby zacząć pisać testy dla naszego pipeline'u genomiki.
 
 ### Co dalej?
 
@@ -332,7 +332,7 @@ Czasami przydatne jest testowanie różnych plików wejściowych, aby upewnić s
 
         when {
             params {
-                // define parameters here
+                // zdefiniuj parametry tutaj
             }
             process {
                 """
@@ -352,7 +352,7 @@ Czasami przydatne jest testowanie różnych plików wejściowych, aby upewnić s
 
         when {
             params {
-                // define parameters here
+                // zdefiniuj parametry tutaj
             }
             process {
                 """
@@ -402,7 +402,7 @@ Zwróć uwagę na ostrzeżenie odnoszące się do efektu parametru `--update-sna
 
 !!! note "Uwaga"
 
-    Tutaj używamy danych testowych, których użyliśmy wcześniej do zademonstrowania naukowych wyników pipeline.
+    Tutaj używamy danych testowych, których użyliśmy wcześniej do zademonstrowania naukowych wyników pipeline'u.
     Gdybyśmy planowali obsługiwać te testy w środowisku produkcyjnym, wygenerowalibyśmy mniejsze dane wejściowe do celów testowych.
 
     Ogólnie rzecz biorąc, ważne jest, aby testy jednostkowe były jak najlżejsze poprzez używanie najmniejszych elementów danych niezbędnych i wystarczających do oceny funkcjonalności procesu, w przeciwnym razie całkowity czas wykonania może znacznie się zwiększyć.
@@ -548,7 +548,7 @@ Następnie możemy odwołać się do wyjścia tego procesu w bloku `when`, gdzie
 ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="20"
         when {
             params {
-                // define parameters here
+                // zdefiniuj parametry tutaj
             }
             process {
                 """
@@ -724,7 +724,7 @@ Dodaj podobne testy dla próbek matki i ojca:
 
         when {
             params {
-                // define parameters here
+                // zdefiniuj parametry tutaj
             }
             process {
                 """
@@ -759,7 +759,7 @@ Dodaj podobne testy dla próbek matki i ojca:
 
         when {
             params {
-                // define parameters here
+                // zdefiniuj parametry tutaj
             }
             process {
                 """
@@ -804,7 +804,7 @@ nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
     SUCCESS: Executed 3 tests in 127.586s
     ```
 
-To kończy podstawowy plan testów dla tego drugiego kroku w pipeline. Przechodzimy do trzeciego i ostatniego testu na poziomie modułu!
+To kończy podstawowy plan testów dla tego drugiego kroku w pipeline'ie. Przechodzimy do trzeciego i ostatniego testu na poziomie modułu!
 
 ### Podsumowanie
 
@@ -827,7 +827,7 @@ W przypadku etapu wspólnego genotypowania użyjemy innego podejścia - używani
 
 1. Złożonych procesów z wieloma zależnościami
 2. Procesów, których uruchomienie zajmuje dużo czasu
-3. Procesów będących częścią stabilnego, produkcyjnego pipeline
+3. Procesów będących częścią stabilnego, produkcyjnego pipeline'u
 
 ### 3.1. Wygeneruj dane testowe
 
@@ -954,7 +954,7 @@ Wypełnij wejścia na podstawie definicji wejść procesu i odpowiednio zmień n
 
         when {
             params {
-                // define parameters here
+                // zdefiniuj parametry tutaj
             }
             process {
                 """
@@ -1052,7 +1052,7 @@ Teraz przetestujemy kompletny pipeline wykrywania wariantów, od plików BAM do 
 
 ### 4.1. Wygeneruj test workflow
 
-Wygeneruj plik testowy dla kompletnego pipeline:
+Wygeneruj plik testowy dla kompletnego pipeline'u:
 
 ```bash
 nf-test generate pipeline genomics-4.nf
@@ -1120,11 +1120,11 @@ Jednak prostszym sposobem jest skonfigurowanie bloku `params {}` w pliku `nextfl
 ```groovy title="tests/nextflow.config" linenums="1"
 /*
 ========================================================================================
-    Nextflow config file for running tests
+    Plik konfiguracyjny Nextflow do uruchamiania testów
 ========================================================================================
 */
 
-// Katalog wyjściowy dla wyników workflow
+// Katalog wyjściowy dla wyników workflow'u
 outputDir = 'results_genomics'
 
 /*
@@ -1243,9 +1243,9 @@ nf-test test
     SUCCESS: Executed 8 tests in 380.801s
     ```
 
-8 testów w 1 poleceniu! Poświęciliśmy dużo czasu na konfigurowanie wielu testów, ale jeśli chodzi o ich uruchamianie, było bardzo szybko i łatwo. Możesz zobaczyć, jak przydatne jest to podczas utrzymywania dużego pipeline, który może zawierać setki różnych elementów. Poświęcamy czas na napisanie testów raz, aby móc zaoszczędzić czas na uruchamianiu ich wiele razy.
+8 testów w 1 poleceniu! Poświęciliśmy dużo czasu na konfigurowanie wielu testów, ale jeśli chodzi o ich uruchamianie, było bardzo szybko i łatwo. Możesz zobaczyć, jak przydatne jest to podczas utrzymywania dużego pipeline'u, który może zawierać setki różnych elementów. Poświęcamy czas na napisanie testów raz, aby móc zaoszczędzić czas na uruchamianiu ich wiele razy.
 
-Co więcej, możemy to zautomatyzować! Wyobraź sobie testy uruchamiane za każdym razem, gdy Ty lub kolega próbujecie dodać nowy kod. W ten sposób zapewniamy, że nasze pipeline utrzymują wysoki standard.
+Co więcej, możemy to zautomatyzować! Wyobraź sobie testy uruchamiane za każdym razem, gdy Ty lub kolega próbujecie dodać nowy kod. W ten sposób zapewniamy, że nasze pipeline'y utrzymują wysoki standard.
 
 ## Podsumowanie
 
@@ -1263,4 +1263,4 @@ Wdrożyłeś również różne strategie testowania specyficzne dla danych genom
 - Testowanie zestawem danych tria rodzinnego, aby zapewnić prawidłową identyfikację wariantów w powiązanych próbkach
 - Sprawdzanie konkretnych współrzędnych genomicznych i informacji o wariantach w plikach wyjściowych
 
-Te umiejętności testowania są niezbędne do rozwijania solidnych pipeline bioinformatycznych, które mogą niezawodnie przetwarzać dane genomiczne i produkować dokładne wywołania wariantów. W miarę dalszej pracy z Nextflow w analizie genomiki, te fundamenty testowania pomogą Ci utrzymać wysoką jakość kodu, który produkuje wiarygodne wyniki naukowe.
+Te umiejętności testowania są niezbędne do rozwijania solidnych pipeline'ów bioinformatycznych, które mogą niezawodnie przetwarzać dane genomiczne i produkować dokładne wywołania wariantów. W miarę dalszej pracy z Nextflow w analizie genomiki, te fundamenty testowania pomogą Ci utrzymać wysoką jakość kodu, który produkuje wiarygodne wyniki naukowe.

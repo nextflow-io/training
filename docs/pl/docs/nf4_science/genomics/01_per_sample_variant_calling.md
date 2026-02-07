@@ -296,7 +296,7 @@ output {
 }
 ```
 
-Każdy nazwany cel z sekcji `publish:` (jak `bam_index`) otrzymuje Swój własny blok, w którym można skonfigurować ścieżkę wyjściową względem bazowego katalogu wyjściowego.
+Każdy nazwany cel z sekcji `publish:` (jak `bam_index`) otrzymuje swój własny blok, w którym można skonfigurować ścieżkę wyjściową względem bazowego katalogu wyjściowego.
 
 !!! note "Uwaga"
 
@@ -775,7 +775,7 @@ Najprostszym sposobem, aby upewnić się, że plik BAM i jego indeks pozostają 
 
     **Krotka** to skończona, uporządkowana lista elementów, która jest powszechnie używana do zwracania wielu wartości z funkcji. Krotki są szczególnie przydatne do przekazywania wielu wejść lub wyjść między procesami przy zachowaniu ich powiązania i kolejności.
 
-Najpierw zmień wyjście procesu `SAMTOOLS_INDEX`, aby uwzględnić plik BAM w Swojej deklaracji wyjściowej.
+Najpierw zmień wyjście procesu `SAMTOOLS_INDEX`, aby uwzględnić plik BAM w swojej deklaracji wyjściowej.
 
 === "Po"
 

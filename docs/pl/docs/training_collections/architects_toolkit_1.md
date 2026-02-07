@@ -16,7 +16,7 @@ Po ukończeniu tej kolekcji zdobędziesz doświadczenie z:
 
 - **Złożonymi modułowymi architekturami workflow'ów** - Łączenie wielu workflow'ów w spójne pipeline'y
 - **Kompleksowymi strategiami testowania** - Zapewnianie, że Twoje workflow'y są niezawodne i łatwe w utrzymaniu
-- **Zarządzaniem metadanymi** - Efektywne przetwarzanie metadanych specyficznych dla próbek w całym workflow'ie
+- **Zarządzaniem metadanymi** - Efektywna obsługa metadanych specyficznych dla próbek w całym workflow'ie
 - **Zaawansowanym przetwarzaniem danych** - Wdrażanie wydajnych wzorców dzielenia i grupowania danych
 
 Te umiejętności pozwolą Ci budować solidne, skalowalne i łatwe w utrzymaniu workflow'y Nextflow dla rzeczywistych zastosowań.
@@ -54,7 +54,7 @@ Gdy Twoje środowisko będzie uruchomione, pracuj nad kolekcją w następujący 
 1. W tej karcie: Przejdź do pierwszego Side Quest wymienionego powyżej, który opisuje krok po kroku ćwiczenia rozwojowe.
 2. W karcie Codespaces: Pracuj nad ćwiczeniami dla Side Quest.
 3. Gdy ukończysz Side Quest, wróć na tę stronę i przejdź do następnego na liście powyżej.
-4. Gdy ukończysz kolekcję, kliknij przycisk poniżej, aby wypełnić bardzo krótką ankietę. Twoja opinia pozwala nam na ciągłe ulepszanie materiałów szkoleniowych dla wszystkich.
+4. Gdy ukończysz kolekcję, kliknij przycisk poniżej, aby wypełnić bardzo krótką ankietę. Twoja opinia pozwala nam ciągle ulepszać materiały szkoleniowe dla wszystkich.
 
 [![Take the survey](https://img.shields.io/badge/Take%20the-Survey-blue?style=flat-square)](https://seqera.typeform.com/to/Q9pc2YKw)
 

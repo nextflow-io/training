@@ -2,17 +2,17 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
-Jednak potrzebujesz (darmowego) konta, aby się zalogować, i powinieneś poświęcić kilka minut na zapoznanie się z interfejsem.
+Środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem, więc nie musisz niczego instalować samodzielnie.
+Jednak potrzebujesz (darmowego) konta, aby się zalogować; warto też poświęcić kilka minut na zapoznanie się z interfejsem.
 
 Jeśli jeszcze tego nie zrobiłeś, ukończ mini-kurs [Konfiguracja środowiska](../../envsetup/) przed dalszą pracą.
 
 ## Dostarczone materiały
 
-W trakcie tego kursu szkoleniowego będziemy pracować w katalogu `nf4-science/rnaseq/`, do którego należy przejść po otwarciu obszaru roboczego szkolenia.
-Ten katalog zawiera wszystkie pliki kodu, dane testowe i pliki pomocnicze, których będziesz potrzebować.
+W trakcie tego kursu będziemy pracować w katalogu `nf4-science/rnaseq/`, do którego należy przejść po otwarciu obszaru roboczego szkolenia.
+Katalog ten zawiera wszystkie pliki kodu, dane testowe i pliki pomocnicze, których będziesz potrzebować.
 
-Możesz swobodnie eksplorować zawartość tego katalogu; najłatwiejszym sposobem jest użycie eksploratora plików po lewej stronie obszaru roboczego szkolenia w interfejsie VSCode.
+Możesz swobodnie eksplorować jego zawartość; najłatwiejszym sposobem jest użycie eksploratora plików po lewej stronie obszaru roboczego szkolenia w interfejsie VSCode.
 Alternatywnie możesz użyć polecenia `tree`.
 W trakcie kursu używamy wyjścia `tree` do przedstawienia struktury katalogów i zawartości w czytelnej formie.
 Czasami wprowadzamy drobne modyfikacje dla przejrzystości.
@@ -65,14 +65,14 @@ tree . -L 3
 
 !!!note "Uwaga"
 
-    Nie martw się, jeśli wydaje się to dużo; przejdziemy przez odpowiednie elementy na każdym etapie kursu.
+    Nie martw się, jeśli wydaje Ci się, że to dużo; przejdziemy przez odpowiednie elementy na każdym etapie kursu.
     To ma jedynie na celu dać Ci przegląd.
 
 **Oto podsumowanie tego, co powinieneś wiedzieć, aby zacząć:**
 
 - **Plik `rnaseq.nf`** to zarys skryptu workflow'u, który będziemy rozwijać.
 
-- **Plik `nextflow.config`** to plik konfiguracyjny, który ustawia minimalne właściwości środowiska. Na razie możesz go zignorować.
+- **Plik `nextflow.config`** to plik konfiguracyjny ustawiający minimalne właściwości środowiska. Na razie możesz go zignorować.
 
 - **Katalog `data`** zawiera dane wejściowe i powiązane zasoby:
 
@@ -81,7 +81,7 @@ tree . -L 3
   - _Pliki CSV_ zawierające identyfikatory i ścieżki przykładowych plików danych, do przetwarzania wsadowego.
 
 - **Katalog `solutions`** zawiera ukończone skrypty workflow'ów i moduły, które są wynikiem każdego etapu kursu.
-  Mają one służyć jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania ewentualnych problemów.
+  Służą one jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania ewentualnych problemów.
   Numer w nazwie pliku odpowiada etapowi odpowiedniej części kursu.
 
 !!!tip "Wskazówka"

@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 W tej ostatniej części kursu zamienimy nasz prosty workflow w potężne narzędzie do automatyzacji wsadowej, które obsłuży dowolną liczbę próbek.
-Przy okazji przełączymy go również na obsługę danych paired-end, które są bardziej powszechne w nowszych badaniach.
+Przy okazji przełączymy go również na obsługę danych paired-end, które są częstsze w nowszych badaniach.
 
 Zrobimy to w trzech etapach:
 
@@ -19,7 +19,7 @@ Musimy zmienić sposób zarządzania danymi wejściowymi.
 
 ### 1.1. Zmiana głównego wejścia na plik CSV ze ścieżkami plików zamiast pojedynczego pliku
 
-W katalogu `data/` udostępniamy plik CSV zawierający identyfikatory próbek oraz ścieżki do plików FASTQ.
+Udostępniamy plik CSV zawierający identyfikatory próbek oraz ścieżki do plików FASTQ w katalogu `data/`.
 Ten plik CSV zawiera linię nagłówkową.
 Zwróć uwagę, że ścieżki do plików FASTQ są ścieżkami bezwzględnymi.
 
@@ -33,7 +33,7 @@ ENCSR000CPO1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO1_1.f
 ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.fastq.gz
 ```
 
-Zmieńmy nazwę głównego parametru wejściowego na `input_csv` i zmieńmy wartość domyślną na ścieżkę do pliku `single-end.csv`.
+Zmieńmy nazwę głównego parametru wejściowego na `input_csv` i ustawmy wartość domyślną na ścieżkę do pliku `single-end.csv`.
 
 ```groovy title="rnaseq.nf" linenums="13"
 params {
@@ -84,7 +84,7 @@ Nextflow obsługuje całą równoległość za nas.
 
 ## 2. Agregacja metryk QC wstępnego przetwarzania w pojedynczy raport MultiQC
 
-To wszystko generuje wiele raportów QC i nie chcemy musieć przeglądać poszczególnych raportów.
+To wszystko generuje wiele raportów QC, a nie chcemy przeszukiwać poszczególnych raportów.
 To idealny moment, aby dodać krok agregacji raportów MultiQC!
 
 ### 2.1. Utworzenie modułu dla procesu agregacji QC
@@ -417,7 +417,7 @@ include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
 
 Proces `TRIM_GALORE` generuje teraz dodatkowy kanał wyjściowy, więc musimy przekazać go do MultiQC.
 
-Zastąp `TRIM_GALORE.out.fastqc_reports,` przez `TRIM_GALORE.out.fastqc_reports_1,` plus `TRIM_GALORE.out.fastqc_reports_2,`:
+Zastąp `TRIM_GALORE.out.fastqc_reports,` przez `TRIM_GALORE.out.fastqc_reports_1,` oraz `TRIM_GALORE.out.fastqc_reports_2,`:
 
 ```groovy title="rnaseq_pe.nf" linenums="33"
     // Generowanie kompleksowego raportu QC

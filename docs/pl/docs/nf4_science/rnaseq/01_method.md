@@ -3,21 +3,16 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Istnieje wiele prawidłowych metod przetwarzania i analizy danych bulk RNAseq.
-W tym szkoleniu stosujemy metodę opisaną [tutaj](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) przez dr Simon Andrews i dr Laurę Biggins z [Babraham Institute](https://www.babraham.ac.uk/).
+W tym szkoleniu stosujemy metodę opisaną [tutaj](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) przez dr Simona Andrewsa i dr Laurę Biggins z [Babraham Institute](https://www.babraham.ac.uk/).
 
-Naszym celem jest opracowanie workflow'u implementującego następujące etapy przetwarzania:
-
-- Przeprowadzenie wstępnej kontroli jakości odczytów w próbce bulk RNAseq
-- Usunięcie sekwencji adapterów
-- Dopasowanie do genomu referencyjnego
-- Wygenerowanie kompleksowego raportu QC
+Naszym celem jest opracowanie workflow'u implementującego następujące etapy przetwarzania: przeprowadzenie wstępnej kontroli jakości odczytów w próbce bulk RNAseq, przycięcie sekwencji adapterów z odczytów, dopasowanie odczytów do genomu referencyjnego oraz wygenerowanie kompleksowego raportu kontroli jakości (QC).
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
-- **FASTQC:** Przeprowadzenie QC na danych odczytów przed przycinaniem przy użyciu FastQC
-- **TRIM_GALORE:** Usunięcie sekwencji adapterów i przeprowadzenie QC po przycięciu przy użyciu Trim Galore (łączy Cutadapt i FastQC)
+- **FASTQC:** Przeprowadzenie QC na danych odczytów przed przycięciem przy użyciu FastQC
+- **TRIM_GALORE:** Przycięcie sekwencji adapterów i przeprowadzenie QC po przycięciu przy użyciu Trim Galore (łączy Cutadapt i FastQC)
 - **HISAT2_ALIGN:** Dopasowanie odczytów do genomu referencyjnego przy użyciu Hisat2
 - **MULTIQC:** Wygenerowanie kompleksowego raportu QC przy użyciu MultiQC
 
@@ -30,7 +25,7 @@ Narzędzia, których potrzebujemy, nie są zainstalowane w środowisku GitHub Co
 
 ---
 
-## 1. Wstępne QC i usuwanie adapterów
+## 1. Wstępne QC i przycięcie adapterów
 
 Pobierzemy obraz kontenera, który ma zainstalowane zarówno `fastqc`, jak i `trim_galore`, uruchomimy go interaktywnie i wykonamy polecenia przycinania oraz QC na jednym z przykładowych plików danych.
 
@@ -129,7 +124,7 @@ fastqc /data/reads/ENCSR000COQ1_1.fastq.gz
     Analysis complete for ENCSR000COQ1_1.fastq.gz
     ```
 
-Powinno to działać bardzo szybko.
+Powinno to zadziałać bardzo szybko.
 Pliki wyjściowe znajdziesz w tym samym katalogu co oryginalne dane:
 
 ```bash
@@ -142,9 +137,9 @@ ls /data/reads/ENCSR000COQ1_1_fastqc*
 /data/reads/ENCSR000COQ1_1_fastqc.html  /data/reads/ENCSR000COQ1_1_fastqc.zip
 ```
 
-### 1.4. Usunięcie sekwencji adapterów za pomocą `trim_galore`
+### 1.4. Przycięcie sekwencji adapterów za pomocą `trim_galore`
 
-Teraz uruchommy `trim_galore`, który łączy Cutadapt i FastQC, aby usunąć sekwencje adapterów i zebrać metryki QC po przycięciu.
+Teraz uruchommy `trim_galore`, który łączy Cutadapt i FastQC, aby przyciąć sekwencje adapterów i zebrać metryki QC po przycięciu.
 
 ```bash
 trim_galore --fastqc /data/reads/ENCSR000COQ1_1.fastq.gz
@@ -200,7 +195,7 @@ exit
 
 ## 2. Dopasowanie odczytów do genomu referencyjnego
 
-Pobierzemy obraz kontenera, który ma zainstalowany `hisat2`, uruchomimy go interaktywnie i wykonamy polecenie wyrównania danych RNAseq do genomu referencyjnego.
+Pobierzemy obraz kontenera, który ma zainstalowany `hisat2`, uruchomimy go interaktywnie i wykonamy polecenie dopasowania danych RNAseq do genomu referencyjnego.
 
 ### 2.1. Pobranie kontenera `hisat2`
 
@@ -259,7 +254,7 @@ Wynik jest bardzo obszerny, więc poniżej przedstawiono wersję skróconą:
     Total time for call to driver() for forward index: 00:00:16
     ```
 
-To tworzy wiele plików indeksu genomu, które można znaleźć w katalogu roboczym.
+Utworzy to wiele plików indeksu genomu, które można znaleźć w katalogu roboczym.
 
 ```bash
 ls genome_index.*
@@ -276,7 +271,7 @@ Użyjemy ich za chwilę, ale najpierw wygenerujmy skompresowany tarball z tymi p
 tar -czvf /data/genome_index.tar.gz genome_index.*
 ```
 
-To zapisuje tarball `genome_index.tar.gz` zawierający pliki indeksu genomu w katalogu `data/` w naszym systemie plików, co przyda się w Części 2 tego szkolenia.
+Zapisuje to tarball `genome_index.tar.gz` zawierający pliki indeksu genomu w katalogu `data/` w naszym systemie plików, co przyda się w Części 2 tego szkolenia.
 
 ### 2.4. Uruchomienie polecenia `hisat2`
 
@@ -301,7 +296,7 @@ hisat2 -x genome_index -U /data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz \
             Overall alignment rate: 94.43%
     ```
 
-To działa niemal natychmiast, ponieważ jest to bardzo mały plik testowy.
+Działa to niemal natychmiast, ponieważ jest to bardzo mały plik testowy.
 W rzeczywistej skali może to potrwać znacznie dłużej.
 
 Ponownie pliki wyjściowe znajdziesz w katalogu roboczym:
@@ -391,7 +386,7 @@ multiqc /data/reads /data/trimmed /data/aligned -n ENCSR000COQ1_1_QC
               multiqc | MultiQC complete
     ```
 
-MultiQC jest w stanie przeszukiwać katalogi w poszukiwaniu kompatybilnych raportów QC i zagreguje wszystko, co znajdzie.
+MultiQC potrafi przeszukiwać katalogi w poszukiwaniu kompatybilnych raportów QC i zagreguje wszystko, co znajdzie.
 
 Tutaj widzimy, że narzędzie znalazło wszystkie trzy raporty QC, które wygenerowaliśmy: wstępny QC wykonany za pomocą `fastqc`, raport po przycięciu z `cutadapt` (wykonany za pomocą `trim_galore`) oraz QC po dopasowaniu wygenerowany przez `hisat2`.
 

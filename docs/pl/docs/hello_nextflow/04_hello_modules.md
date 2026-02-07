@@ -14,11 +14,11 @@
 ///
 -->
 
-Ta sekcja opisuje, jak organizować kod workflow, aby rozwój i utrzymanie pipeline było bardziej efektywne i zrównoważone.
+Ta sekcja opisuje, jak organizować kod workflow, aby rozwój i utrzymanie pipeline'u było bardziej efektywne i zrównoważone.
 W szczególności pokażemy, jak używać [**modułów**](https://nextflow.io/docs/latest/module.html).
 
 W Nextflow **moduł** to samodzielny plik kodu, często zamykający w sobie jedną definicję procesu.
-Aby użyć modułu w workflow, wystarczy dodać jednoliniową instrukcję `include` do pliku kodu workflow; następnie możesz zintegrować proces z workflow'em w standardowy sposób.
+Aby użyć modułu w workflow, wystarczy dodać jednoliniową instrukcję `include` do pliku kodu workflow'a; następnie możesz zintegrować proces z workflow'em w standardowy sposób.
 Umożliwia to ponowne wykorzystanie definicji procesów w wielu workflow'ach bez tworzenia wielu kopii kodu.
 
 Kiedy zaczęliśmy rozwijać nasz workflow, napisaliśmy wszystko w jednym pliku kodu.
@@ -38,7 +38,7 @@ To sprawi, że nasz kod będzie bardziej współdzielny, elastyczny i łatwy w u
 
 ## 0. Rozgrzewka: Uruchom `hello-modules.nf`
 
-Użyjemy skryptu workflow `hello-modules.nf` jako punktu wyjścia.
+Użyjemy skryptu workflow'a `hello-modules.nf` jako punktu wyjścia.
 Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 3 tego szkolenia, z tą różnicą, że zmieniliśmy miejsca docelowe wyjść:
 
 ```groovy title="hello-modules.nf" linenums="37" hl_lines="3 7 11 15"
@@ -97,7 +97,7 @@ Jak poprzednio, pliki wyjściowe znajdziesz w katalogu określonym w bloku `outp
     └── UPPER-Holà-output.txt
     ```
 
-Jeśli to zadziałało, jesteś gotowy do nauki modularyzacji kodu workflow.
+Jeśli to zadziałało, jesteś gotowy do nauki modularyzacji kodu workflow'a.
 
 ---
 
@@ -115,7 +115,7 @@ mkdir modules
 ## 2. Utwórz moduł dla `sayHello()`
 
 W najprostszej formie przekształcenie istniejącego procesu w moduł to niewiele więcej niż operacja kopiuj-wklej.
-Utworzymy plik dla modułu, skopiujemy odpowiedni kod, a następnie usuniemy go z głównego pliku workflow.
+Utworzymy plik dla modułu, skopiujemy odpowiedni kod, a następnie usuniemy go z głównego pliku workflow'a.
 
 Potem wystarczy dodać instrukcję `include`, aby Nextflow wiedział, że ma pobrać odpowiedni kod w czasie wykonania.
 
@@ -131,11 +131,9 @@ To daje nam miejsce na umieszczenie kodu procesu.
 
 ### 2.2. Przenieś kod procesu `sayHello` do pliku modułu
 
-Skopiuj całą definicję procesu z pliku workflow do pliku modułu, upewniając się, że kopiujesz również shebang `#!/usr/bin/env nextflow`.
+Skopiuj całą definicję procesu z pliku workflow'a do pliku modułu.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Użyj echo do wypisania 'Hello World!' do pliku
  */
@@ -154,7 +152,7 @@ process sayHello {
 }
 ```
 
-Po wykonaniu tego usuń definicję procesu z pliku workflow, ale upewnij się, że zostawiasz shebang na miejscu.
+Po wykonaniu tego usuń definicję procesu z pliku workflow'a.
 
 ### 2.3. Dodaj deklarację importu przed blokiem workflow
 
@@ -222,7 +220,7 @@ Nextflow rozpoznał, że nadal jest to ta sama praca do wykonania, nawet jeśli 
 
 ### Podsumowanie
 
-Wiesz już, jak wyodrębnić proces do lokalnego modułu i wiesz, że nie wpływa to na możliwość wznawiania workflow.
+Wiesz już, jak wyodrębnić proces do lokalnego modułu i wiesz, że nie wpływa to na możliwość wznawiania workflow'a.
 
 ### Co dalej?
 
@@ -244,11 +242,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. Przenieś kod procesu `convertToUpper` do pliku modułu
 
-Skopiuj całą definicję procesu z pliku workflow do pliku modułu, upewniając się, że kopiujesz również shebang `#!/usr/bin/env nextflow`.
+Skopiuj całą definicję procesu z pliku workflow'a do pliku modułu.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery
  */
@@ -267,7 +263,7 @@ process convertToUpper {
 }
 ```
 
-Po wykonaniu tego usuń definicję procesu z pliku workflow, ale upewnij się, że zostawiasz shebang na miejscu.
+Po wykonaniu tego usuń definicję procesu z pliku workflow'a.
 
 ### 3.3. Dodaj deklarację importu przed blokiem `params`
 
@@ -344,11 +340,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. Przenieś kod procesu `collectGreetings` do pliku modułu
 
-Skopiuj całą definicję procesu z pliku workflow do pliku modułu, upewniając się, że kopiujesz również shebang `#!/usr/bin/env nextflow`.
+Skopiuj całą definicję procesu z pliku workflow'a do pliku modułu.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Zbierz pozdrowienia pisane wielkimi literami do jednego pliku wyjściowego
  */
@@ -371,7 +365,7 @@ process collectGreetings {
 }
 ```
 
-Po wykonaniu tego usuń definicję procesu z pliku workflow, ale upewnij się, że zostawiasz shebang na miejscu.
+Po wykonaniu tego usuń definicję procesu z pliku workflow'a.
 
 ### 4.3. Dodaj deklarację importu przed blokiem `params`
 
@@ -438,7 +432,7 @@ To powinno nadal produkować takie same wyjście jak poprzednio.
 
 Wiesz już, jak modularyzować wiele procesów w workflow.
 
-Gratulacje, wykonałeś całą tę pracę i absolutnie nic się nie zmieniło w działaniu pipeline!
+Gratulacje, wykonałeś całą tę pracę i absolutnie nic się nie zmieniło w działaniu pipeline'u!
 
 Żarty na bok, teraz Twój kod jest bardziej modularny, a jeśli zdecydujesz się napisać inny pipeline, który wywołuje jeden z tych procesów, wystarczy wpisać jedną krótką instrukcję `include`, aby użyć odpowiedniego modułu.
 Jest to lepsze niż kopiowanie-wklejanie kodu, ponieważ jeśli później zdecydujesz się ulepszyć moduł, wszystkie Twoje pipeline'y odziedziczą te ulepszenia.

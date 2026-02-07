@@ -2,12 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej drugiej części kursu szkoleniowego Hello nf-core pokażemy, jak utworzyć wersję workflow'u kompatybilną z nf-core, opartą na projekcie z kursu dla początkujących [Hello Nextflow](../hello_nextflow/index.md).
+W tej drugiej części kursu szkoleniowego Hello nf-core pokażemy, jak utworzyć wersję pipeline'u kompatybilną z nf-core, opartą na projekcie z kursu dla początkujących [Hello Nextflow](../hello_nextflow/index.md).
 
-Zauważyłeś w pierwszej sekcji szkolenia, że workflow'y nf-core mają dość rozbudowaną strukturę z wieloma plikami pomocniczymi.
-Tworzenie tego wszystkiego od zera byłoby bardzo żmudne, dlatego społeczność opracowała narzędzia, które wykorzystują szablon do wygenerowania podstawowej struktury projektu.
+Zauważyłeś w pierwszej części szkolenia, że pipeline'y nf-core mają dość rozbudowaną strukturę z wieloma plikami pomocniczymi.
+Tworzenie tego wszystkiego od zera byłoby bardzo żmudne, dlatego społeczność nf-core opracowała narzędzia wykorzystujące szablon do wygenerowania podstawowej struktury projektu.
 
-Pokażemy, jak użyć tych narzędzi do wygenerowania szkieletu projektu, a następnie zaadaptować istniejący kod 'zwykłego' workflow'u do struktury nf-core.
+Pokażemy, jak użyć tych narzędzi do wygenerowania szkieletu pipeline'u, a następnie zaadaptować istniejący kod 'zwykłego' pipeline'u do struktury nf-core.
 
 Jeśli nie znasz pipeline'u Hello lub potrzebujesz przypomnienia, zobacz [tę stronę informacyjną](../info/hello_pipeline.md).
 
@@ -24,7 +24,7 @@ Najpierw stworzymy szkielet dla nowego pipeline'u.
 ### 1.1. Uruchomienie narzędzia do tworzenia pipeline'u opartego na szablonie
 
 Zacznijmy od stworzenia nowego pipeline'u za pomocą polecenia `nf-core pipelines create`.
-Spowoduje to utworzenie nowego szkieletu pipeline'u przy użyciu podstawowego szablonu nf-core, dostosowanego za pomocą nazwy pipeline'u, opisu i autora.
+Utworzy to nowy szkielet pipeline'u przy użyciu podstawowego szablonu nf-core, dostosowany za pomocą nazwy pipeline'u, opisu i autora.
 
 ```bash
 nf-core pipelines create
@@ -229,7 +229,7 @@ Spójrzmy, co faktycznie znajduje się w kodzie.
 
 Jeśli zajrzysz do pliku `main.nf`, zobaczysz, że importuje on workflow o nazwie `HELLO` z `workflows/hello`.
 
-Jest to odpowiednik pliku `workflows/demo.nf`, który napotkaliśmy w Części 1, i służy jako tymczasowa struktura dla naszego przepływu pracy, z niektórymi funkcjami nf-core już na miejscu.
+Jest to odpowiednik pliku `workflows/demo.nf`, który napotkaliśmy w Części 1, i służy jako tymczasowa struktura dla naszego workflow'u, z niektórymi funkcjami nf-core już na miejscu.
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 35"
 /*
@@ -280,12 +280,12 @@ workflow HELLO {
 
 W porównaniu do podstawowego workflow Nextflow, takiego jak ten opracowany w [Hello Nextflow](../hello_nextflow/index.md), zauważysz kilka nowych rzeczy (podświetlone linie powyżej):
 
-- Blok workflow'u ma nazwę
+- Blok `workflow` ma nazwę
 - Wejścia workflow'u są deklarowane za pomocą słowa kluczowego `take:`, a konstrukcja kanału jest przenoszona do workflow'u nadrzędnego
 - Zawartość workflow'u jest umieszczona w bloku `main:`
 - Wyjścia są deklarowane za pomocą słowa kluczowego `emit:`
 
-Są to opcjonalne funkcje Nextflow, które sprawiają, że workflow jest **kompozycyjny**, co oznacza, że może być wywoływany z innego workflow.
+Są to opcjonalne funkcje Nextflow, które sprawiają, że workflow jest **kompozycyjny**, co oznacza, że może być wywoływany z innego workflow'u.
 
 !!! note "Kompozycyjne workflow w szczegółach"
 
@@ -306,7 +306,7 @@ Naucz się, jak uczynić prosty workflow kompozycyjnym jako wstęp do uczynienia
 
 ## 2. Uczynienie oryginalnego workflow Hello Nextflow kompozycyjnym
 
-Teraz czas rozpocząć pracę nad integracją naszego przepływu pracy do szkieletu nf-core.
+Teraz czas rozpocząć pracę nad integracją naszego workflow'u do szkieletu nf-core.
 Przypominamy, że pracujemy z kodem przedstawionym w kursie szkoleniowym [Hello Nextflow](../hello_nextflow/index.md).
 
 !!! tip "Wskazówka"
@@ -366,7 +366,7 @@ params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Dołącz moduły
+// Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -374,21 +374,21 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // utwórz kanał dla danych wejściowych z pliku CSV
+  // create a channel for inputs from a CSV file
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // wyemituj pozdrowienie
+  // emit a greeting
   sayHello(greeting_ch)
 
-  // przekształć pozdrowienie na wielkie litery
+  // convert the greeting to uppercase
   convertToUpper(sayHello.out)
 
-  // zbierz wszystkie pozdrowienia do jednego pliku
+  // collect all the greetings into one file
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+  // generate ASCII art of the greetings with cowpy
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
@@ -431,7 +431,7 @@ Teraz zastąp konstrukcję kanału prostą instrukcją `take` deklarującą ocze
 === "Przed"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // utwórz kanał dla danych wejściowych z pliku CSV
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -479,32 +479,32 @@ Następnie dodaj instrukcję `main` przed pozostałymi operacjami wywoływanymi 
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
-        // wyemituj pozdrowienie
+        // emit a greeting
         sayHello(greeting_ch)
 
-        // przekształć pozdrowienie na wielkie litery
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
 
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+        // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Przed"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // wyemituj pozdrowienie
+        // emit a greeting
         sayHello(greeting_ch)
 
-        // przekształć pozdrowienie na wielkie litery
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
 
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+        // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -535,7 +535,7 @@ Jeśli wykonałeś wszystkie zmiany zgodnie z opisem, Twój workflow powinien te
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Dołącz moduły
+// Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -549,16 +549,16 @@ workflow HELLO {
 
     main:
 
-    // wyemituj pozdrowienie
+    // emit a greeting
     sayHello(greeting_ch)
 
-    // przekształć pozdrowienie na wielkie litery
+    // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 
-    // zbierz wszystkie pozdrowienia do jednego pliku
+    // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+    // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
@@ -607,7 +607,7 @@ workflow {
 
 Są tutaj dwie ważne obserwacje:
 
-- Sposób wywoływania zaimportowanego przepływu pracy jest zasadniczo taki sam jak w przypadku modułów.
+- Sposób wywoływania zaimportowanego workflow jest zasadniczo taki sam jak w przypadku modułów.
 - Wszystko, co jest związane z wprowadzaniem wejść (parametr wejściowy i konstrukcja kanału) jest teraz zadeklarowane w nadrzędnym skrypcie.
 
 !!! note "Uwaga"
@@ -663,7 +663,7 @@ Naucz się, jak przeszczepić podstawowy kompozycyjny workflow na szkielet nf-co
 
 ## 3. Dopasowanie zaktualizowanej logiki workflow do zastępczego workflow
 
-Teraz, gdy zweryfikowaliśmy poprawność naszego kompozycyjnego przepływu pracy, wróćmy do szkieletu nf-core, który utworzyliśmy w sekcji 1.
+Teraz, gdy zweryfikowaliśmy poprawność naszego kompozycyjnego workflow'u, wróćmy do szkieletu nf-core, który utworzyliśmy w sekcji 1.
 Chcemy zintegrować opracowany właśnie kod ze strukturą szablonu, więc wynik końcowy powinien wyglądać mniej więcej tak.
 
 <figure class="excalidraw">
@@ -770,7 +770,7 @@ Teraz skonfigurujmy instrukcje importu modułów.
 To były instrukcje importu w workflow'ie `original-hello/hello.nf`:
 
 ```groovy title="original-hello/hello.nf" linenums="9"
-// Dołącz moduły
+// Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -833,16 +833,16 @@ Przypominamy, że to jest odpowiedni kod w oryginalnym workflow, który nie zmie
 ```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
-    // wyemituj pozdrowienie
+    // emit a greeting
     sayHello(greeting_ch)
 
-    // przekształć pozdrowienie na wielkie litery
+    // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 
-    // zbierz wszystkie pozdrowienia do jednego pliku
+    // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+    // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
@@ -864,16 +864,16 @@ Ta kolejność ma sens, ponieważ w prawdziwym projekcie procesy emitowałyby in
 
         ch_versions = Channel.empty()
 
-        // wyemituj pozdrowienie
+        // emit a greeting
         sayHello(greeting_ch)
 
-        // przekształć pozdrowienie na wielkie litery
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
 
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+        // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
@@ -930,14 +930,14 @@ To wygląda świetnie, ale nadal musimy zaktualizować nazwę kanału, który pr
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // wyemituj pozdrowienie (zaktualizowane do używania konwencji nf-core dla samplesheet)
+        // emit a greeting (zaktualizowane do używania konwencji nf-core dla samplesheet)
         sayHello(ch_samplesheet)
     ```
 
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // wyemituj pozdrowienie
+        // emit a greeting
         sayHello(greeting_ch)
     ```
 
@@ -1013,7 +1013,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_hell
 */
 
 //
-// WORKFLOW: Uruchom główny pipeline analizy w zależności od typu danych wejściowych
+// WORKFLOW: Run main analysis pipeline depending on type of input
 //
 workflow CORE_HELLO {
 
@@ -1023,7 +1023,7 @@ workflow CORE_HELLO {
     main:
 
     //
-    // WORKFLOW: Uruchom pipeline
+    // WORKFLOW: Run pipeline
     //
     HELLO (
         samplesheet
@@ -1039,7 +1039,7 @@ workflow {
 
     main:
     //
-    // SUBWORKFLOW: Uruchom zadania inicjalizacyjne
+    // SUBWORKFLOW: Run initialisation tasks
     //
     PIPELINE_INITIALISATION (
         params.version,
@@ -1051,13 +1051,13 @@ workflow {
     )
 
     //
-    // WORKFLOW: Uruchom główny workflow
+    // WORKFLOW: Run main workflow
     //
     CORE_HELLO (
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //
-    // SUBWORKFLOW: Uruchom zadania końcowe
+    // SUBWORKFLOW: Run completion tasks
     //
     PIPELINE_COMPLETION (
         params.outdir,
@@ -1146,7 +1146,7 @@ Dobrą wiadomością jest to, że potrzeby naszego pipeline'u są znacznie prost
 Przypominamy, że konstrukcja kanału wyglądała tak (jak widać w katalogu rozwiązań):
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
-    // utwórz kanał dla danych wejściowych z pliku CSV
+    // create a channel for inputs from a CSV file
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
         .map { line -> line[0] }
@@ -1406,3 +1406,29 @@ tree results
     ├── cowpy-COLLECTED-test-output.txt
     ├── Hello-output.txt
     ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+
+    0 directories, 10 files
+    ```
+
+Ach, są tu, zmieszane z wynikami wcześniejszych uruchomień oryginalnego pipeline'u Hello.
+
+Jeśli chcemy, żeby były schludnie zorganizowane jak wyniki pipeline'u demo, musimy zmienić sposób, w jaki ustawiamy publikowanie wyników.
+Pokażemy, jak to zrobić, w późniejszej części tego kursu szkoleniowego.
+
+<!-- TODO: Update this once we've updated Hello Nextflow to use workflow-level outputs -->
+
+I to wszystko! Może się wydawać, że to dużo pracy, aby osiągnąć ten sam rezultat co oryginalny pipeline, ale otrzymujesz wszystkie te piękne raporty generowane automatycznie, a teraz masz solidne podstawy do wykorzystania dodatkowych funkcji nf-core, w tym walidacji wejść i niektórych sprytnych możliwości obsługi metadanych, które omówimy w późniejszej części.
+
+---
+
+### Podsumowanie
+
+Wiesz, jak przekonwertować zwykły pipeline Nextflow na pipeline w stylu nf-core przy użyciu szablonu nf-core.
+W ramach tego nauczyłeś się, jak uczynić workflow kompozycyjnym oraz jak zidentyfikować elementy szablonu nf-core, które najczęściej wymagają dostosowania podczas tworzenia niestandardowego pipeline'u w stylu nf-core.
+
+### Co dalej?
+
+Zrób sobie przerwę, to była ciężka praca! Gdy będziesz gotowy, przejdź do [Części 3: Użycie modułu nf-core](./03_use_module.md), aby nauczyć się wykorzystywać moduły utrzymywane przez społeczność z repozytorium nf-core/modules.

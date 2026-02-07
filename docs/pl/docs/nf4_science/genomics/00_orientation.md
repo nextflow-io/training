@@ -2,14 +2,14 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
-Jednakże potrzebujesz (bezpłatnego) konta, aby się zalogować, i powinieneś/powinnaś poświęcić kilka minut na zapoznanie się z interfejsem.
+Środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem, więc nie musisz niczego instalować samodzielnie.
+Potrzebujesz jednak (bezpłatnego) konta, aby się zalogować, i powinieneś poświęcić kilka minut na zapoznanie się z interfejsem.
 
-Jeśli jeszcze tego nie zrobiłeś/zrobiłaś, skorzystaj z [tego linku](../../../envsetup/) przed dalszym przejściem.
+Jeśli jeszcze tego nie zrobiłeś, skorzystaj z [tego linku](../../../envsetup/) przed dalszym przejściem.
 
 ## Dostarczone materiały
 
-Przez cały kurs szkoleniowy będziemy pracować w katalogu `nf4-science/genomics/`, do którego musisz przejść po otwarciu przestrzeni roboczej szkolenia.
+Przez cały kurs będziemy pracować w katalogu `nf4-science/genomics/`, do którego musisz przejść po otwarciu przestrzeni roboczej szkolenia.
 Ten katalog zawiera wszystkie pliki kodu, dane testowe i pliki pomocnicze, których będziesz potrzebować.
 
 Możesz swobodnie eksplorować zawartość tego katalogu; najłatwiejszym sposobem jest użycie eksploratora plików po lewej stronie przestrzeni roboczej szkolenia w interfejsie VSCode.
@@ -22,7 +22,7 @@ Tutaj generujemy spis treści do drugiego poziomu w dół:
 tree . -L 2
 ```
 
-Jeśli uruchomisz to wewnątrz `nf4-science/genomics`, powinieneś/powinnaś zobaczyć następujące wyjście:
+Jeśli uruchomisz to wewnątrz `nf4-science/genomics`, powinieneś zobaczyć następujące wyjście:
 
 ```console title="Zawartość katalogu"
 

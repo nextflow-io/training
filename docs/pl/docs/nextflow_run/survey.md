@@ -4,6 +4,6 @@
 
 Zanim przejdziesz dalej, wypełnij tę krótką 5-pytaniową ankietę, aby ocenić szkolenie, podzielić się opinią o swoich doświadczeniach i powiedzieć nam, co jeszcze moglibyśmy zrobić, aby pomóc Ci na Twojej drodze z Nextflow.
 
-Wypełnienie powinno zająć Ci tylko minutę lub dwie. Dziękujemy za pomoc w ulepszaniu naszych materiałów szkoleniowych dla wszystkich!
+Wypełnienie powinno zająć Ci tylko minutę lub dwie. Dziękujemy za pomoc w ulepszaniu naszych materiałów szkoleniowych!
 
 <div data-tf-live="01KGH8377MK9V7KE75SCKF8QQK"></div><script src="//embed.typeform.com/next/embed.js"></script>

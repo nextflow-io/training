@@ -13,12 +13,12 @@ Jeśli jeszcze tego nie zrobiłeś, zrób to teraz, najlepiej w drugim oknie lub
 
 ## GitHub Codespaces
 
-Środowisko GitHub Codespaces zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
-Jednak potrzebujesz (bezpłatnego) konta GitHub, aby się zalogować, a jeśli nie znasz interfejsu, powinieneś poświęcić kilka minut na zapoznanie się z nim, przechodząc mini-kurs [GitHub Codespaces Orientation](../../envsetup/index.md).
+Środowisko GitHub Codespaces zawiera całe oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
+Potrzebujesz jednak (bezpłatnego) konta GitHub, aby się zalogować; jeśli nie znasz interfejsu, powinieneś poświęcić kilka minut na zapoznanie się z nim, przechodząc mini-kurs [GitHub Codespaces Orientation](../../envsetup/index.md).
 
 ## Wstępne pobieranie obrazów Docker
 
-Gdy już otworzysz Swój Codespace, pobierzmy wstępnie wszystkie obrazy Docker, których będziemy potrzebować do tego kursu szkoleniowego.
+Gdy już otworzysz Swój Codespace, pobierzmy wstępnie wszystkie obrazy Docker, których będziemy potrzebować w tym kursie szkoleniowym.
 Zaoszczędzi to czas później i zapewni płynne wykonywanie workflow'ów.
 
 Otwórz nową kartę terminala i uruchom następujące polecenie:
@@ -30,7 +30,7 @@ nextflow run nf-core/molkart -profile docker,test -stub -resume --outdir results
 To polecenie pobierze wszystkie niezbędne obrazy Docker w tle.
 Możesz kontynuować resztę orientacji, podczas gdy to się wykonuje.
 
-!!!tip
+!!!tip "Wskazówka"
 
     Flaga `-stub` pozwala na szybkie uruchomienie pipeline'u bez przetwarzania rzeczywistych danych, co jest idealne do pobierania obrazów. Możesz monitorować postęp w karcie terminala.
 
@@ -44,7 +44,7 @@ Zmień teraz katalog, uruchamiając to polecenie w terminalu:
 cd nf4-science/imaging/
 ```
 
-!!!tip
+!!!tip "Wskazówka"
 
     Jeśli z jakiegokolwiek powodu opuścisz ten katalog, zawsze możesz użyć pełnej ścieżki, aby do niego wrócić, zakładając, że pracujesz w środowisku szkoleniowym GitHub Codespaces:
 

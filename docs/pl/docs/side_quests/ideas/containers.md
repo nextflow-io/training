@@ -54,7 +54,7 @@ Dodaliśmy wyjaśniające komentarze do poniższego Dockerfile, aby pomóc Ci zr
 FROM mambaorg/micromamba:1.5.10-noble
 # Skopiuj plik conda.yml do kontenera
 COPY --chown=$MAMBA_USER:$MAMBA_USER conda.yml /tmp/conda.yml
-# Zainstaluj różne narzędzia dla Nextflow oraz pakiety z pliku conda.yml
+# Zainstaluj różne narzędzia dla Nextflow'a oraz pakiety z pliku conda.yml
 RUN micromamba install -y -n base -f /tmp/conda.yml \
     && micromamba install -y -n base conda-forge::procps-ng \
     && micromamba env export --name base --explicit > environment.lock \
@@ -85,7 +85,7 @@ Skopiuj zawartość tych plików do zaślepek znajdujących się w katalogu `con
 !!! note "Uwaga"
 
     Używamy flagi `-t quote:latest`, aby oznaczyć obraz kontenera nazwą `quote` i tagiem `latest`.
-    Będziemy mogli użyć tego tagu do odwoływania się do obrazu kontenera podczas uruchamiania go w tym systemie.
+    Dzięki temu będziemy mogli używać tego tagu do odwoływania się do obrazu kontenera podczas uruchamiania go w tym systemie.
 
 ```bash
 docker build -t quote:latest containers/build
@@ -141,7 +141,7 @@ Na wysokim poziomie, aby ukończyć to ćwiczenie, musisz:
 - Utworzyć proces `getQuote`, który używa kontenera `quote` do pobierania cytatu dla każdego wejścia.
 - Połączyć wyjście procesu `getQuote` z procesem `cowsay`, aby wyświetlić cytat.
 
-Dla obrazu kontenera `quote` możesz użyć tego, który zbudowałeś samodzielnie w poprzednim dodatkowym ćwiczeniu lub tego, który uzyskałeś z Seqera Containers.
+Dla obrazu kontenera `quote` możesz użyć tego, który zbudowałeś samodzielnie w poprzednim dodatkowym ćwiczeniu, lub tego, który uzyskałeś z Seqera Containers.
 
 !!! tip "Wskazówka"
 
@@ -160,7 +160,7 @@ Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-cont
 ### 2.2. Zmodyfikuj Swój pipeline Nextflow, aby umożliwić jego wykonanie w trybach `quote` i `sayHello`.
 
 Dodaj logikę rozgałęzienia do Swojego pipeline'u, aby umożliwić mu akceptowanie wejść przeznaczonych zarówno dla `quote`, jak i `sayHello`.
-Oto przykład użycia instrukcji `if` w workflow Nextflow:
+Oto przykład użycia instrukcji `if` w workflow'ie Nextflow:
 
 ```groovy title="hello-containers.nf"
 workflow {
@@ -182,7 +182,7 @@ Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-cont
 
 ### Podsumowanie
 
-Wiesz już, jak używać kontenerów w Nextflow do uruchamiania procesów oraz jak zbudować logikę rozgałęzienia w Swoich pipeline'ach!
+Wiesz już, jak używać kontenerów w Nextflow'ie do uruchamiania procesów oraz jak zbudować logikę rozgałęzienia w Swoich pipeline'ach!
 
 ### Co dalej?
 

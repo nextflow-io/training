@@ -1,1 +1,1 @@
-To jest zastępczy tekst dla przyszłych Side Quests (pogłębionych szkoleń). Dokumenty znajdujące się tutaj są szkicami opartymi na treściach pochodzących z innych źródeł.
+Zastępczy tekst dla przyszłych Side Quests (szkoleń pogłębiających). Dokumenty znajdujące się tutaj to szkice oparte na treściach zaczerpniętych z innych źródeł.

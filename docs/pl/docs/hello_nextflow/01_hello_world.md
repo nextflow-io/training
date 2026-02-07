@@ -14,7 +14,7 @@
 ///
 -->
 
-W tej pierwszej części kursu szkoleniowego Hello Nextflow łagodnie wprowadzamy temat prostym, niezależnym od dziedziny przykładem Hello World, który będziemy stopniowo rozbudowywać, aby zademonstrować użycie podstawowych elementów logiki i komponentów Nextflow.
+W tej pierwszej części kursu szkoleniowego Hello Nextflow łagodnie wprowadzamy temat prostym, niezależnym od dziedziny przykładem Hello World, który będziemy stopniowo rozbudowywać, aby zademonstrować użycie podstawowych elementów logiki i komponentów Nextflow'a.
 
 ??? info "Czym jest przykład Hello World?"
 
@@ -25,7 +25,7 @@ W tej pierwszej części kursu szkoleniowego Hello Nextflow łagodnie wprowadzam
 
 ## 0. Rozgrzewka: Uruchom przykład Hello World bezpośrednio
 
-Zademonstrujmy to prostym poleceniem, które uruchomimy bezpośrednio w terminalu, aby pokazać, co robi, zanim opakujemy je w Nextflow.
+Zademonstrujmy to prostym poleceniem, które uruchomimy bezpośrednio w terminalu, aby pokazać, co robi, zanim opakujemy je w Nextflow'a.
 
 !!! tip "Wskazówka"
 
@@ -88,7 +88,7 @@ Dowiedz się, jak wyglądałoby to napisane jako workflow Nextflow.
 
 ## 1. Przeanalizuj skrypt i uruchom go
 
-Dostarczamy Ci w pełni funkcjonalny, choć minimalistyczny skrypt workflow'u o nazwie `hello-world.nf`, który robi to samo co wcześniej (wypisuje 'Hello World!'), ale z Nextflow.
+Dostarczamy Ci w pełni funkcjonalny, choć minimalistyczny skrypt workflow'u o nazwie `hello-world.nf`, który robi to samo co wcześniej (wypisuje 'Hello World!'), ale z Nextflow'em.
 
 Na początek otwórzmy skrypt workflow'u, abyś mógł zorientować się w jego strukturze.
 Następnie uruchomimy go i poszukamy jego wyjść.

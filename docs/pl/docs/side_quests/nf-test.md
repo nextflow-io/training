@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Możliwość systematycznego testowania, czy każda część workflow działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.
+Możliwość systematycznego testowania, czy każda część Twojego workflow działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.
 
 Poświęćmy chwilę na omówienie, dlaczego testowanie jest tak ważne. Jeśli tworzysz workflow, jedną z pierwszych rzeczy, które zrobisz, jest pobranie danych testowych, o których wiesz, że są poprawne i powinny dać wynik. Dodajesz pierwszy proces do pipeline'u i podłączasz go do Swoich danych wejściowych, aby działał. Następnie, aby sprawdzić, czy wszystko działa, uruchamiasz go na danych testowych. Zakładając, że działa, przechodzisz do następnego procesu i ponownie uruchamiasz dane testowe. Powtarzasz ten proces, aż otrzymasz pipeline, z którego jesteś zadowolony.
 
@@ -12,7 +12,7 @@ W miarę rozwoju pipeline'u szybko stanie się on tak złożony, że ręczne tes
 
 Testowanie pozwala systematycznie sprawdzać, czy każda część pipeline'u działa zgodnie z oczekiwaniami. Korzyści dla programisty z dobrze napisanych testów są ogromne:
 
-- **Pewność**: Ponieważ testy obejmują cały pipeline, możesz być pewny, że zmiana czegoś nie wpłynie na nic innego
+- **Pewność**: Ponieważ testy obejmują cały pipeline, możesz być pewien, że zmiana czegoś nie wpłynie na nic innego
 - **Zaufanie**: Kiedy wielu programistów pracuje nad pipeline'em, wiedzą, że inni programiści nie zepsuli pipeline'u ani żadnego komponentu.
 - **Przejrzystość**: Testy pokazują, gdzie pipeline zawodzi i ułatwiają wyśledzenie problemu. Działają również jako forma dokumentacji, pokazując, jak uruchomić proces lub workflow.
 - **Szybkość**: Ponieważ testy są zautomatyzowane, można je uruchamiać bardzo szybko i wielokrotnie. Możesz szybko iterować z mniejszą obawą o wprowadzenie nowych błędów.
@@ -48,7 +48,7 @@ Te umiejętności pomogą Ci wdrożyć kompleksową strategię testowania w proj
 Przed podjęciem tego side questa powinieneś:
 
 - Ukończyć samouczek [Hello Nextflow](../hello_nextflow/README.md) lub równoważny kurs dla początkujących.
-- Swobodnie posługiwać się podstawowymi koncepcjami i mechanizmami Nextflow (procesy, kanały, operatory, praca z plikami, metadane)
+- Swobodnie posługiwać się podstawowymi koncepcjami i mechanizmami Nextflow (**process**, **channel**, operatory, praca z plikami, metadane)
 
 ---
 
@@ -94,7 +94,7 @@ Workflow, który będziemy testować, jest podzbiorem workflow Hello zbudowanego
 
     Workflow pobiera plik CSV zawierający pozdrowienia, przeprowadza na nich cztery kolejne kroki transformacji i wyprowadza pojedynczy plik tekstowy zawierający obraz ASCII zabawnej postaci wypowiadającej pozdrowienia.
 
-    Cztery kroki są zaimplementowane jako procesy Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) przechowywane w oddzielnych plikach modułów.
+    Cztery kroki są zaimplementowane jako **procesy** Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) przechowywane w oddzielnych plikach modułów.
 
     1. **`sayHello`:** Zapisuje każde pozdrowienie do własnego pliku wyjściowego (np. "Hello-output.txt")
     2. **`convertToUpper`:** Konwertuje każde pozdrowienie na wielkie litery (np. "HELLO")
@@ -105,14 +105,14 @@ Workflow, który będziemy testować, jest podzbiorem workflow Hello zbudowanego
 
     W tym side queście używamy pośredniej formy workflow Hello, która zawiera tylko dwa pierwsze procesy.
 
-Podzbiór, z którym będziemy pracować, składa się z dwóch procesów: `sayHello` i `convertToUpper`.
+Podzbiór, z którym będziemy pracować, składa się z dwóch **procesów**: `sayHello` i `convertToUpper`.
 Pełny kod workflow możesz zobaczyć poniżej.
 
 ??? example "Kod workflow"
 
     ```groovy title="main.nf"
     /*
-    * Pipeline parameters
+    * Parametry pipeline'u
     */
     params.input_file = "greetings.csv"
 
@@ -272,7 +272,7 @@ nextflow_pipeline {
 
         when {
             params {
-                // define parameters here. Example:
+                // zdefiniuj tutaj parametry. Przykład:
                 // outdir = "tests/results"
             }
         }
@@ -363,13 +363,13 @@ Test nie powiódł się! Co się stało?
 ```groovy title="tests/main.nf.test"
 when {
     params {
-        // define parameters here. Example:
+        // zdefiniuj tutaj parametry. Przykład:
         // outdir = "tests/results"
     }
 }
 ```
 
-2. nf-test sprawdził status pipeline'u i porównał go z blokiem `when`:
+2. nf-test sprawdził status pipeline'u i porównał go z blokiem `then`:
 
 ```groovy title="tests/main.nf.test"
 then {
@@ -394,7 +394,7 @@ _Przed:_
 ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
 when {
     params {
-        // define parameters here. Example:
+        // zdefiniuj tutaj parametry. Przykład:
         // outdir = "tests/results"
     }
 }
@@ -621,7 +621,7 @@ Sukces! Testy przechodzą, ponieważ pipeline zakończył się pomyślnie, uruch
 
 To tylko powierzchnia, możemy dalej pisać asercje, aby sprawdzić szczegóły pipeline'u, ale na razie przejdźmy do testowania wewnętrznych elementów pipeline'u.
 
-### Wnioski
+### Podsumowanie
 
 Wiesz, jak napisać nf-test dla pipeline'u.
 
@@ -670,12 +670,12 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
+                // zdefiniuj tutaj parametry. Przykład:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // zdefiniuj tutaj wejścia procesu. Przykład:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -735,12 +735,12 @@ Test nie powiódł się, ponieważ proces `sayHello` deklaruje 1 wejście, ale z
 
         when {
             params {
-                // define parameters here. Example:
+                // zdefiniuj tutaj parametry. Przykład:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // zdefiniuj tutaj wejścia procesu. Przykład:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -761,7 +761,7 @@ Test nie powiódł się, ponieważ proces `sayHello` deklaruje 1 wejście, ale z
 
         when {
             params {
-                // define parameters here. Example:
+                // zdefiniuj tutaj parametry. Przykład:
                 // outdir = "tests/results"
             }
             process {
@@ -874,7 +874,7 @@ Oto jak moglibyśmy zmodyfikować nasz test, aby sprawdzić konkretną zawartoś
 
         when {
             params {
-                // define parameters here. Example:
+                // zdefiniuj tutaj parametry. Przykład:
                 // outdir = "tests/results"
             }
             process {
@@ -899,7 +899,7 @@ Oto jak moglibyśmy zmodyfikować nasz test, aby sprawdzić konkretną zawartoś
 
         when {
             params {
-                // define parameters here
+                // zdefiniuj tutaj parametry
             }
             process {
                 """
@@ -963,12 +963,12 @@ nextflow_process {
 
         when {
             params {
-                // define parameters here. Example:
+                // zdefiniuj tutaj parametry. Przykład:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // zdefiniuj tutaj wejścia procesu. Przykład:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -1001,12 +1001,12 @@ Na razie ponownie użyjmy istniejącego pliku data/greetings.csv, używając prz
 
         when {
             params {
-                // define parameters here. Example:
+                // zdefiniuj tutaj parametry. Przykład:
                 // outdir = "tests/results"
             }
             process {
                 """
-                // define inputs of the process here. Example:
+                // zdefiniuj tutaj wejścia procesu. Przykład:
                 // input[0] = file("test-file.txt")
                 """
             }
@@ -1027,7 +1027,7 @@ Na razie ponownie użyjmy istniejącego pliku data/greetings.csv, używając prz
 
         when {
             params {
-                // define parameters here. Example:
+                // zdefiniuj tutaj parametry. Przykład:
                 // outdir = "tests/results"
             }
             process {
@@ -1094,7 +1094,7 @@ Test Process convertToUpper
 SUCCESS: Executed 1 tests in 1.811s
 ```
 
-### Wnioski
+### Podsumowanie
 
 Wiesz, jak pisać testy dla procesu Nextflow i je uruchamiać.
 
@@ -1185,7 +1185,7 @@ Sprawdź [dokumentację nf-test](https://www.nf-test.com/), aby poznać bardziej
 - Dowiedzieć się więcej o innych typach testów, takich jak testy workflow'ów i modułów
 - Zbadać bardziej zaawansowane techniki walidacji zawartości
 
-**Pamiętaj:** Testy są żywą dokumentacją tego, jak powinien zachowywać się Twój kod. Im więcej testów napiszesz i im bardziej szczegółowe będą Twoje asercje, tym bardziej możesz być pewny niezawodności Swojego pipeline'u.
+**Pamiętaj:** Testy są żywą dokumentacją tego, jak powinien zachowywać się Twój kod. Im więcej testów napiszesz i im bardziej szczegółowe będą Twoje asercje, tym bardziej możesz być pewien niezawodności Swojego pipeline'u.
 
 ---
 

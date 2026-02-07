@@ -39,7 +39,7 @@ Na wysokim poziomie, aby wykonać to ćwiczenie, będziesz musiał:
 - Utworzyć proces `getQuote`, który używa kontenera `quote` do pobrania cytatu dla każdego wejścia.
 - Połączyć wyjście procesu `getQuote` z procesem `cowsay`, aby wyświetlić cytat.
 
-Dla obrazu kontenera `quote` możesz użyć albo tego, który sam zbudowałeś w poprzednim dodatkowym ćwiczeniu, albo tego z Seqera Containers.
+Dla obrazu kontenera `quote` możesz użyć tego, który sam zbudowałeś w poprzednim dodatkowym ćwiczeniu, lub skorzystać z obrazu dostępnego w Seqera Containers.
 
 !!! Hint
 
@@ -55,10 +55,10 @@ Dla obrazu kontenera `quote` możesz użyć albo tego, który sam zbudowałeś w
 
 Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-containers-4.1.nf`.
 
-### 1.2. Zmodyfikuj Swój pipeline Nextflow, aby mógł wykonywać się w trybach `quote` i `sayHello`.
+### 1.2. Zmodyfikuj Swój pipeline Nextflow, aby mógł wykonywać się w trybach `quote` i `sayHello`
 
 Dodaj logikę rozgałęzień do Swojego pipeline'u, aby mógł akceptować dane wejściowe przeznaczone zarówno dla `quote`, jak i `sayHello`.
-Oto przykład użycia instrukcji `if` w workflow Nextflow:
+Oto przykład użycia instrukcji `if` w workflow'ie Nextflow:
 
 ```groovy title="hello-containers.nf"
 workflow {

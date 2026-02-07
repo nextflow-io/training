@@ -10,7 +10,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Większość naszych kursów szkoleniowych używa prostego, domenowo-agnostycznego pipeline'u do demonstracji koncepcji i mechanizmów Nextflow.
+Większość naszych kursów szkoleniowych wykorzystuje prosty, domenowo-agnostyczny pipeline do demonstracji koncepcji i mechanizmów Nextflow.
 Kurs Hello Nextflow pokazuje, jak rozwijać ten pipeline krok po kroku, wyjaśniając każdą decyzję projektową i implementacyjną.
 Inne szkolenia używają tego pipeline'u lub jego części jako punktu wyjścia.
 
@@ -18,15 +18,15 @@ Ta strona podsumowuje stan pipeline'u po ukończeniu kursu Hello Nextflow.
 
 ### Krótki opis
 
-Workflow Hello przyjmuje plik CSV zawierający teksty powitalne. Zapisuje je do oddzielnych plików i konwertuje na wielkie litery. Następnie zbiera je z powrotem razem i generuje pojedynczy plik tekstowy z obrazkiem ASCII zabawnej postaci wypowiadającej te teksty.
+Workflow Hello przyjmuje plik CSV zawierający powitania, zapisuje je do oddzielnych plików, konwertuje każde na wielkie litery, zbiera je z powrotem razem i wyświetla pojedynczy plik tekstowy zawierający obrazek ASCII zabawnej postaci wypowiadającej te powitania.
 
-### Kroki workflow (procesy)
+### Kroki workflow'a (procesy)
 
 Cztery kroki są zaimplementowane jako procesy Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) przechowywane w oddzielnych plikach modułów.
 
-1. **`sayHello`:** Zapisuje każdy tekst powitalny do własnego pliku wyjściowego (np. "Hello-output.txt")
-2. **`convertToUpper`:** Konwertuje każdy wpis na wielkie litery (np. "HELLO")
-3. **`collectGreetings`:** Zbiera wszystkie pozdrowienia wielkimi literami do pojedynczego pliku wsadowego
+1. **`sayHello`:** Zapisuje każde powitanie do własnego pliku wyjściowego (np. "Hello-output.txt")
+2. **`convertToUpper`:** Konwertuje każde powitanie na wielkie litery (np. "HELLO")
+3. **`collectGreetings`:** Zbiera wszystkie powitania wielkimi literami do pojedynczego pliku wsadowego
 4. **`cowpy`:** Generuje grafikę ASCII za pomocą narzędzia `cowpy`
 
 ### Diagram
@@ -37,7 +37,7 @@ Cztery kroki są zaimplementowane jako procesy Nextflow (`sayHello`, `convertToU
 
 ### Wyniki
 
-Wyniki są publikowane do katalogu o nazwie `results/`, a końcowe wyjście pipeline'u (przy uruchomieniu z domyślnymi parametrami) to plik tekstowy zawierający grafikę ASCII indyka wypowiadającego pozdrowienia wielkimi literami.
+Wyniki są publikowane do katalogu o nazwie `results/`, a końcowe wyjście pipeline'u (przy uruchomieniu z domyślnymi parametrami) to plik tekstowy zawierający grafikę ASCII indyka wypowiadającego powitania wielkimi literami.
 
 ```txt title="results/cowpy-COLLECTED-test-batch-output.txt"
   _________

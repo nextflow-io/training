@@ -45,7 +45,7 @@ Przejdźmy do katalogu, w którym znajdują się pliki do tego tutorialu.
 cd side-quests/workflows_of_workflows
 ```
 
-Możesz ustawić VSCode, aby skupić się na tym katalogu:
+Możesz ustawić VSCode, aby skupił się na tym katalogu:
 
 ```bash
 code .
@@ -70,6 +70,8 @@ Twoim wyzwaniem jest złożenie tych modułów w dwa oddzielne workflow'y, któr
 
 - `GREETING_WORKFLOW`, który waliduje nazwy, tworzy powitania i dodaje znaczniki czasu
 - `TRANSFORM_WORKFLOW`, który konwertuje tekst na wielkie litery i odwraca go
+
+<!-- TODO: give a bit more details, similar to how it's done in the Metadata side quest -->
 
 #### Lista gotowości
 
@@ -108,7 +110,7 @@ workflow {
 
     names_ch = channel.of('Alice', 'Bob', 'Charlie')
 
-    // Połącz procesy: waliduj -> utwórz pozdrowienie -> dodaj znacznik czasu
+    // Połącz procesy: waliduj -> utwórz powitanie -> dodaj znacznik czasu
     validated_ch = VALIDATE_NAME(names_ch)
     greetings_ch = SAY_HELLO(validated_ch)
     timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
@@ -145,6 +147,8 @@ Komponowalne workflow'y mają kilka różnic w porównaniu z tymi, które widzia
 
 Zaktualizujmy workflow powitania, aby pasował do tej struktury. Zmień kod na następujący:
 
+<!-- TODO: switch to before/after tabs -->
+
 ```groovy title="workflows/greeting.nf" linenums="1" hl_lines="6 7 9 15 16 17"
 include { VALIDATE_NAME } from '../modules/validate_name'
 include { SAY_HELLO } from '../modules/say_hello'
@@ -155,18 +159,18 @@ workflow GREETING_WORKFLOW {
         names_ch        // Kanał wejściowy z imionami
 
     main:
-        // Połącz procesy: waliduj -> utwórz pozdrowienie -> dodaj znacznik czasu
+        // Połącz procesy: waliduj -> utwórz powitanie -> dodaj znacznik czasu
         validated_ch = VALIDATE_NAME(names_ch)
         greetings_ch = SAY_HELLO(validated_ch)
         timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
 
     emit:
-        greetings = greetings_ch      // Oryginalne pozdrowienia
-        timestamped = timestamped_ch  // Pozdrowienia ze znacznikiem czasu
+        greetings = greetings_ch      // Oryginalne powitania
+        timestamped = timestamped_ch  // Powitania ze znacznikiem czasu
 }
 ```
 
-Widać, że workflow jest teraz nazwany i ma bloki `take:` oraz `emit:`, a to są połączenia, których użyjemy do komponowania workflow wyższego poziomu.
+Widać, że workflow jest teraz nazwany i ma bloki `take:` oraz `emit:`. To połączenia, których użyjemy do skomponowania workflow wyższego poziomu.
 Zawartość workflow jest również umieszczona wewnątrz bloku `main:`. Zauważ również, że usunęliśmy deklarację kanału wejściowego `names_ch`, ponieważ jest on teraz przekazywany jako argument do workflow.
 
 Przetestujmy workflow ponownie, aby zobaczyć, czy działa zgodnie z oczekiwaniami:
@@ -183,13 +187,13 @@ nextflow run workflows/greeting.nf
     No entry workflow specified
     ```
 
-To informuje Cię o kolejnym nowym koncepcie, 'workflow wejściowym'. Workflow wejściowy to workflow, który jest wywoływany po uruchomieniu skryptu Nextflow. Domyślnie Nextflow użyje nienazwanego workflow jako workflow wejściowego, gdy jest obecny, i to robiłeś do tej pory, z blokami workflow zaczynającymi się w ten sposób:
+To informuje Cię o kolejnym nowym koncepcie: 'workflow wejściowym'. Workflow wejściowy to workflow, który jest wywoływany po uruchomieniu skryptu Nextflow. Domyślnie Nextflow użyje nienazwanego workflow jako workflow wejściowego, gdy jest obecny, i to robiłeś do tej pory, z blokami workflow zaczynającymi się w ten sposób:
 
 ```groovy title="hello.nf" linenums="1"
 workflow {
 ```
 
-Ale nasz workflow powitania nie ma nienazwanego workflow, zamiast tego mamy nazwany workflow:
+Ale nasz workflow powitania nie ma nienazwanego workflow; zamiast tego mamy nazwany workflow:
 
 ```groovy title="workflows/greeting.nf" linenums="1"
 workflow GREETING_WORKFLOW {
@@ -245,7 +249,7 @@ nextflow run main.nf
 
 Działa! Opakaliśmy nazwany workflow powitania w główny workflow z nienazwanym blokiem wejściowym `workflow`. Główny workflow używa workflow `GREETING_WORKFLOW` prawie (nie całkiem) jak procesu i przekazuje kanał `names` jako argument.
 
-### Wnioski
+### Podsumowanie
 
 W tej sekcji nauczyłeś się kilku ważnych koncepcji:
 
@@ -295,8 +299,8 @@ workflow TRANSFORM_WORKFLOW {
         reversed_ch = REVERSE_TEXT(upper_ch)
 
     emit:
-        upper = upper_ch        // Pozdrowienia pisane wielkimi literami
-        reversed = reversed_ch  // Odwrócone pozdrowienia pisane wielkimi literami
+        upper = upper_ch        // Powitania pisane wielkimi literami
+        reversed = reversed_ch  // Odwrócone powitania pisane wielkimi literami
 }
 ```
 
@@ -361,7 +365,7 @@ cat /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef
 !ECILA ,OLLEH ]04:50:71 60-30-5202[
 ```
 
-### Wnioski
+### Podsumowanie
 
 Powinieneś teraz mieć kompletny pipeline, który:
 

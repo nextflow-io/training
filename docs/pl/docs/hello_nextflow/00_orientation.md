@@ -42,7 +42,7 @@ Jeśli pracujesz z tym kursem samodzielnie, zapoznaj się z [podstawami środowi
 
 ### Wymagania wersji
 
-To szkolenie jest zaprojektowane dla Nextflow 25.10.2 lub nowszego **z WŁĄCZONYM parserem składni v2**.
+To szkolenie jest zaprojektowane dla Nextflow'a 25.10.2 lub nowszego **z WŁĄCZONYM parserem składni v2**.
 Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że używasz prawidłowych ustawień, jak udokumentowano [tutaj](../info/nxf_versions.md).
 
 ## Przygotuj się do pracy
@@ -51,7 +51,7 @@ Po uruchomieniu codespace musisz wykonać dwie czynności: ustawić katalog robo
 
 ### Ustaw katalog roboczy
 
-Domyślnie codespace otwiera się z główną lokalizacją wszystkich kursów szkoleniowych jako katalogiem roboczym, ale tym razem będziemy pracować w `hello-nextflow/`.
+Domyślnie codespace otwiera się z główną lokalizacją wszystkich kursów szkoleniowych jako katalogiem roboczym, ale tym razem będziemy pracować w katalogu `hello-nextflow/`.
 
 Zmień teraz katalog, uruchamiając to polecenie w terminalu:
 
@@ -120,12 +120,12 @@ Używamy takich rozwijanych sekcji, aby zwięźle włączać oczekiwane wyjście
 - **Plik `nextflow.config`** to plik konfiguracyjny, który ustawia minimalne właściwości środowiska.
   Na razie możesz go zignorować.
 
-- **Plik `greetings.csv`** w `data/` zawiera dane wejściowe, których użyjemy w większości kursu. Jest opisany w Części 2 (Channels), kiedy wprowadzamy go po raz pierwszy.
+- **Plik `greetings.csv`** w katalogu `data/` zawiera dane wejściowe, których użyjemy w większości kursu. Jest opisany w Części 2 (Channels), kiedy wprowadzamy go po raz pierwszy.
 
 - **Pliki `test-params.*`** to pliki konfiguracyjne, których użyjemy w Części 6 (Configuration). Na razie możesz je zignorować.
 
 - **Katalog `solutions`** zawiera ukończone skrypty workflow'ów, które są wynikiem każdego etapu kursu.
-  Służą jako odniesienie do weryfikacji Swojej pracy i rozwiązywania problemów.
+  Służą jako odniesienie do weryfikacji Twojej pracy i rozwiązywania problemów.
 
 ## Lista kontrolna gotowości
 
@@ -133,7 +133,7 @@ Myślisz, że jesteś gotowy do zanurzenia się?
 
 - [ ] Rozumiem cel tego kursu i jego wymagania wstępne
 - [ ] Moje środowisko jest uruchomione
-- [ ] Ustawiłem odpowiednio Swój katalog roboczy
+- [ ] Ustawiłem odpowiednio mój katalog roboczy
 
 Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.
 

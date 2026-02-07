@@ -62,7 +62,7 @@ process {
 ```
 
 Po określeniu tego, domyślne ustawienia będą stosowane do wszystkich procesów **z wyjątkiem** procesu `GATK_JOINTGENOTYPING`, który jest wyjątkowy i otrzymuje znacznie więcej CPU.
-Miejmy nadzieję, że to powinno mieć efekt.
+Miejmy nadzieję, że to powinno przynieść efekt.
 
 ### 1.3. Uruchom ponownie ze zmodyfikowaną konfiguracją
 

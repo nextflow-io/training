@@ -12,7 +12,7 @@ W tej części szkolenia demonstrujemy kluczowe funkcje rzeczywistych pipeline'�
 ## 1. Przetwarzanie danych wejściowych z pliku
 
 W rzeczywistym pipeline'ie zazwyczaj chcemy przetwarzać wiele punktów danych (lub serii danych) zawartych w jednym lub więcej plikach wejściowych.
-I gdziekolwiek to możliwe, chcemy uruchamiać przetwarzanie niezależnych danych równolegle, aby skrócić czas oczekiwania na analizę.
+Gdziekolwiek to możliwe, chcemy uruchamiać przetwarzanie niezależnych danych równolegle, aby skrócić czas oczekiwania na analizę.
 
 Aby zademonstrować, jak Nextflow to robi, przygotowaliśmy plik CSV o nazwie `greetings.csv`, który zawiera kilka powitań wejściowych, naśladując rodzaj danych kolumnowych, które możesz chcieć przetwarzać w prawdziwej analizie danych.
 Zauważ, że liczby nie mają znaczenia, są tam tylko w celach ilustracyjnych.
@@ -29,7 +29,7 @@ Napisaliśmy również ulepszoną wersję oryginalnego workflow'u, teraz o nazwi
 --8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
 </figure>
 
-Uruchommy najpierw workflow, a potem przyjrzymy się odpowiedniemu kodowi Nextflow.
+Uruchommy najpierw workflow, a następnie przyjrzymy się odpowiedniemu kodowi Nextflow.
 
 ### 1.1. Uruchom workflow
 
@@ -96,7 +96,7 @@ Czy to oznacza, że wszystkie trzy wywołania `sayHello()` zostały wykonane w t
 
 #### 1.3.1. Zbadaj katalog zadania podany w terminalu
 
-Zajrzyjmy do tego katalogu zadania `8e/0eb066`.
+Zajrzyjmy do katalogu zadania `8e/0eb066`.
 
 ??? abstract "Zawartość katalogu"
 
@@ -349,7 +349,7 @@ Konkretnie, stworzyliśmy rozszerzoną wersję workflow'u o nazwie `2b-multistep
 --8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
 </figure>
 
-Jak poprzednio, najpierw uruchomimy workflow, a potem przyjrzymy się kodowi, aby zobaczyć, co jest nowe.
+Jak poprzednio, najpierw uruchomimy workflow, a następnie przyjrzymy się kodowi, aby zobaczyć, co jest nowe.
 
 ### 2.1. Uruchom workflow
 
@@ -1595,7 +1595,7 @@ Dowiedz się więcej: [1.4.3. Jak nazywane są wyjścia](#143-jak-nazywane-są-w
 </quiz>
 
 <quiz>
-Jaki jest cel instrukcji `include` w zmodularizowanym workflow'ie?
+Jaki jest cel instrukcji `include` w zmodularyzowanym workflow'ie?
 - [ ] Aby skopiować kod procesu do pliku workflow'u
 - [x] Aby zaimportować definicję procesu z zewnętrznego pliku modułu
 - [ ] Aby dołączyć ustawienia konfiguracji
@@ -1641,5 +1641,5 @@ Co Nextflow automatycznie obsługuje podczas uruchamiania konteneryzowanego proc
 - [x] Uruchamianie skryptu procesu wewnątrz kontenera
 - [x] Czyszczenie instancji kontenera po wykonaniu
 
-Dowiedz się więcej: [4. Używanie konteneryzowanego oprogramowania](#4-używanie-konteneryzowanego-oprogramowania)
+Dowiedz się więcej: [4. Używanie konteneryzowanego oprogramowania](#4-używanie-kontenerizowanego-oprogramowania)
 </quiz>

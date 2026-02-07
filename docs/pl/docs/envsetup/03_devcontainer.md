@@ -2,21 +2,21 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Jeśli masz lokalną instalację Docker lub chętnie ją skonfigurujesz, najłatwiejszym sposobem pracy lokalnej z tymi materiałami jest użycie funkcji devcontainer w Visual Studio Code. To podejście zapewnia wszystkie niezbędne narzędzia i zależności bez konieczności ręcznej konfiguracji.
+Jeśli posiadasz lokalną instalację Dockera lub chętnie ją skonfigurujesz, najłatwiejszym sposobem pracy lokalnej z tymi materiałami jest użycie funkcji devcontainer w Visual Studio Code. To podejście zapewnia wszystkie niezbędne narzędzia i zależności bez konieczności ręcznej instalacji.
 
 ## Wymagania
 
 Aby użyć lokalnej konfiguracji devcontainer, będziesz potrzebować:
 
 - [Visual Studio Code](https://code.visualstudio.com/)
-- Lokalnej instalacji Docker, na przykład:
+- Lokalnej instalacji Dockera, na przykład:
   - [Docker Desktop](https://docs.docker.com/get-docker/) (dla Windows/macOS)
-  - [Docker Engine](https://docs.docker.com/engine/install/) (dla Linux)
+  - [Docker Engine](https://docs.docker.com/engine/install/) (dla Linuxa)
   - [Colima](https://github.com/abiosoft/colima) (alternatywa dla macOS)
-- [Docker Buildx](https://docs.docker.com/build/concepts/overview/#install-buildx) (dołączony do Docker Desktop, ale może wymagać osobnej instalacji z innymi konfiguracjami Docker)
+- [Docker Buildx](https://docs.docker.com/build/concepts/overview/#install-buildx) (dołączony do Docker Desktop, ale może wymagać osobnej instalacji z innymi konfiguracjami Dockera)
 - [Rozszerzenie Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) dla VS Code
 
-Twoja instalacja Docker musi być uruchomiona przed próbą otwarcia devcontainer.
+Twoja instalacja Dockera musi być uruchomiona przed próbą otwarcia devcontainer.
 
 Aby sprawdzić, czy Docker buildx jest dostępny, uruchom:
 
@@ -28,7 +28,7 @@ Jeśli to polecenie nie powiedzie się, będziesz musiał zainstalować rozszerz
 
 ## Instrukcje konfiguracji
 
-Wykonaj następujące kroki, aby skonfigurować lokalne środowisko za pomocą devcontainers VS Code:
+Wykonaj poniższe kroki, aby skonfigurować lokalne środowisko za pomocą devcontainers VS Code:
 
 ### Zainstaluj rozszerzenie "Dev Containers" w VS Code
 
@@ -50,7 +50,7 @@ cd training
 
 - Uruchom VS Code
 - Wybierz **File -> Open Folder** z menu
-- Przejdź do i wybierz folder repozytorium szkoleniowego, który właśnie sklonowałeś
+- Przejdź do folderu repozytorium szkoleniowego, który właśnie sklonowałeś, i wybierz go
 - Kliknij **Open**
 
 ### Otwórz ponownie w kontenerze
@@ -85,7 +85,7 @@ Korzystanie z podejścia devcontainer oferuje kilka zalet:
 - **Prostota**: Wszystkie zależności są preinstalowane i skonfigurowane
 - **Izolacja**: Środowisko programistyczne jest odizolowane od Twojego lokalnego systemu
 - **Powtarzalność**: Każdy korzystający z devcontainer otrzymuje taką samą konfigurację
-- **Brak ręcznej konfiguracji**: Nie ma potrzeby samodzielnego instalowania Java, Nextflow i innych narzędzi
+- **Brak ręcznej instalacji**: Nie ma potrzeby samodzielnego instalowania Java, Nextflow i innych narzędzi
 
 ## Sprawdzanie środowiska
 
@@ -95,13 +95,13 @@ Po uruchomieniu devcontainer możesz sprawdzić, czy wszystko jest poprawnie sko
 nextflow info
 ```
 
-Powinno to wyświetlić wersję Nextflow i informacje o środowisku wykonawczym, potwierdzając, że Twoje środowisko jest poprawnie skonfigurowane.
+Powinno to wyświetlić wersję Nextflow'a i informacje o środowisku wykonawczym, potwierdzając, że Twoje środowisko jest poprawnie skonfigurowane.
 
 ## Rozwiązywanie problemów
 
 Jeśli napotkasz problemy z konfiguracją devcontainer:
 
-1. Upewnij się, że Twoja instalacja Docker (Docker Desktop, Colima, Docker Engine itp.) jest uruchomiona przed otwarciem devcontainer
+1. Upewnij się, że Twoja instalacja Dockera (Docker Desktop, Colima, Docker Engine itp.) jest uruchomiona przed otwarciem devcontainer
 2. Sprawdź, czy wybrałeś konfigurację **local-dev**, gdy pojawił się monit
 3. Sprawdź, czy Docker buildx jest zainstalowany i działa, uruchamiając `docker buildx version`
 4. Jeśli kontener nie zbuduje się, spróbuj go przebudować, uruchamiając polecenie "Dev Containers: Rebuild Container"

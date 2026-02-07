@@ -16,13 +16,13 @@
 
 W Częściach 1-4 tego kursu nauczyłeś się używać podstawowych elementów budulcowych Nextflow do składania prostego workflow zdolnego do przetwarzania tekstu, równoległego wykonywania wielu wejść i zbierania wyników do dalszego przetwarzania.
 
-Jednak byłeś ograniczony do podstawowych narzędzi UNIX dostępnych w Twoim środowisku.
+Byłeś jednak ograniczony do podstawowych narzędzi UNIX dostępnych w Twoim środowisku.
 Rzeczywiste zadania często wymagają różnych narzędzi i pakietów, które nie są domyślnie dołączone.
 Zazwyczaj musiałbyś zainstalować te narzędzia, zarządzać ich zależnościami i rozwiązywać konflikty.
 
 To wszystko jest bardzo nużące i irytujące, więc pokażemy Ci, jak używać **kontenerów**, aby rozwiązać ten problem znacznie wygodniej.
 
-**Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu kontenera**, która zawiera wszystko potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
+**Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu kontenera**, zawierająca wszystko potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
 Jak można się domyślić, będzie to bardzo pomocne w zwiększeniu powtarzalności Twoich pipeline'ów.
 
 Zauważ, że będziemy tego uczyć używając [Docker](https://www.docker.com/get-started/), ale pamiętaj, że Nextflow obsługuje również [kilka innych technologii kontenerowych](https://nextflow.io/docs/latest/container.html).
@@ -109,11 +109,11 @@ Jeśli to zadziałało, jesteś gotowy do nauki używania kontenerów.
 
 Chcemy dodać krok do naszego workflow, który będzie używał kontenera do wykonania.
 
-Jednak najpierw omówimy podstawowe koncepcje i operacje, aby utrwalić Twoje zrozumienie tego, czym są kontenery, zanim zaczniemy ich używać w Nextflow.
+Najpierw jednak omówimy podstawowe koncepcje i operacje, aby utrwalić Twoje zrozumienie tego, czym są kontenery, zanim zaczniemy ich używać w Nextflow.
 
 ### 1.1. Pobierz obraz kontenera
 
-Aby użyć kontenera, zazwyczaj pobierasz lub _ściągasz_ obraz kontenera z rejestru kontenerów, a następnie uruchamiasz go, aby utworzyć działającą instancję.
+Aby użyć kontenera, zazwyczaj pobierasz lub _ściągasz_ obraz kontenera z rejestru kontenerów, a następnie go uruchamiasz, aby utworzyć działającą instancję.
 
 Ogólna składnia jest następująca:
 

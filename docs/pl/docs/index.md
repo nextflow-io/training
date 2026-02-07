@@ -61,7 +61,7 @@ hide:
 
         [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-        Te materiały szkoleniowe są tworzone i utrzymywane przez [Seqera](https://seqera.io) i udostępniane na licencji open-source ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) dla dobra społeczności. Jeśli chcesz wykorzystać te materiały w sposób wykraczający poza zakres licencji (zwróć uwagę na ograniczenia dotyczące użytku komercyjnego i redystrybucji),         skontaktuj się z nami pod adresem [community@seqera.io](mailto:community@seqera.io), aby omówić Swoją prośbę.
+        Te materiały szkoleniowe są tworzone i utrzymywane przez [Seqera](https://seqera.io) i udostępniane na licencji open-source ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) dla dobra społeczności. Jeśli chcesz wykorzystać te materiały w sposób wykraczający poza zakres licencji (zwróć uwagę na ograniczenia dotyczące użytku komercyjnego i redystrybucji), skontaktuj się z nami pod adresem [community@seqera.io](mailto:community@seqera.io), aby omówić Swoją prośbę.
 
         Z przyjemnością przyjmujemy ulepszenia, poprawki i zgłoszenia błędów od społeczności. Każda strona ma ikonę :material-file-edit-outline: w prawym górnym rogu, która prowadzi do repozytorium kodu, gdzie możesz zgłaszać problemy lub proponować zmiany w materiałach szkoleniowych poprzez pull request. Więcej szczegółów znajdziesz w pliku `README.md` w repozytorium.
 
@@ -83,7 +83,7 @@ hide:
 
     ### :material-compass:{.nextflow-primary} Nextflow dla początkujących {.mt-1}
 
-    Kursy niezależne od dziedziny, przeznaczone dla osób, które są całkowicie nowe w Nextflow. Każdy z nich składa się z serii modułów szkoleniowych. Te moduły pomagają uczącym się stopniowo rozwijać swoje umiejętności.
+    Kursy niezależne od dziedziny, przeznaczone dla osób, które są całkowicie nowe w Nextflow. Każdy z nich składa się z serii modułów szkoleniowych zaprojektowanych tak, aby pomóc uczącym się stopniowo rozwijać swoje umiejętności.
 
     ??? courses "**Hello Nextflow:** Naucz się tworzyć własne pipeline'y"
 
@@ -105,19 +105,19 @@ hide:
 
     ??? courses "**Nextflow dla genomiki** (wykrywanie wariantów)"
 
-        Dla badaczy, którzy chcą nauczyć się tworzyć własne pipeline'y genomiczne. Poprzez przypadek wykrywania wariantów pokazuje, jak budować prosty, ale funkcjonalny pipeline genomiczny.
+        Dla badaczy, którzy chcą nauczyć się tworzyć własne pipeline'y genomiczne. Kurs wykorzystuje przypadek wykrywania wariantów, aby zademonstrować, jak opracowywać prosty, ale funkcjonalny pipeline genomiczny.
 
         [Rozpocznij szkolenie Nextflow dla genomiki :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--secondary }
 
     ??? courses "**Nextflow dla RNAseq** (bulk RNAseq)"
 
-        Dla badaczy, którzy chcą nauczyć się tworzyć własne pipeline'y RNAseq. Poprzez przypadek przetwarzania bulk RNAseq demonstruje, jak budować prosty, ale funkcjonalny pipeline analityczny.
+        Dla badaczy, którzy chcą nauczyć się tworzyć własne pipeline'y RNAseq. Kurs wykorzystuje przypadek przetwarzania bulk RNAseq, aby zademonstrować, jak opracowywać prosty, ale funkcjonalny pipeline RNAseq.
 
         [Rozpocznij szkolenie Nextflow dla RNAseq :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--secondary }
 
     ??? courses "**Nextflow dla obrazowania** (spatial omics)"
 
-        Dla badaczy zajmujących się obrazowaniem i spatial omics, którzy chcą nauczyć się uruchamiać i dostosowywać workflow'y analityczne. Oparty na nf-core/molkart, kurs demonstruje konfigurację, wykonywanie oraz zarządzanie wejściami dla workflow'ów Nextflow.
+        Dla badaczy zajmujących się obrazowaniem i spatial omics, którzy chcą nauczyć się uruchamiać i dostosowywać pipeline'y analityczne. Kurs wykorzystuje pipeline nf-core/molkart, aby zapewnić biologicznie istotny przykład demonstrujący, jak uruchamiać, konfigurować i zarządzać wejściami dla workflow'ów Nextflow.
 
         [Rozpocznij szkolenie Nextflow dla obrazowania :material-arrow-right:](nf4_science/imaging/){ .md-button .md-button--secondary }
 
@@ -129,11 +129,12 @@ hide:
 
     Naucz się wykorzystywać kod i najlepsze praktyki z projektu społeczności [nf-core](https://nf-co.re/).
 
-    Te kursy pomagają przejść od podstaw Nextflow do najlepszych praktyk nf-core. Zrozum, jak i dlaczego społeczność buduje swoje workflow'y, oraz jak możesz współtworzyć i ponownie stosować te techniki.
+    Te kursy pomagają przejść od podstaw Nextflow do najlepszych praktyk nf-core.
+    Zrozum, jak i dlaczego społeczność nf-core buduje pipeline'y, oraz jak możesz współtworzyć i ponownie stosować te techniki.
 
     ??? courses "**Hello nf-core:** Rozpocznij pracę z nf-core"
 
-        Dla programistów, którzy chcą nauczyć się uruchamiać i tworzyć workflow'y zgodne z [nf-core](https://nf-co.re/). Kurs szczegółowo omawia strukturę tych workflow'ów, umożliwiając budowanie prostych, ale funkcjonalnych rozwiązań. Uczestnicy poznają szablon, najlepsze praktyki deweloperskie oraz istniejące moduły społeczności.
+        Dla programistów, którzy chcą nauczyć się uruchamiać i tworzyć pipeline'y zgodne z [nf-core](https://nf-co.re/). Kurs szczegółowo omawia strukturę pipeline'ów nf-core, umożliwiając budowanie prostych, ale funkcjonalnych rozwiązań zgodnych z szablonem nf-core i najlepszymi praktykami deweloperskimi, a także wykorzystywanie istniejących modułów nf-core.
 
         [Rozpocznij szkolenie Hello nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--secondary }
 

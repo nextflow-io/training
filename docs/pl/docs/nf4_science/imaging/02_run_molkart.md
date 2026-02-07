@@ -62,7 +62,7 @@ To tworzy katalog `molkart/` zawierający kompletny kod źródłowy pipeline'u.
 
 !!! note "Dlaczego klonujemy lokalnie?"
 
-    Zazwyczaj uruchamiałbyś pipeline'y nf-core bezpośrednio z GitHub używając `nextflow run nf-core/molkart -r 1.2.0`.
+    Zazwyczaj uruchamiałbyś pipeline'y nf-core bezpośrednio z GitHub'a używając `nextflow run nf-core/molkart -r 1.2.0`.
     Nextflow automatycznie pobiera żądaną wersję pipeline'u do `$HOME/.nextflow/assets/nf-core/molkart` i uruchamia go stamtąd.
     Jednak dla celów tego szkolenia klonujemy pipeline do innego katalogu lokalnego, abyśmy mogli łatwiej sprawdzić kod.
 
@@ -125,11 +125,11 @@ Dzieje się tak, ponieważ:
 
 1. Pipeline oczekuje zainstalowanego specjalistycznego oprogramowania bioinformatycznego
 2. Te narzędzia (takie jak `duplicate_finder.py`, `apply_clahe.dask.py`, itp.) nie są częścią standardowych dystrybucji Linux
-3. Bez kontenerów, Nextflow próbuje uruchomić polecenia bezpośrednio na Twojej lokalnej maszynie
+3. Bez kontenerów Nextflow próbuje uruchomić polecenia bezpośrednio na Twojej lokalnej maszynie
 
 **Skąd mają pochodzić te narzędzia?**
 
-Sprawdźmy jeden z modułów procesu, aby zobaczyć jak deklaruje Swoje wymagania dotyczące oprogramowania.
+Sprawdźmy jeden z modułów procesu, aby zobaczyć jak deklaruje swoje wymagania dotyczące oprogramowania.
 
 Otwórz moduł przetwarzania wstępnego CLAHE:
 
@@ -143,16 +143,16 @@ Spójrz na linię 5 - zobaczysz:
 container 'ghcr.io/schapirolabor/molkart-local:v0.0.4'
 ```
 
-Ta linia informuje Nextflow: "Aby uruchomić ten proces, użyj obrazu Docker `ghcr.io/schapirolabor/molkart-local:v0.0.4`, który zawiera wszystkie wymagane oprogramowanie."
+Ta linia informuje Nextflow'a: "Aby uruchomić ten proces, użyj obrazu Docker'a `ghcr.io/schapirolabor/molkart-local:v0.0.4`, który zawiera całe wymagane oprogramowanie."
 
 Każdy proces deklaruje który obraz kontenera dostarcza wymagane narzędzia.
 Jednak Nextflow używa tych kontenerów tylko jeśli mu powiesz!
 
 **Rozwiązanie: Włącz Docker w konfiguracji**
 
-### 2.2. Konfiguracja Docker i uruchomienie pipeline'u
+### 2.2. Konfiguracja Docker'a i uruchomienie pipeline'u
 
-Aby włączyć Docker, musimy zmienić `docker.enabled` z `false` na `true` w pliku `nextflow.config`.
+Aby włączyć Docker'a, musimy zmienić `docker.enabled` z `false` na `true` w pliku `nextflow.config`.
 
 Otwórz plik konfiguracyjny:
 
@@ -188,7 +188,7 @@ nextflow run ./molkart \
 Tym razem Nextflow:
 
 1. Odczyta ustawienie `docker.enabled = true` z konfiguracji
-2. Pobierze wymagane obrazy Docker (tylko za pierwszym razem)
+2. Pobierze wymagane obrazy Docker'a (tylko za pierwszym razem)
 3. Uruchomi każdy proces wewnątrz określonego kontenera
 4. Wykona się pomyślnie, ponieważ wszystkie narzędzia są dostępne wewnątrz kontenerów
 
@@ -289,7 +289,7 @@ Podczas działania pipeline'u zobaczysz wyjście podobne do tego:
 
 Zauważ, jak to wyjście jest bardziej szczegółowe niż nasz przykład Hello World z powodu konwencji nf-core, których przestrzega pipeline:
 
-- Pipeline pokazuje Swoją wersję i logo
+- Pipeline pokazuje swoją wersję i logo
 - Wyświetlane są parametry konfiguracji
 - Wiele procesów działa równolegle (wskazane przez wiele linii procesów)
 - Nazwy procesów zawierają pełną ścieżkę modułu (np. `NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP`)
@@ -490,7 +490,7 @@ Jednak dla pipeline'ów nf-core z dużymi plikami pośrednimi szczególnie ważn
 
 ### Podsumowanie
 
-Rozumiesz jak pipeline'y nf-core organizują Swoje katalogi robocze i jak sprawdzać poszczególne zadania w celu debugowania.
+Rozumiesz jak pipeline'y nf-core organizują swoje katalogi robocze i jak sprawdzać poszczególne zadania w celu debugowania.
 
 ### Co dalej?
 
@@ -562,4 +562,4 @@ Wiesz jak używać `-resume`, aby efektywnie ponownie uruchamiać pipeline'y bez
 
 ### Co dalej?
 
-Teraz gdy możesz uruchomić nf-core/molkart z danymi testowymi, jesteś gotowy nauczyć się jak skonfigurować go dla Swoich własnych zestawów danych.
+Teraz gdy możesz uruchomić nf-core/molkart z danymi testowymi, jesteś gotowy nauczyć się jak skonfigurować go dla swoich własnych zestawów danych.

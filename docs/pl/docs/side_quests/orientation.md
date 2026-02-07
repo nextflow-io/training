@@ -39,8 +39,8 @@ Jeśli uruchomisz to wewnątrz `side-quests`, powinieneś zobaczyć następując
 - **Każdy katalog odpowiada indywidualnemu zadaniu pobocznemu.**
   Ich zawartość jest szczegółowo opisana na stronie odpowiedniego zadania pobocznego.
 
-- **Katalog `solutions`** zawiera ukończone skrypty workflow i/lub modułów, które powstają w wyniku wykonania różnych kroków każdego zadania pobocznego.
-  Mają one służyć jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania ewentualnych problemów.
+- **Katalog `solutions`** zawiera ukończone skrypty workflow'ów i/lub modułów, które powstają w wyniku wykonania różnych kroków każdego zadania pobocznego.
+  Mają służyć jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania ewentualnych problemów.
 
 !!!tip "Wskazówka"
 

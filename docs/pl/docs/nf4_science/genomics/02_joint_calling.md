@@ -5,13 +5,13 @@
 W pierwszej części tego kursu zbudowałeś pipeline do wykrywania wariantów, który był całkowicie liniowy i przetwarzał dane każdej próbki niezależnie od innych.
 Jednak w rzeczywistym przypadku użycia genomiki zazwyczaj będziesz musiał spojrzeć na wywołania wariantów wielu próbek razem.
 
-W tej drugiej części pokażemy Ci, jak używać kanałów i operatorów kanałów do implementacji wspólnego wykrywania wariantów za pomocą GATK, budując na pipeline'ie z Części 1.
+W tej drugiej części pokażemy Ci, jak używać kanałów i operatorów kanału do implementacji wspólnego wykrywania wariantów za pomocą GATK, budując na pipeline'ie z Części 1.
 
 ### Przegląd metody
 
 Metoda GATK, której użyliśmy w pierwszej części tego kursu, generowała wyniki dla każdej próbki osobno.
 Jest to w porządku, jeśli chcesz analizować warianty z każdej próbki indywidualnie, ale daje ograniczone informacje.
-Często bardziej interesujące jest porównanie wyników między wieloma próbkami, a GATK oferuje do tego alternatywną metodę zwaną wspólnym genotypowaniem, którą tutaj demonstrujemy.
+Często bardziej interesujące jest porównanie wyników między wieloma próbkami, a GATK oferuje do tego alternatywną metodę zwaną wspólnym wywoływaniem wariantów, którą tutaj demonstrujemy.
 
 Wspólne wywoływanie wariantów polega na wygenerowaniu specjalnego rodzaju wyjścia wariantów zwanego GVCF (Genomic VCF) dla każdej próbki, następnie połączeniu danych GVCF ze wszystkich próbek i wreszcie uruchomieniu statystycznej analizy 'wspólnego genotypowania'.
 
@@ -64,7 +64,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -112,7 +112,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -136,7 +136,7 @@ gatk HaplotypeCaller \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -181,7 +181,7 @@ gatk HaplotypeCaller \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -198,7 +198,7 @@ gatk HaplotypeCaller \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -226,7 +226,7 @@ gatk GenomicsDBImport \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -252,7 +252,7 @@ gatk GenotypeGVCFs \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -282,7 +282,7 @@ To jest ostatecznie informacja, którą chcemy wydobyć z zestawu danych! Więc 
 exit
 ```
 
-### Wnioski
+### Podsumowanie
 
 Wiesz, jak uruchamiać poszczególne polecenia zaangażowane we wspólne wywoływanie wariantów w terminalu, aby sprawdzić, czy wyprodukują informacje, których chcesz.
 
@@ -350,7 +350,7 @@ Upewnij się, że odpowiednio zaktualizowałeś nazwę pliku.
 nextflow run genomics-2.nf
 ```
 
-??? failure "Wyjście polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -502,7 +502,7 @@ Same wyjście Nextflow nie wygląda inaczej (w porównaniu do pomyślnego urucho
 
 Jeśli otworzysz jeden z plików GVCF i przewiniesz go, możesz sprawdzić, że GATK HaplotypeCaller wytworzyło pliki GVCF zgodnie z życzeniem.
 
-### Wnioski
+### Podsumowanie
 
 Okej, ten był minimalny pod względem nauki Nextflow...
 Ale to była miła okazja, aby powtórzyć znaczenie bloku wyjściowego procesu!
@@ -765,7 +765,7 @@ Magazyn danych GenomicsDB jest tworzony w katalogu roboczym, ale nie jest publik
 
 Nawiasem mówiąc, nie musieliśmy robić nic specjalnego, aby obsłużyć wyjście będące katalogiem zamiast pojedynczym plikiem.
 
-### Wnioski
+### Podsumowanie
 
 Teraz wiesz, jak zbierać wyjścia z kanału i grupować je jako pojedyncze wejście do innego procesu.
 Wiesz również, jak skonstruować linię poleceń, aby dostarczyć wejścia do danego narzędzia z odpowiednią składnią.
@@ -1015,7 +1015,7 @@ Masz teraz zautomatyzowany, w pełni odtwarzalny workflow wspólnego wywoływani
     Rzeczywisty rozmiar zestawu wywołań wariantów byłby liczony w milionach wariantów.
     Dlatego używamy tylko małych podzbiorów danych do celów szkoleniowych!
 
-### Wnioski
+### Podsumowanie
 
 Wiesz, jak używać niektórych typowych operatorów, a także domknięć Groovy do kontrolowania przepływu danych w Twoim workflow'ie.
 

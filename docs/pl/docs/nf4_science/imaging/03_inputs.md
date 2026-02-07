@@ -127,13 +127,13 @@ mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 
 !!! warning "Ostrzeżenie"
 
-    Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, **z którego uruchamiasz** Nextflow, a nie względem miejsca, w którym znajduje się arkusz próbek.
+    Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, **z którego uruchamiasz** Nextflow'a, a nie względem miejsca, w którym znajduje się arkusz próbek.
 
 Na koniec wykonajmy nf-core/molkart jeszcze raz z arkuszem próbek zawierającym lokalne ścieżki do plików:
 
 `nextflow run ./molkart -params-file params.yaml -resume`
 
-Jak widzisz, Nextflow wykonuje to uruchomienie podobnie jak wtedy, gdy pliki były pobierane z Github. To jedna ze świetnych funkcji Nextflow - właściwie przygotowuje dane dla Ciebie, niezależnie od tego, gdzie się znajdują.
+Jak widzisz, Nextflow wykonuje to uruchomienie podobnie jak wtedy, gdy pliki były pobierane z Githuba. To jedna ze świetnych funkcji Nextflow'a - właściwie przygotowuje dane dla Ciebie, niezależnie od tego, gdzie się znajdują.
 
 ### Podsumowanie
 

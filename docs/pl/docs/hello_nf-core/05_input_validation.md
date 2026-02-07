@@ -55,26 +55,26 @@ ERROR ~ Validation of pipeline parameters failed!
 Pipeline failed before execution - please fix the errors above
 ```
 
-Pipeline zawodzi natychmiast z jasnymi, działającymi komunikatami o błędach. To oszczędza czas, zasoby obliczeniowe i frustrację.
+Pipeline zawodzi natychmiast z jasnymi, rzeczowymi komunikatami o błędach. To oszczędza czas, zasoby obliczeniowe i frustrację.
 
 ### 0.2. Wtyczka nf-schema
 
-[Wtyczka nf-schema](https://nextflow-io.github.io/nf-schema/latest/) to wtyczka Nextflow, która zapewnia kompleksowe możliwości walidacji dla pipeline'ów Nextflow.
-Chociaż nf-schema działa z dowolnym workflow'em Nextflow, jest to standardowe rozwiązanie walidacyjne dla wszystkich pipeline'ów nf-core.
+[Wtyczka nf-schema](https://nextflow-io.github.io/nf-schema/latest/) to wtyczka Nextflow'a, która zapewnia kompleksowe możliwości walidacji dla pipeline'ów Nextflow'a.
+Chociaż nf-schema działa z dowolnym workflow'em Nextflow'a, jest to standardowe rozwiązanie walidacyjne dla wszystkich pipeline'ów nf-core.
 
 nf-schema zapewnia kilka kluczowych funkcji:
 
 - **Walidacja parametrów**: Waliduje parametry pipeline'u względem `nextflow_schema.json`
 - **Walidacja arkuszy próbek**: Waliduje pliki wejściowe względem `assets/schema_input.json`
-- **Konwersja kanałów**: Konwertuje zwalidowane arkusze próbek na kanały Nextflow
+- **Konwersja kanałów**: Konwertuje zwalidowane arkusze próbek na kanały Nextflow'a
 - **Generowanie tekstu pomocy**: Automatycznie generuje wyjście `--help` z definicji schematu
 - **Podsumowanie parametrów**: Wyświetla, które parametry różnią się od wartości domyślnych
 
 nf-schema jest następcą przestarzałej wtyczki nf-validation i używa standardu [JSON Schema Draft 2020-12](https://json-schema.org/) do walidacji.
 
-??? info "Czym są wtyczki Nextflow?"
+??? info "Czym są wtyczki Nextflow'a?"
 
-    Wtyczki to rozszerzenia, które dodają nowe funkcjonalności do samego języka Nextflow. Są instalowane przez blok `plugins{}` w `nextflow.config` i mogą zapewniać:
+    Wtyczki to rozszerzenia, które dodają nowe funkcjonalności do samego języka Nextflow'a. Są instalowane przez blok `plugins{}` w `nextflow.config` i mogą zapewniać:
 
     - Nowe funkcje i klasy, które można zaimportować (jak `samplesheetToList`)
     - Nowe funkcje DSL i operatory
@@ -92,7 +92,7 @@ nf-schema jest następcą przestarzałej wtyczki nf-validation i używa standard
 
 ### 0.3. Dwa pliki schematu dla dwóch typów walidacji
 
-Pipeline nf-core będzie wykorzystywał dwa oddzielne pliki schematu, które odpowiadają dwóm typom walidacji:
+Pipeline nf-core wykorzystuje dwa oddzielne pliki schematu, które odpowiadają dwóm typom walidacji:
 
 | Plik schematu              | Cel                          | Waliduje                                              |
 | -------------------------- | ---------------------------- | ----------------------------------------------------- |
@@ -101,14 +101,14 @@ Pipeline nf-core będzie wykorzystywał dwa oddzielne pliki schematu, które odp
 
 Oba schematy używają formatu JSON Schema, szeroko przyjętego standardu do opisywania i walidacji struktur danych.
 
-**Walidacja parametrów** sprawdza argumenty linii poleceń (flagi takie jak `--outdir`, `--batch`, `--input`):
+**Walidacja parametrów** sprawdza parametry linii poleceń (flagi takie jak `--outdir`, `--batch`, `--input`):
 
-- Kontroluje typy wartości, zakresy i formaty
-- Zapewnia, że wymagane opcje są podane
+- Kontroluje typy, zakresy i formaty parametrów
+- Zapewnia, że wymagane parametry są podane
 - Weryfikuje, czy ścieżki plików istnieją
 - Zdefiniowana w `nextflow_schema.json`
 
-**Walidacja danych wejściowych** sprawdza strukturę arkuszy próbek i manifestów (pliki CSV/TSV opisujące Twoje dane):
+**Walidacja danych wejściowych** sprawdza strukturę arkuszy próbek i plików manifestów (pliki CSV/TSV opisujące Twoje dane):
 
 - Kontroluje strukturę kolumn i typy danych
 - Weryfikuje, czy ścieżki wymienione w arkuszu próbek istnieją
@@ -117,9 +117,9 @@ Oba schematy używają formatu JSON Schema, szeroko przyjętego standardu do opi
 
 !!! warning "Czego walidacja danych wejściowych NIE robi"
 
-    Walidacja danych wejściowych sprawdza strukturę *plików manifestu* (arkusze próbek, pliki CSV), NIE zawartość rzeczywistych plików danych (FASTQ, BAM, VCF, itp.).
+    Walidacja danych wejściowych sprawdza strukturę *plików manifestów* (arkusze próbek, pliki CSV), NIE zawartość rzeczywistych plików danych (FASTQ, BAM, VCF, itp.).
 
-    Dla danych na dużą skalę walidacja zawartości plików (jak sprawdzanie integralności BAM) powinna odbywać się w procesach pipeline'u działających na węzłach roboczych, a nie podczas etapu walidacji na maszynie orkiestrującej.
+    W przypadku danych na dużą skalę walidacja zawartości plików (jak sprawdzanie integralności BAM) powinna odbywać się w procesach pipeline'u działających na węzłach roboczych, a nie podczas etapu walidacji na maszynie orkiestrującej.
 
 ### 0.4. Kiedy powinna nastąpić walidacja?
 
@@ -240,8 +240,8 @@ Dodamy go w następnej sekcji.
 
 ??? info "Skąd pochodzą parametry schematu?"
 
-    Walidacja schematu używa `nextflow.config` jako bazy dla definicji opcji konfiguracyjnych.
-    Wartości zadeklarowane gdzie indziej w skryptach workflow'u (jak w `main.nf` lub plikach modułów) **nie** są automatycznie przechwytywane przez walidator schematu.
+    Walidacja schematu używa `nextflow.config` jako bazy dla definicji parametrów.
+    Parametry zadeklarowane gdzie indziej w skryptach workflow'u (jak w `main.nf` lub plikach modułów) **nie** są automatycznie przechwytywane przez walidator schematu.
 
     To oznacza, że zawsze powinieneś deklarować parametry pipeline'u w `nextflow.config`, a następnie definiować ich reguły walidacji w `nextflow_schema.json`.
 
@@ -383,7 +383,7 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 
 Pipeline powinien uruchomić się pomyślnie, a parametr `batch` jest teraz walidowany.
 
-### Wnioski
+### Podsumowanie
 
 Nauczyłeś się, jak używać interaktywnego narzędzia `nf-core pipelines schema build` do dodawania parametrów do `nextflow_schema.json` i widziałeś walidację parametrów w akcji.
 Interfejs webowy obsługuje całą składnię JSON Schema za Ciebie, ułatwiając zarządzanie złożonymi schematami parametrów bez podatnej na błędy ręcznej edycji JSON.
@@ -628,7 +628,7 @@ Teraz zaktualizuj kod tworzenia kanału:
 Rozłóżmy, co się zmieniło:
 
 1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Waliduje plik wejściowy względem naszego schematu i zwraca listę
-2. **`Channel.fromList(...)`**: Konwertuje listę na kanał Nextflow
+2. **`Channel.fromList(...)`**: Konwertuje listę na kanał Nextflow'a
 
 To kończy implementację walidacji danych wejściowych używając `samplesheetToList` i schematów JSON.
 
@@ -781,7 +781,7 @@ Walidacja schematu zapewnia, że pliki wejściowe mają poprawną strukturę, za
 
 Jeśli chcesz to przećwiczyć, śmiało twórz inne pliki wejściowe powitań, które naruszają schemat na inne zabawne sposoby.
 
-### Wnioski
+### Podsumowanie
 
 Zaimplementowałeś i przetestowałeś zarówno walidację parametrów, jak i walidację danych wejściowych. Twój pipeline waliduje teraz wejścia przed wykonaniem, zapewniając szybkie informacje zwrotne i jasne komunikaty o błędach.
 

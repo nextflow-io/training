@@ -2,23 +2,23 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W częściach 1-3 nauczyliśmy się jak uruchamiać Nextflow, uruchamiać pipeline nf-core oraz zarządzać wejściami za pomocą plików parametrów i arkuszy próbek.
-Teraz zbadamy jak konfigurować pipeline'y dla różnych środowisk obliczeniowych używając **plików konfiguracyjnych** i **profili**.
+W częściach 1-3 nauczyliśmy się uruchamiać Nextflow'a, wykonywać pipeline nf-core oraz zarządzać wejściami za pomocą plików parametrów i arkuszy próbek.
+Teraz zbadamy, jak konfigurować pipeline'y dla różnych środowisk obliczeniowych przy użyciu **plików konfiguracyjnych** i **profili**.
 
 ## Cele nauczania
 
 Pod koniec tej części będziesz potrafić:
 
-- Zrozumieć jak Nextflow rozwiązuje konfigurację z wielu źródeł
+- Zrozumieć, jak Nextflow rozwiązuje konfigurację z wielu źródeł
 - Używać wbudowanych profili nf-core dla kontenerów i testowania
 - Tworzyć własne profile dla różnych środowisk obliczeniowych
-- Dostosowywać żądania zasobów używając etykiet procesów
+- Dostosowywać żądania zasobów przy użyciu etykiet procesów
 - Zarządzać limitami zasobów w ograniczonych środowiskach
 - Sprawdzać rozwiązaną konfigurację za pomocą `nextflow config`
 
 ---
 
-## 1. Zrozumienie konfiguracji Nextflow
+## 1. Zrozumienie konfiguracji Nextflow'a
 
 ### 1.1. Czym jest plik konfiguracyjny?
 
@@ -27,7 +27,7 @@ Nextflow używa plików konfiguracyjnych do oddzielenia **logiki workflow'u** (c
 Pliki konfiguracyjne kontrolują:
 
 - Silniki kontenerów (Docker, Singularity, Conda)
-- Zasoby obliczeniowe (CPU, pamięć, czas)
+- Zasoby obliczeniowe (procesory, pamięć, czas)
 - Platformy wykonania (lokalnie, HPC, chmura)
 - Parametry pipeline'u
 
@@ -36,11 +36,11 @@ Pliki konfiguracyjne kontrolują:
 Nextflow wczytuje konfigurację z wielu źródeł, przy czym późniejsze źródła nadpisują wcześniejsze:
 
 1. **Konfiguracja pipeline'u**: `nextflow.config` w repozytorium pipeline'u
-2. **Konfiguracja katalogu**: `nextflow.config` w bieżącym katalogu roboczym
+2. **Konfiguracja katalogu**: `nextflow.config` w Twoim bieżącym katalogu roboczym
 3. **Konfiguracja użytkownika**: `~/.nextflow/config`
 4. **Linia poleceń**: Parametry i opcje przekazane bezpośrednio
 
-To warstwowe podejście pozwala zachować wartości domyślne w pipeline'ie, nadpisać je ustawieniami użytkownika i dokonać szybkich dostosowań w linii poleceń.
+To warstwowe podejście pozwala zachować wartości domyślne w pipeline'ie, nadpisać je ustawieniami specyficznymi dla użytkownika i dokonać szybkich dostosowań w linii poleceń.
 
 ### 1.3. Nasza obecna konfiguracja
 
@@ -57,7 +57,7 @@ process {
 
 ```
 
-Zakomentujmy lub zmieńmy z powrotem linię `docker.enabled = true` z Części 2 i dowiedzmy się, jak możemy osiągnąć ten sam rezultat używając profilu w molkart.
+Zakomentujmy lub zmieńmy z powrotem linię `docker.enabled = true` z Części 2 i dowiedzmy się, jak możemy osiągnąć ten sam rezultat używając zamiast tego profilu w molkart.
 
 ---
 
@@ -66,7 +66,7 @@ Zakomentujmy lub zmieńmy z powrotem linię `docker.enabled = true` z Części 2
 ### 2.1. Czym są profile?
 
 Profile to nazwane zestawy konfiguracji, które można aktywować za pomocą flagi `-profile` poprzez polecenie `nextflow run`.
-Ułatwiają one przełączanie między różnymi scenariuszami obliczeniowymi bez edycji plików konfiguracyjnych.
+Ułatwiają one przełączanie między różnymi scenariuszami obliczeniowymi bez edytowania plików konfiguracyjnych.
 
 Wszystkie pipeline'y nf-core zawierają szereg domyślnych profili, z których możemy skorzystać.
 
@@ -109,7 +109,7 @@ Popularne profile kontenerów:
 
 ### 2.3. Ponowne uruchomienie z profilami zamiast nextflow.config
 
-Teraz, gdy wyłączyliśmy konfigurację docker w naszym lokalnym pliku `nextflow.config` i rozumiemy profile, uruchommy ponownie pipeline używając flagi `-profile`.
+Teraz, gdy wyłączyliśmy konfigurację dockera w naszym lokalnym pliku `nextflow.config` i rozumiemy profile, uruchommy ponownie pipeline używając flagi `-profile`.
 
 Wcześniej w Części 3 utworzyliśmy plik `params.yaml` z naszymi własnymi parametrami.
 Możemy teraz połączyć to z wbudowanym profilem Docker:
@@ -184,7 +184,7 @@ process {
 
 Zauważ, że ten profil zawiera te same parametry, których użyliśmy wcześniej w naszym pliku `params.yaml`.
 
-Możesz aktywować wiele profili oddzielając je przecinkami.
+Możesz aktywować wiele profili, oddzielając je przecinkami.
 Użyjmy tego do przetestowania naszego pipeline'u bez potrzeby używania pliku params:
 
 ```bash
@@ -205,7 +205,7 @@ Możesz łączyć wiele profili, aby zbudować potrzebną konfigurację.
 
 ### Co dalej?
 
-Naucz się jak tworzyć własne profile dla różnych środowisk obliczeniowych.
+Naucz się, jak tworzyć własne profile dla różnych środowisk obliczeniowych.
 
 ---
 
@@ -216,9 +216,9 @@ Naucz się jak tworzyć własne profile dla różnych środowisk obliczeniowych.
 Stwórzmy własne profile dla dwóch scenariuszy:
 
 1. Lokalny rozwój z Docker
-2. Uniwersytecki HPC zeSchedulerem Slurm i Singularity
+2. Uniwersytecki HPC ze schedulerem Slurm i Singularity
 
-Dodaj następujący kod do Swojego `nextflow.config`:
+Dodaj następujący kod do Twojego `nextflow.config`:
 
 ```groovy title="nextflow.config"
 profiles {
@@ -271,7 +271,7 @@ Jest to niezwykle przydatne do:
 
 - Debugowania problemów z konfiguracją
 - Zrozumienia, jakie wartości będą faktycznie użyte
-- Sprawdzania, jak wiele profili wchodzi w interakcje
+- Sprawdzania, jak wiele profili wchodzi w interakcję
 
 ### Podsumowanie
 
@@ -280,7 +280,7 @@ Użyj `nextflow config` do sprawdzenia rozwiązanej konfiguracji przed uruchomie
 
 ### Co dalej?
 
-Naucz się jak dostosować żądania zasobów dla poszczególnych procesów używając systemu etykiet procesów nf-core.
+Naucz się, jak dostosować żądania zasobów dla poszczególnych procesów używając systemu etykiet procesów nf-core.
 
 ---
 
@@ -289,7 +289,7 @@ Naucz się jak dostosować żądania zasobów dla poszczególnych procesów uży
 ### 4.1. Zrozumienie etykiet procesów w pipeline'ach nf-core
 
 Dla uproszczenia, pipeline'y nf-core używają [**etykiet procesów**](https://www.nextflow.io/docs/latest/reference/process.html#process-label) do standaryzacji alokacji zasobów we wszystkich pipeline'ach.
-Każdy proces jest oznaczony etykietą taką jak `process_low`, `process_medium` lub `process_high` w celu opisania niskich, średnich lub wysokich wymagań zasobów obliczeniowych.
+Każdy proces jest oznaczony etykietą taką jak `process_low`, `process_medium` lub `process_high` w celu opisania odpowiednio niskich, średnich lub wysokich wymagań zasobów obliczeniowych.
 Te etykiety są konwertowane na konkretne żądania zasobów w jednym z plików konfiguracyjnych znajdujących się w katalogu `conf/` pipeline'u.
 
 ```groovy title="molkart/conf/base.config (fragment)"
@@ -340,7 +340,7 @@ process {
 }
 ```
 
-Jeśli spróbujemy uruchomić ten pipeline z powyższym nadpisaniem, proces `CELLPOSE` zażąda 16 CPU i 32 GB pamięci zamiast wartości domyślnej zdefiniowanej przez jego etykietę.
+Jeśli spróbujemy uruchomić ten pipeline z powyższym nadpisaniem, proces `CELLPOSE` zażąda 16 procesorów i 32 GB pamięci zamiast wartości domyślnej zdefiniowanej przez jego etykietę.
 Spowoduje to niepowodzenie pipeline'u w naszym obecnym środowisku, ponieważ nie mamy dostępnej takiej ilości pamięci RAM.
 W następnej sekcji nauczymy się, jak zapobiegać tego typu awariom.
 
@@ -356,7 +356,7 @@ Możesz nadpisać zasoby według etykiety (wpływa na wiele procesów) lub wedł
 
 ### Co dalej?
 
-Naucz się jak zarządzać limitami zasobów w ograniczonych środowiskach takich jak GitHub Codespaces.
+Naucz się, jak zarządzać limitami zasobów w ograniczonych środowiskach takich jak GitHub Codespaces.
 
 ---
 
@@ -364,7 +364,7 @@ Naucz się jak zarządzać limitami zasobów w ograniczonych środowiskach takic
 
 ### 5.1. Problem limitów zasobów
 
-Gdybyśmy spróbowali uruchomić molkart z procesem żądającym 16 CPU i 32 GB pamięci (jak pokazano w sekcji 4.2), nie powiódłby się w naszym obecnym środowisku, ponieważ nie mamy dostępnych tylu zasobów.
+Gdybyśmy spróbowali uruchomić molkart z procesem żądającym 16 procesorów i 32 GB pamięci (jak pokazano w sekcji 4.2), nie powiódłby się w naszym obecnym środowisku, ponieważ nie mamy dostępnych tylu zasobów.
 W środowisku klastra z większymi węzłami takie żądania zostałyby przesłane do schedulera.
 
 W ograniczonych środowiskach takich jak GitHub Codespaces, bez limitów, Nextflow odmówiłby uruchomienia procesów przekraczających dostępne zasoby.
@@ -379,11 +379,11 @@ process {
 }
 ```
 
-Mówi to Nextflow: "Jeśli jakikolwiek proces zażąda więcej niż 2 CPU lub 7 GB pamięci, ogranicz to do tych limitów."
+Mówi to Nextflow'owi: "Jeśli jakikolwiek proces zażąda więcej niż 2 procesory lub 7 GB pamięci, ogranicz to do tych limitów."
 
 ### 5.3. Dodawanie limitów zasobów do własnych profili
 
-Zaktualizuj Swoje własne profile, aby zawierały odpowiednie limity:
+Zaktualizuj Twoje własne profile, aby zawierały odpowiednie limity:
 
 ```groovy title="nextflow.config"
 profiles {
@@ -417,7 +417,7 @@ profiles {
 ### Podsumowanie
 
 Użyj `resourceLimits`, aby uruchamiać pipeline'y w środowiskach z ograniczonymi zasobami poprzez ograniczenie żądań zasobów procesów.
-Różne profile mogą mieć różne limity odpowiednie dla Swojego środowiska.
+Różne profile mogą mieć różne limity odpowiednie dla Twojego środowiska.
 
 ### Co dalej?
 
@@ -427,7 +427,7 @@ Ukończyłeś podstawowe szkolenie Nextflow for Bioimaging!
 
 ## Podsumowanie
 
-Teraz rozumiesz, jak konfigurować pipeline'y Nextflow dla różnych środowisk obliczeniowych.
+Teraz rozumiesz, jak konfigurować pipeline'y Nextflow'a dla różnych środowisk obliczeniowych.
 
 Kluczowe umiejętności, których się nauczyłeś:
 
@@ -438,7 +438,7 @@ Kluczowe umiejętności, których się nauczyłeś:
 - **Limity zasobów**: Zarządzanie ograniczonymi środowiskami za pomocą `resourceLimits`
 - **Sprawdzanie konfiguracji**: Używanie `nextflow config` do debugowania i weryfikacji ustawień
 
-Te umiejętności konfiguracyjne są przydatne dla każdego pipeline'u Nextflow i pomogą Ci efektywnie uruchamiać workflow'e na lokalnych maszynach, klastrach HPC i platformach chmurowych.
+Te umiejętności konfiguracyjne są przydatne dla każdego pipeline'u Nextflow'a i pomogą Ci efektywnie uruchamiać workflow'y na lokalnych maszynach, klastrach HPC i platformach chmurowych.
 
 ### Co dalej?
 
