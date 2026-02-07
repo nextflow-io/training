@@ -16,29 +16,34 @@ LLM-powered translation CLI for Nextflow training docs.
 Usage:
     uv run translate.py sync pt --dry-run
     uv run translate.py sync pt
+    uv run translate.py sync pt --parallel 20
     uv run translate.py translate docs/en/docs/index.md --lang pt
 """
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
+import random
 import re
 import secrets
 import subprocess
 import sys
+import time
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 from typing import NamedTuple
-
-import time
 
 import anthropic
 import git
 import typer
 import yaml
 from rich.console import Console
+
+# Module-level console for output (force color in CI)
+console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
 
 # =============================================================================
@@ -508,6 +513,94 @@ def call_claude(prompt: str, console: Console | None = None) -> str:
     return "".join(result_parts).strip()
 
 
+# =============================================================================
+# Async Translation API (for parallel execution)
+# =============================================================================
+
+
+async def _call_claude_once_async(
+    client: anthropic.AsyncAnthropic,
+    messages: list[dict],
+    file_label: str = "",
+) -> anthropic.types.Message:
+    """Make a single async Claude API call with jittered exponential backoff.
+
+    Args:
+        client: Async Anthropic client
+        messages: Message history
+        file_label: Optional label for log messages (e.g., file path)
+    """
+    for attempt in range(MAX_RETRIES + 1):
+        try:
+            return await client.messages.create(
+                model=MODEL,
+                max_tokens=MAX_TOKENS,
+                timeout=REQUEST_TIMEOUT,
+                messages=messages,
+            )
+        except (
+            anthropic.APIConnectionError,
+            anthropic.APITimeoutError,
+            anthropic.RateLimitError,
+            anthropic.InternalServerError,
+        ) as e:
+            if attempt == MAX_RETRIES:
+                raise
+            # Jittered exponential backoff to avoid thundering herd
+            base_delay = BASE_DELAY * (2**attempt)
+            jitter = random.uniform(0, base_delay * 0.5)
+            delay = base_delay + jitter
+            print(
+                f"  [{file_label}] Retry {attempt + 1}/{MAX_RETRIES} "
+                f"after {delay:.1f}s: {type(e).__name__}"
+            )
+            await asyncio.sleep(delay)
+
+    raise RuntimeError("Unreachable")
+
+
+async def call_claude_async(
+    prompt: str, file_label: str = "", client: anthropic.AsyncAnthropic | None = None
+) -> str:
+    """Async version of call_claude with continuation support.
+
+    Args:
+        prompt: The translation prompt
+        file_label: Optional label for log messages
+        client: Optional shared client (creates one if not provided)
+    """
+    client = client or anthropic.AsyncAnthropic()
+    messages: list[dict] = [{"role": "user", "content": prompt}]
+
+    # Initial request
+    message = await _call_claude_once_async(client, messages, file_label)
+    result_parts = [message.content[0].text]
+
+    # Handle continuations if response was truncated
+    continuation = 0
+    while message.stop_reason == "max_tokens":
+        continuation += 1
+        if continuation > MAX_CONTINUATIONS:
+            raise TranslationError(
+                f"Response still incomplete after {MAX_CONTINUATIONS} continuations. "
+                f"File may be too large to translate."
+            )
+        print(
+            f"  [{file_label}] Response truncated, continuation "
+            f"{continuation}/{MAX_CONTINUATIONS}..."
+        )
+
+        messages.append({"role": "assistant", "content": message.content[0].text})
+        messages.append(
+            {"role": "user", "content": "Continue exactly where you left off."}
+        )
+
+        message = await _call_claude_once_async(client, messages, file_label)
+        result_parts.append(message.content[0].text)
+
+    return "".join(result_parts).strip()
+
+
 def translate_file(tf: TranslationFile, console: Console) -> None:
     """Translate a single file."""
     langs = get_languages()
@@ -527,6 +620,98 @@ def translate_file(tf: TranslationFile, console: Console) -> None:
 
     tf.lang_path.parent.mkdir(parents=True, exist_ok=True)
     tf.lang_path.write_text(f"{result}\n", encoding="utf-8", newline="\n")
+
+
+class TranslationProgress:
+    """Track translation progress across parallel tasks."""
+
+    def __init__(self, files: list["TranslationFile"], file_lines: dict[str, int]):
+        self.total = len(files)
+        self.queued: list[str] = [str(f.relative_path) for f in files]
+        self.working: list[str] = []
+        self.complete = 0
+        self.failed = 0
+        self._file_lines = file_lines
+        self.lines_total = sum(file_lines.values())
+        self.lines_complete = 0
+        self._lock = asyncio.Lock()
+        self._start_time = time.time()
+
+    async def start_one(self, filename: str):
+        async with self._lock:
+            self.queued.remove(filename)
+            self.working.append(filename)
+
+    async def finish_one(self, filename: str, success: bool = True):
+        async with self._lock:
+            self.working.remove(filename)
+            if success:
+                self.complete += 1
+                self.lines_complete += self._file_lines[filename]
+            else:
+                self.failed += 1
+
+    def status(self) -> str:
+        """Return a status line with aligned columns, using Rich colors."""
+        elapsed = int(time.time() - self._start_time)
+        mins, secs = divmod(elapsed, 60)
+        lines_remaining = self.lines_total - self.lines_complete
+        w = len(str(self.total))  # width for padding
+        line = (
+            f"[dim][{mins:02d}:{secs:02d}][/dim] "
+            f"[green]{self.complete:>{w}}/{self.total}[/green] files complete, "
+            f"[cyan]{_format_lines(lines_remaining):>5}[/cyan] lines remaining, "
+            f"[yellow]{len(self.working):>{w}}[/yellow] files underway"
+        )
+        if self.failed:
+            line += f", [red]{self.failed} failed[/red]"
+        return line
+
+
+def _format_lines(n: int) -> str:
+    """Format line count with k suffix for thousands."""
+    if n >= 1000:
+        return f"{n / 1000:.1f}k"
+    return str(n)
+
+
+async def _progress_logger(progress: TranslationProgress, interval: float = 10.0):
+    """Print progress status every interval seconds, starting immediately."""
+    console.print(
+        f"[dim][00:00][/dim] Starting: [bold]{progress.total}[/bold] files, [bold]{_format_lines(progress.lines_total)}[/bold] lines"
+    )
+    while progress.complete + progress.failed < progress.total:
+        await asyncio.sleep(interval)
+        console.print(progress.status())
+
+
+async def translate_file_async(
+    tf: TranslationFile,
+    semaphore: asyncio.Semaphore,
+    progress: TranslationProgress,
+    client: anthropic.AsyncAnthropic,
+) -> None:
+    """Translate a single file (async version for parallel execution)."""
+    filename = str(tf.relative_path)
+    async with semaphore:
+        await progress.start_one(filename)
+        try:
+            langs = get_languages()
+            en_content = tf.en_path.read_text(encoding="utf-8")
+            existing = tf.lang_path.read_text(encoding="utf-8") if tf.exists else None
+
+            prompt = build_translation_prompt(
+                tf.language, langs[tf.language], en_content, existing
+            )
+            result = await call_claude_async(prompt, filename, client)
+
+            tf.lang_path.parent.mkdir(parents=True, exist_ok=True)
+            tf.lang_path.write_text(f"{result}\n", encoding="utf-8", newline="\n")
+            post_process_file(tf.lang_path, tf.language)
+            await progress.finish_one(filename, success=True)
+        except Exception:
+            await progress.finish_one(filename, success=False)
+            raise
 
 
 # =============================================================================
@@ -815,7 +1000,6 @@ def translate(
 ):
     """Translate a single file."""
     check_api_key()
-    console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
     if lang == "en":
         raise typer.Exit("Cannot translate to English")
@@ -828,6 +1012,48 @@ def translate(
     console.print(f"[green]Done:[/green] {tf.lang_path}")
 
 
+DEFAULT_PARALLEL = 50
+
+
+async def _translate_all(files: list[TranslationFile], parallel: int) -> None:
+    """Translate all files in parallel with progress logging."""
+    # Pre-compute line counts once (used for sorting and progress tracking)
+    file_lines = {
+        str(f.relative_path): f.en_path.read_text().count("\n") for f in files
+    }
+
+    # Sort largest files first to avoid "long pole" problem
+    files.sort(key=lambda f: file_lines[str(f.relative_path)], reverse=True)
+
+    semaphore = asyncio.Semaphore(parallel)
+    progress = TranslationProgress(files, file_lines)
+    client = anthropic.AsyncAnthropic()
+
+    # Create translation tasks
+    tasks = [translate_file_async(tf, semaphore, progress, client) for tf in files]
+
+    # Run translations with progress logger
+    logger_task = asyncio.create_task(_progress_logger(progress))
+    try:
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+    finally:
+        logger_task.cancel()
+        try:
+            await logger_task
+        except asyncio.CancelledError:
+            pass
+
+    # Print final status
+    console.print(f"[bold green]Translation complete:[/bold green] {progress.status()}")
+
+    # Raise if any failed
+    errors = [r for r in results if isinstance(r, Exception)]
+    if errors:
+        for e in errors:
+            console.print(f"[red]Error: {e}[/red]")
+        raise errors[0]
+
+
 @app.command()
 def sync(
     lang: str = typer.Argument(..., help="Language code"),
@@ -838,6 +1064,12 @@ def sync(
         help="Compare since this commit (default: auto-detect from last translation PR)",
     ),
     dry_run: bool = typer.Option(False, "--dry-run", "-n", help="Preview only"),
+    parallel: int = typer.Option(
+        DEFAULT_PARALLEL,
+        "--parallel",
+        "-p",
+        help="Max concurrent translations (default: 50)",
+    ),
 ):
     """Sync translations: update outdated, add missing, remove orphaned."""
     console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
@@ -900,23 +1132,15 @@ def sync(
             p.unlink()
             console.print(f"  [red]Removed:[/red] {p.relative_to(REPO_ROOT)}")
 
-    # Update outdated
-    if outdated:
-        console.print(f"[bold]Updating {len(outdated)} outdated...[/bold]")
-        for i, tf in enumerate(outdated, 1):
-            console.print(f"[{i}/{len(outdated)}]", end="", style="blue")
-            translate_file(tf, console)
-            post_process_file(tf.lang_path, lang)
+    # Run translations in parallel
+    all_files = outdated + missing
+    if all_files:
+        print(
+            f"Translating {len(all_files)} files with parallel={parallel}. Largest files first."
+        )
+        asyncio.run(_translate_all(all_files, parallel))
 
-    # Add missing
-    if missing:
-        console.print(f"[bold]Adding {len(missing)} missing...[/bold]")
-        for i, tf in enumerate(missing, 1):
-            console.print(f"[{i}/{len(missing)}]", end="")
-            translate_file(tf, console)
-            post_process_file(tf.lang_path, lang)
-
-    console.print("[green]:white_check_mark: Sync complete[/green]")
+    console.print("[green]✓ Sync complete[/green]")
 
 
 # =============================================================================
