@@ -23,15 +23,16 @@ Usage:
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import os
 import random
 import re
 import secrets
 import subprocess
-import sys
 import time
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
+from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
 from typing import NamedTuple
@@ -559,15 +560,30 @@ async def _call_claude_once_async(
     raise RuntimeError("Unreachable")
 
 
+@dataclass
+class TranslationResult:
+    """Result from Claude API including metadata."""
+
+    text: str
+    model: str
+    input_tokens: int
+    output_tokens: int
+    stop_reason: str
+    continuations: int
+
+
 async def call_claude_async(
     prompt: str, file_label: str = "", client: anthropic.AsyncAnthropic | None = None
-) -> str:
+) -> TranslationResult:
     """Async version of call_claude with continuation support.
 
     Args:
         prompt: The translation prompt
         file_label: Optional label for log messages
         client: Optional shared client (creates one if not provided)
+
+    Returns:
+        TranslationResult with text and API metadata
     """
     client = client or anthropic.AsyncAnthropic()
     messages: list[dict] = [{"role": "user", "content": prompt}]
@@ -575,19 +591,21 @@ async def call_claude_async(
     # Initial request
     message = await _call_claude_once_async(client, messages, file_label)
     result_parts = [message.content[0].text]
+    total_input_tokens = message.usage.input_tokens
+    total_output_tokens = message.usage.output_tokens
 
     # Handle continuations if response was truncated
-    continuation = 0
+    continuations = 0
     while message.stop_reason == "max_tokens":
-        continuation += 1
-        if continuation > MAX_CONTINUATIONS:
+        continuations += 1
+        if continuations > MAX_CONTINUATIONS:
             raise TranslationError(
                 f"Response still incomplete after {MAX_CONTINUATIONS} continuations. "
                 f"File may be too large to translate."
             )
         print(
             f"  [{file_label}] Response truncated, continuation "
-            f"{continuation}/{MAX_CONTINUATIONS}..."
+            f"{continuations}/{MAX_CONTINUATIONS}..."
         )
 
         messages.append({"role": "assistant", "content": message.content[0].text})
@@ -597,8 +615,17 @@ async def call_claude_async(
 
         message = await _call_claude_once_async(client, messages, file_label)
         result_parts.append(message.content[0].text)
+        total_input_tokens += message.usage.input_tokens
+        total_output_tokens += message.usage.output_tokens
 
-    return "".join(result_parts).strip()
+    return TranslationResult(
+        text="".join(result_parts).strip(),
+        model=message.model,
+        input_tokens=total_input_tokens,
+        output_tokens=total_output_tokens,
+        stop_reason=message.stop_reason,
+        continuations=continuations,
+    )
 
 
 def translate_file(tf: TranslationFile, console: Console) -> None:
@@ -620,6 +647,93 @@ def translate_file(tf: TranslationFile, console: Console) -> None:
 
     tf.lang_path.parent.mkdir(parents=True, exist_ok=True)
     tf.lang_path.write_text(f"{result}\n", encoding="utf-8", newline="\n")
+
+
+@dataclass
+class FileLogEntry:
+    """Log entry for a single file translation."""
+
+    filename: str
+    started_at: str
+    finished_at: str = ""
+    duration_s: float = 0.0
+    input_lines: int = 0
+    input_hash: str = ""
+    output_lines: int = 0
+    output_hash: str = ""
+    changed: bool = False
+    error: str = ""
+    # API response metadata
+    model: str = ""
+    input_tokens: int = 0
+    output_tokens: int = 0
+    stop_reason: str = ""
+    continuations: int = 0
+
+
+class TranslationLog:
+    """Verbose log for debugging translation runs."""
+
+    def __init__(
+        self,
+        log_path: Path,
+        baseline: str,
+        language: str,
+        parallel: int,
+        total_files: int,
+    ):
+        self.path = log_path
+        self.baseline = baseline
+        self.language = language
+        self.parallel = parallel
+        self.total_files = total_files
+        self.entries: list[FileLogEntry] = []
+        self._lock = asyncio.Lock()
+        self.started_at = datetime.now().isoformat()
+
+    async def add_entry(self, entry: FileLogEntry):
+        async with self._lock:
+            self.entries.append(entry)
+
+    def write(self):
+        if not self.path:
+            return
+        data = {
+            "started_at": self.started_at,
+            "finished_at": datetime.now().isoformat(),
+            "baseline": self.baseline,
+            "language": self.language,
+            "parallel": self.parallel,
+            "total_files": self.total_files,
+            "files_changed": sum(1 for e in self.entries if e.changed),
+            "files_unchanged": sum(
+                1 for e in self.entries if not e.changed and not e.error
+            ),
+            "files_failed": sum(1 for e in self.entries if e.error),
+            "total_input_tokens": sum(e.input_tokens for e in self.entries),
+            "total_output_tokens": sum(e.output_tokens for e in self.entries),
+            "files": [
+                {
+                    "filename": e.filename,
+                    "started_at": e.started_at,
+                    "finished_at": e.finished_at,
+                    "duration_s": round(e.duration_s, 2),
+                    "input_lines": e.input_lines,
+                    "input_hash": e.input_hash,
+                    "output_lines": e.output_lines,
+                    "output_hash": e.output_hash,
+                    "changed": e.changed,
+                    "error": e.error,
+                    "model": e.model,
+                    "input_tokens": e.input_tokens,
+                    "output_tokens": e.output_tokens,
+                    "stop_reason": e.stop_reason,
+                    "continuations": e.continuations,
+                }
+                for e in sorted(self.entries, key=lambda x: x.started_at)
+            ],
+        }
+        self.path.write_text(json.dumps(data, indent=2), encoding="utf-8")
 
 
 class TranslationProgress:
@@ -690,9 +804,13 @@ async def translate_file_async(
     semaphore: asyncio.Semaphore,
     progress: TranslationProgress,
     client: anthropic.AsyncAnthropic,
+    log: TranslationLog | None = None,
 ) -> None:
     """Translate a single file (async version for parallel execution)."""
     filename = str(tf.relative_path)
+    entry = FileLogEntry(filename=filename, started_at=datetime.now().isoformat())
+    start_time = time.time()
+
     async with semaphore:
         await progress.start_one(filename)
         try:
@@ -700,18 +818,42 @@ async def translate_file_async(
             en_content = tf.en_path.read_text(encoding="utf-8")
             existing = tf.lang_path.read_text(encoding="utf-8") if tf.exists else None
 
+            entry.input_lines = en_content.count("\n") + 1
+            entry.input_hash = hashlib.md5(en_content.encode()).hexdigest()[:12]
+
             prompt = build_translation_prompt(
                 tf.language, langs[tf.language], en_content, existing
             )
             result = await call_claude_async(prompt, filename, client)
+            output_content = f"{result.text}\n"
+
+            # Log API response metadata
+            entry.model = result.model
+            entry.input_tokens = result.input_tokens
+            entry.output_tokens = result.output_tokens
+            entry.stop_reason = result.stop_reason
+            entry.continuations = result.continuations
 
             tf.lang_path.parent.mkdir(parents=True, exist_ok=True)
-            tf.lang_path.write_text(f"{result}\n", encoding="utf-8", newline="\n")
+            tf.lang_path.write_text(output_content, encoding="utf-8", newline="\n")
             post_process_file(tf.lang_path, tf.language)
+
+            # Compute hash and changed flag AFTER post-processing
+            final_content = tf.lang_path.read_text(encoding="utf-8")
+            entry.output_lines = final_content.count("\n")
+            entry.output_hash = hashlib.md5(final_content.encode()).hexdigest()[:12]
+            entry.changed = existing is None or existing != final_content
+
             await progress.finish_one(filename, success=True)
-        except Exception:
+        except Exception as e:
+            entry.error = str(e)
             await progress.finish_one(filename, success=False)
             raise
+        finally:
+            entry.finished_at = datetime.now().isoformat()
+            entry.duration_s = time.time() - start_time
+            if log:
+                await log.add_entry(entry)
 
 
 # =============================================================================
@@ -1015,7 +1157,9 @@ def translate(
 DEFAULT_PARALLEL = 50
 
 
-async def _translate_all(files: list[TranslationFile], parallel: int) -> None:
+async def _translate_all(
+    files: list[TranslationFile], parallel: int, log: TranslationLog | None = None
+) -> None:
     """Translate all files in parallel with progress logging."""
     # Pre-compute line counts once (used for sorting and progress tracking)
     file_lines = {
@@ -1030,7 +1174,7 @@ async def _translate_all(files: list[TranslationFile], parallel: int) -> None:
     client = anthropic.AsyncAnthropic()
 
     # Create translation tasks
-    tasks = [translate_file_async(tf, semaphore, progress, client) for tf in files]
+    tasks = [translate_file_async(tf, semaphore, progress, client, log) for tf in files]
 
     # Run translations with progress logger
     logger_task = asyncio.create_task(_progress_logger(progress))
@@ -1042,6 +1186,11 @@ async def _translate_all(files: list[TranslationFile], parallel: int) -> None:
             await logger_task
         except asyncio.CancelledError:
             pass
+
+    # Write log if enabled
+    if log:
+        log.write()
+        console.print(f"[dim]Log written to: {log.path}[/dim]")
 
     # Print final status
     console.print(f"[bold green]Translation complete:[/bold green] {progress.status()}")
@@ -1069,6 +1218,11 @@ def sync(
         "--parallel",
         "-p",
         help="Max concurrent translations (default: 50)",
+    ),
+    log_file: Path | None = typer.Option(
+        None,
+        "--log",
+        help="Write detailed JSON log to file",
     ),
 ):
     """Sync translations: update outdated, add missing, remove orphaned."""
@@ -1138,7 +1292,13 @@ def sync(
         print(
             f"Translating {len(all_files)} files with parallel={parallel}. Largest files first."
         )
-        asyncio.run(_translate_all(all_files, parallel))
+        # Set up verbose log if requested
+        log = (
+            TranslationLog(log_file, baseline, lang, parallel, len(all_files))
+            if log_file
+            else None
+        )
+        asyncio.run(_translate_all(all_files, parallel, log))
 
     console.print("[green]✓ Sync complete[/green]")
 

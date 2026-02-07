@@ -75,7 +75,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: _scripts
-        run: uv run -q translate.py sync ${{ matrix.language }}
+        run: uv run -q translate.py sync ${{ matrix.language }} --log translate-${{ matrix.language }}.json
 
       - name: Dry run ${{ matrix.language }}
         if: ${{ inputs.dry_run }}
@@ -92,6 +92,15 @@ jobs:
           name: translation-${{ matrix.language }}
           path: docs/${{ matrix.language }}/docs/
           retention-days: 1
+          if-no-files-found: ignore
+
+      - name: Upload translation log
+        if: ${{ !inputs.dry_run && always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: log-${{ matrix.language }}
+          path: _scripts/translate-${{ matrix.language }}.json
+          retention-days: 7
           if-no-files-found: ignore
 
   merge:
