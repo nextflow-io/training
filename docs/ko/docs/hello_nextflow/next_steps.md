@@ -10,7 +10,7 @@ Hello Nextflow 교육 과정을 완료하신 것을 축하드립니다! 🎉
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube 채널에서 [전체 재생 목록](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik)을 확인하세요.
+:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube 채널에서 [전체 재생 목록](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n)을 확인하세요.
 
 :green_book: 비디오와 함께 [비디오 스크립트](./transcripts/07_next_steps.md)를 읽을 수 있습니다.
 ///

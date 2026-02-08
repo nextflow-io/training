@@ -18,7 +18,7 @@ additional_information:
     - "**대상:** 이 과정은 Nextflow를 처음 접하고 자체 파이프라인을 개발하고자 하는 학습자를 위해 설계되었습니다."
     - "**기술:** 명령줄, 기본 스크립팅 개념 및 일반적인 파일 형식에 대한 약간의 친숙함이 있다고 가정합니다."
     - "**도메인:** 모든 연습은 도메인에 구애받지 않으므로 사전 과학적 지식이 필요하지 않습니다."
-  videos_playlist: https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik
+  videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
 
 # Hello Nextflow

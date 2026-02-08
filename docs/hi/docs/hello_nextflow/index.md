@@ -18,7 +18,7 @@ additional_information:
     - "**दर्शक:** यह कोर्स उन learners के लिए डिज़ाइन किया गया है जो Nextflow में बिल्कुल नए हैं और अपने खुद के pipelines विकसित करना चाहते हैं।"
     - "**कौशल:** command line, बुनियादी scripting concepts और सामान्य file formats से कुछ परिचितता मानी गई है।"
     - "**डोमेन:** सभी exercises डोमेन-अज्ञेयवादी हैं, इसलिए कोई पूर्व वैज्ञानिक ज्ञान आवश्यक नहीं है।"
-  videos_playlist: https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik
+  videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
 
 # Hello Nextflow

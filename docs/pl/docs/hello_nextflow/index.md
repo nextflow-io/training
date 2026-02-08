@@ -18,7 +18,7 @@ additional_information:
     - "**Odbiorcy:** Ten kurs jest przeznaczony dla osób, które są całkowicie nowe w Nextflow i chcą tworzyć własne pipeline'y."
     - "**Umiejętności:** Zakłada się pewną znajomość wiersza poleceń, podstawowych koncepcji skryptowych i popularnych formatów plików."
     - "**Dziedzina:** Ćwiczenia są niezależne od dziedziny, więc nie jest wymagana wcześniejsza wiedza naukowa."
-  videos_playlist: https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik
+  videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
 
 # Hello Nextflow

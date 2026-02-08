@@ -8,7 +8,7 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Sieh dir [die ganze Playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) auf dem Nextflow YouTube-Kanal an.
+:fontawesome-brands-youtube:{ .youtube } Sieh dir [die ganze Playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) auf dem Nextflow YouTube-Kanal an.
 
 :green_book: Das Videotranskript ist [hier](./transcripts/05_hello_containers.md) verfügbar.
 ///

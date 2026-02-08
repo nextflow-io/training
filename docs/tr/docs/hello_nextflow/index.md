@@ -18,7 +18,7 @@ additional_information:
     - "**Hedef kitle:** Bu kurs, Nextflow'a tamamen yeni olan ve kendi iş akışlarını geliştirmek isteyen öğrenciler için tasarlanmıştır."
     - "**Beceriler:** Komut satırı, temel betik kavramları ve yaygın dosya formatları ile biraz aşinalık varsayılmaktadır."
     - "**Alan:** Alıştırmaların tümü alana bağımlı değildir, bu nedenle önceden bilimsel bilgi gerekmez."
-  videos_playlist: https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik
+  videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
 
 # Hello Nextflow

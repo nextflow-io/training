@@ -8,7 +8,7 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Obejrzyj [całą playlistę](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) na kanale YouTube Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Obejrzyj [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow.
 
 :green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/04_hello_modules.md).
 ///

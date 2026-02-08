@@ -18,7 +18,7 @@ additional_information:
     - "**Audiencia:** Este curso está diseñado para estudiantes que son completamente nuevos en Nextflow y quieren desarrollar sus propios pipelines."
     - "**Habilidades:** Se asume cierta familiaridad con la línea de comandos, conceptos básicos de scripting y formatos de archivo comunes."
     - "**Dominio:** Los ejercicios son todos independientes del dominio, por lo que no se requiere conocimiento científico previo."
-  videos_playlist: https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik
+  videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
 
 # Hello Nextflow

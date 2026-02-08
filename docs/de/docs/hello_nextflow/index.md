@@ -18,7 +18,7 @@ additional_information:
     - "**Zielgruppe:** Dieser Kurs ist für Lernende konzipiert, die komplett neu bei Nextflow sind und eigene Pipelines entwickeln möchten."
     - "**Fähigkeiten:** Grundlegende Vertrautheit mit der Befehlszeile, grundlegenden Scripting-Konzepten und gängigen Dateiformaten wird vorausgesetzt."
     - "**Fachgebiet:** Die Übungen sind alle fachgebietsunabhängig, daher ist kein wissenschaftliches Vorwissen erforderlich."
-  videos_playlist: https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik
+  videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
 
 # Hello Nextflow

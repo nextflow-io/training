@@ -8,7 +8,7 @@ Congratulations on completing the Hello Nextflow training course! 🎉
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n).
 
 :green_book: You can read the [video transcript](./transcripts/07_next_steps.md) alongside the video.
 ///

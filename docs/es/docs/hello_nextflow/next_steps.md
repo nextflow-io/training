@@ -8,7 +8,7 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Vea la [lista de reproducción completa en el canal de YouTube de Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } Vea la [lista de reproducción completa en el canal de YouTube de Nextflow](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n).
 
 :green_book: Puede leer la [transcripción del video](./transcripts/07_next_steps.md) junto con el video.
 ///
