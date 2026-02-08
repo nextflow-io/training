@@ -448,7 +448,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     }
 
     /*
-    * Use a text replacement tool to convert the greeting to uppercase
+    * अभिवादन को uppercase में बदलने के लिए एक text replacement tool का उपयोग करें
     */
     process convertToUpper {
 
@@ -465,7 +465,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     }
 
     /*
-    * Collect uppercase greetings into a single output file
+    * Uppercase greetings को एक single output फ़ाइल में collect करें
     */
     process collectGreetings {
 
@@ -872,7 +872,7 @@ Workflow में module use करने के लिए, तुम बस �
 तुम देखते हो कि workflow logic पिछले workflow version के exactly same है।
 हालांकि, process code workflow फ़ाइल से गायब है, और इसके बजाय `modules` के अंतर्गत अलग फ़ाइलों की ओर point करने वाले `include` statements हैं।
 
-```groovy title="hello-modules.nf" linenums="3"
+```groovy title="2c-modules.nf" linenums="3"
 // Modules को include करें
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -924,9 +924,9 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 तुम देखोगे कि सभी process executions successfully cached हुए, मतलब Nextflow ने recognize किया कि यह requested work पहले ही कर चुका है, भले ही code split हो गया है और main workflow फ़ाइल का नाम बदल गया है।
@@ -1223,9 +1223,9 @@ Workflow पिछले वाले के बहुत similar है, plus `
 
 तुम देखते हो कि यह workflow एक module फ़ाइल से `cowpy` process import करती है, और इसे `collectGreetings()` call के output पर call करती है, plus `params.character` नाम का एक input parameter।
 
-```groovy title="2d-container.nf" linenums="25"
+```groovy title="2d-container.nf" linenums="31"
 // cowpy के साथ ASCII art जनरेट करें
-cowpy(collectGreetings.out, params.character)
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 `cowpy` process, जो ASCII art generate करने के लिए cowpy कमांड wrap करता है, `cowpy.nf` module में defined है।

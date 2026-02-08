@@ -91,7 +91,8 @@ prettier --write docs/**/*.md
 
 - **DSL2 only**: All examples use DSL2 syntax
 - **UPPERCASE processes**: Process names like `PROCESS_NAME`
-- **Shebang required**: `#!/usr/bin/env nextflow`
+- **Shebang required**: `#!/usr/bin/env nextflow` in scripts with an entry workflow
+- **No Shebang** in module files, i.e. `**/modules/*.nf`
 - **Educational focus**: Keep examples simple and well-commented
 - **Dot notation for channels**: Use `.map{}`, `.view{}` instead of pipe operators
 

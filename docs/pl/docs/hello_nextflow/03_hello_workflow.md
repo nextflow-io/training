@@ -1,25 +1,21 @@
 # Część 3: Hello Workflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/zJP7cUYPEbA?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Obejrzyj [całą playlistę](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) na kanale YouTube Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Obejrzyj [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow.
 
 :green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/03_hello_workflow.md).
 ///
--->
 
 Większość rzeczywistych workflow składa się z więcej niż jednego kroku.
 W tym module szkoleniowym nauczysz się łączyć procesy w wieloetapowy workflow.
 
 Poznasz następujące techniki Nextflow'a:
 
-1. Przekazywanie danych z jednego procesu do następnego
+1. Przepływ danych z jednego procesu do następnego
 2. Zbieranie wyjść z wielu wywołań procesu do pojedynczego wywołania
 3. Przekazywanie dodatkowych parametrów do procesu
 4. Obsługę wielu wyjść pochodzących z procesu
@@ -27,20 +23,20 @@ Poznasz następujące techniki Nextflow'a:
 Dla demonstracji będziemy kontynuować rozbudowę domenowo-agnostycznego przykładu Hello World z Części 1 i 2.
 Tym razem wprowadzimy następujące zmiany w naszym workflow, aby lepiej odzwierciedlić sposób budowania rzeczywistych workflow:
 
-1. Dodamy drugi krok, który konwertuje pozdrowienie na wielkie litery.
-2. Dodamy trzeci krok, który zbiera wszystkie przekształcone pozdrowienia i zapisuje je do pojedynczego pliku.
+1. Dodamy drugi krok konwertujący pozdrowienie na wielkie litery.
+2. Dodamy trzeci krok zbierający wszystkie przekształcone pozdrowienia i zapisujący je do pojedynczego pliku.
 3. Dodamy parametr do nazwania końcowego pliku wyjściowego i przekażemy go jako dodatkowe wejście do kroku zbierania.
 4. Sprawimy, że krok zbierania będzie również raportował prostą statystykę o tym, co zostało przetworzone.
 
 ??? info "Jak zacząć od tej sekcji"
 
-    Ta sekcja kursu zakłada, że ukończyłeś Części 1-2 kursu [Hello Nextflow](./index.md), ale jeśli znasz podstawy omówione w tych sekcjach, możesz zacząć od tego miejsca bez dodatkowych przygotowań.
+    Ta sekcja kursu zakłada, że ukończyłeś Części 1-2 kursu [Hello Nextflow](./index.md), ale jeśli czujesz się komfortowo z podstawami omówionymi w tych sekcjach, możesz zacząć od tego miejsca bez dodatkowych przygotowań.
 
 ---
 
 ## 0. Rozgrzewka: Uruchom `hello-workflow.nf`
 
-Użyjemy skryptu workflow `hello-workflow.nf` jako punktu wyjścia.
+Użyjemy skryptu workflow'a `hello-workflow.nf` jako punktu wyjścia.
 Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 2 tego szkolenia, z tą różnicą, że usunęliśmy instrukcje `view()` i zmieniliśmy miejsce docelowe wyjścia:
 
 ```groovy title="hello-workflow.nf" linenums="37" hl_lines="3"
@@ -111,11 +107,11 @@ W tym celu musimy wykonać trzy rzeczy:
 
 Do konwersji pozdrowień na wielkie litery użyjemy klasycznego narzędzia UNIX o nazwie `tr` (od 'text replacement'), z następującą składnią:
 
-```bash title="Składnia"
+```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
 ```
 
-Jest to bardzo prosty one-liner do zamiany tekstu, który nie uwzględnia liter z akcentami, więc na przykład 'Holà' zostanie zamienione na 'HOLà', ale wystarczająco dobrze posłuży do demonstracji koncepcji Nextflow'a i to jest najważniejsze.
+To bardzo naiwny one-liner do zamiany tekstu, który nie uwzględnia liter z akcentami, więc na przykład 'Holà' zostanie zamienione na 'HOLà', ale wystarczająco dobrze posłuży do demonstracji koncepcji Nextflow'a i to jest najważniejsze.
 
 Aby to przetestować, możemy uruchomić polecenie `echo 'Hello World'` i przekierować jego wyjście do polecenia `tr`:
 
@@ -153,7 +149,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 ```
@@ -172,13 +168,13 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
     workflow {
 
         main:
-        // utwórz kanał dla danych wejściowych z pliku CSV
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // emit a greeting
         sayHello(greeting_ch)
-        // przekształć pozdrowienie na wielkie litery
+        // convert the greeting to uppercase
         convertToUpper()
 
         publish:
@@ -192,11 +188,11 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
     workflow {
 
         main:
-        // utwórz kanał dla danych wejściowych z pliku CSV
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // wyemituj pozdrowienie
+        // emit a greeting
         sayHello(greeting_ch)
 
         publish:
@@ -224,18 +220,18 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // przekształć pozdrowienie na wielkie litery
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
     ```
 
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // przekształć pozdrowienie na wielkie litery
+        // convert the greeting to uppercase
         convertToUpper()
     ```
 
-Dla prostego przypadku takiego jak ten (jedno wyjście do jednego wejścia), to wszystko, co musimy zrobić, aby połączyć dwa procesy!
+W prostym przypadku takim jak ten (jedno wyjście do jednego wejścia), to wszystko, co musimy zrobić, aby połączyć dwa procesy!
 
 ### 1.5. Skonfiguruj publikowanie wyjść workflow'a
 
@@ -520,10 +516,10 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // przekształć pozdrowienie na wielkie litery
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
 
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -531,7 +527,7 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="75"
-        // przekształć pozdrowienie na wielkie litery
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
     }
     ```
@@ -598,7 +594,7 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -606,7 +602,7 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -618,10 +614,10 @@ Dodajmy również kilka instrukcji `view()`, aby zwizualizować stany kanału pr
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
 
-        // opcjonalne instrukcje view
+        // optional view statements
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
@@ -630,7 +626,7 @@ Dodajmy również kilka instrukcji `view()`, aby zwizualizować stany kanału pr
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -699,17 +695,17 @@ Zanim przejdziesz do następnej sekcji, zalecamy usunięcie instrukcji `view()`,
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     ```
 
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
 
-        // opcjonalne instrukcje view
+        // optional view statements
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
@@ -853,14 +849,14 @@ W bloku workflow wprowadź następującą zmianę w kodzie:
 === "Po"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
 === "Przed"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // zbierz wszystkie pozdrowienia do jednego pliku
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     ```
 
@@ -1147,7 +1143,7 @@ Jak uzyskujesz dostęp do wyjścia procesu w bloku workflow?
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego procesu](#14-przekaz-wyjscie-pierwszego-procesu-do-drugiego-procesu)
+Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego procesu](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1157,7 +1153,7 @@ Co determinuje kolejność wykonywania procesów w Nextflow?
 - [x] Zależności danych między procesami
 - [ ] Losowa kolejność dla równoległego wykonania
 
-Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego procesu](#14-przekaz-wyjscie-pierwszego-procesu-do-drugiego-procesu)
+Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego procesu](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1176,7 +1172,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście](#24-uzyj-operatora-do-zebrania-pozdrowien-w-pojedyncze-wejscie)
+Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1186,7 +1182,7 @@ Kiedy należy używać operatora `collect()`?
 - [x] Gdy proces następczy potrzebuje wszystkich elementów z procesu poprzedzającego
 - [ ] Gdy chcesz rozdzielić dane między wiele procesów
 
-Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście](#24-uzyj-operatora-do-zebrania-pozdrowien-w-pojedyncze-wejscie)
+Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1196,7 +1192,7 @@ Jak uzyskujesz dostęp do nazwanego wyjścia z procesu?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-wyemituj-plik-raportu-i-nazwij-wyjscia)
+Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1206,7 +1202,7 @@ Jaka jest poprawna składnia do nazywania wyjścia w procesie?
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-wyemituj-plik-raportu-i-nazwij-wyjscia)
+Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1216,5 +1212,5 @@ Przy dostarczaniu wielu wejść do procesu, co musi być prawdą?
 - [x] Kolejność wejść musi odpowiadać kolejności zdefiniowanej w bloku input
 - [ ] Tylko dwa wejścia mogą być podane jednocześnie
 
-Dowiedz się więcej: [3. Przekaż więcej niż jedno wejście do procesu](#3-przekaz-wiecej-niz-jedno-wejscie-do-procesu)
+Dowiedz się więcej: [3. Przekaż dodatkowe parametry do procesu](#3-pass-more-than-one-input-to-a-process)
 </quiz>

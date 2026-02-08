@@ -4,7 +4,7 @@
 
 Cette section explorera comment gérer la configuration d'un pipeline Nextflow afin de personnaliser son comportement, l'adapter à différents environnements et optimiser l'utilisation des ressources _sans modifier une seule ligne du code du workflow lui-même_.
 
-Il existe plusieurs façons de le faire, qui peuvent être utilisées en combinaison et sont interprétées selon l'ordre de priorité décrit [ici](https://www.nextflow.io/docs/latest/config.html).
+Il existe plusieurs façons de le faire, qui peuvent être utilisées en combinaison et sont interprétées selon l'ordre de priorité décrit dans la documentation [Configuration](https://nextflow.io/docs/latest/config.html).
 
 Dans cette partie de la formation, nous allons vous montrer le mécanisme de fichier de configuration le plus simple et le plus courant, le fichier `nextflow.config`, que vous avez déjà rencontré dans la section sur les conteneurs de la Partie 2.
 
@@ -13,7 +13,7 @@ En apprenant à utiliser efficacement ces options de configuration, vous pourrez
 
 Pour exercer ces éléments de configuration, nous allons exécuter une nouvelle copie du workflow que nous avons exécuté à la fin de la Partie 2 de cette formation, renommé `3-main.nf`.
 
-Si vous n'êtes pas familier avec le pipeline Hello ou si vous avez besoin d'un rappel, consultez [cette page d'information](../info/hello_pipeline.md).
+Si vous n'êtes pas familier·ère avec le pipeline Hello ou si vous avez besoin d'un rappel, consultez [cette page d'information](../info/hello_pipeline.md).
 
 ---
 
@@ -22,7 +22,7 @@ Si vous n'êtes pas familier avec le pipeline Hello ou si vous avez besoin d'un 
 ??? example "Scénario"
 
     Vous avez téléchargé un pipeline et souhaitez l'exécuter de manière répétée avec les mêmes fichiers d'entrée et paramètres, mais vous ne voulez pas taper tous les paramètres à chaque fois.
-    Ou peut-être configurez-vous le pipeline pour un collègue qui n'est pas à l'aise avec les arguments en ligne de commande.
+    Ou peut-être configurez-vous le pipeline pour un·e collègue qui n'est pas à l'aise avec les arguments en ligne de commande.
 
 Nous allons commencer par un aspect de la configuration qui est simplement une extension de ce avec quoi nous avons travaillé jusqu'à présent : la gestion des paramètres d'entrée.
 
@@ -270,12 +270,12 @@ Maintenant regardons une autre façon utile de définir des valeurs de paramètr
 
 ??? example "Scénario"
 
-    Vous devez partager les paramètres exacts d'exécution avec un collaborateur, ou les enregistrer pour une publication.
+    Vous devez partager les paramètres exacts d'exécution avec un·e collaborateur·trice, ou les enregistrer pour une publication.
 
 L'approche du sous-répertoire fonctionne très bien pour expérimenter, mais elle implique un peu de configuration et nécessite que vous adaptiez les chemins en conséquence.
 Il existe une approche plus simple pour quand vous voulez exécuter votre pipeline avec un ensemble spécifique de valeurs, ou permettre à quelqu'un d'autre de le faire avec un effort minimal.
 
-Nextflow nous permet de spécifier des paramètres via un fichier de paramètres au format YAML ou JSON, ce qui rend très pratique la gestion et la distribution d'ensembles alternatifs de valeurs par défaut, par exemple, ainsi que de valeurs de paramètres spécifiques à l'exécution.
+Nextflow nous permet de spécifier des paramètres via un [fichier de paramètres](https://nextflow.io/docs/latest/config.html#parameter-file) au format YAML ou JSON, ce qui rend très pratique la gestion et la distribution d'ensembles alternatifs de valeurs par défaut, par exemple, ainsi que de valeurs de paramètres spécifiques à l'exécution.
 
 #### 1.3.1. Examiner le fichier de paramètres d'exemple
 
@@ -312,10 +312,10 @@ nextflow run 3-main.nf -params-file test-params.yaml
     Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [2b/9a7d1e] sayHello (2)       | 3 of 3 ✔
+    [5c/8f3b2a] convertToUpper (3) | 3 of 3 ✔
+    [a3/29d8fb] collectGreetings   | 1 of 1 ✔
+    [b7/83ef12] cowpy              | 1 of 1 ✔
     ```
 
 Le fichier de sortie final devrait contenir le personnage stegosaurus disant les salutations.
@@ -347,7 +347,7 @@ Le fichier de sortie final devrait contenir le personnage stegosaurus disant les
 Utiliser un fichier de paramètres peut sembler excessif quand vous n'avez que quelques paramètres à spécifier, mais certains pipelines attendent des dizaines de paramètres.
 Dans ces cas, utiliser un fichier de paramètres nous permettra de fournir des valeurs de paramètres au moment de l'exécution sans avoir à taper des lignes de commande massives et sans modifier le script du workflow.
 
-Cela facilite également la distribution d'ensembles de paramètres à des collaborateurs, ou comme information supplémentaire pour une publication, par exemple.
+Cela facilite également la distribution d'ensembles de paramètres à des collaborateur·trices, ou comme information supplémentaire pour une publication, par exemple.
 Cela rend votre travail plus reproductible par d'autres.
 
 ### Récapitulatif
@@ -374,7 +374,8 @@ Regardons quelques façons courantes de configurer cela pour être plus flexible
 
 Chaque version du workflow que nous avons exécutée jusqu'à présent a publié ses sorties dans un sous-répertoire différent codé en dur dans les définitions de sortie.
 
-Changeons cela pour utiliser un paramètre configurable par l'utilisateur.
+Nous avons changé l'emplacement de ce sous-répertoire dans la Partie 1 en utilisant le drapeau CLI `-output-dir`, mais ce n'est toujours qu'une chaîne statique.
+Configurons plutôt cela dans un fichier de config, où nous pouvons définir des chemins dynamiques plus complexes.
 Nous pourrions créer un tout nouveau paramètre pour cela, mais utilisons le paramètre `batch` puisqu'il est juste là.
 
 #### 2.1.1. Définir une valeur pour `outputDir` dans le fichier de configuration
@@ -397,9 +398,9 @@ Ajoutez le code suivant au fichier `nextflow.config` :
     }
 
     /*
-    * Output settings
+    * Paramètres de sortie
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 === "Avant"
@@ -415,10 +416,10 @@ Ajoutez le code suivant au fichier `nextflow.config` :
     }
     ```
 
-Cela remplacera le chemin par défaut intégré, `results/`, par `results/` plus la valeur du paramètre `batch` comme sous-répertoire.
-Vous pourriez également changer la partie `results` si vous le souhaitiez.
+Cela remplacera le chemin par défaut intégré, `results/`, par `results_config/` plus la valeur du paramètre `batch` comme sous-répertoire.
 
-Pour un changement temporaire, vous pourriez définir cette option depuis la ligne de commande en utilisant le paramètre `-output-dir` dans votre commande (mais alors vous ne pourriez pas utiliser la valeur du paramètre `batch`).
+N'oubliez pas que vous pouvez également définir cette option depuis la ligne de commande en utilisant le paramètre `-output-dir` dans votre commande (`-o` en abrégé), mais alors vous ne pourriez pas utiliser la valeur du paramètre `batch`.
+L'utilisation du drapeau CLI écrasera `outputDir` dans la config s'il est défini.
 
 #### 2.1.2. Supprimer la partie répétée du chemin codé en dur
 
@@ -495,21 +496,21 @@ nextflow run 3-main.nf --batch outdir
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [9c/6a03ea] sayHello (2)       [100%] 3 of 3 ✔
+    [11/9e58a6] convertToUpper (3) [100%] 3 of 3 ✔
+    [c8/1977e5] collectGreetings   [100%] 1 of 1 ✔
+    [38/f01eda] cowpy              [100%] 1 of 1 ✔
     ```
 
-Cela produit toujours la même sortie qu'auparavant, sauf que cette fois nous trouvons nos sorties sous `results/outdir/`.
+Cela produit toujours la même sortie qu'auparavant, sauf que cette fois nous trouvons nos sorties sous `results_config/outdir/`.
 
 ??? abstract "Contenu du répertoire"
 
     ```console
-    results/outdir/
+    results_config/outdir
     ├── cowpy-COLLECTED-outdir-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -530,7 +531,7 @@ Une façon populaire d'organiser davantage les sorties est de le faire par proce
 
 #### 2.2.1. Remplacer les chemins de sortie par une référence aux noms de process
 
-Tout ce que vous avez à faire est de référencer le nom du process comme `<task>.name` dans la déclaration du chemin de sortie.
+Tout ce que vous avez à faire est de référencer le nom du process comme `<process>.name` dans la déclaration du chemin de sortie.
 
 Effectuez les modifications suivantes dans le fichier du workflow :
 
@@ -606,18 +607,18 @@ nextflow run 3-main.nf --batch pnames
     Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [4a/c2e6b8] sayHello (2)       | 3 of 3 ✔
+    [6f/d4a172] convertToUpper (3) | 3 of 3 ✔
+    [e8/4f19d7] collectGreetings   | 1 of 1 ✔
+    [f2/a85c36] cowpy              | 1 of 1 ✔
     ```
 
-Cela produit toujours la même sortie qu'auparavant, sauf que cette fois nous trouvons nos sorties sous `results/pnames/`, et elles sont groupées par process.
+Cela produit toujours la même sortie qu'auparavant, sauf que cette fois nous trouvons nos sorties sous `results_config/pnames/`, et elles sont groupées par process.
 
 ??? abstract "Contenu du répertoire"
 
     ```console
-    results/pnames/
+    results_config/pnames/
     ├── collectGreetings
     │   ├── COLLECTED-pnames-output.txt
     │   └── pnames-report.txt
@@ -633,8 +634,10 @@ Cela produit toujours la même sortie qu'auparavant, sauf que cette fois nous tr
         └── Holà-output.txt
     ```
 
-Notez qu'ici nous avons effacé la distinction entre `intermediates` versus les sorties finales au niveau supérieur.
-Vous pourriez bien sûr mélanger ces approches, par exemple en définissant le chemin de la première sortie comme `intermediates/${sayHello.name}`
+!!! note "Note"
+
+    Notez qu'ici nous avons effacé la distinction entre `intermediates` versus les sorties finales au niveau supérieur.
+    Vous pouvez mélanger ces approches et même inclure plusieurs variables, par exemple en définissant le chemin de la première sortie comme `#!groovy "${params.batch}/intermediates/${sayHello.name}"`
 
 ### 2.3. Définir le mode de publication au niveau du workflow
 
@@ -648,9 +651,9 @@ Ajoutez le code suivant au fichier `nextflow.config` :
 
     ```groovy title="nextflow.config" linenums="2" hl_lines="5"
     /*
-    * Output settings
+    * Paramètres de sortie
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     workflow.output.mode = 'copy'
     ```
 
@@ -658,9 +661,9 @@ Ajoutez le code suivant au fichier `nextflow.config` :
 
     ```groovy title="nextflow.config" linenums="12"
     /*
-    * Output settings
+    * Paramètres de sortie
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 Tout comme l'option `outputDir`, donner une valeur à `workflow.output.mode` dans le fichier de configuration serait suffisant pour remplacer ce qui est défini dans le fichier du workflow, mais supprimons quand même le code inutile.
@@ -736,19 +739,19 @@ nextflow run 3-main.nf --batch outmode
     Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [5b/d91e3c] sayHello (2)       | 3 of 3 ✔
+    [8a/f6c241] convertToUpper (3) | 3 of 3 ✔
+    [89/cd3a48] collectGreetings   | 1 of 1 ✔
+    [9e/71fb52] cowpy              | 1 of 1 ✔
     ```
 
-Cela produit toujours la même sortie qu'auparavant, sauf que cette fois nous trouvons nos sorties sous `results/outmode/`.
+Cela produit toujours la même sortie qu'auparavant, sauf que cette fois nous trouvons nos sorties sous `results_config/outmode/`.
 Ce sont toujours toutes des copies propres, pas des liens symboliques.
 
 ??? abstract "Contenu du répertoire"
 
     ```console
-    results/outmode/
+    results_config/outmode/
     ├── collectGreetings
     │   ├── COLLECTED-outmode-output.txt
     │   └── outmode-report.txt
@@ -780,7 +783,7 @@ Apprenez à adapter la configuration de votre workflow à votre environnement de
 
 ## 3. Sélectionner une technologie d'empaquetage logiciel
 
-Jusqu'à présent, nous avons examiné les éléments de configuration qui contrôlent comment les entrées vont et d'où les sorties sortent. Maintenant il est temps de se concentrer plus spécifiquement sur l'adaptation de la configuration de votre workflow à votre environnement de calcul.
+Jusqu'à présent, nous avons examiné les éléments de configuration qui contrôlent comment les entrées entrent et d'où les sorties sortent. Maintenant il est temps de se concentrer plus spécifiquement sur l'adaptation de la configuration de votre workflow à votre environnement de calcul.
 
 La première étape sur ce chemin est de spécifier d'où vont venir les packages logiciels qui seront exécutés à chaque étape.
 Sont-ils déjà installés dans l'environnement de calcul local ?
@@ -799,7 +802,7 @@ Maintenant voyons comment nous pouvons configurer une option d'empaquetage logic
     Vous déplacez votre pipeline vers un cluster HPC où Docker n'est pas autorisé pour des raisons de sécurité.
     Le cluster prend en charge Singularity et Conda, donc vous devez changer votre configuration en conséquence.
 
-Nextflow prend en charge plusieurs technologies de conteneurs, y compris Singularity (qui est plus largement utilisé sur HPC), ainsi que des gestionnaires de packages logiciels tels que Conda.
+Comme noté précédemment, Nextflow prend en charge plusieurs technologies de conteneurs, y compris Singularity (qui est plus largement utilisé sur HPC), ainsi que des gestionnaires de packages logiciels tels que Conda.
 
 Nous pouvons changer notre fichier de configuration pour utiliser Conda au lieu de Docker.
 Pour ce faire, changeons la valeur de `docker.enabled` à `false`, et ajoutons une directive activant l'utilisation de Conda :
@@ -876,7 +879,7 @@ nextflow run 3-main.nf --batch conda
     [c5/af5f88] cowpy              | 1 of 1 ✔
     ```
 
-Cela devrait fonctionner sans problème et produire les mêmes sorties qu'auparavant sous `results/conda`.
+Cela devrait fonctionner sans problème et produire les mêmes sorties qu'auparavant sous `results_config/conda`.
 
 En coulisses, Nextflow a récupéré les packages Conda et créé l'environnement, ce qui prend normalement un peu de travail ; donc c'est agréable de ne pas avoir à faire tout cela nous-mêmes !
 
@@ -887,7 +890,7 @@ En coulisses, Nextflow a récupéré les packages Conda et créé l'environnemen
 
 De notre point de vue, cela semble fonctionner exactement de la même manière que l'exécution avec Docker, même si en arrière-plan les mécanismes sont un peu différents.
 
-Cela signifie que nous sommes prêts à exécuter avec des environnements Conda si nécessaire.
+Cela signifie que nous sommes prêt·es à exécuter avec des environnements Conda si nécessaire.
 
 ??? info "Mélanger Docker et Conda"
 
@@ -895,7 +898,7 @@ Cela signifie que nous sommes prêts à exécuter avec des environnements Conda 
     Dans ce cas, vous activeriez à la fois Docker et Conda dans votre fichier de configuration.
     Si les deux sont disponibles pour un process donné, Nextflow priorisera les conteneurs.
 
-    Et comme noté précédemment, Nextflow prend en charge plusieurs autres technologies d'empaquetage logiciel et de conteneurs, donc vous n'êtes pas limité à ces deux-là.
+    Et comme noté précédemment, Nextflow prend en charge plusieurs autres technologies d'empaquetage logiciel et de conteneurs, donc vous n'êtes pas limité·e à ces deux-là.
 
 ### Récapitulatif
 
@@ -921,7 +924,7 @@ Si les ressources des tâches prêtes à s'exécuter dépassent les ressources d
 
 L'executor local est pratique et efficace, mais il est limité à cette seule machine. Pour de très grandes charges de travail, vous pourriez découvrir que votre machine locale est un goulot d'étranglement, soit parce que vous avez une seule tâche qui nécessite plus de ressources que vous n'en avez disponibles, soit parce que vous avez tellement de tâches qu'attendre qu'une seule machine les exécute prendrait trop de temps.
 
-Nextflow prend en charge [de nombreux backends d'exécution différents](https://www.nextflow.io/docs/latest/executor.html), y compris les ordonnanceurs HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor et d'autres) ainsi que les backends d'exécution cloud (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes et plus).
+Nextflow prend en charge [de nombreux backends d'exécution différents](https://nextflow.io/docs/latest/executor.html), y compris les ordonnanceurs HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor et d'autres) ainsi que les backends d'exécution cloud (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes et plus).
 
 ### 4.1. Cibler un backend différent
 
@@ -934,7 +937,7 @@ process {
 }
 ```
 
-Pour définir l'executor pour cibler un backend différent, vous spécifieriez simplement l'executor que vous voulez en utilisant une syntaxe similaire à celle décrite ci-dessus pour les allocations de ressources (voir la [documentation](https://www.nextflow.io/docs/latest/executor.html) pour toutes les options).
+Pour définir l'executor pour cibler un backend différent, vous spécifieriez simplement l'executor que vous voulez en utilisant une syntaxe similaire à celle décrite ci-dessus pour les allocations de ressources (voir [Executors](https://nextflow.io/docs/latest/executor.html) pour toutes les options).
 
 ```groovy title="nextflow.config"
 process {
@@ -983,7 +986,7 @@ Malheureusement, chacun de ces systèmes utilise différentes technologies, synt
     ```
 
 Heureusement, Nextflow simplifie tout cela.
-Il fournit une syntaxe standardisée pour que vous puissiez spécifier les propriétés pertinentes telles que `cpus`, `memory` et `queue` (voir la documentation pour d'autres propriétés) une seule fois.
+Il fournit une syntaxe standardisée pour que vous puissiez spécifier les propriétés pertinentes telles que `cpus`, `memory` et `queue` une seule fois (voir [Directives de process](https://nextflow.io/docs/latest/reference/process.html#process-directives) pour toutes les options disponibles).
 Ensuite, au moment de l'exécution, Nextflow utilisera ces paramètres pour générer les scripts spécifiques au backend appropriés en fonction du paramètre d'executor.
 
 Nous couvrirons cette syntaxe standardisée dans la section suivante.
@@ -1003,7 +1006,7 @@ Apprenez à évaluer et exprimer les allocations et limitations de ressources da
 ??? example "Scénario"
 
     Votre pipeline continue d'échouer sur le cluster parce que les tâches sont tuées pour avoir dépassé les limites de mémoire.
-    Ou peut-être êtes-vous facturé pour des ressources que vous n'utilisez pas et souhaitez-vous optimiser les coûts.
+    Ou peut-être êtes-vous facturé·e pour des ressources que vous n'utilisez pas et souhaitez-vous optimiser les coûts.
 
 La plupart des plateformes de calcul haute performance permettent (et parfois exigent) que vous spécifiiez certains paramètres d'allocation de ressources tels que le nombre de CPU et la mémoire.
 
@@ -1042,7 +1045,8 @@ Le rapport est un fichier html, que vous pouvez télécharger et ouvrir dans vot
 
 Prenez quelques minutes pour parcourir le rapport et voir si vous pouvez identifier des opportunités d'ajustement des ressources.
 Assurez-vous de cliquer sur les onglets qui montrent les résultats d'utilisation en pourcentage de ce qui a été alloué.
-Il y a de la [documentation](https://www.nextflow.io/docs/latest/reports.html) décrivant toutes les fonctionnalités disponibles.
+
+Consultez [Rapports](https://nextflow.io/docs/latest/reports.html) pour la documentation sur toutes les fonctionnalités disponibles.
 
 ### 5.2. Définir les allocations de ressources pour tous les processes
 
@@ -1052,7 +1056,7 @@ Ajoutez ce qui suit à votre fichier `nextflow.config`, avant la section des par
 
 ```groovy title="nextflow.config" linenums="4"
 /*
-* Process settings
+* Paramètres de process
 */
 process {
     memory = 1.GB
@@ -1069,7 +1073,7 @@ En même temps, nous allons prétendre que le process `cowpy` nécessite plus de
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="6-9"
     /*
-    * Process settings
+    * Paramètres de process
     */
     process {
         memory = 1.GB
@@ -1084,7 +1088,7 @@ En même temps, nous allons prétendre que le process `cowpy` nécessite plus de
 
     ```groovy title="nextflow.config" linenums="4"
     /*
-    * Process settings
+    * Paramètres de process
     */
     process {
         memory = 1.GB
@@ -1113,7 +1117,7 @@ C'est très utile lorsque vos processes ont des besoins en ressources différent
 !!! tip "Astuce"
 
     Ceci n'est qu'un petit aperçu de ce que vous pouvez faire pour optimiser votre utilisation des ressources.
-    Nextflow lui-même a une [logique de réessai dynamique](https://training.nextflow.io/basic_training/debugging/#dynamic-resources-allocation) vraiment intéressante intégrée pour réessayer les jobs qui échouent en raison de limitations de ressources.
+    Nextflow lui-même a une [logique de réessai dynamique](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) vraiment intéressante intégrée pour réessayer les jobs qui échouent en raison de limitations de ressources.
     De plus, la plateforme Seqera offre des outils pilotés par l'IA pour optimiser vos allocations de ressources automatiquement également.
 
 ### 5.5. Ajouter des limites de ressources
@@ -1165,7 +1169,7 @@ Nous vous avons montré un certain nombre de façons de personnaliser la configu
 
 Vous pourriez vouloir basculer entre des paramètres alternatifs selon l'infrastructure de calcul que vous utilisez. Par exemple, vous pourriez vouloir développer et exécuter des tests à petite échelle localement sur votre ordinateur portable, puis exécuter des charges de travail à grande échelle sur HPC ou cloud.
 
-Nextflow vous permet de configurer n'importe quel nombre de profils qui décrivent différentes configurations, que vous pouvez ensuite sélectionner au moment de l'exécution en utilisant un argument de ligne de commande, plutôt que d'avoir à modifier le fichier de configuration lui-même.
+Nextflow vous permet de configurer n'importe quel nombre de [**profils**](https://nextflow.io/docs/latest/config.html#profiles) qui décrivent différentes configurations, que vous pouvez ensuite sélectionner au moment de l'exécution en utilisant un argument de ligne de commande, plutôt que d'avoir à modifier le fichier de configuration lui-même.
 
 ### 6.1. Créer des profils pour basculer entre le développement local et l'exécution sur HPC
 
@@ -1177,7 +1181,7 @@ Ajoutez ce qui suit à votre fichier `nextflow.config`, après la section des pa
 
 ```groovy title="nextflow.config" linenums="24"
 /*
-* Profiles
+* Profils
 */
 profiles {
     my_laptop {
@@ -1257,7 +1261,7 @@ Si nous ajoutons un profil de test pour notre workflow, le bloc `profiles` devie
 
 ```groovy title="nextflow.config" linenums="24"
 /*
-* Profiles
+* Profils
 */
 profiles {
     my_laptop {
@@ -1288,7 +1292,7 @@ Tout comme pour les profils de configuration technique, vous pouvez configurer p
 Commodément, les profils ne sont pas mutuellement exclusifs, donc nous pouvons spécifier plusieurs profils dans notre ligne de commande en utilisant la syntaxe suivante `-profile <profile1>,<profile2>` (pour n'importe quel nombre de profils).
 
 Si vous combinez des profils qui définissent des valeurs pour les mêmes éléments de configuration et sont décrits dans le même fichier de configuration, Nextflow résoudra le conflit en utilisant la valeur qu'il a lue en dernier (_c.-à-d._ ce qui vient plus tard dans le fichier).
-Si les paramètres en conflit sont définis dans différentes sources de configuration, l'[ordre de priorité](https://www.nextflow.io/docs/latest/config.html) par défaut s'applique.
+Si les paramètres en conflit sont définis dans différentes sources de configuration, l'[ordre de priorité](https://www.nextflow.io/docs/latest/config.html#configuration-file) par défaut s'applique.
 
 Essayons d'ajouter le profil de test à notre commande précédente :
 
@@ -1310,11 +1314,11 @@ nextflow run 3-main.nf -profile my_laptop,test
     [fd/e84fa9] cowpy              | 1 of 1 ✔
     ```
 
-Cela utilisera Docker où possible et produira des sorties sous `results/test`, et cette fois le personnage est le duo comique `dragonandcow`.
+Cela utilisera Docker où possible et produira des sorties sous `results_config/test`, et cette fois le personnage est le duo comique `dragonandcow`.
 
 ??? abstract "Contenu du fichier"
 
-    ```console title="results/test/"
+    ```console title="results_config/test/"
      _________
     / HOLà    \
     | HELLO   |
@@ -1345,14 +1349,14 @@ Cela signifie que tant que nous distribuons tous les fichiers de données de tes
     Nous pouvons pointer vers des URL pour des fichiers plus grands qui sont stockés en externe.
     Nextflow les téléchargera automatiquement tant qu'il y a une connexion ouverte.
 
-    Pour plus de détails, consultez le Side Quest [Working with Files](../side_quests/working_with_files.md)
+    Pour plus de détails, consultez la Quête secondaire [Travailler avec les fichiers](../side_quests/working_with_files.md)
 
 ### 6.3. Utiliser `nextflow config` pour voir la configuration résolue
 
 Comme noté ci-dessus, parfois le même paramètre peut être défini sur différentes valeurs dans des profils que vous voulez combiner.
 Et plus généralement, il y a de nombreux endroits où des éléments de configuration peuvent être stockés, et parfois les mêmes propriétés peuvent être définies sur différentes valeurs à différents endroits.
 
-Nextflow applique un [ordre de priorité](https://www.nextflow.io/docs/latest/config.html) défini pour résoudre les conflits, mais cela peut être difficile à déterminer vous-même.
+Nextflow applique un [ordre de priorité](https://nextflow.io/docs/latest/config.html#configuration-file) défini pour résoudre les conflits, mais cela peut être difficile à déterminer vous-même.
 Et même si rien n'est en conflit, il peut être fastidieux de rechercher tous les endroits possibles où les choses pourraient être configurées.
 
 Heureusement, Nextflow inclut un outil utilitaire pratique appelé `config` qui peut automatiser tout ce processus pour vous.
@@ -1371,6 +1375,12 @@ nextflow config
 ??? success "Sortie de la commande"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'batch'
+      character = 'turkey'
+    }
+
     docker {
       enabled = false
     }
@@ -1387,10 +1397,12 @@ nextflow config
       }
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+    outputDir = 'results_config/batch'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1407,6 +1419,12 @@ nextflow config -profile my_laptop,test
 ??? success "Sortie de la commande"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'test'
+      character = 'dragonandcow'
+    }
+
     docker {
       enabled = true
     }
@@ -1424,10 +1442,12 @@ nextflow config -profile my_laptop,test
       executor = 'local'
     }
 
-    params {
-      input = 'data/greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+    outputDir = 'results_config/test'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1465,17 +1485,55 @@ Essayez d'exécuter le pipeline de démonstration officiel Nextflow « hello » 
 nextflow run nextflow-io/hello
 ```
 
+??? success "Sortie de la commande"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Pulling nextflow-io/hello ...
+     downloaded from https://github.com/nextflow-io/hello.git
+    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] DSL2 - revision: 2ce0b0e294 [master]
+
+    executor >  local (4)
+    [ba/08236d] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Hello world!
+
+    Bonjour world!
+
+    Hola world!
+    ```
+
 La première fois que vous exécutez un pipeline distant, Nextflow le télécharge et le met en cache localement.
 Les exécutions suivantes utilisent la version mise en cache à moins que vous ne demandiez explicitement une mise à jour.
 
 ### 7.2. Spécifier une version pour la reproductibilité
 
 Par défaut, Nextflow exécute la dernière version de la branche par défaut.
-Vous pouvez spécifier une version particulière, une branche ou un commit en utilisant le drapeau `-r` :
+Vous pouvez spécifier une version particulière (tag), une branche ou un commit en utilisant le drapeau `-r` :
 
 ```bash
-nextflow run nextflow-io/hello -r v1.1
+nextflow run nextflow-io/hello -r v1.3
 ```
+
+??? success "Sortie de la commande"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
+
+    executor >  local (4)
+    [61/e11f77] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Bonjour world!
+
+    Hello world!
+
+    Hola world!
+    ```
 
 Spécifier des versions exactes est essentiel pour la reproductibilité.
 
@@ -1542,8 +1600,8 @@ En savoir plus : [2.1. Personnaliser le nom du répertoire outputDir](#21-person
 <quiz>
 Comment référencez-vous dynamiquement un nom de process dans la configuration du chemin de sortie ?
 - [ ] `#!groovy ${processName}`
-- [ ] `process.name`
-- [x] `#!groovy { meta.id }`
+- [ ] `#!groovy path "<process>.name"`
+- [x] `#!groovy path { <process>.name }`
 - [ ] `@processName`
 
 En savoir plus : [2.2. Organiser les sorties par process](#22-organiser-les-sorties-par-process)

@@ -2,30 +2,28 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/5PyOWjKnNmg?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Obejrzyj [całą playlistę](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) na kanale YouTube Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Obejrzyj [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow'a.
 
 :green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/05_hello_containers.md).
 ///
--->
 
-W Częściach 1-4 tego kursu nauczyłeś się używać podstawowych elementów budulcowych Nextflow do składania prostego workflow zdolnego do przetwarzania tekstu, równoległego wykonywania wielu wejść i zbierania wyników do dalszego przetwarzania.
+W Częściach 1-4 tego kursu szkoleniowego nauczyłeś się wykorzystywać podstawowe elementy budulcowe Nextflow'a do składania prostego workflow'a zdolnego do przetwarzania tekstu, paralelizowania wykonania przy wielu wejściach oraz zbierania wyników do dalszego przetwarzania.
 
-Jednak byłeś ograniczony do podstawowych narzędzi UNIX dostępnych w Twoim środowisku.
-Rzeczywiste zadania często wymagają różnych narzędzi i pakietów, które nie są domyślnie dołączone.
-Zazwyczaj musiałbyś zainstalować te narzędzia, zarządzać ich zależnościami i rozwiązywać konflikty.
+Byłeś jednak ograniczony do podstawowych narzędzi UNIX dostępnych w Twoim środowisku.
+Rzeczywiste zadania często wymagają różnych narzędzi i pakietów niedołączonych domyślnie.
+Zazwyczaj musiałbyś zainstalować te narzędzia, zarządzać ich zależnościami i rozwiązywać wszelkie konflikty.
 
-To wszystko jest bardzo nużące i irytujące, więc pokażemy Ci, jak używać **kontenerów**, aby rozwiązać ten problem znacznie wygodniej.
+To wszystko jest bardzo nużące i irytujące, dlatego pokażemy Ci, jak używać **kontenerów** do rozwiązania tego problemu o wiele wygodniej.
 
 **Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu kontenera**, która zawiera wszystko potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
 Jak można się domyślić, będzie to bardzo pomocne w zwiększeniu powtarzalności Twoich pipeline'ów.
 
-Zauważ, że będziemy tego uczyć używając [Docker](https://www.docker.com/get-started/), ale pamiętaj, że Nextflow obsługuje również [kilka innych technologii kontenerowych](https://nextflow.io/docs/latest/container.html).
+Zauważ, że będziemy tego uczyć używając narzędzia [Docker](https://www.docker.com/get-started/), ale pamiętaj, że Nextflow obsługuje również [kilka innych technologii kontenerowych](https://nextflow.io/docs/latest/container.html).
 
 ??? info "Jak zacząć od tej sekcji"
 
@@ -41,8 +39,8 @@ Zauważ, że będziemy tego uczyć używając [Docker](https://www.docker.com/ge
 
 ## 0. Rozgrzewka: Uruchom `hello-containers.nf`
 
-Użyjemy skryptu workflow `hello-containers.nf` jako punktu wyjścia.
-Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 4 tego szkolenia, z tą różnicą, że zmieniliśmy miejsca docelowe wyjść:
+Użyjemy skryptu workflow'a `hello-containers.nf` jako punktu wyjścia.
+Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 4 tego kursu, z tą różnicą, że zmieniliśmy miejsca docelowe wyjść:
 
 ```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
 output {
@@ -107,9 +105,9 @@ Jeśli to zadziałało, jesteś gotowy do nauki używania kontenerów.
 
 ## 1. Użyj kontenera 'ręcznie'
 
-Chcemy dodać krok do naszego workflow, który będzie używał kontenera do wykonania.
+Chcemy dodać krok do naszego workflow'a, który będzie używał kontenera do wykonania.
 
-Jednak najpierw omówimy podstawowe koncepcje i operacje, aby utrwalić Twoje zrozumienie tego, czym są kontenery, zanim zaczniemy ich używać w Nextflow.
+Najpierw jednak omówimy podstawowe koncepcje i operacje, aby utrwalić Twoje zrozumienie tego, czym są kontenery, zanim zaczniemy ich używać w Nextflow'ie.
 
 ### 1.1. Pobierz obraz kontenera
 
@@ -194,7 +192,7 @@ docker run --rm '<kontener>' [polecenie narzędzia]
 ```
 
 Część `docker run --rm '<kontener>'` to instrukcja dla systemu, aby uruchomił instancję kontenera z obrazu i wykonał w niej polecenie.
-Flaga `--rm` mówi systemowi, aby usunął instancję kontenera po zakończeniu polecenia.
+Flaga `--rm` mówi systemowi, aby wyłączył instancję kontenera po zakończeniu polecenia.
 
 Składnia `[polecenie narzędzia]` zależy od używanego narzędzia i konfiguracji kontenera.
 Zacznijmy po prostu od `cowpy`.
@@ -371,7 +369,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -385,7 +383,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
 
 To produkuje pożądaną grafikę ASCII indyka recytującego nasze przykładowe pozdrowienia!
 Tyle że tutaj indyk powtarza pełne wiersze zamiast samych pozdrowień.
-Wiemy już, że nasz workflow Nextflow zrobi to lepiej!
+Wiemy już, że nasz workflow Nextflow'a zrobi to lepiej!
 
 Poeksperymentuj z tym poleceniem.
 Gdy skończysz, wyjdź z kontenera jak poprzednio:
@@ -402,11 +400,11 @@ Wiesz już, jak pobrać kontener i uruchomić go jednorazowo lub interaktywnie. 
 
 ### Co dalej?
 
-Naucz się używać kontenerów do wykonywania procesów Nextflow.
+Naucz się używać kontenerów do wykonywania procesów Nextflow'a.
 
 ---
 
-## 2. Używaj kontenerów w Nextflow
+## 2. Używaj kontenerów w Nextflow'ie
 
 Nextflow ma wbudowaną obsługę uruchamiania procesów wewnątrz kontenerów, co pozwala korzystać z narzędzi, których nie masz zainstalowanych w swoim środowisku obliczeniowym.
 Oznacza to, że możesz użyć dowolnego obrazu kontenera do wykonywania procesów, a Nextflow zajmie się pobieraniem obrazu, montowaniem danych i obsługą całego cyklu życia kontenera.
@@ -460,7 +458,7 @@ Proces oczekuje `input_file` zawierającego pozdrowienia oraz wartości `charact
 
 Wyjściem będzie nowy plik tekstowy zawierający grafikę ASCII wygenerowaną przez narzędzie `cowpy`.
 
-### 2.2. Dodaj cowpy do workflow
+### 2.2. Dodaj cowpy do workflow'a
 
 Teraz musimy zaimportować moduł i wywołać proces.
 
@@ -487,9 +485,9 @@ Wstaw deklarację importu powyżej bloku workflow i wypełnij ją odpowiednio.
     include { collectGreetings } from './modules/collectGreetings.nf'
     ```
 
-Teraz moduł `cowpy` jest dostępny do użycia w workflow.
+Teraz moduł `cowpy` jest dostępny do użycia w workflow'ie.
 
-#### 2.2.2. Dodaj wywołanie procesu `cowpy` w workflow
+#### 2.2.2. Dodaj wywołanie procesu `cowpy` w workflow'ie
 
 Połączmy proces `cowpy()` z wyjściem procesu `collectGreetings()`, który jak pamiętasz produkuje dwa wyjścia:
 
@@ -565,9 +563,9 @@ To technicznie jest opcjonalne, ale jest to zalecana praktyka i okazja do ustawi
 
 Teraz możemy być leniwi i pominąć wpisywanie parametru postaci w naszych poleceniach.
 
-#### 2.2.4. Zaktualizuj wyjścia workflow
+#### 2.2.4. Zaktualizuj wyjścia workflow'a
 
-Musimy zaktualizować wyjścia workflow, aby publikować wyjście procesu `cowpy`.
+Musimy zaktualizować wyjścia workflow'a, aby publikować wyjście procesu `cowpy`.
 
 ##### 2.2.4.1. Zaktualizuj sekcję `publish:`
 
@@ -596,7 +594,7 @@ W bloku `workflow` wprowadź następującą zmianę w kodzie:
 
 Proces `cowpy` produkuje tylko jedno wyjście, więc możemy się do niego odnieść w zwykły sposób, dodając `.out`.
 
-Ale na razie dokończmy aktualizację wyjść na poziomie workflow.
+Ale na razie dokończmy aktualizację wyjść na poziomie workflow'a.
 
 ##### 2.2.4.2. Zaktualizuj blok `output`
 
@@ -722,7 +720,7 @@ To ma sens, ponieważ wywołujemy narzędzie `cowpy`, ale tak naprawdę nie okre
 
 ### 2.3. Użyj kontenera do uruchomienia procesu `cowpy`
 
-Musimy określić kontener i powiedzieć Nextflow, aby użył go dla procesu `cowpy()`.
+Musimy określić kontener i powiedzieć Nextflow'owi, aby użył go dla procesu `cowpy()`.
 
 #### 2.3.1. Określ kontener dla `cowpy`
 
@@ -770,14 +768,14 @@ Edytuj moduł `cowpy.nf`, aby dodać dyrektywę `container` do definicji procesu
     }
     ```
 
-To mówi Nextflow, że _jeśli użycie Docker jest włączone_, powinien użyć określonego tutaj obrazu kontenera do wykonania procesu.
+To mówi Nextflow'owi, że _jeśli użycie Docker jest włączone_, powinien użyć określonego tutaj obrazu kontenera do wykonania procesu.
 
 #### 2.3.2. Włącz użycie Docker przez plik `nextflow.config`
 
-Zauważ, że wspomnieliśmy _'jeśli użycie Docker jest włączone'_. Domyślnie nie jest, więc musimy włączyć tę opcję w Nextflow.
+Zauważ, że wspomnieliśmy _'jeśli użycie Docker jest włączone'_. Domyślnie nie jest, więc musimy włączyć tę opcję w Nextflow'ie.
 W tym celu nieco uprzedzamy temat następnej i ostatniej części tego kursu (Część 6), która obejmuje konfigurację.
 
-Jednym z głównych sposobów konfigurowania wykonywania workflow, które oferuje Nextflow, jest użycie pliku `nextflow.config`.
+Jednym z głównych sposobów konfigurowania wykonywania workflow'a, które oferuje Nextflow, jest użycie pliku `nextflow.config`.
 Gdy taki plik jest obecny w bieżącym katalogu, Nextflow automatycznie go załaduje i zastosuje zawartą w nim konfigurację.
 
 Dostarczyliśmy plik `nextflow.config` z jedną linią kodu, która jawnie wyłącza Docker: `docker.enabled = false`.
@@ -799,7 +797,7 @@ Teraz zmieńmy to na `true`, aby włączyć Docker:
 !!! tip "Wskazówka"
 
     Możliwe jest włączenie wykonywania Docker z wiersza poleceń, dla pojedynczego uruchomienia, używając parametru `-with-docker <kontener>`.
-    Jednak pozwala to tylko na określenie jednego kontenera dla całego workflow, podczas gdy podejście, które właśnie pokazaliśmy, pozwala na określenie innego kontenera dla każdego procesu.
+    Jednak pozwala to tylko na określenie jednego kontenera dla całego workflow'a, podczas gdy podejście, które właśnie pokazaliśmy, pozwala na określenie innego kontenera dla każdego procesu.
     To jest lepsze dla modularności, utrzymania kodu i powtarzalności.
 
 #### 2.3.3. Uruchom workflow z włączonym Docker
@@ -825,7 +823,7 @@ nextflow run hello-containers.nf -resume
     ```
 
 Tym razem rzeczywiście działa!
-Jak zwykle wyjścia workflow znajdziesz w odpowiednim katalogu results, choć tym razem są nieco lepiej zorganizowane, z tylko raportem i końcowym wyjściem na najwyższym poziomie, a wszystkie pliki pośrednie schowane w podkatalogu.
+Jak zwykle wyjścia workflow'a znajdziesz w odpowiednim katalogu results, choć tym razem są nieco lepiej zorganizowane, z tylko raportem i końcowym wyjściem na najwyższym poziomie, a wszystkie pliki pośrednie schowane w podkatalogu.
 
 ??? abstract "Zawartość katalogu"
 
@@ -864,7 +862,7 @@ Końcowa grafika ASCII znajduje się w katalogu `results/hello_containers/`, pod
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -1081,7 +1079,7 @@ Cała ciężka praca, którą musieliśmy wykonać ręcznie w pierwszej sekcji? 
 
 ### Podsumowanie
 
-Wiesz już, jak używać kontenerów w Nextflow do uruchamiania procesów.
+Wiesz już, jak używać kontenerów w Nextflow'ie do uruchamiania procesów.
 
 ### Co dalej?
 
@@ -1132,7 +1130,7 @@ Dowiedz się więcej: [1.3.4. Zamontuj dane w kontenerze](#134-zamontuj-dane-w-k
 </quiz>
 
 <quiz>
-Jak określasz kontener dla procesu Nextflow?
+Jak określasz kontener dla procesu Nextflow'a?
 - [ ] `docker 'container-uri'`
 - [ ] `image 'container-uri'`
 - [x] `container 'container-uri'`
@@ -1142,7 +1140,7 @@ Dowiedz się więcej: [2.3.1. Określ kontener dla cowpy](#231-okresl-kontener-d
 </quiz>
 
 <quiz>
-Które ustawienie `nextflow.config` włącza Docker dla Twojego workflow?
+Które ustawienie `nextflow.config` włącza Docker dla Twojego workflow'a?
 - [ ] `#!groovy process.docker = true`
 - [x] `#!groovy docker.enabled = true`
 - [ ] `#!groovy container.engine = 'docker'`

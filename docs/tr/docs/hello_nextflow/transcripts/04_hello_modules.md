@@ -1,107 +1,85 @@
-# Bölüm 4: Merhaba Modüller - Transkript
-
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+# Bölüm 4: Hello Modules - Video Transkripti
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xxp_menS0E8?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Önemli notlar"
 
-    Bu sayfa yalnızca transkripti göstermektedir. Adım adım talimatların tamamı için [kurs materyaline](../04_hello_modules.md) geri dönün.
+    Bu sayfa yalnızca transkripti göstermektedir. Adım adım tam talimatlar için [kurs materyaline](../04_hello_modules.md) geri dönün.
 
     Transkriptte gösterilen bölüm numaraları yalnızca bilgilendirme amaçlıdır ve materyallerdeki tüm bölüm numaralarını içermeyebilir.
 
 ## Hoş Geldiniz
 
-Merhaba, Merhaba Nextflow eğitim kursunun Dördüncü Bölümüne hoş geldiniz.
+Merhaba ve Hello Nextflow'un dördüncü bölümüne tekrar hoş geldiniz. Bu bölüm tamamen modüllerle ilgili ve kursun oldukça kısa bir bölümü. Aslında fazla kod yazmayacağız, daha çok pipeline'daki kodu nasıl organize edeceğimizle ilgili.
 
-Bu bölümün adı Merhaba Modüller ve Nextflow kodunun nasıl modülerleştirileceğinden bahsedeceğiz. Yapacağımız şey, tek bir workflow betiğimizi alıp ayrı dosyalara bölmek.
+Şimdiye kadar her şeyi tek bir dosyaya koyuyorduk, bu iyidir ve aslında eski günlerde Nextflow pipeline'larını böyle oluşturuyorduk.
 
-Bu, workflow'unuz büyüdükçe kodun gezinmesini ve bakımını kolaylaştırır ve ayrıca pipeline'lar arasında modüllerin paylaşılmasını mümkün kılar, böylece aynı aracı kullanan birden fazla pipeline'ınız varsa, o process'i yalnızca bir kez yazmanız yeterli olur.
+Ancak bu pipeline büyüdükçe, betik daha uzun ve daha uzun ve daha uzun hale geliyor ve gezinmesi, bakımını yapmak daha zor oluyor, ayrıca kodun herhangi birini gerçekten paylaşamayacağımız anlamına geliyor.
 
-Bunun klasik bir örneği nf-core modül deposudur; kullanıma hazır modüllerde binlerce farklı aracı vardır ve bunları kurabilir ve workflow'unuzda kullanabilirsiniz.
+Nextflow modülleri, süreçleri ana betikten çıkarmamıza ve ardından bunları içe aktarmamıza olanak tanır. Bu, kodun gezinmesinin daha kolay olduğu ve ayrıca bu modül kodunu farklı pipeline'lar arasında paylaşabileceğimiz anlamına gelir.
 
-Nextflow ayrıca alt workflow'larla da çalışabilir; bunlar modüller gibidir, ancak birden fazla process içerirler. Bu eğitimin kapsamı dışındadır, ancak temelde aynı şekilde çalışır.
+Dokümantasyonun ana sayfasındaki bu küçük diyagram konsepti güzel bir şekilde gösteriyor. Tek bir devasa betik yerine, farklı modül betiklerinden bu ayrı modül dosyalarını ekleyeceğiz ve hepsi workflow'a çekilecek, ancak hala tamamen aynı şekilde çalışacak.
 
-Tamam. Hadi bir göz atalım.
+O halde GitHub Codespaces'e atlayalım ve etrafta biraz bakalım. Daha önceki gibi, buradaki çalışma alanımı biraz temizledim. Eski Nextflow dizinlerini ve work dizinini ve benzeri şeyleri kaldırdım. Ancak bu dosyalar hala etrafta olsa bile önemli değil.
 
-Her zamanki gibi, training.nextflow.io adresine giderek başlayın.
+hello modules dosyasında çalışmaya başlayacağım, bu temelde önceki bölümün sonunda bıraktığımız yerdir. Burada üç sürecimiz var. Birkaç params'ımız var, bu üç süreci çalıştırdığımız ve kanallarla birbirine bağladığımız workflow bloğu. Sonra çıktı kanallarını yayınlıyoruz ve bu dosyaların nasıl yayınlanacağını söyleyen output bloğumuz var.
 
-Kenar çubuğunda "Hello Nextflow"a gidin ve dördüncü bölümü yapıyoruz: "Hello Modules".
+## 1. Modülleri saklamak için bir dizin oluşturun
 
-Şimdi GitHub Code Spaces ortamıma geçeceğim ve "hello-modules" dosyasına bakacağım.
-
-Daha önce olduğu gibi, önceki bölümün son noktasından başlıyoruz, bu yüzden bu betik tanıdık gelmeli. Üç process'imiz var: say hello, convert to upper ve collect greetings, ve bu üç komutu çalıştıran ve sonunda bir mesaj yayan basit bir workflow. Greeting ve batch adında iki parametremiz var; batch, sonunda toplanan çıktı dosyası için kullanılan adı belirtir.
-
-## 0. Isınma: hello-modules.nf'yi çalıştırın
-
-Bu workflow'un beklediğimiz gibi çalıştığını nextflow run hello, modules yaparak doğrulayabiliriz.
-
-Harika. Her bir process'ten üç görev, bir toplama görevi çalıştırdı ve bu toplu işteki üç karşılama olduğunu söyledi. Results'a gidersek, toplanan test batch çıktısı dahil olmak üzere farklı çıktı dosyalarımızı burada aldık.
-
-## 1. Modülleri depolamak için bir dizin oluşturun
-
-Pekala. Hadi biraz modülerleştirme yapalım.
-
-Modülleri pipeline deponuzda bir alt klasöre koymak genellikle iyi bir fikirdir, sadece işleri düzenli tutmak için. Bunu istediğiniz gibi adlandırabilirsiniz, ancak geleneksel olarak genellikle modules diyoruz.
-
-O halde devam edelim, bir terminale gidelim ve modules'u oluşturalım. VS Code'da kenar çubuğunda belirdiğini görebilirsiniz.
+Şimdi, dediğim gibi, gerçekten çok fazla kod yazmayacağız veya düzenlemeyeceğiz. Sadece zaten sahip olduğumuz kodu etrafta taşıyacağız. Nextflow modül dosyaları tipik olarak tek bir süreç içerir ve geleneksel olarak bunları normalde modules adlı bir dizinde tutarız. Ancak buna istediğiniz şeyi verebilirsiniz. Ama buradaki repomda bir modules dizini tutacağım ve sonra her süreç için bir dosya oluşturacağım. Yani yeni dosya diyeceğim, sayHello.nf.
 
 ## 2. sayHello() için bir modül oluşturun
 
-Ardından ilk modülüm için yeni bir dosya oluşturacağım. "touch" veya "code" yapabilirsiniz veya bunu kenar çubuğunda yapabilirsiniz, gerçekten önemli değil. Bu yüzden code modules yapacağım ve process'in adını vereceğim. Yani sayHello.nf. NF, Nextflow dosyaları için geleneksel dosya uzantısıdır.
+Şimdi sürecimi alacağım ve bu kodu ana hello modules dosyasından seçeceğim, keseceğim ve buraya yapıştıracağım.
 
-Burada kaydet'e basacağım ve yeni modül dosyamızın ortaya çıktığını göreceğiz.
+Açıkçası bu tek başına bir şey yapmaz. Ana betiğimiz hala bu sürece ihtiyaç duyuyor, bu yüzden onu bir şekilde geri çekmemiz gerekiyor. Ve bunu include ifadesiyle yapıyoruz.
 
-## 2.2. sayHello process kodunu modül dosyasına taşıyın
+Yani include yazıyorum ve süslü parantezler, ve sonra sürecin adını alıyorum. Ve from diyorum, ve sonra ona göreceli bir dosya yolu veriyorum. Yani bu betiğin kaydedildiği yerden göreceli olduğu için ./ ile başladığını söylüyor. Yani modules sayHello.nf.
 
-Sağda, modül kodunu workflow'dan alacağım. Ayrıca önce burada hash bang'i alacağım ve açıkça bir Nextflow dosyası olması için kopyalayacağım. Sonra bu process'i alacağım ve keseceğim. Yani ana workflow betiğimden kaldıracağım ve bu yeni modüle yapıştıracağım.
+VS code uzantısının burada oldukça yardımcı olduğuna dikkat edin. Bize bu dosyayı bulabiliyorsa ve adlandırdığım bir süreç bulabiliyorsa söylüyor. Burada kasıtlı olarak bir yazım hatası koyarsam, hemen bana bir hata veriyor ve içe aktarmaya çalıştığım bu süreci bulamadığını söyleyecek. Bu yüzden bulduğunuz hatalara göz kulak olun.
 
-Bu modül dosyasının içereceği tüm içerik bu. Sadece tek bir process, workflow yok, mantık yok, sadece tek başına bir process.
+Ve gerçekten hepsi bu. Sürecimiz hala burada. Aşağıda hiçbir değişiklik gerekmiyor. Süreç aynı ada sahip ve tamamen aynı şekilde yürütülüyor. Sadece sürecin asıl kodu artık ayrı bir dosyada.
 
-Şimdi bu dosyayı kapatabilirim.
+Nextflow workflow'unu tekrar çalıştırabiliriz, tamamen aynı şekilde çalışacak. Ve bu temelde kursun bu bölümünün geri kalanı sadece bu üç süreci kendi dosyalarına taşımak.
 
-## 2.3. workflow bloğundan önce bir import bildirimi ekleyin
+Şimdi bunu yapalım. İkinci süreç için hızlıca yeni bir modül dosyası oluşturacağım: convertToUpper.nf. O kodu keseceğim, buraya yapıştıracağım. Ve sonra bunu da dahil edeceğim. hadi, harika.
 
-Şimdi workflow'umda o ilk process eksik, bu yüzden onu içe aktararak geri getirmemiz gerekiyor. Bunun sözdizimi diğer programlama dillerine çok benzer, bu yüzden tanıdık gelebilir. Include'u süslü parantezlerle yaparız, process'in adı say hello, ve sonra dosya yolu modules, say hello, nf'den. Harika.
+Ve sonra collectGreetings.nf için yeni bir dosya oluşturacağım. Bunu kesin.
 
-Burada birkaç püf noktası var. VS Code uzantısı bu konuda akıllı. Bu dosya yolunu tanır ve üzerine gelip follow link yapabilirsiniz. Ya da Mac'teyim, option tuşuna tıklayabilirim ve bu dosyayı açar. Böylece hızlıca ona geçebiliriz.
+Bir sürü kesme, kesme ve kopyalama ve yapıştırma.
 
-Bu process adı şimdi aşağıdaki workflow tarafından kullanılıyor ve burada aynı şeyi yapabiliriz. Bize o process hakkında biraz bilgi gösteriyor ve yine option tuşunu basılı tutabilirim, üzerine tıklayabilirim ve editörde açılacak.
+Ve şimdi ana workflow betiğimiz aniden çok daha kısa, çok daha ulaşılabilir ve okuması çok daha kolay görünüyor.
 
-Yani farklı process'leriniz için çok sayıda dosyanız olduğunda VS Code'da kod tabanınızda hızlıca gezinmenin gerçekten hızlı bir yolu.
+Ve projenin artık farklı dosyalarımızla nasıl inşa edilmeye başladığını görebilirsiniz. İstediğimiz yerlerde detaya dalabilir, pipeline'daki belirli adımları bulmak için etrafta çok daha kolay gezinebilir ve pipeline'ın ne yaptığına dair hızlı bir genel bakış alabiliriz.
 
-Tamam. Bu bölüm için temelde bu kadar. Şimdi sadece diğer process'ler için aynı şeyi tekrar yapıyoruz.
+## VS Code ile modüllerde gezinme
 
-## 3. convertToUpper() process'ini modülerleştirin
+Şimdi, elbette, bunu yapmanın dezavantajı, büyük bir pipeline'ınız varsa, bir sürü modül dosyanız olacak ve bunlar birden fazla alt dizinde organize edilebilir veya her türlü şey olabilir. Şimdi, yine, burada küçük bir ipucu. VS Code uzantısı kod tabanınızda gezinmekte ve ayrıca oradaki kod hakkında size bilgi vermekte oldukça iyidir.
 
-O halde burada yeni bir dosya oluşturalım. Convert to upper nf olarak adlandıralım. Yine hash bang'i kopyalayın. Ve sonra process'i kesin.
+VS Code'un bu sürecin ne olduğunu anladığını ve üzerine geldiğimde bana küçük bir genel bakış verdiğini görebilirsiniz, böylece kaynak kodunu bulup gitmek zorunda kalmadan, bir workflow'da kullanırken tipik olarak en önemli şey olan girdilerin ve çıktıların ne olduğunu görebiliyorum.
 
-Process adını oraya kopyalayın, yeni process adıyla yeni bir include ifadesi ekleyin.
+Ayrıca command'ı basılı tutarsam, ben Mac'teyim, ve süreç adına tıklarsam, dosyayı doğrudan hemen açar. Onu içeri çeker. Böylece gerçek dosya yollarının ne olduğunu düşünmeden doğrudan oraya atlayabilirim. Ve bu her yerde çalışır, süreçlerin çağrıldığı yerlerde de bunu yapabilirim. Yani bu gerçekten hızlı.
 
-## 4. collectGreetings() process'ini modülerleştirin
+## 4.4. Workflow'u çalıştırın
 
-Ve sonra üçüncü process için aynısını yapın. Yeni dosya, connect. Greetings,
+Tamam, pipeline'ın hala beklediğimiz gibi çalıştığını kontrol edelim. Terminali açalım. "nextflow run hello modules" yapalım ve herhangi bir sorun olmadan çalışıp çalışmadığını görelim.
 
-hash bang'i yapın. Process'i kesin, process'i yapıştırın ve yeni bir include ifadesi yapın.
+Umarım bunun amacı pipeline'ın temelde değişmemiş olmasıdır, bu yüzden gerçekten daha önce çalıştırdığımızda gördüğümüz herhangi bir değişikliği görmemelisiniz. Buradaki çıktı tamamen aynı görünüyor ve tüm aynı dosyalarla results dizinimizi görebilirsiniz, bu harika. Değişiklik olmaması iyi.
 
-Şimdi burada geçersiz include kaynağı diyen bir hata alt çizgisi aldığımı görebilirsiniz. Ve bu aslında biraz fazla hızlı hareket ettiğim için yaptığım gerçek bir hata. Yakından bakarsanız, T'yi kaçırdığımı ve convert to upper'a dönüştürdüğümü görebilirsiniz.
+## nf-core/modules hakkında bir not
 
-Bu yüzden VS Code çok faydalı bir şekilde bana orada bir hata yaptığımı söyledi. O dosya adını düzeltirsem, hata ortadan kalkar. Bu, VS Code içindeki hata kontrolünün Nextflow kodu yazmak için neden bu kadar yararlı olduğunun iyi bir örneği. Aksi takdirde bunu fark etmezdim ve ancak çok daha sonra workflow'u çalıştırmayı denediğimde öğrenirdim.
+Bitirmeden önce, modüller söz konusu olduğunda işbirliğinin gücüne hızlıca değinmek istiyorum. Bu dosyalar benim repomda oturuyor, bu yüzden üzerlerinde nasıl işbirliği yapabileceğimiz hemen belli olmuyor. Ve bunu yapabileceğiniz birçok farklı yol var, ancak muhtemelen bunun en büyük ve en iyi bilinen örneği nf-core.
 
-Ana pipeline betiğimiz artık çok daha basit görünüyor. İçinde hiçbir process yok, sadece üç include ifademiz ve workflow'umuz var. Workflow'un mantığını değiştirmedik. Process kodunu değiştirmedik, bu yüzden umarım tamamen aynı şekilde çalışmalı.
+Eğer nf-core web sitesine gidersem, resources'a, ve modules'e gidiyorum. nf-core'un devasa bir modül kütüphanesine sahip olduğunu görebilirsiniz, bunu görüntülediğimde 1700'ün hemen altında modül var. Ve böylece en sevdiğim araçlardan herhangi birinin adını yazabilirim, başka birinin zaten bunun için bir modül yazıp yazmadığını bulmaya gidebilirim ve burada önceden yazılmış bu modül sürecini tüm girdilerle, çıktılarla, yazılım container'larıyla, tüm bu bilgilerle görebilirim ve burada yanda kaç farklı nf-core pipeline'ının bu tek paylaşılan süreci kullandığını görebilirsiniz.
 
-## 4.4. Daha önce olduğu gibi aynı şeyi yaptığını doğrulamak için workflow'u çalıştırın
+Bu biraz aşırı bir örnek, ancak bunun gerçekten bu kodu yeniden kullandığını görebilirsiniz. Ve bunun GitHub kaynağına tıklarsam, yaptığımızla tamamen aynı. Sadece bir dosyada büyük bir süreç.
 
-Kontrol edelim. Bir terminal açacağım ve daha önce olduğu gibi tamamen aynı komutu çalıştıracağım.
+Şimdi nf-core tarafında, bu dosyaları paylaşabilmek ve bunları farklı repolara getirebilmek için bazı numaralar yapıyoruz. Ve bu konuda daha fazla bilgi edinmek istiyorsanız, özellikle nf-core ile kullanma ve oluşturma hakkında sahip olduğumuz kursa göz atın. Ancak size bu kod yeniden kullanımı konseptinin ne kadar güçlü olabileceğine dair bir fikir vermek istedim.
 
-Kesinlikle, process'lerimizi çalıştırdı, say hello, convert to upper collect greetings ve bize tekrar üç karşılama verdi.
+## Özet
 
-Yani kodumuzun yerini değiştirdik, ancak workflow'un nasıl yürütüldüğü hakkında hiçbir şeyi değiştirmedik ve tamamen değişmedi. Tek fark, artık daha temiz kodumuz var, bakımı daha kolay ve başkalarıyla paylaşılması daha kolay.
+Tamam, modüller için bu kadar. Size kursun kısa bir bölümü olduğunu söylemiştim. Testi kontrol edin, anladığınızdan emin olun ve her şeyin hala düzgün çalıştığından emin olun. Ve sizi bir sonraki videoda göreceğim, o video tamamen yazılım container'larıyla ilgili. Çok teşekkür ederim.
 
-Ve bu kadar. Kısa bir bölümdü. Basit bir kavram, ancak çok güçlü ve daha karmaşık Nextflow workflow'ları yazma şeklimizin anahtarı. Bu yüzden bunu anlamanız ve kullanma alışkanlığı kazanmanız önemli.
-
-Bir sonraki bölümde, biraz tempomuz değişecek ve Nextflow kodu yazma sözdizimi hakkında bu kadar fazla düşünmeyi bırakacağız ve process'lerin kendilerinde yazılımı nasıl kullandığımız hakkında biraz düşüneceğiz. Bölüm beşte Merhaba Konteynerler için bize katılın.
-
-[Sonraki video transkripti :octicons-arrow-right-24:](05_hello_containers.md)
+I.

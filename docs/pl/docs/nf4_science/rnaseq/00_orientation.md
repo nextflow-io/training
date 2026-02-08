@@ -2,20 +2,19 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
-Jednak potrzebujesz (darmowego) konta, aby się zalogować, i powinieneś poświęcić kilka minut na zapoznanie się z interfejsem.
+Środowisko szkoleniowe zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem, więc nie musisz niczego instalować samodzielnie.
+Potrzebujesz jednak (darmowego) konta, aby się zalogować, i powinieneś poświęcić kilka minut na zapoznanie się z interfejsem.
 
 Jeśli jeszcze tego nie zrobiłeś, ukończ mini-kurs [Konfiguracja środowiska](../../envsetup/) przed dalszą pracą.
 
 ## Dostarczone materiały
 
-W trakcie tego kursu szkoleniowego będziemy pracować w katalogu `nf4-science/rnaseq/`, do którego należy przejść po otwarciu obszaru roboczego szkolenia.
+W trakcie tego kursu będziemy pracować w katalogu `nf4-science/rnaseq/`, do którego należy przejść po otwarciu obszaru roboczego szkolenia.
 Ten katalog zawiera wszystkie pliki kodu, dane testowe i pliki pomocnicze, których będziesz potrzebować.
 
 Możesz swobodnie eksplorować zawartość tego katalogu; najłatwiejszym sposobem jest użycie eksploratora plików po lewej stronie obszaru roboczego szkolenia w interfejsie VSCode.
 Alternatywnie możesz użyć polecenia `tree`.
-W trakcie kursu używamy wyjścia `tree` do przedstawienia struktury katalogów i zawartości w czytelnej formie.
-Czasami wprowadzamy drobne modyfikacje dla przejrzystości.
+W trakcie kursu używamy wyjścia `tree` do przedstawienia struktury katalogów i zawartości w czytelnej formie, czasami z drobnymi modyfikacjami dla przejrzystości.
 
 Tutaj generujemy spis treści do drugiego poziomu:
 

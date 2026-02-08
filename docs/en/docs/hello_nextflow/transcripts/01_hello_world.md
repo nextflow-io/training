@@ -1,7 +1,7 @@
-# Part 1: Hello World - Transcript
+# Part 1: Hello World - Video Transcript
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2hHI-9vms?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Important notes"
@@ -12,232 +12,324 @@
 
 ## Welcome
 
-Hi, welcome to Chapter One of Hello Nextflow.
+Hi, and welcome back.
 
-In this first part of a six part course, we're going to go into the very basics of Nextflow. We're going to start off by running some commands in a terminal, and then we'll take those Bash commands and see how to build them into a Nextflow script.
+You are now in Part One of the "Hello Nextflow" course called "Hello World". In this chapter, we're gonna start to build up some understanding of the very basics of Nextflow.
 
-We'll try running that first Nextflow pipeline, see what Nextflow does, where it runs, what files it creates, and what the purpose of where those files is.
+So hopefully you are now set up in Codespaces or somewhere equivalent with VS Code running, and you have your Hello Nextflow folder in the workspace in the Explorer with all these different files here.
 
-All right, let's get started.
+We're gonna start off by doing just some very basic things in the terminal using Bash, and then we'll see if we can do the same things within Nextflow so you get a feel for what the syntax looks like.
 
-## training.nextflow.io
+## 0. Warmup
 
-First things first, go to training.nextflow.io. Just as before, all of the material is written here, and I'll be working through it step by step. I'll be showing my screen as I do the steps of a training, but. Everything I'm saying is in the training material so you can follow it at your own speed, and you can find it all written there.
+So let's start really, simple. Let's just start with "echo", to print something to a terminal. "Hello World". I press enter and that goes to a terminal. Hello World. Hopefully that's not a surprise to anyone watching this course.
 
-This video also has video subtitles enabled, so feel free to put those up and track exactly what I'm saying as I say it.
+Okay, let's do something with this. Rather than just printing it to the terminal, let's write it to a file. I'm going to press up my keyboard up cursor, which cycles through the Bash history, so it gives me my last command, and I'm gonna tack onto the end of it there, little greater than symbol, which redirects the output from this command to a file, and I'm gonna call it output.txt.
 
-Okay, let's go to Hello Nextflow. That's the course we're going to be doing today, and we've done the orientation already in the first video, so we're going to go straight into part one. Hello World.
+Enter again, to run that command, nothing in the terminal this time, but we can see on the left hand side, the new file has popped up here, called output.txt.
 
-Okay, I'm going to leave this training material now and hop into my Code Spaces environment. This is what we set up in the first video. Hopefully you have something that looks very similar to this in your own system. I'm using VS Code and I'm looking at the training material and I've changed directories into the hello Nextflow directory.
+We can view that in a terminal with something like cat. So cat output.txt and sure enough it says "Hello World". We can also double click it and it opens it up in the code editor in VS Code.
 
-## 0. Warmup: Run Hello World directly
+## 1.1. Examine the code
 
-Okay. Let's start off with a couple of basics, which hopefully will feel familiar to everybody. I'm going to start off just by writing very basic command in the terminal. Down here going to say 'echo Hello World!"' press enter and, no surprises, the terminal does what I ask it and returns that string. Hello world.
+All right. I told you it was simple. What's next? Let's try and take this process and do it again, but this time, let's do it inside Nextflow.
 
-Okay, then I'm going to press up to get that command and edit it a bit more. Let's this time redirect that output to a file. I'm going to write it instead to output.txt and press enter nothing on the terminal this time because the output didn't come to the terminal. It went into that file.
+As I said, all of the different chapters in this course start with a script and this one is called, Hello World. So I'm gonna find Hello World. It previews it if I single click it, I'm gonna double click it to open it in the editor here. And I'm gonna just quickly get rid of the terminal.
 
-I can then read that file by doing 'cat output.txt' hit tab there to auto expand the file name and there you go. The file's there.
+Now this is a very, simple script, so about as simple as it gets. It's only 22 lines long, and it does basically the same thing. In fact. Some of this should look familiar. It is what we just typed. We can see our bash command redirecting to a file there.
 
-I can also see that file in the sidebar over in the file explorer in VS code. I can double click it and open it here. If you want to open it in VS Code without clicking anything, you can also do "code" and then "output.txt" and it does the same thing.
+Okay. What else? Also, in this file, we can start to see some of the core concepts of Nextflow. We have a process in red here and a workflow. These the special keywords and special terminology in Nextflow.
 
-Great. That's the first step. Very simple.
+## 1.1.1. The process definition
 
-## 1. Examine the Hello World workflow starter script
+Different processes within a workflow wrap different logical units of your workflow. Each process does one thing.
 
-Okay. We're now going to do exactly the same thing, but in Nextflow, instead of directly in the terminal.
+When we run it, it generates a task or multiple tasks, which are an actual doing steps of a pipeline. All of the processes are then orchestrated within a workflow block, which we see at the bottom, and in this case, just runs that one process.
 
-We're going to use the first example script to start with, this file is called Hello World. I can do "ls" to view it in a terminal, and I'm on Mac, so I can do command click to open that file, or I could have just double clicked in the sidebar over here.
+The process name follows this keyword here, and this can be basically anything. And then the contents of the process are within these curly brackets.
 
-There are a few things we can see in this file. Right at the top, there's a hash statement saying that this is a Nextflow file and that's how it could be executed. There are some comments here, just regular code comments in light gray, which don't affect the execution, and just help us read the script.
+There's only really one requirement for process, which is that it includes some kind of a script or an exec block. This is in the triple quotes here, and this is the bash script which gets written to the working directory when we run the pipeline and there's a thing which actually runs on your computer or server.
 
-And then there are two main structures. There's a process here and a workflow.
+This is bash typically, but you can also put in a different hash bang here at the top, and it could be a Python script or a R script. It doesn't matter. Whatever is in this script will be executed.
 
-Processes in Nextflow are the steps of the pipeline. They're the parts which actually do the logic and do the processing.
+There's one other thing we've added into this process here, which is the output declaration. This tells Nextflow that this process is expecting an output file called output.txt. It says it's a path, so it should be handled like a file, not say, if this was val, it would say it's like a variable or value.
 
-The workflow then at the bottom stitches these processes together and governs the logic of the workflow, how everything connects to one another.
+Note that this is not creating this file. It's not actually generating it. That's done by the script down here. It's just telling Nextflow to expect an output file with this filename.
 
-We're going to start off looking at a process. We'll come back to the workflow in a moment.
+## 1.1.2. The workflow definition
 
-## 1.2 The process definition
+Okay. And then at the bottom we have a workflow here, and again, we have a declaration. This one's called Main. This is the workflow equivalent of a script block, if you like. It's the part of the workflow that does something. And in this case, we are saying, call the process called sayHello.
 
-So every process starts with a key word process. Has a name and then has some curly brackets and everything within those curly brackets is that single process.
+Normally, of course, your pipeline will look a lot more complex than this. You'll have probably more than one process, and you'll use channels to orchestrate the data flow between them. We're gonna come onto that in the next parts of this course, but for now, this is enough. This is a valid pipeline, which should work.
 
-A process must have a script section, and contained here is a bash snippet in a multi-line string, which is the part of the code which is actually executed in the compute environment.
+I can even click preview DAG here in VS Code. The DAG or DAG is a representation of a data flow structure in the pipeline, and we can see it rendered on the side as a mermaid diagram. In this case it's very, simple. There's one box, which is the workflow and one process, which is called sayHello, but that might look more interesting as we go on.
 
-We also have an output statement here, which tells Nextflow, which files are expected to be created by the script. Note that the output here has a keyword path, which tells Nextflow that this is a file, not a value, or a string.
+## 1.2. Run the workflow
 
-Within the script block, this is just a regular bash statement, and it's exactly the same as what we wrote in the terminal. We're echoing hello world to a file called output.txt. This output.txt is then picked up by the output definition. The output definition isn't actually doing anything. It's just telling Nextflow what to expect, and if this file wasn't created, Nextflow would throw an error.
+Okay, let's try and run this workflow and see what happens.
 
-Note that this example is not a great one because we've hardcoded the file name here, output.txt and output.txt. If either of these were changed, that would cause an error in our workflow.
+I'm gonna bring up the terminal again at the bottom, clear the output, and I'm gonna type Nextflow Run. And then I'm just gonna type in the script name, which is hello-world.nf. And I'm gonna press enter.
 
-There is better way to do this with variables, which we'll cover in a minute.
+Okay, it's got some standard stuff at the top, which tells us that Nextflow ran and which version was running and what the script name and everything was.
 
-## 1.3 The workflow definition
+And really the important thing that we're looking for here is _here_, which is a summary of the different tasks which were executed.
 
-Okay. Moving down to the workflow, we can see that we have a comment and then we run the process called sayHello. This is the same keyword that's up here. This is about as simple as a workflow can get. We're just calling a single process with no variable input, so we're not connecting it to anything else. In the later part of this course, we'll talk about how to make this more powerful by using variable inputs and connecting things with channels.
+If yours looks like this with a little green tick, then well done. You've just run your first pipeline. Fantastic.
 
-## 2. Run the workflow
+It tells us here the name of the process, which Ran, which was called Say Hello, and it told us that it ran once and that it was successful. This updates as you go along, so when you're running a bigger pipeline, you'll see the progress represented here. But because this is so tiny, it runs basically immediately.
 
-Okay, this is all we need. Let's see if we can run it and see what happens. I am going to just clear the terminal and then I'm going to do "nextflow run", and I'm going to call the file name, which is hello-world.nf. That's all we need to run a Nextflow pipeline. This pipeline doesn't take any input, so we don't need any other arguments.
+## 1.2.2. Find the output and logs in the work directory
 
-Let's hit enter and see what happens.
+Now when you run a Nextflow pipeline, each one of those processes is stitched together, and each process, like I said before, can generate tasks one or multiple. So in this case, we had a single task from this process. It just ran once and that was done under this task _hash_.
 
-Okay. Hopefully you should have some output, which looks like this. We have a few bits of information telling us that Nextflow ran and what version it was using. Tells us which script was launched and it gives us a randomly generated name for this particular workflow execution. In this case, mine was called "gloomy_crick".
+Nextflow doesn't deal with the files in your working directory directly, it creates a special folder called work. And if I do "ls", we'll see it has appeared here: _work_, and within here there are sub directories for every single task which runs. And that matches this hash. So you can see if I go to "ls work/c4", and then it's truncated, but it starts 203, and that's the working directory, which was created by this process when we ran the pipeline. And you can see it on the side as well.
 
-The most important part of this though, is it tells us which steps ran in the pipeline. You can see that our process called sayHello ran, and it ran once and it was a hundred percent complete.
+When I list those files, you can see the output.txt file was generated. You can see it here as well. And there's a bunch of hidden files , which are not showing up with my regular "ls".
 
-This part here is the hash for that particular workflow task. Each process runs one or more times, and each one of those executions is called a task.
+If I click on output.txt, sure enough, we have our output. Fantastic. So the pipeline worked.
 
-## 2.2. Find the output and logs in the work directory
+It might seem like quite a lot of boilerplate for running what was essentially a one line bash script, but it will make more sense as our processes get more complicated. And this work directory with Nextflow and these files, which are created is really the backbone of what makes Nextflow so powerful.
 
-Every task gets its own isolated directory where it runs, so it's separate from the rest of the execution of the workflow. This hash corresponds to the file structure Within the work directory. If I do "tree work", we can see a0, and then a longer version of a short hash, and then our output.txt file. You can also see it in a sidebar.
+Each task, each element of a pipeline is isolated from every other task. It's reproducible. They don't conflict with one another, and everything can run in parallel. It's actually a really nice way when you get used to it because of this isolation that you can go in and see exactly what happened for a single task and debug.
 
-You can see in the sidebar there are some additional files here. The reason that these didn't show up in a terminal is because they are hidden files, they start with a dot. And indeed, if I do "tree -a" for all, and "work", we can see them here.
+Let's have a quick look at these other files in the work directory. From top to bottom, we have a file called _.command.begin_. This is empty. It is just at what's called a sentinel file, created by Nextflow saying, okay, I'm starting the task. Nothing interesting there.
 
-These dot files are present in every single work directory. That Nextflow creates, and each one has a slightly different task. Firstly .command.begin just includes some instructions for Nextflow that sets up the task before it runs. .command.run are the actual instructions executed by Nextflow itself. Then .command.sh is probably the most interesting one. This is the script that was resolved from our process block script.
+Then there's _.command.error_, _.command.log_ and _.command.out_. These are all outputs from the bash command or this script which ran. This is standard error. This is standard out, and this is the two of them combined as they came out. So you get the logical order.
 
-If I open it, you can see we've got our "echo Hello World" to output.txt file. This is exactly the same as our process in this case, but if we have any variables within our Nextflow code, every task will have a different .command.sh, and you can see how those variables were resolved.
+Okay, those were all empty for this as well, so not very interesting, but things get more interesting when you get to _.command.run_.
 
-The other files are to do with how the task executed. So .command.err, .log and .out are the standard error, standard output and the two combined. And .exitcode tells Nextflow how this task executed with what exit code, whether it's successful or not.
+This is typically a very long script. And this is what Nextflow actually executes. If you go in here, you'll start to see all the inner logic of Nextflow and see what it's doing and how it's executing your process. This will depend on where you are running, whether we're running locally or submitting it as a job to SLURM, in which case we'll have SLURM headers at the top. All these different setups.
 
-Finally, we have our output.txt file and sure enough, "Hello World" this is what we're expecting and this is what was created.
+Generally, you don't really need to ever look in this file, though. It is autogenerated by Nextflow and there's nothing really particularly unique to your pipeline, which is in it. But that's really the core of what's running.
 
-Okay, great. That was your first ever Nextflow run. Congratulations. It really is that simple.
+The next one is much more interesting. _.command.sh_ is the generated script, which came from your process, and here you can see that Nextflow added the Bash header, and then it executed our command, which was in our script block.
 
-Next, we're going to go onto how to do this a little bit more conveniently so that we don't have to edit the code every time we want to make a change to how the pipeline runs.
+And that's all the _.command.run_ file does is it just runs this _.command.sh_ file.
 
-## 3. Manage workflow executions
+This is a really useful one, which is the one you usually end up looking at the most when you're trying to debug something and check that the logic of your Nextflow pipeline is doing what you expect it to do.
 
-This directory structure is great for keeping all the tasks separated and everything organized, but of course, it's not very convenient to find your output files. You don't want to be digging through loads of nested directories trying to find the results of your pipeline.
+Finally, we have a file called _.exitcode_, and this just captures the exit code from a task , which in this case was successful. So the exit code was zero.
 
-## 3.1. Publish outputs
+If something goes wrong, you run outta memory or something else and it fails, then this very useful to understand what went wrong.
 
-The good news is you're not meant to. The work directories are really just for Nextflow to use itself. So what we're going to do is we're going to use a function for Nextflow called "publishDir".
+## 1.3. Run the workflow again
 
-We go back to our workflow, go to the process. We can add a new statement here called a directive. This is what Nextflow calls these things at the top of processes which augment how the functionality works, and the one we're going to use is called publishDir.
+One more thing to understand about work directories is that if I keep running this pipeline repeatedly, so if I _"nextflow run hello-world.nf"_, it's gonna do exactly the same thing, but this time it will have a new task id. You can see that this hash here is different, and now if I look in work, there's two hash directories. And these are, again, separate from one another.
 
-You can see I've started typing here and the Nextflow extension for VS Code has suggested to directive for me, so I can just hit enter.
+So every time you run a Nextflow workflow, unless you use the resume, which uses the cache, we'll touch on later, it's gonna rerun those processes in new work directories, which are separate from one another. You won't get any file name collisions, you won't have any problems like that. Everything is isolated and clean.
 
-Okay, I am going to follow this with a directory called "results" and we're going to tell it to copy the output files there . So I'm going to say mode copy. Great. going to hit save and let's run the workflow again.
+And if we go in this directory, you can see all the same files and the same _output.txt_, which has been recreated from scratch.
 
-nextflow run hello-world.nf
+## 2. Publish outputs
 
-It runs exactly the same. Though note we have a slightly different hash this time. Nextflow, will use a different hash every time you run the workflow. And we have a different set of work directories as a result. Areas, ones called EB instead, but you can see all the files are the same . However, what's new this time is that we also have a directory called "results".
+Okay, that's great for Nextflow for itself, whilst it's running your pipeline so that all the things are separate from one another and clean and can be managed.
 
-Within "results" here we have our output file. That's what we told Nextflow to do. We said, save the results files in a directory called "results" and copy them there. And so this is now much easier to find. It's just there alongside where we launched a workflow and all the different files can be organized there however, we wish, irrespective of where or how Nextflow ran the actual execution.
+But it's not super useful if you're a person trying to explore your results. You don't really want to be digging around through thousands and thousands of different work directories trying to find your result files. And you're not really meant to. The work directories are not meant to be the final state of where your files are created.
 
-Note that publishDir can handle symlinks, which is good if you're working on a shared file system and you want to save on space. And also you don't have to define all the files which are created by a process as an output.
+We do this by publishing our files.
 
-Nextflow will only copy the things which are defined in this output block. So if you have intermediate files created by the step, which are not needed downstream of this process, you just don't define them in output and they won't turn up in the publishDir. So this is a way of keeping your output files from a pipeline clean and easily deleting intermediate files once the workplace finished.
+## 2.1.1. Declare the output of the sayHello process
 
-A quick note here. There's some new Nextflow syntax coming called workflow output definitions, which will eventually replace publishDir. This gives us a way to define all the outputs from a workflow at pipeline level down in the workflow block. This is described in the Nextflow docs if you wanna give it a try. But for now, publishDir will be around for a while, so still have that in a training for 2025.
+So if I go back to our script, we're gonna work in our workflow block here. We're going to tell it what files to expect, which files we care about, and then we're gonna create a new block underneath called the output block.
 
-## 3.2. Re-launch a workflow with -resume
+This is the new syntax, which came with a the syntax parser and be default in version 26.04 of Nextflow. So if you have used Nextflow a little bit before, this is one of the things which is new.
 
-Okay. I mentioned that the work directory here now has two sets of results with a different hash from each time we run the workflow. That's good. However, sometimes we don't want to recompute steps every time if we don't need to.
+So we've got the main block, and next I'm gonna say publish and I'm gonna tell Nextflow what to expect from the publishing. We're gonna call it _first_output_, and we're gonna call it, _sayHello.out_.
 
-Maybe you are iteratively building your workflow and you're adding steps in and you want the first steps just to reuse the cached versions. Or maybe something went wrong on your compute system halfway through your workflow and you want it to carry on from where it left off, but skip the steps it had already completed.
+I accidentally made a typo there, but this is a good opportunity to also point out some of the features of the Nextflow VS Code extension. You can see that right away it gave me a little wiggly red line underneath this saying something's wrong. And if I hover over it, it's gonna tell me this variable is not defined. I dunno what it is.
 
-Nextflow has built-in functionality for this called resume. Let's try it out. So first off, I'm going to just have a look at the work directory so we can remember what was there.
+It's pretty obvious in this case, I made a typo. I meant to type, sayHello, and then the squiggly line goes away.
 
-And then I'm going to do "nextflow run hello-world.nf" and I'm going to add a single command here, "-resume".
+Now it's purple. The Nextflow syntax parser knows that this is a process and when I hover over it, it gives me a reduced representation of what this process looks like. So I can see very quickly at a glance it doesn't take any inputs and it gives us this output. So working in VS Code with this extension gives you lots of contextual information as you're writing code.
 
-Note, single dash, that's really important. I'm going to run it and the output's going to look basically exactly the same, with a couple of small differences.
+Note that we can refer to the output from this process with the _.out_ syntax. And at the moment we can call this whatever we like, it's just an arbitrary variable name.
 
-Note here it says "cached" in gray. That means that Nextflow didn't run the task. This time it found something that matched what were requirements and it reused those outputs directly rather than rerunning the step.
+## 2.1.2. Add an output: block to the script
 
-And sure enough, if you look at the hash here, you can see this corresponds to the existing hash that we had from a previous run.
+Where it becomes important is when we do our new block here, and this is below the workflow block now, we're not no longer inside workflow. Squiggly brackets again. And this is where we just tell Nextflow where to put all of the files, which are created by the workflow.
 
-## 3.3. Delete older work directories
+Now I'm gonna take this variable name, which I created here, and I'm gonna put that there and put some squiggly brackets for this. And I'm gonna tell Nextflow to use a path. Oops. Path, in quote marks. And I'm gonna use dot. That just tells Nextflow to put the file in the root of the results directory. So not any sub directories or anything.
 
-Okay. But if you are developing iteratively, you're going to build up a lot of these workflow files. That can be a problem if you might be short on space.
+Let's try running our workflow again. If I do _"nextflow run hello-world.nf"_, then hopefully it should look basically exactly the same. Nothing has really changed with Nextflow here. It's running the same things. It's just doing them in work directories again.
 
-Nextflow can help us clean up these work directories with a couple of helper commands. If I do "nextflow log". That will give me a list of all the different workflow runs that I've done in this directory, and they have the run names here. You can see the gloomy quick one, which was the first one we ran, and then these two new ones.
+But now if I do _"ls results/"_, you'll see there's a new directory here that's been created called results, which is the default base directory for workflow publishing. And in there's a file called _output.txt_.
 
-We can now take that name and use those with the "nextflow clean" command. I can specify a single run name. Or even better, I can tell Nextflow to delete everything from before a single workflow name with "-before", and I'm going to put in "stupefied_shaw". That was my most recent run, "-n".
+If I do _"ls -l results"_, you'll see this is actually soft linked to the work directory. So this is not a real file, it's linked to the work directory and it's collected all of the files there for us.
 
-The "-n" command told Nextflow to do it as a dry run without actually deleting anything for real, and it tells us which of the hash directories it would've been removed. Sure enough, it's just that one from the first execution. Both of the second executions use the same hash directory.
+## 2.2. Set a custom location
 
-I am going to run it again, but now instead of "-n" for dry run, I'm going to do "-f" for force and it has removed that hash directory. Now if I do "tree work", we can see, we just have this output file left.
+"Results" is the default name for this path. If I run the workflow again, and this time I do _dash_ single hyphen, this is, 'cause it's a core Nextflow option. _" -Output-dir **my** results"._ Could also just do _"-o"_ for short. Then it's gonna set a different base directory for where the files are stored and once again, up here in _myresults/_, now we have an _output.txt_.
 
-Great. So we've managed to clean up a whole bunch of disc space there.
+That's great, but we probably don't want all the files just in the root. We want some organization, so we can also create a subdirectory here called whatever we want. Let's say _"path 'hello_world'"_, and I just run this again. _"nextflow run hello-world.nf"_. It should go into the results directory into a subdirectory and sure enough, now under results here at the top we have _hello_world/_ and we have _output.txt_.
 
-A couple of things to note when deleting work directories, if you symlink stuff to your results directory, those symlink sources will now be deleted and your results will be gone forever. So that's why using copy mode is a safer thing to do, and generally what we recommend.
+Important thing to notice, the old _output.txt_ file is still there. The results directory is not wiped when you do this. Just new files are copied in there. They'll overwrite files which are already there if they have the same file name, but they won't clear out old ones. So you need to be a little bit careful about when you rerun pipelines. If you don't want them to be on top of the files that are already there. Make sure you use a blank empty directory.
 
-Secondly, Nextflow's resume functionality relies on these work directories. So if you delete them and you run Nextflow again, the resume functionality will no longer work. So it's up to you to keep track of which things you may need or may not need, and only delete things when you're sure that it's safe to do so.
+## 2.3. Set the publish mode to copy
 
-The other thing we can do is we can just delete the entire work directory if we've finished our workflow run and we're sure we don't need it anymore.
+Okay, I mentioned that these files are soft links, so if I do _"ls -l results/hello_world/"_, you can see it's soft linking to the work directory. That's generally a good thing if you're working on something like HPC, and these are really huge files and you don't want to duplicate them, because it means that the files only stored once on the file system.
 
-So I can do "rm -r work". I know there was nothing important in there. I've got my results that I care about in the results directory where we copied them. And so it was safe to delete the work directory. It's up to you which of these approaches you use.
+However, it does mean that if you delete the work directory: if I do _"rm -r work"_ and clear out all those intermediate files which were created. Now, if I try and read this file _"results/hello_world/"_. It's gonna be pointing as a soft link to a file that no longer exists and the data is gone forever and is irretrievable, which is maybe not great.
 
-## 4. Use a variable input passed on the command line
+So generally we, I say it's good practice to copy the files instead of soft linking if you can, because it's safer. Just be aware that it will use twice as much disk space unless you delete those work directories.
 
-Okay, what's next? I mentioned that we had hardcoded some of the values in our workflow script here, the output.txt file, and that there might be a better way to do that.
+To do that with the output block, I'm gonna go to the first output here. I set the path before and now I'm gonna set the mode and you can see as I type, the VS code extension is, suggesting stuff it knows it's an output directive here. And I'm gonna say copy. I hit save.
 
-Let's make a start on this. What we're going to do is three things. We're going to add a new input to the process. We're going to tell the process script how to use that input, and then we're going to wire it up in the workflow so that we can use it dynamically with a command line flag when running Nextflow.
+Let's rerun the workflow. It is gonna create the files again, new work directory.
 
-So first things first. Let's add an input block here. Just the same as output. This is a new section for the process, and I'm going to say, "val greeting".
+Now, if I go to _"ls -l results/hello_world/"_ you can see this is a real file and it is not a soft link anymore, and Nextflow copied that. Good to know. So path and mode are things you'll find yourself writing quite a lot.
 
-Note here, I'm saying "val", which says that this is a variable, not a path.
+Now, of course, this is very simple. We will make this more complex and powerful as we go along, and you'll see how to make these things dynamic and not too verbose.
 
-I can then go down into the script and then I can take out this hardcoded text here and do $greeting. This works just like any other programming language. We're defining a variable here and we're referencing it within this script block. When Nextflow runs this process, the variable will be interpolated. And when we go and look at that .command.sh file, we'll see the actual hard coded string here instead.
+## 2.4. Note on process-level publishDir directives
 
-## 4.1.3. Set up a CLI parameter and provide it as input to the process call
+Now, I said as we started on this, that this is a fairly new form of syntax. It's only available in the latest versions of Nextflow as I record this, and it's called Workflow Outputs.
 
-Okay, but where do we provide the variable? Next we go down to the workflow section, and you can see that the extension here is saying, we now expect an input, and it's given me a warning.
+If you use this, it's great. It unlocks lots of other cool features within Nextflow, such as, Nextflow Lineage to help track the heritage of these files as they're created, and soon will be the default in 26.04. And at a later date in the future, this will be the only way to write your workflows.
 
-Now, the simplest thing we could do is just hard code it . I could write "Hello World" and provide that string input to the process. But again, that wouldn't really solve any problems. We'd still have to go back and edit the pipeline code every time we wanted to change something, which is no good.
+However, as we're in this transition phase right now, you might well see pipelines in the wild, which you use something called publishDir, which is the old way to do it, and this is defined not at the workflow and output level, but this is defined at process level.
 
-The good news is that Nextflow has a built in system to handle command line arguments called parameters. So instead, I can use one of these special variables called paras and I can call it whatever I want, but I'm going to say greeting so that it matches the workflow logic.
+And this declaration says basically the same thing. It says, publish the results files into a directory called results, and use a copy mode. So you can see the syntax is very similar. But when you're writing new pipelines now, try not to use this publishDir directive, even if you see it, in AI results or in documentation or other pipelines, because that's the old way to do it.
 
-Hit save and let's see what we can do with this.
+In 2026 we should all be using workflow outputs.
 
-So if I go back to the terminal. So we do "nextflow run hello-world.nf". Just as before, but the key difference is we do --greeting
+This is all documented, if you are doing this and you've used Nextflow before, you can go to the Nextflow docs here, nextflow.io/docs/. And if I scroll down to tutorials, there's a tutorial called _Migrating to Workflow Outputs_.
 
-Note, there are two dashes here because this is a parameter. When we resumed the workflow before, that was a single dash . That's because resume is a core Nextflow option, and this is a parameter which is specific to our pipeline.
+It is really good. It goes through all the syntax, how it's equivalent to the old syntax, why we changed it, and, have a timeline and everything. And it goes through all the different scenarios with loads and lots of examples. So you can easily convert existing Nextflow code over to the new syntax.
 
-Don't mix the two up. It's easy to do that. If you did --resume instead of just one dash, then that would be "params.resume", which wouldn't do anything. Likewise, if you did a single dash here, Nextflow wouldn't recognize it as a key argument.
+## 3.1. Change the sayHello process to expect a variable input
 
-So it's --greeting, which corresponds to parameters greeting.
+Okay, so we've got our simple script, which is running a process, creating a file, telling Nextflow it's an output, and then we're telling Nextflow where to save that file. That's a good start.
 
-I can now follow that with whatever text I want. So I'm in Sweden at the moment, so I'm going to say, "Hej världen".
+But it'd be more interesting if it wasn't all hardcoded. So next, let's think about how to tell Nextflow that this process can take a variable input, which is something we can control at runtime when we launch a workflow.
 
-So let's run it, see what happens, moment of truth.
+We need to do a few different things to make this happen.
 
-Okay, so you can see that the process ran again, just as before, sayHello with a single execution.
+Firstly, we need to tell this process that it can accept an input variable and we type _input_ here as a new declaration block. And we're gonna call this _"val greeting"_.
 
-This will have overwritten the file that was in the publishDir "results" directory. And so be careful when you're rerunning the files because things in the published air will be overwritten.
+The val bit is the equivalent of a path down here. It tells Nextflow this is a variable, like a string in this case. And if you hover over it again, it tells you from the extension of what this means.
 
-I can now do "code results/output.txt", and sure enough, our output's been updated and now says "Hej världen".
+Next we're gonna tell Nextflow what to do with this. It's not, enough just to say that there is a variable. You have to say in the script how to use that variable. And so I'm gonna get rid of this hardcoded string here, and I'm gonna put in a variable.
 
-## 4.2. Use default values for command line parameters
+I'm gonna quickly do it without squiggly brackets just to show you that this is, allowed, and this is the old, style way of doing it. But now with the new syntax, we really recommend putting it inside squiggly brackets like this, and it makes it really clear that this is being interpolated by Nextflow here.
 
-Okay, that's great. But the problem now is our workflow relies on us always defining this parameter, and it's nice to have sensible defaults so that things will run in a sensible way for your workflow unless you override the defaults.
+Great. So _"input greeting"_ goes into _$\{greeting\}._ Last thing is we need to tell Nextflow at the workflow level that this process now takes an input. And to do that, we're basically going to give it a variable.
 
-So the way we do that is by setting a default value for the parameter in our workflow script.
+## 3.2. Set up a command-line parameter to capture user input
 
-So if I go back to my hello-world.nf file, I can go into the script just above workflow, type "prams.greeting" and define it like any other variable. So let's put a string here and let's say "Holà mundo!"
+We could hard code it again, like Hello World, and that would work fine, but obviously it doesn't really give us any advantage. We wanted to be able to configure this at run time, so we want to be able to do it on the CLI, when you launch Nextflow.
 
-Now this parameter has got a default defined, which will be used here , or we can still override it on the command line with --greeting, just as we did before.
+And the way we do that is a special Nextflow concept called _params_. We're gonna call that _params.input_.
 
-So let's check it works. "nextflow run hello-world.nf"
+What this does is it exposes this input variable on the CLI and that's where we use a double dash when we launch Nextflow.
 
-No command-line arguments this time, and check whether it did the right thing.
+I can call this whatever I like, I can call it _hello, greeting_. Doesn't matter. Whatever I do there will be exposed as a CLI option when we launch a pipeline. And this is a real magic trick by Nextflow 'cause it means you can build your workflow script very quickly with these parameters, and you're essentially building out a custom CLI for your pipeline, making it really easy to customize different options on the fly when you launch.
 
-"code results/output.txt". And there it is. We got our default.
+So. Let's try it out. Go back to our terminal. We have our _"nextflow run"_ command here. And now I'm gonna do _"--input"_, which matches the _"params.input"_ we saw before. I think in the docs it's in French. Geraldine likes to speak French. I'm gonna do it in Swedish 'cause I live in Sweden. so I'm gonna say, "_Hej Världen_" and hit enter.
 
-Okay, let's try again, just check I'm not telling you any lies. Let's run it again, but do --greeting, and use the example from a training material, let's say "Konnichiwa!"
+Can use single quotes or double quotes, it just affects how Bash interprets it.
 
-Reruns, the workflow, and sure enough, our output file up at the top is just updated with the new value which we provided on the command line.
+It runs the Nextflow pipeline exactly the same way. You can see the working directory and everything is the same. But now if I go up to _"results/hello_world/output"_. We can see our nice Swedish here instead.
 
-Great. This is a real central aspect to writing any Nextflow workflow. Defining sensible defaults in your pipeline code, but making it very easy to configure for the end user by having command line arguments on the terminal.
+So we have dynamically passed an input from a CLI to a parameter. We've passed that as an input to the process and the process interpreted that and put it into a script block, which has then dynamically changed the output of that script result. Pretty cool.
 
-Note that the end user can overwrite the config in multiple different places. You can have a config file in your home directory, which is applied to every single Nextflow run that you do. You can have a config file in a launch directory. You can have a config file in a pipeline directory. All of these different config locations are loaded in a specific order, which is described in the Nextflow docs.
+Quite complex logic with very, little syntax here. And you can hopefully see how this now starts to scale. And this is how we really build the logic and the customizability of our pipelines into the Nextflow script.
 
-Okay, that's the end of section one. We've had our first ever workflow script in Nextflow with a process and a workflow. We've looked at inputs, outputs, scripts, and publishing, and how to wire up parameters and an input channel into our process.
+## 3.4. Use default values for command line parameters
 
-Congratulations, your first step towards writing Next low code is complete.
+Okay, that's great. The problem though now is, every single time I run this pipeline, I need to do dash, input for it to run.
 
-Have a little break and I'll see you back in a few minutes for chapter two.
+If I try and run without this parameter, now Nextflow is gonna throw an error saying it needed this parameter and it wasn't set. and so it didn't know what to do.
 
-[Next video transcript :octicons-arrow-right-24:](02_hello_channels.md)
+This is a cool new thing, by the way. In the past, Nextflow would've just run with an empty string, and you'd have had all kinds of weird errors, which would've been difficult to understand. But in the new Nextflow syntax parser, it is a bit more careful and it tells you right away.
+
+So we don't always want to specify every single option. It's good practice to specify sensible defaults. So how do we do that in our script?
+
+You'll notice that when we wrote this, we just put _params.input_ straight into where we're using it. So the obvious solution is we define a default, and we do that up at the top of the script here in a special params block in the workflow. This is in the workflow script here.
+
+Again, some new syntax here, so pay attention. This is really cool stuff. We've got the name of the parameter, which will be expected here.
+
+And then after this colon character, we're defining a type of the variable. You don't have to do this, you can just leave it blank, but it's really nice. It tells Nextflow that we're expecting a string and treat it as such.
+
+If we want a number instead, for example, we could write float, and that would say we want a floating point number. And if we try and run with that, then it will throw an error. If we give it a string, which is not a float. And it'll also pass it as such. As if we do string, then it knows it's a string. And even if it has leading zeros and is all numeric, it will still pass it as an actual string.
+
+So that type safety is a very new feature of Nextflow, but really powerful to make your code safer to write and to run.
+
+Then after that we've got an equal symbol and then the default value here. Nextflow is written in Barcelona originally, so it seems appropriate that we've got some, Spanish here, _"Holà mundo!"_ as a default.
+
+Right i'm gonna save that script, go back, run the script again without _--input_. And this time it should run and it will create our new file up in _results_. And in this file now it says _"Holà mundo!"_.
+
+This is just a default though, so it doesn't mean that we can't still do the same thing as before. If I go back and find my old script here, _"Hej Världen"_, because I do _--input_ on the command line, that will overwrite that default and use that again in the output.txt file.
+
+So this in the script is only the default value that I'm setting.
+
+As we build up our workflow to be more complex and include more parameters, this params block at the top of the script will start to collect all of them in one place.
+
+And you end up with this quite nice symmetry in your script, where you effectively have all your workflow inputs here and your workflow outputs down at the bottom. And it's very clear what the interface of your workflow is to the outside world. So you can pick up a new pipeline very quickly with the new syntax and understand how to use it.
+
+One last cool thing. We don't have to set a default value with this. If we do params input but don't set a default value, then it tells Nextflow that this parameter is required, and again, the pipeline will fail to run without it, but it'll give you a more useful error message rather than something about it being null.
+
+So it says we are expecting its input is required, but it wasn't specified on the command line. Very nice.
+
+Okay, so hopefully now it's clear about how to set up your Nextflow pipeline with variable inputs and parameters, how to set the default, set, the types, it could be a Boolean true false flag or an integer or different types here. How to pass them into your workflow, where it goes through, and then interpolates into your process. And then you also know how to customize those on the command line when you launch Nextflow. This is starting to look more interesting than our simple bash command.
+
+## 4. Manage workflow executions
+
+Okay. What's next? For the final part of this chapter, we're gonna talk a little bit about how to manage all different workflow executions. If you look in my sidebar here and the Explorer underneath work, you'll see I've run a bunch of different pipelines and these work directories are getting quite long, there's a lot of them.
+
+And the other thing is, as I said before, every time I rerun this pipeline, it's creating a new set of work directories, and it's rerunning all the processes from scratch, which is a good thing. That's intended behavior. It's reproducible and it's regenerating everything fresh. But it obviously, if you're running very long running processes, it's annoying to always have to start your pipeline from the beginning if it crashed halfway through, or if you change something at the end of the pipeline.
+
+## 4.1. Re-launch a workflow with -resume
+
+Luckily, Nextflow is really, good at knowing what has previously been run and what's available, and to reuse those old results is very, simple. We just add a, new flag at the end of the command _"-resume"_.
+
+Now, note there are two hyphens on input 'cause that's the parameter. There's only one hyphen on resume because that's a core Nextflow option.
+
+It trips people up all the time, even if you've been using Nextflow for a long time. So always remember one or two hyphens. Depends if it's a core Nextflow option.
+
+Okay, so now I do _-resume_ and I run exactly the same workflow again. And this time it should look pretty much exactly the same with one key difference.
+
+In the output here, you can see that the results were cached. And in fact, this task hash here is exactly the same as the previous run, and it's just reused that work directory in its entirety. The inputs and the outputs and the script were all unmodified. And so it just takes that file from that and if there are downstream steps in the process, it would pass them onto the next step in the pipeline.
+
+So it's still running the whole pipeline from start to end, but it's using cached results for each one of those tasks, where it can.
+
+Now, when you do _-resume_, it just resumes the last pipeline run in your working directory, whatever that was. But you can actually resume from any previous run that you've done there. And we've done quite a lot now.
+
+## 4.2. Inspect the log of past executions
+
+To look at all of them, we can do _"nextflow log"_ instead of _"nextflow run"_, and that will give us a nice output showing all of these different.. I need to make my screen a bit smaller so we can see it, all of these different runs when we did them, the session id, the command and everything.
+
+And we can look in here and we can take the run name of any of these and then resume one of those specific ones. So I can go back and I can resume that one called _hungry_ekeblad_. And I just put that after the _resume_.
+
+If you're curious, by the way, all of these adjectives and scientists names are in the Nextflow source code. It's a really good way to get your first ever pull request to Nextflow by going and finding it and adding your favorite scientists.
+
+And anyway, so I did that and it went back and it looked at the cached results from this workflow run, realized it could still reuse them, and it did. So I got the cached results again.
+
+## 4.3. Delete older work directories
+
+That's great. What about if I want to clean up these work directories? There are loads of them here. There's loads of files. Maybe I know for a fact that I want to resume from the last couple of pipeline runs, but I don't care about all the ones before that.
+
+Then I can pick one here and I can use another Nextflow command, which is _"nextflow clean"_, and I can do _"nextflow clean"_, I'm gonna do _"-before"_, and the particular run name, which in this case was _reverent_pike_ and I'm gonna do _"-n"_, which tells Nextflow just to do a dry run. So it just tells me what it will delete. Without actually doing anything, so it would remove these work directories.
+
+That looks sensible. So I'm gonna do the same command again, but instead of _"-n"_ I'll do _"-f"_ to actually do the cleanup. And this time it's actually removed all these directories. And if I go in and look at the work directories, it's now looking a lot lighter. Fantastic.
+
+So that's how to clean up all of your local work directories in a pretty safe way without completely destroying the cache. So you can still resume if you want to.
+
+If ever you forget what these flags are for every Nextflow command you can do _"nextflow help"_, and then the name of the command. So if I do _"nextflow help clean"_, you can see all the different options: _-after, -before, -but_, all different ways to configure this cleanup behavior. Pretty cool.
+
+## Takeaway
+
+Okay, that's the end of part one of Hello Nextflow. It's quite an intense start to the course, but hopefully now you have a pretty good understanding of what a Nextflow script looks like; with different key parts, the processes, the workflows, the outputs, and the parameters. You know how to configure them with basic overrides from the command line, how to make a dynamic input block with a dynamic script and you know how to manage all of your workload executions: seeing what you've already run, resuming, cleaning up. There's a lot of stuff. You've come a long way. So if you want to take a break and have a quick walk around and a cup of tea, now is probably a good time. You've earned it.
+
+From here on, we are basically building on this foundation. How can we make this more complex, more powerful? How can we make it more flexible? Do the things we want to do our analysis at scale.
+
+## Quiz
+
+Now if you scroll down to the part one, hello world, on the webpage you'll see a little quiz and this is something new that we've done for this version of the Nextflow training. And you can go through and quiz yourself to check that you've understood all the material that we've done in this chapter.
+
+This isn't sent to us or anything, it's just stored in your browser. So we don't know what your answers are, but it's just a little self check to make sure that you haven't missed anything or misunderstood anything. And you can try it as many times as you like.
+
+If you're like me, maybe you want to stay in the terminal in your VS Code instance, in which case you can type the _quiz_ command and then just tell it which, chapter you're on. So we do _"Hello World"_, and then you can do exactly the same, quiz questions, which are in the web browser, but just in your terminal.
+
+Cool. Okay. Hope you enjoy that. Have a bit of fun and, we'll see you in the next chapter in just a minute to talk all about Nextflow channels.
+
+​

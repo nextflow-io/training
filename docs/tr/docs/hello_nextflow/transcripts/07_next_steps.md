@@ -1,63 +1,79 @@
-# Sonraki Adımlar - Transkript
+# Sonraki Adımlar - Video Transkripti
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } YZ destekli çeviri - [daha fazla bilgi edinin ve iyileştirmeler önerin](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/xHOcx_4Ancg?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Önemli notlar"
 
-    Bu sayfa sadece transkripti göstermektedir. Adım adım talimatların tamamı için [kurs materyaline](../05_hello_containers.md) geri dönün.
+    Bu sayfa yalnızca transkripti göstermektedir. Adım adım tam talimatlar için [kurs materyaline](../next_steps.md) dönün.
 
 ## Hoş Geldiniz
 
-Tebrikler, başardınız. Hello Nextflow adlı ilk Nextflow eğitim kursunu tamamladınız.
+​
 
-Aferin. Sonuna kadar devam ettiğiniz için teşekkür ederiz ve Nextflow öğrenmek için harcadığınız zaman ve çabayı gerçekten takdir ediyoruz. Bunun çalışmalarınız için faydalı olacağını umuyoruz.
+Tebrikler, başardınız!
 
-## Sonraki Adımlar
+Sona ulaştınız ve Hello Nextflow eğitim kursunu tamamladınız. Umarım keyif almışsınızdır. Sonuna kadar bizimle kaldığınız için çok teşekkür ederiz ve Nextflow'u öğrenmek için harcadığınız zaman ve çabayı gerçekten takdir ediyoruz. İşiniz için faydalı olacağını umuyoruz.
 
-Sonraki adımlar için eğitim portalını takip edin: training.nextflow.io. Oraya sürekli olarak yeni kurs materyalleri ekliyoruz ve bunları yeniliyoruz. Böylece daha ileri düzey eğitimler veya ilgilendiğiniz araştırma alanına özel eğitimler bulabilirsiniz.
+## training.nextflow.io'daki Diğer Kurslar
 
-Özellikle Nextflow for Science sayfasına göz atın. Bu sayfada, Hello Nextflow'da öğrendiklerinizi belirli kullanım senaryolarına genişleten, bağımsız kısa kurslar serisi bulunmaktadır.
+training.nextflow.io'yu ziyaret etmeye devam etmeyi unutmayın. Sürekli olarak yeni kısa kurslar ekliyoruz ve ayrıca zaten burada olan materyallerin çoğunu yeniliyoruz. Dolayısıyla bu Hello Nextflow eğitim kursu zamanla güncellenecektir.
 
-Genomik için bir tane ve ayrıca RNA-seq için bir tane var. Yakında daha fazlasını getirmeyi umuyoruz.
+Bu özellikle önemlidir çünkü Nextflow'da sözdizimini güncelliyoruz ve 2026'da oldukça fazla yeni özellik gelecek, dolayısıyla bu kurs 2027'de bir sonraki yaptığımızda biraz farklı görünecek ve hissettirecek.
 
-## Yan Görevler
+Özellikle "Nextflow for Science" sayfasına dikkat çekmek istiyorum. Bunlar kısa kurslardır ve bu Hello Nextflow kursunu takip edecek şekilde tasarlanmıştır. Ve genomik, RNAseq veya her türlü farklı şey olsun, belirli farklı kullanım durumlarıyla Nextflow'un nasıl kullanılacağını gösterirler. Sürekli olarak daha fazla bilimsel kullanım durumu eklemeye çalışıyoruz.
 
-Hello Nextflow'da bahsedebileceğimiz ama çok fazla detay olacak birçok şey var. Bu konuların bazılarını, belirli konularda kısa kurslar olan Yan Görevler içine koyuyoruz.
+Ayrıca Yan Görevler de var. Hello Nextflow gibi bir kurs geliştirdiğimizde, kapsayabileceğimiz çok şey var ve her şeyi kapsam içinde tutmak zor. Dolayısıyla insanlar için ilginç olduğunu düşündüğümüz, daha derinlemesine ele alınmayı hak eden belirli bir konu varsa, bunu bir Yan Görev'e koyuyoruz.
 
-İlginizi çekebilecek içerikler içeren daha büyük temel eğitim ve ileri düzey eğitim kursları da bulunmaktadır.
+Gidin ve inceleyin ve işinizle alakalı olabilecek farklı şeyler varsa, nf-test veya metadata ile farklı şeyler yapmak ve yaygın betik kalıpları gibi, Yan Görevlere göz atın ve daha fazla bilgi edinmek için faydalı olup olmayacağına bakın.
 
-## nf-core
+Ayrıca nf-core hakkında bir kurs var. Umarım bu noktada projeye aşinasınızdır, ama değilseniz, gidin ve inceleyin. Farklı analiz türleri ve farklı veri türleri için neredeyse 150 farklı pipeline var, dolayısıyla ihtiyacınız olan veri analizi türü için kutusundan çıkar çıkmaz hazır bir pipeline olması tamamen mümkün.
 
-Bu kursta bir iki kez bahsedildi, ancak kesinlikle nf-core projesine göz atın. Farklı veri türleri için yüzün üzerinde pipeline var, bu nedenle kendi pipeline'ınızı oluşturmanıza gerek kalmayabilir.
-
-Ayrıca nf-core geliştirici araçlarını kullandığınızda, bir pipeline oluşturabileceğiniz ve bu modülleri saniyeler içinde içe aktarabileceğiniz bine yakın süreç modülü bulunmaktadır.
+Önemlisi, nf-core'da ayrıca bileşenler var, neredeyse 1700 farklı modül, farklı süreçler ve araçlar için sarmalayıcılar. Ve nf-core ile gelen araçlarla, bunları karıştırabilir ve Lego parçaları gibi kendi pipeline'ınızı oluşturabilirsiniz. Çok daha hızlı ve daha tekrarlanabilir.
 
 ## Seqera Platform
 
-Son olarak, Seqera Platform için kısa bir tanıtım. Bu, hiç şüphesiz Nextflow'u pratikte çalıştırmanın en iyi yoludur. Bulut tabanlı bir platformdur, ancak kendi hesaplama altyapınızı eklersiniz; ister AWS, Google Batch veya Azure'da kendi bulut hesabınız olsun, ister kendi HPC'niz olsun. Ücretsiz katman herkes için mevcuttur ve akademisyenseniz, ücretsiz profesyonel düzey erişim için akademik programımıza başvurabilirsiniz.
+Nextflow ile kullanımınızı ölçeklendirirken, Seqera Platform'u inceleyin, Nextflow'u çalıştırmanın en iyi yolu. Kendi altyapınızda çalıştırabilirsiniz, yani HPC veya AWS, Azure, Google Cloud, Oracle ve daha fazlası. Ayrıca hiçbir bilişim altyapısını yönetmek istemiyorsanız kendi Seqera Compute'umuzu da kullanabilirsiniz.
 
-Seqera Platform, iş akışlarını başlatmak ve izlemek için sadece bir grafik arayüzün ötesine geçer. İnteraktif oturumlar çalıştırmak için Data Studios gibi ek araçlar ve bulut üzerinden verilere daha hızlı ve daha ucuz erişim sağlayan Fusion gibi temel araçlar da vardır.
+Seqera Platform, ortamı sizin için oluşturan Batch Forge gibi özelliklerle bu karmaşık bulut altyapılarının kurulumunu gerçekten basitleştirir. Ve ayrıca gözlemlenebilirlik, denetim günlüğü ve uyumluluk konusunda gerçekten yardımcı olur.
 
-## Destek ve etkinlikler
+Disk erişimini ve veri aktarımlarını optimize eden Fusion gibi teknolojilerle pipeline'ların nesnel olarak daha ucuz ve daha hızlı çalışmasını sağlar. Ve ayrıca pipeline'larınızın yapılandırmasının mümkün olduğunca sıkı ayarlandığından emin olmak için pipeline optimizasyonu da var.
 
-Unutmayın, herhangi bir sorunla karşılaşırsanız, sadece community.seqera.io adresine gidin. Oradaki forumumuz gerçekten aktiftir, Nextflow topluluğu çok güçlüdür ve yardıma hazır insanlar neredeyse her zaman mevcuttur; ister eğitim, ister Nextflow'un günlük kullanımıyla ilgili herhangi bir şey olsun.
+Pipeline'ları çalıştırmanın dışında tamamen farklı özellikler de var. Etkileşimli analizler çalıştırabileceğiniz ve oluşturduğunuz herhangi bir özel docker imajından ortamlar oluşturabileceğiniz Studios'umuz var. Ve nerede olurlarsa olsunlar farklı dosya sistemlerinizi keşfetmenize yardımcı olan Data Explorer.
 
-Ve tabii ki, harika bir sonraki adım, nf-core hackathon'larından biri veya Nextflow Summit etkinliklerinden birine katılmaktır. Çok eğlenceliler ve orada sizinle tanışıp Nextflow'u ne için kullandığınız hakkında konuşmak gerçekten güzel olurdu.
+Seqera Platform'un ücretsiz bir katmanı var, dolayısıyla bu özelliklerin neredeyse tamamını şu anda ücretsiz olarak kullanabilirsiniz. Ve kurumsal e-posta adresinizle kaydolursanız size Seqera Compute ile yüz dolarlık ücretsiz işlem kredisi bile vereceğiz. Son olarak, bir akademik program var, dolayısıyla bir üniversitede çalışıyorsanız, fiyatlandırma sayfasına göz atın, oradaki formu bulun ve bize bildirin, sizi Cloud Pro'ya ücretsiz olarak yükselteceğiz.
+
+## Topluluk Yardımı ve Etkinlikler
+
+Tamam. İleriye dönük olarak. Nextflow ile ilgili herhangi bir desteğe ihtiyacınız olursa, community.seqera.io'ya göz atın. Gerçekten aktif ve sizi orada görmeyi ve farklı sorunlarınızı ve kullanım durumlarınızı tartışmayı umuyoruz ve belki şimdi başkalarına bile yardımcı olabilirsiniz.
+
+Ayrıca devam eden birçok etkinliğimiz var. nf-core ve Nextflow'dan gelen topluluk etkinliklerimiz var. Mart ayında çevrimiçi ve dağıtılmış bir nf-core hackathon'umuz var, geçen yıl dünya çapında sitelerde bine yakın kişi katıldı. Dolayısıyla yapabilirseniz lütfen bize katılın.
+
+Ve ayrıca Nextflow Summit etkinliklerimiz var, biri Boston'da, sonra Barcelona'da ve çevrimiçi bir etkinliğimiz var. İnsanların Nextflow'u gerçekten büyük, vahşi ve heyecan verici farklı şekillerde kullandığını duyabileceğiniz harika konuşmalar. Ve ayrıca bunlarla ilişkili hackathon'lar ve yüz yüze eğitimler var.
+
+## Nextflow Podcast ve Blog
+
+Nextflow ekosisteminde olup bitenlerden haberdar olmak istiyorsanız, seqera.io/blog'u mutlaka kontrol edin.
+
+Orada Nextflow için bir bölüm var, topluluktaki çalışan insanlardan topluluk blog yazılarını ve ayrıca Nextflow ve ürettiğimiz diğer araçlara yönelik güncellemeler hakkında Seqera'dan blog yazılarını duyabilirsiniz.
+
+Ayrıca benim tutkum olan projem için de bir çağrı yapmak istiyorum, bu da Nextflow Podcast. Bunu Spotify'da, Apple Music'te veya YouTube'da kontrol edin. Ya Nextflow veya ilişkili teknolojilerle çalışan ya da topluluktan insanlarla sohbet ettiğim yeni bölümler periyodik olarak yayınlıyoruz. Ve şeylerin nasıl çalıştığı ve insanların ne yaptığı hakkında gerçek teknik, derin dalışlar yapıyoruz. Dolayısıyla ilgileniyorsanız, kontrol edin. Gerçekten eğlenceli.
 
 ## Teşekkürler
 
-Bu eğitim materyalinin yazılmasında yer alan herkese büyük bir teşekkür etmek istiyorum. Ben sundum, ama gerçekten tüm zor işler Seqera'daki eğitim ekibi tarafından yapıldı. Özellikle, bu materyali yeniden yazmak için büyük miktarda çalışma yapan Geraldine'e.
+Tamam, bir dizi teşekkür etmek istiyorum. Seqera'daki eğitim ekibi bu materyalden sorumlu. Ben bir kameranın önünde oturuyorum, ama gerçekten tüm zor iş o diğer insanlar tarafından yapıldı. Özellikle Hello Nextflow ve diğerleri için bu eğitim materyali kursunu yazan ve yenileyen Geraldine için özel bir çağrı. Ve ayrıca özellikle yeni Nextflow sözdizimi için sözdizimini güncellemede yardımcı olan ve ayrıca kursların çoğunu kendisi yazan Jon. Rike, Rob, Florian ve diğerleri gibi bilimsel geliştirme ekibindeki diğerleri de üzerinde çalıştığımız materyale büyük katkıda bulundu.
 
-Ayrıca Marcel, Ken, Adam, John, bilimsel geliştirme ekibinden diğerleri ve topluluktaki diğerlerine.
+Ayrıca topluluktaki insanlara da teşekkür etmek istiyorum. Örneğin çok yeni olan yeni çeviriler, büyükelçi programındaki ve başka yerlerdeki insanlar tarafından büyük ölçüde etkilendi. Ve eğitim materyalinin açık kaynak doğası, oldukça sık gelen pull request'leri ve issue'ları olduğu anlamına gelir, bu da gerçekten bize yardımcı olur.
 
-## Geri Bildirim Anketi
+## Anket
 
-Kursu tamamladığınıza göre, ne düşündüğünüzü bilmek isteriz. training.nextflow.io'da, Hello Nextflow bölümünün altında bir geri bildirim anketi bulacaksınız.
+Şimdi bitirdiğinize göre, henüz yapmadıysanız, lütfen hızlıca geri bildirim anketini yapın. training.nextflow.io web sitesinde Hello Nextflow bölümünün hemen altında.
 
-Sadece dört soru var ama bizim için gerçekten önemli. Hiçbir şey yoksa, bize kabaca kaç kişinin eğitim aldığını söyler. Ayrıca beğenip beğenmediğinizi de söyler ve herhangi bir öneriniz varsa, lütfen sonunda bunları bırakın. Her bir gönderimi okuyoruz.
+Sadece beş soru. Gerçekten, gerçekten hızlı, ama bu yaklaşık olarak kaç kişinin eğitimi yaptığını takip etmemizi sağlar ve ayrıca bize eğitim materyalini nasıl geliştirebileceğimizi söyleyebilirsiniz. Tüm yanıtları gerçekten kontrol ediyoruz, dolayısıyla oradaki girdilerinizi gerçekten değerlendiriyoruz.
 
-Herhangi bir hata görürseniz, her şey GitHub'da açık kaynaklıdır, bu nedenle bir issue oluşturabilir veya bir pull request yapabilir veya forumda bize bir mesaj bırakabilirsiniz. Ne düşündüğünüzü ve nasıl geliştirebileceğimizi duymayı çok isteriz. Tekrar teşekkürler. Yakında görüşmek üzere.
+## Hoşça Kalın
+
+Bir kez daha, bu kursa ve bu yolculuğa katıldığınız için çok çok teşekkürler. Eğitim materyalinde geliştirilmesi gerektiğini düşündüğünüz bir şey gördüyseniz bir GitHub issue veya Pull Request bırakın. Ve sizi başka bir Nextflow eğitim kursunda veya belki bir hackathon'da veya bir etkinlikte görmeyi gerçekten umuyorum. Tekrar teşekkürler.​

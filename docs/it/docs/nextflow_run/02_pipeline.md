@@ -323,7 +323,7 @@ Questo è un modo per assicurarsi che i nomi dei file di output non collideranno
 
 E questa è l'unica modifica che abbiamo dovuto fare dentro la dichiarazione del process!
 
-### Riepilogo
+### Takeaway
 
 Capisci a livello base come i canali e gli operatori ci permettono di elaborare input multipli efficientemente.
 
@@ -618,7 +618,7 @@ Questa volta l'operatore si chiama `collect`, ed è applicato al canale di outpu
 
 L'operatore `collect` è usato per raccogliere gli output da chiamate multiple allo stesso process e impacchettarli in un singolo elemento del canale.
 
-Nel contesto di questo workflow, sta prendendo i tre saluti maiuscoli nel canale `convertToUpper.out` --che sono tre elementi separati del canale, e normalmente verrebbero gestiti in chiamate separate dal process successivo-- e li impacchetta in un singolo elemento.
+Nel contesto di questo workflow, sta prendendo i tre saluti maiuscoli nel canale `convertToUpper.out` (che sono tre elementi separati del canale, e normalmente verrebbero gestiti in chiamate separate dal process successivo) e li impacchetta in un singolo elemento.
 È così che otteniamo tutti i saluti di nuovo nello stesso file.
 
 <figure class="excalidraw">
@@ -760,7 +760,7 @@ Ci sono modi più sofisticati per organizzare gli output pubblicati; ne tocchere
 
     Per una copertura dettagliata sulla costruzione di workflow multi-step, vedi [Hello Nextflow Parte 3: Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
-### Riepilogo
+### Takeaway
 
 Capisci a livello base come i workflow multi-step sono costruiti usando canali e operatori e come operano.
 Hai anche visto che i process possono prendere input multipli e produrre output multipli, e che questi possono essere pubblicati in modo strutturato.
@@ -925,9 +925,9 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 Noterai che le esecuzioni dei process sono state tutte salvate nella cache con successo, il che significa che Nextflow ha riconosciuto che ha già fatto il lavoro richiesto, anche se il codice è stato diviso e il file del workflow principale è stato rinominato.
@@ -940,7 +940,7 @@ Niente di tutto ciò importa a Nextflow; ciò che importa è lo script del job c
 
     Puoi saperne di più sullo sviluppo di workflow componibili nella Side Quest su [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/).
 
-### Riepilogo
+### Takeaway
 
 Sai come i process possono essere memorizzati in moduli standalone per promuovere il riuso del codice e migliorare la manutenibilità.
 
@@ -1225,9 +1225,9 @@ Il workflow è molto simile a quello precedente, più lo step extra per eseguire
 
 Vedi che questo workflow importa un process `cowpy` da un file modulo, e lo chiama sull'output della chiamata `collectGreetings()`, più un parametro di input chiamato `params.character`.
 
-```groovy title="2d-container.nf" linenums="25"
-// genera arte ASCII con cowpy
-cowpy(collectGreetings.out, params.character)
+```groovy title="2d-container.nf" linenums="31"
+// genera arte ASCII dei saluti con cowpy
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 Il process `cowpy`, che incapsula il comando cowpy per generare arte ASCII, è definito nel modulo `cowpy.nf`.
@@ -1424,7 +1424,7 @@ Monta anche la corrispondente sottodirectory di lavoro nel container, imposta la
 
 Questo conferma che tutto il duro lavoro che abbiamo dovuto fare manualmente nella sezione precedente viene ora fatto per noi da Nextflow!
 
-### Riepilogo
+### Takeaway
 
 Capisci quale ruolo giocano i container nella gestione delle versioni degli strumenti software e nell'assicurare la riproducibilità.
 

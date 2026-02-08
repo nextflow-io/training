@@ -1,279 +1,277 @@
-# Część 2: Hello Channels - Transkrypcja
+# Część 2: Hello Channels - Transkrypcja Wideo
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zaproponuj poprawki](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/lJ41WMMm44M?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Ważne informacje"
+!!! note "Ważne uwagi"
 
-    Ta strona zawiera jedynie transkrypcję. Aby uzyskać pełne instrukcje krok po kroku, wróć do [materiałów szkoleniowych](../02_hello_channels.md).
+    Ta strona zawiera jedynie transkrypcję. Pełne instrukcje krok po kroku znajdziesz w [materiale szkoleniowym](../02_hello_channels.md).
 
-    Numery sekcji pokazane w transkrypcji są podane jedynie orientacyjnie i mogą nie obejmować wszystkich numerów sekcji w materiałach.
+    Numery sekcji pokazane w transkrypcji służą jedynie celom informacyjnym i mogą nie obejmować wszystkich numerów sekcji w materiałach.
 
-## Powitanie
+## Witamy
 
-Cześć, witamy w drugiej części Hello Nextflow.
+Witaj z powrotem w Części 2 Hello Nextflow. Ten rozdział nosi tytuł Hello Channels.
 
-Ten rozdział nazywa się Hello Channels. Będziemy mówić o tej fundamentalnej części Nextflow.
+Kanały są jak spoiwo Twojego pipeline'u Nextflow. To fragmenty, które trzymają razem wszystkie różne procesy, których Nextflow używa do przekazywania informacji i orkiestracji Twojego workflow'u.
 
-Channels to elementy, które łączą różne kroki w Twoim pipeline, sposób, w jaki Twoje dane i logika przepływają przez Twój workflow.
+Kanały mają jeszcze jeden aspekt - operatory. To zasadniczo funkcje, których możemy używać na kanałach, aby modyfikować ich zawartość. Przejdźmy do VS Code i zobaczmy, gdzie się znajdujemy.
 
-Dobra, zanurzmy się w to.
+Jestem bardzo przybliżony w tym VS Code, więc żeby zachować porządek, usunąłem wszystkie pliki _.nextflow\*_ oraz katalog _work/_, _results/_ i wszystko z Rozdziału Pierwszego. Po prostu zaczynam tu od nowa. Ale nie przejmuj się tym zbytnio. Jeśli nie chcesz, możesz zostawić te pliki. Nie spowodują żadnych problemów.
 
-Zacznijmy od przejścia do training.nextflow.io
+Zaczniemy od pracy nad _hello-channels.nf_ w tym rozdziale, a jeśli go otworzę, powinien wyglądać bardzo podobnie do pliku, nad którym pracowaliśmy wcześniej. Może się zdarzyć, że różne fragmenty znajdują się w innych miejscach skryptu, ale wszystko powinno być zasadniczo takie samo.
 
-Hello Nextflow w pasku bocznym i kliknięcia w część drugą, Hello Channels.
+Jedną różnicą jest to, że ścieżka w bloku output to teraz _hello_channels_ dla tej części, co oznacza, że pliki wynikowe będą przechowywane w innym podkatalogu w Twoim katalogu results, jeśli nadal go tam masz. Powinno być więc miłe i czyste miejsce do rozpoczęcia bez dezorientacji związanej z wynikami.
 
-Wszystkie materiały są tutaj napisane, więc możesz podążać we własnym tempie i nadrobić wszystko, co mogłeś przegapić.
+Dobrze, przypomnijmy sobie szybko, co robi ten skrypt, gdy uruchamiamy ten workflow. Wykonujemy _"nextflow run hello-channels.nf"_. Możemy dodać _"--input myinput"_, a gdy to uruchomimy, użyje tego parametru params.input, który został przekazany jako zmienna do procesu sayHello tutaj na górze, która trafia do greeting i zostaje zapisana do output.txt. I możemy to zobaczyć w pliku results. Świetnie.
 
-Gdy już otworzysz stronę internetową, możesz załadować Codespaces i będziemy kontynuować od miejsca, w którym zakończyliśmy ostatni rozdział.
+## 1. Dostarczanie zmiennych wejściowych za pomocą kanału jawnie
 
-## 0. Rozgrzewka: Uruchom hello-channels.nf
+To miłe. Ale jest dość uproszczone. Mamy jedną zmienną w tym parametrze, która trafia do procesu uruchamianego raz i nie skaluje się zbyt dobrze. Nie możemy przekazać jej wielu różnych plików do utworzenia. Nie możemy jej dać wielu różnych powitań. Mamy tylko jedno.
 
-W tym rozdziale będziemy edytować inny plik. Ten nazywa się Hello Channels, więc możesz go znaleźć w pasku bocznym, kliknij dwukrotnie, aby otworzyć.
+W rzeczywistości Nextflow służy do skalowania Twojej analizy. Prawdopodobnie więc chcesz, żeby robił więcej niż jedną rzecz. I robimy to za pomocą _kanałów_.
 
-Teraz, jeśli właśnie przyszedłeś z rozdziału pierwszego, ten plik będzie Ci bardzo znajomy. Punkt wyjścia tutaj to w zasadzie miejsce, w którym zakończyliśmy rozdział pierwszy, z naszym processem o nazwie sayHello, naszym wejściem, wyjściem, naszym publishDir i naszym params.greeting, oraz naszym prostym workflow.
+Kanały to trochę unikalny koncept dla wielu osób zaczynających pracę z Nextflow. Wywodzi się z koncepcji programowania funkcyjnego i może zająć trochę czasu, zanim się go zrozumie, ale gdy już to zrozumiesz, naprawdę odblokują moc Nextflow i są kluczowe dla tego, jak piszesz swoje workflow'y.
 
-Zaczynamy od nowego pliku, więc to równe warunki dla wszystkich, ale możesz kontynuować z poprzednim plikiem, jeśli wolisz.
+## 1.1. Utworzenie kanału wejściowego
 
-Zauważ, że usunąłem również wszystkie pliki .nextflow\* i katalogi work tutaj, po prostu aby był czysty punkt wyjścia. Nie ma znaczenia, czy to zrobisz, czy nie, to zależy od Ciebie.
+Zacznijmy od wzięcia tego skryptu i sprawienia, by używał _kanału_ zamiast tylko _parametru_.
 
-Dobra. Zacznijmy od sprawdzenia, czy ten pipeline nadal działa zgodnie z naszymi oczekiwaniami. Wywołam terminal tutaj.
+Przechodzimy do workflow'u, gdzie znajduje się cała logika naszego workflow'u dotycząca łączenia rzeczy. I tutaj utworzę nowy kanał.
 
-Wpiszę "nextflow run hello-channels.nf" i nacisnę enter.
+Utworzę nowy kanał.
 
-To uruchomi ten mały workflow, uruchomi nasz krok sayHello, wygeneruje katalog work z tym hashem, i tutaj jest nasz folder results, a tam jest nasz plik wyjściowy, dokładnie tak, jak oczekiwaliśmy od naszego domyślnego params.greeting.
+I nazwę go "_greeting_ch"_. To konwencja, by dodawać "_\_ch"_ w ten sposób, żebyś mógł pamiętać, że ta zmienna jest kanałem. Ale możesz nazwać to, jak chcesz.
 
-To wspaniałe. Dokładnie to samo co w rozdziale pierwszym, działa zgodnie z oczekiwaniami.
+Potem napiszę równa się, i zrobię _"channel.of"._
 
-## 1. Dostarczanie zmiennych wejściowych przez channel jawnie
+Channel to jak przestrzeń nazw dla wszystkiego związanego z kanałami. Małe "c", jeśli używałeś wcześniej Nextflow. A _".of"_ to coś, co nazywa się fabryką kanałów (Channel factory), która jest zasadniczo sposobem tworzenia kanału.
 
-W rozdziale pierwszym faktycznie już używałeś channels, po prostu nie zdawałeś sobie z tego sprawy. Gdy określiliśmy tutaj string, Nextflow automatycznie utworzył dla nas channel wokół tego stringa, po prostu dlatego, że wiedział, że wywołujemy process, więc potrzebowaliśmy input channel.
+Istnieje wiele różnych fabryk kanałów. Jeśli napiszę tylko ".", zobaczysz, że VS Code sugeruje ich mnóstwo, ale _".of"_ jest najprostszy i po prostu przyjmuje wartość wejściową.
 
-Pierwszą rzeczą, którą zrobimy, jest uczynienie tego jawnym poprzez faktyczne wypisanie samego channel.
+Więc mogę dodać nawiasy i napiszę _"Hello Channels!"_.
 
-## 1.1. Utwórz input channel
+Świetnie. Mam kanał. Fantastycznie. Mogę nacisnąć zapisz, mogę to uruchomić ponownie, ale nic ciekawego się nie stanie. VS Code pokazał mi pomarańczową linię ostrzeżenia tutaj i powiedział, że to jest ustawione: utworzyłeś to, ale nigdy tego nie użyłeś do niczego. Ten kanał nie jest wykorzystywany.
 
-Więc przejdę do workflow tutaj na dole skryptu i powiem greeting_ch. To jest konwencja, której często używamy w kodzie Nextflow, aby mieć podkreślenie ch na końcu nazwy zmiennej, gdy jest to channel, po prostu aby łatwo było zidentyfikować, że to jest channel, ale nie musisz tego robić. Równa się channel of Hello Channels.
+Dobrze, więc jak go użyjemy? Bardzo prosto. Skopiuję to, usunę _params.input_ i zamiast tego wstawię tutaj _"greeting_ch"_. Więc przekażemy ten kanał jako wejście do sayHello.
 
-To, czego właśnie użyliśmy, nazywa się "Channel Factory" w języku Nextflow. To jest ta rzecz tutaj, ustawiamy tę zmienną na nowy channel, a ta fabryka channel tutaj tworzy dla nas channel w określony sposób.
+Zauważ, że na razie zakodowałem ten string na sztywno. To trochę krok wstecz po naszym ładnym parametrze, którego używaliśmy na końcu ostatniego rozdziału, ale pozwala to na prostotę na początek, żebyś mógł zobaczyć logikę.
 
-Istnieje kilka różnych fabryk channel, które ma Nextflow, aby tworzyć channels z różnych typów wejść. Dot of jest najprościejszy i po prostu przyjmuje wszystkie stringi, które mu przekażemy.
+Dobrze, przejdę do mojego terminala i uruchomię workflow ponownie. Tym razem bez żadnego _"--input"_, a on się uruchomi i użyje kanału, który utworzyliśmy, i miejmy nadzieję, że powinniśmy mieć plik tutaj w _results/hello_channels/_, który teraz mówi "Hello Channels!". Fantastycznie. Więc tego oczekujemy od naszego kanału. Świetnie.
 
-Zauważ, że gdy najadę na te słowa w VS Code, rozszerzenie Nextflow pokazuje mi popup wyjaśniający, co robi ta składnia, a na dole tego okna popup jest również tekst "read more".
+## 1.4. Użycie view() do inspekcji zawartości kanału
 
-Jeśli kliknę to, otworzy dokumentację Nextflow w nowej zakładce i zabierze mnie bezpośrednio do dokumentacji dla tej konkretnej rzeczy. W tym przypadku dla channel.of.
+Jeszcze jedna rzecz do dodania tutaj, szybkie wprowadzenie do kolejnej funkcji, której możemy używać na kanałach, zwanej "_.view"_.
 
-## 1.2. Dodaj channel jako wejście do wywołania procesu
+To jest analogiczne do polecenia _print_ w Pythonie lub innych językach, do których możesz być przyzwyczajony, i po prostu wyrzuca zawartość tego kanału do terminala, gdy go uruchamiamy.
 
-Zauważ, że rozszerzenie również daje nam ostrzeżenie mówiące, że utworzyliśmy tutaj nowy channel, ale nic go nie używa.
+Więc zrobię "_.view"_, a potem jeśli ponownie uruchomię workflow, powinno wydrukować do terminala, jaka jest zawartość tego kanału w momencie jego utworzenia.
 
-Więc naprawmy to. Wezmę nową nazwę channel i zastąpię ten params.greeting naszym nowym channel.
+I rzeczywiście, widzisz, że jest to wydrukowane do terminala tutaj. _"Hello Channels!"_.
 
-Zauważ, że nie używamy już teraz flagi wiersza poleceń --greeting, params.greeting nie jest używany, wracamy do zakodowania na stałe tego stringa. To w porządku. Staram się po prostu utrzymać rzeczy prostymi. Wrócimy później i użyjemy params ponownie.
+Zauważ, że możesz dzielić te rzeczy na wiele linii, jeśli chcesz, i w rzeczywistości automatyczny formater Nextflow będzie próbował to dla Ciebie robić. Białe znaki nie są tu naprawdę ważne, więc możesz łączyć te rzeczy jedną po drugiej.
 
-## 1.3. Uruchom ponownie polecenie workflow
+## 2. Modyfikacja workflow'u do działania na wielu wartościach wejściowych
 
-Dobra, sprawdźmy tylko, czy to działa. Wywołam terminal i zauważ ponownie. Nextflow run hello channels. Sprawdź output.txt, i oto jest.
+Dobrze, więc nasz kanał ma jedną rzecz, co jest miłe, ale jest to zasadniczo to samo, co było wcześniej. Więc skomplikujmy to trochę. Dodajmy kilka więcej rzeczy do naszego kanału.
 
-Świetny, trochę nudny przykład, robiący dokładnie to samo co wcześniej, ale teraz przynajmniej logika jest bardziej czytelna. Jesteśmy jawni w pisaniu nowego channel.
+Fabryka kanałów "_.of()"_ może przyjąć wiele elementów, więc napiszmy kilka więcej. Zrobimy _Hello, Bonjour, Hej_. I wtedy możemy uruchomić ten workflow ponownie i zobaczymy, co się stanie.
 
-Właściwie właśnie napisaliśmy więcej kodu, aby zrobić to samo. Ale to zacznie mieć więcej sensu, gdy staniemy się nieco bardziej skomplikowani w sposobie tworzenia naszych channels.
+Powinno się uruchomić ponownie. I teraz wydrukowaliśmy _"Hello", "Bonjour"_ i _"Hej"_ do terminala za pomocą naszej instrukcji view. Fantastycznie.
 
-## 2. Zmodyfikuj workflow, aby działał na wielu wartościach wejściowych
+## 2.1.2. Uruchomienie polecenia i sprawdzenie logów wyjściowych
 
-Dobra, uczyńmy to nieco ciekawszym. Bardzo rzadko chcesz uruchomić pipeline Nextflow na pojedynczym wejściu, więc dajmy mu kilka wejść.
+Możesz myśleć, że w tym momencie skończyliśmy. Ale właściwie jest tu pewna pułapka, która nas złapie. Jeśli spojrzymy na nasz plik wyjściowy tutaj, zobaczysz, że ma _"Hello"_, ale nie ma żadnych innych wyników. W rzeczywistości jest tylko ten jeden.
 
-## 2.1. Załaduj wiele powitań do input channel
+Jeśli uruchomimy ten workflow wielokrotnie, możemy nawet zobaczyć, że czasami ma _"Bonjour"_, czasami _"Hej"_. To trochę losowe.
 
-Z dokumentacji tutaj. Skopiuję te różne stringi, trzy z nich. Hello, Bonjour, Olà. Oh, mam nadzieję. Copilot sugeruje kilka innych. Więc zatabulujmy i wprowadźmy je.
+Jeśli spojrzymy na terminal, możemy zobaczyć, że uruchomił się trzy razy i możemy zobaczyć różne wyniki view. Ale jeśli przejdę do katalogu work, mogę zrobić _"cat work"_. Wstaw ten hash i rozwiń to oraz _output.txt_. Widzisz, że ten plik w katalogu work jest inny niż katalog results, a ten to _"Hej"._ Więc coś tu nie działa całkiem prawidłowo.
 
-Dokumentacja Nextflow tutaj mówi nam, że możemy przekazać wiele wartości do tego operatora, więc powinno działać, ale wypróbujmy to i zobaczmy, co się stanie.
+Kluczowe jest to, że mamy trzy zadania, które się uruchomiły. Output Nextflow próbuje to podsumować w miarę postępu przetwarzania, aby nie przejął całkowicie Twojego terminala, a to logowanie ANSI używa kodów escape ANSI, co zasadniczo nadpisało inne zadania. Więc pokazuje Ci tylko ostatnie, które zostało zaktualizowane.
 
-## 2.1.2. Uruchom polecenie i spójrz na wyjście logów
+## 2.1.3. Ponowne uruchomienie polecenia z opcją -ansi-log false
 
-Cóż. Tak i nie. Zobaczmy. Mówi, że pięć z pięciu zadań zostało uruchomionych tutaj, ale pokazuje nam tylko jeden hash, co jest trochę dziwne. To w porządku. Wszystko jest zgodne z oczekiwaniami tutaj. Domyślnie Nextflow używa specjalnego typu wyjścia do terminala zwanego kodami kontrolnymi ANSI, co oznacza, że nadpisuje pewne linie, aby dać ładny skompresowany widok wszystkich różnych procesów, które są uruchamiane.
+Jest kilka rzeczy, które możemy zrobić, aby lepiej to zrozumieć. Możemy zajrzeć do samego katalogu work i zobaczyć wszystkie różne katalogi work tam, ale to jest trochę mylące, ponieważ będą one zmieszane z różnymi uruchomieniami Nextflow.
 
-Ma to o wiele większy sens, gdy masz większe workflows i uruchamiasz setki lub tysiące różnych próbek. Po prostu możesz wygenerować tak wiele wyjścia na terminalu, że niemożliwe jest spojrzenie na nie, podczas gdy ten aktualizujący się widok daje ci postęp w czasie rzeczywistym.
+Albo możemy powiedzieć Nextflow, żeby nie używał kodów escape ANSI.
 
-## 2.1.3. Uruchom polecenie ponownie z opcją -ansi-log false
+Więc jeśli uruchomię polecenie ponownie, ale tym razem powiem _"-ansi-log false"_, żeby to wyłączyć, mógłbym też użyć zmiennych środowiskowych _$NO_COLOR_ lub _"$NXF_ANSI_LOG=false"_. Wtedy używa bardziej staromodnego stylu logowania Nextflow bez żadnych z tych kodów escape. Po prostu drukuje bezpośrednio do terminala bez żadnych sprytnych aktualizacji.
 
-Jeśli chcesz, możesz uruchomić to ponownie, a tym razem użyję dodatkowego argumentu rdzenia Nextflow z pojedynczym myślnikiem mówiącym, "-ansi-log false". To używa poprzedniej wersji wyjścia logów Nextflow. I tutaj możesz zobaczyć wszystkie indywidualne procesy, które zostały uruchomione.
+I teraz możemy zobaczyć wszystkie trzy procesy, które się uruchomiły. I każdy z nich ma swój własny hash zadania. A jeśli wejdziemy do tych katalogów work, zobaczymy trzy różne powitania, które określiliśmy.
 
-To zależy od Ciebie, czy to zrobisz, czy nie. Wyjście z Nextflow jest dokładnie takie samo w obu przypadkach.
+Więc to ma teraz więcej sensu. Miejmy nadzieję, że rozumiesz, że Nextflow to robił, po prostu był trochę sprytny z tym, co pokazywał Ci w terminalu z tymi katalogami work.
 
-## 2.2. Upewnij się, że nazwy plików wyjściowych będą unikalne
+Jednak to naprawiło jeden problem z katalogami work, ale nie naprawiło problemu z plikiem wyjściowym. Nadal mamy tylko jeden plik wyjściowy, który mówi _"Hello"_.
 
-Dobra, spójrzmy więc na pliki wyjściowe, następnie przejdziemy do results. Ale jest tylko pojedynczy plik wyjściowy. Co się stało? Widzieliśmy, że process był uruchamiany wiele razy. Możemy przejść do katalogu work i zobaczyć wszystkie różne hashe, wszystkie zadania zostały wykonane prawidłowo. Ale jeśli pamiętasz w naszym procesie tutaj, zapisujemy wszystko do pliku output.txt, a następnie publikujemy to do tego katalogu.
+## 2.2. Upewnienie się, że nazwy plików wyjściowych będą unikalne
 
-Więc ten sam plik został utworzony pięć razy, a następnie został nadpisany pięć razy. I po prostu mamy to, które zadanie wykonało się ostatnie.
+Teraz, aby to zrozumieć, musimy wrócić do naszego skryptu workflow. Generujemy tutaj nasz kanał, przekazujemy go do naszego procesu, a jeśli spojrzymy na proces, zapisujemy greeting do pliku o nazwie _"output.txt"_ i przekazujemy ten plik wyjściowy z powrotem do bloku output tutaj na dole, publikując go.
 
-## 2.2.1. Skonstruuj dynamiczną nazwę pliku wyjściowego
+Jednak za każdym razem, gdy ten proces uruchamia się te trzy razy - te trzy różne zadania - wszystkie generują plik o nazwie _"output.txt"_, wszystkie te pliki wyjściowe są publikowane w katalogu results i wszystkie się wzajemnie nadpisują. Więc jakikolwiek plik wynikowy tam dostaniesz, jest po prostu ostatnim, który został wygenerowany, ale zniszczył wszystkie pozostałe. To nie jest to, czego chcemy.
 
-Sposób, w jaki to naprawiamy, to użycie dynamicznej nazwy pliku wyjściowego. Tutaj już mamy zmienną o nazwie greeting w procesie, więc możemy użyć jej w nazwie pliku wyjściowego. Kopiuję to i robię $greeting-output.txt.
+## 2.2.1. Konstruowanie dynamicznej nazwy pliku wyjściowego
 
-Otoczę to w cudzysłowy, po prostu żeby bash nie pomylił się przez jakiekolwiek spacje, które mogą się tu pojawić. A następnie wezmę tę samą nazwę pliku i zaktualizuję tutaj wyjście.
+Istnieją różne sposoby radzenia sobie z tym, ale najprostszym na razie jest po prostu utworzenie różnych unikalnych nazw plików. Więc za każdym razem, gdy zadanie uruchamia się z innym powitaniem, wygeneruje inny plik wyjściowy, który nie będzie już kolidował podczas publikowania. I wtedy otrzymamy trzy unikalne pliki wyjściowe.
 
-To jest naprawdę ważne, aby wyjście pasowało do tego, ponieważ w przeciwnym razie ten plik nie zostanie znaleziony i Nextflow się zawiesi.
+Robimy to dokładnie w ten sam sposób. Możemy użyć tej zmiennej gdziekolwiek w bloku script i możemy jej użyć wiele razy.
 
-Zamierzam dokonać jeszcze jednej naprawdę ważnej edycji, czyli zamienię te pojedyncze cudzysłowy na podwójne cudzysłowy. Zauważ, że kolor kodu zmienił się, gdy to zrobiłem. Ta zmienna jest rozwijana tylko wtedy, gdy używamy podwójnych cudzysłowów. Jeśli użyję tutaj pojedynczych cudzysłowów, jest używana jako wartość literalna, i otrzymałbym pojedynczy plik o nazwie $greeting-output, co nie jest tym, czego chcę.
+Więc mogę wkleić to tutaj, _"$\{greeting\}\_output.txt"_, a następnie muszę również wkleić to tutaj na górze, ponieważ nie tworzymy już pliku o nazwie _output.txt_. Więc jeśli tego nie zaktualizuję, Nextflow ulegnie awarii z błędem mówiącym, że oczekiwał pliku, który nigdy nie został wygenerowany.
 
-## 2.2.2. Uruchom workflow
+Więc muszę zrobić to samo tam i muszę użyć podwójnych cudzysłowów, a nie pojedynczych, żeby ta zmienna była zrozumiana.
 
-Więc wróćmy do podwójnych cudzysłowów i spróbujmy.
+Dobrze, wypróbujmy to i zobaczmy, czy zadziałało. Uruchomimy workflow ponownie. Miejmy nadzieję, że pokaże nam trzy różne zadania w trzech różnych katalogach work. I rzeczywiście, widzisz tutaj na górze w folderze results po lewej stronie. Mamy teraz trzy różne pliki z trzema różnymi nazwami plików, każdy z różną zawartością, jakiej oczekujemy. Więc pliki już się nie nadpisują i wszystko jest tam, jak oczekujemy.
 
-Po prostu zamierzam uporządkować mój katalog przed rozpoczęciem, więc będzie łatwo zobaczyć nowe pliki. Zamierzam usunąć wszystko o nazwie .nextflow, work i results.
+To jest trochę trywialna konfiguracja, przez którą przeszliśmy tutaj, ale podkreśla niektóre kluczowe koncepcje, które musisz zrozumieć o tym, jak działa publikowanie plików, i niektóre pułapki, w które możesz wpaść. Więc miejmy nadzieję, że możesz tego uniknąć w swoich własnych workflow'ach.
 
-I zamierzam uruchomić to polecenie Nextflow ponownie i zobaczmy, jakie pliki zostały utworzone. Więc uruchamia pięć procesów tam. Jeśli bardzo uważnie patrzyłeś, mogłeś zobaczyć, że ta linia się aktualizowała podczas działania.
+Warto również zauważyć, że to, co tutaj zrobiliśmy, jest trochę niepraktyczne w rzeczywistych sytuacjach. Wzięliśmy jakieś dane wejściowe i używamy tych danych, ale również nazywamy plik po tych danych, czego zwykle nie można robić.
 
-I teraz możemy przejść do katalogu results, i rzeczywiście, mamy pięć różnych wyjść, i wszystkie są poprzedzone różnymi powitaniami.
+Więc w rzeczywistych, bardziej dojrzałych pipeline'ach Nextflow często będziesz przekazywał obiekt meta ze wszystkimi metadanymi powiązanymi z daną próbką. Możesz wtedy tworzyć dynamiczne nazwy plików na podstawie tego, co jest o wiele bardziej praktyczne.
 
-Jeśli otworzę każdy z nich, zobaczymy, że każdy zawiera odpowiednie powitanie. Fantastycznie. To jest to, czego chcemy.
+Jeśli jesteś zainteresowany, jak to zrobić zgodnie z najlepszymi praktykami, na _training.nextflow.io_ jest quest poboczny, który dotyczy konkretnie metadanych i map meta, więc możesz tam zagłębić się w więcej szczegółów.
 
-## 3. Użyj operatora do przekształcenia zawartości channel
+## 3. Dostarczanie wielu danych wejściowych za pomocą tablicy
 
-Dobra, więc teraz wiemy, czym są channels i wiemy, czym są fabryki channel. A co z operatorami? To kolejny termin dla części języka Nextflow, który jest serią funkcji, które pozwalają nam operować na channels, aby zrobić z nimi pewne rzeczy. Nextflow zawiera zestaw operatorów, które pozwalają nam manipulować channels na różne sposoby.
+Dobrze. Następnie zbadamy trochę, jak kanały są zbudowane i jak różnią się od innych rodzajów struktur danych w języku programowania. I pomyślę trochę o tym, jak mogę potencjalnie użyć tablicy, która może być znajomą koncepcją, jeśli przyszedłeś z innych języków.
 
-## 3.1. Dostarcz tablicę wartości jako wejście do channel
+Czy mogę użyć tablicy w kanale? Spróbujmy tego. Utworzę tablicę, a to skopiowałem z dokumentacji, _"greetings_array"_ i _"Hello", "Bonjour"_ i _"Holà"_. A potem wstawię to tutaj zamiast moich zakodowanych na sztywno stringów. Więc powiem "channel.of" _"greetings_array"_, przekazując tę tablicę do kanału. Spróbujmy tego.
 
-Przejdźmy przez to na przykładzie. Powiedzmy, że chcemy wziąć te stringi wejściowe, ale zamiast po prostu umieszczać je bezpośrednio w fabryce channel, chcemy zdefiniować je jako tablicę.
+Wywołam terminal i uruchomię pipeline.
 
-## 3.1.1. Ustaw zmienną wejściową
+Dobrze. Widzisz, że instrukcja view tutaj wydrukowała naszą tablicę zgodnie z oczekiwaniami, ale potem cały ten czerwony tekst, lub nie będzie czerwony, jeśli nadal masz _"-ansi-log"_ wyłączony, ale cały ten czerwony tekst mówi nam, że coś poszło nie tak.
 
-Więc wezmę je i zrobię to jako nową linię powyżej i powiem, greetings, array.
+Nie mamy już ładnego zielonego znacznika. Mamy czerwony krzyżyk, a jeśli po prostu zrobię to trochę szersze, żeby było łatwiej czytać, Nextflow mówi nam, co poszło nie tak.
 
-Proszę bardzo. Wezmę tę zmienną array i umieszczę ją w channel.of, i nacisnę save.
+Więc rozłóżmy to na części. Mówi, że błąd został spowodowany przez, a następnie przyczynę błędu, którą są brakujące pliki wyjściowe. Więc zasadniczo ten blok output powiedział, że ten plik powinien zostać utworzony, a nie został. Następnie mówi, że to jest polecenie, które zostało wykonane. Więc to jest zasadniczo zawartość tego pliku _.command.sh_. Tak to wyglądało po wstawieniu wszystkich tych zmiennych.
 
-## 3.1.3. Uruchom workflow
+I widzisz tutaj, że nasze polecenie echo zostało faktycznie uruchomione tylko raz i użyło całej tablicy, ale w reprezentacji stringowej, co nie jest tym, czego chcieliśmy.
 
-Teraz zobaczmy, co się stanie. Wracam do mojego terminala. Po prostu zamierzam uporządkować wszystkie te pliki tymczasowe ponownie. I uruchommy workflow.
+A potem polecenie zakończyło się w ten sposób, i to był katalog work, gdzie możemy pójść i zobaczyć pliki, aby lepiej to zrozumieć.
 
-Niedobrze. Dobra. To się zepsuło. W porządku. Spodziewałem się, że to się zepsuje tym razem. Debugowanie tego, co idzie nie tak, gdy workflow Nextflow zawodzi, jest kluczową częścią bycia deweloperem Nextflow. To będzie się zdarzać często i ważne jest, aby zrozumieć, co mówi komunikat o błędzie i jak sobie z tym radzić.
+Dobrze. Więc co się stało, to Nextflow po prostu przekazał całą tę tablicę jako pojedynczy element kanału do procesu, co oznaczało, że proces uruchomił się tylko raz. Miał jedno zadanie i nie użył danych w strukturze, jakiej oczekiwaliśmy.
 
-Komunikaty o błędach Nextflow są w rzeczywistości dość strukturalne. Mówi nam, który process poszedł nie tak. Podaje nam komunikat o błędzie z powodu. Mówi, jakie było polecenie, które próbowało uruchomić w ramach tego konkretnego zadania, jaki był status wyjścia, jakie było wyjście i gdzie był katalog work tego zadania.
+## 3.2. Użycie operatora do transformacji zawartości kanału
 
-Zauważ, że mogę kliknąć to opcją w VS Code, a otwiera się to w pasku bocznym, więc mogę przejść tam bezpośrednio i wyświetlić wszystkie te ukryte pliki, o których mówiliśmy w poprzednim rozdziale, włącznie z plikiem .command.sh. Jak widać, jest to to samo co polecenia, które zostały wykonane tutaj.
+Więc musimy zrobić coś z tym kanałem najpierw, zanim będzie mógł być użyty. I to przygotowuje grunt pod użycie operatorów, które są specjalnymi funkcjami, których możemy używać na kanałach do manipulowania zawartością kanału.
 
-Patrząc na ten plik, możemy poczuć, co mogło pójść nie tak tutaj zamiast uruchamiania pojedynczego zadania dla każdego elementu w tablicy, jak to było ostatnim razem, po prostu dostarczyło całą tablicę na raz jako string. Więc musimy rozpakować tę tablicę na indywidualne wartości, zanim przekażemy ją do channel. Wróćmy i zobaczmy, czy możemy to zrobić za pomocą operatora.
+W tym przypadku użyjemy czegoś, co nazywa się _flatten_. Które przekazujemy na końcu kanału tutaj. Więc tworzymy kanał, a następnie uruchamiamy _flatten_. I znowu, jeśli najedziesz na to myszką, pokaże Ci dokumentację dla tego polecenia od razu w VS Code, co jest bardzo pomocne. Możesz również znaleźć wszystkie te dokumenty na stronie Nextflow, w dokumentacji.
 
-## 3.2. Użyj operatora do przekształcenia zawartości channel
+Mógłbym po prostu uruchomić ten kod teraz i zobaczyć, czy działa, ale to również dobra okazja, aby wprowadzić, jak robić dynamiczny kod w operatorach i w kodzie Nextflow, które nazywane są closures.
 
-W tym przypadku nie zamierzamy zmieniać tablicy przed przekazaniem jej do channel. Zamierzamy dostosować channel tak, aby zachowywał się w sposób, jakiego oczekujemy. Zamierzamy to zrobić, używając operatora flatten, może zrobić dot, zacznij pisać i zobaczymy, że rozszerzenie VS Code zaczyna sugerować wszystkie różne operatory, które mamy dostępne.
+Więc dodam z powrotem polecenie view tutaj, zanim uruchomimy _flatten_. I tutaj ten ma te kręcone nawiasy, które są dynamicznym closure. I jest tam tylko jakiś dowolny kod, który zostanie wykonany w kontekście operatora view.
 
-## 3.2.1. Dodaj operator flatten()
+Tutaj to mówi weź greeting, które jest wejściem operatora view, i to jest tutaj. Mógłbym nazwać to, jak chcę, mógłbym nazwać to _"foo"_ i po prostu muszę się do tego później odwoływać jako _"foo"_. A potem mówię z tym, zwróć to.
 
-I zamierzam wybrać flatten. Zauważ, że białe znaki nie mają znaczenia w tym kontekście dla Nextflow. Więc możesz umieścić te operatory w nowej linii, jeśli chcesz. Więc mogę upuścić to tutaj i wciąć, żeby znajdowało się pod ".of" i zobaczysz, że ludzie często łańcuchują wiele operatorów w ten sposób na channel i wcięli to w ten sposób, aby było łatwiej to czytać.
+A następnie ustawiamy zwracanie stringa, który mówi przed flatten dla zmiennej. Bardzo proste.
 
-Możesz również zobaczyć, tak jak wcześniej, mogę najechać na to i przeczytać, co robi operator flatten, a także podążyć za linkiem do dokumentacji, jeśli chcę.
+Teraz dodam kolejny dokładnie taki sam, ale powiem po _flatten_.
 
-Więc ten operator bierze ten channel, który ma w sobie pojedynczą tablicę i rozdziela wartości tablicy.
+Więc to co to robi, ponieważ to działa sekwencyjnie, zobaczysz, jak wygląda kanał, zanim uruchomimy _flatten_, a następnie ponownie po uruchomieniu _flatten_.
 
-## 3.2.2. Dodaj view() aby sprawdzić zawartość channel
+A potem ten kanał greeting jest nadal utworzony, więc nadal będzie przekazany do procesu. I miejmy nadzieję, że teraz workflow się uruchomi. Spróbujmy tego.
 
-Możemy zajrzeć do channels za pomocą specjalnego operatora view, i zamierzam dodać kilka z nich tutaj. To jest trochę jak używanie instrukcji print w innych językach. Więc zamierzam zrobić dot view, a następnie zamierzam użyć tych kręconych nawiasów.
+Świetnie. Po pierwsze, pipeline tym razem się nie zawiesił. Mieliśmy trzy procesy, które uruchomiły się prawidłowo i mamy mały znacznik. A następnie możemy zobaczyć, że nasze instrukcje view zadziałały.
 
-To nazywa się closure. To zasadniczo daje dodatkowy kod do operatora view, który wykona na każdym elemencie w channel. W tym przypadku zamierzam powiedzieć greeting before flatten. Greeting.
+Mamy przed _flatten_, która jest tą tablicą, którą widzieliśmy wcześniej z błędu, a następnie mamy trzy razy po _flatten_ została wywołana, gdzie mamy _"Hello", "Bonjour"_ i te wszystkie trzy oddzielne elementy w tablicy, które są teraz, jak mieliśmy nadzieję, trzema oddzielnymi elementami w kanale.
 
-Definiuję tutaj zmienną, która jest tylko w zakresie tego closure. Więc ta zmienna jest używana tylko tutaj i mogłem nazwać ją, jak chciałem. To naprawdę nie ma znaczenia. Po prostu używam greeting, aby było łatwo czytać.
+I widzisz, że operator _view_ został uruchomiony trzy razy. I to dlatego, że ten kanał po _flatten_ ma teraz trzy elementy. I więc operator jest wywoływany trzy razy.
 
-W niektórych pipeline Nextflow możesz zobaczyć, że ludzie używają specjalnej niejawnej zmiennej o nazwie "$it". Tak jak to. To jest specjalna zmienna w kodzie Nextflow, która jest skrótem, więc nie musisz robić małej definicji zmiennej. Jednak z czasem myślimy, że to nie jest bardzo jasne dla ludzi, którzy są nowi w Nextflow, i teraz zniechęcamy do używania "$it".
+Bardzo szybko, wspomnę tylko, że gdy tworzyłem fabryki kanałów wcześniej, zrobiłem _"."_, a następnie zobaczyliśmy, że było wiele różnych sposobów tworzenia kanałów, a jeden z nich nazywa się "_fromList"_. I to jest faktycznie specjalnie zaprojektowane, aby wykonać tę samą operację. Więc mogliśmy po prostu zrobić from list greetings array, i to by zadziałało. To nieco czystsza i ładniejsza składnia. Ale dla celów tej demonstracji chcieliśmy zrobić to bardziej krok po kroku, żebyś mógł zobaczyć, jak kanał jest manipulowany i jak różne operatory mogą zmienić zawartość kanału.
 
-Więc zamierzam trzymać się poprzedniego zachowania greeting i używać tego w ten sposób, ponieważ jest to bardziej jawne i jaśniejsze, co się dzieje.
+## 4. Odczytywanie wartości wejściowych z pliku CSV
 
-Następnie skopiuję tę linię i zrobię dokładnie to samo ponownie po argumentach flatten. Operator view jest trochę specjalny, ponieważ robi coś na elementach, ale także po prostu kontynuuje przekazywanie ich do następnego operatora, więc możemy połączyć go w środku łańcucha operacji w ten sposób, a on wydrukuje tam status i będzie kontynuował. Więc miejmy nadzieję, że to pokaże nam, jak wygląda channel przed i po operatorze flatten.
+Dobrze, jak możemy to uczynić bardziej realistycznym? Prawdopodobnie nie będziesz chciał tworzyć mnóstwa kodu w swoim pipeline Nextflow z zakodowanymi na sztywno tablicami. Prawdopodobnie będziesz chciał pobrać dane z zewnątrz podczas uruchamiania, a te dane prawie na pewno będą w plikach.
 
-## 3.2.3. Uruchom workflow
+Więc następną rzeczą, którą zrobimy, będzie replikacja tego, ale zamiast brać dane z pojedynczego parametru CLI lub z zakodowanego na sztywno stringa lub tablicy, weźmiemy je z pliku.
 
-Wypróbujmy to. Wyczyść. Wyczyść wszystko w przestrzeni roboczej. Uruchom pipeline ponownie.
+Więc pozbądźmy się naszych greetings array. A teraz zmienimy tę fabrykę kanałów ponownie. Właśnie powiedziałem, że jest mnóstwo do wyboru i jest jedna zwana _".fromPath"_. I powiem jej, żeby w tym przypadku wzięła _params.input_, co wraca do naszego inputu, którego używaliśmy wcześniej.
 
-Dobra, więc możemy zobaczyć, że uruchomił nasze pięć procesów. Ponownie, nie zawiesił się z błędem, więc to zdecydowanie dobrze. I teraz mamy before flatten i rzeczywiście mamy naszą tablicę i mamy after flatten, wydrukowane pięć razy, raz dla każdego elementu tablicy. To dokładnie to, na co liczyliśmy. Więc to naprawdę dobra wiadomość. I to pasuje dokładnie do tego, czego oczekiwalibyśmy od kodu.
+Teraz ten parametr nie jest jeszcze gotowy do użycia. Nadal mówimy, że to jest string i jest zakodowany na sztywno tutaj z domyślną wartością, ale możemy nadpisać ten string. Teraz chcemy, żeby to był plik. Więc typ jest inny. To już nie jest _String_. To _Path_.
 
-Nie potrzebujemy już tych instrukcji debugowania, więc mogę je albo zakomentować, albo usunąć. Zamierzam je usunąć, żeby utrzymać mój kod ładny i czysty. Dobra, świetnie. Ten przykład działa teraz ładnie i możemy zacząć widzieć, jak channels mogą robić nieco bardziej skomplikowaną logikę.
+A następnie możemy ustawić wartość domyślną, jeśli chcemy, ponownie na Path. A jeśli spojrzę w explorer po lewej stronie, zobaczysz w tym repozytorium, w tym katalogu roboczym, że mam katalog o nazwie data. Mam tam plik o nazwie _"greetings.csv"._
 
-## 4. Użyj operatora do parsowania wartości wejściowych z pliku CSV
+Więc mogę po prostu ustawić wartość domyślną tutaj na _"data/greetings.csv"_. Teraz, gdy uruchomię ten pipeline ponownie bez żadnych opcji wiersza poleceń, użyje tej wartości domyślnej. Wie, że to path, więc wie, że powinno to traktować jako ścieżkę, a nie string.
 
-Teraz spróbujemy to zrobić, używając pliku z serią wejść zamiast tego. To jest bardzo powszechny sposób pisania pipeline Nextflow przy użyciu arkusza próbek lub CSV z metadanymi.
+A następnie przekaże to do fabryki kanałów z tego _params.input_ i utworzy nasz kanał, który następnie będzie użyty w tym procesie o nazwie _sayHello_. Spróbujmy tego.
 
-## 4.1. Zmodyfikuj skrypt, aby oczekiwał pliku CSV jako źródła powitań
+Dobrze. Nie powiodło się. Nie martw się. To było oczekiwane. A jeśli śledzisz materiał szkoleniowy, zobaczysz, że tam też było oczekiwane. Zobaczmy, co się dzieje.
 
-Jeśli przejdę do paska bocznego, możesz zobaczyć greetings.csv w repozytorium przykładowym, i to jest bardzo, bardzo prosty plik CSV, który po prostu zawiera trzy linie z trzema różnymi powitaniami. Zobaczmy, czy możemy użyć tego pliku CSV w naszym workflow.
+Próbował uruchomić pipeline. Próbował wykonać proces i dostał dość podobny błąd do tego, który widzieliśmy wcześniej.
 
-Teraz zamierzam wrócić do używania params, jak robiliśmy to w rozdziale pierwszym, abyśmy mogli mieć wejście wiersza poleceń.
+Tutaj mówi: próbowaliśmy uruchomić _echo_, ale zamiast echować zawartość tego pliku CSV, po prostu echowało ścieżkę. I widzisz, że to jest pełna ścieżka absolutna tutaj do tego pliku CSV.
 
-Zamierzam usunąć tę tablicę greetings.
+A następnie, rzecz jasna, ponieważ próbował zapisać to do tej naprawdę skomplikowanej ścieżki, nie bardzo wiedział, co zrobić. I było to poza zakresem katalogu work procesu.
 
-## 4.1.1. Przełącz parametr wejściowy na plik CSV
+Wspomniałem na początku, że Nextflow enkapsuluje każde wykonane zadanie w specjalnym katalogu work. A jeśli spróbujesz zapisać dane poza tym katalogiem work, Nextflow Cię zatrzyma jako środek ostrożności. I to właśnie się tutaj stało. Próbowaliśmy zapisać do ścieżki absolutnej, a Nextflow zawiódł i nas powstrzymał.
 
-Zamierzam ustawić params greeting na nazwę pliku, która jest greetings.csv, i zamierzam użyć tej specjalnej zmiennej do wygenerowania channel. Zamierzam umieścić to tam, a błędy znikają. Pamiętaj, że to ustawia tę zmienną domyślnie teraz. Więc jeśli uruchomię pipeline bez żadnych argumentów, użyje greetings.csv, ale mogłem zrobić --greeting, aby nadpisać tę zmienną, gdybym chciał.
+## 4.2. Użycie operatora splitCsv() do parsowania pliku
 
-## 4.1.2. Przełącz się na fabrykę channel zaprojektowaną do obsługi pliku
+Dobrze, przyjrzyjmy się temu kanałowi i zobaczmy, jak wygląda. Możemy zrobić _".view"_, a to skopiowałem ze strony internetowej. Więc _.view_, i mamy dynamiczne closure tutaj i mówimy nazwę zmiennej "_csv"_ jako wejście. Więc to jest zawartość kanału, i mówimy przed splitCsv, i tak to wygląda.
 
-Dobra, przekazujemy teraz plik zamiast stringa lub tablicy stringów, więc prawdopodobnie potrzebujemy innej fabryki channel.
+Jeśli uruchomię to ponownie, nadal się nie powiedzie, ale pokaże nam, co jest w tym kanale. Nie jest to szczególnie ekscytujące. To jest ta zmienna _path_. Więc widzisz, że to jest po prostu string tutaj, ponieważ jest drukowany do terminala, ale jest to obiekt _path_, który zawiera informacje i metadane o tym pliku.
 
-Pozbędziemy się "of", którego używaliśmy do tej pory, a zamiast tego użyjemy .fromPath. To robi dokładnie to, jak brzmi. Tworzy channel ze ścieżkami zamiast wartości, używając nazwy pliku string lub glob. Zamierzam również usunąć operator flatten, ponieważ już go nie potrzebujemy, teraz, gdy przekazujemy plik.
+Nie chcemy przekazywać metadanych pliku do wejścia. Chcemy przekazać zawartość tego pliku. Jeśli spojrzymy na plik _greetings.csv_, zobaczysz tutaj, że ma te różne zmienne tutaj. _Hello, Bonjour, Holà_ ponownie. I to są rzeczy, które naprawdę chcemy przekazywać do naszego procesu, a nie tylko sam plik jako pojedynczy obiekt.
 
-## 4.1.3. Uruchom workflow
+Więc musimy sparsować ten plik CSV. Musimy go rozpakować, dostać się do zawartości pliku CSV, a następnie przekazać zawartość w kanale do procesu.
 
-Zamierzam nacisnąć save, otworzyć terminal, uruchomić workflow i zobaczyć, co się stanie.
+Jak prawdopodobnie możesz wywnioskować z komunikatu dziennika, chcemy użyć _splitCsv_, który jest kolejnym operatorem, kolejnym operatorem kanału. Więc jeśli zrobię "_dot" "s"_, a następnie zobaczysz, że jest autosugerowany. Ups, _splitCsv_ i nawiasy.
 
-Dobra. Znowu się zawiesiło. Nie martw się. Tego też się spodziewałem. Spójrzmy na komunikat o błędzie i zobaczmy, czy możemy dowiedzieć się, co idzie nie tak. Tutaj możemy zobaczyć wykonane polecenie, i trochę jak wcześniej, gdzie mieliśmy wydrukowaną całą tablicę. Teraz mamy ścieżkę pliku echo do polecenia, zamiast przechodzenia przez zawartość pliku.
+A następnie po _splitCsv_, wstawię kolejną instrukcję _view_, żebyśmy mogli zobaczyć, jak to wygląda później. Uruchommy pipeline i zobaczmy, co dostaliśmy.
 
-## 4.2. Użyj operatora splitCsv() do parsowania pliku
+Dobrze. Nadal się nie powiodło, ale w nowy i ekscytujący sposób, co jest postępem.
 
-Więc aby użyć zawartości pliku zamiast tego, potrzebujemy innego operatora. Operator, którego zamierzamy użyć dla tego, nazywa się splitCsv. Ma sens, ponieważ to jest plik CSV, który ładujemy.
+Tym razem znowu mamy jakiś problem z naszym skryptem, który został wyrenderowany. Teraz nie mamy już końcowej ścieżki, ale mamy tablicę zmiennych, która wygląda bardzo podobnie do błędu, który mieliśmy wcześniej, gdy przekazywaliśmy tablicę jako stałe wejście.
 
-## 4.2.1. Zastosuj splitCsv() do channel
+Dzięki naszemu logowaniu z operatora view możemy zobaczyć, że przed _splitCsv_ była ścieżka. I rzeczywiście, po _splitCsv_, mamy trzy różne wyjścia, a każde z tych wyjść wygląda bardzo podobnie do każdego z wierszy z pliku _greetings.csv_, co ma sens.
 
-Ok, więc splitCsv. Zamknij nawias. Nie potrzebujemy tutaj żadnych argumentów. I znowu zamierzam użyć kilku operatorów view, aby dać pewien wgląd w to, co się tutaj dzieje.
+Więc to, co się tutaj stało, to Nextflow sparsował ten plik CSV, dając nam trzy obiekty, jedną tablicę dla każdej linii pliku CSV. Więc trzy razy przekazaliśmy tablicę zmiennych do kanału zamiast pojedynczej wartości stringa.
 
-.view csv after splitCsv. Before split Csv.
+Dobrze, więc ostatnim razem, gdy mieliśmy ten problem, użyliśmy _flatten_. Spróbujmy bardzo szybko flatten i zobaczmy, co się stanie.
 
-## 4.2.2. Uruchom workflow ponownie
+Mogę nazwać te zmienne, jak chcę. Więc nazwę to _myarray_, ponieważ to już tak naprawdę nie jest CSV. Spróbujmy uruchomić to ponownie i zobaczmy, co się stanie z _flatten_.
 
-Dobra, spróbujmy to uruchomić i zobaczymy, co się stanie.
+Więc tym razem uruchomimy, sparsowaliśmy CSV na trzy obiekty tablicowe, a następnie spłaszczyliśmy to. I tym razem to przeszło. I pipeline Nextflow się uruchomił. Jednak widzisz, że _flatten_ naprawdę się rozkręcił i spłaszczył wszystko. I więc otrzymujemy trzy niezależne wpisy tablicy dla każdego wiersza. I więc uruchomił proces trzy razy dla każdego wiersza CSV. A teraz mamy całą masę plików wynikowych, 123, 456 i wszystkie rodzaje rzeczy, a nie tylko tę pierwszą kolumnę CSV, której naprawdę chcieliśmy.
 
-Dobra, tym razem mamy trochę więcej wyjścia, ale nadal się zawiodło. Możemy spojrzeć na instrukcje view, i tutaj możesz zobaczyć before split CSV, i mamy ścieżkę pliku, jak widzieliśmy w poprzednim komunikacie o błędzie. After split CSV, teraz mamy trzy wartości odpowiadające trzem linii w pliku CSV.
+## 4.3. Użycie operatora map() do wydobycia powitań
 
-Jednak możesz zobaczyć, że każda z tych wartości jest otoczona nawiasami kwadratowymi. Więc każda z nich była tablicą sama w sobie, i to dało nam ten sam obszar, który mieliśmy wcześniej, gdzie próbuje echo tablicę zamiast tylko pojedynczego stringa.
+Więc jak dostać się tylko do pierwszej kolumny? Jeśli flatten jest tu zbyt uproszczony, potrzebujemy bardziej złożonego operatora, gdzie możemy faktycznie dostosować i powiedzieć mu, czego chcemy z CSV.
 
-Jeśli pomyślimy o pliku CSV, ma to trochę sensu. Zazwyczaj plik CSV będzie miał wiersze i kolumny, więc split CSV robi dwuwymiarową tablicę. Pierwszy wymiar tablicy to każdy wiersz, a następnie jest drugi wymiar, który jest każdą kolumną dla każdego wiersza.
+Aby to zrobić, użyjemy _map_. Zasadniczo _map_ po prostu mówi, uruchom jakiś kod, jakąś funkcję nad każdym elementem, który dostaję, i wykonaj jakąś transformację na nim. A ponieważ jest tak elastyczny, zobaczysz, że pojawia się w kodzie Nextflow cały czas.
 
-Więc tutaj mamy tylko pojedynczą wartość w każdej linii, więc mamy pojedynczą kolumnę, więc mamy tablicę jednooelementową dla każdej linii pliku.
+Sam w sobie nic nie robi. Więc nie chcemy zwykłych nawiasów, chcemy tutaj closure i musimy mu powiedzieć, co robić. Więc powiem _"row"_, ponieważ to dostaje wiersze z CSV, więc to logiczna nazwa zmiennej. Jest wejściem. I chcę zwrócić tylko pierwszy element tej tablicy.
 
-To w porządku. Po prostu potrzebujemy kolejnego operatora, aby zwinąć tę tablicę dla każdej linii parsowanego pliku CSV. Posprzątajmy to. Pozbądźmy się terminala i zobaczmy, co możemy zrobić.
+Tablice w Nextflow są indeksowane od zera, więc powiemy tylko pierwszy element, którym jest wiersz zero. Gdybym chciał drugą kolumnę, mógłbym być jeden lub trzecia kolumna byłaby dwa, i tak dalej. Możemy zwrócić tutaj, co chcemy, ale zwrócę tylko pierwszą wartość.
 
-## 4.3. Użyj operatora map() do wyodrębnienia powitań
+A teraz możemy uruchomić pipeline ponownie i zobaczyć, czy robi to, czego oczekujemy.
 
-Teraz moglibyśmy użyć operatora flatten ponownie, którego używaliśmy wcześniej. Widzieliśmy, jak może zwinąć tablicę w serię wartości, co bardzo dobrze by tutaj zadziałało. Ale zamierzam wykorzystać okazję, aby zademonstrować inny operator, który jest bardzo powszechny w workflows, zwany operatorem map.
+I rzeczywiście, po _splitCsv_ mamy nasze tablice, a następnie po _map_, mamy nasze ładne, czyste stringi, tylko _"Hello", "Bonjour"_ i _"Holà"_. I pipeline teraz robi to, czego chcemy. Fantastycznie.
 
-## 4.3.1. Zastosuj map() do channel
+Więc możemy teraz pozbyć się wszystkich tych poleceń view. Nie potrzebujemy ich już.
 
-Zamierzam zrobić dot map i zamierzam zrobić item item[0].
+## Podsumowanie
 
-Jeśli piszesz wiele innych języków kodu, możesz być już zaznajomiony z operatorem map. Bierze iterowalny, taki jak tablica lub channel, i wykonuje jakąś operację na każdej wartości tego.
+Skończyliśmy naszą debugowanie i to jest kod, z którym kończymy. Bierzemy nasz parametr CLI o nazwie _input_, który jest sklasyfikowany jako _Path_. Nextflow znajduje ścieżkę, ładuje ją i rozumie plik CSV. Zwraca wszystkie różne wiersze. A następnie mapujemy tylko pierwszy element tego wiersza do kanału, który daje nam zawartość kanału, która jest przekazywana do procesu.
 
-Tutaj mówimy, że powinniśmy zdefiniować zmienną o nazwie item w zakresie tego closure, a następnie chcemy zwrócić, tylko pierwszą wartość w tej tablicy. Więc item indeks zero.
+A proces działa na każdym elemencie w kanale, których jest trzy. I uruchamia proces trzy razy, dając mu trzy zadania. A te wyniki są następnie publikowane z workflow'u, przechwycone przez wyjście procesu. Publikowane z workflow'u i zapisywane w bloku output do podkatalogu o nazwie _"hello_channels"_.
 
-To jest skuteczne spłaszczanie tablicy. Możesz zobaczyć, jak moglibyśmy rozszerzyć to, aby było bardziej złożone, chociaż: gdyby nasz plik CSV miał sześć kolumn, ale jesteśmy zainteresowani tylko czwartą kolumną, moglibyśmy uzyskać dostęp do konkretnego indeksu tutaj. Lub wykonać jakikolwiek inny rodzaj operacji na wartości przed przekazaniem jej do przetwarzania downstream.
+Całkiem fajne. Zbliżamy się teraz do czegoś, co bardziej przypomina prawdziwy pipeline Nextflow, który możesz uruchomić dla jakiejś prawdziwej analizy.
 
-Więc operator map jest niezwykle elastyczny i bardzo potężny do modyfikowania channels w locie. Wstawmy kolejną instrukcję view, aby zobaczyć, co robi w naszym wykonaniu. Może adjudicat tę linię i przenieść ją w dół. I after map.
+## Podsumowanie
 
-## 4.3.2. Uruchom workflow jeszcze raz
+Dobrze. Miejmy nadzieję, że teraz rozumiesz, czym są kanały i operatory Nextflow i jak operatory działają na kanałach oraz jak możesz je tworzyć.
 
-Wywołajmy terminal i spróbujmy uruchomić workflow.
+Kanały, jak powiedziałem na początku tego wideo, są spoiwem Nextflow. I widzisz tutaj, że możemy brać różne dane wejściowe i manipulować nimi oraz pobierać te dane, a następnie przekazywać je do logiki downstream workflow.
 
-Dobra, tym razem nie ma błędów. To dobry znak. Możemy teraz przejść przez wszystkie te różne wyjścia z instrukcji view. Before split CSV, mieliśmy pojedynczą ścieżkę. After split CSV, mieliśmy tablice jednowartościowe, a następnie after map, mamy tylko wartości bez żadnej składni tablicy. Przejdźmy do katalogu results, i tutaj są nasze pliki wyjściowe zachowujące się dokładnie tak, jak chcieliśmy.
+A ten blok workflow tutaj jest naprawdę miejscem, gdzie budujesz całą paralelizację i całą sprytną logikę i wyjaśniasz Nextflow, jak zbudować Twój DAG workflow i jak zorkiestrować Twój pipeline.
 
-Jest mały bonus tutaj. Możesz faktycznie zobaczyć, że operatory view są nieco pomieszane w kolejności, w jakiej wykonały wyjście. To dlatego, że Nextflow wykonuje równoległość tych różnych zadań. Więc po podzieleniu CSV, są trzy elementy w tym channel, i obsługuje przetwarzanie tych trzech elementów równolegle automatycznie. To oznacza, że kolejność wyjść jest stochastyczna i może się różnić. W tym przypadku po prostu zdarzyło się, że niektóre z operatorów view zwróciły po zakończeniu kolejnego kroku, więc przyszło w tej kolejności.
+Kanały nie są najłatwiejszą koncepcją do zrozumienia. Więc zrób sobie przerwę, pomyśl o tym trochę, może przeczytaj materiał ponownie i naprawdę upewnij się, że zrozumiałeś te koncepcje, ponieważ jest to kluczowe dla Twojego zrozumienia Nextflow i im lepiej rozumiesz kanały oraz różne operatory kanałów i różne fabryki kanałów, tym więcej zabawy będziesz mieć pisząc Nextflow i tym potężniejsze będą Twoje pipeline'y.
 
-Jeśli uruchomię ten sam workflow ponownie. To rzeczywiście, przyszło w innej kolejności i tym razem mamy split CSV i mapy w kolejności, jakiej byśmy oczekiwali.
+To nie jest to samo, co regularne programowanie w Pythonie lub innych językach. Nie używamy tutaj instrukcji _if_, to jest funkcjonalne programowanie przepływu przy użyciu kanałów i operatorów. Więc jest trochę inne, ale jest też super potężne.
 
-Więc po prostu pamiętaj, nie możesz polegać na kolejności wyjść z zadania procesu, ponieważ Nextflow obsługuje tę równoległość dla Ciebie automatycznie. Nextflow robi to dla Ciebie Swoją logiką przepływu danych, i to jest prawdziwa moc Nextflow.
+To koniec tego rozdziału. Idź i zrób sobie krótką przerwę, a zobaczę się z Tobą w następnym wideo dla części trzeciej, gdzie przejdziemy przez Hello Workflow i porozmawiamy trochę więcej o workflow'ach.
 
-Dobra, to prawdopodobnie jeden z najważniejszych rozdziałów całego szkolenia. Gdy zrozumiesz channels, fabryki channel i operatory, zaczniesz włączać się w siłę Nextflow i to, co czyni go wyjątkowym jako język programowania. Ta funkcjonalność pozwala Nextflow zrównoleglać wszystkie Twoje workflows dla Ciebie i generować niezwykle złożoną logikę workflow z bardzo czystą składnią i modelem przepływu danych push. To może być na początku trochę dziwna koncepcja, ale gdy już przyzwyczaisz się do pisania kodu w ten sposób, szybko poczuje się to naturalne i zanim się zorientujesz, będziesz pisać fantastyczne workflows.
+Tak jak w poprzednim rozdziale, na dole strony internetowej tutaj jest kilka pytań quizowych, więc możesz przez nie szybko przejść i upewnić się, że rozumiesz wszystkie różne części materiału, który właśnie przeszliśmy. A poza tym zobaczę się z Tobą w następnym wideo. Dziękuję bardzo.
 
-Zrób sobie przerwę, filiżankę herbaty, spacer dookoła i przejdźmy do rozdziału trzeciego, gdzie zaczynamy rozszerzać te koncepcje na bardziej złożone workflows. Do zobaczenia w następnym filmie.
-
-[Następna transkrypcja wideo :octicons-arrow-right-24:](03_hello_workflow.md)
+Dobrze.

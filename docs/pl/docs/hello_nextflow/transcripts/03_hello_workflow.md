@@ -1,237 +1,233 @@
-# Część 3: Hello Workflow - Transkrypcja
-
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+# Część 3: Hello Workflow - Transkrypcja wideo
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/zJP7cUYPEbA?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Ważne uwagi"
 
-    Ta strona zawiera tylko transkrypcję. Aby uzyskać pełne instrukcje krok po kroku, wróć do [materiałów szkoleniowych](../03_hello_workflow.md).
+    Ta strona zawiera wyłącznie transkrypcję. Pełną instrukcję krok po kroku znajdziesz w [materiałach szkoleniowych](../03_hello_workflow.md).
 
-    Numery sekcji pokazane w transkrypcji są podane tylko orientacyjnie i mogą nie zawierać wszystkich numerów sekcji w materiałach.
+    Numery sekcji w transkrypcji służą wyłącznie celom orientacyjnym i mogą nie pokrywać się ze wszystkimi numerami sekcji w materiałach.
 
-## Powitanie
+## Powitanie i podsumowanie
 
-Witam, witamy w trzeciej części kursu szkoleniowego "Hello Nextflow".
+Cześć i witaj z powrotem w części trzeciej kursu Hello Nextflow. Ta część nosi nazwę Hello Workflow i to właśnie tutaj zaczynamy uzasadniać nazwę "pipeline" czy "workflow".
 
-Ten rozdział nosi tytuł "Hello Workflow".
+Weźmiemy nasz prosty skrypt pipeline'u, który do tej pory zawierał tylko jeden proces, i zaczniemy dodawać kolejne procesy, aby zobaczyć, jak Nextflow radzi sobie z orkiestracją i przepływem danych przez pipeline'a.
 
-W rozdziale drugim zbudowaliśmy prosty workflow składający się z jednego procesu, ale w rzeczywistości pipeline'y są użyteczne, ponieważ mogą łączyć wiele kroków analizy razem.
+Wróćmy do naszego środowiska Codespaces. Widzicie, że usunąłem wszystkie katalogi .nextflow\* i katalogi work, żeby utrzymać porządek. Nie martwcie się, jeśli nadal macie te pliki z poprzednich części kursu.
 
-W tym rozdziale weźmiemy ten początkowy przykład i rozszerzymy go, aby był nieco bardziej realistyczny.
+Będziemy pracować na pliku o nazwie hello-workflow.nf. Jak wcześniej, reprezentuje on skrypt, który zbudowaliśmy do tej pory, i daje nam czysty punkt wyjścia. Ponownie, w sekcji output widzimy, że ścieżka to teraz hello_workflow. Więc publikowane pliki powinny trafiać do innego podkatalogu w katalogu results.
 
-Dodamy kilka dodatkowych kroków i przyjrzymy się, jak używamy kanałów do łączenia tych kroków.
+Podsumujmy, gdzie jesteśmy. Mamy pojedynczy proces z jednym wejściem (greeting) i jednym wyjściem (greeting file). A następnie prosty skrypt Bash, który wykonuje polecenie echo do pliku.
 
-Będziemy się zajmować wieloma zadaniami, które mogą się zwijać do jednego procesu, i przyjrzymy się procesom, które mogą mieć wiele wejść i wiele wyjść.
+Mamy pojedyncze wejście workflow'a - blok params - gdzie mówimy, że oczekuje ścieżki, a wartość domyślna to data/greetings.csv, czyli ten plik tutaj.
 
-Dobra, zaczynajmy.
+W samym workflow'ie mamy blok main. Tworzymy kanał, parsujemy CSV na wiersze, a następnie bierzemy pierwszy element każdej tablicy i przekazujemy ten kanał do procesu, który generuje trzy zadania. Publikujemy z workflow'a wyjścia z tego procesu.
 
-Więc zacznijmy. Tak jak poprzednio. Przejdźmy do training.nextflow.io. Hello Nextflow, rozdział trzeci. Hello Workflow. I otwórzmy nasz obszar roboczy. Uporządkowałem wszystkie moje pliki robocze z poprzednich rozdziałów i zamierzam otworzyć Hello Workflow.
+Na końcu w bloku output mówimy Nextflow'owi, żeby opublikował te pliki z tego kanału do katalogu o nazwie hello_workflow. Oraz żeby skopiował te pliki, a nie tworzył dowiązań symbolicznych.
 
-Teraz to jest ten sam plik, nad którym pracowaliśmy do tej pory, więc powinien wyglądać znajomo. Mamy nasz proces say hello. Mamy nasz params.greeting z plikiem CSV greetings i mamy nasz workflow na dole, który ładuje ten plik CSV, tworzy kanał i przekazuje go do naszego procesu.
+## 1. Dodanie drugiego kroku do workflow'a
 
-## 0. Rozgrzewka: Uruchomienie hello-workflow.nf
+Dobrze, w tej części dodamy drugi proces do naszego workflow'a. Weźmiemy wyjścia z procesu sayHello i przetworzymy je w drugim kroku, który zamieni wszystkie litery w tych plikach na wielkie - convertToUppercase.
 
-Jeśli chcesz, możemy to wypróbować i dokładnie sprawdzić, czy działa zgodnie z oczekiwaniami. Otwórzmy terminal, aby uruchomić nextflow run hello workflow nf i kliknij enter.
+To tylko przykładowy przypadek, kolejne proste przetwarzanie łańcuchów znaków, ale pokazuje, jak możemy zastosować logikę w workflow'ie.
 
-Dobra, świetnie. Nasze trzy procesy działają. Mamy nasz katalog results z naszymi trzema wyjściami. Bonjour. Hello. Holà. Więc zamknijmy te pliki, zamknijmy terminal, wróćmy do skryptu.
+Użyjemy do tego polecenia bash o nazwie "tr", skrót od "translate". To polecenie uniksowe istniejące od zawsze. Jeśli nie znacie go, to nic dziwnego. Sam chyba nigdy nie używałem go przed szkoleniem, ale możecie je szybko wypróbować w terminalu. Jeśli wpiszę "echo 'hello world'", a następnie przekieruję przez pipe do 'tr', a potem w cudzysłowach podam zakres znaków, więc od A do Z, małe litery, a następnie chcę od A do Z wielkie litery. Po prostu mówi: przetłumacz te litery na te litery.
 
-## 1. Dodanie drugiego kroku do workflow
+Gdy nacisnę enter, zobaczysz, że wszystko zostało zamienione na wielkie litery. Bardzo fajne, jeśli lubicie krzyczeć na ludzi.
 
-Dobra. W naszym przykładzie pozostajemy przy podstawach i staramy się być niezależni od domeny. Więc nasz drugi proces po prostu będzie manipulował tymi łańcuchami znaków, tymi słowami, w prosty sposób. Użyjemy polecenia Unix translate, aby wziąć te pliki i zamienić je na duże litery. Robimy to za pomocą polecenia "tr".
+To bardzo prosty styl polecenia bash, którego użyjemy w naszym drugim procesie.
 
-## 1.1. Zdefiniowanie polecenia zamiany na wielkie litery i przetestowanie go w terminalu
+## 1.2. Napisanie kroku zamiany na wielkie litery jako procesu Nextflow
 
-Możemy to wypróbować w terminalu bash i sprawdzić, czy działa. Więc robisz echo, Hello World, a następnie przekazujesz to z symbolem pipe do tr, i podajemy mu wzorzec rozpoznawania, a do z i na co powinien to przetłumaczyć. A do Z wielkimi literami.
+Więc jeśli wrócę do mojego skryptu, trochę oszukam i po prostu skopiuję kod z dokumentacji szkoleniowej. Ale widzicie dokładnie, co się dzieje.
 
-To jest bardzo proste, ponieważ dosłownie używa znaków od A do Z. Więc nie będzie działać na niczym, co jest akcentowane ani nic podobnego. Ale dla celów przykładu powinniście zrozumieć ideę.
+Mamy nowy proces tutaj. Ten nazwaliśmy convertToUpper, ale moglibyśmy nazwać go jak tylko chcemy.
 
-Zamierzam nacisnąć enter i wypisuje w terminalu HELLO WORLD wielkimi literami. I tak jak poprzednio, moglibyśmy przekierować to do pliku, gdybyśmy chcieli. Outfile.
+Mamy jedno wejście typu path, tak jak wcześniej. To nie jest kanał wartości, to kanał ścieżki. A następnie pojedyncze wyjście.
 
-Dobra. Posprzątajmy to.
+W bloku script robimy "cat" na pliku wejściowym. Możemy umieścić to w klamrach, jeśli chcemy, co pobiera tę zmienną. Uruchamiamy to samo polecenie bash w pipe i zapisujemy wyniki do pliku z tą nazwą, która jest przechwytywana przez wyjściową ścieżkę.
 
-## 1.1. Napisanie kroku zamiany na wielkie litery jako proces Nextflow
+Teraz musimy coś zrobić z tym nowym procesem. Więc przejdziemy do workflow'a, gdzie budujemy różną logikę workflow'a, i po pierwszym procesie uruchomimy nasz drugi proces. Więc convertToUpper to nazwa procesu tutaj.
 
-Wróćmy do naszego skryptu i napiszmy nowy proces do obsługi tego polecenia bash. Zamierzam skopiować poprzedni proces, wkleić go poniżej i nazwać convert to upper. Dla uppercase. Zamierzam użyć tego samego publishDir results, ale zamierzam wprowadzić kilka zmian tutaj. Zamiast przyjmować val, zamierzam przyjąć path input file i zamierzam mieć tutaj prefiks upper, aby nasze pliki wyjściowe nie nadpisały wyjścia. I zamierzam użyć nazwy zmiennej z wejścia. A potem zamierzam zmienić skrypt tutaj na dole, i zamiast tego zamierzam użyć cat na pliku wejściowym i tak jak zrobiliśmy w Bash TR, a-z, upper input file .txt. Dobra, kliknijmy zapisz.
+Przyjmuje wejście, więc nie możemy go po prostu wywołać samodzielnie. Chcemy przetworzyć wyjście pierwszego procesu. Więc tak jak zrobiliśmy to z sayHello out, gdzie publikujemy te wyniki, chcemy użyć tych samych wyników tutaj jako wejścia, więc możemy to skopiować i tam wstawić.
 
-## 1.2. Dodanie wywołania nowego procesu w bloku workflow
+Chcemy proces sayHello z ".out", a Nextflow wie, że oznacza to prosty pojedynczy rekord wyjściowy tutaj, którym jest ten plik. Więc to zostanie przekazane jako wejście do drugiego procesu.
 
-Teraz jeśli przewinę w dół, musimy faktycznie wywołać ten proces. Samo dodanie procesu do skryptu nie wystarczy. Musimy powiedzieć Nextflow, że musimy uruchomić ten proces i gdzie to zrobić.
+## 1.5. Konfiguracja publikowania wyjścia workflow'a
 
-Więc zamierzam tutaj, convert to upper i
+Dobra. I w końcu, żebyśmy faktycznie zapisali wyniki tego drugiego procesu, musimy je również opublikować z workflow'a, a następnie zdefiniować je w bloku output, ta sama składnia co wcześniej. Więc możemy to skopiować i powiedzieć second outputs, lub nazwać to jak chcecie.
 
-dobra, dostajemy błąd mówiący, że oczekuje argumentu. Na pewno, musimy coś przekazać do tego procesu, aby faktycznie miał coś do zrobienia.
+Weźmiemy nazwę procesu, który nas interesuje, convertToUpper out, a następnie tutaj w dole w bloku output. Dodamy to i moglibyśmy użyć tych samych atrybutów tutaj. Więc chcemy również te pliki w podkatalogu Hello Workflow i chcemy je również skopiować.
 
-## 1.3. Przekazanie wyjścia pierwszego procesu do drugiego procesu
+Świetnie. Spróbujmy to uruchomić. Więc jeśli wywołam terminal i wpiszę "nextflow run hello-workflow.nf", zobaczymy, co to da. Sprawdzimy, czy wygląda to inaczej niż w poprzednich częściach.
 
-To, co zamierzamy zrobić, to weźmiemy wyjście z tego procesu. Więc biorę nazwę, say hello, i gdy robię dot out.
+Więc uruchamia Nextflow. W dokumentacji jest napisane, żeby zrobić to z "-resume", ale usunąłem cały mój katalog work, więc i tak by to nie zrobiło różnicy tutaj. Ale jeśli Wy tego nie zrobiliście, to też zadziała.
 
-Dla tak prostego przykładu jak ten, gdzie mamy proces, który ma tylko jedno wyjście i przekazujemy je do nowego procesu, więc ma jedno wejście, to powinno być wszystko, czego potrzebujemy. Więc zamierzam kliknąć zapisz, otworzyć terminal i spróbujmy uruchomić to ponownie.
+I wygląda to prawie dokładnie tak samo. Ale widzicie teraz drugą linię wyjścia tutaj, gdzie możecie zobaczyć nazwę drugiego procesu, który właśnie dodaliśmy. I rzeczywiście, widzicie, że uruchomił się trzy razy pomyślnie.
 
-## 1.4. Ponowne uruchomienie workflow
+Świetnie. Gdybym miał poprzednie katalogi work i zrobiłbym to z "-resume", te byłyby zacache'owane tylko dla pierwszego kroku w pipeline'ie. Bo te wyjścia były dokładnie takie same, więc Nextflow wiedziałby, żeby je ponownie użyć.
 
-Teraz nie uporządkowałem mojego katalogu work od ostatniego razu, kiedy uruchomiłem ten workflow. Zamierzam uruchomić go ponownie i zamierzam użyć tego jako okazji do pokazania, jak działa częściowe cache'owanie. Więc jeśli zrobię pojedynczy kreska resume. Miejmy nadzieję, że powinien ponownie użyć wyjść z pierwszego procesu, które były dokładnie takie same jak ostatnim razem, kiedy uruchamiałem. Ale teraz mamy nowy proces tutaj, który nie był wcześniej uruchamiany, który działa od podstaw. I na pewno, możesz zobaczyć, że pierwszy proces użył cache'owanych wyjść, a drugie wyjście uruchomiło trzy z trzech. Możesz również zobaczyć, że mamy teraz oba nasze procesy tutaj, nasz pierwszy proces, say hello, uruchomiony trzy razy, i nasz drugi proces convert to upper uruchomiony trzy razy.
+I więc widzicie, jak możecie używać -resume do iteracyjnego budowania workflow'a, krok po kroku, jeśli trzeba.
 
-Jeśli uruchomię to ponownie, jako przypomnienie, z -ansi-log false, powinniśmy zobaczyć, że sześć różnych zadań procesu uruchomiło się, trzy dla każdego z nich. Więc to robi dokładnie to, czego się spodziewaliśmy. Pierwszy proces działa trzy razy, przekazując te wyjścia do drugiego procesu, który następnie działa trzy razy.
+Dobra, spójrzmy do katalogu results tutaj na górze i zobaczmy, czy zadziałało. Widzimy, że mamy tutaj więcej plików. Mamy nasze oryginalne pliki jak wcześniej z pierwszego procesu. I rzeczywiście, mamy nasze pliki upper i litery są wszystkie wielkie, więc zadziałało. Naprawdę miło to widzieć.
 
-Więc przyjrzyjmy się wnętrzu katalogu work i zobaczmy, jak Nextflow obsługuje te pliki wejściowe. Jeśli wezmę ten katalog hash tutaj z drugiego procesu, możemy użyć polecenia tree ponownie z -a tylko po to, aby spojrzeć na te pliki. Widzisz tutaj, że mamy nasz plik wejściowy, którym jest plik Bonjour-output.txt, i to jest faktycznie symlink. To właśnie pokazuje nam ta strzałka i wskazuje na plik w poprzednim katalogu work.
+Ciekawe jest również zajrzenie do tych katalogów work. Jak wcześniej, hash tutaj odpowiada katalogom work. Więc jeśli spojrzę do "ls work", a następnie rozwinę to, zobaczymy różne pliki tutaj.
 
-To ma sens. Nextflow obsługuje wykonanie każdego zadania we własnym zamkniętym katalogu, więc jest całkowicie samodzielne. Jednakże musi dostarczyć pliki z poprzednich kroków jako wejście. Zamiast sięgać poza katalog work, aby pobrać te pliki, Nextflow umieszcza je w katalogu work.
+Widzimy plik wyjściowy z pierwszego procesu, który został tutaj wciągnięty jako wejście. I widzimy nowy plik wyjściowy, który został wygenerowany.
 
-Jeśli mamy współdzielony system plików jak tutaj, robi to za pomocą symlinku, tak aby nie używało dodatkowej przestrzeni na pliki. Jeśli używamy pamięci chmurowej z bucket'ami w różnych lokalizacjach, pobrałby te pliki i faktycznie skopiował je do katalogu work.
+Teraz jeśli zrobię to z "-la", żeby wylistować i pokazać wszystkie pliki, zobaczymy kilka więcej rzeczy. Po pierwsze, zobaczycie, że ten plik jest w rzeczywistości dowiązaniem symbolicznym do pierwszego procesu. To prawie zawsze jest dowiązanie symboliczne, jeśli to możliwe, żeby zaoszczędzić miejsce na dysku. Nie publikujemy tutaj plików i po prostu odwołuje się do tego pliku z pierwszego zadania do drugiego zadania, tak że wszystko jest zamknięte w tym jednym katalogu roboczym, bezpieczne i odizolowane od wszystkiego innego.
 
-Przyjrzyjmy się plikowi command sh. Jeśli zrobię code work, command sh, możesz zobaczyć, na pewno, że uzyskuje dostęp do tego pliku z lokalnego katalogu. Więc wszystko jest bardzo samodzielne i czyste.
+I to musi tam być, bo jeśli spojrzymy na plik .command.sh, więc jeśli zrobię "cat work/b8/56\*", zobaczysz, że części plików tutaj są względne, więc robi cat tego pliku wejściowego, który został dowiązany symbolicznie do tego samego katalogu roboczego.
 
-Możemy również sprawdzić katalog results i upewnić się, że te pliki zostały poprawnie wyprowadzone. I na pewno, w results możemy zobaczyć wszystkie pliki wyjściowe z pierwszego procesu i wszystkie pliki wyjściowe z drugiego. I wszystkie są wielkimi literami, jak się spodziewaliśmy.
+Tak więc tak będzie wyglądał każdy katalog work. Gdy spojrzysz na to w Nextflow, będziesz miał wszystkie pliki wejściowe tam przygotowane do tego katalogu roboczego. A następnie będziesz miał również wszystkie pliki wyjściowe, które zostały utworzone. Więc to świetnie. To wygląda, jak się spodziewaliśmy.
 
-To tutaj zaczyna się pokazywać moc Nextflow. Za pomocą bardzo minimalnego kodu Nextflow obsługiwał równoległe wykonywanie tych zadań z czystą enkapsulacją w oddzielnych katalogach work oraz umieszczanie plików wejściowych i wyjściowych oraz publikowanie plików, wszystko automatycznie dla nas, od razu. Więc widzicie, jak, gdy skalujemy złożoność naszych workflow'ów analizy, ta funkcjonalność jest naprawdę, naprawdę cenna.
+## 2.1. Zdefiniowanie polecenia zbierającego i przetestowanie go w terminalu
 
-## 2. Dodanie trzeciego kroku do zebrania wszystkich powitań
+Dobra, wróćmy do naszego workflow'a. Jaki jest następny krok, który chcemy wykonać?
 
-Dobra. Te kroki były jeden-do-jednego. Mieliśmy jedno wyjście z pierwszego procesu trafiające do jednego wejścia dla drugiego procesu. Dalej będziemy mówić o tym, jak zebrać te różne wyjścia w jedno zadanie procesu, co znowu jest bardzo powszechną rzeczą do zrobienia. Więc szybko otwórzmy terminal i zróbmy próbny przebieg tego.
+Mamy teraz dwa procesy i pobierają one ten jeden plik CSV, parsują go i dzielą. A następnie mamy trzy zadania dla każdego z tych procesów i Nextflow zajmuje się paralelizacją tego wszystkiego, więc wszystko działa równolegle, gdzie to możliwe.
 
-## 2.1. Zdefiniowanie polecenia zbierania i przetestowanie go w terminalu
+Ten sposób dzielenia pracy, żeby uruchamiać rzeczy równolegle, jest bardzo powszechny. I odwrotnością tego jest zbieranie wszystkiego z powrotem. Więc to zrobimy z naszym ostatnim procesem w workflow'ie - będziemy mieć tutaj trzeci, który pobiera te trzy różne wyjścia i łączy je wszystkie w jeden plik.
 
-Zamierzam oszukać i skopiować przykładowy kod bash z materiału szkoleniowego i po prostu nacisnąć enter.
+Możemy to zrobić całkiem prosto w terminalu, żeby poczuć, jak to będzie wyglądało.
 
-To, co możemy tutaj zobaczyć, to uruchomiliśmy to polecenie echo trzy razy do trzech różnych plików wyjściowych, które mogę tutaj zobaczyć. A następnie użyliśmy polecenia cat, aby wypisać wyjście każdego z tych trzech różnych plików i przekierować to do jednego zebranego pliku.
+Jeśli przejdę do katalogu results. Więc, "cd results/hello_workflow/", mamy tutaj wszystkie pliki UPPER. Mogę po prostu użyć "cat", którego używamy do wypisania zawartości tego pliku, i możesz podać wiele plików do "cat" i będzie czytał jeden po drugim.
 
-I jeśli zrobię "cat COLLECTED-output", możesz zobaczyć, że zawiera zawartość tych trzech różnych plików, teraz w jednym pliku.
+Więc mogę powiedzieć "UPPER-\*", co daje mi tę samą listę trzech nazw plików z rozwinięciem Bash. I mogę powiedzieć combined.txt. Myślę, że w dokumentacji wymienione są dokładne nazwy plików, ale to robi to samo.
 
-## 2.2. Utworzenie nowego procesu do wykonania kroku zbierania
+Teraz, jeśli użyję "cat combined.txt", zobaczymy, że mamy zawartość wszystkich trzech tych plików.
 
-Więc zobaczmy, czy możemy odtworzyć to samo w naszym pipeline Nextflow.
+Więc to w zasadzie wszystko, co ten proces będzie robił - spróbujemy dać mu wszystkie różne pliki wyjściowe z poprzedniego procesu w jednym zadaniu procesu, a następnie "cat" je razem i zapiszemy plik wyjściowy.
 
-Przewińmy w górę i stwórzmy trzeci proces. Zamierzam skopiować ten poprzedni, a tym razem zamierzam nazwać go Collect Greetings.
+## 2.2. Utworzenie nowego procesu do wykonania kroku zbierającego
 
-W terminalu bash nazwaliśmy to collected output txt. Więc zamierzam powiedzieć to samo path output tutaj. I zamierzam zrobić przekierowanie tutaj, więc jest zapisywane w ten sam sposób.
+Dobra, więc dodajmy nasz nowy proces. Wkleję to z materiałów szkoleniowych i widzicie, że zostawiono nam trochę ćwiczenia dla czytelnika tutaj z tymi znakami zapytania. Ale widzicie ogólny zarys procesu to w zasadzie to, co właśnie zrobiliśmy w terminalu, gdzie robimy "cat" wielu plików wejściowych i zapisujemy to do pliku wyjściowego tutaj o nazwie collected, a następnie wyjście oczekuje tej pojedynczej ścieżki ponownie.
 
-Dobra. Musimy zmienić to, co dzieje się na początku tego polecenia i musimy pomyśleć o tym, czym jest tutaj plik wejściowy. W rzeczywistości ten proces będzie przyjmował wiele plików wejściowych. Zamierzam zachować path i zamierzam zmienić to na nową zmienną o nazwie input files, w liczbie mnogiej.
+Więc potrzebujemy jakiegoś wejścia tutaj i będzie to zbiór ścieżek. Więc ponownie, definiujemy wejściowy kanał ścieżki i nazwijmy go input_files. Teraz, to wcześniej dawało nam pojedynczą ścieżkę tutaj, ale ścieżka może również mieć wiele plików tutaj, nawet jeśli to nadal pojedyncza deklaracja.
 
-Następnie zamierzam ponownie, cat je, tak jak zrobiliśmy w naszym skrypcie bash. I zamierzam użyć tutaj zmiennej.
+Skopiuję to tutaj w dół, bo chcemy zrobić "cat" tych plików. I możecie pomyśleć, że mamy jakieś problemy tutaj z drukowaniem tablicy czy coś w tym stylu, ale Nextflow jest ogólnie dość rozsądny, jeśli chodzi o to. I jeśli dostanie kanał z wieloma plikami w nim w ten sposób, umieści je wszystkie razem z separatorami spacji. Więc to da nam poprawną składnię.
 
-Teraz możesz pomyśleć, że to nie zadziała. Widzieliśmy wcześniej błędy, gdzie tablica łańcuchów lub tablica ścieżek została przekazana do procesu i to spowodowało błąd. Ale w rzeczywistości tutaj Nextflow obsłuży to automatycznie dla nas we właściwy sposób. Weźmie kilka różnych plików wejściowych i po prostu wypisze różne ścieżki plików tutaj.
+To świetnie. Więc teraz podłączmy nasz nowy proces. Przechodzę do workflow'a. Powiem combine the outputs, nowa nazwa procesu, i tak samo jak wcześniej. Wezmę ten poprzedni proces, convertToUpper i zrobię ".out".
 
-Oczywiście pomaga to, że polecenie cat może przyjmować serię nazw plików w ten sposób. Gdybym używał innego polecenia, które wymagało argumentu przed każdą ścieżką pliku lub czegoś, musielibyśmy mieć tutaj trochę więcej kodu i logiki, aby móc obsłużyć iterację tych ścieżek plików. Ale w tym przypadku powinno po prostu zadziałać.
+Świetnie. Wypróbujmy to i zobaczmy, czy działa w terminalu. Jeśli po prostu wrócę o kilka katalogów w górę, a następnie uruchomię ponownie polecenie Nextflow, zobaczymy, co się stanie.
 
-## 2.3. Dodanie kroku zbierania do workflow
+Więc workflow został uruchomiony i teraz widzicie, że mamy trzy różne nazwy procesów, co jest świetne. Pierwsze dwa wyglądają tak samo jak wcześniej, a trzeci nowy się uruchamia, co jest dobre.
 
-Dobra, zejdźmy do workflow i dodajmy nasz nowy proces. Collect greetings. I znowu weźmy wyjście z convert to upper out. Zapiszmy to.
+Jednak jest coś dziwnego. Chcieliśmy połączyć te pliki wyjściowe w jeden plik, a jednak ten proces, widzimy, uruchomił się trzy razy, a nie raz.
 
-Wypróbujmy to. nextflow run hello workflow.
+Rzeczywiście, jeśli przejdziemy do jednego z tych katalogów work. I zrobimy "cat work/" "collected", wtedy zobaczymy. Jest tutaj tylko jedno słowo, nie trzy.
 
-Dobra, workflow się uruchomił, ale coś jest trochę dziwne. Mamy trzy wykonania pierwszego kroku, czego się spodziewamy. Trzy zadania dla drugiego, ale mamy również trzy zadania na końcu, kiedy spodziewaliśmy się mieć tylko jedno zadanie tutaj łączące wszystkie wyjścia.
+I więc co się stało, to Nextflow kontynuował tę paralelizację tak jak w poprzednich krokach. I ten proces dał nam kanał z trzema elementami, i te trzy elementy kanału zostały przekazane do naszego procesu downstream, który wygenerował trzy zadania procesu.
 
-Jeśli przejdziemy do naszego katalogu results. Widzimy również, że collected output ma tylko jedną wartość zamiast wszystkich trzech. To dlatego, że ten plik wyjściowy był nadpisywany trzy razy z trzema różnymi wartościami.
+W zasadzie próbował zebrać trzy oddzielne razy i za każdym razem miał tylko pojedynczy plik, więc po prostu zrobił cat pojedynczego pliku do wyjścia, i w rzeczywistości możemy to również zobaczyć w pliku .command.sh.
 
-To ma sens, ponieważ przekazaliśmy jedno wyjście do jednego wejścia tutaj w ten sam sposób, jak zrobiliśmy to w poprzednim kroku.
+Jeśli zrobię .command.sh, zobaczymy, że ma tylko pojedynczą nazwę pliku tutaj i tylko pojedynczy plik został przygotowany do tego katalogu roboczego.
 
-## 2.4. Użycie operatora do zebrania powitań w jedno wejście
+## 2.3. Dodanie kroku zbierającego do workflow'a
 
-Więc potrzebujemy operatora tutaj, aby wziąć ten kanał z trzema elementami i zwinąć je do jednego elementu, tak aby ten końcowy proces uruchomił się tylko raz.
+Więc jakoś musimy powiedzieć Nextflow, żeby zebrał wszystkie te wyjścia z poprzedniego procesu i dał je temu procesowi downstream jako pojedynczy element kanału, a nie trzy.
 
-Aby to zrobić, użyjemy operatora collect. Mogę to zrobić bezpośrednio w workflow. Mogę zrobić .out i połączyć łańcuchowo z operatorem tutaj na końcu .collect.
+Robimy to za pomocą operatora kanału o nazwie _collect_.
 
-Kliknij zapisz. A następnie dla celów tego szkolenia zamierzam również zrobić kilka operatorów view, jak robiliśmy wcześniej, abyśmy mogli spojrzeć na ten kanał przed i po użyciu operatora collect, więc możemy zrozumieć, co się dzieje.
+To super przydatny operator, który zobaczycie w pipeline'ach Nextflow cały czas. To jest kanał tutaj, ten kanał wyjściowy, tak samo jak ten, który stworzyliśmy na górze. I więc możemy dołączać do niego operatory kanału, tak jak robiliśmy wcześniej. Możemy po prostu zrobić kropkę, a następnie w tym przypadku collect, nawiasy.
 
-Zamierzam wziąć ten kanał, pozbyć się collect i dot view greetings, a następnie zamierzam zduplikować tę linię, dodać operator collect. I zmienić to na after.
+I to wszystko, czego potrzebujemy. To wtedy zmanipuluje ten kanał, zanim zostanie przekazany do tego procesu.
 
-To jest oddzielne od miejsca, gdzie to wywołujemy, ale to w porządku, ponieważ używamy tych samych wywołań operatorów na tym samym kanale wyjściowym.
+Jeśli chcecie zobaczyć, co się z nim dzieje, możemy również go wyświetlić tutaj. Więc tutaj, to nie jest związane z uruchamianiem tego procesu w ogóle, więc mogłem to umieścić w dowolnym punkcie po uruchomieniu tego procesu. Ale bierzemy ten sam kanał wyjściowy i patrzymy na niego z .view, a następnie patrzymy na niego ponownie z .collect.view.
 
-Dobra, kliknijmy zapisz i wypróbujmy to w terminalu. Zamierzam uruchomić nextflow run. Hello, workflow. Ponownie uruchomić nasz skrypt.
+I gdy to uruchomimy, pokaże nam dwie różne struktury tego kanału, przed i po collect. Więc spróbujmy tego teraz. Dobra, właśnie trochę pomniejszyłem, bo niektóre wyjścia są dość długie, ale jeśli uruchomię pipeline'a, zobaczymy, czy działa.
 
-Dobra. To wygląda lepiej. Tak jak poprzednio możemy zobaczyć, że pierwsze dwa procesy uruchamiają się trzy razy, a teraz nasz końcowy proces uruchomił się tylko raz.
+Mam nadzieję, że trzeci proces uruchomi się tylko raz, bo zbiera wyjścia i rzeczywiście, widzicie collectGreetings jako jeden z jednego. Więc uruchomił się tylko jedno zadanie.
 
-Jeśli spojrzymy na to, co zostało wypisane przez operator view, tutaj na dole, powiedzieliśmy before collect, co jest tym wyjściem tutaj, i to jest wypisane trzy razy. I widzisz, że jest pojedyncza ścieżka dla każdego z nich. A potem after collect, możesz zobaczyć, że mamy tę tablicę trzech ścieżek. Więc to jest zgodne z oczekiwaniami.
+A następnie jeśli spojrzymy na instrukcje view, mamy trzy instrukcje view dla trzech elementów przed, z jedną ścieżką pliku w każdym.
 
-Dobra, sprawdźmy plik results i zobaczmy, czy tym razem jest zgodny z oczekiwaniami. Na pewno, są teraz trzy linie w pliku - to z powodzeniem połączyło te trzy wyjścia w jeden plik wyjściowy. Fantastycznie.
+A następnie po tej instrukcji collect, została wyzwolona tylko raz, bo jest pojedynczy element w tym kanale. I teraz mamy tę listę trzech różnych ścieżek plików.
 
-Dobra, zamierzam posprzątać i przejdźmy do następnego kroku. I zamierzam usunąć te instrukcje view tylko po to, aby zachować porządek.
+To dokładnie to, na co liczyliśmy. I widzicie, mam nadzieję, że to w zasadzie odwrotność tego operatora `map`, którego użyliśmy, żeby przejść z tablic CSV do oddzielnych elementów kanału. Teraz bierzemy oddzielne elementy kanału i wkładamy je z powrotem do pojedynczej tablicy.
 
-## 3. Przekazanie więcej niż jednego wejścia do procesu w celu unikalnego nazwania końcowego pliku wyjściowego
+Świetnie, możemy wyczyścić te instrukcje view. Nie potrzebujemy ich już. Możemy przejść do następnego kroku.
 
-Dobra. Do tej pory wszystkie nasze procesy przyjmowały tylko jedno wejście. Teraz zamierzamy wykonać ćwiczenie, w którym dodamy więcej niż jedno wejście do procesu, aby zobaczyć, jak to działa. Aby to zrobić, użyjemy tego przykładu collect greetings.
+Zanim pójdę dalej i zanim zapomnę, dodam nową instrukcję publish tutaj. Third output. Możecie nazwać to czymś bardziej semantycznym i opisowym w Waszym workflow'ie. A następnie dodam to do bloku output ponownie i powiem path 'hello_workflow' mode 'copy'. Po prostu żeby plik wyjściowy wygenerowany przez ten proces został zapisany do naszego katalogu results tutaj na górze.
 
-Za każdym razem, gdy uruchamiałem workflow, nadpisywał ten plik w katalogu results, co może nie być tym, czego chcemy.
+Tylko żeby szybko sprawdzić, czy działa. Powinno być teraz trochę czystsze, bo nie mamy tych instrukcji view. I zobaczymy, czy otrzymamy nasz nowy plik wyjściowy tutaj na górze. Jedno z jednego zadania uruchomiło się, dostaliśmy nowy plik o nazwie collected, i teraz mamy wszystkie trzy te słowa. Fantastycznie. Co dalej?
 
-## 3.1. Modyfikacja procesu zbierania, aby akceptował zdefiniowaną przez użytkownika nazwę dla pliku wyjściowego
+## 3. Przekazanie dodatkowych parametrów do procesu
 
-Więc dla tego przykładu zamierzamy przekazać dodatkowy parametr, abyśmy mogli dostosować nazwę pliku wyjściowego.
+Dobra. Następnie przyjrzymy się obsłudze wielu wejść do pojedynczego procesu. Do tej pory widzicie, że wszystkie nasze procesy pobierają tylko jedną rzecz jako wejście. Wszystkie mają pojedynczą linię pod swoim wejściem.
 
-Dodanie drugiego wejścia do procesu jest bardzo proste. Po prostu dodaję drugą linię w bloku input. Tym razem to będzie value, a nie path, ponieważ chcemy przekazać łańcuch i zamierzam nazwać to batch underscore name.
+Zademonstrujemy to pozwalając Nextflow określić inny identyfikator batch, tak że może uruchomicie ten workflow wielokrotnie i możecie nadać mu inny batch ID za każdym razem.
 
-Mogę teraz użyć tej zmiennej w bloku script i zamierzam powiedzieć collected dash dollar batch name.
+Po prostu dodam drugą linię we wejściu tutaj dla collectGreetings. I nazwę to "val", bo to jest łańcuch znaków. Teraz to jest wartość, nie ścieżka, i nazwę to "batch_name".
 
-Używam tutaj nawiasów klamrowych wokół nazwy zmiennej. To tylko po to, aby oddzielić ją od reszty łańcucha i prawdopodobnie nie jest to potrzebne w tym przypadku, ale myślę, że ułatwia to czytanie.
+Następnie edytuję skrypt tutaj na dole, żeby użyć tej zmiennej, i spróbuję umieścić ją w tym samym miejscu co materiał szkoleniowy. Więc umieszczę ją w środku tej ścieżki pliku COLLECTED-$\{batch_name\}-output.
 
-Dobra. Na koniec pamiętaj, aby zaktualizować ścieżkę wyjścia, ponieważ teraz nazwa pliku się zmieniła, więc zamierzam zrobić to samo i umieścić batch name w wyjściu path zgodnie z oczekiwaniami.
+Jeszcze nie skończyliśmy. Pamiętajcie, że musimy powiedzieć Nextflow, jakie będą nazwy plików wyjściowych. Więc musimy też zrobić to samo tutaj na górze: COLLECTED-$\{batch_name\}-output.txt".
 
-## 3.2. Dodanie parametru wiersza poleceń batch
+Fantastycznie. Nextflow teraz dostaje drugie wejście zmiennej i interpoluje to do skryptu i wyjścia.
 
-Teraz musimy przekazać nazwę batch skądś i zamierzam stworzyć drugi parametr, aby to zrobić, abyśmy mogli to zrobić w wierszu poleceń, gdy uruchamiamy workflow.
+Jeszcze jedna rzecz, teraz musimy znaleźć, gdzie to jest wywoływane, i musimy przekazać drugie wejście do procesu. To jest jak każde inne wejście do funkcji w każdym innym języku.
 
-Więc zamierzam zrobić params batch name, a domyślnie nazwijmy to test batch. Teraz mogę użyć tej specjalnej zmiennej parametrów tam, gdzie wywołujemy proces.
+Tak jak zrobiliśmy wcześniej w szkoleniu, użyję specjalnego "params" tutaj, i nazwiemy to "params.batch", żebyśmy mogli mieć opcję CLI --batch. I teraz widzicie, że nasz proces tutaj ma dwa oddzielne wejścia oddzielone przecinkiem, które są przekazywane.
 
-I na pewno VS Code mówi nam, że nie ma wystarczającej liczby argumentów dla tego procesu teraz i że oczekuje drugiego wejścia.
+Naprawdę ważne jest, żeby uzyskać właściwą kolejność, więc kolejność argumentów tutaj dla kanału i następnie parametru musi się zgadzać. Kanał i nazwa batch tutaj. To jest po prostu dopasowanie pozycyjne.
 
-Po prostu robię przecinek i przekazuję naszą nową zmienną i błąd znika.
+Dobra. Mogę teraz uruchomić ten pipeline od razu z --batch, ale zróbmy najpierw właściwą rzecz i zdefiniujmy to we wejściu tutaj w Params. Więc dodam to do batch i następnie powiemy, że to jest łańcuch znaków i dajmy wartość domyślną. Więc po prostu nazwijmy to batch. Dobra? Teraz spróbujmy uruchomić workflow.
 
-Zauważ, że kolejność wejść tutaj jest naprawdę ważna. Pierwsze wejście procesu było path, a drugie wejście to name. Jeśli zmienię kolejność tutaj, muszę również zmienić kolejność, gdy wywołuję proces. W przeciwnym razie. Dalej przekażemy niewłaściwy kanał do niewłaściwego wejścia.
+--batch Trio. Myślę, że tak jest napisane w materiale szkoleniowym, ale moglibyśmy użyć dowolnego łańcucha znaków tam. I mam nadzieję, że zobaczymy, że plik wyjściowy results pojawi się tutaj.
 
-## 3.3. Uruchomienie workflow
+I rzeczywiście, COLLECTED-trio-output - zadziałało poprawnie. Zmienił nazwę naszego pliku. I możecie sobie wyobrazić, że teraz to jest przydatne, bo jeśli uruchomię to ponownie z inną nazwą batch, jak replicate_two, to da nam inną nazwę batch tutaj na górze.
 
-Dobra, wypróbujmy to i zobaczmy, czy działa. Zróbmy "nextflow run hello- workflow. Dobra, uruchomił się jak poprzednio. Przyjrzyjmy się katalogowi results.
+I w tym przypadku nie nadpisze plików wyjściowych. Więc to miłe.
 
-Na pewno, nasza nazwa pliku tutaj nazywa się teraz " collected test batch output txt". Fantastycznie.
+## 4. Dodanie wyjścia do kroku zbierającego
 
-A teraz zobaczmy, czy możemy to nadpisać, uruchamiając ponownie. Tym razem zamierzam zrobić --batch_name, aby dopasować tę nazwę specjalnej zmiennej parametru tutaj. I zamierzam nazwać to demo output.
+Dobra, więc mamy teraz wiele wejść do naszego procesu tutaj. Ale co się stanie, jeśli chcemy utworzyć wiele wyjść? Naszym przykładem tutaj będzie to, że utworzymy raport dla tego procesu, mówiący po prostu, ile plików zostało zebranych.
 
-Uruchom workflow ponownie i zobaczymy, czy coś się stanie.
+I zrobimy to za pomocą polecenia echo tutaj. Więc możemy powiedzieć echo. There were, skopiuję to z materiału szkoleniowego, żebyście nie musieli patrzeć, jak to wpisuję.
 
-Dobra, teraz mamy collected demo output .txt. I ponieważ ta nazwa pliku różni się od tamtej, nie nadpisała jej. Obie są teraz obecne w katalogu results.
+There were $\{count_greetings\} greetings in this batch, i zapiszemy to do nowego pliku teraz o nazwie $\{batch_name\}, więc ta sama zmienna, możemy jej używać tyle razy, ile chcemy, report.txt.
 
-## 4. Dodanie wyjścia do kroku zbierania
+## 4.1.1. Policzenie liczby zebranych powitań
 
-Dobra, więc tam pokazaliśmy podawanie wielu wejść do procesu, ale co z wieloma wyjściami? W tym przykładzie zamierzamy obliczyć liczbę powitań, które są przetwarzane i wyprowadzić to jako drugorzędne wyjście dla tego kroku collect greeting.
+Musimy jakoś to faktycznie obliczyć. Moglibyśmy zrobić tę logikę w skrypcie Bash, gdybyśmy chcieli, używając logiki Bash. Jednak możemy również po prostu robić skryptowanie bezpośrednio w kodzie Nextflow, o ile znajduje się w bloku script w procesie i nad zacytowaną sekcją.
 
-## 4.1. Modyfikacja procesu, aby liczył i wyprowadzał liczbę powitań
+Cokolwiek tutaj nie zostanie włączone do ostatecznego wyrenderowanego skryptu i zostanie po prostu wykonane przez Nextflow, gdy renderuje zadanie.
 
-Zamierzamy zrobić tutaj małą sztuczkę. Procesy Nextflow mają ten blok script z wieloliniowym łańcuchem i jest on przekazywany jako wyjście bash do dot command dot sh. Ale możemy faktycznie napisać dowolny niestandardowy kod powyżej tego, i zostanie on wykonany jako część zadania, ale nie zostanie włączony w skrypt bash.
+Więc tutaj po prostu robimy trochę logiki. Tworzymy nową zmienną o nazwie count_greetings. Bierzemy tutaj kanał plików wejściowych i wywołujemy na nim .size().
 
-Jedną z wbudowanych funkcji w składni Nextflow jest funkcja size. Więc zamierzam wziąć wejście path i zamierzam powiedzieć count underscore greetings, tylko po to, aby zdefiniować nazwę zmiennej. Zamierzam wziąć pliki wejściowe i zamierzam wywołać "size" na nich.
+Dobra, ta funkcja da mi tutaj liczbę do tej zmiennej, i teraz nasze ostrzeżenie zniknęło, bo ta zmienna jest definiowana.
 
-Ta funkcja policzy rozmiar tego kanału wejściowego i przypisze go do zmiennej.
+Dobra, więc tworzymy ten drugi plik w katalogu work, ale musimy powiedzieć Nextflow, żeby oczekiwał go jako opublikowane wyjście tego procesu. Więc robimy to dokładnie tą samą składnią, jakiej użyliśmy dla pierwszego pliku.
 
-Możemy teraz zwrócić tę zmienną jako część bloku output. Więc mówimy, val, ponieważ jest to wartość, a nie plik. I count greetings.
+Mówimy path, bo znowu, moglibyśmy publikować zmienną tutaj, gdybyśmy chcieli, z "val", ale powiemy "path". A następnie oczekiwaną nazwę pliku. Zauważcie, że nie jest tutaj podświetlona. To dlatego, że użyłem pojedynczych cudzysłowów. Muszę użyć podwójnych cudzysłowów.
 
-Teraz to samo w sobie jest wystarczające i moglibyśmy teraz uzyskać dostęp do tych różnych wyjść z tego procesu. Jednakże musielibyśmy uzyskać do nich dostęp w sposób pozycyjny. Więc używając klucza indeksu takiego jak zero i jeden.
+## 4.1.2. Wyemitowanie pliku raportu i nazwanie wyjść
 
-Aby ułatwić sobie dostęp do wyjść, możemy je nazwać i robimy to za pomocą instrukcji emit.
+Dobra, to świetnie. I moglibyśmy teraz zacząć uzyskiwać dostęp do tych wyjść tutaj na dole tak jak zrobiłem tutaj. Ale teraz to jest tablica różnych obiektów, więc mógłbym zrobić collectGreetings.out[0], żeby dostać pierwszy, lub jeden, żeby dostać drugi, czyli nasz nowy raport.
 
-Więc robimy przecinek emit out file lub cokolwiek chcę to nazwać. I robię tutaj emit count. To jest w zasadzie tylko dekorator, który pomaga nam pisać nieco czystszy kod, abyśmy mogli łatwo odwoływać się do konkretnych wyjść później w bloku workflow.
+Ale naprawdę nie lubię tego robić, bo dość łatwo pomylić się w liczeniu indeksów. I siedzicie tam licząc linie często i dodajecie nowe wyjście i nagle wszystko się psuje. Więc
 
-## 4.2. Raportowanie wyjścia na końcu workflow
+znacznie lepiej jest odwoływać się do wszystkiego po nazwie zamiast tego. I możemy to zrobić za pomocą specjalnego klucza tutaj o nazwie "emit".
 
-Dobra. Jeśli przewinę w dół do bloku workflow, mogę teraz wziąć wyjścia collect greetings, zrobić collect greetings, dot out, i możemy zobaczyć nasze dwa nazwane wyjścia są sugerowane tutaj przez rozszerzenie VS Code. Bardzo przydatne.
+Więc możemy to nazwać, jak chcemy. Nazwijmy to emit outfile, i emit reports. Jeśli je zdefiniujecie i możecie to zrobić dla jednego lub wielu, zależy od Was. Teraz mogę przejść tutaj na dół i zamiast tego mogę przejść do dot out dot reports i po prostu wywołać to po nazwie, co jest znacznie łatwiejsze do zrozumienia Waszego kodu, gdy go czytacie, i jest bezpieczniejsze dla zmian w kodzie.
 
-Więc zamierzam zrobić dot count, aby uzyskać wartość count, którą właśnie stworzyliśmy, i zamierzam zrobić view, aby zostało wypisane w wierszu poleceń. Więc możemy to zobaczyć, gdy uruchamiamy workflow.
+Dodałem tutaj .out.report, ale faktycznie muszę mieć dwa różne wyjścia publikowane. Więc zmienię nazwę na coś bardziej interesującego jak collected i report i czy tak to nazwałem? Nazwałem to out file, przepraszam. Więc ta nazwa emit tutaj outfile i report, bo publikujemy dwa różne kanały wyjściowe i więc musimy odwołać się do nich obu w bloku publish.
 
-Napiszmy coś w domknięciu tutaj tylko po to, aby było to trochę ładniejsze. num greetings, there were greetings greetings.
+Następnie musimy również zdefiniować je w bloku output. Więc zmieniłem nazwę tego na collected, i znowu, dla reports, trochę rozwlekłe tutaj, ale jest to naprawdę przydatne, gdy przychodzisz czytać nowy workflow, żeby zobaczyć wszystkie różne wyjścia tutaj, wszystkie różne kanały wymienione obok siebie, i są sposoby, żeby to uczynić mniej rozwlekłym, których dotknę później.
 
-I tak naprawdę nie zależy nam na drugim wyjściu, ponieważ nie używamy go jako wejścia dla żadnych innych procesów. Ale widzicie, jak moglibyśmy łatwo przekazać to jako wejście do innego procesu, gdybyśmy chcieli, w dalszej części.
+Dobra, spróbujmy i uruchommy nasz workflow i zobaczmy, co się stanie.
 
-## 4.3. Uruchomienie workflow
+Mam nadzieję, że teraz powinien działać w zasadzie tak samo jak wcześniej. I otrzymamy nowy plik wyjściowy tutaj na górze o nazwie replicate_two, report. I proszę. Został otwarty i mówi, że są trzy powitania w batch, co jest tym, czego oczekiwaliśmy, więc jest idealnie.
 
-Zamierzamy kliknąć zapisz. Przyjrzyjmy się terminalowi i wypróbujmy to.
+Jeśli przejdę do katalogu work tutaj tylko po to, żeby Wam udowodnić, że zostało wykonane w kodzie Nextflow, a nie w skrypcie bash, mogę przejść do cat work/ command.sh, i zobaczycie tutaj, że po prostu wypisuje ten łańcuch znaków bezpośrednio. There were three greetings in this batch, i więc ta zmienna została zinterpolowana przez Nextflow. Została obliczona w bloku script, zanim napisał plik .command.sh. Więc wynikowe obliczenie zmiennej jest w zasadzie zakodowane na stałe do tego, zanim zostanie wykonane w Waszym środowisku obliczeniowym w tym przypadku.
 
-Dobra, fantastycznie. Proszę bardzo. There are three greetings. To dokładnie tak.
+I więc widzicie to oddzielenie między blokiem script tutaj a wszystkim powyżej niego. Mam nadzieję, że to ma sens.
 
-Dobra, świetna robota. To koniec tego rozdziału. Wszystko zrobione, że dotarliście tak daleko. Teraz zaczynasz budować dość realistyczny workflow, gdzie jesteśmy w stanie obsługiwać wejścia i wyjścia oraz logikę w naszym workflow.
+## Podsumowanie i quiz
 
-Gdy te pliki workflow stają się dłuższe, zaczynają być nieco nieporęczne. Więc w następnym rozdziale przyjrzymy się, jak możemy modularyzować kod Nextflow do oddzielnych plików, aby łatwiej było znaleźć i utrzymać kod w workflow.
+Dobra, to koniec tej części kursu Hello Nextflow. Więc jak wcześniej, idźcie i sprawdźcie quiz. Zróbcie to na stronie internetowej lub w CLI, przejdźcie przez kilka pytań i sprawdźcie, czy zrozumieliście część materiału, który omówiliśmy. Zobaczcie, czy jest tam coś, co podkreśla coś, czego mogliście nie zrozumieć. Niewiele pytań. Łatwe i miłe do zrobienia. Lub możecie zrobić to na stronie internetowej tutaj na dole również.
 
-Dołącz do nas w następnym filmie dla rozdziału czwartego. Hello Modules.
-
-[Następna transkrypcja wideo :octicons-arrow-right-24:](04_hello_modules.md)
+I zróbcie sobie małą przerwę, małą przechadzkę i wracajcie i dołączcie do nas w części czwartej kursu Hello Nextflow, gdzie będziemy mówić o modułach. Dziękuję bardzo.

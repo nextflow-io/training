@@ -310,10 +310,10 @@ nextflow run 3-main.nf -params-file test-params.yaml
     Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [2b/9a7d1e] sayHello (2)       | 3 of 3 ✔
+    [5c/8f3b2a] convertToUpper (3) | 3 of 3 ✔
+    [a3/29d8fb] collectGreetings   | 1 of 1 ✔
+    [b7/83ef12] cowpy              | 1 of 1 ✔
     ```
 
 The final output file should contain the stegosaurus character saying the greetings.
@@ -372,7 +372,8 @@ Let's look at a few common ways you might configure this to be more flexible.
 
 Each version of the workflow we've run so far has published its outputs to a different subdirectory hardcoded into the output definitions.
 
-Let's change that to use a user-configurable parameter.
+We changed where that subdirectory was in Part 1 by using the `-output-dir` CLI flag, but that's still just a static string.
+Let's instead configure this in a config file, where we can define more complex dynamic paths.
 We could create a whole new parameter for this, but let's use the `batch` parameter since it's right there.
 
 #### 2.1.1. Set a value for `outputDir` in the configuration file
@@ -397,7 +398,7 @@ Add the following code to the `nextflow.config` file:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 === "Before"
@@ -413,10 +414,10 @@ Add the following code to the `nextflow.config` file:
     }
     ```
 
-This will replace the built-in default path, `results/`, with `results/` plus the value of the `batch` parameter as subdirectory.
-You could also change the `results` part if you wanted.
+This will replace the built-in default path, `results/`, with `results_config/` plus the value of the `batch` parameter as subdirectory.
 
-For a temporary change, you could set this option from the command-line using the `-output-dir` parameter in your command (but then you couldn't use the `batch` parameter value).
+Remember that you can also set this option from the command-line using the `-output-dir` parameter in your command (`-o` for short), but then you couldn't use the `batch` parameter value.
+Using the CLI flag will overwrite `outputDir` in the config if it is set.
 
 #### 2.1.2. Remove the repeated part of the hardcoded path
 
@@ -493,21 +494,21 @@ nextflow run 3-main.nf --batch outdir
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [9c/6a03ea] sayHello (2)       [100%] 3 of 3 ✔
+    [11/9e58a6] convertToUpper (3) [100%] 3 of 3 ✔
+    [c8/1977e5] collectGreetings   [100%] 1 of 1 ✔
+    [38/f01eda] cowpy              [100%] 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/outdir/`.
+This still produces the same output as previously, except this time we find our outputs under `results_config/outdir/`.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/outdir/
+    results_config/outdir
     ├── cowpy-COLLECTED-outdir-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -528,7 +529,7 @@ One popular way to organize outputs further is to do it by process, _i.e._ creat
 
 #### 2.2.1. Replace the output paths by a reference to process names
 
-All you need to do is reference the name of the process as `<task>.name` in the output path declaration.
+All you need to do is reference the name of the process as `<process>.name` in the output path declaration.
 
 Make the following changes in the workflow file:
 
@@ -604,18 +605,18 @@ nextflow run 3-main.nf --batch pnames
     Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [4a/c2e6b8] sayHello (2)       | 3 of 3 ✔
+    [6f/d4a172] convertToUpper (3) | 3 of 3 ✔
+    [e8/4f19d7] collectGreetings   | 1 of 1 ✔
+    [f2/a85c36] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/pnames/`, and they are grouped by process.
+This still produces the same output as previously, except this time we find our outputs under `results_config/pnames/`, and they are grouped by process.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/pnames/
+    results_config/pnames/
     ├── collectGreetings
     │   ├── COLLECTED-pnames-output.txt
     │   └── pnames-report.txt
@@ -631,8 +632,10 @@ This still produces the same output as previously, except this time we find our 
         └── Holà-output.txt
     ```
 
-Note that here we've erased the distinction between `intermediates` versus final outputs being at the top level.
-You could of course mix and match these approaches, for example by setting the first output's path as `intermediates/${sayHello.name}`
+!!! note
+
+    Note that here we've erased the distinction between `intermediates` versus final outputs being at the top level.
+    You can mix and match these approaches and even include multiple variables, for example by setting the first output's path as `#!groovy "${params.batch}/intermediates/${sayHello.name}"`
 
 ### 2.3. Set the publish mode at the workflow level
 
@@ -648,7 +651,7 @@ Add the following code to the `nextflow.config` file:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     workflow.output.mode = 'copy'
     ```
 
@@ -658,7 +661,7 @@ Add the following code to the `nextflow.config` file:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 Just like the `outputDir` option, giving `workflow.output.mode` a value in the configuration file would be sufficient to override what is set in the workflow file, but let's remove the unnecessary code anyway.
@@ -734,19 +737,19 @@ nextflow run 3-main.nf --batch outmode
     Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [5b/d91e3c] sayHello (2)       | 3 of 3 ✔
+    [8a/f6c241] convertToUpper (3) | 3 of 3 ✔
+    [89/cd3a48] collectGreetings   | 1 of 1 ✔
+    [9e/71fb52] cowpy              | 1 of 1 ✔
     ```
 
-This still produces the same output as previously, except this time we find our outputs under `results/outmode/`.
+This still produces the same output as previously, except this time we find our outputs under `results_config/outmode/`.
 They are still all proper copies, not symlinks.
 
 ??? abstract "Directory contents"
 
     ```console
-    results/outmode/
+    results_config/outmode/
     ├── collectGreetings
     │   ├── COLLECTED-outmode-output.txt
     │   └── outmode-report.txt
@@ -874,7 +877,7 @@ nextflow run 3-main.nf --batch conda
     [c5/af5f88] cowpy              | 1 of 1 ✔
     ```
 
-This should work without issue and produce the same outputs as previously under `results/conda`.
+This should work without issue and produce the same outputs as previously under `results_config/conda`.
 
 Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
@@ -1309,11 +1312,11 @@ nextflow run 3-main.nf -profile my_laptop,test
     [fd/e84fa9] cowpy              | 1 of 1 ✔
     ```
 
-This will use Docker where possible and produce outputs under `results/test`, and this time the character is the comedic duo `dragonandcow`.
+This will use Docker where possible and produce outputs under `results_config/test`, and this time the character is the comedic duo `dragonandcow`.
 
 ??? abstract "File contents"
 
-    ```console title="results/test/"
+    ```console title="results_config/test/"
      _________
     / HOLà    \
     | HELLO   |
@@ -1370,6 +1373,12 @@ nextflow config
 ??? success "Command output"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'batch'
+      character = 'turkey'
+    }
+
     docker {
       enabled = false
     }
@@ -1386,10 +1395,12 @@ nextflow config
       }
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+    outputDir = 'results_config/batch'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1406,6 +1417,12 @@ nextflow config -profile my_laptop,test
 ??? success "Command output"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'test'
+      character = 'dragonandcow'
+    }
+
     docker {
       enabled = true
     }
@@ -1423,10 +1440,12 @@ nextflow config -profile my_laptop,test
       executor = 'local'
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+    outputDir = 'results_config/test'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1464,17 +1483,55 @@ Try running the official Nextflow "hello" demo pipeline:
 nextflow run nextflow-io/hello
 ```
 
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Pulling nextflow-io/hello ...
+     downloaded from https://github.com/nextflow-io/hello.git
+    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] DSL2 - revision: 2ce0b0e294 [master]
+
+    executor >  local (4)
+    [ba/08236d] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Hello world!
+
+    Bonjour world!
+
+    Hola world!
+    ```
+
 The first time you run a remote pipeline, Nextflow downloads it and caches it locally.
 Subsequent runs use the cached version unless you explicitly request an update.
 
 ### 7.2. Specify a version for reproducibility
 
 By default, Nextflow runs the latest version from the default branch.
-You can specify a particular version, branch, or commit using the `-r` flag:
+You can specify a particular version (tag), branch, or commit using the `-r` flag:
 
 ```bash
-nextflow run nextflow-io/hello -r v1.1
+nextflow run nextflow-io/hello -r v1.3
 ```
+
+??? success "Command output"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
+
+    executor >  local (4)
+    [61/e11f77] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Bonjour world!
+
+    Hello world!
+
+    Hola world!
+    ```
 
 Specifying exact versions is essential for reproducibility.
 
@@ -1541,8 +1598,8 @@ Learn more: [2.1. Customize the outputDir directory name](#21-customize-the-outp
 <quiz>
 How do you reference a process name dynamically in output path configuration?
 - [ ] `#!groovy ${processName}`
-- [ ] `process.name`
-- [x] `#!groovy { meta.id }`
+- [ ] `#!groovy path "<process>.name"`
+- [x] `#!groovy path { <process>.name }`
 - [ ] `@processName`
 
 Learn more: [2.2. Organize outputs by process](#22-organize-outputs-by-process)

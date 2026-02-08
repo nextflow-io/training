@@ -6,8 +6,6 @@ hide:
 
 # Zadania Poboczne
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 To zbiór samodzielnych mini-kursów szkoleniowych, które zagłębiają się w konkretne tematy. Możesz przez nie przechodzić w dowolnej kolejności.
 
 Zaczynajmy! Kliknij przycisk "Open in GitHub Codespaces" poniżej, aby uruchomić środowisko szkoleniowe (najlepiej w osobnej karcie), a następnie czytaj dalej, podczas gdy się ładuje.

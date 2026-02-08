@@ -583,7 +583,7 @@ Así es como transportamos datos de un paso al siguiente en Nextflow.
 
 La tercera llamada de process, a `collectGreetings`, es un poco diferente.
 
-```groovy title="2b-multistep.nf" linenums="77"
+```groovy title="2b-multistep.nf" linenums="78"
     // recopilar todos los saludos en un archivo
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
@@ -640,7 +640,7 @@ La desventaja es que a veces puede hacer más difícil descifrar lo que está ha
 
 Puede haber notado que `collectGreetings` toma una segunda entrada, `params.batch`:
 
-```groovy title="2b-multistep.nf" linenums="77"
+```groovy title="2b-multistep.nf" linenums="78"
     // recopilar todos los saludos en un archivo
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
@@ -873,7 +873,7 @@ Comience abriendo el archivo de workflow `2c-modules.nf`.
 Puede ver que la lógica del workflow es exactamente la misma que en la versión anterior del workflow.
 Sin embargo, el código del process ya no está en el archivo del workflow, y en su lugar hay declaraciones `include` que apuntan a archivos separados bajo `modules`.
 
-```groovy title="hello-modules.nf" linenums="3"
+```groovy title="2c-modules.nf" linenums="3"
 // Incluir módulos
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -925,9 +925,9 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 Notará que las ejecuciones de process todas se almacenaron en caché exitosamente, lo que significa que Nextflow reconoció que ya ha hecho el trabajo solicitado, aunque el código se haya dividido y el archivo principal del workflow se haya renombrado.
@@ -1225,9 +1225,9 @@ El workflow es muy similar al anterior, más el paso extra para ejecutar `cowpy`
 
 Puede ver que este workflow importa un process `cowpy` de un archivo de módulo, y lo llama en la salida de la llamada `collectGreetings()`, más un parámetro de entrada llamado `params.character`.
 
-```groovy title="2d-container.nf" linenums="25"
-// generar arte ASCII con cowpy
-cowpy(collectGreetings.out, params.character)
+```groovy title="2d-container.nf" linenums="31"
+// generar arte ASCII de los saludos con cowpy
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 El process `cowpy`, que envuelve el comando cowpy para generar arte ASCII, está definido en el módulo `cowpy.nf`.

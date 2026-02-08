@@ -8,7 +8,7 @@ Platforma jest obsługiwana przez GitHub (który należy do Microsoft) i jest do
 !!! warning "Ostrzeżenie"
 
     Konta powiązane z organizacjami mogą podlegać pewnym dodatkowym ograniczeniom.
-    W takim przypadku może być konieczne użycie niezależnego konta osobistego lub lokalna instalacja.
+    W takim przypadku może być konieczne użycie niezależnego konta osobistego lub instalacja lokalna.
 
 ## Tworzenie konta GitHub
 
@@ -31,7 +31,7 @@ Powinieneś zobaczyć stronę, na której możesz utworzyć nowy GitHub Codespac
 Do ogólnego użytku nie powinieneś potrzebować niczego konfigurować.
 O ile nie zaznaczono inaczej w kursie, który rozpoczynasz, możesz po prostu kliknąć główny przycisk, aby kontynuować.
 
-Jednak możliwe jest dostosowanie środowiska, klikając przycisk "Change options".
+Możliwe jest jednak dostosowanie środowiska, klikając przycisk "Change options".
 
 ??? info "Opcje konfiguracji"
 
@@ -47,14 +47,15 @@ Jednak możliwe jest dostosowanie środowiska, klikając przycisk "Change option
 
     Pozwala dostosować maszynę wirtualną, której będziesz używać do pracy ze szkoleniem.
 
-    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow do równoległego wykonywania workflow'ów. Jednak zużyje to szybciej Twój darmowy limit. Nie zalecamy zmiany tego ustawienia, chyba że wymaga tego kurs, który zamierzasz realizować.
+    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow'a do równoległego wykonywania workflow'ów.
+    Jednak zużyje to szybciej Twój darmowy limit, więc nie zalecamy zmiany tego ustawienia, chyba że wymaga tego kurs, który zamierzasz realizować.
 
     Zobacz 'Limity GitHub Codespaces' poniżej, aby uzyskać więcej szczegółów o limitach.
 
 ### Czas uruchamiania
 
 Otwieranie nowego środowiska GitHub Codespaces po raz pierwszy może zająć kilka minut, ponieważ system musi skonfigurować Twoją maszynę wirtualną, więc nie martw się, jeśli jest czas oczekiwania.
-Jednak nie powinno to trwać dłużej niż pięć minut.
+Nie powinno to jednak trwać dłużej niż pięć minut.
 
 ## Nawigacja w interfejsie szkoleniowym
 
@@ -62,7 +63,7 @@ Po załadowaniu GitHub Codespaces powinieneś zobaczyć coś podobnego do poniż
 
 ![GitHub Codespaces welcome](img/codespaces_welcome.png)
 
-To jest interfejs VSCode IDE, popularnej aplikacji do tworzenia kodu, którą polecamy do pracy z Nextflow.
+To jest interfejs IDE VSCode, popularnej aplikacji do tworzenia kodu, którą polecamy do pracy z Nextflow.
 
 - **Główny edytor** to miejsce, gdzie będą otwierane kod Nextflow i inne pliki tekstowe. Tutaj będziesz edytować kod. Po otwarciu codespace wyświetli podgląd pliku `README.md`.
 - **Terminal** poniżej głównego edytora pozwala uruchamiać polecenia. Tutaj będziesz uruchamiać wszystkie polecenia podane w instrukcjach kursu.
@@ -76,7 +77,7 @@ Możesz dostosować względne proporcje paneli okna według własnych upodobań.
 
 ### Wznawianie sesji
 
-Po utworzeniu codespace możesz je łatwo wznowić lub uruchomić ponownie i kontynuować od miejsca, w którym skończyłeś.
+Po utworzeniu środowiska możesz je łatwo wznowić lub uruchomić ponownie i kontynuować od miejsca, w którym skończyłeś.
 Sesja automatycznie zakończy się po 30 minutach bezczynności i zachowa Twoje zmiany przez maksymalnie 2 tygodnie.
 
 Możesz ponownie otworzyć środowisko z <https://github.com/codespaces/>.
@@ -104,7 +105,7 @@ GitHub Codespaces daje Ci do 15 GB-miesięcy przestrzeni dyskowej miesięcznie i
 Jest to równoważne około 60 godzinom domyślnego czasu działania środowiska przy użyciu standardowej przestrzeni roboczej (2 rdzenie, 8 GB RAM i 32 GB przestrzeni dyskowej).
 
 Możesz tworzyć je z większymi zasobami (patrz wyjaśnienie powyżej), ale spowoduje to szybsze zużycie darmowego limitu i będziesz mieć mniej godzin dostępu do tej przestrzeni.
-Na przykład, jeśli wybierzesz maszynę 4-rdzeniową zamiast domyślnej 2-rdzeniowej, Twój limit wyczerpie się o połowę szybciej.
+Na przykład, jeśli wybierzesz maszynę 4-rdzeniową zamiast domyślnej 2-rdzeniowej, Twój limit wyczerpie się w połowie czasu.
 
 Opcjonalnie możesz zakupić dostęp do większych zasobów.
 

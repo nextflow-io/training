@@ -41,18 +41,18 @@ workflow {
 
 output {
     first_output {
-        path { sayHello.process }
+        path { sayHello.name }
     }
     uppercased {
-        path { convertToUpper.process }
+        path { convertToUpper.name }
     }
     collected {
-        path { collectGreetings.process }
+        path { collectGreetings.name }
     }
     batch_report {
-        path { collectGreetings.process }
+        path { collectGreetings.name }
     }
     cowpy_art {
-        path { cowpy.process }
+        path { cowpy.name }
     }
 }

@@ -1,109 +1,177 @@
 # Orientamento - Trascrizione Video
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/G3CV-FcV-rc?si=nyLvwhrSB2m1NPc5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWaTV4zd?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Nota importante"
 
-    Questa pagina mostra solo la trascrizione. Per le istruzioni complete passo dopo passo, torni al [materiale del corso](../00_orientation.md).
+    Questa pagina mostra solo la trascrizione. Per le istruzioni complete passo dopo passo, tornate al [materiale del corso](../00_orientation.md).
 
-## Benvenuto
+## Benvenuti
 
-Salve, benvenuto a Hello Nextflow. Mi chiamo Phil Ewels. Sono Product Manager per Open Source in Seqera, e sono lieto di essere qui oggi per accompagnarla attraverso questo primo corso di formazione su Nextflow.
+Ciao e benvenuti a Hello Nextflow. Mi chiamo Phil Ewels. Sono Product Manager per Open Source Software presso Seqera, l'azienda dietro Nextflow.
 
-Esamineremo le basi di Nextflow, spiegando come scrivere ed eseguire pipeline e come configurarle.
+Questo corso è un'introduzione pratica alla costruzione di flussi di lavoro con Nextflow. È progettato per persone completamente nuove a Nextflow che vogliono sviluppare le proprie pipeline.
 
-E costruirà la sua semplice pipeline multi-step. Tratteremo terminologia come operatori e channel factories, e alla fine del corso, sarà pronto per iniziare a costruire le sue pipeline bioinformatiche.
+Gli esempi sono tutti semplici elaborazioni di testo, così potete concentrarvi sui concetti di Nextflow senza bisogno di competenze di dominio, solo una certa familiarità con la riga di comando.
 
-Se ha domande, la preghiamo di contattarci su community.seqera.io. Abbiamo una comunità Nextflow molto attiva con una sezione dedicata alla formazione, quindi ci faccia sapere dove ha difficoltà e qualcuno sarà in grado di aiutare.
+Esamineremo le basi di Nextflow: scrivere processi, collegarli in flussi di lavoro multi-step, gestire le dipendenze software con i container e configurare le pipeline per diversi ambienti di calcolo. Alla fine, avrete costruito una pipeline funzionante da zero.
 
-Bene. Iniziamo.
+Questo corso si concentra sullo _sviluppo_ di pipeline. Se volete solo _eseguire_ pipeline esistenti senza entrare troppo nel codice, abbiamo un corso più breve "Nextflow Run" che potrebbe essere più adatto a voi.
 
-## Sito Web di Formazione
+Una volta che avrete acquisito le basi qui, abbiamo anche corsi di follow-up che applicano questi concetti ad analisi scientifiche reali. Vi insegneremo come usare le pipeline e le best practice della comunità nf-core.
 
-Tutto il materiale di formazione per i corsi Nextflow si trova su training.nextflow.io. Può accedervi nel suo browser web. Lo avvii ora e possiamo dare un'occhiata.
+Se rimanete bloccati, dirigetevi su community.seqera.io. C'è un forum della comunità attivo con una sezione dedicata proprio alle domande sulla formazione. Potete usarlo in qualsiasi momento, tuttavia organizziamo anche settimane di formazione trimestrali con persone disponibili specificamente per aiutare. Quindi se state facendo la formazione durante una di quelle, non siate assolutamente timidi e chiedete aiuto.
 
-Eseguirò questo con la versione 2.1.1. Pubblichiamo piccoli aggiornamenti e correzioni qua e là, quindi non si preoccupi se è leggermente diverso, ma se il materiale è troppo cambiato, può sempre usare questo selettore di versione in alto per scegliere la versione esatta dei materiali che tratterò.
+Potete anche provare a chiedere aiuto a Seqera AI. È ottimo nello spiegare il codice Nextflow e nell'aiutarvi con il debugging.
 
-Se preferisce la modalità chiara, può cambiare il tema del sito web qui.
+Quando siete pronti a eseguire Nextflow su larga scala, Seqera Platform è il posto migliore per farlo. Funziona sulla vostra infrastruttura senza alcun vendor lock-in, con tutto dal lancio delle pipeline al monitoraggio in tempo reale, agli ambienti di analisi interattivi. Ma per ora, concentriamoci solo sui fondamenti.
 
-Veda le traduzioni qui, anche se al momento della registrazione, è disponibile solo in inglese, che copre questo nuovo materiale.
+Bene, iniziamo.
 
-E veda anche tutto il codice sorgente per il sito web di formazione e tutto ciò con cui lavoreremo su GitHub.
+## training.nextflow.io
 
-La homepage qui elenca tutti i diversi corsi di materiale di formazione che abbiamo. Quindi scorrendo verso il basso, vedremo Nextflow per principianti con il corso Hello Nextflow che faremo qui. Può vedere tutti gli altri corsi che abbiamo anche, che funzionano in modo simile.
+Okay. La prima cosa da notare è che tutti i corsi di formazione su training.nextflow.io sono molto interattivi. L'idea è che seguiate il materiale di formazione e le mie istruzioni, e percorriamo insieme il materiale di formazione. Quindi avrete bisogno di due cose: il vostro laptop e questo sito web aperto. E questo è praticamente tutto.
 
-## Configurazione dell'Ambiente
+Questa è la homepage come appare oggi mentre registro questo. Potete vedere che c'è una panoramica delle diverse cose, lo sfondo e i diversi corsi che abbiamo, la cui lista sta crescendo continuamente.
 
-In realtà inizierò usando questo primo in alto, che è comune per tutti i corsi di formazione, e riguarda specificamente la configurazione del nostro ambiente.
+Nextflow for newcomers è dove siamo. Ci sono due corsi qui dentro, Nextflow Run, che è un corso diverso, e Hello Nextflow, che è quello che ci interessa.
 
-Cliccando, mi porta a questa sezione, e possiamo vedere le istruzioni per sviluppare localmente. Se vuole usare il suo laptop con la sua copia di VS Code e le sue installazioni software, o quello che ci aspettiamo che facciano la maggior parte delle persone, che è usare qualcosa chiamato GitHub Codespaces.
+E potete anche vedere tutti i diversi corsi nella barra laterale. Posso passare a Hello Nextflow e possiamo vedere tutti i diversi capitoli che lavoreremo insieme.
 
-Codespaces è un servizio fornito da GitHub dove eseguono un server web nel cloud, a cui può connettersi. Quel server ha VS Code installato, dove può eseguirlo nel suo browser web, o se preferisce, connetterlo alla sua installazione locale di VS Code. Tutti i calcoli, tutti i file, tutte le modifiche avvengono in remoto, il che significa che tutto il software di cui ha bisogno viene preinstallato ed è lo stesso per tutti.
+Ci sono un paio di altre cose importanti da notare qui. Innanzitutto, il materiale di formazione è versionato, quindi potete vedere qui in alto. Dice 3.0 latest, che al momento della registrazione è la versione stabile più recente. Questo cambierà nel tempo. Pubblichiamo nuovi corsi e aggiorniamo il materiale nel tempo. Quindi se è 3.1 o 3.2, non preoccupatevi troppo. Se è 4.0, allora probabilmente c'è un nuovo video, e dovreste forse andare a cercarlo perché probabilmente ci saranno aggiornamenti significativi.
 
-## Creazione di un GitHub Codespace
+Un altro menu a tendina in alto è questo, quello della lingua. Ora questo è completamente nuovo per la versione 3.0. Abbiamo preso il materiale precedentemente tradotto, che era stato fatto da esseri umani, a mano, e l'abbiamo passato in un LLM e abbiamo configurato tutta questa nuova infrastruttura per mantenere diverse traduzioni del materiale di formazione usando la traduzione LLM.
 
-Per creare il codespace con tutto ciò di cui abbiamo bisogno, cerchi i pulsanti nei documenti del materiale, che dicono "Open in GitHub Codespaces". Cliccherò ora, aprendolo in una nuova scheda. E mi viene presentata questa pagina web. Ora può vedere che è preconfigurato per essere impostato con nextflow-io training.
+Quindi ora abbiamo tutte queste fantastiche traduzioni qui. Quindi se volete seguire in coreano, potete caricare l'intero sito web in coreano. E seguire lì. Lo stesso per tutte queste altre lingue, hindi e tedesco e così via. Io seguirò in inglese. È come la lingua primaria in cui scriviamo il materiale.
 
-Posso semplicemente cliccare crea nuovo codespace. Ma in realtà raccomandiamo di usare una macchina leggermente più grande per la formazione Nextflow con quattro CPU invece di due. Può cambiare quale versione del materiale utilizza. Quindi questo è predefinito su 2.1.1 perché è la versione dei documenti da cui ho seguito il collegamento. Ma potrei anche impostarlo su un branch specifico del repository se voglio.
+Un paio di altri pulsanti se vi piace avere la modalità chiara. Invece di quella modalità, potete seguire il sito web in modalità chiara in alto qui.
 
-Ora cliccherò crea codespace. E inizierà a configurare l'ambiente per me.
+E poi anche tutto ciò che guardiamo è in un singolo repository GitHub, che è open source, chiamato nextflow-io/training. E se cliccate questo pulsante in qualsiasi momento, vi porterà al repository GitHub. Ci torneremo tra un minuto.
 
-## Creazione del Codespace
+## Configurazione di GitHub Codespaces
 
-Ora, la prima volta che lo fa, ci vorrà parecchio tempo, quindi ora è un buon momento per andare a prendere una tazza di tè. Si metta comodo, chiacchieri con la persona seduta accanto a lei.
+Okay, quindi ora avete questo aperto nella scheda del browser. Andiamo a Hello Nextflow e clicchiamo dentro. Potete vedere nella pagina introduttiva, ci dice alcuni dei requisiti, la panoramica e il piano della lezione di circa ciò che copriremo, e poi ci immergeremo nell'iniziare.
 
-Se è interessato, può cliccare building codespace qui sotto per vedere i log della configurazione. E può vedere qui che sta scaricando un'immagine Docker con tutto ciò di cui ho bisogno e configurando l'ambiente.
+Ci sono diversi modi per fare questo tutorial interattivo. Se vi fa piacere, siete i benvenuti a farlo localmente sul vostro computer con la vostra installazione di Nextflow. Se clicchiamo su Environment Options, potete vedere che ci sono più dettagli su come farlo usando Devcontainer locale o potete anche semplicemente installare tutto il software localmente, con installazione manuale.
 
-Ora, deve aspettare così solo la prima volta che crea un codespace. Se va su github.com/codespaces qui, vedrà tutti i diversi Codespaces che ha aperti. Ecco quello che ho appena creato. La prossima volta che lo fa, può andare qui e può selezionare il codespace precedente e tornare direttamente ad esso. Ed è un processo molto, molto più veloce per avviare quell'ambiente esistente. Questo manterrà anche tutte le modifiche che ha apportato a VS Code e ai file, quindi non perderà i suoi progressi se esce e torna.
+Stiamo lavorando per far funzionare questo bene con Seqera Studios, quindi questa è un'altra opzione. Ma quella più comune in questo momento è usare GitHub Codespaces.
 
-Può cliccare i tre punti qui per eseguire altre azioni. Ad esempio, se l'ha configurato con due CPU e ora ne vuole quattro, può cambiare il tipo di macchina. O se vuole ricominciare da capo e da zero, può eliminare il codespace.
+Codespaces configura un ambiente sandbox su un server remoto gestito da GitHub. Ed è gratuito per una certa quantità di utilizzo, che di solito va bene per la formazione. E vi configurerà un'istanza di VS Code, un IDE dove potete accedere a tutti i file dal repository, eseguire Nextflow e tutto. E abbiamo pre-configurato Codespaces per voi. Quindi ha tutto ciò di cui avete bisogno.
 
-## Introduzione a VS Code
+La bellezza di questo è che basta un clic per configurare un Codespace. È lo stesso per tutti, e sappiamo che avete già installato tutti i prerequisiti, quindi è bello e veloce.
 
-Okay, Codespaces ha finito di configurare il mio ambiente e ora mi viene presentato VS Code nel browser web.
+Quindi la prima cosa da fare è andare su "Getting Started". Cercate questo pulsante, che dice _Open in Codespaces_. Farò command + clic per aprirlo in una nuova scheda, e ci porta a GitHub.
 
-Se è abituato a VS Code. Questo sembrerà molto familiare se non l'ha mai usato prima, è abbastanza semplice. Ci sono alcune parti diverse della pagina di cui deve essere consapevole.
+Questo è come appare. Possiamo vedere, abbiamo impostato tutte le opzioni qui per voi. Se volete, potete cliccare su change options. Alcune cose che potete fare qui. Potete dare una macchina istanza più grande, per esempio, se scoprite che crasha perché finisce la memoria o cose del genere. O impostare versioni specifiche del materiale di formazione. Ma di solito potete semplicemente andare con ciò che abbiamo configurato qui e potete vederlo. In questo caso sta usando la release 3.0.
 
-Qui a sinistra, abbiamo la barra laterale. Può vedere l'Explorer configurato con tutti i diversi file nel repository GitHub dal repository di formazione.
+Quindi cliccherò su create new Codespace. E questo mi porta dentro.
 
-Su questi pulsanti in basso a sinistra, possono esserci strumenti diversi. Nella barra laterale. Posso cercare tutti i file in tutto il progetto. Posso lavorare con Git, posso lavorare con GitHub, tutte cose diverse come quella.
+Notate anche, dice no Codespace to resume lì. Se ho precedentemente creato un Codespace, cliccando di nuovo quel pulsante sul materiale di formazione mi porterà alla stessa pagina e elencherà tutti i Codespaces che ho già in esecuzione. Allora potete semplicemente saltare direttamente in essi e continuare da dove avete lasciato. Quindi non importa se avete chiuso il vostro laptop.
 
-In alto qui c'è il menu principale. L'esploratore di file è quello che avremo aperto per la maggior parte del tempo qui, e può fare clic destro su uno qualsiasi di questi file e fare le cose normali che si aspetterebbe. Potrebbe dover cliccare attraverso alcuni avvisi come questo dove dice taglia copia e può anche scaricare sulla sua macchina locale.
+Si spengono automaticamente dopo pochi minuti di inattività, ma non è un problema. Potete semplicemente riavviarli.
 
-Quando il codespace si carica, ci dà un'anteprima del file markdown in quest'area principale qui. Questo è proprio lo stesso di quello che viene visualizzato su github.com. Posso chiuderlo e se faccio doppio clic su quel file Readme, vedrà che lo apre come codice nell'editor di codice e proprio come con qualsiasi altro file, possiamo modificare questo codice direttamente.
+Una volta avviato un nuovo Codespace, rimarrà su questa pagina così e caricherà per un bel po'. Quindi ora è un buon momento per fare una breve pausa. Forse avete dimenticato di andare in bagno o volete una tazza di tè prima di iniziare? Andate ora mentre aspettate questo, perché rimarrà lì a girare per un po'.
 
-Infine qui in basso, abbiamo la finestra del terminale. Stavo guardando i log mentre si costruiva, quindi è quello che sta mostrando la cosa corrente. Posso anche premere questo pulsante più per avviare una nuova sessione di terminale. Questo non è in esecuzione sulla mia macchina. Ricordi, questo è in esecuzione nel cloud, e se faccio tree tre alla profondità di due, vedrà tutti gli stessi file qui, che erano sulla sinistra.
+Velocemente mentre aspettiamo che carichi, andrò anche su github.com/codespaces e mostrerò questa è la pagina panoramica dove potete vedere tutti i diversi Codespaces che avete attualmente in esecuzione.
 
-## Mostrare solo i file "hello-nextflow"
+Potete vedere che ne ho uno qui per nextflow-io/training. Nessuna modifica, perché non ci ho ancora fatto nulla. La quantità di risorse che sta usando, e potete vedere al momento si sta configurando. Posso andare qui, cliccare questo piccolo menu a tendina e cliccare delete. Quindi se accidentalmente configurate più Codespaces e non ne state usando alcuni, potete eliminare quelli vecchi e fare pulizia.
 
-Questo repository GitHub contiene tutti i diversi set di formazione, non solo quello che stiamo facendo. Quindi se vuole, può concentrarsi solo sulla cartella Hello Nextflow. Un modo per pulire un po' questo è andare al menu file e poi aggiungere cartella all'area di lavoro.
+Infine, un altro modo per arrivare qui. Se andiamo al repository GitHub. E questo funziona per qualsiasi repository GitHub. Cliccare code. Avete comandi per clonare il repository localmente. E c'è una scheda chiamata Codespaces. E di nuovo, potete crearne uno nuovo, e potete vedere quelli che sono già in esecuzione.
 
-Facciamo clic su quello, andiamo a training. Hello nextflow, e clicchiamo aggiungi. Aggiornerà il suo schermo. E poi nell'Explorer, ora abbiamo due diverse aree di lavoro, quella che avevamo prima per training e una con solo Hello Nextflow.
+Quindi di nuovo, se dimenticate come avete creato il vostro Codespace, potete sempre tornarci in questo modo.
 
-Se vuole, può fare clic destro su training e fare clic su rimuovi cartella dall'area di lavoro per eliminarla completamente dalla barra laterale.
+## L'interfaccia di VS Code
 
-Ora abbiamo solo i file per questo particolare corso di formazione nella barra laterale. Posso nascondere quell'avviso e ora posso fare la stessa cosa nel terminale qui e fare CD per cambiare directory. Hello, Nextflow. E di nuovo, abbiamo gli stessi file qui, che sono nella barra laterale.
+Okay, i builder hanno finito e ora sta iniziando a caricare GitHub Codespaces. Non ci vuole sempre così tanto, quindi non preoccupatevi. È solo la prima volta che create il Codespace. Se saltate di nuovo in uno che esiste già, è molto più veloce.
 
-## Hello Nextflow: file
+Non siate troppo impazienti se questa è la prima volta, non ha ancora finito, anche se sta iniziando a darci un'interfaccia.
 
-Guardando questi file per il corso Hello Nextflow.
+Ma mentre aspettiamo che le cose finali siano configurate, vi guiderò attraverso l'interfaccia nel caso non abbiate molta familiarità con VS Code.
 
-Abbiamo un gruppo di file .nf, che sono per Nextflow, e c'è uno di questi file per ciascuno dei capitoli del corso di formazione. Lavoreremo su questi file e li modificheremo negli esercizi.
+Innanzitutto, c'è la barra laterale della chat per le cose AI, che non ci serve. Quindi la chiuderò, me ne libererò e libererò un po' di spazio.
 
-Abbiamo anche un file nextflow.config, che ha solo impostazioni di configurazione di base per eseguire Nextflow in questo ambiente, di cui non deve davvero preoccuparsi a questo punto. Un file greetings.csv, che useremo per elaborare i dati, che verrà introdotto nella prossima parte di questo corso, e un file test-params.json, che verrà utilizzato nella parte sei e che può ignorare per ora.
+Sulla sinistra, abbiamo l'esploratore file che ci mostra tutti i file nel repository Git, che è il workspace che abbiamo creato. Notate, questi non sono file locale. Questo è tutto sul server remoto dove stiamo lavorando. Potete trascinare e rilasciare file locale e cose del genere, ma per la maggior parte, non ci penseremo oggi. Stiamo solo lavorando puramente in remoto.
 
-Questi file Nextflow sono solo l'inizio di ogni esercizio. Se vuole vedere come dovrebbero apparire quando sono finiti, può andare in una directory solutions e ci sono le risposte per ogni parte del corso di formazione, quindi può vedere una versione funzionante di ciò che sta cercando di raggiungere.
+Ci sono altri strumenti in questa barra laterale, per esempio, ricerca. Quindi potete cercare tutti i file in un repository in una volta. E se stessimo facendo lavoro di sviluppo sul repo di formazione, potremmo fare integrazione con il controllo sorgente con Git e debugging e altre cose.
 
-## Apertura di un terminale
+Altre cose sono, c'è una finestra principale di editing del codice qui in alto, che ha appena caricato un'anteprima del readme, che è per il materiale di formazione. Quindi in questo caso sta visualizzando markdown, ma normalmente questo sarà un editor di codice.
 
-Se in qualsiasi momento chiude il terminale e non riesce a ricordare come tornare indietro, non si preoccupi. Questi pulsanti in alto a destra aprono e chiudono diversi pannelli nell'area di lavoro. Quindi clicchi questo per il pannello inferiore e riapparirà. E si assicuri solo di aver selezionato terminal qui. Può anche cliccare questo pulsante qui, la freccia sul lato destro del terminale per renderlo a schermo intero.
+E poi sotto quello abbiamo il terminale, che è dove eseguiremo tutti i nostri comandi e interagiremo direttamente con Nextflow.
 
-Mi vedrà farlo molto spesso perché ho VS Code ingrandito in modo che possa leggere il testo. A seconda delle dimensioni del suo schermo, potrebbe o meno aver bisogno di farlo. Lo stesso vale per ridurre al minimo il pannello laterale.
+Tutto nel Codespace è pre-installato, quindi il comando Nextflow è già lì e così via.
 
-Bene. Questo è abbastanza per l'ambiente. Penso che siamo pronti per iniziare. Mi raggiunga nel prossimo video per il capitolo uno.
+Okay. Quando arrivate fin qui, dovrebbe essere quasi finito. Potete vedere ora ha scaricato il Nextflow language server e ha configurato alcune estensioni per noi in VS code, inclusa l'estensione Nextflow, che sarà utile. Quindi posso chiudere quello e posso chiudere il README.md.
 
-[Prossima trascrizione video :octicons-arrow-right-24:](01_hello_world.md)
+E ora potete vedere che ho di più sulla sinistra. Sono un po' ingrandito qui, ma se riduco lo zoom potete vedere che uno dei pulsanti dice Nextflow con l'icona Nextflow. E ha alcune cose interessanti qui dentro per esplorare il progetto e cose del genere, a cui torneremo più tardi.
+
+Okay. nel caso perdiate mai uno di questi pannelli, questi pulsanti in alto a destra sono davvero utili e questi semplicemente mostrano e nascondono le cose. Quindi quello mostra e nasconde l'Explorer mostra e nasconde il terminale in basso. E così via.
+
+Userò questi abbastanza spesso perché sono molto ingrandito, quindi cercherò di aiutarvi a vedere tutto il testo sul mio schermo, ed è utile poter andare a schermo intero con il terminale e poi nasconderlo quando stiamo guardando il codice. Ma la maggior parte del tempo potete semplicemente avere tutte queste cose aperte allo stesso tempo.
+
+Okay, cos'altro guardare? Non troppo altro. Notate che Nextflow, come dico, è installato. Quindi posso digitare "nextflow -version" e dovrebbe venire su dicendo quale versione abbiamo installato.
+
+C'è anche altro software installato qui. Alla fine di ogni capitolo, abbiamo un set di domande quiz, per esempio, sul sito web. E potete anche farle nel terminale se volete digitando quiz.
+
+Ci sono altre scorciatoie da tastiera che userò, giusto nel caso siate curiosi. Per esempio, proprio allora ho premuto cmd+K sul mio Mac e quello ha pulito il terminale, per sbarazzarsi di tutto l'output precedente. Quindi è bello per mantenere le cose pulite. Se mi vedete farlo è così che lo faccio.
+
+E anche se siete nuovi al terminale, ricordate che potete usare tab per completare automaticamente, che userò molto per completare automaticamente i percorsi.
+
+Quindi posso vedere sulla sinistra qui c'è una cartella chiamata Hello Nextflow, che è quella su cui lavoreremo. Se faccio "ls" per elencare i file, posso fare "hel", premere tab, completa automaticamente. E quindi questo è un modo molto veloce per completare i percorsi.
+
+## Aprire solo la cartella Hello Nextflow
+
+Okay. Questo è fantastico. C'è molta roba in questo repository però.
+
+Ci sono tutti i file per generare il sito web, e ci sono più corsi diversi qui dentro, e potete farlo da questa route e semplicemente cliccare nella cartella "Hello Nextflow". Ma è bello effettivamente concentrarsi puramente su questo.
+
+Potete impostare questo come il vostro workspace con un po' di clic qui intorno e impostare una directory di progetto e roba del genere. Ma il modo più semplice è digitare code, che è il comando CLI per lanciare VS Code, e poi "hello-nextflow".
+
+Questo aprirà una nuova scheda del browser e potete chiudere quella vecchia. E sembra esattamente lo stesso. Ma ora potete vedere che siamo in questa subdirectory e tutti gli altri file sono invisibili, e abbiamo una configurazione più pulita.
+
+Potete vedere qui che anche la directory di lavoro corrente è ora all'interno della cartella Hello Nextflow. Quindi bello e pulito. Non dobbiamo preoccuparci di essere nel posto sbagliato. Okay.
+
+## Nuova Sintassi Nextflow per il 2026
+
+C'è una cosa speciale che devo menzionare a questo punto. In questo momento, all'inizio del 2026, stiamo iniziando a introdurre diverse funzionalità in Nextflow, e una delle grandi novità è un nuovo parser di sintassi del linguaggio all'interno di Nextflow.
+
+Fondamentalmente il motore che legge i vostri file Nextflow e li comprende, per il runtime. Ci sono alcune modifiche alla sintassi, ed è davvero importante che usiate Nextflow con il parser di sintassi corretto abilitato.
+
+Due cose vi servono per questo. Avete bisogno di una versione aggiornata di Nextflow e dovete assicurarvi che sia abilitata.
+
+Se faccio di nuovo "nextflow -version", vedrete che il Codespace sta eseguendo con 25.10.2 e 25.10 è la versione minima per poter usare questa roba.
+
+Se state usando 26.04, che per me non è ancora uscita, ma uscirà presto. Allora questa eseguirà il nuovo parser di sintassi per impostazione predefinita, e non dovete fare nient'altro.
+
+Ma se state eseguendo 25.10, dovete abilitare il parser di sintassi strict, come viene chiamato, o parser di sintassi v2.
+
+Questo viene fatto con una variabile d'ambiente. È già impostata nel Codespaces, quindi non dovete fare nulla. Ma se state eseguendo localmente, dovete impostare questo, e posso verificare questo facendo "echo $NXF_SYNTAX_PARSER", e dovrebbe essere impostato su v2.
+
+Quindi se state eseguendo localmente, fate semplicemente "export NXF_SYNTAX_PARSER=v2". Semplice così. Ma ricordatevi di farlo. Perché altrimenti vedrete alcune strane discrepanze ed errori mentre procediamo.
+
+Se avete qualsiasi dubbio su questa roba intorno alla versione Nextflow e al parser di sintassi, innanzitutto, ricordate, non dovete preoccuparvi se siete in Codespaces. Tutto dovrebbe essere configurato correttamente. Ma in secondo luogo, se andate sul materiale di formazione Nextflow, se scendete giù, parlate dei requisiti di versione, c'è un link qui che vi porta alla pagina di aiuto sulle versioni di esplorazione, e questo tipo di passa attraverso tutto in dettaglio.
+
+Vale la pena leggere questo se avete un momento. Perché aiuta a chiarire quali sono alcuni dei diversi termini, che potreste sentire quando iniziate a usare Nextflow. Cose come DSL1, DSL2, parser di sintassi uno, parser di sintassi due, e così via. Quindi vale la pena dare un'occhiata a quello e che ripete un po' di quello che ho appena detto.
+
+È anche davvero utile se avete precedentemente scritto codice Nextflow e state tornando per un ripasso. Vi dice alcune delle cose che cambiano e vi collega alle parti della documentazione Nextflow, che vi dice come aggiornare il vostro codice Nextflow.
+
+## File del corso
+
+Okay. Ultima cosa per familiarizzare è solo vedere i file, che sono in questa directory. Potete guardare nella barra laterale o spesso nel materiale di formazione, usiamo il comando tree, -L, che è il numero di livelli in cui guardare. Diremo due, e se faccio questo a schermo intero, vedrete questo sostanzialmente rispecchia esattamente ciò che vediamo sulla barra laterale lì, ma esclude i file nascosti, che iniziano con un punto.
+
+Quindi i file \*.nf, sta per Nextflow. Quindi questi sono i file script Nextflow, e c'è un file starter qui per ciascuno dei diversi capitoli del materiale di formazione, che apriremo ed esploreremo e poi modificheremo.
+
+Modificheremo questi file mentre procediamo, e quindi entro la fine di ogni capitolo, i file dovrebbero apparire praticamente uguali all'inizio del capitolo per quello successivo. Ma vi diamo questi diversi file così potete sempre ricominciare da capo e non preoccuparvi troppo di rovinare la sintassi.
+
+Se dovete confrontare con qualcosa che dovrebbe funzionare definitivamente. Potete controllare nella cartella solutions, e questo è come uno stato finale per ciascuno dei capitoli, così potete confrontare ciò che avete scritto con ciò che c'è lì.
+
+C'è una directory data. Questa ha solo un file greetings.csv, che useremo come dati di input di esempio in parte del corso, e cose come un file di config e alcuni parametri, che descriveremo più avanti nel corso.
+
+## Conclusione
+
+Okay, quindi ora si spera che tutto stia funzionando. Il vostro schermo sembra uguale al mio e capite come accedere a tutto e cosa sono tutti i diversi file.
+
+Se scorrete verso il basso fino alla fine della pagina su getting started, una piccola casella di controllo dovreste dire che capisco cosa sto facendo. Il mio ambiente è attivo e funzionante e siete impostati, state lavorando nella directory impostata correttamente sulla cartella "Hello Nextflow".
+
+Se avete spuntato tutti quelli e sembrano verdi. Possiamo continuare al prossimo video e al prossimo capitolo, che è parte uno. Hello World. Ci vediamo tra un momento.

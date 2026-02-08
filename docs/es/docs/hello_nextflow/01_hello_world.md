@@ -1,18 +1,14 @@
 # Parte 1: Hello World
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2hHI-9vms?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Vea [la lista de reproducción completa](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) en el canal de YouTube de Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Vea [la lista de reproducción completa](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) en el canal de YouTube de Nextflow.
 
 :green_book: La transcripción del video está disponible [aquí](./transcripts/01_hello_world.md).
 ///
--->
 
 En esta primera parte del curso de capacitación Hello Nextflow, nos introducimos al tema con un ejemplo muy básico de Hello World independiente del dominio, que iremos construyendo progresivamente para demostrar el uso de la lógica y componentes fundamentales de Nextflow.
 
@@ -119,7 +115,7 @@ Encontrará el script `hello-world.nf` en su directorio actual, que debería ser
     workflow {
 
         main:
-        // emitir un saludo
+        // emit a greeting
         sayHello()
     }
     ```
@@ -187,7 +183,7 @@ Aquí tenemos un **workflow** que consiste en un bloque `main:` (que dice 'este 
 workflow {
 
     main:
-    // emitir un saludo
+    // emit a greeting
     sayHello()
 }
 ```
@@ -413,7 +409,7 @@ En el archivo de script del workflow `hello-world.nf`, agregue las siguientes l�
     workflow {
 
         main:
-        // emitir un saludo
+        // emit a greeting
         sayHello()
 
         publish:
@@ -427,7 +423,7 @@ En el archivo de script del workflow `hello-world.nf`, agregue las siguientes l�
     workflow {
 
         main:
-        // emitir un saludo
+        // emit a greeting
         sayHello()
     }
     ```
@@ -446,7 +442,7 @@ En el archivo de script del workflow `hello-world.nf`, agregue las siguientes l�
     workflow {
 
         main:
-        // emitir un saludo
+        // emit a greeting
         sayHello()
 
         publish:
@@ -466,7 +462,7 @@ En el archivo de script del workflow `hello-world.nf`, agregue las siguientes l�
     workflow {
 
         main:
-        // emitir un saludo
+        // emit a greeting
         sayHello()
 
         publish:
@@ -602,8 +598,8 @@ Ve que el resultado de la ejecución anterior todavía está ahí.
 </figure>
 
 Puede usar tantos niveles de anidamiento como desee.
-También es posible usar el nombre del proceso u otras variables para nombrar los directorios usados para organizar los resultados, y es posible cambiar el nombre predeterminado del directorio de salida de nivel superior (que es controlado por la variable especial `outputDir`).
-Cubriremos estas opciones en capacitaciones posteriores.
+También es posible usar el nombre del proceso u otras variables para nombrar los directorios usados para organizar los resultados, y es posible cambiar el nombre predeterminado del directorio de salida de nivel superior (que es controlado por el flag CLI `-o` o la variable de configuración `outputDir`).
+Cubriremos estas opciones más adelante en la capacitación.
 
 ### 2.3. Establecer el modo de publicación a copia
 
@@ -813,14 +809,14 @@ En el bloque del workflow, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emitir un saludo
+    // emit a greeting
     sayHello(params.input)
     ```
 
 === "Antes"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emitir un saludo
+    // emit a greeting
     sayHello()
     ```
 
@@ -968,7 +964,7 @@ Sabe cómo usar una entrada variable simple proporcionada en tiempo de ejecució
 
 ### ¿Qué sigue?
 
-Aprenda a gestionar ejecuciones de manera más conveniente.
+Aprenda a gestionar ejecuciones del workflow de manera más conveniente.
 
 ---
 
@@ -1071,7 +1067,7 @@ Afortunadamente Nextflow incluye un útil subcomando `clean` que puede eliminar 
 
 #### 4.3.1. Determinar criterios de eliminación
 
-Hay múltiples [opciones](https://nextflow.io/docs/latest/reference/cli.html#clean) para determinar qué eliminar.
+Hay múltiples [opciones](https://www.nextflow.io/docs/latest/reference/cli.html#clean) para determinar qué eliminar.
 
 Aquí le mostramos un ejemplo que elimina todos los subdirectorios de ejecuciones antes de una ejecución dada, especificada usando su nombre de ejecución.
 
@@ -1145,7 +1141,7 @@ Cuando esté listo, continúe a [**Parte 2: Hello Channels**](./02_hello_channel
 - [ ] Bloques de entrada, salida y script
 - [ ] Solo un bloque de script
 
-Más información: [1.1.1. La definición de process](#111-la-definicion-de-process)
+Más información: [1.1.1. La definición de process](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1155,7 +1151,7 @@ Más información: [1.1.1. La definición de process](#111-la-definicion-de-proc
 - [x] Declarar las salidas esperadas del proceso
 - [ ] Definir variables de entorno
 
-Más información: [1.1.1. La definición de process](#111-la-definicion-de-process)
+Más información: [1.1.1. La definición de process](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1186,7 +1182,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Más información: [1.2.2. Encontrar la salida y los logs en el directorio `work`](#122-encontrar-la-salida-y-los-logs-en-el-directorio-work)
+Más información: [1.2.2. Encontrar la salida y los logs en el directorio `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1196,7 +1192,7 @@ Más información: [1.2.2. Encontrar la salida y los logs en el directorio `work
 - [x] Omite procesos que ya se completaron exitosamente
 - [ ] Crea una copia de seguridad del workflow
 
-Más información: [4.1. Volver a iniciar un workflow con `-resume`](#41-volver-a-iniciar-un-workflow-con--resume)
+Más información: [4.1. Volver a iniciar un workflow con `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1206,7 +1202,7 @@ Más información: [4.1. Volver a iniciar un workflow con `-resume`](#41-volver-
 - [ ] Mover archivos al directorio de salida
 - [ ] Comprimir archivos en el directorio de salida
 
-Más información: [2.3. Establecer el modo de publicación a copia](#23-establecer-el-modo-de-publicacion-a-copia)
+Más información: [2.3. Establecer el modo de publicación a copia](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1216,7 +1212,7 @@ Más información: [2.3. Establecer el modo de publicación a copia](#23-estable
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Más información: [3.2. Configurar un parámetro de línea de comandos para capturar la entrada del usuario](#32-configurar-un-parametro-de-linea-de-comandos-para-capturar-la-entrada-del-usuario)
+Más información: [3.2. Configurar un parámetro de línea de comandos para capturar la entrada del usuario](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

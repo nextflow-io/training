@@ -1,9 +1,9 @@
-# Parte 5: Hola Contenedores - Transcripción
+# Parte 5: Hello Containers - Transcripción del video
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/5PyOWjKnNmg?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Notas importantes"
@@ -12,182 +12,208 @@
 
     Los números de sección mostrados en la transcripción se proporcionan únicamente con fines indicativos y pueden no incluir todos los números de sección en los materiales.
 
-## Bienvenida
+## Bienvenida y antecedentes
 
-Hola, bienvenido a la Parte Cinco del curso de entrenamiento Hello Nextflow.
+Hola, y bienvenidos de nuevo a Hello Nextflow. Esta es la parte cinco llamada Hello Containers. Y en esta parte del curso, vamos a hablar todo sobre cómo encapsular los requisitos de software para un pipeline de manera que las personas que ejecuten el pipeline no tengan que pensar en instalar el software.
 
-Este capítulo se llama Hola Contenedores. Vamos a hablar sobre cómo Nextflow se integra con herramientas como Docker y Singularity para usar contenedores de software para proporcionar software a los usuarios de su pipeline.
+Si has estado trabajando en bioinformática tanto tiempo como yo, quizás recuerdes lo que a menudo llamo los viejos malos tiempos, donde cuando querías ejecutar el pipeline de otra persona o replicar su trabajo, pasabas horas o días tratando de instalar todas las diferentes herramientas de software que usaron, en las mismas versiones, tratando de compilarlas en tu máquina, y era una pesadilla. Era realmente difícil.
 
-Esto significa que cuando las personas ejecutan su pipeline, no tienen que ir e instalar todas las diferentes herramientas ellos mismos. Nextflow lo hará por ellos.
+Si estabas ejecutando en un HPC, quizás usaste módulos de entorno donde los administradores de sistemas trataban de instalar software para ti, lo cual estaba bien, pero todavía era imperfecto.
 
-Los contenedores son una tecnología extremadamente poderosa y crucial en reproducibilidad y facilidad de uso. Vamos a comenzar haciendo una breve introducción a los contenedores mismos, ejecutando algunos comandos de docker manualmente, y luego tomaremos esos mismos contenedores y los pondremos en nuestro pipeline de Nextflow.
+Pero ahora tenemos mejores formas de hacer esto. Nextflow tiene soporte integrado para diferentes tecnologías de contenedores de software. Docker es la más común. Esa es la que vamos a usar hoy. Funciona bien en Codespaces. Funciona bien en tu computadora local y funciona bien en la nube.
 
-Muy bien. Empecemos.
+Pero también Singularity o Apptainer, que son muy comunes en sistemas HPC y efectivamente funcionan exactamente de la misma manera. O Poman, Shifter, hay un montón de otros que son todos muy similares.
 
-Entonces, como antes, comencemos cargando el material de entrenamiento. Vaya a training.nextflow.io. Hello Nextflow, Capítulo Cinco, Hola Contenedores.
+El único extra, que es algo similar pero no exactamente, que Nextflow soporta es Conda. Y Nextflow puede gestionar entornos Conda para ti por proceso, lo cual es mucho mejor que hacer tus propios entornos Conda. Y nuevamente, puede enviarse con un pipeline.
 
-Voy a entrar en mi entorno de Codespaces y a la izquierda aquí vemos hello containers punto nf.
+Vamos a comenzar este capítulo hablando un poco sobre las tecnologías de contenedores y Docker y cómo funcionan. Y vamos a hacer la primera mitad solo manualmente en Docker para que entiendas qué está pasando bajo el capó y cómo funciona esto. Porque eso es realmente importante para entender qué está haciendo Nextflow y cómo entender qué está haciendo tu workflow cuando se está ejecutando.
 
-Como antes, este es el mismo script con el que terminamos el capítulo cuatro anterior, así que debería verse familiar.
+Así que. Saltemos a nuestros Codespaces. Ahora he limpiado todo de nuevo, pero si saltamos a Hello Containers, deberías ver que todos nuestros scripts y todo están ahí igual que al final del capítulo de módulos. Así que tenemos nuestros diferentes módulos aquí, que creé en el directorio de módulos.
 
-Tenemos nuestros parámetros de línea de comandos para especificar el archivo de entrada y el nombre del lote. Estamos incluyendo nuestros tres módulos, y tenemos nuestro workflow donde ejecutamos los tres procesos.
+Todavía están ahí. Necesitan estar ahí para que pueda ejecutarse. y el workflow y la salida son todos iguales excepto que hemos cambiado la ruta de publicación de salida a Hello Containers, para que tus archivos terminen en ese directorio.
 
-## 0. Calentamiento: Ejecute hello-containers.nf
+Podemos ejecutar esto ahora para verificar que funciona si quieres, o podemos continuar con la terminal.
 
-Siéntase libre de ejecutar este workflow nuevamente y verificar que está produciendo las salidas que espera. Por ahora, en realidad voy a cerrarlo y sumergirme en la terminal.
+## 1. Usar un contenedor 'manualmente'
 
-## 1. Use un contenedor 'manualmente'
+Vamos a usar Docker para gestionar nuestros contenedores, y puedo verificar que está instalado en mi Codespaces haciendo "docker -v", lo cual me muestra la versión que está instalada y todo, y que está funcionando correctamente.
 
-Para comenzar este capítulo, vamos a hacer un poco de recapitulación sobre la tecnología de contenedores. Si está muy acostumbrado a docker o singularity u otras tecnologías de contenedores, entonces trate esto como un repaso, o siéntase libre de omitirlo completamente.
+Ahora los contenedores y Docker tienen dos conceptos que son realmente importantes. Uno se llama imagen, y uno se llama contenedor. La imagen es la instantánea, si quieres, de todo el sistema de archivos que estarás usando, y el contenedor es el entorno en ejecución. Así que creas un contenedor usando una imagen.
 
-Nextflow soporta muchos tipos diferentes de tecnologías de contenedores. Eso incluye Docker, Singularity, Podman, Shifter, Charliecloud, y más.
+Una vez que estás en ese contenedor, típicamente funciona como un sistema operativo completo. Está aislado del mundo exterior. Está separado de todo lo demás, y eso es algo bueno. Así es como obtenemos tan buena reproducibilidad con Nextflow.
 
-En este entrenamiento, vamos a enfocarnos en Docker. Ese viene preinstalado en los code spaces y es una de las tecnologías de contenedores más populares, especialmente si está desarrollando en su propia computadora o en su propia laptop.
+Porque para tareas ejecutadas dentro de un contenedor, no están contaminadas por ningún archivo de configuración en tu sistema local. Ninguna otra influencia externa, se ejecutan en su propia pequeña caja de arena. Los archivos se producen entonces de una manera muy, muy reproducible porque estás usando las mismas bibliotecas subyacentes, todas las mismas dependencias, exactamente el mismo software para cada persona ejecutando en cada entorno de computación diferente. Lo cual francamente creo que es fantástico y asombroso que funcione. E incluso, incluso hasta el día de hoy todavía me sorprende que esto sea posible.
 
-Si está trabajando en un entorno académico en un HPC compartido, puede que encuentre que Singularity está disponible y no Docker. Está bien. Todos los conceptos son exactamente los mismos. Algunos de los comandos manuales son diferentes, pero si entiende Docker, también entenderá singularity.
+## 1.1. Descargar la imagen del contenedor
 
-De hecho, Singularity también está instalado en el entorno de Code Spaces. Entonces si gusta, puede intentar hacer las mismas tareas usando Singularity en lugar de Docker.
+Así que vamos a probar usando algunas imágenes Docker y Docker, cuando lo ejecutas en tu sistema, tiene un registro docker en tu computadora, o en este caso, en el codespace, que lleva un registro de todas las diferentes imágenes que han sido descargadas y usadas en el pasado, y las diferentes capas de las cuales están construidas.
 
-Bien, entonces ¿qué es la tecnología de contenedores? La idea detrás de Docker es que puede obtener una imagen de una fuente remota. Descargarla a su máquina local y luego crear un contenedor basado en esa imagen.
+Podemos ver qué imágenes tenemos localmente con Docker haciendo "docker image ls". Y en este caso puedes ver que hay un montón de imágenes Docker aquí, que todas tienen que ver con configurar este Codespaces. Todas tienen que ver con contenedores de desarrollo y cosas así. Así que no necesitas preocuparte mucho por ellas, pero a medida que agreguemos más imágenes y las descarguemos, a medida que avanza este curso, puedes verificar esa lista y verás que el registro local está llevando un registro de todas estas cosas que hemos descargado.
 
-Este contenedor en ejecución es un poco como una máquina virtual ejecutándose en su computadora. Está aislado de su entorno, y viene preempaquetado con un sistema operativo y un conjunto de software disponible.
+Pero vamos a agarrar una nueva haciendo "docker pull". Y eso le dice a Docker que busque una nueva imagen desde la web.
 
-## 1.1. Descargue la imagen del contenedor
+Luego ponemos el URI para ese contenedor. Ahora esto podría ser una imagen docker que has construido localmente y luego enviado a internet. podría ser una imagen que otra persona ha hecho. Hay muchas, muchas, muchas formas diferentes de hacer imágenes Docker, pero posiblemente una de las formas más simples es externalizar eso, y hacer que alguien más lo haga por ti.
 
-La sintaxis que necesitamos para obtener una imagen preexistente es "docker pull". Entonces voy a escribir eso en mi terminal, pero ahora necesitamos una imagen con la cual jugar.
+Y lo que vamos a usar en este, tutorial es un servicio de Seqera llamado Seqera Containers.
 
-Puede construir imágenes usted mismo. Puede encontrarlas en registros públicos como Docker Hub o quay.io. Pero una forma realmente buena de obtener imágenes rápidamente es usando Seqera Containers.
+Ahora, Seqera Containers es totalmente gratis, y usa una pieza de software de código abierto que desarrollamos llamado Wave, que fue construido para gestionar contenedores de manera complementaria a Nextflow. Y maneja muchos de los casos de uso comunes con los que nos encontramos lidiando con Nextflow.
 
-Este es un servicio comunitario gratuito que hemos construido en 2024, que puede usar sin inicio de sesión ni nada.
+Es muy común que el software que necesitamos esté empaquetado en Conda, en canales Bioconda, o conda-forge o canales más específicos de dominio. Y Wave y Seqera Containers es realmente bueno construyendo imágenes a partir de eso.
 
-Si va a seqera.io/containers o hace clic en containers en la parte superior aquí, se le presenta una interfaz de búsqueda y puede escribir el nombre de cualquier herramienta disponible en Conda o en el Python package Index.
+Así que puedo ir a esta interfaz web y vamos a jugar con el paquete llamado "cowpy". Así que escribo el nombre del paquete que quiero. Busca, lo ha encontrado en el índice de paquetes Python, así que puedo usar eso. O si espero un poco más, está buscando bioconda y conda-forge. Y puedes ver, puedo especificar cualquier canal conda aquí. Así que si quieres encontrar un canal Nvidia o cualquier otra cosa, eso también debería funcionar.
 
-Por defecto, busca en los canales de Bioconda y Conda Forge, pero puede prefijar cualquier canal de Conda. Estoy aquí si lo desea.
+Y luego puedo especificar si quiero que construya una imagen docker para mí o una imagen singularity y también qué arquitectura de CPU quiero usar. Así que amd64 o arm64.
 
-Por diversión, usemos cowpy. Voy a escribir cowpy. Me da resultados de Python Package Index y Conda Forge. Voy a hacer clic en eso para agregarlo a mi contenedor. Podría agregar múltiples paquetes aquí si quisiera. Selecciono Docker, selecciono linux/amd64, y hago clic en Get Container.
+Y una vez que los resultados de bioconda están listados, ahora puedo ver todas las diferentes versiones que están disponibles también. Voy a agregar eso. Y ahora podría seguir buscando y obtener más paquetes de Conda si quiero y componer este contenedor como quiera, pero solo quiero ese. Así que voy a hacer clic en Get Container.
 
-Esto construye la imagen para mí bajo demanda si no ha sido creada ya, y me da una URL que puedo copiar.
+Ahora, alguien más ya ha solicitado el mismo contenedor antes y se devuelve desde un registro, así que lo obtenemos inmediatamente. Pero si nadie más hubiera pedido este paquete de software o esta combinación de paquetes de software, Wave y Seqera Containers lo construiría sobre la marcha para nosotros.
 
-Si está interesado, puede hacer clic en view Build Details, y eso lo lleva a una página que muestra el archivo de entorno conda que fue usado y el registro completo de construcción para la construcción, junto con los resultados del escaneo de seguridad.
+Podemos copiar esta URL y también podemos ver los detalles de construcción. Y esto nos muestra qué hizo el servicio en el backend. Creó un archivo de entorno conda. Un archivo docker, y luego esto es, ejecutando el proceso de construcción docker. También ejecutó un escaneo, un escaneo de seguridad, así que puedes ver cualquier CVE. Y te dice cuándo se creó esto.
 
-Si regreso a mis code spaces, ahora puedo pegar este nombre de contenedor y presionar enter.
+Wave y Seqera Containers pueden hacer mucho más que esto, pero este es un caso de uso simple, que es el más común. Y debería decir que estas imágenes se alojan durante al menos cinco años. Así que puedes construir estas URLs en tus pipelines y saber que no van a desaparecer pronto.
 
-Docker ahora descarga todas las diferentes capas dentro de esta imagen de contenedor, y ahora nos dice que esta imagen está disponible para usar.
+Así que tengo mi URL para mi imagen docker para cowpy.
 
-## Descargando una imagen de Singularity
+Ahora puedo hacer "docker pull" de esa URL, y buscará todas las diferentes capas y descargará esta imagen para que esté disponible localmente para mí.
 
-Si está usando singularity, el proceso es básicamente el mismo. Seleccionamos nuestros paquetes de imagen, seleccionamos cowpy. Ahora elegimos Singularity en lugar de Docker y hacemos clic en Get Container. Eso nos da una URL de imagen usando oras://. O si prefiere, puede usar https:// marcando esa casilla. Copie esa URL. Ahora vaya a Code Spaces. En realidad tenemos Apptainer instalado en este espacio, que es lo mismo que Singularity, pero están aliados entre sí. Entonces voy a hacer apptainer pull y luego voy a llamarlo cowpy sif, pero puede llamarlo como quiera. Pegue la URL. Y eso va a descargar esa imagen para mí.
+## 1.2. Usar el contenedor para ejecutar cowpy como un comando único
 
-Podría hacer ls -lh y ver cowpy.sif
+Bien, ahora intentemos realmente usarlo. Así que ahora voy a usar un comando "docker run" en lugar de "docker pull", y voy a usar la bandera "--rm", que solo le dice a Docker que apague este contenedor una vez que haya terminado de hacer lo que le he pedido. Y luego pongo el identificador del contenedor, que es solo un URI.
 
-Singularity es diferente a Docker, en que singularity almacena todas las imágenes en archivos planos, mientras que Docker tiene un registro donde mantiene todas las capas por separado en su máquina host, y tiene un demonio ejecutándose para hacer seguimiento de todo eso.
+Y luego al final, especifico el comando que quiero que Docker ejecute dentro del contenedor generado desde esta imagen. Solo voy a decir cowpy, que es el nombre de la herramienta que está instalada desde Conda Forge, que está disponible dentro de la imagen.
 
-## 1.2. Use el contenedor para ejecutar cowpy como un comando único
+Voy a presionar enter y ahí lo tienes. Hemos ejecutado cowpy en un sistema. Tenemos una pequeña vaca dándonos algo de información.
 
-Bien, volvamos a Docker. Ahora podemos intentar ejecutar esta imagen que creamos haciendo docker run.
+Ahora nota que cowpy no está instalado en mi sistema local. Así que si lo ejecuto solo sin todas las cosas de Docker, dice, comando no encontrado. Así que esto ha descargado una imagen. Ha creado un contenedor usando Docker, y luego ha ido a ese contenedor y ha ejecutado este comando para nosotros y nos ha devuelto la salida a nuestra terminal. Muy, muy genial.
 
-Voy a hacer dash dash rm, que simplemente hace una ejecución única de la imagen. Y voy a pegar la URL de la imagen. Y luego finalmente, termina esto con un comando que desea ejecutar.
+## 1.3. Usar el contenedor para ejecutar cowpy interactivamente
 
-La imagen que generamos tenía cowpy instalado, así que intentemos cowpy.
+Bien, vamos a ir un paso más allá ahora y ejecutar este contenedor interactivamente y echar un vistazo, para que podamos ver qué está pasando dentro del contenedor.
 
-Ahí está. Ejecutó nuestro comando. No tengo cowpy instalado localmente. Puede ver que si intento ejecutarlo, no existe. Sin embargo, en este comando, lo ejecuté usando Docker y correctamente generó esta salida.
+Así que si vuelvo atrás y tomo mi comando run y voy a deshacerme de cowpy al final ahí, porque realmente no quiero ejecutar cowpy. Quiero ejecutar una terminal Bash.
 
-## 1.3. Use el contenedor para ejecutar cowpy interactivamente
+Y luego voy a volver aquí y voy a hacer "-it", que significa Interactivo y Terminal o TTY, y voy a presionar enter.
 
-Podemos ir más allá de esto si queremos y activar un contenedor interactivamente y mirar alrededor adentro. Nuevamente, hago "docker run dash dash rm". Ahora voy a hacer dash it, que le dice a Docker que queremos una terminal interactiva. Hago la URL de la imagen nuevamente, y esta vez, en lugar de hacer cowpy, voy a hacer bin bash porque el comando que queremos ejecutar es bash.
+Y ahora puedes ver que el prompt, la parte antes de que escriba, ha cambiado. Este era el prompt de Codespaces donde decía el directorio, y ahora dice base y root y tmp. Así que ahora estoy dentro del contenedor, y si hago "ls", verás que los archivos que veo en este directorio son diferentes a los archivos que tengo en mi espacio de trabajo.
 
-Esto nos lleva dentro de este contenedor en ejecución y puede ver que el prompt ha cambiado ahora.
+Y de hecho, no puedo ver ninguno de los archivos de mi espacio de trabajo local de codespaces o mi unidad local dentro del contenedor Docker. El tiempo de ejecución del contenedor docker, está completamente aislado y no puede escribir o leer ningún archivo de un sistema de archivos host externo.
 
-Si hago LS slash puede ver que los directorios aquí son diferentes.
+Sin embargo, puedo ver el software que está instalado dentro del contenedor y ejecutarlo. Así que puedo ejecutar cowpy y podemos ver un poco más sobre cómo usar cowpy. Aquí puedo hacer "cowpy 'Hello World'" y eso le dice, le dice que realmente ponga mi cita dentro de una pequeña burbuja de diálogo. Y también puedes ejecutar diferentes tipos de vacas, así que no tiene que ser una vaca. Puedes hacer un "-c". Y estoy en Suecia, así que voy a elegir un alce. Muy bonito. Le di algunos cuernos.
 
-Si abro una segunda terminal aquí a la derecha, que simplemente está ejecutándose en GitHub Code Spaces y hago LS slash, ve que tenemos directorios como workspaces y temp, mientras que aquí en Docker es diferente.
+Y hay un montón de diferentes que puedes explorar, que puedes ver descritos en los documentos de capacitación.
 
-Entonces este entorno está completamente separado dentro de Docker y aislado de mi entorno host. Eso es algo bueno, porque eso aísla la ejecución de este comando en la imagen de Docker y lo mantiene reproducible entre diferentes personas en diferentes sistemas host.
+## 1.3.4. Montar datos en el contenedor
 
-Si desea usar datos de su sistema host dentro de la imagen de Docker, tiene que montar eso explícitamente en el contenedor.
+Bien. Sería bueno si pudiéramos ejecutar cowpy en los archivos de nuestro sistema de archivos.
 
-Vamos a hacer eso en un segundo.
+Por supuesto, no es muy útil solo tener el contenedor y sin acceso a nada en absoluto. Podría ser seguro y reproducible, pero no es muy útil.
 
-## 1.3.2. Ejecute el(los) comando(s) de la herramienta deseada
+Entonces, ¿cómo hacemos eso? Voy a salir de este contenedor Docker escribiendo exit, y puedes ver que el prompt nos dice que ahora estamos de vuelta en nuestro Codespaces regular de nuevo.
 
-Primero, sin embargo, veamos si podemos ejecutar cowpy. Ahí nuevamente, el comando está disponible ahora directamente en la línea de comandos, y podemos comenzar a hacer cosas más complejas y pasar argumentos. Hello containers y en lugar de la vaca, hagamos el pingüino tux. Veamos qué más tenemos.
+Y voy a ejecutar el mismo comando de nuevo. Pero esta vez voy a agregar algunas banderas adicionales aquí. Y la importante es "-v", que significa montar un volumen, que es básicamente como una parte, parte de un espacio de disco.
 
-Hagamos cheese. Maravilloso. ¿Qué tal Dragon y Cow? Bastante bien.
+El "-v" toma dos partes: hay como una cadena y luego dos puntos y una cadena. Y la primera parte es el sistema de archivos local, que debería montarse en el contenedor. Y luego la segunda parte es dónde eso debería terminar dentro del contenedor.
 
-## 1.3.3. Salga del contenedor
+Ahora solo quiero cargar todo mi sistema de archivos local aquí. Así que "." es el directorio de trabajo actual. Así que solo voy a hacer "." y luego ":", y luego vamos a poner eso en un nuevo directorio dentro del contenedor llamado "my_project". Esto realmente podría llamarse cualquier cosa.
 
-Bien. No puedo hacer mucho más porque no tengo ningún dato en este contenedor. Así que salgamos de esta imagen en ejecución y veamos si podemos montar algunos datos en el contenedor. Puedo hacer eso haciendo control D o escribiendo exit. Bien, ahora estoy de vuelta en mi code space regular de GitHub.
+Y luego voy a ejecutar de nuevo.
 
-## 1.3.4. Monte datos en el contenedor
+En el directorio de trabajo donde me deja, que es /tmp, los archivos no están ahí. Pero si hago "ls my_project", ahí lo tenemos: todos los mismos archivos que teníamos localmente en nuestros Codespaces ahora están disponibles dentro del contenedor en esa ruta.
 
-Para montar algunos datos en el contenedor de Docker, necesito usar dash V. Entonces voy a tomar mi comando docker anterior, ir al inicio hacer dash v. Voy a hacer "." para el directorio de trabajo local actual, y luego dos puntos para decir dónde debería montarse eso en el directorio host y hacer slash data. Entonces eso está montando este directorio particular en el contenedor en slash data.
+Este es acceso de lectura y escritura, así que puedo crear nuevos archivos en este directorio y aparecerán en mi sistema de archivos host. Este directorio particular, entonces se comporta exactamente como si estuviera fuera del contenedor, así que ahora puedo leer y escribir y hacer cosas.
 
-Ahora si hago LS slash podemos ver que tenemos un nuevo directorio llamado data, y si hago LS data, puede ver todos los archivos que tenemos en la barra lateral aquí. Fantástico.
+## 1.3.5. Usar los datos montados
 
-## 1.3.5. Use los datos montados
+Bien, vamos a probar que podemos hacer esto. Hago "cat /my_project/data/greetings.csv". Si recuerdas, el contenido de este archivo se ve así. Ahora puedo canalizar eso a cowpy y la vaca imprimirá las diferentes salidas de ese archivo en su pequeña burbuja de diálogo, lo cual es algo divertido.
 
-Ahora podemos comenzar a usar algunos de los archivos que están en el sistema host dentro de la imagen de Docker. Entonces puedo decir cat data greetings csv. Si recuerda, este es nuestro archivo CSV con nuestros diferentes saludos de antes, y puedo canalizarlo a cowpy. Fantástico. Ahora estamos llegando a algún lado.
+Así que puedes ver, ahora podemos usar el software en el contenedor para interactuar con los archivos en nuestro sistema host.
 
-Bien. Eso es suficiente para ejecutar Docker interactivamente. Esperamos que ahora tenga una idea de aproximadamente qué es Docker y cómo usarlo tanto para ejecutar un comando de manera única, como también para usar una imagen interactivamente. Si está usando singularity. Los comandos son todos muy similares excepto que hace cosas como apptainer exec o apptainer run, o singularity exec o singularity run.
+Bien, salgamos de vuelta y continuaremos con el resto del material de capacitación.
 
-## 2. Use contenedores en Nextflow
+## 2. Usar contenedores en Nextflow
 
-A continuación vamos a volver a nuestro workflow de Nextflow y ver cómo usar esta tecnología dentro del pipeline de Nextflow.
+Así que eso es realmente genial usar contenedores. Espero que tenga sentido. Y puedes ver el valor de estos contenedores y por qué eso es útil para ejecutar software de análisis.
 
-Cerremos la terminal y abramos Hello Containers nuevamente.
+Pero, ¿cómo hacemos todo este mismo proceso dentro de Nextflow? No queremos estar ejecutando montones de comandos Docker nosotros mismos. Queremos simplemente dejar que Nextflow maneje todo eso por nosotros.
 
-## 2.1. Escriba un módulo cowpy
+Así que trabajemos en esto. Vamos a agregar un nuevo proceso a nuestro pipeline, para ejecutar cowpy. Bien, así que creemos un nuevo módulo para nuestro nuevo proceso. Así que vamos a módulos, llamémoslo cowPy.nf, y luego voy a copiar el código del material de capacitación aquí.
 
-Para continuar con nuestro ejemplo de cowpy, creemos un nuevo proceso en nuestro workflow, que use cowpy. Vayamos a modules, creemos un nuevo archivo y llamémoslo cowpy nf. Ahora voy a hacer trampa un poco y copiar el código del material de entrenamiento y presionar guardar. Y echemos un vistazo.
+Pero puedes ver que el proceso es muy simple. Se parece mucho a los que hemos hecho hasta ahora, tenemos un bloque de entrada con un path, que es nuestro archivo de entrada, y también un valor aquí para que esto sea un carácter, así que podríamos usar un alce de nuevo si queremos.
 
-Entonces este es un proceso simple. Esperamos que ahora entienda cómo lucen los bloques de construcción de un proceso. Tenemos nuestro publishDir nuevamente, yendo a results. Tenemos dos entradas, un archivo de entrada y un string llamado character. Tenemos una salida cowpy input file, y tenemos un script que se ve exactamente igual a lo que ejecutamos manualmente dentro de nuestra imagen de docker hace un segundo: cat para imprimir un archivo, canalizándolo a cowpy, diciendo qué tipo de carácter de cowpy queremos usar, y enviando eso al archivo de salida, que pasamos como la salida aquí.
+Y luego una salida, que es un solo archivo aquí, un path y luego un script. Y estamos haciendo lo mismo que hicimos interactivamente dentro del contenedor: estamos haciendo "cat" para leer el archivo de entrada. Estamos canalizando ese contenido a cowpy. Estamos eligiendo un carácter específico basado en esa entrada, estamos escribiendo a un archivo de salida llamado cowpy input file, que luego se hace eco a la salida.
 
-## 2.2. Agregue cowpy al workflow
+Genial. Incluyamos eso. Así que include \{ cowpy \} from "./modules/cowpy.nf", ¿lo llamé cowpy? Sí.
 
-Bien, volvamos a nuestro workflow, importemos este nuevo proceso. Entonces cowpy from modules cowpy nf. Creemos un nuevo parámetro para que podamos especificar qué carácter queríamos. Digamos Turkey por defecto. Y luego llamemos a este nuevo proceso al final del workflow,
+Y luego llamemos a nuestro nuevo proceso aquí abajo en el bloque principal del workflow. Así que ejecutemos cowpy. Y tomaremos nuestro nuevo proceso cowpy y vamos a decir collectGreetings.out.
 
-cowpy. Y usemos la salida aquí de Collect Greetings. Entonces collect greetings out, out file aquí. Y luego necesitamos un segundo argumento, que es el nuevo params que acabamos de hacer. params dot character.
+Y luego si recuerdas, había dos salidas para este módulo. Una llamada outfile y una llamada report. La extensión VS Code está auto-sugiriendo estas para nosotros y queremos el .outfile.
 
-## 2.2.4. Ejecute el workflow para verificar que funciona
+Siempre puedes saltar a este proceso aquí. O pasa el cursor sobre él y debería mostrarte rápidamente cuáles eran las salidas. Y también podemos hacer command clic en él y abrirá el archivo del módulo si quieres ver con más detalle.
 
-Bien, veamos si nuestro nuevo proceso funciona. Nextflow run hello containers. Esto debería ejecutar esos primeros tres procesos y luego intentar ejecutar cowpy al final.
+Así que aquí vamos. Ese es el outfile ahí, y ese es el path. Así que ahora ese será el archivo de entrada para nuestro proceso cowpy. Fantástico.
 
-Tuvimos un error. Lo que está diciendo aquí, cowpy tuvo un error y tuvo un estado de salida 127 y efectivamente, comando sh cowpy comando no encontrado.
+Ahora si recuerdas, un proceso cowpy tiene dos entradas. También teníamos el canal de valor para el carácter. Así que podemos agregar "params.character" aquí. Podría haber codificado esto si hubiera querido, pero hagámoslo una opción CLI para que podamos hacer dash, dash character.
 
-No le dijimos a Nextflow que tenemos una imagen de Docker disponible para cowpy, así que intentó ejecutarlo en nuestro sistema host y no tenemos cowpy instalado en nuestro sistema host, así que desencadenó un error.
+Bien. Ahora necesito definir el parámetro de entrada que acabamos de llamar y darle un valor predeterminado. Así que character, String. Y me gusta el alce, así que voy a establecerlo en moose por defecto.
 
-## 2.3. Use un contenedor para ejecutarlo
+Bien, intentemos ejecutarlo. Así que si hago Nextflow run hello containers, veremos qué pasa.
 
-Entonces lo que necesitamos hacer es que necesitamos decirle a Nextflow que tenemos un contenedor disponible. Vayamos a nuestro proceso cowpy y vamos a agregar una nueva directiva en la parte superior del proceso llamada container.
+Podría haber usado dash resume si tuviera los viejos directorios de trabajo dando vueltas. Y nuevamente, estos primeros procesos habrían sido, almacenados en caché y habría sido un poco más rápido, pero debería ser básicamente lo mismo.
 
-Luego encontramos nuestra imagen, copiamos la URL, y la ponemos en un string.
+Ahora podemos ver de inmediato que ha lanzado un error cuando llegó a nuestro nuevo proceso, nos está diciendo aquí que hubo un error ejecutando el proceso cowpy y salió con un estado de salida 127. Este es el comando que intentó ejecutar. Se ve bien, se ve como esperábamos. Está tomando ese nombre de archivo de salida, que se ve correcto, lo está ejecutando con un carácter moose y tratando de guardarlo.
 
-Esto no es suficiente por sí mismo porque un pipeline de Nextflow puede tener varias formas de especificar software. También podría hacer conda conda-forge cowpy, por ejemplo. Y Nextflow necesita saber cuál de estas tecnologías desea usar.
+Pero puedes ver que el error del comando aquí está diciendo que el comando cowpy no se encontró. Y eso tiene sentido porque en realidad no le hemos dicho a Nextflow que use un contenedor todavía. Solo le hemos dado el comando cowpy. Y como dije antes, cowpy no está instalado en nuestro sistema local. Así que cuando intentó ejecutarlo, falló.
 
-## 2.3.2. Habilite el uso de Docker a través del archivo nextflow.config
+## 2.3.1. Especificar un contenedor para cowpy
 
-Entonces para ejecutar con Docker habilitado, vamos a adelantarnos un poco y usar el archivo Nextflow config, que es algo que vamos a cubrir con más detalle en el próximo capítulo. Puede ver en este directorio que tenemos un archivo llamado Nextflow Config, y aquí ya tiene docker.enabled False.
+Necesitamos decirle a Nextflow que hay un contenedor disponible y que puede usarlo. Entonces, ¿cómo hacemos eso?
 
-Vamos a cambiar eso a True para habilitar Docker, y luego podemos intentar ejecutar el workflow nuevamente.
+Si entramos en nuestro módulo aquí, vamos a agregar una nueva declaración en la parte superior llamada "container". Y luego vamos a establecer eso en una cadena.
 
-## 2.3.3. Ejecute el workflow con Docker habilitado
+Ahora, si recuerdas, allá en Seqera Containers, puedo copiar esa URL y simplemente la coloco entre comillas aquí.
 
-Nextflow run hello containers nf y esta vez cowpy se ejecutó exitosamente. Miremos en Results. cowpy collected test y ahí está nuestro Turkey. Maravilloso.
+Ahora regresa e intenta ejecutarlo de nuevo.
 
-Entonces en segundo plano ahí, Nextflow sabía que tenía un contenedor disponible para ese proceso.
+Déjame ver si funciona esta vez.
 
-Obtuvo la imagen y ejecutó los comandos por nosotros.
+Desafortunadamente, falla exactamente de la misma manera, a pesar de que ahora hemos definido un contenedor para que se ejecute el proceso. Así que para usar nuestra imagen docker, necesitamos decirle a Nextflow que habilite el uso de Docker cuando ejecutemos el workflow.
 
-## 2.3.4. Inspeccione cómo Nextflow lanzó la tarea contenerizada
+Y vamos a hacer eso creando un nuevo archivo de configuración. Así que voy a decir touch nextflow.config.
 
-Si tiene curiosidad, en realidad podemos ver exactamente qué hizo mirando en el directorio de trabajo. Si hago code work, y luego el hash y luego command run, que si recuerda es el archivo real que se ejecuta para esa tarea, podemos entrar y podemos buscar una función llamada NXF launch. Y aquí puede ver el comando docker exacto que Nextflow usó, que se parece mucho a lo que estábamos haciendo manualmente en la terminal antes. Docker run. Vinculando este directorio host en el contenedor, y luego especificando la URL del contenedor.
+Este es un nombre de archivo especial donde si está en el directorio de trabajo mientras lanzo el pipeline, se cargará automáticamente. Así que si voy a este archivo Nextflow dot config, puedes ver que en realidad ya existe, lo cual había olvidado. Y tenemos docker.enabled aquí ya, pero está establecido en false, que es el valor predeterminado.
 
-Entonces no hay magia aquí. Es solo que Nextflow está haciendo automáticamente el trabajo pesado por usted de una manera que significa que puede especificar fácilmente contenedores en su pipeline, que luego están fácilmente disponibles para cualquier otra persona que ejecute su workflow. Y esas personas ya no tienen que pensar en gestionar software para ejecutar su pipeline de análisis.
+Así que si cambio eso a equals True en su lugar, docker.enabled. Y hay documentos de referencia para todos estos ámbitos de configuración en los documentos de Nextflow. Y también puedes ver que cuando paso el cursor con una extensión VS Code, trae los documentos específicos para esto y me dice qué significa y cómo configurarlo.
 
-Muy, muy simple, muy conveniente, y también realmente reproducible. Bueno en general.
+Así que ahora lo hemos establecido en true, y si ejecuto Nextflow de nuevo, Nextflow ahora sabrá buscar esa imagen docker para nosotros si aún no la tenemos localmente, y luego ejecutar ese proceso con ese entorno de contenedor.
 
-Bien, buen trabajo. Ese es el final del Capítulo Cinco. Únase a nosotros en el próximo video para la parte seis, que es la parte final de este entrenamiento Hello Nextflow, donde hablaremos sobre la configuración de Nextflow con más detalle.
+Y así podemos ver que se ha ejecutado exitosamente y tenemos un pequeño tic junto a cowpy. Fantástico. Si subo y miro en el directorio de resultados, el archivo no está ahí todavía. Y eso es porque todavía necesitamos, publicar este archivo de salida igual que todos los demás.
 
-Nos vemos en el próximo video.
+Así que vamos al bloque publish dentro del workflow, digamos mycowpy equals cowpy.out.
 
-[Transcripción del próximo video :octicons-arrow-right-24:](06_hello_config.md)
+Y luego aquí abajo en el bloque output, mycowpy, llaves onduladas path. Ups. Hello containers. Mode, copy.
+
+Si ejecuto de nuevo ahora, debería ejecutarse exactamente de la misma manera. Podría haber usado dash resume y olvido cada vez. Y luego subo y ahora tenemos un nuevo archivo creado llamado cowpy-COLLECTED, y ahí está mi alce diciendo BONJOUR, HELLO, HOLà Fantástico.
+
+Ahora, por supuesto, también podría pasar ahora "--character". ¿Cuáles son las diferentes opciones? ¿Creo que hay un pavo? Así que puedo usar character Turkey. Va a ejecutarse exactamente de la misma manera. Perdí otra oportunidad de usar dash resume, y ahora si cargamos nuestro archivo y ahora tenemos un pavo. Fantástico.
+
+## 2.3.4. Inspeccionar cómo Nextflow lanzó la tarea en contenedor
+
+Bien. Última pequeña cosa. Ejecutemos rápidamente este comando de nuevo, resume esta vez, y echemos un vistazo rápido en el directorio de trabajo para ver qué es lo que Nextflow está haciendo bajo el capó para hacer que todo esto funcione para nosotros.
+
+Esta vez es súper rápido, vamos a ese directorio de trabajo, cd work/. Ahora si recuerdas tenemos un montón de archivos punto aquí y el que nos interesa en este caso es el que dije que casi nunca necesitamos mirar, llamado .command.run.
+
+Si hago code dot command run, lo va a abrir en el editor. Y puedo buscar en este archivo y si me desplazo hacia abajo debería ver Docker run. Y puedes ver que Nextflow está haciendo el comando docker run para nosotros, cuando Docker está habilitado en una configuración. Tiene un montón de diferentes, banderas y cosas aquí, pero puedes ver la bandera "-v" que usamos nosotros mismos cuando estábamos ejecutando. Y puedes ver que está montando el directorio del espacio de trabajo local en el contenedor, para que el contenedor pueda acceder a nuestros archivos de entrada y guardar las salidas. Y luego al final, también está ejecutando .command.sh, que es el script generado, que tiene el comando cowpy dentro.
+
+Y así puedes ver que Nextflow está tomando la lógica del workflow, que es lo que realmente nos importa, que es específica para nuestro análisis, y está haciendo todo lo inteligente detrás de escena para hacer que Docker funcione en nuestro sistema.
+
+Y lo está haciendo de una manera realmente portátil para que un usuario final del pipeline pueda cambiar la tecnología que está usando: Docker, Singularity, Apptainer, Conda. Eso realmente no importa para la lógica del pipeline, pero Nextflow manejará todas las necesidades de infraestructura subyacentes, para que se ejecute en cualquier lugar.
+
+Y ese es realmente el superpoder de Nextflow. Es reproducibilidad y portabilidad. Y con Nextflow puedes realmente compartir tu workflow y otras personas pueden ejecutarlo en sus sistemas y simplemente funcionará.
+
+Esa es una cosa realmente, realmente difícil de hacer, y ahora tú también sabes cómo hacerlo con tus workflows.
+
+Bien, eso es todo para este capítulo. si bajas al final del curso, encontrarás un, un cuestionario de nuevo sobre algunos contenedores. Espero que todo haya tenido sentido. Es una forma realmente genial de trabajar con análisis. Y si eres nuevo en contenedores, espero haberte convencido de que es el camino a seguir, y nunca mirarás atrás.
+
+Pero con eso, toma un pequeño descanso quizás, y te unes a mí en un par de minutos para revisar la parte seis final del Hello Nextflow, que es todo sobre configuración.
+
+Muchas gracias.

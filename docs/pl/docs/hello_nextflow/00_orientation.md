@@ -2,13 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/G3CV-FcV-rc?si=nyLvwhrSB2m1NPc5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=gZxlXgkVxuLEzOsC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Zobacz [całą playlistę](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) na kanale YouTube Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Zobacz [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow.
 
 :green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/00_orientation.md).
 ///
@@ -19,8 +18,6 @@
 
     - :fontawesome-solid-closed-captioning: Wysokiej jakości (ręcznie przygotowane) napisy. Włącz je ikoną :material-subtitles:
     - :material-bookmark: Rozdziały wideo na osi czasu odpowiadające nagłówkom strony.
-
--->
 
 ## Uruchom środowisko szkoleniowe
 
@@ -42,16 +39,16 @@ Jeśli pracujesz z tym kursem samodzielnie, zapoznaj się z [podstawami środowi
 
 ### Wymagania wersji
 
-To szkolenie jest zaprojektowane dla Nextflow 25.10.2 lub nowszego **z WŁĄCZONYM parserem składni v2**.
+To szkolenie jest zaprojektowane dla Nextflow'a 25.10.2 lub nowszego **z WŁĄCZONYM parserem składni v2**.
 Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że używasz prawidłowych ustawień, jak udokumentowano [tutaj](../info/nxf_versions.md).
 
 ## Przygotuj się do pracy
 
-Po uruchomieniu codespace musisz wykonać dwie czynności: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.
+Po uruchomieniu Twojego codespace musisz wykonać dwie czynności zanim zanurzysz się w szkoleniu: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.
 
 ### Ustaw katalog roboczy
 
-Domyślnie codespace otwiera się z główną lokalizacją wszystkich kursów szkoleniowych jako katalogiem roboczym, ale tym razem będziemy pracować w `hello-nextflow/`.
+Domyślnie codespace otwiera się z główną lokalizacją wszystkich kursów szkoleniowych jako katalogiem roboczym, ale tym razem będziemy pracować w katalogu `hello-nextflow/`.
 
 Zmień teraz katalog, uruchamiając to polecenie w terminalu:
 
@@ -125,7 +122,7 @@ Używamy takich rozwijanych sekcji, aby zwięźle włączać oczekiwane wyjście
 - **Pliki `test-params.*`** to pliki konfiguracyjne, których użyjemy w Części 6 (Configuration). Na razie możesz je zignorować.
 
 - **Katalog `solutions`** zawiera ukończone skrypty workflow'ów, które są wynikiem każdego etapu kursu.
-  Służą jako odniesienie do weryfikacji Swojej pracy i rozwiązywania problemów.
+  Służą jako odniesienie do weryfikacji Twojej pracy i rozwiązywania problemów.
 
 ## Lista kontrolna gotowości
 

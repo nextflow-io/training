@@ -229,7 +229,7 @@ Encore une fois, vous n'avez pas besoin de mémoriser la syntaxe du code, mais i
 
 C'est la partie la plus intéressante : comment sommes-nous passés de la prise d'une seule valeur depuis la ligne de commande, à la prise d'un fichier CSV, son analyse et le traitement des salutations individuelles qu'il contient ?
 
-Dans Nextflow, nous faisons cela avec un [**canal**](https://nextflow.io/docs/latest/channel.html) : une construction de file d'attente conçue pour gérer les entrées efficacement et les faire passer d'une étape à l'autre dans les workflows multi-étapes, tout en fournissant un parallélisme intégré et de nombreux autres avantages.
+Dans Nextflow, nous faisons cela avec un **canal** : une construction de file d'attente conçue pour gérer les entrées efficacement et les faire passer d'une étape à l'autre dans les workflows multi-étapes, tout en fournissant un parallélisme intégré et de nombreux autres avantages.
 
 Décomposons cela.
 
@@ -250,12 +250,12 @@ Le résultat est un canal contenant `Hello`, `Bonjour`, et `Holà`.
 
     Voici ce que cette ligne signifie en langage courant :
 
-    - `channel.fromPath` est une **fabrique de canal** qui crée un canal à partir de chemin(s) de fichier
+    - `channel.fromPath` est une fabrique de canal qui crée un canal à partir de chemin(s) de fichier
     - `(params.input)` spécifie que le chemin du fichier est fourni par `--input` sur la ligne de commande
 
     En d'autres termes, cette ligne dit à Nextflow : prends le chemin de fichier donné avec `--input` et prépare-toi à traiter son contenu comme des données d'entrée.
 
-    Ensuite, les deux lignes suivantes appliquent des **opérateurs** qui font l'analyse réelle du fichier et le chargement des données dans la structure de données appropriée :
+    Ensuite, les deux lignes suivantes appliquent des opérateurs qui font l'analyse réelle du fichier et le chargement des données dans la structure de données appropriée :
 
     - `.splitCsv()` dit à Nextflow d'analyser le fichier CSV en un tableau représentant les lignes et les colonnes
     - `.map { line -> line[0] }` dit à Nextflow de prendre uniquement l'élément de la première colonne de chaque ligne
@@ -780,7 +780,7 @@ Cela peut rendre leur développement et leur maintenance plus efficaces et durab
 
 Ici, nous allons démontrer la forme la plus courante de modularité du code dans Nextflow, qui est l'utilisation de **modules**.
 
-Dans Nextflow, un [**module**](https://nextflow.io/docs/latest/module.html) est une définition de process unique qui est encapsulée par elle-même dans un fichier de code autonome.
+Dans Nextflow, un **module** est une définition de process unique qui est encapsulée par elle-même dans un fichier de code autonome.
 Pour utiliser un module dans un workflow, vous ajoutez simplement une instruction d'importation d'une seule ligne à votre fichier de code de workflow ; ensuite vous pouvez intégrer le process dans le workflow de la même manière que vous le feriez normalement.
 Cela permet de réutiliser les définitions de process dans plusieurs workflows sans produire plusieurs copies du code.
 
@@ -925,9 +925,9 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 Vous remarquerez que les exécutions de process ont toutes été mises en cache avec succès, ce qui signifie que Nextflow a reconnu qu'il a déjà fait le travail demandé, même si le code a été divisé et le fichier de workflow principal a été renommé.
@@ -1225,9 +1225,9 @@ Le workflow est très similaire au précédent, plus l'étape supplémentaire po
 
 Vous voyez que ce workflow importe un process `cowpy` depuis un fichier de module, et l'appelle sur la sortie de l'appel `collectGreetings()`, plus un paramètre d'entrée appelé `params.character`.
 
-```groovy title="2d-container.nf" linenums="25"
-// générer de l'art ASCII avec cowpy
-cowpy(collectGreetings.out, params.character)
+```groovy title="2d-container.nf" linenums="31"
+// générer de l'art ASCII des salutations avec cowpy
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 Le process `cowpy`, qui encapsule la commande cowpy pour générer de l'art ASCII, est défini dans le module `cowpy.nf`.
@@ -1373,7 +1373,145 @@ Dans ce répertoire, vous trouverez le fichier `.command.run` qui contient toute
     set -u
     NXF_DEBUG=${NXF_DEBUG:=0}; [[ $NXF_DEBUG > 1 ]] && set -x
     NXF_ENTRY=${1:-nxf_main}
-    ...
+
+
+    nxf_sleep() {
+      sleep $1 2>/dev/null || sleep 1;
+    }
+
+    nxf_date() {
+        local ts=$(date +%s%3N);
+        if [[ ${#ts} == 10 ]]; then echo ${ts}000
+        elif [[ $ts == *%3N ]]; then echo ${ts/\%3N/000}
+        elif [[ $ts == *3N ]]; then echo ${ts/3N/000}
+        elif [[ ${#ts} == 13 ]]; then echo $ts
+        else echo "Unexpected timestamp value: $ts"; exit 1
+        fi
+    }
+
+    nxf_env() {
+        echo '============= task environment ============='
+        env | sort | sed "s/\(.*\)AWS\(.*\)=\(.\{6\}\).*/\1AWS\2=\3xxxxxxxxxxxxx/"
+        echo '============= task output =================='
+    }
+
+    nxf_kill() {
+        declare -a children
+        while read P PP;do
+            children[$PP]+=" $P"
+        done < <(ps -e -o pid= -o ppid=)
+
+        kill_all() {
+            [[ $1 != $$ ]] && kill $1 2>/dev/null || true
+            for i in ${children[$1]:=}; do kill_all $i; done
+        }
+
+        kill_all $1
+    }
+
+    nxf_mktemp() {
+        local base=${1:-/tmp}
+        mkdir -p "$base"
+        if [[ $(uname) = Darwin ]]; then mktemp -d $base/nxf.XXXXXXXXXX
+        else TMPDIR="$base" mktemp -d -t nxf.XXXXXXXXXX
+        fi
+    }
+
+    nxf_fs_copy() {
+      local source=$1
+      local target=$2
+      local basedir=$(dirname $1)
+      mkdir -p $target/$basedir
+      cp -fRL $source $target/$basedir
+    }
+
+    nxf_fs_move() {
+      local source=$1
+      local target=$2
+      local basedir=$(dirname $1)
+      mkdir -p $target/$basedir
+      mv -f $source $target/$basedir
+    }
+
+    nxf_fs_rsync() {
+      rsync -rRl $1 $2
+    }
+
+    nxf_fs_rclone() {
+      rclone copyto $1 $2/$1
+    }
+
+    nxf_fs_fcp() {
+      fcp $1 $2/$1
+    }
+
+    on_exit() {
+        local last_err=$?
+        local exit_status=${nxf_main_ret:=0}
+        [[ ${exit_status} -eq 0 && ${nxf_unstage_ret:=0} -ne 0 ]] && exit_status=${nxf_unstage_ret:=0}
+        [[ ${exit_status} -eq 0 && ${last_err} -ne 0 ]] && exit_status=${last_err}
+        printf -- $exit_status > /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.exitcode
+        set +u
+        docker rm $NXF_BOXID &>/dev/null || true
+        exit $exit_status
+    }
+
+    on_term() {
+        set +e
+        docker stop $NXF_BOXID
+    }
+
+    nxf_launch() {
+        docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nextflow-run/work:/workspaces/training/nextflow-run/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.sh
+    }
+
+    nxf_stage() {
+        true
+        # stage input files
+        rm -f COLLECTED-batch-output.txt
+        ln -s /workspaces/training/nextflow-run/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
+    }
+
+    nxf_unstage_outputs() {
+        true
+    }
+
+    nxf_unstage_controls() {
+        true
+    }
+
+    nxf_unstage() {
+        if [[ ${nxf_main_ret:=0} == 0 ]]; then
+            (set -e -o pipefail; (nxf_unstage_outputs | tee -a .command.out) 3>&1 1>&2 2>&3 | tee -a .command.err)
+            nxf_unstage_ret=$?
+        fi
+        nxf_unstage_controls
+    }
+
+    nxf_main() {
+        trap on_exit EXIT
+        trap on_term TERM INT USR2
+        trap '' USR1
+
+        [[ "${NXF_CHDIR:-}" ]] && cd "$NXF_CHDIR"
+        export NXF_BOXID="nxf-$(dd bs=18 count=1 if=/dev/urandom 2>/dev/null | base64 | tr +/ 0A | tr -d '\r\n')"
+        NXF_SCRATCH=''
+        [[ $NXF_DEBUG > 0 ]] && nxf_env
+        touch /workspaces/training/nextflow-run/work/7f/caf71890cce1667c094d880f4b6dcc/.command.begin
+        set +u
+        set -u
+        [[ $NXF_SCRATCH ]] && cd $NXF_SCRATCH
+        export NXF_TASK_WORKDIR="$PWD"
+        nxf_stage
+
+        set +e
+        (set -o pipefail; (nxf_launch | tee .command.out) 3>&1 1>&2 2>&3 | tee .command.err) &
+        pid=$!
+        wait $pid || nxf_main_ret=$?
+        nxf_unstage
+    }
+
+    $NXF_ENTRY
     ```
 
 Si vous cherchez `nxf_launch` dans ce fichier, vous devriez voir quelque chose comme ceci :

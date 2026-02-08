@@ -2,17 +2,15 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/5PyOWjKnNmg?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube kanalında [tüm oynatma listesini](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) izleyin.
+:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
 
 :green_book: Video transkripti [burada](./transcripts/05_hello_containers.md) mevcuttur.
 ///
--->
 
 Bu eğitim kursunun 1-4. Bölümlerinde, bazı metinleri işleyebilen, birden fazla girdi varsa yürütmeyi paralelleştirebilen ve sonuçları daha fazla işleme için toplayabilen basit bir iş akışı oluşturmak için Nextflow'un temel yapı taşlarını nasıl kullanacağınızı öğrendiniz.
 
@@ -25,7 +23,7 @@ Bunların hepsi çok sıkıcı ve can sıkıcı, bu nedenle size bu sorunu çok 
 Bir **konteyner**, kod, sistem kütüphaneleri ve ayarlar dahil olmak üzere bir uygulamayı çalıştırmak için gereken her şeyi içeren bir konteyner **imajından** oluşturulan hafif, bağımsız, çalıştırılabilir bir yazılım birimidir.
 Tahmin edebileceğiniz gibi, bu pipeline'larınızı daha tekrarlanabilir hale getirmek için çok yardımcı olacak.
 
-Bunu [Docker](https://www.docker.com/get-started/) kullanarak öğreteceğimizi, ancak Nextflow'un [diğer birçok konteyner teknolojisini](https://www.nextflow.io/docs/latest/container.html#) de desteklediğini unutmayın.
+Bunu [Docker](https://www.docker.com/get-started/) kullanarak öğreteceğimizi, ancak Nextflow'un [diğer birçok konteyner teknolojisini](https://www.nextflow.io/docs/latest/container.html) de desteklediğini unutmayın.
 
 ??? info "Bu bölümden nasıl başlanır"
 
@@ -402,7 +400,7 @@ Bir konteyneri nasıl çekip tek seferlik veya etkileşimli olarak çalıştıra
 
 ### Sırada ne var?
 
-Nextflow süreçlerinin yürütülmesi için konteynerleri nasıl kullanacağınızı öğrenin.
+Nextflow'da süreçlerin yürütülmesi için konteynerleri nasıl kullanacağınızı öğrenin.
 
 ---
 
@@ -414,7 +412,7 @@ Bu, süreçlerinizi çalıştırmak için istediğiniz herhangi bir konteyner im
 Bunu göstermek için, geliştirdiğimiz pipeline'a `collectGreetings` adımından sonra bir `cowpy` adımı ekleyeceğiz.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
 ### 2.1. Bir `cowpy` modülü yazın

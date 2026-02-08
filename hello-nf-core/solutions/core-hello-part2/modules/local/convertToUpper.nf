@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 /*
  * Use a text replacement tool to convert the greeting to uppercase
  */

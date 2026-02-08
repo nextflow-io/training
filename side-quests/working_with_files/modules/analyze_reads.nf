@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 process ANALYZE_READS {
     tag { meta.id }
 

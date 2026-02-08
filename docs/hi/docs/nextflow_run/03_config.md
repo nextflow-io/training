@@ -4,7 +4,7 @@
 
 यह section explore करेगा कि pipeline के व्यवहार को customize करने, इसे different environments में adapt करने, और resource usage को optimize करने के लिए Nextflow pipeline की configuration कैसे manage करें _workflow code की एक भी पंक्ति बदले बिना_।
 
-ऐसा करने के कई तरीके हैं, जिन्हें combination में use किया जा सकता है और [यहां](https://www.nextflow.io/docs/latest/config.html) described precedence के order के अनुसार interpret किया जाता है।
+ऐसा करने के कई तरीके हैं, जिन्हें combination में use किया जा सकता है और [Configuration](https://nextflow.io/docs/latest/config.html) documentation में described precedence के order के अनुसार interpret किया जाता है।
 
 इस course के इस part में, हम तुम्हें सबसे simple और सबसे common configuration फ़ाइल mechanism, `nextflow.config` फ़ाइल, दिखाने जा रहे हैं, जिसे तुमने Part 2 में containers पर section में पहले ही encounter किया था।
 
@@ -275,7 +275,7 @@ Final output फ़ाइल में greetings बोलते हुए tux c
 Subdirectory approach experimenting के लिए बढ़िया काम करता है, लेकिन इसमें थोड़ा setup involve है और requires कि तुम paths को accordingly adapt करो।
 जब तुम अपनी pipeline को values के specific set के साथ run करना चाहते हो, या किसी और को minimal effort के साथ ऐसा करने में enable करना चाहते हो, तो एक simpler approach है।
 
-Nextflow हमें YAML या JSON format में parameter फ़ाइल के माध्यम से parameters specify करने की अनुमति देता है, जो default values के alternative sets manage और distribute करना बहुत convenient बनाता है, साथ ही run-specific parameter values भी।
+Nextflow हमें [parameter file](https://nextflow.io/docs/latest/config.html#parameter-file) के माध्यम से YAML या JSON format में parameters specify करने की अनुमति देता है, जो default values के alternative sets manage और distribute करना बहुत convenient बनाता है, साथ ही run-specific parameter values भी।
 
 #### 1.3.1. Example parameter फ़ाइल की जांच करो
 
@@ -312,10 +312,10 @@ nextflow run 3-main.nf -params-file test-params.yaml
     Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [2b/9a7d1e] sayHello (2)       | 3 of 3 ✔
+    [5c/8f3b2a] convertToUpper (3) | 3 of 3 ✔
+    [a3/29d8fb] collectGreetings   | 1 of 1 ✔
+    [b7/83ef12] cowpy              | 1 of 1 ✔
     ```
 
 Final output फ़ाइल में greetings बोलते हुए stegosaurus character होना चाहिए।
@@ -374,7 +374,8 @@ Parameter फ़ाइल use करना overkill लग सकता है �
 
 अब तक हमने जो workflow का प्रत्येक version run किया है उसने अपने outputs को output definitions में hardcoded एक different subdirectory में publish किया है।
 
-आइए इसे एक user-configurable parameter use करने के लिए change करें।
+हमने Part 1 में `-output-dir` CLI flag use करके उस subdirectory को change किया था, लेकिन वह अभी भी बस एक static string है।
+आइए इसे एक config फ़ाइल में configure करें, जहां हम अधिक complex dynamic paths define कर सकते हैं।
 हम इसके लिए एक whole new parameter create कर सकते थे, लेकिन आइए `batch` parameter use करें क्योंकि यह right there है।
 
 #### 2.1.1. Configuration फ़ाइल में `outputDir` के लिए एक value set करो
@@ -399,7 +400,7 @@ Nextflow outputs publish करने के लिए जो path use करत
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 === "पहले"
@@ -415,10 +416,10 @@ Nextflow outputs publish करने के लिए जो path use करत
     }
     ```
 
-यह built-in default path, `results/`, को `results/` plus subdirectory के रूप में `batch` parameter की value से replace करेगा।
-तुम चाहो तो `results` part भी change कर सकते हो।
+यह built-in default path, `results/`, को `results_config/` plus subdirectory के रूप में `batch` parameter की value से replace करेगा।
 
-Temporary change के लिए, तुम अपने command में `-output-dir` parameter use करके command-line से यह option set कर सकते हो (लेकिन फिर तुम `batch` parameter value use नहीं कर पाओगे)।
+याद रहे कि तुम अपने command में `-output-dir` parameter use करके command-line से भी यह option set कर सकते हो (संक्षिप्त रूप में `-o`), लेकिन फिर तुम `batch` parameter value use नहीं कर पाओगे।
+CLI flag use करने से config में `outputDir` overwrite हो जाएगा यदि वह set है।
 
 #### 2.1.2. Hardcoded path का repeated part remove करो
 
@@ -495,21 +496,21 @@ nextflow run 3-main.nf --batch outdir
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [9c/6a03ea] sayHello (2)       [100%] 3 of 3 ✔
+    [11/9e58a6] convertToUpper (3) [100%] 3 of 3 ✔
+    [c8/1977e5] collectGreetings   [100%] 1 of 1 ✔
+    [38/f01eda] cowpy              [100%] 1 of 1 ✔
     ```
 
-यह अभी भी पहले जैसा ही output produce करता है, सिवाय इसके कि इस बार हम अपने outputs `results/outdir/` के अंतर्गत पाते हैं।
+यह अभी भी पहले जैसा ही output produce करता है, सिवाय इसके कि इस बार हम अपने outputs `results_config/outdir/` के अंतर्गत पाते हैं।
 
 ??? abstract "डायरेक्टरी सामग्री"
 
     ```console
-    results/outdir/
+    results_config/outdir
     ├── cowpy-COLLECTED-outdir-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -530,7 +531,7 @@ Outputs को और organize करने का एक popular तरीक�
 
 #### 2.2.1. Output paths को process names के reference से replace करो
 
-तुम्हें बस output path declaration में process के name को `<task>.name` के रूप में reference करना है।
+तुम्हें बस output path declaration में process के name को `<process>.name` के रूप में reference करना है।
 
 Workflow फ़ाइल में निम्नलिखित changes करो:
 
@@ -606,18 +607,18 @@ nextflow run 3-main.nf --batch pnames
     Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [4a/c2e6b8] sayHello (2)       | 3 of 3 ✔
+    [6f/d4a172] convertToUpper (3) | 3 of 3 ✔
+    [e8/4f19d7] collectGreetings   | 1 of 1 ✔
+    [f2/a85c36] cowpy              | 1 of 1 ✔
     ```
 
-यह अभी भी पहले जैसा ही output produce करता है, सिवाय इसके कि इस बार हम अपने outputs `results/pnames/` के अंतर्गत पाते हैं, और वे process के अनुसार grouped हैं।
+यह अभी भी पहले जैसा ही output produce करता है, सिवाय इसके कि इस बार हम अपने outputs `results_config/pnames/` के अंतर्गत पाते हैं, और वे process के अनुसार grouped हैं।
 
 ??? abstract "डायरेक्टरी सामग्री"
 
     ```console
-    results/pnames/
+    results_config/pnames/
     ├── collectGreetings
     │   ├── COLLECTED-pnames-output.txt
     │   └── pnames-report.txt
@@ -633,8 +634,10 @@ nextflow run 3-main.nf --batch pnames
         └── Holà-output.txt
     ```
 
-ध्यान दो कि यहां हमने `intermediates` बनाम top level पर final outputs के बीच distinction erase कर दिया है।
-तुम बेशक इन approaches को mix और match कर सकते हो, उदाहरण के लिए पहले output का path `intermediates/${sayHello.name}` set करके।
+!!! note "नोट"
+
+    ध्यान दो कि यहां हमने `intermediates` बनाम top level पर final outputs के बीच distinction erase कर दिया है।
+    तुम बेशक इन approaches को mix और match कर सकते हो और multiple variables भी include कर सकते हो, उदाहरण के लिए पहले output का path `#!groovy "${params.batch}/intermediates/${sayHello.name}"` set करके।
 
 ### 2.3. Workflow level पर publish mode set करो
 
@@ -650,7 +653,7 @@ nextflow run 3-main.nf --batch pnames
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     workflow.output.mode = 'copy'
     ```
 
@@ -660,7 +663,7 @@ nextflow run 3-main.nf --batch pnames
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 `outputDir` option की तरह ही, configuration फ़ाइल में `workflow.output.mode` को एक value देना workflow फ़ाइल में जो set है उसे override करने के लिए sufficient होगा, लेकिन आइए unnecessary code anyway remove करें।
@@ -736,19 +739,19 @@ nextflow run 3-main.nf --batch outmode
     Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [5b/d91e3c] sayHello (2)       | 3 of 3 ✔
+    [8a/f6c241] convertToUpper (3) | 3 of 3 ✔
+    [89/cd3a48] collectGreetings   | 1 of 1 ✔
+    [9e/71fb52] cowpy              | 1 of 1 ✔
     ```
 
-यह अभी भी पहले जैसा ही output produce करता है, सिवाय इसके कि इस बार हम अपने outputs `results/outmode/` के अंतर्गत पाते हैं।
+यह अभी भी पहले जैसा ही output produce करता है, सिवाय इसके कि इस बार हम अपने outputs `results_config/outmode/` के अंतर्गत पाते हैं।
 वे अभी भी सब proper copies हैं, symlinks नहीं।
 
 ??? abstract "डायरेक्टरी सामग्री"
 
     ```console
-    results/outmode/
+    results_config/outmode/
     ├── collectGreetings
     │   ├── COLLECTED-outmode-output.txt
     │   └── outmode-report.txt
@@ -799,7 +802,7 @@ Per-output तरीके से mode set करने का मुख्य �
     तुम अपनी pipeline को एक HPC cluster पर move कर रहे हो जहां security reasons के लिए Docker allowed नहीं है।
     Cluster Singularity और Conda support करता है, इसलिए तुम्हें अपनी configuration accordingly switch करनी होगी।
 
-Nextflow Singularity (जो HPC पर अधिक widely use होता है) सहित multiple container technologies support करता है, साथ ही software package managers जैसे Conda भी।
+जैसा कि पहले noted था, Nextflow Singularity (जो HPC पर अधिक widely use होता है) सहित multiple container technologies support करता है, साथ ही software package managers जैसे Conda भी।
 
 हम Docker के बजाय Conda use करने के लिए अपनी configuration फ़ाइल change कर सकते हैं।
 ऐसा करने के लिए, आइए `docker.enabled` की value को `false` में switch करें, और Conda का use enable करने वाला एक directive add करें:
@@ -876,7 +879,7 @@ nextflow run 3-main.nf --batch conda
     [c5/af5f88] cowpy              | 1 of 1 ✔
     ```
 
-यह बिना किसी issue के काम करना चाहिए और `results/conda` के अंतर्गत पहले जैसे ही outputs produce करना चाहिए।
+यह बिना किसी issue के काम करना चाहिए और `results_config/conda` के अंतर्गत पहले जैसे ही outputs produce करना चाहिए।
 
 Behind the scenes, Nextflow ने Conda packages retrieve किए हैं और environment create किया है, जिसमें normally थोड़ा काम लगता है; तो यह अच्छा है कि हमें वह सब खुद नहीं करना पड़ा!
 
@@ -921,7 +924,7 @@ Behind the scenes, Nextflow ने Conda packages retrieve किए हैं �
 
 Local executor convenient और efficient है, लेकिन यह उस single machine तक limited है। बहुत large workloads के लिए, तुम discover कर सकते हो कि तुम्हारी local machine एक bottleneck है, या तो इसलिए कि तुम्हारे पास एक single task है जिसे तुम्हारे पास available से अधिक resources चाहिए, या इसलिए कि तुम्हारे पास इतने सारे tasks हैं कि single machine के उन्हें run करने का wait करना बहुत long लेगा।
 
-Nextflow [कई different execution backends](https://www.nextflow.io/docs/latest/executor.html) support करता है, जिसमें HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor और अन्य) के साथ-साथ cloud execution backends जैसे (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes और अधिक) शामिल हैं।
+Nextflow [कई different execution backends](https://nextflow.io/docs/latest/executor.html) support करता है, जिसमें HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor और अन्य) के साथ-साथ cloud execution backends जैसे (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes और अधिक) शामिल हैं।
 
 ### 4.1. Different backend target करना
 
@@ -934,7 +937,7 @@ process {
 }
 ```
 
-Different backend target करने के लिए executor set करने के लिए, तुम simply वह executor specify करोगे जो तुम चाहते हो resource allocations के लिए ऊपर described similar syntax use करके (सभी options के लिए [documentation](https://www.nextflow.io/docs/latest/executor.html) देखो)।
+Different backend target करने के लिए executor set करने के लिए, तुम simply वह executor specify करोगे जो तुम चाहते हो resource allocations के लिए ऊपर described similar syntax use करके (सभी options के लिए [Executors](https://nextflow.io/docs/latest/executor.html) देखो)।
 
 ```groovy title="nextflow.config"
 process {
@@ -983,7 +986,7 @@ process {
     ```
 
 Fortunately, Nextflow यह सब simplify करता है।
-यह एक standardized syntax provide करता है ताकि तुम `cpus`, `memory` और `queue` (अन्य properties के लिए documentation देखो) जैसी relevant properties बस एक बार specify कर सको।
+यह एक standardized syntax provide करता है ताकि तुम `cpus`, `memory` और `queue` (सभी available options के लिए [Process directives](https://nextflow.io/docs/latest/reference/process.html#process-directives) देखो) जैसी relevant properties बस एक बार specify कर सको।
 फिर, runtime पर, Nextflow executor setting के आधार पर appropriate backend-specific scripts generate करने के लिए उन settings use करेगा।
 
 हम अगले section में उस standardized syntax को cover करेंगे।
@@ -1042,7 +1045,8 @@ Report एक html फ़ाइल है, जिसे तुम download क�
 
 Report को देखने में कुछ minutes लो और देखो कि क्या तुम resources adjust करने के लिए कुछ opportunities identify कर सकते हो।
 जो tabs utilization results को allocated के percentage के रूप में show करते हैं उन पर click करना सुनिश्चित करो।
-सभी available features describe करने वाला कुछ [documentation](https://www.nextflow.io/docs/latest/reports.html) है।
+
+सभी available features describe करने वाला [Reports](https://nextflow.io/docs/latest/reports.html) documentation देखो।
 
 ### 5.2. सभी processes के लिए resource allocations set करो
 
@@ -1113,7 +1117,7 @@ nextflow run 3-main.nf -with-report report-config-2.html
 !!! tip "सुझाव"
 
     यह सिर्फ एक tiny taster है जो तुम resources के अपने use को optimize करने के लिए कर सकते हो।
-    Nextflow में itself कुछ really neat [dynamic retry logic](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) built in है जो resource limitations के कारण fail होने वाले jobs को retry करता है।
+    Nextflow में itself कुछ really neat [dynamic retry logic](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) built in है जो resource limitations के कारण fail होने वाले jobs को retry करता है।
     Additionally, Seqera Platform आपकी resource allocations को automatically optimize करने के लिए AI-driven tooling भी offer करता है।
 
 ### 5.5. Resource limits add करो
@@ -1165,7 +1169,7 @@ Nextflow तुम्हारे द्वारा specified executor के �
 
 तुम शायद जो computing infrastructure use कर रहे हो उसके आधार पर alternative settings के बीच switch करना चाहो। उदाहरण के लिए, तुम अपने laptop पर locally develop और small-scale tests run करना चाहोगे, फिर HPC या cloud पर full-scale workloads run करना।
 
-Nextflow तुम्हें any number of profiles set up करने देता है जो different configurations describe करते हैं, जिन्हें तुम फिर configuration फ़ाइल itself modify करने के बजाय एक command-line argument use करके runtime पर select कर सकते हो।
+Nextflow तुम्हें any number of [**profiles**](https://nextflow.io/docs/latest/config.html#profiles) set up करने देता है जो different configurations describe करते हैं, जिन्हें तुम फिर configuration फ़ाइल itself modify करने के बजाय एक command-line argument use करके runtime पर select कर सकते हो।
 
 ### 6.1. Local development और HPC पर execution के बीच switch करने के लिए profiles create करो
 
@@ -1310,11 +1314,11 @@ nextflow run 3-main.nf -profile my_laptop,test
     [fd/e84fa9] cowpy              | 1 of 1 ✔
     ```
 
-यह जहां possible हो Docker use करेगा और `results/test` के अंतर्गत outputs produce करेगा, और इस बार character comedic duo `dragonandcow` है।
+यह जहां possible हो Docker use करेगा और `results_config/test` के अंतर्गत outputs produce करेगा, और इस बार character comedic duo `dragonandcow` है।
 
 ??? abstract "फ़ाइल सामग्री"
 
-    ```console title="results/test/"
+    ```console title="results_config/test/"
      _________
     / HOLà    \
     | HELLO   |
@@ -1352,7 +1356,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 जैसा कि ऊपर noted था, कभी-कभी same parameter को different values पर profiles में set किया जा सकता है जिन्हें तुम combine करना चाहते हो।
 और अधिक generally, numerous places हैं जहां configuration के elements stored हो सकते हैं, और कभी-कभी same properties को different places में different values पर set किया जा सकता है।
 
-Nextflow किसी भी conflicts को resolve करने के लिए set [order of precedence](https://www.nextflow.io/docs/latest/config.html) apply करता है, लेकिन यह खुद determine करना tricky हो सकता है।
+Nextflow किसी भी conflicts को resolve करने के लिए set [order of precedence](https://www.nextflow.io/docs/latest/config.html#configuration-file) apply करता है, लेकिन यह खुद determine करना tricky हो सकता है।
 और भले ही कुछ भी conflicting न हो, सभी possible places look up करना tedious हो सकता है जहां चीजें configured हो सकती हैं।
 
 Fortunately, Nextflow में `config` नाम का एक convenient utility tool शामिल है जो तुम्हारे लिए उस whole process को automate कर सकता है।
@@ -1371,6 +1375,12 @@ nextflow config
 ??? success "कमांड आउटपुट"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'batch'
+      character = 'turkey'
+    }
+
     docker {
       enabled = false
     }
@@ -1387,10 +1397,12 @@ nextflow config
       }
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+    outputDir = 'results_config/batch'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1407,6 +1419,12 @@ nextflow config -profile my_laptop,test
 ??? success "कमांड आउटपुट"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'test'
+      character = 'dragonandcow'
+    }
+
     docker {
       enabled = true
     }
@@ -1424,20 +1442,247 @@ nextflow config -profile my_laptop,test
       executor = 'local'
     }
 
-    params {
-      input = 'data/greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+    outputDir = 'results_config/test'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
-यह तुम्हें दिखाता है कि profiles से configuration जोड़ने पर क्या मिलता है।
+यह especially उन complex projects के लिए useful हो जाता है जिनमें configuration की multiple layers involve हैं।
 
 ### सीख
 
-तुम जानते हो कि how to create profiles to bundle configuration presets और runtime पर उनके बीच toggle कैसे करें।
-तुम यह भी जानते हो कि `nextflow config` utility का use कैसे करें जो set होगा उसे resolve और view करने के लिए।
+तुम जानते हो कि minimal hassle के साथ runtime पर preset configuration select करने के लिए profiles का use कैसे करें।
+अधिक generally, तुम जानते हो कि different compute platforms suit करने और अपने analyses की reproducibility enhance करने के लिए अपनी workflow executions को कैसे configure करें।
 
 ### आगे क्या?
 
-Part 3 complete करने पर congratulations! अगले page पर proceed करो course summary देखने के लिए और अपनी Nextflow journey में next steps के बारे में जानने के लिए।
+सीखो कि GitHub जैसे remote repositories से directly pipelines कैसे run करें।
+
+---
+
+## 7. Remote repositories से pipelines run करें
+
+??? example "परिदृश्य"
+
+    तुम एक well-established pipeline जैसे nf-core से run करना चाहते हो बिना code खुद download और manage किए।
+
+अब तक हम current directory में located workflow scripts run कर रहे थे।
+Practice में, तुम अक्सर remote repositories में stored pipelines run करना चाहोगे, जैसे GitHub।
+
+Nextflow इसे straightforward बनाता है: तुम किसी भी pipeline को directly एक Git repository URL से run कर सकते हो बिना manually पहले इसे download किए।
+
+### 7.1. GitHub से pipeline run करो
+
+Remote pipeline run करने का basic syntax `nextflow run <repository>` है, जहां `<repository>` एक GitHub repository path हो सकता है जैसे `nextflow-io/hello`, एक full URL, या GitLab, Bitbucket, या other Git hosting services का path।
+
+Official Nextflow "hello" demo pipeline run करने की try करो:
+
+```bash
+nextflow run nextflow-io/hello
+```
+
+??? success "कमांड आउटपुट"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Pulling nextflow-io/hello ...
+     downloaded from https://github.com/nextflow-io/hello.git
+    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] DSL2 - revision: 2ce0b0e294 [master]
+
+    executor >  local (4)
+    [ba/08236d] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Hello world!
+
+    Bonjour world!
+
+    Hola world!
+    ```
+
+पहली बार जब तुम एक remote pipeline run करते हो, Nextflow इसे download करता है और locally cache करता है।
+Subsequent runs cached version use करते हैं जब तक तुम explicitly एक update request नहीं करते।
+
+### 7.2. Reproducibility के लिए version specify करो
+
+Default रूप से, Nextflow default branch से latest version run करता है।
+तुम `-r` flag use करके particular version (tag), branch, या commit specify कर सकते हो:
+
+```bash
+nextflow run nextflow-io/hello -r v1.3
+```
+
+??? success "कमांड आउटपुट"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
+
+    executor >  local (4)
+    [61/e11f77] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Bonjour world!
+
+    Hello world!
+
+    Hola world!
+    ```
+
+Exact versions specify करना reproducibility के लिए essential है।
+
+### सीख
+
+तुम जानते हो कि GitHub और other remote repositories से directly pipelines कैसे run करें, और reproducibility के लिए versions कैसे specify करें।
+
+### आगे क्या?
+
+अपने आप को एक big pat on the back दो!
+तुम सब कुछ जानते हो जो तुम्हें Nextflow pipelines run और manage करना शुरू करने के लिए जानना जरूरी है।
+
+यह इस course को conclude करता है, लेकिन यदि तुम सीखना जारी रखने के लिए eager हो, हमारे पास दो main recommendations हैं:
+
+- यदि तुम अपनी own pipelines develop करने में deeper dig करना चाहते हो, [Hello Nextflow](../hello_nextflow/index.md) देखो, beginners के लिए एक course जो इस वाले जैसी ही general progression cover करता है लेकिन channels और operators के बारे में बहुत अधिक detail में जाता है।
+- यदि तुम code में deeper जाए बिना Nextflow pipelines run करना सीखना जारी रखना चाहते हो, [Hello nf-core](../hello_nf-core/index.md) के first part को देखो, जो hugely popular [nf-core](https://nf-co.re/) project से pipelines खोजने और run करने के लिए tooling introduce करता है।
+
+मज़े करो!
+
+---
+
+## Quiz
+
+<quiz>
+जब parameter values workflow फ़ाइल और `nextflow.config` दोनों में set हैं, तो कौन precedence लेता है?
+- [ ] Workflow फ़ाइल value
+- [x] Configuration फ़ाइल value
+- [ ] पहली encounter की गई value
+- [ ] यह error cause करता है
+
+अधिक जानें: [1.1. `nextflow.config` में values set up करें](#11-nextflowconfig-में-values-set-up-करें)
+</quiz>
+
+<quiz>
+Workflow फ़ाइल में parameter default set करने बनाम config फ़ाइल में syntax difference क्या है?
+- [ ] वे same syntax use करते हैं
+- [x] Workflow typed declaration (`#!groovy param: Type = value`) use करती है, config assignment (`#!groovy param = value`) use करती है
+- [ ] Config typed declaration use करती है, workflow assignment use करती है
+- [ ] केवल config files default values set कर सकती हैं
+
+अधिक जानें: [1.1. `nextflow.config` में values set up करें](#11-nextflowconfig-में-values-set-up-करें)
+</quiz>
+
+<quiz>
+Workflow run करते समय parameter फ़ाइल कैसे specify करते हो?
+- [ ] `--params params.yaml`
+- [ ] `-config params.yaml`
+- [x] `-params-file params.yaml`
+- [ ] `--input-params params.yaml`
+
+अधिक जानें: [1.3. Parameter फ़ाइल use करें](#13-parameter-फ़ाइल-use-करें)
+</quiz>
+
+<quiz>
+`outputDir` configuration option क्या control करता है?
+- [ ] Work directory का location
+- [x] Base path जहां workflow outputs publish होते हैं
+- [ ] Log files के लिए directory
+- [ ] Module files का location
+
+अधिक जानें: [2.1. `outputDir` directory name customize करो](#21-outputdir-directory-name-customize-करो)
+</quiz>
+
+<quiz>
+Output path configuration में process name को dynamically कैसे reference करते हो?
+- [ ] `#!groovy ${processName}`
+- [ ] `#!groovy path "<process>.name"`
+- [x] `#!groovy path { <process>.name }`
+- [ ] `@processName`
+
+अधिक जानें: [2.2. Process के अनुसार outputs organize करो](#22-process-के-अनुसार-outputs-organize-करो)
+</quiz>
+
+<quiz>
+यदि Docker और Conda दोनों enable हैं और process में दोनों directives हैं, तो कौन prioritized है?
+- [x] Docker (containers)
+- [ ] Conda
+- [ ] Process में पहले defined जो
+- [ ] यह error cause करता है
+
+अधिक जानें: [3. Software packaging technology select करें](#3-software-packaging-technology-select-करें)
+</quiz>
+
+<quiz>
+Nextflow में default executor क्या है?
+- [x] `local`
+- [ ] `slurm`
+- [ ] `kubernetes`
+- [ ] `aws`
+
+अधिक जानें: [4. Execution platform select करें](#4-execution-platform-select-करें)
+</quiz>
+
+<quiz>
+Resource utilization report generate करने वाली कमांड क्या है?
+- [ ] `nextflow run workflow.nf -with-metrics`
+- [ ] `nextflow run workflow.nf -with-stats`
+- [x] `nextflow run workflow.nf -with-report report.html`
+- [ ] `nextflow run workflow.nf -profile report`
+
+अधिक जानें: [5.1. Resource utilization report generate करने के लिए workflow run करो](#51-resource-utilization-report-generate-करने-के-लिए-workflow-run-करो)
+</quiz>
+
+<quiz>
+Config फ़ाइल में `cowpy` नाम के specific process के लिए resource requirements कैसे set करते हो?
+- [ ] `#!groovy cowpy.memory = '2.GB'`
+- [ ] `#!groovy process.cowpy.memory = '2.GB'`
+- [x] `#!groovy process { withName: 'cowpy' { memory = '2.GB' } }`
+- [ ] `#!groovy resources.cowpy.memory = '2.GB'`
+
+अधिक जानें: [5.3. Specific process के लिए resource allocations set करो](#53-specific-process-के-लिए-resource-allocations-set-करो)
+</quiz>
+
+<quiz>
+`resourceLimits` directive क्या करता है?
+- [ ] Minimum resource requirements set करता है
+- [ ] Processes को resources allocate करता है
+- [x] Maximum resources cap करता है जो request की जा सकती हैं
+- [ ] Real-time में resource usage monitor करता है
+
+अधिक जानें: [5.5. Resource limits add करो](#55-resource-limits-add-करो)
+</quiz>
+
+<quiz>
+एक single command में multiple profiles कैसे specify करते हो?
+- [ ] `-profile profile1 -profile profile2`
+- [ ] `-profiles profile1,profile2`
+- [x] `-profile profile1,profile2`
+- [ ] `--profile profile1 --profile profile2`
+
+अधिक जानें: [6. Preset configurations के बीच switch करने के लिए profiles use करें](#6-preset-configurations-के-बीच-switch-करने-के-लिए-profiles-use-करें)
+</quiz>
+
+<quiz>
+वह command जो fully resolved configuration show करती है जो Nextflow use करेगा?
+- [ ] `nextflow show-config`
+- [ ] `nextflow settings`
+- [x] `nextflow config`
+- [ ] `nextflow resolve`
+
+अधिक जानें: [6.3. Resolved configuration देखने के लिए `nextflow config` use करो](#63-resolved-configuration-देखने-के-लिए-nextflow-config-use-करो)
+</quiz>
+
+<quiz>
+Profiles किसके लिए use की जा सकती हैं? (सभी लागू select करो)
+- [x] Infrastructure-specific settings define करना (executors, containers)
+- [x] Different environments के लिए resource limits set करना
+- [x] Easy workflow testing के लिए test parameters provide करना
+- [ ] नई processes define करना
+
+अधिक जानें: [6. Preset configurations के बीच switch करने के लिए profiles use करें](#6-preset-configurations-के-बीच-switch-करने-के-लिए-profiles-use-करें)
+</quiz>

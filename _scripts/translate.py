@@ -16,29 +16,35 @@ LLM-powered translation CLI for Nextflow training docs.
 Usage:
     uv run translate.py sync pt --dry-run
     uv run translate.py sync pt
+    uv run translate.py sync pt --parallel 20
     uv run translate.py translate docs/en/docs/index.md --lang pt
 """
 
 from __future__ import annotations
 
+import asyncio
+import hashlib
 import json
 import os
+import random
 import re
 import secrets
 import subprocess
-import sys
-from dataclasses import dataclass
+import time
+from dataclasses import asdict, dataclass
+from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
 from typing import NamedTuple
-
-import time
 
 import anthropic
 import git
 import typer
 import yaml
 from rich.console import Console
+
+# Module-level console for output (force color in CI)
+console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
 
 # =============================================================================
@@ -254,27 +260,145 @@ def _get_repo() -> git.Repo:
     return git.Repo(REPO_ROOT)
 
 
-def get_file_commit_time(path: Path) -> int | None:
-    """Get timestamp of last commit affecting a file."""
+def file_changed_since(path: Path, since_commit: str) -> bool:
+    """Check if file has any commits after the given commit.
+
+    Args:
+        path: File path to check
+        since_commit: Commit SHA to compare against
+
+    Returns:
+        True if the file has commits newer than since_commit
+    """
     try:
-        commits = list(_get_repo().iter_commits(paths=str(path), max_count=1))
-        return commits[0].committed_date if commits else None
+        # git log since_commit..HEAD -- path
+        commits = list(
+            _get_repo().iter_commits(
+                rev=f"{since_commit}..HEAD", paths=str(path), max_count=1
+            )
+        )
+        return len(commits) > 0
     except git.GitCommandError:
-        return None
+        return False
 
 
-def get_outdated_files(lang: str) -> list[TranslationFile]:
-    """Find translations older than their English source."""
+def get_translation_baseline(
+    github_token: str | None = None,
+    github_repository: str | None = None,
+) -> str:
+    """Get the commit SHA that the last translation was based on.
+
+    Finds the most recent merged translation PR and extracts the
+    trigger commit from its body.
+
+    Args:
+        github_token: GitHub token for API access (uses GITHUB_TOKEN env if not provided)
+        github_repository: Repository in owner/repo format (uses GITHUB_REPOSITORY env if not provided)
+
+    Returns:
+        The commit SHA that triggered the last translation
+
+    Raises:
+        ConfigError: If no translation PR found or commit cannot be extracted
+    """
+    from github import Github
+
+    token = github_token or os.environ.get("GITHUB_TOKEN")
+    repo_name = github_repository or os.environ.get("GITHUB_REPOSITORY")
+
+    if not token:
+        raise ConfigError(
+            "GITHUB_TOKEN not set. Required to find translation baseline. "
+            "Use --since to specify a commit manually."
+        )
+    if not repo_name:
+        raise ConfigError(
+            "GITHUB_REPOSITORY not set. Required to find translation baseline. "
+            "Use --since to specify a commit manually."
+        )
+
+    from github import Auth
+
+    gh = Github(auth=Auth.Token(token))
+    repo = gh.get_repo(repo_name)
+
+    # Find the most recent merged translation PR
+    # Search for PRs with "Update translations" in title, merged, sorted by updated desc
+    prs = repo.get_pulls(state="closed", sort="updated", direction="desc")
+
+    commit_pattern = re.compile(r"commit:?\s*([a-f0-9]{7,40})")
+
+    for pr in prs:
+        if not pr.merged:
+            continue
+        if "Update translations" not in pr.title:
+            continue
+
+        # Extract commit SHA from PR body
+        if pr.body:
+            match = commit_pattern.search(pr.body)
+            if match:
+                return match.group(1)
+
+        # If we found a translation PR but couldn't extract commit, keep looking
+        # (older PRs might have different format)
+
+    raise ConfigError(
+        "Could not find baseline commit from previous translation PRs. "
+        "Use --since to specify a commit manually."
+    )
+
+
+def prompt_changed_since(lang: str, baseline: str) -> bool:
+    """Check if any prompt files affecting this language changed since baseline.
+
+    Returns True if either:
+    - The general prompt (_scripts/general-llm-prompt.md) changed
+    - The language-specific prompt (docs/{lang}/llm-prompt.md) changed
+    """
+    general_prompt = SCRIPTS_DIR / "general-llm-prompt.md"
+    lang_prompt = DOCS_ROOT / lang / "llm-prompt.md"
+
+    if file_changed_since(general_prompt, baseline):
+        return True
+    if file_changed_since(lang_prompt, baseline):
+        return True
+    return False
+
+
+def get_outdated_files(lang: str, baseline: str | None = None) -> list[TranslationFile]:
+    """Find translations needing updates.
+
+    Args:
+        lang: Target language code
+        baseline: Commit SHA to compare against. Finds files that changed
+            in English since this commit. If None, returns empty list.
+
+    Returns:
+        List of TranslationFile objects needing updates
+
+    Note:
+        If prompt files (general or language-specific) changed since baseline,
+        ALL existing translations for that language are considered outdated.
+    """
+    if not baseline:
+        return []
+
     outdated = []
+
+    # Check if prompts changed - if so, all existing translations are outdated
+    prompts_changed = prompt_changed_since(lang, baseline)
+
     for en_path in iter_en_docs():
         lang_path = en_to_lang_path(en_path, lang)
         if not lang_path.exists():
             continue
 
-        en_time = get_file_commit_time(en_path)
-        lang_time = get_file_commit_time(lang_path)
-
-        if en_time and lang_time and lang_time < en_time:
+        if prompts_changed:
+            # Prompt changed: all existing translations need re-translation
+            outdated.append(TranslationFile(en_path, lang_path, lang))
+        elif file_changed_since(en_path, baseline):
+            # Check if English file changed since baseline
             outdated.append(TranslationFile(en_path, lang_path, lang))
 
     return outdated
@@ -390,6 +514,120 @@ def call_claude(prompt: str, console: Console | None = None) -> str:
     return "".join(result_parts).strip()
 
 
+# =============================================================================
+# Async Translation API (for parallel execution)
+# =============================================================================
+
+
+async def _call_claude_once_async(
+    client: anthropic.AsyncAnthropic,
+    messages: list[dict],
+    file_label: str = "",
+) -> anthropic.types.Message:
+    """Make a single async Claude API call with jittered exponential backoff.
+
+    Args:
+        client: Async Anthropic client
+        messages: Message history
+        file_label: Optional label for log messages (e.g., file path)
+    """
+    for attempt in range(MAX_RETRIES + 1):
+        try:
+            return await client.messages.create(
+                model=MODEL,
+                max_tokens=MAX_TOKENS,
+                timeout=REQUEST_TIMEOUT,
+                messages=messages,
+            )
+        except (
+            anthropic.APIConnectionError,
+            anthropic.APITimeoutError,
+            anthropic.RateLimitError,
+            anthropic.InternalServerError,
+        ) as e:
+            if attempt == MAX_RETRIES:
+                raise
+            # Jittered exponential backoff to avoid thundering herd
+            base_delay = BASE_DELAY * (2**attempt)
+            jitter = random.uniform(0, base_delay * 0.5)
+            delay = base_delay + jitter
+            print(
+                f"  [{file_label}] Retry {attempt + 1}/{MAX_RETRIES} "
+                f"after {delay:.1f}s: {type(e).__name__}"
+            )
+            await asyncio.sleep(delay)
+
+    raise RuntimeError("Unreachable")
+
+
+@dataclass
+class TranslationResult:
+    """Result from Claude API including metadata."""
+
+    text: str
+    model: str
+    input_tokens: int
+    output_tokens: int
+    stop_reason: str
+    continuations: int
+
+
+async def call_claude_async(
+    prompt: str, file_label: str = "", client: anthropic.AsyncAnthropic | None = None
+) -> TranslationResult:
+    """Async version of call_claude with continuation support.
+
+    Args:
+        prompt: The translation prompt
+        file_label: Optional label for log messages
+        client: Optional shared client (creates one if not provided)
+
+    Returns:
+        TranslationResult with text and API metadata
+    """
+    client = client or anthropic.AsyncAnthropic()
+    messages: list[dict] = [{"role": "user", "content": prompt}]
+
+    # Initial request
+    message = await _call_claude_once_async(client, messages, file_label)
+    result_parts = [message.content[0].text]
+    total_input_tokens = message.usage.input_tokens
+    total_output_tokens = message.usage.output_tokens
+
+    # Handle continuations if response was truncated
+    continuations = 0
+    while message.stop_reason == "max_tokens":
+        continuations += 1
+        if continuations > MAX_CONTINUATIONS:
+            raise TranslationError(
+                f"Response still incomplete after {MAX_CONTINUATIONS} continuations. "
+                f"File may be too large to translate."
+            )
+        print(
+            f"  [{file_label}] Response truncated, continuation "
+            f"{continuations}/{MAX_CONTINUATIONS}..."
+        )
+
+        messages.append({"role": "assistant", "content": message.content[0].text})
+        messages.append(
+            {"role": "user", "content": "Continue exactly where you left off."}
+        )
+
+        message = await _call_claude_once_async(client, messages, file_label)
+        result_parts.append(message.content[0].text)
+        total_input_tokens += message.usage.input_tokens
+        total_output_tokens += message.usage.output_tokens
+
+    return TranslationResult(
+        text="".join(result_parts).strip(),
+        model=message.model,
+        input_tokens=total_input_tokens,
+        output_tokens=total_output_tokens,
+        stop_reason=message.stop_reason,
+        continuations=continuations,
+    )
+
+
 def translate_file(tf: TranslationFile, console: Console) -> None:
     """Translate a single file."""
     langs = get_languages()
@@ -409,6 +647,213 @@ def translate_file(tf: TranslationFile, console: Console) -> None:
 
     tf.lang_path.parent.mkdir(parents=True, exist_ok=True)
     tf.lang_path.write_text(f"{result}\n", encoding="utf-8", newline="\n")
+
+
+@dataclass
+class FileLogEntry:
+    """Log entry for a single file translation."""
+
+    filename: str
+    started_at: str
+    finished_at: str = ""
+    duration_s: float = 0.0
+    input_lines: int = 0
+    input_hash: str = ""
+    output_lines: int = 0
+    output_hash: str = ""
+    changed: bool = False
+    error: str = ""
+    # API response metadata
+    model: str = ""
+    input_tokens: int = 0
+    output_tokens: int = 0
+    stop_reason: str = ""
+    continuations: int = 0
+
+
+class TranslationLog:
+    """Verbose log for debugging translation runs."""
+
+    def __init__(
+        self,
+        log_path: Path,
+        baseline: str,
+        language: str,
+        parallel: int,
+        total_files: int,
+    ):
+        self.path = log_path
+        self.baseline = baseline
+        self.language = language
+        self.parallel = parallel
+        self.total_files = total_files
+        self.entries: list[FileLogEntry] = []
+        self._lock = asyncio.Lock()
+        self.started_at = datetime.now().isoformat()
+
+    async def add_entry(self, entry: FileLogEntry):
+        async with self._lock:
+            self.entries.append(entry)
+
+    def write(self):
+        if not self.path:
+            return
+        data = {
+            "started_at": self.started_at,
+            "finished_at": datetime.now().isoformat(),
+            "baseline": self.baseline,
+            "language": self.language,
+            "parallel": self.parallel,
+            "total_files": self.total_files,
+            "files_changed": sum(1 for e in self.entries if e.changed),
+            "files_unchanged": sum(
+                1 for e in self.entries if not e.changed and not e.error
+            ),
+            "files_failed": sum(1 for e in self.entries if e.error),
+            "total_input_tokens": sum(e.input_tokens for e in self.entries),
+            "total_output_tokens": sum(e.output_tokens for e in self.entries),
+            "files": [
+                {
+                    "filename": e.filename,
+                    "started_at": e.started_at,
+                    "finished_at": e.finished_at,
+                    "duration_s": round(e.duration_s, 2),
+                    "input_lines": e.input_lines,
+                    "input_hash": e.input_hash,
+                    "output_lines": e.output_lines,
+                    "output_hash": e.output_hash,
+                    "changed": e.changed,
+                    "error": e.error,
+                    "model": e.model,
+                    "input_tokens": e.input_tokens,
+                    "output_tokens": e.output_tokens,
+                    "stop_reason": e.stop_reason,
+                    "continuations": e.continuations,
+                }
+                for e in sorted(self.entries, key=lambda x: x.started_at)
+            ],
+        }
+        self.path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+
+class TranslationProgress:
+    """Track translation progress across parallel tasks."""
+
+    def __init__(self, files: list["TranslationFile"], file_lines: dict[str, int]):
+        self.total = len(files)
+        self.queued: list[str] = [str(f.relative_path) for f in files]
+        self.working: list[str] = []
+        self.complete = 0
+        self.failed = 0
+        self._file_lines = file_lines
+        self.lines_total = sum(file_lines.values())
+        self.lines_complete = 0
+        self._lock = asyncio.Lock()
+        self._start_time = time.time()
+
+    async def start_one(self, filename: str):
+        async with self._lock:
+            self.queued.remove(filename)
+            self.working.append(filename)
+
+    async def finish_one(self, filename: str, success: bool = True):
+        async with self._lock:
+            self.working.remove(filename)
+            if success:
+                self.complete += 1
+                self.lines_complete += self._file_lines[filename]
+            else:
+                self.failed += 1
+
+    def status(self) -> str:
+        """Return a status line with aligned columns, using Rich colors."""
+        elapsed = int(time.time() - self._start_time)
+        mins, secs = divmod(elapsed, 60)
+        lines_remaining = self.lines_total - self.lines_complete
+        w = len(str(self.total))  # width for padding
+        line = (
+            f"[dim][{mins:02d}:{secs:02d}][/dim] "
+            f"[green]{self.complete:>{w}}/{self.total}[/green] files complete, "
+            f"[cyan]{_format_lines(lines_remaining):>5}[/cyan] lines remaining, "
+            f"[yellow]{len(self.working):>{w}}[/yellow] files underway"
+        )
+        if self.failed:
+            line += f", [red]{self.failed} failed[/red]"
+        return line
+
+
+def _format_lines(n: int) -> str:
+    """Format line count with k suffix for thousands."""
+    if n >= 1000:
+        return f"{n / 1000:.1f}k"
+    return str(n)
+
+
+async def _progress_logger(progress: TranslationProgress, interval: float = 10.0):
+    """Print progress status every interval seconds, starting immediately."""
+    console.print(
+        f"[dim][00:00][/dim] Starting: [bold]{progress.total}[/bold] files, [bold]{_format_lines(progress.lines_total)}[/bold] lines"
+    )
+    while progress.complete + progress.failed < progress.total:
+        await asyncio.sleep(interval)
+        console.print(progress.status())
+
+
+async def translate_file_async(
+    tf: TranslationFile,
+    semaphore: asyncio.Semaphore,
+    progress: TranslationProgress,
+    client: anthropic.AsyncAnthropic,
+    log: TranslationLog | None = None,
+) -> None:
+    """Translate a single file (async version for parallel execution)."""
+    filename = str(tf.relative_path)
+    entry = FileLogEntry(filename=filename, started_at=datetime.now().isoformat())
+    start_time = time.time()
+
+    async with semaphore:
+        await progress.start_one(filename)
+        try:
+            langs = get_languages()
+            en_content = tf.en_path.read_text(encoding="utf-8")
+            existing = tf.lang_path.read_text(encoding="utf-8") if tf.exists else None
+
+            entry.input_lines = en_content.count("\n") + 1
+            entry.input_hash = hashlib.md5(en_content.encode()).hexdigest()[:12]
+
+            prompt = build_translation_prompt(
+                tf.language, langs[tf.language], en_content, existing
+            )
+            result = await call_claude_async(prompt, filename, client)
+            output_content = f"{result.text}\n"
+
+            # Log API response metadata
+            entry.model = result.model
+            entry.input_tokens = result.input_tokens
+            entry.output_tokens = result.output_tokens
+            entry.stop_reason = result.stop_reason
+            entry.continuations = result.continuations
+
+            tf.lang_path.parent.mkdir(parents=True, exist_ok=True)
+            tf.lang_path.write_text(output_content, encoding="utf-8", newline="\n")
+            post_process_file(tf.lang_path, tf.language)
+
+            # Compute hash and changed flag AFTER post-processing
+            final_content = tf.lang_path.read_text(encoding="utf-8")
+            entry.output_lines = final_content.count("\n")
+            entry.output_hash = hashlib.md5(final_content.encode()).hexdigest()[:12]
+            entry.changed = existing is None or existing != final_content
+
+            await progress.finish_one(filename, success=True)
+        except Exception as e:
+            entry.error = str(e)
+            await progress.finish_one(filename, success=False)
+            raise
+        finally:
+            entry.finished_at = datetime.now().isoformat()
+            entry.duration_s = time.time() - start_time
+            if log:
+                await log.add_entry(entry)
 
 
 # =============================================================================
@@ -697,7 +1142,6 @@ def translate(
 ):
     """Translate a single file."""
     check_api_key()
-    console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
     if lang == "en":
         raise typer.Exit("Cannot translate to English")
@@ -710,19 +1154,105 @@ def translate(
     console.print(f"[green]Done:[/green] {tf.lang_path}")
 
 
+DEFAULT_PARALLEL = 50
+
+
+async def _translate_all(
+    files: list[TranslationFile], parallel: int, log: TranslationLog | None = None
+) -> None:
+    """Translate all files in parallel with progress logging."""
+    # Pre-compute line counts once (used for sorting and progress tracking)
+    file_lines = {
+        str(f.relative_path): f.en_path.read_text().count("\n") for f in files
+    }
+
+    # Sort largest files first to avoid "long pole" problem
+    files.sort(key=lambda f: file_lines[str(f.relative_path)], reverse=True)
+
+    semaphore = asyncio.Semaphore(parallel)
+    progress = TranslationProgress(files, file_lines)
+    client = anthropic.AsyncAnthropic()
+
+    # Create translation tasks
+    tasks = [translate_file_async(tf, semaphore, progress, client, log) for tf in files]
+
+    # Run translations with progress logger
+    logger_task = asyncio.create_task(_progress_logger(progress))
+    try:
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+    finally:
+        logger_task.cancel()
+        try:
+            await logger_task
+        except asyncio.CancelledError:
+            pass
+
+    # Write log if enabled
+    if log:
+        log.write()
+        console.print(f"[dim]Log written to: {log.path}[/dim]")
+
+    # Print final status
+    console.print(f"[bold green]Translation complete:[/bold green] {progress.status()}")
+
+    # Raise if any failed
+    errors = [r for r in results if isinstance(r, Exception)]
+    if errors:
+        for e in errors:
+            console.print(f"[red]Error: {e}[/red]")
+        raise errors[0]
+
+
 @app.command()
 def sync(
     lang: str = typer.Argument(..., help="Language code"),
     include: str | None = typer.Option(None, "--include", "-i", help="Filter pattern"),
+    since: str | None = typer.Option(
+        None,
+        "--since",
+        help="Compare since this commit (default: auto-detect from last translation PR)",
+    ),
     dry_run: bool = typer.Option(False, "--dry-run", "-n", help="Preview only"),
+    parallel: int = typer.Option(
+        DEFAULT_PARALLEL,
+        "--parallel",
+        "-p",
+        help="Max concurrent translations (default: 50)",
+    ),
+    log_file: Path | None = typer.Option(
+        None,
+        "--log",
+        help="Write detailed JSON log to file",
+    ),
 ):
     """Sync translations: update outdated, add missing, remove orphaned."""
     console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
+    # Determine baseline commit
+    if since:
+        baseline = since
+        console.print(f"[cyan]Using baseline commit (manual):[/cyan] {baseline}")
+    else:
+        try:
+            baseline = get_translation_baseline()
+            console.print(
+                f"[cyan]Using baseline commit (from last PR):[/cyan] {baseline}"
+            )
+        except ConfigError as e:
+            console.print(f"[red]Error:[/red] {e}")
+            raise typer.Exit(1)
+
     # Gather work
     orphaned = get_orphaned_files(lang)
-    outdated = get_outdated_files(lang)
+    outdated = get_outdated_files(lang, baseline=baseline)
     missing = get_missing_files(lang)
+
+    # Check if prompt changed (for informational output)
+    prompts_changed = baseline and prompt_changed_since(lang, baseline)
+    if prompts_changed:
+        console.print(
+            f"[magenta]Prompt changed:[/magenta] all {lang} translations will be updated"
+        )
 
     if include:
         outdated = [tf for tf in outdated if include in str(tf.en_path)]
@@ -736,8 +1266,9 @@ def sync(
                 console.print(f"  {p.relative_to(REPO_ROOT)}")
         if outdated:
             console.print(f"[yellow]Would update {len(outdated)} outdated:[/yellow]")
-            for tf in outdated:
-                console.print(f"  {tf.relative_path}")
+            if not prompts_changed:
+                for tf in outdated:
+                    console.print(f"  {tf.relative_path}")
         if missing:
             console.print(f"[blue]Would add {len(missing)} missing:[/blue]")
             for tf in missing:
@@ -755,23 +1286,21 @@ def sync(
             p.unlink()
             console.print(f"  [red]Removed:[/red] {p.relative_to(REPO_ROOT)}")
 
-    # Update outdated
-    if outdated:
-        console.print(f"[bold]Updating {len(outdated)} outdated...[/bold]")
-        for i, tf in enumerate(outdated, 1):
-            console.print(f"[{i}/{len(outdated)}]", end="", style="blue")
-            translate_file(tf, console)
-            post_process_file(tf.lang_path, lang)
+    # Run translations in parallel
+    all_files = outdated + missing
+    if all_files:
+        print(
+            f"Translating {len(all_files)} files with parallel={parallel}. Largest files first."
+        )
+        # Set up verbose log if requested
+        log = (
+            TranslationLog(log_file, baseline, lang, parallel, len(all_files))
+            if log_file
+            else None
+        )
+        asyncio.run(_translate_all(all_files, parallel, log))
 
-    # Add missing
-    if missing:
-        console.print(f"[bold]Adding {len(missing)} missing...[/bold]")
-        for i, tf in enumerate(missing, 1):
-            console.print(f"[{i}/{len(missing)}]", end="")
-            translate_file(tf, console)
-            post_process_file(tf.lang_path, lang)
-
-    console.print("[green]:white_check_mark: Sync complete[/green]")
+    console.print("[green]✓ Sync complete[/green]")
 
 
 # =============================================================================
@@ -780,7 +1309,14 @@ def sync(
 
 
 @app.command("ci-detect")
-def ci_detect(language: str | None = typer.Option(None, "--language")):
+def ci_detect(
+    language: str | None = typer.Option(None, "--language"),
+    since: str | None = typer.Option(
+        None,
+        "--since",
+        help="Compare since this commit (default: auto-detect from last translation PR)",
+    ),
+):
     """Detect languages needing sync (GitHub Actions output)."""
     console = Console(
         stderr=True, force_terminal=True if os.getenv("GITHUB_ACTIONS") else None
@@ -794,20 +1330,43 @@ def ci_detect(language: str | None = typer.Option(None, "--language")):
     else:
         langs = all_langs
 
+    # Determine baseline commit
+    if since:
+        baseline = since
+        console.print(f"[cyan]Using baseline commit (manual):[/cyan] {baseline}")
+    else:
+        try:
+            baseline = get_translation_baseline()
+            console.print(
+                f"[cyan]Using baseline commit (from last PR):[/cyan] {baseline}"
+            )
+        except ConfigError as e:
+            console.print(f"[red]Error:[/red] {e}")
+            raise typer.Exit(1)
+
     # Check which have work and collect details
     need_sync = []
     for lang in langs:
         missing = get_missing_files(lang)
-        outdated = get_outdated_files(lang)
+        outdated = get_outdated_files(lang, baseline=baseline)
         orphaned = get_orphaned_files(lang)
+
+        # Check if prompt changed (for informational output)
+        prompts_changed = baseline and prompt_changed_since(lang, baseline)
 
         if missing or outdated or orphaned:
             need_sync.append(lang)
             console.print(f"[bold cyan]{lang}[/bold cyan]:")
+            if prompts_changed:
+                console.print(
+                    f"  [magenta]Prompt changed:[/magenta] all translations will be updated"
+                )
             if outdated:
                 console.print(f"  [yellow]Outdated:[/yellow] {len(outdated)}")
-                for f in outdated:
-                    console.print(f"    {f.relative_path}")
+                if not prompts_changed:
+                    # Only list individual files if not all files are outdated due to prompt change
+                    for f in outdated:
+                        console.print(f"    {f.relative_path}")
             if missing:
                 console.print(f"  [green]Missing:[/green] {len(missing)}")
                 for f in missing:
@@ -855,11 +1414,6 @@ def ci_pr(
     """Create PR with translation changes (CI)."""
     from github import Github
 
-    repo = _get_repo()
-    if not repo.is_dirty(untracked_files=True):
-        print("No changes to commit")
-        return
-
     subprocess.run(
         ["git", "config", "user.name", "github-actions[bot]"], check=True, cwd=REPO_ROOT
     )
@@ -869,9 +1423,19 @@ def ci_pr(
         cwd=REPO_ROOT,
     )
 
+    # Stage docs/ and check if anything was actually added
+    subprocess.run(["git", "add", "docs/"], check=True, cwd=REPO_ROOT)
+    result = subprocess.run(
+        ["git", "diff", "--cached", "--quiet"],
+        cwd=REPO_ROOT,
+    )
+    if result.returncode == 0:
+        # Nothing staged - exit cleanly
+        print("No changes to commit")
+        return
+
     branch = f"translate-{secrets.token_hex(4)}"
     subprocess.run(["git", "checkout", "-b", branch], check=True, cwd=REPO_ROOT)
-    subprocess.run(["git", "add", "docs/"], check=True, cwd=REPO_ROOT)
     subprocess.run(
         ["git", "commit", "-m", "Update translations"], check=True, cwd=REPO_ROOT
     )
@@ -885,7 +1449,12 @@ def ci_pr(
         title = "Update translations"
 
     # Build PR body
-    trigger_line = f"commit {commit_sha[:10]}" if commit_sha else "[manual]"
+    # Always include commit SHA so future runs can detect baseline
+    if not commit_sha:
+        raise ConfigError(
+            "GITHUB_SHA not set. Required to record translation baseline in PR body."
+        )
+    trigger_line = f"commit {commit_sha[:10]}"
     commit_quote = f"\n\n> {commit_message}" if commit_message else ""
 
     body = f"""Automated translation update, generated by workflow run {run_url}

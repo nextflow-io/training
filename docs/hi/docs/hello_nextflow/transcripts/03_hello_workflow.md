@@ -1,237 +1,235 @@
-# भाग 3: Hello Workflow - ट्रांसक्रिप्ट
+# भाग 3: Hello Workflow - वीडियो ट्रांसक्रिप्ट
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/zJP7cUYPEbA?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "महत्वपूर्ण नोट"
 
-    यह पेज केवल ट्रांसक्रिप्ट दिखाता है। पूर्ण चरण-दर-चरण निर्देशों के लिए, [पाठ्यक्रम सामग्री](../03_hello_workflow.md) पर वापस जाएं।
+    यह पेज केवल ट्रांसक्रिप्ट दिखाता है। पूर्ण चरण-दर-चरण निर्देशों के लिए, [कोर्स सामग्री](../03_hello_workflow.md) पर वापस जाओ।
 
-    ट्रांसक्रिप्ट में दिखाए गए अनुभाग नंबर केवल संकेत के लिए प्रदान किए गए हैं और सामग्री में सभी अनुभाग नंबर शामिल नहीं हो सकते हैं।
+    ट्रांसक्रिप्ट में दिखाए गए सेक्शन नंबर केवल संकेतात्मक उद्देश्यों के लिए प्रदान किए गए हैं और सामग्री में सभी सेक्शन नंबर शामिल नहीं हो सकते हैं।
 
-## स्वागत
+## स्वागत और रीकैप
 
-नमस्ते, "Hello Nextflow" प्रशिक्षण पाठ्यक्रम के भाग तीन में आपका स्वागत है।
+नमस्ते, और Hello Nextflow के भाग तीन में वापस स्वागत है। इस भाग को Hello Workflow कहा जाता है, और कोर्स के इस भाग में हम वास्तव में pipeline या workflow नाम को सही ठहराना शुरू करते हैं।
 
-इस अध्याय को "Hello Workflow" कहा जाता है।
+हम अपनी सरल pipeline script को, जिसमें अभी तक एक process है, लेंगे और अतिरिक्त processes जोड़ना शुरू करेंगे और देखेंगे कि Nextflow इस orchestration और pipeline के माध्यम से data flow को कैसे हैंडल करता है।
 
-अध्याय दो में, हमने एक process की एक सरल workflow बनाई थी, लेकिन वास्तविकता में, pipelines उपयोगी होती हैं क्योंकि वे विश्लेषण के कई चरणों को एक साथ जोड़ सकती हैं।
+चलो वापस अपने code spaces पर जाते हैं। तुम देखोगे कि मैंने अपनी सभी .nextflow\* डायरेक्टरीज और work डायरेक्टरीज और सब कुछ साफ रखने के लिए डिलीट कर दी है। चिंता मत करो अगर तुम्हारे पास अभी भी कोर्स के पिछले भागों से वे फ़ाइलें पड़ी हैं।
 
-इस अध्याय में, हम उस प्रारंभिक उदाहरण को लेने जा रहे हैं और इसे थोड़ा और यथार्थवादी बनाने के लिए विस्तारित करेंगे।
+हम hello-workflow.nf नामक फ़ाइल से काम करने वाले हैं। पहले की तरह, यह मूल रूप से उस script को दर्शाता है जिसे हमने अब तक बनाया है, और हमें एक साफ शुरुआती बिंदु देता है। और फिर से, output में नीचे हम देख सकते हैं कि path अब hello_workflow है। तो published फ़ाइलें तुम्हारे results फ़ोल्डर में एक अलग subdirectory में जानी चाहिए।
 
-हम कुछ अतिरिक्त चरण जोड़ने जा रहे हैं और हम देखेंगे कि उन चरणों को जोड़ने के लिए हम channels का उपयोग कैसे करते हैं।
+रीकैप करने के लिए कि हम अब तक कहाँ हैं, हमारे पास यहाँ एक single process है, एक input greeting के साथ, एक output greeting फ़ाइल। और फिर simple Bash script, जो बस एक फ़ाइल में echo कमांड करता है।
 
-हम कई tasks को देखने जा रहे हैं, जो एक single process में समा सकते हैं और हम processes को देखने जा रहे हैं जिनमें कई inputs और कई outputs हो सकते हैं।
+हमारे पास एक single workflow input है, यहाँ params block, जहाँ हम कहते हैं कि यह एक path की उम्मीद कर रहा है, और डिफ़ॉल्ट data/greetings.csv है, जो यह फ़ाइल यहाँ ऊपर है।
 
-ठीक है, चलिए शुरू करते हैं।
+फिर workflow में ही, हमारे पास एक main block है। हम एक चैनल बना रहे हैं। हम CSV को rows में parse कर रहे हैं और फिर प्रत्येक array के पहले element को ले रहे हैं, और हम उस चैनल को उस process में पास कर रहे हैं, जो फिर तीन tasks generate कर रहा है, और हम workflow से, उस process के outputs publish कर रहे हैं।
 
-तो चलिए शुरू करते हैं। पहले की तरह ही। चलिए training.nextflow.io पर जाते हैं। Hello Nextflow, अध्याय तीन। Hello Workflow। और चलिए अपना workspace खोलें। मैंने अपने पिछले अध्यायों से अपनी सभी work files को साफ कर दिया है और मैं Hello Workflow को खोलने जा रहा हूं।
+और फिर अंत में, output block में, हम Nextflow को बता रहे हैं कि इस चैनल से इन फ़ाइलों को hello_workflow नामक डायरेक्टरी में publish करे। और उन फ़ाइलों को soft link करने के बजाय copy करे।
 
-अब यह वही फ़ाइल है जिस पर हम अब तक काम कर रहे थे इसलिए यह परिचित लगनी चाहिए। हमारे पास हमारी say hello process है। हमारे पास हमारी params.greeting अपनी greetings CSV फ़ाइल के साथ है, और हमारे पास नीचे हमारी workflow है, जो उस CSV फ़ाइल को लोड करती है, channel बनाती है और इसे हमारी process में पास करती है।
+## 1. workflow में दूसरा स्टेप जोड़ो
 
-## 0. वार्म-अप: hello-workflow.nf चलाएं
+ठीक है, इस भाग में हम अपने workflow में एक दूसरा process जोड़ने वाले हैं। हम sayHello process के outputs लेंगे, और उन्हें एक दूसरे स्टेप में process करेंगे, जो उन फ़ाइलों के भीतर सभी अक्षरों को convertToUppercase करेगा।
 
-यदि आप चाहें, तो हम इसे आज़मा सकते हैं और दोबारा जांच सकते हैं कि यह हमारी उम्मीद के अनुसार काम कर रहा है। nextflow run hello workflow nf के लिए एक terminal लोड करें और enter पर क्लिक करें।
+यह बस एक silly उदाहरण है, यह फिर से कुछ सरल string processing है, लेकिन यह तुम्हें दिखाता है कि हम workflow के भीतर logic को कैसे ले सकते हैं।
 
-ठीक है, बढ़िया। हमारी तीन processes रन हुईं। हमारे पास अपनी तीन outputs के साथ हमारी results डायरेक्टरी है। Bonjour. Hello. Holà. तो चलिए उन files को बंद करें, terminal को बंद करें, script पर वापस जाएं।
+हम इसके लिए "tr" नामक एक bash कमांड करने वाले हैं, जो translate के लिए short है। यह एक Unix कमांड है जो हमेशा से है। अगर तुम इससे परिचित नहीं हो, तो मैं तुम्हें दोष नहीं देता। मुझे नहीं लगता कि मैंने training से पहले कभी इसका उपयोग किया था, लेकिन तुम इसे terminal पर बहुत जल्दी try कर सकते हो। अगर मैं "echo 'hello world'" करूँ और फिर 'tr' में pipe करूँ और फिर quotes में तुम character range कहो, तो A से Z, lowercase, और फिर तुम A से Z uppercase करना चाहते हो। और यह बस कहता है, इन अक्षरों को इन अक्षरों में translate करो।
 
-## 1. workflow में दूसरा चरण जोड़ें
+और जब मैं enter दबाता हूँ, तुम देख सकते हो कि यह अब सब कुछ capitalize कर चुका है। बहुत अच्छा अगर तुम्हें लोगों पर चिल्लाना पसंद है।
 
-ठीक है। हमारे उदाहरण के लिए, हम बुनियादी बने रहेंगे और हम domain agnostic रहने की कोशिश कर रहे हैं। तो हमारी दूसरी process बस इन strings, इन शब्दों को एक सरल तरीके से manipulate करने जा रही है। हम इन files को लेने और उन्हें सभी uppercase बनाने के लिए translate Unix कमांड का उपयोग करने जा रहे हैं। हम "tr" कमांड के साथ ऐसा करते हैं।
+तो यह bash कमांड की एक बहुत सरल शैली है जिसे हम अपने दूसरे process में उपयोग करने वाले हैं।
 
-## 1.1. uppercasing कमांड परिभाषित करें और इसे terminal में टेस्ट करें
+## 1.2. uppercasing स्टेप को Nextflow process के रूप में लिखो
 
-हम इसे बस bash terminal में आज़मा सकते हैं, और देख सकते हैं कि क्या यह काम करता है। तो आप echo करें, Hello World, और फिर इसे pipe character के साथ tr पर पास करें, और हम इसे एक recognition pattern देते हैं, a से z और इसे क्या translate करना चाहिए। A से Z uppercase में।
+तो अगर मैं अपनी script पर वापस जाता हूँ, मैं थोड़ा चीट करने जा रहा हूँ और training के docs से कोड कॉपी करूँगा। लेकिन तुम बिल्कुल देख सकते हो कि क्या हो रहा है।
 
-यह बहुत सरल है क्योंकि यह शाब्दिक रूप से A से Z characters कर रहा है। तो यह किसी भी चीज़ पर काम नहीं करेगा जो accented है या ऐसा कुछ भी है। लेकिन उदाहरण के उद्देश्यों के लिए, आपको तस्वीर मिल जानी चाहिए।
+हमारे पास यहाँ एक नया process है। इसे हमने convertToUpper कहा है, लेकिन हम इसे जो चाहें कह सकते हैं।
 
-enter दबाने जा रहा हूं और यह terminal पर प्रिंट करता है, HELLO WORLD capitals में। और बस पहले की तरह, हम चाहें तो इसे एक फ़ाइल में redirect कर सकते हैं। Outfile.
+हमारे पास एक single input path है, जैसा कि हमने पहले किया था। यह एक value चैनल नहीं है, यह एक path चैनल है। और फिर एक single output।
 
-ठीक है। चलिए इसे साफ करें।
+script block में हम input फ़ाइल पर "cat" करते हैं। और हम इसे squiggly brackets में रख सकते हैं अगर हम चाहें। और जो उस variable को लेता है। और हम उसी bash कमांड को pipe में चलाते हैं और हम परिणाम को इस फ़ाइल नाम के साथ एक फ़ाइल में लिखते हैं, और वह output path द्वारा pick up होता है।
 
-## 1.1. uppercasing step को Nextflow process के रूप में लिखें
+अब हमें इस नए process के साथ कुछ करने की आवश्यकता है। तो हम workflow में जाने वाले हैं जहाँ हम एक workflow के विभिन्न logic को build करते हैं, और उस पहले process के बाद, हम अपना दूसरा process चलाने जा रहे हैं। तो convertToUpper यहाँ process का नाम है।
 
-चलिए अपनी script पर वापस जाएं और इस bash कमांड को handle करने के लिए एक नई process लिखें। मैं पिछली process को copy करने जा रहा हूं, इसे नीचे paste करूंगा, और इसे convert to upper कहूंगा। Uppercase के लिए। मैं वही publishDir results का उपयोग करने जा रहा हूं, लेकिन मैं यहां कुछ बदलाव करने जा रहा हूं। val लेने के बजाय, मैं एक path input फ़ाइल लेने जा रहा हूं, और मेरे पास यहां एक prefix upper होगा, ताकि हमारी output files आउटपुट को clobber न करें। और मैं input से variable name का उपयोग करने जा रहा हूं। और फिर मैं यहां नीचे एक script बदलने जा रहा हूं, और इसके बजाय मैं input फ़ाइल पर cat का उपयोग करने जा रहा हूं और जैसे हमने Bash TR में किया था, a-z, upper input file .txt। ठीक है, चलिए save पर क्लिक करें।
+यह एक input लेता है इसलिए हम इसे अकेले नहीं बुला सकते। हम पहले process के output को process करना चाहते हैं। तो जैसे हमने इसके साथ किया, sayHello out जहाँ हम उन results को publish कर रहे हैं। हम उन्हीं results को यहाँ input के रूप में उपयोग करना चाहते हैं, इसलिए हम उन्हें copy कर सकते हैं और उन्हें वहाँ डाल सकते हैं।
 
-## 1.2. workflow block में नई process को कॉल जोड़ें
+हम sayHello process ".out" चाहते हैं, और Nextflow जानता है कि इसका मतलब यहाँ एक simple single output record है, जो यह फ़ाइल है। तो वह फिर एक दूसरे process को input के रूप में pass किया जाएगा।
 
-अब यदि मैं नीचे scroll करूं, तो हमें वास्तव में इस process को call करने की आवश्यकता है। बस script में process जोड़ना पर्याप्त नहीं है। हमें Nextflow को बताना होगा कि हमें इस process को चलाने की आवश्यकता है और इसे कहां करना है।
+## 1.5. workflow output publishing सेट करो
 
-तो मैं यहीं जा रहा हूं, convert to upper और
+ठीक है। और अंत में, ताकि हम वास्तव में इस दूसरे process के results को save करें, हमें उन्हें workflow से भी publish करने की आवश्यकता है, और फिर उन्हें output block में define करना है, पहले जैसा ही syntax। तो हम इसे copy कर सकते हैं और second outputs कह सकते हैं, या जो भी तुम इसे कहना चाहते हो।
 
-ठीक है, हमें यहां एक error मिल रही है जो कहती है कि यह एक argument की उम्मीद करती है। निश्चित रूप से, हमें इस process को कुछ पास करने की आवश्यकता है ताकि इसके पास वास्तव में कुछ करने के लिए हो।
+उस process का नाम लो जिसमें हम रुचि रखते हैं, convertToUpper out, और फिर यहाँ नीचे output block में। इसे add करो और हम यहाँ same attributes कर सकते थे। तो हम भी चाहते हैं कि ये फ़ाइलें Hello Workflow subdirectory में हों, और हम भी उन्हें copy करना चाहते हैं।
 
-## 1.3. पहली process के output को दूसरी process में पास करें
+बढ़िया। चलो इसे चलाने की कोशिश करते हैं। तो अगर मैं terminal लाता हूँ और मैं "nextflow run hello-workflow.nf" करता हूँ, और हम देखेंगे कि यह क्या करता है। देखते हैं कि क्या यह पिछले भागों से अलग दिखता है।
 
-हम जो करने जा रहे हैं वह है हम इस process से output लेने जा रहे हैं। तो मैं name लेता हूं, say hello, और जब मैं dot out करता हूं।
+तो यह Nextflow launch करता है। docs में, यह "-resume" के साथ करने के लिए कहता है, लेकिन मैंने अपनी सभी work डायरेक्टरी delete कर दी थी, इसलिए यहाँ कोई फर्क नहीं पड़ता। लेकिन अगर तुमने किया होता, तो वह भी काम करेगा।
 
-इस तरह के एक सरल उदाहरण के लिए, जहां हमारे पास एक process है जिसमें बस एक output है और हम इसे एक नई process में पास कर रहे हैं, तो इसमें एक input है जो हमें चाहिए होना चाहिए। तो मैं save पर क्लिक करने जा रहा हूं, terminal लाऊंगा, और चलिए इसे फिर से चलाने की कोशिश करते हैं।
+और यह लगभग बिल्कुल same दिखता है। लेकिन तुम अब देख सकते हो कि यहाँ output की एक दूसरी line है, जहाँ तुम उस दूसरे process का नाम देख सकते हो जिसे हमने अभी जोड़ा है। और वास्तव में, तुम देख सकते हो कि यह तीन बार successfully चला।
 
-## 1.4. workflow को फिर से चलाएं
+शानदार। अगर मेरी पिछली work डायरेक्टरीज आसपास होतीं और मैंने यह "-resume" के साथ किया होता, तो ये pipeline में बस पहले स्टेप को cached किया गया होता। क्योंकि वे outputs बिल्कुल same थे, इसलिए Nextflow जानता होता कि उन्हें फिर से reuse करना है।
 
-अब, मैंने पिछली बार जब मैंने यह workflow चलाई थी तब से अपनी work डायरेक्टरी को साफ नहीं किया है। मैं इसे फिर से चलाने जा रहा हूं और मैं इसे एक अवसर के रूप में उपयोग करने जा रहा हूं यह दिखाने के लिए कि partial caching कैसे काम करती है। तो यदि मैं single dash resume करता हूं। उम्मीद है कि यह उस पहली process से outputs का पुन: उपयोग करना चाहिए, जो पिछली बार मैंने चलाए के बिल्कुल समान थे। लेकिन अब हमारे पास यहां एक नई process है जो पहले नहीं चली है, जो scratch से चलती है। और निश्चित रूप से, आप देख सकते हैं कि पहली process ने cache outputs का उपयोग किया, और दूसरे output ने तीन में से तीन चलाए। आप यह भी देख सकते हैं कि हमारे पास अब अपनी दोनों processes हैं, हमारी पहली process, say hello, तीन बार चली, और हमारी दूसरी process convert to upper तीन बार चली।
+और इसलिए तुम देख सकते हो कि तुम -resume का उपयोग करके अपने workflow को iteratively कैसे build कर सकते हो, step by step, अगर तुम्हें ज़रूरत हो।
 
-यदि मैं इसे फिर से चलाता हूं, एक reminder के रूप में, -ansi-log false के साथ, हमें देखना चाहिए कि छह अलग-अलग process tasks चलीं उनमें से प्रत्येक के लिए तीन। तो यह बिल्कुल वही कर रहा है जो हमने उम्मीद की थी। पहली process तीन बार चल रही है, उन outputs को दूसरी process पर पास कर रही है, जो फिर तीन बार चल रही है।
+ठीक है, चलो यहाँ ऊपर results डायरेक्टरी में देखते हैं और देखते हैं कि क्या यह काम किया। हम देख सकते हैं कि हमारे पास यहाँ ऊपर कुछ और फ़ाइलें हैं। हमें हमारी पहले जैसी original फ़ाइलें मिली हैं पहले process से। और वास्तव में, हमारे पास हमारी upper फ़ाइलें हैं और अक्षर सभी uppercase हैं, इसलिए यह काम कर गया। यह देखना वास्तव में अच्छा है।
 
-तो चलिए work डायरेक्टरी के अंदर देखते हैं और देखते हैं कि Nextflow इन file inputs को कैसे handle कर रहा है। यदि मैं दूसरी process से इस hash डायरेक्टरी को यहां लेता हूं तो हम इन files को देखने के लिए फिर से -a के साथ tree कमांड का उपयोग कर सकते हैं। आप यहां देख सकते हैं कि हमारे पास हमारी input फ़ाइल है, जो Bonjour-output.txt फ़ाइल है, और वह वास्तव में एक symlink है। यही वह है जो यह arrow हमें दिखा रहा है, और यह पिछली work डायरेक्टरी में फ़ाइल की ओर इशारा कर रहा है।
+इन work डायरेक्टरीज के अंदर check करना भी दिलचस्प है। पहले की तरह, यहाँ hash work डायरेक्टरीज से मेल खाता है। तो अगर मैं "ls work" में देखता हूँ, और फिर उसे expand करता हूँ, तो हम यहाँ विभिन्न फ़ाइलें देखेंगे।
 
-यह समझ में आता है। Nextflow अपनी स्वयं की encapsulated डायरेक्टरी में प्रत्येक कार्य के execution को handle करता है, इसलिए यह पूरी तरह से self enclosed है। हालांकि, इसे input के रूप में पिछले चरणों से files प्रदान करने की आवश्यकता है। उन files को प्राप्त करने के लिए work डायरेक्टरी के बाहर पहुंचने के बजाय, Nextflow उन्हें work डायरेक्टरी में stages करता है।
+हम पहले process से output फ़ाइल देखते हैं, जिसे यहाँ input के रूप में pull किया गया है। और हम नई output फ़ाइल देख सकते हैं जो generate की गई थी।
 
-यदि हमारे पास यहां जैसी shared file system है, तो यह एक symlink का उपयोग करके ऐसा करता है ताकि यह किसी अतिरिक्त file space का उपयोग न करे। यदि हम विभिन्न स्थानों में buckets के साथ cloud storage का उपयोग करते हैं, तो यह उन files को fetch करेगा और वास्तव में उन्हें work डायरेक्टरी में copy करेगा।
+अब अगर मैं "-la" के साथ list करने और सभी फ़ाइलें दिखाने के लिए यह करता हूँ, तो हम कुछ और चीजें देखेंगे। सबसे पहले, तुम देखोगे कि यह फ़ाइल वास्तव में पहले process के लिए एक soft link है। यह मूल रूप से हमेशा एक soft link है अगर यह हो सकता है, फ़ाइल स्पेस बचाने के लिए। हम यहाँ फ़ाइलों को publish नहीं कर रहे हैं और यह बस उस फ़ाइल को पहले task से दूसरे task में reference करता है ताकि सब कुछ उस एक working डायरेक्टरी के भीतर encapsulate हो, और बाकी सब चीजों से safe और isolated हो।
 
-चलिए command sh फ़ाइल पर एक नज़र डालते हैं। यदि मैं code work, command sh करता हूं, तो आप देख सकते हैं, निश्चित रूप से, यह local डायरेक्टरी से उस फ़ाइल तक पहुंच रहा है। तो सब कुछ बहुत self-contained और clean है।
+और यह वहाँ होना चाहिए क्योंकि अगर हम .command.sh फ़ाइल को देखें, तो अगर मैं "cat work/b8/56\*" करता हूँ, तो तुम देख सकते हो कि, यहाँ फ़ाइल parts relative हैं, तो यह उस input फ़ाइल को cat कर रहा है, जिसे उसी working डायरेक्टरी में soft linked किया गया है।
 
-हम results डायरेक्टरी की भी जांच कर सकते हैं और सुनिश्चित कर सकते हैं कि ये files ठीक से output हुईं। और निश्चित रूप से, results में, हम पहली process से सभी output files और दूसरी से सभी output files देख सकते हैं। और वे सभी uppercase में हैं जैसा हमने उम्मीद की थी।
+तो हर work डायरेक्टरी ऐसी ही दिखेगी। जब तुम Nextflow में देखते हो, तो तुम्हारे पास वहाँ सभी input फ़ाइलें उस work डायरेक्टरी में staged होंगी। और फिर तुम्हारे पास कोई भी output फ़ाइलें भी होंगी जो बनाई गई थीं। तो यह बढ़िया है। वह ऐसा दिखता है जैसा हम उम्मीद करते हैं।
 
-यहीं पर Nextflow की शक्ति चमकने लगती है। कुछ बहुत न्यूनतम code के साथ और Nextflow ने इन tasks के parallel में execution को clean encapsulation के साथ अलग work directories के भीतर और input और output files की staging और file publishing सभी स्वचालित रूप से हमारे लिए बस out of the box में handle किया। तो आप देख सकते हैं कि जैसे-जैसे हम अपनी analysis workflows की जटिलता को scale करते हैं, यह functionality वास्तव में, वास्तव में मूल्यवान है।
+## 2.1. collection कमांड define करो और terminal में test करो
 
-## 2. सभी greetings को collect करने के लिए तीसरा चरण जोड़ें
+ठीक है, चलो अपने workflow पर वापस जाते हैं। अगला स्टेप क्या है जो हम करना चाहते हैं?
 
-ठीक है। ये steps one-to-one थे। हमारे पास पहली process से एक output था जो दूसरी process के लिए एक input में जा रहा था। इसके बाद, हम बात करने जा रहे हैं कि इन विभिन्न outputs को एक single process कार्य में कैसे collect किया जाए, जो फिर से, करने के लिए एक बहुत ही सामान्य बात है। तो चलिए जल्दी से terminal लाते हैं और इसका एक dry run करते हैं।
+हमारे पास अब दो processes हैं और वे इस एक CSV फ़ाइल को ले रहे हैं, उसे parse कर रहे हैं और split कर रहे हैं। और फिर हम इन प्रत्येक processes के लिए तीन tasks रखते हैं और Nextflow इन सभी की parallelization को handle करता है, इसलिए यह सब side by side चलता है जहाँ संभव हो।
 
-## 2.1. collection कमांड परिभाषित करें और इसे terminal में टेस्ट करें
+काम को parallel में चलाने के लिए split करने का यह तरीका बहुत सामान्य है। और उसका inverse फिर सब कुछ वापस gather करना है। तो हम अपने workflow में अपने अंतिम process के साथ यही करने वाले हैं, हमारे पास यहाँ एक तीसरा होगा, जो इन तीन अलग-अलग outputs को लेता है और उन सभी को एक single फ़ाइल में combine करता है।
 
-मैं cheat करने जा रहा हूं और प्रशिक्षण सामग्री से example bash code को copy करूंगा और बस enter दबाऊंगा।
+हम यह terminal में काफी simply कर सकते हैं, बस यह महसूस करने के लिए कि यह कैसा दिखेगा।
 
-हम यहां देख सकते हैं कि हमने इस echo कमांड को तीन अलग-अलग output files के लिए तीन बार चलाया, जिसे मैं यहां देख सकता हूं। और फिर इन तीन अलग-अलग files में से प्रत्येक के output को print करने के लिए cat कमांड का उपयोग किया, और उसे एक single collected फ़ाइल में redirect किया।
+अगर मैं results फ़ोल्डर में जाता हूँ। तो, "cd results/hello_workflow/", और हमारे पास यहाँ सभी UPPER फ़ाइलें हैं। मैं बस "cat" का उपयोग कर सकता हूँ, जिसका उपयोग हम उस फ़ाइल की contents को print करने के लिए करते हैं, और तुम "cat" को multiple फ़ाइलें दे सकते हो और यह एक के बाद एक पढ़ेगा।
 
-और यदि मैं "cat COLLECTED-output" करता हूं, तो आप देख सकते हैं कि इसमें उन तीन अलग-अलग files की contents हैं, अब एक single फ़ाइल में।
+तो मैं "UPPER-\*" कह सकता हूँ, जो मुझे Bash expansion के साथ तीन फ़ाइल नामों की same list देता है। और मैं combined.txt कह सकता हूँ। मुझे लगता है कि docs में, यह exact फ़ाइल नाम list करता है, लेकिन यह same चीज़ कर रहा है।
 
-## 2.2. collection step करने के लिए एक नई process बनाएं
+अब, अगर मैं "cat combined.txt" का उपयोग करता हूँ, तो हम देख सकते हैं कि हमारे पास उन तीनों फ़ाइलों की फ़ाइल contents हैं।
 
-तो चलिए देखते हैं कि क्या हम अपनी Nextflow pipeline के भीतर वही चीज़ replicate कर सकते हैं।
+तो मूल रूप से यह process यही करने वाला है कि हम उसे एक previous process से सभी अलग-अलग output फ़ाइलें एक single process task में देने की कोशिश करने जा रहे हैं, और फिर हम उन्हें "cat" करके एक साथ जोड़ने जा रहे हैं और output फ़ाइल को save करेंगे।
 
-चलिए ऊपर scroll करें और एक तीसरी process बनाएं। मैं इस पिछले वाले को copy करने जा रहा हूं, और इस बार मैं इसे Collect Greetings कहने जा रहा हूं।
+## 2.2. collection स्टेप करने के लिए एक नया process बनाओ
 
-bash terminal में, हमने इसे collected output txt कहा था। तो मैं यहां same path output कहने जा रहा हूं। और मैं यहां redirection करने जा रहा हूं, इसलिए यह उसी तरह से save हो जाती है।
+ठीक है, तो चलो अपना नया process add करते हैं। मैं इसे training सामग्री से paste करने वाला हूँ, और तुम देख सकते हो कि इसने हमें इन question marks के साथ reader के लिए थोड़ा exercise छोड़ा है। लेकिन तुम process की सामान्य outline देख सकते हो मूल रूप से वही है जो हमने अभी terminal में किया था, जहाँ हम input फ़ाइलों के एक bunch का "cat" कर रहे हैं और इसे collected नामक एक output फ़ाइल में लिख रहे हैं, और फिर output फिर से उस single path की उम्मीद करता है।
 
-ठीक है। हमें उस कमांड की शुरुआत में जो होता है उसे बदलने की आवश्यकता है, और हमें सोचना होगा कि यहां input फ़ाइल क्या है। वास्तव में, यह process कई input files लेने जा रही है। मैं path रखने जा रहा हूं और मैं इसे एक नए variable input files में बदलने जा रहा हूं, plural।
+तो हमें यहाँ किसी प्रकार के input की आवश्यकता है और वे paths का एक set होने वाले हैं। तो फिर से, हम एक input path चैनल define करते हैं और चलो इसे input_files कहते हैं। अब, इसने हमें पहले यहाँ एक single path दिया है, लेकिन एक path में यहाँ multiple फ़ाइलें भी हो सकती हैं, भले ही यह अभी भी एक single declaration है।
 
-फिर मैं फिर से, उन्हें cat करूंगा जैसे हमने अपनी bash script में किया था। और मैं यहां variable का उपयोग करने जा रहा हूं।
+मैं इसे यहाँ नीचे copy करने वाला हूँ क्योंकि हम इन फ़ाइलों को "cat" करना चाहते हैं। और तुम सोच सकते हो कि हमें यहाँ array print करने या इस तरह की चीजों के साथ कुछ issues हैं, लेकिन Nextflow आम तौर पर इस मामले में काफी sensible है। और अगर इसे इस तरह multiple फ़ाइलों के साथ एक चैनल दिया जाता है, तो यह, उन सभी को space separators के साथ एक साथ रखेगा। तो यह हमें सही syntax देगा।
 
-अब, आप सोच सकते हैं कि यह काम नहीं करेगा। हमने पहले failures देखी हैं जहां strings की एक array या paths की एक array को एक process में पास किया गया था और इससे error हुई थी। लेकिन वास्तव में, यहां Nextflow इसे स्वचालित रूप से सही तरीके से हमारे लिए handle करने जा रहा है। यह कई अलग-अलग input files लेने जा रहा है, और यह बस यहां विभिन्न file paths को print करने जा रहा है।
+यह बढ़िया है। तो अब चलो अपने नए process को wire up करते हैं। मैं workflow में जाता हूँ। मैं outputs को combine करने जा रहा हूँ, नया process नाम, और बस पहले की तरह। मैं इस previous process को लूँगा, convertToUpper और ".out" करूँगा।
 
-बेशक यह मदद करता है कि cat कमांड इस तरह file names की एक series ले सकती है। यदि मैं एक अलग कमांड का उपयोग कर रहा था जिसे प्रत्येक file path से पहले एक argument की आवश्यकता थी या कुछ और, तो हमें यहां थोड़ा और अधिक code और logic रखना होगा ताकि इन file paths की iteration को handle करने में सक्षम हो सकें। लेकिन इस मामले में, यह बस काम करना चाहिए।
+बढ़िया। चलो इसे try करते हैं और देखते हैं कि क्या यह terminal में काम करता है। अगर मैं बस कुछ डायरेक्टरीज ऊपर जाता हूँ और फिर Nextflow कमांड rerun करता हूँ, और हम देखेंगे कि क्या होता है।
 
-## 2.3. workflow में collection step जोड़ें
+तो workflow launch हो गया है और अब तुम देख सकते हो कि हमारे पास तीन अलग-अलग process नाम हैं, जो बढ़िया है। पहले दोनों पहले जैसे ही दिखते हैं, और तीसरा नया चलता है, जो अच्छा है।
 
-ठीक है, चलिए workflow पर नीचे जाएं और अपनी नई process जोड़ें। Collect greetings। और फिर से, चलिए convert to upper out से output लेते हैं। चलिए इसे save करें।
+हालाँकि, यहाँ कुछ अजीब है। हम उन output फ़ाइलों को एक single फ़ाइल में combine करना चाहते थे, और फिर भी इस process को हम देख सकते हैं कि तीन बार चला है, एक बार नहीं।
 
-इसे एक try दें। nextflow run hello workflow.
+वास्तव में, अगर हम इन work डायरेक्टरीज में से एक में जाते हैं। और "cat work/" "collected" करते हैं, तो हम देखेंगे। यहाँ केवल एक single शब्द है, तीन नहीं।
 
-ठीक है, workflow चली, लेकिन कुछ अजीब है यहां। हमें पहले चरण के तीन executions मिले हैं, जिसकी हम उम्मीद करते हैं। दूसरे के लिए तीन tasks, लेकिन हमारे पास अंत में तीन tasks भी हैं जब हम यहां केवल एक single कार्य की उम्मीद करते थे जो सभी outputs को merge कर रहा था।
+और इसलिए जो हुआ है वह यह है कि Nextflow ने उस parallelization को जारी रखा है जैसे उसने पिछले steps में किया था। और इस process ने हमें तीन elements के साथ एक चैनल दिया, और वे तीन चैनल elements हमारे downstream process को pass किए गए, जिसने तीन process tasks generate किए।
 
-यदि हम अपनी results डायरेक्टरी में जाते हैं। हम यह भी देखते हैं कि collected output में तीनों के बजाय केवल एक single value है। ऐसा इसलिए है क्योंकि वह output फ़ाइल तीन अलग-अलग values के साथ तीन बार overwrite की गई थी।
+यह मूल रूप से तीन अलग बार collect करने की कोशिश की और हर बार उसके पास बस एक single फ़ाइल थी, इसलिए यह बस एक output में single फ़ाइल को cat किया, और वास्तव में, हम .command.sh फ़ाइल में भी देख सकते हैं।
 
-यह समझ में आता है क्योंकि हमने यहां एक output को एक input में उसी तरह पास किया जैसे हमने पिछले चरण में किया था।
+अगर मैं .command.sh करता हूँ, तो हम देख सकते हैं कि यहाँ बस एक single फ़ाइल नाम है और केवल एक single फ़ाइल को उस working डायरेक्टरी में staged किया गया था।
 
-## 2.4. greetings को एक single input में collect करने के लिए एक operator का उपयोग करें
+## 2.3. workflow में collection स्टेप add करो
 
-तो हमें यहां एक operator की आवश्यकता है जो इस channel को तीन elements के साथ लेगा और उन्हें एक single element में collapse करेगा, ताकि वह final process केवल एक बार चले।
+तो किसी तरह हमें Nextflow को बताने की ज़रूरत है कि एक previous process से उन सभी outputs को एक साथ लाए और उन्हें इस downstream process को एक single चैनल element के रूप में दे, तीन के बजाय।
 
-ऐसा करने के लिए, हम collect operator का उपयोग करने जा रहे हैं। मैं workflow के भीतर सीधे ऐसा कर सकता हूं। मैं .out कर सकता हूं और यहां अंत में एक operator पर chain कर सकता हूं .collect.
+हम यह _collect_ नामक एक चैनल ऑपरेटर के साथ करते हैं।
 
-save दबाएं। और फिर इस प्रशिक्षण के उद्देश्यों के लिए, मैं कुछ view operators भी करने जा रहा हूं जैसे हमने पहले किया था, ताकि हम collect operator का उपयोग करने से पहले और बाद में इस channel पर एक नज़र डाल सकें, ताकि हम समझ सकें कि क्या हो रहा है।
+यह एक बहुत useful ऑपरेटर है, जिसे तुम Nextflow pipelines में हर समय देखोगे। यह यहाँ एक चैनल है, यह output चैनल, बिल्कुल वही जो हमने ऊपर बनाया था। और इसलिए हम चैनल ऑपरेटरों को इसमें append कर सकते हैं जैसे हमने पहले किया था। हम बस dot कर सकते हैं, और फिर इस मामले में, collect, brackets।
 
-मैं इस channel को लेने जा रहा हूं, collect से छुटकारा पाऊंगा और dot view greetings करूंगा, और फिर मैं इस line को duplicate करूंगा, collect operator जोड़ूंगा। और उसे after में बदलूंगा।
+और बस इतना ही। यह फिर इस process में pass होने से पहले इस चैनल को manipulate करेगा।
 
-यह अलग है जहां हम इसे call कर रहे हैं, लेकिन यह ठीक है क्योंकि हम same output channel पर same operator calls का उपयोग कर रहे हैं।
+अगर तुम देखना चाहते हो कि इसका क्या हो रहा है, तो हम इसे यहाँ view भी कर सकते हैं। तो यहाँ, यह इस process को चलाने से बिल्कुल भी related नहीं है, इसलिए मैं इसे उस process को चलाने के बाद किसी भी बिंदु पर रख सकता हूँ। लेकिन हम same, output चैनल लेते हैं, और हम इसे .view के साथ देख रहे हैं, और फिर हम इसे .collect.view के साथ फिर से देख रहे हैं।
 
-ठीक है, चलिए save दबाएं और चलिए इसे terminal में आज़माएं। lgoing nextflow run करने जा रहा हूं। Hello, workflow। हमारी script फिर से चलाएं।
+और जब हम यह चलाते हैं, तो यह हमें उस चैनल की दो अलग-अलग structures दिखाएगा, collect से पहले और बाद में। तो चलो अब इसे try करते हैं। ठीक है, मैंने थोड़ा zoom out किया है क्योंकि कुछ outputs काफी लंबे हैं, लेकिन अगर मैं pipeline चलाता हूँ, तो हम देखेंगे कि क्या यह काम करता है।
 
-ठीक है। यह बेहतर लग रहा है। पहले की तरह हम देख सकते हैं कि पहली दो processes तीन बार चलीं और अब हमारी final process केवल एक बार चली।
+मैं आशा कर रहा हूँ कि एक तीसरा process सिर्फ एक बार चलेगा, क्योंकि यह outputs को collect कर रहा है और वास्तव में, तुम देख सकते हो कि collectGreetings तीन में से एक है। तो यह बस एक task चला।
 
-यदि हम देखें कि view operator द्वारा क्या print किया गया था, यहां नीचे, हमने collect से पहले कहा, जो यहां यह output है, और वह तीन बार print हुआ है। और आप देख सकते हैं कि उनमें से प्रत्येक के लिए एक single path है। और फिर collect के बाद, आप देख सकते हैं कि हमारे पास तीन paths की यह array है। तो यह जैसी हमने उम्मीद की थी वैसी है।
+और फिर अगर हम view statements को देखें, तो हमारे पास पहले के तीन elements के लिए तीन view statements हैं, प्रत्येक में एक फ़ाइल path के साथ।
 
-ठीक है, चलिए results फ़ाइल की जांच करें और देखें कि क्या यह इस बार हमारी उम्मीद के अनुसार है। निश्चित रूप से, अब फ़ाइल में तीन lines हैं - वह सफलतापूर्वक इन तीन outputs को एक single output फ़ाइल में concatenate कर दी। शानदार।
+और फिर उस collect statement के बाद, यह सिर्फ एक बार triggered हुआ क्योंकि उस चैनल में एक single element है। और अब हमारे पास तीन अलग-अलग फ़ाइल paths की यह, list है।
 
-ठीक है, मैं clean up करने जा रहा हूं और चलिए अगले चरण पर जाते हैं। और मैं इन view statements को हटाने जा रहा हूं बस चीजों को clean रखने के लिए।
+यह बिल्कुल वही है जो हम चाहते थे। और तुम देख सकते हो उम्मीद है, यह मूल रूप से उस "map" ऑपरेटर का inverse है जो हमने CSV arrays से अलग चैनल elements में जाने के लिए किया था। अब हम अलग चैनल elements ले रहे हैं और उन्हें एक single array में वापस रख रहे हैं।
 
-## 3. final output फ़ाइल को uniquely नाम देने के लिए एक process को एक से अधिक input पास करें
+बढ़िया, हम इन view statements को clear कर सकते हैं। हमें इनकी अब ज़रूरत नहीं है। हम अगले स्टेप पर जा सकते हैं।
 
-ठीक है। अब तक, हमारी सभी processes ने केवल एक single input लिया है। अब हम एक अभ्यास करने जा रहे हैं जहां हम एक process में एक से अधिक input जोड़ते हैं यह देखने के लिए कि यह कैसे काम करता है। ऐसा करने के लिए, हम इस collect greetings example का उपयोग करने जा रहे हैं।
+इससे आगे बढ़ने से पहले, और भूलने से पहले, मैं यहाँ एक नया publish statement add करने वाला हूँ। Third output। तुम इसे अपने workflow में कुछ अधिक semantic और descriptive कह सकते हो। और फिर मैं इसे output block में फिर से add करूँगा और कहूँगा path 'hello_workflow' mode 'copy'। बस ताकि इस process द्वारा generate की गई output फ़ाइल यहाँ ऊपर हमारे results फ़ोल्डर में save हो जाए।
 
-हर बार जब मैंने workflow चलाई, तो यह results डायरेक्टरी में उस फ़ाइल को overwrite कर दी, जो शायद हम नहीं चाहते हैं।
+बस जल्दी से double check करने के लिए कि यह काम करता है। अब थोड़ा cleaner होना चाहिए क्योंकि हमारे पास वे view statements नहीं हैं। और, हम देखेंगे कि क्या हमें यहाँ ऊपर हमारी नई output फ़ाइल मिलती है। एक, एक task चला, collected नामक एक नई फ़ाइल मिली, और अब हमारे पास वे तीनों शब्द हैं। शानदार। आगे क्या है?
 
-## 3.1. output फ़ाइल के लिए user-defined name स्वीकार करने के लिए collector process को संशोधित करें
+## 3. process को अतिरिक्त पैरामीटर pass करो
 
-तो इस उदाहरण के लिए, हम एक अतिरिक्त पैरामीटर पास करने जा रहे हैं ताकि हम output फ़ाइल के name को customize कर सकें।
+ठीक है। अब हम एक single process में multiple inputs को handle करना देखने वाले हैं। अब तक तुम देख सकते हो कि हमारे सभी processes बस एक चीज़ को input के रूप में ले रहे हैं। उन सभी के input के नीचे एक single line है।
 
-एक process में दूसरा input जोड़ना बहुत सरल है। मैं बस input block में दूसरी line जोड़ता हूं। इस बार यह एक value होने जा रहा है, path के बजाय, क्योंकि हम एक string पास करना चाहते हैं और मैं इसे batch underscore name कहने जा रहा हूं।
+हम यह demonstrate करने जा रहे हैं कि Nextflow को एक अलग batch identifier specify करने की अनुमति दें ताकि शायद तुम यह, workflow कई बार चला सको और तुम हर बार एक अलग batch ID दे सको।
 
-अब मैं इस variable का उपयोग script block में कर सकता हूं, और मैं collected dash dollar batch name कहने जा रहा हूं।
+मैं यहाँ collectGreetings के input में बस एक दूसरी line add करने वाला हूँ। और मैं इसे "val" कहने वाला हूँ, क्योंकि यह एक string है। अब यह एक value है, path नहीं, और मैं इसे "batch_name" कहने वाला हूँ।
 
-मैं यहां variable name के आसपास squiggly brackets का उपयोग कर रहा हूं। यह बस इसे string के बाकी हिस्सों से अलग रखने के लिए है, और शायद इस मामले में इसकी आवश्यकता नहीं है, लेकिन मुझे लगता है कि यह इसे पढ़ना आसान बनाता है।
+फिर मैं इस variable का उपयोग करने के लिए यहाँ नीचे script को edit करने वाला हूँ, और मैं इसे training material में उसी स्थान पर डालने की कोशिश करूँगा। तो मैं इसे इस फ़ाइल path COLLECTED-$\{batch_name\}-output के बीच में डालता हूँ।
 
-ठीक है। अंत में, output path को update करना याद रखें क्योंकि अब फ़ाइल का name बदल गया है, तो मैं वही चीज़ करने जा रहा हूं और batch name को output of path में उम्मीद के अनुसार रखूंगा।
+अभी पूरा नहीं हुआ। याद रखो कि हमें Nextflow को बताना होगा कि output फ़ाइल नाम क्या होने जा रहे हैं। तो हमें यहाँ ऊपर भी same चीज़ करनी होगी: COLLECTED-$\{batch_name\}-output.txt"।
 
-## 3.2. batch command-line पैरामीटर जोड़ें
+शानदार। Nextflow अब एक दूसरा variable input प्राप्त कर रहा है और यह उसे script और output में interpolate कर रहा है।
 
-अब हमें कहीं से एक batch name पास करने की आवश्यकता है, और मैं ऐसा करने के लिए एक दूसरा पैरामीटर बनाने जा रहा हूं ताकि हम इसे command line पर कर सकें जब हम workflow चलाएं।
+एक आखिरी चीज़, अब हमें पता लगाना होगा कि इसे कहाँ call किया जा रहा है, और हमें process को दूसरा input pass करना होगा। यह किसी भी अन्य भाषा में किसी भी अन्य function में input की तरह है।
 
-तो मैं params batch name करने जा रहा हूं, और by default, चलिए इसे test batch कहते हैं। अब मैं इस special parameters variable को नीचे उपयोग कर सकता हूं, जहां हम process को call करते हैं।
+जैसे हमने training में पहले किया था, मैं यहाँ special "params" का उपयोग करने जा रहा हूँ, और हम इसे "params.batch" कहने वाले हैं ताकि हमारे पास -- batch CLI option हो सके। और अब तुम देख सकते हो कि यहाँ हमारे process में दो अलग inputs हैं बस comma separated, जो pass किए जा रहे हैं।
 
-और निश्चित रूप से VS Code हमें बता रहा है कि अब इस process के लिए पर्याप्त arguments नहीं हैं, और यह दूसरे input की उम्मीद करती है।
+order को सही प्राप्त करना वास्तव में महत्वपूर्ण है, इसलिए यहाँ चैनल के लिए arguments का order और फिर param match करना चाहिए। यहाँ, चैनल और batch name। यह सिर्फ positional matching है।
 
-बस comma करें और हमारे नए variable को पास करें और error चली जाती है।
+ठीक है। मैं अब सीधे --batch के साथ इस pipeline को चला सकता हूँ, लेकिन चलो पहले सही चीज़ करते हैं और इसे यहाँ Params में input में define करते हैं। तो मैं इसे batch में add करने वाला हूँ और फिर हम कहेंगे कि यह एक string है और चलो इसे एक डिफ़ॉल्ट दें। तो चलो इसे बस batch कहते हैं। ठीक है? अब workflow चलाने की कोशिश करते हैं।
 
-ध्यान दें कि यहां inputs का क्रम वास्तव में महत्वपूर्ण है। पहला process input path था, और दूसरा input name है। यदि मैं यहां क्रम बदलता हूं, तो मुझे भी क्रम बदलना होगा जब मैं process को call करूं। अन्यथा। इसके बाद, हम गलत input के लिए गलत channel पास करेंगे।
+--batch Trio. मुझे लगता है कि यह training material में कहता है, लेकिन हम वहाँ कोई भी string उपयोग कर सकते हैं। और उम्मीद है कि हम उस results output फ़ाइल को यहाँ ऊपर आते हुए देखेंगे।
 
-## 3.3. workflow चलाएं
+और वास्तव में, COLLECTED-trio-output - यह ठीक से काम कर गया है। इसने हमारी फ़ाइल को rename कर दिया है। और तुम अब imagine कर सकते हो कि यह उपयोगी है क्योंकि अगर मैं इसे फिर से एक अलग batch नाम के साथ चलाता हूँ, जैसे replicate_two, तो यह हमें यहाँ ऊपर एक अलग batch नाम देने वाला है।
 
-ठीक है, चलिए इसे आज़माते हैं और देखते हैं कि क्या यह काम करता है। चलिए "nextflow run hello- workflow करते हैं। ठीक है, यह पहले की तरह चली। चलिए results डायरेक्टरी में देखते हैं।
+और और यह फिर इस मामले में output फ़ाइलों को clobber नहीं करेगा। तो यह अच्छा है।
 
-निश्चित रूप से, हमारी फ़ाइल का name अब "collected test batch output txt" है। शानदार।
+## 4. collector स्टेप में एक output add करो
 
-और अब देखते हैं कि क्या हम फिर से चलाकर उसे overwrite कर सकते हैं। इस बार मैं --batch_name करने जा रहा हूं ताकि यहां उस special parameter variable name से match हो। और मैं इसे demo output कहने जा रहा हूं।
+ठीक है, तो अब हमारे पास यहाँ हमारे process में multiple inputs हैं। लेकिन क्या होता है अगर हम multiple outputs बनाना चाहते हैं? फिर हमारा उदाहरण यह है कि हम इस process के लिए एक report बनाने जा रहे हैं, बस यह कहते हुए कि कितनी फ़ाइलें collected की गईं।
 
-workflow को फिर से चलाएं और हम देखेंगे कि क्या कुछ होता है।
+और हम यह यहाँ एक echo कमांड के साथ करेंगे। तो हम कह सकते हैं echo। There were, मैं इसे training material से copy करने वाला हूँ, ताकि तुम्हें मुझे इसे type करते हुए नहीं देखना पड़े।
 
-ठीक है, अब हमारे पास एक collected demo output .txt है। और क्योंकि यह फ़ाइल का name उस एक से अलग है, इसने इसे overwrite नहीं किया है। दोनों अब results डायरेक्टरी में मौजूद हैं।
+There were $\{count_greetings\} greetings in this batch, और इसे अब $\{batch_name\} नामक एक नई फ़ाइल में save करो, तो same variable, हम इसे जितनी बार चाहें reuse कर सकते हैं, report.txt।
 
-## 4. collector step में एक output जोड़ें
+## 4.1.1. collected greetings की संख्या count करो
 
-ठीक है, तो वहां हमने एक process को कई inputs देना दिखाया, लेकिन कई outputs के बारे में क्या? इस उदाहरण के लिए, हम greetings की संख्या की गणना करने जा रहे हैं जो processed हैं और इसे इस collect greeting step के लिए एक secondary output के रूप में output करें।
+हमें वास्तव में उसे किसी तरह calculate करने की आवश्यकता है। हम यह logic Bash script में कर सकते थे अगर हम चाहते, Bash logic का उपयोग करके। हालाँकि, हम Nextflow code के भीतर सीधे scripting भी कर सकते हैं, जब तक कि यह process में script block के भीतर है और quoted सेक्शन के ऊपर है।
 
-## 4.1. greetings की संख्या को count और output करने के लिए process को संशोधित करें
+यहाँ कुछ भी final rendered script में शामिल नहीं होगा, और यह बस Nextflow द्वारा execute किया जाएगा जब यह एक task render करता है।
 
-हम यहां थोड़ी trick करने जा रहे हैं। Nextflow processes में यह script block होता है एक multi-line string के साथ, और वह bash output के रूप में dot कमांड dot sh में पास किया जाता है। लेकिन हम वास्तव में उस से ऊपर कोई भी custom code लिख सकते हैं, और वह एक कार्य के हिस्से के रूप में execute होगा लेकिन bash script के भीतर शामिल नहीं होगा।
+तो यहाँ हम बस कुछ logic कर रहे हैं। हम count_greetings नामक एक नया variable बना रहे हैं। हम यहाँ input फ़ाइलें चैनल लेते हैं, और हम उस पर .size() call कर रहे हैं।
 
-Nextflow syntax में built-in functions में से एक को size कहा जाता है। तो मैं path input लेने जा रहा हूं, और मैं count underscore greetings कहने जा रहा हूं, बस एक variable name define करने के लिए। मैं input files लेने जा रहा हूं और मैं इस पर "size" call करने जा रहा हूं।
+ठीक है, वह function मुझे यहाँ इस variable में एक नंबर देने वाला है, और अब हमारी warning चली गई है क्योंकि यह variable define किया जा रहा है।
 
-यह function इस input channel के size को count करेगा और इसे एक variable को assign करेगा।
+ठीक है, तो हम work डायरेक्टरी में वह दूसरी फ़ाइल बना रहे हैं, लेकिन हमें Nextflow को बताने की ज़रूरत है कि इसे इस process के एक published output के रूप में उम्मीद करे। तो हम यह बिल्कुल उसी syntax से करते हैं जैसे हमने पहली फ़ाइल के लिए किया था।
 
-अब हम उस variable को output block के हिस्से के रूप में return कर सकते हैं। तो हम कहते हैं, val, क्योंकि यह value है, फ़ाइल नहीं। और count greetings.
+हम कहते हैं path क्योंकि यह, फिर से, हम यहाँ एक variable publish कर सकते थे अगर हम चाहते "val" के साथ, लेकिन हम कहने वाले हैं "path"। और फिर expected, फ़ाइल नाम। ध्यान दो यह यहाँ highlighted नहीं है। यह इसलिए है क्योंकि मैंने single quotes का उपयोग किया। मुझे double quotes का उपयोग करना होगा।
 
-अब यह अपने आप में पर्याप्त है, और हम अब इस process से इन विभिन्न outputs तक पहुंच सकते हैं। हालांकि, हमें उन्हें positional तरीके से access करना होगा। तो zero और one जैसी index key का उपयोग करके।
+## 4.1.2. report फ़ाइल emit करो और outputs को नाम दो
 
-outputs तक पहुंचना थोड़ा आसान बनाने के लिए, हम उन्हें नाम दे सकते हैं और हम एक emit statement का उपयोग करके ऐसा करते हैं।
+ठीक है, यह बढ़िया है। और अब हम इन outputs को यहाँ नीचे access करना शुरू कर सकते हैं जैसे मैंने यहाँ किया था। लेकिन अब यह अलग-अलग objects का एक array है, इसलिए मैं पहला प्राप्त करने के लिए collectGreetings.out[0] कर सकता हूँ, या दूसरा प्राप्त करने के लिए एक, जो हमारी नई report है।
 
-तो हम comma emit out file या जो कुछ भी मैं इसे call करना चाहता हूं करते हैं। और मैं यहां emit count करता हूं। यह मूल रूप से बस एक decorator है, जो हमें थोड़ा cleaner code लिखने में मदद करता है ताकि हम बाद में workflow block में specific outputs को आसानी से reference कर सकें।
+लेकिन मुझे यह करना वास्तव में पसंद नहीं है क्योंकि index counting को mess up करना काफी आसान है। और तुम lines count करते हुए वहाँ बहुत बैठते हो और तुम एक नया output add करते हो और अचानक सब कुछ break हो जाता है। तो
 
-## 4.2. workflow के अंत में output की रिपोर्ट करें
+इसके बजाय name से सब कुछ reference करना बहुत अच्छा है। और हम यहाँ "emit" नामक एक special key के साथ यह कर सकते हैं।
 
-ठीक है। यदि मैं workflow block पर नीचे scroll करूं, तो अब मैं collect greetings के outputs ले सकता हूं, collect greetings, dot out कर सकता हूं, और हम देख सकते हैं कि हमारे दो named outputs यहां VS Code extension द्वारा सुझाए गए हैं। बहुत उपयोगी।
+तो हम इसे जो चाहें कह सकते हैं। चलो इसे emit outfile कहते हैं, और emit reports। अगर तुम इन्हें define करते हो और तुम इसे एक या कई पर कर सकते हो, यह तुम्हारे ऊपर है। अब मैं यहाँ नीचे जा सकता हूँ और इसके बजाय मैं dot out dot reports जा सकता हूँ और बस इसे name से call कर सकता हूँ, जो तुम्हारे code को पढ़ते समय समझना बहुत आसान है, और code में changes के लिए safer है।
 
-तो मैं dot count करने जा रहा हूं जो हमने अभी बनाया count value प्राप्त करने के लिए, और मैं view करने जा रहा हूं, ताकि यह command line में print हो। ताकि हम इसे देख सकें जब हम workflow चलाएं।
+मैंने, यहाँ .out.report add किया है, लेकिन वास्तव में मुझे दो अलग-अलग outputs published होने की ज़रूरत है। तो मैं इसे कुछ अधिक दिलचस्प के रूप में rename करने वाला हूँ जैसे collected और report और क्या मैंने इसे वही कहा? मैंने इसे out फ़ाइल कहा, sorry। तो वह emit नाम यहाँ outfile और report। क्योंकि हम दो अलग-अलग output चैनलों को publish कर रहे हैं और इसलिए हमें publish block में दोनों को reference करने की ज़रूरत है।
 
-चलिए closure में यहां कुछ लिखते हैं बस इसे थोड़ा अच्छा बनाने के लिए। num greetings, there were greetings greetings.
+फिर हमें output block में भी इन्हें define करने की ज़रूरत है। तो मैंने उसे collected rename किया, और फिर से, reports के लिए, यहाँ थोड़ा verbose, लेकिन यह वास्तव में उपयोगी है जब तुम एक नया workflow पढ़ने आते हो, तो यहाँ सभी अलग-अलग outputs को देखने के लिए, सभी अलग-अलग चैनलों को side by side list किया गया है, और इसे कम verbose बनाने के तरीके हैं, जिन्हें हम बाद में touch करेंगे।
 
-और हम वास्तव में दूसरे output के बारे में परवाह नहीं करते क्योंकि हम इसे किसी अन्य processes के लिए input के रूप में उपयोग नहीं कर रहे हैं। लेकिन आप देख सकते हैं कि यदि हम चाहें तो इसे एक और process के लिए input के रूप में आसानी से कैसे पास कर सकते हैं, downstream।
+ठीक है, चलो इसे try करते हैं और अपना workflow चलाते हैं और देखते हैं कि क्या होता है।
 
-## 4.3. workflow चलाएं
+उम्मीद है कि अब यह मूल रूप से पहले की तरह ही चलना चाहिए। और हम यहाँ ऊपर replicate_two नामक एक नई output फ़ाइल प्राप्त करने जा रहे हैं, report। और यह है। यह खुल गया है और यह कहता है कि batch में तीन greetings हैं, जो हम उम्मीद करते थे, इसलिए यह perfect है।
 
-हम save पर क्लिक करने जा रहे हैं। चलिए terminal पर एक नज़र डालते हैं और इसे आज़माते हैं।
+अगर मैं यहाँ work डायरेक्टरी में जाता हूँ बस तुम्हें prove करने के लिए कि Nextflow, code में execute किया गया था न कि bash script में, मैं cat work/ command.sh में जा सकता हूँ, और तुम यहाँ देखोगे कि यह बस इस string को सीधे echo कर रहा है। There were three greetings in this batch, और इसलिए वह variable Nextflow द्वारा interpolate किया गया था। यह .command.sh फ़ाइल लिखने से पहले script block में calculate किया गया था। तो resulting variable calculation मूल रूप से इसमें hard coded है इससे पहले कि यह इस मामले में तुम्हारे compute environment पर execute किया जाए।
 
-ठीक है, शानदार। यहां हम जाते हैं। तीन greetings हैं। यह बिल्कुल सही है।
+और इसलिए तुम script के बीच उस separation को देख सकते हो। Block यहाँ और इसके ऊपर कुछ भी। मुझे \_hope है कि यह समझ में आता है।
 
-ठीक है, बढ़िया सामान। यह इस अध्याय का अंत है। अब तक बनाने के लिए हम सब पूरा कर चुके हैं। अब आप काफी realistic workflow बनाना शुरू कर रहे हैं, जहां हम अपनी workflow के भीतर inputs और outputs और logic को handle करने में सक्षम हैं।
+## सारांश और क्विज़
 
-जैसे-जैसे ये workflow files लंबी होती जाती हैं, वे थोड़ी unwieldy होने लगती हैं। तो अगले अध्याय में, हम देखेंगे कि कैसे हम Nextflow code को अलग files में modularize कर सकते हैं ताकि workflow के भीतर code को ढूंढना और बनाए रखना आसान हो।
+ठीक है, यह Hello Nextflow के इस भाग का अंत है। तो पहले की तरह, जाओ और quiz check करो। इसे webpage पर या CLI में करो, कुछ सवालों से गुज़रो और बस check करो कि तुमने हमने जो सामग्री cover की है उसे समझ लिया है। देखो कि क्या वहाँ कुछ है जो किसी चीज़ को highlight करता है जो तुम शायद नहीं समझे होगे। बहुत सारे सवाल नहीं। करने में अच्छा और आसान। या तुम यहाँ नीचे webpage पर भी कर सकते हो।
 
-अध्याय चार के लिए अगले वीडियो में हमारे साथ शामिल हों। Hello Modules.
-
-[अगला वीडियो ट्रांसक्रिप्ट :octicons-arrow-right-24:](04_hello_modules.md)
+और थोड़ा break लो, थोड़ा घूमो और वापस आओ और Hello, Nextflow के भाग चार में हमसे जुड़ो, जहाँ हम modules के बारे में बात करेंगे। बहुत-बहुत धन्यवाद।

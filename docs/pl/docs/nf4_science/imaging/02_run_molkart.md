@@ -2,11 +2,11 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W Części 1 uruchomiliśmy prosty workflow Hello World, aby zrozumieć podstawy wykonywania Nextflow.
+W Części 1 uruchomiliśmy prosty workflow Hello World, aby zrozumieć podstawy wykonywania Nextflow'a.
 Teraz uruchomimy rzeczywisty pipeline do bioobrażowania: **nf-core/molkart**.
 
 Ten pipeline przetwarza dane transkryptomiki przestrzennej Molecular Cartography z Resolve Bioscience.
-Jednak wzorce Nextflow, których się tutaj nauczysz, mają zastosowanie do każdego pipeline'u nf-core lub produkcyjnego workflow'u.
+Jednak wzorce Nextflow'a, których się tutaj nauczysz, mają zastosowanie do każdego pipeline'u nf-core lub produkcyjnego workflow'u.
 
 ## 1. Zrozumienie pipeline'ów nf-core
 
@@ -14,7 +14,7 @@ Zanim uruchomimy pipeline, zrozummy czym jest nf-core i dlaczego ma znaczenie pr
 
 ### 1.1. Czym jest nf-core?
 
-[nf-core](https://nf-co.re/) to wspierana przez społeczność kolekcja wysokiej jakości pipeline'ów Nextflow.
+[nf-core](https://nf-co.re/) to wspierana przez społeczność kolekcja wysokiej jakości pipeline'ów Nextflow'a.
 Wszystkie pipeline'y nf-core mają tę samą strukturę i konwencje, co oznacza, że nauczywszy się uruchamiać jeden, możesz uruchomić każdy z nich.
 
 Kluczowe cechy pipeline'ów nf-core:
@@ -23,7 +23,7 @@ Kluczowe cechy pipeline'ów nf-core:
 - **Wbudowane dane testowe**: Każdy pipeline zawiera profile testowe do szybkiej walidacji
 - **Kompleksowa dokumentacja**: Szczegółowe instrukcje użycia i opisy parametrów
 - **Kontrola jakości**: Automatyczne raporty QC przy użyciu MultiQC
-- **Wsparcie dla kontenerów**: Gotowe kontenery dla powtarzalności
+- **Wsparcie dla kontenerów**: Gotowe kontenery zapewniające powtarzalność
 
 !!! tip "Chcesz dowiedzieć się więcej o nf-core?"
 
@@ -38,10 +38,10 @@ Pipeline [nf-core/molkart](https://nf-co.re/molkart) przetwarza dane obrazowania
 
 1. **Przetwarzanie wstępne obrazu**: Wypełnianie wzoru siatki i opcjonalne wzmocnienie kontrastu
 2. **Segmentacja komórek**: Wiele opcji algorytmów (Cellpose, Mesmer, ilastik, Stardist)
-3. **Przypisanie punktów**: Przypisanie punktów transkryptu do zsegmentowanych komórek
+3. **Przypisanie punktów**: Przypisywanie punktów transkryptów do zsegmentowanych komórek
 4. **Kontrola jakości**: Generowanie kompleksowych raportów QC
 
-Kluczowe wyjścia to:
+Kluczowe wyniki to:
 
 - Tabele liczby transkryptów według komórek
 - Maski segmentacji
@@ -62,7 +62,7 @@ To tworzy katalog `molkart/` zawierający kompletny kod źródłowy pipeline'u.
 
 !!! note "Dlaczego klonujemy lokalnie?"
 
-    Zazwyczaj uruchamiałbyś pipeline'y nf-core bezpośrednio z GitHub używając `nextflow run nf-core/molkart -r 1.2.0`.
+    Zazwyczaj uruchamiałbyś pipeline'y nf-core bezpośrednio z GitHub'a używając `nextflow run nf-core/molkart -r 1.2.0`.
     Nextflow automatycznie pobiera żądaną wersję pipeline'u do `$HOME/.nextflow/assets/nf-core/molkart` i uruchamia go stamtąd.
     Jednak dla celów tego szkolenia klonujemy pipeline do innego katalogu lokalnego, abyśmy mogli łatwiej sprawdzić kod.
 
@@ -124,12 +124,12 @@ Błąd `command not found` (status wyjścia 127) oznacza, że Nextflow próbowa�
 Dzieje się tak, ponieważ:
 
 1. Pipeline oczekuje zainstalowanego specjalistycznego oprogramowania bioinformatycznego
-2. Te narzędzia (takie jak `duplicate_finder.py`, `apply_clahe.dask.py`, itp.) nie są częścią standardowych dystrybucji Linux
-3. Bez kontenerów, Nextflow próbuje uruchomić polecenia bezpośrednio na Twojej lokalnej maszynie
+2. Te narzędzia (takie jak `duplicate_finder.py`, `apply_clahe.dask.py`, itp.) nie są częścią standardowych dystrybucji Linuksa
+3. Bez kontenerów Nextflow próbuje uruchomić polecenia bezpośrednio na Twojej lokalnej maszynie
 
 **Skąd mają pochodzić te narzędzia?**
 
-Sprawdźmy jeden z modułów procesu, aby zobaczyć jak deklaruje Swoje wymagania dotyczące oprogramowania.
+Sprawdźmy jeden z modułów procesu, aby zobaczyć jak deklaruje swoje wymagania dotyczące oprogramowania.
 
 Otwórz moduł przetwarzania wstępnego CLAHE:
 
@@ -143,16 +143,16 @@ Spójrz na linię 5 - zobaczysz:
 container 'ghcr.io/schapirolabor/molkart-local:v0.0.4'
 ```
 
-Ta linia informuje Nextflow: "Aby uruchomić ten proces, użyj obrazu Docker `ghcr.io/schapirolabor/molkart-local:v0.0.4`, który zawiera wszystkie wymagane oprogramowanie."
+Ta linia informuje Nextflow'a: "Aby uruchomić ten proces, użyj obrazu Docker'a `ghcr.io/schapirolabor/molkart-local:v0.0.4`, który zawiera wszystkie wymagane oprogramowanie."
 
-Każdy proces deklaruje który obraz kontenera dostarcza wymagane narzędzia.
-Jednak Nextflow używa tych kontenerów tylko jeśli mu powiesz!
+Każdy proces deklaruje, który obraz kontenera dostarcza wymagane narzędzia.
+Jednak Nextflow używa tych kontenerów tylko wtedy, gdy mu powiesz!
 
 **Rozwiązanie: Włącz Docker w konfiguracji**
 
-### 2.2. Konfiguracja Docker i uruchomienie pipeline'u
+### 2.2. Konfiguracja Docker'a i uruchomienie pipeline'u
 
-Aby włączyć Docker, musimy zmienić `docker.enabled` z `false` na `true` w pliku `nextflow.config`.
+Aby włączyć Docker'a, musimy zmienić `docker.enabled` z `false` na `true` w pliku `nextflow.config`.
 
 Otwórz plik konfiguracyjny:
 
@@ -188,7 +188,7 @@ nextflow run ./molkart \
 Tym razem Nextflow:
 
 1. Odczyta ustawienie `docker.enabled = true` z konfiguracji
-2. Pobierze wymagane obrazy Docker (tylko za pierwszym razem)
+2. Pobierze wymagane obrazy Docker'a (tylko za pierwszym razem)
 3. Uruchomi każdy proces wewnątrz określonego kontenera
 4. Wykona się pomyślnie, ponieważ wszystkie narzędzia są dostępne wewnątrz kontenerów
 
@@ -200,7 +200,7 @@ Tym razem Nextflow:
     - Kontenery zapewniają powtarzalność - dokładnie te same wersje oprogramowania działają wszędzie
     - Nie musisz ręcznie instalować dziesiątek narzędzi i ich zależności
 
-    Aby uzyskać więcej szczegółów o kontenerach w Nextflow, zobacz [Hello Containers](../../hello_nextflow/05_hello_containers.md) ze szkolenia Hello Nextflow.
+    Aby uzyskać więcej szczegółów o kontenerach w Nextflow'ie, zobacz [Hello Containers](../../hello_nextflow/05_hello_containers.md) ze szkolenia Hello Nextflow.
 
 ### 2.3. Monitorowanie wykonania
 
@@ -287,9 +287,9 @@ Podczas działania pipeline'u zobaczysz wyjście podobne do tego:
     Succeeded   : 22
     ```
 
-Zauważ, jak to wyjście jest bardziej szczegółowe niż nasz przykład Hello World z powodu konwencji nf-core, których przestrzega pipeline:
+Zauważ, jak to wyjście jest bardziej szczegółowe niż nasz przykład Hello World dzięki konwencjom nf-core, których przestrzega pipeline:
 
-- Pipeline pokazuje Swoją wersję i logo
+- Pipeline pokazuje swoją wersję i logo
 - Wyświetlane są parametry konfiguracji
 - Wiele procesów działa równolegle (wskazane przez wiele linii procesów)
 - Nazwy procesów zawierają pełną ścieżkę modułu (np. `NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP`)
@@ -324,7 +324,7 @@ Kiedy pipeline zakończy się pomyślnie, zobaczysz komunikat o zakończeniu i p
 
 ### 3.1. Zlokalizowanie katalogu wyników
 
-Domyślnie pipeline'y nf-core zapisują wyjścia do katalogu określonego przez parametr `outdir`, który ustawiliśmy na `results/`.
+Domyślnie pipeline'y nf-core zapisują wyniki do katalogu określonego przez parametr `outdir`, który ustawiliśmy na `results/`.
 
 Wyświetl zawartość:
 
@@ -347,7 +347,7 @@ results/
 └── stack/
 ```
 
-Każdy podkatalog zawiera wyjścia z określonego etapu pipeline'u:
+Każdy podkatalog zawiera wyniki z określonego etapu pipeline'u:
 
 - **mindagap/**: Obrazy z wypełnioną siatką z kroku przetwarzania wstępnego MindaGap
 - **clahe/**: Obrazy ze wzmocnionym kontrastem z przetwarzania wstępnego CLAHE
@@ -379,8 +379,8 @@ Raport zawiera:
 
 ### 3.3. Badanie tabel transkryptów według komórek
 
-Najważniejszym wyjściem naukowym jest tabela liczby transkryptów według komórek.
-Mówi ona ile transkryptów każdego typu zostało wykrytych w każdej komórce.
+Najważniejszym wynikiem naukowym jest tabela liczby transkryptów według komórek.
+Mówi ona, ile transkryptów każdego typu zostało wykrytych w każdej komórce.
 
 Przejdź do katalogu spot2cell:
 
@@ -394,8 +394,8 @@ Znajdziesz pliki takie jak:
 - `cellxgene_mem_only_mesmer.csv`: Tabela transkryptów według komórek używająca segmentacji Mesmer
 - `cellxgene_mem_only_stardist.csv`: Tabela transkryptów według komórek używająca segmentacji Stardist
 
-Uruchomiliśmy tylko 1 próbkę w tym zestawie danych testowych, ale w prawdziwym eksperymencie mielibyśmy te tabele dla każdej próbki.
-Zauważ jak Nextflow jest w stanie przetwarzać wiele metod segmentacji równolegle, ułatwiając porównywanie wyników.
+Uruchomiliśmy tylko jedną próbkę w tym zestawie danych testowych, ale w prawdziwym eksperymencie mielibyśmy te tabele dla każdej próbki.
+Zauważ, jak Nextflow potrafi przetwarzać wiele metod segmentacji równolegle, ułatwiając porównywanie wyników.
 
 ### 3.4. Przeglądanie raportów wykonania
 
@@ -420,11 +420,11 @@ Otwórz raport wykonania, aby zobaczyć użycie zasobów:
 code results/pipeline_info/execution_report.html
 ```
 
-To pokazuje:
+Pokazuje on:
 
 - Jak długo trwał każdy proces
 - Użycie CPU i pamięci
-- Które zadania były w pamięci podręcznej vs. wykonane
+- Które zadania były w pamięci podręcznej, a które wykonane
 
 !!! Tip
 
@@ -432,7 +432,7 @@ To pokazuje:
 
 ### Podsumowanie
 
-Wiesz jak zlokalizować wyjścia pipeline'u, badać raporty kontroli jakości i uzyskać dostęp do metryk wykonania.
+Wiesz jak zlokalizować wyniki pipeline'u, badać raporty kontroli jakości i uzyskać dostęp do metryk wykonania.
 
 ### Co dalej?
 
@@ -467,7 +467,7 @@ ls -la work/3m/4n5o6p*/
 
 Zobaczysz:
 
-- **Pliki .command.\***: Skrypty wykonania Nextflow i logi (jak wcześniej)
+- **Pliki .command.\***: Skrypty wykonania Nextflow'a i logi (jak wcześniej)
 - **Przygotowane pliki wejściowe**: Dowiązania symboliczne do rzeczywistych plików wejściowych
 - **Pliki wyjściowe**: Maski segmentacji, wyniki pośrednie, itp.
 
@@ -490,24 +490,24 @@ Jednak dla pipeline'ów nf-core z dużymi plikami pośrednimi szczególnie ważn
 
 ### Podsumowanie
 
-Rozumiesz jak pipeline'y nf-core organizują Swoje katalogi robocze i jak sprawdzać poszczególne zadania w celu debugowania.
+Rozumiesz jak pipeline'y nf-core organizują swoje katalogi robocze i jak sprawdzać poszczególne zadania w celu debugowania.
 
 ### Co dalej?
 
-Naucz się o pamięci podręcznej Nextflow i jak wznowić nieudane uruchomienia pipeline'u.
+Naucz się o pamięci podręcznej Nextflow'a i jak wznowić nieudane uruchomienia pipeline'u.
 
 ---
 
 ## 5. Wznowienie uruchomienia pipeline'u
 
-Jedną z najpotężniejszych funkcji Nextflow jest możliwość wznowienia pipeline'u od momentu niepowodzenia.
+Jedną z najpotężniejszych funkcji Nextflow'a jest możliwość wznowienia pipeline'u od momentu niepowodzenia.
 
 ### 5.1. Mechanizm pamięci podręcznej
 
 Kiedy uruchamiasz pipeline z `-resume`, Nextflow:
 
 1. Sprawdza pamięć podręczną dla każdego zadania
-2. Jeśli wejścia, kod i parametry są identyczne, ponownie używa wyniku z pamięci podręcznej
+2. Jeśli dane wejściowe, kod i parametry są identyczne, ponownie używa wyniku z pamięci podręcznej
 3. Ponownie uruchamia tylko zadania, które się zmieniły lub zakończyły się niepowodzeniem
 
 Jest to niezbędne dla długo działających pipeline'ów, gdzie niepowodzenia mogą wystąpić późno w wykonaniu.
@@ -544,16 +544,16 @@ Zauważ `cached: 2` lub `cached: 1` dla każdego procesu - nic nie zostało pono
 
 ### 5.3. Kiedy resume jest przydatne
 
-Resume jest szczególnie wartościowe gdy:
+Resume jest szczególnie wartościowe, gdy:
 
 - Pipeline kończy się niepowodzeniem z powodu limitów zasobów (brak pamięci, przekroczenie limitu czasu)
 - Musisz zmodyfikować procesy końcowe bez ponownego uruchamiania kroków początkowych
 - Twoje połączenie sieciowe zostanie przerwane podczas pobierania danych
-- Chcesz dodać dodatkowe wyjścia bez powtarzania obliczeń
+- Chcesz dodać dodatkowe wyniki bez powtarzania obliczeń
 
 !!! Warning
 
-    Resume działa tylko jeśli nie zmieniłeś danych wejściowych, kodu pipeline'u lub parametrów.
+    Resume działa tylko wtedy, gdy nie zmieniłeś danych wejściowych, kodu pipeline'u lub parametrów.
     Jeśli zmienisz którekolwiek z nich, Nextflow poprawnie ponownie uruchomi dotknięte zadania.
 
 ### Podsumowanie
@@ -562,4 +562,4 @@ Wiesz jak używać `-resume`, aby efektywnie ponownie uruchamiać pipeline'y bez
 
 ### Co dalej?
 
-Teraz gdy możesz uruchomić nf-core/molkart z danymi testowymi, jesteś gotowy nauczyć się jak skonfigurować go dla Swoich własnych zestawów danych.
+Teraz, gdy możesz uruchomić nf-core/molkart z danymi testowymi, jesteś gotowy nauczyć się jak skonfigurować go dla Twoich własnych zestawów danych.

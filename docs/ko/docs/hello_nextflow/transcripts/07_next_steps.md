@@ -1,63 +1,79 @@
-# 다음 단계 - 대본
+# 다음 단계 - 비디오 스크립트
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안하기](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/xHOcx_4Ancg?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "중요한 참고 사항"
+!!!note "중요 참고사항"
 
-    이 페이지는 대본만 보여줍니다. 전체 단계별 지침은 [강의 자료](../05_hello_containers.md)로 돌아가십시오.
+    이 페이지는 스크립트만 보여줍니다. 전체 단계별 지침은 [과정 자료](../next_steps.md)로 돌아가세요.
 
 ## 환영합니다
 
-축하합니다. 해내셨습니다. Hello Nextflow라고 불리는 첫 번째 Nextflow 교육 강좌를 완료하셨습니다.
+​
 
-잘 하셨습니다. 끝까지 함께해 주셔서 감사합니다. Nextflow 학습에 투자하신 시간과 노력에 진심으로 감사드리며, 여러분의 업무에 유용하게 사용되기를 진심으로 바랍니다.
+축하합니다, 해내셨습니다!
 
-## 다음 단계
+끝까지 완주하시고 Hello Nextflow 교육 과정을 완료하셨습니다. 즐거우셨기를 진심으로 바랍니다. 끝까지 함께해 주셔서 감사드리며, Nextflow를 배우는 데 투자해 주신 시간과 노력에 깊이 감사드립니다. 여러분의 작업에 유용하게 쓰이기를 진심으로 바랍니다.
 
-다음 단계로는 교육 포털 training.nextflow.io를 주목해 주십시오. 저희는 항상 새로운 강의 자료를 게시하고 업데이트하고 있습니다. 따라서 더 고급 교육이나 여러분이 관심 있는 연구 분야에 특화된 교육을 찾으실 수 있을 것입니다.
+## training.nextflow.io의 다른 과정
 
-특히 Nextflow for Science 페이지를 확인해 보십시오. 이곳에는 독립적으로 구성된 일련의 단기 강좌가 있으며, Hello Nextflow에서 배운 내용을 특정 사용 사례로 확장합니다.
+training.nextflow.io를 계속 방문하는 것을 잊지 마세요. 저희는 항상 새로운 단기 과정을 추가하고 있으며, 이미 있는 많은 자료도 업데이트하고 있습니다. 따라서 이 Hello Nextflow 교육 과정도 시간이 지남에 따라 업데이트될 것입니다.
 
-Genomics에 관한 강좌와 RNA-seq에 관한 강좌가 있습니다. 곧 더 많은 강좌를 제공할 예정입니다.
+이는 특히 중요합니다. 저희가 Nextflow의 구문을 업데이트하고 있기 때문입니다. 2026년에는 많은 새로운 기능이 추가될 예정이므로, 2027년에 다시 진행할 때 이 과정은 조금 다르게 보이고 느껴질 것입니다.
 
-## 사이드 퀘스트
+특히 "Nextflow for Science" 페이지를 강조하고 싶습니다. 이들은 단기 과정이며 이 Hello Nextflow 과정에 이어서 진행하도록 설계되었습니다. 유전체학, RNAseq 등 다양한 특정 사용 사례에서 Nextflow를 사용하는 방법을 보여줍니다. 저희는 항상 더 많은 과학적 사용 사례를 추가하려고 노력하고 있습니다.
 
-Hello Nextflow에서 다루었다면 너무 세부적이었을 많은 주제들이 있습니다. 이러한 주제들 중 일부를 사이드 퀘스트로 제공하고 있으며, 이는 특정 주제에 대한 단기 강좌입니다.
+Side Quests도 있습니다. Hello Nextflow와 같은 과정을 개발할 때, 다룰 수 있는 내용이 너무 많아서 모든 것을 범위 내에 유지하기가 어렵습니다. 따라서 사람들에게 흥미롭고 더 깊이 다룰 가치가 있다고 생각하는 특정 주제가 있다면, 그것을 Side Quest에 넣습니다.
 
-또한 더 큰 규모의 기초 교육과 고급 교육 강좌가 있으며, 여기에서 흥미로운 내용을 찾으실 수 있을 것입니다.
+둘러보시고 메타데이터 작업, 일반적인 스크립트 패턴, nf-test 등 여러분의 작업과 관련될 수 있는 다양한 내용이 있다면, Side Quests를 확인하여 더 많이 배우는 것이 유용할지 살펴보세요.
 
-## nf-core
+nf-core에 대한 과정도 있습니다. 이 시점에서 이 프로젝트에 익숙하시길 바라지만, 그렇지 않다면 확인해 보세요. 다양한 유형의 분석과 데이터를 위한 거의 150개의 다양한 파이프라인이 있으므로, 필요한 데이터 분석 종류에 맞는 파이프라인이 바로 사용 가능한 상태로 준비되어 있을 가능성이 충분합니다.
 
-이 강좌에서 한두 번 언급되었지만, nf-core 프로젝트를 꼭 확인해 보십시오. 다양한 데이터 유형에 대한 백 개 이상의 파이프라인이 있으므로, 여러분이 직접 파이프라인을 구축할 필요가 없을 가능성도 있습니다.
-
-또한 거의 천오백 개의 프로세스 모듈이 있어서 nf-core 개발자 도구를 사용하면 파이프라인을 만들고 해당 모듈을 몇 초 만에 가져올 수 있습니다.
+중요한 것은 nf-core에 거의 1700개의 다양한 모듈, 다양한 프로세스 및 도구 래퍼 등의 컴포넌트도 있다는 점입니다. nf-core와 함께 제공되는 도구를 사용하면 이들을 레고 블록처럼 조합하여 자신만의 파이프라인을 훨씬 빠르고 재현 가능하게 구축할 수 있습니다.
 
 ## Seqera Platform
 
-마지막으로 Seqera Platform을 간단히 소개하겠습니다. 이것은 의심할 여지 없이 실무에서 Nextflow를 실행하는 가장 좋은 방법입니다. 클라우드 기반 플랫폼이지만 AWS, Google Batch, Azure의 자체 클라우드 계정이나 심지어 자체 HPC 등 여러분 자신의 컴퓨팅 인프라를 연결합니다. 무료 등급은 모든 사람에게 제공되며, 학계에 계신다면 무료 프로급 액세스를 위한 학술 프로그램에 지원하실 수 있습니다.
+Nextflow 사용을 확장함에 따라 Seqera Platform을 확인해 보세요. Nextflow를 실행하는 가장 좋은 방법입니다. HPC, AWS, Azure, Google Cloud, Oracle 등 자체 인프라에서 실행할 수 있습니다. 컴퓨팅 인프라를 전혀 관리하고 싶지 않다면 자체 Seqera Compute를 사용할 수도 있습니다.
 
-Seqera Platform은 워크플로우 시작 및 모니터링을 위한 그래픽 인터페이스를 넘어섭니다. 대화형 세션 실행을 위한 Data Studios와 같은 추가 도구가 있으며, 클라우드를 통해 데이터에 더 빠르고 저렴하게 액세스할 수 있는 Fusion과 같은 기본 도구도 있습니다.
+Seqera Platform은 Batch Forge와 같은 기능으로 이러한 복잡한 클라우드 인프라 설정을 정말로 단순화합니다. Batch Forge는 환경을 자동으로 생성해 줍니다. 또한 관찰 가능성, 감사 로깅, 컴플라이언스에도 정말로 도움이 됩니다.
 
-## 지원 및 이벤트
+Fusion과 같은 기술로 디스크 액세스와 데이터 전송을 최적화하여 파이프라인을 객관적으로 더 저렴하고 빠르게 실행할 수 있습니다. 또한 파이프라인 최적화를 통해 파이프라인의 구성이 가능한 한 최적으로 조정되도록 보장합니다.
 
-어려움이 생기면 언제든지 community.seqera.io를 방문해 주십시오. 그곳의 포럼은 매우 활발하며, Nextflow 커뮤니티는 매우 강력하고 교육이나 Nextflow의 일상적인 사용과 관련된 모든 것에 대해 도움을 줄 준비가 된 사람들이 거의 항상 있습니다.
+파이프라인 실행 외에도 완전히 다른 기능들이 있습니다. 대화형 분석을 실행하고 사용자 정의 Docker 이미지에서 환경을 생성할 수 있는 Studios가 있습니다. 그리고 어디에 있든 다양한 파일 시스템을 탐색하는 데 도움이 되는 Data Explorer도 있습니다.
 
-그리고 물론, 훌륭한 다음 단계는 커뮤니티 이벤트 중 하나에 참여하는 것입니다. nf-core 해커톤이든 Nextflow Summit 이벤트 중 하나든 상관없습니다. 매우 재미있으며, 그곳에서 여러분을 만나 Nextflow를 무엇에 사용하고 계신지 이야기를 나눌 수 있으면 정말 좋겠습니다.
+Seqera Platform에는 무료 티어가 있으므로, 지금 바로 이러한 기능의 거의 모두를 무료로 사용할 수 있습니다. 그리고 조직 이메일 주소로 가입하시면 Seqera Compute에서 100달러의 무료 컴퓨팅 크레딧을 드립니다. 마지막으로 학술 프로그램이 있으므로, 대학에서 근무하신다면 가격 페이지를 확인하고, 거기 있는 양식을 찾아서 알려주시면 Cloud Pro로 무료 업그레이드해 드리겠습니다.
 
-## 감사의 말
+## 커뮤니티 도움 및 이벤트
 
-이 교육 자료를 작성하는 데 참여한 모든 분들께 큰 감사를 드립니다. 제가 발표했지만, 실제로 모든 어려운 작업은 Seqera의 교육 팀이 수행했습니다. 특히 Geraldine은 이 자료를 다시 작성하는 데 엄청난 노력을 기울였습니다.
+자, 앞으로 나아가겠습니다. Nextflow에 대한 지원이 필요하시면 언제든지 community.seqera.io를 확인하세요. 매우 활발하며, 여러분을 거기서 만나 다양한 문제와 사용 사례를 논의하고, 이제는 다른 사람들도 도울 수 있기를 바랍니다.
 
-또한 Marcel, Ken, Adam, John, 과학 개발 팀의 다른 분들과 커뮤니티의 다른 분들께도 감사드립니다.
+또한 많은 이벤트가 진행되고 있습니다. nf-core와 Nextflow에서 오는 커뮤니티 이벤트가 있습니다. 3월에는 온라인 및 분산형 nf-core 해커톤이 있으며, 작년에는 전 세계 각지에서 천 명이 넘는 사람들이 참여했습니다. 가능하시다면 참여해 주세요.
 
-## 피드백 설문조사
+또한 Nextflow Summit 이벤트도 있습니다. 하나는 보스턴에서, 또 하나는 바르셀로나와 온라인에서 진행됩니다. 정말 대규모로, 혁신적이고 흥미로운 다양한 방식으로 Nextflow를 사용하는 사람들의 이야기를 들을 수 있는 환상적인 발표들이 있습니다. 그리고 이들과 연계된 해커톤과 대면 교육도 있습니다.
 
-강좌를 마치셨으니, 여러분의 생각을 듣고 싶습니다. training.nextflow.io에서 Hello Nextflow 섹션 아래에 피드백 설문조사를 찾으실 수 있습니다.
+## Nextflow Podcast와 블로그
 
-단 네 개의 질문이지만 저희에게 정말 중요합니다. 무엇보다도, 대략 얼마나 많은 사람들이 교육을 받고 있는지 알려줍니다. 또한 여러분이 좋아하셨는지 알려주며, 제안이 있으시면 마지막에 남겨주십시오. 모든 제출 내용을 읽고 있습니다.
+Nextflow 생태계에서 진행되는 일들을 최신 상태로 유지하고 싶으시다면 seqera.io/blog을 확인하세요.
 
-오류를 발견하시면 모든 것이 GitHub에서 오픈 소스이므로 이슈를 생성하거나 풀 리퀘스트를 만들거나 포럼에 메시지를 남겨주십시오. 여러분의 생각과 개선 방법에 대해 듣고 싶습니다. 다시 한 번 감사드립니다. 곧 뵙기를 바랍니다.
+거기에 Nextflow 섹션이 있어서 커뮤니티에서 작업하는 사람들의 커뮤니티 블로그 게시물과 Nextflow 및 저희가 생성하는 다른 도구에 대한 업데이트에 관한 Seqera의 블로그 게시물을 볼 수 있습니다.
+
+제 개인 프로젝트인 Nextflow Podcast도 홍보하고 싶습니다. Spotify, Apple Music, YouTube에서 확인하세요. 저는 주기적으로 Nextflow 또는 관련 기술로 작업하는 다른 사람들, 또는 커뮤니티의 사람들과 대화하는 새로운 에피소드를 공개합니다. 그리고 사물이 어떻게 작동하는지, 사람들이 무엇을 하고 있는지에 대한 진정한 기술적 심층 분석을 합니다. 관심이 있으시다면 확인해 보세요. 정말 재미있습니다.
+
+## 감사 인사
+
+좋습니다, 감사 인사를 드리고 싶습니다. Seqera의 교육 팀이 이 자료를 담당했습니다. 제가 카메라 앞에 앉아 있지만, 실제로 모든 힘든 작업은 다른 사람들이 해냈습니다. 특히 이 Hello Nextflow 및 다른 교육 자료 과정을 작성하고 업데이트한 Geraldine에게 감사드립니다. 그리고 특히 새로운 Nextflow 구문에 맞게 구문을 업데이트하고 많은 과정을 직접 작성하는 데 정말로 도움을 준 Jon에게도 감사드립니다. Rike, Rob, Florian 등 과학 개발 팀의 다른 많은 분들도 우리가 작업하고 있는 자료에 큰 기여를 해주셨습니다.
+
+또한 커뮤니티의 사람들에게도 감사드리고 싶습니다. 예를 들어, 매우 새로운 번역은 앰버서더 프로그램 및 다른 곳의 사람들에 의해 크게 영향을 받았습니다. 그리고 실제로 교육 자료의 오픈 소스 특성은 풀 리퀘스트와 이슈가 상당히 자주 들어오고 있다는 것을 의미하며, 이는 정말로 우리에게 도움이 됩니다.
+
+## 설문조사
+
+이제 완료하셨으니, 아직 하지 않으셨다면 피드백 설문조사를 빠르게 작성해 주세요. training.nextflow.io 웹사이트의 Hello Nextflow 섹션 바로 아래에 있습니다.
+
+단 5개 질문입니다. 정말, 정말 빠르지만, 이를 통해 대략 얼마나 많은 사람들이 교육을 받고 있는지 추적할 수 있으며, 교육 자료를 어떻게 개선할 수 있는지 알려주실 수도 있습니다. 저희는 정말로 모든 응답을 확인하므로, 여러분의 의견을 정말로 소중히 여깁니다.
+
+## 작별 인사
+
+다시 한번, 이 과정과 이 여정에 함께해 주셔서 진심으로 감사드립니다. 교육 자료에서 개선될 수 있다고 생각되는 것을 발견하셨다면 GitHub 이슈나 Pull Request를 남겨주세요. 그리고 다른 Nextflow 교육 과정에서, 또는 해커톤이나 이벤트에서 여러분을 만나기를 진심으로 바랍니다. 다시 한번 감사드립니다.​

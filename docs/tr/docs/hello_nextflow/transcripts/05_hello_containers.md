@@ -1,193 +1,219 @@
-# Bölüm 5: Merhaba Konteynerler - Transkript
+# Bölüm 5: Hello Containers - Video Transkripti
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi edinin ve iyileştirmeler önerin](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/5PyOWjKnNmg?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Önemli notlar"
 
-    Bu sayfa sadece transkripti göstermektedir. Adım adım talimatların tamamı için [kurs materyaline](../05_hello_containers.md) geri dönün.
+    Bu sayfa yalnızca transkripti göstermektedir. Adım adım eksiksiz talimatlar için [kurs materyaline](../05_hello_containers.md) geri dönün.
 
     Transkriptte gösterilen bölüm numaraları yalnızca bilgilendirme amaçlıdır ve materyallerdeki tüm bölüm numaralarını içermeyebilir.
 
-## Hoş Geldiniz
+## Hoş geldiniz ve arka plan
 
-Merhaba, Merhaba Nextflow eğitim kursunun Beşinci Bölümüne hoş geldiniz.
+Merhaba ve Hello Nextflow'a tekrar hoş geldiniz. Bu, Hello Containers adlı beşinci bölüm. Ve bu kursum bölümünde, bir boru hattı için yazılım gereksinimlerini nasıl kapsülleyeceğimiz hakkında konuşacağız; böylece boru hattını çalıştıran kişilerin yazılımı yüklemeyi düşünmelerine gerek kalmayacak.
 
-Bu bölümün adı Merhaba Konteynerler. Nextflow'un Docker ve Singularity gibi araçlarla nasıl entegre olduğundan ve yazılım konteynerlerini kullanarak pipeline'ınızın kullanıcılarına yazılım sağlamaktan bahsedeceğiz.
+Benim kadar uzun süredir biyoinformatikte çalışıyorsanız, sık sık kötü eski günler dediğim zamanları hatırlayabilirsiniz; başkasının boru hattını çalıştırmak veya çalışmalarını tekrarlamak istediğinizde, kullandıkları tüm farklı yazılım araçlarını, aynı sürümlerde, makinenizde derlemek için saatler veya günler harcardınız ve bu bir kabusту. Gerçekten zordu.
 
-Bu, insanlar pipeline'ınızı çalıştırdığında, tüm farklı araçları kendilerinin yüklemek zorunda kalmadıkları anlamına gelir. Nextflow bunu onlar için yapacaktır.
+Bir HPC üzerinde çalışıyorsanız, sistem yöneticilerinin sizin için yazılım yüklemeye çalıştığı ortam modüllerini kullanmış olabilirsiniz, ki bu iyi ama yine de kusurlu bir yöntemdi.
 
-Konteynerler son derece güçlü bir teknolojidir ve tekrarlanabilirlik ve kullanım kolaylığı açısından çok önemlidir. Konteynerlerin kendilerine kısa bir giriş yaparak başlayacağız, bazı docker komutlarını manuel olarak çalıştıracağız ve sonra aynı konteynerleri Nextflow pipeline'ımıza koyacağız.
+Ama şimdi bunu yapmanın daha iyi yolları var. Nextflow'un farklı yazılım konteyner teknolojileri için yerleşik desteği var. Docker en yaygın olanıdır. Bugün kullanacağımız da bu. Codespaces'te iyi çalışır. Yerel bilgisayarınızda iyi çalışır ve bulutta iyi çalışır.
 
-Tamam. Hadi başlayalım.
+Ama aynı zamanda Singularity veya Apptainer, HPC sistemlerinde çok yaygındır ve etkili bir şekilde tamamen aynı şekilde çalışır. Ya da Podman, Shifter, çok benzer olan bir dizi başka araç var.
 
-Daha önce olduğu gibi, eğitim materyalini yükleyerek başlayalım. training.nextflow.io adresine gidin. Merhaba Nextflow, Bölüm Beş, Merhaba Konteynerler.
+Biraz benzer ama tam olarak aynı olmayan ve Nextflow'un desteklediği ekstra bir tanesi Conda. Ve Nextflow sizin için süreç bazında Conda ortamlarını yönetebilir, bu kendi Conda ortamlarınızı yapmaktan çok daha iyidir. Ve yine bir boru hattı ile birlikte gönderilebilir.
 
-Codespaces ortamıma atlayacağım ve burada solda hello containers dot nf'i görüyoruz.
+Bu bölüme konteyner teknolojileri, Docker ve nasıl çalıştıkları hakkında biraz konuşarak başlayacağız. Ve ilk yarıyı sadece Docker'da manuel olarak yapacağız, böylece perde arkasında neler olduğunu ve bunun nasıl çalıştığını anlayacaksınız. Çünkü Nextflow'un ne yaptığını ve iş akışınızın çalıştırıldığında ne yaptığını anlamak için bu gerçekten önemli.
 
-Daha önce olduğu gibi, bu dördüncü bölümü bitirdiğimiz aynı betik, bu yüzden tanıdık gelmeli.
+Öyleyse, hadi Codespaces'imize geçelim. Şimdi her şeyi tekrar temizledim, ama Hello Containers'a atlarsanız, tüm scriptlerimizin ve her şeyin modüller bölümünün sonundaki gibi orada olduğunu görmelisiniz. Yani burada modüller dizininde oluşturduğum farklı modüllerimiz var.
 
-Girdi dosyasını ve batch adını belirtmek için komut satırı parametrelerimiz var. Üç modülümüzü dahil ediyoruz ve üç işlemi çalıştırdığımız workflow'umuz var.
+Onlar hala orada. Çalışabilmesi için orada olmaları gerekiyor. Ve iş akışı ve çıktı, dosyalarınızın bu dizinde sonlanması için çıktı yayınlama yolunu Hello Containers olarak değiştirmemiz dışında tamamen aynı.
 
-## 0. Isınma: hello-containers.nf'yi Çalıştırın
+İsterseniz çalıştığını kontrol etmek için bunu şimdi çalıştırabiliriz veya terminale devam edebiliriz.
 
-Bu workflow'u tekrar çalıştırmaktan ve beklediğiniz çıktıları ürettiğini iki kez kontrol etmekten çekinmeyin. Şimdilik, aslında kapatacağım ve terminale dalacağım.
+## 1. Bir konteyneri 'manuel olarak' kullanma
 
-## 1. Bir konteyneri 'manuel olarak' kullanın
+Konteynerlerimizi yönetmek için Docker kullanacağız ve Codespaces'imde kurulu olup olmadığını "docker -v" yaparak kontrol edebilirim, bu bana kurulu olan sürümü gösterir ve her şeyin düzgün çalıştığını gösterir.
 
-Bu bölüme başlamak için, konteyner teknolojisi üzerine bir özet yapacağız. Docker veya singularity ya da diğer konteyner teknolojilerine çok alışkınsanız, bunu bir tazeleme olarak düşünün veya tamamen atlamaktan çekinmeyin.
+Şimdi konteynerler ve Docker'ın gerçekten önemli olan iki kavramı var. Birine image denir, birine de container. Image, kullanacağınız tüm dosya sisteminin anlık görüntüsü gibidir ve container çalışan ortamdır. Bir image kullanarak bir container oluşturursunuz.
 
-Nextflow birçok farklı konteyner teknolojisini destekler. Buna Docker, Singularity, Podman, Shifter, Charliecloud ve daha fazlası dahildir.
+Bir kez o containerin içinde olduğunuzda, tipik olarak tam bir işletim sistemi gibi çalışır. Dış dünyadan kesilmiştir. Her şeyden ayrıdır ve bu iyi bir şeydir. Nextflow ile böylesine iyi bir tekrarlanabilirlik elde etmemizin nedeni budur.
 
-Bu eğitimde Docker'a odaklanacağız. Code spaces ortamında önceden yüklenmiş olarak gelir ve özellikle kendi bilgisayarınızda veya dizüstü bilgisayarınızda geliştirme yapıyorsanız en popüler konteyner teknolojilerinden biridir.
+Çünkü bir konteyner içinde çalışan görevler için, yerel sisteminizdeki herhangi bir yapılandırma dosyasından etkilenmezler. Diğer dış etkilerden, kendi küçük korumalı alanlarında çalışırlar. Dosyalar daha sonra çok, çok tekrarlanabilir bir şekilde üretilir çünkü her farklı bilgi işlem ortamında çalışan her kişi için tamamen aynı temel kütüphaneleri, tüm aynı bağımlılıkları, tamamen aynı yazılımı kullanıyorsunuz. Açıkçası bunun harika ve muhteşem olduğunu düşünüyorum ve hala bunun mümkün olduğu gerçeği aklımı başımdan alıyor.
 
-Paylaşımlı bir HPC'de akademik bir ortamda çalışıyorsanız, Singularity'nin mevcut olduğunu ve Docker'ın olmadığını görebilirsiniz. Sorun değil. Tüm kavramlar tamamen aynıdır. Birkaç manuel komut farklıdır, ancak Docker'ı anlıyorsanız, singularity'yi de anlayacaksınız.
+## 1.1. Konteyner imajını çekme
 
-Aslında, Singularity da Code Spaces ortamında yüklüdür. İsterseniz, aynı görevleri Docker yerine Singularity kullanarak yapmayı deneyebilirsiniz.
+Bazı Docker imajlarını ve Docker'ı deneyeceğiz, sisteminizde çalıştırdığınızda Docker, bilgisayarınızda veya bu durumda kod alanında, geçmişte indirilen ve kullanılan tüm farklı imajları ve üzerine inşa edildikleri farklı katmanları takip eden bir docker kayıt defteri tutar.
 
-Peki, konteyner teknolojisi nedir? Docker'ın arkasındaki fikir, uzak bir kaynaktan bir imaj çekebilmesi, yerel makinenize çekebilmesi ve ardından bu imaja dayalı bir konteyner oluşturabilmesidir.
+Docker ile yerel olarak hangi imajlara sahip olduğumuzu "docker image ls" yaparak görebiliriz. Ve bu durumda burada bir sürü Docker imajı olduğunu görebilirsiniz, bunların hepsi bu Codespaces'i kurmakla ilgili. Hepsi dev containerlar ve şeylerle ilgili. Yani bunlar hakkında çok fazla endişelenmenize gerek yok, ama bu kurs ilerledikçe daha fazla imaj ekleyip indirdikçe, o listeyi kontrol edebilirsiniz ve yerel kayıt defterinin çektiğimiz tüm bu şeyleri takip ettiğini göreceksiniz.
 
-Bu çalışan konteyner, bilgisayarınızda çalışan bir sanal makineye biraz benzer. Ortamınızdan izole edilmiştir ve önceden paketlenmiş bir işletim sistemi ve bir dizi mevcut yazılımla birlikte gelir.
+Ama yeni bir tane alacağız "docker pull" yaparak. Ve bu Docker'a web'den yeni bir imaj getirmesini söyler.
 
-## 1.1. Konteyner imajını çekin
+Ardından o konteyner için URI'yi koyuyoruz. Şimdi bu, yerel olarak oluşturduğunuz ve ardından internete gönderdiğiniz bir docker imajı olabilir. Başka birinin yaptığı bir imaj olabilir. Docker imajları yapmanın çok, çok, çok farklı yolları var, ama muhtemelen en basit yollardan biri bunu dış kaynak kullanmak ve bunu başka birinin sizin için yapmasını sağlamak.
 
-Önceden var olan bir imajı çekmek için ihtiyacımız olan sözdizimi "docker pull". Terminalime yazacağım, ancak şimdi oynayacak bir imaja ihtiyacımız var.
+Ve bu eğitimde kullanacağımız şey, Seqera'dan Seqera Containers adlı bir hizmettir.
 
-İmajları kendiniz oluşturabilirsiniz. Onları Docker Hub veya quay.io gibi genel kayıt defterlerinde bulabilirsiniz. Ancak imajları hızlı bir şekilde almanın gerçekten iyi bir yolu Seqera Containers kullanmaktır.
+Şimdi, Seqera Containers tamamen ücretsizdir ve Wave adını verdiğimiz, Nextflow'a tamamlayıcı bir şekilde konteynerleri yönetmek için oluşturulmuş açık kaynaklı bir yazılım parçası kullanır. Ve Nextflow ile uğraştığımız birçok yaygın kullanım durumunu ele alır.
 
-Bu, 2024'te oluşturduğumuz, giriş yapmadan veya herhangi bir şey olmadan kullanabileceğiniz, kullanımı ücretsiz bir topluluk hizmetidir.
+İhtiyacımız olan yazılımın Conda'da, Bioconda'da veya conda-forge kanallarında veya diğer daha alana özel kanallarda paketlenmiş olması çok yaygındır. Ve Wave ve Seqera Containers bundan imaj oluşturmada gerçekten iyidir.
 
-seqera.io/containers adresine giderseniz veya burada üstteki containers'a tıklarsanız, size bir arama arayüzü sunulur ve Conda'da veya Python Package Index'te bulunan herhangi bir aracın adını yazabilirsiniz.
+Yani bu web arayüzüne gidebilirim ve "cowpy" adlı bir paketle oynayacağız. Yani istediğim paketin adını yazıyorum. Arama yapıyor, Python paket dizininde buldu, bu yüzden bunu kullanabilirim. Ya da biraz daha beklersem, bioconda ve conda-forge'u arıyor. Ve görebilirsiniz, burada herhangi bir conda kanalı belirleyebilirim. Yani bir Nvidia kanalı veya başka bir şey bulmak isterseniz, bu da çalışmalı.
 
-Varsayılan olarak, Bioconda ve Conda Forge kanallarını arar, ancak istiyorsanız herhangi bir Conda kanalını önek olarak ekleyebilirsiniz.
+Ve ardından benim için bir docker imajı mı yoksa bir singularity imajı mı oluşturmasını istediğimi ve ayrıca hangi CPU mimarisini kullanmak istediğimi belirleyebilirim. Yani amd64 veya arm64.
 
-Biraz eğlenmek için cowpy kullanalım. cowpy yazacağım. Bana Python Package Index ve Conda Forge'dan sonuçlar veriyor. Konteynerime eklemek için buna tıklayacağım. İsteseydim buraya birden fazla paket ekleyebilirdim. Docker'ı seçin, linux/amd64'ü seçin ve Get Container'a tıklayın.
+Ve bioconda sonuçları listelendikten sonra, artık mevcut olan tüm farklı sürümleri de görebiliyorum. Bunu koyacağım. Ve şimdi aramaya devam edip Conda'dan daha fazla paket alabilirdim ve bu konteyneri istediğim gibi oluşturabilirdim, ama sadece bunu istiyorum. Yani Get Container'a tıklayacağım.
 
-Bu, henüz oluşturulmadıysa imajı benim için talep üzerine oluşturur ve kopyalayabileceğim bir URL verir.
+Şimdi, başka biri daha önce aynı konteyneri istemiş ve bir kayıt defterinden döndürüldü, bu yüzden hemen alıyoruz. Ama başka hiç kimse bu yazılım paketini veya bu yazılım paketi kombinasyonunu hiç istememişse, Wave ve Seqera Containers bunu bizim için anında oluşturur.
 
-İlgileniyorsanız, view Build Details'e tıklayabilirsiniz ve bu sizi kullanılan conda ortam dosyasını ve güvenlik tarama sonuçlarıyla birlikte yapı için tam yapı günlüğünü gösteren bir sayfaya götürür.
+Bu URL'yi kopyalayabiliriz ve ayrıca yapı detaylarını görebiliriz. Ve bu bize hizmetin arka planda ne yaptığını gösterir. Bir conda ortam dosyası oluşturdu. Bir docker dosyası ve sonra işte bu, docker yapı sürecini çalıştırıyor. Ayrıca bir tarama, bir güvenlik taraması çalıştırdı, böylece herhangi bir CVE'yi görebilirsiniz. Ve bunun ne zaman oluşturulduğunu söyler.
 
-Code spaces'e geri dönersem, artık bu konteyner adını yapıştırabilir ve enter tuşuna basabilirim.
+Wave ve Seqera Containers bundan çok daha fazlasını yapabilir, ama bu en yaygın olan basit bir kullanım durumu türü. Ve bu imajların en az beş yıl boyunca barındırıldığını söylemeliyim. Yani bu URL'leri boru hatlarınıza yerleştirebilir ve yakın zamanda kaybolmayacaklarını bilebilirsiniz.
 
-Docker şimdi bu konteyner imajı içindeki tüm farklı katmanları indirir ve şimdi bu imajın kullanıma hazır olduğunu söyler.
+Yani cowpy için docker imajım için URL'mi aldım.
 
-## Bir Singularity imajı çekme
+Şimdi "docker pull" o URL'yi yapabilirim ve tüm farklı katmanları getirip bu imajı yerel olarak kullanılabilir hale indirecek.
 
-Singularity kullanıyorsanız, süreç temelde aynıdır. İmaj paketlerimizi seçiyoruz, cowpy'yi seçiyoruz. Şimdi Docker yerine Singularity'yi seçiyoruz ve Get Container'a tıklıyoruz. Bu bize oras:// kullanan bir imaj URL'si verir. Veya isterseniz, bu kutuyu işaretleyerek https:// kullanabilirsiniz. Bu URL'yi kopyalayın. Şimdi Code Spaces'e gidin. Aslında bu alanda Singularity ile aynı olan Apptainer yüklü, ancak birbirlerinin takma adılar. Bu yüzden apptainer pull yapacağım ve sonra ona cowpy sif diyeceğim, ama istediğiniz gibi adlandırabilirsiniz. URL'yi yapıştırın. Ve bu imajı benim için indirecek.
+## 1.2. Konteyneri cowpy'yi tek seferlik komut olarak çalıştırmak için kullanma
 
-ls -lh yapabilir ve cowpy.sif'i görebilirim
+Tamam, şimdi onu gerçekten kullanmayı deneyelim. Yani şimdi "docker pull" komutu yerine "docker run" komutu kullanacağım ve "--rm" bayrağını kullanacağım, bu sadece Docker'a benden yapmasını istediğim şeyi bitirdiğinde bu konteyneri kapatmasını söyler. Ve sonra konteyner için tanımlayıcıyı koyuyorum, bu sadece bir URI.
 
-Singularity Docker'dan farklıdır, singularity tüm imajları düz dosyalarda saklar, oysa Docker, tüm katmanları ana makinenizde ayrı ayrı tutan bir kayıt defterine sahiptir ve tüm bunları takip etmek için çalışan bir daemon'a sahiptir.
+Ve sonra sonunda, Docker'ın konteyner içinde çalıştırmasını istediğim komutu belirtiyorum. Sadece cowpy diyeceğim, bu Conda Forge'dan yüklenen, imaj içinde mevcut olan aracın adı.
 
-## 1.2. Cowpy'yi tek seferlik bir komut olarak çalıştırmak için konteyneri kullanın
+Enter'a basacağım ve işte buyurun. Bir sistemde cowpy'yi çalıştırdık. Bize biraz bilgi veren küçük bir ineğimiz var.
 
-Tamam, Docker'a geri dönelim. Artık docker run yaparak oluşturduğumuz bu imajı çalıştırmayı deneyebiliriz.
+Şimdi dikkat edin cowpy yerel sistemimde kurulu değil. Yani eğer sadece tüm Docker şeyleri olmadan çalıştırırsam, command not found diyor. Yani bu bir imaj çekti. Docker kullanarak bir konteyner oluşturdu ve sonra o konteynerin içine gitti ve bu komutu bizim için çalıştırdı ve çıktıyı terminalimize geri verdi. Çok, çok havalı.
 
-Dash dash rm yapacağım, bu sadece imajın tek seferlik bir çalıştırmasını yapar. Ve imaj URL'sini yapıştıracağım. Ve son olarak, bunu çalıştırmak istediğiniz bir komutla bitirirsiniz.
+## 1.3. Konteyneri cowpy'yi interaktif olarak çalıştırmak için kullanma
 
-Oluşturduğumuz imajda cowpy yüklüydü, o yüzden cowpy'yi deneyelim.
+Tamam, şimdi bir adım daha ileri gideceğiz ve bu konteyneri interaktif olarak çalıştıracağız ve etrafa bir göz atacağız, böylece konteyner içinde ne olduğunu görebiliriz.
 
-İşte. Komutumuzu çalıştırdı. Yerel olarak yüklü cowpy'm yok. Çalıştırmayı denersem, mevcut olmadığını görebilirsiniz. Ancak bu komutta, Docker kullanarak çalıştırdım ve bu çıktıyı doğru bir şekilde üretti.
+Yani geri gidip çalıştırma komutumu alırsam ve sondaki cowpy'yi çıkaracağım, çünkü aslında cowpy çalıştırmak istemiyorum. Bir Bash terminali çalıştırmak istiyorum.
 
-## 1.3. Cowpy'yi etkileşimli olarak çalıştırmak için konteyneri kullanın
+Ve sonra buraya geri gideceğim ve "-it" yapacağım, bu Interactive ve Terminal veya TTY anlamına gelir ve enter'a basacağım.
 
-İstersek bundan daha ileri gidebilir ve etkileşimli olarak bir konteyner başlatıp içeride etrafta bakınabiliriz. Yine, "docker run dash dash rm" yapıyorum. Şimdi dash it yapacağım, bu Docker'a etkileşimli bir terminal istediğimizi söyler. İmaj URL'sini tekrar yapıyorum ve bu sefer cowpy yapmak yerine, bin bash yapacağım çünkü çalıştırmak istediğimiz komut bash.
+Ve şimdi istem görebilirsiniz, yazdığım kısımdan önceki kısım değişti. Bu, dizini söyleyen Codespaces istemiydi ve şimdi base ve root ve tmp diyor. Yani şimdi konteyner içindeyim ve eğer "ls" yaparsam, bu dizinde gördüğüm dosyaların çalışma alanımdaki dosyalardan farklı olduğunu göreceksiniz.
 
-Bu bizi bu çalışan konteynere götürür ve prompt'un şimdi değiştiğini görebilirsiniz.
+Ve aslında, yerel codespaces çalışma alanımdan veya yerel sürücümden hiçbir dosyayı Docker konteyneri içinde göremiyorum. Docker konteyner çalışma zamanı tamamen izole edilmiştir ve dışarıdaki bir host dosya sisteminden hiçbir dosyayı yazamaz veya okuyamaz.
 
-LS slash yaparsam buradaki dizinlerin farklı olduğunu görebilirsiniz.
+Ancak, konteyner içinde yüklü olan yazılımı görebilir ve çalıştırabilirim. Yani cowpy'yi çalıştırabilirim ve cowpy'nin nasıl kullanılacağı hakkında biraz daha görebiliriz. Burada "cowpy 'Hello World'" yapabilirim ve bu, alıntımı aslında küçük bir konuşma balonunun içine koymasını söyler. Ve farklı inek türlerini de çalıştırabilirsiniz, yani inek olmak zorunda değil. "-c" yapabilirsiniz. Ve ben İsveç'teyim, bu yüzden bir geyik seçeceğim. Çok güzel. Ona boynuz verdi.
 
-Sağ tarafta GitHub Code Spaces'te çalışan ikinci bir terminal açarsam ve LS slash yaparsam, workspaces ve temp gibi dizinlerimiz olduğunu görürsünüz, oysa burada Docker'da farklı.
+Ve eğitim dokümanlarında açıklandığını görebileceğiniz oynayabileceğiniz bir sürü farklı tane var.
 
-Bu ortam Docker içinde tamamen ayrı ve ana ortamımdan izole. Bu iyi bir şey, çünkü bu komutun yürütülmesini Docker imajına izole eder ve farklı ana sistemlerde farklı insanlar arasında tekrarlanabilir tutar.
+## 1.3.4. Konteynere veri bağlama
 
-Ana sisteminizdeki verileri Docker imajı içinde kullanmak istiyorsanız, bunu açıkça konteynere monte etmeniz gerekir.
+Tamam. Dosya sistemimizdeki dosyalar üzerinde cowpy çalıştırabilseydik güzel olurdu.
 
-Bunu birazdan yapacağız.
+Tabii ki, sadece konteynere sahip olmak ve hiçbir şeye erişim olmamak çok kullanışlı değil. Güvenli ve tekrarlanabilir olabilir, ama çok kullanışlı değil.
 
-## 1.3.2. İstenen araç komut(lar)ını çalıştırın
+Peki bunu nasıl yaparız? Bu Docker konteynerinden exit yazarak çıkacağım ve istem bize şimdi tekrar normal Codespaces'imizde olduğumuzu söylüyor.
 
-Ama önce, cowpy'yi çalıştırıp çalıştıramayacağımızı görelim. Yine, komut artık doğrudan komut satırında mevcut ve daha karmaşık şeyler yapmaya ve argümanlar geçirmeye başlayabiliriz. Hello containers ve inek yerine, tux penguenini yapalım. Başka nelerimiz var görelim.
+Ve aynı komutu tekrar çalıştıracağım. Ama bu sefer buraya bazı ek bayraklar ekleyeceğim. Ve önemli olanı "-v"dir, bu bir volume bağlamak anlamına gelir, bu temelde bir disk alanının bir parçası gibi bir şey.
 
-Cheese yapalım. Harika. Dragon ve Cow'a ne dersiniz? Oldukça iyi.
+"-v" iki kısım alır: bir string gibi bir şey var ve sonra iki nokta üst üste ve bir string. Ve ilk kısım konteynere bağlanması gereken yerel dosya sistemidir. Ve sonra ikinci kısım bunun konteyner içinde nereye gitmesi gerektiğidir.
 
-## 1.3.3. Konteynerden çıkın
+Şimdi sadece tüm yerel dosya sistemimi buraya yüklemek istiyorum. Yani "." mevcut çalışma dizinidir. Yani sadece "." yapacağım ve sonra ":", ve sonra bunu konteyner içinde "my_project" adlı yeni bir dizine koyacağız. Bu gerçekten herhangi bir şey olarak adlandırılabilirdi.
 
-Tamam. Bu konteynerde hiç verim olmadığı için daha fazla bir şey yapamam. O halde bu çalışan imajdan çıkalım ve konteynere bazı verileri monte edip edemeyeceğimizi görelim. Bunu control D yaparak veya exit yazarak yapabilirim. Tamam, şimdi normal GitHub code space'ime geri döndüm.
+Ve sonra tekrar çalıştıracağım.
 
-## 1.3.4. Verileri konteynere monte edin
+Bırakıldığım çalışma dizininde, /tmp, dosyalar orada değil. Ama eğer "ls my_project" yaparsam, işte buyurun: Codespaces'te yerel olarak sahip olduğumuz tüm aynı dosyalar şimdi o yoldaki konteyner içinde mevcut.
 
-Docker konteynerine bazı verileri monte etmek için dash V kullanmam gerekiyor. Bu yüzden önceki docker komutumu alacağım, başa gidip dash v yapacağım. Mevcut yerel çalışma dizini için "." yapacağım ve sonra bunun ana dizinde nereye monte edilmesi gerektiğini söylemek için bir iki nokta yapıp slash data yapacağım. Yani bu özel dizini konteynerdeki slash data konumuna monte ediyor.
+Bu okuma ve yazma erişimidir, bu yüzden bu dizinde yeni dosyalar oluşturabilirim ve bunlar host dosya sistemimde görünecek. Bu özel dizin, o zaman konteyner dışındaymışım gibi tam olarak davranır, böylece şimdi okuyabilir ve yazabilir ve şeyler yapabilirim.
 
-Şimdi LS slash yaparsam data adında yeni bir dizin görebiliriz ve LS data yaparsam, burada yan çubukta sahip olduğumuz tüm dosyaları görebilirsiniz. Harika.
+## 1.3.5. Bağlanan veriyi kullanma
 
-## 1.3.5. Monte edilen verileri kullanın
+Tamam, bunu yapabileceğimizi kanıtlayalım. "cat /my_project/data/greetings.csv" yapıyorum. Eğer hatırlarsanız bu dosya içerikleri böyle görünür. Şimdi bunu cowpy'ye aktarabilirim ve inek o dosyanın farklı çıktılarını küçük konuşma balonunda yazdıracak, bu biraz eğlenceli.
 
-Şimdi Docker imajı içinde ana sistemde bulunan bazı dosyaları kullanmaya başlayabiliriz. Yani cat data greetings csv diyebilirim. Hatırlarsanız, bu daha önceki farklı selamlamalarımızın bulunduğu CSV dosyamız ve bunu cowpy'ye pipe edebilirim. Harika. Şimdi bir yerlere varıyoruz.
+Yani görebilirsiniz, şimdi konteynerdeki yazılımı host sistemimizdeki dosyalarla etkileşim kurmak için kullanabiliriz.
 
-Tamam. Docker'ı etkileşimli olarak çalıştırmak için bu kadar yeter. Umarım artık Docker'ın kabaca ne olduğu ve hem tek seferlik bir şekilde komut çalıştırmak hem de bir imajı etkileşimli olarak kullanmak için nasıl kullanılacağı konusunda bir fikriniz olmuştur. Singularity kullanıyorsanız, komutların hepsi çok benzerdir, sadece apptainer exec veya apptainer run veya singularity exec veya singularity run gibi şeyler yaparsınız.
+Tamam, tekrar dışarı çıkalım ve eğitim materyalinin geri kalanıyla devam edelim.
 
-## 2. Nextflow'da konteynerler kullanın
+## 2. Nextflow'da konteyner kullanma
 
-Sonra Nextflow workflow'umuza geri döneceğiz ve bu teknolojiyi Nextflow pipeline'ı içinde nasıl kullanacağımızı göreceğiz.
+Yani konteyner kullanmak gerçekten havalı. Umarım mantıklıdır. Ve bu konteynerlerin değerini ve analiz yazılımı çalıştırmak için neden kullanışlı olduğunu görebilirsiniz.
 
-Hadi terminali kapatalım ve Hello Containers'ı tekrar açalım.
+Ama tüm bu aynı süreci Nextflow içinde nasıl yaparız? Kendimiz bir sürü Docker komutu çalıştırmak istemiyoruz. Sadece Nextflow'un tüm bunları bizim için halletmesini istiyoruz.
 
-## 2.1. Bir cowpy modülü yazın
+Öyleyse bunu çözelim. Boru hattımıza cowpy çalıştırmak için yeni bir süreç ekleyeceğiz. Tamam, yeni sürecimiz için yeni bir modül oluşturalım. Yani modüllere gidin, buna cowPy.nf diyelim ve sonra eğitim materyalinden kodu kopyalayacağım.
 
-Cowpy örneğimize bağlı kalmak için, workflow'umuzda cowpy kullanan yeni bir işlem oluşturalım. Modüllere gidelim, yeni bir dosya oluşturalım ve ona cowpy nf diyelim. Şimdi biraz hile yapacağım ve eğitim materyalinden kodu kopyalayıp kaydet'e basacağım. Ve bir bakalım.
+Ama görebilirsiniz süreç çok basit. Şimdiye kadar yaptıklarımıza çok benziyor, girdi dosyamız olan bir yol ile bir girdi bloğumuz var ve ayrıca burada bir değer var, böylece bu bir karakter olacak, böylece isterseniz tekrar bir geyik kullanabiliriz.
 
-Yani bu basit bir işlem. Umarım artık bir işlemin yapı taşlarının nasıl göründüğünü anlıyorsunuzdur. publishDir'imiz tekrar var, results'a gidiyor. İki girdimiz var, bir girdi dosyası ve character adında bir string. Bir çıktımız var cowpy input file ve tam olarak Docker imajımızda bir saniye önce manuel olarak çalıştırdığımıza benzeyen bir betiğimiz var: bir dosyayı yazdırmak için cat, bunu cowpy'ye pipe ederek, hangi tür cowpy karakterini kullanmak istediğimizi söyleyerek ve bunu burada çıktı olarak geçirdiğimiz çıktı dosyasına çıktılayarak.
+Ve sonra bir çıktı, bu burada tek bir dosya, bir yol ve sonra bir script. Ve konteynerin içinde interaktif olarak yaptığımız şeyin aynısını yapıyoruz: girdi dosyasını okumak için "cat" yapıyoruz. O içerikleri cowpy'ye aktarıyoruz. O girdiye göre belirli bir karakter seçiyoruz, cowpy girdi dosyası adlı bir çıktı dosyasına yazıyoruz, bu daha sonra çıktıya yansıtılıyor.
 
-## 2.2. Workflow'a cowpy ekleyin
+Harika. Bunu dahil edelim. Yani include \{ COWPY \} from "./modules/cowpy.nf", buna cowpy mi dedim? Evet.
 
-Tamam, workflow'umuza geri dönelim, bu yeni işlemi içe aktaralım. Yani modules cowpy nf'den cowpy. Hangi karakteri istediğimizi belirtebilmemiz için yeni bir parametre oluşturalım. Varsayılan olarak Turkey diyelim. Ve sonra workflow'un sonunda bu yeni işlemi çağıralım,
+Ve sonra yeni sürecimizi iş akışının ana bloğunda çağıralım. Yani cowpy'yi çalıştıralım. Ve yeni cowpy sürecimizi alacağız ve collectGreetings.out diyeceğiz.
 
-cowpy. Ve burada Collect Greetings'ten çıktıyı kullanalım. Yani collect greetings out, burada out file. Ve sonra ihtiyacımız olan ikinci bir argüman var, bu da az önce yaptığımız yeni params. params dot character.
+Ve eğer hatırlarsanız, bu modül için iki çıktı vardı. Biri outfile, diğeri report. VS Code uzantısı bunları bizim için otomatik öneriyor ve .outfile istiyoruz.
 
-## 2.2.4. Çalıştığını doğrulamak için workflow'u çalıştırın
+Her zaman buradan bu sürece atlayabilirsiniz. Ya üzerine gelirsiniz ve çıktıların ne olduğunu hızlıca gösterir. Ve daha fazla detay görmek isterseniz içine komut tıklayıp modül dosyasını açabilirsiniz.
 
-Tamam, yeni işlemimizin çalışıp çalışmadığını görelim. Nextflow run hello containers. Bu, ilk üç işlemi çalıştırmalı ve sonra sonunda cowpy'yi çalıştırmaya çalışmalı.
+Yani işte buyurun. Outfile orada ve bu yol. Yani bu şimdi cowpy sürecimiz için girdi dosyası olacak. Harika.
 
-Bir hata aldık. Burada söylediği şey, cowpy'de bir hata oldu ve 127 çıkış durumu vardı ve elbette, komut sh cowpy komutu bulunamadı.
+Şimdi eğer hatırlarsanız, bir cowpy sürecinin iki girdisi var. Ayrıca karakter için değer kanalı vardı. Yani buraya "params.character" ekleyebiliriz. İstersenm bunu sabit kodlayabilirdim, ama onu bir CLI seçeneği yapalım, böylece tire, tire character yapabiliriz.
 
-Nextflow'a cowpy için mevcut bir Docker imajımız olduğunu söylemedik, bu yüzden onu ana sistemimizde çalıştırmaya çalıştı ve ana sistemimizde yüklü cowpy'miz yok, bu yüzden bir hata tetikledi.
+Doğru. Şimdi az önce çağırdığımız girdi parametresini tanımlamam ve ona bir varsayılan vermem gerekiyor. Yani character, String. Ve geyiği seviyorum, bu yüzden varsayılan olarak moose'a ayarlayacağım.
 
-## 2.3. Çalıştırmak için bir konteyner kullanın
+Doğru, çalıştırmayı deneyelim. Yani eğer Nextflow run hello containers yaparsam, ne olduğunu göreceğiz.
 
-Yapmamız gereken şey, Nextflow'a mevcut bir konteynerimiz olduğunu söylememiz. Cowpy işlemimize gidelim ve işlemin üstüne container adında yeni bir yönerge ekleyeceğiz.
+Eski çalışma dizinleri etrafta dolaşsaydı tire resume kullanabilirdim. Ve yine, bu ilk süreçler önbelleğe alınmış olurdu ve biraz daha hızlı olurdu, ama temelde aynı olmalı.
 
-Sonra imajımızı buluyoruz, URL'yi kopyalıyoruz ve bunu bir string'e koyuyoruz.
+Şimdi hemen görebiliriz ki yeni sürecimize geldiğinde bir hata fırlattı, bize burada cowpy sürecini çalıştırırken bir hata olduğunu söylüyor ve 127 çıkış durumu ile çıktı. Çalıştırmaya çalıştığı komut bu. Doğru görünüyor, beklediğimiz gibi görünüyor. O çıktı dosya adını alıyor, bu doğru görünüyor, bir moose karakteriyle çalıştırıyor ve kaydetmeye çalışıyor.
 
-Bu tek başına yeterli değil çünkü bir X Flow pipeline'ı yazılımı belirtmenin birkaç yolu olabilir. Örneğin conda conda-forge cowpy da yapabilirim. Ve Nextflow'un hangi teknolojiyi kullanmak istediğinizi bilmesi gerekir.
+Ama burada komut hatasının cowpy komutunun bulunamadığını söylediğini görebilirsiniz. Ve bu mantıklı çünkü henüz Nextflow'a bir konteyner kullanmasını söylemedik. Sadece ona cowpy komutunu verdik. Ve daha önce söylediğim gibi, cowpy yerel sistemimizde kurulu değil. Yani çalıştırmayı denediğinde, başarısız oldu.
 
-## 2.3.2. nextflow.config dosyası aracılığıyla Docker kullanımını etkinleştirin
+## 2.3.1. cowpy için bir konteyner belirtme
 
-Bu yüzden Docker etkinken çalıştırmak için, kendimizi biraz ileride atacağız ve bir sonraki bölümde daha ayrıntılı olarak ele alacağımız Nextflow config dosyasını kullanacağız. Bu dizinde Nextflow Config adında bir dosyamız olduğunu görebilirsiniz ve burada zaten docker.enabled False var.
+Nextflow'a mevcut bir konteyner olduğunu ve kullanabileceğini söylememiz gerekiyor. Peki bunu nasıl yaparız?
 
-Docker'ı etkinleştirmek için bunu True olarak değiştireceğiz ve sonra workflow'u tekrar çalıştırmayı deneyebiliriz.
+Modülümüze girelim, üste "container" adlı yeni bir bildirim ekleyeceğiz. Ve bunu bir stringe ayarlayacağız.
 
-## 2.3.3. Docker etkinken workflow'u çalıştırın
+Şimdi, eğer hatırlarsanız, Seqera Containers'da, o URL'yi kopyalayabilirim ve bunu buradaki tırnak içine bırakıyorum.
 
-Nextflow run hello containers nf ve bu sefer cowpy başarıyla çalıştı. Results'a bakalım. cowpy collected test ve işte Turkey'imiz. Harika.
+Şimdi geri dönün ve tekrar çalıştırmayı deneyin.
 
-Yani arka planda, Nextflow o işlem için mevcut bir konteyneri olduğunu biliyordu.
+Bakalım bu sefer çalışacak mı.
 
-İmajı çekti ve komutları bizim için çalıştırdı.
+Ne yazık ki, süreç için bir konteyner tanımlamış olmamıza rağmen tamamen aynı şekilde başarısız oluyor. Yani docker imajımızı kullanabilmek için, iş akışını çalıştırdığımızda Nextflow'a Docker kullanımını etkinleştirmesini söylememiz gerekiyor.
 
-## 2.3.4. Nextflow'un konteynerli görevi nasıl başlattığını inceleyin
+Ve bunu yeni bir yapılandırma dosyası oluşturarak yapacağız. Yani touch nextflow.config diyeceğim.
 
-Merak ediyorsanız, aslında tam olarak ne yaptığını work dizinine bakarak görebiliriz. Code work yaparsam, sonra hash ve sonra command run, hatırlarsanız o görev için yürütülen gerçek dosya, içeri girebilir ve NXF launch adlı bir fonksiyon arayabiliriz. Ve burada Nextflow'un kullandığı tam docker komutunu görebilirsiniz, bu daha önce terminalde manuel olarak yaptığımıza çok benziyor. Docker run. Bu ana dizini konteynere bağlama ve sonra konteyner URL'sini belirtme.
+Bu, boru hattını başlatırken çalışma dizinindeyse otomatik olarak yüklenecek özel bir dosya adıdır. Yani bu Nextflow dot config dosyasına girersem, aslında zaten var olduğunu görebilirsiniz, bunu unutmuştum. Ve burada zaten docker.enabled var, ama false'a ayarlı, bu varsayılan.
 
-Yani burada sihir yok. Sadece Nextflow sizin için ağır işi otomatik olarak yapıyor, pipeline'ınızda konteynerleri kolayca belirtebileceğiniz ve sonra workflow'unuzu çalıştıran diğer herkesin kolayca kullanabileceği bir şekilde. Ve bu insanların artık analiz pipeline'ınızı çalıştırmak için yazılım yönetimi hakkında düşünmelerine gerek kalmıyor.
+Yani eğer bunu bunun yerine True'ya eşit olacak şekilde değiştirirsem, docker.enabled. Ve bunların tümü için Nextflow dokümanlarında referans dokümanları var. Ve ayrıca VS Code uzantısı ile üzerine geldiğimde, bununla ilgili dokümanları çeker ve bunun ne anlama geldiğini ve nasıl ayarlanacağını söyler.
 
-Çok, çok basit, çok kullanışlı ve aynı zamanda gerçekten tekrarlanabilir. Her açıdan iyi.
+Yani şimdi true'ya ayarladık ve eğer Nextflow'u tekrar çalıştırırsam, Nextflow şimdi o docker imajını yerel olarak henüz yoksa bizim için çekmeyi ve ardından o sürecі o konteyner ortamıyla çalıştırmayı bilecek.
 
-Tamam, harika iş. Bu Beşinci Bölümün sonu. Nextflow yapılandırmasından daha ayrıntılı olarak bahsedeceğimiz bu Merhaba Nextflow eğitiminin son bölümü olan altıncı bölüm için bir sonraki videoda bize katılın.
+Ve başarıyla çalıştığını ve cowpy'nin yanında küçük bir tik işareti olduğunu görebiliriz. Harika. Eğer yukarı çıkıp sonuçlar dizinine bakarsam, dosya henüz orada değil. Ve bunun nedeni, diğerlerinin hepsi gibi bu çıktı dosyasını yayınlamamız gerekiyor.
 
-Bir sonraki videoda görüşürüz.
+Yani iş akışı içindeki yayınlama bloğuna gidiyoruz, mycowpy equals cowpy.out diyoruz.
 
-[Sonraki video transkripti :octicons-arrow-right-24:](06_hello_config.md)
+Ve sonra burada çıktı bloğunda, mycowpy, küme parantezler path. Hoop. Hello containers. Mode, copy.
+
+Şimdi tekrar çalıştırırsam, tamamen aynı şekilde çalışmalı. Tire resume kullanabilirdim ve her seferinde unutuyorum. Ve sonra yukarı çıkıyorum ve şimdi cowpy-COLLECTED adlı yeni bir dosya oluşturuldu ve işte benim geyiğim BONJOUR, HELLO, HOLA diyor. Harika.
+
+Şimdi tabii ki şimdi ayrıca "--character" geçirebilirim. Farklı seçenekler neler? Sanırım bir Turkey var? Yani character Turkey kullanabilirim. Tamamen aynı şekilde çalışacak. Tire resume kullanmak için başka bir fırsatı kaçırdım ve şimdi dosyamızı yüklersek ve şimdi bir Turkey'imiz var. Harika.
+
+## 2.3.4. Nextflow'un konteynerize edilmiş görevi nasıl başlattığını inceleme
+
+Tamam. Son küçük şey. Hadi bu komutu tekrar hızlıca çalıştıralım, bu sefer resume, ve Nextflow'un tüm bunların bizim için çalışmasını sağlamak için perde arkasında ne yaptığını görmek için çalışma dizinine hızlıca bir göz atalım.
+
+Bu sefer süper hızlı, hadi bu çalışma dizinine gidelim, cd work/. Şimdi eğer hatırlarsanız burada bir sürü nokta dosyamız var ve bu durumda ilgilendiğimiz, neredeyse hiç bakmamız gerekmediğini söylediğim .command.run adlı olan.
+
+Eğer code dot command run yaparsam, editörde açacak. Ve bu dosyada arama yapabilirim ve aşağı kaydırırsam Docker run'ı görmeliyim. Ve Nextflow'un Docker etkinleştirildiğinde bizim için docker run komutunu yaptığını görebilirsiniz. Burada bir sürü farklı bayrak ve şey var, ama kendimiz çalıştırırken kullandığımız "-v" bayrağını görebilirsiniz. Ve yerel çalışma alanı dizinini konteynere bağladığını görebilirsiniz, böylece konteyner girdi dosyalarımıza erişebilir ve çıktıları kaydedebilir. Ve sonunda, ayrıca .command.sh'yi çalıştırıyor, bu içinde cowpy komutu olan üretilmiş scripttir.
+
+Ve böylece Nextflow'un iş akışı mantığını aldığını görebilirsiniz, bu gerçekten önemsediğimiz şeydir, analizimize özgü olandır, ve sistemimizde Docker'ın çalışmasını sağlamak için tüm akıllı perde arkası işleri yapıyor.
+
+Ve bunu gerçekten taşınabilir bir şekilde yapıyor, böylece boru hattının son kullanıcısı kullandıkları teknolojiyi değiştirebilir: Docker, Singularity, Apptainer, Conda. Bu gerçekten boru hattı mantığı için önemli değil, ama Nextflow tüm temel altyapı ihtiyaçlarını halledecek, böylece her yerde çalışır.
+
+Ve bu gerçekten Nextflow'un süper gücüdür. Tekrarlanabilirlik ve taşınabilirlik. Ve Nextflow ile iş akışınızı gerçekten paylaşabilir ve diğer insanlar sistemlerinde çalıştırabilir ve sadece çalışacaktır.
+
+Bu yapmak gerçekten, gerçekten zor bir şeydir ve şimdi siz de iş akışlarınızla bunu nasıl yapacağınızı biliyorsunuz.
+
+Tamam, bu bölüm için bu kadar. Eğer bir kursun sonuna giderseniz, konteynerler hakkında tekrar bir sınav bulacaksınız. Umarım hepsi mantıklıydı. Analizle çalışmanın gerçekten havalı bir yolu. Ve konteynerlere yeniyseniz, umarım bunun gidilecek yol olduğuna sizi ikna etmişimdir ve asla geriye bakmayacaksınız.
+
+Ama bununla, belki biraz mola verin ve bir kaç dakika içinde Hello Nextflow'un tamamı yapılandırma hakkında olan son altıncı bölümü geçmek için bana katılın.
+
+Çok teşekkür ederim.

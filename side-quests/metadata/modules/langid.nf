@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 // Use langid to predict the language of each input file
 process IDENTIFY_LANGUAGE {
 

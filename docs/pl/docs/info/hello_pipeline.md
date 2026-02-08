@@ -8,7 +8,7 @@ hide:
 
 # Pipeline Hello
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Większość naszych kursów szkoleniowych używa prostego, domenowo-agnostycznego pipeline'u do demonstracji koncepcji i mechanizmów Nextflow.
 Kurs Hello Nextflow pokazuje, jak rozwijać ten pipeline krok po kroku, wyjaśniając każdą decyzję projektową i implementacyjną.
@@ -18,14 +18,14 @@ Ta strona podsumowuje stan pipeline'u po ukończeniu kursu Hello Nextflow.
 
 ### Krótki opis
 
-Workflow Hello przyjmuje plik CSV zawierający teksty powitalne. Zapisuje je do oddzielnych plików i konwertuje na wielkie litery. Następnie zbiera je z powrotem razem i generuje pojedynczy plik tekstowy z obrazkiem ASCII zabawnej postaci wypowiadającej te teksty.
+Workflow Hello przyjmuje plik CSV zawierający pozdrowienia, zapisuje je do oddzielnych plików, konwertuje każde na wielkie litery, zbiera je ponownie razem i generuje pojedynczy plik tekstowy zawierający obrazek ASCII zabawnej postaci wypowiadającej te pozdrowienia.
 
 ### Kroki workflow (procesy)
 
 Cztery kroki są zaimplementowane jako procesy Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) przechowywane w oddzielnych plikach modułów.
 
-1. **`sayHello`:** Zapisuje każdy tekst powitalny do własnego pliku wyjściowego (np. "Hello-output.txt")
-2. **`convertToUpper`:** Konwertuje każdy wpis na wielkie litery (np. "HELLO")
+1. **`sayHello`:** Zapisuje każde pozdrowienie do własnego pliku wyjściowego (np. "Hello-output.txt")
+2. **`convertToUpper`:** Konwertuje każde pozdrowienie na wielkie litery (np. "HELLO")
 3. **`collectGreetings`:** Zbiera wszystkie pozdrowienia wielkimi literami do pojedynczego pliku wsadowego
 4. **`cowpy`:** Generuje grafikę ASCII za pomocą narzędzia `cowpy`
 

@@ -620,19 +620,17 @@ Bu sefer operatör `collect` olarak adlandırılır ve `convertToUpper` tarafın
 
 Bu workflow bağlamında, `convertToUpper.out` channel'ındaki üç büyük harfli selamlamayı --bunlar üç ayrı channel öğesidir ve normalde sonraki process tarafından ayrı çağrılarda işlenirler-- alıp tek bir öğeye paketliyor.
 
-Daha pratik terimlerle: `collectGreetings()`'e beslemeden önce `convertToUpper()`'ın çıktısına `collect()` uygulamasaydık, Nextflow basitçe `collectGreetings()`'i her selamlamada bağımsız olarak çalıştırırdı, bu da amacımıza ulaşmazdı.
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
-</figure>
-
-Buna karşılık, `collect()` kullanmak, workflow'un ikinci adımı tarafından üretilen tüm ayrı büyük harfli selamlamaları almamıza ve pipeline'ın üçüncü adımında tek bir çağrıya hepsini birlikte beslememize olanak tanır.
-
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
 Tüm selamlamaları aynı dosyaya bu şekilde geri alıyoruz.
+
+Buna karşılık, `collect()` kullanmadan `convertToUpper()`'ın çıktısını `collectGreetings()`'e beslemek, Nextflow'un basitçe `collectGreetings()`'i her selamlamada bağımsız olarak çalıştırmasına neden olur, bu da amacımıza ulaşmaz.
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
+</figure>
 
 Process çağrıları arasında channel içeriklerine dönüşümler uygulamak için birçok başka [operatör](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) mevcuttur.
 
@@ -876,7 +874,7 @@ Bu sefer önce koda bakacağız.
 Workflow mantığının önceki workflow versiyonuyla tamamen aynı olduğunu görüyorsunuz.
 Ancak, process kodu workflow dosyasından gitmiş ve yerine `modules` altındaki ayrı dosyalara işaret eden `include` ifadeleri var.
 
-```groovy title="hello-modules.nf" linenums="3"
+```groovy title="2c-modules.nf" linenums="3"
 // Modülleri dahil et
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -928,9 +926,9 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 Process çalıştırmalarının hepsinin başarıyla önbelleğe alındığını fark edeceksiniz, yani Nextflow istenen işi zaten yaptığını tanıdı, kod bölünmüş ve ana workflow dosyası yeniden adlandırılmış olsa bile.
@@ -1228,9 +1226,9 @@ Workflow, öncekine çok benzer, artı `cowpy` çalıştırmak için ekstra adı
 
 Bu workflow'un bir modül dosyasından bir `cowpy` process'i içe aktardığını ve bunu `collectGreetings()` çağrısının çıktısında, artı `params.character` adlı bir girdi parametresinde çağırdığını görüyorsunuz.
 
-```groovy title="2d-container.nf" linenums="25"
+```groovy title="2d-container.nf" linenums="31"
 // cowpy ile ASCII sanatı oluştur
-cowpy(collectGreetings.out, params.character)
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 ASCII art oluşturmak için cowpy komutunu saran `cowpy` process'i, `cowpy.nf` modülünde tanımlanmıştır.

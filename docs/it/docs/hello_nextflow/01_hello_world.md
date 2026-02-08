@@ -2,17 +2,15 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2hHI-9vms?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Guarda [l'intera playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) sul canale YouTube di Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Guarda [l'intera playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sul canale YouTube di Nextflow.
 
 :green_book: La trascrizione del video è disponibile [qui](./transcripts/01_hello_world.md).
 ///
--->
 
 In questa prima parte del corso di formazione Hello Nextflow, introduciamo l'argomento con un esempio Hello World molto semplice e indipendente dal dominio, che costruiremo progressivamente per dimostrare l'uso della logica e dei componenti fondamentali di Nextflow.
 
@@ -602,8 +600,8 @@ Vedete che il risultato dell'esecuzione precedente è ancora lì.
 </figure>
 
 Potete usare quanti livelli di nidificazione desiderate.
-È anche possibile usare il nome del process o altre variabili per nominare le directory usate per organizzare i risultati, ed è possibile cambiare il nome predefinito della directory di output di primo livello (che è controllata dalla variabile speciale `outputDir`).
-Copriremo queste opzioni in formazioni successive.
+È anche possibile usare il nome del process o altre variabili per nominare le directory usate per organizzare i risultati, ed è possibile cambiare il nome predefinito della directory di output di primo livello (che è controllata dal flag CLI `-o` o dalla variabile di configurazione `outputDir`).
+Copriremo queste opzioni più avanti nella formazione.
 
 ### 2.3. Impostare la modalità di pubblicazione su copy
 
@@ -1145,7 +1143,7 @@ Quali sono i componenti minimi richiesti di un process Nextflow?
 - [ ] Blocchi input, output e script
 - [ ] Solo un blocco script
 
-Approfondisci: [1.1.1. La definizione del process](#111-la-definizione-del-process)
+Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
 </quiz>
 
 <quiz>
@@ -1155,7 +1153,7 @@ Qual è lo scopo del blocco output in un process?
 - [x] Dichiarare gli output attesi dal process
 - [ ] Definire variabili d'ambiente
 
-Approfondisci: [1.1.1. La definizione del process](#111-la-definizione-del-process)
+Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
 </quiz>
 
 <quiz>

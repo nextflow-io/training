@@ -9,12 +9,12 @@ Jeśli jeszcze tego nie zrobiłeś, zrób to teraz, najlepiej w drugim oknie lub
 
 !!!warning "Wymagania dotyczące rozmiaru maszyny"
 
-    Upewnij się, że wybierasz **maszynę 8-rdzeniową** podczas tworzenia Codespace dla tego kursu szkoleniowego. Workflow'e bioimagingu wymagają dodatkowych zasobów obliczeniowych.
+    Upewnij się, że wybierasz **maszynę 8-rdzeniową** podczas tworzenia Twojego Codespace dla tego kursu szkoleniowego. Workflow'y bioimagingu wymagają dodatkowych zasobów obliczeniowych.
 
 ## GitHub Codespaces
 
-Środowisko GitHub Codespaces zawiera wszystkie oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
-Jednak potrzebujesz (bezpłatnego) konta GitHub, aby się zalogować, a jeśli nie znasz interfejsu, powinieneś poświęcić kilka minut na zapoznanie się z nim, przechodząc mini-kurs [GitHub Codespaces Orientation](../../envsetup/index.md).
+Środowisko GitHub Codespaces zawiera całe oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
+Potrzebujesz jednak (bezpłatnego) konta GitHub, aby się zalogować, a jeśli nie znasz interfejsu, powinieneś poświęcić kilka minut na zapoznanie się z nim, przechodząc mini-kurs [GitHub Codespaces Orientation](../../envsetup/index.md).
 
 ## Wstępne pobieranie obrazów Docker
 

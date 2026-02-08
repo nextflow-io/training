@@ -925,9 +925,9 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [95/79484f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [5e/4358gc] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 Você notará que as execuções de processo foram todas cacheadas com sucesso, significando que o Nextflow reconheceu que já fez o trabalho solicitado, mesmo que o código tenha sido dividido e o arquivo de fluxo de trabalho principal tenha sido renomeado.
@@ -938,7 +938,7 @@ Nada disso importa para o Nextflow; o que importa é o script de job que é gera
 
     Também é possível encapsular uma seção de um fluxo de trabalho como um 'subworkflow' que pode ser importado em um pipeline maior, mas isso está fora do escopo deste curso.
 
-    Você pode aprender mais sobre desenvolver fluxos de trabalho composíveis na Side Quest sobre [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/).
+    Você pode aprender mais sobre desenvolver fluxos de trabalhos composíveis na Side Quest sobre [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/).
 
 ### Conclusão
 
@@ -1225,9 +1225,9 @@ O fluxo de trabalho é muito similar ao anterior, mais a etapa extra para execut
 
 Você vê que este fluxo de trabalho importa um processo `cowpy` de um arquivo de módulo, e o chama na saída da chamada `collectGreetings()`, mais um parâmetro de entrada chamado `params.character`.
 
-```groovy title="2d-container.nf" linenums="25"
-// gera arte ASCII com cowpy
-cowpy(collectGreetings.out, params.character)
+```groovy title="2d-container.nf" linenums="31"
+// gera arte ASCII das saudações com cowpy
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 O processo `cowpy`, que envolve o comando cowpy para gerar arte ASCII, é definido no módulo `cowpy.nf`.

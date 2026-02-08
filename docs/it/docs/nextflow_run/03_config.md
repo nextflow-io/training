@@ -1,19 +1,19 @@
-# Parte 3: Configurazione
+# Parte 3: Configurazione dell'esecuzione
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Questa sezione esplorerà come gestire la configurazione di una pipeline Nextflow per personalizzarne il comportamento, adattarla a diversi ambienti e ottimizzare l'uso delle risorse _senza modificare una singola riga del codice del workflow stesso_.
+Questa sezione esplorerà come gestire la configurazione di una pipeline Nextflow per personalizzarne il comportamento, adattarla a diversi ambienti e ottimizzare l'uso delle risorse _senza alterare una singola riga del codice del workflow stesso_.
 
-Ci sono molteplici modi per farlo, che possono essere usati in combinazione e vengono interpretati secondo l'ordine di precedenza descritto [qui](https://www.nextflow.io/docs/latest/config.html).
+Ci sono molteplici modi per farlo, che possono essere usati in combinazione e vengono interpretati secondo l'ordine di precedenza descritto nella documentazione [Configuration](https://nextflow.io/docs/latest/config.html).
 
-In questa parte del corso, ti mostreremo il meccanismo di file di configurazione più semplice e comune, il file `nextflow.config`, che hai già incontrato nella sezione sui container nella Parte 2.
+In questa parte del corso, vi mostreremo il meccanismo di file di configurazione più semplice e comune, il file `nextflow.config`, che avete già incontrato nella sezione sui container nella Parte 2.
 
 Esamineremo i componenti essenziali della configurazione di Nextflow come le direttive dei process, gli executor, i profili e i file di parametri.
-Imparando a utilizzare efficacemente queste opzioni di configurazione, puoi sfruttare appieno la flessibilità, la scalabilità e le prestazioni delle pipeline Nextflow.
+Imparando a utilizzare efficacemente queste opzioni di configurazione, potete sfruttare appieno la flessibilità, la scalabilità e le prestazioni delle pipeline Nextflow.
 
 Per esercitare questi elementi di configurazione, eseguiremo una copia fresca del workflow che abbiamo eseguito per ultimo alla fine della Parte 2 di questo corso di formazione, rinominato `3-main.nf`.
 
-Se non hai familiarità con la pipeline Hello o potresti aver bisogno di un promemoria, consulta [questa pagina informativa](../info/hello_pipeline.md).
+Se non avete familiarità con la pipeline Hello o potreste aver bisogno di un promemoria, consultate [questa pagina informativa](../info/hello_pipeline.md).
 
 ---
 
@@ -21,28 +21,28 @@ Se non hai familiarità con la pipeline Hello o potresti aver bisogno di un prom
 
 ??? example "Scenario"
 
-    Hai scaricato una pipeline e vuoi eseguirla ripetutamente con gli stessi file di input e impostazioni, ma non vuoi digitare tutti i parametri ogni volta.
-    O forse stai configurando la pipeline per un collega che non è a suo agio con gli argomenti da riga di comando.
+    Avete scaricato una pipeline e volete eseguirla ripetutamente con gli stessi file di input e impostazioni, ma non volete digitare tutti i parametri ogni volta.
+    O forse state configurando la pipeline per un collega che non è a suo agio con gli argomenti da riga di comando.
 
 Inizieremo con un aspetto della configurazione che è semplicemente un'estensione di ciò con cui abbiamo lavorato finora: la gestione dei parametri di input.
 
 Attualmente, il nostro workflow è configurato per accettare diversi valori di parametri tramite la riga di comando, dichiarati in un blocco `params` nello script del workflow stesso.
 Uno ha un valore predefinito impostato come parte della sua dichiarazione.
 
-Tuttavia, potresti voler impostare valori predefiniti per tutti loro, o sovrascrivere il valore predefinito esistente senza dover specificare parametri sulla riga di comando o modificare il file di script originale.
+Tuttavia, potreste voler impostare valori predefiniti per tutti loro, o sovrascrivere il valore predefinito esistente senza dover specificare parametri sulla riga di comando o modificare il file di script originale.
 
-Ci sono molteplici modi per farlo; ti mostreremo tre modi base che sono molto comunemente usati.
+Ci sono molteplici modi per farlo; vi mostreremo tre modi base che sono molto comunemente usati.
 
 ### 1.1. Imposta i valori in `nextflow.config`
 
-Questo è l'approccio più semplice, sebbene sia probabilmente il meno flessibile poiché il file `nextflow.config` principale non è qualcosa che vuoi modificare per ogni esecuzione.
+Questo è l'approccio più semplice, sebbene sia probabilmente il meno flessibile poiché il file `nextflow.config` principale non è qualcosa che volete modificare per ogni esecuzione.
 Ma ha il vantaggio di separare le preoccupazioni della _dichiarazione_ dei parametri nel workflow (che decisamente appartiene lì) rispetto alla fornitura dei _valori predefiniti_, che sono più a loro agio in un file di configurazione.
 
 Facciamolo in due step.
 
 #### 1.1.1. Crea un blocco `params` nel file di configurazione
 
-Fai le seguenti modifiche al codice nel file `nextflow.config`:
+Fate le seguenti modifiche al codice nel file `nextflow.config`:
 
 === "Dopo"
 
@@ -65,19 +65,19 @@ Fai le seguenti modifiche al codice nel file `nextflow.config`:
     docker.enabled = true
     ```
 
-Nota che non abbiamo semplicemente copiato il blocco `params` dal workflow al file di configurazione.
+Notate che non abbiamo semplicemente copiato il blocco `params` dal workflow al file di configurazione.
 Per il parametro `batch` che aveva già un valore predefinito dichiarato, la sintassi è un po' diversa.
 Nel file del workflow, quella è una dichiarazione tipizzata.
 Nella configurazione, quelle sono assegnazioni di valori.
 
 Tecnicamente, questo è sufficiente per sovrascrivere i valori predefiniti ancora specificati nel file del workflow.
-Potresti modificare il valore predefinito per `batch` ed eseguire il workflow per verificare che il valore impostato nel file di configurazione sovrascrive quello impostato nel file del workflow.
+Potreste modificare il valore predefinito per `batch` ed eseguire il workflow per verificare che il valore impostato nel file di configurazione sovrascrive quello impostato nel file del workflow.
 
 Ma nello spirito di spostare la configurazione completamente al file di configurazione, rimuoviamo quel valore predefinito dal file del workflow completamente.
 
 #### 1.1.2. Rimuovi il valore predefinito per `batch` nel file del workflow
 
-Fai la seguente modifica al codice nel file del workflow `3-main.nf`:
+Fate la seguente modifica al codice nel file del workflow `3-main.nf`:
 
 === "Dopo"
 
@@ -170,9 +170,9 @@ Funzionalmente, questo spostamento non ha cambiato nulla, ma concettualmente è 
 
 ??? example "Scenario"
 
-    Vuoi sperimentare con diverse impostazioni senza modificare il tuo file di configurazione principale.
+    Volete sperimentare con diverse impostazioni senza modificare il vostro file di configurazione principale.
 
-Puoi farlo creando un nuovo file `nextflow.config` in una sottodirectory che userai come directory di lavoro per i tuoi esperimenti.
+Potete farlo creando un nuovo file `nextflow.config` in una sottodirectory che userete come directory di lavoro per i vostri esperimenti.
 
 #### 1.2.1. Crea la directory di lavoro con una configurazione vuota
 
@@ -183,7 +183,7 @@ mkdir -p tux-run
 cd tux-run
 ```
 
-Poi, crea un file di configurazione vuoto in quella directory:
+Poi, create un file di configurazione vuoto in quella directory:
 
 ```bash
 touch nextflow.config
@@ -193,7 +193,7 @@ Questo produce un file vuoto.
 
 #### 1.2.2. Imposta la configurazione sperimentale
 
-Ora apri il nuovo file e aggiungi i parametri che vuoi personalizzare:
+Ora aprite il nuovo file e aggiungete i parametri che volete personalizzare:
 
 ```groovy title="tux-run/nextflow.config" linenums="1"
 params {
@@ -203,12 +203,12 @@ params {
 }
 ```
 
-Nota che il percorso del file di input deve riflettere la struttura delle directory.
+Notate che il percorso del file di input deve riflettere la struttura delle directory.
 
 #### 1.2.3. Esegui la pipeline
 
 Ora possiamo eseguire la nostra pipeline dall'interno della nostra nuova directory di lavoro.
-Assicurati di adattare il percorso di conseguenza!
+Assicuratevi di adattare il percorso di conseguenza!
 
 ```bash
 nextflow run ../3-main.nf
@@ -254,11 +254,11 @@ Il file di output finale dovrebbe contenere il personaggio tux che dice i saluti
 
     ```
 
-Ecco fatto; ora hai uno spazio per sperimentare senza modificare la tua configurazione 'normale'.
+Ecco fatto; ora avete uno spazio per sperimentare senza modificare la vostra configurazione 'normale'.
 
 !!! warning "Avviso"
 
-    Assicurati di tornare alla directory precedente prima di passare alla prossima sezione!
+    Assicuratevi di tornare alla directory precedente prima di passare alla prossima sezione!
 
     ```bash
     cd ..
@@ -270,12 +270,12 @@ Ora guardiamo un altro modo utile per impostare i valori dei parametri.
 
 ??? example "Scenario"
 
-    Devi condividere i parametri esatti dell'esecuzione con un collaboratore, o registrarli per una pubblicazione.
+    Dovete condividere i parametri esatti dell'esecuzione con un collaboratore, o registrarli per una pubblicazione.
 
-L'approccio con la sottodirectory funziona benissimo per sperimentare, ma comporta un po' di setup e richiede che tu adatti i percorsi di conseguenza.
-C'è un approccio più semplice per quando vuoi eseguire la tua pipeline con un set specifico di valori, o permettere a qualcun altro di farlo con il minimo sforzo.
+L'approccio con la sottodirectory funziona benissimo per sperimentare, ma comporta un po' di setup e richiede che adattiate i percorsi di conseguenza.
+C'è un approccio più semplice per quando volete eseguire la vostra pipeline con un set specifico di valori, o permettere a qualcun altro di farlo con il minimo sforzo.
 
-Nextflow ci permette di specificare parametri tramite un file di parametri in formato YAML o JSON, il che lo rende molto conveniente per gestire e distribuire set alternativi di valori predefiniti, per esempio, così come valori di parametri specifici per l'esecuzione.
+Nextflow ci permette di specificare parametri tramite un [file di parametri](https://nextflow.io/docs/latest/config.html#parameter-file) in formato YAML o JSON, il che lo rende molto conveniente per gestire e distribuire set alternativi di valori predefiniti, per esempio, così come valori di parametri specifici per l'esecuzione.
 
 #### 1.3.1. Esamina il file di parametri di esempio
 
@@ -288,17 +288,17 @@ character: "stegosaurus"
 ```
 
 Questo file di parametri contiene una coppia chiave-valore per ciascuno degli input che vogliamo specificare.
-Nota l'uso dei due punti (`:`) invece dei segni di uguale (`=`) se confronti la sintassi con il file di configurazione.
+Notate l'uso dei due punti (`:`) invece dei segni di uguale (`=`) se confrontate la sintassi con il file di configurazione.
 Il file config è scritto in Groovy, mentre il file di parametri è scritto in YAML.
 
 !!! info "Informazione"
 
-    Forniamo anche una versione JSON del file di parametri come esempio ma non lo eseguiremo qui.
-    Sentiti libero di provare quello da solo.
+    Forniamo anche una versione JSON del file di parametri come esempio ma non la eseguiremo qui.
+    Sentitevi liberi di provare quella da soli.
 
 #### 1.3.2. Esegui la pipeline
 
-Per eseguire il workflow con questo file di parametri, aggiungi semplicemente `-params-file <nomefile>` al comando base.
+Per eseguire il workflow con questo file di parametri, aggiungete semplicemente `-params-file <nomefile>` al comando base.
 
 ```bash
 nextflow run 3-main.nf -params-file test-params.yaml
@@ -312,10 +312,10 @@ nextflow run 3-main.nf -params-file test-params.yaml
     Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [2b/9a7d1e] sayHello (2)       | 3 of 3 ✔
+    [5c/8f3b2a] convertToUpper (3) | 3 of 3 ✔
+    [a3/29d8fb] collectGreetings   | 1 of 1 ✔
+    [b7/83ef12] cowpy              | 1 of 1 ✔
     ```
 
 Il file di output finale dovrebbe contenere il personaggio stegosaurus che dice i saluti.
@@ -344,19 +344,19 @@ Il file di output finale dovrebbe contenere il personaggio stegosaurus che dice 
                         |_____|        |_____|         ~ - . _ _ _ _ _>
     ```
 
-Usare un file di parametri potrebbe sembrare eccessivo quando hai solo pochi parametri da specificare, ma alcune pipeline si aspettano dozzine di parametri.
-In quei casi, usare un file di parametri ci permetterà di fornire valori di parametri a runtime senza dover digitare linee di comando massive e senza modificare lo script del workflow.
+Usare un file di parametri potrebbe sembrare eccessivo quando avete solo pochi parametri da specificare, ma alcune pipeline si aspettano dozzine di parametri.
+In quei casi, usare un file di parametri vi permetterà di fornire valori di parametri a runtime senza dover digitare linee di comando massive e senza modificare lo script del workflow.
 
 Rende anche più facile distribuire set di parametri ai collaboratori, o come informazione di supporto per una pubblicazione, per esempio.
-Questo rende il tuo lavoro più riproducibile da altri.
+Questo rende il vostro lavoro più riproducibile da altri.
 
 ### Riepilogo
 
-Sai come sfruttare le opzioni di configurazione chiave per gestire gli input del workflow.
+Sapete come sfruttare le opzioni di configurazione chiave per gestire gli input del workflow.
 
 ### Cosa c'è dopo?
 
-Impara come gestire dove e come vengono pubblicati gli output del tuo workflow.
+Imparate come gestire dove e come vengono pubblicati gli output del vostro workflow.
 
 ---
 
@@ -364,25 +364,26 @@ Impara come gestire dove e come vengono pubblicati gli output del tuo workflow.
 
 ??? example "Scenario"
 
-    La tua pipeline pubblica gli output in una directory hardcoded, ma vuoi organizzare i risultati per progetto o nome dell'esperimento senza modificare il codice del workflow ogni volta.
+    La vostra pipeline pubblica gli output in una directory hardcoded, ma volete organizzare i risultati per progetto o nome dell'esperimento senza modificare il codice del workflow ogni volta.
 
 Il workflow che abbiamo ereditato usa percorsi per le dichiarazioni di output a livello di workflow, il che non è terribilmente flessibile e comporta molta ripetizione.
 
-Guardiamo alcuni modi comuni in cui potresti configurare questo per essere più flessibile.
+Guardiamo alcuni modi comuni in cui potreste configurare questo per essere più flessibile.
 
 ### 2.1. Personalizza il nome della directory `outputDir`
 
 Ogni versione del workflow che abbiamo eseguito finora ha pubblicato i suoi output in una sottodirectory diversa hardcoded nelle definizioni di output.
 
-Cambiamo questo per usare un parametro configurabile dall'utente.
+Abbiamo cambiato dove quella sottodirectory si trovava nella Parte 1 usando il flag CLI `-output-dir`, ma quella è ancora solo una stringa statica.
+Configuriamo invece questo in un file di config, dove possiamo definire percorsi dinamici più complessi.
 Potremmo creare un parametro completamente nuovo per questo, ma usiamo il parametro `batch` dato che è già lì.
 
 #### 2.1.1. Imposta un valore per `outputDir` nel file di configurazione
 
 Il percorso che Nextflow usa per pubblicare gli output è controllato dall'opzione `outputDir`.
-Per cambiare il percorso per tutti gli output, puoi impostare un valore per questa opzione nel file di configurazione `nextflow.config`.
+Per cambiare il percorso per tutti gli output, potete impostare un valore per questa opzione nel file di configurazione `nextflow.config`.
 
-Aggiungi il seguente codice al file `nextflow.config`:
+Aggiungete il seguente codice al file `nextflow.config`:
 
 === "Dopo"
 
@@ -399,7 +400,7 @@ Aggiungi il seguente codice al file `nextflow.config`:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 === "Prima"
@@ -415,16 +416,16 @@ Aggiungi il seguente codice al file `nextflow.config`:
     }
     ```
 
-Questo sostituirà il percorso predefinito integrato, `results/`, con `results/` più il valore del parametro `batch` come sottodirectory.
-Potresti anche cambiare la parte `results` se volessi.
+Questo sostituirà il percorso predefinito integrato, `results/`, con `results_config/` più il valore del parametro `batch` come sottodirectory.
 
-Per una modifica temporanea, potresti impostare questa opzione dalla riga di comando usando il parametro `-output-dir` nel tuo comando (ma allora non potresti usare il valore del parametro `batch`).
+Ricordate che potete anche impostare questa opzione dalla riga di comando usando il parametro `-output-dir` nel vostro comando (`-o` in forma breve), ma allora non potreste usare il valore del parametro `batch`.
+Usare il flag CLI sovrascriverà `outputDir` nel config se è impostato.
 
 #### 2.1.2. Rimuovi la parte ripetuta del percorso hardcoded
 
 Abbiamo ancora una sottodirectory hardcoded nelle opzioni di output, quindi togliamola ora.
 
-Fai le seguenti modifiche al codice nel file del workflow:
+Fate le seguenti modifiche al codice nel file del workflow:
 
 === "Dopo"
 
@@ -495,21 +496,21 @@ nextflow run 3-main.nf --batch outdir
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [9c/6a03ea] sayHello (2)       [100%] 3 of 3 ✔
+    [11/9e58a6] convertToUpper (3) [100%] 3 of 3 ✔
+    [c8/1977e5] collectGreetings   [100%] 1 of 1 ✔
+    [38/f01eda] cowpy              [100%] 1 of 1 ✔
     ```
 
-Questo produce ancora lo stesso output di prima, tranne che questa volta troviamo i nostri output sotto `results/outdir/`.
+Questo produce ancora lo stesso output di prima, tranne che questa volta troviamo i nostri output sotto `results_config/outdir/`.
 
 ??? abstract "Contenuti della directory"
 
     ```console
-    results/outdir/
+    results_config/outdir
     ├── cowpy-COLLECTED-outdir-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -522,7 +523,7 @@ Questo produce ancora lo stesso output di prima, tranne che questa volta troviam
     └── outdir-report.txt
     ```
 
-Puoi combinare questo approccio con definizioni di percorsi personalizzate per costruire qualsiasi gerarchia di directory ti piaccia.
+Potete combinare questo approccio con definizioni di percorsi personalizzate per costruire qualsiasi gerarchia di directory vi piaccia.
 
 ### 2.2. Organizza gli output per process
 
@@ -530,9 +531,9 @@ Un modo popolare per organizzare ulteriormente gli output è farlo per process, 
 
 #### 2.2.1. Sostituisci i percorsi di output con un riferimento ai nomi dei process
 
-Tutto ciò che devi fare è fare riferimento al nome del process come `<task>.name` nella dichiarazione del percorso di output.
+Tutto ciò che dovete fare è fare riferimento al nome del process come `<process>.name` nella dichiarazione del percorso di output.
 
-Fai le seguenti modifiche nel file del workflow:
+Fate le seguenti modifiche nel file del workflow:
 
 === "Dopo"
 
@@ -606,18 +607,18 @@ nextflow run 3-main.nf --batch pnames
     Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [4a/c2e6b8] sayHello (2)       | 3 of 3 ✔
+    [6f/d4a172] convertToUpper (3) | 3 of 3 ✔
+    [e8/4f19d7] collectGreetings   | 1 of 1 ✔
+    [f2/a85c36] cowpy              | 1 of 1 ✔
     ```
 
-Questo produce ancora lo stesso output di prima, tranne che questa volta troviamo i nostri output sotto `results/pnames/`, e sono raggruppati per process.
+Questo produce ancora lo stesso output di prima, tranne che questa volta troviamo i nostri output sotto `results_config/pnames/`, e sono raggruppati per process.
 
 ??? abstract "Contenuti della directory"
 
     ```console
-    results/pnames/
+    results_config/pnames/
     ├── collectGreetings
     │   ├── COLLECTED-pnames-output.txt
     │   └── pnames-report.txt
@@ -633,8 +634,10 @@ Questo produce ancora lo stesso output di prima, tranne che questa volta troviam
         └── Holà-output.txt
     ```
 
-Nota che qui abbiamo eliminato la distinzione tra `intermediates` rispetto agli output finali al livello superiore.
-Potresti ovviamente mescolare e abbinare questi approcci, per esempio impostando il percorso del primo output come `intermediates/${sayHello.name}`
+!!! note "Nota"
+
+    Notate che qui abbiamo eliminato la distinzione tra `intermediates` rispetto agli output finali al livello superiore.
+    Potete mescolare e abbinare questi approcci e includere anche variabili multiple, per esempio impostando il percorso del primo output come `#!groovy "${params.batch}/intermediates/${sayHello.name}"`
 
 ### 2.3. Imposta la modalità di pubblicazione a livello di workflow
 
@@ -642,7 +645,7 @@ Infine, nello spirito di ridurre la quantità di codice ripetitivo, possiamo sos
 
 #### 2.3.1. Aggiungi `workflow.output.mode` al file di configurazione
 
-Aggiungi il seguente codice al file `nextflow.config`:
+Aggiungete il seguente codice al file `nextflow.config`:
 
 === "Dopo"
 
@@ -650,7 +653,7 @@ Aggiungi il seguente codice al file `nextflow.config`:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     workflow.output.mode = 'copy'
     ```
 
@@ -660,14 +663,14 @@ Aggiungi il seguente codice al file `nextflow.config`:
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 Proprio come l'opzione `outputDir`, dare a `workflow.output.mode` un valore nel file di configurazione sarebbe sufficiente per sovrascrivere ciò che è impostato nel file del workflow, ma rimuoviamo comunque il codice non necessario.
 
 #### 2.3.2. Rimuovi la modalità di output dal file del workflow
 
-Fai le seguenti modifiche nel file del workflow:
+Fate le seguenti modifiche nel file del workflow:
 
 === "Dopo"
 
@@ -736,19 +739,19 @@ nextflow run 3-main.nf --batch outmode
     Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [5b/d91e3c] sayHello (2)       | 3 of 3 ✔
+    [8a/f6c241] convertToUpper (3) | 3 of 3 ✔
+    [89/cd3a48] collectGreetings   | 1 of 1 ✔
+    [9e/71fb52] cowpy              | 1 of 1 ✔
     ```
 
-Questo produce ancora lo stesso output di prima, tranne che questa volta troviamo i nostri output sotto `results/outmode/`.
+Questo produce ancora lo stesso output di prima, tranne che questa volta troviamo i nostri output sotto `results_config/outmode/`.
 Sono ancora tutte copie vere, non symlink.
 
 ??? abstract "Contenuti della directory"
 
     ```console
-    results/outmode/
+    results_config/outmode/
     ├── collectGreetings
     │   ├── COLLECTED-outmode-output.txt
     │   └── outmode-report.txt
@@ -764,23 +767,23 @@ Sono ancora tutte copie vere, non symlink.
         └── Holà-output.txt
     ```
 
-Il motivo principale per cui potresti ancora voler usare il modo per-output di impostare la modalità è se vuoi mescolare e abbinare all'interno dello stesso workflow, _cioè_ avere alcuni output copiati e alcuni linkati simbolicamente.
+Il motivo principale per cui potreste ancora voler usare il modo per-output di impostare la modalità è se volete mescolare e abbinare all'interno dello stesso workflow, _cioè_ avere alcuni output copiati e alcuni linkati simbolicamente.
 
-Ci sono molte altre opzioni che puoi personalizzare in questo modo, ma speriamo che questo ti dia un'idea della gamma di opzioni e di come utilizzarle efficacemente per adattarle alle tue preferenze.
+Ci sono molte altre opzioni che potete personalizzare in questo modo, ma speriamo che questo vi dia un'idea della gamma di opzioni e di come utilizzarle efficacemente per adattarle alle vostre preferenze.
 
 ### Riepilogo
 
-Sai come controllare la denominazione e la struttura delle directory dove vengono pubblicati i tuoi output, così come la modalità di pubblicazione dell'output del workflow.
+Sapete come controllare la denominazione e la struttura delle directory dove vengono pubblicati i vostri output, così come la modalità di pubblicazione dell'output del workflow.
 
 ### Cosa c'è dopo?
 
-Impara come adattare la configurazione del tuo workflow al tuo ambiente di calcolo, partendo dalla tecnologia di pacchettizzazione software.
+Imparate come adattare la configurazione del vostro workflow al vostro ambiente di calcolo, partendo dalla tecnologia di pacchettizzazione software.
 
 ---
 
 ## 3. Seleziona una tecnologia di pacchettizzazione software
 
-Finora abbiamo guardato elementi di configurazione che controllano come gli input entrano e dove gli output escono. Ora è il momento di concentrarsi più specificamente sull'adattare la configurazione del tuo workflow al tuo ambiente di calcolo.
+Finora abbiamo guardato elementi di configurazione che controllano come gli input entrano e dove gli output escono. Ora è il momento di concentrarsi più specificamente sull'adattare la configurazione del vostro workflow al vostro ambiente di calcolo.
 
 Il primo passo su quel percorso è specificare da dove verranno i pacchetti software che verranno eseguiti in ogni step.
 Sono già installati nell'ambiente di calcolo locale?
@@ -796,10 +799,10 @@ Ora vediamo come possiamo configurare un'opzione alternativa di pacchettizzazion
 
 ??? example "Scenario"
 
-    Stai spostando la tua pipeline su un cluster HPC dove Docker non è permesso per motivi di sicurezza.
-    Il cluster supporta Singularity e Conda, quindi devi cambiare la tua configurazione di conseguenza.
+    State spostando la vostra pipeline su un cluster HPC dove Docker non è permesso per motivi di sicurezza.
+    Il cluster supporta Singularity e Conda, quindi dovete cambiare la vostra configurazione di conseguenza.
 
-Nextflow supporta molteplici tecnologie container incluso Singularity (che è più ampiamente usato su HPC), così come gestori di pacchetti software come Conda.
+Come notato precedentemente, Nextflow supporta molteplici tecnologie container incluso Singularity (che è più ampiamente usato su HPC), così come gestori di pacchetti software come Conda.
 
 Possiamo cambiare il nostro file di configurazione per usare Conda invece di Docker.
 Per farlo, cambiamo il valore di `docker.enabled` a `false`, e aggiungiamo una direttiva che abilita l'uso di Conda:
@@ -852,7 +855,7 @@ Per essere chiari, non stiamo _sostituendo_ la direttiva `docker`, stiamo _aggiu
 !!! tip "Suggerimento"
 
     Ci sono alcuni modi diversi per ottenere l'URI per un dato pacchetto conda.
-    Raccomandiamo di usare la query di ricerca di [Seqera Containers](https://seqera.io/containers/), che ti darà un URI che puoi copiare e incollare, anche se non stai pianificando di creare un container da esso.
+    Raccomandiamo di usare la query di ricerca di [Seqera Containers](https://seqera.io/containers/), che vi darà un URI che potete copiare e incollare, anche se non state pianificando di creare un container da esso.
 
 ### 3.3. Esegui il workflow per verificare che possa usare Conda
 
@@ -876,14 +879,14 @@ nextflow run 3-main.nf --batch conda
     [c5/af5f88] cowpy              | 1 of 1 ✔
     ```
 
-Questo dovrebbe funzionare senza problemi e produrre gli stessi output di prima sotto `results/conda`.
+Questo dovrebbe funzionare senza problemi e produrre gli stessi output di prima sotto `results_config/conda`.
 
 Dietro le quinte, Nextflow ha recuperato i pacchetti Conda e creato l'ambiente, che normalmente richiede un po' di lavoro; quindi è bello che non dobbiamo fare niente di tutto ciò noi stessi!
 
 !!! info "Informazione"
 
-    Questo viene eseguito velocemente perché il pacchetto `cowpy` è abbastanza piccolo, ma se stai lavorando con pacchetti grandi, potrebbe richiedere un po' più di tempo del solito la prima volta, e potresti vedere l'output della console rimanere 'bloccato' per un minuto circa prima di completarsi.
-    Questo è normale ed è dovuto al lavoro extra che Nextflow fa la prima volta che usi un nuovo pacchetto.
+    Questo viene eseguito velocemente perché il pacchetto `cowpy` è abbastanza piccolo, ma se state lavorando con pacchetti grandi, potrebbe richiedere un po' più di tempo del solito la prima volta, e potreste vedere l'output della console rimanere 'bloccato' per un minuto circa prima di completarsi.
+    Questo è normale ed è dovuto al lavoro extra che Nextflow fa la prima volta che usate un nuovo pacchetto.
 
 Dal nostro punto di vista, sembra che funzioni esattamente come l'esecuzione con Docker, anche se nel backend la meccanica è un po' diversa.
 
@@ -891,19 +894,19 @@ Questo significa che siamo pronti per eseguire con ambienti Conda se necessario.
 
 ??? info "Mescolare e abbinare Docker e Conda"
 
-    Dato che queste direttive sono assegnate per process, è possibile 'mescolare e abbinare', _cioè_ configurare alcuni dei process nel tuo workflow per essere eseguiti con Docker e altri con Conda, per esempio, se l'infrastruttura di calcolo che stai usando supporta entrambi.
-    In quel caso, abiliteresti sia Docker che Conda nel tuo file di configurazione.
+    Dato che queste direttive sono assegnate per process, è possibile 'mescolare e abbinare', _cioè_ configurare alcuni dei process nel vostro workflow per essere eseguiti con Docker e altri con Conda, per esempio, se l'infrastruttura di calcolo che state usando supporta entrambi.
+    In quel caso, abilitereste sia Docker che Conda nel vostro file di configurazione.
     Se entrambi sono disponibili per un dato process, Nextflow darà priorità ai container.
 
-    E come notato prima, Nextflow supporta molteplici altre tecnologie di pacchettizzazione software e container, quindi non sei limitato a solo quelle due.
+    E come notato prima, Nextflow supporta molteplici altre tecnologie di pacchettizzazione software e container, quindi non siete limitati a solo quelle due.
 
 ### Riepilogo
 
-Sai come configurare quale pacchetto software ogni process dovrebbe usare, e come passare da una tecnologia all'altra.
+Sapete come configurare quale pacchetto software ogni process dovrebbe usare, e come passare da una tecnologia all'altra.
 
 ### Cosa c'è dopo?
 
-Impara come cambiare la piattaforma di esecuzione usata da Nextflow per fare effettivamente il lavoro.
+Imparate come cambiare la piattaforma di esecuzione usata da Nextflow per fare effettivamente il lavoro.
 
 ---
 
@@ -911,17 +914,17 @@ Impara come cambiare la piattaforma di esecuzione usata da Nextflow per fare eff
 
 ??? example "Scenario"
 
-    Hai sviluppato e testato la tua pipeline sul tuo laptop, ma ora devi eseguirla su migliaia di campioni.
-    La tua istituzione ha un cluster HPC con uno scheduler Slurm che vorresti usare invece.
+    Avete sviluppato e testato la vostra pipeline sul vostro laptop, ma ora dovete eseguirla su migliaia di campioni.
+    La vostra istituzione ha un cluster HPC con uno scheduler Slurm che vorreste usare invece.
 
 Finora, abbiamo eseguito la nostra pipeline con l'executor locale.
 Questo esegue ogni attività sulla macchina su cui Nextflow è in esecuzione.
 Quando Nextflow inizia, guarda le CPU e la memoria disponibili.
 Se le risorse delle attività pronte per l'esecuzione superano le risorse disponibili, Nextflow tratterrà le ultime attività dall'esecuzione fino a quando una o più delle attività precedenti sono terminate, liberando le risorse necessarie.
 
-L'executor locale è conveniente ed efficiente, ma è limitato a quella singola macchina. Per carichi di lavoro molto grandi, potresti scoprire che la tua macchina locale è un collo di bottiglia, o perché hai una singola attività che richiede più risorse di quelle disponibili, o perché hai così tante attività che aspettare che una singola macchina le esegua richiederebbe troppo tempo.
+L'executor locale è conveniente ed efficiente, ma è limitato a quella singola macchina. Per carichi di lavoro molto grandi, potreste scoprire che la vostra macchina locale è un collo di bottiglia, o perché avete una singola attività che richiede più risorse di quelle disponibili, o perché avete così tante attività che aspettare che una singola macchina le esegua richiederebbe troppo tempo.
 
-Nextflow supporta [molti backend di esecuzione diversi](https://www.nextflow.io/docs/latest/executor.html), inclusi scheduler HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor e altri) così come backend di esecuzione cloud come (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes e altri).
+Nextflow supporta [molti backend di esecuzione diversi](https://nextflow.io/docs/latest/executor.html), inclusi scheduler HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor e altri) così come backend di esecuzione cloud come (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes e altri).
 
 ### 4.1. Puntare a un backend diverso
 
@@ -934,7 +937,7 @@ process {
 }
 ```
 
-Per impostare l'executor per puntare a un backend diverso, specificheresti semplicemente l'executor che vuoi usando una sintassi simile a quella descritta sopra per le allocazioni di risorse (vedi [documentazione](https://www.nextflow.io/docs/latest/executor.html) per tutte le opzioni).
+Per impostare l'executor per puntare a un backend diverso, specifichereste semplicemente l'executor che volete usando una sintassi simile a quella descritta sopra per le allocazioni di risorse (vedi [Executors](https://nextflow.io/docs/latest/executor.html) per tutte le opzioni).
 
 ```groovy title="nextflow.config"
 process {
@@ -983,18 +986,18 @@ Sfortunatamente, ciascuno di questi sistemi usa tecnologie, sintassi e configura
     ```
 
 Fortunatamente, Nextflow semplifica tutto questo.
-Fornisce una sintassi standardizzata in modo che tu possa specificare le proprietà rilevanti come `cpus`, `memory` e `queue` (vedi documentazione per altre proprietà) solo una volta.
+Fornisce una sintassi standardizzata in modo che possiate specificare le proprietà rilevanti come `cpus`, `memory` e `queue` solo una volta (vedi [Process directives](https://nextflow.io/docs/latest/reference/process.html#process-directives) per tutte le opzioni disponibili).
 Poi, a runtime, Nextflow userà quelle impostazioni per generare gli script specifici del backend appropriati basati sull'impostazione dell'executor.
 
 Copriremo quella sintassi standardizzata nella prossima sezione.
 
 ### Riepilogo
 
-Ora sai come cambiare l'executor per usare diversi tipi di infrastruttura di calcolo.
+Ora sapete come cambiare l'executor per usare diversi tipi di infrastruttura di calcolo.
 
 ### Cosa c'è dopo?
 
-Impara come valutare ed esprimere allocazioni e limitazioni delle risorse in Nextflow.
+Imparate come valutare ed esprimere allocazioni e limitazioni delle risorse in Nextflow.
 
 ---
 
@@ -1002,8 +1005,8 @@ Impara come valutare ed esprimere allocazioni e limitazioni delle risorse in Nex
 
 ??? example "Scenario"
 
-    La tua pipeline continua a fallire sul cluster perché le attività vengono terminate per aver superato i limiti di memoria.
-    O forse ti vengono addebitate risorse che non stai usando e vuoi ottimizzare i costi.
+    La vostra pipeline continua a fallire sul cluster perché le attività vengono terminate per aver superato i limiti di memoria.
+    O forse vi vengono addebitate risorse che non state usando e volete ottimizzare i costi.
 
 La maggior parte delle piattaforme di calcolo ad alte prestazioni permettono (e a volte richiedono) di specificare certi parametri di allocazione delle risorse come il numero di CPU e la memoria.
 
@@ -1017,38 +1020,39 @@ process {
 }
 ```
 
-Puoi modificare questi valori, sia per tutti i process che per process specifici nominati, usando direttive di process aggiuntive nel tuo file di configurazione.
+Potete modificare questi valori, sia per tutti i process che per process specifici nominati, usando direttive di process aggiuntive nel vostro file di configurazione.
 Nextflow le tradurrà nelle istruzioni appropriate per l'executor scelto.
 
-Ma come sai quali valori usare?
+Ma come sapete quali valori usare?
 
 ### 5.1. Esegui il workflow per generare un report di utilizzo delle risorse
 
 ??? example "Scenario"
 
-    Non sai quanta memoria o CPU i tuoi process hanno bisogno e vuoi evitare di sprecare risorse o avere job terminati.
+    Non sapete quanta memoria o CPU i vostri process hanno bisogno e volete evitare di sprecare risorse o avere job terminati.
 
-Se non sai in anticipo quanta CPU e memoria i tuoi process probabilmente avranno bisogno, puoi fare del profiling delle risorse, il che significa eseguire il workflow con alcune allocazioni predefinite, registrare quanto ogni process ha usato, e da lì, stimare come regolare le allocazioni base.
+Se non sapete in anticipo quanta CPU e memoria i vostri process probabilmente avranno bisogno, potete fare del profiling delle risorse, il che significa eseguire il workflow con alcune allocazioni predefinite, registrare quanto ogni process ha usato, e da lì, stimare come regolare le allocazioni base.
 
-Convenientemente, Nextflow include strumenti integrati per fare questo, e genererà felicemente un report per te su richiesta.
+Convenientemente, Nextflow include strumenti integrati per fare questo, e genererà felicemente un report per voi su richiesta.
 
-Per farlo, aggiungi `-with-report <nomefile>.html` alla tua riga di comando.
+Per farlo, aggiungete `-with-report <nomefile>.html` alla vostra riga di comando.
 
 ```bash
 nextflow run 3-main.nf -with-report report-config-1.html
 ```
 
-Il report è un file html, che puoi scaricare e aprire nel tuo browser. Puoi anche fare clic destro su di esso nell'esploratore file a sinistra e cliccare su `Show preview` per visualizzarlo nell'ambiente di formazione.
+Il report è un file html, che potete scaricare e aprire nel vostro browser. Potete anche fare clic destro su di esso nell'esploratore file a sinistra e cliccare su `Show preview` per visualizzarlo nell'ambiente di formazione.
 
-Prenditi qualche minuto per guardare il report e vedere se riesci a identificare alcune opportunità per regolare le risorse.
-Assicurati di cliccare sulle schede che mostrano i risultati di utilizzo come percentuale di ciò che è stato allocato.
-C'è della [documentazione](https://www.nextflow.io/docs/latest/reports.html) che descrive tutte le funzionalità disponibili.
+Prendetevi qualche minuto per guardare il report e vedere se riuscite a identificare alcune opportunità per regolare le risorse.
+Assicuratevi di cliccare sulle schede che mostrano i risultati di utilizzo come percentuale di ciò che è stato allocato.
+
+Vedi [Reports](https://nextflow.io/docs/latest/reports.html) per la documentazione su tutte le funzionalità disponibili.
 
 ### 5.2. Imposta le allocazioni delle risorse per tutti i process
 
 Il profiling mostra che i process nel nostro workflow di formazione sono molto leggeri, quindi riduciamo l'allocazione di memoria predefinita a 1GB per process.
 
-Aggiungi quanto segue al tuo file `nextflow.config`, prima della sezione dei parametri della pipeline:
+Aggiungete quanto segue al vostro file `nextflow.config`, prima della sezione dei parametri della pipeline:
 
 ```groovy title="nextflow.config" linenums="4"
 /*
@@ -1095,7 +1099,7 @@ Con questa configurazione, tutti i process richiederanno 1GB di memoria e una si
 
 !!! info "Informazione"
 
-    Se hai una macchina con poche CPU e allochi un numero elevato per process, potresti vedere chiamate ai process mettersi in coda l'una dietro l'altra.
+    Se avete una macchina con poche CPU e allocate un numero elevato per process, potreste vedere chiamate ai process mettersi in coda l'una dietro l'altra.
     Questo perché Nextflow assicura che non richiediamo più CPU di quelle disponibili.
 
 ### 5.4. Esegui il workflow con la configurazione aggiornata
@@ -1106,22 +1110,22 @@ Proviamolo, fornendo un nome file diverso per il report di profiling così possi
 nextflow run 3-main.nf -with-report report-config-2.html
 ```
 
-Probabilmente non noterai alcuna differenza reale dato che questo è un carico di lavoro così piccolo, ma questo è l'approccio che useresti per analizzare le prestazioni e i requisiti di risorse di un workflow del mondo reale.
+Probabilmente non noterete alcuna differenza reale dato che questo è un carico di lavoro così piccolo, ma questo è l'approccio che usereste per analizzare le prestazioni e i requisiti di risorse di un workflow del mondo reale.
 
-È molto utile quando i tuoi process hanno requisiti di risorse diversi. Ti permette di dimensionare correttamente le allocazioni delle risorse che imposti per ogni process basandoti su dati reali, non su supposizioni.
+È molto utile quando i vostri process hanno requisiti di risorse diversi. Vi permette di dimensionare correttamente le allocazioni delle risorse che impostate per ogni process basandovi su dati reali, non su supposizioni.
 
 !!! tip "Suggerimento"
 
-    Questo è solo un piccolo assaggio di ciò che puoi fare per ottimizzare il tuo uso delle risorse.
-    Nextflow stesso ha una logica di [retry dinamico](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) davvero interessante integrata per ritentare i job che falliscono a causa di limitazioni delle risorse.
-    Inoltre, Seqera Platform offre anche strumenti basati sull'IA per ottimizzare automaticamente le tue allocazioni delle risorse.
+    Questo è solo un piccolo assaggio di ciò che potete fare per ottimizzare il vostro uso delle risorse.
+    Nextflow stesso ha una logica di [retry dinamico](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) davvero interessante integrata per ritentare i job che falliscono a causa di limitazioni delle risorse.
+    Inoltre, Seqera Platform offre anche strumenti basati sull'IA per ottimizzare automaticamente le vostre allocazioni delle risorse.
 
 ### 5.5. Aggiungi limiti alle risorse
 
-A seconda di quale executor di calcolo e infrastruttura di calcolo stai usando, potrebbero esserci alcuni vincoli su ciò che puoi (o devi) allocare.
-Per esempio, il tuo cluster potrebbe richiedere di rimanere entro certi limiti.
+A seconda di quale executor di calcolo e infrastruttura di calcolo state usando, potrebbero esserci alcuni vincoli su ciò che potete (o dovete) allocare.
+Per esempio, il vostro cluster potrebbe richiedere di rimanere entro certi limiti.
 
-Puoi usare la direttiva `resourceLimits` per impostare le limitazioni rilevanti. La sintassi appare così quando è da sola in un blocco process:
+Potete usare la direttiva `resourceLimits` per impostare le limitazioni rilevanti. La sintassi appare così quando è da sola in un blocco process:
 
 ```groovy title="Esempio di sintassi"
 process {
@@ -1133,10 +1137,10 @@ process {
 }
 ```
 
-Nextflow tradurrà questi valori nelle istruzioni appropriate a seconda dell'executor che hai specificato.
+Nextflow tradurrà questi valori nelle istruzioni appropriate a seconda dell'executor che avete specificato.
 
 Non eseguiremo questo, dato che non abbiamo accesso a un'infrastruttura rilevante nell'ambiente di formazione.
-Tuttavia, se provassi a eseguire il workflow con allocazioni di risorse che superano questi limiti, poi cercassi il comando `sbatch` nel file di script `.command.run`, vedresti che le richieste che vengono effettivamente inviate all'executor sono limitate ai valori specificati da `resourceLimits`.
+Tuttavia, se provaste a eseguire il workflow con allocazioni di risorse che superano questi limiti, poi cercaste il comando `sbatch` nel file di script `.command.run`, vedreste che le richieste che vengono effettivamente inviate all'executor sono limitate ai valori specificati da `resourceLimits`.
 
 ??? info "Configurazioni di riferimento istituzionali"
 
@@ -1146,11 +1150,11 @@ Tuttavia, se provassi a eseguire il workflow con allocazioni di risorse che supe
 
 ### Riepilogo
 
-Sai come generare un report di profiling per valutare l'utilizzo delle risorse e come modificare le allocazioni delle risorse per tutti i process e/o per process individuali, oltre a impostare limitazioni delle risorse per l'esecuzione su HPC.
+Sapete come generare un report di profiling per valutare l'utilizzo delle risorse e come modificare le allocazioni delle risorse per tutti i process e/o per process individuali, oltre a impostare limitazioni delle risorse per l'esecuzione su HPC.
 
 ### Cosa c'è dopo?
 
-Impara come impostare profili di configurazione preimpostati e passare da uno all'altro a runtime.
+Imparate come impostare profili di configurazione preimpostati e passare da uno all'altro a runtime.
 
 ---
 
@@ -1158,14 +1162,14 @@ Impara come impostare profili di configurazione preimpostati e passare da uno al
 
 ??? example "Scenario"
 
-    Passi regolarmente dall'esecuzione di pipeline sul tuo laptop per lo sviluppo all'HPC della tua istituzione per le esecuzioni in produzione.
-    Sei stanco di cambiare manualmente le impostazioni di configurazione ogni volta che cambi ambiente.
+    Passate regolarmente dall'esecuzione di pipeline sul vostro laptop per lo sviluppo all'HPC della vostra istituzione per le esecuzioni in produzione.
+    Siete stanchi di cambiare manualmente le impostazioni di configurazione ogni volta che cambiate ambiente.
 
-Ti abbiamo mostrato diversi modi in cui puoi personalizzare la configurazione della tua pipeline a seconda del progetto su cui stai lavorando o dell'ambiente di calcolo che stai usando.
+Vi abbiamo mostrato diversi modi in cui potete personalizzare la configurazione della vostra pipeline a seconda del progetto su cui state lavorando o dell'ambiente di calcolo che state usando.
 
-Potresti voler passare da un'impostazione alternativa all'altra a seconda di quale infrastruttura di calcolo stai usando. Per esempio, potresti voler sviluppare e eseguire test su piccola scala localmente sul tuo laptop, poi eseguire carichi di lavoro su scala completa su HPC o cloud.
+Potreste voler passare da un'impostazione alternativa all'altra a seconda di quale infrastruttura di calcolo state usando. Per esempio, potreste voler sviluppare e eseguire test su piccola scala localmente sul vostro laptop, poi eseguire carichi di lavoro su scala completa su HPC o cloud.
 
-Nextflow ti permette di impostare un numero qualsiasi di profili che descrivono diverse configurazioni, che puoi poi selezionare a runtime usando un argomento da riga di comando, piuttosto che dover modificare il file di configurazione stesso.
+Nextflow vi permette di impostare un numero qualsiasi di [**profili**](https://nextflow.io/docs/latest/config.html#profiles) che descrivono diverse configurazioni, che potete poi selezionare a runtime usando un argomento da riga di comando, piuttosto che dover modificare il file di configurazione stesso.
 
 ### 6.1. Crea profili per passare dallo sviluppo locale all'esecuzione su HPC
 
@@ -1173,7 +1177,7 @@ Impostiamo due profili alternativi; uno per eseguire carichi su piccola scala su
 
 #### 6.1.1. Imposta i profili
 
-Aggiungi quanto segue al tuo file `nextflow.config`, dopo la sezione dei parametri della pipeline ma prima delle impostazioni di output:
+Aggiungete quanto segue al vostro file `nextflow.config`, dopo la sezione dei parametri della pipeline ma prima delle impostazioni di output:
 
 ```groovy title="nextflow.config" linenums="24"
 /*
@@ -1196,7 +1200,7 @@ profiles {
 }
 ```
 
-Vedi che per l'HPC universitario, stiamo anche specificando limitazioni delle risorse.
+Vedete che per l'HPC universitario, stiamo anche specificando limitazioni delle risorse.
 
 #### 6.1.2. Esegui il workflow con un profilo
 
@@ -1222,7 +1226,7 @@ nextflow run 3-main.nf -profile my_laptop
     [37/7b51b5] cowpy              | 1 of 1 ✔
     ```
 
-Come puoi vedere, questo ci permette di alternare tra configurazioni molto comodamente a runtime.
+Come potete vedere, questo ci permette di alternare tra configurazioni molto comodamente a runtime.
 
 !!! warning "Avviso"
 
@@ -1235,11 +1239,11 @@ Possiamo anche creare profili aggiuntivi se ci sono altri elementi di configuraz
 
 ??? example "Scenario"
 
-    Vuoi che altri possano provare rapidamente la tua pipeline senza dover raccogliere i propri dati di input.
+    Volete che altri possano provare rapidamente la vostra pipeline senza dover raccogliere i propri dati di input.
 
 I profili non sono solo per la configurazione dell'infrastruttura.
 Possiamo anche usarli per impostare valori predefiniti per i parametri del workflow, per rendere più facile per gli altri provare il workflow senza dover raccogliere valori di input appropriati loro stessi.
-Puoi considerare questo un'alternativa all'uso di un file di parametri.
+Potete considerare questo un'alternativa all'uso di un file di parametri.
 
 #### 6.2.1. Imposta il profilo
 
@@ -1281,14 +1285,14 @@ profiles {
 }
 ```
 
-Proprio come per i profili di configurazione tecnica, puoi impostare molteplici profili diversi che specificano parametri sotto qualsiasi nome arbitrario tu voglia.
+Proprio come per i profili di configurazione tecnica, potete impostare molteplici profili diversi che specificano parametri sotto qualsiasi nome arbitrario vi piaccia.
 
 #### 6.2.2. Esegui il workflow localmente con il profilo test
 
 Convenientemente, i profili non sono mutuamente esclusivi, quindi possiamo specificare profili multipli nella nostra riga di comando usando la seguente sintassi `-profile <profilo1>,<profilo2>` (per qualsiasi numero di profili).
 
-Se combini profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto usando qualunque valore abbia letto per ultimo (_cioè_ qualunque cosa venga dopo nel file).
-Se le impostazioni in conflitto sono impostate in diverse fonti di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) predefinito.
+Se combinate profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto usando qualunque valore abbia letto per ultimo (_cioè_ qualunque cosa venga dopo nel file).
+Se le impostazioni in conflitto sono impostate in diverse fonti di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html#configuration-file) predefinito.
 
 Proviamo ad aggiungere il profilo test al nostro comando precedente:
 
@@ -1310,11 +1314,11 @@ nextflow run 3-main.nf -profile my_laptop,test
     [fd/e84fa9] cowpy              | 1 of 1 ✔
     ```
 
-Questo userà Docker dove possibile e produrrà output sotto `results/test`, e questa volta il personaggio è il duo comico `dragonandcow`.
+Questo userà Docker dove possibile e produrrà output sotto `results_config/test`, e questa volta il personaggio è il duo comico `dragonandcow`.
 
 ??? abstract "Contenuto del file"
 
-    ```console title="results/test/"
+    ```console title="results_config/test/"
      _________
     / HOLà    \
     | HELLO   |
@@ -1349,20 +1353,20 @@ Questo significa che finché distribuiamo tutti i file di dati di test con il co
 
 ### 6.3. Usa `nextflow config` per vedere la configurazione risolta
 
-Come notato sopra, a volte lo stesso parametro può essere impostato a valori diversi in profili che vuoi combinare.
+Come notato sopra, a volte lo stesso parametro può essere impostato a valori diversi in profili che volete combinare.
 E più in generale, ci sono numerosi posti dove gli elementi di configurazione possono essere memorizzati, e a volte le stesse proprietà possono essere impostate a valori diversi in posti diversi.
 
-Nextflow applica un [ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) stabilito per risolvere qualsiasi conflitto, ma può essere difficile determinarlo da solo.
+Nextflow applica un [ordine di precedenza](https://www.nextflow.io/docs/latest/config.html#configuration-file) stabilito per risolvere qualsiasi conflitto, ma può essere difficile determinarlo da soli.
 E anche se nulla è in conflitto, può essere noioso cercare tutti i possibili posti dove le cose potrebbero essere configurate.
 
-Fortunatamente, Nextflow include un conveniente strumento utility chiamato `config` che può automatizzare tutto quel processo per te.
+Fortunatamente, Nextflow include un conveniente strumento utility chiamato `config` che può automatizzare tutto quel processo per voi.
 
-Lo strumento `config` esplorerà tutti i contenuti nella tua directory di lavoro corrente, raccoglierà tutti i file di configurazione, e produrrà la configurazione completamente risolta che Nextflow userebbe per eseguire il workflow.
-Questo ti permette di scoprire quali impostazioni verranno usate senza dover lanciare nulla.
+Lo strumento `config` esplorerà tutti i contenuti nella vostra directory di lavoro corrente, raccoglierà tutti i file di configurazione, e produrrà la configurazione completamente risolta che Nextflow userebbe per eseguire il workflow.
+Questo vi permette di scoprire quali impostazioni verranno usate senza dover lanciare nulla.
 
 #### 6.3.1. Risolvi la configurazione predefinita
 
-Esegui questo comando per risolvere la configurazione che verrebbe applicata per impostazione predefinita.
+Eseguite questo comando per risolvere la configurazione che verrebbe applicata per impostazione predefinita.
 
 ```bash
 nextflow config
@@ -1371,6 +1375,12 @@ nextflow config
 ??? success "Output del comando"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'batch'
+      character = 'turkey'
+    }
+
     docker {
       enabled = false
     }
@@ -1387,18 +1397,20 @@ nextflow config
       }
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+    outputDir = 'results_config/batch'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
-Questo ti mostra la configurazione base che ottieni se non specifichi nulla di extra nella riga di comando.
+Questo vi mostra la configurazione base che ottenete se non specificate nulla di extra nella riga di comando.
 
 #### 6.3.2. Risolvi la configurazione con impostazioni specifiche attivate
 
-Se fornisci parametri da riga di comando, es. abilitando uno o più profili o caricando un file di parametri, il comando terrà conto anche di quelli.
+Se fornite parametri da riga di comando, es. abilitando uno o più profili o caricando un file di parametri, il comando terrà conto anche di quelli.
 
 ```bash
 nextflow config -profile my_laptop,test
@@ -1407,6 +1419,12 @@ nextflow config -profile my_laptop,test
 ??? success "Output del comando"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'test'
+      character = 'dragonandcow'
+    }
+
     docker {
       enabled = true
     }
@@ -1424,10 +1442,12 @@ nextflow config -profile my_laptop,test
       executor = 'local'
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+    outputDir = 'results_config/test'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1435,12 +1455,12 @@ Questo diventa particolarmente utile per progetti complessi che coinvolgono molt
 
 ### Riepilogo
 
-Sai come usare i profili per selezionare una configurazione preimpostata a runtime con il minimo fastidio.
-Più in generale, sai come configurare le esecuzioni del tuo workflow per adattarle a diverse piattaforme di calcolo e migliorare la riproducibilità delle tue analisi.
+Sapete come usare i profili per selezionare una configurazione preimpostata a runtime con il minimo fastidio.
+Più in generale, sapete come configurare le esecuzioni del vostro workflow per adattarle a diverse piattaforme di calcolo e migliorare la riproducibilità delle vostre analisi.
 
 ### Cosa c'è dopo?
 
-Impara come eseguire pipeline direttamente da repository remoti come GitHub.
+Imparate come eseguire pipeline direttamente da repository remoti come GitHub.
 
 ---
 
@@ -1448,50 +1468,88 @@ Impara come eseguire pipeline direttamente da repository remoti come GitHub.
 
 ??? example "Scenario"
 
-    Vuoi eseguire una pipeline ben consolidata come quelle di nf-core senza dover scaricare e gestire il codice tu stesso.
+    Volete eseguire una pipeline ben consolidata come quelle di nf-core senza dover scaricare e gestire il codice voi stessi.
 
 Finora abbiamo eseguito script di workflow situati nella directory corrente.
-In pratica, vorrai spesso eseguire pipeline memorizzate in repository remoti, come GitHub.
+In pratica, vorrete spesso eseguire pipeline memorizzate in repository remoti, come GitHub.
 
-Nextflow rende questo semplice: puoi eseguire qualsiasi pipeline direttamente da un URL di un repository Git senza scaricarlo manualmente prima.
+Nextflow rende questo semplice: potete eseguire qualsiasi pipeline direttamente da un URL di un repository Git senza scaricarlo manualmente prima.
 
 ### 7.1. Esegui una pipeline da GitHub
 
 La sintassi base per eseguire una pipeline remota è `nextflow run <repository>`, dove `<repository>` può essere un percorso di repository GitHub come `nextflow-io/hello`, un URL completo, o un percorso a GitLab, Bitbucket, o altri servizi di hosting Git.
 
-Prova a eseguire la pipeline demo ufficiale di Nextflow "hello":
+Provate a eseguire la pipeline demo ufficiale di Nextflow "hello":
 
 ```bash
 nextflow run nextflow-io/hello
 ```
 
-La prima volta che esegui una pipeline remota, Nextflow la scarica e la mette in cache localmente.
-Le esecuzioni successive usano la versione in cache a meno che tu non richieda esplicitamente un aggiornamento.
+??? success "Output del comando"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Pulling nextflow-io/hello ...
+     downloaded from https://github.com/nextflow-io/hello.git
+    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] DSL2 - revision: 2ce0b0e294 [master]
+
+    executor >  local (4)
+    [ba/08236d] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Hello world!
+
+    Bonjour world!
+
+    Hola world!
+    ```
+
+La prima volta che eseguite una pipeline remota, Nextflow la scarica e la mette in cache localmente.
+Le esecuzioni successive usano la versione in cache a meno che non richiediate esplicitamente un aggiornamento.
 
 ### 7.2. Specifica una versione per la riproducibilità
 
 Per impostazione predefinita, Nextflow esegue l'ultima versione dal branch predefinito.
-Puoi specificare una particolare versione, branch, o commit usando il flag `-r`:
+Potete specificare una particolare versione (tag), branch, o commit usando il flag `-r`:
 
 ```bash
-nextflow run nextflow-io/hello -r v1.1
+nextflow run nextflow-io/hello -r v1.3
 ```
+
+??? success "Output del comando"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
+
+    executor >  local (4)
+    [61/e11f77] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Bonjour world!
+
+    Hello world!
+
+    Hola world!
+    ```
 
 Specificare versioni esatte è essenziale per la riproducibilità.
 
 ### Riepilogo
 
-Sai come eseguire pipeline direttamente da GitHub e altri repository remoti, e come specificare versioni per la riproducibilità.
+Sapete come eseguire pipeline direttamente da GitHub e altri repository remoti, e come specificare versioni per la riproducibilità.
 
 ### Cosa c'è dopo?
 
-Datti una bella pacca sulla spalla!
-Sai tutto ciò che devi sapere per iniziare a eseguire e gestire pipeline Nextflow.
+Datevi una bella pacca sulla spalla!
+Sapete tutto ciò che dovete sapere per iniziare a eseguire e gestire pipeline Nextflow.
 
-Questo conclude questo corso, ma se sei desideroso di continuare a imparare, abbiamo due raccomandazioni principali:
+Questo conclude questo corso, ma se siete desiderosi di continuare a imparare, abbiamo due raccomandazioni principali:
 
-- Se vuoi approfondire lo sviluppo delle tue pipeline, dai un'occhiata a [Hello Nextflow](../hello_nextflow/index.md), un corso per principianti che copre la stessa progressione generale di questo ma va molto più in dettaglio su channel e operatori.
-- Se vorresti continuare a imparare come eseguire pipeline Nextflow senza andare più in profondità nel codice, dai un'occhiata alla prima parte di [Hello nf-core](../hello_nf-core/index.md), che introduce gli strumenti per trovare e eseguire pipeline dall'estremamente popolare progetto [nf-core](https://nf-co.re/).
+- Se volete approfondire lo sviluppo delle vostre pipeline, date un'occhiata a [Hello Nextflow](../hello_nextflow/index.md), un corso per principianti che copre la stessa progressione generale di questo ma va molto più in dettaglio su channel e operatori.
+- Se vorreste continuare a imparare come eseguire pipeline Nextflow senza andare più in profondità nel codice, date un'occhiata alla prima parte di [Hello nf-core](../hello_nf-core/index.md), che introduce gli strumenti per trovare e eseguire pipeline dall'estremamente popolare progetto [nf-core](https://nf-co.re/).
 
 Buon divertimento!
 
@@ -1520,7 +1578,7 @@ Approfondisci: [1.1. Imposta i valori in `nextflow.config`](#11-imposta-i-valori
 </quiz>
 
 <quiz>
-Come specifichi un file di parametri quando esegui un workflow?
+Come specificate un file di parametri quando eseguite un workflow?
 - [ ] `--params params.yaml`
 - [ ] `-config params.yaml`
 - [x] `-params-file params.yaml`
@@ -1542,8 +1600,8 @@ Approfondisci: [2.1. Personalizza il nome della directory outputDir](#21-persona
 <quiz>
 Come si fa riferimento dinamicamente al nome di un process nella configurazione del percorso di output?
 - [ ] `#!groovy ${processName}`
-- [ ] `process.name`
-- [x] `#!groovy { meta.id }`
+- [ ] `#!groovy path "<process>.name"`
+- [x] `#!groovy path { <process>.name }`
 - [ ] `@processName`
 
 Approfondisci: [2.2. Organizza gli output per process](#22-organizza-gli-output-per-process)
@@ -1620,7 +1678,7 @@ Approfondisci: [6.3. Usa `nextflow config` per vedere la configurazione risolta]
 </quiz>
 
 <quiz>
-Per cosa possono essere usati i profili? (Seleziona tutte le risposte corrette)
+Per cosa possono essere usati i profili? (Selezionate tutte le risposte corrette)
 - [x] Definire impostazioni specifiche dell'infrastruttura (executor, container)
 - [x] Impostare limiti di risorse per diversi ambienti
 - [x] Fornire parametri di test per testare facilmente il workflow

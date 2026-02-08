@@ -412,6 +412,9 @@ uv run translate.py sync <lang> --dry-run
 # Sync all translations (update outdated + add missing + remove orphaned)
 uv run translate.py sync <lang>
 
+# Sync with lower parallelism (default: 50 concurrent translations)
+uv run translate.py sync <lang> --parallel 10
+
 # Sync with filter pattern
 uv run translate.py sync <lang> --include hello_nextflow
 

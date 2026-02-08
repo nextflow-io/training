@@ -2,17 +2,15 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/lJ41WMMm44M?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=fr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Voir [la playlist complète](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) sur la chaîne YouTube Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Voir [la playlist complète](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sur la chaîne YouTube Nextflow.
 
 :green_book: La transcription de la vidéo est disponible [ici](./transcripts/02_hello_channels.md).
 ///
--->
 
 Dans la Partie 1 de ce cours (Hello World), nous vous avons montré comment fournir une entrée variable à un processus en fournissant l'entrée directement dans l'appel du processus : `sayHello(params.input)`.
 C'était une approche délibérément simplifiée.
@@ -20,9 +18,9 @@ En pratique, cette approche a des limitations majeures ; à savoir qu'elle ne fo
 Dans la plupart des cas d'utilisation de workflow réalistes, nous voulons traiter plusieurs valeurs (données expérimentales pour plusieurs échantillons, par exemple), nous avons donc besoin d'une façon plus sophistiquée de gérer les entrées.
 
 C'est à cela que servent les [**canaux**](https://nextflow.io/docs/latest/channel.html) Nextflow.
-Les canaux sont des files d'attente conçues pour gérer les entrées efficacement et les faire passer d'une étape à l'autre dans des workflows à plusieurs étapes, tout en fournissant un parallélisme intégré et de nombreux autres avantages.
+Les **canaux** sont des files d'attente conçues pour gérer les entrées efficacement et les faire passer d'une étape à l'autre dans des workflows à plusieurs étapes, tout en fournissant un parallélisme intégré et de nombreux autres avantages.
 
-Dans cette partie du cours, vous apprendrez à utiliser un canal pour gérer plusieurs entrées provenant de diverses sources différentes.
+Dans cette partie du cours, vous apprendrez à utiliser un **canal** pour gérer plusieurs entrées provenant de diverses sources différentes.
 Vous apprendrez également à utiliser des [**opérateurs**](https://nextflow.io/docs/latest/reference/operator.html) pour transformer le contenu des canaux selon les besoins.
 
 ??? info "Comment commencer à partir de cette section"
@@ -107,7 +105,7 @@ Cela crée un canal appelé `greeting_ch` en utilisant la fabrique de canaux `ch
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
 </figure>
 
-!!! note "Note"
+!!! note
 
     Nous revenons temporairement aux chaînes codées en dur au lieu d'utiliser un paramètre CLI pour des raisons de lisibilité. Nous reviendrons à l'utilisation des paramètres CLI une fois que nous aurons couvert ce qui se passe au niveau du canal.
 
@@ -1408,7 +1406,7 @@ Quand un canal contient plusieurs valeurs, comment Nextflow gère-t-il l'exécut
 - [ ] Le processus s'exécute seulement avec la première valeur
 - [ ] Le processus s'exécute seulement avec la dernière valeur
 
-En savoir plus : [2. Modifier le workflow pour s'exécuter sur plusieurs valeurs d'entrée](#2-modifier-le-flux-de-travail-pour-sexecuter-sur-plusieurs-valeurs-dentree)
+En savoir plus : [2. Modifier le workflow pour s'exécuter sur plusieurs valeurs d'entrée](#2-modifier-le-workflow-pour-sexecuter-sur-plusieurs-valeurs-dentree)
 </quiz>
 
 <quiz>

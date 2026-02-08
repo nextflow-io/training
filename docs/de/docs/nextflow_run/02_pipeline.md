@@ -204,7 +204,7 @@ Schauen wir uns an, was das im Workflow-Code ermöglicht.
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -235,7 +235,7 @@ Lass es uns aufschlüsseln.
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5"
     main:
-    // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+    // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
@@ -243,14 +243,14 @@ Lass es uns aufschlüsseln.
     sayHello(greeting_ch)
 ```
 
-Dieser Code erstellt einen channel namens `greeting_ch`, der die CSV-Datei liest, sie parst und die erste Spalte aus jeder Zeile extrahiert.
-Das Ergebnis ist ein channel, der `Hello`, `Bonjour` und `Holà` enthält.
+Dieser Code erstellt einen Kanal namens `greeting_ch`, der die CSV-Datei liest, sie parst und die erste Spalte aus jeder Zeile extrahiert.
+Das Ergebnis ist ein Kanal, der `Hello`, `Bonjour` und `Holà` enthält.
 
 ??? tip "Wie funktioniert das?"
 
     Hier ist, was diese Zeile auf Deutsch bedeutet:
 
-    - `channel.fromPath` ist eine **channel factory**, die einen channel aus Dateipfad(en) erstellt
+    - `channel.fromPath` ist eine **channel factory**, die einen Kanal aus Dateipfad(en) erstellt
     - `(params.input)` gibt an, dass der Dateipfad durch `--input` auf der Kommandozeile bereitgestellt wird
 
     Mit anderen Worten, diese Zeile sagt Nextflow: Nimm den mit `--input` angegebenen Dateipfad und bereite dich darauf vor, seinen Inhalt als Eingabedaten zu behandeln.
@@ -274,17 +274,17 @@ Das Ergebnis ist ein channel, der `Hello`, `Bonjour` und `Holà` enthält.
     [[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
     ```
 
-    Und dann haben wir das erste Element aus jeder der drei Zeilen genommen und sie in einen Nextflow channel geladen, der jetzt enthält: `Hello`, `Bonjour` und `Holà`.
+    Und dann haben wir das erste Element aus jeder der drei Zeilen genommen und sie in einen Nextflow Kanal geladen, der jetzt enthält: `Hello`, `Bonjour` und `Holà`.
 
-    Wenn du channels und Operatoren im Detail verstehen möchtest, einschließlich wie du sie selbst schreibst, siehe [Hello Nextflow Teil 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
+    Wenn du Kanäle und Operatoren im Detail verstehen möchtest, einschließlich wie du sie selbst schreibst, siehe [Hello Nextflow Teil 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file).
 
 #### 1.4.2. Den process für jeden Gruß aufrufen
 
-Als nächstes geben wir in der letzten Zeile des `main:`-Blocks des Workflows den geladenen `greeting_ch` channel als Eingabe für den `sayHello()` process an.
+Als nächstes geben wir in der letzten Zeile des `main:`-Blocks des Workflows den geladenen `greeting_ch` Kanal als Eingabe für den `sayHello()` process an.
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="7"
     main:
-    // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+    // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
@@ -292,7 +292,7 @@ Als nächstes geben wir in der letzten Zeile des `main:`-Blocks des Workflows de
     sayHello(greeting_ch)
 ```
 
-Dies sagt Nextflow, dass es den process einzeln auf jedes Element im channel ausführen soll, _d.h._ auf jeden Gruß.
+Dies sagt Nextflow, dass es den process einzeln auf jedes Element im Kanal ausführen soll, _d.h._ auf jeden Gruß.
 Und weil Nextflow so clever ist, wird es diese process-Aufrufe parallel ausführen, wenn möglich, abhängig von der verfügbaren Recheninfrastruktur.
 
 So kannst du eine effiziente und skalierbare Verarbeitung vieler Daten (viele Proben oder Datenpunkte, was auch immer deine Forschungseinheit ist) mit vergleichsweise sehr wenig Code erreichen.
@@ -325,7 +325,7 @@ Und das ist die einzige Änderung, die wir innerhalb der process-Deklaration vor
 
 ### Fazit
 
-Du verstehst auf einem grundlegenden Niveau, wie channels und Operatoren uns ermöglichen, mehrere Eingaben effizient zu verarbeiten.
+Du verstehst auf einem grundlegenden Niveau, wie Kanäle und Operatoren uns ermöglichen, mehrere Eingaben effizient zu verarbeiten.
 
 ### Wie geht es weiter?
 
@@ -336,7 +336,7 @@ Entdecke, wie mehrstufige Workflows aufgebaut sind und wie sie funktionieren.
 ## 2. Mehrstufige Workflows ausführen
 
 Die meisten realen Workflows umfassen mehr als einen Schritt.
-Lass uns auf dem aufbauen, was wir gerade über channels gelernt haben, und schauen, wie Nextflow channels und Operatoren verwendet, um processes in einem mehrstufigen Workflow miteinander zu verbinden.
+Lass uns auf dem aufbauen, was wir gerade über Kanäle gelernt haben, und schauen, wie Nextflow Kanäle und Operatoren verwendet, um processes in einem mehrstufigen Workflow miteinander zu verbinden.
 
 Zu diesem Zweck stellen wir dir einen Beispiel-Workflow zur Verfügung, der drei separate Schritte miteinander verkettet und Folgendes demonstriert:
 
@@ -496,7 +496,7 @@ Schauen wir uns den Code an und identifizieren die Schlüsselmuster für mehrstu
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -561,7 +561,7 @@ Das wirklich Interessante hier ist, wie die process-Aufrufe im `main:`-Block des
 
 ```groovy title="2b-multistep.nf" linenums="68" hl_lines="9 11"
     main:
-    // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+    // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
@@ -576,7 +576,7 @@ Das wirklich Interessante hier ist, wie die process-Aufrufe im `main:`-Block des
 Du kannst sehen, dass der erste process-Aufruf, `sayHello(greeting_ch)`, unverändert ist.
 Dann bezieht sich der nächste process-Aufruf, zu `convertToUpper`, auf die Ausgabe von `sayHello` als `sayHello.out`.
 
-Das Muster ist einfach: `processName.out` bezieht sich auf den Ausgabe-channel eines process, der direkt an den nächsten process übergeben werden kann.
+Das Muster ist einfach: `processName.out` bezieht sich auf den Ausgabe-Kanal eines process, der direkt an den nächsten process übergeben werden kann.
 So transportieren wir Daten von einem Schritt zum nächsten in Nextflow.
 
 #### 2.3.3. Ein process kann mehrere Eingaben nehmen
@@ -609,16 +609,16 @@ Lass uns nun einen genaueren Blick auf diese erste Eingabe werfen, `convertToUpp
 
 #### 2.3.4. Was `collect()` im `collectGreetings`-Aufruf tut
 
-Um die Ausgabe von `sayHello` an `convertToUpper` zu übergeben, haben wir einfach auf den Ausgabe-channel von `sayHello` als `sayHello.out` verwiesen. Aber für den nächsten Schritt sehen wir einen Verweis auf `convertToUpper.out.collect()`.
+Um die Ausgabe von `sayHello` an `convertToUpper` zu übergeben, haben wir einfach auf den Ausgabe-Kanal von `sayHello` als `sayHello.out` verwiesen. Aber für den nächsten Schritt sehen wir einen Verweis auf `convertToUpper.out.collect()`.
 
 Was ist dieses `collect()`-Teil und was tut es?
 
 Es ist natürlich ein Operator. Genau wie die `splitCsv`- und `map`-Operatoren, die wir vorher kennengelernt haben.
-Diesmal heißt der Operator `collect` und wird auf den Ausgabe-channel angewendet, der von `convertToUpper` produziert wird.
+Diesmal heißt der Operator `collect` und wird auf den Ausgabe-Kanal angewendet, der von `convertToUpper` produziert wird.
 
-Der `collect`-Operator wird verwendet, um die Ausgaben von mehreren Aufrufen desselben process zu sammeln und sie in ein einzelnes channel-Element zu verpacken.
+Der `collect`-Operator wird verwendet, um die Ausgaben von mehreren Aufrufen desselben process zu sammeln und sie in ein einzelnes Kanal-Element zu verpacken.
 
-Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im `convertToUpper.out` channel (die drei separate channel-Elemente sind und normalerweise in separaten Aufrufen vom nächsten process behandelt würden) und verpackt sie in ein einzelnes Element.
+Im Kontext dieses Workflows nimmt er die drei großgeschriebenen Grüße im `convertToUpper.out` Kanal (die drei separate Kanal-Elemente sind und normalerweise in separaten Aufrufen vom nächsten process behandelt würden) und verpackt sie in ein einzelnes Element.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/with-collect-operator.svg"
@@ -632,7 +632,7 @@ Im Gegensatz dazu würde Nextflow, wenn wir `collect()` nicht auf die Ausgabe vo
 
 So bekommen wir alle Grüße zurück in dieselbe Datei.
 
-Es gibt viele andere [Operatoren](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page), die verfügbar sind, um Transformationen auf den Inhalt von channels zwischen process-Aufrufen anzuwenden.
+Es gibt viele andere [Operatoren](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page), die verfügbar sind, um Transformationen auf den Inhalt von Kanälen zwischen process-Aufrufen anzuwenden.
 
 Das gibt bei der Pipeline-Entwicklung viel Flexibilität für die Anpassung der Flusslogik.
 Der Nachteil ist, dass es manchmal schwieriger machen kann, zu entziffern, was die Pipeline tut.
@@ -763,7 +763,7 @@ Es gibt anspruchsvollere Möglichkeiten, veröffentlichte Ausgaben zu organisier
 
 ### Fazit
 
-Du verstehst auf einem grundlegenden Niveau, wie mehrstufige Workflows unter Verwendung von channels und Operatoren aufgebaut werden und wie sie funktionieren.
+Du verstehst auf einem grundlegenden Niveau, wie mehrstufige Workflows unter Verwendung von Kanälen und Operatoren aufgebaut werden und wie sie funktionieren.
 Du hast auch gesehen, dass processes mehrere Eingaben nehmen und mehrere Ausgaben produzieren können, und dass diese auf strukturierte Weise veröffentlicht werden können.
 
 ### Wie geht es weiter?
@@ -833,7 +833,7 @@ Beginne damit, die `2c-modules.nf` Workflow-Datei zu öffnen.
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -874,7 +874,7 @@ Beginne damit, die `2c-modules.nf` Workflow-Datei zu öffnen.
 Du siehst, dass die Workflow-Logik genau dieselbe ist wie in der vorherigen Version des Workflows.
 Allerdings ist der process-Code aus der Workflow-Datei verschwunden, und stattdessen gibt es `include`-Anweisungen, die auf separate Dateien unter `modules` verweisen.
 
-```groovy title="hello-modules.nf" linenums="3"
+```groovy title="2c-modules.nf" linenums="3"
 // Module einbinden
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -926,9 +926,9 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [99/79484f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
 Du wirst bemerken, dass alle process-Ausführungen erfolgreich aus dem cache geladen wurden, was bedeutet, dass Nextflow erkannt hat, dass es die angeforderte Arbeit bereits erledigt hat, obwohl der Code aufgeteilt wurde und die Haupt-Workflow-Datei umbenannt wurde.
@@ -1179,7 +1179,7 @@ Der Workflow ist sehr ähnlich zum vorherigen, plus der extra Schritt, um `cowpy
     workflow {
 
         main:
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -1226,9 +1226,9 @@ Der Workflow ist sehr ähnlich zum vorherigen, plus der extra Schritt, um `cowpy
 
 Du siehst, dass dieser Workflow einen `cowpy` process aus einer Modul-Datei importiert und ihn auf der Ausgabe des `collectGreetings()`-Aufrufs ausführt, plus einem Eingabe-Parameter namens `params.character`.
 
-```groovy title="2d-container.nf" linenums="25"
+```groovy title="2d-container.nf" linenums="31"
 // ASCII-Kunst mit cowpy generieren
-cowpy(collectGreetings.out, params.character)
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 Der `cowpy` process, der den cowpy-Befehl zum Generieren von ASCII-Kunst umhüllt, ist im `cowpy.nf`-Modul definiert.

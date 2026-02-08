@@ -2,17 +2,15 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2hHI-9vms?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube 채널에서 [전체 재생 목록](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik)을 확인하세요.
+:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube 채널에서 [전체 재생 목록](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n)을 확인하세요.
 
 :green_book: 비디오 스크립트는 [여기](./transcripts/01_hello_world.md)에서 확인할 수 있습니다.
 ///
--->
 
 Hello Nextflow 교육 과정의 첫 번째 파트에서는 매우 기본적인 도메인에 구애받지 않는 Hello World 예제로 주제에 쉽게 접근합니다. 이 예제를 단계적으로 구축하여 기본 Nextflow 로직과 구성 요소의 사용법을 시연합니다.
 
@@ -602,7 +600,7 @@ nextflow run hello-world.nf
 </figure>
 
 원하는 만큼 중첩 수준을 사용할 수 있습니다.
-프로세스 이름이나 다른 변수를 사용하여 결과를 구성하는 데 사용되는 디렉토리 이름을 지정할 수도 있으며, 최상위 출력 디렉토리의 기본 이름을 변경할 수도 있습니다(특수 변수 `outputDir`에 의해 제어됨).
+프로세스 이름이나 다른 변수를 사용하여 결과를 구성하는 데 사용되는 디렉토리 이름을 지정할 수도 있으며, 최상위 출력 디렉토리의 기본 이름을 변경할 수도 있습니다(`-o` CLI 플래그 또는 설정 변수 `outputDir`에 의해 제어됨).
 이러한 옵션은 이후 교육에서 다룹니다.
 
 ### 2.3. 게시 모드를 copy로 설정

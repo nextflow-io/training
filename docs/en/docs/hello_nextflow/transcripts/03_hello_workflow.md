@@ -1,7 +1,7 @@
-# Part 3: Hello Workflow - Transcript
+# Part 3: Hello Workflow - Video Transcript
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/zJP7cUYPEbA?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Important notes"
@@ -10,226 +10,224 @@
 
     The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
 
-## Welcome
+## Welcome and recap
 
-Hi, welcome to part three of the "Hello Nextflow" training course.
+Hi, and welcome back to part three of Hello Nextflow. This part is called Hello Workflow, and it's in this part of the course where we really start to justify the name pipeline or workflow.
 
-This chapter is called "Hello Workflow".
+We're going to take our simple, pipeline script so far with its one process, and we're gonna start adding in additional processes and see how Nextflow handles this orchestration and the data flow through the pipeline.
 
-In chapter two, we built a simple workflow of one process, but in reality, pipelines are useful because they can chain multiple steps of analysis together.
+Let's go back to our code spaces. You'll see I've deleted all my .nextflow\* directories and the work directories and everything to try and keep it clean. Don't worry if you still have those files kicking around from previous parts of the course.
 
-In this chapter, we're going to take that initial example and extend it to be a little bit more realistic.
+We are gonna work from a file called hello-workflow.nf. As before, this basically represents the script that we have built up to this point, and gives us a clean starting place. And again, down in the output we can see that the path is now hello_workflow. So the published files should be going into a different subdirectory in your results folder.
 
-We're going to add some additional steps and we're going to look at how we use channels to connect those steps.
+To recap where we are so far, we have a single process in here, with one input greeting, one output greeting file. And then the simple Bash script, which just does an echo command to a file.
 
-We are going to look at multiple tasks, which can collapse into a single process and we're going to look at processes which can have multiple inputs and multiple outputs.
+We have a single workflow input, the params block here, where we say that it's expecting a path, and the default is data/greetings.csv, which is this file up here.
 
-Okay, let's get started.
+Then in the workflow itself, we have a main block. We're creating a channel. We are parsing the CSV into rows and then taking the first element of each array, and we're passing that channel into that process, which is then generating three tasks, and we are publishing from the workflow, the outputs from that process.
 
-So let's start off. Same as before. Let's go to training.nextflow.io. Hello Nextflow, chapter three. Hello Workflow. And let's open up our workspace. I've cleaned up all my work files from my previous chapters and I'm going to open Hello Workflow.
-
-Now this is the same file we've been working on until now so this should look familiar. We've got our say hello process. We've got our params.greeting with its greetings CSV file, and we've got our workflow at the bottom, which loads that CSV file, creates the channel and passes it to our process.
-
-## 0. Warmup: Run hello-workflow.nf
-
-If you like, we can try this out and double check it is working as we expect. Load up a terminal to nextflow run hello workflow nf and click enter.
-
-Okay, great. Our three processes run. We have our results directory with our three outputs. Bonjour. Hello. Holà. So let's close those files, close the terminal, go back to the script.
+And then finally, in the output block, we're telling Nextflow to publish these files from this channel to the directory called hello_workflow. And to copy those files rather than soft linking them.
 
 ## 1. Add a second step to the workflow
 
-Okay. For our example, we're staying basic and we're trying to stay domain agnostic. So our second process is just going to manipulate these strings, these words, in a simple way. We're going to use the translate Unix command to take these files and make them all uppercase. We do that with the "tr" command.
+Okay, in this part we're going to add a second process to our workflow. We'll take the outputs of the sayHello process, and process them in a second step, which is gonna convert all the letters within those files convertToUppercase.
 
-## 1.1. Define the uppercasing command and test it in the terminal
+This is just a silly example, it's just some simple string processing again, but it shows you how we can take the logic, within the workflow.
 
-We can try this just in the bash terminal, and see if it works. So you do echo, Hello World, and then pass that on with the pipe character to tr, and we give it a recognition pattern, a to z and what it should translate to. A to Z in uppercase.
+We are going to do a bash command called "tr" for this, which is short for translate. It's a Unix command that's been around forever. If you're not familiar with it, I don't blame you. I don't think I ever used it before training, but you can try it out very quickly on the terminal. If I do "echo 'hello world'" and then pipe to 'tr' and then in quotes you say character range, so A to Z, lowercase, and then you want to do A to Z uppercase. And it just says, translate these letters into these letters.
 
-This is very simple because it's literally doing the A to Z characters. So it won't work on anything that's accented or anything like that. But for the purposes of the example, you should get the picture.
+And when I hit enter, you can see it's now capitalized everything. Very nice if you like shouting at people.
 
-Going to hit enter and it prints to a terminal, HELLO WORLD in capitals. And just as before, we could redirect this to a file if we wanted to. Outfile.
+So that's a very simple style of bash command that we're going to use in our second process.
 
-Okay. Let's clean this up.
+## 1.2. Write the uppercasing step as a Nextflow process
 
-## 1.1. Write the uppercasing step as a Nextflow process
+So if I go back to my script, I'm going to cheat a little bit and just copy the code from the, from the docs for the training. But you can see exactly what's going on.
 
-Let's go back to our script and write a new process to handle this bash command. I'm going to copy the previous process, paste it underneath, and call it convert to upper. For uppercase. I am going to use the same publishDir results, but I'm going to make a few changes here. Instead of taking a val, I'm going to take a path input file, and I'm going to have a prefix here upper, so that our output files don't clobber the output. And I'm going to use the variable name from the input.And then I'm going to change a script down here, and instead I'm going to use cat on the input file and just like we did in Bash TR, a-z, upper input file .txt. Okay, let's click save.
+We have a new process here. This one we've called convertToUpper, but we could call it whatever we want.
 
-## 1.2. Add a call to the new process in the workflow block
+We have a single input path, as we did before. It's not a value channel, it's a path channel. And then a single output.
 
-Now if I scroll down, we need to actually call this process. Just adding the process into a script isn't enough. We have to tell Nextflow that we need to run this process and where to do that.
+In the script block we do "cat" on the input file. And we can put this in squiggly brackets if we want to. and which takes that variable. And we run that same bash command in the pipe and we write the results to a file with this file name, and that's picked up by the output path.
 
-So I'm going to right here, convert to upper and
+We now need to do something with this new process. So we're gonna go down to the workflow where we build up the different logic of a workflow, and after that first process, we're going to run our second process. So convertToUpper is the name of the process here.
 
-okay, we're getting an error here saying it expects an argument. Sure enough, we need to pass something to this process so that it actually has something to do.
+It takes an input so we can't just call it by itself. We want to process the output of the first process. So just like we did with this, sayHello out where we're publishing those results. We want to use those same results here as the input, so we can copy those and put them in there.
 
-## 1.3. Pass the output of the first process to the second process
+We want the sayHello process ".out", and Nextflow knows that this means a simple single output record here, which is this file. So that will then be passed as an input to a second process.
 
-What we're going to do is we're going to take the output from this process. So I take the name, say hello, and when I do dot out.
+## 1.5. Set up the workflow output publishing
 
-For a simple example like this, where we have a process that has just one output and we're passing that to a new process, so it has one input that should be all we need. So I'm going to click save, bring up the terminal, and let's try and run this again.
+Okay. And finally, so that we actually save the results of this second process, we also need to publish them from the workflow, and then define them in the output block, same syntax as before. So we can copy this and say second outputs, or whatever you want to call it.
 
-## 1.4. Run the workflow again
+Take the process name that we're interested in, convertToUpper out, and then down here in the output block. Add this and we could do the same attributes here. So we also want these files in the Hello Workflow subdirectory, and we also want to copy them.
 
-Now, I haven't cleared up my work directory from the last time I run this workflow. I'm going to run it again and I'm going to use this as an opportunity to show how partial caching works. So if I do single dash resume. Hopefully it should reuse the outputs from that first process, which were exactly the same as last time I ran. But now we have a new process here which hasn't run before, that runs from scratch. And sure enough, you can see the first process used, the cache outputs, and the second output ran three of three. You can also see that we have both of our processes here now, our first process, say hello, run three times, and our second process convert to upper run three times.
+Great. Let's try and run it. So if I bring up the terminal and I do "nextflow run hello-workflow.nf", and we'll see what it does. See if it looks any different to the previous parts.
 
-If I run this again, as a reminder, with -ansi-log false, we should see that six different process tasks run three for each of them. So this is doing exactly what we hoped it would. The first process is running three times, passing those outputs onto a second process, which is then running three times.
+So it launches Nextflow. In the docs, it says to do this with "-resume", but I deleted all my work directory, so it wouldn't have made any difference here. But if you did, then that will work as well.
 
-So let's have a look inside the work directory and see how Nextflow is handling these file inputs. If I take this hash directory here from the second process we can use a tree command again with -a just to look at these files. You can see in here that we have our input file, which is the Bonjour-output.txt file, and that's actually a symlink. That's what this arrow is showing us, and it's pointing to the file in the previous work directory.
+And it looks almost exactly the same. But you can see now there's a second line of output here, where you can see the name of the second process we've just added. And sure enough, you can see it ran three times successfully.
 
-This makes sense. Nextflow handles the execution of each task in its own encapsulated directory, so it's completely self enclosed. However, it needs to provide the files from a previous steps as an input. Rather than reaching outside of the work directory to get those files, Nextflow stages them into the work directory.
+Brilliant. If I did have my previous work directories around and I'd done this with "-resume", these would've been, cached just the first step in the pipeline. 'Cause those outputs were exactly the same, so Nextflow would've known to reuse those again.
 
-If we have a shared file system like here, it does that using a symlink so that it doesn't use any additional file space. If we use cloud storage with buckets in different locations, it would fetch those files and actually copy them into the work directory.
+And so you can see how you can use -resume to iteratively build up your workflow, step by step, if you need to.
 
-Let's have a look at the command sh file. If I do code work, command sh, you can see, sure enough, it's accessing that file from the local directory. So everything is very self-contained and clean.
+Okay, let's have a look in the results directory up here and see if it's worked. We can see we've got some more files up here. We've got our original files like we did before from the first process. And sure enough, we have our upper files and the letters are all uppercase, so it's worked. It is really nice to see.
 
-We can also check the results directory and make sure that these files were outputted properly. And sure enough, in results, we can see all the output files from the first process and all the output files from the second. And they're all in uppercase as we hoped.
+It's also interesting just to check inside these work directories. As before the, hash here corresponds to the, work directories. So if I look into "ls work", and then expand that, we'll see the different files here.
 
-This is where the power of Nextflow starts to shine. With some very minimal code and Nextflow handled execution in parallel of these tasks with clean encapsulation within separate work directories and staging input and output files and file publishing all automatically for us just out of the box. So you can see how, as we scale this complexity of our analysis workflows, this functionality is really, really valuable.
+We see the output file from the first process, which has been pulled in here as the input. And we can see the new output file that was generated.
 
-## 2. Add a third step to collect all the greetings
+Now if I do this with "-la" to list and show all files, we'll see a few more things. Firstly, you'll see that this file is actually a soft link to the first process. This is basically always a soft link if it can be, to save file space. We're not publishing the files here and it just references that file from a first task into a second task so that everything is encapsulated within that one working directory, and safe and isolated from everything else.
 
-Okay. These steps were one-to-one. We had one output from the first process going to one input for the second process. Next, we're going to talk about how to collect these different outputs into a single process task, which is again, a very common thing to do. So let's quickly bring up the terminal and do a dry run of this.
+And that needs to be there because if we look at the .command.sh file, so if I do "cat work/b8/56\*", you can see that the, file parts here are relative, so it's catting that input file, which has been soft linked into the same working directory.
+
+So that's how every work directory will look. When you look at it in Nextflow, you'll have all of the input files there staged into that work directory. And then you'll also have any output files that were created. So that's great. That looks how we expect.
 
 ## 2.1. Define the collection command and test it in the terminal
 
-I'm going to cheat and copy the example bash code from a training material and just hit enter.
+Okay, let's go back to our workflow. What's the next step we want to do?
 
-What we can see here is we ran this echo command three times to three different output files, which I can see here. And then used the cat command to print the output of each of these three different files, and redirect that to a single collected file.
+We have two processes now and they are taking this one CSV file, parsing it and splitting it up. And then we have three tasks for each of these processes and Nextflow handles the parallelization of all of that, so it all runs side by side where possible.
 
-And if I do "cat COLLECTED-output", you can see it's got the contents of those three different files, now in a single file.
+That kind of way of splitting up work to run things in parallel is very common. And the inverse of that is then to gather everything back. So that's what we're gonna do with our final process in the workflow is we'll have a third one here, which takes these three different outputs and combines them all into a single file.
+
+We can do this quite simply in a terminal, just to get a feel for what this will look like.
+
+If I go to the results folder. So, "cd results/hello_workflow/", and we have all the UPPER files here. I can just use "cat", which we use to print the contents of that file, and you can give multiple files to "cat" and it'll read one after another.
+
+So I can say "UPPER-\*", which gives me the same list of three file names with Bash expansion. And I can say combined.txt. I think in the docs, it lists the exact file names, but it's doing the same thing.
+
+Now, if I use "cat combined.txt", we can see that we have the file contents of all three of those files.
+
+So that's basically all that this process is going to do is we're going to try and give it all of the different output files from a previous process in a single process task, and then we're going to "cat" them together and save the output file.
 
 ## 2.2. Create a new process to do the collection step
 
-So let's see if we can replicate the same thing within our Nextflow pipeline.
+Okay, so let's add our new process. I'm gonna paste this from the training materials, and you can see it's left us a bit of an exercise for the reader here with these question marks. But you can see the general outline of the process is basically what we just did in the terminal, where we're doing "cat" of a bunch of input files and writing it to an output file here called collected, and then the output expects that single path again.
 
-Let's scroll up and create a third process. I'm going to copy this previous one, and this time I'm going to call it Collect Greetings.
+So we need some kind of input here and they're gonna be a set of paths. So again, we define an input path channel and let's call it input_files. Now, this previously has given us a single path here, but a path can also have multiple files here, even though it's still a single declaration.
 
-In the bash terminal, we called it collected output txt. So I'm going to say the same path output here. And I'm going to do the redirection here, so it's saved in the same way.
+I'm gonna copy that down here because we want to "cat" these files. And you might think that we have some issues here with printing an array or things like that, but Nextflow is generally pretty kind of sensible when it comes to this. And if it's given a channel with multiple files in it like this, it will, put them all together with space separators. So this will give us the correct syntax.
 
-Okay. We need to change what happens at the start of that command, and we need to think about what the input file is here. In fact, this process is going to take multiple input files. I'm going to keep path and I'm going to change this to a new variable called input files, plural.
+That's great. So now let's wire up our new process. I go down to the workflow. I'm gonna say combine the outputs, the new process name, and just the same as before. I'm gonna take this previous process, convertToUpper and do ".out".
 
-I'm then going to again, cat them like we did in our bash script. And I'm going to use the variable here.
+Great. Let's try it out and see if it works in the terminal. If I just go back up a couple of the directories and then rerun the Nextflow command, and we'll see what happens.
 
-Now, you might think this wouldn't work. We've seen previously failures where an array of strings or an array of paths has been passed to a process and that caused an error. But in fact, here Nextflow is going to handle this automatically for us in the right way. It's going to take several different input files, and it's just going to print the different file paths here.
+So the workflow has launched and now you can see that we have three different process names, which is great. The first two both look the same as before, and the third new one runs, which is good.
 
-Of course it helps that the cat command can take a series of file names like this. If I was using a different command that required an argument before each file path or something, we'd have to have a bit more code here and logic to be able to handle the iteration of these file paths. But in this case, it should just work.
+However, there's something a bit odd here. We wanted to combine those output files into a single file, and yet this process we can see has run three times, not once.
+
+Sure enough, if we go into one of these work directories. And do "cat work/" "collected", then we'll see. There's only a single word in here, not three.
+
+And so what's happened is that Nextflow has continued that parallelization just as it did in the previous steps. And this process gave us a channel with three elements, and those three channel elements were passed to that our downstream process, which generated three process tasks.
+
+It basically tried to collect three separate times and each time it just had a single file, so it just did cat single file to an output, and in fact, we can see that in the .command.sh file as well.
+
+If I do .command.sh, we can see it just has a single file name here and only a single file was staged into that working directory.
 
 ## 2.3. Add the collection step to the workflow
 
-Okay, let's go down to the workflow and add in our new process. Collect greetings. And again, let's take the output from convert to upper out. Let's save this.
+So somehow we need to tell Nextflow to bring all of those outputs together from a previous process and give them to this downstream process as a single channel element, rather than three.
 
-Give it a try. nextflow run hello workflow.
+We do that with a channel operator called _collect_.
 
-Okay, the workflow ran, but something's a bit strange here. We've got three executions of the first step, which we expect. Three tasks for the second, but we also have three tasks at the end when we expected to only have a single task here merging all the outputs.
+This is a super useful operator, which you'll see in Nextflow pipelines all the time. This is a channel here, this output channel, just the same as the one we created up at the top. And so we can append channel operators to it just like we did before. We can just do dot, and then in this case, collect, brackets.
 
-If we go into our results directory. We also see the collected output only has a single value rather than all three. This is because that output file was overwritten three times with three different values.
+And that's all we need. That's gonna then manipulate this channel before it's passed into this process.
 
-This makes sense because we passed one output to one input here in the same way as we did in the previous step.
+If you wanna see what's happening to it, we can also view it here. So here, this is not related to running this process at all, so I could put it at any point after running that process. But we take the same, output channel, and we're looking at it with .view, and then we're looking at it again with .collect.view.
 
-## 2.4. Use an operator to collect the greetings into a single input
+And when we run this, it will show us the two different structures of that channel, before and after collect. So let's try that now. Okay, I've just zoomed out a little bit because some of the outputs are quite long, but if I run the pipeline, we'll see if it works.
 
-So we need an operator here to take this channel with three elements and collapse them to a single element, so that that final process only runs once.
+I'm hoping a third process will run just once, because it's collecting the outputs and sure enough, you can see collectGreetings as one of one. So that's run just one task.
 
-To do that, we're going to use the collect operator. I can do this directly within the workflow. I can do .out and chain onto an operator here at the end .collect.
+And then if we look at the view statements, we have three view statements for the three elements of before, with one file path in each one.
 
-Hit save. And then for the purposes of this training, I'm also going to do some view operators like we did before, so we can take a look at this channel before and after we use the collect operator, so we can understand what's happening.
+And then after that collect statement, that's just triggered once because there's a single element in that channel. And now we have this, list of three different file paths.
 
-I am going to take this channel, get rid of the collect and dot view greetings, and then I'm going to duplicate this line, add in the collect operator. And change that to after.
+That's exactly what we hoped for. And you can see hopefully, this is basically the inverse of that "map" operator that we did to go from the CSV arrays into separate channel elements. Now we're taking separate channel elements and putting back into a single array.
 
-This is separate to where we're calling this, but that's fine because we're using the same operator calls on the same output channel.
+Great, we can clear up these view statements. We don't need these anymore. We can go onto the next step.
 
-Okay, let's hit save and let's try it out in the terminal. Going to lgoing nextflow run. Hello, workflow. Rerun our script.
+Before I go any further, and before I forget, I'm gonna add a new publish statement here. Third output. You can call this something more semantic and descriptive in your workflow. And then I'm gonna add that down to the output block again and say path 'hello_workflow' mode 'copy'. Just so that the output file generated by this process is saved to our results folder up here.
 
-Okay. This is looking better. As before we can see the first two processes run three times and now our final process only ran once.
+Just to quickly double check that works. Should be a bit cleaner now 'cause we don't have those view statements. And, we'll see if we get our new output file up here. One of, one task ran, got a new file called collected, and now we have all three of those words. Fantastic. What's next?
 
-If we look at what was printed by the view operator, down here, we said before collect, which is this output here, and that's printed three times. And you can see there's a single path for each one of those. And then after collect, you can see that we have this array of three paths. So that's as we expect.
+## 3. Pass additional parameters to a process
 
-Okay, let's check the results file and see if it's what we expect this time. Sure enough, there are now three lines in the file - that's successfully concatenated these three outputs into a single output file. Fantastic.
+Okay. Next we're going to look at handling multiple inputs into a single process. So far you can see that all of our processes are just taking one thing as an input. They all have a single line under their input.
 
-Okay, I am going to clean up and let's go on to the next step. And I'm going to delete these view statements just to keep things clean.
+We're going to demonstrate this by allowing Nextflow specify a different batch identifier so that maybe you run this, workflow multiple times and you can give it a different batch ID each time.
 
-## 3. Pass more than one input to a process in order to name the final output file uniquely
+I am gonna simply add a second line in the input here for collectGreetings. And I'm gonna call it "val" ,'cause this is a string. Now it's a value, not a path, and I'm gonna call it "batch_name".
 
-Okay. So far, all of our processes have only taken a single input. We're now going to do an exercise where we add more than one input to a process to see how this works. To do this, we're going to use this collect greetings example.
+Then I'm gonna edit the script down here to use this variable, and I'm gonna try and put it in the same place as the training material. So I put it in the middle of this file path COLLECTED-$\{batch_name\}-output.
 
-Each time I ran the workflow, it overwrote that file in the results directory, which may not be what we want.
+Not quite done yet. Remember that we have to tell Nextflow what the output file names are going to be. So we have to also do the same thing up here: COLLECTED-$\{batch_name\}-output.txt".
 
-## 3.1. Modify the collector process to accept a user-defined name for the output file
+Fantastic. Nextflow now is getting a second variable input and it's interpolating that into the script and the output.
 
-So for this example, we're going to pass an additional parameter so that we can customize the output file name.
+One last thing, we now have to find where this is being called, and we have to pass the second input to the process. This is just like any other input into a function in any other language.
 
-Adding a second input to a process is very simple. I just add a second line in the input block. This time it's going to be a value, rather than a path, because we want to pass a string and I'm going to call it batch underscore name.
+Just like we did earlier in the training, I'm going to use the special "params" here, and we're gonna call it "params.batch" so that we can have a -- batch CLI option. And now you can see that our process here has two separate inputs just comma separated, which are being passed in.
 
-I can now use this variable in the script block, and I'm going to say collected dash dollar batch name.
+It's really important to get the order right, so the order of arguments here for channel and then the param must match. The, channel and the batch name there. This is just positional matching.
 
-I'm using squiggly brackets here around the variable name. That's just to keep it separate from the rest of a string, and it probably isn't needed in this case, but I think it makes it easier to read.
+Okay. I can run this pipeline now straight away with --batch, but let's first do the right thing and define it in the input here in Params. So I'm gonna add it to batch and then we're gonna say it is a string and let's give it a default. So let's just call it batch. Okay? Now let's try running the workflow.
 
-Okay. Finally, remember to update the output path because now the file name has changed, so I'm going to do the same thing and put the batch name into the output of path as expected.
+--batch Trio. I think it says in the training material, but we could use any string we want there. And hopefully we will see that results output file come up here.
 
-## 3.2. Add a batch command-line parameter
+And sure enough, COLLECTED-trio-output - that has worked properly. It's renamed our file. And you can imagine now this is useful 'cause if I run that again with a different batch name, like replicate_two, then it's gonna give us a different batch name up here.
 
-We now need to pass in a batch name from somewhere, and I'm going to create a second parameter to do this so that we can do it on the command line when we run the workflow.
-
-So I'm going to do params batch name, and by default, let's call this test batch. Now I can use this special parameters variable down, where we call the process.
-
-And sure enough VS Code is telling us that there's not enough arguments to this process now, and that it expects a second input.
-
-Simply do comma and pass our new variable and the error goes away.
-
-Note that the order of inputs here is really important. The first process input was the path, and the second input is the name. If I change the order here, I must also change the order when I call the process. Otherwise. Next, we will pass the wrong channel to the wrong input.
-
-## 3.3. Run the workflow
-
-Okay, let's try it and see if it works. Let's do "nextflow run hello- workflow. Okay, it ran as before. Let's have a look in the results directory.
-
-Sure enough, our file name here is now called " collected test batch output txt". Fantastic.
-
-And now let's see if we can overwrite that by running again. This time I'm going to do --batch_name to match that special parameter variable name here. And I'm going to call it demo output.
-
-Run the workflow again and we'll see if something happens.
-
-Okay, we now we have a collected demo output .txt. And because this file name is different to that one, it hasn't overwritten it. Both are now present in the results directory.
+And and it won't then clobber the output files in this case. So that's nice.
 
 ## 4. Add an output to the collector step
 
-Okay, so there we showed giving multiple inputs to a process, but how about multiple outputs? For this example, we're going to calculate the number of greetings which are processed and output that as a secondary output for this collect greeting step.
+Okay, so we've now got multiple inputs to our process here. But what happens if we want to create multiple outputs? Our example here then is we're going to create a report for this process, just saying this is how many files were collected.
 
-## 4.1. Modify the process to count and output the number of greetings
+And we'll do that with an echo command here. So we can say echo. There were, I'm gonna copy this from a training material, so you don't have to watch me type it out.
 
-We're going to do a bit of a trick here. Nextflow processes have this script block with a multi-line string, and that is passed as bash output to the dot command dot sh. But we can actually write any custom code above that, and that will be executed as part of a task but not included within the bash script.
+There were $\{count_greetings\} greetings in this batch, and save that to a new file now called $\{batch_name\}, so same variable, we can reuse that as many times as we want, report.txt.
 
-One of the built-in functions in the Nextflow syntax is called size. So I'm going to take the path input, and I'm going to say count underscore greetings, just to define a variable name. I'm going to take the input files and I'm going to call "size" on it.
+## 4.1.1. Count the number of greetings collected
 
-This function will count the size of this input channel and assign it to a variable.
+We need to actually calculate that somehow. We could do that logic in the Bash script if we wanted to, using Bash logic. However, we can also just do scripting directly within the Nextflow code, as long as it's within the script block in the process and above the quoted section.
 
-We can now return that variable as part of the output block. So we say, val, because it is value, not a file. And count greetings.
+Anything here won't be included in the final rendered script, and it will just be executed by Nextflow when it renders a task.
 
-Now this is enough by itself, and we could now access these different outputs from this process. However, we'd have to access them in a positional manner. So using an index key such as zero and one.
+So here we're just doing some logic. We're creating a new variable called count_greetings. We take the input files channel here, and we're calling .size() on it.
 
-To make it a little bit easier to get at the outputs, we can name them and we do that by using an emit statement.
+Okay, that function is going to give me a number here into this variable, and now our warning's gone because this variable is being defined.
 
-So we do comma emit out file or whatever I want to call this. And I do here emit count. This is basically just a decorator, which just helps us write slightly cleaner code so that we can easily reference the specific outputs later in the workflow block.
+Okay, so we're creating that second file in the work directory, but we need to tell Nextflow to expect it as a published output of this process. So we do that by exactly the same syntax as we did for the first file.
 
-## 4.2. Report the output at the end of the workflow
+We say path 'cause it's, again, we could be publishing a variable here if we wanted to with "val", but we're gonna say "path". And then the expected, file name. Notice it's not highlighted here. That's 'cause I used single quotes. I have to use double quotes.
 
-Okay. If I scroll down to the workflow block, I can now take the outputs of collect greetings, do collect greetings, dot out, and we can see our two named outputs are suggested here by the VS Code extension. Very handy.
+## 4.1.2. Emit the report file and name outputs
 
-So I'm going to do dot count to get the count value that we've just created, and I'm going to do view, so that it prints it in the command line. So we can see it when we run the workflow.
+Okay, that's great. And we could now start to out access these outputs down here just as I did here. But now it's an array of different objects, so I could do collectGreetings.out[0] to get the first, or one to get the second, which is our new report.
 
-Let's write something in the closure here just to make it a bit nicer. num greetings, there were greetings greetings.
+But I don't really like doing that very much 'cause it's quite easy to mess up the index counting. And you sit there counting lines a lot and you add in a new output and suddenly everything breaks. So
 
-And we don't actually care about the other output because we're not using that as an input for any other processes. But you can see how we could easily pass this as an input to another process if we wanted to, downstream.
+it's much nicer to reference everything by name instead. And we can do that with a special key here called "emit".
 
-## 4.3. Run the workflow
+So we can call this whatever we want. Let's call it emit outfile, and emit reports. If you define these and you can do it on one or many, it's up to you. Now I can go down here and instead I can go dot out dot reports and just call it by name, which is much easier to understand your code when you read it, and it's safer to changes in the code.
 
-We're going to click save. Let's have a look at the terminal and try it out.
+I've, added the .out.report here, but actually I need to have two different outputs being published. So I'm gonna rename as something more interesting like collected and report and is that what I called it? I called it out file, sorry. So that emit name here outfile and report. 'cause we're publishing two different output channels and so we need to reference both of them in the publish block.
 
-Okay, fantastic. Here we go. There are three greetings. That's exactly right.
+Then we also need to define these in the output block. So I renamed that collected, and again, for reports, little bit verbose here, but it's really useful when you come in to read a new workflow, to see all of the different outputs here, all the different channels listed side by side, and there are ways to make this less verbose, which we'll touch on later.
 
-Okay, great stuff. That's the end of this chapter. We're all done for making it this far. You're now starting to build up quite a realistic workflow, where we're able to handle inputs and outputs and logic within our workflow.
+Okay, let's try it out and run our workflow and see what happens.
 
-As these workflow files get longer, they start to become a little bit unwieldy. So in the next chapter, we'll look into how we can modularize Nextflow code into separate files so that it's easier to find and maintain the code within the workflow.
+Hopefully now it should run basically the same as it did before. And we're gonna get a new output file up here called replicate_two, report. And there we go. It's opened and it says there are three greetings in the batch, which is what we expected, so it's perfect.
 
-Join us in the next video for chapter four. Hello Modules.
+If I go into the work directory here just to prove to use was executed in the Nextflow, code rather than the bash script, I can go to cat work/ command.sh, and you'll see here that it's just echoing this string directly. There were three greetings in this batch, and so that variable was interpolated by Nextflow. It was calculated in the script block before it wrote the .command.sh file. So the resulting variable calculation is basically hard coded into this before it's executed on your compute environment in this case.
 
-[Next video transcript :octicons-arrow-right-24:](04_hello_modules.md)
+And so you can see that separation between the script. Block here and anything above it. I \_hope that makes sense.
+
+## Takeaway and quiz
+
+Okay, that's the end of this part of Hello Nextflow. So as before, go and check out the quiz. Do it on the webpage or in the CLI, go through some of the questions and just check you've understood some of the material we've covered. See if there's anything there which highlights anything you might not have understood. Not too many questions. Nice and easy to do. Or you can do it on the webpage down here as well.
+
+And have a little break, little walk around and come back and join us in part four of Hello, Nextflow, where we'll talk about modules. Thanks very much.

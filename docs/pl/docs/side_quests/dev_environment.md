@@ -94,7 +94,7 @@ Jeśli używasz Maca, niektóre (nie wszystkie) skróty klawiszowe będą używa
 
 !!! note "Już używasz Devcontainers?"
 
-    Jeśli pracujesz w **GitHub Codespaces** lub używasz **lokalnego devcontainer**, rozszerzenie Nextflow jest prawdopodobnie już zainstalowane i skonfigurowane. Możesz pominąć poniższe kroki ręcznej instalacji i przejść bezpośrednio do eksplorowania funkcji rozszerzenia.
+    Jeśli pracujesz w **GitHub Codespaces** lub używasz **lokalnego devcontainera**, rozszerzenie Nextflow jest prawdopodobnie już zainstalowane i skonfigurowane. Możesz pominąć poniższe kroki ręcznej instalacji i przejść bezpośrednio do eksplorowania funkcji rozszerzenia.
 
 Aby zainstalować rozszerzenie ręcznie:
 

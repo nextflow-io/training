@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-이 과정의 Part 1(기본 작업 실행)에서는 코드 복잡성을 낮추기 위해 최소한의 기능만 있는 예제 workflow로 시작했습니다.
+이 과정의 파트 1(기본 작업 실행)에서는 코드 복잡성을 낮추기 위해 최소한의 기능만 있는 예제 workflow로 시작했습니다.
 예를 들어 `1-hello.nf`는 명령줄 매개변수(`--input`)를 사용하여 한 번에 하나의 값을 제공했습니다.
 
 그러나 대부분의 실제 pipeline은 대규모 데이터를 효율적으로 처리하고 때로는 복잡한 로직으로 연결된 여러 처리 단계를 적용하기 위해 더 정교한 기능을 사용합니다.
@@ -23,7 +23,8 @@ Bonjour,French,456
 Holà,Spanish,789
 ```
 
-원본 workflow의 개선된 버전인 `2a-inputs.nf`도 작성했습니다. 이 버전은 CSV 파일을 읽어 인사말을 추출하고 각각을 별도의 파일에 씁니다.
+원본 workflow의 개선된 버전인 `2a-inputs.nf`도 작성했습니다.
+이 버전은 CSV 파일을 읽어 인사말을 추출하고 각각을 별도의 파일에 씁니다.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
@@ -204,7 +205,7 @@ workflow 코드에서 무엇이 이를 가능하게 하는지 살펴보겠습니
     workflow {
 
         main:
-        // 입력용 채널 생성
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -227,15 +228,16 @@ workflow 코드에서 무엇이 이를 가능하게 하는지 살펴보겠습니
 
 #### 1.4.1. CSV에서 입력 데이터 로드
 
-이것이 가장 흥미로운 부분입니다: 명령줄에서 단일 값을 가져오는 것에서 CSV 파일을 가져와 분석하고 포함된 개별 인사말을 처리하는 것으로 어떻게 전환했을까요?
+이것이 가장 흥미로운 부분입니다. 명령줄에서 단일 값을 가져오는 것에서 CSV 파일을 가져와 분석하고 포함된 개별 인사말을 처리하는 것으로 어떻게 전환했을까요?
 
-Nextflow에서는 [**channel**](https://nextflow.io/docs/latest/channel.html)로 이를 수행합니다. channel은 입력을 효율적으로 처리하고 다단계 workflow에서 한 단계에서 다른 단계로 전달하도록 설계된 큐 구조로, 내장된 병렬 처리와 많은 추가 이점을 제공합니다.
+Nextflow에서는 [**channel**](https://nextflow.io/docs/latest/channel.html)로 이를 수행합니다.
+channel은 입력을 효율적으로 처리하고 다단계 workflow에서 한 단계에서 다른 단계로 전달하도록 설계된 큐 구조로, 내장된 병렬 처리와 많은 추가 이점을 제공합니다.
 
 분석해 보겠습니다.
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="3-5"
     main:
-    // 입력용 채널 생성
+    // CSV 파일에서 입력용 channel 생성
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
@@ -276,7 +278,7 @@ Nextflow에서는 [**channel**](https://nextflow.io/docs/latest/channel.html)로
 
     그런 다음 세 행 각각에서 첫 번째 요소를 가져와 이제 `Hello`, `Bonjour`, `Holà`를 포함하는 Nextflow channel에 로드했습니다.
 
-    channel과 연산자를 깊이 이해하고 직접 작성하는 방법을 포함하여 [Hello Nextflow Part 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file)를 참조하세요.
+    channel과 연산자를 깊이 이해하고 직접 작성하는 방법을 포함하여 [Hello Nextflow 파트 2: Hello Channels](../hello_nextflow/02_hello_channels.md#4-read-input-values-from-a-csv-file)를 참조하세요.
 
 #### 1.4.2. 각 인사말에 대해 process 호출
 
@@ -284,7 +286,7 @@ Nextflow에서는 [**channel**](https://nextflow.io/docs/latest/channel.html)로
 
 ```groovy title="2a-inputs.nf" linenums="29" hl_lines="7"
     main:
-    // 입력용 채널 생성
+    // CSV 파일에서 입력용 channel 생성
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
@@ -371,7 +373,8 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     [1e/83586c] collectGreetings   | 1 of 1 ✔
     ```
 
-약속대로 workflow의 일부로 여러 단계가 실행된 것을 볼 수 있습니다. 처음 두 개(`sayHello`와 `convertToUpper`)는 아마도 각 개별 인사말에서 실행되었고, 세 번째(`collectGreetings`)는 세 개의 `convertToUpper` 호출 모두의 출력에서 한 번만 실행되었을 것입니다.
+약속대로 workflow의 일부로 여러 단계가 실행된 것을 볼 수 있습니다.
+처음 두 개(`sayHello`와 `convertToUpper`)는 아마도 각 개별 인사말에서 실행되었고, 세 번째(`collectGreetings`)는 세 개의 `convertToUpper` 호출 모두의 출력에서 한 번만 실행되었을 것입니다.
 
 ### 2.2. 출력 찾기
 
@@ -496,7 +499,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     workflow {
 
         main:
-        // 입력용 채널 생성
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -551,7 +554,7 @@ Nextflow 확장이 있는 VSCode를 사용하는 경우 Nextflow 스크립트의
 원래 `sayHello` process 외에도 이제 `convertToUpper`와 `collectGreetings`도 있으며, 이는 콘솔 출력에서 본 process 이름과 일치합니다.
 두 개의 새 process 정의는 `sayHello` process와 동일한 방식으로 구조화되어 있지만, `collectGreetings`는 `batch`라는 추가 입력 매개변수를 받고 두 개의 출력을 생성합니다.
 
-각각의 코드에 대해 자세히 다루지 않겠지만, 궁금하시다면 [Hello Nextflow의 Part 2](../hello_nextflow/03_hello_workflow.md)에서 세부 사항을 찾아볼 수 있습니다.
+각각의 코드에 대해 자세히 다루지 않겠지만, 궁금하시다면 [Hello Nextflow의 파트 3](../hello_nextflow/03_hello_workflow.md)에서 세부 사항을 찾아볼 수 있습니다.
 
 지금은 process가 서로 어떻게 연결되어 있는지 살펴보겠습니다.
 
@@ -561,7 +564,7 @@ Nextflow 확장이 있는 VSCode를 사용하는 경우 Nextflow 스크립트의
 
 ```groovy title="2b-multistep.nf" linenums="68" hl_lines="9 11"
     main:
-    // 입력용 채널 생성
+    // CSV 파일에서 입력용 channel 생성
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
@@ -576,7 +579,7 @@ Nextflow 확장이 있는 VSCode를 사용하는 경우 Nextflow 스크립트의
 첫 번째 process 호출인 `sayHello(greeting_ch)`는 변경되지 않은 것을 볼 수 있습니다.
 그런 다음 `convertToUpper`에 대한 다음 process 호출은 `sayHello`의 출력을 `sayHello.out`으로 참조합니다.
 
-패턴은 간단합니다: `processName.out`은 process의 출력 channel을 참조하며, 이를 다음 process에 직접 전달할 수 있습니다.
+패턴은 간단합니다. `processName.out`은 process의 출력 channel을 참조하며, 이를 다음 process에 직접 전달할 수 있습니다.
 이것이 Nextflow에서 한 단계에서 다음 단계로 데이터를 전달하는 방법입니다.
 
 #### 2.3.3. Process는 여러 입력을 받을 수 있습니다
@@ -609,11 +612,13 @@ Nextflow가 이것을 분석할 때 호출의 첫 번째 입력을 `path input_f
 
 #### 2.3.4. `collectGreetings` 호출에서 `collect()`가 하는 일
 
-`sayHello`의 출력을 `convertToUpper`에 전달하기 위해 `sayHello.out`으로 `sayHello`의 출력 channel을 간단히 참조했습니다. 그러나 다음 단계에서는 `convertToUpper.out.collect()`에 대한 참조를 보고 있습니다.
+`sayHello`의 출력을 `convertToUpper`에 전달하기 위해 `sayHello.out`으로 `sayHello`의 출력 channel을 간단히 참조했습니다.
+그러나 다음 단계에서는 `convertToUpper.out.collect()`에 대한 참조를 보고 있습니다.
 
 이 `collect()` 부분은 무엇이고 무엇을 하나요?
 
-물론 연산자입니다. 앞서 만난 `splitCsv` 및 `map` 연산자와 마찬가지입니다.
+물론 연산자입니다.
+앞서 만난 `splitCsv` 및 `map` 연산자와 마찬가지입니다.
 이번에는 연산자가 `collect`이라고 하며 `convertToUpper`가 생성한 출력 channel에 적용됩니다.
 
 `collect` 연산자는 동일한 process에 대한 여러 호출의 출력을 수집하고 단일 channel 요소로 패키징하는 데 사용됩니다.
@@ -705,7 +710,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
             └── UPPER-Holà-output.txt
     ```
 
-이것은 Part 3에서 더 자세히 다룰 입력 구성의 한 측면이지만, 지금 중요한 것은 입력 매개변수에 기본값을 부여할 수 있다는 것입니다.
+이것은 파트 3에서 더 자세히 다룰 입력 구성의 한 측면이지만, 지금 중요한 것은 입력 매개변수에 기본값을 부여할 수 있다는 것입니다.
 
 #### 2.3.6. Process는 여러 출력을 생성할 수 있습니다
 
@@ -754,11 +759,12 @@ output {
 }
 ```
 
-게시된 출력을 구성하는 더 정교한 방법이 있습니다. 구성에 관한 부분에서 몇 가지를 다룰 것입니다.
+게시된 출력을 구성하는 더 정교한 방법이 있습니다.
+구성에 관한 부분에서 몇 가지를 다룰 것입니다.
 
 !!! tip "Workflow 구축에 대해 더 알고 싶으신가요?"
 
-    다단계 workflow 구축에 대한 자세한 내용은 [Hello Nextflow Part 3: Hello Workflow](../hello_nextflow/03_hello_workflow.md)를 참조하세요.
+    다단계 workflow 구축에 대한 자세한 내용은 [Hello Nextflow 파트 3: Hello Workflow](../hello_nextflow/03_hello_workflow.md)를 참조하세요.
 
 ### 핵심 정리
 
@@ -781,7 +787,8 @@ Nextflow pipeline이 코드 재사용과 유지 관리성을 촉진하기 위해
 여기서는 Nextflow에서 가장 일반적인 코드 모듈성 형태인 **모듈** 사용을 시연하겠습니다.
 
 Nextflow에서 [**모듈**](https://nextflow.io/docs/latest/module.html)은 독립 실행형 코드 파일에 자체적으로 캡슐화된 단일 process 정의입니다.
-workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 import 문을 추가하기만 하면 됩니다. 그런 다음 일반적으로 하는 것과 같은 방식으로 process를 workflow에 통합할 수 있습니다.
+workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 import 문을 추가하기만 하면 됩니다.
+그런 다음 일반적으로 하는 것과 같은 방식으로 process를 workflow에 통합할 수 있습니다.
 이를 통해 코드의 여러 복사본을 생성하지 않고도 여러 workflow에서 process 정의를 재사용할 수 있습니다.
 
 지금까지 모든 process가 단일 코드 파일에 포함된 workflow를 실행해 왔습니다.
@@ -804,7 +811,8 @@ workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 impor
     ```
 
 각각 process 중 하나의 이름을 딴 네 개의 Nextflow 파일이 있습니다.
-지금은 `cowpy.nf` 파일을 무시해도 됩니다. 나중에 다룰 것입니다.
+지금은 `cowpy.nf` 파일을 무시해도 됩니다.
+나중에 다룰 것입니다.
 
 ### 3.1. 코드 검토
 
@@ -832,7 +840,7 @@ workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 impor
     workflow {
 
         main:
-        // 입력용 채널 생성
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -905,7 +913,8 @@ include { collectGreetings } from './modules/collectGreetings.nf'
     }
     ```
 
-보시다시피 process 코드는 변경되지 않았습니다. 기본 workflow 파일에 있는 대신 개별 모듈 파일에 복사되었을 뿐입니다.
+보시다시피 process 코드는 변경되지 않았습니다.
+기본 workflow 파일에 있는 대신 개별 모듈 파일에 복사되었을 뿐입니다.
 다른 두 process에도 동일하게 적용됩니다.
 
 이제 이 새 버전을 실행하면 어떻게 보이는지 살펴보겠습니다.
@@ -925,12 +934,13 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
 
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
-    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
-    [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
-    [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
+    [j6/cdfa66] sayHello (1)       | 3 of 3, cached: 3 ✔
+    [95/79484f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [5e/4358gc] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
-코드가 분할되고 기본 workflow 파일 이름이 변경되었음에도 불구하고 process 실행이 모두 성공적으로 캐시되었음을 알 수 있습니다. 이는 Nextflow가 요청된 작업을 이미 수행했음을 인식했다는 것을 의미합니다.
+코드가 분할되고 기본 workflow 파일 이름이 변경되었음에도 불구하고 process 실행이 모두 성공적으로 캐시되었음을 알 수 있습니다.
+이는 Nextflow가 요청된 작업을 이미 수행했음을 인식했다는 것을 의미합니다.
 
 Nextflow에게 중요한 것은 모든 코드가 함께 가져와지고 평가된 후 생성되는 작업 스크립트입니다.
 
@@ -1068,7 +1078,7 @@ ls /
 
     이것은 파일 시스템의 해당 부분에 액세스하는 데 사용할 수 있는 컨테이너 벽을 통해 터널을 효과적으로 설정합니다.
 
-    이에 대한 자세한 내용은 [Hello Nextflow의 Part 5](../hello_nextflow/05_hello_containers.md)에서 다룹니다.
+    이에 대한 자세한 내용은 [Hello Nextflow의 파트 5](../hello_nextflow/05_hello_containers.md)에서 다룹니다.
 
 #### 4.1.3. `cowpy` 도구 실행
 
@@ -1178,7 +1188,7 @@ workflow는 `cowpy`를 실행하는 추가 단계를 제외하고 이전 것과 
     workflow {
 
         main:
-        // 입력용 채널 생성
+        // CSV 파일에서 입력용 channel 생성
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -1225,9 +1235,9 @@ workflow는 `cowpy`를 실행하는 추가 단계를 제외하고 이전 것과 
 
 이 workflow가 모듈 파일에서 `cowpy` process를 가져오고 `collectGreetings()` 호출의 출력과 `params.character`라는 입력 매개변수에서 호출하는 것을 볼 수 있습니다.
 
-```groovy title="2d-container.nf" linenums="25"
-// cowpy로 ASCII 아트 생성
-cowpy(collectGreetings.out, params.character)
+```groovy title="2d-container.nf" linenums="31"
+// cowpy로 인사말의 ASCII 아트 생성
+cowpy(collectGreetings.out.outfile, params.character)
 ```
 
 ASCII 아트를 생성하기 위해 cowpy 명령을 적용하는 `cowpy` process는 `cowpy.nf` 모듈에 정의되어 있습니다.
@@ -1256,13 +1266,15 @@ ASCII 아트를 생성하기 위해 cowpy 명령을 적용하는 `cowpy` process
     }
     ```
 
-`cowpy` process에는 두 개의 입력이 필요합니다: 말풍선에 넣을 텍스트가 포함된 입력 파일의 경로(`input_file`)와 캐릭터 변수의 값입니다.
+`cowpy` process에는 두 개의 입력이 필요합니다.
+말풍선에 넣을 텍스트가 포함된 입력 파일의 경로(`input_file`)와 캐릭터 변수의 값입니다.
 
 중요하게도 이전에 사용한 컨테이너 URI를 가리키는 `container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'` 줄도 포함합니다.
 
 #### 4.2.2. 구성에서 Docker가 활성화되어 있는지 확인
 
-`nextflow.config` 구성 파일을 소개하여 이 교육 과정의 Part 3를 약간 앞당기겠습니다. 이것은 Nextflow가 workflow 실행을 구성하는 주요 방법 중 하나입니다.
+`nextflow.config` 구성 파일을 소개하여 이 교육 과정의 파트 3를 약간 앞당기겠습니다.
+이것은 Nextflow가 workflow 실행을 구성하는 주요 방법 중 하나입니다.
 현재 디렉토리에 `nextflow.config`라는 이름의 파일이 있으면 Nextflow가 자동으로 로드하고 포함된 모든 구성을 적용합니다.
 
 이를 위해 Docker를 활성화하는 한 줄의 코드가 포함된 `nextflow.config` 파일을 포함했습니다.
@@ -1403,7 +1415,8 @@ Nextflow가 여러 입력을 효율적으로 처리하고, 함께 연결된 여�
 
 ### 다음 단계
 
-또 다른 휴식을 취하세요! Nextflow pipeline이 작동하는 방법에 대한 많은 정보였습니다.
+또 다른 휴식을 취하세요!
+Nextflow pipeline이 작동하는 방법에 대한 많은 정보였습니다.
 
 교육의 마지막 섹션에서는 구성 주제에 대해 더 깊이 파고들 것입니다.
 인프라에 맞게 pipeline 실행을 구성하고 입력 및 매개변수의 구성을 관리하는 방법을 학습합니다.

@@ -2,13 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/G3CV-FcV-rc?si=nyLvwhrSB2m1NPc5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=gZxlXgkVxuLEzOsC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Voir [la playlist complète](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) sur la chaîne YouTube Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Voir [la playlist complète](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sur la chaîne YouTube Nextflow.
 
 :green_book: La transcription de la vidéo est disponible [ici](./transcripts/00_orientation.md).
 ///
@@ -19,8 +18,6 @@
 
     - :fontawesome-solid-closed-captioning: Sous-titres de haute qualité (révisés manuellement). Activez-les avec l'icône :material-subtitles:
     - :material-bookmark: Chapitres vidéo dans la timeline qui correspondent aux titres de la page.
-
--->
 
 ## Démarrer un environnement de formation
 
@@ -115,7 +112,7 @@ tree . -L 2
 Cliquez sur la boîte colorée pour développer la section et voir son contenu.
 Nous utilisons des sections pliables comme celle-ci pour inclure la sortie de commande attendue de manière concise.
 
-- **Les fichiers `.nf`** sont des scripts de flux de travail nommés en fonction de la partie du cours où ils sont utilisés.
+- **Les fichiers `.nf`** sont des scripts de workflow nommés en fonction de la partie du cours où ils sont utilisés.
 
 - **Le fichier `nextflow.config`** est un fichier de configuration qui définit des propriétés d'environnement minimales.
   Vous pouvez l'ignorer pour l'instant.
@@ -124,7 +121,7 @@ Nous utilisons des sections pliables comme celle-ci pour inclure la sortie de co
 
 - **Les fichiers `test-params.*`** sont des fichiers de configuration que nous utiliserons dans la Partie 6 (Configuration). Vous pouvez les ignorer pour l'instant.
 
-- **Le répertoire `solutions`** contient les scripts de flux de travail complétés qui résultent de chaque étape du cours.
+- **Le répertoire `solutions`** contient les scripts de workflow complétés qui résultent de chaque étape du cours.
   Ils sont destinés à être utilisés comme référence pour vérifier votre travail et résoudre les éventuels problèmes.
 
 ## Liste de vérification de préparation

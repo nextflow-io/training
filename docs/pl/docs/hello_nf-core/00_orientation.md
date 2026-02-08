@@ -1,6 +1,4 @@
-# Wprowadzenie
-
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+# Pierwsze kroki
 
 ## Uruchomienie środowiska szkoleniowego
 
@@ -47,7 +45,7 @@ Gdy Twój codespace już działa, musisz wykonać dwie rzeczy przed rozpoczęcie
 
 ### Ustawienie katalogu roboczego
 
-Domyślnie codespace otwiera się z lokalizacją główną wszystkich kursów szkoleniowych, ale w tym module będziemy pracować w folderze `hello-nf-core/`.
+Domyślnie codespace otwiera się z katalogiem roboczym ustawionym na katalog główny wszystkich kursów szkoleniowych, ale w tym kursie będziemy pracować w katalogu `hello-nf-core/`.
 
 Zmień teraz katalog, uruchamiając to polecenie w terminalu:
 
@@ -70,7 +68,7 @@ Teraz przyjrzyjmy się zawartości tego katalogu.
 Możesz przeglądać zawartość tego katalogu używając eksploratora plików po lewej stronie obszaru roboczego szkolenia.
 Alternatywnie możesz użyć polecenia `tree`.
 
-W trakcie kursu używamy wyjścia `tree` do przedstawienia struktury folderów i ich zawartości w czytelnej formie, czasami z drobnymi modyfikacjami dla przejrzystości.
+W trakcie kursu używamy wyjścia `tree` do przedstawienia struktury katalogów i ich zawartości w czytelnej formie, czasami z drobnymi modyfikacjami dla przejrzystości.
 
 Tutaj generujemy spis treści do drugiego poziomu w dół:
 
@@ -103,7 +101,7 @@ Używamy zwijanych sekcji w ten sposób, aby w zwięzły sposób uwzględnić oc
 
 - **Katalog `original-hello`** zawiera kopię kodu źródłowego powstałego w wyniku przejścia przez kompletną serię szkoleń Hello Nextflow (z włączonym Docker).
 
-- **Katalog `solutions`** zawiera ukończone skrypty workflow'u powstałe w wyniku każdego kroku kursu.
+- **Katalog `solutions`** zawiera ukończone skrypty workflow'ów powstałe w wyniku każdego kroku kursu.
   Są one przeznaczone do użycia jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania problemów.
 
 ## Lista gotowości

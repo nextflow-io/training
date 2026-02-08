@@ -1,7 +1,7 @@
-# Part 2: Hello Channels - Transcript
+# Part 2: Hello Channels - Video Transcript
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/lJ41WMMm44M?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Important notes"
@@ -12,266 +12,266 @@
 
 ## Welcome
 
-Hi, welcome to part two of Hello Nextflow.
+​Hello and welcome back to Part 2 of Hello Nextflow. This chapter is called Hello Channels.
 
-This chapter is called Hello Channels. We're gonna be talking all about this fundamental part of Nextflow.
+Channels are like the glue in your Nextflow pipeline. They're the bits which hold all the different processes together, which Nextflow uses to pass all the information around and orchestrate your workflow.
 
-Channels are the things which connect with different steps in your pipeline, the way that your data and logic flows through your workflow.
+There's another part to channels which are operators. These are basically functions that we can use on channels to modify the contents. Let's dive into VS code and see where we are.
 
-Okay, let's dig in.
+I'm very zoomed in on this VS code, so to keep things clean and tidy, I have removed all the _.nextflow\*_ files and the* work/* directory and the results/ and everything from Chapter One. And I'm just starting fresh here. But don't worry too much about that. If you don't want to, you can leave those files around. They won't cause any problems.
 
-Let's start off by going to training.nextflow.io
+We're gonna start off working on _hello-channels.nf_ for this chapter, and if I open this up, it should look very similar to the file we were working on previously. It might be that different parts are in different parts of the script, but everything should be basically the same.
 
-Hello Nextflow in the sidebar and clicking part two. Hello Channels.
+One thing that is different is that the path in output block here is now _hello_channels_ for this part, which means that the result files will be stored in a different subdirectory in your results if you still have that there. So it should be nice and clean a place to start without being confused about outputs.
 
-All of the material is written down here so you can follow at your own pace and catch anything that you might have missed.
-
-Once you've got the website open, you can load up Codespaces and we'll continue from where we were at the end of the last chapter.
-
-## 0. Warmup: Run hello-channels.nf
-
-For this chapter, we're going to be editing a different file. This one's called Hello Channels, so you can find that in a side bar, double click it to open.
-
-Now if you've just come from chapter one, this file will look very familiar. The starting point here is basically where we finish chapter one, with our process called sayHello, our input, output, our publishDir and our params.greeting, and our simple workflow.
-
-We're starting with a new file, so it's a level playing ground for everybody, but you can continue with your previous file if you prefer.
-
-Note, I've also deleted all of the .nextflow\* files and the work directories here, just so it's a clean starting point. It doesn't matter if you do that or not, it's up to you.
-
-Okay. Let's start off by checking that this pipeline still works as we expect. I'm going to bring up the terminal here.
-
-Do "nextflow run hello-channels.nf" and hit enter.
-
-It's going to run that little workflow, runs our sayHello step, generates a work directory with that hash, and here's our results folder and there's our output file, just as we expected from our default params.greeting.
-
-So that's great. Exactly the same as chapter one, working as we expect.
+Okay, so let's quickly remember what this script does when we run this workflow. We do _"nextflow run hello-channels.nf"_. We can do _"--input myinput"_, and when we run this, it's going to use this parameter, params.input, which was passed as the variable for the sayHello process up here, which goes into greeting and gets saved to output.txt. And we can see that in the results file. Great.
 
 ## 1. Provide variable inputs via a channel explicitly
 
-In chapter one, you were actually already using channels, you just didn't realize it. When we specified a string here, Nextflow automatically created a channel around that string for us, just because it knew that we were calling a process, so we needed an input channel.
+That's nice. But it is, it's quite simplistic. We have one variable in this parameter, which goes into a process which runs once, and doesn't really scale. And we can't give it lots of different files to create here. We can't give it lots of different greetings. We have just one.
 
-The first thing we're going to do is make it explicit by actually typing out the channel itself.
+In reality, Nextflow is all about scaling up your analysis. So you probably want it to do more than one thing. And we do that with _channels_.
+
+Channels are a bit of a unique concept to many people picking up Nextflow. It comes from this kind of concepts of functional programming, and it can take a little bit of time to get your head around, but once you click, they really unlock the power of Nextflow and it's key to how you write your workflows.
 
 ## 1.1. Create an input channel
 
-So I'm going to go to the workflow here at the bottom of the script, and I'm going to say greeting_ch. This is a convention we often use in Nextflow code to have a underscore ch at the end of a variable name when it's a channel, just so it's easy to identify that it is a channel, but you don't have to do that. Equals channel of Hello Channels.
+Let's start by taking this script and making it use a _channel_ instead of just a _param_.
 
-What we've just used is something called a "Channel Factory" in Nextflow language. This is this thing here, we're setting this variable to a new channel, and this channel factory here is creating a channel for us in a particular way.
+We go down to the workflow, which is where all of our workflow logic is about stringing things together. And I'm gonna go in here and I'm gonna create a new channel.
 
-There are a handful of different channel factories that Nextflow has, to create channels from different types of inputs. Dot of is the simplest one, and just takes any strings that we give it.
+Create a new channel.
 
-Notice that when I hover over these words in VS Code, the Nextflow extension is giving me a popup explaining what this syntax does, and there's also a read more text at the bottom of that popup window.
+And I'm gonna call it "_greeting_ch"_. This is convention to do "_\_ch"_ like this, just so that you can remember that this variable is a channel. But you can call it whatever you want.
 
-If I click that, it'll open the Nextflow docs. In a new tab and take me straight to the documentation for this specific thing. In this case for channel.of.
+And then I'm gonna say equals, and I'm gonna do _"channel.of"._
 
-## 1.2. Add the channel as input to the process call
+Channel is like the name space for everything to do with channels. Lower case "c" if you've been using Nextflow before. And the _".of"_ is something called a Channel factory, which is basically a way to create a channel.
 
-Note that the extension is also giving us a warning, saying that we've created a new channel here, but it's not being used by anything.
+There's lots of different channel factories. If I do just "." here, you can see that VS Code is suggesting loads of them, but _".of"_ is the simplest and just takes, an input here.
 
-So, let's fix that. I'm going to take the new channel name and I'm going to replace this params.greeting with our new channel.
+So I can do some brackets and I'm gonna say _"Hello Channels!"_.
 
-Note that we're no longer using the command line flag --greeting now, params.greeting isn't being used, we're going back to hard coding this string. That's okay. I'm just trying to keep things simple. We'll come back later and use the params again.
+Great. I have a channel. Fantastic. I can hit save, I could run it again, but nothing interesting is going to happen. VS Code has given me a orange warning line under here and told me that this is set up: you've created this, but you've never actually used it for anything. This channel's not being consumed.
 
-## 1.3. Run the workflow command again
+Okay, so how do we use it? Very simple. I'm gonna take this, copy it, and I'm gonna delete _params.input_ and I'm gonna put in _"greeting_ch"_ here instead. So we're gonna pass this channel as the input to sayHello.
 
-Okay, let's just double check this works. Bring up the terminal and note again. Nextflow run hello channels. Check output.txt, and there it is.
+Note that I've hard coded this string for now. This is a bit of a backward step after our nice pram that we used at the end of the last chapter, but it just keeps things simple to start off with so you can see the logic.
 
-Great bit of a boring example, doing exactly the same thing as we did before, but now at least the logic is a bit clearer. We're being explicit about writing a new channel.
+Okay, I'm gonna go into my terminal and I'm gonna run the workflow again. Without any _"--input"_ this time, and it's gonna run and it's gonna use that channel that we've created and hopefully we should have a file up here in _results/hello_channels/_ and it now says "Hello* Channels!"*. Fantastic. So that is what we're hoping from, our channel here. Great.
 
-We've effectively just written more code to do the same thing. But this will start to make more sense as we become a bit more complicated with how we create our channels.
+## 1.4. Use view() to inspect the channel contents
+
+One more thing to add on here, just a quick introduction to another function we can use on channels called "_.view"_.
+
+This is analogous to the _print_ command in Python or other languages that you might be used to , and it just dumps the contents of this channel to the terminal when we run it.
+
+So do "_.view"_, and then if I rerun the workflow again, it should print to the terminal what the contents of that channel is, at the time that we created it.
+
+Sure enough, you can see it's printed to the terminal here. _"Hello Channels!"_.
+
+Note that you can break these things across lines if you want to, and in fact, the Nextflow, automatic formatter will try and do that for you. White space is not really important here, so you can chain these things one after another.
 
 ## 2. Modify the workflow to run on multiple input values
 
-Okay, let's make this a bit more interesting. It's very rare that you want to run a Nextflow pipeline on a single input, so let's give it several inputs.
+Okay, so our channel has one thing in which is nice, but it's basically the same as it was before. So let's make it a bit more complicated. Let's add a few more things into our channel.
 
-## 2.1. Load multiple greetings into the input channel
+The "_.of()"_ channel factory can take multiple items, so let's write a few more. We'll do _Hello, Bonjour, Hej_. And then we can run this workflow again and we'll see what happens.
 
-From the docs here. I'm going to copy in these different strings, three of them. Hello, Bonjour, Olà. Oh, get Hope. Copilot is suggesting a couple of others. So let's tab enter those.
-
-The Nextflow docs here tells us that we can give multiple values to this operator, so it should work, but let's try it out and see what happens.
+Should run again. And we've printed now. _"Hello", "Bonjour"_ and _"Hej"_ to the terminal with our view statement. Fantastic.
 
 ## 2.1.2. Run the command and look at the log output
 
-Well. Yes and no. Let's see. It says that five of five tasks have run here, but it only shows us one hash, which is a bit odd. That's okay. Everything is it's expected here. By default. Nextflow uses a special type of output to a terminal called ANSI control codes, which means it overwrites the certain lines to give a nice compressed view of all the different processes which are being run.
+You might think that we're done at this point. But actually there's a bit of a gotcha here, which is gonna trip us up. If we look at our output file here. You can see it's got _"Hello"_ in, but it doesn't have any of the other outputs. In fact, it's just this one.
 
-This makes much more sense when you have larger workflows and are running hundreds or thousands of different samples. You can just generate so much output on the terminal, it's impossible to look at, whereas this updating view gives you a real time progress for you.
+If we run this workflow multiple times, we might even see that sometimes it has _"Bonjour"_, sometimes it has _"Hej"_. It's a bit random.
+
+If we look at the terminal, we can see it ran three times and we can see the different view outputs. But if I go to the work directory, I can do _"cat work"_. Put this hash and expand that and _output.txt_. You can see that this file in the work directory is different than the results directory, and this one is, _"Hej"._ So there's something not quite working right here.
+
+And the key is that, we have three tasks that ran. The Nextflow output tries to summarize that as the processing goes on, so that it doesn't completely take over your entire terminal, and that ANSI Logging uses ANSI escape codes, has basically overwritten the other tasks. So it just shows you the last one which happened to be updated.
 
 ## 2.1.3. Run the command again with the -ansi-log false option
 
-If you want, you can run it again, and this time I'm going to use an additional Nextflow core argument with a single hyphen saying, "-ansi-log false". This uses the previous version of the Nextflow log output. And here you can see all the individual processes which have been launched.
+There's a few things we can do to actually understand this a bit better. We can look into the work directory itself and you can see all the different work dirs there, but that's a bit confusing 'cause it will be mixed up with different Nextflow execution runs.
 
-It's up to you whether you do this or not. The output from Nextflow is exactly the same in both cases.
+Or we can tell Nextflow not to use the ANSI escape codes.
+
+So if I run the command again, but this time I say _"-ansi-log false"_ to turn it off, I could also use the environment variables _$NO_COLOR_ or _"$NXF_ANSI_LOG=false"_. Then it uses the kind of more old fashioned style of Nextflow logging without any of these escape codes. It just prints directly to a terminal with no clever updates.
+
+And now we can see all three of these processes that ran. And each one of them its own task hash. And if we go into these work directories, we'll see the three different greetings that we specified.
+
+So that makes a bit more sense now. Hopefully you understand that Nextflow was doing this, it was just being a bit clever with what it showed you in the terminal with those work directories.
+
+However, this is fixed for one problem with the work directories, but it hasn't fixed a problem with the output file. We still just have one output file which says _"Hello"_.
 
 ## 2.2. Ensure the output file names will be unique
 
-Okay, let's have a look at the output files, then we'll go to results. But there's only a single output file. What's happened? We saw that the process had run lots of times. We can go into the work directory and see all of the different hashes, all the tasks were executed properly. But if you remember in our process here, we're saving everything to an output.txt file and then publishing that to this directory.
+Now to understand this, we need to go back to our workflow script. We're generating our channel here, we're passing it to our process, and if we look at the process, we are writing the greeting to a file called _"output.txt"_ and passing that output file back out to the output block down here, publishing it.
 
-So the same file was created five times, and then it was overwritten five times. And we just have whichever task happen to execute last.
+However, each three times this process runs these three different tasks. They all generate a file called _"output.txt"_, that all of those output files are published into the results directory, and they all overwrite one another. So whatever result file you get there is just the last one that was generated, but clobbered all the others. That's not really what we want.
 
 ## 2.2.1. Construct a dynamic output file name
 
-The way we fix this is by using a dynamic output file name. Here we already have a variable called greeting within the process, so we can use that in the output file name. I copy that and I do $greeting-output.txt.
+There are different ways to handle this, but the simplest for now is just to create different unique file names. So each time the task runs with a different greeting, it will generate a different output file, which will no longer clash when published. And then we'll get three unique output files.
 
-I am going to surround this in quotes, just so that bash doesn't get confused by any spaces which might creep in here. And then I'm going to take the same file name and update the output here.
+We do this in exactly the same way. We can use this variable anywhere within the script block and we can use it multiple times.
 
-It's really important that the output matches this, because otherwise, this file won't be found and Nextflow will crash.
+So I can paste it here, _"$\{greeting\}\_output.txt"_, and then I also need to paste it up here because we're no longer creating a file called _output.txt_. So if I don't update this, Nextflow will crash with an error saying it expected a file, which was never generated.
 
-I'm going to make one more really important edit, which is I'm going to change these single quotes for double quotes. Note that the color of the code changed when I did that. This variable is only expanded if we use double quotes. If I use single quotes here, it's used as a literal value, and I'd get a single file called $greeting-output, which is not what I want.
+So I need to do the same there and I need to use double quotes, not single quotes, so that this variable is understood.
 
-## 2.2.2. Run the workflow
+Okay, let's try it out and see if it worked. We are gonna run the workflow again. Hopefully it'll show us the three different tasks within the three different work directories. And sure enough, you can see up in the results folder up here on the left. We now have three different files with three different file names and each with the different contents that we expect. So the files are no longer clobbered one another, and everything is there as we expect.
 
-So let's put the double quotes back and give it a try.
+This is a bit of a kind of trivial setup that we've gone through here, but it underscores some of the key concepts you need to understand about how file publishing works, and some of the things that you might fall into as traps. So hopefully you can avoid that in your own workflows.
 
-I am just going to clear up my directory before I start, so it's easy to see the new files. I'm going to delete anything called .nextflow, work, and results.
+It is worth noting also that what we've done here is a bit impractical in real life situations. We've taken some input data and we're using that data, but we're also naming the file after that data, which you can't usually do.
 
-And I'm going to run that Nextflow command again and let's see what files are created. So it runs the five processes there. If you were watching very closely, you might have seen that line update as it was running.
+So in real more mature Nextflow pipelines, you will often pass around a meta object with all the metadata associated with a given sample. You can then create dynamic file names based on that, which is a lot more practical.
 
-And now we can go into the results directory, and sure enough, we have five different outputs, and they're all prefixed with the different greeting.
+If you're interested in how to do this with best practices, there's a side quest on _training.nextflow.io_, which is all about specifically metadata and meta maps, so you can dig in there for more detail.
 
-If I open each of these, we'll see that they each contain the corresponding greeting. Fantastic. That's what we want.
+## 3. Provide multiple inputs via an array
 
-## 3. Use an operator to transform the contents of a channel
+Okay. Next we're gonna explore a little bit about how channels are structured and how they differ to other kinds of data structures in the coding language. And I'm gonna think a little bit about how I could potentially use an array, which might be a familiar concept if you've come from other languages.
 
-Okay, so now we know what channels are and we know what channel factories are. What about operators? This is another term for part of the Nextflow language, which is a series of functions which allow us to operate on channels to do certain things to them. Nextflow, comes with a suite of operators, which allow us to manipulate channels in a variety of different ways.
+Can I use an array in a channel? Let's try it. I'm going to create an array, and I've copied this from the docs, _"greetings_array"_ and _"Hello", "Bonjour" \_and_ "Holà"_. And then I'm gonna put that here instead of my hardcoded strings. So I'm gonna say "channel.of" _"greetings_array",\_ passing this array into a channel. Let's try it.
 
-## 3.1. Provide an array of values as input to the channel
+Bring up the terminal, and run the pipeline.
 
-Let's work through this with an example. Let's say that we want to take these input strings, but instead of just putting them directly into a channel factory, we want to define them as an array.
+Okay. You can see that the view statement here did print our array as expected, but then all of this red text, or it won't be red if you have still have _"-ansi-log"_ off, but all of this red text is telling us that something went wrong.
 
-## 3.1.1. Set up the input variable
+We don't have a nice green tick here anymore. We have a red cross, and if I just make this a little bit wider so it's easier to read, Nextflow is telling us what went wrong.
 
-So I'm going to take these and do that as a new line above and say, greetings, array.
+So let's break this down section by section. It says the error was caused by, and then the reason for the error, which is missing output files. So basically that output block said that this file should be created and it wasn't. Next it says this is the command which was executed. So this is basically the contents of that _.command.sh_ file. This is what it looked like after all those variables had been put in.
 
-There we go. I'm going to take that array variable and put it into the channel.of, and hit save.
+And you can see here our echo command is actually only been run once and it's used the entire array, but in a string representation, which is not really what we wanted.
 
-## 3.1.3. Run the workflow
+And then the command exited like that, and that was the work directory where we can go and see the files to understand a bit more.
 
-Now, let's see what happens. Go back to my terminal. I'm just going to clear up all those temporary files again. And let's run the workflow.
-
-Not good. Okay. It broke. That's okay. I expected it to break this time. Debugging what goes wrong when an Nextflow workflow fails is a key part of being an Nextflow developer. This will happen a lot and it's important to understand what the error message says and how to deal with it.
-
-The Nextflow, error messages are actually quite structured. It tells us which process went wrong. It gives us an error message for a reason. It says what the command was that it tried to run within that particular task, what the exit status was, what the output was on where that task work directory was.
-
-Note that I can option, click this in VS Code and it opens it in a sidebar so I can go straight there and view all of these hidden files, which we talked about in the previous chapter, including the .command.sh file. This you can see is the same as the commands which was executed here.
-
-By looking at this file, we can get a feel for what might have gone wrong here instead of running a single task for each element in the array as it did last time, it just provided the entire array in one go as a string. So we need to unpack that array into individual values before we pass it into the channel. Let's go back and see if we can do that using an operator.
+Okay. So what happened then was. Nextflow just passed this entire array as a single channel element to the process, which meant that the process only ran once. It had one task and it didn't use the data in a structure we expected.
 
 ## 3.2. Use an operator to transform channel contents
 
-In this case, we're not going to change the array before we pass it into the channel. We're going to adjust the channel so that it behaves in the way we expect. We're going to do that by using the flatten operator can do dot start typing and we can see that VS Code extension starts suggesting all the different operators we have available.
+So we need to do something to this channel first, before it can be used. And this is setting a stage for using operators, which is special functions we can use on channels to manipulate channel contents.
 
-## 3.2.1. Add the flatten() operator
+In this case, we are going to use something called _flatten_. Which we pass on the end of the channel here. So we create the channel and then we run _flatten_. And again, if we hover over it, it shows us the documentation for this command straightaway in VS Code, which is very helpful. You can also find all of these docs on the Nextflow website, the documentation.
 
-And I'm going to select flatten. Note that white space doesn't matter in this context for Nextflow. So you can put these operators on a new line if you want to. So I can drop this down here and indent it so it sits underneath ".of" and you'll see that people often chain lots of operators like this onto a channel and indent it in this way so that it is easier to read.
+I could just run this code now and see if it works, but it's also a nice opportunity to introduce how to do dynamic code within operators and within Nextflow code, which are called closures.
 
-You can also see, like before I can hover over this and read what the flatten operator's doing, and also follow a link to the documentation if I want to.
+So I'm gonna add back in a view command here before we run _flatten_. And here this one has got this squiggly brackets, which is the, dynamic closure. And there's just some arbitrary code within here which will be executed, within the context of a view operator.
 
-So this operator is taking this channel, which has a single array within it, and separating out the array values.
+Here, this is saying take the greeting, which is the inputs of the view operator, and that's here. I could call this whatever I wanted to, I could call this _"foo"_ and I just need to refer to it as _"foo"_ later. And then I say with this, return this.
 
-## 3.2.2. Add view() to inspect channel contents
+And then set returning a string which says before the flatten for a variable. very simple.
 
-We can peek into the channels by using the special view operator, and I'm going to add a couple of them here. This is a bit like using print statements in other languages. So I'm going to do dot view and then I'm going to use these squiggly brackets.
+I'm now gonna add another one of these exactly the same, but I'm gonna say after _flatten_.
 
-This is called a closure. This basically gives additional code to the view operator, which it will execute on each item within the channel. In this case, I'm going to say greeting before flatten. Greeting.
+So what this does, because this runs in sequence, you're gonna see what the channel looks like before we run _flatten_, and then again after we run _flatten_.
 
-I'm defining a variable here, which is just within the scope of this closure. So this variable is only used here and I could call it whatever I wanted. It doesn't really matter. I'm just using greeting to make it easy to read.
+And then this greeting channel is still created, so it's still gonna be passed into the process. And hopefully now the workflow will run. Let's try it out.
 
-In some Nextflow pipelines, you might see people use a special implicit variable called "$it". Like that. This is a special variable within Nextflow code, which is a shorthand so that you don't have to do the little definition of a variable. However, over time we're thinking, this is not very clear to people who are new to Nextflow, and we discourage usage of "$it" now.
+Great. So first things first is that the pipeline didn't crash this time. We had three processes that ran properly and we've got a little tick mark. And then we can see our view statements did work.
 
-So I'm going to stick with the previous behavior of greeting and using it like this because that's more explicit and it's clearer on what's going on.
+We have before _flatten_, which is that array that we saw before from the failure, and then we have three times the after _flatten_ was called where we have _"Hello", "Bonjour",_ and all that other three separate elements in the array, which are now as we hoped, three separate elements in the channel.
 
-I'm going to then copy this line and do exactly the same thing again after the flatten arguments. The view operator's a bit special because it does something on the elements, but it also just continues passing them onto the next operator so we can chain it in the middle of a chain of operations like this, and it will print the status there and keep going. So hopefully this will show us what the channel looks like before and after the flatten operator.
+And you can see that the _view_ operator was run three times. And that's because this channel after _flatten_ now has three elements. And so the operator gets called three times.
 
-## 3.2.3. Run the workflow
+Very quickly, I would just mention that when I was creating channel factories before, I did _"."_, and then we saw there were lots of different ways to create channels, and one of them is called "_fromList"_. And that's actually specifically designed to do this same operation. So we could have just done from list greetings away, and that will work. It's slightly clean and nicer syntax. But for the purposes of this demonstration, we wanted to make it a bit more step-by-step so you could see how the channel is being manipulated and how different operators can change what's in the content of a channel.
 
-Let's try it out. Clean. Clean everything up in the workspace. Run the pipeline again.
+## 4. Read input values from a CSV file
 
-Okay, so we can see it ran our five processes. Again, it didn't crash with an error, so that's definitely good. And now we have the before flatten and it sure enough we have our array and we have after flatten, printed five times once for each elements of the array. That's exactly what we were hoping for. So that's really good news. And that fits exactly with what we'd expect from the code.
+Okay, how can we make this a bit more realistic? You're probably not going to want to be creating lots of code in your Nextflow pipeline with hard coded arrays. You're probably going to want to take the data from outside when you launch, and that data is almost certainly going to be in files.
 
-We don't need these debug statements anymore, so I can either comment them out or delete them. I'm going to delete them just to keep my code nice and clean. Okay, great. This example is now working nicely and we can start to see how channels can do a bit more complicated logic.
+So the next thing we're gonna do is we're gonna replicate this, but instead of taking the data from a single CLI parameter or from a hardcoded string or array, we're gonna take it from a file.
 
-## 4. Use an operator to parse input values from a CSV file
+So let's get rid of our greetings away. And now we're gonna change this channel factory again. I just said there were a bunch to choose from and there's one called _".fromPath"_. And I'm going to tell it to, in this case, take _params.input_, which is going back to our input that we were using earlier.
 
-Now we're going to try and do this using a file with a series of inputs instead. This is a very common way to write Nextflow pipelines using a sample sheet or a CSV of metadata.
+Now that parameter isn't really ready to be used yet. We're still saying that it's a string and it's hard coded here with a default, but we could overwrite that string. We now want this to be a file instead. So the type is different. It's no longer a _String_. It's a _Path_.
 
-## 4.1. Modify the script to expect a CSV file as the source of greetings
+And then we can set the default if we want to, again, to a Path. And if I look in explore on the left, you can see in this repository, in this working directory, I have a directory called data. I have a file in there called _"greetings.csv"._
 
-If I go over to the sidebar, you can see greetings.csv in the example repository, and this is a very, very simple CSV file that just contains three lines with three different greetings. Let's see if we can use this CSV file within our workflow.
+So I can just set the default here to _"data/greetings.csv"_. Now, when I run this pipeline again without any command line options, it will use this default value. It knows it's a path, so it knows it should handle that as a path and not a string.
 
-I'm now going to go back to using params like we did in chapter one, so that we can have a command line input.
+And then it's gonna pass that into a channel factory from this _params.input_ and create our channel, which is then gonna be used in this process called _sayHello_. Let's try it out.
 
-I'm going to delete this greetings array.
+Okay. Failed. Don't worry. This was expected. And if you're following the training material, you'll see it was expected there as well. Let's see what's happening here.
 
-## 4.1.1. Switch the input parameter to point to the CSV file
+It's tried to run the pipeline. It's tried to execute the process, and it's got quite a similar error to the one we saw before.
 
-I'm going to set params greeting to the file name, which is greetings.csv, and I'm going to use this special variable to generate the channel. I'm going to put that in there, and the errors go away. Remember that this is setting this variable by default now. So if I run the pipeline without any arguments, it'll use greetings.csv, but I could do --greeting to overwrite this variable if I wanted to.
+Here it says: we tried to run \_echo, \_but instead of echoing the contents of this CSV file, it just echoed the path. And you can see it's the full absolute path here to this CSV file.
 
-## 4.1.2. Switch to a channel factory designed to handle a file
+And then sure enough, because it tried to write that to this really complicated path, it didn't really know what to do. And it was outside the scope of the process work directory.
 
-Okay, we're passing a file now rather than a string or an array of strings, so we probably need a different channel factory.
-
-We're going to get rid of "of" which we've been using so far, and instead use .fromPath. This does exactly what it sounds like. It creates a channel with paths instead of values, using a string file name or glob. I am also going to remove the flatten operator as we no longer need this, now that we're passing a file.
-
-## 4.1.3. Run the workflow
-
-I'm going to hit save, open up the terminal, run the workflow, and then see what happens.
-
-Okay. It crashed again. Don't worry. I was expecting this one as well. Let's have a look at the error message and see if we can figure out what's going wrong. Here we can see the command executed, and a bit like before where we had the whole array printed. Now we have the file path being echoed into the command, rather than going through the contents of the file.
+I mentioned in the start that Nextflow encapsulates every executed task within a special work directory. And if you try and write to data, which is outside of that work directory, Nextflow will stop you as a safety precaution. And that's what's happened here. We try to write to an absolute path and Nextflow failed and prevented us.
 
 ## 4.2. Use the splitCsv() operator to parse the file
 
-So to use the contents of the file instead, we need another operator. The operator we're going to use for this one is called splitCsv. Makes sense, because it's a CSV file we're loading.
+Okay, let's have a look at this, channel and see what it looks like. We can do _".view",_ and I've copied this from the website. So _.view_, and we have a, dynamic closure here and we say a variable name "_csv"_ as the input. So that's the channel contents, and we say before splitCsv, and this is what it looks like.
 
-## 4.2.1. Apply splitCsv() to the channel
+If I run it again, it will still fail, but it will show us what's inside this channel. It is not particularly exciting. It is that _path_ variable. So you can see it's just a string here because it's being printed to a terminal, but it is a _path_ object, which contains the information and metadata about this file.
 
-Ok, so splitCsv. Close bracket. We don't need any arguments here. And again, I'm going to use some view operators to give some insight as to what's going on here.
+We don't wanna pass the metadata of the file to the input. We want to pass the contents of that file. If we look at the _greetings.csv_ file, you can see here that it's got these different variables here. _Hello, Bonjour, Holà_ again. And these are the things really we want to be passing to our process, not just the file itself as a single object.
 
-.view csv after splitCsv. Before split Cv.s
+So we need to parse this CSV file. We need to unpack it, get at the contents of the CSV file, and then pass the contents within the channel to the process.
 
-## 4.2.2. Run the workflow again
+As you can probably tell from the log message, we want to use the _splitCsv_, which is another operator, another channel operator. So if I do "_dot" "s"_, and then you can see it's auto suggested. Oops, _splitCsv_ and some brackets.
 
-Okay, let's try running this and seeing what happens.
+And then after _splitCsv_, I'm gonna put another _view_ statement just so we can see how it looks afterwards. Let's run the pipeline and see what we've got.
 
-Okay, we've got a bit more output this time, but it still failed. We can look at the view statements, and here you can see before split CSV, and we have a file path as we saw in the previous error message. After split CSV, we now have three values corresponding to the three lines in the CSV file.
+Okay. It still failed, but in a new and exciting way, which is progress.
 
-However, you can see that each of these values is surrounded by square brackets. So each one of those was an array in its own right, and that's given us the same area that we had before where it's trying to echo an array rather than just a single string.
+This time again, we have some problem with our script, which has been rendered. Now. We haven't got the final path anymore, but we've got an array of variables, which looks very much like the error we had earlier on when we were passing an array as a fixed input.
 
-If we think about a CSV file, this kind of makes sense. Typically, a CSV file will have rows and columns, so split CSV does two dimensional array. The first dimension of the array is each row, and then there's a second dimension, which is each column for each row.
+With our logging from the view operator, we can see before _splitCsv_ was the path. And sure enough, after _splitCsv_, we have three different outputs and each of those outputs looks an awful lot like each of the rows from the _greetings.csv_ file, which makes sense.
 
-So here we only have a single value on each line, so we have a single column, so we have a one element array for each line of the file.
+So what's happened here is that Nextflow has parsed, this CSV file given us three objects, one array for each line of the CSV file. So then three times we've passed an array of variables to the channel instead of a single string value.
 
-That's fine. We just need another operator to collapse that array for each line of the parsed CSV file. Let's clean this up. Get rid of a terminal and see what we can do.
+Okay, so last time we had this problem, we used _flatten_. Let's just very quickly. Try flatten and see what happens.
+
+I can call these variables, whatever. So I'm gonna call it _myarray_ 'cause it's no longer really a CSV. Let's try and run it again and see what happens with _flatten_.
+
+So this time we're gonna run, we parsed the CSV into three array objects, and then we flattened it. And this time it, it passed. And the Nextflow pipeline ran. However you can see that _flatten_ really goes to town and flattens everything. And so we get three independent array, entries for each row. And so it ran the process three times every row of a CSV. And now we have a whole bunch of results files, and 123, 456, and all kinds of things, not just that first column of the CSV, which is what we really wanted.
 
 ## 4.3. Use the map() operator to extract the greetings
 
-Now we could use the flatten operator again, which we used before. We've seen how that can collapse an array into a series of values, which would work very well here. But I'm going to use the opportunity to demonstrate another operator, which is very common within workflows called the map operator.
+So how do we get at just the first column? If flatten is too simplistic here, we need a more complex operator where we can actually customize and tell it what we want from the CSV.
 
-## 4.3.1. Apply map() to the channel
+To do that, we're going to use _map_. Basically _map_ just says, run some code, some function over every element that I get given and do some kind of transformation on it. And because it's so flexible, you'll see it come up in Nextflow code all the time.
 
-I'm going to do dot map and I'm going to do item item[0].
+By itself, it doesn't do anything. So we don't want regular brackets, we want a closure here and we need to tell it what to do. So I'm gonna say _"row"_, 'cause that's being given rows from the CSV, so it's a logical variable name. Is the input. And I want to return just the first element of that array.
 
-If you write a lot of other code languages, you might be familiar with the map operator already. It takes an iterable, such as an array or a channel, and it does some operation on each value of that.
+Arrays in Nextflow are zero based, so we're gonna say just the first element, which is row zero. If we wanted to the second column, I could be one or the third column be two, and so on. We can return whatever we want here, but I'm gonna return just the first value.
 
-Here we're saying that we should define a variable called item within the scope of this closure, and then we want to return, just the first value in that array. So item index zero.
+And now, we can run the pipeline again and see if it does what we expect.
 
-This is effectively flattening the array. You can see how we could extend this to be more complex, though: if our CSV file had six columns, but we're only interested in the fourth column, we could access a specific index here. Or do any other kind of operation on the value before we pass it onto downstream processing.
+Sure enough, after _splitCsv_ we've got our arrays, and then after the _map,_ we have our nice clean strings, just _"Hello", "Bonjour"_ and _"Holà"_. And the pipeline is now doing what we want it to. Fantastic.
 
-So the map operator is extremely flexible and very powerful for modifying channels in flight. Let's put in another view statement just so we can see what it's doing in our execution. Can adjudicate that line and move it down. And after map.
+So we can get rid of all these view commands now. We don't need them anymore.
 
-## 4.3.2. Run the workflow one more time
+## Recap
 
-Let's bring up the terminal and try running the workflow.
+We finished our kind of debugging and this is the code we end up with. Taking our CLI parameter called _input_, which is classed as a _Path_. Nextflow finds the path, loads it, and understands the CSV file. Returns all the different rows. And then we map just the first element of that row into the channel that kind of gives us the channel contents, which is passed to the process.
 
-Okay, no errors this time. That's a good sign. We can now go through all these different outputs from the view statements. Before split CSV, we had a single path. After split CSV, we had the single value arrays, and then after map, we have just the values without any array syntax. Let's go up to the results directory, and here are our output files behaving exactly as we wanted them to.
+And the process runs over each element in the channel, which is three. And it runs the process three times, giving it three tasks. And those results are then published from the workflow, picked up by the process output. Published from a workflow and saved in the output block to a subdirectory called _"hello_channels"_.
 
-There's a little bonus here. You can actually see that the view operators are slightly mixed up in the order that they've done the output. This is because Nextflow is doing parallelization of these different tasks. So after it split the CSV, there are three elements in this channel, and it's handling the processing of those three elements in parallel automatically. That means that the order of the outputs is stochastic and can vary. In this case, it just happened that some of the view operators returned after the subsequent step had been completed, and so it came in this order.
+Pretty cool. We are getting now to something that more closely resembles a real life Nextflow pipeline that you might run for some real analysis.
 
-If I run the same workflow again. Then sure enough, it's come in a different order and this time we've got the split CSVs and the maps in the order we'd expect.
+## Takeaway
 
-So just bear in mind, you cannot rely on the order of outputs from a process task because Nextflow's handling this parallelization for you automatically. Nextflow does that for you with its data flow logic, and that's the real power of Nextflow.
+Okay. Hopefully you're now getting a feel for what Nextflow channels and operators are and how operators work on channels and how you can create them.
 
-Okay, this is probably one of the most important chapters of the whole training. Once you understand channels, channel factories and operators, you start to key into the strength of Nextflow and what makes it unique as a programming language. This functionality allows Nextflow to parallelize all of your workflows for you and generate extremely complex workflow logic with a very clean syntax and a push data flow model. It can be a bit of a strange concept at first, but once you get used to writing code like this, it will quickly feel natural and before you know it, you'll be writing fantastic workflows.
+Channels, like I said at the start of this video, are the glue of Nextflow. And you can see here that we can take different inputs and manipulate them and take that data and then pass 'em into downstream workflow logic.
 
-Have a break, cup of tea, walk around and let's move on to chapter three, where we start to extend these concepts into more complex workflows. See you in the next video.
+And this workflow block here is really where you build up all that parallelization and all the clever logic, and explain to Nextflow how to build your workflow DAG, and how to orchestrate your pipeline.
 
-[Next video transcript :octicons-arrow-right-24:](03_hello_workflow.md)
+Channels are not the easiest concept to get your head around. So take a break, have a little think about this, maybe read over the material again, and really make sure that you've got these concepts down because this is key to your understanding of Nextflow and the better you understand channels and the different channel operators and the different channel factories. The more fun you'll have writing Nextflow and the more powerful your pipelines will be.
+
+This is not the same as regular programming in Python or other languages. We're not using _if_ statements here, this is functional flow programming using channels and operators. So it is a bit different, but it's also super powerful.
+
+That's the end of this chapter. Go and have a quick break and I'll see you in the next video for part three where we're gonna go through Hello Workflow, and talk a bit more about the workflows.
+
+Just like the previous chapter, there's a few quiz questions at the bottom of the webpage here, so you can have a quick run through these and make sure you understand all the different parts of the material we've just done. And aside from that, I will see you in the next video. Thanks very much.
+
+Okay.
+
+​

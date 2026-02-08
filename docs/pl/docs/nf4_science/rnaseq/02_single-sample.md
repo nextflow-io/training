@@ -2,11 +2,11 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej części kursu napiszemy najprostszy możliwy workflow, który obejmie wszystkie polecenia uruchomione w Części 1, aby zautomatyzować ich wykonywanie, i będziemy dążyć do przetwarzania jednej próbki na raz.
+W tej części kursu napiszemy najprostszy możliwy workflow, który obejmie wszystkie polecenia uruchomione w Części 1, aby zautomatyzować ich wykonywanie. Będziemy dążyć do przetwarzania jednej próbki na raz.
 
 Zrobimy to w trzech etapach:
 
-1. Napisanie jednoetapowego workflow, który uruchamia początkowy krok kontroli jakości
+1. Napisanie jednoetapowego workflow'u, który uruchamia początkowy krok kontroli jakości
 2. Dodanie przycinania adapterów i kontroli jakości po przycięciu
 3. Dodanie dopasowania do genomu referencyjnego
 
@@ -17,11 +17,11 @@ Zrobimy to w trzech etapach:
 
 ---
 
-## 1. Napisanie jednoetapowego workflow, który uruchamia początkową kontrolę jakości
+## 1. Napisanie jednoetapowego workflow'u, który uruchamia początkową kontrolę jakości
 
-Zacznijmy od napisania prostego workflow, który uruchamia narzędzie FastQC na pliku FASTQ zawierającym odczyty RNAseq pojedynczego końca.
+Zacznijmy od napisania prostego workflow'u, który uruchamia narzędzie FastQC na pliku FASTQ zawierającym odczyty RNAseq pojedynczego końca.
 
-Udostępniamy plik workflow, `rnaseq.nf`, który określa główne części workflow.
+Udostępniamy plik workflow'u, `rnaseq.nf`, który określa główne części workflow'u.
 
 ```groovy title="rnaseq.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -29,7 +29,7 @@ Udostępniamy plik workflow, `rnaseq.nf`, który określa główne części work
 // Instrukcje INCLUDE modułów
 
 /*
- * Parametry pipeline
+ * Parametry pipeline'u
  */
 
 // Główne wejście
@@ -47,7 +47,7 @@ Pamiętaj, że ten kod workflow'u jest poprawny, ale nie jest funkcjonalny; jego
 
 ### 1.1. Utworzenie katalogu do przechowywania modułów
 
-Utworzymy samodzielne moduły dla każdego procesu. Ułatwi to zarządzanie i ponowne wykorzystanie, więc stwórzmy katalog do przechowywania modułów.
+Utworzymy samodzielne moduły dla każdego procesu, aby ułatwić zarządzanie nimi i ponowne wykorzystanie, więc stwórzmy katalog do ich przechowywania.
 
 ```bash
 mkdir modules
@@ -91,7 +91,7 @@ Powinieneś rozpoznać wszystkie elementy z tego, czego nauczyłeś się w Czę�
 
     Mimo że pliki danych, których tutaj używamy, są bardzo małe, w genomice mogą być bardzo duże. W celach demonstracyjnych w środowisku szkoleniowym używamy trybu publikowania 'symlink', aby uniknąć niepotrzebnych kopii plików. Nie powinieneś tego robić w Swoich finalnych workflow'ach, ponieważ stracisz wyniki podczas czyszczenia katalogu `work`.
 
-### 1.3. Importowanie modułu do pliku workflow
+### 1.3. Importowanie modułu do pliku workflow'u
 
 Dodaj instrukcję `include { FASTQC } from './modules/fastqc.nf'` do pliku `rnaseq.nf`:
 
@@ -211,7 +211,7 @@ process TRIM_GALORE {
 }
 ```
 
-### 2.2. Importowanie modułu do pliku workflow
+### 2.2. Importowanie modułu do pliku workflow'u
 
 Dodaj instrukcję `include { TRIM_GALORE } from './modules/trim_galore.nf'` do pliku `rnaseq.nf`:
 
@@ -310,7 +310,7 @@ process HISAT2_ALIGN {
 }
 ```
 
-### 3.2. Importowanie modułu do pliku workflow
+### 3.2. Importowanie modułu do pliku workflow'u
 
 Dodaj instrukcję `include { HISAT2_ALIGN } from './modules/hisat2_align.nf'` do pliku `rnaseq.nf`:
 
@@ -339,7 +339,7 @@ params {
 
 Przycięte odczyty znajdują się w kanale `TRIM_GALORE.out.trimmed_reads` wyjściowym z poprzedniego kroku.
 
-Dodatkowo używamy `file (params.hisat2_index_zip)`, aby dostarczyć narzędziu Hisat2 spakowany archiwum tar indeksu genomu.
+Dodatkowo używamy `file (params.hisat2_index_zip)`, aby dostarczyć narzędziu Hisat2 spakowane archiwum tar indeksu genomu.
 
 ```groovy title="rnaseq.nf" linenums="16"
 workflow {
@@ -389,7 +389,7 @@ ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 
 To kończy podstawowe przetwarzanie, które musimy zastosować do każdej próbki.
 
-_Dodamy agregację raportów MultiQC w Części 2, po tym, jak sprawimy, że workflow będzie akceptować wiele próbek naraz._
+_Dodamy agregację raportów MultiQC w Części 3, po tym, jak sprawimy, że workflow będzie akceptować wiele próbek naraz._
 
 ---
 

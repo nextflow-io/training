@@ -2,23 +2,21 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xxp_menS0E8?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube kanalında [tüm oynatma listesini](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) izleyin.
+:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
 
 :green_book: Video transkripti [burada](./transcripts/04_hello_modules.md) mevcuttur.
 ///
--->
 
 Bu bölüm, pipeline'ınızın geliştirilmesini ve bakımını daha verimli ve sürdürülebilir hale getirmek için iş akışı kodunuzu nasıl organize edeceğinizi kapsar.
-Özellikle, **modülleri** nasıl kullanacağınızı göstereceğiz.
+Özellikle, [**modülleri**](https://nextflow.io/docs/latest/module.html) nasıl kullanacağınızı göstereceğiz.
 
-Nextflow'da bir **modül**, bağımsız bir kod dosyasında kendi başına kapsüllenmiş tek bir süreç tanımıdır.
-Bir iş akışında bir modül kullanmak için, iş akışı kod dosyanıza tek satırlık bir import ifadesi eklemeniz yeterlidir; ardından süreci normalde yaptığınız gibi iş akışına entegre edebilirsiniz.
+Nextflow'da bir **modül**, genellikle tek bir süreç tanımını kapsülleyen bağımsız bir kod dosyasıdır.
+Bir iş akışında bir modül kullanmak için, iş akışı kod dosyanıza tek satırlık bir `include` ifadesi eklemeniz yeterlidir; ardından süreci normalde yaptığınız gibi iş akışına entegre edebilirsiniz.
 Bu, kodun birden fazla kopyasını üretmeden süreç tanımlarını birden fazla iş akışında yeniden kullanmayı mümkün kılar.
 
 İş akışımızı geliştirmeye başladığımızda, her şeyi tek bir kod dosyasına yazdık.
@@ -110,11 +108,6 @@ Bu dizine istediğiniz adı verebilirsiniz, ancak konvansiyon `modules/` olarak 
 mkdir modules
 ```
 
-!!! tip "İpucu"
-
-    Burada size **yerel modülleri** nasıl kullanacağınızı gösteriyoruz, yani uzak modüllerin aksine iş akışı kodunun geri kalanıyla aynı depoda yerel olarak depolanan modüller; uzak modüller diğer (uzak) depolarda saklanır.
-    **Uzak modüller** hakkında daha fazla bilgi için [dokümantasyona](https://www.nextflow.io/docs/latest/module.html) bakın.
-
 ---
 
 ## 2. `sayHello()` için bir modül oluşturun
@@ -122,7 +115,7 @@ mkdir modules
 En basit haliyle, mevcut bir süreci modüle dönüştürmek bir kopyala-yapıştır işleminden biraz fazlasıdır.
 Modül için bir dosya taslağı oluşturacağız, ilgili kodu kopyalayacağız ve ardından ana iş akışı dosyasından sileceğiz.
 
-Sonra tek yapmamız gereken, Nextflow'un çalışma zamanında ilgili kodu çekmesini bilmesi için bir import ifadesi eklemek.
+Sonra tek yapmamız gereken, Nextflow'un çalışma zamanında ilgili kodu çekmesini bilmesi için bir `include` ifadesi eklemek.
 
 ### 2.1. Yeni modül için bir dosya taslağı oluşturun
 
@@ -136,11 +129,9 @@ Bu bize süreç kodunu koyacağımız bir yer verir.
 
 ### 2.2. `sayHello` süreç kodunu modül dosyasına taşıyın
 
-Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın, `#!/usr/bin/env nextflow` shebang'ını da kopyaladığınızdan emin olun.
+Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * 'Hello World!' ifadesini bir dosyaya yazdırmak için echo kullan
  */
@@ -159,14 +150,14 @@ process sayHello {
 }
 ```
 
-Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin, ancak shebang'ı yerinde bıraktığınızdan emin olun.
+Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
-### 2.3. İş akışı bloğundan önce bir import tanımı ekleyin
+### 2.3. İş akışı bloğundan önce bir include tanımı ekleyin
 
-Yerel bir modülü içe aktarma sözdizimi oldukça basittir:
+Bir modülden süreç dahil etmenin sözdizimi oldukça basittir:
 
-```groovy title="Sözdizimi: Import tanımı"
-include { <MODÜL_ADI> } from '<modül_yolu>'
+```groovy title="Sözdizimi: include tanımı"
+include { <SÜREÇ_ADI> } from '<modül_yolu>'
 ```
 
 Bunu `params` bloğunun üstüne ekleyelim ve uygun şekilde dolduralım.
@@ -198,7 +189,7 @@ Bunu `params` bloğunun üstüne ekleyelim ve uygun şekilde dolduralım.
     }
     ```
 
-Modül adını, `sayHello`, ve modül kodunu içeren dosyanın yolunu, `./modules/sayHello.nf`, doldurduğumuzu görüyorsunuz.
+Süreç adını, `sayHello`, ve modül kodunu içeren dosyanın yolunu, `./modules/sayHello.nf`, doldurduğumuzu görüyorsunuz.
 
 ### 2.4. İş akışını çalıştırın
 
@@ -249,11 +240,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. `convertToUpper` süreç kodunu modül dosyasına taşıyın
 
-Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın, `#!/usr/bin/env nextflow` shebang'ını da kopyaladığınızdan emin olun.
+Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Selamlamayı büyük harfe dönüştürmek için bir metin değiştirme aracı kullan
  */
@@ -272,11 +261,11 @@ process convertToUpper {
 }
 ```
 
-Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin, ancak shebang'ı yerinde bıraktığınızdan emin olun.
+Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
-### 3.3. `params` bloğundan önce bir import tanımı ekleyin
+### 3.3. `params` bloğundan önce bir include tanımı ekleyin
 
-Import tanımını `params` bloğunun üstüne ekleyin ve uygun şekilde doldurun.
+Include tanımını `params` bloğunun üstüne ekleyin ve uygun şekilde doldurun.
 
 === "Sonra"
 
@@ -349,11 +338,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. `collectGreetings` süreç kodunu modül dosyasına taşıyın
 
-Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın, `#!/usr/bin/env nextflow` shebang'ını da kopyaladığınızdan emin olun.
+Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Büyük harfli selamlamaları tek bir çıktı dosyasında topla
  */
@@ -376,11 +363,11 @@ process collectGreetings {
 }
 ```
 
-Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin, ancak shebang'ı yerinde bıraktığınızdan emin olun.
+Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
-### 4.3. `params` bloğundan önce bir import tanımı ekleyin
+### 4.3. `params` bloğundan önce bir include tanımı ekleyin
 
-Import tanımını `params` bloğunun üstüne ekleyin ve uygun şekilde doldurun.
+Include tanımını `params` bloğunun üstüne ekleyin ve uygun şekilde doldurun.
 
 === "Sonra"
 
@@ -445,7 +432,7 @@ Bir iş akışında birden fazla süreci nasıl modülerleştireceğinizi biliyo
 
 Tebrikler, tüm bu işi yaptınız ve pipeline'ın çalışma şeklinde kesinlikle hiçbir şey değişmedi!
 
-Şakayı bir kenara bırakırsak, artık kodunuz daha modüler ve bu süreçlerden birini çağıran başka bir pipeline yazmaya karar verirseniz, ilgili modülü kullanmak için yalnızca bir kısa import ifadesi yazmanız gerekiyor.
+Şakayı bir kenara bırakırsak, artık kodunuz daha modüler ve bu süreçlerden birini çağıran başka bir pipeline yazmaya karar verirseniz, ilgili modülü kullanmak için yalnızca bir kısa `include` ifadesi yazmanız gerekiyor.
 Bu, kodu kopyala-yapıştır yapmaktan daha iyi çünkü daha sonra modülü geliştirmeye karar verirseniz, tüm pipeline'larınız bu iyileştirmeleri miras alacak.
 
 ### Sırada ne var?
@@ -461,7 +448,7 @@ Hazır olduğunuzda, yazılım bağımlılıklarını daha kullanışlı ve tekr
 <quiz>
 Nextflow'da modül nedir?
 - [ ] Bir yapılandırma dosyası
-- [x] Tek bir süreç tanımı içeren bağımsız bir dosya
+- [x] Süreç tanımları içerebilen bağımsız bir dosya
 - [ ] Bir iş akışı tanımı
 - [ ] Bir kanal operatörü
 
@@ -469,15 +456,7 @@ Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-sayhello-icin
 </quiz>
 
 <quiz>
-Modül dosyaları için önerilen adlandırma kuralı nedir?
-- [ ] `module_processName.nf`
-- [ ] `processName_module.nf`
-- [x] `processName.nf`
-- [ ] `mod_processName.nf`
-</quiz>
-
-<quiz>
-Modül dosyaları nerede saklanmalıdır?
+Modül dosyaları için genellikle kullanılan konvansiyon nedir?
 - [ ] İş akışıyla aynı dizinde
 - [ ] Bir `bin/` dizininde
 - [x] Bir `modules/` dizininde
@@ -487,14 +466,14 @@ Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-modull
 </quiz>
 
 <quiz>
-Bir modülü içe aktarmak için doğru sözdizimi nedir?
+Bir modül kullanmak için doğru sözdizimi nedir?
 
 - [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Daha fazla bilgi: [2.3. Bir import tanımı ekleyin](#23-is-akisi-blogundan-once-bir-import-tanimi-ekleyin)
+Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-is-akisi-blogundan-once-bir-include-tanimi-ekleyin)
 </quiz>
 
 <quiz>

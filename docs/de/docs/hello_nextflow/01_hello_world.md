@@ -2,17 +2,15 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2hHI-9vms?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=de" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Siehe [die gesamte Playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) auf dem Nextflow YouTube-Kanal.
+:fontawesome-brands-youtube:{ .youtube } Siehe [die gesamte Playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) auf dem Nextflow YouTube-Kanal.
 
 :green_book: Das Videotranskript ist [hier](./transcripts/01_hello_world.md) verfügbar.
 ///
--->
 
 In diesem ersten Teil des Hello Nextflow Trainingskurses steigen wir mit einem sehr einfachen, domänenunabhängigen Hello World Beispiel ein. Dieses bauen wir schrittweise aus, um die Verwendung grundlegender Nextflow-Logik und -Komponenten zu demonstrieren.
 
@@ -407,7 +405,7 @@ Wir müssen einen `publish:`-Block zum Workflow-Körper hinzufügen (dasselbe Co
 
 Füge in der Workflow-Skriptdatei `hello-world.nf` die folgenden Codezeilen hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-world.nf" linenums="17" hl_lines="7-8"
     workflow {
@@ -440,7 +438,7 @@ Jetzt müssen wir nur noch den `output:`-Block hinzufügen, in dem der Pfad des 
 
 Füge in der Workflow-Skriptdatei `hello-world.nf` die folgenden Codezeilen hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-world.nf" linenums="17" hl_lines="11-15"
     workflow {
@@ -543,7 +541,7 @@ Der einfachste Weg, das zu tun, ist, pro Ausgabe einen spezifischen Ausgabepfad 
 Auch hier ist das Modifizieren des Veröffentlichungsverhaltens für eine bestimmte Ausgabe wirklich einfach.
 Um einen benutzerdefinierten Speicherort festzulegen, bearbeite einfach den `path` entsprechend:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
     output {
@@ -602,8 +600,8 @@ Du siehst, dass das Ergebnis der vorherigen Ausführung immer noch da ist.
 </figure>
 
 Du kannst so viele Verschachtelungsebenen verwenden, wie du möchtest.
-Es ist auch möglich, den Prozessnamen oder andere Variablen zu verwenden, um die Verzeichnisse zu benennen, die zur Organisation der Ergebnisse verwendet werden, und es ist möglich, den Standardnamen des Ausgabeverzeichnisses der obersten Ebene zu ändern (der durch die spezielle Variable `outputDir` gesteuert wird).
-Wir werden diese Optionen in späteren Trainings behandeln.
+Es ist auch möglich, den Prozessnamen oder andere Variablen zu verwenden, um die Verzeichnisse zu benennen, die zur Organisation der Ergebnisse verwendet werden, und es ist möglich, den Standardnamen des Ausgabeverzeichnisses der obersten Ebene zu ändern (der durch das `-o`-CLI-Flag oder die Konfigurationsvariable `outputDir` gesteuert wird).
+Wir werden diese Optionen später im Training behandeln.
 
 ### 2.3. Den Veröffentlichungsmodus auf Kopieren setzen
 
@@ -621,7 +619,7 @@ Eine einfache Option ist, den Veröffentlichungsmodus für die Ausgaben, die dir
 Dieser Teil ist wirklich einfach.
 Füge einfach `mode 'copy'` zur relevanten Workflow-Output-Definition hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="4"
     output {
@@ -737,7 +735,7 @@ Zuerst passen wir die Prozessdefinition an, um eine Eingabe namens `greeting` zu
 
 Nimm im Prozessblock die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-world.nf" linenums="6" hl_lines="3-4"
     process sayHello {
@@ -766,7 +764,7 @@ Jetzt tauschen wir den ursprünglichen fest eincodierten Wert gegen den Wert der
 
 Nimm im Prozessblock die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
     script:
@@ -810,7 +808,7 @@ Im Prinzip können wir es überall hinschreiben; aber da wir es dem `sayHello()`
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
     // Eine Begrüßung ausgeben

@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Możliwość systematycznego testowania, czy każda część workflow działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.
+Możliwość systematycznego testowania, czy każda część Twojego workflow działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.
 
 Poświęćmy chwilę na omówienie, dlaczego testowanie jest tak ważne. Jeśli tworzysz workflow, jedną z pierwszych rzeczy, które zrobisz, jest pobranie danych testowych, o których wiesz, że są poprawne i powinny dać wynik. Dodajesz pierwszy proces do pipeline'u i podłączasz go do Swoich danych wejściowych, aby działał. Następnie, aby sprawdzić, czy wszystko działa, uruchamiasz go na danych testowych. Zakładając, że działa, przechodzisz do następnego procesu i ponownie uruchamiasz dane testowe. Powtarzasz ten proces, aż otrzymasz pipeline, z którego jesteś zadowolony.
 
@@ -20,18 +20,18 @@ Testowanie pozwala systematycznie sprawdzać, czy każda część pipeline'u dzi
 Możemy napisać wiele różnych rodzajów testów:
 
 1. **Testy na poziomie modułu**: Dla pojedynczych procesów
-2. **Testy na poziomie workflow**: Dla pojedynczego workflow
+2. **Testy na poziomie workflow'u**: Dla pojedynczego workflow'u
 3. **Testy na poziomie pipeline'u**: Dla pipeline'u jako całości
 4. **Testy wydajnościowe**: Dla szybkości i wydajności pipeline'u
 5. **Testy obciążeniowe**: Ocena wydajności pipeline'u w ekstremalnych warunkach w celu określenia jego granic
 
-Testowanie pojedynczych procesów jest analogiczne do testów jednostkowych w innych językach. Testowanie workflow lub całego pipeline'u jest analogiczne do tego, co nazywa się testami integracyjnymi w innych językach, gdzie testujemy interakcje komponentów.
+Testowanie pojedynczych procesów jest analogiczne do testów jednostkowych w innych językach. Testowanie workflow'u lub całego pipeline'u jest analogiczne do tego, co nazywa się testami integracyjnymi w innych językach, gdzie testujemy interakcje komponentów.
 
-[**nf-test**](https://www.nf-test.com/) to narzędzie, które pozwala pisać testy na poziomie modułu, workflow i pipeline'u. Krótko mówiąc, pozwala systematycznie sprawdzać, czy każda pojedyncza część pipeline'u działa zgodnie z oczekiwaniami, _w izolacji_.
+[**nf-test**](https://www.nf-test.com/) to narzędzie, które pozwala pisać testy na poziomie modułu, workflow'u i pipeline'u. Krótko mówiąc, pozwala systematycznie sprawdzać, czy każda pojedyncza część pipeline'u działa zgodnie z oczekiwaniami, _w izolacji_.
 
 ### Cele nauki
 
-W tym side queście nauczysz się używać nf-test do pisania testów na poziomie workflow dla pipeline'u, a także testów na poziomie modułu dla trzech procesów, które wywołuje.
+W tym side queście nauczysz się używać nf-test do pisania testów na poziomie workflow'u dla pipeline'u, a także testów na poziomie modułu dla trzech procesów, które wywołuje.
 
 Pod koniec tego side questa będziesz w stanie efektywnie używać następujących technik:
 
@@ -76,7 +76,7 @@ code .
 
 #### Przejrzyj materiały
 
-Znajdziesz główny plik workflow i plik CSV o nazwie `greetings.csv`, który zawiera dane wejściowe do pipeline'u.
+Znajdziesz główny plik workflow'u i plik CSV o nazwie `greetings.csv`, który zawiera dane wejściowe do pipeline'u.
 
 ```console title="Zawartość katalogu"
 .
@@ -86,7 +86,7 @@ Znajdziesz główny plik workflow i plik CSV o nazwie `greetings.csv`, który za
 
 Aby uzyskać szczegółowy opis plików, zobacz [rozgrzewkę z Hello Nextflow](../hello_nextflow/00_orientation.md).
 
-Workflow, który będziemy testować, jest podzbiorem workflow Hello zbudowanego w [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
+Workflow, który będziemy testować, jest podzbiorem workflow'u Hello zbudowanego w [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
 ??? example "Co robi workflow Hello Nextflow?"
 
@@ -103,12 +103,12 @@ Workflow, który będziemy testować, jest podzbiorem workflow Hello zbudowanego
 
     Wyniki są publikowane w katalogu o nazwie `results/`, a końcowe wyjście pipeline'u (po uruchomieniu z domyślnymi parametrami) to zwykły plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia z wielkimi literami.
 
-    W tym side queście używamy pośredniej formy workflow Hello, która zawiera tylko dwa pierwsze procesy.
+    W tym side queście używamy pośredniej formy workflow'u Hello, która zawiera tylko dwa pierwsze procesy.
 
 Podzbiór, z którym będziemy pracować, składa się z dwóch procesów: `sayHello` i `convertToUpper`.
-Pełny kod workflow możesz zobaczyć poniżej.
+Pełny kod workflow'u możesz zobaczyć poniżej.
 
-??? example "Kod workflow"
+??? example "Kod workflow'u"
 
     ```groovy title="main.nf"
     /*
@@ -175,7 +175,7 @@ Uruchommy workflow, aby upewnić się, że działa zgodnie z oczekiwaniami.
 nextflow run main.nf
 ```
 
-```console title="Wynik uruchomienia workflow"
+```console title="Wynik uruchomienia workflow'u"
  N E X T F L O W   ~  version 24.10.2
 
 Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
@@ -193,13 +193,13 @@ Dobre pytanie!
 
 Rozłóżmy to na czynniki pierwsze.
 
-Uruchomiłeś workflow z domyślnymi parametrami, potwierdziłeś, że działa i jesteś zadowolony z wyników. To jest istota testowania. Jeśli pracowałeś przez kurs szkoleniowy Hello Nextflow, zauważysz, że zawsze zaczynaliśmy każdą sekcję od uruchomienia workflow, którego używaliśmy jako punktu wyjścia, aby potwierdzić, że wszystko jest poprawnie skonfigurowane.
+Uruchomiłeś workflow z domyślnymi parametrami, potwierdziłeś, że działa i jesteś zadowolony z wyników. To jest istota testowania. Jeśli pracowałeś przez kurs szkoleniowy Hello Nextflow, zauważysz, że zawsze zaczynaliśmy każdą sekcję od uruchomienia workflow'u, którego używaliśmy jako punktu wyjścia, aby potwierdzić, że wszystko jest poprawnie skonfigurowane.
 
 Testowanie oprogramowania zasadniczo wykonuje ten proces za nas.
 
 #### Przejrzyj zadanie
 
-Twoim wyzwaniem jest dodanie standardowych testów do tego workflow za pomocą nf-test, aby ułatwić weryfikację, że każda część nadal działa zgodnie z oczekiwaniami w przypadku wprowadzenia jakichkolwiek dalszych zmian.
+Twoim wyzwaniem jest dodanie standardowych testów do tego workflow'u za pomocą nf-test, aby ułatwić weryfikację, że każda część nadal działa zgodnie z oczekiwaniami w przypadku wprowadzenia jakichkolwiek dalszych zmian.
 
 #### Lista kontrolna gotowości
 
@@ -328,7 +328,7 @@ Uruchommy test, aby zobaczyć, co się stanie.
 nf-test test tests/main.nf.test
 ```
 
-```console title="nf-test pipeline fail"
+```console title="nf-test pipeline nie powiódł się"
 > nf-test test tests/main.nf.test
 
 🚀 nf-test 0.9.3
@@ -412,7 +412,7 @@ when {
 
 Uruchommy test ponownie, aby zobaczyć, czy działa.
 
-```bash title="nf-test pipeline pass"
+```bash title="nf-test pipeline przechodzi"
 nf-test test tests/main.nf.test
 ```
 
@@ -513,7 +513,7 @@ Nazwa testu teraz lepiej odzwierciedla to, co faktycznie weryfikujemy - nie tylk
 
 Uruchommy test ponownie, aby zobaczyć, czy działa.
 
-```bash title="nf-test pipeline pass"
+```bash title="nf-test pipeline przechodzi"
 nf-test test tests/main.nf.test
 ```
 
@@ -596,7 +596,7 @@ Dodajmy asercję do naszego testu, aby sprawdzić, czy plik wyjściowy został u
 
 Uruchom test ponownie, aby zobaczyć, czy działa.
 
-```bash title="nf-test pipeline pass"
+```bash title="nf-test pipeline przechodzi"
 nf-test test tests/main.nf.test
 ```
 
@@ -695,7 +695,7 @@ Jak poprzednio, zaczynamy od szczegółów testu, po których następują bloki 
 
 Uruchommy test, aby zobaczyć, czy działa.
 
-```bash title="nf-test pipeline pass"
+```bash title="nf-test pipeline przechodzi"
 nf-test test tests/main.sayhello.nf.test
 ```
 
@@ -781,7 +781,7 @@ Test nie powiódł się, ponieważ proces `sayHello` deklaruje 1 wejście, ale z
 
 Uruchommy test ponownie, aby zobaczyć, czy działa.
 
-```console title="nf-test pipeline pass"
+```console title="nf-test pipeline przechodzi"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -839,7 +839,7 @@ Jeśli w trakcie przyszłego rozwoju coś w kodzie się zmieni, co spowoduje, ż
 
 Możemy uruchomić test ponownie i zobaczyć, że test powinien przejść:
 
-```console title="nf-test process pass with snapshot"
+```console title="nf-test proces przechodzi z migawką"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -928,11 +928,11 @@ To podejście:
 
 Uruchommy test, aby zobaczyć, czy działa.
 
-```bash title="nf-test pipeline pass"
+```bash title="nf-test pipeline przechodzi"
 nf-test test tests/main.sayhello.nf.test
 ```
 
-```console title="Test procesu nie powiódł się"
+```console title="Test procesu przechodzi"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -1047,11 +1047,11 @@ Na razie ponownie użyjmy istniejącego pliku data/greetings.csv, używając prz
 
 I uruchom test!
 
-```bash title="nf-test pipeline pass"
+```bash title="nf-test pipeline przechodzi"
 nf-test test tests/main.converttoupper.nf.test
 ```
 
-```console title="nf-test process convertToUpper pass"
+```console title="nf-test proces convertToUpper przechodzi"
 > nf-test test tests/main.converttoupper.nf.test
 
 🚀 nf-test 0.9.3
@@ -1074,11 +1074,11 @@ SUCCESS: Executed 1 tests in 1.764s
 
 Zauważ, że utworzyliśmy plik migawki dla procesu `convertToUpper` w `tests/main.converttoupper.nf.test.snap`. Jeśli ponownie uruchomimy test, powinniśmy zobaczyć, że nf-test ponownie przechodzi.
 
-```bash title="nf-test process convertToUpper pass"
+```bash title="nf-test proces convertToUpper przechodzi"
 nf-test test tests/main.converttoupper.nf.test
 ```
 
-```console title="nf-test process convertToUpper pass"
+```console title="nf-test proces convertToUpper przechodzi"
 > nf-test test tests/main.converttoupper.nf.test
 
 🚀 nf-test 0.9.3
@@ -1120,7 +1120,7 @@ nf-test test .
 
 Zauważ, że używamy tylko `.`, aby uruchomić wszystko z naszego bieżącego katalogu. To będzie zawierać każdy test!
 
-```console title="nf-test repo pass"
+```console title="nf-test repozytorium przechodzi"
 > nf-test test .
 
 🚀 nf-test 0.9.3

@@ -1,107 +1,85 @@
-# Partie 4 : Hello Modules - Transcription
+# Partie 4 : Hello Modules - Transcription vidéo
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xxp_menS0E8?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Notes importantes"
 
-    Cette page présente uniquement la transcription. Pour des instructions complètes étape par étape, retournez au [matériel de formation](../04_hello_modules.md).
+    Cette page présente uniquement la transcription. Pour les instructions complètes étape par étape, retournez au [matériel de cours](../04_hello_modules.md).
 
     Les numéros de section affichés dans la transcription sont fournis à titre indicatif uniquement et peuvent ne pas inclure tous les numéros de section du matériel.
 
 ## Bienvenue
 
-Bonjour, bienvenue dans la Partie Quatre de la formation Hello Nextflow.
+Bonjour et bienvenue dans la partie quatre de Hello Nextflow. Cette section est entièrement consacrée aux modules, et c'est une section assez courte du cours. Nous n'allons pas vraiment écrire beaucoup de code, il s'agit plutôt de la façon dont nous organisons le code dans notre pipeline.
 
-Ce chapitre s'intitule Hello Modules, et nous allons parler de la façon de modulariser le code Nextflow. Ce que nous allons faire, c'est prendre notre script de workflow unique et le diviser en fichiers séparés.
+Jusqu'à présent, nous avons tout mis dans un seul fichier, ce qui est acceptable, et c'est d'ailleurs comme ça que nous construisions les pipelines Nextflow autrefois.
 
-Cela rend le code plus facile à naviguer et à maintenir au fur et à mesure que votre workflow grandit, et permet également de partager des modules entre pipelines, de sorte que si vous avez plusieurs pipelines utilisant le même outil, vous n'avez besoin d'écrire ce process qu'une seule fois.
+Mais à mesure que ce pipeline grandit, le script devient de plus en plus long et de plus en plus difficile à parcourir, à maintenir, et cela signifie également que nous ne pouvons pas vraiment partager le code.
 
-Un exemple classique de ceci est le dépôt de modules nf-core, qui contient des milliers d'outils différents dans des modules prêts à l'emploi, que vous pouvez installer et utiliser dans votre workflow.
+Les modules Nextflow nous permettent d'extraire les processus de ce script principal puis de les importer. Cela signifie que le code est plus facile à parcourir et cela signifie également que nous pouvons partager ce code de module entre différents pipelines.
 
-Nextflow peut également fonctionner avec des sub workflows, qui sont comme des modules, mais ils ont plusieurs processes. Cela dépasse le cadre de cette formation, mais cela fonctionne essentiellement de la même manière.
+Ce petit diagramme sur la page principale de la documentation illustre bien le concept. Au lieu d'un énorme script, nous allons inclure ces fichiers de modules séparés, à partir de différents scripts de modules, et tout va être intégré dans le workflow, mais ça va toujours s'exécuter exactement de la même manière.
 
-D'accord. Jetons un coup d'œil.
+Alors entrons dans GitHub Codespaces et jetons un petit coup d'œil. Comme avant, j'ai un peu nettoyé mon espace de travail ici. J'ai supprimé les anciens répertoires Nextflow et le répertoire de travail et ainsi de suite. Mais ce n'est pas grave si vous avez toujours ces fichiers.
 
-Comme d'habitude, commencez par aller sur training.nextflow.io.
-
-Allez dans « Hello Nextflow » dans la barre latérale, et nous faisons la partie quatre : « Hello Modules ».
-
-Je vais maintenant passer à mon environnement GitHub Code Spaces et examiner le fichier « hello-modules ».
-
-Comme précédemment, nous commençons à partir du point final du chapitre précédent, donc ce script devrait vous sembler familier. Nous avons nos trois processes, say hello, convert to upper et collect greetings, et dans un workflow simple, qui exécute ces trois commandes et émet un message à la fin. Nous avons deux paramètres appelés greeting et batch, qui spécifie le nom utilisé pour le fichier de sortie collecté à la fin.
-
-## 0. Échauffement : Exécuter hello-modules.nf
-
-Nous pouvons vérifier que ce workflow fonctionne toujours comme prévu en faisant nextflow run hello, modules.
-
-Parfait. Il a exécuté trois tâches avec chacun de ces processes, une tâche collectée, et il nous a dit qu'il y a trois salutations dans ce lot. Si nous allons dans results, nous avons nos différents fichiers de sortie ici, y compris le test collecté, la sortie batch.
+Je vais commencer à travailler dans le fichier hello modules, qui est essentiellement là où nous l'avons laissé à la fin d'un chapitre précédent. Nous avons nos trois processus ici. Nous avons quelques paramètres, le bloc workflow, où nous exécutons ces trois processus et les assemblons avec des canaux. Ensuite, nous publions les canaux de sortie et nous avons le bloc output indiquant comment publier ces fichiers.
 
 ## 1. Créer un répertoire pour stocker les modules
 
-Bien. Faisons un peu de modularisation.
-
-C'est généralement une bonne idée de mettre les modules dans un sous-répertoire de votre dépôt de pipeline, juste pour garder les choses organisées. Vous pouvez appeler cela comme vous voulez, mais par convention, nous l'appelons habituellement modules.
-
-Alors allons-y, ouvrons un terminal et faisons make the modules. Vous pouvez le voir apparaître dans la barre latérale et VS Code ici.
+Maintenant, comme je l'ai dit, nous n'allons pas vraiment écrire ou modifier beaucoup de code. Nous allons simplement déplacer le code que nous avons déjà. Les fichiers de modules Nextflow contiennent généralement un seul processus, et par convention, nous les conservons normalement dans un répertoire appelé modules. Mais vous pouvez l'appeler comme vous voulez. Mais je vais conserver un répertoire modules dans mon dépôt ici, puis je vais créer un fichier pour chaque processus. Donc je vais dire nouveau fichier, sayHello.nf.
 
 ## 2. Créer un module pour sayHello()
 
-Je vais ensuite créer un nouveau fichier pour mon premier module. Vous pouvez faire « touch » ou « code » ou vous pouvez le faire dans la barre latérale, cela n'a vraiment pas d'importance. Donc je vais faire code modules et je vais le nommer d'après le process. Donc sayHello.nf . NF est une extension de fichier traditionnelle pour les fichiers Nextflow.
+Maintenant, je vais prendre mon processus et je vais simplement sélectionner ce code, le couper du fichier principal hello modules et le coller ici.
 
-Je vais sauvegarder ici et nous pouvons voir notre nouveau fichier de module apparaître.
+Évidemment, cela ne fait rien par lui-même. Notre script principal a toujours besoin de ce processus, donc nous devons le réintégrer d'une manière ou d'une autre. Et nous faisons cela avec l'instruction include.
 
-## 2.2. Déplacer le code du process sayHello vers le fichier module
+Donc je tape include et des accolades, puis je prends le nom du processus. Et je dis from, puis je donne un chemin de fichier relatif. Donc ça dit, commence par ./ parce que c'est relatif à l'endroit où ce script est enregistré. Donc c'est modules sayHello.nf.
 
-Bien, ensuite je vais prendre le code du module depuis le workflow. Je vais aussi prendre le hash bang ici et le copier en premier pour qu'il soit clairement un fichier Nextflow. Et puis je vais prendre ce process et je vais le couper. Donc je vais le retirer de mon script de workflow principal et je vais le coller dans ce nouveau module.
+Remarquez que l'extension VS Code est assez utile ici. Elle nous indique si elle peut trouver ce fichier et si elle peut trouver un processus, que je nomme. Si je mets délibérément une faute de frappe ici, elle me donne une erreur immédiatement et elle me dira qu'elle ne peut pas trouver ce processus que j'essaie d'importer. Donc gardez simplement un œil sur les erreurs que vous trouvez.
 
-C'est tout le contenu que ce fichier module va contenir. Juste un seul process, pas de workflow, pas de logique, juste un process seul.
+Et c'est vraiment tout. Nous avons toujours notre processus ici. Aucune modification n'est nécessaire en bas. Le processus a le même nom et il est exécuté exactement de la même manière. C'est juste que le code réel du processus est maintenant dans un fichier séparé.
 
-Je peux maintenant fermer ce fichier.
+Nous pouvons exécuter à nouveau le workflow Nextflow, il va fonctionner exactement de la même manière. Et c'est essentiellement le reste de ce chapitre du cours : simplement déplacer ces trois processus dans leurs propres fichiers.
 
-## 2.3. Ajouter une déclaration d'import avant le bloc workflow
+Faisons cela maintenant. Je vais rapidement créer un nouveau fichier de module pour le deuxième processus : convertToUpper.nf. Je vais couper ce code, le coller là. Et ensuite je vais inclure celui-là. C'est bon.
 
-Maintenant mon workflow manque ce premier process, donc nous devons le ramener en l'important. La syntaxe pour cela est très similaire à d'autres langages de programmation, donc elle peut sembler familière. Nous faisons include accolades, le nom du process, say hello, puis from le chemin du fichier modules, say hello, nf. Fantastique.
+Et puis je vais créer un nouveau fichier pour collectGreetings.nf. Je coupe ça.
 
-Quelques astuces ici. L'extension VS Code est intelligente à ce sujet. Elle reconnaît ce chemin de fichier et vous pouvez passer la souris dessus et faire follow link. Ou je suis sur Mac, je peux faire option click et cela ouvre ce fichier. Donc nous pouvons rapidement y accéder.
+Beaucoup de couper, couper et copier et coller.
 
-Ce nom de process est maintenant utilisé par le workflow en bas ici, et nous pouvons faire la même chose ici. Il nous montre un peu d'information sur ce process, et encore une fois, je peux maintenir option, cliquer dessus, et cela l'ouvrira dans l'éditeur.
+Et maintenant notre script de workflow principal a soudainement l'air beaucoup, beaucoup plus court, beaucoup plus accessible et beaucoup plus facile à lire.
 
-C'est donc un moyen très rapide lorsque vous avez beaucoup de fichiers pour vos différents processes de naviguer rapidement dans votre base de code dans VS Code.
+Et vous pouvez voir comment le projet commence maintenant à se construire avec nos différents fichiers. Nous pouvons plonger dans les détails aux endroits que nous voulons. Naviguer pour trouver des étapes spécifiques dans le pipeline beaucoup plus facilement, et obtenir rapidement un aperçu de ce que fait le pipeline.
 
-D'accord. C'est essentiellement tout pour ce chapitre. Maintenant nous faisons juste la même chose à nouveau pour les autres processes.
+## Naviguer dans les modules avec VS Code
 
-## 3. Modulariser le process convertToUpper()
+Maintenant, bien sûr, l'inconvénient de faire cela est que si vous avez un gros pipeline, vous aurez beaucoup de fichiers de modules et ils pourraient être organisés dans plusieurs sous-répertoires ou toutes sortes de choses. Maintenant, encore une fois, un petit conseil ici. L'extension VS Code est plutôt douée pour naviguer dans votre base de code et vous renseigner sur le code qui s'y trouve.
 
-Donc créons un nouveau fichier ici. Appelons-le Convert to upper nf. Encore une fois, copions le hash bang. Et puis coupons le process.
+Vous pouvez voir que VS Code comprend ce qu'est ce processus et me donne un petit aperçu quand je survole, donc je peux voir sans avoir à aller chercher le code source, quelles sont les entrées et les sorties, ce qui est généralement la chose la plus importante quand je l'utilise dans un workflow.
 
-Copions le nom du process là, include une nouvelle instruction include avec le nouveau nom de process.
+Et aussi si je maintiens la touche command, je suis sur un Mac, et que je clique sur le nom du processus, ça ouvre le fichier directement tout de suite. Le récupère. Donc je peux simplement y aller directement sans même penser aux chemins de fichiers réels. Et ça fonctionne n'importe où, je peux faire ça aussi, où que les processus soient appelés. Donc ça rend vraiment rapide.
 
-## 4. Modulariser le process collectGreetings()
+## 4.4. Exécuter le workflow
 
-Et puis faisons la même chose pour le troisième process. Nouveau fichier, connect. Greetings,
+D'accord, vérifions simplement que le pipeline s'exécute toujours comme nous nous y attendons. Donc j'ouvre le terminal. Faisons "nextflow run hello modules", et voyons s'il s'exécute sans problème.
 
-faisons le hash bang. Coupons le process, collons le process, et faisons une nouvelle instruction include.
+J'espère que tout l'intérêt de cela est que le pipeline est essentiellement inchangé, donc vous ne devriez vraiment pas voir de changements par rapport à quand nous l'avons exécuté avant. La sortie ici a exactement la même apparence, et vous pouvez voir notre répertoire results avec tous les mêmes fichiers, donc c'est génial. Pas de changement, c'est bien.
 
-Maintenant vous pouvez voir ici j'ai un soulignement d'erreur ici disant invalid include source. Et c'est en fait une véritable erreur que j'ai faite parce que j'allais un peu trop vite. Si vous regardez attentivement, vous pouvez voir que j'ai manqué le T dans convert to upper
+## Une note sur nf-core/modules
 
-Donc VS Code m'a très utilement dit que j'avais fait une erreur là. Si je corrige ce nom de fichier, l'erreur disparaît. C'est un bon exemple de pourquoi la vérification des erreurs dans VS Code est si utile pour écrire du code Nextflow. Sinon je ne l'aurais pas remarqué et je ne l'aurais découvert que bien plus tard lorsque j'aurais essayé d'exécuter le workflow.
+Juste avant de terminer, je veux rapidement aborder la puissance de la collaboration en ce qui concerne les modules. Ces fichiers sont dans mon dépôt, donc il n'est pas évident tout de suite comment nous pourrions collaborer dessus. Et il existe de nombreuses façons différentes de le faire, mais l'exemple probablement le plus grand et le plus connu est nf-core.
 
-Notre script de pipeline principal est maintenant beaucoup plus simple. Il n'a aucun process dedans, nous avons juste trois instructions include et notre workflow. Nous n'avons changé aucune logique du workflow. Nous n'avons changé aucun code de process, donc j'espère qu'il devrait fonctionner exactement de la même manière.
+Si je vais sur le site web nf-core, je vais dans ressources, et modules. Vous pouvez voir que nf-core a une énorme bibliothèque de modules, presque juste en dessous de 1 700 modules quand je consulte cela. Et donc je peux taper le nom de n'importe lequel de mes outils préférés, aller voir si quelqu'un d'autre a déjà écrit un module pour cela, et voir ce processus de module pré-écrit ici avec toutes les entrées, les sorties, les conteneurs logiciels, toutes ces informations, et vous pouvez voir sur le côté ici, combien de pipelines nf-core différents utilisent tous ce processus partagé unique.
 
-## 4.4. Exécuter le workflow pour vérifier qu'il fait la même chose qu'avant
+C'est un exemple un peu extrême, mais vous pouvez voir que c'est vraiment réutiliser ce code. Et si je clique pour aller à la source GitHub de cela, c'est exactement la même chose que ce que nous faisons. C'est juste un gros processus dans un fichier.
 
-Vérifions. Je vais ouvrir un terminal et je vais exécuter exactement la même commande qu'avant.
+Maintenant du côté nf-core, nous faisons quelques astuces pour pouvoir partager ces fichiers et les amener dans différents dépôts. Et si vous voulez en savoir plus à ce sujet, allez consulter le cours que nous avons sur l'utilisation et la construction avec nf-core spécifiquement. Mais je voulais juste vous donner une idée de à quel point ce concept de réutilisation de code peut être puissant.
 
-Effectivement, il a exécuté nos processes, say hello, convert to upper collect greetings, et nous a donné trois salutations à nouveau.
+## Conclusion
 
-Donc nous avons déplacé notre code, mais nous n'avons rien changé à la façon dont le workflow s'exécute et il est complètement inchangé. La seule différence est que nous avons maintenant un code plus propre, plus facile à maintenir et plus facile à partager avec les autres.
-
-Et c'est tout. C'était un chapitre court. C'est un concept simple, mais il est très puissant et essentiel à la façon dont nous écrivons des workflows Nextflow plus complexes. Il est donc important que vous le compreniez et que vous preniez l'habitude de l'utiliser.
-
-Dans le chapitre suivant, nous allons changer un peu de rythme et arrêter de penser autant à la syntaxe d'écriture du code Nextflow, et réfléchir un peu à la façon dont nous utilisons les logiciels dans les processes eux-mêmes. Rejoignez-nous dans la partie cinq pour Hello Containers.
-
-[Transcription vidéo suivante :octicons-arrow-right-24:](05_hello_containers.md)
+Bon, c'est tout pour les modules. Je vous avais dit que c'était une courte section du cours. Consultez le quiz, assurez-vous de bien comprendre et assurez-vous que tout fonctionne toujours correctement. Et je vous retrouve dans la prochaine vidéo, qui sera entièrement consacrée aux conteneurs logiciels. Merci beaucoup.

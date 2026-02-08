@@ -4,7 +4,7 @@
 
 이 섹션에서는 _workflow 코드 자체를 한 줄도 변경하지 않고_ pipeline의 동작을 사용자 정의하고, 다양한 환경에 적응시키고, 리소스 사용을 최적화하기 위해 Nextflow pipeline의 구성을 관리하는 방법을 살펴봅니다.
 
-이를 수행하는 여러 가지 방법이 있으며, 조합하여 사용할 수 있고 [여기](https://www.nextflow.io/docs/latest/config.html)에 설명된 우선순위에 따라 해석됩니다.
+이를 수행하는 여러 가지 방법이 있으며, 조합하여 사용할 수 있고 [Configuration](https://nextflow.io/docs/latest/config.html) 문서에 설명된 우선순위에 따라 해석됩니다.
 
 과정의 이 부분에서는 Part 2의 컨테이너 섹션에서 이미 접한 `nextflow.config` 파일이라는 가장 간단하고 일반적인 구성 파일 메커니즘을 보여드리겠습니다.
 
@@ -275,7 +275,7 @@ nextflow run ../3-main.nf
 하위 디렉토리 접근 방식은 실험에 좋지만, 약간의 설정이 필요하고 그에 따라 경로를 조정해야 합니다.
 특정 값 세트로 pipeline을 실행하거나 다른 사람이 최소한의 노력으로 할 수 있도록 하려는 경우 더 간단한 접근 방식이 있습니다.
 
-Nextflow를 사용하면 YAML 또는 JSON 형식의 매개변수 파일을 통해 매개변수를 지정할 수 있어 기본값의 대체 세트와 실행별 매개변수 값을 관리하고 배포하기가 매우 편리합니다.
+Nextflow를 사용하면 YAML 또는 JSON 형식의 [매개변수 파일](https://nextflow.io/docs/latest/config.html#parameter-file)을 통해 매개변수를 지정할 수 있어 기본값의 대체 세트와 실행별 매개변수 값을 관리하고 배포하기가 매우 편리합니다.
 
 #### 1.3.1. 예제 매개변수 파일 검토
 
@@ -312,10 +312,10 @@ nextflow run 3-main.nf -params-file test-params.yaml
     Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [2b/9a7d1e] sayHello (2)       | 3 of 3 ✔
+    [5c/8f3b2a] convertToUpper (3) | 3 of 3 ✔
+    [a3/29d8fb] collectGreetings   | 1 of 1 ✔
+    [b7/83ef12] cowpy              | 1 of 1 ✔
     ```
 
 최종 출력 파일에는 인사말을 말하는 stegosaurus 캐릭터가 포함되어야 합니다.
@@ -350,7 +350,7 @@ nextflow run 3-main.nf -params-file test-params.yaml
 또한 협력자에게 매개변수 세트를 배포하거나 예를 들어 출판물의 보충 정보로 사용하기가 더 쉬워집니다.
 이렇게 하면 다른 사람들이 작업을 더 재현 가능하게 만들 수 있습니다.
 
-### 요약
+### 핵심 정리
 
 workflow 입력 관리를 위한 주요 구성 옵션을 활용하는 방법을 알게 되었습니다.
 
@@ -374,7 +374,8 @@ workflow 출력이 게시되는 위치와 방법을 관리하는 방법을 배�
 
 지금까지 실행한 workflow의 각 버전은 출력 정의에 하드코딩된 다른 하위 디렉토리에 출력을 게시했습니다.
 
-사용자가 구성할 수 있는 매개변수를 사용하도록 변경해 보겠습니다.
+Part 1에서 `-output-dir` CLI 플래그를 사용하여 해당 하위 디렉토리의 위치를 변경했지만, 이것은 여전히 정적 문자열일 뿐입니다.
+대신 구성 파일에서 이를 구성하여 더 복잡한 동적 경로를 정의할 수 있습니다.
 이를 위해 완전히 새로운 매개변수를 만들 수도 있지만, `batch` 매개변수가 바로 있으니 사용해 보겠습니다.
 
 #### 2.1.1. 구성 파일에서 `outputDir` 값 설정
@@ -399,7 +400,7 @@ Nextflow가 출력을 게시하는 데 사용하는 경로는 `outputDir` 옵션
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 === "변경 전"
@@ -415,10 +416,10 @@ Nextflow가 출력을 게시하는 데 사용하는 경로는 `outputDir` 옵션
     }
     ```
 
-이것은 내장 기본 경로인 `results/`를 `results/`에 `batch` 매개변수의 값을 하위 디렉토리로 더한 것으로 대체합니다.
-원한다면 `results` 부분도 변경할 수 있습니다.
+이것은 내장 기본 경로인 `results/`를 `results_config/`에 `batch` 매개변수의 값을 하위 디렉토리로 더한 것으로 대체합니다.
 
-일시적인 변경의 경우 명령의 `-output-dir` 매개변수를 사용하여 명령줄에서 이 옵션을 설정할 수 있습니다(하지만 그러면 `batch` 매개변수 값을 사용할 수 없습니다).
+일시적인 변경의 경우 명령의 `-output-dir` 매개변수(`-o` 약칭)를 사용하여 명령줄에서 이 옵션을 설정할 수 있습니다(하지만 그러면 `batch` 매개변수 값을 사용할 수 없습니다).
+CLI 플래그를 사용하면 구성에 설정된 `outputDir`를 덮어씁니다.
 
 #### 2.1.2. 하드코딩된 경로의 반복 부분 제거
 
@@ -495,21 +496,21 @@ nextflow run 3-main.nf --batch outdir
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `3-main.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
+    Launching `3-main.nf` [amazing_church] DSL2 - revision: 6e18cd130e
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [9c/6a03ea] sayHello (2)       [100%] 3 of 3 ✔
+    [11/9e58a6] convertToUpper (3) [100%] 3 of 3 ✔
+    [c8/1977e5] collectGreetings   [100%] 1 of 1 ✔
+    [38/f01eda] cowpy              [100%] 1 of 1 ✔
     ```
 
-이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 `results/outdir/` 아래에서 찾을 수 있습니다.
+이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 `results_config/outdir/` 아래에서 찾을 수 있습니다.
 
 ??? abstract "디렉토리 내용"
 
     ```console
-    results/outdir/
+    results_config/outdir
     ├── cowpy-COLLECTED-outdir-output.txt
     ├── intermediates
     │   ├── Bonjour-output.txt
@@ -530,7 +531,7 @@ nextflow run 3-main.nf --batch outdir
 
 #### 2.2.1. 출력 경로를 process 이름 참조로 대체
 
-출력 경로 선언에서 process 이름을 `<task>.name`으로 참조하기만 하면 됩니다.
+출력 경로 선언에서 process 이름을 `<process>.name`으로 참조하기만 하면 됩니다.
 
 workflow 파일에서 다음 변경을 수행하세요:
 
@@ -606,18 +607,18 @@ nextflow run 3-main.nf --batch pnames
     Launching `3-main.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [4a/c2e6b8] sayHello (2)       | 3 of 3 ✔
+    [6f/d4a172] convertToUpper (3) | 3 of 3 ✔
+    [e8/4f19d7] collectGreetings   | 1 of 1 ✔
+    [f2/a85c36] cowpy              | 1 of 1 ✔
     ```
 
-이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 `results/pnames/` 아래에서 찾을 수 있으며 process별로 그룹화됩니다.
+이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 `results_config/pnames/` 아래에서 찾을 수 있으며 process별로 그룹화됩니다.
 
 ??? abstract "디렉토리 내용"
 
     ```console
-    results/pnames/
+    results_config/pnames/
     ├── collectGreetings
     │   ├── COLLECTED-pnames-output.txt
     │   └── pnames-report.txt
@@ -633,8 +634,10 @@ nextflow run 3-main.nf --batch pnames
         └── Holà-output.txt
     ```
 
-여기서 `intermediates`와 최상위 수준의 최종 출력 간의 구분을 지웠습니다.
-물론 이러한 접근 방식을 혼합하여 사용할 수 있습니다. 예를 들어 첫 번째 출력의 경로를 `intermediates/${sayHello.name}`으로 설정할 수 있습니다.
+!!! note
+
+    여기서 `intermediates`와 최상위 수준의 최종 출력 간의 구분을 지웠습니다.
+    물론 이러한 접근 방식을 혼합하여 사용할 수 있습니다. 예를 들어 첫 번째 출력의 경로를 `#!groovy "${params.batch}/intermediates/${sayHello.name}"`으로 설정할 수 있습니다.
 
 ### 2.3. Workflow 수준에서 게시 모드 설정
 
@@ -650,7 +653,7 @@ nextflow run 3-main.nf --batch pnames
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     workflow.output.mode = 'copy'
     ```
 
@@ -660,7 +663,7 @@ nextflow run 3-main.nf --batch pnames
     /*
     * Output settings
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "results_config/${params.batch}"
     ```
 
 `outputDir` 옵션과 마찬가지로 구성 파일에서 `workflow.output.mode`에 값을 부여하면 workflow 파일에 설정된 것을 재정의하기에 충분하지만, 어쨌든 불필요한 코드를 제거해 보겠습니다.
@@ -736,19 +739,19 @@ nextflow run 3-main.nf --batch outmode
     Launching `3-main.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [5b/d91e3c] sayHello (2)       | 3 of 3 ✔
+    [8a/f6c241] convertToUpper (3) | 3 of 3 ✔
+    [89/cd3a48] collectGreetings   | 1 of 1 ✔
+    [9e/71fb52] cowpy              | 1 of 1 ✔
     ```
 
-이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 `results/outmode/` 아래에서 찾을 수 있습니다.
+이것은 여전히 이전과 동일한 출력을 생성하지만, 이번에는 출력을 `results_config/outmode/` 아래에서 찾을 수 있습니다.
 여전히 모두 symlink가 아닌 적절한 복사본입니다.
 
 ??? abstract "디렉토리 내용"
 
     ```console
-    results/outmode/
+    results_config/outmode/
     ├── collectGreetings
     │   ├── COLLECTED-outmode-output.txt
     │   └── outmode-report.txt
@@ -768,7 +771,7 @@ nextflow run 3-main.nf --batch outmode
 
 이 방식으로 사용자 정의할 수 있는 다른 많은 옵션이 있지만, 이를 통해 옵션의 범위와 선호도에 맞게 효과적으로 활용하는 방법에 대한 감각을 얻을 수 있기를 바랍니다.
 
-### 요약
+### 핵심 정리
 
 출력이 게시되는 디렉토리의 이름 지정 및 구조와 workflow 출력 게시 모드를 제어하는 방법을 알게 되었습니다.
 
@@ -799,7 +802,7 @@ nextflow run 3-main.nf --batch outmode
     보안상의 이유로 Docker가 허용되지 않는 HPC 클러스터로 pipeline을 이동하고 있습니다.
     클러스터는 Singularity와 Conda를 지원하므로 그에 맞게 구성을 전환해야 합니다.
 
-Nextflow는 HPC에서 더 널리 사용되는 Singularity와 Conda와 같은 소프트웨어 패키지 관리자를 포함한 여러 컨테이너 기술을 지원합니다.
+앞서 언급했듯이 Nextflow는 HPC에서 더 널리 사용되는 Singularity와 Conda와 같은 소프트웨어 패키지 관리자를 포함한 여러 컨테이너 기술을 지원합니다.
 
 Docker 대신 Conda를 사용하도록 구성 파일을 변경할 수 있습니다.
 이를 위해 `docker.enabled`의 값을 `false`로 전환하고 Conda 사용을 활성화하는 지시문을 추가합니다:
@@ -876,7 +879,7 @@ nextflow run 3-main.nf --batch conda
     [c5/af5f88] cowpy              | 1 of 1 ✔
     ```
 
-이것은 문제없이 작동하고 이전과 동일한 출력을 `results/conda` 아래에 생성해야 합니다.
+이것은 문제없이 작동하고 이전과 동일한 출력을 `results_config/conda` 아래에 생성해야 합니다.
 
 백그라운드에서 Nextflow가 Conda 패키지를 검색하고 환경을 생성했으며, 이는 일반적으로 약간의 작업이 필요합니다. 그래서 직접 수행할 필요가 없어서 좋습니다!
 
@@ -897,7 +900,7 @@ nextflow run 3-main.nf --batch conda
 
     그리고 앞서 언급했듯이 Nextflow는 여러 다른 소프트웨어 패키징 및 컨테이너 기술을 지원하므로 이 두 가지에만 제한되지 않습니다.
 
-### 요약
+### 핵심 정리
 
 각 process가 사용해야 하는 소프트웨어 패키지를 구성하고 기술 간에 전환하는 방법을 알게 되었습니다.
 
@@ -921,11 +924,11 @@ Nextflow가 시작되면 사용 가능한 CPU와 메모리를 확인합니다.
 
 로컬 executor는 편리하고 효율적이지만 단일 머신으로 제한됩니다. 매우 큰 워크로드의 경우 로컬 머신이 병목 현상이 되는 것을 발견할 수 있습니다. 사용 가능한 것보다 더 많은 리소스가 필요한 단일 작업이 있거나, 단일 머신이 실행하기를 기다리는 데 너무 오래 걸리는 작업이 너무 많기 때문입니다.
 
-Nextflow는 HPC 스케줄러(Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor 등)와 클라우드 실행 백엔드(AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes 등)를 포함한 [많은 다른 실행 백엔드](https://www.nextflow.io/docs/latest/executor.html)를 지원합니다.
+Nextflow는 HPC 스케줄러(Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor 등)와 클라우드 실행 백엔드(AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes 등)를 포함한 [많은 다른 실행 백엔드](https://nextflow.io/docs/latest/executor.html)를 지원합니다.
 
 ### 4.1. 다른 백엔드 대상으로 지정
 
-executor의 선택은 `executor`라는 process 지시문으로 설정됩니다.
+**executor**의 선택은 `executor`라는 process 지시문으로 설정됩니다.
 기본적으로 `local`로 설정되어 있으므로 다음 구성이 암시됩니다:
 
 ```groovy title="내장 구성"
@@ -934,7 +937,7 @@ process {
 }
 ```
 
-다른 백엔드를 대상으로 executor를 설정하려면 리소스 할당에 대해 위에서 설명한 것과 유사한 구문을 사용하여 원하는 executor를 지정하기만 하면 됩니다(모든 옵션은 [문서](https://www.nextflow.io/docs/latest/executor.html) 참조).
+다른 백엔드를 대상으로 **executor**를 설정하려면 리소스 할당에 대해 위에서 설명한 것과 유사한 구문을 사용하여 원하는 executor를 지정하기만 하면 됩니다(모든 옵션은 [Executors](https://nextflow.io/docs/latest/executor.html) 참조).
 
 ```groovy title="nextflow.config"
 process {
@@ -944,7 +947,7 @@ process {
 
 !!! warning
 
-    Slurm 스케줄러에 연결하도록 설정되어 있지 않기 때문에 교육 환경에서는 실제로 이것을 테스트할 수 없습니다.
+    HPC에 연결하도록 설정되어 있지 않기 때문에 교육 환경에서는 실제로 이것을 테스트할 수 없습니다.
 
 ### 4.2. 실행 매개변수에 대한 백엔드별 구문 처리
 
@@ -983,12 +986,12 @@ process {
     ```
 
 다행히 Nextflow는 이 모든 것을 단순화합니다.
-`cpus`, `memory` 및 `queue`(다른 속성은 문서 참조)와 같은 관련 속성을 한 번만 지정할 수 있도록 표준화된 구문을 제공합니다.
+`cpus`, `memory` 및 `queue`(다른 속성은 [Process directives](https://nextflow.io/docs/latest/reference/process.html#process-directives) 참조)와 같은 관련 속성을 한 번만 지정할 수 있도록 표준화된 구문을 제공합니다.
 그런 다음 런타임에 Nextflow는 해당 설정을 사용하여 executor 설정에 따라 적절한 백엔드별 스크립트를 생성합니다.
 
 다음 섹션에서 해당 표준화된 구문을 다룰 것입니다.
 
-### 요약
+### 핵심 정리
 
 이제 다양한 종류의 컴퓨팅 인프라를 사용하도록 executor를 변경하는 방법을 알게 되었습니다.
 
@@ -1028,7 +1031,7 @@ Nextflow는 선택한 executor에 대한 적절한 지침으로 변환합니다.
 
     process에 얼마나 많은 메모리나 CPU가 필요한지 모르며 리소스 낭비나 작업 종료를 피하고 싶습니다.
 
-process에 얼마나 많은 CPU와 메모리가 필요한지 미리 알지 못하는 경우 리소스 프로파일링을 수행할 수 있습니다. 즉, 일부 기본 할당으로 workflow를 실행하고 각 process가 사용한 양을 기록한 다음 거기서 기본 할당을 조정하는 방법을 추정합니다.
+process에 얼마나 많은 CPU와 메모리가 필요한지 미리 알지 못하는 경우 리소스 프로파일링을 수행할 수 있습니다. 즉, 일부 기본 할당으로 workflow를 실행하고 각 process가 사용한 양을 기록한 다음 거기서 기본 할당을 조정하는 방법을 추정하는 것입니다.
 
 편리하게도 Nextflow에는 이를 수행하기 위한 내장 도구가 포함되어 있으며 요청 시 보고서를 기꺼이 생성합니다.
 
@@ -1042,13 +1045,14 @@ nextflow run 3-main.nf -with-report report-config-1.html
 
 몇 분 동안 보고서를 살펴보고 리소스 조정 기회를 식별할 수 있는지 확인하세요.
 할당된 것의 백분율로 활용 결과를 보여주는 탭을 클릭해야 합니다.
-사용 가능한 모든 기능을 설명하는 [문서](https://www.nextflow.io/docs/latest/reports.html)가 있습니다.
+
+사용 가능한 모든 기능을 설명하는 [Reports](https://nextflow.io/docs/latest/reports.html) 문서를 참조하세요.
 
 ### 5.2. 모든 process에 대한 리소스 할당 설정
 
 프로파일링 결과 교육 workflow의 process가 매우 가볍기 때문에 기본 메모리 할당을 process당 1GB로 줄여 보겠습니다.
 
-`nextflow.config` 파일의 pipeline 매개변수 섹션 앞에 다음을 추가하세요:
+pipeline 매개변수 섹션 앞에 `nextflow.config` 파일에 다음을 추가하세요:
 
 ```groovy title="nextflow.config" linenums="4"
 /*
@@ -1113,7 +1117,7 @@ process마다 리소스 요구 사항이 다를 때 매우 유용합니다. 추�
 !!! tip
 
     이것은 리소스 사용을 최적화하기 위해 할 수 있는 것의 아주 작은 맛보기입니다.
-    Nextflow 자체에는 리소스 제한으로 인해 실패한 작업을 다시 시도하는 정말 멋진 [동적 재시도 로직](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources)이 내장되어 있습니다.
+    Nextflow 자체에는 리소스 제한으로 인해 실패한 작업을 다시 시도하는 정말 멋진 [동적 재시도 로직](https://nextflow.io/docs/latest/process.html#dynamic-task-resources)이 내장되어 있습니다.
     또한 Seqera Platform은 리소스 할당을 자동으로 최적화하기 위한 AI 기반 도구도 제공합니다.
 
 ### 5.5. 리소스 제한 추가
@@ -1144,7 +1148,7 @@ Nextflow는 지정한 executor에 따라 이러한 값을 적절한 지침으로
 
     이러한 공유 구성은 해당 기관의 구성을 바로 활용할 수 있는 해당 기관에서 근무하는 사람들과 자체 인프라에 대한 구성을 개발하려는 사람들의 모델로 모두 가치가 있습니다.
 
-### 요약
+### 핵심 정리
 
 리소스 활용을 평가하기 위한 프로파일링 보고서를 생성하고 모든 process 및/또는 개별 process에 대한 리소스 할당을 수정하고 HPC에서 실행하기 위한 리소스 제한을 설정하는 방법을 알게 되었습니다.
 
@@ -1165,7 +1169,7 @@ Nextflow는 지정한 executor에 따라 이러한 값을 적절한 지침으로
 
 사용 중인 컴퓨팅 인프라에 따라 대체 설정 간에 전환하고 싶을 수 있습니다. 예를 들어 노트북에서 로컬로 개발하고 소규모 테스트를 실행한 다음 HPC 또는 클라우드에서 전체 규모 워크로드를 실행할 수 있습니다.
 
-Nextflow를 사용하면 다양한 구성을 설명하는 프로필을 원하는 수만큼 설정한 다음 구성 파일 자체를 수정하지 않고 명령줄 인수를 사용하여 런타임에 선택할 수 있습니다.
+Nextflow를 사용하면 다양한 구성을 설명하는 [**profile**](https://nextflow.io/docs/latest/config.html#profiles)을 원하는 수만큼 설정한 다음 구성 파일 자체를 수정하지 않고 명령줄 인수를 사용하여 런타임에 선택할 수 있습니다.
 
 ### 6.1. 로컬 개발과 HPC 실행 간 전환을 위한 프로필 생성
 
@@ -1173,7 +1177,7 @@ Docker 컨테이너를 사용하는 일반 컴퓨터에서 소규모 로드를 �
 
 #### 6.1.1. 프로필 설정
 
-`nextflow.config` 파일의 pipeline 매개변수 섹션 다음이지만 출력 설정 앞에 다음을 추가하세요:
+pipeline 매개변수 섹션 다음이지만 출력 설정 앞에 `nextflow.config` 파일에 다음을 추가하세요:
 
 ```groovy title="nextflow.config" linenums="24"
 /*
@@ -1288,7 +1292,7 @@ profiles {
 편리하게도 프로필은 상호 배타적이지 않으므로 `-profile <profile1>,<profile2>` 구문을 사용하여 명령줄에 여러 프로필을 지정할 수 있습니다(프로필 수에 관계없이).
 
 동일한 구성 요소에 대해 값을 설정하는 프로필을 결합하고 동일한 구성 파일에 설명되어 있는 경우 Nextflow는 마지막으로 읽은 값(즉, 파일에서 나중에 나오는 값)을 사용하여 충돌을 해결합니다.
-충돌하는 설정이 다른 구성 소스에 설정된 경우 기본 [우선순위](https://www.nextflow.io/docs/latest/config.html)가 적용됩니다.
+충돌하는 설정이 다른 구성 소스에 설정된 경우 기본 [우선순위](https://nextflow.io/docs/latest/config.html#configuration-file)가 적용됩니다.
 
 이전 명령에 테스트 프로필을 추가해 보겠습니다:
 
@@ -1310,11 +1314,11 @@ nextflow run 3-main.nf -profile my_laptop,test
     [fd/e84fa9] cowpy              | 1 of 1 ✔
     ```
 
-이것은 가능한 경우 Docker를 사용하고 `results/test` 아래에 출력을 생성하며, 이번에는 캐릭터가 코믹 듀오 `dragonandcow`입니다.
+이것은 가능한 경우 Docker를 사용하고 `results_config/test` 아래에 출력을 생성하며, 이번에는 캐릭터가 코믹 듀오 `dragonandcow`입니다.
 
 ??? abstract "파일 내용"
 
-    ```console title="results/test/"
+    ```console title="results_config/test/"
      _________
     / HOLà    \
     | HELLO   |
@@ -1352,7 +1356,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 위에서 언급했듯이 때때로 결합하려는 프로필에서 동일한 매개변수를 다른 값으로 설정할 수 있습니다.
 그리고 더 일반적으로 구성 요소를 저장할 수 있는 곳이 많고 때때로 동일한 속성이 다른 곳에서 다른 값으로 설정될 수 있습니다.
 
-Nextflow는 충돌을 해결하기 위해 설정된 [우선순위](https://www.nextflow.io/docs/latest/config.html)를 적용하지만, 직접 결정하기 어려울 수 있습니다.
+Nextflow는 충돌을 해결하기 위해 설정된 [우선순위](https://nextflow.io/docs/latest/config.html#configuration-file)를 적용하지만, 직접 결정하기 어려울 수 있습니다.
 그리고 충돌이 없더라도 구성될 수 있는 모든 가능한 장소를 찾는 것은 지루할 수 있습니다.
 
 다행히 Nextflow에는 전체 프로세스를 자동화할 수 있는 `config`라는 편리한 유틸리티 도구가 포함되어 있습니다.
@@ -1371,6 +1375,12 @@ nextflow config
 ??? success "명령 출력"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'batch'
+      character = 'turkey'
+    }
+
     docker {
       enabled = false
     }
@@ -1387,10 +1397,12 @@ nextflow config
       }
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+    outputDir = 'results_config/batch'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1407,6 +1419,12 @@ nextflow config -profile my_laptop,test
 ??? success "명령 출력"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'test'
+      character = 'dragonandcow'
+    }
+
     docker {
       enabled = true
     }
@@ -1424,16 +1442,18 @@ nextflow config -profile my_laptop,test
       executor = 'local'
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+    outputDir = 'results_config/test'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
 이것은 여러 계층의 구성을 포함하는 복잡한 프로젝트에 특히 유용합니다.
 
-### 요약
+### 핵심 정리
 
 런타임에 최소한의 번거로움으로 사전 설정 구성을 선택하기 위해 프로필을 사용하는 방법을 알게 되었습니다.
 더 일반적으로 다양한 컴퓨팅 플랫폼에 맞게 workflow 실행을 구성하고 분석의 재현성을 향상시키는 방법을 알게 되었습니다.
@@ -1465,21 +1485,59 @@ Nextflow는 이를 간단하게 만듭니다: 먼저 수동으로 다운로드�
 nextflow run nextflow-io/hello
 ```
 
+??? success "명령 출력"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Pulling nextflow-io/hello ...
+     downloaded from https://github.com/nextflow-io/hello.git
+    Launching `https://github.com/nextflow-io/hello` [sleepy_swanson] DSL2 - revision: 2ce0b0e294 [master]
+
+    executor >  local (4)
+    [ba/08236d] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Hello world!
+
+    Bonjour world!
+
+    Hola world!
+    ```
+
 원격 pipeline을 처음 실행하면 Nextflow가 이를 다운로드하고 로컬에 캐시합니다.
 후속 실행은 업데이트를 명시적으로 요청하지 않는 한 캐시된 버전을 사용합니다.
 
 ### 7.2. 재현성을 위해 버전 지정
 
 기본적으로 Nextflow는 기본 브랜치의 최신 버전을 실행합니다.
-`-r` 플래그를 사용하여 특정 버전, 브랜치 또는 커밋을 지정할 수 있습니다:
+`-r` 플래그를 사용하여 특정 버전(태그), 브랜치 또는 커밋을 지정할 수 있습니다:
 
 ```bash
-nextflow run nextflow-io/hello -r v1.1
+nextflow run nextflow-io/hello -r v1.3
 ```
+
+??? success "명령 출력"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `https://github.com/nextflow-io/hello` [sick_carson] DSL2 - revision: 2ce0b0e294 [v1.3]
+
+    executor >  local (4)
+    [61/e11f77] sayHello (4) [100%] 4 of 4 ✔
+    Ciao world!
+
+    Bonjour world!
+
+    Hello world!
+
+    Hola world!
+    ```
 
 정확한 버전을 지정하는 것은 재현성에 필수적입니다.
 
-### 요약
+### 핵심 정리
 
 GitHub 및 기타 원격 저장소에서 직접 pipeline을 실행하는 방법과 재현성을 위해 버전을 지정하는 방법을 알게 되었습니다.
 
@@ -1543,7 +1601,7 @@ workflow를 실행할 때 매개변수 파일을 어떻게 지정하나요?
 출력 경로 구성에서 process 이름을 동적으로 참조하는 방법은 무엇인가요?
 - [ ] `#!groovy ${processName}`
 - [ ] `process.name`
-- [x] `#!groovy { meta.id }`
+- [x] `#!groovy { <process>.name }`
 - [ ] `@processName`
 
 자세히 알아보기: [2.2. Process별로 출력 구성](#22-process별로-출력-구성)

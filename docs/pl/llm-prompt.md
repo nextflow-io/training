@@ -102,6 +102,26 @@ Uruchom workflow'a...
 Zobaczysz wyniki...
 ```
 
+## 4a. Examples of good writing
+
+Below are several paragraphs of high-quality technical writing in Polish. Try to emulate their style when translating prose.
+
+---
+
+Typ `char` (tak jak pozostałe typy znakowe) jest, co prawda, typem całkowitym, ale jest traktowany inaczej niż typy liczbowe, gdyż w zasadzie służy do reprezentowania znaków. Z tego powodu nie powinniśmy, choć jest to formalnie możliwe, używać zmiennych znakowych w operacjach arytmetycznych. Wartości liczbowe zmiennych tych typów odpowiadają zwykle (choć nie musi tak być) kodom ASCII znaków. Tylko pierwsze 128 znaków ASCII (o kodach od 0 do 127) ma określone znaczenie - interpretacja pozostałych może zależeć od platformy. Co gorsza, standard w zasadzie nie wymaga, aby implementacja w ogóle korzystała z kodowania ASCII. W szczególności oznacza to, że teoretycznie nie ma pewności, iż kolejne litery alfabetu mają kolejne kody. Zwykle tak jednak jest, gdyż większość istniejących programów opiera się na założeniu, że znaki kodowane są według standardu ASCII.
+
+---
+
+Tablice w C/C++ mogą być wielowymiarowe, choć ich implementacja nie jest tak efektywna jak w innych językach programowania (w szczególności Fortranie). W zasadzie tablica n-wymiarowa jest jednowymiarową tablicą wskaźników do tablic (n - 1)-wymiarowych. Implementacja takich tablic jest nieco inna dla napisów i dla danych innych typów. Jako przykład tablic tego drugiego rodzaju rozpatrzymy macierze liczbowe; tablice napisów przedstawimy w podrozdziale następnym. Pamiętajmy, że w tym rozdziale mówimy tylko o tablicach statycznych, a więc takich które tworzone są jako zmienne lokalne (na stosie) i ich wymiar jest znany na etapie kompilacji.
+
+---
+
+Aby uniknąć tego rodzaju wieloznaczności, wprowadzono pojęcie priorytetu operatorów. Według priorytetu operatory dzielą się na szereg grup, w ramach których priorytety są jednakowe. W sytuacjach, jak opisana powyżej, gdy to samo wyrażenie może być potraktowane jako argument dwóch operatorów, najpierw zostanie wykonana operacja opisywana przez ten z tych dwóch operatorów który ma wyższy priorytet. Jeśli natomiast oba mają ten sam priorytet, kolejność wykonywania operacji będzie określona ich wiązaniem: od lewej do prawej dla operatorów o wiązaniu lewym i od prawej do lewej dla operatorów o wiązaniu prawym. Aby ta reguła nie prowadziła do sprzeczności, operatory o takim samym priorytecie muszą mieć taki sam kierunek wiązania (co w istocie zachodzi).
+
+---
+
+> Attribution: the examples above are taken from introductory C++ lecture materials by Prof. Tomasz Werner from the University of Warsaw, available at https://www.fuw.edu.pl/~werner/pmn/CPP_HTML/CPP.html.
+
 ## 5. Terms to Translate
 
 These terms should be translated in prose (but kept in English in code).

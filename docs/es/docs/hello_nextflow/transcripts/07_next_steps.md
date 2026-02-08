@@ -1,63 +1,77 @@
-# Próximos Pasos - Transcripción
-
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+# Próximos Pasos - Transcripción del Video
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/xHOcx_4Ancg?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Notas importantes"
 
-    Esta página muestra únicamente la transcripción. Para instrucciones paso a paso completas, regrese al [material del curso](../05_hello_containers.md).
+    Esta página muestra únicamente la transcripción. Para instrucciones completas paso a paso, regrese al [material del curso](../next_steps.md).
 
 ## Bienvenida
 
-Felicidades, lo ha logrado. Ha completado el primer curso de entrenamiento de Nextflow, llamado Hello Nextflow.
+​
 
-Bien hecho. Gracias por perseverar y realmente apreciamos el tiempo y esfuerzo que ha dedicado a aprender Nextflow, y esperamos sinceramente que sea útil para su trabajo.
+¡Felicidades, lo has logrado!
 
-## Próximos Pasos
+Has llegado al final y completado el curso de capacitación Hello Nextflow. Realmente esperamos que lo hayas disfrutado. Gracias por acompañarnos hasta el final, y apreciamos mucho el tiempo y el esfuerzo que has dedicado a aprender Nextflow. Realmente esperamos que sea útil para tu trabajo.
 
-Para los próximos pasos, esté atento al portal de entrenamiento: training.nextflow.io. Estamos subiendo nuevo material de curso todo el tiempo y también lo estamos actualizando. Así que podría encontrar entrenamiento más avanzado, o entrenamiento que sea específico para un campo de investigación que le interese.
+## Otros cursos en training.nextflow.io
 
-Específicamente, consulte la página de Nextflow for Science. Esta tiene una serie de cursos cortos que son independientes, y extienden lo que ha aprendido en Hello Nextflow a casos de uso específicos.
+No olvides seguir visitando training.nextflow.io. Estamos agregando nuevos cursos cortos todo el tiempo y también actualizamos mucho del material que ya está aquí. Así que este curso de capacitación Hello Nextflow se actualizará con el tiempo.
 
-Hay uno para Genómica y también uno para RNA-seq. Esperamos traer más pronto.
+Esto es particularmente importante porque estamos actualizando la sintaxis en Nextflow, y 2026 verá bastantes características nuevas, así que este curso se verá y sentirá un poco diferente la próxima vez que lo hagamos en 2027.
 
-## Side Quests
+Específicamente, quiero destacar la página "Nextflow for Science". Estos son cursos cortos y están diseñados para continuar después de este curso Hello Nextflow. Y muestran cómo usar Nextflow con casos de uso específicos diferentes, ya sea genómica o RNAseq, o todo tipo de cosas diferentes. Intentamos agregar más casos de uso científicos todo el tiempo.
 
-Hay muchas cosas de las que podríamos haber hablado en Hello Nextflow, que habrían sido demasiado detalle. Algunas de estas cosas las estamos poniendo en Side Quests, que son cursos cortos sobre temas específicos.
+También están los Side Quests. Cuando desarrollamos un curso como Hello Nextflow, hay tanto que podríamos cubrir, y es difícil mantener todo dentro del alcance. Así que si hay un tema particular que creemos que es interesante para las personas y que merece una cobertura más profunda, lo ponemos en un Side Quest.
 
-También están los cursos más grandes de entrenamiento fundamental y entrenamiento avanzado, que pueden incluir contenido que le resulte interesante.
+Ve y échale un vistazo y si hay diferentes cosas que podrían ser relevantes para tu trabajo, como nf-test o hacer diferentes cosas con metadatos y patrones de scripting comunes, consulta los Side Quests y ve si podría ser útil aprender más.
 
-## nf-core
+También está el curso sobre nf-core. Con suerte ya estás familiarizado con el proyecto en este punto, pero si no lo estás, ve y échale un vistazo. Hay casi 150 pipelines diferentes para diferentes tipos de análisis y diferentes tipos de datos, así que es completamente posible que haya un pipeline listo para usar desde el principio para el tipo de análisis de datos que necesitas.
 
-Se ha mencionado una o dos veces en este curso, pero definitivamente consulte el proyecto nf-core. Hay más de cien pipelines allí para diferentes tipos de datos, así que es completamente posible que no necesite construir su propio pipeline.
-
-También hay casi mil quinientos módulos de procesos donde, si usa las herramientas de desarrollo de nf-core, puede crear un pipeline e importar esos módulos en cuestión de segundos.
+Importante, también hay componentes en nf-core, casi 1700 módulos diferentes, diferentes procesos y envoltorios para herramientas. Y con las herramientas que vienen con nf-core, puedes mezclarlos y combinarlos y construir tu propio pipeline como bloques de Lego. Mucho más rápido y más reproducible.
 
 ## Seqera Platform
 
-Por último, una rápida mención para Seqera Platform. Esta es sin duda la mejor manera de ejecutar Nextflow en la práctica, es una plataforma basada en la nube, pero usted conecta su propia infraestructura de cómputo, ya sea su propia cuenta en la nube en AWS, Google Batch, o Azure, o incluso su propio HPC. El nivel gratuito está disponible para todos, y si es académico, puede aplicar a nuestro programa académico para acceso gratuito a nivel profesional.
+A medida que aumentas tu uso con Nextflow, consulta Seqera Platform, es la mejor manera de ejecutar Nextflow. Puedes ejecutar en tu propia infraestructura, así sea HPC o AWS, Azure, Google Cloud, Oracle y más. También puedes usar nuestro propio Seqera Compute si no quieres gestionar ninguna infraestructura de cómputo en absoluto.
 
-Seqera Platform va más allá de ser solo una interfaz gráfica para lanzar y monitorear flujos de trabajo. También hay herramientas adicionales como Data Studios para ejecutar sesiones interactivas, y herramientas fundamentales como Fusion, que proporciona acceso más rápido y económico a datos en la nube.
+Seqera Platform realmente simplifica la configuración de estas infraestructuras de nube complejas con características como Batch Forge, que crea el entorno para ti. Y también ayuda mucho con la observabilidad y el registro de auditoría y cumplimiento.
 
-## Soporte y eventos
+Objetivamente hace que los pipelines se ejecuten más baratos y más rápidos con tecnologías como Fusion, que optimizan el acceso a disco y las transferencias de datos. Y también hay optimización de pipelines para asegurar que la configuración de tus pipelines esté tan ajustada como sea posible.
 
-Recuerde, si alguna vez tiene algún problema, simplemente vaya a community.seqera.io. Nuestro foro allí es realmente activo, la comunidad de Nextflow es súper fuerte y casi siempre hay personas disponibles listas para ayudar, ya sea para entrenamiento o cualquier cosa relacionada con su uso diario de Nextflow.
+También hay características totalmente diferentes además de ejecutar pipelines. Tenemos Studios donde puedes ejecutar análisis interactivos y crear entornos desde cualquier imagen docker personalizada que hagas. Y Data Explorer, que te ayuda a explorar tus diferentes sistemas de archivos dondequiera que estén.
 
-Y por supuesto, un gran próximo paso es unirse a uno de nuestros eventos de la comunidad, ya sea un hackathon de nf-core o uno de los eventos de Nextflow Summit. Son muy divertidos, y sería muy agradable conocerle allí y conversar sobre para qué está usando Nextflow.
+Hay un nivel gratuito de Seqera Platform, así que puedes usar prácticamente todas estas características gratis ahora mismo. E incluso te daremos cien dólares de crédito de cómputo gratis con Seqera Compute si te registras con tu dirección de correo electrónico organizacional. Finalmente, hay un programa académico, así que si estás trabajando en una universidad, consulta la página de precios, encuentra el formulario allí y háznoslo saber, y te actualizaremos al Cloud Pro de forma gratuita.
+
+## Ayuda de la comunidad y eventos
+
+Bien. Hacia adelante. Si alguna vez necesitas soporte con Nextflow, visita community.seqera.io. Es muy activo y esperamos verte allí y discutir tus diferentes problemas y casos de uso, y tal vez ahora incluso puedas ayudar a otras personas.
+
+También tenemos muchos eventos en marcha. Tenemos eventos comunitarios provenientes de nf-core y Nextflow. Tenemos un hackathon de nf-core en línea y distribuido en marzo, tuvimos más de mil personas el año pasado con sitios en todo el mundo. Así que por favor únete si puedes.
+
+Y también tenemos eventos Nextflow Summit, uno en Boston, y luego tenemos un evento en Barcelona y en línea. Charlas fantásticas donde puedes escuchar sobre personas usando Nextflow de maneras realmente masivas, sorprendentes y emocionantes. Y también hay hackathons asociados con esos eventos y capacitación presencial.
+
+## Podcast y blog de Nextflow
+
+Si quieres mantenerte actualizado con las cosas que suceden en el ecosistema de Nextflow, consulta seqera.io/blog.
+
+Hay una sección para Nextflow allí donde puedes escuchar publicaciones de blog de la comunidad de personas que trabajan en la comunidad, y también publicaciones de blog de Seqera sobre actualizaciones de Nextflow y las otras herramientas que generamos.
+
+También me gustaría hacer publicidad de mi proyecto personal, que es el Nextflow Podcast. Consúltalo en Spotify, o Apple Music, o YouTube. Publicamos nuevos episodios periódicamente donde converso con otras personas, ya sea trabajando con Nextflow o tecnologías asociadas, o personas en la comunidad. Y hacemos inmersiones técnicas reales y profundas sobre cómo funcionan las cosas y qué están haciendo las personas. Así que si estás interesado, échales un vistazo. Son realmente divertidos.
 
 ## Agradecimientos
 
-Me gustaría dar un enorme agradecimiento a todos los que han estado involucrados en escribir este material de entrenamiento. Yo lo he estado presentando, pero realmente todo el trabajo duro lo ha hecho el equipo de entrenamiento en Seqera. Específicamente Geraldine, quien ha puesto una enorme cantidad de trabajo en reescribir este material.
+Bien, me gustaría hacer una serie de agradecimientos. El equipo de capacitación en Seqera es responsable de este material. Estoy sentado frente a una cámara, pero realmente todo el trabajo duro ha sido hecho por esas otras personas. Mención especial para Geraldine, quien escribió y ha actualizado este material del curso de capacitación para Hello Nextflow y otros. Y también Jon, quien realmente ha ayudado, especialmente con la actualización de sintaxis para la nueva sintaxis de Nextflow y también escribiendo muchos de los cursos él mismo. Otros en el equipo de desarrollo científico como Rike, Rob, Florian, y muchos otros han tenido un gran aporte en el material con el que hemos estado trabajando.
 
-También, Marcel, Ken, Adam, John, otros del equipo de desarrollo científico y otros en la comunidad.
+También me gustaría agradecer a las personas en la comunidad. Las nuevas traducciones, por ejemplo, que son muy nuevas, han sido fuertemente influenciadas por personas en el programa de embajadores y en otros lugares. Y realmente, la naturaleza de código abierto del material de capacitación significa que tenemos pull requests e issues entrando con bastante frecuencia, lo que realmente nos ayuda.
 
-## Encuesta de retroalimentación
+## Encuesta
 
-Ahora que ha terminado el curso, nos encantaría saber qué le pareció. En training.nextflow.io, encontrará una encuesta de retroalimentación debajo de la sección de Hello Nextflow.
+Ahora que has terminado, si no lo has hecho ya, por favor completa rápidamente la encuesta de retroalimentación. Está en el sitio web training.nextflow.io justo debajo de la sección Hello Nextflow.
 
-Solo hay cuatro preguntas pero es realmente importante para nosotros. Si nada más, nos dice aproximadamente cuántas personas están haciendo el entrenamiento. También nos dice si le gustó y si tiene alguna sugerencia, por favor déjela al final. Leemos cada envío.
+Son solo cinco preguntas. Es realmente, realmente rápido, pero eso nos permite rastrear aproximadamente cuántas personas están haciendo la capacitación y también puedes decirnos cómo mejorar el material de capacitación. Realmente revisamos todas las respuestas, así que realmente valoramos tu aporte allí.
 
-Si detecta algún error, todo es de código abierto en GitHub, así que puede crear un issue o hacer un pull request o dejarnos un mensaje en el foro. Nos encantaría saber qué le pareció y cómo podríamos mejorarlo. Gracias de nuevo. Esperamos verle pronto.
+## Despedida
+
+Una vez más, muchas, muchas gracias por acompañarnos en este curso y en este viaje. Deja un issue o Pull Request en GitHub si encontraste algo en el material de capacitación que creas que podría mejorarse. Y realmente espero verte en otro curso de capacitación de Nextflow, o quizás en un hackathon o un evento. Gracias de nuevo.​

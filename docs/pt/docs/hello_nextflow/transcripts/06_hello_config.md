@@ -1,217 +1,391 @@
-# Parte 6: Hello Config - Transcrição
+# Parte 6: Hello Config - Transcrição do Vídeo
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/IuDO2HeKvXk?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Notas importantes"
 
-    Esta página mostra apenas a transcrição. Para instruções completas passo a passo, retorne ao [material do curso](../06_hello_config.md).
+    Esta página mostra apenas a transcrição. Para instruções passo a passo completas, retorne ao [material do curso](../06_hello_config.md).
 
-    Os números das seções mostrados na transcrição são fornecidos apenas para fins indicativos e podem não incluir todos os números de seção nos materiais.
+    Os números de seção mostrados na transcrição são fornecidos apenas para fins indicativos e podem não incluir todos os números de seção nos materiais.
 
 ## Boas-vindas
 
-Olá, bem-vindo à parte seis do curso de treinamento Hello Nextflow.
+Olá, e bem-vindo de volta à Parte Seis do Hello Nextflow. Esta seção é toda sobre configurações, e é a última parte deste curso.
 
-Este capítulo se chama Hello Config, e é a parte final do nosso curso de treinamento.
+Nextflow é particularmente bom em duas coisas, reprodutibilidade e portabilidade. Configurações é onde vemos a segunda delas realmente brilhar. A capacidade de configurar um pipeline Nextflow para rodar de maneiras diferentes e funcionar em sistemas diferentes, sem ter que editar o código subjacente do pipeline.
 
-Neste capítulo, vamos falar sobre configuração do Nextflow. A configuração do Nextflow é muito poderosa. Ela nos permite executar o mesmo pipeline em múltiplas infraestruturas computacionais diferentes com diferentes provisionamentos de software e diferentes opções no próprio pipeline.
+Este superpoder permite que pipelines Nextflow sejam reutilizados por outras pessoas em lugares diferentes, ou através de diferentes infraestruturas que você mesmo possa ter acesso.
 
-Isso significa que você pode pegar pipelines Nextflow construídos por outras pessoas e executá-los no seu sistema, mesmo que eles tenham sido construídos para uma infraestrutura completamente diferente. Esta capacidade de configurar o Nextflow torna os fluxos de trabalho verdadeiramente portáteis e compartilháveis.
+Isso significa que você pode desenvolver código de pipeline no seu laptop, enviá-lo para a nuvem, executá-lo no seu HPC, e é o mesmo código de pipeline e roda em todos os lugares.
 
-Neste capítulo, usaremos o fluxo de trabalho que construímos nas partes anteriores, mas não vamos editar o código do fluxo de trabalho. Vamos apenas olhar nosso arquivo de configuração do Nextflow e ver como alterar a configuração modifica a forma como o Nextflow é executado.
+Nesta seção, vamos passar por alguns tópicos. Começaremos com como o Nextflow lida com arquivos de configuração, de onde ele os carrega, e como você os escreve e como os estrutura, e essa separação entre o próprio pipeline e o que deve ir em um arquivo de configuração.
 
-Ok, vamos começar.
+Depois vamos para alguns casos de uso comuns como mudar onde os arquivos de saída são armazenados, e também como fazer o pipeline funcionar em diferentes infraestruturas, tanto usando diferentes tipos de empacotamento de software quanto submetendo trabalhos para diferentes infraestruturas.
 
-Assim como antes, vamos começar indo para training.nextflow.io. Vá para o lado esquerdo em Hello Nextflow e capítulo seis. Hello config. Agora vou entrar no meu ambiente GitHub Codespaces e verificar o script que usaremos.
+## Hierarquias de arquivos de configuração
 
-## 0. Aquecimento: Verificar que o Docker está habilitado e executar o fluxo de trabalho Hello Config
+Ok, vamos começar. Quando se trata de carregar arquivos de configuração, o Nextflow pode buscar de muitos lugares diferentes, o que é uma coisa boa e também pode ser algo um pouco arriscado porque às vezes pode ser um pouco difícil saber de onde ele está obtendo um arquivo de configuração e em que ordem ele carrega as coisas.
 
-Este se chama Hello Config, e está começando de onde estávamos antes. Então parecendo exatamente o mesmo com nossos três parâmetros. Greetings para o arquivo CSV, batch para o nome do lote de saída e character para o nome do cowpy. Temos nossas quatro importações dos diferentes processos, e então temos um fluxo de trabalho onde os encadeamos.
+Então eu realmente recomendo que você clique neste link aqui, que nos leva à documentação do Nextflow. E nesta página de configuração, ela lista os lugares principais de onde a configuração é carregada, e importante, a ordem em que essas coisas são carregadas.
 
-Na verdade, vou fechar este arquivo agora porque não vamos tocar no arquivo Nextflow em absoluto neste capítulo. Vamos trabalhar puramente dentro do arquivo de configuração. Se eu olhar para o arquivo Nextflow dot config que vimos brevemente no capítulo cinco anterior, podemos ver que temos uma única instrução aqui: Docker enabled equals true, que está dizendo ao Nextflow para usar Docker quando executar este fluxo de trabalho.
+Então você pode ver, você pode colocar um arquivo de configuração no seu diretório home do Nextflow, que é tipicamente ".nextflow" no seu diretório home. E esse arquivo será sempre carregado por toda execução do Nextflow no seu sistema.
 
-Estou usando Nextflow dot config na raiz do pipeline aqui, que é carregado automaticamente quando executo o Nextflow. Mas lembre-se, o Nextflow pode carregar arquivos de configuração de múltiplos lugares.
+O próximo lugar a procurar é um arquivo na raiz do seu repositório ou diretório de pipeline chamado "nextflow.config".
 
-Se eu verificar com Nextflow docs vou para Configuration, você pode ver uma lista desses lugares e uma prioridade na qual eles são carregados.
+Depois disso, outro arquivo chamado "nextflow.config", mas desta vez no diretório de onde você está lançando o Nextflow: o diretório de lançamento.
 
-Ok. Vamos verificar se nosso fluxo de trabalho está executando como esperamos. Abrir um terminal. Fazer Nextflow. Run. Hello, config. E pressionar enter. Devemos ter esses quatro processos executando, terminando com um comando cowpy. Com certeza, isso funcionou corretamente. Eu tinha o Docker habilitado, puxou o Docker e executou o cowpy para mim, exatamente como fez no final do capítulo cinco.
+Finalmente, você pode fornecer caminhos de arquivos de configuração na linha de comando com um argumento "-c", e você pode fazer isso múltiplas vezes. E eles são aplicados na ordem em que você os especifica.
 
-## 1. Determinar qual tecnologia de empacotamento de software usar
+Você pode fornecer arquivos de configuração em todos esses locais se quiser, e eles serão carregados iterativamente, cada um sobrescrevendo o anterior apenas nos escopos de configuração onde eles conflitam.
 
-Ok. Digamos que estou executando em um HPC e não tenho o Docker instalado. A melhor coisa a fazer neste cenário seria usar Singularity ou Apptainer. Se eu fosse fazer isso, iria para o módulo cowpy e mudaria este contêiner para usar a imagem singularity como mostrei no capítulo anterior, com um oras://, que você também pode obter do Seqera Containers.
+Este é um sistema realmente poderoso porque significa que você pode definir padrões sensatos e depois ficar gradualmente mais e mais específico conforme você se aproxima daquela configuração.
 
-Eu então iria para Nextflow dot config definir Docker enabled para false e fazer singularity enabled equals true. Ou, se usar Apptainer, apptainer enabled equals true e isso funcionaria.
+## 0. Aquecimento: Execute hello-config.nf
 
-O Nextflow suporta outras tecnologias também, além de contêineres, algo com que você pode estar familiarizado é conda. Aqui podemos fazer conda enabled equals true e definir Docker para false. conda não usa a mesma diretiva container. Em vez disso, podemos adicionar uma nova aqui chamada conda. Então especificamos o pacote conda que queremos usar. É uma boa prática ser o mais específico possível para tentar tornar o pipeline o mais reproduzível possível. Então vou especificar o canal conda, conda-forge, e então cowpy, e a versão exata, que era 1.1.5.
+Ok, vamos fechar isso e pular para nosso Codespaces e começar. Como antes, limpei aqui, removi meus diretórios de resultados anteriores, meu Nextflow e meus diretórios de trabalho e assim por diante. Não se preocupe se você ainda tiver esses arquivos por aí. É só porque estou muito ampliado e então as coisas ficam bagunçadas muito rapidamente caso contrário.
 
-Eu também poderia apenas escrever cowpy se quisesse, mas isso poderia resolver para uma versão diferente do cowpy em diferentes execuções do pipeline.
+Vamos trabalhar com hello-config.nf, o último arquivo em nosso diretório, e isso deve seguir de onde paramos na seção anterior.
 
-O legal sobre isso é que não toquei na diretiva docker de forma alguma. Esta imagem Docker ainda está lá. Estou apenas fornecendo duas alternativas agora, e estas podem ser ligadas ou desligadas usando apenas um arquivo de configuração.
+Então temos nossos quatro processos diferentes, que estão sendo incluídos de arquivos de módulo. Temos nossos parâmetros de pipeline, nosso bloco workflow onde estamos chamando os diferentes processos e unindo os canais, publicando os canais de saída, e então o bloco output no final onde definimos onde esses arquivos devem ser armazenados e como devem ser copiados.
 
-## 1.3. Executar o fluxo de trabalho para verificar que ele pode usar Conda
+Também já temos um arquivo "nextflow.config" do último capítulo, onde habilitamos o Docker, e vamos construir sobre este arquivo hoje.
 
-Conda está agora habilitado, então vamos experimentar.
+Como antes, mudamos o caminho de saída neste script principal para hello config, só para não conflitar com resultados anteriores que você gerou.
 
-Ótimo. Está executando e você pode ver que há uma mensagem do Nextflow aqui dizendo que o Nextflow está criando um ambiente conda para mim, e está usando este local de cache.
+Ok, vamos apenas verificar rapidamente que tudo ainda está funcionando como esperamos. Abrir um terminal e fazemos nextflow run hello-config.nf. Nextflow carrega. Deve executar nossos quatro processos diferentes. Gerar algumas belas artes ascii usando cowpy e então salvar nossos resultados para nossos arquivos de resultados naquele diretório.
 
-Nos bastidores, o Nextflow está executando comandos "conda create" para mim para criar um novo ambiente conda isolado com apenas os pacotes que eu quero, e então instalando e buscando esses pacotes conda para que possa executar o processo.
+Posso dar uma olhada rápida aqui só para ter certeza de que esses arquivos parecem como esperamos, e com certeza, lá está nosso Peru gigante. Ótimo.
 
-Você pode ver que levou um pouco de tempo porque estava criando o ambiente e instalando o software pela primeira vez. No entanto, ele armazenou em cache este ambiente, então se eu executar o mesmo comando Nextflow novamente, deve ser muito mais rápido porque ele reutilizará o mesmo ambiente conda.
+## 1.1. Mova valores padrão para nextflow.config
 
-Uma das coisas legais sobre isso é que essas diretivas podem ser especificadas no nível do processo, não apenas para o fluxo de trabalho inteiro. Então, se você quiser, pode misturar e combinar qual tecnologia é usada para diferentes processos.
+Agora a primeira coisa que vamos fazer é começar a mover algumas coisas do nosso script para nosso arquivo de configuração.
 
-## 2. Alocar recursos computacionais com diretivas de processo
+E o que nos importa são principalmente os parâmetros neste estágio. Queremos levar os valores padrão para o arquivo de configuração, para que fique mais claro quais são os padrões e seja mais fácil para as pessoas sobrescrevê-los.
 
-O arquivo de configuração do Nextflow pode fazer muito mais do que apenas empacotamento de software. Também podemos dizer ao Nextflow como realmente executar os passos no pipeline. Um exemplo é dizer a um sistema host quais recursos devem ser disponibilizados para cada tarefa em execução.
+Vou apenas pegar este bloco params aqui do script e colocá-lo no arquivo de configuração. E precisamos ter um pouco de cuidado aqui, porque neste momento a sintaxe é ligeiramente diferente entre configuração e scripts. O arquivo de configuração não pode ter declarações de tipo porque não estamos realmente definindo esses params, estamos apenas referenciando-os. Então vou me livrar deles.
 
-Por padrão, o Nextflow não dá muito. Ele dá uma única CPU e apenas dois gigabytes de memória para cada processo.
+Mas no mais é muito semelhante. Temos um bloco params e então temos nossos diferentes parâmetros de entrada, parâmetro batch, parâmetro character.
 
-Isso é provavelmente algo que gostaríamos de mudar, para que processos que demoram muito para executar possam ter mais recursos e executar mais rapidamente, mas pode ser difícil saber o que alocar para um processo. O Nextflow tem alguns truques legais para ajudá-lo com isso.
+Agora posso voltar ao meu script e não preciso mais definir esses padrões porque esses valores estão agora no meu arquivo Nextflow config.
 
-## 2.1. Executar o fluxo de trabalho para gerar um relatório de utilização de recursos
+No entanto, deixo os nomes dos parâmetros e seus tipos, para que o Nextflow saiba essa informação e ainda possa fazer toda a segurança de tipo e tudo mais.
 
-Vamos executar o fluxo de trabalho novamente. Desta vez, vou adicionar um argumento adicional, que é dash with reports. É uma opção central do Nextflow, então é um único hífen. E então qualquer nome de arquivo que eu goste. Neste caso, vou chamá-lo de report config one html.
+Ok. Salvamos esses arquivos e verificamos rapidamente que tudo ainda funciona da mesma forma que antes. Não deveria haver mudanças aqui. Mantivemos os valores iguais. Apenas movemos onde eles foram definidos.
 
-Vou executar o fluxo de trabalho novamente. Vai executar exatamente como antes, mas vai me dar um relatório auxiliar adicional, que você pode ver que apareceu aqui na barra lateral.
+Ótimo.
 
-Vou clicar com o botão direito neste arquivo, clicar em download, que o baixa do GitHub Codespaces para o meu sistema local, para que eu possa visualizá-lo facilmente no navegador da web aqui em cima.
+## 1.2. Use um arquivo de configuração específico da execução
 
-Este relatório pode ser gerado para qualquer execução do Nextflow, e tem muita informação. Começa no topo com alguns metadados sobre qual comando foi usado, quando o fluxo de trabalho foi executado, quanto tempo levou, mas à medida que você rola para baixo, obtemos informações mais detalhadas sobre os recursos que foram usados por cada passo no pipeline.
+Agora, até agora temos lançado o Nextflow do mesmo diretório onde temos nosso script de pipeline. Então nosso diretório de lançamento e nosso diretório de pipeline são meio que a mesma coisa.
 
-Como cada processo é executado várias vezes para diferentes tarefas, temos um gráfico de caixa mostrando a variação dos recursos que usamos para cada processo.
+Para mostrar como podemos ter diferentes arquivos de configuração com diferentes diretórios de lançamento, vamos criar um novo subdiretório agora.
 
-Se eu rolar um pouco mais para baixo, vejo informações similares sobre memória usada e duração do job. Também leitura e escrita de disco.
+Então vou dizer mkdir, e vamos chamá-lo de tux-run.
 
-Você pode imaginar que para um pipeline grande com tarefas de longa execução, isso pode ser muito informativo sobre como ajustar finamente a configuração dos recursos que você está solicitando para que você não solicite em excesso, mas também para que você possa fornecer o suficiente para que execute rapidamente.
+E então vou cd, mudar de diretório para tux-run. E note que agora estamos em nosso diretório de trabalho agora não está mais no mesmo diretório que os scripts de pipeline.
 
-Se eu continuar rolando o relatório para baixo, também vemos uma tabela de tarefas, que nos mostra informações detalhadas sobre cada tarefa individual que foi executada no fluxo de trabalho. Isso inclui informações como o script resolvido, que foi executado.
+Ok, vamos criar um novo arquivo "nextflow.config". Então touch Nextflow config, e vamos apenas abri-lo no VS Code. Você pode ver também na barra lateral aqui que agora estamos neste subdiretório.
 
-Ok, vamos voltar ao nosso arquivo de configuração. Vimos que realmente não precisávamos de muito para nosso fluxo de trabalho, então vamos dizer ao Nextflow que só precisamos de um gigabyte de memória para cada processo no fluxo de trabalho.
+Agora podemos pegar o mesmo bloco params que tínhamos no nextflow.config do nível superior, copiar isso e agora podemos mudar esses valores.
 
-Agora, quando definimos assim no nível de processo, isso é aplicado a cada processo individual no pipeline.
+Primeiro, os dados agora são um caminho relativo diferente porque estamos em um subdiretório, então precisamos atualizar isso. E então vamos mudar batch para experiment, e vamos mudar o character de Turkey para tux.
 
-## 2.3. Definir alocações de recursos para um processo individual
+Agora clique em salvar ali, e vamos testar. Assim como com data, preciso agora dizer ../ para chegar ao script. Então é Hello config. E pressiono enter.
 
-Para fins de argumento, vamos fingir que cowpy está realmente fazendo muito trabalho pesado e precisa de mais recursos do que as outras tarefas. Podemos definir um bloco extra de configuração aqui, que se aplica apenas a esse processo usando, with name cowpy.
+O código do pipeline não mudou nada, mas agora vamos ter dois conjuntos de configuração carregando, e o arquivo de configuração do diretório de lançamento deve sobrescrever os padrões, que foram definidos no nextflow.config do pipeline, e devemos obter diferentes conjuntos de resultados.
 
-Isso é chamado de seletor de configuração, e podemos definir diferentes padrões aqui para corresponder a diferentes processos. Por exemplo, eu poderia fazer cow star. Então eu sigo isso com algumas chaves e vamos dar dois gigabytes de memória em vez de um e vamos dizer duas CPUs.
+Com certeza, dentro do nosso diretório aqui, dentro de tux-run, você pode ver que temos um diretório dot Nextflow e um diretório work e isso é porque estes são criados sempre no seu diretório de lançamento. Então estes são diferentes dos work e results que tínhamos de execuções anteriores.
 
-Agora o Nextflow estará dando a cada processo no fluxo de trabalho um gigabyte, exceto por esta solicitação, que é mais específica. Então ela sobrescreve. E apenas para quaisquer processos que são chamados cowpy, receberão dois gigs de memória e duas CPUs.
+Agora, se olho em results, podemos ver nosso collected e lá está nosso pequeno personagem tux. Então você pode ver que esses parâmetros foram corretamente interpretados.
 
-Note que o Nextflow é inteligente sobre a utilização de recursos. Então, se você começar a colocar esses números em valores mais altos, verá que o Nextflow começa a enfileirar submissões de jobs uma após a outra, em vez de executar todas em paralelo, para que não solicite em excesso os recursos que estão disponíveis.
+## 1.3. Use um arquivo de parâmetros
 
-## 2.4. Executar o fluxo de trabalho com a configuração modificada
+Ok. Antes, quando eu estava falando sobre os diferentes arquivos de configuração que poderiam ser carregados, esqueci de um outro lugar de onde podemos obter configuração.
 
-Vamos tentar executar o fluxo de trabalho novamente e vamos salvar um novo relatório desta vez.
+Você pode obtê-la da linha de comando como vimos com dash dash nomes de parâmetros, mas também podemos fornecer um arquivo YAML ou JSON, apenas de params.
 
-Ok, podemos baixar este arquivo e dar uma olhada.
+O arquivo de configuração pode ter todos os tipos diferentes de escopos, mas esses arquivos são apenas parâmetros, e é uma maneira amigável ao usuário de fornecer muitos parâmetros de uma vez, e talvez uma maneira um pouco mais reproduzível porque você os escreve em arquivo, então é fácil obtê-los em um estágio posterior.
 
-Sim, sem surpresas, parece basicamente exatamente o mesmo porque este é um fluxo de trabalho fictício, que não está fazendo nada real. Mas você pode imaginar como esta abordagem iterativa de definir limites e fazer fluxos de trabalho da vida real com este tipo de relatório permite que você faça uma abordagem baseada em evidências para definir configuração apropriada e realmente aproveitar ao máximo os recursos computacionais que você tem disponíveis.
+Então vamos voltar ao nosso terminal e antes que esqueçamos, certifique-se de voltar um diretório, então não estou mais no subdiretório, e vou olhar o arquivo YAML que temos aqui chamado test-params.yaml.
 
-Você pode começar a ser realmente inteligente sobre isso. O Nextflow tem uma capacidade embutida para tentar novamente falhas, e você pode aproveitar em seu arquivo de configuração usando um closure como este e definindo dinamicamente os recursos que são disponibilizados. Então aqui eu disse ao Nextflow para multiplicar aqueles dois gigabytes pela tentativa de retry. Então a segunda tentativa receberá quatro gigs, a terceira tentativa receberá seis gigs e assim por diante. Isso está um pouco além do escopo deste curso de treinamento, mas se você estiver interessado, confira a documentação do Nextflow, que tem uma seção legal sobre lógica de retry dinâmica.
+Então se eu fizer apenas code test-params.yaml, você pode ver que este é apenas um arquivo YAML regular. Nada de especial nele. Com as chaves sendo nossos nomes de parâmetros, com a formatação YAML então dois pontos aqui, e então um valor.
 
-## 2.5. Adicionar limites de recursos
+Note que este não é código Nextflow, então não podemos colocar coisas como variáveis aqui. Estes são apenas valores estáticos.
 
-Agora, uma coisa que você pode notar sobre isso é que esse tipo de coisa pode tornar muito fácil acidentalmente ir além dos recursos disponíveis no seu sistema. Se você solicitar mais recursos do que estão disponíveis, o Nextflow lançará um erro sobre sua configuração e interromperá a execução. Para evitar isso, você pode usar algo chamado limites de recursos.
+Também porque JSON na verdade analisa como YAML, também podemos ter um arquivo test-params.json, que parece muito similar. É apenas, formato de dados diferente.
 
-No escopo de processo, em nosso fluxo de trabalho, podemos definir limites de recursos assim, que recebe um array, e podemos especificar a memória máxima, CPUs e tempo que estão disponíveis neste sistema.
+Então temos dois arquivos de teste diferentes aqui e temos variáveis ligeiramente diferentes.
 
-Definir valores altos aqui não aumenta a quantidade de recursos que são solicitados. Ainda vamos usar um gigabyte em nossas solicitações, mas significa que se qualquer uma dessas solicitações chegar a 750, elas atingirão esse teto e nada mais do que isso será solicitado, o que significa que o Nextflow continuará a executar e não travará por causa de recursos indisponíveis.
+Ok, então como damos esses ao Nextflow? É muito simples. Fazemos Nextflow run hello config, como antes. E em vez de "-c" para arquivo de configuração, ou carregar esses nomes de arquivo padrão, fazemos -params-file. Hífen único porque é uma opção principal do Nextflow.
 
-Então, esta é uma boa proteção para usar, especialmente se você estiver usando lógica dinâmica com sua alocação de recursos.
+E então passar o caminho para esse arquivo. Então vou fazer "-params-file test-params.yaml", e veremos se esses são corretamente carregados.
 
-A outra situação onde isso é realmente útil é se você estiver usando pipelines que são públicos e não controlados por você. Eles podem vir com padrões de configuração, e o Nextflow automaticamente tomará a abordagem correta de limitar quaisquer solicitações de recursos para executar em seu sistema.
+Ok. Executou. Vamos apenas nos lembrar do que estava neste arquivo YAML. Então o batch foi definido como YAML, então é assim que deve ser chamado, e deve ter um stegosaurus. Então vamos subir e olhar em results. E temos COLLECTED-yaml. Então vamos ver se temos um Stegosaurus. Fantástico, um Stegosaurus usando um chapéu. É isso que gostamos.
 
-Ok, ótimo. Falamos sobre software. Falamos sobre alocação de recursos, e descrevemos diferentes escopos de configuração, tanto para todos os processos quanto para processos específicos.
+Então isso funcionou muito bem, e é exatamente o mesmo com o arquivo JSON. Apenas trocamos a extensão do arquivo aqui e o Nextflow sabe como ler isso.
 
-## 3. Usar um arquivo de parâmetros para armazenar parâmetros do fluxo de trabalho
+E neste caso, devemos ter um batch chamado JSON e devemos ter uma tartaruga. Vamos dar uma olhada. Maravilhoso. Uma das minhas ferramentas CLI favoritas.
 
-Ok, a seguir vamos voltar nossa atenção para parâmetros. Podemos definir parâmetros no arquivo de configuração assim como fizemos antes no script Nextflow. Então params dot greeting equals hello ou ou usar escopo params e definir foo equals bar.
+## 2.1. Personalize o diretório de saída com -output-dir
 
-E isso é ótimo para definir padrões para seu fluxo de trabalho. No entanto, quando você está executando pipelines, pode ser legal especificar parâmetros em um arquivo JSON ou YAML.
+Ok, então isso tem sido principalmente pensar sobre entradas para o pipeline e mudar parâmetros. E quanto às saídas?
 
-Usar um arquivo como este é muito melhor do que especificar opções de linha de comando com dash dash. Pois quando você executa um fluxo de trabalho, você pode ter que especificar muitos parâmetros e pode ser tedioso escrevê-los todos em uma única CLI e propenso a erros. Além disso, é improvável que você se lembre de todos os parâmetros que usou, então se você codificar isso em um arquivo, é mais fácil lançar o fluxo de trabalho novamente, usando os mesmos parâmetros no futuro.
+Agora, embora tenhamos mudado os subdiretórios usando params, você pode ter notado que todos os nossos arquivos ainda estão indo para results.
 
-Temos um arquivo de exemplo aqui chamado test params, e você pode ver que isso especifica os três parâmetros que temos em nosso fluxo de trabalho com três valores diferentes. Pessoalmente, acho YAML mais fácil de escrever do que JSON. Então, apenas para demonstrar que funciona, vou criar um novo arquivo chamado Test yaml e copiar estes, me livrar das aspas. E salvar.
+Podemos mudar esse diretório base para onde todos os arquivos são publicados com uma flag de linha de comando chamada -output-dir. Então se eu fizer Nextflow run hello config, e então fizer -output-dir, e vamos chamá-lo de "custom-outdir-cli". Não consigo digitar. Só para lembrarmos de onde esses arquivos vieram.
 
-Esses arquivos JSON e YAML podem ser mais fáceis de escrever, pois são sintaxe mais familiar. Mas note que estes são apenas para parâmetros e eles só aceitam sintaxe de chave-valor assim.
+Esta é uma opção principal do Nextflow e é muito nova. Isso foi adicionado apenas recentemente, e esta é uma das coisas que podemos fazer com o novo analisador de linguagem e tudo mais.
 
-## 3.1. Executar o fluxo de trabalho usando um arquivo de parâmetros
+É um bocado para digitar. Você também pode apenas chamá-lo de "-o" se quiser. Então se eu apenas voltar. Posso apenas encurtar isso para "-o", que é um pouco mais simples.
 
-Vamos experimentar. Fazer o mesmo comando de antes. Livrar-se do relatório e vou fazer dash params file test params yaml.
+Ok. Executamos isso. Não mudamos nada em nosso pipeline ou mesmo em nossa configuração neste ponto, e deve esperançosamente salvar todos os nossos resultados em um diretório de nível superior diferente. E você pode imaginar que pode definir isso para basicamente qualquer caminho que quiser.
 
-Não, esta é uma opção central do Nextflow, então é um único hífen.
+Acabou de chegar no topo. Temos um custom-outdir-cli, e todos os arquivos estão organizados lá exatamente da mesma forma, com seus mesmos subdiretórios e nomes de arquivo. Então esta é uma maneira realmente fácil de apenas mudar onde o pipeline publica seus resultados, sem pensar muito sobre como esses resultados são organizados.
 
-Ok. Executou o fluxo de trabalho e usou os parâmetros naquele arquivo YAML em vez de eu especificá-los todos na linha de comando. Pode parecer exagero apenas para este exemplo simples, mas você pode imaginar se você tem 10 ou 20 parâmetros diferentes, pode ser um incômodo digitar manualmente, e isso é apenas muito mais fácil de editar em um editor de código e manter para fins de reprodutibilidade.
+## 2.1.2. Remova caminhos hard-coded do bloco output
 
-## 3. Determinar qual(is) executor(es) deve(m) ser usado(s) para fazer o trabalho
+Se olho neste diretório, podemos ver que ainda temos um subdiretório chamado Hello Config, o que parece um pouco redundante agora.
 
-Ok. Falamos sobre empacotamento de software com Docker e conda. Falamos sobre requisitos de recursos de processo com CPUs e memória. E falamos um pouco sobre como especificar parâmetros ao executar fluxos de trabalho.
+Então vamos apenas carregar nosso script novamente e podemos agora remover esse subdiretório do bloco output no final. Porque não precisamos mais disso. Então podemos fazer isso agora, deletar isso daqui. E então se é apenas isso, você pode deletar isso completamente ou deixar como uma string vazia. Vou deixar como uma string vazia por enquanto, porque vamos voltar e colocar algumas coisas diferentes em seu lugar no futuro. Mas se você não se importa com subdiretórios, é mais limpo apenas remover completamente a declaração path ali.
 
-As partes finais da configuração realmente são a execução, a infraestrutura computacional subjacente em si, e esta é a verdadeira joia da coroa do Nextflow: que podemos executar esses mesmos fluxos de trabalho em múltiplas infraestruturas computacionais diferentes.
+Ok, vamos salvar. Apenas tentar rapidamente de novo. Na verdade vou remover meu diretório "custom-outdir-cli" para não nos confundirmos com arquivos existentes lá. Porque lembre-se, quando você publica coisas, não remove os arquivos que estavam lá antes. Apenas adiciona novos. Vamos executar esse comando novamente, custom-outdir-cli.
 
-Na verdade, vou mudar para o material de treinamento escrito por um segundo. Nesta parte do treinamento, podemos ver alguns exemplos diferentes de como diferentes executores, neste caso, escalonadores HPC, definem os requisitos de recursos necessários para submeter um job.
+E agora se você fizer "ls custom-outdir-cli", não há mais diretório lá chamado Hello Config.
 
-Então para Slurm, você tem esses cabeçalhos SBATCH, que definem dash dash mem e o número de CPU. Se você está usando PBS, você tem cabeçalhos diferentes, e se você usa Grid Engine, você tem cabeçalhos diferentes novamente.
+## 2.2.1. Defina outputDir no arquivo de configuração
 
-Você pode imaginar que é ainda mais diferente se você quiser executar na nuvem, seja AWS batch, Google Cloud, Azure, ou mais.
+Ok, a flag de linha de comando aqui, "-o" ou "-output-dir" é boa. Mas e quanto a definir padrões para isso em config? Como fazemos isso?
 
-Cada uma dessas infraestruturas computacionais subjacentes é chamada de executor e o Nextflow sabe como falar com todos esses diferentes executores para submeter jobs com a sintaxe correta.
+Abro o arquivo "nextflow.config", fecho todo o resto e me livro disso. Podemos adicionar uma nova opção de configuração aqui, que acabei de copiar do site de material de treinamento, e é chamada outputDir.
 
-A boa notícia é que você não precisa saber sobre isso. Tudo que você tem que fazer é dizer ao Nextflow, qual executor usar.
+Não está sob nenhum escopo. Não está sob params ou nada. É de nível superior, e podemos definir isso como uma string. Agora uma coisa simples a fazer é apenas mudar para qualquer coisa diferente de results como uma string hard-coded. Mas porque está em um arquivo de configuração Nextflow, podemos ser um pouco inteligentes aqui e também incluir variáveis.
 
-## 3.1. Direcionando para um backend diferente
+E você pode ver aqui que incluímos uma variável params, params.batch, que é parte desta string. Isso significa que podemos reutilizar variáveis que estão vindo de outros lugares. E neste caso, se fizermos --batch, quando executarmos Nextflow Pipeline, vamos obter um subdiretório em nosso caminho personalizado baseado em qual era o nome do batch.
 
-Voltamos ao nosso arquivo de configuração e ao processo fazemos executor, e vou digitar local.
+Ok, então vamos testar isso e apenas dar uma olhada rápida para ver como ele, como os resultados parecem. Então se eu fizer Nextflow run hello config e --batch my_run. Vamos nos lembrar de como ficou a config. Então é custom-outdir-config.
 
-Local é na verdade o padrão, se você não especificar nenhum outro executor, local é o que será usado, e isso apenas significa seu sistema host, onde quer que você tenha lançado o Nextflow,
+Tree custom-outdir-config. E você pode ver o batch foi chamado my_run. E então temos aquele subdiretório chamado my_run. Então esse caminho de arquivo dinâmico funcionou.
 
-Eu poderia especificar em vez disso, Slurm. E isso submeteria jobs Slurm, ou eu poderia dizer AWS batch, e isso submeteria jobs para AWS batch.
+E não só isso, não foi mais para um diretório results padrão, e não tive que especificar nada na linha de comando para mudar o diretório base. Então redefinimos com sucesso o valor padrão para o outputDir padrão.
 
-Você precisa de alguma configuração adicional em alguns casos, por exemplo, executar na nuvem precisará de certas credenciais, mas realmente este é o núcleo disso, e pode ser tão simples quanto uma ou duas linhas de configuração para executar seu fluxo de trabalho em um ambiente computacional completamente diferente.
+## 2.2.2. Subdiretórios com nomes de batch e process
 
-Mesmo que estejamos executando em um sistema simples dentro do Codespaces, ainda posso brincar com isso um pouco e fingir que estamos executando no Slurm. Se eu então lançar o fluxo de trabalho novamente, Nextflow run, hello config. Vai falhar porque não será capaz de submeter jobs para o Slurm. Mas ainda podemos ir para os diretórios de trabalho e ver o que o Nextflow fez. Então, se formos para este diretório de trabalho e olharmos para Command Run. Você pode ver no topo deste arquivo, agora temos essas linhas de cabeçalho sbatch, que tentaram especificar os recursos necessários para o job Slurm.
+Ok, vamos levar isso um pouco além. Essa é uma variável dinâmica dentro do arquivo de configuração. E quanto ao próprio script? Agora, até agora tivemos esses caminhos aqui e estes também podem ser dinâmicos. Então em vez de apenas hard codear algo, podemos colocar alguns colchetes encaracolados e colocar algo dinâmico.
 
-## 4. Usar perfis para selecionar configurações predefinidas
+Então por exemplo, temos nossos processos chamados sayHello. Poderíamos fazer sayHello.name, que é um atributo do processo, que é meio chato porque é apenas "sayHello" neste caso. Mas é variável.
 
-Ok, estamos quase lá. A parte final deste capítulo é falar sobre perfis de configuração. Se você está executando seu pipeline em vários sistemas diferentes, pode ser irritante ter todos esses arquivos de configuração Nextflow diferentes, que você precisa especificar toda vez.
+Então isso te dá uma ideia. Então podemos colocar isso aqui e dizer convertToUpper.name, collectGreetings.name, collectGreetings.name novamente, e cowpy.
 
-Em vez disso, você pode codificar agrupamentos de configuração dentro do seu arquivo Nextflow config, e ligar e desligar esses grupos usando uma flag de perfil. Vamos ver como isso se parece.
+Agora quando executarmos, o diretório base ainda vai ser custom-outdir-config. E vai estar em um subdiretório chamado params.batch, mas os subdiretórios sob isso devem ser organizados por nome de processo.
 
-## 4.1. Criar perfis para alternar entre desenvolvimento local e execução em HPC
+Vamos apenas testar isso e ver se funciona. Então vou remover o diretório anterior para não nos confundirmos, e apenas usar exatamente o mesmo comando Nextflow Run.
 
-Vamos criar dois perfis em nosso exemplo aqui, um para o meu laptop e um para um sistema HPC mais pesado. Vou trapacear um pouco e apenas copiar o código do material de treinamento e colocá-lo aqui.
+Deveria executar da mesma forma. Poderia estar usando dash resume em todos esses para torná-lo um pouco mais rápido e usar os resultados calculados anteriormente. Agora, se eu fizer tree custom-outdir-config, você pode ver que não está em results, está em nosso diretório base com o nome do batch. E você pode ver que todos os resultados estão agora organizados dentro de subdiretórios nomeados após o processo. Então temos dois lugares diferentes onde estamos definindo caminhos de saída dinâmicos aqui.
 
-Temos um novo escopo chamado profiles, e então temos um nome para cada perfil, que pode ser qualquer coisa. E dentro disso temos configuração, que parece exatamente o mesmo que a configuração de nível superior que já escrevemos. Então, novamente, temos escopo process. Escopo Docker.
+Ok. Última coisa, vamos adicionar de volta aquelas pastas intermediárias, que tínhamos antes porque eram meio legais. Intermediates.
 
-No perfil chamado my laptop. Estou dizendo para executar usando o executor local, então no meu sistema host e usar Docker.
+E também podemos pensar um pouco sobre este params.batch, talvez como desenvolvedor de pipeline eu realmente gostei de ter isso no subdiretório, mas se usuários finais do pipeline estão definindo "-o" ou -output-dir no CLI, está completamente sobrescrevendo toda essa declaração, e perdemos aquele subdiretório.
 
-No perfil university HPC aqui estou dizendo para usar Slurm para submeter jobs, usar conda em vez de Docker, e estou especificando diferentes limites de recursos, que podem corresponder ao tamanho do sistema de nós no HPC que estou usando.
+Então o que podemos fazer é podemos tirar aquele caminho dinâmico do config outputDir, que seria esmagado, e colocá-lo no caminho output, que não é esmagado.
 
-Por padrão, nenhuma dessas configurações será usada quando eu executar o Nextflow, tenho que especificar que quero usar um desses perfis.
+Então podemos fazer params.batch slash intermediates slash sayHello.name, e fazer tudo isso em uma string entre aspas duplas, então é interpolado pelo Nextflow.
 
-## 4.2. Executar o fluxo de trabalho com um perfil
+Posso agora copiar, ops. Copiar estes para os outros processos. Lembre-se de colocar todos entre aspas. E remover intermediates destes outputs particulares.
 
-Vamos fazer nextflow run hello config. E vou fazer dash profile, único hífen porque é uma opção central do Nextflow. E então o nome que dei a ele, que é my laptop. O Nextflow deve agora usar o bloco de configuração que foi especificado dentro daquele perfil de configuração, e aplicá-lo quando executar o Nextflow. Se eu quisesse usar o outro bloco de configuração, só tenho que mudar esse nome de perfil. Muito mais fácil de lembrar. Muito mais fácil de usar.
+Ok? Está parecendo ligeiramente mais complexo agora, mas você pode ver que estamos realmente começando a construir uma estrutura de diretório de saída bem organizada em nosso código.
 
-## 4.3. Criar um perfil de teste
+E o que é realmente legal é que essa complexidade extra no código não passa para o CLI. Então podemos executar nosso comando com -output-dir e quaisquer variáveis batch, apenas pensando em como executar o pipeline e não realmente pensando muito sobre o que está no código. E nossos arquivos de saída vão ser construídos muito bem de uma maneira muito bem organizada, o que é legal para pessoas usando o pipeline basicamente.
 
-Note, os perfis podem ter qualquer tipo de configuração, então não precisa estar relacionado ao seu ambiente de execução. Por exemplo, vamos criar um novo perfil aqui, que tem um conjunto de parâmetros. Podemos mudar isso para tux e mudar para my profile, e agora quando fazemos profile test, vai especificar esses parâmetros, que sobrescreverão os parâmetros que são especificados no nível superior do fluxo de trabalho.
+Ótimo. Enquanto escrevo isso, percebo que cometi um erro. Veja se alguém me pegou aqui. Temos collectGreetings.name, então algo deu um pouco errado. E sim, com certeza, eu acidentalmente esqueci de colocar estes em colchetes encaracolados.
 
-Quando você executa o Nextflow, você pode encadear múltiplos perfis e eles serão aplicados em sequência.
+Então lembre-se, tenha cuidado quando estiver escrevendo seu código e certifique-se de dizer ao Nextflow o que é uma variável e o que é apenas uma string. Porque ele vai fazer exatamente o que você diz para fazer. E nada mais. Como todos os bons computadores. Ok, isso deve consertar.
 
-## 4.4. Executar o fluxo de trabalho localmente com o perfil de teste
+## 2.3. Defina o modo de publicação no nível do workflow
 
-Então posso pegar o comando anterior e fazer vírgula test. Isso aplicará o, my laptop config primeiro, e então aplicará o test config. Se houver alguma sobreposição, então o perfil à direita sobrescreverá qualquer configuração em perfis anteriores. Se eu pressionar enter, vamos ver o que acontece.
+Há uma parte deste script, que eu ainda não amo, que é o fato de que estamos escrevendo mode copy de novo e de novo, e se há uma coisa que não gostamos, é nos repetir.
 
-Ok, temos um novo arquivo de resultados aqui. Você pode ver o My Profile, que eu especifiquei como uma das opções. E também podemos ver cowpy, my profile, e com certeza, está o tux. Então funcionou.
+Então podemos limpar isso um pouco pegando isso e movendo para a config. E na verdade, podemos definir para todo o pipeline de uma vez. Então não temos que dizer múltiplas vezes.
+
+Vamos para nosso arquivo de configuração e temos um novo escopo aqui chamado workflow. E podemos fazer colchetes encaracolados ou podemos fazer notação de ponto. Não faz diferença. O site de material de treinamento usa notação de ponto. Posso dizer output e podemos misturar, então mode equals copy. Ótimo.
+
+E agora podemos voltar aqui e deletar estes. Agora poderíamos deixá-los no lugar. A config está basicamente sobrescrevendo o que está escrito aqui, mas como temos no config de nível de pipeline, e esses dois arquivos são enviados juntos, não há razão para realmente fazer duas vezes.
+
+Ok. Apenas uma verificação de sanidade, porque aparentemente cometemos erros. Vamos executar isso novamente e apenas verificar que estamos corretamente usando o modo copy para publicar arquivos. Então vamos executar o script novamente e desta vez colocamos os resultados em um diretório chamado config-output-mode, ver como os arquivos ficam lá.
+
+E então se eu fizer "ls -l" para olhar batch, e podemos olhar cowpy, por exemplo. E devemos ver, sim, que este é um arquivo apropriado aqui, que não é um link simbólico, então esse atributo de config foi aplicado corretamente.
+
+## 3. Selecione uma tecnologia de empacotamento de software
+
+Ok. Até agora temos focado nas entradas e nas saídas, os arquivos com os quais o fluxo de trabalho está executando. Mas e quanto à infraestrutura? Eu disse no início que Nextflow permite que você execute o mesmo pipeline em diferentes configurações computacionais. Então como isso parece?
+
+Para mostrar isso, vamos mudar de usar Docker para executar cowpy, e em vez disso usaremos Conda para fazer a mesma coisa.
+
+Posso fazer isso muito simplesmente. Se eu for para code, "nextflow.config". Se você se lembra no topo, definimos docker.enabled anteriormente, e no último capítulo para que pudéssemos usar o contêiner com cowpy nele.
+
+Vou dizer ao Nextflow para não usar Docker. Definir isso como false. E vou dizer Conda enabled equals true. Então dizer ao Nextflow, por favor use Conda.
+
+Agora apenas habilitar Conda não é suficiente por si só. Assim como fizemos com Docker, temos que dizer ao Nextflow onde pode obter o software que precisa.
+
+Então se pularmos para os módulos aqui. E abrir o script cowpy. Podemos ver que temos uma declaração container no topo. E o contêiner é usado pelo Docker, mas também Singularity, Apptainer, e muitas das outras ferramentas de software.
+
+Mas não pode ser usado para Conda, então temos uma declaração separada chamada "conda", e poderíamos apenas escrever "cowpy". E isso vai deixar para a resolução de pacotes conda descobrir a melhor maneira de resolver isso de acordo com seu ambiente conda local.
+
+Ou é uma boa prática fazer o que o site de material de treinamento diz para fazer, que é definir um canal conda específico com sua notação de dois pontos duplos, e definitivamente definir uma versão específica do software para que cada pessoa que execute o pipeline obtenha a mesma versão.
+
+Note que contêineres são um pouco superiores neste aspecto, porque quando você instala algo com Conda, ainda vai descobrir todas as dependências para aquele pacote, e elas podem mudar ao longo do tempo. Chamado desvio de dependência.
+
+Então contêineres, no entanto, travam toda a pilha de toda a pilha de dependências de software até o fim, então você pode estar um pouco mais confiante que A, vai funcionar, e B, será reproduzível.
+
+Então se você é capaz de usar Docker ou Singularity ou Apptainer, eu definitivamente recomendaria isso.
+
+Agora o que é legal sobre isso é que o arquivo de módulo, que é escrito pelo desenvolvedor do pipeline, agora tem tanto Container quanto Conda, e então estamos dizendo à pessoa que está executando este pipeline, não nos importamos qual solução de empacotamento de software você usa. Vai funcionar tanto com Docker quanto com Conda, e este é onde obter o software em ambos os casos.
+
+Podemos abrir o terminal e vamos tentar isso. Então Nextflow run hello config --batch conda. E a primeira vez que isso executar com conda, vai ser um pouco lento quando chegar naquele processo particular, porque tem que executar "conda install".
+
+E está criando um ambiente conda especial apenas para este processo. Então não está usando meu ambiente conda global, que tenho no meu terminal. Está criando um apenas para aquele processo. Isso é bom porque evita coisas como conflitos de dependência entre diferentes processos no seu fluxo de trabalho. Se seus processos têm ferramentas que precisam de diferentes versões de Python ou coisas assim, tudo bem porque estão usando diferentes ambientes conda.
+
+Nextflow cacheia esses ambientes conda localmente, você pode ver que ele te diz onde está esse caminho, está no diretório work aqui. E então da próxima vez que eu executar este script com Conda, vai ser muito mais rápido porque vai encontrar aquele ambiente conda existente e apenas reutilizá-lo. Mas a primeira vez que fazemos isso, tem que ir e buscar, resolver, baixar todas as dependências, e configurar tudo.
+
+Ok, ótimo, executou. Podemos apenas nos lembrar do que o pipeline está atualmente configurado para usar. Se olharmos no arquivo de configuração, era "custom-outdir-config" agora para mim. Veja se eu subir para aquele diretório base. E fiz --batch conda. Lá está nosso subdiretório conda. Então funcionou e lá está nossa saída cowpy.
+
+Então buscou cowpy, instalou no meu sistema local usando conda, e executou o processo. E o que é ótimo é que, como aquele usuário final, não tive que pensar nada sobre qualquer gerenciamento de software ali. Nextflow apenas resolveu para mim. Eu disse, preciso usar conda neste sistema. O desenvolvedor do pipeline disse quais pacotes eu precisava. E Nextflow fez o resto. Muito poderoso.
+
+Note que você pode na verdade usar uma mistura de diferentes tecnologias. Então posso habilitar Docker para processos específicos, e conda para outros processos, ou dizer que alguns processos devem apenas usar qualquer software local que eu tinha instalado. Isso é bastante incomum, mas é possível, e em alguns casos, por exemplo, se você está usando certo software que pode ser difícil de empacotar em Docker, você tem uma saída
+
+## 4. Selecione uma plataforma de execução
+
+Então isso é empacotamento de software. A outra parte da portabilidade para outros sistemas é onde os trabalhos realmente executam. No momento, estou executando basicamente no meu_laptop ou neste Codespaces, que é um único computador. Não há nada sofisticado. Nextflow está sendo um pouco inteligente sobre paralelizar os trabalhos da melhor forma que pode, mas está tudo em um sistema.
+
+Agora, se você está executando em um HPC, você provavelmente tem algum tipo de agendador de trabalhos como SLURM ou PBS ou algo assim, e você submeterá trabalhos para aquele agendador e ele distribuirá todos os trabalhos para diferentes nós de computação.
+
+Outra forma de executar é na nuvem. Então talvez você esteja usando AWS Batch, ou Azure Cloud, ou Google. E todos estes funcionam em um sistema similar onde você tem um agendador e você submete trabalhos e eles são submetidos para lugares diferentes para serem computados.
+
+Agora no passado distante quando comecei a fazer bioinformática, o software de todos para executar análise era muito ligado à sua infraestrutura computacional, o que tornava quase impossível replicar.
+
+Mas com essa separação de configuração no Nextflow, e com a capacidade do Nextflow de interagir com muitos backends de infraestrutura de computação diferentes, é muito simples pegar nosso pipeline sem modificar o código do pipeline e apenas trocar isso.
+
+## 4.1. Direcionando um backend diferente
+
+Então se formos ao nosso arquivo "nextflow.config", e podemos agora colocar alguma configuração de nível de processo. Então se eu colocar no topo escopo process e posso definir o executor, e aqui está definido como local, que é o padrão.
+
+Note porque isso é nível de processo, podemos direcionar coisas para diferentes processos. E então você pode na verdade configurar executores para serem específicos de processo e ter uma execução híbrida, onde alguns trabalhos podem executar localmente, onde quer que o trabalho Nextflow esteja sendo executado. Alguns são submetidos para diferentes HPC e alguns podem ser submetidos para a nuvem. Você pode ser tão inteligente quanto quiser.
+
+Agora, é muito difícil demonstrar isso em um ambiente de treinamento como este porque não tenho um HPC para submeter. Mas posso fazer é se eu digitar slurm, podemos trapacear um pouco e você pode ter uma sensação disso.
+
+E isto é realmente mais interessante para pessoas que estão acostumadas a executar em SLURM e sabem como os cabeçalhos SLURM parecem. Mas se eu fizer Nextflow run, hello config. Vai falhar porque vai tentar submeter trabalhos para um cluster que não existe. Então vamos ter algum tipo de erro sobre sbatch não estar disponível.
+
+Sim, escrito. Essa é a ferramenta. Essa é a ferramenta CLI que você usa para submeter trabalhos para um cluster slurm. Mas o que podemos fazer é podemos ir e olhar em nosso diretório work aqui com command click, abrir aquele diretório e olhar o .command.run. E você pode ver no topo do arquivo .command.run, temos nossos cabeçalhos sbatch, dizendo a um cluster SLURM teórico como lidar com esta submissão de trabalho.
+
+E então você pode ver que Nextflow está sendo inteligente, está fazendo todas as coisas certas. É só que não tínhamos um cluster para submeter.
+
+## 5. Controle alocações de recursos computacionais
+
+O que mais é diferente entre diferentes infraestruturas de computação? Outra coisa é quanta recursos disponíveis você tem, e de fato, em muitos ambientes de computação, é um requisito que você tenha que especificar quantas CPUs e quanta memória um trabalho precisa.
+
+Novamente, Nextflow abstrai isso para nós, de modo que não é mais específico de um único tipo de ambiente de computação, e podemos digitar no escopo de nível de processo aqui. CPUs equals um, memory equals dois gigabytes. Nosso pipeline não é muito exigente, então isso deve estar bem.
+
+Agora, acabei de adivinhar esses números aqui, mas como você sabe qual é uma quantidade sensata de recursos para usar? É um trabalho bastante difícil ir e cavar através de todos esses diferentes processos de um grande pipeline de muitas amostras e entender qual foi a utilização de recursos.
+
+Então uma boa abordagem para isso é definir esses valores para números altos para começar, apenas para que seu pipeline execute sem erros, e então pedir ao Nextflow para gerar um relatório de uso para você.
+
+Isso é super fácil de fazer, então vou voltar para um terminal. Oh, preciso lembrar de definir isso de volta para local para que meu pipeline realmente execute. E vou dizer Nextflow run, e vou usar uma flag de linha de comando -with-report.
+
+E posso deixar isso em branco e vai dar um nome de arquivo padrão, mas vou dar um nome de arquivo específico para que isso seja salvo em um lugar específico.
+
+Pressiono Enter, e o pipeline executa exatamente como normal, mas quando terminar, vai gerar um belo relatório HTML para mim.
+
+Então na barra lateral aqui, tenho este arquivo HTML. Se eu estivesse executando isso localmente, apenas o abriria. Estou, porque estou em Codespaces, vou clicar com o botão direito nisso e clicar em download, o que vai baixar para meu computador local. E posso apenas facilmente abri-lo no navegador web.
+
+Nextflow pode gerar um relatório como este para qualquer pipeline e tem algumas informações realmente legais. Então é uma boa prática sempre salvar essas coisas. Nos diz quando executamos, onde executamos, se foi bem-sucedido ou não, quais parâmetros foram usados, qual foi o comando CLI, coisas assim.
+
+E também há esses gráficos sobre uso de recursos. Então nos diz qual porcentagem de chamadas de CPU foram usadas para cada processo como um gráfico de caixa aqui, porque há muitas tarefas para cada processo, então podemos ver a distribuição.
+
+Você pode ver nossos processos aqui, cowpy e collectGreetings só tinham uma única tarefa, então é apenas uma linha única. E temos tanto CPU quanto memória e duração do trabalho, e foram muito rápidos.
+
+Se você está usando Seqera Platform, a propósito, você obtém os mesmos gráficos incorporados na interface do Platform sem ter que fazer nada. Então você sempre obtém essa informação na ponta dos dedos.
+
+Ok, então podemos usar este relatório e em uma execução real, e ter uma noção de quantas CPUs e quanta memória está sendo usada por nosso pipeline e voltar e colocar esses valores de volta em nosso arquivo de configuração, para que da próxima vez talvez não solicitemos tanto. E podemos ser um pouco mais enxutos.
+
+Agora você pode ficar realmente inteligente sobre configurar arquivos de configuração de pipeline. E novamente, se você está usando Seqera Platform, procure por um pequeno botão que parece uma lâmpada. Porque se você clicar naquilo, vai gerar um arquivo de configuração altamente otimizado, que é especificamente adaptado para seus dados, sua execução e seu pipeline. Para executá-lo da forma mais eficiente possível.
+
+Mas por enquanto, vou dizer que na verdade o número padrão de CPUs que Nextflow estava dando estava bom e só preciso de um gigabyte de memória.
+
+## 5.3. Defina alocações de recursos para um processo específico
+
+Agora, na vida real, é bastante incomum que todos os processos no seu pipeline vão precisar dos mesmos requisitos. Você pode ter algo como MultiQC como uma ferramenta de relatório, que precisa de muito pouco em termos de recursos e executa muito rapidamente.
+
+E então talvez você tenha algo que está indexando um genoma de referência ou fazendo algum alinhamento ou fazendo algum outro trabalho. Não importa o que seja, que requer muitos recursos. E então para essas diferentes submissões de trabalho para um agendador, você quer dar diferentes quantidades de recursos.
+
+Sob este escopo process, podemos definir uma configuração, que direciona processos específicos de maneiras diferentes.
+
+Aqui estamos usando withName, também podemos usar labels, e estes podem usar um padrão para direcionar um ou múltiplos processos. Aqui estamos apenas dizendo quaisquer processos que tenham um nome cowpy definir para dois gigabytes de memória e duas CPUs, e porque este é um seletor mais específico do que o process de nível superior, isso é sobrescrito nestes casos, então você pode construir um arquivo de configuração legal aqui, que realmente adapta todos os seus diferentes processos no seu pipeline para torná-los realmente eficientes.
+
+## 5.5. Adicione limites de recursos
+
+Agora como desenvolvedor de pipeline, provavelmente conheço as ferramentas muito bem, e quero que tudo execute o mais rápido e o melhor possível. Então pode ser que eu coloque números bem altos para alguns destes porque sei que vai executar muito mais rápido se eu der ao cowpy 20 CPUs em vez de duas.
+
+Tudo bem até você ir executar no seu laptop ou no GitHub Actions Continuous Integration test, ou algum outro sistema, que talvez não tenha 20 CPUs disponíveis.
+
+Agora quando você tentar executar o pipeline, vai falhar porque Nextflow vai dizer, não posso submeter este trabalho em lugar nenhum. Não tenho os recursos disponíveis.
+
+Agora para evitar aquela falha dura, podemos adicionar um pouco mais de configuração, que é específica para nosso sistema agora, chamada limites de recursos. E isso parece com isso. Está sob o escopo process novamente.
+
+E limites de recursos, você pode especificar basicamente o teto do que você tem disponível. É um mapa aqui, e você pode, dentro deste mapa, você pode definir a memória, as CPUs, e o tempo.
+
+Agora o que acontece é quando Nextflow submete uma tarefa de um processo, ele olha o que é solicitado e basicamente apenas faz um mínimo entre aquilo e aquilo. Então se solicitamos 20 CPUs, mas apenas quatro estão disponíveis, vai solicitar quatro. O pipeline não falha e usa tão próximo quanto possível do que foi projetado pelo desenvolvedor do pipeline.
+
+## 6. Use profiles para alternar entre configurações predefinidas
+
+Ok. Eu disse que os limites de recursos aqui podem ser específicos do sistema, e talvez eu tenha um arquivo Nextflow config no meu pipeline, e sei que as pessoas vão usar isso em uma variedade de lugares diferentes. Agora, em vez de forçar todo mundo a criar seu próprio arquivo Nextflow config toda vez, o que posso fazer é posso agrupar diferentes predefinições de configuração juntas em perfis de configuração.
+
+Vou rolar um pouco para baixo aqui e então logo após params, porque a ordem do arquivo de configuração aqui é importante, o arquivo de configuração é carregado sequencialmente, então vou colocar estes perfis depois de tudo o resto para que sobrescreva os params previamente definidos. E vou colar estes perfis do material de treinamento.
+
+Então há novo escopo de nível superior chamado profiles. Podemos ter nomes arbitrários aqui. Então temos my_laptop e univ_hpc. E aqui podemos ver estamos definindo os outros mesmos parâmetros de configuração que estávamos antes. Agora dentro apenas de um perfil. Então temos um executor local para executar no my_laptop e estou submetendo para um cluster SLURM no HPC.
+
+Estou usando Docker localmente, conda no HPC, e o sistema HPC tem limites de recursos muito mais altos.
+
+Agora posso executar o pipeline com a opção CLI -profile, dizer qual perfil quero usar. Então vou usar my_laptop, e Nextflow vai aplicar toda a configuração dentro daquele escopo de perfil. Então posso tentar isso agora. É o mesmo comando de antes. Nextflow run hello config, e faço dash profile, dash único porque é a opção principal do Nextflow, dash profile my_laptop.
+
+Agora vai aplicar em lote toda aquela opção de configuração. Oh, e você pode ver, eu disse antes que isso pode acontecer que o requisito do processo, pediu quatro CPUs e só tenho duas nesta instância Codespaces.
+
+Então esta é uma boa oportunidade apenas para testar os limites de recursos do processo, e dizer que só tenho duas CPUs no my_laptop, ou neste Codespaces. Agora se executarmos novamente, deve limitar aquele requisito para dois e esperançosamente o pipeline vai executar. Ótimo.
+
+## 6.2. Crie um perfil de parâmetros de teste
+
+Note que estes perfis não têm que ter apenas configuração sobre sua infraestrutura. Você pode ter agrupamentos de qualquer configuração aqui, incluindo parâmetros.
+
+Então outra coisa que você verá muito frequentemente nos pipelines das pessoas é um perfil test, que inclui parâmetros, que você normalmente submeteria por usuário. Mas aqui temos, basicamente diferentes padrões sensatos para quando quero executar casos de teste.
+
+E isso é ótimo porque não tenho que necessariamente ir e especificar todas essas coisas, que podem ser parâmetros necessários. Caso contrário posso apenas dizer dash profile test e vai apenas executar direto da caixa.
+
+Agora algo a notar é que perfis também podem ser combinados mais de um. Então posso fazer profile my_laptop aqui, e então também adicionar test. Não faço profile duas vezes. Apenas faço uma lista separada por vírgulas aqui sem espaços. E vai aplicar estes perfis em ordem. Então vai pegar a configuração do perfil my_laptop, e então vai aplicar a configuração test em cima.
+
+Realmente conveniente e você pode ver como você pode configurar muitos grupos padrão sensatos aqui para facilitar a execução do seu pipeline.
+
+## 6.3. Use nextflow config para ver a configuração resolvida
+
+Esperançosamente, eu convenci você de que a resolução de configuração Nextflow é poderosa, mas não te culparia se você estiver ficando um pouco tonto neste ponto depois que eu disse cerca de 20 maneiras diferentes de fornecer configuração e dar todas essas diferentes camadas como uma casca de cebola.
+
+Então se você estiver se sentindo inseguro sobre qual é a configuração resolvida final para Nextflow, saiba que há um comando chamado "nextflow config", e podemos executar isso e ele vai nos dizer qual é a configuração resolvida na nossa localização atual.
+
+Então quando eu executo aqui, ele encontra o arquivo "nextflow.config" no diretório de trabalho atual, e processa toda a configuração diferente, e me dá a saída resolvida.
+
+Note que o arquivo de configuração Nextflow também pode receber a opção CLI profile. Então se eu digo para resolver nos perfis my_laptop e test, e você pode ver que também aplicou os limites de recursos aqui da opção de configuração my_laptop e também definiu os params, que estavam no test.
+
+Então esta é uma maneira legal apenas para explorar como a resolução de configuração está funcionando, se você estiver inseguro.
 
 ## Conclusão
 
-Ok! Incrível. É isso. Você chegou ao final do curso. Você ganha um pouco de confete de celebração. Parabéns por terminar este capítulo.
+Ok, isso é tudo. Isso é configuração Nextflow em poucas palavras. Você pode fazer muita coisa com configuração. É realmente poderoso. Mas estes são a maioria dos casos de uso comuns que você vai se encontrar fazendo, e estes conceitos aplicam-se a todas as diferentes opções.
 
-[Próxima transcrição do vídeo :octicons-arrow-right-24:](07_next_steps.md)
+Dê um tapinha nas costas porque este é o fim do curso de treinamento Hello Nextflow. Você está esperançosamente agora confiante tanto em escrever seu próprio pipeline Nextflow do zero, configurá-lo e executá-lo, e você sabe todos os detalhes e as coisas para procurar.
+
+Há mais um quiz que você pode tentar na página de treinamento de configuração. Então desça e tente aquilo e certifique-se de que você entendeu todas essas partes sobre configuração.
+
+E, junte-se a nós no último vídeo apenas para uma rápida conclusão sobre alguns dos próximos passos que podem ser bons para fazer após este curso de treinamento.
+
+Obrigado por ficar conosco. Muito bem e te vejo no próximo vídeo.

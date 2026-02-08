@@ -2,17 +2,15 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-<!--
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/zJP7cUYPEbA?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Guarda [l'intera playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) sul canale YouTube di Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Guardate [l'intera playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sul canale YouTube di Nextflow.
 
 :green_book: La trascrizione del video è disponibile [qui](./transcripts/03_hello_workflow.md).
 ///
--->
 
 La maggior parte dei flussi di lavoro reali coinvolge più di un passaggio.
 In questo modulo di formazione, imparerete come connettere i processi insieme in un flusso di lavoro multi-step.
@@ -80,7 +78,7 @@ nextflow run hello-workflow.nf
 Come in precedenza, troverete i file di output nella posizione specificata nel blocco `output`.
 Per questo capitolo, è sotto `results/hello_workflow/`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     results/hello_workflow
@@ -111,7 +109,7 @@ A tal fine, dobbiamo fare tre cose:
 
 Per effettuare la conversione dei saluti in maiuscolo, useremo un classico strumento UNIX chiamato `tr` per 'text replacement' (sostituzione di testo), con la seguente sintassi:
 
-```bash title="Syntax"
+```bash title="Sintassi"
 tr '[a-z]' '[A-Z]'
 ```
 
@@ -141,7 +139,7 @@ Aggiungete la seguente definizione di processo allo script del flusso di lavoro,
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Usa uno strumento di sostituzione di testo per convertire il saluto in maiuscolo
  */
 process convertToUpper {
 
@@ -153,7 +151,7 @@ process convertToUpper {
 
     script:
     """
-    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '${input_file}' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
     """
 }
 ```
@@ -326,7 +324,7 @@ Ora c'è una riga extra nell'output della console che corrisponde al nuovo proce
 
 Troverete gli output nella directory `results/hello_workflow` come impostato nel blocco `output`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     results/hello_workflow/
@@ -340,7 +338,7 @@ Troverete gli output nella directory `results/hello_workflow` come impostato nel
 
 Comodo! Ma vale comunque la pena dare un'occhiata dentro la directory di lavoro di una delle chiamate al secondo processo.
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -420,7 +418,7 @@ Aggiungete la seguente definizione di processo allo script del flusso di lavoro:
 
 ```groovy title="hello-workflow.nf" linenums="37"
 /*
- * Collect uppercase greetings into a single output file
+ * Raccoglie i saluti maiuscoli in un singolo file di output
  */
 process collectGreetings {
 
@@ -621,9 +619,9 @@ Includiamo anche un paio di istruzioni `view()` per visualizzare gli stati prima
         // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+        // istruzioni view opzionali
+        convertToUpper.out.view { contents -> "Prima di collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "Dopo collect: $contents" }
     }
     ```
 
@@ -655,10 +653,10 @@ nextflow run hello-workflow.nf -resume
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
-    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Prima di collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+    Prima di collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+    Prima di collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+    Dopo collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
     ```
 
 Viene eseguito con successo, anche se l'output del log potrebbe apparire un po' più disordinato di questo (lo abbiamo ripulito per leggibilità).
@@ -666,8 +664,8 @@ Viene eseguito con successo, anche se l'output del log potrebbe apparire un po' 
 Questa volta il terzo passaggio è stato chiamato solo una volta!
 Guardando l'output delle istruzioni `view()`, vediamo quanto segue:
 
-- Tre istruzioni `Before collect:`, una per ogni saluto: a quel punto i percorsi dei file sono elementi individuali nel canale.
-- Una singola istruzione `After collect:`: i tre percorsi dei file sono ora impacchettati in un singolo elemento.
+- Tre istruzioni `Prima di collect:`, una per ogni saluto: a quel punto i percorsi dei file sono elementi individuali nel canale.
+- Una singola istruzione `Dopo collect:`: i tre percorsi dei file sono ora impacchettati in un singolo elemento.
 
 Possiamo riassumere questo con il seguente diagramma:
 
@@ -709,9 +707,9 @@ Prima di passare alla prossima sezione, raccomandiamo di cancellare le istruzion
         // raccoglie tutti i saluti in un file
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
-        convertToUpper.out.view { contents -> "Before collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
+        // istruzioni view opzionali
+        convertToUpper.out.view { contents -> "Prima di collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "Dopo collect: $contents" }
     ```
 
 Questa è fondamentalmente l'operazione inversa dal punto 2.4.2.
@@ -823,7 +821,7 @@ Nella sezione dei parametri della pipeline, effettuate le seguenti modifiche al 
 
     ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
     /*
-     * Pipeline parameters
+     * Parametri della pipeline
      */
     params {
         input: Path = 'data/greetings.csv'
@@ -835,7 +833,7 @@ Nella sezione dei parametri della pipeline, effettuate le seguenti modifiche al 
 
     ```groovy title="hello-workflow.nf" linenums="55"
     /*
-     * Pipeline parameters
+     * Parametri della pipeline
      */
     params {
         input: Path = 'data/greetings.csv'

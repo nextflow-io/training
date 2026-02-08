@@ -1,279 +1,277 @@
-# Bölüm 2: Merhaba Kanallar - Transkript
+# Bölüm 2: Merhaba Kanallar - Video Transkripti
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi edinin ve iyileştirmeler önerin](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/lJ41WMMm44M?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Önemli notlar"
+!!! note "Önemli notlar"
 
-    Bu sayfa yalnızca transkripti göstermektedir. Adım adım talimatların tamamı için [eğitim materyaline](../02_hello_channels.md) geri dönün.
+    Bu sayfa yalnızca transkripti göstermektedir. Adım adım tam talimatlar için [kurs materyaline](../02_hello_channels.md) geri dönün.
 
-    Transkriptte gösterilen bölüm numaraları yalnızca yönlendirici amaçlıdır ve materyallerdeki tüm bölüm numaralarını içermeyebilir.
+    Transkriptte gösterilen bölüm numaraları yalnızca gösterge amaçlıdır ve materyallerdeki tüm bölüm numaralarını içermeyebilir.
 
 ## Hoş Geldiniz
 
-Merhaba, Merhaba Nextflow'un ikinci bölümüne hoş geldiniz.
+Merhaba ve Hello Nextflow'un 2. Bölümüne tekrar hoş geldiniz. Bu bölümün adı Merhaba Kanallar.
 
-Bu bölümün adı Merhaba Kanallar. Nextflow'un bu temel parçası hakkında konuşacağız.
+Kanallar, Nextflow iş akışınızdaki yapıştırıcı gibidirler. Nextflow'un tüm bilgileri aktarmak ve iş akışınızı yönetmek için kullandığı, farklı süreçleri bir arada tutan parçalardır.
 
-Kanallar, pipeline'ınızdaki farklı adımları birbirine bağlayan şeylerdir, verilerinizin ve mantığınızın iş akışınız boyunca akmasının yoludur.
+Kanalların bir başka parçası da operatörlerdir. Bunlar temelde kanallarda içerikleri değiştirmek için kullanabileceğimiz fonksiyonlardır. Hadi VS Code'a dalıp nerede olduğumuza bakalım.
 
-Pekala, hadi başlayalım.
+Bu VS Code'da çok yakınlaştım, bu yüzden işleri temiz ve düzenli tutmak için tüm _.nextflow\*_ dosyalarını ve _work/_ dizinini ve results/ dizinini ve Birinci Bölüm'deki her şeyi kaldırdım. Ve burada sıfırdan başlıyorum. Ama bunun için endişelenmeyin. İstemiyorsanız, o dosyaları orada bırakabilirsiniz. Herhangi bir soruna neden olmazlar.
 
-training.nextflow.io adresine giderek başlayalım
+Bu bölüm için _hello-channels.nf_ üzerinde çalışmaya başlayacağız ve bunu açarsam, daha önce üzerinde çalıştığımız dosyaya çok benzer görünmeli. Betiğin farklı kısımlarının farklı yerlerde olması mümkün, ama her şey temelde aynı olmalı.
 
-Yan çubukta Merhaba Nextflow'u bulun ve ikinci bölüme tıklayın. Merhaba Kanallar.
+Farklı olan bir şey, buradaki output bloğundaki yolun şimdi bu bölüm için _hello_channels_ olması, bu da sonuç dosyalarının eğer hâlâ oradaysa sonuçlarınızın farklı bir alt dizininde saklanacağı anlamına gelir. Bu yüzden çıktılar hakkında kafanız karışmadan başlamak için güzel ve temiz bir yer olmalı.
 
-Tüm materyal burada yazılı, böylece kendi hızınızda ilerleyebilir ve kaçırmış olabileceğiniz herhangi bir şeyi yakalayabilirsiniz.
+Tamam, bu iş akışını çalıştırdığımızda bu betiğin ne yaptığını hızlıca hatırlayalım. _"nextflow run hello-channels.nf"_ yapıyoruz. _"--input myinput"_ yapabiliriz ve bunu çalıştırdığımızda, yukarıdaki sayHello sürecinde greeting'e giden ve output.txt'ye kaydedilen bu params.input parametresini kullanacak. Ve bunu sonuç dosyasında görebiliriz. Harika.
 
-Web sitesini açtıktan sonra, Codespaces'i yükleyebilirsiniz ve son bölümün sonunda kaldığımız yerden devam edeceğiz.
+## 1. Değişken girdileri açıkça bir kanal aracılığıyla sağlayın
 
-## 0. Isınma: hello-channels.nf dosyasını çalıştırın
+Bu güzel. Ama oldukça basit. Bu parametrede bir değişkenimiz var, bu değişken bir kez çalışan bir sürece gidiyor ve gerçekten ölçeklenmiyor. Ve ona birçok farklı dosya veremiyoruz. Ona birçok farklı selamlama veremiyoruz. Sadece bir tanemiz var.
 
-Bu bölüm için farklı bir dosyayı düzenleyeceğiz. Bu dosyanın adı Merhaba Kanallar, böylece yan çubukta bulabilirsiniz, açmak için çift tıklayın.
+Gerçekte, Nextflow tamamen analizinizi ölçeklendirmekle ilgilidir. Yani muhtemelen birden fazla şey yapmasını istiyorsunuz. Ve bunu _kanallarla_ yapıyoruz.
 
-Şimdi, eğer birinci bölümden yeni geldiyseniz, bu dosya size çok tanıdık gelecektir. Buradaki başlangıç noktası temelde birinci bölümü bitirdiğimiz yer, sayHello adlı işlememiz, girdimiz, çıktımız, publishDir'imiz ve params.greeting'imiz ve basit iş akışımız ile.
-
-Yeni bir dosya ile başlıyoruz, bu yüzden herkes için eşit bir zemin, ama isterseniz önceki dosyanızla devam edebilirsiniz.
-
-Not edin, temiz bir başlangıç noktası olması için buradaki tüm .nextflow\* dosyalarını ve work dizinlerini de sildim. Bunu yapıp yapmadığınız önemli değil, size kalmış.
-
-Pekala. Bu pipeline'ın beklediğimiz gibi çalıştığını kontrol ederek başlayalım. Burada terminali açacağım.
-
-"nextflow run hello-channels.nf" yazıp enter'a basıyorum.
-
-O küçük iş akışını çalıştıracak, sayHello adımımızı çalıştıracak, o hash ile bir work dizini oluşturacak ve işte results klasörümüz ve varsayılan params.greeting'imizden çıktı dosyamız.
-
-Bu harika. Birinci bölümle tamamen aynı, beklediğimiz gibi çalışıyor.
-
-## 1. Değişken girdileri bir kanal aracılığıyla açıkça sağlayın
-
-Birinci bölümde, aslında zaten kanalları kullanıyordunuz, sadece farkında değildiniz. Burada bir string belirttiğimizde, Nextflow otomatik olarak bizim için o string'in etrafında bir kanal oluşturdu, sadece bir process çağırdığımızı bildiği için, bu yüzden bir girdi kanalına ihtiyacımız vardı.
-
-Yapacağımız ilk şey, kanalın kendisini yazarak bunu açık hale getirmek.
+Kanallar, Nextflow'u öğrenen birçok kişi için biraz benzersiz bir kavramdır. Fonksiyonel programlama kavramlarından gelir ve kafanıza yerleşmesi biraz zaman alabilir, ama bir kez tıkladığında, gerçekten Nextflow'un gücünü açarlar ve iş akışlarınızı nasıl yazacağınızın anahtarıdır.
 
 ## 1.1. Bir girdi kanalı oluşturun
 
-Bu yüzden betiğin altındaki workflow'a gideceğim ve greeting_ch diyeceğim. Bu, bir değişken adının sonuna \_ch koymak için Nextflow kodunda sık kullandığımız bir gelenektir, böylece bir kanal olduğunu belirlemek kolaydır, ama bunu yapmak zorunda değilsiniz. Eşittir channel of Merhaba Kanallar.
+Bu betiği alıp sadece bir _param_ yerine bir _kanal_ kullanmasını sağlayalım.
 
-Az önce kullandığımız şey, Nextflow dilinde "Channel Factory" denen bir şeydir. İşte bu şey, bu değişkeni yeni bir kanala ayarlıyoruz ve buradaki bu channel factory bize belirli bir şekilde bir kanal oluşturuyor.
+İş akışına gidiyoruz, bu bizim iş akışı mantığımızın işleri birbirine bağlama hakkında olduğu yer. Ve buraya gireceğim ve yeni bir kanal oluşturacağım.
 
-Nextflow'un farklı türde girdilerden kanallar oluşturmak için bir avuç farklı channel factory'si vardır. Dot of en basit olanıdır ve ona verdiğimiz herhangi bir string'i alır.
+Yeni bir kanal oluştur.
 
-VS Code'da bu kelimelerin üzerine geldiğimde, Nextflow uzantısının bana bu sözdiziminin ne yaptığını açıklayan bir açılır pencere verdiğini fark edin ve o açılır pencerenin altında da daha fazla oku metni var.
+Ve ona "_greeting_ch"_ adını vereceğim. Bu değişkenin bir kanal olduğunu hatırlamanız için böyle "_\_ch"_ yapmak bir gelenektir. Ama istediğiniz adı verebilirsiniz.
 
-Buna tıklarsam, Nextflow dokümanlarını açacak. Yeni bir sekmede ve beni doğrudan bu spesifik şeyin dokümantasyonuna götürecek. Bu durumda channel.of için.
+Ve sonra eşittir diyeceğim ve _"channel.of"_ yapacağım.
 
-## 1.2. Kanalı process çağrısına girdi olarak ekleyin
+Channel, kanallarla ilgili her şey için isim alanı gibidir. Küçük harf "c", eğer daha önce Nextflow kullanıyorsanız. Ve _".of"_, kanal oluşturmanın bir yolu olan Channel factory adı verilen bir şeydir.
 
-Uzantının bize ayrıca bir uyarı verdiğini, burada yeni bir kanal oluşturduğumuzu ama herhangi bir şey tarafından kullanılmadığını söylediğini unutmayın.
+Birçok farklı channel factory vardır. Burada sadece "." yaparsam, VS Code'un bir sürüsünü önerdiğini görebilirsiniz, ama _".of"_ en basit olanıdır ve sadece buraya bir girdi alır.
 
-Öyleyse, hadi bunu düzeltelim. Yeni kanal adını alacağım ve bu params.greeting'i yeni kanalımızla değiştireceğim.
+Yani bazı parantezler yapabilirim ve _"Hello Channels!"_ diyeceğim.
 
-Artık --greeting komut satırı bayrağını kullanmıyoruz, params.greeting kullanılmıyor, bu string'i tekrar sabit kodlamaya geri dönüyoruz. Bu tamam. Sadece işleri basit tutmaya çalışıyorum. Daha sonra geri gelip params'ı tekrar kullanacağız.
+Harika. Bir kanalım var. Fantastik. Kaydet'e basabilirim, tekrar çalıştırabilirim, ama ilginç bir şey olmayacak. VS Code bana burada turuncu bir uyarı çizgisi verdi ve bunu kurduğunuzu söyledi: bunu oluşturdunuz, ama aslında hiçbir şey için kullanmadınız. Bu kanal tüketilmiyor.
 
-## 1.3. Workflow komutunu tekrar çalıştırın
+Tamam, peki nasıl kullanırız? Çok basit. Bunu alacağım, kopyalayacağım ve _params.input_'u sileceğim ve bunun yerine _"greeting_ch"_ koyacağım. Yani bu kanalı sayHello'ya girdi olarak geçireceğiz.
 
-Pekala, bunun çalıştığını bir kontrol edelim. Terminali açıyorum ve tekrar not ediyorum. Nextflow run hello channels. output.txt'yi kontrol edin, ve işte orada.
+Şimdilik bu dizgiyi sabit kodladığımı unutmayın. Bu, son bölümün sonunda kullandığımız güzel parametreden sonra biraz geri bir adım, ama mantığı görebilmeniz için işleri basit tutmak için.
 
-Harika, biraz sıkıcı bir örnek, daha önce yaptığımızla tamamen aynı şeyi yapıyor, ama şimdi en azından mantık biraz daha net. Yeni bir kanal yazmak konusunda açık oluyoruz.
+Tamam, terminalime gireceğim ve iş akışını tekrar çalıştıracağım. Bu sefer herhangi bir _"--input"_ olmadan, ve çalışacak ve oluşturduğumuz kanalı kullanacak ve umarım _results/hello_channels/_ içinde bir dosyamız olmalı ve şimdi "Hello Channels!" diyor. Fantastik. Yani kanalımızdan beklediğimiz bu. Harika.
 
-Aynı şeyi yapmak için etkili bir şekilde daha fazla kod yazdık. Ancak kanallarımızı nasıl oluşturduğumuz konusunda biraz daha karmaşık hale geldikçe bu daha mantıklı olmaya başlayacak.
+## 1.4. Kanal içeriğini incelemek için view() kullanın
 
-## 2. İş akışını birden fazla girdi değerinde çalışacak şekilde değiştirin
+Buraya eklenecek bir şey daha, kanallarda kullanabileceğimiz "_.view"_ adlı başka bir fonksiyona hızlı bir giriş.
 
-Pekala, bunu biraz daha ilginç hale getirelim. Bir Nextflow pipeline'ını tek bir girdi üzerinde çalıştırmak istemeniz çok nadirdir, o yüzden ona birkaç girdi verelim.
+Bu, Python veya alışkın olabileceğiniz diğer dillerdeki _print_ komutuna benzer ve çalıştırdığımızda bu kanalın içeriğini terminale döker.
 
-## 2.1. Girdi kanalına birden fazla karşılama yükleyin
+Yani "_.view"_ yapın, ve sonra iş akışını tekrar çalıştırırsam, bu kanalın içeriğinin ne olduğunu, oluşturduğumuz zamanda, terminale yazdırmalı.
 
-Buradan dokümanlardan. Bu farklı string'leri, üç tanesini kopyalayacağım. Hello, Bonjour, Olà. Oh, umut. Copilot birkaç tane daha öneriyor. Öyleyse bunları tab enter ile girelim.
+Nitekim, terminale buraya yazdırdığını görebilirsiniz. _"Hello Channels!"_.
 
-Buradaki Nextflow dokümanları bize bu operatöre birden fazla değer verebileceğimizi söylüyor, bu yüzden çalışması gerekir, ama deneyelim ve ne olduğunu görelim.
+İsterseniz bunları satırlar arasında bölebileceğinizi unutmayın ve aslında, Nextflow otomatik biçimlendiricisi bunu sizin için yapmaya çalışacaktır. Boşluk burada gerçekten önemli değil, bu yüzden bunları birbiri ardına zincirleyebilirsiniz.
 
-## 2.1.2. Komutu çalıştırın ve günlük çıktısına bakın
+## 2. İş akışını birden fazla girdi değeri üzerinde çalışacak şekilde değiştirin
 
-Evet ve hayır. Bakalım. Burada beş görevden beşinin çalıştığını söylüyor, ama bize sadece bir hash gösteriyor, bu biraz garip. Sorun değil. Her şey burada beklendiği gibi. Varsayılan olarak. Nextflow, terminale ANSI kontrol kodları adı verilen özel bir çıktı türü kullanır, bu da çalıştırılan tüm farklı işlemlerin güzel bir sıkıştırılmış görünümünü vermek için belirli satırların üzerine yazar.
+Tamam, kanalımızda bir şey var ki bu güzel, ama temelde daha öncekiyle aynı. O halde biraz daha karmaşık hale getirelim. Kanalımıza birkaç şey daha ekleyelim.
 
-Bu, daha büyük iş akışlarınız olduğunda ve yüzlerce veya binlerce farklı örnek çalıştırdığınızda çok daha mantıklıdır. Terminalde o kadar çok çıktı oluşturabilirsiniz ki, bakmak imkansızdır, oysa bu güncellenen görünüm size gerçek zamanlı bir ilerleme sağlar.
+"_.of()"_ channel factory birden fazla öğe alabilir, o halde birkaç tane daha yazalım. _Hello, Bonjour, Hej_ yapacağız. Ve sonra bu iş akışını tekrar çalıştırabiliriz ve ne olacağını göreceğiz.
 
-## 2.1.3. Komutu tekrar -ansi-log false seçeneğiyle çalıştırın
+Tekrar çalışmalı. Ve şimdi yazdırdık. _"Hello", "Bonjour"_ ve _"Hej"_ terminale view ifademizle. Fantastik.
 
-İsterseniz, tekrar çalıştırabilirsiniz ve bu sefer "-ansi-log false" diyen tek bir tire ile ek bir Nextflow çekirdek argümanı kullanacağım. Bu, Nextflow günlük çıktısının önceki sürümünü kullanır. Ve burada başlatılan tüm bireysel işlemleri görebilirsiniz.
+## 2.1.2. Komutu çalıştırın ve log çıktısına bakın
 
-Bunu yapıp yapmamak size kalmış. Nextflow'dan gelen çıktı her iki durumda da tamamen aynıdır.
+Bu noktada işimizin bittiğini düşünebilirsiniz. Ama aslında burada bizi yakalayacak bir tuzak var. Çıktı dosyamıza buraya bakarsak. _"Hello"_ içinde olduğunu görebilirsiniz, ama diğer çıktılardan hiçbiri yok. Aslında, sadece bu.
 
-## 2.2. Çıktı dosya adlarının benzersiz olacağından emin olun
+Bu iş akışını birden çok kez çalıştırırsak, bazen _"Bonjour"_ olduğunu, bazen _"Hej"_ olduğunu bile görebiliriz. Biraz rastgele.
 
-Pekala, çıktı dosyalarına bakalım o zaman, results'a gideceğiz. Ama sadece tek bir çıktı dosyası var. Ne oldu? İşlemin birçok kez çalıştığını gördük. Work dizinine gidebilir ve tüm farklı hash'leri görebiliriz, tüm görevler düzgün bir şekilde yürütüldü. Ama burada işlememizde hatırlarsanız, her şeyi bir output.txt dosyasına kaydediyor ve sonra bunu bu dizine yayınlıyoruz.
+Terminale bakarsak, üç kez çalıştığını görebiliriz ve farklı view çıktılarını görebiliriz. Ama work dizinine gidersem, _"cat work"_ yapabilirim. Bu hash'i koy ve genişlet ve _output.txt_. Work dizinindeki bu dosyanın results dizininden farklı olduğunu görebilirsiniz ve bu _"Hej"_. Yani burada tam olarak çalışmayan bir şey var.
 
-Yani aynı dosya beş kez oluşturuldu ve sonra beş kez üzerine yazıldı. Ve sadece hangi görevin en son yürütülmüş olduğuna sahibiz.
+Ve anahtar şu ki, üç görev çalıştı. Nextflow çıktısı, işlem devam ederken bunu özetlemeye çalışır, böylece tüm terminalinizi tamamen ele geçirmez ve bu ANSI Günlüğü, temelde diğer görevlerin üzerine yazan ANSI kaçış kodlarını kullanır. Yani size sadece güncellenen son olanı gösterir.
 
-## 2.2.1. Dinamik bir çıktı dosya adı oluşturun
+## 2.1.3. Komutu -ansi-log false seçeneği ile tekrar çalıştırın
 
-Bunu düzeltme yolumuz dinamik bir çıktı dosya adı kullanmaktır. Burada işlem içinde zaten greeting adında bir değişkenimiz var, bu yüzden bunu çıktı dosya adında kullanabiliriz. Bunu kopyalıyorum ve $greeting-output.txt yapıyorum.
+Bunu gerçekten daha iyi anlamak için yapabileceğimiz birkaç şey var. Work dizininin içine bakabiliriz ve oradaki tüm farklı work dizinlerini görebilirsiniz, ama bu biraz kafa karıştırıcı çünkü farklı Nextflow yürütme çalıştırmalarıyla karışacak.
 
-Bunu tırnak içine alacağım, böylece bash burada sızabilecek herhangi bir boşluktan kafası karışmasın. Ve sonra aynı dosya adını alacağım ve buradaki çıktıyı güncelleyeceğim.
+Ya da Nextflow'a ANSI kaçış kodlarını kullanmamasını söyleyebiliriz.
 
-Çıktının bununla eşleşmesi gerçekten önemlidir, çünkü aksi takdirde bu dosya bulunamayacak ve Nextflow çökecektir.
+Yani komutu tekrar çalıştırırsam, ama bu sefer _"-ansi-log false"_ diyerek kapatıyorum, ayrıca _$NO_COLOR_ veya _"$NXF_ANSI_LOG=false"_ ortam değişkenlerini de kullanabilirim. O zaman bu kaçış kodlarından herhangi biri olmadan Nextflow günlüğünün daha eski tarzını kullanır. Akıllı güncellemeler olmadan doğrudan terminale yazdırır.
 
-Gerçekten önemli bir düzenleme daha yapacağım, bu tek tırnakları çift tırnaklara çevireceğim. Bunu yaptığımda kodun renginin değiştiğini fark edin. Bu değişken yalnızca çift tırnak kullanırsak genişletilir. Burada tek tırnak kullanırsam, gerçek bir değer olarak kullanılır ve $greeting-output adında tek bir dosya elde ederim, bu da istediğim şey değil.
+Ve şimdi çalışan bu üç sürecin tümünü görebiliriz. Ve her birinin kendi görev hash'i var. Ve bu work dizinlerine girersek, belirttiğimiz üç farklı selamlamayı göreceğiz.
 
-## 2.2.2. İş akışını çalıştırın
+Yani bu artık biraz daha mantıklı. Umarım Nextflow'un bunu yaptığını anlarsınız, sadece bu work dizinleriyle size terminalde gösterdiği şeyde biraz akıllıydı.
 
-Öyleyse çift tırnakları geri koyalım ve bir deneyelim.
+Ancak, bu work dizinleriyle ilgili bir sorunu düzeltti, ancak çıktı dosyasıyla ilgili bir sorunu düzeltmedi. Hâlâ sadece _"Hello"_ yazan bir çıktı dosyamız var.
 
-Başlamadan önce dizinimı temizleyeceğim, böylece yeni dosyaları görmek kolay olur. .nextflow, work ve results adlı her şeyi sileceğim.
+## 2.2. Çıktı dosyası adlarının benzersiz olacağından emin olun
 
-Ve o Nextflow komutunu tekrar çalıştıracağım ve hangi dosyaların oluşturulduğuna bakalım. Yani orada beş işlemi çalıştırıyor. Çok yakından izliyorsanız, çalışırken o satırın güncellendiğini görmüş olabilirsiniz.
+Şimdi bunu anlamak için iş akışı betiğimize geri dönmemiz gerekiyor. Burada kanalımızı oluşturuyoruz, onu sürecimize geçiriyoruz ve sürece bakarsak, selamlamayı _"output.txt"_ adlı bir dosyaya yazıyoruz ve o çıktı dosyasını aşağıdaki output bloğuna geri geçirerek yayınlıyoruz.
 
-Ve şimdi results dizinine gidebiliriz ve elbette beş farklı çıktımız var ve hepsi farklı karşılama ile öneklenmiş.
+Ancak, bu süreç her üç kez çalıştığında bu üç farklı görev. Hepsi _"output.txt"_ adlı bir dosya oluşturur, tüm bu çıktı dosyaları results dizinine yayınlanır ve hepsi birbirinin üzerine yazar. Yani orada aldığınız sonuç dosyası her ne ise, sadece oluşturulan son olandır, ancak diğerlerinin hepsini sildi. Bu gerçekten istediğimiz şey değil.
 
-Bunların her birini açarsam, her birinin karşılık gelen karşılamayı içerdiğini göreceğiz. Harika. İstediğimiz bu.
+## 2.2.1. Dinamik bir çıktı dosyası adı oluşturun
 
-## 3. Bir kanalın içeriğini dönüştürmek için bir operatör kullanın
+Bunu ele almanın farklı yolları var, ama şimdilik en basiti sadece farklı benzersiz dosya adları oluşturmak. Böylece görev her farklı selamlama ile çalıştığında, farklı bir çıktı dosyası oluşturacak, bu da yayınlandığında artık çakışmayacak. Ve sonra üç benzersiz çıktı dosyası alacağız.
 
-Pekala, şimdi kanalların ne olduğunu ve channel factory'lerin ne olduğunu biliyoruz. Peki ya operatörler? Bu, Nextflow dilinin bir başka terimi olup, bize belirli şeyler yapmak için kanallar üzerinde işlem yapmamıza izin veren bir dizi fonksiyondur. Nextflow, kanalları çeşitli şekillerde manipüle etmemize izin veren bir operatör paketi ile birlikte gelir.
+Bunu tamamen aynı şekilde yapıyoruz. Bu değişkeni script bloğu içinde herhangi bir yerde kullanabiliriz ve birden çok kez kullanabiliriz.
 
-## 3.1. Kanala girdi olarak bir değer dizisi sağlayın
+Yani bunu buraya yapıştırabilirim, _"$\{greeting\}\_output.txt"_, ve sonra bunu buraya da yapıştırmam gerekiyor çünkü artık _output.txt_ adlı bir dosya oluşturmuyoruz. Yani bunu güncellemezsen, Nextflow hiç oluşturulmamış bir dosya beklediğini söyleyen bir hatayla çökecektir.
 
-Bunu bir örnekle inceleyelim. Diyelim ki bu girdi string'lerini almak istiyoruz, ama bunları doğrudan bir channel factory'ye koymak yerine, onları bir dizi olarak tanımlamak istiyoruz.
+Yani aynısını orada yapmam gerekiyor ve bu değişkenin anlaşılması için tek tırnak değil çift tırnak kullanmam gerekiyor.
 
-## 3.1.1. Girdi değişkenini ayarlayın
+Tamam, hadi deneyelim ve çalışıp çalışmadığına bakalım. İş akışını tekrar çalıştıracağız. Umarım bize üç farklı work dizinindeki üç farklı görevi gösterecektir. Ve nitekim, sol tarafta burada results klasörünün içinde artık üç farklı dosyayla üç farklı dosya adı ve her biri beklediğimiz farklı içeriklerle var. Yani dosyalar artık birbirinin üzerine yazmıyor ve her şey beklediğimiz gibi orada. 
 
-Öyleyse bunları alacağım ve yukarıda yeni bir satır olarak yapacağım ve greetings, dizi diyeceğim.
+Burada yaşadığımız bu biraz önemsiz bir kurulum, ama dosya yayınlamanın nasıl çalıştığı hakkında anlamanız gereken bazı temel kavramları vurguluyor ve tuzak olarak düşebileceğiniz bazı şeyler. Umarım kendi iş akışlarınızda bundan kaçınabilirsiniz.
 
-İşte oldu. O dizi değişkenini alacağım ve onu channel.of'a koyacağım ve kaydedeceğim.
+Ayrıca burada yaptığımız şeyin gerçek hayat durumlarında biraz pratik olmadığını belirtmekte fayda var. Bazı girdi verilerini aldık ve bu verileri kullanıyoruz, ama aynı zamanda dosyayı bu verilerden sonra adlandırıyoruz, ki bunu genellikle yapamazsınız.
 
-## 3.1.3. İş akışını çalıştırın
+Yani gerçek daha olgun Nextflow iş hatlarında, genellikle belirli bir örnekle ilişkili tüm meta verileri içeren bir meta nesnesini etrafta taşırsınız. Daha sonra buna dayalı olarak dinamik dosya adları oluşturabilirsiniz, ki bu çok daha pratiktir.
 
-Şimdi, bakalım ne olacak. Terminalime geri dönüyorum. Sadece o geçici dosyaların hepsini tekrar temizleyeceğim. Ve iş akışını çalıştıralım.
+Bunu en iyi uygulamalarla nasıl yapacağınızla ilgileniyorsanız, _training.nextflow.io_'da özellikle meta veriler ve meta haritalar hakkında bir yan görev var, daha fazla detay için oraya girebilirsiniz.
 
-İyi değil. Pekala. Bozuldu. Sorun değil. Bu sefer bozulmasını bekliyordum. Bir Nextflow iş akışı başarısız olduğunda neyin yanlış gittiğini hata ayıklamak, bir Nextflow geliştiricisi olmanın önemli bir parçasıdır. Bu çok olacak ve hata mesajının ne söylediğini ve bununla nasıl başa çıkılacağını anlamak önemlidir.
+## 3. Bir dizi aracılığıyla birden fazla girdi sağlayın
 
-Nextflow hata mesajları aslında oldukça yapılandırılmıştır. Bize hangi işlemin yanlış gittiğini söyler. Bir sebep için bize bir hata mesajı verir. Çalıştırmaya çalıştığı komutun o belirli görev içinde ne olduğunu, çıkış durumunun ne olduğunu, çıktının o görev work dizininin nerede olduğunu söyler.
+Tamam. Şimdi kanalların nasıl yapılandırıldığı ve kodlama dilindeki diğer veri yapıları türlerinden nasıl farklı olduğu hakkında biraz keşfedeceğiz. Ve diğer dillerden geldiyseniz tanıdık bir kavram olabilecek bir diziyi nasıl potansiyel olarak kullanabileceğimi düşüneceğim.
 
-VS Code'da buna option, tıklayabiliceğimi ve yan çubukta açtığını unutmayın, böylece doğrudan oraya gidebilir ve .command.sh dosyası dahil olmak üzere önceki bölümde bahsettiğimiz tüm bu gizli dosyaları görüntüleyebilirim. Bunun burada yürütülen komutlarla aynı olduğunu görebilirsiniz.
+Bir kanalda bir dizi kullanabilir miyim? Hadi deneyelim. Bir dizi oluşturacağım ve bunu dokümantasyondan kopyaladım, _"greetings_array"_ ve _"Hello", "Bonjour"_ ve _"Holà"_. Ve sonra bunu sabit kodlanmış dizgilerim yerine buraya koyacağım. Yani "channel.of" _"greetings_array"_ diyeceğim, bu diziyi bir kanala geçirerek. Hadi deneyelim.
 
-Bu dosyaya bakarak, burada neyin yanlış gitmiş olabileceğine dair bir fikir edinebiliriz, dizideki her öğe için tek bir görev çalıştırmak yerine, sadece tüm diziyi bir string olarak bir kerede sağladı. Bu yüzden o diziyi kanala geçirmeden önce bireysel değerlere açmamız gerekiyor. Geri dönelim ve bir operatör kullanarak bunu yapıp yapamayacağımızı görelim.
+Terminali açın ve iş hattını çalıştırın.
+
+Tamam. View ifadesinin beklendiği gibi dizimizi yazdırdığını görebilirsiniz, ama sonra tüm bu kırmızı metin, veya hâlâ _"-ansi-log"_'u kapatmışsanız kırmızı olmayacak, ama tüm bu kırmızı metin bize bir şeylerin ters gittiğini söylüyor.
+
+Artık burada güzel bir yeşil onay işaretimiz yok. Kırmızı bir çarpımız var ve bunu biraz daha genişletirsem okunması daha kolay olsun, Nextflow bize neyin yanlış gittiğini söylüyor.
+
+Hadi bunu bölüm bölüm inceleyelim. Hatanın nedeni diyor ve sonra hatanın nedeni, eksik çıktı dosyaları. Yani temelde o output bloğu bu dosyanın oluşturulması gerektiğini söyledi ama oluşturulmadı. Sonra bu yürütülen komut diyor. Yani bu temelde o _.command.sh_ dosyasının içeriği. Tüm bu değişkenler konulduktan sonra böyle görünüyordu.
+
+Ve burada echo komutumuzu görebilirsiniz aslında sadece bir kez çalıştırıldı ve tüm diziyi kullandı, ama bir dizi temsili olarak, ki bu gerçekten istediğimiz şey değildi.
+
+Ve sonra komut öyle çıktı ve bu bizim gidip dosyaları görebileceğimiz, biraz daha anlayabileceğimiz work diziniydi.
+
+Tamam. O zaman olan şey. Nextflow sadece bu tüm diziyi sürece tek bir kanal elemanı olarak geçirdi, bu da sürecin sadece bir kez çalıştığı anlamına geliyordu. Bir görevi vardı ve verileri beklediğimiz yapıda kullanmadı.
 
 ## 3.2. Kanal içeriğini dönüştürmek için bir operatör kullanın
 
-Bu durumda, diziyi kanala geçirmeden önce değiştirmeyeceğiz. Kanalı beklediğimiz şekilde davranacak şekilde ayarlayacağız. Bunu flatten operatörünü kullanarak yapacağız, dot yazmaya başlayabilirim ve VS Code uzantısının elimizde olan tüm farklı operatörleri önermeye başladığını görebiliriz.
+Yani kullanılabilmeden önce bu kanala bir şey yapmamız gerekiyor. Ve bu, kanal içeriklerini manipüle etmek için kanallarda kullanabileceğimiz özel fonksiyonlar olan operatörleri kullanmanın aşamasını hazırlıyor.
 
-## 3.2.1. flatten() operatörünü ekleyin
+Bu durumda, _flatten_ adı verilen bir şey kullanacağız. Bunu burada kanalın sonuna geçiriyoruz. Yani kanalı oluşturuyoruz ve sonra _flatten_ çalıştırıyoruz. Ve yine üzerine gelirseniz, bu komutun dokümantasyonunu VS Code'da hemen gösterir, bu çok yararlı. Tüm bu dokümantasyonları Nextflow web sitesinde, dokümantasyonda da bulabilirsiniz.
 
-Ve flatten'ı seçeceğim. Bu bağlamda Nextflow için beyaz boşluğun önemli olmadığını unutmayın. Yani isterseniz bu operatörleri yeni bir satıra koyabilirsiniz. Böylece bunu buraya bırakabilirim ve ".of" altında oturacak şekilde girintileyebilirim ve insanların genellikle bu şekilde bir kanala çok sayıda operatör zincirlediğini ve okumayı kolaylaştırmak için bu şekilde girintilediğini göreceksiniz.
+Şimdi bu kodu çalıştırabilirdim ve çalışıp çalışmadığını görebilirdim, ama bu aynı zamanda operatörler içinde ve Nextflow kodu içinde closure adı verilen dinamik kod yapmayı tanıtmak için güzel bir fırsat.
 
-Ayrıca görebilirsiniz, daha önce olduğu gibi bunun üzerine gelebilir ve flatten operatörünün ne yaptığını okuyabilir ve ayrıca istersem dokümantasyona bir bağlantı izleyebilirim.
+Yani _flatten_ çalıştırmadan önce burada bir view komutu ekleyeceğim. Ve burada dinamik closure olan bu kıvrımlı parantezler var. Ve burada sadece view operatörü bağlamında yürütülecek bazı keyfi kodlar var.
 
-Bu operatör, içinde tek bir dizi olan bu kanalı alıyor ve dizi değerlerini ayırıyor.
+Burada, bu greeting al diyor, ki bu view operatörünün girdileri, ve bu burada. Bunu istediğim gibi çağırabilirim, buna _"foo"_ diyebilirim ve sadece daha sonra _"foo"_ olarak ona atıfta bulunmam gerekir. Ve sonra bununla, bunu döndür diyorum.
 
-## 3.2.2. Kanal içeriğini incelemek için view() ekleyin
+Ve sonra bir değişken için flatten'den önce diyen bir dizi döndürüyor. çok basit.
 
-view operatörünü kullanarak kanallara göz atabiliriz ve burada birkaç tane ekleyeceğim. Bu, diğer dillerde print ifadeleri kullanmak gibidir. Bu yüzden dot view yapacağım ve sonra bu kıvrımlı parantezleri kullanacağım.
+Şimdi bunlardan bir tane daha ekleyeceğim tamamen aynı şekilde, ama _flatten_'den sonra diyeceğim.
 
-Buna closure denir. Bu temelde view operatörüne, kanal içindeki her öğe üzerinde yürüteceği ek kod verir. Bu durumda, flatten'dan önce karşılama diyeceğim. Karşılama.
+Yani bunun yaptığı, bu sırayla çalıştığı için, _flatten_ çalıştırmadan önce kanalın nasıl göründüğünü göreceksiniz, ve sonra _flatten_ çalıştırdıktan sonra tekrar.
 
-Burada sadece bu closure'ın kapsamı içinde olan bir değişken tanımlıyorum. Yani bu değişken sadece burada kullanılıyor ve istediğimi çağırabilirim. Önemli değil. Okumayı kolaylaştırmak için sadece greeting kullanıyorum.
+Ve sonra bu greeting kanalı hâlâ oluşturuldu, yani hâlâ sürece geçirilecek. Ve umarım artık iş akışı çalışacaktır. Hadi deneyelim.
 
-Bazı Nextflow pipeline'larında, insanların "$it" adlı özel bir örtük değişken kullandığını görebilirsiniz. Bunun gibi. Bu, Nextflow kodu içinde özel bir değişkendir, bir değişken tanımı yapmak zorunda kalmamanız için bir kısayoldur. Ancak zamanla, bunun Nextflow'a yeni başlayanlar için çok net olmadığını düşünüyoruz ve artık "$it" kullanımını caydırıyoruz.
+Harika. Öncelikle, iş hattı bu sefer çökmedi. Düzgün çalışan üç sürecimiz vardı ve küçük bir onay işaretimiz var. Ve sonra view ifadelerimizin çalıştığını görebiliriz.
 
-Bu yüzden greeting ile önceki davranışa sadık kalacağım ve bunu bu şekilde kullanacağım çünkü bu daha açık ve neler olup bittiği konusunda daha net.
+_flatten_'den önce var, ki bu daha önce hatadan gördüğümüz dizi, ve sonra _flatten_ çağrıldıktan sonra üç kez var, _"Hello", "Bonjour"_ ve dizideki diğer üç ayrı eleman var, ki bunlar artık umduğumuz gibi kanaldaki üç ayrı eleman.
 
-Sonra bu satırı kopyalayacağım ve flatten argümanlarından sonra tamamen aynı şeyi tekrar yapacağım. view operatörü biraz özeldir çünkü öğeler üzerinde bir şey yapar, ancak aynı zamanda bunları bir sonraki operatöre geçirmeye devam eder, böylece bunu bu şekilde bir operasyon zincirinin ortasına zincirleyebiliriz ve oradaki durumu yazdıracak ve devam edecektir. Umarım bu bize flatten operatöründen önce ve sonra kanalın nasıl göründüğünü gösterecektir.
+Ve _view_ operatörünün üç kez çalıştırıldığını görebilirsiniz. Ve bu, _flatten_'den sonra bu kanalın artık üç elemanı olduğu için. Yani operatör üç kez çağrılır.
 
-## 3.2.3. İş akışını çalıştırın
+Çok hızlı, channel factory'leri oluşturmadan önce, _"."_ yaptım dediğimi belirtmek isterim, ve kanal oluşturmanın birçok farklı yolunun olduğunu gördük ve bunlardan biri "_fromList"_ adında. Ve bu aslında özellikle bu aynı operasyonu yapmak için tasarlandı. Yani sadece from list greetings away yapabilirdik, ve bu çalışacaktır. Biraz daha temiz ve güzel bir sözdizimi. Ama bu gösterimin amaçları için, kanalın nasıl manipüle edildiğini ve farklı operatörlerin bir kanalın içeriğinde içeriği nasıl değiştirebileceğini görebilmeniz için adım adım yapmak istedik.
 
-Hadi deneyelim. Temizle. Çalışma alanındaki her şeyi temizle. Pipeline'ı tekrar çalıştır.
+## 4. Girdi değerlerini bir CSV dosyasından okuyun
 
-Tamam, yani beş işlemimizi tekrar çalıştırdığını görebiliriz. Bir hata ile çökmedi, bu kesinlikle iyi. Ve şimdi flatten'dan öncesi var ve elbette dizimiz var ve flatten'dan sonra, dizinin her öğesi için bir kez olmak üzere beş kez yazdırılmış. Tam olarak umduğumuz şey bu. Yani bu gerçekten iyi bir haber. Ve bu tam olarak koddan beklediğimizle uyuyor.
+Tamam, bunu biraz daha gerçekçi nasıl yapabiliriz? Muhtemelen Nextflow iş hattınızda sabit kodlanmış dizilerle çok fazla kod oluşturmak istemeyeceksiniz. Muhtemelen başlattığınızda verileri dışarıdan almak isteyeceksiniz ve bu veriler neredeyse kesinlikle dosyalarda olacak.
 
-Artık bu hata ayıklama ifadelerine ihtiyacımız yok, bu yüzden ya bunları yorumlayabilirim ya da silebilirim. Kodumu güzel ve temiz tutmak için onları sileceğim. Pekala, harika. Bu örnek artık güzel bir şekilde çalışıyor ve kanalların biraz daha karmaşık mantık yapabildiğini görmeye başlayabiliriz.
+Yani yapacağımız bir sonraki şey, bunu tekrarlayacağız, ama verileri tek bir CLI parametresinden veya sabit kodlanmış bir dizgiden veya diziden almak yerine, bir dosyadan alacağız.
 
-## 4. Bir CSV dosyasından girdi değerlerini ayrıştırmak için bir operatör kullanın
+Yani greetings away'den kurtulalım. Ve şimdi bu channel factory'yi tekrar değiştireceğiz. Az önce aralarından seçim yapabileceğiniz bir grup olduğunu söyledim ve _".fromPath"_ adlı bir tane var. Ve ona, bu durumda, daha önce kullandığımız girdimiz olan _params.input_ al diyeceğim.
 
-Şimdi bunu bir dizi girdi içeren bir dosya kullanarak yapmayı deneyeceğiz. Bu, bir örnek sayfası veya bir metadata CSV'si kullanarak Nextflow pipeline'ları yazmanın çok yaygın bir yoludur.
+Şimdi o parametre henüz kullanılmaya hazır değil. Hâlâ bunun bir dizi olduğunu söylüyoruz ve varsayılan olarak burada sabit kodlanmış, ama o dizgiyi üzerine yazabiliriz. Şimdi bunun bir dosya olmasını istiyoruz. Yani tür farklı. Artık bir _String_ değil. Bir _Path_.
 
-## 4.1. Betiği, karşılamaların kaynağı olarak bir CSV dosyası bekleyecek şekilde değiştirin
+Ve sonra isterseniz varsayılanı yine bir Path'e ayarlayabiliriz. Ve soldaki keşfet'e bakarsam, bu depoda, bu çalışma dizininde, data adında bir dizinin olduğunu görebilirsiniz. Orada _"greetings.csv"_ adlı bir dosyam var.
 
-Yan çubuğa gidersem, örnek deposunda greetings.csv'yi görebilirsiniz ve bu, üç farklı karşılama ile sadece üç satır içeren çok, çok basit bir CSV dosyasıdır. Bakalım bu CSV dosyasını iş akışımız içinde kullanabilecek miyiz.
+Yani varsayılanı burada _"data/greetings.csv"_'ye ayarlayabilirim. Şimdi, bu iş hattını herhangi bir komut satırı seçeneği olmadan tekrar çalıştırdığımda, bu varsayılan değeri kullanacak. Bunun bir path olduğunu biliyor, bu yüzden bunu bir dizgi değil bir path olarak işlemesi gerektiğini biliyor.
 
-Şimdi birinci bölümde yaptığımız gibi params kullanmaya geri döneceğim, böylece bir komut satırı girdisi alabiliriz.
+Ve sonra bunu bu _params.input_'tan bir channel factory'ye geçirecek ve kanalımızı oluşturacak, bu da sonra _sayHello_ adlı bu süreçte kullanılacak. Hadi deneyelim.
 
-Bu greetings dizisini sileceğim.
+Tamam. Başarısız. Endişelenmeyin. Bu bekleniyordu. Ve eğitim materyalini takip ediyorsanız, orada da beklendiğini göreceksiniz. Burada ne oluyor görelim.
 
-## 4.1.1. Girdi parametresini CSV dosyasına işaret edecek şekilde değiştirin
+İş hattını çalıştırmaya çalıştı. Süreci yürütmeye çalıştı ve daha önce gördüğümüze oldukça benzer bir hata aldı.
 
-params greeting'i dosya adına ayarlayacağım, bu da greetings.csv ve bu özel değişkeni kanalı oluşturmak için kullanacağım. Bunu oraya koyacağım ve hatalar kaybolacak. Bunun bu değişkeni varsayılan olarak şimdi ayarladığını unutmayın. Bu yüzden pipeline'ı herhangi bir argüman olmadan çalıştırırsam, greetings.csv kullanacak, ama istersem bu değişkeni üzerine yazmak için --greeting yapabilirim.
+Burada şöyle diyor: _echo_ çalıştırmaya çalıştık, ama bu CSV dosyasının içeriğini yankılamak yerine, sadece yolu yankıladı. Ve buradaki bu CSV dosyasına giden tam mutlak yolu görebilirsiniz.
 
-## 4.1.2. Bir dosyayı işlemek için tasarlanmış bir channel factory'ye geçin
+Ve sonra nitekim, bunu bu gerçekten karmaşık yola yazmaya çalıştığı için, ne yapacağını gerçekten bilmiyordu. Ve süreç work dizininin kapsamı dışındaydı.
 
-Pekala, şimdi bir string veya bir string dizisi yerine bir dosya geçiriyoruz, bu yüzden muhtemelen farklı bir channel factory'ye ihtiyacımız var.
-
-Şimdiye kadar kullandığımız "of"'tan kurtulacağız ve bunun yerine .fromPath kullanacağız. Bu tam olarak kulağa geldiği gibi bir şey yapar. Bir string dosya adı veya glob kullanarak değerler yerine yollarla bir kanal oluşturur. Ayrıca flatten operatörünü kaldıracağım çünkü artık bir dosya geçirdiğimize göre buna ihtiyacımız yok.
-
-## 4.1.3. İş akışını çalıştırın
-
-Kaydet'e basacağım, terminali açacağım, iş akışını çalıştıracağım ve sonra ne olduğunu göreceğim.
-
-Pekala. Yine çöktü. Endişelenmeyin. Bunu da bekliyordum. Hata mesajına bakalım ve neyin yanlış gittiğini anlayıp anlayamayacağımızı görelim. Burada yürütülen komutu görebiliriz ve daha önce tüm dizinin yazdırıldığı gibi, şimdi dosyanın içeriğinden geçmek yerine dosya yolunun komuta yankılandığını görüyoruz.
+Başlangıçta Nextflow'un her yürütülen görevi özel bir work dizini içinde kapsüllediğini söyledim. Ve o work dizininin dışında olan verileri yazmaya çalışırsanız, Nextflow güvenlik önlemi olarak sizi durduracak. Ve burada olan bu. Mutlak bir yola yazmaya çalıştık ve Nextflow başarısız oldu ve bizi engelledi.
 
 ## 4.2. Dosyayı ayrıştırmak için splitCsv() operatörünü kullanın
 
-Yani bunun yerine dosyanın içeriğini kullanmak için başka bir operatöre ihtiyacımız var. Bunun için kullanacağımız operatör splitCsv olarak adlandırılır. Mantıklı, çünkü yüklediğimiz bir CSV dosyası.
+Tamam, bu kanala bir bakalım ve neye benzediğini görelim. _".view"_ yapabiliriz, ve bunu web sitesinden kopyaladım. Yani _.view_, ve burada dinamik bir closure var ve girdi olarak "_csv"_ değişken adını söylüyoruz. Yani bu kanal içeriği, ve splitCsv'den önce diyoruz, ve böyle görünüyor.
 
-## 4.2.1. Kanala splitCsv() uygulayın
+Tekrar çalıştırırsam, yine başarısız olacak, ama bu kanalın içinde ne olduğunu bize gösterecek. Özellikle heyecan verici değil. Bu _path_ değişkeni. Yani bir terminale yazdırıldığı için burada sadece bir dizi olduğunu görebilirsiniz, ama bu dosya hakkındaki bilgileri ve meta verileri içeren bir _path_ nesnesi.
 
-Tamam, yani splitCsv. Parantezi kapat. Burada herhangi bir argümana ihtiyacımız yok. Ve yine, burada neler olup bittiğine dair bir içgörü vermek için bazı view operatörleri kullanacağım.
+Dosyanın meta verilerini girdiye geçirmek istemiyoruz. O dosyanın içeriğini geçirmek istiyoruz. _greetings.csv_ dosyasına bakarsak, burada bu farklı değişkenlerin olduğunu görebilirsiniz. _Hello, Bonjour, Holà_ tekrar. Ve bunlar gerçekten sürece geçirmek istediğimiz şeyler, sadece dosyanın kendisi tek bir nesne olarak değil.
 
-.view csv splitCsv'den sonra. splitCsv'den önce.
+Yani bu CSV dosyasını ayrıştırmamız gerekiyor. Onu açmamız, CSV dosyasının içeriğine ulaşmamız ve sonra içerikleri kanal içinde sürece geçirmemiz gerekiyor.
 
-## 4.2.2. İş akışını tekrar çalıştırın
+Günlük mesajından muhtemelen anlayabileceğiniz gibi, başka bir operatör, başka bir kanal operatörü olan _splitCsv_'yi kullanmak istiyoruz. Yani "_dot" "s"_ yaparsam, ve sonra otomatik önerildiğini görebilirsiniz. Hata, _splitCsv_ ve bazı parantezler.
 
-Pekala, bunu çalıştırmayı deneyelim ve ne olduğunu görelim.
+Ve sonra _splitCsv_'den sonra, nasıl göründüğünü görebilmemiz için başka bir _view_ ifadesi koyacağım. Hadi iş hattını çalıştıralım ve ne aldığımızı görelim.
 
-Tamam, bu sefer biraz daha fazla çıktımız var, ama yine başarısız oldu. view ifadelerine bakabiliriz ve burada split CSV'den önce görüyorsunuz ve önceki hata mesajında gördüğümüz gibi bir dosya yolumuz var. split CSV'den sonra, şimdi CSV dosyasındaki üç satıra karşılık gelen üç değerimiz var.
+Tamam. Hâlâ başarısız oldu, ama yeni ve heyecan verici bir şekilde, bu ilerleme.
 
-Ancak, bu değerlerin her birinin köşeli parantezlerle çevrelendiğini görebilirsiniz. Yani bunların her biri kendi başına bir diziydi ve bu bize daha önce sahip olduğumuz aynı alanı verdi, burada sadece tek bir string yerine bir diziyi yankılamaya çalışıyor.
+Bu sefer yine betiğimizle ilgili bazı sorunlarımız var, ki bu render edildi. Şimdi. Artık son yolu almadık, ama bir değişken dizisi aldık, ki bu daha önce bir diziyi sabit girdi olarak geçirdiğimizde sahip olduğumuz hataya çok benziyor.
 
-Bir CSV dosyası hakkında düşünürsek, bu bir anlamda mantıklıdır. Tipik olarak, bir CSV dosyasının satırları ve sütunları olacaktır, bu yüzden split CSV iki boyutlu dizi yapar. Dizinin ilk boyutu her satırdır ve sonra her satır için her sütun olan ikinci bir boyut vardır.
+View operatöründen gelen günlüğümüzle, _splitCsv_'den öncenin path olduğunu görebiliriz. Ve nitekim, _splitCsv_'den sonra, üç farklı çıktımız var ve bu çıktıların her biri _greetings.csv_ dosyasındaki satırların her birine çok benziyor, ki bu mantıklı.
 
-Yani burada her satırda sadece tek bir değerimiz var, bu yüzden tek bir sütunumuz var, bu yüzden dosyanın her satırı için tek öğeli bir dizimiz var.
+Yani burada olan, Nextflow'un bu CSV dosyasını ayrıştırdığı, bize CSV dosyasının her satırı için bir dizi olmak üzere üç nesne verdi. Yani sonra üç kez tek bir dizi değeri yerine bir değişken dizisini kanala geçirdik.
 
-Bu iyi. Ayrıştırılmış CSV dosyasının her satırı için o diziyi daraltmak için sadece başka bir operatöre ihtiyacımız var. Bunu temizleyelim. Terminalden kurtulalım ve ne yapabileceğimize bakalım.
+Tamam, yani geçen sefer bu sorunu yaşadığımızda, _flatten_ kullandık. Hadi çok hızlıca. Flatten'ı deneyelim ve ne olacağını görelim.
 
-## 4.3. Karşılamaları çıkarmak için map() operatörünü kullanın
+Bu değişkenlere ne dersem diyebilirim. Yani ona _myarray_ diyeceğim çünkü artık gerçekten bir CSV değil. Hadi tekrar çalıştırmayı deneyelim ve _flatten_ ile ne olacağını görelim.
 
-Şimdi daha önce kullandığımız flatten operatörünü tekrar kullanabiliriz. Bunun bir diziyi bir dizi değere nasıl daraltabileceğini gördük, bu burada çok iyi çalışırdı. Ancak, iş akışları içinde çok yaygın olan map operatörü adlı başka bir operatörü göstermek için fırsatı kullanacağım.
+Yani bu sefer çalışacağız, CSV'yi üç dizi nesnesine ayrıştırdık, ve sonra düzleştirdik. Ve bu sefer geçti. Ve Nextflow iş hattı çalıştı. Ancak _flatten_'in gerçekten işi abartıp her şeyi düzleştirdiğini görebilirsiniz. Ve her satır için üç bağımsız dizi girdisi alırız. Ve bu yüzden süreci CSV'nin her satırı için üç kez çalıştırdı. Ve şimdi bir sürü sonuç dosyamız var, ve 123, 456, ve her türlü şeyler, sadece CSV'nin ilk sütunu değil, ki bu gerçekten istediğimiz şeydi.
 
-## 4.3.1. Kanala map() uygulayın
+## 4.3. Selamlamaları çıkarmak için map() operatörünü kullanın
 
-Dot map yapacağım ve item item[0] yapacağım.
+Peki sadece ilk sütuna nasıl ulaşırız? Eğer flatten burada çok basitse, aslında özelleştirebileceğimiz ve CSV'den ne istediğimizi söyleyebileceğimiz daha karmaşık bir operatöre ihtiyacımız var.
 
-Eğer çok sayıda başka kod dili yazıyorsanız, map operatörüne zaten aşina olabilirsiniz. Bir dizi veya kanal gibi yinelenebilir bir şey alır ve bunun her değeri üzerinde bir işlem yapar.
+Bunu yapmak için _map_ kullanacağız. Temelde _map_, bana verilen her eleman üzerinde bazı kodları, bazı fonksiyonları çalıştır ve üzerinde bir tür dönüşüm yap der. Ve çok esnek olduğu için, Nextflow kodunda her zaman ortaya çıktığını göreceksiniz.
 
-Burada, bu closure'ın kapsamı içinde item adında bir değişken tanımlamamız gerektiğini ve sonra o dizinin sadece ilk değerini döndürmek istediğimizi söylüyoruz. Yani item index sıfır.
+Tek başına hiçbir şey yapmaz. Yani normal parantez istemiyoruz, burada bir closure istiyoruz ve ne yapacağımızı söylememiz gerekiyor. Yani _"row"_ diyeceğim, çünkü CSV'den satırlar veriliyor, yani mantıklı bir değişken adı. Girdi. Ve sadece o dizinin ilk elemanını döndürmek istiyorum.
 
-Bu etkili bir şekilde diziyi düzleştiriyor. Bunun nasıl daha karmaşık olacak şekilde genişletebileceğimizi görebilirsiniz: CSV dosyamızın altı sütunu olsaydı, ancak sadece dördüncü sütunla ilgileniyorsak, burada belirli bir indekse erişebiliriz. Veya değeri aşağı akış işlemeye geçirmeden önce üzerinde başka herhangi bir işlem türü yapabiliriz.
+Nextflow'daki diziler sıfır tabanlıdır, yani sadece ilk eleman diyeceğiz, ki bu sıfırıncı satır. İkinci sütunu isteseydik, bir veya üçüncü sütun iki olabilirdi, ve böyle devam eder. Burada istediğimizi döndürebiliriz, ama sadece ilk değeri döndüreceğim.
 
-Yani map operatörü son derece esnektir ve uçuş halindeki kanalları değiştirmek için çok güçlüdür. Yürütmemizde ne yaptığını görebilmemiz için başka bir view ifadesi koyalım. O satırı tanımlayabilir ve aşağı taşıyabiliriz. Ve map'ten sonra.
+Ve şimdi, iş hattını tekrar çalıştırabiliriz ve beklediğimizi yapıp yapmadığını görebiliriz.
 
-## 4.3.2. İş akışını bir kez daha çalıştırın
+Nitekim, _splitCsv_'den sonra dizilerimiz var, ve sonra _map_'ten sonra sadece _"Hello", "Bonjour"_ ve _"Holà"_ olmak üzere güzel temiz dizgilerimiz var. Ve iş hattı şimdi istediğimizi yapıyor. Fantastik.
 
-Terminali açalım ve iş akışını çalıştırmayı deneyelim.
+Yani tüm bu view komutlarından artık kurtulabiliriz. Artık onlara ihtiyacımız yok.
 
-Tamam, bu sefer hata yok. Bu iyi bir işaret. Şimdi view ifadelerinden gelen tüm bu farklı çıktıları gözden geçirebiliriz. split CSV'den önce, tek bir yolumuz vardı. split CSV'den sonra, tek değerli dizilerimiz vardı ve sonra map'ten sonra, herhangi bir dizi sözdizimi olmadan sadece değerlerimiz var. results dizinine gidelim ve işte tam olarak istediğimiz gibi davranan çıktı dosyalarımız.
+## Özet
 
-Burada küçük bir bonus var. view operatörlerinin yaptıkları çıktının sırasında biraz karışık olduğunu görebilirsiniz. Bunun nedeni Nextflow'un bu farklı görevlerin paralelleştirilmesini yapıyor olmasıdır. Yani CSV'yi böldükten sonra, bu kanalda üç öğe var ve bu üç öğenin işlenmesini otomatik olarak paralel olarak gerçekleştiriyor. Bu, çıktıların sırasının stokastik olduğu ve değişebileceği anlamına gelir. Bu durumda, sadece bazı view operatörlerinin sonraki adım tamamlandıktan sonra geri döndüğü oldu ve bu yüzden bu sırayla geldi.
+Hata ayıklamamızı bitirdik ve sonuçta bu kodla karşılaştık. CLI parametremiz olan _input_'u alarak, ki bu bir _Path_ olarak sınıflandırıldı. Nextflow yolu bulur, yükler ve CSV dosyasını anlar. Tüm farklı satırları döndürür. Ve sonra o satırın sadece ilk elemanını, kanal içeriklerini veren, sürece geçirilen kanala haritalıyoruz.
 
-Aynı iş akışını tekrar çalıştırırsam. O zaman elbette, farklı bir sırayla geldi ve bu sefer split CSV'lerimizi ve map'lerimizi beklediğimiz sırada aldık.
+Ve süreç kanaldaki her eleman üzerinde çalışır, ki bu üç. Ve süreci üç kez çalıştırır, ona üç görev verir. Ve o sonuçlar daha sonra iş akışından yayınlanır, süreç çıktısı tarafından alınır. Bir iş akışından yayınlanır ve output bloğunda _"hello_channels"_ adlı bir alt dizine kaydedilir.
 
-Bu yüzden sadece unutmayın, bir process görevinden gelen çıktıların sırasına güvenemezsiniz çünkü Nextflow bu paralelleştirmeyi sizin için otomatik olarak gerçekleştiriyor. Nextflow bunu sizin için veri akışı mantığıyla yapıyor ve bu Nextflow'un gerçek gücüdür.
+Oldukça havalı. Artık gerçek bir analiz için çalıştırabileceğiniz gerçek bir Nextflow iş hattına daha yakın bir şeye geliyoruz.
 
-Tamam, bu muhtemelen tüm eğitimin en önemli bölümlerinden biridir. Kanalları, channel factory'leri ve operatörleri anladığınızda, Nextflow'un gücünü ve onu bir programlama dili olarak benzersiz yapan şeyi kavramaya başlarsınız. Bu işlevsellik, Nextflow'un tüm iş akışlarınızı sizin için paralelleştirmesine ve çok temiz bir sözdizimi ve bir itme veri akışı modeliyle son derece karmaşık iş akışı mantığı oluşturmasına izin verir. İlk başta biraz garip bir kavram olabilir, ama böyle kod yazmaya alıştıktan sonra, hızla doğal hissedecek ve farkına varmadan harika iş akışları yazıyor olacaksınız.
+## Özet
 
-Bir mola verin, bir fincan çay, etrafta dolaşın ve üçüncü bölüme geçelim, burada bu kavramları daha karmaşık iş akışlarına genişletmeye başlıyoruz. Bir sonraki videoda görüşürüz.
+Tamam. Umarım artık Nextflow kanallarının ve operatörlerin ne olduğunu ve operatörlerin kanallarda nasıl çalıştığını ve bunları nasıl oluşturabileceğinizi hissediyorsunuzdur.
 
-[Sonraki video transkripti :octicons-arrow-right-24:](03_hello_workflow.md)
+Bu videonun başında söylediğim gibi, kanallar Nextflow'un yapıştırıcısıdır. Ve burada farklı girdileri alabileceğimizi, onları manipüle edebileceğimizi ve bu verileri alabileceğimizi ve sonra onları aşağı akış iş akışı mantığına geçirebileceğimizi görebilirsiniz.
+
+Ve buradaki bu workflow bloğu gerçekten tüm o paralelleştirmeyi ve tüm akıllı mantığı oluşturduğunuz yerdir ve Nextflow'a iş akışı DAG'inizi nasıl oluşturacağını ve iş hattınızı nasıl yöneteceğini açıklarsınız.
+
+Kanallar kafanıza yerleştirilmesi en kolay kavram değildir. Bu yüzden bir mola verin, bunun hakkında biraz düşünün, belki materyali tekrar okuyun ve bu kavramları gerçekten anladığınızdan emin olun çünkü bu Nextflow'u anlamanız için anahtardır ve kanalları, farklı kanal operatörlerini ve farklı channel factory'leri ne kadar iyi anlarsanız. Nextflow yazarken o kadar eğleneceksiniz ve iş hatlarınız o kadar güçlü olacak.
+
+Bu Python veya diğer dillerdeki normal programlama ile aynı değil. Burada _if_ ifadeleri kullanmıyoruz, bu kanallar ve operatörler kullanan fonksiyonel akış programlamadır. Yani biraz farklı, ama aynı zamanda süper güçlü.
+
+Bu bölümün sonu. Gidin hızlı bir mola verin ve bir sonraki videoda sizi Part three'de göreceğim, Merhaba İş Akışı'ndan geçeceğiz ve iş akışları hakkında biraz daha konuşacağız.
+
+Önceki bölüm gibi, burada web sayfasının altında birkaç test sorusu var, bu yüzden bunlara hızlıca göz atabilirsiniz ve az önce yaptığımız materyalin tüm farklı bölümlerini anladığınızdan emin olabilirsiniz. Ve bunun dışında, bir sonraki videoda sizinle görüşeceğim. Çok teşekkürler.
+
+Tamam.
