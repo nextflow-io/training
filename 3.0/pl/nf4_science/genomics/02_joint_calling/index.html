@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -1656,15 +1656,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#01-indeksuj-plik-bam-wejsciowy-za-pomoca-samtools" class="md-nav__link">
+  <a href="#01-zaindeksuj-plik-bam-wejsciowy-za-pomoca-samtools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.1. Indeksuj plik BAM wejściowy za pomocą Samtools
+        0.1. Zaindeksuj plik BAM wejściowy za pomocą Samtools
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0.1. Indeksuj plik BAM wejściowy za pomocą Samtools">
+    <nav class="md-nav" aria-label="0.1. Zaindeksuj plik BAM wejściowy za pomocą Samtools">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1843,10 +1843,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-powiedz-haplotypecaller-aby-emitowa-gvcf-i-zaktualizuj-rozszerzenie-wyjsciowe" class="md-nav__link">
+  <a href="#11-powiedz-haplotypecallerowi-aby-emitowa-gvcf-i-zaktualizuj-rozszerzenie-wyjsciowe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Powiedz HaplotypeCaller, aby emitował GVCF i zaktualizuj rozszerzenie wyjściowe
+        1.1. Powiedz HaplotypeCaller'owi, aby emitował GVCF i zaktualizuj rozszerzenie wyjściowe
       
     </span>
   </a>
@@ -3282,7 +3282,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3825,15 +3825,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#01-indeksuj-plik-bam-wejsciowy-za-pomoca-samtools" class="md-nav__link">
+  <a href="#01-zaindeksuj-plik-bam-wejsciowy-za-pomoca-samtools" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0.1. Indeksuj plik BAM wejściowy za pomocą Samtools
+        0.1. Zaindeksuj plik BAM wejściowy za pomocą Samtools
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="0.1. Indeksuj plik BAM wejściowy za pomocą Samtools">
+    <nav class="md-nav" aria-label="0.1. Zaindeksuj plik BAM wejściowy za pomocą Samtools">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4012,10 +4012,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-powiedz-haplotypecaller-aby-emitowa-gvcf-i-zaktualizuj-rozszerzenie-wyjsciowe" class="md-nav__link">
+  <a href="#11-powiedz-haplotypecallerowi-aby-emitowa-gvcf-i-zaktualizuj-rozszerzenie-wyjsciowe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Powiedz HaplotypeCaller, aby emitował GVCF i zaktualizuj rozszerzenie wyjściowe
+        1.1. Powiedz HaplotypeCaller'owi, aby emitował GVCF i zaktualizuj rozszerzenie wyjściowe
       
     </span>
   </a>
@@ -4606,7 +4606,7 @@ Jednak w rzeczywistym przypadku użycia genomiki zazwyczaj będziesz musiał spo
 <p>W tej drugiej części pokażemy Ci, jak używać kanałów i operatorów kanałów do implementacji wspólnego wykrywania wariantów za pomocą GATK, budując na pipeline'ie z Części 1.</p>
 <h3 id="przeglad-metody">Przegląd metody<a class="headerlink" href="#przeglad-metody" title="Permanent link">&para;</a></h3>
 <p>Metoda GATK, której użyliśmy w pierwszej części tego kursu, generowała wyniki dla każdej próbki osobno.
-Jest to w porządku, jeśli chcesz analizować warianty z każdej próbki indywidualnie, ale daje ograniczone informacje.
+Jest to w porządku, jeśli chcesz analizować warianty z każdej próbki indywidualnie, ale daje to ograniczone informacje.
 Często bardziej interesujące jest porównanie wyników między wieloma próbkami, a GATK oferuje do tego alternatywną metodę zwaną wspólnym genotypowaniem, którą tutaj demonstrujemy.</p>
 <p>Wspólne wywoływanie wariantów polega na wygenerowaniu specjalnego rodzaju wyjścia wariantów zwanego GVCF (Genomic VCF) dla każdej próbki, następnie połączeniu danych GVCF ze wszystkich próbek i wreszcie uruchomieniu statystycznej analizy 'wspólnego genotypowania'.</p>
 <p><img alt="Wspólna analiza" src="img/joint-calling.png" /></p>
@@ -4651,7 +4651,7 @@ Jest to kluczowe dla obliczenia wspólnego genotypowania (<a href="https://gatk.
 <p>Upewnij się, że jesteś we właściwym katalogu roboczym:
  <code>cd /workspaces/training/nf4-science/genomics</code></p>
 </div>
-<h3 id="01-indeksuj-plik-bam-wejsciowy-za-pomoca-samtools">0.1. Indeksuj plik BAM wejściowy za pomocą Samtools<a class="headerlink" href="#01-indeksuj-plik-bam-wejsciowy-za-pomoca-samtools" title="Permanent link">&para;</a></h3>
+<h3 id="01-zaindeksuj-plik-bam-wejsciowy-za-pomoca-samtools">0.1. Zaindeksuj plik BAM wejściowy za pomocą Samtools<a class="headerlink" href="#01-zaindeksuj-plik-bam-wejsciowy-za-pomoca-samtools" title="Permanent link">&para;</a></h3>
 <p>Ten pierwszy krok jest taki sam jak w Części 1, więc powinien być bardzo znajomy, ale tym razem musimy to zrobić dla wszystkich trzech próbek.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -4661,7 +4661,7 @@ Jest to kluczowe dla obliczenia wspólnego genotypowania (<a href="https://gatk.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 </code></pre></div>
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>
 </code></pre></div>
@@ -4694,14 +4694,14 @@ Jest to kluczowe dla obliczenia wspólnego genotypowania (<a href="https://gatk.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 </code></pre></div>
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>
 </code></pre></div>
 -->
 
 <h4 id="022-uruchom-polecenie-wywoywania-wariantow-z-opcja-gvcf">0.2.2. Uruchom polecenie wywoływania wariantów z opcją GVCF<a class="headerlink" href="#022-uruchom-polecenie-wywoywania-wariantow-z-opcja-gvcf" title="Permanent link">&para;</a></h4>
-<p>Aby wytworzyć genomiczny VCF (GVCF), dodajemy opcję <code>-ERC GVCF</code> do podstawowego polecenia, co włącza tryb GVCF HaplotypeCaller.</p>
+<p>Aby wytworzyć genomiczny VCF (GVCF), dodajemy opcję <code>-ERC GVCF</code> do podstawowego polecenia, co włącza tryb GVCF HaplotypeCaller'a.</p>
 <p>Zmieniamy również rozszerzenie pliku wyjściowego z <code>.vcf</code> na <code>.g.vcf</code>.
 Technicznie nie jest to wymagane, ale jest to zdecydowanie zalecana konwencja.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>gatk<span class="w"> </span>HaplotypeCaller<span class="w"> </span><span class="se">\</span>
@@ -4712,7 +4712,7 @@ Technicznie nie jest to wymagane, ale jest to zdecydowanie zalecana konwencja.</
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">        </span>-ERC<span class="w"> </span>GVCF
 </code></pre></div>
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>
 </code></pre></div>
@@ -4726,7 +4726,7 @@ Technicznie nie jest to wymagane, ale jest to zdecydowanie zalecana konwencja.</
 <a id="__codelineno-9-1675" name="__codelineno-9-1675"></a><span class="go">20_10037292_10066351    14719   .       T       &lt;NON_REF&gt;       .       .       END=14719       GT:DP:GQ:MIN_DP:PL       0/0:36:82:36:0,82,1087</span>
 <a id="__codelineno-9-1676" name="__codelineno-9-1676"></a><span class="go">20_10037292_10066351    14720   .       T       &lt;NON_REF&gt;       .       .       END=14737       GT:DP:GQ:MIN_DP:PL       0/0:42:99:37:0,100,1160</span>
 </code></pre></div></td></tr></table></div>
-<p>Reprezentują one regiony nie-wariantowe, gdzie wywołujący warianty nie znalazł dowodów zmienności, więc uchwycił pewne statystyki opisujące jego poziom pewności w braku zmienności. Umożliwia to rozróżnienie między dwoma bardzo różnymi przypadkami: (1) są dobre jakościowo dane pokazujące, że próbka jest homozygotyczna-referencyjna, i (2) nie ma wystarczająco dobrych danych dostępnych, aby dokonać określenia w każdy sposób.</p>
+<p>Reprezentują one regiony nie-wariantowe, gdzie wywołujący warianty nie znalazł dowodów zmienności, więc uchwycił pewne statystyki opisujące jego poziom pewności w braku zmienności. Umożliwia to rozróżnienie między dwoma bardzo różnymi przypadkami: (1) są dobre jakościowo dane pokazujące, że próbka jest homozygotyczna-referencyjna, i (2) nie ma wystarczająco dobrych danych dostępnych, aby dokonać określenia w jakikolwiek sposób.</p>
 <p>W GVCF zazwyczaj jest wiele takich linii nie-wariantowych, z mniejszą liczbą rekordów wariantów rozproszonymi wśród nich. Spróbuj uruchomić <code>head -176</code> na GVCF, aby załadować tylko pierwsze 176 linii pliku i znaleźć rzeczywiste wywołanie wariantu.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Wyjście</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-174">174</a></span>
 <span class="normal"><a href="#__codelineno-10-175">175</a></span>
@@ -4746,7 +4746,7 @@ Technicznie nie jest to wymagane, ale jest to zdecydowanie zalecana konwencja.</
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">        </span>-ERC<span class="w"> </span>GVCF
 </code></pre></div>
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>
 </code></pre></div>
@@ -4760,13 +4760,13 @@ Technicznie nie jest to wymagane, ale jest to zdecydowanie zalecana konwencja.</
 <a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span>-ERC<span class="w"> </span>GVCF
 </code></pre></div>
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>
 </code></pre></div>
 -->
 
-<p>Po zakończeniu będziesz mieć trzy pliki kończące się na <code>.g.vcf</code> w Swoim bieżącym katalogu (jeden na próbkę) i ich odpowiednie pliki indeksu kończące się na <code>.g.vcf.idx</code>.</p>
+<p>Po zakończeniu będziesz mieć trzy pliki kończące się na <code>.g.vcf</code> w Twoim bieżącym katalogu (jeden na próbkę) i ich odpowiednie pliki indeksu kończące się na <code>.g.vcf.idx</code>.</p>
 <h3 id="03-uruchom-wspolne-genotypowanie">0.3. Uruchom wspólne genotypowanie<a class="headerlink" href="#03-uruchom-wspolne-genotypowanie" title="Permanent link">&para;</a></h3>
 <p>Teraz, gdy mamy wszystkie GVCF, możemy wreszcie wypróbować podejście wspólnego genotypowania do generowania wywołań wariantów dla kohorty próbek.
 Jako przypomnienie, jest to dwuetapowa metoda, która polega na połączeniu danych ze wszystkich GVCF w magazyn danych, a następnie uruchomieniu właściwej analizy wspólnego genotypowania, aby wygenerować końcowy VCF wspólnie wywołanych wariantów.</p>
@@ -4780,7 +4780,7 @@ Jako przypomnienie, jest to dwuetapowa metoda, która polega na połączeniu dan
 <a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span>--genomicsdb-workspace-path<span class="w"> </span>family_trio_gdb
 </code></pre></div>
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>
 </code></pre></div>
@@ -4800,7 +4800,7 @@ Możesz w nim podziurać, ale szybko zobaczysz, że ten format magazynu danych n
 <a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span>-O<span class="w"> </span>family_trio.vcf
 </code></pre></div>
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>
 </code></pre></div>
@@ -4819,7 +4819,7 @@ To kolejny dość mały plik, więc możesz użyć <code>cat</code> na tym pliku
 <p>To wygląda bardziej jak oryginalny VCF, który wygenerowaliśmy w Części 1, z tym że tym razem mamy informacje na poziomie genotypu dla wszystkich trzech próbek.
 Ostatnie trzy kolumny w pliku to bloki genotypu dla próbek, wymienione w porządku alfabetycznym.</p>
 <p>Jeśli spojrzymy na genotypy wywołane dla naszego testowego tria rodzinnego dla pierwszego wariantu, widzimy, że ojciec jest heterozygotyczny-wariantowy (<code>0/1</code>), a matka i syn są obaj homozygotyczni-wariantowi (<code>1/1</code>).</p>
-<p>To jest ostatecznie informacja, którą chcemy wydobyć z zestawu danych! Więc opakowujmy to wszystko w workflow Nextflow, abyśmy mogli robić to na dużą skalę.</p>
+<p>To jest ostatecznie informacja, którą chcemy wydobyć z zestawu danych! Więc opakowujmy to wszystko w workflow Nextflow'a, abyśmy mogli robić to na dużą skalę.</p>
 <h4 id="033-wyjdz-z-kontenera-gatk">0.3.3. Wyjdź z kontenera GATK<a class="headerlink" href="#033-wyjdz-z-kontenera-gatk" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">exit</span>
 </code></pre></div>
@@ -4836,7 +4836,7 @@ Więc musimy zacząć od włączenia trybu wywoływania wariantów GVCF i zaktua
 <p class="admonition-title">Note</p>
 <p>Dla wygody będziemy pracować z nową kopią workflow'u GATK, jak stoi na końcu Części 1, ale pod inną nazwą: <code>genomics-2.nf</code>.</p>
 </div>
-<h3 id="11-powiedz-haplotypecaller-aby-emitowa-gvcf-i-zaktualizuj-rozszerzenie-wyjsciowe">1.1. Powiedz HaplotypeCaller, aby emitował GVCF i zaktualizuj rozszerzenie wyjściowe<a class="headerlink" href="#11-powiedz-haplotypecaller-aby-emitowa-gvcf-i-zaktualizuj-rozszerzenie-wyjsciowe" title="Permanent link">&para;</a></h3>
+<h3 id="11-powiedz-haplotypecallerowi-aby-emitowa-gvcf-i-zaktualizuj-rozszerzenie-wyjsciowe">1.1. Powiedz HaplotypeCaller'owi, aby emitował GVCF i zaktualizuj rozszerzenie wyjściowe<a class="headerlink" href="#11-powiedz-haplotypecallerowi-aby-emitowa-gvcf-i-zaktualizuj-rozszerzenie-wyjsciowe" title="Permanent link">&para;</a></h3>
 <p>Otwórzmy plik <code>genomics-2.nf</code> w edytorze kodu.
 Powinien wyglądać bardzo znajomo, ale możesz go uruchomić, jeśli chcesz upewnić się, że działa zgodnie z oczekiwaniami.</p>
 <p>Zamierzamy zacząć od wprowadzenia dwóch zmian:</p>
@@ -4883,13 +4883,13 @@ Powinien wyglądać bardzo znajomo, ale możesz go uruchomić, jeśli chcesz upe
 </div>
 </div>
 </div>
-<p>I to wszystko, czego potrzeba, aby przełączyć HaplotypeCaller na generowanie GVCF zamiast VCF, prawda?</p>
+<p>I to wszystko, czego potrzeba, aby przełączyć HaplotypeCaller'a na generowanie GVCF zamiast VCF, prawda?</p>
 <h3 id="12-uruchom-pipeline-aby-sprawdzic-czy-mozesz-generowac-gvcf">1.2. Uruchom pipeline, aby sprawdzić, czy możesz generować GVCF<a class="headerlink" href="#12-uruchom-pipeline-aby-sprawdzic-czy-mozesz-generowac-gvcf" title="Permanent link">&para;</a></h3>
-<p>Polecenie wykonania Nextflow jest takie samo jak wcześniej, z wyjątkiem samej nazwy pliku workflow'u.
+<p>Polecenie wykonania Nextflow'a jest takie samo jak wcześniej, z wyjątkiem samej nazwy pliku workflow'u.
 Upewnij się, że odpowiednio zaktualizowałeś nazwę pliku.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics-2.nf
 </code></pre></div>
-<details class="failure">
+<details class="success">
 <summary>Wyjście polecenia</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
@@ -4911,9 +4911,9 @@ Upewnij się, że odpowiednio zaktualizowałeś nazwę pliku.</p>
 <p>A wyjście jest... całe czerwone! O nie.</p>
 <p>Polecenie, które zostało wykonane, jest poprawne, więc mieliśmy rację, że to wystarczyło do zmiany zachowania narzędzia GATK.
 Ale spójrz na tę linię o brakującym pliku wyjściowym. Zauważyłeś coś?</p>
-<p>Tak jest, zapomnieliśmy powiedzieć Nextflow, aby oczekiwał nowej nazwy pliku. Ups.</p>
+<p>Tak jest, zapomnieliśmy powiedzieć Nextflow'owi, aby oczekiwał nowej nazwy pliku. Ups.</p>
 <h3 id="13-zaktualizuj-rowniez-rozszerzenie-pliku-wyjsciowego-w-bloku-wyjsc-procesu">1.3. Zaktualizuj również rozszerzenie pliku wyjściowego w bloku wyjść procesu<a class="headerlink" href="#13-zaktualizuj-rowniez-rozszerzenie-pliku-wyjsciowego-w-bloku-wyjsc-procesu" title="Permanent link">&para;</a></h3>
-<p>Ponieważ nie wystarczy po prostu zmienić rozszerzenie pliku w samym poleceniu narzędzia, musisz również powiedzieć Nextflow, że oczekiwana nazwa pliku wyjściowego się zmieniła.</p>
+<p>Ponieważ nie wystarczy po prostu zmienić rozszerzenie pliku w samym poleceniu narzędzia, musisz również powiedzieć Nextflow'owi, że oczekiwana nazwa pliku wyjściowego się zmieniła.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Po</label><label for="__tabbed_2_2">Przed</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5031,7 +5031,7 @@ Zorganizujemy również pliki GVCF w ich własnym podkatalogu dla jasności.</p>
 </code></pre></div>
 </details>
 <p>Tym razem działa.</p>
-<p>Same wyjście Nextflow nie wygląda inaczej (w porównaniu do pomyślnego uruchomienia w normalnym trybie VCF), ale teraz możemy znaleźć pliki <code>.g.vcf</code> i ich odpowiednie pliki indeksu, dla wszystkich trzech próbek, zorganizowane w podkatalogach.</p>
+<p>Same wyjście Nextflow'a nie wygląda inaczej (w porównaniu do pomyślnego uruchomienia w normalnym trybie VCF), ale teraz możemy znaleźć pliki <code>.g.vcf</code> i ich odpowiednie pliki indeksu, dla wszystkich trzech próbek, zorganizowane w podkatalogach.</p>
 <details class="abstract">
 <summary>Zawartość katalogu (dowiązania symboliczne skrócone)</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">results_genomics/</span>
@@ -5053,7 +5053,7 @@ Zorganizujemy również pliki GVCF w ich własnym podkatalogu dla jasności.</p>
 </details>
 <p>Jeśli otworzysz jeden z plików GVCF i przewiniesz go, możesz sprawdzić, że GATK HaplotypeCaller wytworzyło pliki GVCF zgodnie z życzeniem.</p>
 <h3 id="wnioski_1">Wnioski<a class="headerlink" href="#wnioski_1" title="Permanent link">&para;</a></h3>
-<p>Okej, ten był minimalny pod względem nauki Nextflow...
+<p>Okej, ten był minimalny pod względem nauki Nextflow'a...
 Ale to była miła okazja, aby powtórzyć znaczenie bloku wyjściowego procesu!</p>
 <h3 id="co-dalej_1">Co dalej?<a class="headerlink" href="#co-dalej_1" title="Permanent link">&para;</a></h3>
 <p>Naucz się zbierać zawartość kanału i przekazywać je do następnego procesu jako pojedyncze wejście.</p>
@@ -5559,8 +5559,8 @@ Dlatego używamy tylko małych podzbiorów danych do celów szkoleniowych!</p>
 <h3 id="wnioski_3">Wnioski<a class="headerlink" href="#wnioski_3" title="Permanent link">&para;</a></h3>
 <p>Wiesz, jak używać niektórych typowych operatorów, a także domknięć Groovy do kontrolowania przepływu danych w Twoim workflow'ie.</p>
 <h3 id="co-dalej_3">Co dalej?<a class="headerlink" href="#co-dalej_3" title="Permanent link">&para;</a></h3>
-<p>Świętuj Swój sukces i weź zasłużoną przerwę.</p>
-<p>W następnej części tego kursu nauczysz się, jak modularyzować Swój workflow, wyodrębniając definicje procesów do modułów wielokrotnego użytku.</p><style type="text/css">.quiz {
+<p>Świętuj Twój sukces i weź zasłużoną przerwę.</p>
+<p>W następnej części tego kursu nauczysz się, jak modularyzować Twój workflow, wyodrębniając definicje procesów do modułów wielokrotnego użytku.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

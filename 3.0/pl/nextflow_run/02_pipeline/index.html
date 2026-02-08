@@ -1885,7 +1885,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -3250,7 +3250,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -4539,13 +4539,13 @@
 
 <h1 id="czesc-2-uruchamianie-prawdziwych-pipelineow">Część 2: Uruchamianie prawdziwych pipeline'ów<a class="headerlink" href="#czesc-2-uruchamianie-prawdziwych-pipelineow" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>W Części 1 tego kursu (Uruchamianie podstawowych operacji) zaczęliśmy od przykładowego workflow'u, który miał tylko minimalne funkcje, aby utrzymać niską złożoność kodu.
+<p>W Części 1 tego kursu (Uruchamianie podstawowych operacji) zaczęliśmy od przykładowego workflow'a, który miał tylko minimalne funkcje, aby utrzymać niską złożoność kodu.
 Na przykład <code>1-hello.nf</code> używał parametru wiersza poleceń (<code>--input</code>) do przekazywania pojedynczej wartości na raz.</p>
 <p>Jednak większość rzeczywistych pipeline'ów wykorzystuje bardziej zaawansowane funkcje, aby umożliwić efektywne przetwarzanie dużych ilości danych na dużą skalę i stosowanie wielu kroków przetwarzania połączonych czasami złożoną logiką.</p>
 <p>W tej części szkolenia demonstrujemy kluczowe funkcje rzeczywistych pipeline'ów, wypróbowując rozszerzone wersje oryginalnego pipeline'u Hello World.</p>
 <h2 id="1-przetwarzanie-danych-wejsciowych-z-pliku">1. Przetwarzanie danych wejściowych z pliku<a class="headerlink" href="#1-przetwarzanie-danych-wejsciowych-z-pliku" title="Permanent link">&para;</a></h2>
 <p>W rzeczywistym pipeline'ie zazwyczaj chcemy przetwarzać wiele punktów danych (lub serii danych) zawartych w jednym lub więcej plikach wejściowych.
-I gdziekolwiek to możliwe, chcemy uruchamiać przetwarzanie niezależnych danych równolegle, aby skrócić czas oczekiwania na analizę.</p>
+Wszędzie tam, gdzie to możliwe, chcemy uruchamiać przetwarzanie niezależnych danych równolegle, aby skrócić czas oczekiwania na analizę.</p>
 <p>Aby zademonstrować, jak Nextflow to robi, przygotowaliśmy plik CSV o nazwie <code>greetings.csv</code>, który zawiera kilka powitań wejściowych, naśladując rodzaj danych kolumnowych, które możesz chcieć przetwarzać w prawdziwej analizie danych.
 Zauważ, że liczby nie mają znaczenia, są tam tylko w celach ilustracyjnych.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">data/greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
@@ -4554,7 +4554,7 @@ Zauważ, że liczby nie mają znaczenia, są tam tylko w celach ilustracyjnych.<
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a>Bonjour,French,456
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a>Holà,Spanish,789
 </code></pre></div></td></tr></table></div>
-<p>Napisaliśmy również ulepszoną wersję oryginalnego workflow'u, teraz o nazwie <code>2a-inputs.nf</code>, która odczyta plik CSV, wyodrębni powitania i zapisze każde z nich do oddzielnego pliku.</p>
+<p>Napisaliśmy również ulepszoną wersję oryginalnego workflow'a, teraz o nazwie <code>2a-inputs.nf</code>, która odczyta plik CSV, wyodrębni powitania i zapisze każde z nich do oddzielnego pliku.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -4666,10 +4666,10 @@ W tym rozszerzonym trybie raportuje tylko, że zostały przesłane.</p>
 Ma to wiele zalet, w tym unikanie kolizji, jeśli proces produkuje jakieś pliki pośrednie o nieunikatowych nazwach.</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
-<p>Dla złożonego workflow'u lub dużej liczby danych wejściowych wyświetlanie pełnej listy do terminala może być nieco przytłaczające, więc ludzie normalnie nie używają <code>-ansi-log false</code> w rutynowym użyciu.</p>
+<p>Dla złożonego workflow'a lub dużej liczby danych wejściowych wyświetlanie pełnej listy do terminala może być nieco przytłaczające, więc ludzie normalnie nie używają <code>-ansi-log false</code> w rutynowym użyciu.</p>
 </div>
 <h3 id="14-zbadaj-kod-workflowu">1.4. Zbadaj kod workflow'u<a class="headerlink" href="#14-zbadaj-kod-workflowu" title="Permanent link">&para;</a></h3>
-<p>Więc ta wersja workflow'u jest w stanie odczytać plik CSV z danymi wejściowymi, przetwarzać dane wejściowe osobno i nazywać wyjścia unikalnie.</p>
+<p>Więc ta wersja workflow'a jest w stanie odczytać plik CSV z danymi wejściowymi, przetwarzać dane wejściowe osobno i nazywać wyjścia unikalnie.</p>
 <p>Przyjrzyjmy się, co to umożliwia w kodzie workflow'u.</p>
 <details class="full-code">
 <summary>Pełny plik kodu</summary>
@@ -4831,7 +4831,7 @@ Wynikiem jest kanał zawierający <code>Hello</code>, <code>Bonjour</code> i <co
 </span></code></pre></div></td></tr></table></div>
 <p>To mówi Nextflow, aby uruchomił proces indywidualnie na każdym elemencie w kanale, <em>tzn.</em> na każdym powitaniu.
 A ponieważ Nextflow jest tak inteligentny, uruchomi te wywołania procesu równolegle, jeśli to możliwe, w zależności od dostępnej infrastruktury obliczeniowej.</p>
-<p>To umożliwia efektywne i skalowalne przetwarzanie dużej ilości danych (wielu próbek lub punktów danych, cokolwiek jest Twoją jednostką badawczą) przy stosunkowo niewielkiej ilości kodu.</p>
+<p>W ten sposób można efektywnie i skalowalnie przetwarzać duże ilości danych (wiele próbek lub punktów danych, cokolwiek jest Twoją jednostką badawczą) przy stosunkowo niewielkiej ilości kodu.</p>
 <h4 id="143-jak-nazywane-sa-wyjscia">1.4.3. Jak nazywane są wyjścia<a class="headerlink" href="#143-jak-nazywane-sa-wyjscia" title="Permanent link">&para;</a></h4>
 <p>Na koniec warto szybko spojrzeć na kod procesu, aby zobaczyć, jak uzyskujemy unikalne nazwy plików wyjściowych.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">2a-inputs.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
@@ -5243,7 +5243,7 @@ Ignorując na razie część <code>.collect()</code>, możemy to uogólnić jako
 <p>To oczywiście operator. Tak jak operatory <code>splitCsv</code> i <code>map</code>, które napotkaliśmy wcześniej.
 Tym razem operator nazywa się <code>collect</code> i jest stosowany do kanału wyjściowego produkowanego przez <code>convertToUpper</code>.</p>
 <p>Operator <code>collect</code> służy do agregowania wyjść z wielu wywołań tego samego procesu i pakowania ich w pojedynczy element kanału.</p>
-<p>W kontekście tego workflow'u pobiera trzy powitania wielkimi literami z <code>convertToUpper.out</code> --które są trzema oddzielnymi elementami i normalnie byłyby obsługiwane w oddzielnych wykonaniach przez następny proces-- i łączy je w jeden element.
+<p>W kontekście tego workflow'a pobiera trzy powitania wielkimi literami z <code>convertToUpper.out</code> --które są trzema oddzielnymi elementami i normalnie byłyby obsługiwane w oddzielnych wykonaniach przez następny proces-- i łączy je w jeden element.
 To umożliwia zebranie wszystkich powitań z powrotem do tego samego pliku.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
@@ -6444,7 +6444,7 @@ Co Nextflow automatycznie obsługuje podczas uruchamiania konteneryzowanego proc
 - [x] Uruchamianie skryptu procesu wewnątrz kontenera
 - [x] Czyszczenie instancji kontenera po wykonaniu
 
-Dowiedz się więcej: [4. Używanie konteneryzowanego oprogramowania](#4-używanie-konteneryzowanego-oprogramowania)
+Dowiedz się więcej: [4. Używanie konteneryzowanego oprogramowania](#4-używanie-kontenerizowanego-oprogramowania)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-8">
@@ -6458,7 +6458,7 @@ Dowiedz się więcej: [4. Używanie konteneryzowanego oprogramowania](#4-używan
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Submit</button>
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#4-używanie-konteneryzowanego-oprogramowania">4. Używanie konteneryzowanego oprogramowania</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#4-używanie-kontenerizowanego-oprogramowania">4. Używanie konteneryzowanego oprogramowania</a></p></section>
 </div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;

@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2106,10 +2106,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-uruchom-test-workflow" class="md-nav__link">
+  <a href="#43-uruchom-test-workflowu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Uruchom test workflow
+        4.3. Uruchom test workflow'u
       
     </span>
   </a>
@@ -3193,7 +3193,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -4130,10 +4130,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#43-uruchom-test-workflow" class="md-nav__link">
+  <a href="#43-uruchom-test-workflowu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.3. Uruchom test workflow
+        4.3. Uruchom test workflow'u
       
     </span>
   </a>
@@ -4454,7 +4454,7 @@
 <p>Zanim zaczniemy dodawać testy, upewnij się, że workflow działa zgodnie z oczekiwaniami.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics-4.nf<span class="w"> </span>-resume
 </code></pre></div>
-<p>To wygląda znajomo, jeśli pracowałeś nad tym kursem szkoleniowym od początku.</p>
+<p>To powinno wyglądać bardzo znajomo, jeśli pracowałeś nad tym kursem szkoleniowym od początku.</p>
 <details class="success">
 <summary>Wynik polecenia</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
@@ -4467,7 +4467,7 @@
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="go">[a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Jak poprzednio, w Twoim katalogu projektu znajdzie się teraz katalog <code>work</code> i katalog <code>results_genomics</code>. Faktycznie wykorzystamy te wyniki później w naszych testach. Ale od teraz będziemy używać pakietu <code>nf-test</code> do testowania pipeline.</p>
+<p>Jak poprzednio, w Twoim katalogu projektu znajdzie się teraz katalog <code>work</code> i katalog <code>results_genomics</code>. Faktycznie wykorzystamy te wyniki później w naszych testach. Ale od teraz będziemy używać pakietu <code>nf-test</code> do testowania pipeline'u.</p>
 <h3 id="02-zainicjuj-nf-test">0.2. Zainicjuj <code>nf-test</code><a class="headerlink" href="#02-zainicjuj-nf-test" title="Permanent link">&para;</a></h3>
 <p>Tak jak w <a href="../../../side_quests/nf-test/">zadaniu dodatkowym nf-test</a>, musimy zainicjować pakiet <code>nf-test</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nf-test<span class="w"> </span>init
@@ -4495,7 +4495,7 @@
 </details>
 <p>Tworzy to również katalog <code>tests</code> zawierający szkielet pliku konfiguracyjnego.</p>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
-<p>Teraz jesteśmy gotowi, aby zacząć pisać testy dla naszego pipeline genomiki.</p>
+<p>Teraz jesteśmy gotowi, aby zacząć pisać testy dla naszego pipeline'u genomiki.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
 <p>Napisz podstawowe testy, które oceniają, czy wywołania procesów zakończyły się sukcesem i wygenerowały poprawne wyjścia.</p>
 <hr />
@@ -4518,7 +4518,7 @@
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="go">SUCCESS: Generated 1 test files.</span>
 </code></pre></div>
 </details>
-<p>To tworzy plik w tym samym katalogu co <code>main.nf</code>.
+<p>Tworzy to plik w tym samym katalogu co <code>main.nf</code>.
 Możesz przejść do katalogu w eksploratorze plików i otworzyć plik, który powinien zawierać następujący kod:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/modules/samtools/index/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
@@ -4684,7 +4684,7 @@ Tutaj wybieramy odniesienie do nazwy pliku i jego formatu.</p>
 <a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="go">SUCCESS: Executed 1 tests in 7.727s</span>
 </code></pre></div>
 </details>
-<p>Jak nauczyliśmy się wcześniej, to zweryfikowało podstawową asercję o sukcesie procesu i utworzyło plik migawki na podstawie wyjścia procesu. Możemy zobaczyć zawartość pliku migawki w pliku <code>tests/modules/samtools/index/tests/main.nf.test.snap</code>:</p>
+<p>Jak nauczyliśmy się wcześniej, to zweryfikowało podstawową asercję o sukcesie procesu i utworzyło plik migawki na podstawie wyjścia procesu. Zawartość pliku migawki możemy zobaczyć w pliku <code>tests/modules/samtools/index/tests/main.nf.test.snap</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/samtools/index/tests/main.nf.test.snap</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -4811,7 +4811,7 @@ Tutaj wybieramy odniesienie do nazwy pliku i jego formatu.</p>
 <p>Zwróć uwagę na ostrzeżenie odnoszące się do efektu parametru <code>--update-snapshot</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Uwaga</p>
-<p>Tutaj używamy danych testowych, których użyliśmy wcześniej do zademonstrowania naukowych wyników pipeline.
+<p>Tutaj używamy danych testowych, których użyliśmy wcześniej do zademonstrowania naukowych wyników pipeline'u.
 Gdybyśmy planowali obsługiwać te testy w środowisku produkcyjnym, wygenerowalibyśmy mniejsze dane wejściowe do celów testowych.</p>
 <p>Ogólnie rzecz biorąc, ważne jest, aby testy jednostkowe były jak najlżejsze poprzez używanie najmniejszych elementów danych niezbędnych i wystarczających do oceny funkcjonalności procesu, w przeciwnym razie całkowity czas wykonania może znacznie się zwiększyć.
 Zestaw testów, którego uruchomienie zajmuje zbyt dużo czasu, to zestaw testów, który prawdopodobnie zostanie pominięty w interesie szybkości.</p>
@@ -4828,8 +4828,8 @@ Zestaw testów, którego uruchomienie zajmuje zbyt dużo czasu, to zestaw testó
 <p>Dowiedz się, jak pisać testy dla innych procesów w naszym workflow'ie genomiki, używając metody setup do obsługi połączonych procesów. Ocenimy również, czy wyjścia, konkretnie nasze pliki VCF, zawierają oczekiwane wywołania wariantów.</p>
 <hr />
 <h2 id="2-dodaj-testy-do-poaczonego-procesu-i-testuj-zawartosc">2. Dodaj testy do połączonego procesu i testuj zawartość<a class="headerlink" href="#2-dodaj-testy-do-poaczonego-procesu-i-testuj-zawartosc" title="Permanent link">&para;</a></h2>
-<p>Aby przetestować <code>GATK_HAPLOTYPECALLER</code>, musimy dostarczyć procesowi dane z <code>SAMTOOLS_INDEX</code>. Moglibyśmy uruchomić <code>SAMTOOLS_INDEX</code>, pobrać wyniki i przechowywać je z danymi testowymi workflow'u. To faktycznie jest zalecanym podejściem dla dopracowanego pipeline'u, ale nf-test zapewnia alternatywne podejście, używając metody <code>setup</code>.</p>
-<p>Metoda setup pozwala wywołać proces <code>SAMTOOLS_INDEX</code> jako część konfiguracji testu, a jego wynik wykorzystać jako dane wejściowe dla <code>GATK_HAPLOTYPECALLER</code>. Ma to koszt: <code>SAMTOOLS_INDEX</code> będzie uruchamiany przy każdym teście. Jednak może nadal rozwijamy workflow i nie chcemy wstępnie generować danych testowych, które możemy później zmienić. <code>SAMTOOLS_INDEX</code> jest również bardzo szybki, więc korzyści z wstępnego generowania mogą być pomijalne. Oto jak działa metoda setup.</p>
+<p>Aby przetestować <code>GATK_HAPLOTYPECALLER</code>, musimy dostarczyć procesowi dane wyjściowe z <code>SAMTOOLS_INDEX</code>. Moglibyśmy to zrobić, uruchamiając <code>SAMTOOLS_INDEX</code>, pobierając jego wyniki i przechowując je z danymi testowymi workflow'u. To faktycznie jest zalecanym podejściem dla dopracowanego pipeline'u, ale nf-test zapewnia alternatywne podejście, używając metody <code>setup</code>.</p>
+<p>Metoda setup pozwala wywołać proces <code>SAMTOOLS_INDEX</code> jako część konfiguracji testu, a jego wynik wykorzystać jako dane wejściowe dla <code>GATK_HAPLOTYPECALLER</code>. Ma to koszt: <code>SAMTOOLS_INDEX</code> będzie uruchamiany przy każdym teście <code>GATK_HAPLOTYPECALLER</code>. Jednak być może nadal rozwijamy workflow i nie chcemy wstępnie generować danych testowych, które możemy później zmienić. <code>SAMTOOLS_INDEX</code> jest również bardzo szybki, więc korzyści z wstępnego generowania i przechowywania jego wyników mogą być pomijalne. Oto jak działa metoda setup.</p>
 <h3 id="21-wygeneruj-i-umiesc-plik-testowy">2.1. Wygeneruj i umieść plik testowy<a class="headerlink" href="#21-wygeneruj-i-umiesc-plik-testowy" title="Permanent link">&para;</a></h3>
 <p>Jak poprzednio, najpierw generujemy szkielet pliku:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>nf-test<span class="w"> </span>generate<span class="w"> </span>process<span class="w"> </span>modules/gatk/haplotypecaller/main.nf
@@ -5288,7 +5288,7 @@ Z jasnej strony, może być używane do testowania z dużą precyzją, czy narz�
 <a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a><span class="go">SUCCESS: Executed 3 tests in 127.586s</span>
 </code></pre></div>
 </details>
-<p>To kończy podstawowy plan testów dla tego drugiego kroku w pipeline. Przechodzimy do trzeciego i ostatniego testu na poziomie modułu!</p>
+<p>To kończy podstawowy plan testów dla tego drugiego kroku w pipeline'ie. Przechodzimy do trzeciego i ostatniego testu na poziomie modułu!</p>
 <h3 id="podsumowanie_2">Podsumowanie<a class="headerlink" href="#podsumowanie_2" title="Permanent link">&para;</a></h3>
 <p>Nauczyłeś się, jak:</p>
 <ol>
@@ -5305,7 +5305,7 @@ Z jasnej strony, może być używane do testowania z dużą precyzją, czy narz�
 <ol>
 <li>Złożonych procesów z wieloma zależnościami</li>
 <li>Procesów, których uruchomienie zajmuje dużo czasu</li>
-<li>Procesów będących częścią stabilnego, produkcyjnego pipeline</li>
+<li>Procesów będących częścią stabilnego, produkcyjnego pipeline'u</li>
 </ol>
 <h3 id="31-wygeneruj-dane-testowe">3.1. Wygeneruj dane testowe<a class="headerlink" href="#31-wygeneruj-dane-testowe" title="Permanent link">&para;</a></h3>
 <p>Sprawdź wyniki, które wygenerowaliśmy na początku tej sekcji:</p>
@@ -5549,7 +5549,7 @@ Z jasnej strony, może być używane do testowania z dużą precyzją, czy narz�
 <li>Ostateczne wywołania wariantów są spójne</li>
 </ol>
 <h3 id="41-wygeneruj-test-workflow">4.1. Wygeneruj test workflow<a class="headerlink" href="#41-wygeneruj-test-workflow" title="Permanent link">&para;</a></h3>
-<p>Wygeneruj plik testowy dla kompletnego pipeline:</p>
+<p>Wygeneruj plik testowy dla kompletnego pipeline'u:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>nf-test<span class="w"> </span>generate<span class="w"> </span>pipeline<span class="w"> </span>genomics-4.nf
 </code></pre></div>
 <details class="success">
@@ -5655,7 +5655,7 @@ Jednak prostszym sposobem jest skonfigurowanie bloku <code>params {}</code> w pl
 <a id="__codelineno-63-4" name="__codelineno-63-4"></a><span class="cm">========================================================================================</span>
 <a id="__codelineno-63-5" name="__codelineno-63-5"></a><span class="cm">*/</span>
 <a id="__codelineno-63-6" name="__codelineno-63-6"></a>
-<a id="__codelineno-63-7" name="__codelineno-63-7"></a><span class="c1">// Katalog wyjściowy dla wyników workflow</span>
+<a id="__codelineno-63-7" name="__codelineno-63-7"></a><span class="c1">// Katalog wyjściowy dla wyników workflow&#39;u</span>
 <a id="__codelineno-63-8" name="__codelineno-63-8"></a><span class="n">outputDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;results_genomics&#39;</span>
 <a id="__codelineno-63-9" name="__codelineno-63-9"></a>
 <a id="__codelineno-63-10" name="__codelineno-63-10"></a><span class="cm">/*</span>
@@ -5677,7 +5677,7 @@ Jednak prostszym sposobem jest skonfigurowanie bloku <code>params {}</code> w pl
 <a id="__codelineno-63-26" name="__codelineno-63-26"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Gdy uruchomimy test, <code>nf-test</code> pobierze ten plik konfiguracyjny i odpowiednio pobierze wejścia.</p>
-<h3 id="43-uruchom-test-workflow">4.3. Uruchom test workflow<a class="headerlink" href="#43-uruchom-test-workflow" title="Permanent link">&para;</a></h3>
+<h3 id="43-uruchom-test-workflowu">4.3. Uruchom test workflow'u<a class="headerlink" href="#43-uruchom-test-workflowu" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/genomics-4.nf.test
 </code></pre></div>
 <details class="success">
@@ -5776,8 +5776,8 @@ Jednak prostszym sposobem jest skonfigurowanie bloku <code>params {}</code> w pl
 <a id="__codelineno-69-27" name="__codelineno-69-27" href="#__codelineno-69-27"></a><span class="go">SUCCESS: Executed 8 tests in 380.801s</span>
 </code></pre></div>
 </details>
-<p>8 testów w 1 poleceniu! Poświęciliśmy dużo czasu na konfigurowanie wielu testów, ale jeśli chodzi o ich uruchamianie, było bardzo szybko i łatwo. Możesz zobaczyć, jak przydatne jest to podczas utrzymywania dużego pipeline, który może zawierać setki różnych elementów. Poświęcamy czas na napisanie testów raz, aby móc zaoszczędzić czas na uruchamianiu ich wiele razy.</p>
-<p>Co więcej, możemy to zautomatyzować! Wyobraź sobie testy uruchamiane za każdym razem, gdy Ty lub kolega próbujecie dodać nowy kod. W ten sposób zapewniamy, że nasze pipeline utrzymują wysoki standard.</p>
+<p>8 testów w 1 poleceniu! Poświęciliśmy dużo czasu na konfigurowanie wielu testów, ale jeśli chodzi o ich uruchamianie, było bardzo szybko i łatwo. Możesz zobaczyć, jak przydatne jest to podczas utrzymywania dużego pipeline'u, który może zawierać setki różnych elementów. Poświęcamy czas na napisanie testów raz, aby móc zaoszczędzić czas na uruchamianiu ich wiele razy.</p>
+<p>Co więcej, możemy to zautomatyzować! Wyobraź sobie testy uruchamiane za każdym razem, gdy Ty lub kolega próbujecie dodać nowy kod. W ten sposób zapewniamy, że nasze pipeline'y utrzymują wysoki standard.</p>
 <h2 id="podsumowanie_4">Podsumowanie<a class="headerlink" href="#podsumowanie_4" title="Permanent link">&para;</a></h2>
 <p>Teraz wiesz, jak pisać i uruchamiać kilka rodzajów testów dla Swojego pipeline'u genomiki używając nf-test. Ten framework testowy pomaga zapewnić, że Twój workflow wykrywania wariantów produkuje spójne, niezawodne wyniki w różnych środowiskach i podczas wprowadzania zmian w kodzie.</p>
 <p>Nauczyłeś się testować krytyczne komponenty takie jak:</p>
@@ -5792,7 +5792,7 @@ Jednak prostszym sposobem jest skonfigurowanie bloku <code>params {}</code> w pl
 <li>Testowanie zestawem danych tria rodzinnego, aby zapewnić prawidłową identyfikację wariantów w powiązanych próbkach</li>
 <li>Sprawdzanie konkretnych współrzędnych genomicznych i informacji o wariantach w plikach wyjściowych</li>
 </ul>
-<p>Te umiejętności testowania są niezbędne do rozwijania solidnych pipeline bioinformatycznych, które mogą niezawodnie przetwarzać dane genomiczne i produkować dokładne wywołania wariantów. W miarę dalszej pracy z Nextflow w analizie genomiki, te fundamenty testowania pomogą Ci utrzymać wysoką jakość kodu, który produkuje wiarygodne wyniki naukowe.</p><style type="text/css">.quiz {
+<p>Te umiejętności testowania są niezbędne do rozwijania solidnych pipeline'ów bioinformatycznych, które mogą niezawodnie przetwarzać dane genomiczne i produkować dokładne wywołania wariantów. W miarę dalszej pracy z Nextflow w analizie genomiki, te fundamenty testowania pomogą Ci utrzymać wysoką jakość kodu, który produkuje wiarygodne wyniki naukowe.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

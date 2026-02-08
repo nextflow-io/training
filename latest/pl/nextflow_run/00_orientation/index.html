@@ -1451,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2816,7 +2816,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3673,9 +3673,9 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
 <h2 id="uruchom-srodowisko-szkoleniowe">Uruchom środowisko szkoleniowe<a class="headerlink" href="#uruchom-srodowisko-szkoleniowe" title="Permanent link">&para;</a></h2>
 <p>Aby skorzystać z gotowego środowiska, które udostępniamy na GitHub Codespaces, kliknij przycisk "Open in GitHub Codespaces" poniżej. Inne opcje znajdziesz w sekcji <a href="../../envsetup/">Opcje środowiska</a>.</p>
-<p>Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj prawego przycisku myszy, ctrl-click lub cmd-click w zależności od sprzętu), aby móc czytać wskazówki podczas ładowania środowiska.
-Będziesz musiał mieć te informacje otwarte równolegle, aby przejść przez kurs.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=3.0"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
+<p>Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj prawego przycisku myszy, ctrl-click lub cmd-click w zależności od sprzętu), aby móc czytać dalej podczas ładowania środowiska.
+Będziesz musiał mieć te instrukcje otwarte równolegle, aby przejść przez kurs.</p>
+<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h3 id="podstawy-srodowiska">Podstawy środowiska<a class="headerlink" href="#podstawy-srodowiska" title="Permanent link">&para;</a></h3>
 <p>To środowisko szkoleniowe zawiera całe oprogramowanie, kod i dane potrzebne do pracy z kursem, więc nie musisz niczego instalować samodzielnie.</p>
 <p>Codespace jest skonfigurowany z interfejsem VSCode, który zawiera eksplorator systemu plików, edytor kodu i powłokę terminala.
@@ -3685,9 +3685,9 @@ Wszystkie instrukcje podane podczas kursu (np. 'otwórz plik', 'edytuj kod' lub 
 <p>To szkolenie jest przeznaczone dla Nextflow 25.10.2 lub nowszego <strong>z WŁĄCZONYM parserem składni v2</strong>.
 Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że używasz prawidłowych ustawień, jak opisano <a href="../../info/nxf_versions/">tutaj</a>.</p>
 <h2 id="przygotuj-sie-do-pracy">Przygotuj się do pracy<a class="headerlink" href="#przygotuj-sie-do-pracy" title="Permanent link">&para;</a></h2>
-<p>Po uruchomieniu codespace są dwie rzeczy, które musisz zrobić przed rozpoczęciem szkolenia: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.</p>
+<p>Po uruchomieniu codespace'a musisz wykonać dwie czynności przed rozpoczęciem szkolenia: ustawić katalog roboczy dla tego konkretnego kursu i przejrzeć dostarczone materiały.</p>
 <h3 id="ustaw-katalog-roboczy">Ustaw katalog roboczy<a class="headerlink" href="#ustaw-katalog-roboczy" title="Permanent link">&para;</a></h3>
-<p>Domyślnie codespace otwiera się z głównym folderem wszystkich materiałów szkoleniowych, ale dla tego modułu będziemy pracować w podkatalogu <code>nextflow-run/</code>.</p>
+<p>Domyślnie codespace otwiera się z katalogiem roboczym ustawionym w głównym folderze wszystkich kursów szkoleniowych, ale w tym kursie będziemy pracować w katalogu <code>nextflow-run/</code>.</p>
 <p>Zmień katalog teraz, uruchamiając to polecenie w terminalu:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>nextflow-run/
 </code></pre></div>
@@ -3755,14 +3755,14 @@ Używamy zwijanych sekcji takich jak ta do wyświetlania oczekiwanego wyjścia p
 </li>
 </ul>
 <h2 id="lista-kontrolna-gotowosci">Lista kontrolna gotowości<a class="headerlink" href="#lista-kontrolna-gotowosci" title="Permanent link">&para;</a></h2>
-<p>Myślisz, że jesteś gotowy do rozpoczęcia?</p>
+<p>Myślisz, że jesteś gotowy, aby zacząć?</p>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Rozumiem cel tego kursu i jego wymagania wstępne</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Moje środowisko jest uruchomione i działa</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ustawiłem odpowiednio Swój katalog roboczy</li>
 </ul>
 <p>Jeśli możesz zaznaczyć wszystkie pola, jesteś gotowy do działania.</p>
-<p><strong>Aby przejść do <a href="../01_basics/">Części 1: Podstawowe operacje</a>, kliknij strzałkę w prawym dolnym rogu tej strony.</strong></p><style type="text/css">.quiz {
+<p><strong>Aby przejść do <a href="../01_basics/">Części 1: Uruchamianie podstawowych operacji</a>, kliknij strzałkę w prawym dolnym rogu tej strony.</strong></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

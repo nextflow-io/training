@@ -1616,7 +1616,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2981,7 +2981,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -4001,22 +4001,20 @@
 
 <h1 id="czesc-4-hello-modules">Część 4: Hello Modules<a class="headerlink" href="#czesc-4-hello-modules" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<!--
+<figure>
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xxp_menS0E8?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Obejrzyj [całą playlistę](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) na kanale YouTube Nextflow.
-
-:green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/04_hello_modules.md).
-///
--->
-
-<p>Ta sekcja opisuje, jak organizować kod workflow, aby rozwój i utrzymanie pipeline było bardziej efektywne i zrównoważone.
+<figcaption>
+<p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Obejrzyj <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">całą playlistę</a> na kanale YouTube Nextflow.</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Transkrypcja wideo jest dostępna <a href="./transcripts/04_hello_modules.md">tutaj</a>.</p>
+</figcaption>
+</figure>
+<p>Ta sekcja opisuje, jak organizować kod workflow'u, aby rozwój i utrzymanie pipeline'u było bardziej efektywne i zrównoważone.
 W szczególności pokażemy, jak używać <a href="https://nextflow.io/docs/latest/module.html"><strong>modułów</strong></a>.</p>
 <p>W Nextflow <strong>moduł</strong> to samodzielny plik kodu, często zamykający w sobie jedną definicję procesu.
-Aby użyć modułu w workflow, wystarczy dodać jednoliniową instrukcję <code>include</code> do pliku kodu workflow; następnie możesz zintegrować proces z workflow'em w standardowy sposób.
+Aby użyć modułu w workflow'ie, wystarczy dodać jednoliniową instrukcję <code>include</code> do pliku kodu workflow'u; następnie możesz zintegrować proces z workflow'em w standardowy sposób.
 Umożliwia to ponowne wykorzystanie definicji procesów w wielu workflow'ach bez tworzenia wielu kopii kodu.</p>
 <p>Kiedy zaczęliśmy rozwijać nasz workflow, napisaliśmy wszystko w jednym pliku kodu.
 Teraz przeniesiemy procesy do indywidualnych modułów.</p>
@@ -4031,11 +4029,11 @@ Teraz przeniesiemy procesy do indywidualnych modułów.</p>
 <p>To sprawi, że nasz kod będzie bardziej współdzielny, elastyczny i łatwy w utrzymaniu.</p>
 <details class="info">
 <summary>Jak zacząć od tej sekcji</summary>
-<p>Ta sekcja kursu zakłada, że ukończyłeś Części 1-3 kursu <a href="../">Hello Nextflow</a>, ale jeśli znasz podstawy omówione w tych sekcjach, możesz zacząć od tego miejsca bez żadnych dodatkowych przygotowań.</p>
+<p>Ta sekcja kursu zakłada, że ukończyłeś Części 1-3 kursu <a href="../">Hello Nextflow</a>, ale jeśli znasz podstawy omówione w tych sekcjach, możesz zacząć od tego miejsca bez dodatkowych przygotowań.</p>
 </details>
 <hr />
 <h2 id="0-rozgrzewka-uruchom-hello-modulesnf">0. Rozgrzewka: Uruchom <code>hello-modules.nf</code><a class="headerlink" href="#0-rozgrzewka-uruchom-hello-modulesnf" title="Permanent link">&para;</a></h2>
-<p>Użyjemy skryptu workflow <code>hello-modules.nf</code> jako punktu wyjścia.
+<p>Użyjemy skryptu workflow'u <code>hello-modules.nf</code> jako punktu wyjścia.
 Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 3 tego szkolenia, z tą różnicą, że zmieniliśmy miejsca docelowe wyjść:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-modules.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-37">37</a></span>
 <span class="normal"><a href="#__codelineno-0-38">38</a></span>
@@ -4102,17 +4100,17 @@ Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 3 tego s
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="go">└── UPPER-Holà-output.txt</span>
 </code></pre></div>
 </details>
-<p>Jeśli to zadziałało, jesteś gotowy do nauki modularyzacji kodu workflow.</p>
+<p>Jeśli to zadziałało, jesteś gotowy do nauki modularyzacji kodu workflow'u.</p>
 <hr />
 <h2 id="1-utworz-katalog-do-przechowywania-moduow">1. Utwórz katalog do przechowywania modułów<a class="headerlink" href="#1-utworz-katalog-do-przechowywania-moduow" title="Permanent link">&para;</a></h2>
-<p>Najlepszą praktyką jest przechowywanie modułów w konkretnym katalogu.
+<p>Najlepszą praktyką jest przechowywanie modułów w dedykowanym katalogu.
 Możesz nazwać ten katalog jak chcesz, ale konwencja nakazuje nazywać go <code>modules/</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mkdir<span class="w"> </span>modules
 </code></pre></div>
 <hr />
 <h2 id="2-utworz-modu-dla-sayhello">2. Utwórz moduł dla <code>sayHello()</code><a class="headerlink" href="#2-utworz-modu-dla-sayhello" title="Permanent link">&para;</a></h2>
 <p>W najprostszej formie przekształcenie istniejącego procesu w moduł to niewiele więcej niż operacja kopiuj-wklej.
-Utworzymy plik dla modułu, skopiujemy odpowiedni kod, a następnie usuniemy go z głównego pliku workflow.</p>
+Utworzymy plik dla modułu, skopiujemy odpowiedni kod, a następnie usuniemy go z głównego pliku workflow'u.</p>
 <p>Potem wystarczy dodać instrukcję <code>include</code>, aby Nextflow wiedział, że ma pobrać odpowiedni kod w czasie wykonania.</p>
 <h3 id="21-utworz-plik-dla-nowego-moduu">2.1. Utwórz plik dla nowego modułu<a class="headerlink" href="#21-utworz-plik-dla-nowego-moduu" title="Permanent link">&para;</a></h3>
 <p>Utwórzmy pusty plik dla modułu o nazwie <code>sayHello.nf</code>.</p>
@@ -4120,7 +4118,7 @@ Utworzymy plik dla modułu, skopiujemy odpowiedni kod, a następnie usuniemy go 
 </code></pre></div>
 <p>To daje nam miejsce na umieszczenie kodu procesu.</p>
 <h3 id="22-przenies-kod-procesu-sayhello-do-pliku-moduu">2.2. Przenieś kod procesu <code>sayHello</code> do pliku modułu<a class="headerlink" href="#22-przenies-kod-procesu-sayhello-do-pliku-moduu" title="Permanent link">&para;</a></h3>
-<p>Skopiuj całą definicję procesu z pliku workflow do pliku modułu, upewniając się, że kopiujesz również shebang <code>#!/usr/bin/env nextflow</code>.</p>
+<p>Skopiuj całą definicję procesu z pliku workflow'u do pliku modułu.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/sayHello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -4136,28 +4134,24 @@ Utworzymy plik dla modułu, skopiujemy odpowiedni kod, a następnie usuniemy go 
 <span class="normal"><a href="#__codelineno-6-13">13</a></span>
 <span class="normal"><a href="#__codelineno-6-14">14</a></span>
 <span class="normal"><a href="#__codelineno-6-15">15</a></span>
-<span class="normal"><a href="#__codelineno-6-16">16</a></span>
-<span class="normal"><a href="#__codelineno-6-17">17</a></span>
-<span class="normal"><a href="#__codelineno-6-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="cm">/*</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="cm"> * Użyj echo do wypisania &#39;Hello World!&#39; do pliku</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="cm"> */</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7"></a>
-<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10"></a>
-<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13"></a>
-<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; &#39;${greeting}-output.txt&#39;</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cm">/*</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="cm"> * Użyj echo do wypisania &#39;Hello World!&#39; do pliku</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="cm"> */</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; &#39;${greeting}-output.txt&#39;</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Po wykonaniu tego usuń definicję procesu z pliku workflow, ale upewnij się, że zostawiasz shebang na miejscu.</p>
+<p>Po wykonaniu tego usuń definicję procesu z pliku workflow'u.</p>
 <h3 id="23-dodaj-deklaracje-importu-przed-blokiem-workflow">2.3. Dodaj deklarację importu przed blokiem workflow<a class="headerlink" href="#23-dodaj-deklaracje-importu-przed-blokiem-workflow" title="Permanent link">&para;</a></h3>
 <p>Składnia importowania procesu z modułu jest dość prosta:</p>
 <div class="highlight"><span class="filename">Składnia: Deklaracja importu</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">NAZWA_PROCESU</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;ścieżka_do_modułu&gt;&#39;</span>
@@ -4225,7 +4219,7 @@ Utworzymy plik dla modułu, skopiujemy odpowiedni kod, a następnie usuniemy go 
 Możesz sprawdzić opublikowane wyjścia.</p>
 <p>Nextflow rozpoznał, że nadal jest to ta sama praca do wykonania, nawet jeśli kod jest podzielony na wiele plików.</p>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
-<p>Wiesz już, jak wyodrębnić proces do lokalnego modułu i wiesz, że nie wpływa to na możliwość wznawiania workflow.</p>
+<p>Wiesz już, jak wyodrębnić proces do lokalnego modułu i wiesz, że nie wpływa to na możliwość wznawiania workflow'u.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
 <p>Ćwicz tworzenie kolejnych modułów.
 Gdy zrobisz jeden, możesz zrobić milion więcej...
@@ -4237,7 +4231,7 @@ Ale na razie zróbmy jeszcze tylko dwa.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>touch<span class="w"> </span>modules/convertToUpper.nf
 </code></pre></div>
 <h3 id="32-przenies-kod-procesu-converttoupper-do-pliku-moduu">3.2. Przenieś kod procesu <code>convertToUpper</code> do pliku modułu<a class="headerlink" href="#32-przenies-kod-procesu-converttoupper-do-pliku-moduu" title="Permanent link">&para;</a></h3>
-<p>Skopiuj całą definicję procesu z pliku workflow do pliku modułu, upewniając się, że kopiujesz również shebang <code>#!/usr/bin/env nextflow</code>.</p>
+<p>Skopiuj całą definicję procesu z pliku workflow'u do pliku modułu.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/convertToUpper.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -4253,28 +4247,24 @@ Ale na razie zróbmy jeszcze tylko dwa.</p>
 <span class="normal"><a href="#__codelineno-13-13">13</a></span>
 <span class="normal"><a href="#__codelineno-13-14">14</a></span>
 <span class="normal"><a href="#__codelineno-13-15">15</a></span>
-<span class="normal"><a href="#__codelineno-13-16">16</a></span>
-<span class="normal"><a href="#__codelineno-13-17">17</a></span>
-<span class="normal"><a href="#__codelineno-13-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cm">/*</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="cm"> * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="cm"> */</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7"></a>
-<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10"></a>
-<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;UPPER-${input_file}&quot;</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13"></a>
-<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="s2">    cat &#39;${input_file}&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; &#39;UPPER-${input_file}&#39;</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-13-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cm">/*</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="cm"> * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cm"> */</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;UPPER-${input_file}&quot;</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="s2">    cat &#39;${input_file}&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; &#39;UPPER-${input_file}&#39;</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Po wykonaniu tego usuń definicję procesu z pliku workflow, ale upewnij się, że zostawiasz shebang na miejscu.</p>
+<p>Po wykonaniu tego usuń definicję procesu z pliku workflow'u.</p>
 <h3 id="33-dodaj-deklaracje-importu-przed-blokiem-params">3.3. Dodaj deklarację importu przed blokiem <code>params</code><a class="headerlink" href="#33-dodaj-deklaracje-importu-przed-blokiem-params" title="Permanent link">&para;</a></h3>
 <p>Wstaw deklarację importu powyżej bloku <code>params</code> i wypełnij ją odpowiednio.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Po</label><label for="__tabbed_2_2">Przed</label></div>
@@ -4343,7 +4333,7 @@ Ale na razie zróbmy jeszcze tylko dwa.</p>
 <a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>To powinno nadal produkować takie same wyjście jak poprzednio.</p>
+<p>To powinno nadal produkować takie samo wyjście jak poprzednio.</p>
 <p>Dwa zrobione, jeszcze jeden do zrobienia!</p>
 <hr />
 <h2 id="4-zmodularyzuj-proces-collectgreetings">4. Zmodularyzuj proces <code>collectGreetings()</code><a class="headerlink" href="#4-zmodularyzuj-proces-collectgreetings" title="Permanent link">&para;</a></h2>
@@ -4352,7 +4342,7 @@ Ale na razie zróbmy jeszcze tylko dwa.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>touch<span class="w"> </span>modules/collectGreetings.nf
 </code></pre></div>
 <h3 id="42-przenies-kod-procesu-collectgreetings-do-pliku-moduu">4.2. Przenieś kod procesu <code>collectGreetings</code> do pliku modułu<a class="headerlink" href="#42-przenies-kod-procesu-collectgreetings-do-pliku-moduu" title="Permanent link">&para;</a></h3>
-<p>Skopiuj całą definicję procesu z pliku workflow do pliku modułu, upewniając się, że kopiujesz również shebang <code>#!/usr/bin/env nextflow</code>.</p>
+<p>Skopiuj całą definicję procesu z pliku workflow'u do pliku modułu.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/collectGreetings.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -4372,32 +4362,28 @@ Ale na razie zróbmy jeszcze tylko dwa.</p>
 <span class="normal"><a href="#__codelineno-19-17">17</a></span>
 <span class="normal"><a href="#__codelineno-19-18">18</a></span>
 <span class="normal"><a href="#__codelineno-19-19">19</a></span>
-<span class="normal"><a href="#__codelineno-19-20">20</a></span>
-<span class="normal"><a href="#__codelineno-19-21">21</a></span>
-<span class="normal"><a href="#__codelineno-19-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2"></a>
-<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="cm">/*</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="cm"> * Zbierz pozdrowienia pisane wielkimi literami do jednego pliku wyjściowego</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="cm"> */</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7"></a>
-<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_files</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">batch_name</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11"></a>
-<a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;COLLECTED-${batch_name}-output.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
-<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${batch_name}-report.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
-<a id="__codelineno-19-15" name="__codelineno-19-15"></a>
-<a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="w">    </span><span class="n">count_greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_files</span><span class="o">.</span><span class="na">size</span><span class="o">()</span>
-<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="s2">    cat ${input_files} &gt; &#39;COLLECTED-${batch_name}-output.txt&#39;</span>
-<a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="s2">    echo &#39;There were ${count_greetings} greetings in this batch.&#39; &gt; &#39;${batch_name}-report.txt&#39;</span>
-<a id="__codelineno-19-21" name="__codelineno-19-21"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-19-22" name="__codelineno-19-22"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-19-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="cm">/*</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="cm"> * Zbierz pozdrowienia pisane wielkimi literami do jednego pliku wyjściowego</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="cm"> */</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_files</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">batch_name</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;COLLECTED-${batch_name}-output.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${batch_name}-report.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13"></a>
+<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">    </span><span class="n">count_greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_files</span><span class="o">.</span><span class="na">size</span><span class="o">()</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="s2">    cat ${input_files} &gt; &#39;COLLECTED-${batch_name}-output.txt&#39;</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="s2">    echo &#39;There were ${count_greetings} greetings in this batch.&#39; &gt; &#39;${batch_name}-report.txt&#39;</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Po wykonaniu tego usuń definicję procesu z pliku workflow, ale upewnij się, że zostawiasz shebang na miejscu.</p>
+<p>Po wykonaniu tego usuń definicję procesu z pliku workflow'u.</p>
 <h3 id="43-dodaj-deklaracje-importu-przed-blokiem-params">4.3. Dodaj deklarację importu przed blokiem <code>params</code><a class="headerlink" href="#43-dodaj-deklaracje-importu-przed-blokiem-params" title="Permanent link">&para;</a></h3>
 <p>Wstaw deklarację importu powyżej bloku <code>params</code> i wypełnij ją odpowiednio.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Po</label><label for="__tabbed_3_2">Przed</label></div>
@@ -4470,10 +4456,10 @@ Ale na razie zróbmy jeszcze tylko dwa.</p>
 <a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>To powinno nadal produkować takie same wyjście jak poprzednio.</p>
+<p>To powinno nadal produkować takie samo wyjście jak poprzednio.</p>
 <h3 id="podsumowanie_1">Podsumowanie<a class="headerlink" href="#podsumowanie_1" title="Permanent link">&para;</a></h3>
-<p>Wiesz już, jak modularyzować wiele procesów w workflow.</p>
-<p>Gratulacje, wykonałeś całą tę pracę i absolutnie nic się nie zmieniło w działaniu pipeline!</p>
+<p>Wiesz już, jak modularyzować wiele procesów w workflow'ie.</p>
+<p>Gratulacje, wykonałeś całą tę pracę i absolutnie nic się nie zmieniło w działaniu pipeline'u!</p>
 <p>Żarty na bok, teraz Twój kod jest bardziej modularny, a jeśli zdecydujesz się napisać inny pipeline, który wywołuje jeden z tych procesów, wystarczy wpisać jedną krótką instrukcję <code>include</code>, aby użyć odpowiedniego modułu.
 Jest to lepsze niż kopiowanie-wklejanie kodu, ponieważ jeśli później zdecydujesz się ulepszyć moduł, wszystkie Twoje pipeline'y odziedziczą te ulepszenia.</p>
 <h3 id="co-dalej_1">Co dalej?<a class="headerlink" href="#co-dalej_1" title="Permanent link">&para;</a></h3>
@@ -4486,7 +4472,7 @@ Jest to lepsze niż kopiowanie-wklejanie kodu, ponieważ jeśli później zdecyd
 Czym jest moduł w Nextflow?
 - [ ] Plik konfiguracyjny
 - [x] Samodzielny plik, który może zawierać definicje procesów
-- [ ] Definicja workflow
+- [ ] Definicja workflow'u
 - [ ] Operator kanału
 
 Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-utworz-modul-dla-sayhello)
@@ -4499,7 +4485,7 @@ Dowiedz się więcej: [2. Utwórz moduł dla `sayHello()`](#2-utworz-modul-dla-s
         <p>Czym jest moduł w Nextflow?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Plik konfiguracyjny</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">Samodzielny plik, który może zawierać definicje procesów</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Definicja workflow</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Operator kanału</label></div></fieldset>
+        <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Plik konfiguracyjny</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">Samodzielny plik, który może zawierać definicje procesów</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Definicja workflow'u</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Operator kanału</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
 
     </form>
@@ -4585,7 +4571,7 @@ Co się dzieje z funkcjonalnością `-resume` podczas używania modułów?
 Jakie są korzyści z używania modułów? (Wybierz wszystkie pasujące)
 - [x] Możliwość ponownego wykorzystania kodu w różnych workflow'ach
 - [x] Łatwiejsze utrzymanie
-- [x] Lepsza organizacja kodu workflow
+- [x] Lepsza organizacja kodu workflow'u
 - [ ] Szybsza prędkość wykonania
 </quiz>
 -->
@@ -4596,7 +4582,7 @@ Jakie są korzyści z używania modułów? (Wybierz wszystkie pasujące)
         <p>Jakie są korzyści z używania modułów? (Wybierz wszystkie pasujące)</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
-        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-4-0" correct><label for="quiz-4-0">Możliwość ponownego wykorzystania kodu w różnych workflow'ach</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-4-1" correct><label for="quiz-4-1">Łatwiejsze utrzymanie</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">Lepsza organizacja kodu workflow</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">Szybsza prędkość wykonania</label></div></fieldset>
+        <fieldset><div><input type="checkbox" name="answer" value="0" id="quiz-4-0" correct><label for="quiz-4-0">Możliwość ponownego wykorzystania kodu w różnych workflow'ach</label></div><div><input type="checkbox" name="answer" value="1" id="quiz-4-1" correct><label for="quiz-4-1">Łatwiejsze utrzymanie</label></div><div><input type="checkbox" name="answer" value="2" id="quiz-4-2" correct><label for="quiz-4-2">Lepsza organizacja kodu workflow'u</label></div><div><input type="checkbox" name="answer" value="3" id="quiz-4-3" ><label for="quiz-4-3">Szybsza prędkość wykonania</label></div></fieldset>
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Submit</button>
     </form>

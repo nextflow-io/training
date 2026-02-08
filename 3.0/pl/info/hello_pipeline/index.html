@@ -1140,7 +1140,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2505,7 +2505,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3582,18 +3582,18 @@
  
 
 <h1 id="pipeline-hello">Pipeline Hello<a class="headerlink" href="#pipeline-hello" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
+<p><span class="ai-translation-notice">:material-information-notice-icon } Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
 <p>Większość naszych kursów szkoleniowych używa prostego, domenowo-agnostycznego pipeline'u do demonstracji koncepcji i mechanizmów Nextflow.
 Kurs Hello Nextflow pokazuje, jak rozwijać ten pipeline krok po kroku, wyjaśniając każdą decyzję projektową i implementacyjną.
 Inne szkolenia używają tego pipeline'u lub jego części jako punktu wyjścia.</p>
 <p>Ta strona podsumowuje stan pipeline'u po ukończeniu kursu Hello Nextflow.</p>
 <h3 id="krotki-opis">Krótki opis<a class="headerlink" href="#krotki-opis" title="Permanent link">&para;</a></h3>
-<p>Workflow Hello przyjmuje plik CSV zawierający teksty powitalne. Zapisuje je do oddzielnych plików i konwertuje na wielkie litery. Następnie zbiera je z powrotem razem i generuje pojedynczy plik tekstowy z obrazkiem ASCII zabawnej postaci wypowiadającej te teksty.</p>
+<p>Workflow Hello przyjmuje plik CSV zawierający pozdrowienia, zapisuje je do oddzielnych plików, konwertuje każde na wielkie litery, zbiera je ponownie razem i generuje pojedynczy plik tekstowy zawierający obrazek ASCII zabawnej postaci wypowiadającej te pozdrowienia.</p>
 <h3 id="kroki-workflow-procesy">Kroki workflow (procesy)<a class="headerlink" href="#kroki-workflow-procesy" title="Permanent link">&para;</a></h3>
 <p>Cztery kroki są zaimplementowane jako procesy Nextflow (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> i <code>cowpy</code>) przechowywane w oddzielnych plikach modułów.</p>
 <ol>
-<li><strong><code>sayHello</code>:</strong> Zapisuje każdy tekst powitalny do własnego pliku wyjściowego (np. "Hello-output.txt")</li>
-<li><strong><code>convertToUpper</code>:</strong> Konwertuje każdy wpis na wielkie litery (np. "HELLO")</li>
+<li><strong><code>sayHello</code>:</strong> Zapisuje każde pozdrowienie do własnego pliku wyjściowego (np. "Hello-output.txt")</li>
+<li><strong><code>convertToUpper</code>:</strong> Konwertuje każde pozdrowienie na wielkie litery (np. "HELLO")</li>
 <li><strong><code>collectGreetings</code>:</strong> Zbiera wszystkie pozdrowienia wielkimi literami do pojedynczego pliku wsadowego</li>
 <li><strong><code>cowpy</code>:</strong> Generuje grafikę ASCII za pomocą narzędzia <code>cowpy</code></li>
 </ol>

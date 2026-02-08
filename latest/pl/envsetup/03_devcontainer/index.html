@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2503,7 +2503,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3001,10 +3001,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#zalety-korzystania-z-devcontainers" class="md-nav__link">
+  <a href="#zalety-korzystania-z-devcontainerow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Zalety korzystania z Devcontainers
+        Zalety korzystania z devcontainerów
       
     </span>
   </a>
@@ -3411,10 +3411,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#zalety-korzystania-z-devcontainers" class="md-nav__link">
+  <a href="#zalety-korzystania-z-devcontainerow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Zalety korzystania z Devcontainers
+        Zalety korzystania z devcontainerów
       
     </span>
   </a>
@@ -3697,25 +3697,25 @@
 
 <h1 id="lokalne-devcontainers">Lokalne Devcontainers<a class="headerlink" href="#lokalne-devcontainers" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>Jeśli masz lokalną instalację Docker lub chętnie ją skonfigurujesz, najłatwiejszym sposobem pracy lokalnej z tymi materiałami jest użycie funkcji devcontainer w Visual Studio Code. To podejście zapewnia wszystkie niezbędne narzędzia i zależności bez konieczności ręcznej konfiguracji.</p>
+<p>Jeśli masz lokalną instalację Dockera lub chętnie ją skonfigurujesz, najprostszym sposobem pracy z tymi materiałami w środowisku lokalnym jest użycie funkcji devcontainer w Visual Studio Code. To podejście zapewnia wszystkie niezbędne narzędzia i zależności bez konieczności ręcznej instalacji.</p>
 <h2 id="wymagania">Wymagania<a class="headerlink" href="#wymagania" title="Permanent link">&para;</a></h2>
 <p>Aby użyć lokalnej konfiguracji devcontainer, będziesz potrzebować:</p>
 <ul>
 <li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
-<li>Lokalnej instalacji Docker, na przykład:</li>
+<li>Lokalnej instalacji Dockera, na przykład:</li>
 <li><a href="https://docs.docker.com/get-docker/">Docker Desktop</a> (dla Windows/macOS)</li>
-<li><a href="https://docs.docker.com/engine/install/">Docker Engine</a> (dla Linux)</li>
+<li><a href="https://docs.docker.com/engine/install/">Docker Engine</a> (dla Linuksa)</li>
 <li><a href="https://github.com/abiosoft/colima">Colima</a> (alternatywa dla macOS)</li>
-<li><a href="https://docs.docker.com/build/concepts/overview/#install-buildx">Docker Buildx</a> (dołączony do Docker Desktop, ale może wymagać osobnej instalacji z innymi konfiguracjami Docker)</li>
+<li><a href="https://docs.docker.com/build/concepts/overview/#install-buildx">Docker Buildx</a> (dołączony do Docker Desktop, ale może wymagać osobnej instalacji z innymi konfiguracjami Dockera)</li>
 <li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Rozszerzenie Dev Containers</a> dla VS Code</li>
 </ul>
-<p>Twoja instalacja Docker musi być uruchomiona przed próbą otwarcia devcontainer.</p>
+<p>Twoja instalacja Dockera musi być uruchomiona przed próbą otwarcia devcontainera.</p>
 <p>Aby sprawdzić, czy Docker buildx jest dostępny, uruchom:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>buildx<span class="w"> </span>version
 </code></pre></div>
-<p>Jeśli to polecenie nie powiedzie się, będziesz musiał zainstalować rozszerzenie buildx przed kontynuowaniem.</p>
+<p>Jeśli to polecenie nie powiedzie się, musisz zainstalować rozszerzenie buildx przed kontynuowaniem.</p>
 <h2 id="instrukcje-konfiguracji">Instrukcje konfiguracji<a class="headerlink" href="#instrukcje-konfiguracji" title="Permanent link">&para;</a></h2>
-<p>Wykonaj następujące kroki, aby skonfigurować lokalne środowisko za pomocą devcontainers VS Code:</p>
+<p>Wykonaj poniższe kroki, aby skonfigurować lokalne środowisko za pomocą devcontainerów VS Code:</p>
 <h3 id="zainstaluj-rozszerzenie-dev-containers-w-vs-code">Zainstaluj rozszerzenie "Dev Containers" w VS Code<a class="headerlink" href="#zainstaluj-rozszerzenie-dev-containers-w-vs-code" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Otwórz VS Code</li>
@@ -3732,7 +3732,7 @@
 <ul>
 <li>Uruchom VS Code</li>
 <li>Wybierz <strong>File -&gt; Open Folder</strong> z menu</li>
-<li>Przejdź do i wybierz folder repozytorium szkoleniowego, który właśnie sklonowałeś</li>
+<li>Przejdź do folderu repozytorium szkoleniowego, który właśnie sklonowałeś, i wybierz go</li>
 <li>Kliknij <strong>Open</strong></li>
 </ul>
 <h3 id="otworz-ponownie-w-kontenerze">Otwórz ponownie w kontenerze<a class="headerlink" href="#otworz-ponownie-w-kontenerze" title="Permanent link">&para;</a></h3>
@@ -3740,7 +3740,7 @@
 <ul>
 <li>Naciśnij F1 (lub Ctrl+Shift+P / Cmd+Shift+P na macOS)</li>
 <li>Wpisz "Dev Containers: Reopen in Container"</li>
-<li><strong>Ważne</strong>: Gdy pojawi się monit o wybór konfiguracji, wybierz konfigurację devcontainer <strong>local-dev</strong></li>
+<li><strong>Ważne</strong>: Gdy pojawi się monit o wybór konfiguracji, wybierz konfigurację devcontainera <strong>local-dev</strong></li>
 </ul>
 <p><img alt="Reopen in Container prompt" src="img/reopen_prompt.png" /></p>
 <p><img alt="Selecting local configuration" src="img/select_local_config.png" /></p>
@@ -3754,26 +3754,26 @@
 <li>I wszystkie inne zależności wymagane do szkolenia</li>
 </ul>
 <p><img alt="VS Code with devcontainer running" src="img/running_container.png" /></p>
-<h2 id="zalety-korzystania-z-devcontainers">Zalety korzystania z Devcontainers<a class="headerlink" href="#zalety-korzystania-z-devcontainers" title="Permanent link">&para;</a></h2>
+<h2 id="zalety-korzystania-z-devcontainerow">Zalety korzystania z devcontainerów<a class="headerlink" href="#zalety-korzystania-z-devcontainerow" title="Permanent link">&para;</a></h2>
 <p>Korzystanie z podejścia devcontainer oferuje kilka zalet:</p>
 <ul>
 <li><strong>Spójność</strong>: Zapewnia spójne środowisko programistyczne na różnych maszynach</li>
 <li><strong>Prostota</strong>: Wszystkie zależności są preinstalowane i skonfigurowane</li>
 <li><strong>Izolacja</strong>: Środowisko programistyczne jest odizolowane od Twojego lokalnego systemu</li>
-<li><strong>Powtarzalność</strong>: Każdy korzystający z devcontainer otrzymuje taką samą konfigurację</li>
-<li><strong>Brak ręcznej konfiguracji</strong>: Nie ma potrzeby samodzielnego instalowania Java, Nextflow i innych narzędzi</li>
+<li><strong>Powtarzalność</strong>: Każdy korzystający z devcontainera otrzymuje taką samą konfigurację</li>
+<li><strong>Brak ręcznej instalacji</strong>: Nie ma potrzeby samodzielnego instalowania Javy, Nextflow'a i innych narzędzi</li>
 </ul>
 <h2 id="sprawdzanie-srodowiska">Sprawdzanie środowiska<a class="headerlink" href="#sprawdzanie-srodowiska" title="Permanent link">&para;</a></h2>
-<p>Po uruchomieniu devcontainer możesz sprawdzić, czy wszystko jest poprawnie skonfigurowane, uruchamiając:</p>
+<p>Po uruchomieniu devcontainera możesz sprawdzić, czy wszystko jest poprawnie skonfigurowane, uruchamiając:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>info
 </code></pre></div>
-<p>Powinno to wyświetlić wersję Nextflow i informacje o środowisku wykonawczym, potwierdzając, że Twoje środowisko jest poprawnie skonfigurowane.</p>
+<p>Powinno to wyświetlić wersję Nextflow'a i informacje o środowisku wykonawczym, potwierdzając, że Twoje środowisko jest poprawnie skonfigurowane.</p>
 <h2 id="rozwiazywanie-problemow">Rozwiązywanie problemów<a class="headerlink" href="#rozwiazywanie-problemow" title="Permanent link">&para;</a></h2>
-<p>Jeśli napotkasz problemy z konfiguracją devcontainer:</p>
+<p>Jeśli napotkasz problemy z konfiguracją devcontainera:</p>
 <ol>
-<li>Upewnij się, że Twoja instalacja Docker (Docker Desktop, Colima, Docker Engine itp.) jest uruchomiona przed otwarciem devcontainer</li>
+<li>Upewnij się, że Twoja instalacja Dockera (Docker Desktop, Colima, Docker Engine itp.) jest uruchomiona przed otwarciem devcontainera</li>
 <li>Sprawdź, czy wybrałeś konfigurację <strong>local-dev</strong>, gdy pojawił się monit</li>
-<li>Sprawdź, czy Docker buildx jest zainstalowany i działa, uruchamiając <code>docker buildx version</code></li>
+<li>Zweryfikuj, czy Docker buildx jest zainstalowany i działa, uruchamiając <code>docker buildx version</code></li>
 <li>Jeśli kontener nie zbuduje się, spróbuj go przebudować, uruchamiając polecenie "Dev Containers: Rebuild Container"</li>
 <li>W przypadku trwałych problemów zapoznaj się z <a href="https://code.visualstudio.com/docs/devcontainers/troubleshooting">przewodnikiem rozwiązywania problemów VS Code Dev Containers</a></li>
 </ol><style type="text/css">.quiz {

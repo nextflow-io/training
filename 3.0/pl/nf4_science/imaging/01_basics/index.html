@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2967,7 +2967,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -4000,7 +4000,7 @@ Na razie nie będziemy przeglądać kodu; najpierw zobaczmy, jak wygląda jego u
 <p>To świetnie, ale możesz się zastanawiać: gdzie jest wyjście?</p>
 <h3 id="12-znalezienie-pliku-wyjsciowego-w-katalogu-results">1.2. Znalezienie pliku wyjściowego w katalogu <code>results</code><a class="headerlink" href="#12-znalezienie-pliku-wyjsciowego-w-katalogu-results" title="Permanent link">&para;</a></h3>
 <p>Ten workflow jest skonfigurowany do publikowania Swojego wyjścia do katalogu o nazwie <code>results</code>.
-Jeśli spojrzysz na Swój bieżący katalog, zobaczysz, że kiedy uruchomiłeś workflow, Nextflow utworzył nowy katalog o nazwie <code>results</code>, który zawiera plik o nazwie <code>output.txt</code>.</p>
+Jeśli spojrzysz na Swój bieżący katalog, zobaczysz, że kiedy uruchomiłeś workflow'a, Nextflow utworzył nowy katalog o nazwie <code>results</code>, który zawiera plik o nazwie <code>output.txt</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">results/</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="go">results</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="go">└── output.txt</span>
@@ -4015,17 +4015,16 @@ Jeśli spojrzysz na Swój bieżący katalog, zobaczysz, że kiedy uruchomiłeś 
 </details>
 
 <p>Świetnie, nasz workflow zrobił to, co powinien!</p>
-<p>Należy jednak pamiętać, że 'opublikowany' wynik jest kopią (lub w niektórych przypadkach dowiązaniem symbolicznym) rzeczywistego wyjścia wygenerowanego przez Nextflow podczas wykonywania workflow'u.</p>
+<p>Należy jednak pamiętać, że 'opublikowany' wynik jest kopią (lub w niektórych przypadkach dowiązaniem symbolicznym) rzeczywistego wyjścia wygenerowanego przez Nextflow'a podczas wykonywania workflow'u.</p>
 <p>Teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pracę.</p>
 <div class="admonition warning">
 <p class="admonition-title">Ostrzeżenie</p>
-<p>Nie wszystkie workflow'e będą skonfigurowane do publikowania wyjść do katalogu results, i/lub nazwa katalogu może być inna.
+<p>Nie wszystkie workflow'y będą skonfigurowane do publikowania wyjść do katalogu results; nazwa katalogu może być też inna.
 Nieco dalej w tej sekcji pokażemy, jak dowiedzieć się, gdzie to zachowanie jest określone.</p>
 </div>
 <h3 id="13-znalezienie-oryginalnego-wyjscia-i-logow-w-katalogu-work">1.3. Znalezienie oryginalnego wyjścia i logów w katalogu <code>work/</code><a class="headerlink" href="#13-znalezienie-oryginalnego-wyjscia-i-logow-w-katalogu-work" title="Permanent link">&para;</a></h3>
-<p>Kiedy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania procesu (czyli każdego kroku w pipeline'ie).
-Dla każdego z nich przygotuje niezbędne wejścia i wykona odpowiednie instrukcje.
-Wyjścia oraz pliki logów trafiają do tego samego katalogu, automatycznie nazwanego przy użyciu hasha w celu zapewnienia unikalności.</p>
+<p>Kiedy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania każdego procesu w workflow'ie (czyli każdego kroku w pipeline'ie).
+Dla każdego z nich przygotuje niezbędne wejścia, wykona odpowiednie instrukcje i zapisze wyjścia oraz pliki logów w tym samym katalogu, automatycznie nazwanym przy użyciu hasha w celu zapewnienia unikalności.</p>
 <p>Wszystkie te katalogi zadań będą znajdować się w katalogu o nazwie <code>work</code> w Twoim bieżącym katalogu (gdzie uruchamiasz polecenie).</p>
 <p>To może brzmieć zagmatwanie, więc zobaczmy, jak to wygląda w praktyce.</p>
 <p>Wracając do wyjścia konsoli dla workflow'u, który uruchomiliśmy wcześniej, mieliśmy tę linię:</p>
@@ -4064,7 +4063,7 @@ Jednak pliki logów są ustawione jako niewidoczne w terminalu, więc jeśli chc
 
 </details>
 
-<p>Powinieneś od razu rozpoznać plik <code>output.txt</code>, który jest w rzeczywistości oryginalnym wyjściem procesu <code>sayHello</code>, które zostało opublikowane w katalogu <code>results</code>.
+<p>Powinieneś od razu rozpoznać plik <code>output.txt</code>, który jest w rzeczywistości oryginalnym wyjściem procesu <code>sayHello</code>, opublikowanym w katalogu <code>results</code>.
 Jeśli go otworzysz, znajdziesz ponownie powitanie <code>Hello World!</code>.</p>
 <details>
   <summary>Zawartość pliku output.txt</summary>
@@ -4078,14 +4077,14 @@ Jeśli go otworzysz, znajdziesz ponownie powitanie <code>Hello World!</code>.</p
 <p>To są pliki pomocnicze i logi, które Nextflow zapisał jako część wykonania zadania:</p>
 <ul>
 <li><strong><code>.command.begin</code></strong>: Plik wartowniczy utworzony natychmiast po uruchomieniu zadania.</li>
-<li><strong><code>.command.err</code></strong>: Komunikaty o błędach (<code>stderr</code>) emitowane przez wywołanie procesu</li>
-<li><strong><code>.command.log</code></strong>: Kompletny log wyjścia emitowany przez wywołanie procesu</li>
+<li><strong><code>.command.err</code></strong>: Komunikaty o błędach (<code>stderr</code>) wyemitowane przez wywołanie procesu</li>
+<li><strong><code>.command.log</code></strong>: Kompletny log wyjścia wyemitowany przez wywołanie procesu</li>
 <li><strong><code>.command.out</code></strong>: Regularne wyjście (<code>stdout</code>) wywołania procesu</li>
-<li><strong><code>.command.run</code></strong>: Pełny skrypt uruchomiony przez Nextflow w celu wykonania wywołania procesu</li>
+<li><strong><code>.command.run</code></strong>: Pełny skrypt uruchomiony przez Nextflow'a w celu wykonania wywołania procesu</li>
 <li><strong><code>.command.sh</code></strong>: Polecenie, które faktycznie zostało uruchomione przez wywołanie procesu</li>
 <li><strong><code>.exitcode</code></strong>: Kod wyjścia wynikający z polecenia</li>
 </ul>
-<p>Plik <code>.command.sh</code> jest szczególnie przydatny, ponieważ pokazuje główne polecenie, które Nextflow wykonał, nie włączając całej księgowości i konfiguracji zadania/środowiska.</p>
+<p>Plik <code>.command.sh</code> jest szczególnie przydatny, ponieważ pokazuje główne polecenie wykonane przez Nextflow'a, nie włączając całej księgowości i konfiguracji zadania/środowiska.</p>
 <details>
   <summary>Zawartość pliku</summary>
 
@@ -4098,11 +4097,11 @@ Jeśli go otworzysz, znajdziesz ponownie powitanie <code>Hello World!</code>.</p
 
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
-<p>Gdy coś pójdzie nie tak i musisz rozwiązać problem, może być przydatne sprawdzenie skryptu <code>command.sh</code>, aby sprawdzić dokładnie, jakie polecenie Nextflow skomponował na podstawie instrukcji workflow'u, interpolacji zmiennych i tak dalej.</p>
+<p>Gdy coś pójdzie nie tak i musisz rozwiązać problem, może być przydatne sprawdzenie skryptu <code>command.sh</code>, aby zweryfikować dokładnie, jakie polecenie Nextflow skomponował na podstawie instrukcji workflow'u, interpolacji zmiennych i tak dalej.</p>
 </div>
 <h3 id="14-cwiczenie-opcjonalne-ponowne-uruchomienie-z-roznymi-powitaniami">1.4. Ćwiczenie opcjonalne: ponowne uruchomienie z różnymi powitaniami<a class="headerlink" href="#14-cwiczenie-opcjonalne-ponowne-uruchomienie-z-roznymi-powitaniami" title="Permanent link">&para;</a></h3>
-<p>Spróbuj ponownie uruchomić workflow kilka razy z różnymi wartościami dla argumentu <code>--greeting</code>, następnie sprawdź zarówno zawartość katalogu <code>results/</code>, jak i katalogów zadań.</p>
-<p>Zauważ, jak wyjścia i logi izolowanych katalogów zadań są zachowywane, podczas gdy zawartość katalogu <code>results</code> jest nadpisywana przez wyjście kolejnych wykonań.</p>
+<p>Spróbuj ponownie uruchomić workflow kilka razy z różnymi wartościami dla argumentu <code>--greeting</code>, a następnie sprawdź zarówno zawartość katalogu <code>results/</code>, jak i katalogów zadań.</p>
+<p>Zauważ, jak wyjścia i logi izolowanych katalogów zadań są zachowywane, podczas gdy zawartość katalogu <code>results</code> jest nadpisywana wyjściem kolejnych wykonań.</p>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
 <p>Wiesz, jak uruchomić prosty skrypt Nextflow, monitorować jego wykonanie i znaleźć jego wyjścia.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
@@ -4173,12 +4172,12 @@ Teraz, gdy zobaczyliśmy, co robi, otwórzmy pudełko i zajrzyjmy do środka.</p
 </details>
 
 <p>Skrypt Nextflow obejmuje dwa główne typy podstawowych komponentów: jeden lub więcej <strong>procesów</strong> oraz sam <strong>workflow</strong>.
-Każdy <strong>proces</strong> definiuje operacje danego kroku w pipeline'ie, natomiast <strong>workflow</strong> określa logikę przepływu danych łączącą poszczególne kroki.</p>
+Każdy <strong>proces</strong> opisuje, jakie operacje powinien wykonać odpowiedni krok w pipeline'ie, natomiast <strong>workflow</strong> opisuje logikę przepływu danych łączącą poszczególne kroki.</p>
 <p>Przyjrzyjmy się najpierw bliżej blokowi <strong>process</strong>, a następnie przyjrzymy się blokowi <strong>workflow</strong>.</p>
 <h3 id="22-definicja-process">2.2. Definicja <code>process</code><a class="headerlink" href="#22-definicja-process" title="Permanent link">&para;</a></h3>
 <p>Pierwszy blok kodu opisuje <strong>proces</strong>.
 Definicja procesu zaczyna się od słowa kluczowego <code>process</code>, po którym następuje nazwa procesu, a na końcu treść procesu oddzielona klamrami.
-Treść procesu musi zawierać blok skryptu, który określa polecenie do uruchomienia, którym może być wszystko, co można uruchomić w terminalu wiersza poleceń.</p>
+Treść procesu musi zawierać blok skryptu, który określa polecenie do uruchomienia; może to być wszystko, co można uruchomić w terminalu wiersza poleceń.</p>
 <p>Tutaj mamy <strong>proces</strong> o nazwie <code>sayHello</code>, który przyjmuje zmienną <strong>wejściową</strong> o nazwie <code>greeting</code> i zapisuje Swoje <strong>wyjście</strong> do pliku o nazwie <code>output.txt</code>.</p>
 <details>
   <summary>Kod</summary>
@@ -4222,9 +4221,9 @@ Treść procesu musi zawierać blok skryptu, który określa polecenie do urucho
 
 </details>
 
-<p>To bardzo minimalna definicja procesu, która zawiera tylko definicję <code>input</code>, definicję <code>output</code> oraz skrypt do wykonania.</p>
-<p>Definicja <code>input</code> zawiera kwalifikator <code>val</code>, który mówi Nextflow, aby spodziewał się wartości jakiegoś rodzaju (może to być ciąg znaków, liczba, cokolwiek).</p>
-<p>Definicja <code>output</code> zawiera kwalifikator <code>path</code>, który mówi Nextflow, że powinno to być traktowane jako ścieżka (obejmuje zarówno ścieżki katalogów, jak i pliki).</p>
+<p>To bardzo minimalna definicja procesu, która zawiera tylko definicję <code>input</code>, definicję <code>output</code> oraz <code>script</code> do wykonania.</p>
+<p>Definicja <code>input</code> zawiera kwalifikator <code>val</code>, który mówi Nextflow'owi, aby spodziewał się wartości jakiegoś rodzaju (może to być ciąg znaków, liczba, cokolwiek).</p>
+<p>Definicja <code>output</code> zawiera kwalifikator <code>path</code>, który mówi Nextflow'owi, że powinno to być traktowane jako ścieżka (obejmuje zarówno ścieżki katalogów, jak i pliki).</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
 <p>Definicja wyjścia nie <em>określa</em>, jakie wyjście zostanie utworzone.
@@ -4236,7 +4235,7 @@ Wyjście wytworzone, które nie pasuje do tego, co jest zadeklarowane w bloku wy
 <h3 id="23-definicja-workflow">2.3. Definicja <code>workflow</code><a class="headerlink" href="#23-definicja-workflow" title="Permanent link">&para;</a></h3>
 <p>Drugi blok kodu opisuje sam <strong>workflow</strong>.
 Definicja workflow'u zaczyna się od słowa kluczowego <code>workflow</code>, po którym następuje opcjonalna nazwa, a następnie treść workflow'u oddzielona klamrami.</p>
-<p>Tutaj mamy <strong>workflow</strong>, który składa się z jednego wywołania procesu <code>sayHello</code>, który przyjmuje wejście, <code>params.greeting</code>, które przechowuje wartość, którą podaliśmy do parametru <code>--greeting</code>.</p>
+<p>Tutaj mamy <strong>workflow</strong>, który składa się z jednego wywołania procesu <code>sayHello</code>; przyjmuje on wejście <code>params.greeting</code>, które przechowuje wartość podaną przez nas do parametru <code>--greeting</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-22">22</a></span>
 <span class="normal"><a href="#__codelineno-13-23">23</a></span>
 <span class="normal"><a href="#__codelineno-13-24">24</a></span>
@@ -4248,16 +4247,16 @@ Definicja workflow'u zaczyna się od słowa kluczowego <code>workflow</code>, po
 <a id="__codelineno-13-26" name="__codelineno-13-26"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>To bardzo minimalna definicja <strong>workflow'u</strong>.
-W rzeczywistym pipeline'ie, workflow zazwyczaj zawiera wiele wywołań <strong>procesów</strong> połączonych <strong>kanałami</strong>, i mogą być ustawione domyślne wartości dla zmiennych wejściowych.</p>
+W rzeczywistym pipeline'ie workflow zazwyczaj zawiera wiele wywołań <strong>procesów</strong> połączonych <strong>kanałami</strong>, i mogą być ustawione domyślne wartości dla zmiennych wejściowych.</p>
 <p>Zobaczymy to w akcji, gdy uruchomimy nf-core/molkart w Części 2 kursu.</p>
 <h3 id="24-system-params-parametrow-wiersza-polecen">2.4. System <code>params</code> parametrów wiersza poleceń<a class="headerlink" href="#24-system-params-parametrow-wiersza-polecen" title="Permanent link">&para;</a></h3>
 <p><code>params.greeting</code>, który przekazujemy do wywołania procesu <code>sayHello()</code>, to elegancki fragment kodu Nextflow i warto poświęcić na niego dodatkową minutę.</p>
 <p>Jak wspomniano powyżej, tak przekazujemy wartość parametru wiersza poleceń <code>--greeting</code> do wywołania procesu <code>sayHello()</code>.
-W rzeczywistości, samo zadeklarowanie <code>params.someParameterName</code> umożliwi nam podanie workflow'owi parametru o nazwie <code>--someParameterName</code> z wiersza poleceń.</p>
+W rzeczywistości samo zadeklarowanie <code>params.someParameterName</code> umożliwi nam podanie workflow'owi parametru o nazwie <code>--someParameterName</code> z wiersza poleceń.</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
-<p>Te parametry workflow'u zadeklarowane przy użyciu systemu <code>params</code> zawsze przyjmują dwie myślniki (<code>--</code>).
-To odróżnia je od parametrów poziomu Nextflow, które przyjmują tylko jeden myślnik (<code>-</code>).</p>
+<p>Te parametry workflow'u zadeklarowane przy użyciu systemu <code>params</code> zawsze przyjmują dwa myślniki (<code>--</code>).
+To odróżnia je od parametrów poziomu Nextflow'a, które przyjmują tylko jeden myślnik (<code>-</code>).</p>
 </div>
 <h3 id="podsumowanie_1">Podsumowanie<a class="headerlink" href="#podsumowanie_1" title="Permanent link">&para;</a></h3>
 <p>Wiesz teraz, jak jest zbudowany prosty workflow Nextflow i jak podstawowe komponenty odnoszą się do jego funkcjonalności.</p>
@@ -4270,7 +4269,7 @@ To odróżnia je od parametrów poziomu Nextflow, które przyjmują tylko jeden 
 <h3 id="31-ponowne-uruchomienie-workflowu-z-resume">3.1. Ponowne uruchomienie workflow'u z <code>-resume</code><a class="headerlink" href="#31-ponowne-uruchomienie-workflowu-z-resume" title="Permanent link">&para;</a></h3>
 <p>Czasami będziesz chciał ponownie uruchomić pipeline, który już wcześniej uruchomiłeś, bez powtarzania jakiejkolwiek pracy, która została już pomyślnie zakończona.</p>
 <p>Nextflow ma opcję o nazwie <code>-resume</code>, która pozwala Ci to zrobić.
-W szczególności, w tym trybie, wszystkie procesy, które zostały już uruchomione z dokładnie tym samym kodem, ustawieniami i wejściami, zostaną pominięte.
+W szczególności, w tym trybie wszystkie procesy, które zostały już uruchomione z dokładnie tym samym kodem, ustawieniami i wejściami, zostaną pominięte.
 Oznacza to, że Nextflow uruchomi tylko procesy, które dodałeś lub zmodyfikowałeś od ostatniego uruchomienia, lub którym przekazujesz nowe ustawienia lub wejścia.</p>
 <p>Są dwie kluczowe zalety tego podejścia:</p>
 <ul>
@@ -4289,15 +4288,15 @@ Oznacza to, że Nextflow uruchomi tylko procesy, które dodałeś lub zmodyfikow
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">[a3/7be2fa] process &gt; sayHello [100%] 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Zwróć uwagę na fragment <code>cached:</code>, który został dodany w linii statusu procesu (linia 5), co oznacza, że Nextflow rozpoznał, że już wykonał tę pracę i po prostu ponownie wykorzystał wynik z poprzedniego pomyślnego uruchomienia.</p>
+<p>Zwróć uwagę na fragment <code>cached:</code>, który został dodany w linii statusu procesu (linia 5), co oznacza, że Nextflow rozpoznał, iż już wykonał tę pracę i po prostu ponownie wykorzystał wynik z poprzedniego pomyślnego uruchomienia.</p>
 <p>Możesz również zobaczyć, że hash podkatalogu roboczego jest taki sam jak w poprzednim uruchomieniu.
-Nextflow dosłownie wskazuje Ci na poprzednie wykonanie mówiąc "Już to zrobiłem tam."</p>
+Nextflow dosłownie wskazuje Ci na poprzednie wykonanie, mówiąc "Już to zrobiłem tam."</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
 <p>Gdy ponownie uruchamiasz pipeline z <code>resume</code>, Nextflow nie nadpisuje żadnych plików zapisanych do katalogu <code>publishDir</code> przez żadne wywołanie procesu, które zostało wcześniej pomyślnie uruchomione.</p>
 </div>
 <h3 id="32-przeglad-logu-wczesniejszych-wykonan">3.2. Przegląd logu wcześniejszych wykonań<a class="headerlink" href="#32-przeglad-logu-wczesniejszych-wykonan" title="Permanent link">&para;</a></h3>
-<p>Za każdym razem, gdy uruchamiasz workflow Nextflow, linia jest zapisywana do pliku logu o nazwie <code>history</code>, w ukrytym katalogu o nazwie <code>.nextflow</code> w bieżącym katalogu roboczym.</p>
+<p>Za każdym razem, gdy uruchamiasz workflow Nextflow, linia jest zapisywana do pliku logu o nazwie <code>history</code> w ukrytym katalogu o nazwie <code>.nextflow</code> w bieżącym katalogu roboczym.</p>
 <p>Bardziej wygodnym sposobem dostępu do tych informacji jest użycie polecenia <code>nextflow log</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nextflow<span class="w"> </span>log
 </code></pre></div>
@@ -4309,8 +4308,8 @@ Ponieważ podkatalogi są nazwane losowo, trudno jest stwierdzić na podstawie i
 <p>Możesz użyć logu Nextflow, aby wyszukać uruchomienie na podstawie jego znacznika czasu i/lub linii poleceń, a następnie użyć <code>nextflow clean -before &lt;run_name&gt; -f</code>, aby usunąć katalogi robocze z wcześniejszych uruchomień.</p>
 <div class="admonition warning">
 <p class="admonition-title">Ostrzeżenie</p>
-<p>Usuwanie podkatalogów roboczych z wcześniejszych uruchomień usuwa je z pamięci podręcznej Nextflow i usuwa wszystkie wyjścia, które były przechowywane w tych katalogach.
-Oznacza to, że przerywa zdolność Nextflow do wznowienia wykonania bez ponownego uruchamiania odpowiednich procesów.</p>
+<p>Usuwanie podkatalogów roboczych z wcześniejszych uruchomień usuwa je z pamięci podręcznej Nextflow'a i usuwa wszystkie wyjścia, które były przechowywane w tych katalogach.
+Oznacza to, że przerywa zdolność Nextflow'a do wznowienia wykonania bez ponownego uruchamiania odpowiednich procesów.</p>
 <p>Jesteś odpowiedzialny za zapisanie wszelkich wyjść, na których Ci zależy lub na których planujesz polegać! Jeśli używasz dyrektywy <code>publishDir</code> w tym celu, upewnij się, że używasz trybu <code>copy</code>, a nie trybu <code>symlink</code>.</p>
 </div>
 <h3 id="podsumowanie_2">Podsumowanie<a class="headerlink" href="#podsumowanie_2" title="Permanent link">&para;</a></h3>

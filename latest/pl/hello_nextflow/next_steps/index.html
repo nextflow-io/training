@@ -1423,7 +1423,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2788,7 +2788,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3616,27 +3616,25 @@
 <h1 id="podsumowanie-kursu">Podsumowanie kursu<a class="headerlink" href="#podsumowanie-kursu" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
 <p>Gratulacje z okazji ukończenia kursu szkoleniowego Hello Nextflow! 🎉</p>
-<!--
+<figure>
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/xHOcx_4Ancg?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Zobacz [całą playlistę na kanale YouTube Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
-
-:green_book: Możesz przeczytać [transkrypcję wideo](./transcripts/07_next_steps.md) wraz z filmem.
-///
--->
-
+<figcaption>
+<p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Zobacz <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">całą playlistę na kanale YouTube Nextflow</a>.</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Możesz przeczytać <a href="./transcripts/07_next_steps.md">transkrypcję wideo</a> wraz z filmem.</p>
+</figcaption>
+</figure>
 <h2 id="twoja-droga">Twoja droga<a class="headerlink" href="#twoja-droga" title="Permanent link">&para;</a></h2>
-<p>Zacząłeś od bardzo prostego workflow'u, który uruchamiał zakodowane na sztywno polecenie.
-W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularny, wieloetapowy pipeline wykorzystujący kluczowe funkcje Nextflow, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.</p>
+<p>Zacząłeś od bardzo prostego workflow'u uruchamiającego zakodowane na sztywno polecenie.
+W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularny, wieloetapowy pipeline wykorzystujący kluczowe funkcje Nextflow'a, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.</p>
 <h3 id="co-zbudowaes">Co zbudowałeś<a class="headerlink" href="#co-zbudowaes" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Ostateczna forma workflow'u Hello przyjmuje jako wejście plik CSV zawierający tekstowe pozdrowienia.</li>
-<li>Cztery kroki są zaimplementowane jako procesy Nextflow (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> i <code>cowpy</code>) przechowywane w osobnych plikach modułów.</li>
+<li>Cztery kroki są zaimplementowane jako procesy Nextflow'a (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> i <code>cowpy</code>) przechowywane w osobnych plikach modułów.</li>
 <li>Wyniki są publikowane do katalogu o nazwie <code>results/</code>.</li>
-<li>Końcowe wyjście pipeline'u to plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia zapisane wielkimi literami.</li>
+<li>Końcowe wyjście pipeline'u to zwykły plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia zapisane wielkimi literami.</li>
 </ul>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
@@ -3648,7 +3646,7 @@ W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularn
 </figure>
 
 <ol>
-<li><strong><code>sayHello</code>:</strong> Zapisuje każde pozdrowienie do własnego pliku wyjściowego (<em>np.</em> "Hello-output.txt")</li>
+<li><strong><code>sayHello</code>:</strong> Zapisuje każde pozdrowienie do osobnego pliku wyjściowego (<em>np.</em> "Hello-output.txt")</li>
 <li><strong><code>convertToUpper</code>:</strong> Konwertuje każde pozdrowienie na wielkie litery (<em>np.</em> "HELLO")</li>
 <li><strong><code>collectGreetings</code>:</strong> Zbiera wszystkie pozdrowienia z wielkimi literami do jednego pliku batch</li>
 <li><strong><code>cowpy</code>:</strong> Generuje grafikę ASCII za pomocą narzędzia <code>cowpy</code></li>
@@ -3657,21 +3655,21 @@ W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularn
 <h3 id="nabyte-umiejetnosci">Nabyte umiejętności<a class="headerlink" href="#nabyte-umiejetnosci" title="Permanent link">&para;</a></h3>
 <p>Dzięki temu praktycznemu kursowi nauczyłeś się:</p>
 <ul>
-<li>Opisywać i wykorzystywać podstawowe komponenty Nextflow wystarczające do budowania prostego, wieloetapowego workflow'u</li>
+<li>Opisywać i wykorzystywać podstawowe komponenty Nextflow'a wystarczające do zbudowania prostego, wieloetapowego workflow'u</li>
 <li>Opisywać koncepcje kolejnego kroku, takie jak operatory i fabryki kanałów</li>
-<li>Uruchamiać workflow Nextflow lokalnie</li>
-<li>Znajdować i interpretować wyjścia (wyniki) i pliki dziennika generowane przez Nextflow</li>
+<li>Uruchamiać workflow Nextflow'a lokalnie</li>
+<li>Znajdować i interpretować wyjścia (wyniki) oraz pliki dziennika generowane przez Nextflow'a</li>
 <li>Rozwiązywać podstawowe problemy</li>
 </ul>
-<p>Jesteś teraz wyposażony w fundamentalną wiedzę, aby zacząć tworzyć własne pipeline'y w Nextflow.</p>
+<p>Jesteś teraz wyposażony w fundamentalną wiedzę, aby zacząć tworzyć własne pipeline'y w Nextflow'ie.</p>
 <h2 id="kolejne-kroki-do-rozwijania-umiejetnosci">Kolejne kroki do rozwijania umiejętności<a class="headerlink" href="#kolejne-kroki-do-rozwijania-umiejetnosci" title="Permanent link">&para;</a></h2>
-<p>Oto nasze 3 najlepsze sugestie, co robić dalej:</p>
+<p>Oto nasze 3 najlepsze sugestie, co zrobić dalej:</p>
 <ul>
-<li>Zastosuj Nextflow do naukowego przypadku analizy z <a href="../../nf4_science/">Nextflow dla nauki</a></li>
-<li>Rozpocznij pracę z nf-core z <a href="../../hello_nf-core/">Hello nf-core</a></li>
-<li>Odkryj bardziej zaawansowane funkcje Nextflow z <a href="../../side_quests/">Side Quests</a></li>
+<li>Zastosuj Nextflow'a do naukowego przypadku analizy z <a href="../../nf4_science/">Nextflow dla nauki</a></li>
+<li>Rozpocznij pracę z nf-core dzięki <a href="../../hello_nf-core/">Hello nf-core</a></li>
+<li>Odkryj bardziej zaawansowane funkcje Nextflow'a w ramach <a href="../../side_quests/">Side Quests</a></li>
 </ul>
-<p>Na koniec polecamy zapoznać się z <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, platformą chmurową opracowaną przez twórców Nextflow, która jeszcze bardziej ułatwia uruchamianie workflow'ów i zarządzanie nimi, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.</p>
+<p>Na koniec polecamy zapoznać się z <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, platformą chmurową opracowaną przez twórców Nextflow'a, która jeszcze bardziej ułatwia uruchamianie workflow'ów i zarządzanie nimi, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.</p>
 <h2 id="ankieta-zwrotna">Ankieta zwrotna<a class="headerlink" href="#ankieta-zwrotna" title="Permanent link">&para;</a></h2>
 <p>Zanim przejdziesz dalej, poświęć chwilę na wypełnienie ankiety kursu! Twoja opinia pomaga nam ulepszać materiały szkoleniowe dla wszystkich.</p>
 <p><a class="md-button md-button--primary" href="../survey/">Wypełnij ankietę <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {

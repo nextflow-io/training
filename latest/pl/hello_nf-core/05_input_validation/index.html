@@ -1140,7 +1140,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -1453,10 +1453,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#wnioski" class="md-nav__link">
+  <a href="#podsumowanie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wnioski
+        Podsumowanie
       
     </span>
   </a>
@@ -1595,10 +1595,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#wnioski_1" class="md-nav__link">
+  <a href="#podsumowanie_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wnioski
+        Podsumowanie
       
     </span>
   </a>
@@ -3026,7 +3026,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3665,10 +3665,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#wnioski" class="md-nav__link">
+  <a href="#podsumowanie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wnioski
+        Podsumowanie
       
     </span>
   </a>
@@ -3807,10 +3807,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#wnioski_1" class="md-nav__link">
+  <a href="#podsumowanie_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wnioski
+        Podsumowanie
       
     </span>
   </a>
@@ -4091,7 +4091,7 @@
 
 <h1 id="czesc-5-walidacja-danych-wejsciowych">Część 5: Walidacja danych wejściowych<a class="headerlink" href="#czesc-5-walidacja-danych-wejsciowych" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>W tej piątej części kursu szkoleniowego Hello nf-core pokażemy, jak używać wtyczki nf-schema do walidacji danych wejściowych i parametrów pipeline'u.</p>
+<p>W tej piątej części kursu szkoleniowego Hello nf-core pokażemy Ci, jak używać wtyczki nf-schema do walidacji danych wejściowych i parametrów pipeline'u.</p>
 <details class="info">
 <summary>Jak rozpocząć od tej sekcji</summary>
 <p>Ta sekcja zakłada, że ukończyłeś <a href="../04_make_module/">Część 4: Tworzenie modułu nf-core</a> i zaktualizowałeś moduł procesu <code>COWPY</code> do standardów nf-core w Swoim pipeline'ie.</p>
@@ -4108,7 +4108,7 @@ Możesz przetestować, czy działa poprawnie, uruchamiając następujące polece
 <hr />
 <h2 id="0-rozgrzewka-troche-kontekstu">0. Rozgrzewka: Trochę kontekstu<a class="headerlink" href="#0-rozgrzewka-troche-kontekstu" title="Permanent link">&para;</a></h2>
 <h3 id="01-dlaczego-walidacja-ma-znaczenie">0.1. Dlaczego walidacja ma znaczenie<a class="headerlink" href="#01-dlaczego-walidacja-ma-znaczenie" title="Permanent link">&para;</a></h3>
-<p>Wyobraź sobie, że uruchamiasz Swój pipeline przez dwie godziny, tylko po to, by się zawiesił, ponieważ użytkownik podał plik z niewłaściwym rozszerzeniem. Lub spędzasz długie chwile na debugowaniu tajemniczych błędów, aby ostatecznie odkryć, że parametr był błędnie napisany. Bez walidacji danych wejściowych takie scenariusze są powszechne.</p>
+<p>Wyobraź sobie, że uruchamiasz Swój pipeline przez dwie godziny, tylko po to, by się zawiesił, ponieważ użytkownik podał plik z niewłaściwym rozszerzeniem. Lub spędzasz godziny na debugowaniu tajemniczych błędów, aby ostatecznie odkryć, że parametr był błędnie napisany. Bez walidacji danych wejściowych takie scenariusze są powszechne.</p>
 <p>Rozważ ten przykład:</p>
 <div class="highlight"><span class="filename">Bez walidacji</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
@@ -4129,20 +4129,20 @@ Możesz przetestować, czy działa poprawnie, uruchamiając następujące polece
 </code></pre></div>
 <p>Pipeline zawodzi natychmiast z jasnymi, działającymi komunikatami o błędach. To oszczędza czas, zasoby obliczeniowe i frustrację.</p>
 <h3 id="02-wtyczka-nf-schema">0.2. Wtyczka nf-schema<a class="headerlink" href="#02-wtyczka-nf-schema" title="Permanent link">&para;</a></h3>
-<p><a href="https://nextflow-io.github.io/nf-schema/latest/">Wtyczka nf-schema</a> to wtyczka Nextflow, która zapewnia kompleksowe możliwości walidacji dla pipeline'ów Nextflow.
-Chociaż nf-schema działa z dowolnym workflow'em Nextflow, jest to standardowe rozwiązanie walidacyjne dla wszystkich pipeline'ów nf-core.</p>
+<p><a href="https://nextflow-io.github.io/nf-schema/latest/">Wtyczka nf-schema</a> to wtyczka Nextflow'a, która zapewnia kompleksowe możliwości walidacji dla pipeline'ów Nextflow'a.
+Chociaż nf-schema działa z dowolnym workflow'em Nextflow'a, jest to standardowe rozwiązanie walidacyjne dla wszystkich pipeline'ów nf-core.</p>
 <p>nf-schema zapewnia kilka kluczowych funkcji:</p>
 <ul>
 <li><strong>Walidacja parametrów</strong>: Waliduje parametry pipeline'u względem <code>nextflow_schema.json</code></li>
 <li><strong>Walidacja arkuszy próbek</strong>: Waliduje pliki wejściowe względem <code>assets/schema_input.json</code></li>
-<li><strong>Konwersja kanałów</strong>: Konwertuje zwalidowane arkusze próbek na kanały Nextflow</li>
+<li><strong>Konwersja kanałów</strong>: Konwertuje zwalidowane arkusze próbek na kanały Nextflow'a</li>
 <li><strong>Generowanie tekstu pomocy</strong>: Automatycznie generuje wyjście <code>--help</code> z definicji schematu</li>
 <li><strong>Podsumowanie parametrów</strong>: Wyświetla, które parametry różnią się od wartości domyślnych</li>
 </ul>
 <p>nf-schema jest następcą przestarzałej wtyczki nf-validation i używa standardu <a href="https://json-schema.org/">JSON Schema Draft 2020-12</a> do walidacji.</p>
 <details class="info">
-<summary>Czym są wtyczki Nextflow?</summary>
-<p>Wtyczki to rozszerzenia, które dodają nowe funkcjonalności do samego języka Nextflow. Są instalowane przez blok <code>plugins{}</code> w <code>nextflow.config</code> i mogą zapewniać:</p>
+<summary>Czym są wtyczki Nextflow'a?</summary>
+<p>Wtyczki to rozszerzenia, które dodają nowe funkcjonalności do samego języka Nextflow'a. Są instalowane przez blok <code>plugins{}</code> w <code>nextflow.config</code> i mogą zapewniać:</p>
 <ul>
 <li>Nowe funkcje i klasy, które można zaimportować (jak <code>samplesheetToList</code>)</li>
 <li>Nowe funkcje DSL i operatory</li>
@@ -4179,14 +4179,14 @@ Chociaż nf-schema działa z dowolnym workflow'em Nextflow, jest to standardowe 
 </tbody>
 </table>
 <p>Oba schematy używają formatu JSON Schema, szeroko przyjętego standardu do opisywania i walidacji struktur danych.</p>
-<p><strong>Walidacja parametrów</strong> sprawdza argumenty linii poleceń (flagi takie jak <code>--outdir</code>, <code>--batch</code>, <code>--input</code>):</p>
+<p><strong>Walidacja parametrów</strong> sprawdza parametry linii poleceń (flagi takie jak <code>--outdir</code>, <code>--batch</code>, <code>--input</code>):</p>
 <ul>
-<li>Kontroluje typy wartości, zakresy i formaty</li>
-<li>Zapewnia, że wymagane opcje są podane</li>
+<li>Kontroluje typy, zakresy i formaty parametrów</li>
+<li>Zapewnia, że wymagane parametry są podane</li>
 <li>Weryfikuje, czy ścieżki plików istnieją</li>
 <li>Zdefiniowana w <code>nextflow_schema.json</code></li>
 </ul>
-<p><strong>Walidacja danych wejściowych</strong> sprawdza strukturę arkuszy próbek i manifestów (pliki CSV/TSV opisujące Twoje dane):</p>
+<p><strong>Walidacja danych wejściowych</strong> sprawdza strukturę arkuszy próbek i plików manifestu (pliki CSV/TSV opisujące Twoje dane):</p>
 <ul>
 <li>Kontroluje strukturę kolumn i typy danych</li>
 <li>Weryfikuje, czy ścieżki wymienione w arkuszu próbek istnieją</li>
@@ -4328,8 +4328,8 @@ Usuniemy to ustawienie w sekcji 2 po skonfigurowaniu schematu danych wejściowyc
 Dodamy go w następnej sekcji.</p>
 <details class="info">
 <summary>Skąd pochodzą parametry schematu?</summary>
-<p>Walidacja schematu używa <code>nextflow.config</code> jako bazy dla definicji opcji konfiguracyjnych.
-Wartości zadeklarowane gdzie indziej w skryptach workflow'u (jak w <code>main.nf</code> lub plikach modułów) <strong>nie</strong> są automatycznie przechwytywane przez walidator schematu.</p>
+<p>Walidacja schematu używa <code>nextflow.config</code> jako bazy dla definicji parametrów.
+Parametry zadeklarowane gdzie indziej w skryptach workflow'u (jak w <code>main.nf</code> lub plikach modułów) <strong>nie</strong> są automatycznie przechwytywane przez walidator schematu.</p>
 <p>To oznacza, że zawsze powinieneś deklarować parametry pipeline'u w <code>nextflow.config</code>, a następnie definiować ich reguły walidacji w <code>nextflow_schema.json</code>.</p>
 </details>
 <h3 id="13-dodaj-parametr-batch">1.3. Dodaj parametr batch<a class="headerlink" href="#13-dodaj-parametr-batch" title="Permanent link">&para;</a></h3>
@@ -4457,7 +4457,7 @@ Zamiast tego nf-core zapewnia interaktywne narzędzie GUI, które obsługuje sk�
 </code></pre></div>
 </details>
 <p>Pipeline powinien uruchomić się pomyślnie, a parametr <code>batch</code> jest teraz walidowany.</p>
-<h3 id="wnioski">Wnioski<a class="headerlink" href="#wnioski" title="Permanent link">&para;</a></h3>
+<h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
 <p>Nauczyłeś się, jak używać interaktywnego narzędzia <code>nf-core pipelines schema build</code> do dodawania parametrów do <code>nextflow_schema.json</code> i widziałeś walidację parametrów w akcji.
 Interfejs webowy obsługuje całą składnię JSON Schema za Ciebie, ułatwiając zarządzanie złożonymi schematami parametrów bez podatnej na błędy ręcznej edycji JSON.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
@@ -4768,7 +4768,7 @@ Musimy zastąpić go prostszym schematem dla naszego przypadku użycia powitań.
 <p>Rozłóżmy, co się zmieniło:</p>
 <ol>
 <li><strong><code>samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")</code></strong>: Waliduje plik wejściowy względem naszego schematu i zwraca listę</li>
-<li><strong><code>Channel.fromList(...)</code></strong>: Konwertuje listę na kanał Nextflow</li>
+<li><strong><code>Channel.fromList(...)</code></strong>: Konwertuje listę na kanał Nextflow'a</li>
 </ol>
 <p>To kończy implementację walidacji danych wejściowych używając <code>samplesheetToList</code> i schematów JSON.</p>
 <p>Teraz, gdy skonfigurowaliśmy schemat danych wejściowych, możemy usunąć tymczasowe ustawienie ignorowania, które dodaliśmy wcześniej.</p>
@@ -4908,7 +4908,7 @@ Jeśli chcesz, użyj tego, czego się nauczyłeś, aby dodać walidację równie
 </ul>
 <p>Walidacja schematu zapewnia, że pliki wejściowe mają poprawną strukturę, zanim pipeline się uruchomi, oszczędzając czas i zapobiegając mylącym błędom później podczas wykonywania.</p>
 <p>Jeśli chcesz to przećwiczyć, śmiało twórz inne pliki wejściowe powitań, które naruszają schemat na inne zabawne sposoby.</p>
-<h3 id="wnioski_1">Wnioski<a class="headerlink" href="#wnioski_1" title="Permanent link">&para;</a></h3>
+<h3 id="podsumowanie_1">Podsumowanie<a class="headerlink" href="#podsumowanie_1" title="Permanent link">&para;</a></h3>
 <p>Zaimplementowałeś i przetestowałeś zarówno walidację parametrów, jak i walidację danych wejściowych. Twój pipeline waliduje teraz wejścia przed wykonaniem, zapewniając szybkie informacje zwrotne i jasne komunikaty o błędach.</p>
 <div class="admonition tip">
 <p class="admonition-title">Dalsze czytanie</p>

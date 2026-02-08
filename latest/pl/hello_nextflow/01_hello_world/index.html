@@ -2006,7 +2006,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -3371,7 +3371,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -4781,27 +4781,25 @@
 
 <h1 id="czesc-1-hello-world">Część 1: Hello World<a class="headerlink" href="#czesc-1-hello-world" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<!--
+<figure>
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2hHI-9vms?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-/// caption
-:fontawesome-brands-youtube:{ .youtube } Zobacz [całą playlistę](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) na kanale YouTube Nextflow.
-
-:green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/01_hello_world.md).
-///
--->
-
-<p>W tej pierwszej części kursu szkoleniowego Hello Nextflow łagodnie wprowadzamy temat prostym, niezależnym od dziedziny przykładem Hello World, który będziemy stopniowo rozbudowywać, aby zademonstrować użycie podstawowych elementów logiki i komponentów Nextflow.</p>
+<figcaption>
+<p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Zobacz <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">całą playlistę</a> na kanale YouTube Nextflow.</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Transkrypcja wideo jest dostępna <a href="./transcripts/01_hello_world.md">tutaj</a>.</p>
+</figcaption>
+</figure>
+<p>W tej pierwszej części kursu Hello Nextflow łagodnie wprowadzamy temat prostym, niezależnym od dziedziny przykładem Hello World, który będziemy stopniowo rozbudowywać, aby zademonstrować użycie podstawowych elementów logiki i komponentów Nextflow.</p>
 <details class="info">
 <summary>Czym jest przykład Hello World?</summary>
-<p>"Hello World!" to minimalistyczny przykład, który ma na celu zademonstrowanie podstawowej składni i struktury języka programowania lub frameworku oprogramowania.
+<p>"Hello World!" to minimalistyczny przykład, który ma na celu zademonstrowanie podstawowej składni i struktury języka programowania lub frameworka oprogramowania.
 Przykład zazwyczaj polega na wypisaniu frazy "Hello, World!" na urządzeniu wyjściowym, takim jak konsola lub terminal, lub zapisaniu jej do pliku.</p>
 </details>
 <hr />
 <h2 id="0-rozgrzewka-uruchom-przykad-hello-world-bezposrednio">0. Rozgrzewka: Uruchom przykład Hello World bezpośrednio<a class="headerlink" href="#0-rozgrzewka-uruchom-przykad-hello-world-bezposrednio" title="Permanent link">&para;</a></h2>
-<p>Zademonstrujmy to prostym poleceniem, które uruchomimy bezpośrednio w terminalu, aby pokazać, co robi, zanim opakujemy je w Nextflow.</p>
+<p>Zademonstrujmy to prostym poleceniem, które uruchomimy bezpośrednio w terminalu, aby pokazać, co robi, zanim opakujemy je w Nextflow'a.</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
 <p>Pamiętaj, że powinieneś teraz znajdować się w katalogu <code>hello-nextflow/</code>, jak opisano na stronie <a href="../00_orientation/">Rozpoczęcie pracy</a>.</p>
@@ -4817,7 +4815,7 @@ Przykład zazwyczaj polega na wypisaniu frazy "Hello, World!" na urządzeniu wyj
 </details>
 <p>To wyświetla tekst 'Hello World' bezpośrednio w terminalu.</p>
 <h3 id="02-zapisz-wyjscie-do-pliku">0.2. Zapisz wyjście do pliku<a class="headerlink" href="#02-zapisz-wyjscie-do-pliku" title="Permanent link">&para;</a></h3>
-<p>Uruchamianie pipeline'ów polega głównie na odczytywaniu danych z plików i zapisywaniu wyników do innych plików, więc zmodyfikujmy polecenie, aby zapisało tekst wyjściowy do pliku i uczynimy przykład nieco bardziej odpowiednim.</p>
+<p>Uruchamianie pipeline'ów polega głównie na odczytywaniu danych z plików i zapisywaniu wyników do innych plików, więc zmodyfikujmy polecenie, aby zapisało tekst wyjściowy do pliku, czyniąc przykład nieco bardziej odpowiednim.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>output.txt
 </code></pre></div>
 <details class="success">
@@ -4834,14 +4832,14 @@ Możesz go otworzyć w eksploratorze plików lub z wiersza poleceń używając n
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>To jest to, co spróbujemy odtworzyć w naszym pierwszym workflow'ie Nextflow.</p>
+<p>To jest to, co spróbujemy odtworzyć w naszym pierwszym workflow'ie Nextflow'a.</p>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
 <p>Wiesz już, jak uruchomić proste polecenie w terminalu, które wyświetla tekst, i opcjonalnie, jak sprawić, by zapisało wyjście do pliku.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
-<p>Dowiedz się, jak wyglądałoby to napisane jako workflow Nextflow.</p>
+<p>Dowiedz się, jak wyglądałoby to napisane jako workflow Nextflow'a.</p>
 <hr />
 <h2 id="1-przeanalizuj-skrypt-i-uruchom-go">1. Przeanalizuj skrypt i uruchom go<a class="headerlink" href="#1-przeanalizuj-skrypt-i-uruchom-go" title="Permanent link">&para;</a></h2>
-<p>Dostarczamy Ci w pełni funkcjonalny, choć minimalistyczny skrypt workflow'u o nazwie <code>hello-world.nf</code>, który robi to samo co wcześniej (wypisuje 'Hello World!'), ale z Nextflow.</p>
+<p>Dostarczamy Ci w pełni funkcjonalny, choć minimalistyczny skrypt workflow'u o nazwie <code>hello-world.nf</code>, który robi to samo co wcześniej (wypisuje 'Hello World!'), ale z Nextflow'em.</p>
 <p>Na początek otwórzmy skrypt workflow'u, abyś mógł zorientować się w jego strukturze.
 Następnie uruchomimy go i poszukamy jego wyjść.</p>
 <h3 id="11-przeanalizuj-kod">1.1. Przeanalizuj kod<a class="headerlink" href="#11-przeanalizuj-kod" title="Permanent link">&para;</a></h3>
@@ -4893,8 +4891,8 @@ Następnie uruchomimy go i poszukamy jego wyjść.</p>
 <a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>Skrypt workflow'u Nextflow zazwyczaj zawiera jedną lub więcej definicji <a href="https://nextflow.io/docs/latest/process.html"><strong>process</strong></a> oraz sam <a href="https://nextflow.io/docs/latest/workflow.html"><strong>workflow</strong></a>, plus kilka opcjonalnych bloków (nieobecnych tutaj), które wprowadzimy później.</p>
-<p>Każdy <strong>process</strong> opisuje, jakie operacje powinien wykonać odpowiedni krok w pipeline'ie, podczas gdy <strong>workflow</strong> opisuje logikę przepływu danych, która łączy poszczególne kroki.</p>
+<p>Skrypt workflow'u Nextflow'a zazwyczaj zawiera jedną lub więcej definicji <a href="https://nextflow.io/docs/latest/process.html"><strong>process</strong></a> oraz sam <a href="https://nextflow.io/docs/latest/workflow.html"><strong>workflow</strong></a>, plus kilka opcjonalnych bloków (nieobecnych tutaj), które wprowadzimy później.</p>
+<p>Każdy <strong>process</strong> opisuje, jakie operacje powinien wykonać odpowiedni krok w pipeline'ie, podczas gdy <strong>workflow</strong> opisuje logikę przepływu danych łączącą poszczególne kroki.</p>
 <p>Najpierw przyjrzymy się bliżej blokowi <strong>process</strong>, a następnie blokowi <strong>workflow</strong>.</p>
 <h4 id="111-definicja-process">1.1.1. Definicja <code>process</code><a class="headerlink" href="#111-definicja-process" title="Permanent link">&para;</a></h4>
 <p>Pierwszy blok kodu opisuje <strong>process</strong>.</p>
@@ -4963,7 +4961,7 @@ Definicja workflow'u zaczyna się od słowa kluczowego <code>workflow</code>, po
 <a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
 <a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>To jest bardzo minimalna definicja <strong>workflow</strong>.
+<p>To jest bardzo minimalna definicja <strong>workflow'u</strong>.
 W rzeczywistym pipeline'ie workflow zazwyczaj zawiera wiele wywołań <strong>procesów</strong> połączonych <strong>kanałami</strong>, a procesy oczekują jednego lub więcej zmiennych <strong>wejść</strong>.</p>
 <p>Nauczysz się, jak dodawać zmienne wejścia później w tym module szkoleniowym; a w Części 3 tego kursu nauczysz się, jak dodawać więcej procesów i łączyć je kanałami.</p>
 <div class="admonition tip">
@@ -4987,7 +4985,7 @@ Ale będziemy jej potrzebować, aby skorzystać z wyjść na poziomie workflow'u
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Jeśli Twoje wyjście konsoli wygląda mniej więcej tak, to gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow!</p>
+<p>Jeśli Twoje wyjście konsoli wygląda mniej więcej tak, to gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow'a!</p>
 <p>Najważniejszym wyjściem tutaj jest ostatnia linia, która jest podświetlona w wyjściu powyżej:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">[65/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
@@ -4995,11 +4993,11 @@ Ale będziemy jej potrzebować, aby skorzystać z wyjść na poziomie workflow'u
 <p>Co ważne, ta linia mówi również, gdzie znaleźć wyjście wywołania procesu <code>sayHello</code>.
 Przyjrzyjmy się temu teraz.</p>
 <h4 id="122-znajdz-wyjscie-i-dzienniki-w-katalogu-work">1.2.2. Znajdź wyjście i dzienniki w katalogu <code>work</code><a class="headerlink" href="#122-znajdz-wyjscie-i-dzienniki-w-katalogu-work" title="Permanent link">&para;</a></h4>
-<p>Kiedy uruchamiasz Nextflow po raz pierwszy w danym katalogu, tworzy on katalog o nazwie <code>work</code>, w którym będzie zapisywał wszystkie pliki (i wszelkie dowiązania symboliczne) wygenerowane w trakcie wykonywania.</p>
+<p>Kiedy uruchamiasz Nextflow'a po raz pierwszy w danym katalogu, tworzy on katalog o nazwie <code>work</code>, w którym będzie zapisywał wszystkie pliki (i wszelkie dowiązania symboliczne) wygenerowane w trakcie wykonywania.</p>
 <p>W katalogu <code>work</code> Nextflow organizuje wyjścia i dzienniki dla każdego wywołania procesu.
-Dla każdego wywołania procesu Nextflow tworzy zagnieżdżony podkatalog, nazwany hashem, aby był unikalny, gdzie przygotuje wszystkie niezbędne wejścia (domyślnie używając dowiązań symbolicznych), zapisze pliki pomocnicze i zapisze dzienniki oraz wszelkie wyjścia procesu.</p>
+Dla każdego wywołania procesu Nextflow tworzy zagnieżdżony podkatalog, nazwany hashem, aby był unikalny, gdzie przygotuje wszystkie niezbędne wejścia (domyślnie używając dowiązań symbolicznych), zapisze pliki pomocnicze, dzienniki oraz wszelkie wyjścia procesu.</p>
 <p>Ścieżka do tego podkatalogu jest pokazana w skróconej formie w nawiasach kwadratowych w wyjściu konsoli.
-Patrząc na to, co otrzymaliśmy dla uruchomienia pokazanego powyżej, linia dziennika konsoli dla procesu sayHello zaczyna się od <code>[65/7be2fa]</code>. To odpowiada następującej ścieżce katalogu: <code>work/65/7be2fad5e71e5f49998f795677fd68</code></p>
+Patrząc na to, co otrzymaliśmy dla uruchomienia pokazanego powyżej, linia dziennika konsoli dla procesu sayHello zaczyna się od <code>[65/7be2fa]</code>. To odpowiada następującej ścieżce katalogu: <code>work/65/7be2fa7be2fad5e71e5f49998f795677fd68</code></p>
 <p>Zobaczmy, co tam jest.</p>
 <details class="abstract">
 <summary>Zawartość katalogu</summary>
@@ -5033,13 +5031,13 @@ Otwórz go, a znajdziesz pozdrowienie <code>Hello World!</code>, które było ce
 </details>
 <p>Zadziałało!</p>
 <p>Trzeba przyznać, że może to wydawać się dużo kodu opakowującego dla tak małego wyniku, ale wartość całego tego kodu opakowującego stanie się bardziej oczywista, gdy zaczniemy wczytywać pliki wejściowe i łączyć wiele kroków.</p>
-<p>To powiedziawszy, przyjrzyjmy się również innym plikom w tym katalogu. To są pliki pomocnicze i dziennika tworzone przez Nextflow jako część wykonywania zadania.</p>
+<p>To powiedziawszy, przyjrzyjmy się również innym plikom w tym katalogu. To są pliki pomocnicze i dziennika tworzone przez Nextflow'a jako część wykonywania zadania.</p>
 <ul>
 <li><strong><code>.command.begin</code></strong>: Metadane związane z początkiem wykonywania wywołania procesu</li>
 <li><strong><code>.command.err</code></strong>: Komunikaty o błędach (<code>stderr</code>) emitowane przez wywołanie procesu</li>
 <li><strong><code>.command.log</code></strong>: Pełne wyjście dziennika emitowane przez wywołanie procesu</li>
 <li><strong><code>.command.out</code></strong>: Zwykłe wyjście (<code>stdout</code>) wywołania procesu</li>
-<li><strong><code>.command.run</code></strong>: Pełny skrypt uruchomiony przez Nextflow do wykonania wywołania procesu</li>
+<li><strong><code>.command.run</code></strong>: Pełny skrypt uruchomiony przez Nextflow'a do wykonania wywołania procesu</li>
 <li><strong><code>.command.sh</code></strong>: Polecenie, które zostało faktycznie uruchomione przez wywołanie procesu</li>
 <li><strong><code>.exitcode</code></strong>: Kod wyjścia wynikający z polecenia</li>
 </ul>
@@ -5112,7 +5110,7 @@ To sprawia, że szczególnie cenne jest móc zobaczyć dokładnie, jak Nextflow 
 <p>Widzisz, że dla każdego uruchomienia został utworzony nowy podkatalog z kompletnym zestawem plików wyjściowych i dziennika.
 To pokazuje, że uruchomienie tego samego workflow'u kilka razy nie nadpisze wyników poprzednich uruchomień.</p>
 <h3 id="podsumowanie_1">Podsumowanie<a class="headerlink" href="#podsumowanie_1" title="Permanent link">&para;</a></h3>
-<p>Wiesz, jak odczytać prosty skrypt Nextflow, uruchomić go i znaleźć wyjście oraz odpowiednie pliki dziennika w katalogu work.</p>
+<p>Wiesz, jak odczytać prosty skrypt Nextflow'a, uruchomić go i znaleźć wyjście oraz odpowiednie pliki dziennika w katalogu work.</p>
 <h3 id="co-dalej_1">Co dalej?<a class="headerlink" href="#co-dalej_1" title="Permanent link">&para;</a></h3>
 <p>Naucz się publikować wyjścia workflow'u do bardziej wygodnej lokalizacji.</p>
 <hr />
@@ -5411,7 +5409,7 @@ Po prostu dodaj <code>mode 'copy'</code> do odpowiedniej definicji wyjścia na p
 <p>Ponieważ to również jest ustawiane na poziomie pojedynczego wyjścia, pozwala to ustawić tryb publikowania w sposób szczegółowy.
 To będzie szczególnie przydatne później, gdy przejdziemy do wieloetapowych pipeline'ów, gdzie możesz chcieć kopiować tylko końcowe wyjścia i zostawiać pośrednie wyjścia jako dowiązania symboliczne, na przykład.</p>
 <p>Jak zauważono wcześniej, istnieją inne, bardziej zaawansowane opcje kontrolowania sposobu publikowania wyjść.
-Pokażemy Ci, jak ich używać w odpowiednim czasie na Twojej drodze z Nextflow.</p>
+Pokażemy Ci, jak ich używać w odpowiednim czasie na Twojej drodze z Nextflow'em.</p>
 <h3 id="24-uwaga-o-dyrektywach-publishdir-na-poziomie-procesu">2.4. Uwaga o dyrektywach <code>publishDir</code> na poziomie procesu<a class="headerlink" href="#24-uwaga-o-dyrektywach-publishdir-na-poziomie-procesu" title="Permanent link">&para;</a></h3>
 <p>Do niedawna ustalonym sposobem publikowania wyjść było robienie tego na poziomie każdego pojedynczego procesu za pomocą dyrektywy <code>publishDir</code>.</p>
 <p>Aby osiągnąć to, co właśnie zrobiliśmy dla wyjść procesu <code>sayHello</code>, zamiast tego dodalibyśmy następującą linię do definicji procesu:</p>
@@ -5439,7 +5437,7 @@ Pokażemy Ci, jak ich używać w odpowiednim czasie na Twojej drodze z Nextflow.
 <a id="__codelineno-33-16" name="__codelineno-33-16"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-33-17" name="__codelineno-33-17"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Nadal znajdziesz ten wzorzec kodu wszędzie w starszych pipeline'ach Nextflow i modułach procesów, więc ważne jest, aby być tego świadomym.
+<p>Nadal znajdziesz ten wzorzec kodu wszędzie w starszych pipeline'ach Nextflow'a i modułach procesów, więc ważne jest, aby być tego świadomym.
 Jednak nie zalecamy używania go w żadnej nowej pracy, ponieważ ostatecznie zostanie niedozwolony w przyszłych wersjach języka Nextflow.</p>
 <h3 id="podsumowanie_2">Podsumowanie<a class="headerlink" href="#podsumowanie_2" title="Permanent link">&para;</a></h3>
 <p>Wiesz, jak publikować wyjścia workflow'u do bardziej wygodnej lokalizacji.</p>
@@ -5522,7 +5520,7 @@ Chcemy dodać elastyczność za pomocą zmiennej wejściowej, co ułatwi zmianę
 <p>Symbol <code>$</code> i nawiasy klamrowe (<code>{ }</code>) mówią Nextflow'owi, że to jest nazwa zmiennej, która musi być zastąpiona faktyczną wartością wejściową (=interpolowana).</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
-<p>Nawiasy klamrowe (<code>{ }</code>) były technicznie opcjonalne w poprzednich wersjach Nextflow, więc możesz zobaczyć starsze workflow'y, gdzie to jest zapisane jako <code>echo '$greeting' &gt; output.txt</code>.</p>
+<p>Nawiasy klamrowe (<code>{ }</code>) były technicznie opcjonalne w poprzednich wersjach Nextflow'a, więc możesz zobaczyć starsze workflow'y, gdzie to jest zapisane jako <code>echo '$greeting' &gt; output.txt</code>.</p>
 </div>
 <p>Teraz, gdy proces <code>sayHello()</code> jest gotowy do przyjęcia zmiennego wejścia, potrzebujemy sposobu na dostarczenie wartości wejściowej do wywołania procesu na poziomie workflow'u.</p>
 <h3 id="32-skonfiguruj-parametr-wiersza-polecen-do-przechwytywania-danych-wejsciowych-uzytkownika">3.2. Skonfiguruj parametr wiersza poleceń do przechwytywania danych wejściowych użytkownika<a class="headerlink" href="#32-skonfiguruj-parametr-wiersza-polecen-do-przechwytywania-danych-wejsciowych-uzytkownika" title="Permanent link">&para;</a></h3>
@@ -5584,10 +5582,10 @@ Zasadniczo możemy to napisać gdziekolwiek; ale ponieważ zamierzamy przekazać
 Jednak wyniki poprzednich uruchomień są nadal zachowane w katalogach zadań w <code>work</code>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
-<p>Możesz łatwo odróżnić parametry na poziomie Nextflow od parametrów na poziomie pipeline'u.</p>
+<p>Możesz łatwo odróżnić parametry na poziomie Nextflow'a od parametrów na poziomie pipeline'u.</p>
 <ul>
 <li>Parametry, które mają zastosowanie do pipeline'u, zawsze mają podwójny myślnik (<code>--</code>).</li>
-<li>Parametry, które modyfikują ustawienie Nextflow, <em>np.</em> funkcja <code>-resume</code>, której użyliśmy wcześniej, mają pojedynczy myślnik (<code>-</code>).</li>
+<li>Parametry, które modyfikują ustawienie Nextflow'a, <em>np.</em> funkcja <code>-resume</code>, której użyliśmy wcześniej, mają pojedynczy myślnik (<code>-</code>).</li>
 </ul>
 </div>
 <h3 id="34-uzyj-wartosci-domyslnych-dla-parametrow-wiersza-polecen">3.4. Użyj wartości domyślnych dla parametrów wiersza poleceń<a class="headerlink" href="#34-uzyj-wartosci-domyslnych-dla-parametrow-wiersza-polecen" title="Permanent link">&para;</a></h3>
@@ -5659,7 +5657,7 @@ To ułatwi znalezienie wszystkich konfigurowalnych parametrów na pierwszy rzut 
 </details>
 <div class="admonition note">
 <p class="admonition-title">Uwaga</p>
-<p>W Nextflow istnieje wiele miejsc, gdzie możesz określić wartości dla parametrów.
+<p>W Nextflow'ie istnieje wiele miejsc, gdzie możesz określić wartości dla parametrów.
 Jeśli ten sam parametr jest ustawiony na różne wartości w wielu miejscach, Nextflow określi, jakiej wartości użyć, na podstawie kolejności pierwszeństwa opisanej <a href="https://www.nextflow.io/docs/latest/config.html">tutaj</a>.</p>
 <p>Omówimy to bardziej szczegółowo w Części 6 (Configuration).</p>
 </div>
@@ -5706,7 +5704,7 @@ Nextflow dosłownie wskazuje Ci poprzednie wykonanie i mówi "Już to zrobiłem 
 <h3 id="42-przegladaj-dziennik-poprzednich-wykonan">4.2. Przeglądaj dziennik poprzednich wykonań<a class="headerlink" href="#42-przegladaj-dziennik-poprzednich-wykonan" title="Permanent link">&para;</a></h3>
 <p>Niezależnie od tego, czy tworzysz nowy pipeline, czy uruchamiasz pipeline'y w produkcji, w pewnym momencie prawdopodobnie będziesz musiał wyszukać informacje o poprzednich uruchomieniach.
 Oto jak to zrobić.</p>
-<p>Za każdym razem, gdy uruchamiasz workflow nextflow, linia jest zapisywana do pliku dziennika o nazwie <code>history</code>, w ukrytym katalogu o nazwie <code>.nextflow</code> w bieżącym katalogu roboczym.</p>
+<p>Za każdym razem, gdy uruchamiasz workflow Nextflow'a, linia jest zapisywana do pliku dziennika o nazwie <code>history</code>, w ukrytym katalogu o nazwie <code>.nextflow</code> w bieżącym katalogu roboczym.</p>
 <details class="abstract">
 <summary>Zawartość pliku</summary>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1">1</a></span>
@@ -5720,7 +5718,7 @@ Oto jak to zrobić.</p>
 <a id="__codelineno-52-5" name="__codelineno-52-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 </code></pre></div></td></tr></table></div>
 </details>
-<p>Ten plik zawiera znacznik czasu, nazwę uruchomienia, status, ID rewizji, ID sesji i pełny wiersz poleceń dla każdego uruchomienia Nextflow, które zostało uruchomione z bieżącego katalogu roboczego.</p>
+<p>Ten plik zawiera znacznik czasu, nazwę uruchomienia, status, ID rewizji, ID sesji i pełny wiersz poleceń dla każdego uruchomienia Nextflow'a, które zostało uruchomione z bieżącego katalogu roboczego.</p>
 <p>Wygodniejszym sposobem uzyskania dostępu do tych informacji jest użycie polecenia <code>nextflow log</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>nextflow<span class="w"> </span>log
 </code></pre></div>
@@ -5751,7 +5749,7 @@ W takim przypadku ID sesji pozostaje takie samo.</p>
 <p>Tutaj pokazujemy przykład, który usuwa wszystkie podkatalogi z uruchomień przed danym uruchomieniem, określonym za pomocą jego nazwy uruchomienia.</p>
 <p>Wyszukaj najnowsze pomyślne uruchomienie, w którym nie używałeś <code>-resume</code>; w naszym przypadku nazwa uruchomienia to <code>golden_cantor</code>.</p>
 <p>Nazwa uruchomienia to generowany maszynowo dwuczęściowy ciąg pokazany w nawiasach kwadratowych w linii wyjścia konsoli <code>Launching (...)</code>.
-Możesz również użyć dziennika Nextflow, aby wyszukać uruchomienie na podstawie jego znacznika czasu i/lub wiersza poleceń.</p>
+Możesz również użyć dziennika Nextflow'a, aby wyszukać uruchomienie na podstawie jego znacznika czasu i/lub wiersza poleceń.</p>
 <h4 id="432-wykonaj-probne-uruchomienie">4.3.2. Wykonaj próbne uruchomienie<a class="headerlink" href="#432-wykonaj-probne-uruchomienie" title="Permanent link">&para;</a></h4>
 <p>Najpierw używamy flagi próbnego uruchomienia <code>-n</code>, aby sprawdzić, co zostanie usunięte przy danym poleceniu:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>golden_cantor<span class="w"> </span>-n
@@ -5776,21 +5774,21 @@ Możesz również użyć dziennika Nextflow, aby wyszukać uruchomienie na podst
 Zauważ, że to nie usuwa dwuznakowych podkatalogów (jak <code>a3/</code> powyżej), ale opróżnia ich zawartość.</p>
 <div class="admonition warning">
 <p class="admonition-title">Ostrzeżenie</p>
-<p>Usunięcie podkatalogów work z poprzednich uruchomień usuwa je z cache'u Nextflow i usuwa wszelkie wyjścia, które były przechowywane w tych katalogach.
-Oznacza to, że psuje to zdolność Nextflow do wznawiania wykonywania bez ponownego uruchamiania odpowiednich procesów.</p>
+<p>Usunięcie podkatalogów work z poprzednich uruchomień usuwa je z cache'u Nextflow'a i usuwa wszelkie wyjścia, które były przechowywane w tych katalogach.
+Oznacza to, że psuje to zdolność Nextflow'a do wznawiania wykonywania bez ponownego uruchamiania odpowiednich procesów.</p>
 <p>Jesteś odpowiedzialny za zapisywanie wszelkich wyjść, na których Ci zależy lub na których planujesz polegać! To jest główny powód, dla którego wolimy używać trybu <code>copy</code> zamiast trybu <code>symlink</code> dla dyrektywy <code>publish</code>.</p>
 </div>
 <h3 id="podsumowanie_4">Podsumowanie<a class="headerlink" href="#podsumowanie_4" title="Permanent link">&para;</a></h3>
 <p>Wiesz, jak publikować wyjścia do określonego katalogu, ponownie uruchamiać pipeline bez powtarzania kroków, które już zostały uruchomione w identyczny sposób, i używać polecenia <code>nextflow clean</code> do czyszczenia starych katalogów work.</p>
-<p>Ogólniej rzecz biorąc, wiesz, jak interpretować prosty workflow Nextflow, zarządzać jego wykonywaniem i pobierać wyjścia.</p>
+<p>Ogólniej rzecz biorąc, wiesz, jak interpretować prosty workflow Nextflow'a, zarządzać jego wykonywaniem i pobierać wyjścia.</p>
 <h3 id="co-dalej_4">Co dalej?<a class="headerlink" href="#co-dalej_4" title="Permanent link">&para;</a></h3>
 <p>Zrób sobie małą przerwę, zasłużyłeś na to!</p>
-<p>Gdy będziesz gotowy, przejdź do <a href="../02_hello_channels/"><strong>Części 2: Hello Channels</strong></a>, aby nauczyć się, jak używać kanałów do zasilania wejść do workflow'u, co pozwoli Ci skorzystać z wbudowanego równoległości przepływu danych Nextflow i innych potężnych funkcji.</p>
+<p>Gdy będziesz gotowy, przejdź do <a href="../02_hello_channels/"><strong>Części 2: Hello Channels</strong></a>, aby nauczyć się, jak używać kanałów do zasilania wejść do workflow'u, co pozwoli Ci skorzystać z wbudowanego równoległości przepływu danych Nextflow'a i innych potężnych funkcji.</p>
 <hr />
 <h2 id="quiz">Quiz<a class="headerlink" href="#quiz" title="Permanent link">&para;</a></h2>
 <!-- mkdocs-quiz-source
 <quiz>
-Jakie są minimalne wymagane komponenty procesu Nextflow?
+Jakie są minimalne wymagane komponenty procesu Nextflow'a?
 - [ ] Tylko bloki wejścia i wyjścia
 - [x] Bloki wyjścia i skryptu
 - [ ] Bloki wejścia, wyjścia i skryptu
@@ -5803,7 +5801,7 @@ Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
     <a href="#quiz-0" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Jakie są minimalne wymagane komponenty procesu Nextflow?</p>
+        <p>Jakie są minimalne wymagane komponenty procesu Nextflow'a?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
         <fieldset><div><input type="radio" name="answer" value="0" id="quiz-0-0" ><label for="quiz-0-0">Tylko bloki wejścia i wyjścia</label></div><div><input type="radio" name="answer" value="1" id="quiz-0-1" correct><label for="quiz-0-1">Bloki wyjścia i skryptu</label></div><div><input type="radio" name="answer" value="2" id="quiz-0-2" ><label for="quiz-0-2">Bloki wejścia, wyjścia i skryptu</label></div><div><input type="radio" name="answer" value="3" id="quiz-0-3" ><label for="quiz-0-3">Tylko blok skryptu</label></div></fieldset>
@@ -5840,7 +5838,7 @@ Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
 
 <!-- mkdocs-quiz-source
 <quiz>
-Jakiego polecenia używa się do uruchomienia workflow'u Nextflow?
+Jakiego polecenia używa się do uruchomienia workflow'u Nextflow'a?
 - [ ] `nextflow start`
 - [ ] `nextflow execute`
 - [x] `nextflow run`
@@ -5851,7 +5849,7 @@ Jakiego polecenia używa się do uruchomienia workflow'u Nextflow?
     <a href="#quiz-2" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Jakiego polecenia używa się do uruchomienia workflow'u Nextflow?</p>
+        <p>Jakiego polecenia używa się do uruchomienia workflow'u Nextflow'a?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
         <fieldset><div><input type="radio" name="answer" value="0" id="quiz-2-0" ><label for="quiz-2-0"><code>nextflow start</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-2-1" ><label for="quiz-2-1"><code>nextflow execute</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-2-2" correct><label for="quiz-2-2"><code>nextflow run</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-2-3" ><label for="quiz-2-3"><code>nextflow launch</code></label></div></fieldset>
@@ -5961,7 +5959,7 @@ Dowiedz się więcej: [2.3. Ustaw tryb publikowania na kopiowanie](#23-ustaw-try
 
 <!-- mkdocs-quiz-source
 <quiz>
-Jak przekazujesz wartość parametru do workflow'u Nextflow z wiersza poleceń?
+Jak przekazujesz wartość parametru do workflow'u Nextflow'a z wiersza poleceń?
 - [ ] `-parameter value`
 - [ ] `--parameter:value`
 - [x] `--parameter value`
@@ -5974,7 +5972,7 @@ Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytyw
     <a href="#quiz-6" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Jak przekazujesz wartość parametru do workflow'u Nextflow z wiersza poleceń?</p>
+        <p>Jak przekazujesz wartość parametru do workflow'u Nextflow'a z wiersza poleceń?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
         <fieldset><div><input type="radio" name="answer" value="0" id="quiz-6-0" ><label for="quiz-6-0"><code>-parameter value</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-6-1" ><label for="quiz-6-1"><code>--parameter:value</code></label></div><div><input type="radio" name="answer" value="2" id="quiz-6-2" correct><label for="quiz-6-2"><code>--parameter value</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-6-3" ><label for="quiz-6-3"><code>-p parameter=value</code></label></div></fieldset>
@@ -5986,7 +5984,7 @@ Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytyw
 
 <!-- mkdocs-quiz-source
 <quiz>
-Jak odwołujesz się do zmiennej wewnątrz bloku skryptu w Nextflow?
+Jak odwołujesz się do zmiennej wewnątrz bloku skryptu w Nextflow'ie?
 - [ ] Używa składni `%variable%`
 - [x] Używa składni `#!groovy ${variable}`
 - [ ] Używa składni `{{variable}}`
@@ -5997,7 +5995,7 @@ Jak odwołujesz się do zmiennej wewnątrz bloku skryptu w Nextflow?
     <a href="#quiz-7" class="quiz-header-link">#</a>
 
     <div class="quiz-question">
-        <p>Jak odwołujesz się do zmiennej wewnątrz bloku skryptu w Nextflow?</p>
+        <p>Jak odwołujesz się do zmiennej wewnątrz bloku skryptu w Nextflow'ie?</p>
     </div>
     <form action="javascript:void(0);" onsubmit="return false;">
         <fieldset><div><input type="radio" name="answer" value="0" id="quiz-7-0" ><label for="quiz-7-0">Używa składni <code>%variable%</code></label></div><div><input type="radio" name="answer" value="1" id="quiz-7-1" correct><label for="quiz-7-1">Używa składni <code class="highlight"><span class="n">$</span><span class="o">{</span><span class="n">variable</span><span class="o">}</span></code></label></div><div><input type="radio" name="answer" value="2" id="quiz-7-2" ><label for="quiz-7-2">Używa składni <code>{{variable}}</code></label></div><div><input type="radio" name="answer" value="3" id="quiz-7-3" ><label for="quiz-7-3">Używa składni <code>[variable]</code></label></div></fieldset>

@@ -1140,7 +1140,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -1489,10 +1489,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-testowanie-workflow" class="md-nav__link">
+  <a href="#35-testowanie-workflowu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Testowanie workflow
+        3.5. Testowanie workflow'u
       
     </span>
   </a>
@@ -2987,7 +2987,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3718,10 +3718,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#35-testowanie-workflow" class="md-nav__link">
+  <a href="#35-testowanie-workflowu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.5. Testowanie workflow
+        3.5. Testowanie workflow'u
       
     </span>
   </a>
@@ -4013,7 +4013,7 @@
 
 <h1 id="czesc-3-uzycie-moduu-nf-core">Część 3: Użycie modułu nf-core<a class="headerlink" href="#czesc-3-uzycie-moduu-nf-core" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>W trzeciej części kursu szkoleniowego Hello nf-core pokażemy, jak znaleźć, zainstalować i użyć istniejącego modułu nf-core w Swoim pipeline'ie.</p>
+<p>W trzeciej części kursu szkoleniowego Hello nf-core pokażemy, jak znaleźć, zainstalować i użyć istniejącego modułu nf-core w Twoim pipeline'ie.</p>
 <p>Jedną z głównych korzyści pracy z nf-core jest możliwość wykorzystania wcześniej przygotowanych, przetestowanych modułów z repozytorium <a href="https://github.com/nf-core/modules">nf-core/modules</a>.
 Zamiast pisać każdy proces od podstaw, możesz zainstalować i używać gotowych komponentów utrzymywanych przez społeczność, które przestrzegają najlepszych praktyk.</p>
 <p>Aby pokazać, jak to działa, zastąpimy niestandardowy moduł <code>collectGreetings</code> modułem <code>cat/cat</code> z nf-core/modules w pipeline'ie <code>core-hello</code>.</p>
@@ -4034,7 +4034,7 @@ Możesz sprawdzić, czy działa poprawnie, uruchamiając następujące polecenie
 <h2 id="1-znajdz-i-zainstaluj-odpowiedni-modu-nf-core">1. Znajdź i zainstaluj odpowiedni moduł nf-core<a class="headerlink" href="#1-znajdz-i-zainstaluj-odpowiedni-modu-nf-core" title="Permanent link">&para;</a></h2>
 <p>Najpierw nauczmy się, jak znaleźć istniejący moduł nf-core i zainstalować go w naszym pipeline'ie.</p>
 <p>Będziemy dążyć do zastąpienia procesu <code>collectGreetings</code>, który używa polecenia Unix <code>cat</code> do łączenia wielu plików z powitaniami w jeden.
-Ta operacja jest bardzo powszechna, więc prawdopodobnie istnieje już moduł w nf-core zaprojektowany do tego celu.</p>
+Łączenie plików jest bardzo powszechną operacją, więc istnieje duże prawdopodobieństwo, że w nf-core jest już moduł zaprojektowany do tego celu.</p>
 <p>Zagłębmy się w to.</p>
 <h3 id="11-przegladanie-dostepnych-moduow-na-stronie-nf-core">1.1. Przeglądanie dostępnych modułów na stronie nf-core<a class="headerlink" href="#11-przegladanie-dostepnych-moduow-na-stronie-nf-core" title="Permanent link">&para;</a></h3>
 <p>Projekt nf-core utrzymuje scentralizowany katalog modułów pod adresem <a href="https://nf-co.re/modules">https://nf-co.re/modules</a>.</p>
@@ -4124,10 +4124,10 @@ Jednak jeśli znasz, możesz przekierować listę do <code>grep</code>, aby znal
 </details>
 <p>To są dokładnie te same informacje, które możesz znaleźć na stronie internetowej.</p>
 <h3 id="14-instalacja-moduu-catcat">1.4. Instalacja modułu cat/cat<a class="headerlink" href="#14-instalacja-moduu-catcat" title="Permanent link">&para;</a></h3>
-<p>Teraz, gdy znaleźliśmy moduł, którego chcemy, musimy dodać go do kodu źródłowego naszego pipeline.</p>
+<p>Teraz, gdy znaleźliśmy moduł, którego chcemy, musimy dodać go do kodu źródłowego naszego pipeline'u.</p>
 <p>Dobra wiadomość jest taka, że projekt nf-core zawiera narzędzia, które ułatwiają tę część.
 Konkretnie, polecenie <code>nf-core modules install</code> umożliwia zautomatyzowanie pobierania kodu i udostępnienia go projektowi w jednym kroku.</p>
-<p>Przejdź do katalogu Swojego pipeline i uruchom polecenie instalacji:</p>
+<p>Przejdź do katalogu Swojego pipeline'u i uruchom polecenie instalacji:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">cd</span><span class="w"> </span>core-hello
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>install<span class="w"> </span>cat/cat
 </code></pre></div>
@@ -4219,7 +4219,7 @@ Naciśnij enter, aby zaakceptować domyślną odpowiedź (tak).</p>
 </code></pre></div>
 </details>
 <p>To potwierdza, że moduł <code>cat/cat</code> jest teraz częścią kodu źródłowego Twojego projektu.</p>
-<p>Jednak aby faktycznie użyć nowego modułu, musimy go zaimportować do naszego pipeline.</p>
+<p>Jednak aby faktycznie użyć nowego modułu, musimy go zaimportować do naszego pipeline'u.</p>
 <h3 id="15-aktualizacja-importow-moduow">1.5. Aktualizacja importów modułów<a class="headerlink" href="#15-aktualizacja-importow-moduow" title="Permanent link">&para;</a></h3>
 <p>Zastąpmy instrukcję <code>include</code> dla modułu <code>collectGreetings</code> instrukcją dla <code>CAT_CAT</code> w sekcji importów pliku workflow <code>workflows/hello.nf</code>.</p>
 <p>Przypominając, narzędzie instalacji modułu podało nam dokładną instrukcję do użycia:</p>
@@ -4281,10 +4281,10 @@ Naciśnij enter, aby zaakceptować domyślną odpowiedź (tak).</p>
 </div>
 <p>Zauważ, jak ścieżka dla modułu nf-core różni się od komponentów lokalnych:</p>
 <ul>
-<li><strong>Komponent nf-core</strong>: <code>'../modules/nf-core/cat/cat/main'</code> (odniesienie do <code>main.nf</code>)</li>
+<li><strong>Moduł nf-core</strong>: <code>'../modules/nf-core/cat/cat/main'</code> (odniesienie do <code>main.nf</code>)</li>
 <li><strong>Komponent lokalny</strong>: <code>'../modules/local/collectGreetings.nf'</code> (odniesienie do pojedynczego pliku)</li>
 </ul>
-<p>CAT_CAT jest teraz dostępny dla workflow, więc wszystko, co musimy zrobić, to zamienić wywołanie <code>collectGreetings</code> na jego użycie. Prawda?</p>
+<p>Moduł jest teraz dostępny dla workflow'u, więc wszystko, co musimy zrobić, to zamienić wywołanie <code>collectGreetings</code> na użycie <code>CAT_CAT</code>. Prawda?</p>
 <p>Nie tak szybko.</p>
 <p>W tym momencie możesz być kuszony, aby zacząć edytować kod, ale warto poświęcić chwilę, aby dokładnie sprawdzić, czego oczekuje nowy moduł i co produkuje.</p>
 <p>Zajmiemy się tym jako osobną sekcją, ponieważ obejmuje to nowy mechanizm, którego jeszcze nie omówiliśmy: mapy metadanych.</p>
@@ -4302,7 +4302,7 @@ Naciśnij enter, aby zaakceptować domyślną odpowiedź (tak).</p>
 <hr />
 <h2 id="2-ocena-wymagan-nowego-moduu">2. Ocena wymagań nowego modułu<a class="headerlink" href="#2-ocena-wymagan-nowego-moduu" title="Permanent link">&para;</a></h2>
 <p>Konkretnie, musimy zbadać <strong>interfejs</strong> modułu, tj. jego definicje wejść i wyjść, i porównać go z interfejsem modułu, który chcemy zastąpić.
-To pozwoli nam określić, czy możemy po prostu traktować nowy moduł jako zamiennik typu "drop-in", czy też będziemy musieli dostosować część połączeń.</p>
+Pozwoli nam to określić, czy możemy po prostu traktować nowy moduł jako zamiennik typu "drop-in", czy też będziemy musieli dostosować część połączeń.</p>
 <p>Najlepiej byłoby zrobić to <em>przed</em> zainstalowaniem modułu, ale hej, lepiej późno niż wcale.
 (Na marginesie, istnieje polecenie <code>uninstall</code>, aby pozbyć się modułów, których nie chcesz już używać.)</p>
 <div class="admonition note">
@@ -4395,7 +4395,7 @@ Jednak aby zrozumieć część z metamapą, musimy przedstawić Ci dodatkowy kon
 <p>Właśnie powiedzieliśmy, że moduł CAT_CAT oczekuje mapy metadanych jako części Swojej krotki wejściowej.
 Poświęćmy kilka minut na bliższe przyjrzenie się temu, czym to jest.</p>
 <p><strong>Mapa metadanych</strong>, często nazywana w skrócie <strong>metamapą</strong>, to mapa w stylu Groovy zawierająca informacje o jednostkach danych.
-W kontekście pipeline Nextflow jednostki danych mogą być czymkolwiek: pojedynczymi próbkami, partiami próbek lub całymi zbiorami danych.</p>
+W kontekście pipeline'ów Nextflow jednostki danych mogą być czymkolwiek: pojedynczymi próbkami, partiami próbek lub całymi zbiorami danych.</p>
 <p>Zgodnie z konwencją, metamapa nf-core jest nazywana <code>meta</code> i zawiera wymagane pole <code>id</code>, które jest używane do nazywania wyjść i śledzenia jednostek danych.</p>
 <p>Na przykład, typowa mapa metadanych może wyglądać tak:</p>
 <div class="highlight"><span class="filename">Przykład metamapy na poziomie próbki</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sample1&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">single_end:</span><span class="w"> </span><span class="kc">false</span><span class="o">,</span><span class="w"> </span><span class="nl">strandedness:</span><span class="w"> </span><span class="s1">&#39;forward&#39;</span><span class="o">]</span>
@@ -4448,7 +4448,7 @@ Nie tylko pozwala to nazwać wyjścia na podstawie metadanych, ale możesz równ
 </ul>
 <p>To powinno załatwić sprawę! Teraz, gdy mamy plan, jesteśmy gotowi do działania.</p>
 <h3 id="podsumowanie_1">Podsumowanie<a class="headerlink" href="#podsumowanie_1" title="Permanent link">&para;</a></h3>
-<p>Wiesz, jak ocenić interfejs wejściowy i wyjściowy nowego modułu, aby zidentyfikować jego wymagania. Nauczyłeś się również, jak metamapy są używane przez nf-core do utrzymywania informacji kontekstowych ściśle powiązanych z danymi podczas ich przepływu przez workflow.</p>
+<p>Wiesz, jak ocenić interfejs wejściowy i wyjściowy nowego modułu, aby zidentyfikować jego wymagania. Nauczyłeś się również, jak metamapy są używane przez pipeline'y nf-core do utrzymywania informacji kontekstowych ściśle powiązanych z danymi podczas ich przepływu przez pipeline.</p>
 <h3 id="co-dalej_1">Co dalej?<a class="headerlink" href="#co-dalej_1" title="Permanent link">&para;</a></h3>
 <p>Zintegrować nowy moduł z workflow'iem.</p>
 <hr />
@@ -4483,16 +4483,16 @@ Więc kod staje się:</p>
 <span class="normal"><a href="#__codelineno-29-33">33</a></span>
 <span class="normal"><a href="#__codelineno-29-34">34</a></span>
 <span class="normal"><a href="#__codelineno-29-35">35</a></span>
-<span class="normal"><a href="#__codelineno-29-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-26" name="__codelineno-29-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-29-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-26" name="__codelineno-29-26"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-29-27" name="__codelineno-29-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-29-28" name="__codelineno-29-28"></a>
-<a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-29-30" name="__codelineno-29-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-29-31" name="__codelineno-29-31"></a>
 <a id="__codelineno-29-32" name="__codelineno-29-32"></a><span class="hll"><span class="w">    </span><span class="c1">// utwórz mapę metadanych z nazwą partii jako ID</span>
 </span><a id="__codelineno-29-33" name="__codelineno-29-33"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">]</span>
 </span><a id="__codelineno-29-34" name="__codelineno-29-34"></a>
-<a id="__codelineno-29-35" name="__codelineno-29-35"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-29-35" name="__codelineno-29-35"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII powitań za pomocą cowpy</span>
 <a id="__codelineno-29-36" name="__codelineno-29-36"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4507,16 +4507,16 @@ Więc kod staje się:</p>
 <span class="normal"><a href="#__codelineno-30-33">33</a></span>
 <span class="normal"><a href="#__codelineno-30-34">34</a></span>
 <span class="normal"><a href="#__codelineno-30-35">35</a></span>
-<span class="normal"><a href="#__codelineno-30-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-26" name="__codelineno-30-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-30-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-26" name="__codelineno-30-26"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-30-27" name="__codelineno-30-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-30-28" name="__codelineno-30-28"></a>
-<a id="__codelineno-30-29" name="__codelineno-30-29"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-30-29" name="__codelineno-30-29"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-30-30" name="__codelineno-30-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-30-31" name="__codelineno-30-31"></a>
 <a id="__codelineno-30-32" name="__codelineno-30-32"></a><span class="hll"><span class="w">    </span><span class="c1">// zbierz wszystkie powitania w jeden plik</span>
 </span><a id="__codelineno-30-33" name="__codelineno-30-33"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 </span><a id="__codelineno-30-34" name="__codelineno-30-34"></a>
-<a id="__codelineno-30-35" name="__codelineno-30-35"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-30-35" name="__codelineno-30-35"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII powitań za pomocą cowpy</span>
 <a id="__codelineno-30-36" name="__codelineno-30-36"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4541,10 +4541,10 @@ Więc kod staje się:</p>
 <span class="normal"><a href="#__codelineno-31-36">36</a></span>
 <span class="normal"><a href="#__codelineno-31-37">37</a></span>
 <span class="normal"><a href="#__codelineno-31-38">38</a></span>
-<span class="normal"><a href="#__codelineno-31-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-26" name="__codelineno-31-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-31-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-26" name="__codelineno-31-26"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-31-27" name="__codelineno-31-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-31-28" name="__codelineno-31-28"></a>
-<a id="__codelineno-31-29" name="__codelineno-31-29"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-31-29" name="__codelineno-31-29"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-31-30" name="__codelineno-31-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-31-31" name="__codelineno-31-31"></a>
 <a id="__codelineno-31-32" name="__codelineno-31-32"></a><span class="w">    </span><span class="c1">// utwórz mapę metadanych z nazwą partii jako ID</span>
@@ -4553,7 +4553,7 @@ Więc kod staje się:</p>
 <a id="__codelineno-31-35" name="__codelineno-31-35"></a><span class="hll"><span class="w">    </span><span class="c1">// utwórz kanał z metadanymi i plikami w formacie krotki</span>
 </span><a id="__codelineno-31-36" name="__codelineno-31-36"></a><span class="hll"><span class="w">    </span><span class="n">ch_for_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-31-37" name="__codelineno-31-37"></a>
-<a id="__codelineno-31-38" name="__codelineno-31-38"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-31-38" name="__codelineno-31-38"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII powitań za pomocą cowpy</span>
 <a id="__codelineno-31-39" name="__codelineno-31-39"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4568,16 +4568,16 @@ Więc kod staje się:</p>
 <span class="normal"><a href="#__codelineno-32-33">33</a></span>
 <span class="normal"><a href="#__codelineno-32-34">34</a></span>
 <span class="normal"><a href="#__codelineno-32-35">35</a></span>
-<span class="normal"><a href="#__codelineno-32-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-26" name="__codelineno-32-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-32-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-26" name="__codelineno-32-26"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-32-27" name="__codelineno-32-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-32-28" name="__codelineno-32-28"></a>
-<a id="__codelineno-32-29" name="__codelineno-32-29"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-32-29" name="__codelineno-32-29"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-32-30" name="__codelineno-32-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-32-31" name="__codelineno-32-31"></a>
 <a id="__codelineno-32-32" name="__codelineno-32-32"></a><span class="w">    </span><span class="c1">// utwórz mapę metadanych z nazwą partii jako ID</span>
 <a id="__codelineno-32-33" name="__codelineno-32-33"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">cat_meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">]</span>
 <a id="__codelineno-32-34" name="__codelineno-32-34"></a>
-<a id="__codelineno-32-35" name="__codelineno-32-35"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-32-35" name="__codelineno-32-35"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII powitań za pomocą cowpy</span>
 <a id="__codelineno-32-36" name="__codelineno-32-36"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4610,10 +4610,10 @@ Więc kod staje się:</p>
 <span class="normal"><a href="#__codelineno-33-39">39</a></span>
 <span class="normal"><a href="#__codelineno-33-40">40</a></span>
 <span class="normal"><a href="#__codelineno-33-41">41</a></span>
-<span class="normal"><a href="#__codelineno-33-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-26" name="__codelineno-33-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-33-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-26" name="__codelineno-33-26"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-33-27" name="__codelineno-33-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-33-28" name="__codelineno-33-28"></a>
-<a id="__codelineno-33-29" name="__codelineno-33-29"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-33-29" name="__codelineno-33-29"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-33-30" name="__codelineno-33-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-33-31" name="__codelineno-33-31"></a>
 <a id="__codelineno-33-32" name="__codelineno-33-32"></a><span class="w">    </span><span class="c1">// utwórz mapę metadanych z nazwą partii jako ID</span>
@@ -4625,7 +4625,7 @@ Więc kod staje się:</p>
 <a id="__codelineno-33-38" name="__codelineno-33-38"></a><span class="hll"><span class="w">    </span><span class="c1">// połącz pliki używając modułu nf-core cat/cat</span>
 </span><a id="__codelineno-33-39" name="__codelineno-33-39"></a><span class="hll"><span class="w">    </span><span class="n">CAT_CAT</span><span class="o">(</span><span class="n">ch_for_cat</span><span class="o">)</span>
 </span><a id="__codelineno-33-40" name="__codelineno-33-40"></a>
-<a id="__codelineno-33-41" name="__codelineno-33-41"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-33-41" name="__codelineno-33-41"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII powitań za pomocą cowpy</span>
 <a id="__codelineno-33-42" name="__codelineno-33-42"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4643,10 +4643,10 @@ Więc kod staje się:</p>
 <span class="normal"><a href="#__codelineno-34-36">36</a></span>
 <span class="normal"><a href="#__codelineno-34-37">37</a></span>
 <span class="normal"><a href="#__codelineno-34-38">38</a></span>
-<span class="normal"><a href="#__codelineno-34-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-26" name="__codelineno-34-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-34-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-26" name="__codelineno-34-26"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-34-27" name="__codelineno-34-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-34-28" name="__codelineno-34-28"></a>
-<a id="__codelineno-34-29" name="__codelineno-34-29"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-34-29" name="__codelineno-34-29"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-34-30" name="__codelineno-34-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-34-31" name="__codelineno-34-31"></a>
 <a id="__codelineno-34-32" name="__codelineno-34-32"></a><span class="w">    </span><span class="c1">// utwórz mapę metadanych z nazwą partii jako ID</span>
@@ -4655,7 +4655,7 @@ Więc kod staje się:</p>
 <a id="__codelineno-34-35" name="__codelineno-34-35"></a><span class="w">    </span><span class="c1">// utwórz kanał z metadanymi i plikami w formacie krotki</span>
 <a id="__codelineno-34-36" name="__codelineno-34-36"></a><span class="w">    </span><span class="n">ch_for_cat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">cat_meta</span><span class="o">,</span><span class="w"> </span><span class="n">files</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-34-37" name="__codelineno-34-37"></a>
-<a id="__codelineno-34-38" name="__codelineno-34-38"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-34-38" name="__codelineno-34-38"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII powitań za pomocą cowpy</span>
 <a id="__codelineno-34-39" name="__codelineno-34-39"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4688,10 +4688,10 @@ Jednak proces <code>CAT_CAT</code> produkuje krotkę, która zawiera metamapę o
 <span class="normal"><a href="#__codelineno-35-42">42</a></span>
 <span class="normal"><a href="#__codelineno-35-43">43</a></span>
 <span class="normal"><a href="#__codelineno-35-44">44</a></span>
-<span class="normal"><a href="#__codelineno-35-45">45</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-26" name="__codelineno-35-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-35-45">45</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-26" name="__codelineno-35-26"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-35-27" name="__codelineno-35-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-35-28" name="__codelineno-35-28"></a>
-<a id="__codelineno-35-29" name="__codelineno-35-29"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-35-29" name="__codelineno-35-29"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-35-30" name="__codelineno-35-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-35-31" name="__codelineno-35-31"></a>
 <a id="__codelineno-35-32" name="__codelineno-35-32"></a><span class="w">    </span><span class="c1">// utwórz mapę metadanych z nazwą partii jako ID</span>
@@ -4727,10 +4727,10 @@ Jednak proces <code>CAT_CAT</code> produkuje krotkę, która zawiera metamapę o
 <span class="normal"><a href="#__codelineno-36-39">39</a></span>
 <span class="normal"><a href="#__codelineno-36-40">40</a></span>
 <span class="normal"><a href="#__codelineno-36-41">41</a></span>
-<span class="normal"><a href="#__codelineno-36-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-26" name="__codelineno-36-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-36-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-26" name="__codelineno-36-26"></a><span class="w">    </span><span class="c1">// wyemituj powitanie</span>
 <a id="__codelineno-36-27" name="__codelineno-36-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 <a id="__codelineno-36-28" name="__codelineno-36-28"></a>
-<a id="__codelineno-36-29" name="__codelineno-36-29"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-36-29" name="__codelineno-36-29"></a><span class="w">    </span><span class="c1">// przekształć powitanie na wielkie litery</span>
 <a id="__codelineno-36-30" name="__codelineno-36-30"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-36-31" name="__codelineno-36-31"></a>
 <a id="__codelineno-36-32" name="__codelineno-36-32"></a><span class="w">    </span><span class="c1">// utwórz mapę metadanych z nazwą partii jako ID</span>
@@ -4754,7 +4754,7 @@ Jednak proces <code>CAT_CAT</code> produkuje krotkę, która zawiera metamapę o
 <p class="admonition-title">Note</p>
 <p>W następnej części kursu zaktualizujemy <code>cowpy</code>, aby pracował bezpośrednio z krotkami metadanych, więc ten krok ekstrakcji nie będzie już potrzebny.</p>
 </div>
-<h3 id="35-testowanie-workflow">3.5. Testowanie workflow<a class="headerlink" href="#35-testowanie-workflow" title="Permanent link">&para;</a></h3>
+<h3 id="35-testowanie-workflowu">3.5. Testowanie workflow'u<a class="headerlink" href="#35-testowanie-workflowu" title="Permanent link">&para;</a></h3>
 <p>Przetestujmy, czy workflow działa z nowo zintegrowanym modułem <code>cat/cat</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>

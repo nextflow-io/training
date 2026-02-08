@@ -1740,7 +1740,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -3105,7 +3105,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -4332,7 +4332,7 @@ Jeśli spojrzysz na Swój bieżący katalog, zobaczysz, że gdy uruchomiłeś wo
 <p>Świetnie, nasz workflow zrobił to, co miał zrobić!</p>
 <h3 id="23-zapisz-wyniki-do-innego-katalogu">2.3. Zapisz wyniki do innego katalogu<a class="headerlink" href="#23-zapisz-wyniki-do-innego-katalogu" title="Permanent link">&para;</a></h3>
 <p>Domyślnie Nextflow zapisze wyjścia pipeline'u do katalogu o nazwie <code>results</code> w Twojej bieżącej ścieżce.
-Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI <code>-output-dir</code> (lub <code>-o</code> w skrócie)</p>
+Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI <code>output-dir</code> (lub <code>-o</code> w skrócie)</p>
 <div class="admonition danger">
 <p class="admonition-title">Ostrzeżenie</p>
 <p>Zauważ, że <code>--input</code> ma dwa myślniki, a <code>-output-dir</code> ma jeden!
@@ -4373,7 +4373,7 @@ Dla każdego z nich przygotowuje niezbędne dane wejściowe, wykonuje odpowiedni
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
 </code></pre></div>
 <p>Widzisz, jak linia zaczyna się od <code>[a3/1e1535]</code>?
-To jest skrócona forma ścieżki katalogu zadania dla tego jednego wywołania <strong>procesu</strong> i mówi, gdzie znaleźć wyjście wywołania procesu <code>sayHello</code> w ścieżce katalogu <code>work/</code>.</p>
+To jest skrócona forma ścieżki katalogu zadania dla tego jednego wywołania <strong>procesu</strong> i mówi, gdzie znaleźć wyjście wywołania <code>sayHello</code> w ścieżce katalogu <code>work/</code>.</p>
 <p>Możesz znaleźć pełną ścieżkę, wpisując następujące polecenie (zastępując <code>a3/1e1535</code> tym, co widzisz w Twoim terminalu) i naciskając klawisz tab, aby automatycznie uzupełnić ścieżkę, lub dodając gwiazdkę:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ls<span class="w"> </span>work/a3/1e1535*
 </code></pre></div>
@@ -4406,7 +4406,7 @@ To jest skrócona forma ścieżki katalogu zadania dla tego jednego wywołania <
 </details>
 <details class="question">
 <summary>Nie widzisz tego samego?</summary>
-<p>Dokładne nazwy podkatalogów będą inne w Twoim systemie.</p>
+<p>Dokładne nazwy podkatalogów będą różne w Twoim systemie.</p>
 <p>Jeśli przeglądasz zawartość podkatalogu zadania w eksploratorze plików VSCode, zobaczysz wszystkie pliki od razu.
 Jednak pliki dziennika są ustawione jako niewidoczne w terminalu, więc jeśli chcesz użyć <code>ls</code> lub <code>tree</code> do ich wyświetlenia, musisz ustawić odpowiednią opcję wyświetlania niewidocznych plików.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
@@ -4426,7 +4426,7 @@ Jeśli go otworzysz, znajdziesz ponownie powitanie <code>Hello World!</code>.</p
 <li><strong><code>.command.err</code></strong>: Komunikaty o błędach (<code>stderr</code>) emitowane przez wywołanie procesu</li>
 <li><strong><code>.command.log</code></strong>: Kompletne wyjście dziennika emitowane przez wywołanie procesu</li>
 <li><strong><code>.command.out</code></strong>: Zwykłe wyjście (<code>stdout</code>) przez wywołanie procesu</li>
-<li><strong><code>.command.run</code></strong>: Pełny skrypt uruchomiony przez Nextflow do wykonania wywołania procesu</li>
+<li><strong><code>.command.run</code></strong>: Pełny skrypt uruchomiony przez Nextflow'a do wykonania wywołania procesu</li>
 <li><strong><code>.command.sh</code></strong>: Polecenie, które zostało faktycznie uruchomione przez wywołanie procesu</li>
 <li><strong><code>.exitcode</code></strong>: Kod wyjścia wynikający z polecenia</li>
 </ul>
@@ -4653,7 +4653,7 @@ Ciało <strong>procesu</strong> musi zawierać blok skryptu, który określa pol
 <p>Definicja <code>output</code> zawiera kwalifikator <code>path</code>, który mówi Nextflow'owi, że powinien to być traktowany jako ścieżka (obejmuje zarówno ścieżki katalogów, jak i pliki).</p>
 <h3 id="33-definicja-workflow">3.3. Definicja <code>workflow</code><a class="headerlink" href="#33-definicja-workflow" title="Permanent link">&para;</a></h3>
 <p>Drugi blok kodu opisuje sam <a href="https://nextflow.io/docs/latest/workflow.html"><strong>workflow</strong></a>.
-Definicja <strong>workflow</strong> zaczyna się od słowa kluczowego <code>workflow</code>, po którym następuje opcjonalna nazwa, a następnie ciało workflow ograniczone nawiasami klamrowymi.</p>
+Definicja <strong>workflow</strong> zaczyna się od słowa kluczowego <code>workflow</code>, po którym następuje opcjonalna nazwa, a następnie ciało workflow'u ograniczone nawiasami klamrowymi.</p>
 <p>Tutaj mamy <strong>workflow</strong>, który składa się z bloku <code>main:</code> i bloku <code>publish:</code>.
 Blok <code>main:</code> jest głównym ciałem workflow'u, a blok <code>publish:</code> wymienia wyjścia, które powinny być opublikowane do katalogu <code>results</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-27">27</a></span>
@@ -4876,7 +4876,7 @@ Zauważ, że to nie usuwa dwuznakowych podkatalogów (jak <code>eb/</code> powy�
 <div class="admonition warning">
 <p class="admonition-title">Ostrzeżenie</p>
 <p>Usuwanie podkatalogów roboczych z poprzednich uruchomień usuwa je z pamięci podręcznej Nextflow i kasuje wszelkie wyjścia, które były przechowywane w tych katalogach.
-To oznacza, że psuje zdolność Nextflow do wznowienia wykonania bez ponownego uruchamiania odpowiednich <strong>procesów</strong>.</p>
+To oznacza, że psuje zdolność Nextflow'a do wznowienia wykonania bez ponownego uruchamiania odpowiednich <strong>procesów</strong>.</p>
 <p>Jesteś odpowiedzialny za zapisanie wszelkich wyjść, na których Ci zależy! To jest główny powód, dla którego wolimy używać trybu <code>copy</code> zamiast trybu <code>symlink</code> dla dyrektywy <code>publish</code>.</p>
 </div>
 <h3 id="podsumowanie_3">Podsumowanie<a class="headerlink" href="#podsumowanie_3" title="Permanent link">&para;</a></h3>

@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -1933,15 +1933,15 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-dostosowanie-workflowu-do-akceptowania-wielu-probek-wejsciowych-i-zrownoleglenia-wykonania" class="md-nav__link">
+  <a href="#1-dostosowanie-workflowu-do-akceptowania-wielu-probek-wejsciowych-i-paralelizacji-wykonania" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
+        1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i paralelizacji wykonania
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Dostosowanie workflow&#39;u do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania">
+    <nav class="md-nav" aria-label="1. Dostosowanie workflow&#39;u do akceptowania wielu próbek wejściowych i paralelizacji wykonania">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2978,7 +2978,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3491,15 +3491,15 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-dostosowanie-workflowu-do-akceptowania-wielu-probek-wejsciowych-i-zrownoleglenia-wykonania" class="md-nav__link">
+  <a href="#1-dostosowanie-workflowu-do-akceptowania-wielu-probek-wejsciowych-i-paralelizacji-wykonania" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania
+        1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i paralelizacji wykonania
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Dostosowanie workflow&#39;u do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania">
+    <nav class="md-nav" aria-label="1. Dostosowanie workflow&#39;u do akceptowania wielu próbek wejściowych i paralelizacji wykonania">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3993,16 +3993,16 @@
 
 <h1 id="czesc-3-implementacja-dla-wielu-probek-z-danymi-paired-end">Część 3: Implementacja dla wielu próbek z danymi paired-end<a class="headerlink" href="#czesc-3-implementacja-dla-wielu-probek-z-danymi-paired-end" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>W tej ostatniej części kursu zamienimy nasz prosty workflow w potężne narzędzie do automatyzacji wsadowej, które obsłuży dowolną liczbę próbek.
-Przy okazji przełączymy go również na obsługę danych paired-end, które są bardziej powszechne w nowszych badaniach.</p>
+<p>W tej ostatniej części kursu podniesiemy nasz prosty workflow na wyższy poziom, zamieniając go w potężne narzędzie automatyzacji wsadowej obsługujące dowolną liczbę próbek.
+Przy okazji zmienimy go również tak, aby oczekiwał danych paired-end, które są bardziej powszechne we współczesnych badaniach.</p>
 <p>Zrobimy to w trzech etapach:</p>
 <ol>
-<li>Dostosujemy workflow do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania</li>
+<li>Dostosujemy workflow do akceptowania wielu próbek wejściowych i paralelizacji wykonania</li>
 <li>Dodamy kompleksowe generowanie raportów QC</li>
 <li>Przełączymy się na dane RNAseq paired-end</li>
 </ol>
 <hr />
-<h2 id="1-dostosowanie-workflowu-do-akceptowania-wielu-probek-wejsciowych-i-zrownoleglenia-wykonania">1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i zrównoleglenia wykonania<a class="headerlink" href="#1-dostosowanie-workflowu-do-akceptowania-wielu-probek-wejsciowych-i-zrownoleglenia-wykonania" title="Permanent link">&para;</a></h2>
+<h2 id="1-dostosowanie-workflowu-do-akceptowania-wielu-probek-wejsciowych-i-paralelizacji-wykonania">1. Dostosowanie workflow'u do akceptowania wielu próbek wejściowych i paralelizacji wykonania<a class="headerlink" href="#1-dostosowanie-workflowu-do-akceptowania-wielu-probek-wejsciowych-i-paralelizacji-wykonania" title="Permanent link">&para;</a></h2>
 <p>Musimy zmienić sposób zarządzania danymi wejściowymi.</p>
 <h3 id="11-zmiana-gownego-wejscia-na-plik-csv-ze-sciezkami-plikow-zamiast-pojedynczego-pliku">1.1. Zmiana głównego wejścia na plik CSV ze ścieżkami plików zamiast pojedynczego pliku<a class="headerlink" href="#11-zmiana-gownego-wejscia-na-plik-csv-ze-sciezkami-plikow-zamiast-pojedynczego-pliku" title="Permanent link">&para;</a></h3>
 <p>W katalogu <code>data/</code> udostępniamy plik CSV zawierający identyfikatory próbek oraz ścieżki do plików FASTQ.
@@ -4062,15 +4062,15 @@ Zwróć uwagę, że ścieżki do plików FASTQ są ścieżkami bezwzględnymi.</
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">[68/4c27b5] HISAT2_ALIGN (6) [100%] 6 of 6 ✔</span>
 </code></pre></div>
 </details>
-<p>Tym razem widzimy, że każdy krok jest uruchamiany 6 razy, na każdym z 6 dostarczonych plików danych.</p>
+<p>Tym razem widzimy, że każdy krok jest uruchamiany 6 razy – na każdym z 6 dostarczonych plików danych.</p>
 <p>To wszystko, czego potrzeba, aby workflow uruchamiał się na wielu plikach!
-Nextflow obsługuje całą równoległość za nas.</p>
+Nextflow obsługuje całą paralelizację za nas.</p>
 <hr />
 <h2 id="2-agregacja-metryk-qc-wstepnego-przetwarzania-w-pojedynczy-raport-multiqc">2. Agregacja metryk QC wstępnego przetwarzania w pojedynczy raport MultiQC<a class="headerlink" href="#2-agregacja-metryk-qc-wstepnego-przetwarzania-w-pojedynczy-raport-multiqc" title="Permanent link">&para;</a></h2>
-<p>To wszystko generuje wiele raportów QC i nie chcemy musieć przeglądać poszczególnych raportów.
+<p>Generuje to wiele raportów QC i nie chcemy musieć przeglądać poszczególnych raportów.
 To idealny moment, aby dodać krok agregacji raportów MultiQC!</p>
 <h3 id="21-utworzenie-moduu-dla-procesu-agregacji-qc">2.1. Utworzenie modułu dla procesu agregacji QC<a class="headerlink" href="#21-utworzenie-moduu-dla-procesu-agregacji-qc" title="Permanent link">&para;</a></h3>
-<p>Stwórzmy plik modułu o nazwie <code>modules/multiqc.nf</code>, który będzie zawierał proces <code>MULTIQC</code>:</p>
+<p>Stwórzmy plik modułu o nazwie <code>modules/multiqc.nf</code>, który będzie zawierał <strong>process</strong> <code>MULTIQC</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>touch<span class="w"> </span>modules/multiqc.nf
 </code></pre></div>
 <p>Otwórz plik w edytorze kodu i skopiuj do niego następujący kod:</p>
@@ -4168,7 +4168,7 @@ To idealny moment, aby dodać krok agregacji raportów MultiQC!</p>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="o">)</span>
 </code></pre></div>
 <p>To zbierze raporty QC dla każdej próbki.
-Ale ponieważ chcemy je zagregować dla wszystkich próbek, musimy dodać operator <code>collect()</code>, aby zebrać raporty dla wszystkich próbek w jedno wywołanie <code>MULTIQC</code>.
+Ponieważ jednak chcemy je zagregować dla wszystkich próbek, musimy dodać operator <code>collect()</code>, aby zebrać raporty dla wszystkich próbek w jedno wywołanie <code>MULTIQC</code>.
 Musimy również przekazać parametr <code>report_id</code>.</p>
 <p>Daje nam to następujący kod:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Ukończone wywołanie MULTIQC</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-33">33</a></span>
@@ -4381,7 +4381,7 @@ Coraz częściej spotyka się dane RNAseq paired-end, więc chcemy móc je obsł
 <a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="s2">    fastqc ${reads}</span>
 <a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
-<p>Technicznie uogólnia to proces <code>FASTQC</code> w sposób, który umożliwia mu obsługę zarówno danych RNAseq single-end, jak i paired-end.</p>
+<p>Technicznie uogólnia to <strong>process</strong> <code>FASTQC</code> w sposób, który umożliwia mu obsługę zarówno danych RNAseq single-end, jak i paired-end.</p>
 <p>Na koniec zaktualizuj instrukcję importu modułu, aby używała wersji paired-end modułu.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/fastqc_pe.nf&#39;</span>
 </code></pre></div></td></tr></table></div>
@@ -4393,7 +4393,7 @@ Coraz częściej spotyka się dane RNAseq paired-end, więc chcemy móc je obsł
 <ul>
 <li>Zmień deklarację wejścia z <code>path reads</code> na <code>tuple path(read1), path(read2)</code></li>
 <li>Zaktualizuj polecenie w bloku <code>script</code>, zastępując <code>$reads</code> przez <code>--paired ${read1} ${read2}</code></li>
-<li>Zaktualizuj deklaracje wyjścia, aby odzwierciedlały dodane pliki i różne konwencje nazewnictwa, używając symboli wieloznacznych, aby uniknąć konieczności wymieniania wszystkiego.</li>
+<li>Zaktualizuj deklaracje wyjścia, aby odzwierciedlały dodane pliki i różne konwencje nazewnictwa, używając symboli wieloznacznych.</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/trim_galore_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
@@ -4425,7 +4425,7 @@ Coraz częściej spotyka się dane RNAseq paired-end, więc chcemy móc je obsł
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/trim_galore_pe.nf&#39;</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="36-aktualizacja-wywoania-procesu-multiqc-aby-oczekiwa-dwoch-raportow-z-trim_galore">3.6. Aktualizacja wywołania procesu MULTIQC, aby oczekiwał dwóch raportów z TRIM_GALORE<a class="headerlink" href="#36-aktualizacja-wywoania-procesu-multiqc-aby-oczekiwa-dwoch-raportow-z-trim_galore" title="Permanent link">&para;</a></h3>
-<p>Proces <code>TRIM_GALORE</code> generuje teraz dodatkowy kanał wyjściowy, więc musimy przekazać go do MultiQC.</p>
+<p><strong>Process</strong> <code>TRIM_GALORE</code> generuje teraz dodatkowy kanał wyjściowy, więc musimy przekazać go do MultiQC.</p>
 <p>Zastąp <code>TRIM_GALORE.out.fastqc_reports,</code> przez <code>TRIM_GALORE.out.fastqc_reports_1,</code> plus <code>TRIM_GALORE.out.fastqc_reports_2,</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq_pe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-33">33</a></span>
 <span class="normal"><a href="#__codelineno-26-34">34</a></span>
@@ -4471,7 +4471,7 @@ Coraz częściej spotyka się dane RNAseq paired-end, więc chcemy móc je obsł
 <a id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="37-utworzenie-wersji-paired-end-procesu-hisat2_align">3.7. Utworzenie wersji paired-end procesu HISAT2_ALIGN<a class="headerlink" href="#37-utworzenie-wersji-paired-end-procesu-hisat2_align" title="Permanent link">&para;</a></h3>
-<p>Stwórz kopię modułu, abyśmy mieli obie wersje pod ręką.</p>
+<p>Stwórz kopię modułu, aby zachować obie wersje.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>cp<span class="w"> </span>modules/hisat2_align.nf<span class="w"> </span>modules/hisat2_align_pe.nf
 </code></pre></div>
 <p>Otwórz nowy plik modułu <code>hisat2_align_pe.nf</code> w edytorze kodu i wprowadź następujące zmiany:</p>
@@ -4536,7 +4536,7 @@ Następnym logicznym krokiem byłoby sprawienie, aby workflow akceptował który
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
 <p>Wiesz, jak dostosować workflow dla pojedynczej próbki, aby sparalelizować przetwarzanie wielu próbek, wygenerować kompleksowy raport QC i dostosować workflow do używania danych paired-end, jeśli jest to potrzebne.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
-<p>Gratulacje, ukończyłeś mini-kurs Nextflow dla RNAseq! Świętuj Swój sukces i weź zasłużoną przerwę!</p>
+<p>Gratulacje, ukończyłeś mini-kurs Nextflow For RNAseq! Świętuj Swój sukces i weź zasłużoną przerwę!</p>
 <p>Następnie prosimy o wypełnienie bardzo krótkiej ankiety dotyczącej Twoich doświadczeń z tym kursem szkoleniowym, a następnie przekierujemy Cię na stronę z linkami do dalszych materiałów szkoleniowych i pomocnych odnośników.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
