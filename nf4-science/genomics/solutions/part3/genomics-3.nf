@@ -25,8 +25,10 @@ include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
 workflow {
 
     main:
-    // Create input channel from a text file listing input file paths
-    reads_ch = channel.fromPath(params.reads_bam).splitText()
+    // Create input channel from a CSV file listing input file paths
+    reads_ch = Channel.fromPath(params.reads_bam)
+            .splitCsv()
+            .map { line -> file(line[0]) }
 
     // Load the file paths for the accessory files (reference and intervals)
     ref_file        = file(params.reference)

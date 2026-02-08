@@ -136,7 +136,7 @@ We'll also organize the GVCF files into their own subdirectory for clarity.
 
 === "After"
 
-    ```groovy title="genomics.nf" linenums="45" hl_lines="3 4"
+    ```groovy title="genomics.nf" linenums="47" hl_lines="3 4"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -145,7 +145,7 @@ We'll also organize the GVCF files into their own subdirectory for clarity.
 
 === "Before"
 
-    ```groovy title="genomics.nf" linenums="45"
+    ```groovy title="genomics.nf" linenums="47"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         vcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -160,7 +160,7 @@ We also need to update the `output` block to put the GVCF files in a `gvcf` subd
 
 === "After"
 
-    ```groovy title="genomics.nf" linenums="51" hl_lines="3 5 6 8 9"
+    ```groovy title="genomics.nf" linenums="53" hl_lines="3 5 6 8 9"
     output {
         indexed_bam {
             path 'indexed_bam'
@@ -176,7 +176,7 @@ We also need to update the `output` block to put the GVCF files in a `gvcf` subd
 
 === "Before"
 
-    ```groovy title="genomics.nf" linenums="51"
+    ```groovy title="genomics.nf" linenums="53"
     output {
         indexed_bam {
             path 'bam'
@@ -285,7 +285,7 @@ Later in the training series you'll learn how to use sample metadata for this so
 
 === "After"
 
-    ```groovy title="genomics.nf" linenums="18" hl_lines="3-4"
+    ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
         intervals: Path = "${projectDir}/data/ref/intervals.bed"
 
         // Base name for final output file
@@ -295,7 +295,7 @@ Later in the training series you'll learn how to use sample metadata for this so
 
 === "Before"
 
-    ```groovy title="genomics.nf" linenums="18"
+    ```groovy title="genomics.nf" linenums="14"
         intervals: Path = "${projectDir}/data/ref/intervals.bed"
     }
     ```
@@ -478,7 +478,7 @@ Add the import statement to `genomics.nf`, below the existing import statements:
 
 === "After"
 
-    ```groovy title="genomics.nf" linenums="8" hl_lines="3"
+    ```groovy title="genomics.nf" linenums="21" hl_lines="3"
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
@@ -486,7 +486,7 @@ Add the import statement to `genomics.nf`, below the existing import statements:
 
 === "Before"
 
-    ```groovy title="genomics.nf" linenums="8"
+    ```groovy title="genomics.nf" linenums="21"
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     ```

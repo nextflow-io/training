@@ -1211,13 +1211,15 @@ The list of files no longer lives in the code at all, which is a big step in the
 Currently, our input channel factory treats any files we give it as the data inputs we want to feed to the indexing process.
 Since we're now giving it a file that lists input file paths, we need to change its behavior to parse the file and treat the file paths it contains as the data inputs.
 
-Fortunately we can do that very simply, just by adding the [`.splitText()` operator](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) to the channel construction step.
+We can do this using the same pattern we used in [Part 2 of Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file): applying the [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operator to parse the file, then a `map` operation to select the first field of each line.
 
 === "After"
 
-    ```groovy title="genomics.nf" linenums="24" hl_lines="1-2"
-        // Create input channel from a text file listing input file paths
-        reads_ch = channel.fromPath(params.reads_bam).splitText()
+    ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
+        // Create input channel from a CSV file listing input file paths
+        reads_ch = Channel.fromPath(params.reads_bam)
+                .splitCsv()
+                .map { line -> file(line[0]) }
     ```
 
 === "Before"
@@ -1227,9 +1229,12 @@ Fortunately we can do that very simply, just by adding the [`.splitText()` opera
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 
+Technically we could do this more simply using the [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) operator, since our input file currently only contains file paths.
+However, by using the more versatile `splitCsv` operator (supplemented by `map`), we can future-proof our workflow in case we decide to add metadata to the file containing file paths.
+
 !!! tip
 
-    This is another great opportunity to use the `.view()` operator to look at what the channel contents look like before and after applying an operator.
+    If you're not confident you understand what the operators are doing here, this is another great opportunity to use the `.view()` operator to look at what the channel contents look like before and after applying them.
 
 ### 4.4. Run the workflow
 
