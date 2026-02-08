@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2875,7 +2875,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3870,13 +3870,14 @@ Każdy wiersz to próbka, a kolumny określają pliki i metadane dla tej próbki
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Ostrzeżenie</p>
-<p>Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, <strong>z którego uruchamiasz</strong> Nextflow, a nie względem miejsca, w którym znajduje się arkusz próbek.</p>
+<p>Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, <strong>z którego uruchamiasz</strong> Nextflow'a, a nie względem miejsca, w którym znajduje się arkusz próbek.</p>
 </div>
 <p>Na koniec wykonajmy nf-core/molkart jeszcze raz z arkuszem próbek zawierającym lokalne ścieżki do plików:</p>
 <p><code>nextflow run ./molkart -params-file params.yaml -resume</code></p>
-<p>Jak widzisz, Nextflow wykonuje to uruchomienie podobnie jak wtedy, gdy pliki były pobierane z Github. To jedna ze świetnych funkcji Nextflow - właściwie przygotowuje dane dla Ciebie, niezależnie od tego, gdzie się znajdują.</p>
+<p>Jak widzisz, Nextflow wykonuje to uruchomienie podobnie jak wtedy, gdy pliki były pobierane z Github.
+To jedna ze świetnych funkcji Nextflow'a - prawidłowo przygotowuje dane dla Ciebie, niezależnie od tego, gdzie się znajdują.</p>
 <h3 id="podsumowanie_1">Podsumowanie<a class="headerlink" href="#podsumowanie_1" title="Permanent link">&para;</a></h3>
-<p>Arkusze próbek organizują zestawy danych z wieloma próbkami w sposób, który pozwala jawnie zdefiniować metadane wraz ze ścieżkami do plików.
+<p>Arkusze próbek organizują zestawy danych z wieloma próbkami w sposób umożliwiający jawne zdefiniowanie metadanych wraz ze ścieżkami do plików.
 Większość pipeline'ów nf-core używa tego wzorca.</p>
 <h3 id="co-dalej_1">Co dalej?<a class="headerlink" href="#co-dalej_1" title="Permanent link">&para;</a></h3>
 <p>Teraz, gdy omówiliśmy dane wejściowe, zbadajmy, jak skonfigurować pipeline'y Nextflow dla różnych środowisk obliczeniowych.</p><style type="text/css">.quiz {

@@ -45,7 +45,7 @@
     
     
       
-        <title>Wprowadzenie - training.nextflow.io</title>
+        <title>Pierwsze kroki - training.nextflow.io</title>
       
     
     
@@ -155,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#wprowadzenie" class="md-skip">
+        <a href="#pierwsze-kroki" class="md-skip">
           Przejdź do treści
         </a>
       
@@ -194,7 +194,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Wprowadzenie
+              Pierwsze kroki
             
           </span>
         </div>
@@ -1149,7 +1149,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -1167,7 +1167,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2844,7 +2844,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3725,8 +3725,7 @@
 </a>
  
 
-<h1 id="wprowadzenie">Wprowadzenie<a class="headerlink" href="#wprowadzenie" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
+<h1 id="pierwsze-kroki">Pierwsze kroki<a class="headerlink" href="#pierwsze-kroki" title="Permanent link">&para;</a></h1>
 <h2 id="uruchomienie-srodowiska-szkoleniowego">Uruchomienie środowiska szkoleniowego<a class="headerlink" href="#uruchomienie-srodowiska-szkoleniowego" title="Permanent link">&para;</a></h2>
 <p>Aby skorzystać z przygotowanego przez nas środowiska w GitHub Codespaces, kliknij przycisk "Open in GitHub Codespaces" poniżej. Aby poznać inne opcje, zobacz <a href="../../envsetup/">Opcje środowiska</a>.</p>
 <p>Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj kliknięcia prawym przyciskiem myszy, ctrl+kliknięcie lub cmd+kliknięcie w zależności od sprzętu), aby móc czytać instrukcje podczas ładowania środowiska.
@@ -3751,7 +3750,7 @@ Jeśli używasz innej wersji narzędzi nf-core, możesz mieć trudności z podą
 <h2 id="przygotowanie-do-pracy">Przygotowanie do pracy<a class="headerlink" href="#przygotowanie-do-pracy" title="Permanent link">&para;</a></h2>
 <p>Gdy Twój codespace już działa, musisz wykonać dwie rzeczy przed rozpoczęciem szkolenia: ustawić katalog roboczy dla tego konkretnego kursu i przyjrzeć się dostarczonym materiałom.</p>
 <h3 id="ustawienie-katalogu-roboczego">Ustawienie katalogu roboczego<a class="headerlink" href="#ustawienie-katalogu-roboczego" title="Permanent link">&para;</a></h3>
-<p>Domyślnie codespace otwiera się z lokalizacją główną wszystkich kursów szkoleniowych, ale w tym module będziemy pracować w folderze <code>hello-nf-core/</code>.</p>
+<p>Domyślnie codespace otwiera się z katalogiem roboczym ustawionym na katalog główny wszystkich kursów szkoleniowych, ale w tym kursie będziemy pracować w katalogu <code>hello-nf-core/</code>.</p>
 <p>Zmień teraz katalog, uruchamiając to polecenie w terminalu:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>hello-nf-core/
 </code></pre></div>
@@ -3765,7 +3764,7 @@ Jeśli używasz innej wersji narzędzi nf-core, możesz mieć trudności z podą
 <h3 id="eksploracja-dostarczonych-materiaow">Eksploracja dostarczonych materiałów<a class="headerlink" href="#eksploracja-dostarczonych-materiaow" title="Permanent link">&para;</a></h3>
 <p>Możesz przeglądać zawartość tego katalogu używając eksploratora plików po lewej stronie obszaru roboczego szkolenia.
 Alternatywnie możesz użyć polecenia <code>tree</code>.</p>
-<p>W trakcie kursu używamy wyjścia <code>tree</code> do przedstawienia struktury folderów i ich zawartości w czytelnej formie, czasami z drobnymi modyfikacjami dla przejrzystości.</p>
+<p>W trakcie kursu używamy wyjścia <code>tree</code> do przedstawienia struktury katalogów i ich zawartości w czytelnej formie, czasami z drobnymi modyfikacjami dla przejrzystości.</p>
 <p>Tutaj generujemy spis treści do drugiego poziomu w dół:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tree<span class="w"> </span>.<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
@@ -3796,7 +3795,7 @@ Używamy zwijanych sekcji w ten sposób, aby w zwięzły sposób uwzględnić oc
 <p><strong>Katalog <code>original-hello</code></strong> zawiera kopię kodu źródłowego powstałego w wyniku przejścia przez kompletną serię szkoleń Hello Nextflow (z włączonym Docker).</p>
 </li>
 <li>
-<p><strong>Katalog <code>solutions</code></strong> zawiera ukończone skrypty workflow'u powstałe w wyniku każdego kroku kursu.
+<p><strong>Katalog <code>solutions</code></strong> zawiera ukończone skrypty workflow'ów powstałe w wyniku każdego kroku kursu.
   Są one przeznaczone do użycia jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania problemów.</p>
 </li>
 </ul>

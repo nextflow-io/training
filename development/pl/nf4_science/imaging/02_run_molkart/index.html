@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2216,10 +2216,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-konfiguracja-docker-i-uruchomienie-pipelineu" class="md-nav__link">
+  <a href="#22-konfiguracja-dockera-i-uruchomienie-pipelineu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Konfiguracja Docker i uruchomienie pipeline'u
+        2.2. Konfiguracja Docker'a i uruchomienie pipeline'u
       
     </span>
   </a>
@@ -3074,7 +3074,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3647,10 +3647,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-konfiguracja-docker-i-uruchomienie-pipelineu" class="md-nav__link">
+  <a href="#22-konfiguracja-dockera-i-uruchomienie-pipelineu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Konfiguracja Docker i uruchomienie pipeline'u
+        2.2. Konfiguracja Docker'a i uruchomienie pipeline'u
       
     </span>
   </a>
@@ -4185,14 +4185,14 @@
 
 <h1 id="czesc-2-uruchomienie-nf-coremolkart">Część 2: Uruchomienie nf-core/molkart<a class="headerlink" href="#czesc-2-uruchomienie-nf-coremolkart" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>W Części 1 uruchomiliśmy prosty workflow Hello World, aby zrozumieć podstawy wykonywania Nextflow.
+<p>W Części 1 uruchomiliśmy prosty workflow Hello World, aby zrozumieć podstawy wykonywania Nextflow'a.
 Teraz uruchomimy rzeczywisty pipeline do bioobrażowania: <strong>nf-core/molkart</strong>.</p>
 <p>Ten pipeline przetwarza dane transkryptomiki przestrzennej Molecular Cartography z Resolve Bioscience.
-Jednak wzorce Nextflow, których się tutaj nauczysz, mają zastosowanie do każdego pipeline'u nf-core lub produkcyjnego workflow'u.</p>
+Jednak wzorce Nextflow'a, których się tutaj nauczysz, mają zastosowanie do każdego pipeline'u nf-core lub produkcyjnego workflow'u.</p>
 <h2 id="1-zrozumienie-pipelineow-nf-core">1. Zrozumienie pipeline'ów nf-core<a class="headerlink" href="#1-zrozumienie-pipelineow-nf-core" title="Permanent link">&para;</a></h2>
 <p>Zanim uruchomimy pipeline, zrozummy czym jest nf-core i dlaczego ma znaczenie przy uruchamianiu workflow'ów.</p>
 <h3 id="11-czym-jest-nf-core">1.1. Czym jest nf-core?<a class="headerlink" href="#11-czym-jest-nf-core" title="Permanent link">&para;</a></h3>
-<p><a href="https://nf-co.re/">nf-core</a> to wspierana przez społeczność kolekcja wysokiej jakości pipeline'ów Nextflow.
+<p><a href="https://nf-co.re/">nf-core</a> to wspierana przez społeczność kolekcja wysokiej jakości pipeline'ów Nextflow'a.
 Wszystkie pipeline'y nf-core mają tę samą strukturę i konwencje, co oznacza, że nauczywszy się uruchamiać jeden, możesz uruchomić każdy z nich.</p>
 <p>Kluczowe cechy pipeline'ów nf-core:</p>
 <ul>
@@ -4200,7 +4200,7 @@ Wszystkie pipeline'y nf-core mają tę samą strukturę i konwencje, co oznacza,
 <li><strong>Wbudowane dane testowe</strong>: Każdy pipeline zawiera profile testowe do szybkiej walidacji</li>
 <li><strong>Kompleksowa dokumentacja</strong>: Szczegółowe instrukcje użycia i opisy parametrów</li>
 <li><strong>Kontrola jakości</strong>: Automatyczne raporty QC przy użyciu MultiQC</li>
-<li><strong>Wsparcie dla kontenerów</strong>: Gotowe kontenery dla powtarzalności</li>
+<li><strong>Wsparcie dla kontenerów</strong>: Gotowe kontenery zapewniające powtarzalność</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Chcesz dowiedzieć się więcej o nf-core?</p>
@@ -4213,10 +4213,10 @@ Obejmuje on tworzenie i dostosowywanie pipeline'ów nf-core od podstaw.</p>
 <ol>
 <li><strong>Przetwarzanie wstępne obrazu</strong>: Wypełnianie wzoru siatki i opcjonalne wzmocnienie kontrastu</li>
 <li><strong>Segmentacja komórek</strong>: Wiele opcji algorytmów (Cellpose, Mesmer, ilastik, Stardist)</li>
-<li><strong>Przypisanie punktów</strong>: Przypisanie punktów transkryptu do zsegmentowanych komórek</li>
+<li><strong>Przypisanie punktów</strong>: Przypisywanie punktów transkryptów do zsegmentowanych komórek</li>
 <li><strong>Kontrola jakości</strong>: Generowanie kompleksowych raportów QC</li>
 </ol>
-<p>Kluczowe wyjścia to:</p>
+<p>Kluczowe wyniki to:</p>
 <ul>
 <li>Tabele liczby transkryptów według komórek</li>
 <li>Maski segmentacji</li>
@@ -4231,7 +4231,7 @@ Obejmuje on tworzenie i dostosowywanie pipeline'ów nf-core od podstaw.</p>
 <p>To tworzy katalog <code>molkart/</code> zawierający kompletny kod źródłowy pipeline'u.</p>
 <div class="admonition note">
 <p class="admonition-title">Dlaczego klonujemy lokalnie?</p>
-<p>Zazwyczaj uruchamiałbyś pipeline'y nf-core bezpośrednio z GitHub używając <code>nextflow run nf-core/molkart -r 1.2.0</code>.
+<p>Zazwyczaj uruchamiałbyś pipeline'y nf-core bezpośrednio z GitHub'a używając <code>nextflow run nf-core/molkart -r 1.2.0</code>.
 Nextflow automatycznie pobiera żądaną wersję pipeline'u do <code>$HOME/.nextflow/assets/nf-core/molkart</code> i uruchamia go stamtąd.
 Jednak dla celów tego szkolenia klonujemy pipeline do innego katalogu lokalnego, abyśmy mogli łatwiej sprawdzić kod.</p>
 </div>
@@ -4285,23 +4285,23 @@ Jednak dla celów tego szkolenia klonujemy pipeline do innego katalogu lokalnego
 Dzieje się tak, ponieważ:</p>
 <ol>
 <li>Pipeline oczekuje zainstalowanego specjalistycznego oprogramowania bioinformatycznego</li>
-<li>Te narzędzia (takie jak <code>duplicate_finder.py</code>, <code>apply_clahe.dask.py</code>, itp.) nie są częścią standardowych dystrybucji Linux</li>
-<li>Bez kontenerów, Nextflow próbuje uruchomić polecenia bezpośrednio na Twojej lokalnej maszynie</li>
+<li>Te narzędzia (takie jak <code>duplicate_finder.py</code>, <code>apply_clahe.dask.py</code>, itp.) nie są częścią standardowych dystrybucji Linuksa</li>
+<li>Bez kontenerów Nextflow próbuje uruchomić polecenia bezpośrednio na Twojej lokalnej maszynie</li>
 </ol>
 <p><strong>Skąd mają pochodzić te narzędzia?</strong></p>
-<p>Sprawdźmy jeden z modułów procesu, aby zobaczyć jak deklaruje Swoje wymagania dotyczące oprogramowania.</p>
+<p>Sprawdźmy jeden z modułów procesu, aby zobaczyć jak deklaruje swoje wymagania dotyczące oprogramowania.</p>
 <p>Otwórz moduł przetwarzania wstępnego CLAHE:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>code<span class="w"> </span>molkart/modules/local/clahe/main.nf
 </code></pre></div>
 <p>Spójrz na linię 5 - zobaczysz:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">container</span><span class="w"> </span><span class="s1">&#39;ghcr.io/schapirolabor/molkart-local:v0.0.4&#39;</span>
 </code></pre></div>
-<p>Ta linia informuje Nextflow: "Aby uruchomić ten proces, użyj obrazu Docker <code>ghcr.io/schapirolabor/molkart-local:v0.0.4</code>, który zawiera wszystkie wymagane oprogramowanie."</p>
-<p>Każdy proces deklaruje który obraz kontenera dostarcza wymagane narzędzia.
-Jednak Nextflow używa tych kontenerów tylko jeśli mu powiesz!</p>
+<p>Ta linia informuje Nextflow'a: "Aby uruchomić ten proces, użyj obrazu Docker'a <code>ghcr.io/schapirolabor/molkart-local:v0.0.4</code>, który zawiera wszystkie wymagane oprogramowanie."</p>
+<p>Każdy proces deklaruje, który obraz kontenera dostarcza wymagane narzędzia.
+Jednak Nextflow używa tych kontenerów tylko wtedy, gdy mu powiesz!</p>
 <p><strong>Rozwiązanie: Włącz Docker w konfiguracji</strong></p>
-<h3 id="22-konfiguracja-docker-i-uruchomienie-pipelineu">2.2. Konfiguracja Docker i uruchomienie pipeline'u<a class="headerlink" href="#22-konfiguracja-docker-i-uruchomienie-pipelineu" title="Permanent link">&para;</a></h3>
-<p>Aby włączyć Docker, musimy zmienić <code>docker.enabled</code> z <code>false</code> na <code>true</code> w pliku <code>nextflow.config</code>.</p>
+<h3 id="22-konfiguracja-dockera-i-uruchomienie-pipelineu">2.2. Konfiguracja Docker'a i uruchomienie pipeline'u<a class="headerlink" href="#22-konfiguracja-dockera-i-uruchomienie-pipelineu" title="Permanent link">&para;</a></h3>
+<p>Aby włączyć Docker'a, musimy zmienić <code>docker.enabled</code> z <code>false</code> na <code>true</code> w pliku <code>nextflow.config</code>.</p>
 <p>Otwórz plik konfiguracyjny:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>code<span class="w"> </span>nextflow.config
 </code></pre></div>
@@ -4327,7 +4327,7 @@ Jednak Nextflow używa tych kontenerów tylko jeśli mu powiesz!</p>
 <p>Tym razem Nextflow:</p>
 <ol>
 <li>Odczyta ustawienie <code>docker.enabled = true</code> z konfiguracji</li>
-<li>Pobierze wymagane obrazy Docker (tylko za pierwszym razem)</li>
+<li>Pobierze wymagane obrazy Docker'a (tylko za pierwszym razem)</li>
 <li>Uruchomi każdy proces wewnątrz określonego kontenera</li>
 <li>Wykona się pomyślnie, ponieważ wszystkie narzędzia są dostępne wewnątrz kontenerów</li>
 </ol>
@@ -4339,7 +4339,7 @@ Jednak Nextflow używa tych kontenerów tylko jeśli mu powiesz!</p>
 <li>Kontenery zapewniają powtarzalność - dokładnie te same wersje oprogramowania działają wszędzie</li>
 <li>Nie musisz ręcznie instalować dziesiątek narzędzi i ich zależności</li>
 </ul>
-<p>Aby uzyskać więcej szczegółów o kontenerach w Nextflow, zobacz <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a> ze szkolenia Hello Nextflow.</p>
+<p>Aby uzyskać więcej szczegółów o kontenerach w Nextflow'ie, zobacz <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a> ze szkolenia Hello Nextflow.</p>
 </div>
 <h3 id="23-monitorowanie-wykonania">2.3. Monitorowanie wykonania<a class="headerlink" href="#23-monitorowanie-wykonania" title="Permanent link">&para;</a></h3>
 <p>Podczas działania pipeline'u zobaczysz wyjście podobne do tego:</p>
@@ -4423,9 +4423,9 @@ Jednak Nextflow używa tych kontenerów tylko jeśli mu powiesz!</p>
 <a id="__codelineno-8-76" name="__codelineno-8-76" href="#__codelineno-8-76"></a><span class="go">Succeeded   : 22</span>
 </code></pre></div>
 </details>
-<p>Zauważ, jak to wyjście jest bardziej szczegółowe niż nasz przykład Hello World z powodu konwencji nf-core, których przestrzega pipeline:</p>
+<p>Zauważ, jak to wyjście jest bardziej szczegółowe niż nasz przykład Hello World dzięki konwencjom nf-core, których przestrzega pipeline:</p>
 <ul>
-<li>Pipeline pokazuje Swoją wersję i logo</li>
+<li>Pipeline pokazuje swoją wersję i logo</li>
 <li>Wyświetlane są parametry konfiguracji</li>
 <li>Wiele procesów działa równolegle (wskazane przez wiele linii procesów)</li>
 <li>Nazwy procesów zawierają pełną ścieżkę modułu (np. <code>NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP</code>)</li>
@@ -4451,7 +4451,7 @@ Jednak Nextflow używa tych kontenerów tylko jeśli mu powiesz!</p>
 <h2 id="3-znajdowanie-i-badanie-wyjsc">3. Znajdowanie i badanie wyjść<a class="headerlink" href="#3-znajdowanie-i-badanie-wyjsc" title="Permanent link">&para;</a></h2>
 <p>Kiedy pipeline zakończy się pomyślnie, zobaczysz komunikat o zakończeniu i podsumowanie wykonania.</p>
 <h3 id="31-zlokalizowanie-katalogu-wynikow">3.1. Zlokalizowanie katalogu wyników<a class="headerlink" href="#31-zlokalizowanie-katalogu-wynikow" title="Permanent link">&para;</a></h3>
-<p>Domyślnie pipeline'y nf-core zapisują wyjścia do katalogu określonego przez parametr <code>outdir</code>, który ustawiliśmy na <code>results/</code>.</p>
+<p>Domyślnie pipeline'y nf-core zapisują wyniki do katalogu określonego przez parametr <code>outdir</code>, który ustawiliśmy na <code>results/</code>.</p>
 <p>Wyświetl zawartość:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>tree<span class="w"> </span>results/
 </code></pre></div>
@@ -4467,7 +4467,7 @@ Jednak Nextflow używa tych kontenerów tylko jeśli mu powiesz!</p>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">├── spot2cell/</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">└── stack/</span>
 </code></pre></div>
-<p>Każdy podkatalog zawiera wyjścia z określonego etapu pipeline'u:</p>
+<p>Każdy podkatalog zawiera wyniki z określonego etapu pipeline'u:</p>
 <ul>
 <li><strong>mindagap/</strong>: Obrazy z wypełnioną siatką z kroku przetwarzania wstępnego MindaGap</li>
 <li><strong>clahe/</strong>: Obrazy ze wzmocnionym kontrastem z przetwarzania wstępnego CLAHE</li>
@@ -4495,8 +4495,8 @@ Jednak Nextflow używa tych kontenerów tylko jeśli mu powiesz!</p>
 Zawsze zapewniają ogólny przegląd wykonania pipeline'u i jakości danych.</p>
 </div>
 <h3 id="33-badanie-tabel-transkryptow-wedug-komorek">3.3. Badanie tabel transkryptów według komórek<a class="headerlink" href="#33-badanie-tabel-transkryptow-wedug-komorek" title="Permanent link">&para;</a></h3>
-<p>Najważniejszym wyjściem naukowym jest tabela liczby transkryptów według komórek.
-Mówi ona ile transkryptów każdego typu zostało wykrytych w każdej komórce.</p>
+<p>Najważniejszym wynikiem naukowym jest tabela liczby transkryptów według komórek.
+Mówi ona, ile transkryptów każdego typu zostało wykrytych w każdej komórce.</p>
 <p>Przejdź do katalogu spot2cell:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>ls<span class="w"> </span>results/spot2cell/
 </code></pre></div>
@@ -4506,8 +4506,8 @@ Mówi ona ile transkryptów każdego typu zostało wykrytych w każdej komórce.
 <li><code>cellxgene_mem_only_mesmer.csv</code>: Tabela transkryptów według komórek używająca segmentacji Mesmer</li>
 <li><code>cellxgene_mem_only_stardist.csv</code>: Tabela transkryptów według komórek używająca segmentacji Stardist</li>
 </ul>
-<p>Uruchomiliśmy tylko 1 próbkę w tym zestawie danych testowych, ale w prawdziwym eksperymencie mielibyśmy te tabele dla każdej próbki.
-Zauważ jak Nextflow jest w stanie przetwarzać wiele metod segmentacji równolegle, ułatwiając porównywanie wyników.</p>
+<p>Uruchomiliśmy tylko jedną próbkę w tym zestawie danych testowych, ale w prawdziwym eksperymencie mielibyśmy te tabele dla każdej próbki.
+Zauważ, jak Nextflow potrafi przetwarzać wiele metod segmentacji równolegle, ułatwiając porównywanie wyników.</p>
 <h3 id="34-przegladanie-raportow-wykonania">3.4. Przeglądanie raportów wykonania<a class="headerlink" href="#34-przegladanie-raportow-wykonania" title="Permanent link">&para;</a></h3>
 <p>Nextflow automatycznie generuje kilka raportów wykonania.</p>
 <p>Sprawdź katalog pipeline_info:</p>
@@ -4523,18 +4523,18 @@ Zauważ jak Nextflow jest w stanie przetwarzać wiele metod segmentacji równole
 <p>Otwórz raport wykonania, aby zobaczyć użycie zasobów:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>code<span class="w"> </span>results/pipeline_info/execution_report.html
 </code></pre></div>
-<p>To pokazuje:</p>
+<p>Pokazuje on:</p>
 <ul>
 <li>Jak długo trwał każdy proces</li>
 <li>Użycie CPU i pamięci</li>
-<li>Które zadania były w pamięci podręcznej vs. wykonane</li>
+<li>Które zadania były w pamięci podręcznej, a które wykonane</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Te raporty są niezwykle przydatne do optymalizacji alokacji zasobów i rozwiązywania problemów z wydajnością.</p>
 </div>
 <h3 id="podsumowanie_1">Podsumowanie<a class="headerlink" href="#podsumowanie_1" title="Permanent link">&para;</a></h3>
-<p>Wiesz jak zlokalizować wyjścia pipeline'u, badać raporty kontroli jakości i uzyskać dostęp do metryk wykonania.</p>
+<p>Wiesz jak zlokalizować wyniki pipeline'u, badać raporty kontroli jakości i uzyskać dostęp do metryk wykonania.</p>
 <h3 id="co-dalej_1">Co dalej?<a class="headerlink" href="#co-dalej_1" title="Permanent link">&para;</a></h3>
 <p>Naucz się o katalogu roboczym i jak Nextflow zarządza plikami pośrednimi.</p>
 <hr />
@@ -4553,7 +4553,7 @@ Dla tego pipeline'u z 12 zadaniami będzie 12 podkatalogów roboczych.</p>
 </code></pre></div>
 <p>Zobaczysz:</p>
 <ul>
-<li><strong>Pliki .command.*</strong>: Skrypty wykonania Nextflow i logi (jak wcześniej)</li>
+<li><strong>Pliki .command.*</strong>: Skrypty wykonania Nextflow'a i logi (jak wcześniej)</li>
 <li><strong>Przygotowane pliki wejściowe</strong>: Dowiązania symboliczne do rzeczywistych plików wejściowych</li>
 <li><strong>Pliki wyjściowe</strong>: Maski segmentacji, wyniki pośrednie, itp.</li>
 </ul>
@@ -4572,17 +4572,17 @@ Dla tego pipeline'u z 12 zadaniami będzie 12 podkatalogów roboczych.</p>
 Jak nauczyliśmy się w Części 1, możesz użyć <code>nextflow clean</code>, aby usunąć katalogi robocze ze starych uruchomień.</p>
 <p>Jednak dla pipeline'ów nf-core z dużymi plikami pośrednimi szczególnie ważne jest regularne czyszczenie.</p>
 <h3 id="podsumowanie_2">Podsumowanie<a class="headerlink" href="#podsumowanie_2" title="Permanent link">&para;</a></h3>
-<p>Rozumiesz jak pipeline'y nf-core organizują Swoje katalogi robocze i jak sprawdzać poszczególne zadania w celu debugowania.</p>
+<p>Rozumiesz jak pipeline'y nf-core organizują swoje katalogi robocze i jak sprawdzać poszczególne zadania w celu debugowania.</p>
 <h3 id="co-dalej_2">Co dalej?<a class="headerlink" href="#co-dalej_2" title="Permanent link">&para;</a></h3>
-<p>Naucz się o pamięci podręcznej Nextflow i jak wznowić nieudane uruchomienia pipeline'u.</p>
+<p>Naucz się o pamięci podręcznej Nextflow'a i jak wznowić nieudane uruchomienia pipeline'u.</p>
 <hr />
 <h2 id="5-wznowienie-uruchomienia-pipelineu">5. Wznowienie uruchomienia pipeline'u<a class="headerlink" href="#5-wznowienie-uruchomienia-pipelineu" title="Permanent link">&para;</a></h2>
-<p>Jedną z najpotężniejszych funkcji Nextflow jest możliwość wznowienia pipeline'u od momentu niepowodzenia.</p>
+<p>Jedną z najpotężniejszych funkcji Nextflow'a jest możliwość wznowienia pipeline'u od momentu niepowodzenia.</p>
 <h3 id="51-mechanizm-pamieci-podrecznej">5.1. Mechanizm pamięci podręcznej<a class="headerlink" href="#51-mechanizm-pamieci-podrecznej" title="Permanent link">&para;</a></h3>
 <p>Kiedy uruchamiasz pipeline z <code>-resume</code>, Nextflow:</p>
 <ol>
 <li>Sprawdza pamięć podręczną dla każdego zadania</li>
-<li>Jeśli wejścia, kod i parametry są identyczne, ponownie używa wyniku z pamięci podręcznej</li>
+<li>Jeśli dane wejściowe, kod i parametry są identyczne, ponownie używa wyniku z pamięci podręcznej</li>
 <li>Ponownie uruchamia tylko zadania, które się zmieniły lub zakończyły się niepowodzeniem</li>
 </ol>
 <p>Jest to niezbędne dla długo działających pipeline'ów, gdzie niepowodzenia mogą wystąpić późno w wykonaniu.</p>
@@ -4609,22 +4609,22 @@ Jak nauczyliśmy się w Części 1, możesz użyć <code>nextflow clean</code>, 
 </code></pre></div>
 <p>Zauważ <code>cached: 2</code> lub <code>cached: 1</code> dla każdego procesu - nic nie zostało ponownie wykonane!</p>
 <h3 id="53-kiedy-resume-jest-przydatne">5.3. Kiedy resume jest przydatne<a class="headerlink" href="#53-kiedy-resume-jest-przydatne" title="Permanent link">&para;</a></h3>
-<p>Resume jest szczególnie wartościowe gdy:</p>
+<p>Resume jest szczególnie wartościowe, gdy:</p>
 <ul>
 <li>Pipeline kończy się niepowodzeniem z powodu limitów zasobów (brak pamięci, przekroczenie limitu czasu)</li>
 <li>Musisz zmodyfikować procesy końcowe bez ponownego uruchamiania kroków początkowych</li>
 <li>Twoje połączenie sieciowe zostanie przerwane podczas pobierania danych</li>
-<li>Chcesz dodać dodatkowe wyjścia bez powtarzania obliczeń</li>
+<li>Chcesz dodać dodatkowe wyniki bez powtarzania obliczeń</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Resume działa tylko jeśli nie zmieniłeś danych wejściowych, kodu pipeline'u lub parametrów.
+<p>Resume działa tylko wtedy, gdy nie zmieniłeś danych wejściowych, kodu pipeline'u lub parametrów.
 Jeśli zmienisz którekolwiek z nich, Nextflow poprawnie ponownie uruchomi dotknięte zadania.</p>
 </div>
 <h3 id="podsumowanie_3">Podsumowanie<a class="headerlink" href="#podsumowanie_3" title="Permanent link">&para;</a></h3>
 <p>Wiesz jak używać <code>-resume</code>, aby efektywnie ponownie uruchamiać pipeline'y bez powtarzania udanych zadań.</p>
 <h3 id="co-dalej_3">Co dalej?<a class="headerlink" href="#co-dalej_3" title="Permanent link">&para;</a></h3>
-<p>Teraz gdy możesz uruchomić nf-core/molkart z danymi testowymi, jesteś gotowy nauczyć się jak skonfigurować go dla Swoich własnych zestawów danych.</p><style type="text/css">.quiz {
+<p>Teraz, gdy możesz uruchomić nf-core/molkart z danymi testowymi, jesteś gotowy nauczyć się jak skonfigurować go dla Twoich własnych zestawów danych.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

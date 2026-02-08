@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2503,7 +2503,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3561,16 +3561,16 @@
 
 <h1 id="reczna-instalacja">Ręczna instalacja<a class="headerlink" href="#reczna-instalacja" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>Możliwe jest ręczne zainstalowanie wszystkiego, czego potrzebujesz do uruchomienia szkolenia w Twoim własnym lokalnym środowisku.</p>
-<p>Tutaj udokumentowaliśmy, jak to zrobić na standardowych systemach zgodnych z POSIX (zakładając komputer osobisty, taki jak laptop).
+<p>Możesz ręcznie zainstalować wszystko, co jest potrzebne do uruchomienia szkoleń we własnym lokalnym środowisku.</p>
+<p>Udokumentowaliśmy tutaj, jak to zrobić na standardowych systemach zgodnych z POSIX (zakładając komputer osobisty, taki jak laptop).
 Pamiętaj, że niektóre szczegóły mogą się różnić w zależności od Twojego konkretnego systemu.</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
-<p>Zanim przejdziesz dalej, czy rozważyłeś użycie <a href="../03_devcontainer/">podejścia Devcontainers</a>?
-Zapewnia ono wszystkie niezbędne narzędzia i zależności bez konieczności ręcznej instalacji.</p>
+<p>Zanim przejdziesz dalej, zastanów się, czy nie lepiej byłoby skorzystać z <a href="../03_devcontainer/">podejścia opartego na Devcontainers</a>?
+Zapewnia ono dostęp do wszystkich niezbędnych narzędzi i zależności bez konieczności ręcznej instalacji.</p>
 </div>
 <h2 id="ogolne-wymagania-programowe">Ogólne wymagania programowe<a class="headerlink" href="#ogolne-wymagania-programowe" title="Permanent link">&para;</a></h2>
-<p>Nextflow może być używany na dowolnym systemie zgodnym z POSIX (Linux, macOS, Windows Subsystem for Linux itp.) z zainstalowaną Javą.
+<p>Nextflow'a można używać na dowolnym systemie zgodnym z POSIX (Linux, macOS, Windows Subsystem for Linux itp.) z zainstalowaną Javą.
 Nasze kursy szkoleniowe mają kilka dodatkowych wymagań.</p>
 <p>W sumie będziesz potrzebować następującego oprogramowania:</p>
 <ul>
@@ -3581,20 +3581,20 @@ Nasze kursy szkoleniowe mają kilka dodatkowych wymagań.</p>
 <li><a href="https://conda.io/">Conda</a> 4.5 (lub nowsza)</li>
 <li><a href="https://code.visualstudio.com">VSCode</a> z <a href="https://www.nextflow.io/docs/latest/developer-env.html#devenv-nextflow">rozszerzeniem Nextflow</a></li>
 </ul>
-<p>Aplikacja VSCode jest technicznie opcjonalna, ale zdecydowanie zalecamy jej użycie zarówno do pracy z kursami, jak i do ogólnej pracy z Nextflow.</p>
-<p>Podręcznik dokumentacji Nextflow zawiera instrukcje instalacji tych zależności w sekcji <a href="https://www.nextflow.io/docs/latest/developer-env.html">Environment setup</a>.</p>
+<p>Aplikacja VSCode jest technicznie opcjonalna, ale zdecydowanie zalecamy jej użycie zarówno do pracy z kursami, jak i do ogólnego rozwijania projektów w Nextflow'ie.</p>
+<p>Podręcznik dokumentacji Nextflow'a zawiera instrukcje instalacji tych zależności w sekcji <a href="https://www.nextflow.io/docs/latest/developer-env.html">Environment setup</a>.</p>
 <h2 id="nextflow-i-narzedzia-nf-core">Nextflow i narzędzia nf-core<a class="headerlink" href="#nextflow-i-narzedzia-nf-core" title="Permanent link">&para;</a></h2>
 <p>Będziesz musiał zainstalować sam Nextflow oraz narzędzia nf-core, jak opisano w artykułach podlinkowanych poniżej:</p>
 <ul>
-<li><a href="https://www.nextflow.io/docs/latest/install.html">Instalacja Nextflow</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/install.html">Instalacja Nextflow'a</a></li>
 <li><a href="https://nf-co.re/docs/nf-core-tools/installation">Narzędzia nf-core</a></li>
 </ul>
-<p>Zalecamy użycie opcji samoinstalacji dla Nextflow i opcji PyPI dla narzędzi nf-core.</p>
+<p>Zalecamy użycie opcji samoinstalacji dla Nextflow'a i opcji PyPI dla narzędzi nf-core.</p>
 <div class="admonition warning">
 <p class="admonition-title">Kompatybilność wersji</p>
 <p><!-- Any update to this content needs to be copied to the home page -->
-<strong>Od stycznia 2026 roku wszystkie nasze kursy szkoleniowe Nextflow wymagają wersji Nextflow 25.10.2 lub nowszej, z włączoną ścisłą składnią v2, chyba że zaznaczono inaczej.</strong></p>
-<p>Więcej informacji o wymaganiach wersji i ścisłej składni v2 znajdziesz w przewodniku <a href="../../info/nxf_versions/">Wersje Nextflow</a>.</p>
+<strong>Od stycznia 2026 roku wszystkie nasze kursy szkoleniowe Nextflow wymagają wersji Nextflow'a 25.10.2 lub nowszej, z włączoną ścisłą składnią v2, chyba że zaznaczono inaczej.</strong></p>
+<p>Więcej informacji o wymaganiach wersji i ścisłej składni v2 znajdziesz w przewodniku <a href="../../info/nxf_versions/">Wersje Nextflow'a</a>.</p>
 <p>Starsze wersje materiałów szkoleniowych odpowiadające wcześniejszej składni są dostępne poprzez selektor wersji w pasku menu tej strony.</p>
 </div>
 <h2 id="materiay-szkoleniowe">Materiały szkoleniowe<a class="headerlink" href="#materiay-szkoleniowe" title="Permanent link">&para;</a></h2>
@@ -3602,7 +3602,7 @@ Nasze kursy szkoleniowe mają kilka dodatkowych wymagań.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/nextflow-io/training.git
 </code></pre></div>
 <p>Każdy kurs ma swój własny katalog.
-Aby rozpocząć pracę, otwórz okno terminala (najlepiej z poziomu aplikacji VSCode) i przejdź za pomocą <code>cd</code> do odpowiedniego katalogu.</p>
+Aby rozpocząć pracę z kursem, otwórz okno terminala (najlepiej z poziomu aplikacji VSCode) i przejdź za pomocą <code>cd</code> do odpowiedniego katalogu.</p>
 <p>Następnie możesz postępować zgodnie z instrukcjami kursu dostarczonymi na stronie internetowej.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;

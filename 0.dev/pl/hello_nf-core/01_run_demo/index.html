@@ -1140,7 +1140,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -1407,10 +1407,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-skrypt-entrypoint-mainnf" class="md-nav__link">
+  <a href="#312-skrypt-punktu-wejscia-mainnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. Skrypt entrypoint: main.nf
+        3.1.2. Skrypt punktu wejścia: main.nf
       
     </span>
   </a>
@@ -1440,10 +1440,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#315-subworkflows-housekeepingowe" class="md-nav__link">
+  <a href="#315-subworkflows-pomocnicze" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.5. Subworkflows housekeepingowe
+        3.1.5. Subworkflows pomocnicze
       
     </span>
   </a>
@@ -3021,7 +3021,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3726,10 +3726,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#312-skrypt-entrypoint-mainnf" class="md-nav__link">
+  <a href="#312-skrypt-punktu-wejscia-mainnf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.2. Skrypt entrypoint: main.nf
+        3.1.2. Skrypt punktu wejścia: main.nf
       
     </span>
   </a>
@@ -3759,10 +3759,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#315-subworkflows-housekeepingowe" class="md-nav__link">
+  <a href="#315-subworkflows-pomocnicze" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1.5. Subworkflows housekeepingowe
+        3.1.5. Subworkflows pomocnicze
       
     </span>
   </a>
@@ -4081,18 +4081,17 @@
 
 <h1 id="czesc-1-uruchomienie-demonstracyjnego-pipelinea">Część 1: Uruchomienie demonstracyjnego pipeline'a<a class="headerlink" href="#czesc-1-uruchomienie-demonstracyjnego-pipelinea" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>W tej pierwszej części szkolenia Hello nf-core pokażemy Ci, jak znaleźć i wypróbować pipeline nf-core.
-Dowiesz się również, jak zorganizowany jest kod oraz czym różni się on od zwykłego kodu Nextflow przedstawionego w <a href="../../hello_nextflow/">Hello Nextflow</a>.</p>
-<p>Będziemy używać pipeline'a o nazwie nf-core/demo, który jest utrzymywany przez projekt nf-core jako część jego inwentarza pipeline'ów służących do demonstracji struktury kodu i operacji narzędzi.</p>
+<p>W tej pierwszej części szkolenia Hello nf-core pokażemy Ci, jak znaleźć i wypróbować pipeline nf-core, zrozumieć, jak zorganizowany jest kod oraz rozpoznać, czym różni się on od zwykłego kodu Nextflow przedstawionego w <a href="../../hello_nextflow/">Hello Nextflow</a>.</p>
+<p>Będziemy używać pipeline'a o nazwie nf-core/demo, który jest utrzymywany przez projekt nf-core jako część inwentarza pipeline'ów służących do demonstracji struktury kodu i operacji narzędzi.</p>
 <p>Upewnij się, że Twój katalog roboczy jest ustawiony na <code>hello-nf-core/</code>, jak wskazano na stronie <a href="../00_orientation/">Pierwsze kroki</a>.</p>
 <hr />
 <h2 id="1-znajdz-i-pobierz-pipeline-nf-coredemo">1. Znajdź i pobierz pipeline nf-core/demo<a class="headerlink" href="#1-znajdz-i-pobierz-pipeline-nf-coredemo" title="Permanent link">&para;</a></h2>
-<p>Zacznijmy od zlokalizowania nf-core/demo na stronie projektu pod adresem <a href="https://nf-co.re">nf-co.re</a>, która centralizuje wszystkie informacje: ogólne artykuły pomocy, opisy poszczególnych workflow'ów, wpisy na blogu, ogłoszenia wydarzeń i tak dalej.</p>
+<p>Zacznijmy od zlokalizowania pipeline'a nf-core/demo na stronie projektu pod adresem <a href="https://nf-co.re">nf-co.re</a>, która centralizuje wszystkie informacje, takie jak: ogólna dokumentacja i artykuły pomocnicze, dokumentacja dla każdego z pipeline'ów, wpisy na blogu, ogłoszenia wydarzeń i tak dalej.</p>
 <h3 id="11-znajdz-pipeline-na-stronie-internetowej">1.1. Znajdź pipeline na stronie internetowej<a class="headerlink" href="#11-znajdz-pipeline-na-stronie-internetowej" title="Permanent link">&para;</a></h3>
 <p>W przeglądarce internetowej przejdź do <a href="https://nf-co.re/pipelines/">https://nf-co.re/pipelines/</a> i wpisz <code>demo</code> w pasku wyszukiwania.</p>
 <p><img alt="wyniki wyszukiwania" src="./img/search-results.png" /></p>
 <p>Kliknij nazwę pipeline'a, <code>demo</code>, aby uzyskać dostęp do strony dokumentacji pipeline'a.</p>
-<p>Każdy wydany pipeline ma dedykowaną stronę, która zawiera następujące sekcje dokumentacji:</p>
+<p>Każdy wydany pipeline ma dedykowaną stronę zawierającą następujące sekcje dokumentacji:</p>
 <ul>
 <li><strong>Introduction:</strong> Wprowadzenie i przegląd pipeline'a</li>
 <li><strong>Usage:</strong> Opisy sposobu wykonywania pipeline'a</li>
@@ -4101,15 +4100,15 @@ Dowiesz się również, jak zorganizowany jest kod oraz czym różni się on od 
 <li><strong>Results:</strong> Przykładowe pliki wyjściowe wygenerowane z pełnego zestawu danych testowych</li>
 <li><strong>Releases &amp; Statistics:</strong> Historia wersji pipeline'a i statystyki</li>
 </ul>
-<p>Za każdym razem, gdy rozważasz użycie nowego workflow'u, powinieneś najpierw uważnie przeczytać dokumentację, aby zrozumieć, co robi i jak powinien być skonfigurowany.</p>
+<p>Gdy rozważasz przyjęcie nowego pipeline'a, powinieneś najpierw uważnie przeczytać jego dokumentację, aby zrozumieć, co robi i jak powinien być skonfigurowany, zanim spróbujesz go uruchomić.</p>
 <p>Spójrz teraz i zobacz, czy możesz dowiedzieć się:</p>
 <ul>
 <li>Które narzędzia uruchomi pipeline (Sprawdź zakładkę: <code>Introduction</code>)</li>
-<li>Które wejścia i parametry pipeline akceptuje lub wymaga (Sprawdź zakładkę: <code>Parameters</code>)</li>
+<li>Jakie wejścia i parametry pipeline akceptuje lub wymaga (Sprawdź zakładkę: <code>Parameters</code>)</li>
 <li>Jakie są wyjścia produkowane przez pipeline (Sprawdź zakładkę: <code>Output</code>)</li>
 </ul>
 <h4 id="111-przeglad-pipelinea">1.1.1. Przegląd pipeline'a<a class="headerlink" href="#111-przeglad-pipelinea" title="Permanent link">&para;</a></h4>
-<p>Zakładka <code>Introduction</code> dostarcza przegląd workflow'u, w tym wizualną reprezentację (zwaną mapą metra) i listę narzędzi, które są uruchamiane jako jego część.</p>
+<p>Zakładka <code>Introduction</code> dostarcza przegląd pipeline'a, w tym wizualną reprezentację (zwaną mapą metra) i listę narzędzi uruchamianych jako część pipeline'a.</p>
 <p><img alt="mapa metra pipeline'a" src="./img/nf-core-demo-subway-cropped.png" /></p>
 <ol>
 <li>Read QC (FASTQC)</li>
@@ -4123,7 +4122,7 @@ Dowiesz się również, jak zorganizowany jest kod oraz czym różni się on od 
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--input<span class="w"> </span>samplesheet.csv<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>--outdir<span class="w"> </span>&lt;OUTDIR&gt;
 </code></pre></div>
-<p>Zauważysz, że przykładowe polecenie NIE określa pliku workflow, tylko referencję do repozytorium pipeline'a, <code>nf-core/demo</code>.</p>
+<p>Zauważysz, że przykładowe polecenie NIE określa pliku workflow'u, tylko referencję do repozytorium pipeline'a, <code>nf-core/demo</code>.</p>
 <p>Gdy jest wywoływany w ten sposób, Nextflow zakłada, że kod jest zorganizowany w określony sposób.
 Pobierzmy kod, abyśmy mogli zbadać tę strukturę.</p>
 <h3 id="12-pobierz-kod-pipelinea">1.2. Pobierz kod pipeline'a<a class="headerlink" href="#12-pobierz-kod-pipelinea" title="Permanent link">&para;</a></h3>
@@ -4139,7 +4138,7 @@ Na szczęście Nextflow ułatwia pobieranie pipeline'ów z poprawnie sformatowan
 </code></pre></div>
 </details>
 <p>Nextflow wykonuje <code>pull</code> kodu pipeline'a, co oznacza, że pobiera całe repozytorium na Twój dysk lokalny.</p>
-<p>Wyjaśnijmy, że możesz to zrobić z każdym workflow'em Nextflow, który jest odpowiednio skonfigurowany w GitHub, nie tylko z projektami nf-core.
+<p>Wyjaśnijmy, że możesz to zrobić z każdym workflow'em Nextflow, który jest odpowiednio skonfigurowany w GitHub, nie tylko z pipeline'ami nf-core.
 Jednak nf-core to największa otwarta kolekcja workflow'ów Nextflow.</p>
 <p>Możesz uzyskać od Nextflow listę pipeline'ów, które pobrałeś w ten sposób:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>nextflow<span class="w"> </span>list
@@ -4163,7 +4162,7 @@ Domyślnie Nextflow zapisuje je w <code>$NXF_HOME/assets</code>.</p>
 <p class="admonition-title">Note</p>
 <p>Pełna ścieżka może się różnić w Twoim systemie, jeśli nie używasz naszego środowiska szkoleniowego.</p>
 </div>
-<p>Nextflow celowo trzyma pobrane źródła 'z dala od drogi' w oparciu o zasadę, że te workflow'y powinny być używane bardziej jak biblioteki niż pliki, z którymi bezpośrednio współdziałasz.</p>
+<p>Nextflow celowo trzyma pobrany kod źródłowy 'z dala od drogi' w oparciu o zasadę, że te pipeline'y powinny być używane bardziej jak biblioteki niż kod, z którym bezpośrednio współdziałasz.</p>
 <p>Jednak dla celów tego szkolenia chcemy móc zagłębiać się i zobaczyć, co tam jest.
 Więc aby to ułatwić, stwórzmy dowiązanie symboliczne do tej lokalizacji z naszego bieżącego katalogu roboczego.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>ln<span class="w"> </span>-s<span class="w"> </span><span class="nv">$NXF_HOME</span>/assets<span class="w"> </span>pipelines
@@ -4180,7 +4179,7 @@ Więc aby to ułatwić, stwórzmy dowiązanie symboliczne do tej lokalizacji z n
 <p>Teraz możemy łatwiej zajrzeć do kodu źródłowego w razie potrzeby.</p>
 <p>Ale najpierw spróbujmy uruchomić nasz pierwszy pipeline nf-core!</p>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
-<p>Teraz wiesz, jak znaleźć pipeline za pośrednictwem strony nf-core i pobrać lokalną kopię kodu źródłowego.</p>
+<p>Wiesz, jak znaleźć pipeline za pośrednictwem strony nf-core i pobrać lokalną kopię kodu źródłowego.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
 <p>Dowiedz się, jak wypróbować pipeline nf-core przy minimalnym wysiłku.</p>
 <hr />
@@ -4339,7 +4338,7 @@ Jeśli podążysz za linkiem do wstępnie skonfigurowanego wejścia, zobaczysz, 
 </details>
 <p>Jeśli Twoje wyjście pasuje do tego, gratulacje! Właśnie uruchomiłeś Swój pierwszy pipeline nf-core.</p>
 <p>Zauważysz, że jest znacznie więcej wyjścia konsoli niż podczas uruchamiania podstawowego pipeline'a Nextflow.
-Jest nagłówek, który zawiera podsumowanie wersji pipeline'a, wejść i wyjść oraz kilka elementów konfiguracji.</p>
+Jest nagłówek, który zawiera podsumowanie wersji pipeline'a, wejść i wyjść oraz kilku elementów konfiguracji.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Twoje wyjście pokaże różne znaczniki czasu, nazwy wykonań i ścieżki plików, ale ogólna struktura i wykonanie procesów powinny być podobne.</p>
@@ -4349,8 +4348,8 @@ Jest nagłówek, który zawiera podsumowanie wersji pipeline'a, wejść i wyjś�
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="go">    [39/731ab7] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE3_SE) | 3 of 3 ✔</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">    [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔</span>
 </code></pre></div>
-<p>To mówi nam, że zostały uruchomione trzy procesy, odpowiadające trzem narzędziom pokazanym w dokumentacji na stronie nf-core: FASTQC, SEQTK_TRIM i MULTIQC.</p>
-<p>Pełne nazwy procesów, jak pokazano tutaj, takie jak <code>NFCORE_DEMO:DEMO:MULTIQC</code>, są dłuższe niż to, co mogłeś zobaczyć w wstępnym materiale Hello Nextflow.
+<p>To mówi nam, że zostały uruchomione trzy procesy, odpowiadające trzem narzędziom pokazanym na stronie dokumentacji pipeline'a na stronie nf-core: FASTQC, SEQTK_TRIM i MULTIQC.</p>
+<p>Pełne nazwy procesów, jak pokazano tutaj, takie jak <code>NFCORE_DEMO:DEMO:MULTIQC</code>, są dłuższe niż to, co mogłeś zobaczyć we wstępnym materiale Hello Nextflow.
 Zawierają one nazwy ich workflow'ów nadrzędnych i odzwierciedlają modularność kodu pipeline'a.
 Zajmiemy się tym bardziej szczegółowo za chwilę.</p>
 <h3 id="23-zbadaj-wyjscia-pipelinea">2.3. Zbadaj wyjścia pipeline'a<a class="headerlink" href="#23-zbadaj-wyjscia-pipelinea" title="Permanent link">&para;</a></h3>
@@ -4398,9 +4397,9 @@ Aby zobaczyć ich równoległe uruchomienie, spróbuj zwiększyć alokację CPU 
 <p>Dowiedz się, jak kod pipeline'a jest zorganizowany.</p>
 <hr />
 <h2 id="3-zbadaj-strukture-kodu-pipelinea">3. Zbadaj strukturę kodu pipeline'a<a class="headerlink" href="#3-zbadaj-strukture-kodu-pipelinea" title="Permanent link">&para;</a></h2>
-<p>Teraz, gdy pomyślnie uruchomiliśmy workflow jako użytkownicy, zmieńmy naszą perspektywę, aby przyjrzeć się wewnętrznej organizacji projektów nf-core.</p>
-<p>Społeczność egzekwuje silne wytyczne dotyczące struktury workflow'ów oraz sposobu organizacji, konfiguracji i dokumentowania kodu.
-Zrozumienie, jak to wszystko jest zorganizowane, jest pierwszym krokiem w kierunku tworzenia własnych pipeline'ów kompatybilnych z nf-core, co podejmiemy w Części 2 tego kursu.</p>
+<p>Teraz, gdy pomyślnie uruchomiliśmy pipeline jako użytkownicy, zmieńmy naszą perspektywę, aby przyjrzeć się wewnętrznej organizacji pipeline'ów nf-core.</p>
+<p>Projekt nf-core egzekwuje silne wytyczne dotyczące tego, jak powinny być strukturyzowane pipeline'y oraz jak powinien być zorganizowany, skonfigurowany i udokumentowany kod.
+Zrozumienie tego, jak to wszystko jest zorganizowane, jest pierwszym krokiem w kierunku tworzenia własnych pipeline'ów kompatybilnych z nf-core, co podejmiemy w Części 2 tego kursu.</p>
 <p>Spójrzmy, jak kod pipeline'a jest zorganizowany w repozytorium <code>nf-core/demo</code>, używając dowiązania symbolicznego <code>pipelines</code>, które utworzyliśmy wcześniej.</p>
 <p>Możesz użyć <code>tree</code> lub użyć eksploratora plików, aby znaleźć i otworzyć katalog <code>nf-core/demo</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">1</span><span class="w"> </span>pipelines/nf-core/demo
@@ -4442,12 +4441,12 @@ Cała ta zawartość jest używana do programowego generowania stron internetowy
 <p>Zacznijmy od komponentów kodu pipeline'a.
 Skoncentrujemy się na hierarchii plików i organizacji strukturalnej, zamiast zagłębiać się w kod w poszczególnych plikach.</p>
 <h3 id="31-komponenty-kodu-pipelinea">3.1. Komponenty kodu pipeline'a<a class="headerlink" href="#31-komponenty-kodu-pipelinea" title="Permanent link">&para;</a></h3>
-<p>Standardowa organizacja projektu nf-core podąża za modularną strukturą, która jest zaprojektowana tak, aby maksymalizować ponowne użycie, jak wprowadzono w <a href="../../hello_nextflow/04_hello_modules/">Hello Modules</a>, Części 4 kursu <a href="../../hello_nextflow/">Hello Nextflow</a>, chociaż w prawdziwie nf-core'owym stylu, jest to zaimplementowane z odrobiną dodatkowej złożoności.
-Konkretnie, workflow'y nf-core obficie wykorzystują subworkflow'y, tj. skrypty importowane przez nadrzędny przepływ pracy.</p>
+<p>Standardowa organizacja kodu pipeline'a nf-core podąża za modularną strukturą zaprojektowaną tak, aby maksymalizować ponowne użycie kodu, jak wprowadzono w <a href="../../hello_nextflow/04_hello_modules/">Hello Modules</a>, Części 4 kursu <a href="../../hello_nextflow/">Hello Nextflow</a>, chociaż w prawdziwie nf-core'owym stylu jest to zaimplementowane z odrobiną dodatkowej złożoności.
+Konkretnie, pipeline'y nf-core obficie wykorzystują subworkflow'y, tj. skrypty importowane przez nadrzędny workflow.</p>
 <p>To może brzmieć trochę abstrakcyjnie, więc spójrzmy, jak jest to używane w praktyce w pipeline'ie <code>nf-core/demo</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Nie przejdziemy przez faktyczny kod dla <em>sposobu</em>, w jaki te komponenty modułowe są połączone, ponieważ istnieje pewna dodatkowa złożoność związana z użyciem subworkflow'ów, która może być myląca, a zrozumienie tego nie jest konieczne na tym etapie szkolenia.
+<p>Nie przejdziemy przez faktyczny kod opisujący <em>sposób</em>, w jaki te komponenty modułowe są połączone, ponieważ istnieje pewna dodatkowa złożoność związana z użyciem subworkflow'ów, która może być myląca. Zrozumienie tego nie jest konieczne na tym etapie szkolenia.
 Na razie skoncentrujemy się na ogólnej organizacji i logice.</p>
 </div>
 <h4 id="311-ogolny-przeglad">3.1.1. Ogólny przegląd<a class="headerlink" href="#311-ogolny-przeglad" title="Permanent link">&para;</a></h4>
@@ -4460,19 +4459,19 @@ Na razie skoncentrujemy się na ogólnej organizacji i logice.</p>
           @font-face { font-family: Comic Shanns; src: url(data:font/woff2;base64,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); }</style></defs><rect x="0" y="0" width="1134.1970541096307" height="484.2408918006713" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(11.009968220279916 56.2838775424334) rotate(0 137.76143535565734 201.44854216470776)"><path d="M0.3 -0.19 L275.97 0.41 L276.38 404.15 L-1.35 403.72" stroke="none" stroke-width="0" fill="#ffc9c9"></path><path d="M0 0 C71.03 1.7, 141.85 1.35, 275.52 0 M0 0 C69.63 1.01, 140.27 1.61, 275.52 0 M275.52 0 C274.25 145.18, 275.54 292.03, 275.52 402.9 M275.52 0 C276.03 83.5, 276.18 167.92, 275.52 402.9 M275.52 402.9 C209.76 401.94, 147.59 402.27, 0 402.9 M275.52 402.9 C175.81 402.82, 75.74 403.16, 0 402.9 M0 402.9 C-0.41 295.02, 0.09 188.1, 0 0 M0 402.9 C0.34 287.95, 0.18 172.18, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(548.113332400887 315.1745275199937) rotate(0 57.3742056218652 79.5331821403388)"><path d="M0.01 1.81 L116.37 0.15 L115.36 159.34 L-0.67 158.04" stroke="none" stroke-width="0" fill="#ffc9c9"></path><path d="M0 0 C45.95 -2.99, 89.58 -0.8, 114.75 0 M0 0 C35.72 -0.19, 72.22 -0.63, 114.75 0 M114.75 0 C116.33 41.89, 115.36 79.71, 114.75 159.07 M114.75 0 C112.95 50.84, 114.11 101.92, 114.75 159.07 M114.75 159.07 C82.43 157.22, 49.46 157, 0 159.07 M114.75 159.07 C86.28 159.34, 58.04 160.43, 0 159.07 M0 159.07 C-0.1 117.07, -0.55 74.87, 0 0 M0 159.07 C0.69 117.8, 0.16 74.96, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(526.7621425645541 293.68811348136387) rotate(0 57.3742056218652 79.5331821403388)"><path d="M-1.41 -1.92 L116.61 -0.62 L114.22 159.95 L-0.77 160.39" stroke="none" stroke-width="0" fill="#ffc9c9"></path><path d="M0 0 C29.38 0.59, 61.29 1.02, 114.75 0 M0 0 C25.44 0.73, 49.71 0.68, 114.75 0 M114.75 0 C112.35 53.62, 115.21 108.19, 114.75 159.07 M114.75 0 C115.02 60.54, 115.94 121.08, 114.75 159.07 M114.75 159.07 C85.93 160.31, 55.41 161.36, 0 159.07 M114.75 159.07 C68.73 160.1, 22.86 159.85, 0 159.07 M0 159.07 C-2.67 98.49, -1.22 36.44, 0 0 M0 159.07 C1.8 103.78, 0.85 45.87, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(507.0763455354552 275.6036556899908) rotate(0 57.3742056218652 79.5331821403388)"><path d="M1.22 -1.33 L116.58 1.37 L115.33 160.24 L0.26 160.38" stroke="none" stroke-width="0" fill="#ffc9c9"></path><path d="M0 0 C28.59 1.4, 57.88 -1.37, 114.75 0 M0 0 C41.14 0.84, 84.6 1.01, 114.75 0 M114.75 0 C114.48 36.98, 114.9 72.82, 114.75 159.07 M114.75 0 C112.83 55.32, 113.39 110.08, 114.75 159.07 M114.75 159.07 C70.79 159.22, 27.54 157.98, 0 159.07 M114.75 159.07 C79.66 158.97, 43.24 159.16, 0 159.07 M0 159.07 C1.09 106.02, 0.17 51.16, 0 0 M0 159.07 C-0.66 120.31, -0.39 83.17, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(506.8583807468133 56.27766804289786) rotate(0 57.3742056218652 79.5331821403388)"><path d="M1.14 0.09 L116.44 -1.99 L115.53 158.7 L-0.36 159.91" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C28.3 -1.04, 58.04 -0.95, 114.75 0 M0 0 C25.91 1.68, 50.88 0.41, 114.75 0 M114.75 0 C117.8 37.86, 114.62 76.85, 114.75 159.07 M114.75 0 C116.08 55.39, 114.94 109.3, 114.75 159.07 M114.75 159.07 C82.55 159.26, 50.08 160.31, 0 159.07 M114.75 159.07 C71.61 159.03, 29.4 159.67, 0 159.07 M0 159.07 C-2.34 120.01, -0.99 81.82, 0 0 M0 159.07 C-1.7 112.44, -1.61 68.67, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(814.0611590633192 153.47950255738397) rotate(0 35.67783821651199 38.82713871737087)"><path d="M-1.08 1.51 L72.26 0.52 L72.48 79.57 L1.18 76.83" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C25.57 1.03, 52.2 -1.62, 71.36 0 M0 0 C20.38 0.22, 41.05 -0.51, 71.36 0 M71.36 0 C73.87 25.88, 74.07 54.31, 71.36 77.65 M71.36 0 C71.37 26.67, 72.38 51.8, 71.36 77.65 M71.36 77.65 C46.09 76.02, 19.14 77.83, 0 77.65 M71.36 77.65 C44.72 77.62, 18.95 76.65, 0 77.65 M0 77.65 C-0.9 50.37, -1.91 22.46, 0 0 M0 77.65 C0.5 59.66, 0.09 42.78, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(798.378710128533 139.5549682524561) rotate(0 35.67783821651199 38.82713871737087)"><path d="M-0.92 1.22 L71.94 1.95 L71.76 78.8 L1.02 78.51" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C17.94 0.88, 35.89 1.18, 71.36 0 M0 0 C21.87 0.24, 44.34 0.36, 71.36 0 M71.36 0 C71.87 18.5, 72.54 36.71, 71.36 77.65 M71.36 0 C72.17 25.96, 72.21 50.55, 71.36 77.65 M71.36 77.65 C49.2 77.36, 23.16 75.81, 0 77.65 M71.36 77.65 C47.05 76, 21.44 76.63, 0 77.65 M0 77.65 C-0.01 50, 0.74 23.8, 0 0 M0 77.65 C-0.09 50.61, -0.09 25.05, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g stroke-linecap="round" transform="translate(781.7461332460299 124.68030599981012) rotate(0 35.67783821651199 38.82713871737087)"><path d="M-1.8 0.73 L70.4 0.22 L72.16 76.67 L1.51 79.38" stroke="none" stroke-width="0" fill="#ffec99"></path><path d="M0 0 C26.69 -1.83, 51.92 -1.39, 71.36 0 M0 0 C23.53 -0.4, 47.58 0.46, 71.36 0 M71.36 0 C70.57 19.46, 72.65 34.85, 71.36 77.65 M71.36 0 C72.78 23.89, 72.53 47.65, 71.36 77.65 M71.36 77.65 C52.95 75.68, 38.36 75.85, 0 77.65 M71.36 77.65 C52.47 76.72, 32.84 76.79, 0 77.65 M0 77.65 C0.4 53.28, -1.49 26.23, 0 0 M0 77.65 C-0.44 49.3, 0.5 21.53, 0 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g><g transform="translate(691.0599382486749 315.5400578460267) rotate(0 98.04195404052734 17.5)"><text x="0" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">subworkflows/</text></g><g transform="translate(507.8413346740314 10) rotate(0 126.12594604492188 17.5)"><text x="0" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">workflows/demo.nf</text></g><g transform="translate(914.6612787438465 158.3033931071932) rotate(0 90.24991607666016 37.5)"><text x="0" y="17.619999999999997" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">fastqc/main.nf</text><text x="0" y="42.62" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">multiqc/main.nf</text><text x="0" y="67.62" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">seqtk/trim/main.nf</text></g><g transform="translate(10 10) rotate(0 46.28398132324219 17.5)"><text x="0" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">main.nf</text></g><g stroke-linecap="round"><g transform="translate(441.42658997238937 110.63067651277652) rotate(0 0 105.22511406549984)"><path d="M0 0 C-0.01 48.45, -2.42 97.07, 0 210.45 M0 0 C1.65 64.19, 0.61 127.53, 0 210.45" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(622.6223592555799 148.44746549119463) rotate(0 79.2798935043827 0)"><path d="M0 0 C37.96 1.01, 74.77 -0.38, 158.56 0 M0 0 C36.57 1.98, 71.55 1.56, 158.56 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g transform="translate(310.35554471456396 185.54731559262473) rotate(0 38.5 12.5)"><text x="0" y="17.5" font-family="Comic Shanns, monospace, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">include</text></g><g transform="translate(646.2594670204861 117.85982132738536) rotate(0 38.5 12.5)"><text x="0" y="17.5" font-family="Comic Shanns, monospace, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">include</text></g><g transform="translate(782.2240313845433 81.97926355788695) rotate(0 116.33995056152344 17.5)"><text x="0" y="24.668" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="28px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">modules/nf-core/</text></g><g transform="translate(733.6173727131462 374.812340213859) rotate(0 195.2898406982422 37.5)"><text x="0" y="17.619999999999997" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">local/utils_nfcore_demo_pipeline/main.nf</text><text x="0" y="42.62" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic"></text><text x="0" y="67.62" font-family="Excalifont, Xiaolai, sans-serif, Segoe UI Emoji" font-size="20px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">nf-core/utils_*/main.nf</text></g><g stroke-linecap="round"><g transform="translate(288.68328253393486 213.34429050586186) rotate(0 77.04238836558841 0)"><path d="M0 0 C47.91 -0.38, 98.93 1.59, 154.08 0 M0 0 C48.77 -0.03, 99.16 -0.21, 154.08 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(441.58737339681966 109.77591149906493) rotate(0 30.86181148584683 0)"><path d="M0 0 C12.18 1.25, 24.62 1.22, 61.72 0 M0 0 C15.9 0.34, 30.38 0.07, 61.72 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(441.2430066852345 320.40906359213204) rotate(0 31.033994841639412 0)"><path d="M0 0 C23.19 1.91, 45.48 -0.03, 62.07 0 M0 0 C14.23 -1.09, 28.41 0.81, 62.07 0" stroke="#1e1e1e" stroke-width="4" fill="none"></path></g></g><mask></mask></svg>
 </figure>
 
-<p>Istnieje tak zwany skrypt <em>entrypoint</em> o nazwie <code>main.nf</code>, który działa jako wrapper dla dwóch rodzajów zagnieżdżonych workflow'ów: workflow'u zawierającego rzeczywistą logikę analizy, zlokalizowanego w <code>workflows/</code> i nazwanego <code>demo.nf</code>, oraz zestawu workflow'ów housekeepingowych zlokalizowanych w <code>subworkflows/</code>.
-Workflow <code>demo.nf</code> wywołuje <strong>moduły</strong> zlokalizowane w <code>modules/</code>; zawierają one <strong>procesy</strong>, które będą wykonywać rzeczywiste kroki analizy.</p>
+<p>Istnieje tak zwany skrypt <em>punktu wejścia</em> o nazwie <code>main.nf</code>, który działa jako wrapper dla dwóch rodzajów zagnieżdżonych workflow'ów: workflow'u zawierającego rzeczywistą logikę analizy, zlokalizowanego w <code>workflows/</code> i nazwanego <code>demo.nf</code>, oraz zestawu workflow'ów pomocniczych zlokalizowanych w <code>subworkflows/</code>.
+Workflow <code>demo.nf</code> wywołuje <strong>moduły</strong> zlokalizowane w <code>modules/</code>; zawierają one <strong>procesy</strong>, które wykonają rzeczywiste kroki analizy.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Subworkflows nie są ograniczone do funkcji housekeepingowych i mogą wykorzystywać moduły procesów.</p>
-<p>Pipeline <code>nf-core/demo</code> pokazany tutaj jest po prostszej stronie spektrum, ale inne pipeline'y nf-core (takie jak <code>nf-core/rnaseq</code>) wykorzystują subworkflow'y, które są zaangażowane w rzeczywistą analizę.</p>
+<p>Subworkflow'y nie są ograniczone do funkcji pomocniczych i mogą wykorzystywać moduły procesów.</p>
+<p>Pipeline <code>nf-core/demo</code> pokazany tutaj jest po prostszej stronie spektrum, ale inne pipeline'y nf-core (takie jak <code>nf-core/rnaseq</code>) wykorzystują subworkflow'y zaangażowane w rzeczywistą analizę.</p>
 </div>
 <p>Teraz przejrzyjmy te komponenty po kolei.</p>
-<h4 id="312-skrypt-entrypoint-mainnf">3.1.2. Skrypt entrypoint: <code>main.nf</code><a class="headerlink" href="#312-skrypt-entrypoint-mainnf" title="Permanent link">&para;</a></h4>
+<h4 id="312-skrypt-punktu-wejscia-mainnf">3.1.2. Skrypt punktu wejścia: <code>main.nf</code><a class="headerlink" href="#312-skrypt-punktu-wejscia-mainnf" title="Permanent link">&para;</a></h4>
 <p>Skrypt <code>main.nf</code> jest punktem wejścia, od którego Nextflow rozpoczyna, gdy wykonujemy <code>nextflow run nf-core/demo</code>.
-Oznacza to, że gdy wywołujesz to polecenie, Nextflow automatycznie znajduje i wykonuje plik <code>main.nf</code>.
+Oznacza to, że gdy uruchamiasz <code>nextflow run nf-core/demo</code> aby uruchomić pipeline, Nextflow automatycznie znajduje i wykonuje skrypt <code>main.nf</code>.
 Działa to dla każdego pipeline'a Nextflow, który podąża za tą konwencjonalną nazwą i strukturą, nie tylko dla pipeline'ów nf-core.</p>
-<p>Użycie skryptu entrypoint ułatwia uruchamianie ustandaryzowanych subworkflow'ów 'housekeepingowych' przed i po uruchomieniu właściwego skryptu analizy.
+<p>Użycie skryptu punktu wejścia ułatwia uruchamianie ustandaryzowanych 'pomocniczych' subworkflow'ów przed i po uruchomieniu właściwego skryptu analizy.
 Przejdziemy przez nie po tym, jak przejrzymy rzeczywisty workflow analizy i jego moduły.</p>
 <h4 id="313-skrypt-analizy-workflowsdemonf">3.1.3. Skrypt analizy: <code>workflows/demo.nf</code><a class="headerlink" href="#313-skrypt-analizy-workflowsdemonf" title="Permanent link">&para;</a></h4>
 <p>Workflow <code>workflows/demo.nf</code> to miejsce, w którym przechowywana jest centralna logika pipeline'a.
@@ -4518,9 +4517,9 @@ Jeśli narzędzie należy do zestawu narzędzi (tj. pakietu zawierającego wiele
 W tym przypadku nie ma żadnych modułów <code>local</code>.</p>
 <p>Plik kodu modułu opisujący proces zawsze nazywa się <code>main.nf</code> i jest accompanied by testami i plikami <code>.yml</code>, które na razie zignorujem.</p>
 <p>Razem wzięte, workflow punktu wejścia, workflow analizy i moduły są wystarczające do uruchomienia 'interesujących' części pipeline'a.
-Jednak wiemy, że są tam również subworkflow'y housekeepingowe, więc spójrzmy na nie teraz.</p>
-<h4 id="315-subworkflows-housekeepingowe">3.1.5. Subworkflows housekeepingowe<a class="headerlink" href="#315-subworkflows-housekeepingowe" title="Permanent link">&para;</a></h4>
-<p>Podobnie jak moduły, subworkflow'y są różnicowane na katalogi <code>local</code> i <code>nf-core</code>, a każdy subworkflow ma Swoją własną zagnieżdżoną strukturę katalogów ze Swoim własnym skryptem <code>main.nf</code>, testami i plikiem <code>.yml</code>.</p>
+Jednak wiemy, że są tam również subworkflow'y pomocnicze, więc spójrzmy na nie teraz.</p>
+<h4 id="315-subworkflows-pomocnicze">3.1.5. Subworkflows pomocnicze<a class="headerlink" href="#315-subworkflows-pomocnicze" title="Permanent link">&para;</a></h4>
+<p>Podobnie jak moduły, subworkflow'y są różnicowane na katalogi <code>local</code> i <code>nf-core</code>, a każdy subworkflow ma swoją własną zagnieżdżoną strukturę katalogów ze swoim własnym skryptem <code>main.nf</code>, testami i plikiem <code>.yml</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>tree<span class="w"> </span>-L<span class="w"> </span><span class="m">3</span><span class="w"> </span>pipelines/nf-core/demo/subworkflows
 </code></pre></div>
 <details class="abstract">
@@ -4546,7 +4545,7 @@ Jednak wiemy, że są tam również subworkflow'y housekeepingowe, więc spójrz
 <a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="go">9 directories, 7 files</span>
 </code></pre></div>
 </details>
-<p>Jak zauważono powyżej, pipeline <code>nf-core/demo</code> nie zawiera żadnych subworkflow'ów specyficznych dla analizy, więc wszystkie subworkflow'y, które tutaj widzimy, są tak zwanymi workflow'ami 'housekeepingowymi' lub 'użytkowymi', jak wskazuje prefiks <code>utils_</code> w ich nazwach.
+<p>Jak zauważono powyżej, pipeline <code>nf-core/demo</code> nie zawiera żadnych subworkflow'ów specyficznych dla analizy, więc wszystkie subworkflow'y, które tutaj widzimy, są tak zwanymi workflow'ami 'pomocniczymi' lub 'użytkowymi', jak wskazuje prefiks <code>utils_</code> w ich nazwach.
 Te subworkflow'y to te, które produkują wymyślny nagłówek nf-core w wyjściu konsoli, między innymi funkcjami akcesoriów.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -4555,8 +4554,8 @@ Te subworkflow'y to te, które produkują wymyślny nagłówek nf-core w wyjści
 <p>To kończy zestawienie podstawowych komponentów kodu, które stanowią pipeline <code>nf-core/demo</code>.
 Teraz spójrzmy na pozostałe elementy, o których powinieneś wiedzieć trochę przed zagłębieniem się w rozwój: konfigurację pipeline'a i walidację wejścia.</p>
 <h3 id="32-konfiguracja-pipelinea">3.2. Konfiguracja pipeline'a<a class="headerlink" href="#32-konfiguracja-pipelinea" title="Permanent link">&para;</a></h3>
-<p>Nauczyłeś się wcześniej, że Nextflow oferuje wiele opcji zarządzania wykonaniem workflow'u, czy to w zakresie wejść i parametrów, zasobów obliczeniowych i innych aspektów orkiestracji.
-Projekt nf-core stosuje wysoce ustandaryzowane wytyczne oparte na elastycznych możliwościach dostosowywania Nextflow, co zapewnia większą spójność i łatwość konserwacji między różnymi workflow'ami.</p>
+<p>Nauczyłeś się wcześniej, że Nextflow oferuje wiele opcji konfigurowania wykonania pipeline'a, czy to w zakresie wejść i parametrów, zasobów obliczeniowych i innych aspektów orkiestracji.
+Projekt nf-core stosuje wysoce ustandaryzowane wytyczne dla konfiguracji pipeline'ów, które mają na celu budowanie na elastycznych możliwościach dostosowywania Nextflow w sposób zapewniający większą spójność i łatwość konserwacji między pipeline'ami.</p>
 <p>Centralny plik konfiguracyjny <code>nextflow.config</code> jest używany do ustawiania domyślnych wartości dla parametrów i innych opcji konfiguracyjnych.
 Większość tych opcji konfiguracyjnych jest stosowana domyślnie, podczas gdy inne (np. profile zależności oprogramowania) są włączone jako opcjonalne profile.</p>
 <p>Istnieje kilka dodatkowych plików konfiguracyjnych, które są przechowywane w katalogu <code>conf</code> i które mogą być dodane do konfiguracji domyślnie lub opcjonalnie jako profile:</p>
@@ -4566,7 +4565,7 @@ Większość tych opcji konfiguracyjnych jest stosowana domyślnie, podczas gdy 
 <li><code>test.config</code>: Profil do uruchomienia pipeline'a z minimalnymi danymi testowymi, który użyliśmy, gdy uruchomiliśmy pipeline demo.</li>
 <li><code>test_full.config</code>: Profil do uruchomienia pipeline'a z pełnowymiarowym zestawem danych testowych.</li>
 </ul>
-<p>Dotniemy kilka z tych plików później w kursie.</p>
+<p>Dotniemy kilku z tych plików później w kursie.</p>
 <h3 id="33-wejscia-i-walidacja">3.3. Wejścia i walidacja<a class="headerlink" href="#33-wejscia-i-walidacja" title="Permanent link">&para;</a></h3>
 <p>Jak zauważyliśmy wcześniej, gdy badaliśmy profil testowy pipeline'a <code>nf-core/demo</code>, jest on zaprojektowany tak, aby przyjmować jako wejście samplesheet zawierający ścieżki plików i identyfikatory próbek.
 Ścieżki plików były powiązane z rzeczywistymi danymi zlokalizowanymi w repozytorium <code>nf-core/test-datasets</code>.</p>
@@ -4584,7 +4583,7 @@ Powiązanym problemem jest sytuacja, gdy parametry są nieprawidłowo podane.</p
 Nazywa się to walidacją wejścia i idealnie powinno być wykonane <em>przed</em> próbą uruchomienia pipeline'a, zamiast czekać, aż pipeline się nie powiedzie, aby dowiedzieć się, że był problem z wejściami.</p>
 <p>Podobnie jak w przypadku konfiguracji, projekt nf-core jest bardzo zopiniowany na temat walidacji wejścia i zaleca użycie <a href="https://nextflow-io.github.io/nf-schema/latest/">wtyczki nf-schema</a>, wtyczki Nextflow, która zapewnia kompleksowe możliwości walidacji dla pipeline'ów Nextflow.</p>
 <p>Omówimy ten temat bardziej szczegółowo w Części 5 tego kursu.
-Na razie po prostu bądź świadomy, że istnieją dwa pliki JSON dostarczone w tym celu, <code>nextflow_schema.json</code> i <code>assets/schema_input.json</code>.</p>
+Na razie po prostu bądź świadomy, że istnieją dwa pliki JSON dostarczone w tym celu: <code>nextflow_schema.json</code> i <code>assets/schema_input.json</code>.</p>
 <p><code>nextflow_schema.json</code> to plik używany do przechowywania informacji o parametrach pipeline'a, w tym typ, opis i tekst pomocy w formacie czytelnym maszynowo.
 Jest to używane do różnych celów, w tym automatycznej walidacji parametrów, generowania tekstu pomocy i interaktywnego renderowania formularza parametrów w interfejsach użytkownika.</p>
 <p><code>schema_input.json</code> to plik używany do definiowania struktury samplesheet wejściowego.
@@ -6147,7 +6146,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Stopka" >
         
           
-          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="Poprzednia strona: Wprowadzenie">
+          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="Poprzednia strona: Pierwsze kroki">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6157,7 +6156,7 @@ window.mkdocsQuizConfig = {
                 Poprzednia strona
               </span>
               <div class="md-ellipsis">
-                Wprowadzenie
+                Pierwsze kroki
               </div>
             </div>
           </a>

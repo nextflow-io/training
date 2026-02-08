@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -1877,15 +1877,15 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-wstepne-qc-i-usuwanie-adapterow" class="md-nav__link">
+  <a href="#1-wstepne-qc-i-przycinanie-adapterow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Wstępne QC i usuwanie adapterów
+        1. Wstępne QC i przycinanie adapterów
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Wstępne QC i usuwanie adapterów">
+    <nav class="md-nav" aria-label="1. Wstępne QC i przycinanie adapterów">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1922,10 +1922,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-usuniecie-sekwencji-adapterow-za-pomoca-trim_galore" class="md-nav__link">
+  <a href="#14-przyciecie-sekwencji-adapterow-za-pomoca-trim_galore" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Usunięcie sekwencji adapterów za pomocą trim_galore
+        1.4. Przycięcie sekwencji adapterów za pomocą trim_galore
       
     </span>
   </a>
@@ -2989,7 +2989,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3502,15 +3502,15 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-wstepne-qc-i-usuwanie-adapterow" class="md-nav__link">
+  <a href="#1-wstepne-qc-i-przycinanie-adapterow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Wstępne QC i usuwanie adapterów
+        1. Wstępne QC i przycinanie adapterów
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Wstępne QC i usuwanie adapterów">
+    <nav class="md-nav" aria-label="1. Wstępne QC i przycinanie adapterów">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3547,10 +3547,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-usuniecie-sekwencji-adapterow-za-pomoca-trim_galore" class="md-nav__link">
+  <a href="#14-przyciecie-sekwencji-adapterow-za-pomoca-trim_galore" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.4. Usunięcie sekwencji adapterów za pomocą trim_galore
+        1.4. Przycięcie sekwencji adapterów za pomocą trim_galore
       
     </span>
   </a>
@@ -4016,36 +4016,30 @@
 <h1 id="czesc-1-przeglad-metody-i-manualne-testowanie">Część 1: Przegląd metody i manualne testowanie<a class="headerlink" href="#czesc-1-przeglad-metody-i-manualne-testowanie" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
 <p>Istnieje wiele prawidłowych metod przetwarzania i analizy danych bulk RNAseq.
-W tym szkoleniu stosujemy metodę opisaną <a href="https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf">tutaj</a> przez dr Simon Andrews i dr Laurę Biggins z <a href="https://www.babraham.ac.uk/">Babraham Institute</a>.</p>
-<p>Naszym celem jest opracowanie workflow'u implementującego następujące etapy przetwarzania:</p>
-<ul>
-<li>Przeprowadzenie wstępnej kontroli jakości odczytów w próbce bulk RNAseq</li>
-<li>Usunięcie sekwencji adapterów</li>
-<li>Dopasowanie do genomu referencyjnego</li>
-<li>Wygenerowanie kompleksowego raportu QC</li>
-</ul>
+W tym szkoleniu stosujemy metodę opisaną <a href="https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf">tutaj</a> przez dr. Simona Andrewsa i dr. Laurę Biggins z <a href="https://www.babraham.ac.uk/">Babraham Institute</a>.</p>
+<p>Naszym celem jest opracowanie workflow'u implementującego następujące etapy przetwarzania: przeprowadzenie wstępnej kontroli jakości odczytów w próbce bulk RNAseq, przycięcie sekwencji adapterów z odczytów, dopasowanie odczytów do genomu referencyjnego i wygenerowanie kompleksowego raportu kontroli jakości (QC).</p>
 <figure class="excalidraw">
 </figure>
 
 <ul>
-<li><strong>FASTQC:</strong> Przeprowadzenie QC na danych odczytów przed przycinaniem przy użyciu FastQC</li>
-<li><strong>TRIM_GALORE:</strong> Usunięcie sekwencji adapterów i przeprowadzenie QC po przycięciu przy użyciu Trim Galore (łączy Cutadapt i FastQC)</li>
+<li><strong>FASTQC:</strong> Przeprowadzenie QC na danych odczytów przed przycięciem przy użyciu FastQC</li>
+<li><strong>TRIM_GALORE:</strong> Przycięcie sekwencji adapterów i przeprowadzenie QC po przycięciu przy użyciu Trim Galore (łączy Cutadapt i FastQC)</li>
 <li><strong>HISAT2_ALIGN:</strong> Dopasowanie odczytów do genomu referencyjnego przy użyciu Hisat2</li>
 <li><strong>MULTIQC:</strong> Wygenerowanie kompleksowego raportu QC przy użyciu MultiQC</li>
 </ul>
-<p>Jednak zanim przejdziemy do pisania jakiegokolwiek kodu workflow'u, wypróbujemy polecenia ręcznie na danych testowych.
+<p>Zanim jednak przejdziemy do pisania jakiegokolwiek kodu workflow'u, wypróbujemy polecenia ręcznie na danych testowych.
 Narzędzia, których potrzebujemy, nie są zainstalowane w środowisku GitHub Codespaces, więc użyjemy ich za pośrednictwem kontenerów (zobacz <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a>).</p>
 <div class="admonition note">
 <p class="admonition-title">Uwaga</p>
-<p>Upewnij się, że jesteś w katalogu <code>nf4-science/rnaseq</code>. Ostatnia część ścieżki wyświetlana po wpisaniu <code>pwd</code> powinna być <code>rnaseq</code>.</p>
+<p>Upewnij się, że jesteś w katalogu <code>nf4-science/rnaseq</code>. Ostatnia część ścieżki wyświetlana po wpisaniu <code>pwd</code> powinna brzmieć <code>rnaseq</code>.</p>
 </div>
 <hr />
-<h2 id="1-wstepne-qc-i-usuwanie-adapterow">1. Wstępne QC i usuwanie adapterów<a class="headerlink" href="#1-wstepne-qc-i-usuwanie-adapterow" title="Permanent link">&para;</a></h2>
-<p>Pobierzemy obraz kontenera, który ma zainstalowane zarówno <code>fastqc</code>, jak i <code>trim_galore</code>, uruchomimy go interaktywnie i wykonamy polecenia przycinania oraz QC na jednym z przykładowych plików danych.</p>
+<h2 id="1-wstepne-qc-i-przycinanie-adapterow">1. Wstępne QC i przycinanie adapterów<a class="headerlink" href="#1-wstepne-qc-i-przycinanie-adapterow" title="Permanent link">&para;</a></h2>
+<p>Pobierzemy obraz kontenera z zainstalowanymi narzędziami <code>fastqc</code> i <code>trim_galore</code>, uruchomimy go interaktywnie i wykonamy polecenia przycinania oraz QC na jednym z przykładowych plików danych.</p>
 <h3 id="11-pobranie-kontenera">1.1. Pobranie kontenera<a class="headerlink" href="#11-pobranie-kontenera" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
 </code></pre></div>
-<p>Otrzymasz następujący wynik w konsoli, gdy system pobiera obraz:</p>
+<p>Otrzymasz następujący wynik w konsoli podczas pobierania obrazu:</p>
 <details class="success">
 <summary>Wynik polecenia</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="go">0.6.10--1bf8ca4e1967cd18: Pulling from library/trim-galore</span>
@@ -4126,11 +4120,11 @@ Pliki wyjściowe znajdziesz w tym samym katalogu co oryginalne dane:</p>
 
 <div class="highlight"><span class="filename">Wyjście</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">/data/reads/ENCSR000COQ1_1_fastqc.html  /data/reads/ENCSR000COQ1_1_fastqc.zip</span>
 </code></pre></div>
-<h3 id="14-usuniecie-sekwencji-adapterow-za-pomoca-trim_galore">1.4. Usunięcie sekwencji adapterów za pomocą <code>trim_galore</code><a class="headerlink" href="#14-usuniecie-sekwencji-adapterow-za-pomoca-trim_galore" title="Permanent link">&para;</a></h3>
-<p>Teraz uruchommy <code>trim_galore</code>, który łączy Cutadapt i FastQC, aby usunąć sekwencje adapterów i zebrać metryki QC po przycięciu.</p>
+<h3 id="14-przyciecie-sekwencji-adapterow-za-pomoca-trim_galore">1.4. Przycięcie sekwencji adapterów za pomocą <code>trim_galore</code><a class="headerlink" href="#14-przyciecie-sekwencji-adapterow-za-pomoca-trim_galore" title="Permanent link">&para;</a></h3>
+<p>Teraz uruchommy <code>trim_galore</code>, który łączy Cutadapt i FastQC, aby przyciąć sekwencje adapterów i zebrać metryki QC po przycięciu.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>trim_galore<span class="w"> </span>--fastqc<span class="w"> </span>/data/reads/ENCSR000COQ1_1.fastq.gz
 </code></pre></div>
-<p>Flaga <code>--fastqc</code> powoduje, że polecenie automatycznie uruchamia etap zbierania QC po zakończeniu przycinania.</p>
+<p>Flaga <code>--fastqc</code> powoduje automatyczne uruchomienie etapu zbierania QC po zakończeniu przycinania.</p>
 <p><em>Wynik jest bardzo obszerny, więc poniżej przedstawiono wersję skróconą.</em></p>
 <details class="success">
 <summary>Wynik polecenia</summary>
@@ -4154,7 +4148,7 @@ Pliki wyjściowe znajdziesz w tym samym katalogu co oryginalne dane:</p>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">ENCSR000COQ1_1_trimmed.fq.gz                 ENCSR000COQ1_1_trimmed_fastqc.zip</span>
 </code></pre></div>
 <h3 id="15-przeniesienie-plikow-wyjsciowych-do-systemu-plikow-poza-kontenerem">1.5. Przeniesienie plików wyjściowych do systemu plików poza kontenerem<a class="headerlink" href="#15-przeniesienie-plikow-wyjsciowych-do-systemu-plikow-poza-kontenerem" title="Permanent link">&para;</a></h3>
-<p>Wszystko, co pozostanie wewnątrz kontenera, będzie niedostępne dla przyszłej pracy, więc przenieśmy te pliki do nowego katalogu.</p>
+<p>Wszystko, co pozostanie wewnątrz kontenera, będzie niedostępne w przyszłości, więc przenieśmy te pliki do nowego katalogu.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>mkdir<span class="w"> </span>/data/trimmed
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>mv<span class="w"> </span>ENCSR000COQ1_1*<span class="w"> </span>/data/trimmed
 </code></pre></div>
@@ -4163,7 +4157,7 @@ Pliki wyjściowe znajdziesz w tym samym katalogu co oryginalne dane:</p>
 </code></pre></div>
 <hr />
 <h2 id="2-dopasowanie-odczytow-do-genomu-referencyjnego">2. Dopasowanie odczytów do genomu referencyjnego<a class="headerlink" href="#2-dopasowanie-odczytow-do-genomu-referencyjnego" title="Permanent link">&para;</a></h2>
-<p>Pobierzemy obraz kontenera, który ma zainstalowany <code>hisat2</code>, uruchomimy go interaktywnie i wykonamy polecenie wyrównania danych RNAseq do genomu referencyjnego.</p>
+<p>Pobierzemy obraz kontenera z zainstalowanym <code>hisat2</code>, uruchomimy go interaktywnie i wykonamy polecenie dopasowania danych RNAseq do genomu referencyjnego.</p>
 <h3 id="21-pobranie-kontenera-hisat2">2.1. Pobranie kontenera <code>hisat2</code><a class="headerlink" href="#21-pobranie-kontenera-hisat2" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
 </code></pre></div>
@@ -4193,7 +4187,7 @@ Pliki wyjściowe znajdziesz w tym samym katalogu co oryginalne dane:</p>
 </code></pre></div>
 <p>Polecenie jest takie samo jak wcześniej, z odpowiednim URI kontenera.</p>
 <h3 id="23-utworzenie-plikow-indeksu-genomu-hisat2">2.3. Utworzenie plików indeksu genomu Hisat2<a class="headerlink" href="#23-utworzenie-plikow-indeksu-genomu-hisat2" title="Permanent link">&para;</a></h3>
-<p>Hisat2 wymaga, aby referencja genomu była dostarczona w bardzo konkretnym formacie i nie może po prostu korzystać z pliku FASTA <code>genome.fa</code>, który dostarczamy, więc skorzystamy z tej okazji, aby utworzyć odpowiednie zasoby.</p>
+<p>Hisat2 wymaga dostarczenia genomu referencyjnego w bardzo konkretnym formacie i nie może po prostu korzystać z pliku FASTA <code>genome.fa</code>, który dostarczamy, więc wykorzystamy tę okazję do utworzenia odpowiednich zasobów.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>hisat2-build<span class="w"> </span>/data/genome.fa<span class="w"> </span>genome_index
 </code></pre></div>
 <p>Wynik jest bardzo obszerny, więc poniżej przedstawiono wersję skróconą:</p>
@@ -4207,13 +4201,13 @@ Pliki wyjściowe znajdziesz w tym samym katalogu co oryginalne dane:</p>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="go">Total time for call to driver() for forward index: 00:00:16</span>
 </code></pre></div>
 </details>
-<p>To tworzy wiele plików indeksu genomu, które można znaleźć w katalogu roboczym.</p>
+<p>To tworzy wiele plików indeksu genomu, które znajdziesz w katalogu roboczym.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>ls<span class="w"> </span>genome_index.*
 </code></pre></div>
 <div class="highlight"><span class="filename">Wyjście</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="go">genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2</span>
 </code></pre></div>
-<p>Użyjemy ich za chwilę, ale najpierw wygenerujmy skompresowany tarball z tymi plikami indeksu genomu; będziemy ich potrzebować później, a generowanie ich nie jest zazwyczaj czymś, co chcemy robić w ramach workflow'u.</p>
+<p>Użyjemy ich za chwilę, ale najpierw wygenerujmy skompresowany tarball zawierający te pliki indeksu genomu; będziemy ich potrzebować później, a ich generowanie nie jest zazwyczaj czymś, co chcemy robić w ramach workflow'u.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>tar<span class="w"> </span>-czvf<span class="w"> </span>/data/genome_index.tar.gz<span class="w"> </span>genome_index.*
 </code></pre></div>
 <p>To zapisuje tarball <code>genome_index.tar.gz</code> zawierający pliki indeksu genomu w katalogu <code>data/</code> w naszym systemie plików, co przyda się w Części 2 tego szkolenia.</p>
@@ -4234,7 +4228,7 @@ Pliki wyjściowe znajdziesz w tym samym katalogu co oryginalne dane:</p>
 <a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="go">        Overall alignment rate: 94.43%</span>
 </code></pre></div>
 </details>
-<p>To działa niemal natychmiast, ponieważ jest to bardzo mały plik testowy.
+<p>Działa to niemal natychmiast, ponieważ jest to bardzo mały plik testowy.
 W rzeczywistej skali może to potrwać znacznie dłużej.</p>
 <p>Ponownie pliki wyjściowe znajdziesz w katalogu roboczym:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>ls<span class="w"> </span>ENCSR000COQ1_1*
@@ -4250,7 +4244,7 @@ W rzeczywistej skali może to potrwać znacznie dłużej.</p>
 </code></pre></div>
 <hr />
 <h2 id="3-wygenerowanie-kompleksowego-raportu-qc">3. Wygenerowanie kompleksowego raportu QC<a class="headerlink" href="#3-wygenerowanie-kompleksowego-raportu-qc" title="Permanent link">&para;</a></h2>
-<p>Pobierzemy obraz kontenera, który ma zainstalowany <code>multiqc</code>, uruchomimy go interaktywnie i wykonamy polecenie generowania raportu na plikach raportów FastQC przed i po.</p>
+<p>Pobierzemy obraz kontenera z zainstalowanym <code>multiqc</code>, uruchomimy go interaktywnie i wykonamy polecenie generowania raportu na podstawie plików raportów FastQC przed i po przycięciu.</p>
 <h3 id="31-pobranie-kontenera-multiqc">3.1. Pobranie kontenera <code>multiqc</code><a class="headerlink" href="#31-pobranie-kontenera-multiqc" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 </code></pre></div>
@@ -4297,8 +4291,8 @@ W rzeczywistej skali może to potrwać znacznie dłużej.</p>
 <a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="go">          multiqc | MultiQC complete</span>
 </code></pre></div>
 </details>
-<p>MultiQC jest w stanie przeszukiwać katalogi w poszukiwaniu kompatybilnych raportów QC i zagreguje wszystko, co znajdzie.</p>
-<p>Tutaj widzimy, że narzędzie znalazło wszystkie trzy raporty QC, które wygenerowaliśmy: wstępny QC wykonany za pomocą <code>fastqc</code>, raport po przycięciu z <code>cutadapt</code> (wykonany za pomocą <code>trim_galore</code>) oraz QC po dopasowaniu wygenerowany przez <code>hisat2</code>.</p>
+<p>MultiQC potrafi przeszukiwać katalogi w poszukiwaniu kompatybilnych raportów QC i zagreguje wszystko, co znajdzie.</p>
+<p>Widzimy tu, że narzędzie znalazło wszystkie trzy raporty QC, które wygenerowaliśmy: wstępny QC wykonany za pomocą <code>fastqc</code>, raport po przycięciu z <code>cutadapt</code> (wykonany za pośrednictwem <code>trim_galore</code>) oraz QC po dopasowaniu wygenerowany przez <code>hisat2</code>.</p>
 <p>Pliki wyjściowe są ponownie w katalogu roboczym:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>ls<span class="w"> </span>ENCSR000COQ1_1_QC*
 </code></pre></div>
@@ -4329,7 +4323,7 @@ W rzeczywistej skali może to potrwać znacznie dłużej.</p>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
 <p>Przetestowałeś wszystkie poszczególne polecenia interaktywnie w odpowiednich kontenerach.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
-<p>Dowiedz się, jak opakować te same polecenia w wieloetapowy workflow, który używa kontenerów do wykonywania zadań.</p><style type="text/css">.quiz {
+<p>Dowiedz się, jak opakować te same polecenia w wieloetapowy workflow, który wykorzystuje kontenery do wykonywania zadań.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

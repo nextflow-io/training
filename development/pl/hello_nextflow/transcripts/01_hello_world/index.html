@@ -1134,7 +1134,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3039,10 +3039,10 @@
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-przeanalizuj-startowy-skrypt-workflow-hello-world" class="md-nav__link">
+  <a href="#1-przeanalizuj-startowy-skrypt-workflowa-hello-world" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Przeanalizuj startowy skrypt workflow Hello World
+        1. Przeanalizuj startowy skrypt workflow'a Hello World
       
     </span>
   </a>
@@ -3057,10 +3057,10 @@
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#13-definicja-workflow" class="md-nav__link">
+  <a href="#13-definicja-workflowa" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3 Definicja workflow
+        1.3 Definicja workflow'a
       
     </span>
   </a>
@@ -3084,10 +3084,10 @@
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-zarzadzaj-wykonaniami-workflow" class="md-nav__link">
+  <a href="#3-zarzadzaj-wykonaniami-workflowa" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Zarządzaj wykonaniami workflow
+        3. Zarządzaj wykonaniami workflow'a
       
     </span>
   </a>
@@ -3417,8 +3417,8 @@
 </div>
 <h2 id="powitanie">Powitanie<a class="headerlink" href="#powitanie" title="Permanent link">&para;</a></h2>
 <p>Cześć, witamy w pierwszym rozdziale Hello Nextflow.</p>
-<p>W tej pierwszej części sześcioczęściowego kursu przejdziemy przez same podstawy Nextflow. Zaczniemy od uruchomienia kilku poleceń w terminalu, a następnie zobaczymy, jak te polecenia Bash przekształcić w skrypt Nextflow.</p>
-<p>Spróbujemy uruchomić pierwszy pipeline Nextflow, zobaczymy, co Nextflow robi, gdzie działa, jakie pliki tworzy i jaki jest cel tych plików.</p>
+<p>W tej pierwszej części sześcioczęściowego kursu przejdziemy przez same podstawy Nextflow'a. Zaczniemy od uruchomienia kilku poleceń w terminalu, a następnie zobaczymy, jak te polecenia Bash przekształcić w skrypt Nextflow'a.</p>
+<p>Uruchomimy pierwszy pipeline Nextflow'a, zobaczymy, co Nextflow robi, gdzie działa, jakie pliki tworzy i jaki jest cel tych plików.</p>
 <p>W porządku, zaczynajmy.</p>
 <h2 id="trainingnextflowio">training.nextflow.io<a class="headerlink" href="#trainingnextflowio" title="Permanent link">&para;</a></h2>
 <p>Przede wszystkim przejdź do training.nextflow.io. Tak jak wcześniej, wszystkie materiały są tu zapisane i będę pracował przez nie krok po kroku. Będę pokazywał mój ekran podczas wykonywania kroków szkolenia, ale wszystko, co mówię, znajduje się w materiałach szkoleniowych, więc możesz je śledzić we własnym tempie i znajdziesz tam wszystko zapisane.</p>
@@ -3429,106 +3429,106 @@
 <p>Dobra. Zacznijmy od kilku podstaw, które mam nadzieję będą wszystkim znajome. Zacznę od napisania bardzo prostego polecenia w terminalu. Tutaj na dole napiszę 'echo Hello World!"', nacisnę enter i, bez niespodzianek, terminal robi to, czego od niego żądam i zwraca ten ciąg znaków. Hello world.</p>
 <p>Dobra, teraz nacisnę strzałkę w górę, żeby przywołać to polecenie i trochę je zmodyfikuję. Tym razem przekierujmy to wyjście do pliku. Zapiszę to zamiast tego do output.txt i nacisnę enter, nic tym razem w terminalu, ponieważ wyjście nie trafiło do terminalu. Trafiło do tego pliku.</p>
 <p>Mogę wtedy odczytać ten plik, robiąc 'cat output.txt', nacisnąć tab, żeby automatycznie rozszerzyć nazwę pliku i proszę. Plik jest tam.</p>
-<p>Widzę również ten plik na pasku bocznym w eksploratorze plików w VS code. Mogę go dwukrotnie kliknąć i otworzyć tutaj. Jeśli chcesz otworzyć go w VS Code bez klikania, możesz również zrobić "code" a następnie "output.txt" i robi to samo.</p>
+<p>Widzę również ten plik na pasku bocznym w eksploratorze plików w VS Code. Mogę go dwukrotnie kliknąć i otworzyć tutaj. Jeśli chcesz otworzyć go w VS Code bez klikania, możesz również zrobić "code" a następnie "output.txt" i robi to samo.</p>
 <p>Świetnie. To pierwszy krok. Bardzo prosty.</p>
-<h2 id="1-przeanalizuj-startowy-skrypt-workflow-hello-world">1. Przeanalizuj startowy skrypt workflow Hello World<a class="headerlink" href="#1-przeanalizuj-startowy-skrypt-workflow-hello-world" title="Permanent link">&para;</a></h2>
+<h2 id="1-przeanalizuj-startowy-skrypt-workflowa-hello-world">1. Przeanalizuj startowy skrypt workflow'a Hello World<a class="headerlink" href="#1-przeanalizuj-startowy-skrypt-workflowa-hello-world" title="Permanent link">&para;</a></h2>
 <p>Dobra. Teraz zrobimy dokładnie to samo, ale w Nextflow, zamiast bezpośrednio w terminalu.</p>
-<p>Użyjemy pierwszego przykładowego skryptu na początek, ten plik nazywa się Hello World. Mogę zrobić "ls", żeby go zobaczyć w terminalu, a jestem na Macu, więc mogę zrobić command click, żeby otworzyć ten plik, lub mogłem po prostu dwukrotnie kliknąć na pasku bocznym tutaj.</p>
-<p>Jest kilka rzeczy, które możemy zobaczyć w tym pliku. Na samej górze jest instrukcja hash mówiąca, że to jest plik Nextflow i tak mógłby być wykonany. Są tu jakieś komentarze, zwykłe komentarze kodu w jasnoszarym kolorze, które nie wpływają na wykonanie, a tylko pomagają nam czytać skrypt.</p>
-<p>A potem są dwie główne struktury. Jest tutaj process i workflow.</p>
-<p>Procesy w Nextflow to kroki pipeline. To części, które faktycznie wykonują logikę i przetwarzanie.</p>
-<p>Workflow na dole łączy te procesy razem i kontroluje logikę workflow, jak wszystko łączy się ze sobą.</p>
-<p>Zaczniemy od spojrzenia na process. Za chwilę wrócimy do workflow.</p>
+<p>Użyjemy pierwszego przykładowego skryptu na początek, ten plik nazywa się Hello World. Mogę zrobić "ls", żeby go zobaczyć w terminalu, a jestem na Macu, więc mogę zrobić command+click, żeby otworzyć ten plik, lub mogłem po prostu dwukrotnie kliknąć na pasku bocznym tutaj.</p>
+<p>Jest kilka rzeczy, które możemy zobaczyć w tym pliku. Na samej górze jest instrukcja hash mówiąca, że to jest plik Nextflow'a i tak mógłby być wykonany. Są tu jakieś komentarze, zwykłe komentarze kodu w jasnoszarym kolorze, które nie wpływają na wykonanie, a tylko pomagają nam czytać skrypt.</p>
+<p>A potem są dwie główne struktury. Jest tutaj <code>process</code> i <code>workflow</code>.</p>
+<p>Procesy w Nextflow to kroki pipeline'u. To części, które faktycznie wykonują logikę i przetwarzanie.</p>
+<p>Workflow na dole łączy te procesy razem i kontroluje logikę workflow'a, jak wszystko łączy się ze sobą.</p>
+<p>Zaczniemy od spojrzenia na proces. Za chwilę wrócimy do workflow'a.</p>
 <h2 id="12-definicja-procesu">1.2 Definicja procesu<a class="headerlink" href="#12-definicja-procesu" title="Permanent link">&para;</a></h2>
-<p>Więc każdy process zaczyna się od słowa kluczowego process. Ma nazwę, a następnie ma nawiasy klamrowe i wszystko w tych nawiasach klamrowych to ten pojedynczy process.</p>
-<p>Process musi mieć sekcję script, a zawarta tutaj jest fragmentu bash w wielowierszowym ciągu znaków, który jest częścią kodu faktycznie wykonywaną w środowisku obliczeniowym.</p>
-<p>Mamy również tutaj instrukcję output, która mówi Nextflow, jakie pliki mają zostać utworzone przez skrypt. Zauważ, że output tutaj ma słowo kluczowe path, które mówi Nextflow, że to jest plik, a nie wartość lub ciąg znaków.</p>
-<p>W bloku script jest to po prostu zwykła instrukcja bash i jest dokładnie taka sama jak to, co napisaliśmy w terminalu. Wykonujemy echo hello world do pliku o nazwie output.txt. Ten output.txt jest następnie przechwytywany przez definicję output. Definicja output tak naprawdę nic nie robi. Tylko mówi Nextflow, czego się spodziewać, a gdyby ten plik nie został utworzony, Nextflow zgłosiłby błąd.</p>
+<p>Więc każdy proces zaczyna się od słowa kluczowego <code>process</code>. Ma nazwę, a następnie ma nawiasy klamrowe i wszystko w tych nawiasach klamrowych to ten pojedynczy proces.</p>
+<p>Proces musi mieć sekcję <code>script</code>, a zawarta tutaj jest fragmentu bash w wielowierszowym ciągu znaków, który jest częścią kodu faktycznie wykonywaną w środowisku obliczeniowym.</p>
+<p>Mamy również tutaj instrukcję <code>output</code>, która mówi Nextflow'owi, jakie pliki mają zostać utworzone przez skrypt. Zauważ, że <code>output</code> tutaj ma słowo kluczowe <code>path</code>, które mówi Nextflow'owi, że to jest plik, a nie wartość czy ciąg znaków.</p>
+<p>W bloku <code>script</code> jest to po prostu zwykła instrukcja bash i jest dokładnie taka sama jak to, co napisaliśmy w terminalu. Wykonujemy echo hello world do pliku o nazwie output.txt. Ten output.txt jest następnie przechwytywany przez definicję <code>output</code>. Definicja <code>output</code> tak naprawdę nic nie robi. Tylko mówi Nextflow'owi, czego się spodziewać, a gdyby ten plik nie został utworzony, Nextflow zgłosiłby błąd.</p>
 <p>Zauważ, że ten przykład nie jest świetny, ponieważ sztywno zakodowaliśmy nazwę pliku tutaj, output.txt i output.txt. Gdyby którykolwiek z nich został zmieniony, spowodowałoby to błąd w naszym workflow.</p>
 <p>Jest lepszy sposób, aby to zrobić za pomocą zmiennych, co omówimy za chwilę.</p>
-<h2 id="13-definicja-workflow">1.3 Definicja workflow<a class="headerlink" href="#13-definicja-workflow" title="Permanent link">&para;</a></h2>
-<p>Dobra. Przechodząc do workflow, możemy zobaczyć, że mamy komentarz, a następnie uruchamiamy process o nazwie sayHello. To jest to samo słowo kluczowe, które jest tutaj na górze. To jest mniej więcej najprostszy workflow, jaki może być. Po prostu wywołujemy pojedynczy process bez zmiennego wejścia, więc nie łączymy go z niczym innym. W późniejszej części tego kursu porozmawiamy o tym, jak uczynić to bardziej zaawansowanym, używając zmiennych wejść i łącząc rzeczy z kanałami.</p>
+<h2 id="13-definicja-workflowa">1.3 Definicja workflow'a<a class="headerlink" href="#13-definicja-workflowa" title="Permanent link">&para;</a></h2>
+<p>Dobra. Przechodząc do workflow'a, możemy zobaczyć, że mamy komentarz, a następnie uruchamiamy proces o nazwie sayHello. To jest to samo słowo kluczowe, które jest tutaj na górze. To jest mniej więcej najprostszy workflow, jaki może być. Po prostu wywołujemy pojedynczy proces bez zmiennego wejścia, więc nie łączymy go z niczym innym. W późniejszej części tego kursu porozmawiamy o tym, jak uczynić to bardziej zaawansowanym, używając zmiennych wejść i łącząc rzeczy z kanałami.</p>
 <h2 id="2-uruchom-workflow">2. Uruchom workflow<a class="headerlink" href="#2-uruchom-workflow" title="Permanent link">&para;</a></h2>
-<p>Dobra, to wszystko, czego potrzebujemy. Zobaczmy, czy możemy to uruchomić i zobaczyć, co się stanie. Wyczyśzczę terminal, a następnie zrobię "nextflow run" i wywołam nazwę pliku, która to hello-world.nf. To wszystko, czego potrzebujemy, aby uruchomić pipeline Nextflow. Ten pipeline nie przyjmuje żadnego wejścia, więc nie potrzebujemy żadnych innych argumentów.</p>
+<p>Dobra, to wszystko, czego potrzebujemy. Zobaczmy, czy możemy to uruchomić i zobaczyć, co się stanie. Wyczyśzczę terminal, a następnie zrobię "nextflow run" i wywołam nazwę pliku, która to hello-world.nf. To wszystko, czego potrzebujemy, aby uruchomić pipeline Nextflow'a. Ten pipeline nie przyjmuje żadnego wejścia, więc nie potrzebujemy żadnych innych argumentów.</p>
 <p>Naciśnijmy enter i zobaczmy, co się stanie.</p>
-<p>Dobra. Mam nadzieję, że powinieneś mieć jakieś wyjście, które wygląda tak. Mamy kilka informacji mówiących nam, że Nextflow został uruchomiony i jaka była używana wersja. Mówi nam, który skrypt został uruchomiony i podaje nam losowo wygenerowaną nazwę dla tego konkretnego wykonania workflow. W tym przypadku mój nazywał się "gloomy_crick".</p>
-<p>Najważniejszą częścią jest jednak to, że mówi nam, które kroki zostały uruchomione w pipeline. Możesz zobaczyć, że nasz process o nazwie sayHello został uruchomiony i został uruchomiony raz i został ukończony w stu procentach.</p>
-<p>Ta część tutaj to hash dla tego konkretnego zadania workflow. Każdy process działa jeden lub więcej razy, a każde z tych wykonań nazywa się zadaniem.</p>
+<p>Dobra. Mam nadzieję, że powinieneś mieć jakieś wyjście, które wygląda tak. Mamy kilka informacji mówiących nam, że Nextflow został uruchomiony i jaka była używana wersja. Mówi nam, który skrypt został uruchomiony i podaje nam losowo wygenerowaną nazwę dla tego konkretnego wykonania workflow'a. W tym przypadku mój nazywał się "gloomy_crick".</p>
+<p>Najważniejszą częścią jest jednak to, że mówi nam, które kroki zostały uruchomione w pipeline'ie. Możesz zobaczyć, że nasz proces o nazwie sayHello został uruchomiony i został uruchomiony raz i został ukończony w stu procentach.</p>
+<p>Ta część tutaj to hash dla tego konkretnego zadania workflow'a. Każdy proces działa jeden lub więcej razy, a każde z tych wykonań nazywa się zadaniem.</p>
 <h2 id="22-znajdz-wyjscie-i-logi-w-katalogu-work">2.2. Znajdź wyjście i logi w katalogu work<a class="headerlink" href="#22-znajdz-wyjscie-i-logi-w-katalogu-work" title="Permanent link">&para;</a></h2>
-<p>Każde zadanie ma Swój własny izolowany katalog, w którym działa, więc jest oddzielony od reszty wykonania workflow. Ten hash odpowiada strukturze plików w katalogu work. Jeśli zrobię "tree work", możemy zobaczyć a0, a następnie dłuższą wersję krótkiego hasha, a następnie nasz plik output.txt. Możesz również zobaczyć to na pasku bocznym.</p>
+<p>Każde zadanie ma swój własny izolowany katalog, w którym działa, więc jest oddzielony od reszty wykonania workflow'a. Ten hash odpowiada strukturze plików w katalogu work. Jeśli zrobię "tree work", możemy zobaczyć a0, a następnie dłuższą wersję krótkiego hasha, a następnie nasz plik output.txt. Możesz również zobaczyć to na pasku bocznym.</p>
 <p>Możesz zobaczyć na pasku bocznym, że jest tu kilka dodatkowych plików. Powodem, dla którego nie pojawiły się one w terminalu, jest to, że są to ukryte pliki, zaczynają się od kropki. I rzeczywiście, jeśli zrobię "tree -a" dla wszystkich i "work", możemy je tutaj zobaczyć.</p>
-<p>Te pliki z kropką są obecne w każdym pojedynczym katalogu work, który tworzy Nextflow, i każdy z nich ma nieco inne zadanie. Po pierwsze .command.begin zawiera po prostu kilka instrukcji dla Nextflow, które konfigurują zadanie przed jego uruchomieniem. .command.run to rzeczywiste instrukcje wykonywane przez sam Nextflow. Następnie .command.sh jest prawdopodobnie najbardziej interesujący. To jest skrypt, który został rozwiązany z naszego bloku script procesu.</p>
-<p>Jeśli go otworzę, możesz zobaczyć, że mamy nasze "echo Hello World" do pliku output.txt. To jest dokładnie to samo co nasz process w tym przypadku, ale jeśli mamy jakiekolwiek zmienne w naszym kodzie Nextflow, każde zadanie będzie miało inny .command.sh i możesz zobaczyć, jak te zmienne zostały rozwiązane.</p>
-<p>Pozostałe pliki dotyczą tego, jak zadanie zostało wykonane. Więc .command.err, .log i .out to standardowy błąd, standardowe wyjście i oba połączone. A .exitcode mówi Nextflow, jak to zadanie zostało wykonane, z jakim kodem wyjścia, czy zakończyło się sukcesem, czy nie.</p>
+<p>Te pliki z kropką są obecne w każdym pojedynczym katalogu work, który tworzy Nextflow, i każdy z nich ma nieco inne zadanie. Po pierwsze .command.begin zawiera po prostu kilka instrukcji dla Nextflow'a, które konfigurują zadanie przed jego uruchomieniem. .command.run to rzeczywiste instrukcje wykonywane przez sam Nextflow. Następnie .command.sh jest prawdopodobnie najbardziej interesujący. To jest skrypt, który został rozwiązany z naszego bloku <code>script</code> procesu.</p>
+<p>Jeśli go otworzę, możesz zobaczyć, że mamy nasze "echo Hello World" do pliku output.txt. To jest dokładnie to samo co nasz proces w tym przypadku, ale jeśli mamy jakiekolwiek zmienne w naszym kodzie Nextflow'a, każde zadanie będzie miało inny .command.sh i możesz zobaczyć, jak te zmienne zostały rozwiązane.</p>
+<p>Pozostałe pliki dotyczą tego, jak zadanie zostało wykonane. Więc .command.err, .log i .out to standardowy błąd, standardowe wyjście i oba połączone. A .exitcode mówi Nextflow'owi, jak to zadanie zostało wykonane, z jakim kodem wyjścia, czy zakończyło się sukcesem, czy nie.</p>
 <p>Na koniec mamy nasz plik output.txt i oczywiście "Hello World", to jest to, czego oczekiwaliśmy i to jest to, co zostało utworzone.</p>
-<p>Dobra, świetnie. To było twoje pierwsze uruchomienie Nextflow. Gratulacje. Naprawdę jest tak proste.</p>
-<p>Następnie przejdziemy do tego, jak zrobić to trochę wygodniej, żebyśmy nie musieli edytować kodu za każdym razem, gdy chcemy dokonać zmiany w sposobie uruchamiania pipeline.</p>
-<h2 id="3-zarzadzaj-wykonaniami-workflow">3. Zarządzaj wykonaniami workflow<a class="headerlink" href="#3-zarzadzaj-wykonaniami-workflow" title="Permanent link">&para;</a></h2>
-<p>Ta struktura katalogów jest świetna do utrzymywania wszystkich zadań oddzielonych i wszystkiego uporządkowanego, ale oczywiście nie jest zbyt wygodne znalezienie plików wyjściowych. Nie chcesz przeszukiwać mnóstwa zagnieżdżonych katalogów, próbując znaleźć wyniki Swojego pipeline.</p>
+<p>Dobra, świetnie. To było Twoje pierwsze uruchomienie Nextflow'a. Gratulacje. Naprawdę jest tak proste.</p>
+<p>Następnie przejdziemy do tego, jak zrobić to trochę wygodniej, żebyśmy nie musieli edytować kodu za każdym razem, gdy chcemy dokonać zmiany w sposobie uruchamiania pipeline'u.</p>
+<h2 id="3-zarzadzaj-wykonaniami-workflowa">3. Zarządzaj wykonaniami workflow'a<a class="headerlink" href="#3-zarzadzaj-wykonaniami-workflowa" title="Permanent link">&para;</a></h2>
+<p>Ta struktura katalogów jest świetna do utrzymywania wszystkich zadań oddzielonych i wszystkiego uporządkowanego, ale oczywiście nie jest zbyt wygodne znalezienie plików wyjściowych. Nie chcesz przeszukiwać mnóstwa zagnieżdżonych katalogów, próbując znaleźć wyniki Twojego pipeline'u.</p>
 <h2 id="31-publikuj-wyjscia">3.1. Publikuj wyjścia<a class="headerlink" href="#31-publikuj-wyjscia" title="Permanent link">&para;</a></h2>
-<p>Dobra wiadomość jest taka, że nie musisz. Katalogi work są naprawdę tylko dla Nextflow do własnego użytku. Więc to, co zrobimy, to użyjemy funkcji Nextflow zwanej "publishDir".</p>
-<p>Wracamy do naszego workflow, idziemy do procesu. Możemy dodać tutaj nową instrukcję zwaną dyrektywą. To jest to, jak Nextflow nazywa te rzeczy na górze procesów, które rozszerzają sposób działania funkcjonalności, a ta, której użyjemy, nazywa się publishDir.</p>
+<p>Dobra wiadomość jest taka, że nie musisz. Katalogi work są naprawdę tylko dla Nextflow'a do własnego użytku. Więc to, co zrobimy, to użyjemy funkcji Nextflow'a zwanej <code>publishDir</code>.</p>
+<p>Wracamy do naszego workflow'a, idziemy do procesu. Możemy dodać tutaj nową instrukcję zwaną dyrektywą. To jest to, jak Nextflow nazywa te rzeczy na górze procesów, które rozszerzają sposób działania funkcjonalności, a ta, której użyjemy, nazywa się <code>publishDir</code>.</p>
 <p>Możesz zobaczyć, że zacząłem tu pisać i rozszerzenie Nextflow dla VS Code zasugerowało mi dyrektywę, więc mogę po prostu nacisnąć enter.</p>
 <p>Dobra. Podam katalog o nazwie "results" i powiemy mu, żeby skopiował tam pliki wyjściowe. Więc powiem mode copy. Świetnie. Zapiszę i uruchommy workflow ponownie.</p>
 <p>nextflow run hello-world.nf</p>
 <p>Działa dokładnie tak samo. Chociaż zauważ, że mamy teraz nieco inny hash. Nextflow użyje innego hasha za każdym razem, gdy uruchomisz workflow. I w rezultacie mamy inny zestaw katalogów work. Obszary, jeden nazywa się EB, ale możesz zobaczyć, że wszystkie pliki są takie same. Jednak tym razem nowością jest to, że mamy również katalog o nazwie "results".</p>
-<p>W "results" tutaj mamy nasz plik wyjściowy. To jest to, co kazaliśmy zrobić Nextflow. Powiedzieliśmy, zapisz pliki wynikowe w katalogu o nazwie "results" i skopiuj je tam. I teraz jest to znacznie łatwiejsze do znalezienia. Jest tam po prostu obok miejsca, w którym uruchomiliśmy workflow i wszystkie różne pliki mogą być tam zorganizowane, jak chcemy, niezależnie od tego, gdzie lub jak Nextflow uruchomił faktyczne wykonanie.</p>
-<p>Zauważ, że publishDir może obsługiwać dowiązania symboliczne, co jest dobre, jeśli pracujesz na współdzielonym systemie plików i chcesz zaoszczędzić na miejscu. A także nie musisz definiować wszystkich plików, które są tworzone przez process jako output.</p>
-<p>Nextflow skopiuje tylko rzeczy, które są zdefiniowane w tym bloku output. Więc jeśli masz pliki pośrednie tworzone przez krok, które nie są potrzebne w dalszej części tego procesu, po prostu nie definiujesz ich w output i nie pojawią się w publishDir. To jest więc sposób na utrzymanie czystości plików wyjściowych z pipeline i łatwe usuwanie plików pośrednich po zakończeniu miejsca pracy.</p>
-<p>Krótka uwaga tutaj. Jest nowa składnia Nextflow, która nadchodzi, nazywana definicjami wyjścia workflow, która ostatecznie zastąpi publishDir. Daje nam to sposób na zdefiniowanie wszystkich wyjść z workflow na poziomie pipeline w dół w bloku workflow. Jest to opisane w dokumentacji Nextflow, jeśli chcesz to wypróbować. Ale na razie publishDir będzie jeszcze przez jakiś czas, więc nadal mamy to w szkoleniu na rok 2025.</p>
+<p>W "results" tutaj mamy nasz plik wyjściowy. To jest to, co kazaliśmy zrobić Nextflow'owi. Powiedzieliśmy, zapisz pliki wynikowe w katalogu o nazwie "results" i skopiuj je tam. I teraz jest to znacznie łatwiejsze do znalezienia. Jest tam po prostu obok miejsca, w którym uruchomiliśmy workflow i wszystkie różne pliki mogą być tam zorganizowane, jak chcemy, niezależnie od tego, gdzie lub jak Nextflow uruchomił faktyczne wykonanie.</p>
+<p>Zauważ, że <code>publishDir</code> może obsługiwać dowiązania symboliczne, co jest dobre, jeśli pracujesz na współdzielonym systemie plików i chcesz zaoszczędzić na miejscu. A także nie musisz definiować wszystkich plików, które są tworzone przez proces jako <code>output</code>.</p>
+<p>Nextflow skopiuje tylko rzeczy, które są zdefiniowane w tym bloku <code>output</code>. Więc jeśli masz pliki pośrednie tworzone przez krok, które nie są potrzebne w dalszej części tego procesu, po prostu nie definiujesz ich w <code>output</code> i nie pojawią się w <code>publishDir</code>. To jest więc sposób na utrzymanie czystości plików wyjściowych z pipeline'u i łatwe usuwanie plików pośrednich po zakończeniu pracy.</p>
+<p>Krótka uwaga tutaj. Jest nowa składnia Nextflow'a, która nadchodzi, nazywana definicjami wyjścia workflow'a, która ostatecznie zastąpi <code>publishDir</code>. Daje nam to sposób na zdefiniowanie wszystkich wyjść z workflow'a na poziomie pipeline'u w dół w bloku <code>workflow</code>. Jest to opisane w dokumentacji Nextflow'a, jeśli chcesz to wypróbować. Ale na razie <code>publishDir</code> będzie jeszcze przez jakiś czas, więc nadal mamy to w szkoleniu na rok 2025.</p>
 <h2 id="32-uruchom-ponownie-workflow-z-resume">3.2. Uruchom ponownie workflow z -resume<a class="headerlink" href="#32-uruchom-ponownie-workflow-z-resume" title="Permanent link">&para;</a></h2>
-<p>Dobra. Wspomniałem, że katalog work ma teraz dwa zestawy wyników z innym hashem z każdego uruchomienia workflow. To dobrze. Jednak czasami nie chcemy ponownie obliczać kroków za każdym razem, jeśli nie musimy.</p>
-<p>Może budujesz iteracyjnie Swój workflow i dodajesz kroki i chcesz, aby pierwsze kroki po prostu użyły wersji z cache. Lub może coś poszło nie tak w Twoim systemie obliczeniowym w połowie workflow i chcesz, aby kontynuował od miejsca, w którym przerwał, ale pominął kroki, które już wykonał.</p>
+<p>Dobra. Wspomniałem, że katalog work ma teraz dwa zestawy wyników z innym hashem z każdego uruchomienia workflow'a. To dobrze. Jednak czasami nie chcemy ponownie obliczać kroków za każdym razem, jeśli nie musimy.</p>
+<p>Może budujesz iteracyjnie swój workflow i dodajesz kroki i chcesz, aby pierwsze kroki po prostu użyły wersji z cache'a. Lub może coś poszło nie tak w Twoim systemie obliczeniowym w połowie workflow'a i chcesz, aby kontynuował od miejsca, w którym przerwał, ale pominął kroki, które już wykonał.</p>
 <p>Nextflow ma wbudowaną funkcjonalność do tego, zwaną resume. Wypróbujmy to. Więc przede wszystkim, po prostu spojrzę na katalog work, żebyśmy mogli pamiętać, co tam było.</p>
 <p>A następnie zrobię "nextflow run hello-world.nf" i dodam jedno polecenie tutaj, "-resume".</p>
 <p>Zauważ, pojedynczy myślnik, to naprawdę ważne. Uruchomię to, a wyjście będzie wyglądać zasadniczo dokładnie tak samo, z kilkoma małymi różnicami.</p>
 <p>Zauważ tutaj, że mówi "cached" na szaro. To oznacza, że Nextflow nie uruchomił zadania. Tym razem znalazł coś, co pasowało do wymagań i użył tych wyjść bezpośrednio, zamiast ponownie uruchamiać krok.</p>
 <p>I rzeczywiście, jeśli spojrzysz na hash tutaj, możesz zobaczyć, że odpowiada istniejącemu hashowi, który mieliśmy z poprzedniego uruchomienia.</p>
 <h2 id="33-usun-starsze-katalogi-work">3.3. Usuń starsze katalogi work<a class="headerlink" href="#33-usun-starsze-katalogi-work" title="Permanent link">&para;</a></h2>
-<p>Dobra. Ale jeśli rozwijasz iteracyjnie, zbudujesz wiele tych plików workflow. To może być problem, jeśli możesz mieć mało miejsca.</p>
-<p>Nextflow może nam pomóc wyczyścić te katalogi work za pomocą kilku poleceń pomocniczych. Jeśli zrobię "nextflow log". To da mi listę wszystkich różnych uruchomień workflow, które wykonałem w tym katalogu, i mają tutaj nazwy uruchomień. Możesz zobaczyć ten gloomy quick, który był pierwszym, który uruchomiliśmy, a następnie te dwa nowe.</p>
-<p>Możemy teraz wziąć tę nazwę i użyć ich z poleceniem "nextflow clean". Mogę określić pojedynczą nazwę uruchomienia. Lub jeszcze lepiej, mogę powiedzieć Nextflow, żeby usunął wszystko sprzed pojedynczej nazwy workflow za pomocą "-before", i podam "stupefied_shaw". To było moje najnowsze uruchomienie, "-n".</p>
-<p>Polecenie "-n" powiedziało Nextflow, aby zrobił to jako próbne uruchomienie bez faktycznego usuwania czegokolwiek na prawdę, i mówi nam, które z katalogów hash zostałyby usunięte. Rzeczywiście, to tylko ten z pierwszego wykonania. Oba drugie wykonania używają tego samego katalogu hash.</p>
+<p>Dobra. Ale jeśli rozwijasz iteracyjnie, zbudujesz wiele tych plików workflow'a. To może być problem, jeśli możesz mieć mało miejsca.</p>
+<p>Nextflow może nam pomóc wyczyścić te katalogi work za pomocą kilku poleceń pomocniczych. Jeśli zrobię "nextflow log". To da mi listę wszystkich różnych uruchomień workflow'a, które wykonałem w tym katalogu, i mają tutaj nazwy uruchomień. Możesz zobaczyć ten gloomy quick, który był pierwszym, który uruchomiliśmy, a następnie te dwa nowe.</p>
+<p>Możemy teraz wziąć tę nazwę i użyć ich z poleceniem "nextflow clean". Mogę określić pojedynczą nazwę uruchomienia. Lub jeszcze lepiej, mogę powiedzieć Nextflow'owi, żeby usunął wszystko sprzed pojedynczej nazwy workflow'a za pomocą "-before", i podam "stupefied_shaw". To było moje najnowsze uruchomienie, "-n".</p>
+<p>Polecenie "-n" powiedziało Nextflow'owi, aby zrobił to jako próbne uruchomienie bez faktycznego usuwania czegokolwiek na prawdę, i mówi nam, które z katalogów hash zostałyby usunięte. Rzeczywiście, to tylko ten z pierwszego wykonania. Oba drugie wykonania używają tego samego katalogu hash.</p>
 <p>Uruchomię to ponownie, ale teraz zamiast "-n" dla próbnego uruchomienia, zrobię "-f" dla force i usunął ten katalog hash. Teraz jeśli zrobię "tree work", możemy zobaczyć, że mamy tylko ten plik wyjściowy.</p>
 <p>Świetnie. Więc udało nam się wyczyścić sporo miejsca na dysku.</p>
-<p>Kilka rzeczy do zauważenia podczas usuwania katalogów work, jeśli stworzyłeś dowiązanie symboliczne do Swojego katalogu wyników, te źródła dowiązań symbolicznych zostaną teraz usunięte i Twoje wyniki znikną na zawsze. Dlatego użycie trybu copy jest bezpieczniejsze i ogólnie to zalecamy.</p>
-<p>Po drugie, funkcjonalność resume Nextflow opiera się na tych katalogach work. Więc jeśli je usuniesz i uruchomisz Nextflow ponownie, funkcjonalność resume nie będzie już działać. Więc to do Ciebie należy śledzenie, których rzeczy możesz potrzebować lub nie, i usuwaj rzeczy tylko wtedy, gdy masz pewność, że jest to bezpieczne.</p>
-<p>Inna rzecz, którą możemy zrobić, to możemy po prostu usunąć cały katalog work, jeśli skończyliśmy uruchamianie workflow i mamy pewność, że już go nie potrzebujemy.</p>
-<p>Więc mogę zrobić "rm -r work". Wiem, że nie było tam nic ważnego. Mam Swoje wyniki, na których mi zależy, w katalogu results, gdzie je skopiowaliśmy. I więc było bezpiecznie usunąć katalog work. To do Ciebie należy, które z tych podejść zastosujesz.</p>
+<p>Kilka rzeczy do zauważenia podczas usuwania katalogów work: jeśli stworzyłeś dowiązanie symboliczne do Twojego katalogu wyników, te źródła dowiązań symbolicznych zostaną teraz usunięte i Twoje wyniki znikną na zawsze. Dlatego użycie trybu copy jest bezpieczniejsze i ogólnie to zalecamy.</p>
+<p>Po drugie, funkcjonalność resume Nextflow'a opiera się na tych katalogach work. Więc jeśli je usuniesz i uruchomisz Nextflow ponownie, funkcjonalność resume nie będzie już działać. Więc to do Ciebie należy śledzenie, których rzeczy możesz potrzebować lub nie, i usuwaj rzeczy tylko wtedy, gdy masz pewność, że jest to bezpieczne.</p>
+<p>Inna rzecz, którą możemy zrobić, to możemy po prostu usunąć cały katalog work, jeśli skończyliśmy uruchamianie workflow'a i mamy pewność, że już go nie potrzebujemy.</p>
+<p>Więc mogę zrobić "rm -r work". Wiem, że nie było tam nic ważnego. Mam swoje wyniki, na których mi zależy, w katalogu results, gdzie je skopiowaliśmy. I więc było bezpiecznie usunąć katalog work. To do Ciebie należy, które z tych podejść zastosujesz.</p>
 <h2 id="4-uzyj-zmiennego-wejscia-przekazanego-z-linii-polecen">4. Użyj zmiennego wejścia przekazanego z linii poleceń<a class="headerlink" href="#4-uzyj-zmiennego-wejscia-przekazanego-z-linii-polecen" title="Permanent link">&para;</a></h2>
-<p>Dobra, co dalej? Wspomniałem, że sztywno zakodowaliśmy niektóre wartości w naszym skrypcie workflow tutaj, plik output.txt, i że może być lepszy sposób, aby to zrobić.</p>
-<p>Zacznijmy od tego. Zrobimy trzy rzeczy. Dodamy nowe wejście do procesu. Powiemy skryptowi procesu, jak użyć tego wejścia, a następnie podłączymy to w workflow, abyśmy mogli używać tego dynamicznie z flagą linii poleceń podczas uruchamiania Nextflow.</p>
-<p>Więc przede wszystkim. Dodajmy blok input tutaj. Tak samo jak output. To jest nowa sekcja dla procesu, i powiem, "val greeting".</p>
-<p>Zauważ tutaj, mówię "val", co oznacza, że to jest zmienna, a nie path.</p>
-<p>Mogę wtedy przejść do skryptu i mogę wziąć ten sztywno zakodowany tekst tutaj i zrobić $greeting. To działa tak jak każdy inny język programowania. Definiujemy tutaj zmienną i odwołujemy się do niej w tym bloku script. Kiedy Nextflow uruchamia ten process, zmienna zostanie zinterpretowana. A kiedy zajrzymy do tego pliku .command.sh, zobaczymy faktyczny sztywno zakodowany ciąg znaków tutaj zamiast tego.</p>
+<p>Dobra, co dalej? Wspomniałem, że sztywno zakodowaliśmy niektóre wartości w naszym skrypcie workflow'a tutaj, plik output.txt, i że może być lepszy sposób, aby to zrobić.</p>
+<p>Zacznijmy od tego. Zrobimy trzy rzeczy. Dodamy nowe wejście do procesu. Powiemy skryptowi procesu, jak użyć tego wejścia, a następnie podłączymy to w workflow'ie, abyśmy mogli używać tego dynamicznie z flagą linii poleceń podczas uruchamiania Nextflow'a.</p>
+<p>Więc przede wszystkim. Dodajmy blok <code>input</code> tutaj. Tak samo jak <code>output</code>. To jest nowa sekcja dla procesu, i powiem, "val greeting".</p>
+<p>Zauważ tutaj, mówię <code>val</code>, co oznacza, że to jest zmienna, a nie <code>path</code>.</p>
+<p>Mogę wtedy przejść do skryptu i mogę wziąć ten sztywno zakodowany tekst tutaj i zrobić $greeting. To działa tak jak każdy inny język programowania. Definiujemy tutaj zmienną i odwołujemy się do niej w tym bloku <code>script</code>. Kiedy Nextflow uruchamia ten proces, zmienna zostanie zinterpretowana. A kiedy zajrzymy do tego pliku .command.sh, zobaczymy faktyczny sztywno zakodowany ciąg znaków tutaj zamiast tego.</p>
 <h2 id="413-ustaw-parametr-cli-i-podaj-go-jako-wejscie-do-wywoania-procesu">4.1.3. Ustaw parametr CLI i podaj go jako wejście do wywołania procesu<a class="headerlink" href="#413-ustaw-parametr-cli-i-podaj-go-jako-wejscie-do-wywoania-procesu" title="Permanent link">&para;</a></h2>
-<p>Dobra, ale gdzie podajemy zmienną? Następnie przechodzimy do sekcji workflow i możesz zobaczyć, że rozszerzenie tutaj mówi, że teraz oczekujemy wejścia i dało mi ostrzeżenie.</p>
-<p>Teraz najprostszą rzeczą, którą moglibyśmy zrobić, jest po prostu sztywne zakodowanie tego. Mógłbym napisać "Hello World" i podać to wejście ciągu znaków do procesu. Ale znowu, to tak naprawdę nie rozwiązałoby żadnych problemów. Nadal musielibyśmy wracać i edytować kod pipeline za każdym razem, gdy chcielibyśmy coś zmienić, co nie jest dobre.</p>
-<p>Dobra wiadomość jest taka, że Nextflow ma wbudowany system obsługi argumentów linii poleceń zwanych parametrami. Więc zamiast tego mogę użyć jednej z tych specjalnych zmiennych zwanych params i mogę nazwać to jak chcę, ale powiem greeting, żeby pasowało do logiki workflow.</p>
+<p>Dobra, ale gdzie podajemy zmienną? Następnie przechodzimy do sekcji <code>workflow</code> i możesz zobaczyć, że rozszerzenie tutaj mówi, że teraz oczekujemy wejścia i dało mi ostrzeżenie.</p>
+<p>Teraz najprostszą rzeczą, którą moglibyśmy zrobić, jest po prostu sztywne zakodowanie tego. Mógłbym napisać "Hello World" i podać to wejście ciągu znaków do procesu. Ale znowu, to tak naprawdę nie rozwiązałoby żadnych problemów. Nadal musielibyśmy wracać i edytować kod pipeline'u za każdym razem, gdy chcielibyśmy coś zmienić, co nie jest dobre.</p>
+<p>Dobra wiadomość jest taka, że Nextflow ma wbudowany system obsługi argumentów linii poleceń zwanych parametrami. Więc zamiast tego mogę użyć jednej z tych specjalnych zmiennych zwanych <code>params</code> i mogę nazwać to jak chcę, ale powiem greeting, żeby pasowało do logiki workflow'a.</p>
 <p>Zapisz i zobaczmy, co możemy z tym zrobić.</p>
 <p>Więc jeśli wrócę do terminala. Więc robimy "nextflow run hello-world.nf". Tak jak wcześniej, ale kluczowa różnica polega na tym, że robimy --greeting</p>
-<p>Zauważ, że są tutaj dwa myślniki, ponieważ to jest parametr. Kiedy wznawialiśmy workflow wcześniej, to był pojedynczy myślnik. To dlatego, że resume jest podstawową opcją Nextflow, a to jest parametr, który jest specyficzny dla naszego pipeline.</p>
+<p>Zauważ, że są tutaj dwa myślniki, ponieważ to jest parametr. Kiedy wznawialiśmy workflow wcześniej, to był pojedynczy myślnik. To dlatego, że resume jest podstawową opcją Nextflow'a, a to jest parametr, który jest specyficzny dla naszego pipeline'u.</p>
 <p>Nie myl tych dwóch. Łatwo to zrobić. Gdybyś zrobił --resume zamiast tylko jednego myślnika, to byłoby "params.resume", co by nic nie zrobiło. Podobnie, gdybyś zrobił pojedynczy myślnik tutaj, Nextflow nie rozpoznałby tego jako kluczowego argumentu.</p>
-<p>Więc to --greeting, które odpowiada parameters greeting.</p>
+<p>Więc to --greeting, które odpowiada <code>params.greeting</code>.</p>
 <p>Mogę teraz śledzić to dowolnym tekstem, jaki chcę. Więc jestem obecnie w Szwecji, więc powiem, "Hej världen".</p>
 <p>Więc uruchommy to, zobaczmy, co się stanie, moment prawdy.</p>
-<p>Dobra, więc możesz zobaczyć, że process został uruchomiony ponownie, tak jak wcześniej, sayHello z pojedynczym wykonaniem.</p>
-<p>To nadpisze plik, który był w katalogu publishDir "results". I więc bądź ostrożny, gdy ponownie uruchamiasz pliki, ponieważ rzeczy w publishDir zostaną nadpisane.</p>
+<p>Dobra, więc możesz zobaczyć, że proces został uruchomiony ponownie, tak jak wcześniej, sayHello z pojedynczym wykonaniem.</p>
+<p>To nadpisze plik, który był w katalogu <code>publishDir</code> "results". I więc bądź ostrożny, gdy ponownie uruchamiasz pliki, ponieważ rzeczy w <code>publishDir</code> zostaną nadpisane.</p>
 <p>Mogę teraz zrobić "code results/output.txt" i rzeczywiście, nasze wyjście zostało zaktualizowane i teraz mówi "Hej världen".</p>
 <h2 id="42-uzyj-wartosci-domyslnych-dla-parametrow-linii-polecen">4.2. Użyj wartości domyślnych dla parametrów linii poleceń<a class="headerlink" href="#42-uzyj-wartosci-domyslnych-dla-parametrow-linii-polecen" title="Permanent link">&para;</a></h2>
-<p>Dobra, to świetnie. Ale problem polega teraz na tym, że nasz workflow polega na tym, że zawsze definiujemy ten parametr, i miło jest mieć rozsądne wartości domyślne, aby rzeczy działały w rozsądny sposób dla Twojego workflow, chyba że nadpiszesz domyślne.</p>
-<p>Więc sposób, w jaki to robimy, to ustawienie wartości domyślnej dla parametru w naszym skrypcie workflow.</p>
-<p>Więc jeśli wrócę do mojego pliku hello-world.nf, mogę przejść do skryptu tuż nad workflow, wpisać "params.greeting" i zdefiniować to jak każdą inną zmienną. Więc umieśćmy tutaj ciąg znaków i powiedzmy "Holà mundo!"</p>
+<p>Dobra, to świetnie. Ale problem polega teraz na tym, że nasz workflow polega na tym, że zawsze definiujemy ten parametr, i miło jest mieć rozsądne wartości domyślne, aby rzeczy działały w rozsądny sposób dla Twojego workflow'a, chyba że nadpiszesz domyślne.</p>
+<p>Więc sposób, w jaki to robimy, to ustawienie wartości domyślnej dla parametru w naszym skrypcie workflow'a.</p>
+<p>Więc jeśli wrócę do mojego pliku hello-world.nf, mogę przejść do skryptu tuż nad workflow'em, wpisać "params.greeting" i zdefiniować to jak każdą inną zmienną. Więc umieśćmy tutaj ciąg znaków i powiedzmy "Holà mundo!"</p>
 <p>Teraz ten parametr ma zdefiniowaną wartość domyślną, która będzie używana tutaj, lub nadal możemy nadpisać to w linii poleceń za pomocą --greeting, tak jak robiliśmy wcześniej.</p>
 <p>Więc sprawdźmy, czy działa. "nextflow run hello-world.nf"</p>
 <p>Tym razem bez argumentów linii poleceń i sprawdźmy, czy zrobił właściwą rzecz.</p>
 <p>"code results/output.txt". I proszę. Dostaliśmy naszą wartość domyślną.</p>
 <p>Dobra, spróbujmy jeszcze raz, tylko sprawdź, że nie mówię nieprawdy. Uruchommy to ponownie, ale zróbmy --greeting i użyjmy przykładu z materiałów szkoleniowych, powiedzmy "Konnichiwa!"</p>
 <p>Ponownie uruchamia workflow i rzeczywiście, nasz plik wyjściowy na górze został właśnie zaktualizowany nową wartością, którą podaliśmy w linii poleceń.</p>
-<p>Świetnie. To jest naprawdę centralny aspekt pisania dowolnego workflow Nextflow. Definiowanie rozsądnych wartości domyślnych w kodzie pipeline, ale ułatwianie konfiguracji użytkownikowi końcowemu poprzez posiadanie argumentów linii poleceń w terminalu.</p>
-<p>Zauważ, że użytkownik końcowy może nadpisać konfigurację w wielu różnych miejscach. Możesz mieć plik konfiguracyjny w Swoim katalogu domowym, który jest stosowany do każdego pojedynczego uruchomienia Nextflow, które robisz. Możesz mieć plik konfiguracyjny w katalogu startowym. Możesz mieć plik konfiguracyjny w katalogu pipeline. Wszystkie te różne lokalizacje konfiguracji są ładowane w określonej kolejności, która jest opisana w dokumentacji Nextflow.</p>
-<p>Dobra, to koniec sekcji pierwszej. Mieliśmy nasz pierwszy skrypt workflow w Nextflow z processem i workflow. Przyjrzeliśmy się wejściom, wyjściom, skryptom i publikowaniu oraz jak podłączyć parametry i kanał wejściowy do naszego procesu.</p>
-<p>Gratulacje, Twój pierwszy krok w kierunku pisania kodu Nextflow jest ukończony.</p>
+<p>Świetnie. To jest naprawdę centralny aspekt pisania dowolnego workflow'a Nextflow'a. Definiowanie rozsądnych wartości domyślnych w kodzie pipeline'u, ale ułatwianie konfiguracji użytkownikowi końcowemu poprzez posiadanie argumentów linii poleceń w terminalu.</p>
+<p>Zauważ, że użytkownik końcowy może nadpisać konfigurację w wielu różnych miejscach. Możesz mieć plik konfiguracyjny w Twoim katalogu domowym, który jest stosowany do każdego pojedynczego uruchomienia Nextflow'a, które robisz. Możesz mieć plik konfiguracyjny w katalogu startowym. Możesz mieć plik konfiguracyjny w katalogu pipeline'u. Wszystkie te różne lokalizacje konfiguracji są ładowane w określonej kolejności, która jest opisana w dokumentacji Nextflow'a.</p>
+<p>Dobra, to koniec sekcji pierwszej. Mieliśmy nasz pierwszy skrypt workflow'a w Nextflow z procesem i workflow'em. Przyjrzeliśmy się wejściom, wyjściom, skryptom i publikowaniu oraz jak podłączyć parametry i kanał wejściowy do naszego procesu.</p>
+<p>Gratulacje, Twój pierwszy krok w kierunku pisania kodu Nextflow'a jest ukończony.</p>
 <p>Zrób sobie małą przerwę, a zobaczę cię za kilka minut w rozdziale drugim.</p>
 <p><a href="../02_hello_channels/">Następna transkrypcja wideo <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.22 19.03a.75.75 0 0 1 0-1.06L18.19 13H3.75a.75.75 0 0 1 0-1.5h14.44l-4.97-4.97a.749.749 0 0 1 .326-1.275.75.75 0 0 1 .734.215l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;

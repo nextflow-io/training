@@ -1423,7 +1423,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2788,7 +2788,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3629,14 +3629,14 @@
 -->
 
 <h2 id="twoja-droga">Twoja droga<a class="headerlink" href="#twoja-droga" title="Permanent link">&para;</a></h2>
-<p>Zacząłeś od bardzo prostego workflow'u, który uruchamiał zakodowane na sztywno polecenie.
-W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularny, wieloetapowy pipeline wykorzystujący kluczowe funkcje Nextflow, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.</p>
+<p>Zacząłeś od bardzo prostego workflow'u uruchamiającego zakodowane na sztywno polecenie.
+W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularny, wieloetapowy pipeline wykorzystujący kluczowe funkcje Nextflow'a, w tym kanały, operatory, wbudowaną obsługę kontenerów i opcje konfiguracji.</p>
 <h3 id="co-zbudowaes">Co zbudowałeś<a class="headerlink" href="#co-zbudowaes" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Ostateczna forma workflow'u Hello przyjmuje jako wejście plik CSV zawierający tekstowe pozdrowienia.</li>
-<li>Cztery kroki są zaimplementowane jako procesy Nextflow (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> i <code>cowpy</code>) przechowywane w osobnych plikach modułów.</li>
+<li>Cztery kroki są zaimplementowane jako procesy Nextflow'a (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> i <code>cowpy</code>) przechowywane w osobnych plikach modułów.</li>
 <li>Wyniki są publikowane do katalogu o nazwie <code>results/</code>.</li>
-<li>Końcowe wyjście pipeline'u to plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia zapisane wielkimi literami.</li>
+<li>Końcowe wyjście pipeline'u to zwykły plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia zapisane wielkimi literami.</li>
 </ul>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
@@ -3648,7 +3648,7 @@ W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularn
 </figure>
 
 <ol>
-<li><strong><code>sayHello</code>:</strong> Zapisuje każde pozdrowienie do własnego pliku wyjściowego (<em>np.</em> "Hello-output.txt")</li>
+<li><strong><code>sayHello</code>:</strong> Zapisuje każde pozdrowienie do osobnego pliku wyjściowego (<em>np.</em> "Hello-output.txt")</li>
 <li><strong><code>convertToUpper</code>:</strong> Konwertuje każde pozdrowienie na wielkie litery (<em>np.</em> "HELLO")</li>
 <li><strong><code>collectGreetings</code>:</strong> Zbiera wszystkie pozdrowienia z wielkimi literami do jednego pliku batch</li>
 <li><strong><code>cowpy</code>:</strong> Generuje grafikę ASCII za pomocą narzędzia <code>cowpy</code></li>
@@ -3657,21 +3657,21 @@ W ciągu sześciu części przekształciłeś ten podstawowy workflow w modularn
 <h3 id="nabyte-umiejetnosci">Nabyte umiejętności<a class="headerlink" href="#nabyte-umiejetnosci" title="Permanent link">&para;</a></h3>
 <p>Dzięki temu praktycznemu kursowi nauczyłeś się:</p>
 <ul>
-<li>Opisywać i wykorzystywać podstawowe komponenty Nextflow wystarczające do budowania prostego, wieloetapowego workflow'u</li>
+<li>Opisywać i wykorzystywać podstawowe komponenty Nextflow'a wystarczające do zbudowania prostego, wieloetapowego workflow'u</li>
 <li>Opisywać koncepcje kolejnego kroku, takie jak operatory i fabryki kanałów</li>
-<li>Uruchamiać workflow Nextflow lokalnie</li>
-<li>Znajdować i interpretować wyjścia (wyniki) i pliki dziennika generowane przez Nextflow</li>
+<li>Uruchamiać workflow Nextflow'a lokalnie</li>
+<li>Znajdować i interpretować wyjścia (wyniki) oraz pliki dziennika generowane przez Nextflow'a</li>
 <li>Rozwiązywać podstawowe problemy</li>
 </ul>
-<p>Jesteś teraz wyposażony w fundamentalną wiedzę, aby zacząć tworzyć własne pipeline'y w Nextflow.</p>
+<p>Jesteś teraz wyposażony w fundamentalną wiedzę, aby zacząć tworzyć własne pipeline'y w Nextflow'ie.</p>
 <h2 id="kolejne-kroki-do-rozwijania-umiejetnosci">Kolejne kroki do rozwijania umiejętności<a class="headerlink" href="#kolejne-kroki-do-rozwijania-umiejetnosci" title="Permanent link">&para;</a></h2>
-<p>Oto nasze 3 najlepsze sugestie, co robić dalej:</p>
+<p>Oto nasze 3 najlepsze sugestie, co zrobić dalej:</p>
 <ul>
-<li>Zastosuj Nextflow do naukowego przypadku analizy z <a href="../../nf4_science/">Nextflow dla nauki</a></li>
-<li>Rozpocznij pracę z nf-core z <a href="../../hello_nf-core/">Hello nf-core</a></li>
-<li>Odkryj bardziej zaawansowane funkcje Nextflow z <a href="../../side_quests/">Side Quests</a></li>
+<li>Zastosuj Nextflow'a do naukowego przypadku analizy z <a href="../../nf4_science/">Nextflow dla nauki</a></li>
+<li>Rozpocznij pracę z nf-core dzięki <a href="../../hello_nf-core/">Hello nf-core</a></li>
+<li>Odkryj bardziej zaawansowane funkcje Nextflow'a w ramach <a href="../../side_quests/">Side Quests</a></li>
 </ul>
-<p>Na koniec polecamy zapoznać się z <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, platformą chmurową opracowaną przez twórców Nextflow, która jeszcze bardziej ułatwia uruchamianie workflow'ów i zarządzanie nimi, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.</p>
+<p>Na koniec polecamy zapoznać się z <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, platformą chmurową opracowaną przez twórców Nextflow'a, która jeszcze bardziej ułatwia uruchamianie workflow'ów i zarządzanie nimi, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.</p>
 <h2 id="ankieta-zwrotna">Ankieta zwrotna<a class="headerlink" href="#ankieta-zwrotna" title="Permanent link">&para;</a></h2>
 <p>Zanim przejdziesz dalej, poświęć chwilę na wypełnienie ankiety kursu! Twoja opinia pomaga nam ulepszać materiały szkoleniowe dla wszystkich.</p>
 <p><a class="md-button md-button--primary" href="../survey/">Wypełnij ankietę <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {

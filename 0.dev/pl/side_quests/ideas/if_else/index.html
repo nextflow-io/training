@@ -1134,7 +1134,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3334,7 +3334,7 @@
 <hr />
 <h2 id="1-spraw-aby-krowa-cytowaa-synnych-naukowcow">1. Spraw, aby krowa cytowała słynnych naukowców<a class="headerlink" href="#1-spraw-aby-krowa-cytowaa-synnych-naukowcow" title="Permanent link">&para;</a></h2>
 <p>Ta sekcja zawiera dodatkowe ćwiczenia pozwalające na utrwalenie dotychczas zdobytej wiedzy.
-Wykonanie tych ćwiczeń <em>nie jest wymagane</em> do zrozumienia późniejszych części szkolenia, ale stanowi świetny sposób na utrwalenie wiedzy poprzez sprawdzenie, jak sprawić, aby krowa cytowała słynnych naukowców.</p>
+Wykonanie tych ćwiczeń <em>nie jest wymagane</em> do zrozumienia późniejszych części szkolenia, ale stanowi świetny sposób na sprawdzenie, jak zmusić krowę do cytowania słynnych naukowców.</p>
 <div class="highlight"><span class="filename">cowsay-output-Grace-Hopper.txt</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">  _________________________________________________</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go"> /                                                 \</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">| Humans are allergic to change. They love to       |</span>
@@ -3360,7 +3360,7 @@ Na wysokim poziomie, aby wykonać to ćwiczenie, będziesz musiał:</p>
 <li>Utworzyć proces <code>getQuote</code>, który używa kontenera <code>quote</code> do pobrania cytatu dla każdego wejścia.</li>
 <li>Połączyć wyjście procesu <code>getQuote</code> z procesem <code>cowsay</code>, aby wyświetlić cytat.</li>
 </ul>
-<p>Dla obrazu kontenera <code>quote</code> możesz użyć albo tego, który sam zbudowałeś w poprzednim dodatkowym ćwiczeniu, albo tego z Seqera Containers.</p>
+<p>Dla obrazu kontenera <code>quote</code> możesz użyć albo tego, który sam zbudowałeś w poprzednim dodatkowym ćwiczeniu, albo pobrać gotowy z Seqera Containers.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Dobrym wyborem dla bloku <code>script</code> Twojego procesu getQuote może być:
@@ -3375,7 +3375,7 @@ Na wysokim poziomie, aby wykonać to ćwiczenie, będziesz musiał:</p>
 <p>Rozwiązanie tego ćwiczenia znajdziesz w pliku <code>containers/solutions/hello-containers-4.1.nf</code>.</p>
 <h3 id="12-zmodyfikuj-swoj-pipeline-nextflow-aby-mog-wykonywac-sie-w-trybach-quote-i-sayhello">1.2. Zmodyfikuj Swój pipeline Nextflow, aby mógł wykonywać się w trybach <code>quote</code> i <code>sayHello</code>.<a class="headerlink" href="#12-zmodyfikuj-swoj-pipeline-nextflow-aby-mog-wykonywac-sie-w-trybach-quote-i-sayhello" title="Permanent link">&para;</a></h3>
 <p>Dodaj logikę rozgałęzień do Swojego pipeline'u, aby mógł akceptować dane wejściowe przeznaczone zarówno dla <code>quote</code>, jak i <code>sayHello</code>.
-Oto przykład użycia instrukcji <code>if</code> w workflow Nextflow:</p>
+Oto przykład użycia instrukcji <code>if</code> w workflow'ie Nextflow:</p>
 <div class="highlight"><span class="filename">hello-containers.nf</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">quote</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="o">...</span>

@@ -1140,7 +1140,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -1596,6 +1596,28 @@
     <span class="md-ellipsis">
       
         4.5. Znalezienie wyników pipeline'u
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#podsumowanie_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Podsumowanie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#co-dalej_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Co dalej?
       
     </span>
   </a>
@@ -3096,7 +3118,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3968,6 +3990,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#podsumowanie_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Podsumowanie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#co-dalej_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Co dalej?
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4231,10 +4275,10 @@
 
 <h1 id="czesc-2-przepisanie-hello-dla-nf-core">Część 2: Przepisanie Hello dla nf-core<a class="headerlink" href="#czesc-2-przepisanie-hello-dla-nf-core" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>W tej drugiej części kursu szkoleniowego Hello nf-core pokażemy, jak utworzyć wersję workflow'u kompatybilną z nf-core, opartą na projekcie z kursu dla początkujących <a href="../../hello_nextflow/">Hello Nextflow</a>.</p>
-<p>Zauważyłeś w pierwszej sekcji szkolenia, że workflow'y nf-core mają dość rozbudowaną strukturę z wieloma plikami pomocniczymi.
-Tworzenie tego wszystkiego od zera byłoby bardzo żmudne, dlatego społeczność opracowała narzędzia, które wykorzystują szablon do wygenerowania podstawowej struktury projektu.</p>
-<p>Pokażemy, jak użyć tych narzędzi do wygenerowania szkieletu projektu, a następnie zaadaptować istniejący kod 'zwykłego' workflow'u do struktury nf-core.</p>
+<p>W tej drugiej części kursu szkoleniowego Hello nf-core pokażemy Ci, jak utworzyć wersję pipeline'u kompatybilną z nf-core, opartą na projekcie z kursu dla początkujących <a href="../../hello_nextflow/">Hello Nextflow</a>.</p>
+<p>Zauważyłeś w pierwszej części szkolenia, że pipeline'y nf-core mają dość rozbudowaną strukturę z wieloma plikami pomocniczymi.
+Tworzenie tego wszystkiego od zera byłoby bardzo żmudne, dlatego społeczność nf-core opracowała narzędzia, które wykorzystują szablon do wygenerowania podstawowej struktury projektu.</p>
+<p>Pokażemy Ci, jak użyć tych narzędzi do wygenerowania szkieletu pipeline'u, a następnie zaadaptować istniejący kod 'zwykłego' pipeline'u do struktury nf-core.</p>
 <p>Jeśli nie znasz pipeline'u Hello lub potrzebujesz przypomnienia, zobacz <a href="../../info/hello_pipeline/">tę stronę informacyjną</a>.</p>
 <hr />
 <h2 id="1-stworzenie-nowego-projektu-pipelineu">1. Stworzenie nowego projektu pipeline'u<a class="headerlink" href="#1-stworzenie-nowego-projektu-pipelineu" title="Permanent link">&para;</a></h2>
@@ -4352,12 +4396,12 @@ Spowoduje to utworzenie nowego szkieletu pipeline'u przy użyciu podstawowego sz
 </code></pre></div>
 </details>
 <p>To dużo plików!</p>
-<p>Miejmy nadzieję, że rozpoznasz wiele z nich jako te same, które napotkaliśmy podczas eksploracji struktury pipeline'u <code>nf-core/demo</code>.
+<p>Mamy nadzieję, że rozpoznasz wiele z nich jako te same, które napotkaliśmy podczas eksploracji struktury pipeline'u <code>nf-core/demo</code>.
 Ale nie martw się, jeśli wciąż czujesz się trochę zagubiony; omówimy razem ważne części w trakcie tego szkolenia.</p>
 <div class="admonition note">
 <p class="admonition-title">Uwaga</p>
-<p>Jedna ważna różnica w porównaniu do pipeline'u <code>nf-core/demo</code>, który zbadaliśmy w pierwszej części tego szkolenia, polega na tym, że nie ma katalogu <code>modules</code>.
-Dzieje się tak, ponieważ nie zdecydowaliśmy się uwzględnić żadnego z domyślnych modułów nf-core.</p>
+<p>Jedna istotna różnica w porównaniu do pipeline'u <code>nf-core/demo</code>, który zbadaliśmy w pierwszej części tego szkolenia, polega na tym, że nie ma katalogu <code>modules</code>.
+Wynika to z faktu, że nie zdecydowaliśmy się uwzględnić żadnego z domyślnych modułów nf-core.</p>
 </div>
 <h3 id="12-sprawdzenie-czy-szkielet-jest-funkcjonalny">1.2. Sprawdzenie, czy szkielet jest funkcjonalny<a class="headerlink" href="#12-sprawdzenie-czy-szkielet-jest-funkcjonalny" title="Permanent link">&para;</a></h3>
 <p>Wierz lub nie, mimo że nie dodałeś jeszcze żadnych modułów do wykonywania rzeczywistej pracy, szkielet pipeline'u można uruchomić używając profilu testowego, tak samo jak uruchamialiśmy pipeline <code>nf-core/demo</code>.</p>
@@ -4398,7 +4442,7 @@ Dzieje się tak, ponieważ nie zdecydowaliśmy się uwzględnić żadnego z domy
 </details>
 <p>To pokazuje, że całe podstawowe okablowanie jest na miejscu.
 Gdzie więc są wyniki? Czy w ogóle jakieś są?</p>
-<p>Tak naprawdę został utworzony nowy katalog wyników o nazwie <code>core-hello-results</code> zawierający standardowe raporty wykonania:</p>
+<p>W rzeczywistości został utworzony nowy katalog wyników o nazwie <code>core-hello-results</code> zawierający standardowe raporty wykonania:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>tree<span class="w"> </span>core-hello-results
 </code></pre></div>
 <details class="abstract">
@@ -4511,15 +4555,15 @@ Gdzie więc są wyniki? Czy w ogóle jakieś są?</p>
 </code></pre></div></td></tr></table></div>
 <p>W porównaniu do podstawowego workflow Nextflow, takiego jak ten opracowany w <a href="../../hello_nextflow/">Hello Nextflow</a>, zauważysz kilka nowych rzeczy (podświetlone linie powyżej):</p>
 <ul>
-<li>Blok workflow'u ma nazwę</li>
+<li>Blok <strong>workflow</strong> ma nazwę</li>
 <li>Wejścia workflow'u są deklarowane za pomocą słowa kluczowego <code>take:</code>, a konstrukcja kanału jest przenoszona do workflow'u nadrzędnego</li>
 <li>Zawartość workflow'u jest umieszczona w bloku <code>main:</code></li>
 <li>Wyjścia są deklarowane za pomocą słowa kluczowego <code>emit:</code></li>
 </ul>
-<p>Są to opcjonalne funkcje Nextflow, które sprawiają, że workflow jest <strong>kompozycyjny</strong>, co oznacza, że może być wywoływany z innego workflow.</p>
+<p>Są to opcjonalne funkcje Nextflow'a, które sprawiają, że workflow jest <strong>kompozycyjny</strong>, co oznacza, że może być wywoływany z innego workflow'u.</p>
 <div class="admonition note">
 <p class="admonition-title">Kompozycyjne workflow w szczegółach</p>
-<p><a href="../../side_quests/workflows_of_workflows/">Side Quest Workflows of Workflows</a> bada kompozycję workflow'ów znacznie głębiej, w tym jak komponować wiele workflow'ów razem i zarządzać złożonymi przepływami danych między nimi. Wprowadzamy kompozycyjność tutaj, ponieważ jest to podstawowy wymóg architektury szablonu nf-core, która wykorzystuje zagnieżdżone workflow'y do organizowania inicjalizacji pipeline'u, głównego workflow'u analizy i zadań zakończenia w oddzielne, wielokrotnego użytku komponenty.</p>
+<p><a href="../../side_quests/workflows_of_workflows/">Side Quest Workflows of Workflows</a> bada kompozycję workflow'ów znacznie głębiej, w tym sposób komponowania wielu workflow'ów razem oraz zarządzania złożonymi przepływami danych między nimi. Wprowadzamy kompozycyjność tutaj, ponieważ jest to podstawowy wymóg architektury szablonu nf-core, która wykorzystuje zagnieżdżone workflow'y do organizowania inicjalizacji pipeline'u, głównego workflow'u analizy oraz zadań zakończenia w oddzielne, wielokrotnego użytku komponenty.</p>
 </div>
 <p>Będziemy musieli podłączyć odpowiednią logikę z naszego workflow'u do tej struktury.
 Pierwszym krokiem jest uczynienie naszego oryginalnego workflow'u kompozycyjnym.</p>
@@ -4530,7 +4574,7 @@ Pierwszym krokiem jest uczynienie naszego oryginalnego workflow'u kompozycyjnym.
 <hr />
 <h2 id="2-uczynienie-oryginalnego-workflow-hello-nextflow-kompozycyjnym">2. Uczynienie oryginalnego workflow Hello Nextflow kompozycyjnym<a class="headerlink" href="#2-uczynienie-oryginalnego-workflow-hello-nextflow-kompozycyjnym" title="Permanent link">&para;</a></h2>
 <p>Teraz czas rozpocząć pracę nad integracją naszego przepływu pracy do szkieletu nf-core.
-Przypominamy, że pracujemy z kodem przedstawionym w kursie szkoleniowym <a href="../../hello_nextflow/">Hello Nextflow</a>.</p>
+Przypominamy, że pracujemy z workflow'em przedstawionym w kursie szkoleniowym <a href="../../hello_nextflow/">Hello Nextflow</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Wskazówka</p>
 <p>Jeśli nie znasz tego pipeline'u lub potrzebujesz przypomnienia, zobacz <a href="../../info/hello_pipeline/">Pipeline Hello</a>.</p>
@@ -4611,7 +4655,7 @@ Przypominamy, że pracujemy z kodem przedstawionym w kursie szkoleniowym <a href
 <a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test-batch&#39;</span>
 <a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
 <a id="__codelineno-15-9" name="__codelineno-15-9"></a>
-<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="c1">// Dołącz moduły</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="c1">// Include modules</span>
 <a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
 <a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
 <a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
@@ -4619,21 +4663,21 @@ Przypominamy, że pracujemy z kodem przedstawionym w kursie szkoleniowym <a href
 <a id="__codelineno-15-15" name="__codelineno-15-15"></a>
 <a id="__codelineno-15-16" name="__codelineno-15-16"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-17" name="__codelineno-15-17"></a>
-<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">  </span><span class="c1">// utwórz kanał dla danych wejściowych z pliku CSV</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a><span class="w">  </span><span class="c1">// create a channel for inputs from a CSV file</span>
 <a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="w">  </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="w">                      </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="w">                      </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-15-22" name="__codelineno-15-22"></a>
-<a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="w">  </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="w">  </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-15-24" name="__codelineno-15-24"></a><span class="w">  </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-15-25" name="__codelineno-15-25"></a>
-<a id="__codelineno-15-26" name="__codelineno-15-26"></a><span class="w">  </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-15-26" name="__codelineno-15-26"></a><span class="w">  </span><span class="c1">// convert the greeting to uppercase</span>
 <a id="__codelineno-15-27" name="__codelineno-15-27"></a><span class="w">  </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-15-28" name="__codelineno-15-28"></a>
-<a id="__codelineno-15-29" name="__codelineno-15-29"></a><span class="w">  </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<a id="__codelineno-15-29" name="__codelineno-15-29"></a><span class="w">  </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-15-30" name="__codelineno-15-30"></a><span class="w">  </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 <a id="__codelineno-15-31" name="__codelineno-15-31"></a>
-<a id="__codelineno-15-32" name="__codelineno-15-32"></a><span class="w">  </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-15-32" name="__codelineno-15-32"></a><span class="w">  </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
 <a id="__codelineno-15-33" name="__codelineno-15-33"></a><span class="w">  </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 <a id="__codelineno-15-34" name="__codelineno-15-34"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4671,7 +4715,7 @@ Aby uczynić go możliwym do uruchomienia z workflow'u nadrzędnego, jak wymaga 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">original-hello/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-18">18</a></span>
 <span class="normal"><a href="#__codelineno-19-19">19</a></span>
 <span class="normal"><a href="#__codelineno-19-20">20</a></span>
-<span class="normal"><a href="#__codelineno-19-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="w">    </span><span class="c1">// utwórz kanał dla danych wejściowych z pliku CSV</span>
+<span class="normal"><a href="#__codelineno-19-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
 <a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
 <a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-19-21" name="__codelineno-19-21"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -4738,16 +4782,16 @@ Dzieje się tak, ponieważ jeśli umieścisz instrukcję <code>take:</code>, mus
 <span class="normal"><a href="#__codelineno-22-33">33</a></span>
 <span class="normal"><a href="#__codelineno-22-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-22" name="__codelineno-22-22"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
 </span><a id="__codelineno-22-23" name="__codelineno-22-23"></a>
-<a id="__codelineno-22-24" name="__codelineno-22-24"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-22-24" name="__codelineno-22-24"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-22-25" name="__codelineno-22-25"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-22-26" name="__codelineno-22-26"></a>
-<a id="__codelineno-22-27" name="__codelineno-22-27"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-22-27" name="__codelineno-22-27"></a><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 <a id="__codelineno-22-28" name="__codelineno-22-28"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-22-29" name="__codelineno-22-29"></a>
-<a id="__codelineno-22-30" name="__codelineno-22-30"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<a id="__codelineno-22-30" name="__codelineno-22-30"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-22-31" name="__codelineno-22-31"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 <a id="__codelineno-22-32" name="__codelineno-22-32"></a>
-<a id="__codelineno-22-33" name="__codelineno-22-33"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-22-33" name="__codelineno-22-33"></a><span class="w">    </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
 <a id="__codelineno-22-34" name="__codelineno-22-34"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4762,16 +4806,16 @@ Dzieje się tak, ponieważ jeśli umieścisz instrukcję <code>take:</code>, mus
 <span class="normal"><a href="#__codelineno-23-28">28</a></span>
 <span class="normal"><a href="#__codelineno-23-29">29</a></span>
 <span class="normal"><a href="#__codelineno-23-30">30</a></span>
-<span class="normal"><a href="#__codelineno-23-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-23-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-23-22" name="__codelineno-23-22"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-23-23" name="__codelineno-23-23"></a>
-<a id="__codelineno-23-24" name="__codelineno-23-24"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-23-24" name="__codelineno-23-24"></a><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 <a id="__codelineno-23-25" name="__codelineno-23-25"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-23-26" name="__codelineno-23-26"></a>
-<a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-23-28" name="__codelineno-23-28"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 <a id="__codelineno-23-29" name="__codelineno-23-29"></a>
-<a id="__codelineno-23-30" name="__codelineno-23-30"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-23-30" name="__codelineno-23-30"></a><span class="w">    </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
 <a id="__codelineno-23-31" name="__codelineno-23-31"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4833,7 +4877,7 @@ Dzieje się tak, ponieważ jeśli umieścisz instrukcję <code>take:</code>, mus
 <a id="__codelineno-25-7" name="__codelineno-25-7"></a><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test-batch&#39;</span>
 <a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;turkey&#39;</span>
 <a id="__codelineno-25-9" name="__codelineno-25-9"></a>
-<a id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="c1">// Dołącz moduły</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="c1">// Include modules</span>
 <a id="__codelineno-25-11" name="__codelineno-25-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
 <a id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
 <a id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
@@ -4847,16 +4891,16 @@ Dzieje się tak, ponieważ jeśli umieścisz instrukcję <code>take:</code>, mus
 </span><a id="__codelineno-25-21" name="__codelineno-25-21"></a>
 <a id="__codelineno-25-22" name="__codelineno-25-22"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
 </span><a id="__codelineno-25-23" name="__codelineno-25-23"></a>
-<a id="__codelineno-25-24" name="__codelineno-25-24"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-25-24" name="__codelineno-25-24"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-25-25" name="__codelineno-25-25"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-25-26" name="__codelineno-25-26"></a>
-<a id="__codelineno-25-27" name="__codelineno-25-27"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-25-27" name="__codelineno-25-27"></a><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 <a id="__codelineno-25-28" name="__codelineno-25-28"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-25-29" name="__codelineno-25-29"></a>
-<a id="__codelineno-25-30" name="__codelineno-25-30"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<a id="__codelineno-25-30" name="__codelineno-25-30"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-25-31" name="__codelineno-25-31"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 <a id="__codelineno-25-32" name="__codelineno-25-32"></a>
-<a id="__codelineno-25-33" name="__codelineno-25-33"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-25-33" name="__codelineno-25-33"></a><span class="w">    </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
 <a id="__codelineno-25-34" name="__codelineno-25-34"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 <a id="__codelineno-25-35" name="__codelineno-25-35"></a>
 <a id="__codelineno-25-36" name="__codelineno-25-36"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
@@ -4914,7 +4958,7 @@ Możemy stworzyć prosty fikcyjny workflow punktu wejścia, aby przetestować ko
 </code></pre></div></td></tr></table></div>
 <p>Są tutaj dwie ważne obserwacje:</p>
 <ul>
-<li>Sposób wywoływania zaimportowanego przepływu pracy jest zasadniczo taki sam jak w przypadku modułów.</li>
+<li>Sposób wywoływania zaimportowanego workflow'u jest zasadniczo taki sam jak w przypadku modułów.</li>
 <li>Wszystko, co jest związane z wprowadzaniem wejść (parametr wejściowy i konstrukcja kanału) jest teraz zadeklarowane w nadrzędnym skrypcie.</li>
 </ul>
 <div class="admonition note">
@@ -4949,7 +4993,7 @@ Gdybyśmy nazwali workflow punktu wejścia <code>something_else.nf</code>, musie
 </details>
 <p>To oznacza, że pomyślnie zaktualizowaliśmy nasz workflow HELLO, aby był kompozycyjny.</p>
 <h3 id="podsumowanie_1">Podsumowanie<a class="headerlink" href="#podsumowanie_1" title="Permanent link">&para;</a></h3>
-<p>Wiesz, jak uczynić workflow kompozycyjnym, nadając mu nazwę i dodając instrukcje <code>take</code>, <code>main</code> i <code>emit</code>, oraz jak wywoływać go z workflow'u punktu wejścia.</p>
+<p>Wiesz, jak uczynić workflow kompozycyjnym, nadając mu nazwę oraz dodając instrukcje <code>take</code>, <code>main</code> i <code>emit</code>, a także jak wywoływać go z workflow'u punktu wejścia.</p>
 <h3 id="co-dalej_1">Co dalej?<a class="headerlink" href="#co-dalej_1" title="Permanent link">&para;</a></h3>
 <p>Naucz się, jak przeszczepić podstawowy kompozycyjny workflow na szkielet nf-core.</p>
 <hr />
@@ -5094,7 +5138,7 @@ Musimy skopiować te moduły do struktury projektu nf-core (pod <code>core-hello
 <span class="normal"><a href="#__codelineno-34-10">10</a></span>
 <span class="normal"><a href="#__codelineno-34-11">11</a></span>
 <span class="normal"><a href="#__codelineno-34-12">12</a></span>
-<span class="normal"><a href="#__codelineno-34-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="c1">// Dołącz moduły</span>
+<span class="normal"><a href="#__codelineno-34-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="c1">// Include modules</span>
 <a id="__codelineno-34-10" name="__codelineno-34-10"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/sayHello.nf&#39;</span>
 <a id="__codelineno-34-11" name="__codelineno-34-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/convertToUpper.nf&#39;</span>
 <a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/collectGreetings.nf&#39;</span>
@@ -5175,16 +5219,16 @@ Ponieważ to jest zasadniczo tym, czym jest nasz plik <code>greetings.csv</code>
 <span class="normal"><a href="#__codelineno-38-33">33</a></span>
 <span class="normal"><a href="#__codelineno-38-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-22" name="__codelineno-38-22"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-38-23" name="__codelineno-38-23"></a>
-<a id="__codelineno-38-24" name="__codelineno-38-24"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-38-24" name="__codelineno-38-24"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-38-25" name="__codelineno-38-25"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-38-26" name="__codelineno-38-26"></a>
-<a id="__codelineno-38-27" name="__codelineno-38-27"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-38-27" name="__codelineno-38-27"></a><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 <a id="__codelineno-38-28" name="__codelineno-38-28"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-38-29" name="__codelineno-38-29"></a>
-<a id="__codelineno-38-30" name="__codelineno-38-30"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<a id="__codelineno-38-30" name="__codelineno-38-30"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-38-31" name="__codelineno-38-31"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 <a id="__codelineno-38-32" name="__codelineno-38-32"></a>
-<a id="__codelineno-38-33" name="__codelineno-38-33"></a><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+<a id="__codelineno-38-33" name="__codelineno-38-33"></a><span class="w">    </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
 <a id="__codelineno-38-34" name="__codelineno-38-34"></a><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>Musimy skopiować kod, który następuje po <code>main:</code> do nowej wersji workflow.</p>
@@ -5239,16 +5283,16 @@ Ta kolejność ma sens, ponieważ w prawdziwym projekcie procesy emitowałyby in
 <a id="__codelineno-39-25" name="__codelineno-39-25"></a>
 <a id="__codelineno-39-26" name="__codelineno-39-26"></a><span class="w">    </span><span class="n">ch_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">empty</span><span class="o">()</span>
 <a id="__codelineno-39-27" name="__codelineno-39-27"></a>
-<a id="__codelineno-39-28" name="__codelineno-39-28"></a><span class="hll"><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-39-28" name="__codelineno-39-28"></a><span class="hll"><span class="w">    </span><span class="c1">// emit a greeting</span>
 </span><a id="__codelineno-39-29" name="__codelineno-39-29"></a><span class="hll"><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </span><a id="__codelineno-39-30" name="__codelineno-39-30"></a><span class="hll">
-</span><a id="__codelineno-39-31" name="__codelineno-39-31"></a><span class="hll"><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+</span><a id="__codelineno-39-31" name="__codelineno-39-31"></a><span class="hll"><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 </span><a id="__codelineno-39-32" name="__codelineno-39-32"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 </span><a id="__codelineno-39-33" name="__codelineno-39-33"></a><span class="hll">
-</span><a id="__codelineno-39-34" name="__codelineno-39-34"></a><span class="hll"><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+</span><a id="__codelineno-39-34" name="__codelineno-39-34"></a><span class="hll"><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 </span><a id="__codelineno-39-35" name="__codelineno-39-35"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 </span><a id="__codelineno-39-36" name="__codelineno-39-36"></a><span class="hll">
-</span><a id="__codelineno-39-37" name="__codelineno-39-37"></a><span class="hll"><span class="w">    </span><span class="c1">// wygeneruj grafikę ASCII pozdrowień za pomocą cowpy</span>
+</span><a id="__codelineno-39-37" name="__codelineno-39-37"></a><span class="hll"><span class="w">    </span><span class="c1">// generate ASCII art of the greetings with cowpy</span>
 </span><a id="__codelineno-39-38" name="__codelineno-39-38"></a><span class="hll"><span class="w">    </span><span class="n">cowpy</span><span class="o">(</span><span class="n">collectGreetings</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">outfile</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
 </span><a id="__codelineno-39-39" name="__codelineno-39-39"></a>
 <a id="__codelineno-39-40" name="__codelineno-39-40"></a><span class="w">    </span><span class="c1">//</span>
@@ -5327,13 +5371,13 @@ Ta kolejność ma sens, ponieważ w prawdziwym projekcie procesy emitowałyby in
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-26">26</a></span>
-<span class="normal"><a href="#__codelineno-41-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-26" name="__codelineno-41-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie (zaktualizowane do używania konwencji nf-core dla samplesheet)</span>
+<span class="normal"><a href="#__codelineno-41-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-26" name="__codelineno-41-26"></a><span class="w">    </span><span class="c1">// wyemituj powitanie (zaktualizowane do używania konwencji nf-core dla samplesheet)</span>
 <a id="__codelineno-41-27" name="__codelineno-41-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">ch_samplesheet</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-26">26</a></span>
-<span class="normal"><a href="#__codelineno-42-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-26" name="__codelineno-42-26"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<span class="normal"><a href="#__codelineno-42-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-26" name="__codelineno-42-26"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-42-27" name="__codelineno-42-27"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5783,7 +5827,7 @@ Zazwyczaj małe pliki testowe są przechowywane w katalogu <code>assets</code>, 
 </div>
 <p>Kluczowe punkty:</p>
 <ul>
-<li><strong>Używanie <code>${projectDir}</code></strong>: To jest niejawna zmienna Nextflow, która wskazuje na katalog, w którym znajduje się główny skrypt workflow (katalog główny pipeline'u). Użycie jej zapewnia, że ścieżka działa niezależnie od tego, skąd pipeline jest uruchamiany.</li>
+<li><strong>Używanie <code>${projectDir}</code></strong>: To jest niejawna zmienna Nextflow'a, która wskazuje na katalog, w którym znajduje się główny skrypt workflow (katalog główny pipeline'u). Użycie jej zapewnia, że ścieżka działa niezależnie od tego, skąd pipeline jest uruchamiany.</li>
 <li><strong>Ścieżki bezwzględne</strong>: Używając <code>${projectDir}</code>, tworzymy ścieżkę bezwzględną, co jest ważne dla danych testowych dostarczanych z pipeline'em.</li>
 <li><strong>Lokalizacja danych testowych</strong>: Pipeline'y nf-core zazwyczaj przechowują dane testowe w katalogu <code>assets/</code> w repozytorium pipeline'u dla małych plików testowych lub odwołują się do zewnętrznych zestawów danych testowych dla większych plików.</li>
 </ul>
@@ -5909,16 +5953,33 @@ Aby zobaczyć, jak te uruchamiają się równolegle, spróbuj zwiększyć alokac
 </code></pre></div>
 <details class="abstract">
 <summary>Zawartość katalogu</summary>
-<p>```console
-results
-├── Bonjour-output.txt
-├── COLLECTED-test-batch-output.txt
-├── COLLECTED-test-output.txt
-├── cowpy-COLLECTED-test-batch-output.txt
-├── cowpy-COLLECTED-test-output.txt
-├── Hello-output.txt
-├── Holà-output.txt</p>
-</details><style type="text/css">.quiz {
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go">results</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="go">├── Bonjour-output.txt</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="go">├── COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="go">├── COLLECTED-test-output.txt</span>
+<a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a><span class="go">├── cowpy-COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="go">├── cowpy-COLLECTED-test-output.txt</span>
+<a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a><span class="go">├── Hello-output.txt</span>
+<a id="__codelineno-62-8" name="__codelineno-62-8" href="#__codelineno-62-8"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-62-10" name="__codelineno-62-10" href="#__codelineno-62-10"></a><span class="go">├── UPPER-Hello-output.txt</span>
+<a id="__codelineno-62-11" name="__codelineno-62-11" href="#__codelineno-62-11"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-62-12" name="__codelineno-62-12" href="#__codelineno-62-12"></a>
+<a id="__codelineno-62-13" name="__codelineno-62-13" href="#__codelineno-62-13"></a><span class="go">0 directories, 10 files</span>
+</code></pre></div>
+</details>
+<p>Aha, są tutaj, pomieszane z wynikami wcześniejszych uruchomień oryginalnego pipeline'u Hello.</p>
+<p>Jeśli chcemy, aby były starannie zorganizowane jak wyniki pipeline'u demo, będziemy musieli zmienić sposób konfiguracji publikowania wyników.
+Pokażemy Ci, jak to zrobić później w tym kursie szkoleniowym.</p>
+<!-- TODO: Update this once we've updated Hello Nextflow to use workflow-level outputs -->
+
+<p>I to tyle! Może się wydawać, że to dużo pracy, aby osiągnąć ten sam rezultat co oryginalny pipeline, ale otrzymujesz wszystkie te ładne raporty generowane automatycznie i masz teraz solidny fundament do wykorzystania dodatkowych funkcji nf-core, w tym walidacji wejść oraz niektórych fajnych możliwości obsługi metadanych, które omówimy w późniejszej sekcji.</p>
+<hr />
+<h3 id="podsumowanie_3">Podsumowanie<a class="headerlink" href="#podsumowanie_3" title="Permanent link">&para;</a></h3>
+<p>Wiesz, jak przekonwertować zwykły pipeline Nextflow na pipeline w stylu nf-core używając szablonu nf-core.
+W ramach tego nauczyłeś się, jak uczynić workflow kompozycyjnym oraz jak zidentyfikować elementy szablonu nf-core, które najczęściej wymagają dostosowania podczas tworzenia niestandardowego pipeline'u w stylu nf-core.</p>
+<h3 id="co-dalej_3">Co dalej?<a class="headerlink" href="#co-dalej_3" title="Permanent link">&para;</a></h3>
+<p>Zrób sobie przerwę, to była ciężka praca! Kiedy będziesz gotowy, przejdź do <a href="../03_use_module/">Części 3: Użycie modułu nf-core</a>, aby nauczyć się, jak wykorzystać moduły utrzymywane przez społeczność z repozytorium nf-core/modules.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

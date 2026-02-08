@@ -1895,7 +1895,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -3260,7 +3260,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -4639,7 +4639,7 @@ Funkcjonalnie będzie to podobne do poprzedniej konfiguracji, ale zamiast polega
 <p>Oto linia kodu, której użyjemy:</p>
 <div class="highlight"><span class="filename">Składnia</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">greeting_ch = channel.of(&#39;Hello Channels!&#39;)</span>
 </code></pre></div>
-<p>To tworzy kanał o nazwie <code>greeting_ch</code> używając fabryki kanałów <code>channel.of()</code>, która konfiguruje prosty kanał kolejki, i ładuje ciąg <code>'Hello Channels!'</code> jako wartość pozdrowienia.</p>
+<p>Linia ta tworzy kanał o nazwie <code>greeting_ch</code> za pomocą fabryki kanałów <code>channel.of()</code>, która konfiguruje prosty kanał kolejki, i ładuje ciąg <code>'Hello Channels!'</code> jako wartość pozdrowienia.</p>
 <figure class="excalidraw">
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -4756,7 +4756,7 @@ Funkcjonalnie będzie to podobne do poprzedniej konfiguracji, ale zamiast polega
 </div>
 </div>
 </div>
-<p>To mówi Nextflow'owi, aby uruchomił proces <code>sayHello</code> na zawartości kanału <code>greeting_ch</code>.</p>
+<p>Linia ta mówi Nextflow'owi, aby uruchomił proces <code>sayHello</code> na zawartości kanału <code>greeting_ch</code>.</p>
 <p>Teraz nasz workflow jest właściwie funkcjonalny; jest jawnym odpowiednikiem napisania <code>sayHello('Hello Channels!')</code>.</p>
 <h3 id="13-uruchom-workflow">1.3. Uruchom workflow<a class="headerlink" href="#13-uruchom-workflow" title="Permanent link">&para;</a></h3>
 <p>Uruchommy to!</p>
@@ -4781,10 +4781,10 @@ Możesz sprawdzić katalog wyników, aby upewnić się, że wynik jest nadal tak
 </details>
 <p>Zwiększyliśmy więc elastyczność workflow'u, osiągając ten sam końcowy wynik.
 Może się wydawać, że piszemy więcej kodu bez wymiernej korzyści, ale wartość stanie się jasna, gdy tylko zaczniemy obsługiwać więcej wejść.</p>
-<p>Jako podgląd tego, spójrzmy na jeszcze jedną rzecz przed przejściem dalej: jedną małą, ale wygodną korzyść z używania jawnego kanału do zarządzania wejściem danych.</p>
+<p>Jako podgląd, spójrzmy na jeszcze jedną rzecz przed przejściem dalej: jedną małą, ale wygodną korzyść z używania jawnego kanału do zarządzania wejściem danych.</p>
 <h3 id="14-uzyj-view-do-inspekcji-zawartosci-kanau">1.4. Użyj <code>view()</code> do inspekcji zawartości kanału<a class="headerlink" href="#14-uzyj-view-do-inspekcji-zawartosci-kanau" title="Permanent link">&para;</a></h3>
 <p>Kanały Nextflow'a są zbudowane w sposób, który pozwala nam operować na ich zawartości za pomocą operatorów, które omówimy szczegółowo później w tym rozdziale.</p>
-<p>Na razie pokażemy Ci tylko, jak używać super prostego operatora o nazwie <a href="https://www.nextflow.io/docs/latest/reference/operator.html#view"><code>view()</code></a> do inspekcji zawartości kanału.
+<p>Na razie pokażemy Ci tylko, jak używać bardzo prostego operatora o nazwie <a href="https://www.nextflow.io/docs/latest/reference/operator.html#view"><code>view()</code></a> do inspekcji zawartości kanału.
 Możesz myśleć o <code>view()</code> jak o narzędziu do debugowania, podobnie jak instrukcja <code>print()</code> w Pythonie czy jej odpowiednik w innych językach.</p>
 <p>Dodaj tę małą linię do bloku workflow:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Po</label><label for="__tabbed_3_2">Przed</label></div>
@@ -4856,7 +4856,7 @@ Możesz myśleć o <code>view()</code> jak o narzędziu do debugowania, podobnie
 <a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="hll"><span class="go">Hello Channels!</span>
 </span></code></pre></div>
 </details>
-<p>Jak widzisz, to wyświetla zawartość kanału do konsoli.
+<p>Jak widzisz, linia ta wyświetla zawartość kanału do konsoli.
 Tutaj mamy tylko jeden element, ale gdy zaczniemy ładować wiele wartości do kanału w następnej sekcji, zobaczysz, że jest ustawione na wyświetlanie jednego elementu na linię.</p>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
 <p>Wiesz, jak używać podstawowej fabryki kanałów do dostarczenia wejścia do procesu.</p>
@@ -5122,7 +5122,7 @@ Tutaj, dla wygody, użyjemy po prostu samego pozdrowienia, ponieważ to tylko kr
 <p class="admonition-title">Wskazówka</p>
 <p>W definicji output MUSISZ użyć podwójnych cudzysłowów wokół wyrażenia nazwy pliku wyjściowego (NIE pojedynczych cudzysłowów), w przeciwnym razie to się nie powiedzie.</p>
 </div>
-<p>To powinno generować unikalną nazwę pliku wyjściowego za każdym razem, gdy proces jest wywoływany, tak aby można go było odróżnić od wyjść z innych wywołań tego samego procesu w katalogu wyjściowym.</p>
+<p>Kod ten powinien generować unikalną nazwę pliku wyjściowego za każdym razem, gdy proces jest wywoływany, tak aby można go było odróżnić od wyjść z innych wywołań tego samego procesu w katalogu wyjściowym.</p>
 <h4 id="222-uruchom-workflow">2.2.2. Uruchom workflow<a class="headerlink" href="#222-uruchom-workflow" title="Permanent link">&para;</a></h4>
 <p>Uruchommy to. Zauważ, że wracamy do uruchamiania z domyślnymi ustawieniami logu ANSI.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
@@ -5455,7 +5455,7 @@ Teraz przyjrzymy się operatorom, które pozwalają nam działać na zawartości
 </figure>
 
 <h4 id="322-doprecyzuj-instrukcje-view">3.2.2. Doprecyzuj instrukcje <code>view()</code><a class="headerlink" href="#322-doprecyzuj-instrukcje-view" title="Permanent link">&para;</a></h4>
-<p>Moglibyśmy uruchomić to od razu, aby sprawdzić, czy działa, ale przy okazji doprecyzujemy sposób, w jaki sprawdzamy zawartość kanału.</p>
+<p>Moglibyśmy uruchomić to od razu, aby sprawdzić, czy działa, ale przy okazji doprecyzujmy sposób, w jaki sprawdzamy zawartość kanału.</p>
 <p>Chcemy móc porównać, jak zawartość wygląda przed i po zastosowaniu operatora <code>flatten()</code>, więc dodamy drugą instrukcję oraz trochę kodu, aby były wyraźniej oznaczone w wyjściu.</p>
 <p>W bloku workflow wprowadź następującą zmianę kodu:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Po</label><label for="__tabbed_9_2">Przed</label></div>
@@ -5536,8 +5536,7 @@ To spowoduje ładnie oznaczone wyjście konsoli.</p>
 <div class="admonition info">
 <p class="admonition-title">Informacja</p>
 <p>W niektórych pipeline'ach możesz zobaczyć specjalną zmienną o nazwie <code>$it</code> używaną wewnątrz closures operatorów.
-Jest to <em>niejawna</em> zmienna, która pozwala na skrócony dostęp do wewnętrznej zmiennej
-bez potrzeby definiowania jej za pomocą <code>-&gt;</code>.</p>
+Jest to <em>niejawna</em> zmienna, która pozwala na skrócony dostęp do wewnętrznej zmiennej bez potrzeby definiowania jej za pomocą <code>-&gt;</code>.</p>
 <p>Preferujemy być jawni, aby pomóc w czytelności kodu, więc składnia <code>$it</code> jest odradzana i będzie stopniowo wycofywana z języka Nextflow.</p>
 </div>
 <h4 id="323-uruchom-workflow">3.2.3. Uruchom workflow<a class="headerlink" href="#323-uruchom-workflow" title="Permanent link">&para;</a></h4>
@@ -5632,7 +5631,7 @@ Zaktualizujemy go, aby wskazywał na plik CSV zawierający nasze pozdrowienia.</
 </div>
 </div>
 </div>
-<p>To zakłada, że plik jest współlokalizowany z kodem workflow'u.
+<p>Edycja ta zakłada, że plik jest współlokalizowany z kodem workflow'u.
 Nauczysz się, jak radzić sobie z innymi lokalizacjami danych później na swojej drodze z Nextflow'em.</p>
 <h4 id="412-przeacz-na-fabryke-kanaow-zaprojektowana-do-obsugi-pliku">4.1.2. Przełącz na fabrykę kanałów zaprojektowaną do obsługi pliku<a class="headerlink" href="#412-przeacz-na-fabryke-kanaow-zaprojektowana-do-obsugi-pliku" title="Permanent link">&para;</a></h4>
 <p>Ponieważ teraz chcemy użyć pliku zamiast prostych ciągów jako wejścia, nie możemy użyć fabryki kanałów <code>channel.of()</code> z poprzedniego.

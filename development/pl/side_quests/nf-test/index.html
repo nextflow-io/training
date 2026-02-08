@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -2505,7 +2505,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -4193,7 +4193,7 @@
 
 <h1 id="testowanie-z-nf-test">Testowanie z nf-test<a class="headerlink" href="#testowanie-z-nf-test" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
-<p>Możliwość systematycznego testowania, czy każda część workflow działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.</p>
+<p>Możliwość systematycznego testowania, czy każda część Twojego workflow działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.</p>
 <p>Poświęćmy chwilę na omówienie, dlaczego testowanie jest tak ważne. Jeśli tworzysz workflow, jedną z pierwszych rzeczy, które zrobisz, jest pobranie danych testowych, o których wiesz, że są poprawne i powinny dać wynik. Dodajesz pierwszy proces do pipeline'u i podłączasz go do Swoich danych wejściowych, aby działał. Następnie, aby sprawdzić, czy wszystko działa, uruchamiasz go na danych testowych. Zakładając, że działa, przechodzisz do następnego procesu i ponownie uruchamiasz dane testowe. Powtarzasz ten proces, aż otrzymasz pipeline, z którego jesteś zadowolony.</p>
 <p>Następnie, być może dodajesz prosty parametr prawda lub fałsz, taki jak <code>--skip_process</code>. Teraz musisz uruchomić pipeline dwa razy, raz z każdym parametrem, aby upewnić się, że działa zgodnie z oczekiwaniami. Ale czekaj, jak sprawdzić, czy <code>--skip_process</code> faktycznie pomija proces? Musimy przejrzeć wyniki lub sprawdzić pliki logów! To jest uciążliwe i podatne na błędy.</p>
 <p>W miarę rozwoju pipeline'u szybko stanie się on tak złożony, że ręczne testowanie każdej iteracji będzie wolne i podatne na błędy. Co więcej, jeśli znajdziesz błąd, bardzo trudno będzie dokładnie określić, skąd w pipeline'u pochodzi błąd. Właśnie tutaj przydaje się testowanie.</p>
@@ -4207,15 +4207,15 @@
 <p>Możemy napisać wiele różnych rodzajów testów:</p>
 <ol>
 <li><strong>Testy na poziomie modułu</strong>: Dla pojedynczych procesów</li>
-<li><strong>Testy na poziomie workflow</strong>: Dla pojedynczego workflow</li>
+<li><strong>Testy na poziomie workflow'u</strong>: Dla pojedynczego workflow'u</li>
 <li><strong>Testy na poziomie pipeline'u</strong>: Dla pipeline'u jako całości</li>
 <li><strong>Testy wydajnościowe</strong>: Dla szybkości i wydajności pipeline'u</li>
 <li><strong>Testy obciążeniowe</strong>: Ocena wydajności pipeline'u w ekstremalnych warunkach w celu określenia jego granic</li>
 </ol>
-<p>Testowanie pojedynczych procesów jest analogiczne do testów jednostkowych w innych językach. Testowanie workflow lub całego pipeline'u jest analogiczne do tego, co nazywa się testami integracyjnymi w innych językach, gdzie testujemy interakcje komponentów.</p>
-<p><a href="https://www.nf-test.com/"><strong>nf-test</strong></a> to narzędzie, które pozwala pisać testy na poziomie modułu, workflow i pipeline'u. Krótko mówiąc, pozwala systematycznie sprawdzać, czy każda pojedyncza część pipeline'u działa zgodnie z oczekiwaniami, <em>w izolacji</em>.</p>
+<p>Testowanie pojedynczych procesów jest analogiczne do testów jednostkowych w innych językach. Testowanie workflow'u lub całego pipeline'u jest analogiczne do tego, co nazywa się testami integracyjnymi w innych językach, gdzie testujemy interakcje komponentów.</p>
+<p><a href="https://www.nf-test.com/"><strong>nf-test</strong></a> to narzędzie, które pozwala pisać testy na poziomie modułu, workflow'u i pipeline'u. Krótko mówiąc, pozwala systematycznie sprawdzać, czy każda pojedyncza część pipeline'u działa zgodnie z oczekiwaniami, <em>w izolacji</em>.</p>
 <h3 id="cele-nauki">Cele nauki<a class="headerlink" href="#cele-nauki" title="Permanent link">&para;</a></h3>
-<p>W tym side queście nauczysz się używać nf-test do pisania testów na poziomie workflow dla pipeline'u, a także testów na poziomie modułu dla trzech procesów, które wywołuje.</p>
+<p>W tym side queście nauczysz się używać nf-test do pisania testów na poziomie workflow'u dla pipeline'u, a także testów na poziomie modułu dla trzech procesów, które wywołuje.</p>
 <p>Pod koniec tego side questa będziesz w stanie efektywnie używać następujących technik:</p>
 <ul>
 <li>Inicjalizowanie nf-test w projekcie</li>
@@ -4244,13 +4244,13 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
 <h4 id="przejrzyj-materiay">Przejrzyj materiały<a class="headerlink" href="#przejrzyj-materiay" title="Permanent link">&para;</a></h4>
-<p>Znajdziesz główny plik workflow i plik CSV o nazwie <code>greetings.csv</code>, który zawiera dane wejściowe do pipeline'u.</p>
+<p>Znajdziesz główny plik workflow'u i plik CSV o nazwie <code>greetings.csv</code>, który zawiera dane wejściowe do pipeline'u.</p>
 <div class="highlight"><span class="filename">Zawartość katalogu</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── greetings.csv</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">└── main.nf</span>
 </code></pre></div>
 <p>Aby uzyskać szczegółowy opis plików, zobacz <a href="../../hello_nextflow/00_orientation/">rozgrzewkę z Hello Nextflow</a>.</p>
-<p>Workflow, który będziemy testować, jest podzbiorem workflow Hello zbudowanego w <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a>.</p>
+<p>Workflow, który będziemy testować, jest podzbiorem workflow'u Hello zbudowanego w <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a>.</p>
 <details class="example">
 <summary>Co robi workflow Hello Nextflow?</summary>
 <p>Jeśli nie ukończyłeś szkolenia <a href="../../hello_nextflow/">Hello Nextflow</a>, oto krótki przegląd tego, co robi ten prosty workflow.</p>
@@ -4263,12 +4263,12 @@
 <li><strong><code>cowpy</code>:</strong> Generuje grafikę ASCII za pomocą narzędzia <code>cowpy</code></li>
 </ol>
 <p>Wyniki są publikowane w katalogu o nazwie <code>results/</code>, a końcowe wyjście pipeline'u (po uruchomieniu z domyślnymi parametrami) to zwykły plik tekstowy zawierający grafikę ASCII postaci wypowiadającej pozdrowienia z wielkimi literami.</p>
-<p>W tym side queście używamy pośredniej formy workflow Hello, która zawiera tylko dwa pierwsze procesy.</p>
+<p>W tym side queście używamy pośredniej formy workflow'u Hello, która zawiera tylko dwa pierwsze procesy.</p>
 </details>
 <p>Podzbiór, z którym będziemy pracować, składa się z dwóch procesów: <code>sayHello</code> i <code>convertToUpper</code>.
-Pełny kod workflow możesz zobaczyć poniżej.</p>
+Pełny kod workflow'u możesz zobaczyć poniżej.</p>
 <details class="example">
-<summary>Kod workflow</summary>
+<summary>Kod workflow'u</summary>
 <div class="highlight"><span class="filename">main.nf</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cm">/*</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="cm">* Pipeline parameters</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="cm">*/</span>
@@ -4329,7 +4329,7 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <p>Uruchommy workflow, aby upewnić się, że działa zgodnie z oczekiwaniami.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Wynik uruchomienia workflow</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.2</span>
+<div class="highlight"><span class="filename">Wynik uruchomienia workflow'u</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.2</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
@@ -4341,10 +4341,10 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <p>"Czekaj, co? Po prostu uruchomiłem workflow i zadziałał! Jak to jest test?"</p>
 <p>Dobre pytanie!</p>
 <p>Rozłóżmy to na czynniki pierwsze.</p>
-<p>Uruchomiłeś workflow z domyślnymi parametrami, potwierdziłeś, że działa i jesteś zadowolony z wyników. To jest istota testowania. Jeśli pracowałeś przez kurs szkoleniowy Hello Nextflow, zauważysz, że zawsze zaczynaliśmy każdą sekcję od uruchomienia workflow, którego używaliśmy jako punktu wyjścia, aby potwierdzić, że wszystko jest poprawnie skonfigurowane.</p>
+<p>Uruchomiłeś workflow z domyślnymi parametrami, potwierdziłeś, że działa i jesteś zadowolony z wyników. To jest istota testowania. Jeśli pracowałeś przez kurs szkoleniowy Hello Nextflow, zauważysz, że zawsze zaczynaliśmy każdą sekcję od uruchomienia workflow'u, którego używaliśmy jako punktu wyjścia, aby potwierdzić, że wszystko jest poprawnie skonfigurowane.</p>
 <p>Testowanie oprogramowania zasadniczo wykonuje ten proces za nas.</p>
 <h4 id="przejrzyj-zadanie">Przejrzyj zadanie<a class="headerlink" href="#przejrzyj-zadanie" title="Permanent link">&para;</a></h4>
-<p>Twoim wyzwaniem jest dodanie standardowych testów do tego workflow za pomocą nf-test, aby ułatwić weryfikację, że każda część nadal działa zgodnie z oczekiwaniami w przypadku wprowadzenia jakichkolwiek dalszych zmian.</p>
+<p>Twoim wyzwaniem jest dodanie standardowych testów do tego workflow'u za pomocą nf-test, aby ułatwić weryfikację, że każda część nadal działa zgodnie z oczekiwaniami w przypadku wprowadzenia jakichkolwiek dalszych zmian.</p>
 <h4 id="lista-kontrolna-gotowosci">Lista kontrolna gotowości<a class="headerlink" href="#lista-kontrolna-gotowosci" title="Permanent link">&para;</a></h4>
 <p>Myślisz, że jesteś gotowy, aby się zanurzyć?</p>
 <ul class="task-list">
@@ -4440,7 +4440,7 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <p>Uruchommy test, aby zobaczyć, co się stanie.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">nf-test pipeline fail</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
+<div class="highlight"><span class="filename">nf-test pipeline nie powiódł się</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4515,7 +4515,7 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Uruchommy test ponownie, aby zobaczyć, czy działa.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline przechodzi</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
 <div class="highlight"><span class="filename">Pipeline przechodzi</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
@@ -4620,7 +4620,7 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 </code></pre></div></td></tr></table></div>
 <p>Nazwa testu teraz lepiej odzwierciedla to, co faktycznie weryfikujemy - nie tylko to, że pipeline działa bez awarii, ale że uruchamia oczekiwaną liczbę procesów.</p>
 <p>Uruchommy test ponownie, aby zobaczyć, czy działa.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline przechodzi</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
 <div class="highlight"><span class="filename">Pipeline przechodzi z asercjami</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="go">https://www.nf-test.com</span>
@@ -4734,7 +4734,7 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 </span><a id="__codelineno-28-33" name="__codelineno-28-33"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
 <p>Uruchom test ponownie, aby zobaczyć, czy działa.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline przechodzi</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
 <div class="highlight"><span class="filename">Pipeline przechodzi z asercjami plików</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
@@ -4807,7 +4807,7 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 </code></pre></div>
 <p>Jak poprzednio, zaczynamy od szczegółów testu, po których następują bloki <code>when</code> i <code>then</code>. Jednak mamy również dodatkowy blok <code>process</code>, który pozwala nam zdefiniować wejścia do procesu.</p>
 <p>Uruchommy test, aby zobaczyć, czy działa.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline przechodzi</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
 </code></pre></div>
 <div class="highlight"><span class="filename">Test procesu nie powiódł się</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
@@ -4920,7 +4920,7 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Uruchommy test ponownie, aby zobaczyć, czy działa.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">nf-test pipeline przechodzi</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4963,7 +4963,7 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <li>Jeśli jest to oczekiwana zmiana (np. narzędzie zostało ulepszone, a wyniki są lepsze), będziemy musieli zaktualizować migawkę, aby zaakceptować nowe wyjście jako odniesienie do dopasowania. nf-test ma parametr <code>--update-snapshot</code> w tym celu.</li>
 </ul>
 <p>Możemy uruchomić test ponownie i zobaczyć, że test powinien przejść:</p>
-<div class="highlight"><span class="filename">nf-test process pass with snapshot</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">nf-test proces przechodzi z migawką</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5077,9 +5077,9 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <li>Pozwala na bardziej złożone walidacje (wzorce wyrażeń regularnych, porównania numeryczne itp.)</li>
 </ul>
 <p>Uruchommy test, aby zobaczyć, czy działa.</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline przechodzi</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Test procesu nie powiódł się</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">Test procesu przechodzi</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5218,9 +5218,9 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <a id="__codelineno-49-20" name="__codelineno-49-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>I uruchom test!</p>
-<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline przechodzi</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
+<div class="highlight"><span class="filename">nf-test proces convertToUpper przechodzi</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
 <a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5240,9 +5240,9 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a><span class="go">SUCCESS: Executed 1 tests in 1.764s</span>
 </code></pre></div>
 <p>Zauważ, że utworzyliśmy plik migawki dla procesu <code>convertToUpper</code> w <code>tests/main.converttoupper.nf.test.snap</code>. Jeśli ponownie uruchomimy test, powinniśmy zobaczyć, że nf-test ponownie przechodzi.</p>
-<div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
+<div class="highlight"><span class="filename">nf-test proces convertToUpper przechodzi</span><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
+<div class="highlight"><span class="filename">nf-test proces convertToUpper przechodzi</span><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
 <a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5269,7 +5269,7 @@ Pełny kod workflow możesz zobaczyć poniżej.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>.
 </code></pre></div>
 <p>Zauważ, że używamy tylko <code>.</code>, aby uruchomić wszystko z naszego bieżącego katalogu. To będzie zawierać każdy test!</p>
-<div class="highlight"><span class="filename">nf-test repo pass</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">&gt; nf-test test .</span>
+<div class="highlight"><span class="filename">nf-test repozytorium przechodzi</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">&gt; nf-test test .</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>
 <a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a><span class="go">https://www.nf-test.com</span>

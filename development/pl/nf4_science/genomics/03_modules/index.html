@@ -1138,7 +1138,7 @@
   <span class="md-ellipsis">
     
   
-    Wprowadzenie
+    Pierwsze kroki
   
 
     
@@ -1750,15 +1750,15 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-testowanie-zmodularyzowanego-workflow" class="md-nav__link">
+  <a href="#2-testowanie-zmodularyzowanego-workflowu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Testowanie zmodularyzowanego workflow
+        2. Testowanie zmodularyzowanego workflow'u
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Testowanie zmodularyzowanego workflow">
+    <nav class="md-nav" aria-label="2. Testowanie zmodularyzowanego workflow&#39;u">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2877,7 +2877,7 @@
   <span class="md-ellipsis">
     
   
-    Debugowanie Workflow
+    Debugowanie Workflow'ów
   
 
     
@@ -3486,15 +3486,15 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-testowanie-zmodularyzowanego-workflow" class="md-nav__link">
+  <a href="#2-testowanie-zmodularyzowanego-workflowu" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Testowanie zmodularyzowanego workflow
+        2. Testowanie zmodularyzowanego workflow'u
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Testowanie zmodularyzowanego workflow">
+    <nav class="md-nav" aria-label="2. Testowanie zmodularyzowanego workflow&#39;u">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3792,13 +3792,13 @@
 <h1 id="czesc-3-przenoszenie-kodu-do-moduow">Część 3: Przenoszenie kodu do modułów<a class="headerlink" href="#czesc-3-przenoszenie-kodu-do-moduow" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
 <p>W pierwszej części tego kursu zbudowałeś pipeline do wykrywania wariantów, który był całkowicie liniowy i przetwarzał dane każdej próbki niezależnie od innych.</p>
-<p>W drugiej części pokazaliśmy, jak używać kanałów i operatorów kanałów do implementacji wspólnego wykrywania wariantów za pomocą GATK, rozbudowując pipeline z Części 1.</p>
-<p>W tej części pokażemy, jak przekonwertować kod z tego workflow'u na moduły. Aby przejść tę część szkolenia, musisz ukończyć Część 1 i Część 2, a także <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, które omawia podstawy modułów.</p>
+<p>W drugiej części pokazaliśmy Ci, jak używać kanałów i operatorów kanałów do implementacji wspólnego wykrywania wariantów za pomocą GATK, rozbudowując pipeline z Części 1.</p>
+<p>W tej części pokażemy Ci, jak przekonwertować kod z tego workflow'u na moduły. Aby przejść tę część szkolenia, musisz ukończyć Część 1 i Część 2, a także <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, które omawia podstawy modułów.</p>
 <hr />
 <h2 id="0-rozgrzewka">0. Rozgrzewka<a class="headerlink" href="#0-rozgrzewka" title="Permanent link">&para;</a></h2>
 <p>Kiedy zaczęliśmy rozwijać nasz workflow, umieściliśmy wszystko w jednym pliku kodu.
 Teraz nadszedł czas, aby zająć się <strong>modularyzacją</strong> naszego kodu, <em>tzn.</em> wyodrębnieniem definicji procesów do modułów.</p>
-<p>Zaczniemy od tego samego workflow co w Części 2, który udostępniliśmy w pliku <code>genomics-3.nf</code>.</p>
+<p>Zaczniemy od tego samego workflow'u co w Części 2, który udostępniliśmy w pliku <code>genomics-3.nf</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Uwaga</p>
 <p>Upewnij się, że jesteś we właściwym katalogu roboczym:
@@ -3818,13 +3818,13 @@ Teraz nadszedł czas, aby zająć się <strong>modularyzacją</strong> naszego k
 </code></pre></div>
 <p>W katalogu projektu pojawi się teraz katalog <code>work</code> oraz katalog <code>results_genomics</code>.</p>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
-<p>Jesteś gotowy, aby rozpocząć modularyzację Swojego workflow'u.</p>
+<p>Jesteś gotowy, aby rozpocząć modularyzację Twojego workflow'u.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
 <p>Przenieś procesy workflow'u Genomics do modułów.</p>
 <hr />
 <h2 id="1-przeniesienie-procesow-do-moduow">1. Przeniesienie procesów do modułów<a class="headerlink" href="#1-przeniesienie-procesow-do-moduow" title="Permanent link">&para;</a></h2>
-<p>Jak nauczyłeś się w <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, tworzenie modułu polega na skopiowaniu definicji procesu do osobnego pliku. Plik może znajdować się w wybranym katalogu i mieć wybraną nazwę.</p>
-<p>Z powodów, które staną się jasne później (w szczególności przy testowaniu), w tym szkoleniu stosujemy konwencję nazewnictwa pliku <code>main.nf</code> i umieszczania go w strukturze katalogów nazwanej według zestawu narzędzi i polecenia.</p>
+<p>Jak nauczyłeś się w <a href="../../../hello_nextflow/hello_modules.md">Hello Modules</a>, moduł można utworzyć po prostu kopiując definicję procesu do osobnego pliku w dowolnym katalogu, nadając mu dowolną wybraną nazwę.</p>
+<p>Z powodów, które staną się jasne później (w szczególności przy testowaniu), w tym szkoleniu będziemy stosować konwencję nazewnictwa pliku <code>main.nf</code> i umieszczania go w strukturze katalogów nazwanej według zestawu narzędzi i polecenia.</p>
 <h3 id="11-utworz-modu-dla-procesu-samtools_index">1.1. Utwórz moduł dla procesu <code>SAMTOOLS_INDEX</code><a class="headerlink" href="#11-utworz-modu-dla-procesu-samtools_index" title="Permanent link">&para;</a></h3>
 <p>W przypadku procesu <code>SAMTOOLS_INDEX</code>, 'samtools' jest zestawem narzędzi, a 'index' jest poleceniem. Utworzymy więc strukturę katalogów <code>modules/samtools/index</code> i umieścimy definicję procesu <code>SAMTOOLS_INDEX</code> w pliku <code>main.nf</code> wewnątrz tego katalogu.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>modules/samtools/index
@@ -3867,7 +3867,7 @@ Teraz nadszedł czas, aby zająć się <strong>modularyzacją</strong> naszego k
 <a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Następnie usuń definicję procesu <code>SAMTOOLS_INDEX</code> z <code>genomics-3.nf</code> i dodaj deklarację importu dla modułu przed definicją następnego procesu, w ten sposób:</p>
+<p>Następnie usuń definicję procesu <code>SAMTOOLS_INDEX</code> z pliku <code>genomics-3.nf</code> i dodaj deklarację importu dla modułu przed definicją następnego procesu, w ten sposób:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Po</label><label for="__tabbed_1_2">Przed</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -3951,7 +3951,7 @@ Dla każdego procesu:</p>
 <h3 id="co-dalej_1">Co dalej?<a class="headerlink" href="#co-dalej_1" title="Permanent link">&para;</a></h3>
 <p>Przetestuj zmodularyzowany workflow.</p>
 <hr />
-<h2 id="2-testowanie-zmodularyzowanego-workflow">2. Testowanie zmodularyzowanego workflow<a class="headerlink" href="#2-testowanie-zmodularyzowanego-workflow" title="Permanent link">&para;</a></h2>
+<h2 id="2-testowanie-zmodularyzowanego-workflowu">2. Testowanie zmodularyzowanego workflow'u<a class="headerlink" href="#2-testowanie-zmodularyzowanego-workflowu" title="Permanent link">&para;</a></h2>
 <p>Uruchom zmodularyzowany workflow, aby zweryfikować, że wszystko nadal działa.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics-3.nf<span class="w"> </span>-resume
 </code></pre></div>
@@ -3963,7 +3963,7 @@ Dla każdego procesu:</p>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="go">[53/b9d342] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="go">[0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔</span>
 </code></pre></div>
-<p>Wszystko nadal działa, w tym możliwość wznowienia pipeline.
+<p>Wszystko nadal działa, w tym możliwość wznowienia pipeline'u.
 Wyniki są nadal publikowane w katalogu <code>results_genomics</code>.</p>
 <div class="highlight"><span class="filename">Zawartość katalogu</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">results_genomics/</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="go">├── family_trio.joint.vcf</span>
@@ -3986,15 +3986,15 @@ Wyniki są nadal publikowane w katalogu <code>results_genomics</code>.</p>
 <h3 id="podsumowanie_2">Podsumowanie<a class="headerlink" href="#podsumowanie_2" title="Permanent link">&para;</a></h3>
 <p>Zmodularyzowałeś workflow i zweryfikowałeś, że nadal działa tak samo jak wcześniej.</p>
 <h3 id="co-dalej_2">Co dalej?<a class="headerlink" href="#co-dalej_2" title="Permanent link">&para;</a></h3>
-<p>Przejrzyj to, czego się nauczyłeś i spójrz na testowanie.</p>
+<p>Przejrzyj to, czego się nauczyłeś, i spójrz na testowanie.</p>
 <hr />
 <h2 id="3-podsumowanie">3. Podsumowanie<a class="headerlink" href="#3-podsumowanie" title="Permanent link">&para;</a></h2>
 <p>Zmodularyzowałeś workflow i nic nie zmieniło się w sposobie działania pipeline'u.
 To jest zamierzone: zrestrukturyzowałeś kod bez wpływu na jego funkcjonalność.</p>
 <p>Moduły zawierają tylko logikę procesu, co czyni je czystymi i wielokrotnego użytku.
-Główny skrypt kontroluje, co jest publikowane i gdzie, podczas gdy moduły pozostają skoncentrowane na Swoim zadaniu obliczeniowym.</p>
+Główny skrypt kontroluje, co jest publikowane i gdzie, podczas gdy moduły pozostają skoncentrowane na swoim zadaniu obliczeniowym.</p>
 <p>Położyłeś fundamenty pod rzeczy, które ułatwią utrzymanie kodu.
-Na przykład możesz teraz dodać testy do Swojego pipeline'u używając frameworka nf-test.
+Na przykład możesz teraz dodać testy do Twojego pipeline'u używając frameworka nf-test.
 To właśnie przyjrzymy się w następnej części tego kursu.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
