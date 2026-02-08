@@ -90,13 +90,13 @@ Vous trouverez un fichier de flux de travail simple appelé `main.nf`, un réper
 Ce répertoire contient des données de séquençage en paires provenant de trois patients (A, B, C).
 
 Pour chaque patient, nous avons des échantillons de type `tumor` (provenant généralement de biopsies tumorales) ou `normal` (prélevés sur des tissus sains ou du sang).
-Si vous n'êtes pas familier avec l'analyse du cancer, sachez simplement que cela correspond à un modèle expérimental qui utilise des échantillons appariés tumeur/normal pour effectuer des analyses contrastives.
+Si vous n'êtes pas familier·ère avec l'analyse du cancer, sachez simplement que cela correspond à un modèle expérimental qui utilise des échantillons appariés tumeur/normal pour effectuer des analyses contrastives.
 
 Pour le patient A spécifiquement, nous avons deux ensembles de réplicats techniques (répétitions).
 
 Les fichiers de données de séquençage sont nommés avec une convention typique `_R1_` et `_R2_` pour ce qu'on appelle les 'lectures avant' et 'lectures arrière'.
 
-_Ne vous inquiétez pas si vous n'êtes pas familier avec ce plan expérimental, ce n'est pas critique pour comprendre ce tutoriel._
+_Ne vous inquiétez pas si vous n'êtes pas familier·ère avec ce plan expérimental, ce n'est pas critique pour comprendre ce tutoriel._
 
 #### Examiner l'exercice
 
@@ -132,7 +132,7 @@ Regardez le fichier de flux de travail `main.nf` :
 
 workflow {
 
-    // Crée un objet Path à partir d'une chaîne de chemin
+    // Create a Path object from a string path
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
     println "${myFile} is of class ${myFile.class}"
@@ -188,7 +188,7 @@ Modifiez le fichier `main.nf` pour envelopper la chaîne avec `file()` comme sui
 === "Avant"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
-        // Crée un objet Path à partir d'une chaîne de chemin
+        // Create a Path object from a string path
         myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
         println "${myFile} is of class ${myFile.class}"
@@ -601,7 +601,7 @@ Pris ensemble, ces deux exemples vous montrent à quel point il est important d'
 
     Assurez-vous de revenir en arrière et de corriger les deux erreurs intentionnelles avant de continuer à la section suivante.
 
-### Enseignements clés
+### À retenir
 
 - Chaînes de chemin vs objets Path : Les chaînes sont juste du texte, les objets Path sont des références de fichiers intelligentes
 - La méthode `file()` convertit un chemin sous forme de chaîne en objet Path avec lequel Nextflow peut travailler
@@ -768,7 +768,7 @@ Nous allons revenir à l'utilisation de nos fichiers d'exemple locaux pour le re
 === "Avant"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Crée un objet Path à partir d'une chaîne de chemin
+        // Utilise un fichier distant depuis Internet
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Affiche les attributs du fichier
@@ -779,7 +779,7 @@ Nous allons revenir à l'utilisation de nos fichiers d'exemple locaux pour le re
         println "Parent directory: ${myFile.parent}"
     ```
 
-### Enseignements clés
+### À retenir
 
 - Les données distantes sont accessibles en utilisant un URI (HTTP, FTP, S3, Azure, Google Cloud)
 - Nextflow téléchargera et mettra en place automatiquement les données au bon endroit, tant que ces chemins sont fournis aux processus
@@ -1016,7 +1016,7 @@ Comme vous pouvez le voir, nous avons maintenant deux objets Path dans notre can
 
 En utilisant cette méthode, nous pouvons récupérer autant ou aussi peu de fichiers que nous le souhaitons simplement en changeant le motif glob. Si nous le rendions plus généreux, par exemple en remplaçant toutes les parties variables des noms de fichiers par `*` (_par exemple_ `data/patient*_rep*_*_R*_001.fastq.gz`), nous pourrions récupérer tous les fichiers d'exemple dans le répertoire `data`.
 
-### Enseignements clés
+### À retenir
 
 - `channel.fromPath()` crée un canal avec des fichiers correspondant à un motif
 - Chaque fichier est émis en tant qu'élément séparé dans le canal
@@ -1032,7 +1032,7 @@ Dans la plupart des domaines scientifiques, il est très courant d'avoir des mé
 Par exemple, en bio-informatique, les fichiers contenant des données de séquençage sont souvent nommés de manière à encoder des informations sur l'échantillon, la condition, le réplicat et le numéro de lecture.
 
 Si les noms de fichiers sont construits selon une convention cohérente, vous pouvez extraire ces métadonnées de manière standardisée et les utiliser dans le cours de votre analyse.
-C'est un grand 'si', bien sûr, et vous devriez être très prudent chaque fois que vous vous fiez à la structure des noms de fichiers ; mais la réalité est que cette approche est très largement utilisée, alors jetons un œil à comment cela se fait dans Nextflow.
+C'est un grand 'si', bien sûr, et vous devriez être très prudent·e chaque fois que vous vous fiez à la structure des noms de fichiers ; mais la réalité est que cette approche est très largement utilisée, alors jetons un œil à comment cela se fait dans Nextflow.
 
 Dans le cas de nos données d'exemple, nous savons que les noms de fichiers incluent des métadonnées structurées de manière cohérente.
 Par exemple, le nom de fichier `patientA_rep1_normal_R2_001` encode ce qui suit :
@@ -1224,4 +1224,816 @@ Effectuez les modifications suivantes dans le flux de travail :
         }
     ```
 
-===
+=== "Avant"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="4"
+        // Charge les fichiers avec channel.fromPath
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_files.map { myFile ->
+            [ myFile.simpleName.tokenize('_'), myFile ]
+        }
+    ```
+
+Les changements clés ici sont :
+
+- **Affectation par déstructuration** : `def (patient, replicate, type, readNum) = ...` extrait les valeurs tokenisées dans des variables nommées en une seule ligne
+- **Syntaxe littérale de map** : `[id: patient, replicate: ...]` crée une map où chaque clé (comme `id`) est associée à une valeur (comme `patient`)
+- **Structure imbriquée** : La liste externe `[..., myFile]` associe la map de métadonnées à l'objet fichier d'origine
+
+Nous avons également simplifié quelques chaînes de métadonnées en utilisant une méthode de remplacement de chaîne appelée `replace()` pour supprimer certains caractères qui sont inutiles (_par exemple_ `replicate.replace('rep', '')` pour ne garder que le numéro des ID de réplicat).
+
+Exécutons à nouveau le flux de travail :
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Sortie de la commande"
+
+    ```console hl_lines="7-8"
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+
+    executor >  local (2)
+    [1b/e7fb27] COUNT_LINES (1) [100%] 2 of 2 ✔
+    [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
+    [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
+    40
+
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
+    40
+    ```
+
+Maintenant les métadonnées sont clairement étiquetées (_par exemple_ `[id:patientA, replicate:1, type:normal, readNum:2]`) donc il est beaucoup plus facile de dire ce qui est quoi.
+
+Il sera également beaucoup plus facile d'utiliser réellement des éléments de métadonnées dans le flux de travail, et cela rendra notre code plus facile à lire et à maintenir.
+
+### À retenir
+
+- Nous pouvons gérer les noms de fichiers dans Nextflow avec la puissance d'un langage de programmation complet
+- Nous pouvons traiter les noms de fichiers comme des chaînes pour extraire les informations pertinentes
+- L'utilisation de méthodes comme `tokenize()` et `replace()` nous permet de manipuler les chaînes dans le nom de fichier
+- L'opération `.map()` transforme les éléments du canal tout en préservant la structure
+- Les métadonnées structurées (maps) rendent le code plus lisible et maintenable que les listes positionnelles
+
+Ensuite, nous allons voir comment gérer les fichiers de données appariés.
+
+---
+
+## 5. Gestion des fichiers de données appariés
+
+De nombreux plans expérimentaux produisent des fichiers de données appariés qui bénéficient d'être gérés de manière explicitement appariée.
+Par exemple, en bio-informatique, les données de séquençage sont souvent générées sous forme de lectures appariées, c'est-à-dire des chaînes de séquences qui proviennent du même fragment d'ADN (souvent appelées 'avant' et 'arrière' car elles sont lues à partir d'extrémités opposées).
+
+C'est le cas de nos données d'exemple, où R1 et R2 font référence aux deux ensembles de lectures.
+
+```console
+data/patientA_rep1_normal_R1_001.fastq.gz
+data/patientA_rep1_normal_R2_001.fastq.gz
+```
+
+Nextflow fournit une fabrique de canal spécialisée pour travailler avec des fichiers appariés comme ceci appelée `channel.fromFilePairs()`, qui groupe automatiquement les fichiers basés sur un motif de nommage partagé. Cela vous permet d'associer les fichiers appariés plus étroitement avec moins d'effort.
+
+Nous allons modifier notre flux de travail pour en tirer parti.
+Cela va prendre deux étapes :
+
+1. Basculer la fabrique de canal vers `channel.fromFilePairs()`
+2. Extraire et mapper les métadonnées
+
+### 5.1. Basculer la fabrique de canal vers `channel.fromFilePairs()`
+
+Pour utiliser `channel.fromFilePairs`, nous devons spécifier le motif que Nextflow doit utiliser pour identifier les deux membres d'une paire.
+
+En revenant à nos données d'exemple, nous pouvons formaliser le motif de nommage comme suit :
+
+```console
+data/patientA_rep1_normal_R{1,2}_001.fastq.gz
+```
+
+C'est similaire au motif glob que nous avons utilisé plus tôt, sauf que ceci énumère spécifiquement les sous-chaînes (soit `1` soit `2` venant juste après le R) qui identifient les deux membres de la paire.
+
+Mettons à jour le flux de travail `main.nf` en conséquence :
+
+=== "Après"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="1-2"
+        // Charge les fichiers avec channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        /* Comment out the mapping for now, we'll come back to it!
+        ch_files.map { myFile ->
+            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            [
+                [
+                    id: sample,
+                    replicate: replicate.replace('rep', ''),
+                    type: type,
+                    readNum: readNum,
+                ],
+                myFile
+            ]
+        }
+        */
+        .view()
+    ```
+
+=== "Avant"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="1-2"
+        // Charge les fichiers avec channel.fromFilePairs
+        ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
+        ch_files.map { myFile ->
+            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            [
+                [
+                    id: sample,
+                    replicate: replicate.replace('rep', ''),
+                    type: type,
+                    readNum: readNum,
+                ],
+                myFile
+            ]
+        }
+        .view()
+    ```
+
+Nous avons basculé la fabrique de canal et adapté le motif de correspondance de fichiers, et pendant que nous y étions, nous avons commenté l'opération map.
+Nous l'ajouterons plus tard, avec quelques modifications.
+
+Exécutez le flux de travail pour le tester :
+
+```bash
+nextflow run main.nf
+```
+
+??? failure "Sortie de la commande"
+
+    ```console hl_lines="7-8"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
+
+    [-        ] COUNT_LINES -
+    [-        ] COUNT_LINES -
+    [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+    ERROR ~ Error executing process > 'COUNT_LINES (1)'
+
+    Caused by:
+      Not a valid path value: 'patientA_rep1_normal_R'
+
+
+
+    Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+Oh-oh, cette fois l'exécution a échoué !
+
+La partie pertinente du message d'erreur est ici :
+
+```console
+Not a valid path value: 'patientA_rep1_normal_R'
+```
+
+C'est parce que nous avons changé la fabrique de canal.
+Jusqu'à maintenant, le canal d'entrée original contenait uniquement les chemins de fichiers.
+Toute la manipulation de métadonnées que nous avons faite n'affectait pas réellement le contenu du canal.
+
+Maintenant que nous utilisons la fabrique de canal `.fromFilePairs`, le contenu du canal résultant est différent.
+Nous ne voyons qu'un seul élément de canal, composé d'un tuple contenant deux éléments : la partie du `simpleName` partagée par les deux fichiers, qui sert d'identifiant, et un tuple contenant les deux objets fichiers, au format `id, [ file1, file2 ]`.
+
+C'est génial, car Nextflow a fait le travail difficile d'extraire le nom du patient en examinant le préfixe partagé et en l'utilisant comme identifiant de patient.
+
+Cependant, cela casse notre flux de travail actuel.
+Si nous voulions toujours exécuter `COUNT_LINES` de la même manière sans changer le processus, nous devrions appliquer une opération de mapping pour extraire les chemins de fichiers.
+Mais nous n'allons pas faire cela, car notre objectif ultime est d'utiliser un processus différent, `ANALYZE_READS`, qui gère les paires de fichiers de manière appropriée.
+
+Alors commentons simplement (ou supprimons) l'appel à `COUNT_LINES` et continuons.
+
+=== "Après"
+
+    ```groovy title="main.nf" linenums="26" hl_lines="2"
+        // Compte les lignes dans le fichier
+        // COUNT_LINES(ch_files)
+    ```
+
+=== "Avant"
+
+    ```groovy title="main.nf" linenums="26" hl_lines="2"
+        // Compte les lignes dans le fichier
+        COUNT_LINES(ch_files)
+    ```
+
+Vous pouvez également commenter ou supprimer l'instruction include de `COUNT_LINES`, mais cela n'aura aucun effet fonctionnel.
+
+Maintenant, exécutons à nouveau le flux de travail :
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Sortie de la commande"
+
+    ```console hl_lines="5"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [fabulous_davinci] DSL2 - revision: 22b53268dc
+
+    [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+    ```
+
+Youpi, cette fois le flux de travail réussit !
+
+Cependant, nous devons encore extraire le reste des métadonnées du champ `id`.
+
+### 5.2. Extraire et organiser les métadonnées des paires de fichiers
+
+Notre opération `map` d'avant ne fonctionnera pas car elle ne correspond pas à la structure des données, mais nous pouvons la modifier pour qu'elle fonctionne.
+
+Nous avons déjà accès à l'identifiant réel du patient dans la chaîne que `fromFilePairs()` a utilisée comme identifiant, donc nous pouvons l'utiliser pour extraire les métadonnées sans obtenir le `simpleName` de l'objet Path comme nous l'avons fait auparavant.
+
+Décommentez l'opération map dans le flux de travail et effectuez les modifications suivantes :
+
+=== "Après"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="3-4 9 11 13"
+        // Charge les fichiers avec channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id, files ->
+            def (sample, replicate, type) = id.tokenize('_')
+            [
+                [
+                    id: sample,
+                    replicate: replicate.replace('rep', ''),
+                    type: type
+                ],
+                files
+            ]
+        }
+        .view()
+    ```
+
+=== "Avant"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="3-5 11 13"
+        // Charge les fichiers avec channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        /* Comment out the mapping for now, we'll come back to it!
+        ch_files.map { myFile ->
+            def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+            [
+                [
+                    id: sample,
+                    replicate: replicate.replace('rep', ''),
+                    type: type,
+                    readNum: readNum,
+                ],
+                myFile
+            ]
+        }
+        */
+        .view()
+    ```
+
+Cette fois, la map commence par `id, files` au lieu de juste `myFile`, et `tokenize()` est appliqué à `id` au lieu de `myFile.simpleName`.
+
+Notez également que nous avons supprimé `readNum` de la ligne `tokenize()` ; toutes les sous-chaînes que nous ne nommons pas spécifiquement (en partant de la gauche) seront silencieusement supprimées.
+Nous pouvons faire cela car les fichiers appariés sont maintenant étroitement associés, donc nous n'avons plus besoin de `readNum` dans la map de métadonnées.
+
+Exécutons le flux de travail :
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Sortie de la commande"
+
+    ```console
+
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
+
+    [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+    ```
+
+Et voilà : nous avons la map de métadonnées (`[id:patientA, replicate:1, type:normal]`) en première position du tuple de sortie, suivie du tuple des fichiers appariés, comme prévu.
+
+Bien sûr, cela ne récupérera et traitera que cette paire spécifique de fichiers.
+Si vous voulez expérimenter avec le traitement de plusieurs paires, vous pouvez essayer d'ajouter des caractères génériques dans le motif d'entrée et voir ce qui se passe.
+Par exemple, essayez d'utiliser `data/patientA_rep1_*_R{1,2}_001.fastq.gz`
+
+### À retenir
+
+- [`channel.fromFilePairs()` trouve et apparie automatiquement les fichiers liés](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
+- Cela simplifie la gestion des lectures en paires dans votre pipeline
+- Les fichiers appariés peuvent être groupés en tant que tuples `[id, [file1, file2]]`
+- L'extraction de métadonnées peut se faire à partir de l'ID de fichier apparié plutôt qu'à partir de fichiers individuels
+
+---
+
+## 6. Utilisation d'opérations sur fichiers dans les processus
+
+Maintenant, assemblons tout cela dans un processus simple pour renforcer comment utiliser les opérations sur fichiers à l'intérieur d'un processus Nextflow.
+
+Nous vous fournissons un module de processus pré-écrit appelé `ANALYZE_READS` qui prend un tuple de métadonnées et une paire de fichiers d'entrée et les analyse.
+Nous pourrions imaginer que cela effectue un alignement de séquences, ou un appel de variants ou toute autre étape qui a du sens pour ce type de données.
+
+Commençons.
+
+### 6.1. Importer le processus et examiner le code
+
+Pour utiliser ce processus dans le flux de travail, nous devons juste ajouter une instruction include de module avant le bloc workflow.
+
+Effectuez la modification suivante dans le flux de travail :
+
+=== "Après"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="3"
+    #!/usr/bin/env nextflow
+
+    include { ANALYZE_READS } from './modules/analyze_reads.nf'
+
+    workflow {
+    ```
+
+=== "Avant"
+
+    ```groovy title="main.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
+    workflow {
+    ```
+
+Vous pouvez ouvrir le fichier de module pour examiner son code :
+
+```groovy title="modules/analyze_reads.nf - exemple de processus" linenums="1"
+#!/usr/bin/env nextflow
+
+process ANALYZE_READS {
+    tag { meta.id }
+
+    publishDir { "results/${meta.id}" }, mode: 'copy'
+
+    input:
+    tuple val(meta), path(files)
+
+    output:
+    tuple val(meta.id), path("${meta.id}_stats.txt")
+
+    script:
+    """
+    echo "Sample metadata: ${meta.id}" > ${meta.id}_stats.txt
+    echo "Replicate: ${meta.replicate}" >> ${meta.id}_stats.txt
+    echo "Type: ${meta.type}" >> ${meta.id}_stats.txt
+    echo "Read 1: ${files[0]}" >> ${meta.id}_stats.txt
+    echo "Read 2: ${files[1]}" >> ${meta.id}_stats.txt
+    echo "Read 1 size: \$(gunzip -dc ${files[0]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
+    echo "Read 2 size: \$(gunzip -dc ${files[1]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
+    """
+}
+```
+
+!!! note
+
+    Les directives `tag` et `publishDir` utilisent la syntaxe de closure (`{ ... }`) au lieu de l'interpolation de chaîne (`"${...}"`).
+    C'est parce que ces directives font référence à des variables d'entrée (`meta`) qui ne sont pas disponibles avant l'exécution.
+    La syntaxe de closure reporte l'évaluation jusqu'à ce que le processus s'exécute réellement.
+
+!!! note
+
+    Nous appelons notre map de métadonnées `meta` par convention.
+    Pour une plongée plus profonde dans les meta maps, consultez la quête secondaire [Métadonnées et meta maps](./metadata.md).
+
+### 6.2. Appeler le processus dans le flux de travail
+
+Maintenant que le processus est disponible pour le flux de travail, nous pouvons ajouter un appel au processus `ANALYZE_READS` pour l'exécuter.
+
+Pour l'exécuter sur nos données d'exemple, nous devrons faire deux choses :
+
+1. Donner un nom au canal remappé
+2. Ajouter un appel au processus
+
+#### 6.2.1. Nommer le canal d'entrée remappé
+
+Nous avons précédemment appliqué les manipulations de mapping directement au canal d'entrée.
+Afin de fournir le contenu remappé au processus `ANALYZE_READS` (et de le faire de manière claire et facile à lire) nous voulons créer un nouveau canal nommé `ch_samples`.
+
+Nous pouvons le faire en utilisant l'opérateur [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set).
+
+Dans le flux de travail principal, remplacez l'opérateur `.view()` par `.set { ch_samples }`, et ajoutez une ligne testant que nous pouvons nous référer au canal par son nom.
+
+=== "Après"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="14 16-17"
+        // Charge les fichiers avec channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           [
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
+        }
+            .set { ch_samples }
+
+        // Temporaire : aperçu de ch_samples
+        ch_samples.view()
+    ```
+
+=== "Avant"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="14"
+        // Charge les fichiers avec channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           [
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
+        }
+        .view()
+    }
+    ```
+
+Exécutons ceci :
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Sortie de la commande"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [goofy_kirch] DSL2 - revision: 3313283e42
+
+    [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
+    ```
+
+Cela confirme que nous pouvons maintenant nous référer au canal par son nom.
+
+#### 6.2.2. Appeler le processus sur les données
+
+Maintenant, appelons réellement le processus `ANALYZE_READS` sur le canal `ch_samples`.
+
+Dans le flux de travail principal, effectuez les changements de code suivants :
+
+=== "Après"
+
+    ```groovy title="main.nf" linenums="23"
+        // Exécute l'analyse
+        ANALYZE_READS(ch_samples)
+    ```
+
+=== "Avant"
+
+    ```groovy title="main.nf" linenums="23"
+        // Temporaire : aperçu de ch_samples
+        ch_samples.view()
+    ```
+
+Exécutons ceci :
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Sortie de la commande"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `./main.nf` [shrivelled_cori] DSL2 - revision: b546a31769
+
+    executor >  local (1)
+    [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
+    ```
+
+Ce processus est configuré pour publier ses sorties dans un répertoire `results`, alors allez-y jeter un œil.
+
+??? abstract "Contenu du répertoire et du fichier"
+
+    ```console
+    results
+    └── patientA
+        └── patientA_stats.txt
+    ```
+
+    ```txt title="patientA_stats.txt"
+    Sample metadata: patientA
+    Replicate: 1
+    Type: normal
+    Read 1: patientA_rep1_normal_R1_001.fastq.gz
+    Read 2: patientA_rep1_normal_R2_001.fastq.gz
+    Read 1 size: 10 reads
+    Read 2 size: 10 reads
+    ```
+
+Le processus a pris nos entrées et créé un nouveau fichier contenant les métadonnées du patient, comme prévu.
+Splendide !
+
+### 6.3. Inclure beaucoup plus de patients
+
+Bien sûr, cela ne traite qu'une seule paire de fichiers pour un seul patient, ce qui n'est pas exactement le type de haut débit que vous espérez obtenir avec Nextflow.
+Vous voudrez probablement traiter beaucoup plus de données à la fois.
+
+Rappelez-vous que `channel.fromPath()` accepte un _glob_ en entrée, ce qui signifie qu'il peut accepter n'importe quel nombre de fichiers qui correspondent au motif.
+Donc si nous voulons inclure tous les patients, nous pouvons simplement modifier la chaîne d'entrée pour inclure plus de patients, comme noté en passant plus tôt.
+
+Faisons semblant de vouloir être aussi gourmands que possible.
+Effectuez les modifications suivantes dans le flux de travail :
+
+=== "Après"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="2"
+        // Charge les fichiers avec channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ```
+
+=== "Avant"
+
+    ```groovy title="main.nf" linenums="7" hl_lines="2"
+        // Charge les fichiers avec channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+    ```
+
+Exécutez à nouveau le pipeline :
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Sortie de la commande"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `./main.nf` [big_stonebraker] DSL2 - revision: f7f9b8a76c
+
+    executor >  local (8)
+    [d5/441891] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    ```
+
+Le répertoire results devrait maintenant contenir des résultats pour toutes les données disponibles.
+
+??? abstract "Contenu du répertoire"
+
+    ```console
+    results
+    ├── patientA
+    │   └── patientA_stats.txt
+    ├── patientB
+    │   └── patientB_stats.txt
+    └── patientC
+        └── patientC_stats.txt
+    ```
+
+Succès ! Nous avons analysé tous les patients d'un coup ! N'est-ce pas ?
+
+Peut-être pas.
+Si vous regardez de plus près, nous avons un problème : nous avons deux réplicats pour patientA, mais un seul fichier de sortie !
+Nous écrasons le fichier de sortie à chaque fois.
+
+### 6.4. Rendre les fichiers publiés uniques
+
+Puisque nous avons accès aux métadonnées du patient, nous pouvons les utiliser pour rendre les fichiers publiés uniques en incluant des métadonnées différenciatrices, soit dans la structure de répertoires soit dans les noms de fichiers eux-mêmes.
+
+Effectuez la modification suivante dans le flux de travail :
+
+=== "Après"
+
+    ```groovy title="modules/analyze_reads.nf" linenums="6"
+        publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    ```
+
+=== "Avant"
+
+    ```groovy title="modules/analyze_reads.nf" linenums="6"
+        publishDir { "results/${meta.id}" }, mode: 'copy'
+    ```
+
+Ici nous montrons l'option d'utiliser des niveaux de répertoire supplémentaires pour tenir compte des types d'échantillons et des réplicats, mais vous pourriez expérimenter en le faisant au niveau du nom de fichier également.
+
+Maintenant exécutez le pipeline une dernière fois, mais assurez-vous de supprimer le répertoire results d'abord pour vous donner un espace de travail propre :
+
+```bash
+rm -r results
+nextflow run main.nf
+```
+
+??? success "Sortie de la commande"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+
+    executor >  local (8)
+    [e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
+    ```
+
+Vérifiez maintenant le répertoire results :
+
+??? abstract "Contenu du répertoire"
+
+    ```console
+    results/
+    ├── normal
+    │   ├── patientA
+    │   │   ├── 1
+    │   │   │   └── patientA_stats.txt
+    │   │   └── 2
+    │   │       └── patientA_stats.txt
+    │   ├── patientB
+    │   │   └── 1
+    │   │       └── patientB_stats.txt
+    │   └── patientC
+    │       └── 1
+    │           └── patientC_stats.txt
+    └── tumor
+        ├── patientA
+        │   ├── 1
+        │   │   └── patientA_stats.txt
+        │   └── 2
+        │       └── patientA_stats.txt
+        ├── patientB
+        │   └── 1
+        │       └── patientB_stats.txt
+        └── patientC
+            └── 1
+                └── patientC_stats.txt
+    ```
+
+Et voilà, toutes nos métadonnées, bien organisées. C'est un succès !
+
+Il y a beaucoup plus que vous pouvez faire une fois que vous avez vos métadonnées chargées dans une map comme celle-ci :
+
+1. Créer des répertoires de sortie organisés basés sur les attributs des patients
+2. Prendre des décisions dans les processus basées sur les propriétés des patients
+3. Diviser, joindre et recombiner les données basées sur les valeurs de métadonnées
+
+Ce modèle de garder les métadonnées explicites et attachées aux données (plutôt qu'encodées dans les noms de fichiers) est une bonne pratique essentielle dans Nextflow qui permet de construire des flux de travail d'analyse robustes et maintenables.
+Vous pouvez en apprendre plus à ce sujet dans la quête secondaire [Métadonnées et meta maps](./metadata.md).
+
+### À retenir
+
+- La directive `publishDir` peut organiser les sorties basées sur les valeurs de métadonnées
+- Les métadonnées dans les tuples permettent une organisation structurée des résultats
+- Cette approche crée des flux de travail maintenables avec une provenance claire des données
+- Les processus peuvent prendre des tuples de métadonnées et de fichiers en entrée
+- La directive `tag` fournit l'identification du processus dans les journaux d'exécution
+- La structure du flux de travail sépare la création de canaux de l'exécution des processus
+
+---
+
+## Résumé
+
+Dans cette quête secondaire, vous avez appris comment travailler avec des fichiers dans Nextflow, des opérations de base aux techniques plus avancées pour gérer des collections de fichiers.
+
+L'application de ces techniques dans votre propre travail vous permettra de construire des flux de travail plus efficaces et maintenables, surtout lorsque vous travaillez avec un grand nombre de fichiers avec des conventions de nommage complexes.
+
+### Motifs clés
+
+1. **Opérations de base sur les fichiers :** Nous avons créé des objets Path avec `file()` et accédé aux attributs de fichiers comme le nom, l'extension et le répertoire parent, en apprenant la différence entre les chaînes et les objets Path.
+
+   - Créer un objet Path avec `file()`
+
+   ```groovy
+   myFile = file('path/to/file.txt')
+   ```
+
+   - Obtenir les attributs de fichier
+
+   ```groovy
+   println myFile.name       // file.txt
+   println myFile.baseName   // file
+   println myFile.extension  // txt
+   println myFile.parent     // path/to
+   ```
+
+2. **Utilisation de fichiers distants** : Nous avons appris comment basculer de manière transparente entre les fichiers locaux et distants en utilisant des URI, démontrant la capacité de Nextflow à gérer des fichiers de diverses sources sans changer la logique du flux de travail.
+
+   - Fichier local
+
+   ```groovy
+   myFile = file('path/to/file.txt')
+   ```
+
+   - FTP
+
+   ```groovy
+   myFile = file('ftp://path/to/file.txt')
+   ```
+
+   - HTTPS
+
+   ```groovy
+   myFile = file('https://path/to/file.txt')
+   ```
+
+   - Amazon S3
+
+   ```groovy
+   myFile = file('s3://path/to/file.txt')
+   ```
+
+   - Azure Blob Storage
+
+   ```groovy
+   myFile = file('az://path/to/file.txt')
+   ```
+
+   - Google Cloud Storage
+
+   ```groovy
+   myFile = file('gs://path/to/file.txt')
+   ```
+
+3. **Chargement de fichiers en utilisant la fabrique de canal `fromPath()`:** Nous avons créé des canaux à partir de motifs de fichiers avec `channel.fromPath()` et visualisé leurs attributs de fichiers, incluant les types d'objets.
+
+   - Créer un canal à partir d'un motif de fichier
+
+   ```groovy
+    ch_files = channel.fromPath('data/*.fastq.gz')
+   ```
+
+   - Obtenir les attributs de fichier
+
+   ```groovy
+    ch_files.view { myFile ->
+       println "File object class: ${myFile.class}"
+       println "File name: ${myFile.name}"
+       println "Simple name: ${myFile.simpleName}"
+       println "Extension: ${myFile.extension}"
+       println "Parent directory: ${myFile.parent}"
+   }
+   ```
+
+4. **Extraction de métadonnées de patients à partir de noms de fichiers :** Nous avons utilisé `tokenize()` et `replace()` pour extraire et structurer les métadonnées à partir de noms de fichiers, les convertissant en maps organisées.
+
+   ```groovy
+   def name = file.name.tokenize('_')
+   def patientId = name[0]
+   def replicate = name[1].replace('rep', '')
+   def type = name[2]
+   def readNum = name[3].replace('R', '')
+   ```
+
+5. **Simplification avec channel.fromFilePairs :** Nous avons utilisé `channel.fromFilePairs()` pour apparier automatiquement les fichiers liés et extraire les métadonnées à partir des ID de fichiers appariés.
+
+   ```groovy
+   ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+   ```
+
+6. **Utilisation d'opérations sur fichiers dans les processus :** Nous avons intégré les opérations sur fichiers dans les processus Nextflow avec une gestion appropriée des entrées, en utilisant `publishDir` pour organiser les sorties basées sur les métadonnées.
+
+   - Associer une meta map aux entrées du processus
+
+   ```groovy
+   ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+   ch_files.map { id,  files ->
+       def (sample, replicate, type, readNum) = id.tokenize('_')
+       [
+           [
+               id: sample,
+               replicate: replicate.replace('rep', ''),
+               type: type
+           ],
+            files
+       ]
+   }
+       .set { ch_samples }
+
+   ANALYZE_READS(ch_samples)
+   ```
+
+   - Organiser les sorties basées sur les métadonnées
+
+   ```groovy
+   publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+   ```
+
+### Ressources supplémentaires
+
+- [Documentation Nextflow : Travailler avec les fichiers](https://www.nextflow.io/docs/latest/working-with-files.html)
+- [channel.fromPath](https://www.nextflow.io/docs/latest/reference/channel.html#frompath)
+- [channel.fromFilePairs](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
+
+---
+
+## Et ensuite ?
+
+Retournez au [menu des Quêtes Secondaires](./index.md) ou cliquez sur le bouton en bas à droite de la page pour passer au prochain sujet de la liste.

@@ -30,8 +30,6 @@ Bu yan göreve başlamadan önce:
 - [Hello Nextflow](../../hello_nextflow/) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.
 - Temel Nextflow kavramları ve mekanizmalarını (process'ler, channel'lar, operatörler) rahatça kullanabiliyor olmalısınız
 
-<!-- Meta map'ler yan görevini önce yapmayı öneren kısmı kaldırdım çünkü bu daha sonra doğal olarak çalışıyor -->
-
 ---
 
 ## 0. Başlangıç
@@ -768,7 +766,7 @@ Bu yan görevin geri kalanında yerel örnek dosyalarımızı kullanmaya devam e
 === "Önce"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Bir dize yolundan Path nesnesi oluştur
+        // İnternetten uzak bir dosya kullanma
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
@@ -799,7 +797,7 @@ Bunu yapmanın naif bir yolu, `file()` metodunu [`channel.of()`](https://www.nex
 
 ```groovy title="Sözdizimi örneği"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
-                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+                      [file('data/patientA_rep1_normal_R2_001.fastq.gz')])
 ```
 
 Bu çalışır, ancak hantal.
@@ -1862,7 +1860,7 @@ nextflow run main.nf
     │   │       └── patientB_stats.txt
     │   └── patientC
     │       └── 1
-    │           └── patientA_stats.txt
+    │           └── patientC_stats.txt
     └── tumor
         ├── patientA
         │   ├── 1
@@ -1874,7 +1872,7 @@ nextflow run main.nf
         │       └── patientB_stats.txt
         └── patientC
             └── 1
-                └── patientA_stats.txt
+                └── patientC_stats.txt
     ```
 
 İşte burada, tüm meta verilerimiz düzgünce organize edilmiş. Bu başarı!
