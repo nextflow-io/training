@@ -1,6 +1,5 @@
 # Getting started
 
-<!--
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=gZxlXgkVxuLEzOsC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -17,8 +16,6 @@
 
     - :fontawesome-solid-closed-captioning: High quality (manually curated) captions / subtitles. Switch them on with the :material-subtitles: icon
     - :material-bookmark: Video chapters in the timeline that correspond to page headings.
-
--->
 
 ## Start a training environment
 
