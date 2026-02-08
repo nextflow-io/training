@@ -51,7 +51,7 @@ Key outputs include:
 
 ---
 
-## 2. Run Sarek with test data
+## 2. Run Sarek with the built-in test data
 
 nf-core pipelines include built-in test profiles that use small datasets to validate the pipeline works correctly.
 This is the recommended way to verify your environment is set up properly.
@@ -61,34 +61,53 @@ This is the recommended way to verify your environment is set up properly.
     Make sure you're in the correct working directory:
     `cd /workspaces/training/nf4-science/genomics`
 
-### 2.1. Understanding container requirements
+### 2.1. Understanding the test profile
+
+[TODO: brief intro text]
+
+#### 2.1.1. Container requirements
 
 Like most nf-core pipelines, Sarek requires containerization (Docker, Singularity, or similar) because it uses many specialized bioinformatics tools.
 
 When you run an nf-core pipeline, each process specifies which container image provides its required software.
 However, Nextflow only uses these containers if you tell it to via a profile or configuration.
 
-### 2.2. Run the test profile
+#### 2.1.2. Test profile configuration
 
-The simplest way to run Sarek is using its built-in test profile, which includes a small test dataset:
+The test profile configures Sarek with:
+
+- A small subset of sequencing data (to run quickly)
+- Minimal resource requirements
+- A reduced reference genome
+- Default variant caller (Strelka)
+
+You can inspect what the test profile sets by looking at the pipeline's configuration:
 
 ```bash
-nextflow run nf-core/sarek -r 3.5.1 -profile test,docker --outdir results_sarek
+nextflow config nf-core/sarek -r 3.5.1 -profile test
 ```
 
-Let's break down this command:
+[TODO: add a collapsible 'success' admonition showing the command output]
+
+This shows all parameters that the test profile configures, including the input samplesheet URL and reference genome settings.
+
+### 2.2. Run the test profile
+
+The simplest way to run Sarek is using its built-in test profile, which includes a small test dataset.
+To that end, we're going to give the following arguments to the `nextflow run` command:
 
 - `nf-core/sarek`: The pipeline to run (Nextflow downloads it from GitHub automatically)
 - `-r 3.5.1`: The pipeline version (pinning versions ensures reproducibility)
 - `-profile test,docker`: Use the test profile AND enable Docker containers
 - `--outdir results_sarek`: Where to save the results
 
-!!! warning "First run may take time"
+Putting it all together, we get this:
 
-    The first time you run Sarek, Nextflow will download the pipeline code and Docker containers.
-    This can take several minutes depending on your internet connection.
+```bash
+nextflow run nf-core/sarek -r 3.5.1 -profile test,docker --outdir results_sarek
+```
 
-??? success "Expected output"
+??? success "Command output"
 
     ```console
     N E X T F L O W   ~  version 24.10.0
@@ -112,38 +131,14 @@ Let's break down this command:
     -[nf-core/sarek] Pipeline completed successfully-
     ```
 
-### 2.3. Understanding the test profile
+Note that the first time you run Sarek, Nextflow will download the pipeline code and Docker containers.
+This can take several minutes depending on your internet connection.
 
-The test profile configures Sarek with:
-
-- A small subset of sequencing data (to run quickly)
-- Minimal resource requirements
-- A reduced reference genome
-- Default variant caller (Strelka)
-
-You can inspect what the test profile sets by looking at the pipeline's configuration:
-
-```bash
-nextflow config nf-core/sarek -r 3.5.1 -profile test
-```
-
-This shows all parameters that the test profile configures, including the input samplesheet URL and reference genome settings.
-
-### Takeaway
-
-You can run any nf-core pipeline using its test profile to verify your environment is correctly configured.
-
-### What's next?
-
-Explore the outputs and understand what Sarek produces.
-
----
-
-## 3. Explore the outputs
+### 2.3. Explore the outputs
 
 When the pipeline completes, you'll find results organized in the output directory.
 
-### 3.1. Output directory structure
+#### 2.3.1. Output directory structure
 
 List the contents of the results directory:
 
@@ -172,7 +167,7 @@ Key directories:
 - **multiqc/**: Aggregated quality control report
 - **pipeline_info/**: Execution reports and logs
 
-### 3.2. Examine the MultiQC report
+#### 2.3.2. Examine the MultiQC report
 
 The MultiQC report aggregates quality metrics from all pipeline steps.
 Open it in your browser or use VS Code's preview feature:
@@ -189,7 +184,7 @@ The report includes:
 - Coverage metrics
 - Variant calling statistics
 
-### 3.3. Find the variant calls
+#### 2.3.3. Find the variant calls
 
 The variant calls are in the `variant_calling/` directory, organized by variant caller:
 
@@ -199,7 +194,7 @@ ls results_sarek/variant_calling/
 
 For the test profile (which uses Strelka by default), you'll find VCF files containing the detected variants.
 
-### 3.4. Pipeline execution reports
+#### 2.3.4. Pipeline execution reports
 
 Check the pipeline_info directory for execution details:
 
@@ -223,11 +218,11 @@ Learn how to configure Sarek for different use cases.
 
 ---
 
-## 4. Configure Sarek for your data
+## 3. Configure Sarek for your data
 
 The test profile is useful for validation, but running Sarek on your own data requires additional configuration.
 
-### 4.1. Key parameters
+### 3.1. Key parameters
 
 Sarek has many configurable parameters. Here are the most commonly used:
 
@@ -241,7 +236,7 @@ Sarek has many configurable parameters. Here are the most commonly used:
 | `--intervals` | Target regions BED file     | `targets.bed`                                  |
 | `--wes`       | Whole exome sequencing mode | `true`                                         |
 
-### 4.2. Input samplesheet format
+### 3.2. Input samplesheet format
 
 Sarek expects a CSV samplesheet with specific columns.
 For starting from FASTQ files:
@@ -259,33 +254,7 @@ patient,sample,bam,bai
 patient1,sample1,sample1.bam,sample1.bam.bai
 ```
 
-### 4.3. Choosing variant callers
-
-Sarek supports multiple variant callers.
-Use the `--tools` parameter to specify which ones to run:
-
-```bash
-# Run GATK HaplotypeCaller (germline variants)
-nextflow run nf-core/sarek -r 3.5.1 -profile docker \
-  --input samplesheet.csv \
-  --outdir results \
-  --genome GATK.GRCh38 \
-  --tools haplotypecaller
-
-# Run multiple callers
-nextflow run nf-core/sarek -r 3.5.1 -profile docker \
-  --input samplesheet.csv \
-  --outdir results \
-  --genome GATK.GRCh38 \
-  --tools haplotypecaller,deepvariant,strelka
-```
-
-!!! tip "Germline vs. somatic calling"
-
-    - For germline variant calling (inherited variants), use tools like `haplotypecaller`, `deepvariant`, `freebayes`, or `strelka`
-    - For somatic variant calling (tumor mutations), use tools like `mutect2`, `strelka` (with tumor/normal pairs), or `manta`
-
-### 4.4. Using GATK joint calling
+### 3.3. Using GATK joint calling
 
 Remember the joint calling workflow you built in Part 3?
 Sarek can do joint calling with GATK HaplotypeCaller:
@@ -301,23 +270,21 @@ nextflow run nf-core/sarek -r 3.5.1 -profile docker \
 
 The `--joint_germline` flag enables the same joint genotyping approach you implemented manually: generating GVCFs per sample, combining them, and running GenotypeGVCFs.
 
-### 4.5. Resource configuration
+??? info "Other variant callers"
 
-For running on different compute environments, use profiles or a custom config:
+    Sarek supports multiple variant callers beyond GATK HaplotypeCaller.
+    Use the `--tools` parameter to specify which ones to run:
 
-```bash
-# Use Singularity instead of Docker
-nextflow run nf-core/sarek -r 3.5.1 -profile singularity \
-  --input samplesheet.csv \
-  --outdir results \
-  --genome GATK.GRCh38
+    ```bash
+    nextflow run nf-core/sarek -r 3.5.1 -profile docker \
+      --input samplesheet.csv \
+      --outdir results \
+      --genome GATK.GRCh38 \
+      --tools haplotypecaller,deepvariant,strelka
+    ```
 
-# Use an institutional config (if available)
-nextflow run nf-core/sarek -r 3.5.1 -profile institutional_profile \
-  --input samplesheet.csv \
-  --outdir results \
-  --genome GATK.GRCh38
-```
+    - For germline variant calling (inherited variants), use tools like `haplotypecaller`, `deepvariant`, `freebayes`, or `strelka`
+    - For somatic variant calling (tumor mutations), use tools like `mutect2`, `strelka` (with tumor/normal pairs), or `manta`
 
 ### Takeaway
 
@@ -325,116 +292,70 @@ Sarek is highly configurable and supports many use cases through its parameters 
 
 ### What's next?
 
-Learn how to resume failed runs and troubleshoot issues.
+Congratulations on completing the genomics training course!
 
 ---
 
-## 5. Resume and troubleshoot
-
-Production pipelines sometimes fail due to resource limits, network issues, or data problems.
-Nextflow's resume capability helps you recover without starting over.
-
-### 5.1. Using resume
-
-If a Sarek run fails or you need to add additional outputs, use `-resume`:
-
-```bash
-nextflow run nf-core/sarek -r 3.5.1 -profile test,docker \
-  --outdir results_sarek \
-  -resume
-```
-
-Nextflow will:
-
-1. Check the cache for each task
-2. Reuse results from successfully completed tasks
-3. Only re-run tasks that failed or changed
-
-### 5.2. Common issues and solutions
-
-**Container download failures**
-
-If container downloads fail, try running again - network issues are often transient.
-For persistent issues, consider pre-pulling containers:
-
-```bash
-docker pull nfcore/sarek:3.5.1
-```
-
-**Out of memory errors**
-
-Sarek's default resource allocations may not suit all environments.
-Create a custom config to adjust resources:
-
-```groovy title="custom.config"
-process {
-    withName: 'BWAMEM2_MEM' {
-        memory = 32.GB
-    }
-    withName: 'GATK4_APPLYBQSR' {
-        memory = 16.GB
-    }
-}
-```
-
-Then include it in your run:
-
-```bash
-nextflow run nf-core/sarek -r 3.5.1 -profile test,docker \
-  -c custom.config \
-  --outdir results_sarek
-```
-
-**Debugging failed tasks**
-
-When a task fails, Nextflow shows the work directory hash.
-Navigate there to inspect logs:
-
-```bash
-# Example: if hash is [ab/123456]
-ls work/ab/123456*/
-cat work/ab/123456*/.command.err
-cat work/ab/123456*/.command.log
-```
-
-### 5.3. Getting help
-
-nf-core provides excellent support resources:
-
-- **Documentation**: [nf-co.re/sarek/docs](https://nf-co.re/sarek/docs)
-- **Parameter reference**: [nf-co.re/sarek/parameters](https://nf-co.re/sarek/parameters)
-- **Slack community**: [nf-co.re/join](https://nf-co.re/join)
-- **GitHub issues**: [github.com/nf-core/sarek/issues](https://github.com/nf-core/sarek/issues)
-
-### Takeaway
-
-The `-resume` flag and good troubleshooting practices help you recover from pipeline failures efficiently.
-
-### What's next?
-
-Reflect on what you've learned and explore additional resources.
-
----
-
-## 6. Summary
+## 4. Summary
 
 In this part, you learned how to run nf-core/sarek, a production-ready variant calling pipeline.
 
-### Key concepts covered
+??? info "Troubleshooting common issues"
 
-1. **nf-core pipelines** provide standardized, well-tested workflows that follow consistent conventions
-2. **Test profiles** allow quick validation of your environment
-3. **Sarek** implements a comprehensive variant calling workflow with preprocessing, multiple caller support, and quality control
-4. **Configuration** allows customization for different data types, reference genomes, and compute environments
-5. **Resume capability** helps recover from failures without re-running completed work
+    **Container download failures**
 
-### Takeaway
+    If container downloads fail, try running again. Network issues are often transient.
+    For persistent issues, consider pre-pulling containers:
 
-You now know how to leverage the nf-core ecosystem for production-ready variant calling while understanding the underlying Nextflow concepts from building your own pipeline.
+    ```bash
+    docker pull nfcore/sarek:3.5.1
+    ```
 
-### What's next?
+    **Out of memory errors**
 
-Congratulations on completing the genomics training course!
+    Sarek's default resource allocations may not suit all environments.
+    Create a custom config to adjust resources:
+
+    ```groovy title="custom.config"
+    process {
+        withName: 'BWAMEM2_MEM' {
+            memory = 32.GB
+        }
+        withName: 'GATK4_APPLYBQSR' {
+            memory = 16.GB
+        }
+    }
+    ```
+
+    Then include it in your run:
+
+    ```bash
+    nextflow run nf-core/sarek -r 3.5.1 -profile test,docker \
+      -c custom.config \
+      --outdir results_sarek
+    ```
+
+    **Debugging failed tasks**
+
+    When a task fails, Nextflow shows the work directory hash.
+    Navigate there to inspect logs:
+
+    ```bash
+    # Example: if hash is [ab/123456]
+    ls work/ab/123456*/
+    cat work/ab/123456*/.command.err
+    cat work/ab/123456*/.command.log
+    ```
+
+??? info "Getting help"
+
+    nf-core provides excellent support resources:
+
+    - **Documentation**: [nf-co.re/sarek/docs](https://nf-co.re/sarek/docs)
+    - **Parameter reference**: [nf-co.re/sarek/parameters](https://nf-co.re/sarek/parameters)
+    - **Slack community**: [nf-co.re/join](https://nf-co.re/join)
+    - **GitHub issues**: [github.com/nf-core/sarek/issues](https://github.com/nf-core/sarek/issues)
+
 Consider exploring:
 
 - Other [nf-core pipelines](https://nf-co.re/pipelines) for your research needs
