@@ -12,7 +12,7 @@ Oto nasze trzy najważniejsze rekomendacje dotyczące kolejnych kroków na podst
 
 ### 1.1. Zastosuj Nextflow do innych przypadków użycia w analizie naukowej
 
-**Sprawdź stronę [Nextflow for Science](../index.md)**, aby znaleźć listę innych krótkich, samodzielnych kursów, które pokazują, jak zastosować podstawowe koncepcje i mechanizmy przedstawione w Hello Nextflow do typowych przypadków użycia w analizie naukowej.
+**Sprawdź stronę [Nextflow for Science](../nf4_science/index.md)**, aby znaleźć listę innych krótkich, samodzielnych kursów, które pokazują, jak zastosować podstawowe koncepcje i mechanizmy przedstawione w Hello Nextflow do typowych przypadków użycia w analizie naukowej.
 
 Jeśli nie widzisz Swojej dziedziny reprezentowanej przez odpowiedni przypadek użycia, daj nam znać na [forum społeczności](https://community.seqera.io/), abyśmy mogli dodać ją do naszej listy rozwojowej.
 
@@ -21,8 +21,7 @@ Jeśli nie widzisz Swojej dziedziny reprezentowanej przez odpowiedni przypadek u
 **[nf-core](https://nf-co.re/)** to światowa inicjatywa współpracy mająca na celu opracowanie znormalizowanych pipeline'ów open-source dla szerokiego zakresu zastosowań w badaniach naukowych.
 Projekt obejmuje [ponad 100 pipeline'ów](https://nf-co.re/pipelines/) dostępnych do użycia od razu oraz [znacznie ponad 1400 modułów procesów](https://nf-co.re/modules/), które można zintegrować z własnymi projektami, a także bogaty zestaw narzędzi deweloperskich.
 
-Kurs szkoleniowy **[Hello nf-core](../../hello_nf-core/index.md)** wprowadzi Cię w pipeline'y kuratorowane przez społeczność nf-core oraz framework deweloperski.
-Narzędzia te pomagają tworzyć powtarzalne, skalowalne i znormalizowane workflow'y.
+Kurs szkoleniowy **[Hello nf-core](../../hello_nf-core/index.md)** wprowadzi Cię w pipeline'y kuratorowane przez społeczność nf-core oraz framework deweloperski, zaprojektowane tak, aby pomóc Ci pisać powtarzalne, skalowalne i znormalizowane workflow'y.
 Nauczysz się używać istniejących pipeline'ów nf-core, przyczyniać się do ich rozwoju, a nawet budować własne, wspierane przez najlepsze praktyki i prężną społeczność.
 Jeśli jesteś gotowy, aby zastosować Swoje umiejętności Nextflow w rzeczywistych projektach, to idealny następny krok.
 

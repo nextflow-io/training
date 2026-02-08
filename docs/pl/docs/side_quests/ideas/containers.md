@@ -35,7 +35,7 @@ docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quot
 
 Wyjście:
 
-```console title="Wyjście"
+```console title="Output"
 Humans are allergic to change. They love to say, 'We've always done it
 this way.' I try to fight that. That's why I have a clock on my wall
 that runs counter-clockwise.
@@ -111,7 +111,7 @@ Możesz również kontynuować opcjonalne ćwiczenie, aby pobierać cytaty pioni
 ## 2. Spraw, aby krowa cytowała słynnych naukowców
 
 Ta sekcja zawiera dodatkowe ćwiczenia, aby przećwiczyć to, czego się dotychczas nauczyłeś.
-Wykonanie tych ćwiczeń _nie jest wymagane_ do zrozumienia późniejszych części szkolenia, ale stanowi zabawny sposób na utrwalenie Swojej wiedzy poprzez wymyślenie, jak sprawić, aby krowa cytowała słynnych naukowców.
+Wykonanie tych ćwiczeń _nie jest wymagane_ do zrozumienia późniejszych części szkolenia, ale stanowi zabawny sposób na utrwalenie Twojej wiedzy poprzez wymyślenie, jak sprawić, aby krowa cytowała słynnych naukowców.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________

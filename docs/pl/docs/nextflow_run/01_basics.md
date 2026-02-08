@@ -133,7 +133,7 @@ Hello World!
 ### 2.3. Zapisz wyniki do innego katalogu
 
 Domyślnie Nextflow zapisze wyjścia pipeline'u do katalogu o nazwie `results` w Twojej bieżącej ścieżce.
-Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI `-output-dir` (lub `-o` w skrócie)
+Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI `output-dir` (lub `-o` w skrócie)
 
 !!! danger "Ostrzeżenie"
 
@@ -190,7 +190,7 @@ Wracając do wyjścia konsoli dla workflow'u, który uruchomiliśmy wcześniej, 
 ```
 
 Widzisz, jak linia zaczyna się od `[a3/1e1535]`?
-To jest skrócona forma ścieżki katalogu zadania dla tego jednego wywołania **procesu** i mówi, gdzie znaleźć wyjście wywołania procesu `sayHello` w ścieżce katalogu `work/`.
+To jest skrócona forma ścieżki katalogu zadania dla tego jednego wywołania **procesu** i mówi, gdzie znaleźć wyjście wywołania `sayHello` w ścieżce katalogu `work/`.
 
 Możesz znaleźć pełną ścieżkę, wpisując następujące polecenie (zastępując `a3/1e1535` tym, co widzisz w Twoim terminalu) i naciskając klawisz tab, aby automatycznie uzupełnić ścieżkę, lub dodając gwiazdkę:
 
@@ -230,7 +230,7 @@ Zobaczmy, co jest w środku.
 
 ??? question "Nie widzisz tego samego?"
 
-    Dokładne nazwy podkatalogów będą inne w Twoim systemie.
+    Dokładne nazwy podkatalogów będą różne w Twoim systemie.
 
     Jeśli przeglądasz zawartość podkatalogu zadania w eksploratorze plików VSCode, zobaczysz wszystkie pliki od razu.
     Jednak pliki dziennika są ustawione jako niewidoczne w terminalu, więc jeśli chcesz użyć `ls` lub `tree` do ich wyświetlenia, musisz ustawić odpowiednią opcję wyświetlania niewidocznych plików.
@@ -258,7 +258,7 @@ To są pliki pomocnicze i dziennika, które Nextflow zapisał jako część wyko
 - **`.command.err`**: Komunikaty o błędach (`stderr`) emitowane przez wywołanie procesu
 - **`.command.log`**: Kompletne wyjście dziennika emitowane przez wywołanie procesu
 - **`.command.out`**: Zwykłe wyjście (`stdout`) przez wywołanie procesu
-- **`.command.run`**: Pełny skrypt uruchomiony przez Nextflow do wykonania wywołania procesu
+- **`.command.run`**: Pełny skrypt uruchomiony przez Nextflow'a do wykonania wywołania procesu
 - **`.command.sh`**: Polecenie, które zostało faktycznie uruchomione przez wywołanie procesu
 - **`.exitcode`**: Kod wyjścia wynikający z polecenia
 
@@ -462,7 +462,7 @@ Definicja `output` zawiera kwalifikator `path`, który mówi Nextflow'owi, że p
 ### 3.3. Definicja `workflow`
 
 Drugi blok kodu opisuje sam [**workflow**](https://nextflow.io/docs/latest/workflow.html).
-Definicja **workflow** zaczyna się od słowa kluczowego `workflow`, po którym następuje opcjonalna nazwa, a następnie ciało workflow ograniczone nawiasami klamrowymi.
+Definicja **workflow** zaczyna się od słowa kluczowego `workflow`, po którym następuje opcjonalna nazwa, a następnie ciało workflow'u ograniczone nawiasami klamrowymi.
 
 Tutaj mamy **workflow**, który składa się z bloku `main:` i bloku `publish:`.
 Blok `main:` jest głównym ciałem workflow'u, a blok `publish:` wymienia wyjścia, które powinny być opublikowane do katalogu `results`.
@@ -722,7 +722,7 @@ Zauważ, że to nie usuwa dwuznakowych podkatalogów (jak `eb/` powyżej), ale o
 !!! warning "Ostrzeżenie"
 
     Usuwanie podkatalogów roboczych z poprzednich uruchomień usuwa je z pamięci podręcznej Nextflow i kasuje wszelkie wyjścia, które były przechowywane w tych katalogach.
-    To oznacza, że psuje zdolność Nextflow do wznowienia wykonania bez ponownego uruchamiania odpowiednich **procesów**.
+    To oznacza, że psuje zdolność Nextflow'a do wznowienia wykonania bez ponownego uruchamiania odpowiednich **procesów**.
 
     Jesteś odpowiedzialny za zapisanie wszelkich wyjść, na których Ci zależy! To jest główny powód, dla którego wolimy używać trybu `copy` zamiast trybu `symlink` dla dyrektywy `publish`.
 

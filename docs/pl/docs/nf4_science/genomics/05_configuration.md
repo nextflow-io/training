@@ -78,7 +78,7 @@ Jednak drugi raport pokazuje, że nasze wykorzystanie zasobów jest teraz bardzi
 
 <!-- **TODO: screenshots?** -->
 
-Jak widać, to podejście jest użyteczne, gdy Twoje procesy mają różne wymagania zasobowe. Daje Ci możliwość dostosowania alokacji zasobów dla każdego procesu na podstawie rzeczywistych danych, a nie domysłów.
+Jak widać, to podejście jest użyteczne, gdy Twoje procesy mają różne wymagania zasobowe. Daje Ci możliwość precyzyjnego dopasowania alokacji zasobów dla każdego procesu na podstawie rzeczywistych danych, a nie domysłów.
 
 !!!note "Uwaga"
 

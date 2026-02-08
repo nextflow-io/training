@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W trzeciej części kursu szkoleniowego Hello nf-core pokażemy, jak znaleźć, zainstalować i użyć istniejącego modułu nf-core w Swoim pipeline'ie.
+W trzeciej części kursu szkoleniowego Hello nf-core pokażemy, jak znaleźć, zainstalować i użyć istniejącego modułu nf-core w Twoim pipeline'ie.
 
 Jedną z głównych korzyści pracy z nf-core jest możliwość wykorzystania wcześniej przygotowanych, przetestowanych modułów z repozytorium [nf-core/modules](https://github.com/nf-core/modules).
 Zamiast pisać każdy proces od podstaw, możesz zainstalować i używać gotowych komponentów utrzymywanych przez społeczność, które przestrzegają najlepszych praktyk.
@@ -35,7 +35,7 @@ Aby pokazać, jak to działa, zastąpimy niestandardowy moduł `collectGreetings
 Najpierw nauczmy się, jak znaleźć istniejący moduł nf-core i zainstalować go w naszym pipeline'ie.
 
 Będziemy dążyć do zastąpienia procesu `collectGreetings`, który używa polecenia Unix `cat` do łączenia wielu plików z powitaniami w jeden.
-Ta operacja jest bardzo powszechna, więc prawdopodobnie istnieje już moduł w nf-core zaprojektowany do tego celu.
+Łączenie plików jest bardzo powszechną operacją, więc istnieje duże prawdopodobieństwo, że w nf-core jest już moduł zaprojektowany do tego celu.
 
 Zagłębmy się w to.
 
@@ -153,12 +153,12 @@ To są dokładnie te same informacje, które możesz znaleźć na stronie intern
 
 ### 1.4. Instalacja modułu cat/cat
 
-Teraz, gdy znaleźliśmy moduł, którego chcemy, musimy dodać go do kodu źródłowego naszego pipeline.
+Teraz, gdy znaleźliśmy moduł, którego chcemy, musimy dodać go do kodu źródłowego naszego pipeline'u.
 
 Dobra wiadomość jest taka, że projekt nf-core zawiera narzędzia, które ułatwiają tę część.
 Konkretnie, polecenie `nf-core modules install` umożliwia zautomatyzowanie pobierania kodu i udostępnienia go projektowi w jednym kroku.
 
-Przejdź do katalogu Swojego pipeline i uruchom polecenie instalacji:
+Przejdź do katalogu Swojego pipeline'u i uruchom polecenie instalacji:
 
 ```bash
 cd core-hello
@@ -271,7 +271,7 @@ nf-core modules list local
 
 To potwierdza, że moduł `cat/cat` jest teraz częścią kodu źródłowego Twojego projektu.
 
-Jednak aby faktycznie użyć nowego modułu, musimy go zaimportować do naszego pipeline.
+Jednak aby faktycznie użyć nowego modułu, musimy go zaimportować do naszego pipeline'u.
 
 ### 1.5. Aktualizacja importów modułów
 
@@ -321,10 +321,10 @@ Otwórz [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) i dokonaj
 
 Zauważ, jak ścieżka dla modułu nf-core różni się od komponentów lokalnych:
 
-- **Komponent nf-core**: `'../modules/nf-core/cat/cat/main'` (odniesienie do `main.nf`)
+- **Moduł nf-core**: `'../modules/nf-core/cat/cat/main'` (odniesienie do `main.nf`)
 - **Komponent lokalny**: `'../modules/local/collectGreetings.nf'` (odniesienie do pojedynczego pliku)
 
-CAT_CAT jest teraz dostępny dla workflow, więc wszystko, co musimy zrobić, to zamienić wywołanie `collectGreetings` na jego użycie. Prawda?
+Moduł jest teraz dostępny dla workflow'u, więc wszystko, co musimy zrobić, to zamienić wywołanie `collectGreetings` na użycie `CAT_CAT`. Prawda?
 
 Nie tak szybko.
 
@@ -355,7 +355,7 @@ Oceń, czego wymaga nowy moduł i zidentyfikuj wszelkie ważne zmiany potrzebne 
 ## 2. Ocena wymagań nowego modułu
 
 Konkretnie, musimy zbadać **interfejs** modułu, tj. jego definicje wejść i wyjść, i porównać go z interfejsem modułu, który chcemy zastąpić.
-To pozwoli nam określić, czy możemy po prostu traktować nowy moduł jako zamiennik typu "drop-in", czy też będziemy musieli dostosować część połączeń.
+Pozwoli nam to określić, czy możemy po prostu traktować nowy moduł jako zamiennik typu "drop-in", czy też będziemy musieli dostosować część połączeń.
 
 Najlepiej byłoby zrobić to _przed_ zainstalowaniem modułu, ale hej, lepiej późno niż wcale.
 (Na marginesie, istnieje polecenie `uninstall`, aby pozbyć się modułów, których nie chcesz już używać.)
@@ -438,7 +438,7 @@ Właśnie powiedzieliśmy, że moduł CAT_CAT oczekuje mapy metadanych jako czę
 Poświęćmy kilka minut na bliższe przyjrzenie się temu, czym to jest.
 
 **Mapa metadanych**, często nazywana w skrócie **metamapą**, to mapa w stylu Groovy zawierająca informacje o jednostkach danych.
-W kontekście pipeline Nextflow jednostki danych mogą być czymkolwiek: pojedynczymi próbkami, partiami próbek lub całymi zbiorami danych.
+W kontekście pipeline'ów Nextflow jednostki danych mogą być czymkolwiek: pojedynczymi próbkami, partiami próbek lub całymi zbiorami danych.
 
 Zgodnie z konwencją, metamapa nf-core jest nazywana `meta` i zawiera wymagane pole `id`, które jest używane do nazywania wyjść i śledzenia jednostek danych.
 
@@ -514,7 +514,7 @@ To powinno załatwić sprawę! Teraz, gdy mamy plan, jesteśmy gotowi do działa
 
 ### Podsumowanie
 
-Wiesz, jak ocenić interfejs wejściowy i wyjściowy nowego modułu, aby zidentyfikować jego wymagania. Nauczyłeś się również, jak metamapy są używane przez nf-core do utrzymywania informacji kontekstowych ściśle powiązanych z danymi podczas ich przepływu przez workflow.
+Wiesz, jak ocenić interfejs wejściowy i wyjściowy nowego modułu, aby zidentyfikować jego wymagania. Nauczyłeś się również, jak metamapy są używane przez pipeline'y nf-core do utrzymywania informacji kontekstowych ściśle powiązanych z danymi podczas ich przepływu przez pipeline.
 
 ### Co dalej?
 
@@ -556,32 +556,32 @@ Dodajmy te linie po wywołaniu `convertToUpper`, usuwając wywołanie `collectGr
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(ch_samplesheet)
 
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
         def cat_meta = [ id: params.batch ]
 
-        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+        // wygeneruj grafikę ASCII powitań za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(ch_samplesheet)
 
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
 
         // zbierz wszystkie powitania w jeden plik
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+        // wygeneruj grafikę ASCII powitań za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -594,10 +594,10 @@ Następnie przekształć kanał plików w kanał krotek zawierających metadane 
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(ch_samplesheet)
 
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
@@ -606,23 +606,23 @@ Następnie przekształć kanał plików w kanał krotek zawierających metadane 
         // utwórz kanał z metadanymi i plikami w formacie krotki
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+        // wygeneruj grafikę ASCII powitań za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(ch_samplesheet)
 
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
         def cat_meta = [ id: params.batch ]
 
-        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+        // wygeneruj grafikę ASCII powitań za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -640,10 +640,10 @@ Teraz wywołaj `CAT_CAT` na nowo utworzonym kanale:
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(ch_samplesheet)
 
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
@@ -655,17 +655,17 @@ Teraz wywołaj `CAT_CAT` na nowo utworzonym kanale:
         // połącz pliki używając modułu nf-core cat/cat
         CAT_CAT(ch_for_cat)
 
-        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+        // wygeneruj grafikę ASCII powitań za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(ch_samplesheet)
 
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
@@ -674,7 +674,7 @@ Teraz wywołaj `CAT_CAT` na nowo utworzonym kanale:
         // utwórz kanał z metadanymi i plikami w formacie krotki
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // wygeneruj grafikę ASCII pozdrowień za pomocą cowpy
+        // wygeneruj grafikę ASCII powitań za pomocą cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -690,10 +690,10 @@ Ponieważ `cowpy` nie akceptuje jeszcze krotek metadanych (naprawimy to w nastę
 === "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(ch_samplesheet)
 
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
@@ -715,10 +715,10 @@ Ponieważ `cowpy` nie akceptuje jeszcze krotek metadanych (naprawimy to w nastę
 === "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="17"
-        // wyemituj pozdrowienie
+        // wyemituj powitanie
         sayHello(ch_samplesheet)
 
-        // przekształć pozdrowienie na wielkie litery
+        // przekształć powitanie na wielkie litery
         convertToUpper(sayHello.out)
 
         // utwórz mapę metadanych z nazwą partii jako ID
@@ -742,7 +742,7 @@ Następnie wystarczy przekazać `ch_for_cowpy` do `cowpy` zamiast `collectGreeti
 
     W następnej części kursu zaktualizujemy `cowpy`, aby pracował bezpośrednio z krotkami metadanych, więc ten krok ekstrakcji nie będzie już potrzebny.
 
-### 3.5. Testowanie workflow
+### 3.5. Testowanie workflow'u
 
 Przetestujmy, czy workflow działa z nowo zintegrowanym modułem `cat/cat`:
 

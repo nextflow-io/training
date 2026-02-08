@@ -9,7 +9,7 @@ hide:
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Ten kurs szkoleniowy jest przeznaczony dla badaczy w dziedzinie transkryptomiki i pokrewnych obszarów, którzy są zainteresowani tworzeniem lub dostosowywaniem pipeline'ów analizy danych.
-Opiera się on na szkoleniu dla początkujących [Hello Nextflow](../../hello_nextflow/) i demonstruje, jak używać Nextflow w konkretnym kontekście analizy masowego RNAseq.
+Opiera się on na szkoleniu dla początkujących [Hello Nextflow](../../hello_nextflow/) i demonstruje, jak używać Nextflow'a w konkretnym kontekście analizy masowego RNAseq.
 
 W szczególności, ten kurs pokazuje, jak zaimplementować prosty pipeline przetwarzania masowego RNAseq do przycinania sekwencji adapterów, dopasowywania odczytów do genomu referencyjnego i przeprowadzania kontroli jakości (QC) na kilku etapach.
 
@@ -26,7 +26,7 @@ Pod koniec tego warsztatu będziesz w stanie:
 - Napisać liniowy workflow do zastosowania podstawowych metod przetwarzania i QC dla RNAseq
 - Odpowiednio obsługiwać pliki specyficzne dla dziedziny, takie jak FASTQ i zasoby genomu referencyjnego
 - Obsługiwać dane sekwencjonowania single-end i paired-end
-- Wykorzystać paradygmat przepływu danych Nextflow do zrównoleglenia przetwarzania RNAseq na poziomie próbek
+- Wykorzystać paradygmat przepływu danych Nextflow'a do zrównoleglenia przetwarzania RNAseq na poziomie próbek
 - Agregować raporty QC z wielu etapów i próbek przy użyciu odpowiednich operatorów kanałów
 
 <!-- TODO

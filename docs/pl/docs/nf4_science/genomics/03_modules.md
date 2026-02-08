@@ -4,9 +4,9 @@
 
 W pierwszej części tego kursu zbudowałeś pipeline do wykrywania wariantów, który był całkowicie liniowy i przetwarzał dane każdej próbki niezależnie od innych.
 
-W drugiej części pokazaliśmy, jak używać kanałów i operatorów kanałów do implementacji wspólnego wykrywania wariantów za pomocą GATK, rozbudowując pipeline z Części 1.
+W drugiej części pokazaliśmy Ci, jak używać kanałów i operatorów kanałów do implementacji wspólnego wykrywania wariantów za pomocą GATK, rozbudowując pipeline z Części 1.
 
-W tej części pokażemy, jak przekonwertować kod z tego workflow'u na moduły. Aby przejść tę część szkolenia, musisz ukończyć Część 1 i Część 2, a także [Hello Modules](../../../hello_nextflow/hello_modules.md), które omawia podstawy modułów.
+W tej części pokażemy Ci, jak przekonwertować kod z tego workflow'u na moduły. Aby przejść tę część szkolenia, musisz ukończyć Część 1 i Część 2, a także [Hello Modules](../../../hello_nextflow/hello_modules.md), które omawia podstawy modułów.
 
 ---
 
@@ -15,7 +15,7 @@ W tej części pokażemy, jak przekonwertować kod z tego workflow'u na moduły.
 Kiedy zaczęliśmy rozwijać nasz workflow, umieściliśmy wszystko w jednym pliku kodu.
 Teraz nadszedł czas, aby zająć się **modularyzacją** naszego kodu, _tzn._ wyodrębnieniem definicji procesów do modułów.
 
-Zaczniemy od tego samego workflow co w Części 2, który udostępniliśmy w pliku `genomics-3.nf`.
+Zaczniemy od tego samego workflow'u co w Części 2, który udostępniliśmy w pliku `genomics-3.nf`.
 
 !!! note "Uwaga"
 
@@ -43,7 +43,7 @@ W katalogu projektu pojawi się teraz katalog `work` oraz katalog `results_genom
 
 ### Podsumowanie
 
-Jesteś gotowy, aby rozpocząć modularyzację Swojego workflow'u.
+Jesteś gotowy, aby rozpocząć modularyzację Twojego workflow'u.
 
 ### Co dalej?
 
@@ -53,9 +53,9 @@ Przenieś procesy workflow'u Genomics do modułów.
 
 ## 1. Przeniesienie procesów do modułów
 
-Jak nauczyłeś się w [Hello Modules](../../../hello_nextflow/hello_modules.md), tworzenie modułu polega na skopiowaniu definicji procesu do osobnego pliku. Plik może znajdować się w wybranym katalogu i mieć wybraną nazwę.
+Jak nauczyłeś się w [Hello Modules](../../../hello_nextflow/hello_modules.md), moduł można utworzyć po prostu kopiując definicję procesu do osobnego pliku w dowolnym katalogu, nadając mu dowolną wybraną nazwę.
 
-Z powodów, które staną się jasne później (w szczególności przy testowaniu), w tym szkoleniu stosujemy konwencję nazewnictwa pliku `main.nf` i umieszczania go w strukturze katalogów nazwanej według zestawu narzędzi i polecenia.
+Z powodów, które staną się jasne później (w szczególności przy testowaniu), w tym szkoleniu będziemy stosować konwencję nazewnictwa pliku `main.nf` i umieszczania go w strukturze katalogów nazwanej według zestawu narzędzi i polecenia.
 
 ### 1.1. Utwórz moduł dla procesu `SAMTOOLS_INDEX`
 
@@ -89,7 +89,7 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-Następnie usuń definicję procesu `SAMTOOLS_INDEX` z `genomics-3.nf` i dodaj deklarację importu dla modułu przed definicją następnego procesu, w ten sposób:
+Następnie usuń definicję procesu `SAMTOOLS_INDEX` z pliku `genomics-3.nf` i dodaj deklarację importu dla modułu przed definicją następnego procesu, w ten sposób:
 
 === "Po"
 
@@ -182,7 +182,7 @@ Przetestuj zmodularyzowany workflow.
 
 ---
 
-## 2. Testowanie zmodularyzowanego workflow
+## 2. Testowanie zmodularyzowanego workflow'u
 
 Uruchom zmodularyzowany workflow, aby zweryfikować, że wszystko nadal działa.
 
@@ -200,7 +200,7 @@ Launching `genomics-3.nf` [astonishing_venter] DSL2 - revision: ca27264c13
 [0c/fa6d15] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔
 ```
 
-Wszystko nadal działa, w tym możliwość wznowienia pipeline.
+Wszystko nadal działa, w tym możliwość wznowienia pipeline'u.
 Wyniki są nadal publikowane w katalogu `results_genomics`.
 
 ```console title="Zawartość katalogu"
@@ -229,7 +229,7 @@ Zmodularyzowałeś workflow i zweryfikowałeś, że nadal działa tak samo jak w
 
 ### Co dalej?
 
-Przejrzyj to, czego się nauczyłeś i spójrz na testowanie.
+Przejrzyj to, czego się nauczyłeś, i spójrz na testowanie.
 
 ---
 
@@ -239,8 +239,8 @@ Zmodularyzowałeś workflow i nic nie zmieniło się w sposobie działania pipel
 To jest zamierzone: zrestrukturyzowałeś kod bez wpływu na jego funkcjonalność.
 
 Moduły zawierają tylko logikę procesu, co czyni je czystymi i wielokrotnego użytku.
-Główny skrypt kontroluje, co jest publikowane i gdzie, podczas gdy moduły pozostają skoncentrowane na Swoim zadaniu obliczeniowym.
+Główny skrypt kontroluje, co jest publikowane i gdzie, podczas gdy moduły pozostają skoncentrowane na swoim zadaniu obliczeniowym.
 
 Położyłeś fundamenty pod rzeczy, które ułatwią utrzymanie kodu.
-Na przykład możesz teraz dodać testy do Swojego pipeline'u używając frameworka nf-test.
+Na przykład możesz teraz dodać testy do Twojego pipeline'u używając frameworka nf-test.
 To właśnie przyjrzymy się w następnej części tego kursu.

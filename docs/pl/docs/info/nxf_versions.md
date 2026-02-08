@@ -27,7 +27,7 @@ Nextflow ma dwie odrębne koncepcje wersjonowania, które są czasami mylone: **
 
 **DSL1 vs DSL2** odnosi się do zasadniczo różnych sposobów pisania pipeline'ów Nextflow.
 DSL1 był oryginalną składnią, gdzie procesy były niejawnie połączone przez kanały.
-DSL2, wprowadzony w Nextflow 20.07, dodał funkcje modularności: możliwość importowania procesów i workflows z innych plików, jawne bloki `workflow` oraz nazwane wyjścia procesów.
+DSL2, wprowadzony w Nextflow 20.07, dodał funkcje modularności: możliwość importowania procesów i workflow z innych plików, jawne bloki `workflow` oraz nazwane wyjścia procesów.
 DSL1 został oznaczony jako przestarzały w Nextflow 22.03 i usunięty w 22.12.
 Cały nowoczesny kod Nextflow używa DSL2.
 
@@ -53,7 +53,7 @@ Aby **włączyć** parser składni v2 dla bieżącej sesji, uruchom następując
 export NXF_SYNTAX_PARSER=v2
 ```
 
-Aby ustawić to na stałe (do czasu, gdy v2 stanie się domyślny w Nextflow 26.04), dodaj polecenie export do profilu Swojej powłoki (`~/.bashrc`, `~/.zshrc`, itp.):
+Aby ustawić to na stałe (do czasu, gdy v2 stanie się domyślny w Nextflow 26.04), dodaj polecenie export do profilu Twojej powłoki (`~/.bashrc`, `~/.zshrc`, itp.):
 
 ```bash
 echo 'export NXF_SYNTAX_PARSER=v2' >> ~/.bashrc
@@ -84,7 +84,8 @@ Te dwa artykuły są szczególnie pomocne przy migracji do najnowszej wersji:
 
 Obie te funkcje są omówione w ramach szkolenia dla początkujących, począwszy od wersji 3.0 materiałów szkoleniowych.
 
-W zależności od generacji kodu Nextflow, który zamierzasz migrować, możesz być w stanie wykonać większość pracy za pomocą lintera. Użyj polecenia `nextflow lint -format`. Zobacz dokumentację CLI dla [`lint`](https://www.nextflow.io/docs/latest/reference/cli.html#lint), aby uzyskać więcej szczegółów.
+W zależności od generacji kodu Nextflow, który zamierzasz migrować, możesz wykonać większość pracy za pomocą lintera Nextflow, używając polecenia `nextflow lint -format`.
+Zobacz dokumentację CLI dla [`lint`](https://www.nextflow.io/docs/latest/reference/cli.html#lint), aby uzyskać więcej szczegółów.
 
 Mamy nadzieję, że będzie to pomocne.
 Jeśli potrzebujesz pomocy, skontaktuj się na Slacku lub na forum.

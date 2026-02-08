@@ -10,7 +10,7 @@ W tej drugiej części pokażemy Ci, jak używać kanałów i operatorów kanał
 ### Przegląd metody
 
 Metoda GATK, której użyliśmy w pierwszej części tego kursu, generowała wyniki dla każdej próbki osobno.
-Jest to w porządku, jeśli chcesz analizować warianty z każdej próbki indywidualnie, ale daje ograniczone informacje.
+Jest to w porządku, jeśli chcesz analizować warianty z każdej próbki indywidualnie, ale daje to ograniczone informacje.
 Często bardziej interesujące jest porównanie wyników między wieloma próbkami, a GATK oferuje do tego alternatywną metodę zwaną wspólnym genotypowaniem, którą tutaj demonstrujemy.
 
 Wspólne wywoływanie wariantów polega na wygenerowaniu specjalnego rodzaju wyjścia wariantów zwanego GVCF (Genomic VCF) dla każdej próbki, następnie połączeniu danych GVCF ze wszystkich próbek i wreszcie uruchomieniu statystycznej analizy 'wspólnego genotypowania'.
@@ -49,7 +49,7 @@ Tak jak wcześniej, chcemy wypróbować polecenia ręcznie, zanim spróbujemy op
      Upewnij się, że jesteś we właściwym katalogu roboczym:
      `cd /workspaces/training/nf4-science/genomics`
 
-### 0.1. Indeksuj plik BAM wejściowy za pomocą Samtools
+### 0.1. Zaindeksuj plik BAM wejściowy za pomocą Samtools
 
 Ten pierwszy krok jest taki sam jak w Części 1, więc powinien być bardzo znajomy, ale tym razem musimy to zrobić dla wszystkich trzech próbek.
 
@@ -64,7 +64,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -112,7 +112,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -121,7 +121,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 
 #### 0.2.2. Uruchom polecenie wywoływania wariantów z opcją GVCF
 
-Aby wytworzyć genomiczny VCF (GVCF), dodajemy opcję `-ERC GVCF` do podstawowego polecenia, co włącza tryb GVCF HaplotypeCaller.
+Aby wytworzyć genomiczny VCF (GVCF), dodajemy opcję `-ERC GVCF` do podstawowego polecenia, co włącza tryb GVCF HaplotypeCaller'a.
 
 Zmieniamy również rozszerzenie pliku wyjściowego z `.vcf` na `.g.vcf`.
 Technicznie nie jest to wymagane, ale jest to zdecydowanie zalecana konwencja.
@@ -136,7 +136,7 @@ gatk HaplotypeCaller \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -153,7 +153,7 @@ Jeśli użyjesz `cat`, aby wyświetlić zawartość, zobaczysz, że jest on znac
 20_10037292_10066351    14720   .       T       <NON_REF>       .       .       END=14737       GT:DP:GQ:MIN_DP:PL       0/0:42:99:37:0,100,1160
 ```
 
-Reprezentują one regiony nie-wariantowe, gdzie wywołujący warianty nie znalazł dowodów zmienności, więc uchwycił pewne statystyki opisujące jego poziom pewności w braku zmienności. Umożliwia to rozróżnienie między dwoma bardzo różnymi przypadkami: (1) są dobre jakościowo dane pokazujące, że próbka jest homozygotyczna-referencyjna, i (2) nie ma wystarczająco dobrych danych dostępnych, aby dokonać określenia w każdy sposób.
+Reprezentują one regiony nie-wariantowe, gdzie wywołujący warianty nie znalazł dowodów zmienności, więc uchwycił pewne statystyki opisujące jego poziom pewności w braku zmienności. Umożliwia to rozróżnienie między dwoma bardzo różnymi przypadkami: (1) są dobre jakościowo dane pokazujące, że próbka jest homozygotyczna-referencyjna, i (2) nie ma wystarczająco dobrych danych dostępnych, aby dokonać określenia w jakikolwiek sposób.
 
 W GVCF zazwyczaj jest wiele takich linii nie-wariantowych, z mniejszą liczbą rekordów wariantów rozproszonymi wśród nich. Spróbuj uruchomić `head -176` na GVCF, aby załadować tylko pierwsze 176 linii pliku i znaleźć rzeczywiste wywołanie wariantu.
 
@@ -181,7 +181,7 @@ gatk HaplotypeCaller \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -198,14 +198,14 @@ gatk HaplotypeCaller \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
     ```
 -->
 
-Po zakończeniu będziesz mieć trzy pliki kończące się na `.g.vcf` w Swoim bieżącym katalogu (jeden na próbkę) i ich odpowiednie pliki indeksu kończące się na `.g.vcf.idx`.
+Po zakończeniu będziesz mieć trzy pliki kończące się na `.g.vcf` w Twoim bieżącym katalogu (jeden na próbkę) i ich odpowiednie pliki indeksu kończące się na `.g.vcf.idx`.
 
 ### 0.3. Uruchom wspólne genotypowanie
 
@@ -226,7 +226,7 @@ gatk GenomicsDBImport \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -252,7 +252,7 @@ gatk GenotypeGVCFs \
 ```
 
 <!--
-??? success "Command output"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -274,7 +274,7 @@ Ostatnie trzy kolumny w pliku to bloki genotypu dla próbek, wymienione w porzą
 
 Jeśli spojrzymy na genotypy wywołane dla naszego testowego tria rodzinnego dla pierwszego wariantu, widzimy, że ojciec jest heterozygotyczny-wariantowy (`0/1`), a matka i syn są obaj homozygotyczni-wariantowi (`1/1`).
 
-To jest ostatecznie informacja, którą chcemy wydobyć z zestawu danych! Więc opakowujmy to wszystko w workflow Nextflow, abyśmy mogli robić to na dużą skalę.
+To jest ostatecznie informacja, którą chcemy wydobyć z zestawu danych! Więc opakowujmy to wszystko w workflow Nextflow'a, abyśmy mogli robić to na dużą skalę.
 
 #### 0.3.3. Wyjdź z kontenera GATK
 
@@ -302,7 +302,7 @@ Więc musimy zacząć od włączenia trybu wywoływania wariantów GVCF i zaktua
 
     Dla wygody będziemy pracować z nową kopią workflow'u GATK, jak stoi na końcu Części 1, ale pod inną nazwą: `genomics-2.nf`.
 
-### 1.1. Powiedz HaplotypeCaller, aby emitował GVCF i zaktualizuj rozszerzenie wyjściowe
+### 1.1. Powiedz HaplotypeCaller'owi, aby emitował GVCF i zaktualizuj rozszerzenie wyjściowe
 
 Otwórzmy plik `genomics-2.nf` w edytorze kodu.
 Powinien wyglądać bardzo znajomo, ale możesz go uruchomić, jeśli chcesz upewnić się, że działa zgodnie z oczekiwaniami.
@@ -339,18 +339,18 @@ Upewnij się, że dodajesz ukośnik wsteczny (`\`) na końcu poprzedniej linii, 
         """
     ```
 
-I to wszystko, czego potrzeba, aby przełączyć HaplotypeCaller na generowanie GVCF zamiast VCF, prawda?
+I to wszystko, czego potrzeba, aby przełączyć HaplotypeCaller'a na generowanie GVCF zamiast VCF, prawda?
 
 ### 1.2. Uruchom pipeline, aby sprawdzić, czy możesz generować GVCF
 
-Polecenie wykonania Nextflow jest takie samo jak wcześniej, z wyjątkiem samej nazwy pliku workflow'u.
+Polecenie wykonania Nextflow'a jest takie samo jak wcześniej, z wyjątkiem samej nazwy pliku workflow'u.
 Upewnij się, że odpowiednio zaktualizowałeś nazwę pliku.
 
 ```bash
 nextflow run genomics-2.nf
 ```
 
-??? failure "Wyjście polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -375,11 +375,11 @@ A wyjście jest... całe czerwone! O nie.
 Polecenie, które zostało wykonane, jest poprawne, więc mieliśmy rację, że to wystarczyło do zmiany zachowania narzędzia GATK.
 Ale spójrz na tę linię o brakującym pliku wyjściowym. Zauważyłeś coś?
 
-Tak jest, zapomnieliśmy powiedzieć Nextflow, aby oczekiwał nowej nazwy pliku. Ups.
+Tak jest, zapomnieliśmy powiedzieć Nextflow'owi, aby oczekiwał nowej nazwy pliku. Ups.
 
 ### 1.3. Zaktualizuj również rozszerzenie pliku wyjściowego w bloku wyjść procesu
 
-Ponieważ nie wystarczy po prostu zmienić rozszerzenie pliku w samym poleceniu narzędzia, musisz również powiedzieć Nextflow, że oczekiwana nazwa pliku wyjściowego się zmieniła.
+Ponieważ nie wystarczy po prostu zmienić rozszerzenie pliku w samym poleceniu narzędzia, musisz również powiedzieć Nextflow'owi, że oczekiwana nazwa pliku wyjściowego się zmieniła.
 
 === "Po"
 
@@ -478,7 +478,7 @@ nextflow run genomics-2.nf -resume
 
 Tym razem działa.
 
-Same wyjście Nextflow nie wygląda inaczej (w porównaniu do pomyślnego uruchomienia w normalnym trybie VCF), ale teraz możemy znaleźć pliki `.g.vcf` i ich odpowiednie pliki indeksu, dla wszystkich trzech próbek, zorganizowane w podkatalogach.
+Same wyjście Nextflow'a nie wygląda inaczej (w porównaniu do pomyślnego uruchomienia w normalnym trybie VCF), ale teraz możemy znaleźć pliki `.g.vcf` i ich odpowiednie pliki indeksu, dla wszystkich trzech próbek, zorganizowane w podkatalogach.
 
 ??? abstract "Zawartość katalogu (dowiązania symboliczne skrócone)"
 
@@ -504,7 +504,7 @@ Jeśli otworzysz jeden z plików GVCF i przewiniesz go, możesz sprawdzić, że 
 
 ### Wnioski
 
-Okej, ten był minimalny pod względem nauki Nextflow...
+Okej, ten był minimalny pod względem nauki Nextflow'a...
 Ale to była miła okazja, aby powtórzyć znaczenie bloku wyjściowego procesu!
 
 ### Co dalej?
@@ -1021,6 +1021,6 @@ Wiesz, jak używać niektórych typowych operatorów, a także domknięć Groovy
 
 ### Co dalej?
 
-Świętuj Swój sukces i weź zasłużoną przerwę.
+Świętuj Twój sukces i weź zasłużoną przerwę.
 
-W następnej części tego kursu nauczysz się, jak modularyzować Swój workflow, wyodrębniając definicje procesów do modułów wielokrotnego użytku.
+W następnej części tego kursu nauczysz się, jak modularyzować Twój workflow, wyodrębniając definicje procesów do modułów wielokrotnego użytku.

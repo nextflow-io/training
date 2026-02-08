@@ -12,7 +12,7 @@ Ta sekcja zawiera wyselekcjonowane kolekcje modułów szkoleniowych zwanych [Sid
 
 ## Wymagania wstępne
 
-Każda z nich ma określone wymagania wstępne udokumentowane na swojej stronie indeksu. Jednak większość kolekcji zakłada:
+Każda kolekcja ma określone wymagania wstępne udokumentowane na swojej stronie indeksu. Jednak większość kolekcji zakłada:
 
 - Doświadczenie z linią poleceń
 - Podstawowe koncepcje Nextflow i narzędzia omówione w kursie szkoleniowym dla początkujących [Hello Nextflow](../../hello_nextflow/)
@@ -21,7 +21,7 @@ Wymagania techniczne i konfigurację środowiska można znaleźć w mini-kursie 
 
 ## Dostępne kolekcje
 
-- [Zestaw Narzędzi Architekta I](./architects_toolkit_1.md) - Kolekcja czterech Side Quests obejmujących wzorce architektury workflow do tworzenia złożonych pipeline'ów, wdrażania strategii testowania, zarządzania metadanymi oraz grupowania i dzielenia danych. _Szacowany czas trwania: 4 godziny w szkoleniu grupowym._
+- [Zestaw Narzędzi Architekta I](./architects_toolkit_1.md) - Kolekcja czterech Side Quests obejmujących wzorce architektury workflow'ów do tworzenia złożonych pipeline'ów, wdrażania strategii testowania, zarządzania metadanymi oraz grupowania i dzielenia danych. _Szacowany czas trwania: 4 godziny w szkoleniu grupowym._
 
 ## Sugerowanie nowych kolekcji
 
