@@ -4780,7 +4780,6 @@
  
 
 <h1 id="parte-1-hello-world">Parte 1: Hello World<a class="headerlink" href="#parte-1-hello-world" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
 <figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -4788,7 +4787,7 @@
 
 <figcaption>
 <p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Vea <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">la lista de reproducción completa</a> en el canal de YouTube de Nextflow.</p>
-<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> La transcripción del video está disponible <a href="./transcripts/01_hello_world.md">aquí</a>.</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> La transcripción del video está disponible <a href="../transcripts/01_hello_world/">aquí</a>.</p>
 </figcaption>
 </figure>
 <p>En esta primera parte del curso de capacitación Hello Nextflow, nos introducimos al tema con un ejemplo muy básico de Hello World independiente del dominio, que iremos construyendo progresivamente para demostrar el uso de la lógica y componentes fundamentales de Nextflow.</p>
@@ -4886,12 +4885,12 @@ Luego lo ejecutaremos y buscaremos sus salidas.</p>
 <a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-18" name="__codelineno-5-18"></a>
 <a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">    </span><span class="c1">// emitir un saludo</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
 <a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>Un script de workflow de Nextflow típicamente incluye una o más definiciones de <strong>process</strong> y el <strong>workflow</strong> en sí, además de algunos bloques opcionales (no presentes aquí) que introduciremos más adelante.</p>
+<p>Un script de workflow de Nextflow típicamente incluye una o más definiciones de <a href="https://nextflow.io/docs/latest/process.html"><strong>process</strong></a> y el <a href="https://nextflow.io/docs/latest/workflow.html"><strong>workflow</strong></a> en sí, además de algunos bloques opcionales (no presentes aquí) que introduciremos más adelante.</p>
 <p>Cada <strong>process</strong> describe qué operación(es) debe realizar el paso correspondiente en el pipeline, mientras que el <strong>workflow</strong> describe la lógica de flujo de datos que conecta los diversos pasos.</p>
 <p>Vamos a examinar más de cerca el bloque <strong>process</strong> primero, luego veremos el bloque <strong>workflow</strong>.</p>
 <h4 id="111-la-definicion-de-process">1.1.1. La definición de <code>process</code><a class="headerlink" href="#111-la-definicion-de-process" title="Permanent link">&para;</a></h4>
@@ -4957,7 +4956,7 @@ La definición del workflow comienza con la palabra clave <code>workflow</code>,
 <span class="normal"><a href="#__codelineno-7-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-7-18" name="__codelineno-7-18"></a>
 <a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="w">    </span><span class="c1">// emitir un saludo</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-7-21" name="__codelineno-7-21"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
 <a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5142,7 +5141,7 @@ Sin embargo, eso hace inconveniente recuperar las salidas que nos importan.</p>
 <span class="normal"><a href="#__codelineno-16-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-16-18" name="__codelineno-16-18"></a>
 <a id="__codelineno-16-19" name="__codelineno-16-19"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-16-20" name="__codelineno-16-20"></a><span class="w">    </span><span class="c1">// emitir un saludo</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-16-21" name="__codelineno-16-21"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
 <a id="__codelineno-16-22" name="__codelineno-16-22"></a>
 <a id="__codelineno-16-23" name="__codelineno-16-23"></a><span class="hll"><span class="w">    </span><span class="nl">publish:</span>
@@ -5159,7 +5158,7 @@ Sin embargo, eso hace inconveniente recuperar las salidas que nos importan.</p>
 <span class="normal"><a href="#__codelineno-17-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-17-18" name="__codelineno-17-18"></a>
 <a id="__codelineno-17-19" name="__codelineno-17-19"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="w">    </span><span class="c1">// emitir un saludo</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-17-21" name="__codelineno-17-21"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
 <a id="__codelineno-17-22" name="__codelineno-17-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5190,7 +5189,7 @@ Sin embargo, eso hace inconveniente recuperar las salidas que nos importan.</p>
 <span class="normal"><a href="#__codelineno-18-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-17" name="__codelineno-18-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-18-18" name="__codelineno-18-18"></a>
 <a id="__codelineno-18-19" name="__codelineno-18-19"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="w">    </span><span class="c1">// emitir un saludo</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-18-21" name="__codelineno-18-21"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
 <a id="__codelineno-18-22" name="__codelineno-18-22"></a>
 <a id="__codelineno-18-23" name="__codelineno-18-23"></a><span class="w">    </span><span class="nl">publish:</span>
@@ -5216,7 +5215,7 @@ Sin embargo, eso hace inconveniente recuperar las salidas que nos importan.</p>
 <span class="normal"><a href="#__codelineno-19-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-19-18" name="__codelineno-19-18"></a>
 <a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="w">    </span><span class="c1">// emitir un saludo</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-19-21" name="__codelineno-19-21"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">()</span>
 <a id="__codelineno-19-22" name="__codelineno-19-22"></a>
 <a id="__codelineno-19-23" name="__codelineno-19-23"></a><span class="w">    </span><span class="nl">publish:</span>
@@ -5542,13 +5541,13 @@ En principio podemos escribirlo en cualquier lugar; pero como vamos a querer dá
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-23">23</a></span>
-<span class="normal"><a href="#__codelineno-38-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-23" name="__codelineno-38-23"></a><span class="c1">// emitir un saludo</span>
+<span class="normal"><a href="#__codelineno-38-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-23" name="__codelineno-38-23"></a><span class="c1">// emit a greeting</span>
 <a id="__codelineno-38-24" name="__codelineno-38-24"></a><span class="hll"><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-23">23</a></span>
-<span class="normal"><a href="#__codelineno-39-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-23" name="__codelineno-39-23"></a><span class="c1">// emitir un saludo</span>
+<span class="normal"><a href="#__codelineno-39-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-23" name="__codelineno-39-23"></a><span class="c1">// emit a greeting</span>
 <a id="__codelineno-39-24" name="__codelineno-39-24"></a><span class="hll"><span class="n">sayHello</span><span class="o">()</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -5745,7 +5744,7 @@ En ese caso, el ID de sesión permanece igual.</p>
 <p>Durante el proceso de desarrollo, típicamente ejecutará su borrador de pipeline un gran número de veces, lo que puede llevar a una acumulación de muchos archivos en muchos subdirectorios.</p>
 <p>Afortunadamente Nextflow incluye un útil subcomando <code>clean</code> que puede eliminar automáticamente los subdirectorios de trabajo para ejecuciones pasadas que ya no le importan.</p>
 <h4 id="431-determinar-criterios-de-eliminacion">4.3.1. Determinar criterios de eliminación<a class="headerlink" href="#431-determinar-criterios-de-eliminacion" title="Permanent link">&para;</a></h4>
-<p>Hay múltiples <a href="https://nextflow.io/docs/latest/reference/cli.html#clean">opciones</a> para determinar qué eliminar.</p>
+<p>Hay múltiples <a href="https://www.nextflow.io/docs/latest/reference/cli.html#clean">opciones</a> para determinar qué eliminar.</p>
 <p>Aquí le mostramos un ejemplo que elimina todos los subdirectorios de ejecuciones antes de una ejecución dada, especificada usando su nombre de ejecución.</p>
 <p>Busque la ejecución exitosa más reciente donde no usó <code>-resume</code>; en nuestro caso el nombre de ejecución fue <code>golden_cantor</code>.</p>
 <p>El nombre de ejecución es la cadena de dos partes generada por la máquina que se muestra entre corchetes en la línea de salida de consola <code>Launching (...)</code>.
@@ -5794,7 +5793,7 @@ Eso significa que rompe la capacidad de Nextflow de reanudar la ejecución sin v
 - [ ] Bloques de entrada, salida y script
 - [ ] Solo un bloque de script
 
-Más información: [1.1.1. La definición de process](#111-la-definicion-de-process)
+Más información: [1.1.1. La definición de process](#111-the-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5808,7 +5807,7 @@ Más información: [1.1.1. La definición de process](#111-la-definicion-de-proc
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Más información: <a href="#111-la-definicion-de-process">1.1.1. La definición de process</a></p></section>
+    <section class="content hidden"><p>Más información: <a href="#111-the-process-definition">1.1.1. La definición de process</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5819,7 +5818,7 @@ Más información: [1.1.1. La definición de process](#111-la-definicion-de-proc
 - [x] Declarar las salidas esperadas del proceso
 - [ ] Definir variables de entorno
 
-Más información: [1.1.1. La definición de process](#111-la-definicion-de-process)
+Más información: [1.1.1. La definición de process](#111-the-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5833,7 +5832,7 @@ Más información: [1.1.1. La definición de process](#111-la-definicion-de-proc
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Más información: <a href="#111-la-definicion-de-process">1.1.1. La definición de process</a></p></section>
+    <section class="content hidden"><p>Más información: <a href="#111-the-process-definition">1.1.1. La definición de process</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5880,7 +5879,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Más información: [1.2.2. Encontrar la salida y los logs en el directorio `work`](#122-encontrar-la-salida-y-los-logs-en-el-directorio-work)
+Más información: [1.2.2. Encontrar la salida y los logs en el directorio `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5904,7 +5903,7 @@ Más información: [1.2.2. Encontrar la salida y los logs en el directorio `work
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>Más información: <a href="#122-encontrar-la-salida-y-los-logs-en-el-directorio-work">1.2.2. Encontrar la salida y los logs en el directorio <code>work</code></a></p></section>
+                <section class="content hidden"><p>Más información: <a href="#122-find-the-output-and-logs-in-the-work-directory">1.2.2. Encontrar la salida y los logs en el directorio <code>work</code></a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -5915,7 +5914,7 @@ Más información: [1.2.2. Encontrar la salida y los logs en el directorio `work
 - [x] Omite procesos que ya se completaron exitosamente
 - [ ] Crea una copia de seguridad del workflow
 
-Más información: [4.1. Volver a iniciar un workflow con `-resume`](#41-volver-a-iniciar-un-workflow-con--resume)
+Más información: [4.1. Volver a iniciar un workflow con `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5929,7 +5928,7 @@ Más información: [4.1. Volver a iniciar un workflow con `-resume`](#41-volver-
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Más información: <a href="#41-volver-a-iniciar-un-workflow-con--resume">4.1. Volver a iniciar un workflow con <code>-resume</code></a></p></section>
+    <section class="content hidden"><p>Más información: <a href="#41-re-launch-a-workflow-with--resume">4.1. Volver a iniciar un workflow con <code>-resume</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5940,7 +5939,7 @@ Más información: [4.1. Volver a iniciar un workflow con `-resume`](#41-volver-
 - [ ] Mover archivos al directorio de salida
 - [ ] Comprimir archivos en el directorio de salida
 
-Más información: [2.3. Establecer el modo de publicación a copia](#23-establecer-el-modo-de-publicacion-a-copia)
+Más información: [2.3. Establecer el modo de publicación a copia](#23-set-the-publish-mode-to-copy)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5954,7 +5953,7 @@ Más información: [2.3. Establecer el modo de publicación a copia](#23-estable
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Más información: <a href="#23-establecer-el-modo-de-publicacion-a-copia">2.3. Establecer el modo de publicación a copia</a></p></section>
+    <section class="content hidden"><p>Más información: <a href="#23-set-the-publish-mode-to-copy">2.3. Establecer el modo de publicación a copia</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5965,7 +5964,7 @@ Más información: [2.3. Establecer el modo de publicación a copia](#23-estable
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Más información: [3.2. Configurar un parámetro de línea de comandos para capturar la entrada del usuario](#32-configurar-un-parametro-de-linea-de-comandos-para-capturar-la-entrada-del-usuario)
+Más información: [3.2. Configurar un parámetro de línea de comandos para capturar la entrada del usuario](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5979,7 +5978,7 @@ Más información: [3.2. Configurar un parámetro de línea de comandos para cap
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Más información: <a href="#32-configurar-un-parametro-de-linea-de-comandos-para-capturar-la-entrada-del-usuario">3.2. Configurar un parámetro de línea de comandos para capturar la entrada del usuario</a></p></section>
+    <section class="content hidden"><p>Más información: <a href="#32-set-up-a-command-line-parameter-to-capture-user-input">3.2. Configurar un parámetro de línea de comandos para capturar la entrada del usuario</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

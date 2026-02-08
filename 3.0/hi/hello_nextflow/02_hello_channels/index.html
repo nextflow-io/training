@@ -1645,7 +1645,7 @@
   <span class="md-ellipsis">
     
   
-    भाग 3: Hello Workflow
+    03 hello workflow
   
 
     
@@ -4561,12 +4561,12 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI-सहायता प्राप्त अनुवाद - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">अधिक जानें और सुधार सुझाएं</a></span></p>
 <figure>
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <figcaption>
 <p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Nextflow YouTube channel पर <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">पूरी playlist</a> देखें।</p>
-<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> वीडियो transcript <a href="./transcripts/02_hello_channels.md">यहाँ</a> उपलब्ध है।</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> वीडियो transcript <a href="../transcripts/02_hello_channels/">यहाँ</a> उपलब्ध है।</p>
 </figcaption>
 </figure>
 <p>इस course के Part 1 (Hello World) में, हमने तुम्हें दिखाया कि process call में directly input provide करके process को variable input कैसे provide करें: <code>sayHello(params.input)</code>।
@@ -4650,7 +4650,7 @@ Functionally यह पहले जैसे set up के similar होगा
 <p>हम readability के लिए temporarily CLI parameter use करने के बजाय hardcoded strings पर वापस switch कर रहे हैं। Channel के level पर जो हो रहा है उसे cover करने के बाद हम CLI parameters use करने पर वापस जाएंगे।</p>
 </div>
 <p>Workflow block में, channel factory code add करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">बाद में</label><label for="__tabbed_1_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-27">27</a></span>
@@ -4702,7 +4702,7 @@ Functionally यह पहले जैसे set up के similar होगा
 <h3 id="12-process-call-input-channel-add">1.2. Process call में input के रूप में channel add करें<a class="headerlink" href="#12-process-call-input-channel-add" title="Permanent link">&para;</a></h3>
 <p>अब हमें अपने newly created channel को <code>sayHello()</code> process call में plug करना होगा, जिस CLI parameter को हम पहले directly provide कर रहे थे उसे replace करते हुए।</p>
 <p>Workflow block में, निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">बाद में</label><label for="__tabbed_2_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-27">27</a></span>
@@ -4785,7 +4785,7 @@ Functionally यह पहले जैसे set up के similar होगा
 <p>अभी के लिए, हम तुम्हें बस दिखाएंगे कि channel की contents inspect करने के लिए <a href="https://www.nextflow.io/docs/latest/reference/operator.html#view"><code>view()</code></a> नामक एक super simple operator कैसे use करें।
 तुम <code>view()</code> को एक debugging tool के रूप में सोच सकते हो, जैसे Python में <code>print()</code> statement, या अन्य languages में इसके equivalent।</p>
 <p>Workflow block में यह tiny line add करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">बाद में</label><label for="__tabbed_3_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-27">27</a></span>
@@ -4869,7 +4869,7 @@ Functionally यह पहले जैसे set up के similar होगा
 <p>चलो उन्हें <code>'Hello'</code>, <code>'Bonjour'</code> और <code>'Holà'</code> बनाते हैं।</p>
 <h4 id="211-more-greetings-add">2.1.1. More greetings add करें<a class="headerlink" href="#211-more-greetings-add" title="Permanent link">&para;</a></h4>
 <p>Workflow block से पहले, निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">बाद में</label><label for="__tabbed_4_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-30">30</a></span>
@@ -5055,7 +5055,7 @@ Specifically, हमें first process को dynamically file name generate �
 
 <h4 id="221-dynamic-output-file-name-construct">2.2.1. Dynamic output file name construct करें<a class="headerlink" href="#221-dynamic-output-file-name-construct" title="Permanent link">&para;</a></h4>
 <p>Process block में, निम्नलिखित code changes करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">बाद में</label><label for="__tabbed_5_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-6"> 6</a></span>
@@ -5191,7 +5191,7 @@ Metadata typically 'sample sheet' या equivalents के माध्यम �
 चलो try करते हैं; हमें input variable set up करना होगा और इसे channel factory में load करना होगा।</p>
 <h4 id="311-input-variable-set-up">3.1.1. Input variable set up करें<a class="headerlink" href="#311-input-variable-set-up" title="Permanent link">&para;</a></h4>
 <p>चलो <code>greetings_array</code> variable जो हमने अभी imagine किया उसे workflow block में add करके reality बनाते हैं:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">After</label><label for="__tabbed_6_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">बाद में</label><label for="__tabbed_6_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-27">27</a></span>
@@ -5255,7 +5255,7 @@ Metadata typically 'sample sheet' या equivalents के माध्यम �
 <h4 id="312-channel-factory-input-greetings-array-set">3.1.2. Channel factory को input के रूप में greetings का array set करें<a class="headerlink" href="#312-channel-factory-input-greetings-array-set" title="Permanent link">&para;</a></h4>
 <p>अब हम channel factory में currently hardcoded values <code>'Hello','Bonjour','Holà'</code> को अभी बनाए गए <code>greetings_array</code> से replace करेंगे।</p>
 <p>Workflow block में, निम्नलिखित change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">After</label><label for="__tabbed_7_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">बाद में</label><label for="__tabbed_7_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-27">27</a></span>
@@ -5377,7 +5377,7 @@ Metadata typically 'sample sheet' या equivalents के माध्यम �
 <h4 id="321-flatten-operator-add">3.2.1. <code>flatten()</code> operator add करें<a class="headerlink" href="#321-flatten-operator-add" title="Permanent link">&para;</a></h4>
 <p>हमारे input channel पर <code>flatten()</code> operator apply करने के लिए, हम इसे channel factory declaration में append करते हैं।</p>
 <p>Workflow block में, निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">After</label><label for="__tabbed_8_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">बाद में</label><label for="__tabbed_8_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-27">27</a></span>
@@ -5456,7 +5456,7 @@ Metadata typically 'sample sheet' या equivalents के माध्यम �
 <p>हम इसे test करने के लिए तुरंत run कर सकते हैं, लेकिन जब हम इस पर हैं, हम channel contents को inspect करने के तरीके को refine करेंगे।</p>
 <p>हम यह contrast करने में सक्षम होना चाहते हैं कि <code>flatten()</code> operator apply होने से पहले और बाद में contents कैसी दिखती हैं, इसलिए हम दूसरा add करेंगे, AND हम उन्हें output में अधिक clearly labeled करने के लिए थोड़ा code add करेंगे।</p>
 <p>Workflow block में, निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">After</label><label for="__tabbed_9_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">बाद में</label><label for="__tabbed_9_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-27">27</a></span>
@@ -5602,7 +5602,7 @@ Most likely, हमारे पास एक या अधिक files हो�
 <p>Part 1 में हमने जो <code>params.input</code> parameter set up किया था याद है?
 हम इसे update करेंगे ताकि हमारी greetings वाली CSV file point करे।</p>
 <p>Parameter declaration में निम्नलिखित edit करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">After</label><label for="__tabbed_10_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">बाद में</label><label for="__tabbed_10_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-20">20</a></span>
@@ -5636,7 +5636,7 @@ Most likely, हमारे पास एक या अधिक files हो�
 <p>चूंकि अब हम simple strings के बजाय file को input के रूप में use करना चाहते हैं, हम पहले वाली <code>channel.of()</code> channel factory use नहीं कर सकते।
 हमें एक new channel factory, <a href="https://nextflow.io/docs/latest/reference/channel.html#frompath"><code>channel.fromPath()</code></a> use करने में switch करना होगा, जिसमें file paths handle करने के लिए कुछ built-in functionality है।</p>
 <p>Workflow block में, निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">After</label><label for="__tabbed_11_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">बाद में</label><label for="__tabbed_11_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-27">27</a></span>
@@ -5754,7 +5754,7 @@ Most likely, हमारे पास एक या अधिक files हो�
 <h4 id="421-channel-splitcsv-apply">4.2.1. Channel पर <code>splitCsv()</code> apply करें<a class="headerlink" href="#421-channel-splitcsv-apply" title="Permanent link">&para;</a></h4>
 <p>Operator apply करने के लिए, हम इसे पहले की तरह channel factory line में append करते हैं।</p>
 <p>Workflow block में, <code>flatten()</code> को <code>splitcsv()</code> (uncommented) से replace करने के लिए निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">After</label><label for="__tabbed_12_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">बाद में</label><label for="__tabbed_12_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-27">27</a></span>
@@ -5874,7 +5874,7 @@ Technically हम same variable name (<code>greeting</code>) use कर सक�
 <p>हमने पहले channel की contents unpack करने के लिए <code>flatten()</code> use किया है, लेकिन यह यहाँ काम नहीं करेगा क्योंकि flatten <em>everything</em> unpack करता है (यदि तुम खुद देखना चाहते हो तो try करो)।</p>
 <p>इसके बजाय, हम <code>map()</code> नामक एक और operator use करेंगे जो वास्तव में useful है और Nextflow pipelines में बहुत pop up होता है।</p>
 <h3 id="43-greetings-extract-map-operator-use">4.3. Greetings extract करने के लिए <code>map()</code> operator use करें<a class="headerlink" href="#43-greetings-extract-map-operator-use" title="Permanent link">&para;</a></h3>
-<p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#map"><code>map()</code></a> operator एक बहुत handy little tool है जो हमें channel की contents पर सभी प्रकार की mappings करने की अनुमति देता है।</p>
+<p><a href="https://nextflow.io/docs/latest/reference/operator.html#map"><code>map()</code></a> operator एक बहुत handy little tool है जो हमें channel की contents पर सभी प्रकार की mappings करने की अनुमति देता है।</p>
 <p>इस case में, हम इसे अपनी data file में प्रत्येक row से उस एक element को extract करने के लिए use करेंगे जो हम चाहते हैं।
 Syntax ऐसा दिखता है:</p>
 <div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
@@ -5883,7 +5883,7 @@ Syntax ऐसा दिखता है:</p>
 <p>तो चलो इसे अपने CSV parsing पर apply करते हैं।</p>
 <h4 id="431-channel-map-apply">4.3.1. Channel पर <code>map()</code> apply करें<a class="headerlink" href="#431-channel-map-apply" title="Permanent link">&para;</a></h4>
 <p>Workflow block में, निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">After</label><label for="__tabbed_13_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">बाद में</label><label for="__tabbed_13_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-27">27</a></span>
@@ -7781,13 +7781,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="../03_hello_workflow/" class="md-footer__link md-footer__link--next" aria-label="आगामी: भाग 3: Hello Workflow">
+          <a href="../03_hello_workflow/" class="md-footer__link md-footer__link--next" aria-label="आगामी: 03 hello workflow">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 आगामी
               </span>
               <div class="md-ellipsis">
-                भाग 3: Hello Workflow
+                03 hello workflow
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -5002,11 +5002,11 @@
 
 <figcaption>
 <p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Obejrzyj <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">całą playlistę</a> na kanale YouTube Nextflow.</p>
-<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Transkrypcja wideo jest dostępna <a href="./transcripts/06_hello_config.md">tutaj</a>.</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Transkrypcja wideo jest dostępna <a href="../transcripts/06_hello_config/">tutaj</a>.</p>
 </figcaption>
 </figure>
-<p>Ta sekcja zbada, jak skonfigurować i zarządzać konfiguracją Twojego pipeline'u Nextflow, abyś mógł dostosować jego zachowanie, zaadaptować go do różnych środowisk i zoptymalizować wykorzystanie zasobów <em>bez zmiany choćby jednej linii samego kodu workflow</em>.</p>
-<p>Istnieje wiele sposobów, aby to zrobić. Można je używać w kombinacji i są interpretowane zgodnie z <a href="https://nextflow.io/docs/latest/config.html">kolejnością pierwszeństwa</a> opisaną w dokumentacji konfiguracji.</p>
+<p>Ta sekcja zbada, jak skonfigurować workflow Nextflow i zarządzać jego konfiguracją, abyś mógł dostosować jego zachowanie, zaadaptować do różnych środowisk i zoptymalizować wykorzystanie zasobów <em>bez zmiany choćby jednej linii samego kodu workflow</em>.</p>
+<p>Istnieje wiele sposobów, aby to zrobić. Można je używać łącznie i są interpretowane zgodnie z <a href="https://nextflow.io/docs/latest/config.html">kolejnością pierwszeństwa</a> opisaną w dokumentacji konfiguracji.</p>
 <p>W tej części kursu pokażemy Ci najprostszy i najczęściej używany mechanizm pliku konfiguracyjnego <a href="https://nextflow.io/docs/latest/config.html"><code>nextflow.config</code></a>, który już spotkałeś w Części 5: Hello Containers.</p>
 <p>Omówimy podstawowe komponenty konfiguracji Nextflow, takie jak dyrektywy procesów, executory, profile i pliki parametrów.
 Ucząc się efektywnego wykorzystania tych opcji konfiguracyjnych, możesz zwiększyć elastyczność, skalowalność i wydajność Swoich pipeline'ów.</p>
@@ -5143,7 +5143,7 @@ Możesz jednak chcieć nadpisać te wartości domyślne bez konieczności okreś
 Ma jednak tę zaletę, że rozdziela kwestię <em>deklarowania</em> parametrów w workflow (co zdecydowanie tam należy) od dostarczania <em>domyślnych wartości</em>, które bardziej pasują do pliku konfiguracyjnego.</p>
 <p>Zróbmy to w dwóch krokach.</p>
 <h4 id="111-utworz-blok-params-w-pliku-konfiguracyjnym">1.1.1. Utwórz blok <code>params</code> w pliku konfiguracyjnym<a class="headerlink" href="#111-utworz-blok-params-w-pliku-konfiguracyjnym" title="Permanent link">&para;</a></h4>
-<p>Wprowadź następujące zmiany w kodzie w pliku <code>nextflow.config</code>:</p>
+<p>Wprowadź następujące zmiany w pliku <code>nextflow.config</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Po</label><label for="__tabbed_1_2">Przed</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5182,7 +5182,7 @@ W konfiguracji są to przypisania wartości.</p>
 Możesz zmodyfikować postać, na przykład, i uruchomić workflow, aby upewnić się, że wartość ustawiona w pliku konfiguracyjnym nadpisuje tę ustawioną w pliku workflow.</p>
 <p>Ale w duchu przeniesienia konfiguracji całkowicie do pliku konfiguracyjnego, usuńmy te wartości z pliku workflow całkowicie.</p>
 <h4 id="112-usun-wartosci-z-bloku-params-w-pliku-workflow">1.1.2. Usuń wartości z bloku <code>params</code> w pliku workflow<a class="headerlink" href="#112-usun-wartosci-z-bloku-params-w-pliku-workflow" title="Permanent link">&para;</a></h4>
-<p>Wprowadź następujące zmiany w kodzie w pliku workflow <code>hello-config.nf</code>:</p>
+<p>Wprowadź następujące zmiany w pliku workflow <code>hello-config.nf</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Po</label><label for="__tabbed_2_2">Przed</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5467,7 +5467,7 @@ Uporządkujmy to.</p>
 <h4 id="212-usun-zakodowane-na-sztywno-sciezki-z-bloku-wyjscia">2.1.2. Usuń zakodowane na sztywno ścieżki z bloku wyjścia<a class="headerlink" href="#212-usun-zakodowane-na-sztywno-sciezki-z-bloku-wyjscia" title="Permanent link">&para;</a></h4>
 <p>Prefiks <code>hello_config/</code> był zakodowany na sztywno we wcześniejszych rozdziałach, ale skoro teraz uczymy się elastycznie konfigurować ścieżki wyjściowe, możemy usunąć to zakodowanie na sztywno.
 Dla wyjść, które nie potrzebują podkatalogu, możemy ustawić dyrektywę <code>path</code> na pusty ciąg lub całkowicie ją usunąć.</p>
-<p>Wprowadź następujące zmiany w kodzie w pliku workflow:</p>
+<p>Wprowadź następujące zmiany w pliku workflow:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Po</label><label for="__tabbed_3_2">Przed</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

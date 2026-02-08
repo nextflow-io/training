@@ -4702,7 +4702,6 @@
  
 
 <h1 id="czesc-3-hello-workflow">Część 3: Hello Workflow<a class="headerlink" href="#czesc-3-hello-workflow" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
 <figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -4710,7 +4709,7 @@
 
 <figcaption>
 <p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Obejrzyj <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">całą playlistę</a> na kanale YouTube Nextflow.</p>
-<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Transkrypcja wideo jest dostępna <a href="./transcripts/03_hello_workflow.md">tutaj</a>.</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Transkrypcja wideo jest dostępna <a href="../transcripts/03_hello_workflow/">tutaj</a>.</p>
 </figcaption>
 </figure>
 <p>Większość rzeczywistych workflow składa się z więcej niż jednego kroku.
@@ -4732,7 +4731,7 @@ Tym razem wprowadzimy następujące zmiany w naszym workflow, aby lepiej odzwier
 </ol>
 <details class="info">
 <summary>Jak zacząć od tej sekcji</summary>
-<p>Ta sekcja kursu zakłada, że ukończyłeś Części 1-2 kursu <a href="../">Hello Nextflow</a>, ale jeśli znasz podstawy omówione w tych sekcjach, możesz zacząć od tego miejsca bez dodatkowych przygotowań.</p>
+<p>Ta sekcja kursu zakłada, że ukończyłeś Części 1-2 kursu <a href="../">Hello Nextflow</a>, ale jeśli czujesz się komfortowo z podstawami omówionymi w tych sekcjach, możesz zacząć od tego miejsca bez dodatkowych przygotowań.</p>
 </details>
 <hr />
 <h2 id="0-rozgrzewka-uruchom-hello-workflownf">0. Rozgrzewka: Uruchom <code>hello-workflow.nf</code><a class="headerlink" href="#0-rozgrzewka-uruchom-hello-workflownf" title="Permanent link">&para;</a></h2>
@@ -4802,7 +4801,7 @@ W tym rozdziale jest to katalog <code>results/hello_workflow/</code>.</p>
 </ul>
 <h3 id="11-zdefiniuj-polecenie-konwersji-na-wielkie-litery-i-przetestuj-je-w-terminalu">1.1. Zdefiniuj polecenie konwersji na wielkie litery i przetestuj je w terminalu<a class="headerlink" href="#11-zdefiniuj-polecenie-konwersji-na-wielkie-litery-i-przetestuj-je-w-terminalu" title="Permanent link">&para;</a></h3>
 <p>Do konwersji pozdrowień na wielkie litery użyjemy klasycznego narzędzia UNIX o nazwie <code>tr</code> (od 'text replacement'), z następującą składnią:</p>
-<div class="highlight"><span class="filename">Składnia</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tr<span class="w"> </span><span class="s1">&#39;[a-z]&#39;</span><span class="w"> </span><span class="s1">&#39;[A-Z]&#39;</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tr<span class="w"> </span><span class="s1">&#39;[a-z]&#39;</span><span class="w"> </span><span class="s1">&#39;[A-Z]&#39;</span>
 </code></pre></div>
 <p>To bardzo naiwny one-liner do zamiany tekstu, który nie uwzględnia liter z akcentami, więc na przykład 'Holà' zostanie zamienione na 'HOLà', ale wystarczająco dobrze posłuży do demonstracji koncepcji Nextflow'a i to jest najważniejsze.</p>
 <p>Aby to przetestować, możemy uruchomić polecenie <code>echo 'Hello World'</code> i przekierować jego wyjście do polecenia <code>tr</code>:</p>
@@ -4874,13 +4873,13 @@ W tym rozdziale jest to katalog <code>results/hello_workflow/</code>.</p>
 <span class="normal"><a href="#__codelineno-8-58">58</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-45" name="__codelineno-8-45"></a>
 <a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="w">    </span><span class="c1">// utwórz kanał dla danych wejściowych z pliku CSV</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
 <a id="__codelineno-8-48" name="__codelineno-8-48"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-8-50" name="__codelineno-8-50"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-8-52" name="__codelineno-8-52"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
-<a id="__codelineno-8-53" name="__codelineno-8-53"></a><span class="hll"><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<a id="__codelineno-8-53" name="__codelineno-8-53"></a><span class="hll"><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 </span><a id="__codelineno-8-54" name="__codelineno-8-54"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">()</span>
 </span><a id="__codelineno-8-55" name="__codelineno-8-55"></a>
 <a id="__codelineno-8-56" name="__codelineno-8-56"></a><span class="w">    </span><span class="nl">publish:</span>
@@ -4904,11 +4903,11 @@ W tym rozdziale jest to katalog <code>results/hello_workflow/</code>.</p>
 <span class="normal"><a href="#__codelineno-9-56">56</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-9-45" name="__codelineno-9-45"></a>
 <a id="__codelineno-9-46" name="__codelineno-9-46"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-9-47" name="__codelineno-9-47"></a><span class="w">    </span><span class="c1">// utwórz kanał dla danych wejściowych z pliku CSV</span>
+<a id="__codelineno-9-47" name="__codelineno-9-47"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
 <a id="__codelineno-9-48" name="__codelineno-9-48"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
 <a id="__codelineno-9-49" name="__codelineno-9-49"></a><span class="w">                        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 <a id="__codelineno-9-50" name="__codelineno-9-50"></a><span class="w">                        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-9-51" name="__codelineno-9-51"></a><span class="w">    </span><span class="c1">// wyemituj pozdrowienie</span>
+<a id="__codelineno-9-51" name="__codelineno-9-51"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
 <a id="__codelineno-9-52" name="__codelineno-9-52"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-9-53" name="__codelineno-9-53"></a>
 <a id="__codelineno-9-54" name="__codelineno-9-54"></a><span class="w">    </span><span class="nl">publish:</span>
@@ -4936,13 +4935,13 @@ Możemy odnieść się do kanału wyjściowego procesu jako <code>&lt;process&gt
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-53">53</a></span>
-<span class="normal"><a href="#__codelineno-10-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-53" name="__codelineno-10-53"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<span class="normal"><a href="#__codelineno-10-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-53" name="__codelineno-10-53"></a><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 <a id="__codelineno-10-54" name="__codelineno-10-54"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-53">53</a></span>
-<span class="normal"><a href="#__codelineno-11-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-53" name="__codelineno-11-53"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<span class="normal"><a href="#__codelineno-11-54">54</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-53" name="__codelineno-11-53"></a><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 <a id="__codelineno-11-54" name="__codelineno-11-54"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">()</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -5221,10 +5220,10 @@ To również jest kanał, o nazwie <code>convertToUpper.out</code>.</p>
 <span class="normal"><a href="#__codelineno-27-77">77</a></span>
 <span class="normal"><a href="#__codelineno-27-78">78</a></span>
 <span class="normal"><a href="#__codelineno-27-79">79</a></span>
-<span class="normal"><a href="#__codelineno-27-80">80</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-75" name="__codelineno-27-75"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<span class="normal"><a href="#__codelineno-27-80">80</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-75" name="__codelineno-27-75"></a><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 <a id="__codelineno-27-76" name="__codelineno-27-76"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-27-77" name="__codelineno-27-77"></a>
-<a id="__codelineno-27-78" name="__codelineno-27-78"></a><span class="hll"><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<a id="__codelineno-27-78" name="__codelineno-27-78"></a><span class="hll"><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 </span><a id="__codelineno-27-79" name="__codelineno-27-79"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 </span><a id="__codelineno-27-80" name="__codelineno-27-80"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5232,7 +5231,7 @@ To również jest kanał, o nazwie <code>convertToUpper.out</code>.</p>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-75">75</a></span>
 <span class="normal"><a href="#__codelineno-28-76">76</a></span>
-<span class="normal"><a href="#__codelineno-28-77">77</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-75" name="__codelineno-28-75"></a><span class="w">    </span><span class="c1">// przekształć pozdrowienie na wielkie litery</span>
+<span class="normal"><a href="#__codelineno-28-77">77</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-75" name="__codelineno-28-75"></a><span class="w">    </span><span class="c1">// convert the greeting to uppercase</span>
 <a id="__codelineno-28-76" name="__codelineno-28-76"></a><span class="w">    </span><span class="n">convertToUpper</span><span class="o">(</span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 <a id="__codelineno-28-77" name="__codelineno-28-77"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5287,7 +5286,7 @@ Możemy to bezpośrednio podłączyć do wywołania procesu <code>collectGreetin
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-73">73</a></span>
 <span class="normal"><a href="#__codelineno-32-74">74</a></span>
-<span class="normal"><a href="#__codelineno-32-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-73" name="__codelineno-32-73"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-32-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-73" name="__codelineno-32-73"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-32-74" name="__codelineno-32-74"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">())</span>
 </span><a id="__codelineno-32-75" name="__codelineno-32-75"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5295,7 +5294,7 @@ Możemy to bezpośrednio podłączyć do wywołania procesu <code>collectGreetin
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-73">73</a></span>
 <span class="normal"><a href="#__codelineno-33-74">74</a></span>
-<span class="normal"><a href="#__codelineno-33-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-73" name="__codelineno-33-73"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-33-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-73" name="__codelineno-33-73"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-33-74" name="__codelineno-33-74"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">)</span>
 </span><a id="__codelineno-33-75" name="__codelineno-33-75"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5313,10 +5312,10 @@ Możemy to bezpośrednio podłączyć do wywołania procesu <code>collectGreetin
 <span class="normal"><a href="#__codelineno-34-76">76</a></span>
 <span class="normal"><a href="#__codelineno-34-77">77</a></span>
 <span class="normal"><a href="#__codelineno-34-78">78</a></span>
-<span class="normal"><a href="#__codelineno-34-79">79</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-73" name="__codelineno-34-73"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-34-79">79</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-73" name="__codelineno-34-73"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-34-74" name="__codelineno-34-74"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">())</span>
 <a id="__codelineno-34-75" name="__codelineno-34-75"></a>
-<a id="__codelineno-34-76" name="__codelineno-34-76"></a><span class="hll"><span class="w">    </span><span class="c1">// opcjonalne instrukcje view</span>
+<a id="__codelineno-34-76" name="__codelineno-34-76"></a><span class="hll"><span class="w">    </span><span class="c1">// optional view statements</span>
 </span><a id="__codelineno-34-77" name="__codelineno-34-77"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before collect: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-34-78" name="__codelineno-34-78"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After collect: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-34-79" name="__codelineno-34-79"></a><span class="o">}</span>
@@ -5325,7 +5324,7 @@ Możemy to bezpośrednio podłączyć do wywołania procesu <code>collectGreetin
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-73">73</a></span>
 <span class="normal"><a href="#__codelineno-35-74">74</a></span>
-<span class="normal"><a href="#__codelineno-35-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-73" name="__codelineno-35-73"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-35-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-73" name="__codelineno-35-73"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-35-74" name="__codelineno-35-74"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">())</span>
 <a id="__codelineno-35-75" name="__codelineno-35-75"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5387,7 +5386,7 @@ To pokazuje, że kolejność, w jakiej elementy przepływają przez wywołania p
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-73">73</a></span>
-<span class="normal"><a href="#__codelineno-39-74">74</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-73" name="__codelineno-39-73"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-39-74">74</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-73" name="__codelineno-39-73"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-39-74" name="__codelineno-39-74"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">())</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5397,10 +5396,10 @@ To pokazuje, że kolejność, w jakiej elementy przepływają przez wywołania p
 <span class="normal"><a href="#__codelineno-40-75">75</a></span>
 <span class="normal"><a href="#__codelineno-40-76">76</a></span>
 <span class="normal"><a href="#__codelineno-40-77">77</a></span>
-<span class="normal"><a href="#__codelineno-40-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-73" name="__codelineno-40-73"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-40-78">78</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-73" name="__codelineno-40-73"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-40-74" name="__codelineno-40-74"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">())</span>
 <a id="__codelineno-40-75" name="__codelineno-40-75"></a>
-<a id="__codelineno-40-76" name="__codelineno-40-76"></a><span class="hll"><span class="w">    </span><span class="c1">// opcjonalne instrukcje view</span>
+<a id="__codelineno-40-76" name="__codelineno-40-76"></a><span class="hll"><span class="w">    </span><span class="c1">// optional view statements</span>
 </span><a id="__codelineno-40-77" name="__codelineno-40-77"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before collect: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-40-78" name="__codelineno-40-78"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After collect: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
@@ -5552,13 +5551,13 @@ Użyjmy tego do zadeklarowania parametru <code>batch</code> (z domyślną warto�
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-74">74</a></span>
-<span class="normal"><a href="#__codelineno-47-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-74" name="__codelineno-47-74"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-47-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-47-74" name="__codelineno-47-74"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-47-75" name="__codelineno-47-75"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">(),</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">batch</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-74">74</a></span>
-<span class="normal"><a href="#__codelineno-48-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-74" name="__codelineno-48-74"></a><span class="w">    </span><span class="c1">// zbierz wszystkie pozdrowienia do jednego pliku</span>
+<span class="normal"><a href="#__codelineno-48-75">75</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-74" name="__codelineno-48-74"></a><span class="w">    </span><span class="c1">// collect all the greetings into one file</span>
 <a id="__codelineno-48-75" name="__codelineno-48-75"></a><span class="hll"><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">())</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -5845,7 +5844,7 @@ Jak uzyskujesz dostęp do wyjścia procesu w bloku workflow?
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego procesu](#14-przekaz-wyjscie-pierwszego-procesu-do-drugiego-procesu)
+Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego procesu](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5859,7 +5858,7 @@ Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego pro
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#14-przekaz-wyjscie-pierwszego-procesu-do-drugiego-procesu">1.4. Przekaż wyjście pierwszego procesu do drugiego procesu</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#14-pass-the-output-of-the-first-process-to-the-second-process">1.4. Przekaż wyjście pierwszego procesu do drugiego procesu</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5870,7 +5869,7 @@ Co determinuje kolejność wykonywania procesów w Nextflow?
 - [x] Zależności danych między procesami
 - [ ] Losowa kolejność dla równoległego wykonania
 
-Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego procesu](#14-przekaz-wyjscie-pierwszego-procesu-do-drugiego-procesu)
+Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego procesu](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5884,7 +5883,7 @@ Dowiedz się więcej: [1.4. Przekaż wyjście pierwszego procesu do drugiego pro
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#14-przekaz-wyjscie-pierwszego-procesu-do-drugiego-procesu">1.4. Przekaż wyjście pierwszego procesu do drugiego procesu</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#14-pass-the-output-of-the-first-process-to-the-second-process">1.4. Przekaż wyjście pierwszego procesu do drugiego procesu</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5904,7 +5903,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście](#24-uzyj-operatora-do-zebrania-pozdrowien-w-pojedyncze-wejscie)
+Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5924,7 +5923,7 @@ Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>Dowiedz się więcej: <a href="#24-uzyj-operatora-do-zebrania-pozdrowien-w-pojedyncze-wejscie">2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście</a></p></section>
+                <section class="content hidden"><p>Dowiedz się więcej: <a href="#24-use-an-operator-to-collect-the-greetings-into-a-single-input">2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście</a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -5935,7 +5934,7 @@ Kiedy należy używać operatora `collect()`?
 - [x] Gdy proces następczy potrzebuje wszystkich elementów z procesu poprzedzającego
 - [ ] Gdy chcesz rozdzielić dane między wiele procesów
 
-Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście](#24-uzyj-operatora-do-zebrania-pozdrowien-w-pojedyncze-wejscie)
+Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5949,7 +5948,7 @@ Dowiedz się więcej: [2.4. Użyj operatora do zebrania pozdrowień w pojedyncze
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#24-uzyj-operatora-do-zebrania-pozdrowien-w-pojedyncze-wejscie">2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#24-use-an-operator-to-collect-the-greetings-into-a-single-input">2.4. Użyj operatora do zebrania pozdrowień w pojedyncze wejście</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5960,7 +5959,7 @@ Jak uzyskujesz dostęp do nazwanego wyjścia z procesu?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-wyemituj-plik-raportu-i-nazwij-wyjscia)
+Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5974,7 +5973,7 @@ Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-wyem
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#412-wyemituj-plik-raportu-i-nazwij-wyjscia">4.1.2. Wyemituj plik raportu i nazwij wyjścia</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#412-emit-the-report-file-and-name-outputs">4.1.2. Wyemituj plik raportu i nazwij wyjścia</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5985,7 +5984,7 @@ Jaka jest poprawna składnia do nazywania wyjścia w procesie?
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-wyemituj-plik-raportu-i-nazwij-wyjscia)
+Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5999,7 +5998,7 @@ Dowiedz się więcej: [4.1.2. Wyemituj plik raportu i nazwij wyjścia](#412-wyem
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#412-wyemituj-plik-raportu-i-nazwij-wyjscia">4.1.2. Wyemituj plik raportu i nazwij wyjścia</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#412-emit-the-report-file-and-name-outputs">4.1.2. Wyemituj plik raportu i nazwij wyjścia</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6010,7 +6009,7 @@ Przy dostarczaniu wielu wejść do procesu, co musi być prawdą?
 - [x] Kolejność wejść musi odpowiadać kolejności zdefiniowanej w bloku input
 - [ ] Tylko dwa wejścia mogą być podane jednocześnie
 
-Dowiedz się więcej: [3. Przekaż dodatkowe parametry do procesu](#3-przekaz-dodatkowe-parametry-do-procesu)
+Dowiedz się więcej: [3. Przekaż dodatkowe parametry do procesu](#3-pass-more-than-one-input-to-a-process)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6024,7 +6023,7 @@ Dowiedz się więcej: [3. Przekaż dodatkowe parametry do procesu](#3-przekaz-do
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Dowiedz się więcej: <a href="#3-przekaz-dodatkowe-parametry-do-procesu">3. Przekaż dodatkowe parametry do procesu</a></p></section>
+    <section class="content hidden"><p>Dowiedz się więcej: <a href="#3-pass-more-than-one-input-to-a-process">3. Przekaż dodatkowe parametry do procesu</a></p></section>
 </div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
