@@ -4008,7 +4008,7 @@
 
 <figcaption>
 <p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Veja <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">a playlist completa</a> no canal do Nextflow no YouTube.</p>
-<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> A transcrição do vídeo está disponível <a href="./transcripts/04_hello_modules.md">aqui</a>.</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> A transcrição do vídeo está disponível <a href="../transcripts/04_hello_modules/">aqui</a>.</p>
 </figcaption>
 </figure>
 <p>Esta seção aborda como organizar o código do seu fluxo de trabalho para tornar o desenvolvimento e a manutenção do seu pipeline mais eficientes e sustentáveis.
@@ -4118,7 +4118,7 @@ Vamos criar um esboço de arquivo para o módulo, copiar o código relevante e e
 </code></pre></div>
 <p>Isso nos dá um lugar para colocar o código do processo.</p>
 <h3 id="22-mova-o-codigo-do-processo-sayhello-para-o-arquivo-do-modulo">2.2. Mova o código do processo <code>sayHello</code> para o arquivo do módulo<a class="headerlink" href="#22-mova-o-codigo-do-processo-sayhello-para-o-arquivo-do-modulo" title="Permanent link">&para;</a></h3>
-<p>Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo, certificando-se de copiar também o shebang <code>#!/usr/bin/env nextflow</code>.</p>
+<p>Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/sayHello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -4134,28 +4134,24 @@ Vamos criar um esboço de arquivo para o módulo, copiar o código relevante e e
 <span class="normal"><a href="#__codelineno-6-13">13</a></span>
 <span class="normal"><a href="#__codelineno-6-14">14</a></span>
 <span class="normal"><a href="#__codelineno-6-15">15</a></span>
-<span class="normal"><a href="#__codelineno-6-16">16</a></span>
-<span class="normal"><a href="#__codelineno-6-17">17</a></span>
-<span class="normal"><a href="#__codelineno-6-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="cm">/*</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="cm"> * Usa echo para imprimir &#39;Hello World!&#39; em um arquivo</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="cm"> */</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7"></a>
-<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10"></a>
-<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13"></a>
-<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; &#39;${greeting}-output.txt&#39;</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="cm">/*</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="cm"> * Usa echo para imprimir &#39;Hello World!&#39; em um arquivo</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="cm"> */</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${greeting}-output.txt&quot;</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; &#39;${greeting}-output.txt&#39;</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho, mas certifique-se de deixar o shebang no lugar.</p>
+<p>Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho.</p>
 <h3 id="23-adicione-uma-declaracao-de-importacao-antes-do-bloco-de-fluxo-de-trabalho">2.3. Adicione uma declaração de importação antes do bloco de fluxo de trabalho<a class="headerlink" href="#23-adicione-uma-declaracao-de-importacao-antes-do-bloco-de-fluxo-de-trabalho" title="Permanent link">&para;</a></h3>
 <p>A sintaxe para incluir um processo de um módulo é bastante direta:</p>
 <div class="highlight"><span class="filename">Sintaxe: Declaração de importação</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">NOME_DO_PROCESSO</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;caminho_para_o_módulo&gt;&#39;</span>
@@ -4235,7 +4231,7 @@ Mas vamos fazer apenas mais dois por enquanto.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>touch<span class="w"> </span>modules/convertToUpper.nf
 </code></pre></div>
 <h3 id="32-mova-o-codigo-do-processo-converttoupper-para-o-arquivo-do-modulo">3.2. Mova o código do processo <code>convertToUpper</code> para o arquivo do módulo<a class="headerlink" href="#32-mova-o-codigo-do-processo-converttoupper-para-o-arquivo-do-modulo" title="Permanent link">&para;</a></h3>
-<p>Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo, certificando-se de copiar também o shebang <code>#!/usr/bin/env nextflow</code>.</p>
+<p>Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/convertToUpper.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -4251,28 +4247,24 @@ Mas vamos fazer apenas mais dois por enquanto.</p>
 <span class="normal"><a href="#__codelineno-13-13">13</a></span>
 <span class="normal"><a href="#__codelineno-13-14">14</a></span>
 <span class="normal"><a href="#__codelineno-13-15">15</a></span>
-<span class="normal"><a href="#__codelineno-13-16">16</a></span>
-<span class="normal"><a href="#__codelineno-13-17">17</a></span>
-<span class="normal"><a href="#__codelineno-13-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cm">/*</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="cm"> * Usa uma ferramenta de substituição de texto para converter a saudação para maiúsculas</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="cm"> */</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7"></a>
-<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10"></a>
-<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;UPPER-${input_file}&quot;</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13"></a>
-<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="s2">    cat &#39;${input_file}&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; &#39;UPPER-${input_file}&#39;</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-13-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="cm">/*</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="cm"> * Usa uma ferramenta de substituição de texto para converter a saudação para maiúsculas</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="cm"> */</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="n">process</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;UPPER-${input_file}&quot;</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span class="s2">    cat &#39;${input_file}&#39; | tr &#39;[a-z]&#39; &#39;[A-Z]&#39; &gt; &#39;UPPER-${input_file}&#39;</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho, mas certifique-se de deixar o shebang no lugar.</p>
+<p>Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho.</p>
 <h3 id="33-adicione-uma-declaracao-de-importacao-antes-do-bloco-params">3.3. Adicione uma declaração de importação antes do bloco <code>params</code><a class="headerlink" href="#33-adicione-uma-declaracao-de-importacao-antes-do-bloco-params" title="Permanent link">&para;</a></h3>
 <p>Insira a declaração de importação acima do bloco <code>params</code> e preencha-a adequadamente.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Depois</label><label for="__tabbed_2_2">Antes</label></div>
@@ -4350,7 +4342,7 @@ Mas vamos fazer apenas mais dois por enquanto.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>touch<span class="w"> </span>modules/collectGreetings.nf
 </code></pre></div>
 <h3 id="42-mova-o-codigo-do-processo-collectgreetings-para-o-arquivo-do-modulo">4.2. Mova o código do processo <code>collectGreetings</code> para o arquivo do módulo<a class="headerlink" href="#42-mova-o-codigo-do-processo-collectgreetings-para-o-arquivo-do-modulo" title="Permanent link">&para;</a></h3>
-<p>Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo, certificando-se de copiar também o shebang <code>#!/usr/bin/env nextflow</code>.</p>
+<p>Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo.</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/collectGreetings.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -4370,32 +4362,28 @@ Mas vamos fazer apenas mais dois por enquanto.</p>
 <span class="normal"><a href="#__codelineno-19-17">17</a></span>
 <span class="normal"><a href="#__codelineno-19-18">18</a></span>
 <span class="normal"><a href="#__codelineno-19-19">19</a></span>
-<span class="normal"><a href="#__codelineno-19-20">20</a></span>
-<span class="normal"><a href="#__codelineno-19-21">21</a></span>
-<span class="normal"><a href="#__codelineno-19-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2"></a>
-<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="cm">/*</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="cm"> * Coleta saudações em maiúsculas em um único arquivo de saída</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="cm"> */</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7"></a>
-<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_files</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">batch_name</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11"></a>
-<a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;COLLECTED-${batch_name}-output.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
-<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${batch_name}-report.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
-<a id="__codelineno-19-15" name="__codelineno-19-15"></a>
-<a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="w">    </span><span class="n">count_greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_files</span><span class="o">.</span><span class="na">size</span><span class="o">()</span>
-<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="s2">    cat ${input_files} &gt; &#39;COLLECTED-${batch_name}-output.txt&#39;</span>
-<a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="s2">    echo &#39;There were ${count_greetings} greetings in this batch.&#39; &gt; &#39;${batch_name}-report.txt&#39;</span>
-<a id="__codelineno-19-21" name="__codelineno-19-21"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-19-22" name="__codelineno-19-22"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-19-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="cm">/*</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="cm"> * Coleta saudações em maiúsculas em um único arquivo de saída</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="cm"> */</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="n">process</span><span class="w"> </span><span class="n">collectGreetings</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_files</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">batch_name</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;COLLECTED-${batch_name}-output.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">outfile</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;${batch_name}-report.txt&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">report</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13"></a>
+<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">    </span><span class="n">count_greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_files</span><span class="o">.</span><span class="na">size</span><span class="o">()</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="s2">    cat ${input_files} &gt; &#39;COLLECTED-${batch_name}-output.txt&#39;</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="s2">    echo &#39;There were ${count_greetings} greetings in this batch.&#39; &gt; &#39;${batch_name}-report.txt&#39;</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho, mas certifique-se de deixar o shebang no lugar.</p>
+<p>Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho.</p>
 <h3 id="43-adicione-uma-declaracao-de-importacao-antes-do-bloco-params">4.3. Adicione uma declaração de importação antes do bloco <code>params</code><a class="headerlink" href="#43-adicione-uma-declaracao-de-importacao-antes-do-bloco-params" title="Permanent link">&para;</a></h3>
 <p>Insira a declaração de importação acima do bloco <code>params</code> e preencha-a adequadamente.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Depois</label><label for="__tabbed_3_2">Antes</label></div>

@@ -1756,7 +1756,7 @@
   <span class="md-ellipsis">
     
   
-    भाग 3: Hello Workflow
+    03 hello workflow
   
 
     
@@ -4788,7 +4788,7 @@
 
 <figcaption>
 <p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Nextflow YouTube channel पर <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">पूरी playlist</a> देखें।</p>
-<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> वीडियो transcript <a href="./transcripts/01_hello_world.md">यहाँ</a> उपलब्ध है।</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> वीडियो transcript <a href="../transcripts/01_hello_world/">यहाँ</a> उपलब्ध है।</p>
 </figcaption>
 </figure>
 <p>Hello Nextflow training course के इस पहले भाग में, हम एक बहुत ही बुनियादी domain-agnostic Hello World उदाहरण के साथ topic में आसानी से प्रवेश करते हैं, जिसे हम foundational Nextflow logic और components के उपयोग को demonstrate करने के लिए progressively build up करेंगे।</p>
@@ -5128,7 +5128,7 @@ Workflow definition keyword <code>workflow</code> से शुरू होत�
 <h4 id="211-sayhello-process-output-declare">2.1.1. <code>sayHello</code> process का output declare करें<a class="headerlink" href="#211-sayhello-process-output-declare" title="Permanent link">&para;</a></h4>
 <p>हमें workflow body में एक <code>publish:</code> block जोड़ना होगा (उसी प्रकार का code element जैसा <code>main:</code> block) और <code>sayHello()</code> process का output list करना होगा।</p>
 <p>Workflow script file <code>hello-world.nf</code> में, code की निम्नलिखित lines जोड़ो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">बाद में</label><label for="__tabbed_1_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-17">17</a></span>
@@ -5170,7 +5170,7 @@ Workflow definition keyword <code>workflow</code> से शुरू होत�
 <h4 id="212-script-output-block">2.1.2. Script में एक <code>output:</code> block जोड़ें<a class="headerlink" href="#212-script-output-block" title="Permanent link">&para;</a></h4>
 <p>अब हमें बस वह <code>output:</code> block जोड़ना है जहाँ output directory path specify किया जाएगा। Note करो कि यह new block script के भीतर <code>workflow</code> block के <strong>बाहर</strong> और <strong>नीचे</strong> बैठता है।</p>
 <p>Workflow script file <code>hello-world.nf</code> में, code की निम्नलिखित lines जोड़ो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">बाद में</label><label for="__tabbed_2_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-17">17</a></span>
@@ -5279,7 +5279,7 @@ Workflow definition keyword <code>workflow</code> से शुरू होत�
 <h4 id="221-output-path-modify">2.2.1. Output path modify करें<a class="headerlink" href="#221-output-path-modify" title="Permanent link">&para;</a></h4>
 <p>एक बार फिर, specific output के लिए publish behavior modify करना वास्तव में straightforward है।
 Custom location set करने के लिए, बस <code>path</code> को accordingly edit करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">बाद में</label><label for="__tabbed_3_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-27">27</a></span>
@@ -5352,7 +5352,7 @@ Process name या अन्य variables का उपयोग करके r
 <h4 id="231-mode-directive">2.3.1. Mode directive जोड़ें<a class="headerlink" href="#231-mode-directive" title="Permanent link">&para;</a></h4>
 <p>यह bit वास्तव में straightforward है।
 बस relevant workflow-level output definition में <code>mode 'copy'</code> जोड़ो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">बाद में</label><label for="__tabbed_4_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-27">27</a></span>
@@ -5459,7 +5459,7 @@ Process name या अन्य variables का उपयोग करके r
 <h4 id="311-process-definition-input-block">3.1.1. Process definition में एक input block जोड़ें<a class="headerlink" href="#311-process-definition-input-block" title="Permanent link">&para;</a></h4>
 <p>पहले, चलो process definition को <code>greeting</code> नामक एक input accept करने के लिए adapt करते हैं।</p>
 <p>Process block में, निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">बाद में</label><label for="__tabbed_5_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-6"> 6</a></span>
@@ -5493,7 +5493,7 @@ Process name या अन्य variables का उपयोग करके r
 <h4 id="312-input-variable-use-process-command-edit">3.1.2. Input variable use करने के लिए process command edit करें<a class="headerlink" href="#312-input-variable-use-process-command-edit" title="Permanent link">&para;</a></h4>
 <p>अब हम original hardcoded value को उस input variable की value से swap करते हैं जो हम receive करने की expect करते हैं।</p>
 <p>Process block में, निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">After</label><label for="__tabbed_6_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">बाद में</label><label for="__tabbed_6_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-14">14</a></span>
@@ -5538,7 +5538,7 @@ Process name या अन्य variables का उपयोग करके r
 <p>यहाँ, हम <code>--input</code> नामक एक parameter बनाना चाहते हैं, इसलिए हमें workflow में कहीं <code>params.input</code> declare करना होगा।
 सिद्धांत रूप में हम इसे कहीं भी लिख सकते हैं; लेकिन चूंकि हम इसे <code>sayHello()</code> process call को देना चाहते हैं, हम इसे सीधे वहाँ plug कर सकते हैं <code>sayHello(params.input)</code> लिखकर।</p>
 <p>Workflow block में, निम्नलिखित code change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">After</label><label for="__tabbed_7_2">Before</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">बाद में</label><label for="__tabbed_7_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-world.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-23">23</a></span>
@@ -5792,7 +5792,7 @@ Nextflow process के minimum required components क्या हैं?
 - [ ] Input, output, और script blocks
 - [ ] केवल एक script block
 
-और जानें: [1.1.1. The `process` definition](#111-the-process-definition)
+और जानें: [1.1.1. `process` definition](#111-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5806,7 +5806,7 @@ Nextflow process के minimum required components क्या हैं?
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#111-the-process-definition">1.1.1. The <code>process</code> definition</a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#111-process-definition">1.1.1. <code>process</code> definition</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5817,7 +5817,7 @@ Process में output block का purpose क्या है?
 - [x] Process से expected outputs declare करना
 - [ ] Environment variables define करना
 
-और जानें: [1.1.1. The `process` definition](#111-the-process-definition)
+और जानें: [1.1.1. `process` definition](#111-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5831,7 +5831,7 @@ Process में output block का purpose क्या है?
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#111-the-process-definition">1.1.1. The <code>process</code> definition</a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#111-process-definition">1.1.1. <code>process</code> definition</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5878,7 +5878,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-और जानें: [1.2.2. Find the output and logs in the `work` directory](#122-find-the-output-and-logs-in-the-work-directory)
+और जानें: [1.2.2. `work` directory में output और logs खोजें](#122-work-directory-में-output-और-logs-खोजें)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5902,7 +5902,7 @@ work/a3/7be2fa.../
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>और जानें: <a href="#122-find-the-output-and-logs-in-the-work-directory">1.2.2. Find the output and logs in the <code>work</code> directory</a></p></section>
+                <section class="content hidden"><p>और जानें: <a href="#122-work-directory-में-output-और-logs-खोजें">1.2.2. <code>work</code> directory में output और logs खोजें</a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -5913,7 +5913,7 @@ work/a3/7be2fa.../
 - [x] उन processes को skip करता है जो पहले से successfully complete हो चुके हैं
 - [ ] Workflow का backup बनाता है
 
-और जानें: [4.1. Re-launch a workflow with `-resume`](#41-re-launch-a-workflow-with--resume)
+और जानें: [4.1. `-resume` के साथ workflow re-launch करें](#41--resume-के-साथ-workflow-re-launch-करें)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5927,7 +5927,7 @@ work/a3/7be2fa.../
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#41-re-launch-a-workflow-with--resume">4.1. Re-launch a workflow with <code>-resume</code></a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#41--resume-के-साथ-workflow-re-launch-करें">4.1. <code>-resume</code> के साथ workflow re-launch करें</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5938,7 +5938,7 @@ Workflow outputs publish करने के लिए default mode क्या
 - [ ] Files को output directory में move करना
 - [ ] Output directory में files compress करना
 
-और जानें: [2.3. Set the publish mode to copy](#23-set-the-publish-mode-to-copy)
+और जानें: [2.3. Publish mode को copy पर सेट करें](#23-publish-mode-को-copy-पर-सेट-करें)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5952,7 +5952,7 @@ Workflow outputs publish करने के लिए default mode क्या
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#23-set-the-publish-mode-to-copy">2.3. Set the publish mode to copy</a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#23-publish-mode-को-copy-पर-सेट-करें">2.3. Publish mode को copy पर सेट करें</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5963,7 +5963,7 @@ Command line से Nextflow workflow को parameter value कैसे pass �
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-और जानें: [3.2. Set up a command-line parameter to capture user input](#32-set-up-a-command-line-parameter-to-capture-user-input)
+और जानें: [3.2. User input capture करने के लिए command-line parameter set up करें](#32-user-input-capture-करने-के-लिए-command-line-parameter-set-up-करें)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5977,7 +5977,7 @@ Command line से Nextflow workflow को parameter value कैसे pass �
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>और जानें: <a href="#32-set-up-a-command-line-parameter-to-capture-user-input">3.2. Set up a command-line parameter to capture user input</a></p></section>
+    <section class="content hidden"><p>और जानें: <a href="#32-user-input-capture-करने-के-लिए-command-line-parameter-set-up-करें">3.2. User input capture करने के लिए command-line parameter set up करें</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

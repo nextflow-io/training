@@ -4710,7 +4710,7 @@
 
 <figcaption>
 <p><span class="twemoji youtube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.2-23.7-24.8-42.3-48.3-48.6C458.9 64 288.1 64 288.1 64S117.3 64 74.7 75.5c-23.5 6.3-42 24.9-48.3 48.6C15 167 15 256.4 15 256.4s0 89.4 11.4 132.3c6.3 23.6 24.8 41.5 48.3 47.8C117.3 448 288.1 448 288.1 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zM232.2 337.6V175.2l142.7 81.2z"/></svg></span> Siehe <a href="https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;si=eF7cLR62goy-lc6n">die gesamte Playlist</a> auf dem Nextflow YouTube-Kanal.</p>
-<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Das Videotranskript ist <a href="./transcripts/03_hello_workflow.md">hier</a> verfügbar.</p>
+<p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Das Videotranskript ist <a href="../transcripts/03_hello_workflow/">hier</a> verfügbar.</p>
 </figcaption>
 </figure>
 <p>Die meisten realen Workflows umfassen mehr als einen Schritt.
@@ -4854,7 +4854,7 @@ Für dieses Kapitel ist es unter <code>results/hello_workflow/</code>.</p>
 <h3 id="13-einen-aufruf-des-neuen-process-im-workflow-block-hinzufugen">1.3. Einen Aufruf des neuen Process im Workflow-Block hinzufügen<a class="headerlink" href="#13-einen-aufruf-des-neuen-process-im-workflow-block-hinzufugen" title="Permanent link">&para;</a></h3>
 <p>Jetzt müssen wir Nextflow sagen, dass es den Process, den wir gerade definiert haben, tatsächlich aufrufen soll.</p>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Nachher</label><label for="__tabbed_1_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Danach</label><label for="__tabbed_1_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-44">44</a></span>
@@ -4932,7 +4932,7 @@ Wir können auf den Ausgabekanal eines Process als <code>&lt;process&gt;.out</co
 </figure>
 
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Nachher</label><label for="__tabbed_2_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Danach</label><label for="__tabbed_2_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-53">53</a></span>
@@ -4953,7 +4953,7 @@ Wir können auf den Ausgabekanal eines Process als <code>&lt;process&gt;.out</co
 <p>Zum Schluss aktualisieren wir die Workflow-Ausgaben, um auch die Ergebnisse des zweiten Process zu veröffentlichen.</p>
 <h4 id="151-den-publish-abschnitt-des-workflow-blocks-aktualisieren">1.5.1. Den <code>publish:</code>-Abschnitt des <code>workflow</code>-Blocks aktualisieren<a class="headerlink" href="#151-den-publish-abschnitt-des-workflow-blocks-aktualisieren" title="Permanent link">&para;</a></h4>
 <p>Nimm im <code>workflow</code>-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Nachher</label><label for="__tabbed_3_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Danach</label><label for="__tabbed_3_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-56">56</a></span>
@@ -4978,7 +4978,7 @@ Wir können auf den Ausgabekanal eines Process als <code>&lt;process&gt;.out</co
 <p>Die Logik ist dieselbe wie zuvor.</p>
 <h4 id="152-den-output-block-aktualisieren">1.5.2. Den <code>output</code>-Block aktualisieren<a class="headerlink" href="#152-den-output-block-aktualisieren" title="Permanent link">&para;</a></h4>
 <p>Nimm im <code>output</code>-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Nachher</label><label for="__tabbed_4_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Danach</label><label for="__tabbed_4_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-61">61</a></span>
@@ -5147,7 +5147,7 @@ Was wissen wir, dass wir vom vorherigen Schritt im Workflow bekommen können?</p
 <p>Der von <code>convertToUpper()</code> ausgegebene Kanal wird die Pfade zu den einzelnen Dateien enthalten, die die Großbuchstaben-Begrüßungen enthalten.
 Das entspricht einem Eingabeslot; nennen wir ihn der Einfachheit halber <code>input_files</code>.</p>
 <p>Nimm im Process-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Nachher</label><label for="__tabbed_5_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Danach</label><label for="__tabbed_5_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-42">42</a></span>
@@ -5170,7 +5170,7 @@ Konkret können wir den Befehl nicht im Voraus schreiben, also müssen wir Nextf
 <p>Mit anderen Worten, wenn wir einen Eingabekanal haben, der das Element <code>[file1.txt, file2.txt, file3.txt]</code> enthält, brauchen wir Nextflow, um das in <code>cat file1.txt file2.txt file3.txt</code> umzuwandeln.</p>
 <p>Glücklicherweise macht Nextflow das gerne für uns, wenn wir einfach <code>cat ${input_files}</code> in den Skriptbefehl schreiben.</p>
 <p>Nimm im Process-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Nachher</label><label for="__tabbed_6_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Danach</label><label for="__tabbed_6_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-54">54</a></span>
@@ -5213,7 +5213,7 @@ Das ist auch ein Kanal, genannt <code>convertToUpper.out</code>.</p>
 
 <h4 id="231-die-process-aufrufe-verbinden">2.3.1. Die Process-Aufrufe verbinden<a class="headerlink" href="#231-die-process-aufrufe-verbinden" title="Permanent link">&para;</a></h4>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Nachher</label><label for="__tabbed_7_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Danach</label><label for="__tabbed_7_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-75">75</a></span>
@@ -5282,7 +5282,7 @@ Wir haben nur einen erwartet, aber es sind drei.</p>
 <p>Wir nehmen das <code>convertToUpper.out</code> und hängen den <code>collect()</code>-Operator an, was uns <code>convertToUpper.out.collect()</code> gibt.
 Wir können das direkt in den <code>collectGreetings()</code>-Process-Aufruf einstecken.</p>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Nachher</label><label for="__tabbed_8_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Danach</label><label for="__tabbed_8_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-73">73</a></span>
@@ -5304,7 +5304,7 @@ Wir können das direkt in den <code>collectGreetings()</code>-Process-Aufruf ein
 </div>
 <h4 id="242-einige-view-anweisungen-hinzufugen">2.4.2. Einige <code>view()</code>-Anweisungen hinzufügen<a class="headerlink" href="#242-einige-view-anweisungen-hinzufugen" title="Permanent link">&para;</a></h4>
 <p>Lass uns auch ein paar <code>view()</code>-Anweisungen einfügen, um die Zustände des Kanal-Inhalts vor und nach zu visualisieren.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Nachher</label><label for="__tabbed_9_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Danach</label><label for="__tabbed_9_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-73">73</a></span>
@@ -5383,7 +5383,7 @@ Dies zeigt dir, dass die Reihenfolge, in der Elemente durch Process-Aufrufe flie
 </div>
 <h4 id="244-view-anweisungen-fur-die-lesbarkeit-entfernen">2.4.4. <code>view()</code>-Anweisungen für die Lesbarkeit entfernen<a class="headerlink" href="#244-view-anweisungen-fur-die-lesbarkeit-entfernen" title="Permanent link">&para;</a></h4>
 <p>Bevor du zum nächsten Abschnitt übergehst, empfehlen wir, die <code>view()</code>-Anweisungen zu löschen, um die Konsolenausgabe nicht zu überladen.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Nachher</label><label for="__tabbed_10_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Danach</label><label for="__tabbed_10_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-73">73</a></span>
@@ -5420,7 +5420,7 @@ Dies zeigt dir, dass die Reihenfolge, in der Elemente durch Process-Aufrufe flie
 </figure>
 
 <h3 id="wie-geht-es-weiter_1">Wie geht es weiter?<a class="headerlink" href="#wie-geht-es-weiter_1" title="Permanent link">&para;</a></h3>
-<p>Lerne, wie du zusätzliche Parameter an einen Process übergibst.</p>
+<p>Lerne, wie du mehr als eine Eingabe an einen Process übergibst.</p>
 <hr />
 <h2 id="3-zusatzliche-parameter-an-einen-process-ubergeben">3. Zusätzliche Parameter an einen Process übergeben<a class="headerlink" href="#3-zusatzliche-parameter-an-einen-process-ubergeben" title="Permanent link">&para;</a></h2>
 <p>Wir wollen in der Lage sein, der endgültigen Ausgabedatei einen bestimmten Namen zu geben, um nachfolgende Stapel von Begrüßungen verarbeiten zu können, ohne die endgültigen Ergebnisse zu überschreiben.</p>
@@ -5443,7 +5443,7 @@ Dies zeigt dir, dass die Reihenfolge, in der Elemente durch Process-Aufrufe flie
 <p>Gute Nachricht: Wir können so viele Eingabevariablen deklarieren, wie wir wollen, in der Process-Definition.
 Nennen wir diese <code>batch_name</code>.</p>
 <p>Nimm im Process-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Nachher</label><label for="__tabbed_11_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Danach</label><label for="__tabbed_11_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-42">42</a></span>
@@ -5467,7 +5467,7 @@ Im Moment sind diese alle als erforderliche Eingaben eingerichtet; du <em>musst<
 <h4 id="312-die-batch_name-variable-im-ausgabedateinamen-verwenden">3.1.2. Die <code>batch_name</code>-Variable im Ausgabedateinamen verwenden<a class="headerlink" href="#312-die-batch_name-variable-im-ausgabedateinamen-verwenden" title="Permanent link">&para;</a></h4>
 <p>Wir können die Variable auf dieselbe Weise in den Ausgabedateinamen einfügen, wie wir zuvor dynamische Dateinamen zusammengestellt haben.</p>
 <p>Nimm im Process-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Nachher</label><label for="__tabbed_12_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Danach</label><label for="__tabbed_12_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-46">46</a></span>
@@ -5510,7 +5510,7 @@ Im Moment sind diese alle als erforderliche Eingaben eingerichtet; du <em>musst<
 <p>Du weißt bereits, wie du das <code>params</code>-System verwendest, um CLI-Parameter zu deklarieren.
 Lass uns das verwenden, um einen <code>batch</code>-Parameter zu deklarieren (mit einem Standardwert, weil wir faul sind).</p>
 <p>Nimm im Abschnitt für Pipeline-Parameter die folgenden Codeänderungen vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Nachher</label><label for="__tabbed_13_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Danach</label><label for="__tabbed_13_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-55">55</a></span>
@@ -5548,7 +5548,7 @@ Lass uns das verwenden, um einen <code>batch</code>-Parameter zu deklarieren (mi
 <h4 id="322-den-batch-parameter-an-den-process-ubergeben">3.2.2. Den <code>batch</code>-Parameter an den Process übergeben<a class="headerlink" href="#322-den-batch-parameter-an-den-process-ubergeben" title="Permanent link">&para;</a></h4>
 <p>Um den Wert des Parameters an den Process zu übergeben, müssen wir ihn im Process-Aufruf hinzufügen.</p>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Nachher</label><label for="__tabbed_14_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Danach</label><label for="__tabbed_14_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-74">74</a></span>
@@ -5615,7 +5615,7 @@ Wir können entweder wählen, diesen Ausgabekanälen Namen zu geben, was es einf
 <p>Praktischerweise erlaubt Nextflow uns, beliebigen Code im <code>script:</code>-Block der Process-Definition hinzuzufügen, was wirklich praktisch ist, um solche Dinge zu tun.</p>
 <p>Das bedeutet, wir können Nextflows eingebaute <code>size()</code>-Funktion verwenden, um die Anzahl der Dateien im <code>input_files</code>-Array zu erhalten, und das Ergebnis mit einem <code>echo</code>-Befehl in eine Datei schreiben.</p>
 <p>Nimm im <code>collectGreetings</code>-Process-Block die folgenden Codeänderungen vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Nachher</label><label for="__tabbed_15_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Danach</label><label for="__tabbed_15_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-55">55</a></span>
@@ -5648,7 +5648,7 @@ Wir können entweder wählen, diesen Ausgabekanälen Namen zu geben, was es einf
 <p>Im Prinzip müssen wir nur die Berichtsdatei zum <code>output:</code>-Block hinzufügen.</p>
 <p>Aber während wir dabei sind, werden wir auch einige <code>emit:</code>-Tags zu unseren Ausgabedeklarationen hinzufügen. Diese werden es uns ermöglichen, die Ausgaben per Namen auszuwählen, anstatt Positionsindizes verwenden zu müssen.</p>
 <p>Nimm im Process-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Nachher</label><label for="__tabbed_16_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Danach</label><label for="__tabbed_16_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-46">46</a></span>
@@ -5691,7 +5691,7 @@ Zum Beispiel würdest du <code>&lt;process&gt;.out[0]</code> verwenden, um die e
 <p>Wir müssen die Workflow-Ausgaben entsprechend aktualisieren.</p>
 <h4 id="421-den-publish-abschnitt-aktualisieren">4.2.1. Den <code>publish:</code>-Abschnitt aktualisieren<a class="headerlink" href="#421-den-publish-abschnitt-aktualisieren" title="Permanent link">&para;</a></h4>
 <p>Nimm im <code>workflow</code>-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">Nachher</label><label for="__tabbed_17_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">Danach</label><label for="__tabbed_17_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-80">80</a></span>
@@ -5722,7 +5722,7 @@ Wenn wir in Teil 5 (Containers) einen weiteren Schritt zu unserer Pipeline hinzu
 <p>Aber für jetzt aktualisieren wir die Workflow-Level-Ausgaben fertig.</p>
 <h4 id="422-den-output-block-aktualisieren">4.2.2. Den <code>output</code>-Block aktualisieren<a class="headerlink" href="#422-den-output-block-aktualisieren" title="Permanent link">&para;</a></h4>
 <p>Nimm im <code>output</code>-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">Nachher</label><label for="__tabbed_18_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">Danach</label><label for="__tabbed_18_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-86"> 86</a></span>
