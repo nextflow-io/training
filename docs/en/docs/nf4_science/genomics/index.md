@@ -11,7 +11,6 @@ additional_information:
     - Handle accessory files such as index files and reference genome resources appropriately
     - Leverage Nextflow's dataflow paradigm to parallelize per-sample variant calling
     - Implement multi-sample joint calling using relevant channel operators
-    - Run an nf-core production pipeline on the same data
   audience_prerequisites:
     - "**Audience:** This course is designed for researchers in genomics and related fields who want to develop or customize data analysis pipelines."
     - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common genomics file formats is assumed."
@@ -23,7 +22,7 @@ additional_information:
 **A hands-on course applying Nextflow to a real-world genomics use case: variant calling with GATK.**
 
 This course builds on the [Hello Nextflow](../../hello_nextflow/) beginner training and demonstrates how to use Nextflow in the specific context of the genomics domain.
-You will implement a variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data, then see what a full-scale production-ready pipeline looks like with nf-core/sarek.
+You will implement a variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data.
 
 <!-- additional_information -->
 
@@ -32,22 +31,16 @@ You will implement a variant calling pipeline with [GATK](https://gatk.broadinst
 This course is hands-on, with goal-oriented exercises structured to introduce information gradually.
 
 You will start by running the variant calling tools manually in the terminal to understand the methodology, then progressively build up a Nextflow pipeline that automates and scales the analysis.
-By the end of the course, you will run an nf-core production pipeline on the same data.
-
-!!! tip "Just want to run pipelines?"
-
-    If you're not interested in developing your own pipeline and just want to run a production-ready variant calling workflow, skip ahead to [Part 4: Run nf-core/sarek](./04_nf-core_sarek.md).
 
 ### Lesson plan
 
-We've broken this down into four parts that each focus on specific aspects of applying Nextflow to a genomics use case.
+We've broken this down into three parts that each focus on specific aspects of applying Nextflow to a genomics use case.
 
 | Course chapter                                                           | Summary                                                                                         | Estimated duration |
 | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ------------------ |
 | [Part 1: Method overview](./01_method.md)                                | Understanding the variant calling methodology and running the tools manually                    | 30 mins            |
 | [Part 2: Per-sample variant calling](./02_per_sample_variant_calling.md) | Building a pipeline that indexes BAM files and calls variants, then scaling to multiple samples | 60 mins            |
 | [Part 3: Joint calling on a cohort](./03_joint_calling.md)               | Adding multi-sample joint genotyping using channel operators to aggregate per-sample outputs    | 45 mins            |
-| [Part 4: Run nf-core/sarek](./04_nf-core_sarek.md)                       | Running a full-scale production-ready pipeline on the same data                                 | 30 mins            |
 
 By the end of this course, you will be able to apply foundational Nextflow concepts and tooling to a typical genomics use case.
 

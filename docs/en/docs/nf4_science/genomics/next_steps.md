@@ -6,7 +6,6 @@ Congratulations on completing the Nextflow for Genomics training course! 🎉
 
 You started by running variant calling tools manually in the terminal to understand the methodology.
 Then you built a single-sample Nextflow pipeline to automate the process, scaled it to handle multiple samples in parallel, and added multi-sample joint genotyping using channel operators.
-Finally, you ran the nf-core/sarek production pipeline on the same data to see what a full-scale production-ready pipeline looks like.
 
 ### What you built
 
@@ -23,9 +22,7 @@ Through this hands-on course, you've learned how to:
 - Handle accessory files such as index files and reference genome resources appropriately
 - Leverage Nextflow's dataflow paradigm to parallelize per-sample variant calling
 - Implement multi-sample joint calling using relevant channel operators
-- Run an nf-core production pipeline on the same data
-
-You're now equipped to start applying Nextflow to genomics analysis workflows in your own work.
+  You're now equipped to start applying Nextflow to genomics analysis workflows in your own work.
 
 ## Next steps to build your skills
 
