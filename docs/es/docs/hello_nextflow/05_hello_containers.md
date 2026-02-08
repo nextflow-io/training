@@ -1,7 +1,5 @@
 # Parte 5: Hello Containers
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -115,7 +113,7 @@ Para usar un contenedor, usualmente descarga o _pull_ una imagen de contenedor d
 
 La sintaxis general es la siguiente:
 
-```bash title="Sintaxis"
+```bash title="Syntax"
 docker pull '<container>'
 ```
 
@@ -125,7 +123,7 @@ La parte `'<container>'` es la dirección URI de la imagen del contenedor.
 
 Como ejemplo, descarguemos una imagen de contenedor que contiene [cowpy](https://github.com/jeffbuttars/cowpy), una implementación en Python de una herramienta llamada `cowsay` que genera arte ASCII para mostrar entradas de texto arbitrarias de una manera divertida.
 
-```txt title="Ejemplo"
+```txt title="Example"
  ________________________
 < Are we having fun yet? >
  ------------------------
@@ -187,7 +185,7 @@ Esto es genial para ejecutar comandos únicos.
 
 La sintaxis general es la siguiente:
 
-```bash title="Sintaxis"
+```bash title="Syntax"
 docker run --rm '<container>' [tool command]
 ```
 
@@ -309,7 +307,7 @@ Como se señaló anteriormente, el contenedor está aislado del sistema host por
 
 Para permitir que el contenedor acceda al sistema de archivos del host, puede **montar** un **volumen** desde el sistema host en el contenedor usando la siguiente sintaxis:
 
-```bash title="Sintaxis"
+```bash title="Syntax"
 -v <outside_path>:<inside_path>
 ```
 
@@ -436,7 +434,7 @@ Podemos modelar nuestro proceso `cowpy` en los otros procesos que hemos escrito 
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generar arte ASCII con cowpy
+// Generate ASCII art with cowpy
 process cowpy {
 
     input:
@@ -469,7 +467,7 @@ Inserte la declaración de importación arriba del bloque workflow y complétela
 === "Después"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-    // Incluir módulos
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -479,7 +477,7 @@ Inserte la declaración de importación arriba del bloque workflow y complétela
 === "Antes"
 
     ```groovy title="hello-containers.nf" linenums="3"
-    // Incluir módulos
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -500,17 +498,17 @@ En el bloque workflow, haga el siguiente cambio de código:
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
-        // crear un canal para entradas desde un archivo CSV
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emitir un saludo
+        // emit a greeting
         sayHello(greeting_ch)
-        // convertir el saludo a mayúsculas
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-        // recopilar todos los saludos en un archivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generar arte ASCII de los saludos con cowpy
+        // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -518,15 +516,15 @@ En el bloque workflow, haga el siguiente cambio de código:
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
-        // crear un canal para entradas desde un archivo CSV
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emitir un saludo
+        // emit a greeting
         sayHello(greeting_ch)
-        // convertir el saludo a mayúsculas
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-        // recopilar todos los saludos en un archivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
@@ -1116,7 +1114,7 @@ Cuando esté listo, continúe con [**Parte 6: Hello Config**](./06_hello_config.
 - [x] Monta un volumen del sistema host en el contenedor
 - [ ] Especifica la versión del contenedor
 
-Aprenda más: [1.3.4. Montar datos en el contenedor](#134-montar-datos-en-el-contenedor)
+Aprenda más: [1.3.4. Montar datos en el contenedor](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1126,7 +1124,7 @@ Aprenda más: [1.3.4. Montar datos en el contenedor](#134-montar-datos-en-el-con
 - [x] Porque los contenedores están aislados del sistema de archivos del host por defecto
 - [ ] Para habilitar la red
 
-Aprenda más: [1.3.4. Montar datos en el contenedor](#134-montar-datos-en-el-contenedor)
+Aprenda más: [1.3.4. Montar datos en el contenedor](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1136,7 +1134,7 @@ Aprenda más: [1.3.4. Montar datos en el contenedor](#134-montar-datos-en-el-con
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-Aprenda más: [2.3.1. Especificar un contenedor para cowpy](#231-especificar-un-contenedor-para-cowpy)
+Aprenda más: [2.3.1. Especificar un contenedor para cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1146,7 +1144,7 @@ Aprenda más: [2.3.1. Especificar un contenedor para cowpy](#231-especificar-un-
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-Aprenda más: [2.3.2. Habilitar el uso de Docker a través del archivo `nextflow.config`](#232-habilitar-el-uso-de-docker-a-traves-del-archivo-nextflowconfig)
+Aprenda más: [2.3.2. Habilitar el uso de Docker a través del archivo `nextflow.config`](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1156,5 +1154,5 @@ Aprenda más: [2.3.2. Habilitar el uso de Docker a través del archivo `nextflow
 - [x] Ejecutar el script del proceso dentro del contenedor
 - [x] Limpiar la instancia del contenedor después de la ejecución
 
-Aprenda más: [2.3.4. Inspeccionar cómo Nextflow lanzó la tarea containerizada](#234-inspeccionar-como-nextflow-lanzo-la-tarea-containerizada)
+Aprenda más: [2.3.4. Inspeccionar cómo Nextflow lanzó la tarea containerizada](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

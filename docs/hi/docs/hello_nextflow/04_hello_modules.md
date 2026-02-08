@@ -1,9 +1,7 @@
 # भाग 4: Hello Modules
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -129,11 +127,9 @@ touch modules/sayHello.nf
 
 ### 2.2. `sayHello` process code को module file में move करें
 
-Workflow file से पूरी process definition को module file में copy करो, `#!/usr/bin/env nextflow` shebang भी copy करना sure करो।
+Workflow file से पूरी process definition को module file में copy करो।
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * 'Hello World!' को एक फ़ाइल में प्रिंट करने के लिए echo का उपयोग करें
  */
@@ -152,7 +148,7 @@ process sayHello {
 }
 ```
 
-एक बार यह हो जाए, workflow file से process definition delete करो, लेकिन shebang को जगह पर छोड़ना sure करो।
+एक बार यह हो जाए, workflow file से process definition delete करो।
 
 ### 2.3. Workflow block से पहले include declaration add करें
 
@@ -167,7 +163,7 @@ include { <PROCESS_NAME> } from '<path_to_module>'
 === "After"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Modules को include करें
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -242,11 +238,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. `convertToUpper` process code को module file में move करें
 
-Workflow file से पूरी process definition को module file में copy करो, `#!/usr/bin/env nextflow` shebang भी copy करना sure करो।
+Workflow file से पूरी process definition को module file में copy करो।
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * अभिवादन को uppercase में बदलने के लिए text replacement tool का उपयोग करें
  */
@@ -265,7 +259,7 @@ process convertToUpper {
 }
 ```
 
-एक बार यह हो जाए, workflow file से process definition delete करो, लेकिन shebang को जगह पर छोड़ना sure करो।
+एक बार यह हो जाए, workflow file से process definition delete करो।
 
 ### 3.3. `params` block से पहले include declaration add करें
 
@@ -274,7 +268,7 @@ process convertToUpper {
 === "After"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Modules को include करें
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -290,7 +284,7 @@ process convertToUpper {
 === "Before"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Modules को include करें
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -342,11 +336,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. `collectGreetings` process code को module file में move करें
 
-Workflow file से पूरी process definition को module file में copy करो, `#!/usr/bin/env nextflow` shebang भी copy करना sure करो।
+Workflow file से पूरी process definition को module file में copy करो।
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Uppercase अभिवादनों को एक single output फ़ाइल में collect करें
  */
@@ -369,7 +361,7 @@ process collectGreetings {
 }
 ```
 
-एक बार यह हो जाए, workflow file से process definition delete करो, लेकिन shebang को जगह पर छोड़ना sure करो।
+एक बार यह हो जाए, workflow file से process definition delete करो।
 
 ### 4.3. `params` block से पहले include declaration add करें
 
@@ -378,7 +370,7 @@ process collectGreetings {
 === "After"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Modules को include करें
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -395,7 +387,7 @@ process collectGreetings {
 === "Before"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Modules को include करें
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 

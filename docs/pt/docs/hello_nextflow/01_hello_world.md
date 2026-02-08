@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -390,7 +390,7 @@ Como você acabou de aprender, a saída produzida pelo nosso pipeline está ente
 Isso é feito propositalmente; o Nextflow está no controle deste diretório e não devemos interagir com ele.
 No entanto, isso torna inconveniente recuperar saídas que nos interessam.
 
-Felizmente, o Nextflow fornece uma maneira de publicar saídas em um diretório designado usando [definições de saída em nível de fluxo de trabalho](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs).
+Felizmente, o Nextflow fornece uma maneira de publicar saídas em um diretório designado usando [definições de saída em nível de fluxo de trabalho](https://nextflow.io/docs/latest/workflow.html#workflow-outputs).
 
 ### 2.1. Uso básico
 

@@ -405,7 +405,7 @@ Workflow को कुछ बार फिर से चलाने का try 
 
 Workflow script file `hello-world.nf` में, code की निम्नलिखित lines जोड़ो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="17" hl_lines="7-8"
     workflow {
@@ -419,7 +419,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="17"
     workflow {
@@ -438,7 +438,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
 
 Workflow script file `hello-world.nf` में, code की निम्नलिखित lines जोड़ो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="17" hl_lines="11-15"
     workflow {
@@ -458,7 +458,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="17"
     workflow {
@@ -541,7 +541,7 @@ Default location होना great है, लेकिन तुम customize 
 एक बार फिर, specific output के लिए publish behavior modify करना वास्तव में straightforward है।
 Custom location set करने के लिए, बस `path` को accordingly edit करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
     output {
@@ -551,7 +551,7 @@ Custom location set करने के लिए, बस `path` को accordin
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="3"
     output {
@@ -619,7 +619,7 @@ Default रूप से, outputs `work` directory से symbolic links के 
 यह bit वास्तव में straightforward है।
 बस relevant workflow-level output definition में `mode 'copy'` जोड़ो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="27" hl_lines="4"
     output {
@@ -630,7 +630,7 @@ Default रूप से, outputs `work` directory से symbolic links के 
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="27"
     output {
@@ -735,7 +735,7 @@ process sayHello {
 
 Process block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="6" hl_lines="3-4"
     process sayHello {
@@ -747,7 +747,7 @@ Process block में, निम्नलिखित code change करो:
         path 'output.txt'
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="6"
     process sayHello {
@@ -764,7 +764,7 @@ Process block में, निम्नलिखित code change करो:
 
 Process block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
     script:
@@ -773,7 +773,7 @@ Process block में, निम्नलिखित code change करो:
     """
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="14" hl_lines="3"
     script:
@@ -808,14 +808,14 @@ General syntax है `params.<parameter_name>` declare करना Nextflow �
 
 Workflow block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
     // एक अभिवादन emit करें
     sayHello(params.input)
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
     // एक अभिवादन emit करें
@@ -1141,7 +1141,7 @@ Nextflow process के minimum required components क्या हैं?
 - [ ] Input, output, और script blocks
 - [ ] केवल एक script block
 
-और जानें: [1.1.1. The `process` definition](#111-the-process-definition)
+और जानें: [1.1.1. `process` definition](#111-process-definition)
 </quiz>
 
 <quiz>
@@ -1151,7 +1151,7 @@ Process में output block का purpose क्या है?
 - [x] Process से expected outputs declare करना
 - [ ] Environment variables define करना
 
-और जानें: [1.1.1. The `process` definition](#111-the-process-definition)
+और जानें: [1.1.1. `process` definition](#111-process-definition)
 </quiz>
 
 <quiz>
@@ -1182,7 +1182,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-और जानें: [1.2.2. Find the output and logs in the `work` directory](#122-find-the-output-and-logs-in-the-work-directory)
+और जानें: [1.2.2. `work` directory में output और logs खोजें](#122-work-directory-में-output-और-logs-खोजें)
 </quiz>
 
 <quiz>
@@ -1192,7 +1192,7 @@ work/a3/7be2fa.../
 - [x] उन processes को skip करता है जो पहले से successfully complete हो चुके हैं
 - [ ] Workflow का backup बनाता है
 
-और जानें: [4.1. Re-launch a workflow with `-resume`](#41-re-launch-a-workflow-with--resume)
+और जानें: [4.1. `-resume` के साथ workflow re-launch करें](#41--resume-के-साथ-workflow-re-launch-करें)
 </quiz>
 
 <quiz>
@@ -1202,7 +1202,7 @@ Workflow outputs publish करने के लिए default mode क्या
 - [ ] Files को output directory में move करना
 - [ ] Output directory में files compress करना
 
-और जानें: [2.3. Set the publish mode to copy](#23-set-the-publish-mode-to-copy)
+और जानें: [2.3. Publish mode को copy पर सेट करें](#23-publish-mode-को-copy-पर-सेट-करें)
 </quiz>
 
 <quiz>
@@ -1212,7 +1212,7 @@ Command line से Nextflow workflow को parameter value कैसे pass �
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-और जानें: [3.2. Set up a command-line parameter to capture user input](#32-set-up-a-command-line-parameter-to-capture-user-input)
+और जानें: [3.2. User input capture करने के लिए command-line parameter set up करें](#32-user-input-capture-करने-के-लिए-command-line-parameter-set-up-करें)
 </quiz>
 
 <quiz>

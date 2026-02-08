@@ -3,7 +3,7 @@
 ¡Felicitaciones por completar el curso de capacitación Hello Nextflow! 🎉
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -14,8 +14,8 @@
 
 ## Su viaje
 
-Comenzó con un flujo de trabajo muy básico que ejecutaba un comando codificado de forma fija.
-A lo largo de seis partes, transformó ese flujo de trabajo básico en un pipeline modular de múltiples pasos que ejercita características clave de Nextflow incluyendo canales, operadores, soporte integrado para contenedores y opciones de configuración.
+Comenzó con un workflow muy básico que ejecutaba un comando codificado de forma fija.
+A lo largo de seis partes, transformó ese workflow básico en un pipeline modular de múltiples pasos que ejercita características clave de Nextflow incluyendo canales, operadores, soporte integrado para contenedores y opciones de configuración.
 
 ### Lo que construyó
 

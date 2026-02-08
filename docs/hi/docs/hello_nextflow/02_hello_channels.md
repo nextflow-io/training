@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -111,7 +111,7 @@ greeting_ch = channel.of('Hello Channels!')
 
 Workflow block में, channel factory code add करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
     workflow {
@@ -127,7 +127,7 @@ Workflow block में, channel factory code add करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
@@ -149,7 +149,7 @@ Workflow block में, channel factory code add करो:
 
 Workflow block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -165,7 +165,7 @@ Workflow block में, निम्नलिखित code change करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -227,7 +227,7 @@ Nextflow channels इस तरह built हैं कि हम operators क�
 
 Workflow block में यह tiny line add करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -244,7 +244,7 @@ Workflow block में यह tiny line add करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
@@ -308,7 +308,7 @@ Conveniently, `channel.of()` channel factory जो हम use कर रहे 
 
 Workflow block से पहले, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // इनपुट के लिए एक channel बनाएं
@@ -316,7 +316,7 @@ Workflow block से पहले, निम्नलिखित code change �
                          .view()
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // इनपुट के लिए एक channel बनाएं
@@ -526,7 +526,7 @@ Specifically, हमें first process को dynamically file name generate �
 
 Process block में, निम्नलिखित code changes करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="6" hl_lines="7 11"
     process sayHello {
@@ -544,7 +544,7 @@ Process block में, निम्नलिखित code changes करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="6" hl_lines="7 11"
     process sayHello {
@@ -666,7 +666,7 @@ Common sense suggest करता है कि हमें single value के
 
 चलो `greetings_array` variable जो हमने अभी imagine किया उसे workflow block में add करके reality बनाते हैं:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
     workflow {
@@ -685,7 +685,7 @@ Common sense suggest करता है कि हमें single value के
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
@@ -710,7 +710,7 @@ Common sense suggest करता है कि हमें single value के
 
 Workflow block में, निम्नलिखित change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -729,7 +729,7 @@ Workflow block में, निम्नलिखित change करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -819,7 +819,7 @@ nextflow run hello-channels.nf
 
 Workflow block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="9"
     workflow {
@@ -839,7 +839,7 @@ Workflow block में, निम्नलिखित code change करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
@@ -873,7 +873,7 @@ Workflow block में, निम्नलिखित code change करो:
 
 Workflow block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-10"
     workflow {
@@ -894,7 +894,7 @@ Workflow block में, निम्नलिखित code change करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-9"
     workflow {
@@ -1011,7 +1011,7 @@ Part 1 में हमने जो `params.input` parameter set up किय�
 
 Parameter declaration में निम्नलिखित edit करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
@@ -1022,7 +1022,7 @@ Parameter declaration में निम्नलिखित edit करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
@@ -1041,7 +1041,7 @@ Parameter declaration में निम्नलिखित edit करो:
 
 Workflow block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
     workflow {
@@ -1060,7 +1060,7 @@ Workflow block में, निम्नलिखित code change करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
     workflow {
@@ -1146,7 +1146,7 @@ Operator apply करने के लिए, हम इसे पहले क�
 
 Workflow block में, `flatten()` को `splitcsv()` (uncommented) से replace करने के लिए निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
     workflow {
@@ -1165,7 +1165,7 @@ Workflow block में, `flatten()` को `splitcsv()` (uncommented) से r
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
     workflow {
@@ -1248,7 +1248,7 @@ Interestingly, यह भी fail होता है, लेकिन एक di
 
 ### 4.3. Greetings extract करने के लिए `map()` operator use करें
 
-[`map()`](https://www.nextflow.io/docs/latest/reference/operator.html#map) operator एक बहुत handy little tool है जो हमें channel की contents पर सभी प्रकार की mappings करने की अनुमति देता है।
+[`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) operator एक बहुत handy little tool है जो हमें channel की contents पर सभी प्रकार की mappings करने की अनुमति देता है।
 
 इस case में, हम इसे अपनी data file में प्रत्येक row से उस एक element को extract करने के लिए use करेंगे जो हम चाहते हैं।
 Syntax ऐसा दिखता है:
@@ -1265,7 +1265,7 @@ Syntax ऐसा दिखता है:
 
 Workflow block में, निम्नलिखित code change करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="9 10"
     workflow {
@@ -1286,7 +1286,7 @@ Workflow block में, निम्नलिखित code change करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {

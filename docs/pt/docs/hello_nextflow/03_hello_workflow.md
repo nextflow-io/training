@@ -1,7 +1,5 @@
 # Parte 3: Hello Workflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -109,7 +107,7 @@ Para isso, precisamos fazer três coisas:
 
 Para fazer a conversão das saudações para maiúsculas, vamos usar uma ferramenta UNIX clássica chamada `tr` para 'text replacement', com a seguinte sintaxe:
 
-```bash title="Sintaxe"
+```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
 ```
 
@@ -170,13 +168,13 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
     workflow {
 
         main:
-        // cria um canal para entradas de um arquivo CSV
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emite uma saudação
+        // emit a greeting
         sayHello(greeting_ch)
-        // converte a saudação para maiúsculas
+        // convert the greeting to uppercase
         convertToUpper()
 
         publish:
@@ -190,11 +188,11 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
     workflow {
 
         main:
-        // cria um canal para entradas de um arquivo CSV
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emite uma saudação
+        // emit a greeting
         sayHello(greeting_ch)
 
         publish:
@@ -222,14 +220,14 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // converte a saudação para maiúsculas
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // converte a saudação para maiúsculas
+        // convert the greeting to uppercase
         convertToUpper()
     ```
 
@@ -518,10 +516,10 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // converte a saudação para maiúsculas
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
 
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -529,7 +527,7 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="75"
-        // converte a saudação para maiúsculas
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
     }
     ```
@@ -596,7 +594,7 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -604,7 +602,7 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -616,19 +614,19 @@ Vamos também incluir algumas instruções `view()` para visualizar os estados a
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
 
-        // instruções view opcionais
-        convertToUpper.out.view { contents -> "Antes do collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "Depois do collect: $contents" }
+        // optional view statements
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -653,10 +651,10 @@ nextflow run hello-workflow.nf -resume
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
-    Antes do collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    Antes do collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Antes do collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    Depois do collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
     ```
 
 Ele é executado com sucesso, embora a saída de log possa parecer um pouco mais bagunçada do que isso (nós a limpamos para legibilidade).
@@ -697,19 +695,19 @@ Antes de passar para a próxima seção, recomendamos que você delete as instru
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
 
-        // instruções view opcionais
-        convertToUpper.out.view { contents -> "Antes do collect: $contents" }
-        convertToUpper.out.collect().view { contents -> "Depois do collect: $contents" }
+        // optional view statements
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
 
 Esta é basicamente a operação inversa do ponto 2.4.2.
@@ -851,14 +849,14 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     ```
 
@@ -946,7 +944,7 @@ No bloco de processo `collectGreetings`, faça as seguintes alterações de cód
         count_greetings = input_files.size()
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'Havia ${count_greetings} saudações neste lote.' > '${batch_name}-report.txt'
+        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
         """
     ```
 
@@ -1111,7 +1109,7 @@ Abra-o para verificar que o fluxo de trabalho relatou corretamente a contagem de
 ??? abstract "Conteúdo do arquivo"
 
     ```txt title="trio-report.txt"
-    Havia 3 saudações neste lote.
+    There were 3 greetings in this batch.
     ```
 
 <figure class="excalidraw">
@@ -1143,7 +1141,7 @@ Como você acessa a saída de um processo no bloco de fluxo de trabalho?
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Saiba mais: [1.4. Passe a saída do primeiro processo para o segundo processo](#14-passe-a-saída-do-primeiro-processo-para-o-segundo-processo)
+Saiba mais: [1.4. Passe a saída do primeiro processo para o segundo processo](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1153,7 +1151,7 @@ O que determina a ordem de execução de processos no Nextflow?
 - [x] Dependências de dados entre processos
 - [ ] Ordem aleatória para execução paralela
 
-Saiba mais: [1.4. Passe a saída do primeiro processo para o segundo processo](#14-passe-a-saída-do-primeiro-processo-para-o-segundo-processo)
+Saiba mais: [1.4. Passe a saída do primeiro processo para o segundo processo](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1172,7 +1170,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-Saiba mais: [2.4. Use um operador para coletar as saudações em uma única entrada](#24-use-um-operador-para-coletar-as-saudações-em-uma-única-entrada)
+Saiba mais: [2.4. Use um operador para coletar as saudações em uma única entrada](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1182,7 +1180,7 @@ Quando você deve usar o operador `collect()`?
 - [x] Quando um processo downstream precisa de todos os itens de um processo upstream
 - [ ] Quando você quer dividir dados entre múltiplos processos
 
-Saiba mais: [2.4. Use um operador para coletar as saudações em uma única entrada](#24-use-um-operador-para-coletar-as-saudações-em-uma-única-entrada)
+Saiba mais: [2.4. Use um operador para coletar as saudações em uma única entrada](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1192,7 +1190,7 @@ Como você acessa uma saída nomeada de um processo?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-Saiba mais: [4.1.2. Emita o arquivo de relatório e nomeie as saídas](#412-emita-o-arquivo-de-relatório-e-nomeie-as-saídas)
+Saiba mais: [4.1.2. Emita o arquivo de relatório e nomeie as saídas](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1202,7 +1200,7 @@ Qual é a sintaxe correta para nomear uma saída em um processo?
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-Saiba mais: [4.1.2. Emita o arquivo de relatório e nomeie as saídas](#412-emita-o-arquivo-de-relatório-e-nomeie-as-saídas)
+Saiba mais: [4.1.2. Emita o arquivo de relatório e nomeie as saídas](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1212,5 +1210,5 @@ Ao fornecer múltiplas entradas a um processo, o que deve ser verdadeiro?
 - [x] A ordem das entradas deve corresponder à ordem definida no bloco de entrada
 - [ ] Apenas duas entradas podem ser fornecidas por vez
 
-Saiba mais: [3. Passe parâmetros adicionais para um processo](#3-passe-parâmetros-adicionais-para-um-processo)
+Saiba mais: [3. Passe parâmetros adicionais para um processo](#3-pass-more-than-one-input-to-a-process)
 </quiz>

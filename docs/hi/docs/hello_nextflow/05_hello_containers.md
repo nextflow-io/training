@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -394,11 +394,11 @@ exit
 
 तुम अपने normal shell में वापस पाओगे।
 
-### सीख
+### सारांश
 
 तुम जानते हो कि container pull करना और इसे one-off या interactively run करना। तुम यह भी जानते हो कि अपने data को अपने container के भीतर से accessible कैसे बनाना, जो तुम्हें अपने system पर कोई software install किए बिना real data पर किसी भी tool को try करने देता है।
 
-### आगे क्या?
+### आगे क्या है?
 
 सीखो कि Nextflow processes के execution के लिए containers कैसे use करें।
 
@@ -1077,11 +1077,11 @@ nxf_launch() {
        ||     ||          i_____;----\.____i""\____\
 ```
 
-### सीख
+### सारांश
 
 तुम जानते हो कि Nextflow में processes run करने के लिए containers कैसे use करें।
 
-### आगे क्या?
+### आगे क्या है?
 
 Break लो!
 

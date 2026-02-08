@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=de" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=de" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -12,16 +12,16 @@
 :green_book: Das Videotranskript ist [hier](./transcripts/02_hello_channels.md) verfügbar.
 ///
 
-In Teil 1 dieses Kurses (Hello World) haben wir dir gezeigt, wie du eine variable Eingabe an einen process übergibst, indem du die Eingabe direkt im process-Aufruf angibst: `sayHello(params.input)`.
+In Teil 1 dieses Kurses (Hello World) haben wir dir gezeigt, wie du eine variable Eingabe an einen Prozess übergibst, indem du die Eingabe direkt im Prozess-Aufruf angibst: `sayHello(params.input)`.
 Das war ein bewusst vereinfachter Ansatz.
-In der Praxis hat dieser Ansatz erhebliche Einschränkungen; er funktioniert nämlich nur für sehr einfache Fälle, bei denen wir den process nur einmal mit einem einzelnen Wert ausführen möchten.
+In der Praxis hat dieser Ansatz erhebliche Einschränkungen; er funktioniert nämlich nur für sehr einfache Fälle, bei denen wir den Prozess nur einmal mit einem einzelnen Wert ausführen möchten.
 In den meisten realistischen Workflow-Anwendungsfällen wollen wir mehrere Werte verarbeiten (z.B. experimentelle Daten für mehrere Proben), daher brauchen wir einen ausgefeilteren Weg, um Eingaben zu handhaben.
 
 Dafür sind Nextflow [**Channels**](https://nextflow.io/docs/latest/channel.html) da.
 Channels sind Warteschlangen, die entwickelt wurden, um Eingaben effizient zu handhaben und sie von einem Schritt zum nächsten in mehrstufigen Workflows zu transportieren, während sie eingebaute Parallelität und viele zusätzliche Vorteile bieten.
 
-In diesem Teil des Kurses lernst du, wie du einen channel verwendest, um mehrere Eingaben aus verschiedenen Quellen zu handhaben.
-Du lernst auch, [**Operatoren**](https://nextflow.io/docs/latest/reference/operator.html) zu verwenden, um channel-Inhalte nach Bedarf zu transformieren.
+In diesem Teil des Kurses lernst du, wie du einen Channel verwendest, um mehrere Eingaben aus verschiedenen Quellen zu handhaben.
+Du lernst auch, [**Operatoren**](https://nextflow.io/docs/latest/reference/operator.html) zu verwenden, um Channel-Inhalte nach Bedarf zu transformieren.
 
 ??? info "Wie du von diesem Abschnitt aus beginnen kannst"
 
@@ -79,19 +79,19 @@ Wie zuvor findest du die Ausgabedatei `output.txt` im Verzeichnis `results/hello
     Hello Channels!
     ```
 
-Wenn das bei dir funktioniert hat, bist du bereit, etwas über channels zu lernen.
+Wenn das bei dir funktioniert hat, bist du bereit, etwas über Channels zu lernen.
 
 ---
 
-## 1. Variable Eingaben explizit über einen channel bereitstellen
+## 1. Variable Eingaben explizit über einen Channel bereitstellen
 
-Wir werden einen **channel** erstellen, um die variable Eingabe an den `sayHello()`-process zu übergeben, anstatt uns auf die implizite Handhabung zu verlassen, die bestimmte Einschränkungen hat.
+Wir werden einen **Channel** erstellen, um die variable Eingabe an den `sayHello()`-Prozess zu übergeben, anstatt uns auf die implizite Handhabung zu verlassen, die bestimmte Einschränkungen hat.
 
-### 1.1. Einen Eingabe-channel erstellen
+### 1.1. Einen Eingabe-Channel erstellen
 
-Es gibt verschiedene [**channel factories**](https://nextflow.io/docs/latest/reference/channel.html), die wir verwenden können, um einen channel einzurichten.
-Um die Dinge vorerst einfach zu halten, werden wir die grundlegendste channel factory namens [`channel.of`](https://nextflow.io/docs/latest/reference/channel.html#of) verwenden, die einen channel mit einem einzelnen Wert erstellt.
-Funktional wird dies ähnlich sein wie zuvor, aber anstatt Nextflow einen channel implizit erstellen zu lassen, tun wir dies jetzt explizit.
+Es gibt verschiedene [**Channel Factories**](https://nextflow.io/docs/latest/reference/channel.html), die wir verwenden können, um einen Channel einzurichten.
+Um die Dinge vorerst einfach zu halten, werden wir die grundlegendste Channel Factory namens [`channel.of`](https://nextflow.io/docs/latest/reference/channel.html#of) verwenden, die einen Channel mit einem einzelnen Wert erstellt.
+Funktional wird dies ähnlich sein wie zuvor, aber anstatt Nextflow einen Channel implizit erstellen zu lassen, tun wir dies jetzt explizit.
 
 Dies ist die Codezeile, die wir verwenden werden:
 
@@ -99,7 +99,7 @@ Dies ist die Codezeile, die wir verwenden werden:
 greeting_ch = channel.of('Hello Channels!')
 ```
 
-Dies erstellt einen channel namens `greeting_ch` unter Verwendung der `channel.of()` channel factory, die einen einfachen queue channel einrichtet, und lädt den String `'Hello Channels!'` als Begrüßungswert.
+Dies erstellt einen Channel namens `greeting_ch` unter Verwendung der `channel.of()` Channel Factory, die einen einfachen Queue Channel einrichtet, und lädt den String `'Hello Channels!'` als Begrüßungswert.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
@@ -107,9 +107,9 @@ Dies erstellt einen channel namens `greeting_ch` unter Verwendung der `channel.o
 
 !!! note "Hinweis"
 
-    Wir wechseln vorübergehend zurück zu fest codierten Strings, anstatt einen CLI-Parameter zu verwenden, um die Lesbarkeit zu verbessern. Wir werden zurück zu CLI-Parametern wechseln, sobald wir behandelt haben, was auf Ebene des channels passiert.
+    Wir wechseln vorübergehend zurück zu fest codierten Strings, anstatt einen CLI-Parameter zu verwenden, um die Lesbarkeit zu verbessern. Wir werden zurück zu CLI-Parametern wechseln, sobald wir behandelt haben, was auf Ebene des Channels passiert.
 
-Füge im workflow-Block den channel factory-Code hinzu:
+Füge im Workflow-Block den Channel Factory-Code hinzu:
 
 === "Nachher"
 
@@ -141,13 +141,13 @@ Füge im workflow-Block den channel factory-Code hinzu:
     }
     ```
 
-Dies ist noch nicht funktionsfähig, da wir die Eingabe für den process-Aufruf noch nicht umgestellt haben.
+Dies ist noch nicht funktionsfähig, da wir die Eingabe für den Prozess-Aufruf noch nicht umgestellt haben.
 
-### 1.2. Den channel als Eingabe zum process-Aufruf hinzufügen
+### 1.2. Den Channel als Eingabe zum Prozess-Aufruf hinzufügen
 
-Jetzt müssen wir unseren neu erstellten channel tatsächlich in den `sayHello()`-process-Aufruf einbinden und den CLI-Parameter ersetzen, den wir zuvor direkt bereitgestellt haben.
+Jetzt müssen wir unseren neu erstellten Channel tatsächlich in den `sayHello()`-Prozess-Aufruf einbinden und den CLI-Parameter ersetzen, den wir zuvor direkt bereitgestellt haben.
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -181,7 +181,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     }
     ```
 
-Dies sagt Nextflow, den `sayHello`-process auf den Inhalt des `greeting_ch`-channels auszuführen.
+Dies sagt Nextflow, den `sayHello`-Prozess auf den Inhalt des `greeting_ch`-Channels auszuführen.
 
 Jetzt ist unser Workflow richtig funktionsfähig; es ist das explizite Äquivalent zum Schreiben von `sayHello('Hello Channels!')`.
 
@@ -216,16 +216,16 @@ Du kannst das Ergebnisverzeichnis überprüfen, um dich zu vergewissern, dass da
 Wir haben also die Flexibilität unseres Workflows erhöht, während wir dasselbe Endergebnis erzielen.
 Das mag so erscheinen, als würden wir mehr Code für keinen greifbaren Nutzen schreiben, aber der Wert wird deutlich, sobald wir anfangen, mehr Eingaben zu handhaben.
 
-Als Vorschau darauf schauen wir uns noch eine Sache an, bevor wir weitermachen: einen kleinen, aber praktischen Vorteil der Verwendung eines expliziten channels zur Verwaltung von Dateneingaben.
+Als Vorschau darauf schauen wir uns noch eine Sache an, bevor wir weitermachen: einen kleinen, aber praktischen Vorteil der Verwendung eines expliziten Channels zur Verwaltung von Dateneingaben.
 
-### 1.4. `view()` verwenden, um channel-Inhalte zu inspizieren
+### 1.4. `view()` verwenden, um Channel-Inhalte zu inspizieren
 
-Nextflow channels sind so aufgebaut, dass wir mit Operatoren auf ihre Inhalte einwirken können, was wir später in diesem Kapitel ausführlich behandeln werden.
+Nextflow Channels sind so aufgebaut, dass wir mit Operatoren auf ihre Inhalte einwirken können, was wir später in diesem Kapitel ausführlich behandeln werden.
 
-Vorerst zeigen wir dir nur, wie du einen super einfachen Operator namens [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) verwendest, um die Inhalte eines channels zu inspizieren.
+Vorerst zeigen wir dir nur, wie du einen super einfachen Operator namens [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) verwendest, um die Inhalte eines Channels zu inspizieren.
 Du kannst `view()` als Debugging-Werkzeug betrachten, wie eine `print()`-Anweisung in Python oder deren Äquivalent in anderen Sprachen.
 
-Füge diese kleine Zeile zum workflow-Block hinzu:
+Füge diese kleine Zeile zum Workflow-Block hinzu:
 
 === "Nachher"
 
@@ -260,7 +260,7 @@ Füge diese kleine Zeile zum workflow-Block hinzu:
     }
     ```
 
-Die genaue Anzahl der Leerzeichen spielt keine Rolle, solange es ein Vielfaches von 4 ist; wir zielen nur darauf ab, den Anfang der `.view()`-Anweisung mit dem `.of()`-Teil der channel-Konstruktion auszurichten.
+Die genaue Anzahl der Leerzeichen spielt keine Rolle, solange es ein Vielfaches von 4 ist; wir zielen nur darauf ab, den Anfang der `.view()`-Anweisung mit dem `.of()`-Teil der Channel-Konstruktion auszurichten.
 
 Führe jetzt den Workflow erneut aus:
 
@@ -280,16 +280,16 @@ nextflow run hello-channels.nf
     Hello Channels!
     ```
 
-Wie du sehen kannst, gibt dies die channel-Inhalte in der Konsole aus.
-Hier haben wir nur ein Element, aber wenn wir im nächsten Abschnitt anfangen, mehrere Werte in den channel zu laden, wirst du sehen, dass dies so eingestellt ist, dass ein Element pro Zeile ausgegeben wird.
+Wie du sehen kannst, gibt dies die Channel-Inhalte in der Konsole aus.
+Hier haben wir nur ein Element, aber wenn wir im nächsten Abschnitt anfangen, mehrere Werte in den Channel zu laden, wirst du sehen, dass dies so eingestellt ist, dass ein Element pro Zeile ausgegeben wird.
 
 ### Fazit
 
-Du weißt, wie du eine grundlegende channel factory verwendest, um eine Eingabe an einen process zu übergeben.
+Du weißt, wie du eine grundlegende Channel Factory verwendest, um eine Eingabe an einen Prozess zu übergeben.
 
 ### Wie geht es weiter?
 
-Lerne, wie du channels verwendest, damit der Workflow über mehrere Eingabewerte iteriert.
+Lerne, wie du Channels verwendest, damit der Workflow über mehrere Eingabewerte iteriert.
 
 ---
 
@@ -297,16 +297,16 @@ Lerne, wie du channels verwendest, damit der Workflow über mehrere Eingabewerte
 
 Workflows werden typischerweise auf Stapel von Eingaben ausgeführt, die in großen Mengen verarbeitet werden sollen, daher wollen wir den Workflow aufrüsten, um mehrere Eingabewerte zu akzeptieren.
 
-### 2.1. Mehrere Begrüßungen in den Eingabe-channel laden
+### 2.1. Mehrere Begrüßungen in den Eingabe-Channel laden
 
-Praktischerweise ist die `channel.of()` channel factory, die wir verwendet haben, durchaus bereit, mehr als einen Wert zu akzeptieren, daher müssen wir das überhaupt nicht ändern.
-Wir können einfach mehrere Werte in den channel laden.
+Praktischerweise ist die `channel.of()` Channel Factory, die wir verwendet haben, durchaus bereit, mehr als einen Wert zu akzeptieren, daher müssen wir das überhaupt nicht ändern.
+Wir können einfach mehrere Werte in den Channel laden.
 
 Machen wir sie zu `'Hello'`, `'Bonjour'` und `'Holà'`.
 
 #### 2.1.1. Weitere Begrüßungen hinzufügen
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -349,7 +349,7 @@ nextflow run hello-channels.nf
     ```
 
 Es scheint tatsächlich gut gelaufen zu sein.
-Der Ausführungsmonitor zeigt, dass `3 von 3` Aufrufe für den `sayHello`-process gemacht wurden, und wir sehen die drei Begrüßungen, die durch die `view()`-Anweisung aufgelistet werden, eine pro Zeile wie versprochen.
+Der Ausführungsmonitor zeigt, dass `3 von 3` Aufrufe für den `sayHello`-Prozess gemacht wurden, und wir sehen die drei Begrüßungen, die durch die `view()`-Anweisung aufgelistet werden, eine pro Zeile wie versprochen.
 
 Allerdings gibt es im Ergebnisverzeichnis immer noch nur eine Ausgabe:
 
@@ -377,7 +377,7 @@ Kannst du dir vorstellen, warum das so sein könnte?
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel-multi.svg"
 </figure>
 
-_Im Diagramm wird der channel in Grün dargestellt, und die Reihenfolge der Elemente wird wie Murmeln in einer Röhre dargestellt: das zuerst geladene ist rechts, dann das zweite in der Mitte, dann das dritte links._
+_Im Diagramm wird der Channel in Grün dargestellt, und die Reihenfolge der Elemente wird wie Murmeln in einer Röhre dargestellt: das zuerst geladene ist rechts, dann das zweite in der Mitte, dann das dritte links._
 
 Wenn wir zurück auf den Ausführungsmonitor schauen, hat er uns nur einen Unterverzeichnispfad gegeben (`f4/c9962c`).
 Lass uns dort hineinschauen.
@@ -404,14 +404,14 @@ Lass uns dort hineinschauen.
 
 Das ist nicht einmal dieselbe Begrüßung, die wir im Ergebnisverzeichnis bekommen haben! Was geht hier vor?
 
-An diesem Punkt müssen wir dir sagen, dass das ANSI-Logging-System standardmäßig das Logging von mehreren Aufrufen desselben process auf derselben Zeile schreibt.
-Also landen die Statusmeldungen von allen drei Aufrufen des `sayHello()`-process an derselben Stelle.
+An diesem Punkt müssen wir dir sagen, dass das ANSI-Logging-System standardmäßig das Logging von mehreren Aufrufen desselben Prozesses auf derselben Zeile schreibt.
+Also landen die Statusmeldungen von allen drei Aufrufen des `sayHello()`-Prozesses an derselben Stelle.
 
-Glücklicherweise können wir dieses Verhalten deaktivieren, um die vollständige Liste der process-Aufrufe zu sehen.
+Glücklicherweise können wir dieses Verhalten deaktivieren, um die vollständige Liste der Prozess-Aufrufe zu sehen.
 
 #### 2.1.3. Den Befehl erneut mit der Option `-ansi-log false` ausführen
 
-Um das Logging zu erweitern und eine Zeile pro process-Aufruf anzuzeigen, füge `-ansi-log false` zum Befehl hinzu.
+Um das Logging zu erweitern und eine Zeile pro Prozess-Aufruf anzuzeigen, füge `-ansi-log false` zum Befehl hinzu.
 
 ```bash
 nextflow run hello-channels.nf -ansi-log false
@@ -430,7 +430,7 @@ nextflow run hello-channels.nf -ansi-log false
     [f4/ea10a6] Submitted process > sayHello (3)
     ```
 
-Diesmal sehen wir alle drei process-Ausführungen und ihre zugehörigen work-Unterverzeichnisse in der Ausgabe aufgelistet.
+Diesmal sehen wir alle drei Prozess-Ausführungen und ihre zugehörigen Work-Unterverzeichnisse in der Ausgabe aufgelistet.
 
 Das ist viel besser, zumindest für einen einfachen Workflow.
 Für einen komplexen Workflow oder eine große Anzahl von Eingaben würde die vollständige Liste, die im Terminal ausgegeben wird, etwas überwältigend werden.
@@ -442,7 +442,7 @@ Deshalb ist `-ansi-log false` nicht das Standardverhalten.
     Im komprimierten Modus meldet Nextflow, ob Aufrufe erfolgreich abgeschlossen wurden oder nicht.
     In diesem erweiterten Modus wird nur gemeldet, dass sie eingereicht wurden.
 
-Wie auch immer, jetzt da wir die Unterverzeichnisse jedes process-Aufrufs haben, können wir nach ihren Logs und Ausgaben suchen.
+Wie auch immer, jetzt da wir die Unterverzeichnisse jedes Prozess-Aufrufs haben, können wir nach ihren Logs und Ausgaben suchen.
 
 ??? abstract "Verzeichnisinhalte"
 
@@ -496,26 +496,26 @@ Wie auch immer, jetzt da wir die Unterverzeichnisse jedes process-Aufrufs haben,
     Holà
     ```
 
-Dies zeigt, dass alle drei processes erfolgreich ausgeführt wurden (juhu).
+Dies zeigt, dass alle drei Prozesse erfolgreich ausgeführt wurden (juhu).
 
 Allerdings haben wir immer noch das Problem, dass es nur eine Ausgabedatei im Ergebnisverzeichnis gibt.
 
-Du erinnerst dich vielleicht, dass wir den Ausgabedateinamen für den `sayHello`-process fest codiert haben, sodass alle drei Aufrufe eine Datei namens `output.txt` produziert haben.
+Du erinnerst dich vielleicht, dass wir den Ausgabedateinamen für den `sayHello`-Prozess fest codiert haben, sodass alle drei Aufrufe eine Datei namens `output.txt` produziert haben.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-task-dirs.svg"
 </figure>
 
-Solange die Ausgabedateien in den work-Unterverzeichnissen bleiben, isoliert von den anderen processes, ist das in Ordnung.
+Solange die Ausgabedateien in den Work-Unterverzeichnissen bleiben, isoliert von den anderen Prozessen, ist das in Ordnung.
 Aber wenn sie in dasselbe Ergebnisverzeichnis veröffentlicht werden, wird die, die zuerst dort kopiert wurde, von der nächsten überschrieben, und so weiter.
 
 ### 2.2. Sicherstellen, dass die Ausgabedateinamen eindeutig sind
 
 Wir können weiterhin alle Ausgaben in dasselbe Ergebnisverzeichnis veröffentlichen, aber wir müssen sicherstellen, dass sie eindeutige Namen haben werden.
-Genauer gesagt müssen wir den ersten process so modifizieren, dass er einen Dateinamen dynamisch generiert, sodass die endgültigen Dateinamen eindeutig sein werden.
+Genauer gesagt müssen wir den ersten Prozess so modifizieren, dass er einen Dateinamen dynamisch generiert, sodass die endgültigen Dateinamen eindeutig sein werden.
 
 Wie machen wir also die Dateinamen eindeutig?
-Ein gängiger Weg, das zu tun, ist, ein eindeutiges Stück Metadaten aus den Eingaben (die vom Eingabe-channel empfangen wurden) als Teil des Ausgabedateinamens zu verwenden.
+Ein gängiger Weg, das zu tun, ist, ein eindeutiges Stück Metadaten aus den Eingaben (die vom Eingabe-Channel empfangen wurden) als Teil des Ausgabedateinamens zu verwenden.
 Hier werden wir der Einfachheit halber nur die Begrüßung selbst verwenden, da sie nur ein kurzer String ist, und sie dem Basis-Ausgabedateinamen voranstellen.
 
 <figure class="excalidraw">
@@ -524,7 +524,7 @@ Hier werden wir der Einfachheit halber nur die Begrüßung selbst verwenden, da 
 
 #### 2.2.1. Einen dynamischen Ausgabedateinamen konstruieren
 
-Nimm im process-Block die folgenden Codeänderungen vor:
+Nimm im Prozess-Block die folgenden Codeänderungen vor:
 
 === "Nachher"
 
@@ -568,7 +568,7 @@ Stelle sicher, dass du `output.txt` sowohl in der Ausgabedefinition als auch im 
 
     In der Ausgabedefinition MUSST du doppelte Anführungszeichen um den Ausgabedateinamensausdruck verwenden (NICHT einfache Anführungszeichen), sonst schlägt es fehl.
 
-Dies sollte jedes Mal einen eindeutigen Ausgabedateinamen produzieren, wenn der process aufgerufen wird, sodass er von den Ausgaben anderer Aufrufe desselben process im Ausgabeverzeichnis unterschieden werden kann.
+Dies sollte jedes Mal einen eindeutigen Ausgabedateinamen produzieren, wenn der Prozess aufgerufen wird, sodass er von den Ausgaben anderer Aufrufe desselben Prozesses im Ausgabeverzeichnis unterschieden werden kann.
 
 #### 2.2.2. Den Workflow ausführen
 
@@ -626,30 +626,30 @@ Erfolg! Jetzt können wir so viele Begrüßungen hinzufügen, wie wir möchten, 
 !!! tip "Tipp"
 
     In der Praxis ist das Benennen von Dateien basierend auf den Eingabedaten selbst fast immer unpraktisch.
-    Der bessere Weg, dynamische Dateinamen zu generieren, ist, Metadaten zusammen mit den Eingabedateien an einen process zu übergeben.
+    Der bessere Weg, dynamische Dateinamen zu generieren, ist, Metadaten zusammen mit den Eingabedateien an einen Prozess zu übergeben.
     Die Metadaten werden typischerweise über ein 'Sample Sheet' oder Äquivalente bereitgestellt.
     Du wirst später in deinem Nextflow-Training lernen, wie du das machst (siehe [Metadaten-Side Quest](../side_quests/metadata.md)).
 
 ### Fazit
 
-Du weißt, wie du mehrere Eingabeelemente durch einen channel führst.
+Du weißt, wie du mehrere Eingabeelemente durch einen Channel führst.
 
 ### Wie geht es weiter?
 
-Lerne, einen Operator zu verwenden, um die Inhalte eines channels zu transformieren.
+Lerne, einen Operator zu verwenden, um die Inhalte eines Channels zu transformieren.
 
 ---
 
 ## 3. Mehrere Eingaben über ein Array bereitstellen
 
-Wir haben dir gerade gezeigt, wie du mehrere Eingabeelemente handhabst, die direkt in der channel factory fest codiert waren.
+Wir haben dir gerade gezeigt, wie du mehrere Eingabeelemente handhabst, die direkt in der Channel Factory fest codiert waren.
 Was ist, wenn wir diese mehreren Eingaben auf eine andere Weise bereitstellen wollten?
 
 Stell dir zum Beispiel vor, wir richten eine Eingabevariable ein, die ein Array von Elementen enthält wie dieses:
 
 `greetings_array = ['Hello','Bonjour','Holà']`
 
-Können wir das in unseren Ausgabe-channel laden und erwarten, dass es funktioniert?
+Können wir das in unseren Channel laden und erwarten, dass es funktioniert?
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-array.svg"
@@ -657,14 +657,14 @@ Können wir das in unseren Ausgabe-channel laden und erwarten, dass es funktioni
 
 Lass uns das herausfinden.
 
-### 3.1. Ein Array von Werten als Eingabe für den channel bereitstellen
+### 3.1. Ein Array von Werten als Eingabe für den Channel bereitstellen
 
 Der gesunde Menschenverstand legt nahe, dass wir einfach ein Array von Werten anstelle eines einzelnen Wertes übergeben können sollten.
-Lass uns es versuchen; wir müssen die Eingabevariable einrichten und sie in die channel factory laden.
+Lass uns es versuchen; wir müssen die Eingabevariable einrichten und sie in die Channel Factory laden.
 
 #### 3.1.1. Die Eingabevariable einrichten
 
-Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, Realität werden lassen, indem wir sie zum workflow-Block hinzufügen:
+Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, Realität werden lassen, indem wir sie zum Workflow-Block hinzufügen:
 
 === "Nachher"
 
@@ -704,11 +704,11 @@ Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, R
 
 Dies ist noch nicht funktionsfähig, wir haben nur eine Deklaration für das Array hinzugefügt.
 
-#### 3.1.2. Das Array von Begrüßungen als Eingabe für die channel factory setzen
+#### 3.1.2. Das Array von Begrüßungen als Eingabe für die Channel Factory setzen
 
-Jetzt werden wir die Werte `'Hello','Bonjour','Holà'`, die derzeit in der channel factory fest codiert sind, durch das `greetings_array` ersetzen, das wir gerade erstellt haben.
+Jetzt werden wir die Werte `'Hello','Bonjour','Holà'`, die derzeit in der Channel Factory fest codiert sind, durch das `greetings_array` ersetzen, das wir gerade erstellt haben.
 
-Nimm im workflow-Block die folgende Änderung vor:
+Nimm im Workflow-Block die folgende Änderung vor:
 
 === "Nachher"
 
@@ -796,28 +796,28 @@ Oh nein! Es gibt einen Fehler!
 
 Schau dir die Ausgabe von `view()` und die Fehlermeldungen an.
 
-Es sieht so aus, als hätte Nextflow versucht, einen einzelnen process-Aufruf auszuführen, wobei `[Hello, Bonjour, Holà]` als Stringwert verwendet wurde, anstatt die drei Strings im Array als separate Werte zu verwenden.
+Es sieht so aus, als hätte Nextflow versucht, einen einzelnen Prozess-Aufruf auszuführen, wobei `[Hello, Bonjour, Holà]` als Stringwert verwendet wurde, anstatt die drei Strings im Array als separate Werte zu verwenden.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-array-fail.svg"
 </figure>
 
 Es ist also die 'Verpackung', die das Problem verursacht.
-Wie bringen wir Nextflow dazu, das Array zu entpacken und die einzelnen Strings in den channel zu laden?
+Wie bringen wir Nextflow dazu, das Array zu entpacken und die einzelnen Strings in den Channel zu laden?
 
-### 3.2. Einen Operator verwenden, um channel-Inhalte zu transformieren
+### 3.2. Einen Operator verwenden, um Channel-Inhalte zu transformieren
 
 Hier kommen [**Operatoren**](https://nextflow.io/docs/latest/reference/operator.html) ins Spiel.
 Du hast bereits den `.view()`-Operator verwendet, der nur hineinschaut, was drin ist.
-Jetzt werden wir uns Operatoren ansehen, die es uns ermöglichen, auf die Inhalte eines channels einzuwirken.
+Jetzt werden wir uns Operatoren ansehen, die es uns ermöglichen, auf die Inhalte eines Channels einzuwirken.
 
 Wenn du durch die [Liste der Operatoren](https://nextflow.io/docs/latest/reference/operator.html) in der Nextflow-Dokumentation blätterst, wirst du [`flatten()`](https://nextflow.io/docs/latest/reference/operator.html#flatten) finden, das genau das tut, was wir brauchen: den Inhalt eines Arrays entpacken und sie als einzelne Elemente ausgeben.
 
 #### 3.2.1. Den `flatten()`-Operator hinzufügen
 
-Um den `flatten()`-Operator auf unseren Eingabe-channel anzuwenden, hängen wir ihn an die channel factory-Deklaration an.
+Um den `flatten()`-Operator auf unseren Eingabe-Channel anzuwenden, hängen wir ihn an die Channel Factory-Deklaration an.
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -858,7 +858,7 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     }
     ```
 
-Hier haben wir den Operator für die Lesbarkeit in der nächsten Zeile hinzugefügt, aber du kannst Operatoren auch auf derselben Zeile wie die channel factory hinzufügen, wenn du möchtest, so:
+Hier haben wir den Operator für die Lesbarkeit in der nächsten Zeile hinzugefügt, aber du kannst Operatoren auch auf derselben Zeile wie die Channel Factory hinzufügen, wenn du möchtest, so:
 `greeting_ch = channel.of(greetings_array).view().flatten()`
 
 <figure class="excalidraw">
@@ -867,11 +867,11 @@ Hier haben wir den Operator für die Lesbarkeit in der nächsten Zeile hinzugef�
 
 #### 3.2.2. Die `view()`-Anweisung(en) verfeinern
 
-Wir könnten dies jetzt sofort ausführen, um zu testen, ob es funktioniert, aber während wir dabei sind, werden wir verfeinern, wie wir die channel-Inhalte inspizieren.
+Wir könnten dies jetzt sofort ausführen, um zu testen, ob es funktioniert, aber während wir dabei sind, werden wir verfeinern, wie wir die Channel-Inhalte inspizieren.
 
 Wir wollen den Inhalt vor und nach der Anwendung des `flatten()`-Operators vergleichen können, also werden wir ein zweites hinzufügen, UND wir werden etwas Code hinzufügen, um sie in der Ausgabe deutlicher zu beschriften.
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -916,15 +916,15 @@ Nimm im workflow-Block die folgende Codeänderung vor:
 
 Du siehst, wir haben eine zweite `.view`-Anweisung hinzugefügt, und für jede von ihnen haben wir die leeren Klammern (`()`) durch geschweifte Klammern mit etwas Code ersetzt, wie `{ greeting -> "Before flatten: $greeting" }`.
 
-Diese werden _closures_ genannt. Der Code, den sie enthalten, wird für jedes Element im channel ausgeführt.
-Wir definieren eine temporäre Variable für den inneren Wert, hier `greeting` genannt (aber es könnte ein beliebiger Name sein), die nur innerhalb des Gültigkeitsbereichs dieser closure verwendet wird.
+Diese werden _Closures_ genannt. Der Code, den sie enthalten, wird für jedes Element im Channel ausgeführt.
+Wir definieren eine temporäre Variable für den inneren Wert, hier `greeting` genannt (aber es könnte ein beliebiger Name sein), die nur innerhalb des Gültigkeitsbereichs dieser Closure verwendet wird.
 
-In diesem Beispiel repräsentiert `$greeting` jedes einzelne Element, das in den channel geladen wurde.
+In diesem Beispiel repräsentiert `$greeting` jedes einzelne Element, das in den Channel geladen wurde.
 Dies führt zu sauber beschrifteter Konsolenausgabe.
 
 !!! info
 
-    In einigen Pipelines siehst du möglicherweise eine spezielle Variable namens `$it`, die innerhalb von Operator-closures verwendet wird.
+    In einigen Pipelines siehst du möglicherweise eine spezielle Variable namens `$it`, die innerhalb von Operator-Closures verwendet wird.
     Dies ist eine _implizite_ Variable, die einen Kurzform-Zugriff auf die innere Variable ermöglicht,
     ohne sie mit einem `->` definieren zu müssen.
 
@@ -953,21 +953,21 @@ nextflow run hello-channels.nf
     After flatten: Holà
     ```
 
-Diesmal funktioniert es UND gibt uns den zusätzlichen Einblick, wie die Inhalte des channels vor und nach der Ausführung des `flatten()`-Operators aussehen.
+Diesmal funktioniert es UND gibt uns den zusätzlichen Einblick, wie die Inhalte des Channels vor und nach der Ausführung des `flatten()`-Operators aussehen.
 
-- Eine einzelne `Before flatten:`-Anweisung, weil zu diesem Zeitpunkt der channel ein Element enthält, das ursprüngliche Array.
-- Drei separate `After flatten:`-Anweisungen, eine für jede Begrüßung, die jetzt einzelne Elemente im channel sind.
+- Eine einzelne `Before flatten:`-Anweisung, weil zu diesem Zeitpunkt der Channel ein Element enthält, das ursprüngliche Array.
+- Drei separate `After flatten:`-Anweisungen, eine für jede Begrüßung, die jetzt einzelne Elemente im Channel sind.
 
 Wichtig ist, dass dies bedeutet, dass jedes Element jetzt separat vom Workflow verarbeitet werden kann.
 
 !!! tip "Tipp"
 
-    Es ist technisch möglich, dieselben Ergebnisse zu erzielen, indem man eine andere channel factory verwendet, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), die einen impliziten Mapping-Schritt in ihrer Operation enthält.
+    Es ist technisch möglich, dieselben Ergebnisse zu erzielen, indem man eine andere Channel Factory verwendet, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), die einen impliziten Mapping-Schritt in ihrer Operation enthält.
     Hier haben wir uns entschieden, das nicht zu verwenden, um die Verwendung eines Operators an einem einfachen Anwendungsfall zu demonstrieren.
 
 ### Fazit
 
-Du weißt, wie du einen Operator wie `flatten()` verwendest, um die Inhalte eines channels zu transformieren, und wie du den `view()`-Operator verwendest, um channel-Inhalte vor und nach der Anwendung eines Operators zu inspizieren.
+Du weißt, wie du einen Operator wie `flatten()` verwendest, um die Inhalte eines Channels zu transformieren, und wie du den `view()`-Operator verwendest, um Channel-Inhalte vor und nach der Anwendung eines Operators zu inspizieren.
 
 ### Wie geht es weiter?
 
@@ -1002,7 +1002,7 @@ Lass uns sehen, wie wir das bewerkstelligen können.
 Um loszulegen, müssen wir zwei wichtige Änderungen am Skript vornehmen:
 
 - Den Eingabeparameter so umstellen, dass er auf die CSV-Datei zeigt
-- Die channel factory auf eine umstellen, die für das Handhaben einer Datei ausgelegt ist
+- Die Channel Factory auf eine umstellen, die für das Handhaben einer Datei ausgelegt ist
 
 #### 4.1.1. Den Eingabeparameter so umstellen, dass er auf die CSV-Datei zeigt
 
@@ -1034,12 +1034,12 @@ Nimm die folgende Änderung an der Parameterdeklaration vor:
 Dies setzt voraus, dass die Datei am selben Ort wie der Workflow-Code liegt.
 Wie du mit anderen Datenspeicherorten umgehst, lernst du in späteren Kursen.
 
-#### 4.1.2. Zu einer channel factory wechseln, die für das Handhaben einer Datei ausgelegt ist
+#### 4.1.2. Zu einer Channel Factory wechseln, die für das Handhaben einer Datei ausgelegt ist
 
-Da wir jetzt eine Datei anstelle von einfachen Strings als Eingabe verwenden wollen, können wir die `channel.of()` channel factory von vorher nicht verwenden.
-Wir müssen zu einer neuen channel factory wechseln, [`channel.fromPath()`](https://nextflow.io/docs/latest/reference/channel.html#frompath), die einige eingebaute Funktionalitäten für das Handhaben von Dateipfaden hat.
+Da wir jetzt eine Datei anstelle von einfachen Strings als Eingabe verwenden wollen, können wir die `channel.of()` Channel Factory von vorher nicht verwenden.
+Wir müssen zu einer neuen Channel Factory wechseln, [`channel.fromPath()`](https://nextflow.io/docs/latest/reference/channel.html#frompath), die einige eingebaute Funktionalitäten für das Handhaben von Dateipfaden hat.
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -1081,12 +1081,12 @@ Nimm im workflow-Block die folgende Codeänderung vor:
     }
     ```
 
-Du wirst bemerken, dass wir die channel-Eingabe zurück zu `param.input` gewechselt und die `greetings_array`-Deklaration gelöscht haben, da wir sie nicht mehr brauchen werden.
+Du wirst bemerken, dass wir die Channel-Eingabe zurück zu `param.input` gewechselt und die `greetings_array`-Deklaration gelöscht haben, da wir sie nicht mehr brauchen werden.
 Wir haben auch `flatten()` und die zweite `view()`-Anweisung auskommentiert.
 
 #### 4.1.3. Den Workflow ausführen
 
-Lass uns versuchen, den Workflow mit der neuen channel factory und der Eingabedatei auszuführen.
+Lass uns versuchen, den Workflow mit der neuen Channel Factory und der Eingabedatei auszuführen.
 
 ```bash
 nextflow run hello-channels.nf
@@ -1129,10 +1129,10 @@ Oh nein, es funktioniert nicht. Schau dir den Anfang der Konsolenausgabe und die
 Der Teil `Command executed:` ist hier besonders hilfreich.
 
 Das sieht vielleicht ein bisschen vertraut aus.
-Es sieht so aus, als hätte Nextflow versucht, einen einzelnen process-Aufruf auszuführen, wobei der Dateipfad selbst als Stringwert verwendet wurde.
+Es sieht so aus, als hätte Nextflow versucht, einen einzelnen Prozess-Aufruf auszuführen, wobei der Dateipfad selbst als Stringwert verwendet wurde.
 Also hat es den Dateipfad korrekt aufgelöst, aber es hat nicht wirklich seinen Inhalt geparst, was wir wollten.
 
-Wie bringen wir Nextflow dazu, die Datei zu öffnen und ihren Inhalt in den channel zu laden?
+Wie bringen wir Nextflow dazu, die Datei zu öffnen und ihren Inhalt in den Channel zu laden?
 
 Klingt so, als bräuchten wir einen weiteren [Operator](https://nextflow.io/docs/latest/reference/operator.html)!
 
@@ -1140,11 +1140,11 @@ Klingt so, als bräuchten wir einen weiteren [Operator](https://nextflow.io/docs
 
 Wenn wir wieder durch die Liste der Operatoren schauen, finden wir [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), das dafür ausgelegt ist, CSV-formatierten Text zu parsen und zu teilen.
 
-#### 4.2.1. `splitCsv()` auf den channel anwenden
+#### 4.2.1. `splitCsv()` auf den Channel anwenden
 
-Um den Operator anzuwenden, hängen wir ihn wie zuvor an die channel factory-Zeile an.
+Um den Operator anzuwenden, hängen wir ihn wie zuvor an die Channel Factory-Zeile an.
 
-Nimm im workflow-Block die folgende Codeänderung vor, um `flatten()` durch `splitcsv()` zu ersetzen (nicht auskommentiert):
+Nimm im Workflow-Block die folgende Codeänderung vor, um `flatten()` durch `splitcsv()` zu ersetzen (nicht auskommentiert):
 
 === "Nachher"
 
@@ -1233,7 +1233,7 @@ nextflow run hello-channels.nf
     ```
 
 Interessanterweise schlägt dies auch fehl, aber mit einem anderen Fehler.
-Diesmal hat Nextflow den Inhalt der Datei geparst (juhu!), aber es hat jede Zeile als Array geladen, und jedes Array ist ein Element im channel.
+Diesmal hat Nextflow den Inhalt der Datei geparst (juhu!), aber es hat jede Zeile als Array geladen, und jedes Array ist ein Element im Channel.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-fail.svg"
@@ -1242,13 +1242,13 @@ Diesmal hat Nextflow den Inhalt der Datei geparst (juhu!), aber es hat jede Zeil
 Wir müssen ihm sagen, dass es nur die erste Spalte in jeder Zeile nehmen soll.
 Wie entpacken wir das also?
 
-Wir haben zuvor `flatten()` verwendet, um die Inhalte eines channels zu entpacken, aber das würde hier nicht funktionieren, weil flatten _alles_ entpackt (versuche es gerne, wenn du es selbst sehen möchtest).
+Wir haben zuvor `flatten()` verwendet, um die Inhalte eines Channels zu entpacken, aber das würde hier nicht funktionieren, weil flatten _alles_ entpackt (versuche es gerne, wenn du es selbst sehen möchtest).
 
 Stattdessen werden wir einen anderen Operator namens `map()` verwenden, der wirklich nützlich ist und in Nextflow-Pipelines häufig vorkommt.
 
 ### 4.3. Den `map()`-Operator verwenden, um die Begrüßungen zu extrahieren
 
-Der [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map)-Operator ist ein sehr praktisches kleines Werkzeug, das es uns ermöglicht, alle Arten von Mappings auf die Inhalte eines channels durchzuführen.
+Der [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map)-Operator ist ein sehr praktisches kleines Werkzeug, das es uns ermöglicht, alle Arten von Mappings auf die Inhalte eines Channels durchzuführen.
 
 In diesem Fall werden wir ihn verwenden, um das eine Element zu extrahieren, das wir aus jeder Zeile in unserer Datendatei wollen.
 So sieht die Syntax aus:
@@ -1257,13 +1257,13 @@ So sieht die Syntax aus:
 .map { row -> row[0] }
 ```
 
-Das bedeutet 'für jede Zeile im channel, nimm das 0. (erste) Element, das sie enthält'.
+Das bedeutet 'für jede Zeile im Channel, nimm das 0. (erste) Element, das sie enthält'.
 
 Also wenden wir das auf unser CSV-Parsing an.
 
-#### 4.3.1. `map()` auf den channel anwenden
+#### 4.3.1. `map()` auf den Channel anwenden
 
-Nimm im workflow-Block die folgende Codeänderung vor:
+Nimm im Workflow-Block die folgende Codeänderung vor:
 
 === "Nachher"
 
@@ -1337,9 +1337,9 @@ Diesmal sollte es ohne Fehler laufen.
 
 Wenn du dir die Ausgabe der `view()`-Anweisungen anschaust, siehst du Folgendes:
 
-- Eine einzelne `Before splitCsv:`-Anweisung: zu diesem Zeitpunkt enthält der channel ein Element, den ursprünglichen Dateipfad.
+- Eine einzelne `Before splitCsv:`-Anweisung: zu diesem Zeitpunkt enthält der Channel ein Element, den ursprünglichen Dateipfad.
 - Drei separate `After splitCsv:`-Anweisungen: eine für jede Begrüßung, aber jede ist in einem Array enthalten, das dieser Zeile in der Datei entspricht.
-- Drei separate `After map:`-Anweisungen: eine für jede Begrüßung, die jetzt einzelne Elemente im channel sind.
+- Drei separate `After map:`-Anweisungen: eine für jede Begrüßung, die jetzt einzelne Elemente im Channel sind.
 
 _Beachte, dass die Zeilen in deiner Ausgabe in einer anderen Reihenfolge erscheinen können._
 
@@ -1349,15 +1349,15 @@ _Beachte, dass die Zeilen in deiner Ausgabe in einer anderen Reihenfolge erschei
 
 Du kannst auch die Ausgabedateien ansehen, um zu überprüfen, dass jede Begrüßung korrekt extrahiert und durch den Workflow verarbeitet wurde.
 
-Wir haben dasselbe Ergebnis wie zuvor erzielt, aber jetzt haben wir viel mehr Flexibilität, um weitere Elemente zum channel von Begrüßungen hinzuzufügen, die wir verarbeiten möchten, indem wir eine Eingabedatei modifizieren, ohne Code zu ändern.
+Wir haben dasselbe Ergebnis wie zuvor erzielt, aber jetzt haben wir viel mehr Flexibilität, um weitere Elemente zum Channel von Begrüßungen hinzuzufügen, die wir verarbeiten möchten, indem wir eine Eingabedatei modifizieren, ohne Code zu ändern.
 Du wirst anspruchsvollere Ansätze für das Handhaben komplexer Eingaben in einem späteren Training lernen.
 
 ### Fazit
 
-Du weißt, wie du den `.fromPath()` channel-Konstruktor und die Operatoren `splitCsv()` und `map()` verwendest, um eine Datei mit Eingabewerten einzulesen und sie angemessen zu handhaben.
+Du weißt, wie du den `.fromPath()` Channel-Konstruktor und die Operatoren `splitCsv()` und `map()` verwendest, um eine Datei mit Eingabewerten einzulesen und sie angemessen zu handhaben.
 
-Allgemeiner hast du ein grundlegendes Verständnis davon, wie Nextflow **channels** verwendet, um Eingaben für processes zu verwalten, und **Operatoren**, um ihre Inhalte zu transformieren.
-Du hast auch gesehen, wie channels parallele Ausführung implizit handhaben.
+Allgemeiner hast du ein grundlegendes Verständnis davon, wie Nextflow **Channels** verwendet, um Eingaben für Prozesse zu verwalten, und **Operatoren**, um ihre Inhalte zu transformieren.
+Du hast auch gesehen, wie Channels parallele Ausführung implizit handhaben.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-parallel.svg"
@@ -1374,13 +1374,13 @@ Wenn du bereit bist, gehe zu [**Teil 3: Hello Workflow**](./03_hello_workflow.md
 ## Quiz
 
 <quiz>
-Was ist ein channel in Nextflow?
+Was ist ein Channel in Nextflow?
 - [ ] Eine Dateipfadspezifikation
-- [ ] Eine process-Definition
-- [x] Eine warteschlangenartige Struktur zum Übergeben von Daten zwischen processes
+- [ ] Eine Prozess-Definition
+- [x] Eine warteschlangenartige Struktur zum Übergeben von Daten zwischen Prozessen
 - [ ] Eine Konfigurationseinstellung
 
-Mehr erfahren: [1.1. Einen Eingabe-channel erstellen](#11-einen-eingabe-channel-erstellen)
+Mehr erfahren: [1.1. Einen Eingabe-Channel erstellen](#11-einen-eingabe-channel-erstellen)
 </quiz>
 
 <quiz>
@@ -1393,26 +1393,26 @@ channel.of('Hello', 'Bonjour', 'Hola')
 
 - [ ] `['Hello', 'Bonjour', 'Hola']` (eine einzelne Liste)
 - [x] Jedes Element in einer separaten Zeile: `Hello`, `Bonjour`, `Hola`
-- [ ] Nichts (channels drucken standardmäßig nicht)
+- [ ] Nichts (Channels drucken standardmäßig nicht)
 - [ ] Einen Fehler (ungültige Syntax)
 
-Mehr erfahren: [1.1. Einen Eingabe-channel erstellen](#11-einen-eingabe-channel-erstellen)
+Mehr erfahren: [1.1. Einen Eingabe-Channel erstellen](#11-einen-eingabe-channel-erstellen)
 </quiz>
 
 <quiz>
-Wenn ein channel mehrere Werte enthält, wie handhabt Nextflow die process-Ausführung?
-- [ ] Der process läuft einmal mit allen Werten
-- [x] Der process läuft einmal für jeden Wert im channel
-- [ ] Der process läuft nur mit dem ersten Wert
-- [ ] Der process läuft nur mit dem letzten Wert
+Wenn ein Channel mehrere Werte enthält, wie handhabt Nextflow die Prozess-Ausführung?
+- [ ] Der Prozess läuft einmal mit allen Werten
+- [x] Der Prozess läuft einmal für jeden Wert im Channel
+- [ ] Der Prozess läuft nur mit dem ersten Wert
+- [ ] Der Prozess läuft nur mit dem letzten Wert
 
 Mehr erfahren: [2. Den Workflow so modifizieren, dass er mit mehreren Eingabewerten läuft](#2-den-workflow-so-modifizieren-dass-er-mit-mehreren-eingabewerten-lauft)
 </quiz>
 
 <quiz>
 Was macht der `flatten()`-Operator?
-- [ ] Kombiniert mehrere channels zu einem
-- [ ] Sortiert channel-Elemente
+- [ ] Kombiniert mehrere Channels zu einem
+- [ ] Sortiert Channel-Elemente
 - [x] Entpackt Arrays in einzelne Elemente
 - [ ] Entfernt doppelte Elemente
 
@@ -1426,12 +1426,12 @@ Was ist der Zweck des `view()`-Operators?
 - [x] Channel-Inhalte zu inspizieren und zu debuggen
 - [ ] Channel-Inhalte in eine Datei zu speichern
 
-Mehr erfahren: [1.4. `view()` verwenden, um channel-Inhalte zu inspizieren](#14-view-verwenden-um-channel-inhalte-zu-inspizieren)
+Mehr erfahren: [1.4. `view()` verwenden, um Channel-Inhalte zu inspizieren](#14-view-verwenden-um-channel-inhalte-zu-inspizieren)
 </quiz>
 
 <quiz>
 Was macht `splitCsv()`?
-- [ ] Erstellt eine CSV-Datei aus channel-Inhalten
+- [ ] Erstellt eine CSV-Datei aus Channel-Inhalten
 - [ ] Teilt einen String durch Kommas
 - [x] Parst eine CSV-Datei in Arrays, die jede Zeile repräsentieren
 - [ ] Führt mehrere CSV-Dateien zusammen
@@ -1441,10 +1441,10 @@ Mehr erfahren: [4.2. Den `splitCsv()`-Operator verwenden, um die Datei zu parsen
 
 <quiz>
 Was ist der Zweck des `map()`-Operators?
-- [ ] Elemente aus einem channel zu filtern
-- [ ] Mehrere channels zu kombinieren
-- [x] Jedes Element in einem channel zu transformieren
-- [ ] Elemente in einem channel zu zählen
+- [ ] Elemente aus einem Channel zu filtern
+- [ ] Mehrere Channels zu kombinieren
+- [x] Jedes Element in einem Channel zu transformieren
+- [ ] Elemente in einem Channel zu zählen
 
 Mehr erfahren: [4.3. Den `map()`-Operator verwenden, um die Begrüßungen zu extrahieren](#43-den-map-operator-verwenden-um-die-begrussungen-zu-extrahieren)
 </quiz>
@@ -1454,7 +1454,7 @@ Warum ist es wichtig, dynamische Ausgabedateinamen zu verwenden, wenn mehrere Ei
 - [ ] Um die Leistung zu verbessern
 - [ ] Um Speicherplatz zu reduzieren
 - [x] Um zu verhindern, dass sich Ausgabedateien gegenseitig überschreiben
-- [ ] Um die resume-Funktionalität zu aktivieren
+- [ ] Um die Resume-Funktionalität zu aktivieren
 
 Mehr erfahren: [2.2. Sicherstellen, dass die Ausgabedateinamen eindeutig sind](#22-sicherstellen-dass-die-ausgabedateinamen-eindeutig-sind)
 </quiz>

@@ -12,7 +12,7 @@
 :green_book: La trascrizione del video è disponibile [qui](./transcripts/05_hello_containers.md).
 ///
 
-Nelle Parti 1-4 di questo corso di formazione, avete imparato come usare i blocchi di costruzione di base di Nextflow per assemblare un semplice workflow capace di elaborare del testo, parallelizzare l'esecuzione se ci sono più input, e raccogliere i risultati per ulteriori elaborazioni.
+Nelle Parti 1-4 di questo corso di formazione, avete imparato come usare i blocchi di costruzione di base di Nextflow per assemblare un semplice flusso di lavoro capace di elaborare del testo, parallelizzare l'esecuzione se ci sono più input, e raccogliere i risultati per ulteriori elaborazioni.
 
 Tuttavia, eravate limitati agli strumenti UNIX di base disponibili nel vostro ambiente.
 Le attività del mondo reale spesso richiedono vari strumenti e pacchetti non inclusi di default.
@@ -39,7 +39,7 @@ Nota che insegneremo questo usando [Docker](https://www.docker.com/get-started/)
 
 ## 0. Riscaldamento: Eseguire `hello-containers.nf`
 
-Useremo lo script del workflow `hello-containers.nf` come punto di partenza.
+Useremo lo script del flusso di lavoro `hello-containers.nf` come punto di partenza.
 È equivalente allo script prodotto seguendo la Parte 4 di questo corso di formazione, tranne che abbiamo cambiato le destinazioni dell'output:
 
 ```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
@@ -105,7 +105,7 @@ Se tutto ha funzionato, siete pronti a imparare come usare i container.
 
 ## 1. Usare un container 'manualmente'
 
-Quello che vogliamo fare è aggiungere un passaggio al nostro workflow che userà un container per l'esecuzione.
+Quello che vogliamo fare è aggiungere un passaggio al nostro flusso di lavoro che userà un container per l'esecuzione.
 
 Tuttavia, prima esamineremo alcuni concetti e operazioni di base per consolidare la vostra comprensione di cosa sono i container prima di iniziare a usarli in Nextflow.
 
@@ -383,7 +383,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
 
 Questo produce l'ASCII art desiderata di un tacchino che recita i nostri saluti di esempio!
 Tranne che qui il tacchino sta ripetendo le righe complete invece di solo i saluti.
-Sappiamo già che il nostro workflow Nextflow farà un lavoro migliore!
+Sappiamo già che il nostro flusso di lavoro Nextflow farà un lavoro migliore!
 
 Sentitevi liberi di giocare con questo comando.
 Quando avete finito, uscite dal container come in precedenza:
@@ -458,7 +458,7 @@ Il processo si aspetta un `input_file` contenente i saluti così come un valore 
 
 L'output sarà un nuovo file di testo contenente l'ASCII art generata dallo strumento `cowpy`.
 
-### 2.2. Aggiungere cowpy al workflow
+### 2.2. Aggiungere cowpy al flusso di lavoro
 
 Ora dobbiamo importare il modulo e chiamare il processo.
 
@@ -485,9 +485,9 @@ Inserite la dichiarazione di import sopra il blocco workflow e compilatela appro
     include { collectGreetings } from './modules/collectGreetings.nf'
     ```
 
-Ora il modulo `cowpy` è disponibile per l'uso nel workflow.
+Ora il modulo `cowpy` è disponibile per l'uso nel flusso di lavoro.
 
-#### 2.2.2. Aggiungere una chiamata al processo `cowpy` nel workflow
+#### 2.2.2. Aggiungere una chiamata al processo `cowpy` nel flusso di lavoro
 
 Connettiamo il processo `cowpy()` all'output del processo `collectGreetings()`, che come potete ricordare produce due output:
 
@@ -563,13 +563,13 @@ Questo è tecnicamente opzionale ma è la pratica raccomandata ed è un'opportun
 
 Ora possiamo essere pigri e saltare la digitazione del parametro character nelle nostre righe di comando.
 
-#### 2.2.4. Aggiornare gli output del workflow
+#### 2.2.4. Aggiornare gli output del flusso di lavoro
 
-Dobbiamo aggiornare gli output del workflow per pubblicare l'output del processo `cowpy`.
+Dobbiamo aggiornare gli output del flusso di lavoro per pubblicare l'output del processo `cowpy`.
 
 ##### 2.2.4.1. Aggiornare la sezione `publish:`
 
-Nel `blocco workflow`, effettuate la seguente modifica al codice:
+Nel blocco `workflow`, effettuate la seguente modifica al codice:
 
 === "Dopo"
 
@@ -594,7 +594,7 @@ Nel `blocco workflow`, effettuate la seguente modifica al codice:
 
 Il processo `cowpy` produce solo un output quindi possiamo riferirci ad esso nel modo usuale aggiungendo `.out`.
 
-Ma per ora, finiamo di aggiornare gli output a livello di workflow.
+Ma per ora, finiamo di aggiornare gli output a livello di flusso di lavoro.
 
 ##### 2.2.4.2. Aggiornare il blocco `output`
 
@@ -654,7 +654,7 @@ Nel blocco `output`, effettuate le seguenti modifiche al codice:
 
 Ora gli output pubblicati saranno un po' più organizzati.
 
-#### 2.2.5. Eseguire il workflow
+#### 2.2.5. Eseguire il flusso di lavoro
 
 Per ricapitolare, questo è quello a cui miriamo:
 
@@ -664,7 +664,7 @@ Per ricapitolare, questo è quello a cui miriamo:
 
 Pensate che funzionerà?
 
-Cancelliamo gli output pubblicati precedenti per avere una lavagna pulita, ed eseguiamo il workflow con il flag `-resume`.
+Cancelliamo gli output pubblicati precedenti per avere una lavagna pulita, ed eseguiamo il flusso di lavoro con il flag `-resume`.
 
 ```bash
 rm -r hello_containers/
@@ -775,7 +775,7 @@ Questo dice a Nextflow che _se l'uso di Docker è abilitato_, dovrebbe usare l'i
 Nota che abbiamo detto _'se l'uso di Docker è abilitato'_. Per impostazione predefinita, non lo è, quindi dobbiamo dire a Nextflow che è autorizzato a usare Docker.
 A tal fine, anticiperemo leggermente l'argomento della prossima e ultima parte di questo corso (Parte 6), che tratta la configurazione.
 
-Uno dei modi principali che Nextflow offre per configurare l'esecuzione del workflow è usare un file `nextflow.config`.
+Uno dei modi principali che Nextflow offre per configurare l'esecuzione del flusso di lavoro è usare un file `nextflow.config`.
 Quando tale file è presente nella directory corrente, Nextflow lo caricherà automaticamente e applicherà qualsiasi configurazione contenga.
 
 Abbiamo fornito un file `nextflow.config` con una singola riga di codice che disabilita esplicitamente Docker: `docker.enabled = false`.
@@ -797,12 +797,12 @@ Ora, cambiamo quello a `true` per abilitare Docker:
 !!! tip "Suggerimento"
 
     È possibile abilitare l'esecuzione Docker dalla riga di comando, su base per esecuzione, usando il parametro `-with-docker <container>`.
-    Tuttavia, questo ci permette solo di specificare un container per l'intero workflow, mentre l'approccio che vi abbiamo appena mostrato ci permette di specificare un container diverso per processo.
+    Tuttavia, questo ci permette solo di specificare un container per l'intero flusso di lavoro, mentre l'approccio che vi abbiamo appena mostrato ci permette di specificare un container diverso per processo.
     Questo è meglio per modularità, manutenzione del codice e riproducibilità.
 
-#### 2.3.3. Eseguire il workflow con Docker abilitato
+#### 2.3.3. Eseguire il flusso di lavoro con Docker abilitato
 
-Eseguite il workflow con il flag `-resume`:
+Eseguite il flusso di lavoro con il flag `-resume`:
 
 ```bash
 nextflow run hello-containers.nf -resume
@@ -823,7 +823,7 @@ nextflow run hello-containers.nf -resume
     ```
 
 Questa volta funziona davvero!
-Come al solito potete trovare gli output del workflow nella directory dei risultati corrispondente, anche se questa volta sono un po' più ordinatamente organizzati, con solo il report e l'output finale al livello superiore, e tutti i file intermedi spostati in una sottodirectory.
+Come al solito potete trovare gli output del flusso di lavoro nella directory dei risultati corrispondente, anche se questa volta sono un po' più ordinatamente organizzati, con solo il report e l'output finale al livello superiore, e tutti i file intermedi spostati in una sottodirectory.
 
 ??? abstract "Directory contents"
 
@@ -1140,7 +1140,7 @@ Per approfondire: [2.3.1. Specificare un container per cowpy](#231-specificare-u
 </quiz>
 
 <quiz>
-Quale impostazione `nextflow.config` abilita Docker per il vostro workflow?
+Quale impostazione `nextflow.config` abilita Docker per il vostro flusso di lavoro?
 - [ ] `#!groovy process.docker = true`
 - [x] `#!groovy docker.enabled = true`
 - [ ] `#!groovy container.engine = 'docker'`

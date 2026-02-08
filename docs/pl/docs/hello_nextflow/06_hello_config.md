@@ -12,9 +12,9 @@
 :green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/06_hello_config.md).
 ///
 
-Ta sekcja zbada, jak skonfigurować i zarządzać konfiguracją Twojego pipeline'u Nextflow, abyś mógł dostosować jego zachowanie, zaadaptować go do różnych środowisk i zoptymalizować wykorzystanie zasobów _bez zmiany choćby jednej linii samego kodu workflow_.
+Ta sekcja zbada, jak skonfigurować workflow Nextflow i zarządzać jego konfiguracją, abyś mógł dostosować jego zachowanie, zaadaptować do różnych środowisk i zoptymalizować wykorzystanie zasobów _bez zmiany choćby jednej linii samego kodu workflow_.
 
-Istnieje wiele sposobów, aby to zrobić. Można je używać w kombinacji i są interpretowane zgodnie z [kolejnością pierwszeństwa](https://nextflow.io/docs/latest/config.html) opisaną w dokumentacji konfiguracji.
+Istnieje wiele sposobów, aby to zrobić. Można je używać łącznie i są interpretowane zgodnie z [kolejnością pierwszeństwa](https://nextflow.io/docs/latest/config.html) opisaną w dokumentacji konfiguracji.
 
 W tej części kursu pokażemy Ci najprostszy i najczęściej używany mechanizm pliku konfiguracyjnego [`nextflow.config`](https://nextflow.io/docs/latest/config.html), który już spotkałeś w Części 5: Hello Containers.
 
@@ -161,7 +161,7 @@ Zróbmy to w dwóch krokach.
 
 #### 1.1.1. Utwórz blok `params` w pliku konfiguracyjnym
 
-Wprowadź następujące zmiany w kodzie w pliku `nextflow.config`:
+Wprowadź następujące zmiany w pliku `nextflow.config`:
 
 === "Po"
 
@@ -196,7 +196,7 @@ Ale w duchu przeniesienia konfiguracji całkowicie do pliku konfiguracyjnego, us
 
 #### 1.1.2. Usuń wartości z bloku `params` w pliku workflow
 
-Wprowadź następujące zmiany w kodzie w pliku workflow `hello-config.nf`:
+Wprowadź następujące zmiany w pliku workflow `hello-config.nf`:
 
 === "Po"
 
@@ -538,7 +538,7 @@ Uporządkujmy to.
 Prefiks `hello_config/` był zakodowany na sztywno we wcześniejszych rozdziałach, ale skoro teraz uczymy się elastycznie konfigurować ścieżki wyjściowe, możemy usunąć to zakodowanie na sztywno.
 Dla wyjść, które nie potrzebują podkatalogu, możemy ustawić dyrektywę `path` na pusty ciąg lub całkowicie ją usunąć.
 
-Wprowadź następujące zmiany w kodzie w pliku workflow:
+Wprowadź następujące zmiany w pliku workflow:
 
 === "Po"
 

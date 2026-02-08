@@ -7,23 +7,23 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Obejrzyj [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Obejrzyj [całą playlistę](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) na kanale YouTube Nextflow'a.
 
 :green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/05_hello_containers.md).
 ///
 
-W Częściach 1-4 tego kursu nauczyłeś się używać podstawowych elementów budulcowych Nextflow'a do składania prostego workflow'a zdolnego do przetwarzania tekstu, równoległego wykonywania wielu wejść i zbierania wyników do dalszego przetwarzania.
+W Częściach 1-4 tego kursu szkoleniowego nauczyłeś się wykorzystywać podstawowe elementy budulcowe Nextflow'a do składania prostego workflow'a zdolnego do przetwarzania tekstu, paralelizowania wykonania przy wielu wejściach oraz zbierania wyników do dalszego przetwarzania.
 
-Jednak byłeś ograniczony do podstawowych narzędzi UNIX dostępnych w Twoim środowisku.
-Rzeczywiste zadania często wymagają różnych narzędzi i pakietów, które nie są domyślnie dostępne.
-Zazwyczaj musiałbyś zainstalować te narzędzia, zarządzać ich zależnościami i rozwiązywać konflikty.
+Byłeś jednak ograniczony do podstawowych narzędzi UNIX dostępnych w Twoim środowisku.
+Rzeczywiste zadania często wymagają różnych narzędzi i pakietów niedołączonych domyślnie.
+Zazwyczaj musiałbyś zainstalować te narzędzia, zarządzać ich zależnościami i rozwiązywać wszelkie konflikty.
 
-To wszystko jest bardzo nużące i irytujące, więc pokażemy Ci, jak używać **kontenerów**, aby rozwiązać ten problem znacznie wygodniej.
+To wszystko jest bardzo nużące i irytujące, dlatego pokażemy Ci, jak używać **kontenerów** do rozwiązania tego problemu o wiele wygodniej.
 
 **Kontener** to lekka, samodzielna, wykonywalna jednostka oprogramowania utworzona z **obrazu kontenera**, która zawiera wszystko potrzebne do uruchomienia aplikacji, w tym kod, biblioteki systemowe i ustawienia.
 Jak można się domyślić, będzie to bardzo pomocne w zwiększeniu powtarzalności Twoich pipeline'ów.
 
-Zauważ, że będziemy tego uczyć używając [Docker](https://www.docker.com/get-started/), ale pamiętaj, że Nextflow obsługuje również [kilka innych technologii kontenerowych](https://nextflow.io/docs/latest/container.html).
+Zauważ, że będziemy tego uczyć używając narzędzia [Docker](https://www.docker.com/get-started/), ale pamiętaj, że Nextflow obsługuje również [kilka innych technologii kontenerowych](https://nextflow.io/docs/latest/container.html).
 
 ??? info "Jak zacząć od tej sekcji"
 
@@ -39,8 +39,8 @@ Zauważ, że będziemy tego uczyć używając [Docker](https://www.docker.com/ge
 
 ## 0. Rozgrzewka: Uruchom `hello-containers.nf`
 
-Użyjemy skryptu workflow `hello-containers.nf` jako punktu wyjścia.
-Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 4 tego szkolenia, z tą różnicą, że zmieniliśmy miejsca docelowe wyjść:
+Użyjemy skryptu workflow'a `hello-containers.nf` jako punktu wyjścia.
+Jest on równoważny skryptowi utworzonemu podczas pracy nad Częścią 4 tego kursu, z tą różnicą, że zmieniliśmy miejsca docelowe wyjść:
 
 ```groovy title="hello-containers.nf" linenums="37" hl_lines="3 7 11 15"
 output {
@@ -107,7 +107,7 @@ Jeśli to zadziałało, jesteś gotowy do nauki używania kontenerów.
 
 Chcemy dodać krok do naszego workflow'a, który będzie używał kontenera do wykonania.
 
-Jednak najpierw omówimy podstawowe koncepcje i operacje, aby utrwalić Twoje zrozumienie tego, czym są kontenery, zanim zaczniemy ich używać w Nextflow'ie.
+Najpierw jednak omówimy podstawowe koncepcje i operacje, aby utrwalić Twoje zrozumienie tego, czym są kontenery, zanim zaczniemy ich używać w Nextflow'ie.
 
 ### 1.1. Pobierz obraz kontenera
 
@@ -192,7 +192,7 @@ docker run --rm '<kontener>' [polecenie narzędzia]
 ```
 
 Część `docker run --rm '<kontener>'` to instrukcja dla systemu, aby uruchomił instancję kontenera z obrazu i wykonał w niej polecenie.
-Flaga `--rm` mówi systemowi, aby usunął instancję kontenera po zakończeniu polecenia.
+Flaga `--rm` mówi systemowi, aby wyłączył instancję kontenera po zakończeniu polecenia.
 
 Składnia `[polecenie narzędzia]` zależy od używanego narzędzia i konfiguracji kontenera.
 Zacznijmy po prostu od `cowpy`.
@@ -369,7 +369,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -862,7 +862,7 @@ Końcowa grafika ASCII znajduje się w katalogu `results/hello_containers/`, pod
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))^^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)

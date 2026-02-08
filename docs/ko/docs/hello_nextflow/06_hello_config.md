@@ -1,9 +1,7 @@
 # 파트 6: Hello Config
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=ko" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=ko" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -478,59 +476,65 @@ nextflow run hello-config.nf -params-file test-params.yaml
 
 이를 더 유연하게 구성할 수 있는 몇 가지 일반적인 방법을 살펴봅시다.
 
-### 2.1. `outputDir` 디렉토리 이름 사용자 정의
+### 2.1. `-output-dir`로 출력 디렉토리 사용자 정의
 
-이 과정의 각 장에서 출력 정의에 하드코딩된 다른 하위 디렉토리에 출력을 게시해 왔습니다.
+'게시된' 출력이 구성되는 방식을 제어할 때 두 가지 별개의 우선순위가 있습니다:
 
-사용자 구성 가능한 매개변수를 사용하도록 변경합시다.
-이를 위해 완전히 새로운 매개변수를 만들 수 있지만, 바로 거기에 있으므로 `batch` 매개변수를 사용합시다.
+- 최상위 출력 디렉토리
+- 이 디렉토리 내에서 파일이 구성되는 방식
 
-#### 2.1.1. 구성 파일에서 `outputDir` 값 설정
+지금까지 기본 최상위 디렉토리인 `results`를 사용해 왔습니다.
+이를 사용자 정의하는 것부터 시작합시다. `-output-dir` CLI 옵션을 사용합니다.
 
-Nextflow가 출력을 게시하는 데 사용하는 경로는 `outputDir` 옵션으로 제어됩니다.
-모든 출력의 경로를 변경하려면 `nextflow.config` 구성 파일에서 이 옵션에 대한 값을 설정할 수 있습니다.
+#### 2.1.1. `-output-dir`로 파이프라인 실행
 
-`nextflow.config` 파일에 다음 코드를 추가하십시오:
+`-output-dir` 옵션(단축형: `-o`)은 모든 워크플로우 출력에 대한 기본 출력 디렉토리(`results/`)를 재정의합니다.
+이것은 출력이 게시되는 루트 경로를 제어하는 권장 방법입니다.
 
-=== "수정 후"
+```bash
+nextflow run hello-config.nf -output-dir custom-outdir-cli/
+```
 
-    ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
-    /*
-    * 파이프라인 매개변수
-    */
-    params {
-        input = 'data/greetings.csv'
-        batch = 'batch'
-        character = 'turkey'
-    }
+??? success "명령 출력"
 
-    /*
-    * 출력 설정
-    */
-    outputDir = "results/${params.batch}"
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2
+
+    executor >  local (8)
+    [9f/332636] sayHello (1)       [100%] 3 of 3 ✔
+    [03/a55991] convertToUpper (3) [100%] 3 of 3 ✔
+    [e5/ab7893] collectGreetings   [100%] 1 of 1 ✔
+    [a8/97338e] cowpy              [100%] 1 of 1 ✔
     ```
 
-=== "수정 전"
+이것은 `results/` 대신 `custom-outdir-cli/`에 출력을 게시합니다:
 
-    ```groovy title="nextflow.config" linenums="9"
-    /*
-    * 파이프라인 매개변수
-    */
-    params {
-        input = 'data/greetings.csv'
-        batch = 'batch'
-        character = 'turkey'
-    }
+??? abstract "디렉토리 내용"
+
+    ```console
+    custom-outdir-cli/
+    └── hello_config
+        ├── batch-report.txt
+        ├── cowpy-COLLECTED-batch-output.txt
+        └── intermediates
+            ├── Bonjour-output.txt
+            ├── COLLECTED-batch-output.txt
+            ├── Hello-output.txt
+            ├── Holà-output.txt
+            ├── UPPER-Bonjour-output.txt
+            ├── UPPER-Hello-output.txt
+            └── UPPER-Holà-output.txt
     ```
 
-이렇게 하면 내장 기본 경로인 `results/`가 `results/` 더하기 하위 디렉토리로서 `batch` 매개변수 값으로 대체됩니다.
-원한다면 `results` 부분도 변경할 수 있습니다.
+output 블록의 `path` 선언에서 `hello_config` 하위 디렉토리가 여전히 있음을 주목하십시오.
+이를 정리합시다.
 
-임시 변경의 경우 명령에서 `-output-dir` 매개변수를 사용하여 명령줄에서 이 옵션을 설정할 수 있습니다(하지만 그러면 `batch` 매개변수 값을 사용할 수 없습니다).
+#### 2.1.2. output 블록에서 하드코딩된 경로 제거
 
-#### 2.1.2. 하드코딩된 경로의 반복되는 부분 제거
-
-출력 옵션에 여전히 하드코딩된 하위 디렉토리가 있으므로 이제 제거합시다.
+`hello_config/` 접두사는 이전 장에서 하드코딩되었지만, 이제 출력 경로를 유연하게 구성하는 방법을 배우고 있으므로 이 하드코딩을 제거할 수 있습니다.
+하위 디렉토리가 필요하지 않은 출력의 경우 `path` 지시문을 빈 문자열로 설정하거나 완전히 제거할 수 있습니다.
 
 워크플로우 파일에서 다음 코드 변경을 수행하십시오:
 
@@ -588,59 +592,93 @@ Nextflow가 출력을 게시하는 데 사용하는 경로는 `outputDir` 옵션
     }
     ```
 
-`outputDir` 기본값을 수정하는 대신 각 경로에 `${params.batch}`를 추가할 수도 있었지만 이것이 더 간결합니다.
-
-#### 2.1.3. 파이프라인 실행
-
-올바르게 작동하는지 테스트해 봅시다. 명령줄에서 배치 이름을 `outdir`로 설정합니다.
+파이프라인을 다시 실행하십시오:
 
 ```bash
-nextflow run hello-config.nf --batch outdir
+nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 ```
 
-??? success "명령 출력"
-
-    ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
-
-    executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
-    ```
-
-이것은 이전과 동일한 출력을 생성하지만, 이번에는 `results/outdir/` 아래에서 출력을 찾습니다.
+이제 출력이 `hello_config` 하위 디렉토리 없이 `custom-outdir-cli-2/` 바로 아래에 게시됩니다:
 
 ??? abstract "디렉토리 내용"
 
     ```console
-    results/outdir/
-    ├── cowpy-COLLECTED-outdir-output.txt
-    ├── intermediates
-    │   ├── Bonjour-output.txt
-    │   ├── COLLECTED-outdir-output.txt
-    │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
-    └── outdir-report.txt
+    custom-outdir-cli-2/
+    ├── batch-report.txt
+    ├── cowpy-COLLECTED-batch-output.txt
+    └── intermediates
+        ├── Bonjour-output.txt
+        ├── COLLECTED-batch-output.txt
+        ├── Hello-output.txt
+        ├── Holà-output.txt
+        ├── UPPER-Bonjour-output.txt
+        ├── UPPER-Hello-output.txt
+        └── UPPER-Holà-output.txt
     ```
 
-이 접근 방식을 사용자 정의 경로 정의와 결합하여 원하는 디렉토리 계층을 구성할 수 있습니다.
+!!! tip "팁"
 
-### 2.2. 프로세스별로 출력 구성
+    `-output-dir` 옵션은 출력이 _어디로_ 가는지 제어하는 데 사용되며, output 블록의 `path` 지시문은 _하위 디렉토리 구조_를 제어합니다.
 
-출력을 추가로 구성하는 인기 있는 방법 중 하나는 프로세스별로 수행하는 것입니다. 즉, 파이프라인에서 실행되는 각 프로세스에 대해 하위 디렉토리를 만드는 것입니다.
+### 2.2. 동적 출력 경로
 
-#### 2.2.1. 출력 경로를 프로세스 이름에 대한 참조로 교체
+CLI를 통해 출력 디렉토리를 변경하는 것 외에도, `outputDir`을 사용하여 구성 파일에서 사용자 정의 기본값을 설정할 수 있습니다.
+이를 통해 디렉토리 경로를 동적으로 설정할 수 있습니다. 즉, 정적 문자열만 사용하는 것이 아닙니다.
 
-출력 경로 선언에서 프로세스 이름을 `<task>.name`으로 참조하기만 하면 됩니다.
+#### 2.2.1. 구성 파일에서 `outputDir` 값 설정
 
-워크플로우 파일에서 다음 변경을 수행하십시오:
+`nextflow.config` 파일에 다음 코드를 추가하십시오:
+
+=== "수정 후"
+
+    ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
+    /*
+    * 파이프라인 매개변수
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+
+    /*
+    * 출력 설정
+    */
+    outputDir = "custom-outdir-config/${params.batch}"
+    ```
+
+=== "수정 전"
+
+    ```groovy title="nextflow.config" linenums="9"
+    /*
+    * 파이프라인 매개변수
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
+
+이렇게 하면 출력 디렉토리가 `custom-outdir-config/` 더하기 하위 디렉토리로서 `batch` 매개변수 값으로 설정됩니다.
+이제 `--batch` 매개변수를 설정하여 출력 위치를 변경할 수 있습니다:
+
+```bash
+nextflow run hello-config.nf --batch my_run
+```
+
+이것은 `custom-outdir-config/my_run/`에 출력을 게시합니다.
+
+!!! note "참고"
+
+    `-output-dir` CLI 옵션이 `outputDir` 구성 설정보다 우선합니다.
+    설정되면 구성 옵션은 완전히 무시됩니다.
+
+#### 2.2.2. batch 및 프로세스 이름을 사용한 하위 디렉토리
+
+출력별로 하위 디렉토리 출력 `path` 선언을 동적으로 설정할 수도 있습니다.
+
+예를 들어, 출력 경로 선언에서 `<process>.name`을 참조하여 프로세스별로 출력을 구성할 수 있습니다:
 
 === "수정 후"
 
@@ -696,14 +734,97 @@ nextflow run hello-config.nf --batch outdir
     }
     ```
 
-이렇게 하면 출력 경로 구성에서 남은 하드코딩된 요소가 제거됩니다.
+더 나아가 더 복잡한 하위 디렉토리 경로를 구성할 수 있습니다.
 
-#### 2.2.2. 파이프라인 실행
+위 편집에서 `intermediates`와 최상위 수준의 최종 출력 간의 구분이 지워졌습니다.
+이를 다시 추가하고 파일을 `params.batch` 하위 디렉토리에도 넣읍시다.
 
-올바르게 작동하는지 테스트해 봅시다. 명령줄에서 배치 이름을 `pnames`로 설정합니다.
+!!! tip "팁"
+
+    output 블록 `path`에 `params.batch`를 포함하면, `outputDir` 구성 대신에 포함하므로 CLI에서 `-output-dir`로 재정의되지 않습니다.
+
+먼저 `outputDir`에서 `${params.batch}`를 제거하도록 구성 파일을 업데이트하십시오(path 선언으로 이동하고 있으므로):
+
+=== "수정 후"
+
+    ```groovy title="nextflow.config" linenums="12" hl_lines="4"
+    /*
+    * 출력 설정
+    */
+    outputDir = "custom-outdir-config/"
+    ```
+
+=== "수정 전"
+
+    ```groovy title="nextflow.config" linenums="12" hl_lines="4"
+    /*
+    * 출력 설정
+    */
+    outputDir = "custom-outdir-config/${params.batch}"
+    ```
+
+그런 다음 워크플로우 파일에서 다음 변경을 수행하십시오:
+
+=== "수정 후"
+
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    output {
+        first_output {
+            path { "${params.batch}/intermediates/${sayHello.name}" }
+            mode 'copy'
+        }
+        uppercased {
+            path { "${params.batch}/intermediates/${convertToUpper.name}" }
+            mode 'copy'
+        }
+        collected {
+            path { "${params.batch}/intermediates/${collectGreetings.name}" }
+            mode 'copy'
+        }
+        batch_report {
+            path { "${params.batch}/${collectGreetings.name}" }
+            mode 'copy'
+        }
+        cowpy_art {
+            path { "${params.batch}/${cowpy.name}" }
+            mode 'copy'
+        }
+    }
+    ```
+
+=== "수정 전"
+
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    output {
+        first_output {
+            path { sayHello.name }
+            mode 'copy'
+        }
+        uppercased {
+            path { convertToUpper.name }
+            mode 'copy'
+        }
+        collected {
+            path { collectGreetings.name }
+            mode 'copy'
+        }
+        batch_report {
+            path { collectGreetings.name }
+            mode 'copy'
+        }
+        cowpy_art {
+            path { cowpy.name }
+            mode 'copy'
+        }
+    }
+    ```
+
+#### 2.2.3. 파이프라인 실행
+
+실제로 어떻게 작동하는지 봅시다. 명령줄에서 `-output-dir`(또는 단축형 `-o`)를 `custom-outdir-config-2`로 설정하고 batch 이름을 `rep2`로 설정합니다:
 
 ```bash
-nextflow run hello-config.nf --batch pnames
+nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ```
 
 ??? success "명령 출력"
@@ -711,38 +832,38 @@ nextflow run hello-config.nf --batch pnames
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [9e/6095e0] sayHello (1)       [100%] 3 of 3 ✔
+    [05/454d52] convertToUpper (3) [100%] 3 of 3 ✔
+    [ed/e3ddfb] collectGreetings   [100%] 1 of 1 ✔
+    [39/5e063a] cowpy              [100%] 1 of 1 ✔
     ```
 
-이것은 이전과 동일한 출력을 생성하지만, 이번에는 `results/pnames/` 아래에서 출력을 찾고 프로세스별로 그룹화되어 있습니다.
+이것은 지정된 기본 경로 _그리고_ batch 이름 하위 디렉토리 _그리고_ 프로세스별로 그룹화된 결과와 함께 `custom-outdir-config-2/rep2/`에 출력을 게시합니다:
 
 ??? abstract "디렉토리 내용"
 
     ```console
-    results/pnames/
-    ├── collectGreetings
-    │   ├── COLLECTED-pnames-output.txt
-    │   └── pnames-report.txt
-    ├── convertToUpper
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
-    ├── cowpy
-    │   └── cowpy-COLLECTED-pnames-output.txt
-    └── sayHello
-        ├── Bonjour-output.txt
-        ├── Hello-output.txt
-        └── Holà-output.txt
+    custom-outdir-config-2
+    └── rep2
+        ├── collectGreetings
+        │   └── rep2-report.txt
+        ├── cowpy
+        │   └── cowpy-COLLECTED-rep2-output.txt
+        └── intermediates
+            ├── collectGreetings
+            │   └── COLLECTED-rep2-output.txt
+            ├── convertToUpper
+            │   ├── UPPER-Bonjour-output.txt
+            │   ├── UPPER-Hello-output.txt
+            │   └── UPPER-Holà-output.txt
+            └── sayHello
+                ├── Bonjour-output.txt
+                ├── Hello-output.txt
+                └── Holà-output.txt
     ```
-
-여기서 `intermediates`와 최상위 수준의 최종 출력 간의 구분이 지워졌습니다.
-물론 이러한 접근 방식을 혼합하여 예를 들어 첫 번째 출력의 경로를 `intermediates/${sayHello.process}`로 설정할 수 있습니다.
 
 ### 2.3. 워크플로우 수준에서 게시 모드 설정
 
@@ -754,11 +875,11 @@ nextflow run hello-config.nf --batch pnames
 
 === "수정 후"
 
-    ```groovy title="nextflow.config" linenums="2" hl_lines="5"
+    ```groovy title="nextflow.config" linenums="12" hl_lines="5"
     /*
     * 출력 설정
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "custom-outdir-config/"
     workflow.output.mode = 'copy'
     ```
 
@@ -768,10 +889,10 @@ nextflow run hello-config.nf --batch pnames
     /*
     * 출력 설정
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "custom-outdir-config/"
     ```
 
-`outputDir` 옵션과 마찬가지로, 구성 파일에서 `workflow.output.mode`에 값을 지정하면 워크플로우 파일에 설정된 것을 재정의하기에 충분하지만, 불필요한 코드를 어쨌든 제거합시다.
+구성 파일에서 `workflow.output.mode`에 값을 지정하면 워크플로우 파일에 설정된 것을 재정의하기에 충분하지만, 불필요한 코드를 어쨌든 제거합시다.
 
 #### 2.3.2. 워크플로우 파일에서 출력 모드 제거
 
@@ -782,45 +903,45 @@ nextflow run hello-config.nf --batch pnames
     ```groovy title="hello-config.nf" linenums="42"
     output {
         first_output {
-            path { sayHello.process }
+            path { "${params.batch}/intermediates/${sayHello.name}" }
         }
         uppercased {
-            path { convertToUpper.process }
+            path { "${params.batch}/intermediates/${convertToUpper.name}" }
         }
         collected {
-            path { collectGreetings.process }
+            path { "${params.batch}/intermediates/${collectGreetings.name}" }
         }
         batch_report {
-            path { collectGreetings.process }
+            path { "${params.batch}/${collectGreetings.name}" }
         }
         cowpy_art {
-            path { cowpy.process }
+            path { "${params.batch}/${cowpy.name}" }
         }
     }
     ```
 
 === "수정 전"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20"
     output {
         first_output {
-            path { sayHello.process }
+            path { "${params.batch}/intermediates/${sayHello.name}" }
             mode 'copy'
         }
         uppercased {
-            path { convertToUpper.process }
+            path { "${params.batch}/intermediates/${convertToUpper.name}" }
             mode 'copy'
         }
         collected {
-            path { collectGreetings.process }
+            path { "${params.batch}/intermediates/${collectGreetings.name}" }
             mode 'copy'
         }
         batch_report {
-            path { collectGreetings.process }
+            path { "${params.batch}/${collectGreetings.name}" }
             mode 'copy'
         }
         cowpy_art {
-            path { cowpy.process }
+            path { "${params.batch}/${cowpy.name}" }
             mode 'copy'
         }
     }
@@ -830,10 +951,10 @@ nextflow run hello-config.nf --batch pnames
 
 #### 2.3.3. 파이프라인 실행
 
-올바르게 작동하는지 테스트해 봅시다. 명령줄에서 배치 이름을 `outmode`로 설정합니다.
+올바르게 작동하는지 테스트해 봅시다:
 
 ```bash
-nextflow run hello-config.nf --batch outmode
+nextflow run hello-config.nf -output-dir config-output-mode
 ```
 
 ??? success "명령 출력"
@@ -841,35 +962,37 @@ nextflow run hello-config.nf --batch outmode
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [e8/a0e93e] sayHello (1)       [100%] 3 of 3 ✔
+    [14/176c9d] convertToUpper (3) [100%] 3 of 3 ✔
+    [23/d667ca] collectGreetings   [100%] 1 of 1 ✔
+    [e6/1dc80e] cowpy              [100%] 1 of 1 ✔
     ```
 
-이것은 이전과 동일한 출력을 생성하지만, 이번에는 `results/outmode/` 아래에서 출력을 찾습니다.
-여전히 심볼릭 링크가 아닌 적절한 복사본입니다.
+이것은 `config-output-mode/`에 출력을 게시하며, 여전히 심볼릭 링크가 아닌 적절한 복사본입니다.
 
 ??? abstract "디렉토리 내용"
 
     ```console
-    results/outmode/
-    ├── collectGreetings
-    │   ├── COLLECTED-outmode-output.txt
-    │   └── outmode-report.txt
-    ├── convertToUpper
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
-    ├── cowpy
-    │   └── cowpy-COLLECTED-outmode-output.txt
-    └── sayHello
-        ├── Bonjour-output.txt
-        ├── Hello-output.txt
-        └── Holà-output.txt
+    config-output-mode
+    └── batch
+        ├── collectGreetings
+        │   └── batch-report.txt
+        ├── cowpy
+        │   └── cowpy-COLLECTED-batch-output.txt
+        └── intermediates
+            ├── collectGreetings
+            │   └── COLLECTED-batch-output.txt
+            ├── convertToUpper
+            │   ├── UPPER-Bonjour-output.txt
+            │   ├── UPPER-Hello-output.txt
+            │   └── UPPER-Holà-output.txt
+            └── sayHello
+                ├── Bonjour-output.txt
+                ├── Hello-output.txt
+                └── Holà-output.txt
     ```
 
 출력별 모드 설정 방식을 여전히 사용하려는 주된 이유는 동일한 워크플로우 내에서 혼합하고 싶은 경우입니다. 즉, 일부 출력은 복사하고 일부는 심볼릭 링크로 설정합니다.
@@ -968,19 +1091,19 @@ nextflow run hello-config.nf --batch conda
 
 ??? success "명령 출력"
 
-    ```console title="출력"
+    ```console title="Output"
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
+    Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
-    [20/2596a7] convertToUpper (1) | 3 of 3 ✔
-    [b3/e15de5] collectGreetings   | 1 of 1 ✔
-    [c5/af5f88] cowpy              | 1 of 1 ✔
+    [e8/91c116] sayHello (2)       [100%] 3 of 3 ✔
+    [fe/6a70ce] convertToUpper (3) [100%] 3 of 3 ✔
+    [99/7cc493] collectGreetings   [100%] 1 of 1 ✔
+    [3c/09fb59] cowpy              [100%] 1 of 1 ✔
     ```
 
-이것은 문제 없이 작동하고 `results/conda` 아래에 이전과 동일한 출력을 생성해야 합니다.
+이것은 문제 없이 작동하고 `custom-outdir-config/conda` 아래에 이전과 동일한 출력을 생성해야 합니다.
 
 백그라운드에서 Nextflow는 Conda 패키지를 검색하고 환경을 생성했으며, 이는 일반적으로 약간의 작업이 필요합니다. 그래서 우리가 직접 그 작업을 하지 않아도 되니 좋습니다!
 
@@ -1027,7 +1150,7 @@ Nextflow는 HPC 스케줄러(Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor �
 실행자 선택은 `executor`라는 프로세스 지시문으로 설정됩니다.
 기본적으로 `local`로 설정되어 있으므로 다음 구성이 암시됩니다:
 
-```groovy title="내장 구성"
+```groovy title="Built-in configuration"
 process {
     executor = 'local'
 }
@@ -1055,7 +1178,7 @@ process {
 
     예를 들어, "my-science-work" 큐에서 8개의 CPU와 4GB의 RAM이 필요한 동일한 작업은 백엔드에 따라 다른 방식으로 표현해야 합니다.
 
-    ```bash title="SLURM 구성 / sbatch를 사용하여 제출"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -1063,7 +1186,7 @@ process {
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="PBS 구성 / qsub을 사용하여 제출"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -1071,7 +1194,7 @@ process {
     #PBS -l mem=4gb
     ```
 
-    ```bash title="SGE 구성 / qsub을 사용하여 제출"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -1104,7 +1227,7 @@ Nextflow에서 리소스 할당 및 제한을 평가하고 표현하는 방법�
 기본적으로 Nextflow는 각 프로세스에 대해 단일 CPU와 2GB의 메모리를 사용합니다.
 해당 프로세스 지시문은 `cpus` 및 `memory`라고 하므로 다음 구성이 암시됩니다:
 
-```groovy title="내장 구성" linenums="1"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -1132,6 +1255,7 @@ nextflow run hello-config.nf -with-report report-config-1.html
 
 보고서를 살펴보고 리소스를 조정할 수 있는 기회를 식별할 수 있는지 확인하는 데 몇 분을 투자하십시오.
 할당된 것에 대한 백분율로 활용 결과를 보여주는 탭을 클릭해야 합니다.
+
 사용 가능한 모든 기능을 설명하는 [보고서 문서](https://nextflow.io/docs/latest/reports.html)가 있습니다.
 
 ### 5.2. 모든 프로세스에 대한 리소스 할당 설정
@@ -1140,14 +1264,44 @@ nextflow run hello-config.nf -with-report report-config-1.html
 
 파이프라인 매개변수 섹션 앞에 `nextflow.config` 파일에 다음을 추가하십시오:
 
-```groovy title="nextflow.config" linenums="4"
-/*
-* 프로세스 설정
-*/
-process {
-    memory = 1.GB
-}
-```
+=== "수정 후"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="4-9"
+    docker.enabled = false
+    conda.enabled = true
+
+    /*
+    * 프로세스 설정
+    */
+    process {
+        memory = 1.GB
+    }
+
+    /*
+    * 파이프라인 매개변수
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
+
+=== "수정 전"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = false
+    conda.enabled = true
+
+    /*
+    * 파이프라인 매개변수
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
 
 이렇게 하면 소비하는 컴퓨팅 양을 줄이는 데 도움이 됩니다.
 
@@ -1213,7 +1367,7 @@ nextflow run hello-config.nf -with-report report-config-2.html
 
 `resourceLimits` 지시문을 사용하여 관련 제한을 설정할 수 있습니다. process 블록에 단독으로 있을 때 구문은 다음과 같습니다:
 
-```groovy title="구문 예제"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -1260,26 +1414,62 @@ Nextflow를 사용하면 다양한 구성을 설명하는 여러 [프로필](htt
 
 파이프라인 매개변수 섹션 뒤에 그리고 출력 설정 앞에 `nextflow.config` 파일에 다음을 추가하십시오:
 
-```groovy title="nextflow.config" linenums="24"
-/*
-* 프로필
-*/
-profiles {
-    my_laptop {
-        process.executor = 'local'
-        docker.enabled = true
+=== "수정 후"
+
+    ```groovy title="nextflow.config" linenums="15" hl_lines="10-27"
+    /*
+    * 파이프라인 매개변수
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
     }
-    univ_hpc {
-        process.executor = 'slurm'
-        conda.enabled = true
-        process.resourceLimits = [
-            memory: 750.GB,
-            cpus: 200,
-            time: 30.d
-        ]
+
+    /*
+    * 프로필
+    */
+    profiles {
+        my_laptop {
+            process.executor = 'local'
+            docker.enabled = true
+        }
+        univ_hpc {
+            process.executor = 'slurm'
+            conda.enabled = true
+            process.resourceLimits = [
+                memory: 750.GB,
+                cpus: 200,
+                time: 30.d
+            ]
+        }
     }
-}
-```
+
+    /*
+    * 출력 설정
+    */
+    outputDir = "custom-outdir-config/"
+    workflow.output.mode = 'copy'
+    ```
+
+=== "수정 전"
+
+    ```groovy title="nextflow.config" linenums="15"
+    /*
+    * 파이프라인 매개변수
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+
+    /*
+    * 출력 설정
+    */
+    outputDir = "custom-outdir-config/"
+    workflow.output.mode = 'copy'
+    ```
 
 대학 HPC의 경우 리소스 제한도 지정하고 있습니다.
 
@@ -1298,13 +1488,13 @@ nextflow run hello-config.nf -profile my_laptop
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [58/da9437] sayHello (3)       | 3 of 3 ✔
-    [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
-    [67/857d05] collectGreetings   | 1 of 1 ✔
-    [37/7b51b5] cowpy              | 1 of 1 ✔
+    [b0/fb2ec9] sayHello (3)       [100%] 3 of 3 ✔
+    [4a/e039f0] convertToUpper (3) [100%] 3 of 3 ✔
+    [6f/408fa9] collectGreetings   [100%] 1 of 1 ✔
+    [f1/fd6520] cowpy              [100%] 1 of 1 ✔
     ```
 
 보시다시피 런타임에 매우 편리하게 구성 간에 전환할 수 있습니다.
@@ -1326,7 +1516,7 @@ nextflow run hello-config.nf -profile my_laptop
 
 이 컨텍스트에서 기본값을 표현하는 구문은 `test`라고 이름 지은 프로필에 대해 다음과 같습니다:
 
-```groovy title="구문 예제"
+```groovy title="Syntax example"
     test {
         params.<parameter1>
         params.<parameter2>
@@ -1336,7 +1526,7 @@ nextflow run hello-config.nf -profile my_laptop
 
 워크플로우에 대한 테스트 프로필을 추가하면 `profiles` 블록은 다음과 같이 됩니다:
 
-```groovy title="nextflow.config" linenums="24"
+```groovy title="nextflow.config" linenums="24" hl_lines="18-22"
 /*
 * 프로필
 */
@@ -1355,7 +1545,7 @@ profiles {
         ]
     }
     test {
-        params.greeting = 'data/greetings.csv'
+        params.input = 'data/greetings.csv'
         params.batch = 'test'
         params.character = 'dragonandcow'
     }
@@ -1382,20 +1572,20 @@ nextflow run hello-config.nf -profile my_laptop,test
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
+    Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [9b/687cdc] sayHello (2)       | 3 of 3 ✔
-    [ca/552187] convertToUpper (3) | 3 of 3 ✔
-    [e8/83e306] collectGreetings   | 1 of 1 ✔
-    [fd/e84fa9] cowpy              | 1 of 1 ✔
+    [4c/fe2580] sayHello (1)       [100%] 3 of 3 ✔
+    [fd/7d9017] convertToUpper (3) [100%] 3 of 3 ✔
+    [13/1523bd] collectGreetings   [100%] 1 of 1 ✔
+    [06/a1ee14] cowpy              [100%] 1 of 1 ✔
     ```
 
-이것은 가능한 경우 Docker를 사용하고 `results/test` 아래에 출력을 생성하며, 이번에 캐릭터는 코믹 듀오 `dragonandcow`입니다.
+이것은 가능한 경우 Docker를 사용하고 `custom-outdir-config/test` 아래에 출력을 생성하며, 이번에 캐릭터는 코믹 듀오 `dragonandcow`입니다.
 
 ??? abstract "파일 내용"
 
-    ```console title="results/test/"
+    ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
     / HOLà    \
     | HELLO   |
@@ -1452,6 +1642,12 @@ nextflow config
 ??? success "명령 출력"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'batch'
+      character = 'turkey'
+    }
+
     docker {
       enabled = false
     }
@@ -1468,10 +1664,12 @@ nextflow config
       }
     }
 
-    params {
-      input = 'data/greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+    outputDir = 'custom-outdir-config/'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1488,6 +1686,12 @@ nextflow config -profile my_laptop,test
 ??? success "명령 출력"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'test'
+      character = 'dragonandcow'
+    }
+
     docker {
       enabled = true
     }
@@ -1505,10 +1709,12 @@ nextflow config -profile my_laptop,test
       executor = 'local'
     }
 
-    params {
-      input = 'data/greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+    outputDir = 'custom-outdir-config/'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1544,7 +1750,7 @@ Nextflow가 자동으로 로드하는 구성 파일의 이름은 무엇입니까
 - [ ] 먼저 만난 값
 - [ ] 둘 다 아님; 오류가 발생함
 
-자세히 알아보기: [1.1. 기본값을 `nextflow.config`로 이동](#11-기본값을-nextflowconfig로-이동)
+자세히 알아보기: [1.1. 기본값을 `nextflow.config`로 이동](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1562,7 +1768,7 @@ Docker와 Conda가 모두 활성화되어 있고 프로세스에 두 지시문�
 - [ ] 먼저 정의된 것
 - [ ] 오류가 발생함
 
-자세히 알아보기: [3. 소프트웨어 패키징 기술 선택](#3-소프트웨어-패키징-기술-선택)
+자세히 알아보기: [3. 소프트웨어 패키징 기술 선택](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1580,7 +1786,7 @@ Nextflow 프로세스의 기본 메모리 할당은 얼마입니까?
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-자세히 알아보기: [5.3. 특정 프로세스에 대한 리소스 할당 설정](#53-특정-프로세스에-대한-리소스-할당-설정)
+자세히 알아보기: [5.3. 특정 프로세스에 대한 리소스 할당 설정](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1590,7 +1796,7 @@ Nextflow 프로세스의 기본 메모리 할당은 얼마입니까?
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-자세히 알아보기: [5.1. 리소스 활용 보고서를 생성하기 위해 워크플로우 실행](#51-리소스-활용-보고서를-생성하기-위해-워크플로우-실행)
+자세히 알아보기: [5.1. 리소스 활용 보고서를 생성하기 위해 워크플로우 실행](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1600,7 +1806,7 @@ Nextflow 프로세스의 기본 메모리 할당은 얼마입니까?
 - [x] 요청할 수 있는 최대 리소스 제한
 - [ ] 리소스 사용 모니터링
 
-자세히 알아보기: [5.5. 리소스 제한 추가](#55-리소스-제한-추가)
+자세히 알아보기: [5.5. 리소스 제한 추가](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1610,7 +1816,7 @@ Nextflow의 기본 실행자는 무엇입니까?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-자세히 알아보기: [4. 실행 플랫폼 선택](#4-실행-플랫폼-선택)
+자세히 알아보기: [4. 실행 플랫폼 선택](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1620,7 +1826,7 @@ Nextflow를 실행할 때 매개변수 파일을 어떻게 지정합니까?
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-자세히 알아보기: [1.3. 매개변수 파일 사용](#13-매개변수-파일-사용)
+자세히 알아보기: [1.3. 매개변수 파일 사용](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1630,7 +1836,7 @@ Nextflow를 실행할 때 매개변수 파일을 어떻게 지정합니까?
 - [x] 테스트 매개변수 제공
 - [ ] 새 프로세스 정의
 
-자세히 알아보기: [6. 프로필을 사용하여 사전 설정 구성 간 전환](#6-프로필을-사용하여-사전-설정-구성-간-전환)
+자세히 알아보기: [6. 프로필을 사용하여 사전 설정 구성 간 전환](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1640,5 +1846,5 @@ Nextflow를 실행할 때 매개변수 파일을 어떻게 지정합니까?
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-자세히 알아보기: [6. 프로필을 사용하여 사전 설정 구성 간 전환](#6-프로필을-사용하여-사전-설정-구성-간-전환)
+자세히 알아보기: [6. 프로필을 사용하여 사전 설정 구성 간 전환](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

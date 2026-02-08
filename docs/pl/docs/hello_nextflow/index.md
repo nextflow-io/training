@@ -18,7 +18,7 @@ additional_information:
         - "**Odbiorcy:** Ten kurs jest przeznaczony dla osób, które są całkowicie nowe w Nextflow i chcą tworzyć własne pipeline'y."
         - "**Umiejętności:** Zakłada się pewną znajomość wiersza poleceń, podstawowych koncepcji skryptowych i popularnych formatów plików."
         - "**Dziedzina:** Ćwiczenia są niezależne od dziedziny, więc nie jest wymagana wcześniejsza wiedza naukowa."
-    videos_playlist: https://www.youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK
+    videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
 
 # Hello Nextflow
@@ -43,14 +43,14 @@ Stworzysz prosty pipeline Nextflow, który przyjmuje tekstowe dane wejściowe, w
 
 Aby uniknąć przytłoczenia Cię koncepcjami i kodem, podzieliliśmy to na sześć części, z których każda skupia się na konkretnych aspektach tworzenia pipeline'ów w Nextflow.
 
-| Rozdział kursu                                        | Podsumowanie                                                                                                                | Szacowany czas |
-| ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Część 1: Hello World](./01_hello_world.md)           | Podstawowe komponenty i zasady składania i uruchamiania workflow'u Nextflow                                                 | 30 min         |
-| [Część 2: Hello Channels](./02_hello_channels.md)     | Używanie kanałów i operatorów do przetwarzania wejść i bezwysiłkowej paralelizacji wykonywania                              | 45 min         |
-| [Część 3: Hello Workflow](./03_hello_workflow.md)     | Używanie kanałów do łączenia wielu kroków i obsługi transferu danych między krokami                                         | 60 min         |
-| [Część 4: Hello Modules](./04_hello_modules.md)       | Stosowanie zasad modularności kodu w celu zwiększenia możliwości ponownego użycia i zmniejszenia obciążenia konserwacyjnego | 20 min         |
-| [Część 5: Hello Containers](./05_hello_containers.md) | Używanie kontenerów jako mechanizmu zarządzania zależnościami oprogramowania i zwiększenia powtarzalności                   | 60 min         |
-| [Część 6: Hello Config](./06_hello_config.md)         | Dostosowywanie zachowania pipeline'u i optymalizacja użycia w różnych środowiskach obliczeniowych                           | 60 min         |
+| Rozdział kursu                                        | Podsumowanie                                                                                                              | Szacowany czas |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| [Część 1: Hello World](./01_hello_world.md)           | Podstawowe komponenty i zasady składania i uruchamiania workflow'u Nextflow                                               | 30 min         |
+| [Część 2: Hello Channels](./02_hello_channels.md)     | Używanie kanałów i operatorów do przetwarzania wejść i bezwysiłkowej paralelizacji wykonywania                            | 45 min         |
+| [Część 3: Hello Workflow](./03_hello_workflow.md)     | Używanie kanałów do łączenia wielu kroków i obsługi transferu danych między krokami                                       | 60 min         |
+| [Część 4: Hello Modules](./04_hello_modules.md)       | Stosowanie zasad modularności kodu w celu zwiększenia możliwości ponownego użycia i zmniejszenia obciążenia konserwacyjne | 20 min         |
+| [Część 5: Hello Containers](./05_hello_containers.md) | Używanie kontenerów jako mechanizmu zarządzania zależnościami oprogramowania i zwiększenia powtarzalności                 | 60 min         |
+| [Część 6: Hello Config](./06_hello_config.md)         | Dostosowywanie zachowania pipeline'u i optymalizacja użycia w różnych środowiskach obliczeniowych                         | 60 min         |
 
 Pod koniec tego kursu będziesz dobrze przygotowany do podjęcia kolejnych kroków w Swojej drodze do tworzenia powtarzalnych workflow'ów dla Twoich potrzeb obliczeniowych w nauce.
 

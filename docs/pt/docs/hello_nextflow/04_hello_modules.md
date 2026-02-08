@@ -129,11 +129,9 @@ Isso nos dá um lugar para colocar o código do processo.
 
 ### 2.2. Mova o código do processo `sayHello` para o arquivo do módulo
 
-Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo, certificando-se de copiar também o shebang `#!/usr/bin/env nextflow`.
+Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Usa echo para imprimir 'Hello World!' em um arquivo
  */
@@ -152,7 +150,7 @@ process sayHello {
 }
 ```
 
-Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho, mas certifique-se de deixar o shebang no lugar.
+Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho.
 
 ### 2.3. Adicione uma declaração de importação antes do bloco de fluxo de trabalho
 
@@ -242,11 +240,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. Mova o código do processo `convertToUpper` para o arquivo do módulo
 
-Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo, certificando-se de copiar também o shebang `#!/usr/bin/env nextflow`.
+Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Usa uma ferramenta de substituição de texto para converter a saudação para maiúsculas
  */
@@ -265,7 +261,7 @@ process convertToUpper {
 }
 ```
 
-Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho, mas certifique-se de deixar o shebang no lugar.
+Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho.
 
 ### 3.3. Adicione uma declaração de importação antes do bloco `params`
 
@@ -342,11 +338,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. Mova o código do processo `collectGreetings` para o arquivo do módulo
 
-Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo, certificando-se de copiar também o shebang `#!/usr/bin/env nextflow`.
+Copie toda a definição do processo do arquivo de fluxo de trabalho para o arquivo do módulo.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Coleta saudações em maiúsculas em um único arquivo de saída
  */
@@ -369,7 +363,7 @@ process collectGreetings {
 }
 ```
 
-Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho, mas certifique-se de deixar o shebang no lugar.
+Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trabalho.
 
 ### 4.3. Adicione uma declaração de importação antes do bloco `params`
 

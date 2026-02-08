@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=nyLvwhrSB2m1NPc5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=gZxlXgkVxuLEzOsC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -12,7 +12,7 @@
 :green_book: La trascrizione del video è disponibile [qui](./transcripts/00_orientation.md).
 ///
 
-!!! tip "Suggerimento"
+!!! tip
 
     I video di YouTube hanno alcune funzionalità speciali!
 
@@ -62,7 +62,7 @@ Potete impostare VSCode per focalizzarsi su questa directory, in modo che solo i
 code .
 ```
 
-!!! tip "Suggerimento"
+!!! tip
 
     Se per qualsiasi motivo uscite da questa directory (ad es. il codespace va in sleep), potete sempre usare il percorso completo per tornarci, assumendo che stiate eseguendo all'interno dell'ambiente di formazione Github Codespaces:
 

@@ -164,7 +164,7 @@ Jetzt müssen wir Nextflow sagen, dass es den Process, den wir gerade definiert 
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="44" hl_lines="10-11"
     workflow {
@@ -219,7 +219,7 @@ Also ist die Ausgabe des `sayHello`-Process ein Kanal namens `sayHello.out`, den
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
         // Die Begrüßung in Großbuchstaben umwandeln
@@ -243,7 +243,7 @@ Zum Schluss aktualisieren wir die Workflow-Ausgaben, um auch die Ergebnisse des 
 
 Nimm im `workflow`-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="56" hl_lines="3"
         publish:
@@ -266,7 +266,7 @@ Die Logik ist dieselbe wie zuvor.
 
 Nimm im `output`-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="61" hl_lines="6-9"
     output {
@@ -449,7 +449,7 @@ Das entspricht einem Eingabeslot; nennen wir ihn der Einfachheit halber `input_f
 
 Nimm im Process-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="42" hl_lines="2"
           input:
@@ -476,7 +476,7 @@ Glücklicherweise macht Nextflow das gerne für uns, wenn wir einfach `cat ${inp
 
 Nimm im Process-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="54" hl_lines="3"
         script:
@@ -515,7 +515,7 @@ Das ist auch ein Kanal, genannt `convertToUpper.out`.
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
         // Die Begrüßung in Großbuchstaben umwandeln
@@ -593,7 +593,7 @@ Wir können das direkt in den `collectGreetings()`-Process-Aufruf einstecken.
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
         // Alle Begrüßungen in einer Datei sammeln
@@ -613,7 +613,7 @@ Nimm im Workflow-Block die folgende Codeänderung vor:
 
 Lass uns auch ein paar `view()`-Anweisungen einfügen, um die Zustände des Kanal-Inhalts vor und nach zu visualisieren.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
         // Alle Begrüßungen in einer Datei sammeln
@@ -694,7 +694,7 @@ Diesmal haben wir alle drei Begrüßungen in der endgültigen Ausgabedatei. Erfo
 
 Bevor du zum nächsten Abschnitt übergehst, empfehlen wir, die `view()`-Anweisungen zu löschen, um die Konsolenausgabe nicht zu überladen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="73"
         // Alle Begrüßungen in einer Datei sammeln
@@ -726,7 +726,7 @@ Zur Wiederholung, das ist, was du bisher erstellt hast:
 
 ### Wie geht es weiter?
 
-Lerne, wie du zusätzliche Parameter an einen Process übergibst.
+Lerne, wie du mehr als eine Eingabe an einen Process übergibst.
 
 ---
 
@@ -754,7 +754,7 @@ Nennen wir diese `batch_name`.
 
 Nimm im Process-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="42" hl_lines="3"
         input:
@@ -780,7 +780,7 @@ Wir können die Variable auf dieselbe Weise in den Ausgabedateinamen einfügen, 
 
 Nimm im Process-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 6"
         output:
@@ -817,7 +817,7 @@ Lass uns das verwenden, um einen `batch`-Parameter zu deklarieren (mit einem Sta
 
 Nimm im Abschnitt für Pipeline-Parameter die folgenden Codeänderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
     /*
@@ -848,7 +848,7 @@ Um den Wert des Parameters an den Process zu übergeben, müssen wir ihn im Proc
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
         // Alle Begrüßungen in einer Datei sammeln
@@ -939,7 +939,7 @@ Das bedeutet, wir können Nextflows eingebaute `size()`-Funktion verwenden, um d
 
 Nimm im `collectGreetings`-Process-Block die folgenden Codeänderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="55" hl_lines="2 5"
         script:
@@ -969,7 +969,7 @@ Aber während wir dabei sind, werden wir auch einige `emit:`-Tags zu unseren Aus
 
 Nimm im Process-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="46" hl_lines="2 3"
         output:
@@ -1011,7 +1011,7 @@ Wir müssen die Workflow-Ausgaben entsprechend aktualisieren.
 
 Nimm im `workflow`-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="80" hl_lines="4 5"
         publish:
@@ -1039,7 +1039,7 @@ Aber für jetzt aktualisieren wir die Workflow-Level-Ausgaben fertig.
 
 Nimm im `output`-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-workflow.nf" linenums="86" hl_lines="14-17"
     output {

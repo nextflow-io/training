@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -12,13 +12,13 @@
 :green_book: Transkrypcja wideo jest dostępna [tutaj](./transcripts/02_hello_channels.md).
 ///
 
-W Części 1 kursu (Hello World) pokazaliśmy Ci, jak dostarczyć zmienne wejście do procesu, podając je bezpośrednio w wywołaniu procesu: `sayHello(params.input)`.
+W Części 1 kursu (Hello World) pokazaliśmy Ci, jak dostarczyć zmienne wejście do procesu, podając je bezpośrednio w wywołaniu: `sayHello(params.input)`.
 To było celowo uproszczone podejście.
 W praktyce takie rozwiązanie ma poważne ograniczenia; działa tylko w bardzo prostych przypadkach, gdy chcemy uruchomić proces jednorazowo, na pojedynczej wartości.
-W większości realistycznych przypadków użycia workflow'ów chcemy przetworzyć wiele wartości (na przykład dane eksperymentalne dla wielu próbek), więc potrzebujemy bardziej wyrafinowanego sposobu obsługi wejść.
+W większości realistycznych zastosowań workflow'ów chcemy przetworzyć wiele wartości (na przykład dane eksperymentalne dla wielu próbek), więc potrzebujemy bardziej wyrafinowanego sposobu obsługi wejść.
 
 Do tego służą [**kanały**](https://nextflow.io/docs/latest/channel.html) Nextflow'a.
-Kanały to kolejki zaprojektowane do efektywnej obsługi wejść i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowane przetwarzanie równoległe i wiele dodatkowych korzyści.
+**Kanały** to kolejki zaprojektowane do efektywnej obsługi wejść i przekazywania ich z jednego kroku do drugiego w wieloetapowych workflow'ach, zapewniając jednocześnie wbudowane przetwarzanie równoległe i wiele dodatkowych korzyści.
 
 W tej części kursu nauczysz się, jak używać kanału do obsługi wielu wejść z różnych źródeł.
 Nauczysz się również używać [**operatorów**](https://nextflow.io/docs/latest/reference/operator.html) do transformowania zawartości kanałów w razie potrzeby.

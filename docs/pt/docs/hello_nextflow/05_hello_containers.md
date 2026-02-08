@@ -1,9 +1,7 @@
 # Parte 5: Hello Containers
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -115,7 +113,7 @@ Para usar um contêiner, você normalmente baixa ou _puxa_ uma imagem de contêi
 
 A sintaxe geral é a seguinte:
 
-```bash title="Sintaxe"
+```bash title="Syntax"
 docker pull '<container>'
 ```
 
@@ -125,7 +123,7 @@ A parte `'<container>'` é o endereço URI da imagem de contêiner.
 
 Como exemplo, vamos puxar uma imagem de contêiner que contém [cowpy](https://github.com/jeffbuttars/cowpy), uma implementação em Python de uma ferramenta chamada `cowsay` que gera arte ASCII para exibir entradas de texto arbitrárias de forma divertida.
 
-```txt title="Exemplo"
+```txt title="Example"
  ________________________
 < Are we having fun yet? >
  ------------------------
@@ -187,7 +185,7 @@ Isso é ótimo para executar comandos únicos.
 
 A sintaxe geral é a seguinte:
 
-```bash title="Sintaxe"
+```bash title="Syntax"
 docker run --rm '<container>' [tool command]
 ```
 
@@ -309,7 +307,7 @@ Como notado anteriormente, o contêiner está isolado do sistema hospedeiro por 
 
 Para permitir que o contêiner acesse o sistema de arquivos do hospedeiro, você pode **montar** um **volume** do sistema hospedeiro no contêiner usando a seguinte sintaxe:
 
-```bash title="Sintaxe"
+```bash title="Syntax"
 -v <outside_path>:<inside_path>
 ```
 
@@ -415,8 +413,6 @@ Para demonstrar isso, vamos adicionar uma etapa `cowpy` ao pipeline que estamos 
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
 </figure>
 
-Muu se você está pronto para mergulhar!
-
 ### 2.1. Escreva um módulo `cowpy`
 
 Primeiro, vamos criar o módulo do processo `cowpy`.
@@ -438,7 +434,7 @@ Podemos modelar nosso processo `cowpy` nos outros processos que escrevemos anter
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Gera arte ASCII com cowpy
+// Generate ASCII art with cowpy
 process cowpy {
 
     input:
@@ -471,7 +467,7 @@ Insira a declaração de importação acima do bloco de fluxo de trabalho e pree
 === "Depois"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-    // Inclui módulos
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -481,7 +477,7 @@ Insira a declaração de importação acima do bloco de fluxo de trabalho e pree
 === "Antes"
 
     ```groovy title="hello-containers.nf" linenums="3"
-    // Inclui módulos
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -502,17 +498,17 @@ No bloco de fluxo de trabalho, faça a seguinte mudança de código:
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
-        // cria um canal para entradas de um arquivo CSV
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emite uma saudação
+        // emit a greeting
         sayHello(greeting_ch)
-        // converte a saudação para maiúsculas
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // gera arte ASCII das saudações com cowpy
+        // generate ASCII art of the greetings with cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -520,15 +516,15 @@ No bloco de fluxo de trabalho, faça a seguinte mudança de código:
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
-        // cria um canal para entradas de um arquivo CSV
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emite uma saudação
+        // emit a greeting
         sayHello(greeting_ch)
-        // converte a saudação para maiúsculas
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-        // coleta todas as saudações em um arquivo
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
@@ -1059,7 +1055,7 @@ Todo o trabalho duro que tivemos que fazer manualmente na primeira seção? O Ne
 
 ```txt
  _______________________
-< Viva os robôs...! >
+< Hurray for robots...! >
  -----------------------
                                    ,-----.
                                    |     |
@@ -1118,7 +1114,7 @@ O que a flag `-v` faz em um comando `docker run`?
 - [x] Monta um volume do sistema hospedeiro no contêiner
 - [ ] Especifica a versão do contêiner
 
-Saiba mais: [1.3.4. Monte dados no contêiner](#134-monte-dados-no-conteiner)
+Saiba mais: [1.3.4. Monte dados no contêiner](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1128,7 +1124,7 @@ Por que você precisa montar volumes ao usar contêineres?
 - [x] Porque contêineres estão isolados do sistema de arquivos do hospedeiro por padrão
 - [ ] Para habilitar rede
 
-Saiba mais: [1.3.4. Monte dados no contêiner](#134-monte-dados-no-conteiner)
+Saiba mais: [1.3.4. Monte dados no contêiner](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1138,7 +1134,7 @@ Como você especifica um contêiner para um processo Nextflow?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-Saiba mais: [2.3.1. Especifique um contêiner para cowpy](#231-especifique-um-conteiner-para-cowpy)
+Saiba mais: [2.3.1. Especifique um contêiner para cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1148,7 +1144,7 @@ Qual configuração do `nextflow.config` habilita Docker para seu fluxo de traba
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-Saiba mais: [2.3.2. Habilite o uso de Docker através do arquivo `nextflow.config`](#232-habilite-o-uso-de-docker-atraves-do-arquivo-nextflowconfig)
+Saiba mais: [2.3.2. Habilite o uso de Docker através do arquivo `nextflow.config`](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1158,5 +1154,5 @@ O que o Nextflow lida automaticamente ao executar um processo em um contêiner? 
 - [x] Executar o script do processo dentro do contêiner
 - [x] Limpar a instância do contêiner após a execução
 
-Saiba mais: [2.3.4. Inspecione como o Nextflow lançou a tarefa em contêiner](#234-inspecione-como-o-nextflow-lancou-a-tarefa-em-conteiner)
+Saiba mais: [2.3.4. Inspecione como o Nextflow lançou a tarefa em contêiner](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

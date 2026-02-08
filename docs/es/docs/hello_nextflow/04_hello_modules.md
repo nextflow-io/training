@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -129,11 +129,9 @@ Esto nos da un lugar para poner el código del proceso.
 
 ### 2.2. Mover el código del proceso `sayHello` al archivo del módulo
 
-Copie toda la definición del proceso desde el archivo de workflow al archivo del módulo, asegurándose de copiar también el shebang `#!/usr/bin/env nextflow`.
+Copie toda la definición del proceso desde el archivo de workflow al archivo del módulo.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Usar echo para imprimir 'Hello World!' a un archivo
  */
@@ -152,7 +150,7 @@ process sayHello {
 }
 ```
 
-Una vez hecho eso, elimine la definición del proceso del archivo de workflow, pero asegúrese de dejar el shebang en su lugar.
+Una vez hecho eso, elimine la definición del proceso del archivo de workflow.
 
 ### 2.3. Agregar una declaración de importación antes del bloque workflow
 
@@ -193,7 +191,7 @@ Insertemos eso arriba del bloque `params` y completémoslo apropiadamente.
 
 Verá que hemos completado el nombre del proceso, `sayHello`, y la ruta al archivo que contiene el código del módulo, `./modules/sayHello.nf`.
 
-### 2.4. Ejecutar el flujo de trabajo
+### 2.4. Ejecutar el workflow
 
 Estamos ejecutando el workflow con esencialmente el mismo código y entradas que antes, así que ejecutemos con la bandera `-resume` y veamos qué sucede.
 
@@ -242,11 +240,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. Mover el código del proceso `convertToUpper` al archivo del módulo
 
-Copie toda la definición del proceso desde el archivo de workflow al archivo del módulo, asegurándose de copiar también el shebang `#!/usr/bin/env nextflow`.
+Copie toda la definición del proceso desde el archivo de workflow al archivo del módulo.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Usar una herramienta de reemplazo de texto para convertir el saludo a mayúsculas
  */
@@ -265,7 +261,7 @@ process convertToUpper {
 }
 ```
 
-Una vez hecho eso, elimine la definición del proceso del archivo de workflow, pero asegúrese de dejar el shebang en su lugar.
+Una vez hecho eso, elimine la definición del proceso del archivo de workflow.
 
 ### 3.3. Agregar una declaración de importación antes del bloque `params`
 
@@ -304,7 +300,7 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
 
 Esto debería empezar a verse muy familiar.
 
-### 3.4. Ejecutar el flujo de trabajo nuevamente
+### 3.4. Ejecutar el workflow nuevamente
 
 Ejecute esto con la bandera `-resume`.
 
@@ -342,11 +338,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. Mover el código del proceso `collectGreetings` al archivo del módulo
 
-Copie toda la definición del proceso desde el archivo de workflow al archivo del módulo, asegurándose de copiar también el shebang `#!/usr/bin/env nextflow`.
+Copie toda la definición del proceso desde el archivo de workflow al archivo del módulo.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Recopilar saludos en mayúsculas en un único archivo de salida
  */
@@ -369,7 +363,7 @@ process collectGreetings {
 }
 ```
 
-Una vez hecho eso, elimine la definición del proceso del archivo de workflow, pero asegúrese de dejar el shebang en su lugar.
+Una vez hecho eso, elimine la definición del proceso del archivo de workflow.
 
 ### 4.3. Agregar una declaración de importación antes del bloque `params`
 
@@ -410,7 +404,7 @@ Inserte la declaración de importación arriba del bloque `params` y complétela
 
 ¡El último!
 
-### 4.4. Ejecutar el flujo de trabajo
+### 4.4. Ejecutar el workflow
 
 Ejecute esto con la bandera `-resume`.
 

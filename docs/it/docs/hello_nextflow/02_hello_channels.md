@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -89,13 +89,13 @@ Creeremo un **canale** per passare l'input variabile al processo `sayHello()` in
 
 ### 1.1. Creare un canale di input
 
-Esistono diverse [**fabbrica di canali**](https://nextflow.io/docs/latest/reference/channel.html) che possiamo usare per configurare un canale.
+Esistono diverse [**fabbriche di canali**](https://nextflow.io/docs/latest/reference/channel.html) che possiamo usare per configurare un canale.
 Per mantenere le cose semplici per ora, useremo la fabbrica di canali più basilare, chiamata [`channel.of`](https://nextflow.io/docs/latest/reference/channel.html#of), che creerà un canale contenente un singolo valore.
 Funzionalmente sarà simile a come lo avevamo configurato prima, ma invece di far creare a Nextflow un canale implicitamente, ora lo stiamo facendo esplicitamente.
 
 Questa è la riga di codice che useremo:
 
-```console title="Syntax"
+```console title="Sintassi"
 greeting_ch = channel.of('Hello Channels!')
 ```
 
@@ -1253,7 +1253,7 @@ L'operatore [`map()`](https://nextflow.io/docs/latest/reference/operator.html#ma
 In questo caso, lo useremo per estrarre quell'unico elemento che vogliamo da ogni riga nel nostro file di dati.
 Ecco come appare la sintassi:
 
-```groovy title="Syntax"
+```groovy title="Sintassi"
 .map { row -> row[0] }
 ```
 

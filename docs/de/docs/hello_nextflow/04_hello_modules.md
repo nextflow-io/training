@@ -1,9 +1,7 @@
 # Teil 4: Hello Modules
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=de" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=de" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -129,11 +127,9 @@ Dies gibt uns einen Platz, um den process-Code zu platzieren.
 
 ### 2.2. Den `sayHello`-process-Code in die Moduldatei verschieben
 
-Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei und stelle sicher, dass du auch den `#!/usr/bin/env nextflow`-Shebang mit kopierst.
+Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Verwende echo, um 'Hello World!' in eine Datei zu schreiben
  */
@@ -152,13 +148,13 @@ process sayHello {
 }
 ```
 
-Sobald das erledigt ist, lösche die process-Definition aus der Workflow-Datei, aber stelle sicher, dass du den Shebang an Ort und Stelle lässt.
+Sobald das erledigt ist, lösche die process-Definition aus der Workflow-Datei.
 
 ### 2.3. Eine include-Deklaration vor dem workflow-Block hinzufügen
 
 Die Syntax für das Einbinden eines process aus einem Modul ist ziemlich unkompliziert:
 
-```groovy title="Syntax: include-Deklaration"
+```groovy title="Syntax: include declaration"
 include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
@@ -167,7 +163,7 @@ Lass uns das oberhalb des `params`-Blocks einfügen und es entsprechend ausfüll
 === "Nachher"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Module einbinden
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -242,11 +238,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. Den `convertToUpper`-process-Code in die Moduldatei verschieben
 
-Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei und stelle sicher, dass du auch den `#!/usr/bin/env nextflow`-Shebang mit kopierst.
+Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Verwende ein Textersetzungstool, um die Begrüßung in Großbuchstaben umzuwandeln
  */
@@ -265,7 +259,7 @@ process convertToUpper {
 }
 ```
 
-Sobald das erledigt ist, lösche die process-Definition aus der Workflow-Datei, aber stelle sicher, dass du den Shebang an Ort und Stelle lässt.
+Sobald das erledigt ist, lösche die process-Definition aus der Workflow-Datei.
 
 ### 3.3. Eine include-Deklaration vor dem `params`-Block hinzufügen
 
@@ -274,7 +268,7 @@ Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie en
 === "Nachher"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Module einbinden
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -290,7 +284,7 @@ Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie en
 === "Vorher"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Module einbinden
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -342,11 +336,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. Den `collectGreetings`-process-Code in die Moduldatei verschieben
 
-Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei und stelle sicher, dass du auch den `#!/usr/bin/env nextflow`-Shebang mit kopierst.
+Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Großbuchstaben-Begrüßungen in einer einzelnen Ausgabedatei sammeln
  */
@@ -369,7 +361,7 @@ process collectGreetings {
 }
 ```
 
-Sobald das erledigt ist, lösche die process-Definition aus der Workflow-Datei, aber stelle sicher, dass du den Shebang an Ort und Stelle lässt.
+Sobald das erledigt ist, lösche die process-Definition aus der Workflow-Datei.
 
 ### 4.3. Eine include-Deklaration vor dem `params`-Block hinzufügen
 
@@ -378,7 +370,7 @@ Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie en
 === "Nachher"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Module einbinden
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -395,7 +387,7 @@ Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie en
 === "Vorher"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Module einbinden
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -458,7 +450,7 @@ Was ist ein Modul in Nextflow?
 - [ ] Eine Workflow-Definition
 - [ ] Ein channel-Operator
 
-Mehr erfahren: [2. Ein Modul für `sayHello()` erstellen](#2-ein-modul-fur-sayhello-erstellen)
+Mehr erfahren: [2. Ein Modul für `sayHello()` erstellen](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -468,7 +460,7 @@ Welche Konvention wird typischerweise für das Speichern von Moduldateien verwen
 - [x] In einem `modules/`-Verzeichnis
 - [ ] In einem `lib/`-Verzeichnis
 
-Mehr erfahren: [1. Ein Verzeichnis zum Speichern von Modulen erstellen](#1-ein-verzeichnis-zum-speichern-von-modulen-erstellen)
+Mehr erfahren: [1. Ein Verzeichnis zum Speichern von Modulen erstellen](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -479,7 +471,7 @@ Was ist die korrekte Syntax, um ein Modul zu verwenden?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Mehr erfahren: [2.3. Eine include-Deklaration hinzufügen](#23-eine-include-deklaration-vor-dem-workflow-block-hinzufugen)
+Mehr erfahren: [2.3. Eine include-Deklaration hinzufügen](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

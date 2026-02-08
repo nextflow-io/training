@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=nyLvwhrSB2m1NPc5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=fr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=gZxlXgkVxuLEzOsC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -112,7 +112,7 @@ tree . -L 2
 Cliquez sur la boîte colorée pour développer la section et voir son contenu.
 Nous utilisons des sections pliables comme celle-ci pour inclure la sortie de commande attendue de manière concise.
 
-- **Les fichiers `.nf`** sont des scripts de flux de travail nommés en fonction de la partie du cours où ils sont utilisés.
+- **Les fichiers `.nf`** sont des scripts de workflow nommés en fonction de la partie du cours où ils sont utilisés.
 
 - **Le fichier `nextflow.config`** est un fichier de configuration qui définit des propriétés d'environnement minimales.
   Vous pouvez l'ignorer pour l'instant.
@@ -121,7 +121,7 @@ Nous utilisons des sections pliables comme celle-ci pour inclure la sortie de co
 
 - **Les fichiers `test-params.*`** sont des fichiers de configuration que nous utiliserons dans la Partie 6 (Configuration). Vous pouvez les ignorer pour l'instant.
 
-- **Le répertoire `solutions`** contient les scripts de flux de travail complétés qui résultent de chaque étape du cours.
+- **Le répertoire `solutions`** contient les scripts de workflow complétés qui résultent de chaque étape du cours.
   Ils sont destinés à être utilisés comme référence pour vérifier votre travail et résoudre les éventuels problèmes.
 
 ## Liste de vérification de préparation

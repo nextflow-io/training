@@ -43,14 +43,14 @@ Você desenvolverá um pipeline simples do Nextflow que recebe algumas entradas 
 
 Para evitar sobrecarregá-lo com conceitos e código, dividimos isso em seis partes que focarão em aspectos específicos do desenvolvimento de pipelines com Nextflow.
 
-| Capítulo do curso                                    | Resumo                                                                                                             | Duração estimada |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| [Parte 1: Hello World](./01_hello_world.md)          | Componentes básicos e princípios envolvidos na montagem e execução de um fluxo de trabalho Nextflow               | 30 mins          |
-| [Parte 2: Hello Channels](./02_hello_channels.md)    | Usando canais e operadores para processar entradas e paralelizar a execução sem esforço                            | 45 mins          |
-| [Parte 3: Hello Workflow](./03_hello_workflow.md)    | Usando canais para encadear múltiplas etapas juntas e lidar com a transferência de dados entre etapas             | 60 mins          |
-| [Parte 4: Hello Modules](./04_hello_modules.md)      | Aplicando princípios de modularidade de código para aumentar a reutilização e diminuir a carga de manutenção      | 20 mins          |
-| [Parte 5: Hello Containers](./05_hello_containers.md)| Usando contêineres como um mecanismo para gerenciar dependências de software e aumentar a reprodutibilidade       | 60 mins          |
-| [Parte 6: Hello Config](./06_hello_config.md)        | Personalizando o comportamento do pipeline e otimizando o uso em diferentes ambientes computacionais              | 60 mins          |
+| Capítulo do curso                                    | Resumo                                                                                                           | Duração estimada |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------- |
+| [Parte 1: Hello World](./01_hello_world.md)          | Componentes básicos e princípios envolvidos na montagem e execução de um fluxo de trabalho Nextflow             | 30 mins          |
+| [Parte 2: Hello Channels](./02_hello_channels.md)    | Usando canais e operadores para processar entradas e paralelizar a execução sem esforço                         | 45 mins          |
+| [Parte 3: Hello Workflow](./03_hello_workflow.md)    | Usando canais para encadear múltiplas etapas juntas e lidar com a transferência de dados entre etapas           | 60 mins          |
+| [Parte 4: Hello Modules](./04_hello_modules.md)      | Aplicando princípios de modularidade de código para aumentar a reutilização e diminuir a carga de manutenção    | 20 mins          |
+| [Parte 5: Hello Containers](./05_hello_containers.md)| Usando contêineres como um mecanismo para gerenciar dependências de software e aumentar a reprodutibilidade     | 60 mins          |
+| [Parte 6: Hello Config](./06_hello_config.md)        | Personalizando o comportamento do pipeline e otimizando o uso em diferentes ambientes computacionais            | 60 mins          |
 
 Ao final deste curso, você estará bem preparado para enfrentar os próximos passos em sua jornada para desenvolver fluxos de trabalho reproduzíveis para suas necessidades de computação científica.
 

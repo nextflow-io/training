@@ -15,10 +15,10 @@
 En la Parte 1 de este curso (Hello World), le mostramos cómo proporcionar una entrada variable a un proceso proporcionando la entrada directamente en la llamada al proceso: `sayHello(params.input)`.
 Ese fue un enfoque deliberadamente simplificado.
 En la práctica, ese enfoque tiene limitaciones importantes; a saber, que solo funciona para casos muy simples donde solo queremos ejecutar el proceso una vez, con un único valor.
-En la mayoría de los casos de uso reales de flujos de trabajo, queremos procesar múltiples valores (datos experimentales para múltiples muestras, por ejemplo), por lo que necesitamos una forma más sofisticada de manejar las entradas.
+En la mayoría de los casos de uso reales de workflows, queremos procesar múltiples valores (datos experimentales para múltiples muestras, por ejemplo), por lo que necesitamos una forma más sofisticada de manejar las entradas.
 
 Para eso sirven los [**channels**](https://nextflow.io/docs/latest/channel.html) de Nextflow.
-Los channels son colas diseñadas para manejar entradas de manera eficiente y transportarlas de un paso a otro en flujos de trabajo de múltiples pasos, mientras proporcionan paralelismo integrado y muchos beneficios adicionales.
+Los channels son colas diseñadas para manejar entradas de manera eficiente y transportarlas de un paso a otro en workflows de múltiples pasos, mientras proporcionan paralelismo integrado y muchos beneficios adicionales.
 
 En esta parte del curso, aprenderá cómo usar un channel para manejar múltiples entradas de una variedad de fuentes diferentes.
 También aprenderá a usar [**operadores**](https://nextflow.io/docs/latest/reference/operator.html) para transformar el contenido de los channels según sea necesario.
@@ -183,9 +183,9 @@ En el bloque workflow, haga el siguiente cambio de código:
 
 Esto le dice a Nextflow que ejecute el proceso `sayHello` sobre el contenido del channel `greeting_ch`.
 
-Ahora nuestro flujo de trabajo es correctamente funcional; es el equivalente explícito de escribir `sayHello('Hello Channels!')`.
+Ahora nuestro workflow es correctamente funcional; es el equivalente explícito de escribir `sayHello('Hello Channels!')`.
 
-### 1.3. Ejecutar el flujo de trabajo
+### 1.3. Ejecutar el workflow
 
 ¡Ejecutémoslo!
 
@@ -213,7 +213,7 @@ Puede verificar el directorio de resultados para comprobar que el resultado sigu
     Hello Channels!
     ```
 
-Así que hemos aumentado la flexibilidad de nuestro flujo de trabajo mientras logramos el mismo resultado final.
+Así que hemos aumentado la flexibilidad de nuestro workflow mientras logramos el mismo resultado final.
 Esto puede parecer que estamos escribiendo más código sin ningún beneficio tangible, pero el valor se hará evidente tan pronto como comencemos a manejar más entradas.
 
 Como adelanto de eso, veamos una cosa más antes de continuar: un pequeño pero conveniente beneficio de usar un channel explícito para gestionar la entrada de datos.
@@ -262,7 +262,7 @@ Agregue esta pequeña línea al bloque workflow:
 
 La cantidad exacta de espacios no importa siempre que sea un múltiplo de 4; solo estamos tratando de alinear el inicio de la declaración `.view()` con la parte `.of()` de la construcción del channel.
 
-Ahora ejecute el flujo de trabajo nuevamente:
+Ahora ejecute el workflow nuevamente:
 
 ```bash
 nextflow run hello-channels.nf
@@ -289,13 +289,13 @@ Sabe cómo usar una channel factory básica para proporcionar una entrada a un p
 
 ### ¿Qué sigue?
 
-Aprender cómo usar channels para hacer que el flujo de trabajo itere sobre múltiples valores de entrada.
+Aprender cómo usar channels para hacer que el workflow itere sobre múltiples valores de entrada.
 
 ---
 
-## 2. Modificar el flujo de trabajo para ejecutarse con múltiples valores de entrada
+## 2. Modificar el workflow para ejecutarse con múltiples valores de entrada
 
-Los flujos de trabajo típicamente se ejecutan en lotes de entradas que están destinadas a ser procesadas en masa, por lo que queremos actualizar el flujo de trabajo para aceptar múltiples valores de entrada.
+Los workflows típicamente se ejecutan en lotes de entradas que están destinadas a ser procesadas en masa, por lo que queremos actualizar el workflow para aceptar múltiples valores de entrada.
 
 ### 2.1. Cargar múltiples saludos en el channel de entrada
 
@@ -306,7 +306,7 @@ Hagámoslos `'Hello'`, `'Bonjour'` y `'Holà'`.
 
 #### 2.1.1. Agregar más saludos
 
-Antes del bloque workflow, haga el siguiente cambio de código:
+En el bloque workflow, haga el siguiente cambio de código:
 
 === "Después"
 
@@ -432,8 +432,8 @@ nextflow run hello-channels.nf -ansi-log false
 
 Esta vez vemos las tres ejecuciones de proceso y sus subdirectorios de trabajo asociados listados en la salida.
 
-Eso es mucho mejor, al menos para un flujo de trabajo simple.
-Para un flujo de trabajo complejo, o un gran número de entradas, tener la lista completa en el terminal sería un poco abrumador.
+Eso es mucho mejor, al menos para un workflow simple.
+Para un workflow complejo, o un gran número de entradas, tener la lista completa en el terminal sería un poco abrumador.
 Por eso `-ansi-log false` no es el comportamiento predeterminado.
 
 !!! tip "Consejo"
@@ -570,7 +570,7 @@ Asegúrese de reemplazar `output.txt` tanto en la definición de salida como en 
 
 Esto debería producir un nombre de archivo de salida único cada vez que se llama al proceso, para que pueda distinguirse de las salidas de otras llamadas al mismo proceso en el directorio de salida.
 
-#### 2.2.2. Ejecutar el flujo de trabajo
+#### 2.2.2. Ejecutar el workflow
 
 Ejecutémoslo. Note que volvemos a ejecutar con la configuración de log ANSI predeterminada.
 
@@ -750,7 +750,7 @@ En el bloque workflow, haga el siguiente cambio:
 
 Esto debería ser funcional ahora.
 
-#### 3.1.3. Ejecutar el flujo de trabajo
+#### 3.1.3. Ejecutar el workflow
 
 Intentemos ejecutarlo:
 
@@ -930,9 +930,9 @@ Esto resultará en una salida de consola bien etiquetada.
 
     Preferimos ser explícitos para ayudar a la claridad del código, por lo que la sintaxis `$it` está desaconsejada y gradualmente se eliminará del lenguaje Nextflow.
 
-#### 3.2.3. Ejecutar el flujo de trabajo
+#### 3.2.3. Ejecutar el workflow
 
-¡Finalmente, puede intentar ejecutar el flujo de trabajo nuevamente!
+¡Finalmente, puede intentar ejecutar el workflow nuevamente!
 
 ```bash
 nextflow run hello-channels.nf
@@ -958,7 +958,7 @@ Esta vez funciona Y nos da la información adicional sobre cómo se ve el conten
 - Una única declaración `Before flatten:` porque en ese punto el channel contiene un elemento, el array original.
 - Tres declaraciones `After flatten:` separadas, una para cada saludo, que ahora son elementos individuales en el channel.
 
-Importante, esto significa que cada elemento ahora puede ser procesado por separado por el flujo de trabajo.
+Importante, esto significa que cada elemento ahora puede ser procesado por separado por el workflow.
 
 !!! tip "Consejo"
 
@@ -971,13 +971,13 @@ Sabe cómo usar un operador como `flatten()` para transformar el contenido de un
 
 ### ¿Qué sigue?
 
-Aprender cómo hacer que el flujo de trabajo tome un archivo como su fuente de valores de entrada.
+Aprender cómo hacer que el workflow tome un archivo como su fuente de valores de entrada.
 
 ---
 
 ## 4. Leer valores de entrada desde un archivo CSV
 
-Realisticamente, rara vez o nunca vamos a comenzar desde un array de valores.
+Realísticamente, rara vez o nunca vamos a comenzar desde un array de valores.
 Lo más probable es que tengamos uno o más archivos que contienen los datos que necesitan ser procesados, en algún tipo de formato estructurado.
 
 Hemos preparado un archivo CSV llamado `greetings.csv` que contiene varios saludos de entrada, imitando el tipo de datos columnares que podría querer procesar en un análisis de datos real, almacenado bajo `data/`.
@@ -989,7 +989,7 @@ Bonjour,French,456
 Holà,Spanish,789
 ```
 
-Nuestra próxima tarea es adaptar nuestro flujo de trabajo para leer los valores de este archivo.
+Nuestra próxima tarea es adaptar nuestro workflow para leer los valores de este archivo.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-multi-inputs-csv.svg"
@@ -1028,10 +1028,12 @@ Haga la siguiente edición a la declaración del parámetro:
     /*
      * Parámetros del pipeline
      */
-    input: String = 'Holà mundo!'
+    params {
+        input: String = 'Holà mundo!'
+    }
     ```
 
-Esto asume que el archivo está ubicado junto con el código del flujo de trabajo.
+Esto asume que el archivo está ubicado junto con el código del workflow.
 Aprenderá cómo lidiar con otras ubicaciones de datos más adelante en su viaje con Nextflow.
 
 #### 4.1.2. Cambiar a una channel factory diseñada para manejar un archivo
@@ -1084,9 +1086,9 @@ En el bloque workflow, haga el siguiente cambio de código:
 Notará que cambiamos la entrada del channel de nuevo a `param.input`, y eliminamos la declaración `greetings_array` ya que ya no la necesitaremos.
 También hemos comentado el `flatten()` y la segunda declaración `view()`.
 
-#### 4.1.3. Ejecutar el flujo de trabajo
+#### 4.1.3. Ejecutar el workflow
 
-Intentemos ejecutar el flujo de trabajo con la nueva channel factory y el archivo de entrada.
+Intentemos ejecutar el workflow con la nueva channel factory y el archivo de entrada.
 
 ```bash
 nextflow run hello-channels.nf
@@ -1187,9 +1189,9 @@ En el bloque workflow, haga el siguiente cambio de código para reemplazar `flat
 Como puede ver, también actualizamos las declaraciones `view()` de antes/después.
 Técnicamente podríamos haber usado el mismo nombre de variable (`greeting`) pero lo actualizamos a algo más apropiado (`csv`) para hacer el código más legible por otros.
 
-#### 4.2.2. Ejecutar el flujo de trabajo nuevamente
+#### 4.2.2. Ejecutar el workflow nuevamente
 
-Intentemos ejecutar el flujo de trabajo con la lógica de análisis CSV agregada.
+Intentemos ejecutar el workflow con la lógica de análisis CSV agregada.
 
 ```bash
 nextflow run hello-channels.nf
@@ -1307,7 +1309,7 @@ En el bloque workflow, haga el siguiente cambio de código:
 
 Verá que agregamos otra llamada `view()` para confirmar que el operador hace lo que esperamos.
 
-#### 4.3.2. Ejecutar el flujo de trabajo
+#### 4.3.2. Ejecutar el workflow
 
 Ejecutemos esto una vez más:
 
@@ -1347,7 +1349,7 @@ _Note que las líneas pueden aparecer en un orden diferente en su salida._
 --8<-- "docs/en/docs/hello_nextflow/img/hello-channels-split-and-map.svg"
 </figure>
 
-También puede mirar los archivos de salida para verificar que cada saludo fue correctamente extraído y procesado a través del flujo de trabajo.
+También puede mirar los archivos de salida para verificar que cada saludo fue correctamente extraído y procesado a través del workflow.
 
 Hemos logrado el mismo resultado que antes, pero ahora tenemos mucha más flexibilidad para agregar más elementos al channel de saludos que queremos procesar modificando un archivo de entrada, sin modificar ningún código.
 Aprenderá enfoques más sofisticados para manejar entradas complejas en una capacitación posterior.
@@ -1367,7 +1369,7 @@ También ha visto cómo los channels manejan la ejecución paralela implícitame
 
 ¡Tome un gran descanso, trabajó duro en este!
 
-Cuando esté listo, continúe con [**Parte 3: Hello Workflow**](./03_hello_workflow.md) para aprender cómo agregar más pasos y conectarlos en un flujo de trabajo completo.
+Cuando esté listo, continúe con [**Parte 3: Hello Workflow**](./03_hello_workflow.md) para aprender cómo agregar más pasos y conectarlos en un workflow completo.
 
 ---
 
@@ -1406,7 +1408,7 @@ Cuando un channel contiene múltiples valores, ¿cómo maneja Nextflow la ejecuc
 - [ ] El proceso se ejecuta solo con el primer valor
 - [ ] El proceso se ejecuta solo con el último valor
 
-Aprenda más: [2. Modificar el flujo de trabajo para ejecutarse con múltiples valores de entrada](#2-modificar-el-flujo-de-trabajo-para-ejecutarse-con-multiples-valores-de-entrada)
+Aprenda más: [2. Modificar el workflow para ejecutarse con múltiples valores de entrada](#2-modificar-el-workflow-para-ejecutarse-con-multiples-valores-de-entrada)
 </quiz>
 
 <quiz>

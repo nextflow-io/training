@@ -7,7 +7,7 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Guarda [l'intera playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sul canale YouTube di Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Guardate [l'intera playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sul canale YouTube di Nextflow.
 
 :green_book: La trascrizione del video è disponibile [qui](./transcripts/03_hello_workflow.md).
 ///
@@ -78,7 +78,7 @@ nextflow run hello-workflow.nf
 Come in precedenza, troverete i file di output nella posizione specificata nel blocco `output`.
 Per questo capitolo, è sotto `results/hello_workflow/`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     results/hello_workflow
@@ -139,7 +139,7 @@ Aggiungete la seguente definizione di processo allo script del flusso di lavoro,
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Usa uno strumento di sostituzione di testo per convertire il saluto in maiuscolo
  */
 process convertToUpper {
 
@@ -324,7 +324,7 @@ Ora c'è una riga extra nell'output della console che corrisponde al nuovo proce
 
 Troverete gli output nella directory `results/hello_workflow` come impostato nel blocco `output`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     results/hello_workflow/
@@ -338,7 +338,7 @@ Troverete gli output nella directory `results/hello_workflow` come impostato nel
 
 Comodo! Ma vale comunque la pena dare un'occhiata dentro la directory di lavoro di una delle chiamate al secondo processo.
 
-??? abstract "Contenuti della directory"
+??? abstract "Directory contents"
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -418,7 +418,7 @@ Aggiungete la seguente definizione di processo allo script del flusso di lavoro:
 
 ```groovy title="hello-workflow.nf" linenums="37"
 /*
- * Collect uppercase greetings into a single output file
+ * Raccoglie i saluti maiuscoli in un singolo file di output
  */
 process collectGreetings {
 
@@ -821,7 +821,7 @@ Nella sezione dei parametri della pipeline, effettuate le seguenti modifiche al 
 
     ```groovy title="hello-workflow.nf" linenums="55" hl_lines="6"
     /*
-     * Pipeline parameters
+     * Parametri della pipeline
      */
     params {
         input: Path = 'data/greetings.csv'
@@ -833,7 +833,7 @@ Nella sezione dei parametri della pipeline, effettuate le seguenti modifiche al 
 
     ```groovy title="hello-workflow.nf" linenums="55"
     /*
-     * Pipeline parameters
+     * Parametri della pipeline
      */
     params {
         input: Path = 'data/greetings.csv'

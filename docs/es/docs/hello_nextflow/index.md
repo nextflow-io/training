@@ -1,24 +1,24 @@
 ---
 title: Hello Nextflow
 hide:
-  - toc
+    - toc
 page_type: index_page
 index_type: course
 additional_information:
-  technical_requirements: true
-  learning_objectives:
-    - Iniciar y gestionar la ejecución de flujos de trabajo de Nextflow
-    - Encontrar e interpretar salidas (resultados) y archivos de registro generados por Nextflow
-    - Solucionar problemas básicos
-    - Construir un flujo de trabajo simple de múltiples pasos a partir de componentes principales de Nextflow
-    - Distinguir entre tipos esenciales de channel factories y operadores y utilizarlos efectivamente en un flujo de trabajo simple
-    - Configurar la ejecución de pipelines para ejecutar en plataformas de cómputo comunes incluyendo HPC y nube
-    - Aplicar mejores prácticas de reproducibilidad, portabilidad y reutilización de código que hacen los pipelines FAIR, incluyendo modularidad del código y contenedores de software
-  audience_prerequisites:
-    - "**Audiencia:** Este curso está diseñado para estudiantes que son completamente nuevos en Nextflow y quieren desarrollar sus propios pipelines."
-    - "**Habilidades:** Se asume cierta familiaridad con la línea de comandos, conceptos básicos de scripting y formatos de archivo comunes."
-    - "**Dominio:** Los ejercicios son todos independientes del dominio, por lo que no se requiere conocimiento científico previo."
-  videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
+    technical_requirements: true
+    learning_objectives:
+        - Iniciar y gestionar la ejecución de flujos de trabajo de Nextflow
+        - Encontrar e interpretar salidas (resultados) y archivos de registro generados por Nextflow
+        - Solucionar problemas básicos
+        - Construir un flujo de trabajo simple de múltiples pasos a partir de componentes principales de Nextflow
+        - Distinguir entre tipos esenciales de channel factories y operadores y utilizarlos efectivamente en un flujo de trabajo simple
+        - Configurar la ejecución de pipelines para ejecutar en plataformas de cómputo comunes incluyendo HPC y nube
+        - Aplicar mejores prácticas de reproducibilidad, portabilidad y reutilización de código que hacen los pipelines FAIR, incluyendo modularidad del código y contenedores de software
+    audience_prerequisites:
+        - "**Audiencia:** Este curso está diseñado para estudiantes que son completamente nuevos en Nextflow y quieren desarrollar sus propios pipelines."
+        - "**Habilidades:** Se asume cierta familiaridad con la línea de comandos, conceptos básicos de scripting y formatos de archivo comunes."
+        - "**Dominio:** Los ejercicios son todos independientes del dominio, por lo que no se requiere conocimiento científico previo."
+    videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
 
 # Hello Nextflow
@@ -37,7 +37,7 @@ Se llevará las habilidades y la confianza para comenzar a desarrollar y ejecuta
 
 Este curso está diseñado para ser práctico, con ejercicios orientados a objetivos estructurados para introducir información gradualmente.
 
-Desarrollará un pipeline simple de Nextflow que toma algunas entradas de texto, ejecuta algunos pasos de transformación, y produce un único archivo de texto que contiene una imagen ASCII de un personaje diciendo el texto transformado.
+Desarrollará un pipeline simple de Nextflow que toma algunas entradas de texto, ejecuta algunos pasos de transformación y produce un único archivo de texto que contiene una imagen ASCII de un personaje diciendo el texto transformado.
 
 ### Plan de lecciones
 

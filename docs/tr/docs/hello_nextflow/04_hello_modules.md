@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -129,11 +129,9 @@ Bu bize süreç kodunu koyacağımız bir yer verir.
 
 ### 2.2. `sayHello` süreç kodunu modül dosyasına taşıyın
 
-Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın, `#!/usr/bin/env nextflow` shebang'ını da kopyaladığınızdan emin olun.
+Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * 'Hello World!' ifadesini bir dosyaya yazdırmak için echo kullan
  */
@@ -152,7 +150,7 @@ process sayHello {
 }
 ```
 
-Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin, ancak shebang'ı yerinde bıraktığınızdan emin olun.
+Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
 ### 2.3. İş akışı bloğundan önce bir include tanımı ekleyin
 
@@ -242,11 +240,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. `convertToUpper` süreç kodunu modül dosyasına taşıyın
 
-Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın, `#!/usr/bin/env nextflow` shebang'ını da kopyaladığınızdan emin olun.
+Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Selamlamayı büyük harfe dönüştürmek için bir metin değiştirme aracı kullan
  */
@@ -265,7 +261,7 @@ process convertToUpper {
 }
 ```
 
-Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin, ancak shebang'ı yerinde bıraktığınızdan emin olun.
+Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
 ### 3.3. `params` bloğundan önce bir include tanımı ekleyin
 
@@ -342,11 +338,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. `collectGreetings` süreç kodunu modül dosyasına taşıyın
 
-Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın, `#!/usr/bin/env nextflow` shebang'ını da kopyaladığınızdan emin olun.
+Tüm süreç tanımını iş akışı dosyasından modül dosyasına kopyalayın.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Büyük harfli selamlamaları tek bir çıktı dosyasında topla
  */
@@ -369,7 +363,7 @@ process collectGreetings {
 }
 ```
 
-Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin, ancak shebang'ı yerinde bıraktığınızdan emin olun.
+Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
 ### 4.3. `params` bloğundan önce bir include tanımı ekleyin
 

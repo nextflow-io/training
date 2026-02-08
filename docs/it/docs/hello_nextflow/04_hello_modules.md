@@ -129,11 +129,9 @@ Questo ci dà un posto dove mettere il codice del processo.
 
 ### 2.2. Spostare il codice del processo `sayHello` nel file del modulo
 
-Copiate l'intera definizione del processo dal file del workflow al file del modulo, assicurandovi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
+Copiate l'intera definizione del processo dal file del workflow al file del modulo.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Use echo to print 'Hello World!' to a file
  */
@@ -152,7 +150,7 @@ process sayHello {
 }
 ```
 
-Una volta fatto, cancellate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
+Una volta fatto, cancellate la definizione del processo dal file del workflow.
 
 ### 2.3. Aggiungere una dichiarazione di include prima del blocco workflow
 
@@ -242,11 +240,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. Spostare il codice del processo `convertToUpper` nel file del modulo
 
-Copiate l'intera definizione del processo dal file del workflow al file del modulo, assicurandovi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
+Copiate l'intera definizione del processo dal file del workflow al file del modulo.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Use a text replacement tool to convert the greeting to uppercase
  */
@@ -265,7 +261,7 @@ process convertToUpper {
 }
 ```
 
-Una volta fatto, cancellate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
+Una volta fatto, cancellate la definizione del processo dal file del workflow.
 
 ### 3.3. Aggiungere una dichiarazione di include prima del blocco `params`
 
@@ -342,11 +338,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. Spostare il codice del processo `collectGreetings` nel file del modulo
 
-Copiate l'intera definizione del processo dal file del workflow al file del modulo, assicurandovi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
+Copiate l'intera definizione del processo dal file del workflow al file del modulo.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * Collect uppercase greetings into a single output file
  */
@@ -369,7 +363,7 @@ process collectGreetings {
 }
 ```
 
-Una volta fatto, cancellate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
+Una volta fatto, cancellate la definizione del processo dal file del workflow.
 
 ### 4.3. Aggiungere una dichiarazione di include prima del blocco `params`
 

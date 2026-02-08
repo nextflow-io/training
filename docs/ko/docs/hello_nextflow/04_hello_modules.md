@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=ko" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -129,11 +129,9 @@ touch modules/sayHello.nf
 
 ### 2.2. `sayHello` process 코드를 모듈 파일로 이동
 
-전체 process 정의를 workflow 파일에서 모듈 파일로 복사하고, `#!/usr/bin/env nextflow` shebang도 함께 복사해야 합니다.
+전체 process 정의를 workflow 파일에서 모듈 파일로 복사합니다.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * echo를 사용하여 'Hello World!'를 파일에 출력
  */
@@ -152,9 +150,9 @@ process sayHello {
 }
 ```
 
-완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.
+완료되면 workflow 파일에서 process 정의를 삭제하십시오.
 
-### 2.3. Workflow 블록 전에 include 선언 추가
+### 2.3. workflow 블록 전에 include 선언 추가
 
 모듈에서 process를 가져오는 구문은 매우 간단합니다:
 
@@ -242,11 +240,9 @@ touch modules/convertToUpper.nf
 
 ### 3.2. `convertToUpper` process 코드를 모듈 파일로 이동
 
-전체 process 정의를 workflow 파일에서 모듈 파일로 복사하고, `#!/usr/bin/env nextflow` shebang도 함께 복사해야 합니다.
+전체 process 정의를 workflow 파일에서 모듈 파일로 복사합니다.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * 텍스트 대체 도구를 사용하여 인사말을 대문자로 변환
  */
@@ -265,7 +261,7 @@ process convertToUpper {
 }
 ```
 
-완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.
+완료되면 workflow 파일에서 process 정의를 삭제하십시오.
 
 ### 3.3. `params` 블록 전에 include 선언 추가
 
@@ -342,11 +338,9 @@ touch modules/collectGreetings.nf
 
 ### 4.2. `collectGreetings` process 코드를 모듈 파일로 이동
 
-전체 process 정의를 workflow 파일에서 모듈 파일로 복사하고, `#!/usr/bin/env nextflow` shebang도 함께 복사해야 합니다.
+전체 process 정의를 workflow 파일에서 모듈 파일로 복사합니다.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 /*
  * 대문자 인사말을 하나의 출력 파일에 수집
  */
@@ -369,7 +363,7 @@ process collectGreetings {
 }
 ```
 
-완료되면 workflow 파일에서 process 정의를 삭제하되, shebang은 그대로 두십시오.
+완료되면 workflow 파일에서 process 정의를 삭제하십시오.
 
 ### 4.3. `params` 블록 전에 include 선언 추가
 

@@ -12,7 +12,7 @@
 :green_book: La transcripción del video está disponible [aquí](./transcripts/03_hello_workflow.md).
 ///
 
-La mayoría de los flujos de trabajo del mundo real involucran más de un paso.
+La mayoría de los workflows del mundo real involucran más de un paso.
 En este módulo de capacitación, aprenderá cómo conectar procesos juntos en un workflow de múltiples pasos.
 
 Esto le enseñará la manera de Nextflow de lograr lo siguiente:

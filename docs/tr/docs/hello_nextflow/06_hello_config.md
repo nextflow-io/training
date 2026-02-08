@@ -1,9 +1,7 @@
 # Bölüm 6: Hello Config
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -14,9 +12,9 @@
 
 Bu bölüm, _iş akışı kodunun tek bir satırını değiştirmeden_ davranışını özelleştirebilmeniz, farklı ortamlara uyarlayabilmeniz ve kaynak kullanımını optimize edebilmeniz için Nextflow pipeline'ınızın yapılandırmasını nasıl kuracağınızı ve yöneteceğinizi keşfedecektir.
 
-Bunu yapmanın birden fazla yolu vardır; bunlar birlikte kullanılabilir ve [burada](https://www.nextflow.io/docs/latest/config.html) açıklanan öncelik sırasına göre yorumlanır.
+Bunu yapmanın birden fazla yolu vardır; bunlar birlikte kullanılabilir ve [burada](https://nextflow.io/docs/latest/config.html) açıklanan öncelik sırasına göre yorumlanır.
 
-Bu kursun bu bölümünde, Bölüm 5: Hello Containers'da zaten karşılaştığınız en basit ve en yaygın yapılandırma dosyası mekanizması olan [`nextflow.config`](https://www.nextflow.io/docs/latest/config.html) dosyasını göstereceğiz.
+Bu kursun bu bölümünde, Bölüm 5: Hello Containers'da zaten karşılaştığınız en basit ve en yaygın yapılandırma dosyası mekanizması olan [`nextflow.config`](https://nextflow.io/docs/latest/config.html) dosyasını göstereceğiz.
 
 Süreç yönergeleri, yürütücüler, profiller ve parametre dosyaları gibi Nextflow yapılandırmasının temel bileşenlerini gözden geçireceğiz.
 Bu yapılandırma seçeneklerini etkin bir şekilde kullanmayı öğrenerek, pipeline'larınızın esnekliğini, ölçeklenebilirliğini ve performansını artırabilirsiniz.
@@ -478,59 +476,65 @@ Bu, çalışmanızı başkaları tarafından daha tekrarlanabilir hale getirir.
 
 Bunu daha esnek yapılandırmak için birkaç yaygın yola bakalım.
 
-### 2.1. `outputDir` dizin adını özelleştirin
+### 2.1. `-output-dir` ile çıktı dizinini özelleştirin
 
-Bu kursun her bölümü için, çıktıları çıktı tanımlarına sabit kodlanmış farklı bir alt dizine yayınlıyorduk.
+'Yayınlanmış' çıktılarımızın nasıl organize edileceğini kontrol ederken iki farklı önceliğimiz var:
 
-Bunu kullanıcı tarafından yapılandırılabilir bir parametre kullanacak şekilde değiştirelim.
-Bunun için tamamen yeni bir parametre oluşturabiliriz, ancak zaten orada olduğu için `batch` parametresini kullanalım.
+- Üst düzey çıktı dizini
+- Dosyaların bu dizin içinde nasıl organize edileceği
 
-#### 2.1.1. Yapılandırma dosyasında `outputDir` için bir değer ayarlayın
+Şimdiye kadar varsayılan üst düzey dizini kullanıyorduk: `results`.
+Bunu `-output-dir` CLI seçeneğini kullanarak özelleştirmeyle başlayalım.
 
-Nextflow'un çıktıları yayınlamak için kullandığı yol, `outputDir` seçeneği tarafından kontrol edilir.
-Tüm çıktılar için yolu değiştirmek üzere, `nextflow.config` yapılandırma dosyasında bu seçenek için bir değer ayarlayabilirsiniz.
+#### 2.1.1. Pipeline'ı `-output-dir` ile çalıştırın
 
-`nextflow.config` dosyasına aşağıdaki kodu ekleyin:
+`-output-dir` seçeneği (kısa hali: `-o`) tüm iş akışı çıktıları için varsayılan çıktı dizinini (`results/`) geçersiz kılar.
+Bu, çıktıların yayınlandığı kök yolu kontrol etmek için önerilen yoldur.
 
-=== "Sonra"
+```bash
+nextflow run hello-config.nf -output-dir custom-outdir-cli/
+```
 
-    ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input = 'data/greetings.csv'
-        batch = 'batch'
-        character = 'turkey'
-    }
+??? success "Komut çıktısı"
 
-    /*
-    * Çıktı ayarları
-    */
-    outputDir = "results/${params.batch}"
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `hello-config.nf` [prickly_kay] DSL2 - revision: 32ecc4fba2
+
+    executor >  local (8)
+    [9f/332636] sayHello (1)       [100%] 3 of 3 ✔
+    [03/a55991] convertToUpper (3) [100%] 3 of 3 ✔
+    [e5/ab7893] collectGreetings   [100%] 1 of 1 ✔
+    [a8/97338e] cowpy              [100%] 1 of 1 ✔
     ```
 
-=== "Önce"
+Bu, çıktıları `results/` yerine `custom-outdir-cli/` altında yayınlar:
 
-    ```groovy title="nextflow.config" linenums="9"
-    /*
-    * Pipeline parametreleri
-    */
-    params {
-        input = 'data/greetings.csv'
-        batch = 'batch'
-        character = 'turkey'
-    }
+??? abstract "Dizin içerikleri"
+
+    ```console
+    custom-outdir-cli/
+    └── hello_config
+        ├── batch-report.txt
+        ├── cowpy-COLLECTED-batch-output.txt
+        └── intermediates
+            ├── Bonjour-output.txt
+            ├── COLLECTED-batch-output.txt
+            ├── Hello-output.txt
+            ├── Holà-output.txt
+            ├── UPPER-Bonjour-output.txt
+            ├── UPPER-Hello-output.txt
+            └── UPPER-Holà-output.txt
     ```
 
-Bu, yerleşik varsayılan yolu, `results/`, `results/` artı alt dizin olarak `batch` parametresinin değeriyle değiştirecektir.
-İsterseniz `results` kısmını da değiştirebilirsiniz.
+Çıktı bloğundaki `path` bildirimlerinden gelen `hello_config` alt dizinine hâlâ sahip olduğumuza dikkat edin.
+Bunu temizleyelim.
 
-Geçici bir değişiklik için, komutunuzda `-output-dir` parametresini kullanarak bu seçeneği komut satırından ayarlayabilirsiniz (ancak o zaman `batch` parametre değerini kullanamazsınız).
+#### 2.1.2. Çıktı bloğundan sabit kodlanmış yolları kaldırın
 
-#### 2.1.2. Sabit kodlanmış yolun tekrarlanan kısmını kaldırın
-
-Çıktı seçeneklerinde hâlâ sabit kodlanmış bir alt dizinimiz var, o yüzden şimdi ondan kurtulalım.
+`hello_config/` öneki önceki bölümlerde sabit kodlanmıştı, ancak artık çıktı yollarını esnek bir şekilde yapılandırmayı öğrendiğimize göre, bu sabit kodlamayı kaldırabiliriz.
+Alt dizine ihtiyaç duymayan çıktılar için `path` yönergesini boş bir dizeye ayarlayabiliriz veya tamamen kaldırabiliriz.
 
 İş akışı dosyasında aşağıdaki kod değişikliklerini yapın:
 
@@ -588,59 +592,93 @@ Geçici bir değişiklik için, komutunuzda `-output-dir` parametresini kullanar
     }
     ```
 
-`outputDir` varsayılanını değiştirmek yerine her yola `${params.batch}` ekleyebilirdik, ancak bu daha kısa.
-
-#### 2.1.3. Pipeline'ı çalıştırın
-
-Doğru çalışıp çalışmadığını test edelim, grup adını komut satırından `outdir` olarak ayarlayarak.
+Pipeline'ı tekrar çalıştırın:
 
 ```bash
-nextflow run hello-config.nf --batch outdir
+nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 ```
 
-??? success "Komut çıktısı"
-
-    ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `hello-config.nf` [disturbed_einstein] DSL2 - revision: ede9037d02
-
-    executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
-    ```
-
-Bu hâlâ daha önce olduğu gibi aynı çıktıyı üretiyor, ancak bu sefer çıktılarımızı `results/outdir/` altında buluyoruz.
+Şimdi çıktılar `hello_config` alt dizini olmadan doğrudan `custom-outdir-cli-2/` altında yayınlanıyor:
 
 ??? abstract "Dizin içerikleri"
 
     ```console
-    results/outdir/
-    ├── cowpy-COLLECTED-outdir-output.txt
-    ├── intermediates
-    │   ├── Bonjour-output.txt
-    │   ├── COLLECTED-outdir-output.txt
-    │   ├── Hello-output.txt
-    │   ├── Holà-output.txt
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
-    └── outdir-report.txt
+    custom-outdir-cli-2/
+    ├── batch-report.txt
+    ├── cowpy-COLLECTED-batch-output.txt
+    └── intermediates
+        ├── Bonjour-output.txt
+        ├── COLLECTED-batch-output.txt
+        ├── Hello-output.txt
+        ├── Holà-output.txt
+        ├── UPPER-Bonjour-output.txt
+        ├── UPPER-Hello-output.txt
+        └── UPPER-Holà-output.txt
     ```
 
-Bu yaklaşımı özel yol tanımlarıyla birleştirerek istediğiniz herhangi bir dizin hiyerarşisini oluşturabilirsiniz.
+!!! tip "İpucu"
 
-### 2.2. Çıktıları sürece göre organize edin
+    `-output-dir` seçeneği çıktıların _nereye_ gideceğini kontrol etmek için kullanılırken, çıktı bloğundaki `path` yönergesi _alt dizin yapısını_ kontrol eder.
 
-Çıktıları daha fazla organize etmenin popüler bir yolu, bunu sürece göre yapmaktır, _yani_ pipeline'da çalıştırılan her süreç için alt dizinler oluşturmak.
+### 2.2. Dinamik çıktı yolları
 
-#### 2.2.1. Çıktı yollarını süreç adlarına referansla değiştirin
+CLI üzerinden çıktı dizinini değiştirmenin yanı sıra, `outputDir` kullanarak yapılandırma dosyasında özel bir varsayılan değer de ayarlayabiliriz.
+Bu, dizin yolunu dinamik olarak ayarlamamıza olanak tanır - sadece statik dizeler kullanmakla kalmaz.
 
-Yapmanız gereken tek şey, çıktı yolu tanımında sürecin adını `<task>.name` olarak referans vermektir.
+#### 2.2.1. Yapılandırma dosyasında `outputDir` ayarlayın
 
-İş akışı dosyasında aşağıdaki değişiklikleri yapın:
+`nextflow.config` dosyasına aşağıdaki kodu ekleyin:
+
+=== "Sonra"
+
+    ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
+    /*
+    * Pipeline parametreleri
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+
+    /*
+    * Çıktı ayarları
+    */
+    outputDir = "custom-outdir-config/${params.batch}"
+    ```
+
+=== "Önce"
+
+    ```groovy title="nextflow.config" linenums="9"
+    /*
+    * Pipeline parametreleri
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
+
+Bu, çıktı dizinini `custom-outdir-config/` artı alt dizin olarak `batch` parametresinin değerine ayarlar.
+Şimdi `--batch` parametresini ayarlayarak çıktı konumunu değiştirebilirsiniz:
+
+```bash
+nextflow run hello-config.nf --batch my_run
+```
+
+Bu, çıktıları `custom-outdir-config/my_run/` altında yayınlar.
+
+!!! note "Not"
+
+    `-output-dir` CLI seçeneği, `outputDir` yapılandırma ayarından önceliklidir.
+    Eğer ayarlanmışsa, yapılandırma seçeneği tamamen yok sayılır.
+
+#### 2.2.2. Grup ve süreç adlarıyla alt dizinler
+
+Ayrıca, çıktı başına alt dizin çıktı `path` bildirimlerini dinamik olarak ayarlayabiliriz.
+
+Örneğin, çıktı yolu bildiriminde `<süreç>.name`'e referans vererek çıktılarımızı sürece göre organize edebiliriz:
 
 === "Sonra"
 
@@ -696,14 +734,97 @@ Yapmanız gereken tek şey, çıktı yolu tanımında sürecin adını `<task>.n
     }
     ```
 
-Bu, çıktı yolu yapılandırmasından kalan sabit kodlanmış öğeleri kaldırır.
+Daha da ileri gidebilir ve daha karmaşık alt dizin yolları oluşturabiliriz.
 
-#### 2.2.2. Pipeline'ı çalıştırın
+Yukarıdaki düzenlemede `intermediates` ile son çıktıların üst düzeyde olması arasındaki ayrımı sildik.
+Bunu geri koyalım ve ayrıca dosyaları bir `params.batch` alt dizinine koyalım.
 
-Doğru çalışıp çalışmadığını test edelim, grup adını komut satırından `pnames` olarak ayarlayarak.
+!!! tip "İpucu"
+
+    `params.batch`'i çıktı bloğu `path`'ine dahil etmek, `outputDir` yapılandırması yerine, CLI'da `-output-dir` ile üzerine yazılmayacağı anlamına gelir.
+
+Önce, yapılandırma dosyasını `outputDir`'den `${params.batch}`'i kaldıracak şekilde güncelleyin (çünkü onu yol bildirimlerine taşıyoruz):
+
+=== "Sonra"
+
+    ```groovy title="nextflow.config" linenums="12" hl_lines="4"
+    /*
+    * Çıktı ayarları
+    */
+    outputDir = "custom-outdir-config/"
+    ```
+
+=== "Önce"
+
+    ```groovy title="nextflow.config" linenums="12" hl_lines="4"
+    /*
+    * Çıktı ayarları
+    */
+    outputDir = "custom-outdir-config/${params.batch}"
+    ```
+
+Ardından, iş akışı dosyasında aşağıdaki değişiklikleri yapın:
+
+=== "Sonra"
+
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    output {
+        first_output {
+            path { "${params.batch}/intermediates/${sayHello.name}" }
+            mode 'copy'
+        }
+        uppercased {
+            path { "${params.batch}/intermediates/${convertToUpper.name}" }
+            mode 'copy'
+        }
+        collected {
+            path { "${params.batch}/intermediates/${collectGreetings.name}" }
+            mode 'copy'
+        }
+        batch_report {
+            path { "${params.batch}/${collectGreetings.name}" }
+            mode 'copy'
+        }
+        cowpy_art {
+            path { "${params.batch}/${cowpy.name}" }
+            mode 'copy'
+        }
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    output {
+        first_output {
+            path { sayHello.name }
+            mode 'copy'
+        }
+        uppercased {
+            path { convertToUpper.name }
+            mode 'copy'
+        }
+        collected {
+            path { collectGreetings.name }
+            mode 'copy'
+        }
+        batch_report {
+            path { collectGreetings.name }
+            mode 'copy'
+        }
+        cowpy_art {
+            path { cowpy.name }
+            mode 'copy'
+        }
+    }
+    ```
+
+#### 2.2.3. Pipeline'ı çalıştırın
+
+Bunun pratikte nasıl çalıştığını görelim, hem `-output-dir` (veya kısaca `-o`) değerini `custom-outdir-config-2` hem de grup adını komut satırından `rep2` olarak ayarlayarak:
 
 ```bash
-nextflow run hello-config.nf --batch pnames
+nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ```
 
 ??? success "Komut çıktısı"
@@ -711,38 +832,38 @@ nextflow run hello-config.nf --batch pnames
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [jovial_mcclintock] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [mad_curry] DSL2 - revision: 668a98ccb9
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [9e/6095e0] sayHello (1)       [100%] 3 of 3 ✔
+    [05/454d52] convertToUpper (3) [100%] 3 of 3 ✔
+    [ed/e3ddfb] collectGreetings   [100%] 1 of 1 ✔
+    [39/5e063a] cowpy              [100%] 1 of 1 ✔
     ```
 
-Bu hâlâ daha önce olduğu gibi aynı çıktıyı üretiyor, ancak bu sefer çıktılarımızı `results/pnames/` altında buluyoruz ve sürece göre gruplandırılmışlar.
+Bu, çıktıları `custom-outdir-config-2/rep2/` altında yayınlar, belirtilen temel yol _ve_ grup adı alt dizini _ve_ sürece göre gruplanmış sonuçlarla:
 
 ??? abstract "Dizin içerikleri"
 
     ```console
-    results/pnames/
-    ├── collectGreetings
-    │   ├── COLLECTED-pnames-output.txt
-    │   └── pnames-report.txt
-    ├── convertToUpper
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
-    ├── cowpy
-    │   └── cowpy-COLLECTED-pnames-output.txt
-    └── sayHello
-        ├── Bonjour-output.txt
-        ├── Hello-output.txt
-        └── Holà-output.txt
+    custom-outdir-config-2
+    └── rep2
+        ├── collectGreetings
+        │   └── rep2-report.txt
+        ├── cowpy
+        │   └── cowpy-COLLECTED-rep2-output.txt
+        └── intermediates
+            ├── collectGreetings
+            │   └── COLLECTED-rep2-output.txt
+            ├── convertToUpper
+            │   ├── UPPER-Bonjour-output.txt
+            │   ├── UPPER-Hello-output.txt
+            │   └── UPPER-Holà-output.txt
+            └── sayHello
+                ├── Bonjour-output.txt
+                ├── Hello-output.txt
+                └── Holà-output.txt
     ```
-
-Burada `intermediates` ile son çıktıların üst düzeyde olması arasındaki ayrımı sildiğimizi unutmayın.
-Tabii ki bu yaklaşımları karıştırabilirsiniz, örneğin ilk çıktının yolunu `intermediates/${sayHello.process}` olarak ayarlayarak
 
 ### 2.3. Yayınlama modunu iş akışı düzeyinde ayarlayın
 
@@ -754,11 +875,11 @@ Son olarak, tekrarlayan kod miktarını azaltma ruhuna uygun olarak, çıktı ba
 
 === "Sonra"
 
-    ```groovy title="nextflow.config" linenums="2" hl_lines="5"
+    ```groovy title="nextflow.config" linenums="12" hl_lines="5"
     /*
     * Çıktı ayarları
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "custom-outdir-config/"
     workflow.output.mode = 'copy'
     ```
 
@@ -768,7 +889,7 @@ Son olarak, tekrarlayan kod miktarını azaltma ruhuna uygun olarak, çıktı ba
     /*
     * Çıktı ayarları
     */
-    outputDir = "results/${params.batch}"
+    outputDir = "custom-outdir-config/"
     ```
 
 Tıpkı `outputDir` seçeneği gibi, yapılandırma dosyasında `workflow.output.mode`'a bir değer vermek, iş akışı dosyasında ayarlananı geçersiz kılmak için yeterli olurdu, ancak yine de gereksiz kodu kaldıralım.
@@ -782,45 +903,45 @@ Tıpkı `outputDir` seçeneği gibi, yapılandırma dosyasında `workflow.output
     ```groovy title="hello-config.nf" linenums="42"
     output {
         first_output {
-            path { sayHello.process }
+            path { "${params.batch}/intermediates/${sayHello.name}" }
         }
         uppercased {
-            path { convertToUpper.process }
+            path { "${params.batch}/intermediates/${convertToUpper.name}" }
         }
         collected {
-            path { collectGreetings.process }
+            path { "${params.batch}/intermediates/${collectGreetings.name}" }
         }
         batch_report {
-            path { collectGreetings.process }
+            path { "${params.batch}/${collectGreetings.name}" }
         }
         cowpy_art {
-            path { cowpy.process }
+            path { "${params.batch}/${cowpy.name}" }
         }
     }
     ```
 
 === "Önce"
 
-    ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20"
     output {
         first_output {
-            path { sayHello.process }
+            path { "${params.batch}/intermediates/${sayHello.name}" }
             mode 'copy'
         }
         uppercased {
-            path { convertToUpper.process }
+            path { "${params.batch}/intermediates/${convertToUpper.name}" }
             mode 'copy'
         }
         collected {
-            path { collectGreetings.process }
+            path { "${params.batch}/intermediates/${collectGreetings.name}" }
             mode 'copy'
         }
         batch_report {
-            path { collectGreetings.process }
+            path { "${params.batch}/${collectGreetings.name}" }
             mode 'copy'
         }
         cowpy_art {
-            path { cowpy.process }
+            path { "${params.batch}/${cowpy.name}" }
             mode 'copy'
         }
     }
@@ -830,10 +951,10 @@ Bu daha kısa, değil mi?
 
 #### 2.3.3. Pipeline'ı çalıştırın
 
-Doğru çalışıp çalışmadığını test edelim, grup adını komut satırından `outmode` olarak ayarlayarak.
+Doğru çalışıp çalışmadığını test edelim:
 
 ```bash
-nextflow run hello-config.nf --batch outmode
+nextflow run hello-config.nf -output-dir config-output-mode
 ```
 
 ??? success "Komut çıktısı"
@@ -841,35 +962,37 @@ nextflow run hello-config.nf --batch outmode
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [rowdy_sagan] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [small_stone] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [f0/35723c] sayHello (2)       | 3 of 3 ✔
-    [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
-    [17/e97d32] collectGreetings   | 1 of 1 ✔
-    [98/c6b57b] cowpy              | 1 of 1 ✔
+    [e8/a0e93e] sayHello (1)       [100%] 3 of 3 ✔
+    [14/176c9d] convertToUpper (3) [100%] 3 of 3 ✔
+    [23/d667ca] collectGreetings   [100%] 1 of 1 ✔
+    [e6/1dc80e] cowpy              [100%] 1 of 1 ✔
     ```
 
-Bu hâlâ daha önce olduğu gibi aynı çıktıyı üretiyor, ancak bu sefer çıktılarımızı `results/outmode/` altında buluyoruz.
-Hepsi hâlâ düzgün kopyalar, sembolik bağlantılar değil.
+Bu, çıktıları `config-output-mode/` altında yayınlar ve hepsi hâlâ düzgün kopyalar, sembolik bağlantılar değil.
 
 ??? abstract "Dizin içerikleri"
 
     ```console
-    results/outmode/
-    ├── collectGreetings
-    │   ├── COLLECTED-outmode-output.txt
-    │   └── outmode-report.txt
-    ├── convertToUpper
-    │   ├── UPPER-Bonjour-output.txt
-    │   ├── UPPER-Hello-output.txt
-    │   └── UPPER-Holà-output.txt
-    ├── cowpy
-    │   └── cowpy-COLLECTED-outmode-output.txt
-    └── sayHello
-        ├── Bonjour-output.txt
-        ├── Hello-output.txt
-        └── Holà-output.txt
+    config-output-mode
+    └── batch
+        ├── collectGreetings
+        │   └── batch-report.txt
+        ├── cowpy
+        │   └── cowpy-COLLECTED-batch-output.txt
+        └── intermediates
+            ├── collectGreetings
+            │   └── COLLECTED-batch-output.txt
+            ├── convertToUpper
+            │   ├── UPPER-Bonjour-output.txt
+            │   ├── UPPER-Hello-output.txt
+            │   └── UPPER-Holà-output.txt
+            └── sayHello
+                ├── Bonjour-output.txt
+                ├── Hello-output.txt
+                └── Holà-output.txt
     ```
 
 Çıktı başına mod ayarlama yolunu hâlâ kullanmak istemenizin ana nedeni, aynı iş akışı içinde karıştırıp eşleştirmek istemeniz olabilir, _yani_ bazı çıktıların kopyalanması ve bazılarının sembolik bağlantı olması.
@@ -951,7 +1074,7 @@ Bu, şimdi `cowpy` sürecimize bunlardan birini eklememiz gerektiği anlamına g
         input:
     ```
 
-Açık olmak gerekirse, `docker` yönergesini _değiştirmiyoruz_, alternatif bir seçenek _ekliyoruz_.
+Açık olmak gerekirse, `container` yönergesini _değiştirmiyoruz_, alternatif bir seçenek _ekliyoruz_.
 
 !!! tip "İpucu"
 
@@ -968,19 +1091,19 @@ nextflow run hello-config.nf --batch conda
 
 ??? success "Komut çıktısı"
 
-    ```console title="Çıktı"
+    ```console title="Output"
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
+    Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
-    [20/2596a7] convertToUpper (1) | 3 of 3 ✔
-    [b3/e15de5] collectGreetings   | 1 of 1 ✔
-    [c5/af5f88] cowpy              | 1 of 1 ✔
+    [e8/91c116] sayHello (2)       [100%] 3 of 3 ✔
+    [fe/6a70ce] convertToUpper (3) [100%] 3 of 3 ✔
+    [99/7cc493] collectGreetings   [100%] 1 of 1 ✔
+    [3c/09fb59] cowpy              [100%] 1 of 1 ✔
     ```
 
-Bu sorunsuz çalışmalı ve `results/conda` altında daha önce olduğu gibi aynı çıktıları üretmelidir.
+Bu sorunsuz çalışmalı ve `custom-outdir-config/conda` altında daha önce olduğu gibi aynı çıktıları üretmelidir.
 
 Perde arkasında, Nextflow Conda paketlerini aldı ve ortamı oluşturdu, bu normalde biraz iş gerektirir; bu yüzden bunların hiçbirini kendimiz yapmak zorunda kalmamamız güzel!
 
@@ -1020,20 +1143,20 @@ Nextflow başladığında, mevcut CPU'lara ve belleğe bakar.
 
 Local yürütücü kullanışlı ve verimlidir, ancak o tek makineyle sınırlıdır. Çok büyük iş yükleri için, yerel makinenizin bir darboğaz olduğunu keşfedebilirsiniz; ya mevcut olandan daha fazla kaynak gerektiren tek bir göreviniz olduğu için ya da tek bir makinenin bunları çalıştırmasını beklemenin çok uzun süreceği kadar çok göreviniz olduğu için.
 
-Nextflow, HPC zamanlayıcıları (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor ve diğerleri) dahil olmak üzere [birçok farklı yürütme arka ucunu](https://www.nextflow.io/docs/latest/executor.html) ve ayrıca bulut yürütme arka uçlarını (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes ve daha fazlası) destekler.
+Nextflow, HPC zamanlayıcıları (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor ve diğerleri) dahil olmak üzere [birçok farklı yürütme arka ucunu](https://nextflow.io/docs/latest/executor.html) ve ayrıca bulut yürütme arka uçlarını (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes ve daha fazlası) destekler.
 
 ### 4.1. Farklı bir arka ucu hedefleme
 
 Yürütücü seçimi, `executor` adlı bir süreç yönergesiyle belirlenir.
 Varsayılan olarak `local` olarak ayarlanmıştır, bu nedenle aşağıdaki yapılandırma ima edilir:
 
-```groovy title="Yerleşik yapılandırma"
+```groovy title="Built-in configuration"
 process {
     executor = 'local'
 }
 ```
 
-Yürütücüyü farklı bir arka ucu hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklandığı gibi benzer sözdizimi kullanarak istediğiniz yürütücüyü belirtmeniz yeterlidir (tüm seçenekler için [yürütücü dokümantasyonuna](https://www.nextflow.io/docs/latest/executor.html) bakın).
+Yürütücüyü farklı bir arka ucu hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklandığı gibi benzer sözdizimi kullanarak istediğiniz yürütücüyü belirtmeniz yeterlidir (tüm seçenekler için [yürütücü dokümantasyonuna](https://nextflow.io/docs/latest/executor.html) bakın).
 
 ```groovy title="nextflow.config"
 process {
@@ -1055,7 +1178,7 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
 
     Örneğin, 8 CPU ve 4GB RAM gerektiren ve "my-science-work" kuyruğunda yürütülecek aynı iş, arka uca bağlı olarak aşağıdaki farklı şekillerde ifade edilmelidir.
 
-    ```bash title="SLURM için yapılandırma / sbatch kullanarak gönder"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -1063,7 +1186,7 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="PBS için yapılandırma / qsub kullanarak gönder"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -1071,7 +1194,7 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
     #PBS -l mem=4gb
     ```
 
-    ```bash title="SGE için yapılandırma / qsub kullanarak gönder"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -1104,7 +1227,7 @@ Nextflow'da kaynak tahsislerini ve sınırlamalarını nasıl değerlendirip ifa
 Varsayılan olarak, Nextflow her süreç için tek bir CPU ve 2GB bellek kullanacaktır.
 İlgili süreç yönergeleri `cpus` ve `memory` olarak adlandırılır, bu nedenle aşağıdaki yapılandırma ima edilir:
 
-```groovy title="Yerleşik yapılandırma" linenums="1"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -1141,14 +1264,44 @@ Profilleme, eğitim iş akışımızdaki süreçlerin çok hafif olduğunu göst
 
 `nextflow.config` dosyanıza, pipeline parametreleri bölümünden önce aşağıdakileri ekleyin:
 
-```groovy title="nextflow.config" linenums="4"
-/*
-* Süreç ayarları
-*/
-process {
-    memory = 1.GB
-}
-```
+=== "Sonra"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="4-9"
+    docker.enabled = false
+    conda.enabled = true
+
+    /*
+    * Süreç ayarları
+    */
+    process {
+        memory = 1.GB
+    }
+
+    /*
+    * Pipeline parametreleri
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = false
+    conda.enabled = true
+
+    /*
+    * Pipeline parametreleri
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+    ```
 
 Bu, tükettiğimiz hesaplama miktarını azaltmaya yardımcı olacaktır.
 
@@ -1214,7 +1367,7 @@ Hangi hesaplama yürütücüsü ve hesaplama altyapısı kullandığınıza bağ
 
 İlgili sınırlamaları ayarlamak için `resourceLimits` yönergesini kullanabilirsiniz. Sözdizimi, bir process bloğunda tek başına olduğunda şöyle görünür:
 
-```groovy title="Sözdizimi örneği"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -1261,26 +1414,62 @@ Nextflow, farklı yapılandırmaları tanımlayan herhangi bir sayıda [profil](
 
 `nextflow.config` dosyanıza, pipeline parametreleri bölümünden sonra ancak çıktı ayarlarından önce aşağıdakileri ekleyin:
 
-```groovy title="nextflow.config" linenums="24"
-/*
-* Profiller
-*/
-profiles {
-    my_laptop {
-        process.executor = 'local'
-        docker.enabled = true
+=== "Sonra"
+
+    ```groovy title="nextflow.config" linenums="15" hl_lines="10-27"
+    /*
+    * Pipeline parametreleri
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
     }
-    univ_hpc {
-        process.executor = 'slurm'
-        conda.enabled = true
-        process.resourceLimits = [
-            memory: 750.GB,
-            cpus: 200,
-            time: 30.d
-        ]
+
+    /*
+    * Profiller
+    */
+    profiles {
+        my_laptop {
+            process.executor = 'local'
+            docker.enabled = true
+        }
+        univ_hpc {
+            process.executor = 'slurm'
+            conda.enabled = true
+            process.resourceLimits = [
+                memory: 750.GB,
+                cpus: 200,
+                time: 30.d
+            ]
+        }
     }
-}
-```
+
+    /*
+    * Çıktı ayarları
+    */
+    outputDir = "custom-outdir-config/"
+    workflow.output.mode = 'copy'
+    ```
+
+=== "Önce"
+
+    ```groovy title="nextflow.config" linenums="15"
+    /*
+    * Pipeline parametreleri
+    */
+    params {
+        input = 'data/greetings.csv'
+        batch = 'batch'
+        character = 'turkey'
+    }
+
+    /*
+    * Çıktı ayarları
+    */
+    outputDir = "custom-outdir-config/"
+    workflow.output.mode = 'copy'
+    ```
 
 Üniversite HPC'si için kaynak sınırlamalarını da belirttiğimizi görüyorsunuz.
 
@@ -1299,13 +1488,13 @@ nextflow run hello-config.nf -profile my_laptop
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+    Launching `hello-config.nf` [hungry_sanger] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [58/da9437] sayHello (3)       | 3 of 3 ✔
-    [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
-    [67/857d05] collectGreetings   | 1 of 1 ✔
-    [37/7b51b5] cowpy              | 1 of 1 ✔
+    [b0/fb2ec9] sayHello (3)       [100%] 3 of 3 ✔
+    [4a/e039f0] convertToUpper (3) [100%] 3 of 3 ✔
+    [6f/408fa9] collectGreetings   [100%] 1 of 1 ✔
+    [f1/fd6520] cowpy              [100%] 1 of 1 ✔
     ```
 
 Gördüğünüz gibi, bu yapılandırmalar arasında çalışma zamanında çok kullanışlı bir şekilde geçiş yapmamıza olanak tanır.
@@ -1327,17 +1516,17 @@ Bunu bir parametre dosyası kullanmaya alternatif olarak düşünebilirsiniz.
 
 Bu bağlamda varsayılan değerleri ifade etme sözdizimi şöyle görünür, `test` olarak adlandırdığımız bir profil için:
 
-```groovy title="Sözdizimi örneği"
+```groovy title="Syntax example"
     test {
-        params.<parametre1>
-        params.<parametre2>
+        params.<parameter1>
+        params.<parameter2>
         ...
     }
 ```
 
 İş akışımız için bir test profili eklersek, `profiles` bloğu şöyle olur:
 
-```groovy title="nextflow.config" linenums="24"
+```groovy title="nextflow.config" linenums="24" hl_lines="18-22"
 /*
 * Profiller
 */
@@ -1356,7 +1545,7 @@ profiles {
         ]
     }
     test {
-        params.greeting = 'greetings.csv'
+        params.input = 'data/greetings.csv'
         params.batch = 'test'
         params.character = 'dragonandcow'
     }
@@ -1370,7 +1559,7 @@ Teknik yapılandırma profilleri gibi, istediğiniz herhangi bir rastgele ad alt
 Kullanışlı bir şekilde, profiller birbirini dışlamaz, bu nedenle `-profile <profil1>,<profil2>` sözdizimini (herhangi bir sayıda profil için) kullanarak komut satırımızda birden fazla profil belirtebiliriz.
 
 Aynı yapılandırma öğeleri için değerler ayarlayan ve aynı yapılandırma dosyasında tanımlanan profilleri birleştirirseniz, Nextflow çatışmayı en son okuduğu değeri kullanarak çözecektir (_yani_ dosyada daha sonra gelen).
-Çakışan ayarlar farklı yapılandırma kaynaklarında ayarlanmışsa, varsayılan [öncelik sırası](https://www.nextflow.io/docs/latest/config.html) geçerlidir.
+Çakışan ayarlar farklı yapılandırma kaynaklarında ayarlanmışsa, varsayılan [öncelik sırası](https://nextflow.io/docs/latest/config.html) geçerlidir.
 
 Önceki komutumuzda test profilini eklemeyi deneyelim:
 
@@ -1383,20 +1572,20 @@ nextflow run hello-config.nf -profile my_laptop,test
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `hello-config.nf` [jovial_coulomb] DSL2 - revision: 46a6763141
+    Launching `hello-config.nf` [modest_becquerel] DSL2 - revision: 024d6361b5
 
     executor >  local (8)
-    [9b/687cdc] sayHello (2)       | 3 of 3 ✔
-    [ca/552187] convertToUpper (3) | 3 of 3 ✔
-    [e8/83e306] collectGreetings   | 1 of 1 ✔
-    [fd/e84fa9] cowpy              | 1 of 1 ✔
+    [4c/fe2580] sayHello (1)       [100%] 3 of 3 ✔
+    [fd/7d9017] convertToUpper (3) [100%] 3 of 3 ✔
+    [13/1523bd] collectGreetings   [100%] 1 of 1 ✔
+    [06/a1ee14] cowpy              [100%] 1 of 1 ✔
     ```
 
-Bu, mümkün olduğunda Docker kullanacak ve çıktıları `results/test` altında üretecektir ve bu sefer karakter komik ikili `dragonandcow`'dur.
+Bu, mümkün olduğunda Docker kullanacak ve çıktıları `custom-outdir-config/test` altında üretecektir ve bu sefer karakter komik ikili `dragonandcow`'dur.
 
 ??? abstract "Dosya içerikleri"
 
-    ```console title="results/test/"
+    ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
     / HOLà    \
     | HELLO   |
@@ -1434,7 +1623,7 @@ Bu, test veri dosyalarını iş akışı koduyla birlikte dağıttığımız sü
 Yukarıda belirtildiği gibi, bazen aynı parametre birleştirmek istediğiniz profillerde farklı değerlere ayarlanabilir.
 Ve daha genel olarak, yapılandırma öğelerinin depolanabileceği çok sayıda yer vardır ve bazen aynı özellikler farklı yerlerde farklı değerlere ayarlanabilir.
 
-Nextflow, herhangi bir çatışmayı çözmek için belirlenmiş bir [öncelik sırası](https://www.nextflow.io/docs/latest/config.html) uygular, ancak bunu kendiniz belirlemek zor olabilir.
+Nextflow, herhangi bir çatışmayı çözmek için belirlenmiş bir [öncelik sırası](https://nextflow.io/docs/latest/config.html) uygular, ancak bunu kendiniz belirlemek zor olabilir.
 Ve hiçbir şey çakışmıyor olsa bile, şeylerin yapılandırılabileceği tüm olası yerlere bakmak sıkıcı olabilir.
 
 Neyse ki, Nextflow bu tüm süreci sizin için otomatikleştirebilen `config` adlı kullanışlı bir yardımcı araç içerir.
@@ -1453,6 +1642,12 @@ nextflow config
 ??? success "Komut çıktısı"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'batch'
+      character = 'turkey'
+    }
+
     docker {
       enabled = false
     }
@@ -1469,10 +1664,12 @@ nextflow config
       }
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'batch'
-      character = 'turkey'
+    outputDir = 'custom-outdir-config/'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
@@ -1489,6 +1686,12 @@ nextflow config -profile my_laptop,test
 ??? success "Komut çıktısı"
 
     ```groovy
+    params {
+      input = 'data/greetings.csv'
+      batch = 'test'
+      character = 'dragonandcow'
+    }
+
     docker {
       enabled = true
     }
@@ -1506,14 +1709,16 @@ nextflow config -profile my_laptop,test
       executor = 'local'
     }
 
-    params {
-      input = 'greetings.csv'
-      batch = 'test'
-      character = 'dragonandcow'
+    outputDir = 'custom-outdir-config/'
+
+    workflow {
+      output {
+          mode = 'copy'
+      }
     }
     ```
 
-Bu, birden fazla yapılandırma katmanı içeren karmaşık projeler için özellikle faydalı olur.
+Bu, birden fazla yapılandırma katmanı içeren karmaşık projeler için özellikle faydalıdır.
 
 ### Özet
 
@@ -1545,7 +1750,7 @@ Aynı parametre hem yapılandırma dosyasında hem de komut satırında ayarland
 - [ ] İlk karşılaşılan değer
 - [ ] Hiçbiri; bir hataya neden olur
 
-Daha fazla bilgi: [1.1. Varsayılan değerleri `nextflow.config`'e taşıyın](#11-varsayilan-degerleri-nextflowconfige-tasiyin)
+Daha fazla bilgi: [1.1. Varsayılan değerleri `nextflow.config`'e taşıyın](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1563,7 +1768,7 @@ Hem Docker hem de Conda etkinse ve bir süreçte her iki yönerge de varsa, hang
 - [ ] İlk tanımlanan
 - [ ] Bir hataya neden olur
 
-Daha fazla bilgi: [3. Bir yazılım paketleme teknolojisi seçin](#3-bir-yazilim-paketleme-teknolojisi-secin)
+Daha fazla bilgi: [3. Bir yazılım paketleme teknolojisi seçin](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1581,7 +1786,7 @@ Yapılandırma dosyasında belirli bir süreç için kaynak gereksinimlerini nas
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-Daha fazla bilgi: [5.3. Belirli bir süreç için kaynak tahsisleri ayarlayın](#53-belirli-bir-surec-icin-kaynak-tahsisleri-ayarlayin)
+Daha fazla bilgi: [5.3. Belirli bir süreç için kaynak tahsisleri ayarlayın](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1591,7 +1796,7 @@ Hangi komut satırı seçeneği kaynak kullanım raporu oluşturur?
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-Daha fazla bilgi: [5.1. Kaynak kullanım raporu oluşturmak için iş akışını çalıştırın](#51-kaynak-kullanim-raporu-olusturmak-icin-is-akisini-calistirin)
+Daha fazla bilgi: [5.1. Kaynak kullanım raporu oluşturmak için iş akışını çalıştırın](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1601,7 +1806,7 @@ Daha fazla bilgi: [5.1. Kaynak kullanım raporu oluşturmak için iş akışın�
 - [x] Talep edilebilecek maksimum kaynakları sınırlar
 - [ ] Kaynak kullanımını izler
 
-Daha fazla bilgi: [5.5. Kaynak sınırları ekleyin](#55-kaynak-sinirlari-ekleyin)
+Daha fazla bilgi: [5.5. Kaynak sınırları ekleyin](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1611,7 +1816,7 @@ Nextflow'daki varsayılan yürütücü nedir?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Daha fazla bilgi: [4. Bir yürütme platformu seçin](#4-bir-yurutme-platformu-secin)
+Daha fazla bilgi: [4. Bir yürütme platformu seçin](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1621,7 +1826,7 @@ Nextflow çalıştırırken bir parametre dosyasını nasıl belirtirsiniz?
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-Daha fazla bilgi: [1.3. Bir parametre dosyası kullanın](#13-bir-parametre-dosyasi-kullanin)
+Daha fazla bilgi: [1.3. Bir parametre dosyası kullanın](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1631,7 +1836,7 @@ Profiller ne için kullanılabilir? (Uygulanabilen tümünü seçin)
 - [x] Test parametreleri sağlamak
 - [ ] Yeni süreçler tanımlamak
 
-Daha fazla bilgi: [6. Önceden ayarlanmış yapılandırmalar arasında geçiş yapmak için profilleri kullanın](#6-onceden-ayarlanmis-yapilandirmalar-arasinda-gecis-yapmak-icin-profilleri-kullanin)
+Daha fazla bilgi: [6. Önceden ayarlanmış yapılandırmalar arasında geçiş yapmak için profilleri kullanın](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1641,5 +1846,5 @@ Tek bir komutta birden fazla profili nasıl belirtirsiniz?
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Daha fazla bilgi: [6. Önceden ayarlanmış yapılandırmalar arasında geçiş yapmak için profilleri kullanın](#6-onceden-ayarlanmis-yapilandirmalar-arasinda-gecis-yapmak-icin-profilleri-kullanin)
+Daha fazla bilgi: [6. Önceden ayarlanmış yapılandırmalar arasında geçiş yapmak için profilleri kullanın](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
