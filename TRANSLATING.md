@@ -289,14 +289,11 @@ For maintainers with `ANTHROPIC_API_KEY` access:
 ```bash
 cd _scripts
 
-# Preview what needs translating
-uv run translate.py sync pt --dry-run
-
 # Translate one file at a time
-uv run translate.py translate nf4_science/index.md --lang pt
+uv run python -m translate translate nf4_science/index.md --lang pt
 
 # Or sync all (update outdated + add missing + remove orphaned)
-uv run translate.py sync pt
+uv run python -m translate sync pt
 ```
 
 ### After Translation
@@ -386,7 +383,18 @@ docs/
 └── ...
 
 _scripts/
-├── translate.py            # Translation CLI
+├── translate/              # Translation CLI package
+│   ├── config.py           # Constants and configuration
+│   ├── models.py           # Data structures
+│   ├── paths.py            # Path utilities
+│   ├── prompts.py          # Prompt loading
+│   ├── git_utils.py        # Git operations
+│   ├── api.py              # Claude API calls
+│   ├── postprocess.py      # Translation post-processing
+│   ├── verify.py           # Translation verification
+│   ├── progress.py         # Progress tracking
+│   ├── core.py             # Translation orchestration
+│   └── cli.py              # CLI commands
 ├── general-llm-prompt.md   # Shared translation rules
 └── docs.py                 # Build/serve CLI
 ```
@@ -406,20 +414,17 @@ cd _scripts
 ### Translation Commands
 
 ```bash
-# Preview what sync would do (no API key required)
-uv run translate.py sync <lang> --dry-run
-
 # Sync all translations (update outdated + add missing + remove orphaned)
-uv run translate.py sync <lang>
+uv run python -m translate sync <lang>
 
 # Sync with lower parallelism (default: 50 concurrent translations)
-uv run translate.py sync <lang> --parallel 10
+uv run python -m translate sync <lang> --parallel 10
 
 # Sync with filter pattern
-uv run translate.py sync <lang> --include hello_nextflow
+uv run python -m translate sync <lang> --include hello_nextflow
 
 # Translate a single file
-uv run translate.py translate <path> --lang <lang>
+uv run python -m translate translate <path> --lang <lang>
 ```
 
 ### Preview Commands (No API key required)
