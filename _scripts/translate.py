@@ -1475,6 +1475,38 @@ def ci_detect(
     print(f"has_work={'true' if need_sync else 'false'}")
 
 
+@app.command("ci-delete-orphans")
+def ci_delete_orphans():
+    """Delete orphaned translation files for all languages (CI).
+
+    This runs in the merge job to delete translation files that no longer
+    have a corresponding English source file. Files are deleted and staged
+    for commit using git rm.
+    """
+    console = Console(
+        stderr=True, force_terminal=True if os.getenv("GITHUB_ACTIONS") else None
+    )
+    all_langs = get_translation_languages()
+    total_deleted = 0
+
+    for lang in all_langs:
+        orphaned = get_orphaned_files(lang)
+        if orphaned:
+            console.print(
+                f"[bold cyan]{lang}[/bold cyan]: deleting {len(orphaned)} orphaned files"
+            )
+            for p in orphaned:
+                console.print(f"  [red]Deleting:[/red] {p.relative_to(DOCS_ROOT)}")
+                # Use git rm to delete and stage the deletion in one step
+                subprocess.run(["git", "rm", "-f", str(p)], check=True, cwd=REPO_ROOT)
+                total_deleted += 1
+
+    if total_deleted:
+        console.print(f"\n[bold]Total deleted:[/bold] {total_deleted} orphaned files")
+    else:
+        console.print("[dim]No orphaned files found[/dim]")
+
+
 @app.command("ci-run")
 def ci_run(
     languages: str = typer.Option("[]", "--languages"),

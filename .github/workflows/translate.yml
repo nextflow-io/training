@@ -151,6 +151,11 @@ jobs:
           pip install pre-commit
           pre-commit run --files docs/*/docs/**/*.md || true
 
+      - name: Delete orphaned translation files
+        if: steps.check.outputs.has_artifacts == 'true'
+        working-directory: _scripts
+        run: uv run -q translate.py ci-delete-orphans
+
       - name: Create PR
         if: steps.check.outputs.has_artifacts == 'true'
         env:
