@@ -1,1 +1,0 @@
-Este es un marcador de posición para las futuras Misiones Secundarias (entrenamientos profundos). Los documentos que se encuentran aquí actualmente son borradores basados en contenido reutilizado de otros lugares.
