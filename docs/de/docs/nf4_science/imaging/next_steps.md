@@ -1,0 +1,39 @@
+# Nächste Schritte
+
+Herzlichen Glückwunsch zum Abschluss des Nextflow for Bioimaging Trainings!
+
+Du hast jetzt die grundlegenden Fähigkeiten, um Nextflow-Pipelines für die Analyse von Bilddaten auszuführen und zu konfigurieren.
+
+## Weiterlernen
+
+Hier sind einige empfohlene nächste Schritte, um dein Nextflow-Wissen zu vertiefen:
+
+### Weitere nf-core-Pipelines erkunden
+
+- **Alle Pipelines durchsuchen**: [https://nf-co.re/pipelines](https://nf-co.re/pipelines)
+
+### Eigene Pipelines entwickeln
+
+Wenn du lernen möchtest, wie man Nextflow-Pipelines schreibt:
+
+- **[Hello Nextflow](../../hello_nextflow/)**: Umfassendes Nextflow-Entwicklungstraining
+- **[Side Quests](../../side_quests/)**: Fortgeschrittene Themen für Pipeline-Entwickler\*innen
+
+### Der Community beitreten
+
+- **[Nextflow Slack](https://www.nextflow.io/slack-invite.html)**: Hilfe erhalten und mit anderen Nutzer\*innen in Kontakt treten
+- **[nf-core Slack](https://nf-co.re/join)**: Der nf-core-Community beitreten
+- **[Seqera Community Forum](https://community.seqera.io)**: Fragen stellen und Erfahrungen teilen
+
+### Zusätzliche Ressourcen
+
+- **[Nextflow-Dokumentation](https://www.nextflow.io/docs/latest/)**: Vollständige Referenzdokumentation
+- **[nf-core-Dokumentation](https://nf-co.re/docs)**: Richtlinien und Best Practices
+
+## Mitmachen
+
+- **Zu nf-core beitragen**: Hilf mit, Pipelines oder Dokumentation zu verbessern
+- **Deine Workflows teilen**: Trage deine eigenen Pipelines zur Community bei
+- **An Events teilnehmen**: Nimm am Nextflow Summit und Community-Trainings teil
+
+Vielen Dank, dass du mit uns gelernt hast!
