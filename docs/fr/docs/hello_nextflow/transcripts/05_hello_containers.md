@@ -18,7 +18,7 @@ Bonjour et bienvenue pour cette nouvelle partie de Hello Nextflow. Il s'agit de 
 
 Si vous travaillez en bio-informatique depuis aussi longtemps que moi, vous vous souvenez peut-être de ce que j'appelle souvent « le mauvais vieux temps », où quand vous vouliez exécuter le pipeline de quelqu'un d'autre ou reproduire son travail, vous passiez des heures ou des jours à essayer d'installer tous les différents outils logiciels qu'ils utilisaient, dans les mêmes versions, en essayant de les compiler sur votre machine, et c'était un cauchemar. C'était vraiment difficile.
 
-Si vous travailliez sur un HPC, vous avez peut-être utilisé des modules d'environnement où les administrateurs système essayaient d'installer des logiciels pour vous, ce qui était correct, mais toujours imparfait.
+Si vous travailliez sur un HPC, vous avez peut-être utilisé des modules d'environnement où les administrateur·trices système essayaient d'installer des logiciels pour vous, ce qui était correct, mais toujours imparfait.
 
 Mais maintenant nous avons de meilleures façons de faire. Nextflow a un support intégré pour différentes technologies de conteneurs logiciels. Docker est la plus courante. C'est celle que nous allons utiliser aujourd'hui. Elle fonctionne bien dans Codespaces. Elle fonctionne bien sur votre ordinateur local et elle fonctionne bien dans le cloud.
 

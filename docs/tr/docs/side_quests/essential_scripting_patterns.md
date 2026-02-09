@@ -554,7 +554,7 @@ nextflow run collect.nf
     channel.collect() sonucu: [sample_001, sample_002, sample_003] (3 öğe 1'de toplandı)
     ```
 
-Bu sefer, bazı örnekleri dışlayan bir filtre seçtiğimiz için verinin yapısını değiştirmedik, hala listede 3 öğemiz var, ancak değiştirilmiş değerlere sahip yeni bir liste üretmek için List'in `collect` yöntemini kullanarak her öğeyi dönüştürdük. Bu, bir kanal üzerinde `map` operatörü kullanmaya benzer, ancak kanal yerine bir List veri yapısı üzerinde çalışıyor.
+Bu sefer, verinin yapısını değiştirmedik, hala listede 3 öğemiz var, ancak değiştirilmiş değerlere sahip yeni bir liste üretmek için List'in `collect` yöntemini kullanarak her öğeyi dönüştürdük. Bu, bir kanal üzerinde `map` operatörü kullanmaya benzer, ancak kanal yerine bir List veri yapısı üzerinde çalışıyor.
 
 `collect` burada bir nokta belirtmek için kullandığımız uç bir durumdur. Önemli ders şudur: iş akışları yazarken her zaman **veri yapıları** (Listeler, Map'ler, vb.) ile **kanallar** (dataflow yapıları) arasında ayrım yapın. İşlemler aynı adları paylaşabilir ancak üzerinde çağrıldıkları türe bağlı olarak tamamen farklı davranabilir.
 
@@ -992,4 +992,1472 @@ Dinamik script mantığının bir başka yaygın kullanımı [Bilim için Nextfl
     """
 ```
 
-Process script bloklarında scripting kullanmanın bu kalıpları son derece güçlüdür ve birçok senaryoda uygulanabilir - değişken girdi türlerini işlemekten dosya koleksiyonlarından karmaşık komut satırı argü
+Process script bloklarında scripting kullanmanın bu kalıpları son derece güçlüdür ve birçok senaryoda uygulanabilir - değişken girdi türlerini işlemekten dosya koleksiyonlarından karmaşık komut satırı argümanları oluşturmaya kadar, process'lerinizi gerçek dünya verilerinin çeşitli gereksinimlerine gerçekten uyarlanabilir hale getirir.
+
+### 2.3. Değişken Enterpolasyonu: Nextflow ve Shell Değişkenleri
+
+Process script'leri Nextflow değişkenlerini, shell değişkenlerini ve komut ikamelerini karıştırır, her biri farklı enterpolasyon sözdizimi ile. Yanlış sözdizimi kullanmak hatalara neden olur. Bunları bir rapor oluşturan bir process ile keşfedelim.
+
+`modules/generate_report.nf` modül dosyasına bakın:
+
+```groovy title="modules/generate_report.nf" linenums="1"
+process GENERATE_REPORT {
+
+    publishDir 'results/reports', mode: 'copy'
+
+    input:
+    tuple val(meta), path(reads)
+
+    output:
+    path "${meta.id}_report.txt"
+
+    script:
+    """
+    echo "Processing ${reads}" > ${meta.id}_report.txt
+    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+    """
+}
+```
+
+Bu process örnek kimliği ve dosya adı ile basit bir rapor yazar. Şimdi farklı değişken türlerini karıştırmamız gerektiğinde ne olduğunu görmek için çalıştıralım.
+
+Process'i `main.nf`'nize dahil edin ve iş akışına ekleyin:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="2 30"
+    include { FASTP } from './modules/fastp.nf'
+    include { GENERATE_REPORT } from './modules/generate_report.nf'
+
+    workflow {
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+            }
+
+        ch_fastp = FASTP(ch_samples)
+        GENERATE_REPORT(ch_samples)
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="1 10-29"
+    include { FASTP } from './modules/fastp.nf'
+
+    workflow {
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+            }
+
+        ch_fastp = FASTP(ch_samples)
+    }
+    ```
+
+Şimdi iş akışını çalıştırın ve `results/reports/` içinde oluşturulan raporları kontrol edin. Her örnek hakkında temel bilgiler içermelidirler.
+
+<!-- TODO: add the run command -->
+
+??? success "Komut çıktısı"
+
+    ```console
+    <!-- TODO: output -->
+    ```
+
+Peki ya işlemenin ne zaman ve nerede gerçekleştiğine dair bilgi eklemek istersek? Process'i **shell** değişkenlerini ve biraz komut ikamesini kullanarak rapora mevcut kullanıcı, hostname ve tarihi dahil edecek şekilde değiştirelim:
+
+=== "Sonra"
+
+    ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
+        """
+    ```
+
+=== "Önce"
+
+    ```groovy title="modules/generate_report.nf" linenums="10"
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        """
+    ```
+
+Bunu çalıştırırsanız, bir hata göreceksiniz - Nextflow `${USER}`'ı var olmayan bir Nextflow değişkeni olarak yorumlamaya çalışır.
+
+??? failure "Komut çıktısı"
+
+    ```console
+    Error modules/generate_report.nf:15:27: `USER` is not defined
+    │  15 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+    ╰     |                           ^^^^
+
+    ERROR ~ Script compilation failed
+    ```
+
+Bash'in bunu işleyebilmesi için kaçırmamız gerekiyor.
+
+Shell değişkenlerini ve komut ikamelerini ters eğik çizgi (`\`) ile kaçırarak düzeltin:
+
+=== "Sonra"
+
+    ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: \${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: \$(hostname)" >> ${meta.id}_report.txt
+        echo "Date: \$(date)" >> ${meta.id}_report.txt
+        """
+    ```
+
+=== "Önce"
+
+    ```groovy title="modules/generate_report.nf" linenums="10"
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
+        """
+    ```
+
+Şimdi çalışıyor! Ters eğik çizgi (`\`) Nextflow'a "bunu yorumlama, Bash'e geçir" der.
+
+### Çıkarımlar
+
+Bu bölümde **string işleme** tekniklerini öğrendiniz:
+
+- **Dosya ayrıştırma için düzenli ifadeler**: Karmaşık dosya adlandırma kurallarından meta veri çıkartmak için `=~` operatörünü ve regex kalıplarını (`~/pattern/`) kullanma
+- **Dinamik script oluşturma**: Girdi özelliklerine göre farklı script string'leri oluşturmak için koşullu mantık (if/else, üçlü operatörler) kullanma
+- **Değişken enterpolasyonu**: Nextflow'un string'leri ne zaman yorumladığını ve shell'in ne zaman yorumladığını anlama
+  - `${var}` - Nextflow değişkenleri (iş akışı derleme zamanında Nextflow tarafından enterpolasyon yapılır)
+  - `\${var}` - Shell ortam değişkenleri (kaçırılmış, çalışma zamanında bash'e geçirilir)
+  - `\$(cmd)` - Shell komut ikamesi (kaçırılmış, çalışma zamanında bash tarafından çalıştırılır)
+
+Bu string işleme ve oluşturma kalıpları, gerçek dünya biyoinformatik iş akışlarında karşılaşacağınız çeşitli dosya formatları ve adlandırma kurallarını işlemek için esastır.
+
+---
+
+## 3. Yeniden Kullanılabilir Fonksiyonlar Oluşturma
+
+Kanal operatörlerinde veya process tanımlarında satır içi karmaşık iş akışı mantığı okunabilirliği ve bakımı azaltır. **Fonksiyonlar**, bu mantığı adlandırılmış, yeniden kullanılabilir bileşenlere çıkartmanıza olanak tanır.
+
+Map işlemimiz uzun ve karmaşık hale geldi. `def` anahtar kelimesini kullanarak bunu yeniden kullanılabilir bir fonksiyona çıkaralım.
+
+Mevcut iş akışımızla bunun nasıl göründüğünü göstermek için, `separateMetadata` adlı yeniden kullanılabilir bir fonksiyon tanımlamak üzere `def` kullanarak aşağıdaki değişikliği yapın:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="4-24 29"
+    include { FASTP } from './modules/fastp.nf'
+    include { GENERATE_REPORT } from './modules/generate_report.nf'
+
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+        def fastq_path = file(row.file_path)
+
+        def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+        def file_meta = m ? [
+            sample_num: m[0][2].toInteger(),
+            lane: m[0][3],
+            read: m[0][4],
+            chunk: m[0][5]
+        ] : [:]
+
+        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+    }
+
+    workflow {
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
+
+        ch_fastp = FASTP(ch_samples)
+        GENERATE_REPORT(ch_samples)
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="7-27"
+    include { FASTP } from './modules/fastp.nf'
+    include { GENERATE_REPORT } from './modules/generate_report.nf'
+
+    workflow {
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+            }
+
+        ch_fastp = FASTP(ch_samples)
+        GENERATE_REPORT(ch_samples)
+    }
+    ```
+
+Bu mantığı bir fonksiyona çıkartarak, gerçek iş akışı mantığını çok daha temiz bir şeye indirgedik:
+
+```groovy title="minimal workflow"
+    ch_samples = channel.fromPath("./data/samples.csv")
+        .splitCsv(header: true)
+        .map{ row -> separateMetadata(row) }
+
+    ch_fastp = FASTP(ch_samples)
+    GENERATE_REPORT(ch_samples)
+```
+
+Bu, iş akışı mantığını bir bakışta okumayı ve anlamayı çok daha kolay hale getirir. `separateMetadata` fonksiyonu, meta verileri ayrıştırma ve zenginleştirme için tüm karmaşık mantığı kapsüller, onu yeniden kullanılabilir ve test edilebilir hale getirir.
+
+Hala çalıştığından emin olmak için iş akışını çalıştırın:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [admiring_panini] DSL2 - revision: 8cc832e32f
+
+    executor >  local (6)
+    [8c/2e3f91] process > FASTP (3)           [100%] 3 of 3 ✔
+    [7a/1b4c92] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    ```
+
+Çıktı her iki process'in de başarıyla tamamlandığını göstermelidir. İş akışı artık çok daha temiz ve bakımı kolay, tüm karmaşık meta veri işleme mantığı `separateMetadata` fonksiyonunda kapsüllenmiş durumda.
+
+### Çıkarımlar
+
+Bu bölümde **fonksiyon oluşturmayı** öğrendiniz:
+
+- **`def` ile fonksiyon tanımlama**: Adlandırılmış fonksiyonlar oluşturmak için anahtar kelime (Python'daki `def` veya JavaScript'teki `function` gibi)
+- **Fonksiyon kapsamı**: Script seviyesinde tanımlanan fonksiyonlar Nextflow iş akışınız boyunca erişilebilir
+- **Dönüş değerleri**: Fonksiyonlar otomatik olarak son ifadeyi döndürür veya açık `return` kullanır
+- **Daha temiz kod**: Karmaşık mantığı fonksiyonlara çıkartmak herhangi bir dilde temel bir yazılım mühendisliği pratiğidir
+
+Sonrasında, dinamik kaynak tahsisi için process yönergelerinde closure'ları nasıl kullanacağımızı keşfedeceğiz.
+
+---
+
+## 4. Closure'larla Dinamik Kaynak Yönergeleri
+
+Şimdiye kadar process'lerin `script` bloğunda scripting kullandık. Ancak **closure'lar** (Bölüm 1.1'de tanıtıldı) özellikle dinamik kaynak tahsisi için process yönergelerinde de inanılmaz derecede kullanışlıdır. FASTP process'imize örnek özelliklerine göre uyum sağlayan kaynak yönergeleri ekleyelim.
+
+### 4.1. Örneğe özgü kaynak tahsisi
+
+Şu anda FASTP process'imiz varsayılan kaynakları kullanıyor. Yüksek derinlikli örnekler için daha fazla CPU tahsis ederek daha akıllı hale getirelim. Dinamik bir `cpus` yönergesi ve statik bir `memory` yönergesi içerecek şekilde `modules/fastp.nf`'yi düzenleyin:
+
+=== "Sonra"
+
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="4-5"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        cpus { meta.depth > 40000000 ? 2 : 1 }
+        memory 2.GB
+
+        input:
+        tuple val(meta), path(reads)
+    ```
+
+=== "Önce"
+
+    ```groovy title="modules/fastp.nf" linenums="1"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        input:
+        tuple val(meta), path(reads)
+    ```
+
+`{ meta.depth > 40000000 ? 2 : 1 }` closure'ı **üçlü operatörü** (Bölüm 1.1'de ele alındı) kullanır ve her görev için değerlendirilir, örnek başına kaynak tahsisine olanak tanır. Yüksek derinlikli örnekler (>40M okuma) 2 CPU alırken, diğerleri 1 CPU alır.
+
+!!! note "Yönergelerde Girdi Değişkenlerine Erişim"
+
+    Closure, herhangi bir girdi değişkenine (burada `meta` gibi) erişebilir çünkü Nextflow bu closure'ları her görev yürütmesinin bağlamında değerlendirir.
+
+Görev hash'lerini görmeyi kolaylaştırmak için `-ansi-log false` seçeneğiyle iş akışını tekrar çalıştırın.
+
+```bash
+nextflow run main.nf -ansi-log false
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [fervent_albattani] DSL2 - revision: fa8f249759
+    [bd/ff3d41] Submitted process > FASTP (2)
+    [a4/a3aab2] Submitted process > FASTP (1)
+    [48/6db0c9] Submitted process > FASTP (3)
+    [ec/83439d] Submitted process > GENERATE_REPORT (3)
+    [bd/15d7cc] Submitted process > GENERATE_REPORT (2)
+    [42/699357] Submitted process > GENERATE_REPORT (1)
+    ```
+
+Herhangi bir görev için CPU tahsisini görmek üzere çalıştırılan tam `docker` komutunu kontrol edebilirsiniz:
+
+```console title="Docker komutunu kontrol et"
+cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
+```
+
+Şuna benzer bir şey görmelisiniz:
+
+```bash title="docker komutu"
+    docker run -i --cpu-shares 4096 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
+```
+
+Bu örnekte yüksek derinlikli bir örnek olduğu için 2 CPU (`--cpu-shares 2048`) isteyen bir örnek seçtik, ancak örnek derinliğine bağlı olarak farklı CPU tahsisleri görmelisiniz. Bunu diğer görevler için de deneyin.
+
+### 4.2. Yeniden deneme stratejileri
+
+Bir başka güçlü kalıp, yeniden deneme stratejileri için `task.attempt` kullanmaktır. Bunun neden yararlı olduğunu göstermek için, FASTP'ye bellek tahsisini ihtiyaç duyduğundan daha aza indirerek başlayacağız. `modules/fastp.nf`'deki `memory` yönergesini `1.GB` olarak değiştirin:
+
+=== "Sonra"
+
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        cpus { meta.depth > 40000000 ? 4 : 2 }
+        memory 1.GB
+
+        input:
+        tuple val(meta), path(reads)
+    ```
+
+=== "Önce"
+
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        cpus { meta.depth > 40000000 ? 4 : 2 }
+        memory 2.GB
+
+        input:
+        tuple val(meta), path(reads)
+    ```
+
+... ve iş akışını tekrar çalıştırın:
+
+```bash
+nextflow run main.nf
+```
+
+??? failure "Komut çıktısı"
+
+    ```console hl_lines="2 11"
+    Command exit status:
+      137
+
+    Command output:
+      (empty)
+
+    Command error:
+      Detecting adapter sequence for read1...
+      No adapter detected for read1
+
+      .command.sh: line 7:   101 Killed                  fastp --in1 SAMPLE_002_S2_L001_R1_001.fastq --out1 sample_002_trimmed.fastq.gz --json sample_002.fastp.json --html sample_002.fastp.html --thread 2
+    ```
+
+Bu, process'in bellek limitlerini aştığı için öldürüldüğünü gösterir.
+
+Bu, gerçek dünya iş akışlarında çok yaygın bir senaryodur - bazen bir görevin ne kadar belleğe ihtiyaç duyacağını çalıştırana kadar bilemezsiniz.
+
+İş akışımızı daha sağlam hale getirmek için, her denemede bellek tahsisini artıran bir yeniden deneme stratejisi uygulayabiliriz, bir kez daha Groovy closure kullanarak. `memory` yönergesini temel belleği `task.attempt` ile çarpmak üzere değiştirin ve `errorStrategy 'retry'` ve `maxRetries 2` yönergelerini ekleyin:
+
+=== "Sonra"
+
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5-7"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        cpus { meta.depth > 40000000 ? 4 : 2 }
+        memory { 1.GB * task.attempt }
+        errorStrategy 'retry'
+        maxRetries 2
+
+        input:
+        tuple val(meta), path(reads)
+    ```
+
+=== "Önce"
+
+    ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
+    process FASTP {
+        container 'community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690'
+
+        cpus { meta.depth > 40000000 ? 4 : 2 }
+        memory 2.GB
+
+        input:
+        tuple val(meta), path(reads)
+    ```
+
+Şimdi process yetersiz bellek nedeniyle başarısız olursa, Nextflow daha fazla bellek ile yeniden deneyecektir:
+
+- İlk deneme: 1 GB (task.attempt = 1)
+- İkinci deneme: 2.GB (task.attempt = 2)
+
+... ve böyle devam eder, `maxRetries` limitine kadar.
+
+### Çıkarımlar
+
+Closure'larla dinamik yönergeler şunları yapmanıza olanak tanır:
+
+- Girdi özelliklerine göre kaynak tahsis etme
+- Artan kaynaklarla otomatik yeniden deneme stratejileri uygulama
+- Birden fazla faktörü birleştirme (meta veri, deneme sayısı, öncelikler)
+- Karmaşık kaynak hesaplamaları için koşullu mantık kullanma
+
+Bu, iş akışlarınızı hem daha verimli (aşırı tahsis etmeme) hem de daha sağlam (daha fazla kaynakla otomatik yeniden deneme) hale getirir.
+
+---
+
+## 5. Koşullu Mantık ve Process Kontrolü
+
+Daha önce, kanal verilerini dönüştürmek için scripting ile `.map()` kullandık. Şimdi hangi process'lerin veriye göre çalıştırılacağını kontrol etmek için koşullu mantık kullanacağız - farklı örnek türlerine uyum sağlayan esnek iş akışları için esastır.
+
+Nextflow'un [dataflow operatörleri](https://www.nextflow.io/docs/latest/reference/operator.html) çalışma zamanında değerlendirilen closure'lar alır, koşullu mantığın kanal içeriğine göre iş akışı kararlarını yönlendirmesini sağlar.
+
+### 5.1. `.branch()` ile Yönlendirme
+
+Örneğin, dizileme örneklerimizin sadece belirli bir eşiğin üzerinde kapsama sahip insan örnekleri olmaları durumunda FASTP ile kırpılması gerektiğini varsayalım. Fare örnekleri veya düşük kapsama sahip örnekler bunun yerine Trimgalore ile çalıştırılmalıdır (bu uydurulmuş bir örnek, ancak noktayı gösteriyor).
+
+`modules/trimgalore.nf`'de basit bir Trimgalore process'i sağladık, isterseniz bakabilirsiniz, ancak detaylar bu alıştırma için önemli değil. Önemli nokta, örnekleri meta verilerine göre yönlendirmek istememizdir.
+
+`modules/trimgalore.nf`'den yeni formu dahil edin:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="2"
+    include { FASTP } from './modules/fastp.nf'
+    include { TRIMGALORE } from './modules/trimgalore.nf'
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="1"
+    include { FASTP } from './modules/fastp.nf'
+    ```
+
+... ve sonra `main.nf` iş akışınızı örnekleri meta verilerine göre dallandırmak ve uygun kırpma process'inden yönlendirmek için şu şekilde değiştirin:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="28" hl_lines="5-12"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row -> separateMetadata(row) }
+
+        trim_branches = ch_samples
+            .branch { meta, reads ->
+                fastp: meta.organism == 'human' && meta.depth >= 30000000
+                trimgalore: true
+            }
+
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="28" hl_lines="5"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row -> separateMetadata(row) }
+
+        ch_fastp = FASTP(ch_samples)
+        GENERATE_REPORT(ch_samples)
+    ```
+
+Bu değiştirilmiş iş akışını çalıştırın:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [adoring_galileo] DSL2 - revision: c9e83aaef1
+
+    executor >  local (6)
+    [1d/0747ac] process > FASTP (2)           [100%] 2 of 2 ✔
+    [cc/c44caf] process > TRIMGALORE (1)      [100%] 1 of 1 ✔
+    [34/bd5a9f] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
+    ```
+
+Burada, örnekleri meta verilerine göre yönlendirmek için `.branch{}` operatörü içinde küçük ama güçlü koşullu ifadeler kullandık. Yüksek kapsama sahip insan örnekleri `FASTP`'den geçerken, diğer tüm örnekler `TRIMGALORE`'den geçer.
+
+### 5.2. Doğruluk ile `.filter()` Kullanma
+
+İş akışı yürütmesini kontrol etmek için bir başka güçlü kalıp, hangi öğelerin pipeline'da devam etmesi gerektiğini belirlemek için bir closure kullanan `.filter()` operatörüdür. Filtre closure'ı içinde, hangi öğelerin geçeceğine karar veren **boolean ifadeleri** yazacaksınız.
+
+Nextflow'un (birçok dinamik dil gibi) boolean bağlamlarda hangi değerlerin `true` veya `false` olarak değerlendirileceğini belirleyen bir **"doğruluk"** kavramı vardır:
+
+- **Doğru**: Null olmayan değerler, boş olmayan string'ler, sıfır olmayan sayılar, boş olmayan koleksiyonlar
+- **Yanlış**: `null`, boş string'ler `""`, sıfır `0`, boş koleksiyonlar `[]` veya `[:]`, `false`
+
+Bu, `meta.id`'nin tek başına (açık `!= null` olmadan) kimliğin var olup olmadığını ve boş olmadığını kontrol ettiği anlamına gelir. Kalite gereksinimlerimizi karşılamayan örnekleri filtrelemek için bunu kullanalım.
+
+Dal işleminden önce aşağıdakini ekleyin:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="28" hl_lines="5-11"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row -> separateMetadata(row) }
+
+        // Geçersiz veya düşük kaliteli örnekleri filtrele
+        ch_valid_samples = ch_samples
+            .filter { meta, reads ->
+                meta.id && meta.organism && meta.depth >= 25000000
+            }
+
+        trim_branches = ch_valid_samples
+            .branch { meta, reads ->
+                fastp: meta.organism == 'human' && meta.depth >= 30000000
+                trimgalore: true
+            }
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="28" hl_lines="5"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row -> separateMetadata(row) }
+
+        trim_branches = ch_samples
+            .branch { meta, reads ->
+                fastp: meta.organism == 'human' && meta.depth >= 30000000
+                trimgalore: true
+            }
+    ```
+
+İş akışını tekrar çalıştırın:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [lonely_williams] DSL2 - revision: d0b3f121ec
+    [94/b48eac] Submitted process > FASTP (2)
+    [2c/d2b28f] Submitted process > GENERATE_REPORT (2)
+    [65/2e3be4] Submitted process > GENERATE_REPORT (1)
+    [94/b48eac] NOTE: Process `FASTP (2)` terminated with an error exit status (137) -- Execution is retried (1)
+    [3e/0d8664] Submitted process > TRIMGALORE (1)
+    [6a/9137b0] Submitted process > FASTP (1)
+    [6a/9137b0] NOTE: Process `FASTP (1)` terminated with an error exit status (137) -- Execution is retried (1)
+    [83/577ac0] Submitted process > GENERATE_REPORT (3)
+    [a2/5117de] Re-submitted process > FASTP (1)
+    [1f/a1a4ca] Re-submitted process > FASTP (2)
+    ```
+
+Bazı örnekleri dışlayan bir filtre seçtiğimiz için, daha az görev yürütüldü.
+
+Filtre ifadesi `meta.id && meta.organism && meta.depth >= 25000000` doğruluğu açık karşılaştırmalarla birleştirir:
+
+- `meta.id && meta.organism` her iki alanın da var olduğunu ve boş olmadığını kontrol eder (doğruluk kullanarak)
+- `meta.depth >= 25000000` açık bir karşılaştırma ile yeterli dizileme derinliğini sağlar
+
+!!! note "Pratikte Doğruluk"
+
+    `meta.id && meta.organism` ifadesi şunu yazmaktan daha özlüdür:
+    ```groovy
+    meta.id != null && meta.id != '' && meta.organism != null && meta.organism != ''
+    ```
+
+    Bu, filtreleme mantığını çok daha temiz ve okunması kolay hale getirir.
+
+### Çıkarımlar
+
+Bu bölümde, `.branch{}` ve `.filter{}` gibi Nextflow operatörlerinin closure arayüzlerini kullanarak iş akışı yürütmesini kontrol etmek için koşullu mantık kullanmayı, özlü koşullu ifadeler yazmak için doğruluğu kullanmayı öğrendiniz.
+
+Pipeline'ımız artık örnekleri uygun process'lerden akıllıca yönlendiriyor, ancak üretim iş akışlarının geçersiz verileri zarif bir şekilde işlemesi gerekir. İş akışımızı eksik veya null değerlere karşı sağlam hale getirelim.
+
+---
+
+## 6. Güvenli Navigasyon ve Elvis Operatörleri
+
+`separateMetadata` fonksiyonumuz şu anda tüm CSV alanlarının mevcut ve geçerli olduğunu varsayıyor. Peki eksik verilerle ne olur? Öğrenelim.
+
+### 6.1. Problem: Var Olmayan Özelliklere Erişim
+
+Diyelim ki isteğe bağlı dizileme çalıştırma bilgisi için destek eklemek istiyoruz. Bazı laboratuvarlarda, örneklerin dizileme çalıştırma kimliği veya parti numarası için ek bir alanı olabilir, ancak mevcut CSV'mizde bu sütun yok. Yine de ona erişmeyi deneyelim.
+
+`separateMetadata` fonksiyonunu bir run_id alanı içerecek şekilde değiştirin:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="5" hl_lines="9"
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+        def run_id = row.run_id.toUpperCase()
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="5"
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+    ```
+
+Şimdi iş akışını çalıştırın:
+
+```bash
+nextflow run main.nf
+```
+
+??? failure "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [trusting_torvalds] DSL2 - revision: b56fbfbce2
+
+    ERROR ~ Cannot invoke method toUpperCase() on null object
+
+    -- Check script 'main.nf' at line: 13 or see '.nextflow.log' file for more details
+    ```
+
+Bu bir NullPointerException ile çöküyor.
+
+Problem, `row.run_id`'nin `null` döndürmesidir çünkü `run_id` sütunu CSV'mizde mevcut değildir. `null` üzerinde `.toUpperCase()` çağırmaya çalıştığımızda çöküyor. Güvenli navigasyon operatörünün günü kurtardığı yer burasıdır.
+
+### 6.2. Güvenli Navigasyon Operatörü (`?.`)
+
+Güvenli navigasyon operatörü (`?.`), `null` bir değer üzerinde çağrıldığında istisna atmak yerine `null` döndürür. `?.` öncesindeki nesne `null` ise, tüm ifade yöntemi çalıştırmadan `null` olarak değerlendirilir.
+
+Güvenli navigasyon kullanmak için fonksiyonu güncelleyin:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="4" hl_lines="9"
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+        def run_id = row.run_id?.toUpperCase()
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="4" hl_lines="9"
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+        def run_id = row.run_id.toUpperCase()
+    ```
+
+Tekrar çalıştırın:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    <!-- TODO: output -->
+    ```
+
+Çökme yok! İş akışı artık eksik alanı zarif bir şekilde işliyor. `row.run_id` `null` olduğunda, `?.` operatörü `.toUpperCase()` çağrısını önler ve `run_id` istisna oluşturmak yerine `null` olur.
+
+### 6.3. Varsayılanlar için Elvis Operatörü (`?:`)
+
+Elvis operatörü (`?:`), sol taraf "yanlış" olduğunda (daha önce açıklandığı gibi) varsayılan değerler sağlar. Yan tarafından bakıldığında `?:` Elvis Presley'nin ünlü saçı ve gözleri gibi göründüğü için Elvis operatörü olarak adlandırılır!
+
+Artık güvenli navigasyon kullandığımıza göre, `run_id` o alan olmayan örnekler için `null` olacaktır. Varsayılan bir değer sağlamak ve `sample_meta` map'imize eklemek için Elvis operatörünü kullanalım:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="5" hl_lines="9-10"
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+        def run_id = row.run_id?.toUpperCase() ?: 'UNSPECIFIED'
+        sample_meta.run = run_id
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="5" hl_lines="9"
+    def separateMetadata(row) {
+        def sample_meta = [
+            id: row.sample_id.toLowerCase(),
+            organism: row.organism,
+            tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+            depth: row.sequencing_depth.toInteger(),
+            quality: row.quality_score.toDouble()
+        ]
+        def run_id = row.run_id?.toUpperCase()
+    ```
+
+Ayrıca sonuçları görmek için iş akışına bir `view()` operatörü ekleyin:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="30" hl_lines="4"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
+            .view()
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="30"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
+    ```
+
+ve iş akışını çalıştırın:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, run:UNSPECIFIED, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+    [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, run:UNSPECIFIED, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+    [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, run:UNSPECIFIED, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+    ```
+
+Mükemmel! Şimdi tüm örneklerin gerçek çalıştırma kimliği (büyük harfle) veya varsayılan değer 'UNSPECIFIED' ile bir `run` alanı var. `?.` ve `?:` kombinasyonu hem güvenlik (çökme yok) hem de mantıklı varsayılanlar sağlar.
+
+Çalıştığını onayladığımıza göre `.view()` operatörünü çıkarın.
+
+!!! tip "Güvenli Navigasyon ve Elvis'i Birleştirme"
+
+    `value?.method() ?: 'default'` kalıbı üretim iş akışlarında yaygındır:
+
+    - `value?.method()` - Yöntemi güvenli bir şekilde çağırır, `value` `null` ise `null` döndürür
+    - `?: 'default'` - Sonuç `null` ise yedek sağlar
+
+    Bu kalıp eksik/eksik verileri zarif bir şekilde işler.
+
+Bu operatörleri fonksiyonlarda, operatör closure'larında (`.map{}`, `.filter{}`), process script'lerinde ve yapılandırma dosyalarında tutarlı bir şekilde kullanın. Gerçek dünya verileriyle çalışırken çökmeleri önlerler.
+
+### Çıkarımlar
+
+- **Güvenli navigasyon (`?.`)**: Null değerlerde çökmeleri önler - istisna atmak yerine null döndürür
+- **Elvis operatörü (`?:`)**: Varsayılanlar sağlar - `value ?: 'default'`
+- **Birleştirme**: `value?.method() ?: 'default'` yaygın kalıptır
+
+Bu operatörler iş akışlarını eksik verilere karşı dirençli hale getirir - gerçek dünya çalışması için esastır.
+
+---
+
+## 7. `error()` ve `log.warn` ile Doğrulama
+
+Bazen girdi parametreleri geçersizse iş akışını hemen durdurmanız gerekir. Nextflow'da, doğrulama mantığı uygulamak için `error()` ve `log.warn` gibi yerleşik fonksiyonların yanı sıra `if` ifadeleri ve boolean mantığı gibi standart programlama yapılarını kullanabilirsiniz. İş akışımıza doğrulama ekleyelim.
+
+İş akışı bloğunuzdan önce bir doğrulama fonksiyonu oluşturun, iş akışından çağırın ve kanal oluşturmayı CSV dosya yolu için bir parametre kullanacak şekilde değiştirin. Parametre eksikse veya dosya mevcut değilse, açık bir mesajla yürütmeyi durdurmak için `error()` çağırın.
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="5-20 23-24"
+    include { FASTP } from './modules/fastp.nf'
+    include { TRIMGALORE } from './modules/trimgalore.nf'
+    include { GENERATE_REPORT } from './modules/generate_report.nf'
+
+    def validateInputs() {
+        // Girdi parametresinin sağlandığını kontrol et
+        if (!params.input) {
+            error("Girdi CSV dosya yolu sağlanmadı. Lütfen --input <file.csv> belirtin")
+        }
+
+        // CSV dosyasının var olduğunu kontrol et
+        if (!file(params.input).exists()) {
+            error("Girdi CSV dosyası bulunamadı: ${params.input}")
+        }
+    }
+    ...
+    workflow {
+        validateInputs()
+        ch_samples = channel.fromPath(params.input)
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="1"
+    include { FASTP } from './modules/fastp.nf'
+    include { TRIMGALORE } from './modules/trimgalore.nf'
+    include { GENERATE_REPORT } from './modules/generate_report.nf'
+
+    ...
+    workflow {
+        ch_samples = channel.fromPath("./data/samples.csv")
+    ```
+
+Şimdi CSV dosyası olmadan çalıştırmayı deneyin:
+
+```bash
+nextflow run main.nf
+```
+
+??? failure "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
+
+    WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
+    Girdi CSV dosya yolu sağlanmadı. Lütfen --input <file.csv> belirtin
+    ```
+
+İş akışı daha sonra gizemli bir şekilde başarısız olmak yerine açık bir hata mesajıyla hemen durur
+
+Şimdi var olmayan bir dosyayla çalıştırın:
+
+```bash
+nextflow run main.nf --input ./data/nonexistent.csv
+```
+
+??? failure "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
+
+    Girdi CSV dosyası bulunamadı: ./data/nonexistent.csv
+    ```
+
+Son olarak, doğru dosyayla çalıştırın:
+
+```bash
+nextflow run main.nf --input ./data/samples.csv
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    <!-- TODO: output -->
+    ```
+
+Bu sefer başarıyla çalışıyor.
+
+`separateMetadata` fonksiyonu içinde de doğrulama ekleyebilirsiniz. Düşük dizileme derinliğine sahip örnekler için uyarılar vermek üzere ölümcül olmayan `log.warn` kullanalım, ancak iş akışının devam etmesine izin verelim:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="3-6"
+        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+
+        // Verinin mantıklı olduğunu doğrula
+        if (sample_meta.depth < 30000000) {
+            log.warn "${sample_meta.id} için düşük dizileme derinliği: ${sample_meta.depth}"
+        }
+
+        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="1"
+        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+
+        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+    }
+    ```
+
+İş akışını orijinal CSV ile tekrar çalıştırın:
+
+```bash
+nextflow run main.nf --input ./data/samples.csv
+```
+
+??? warning "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [awesome_goldwasser] DSL2 - revision: a31662a7c1
+
+    executor >  local (5)
+    [ce/df5eeb] process > FASTP (2)           [100%] 2 of 2 ✔
+    [-        ] process > TRIMGALORE          -
+    [d1/7d2b4b] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
+    WARN: sample_002 için düşük dizileme derinliği: 25000000
+    ```
+
+Örneklerden biri için düşük dizileme derinliği hakkında bir uyarı görüyoruz.
+
+### Çıkarımlar
+
+- **`error()`**: Açık mesajla iş akışını hemen durdurur
+- **`log.warn`**: İş akışını durdurmadan uyarılar verir
+- **Erken doğrulama**: Yararlı hatalarla hızlı başarısızlık için işlemeden önce girdileri kontrol edin
+- **Doğrulama fonksiyonları**: İş akışı başlangıcında çağrılabilecek yeniden kullanılabilir doğrulama mantığı oluşturun
+
+Uygun doğrulama, sorunları erken yakalayarak ve açık hata mesajlarıyla iş akışlarını daha sağlam ve kullanıcı dostu hale getirir.
+
+---
+
+## 8. Workflow Olay İşleyicileri
+
+Şimdiye kadar, iş akışı script'lerimizde ve process tanımlarımızda kod yazıyorduk. Ancak bilmeniz gereken bir önemli özellik daha var: workflow olay işleyicileri.
+
+Olay işleyicileri, iş akışınızın yaşam döngüsünde belirli noktalarda çalışan closure'lardır. Günlükleme, bildirimler veya temizleme işlemleri eklemek için mükemmeldir. Bu işleyiciler, iş akışı tanımınızın yanında iş akışı script'inizde tanımlanmalıdır.
+
+### 8.1. `onComplete` İşleyicisi
+
+En yaygın kullanılan olay işleyicisi, iş akışınız bittiğinde (başarılı veya başarısız olsun) çalışan `onComplete`'dir. Pipeline sonuçlarımızı özetlemek için bir tane ekleyelim.
+
+Olay işleyicisini `main.nf` dosyanıza, iş akışı tanımınızın içine ekleyin:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
+
+        workflow.onComplete = {
+            println ""
+            println "Pipeline yürütme özeti:"
+            println "=========================="
+            println "Tamamlandı: ${workflow.complete}"
+            println "Süre      : ${workflow.duration}"
+            println "Başarı    : ${workflow.success}"
+            println "workDir   : ${workflow.workDir}"
+            println "çıkış durumu : ${workflow.exitStatus}"
+            println ""
+        }
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="66" hl_lines="4"
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
+    }
+    ```
+
+Bu closure iş akışı tamamlandığında çalışır. İçinde, yürütme hakkında yararlı özellikler sağlayan `workflow` nesnesine erişiminiz vardır.
+
+İş akışınızı çalıştırın ve bu özetin sonunda göründüğünü göreceksiniz!
+
+```bash
+nextflow run main.nf --input ./data/samples.csv -ansi-log false
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
+    WARN: sample_002 için düşük dizileme derinliği: 25000000
+    [9b/d48e40] Submitted process > FASTP (2)
+    [6a/73867a] Submitted process > GENERATE_REPORT (2)
+    [79/ad0ac5] Submitted process > GENERATE_REPORT (1)
+    [f3/bda6cb] Submitted process > FASTP (1)
+    [34/d5b52f] Submitted process > GENERATE_REPORT (3)
+
+    Pipeline yürütme özeti:
+    ==========================
+    Tamamlandı: 2025-10-10T12:14:24.885384+01:00
+    Süre      : 2.9s
+    Başarı    : true
+    workDir   : /workspaces/training/side-quests/essential_scripting_patterns/work
+    çıkış durumu : 0
+    ```
+
+Koşullu mantık ekleyerek daha kullanışlı hale getirelim:
+
+=== "Sonra"
+
+    ```groovy title="main.nf" linenums="66" hl_lines="5-22"
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
+
+        workflow.onComplete = {
+            println ""
+            println "Pipeline yürütme özeti:"
+            println "=========================="
+            println "Tamamlandı: ${workflow.complete}"
+            println "Süre      : ${workflow.duration}"
+            println "Başarı    : ${workflow.success}"
+            println "workDir   : ${workflow.workDir}"
+            println "çıkış durumu : ${workflow.exitStatus}"
+            println ""
+
+            if (workflow.success) {
+                println "✅ Pipeline başarıyla tamamlandı!"
+            } else {
+                println "❌ Pipeline başarısız oldu!"
+                println "Hata: ${workflow.errorMessage}"
+            }
+        }
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="main.nf" linenums="66" hl_lines="5-16"
+        ch_fastp = FASTP(trim_branches.fastp)
+        ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+        GENERATE_REPORT(ch_samples)
+
+        workflow.onComplete = {
+            println ""
+            println "Pipeline yürütme özeti:"
+            println "=========================="
+            println "Tamamlandı: ${workflow.complete}"
+            println "Süre      : ${workflow.duration}"
+            println "Başarı    : ${workflow.success}"
+            println "workDir   : ${workflow.workDir}"
+            println "çıkış durumu : ${workflow.exitStatus}"
+            println ""
+        }
+    }
+    ```
+
+Şimdi belirtilmişse başarı/başarısızlık mesajı ve çıktı dizini dahil olmak üzere daha da bilgilendirici bir özet alıyoruz:
+
+<!-- TODO: add run command -->
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
+    WARN: sample_002 için düşük dizileme derinliği:25000000
+    [e5/242efc] Submitted process > FASTP (2)
+    [3b/74047c] Submitted process > GENERATE_REPORT (3)
+    [8a/7a57e6] Submitted process > GENERATE_REPORT (1)
+    [a8/b1a31f] Submitted process > GENERATE_REPORT (2)
+    [40/648429] Submitted process > FASTP (1)
+
+    Pipeline yürütme özeti:
+    ==========================
+    Tamamlandı: 2025-10-10T12:16:00.522569+01:00
+    Süre      : 3.6s
+    Başarı    : true
+    workDir   : /workspaces/training/side-quests/essential_scripting_patterns/work
+    çıkış durumu : 0
+
+    ✅ Pipeline başarıyla tamamlandı!
+    ```
+
+Dosya işlemlerini kullanarak özeti bir dosyaya da yazabilirsiniz:
+
+```groovy title="main.nf - Özeti dosyaya yazma"
+workflow {
+    // ... iş akışı kodunuz ...
+
+    workflow.onComplete = {
+        def summary = """
+        Pipeline Yürütme Özeti
+        ===========================
+        Tamamlandı: ${workflow.complete}
+        Süre      : ${workflow.duration}
+        Başarı    : ${workflow.success}
+        Komut     : ${workflow.commandLine}
+        """
+
+        println summary
+
+        // Bir log dosyasına yaz
+        def log_file = file("${workflow.launchDir}/pipeline_summary.txt")
+        log_file.text = summary
+    }
+}
+```
+
+### 8.2. `onError` İşleyicisi
+
+`onComplete`'in yanı sıra, kullanabileceğiniz bir başka olay işleyicisi daha var: `onError`, sadece iş akışı başarısız olursa çalışır:
+
+```groovy title="main.nf - onError işleyicisi"
+workflow {
+    // ... iş akışı kodunuz ...
+
+    workflow.onError = {
+        println "="* 50
+        println "Pipeline yürütmesi başarısız oldu!"
+        println "Hata mesajı: ${workflow.errorMessage}"
+        println "="* 50
+
+        // Detaylı hata günlüğü yaz
+        def error_file = file("${workflow.launchDir}/error.log")
+        error_file.text = """
+        Workflow Hata Raporu
+        =====================
+        Zaman: ${new Date()}
+        Hata: ${workflow.errorMessage}
+        Hata raporu: ${workflow.errorReport ?: 'Detaylı rapor mevcut değil'}
+        """
+
+        println "Hata detayları şuraya yazıldı: ${error_file}"
+    }
+}
+```
+
+İş akışı script'inizde birden fazla işleyiciyi birlikte kullanabilirsiniz:
+
+```groovy title="main.nf - Birleştirilmiş işleyiciler"
+workflow {
+    // ... iş akışı kodunuz ...
+
+    workflow.onError = {
+        println "Workflow başarısız oldu: ${workflow.errorMessage}"
+    }
+
+    workflow.onComplete = {
+        def duration_mins = workflow.duration.toMinutes().round(2)
+        def status = workflow.success ? "BAŞARI ✅" : "BAŞARISIZ ❌"
+
+        println """
+        Pipeline tamamlandı: ${status}
+        Süre: ${duration_mins} dakika
+        """
+    }
+}
+```
+
+### Çıkarımlar
+
+Bu bölümde şunları öğrendiniz:
+
+- **Olay işleyici closure'ları**: Farklı yaşam döngüsü noktalarında çalışan iş akışı script'inizdeki closure'lar
+- **`onComplete` işleyicisi**: Yürütme özetleri ve sonuç raporlaması için
+- **`onError` işleyicisi**: Hata işleme ve başarısızlıkları günlükleme için
+- **Workflow nesne özellikleri**: `workflow.success`, `workflow.duration`, `workflow.errorMessage`, vb.'ye erişim
+
+Olay işleyicileri, gelişmiş günlükleme ve bildirim yetenekleri eklemek için iş akışı script'lerinizde Nextflow dilinin tam gücünü nasıl kullanabileceğinizi gösterir.
+
+---
+
+## Özet
+
+Tebrikler, başardınız!
+
+Bu yan görev boyunca, temel meta veri işlemeden gelişmiş, üretime hazır bir iş akışına evrilen kapsamlı bir örnek işleme pipeline'ı oluşturdunuz.
+Her bölüm bir öncekinin üzerine inşa edildi, programlama yapılarının basit iş akışlarını güçlü veri işleme sistemlerine nasıl dönüştürdüğünü gösterdi, aşağıdaki faydalarla:
+
+- **Daha açık kod**: Dataflow vs scripting'i anlamak daha organize iş akışları yazmanıza yardımcı olur
+- **Sağlam işleme**: Güvenli navigasyon ve Elvis operatörleri iş akışlarını eksik verilere karşı dirençli hale getirir
+- **Esnek işleme**: Koşullu mantık iş akışlarınızın farklı örnek türlerini uygun şekilde işlemesini sağlar
+- **Uyarlanabilir kaynaklar**: Dinamik yönergeler girdi özelliklerine göre kaynak kullanımını optimize eder
+
+Bu ilerleme, birkaç örneği işleyen araştırma prototiplerinden laboratuvarlar ve kurumlar arasında binlerce örneği işleyen üretim sistemlerine kadar gerçek dünya biyoinformatik pipeline'larının evrimini yansıtır.
+Çözdüğünüz her zorluk ve öğrendiğiniz her kalıp, geliştiricilerin Nextflow iş akışlarını ölçeklendirirken karşılaştıkları gerçek sorunları yansıtır.
+
+Bu kalıpları kendi çalışmanızda uygulamak, sağlam, üretime hazır iş akışları oluşturmanızı sağlayacaktır.
+
+### Anahtar kalıplar
+
+1.  **Dataflow vs Scripting:** Dataflow işlemleri (kanal düzenlemesi) ile scripting (veriyi manipüle eden kod) arasında ayrım yapmayı öğrendiniz, Channel vs List üzerindeki `collect` gibi farklı türlerdeki işlemler arasındaki önemli farkları da içerecek şekilde.
+
+    - Dataflow: kanal düzenlemesi
+
+    ```groovy
+    channel.fromPath('*.fastq').splitCsv(header: true)
+    ```
+
+    - Scripting: koleksiyonlar üzerinde veri işleme
+
+    ```groovy
+    sample_data.collect { it.toUpperCase() }
+    ```
+
+2.  **Gelişmiş String İşleme**: Dosya adlarını ayrıştırmak için düzenli ifadelerde, process'lerde dinamik script oluşturmada ve değişken enterpolasyonunda (Nextflow vs Bash vs Shell) ustalaştınız.
+
+    - Kalıp eşleme
+
+    ```groovy
+    filename =~ ~/^(\w+)_(\w+)_(\d+)\.fastq$/
+    ```
+
+    - Koşullu dönüşle fonksiyon
+
+    ```groovy
+    def parseSample(filename) {
+        def matcher = filename =~ pattern
+        return matcher ? [valid: true, data: matcher[0]] : [valid: false]
+    }
+    ```
+
+    - Dosya koleksiyonunu komut argümanlarına (process script bloğunda)
+
+    ```groovy
+    script:
+    def file_args = input_files.collect { file -> "--input ${file}" }.join(' ')
+    """
+    analysis_tool ${file_args} --output results.txt
+    """
+    ```
+
+3.  **Yeniden Kullanılabilir Fonksiyonlar Oluşturma**: Karmaşık mantığı kanal operatörlerinden çağrılabilen adlandırılmış fonksiyonlara çıkartmayı öğrendiniz, iş akışlarını daha okunabilir ve bakımı kolay hale getirdiniz.
+
+    - Adlandırılmış bir fonksiyon tanımla
+
+    ```groovy
+    def separateMetadata(row) {
+        def sample_meta = [ /* kısalık için kod gizlendi */ ]
+        def fastq_path = file(row.file_path)
+        def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+        def file_meta = m ? [ /* kısalık için kod gizlendi */ ] : [:]
+        def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+
+        return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+    }
+    ```
+
+    - Adlandırılmış fonksiyonu bir iş akışında çağır
+
+    ```groovy
+    workflow {
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map{ row -> separateMetadata(row) }
+
+        ch_fastp = FASTP(ch_samples)
+    }
+    ```
+
+4.  **Closure'larla Dinamik Kaynak Yönergeleri**: Girdi özelliklerine göre uyarlanabilir kaynak tahsisi için process yönergelerinde closure'ları kullanmayı keşfettiniz.
+
+    - Adlandırılmış closure'lar ve kompozisyon
+
+    ```groovy
+    def enrichData = normalizeId >> addQualityCategory >> addFlags
+    def processor = generalFunction.curry(fixedParam)
+    ```
+
+    - Kapsam erişimi olan closure'lar
+
+    ```groovy
+    def collectStats = { data -> stats.count++; return data }
+    ```
+
+5.  **Koşullu Mantık ve Process Kontrolü**: `.branch()` ve `.filter()` operatörlerini kullanarak akıllı yönlendirme eklediniz, özlü koşullu ifadeler için doğruluğu kullandınız.
+
+    - Veriyi farklı iş akışı dallarından yönlendirmek için `.branch()` kullan
+
+    ```groovy
+    trim_branches = ch_samples
+    .branch { meta, reads ->
+        fastp: meta.organism == 'human' && meta.depth >= 30000000
+        trimgalore: true
+    }
+
+    ch_fastp = FASTP(trim_branches.fastp)
+    ch_trimgalore = TRIMGALORE(trim_branches.trimgalore)
+    ```
+
+    - Groovy Truth ile boolean değerlendirme
+
+    ```groovy
+    if (sample.files) println "Dosyalar var"
+    ```
+
+    - Veriyi 'doğruluk' ile alt kümelemek için `filter()` kullan
+
+    ```groovy
+    ch_valid_samples = ch_samples
+        .filter { meta, reads ->
+            meta.id && meta.organism && meta.depth >= 25000000
+        }
+    ```
+
+6.  **Güvenli Navigasyon ve Elvis Operatörleri**: Null-safe özellik erişimi için `?.` ve varsayılan değerler sağlamak için `?:` kullanarak pipeline'ı eksik verilere karşı sağlam hale getirdiniz.
+
+    ```groovy
+    def id = data?.sample?.id ?: 'unknown'
+    ```
+
+7.  **error() ve log.warn ile Doğrulama**: Girdileri erken doğrulamayı ve açık hata mesajlarıyla hızlı başarısızlık sağlamayı öğrendiniz.
+
+    ```groovy
+    try {
+        def errors = validateSample(sample)
+        if (errors) throw new RuntimeException("Geçersiz: ${errors.join(', ')}")
+    } catch (Exception e) {
+        println "Hata: ${e.message}"
+    }
+    ```
+
+8.  **Yapılandırma Olay İşleyicileri**: Günlükleme, bildirimler ve yaşam döngüsü yönetimi için workflow olay işleyicilerini (`onComplete` ve `onError`) kullanmayı öğrendiniz.
+
+    - Günlükleme ve bildirim için `onComplete` kullanma
+
+    ```groovy
+    workflow.onComplete = {
+        println "Başarı     : ${workflow.success}"
+        println "çıkış durumu : ${workflow.exitStatus}"
+
+        if (workflow.success) {
+            println "✅ Pipeline başarıyla tamamlandı!"
+        } else {
+            println "❌ Pipeline başarısız oldu!"
+            println "Hata: ${workflow.errorMessage}"
+        }
+    }
+    ```
+
+    - Özellikle başarısızlık durumunda işlem yapmak için `onError` kullanma
+
+    ```groovy
+    workflow.onError = {
+        // Detaylı hata günlüğü yaz
+        def error_file = file("${workflow.launchDir}/error.log")
+        error_file.text = """
+        Zaman: ${new Date()}
+        Hata: ${workflow.errorMessage}
+        Hata raporu: ${workflow.errorReport ?: 'Detaylı rapor mevcut değil'}
+        """
+
+        println "Hata detayları şuraya yazıldı: ${error_file}"
+    }
+    ```
+
+### Ek kaynaklar
+
+- [Nextflow Dil Referansı](https://nextflow.io/docs/latest/reference/syntax.html)
+- [Nextflow Operatörleri](https://www.nextflow.io/docs/latest/operator.html)
+- [Nextflow Script Sözdizimi](https://www.nextflow.io/docs/latest/script.html)
+- [Nextflow Standart Kütüphanesi](https://nextflow.io/docs/latest/reference/stdlib.html)
+
+Daha gelişmiş özellikleri keşfetmeniz gerektiğinde bu kaynaklara mutlaka göz atın.
+
+Becerilerinizi pratik yaparak ve genişleterek geliştirmekten faydalanacaksınız:
+
+- Dataflow ve scripting arasında uygun ayrım ile daha temiz iş akışları yazma
+- Nextflow, Bash ve shell değişkenleriyle yaygın tuzaklardan kaçınmak için değişken enterpolasyonunda ustalaşma
+- Verimli, uyarlanabilir iş akışları için dinamik kaynak yönergeleri kullanma
+- Dosya koleksiyonlarını düzgün biçimlendirilmiş komut satırı argümanlarına dönüştürme
+- Regex ve string işleme kullanarak farklı dosya adlandırma kurallarını ve girdi formatlarını zarif bir şekilde işleme
+- Gelişmiş closure kalıpları ve fonksiyonel programlama kullanarak yeniden kullanılabilir, bakımı yapılabilir kod oluşturma
+- Koleksiyon işlemlerini kullanarak karmaşık veri setlerini işleme ve organize etme
+- İş akışlarınızı üretime hazır hale getirmek için doğrulama, hata işleme ve günlükleme ekleme
+- Olay işleyicileriyle workflow yaşam döngüsü yönetimi uygulama
+
+---
+
+## Sırada ne var?
+
+[Yan Görevler menüsüne](./index.md) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ altındaki düğmeye tıklayın.

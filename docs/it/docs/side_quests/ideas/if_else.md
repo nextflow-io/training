@@ -41,7 +41,7 @@ Ad alto livello, per completare questo esercizio sarà necessario:
 
 Per l'immagine del container `quote`, è possibile utilizzare quella costruita personalmente nell'esercizio avanzato precedente oppure quella ottenuta da Seqera Containers.
 
-!!! Hint
+!!! hint "Suggerimento"
 
     Una buona scelta per il blocco `script` del processo getQuote potrebbe essere:
         ```groovy
@@ -55,10 +55,10 @@ Per l'immagine del container `quote`, è possibile utilizzare quella costruita p
 
 È possibile trovare una soluzione a questo esercizio in `containers/solutions/hello-containers-4.1.nf`.
 
-### 1.2. Modificare il pipeline Nextflow per consentirne l'esecuzione nelle modalità `quote` e `sayHello`.
+### 1.2. Modificare il pipeline Nextflow per consentirne l'esecuzione nelle modalità `quote` e `sayHello`
 
 Aggiungere della logica di ramificazione al pipeline per consentirgli di accettare input destinati sia a `quote` che a `sayHello`.
-Ecco un esempio di come utilizzare un'istruzione `if` in un workflow Nextflow:
+Ecco un esempio di come utilizzare un'istruzione `if` in un flusso di lavoro Nextflow:
 
 ```groovy title="hello-containers.nf"
 workflow {
@@ -72,18 +72,18 @@ workflow {
 }
 ```
 
-!!! Hint
+!!! hint "Suggerimento"
 
     È possibile utilizzare `new_ch = processName.out` per assegnare un nome al canale di output di un processo.
 
 È possibile trovare una soluzione a questo esercizio in `containers/solutions/hello-containers-4.2.nf`.
 
-### Conclusioni
+### Takeaway
 
-Ora sa come utilizzare i container in Nextflow per eseguire processi e come costruire della logica di ramificazione nei suoi pipeline!
+Ora sapete come utilizzare i container in Nextflow per eseguire processi e come costruire della logica di ramificazione nei vostri pipeline!
 
-### Prossimi passi
+### Cosa c'è dopo?
 
-Celebri, prendetevi una pausa per fare stretching e beva dell'acqua!
+Celebriamo, prendetevi una pausa per fare stretching e bevete dell'acqua!
 
-Quando è pronto, passi alla Parte 3 di questa serie di formazione per imparare ad applicare quanto appreso finora a un caso d'uso di analisi dati più realistico.
+Quando siete pronti, passate alla Parte 3 di questa serie di formazione per imparare ad applicare quanto appreso finora a un caso d'uso di analisi dati più realistico.

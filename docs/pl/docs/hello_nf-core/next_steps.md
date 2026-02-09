@@ -40,7 +40,7 @@ Oto nasze 3 najlepsze sugestie, co zrobić dalej:
 
 - Zastosuj Nextflow do naukowego przypadku analizy z [Nextflow for Science](../nf4_science/index.md)
 - Poznaj bardziej zaawansowane funkcje Nextflow dzięki [Side Quests](../side_quests/index.md)
-- Zaangażuj się, [dołączając do społeczności nf-core](https://nf-co.re/join).
+- Zaangażuj się, [dołączając do społeczności nf-core](https://nf-co.re/join)
 
 Na koniec zalecamy zapoznanie się z [**Seqera Platform**](https://seqera.io/), platformą chmurową opracowaną przez twórców Nextflow'a, która ułatwia uruchamianie i zarządzanie Twoimi workflow'ami, a także zarządzanie danymi i przeprowadzanie analiz interaktywnie w dowolnym środowisku.
 

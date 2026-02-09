@@ -82,7 +82,7 @@ dependencies:
 
 Copie o conteúdo desses arquivos para os esboços localizados no diretório `containers/build`, depois execute o seguinte comando para construir a imagem de contêiner você mesmo.
 
-!!! Note "Nota"
+!!! note "Nota"
 
     Usamos a flag `-t quote:latest` para marcar a imagem de contêiner com o nome `quote` e a tag `latest`.
     Poderemos usar esta tag para nos referir à imagem de contêiner ao executá-la neste sistema.
@@ -101,7 +101,7 @@ docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 
 Você aprendeu duas maneiras diferentes de obter uma imagem de contêiner para uma ferramenta que deseja usar em seus pipelines Nextflow: usando Seqera Containers e construindo a imagem de contêiner você mesmo.
 
-### Qual é o próximo passo?
+### O que vem a seguir?
 
 Você tem tudo o que precisa para continuar para o [próximo capítulo](./04_hello_genomics.md) desta série de treinamento.
 Você também pode continuar com um exercício opcional para buscar citações de pioneiros da computação/biologia usando o contêiner `quote` e exibi-las usando o contêiner `cowsay`.
@@ -143,7 +143,7 @@ Em alto nível, para completar este exercício você precisará:
 
 Para a imagem de contêiner `quote`, você pode usar aquela que construiu você mesmo no exercício extra anterior ou usar aquela que obteve do Seqera Containers.
 
-!!! Hint "Dica"
+!!! tip "Dica"
 
     Uma boa escolha para o bloco `script` do seu processo getQuote pode ser:
         ```groovy
@@ -157,7 +157,7 @@ Para a imagem de contêiner `quote`, você pode usar aquela que construiu você 
 
 Você pode encontrar uma solução para este exercício em `containers/solutions/hello-containers-4.1.nf`.
 
-### 2.2. Modificar seu pipeline Nextflow para permitir a execução nos modos `quote` e `sayHello`.
+### 2.2. Modificar seu pipeline Nextflow para permitir a execução nos modos `quote` e `sayHello`
 
 Adicione alguma lógica de ramificação ao seu pipeline para permitir que ele aceite entradas destinadas tanto a `quote` quanto a `sayHello`.
 Aqui está um exemplo de como usar uma instrução `if` em um fluxo de trabalho Nextflow:
@@ -174,7 +174,7 @@ workflow {
 }
 ```
 
-!!! Hint "Dica"
+!!! tip "Dica"
 
     Você pode usar `new_ch = processName.out` para atribuir um nome ao canal de saída de um processo.
 
@@ -184,7 +184,7 @@ Você pode encontrar uma solução para este exercício em `containers/solutions
 
 Você sabe como usar contêineres no Nextflow para executar processos, e como construir alguma lógica de ramificação em seus pipelines!
 
-### Qual é o próximo passo?
+### O que vem a seguir?
 
 Comemore, faça uma pausa para se alongar e beba um pouco de água!
 

@@ -1,7 +1,7 @@
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+# Part 3: Hello Workflow
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -168,13 +168,13 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // एक अभिवादन emit करें
+        // emit a greeting
         sayHello(greeting_ch)
-        // अभिवादन को uppercase में बदलें
+        // convert the greeting to uppercase
         convertToUpper()
 
         publish:
@@ -188,11 +188,11 @@ Workflow block में, निम्नलिखित code change करो:
     workflow {
 
         main:
-        // CSV फ़ाइल से इनपुट के लिए एक channel बनाएं
+        // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // एक अभिवादन emit करें
+        // emit a greeting
         sayHello(greeting_ch)
 
         publish:
@@ -220,14 +220,14 @@ Workflow block में, निम्नलिखित code change करो:
 === "बाद में"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // अभिवादन को uppercase में बदलें
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
     ```
 
 === "पहले"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // अभिवादन को uppercase में बदलें
+        // convert the greeting to uppercase
         convertToUpper()
     ```
 
@@ -516,10 +516,10 @@ Workflow block में, निम्नलिखित code change करो:
 === "बाद में"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // अभिवादन को uppercase में बदलें
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
 
-        // सभी अभिवादनों को एक फ़ाइल में collect करें
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -527,7 +527,7 @@ Workflow block में, निम्नलिखित code change करो:
 === "पहले"
 
     ```groovy title="hello-workflow.nf" linenums="75"
-        // अभिवादन को uppercase में बदलें
+        // convert the greeting to uppercase
         convertToUpper(sayHello.out)
     }
     ```
@@ -594,7 +594,7 @@ Workflow block में, निम्नलिखित code change करो:
 === "बाद में"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // सभी अभिवादनों को एक फ़ाइल में collect करें
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -602,7 +602,7 @@ Workflow block में, निम्नलिखित code change करो:
 === "पहले"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // सभी अभिवादनों को एक फ़ाइल में collect करें
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -614,7 +614,7 @@ Workflow block में, निम्नलिखित code change करो:
 === "बाद में"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // सभी अभिवादनों को एक फ़ाइल में collect करें
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
 
         // optional view statements
@@ -626,7 +626,7 @@ Workflow block में, निम्नलिखित code change करो:
 === "पहले"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // सभी अभिवादनों को एक फ़ाइल में collect करें
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -695,14 +695,14 @@ Finally, तुम output file की contents पर नज़र डाल स
 === "बाद में"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // सभी अभिवादनों को एक फ़ाइल में collect करें
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     ```
 
 === "पहले"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // सभी अभिवादनों को एक फ़ाइल में collect करें
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
 
         // optional view statements
@@ -849,14 +849,14 @@ Workflow block में, निम्नलिखित code change करो:
 === "बाद में"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // सभी अभिवादनों को एक फ़ाइल में collect करें
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
 === "पहले"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // सभी अभिवादनों को एक फ़ाइल में collect करें
+        // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     ```
 
@@ -1141,7 +1141,7 @@ Workflow block में process का output कैसे access करते 
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-और जानें: [1.4. Pass the output of the first process to the second process](#14-first-process-का-output-second-process-को-pass-करें)
+और जानें: [1.4. First process का output second process को pass करें](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1151,7 +1151,7 @@ Nextflow में process execution का order क्या determine कर�
 - [x] Processes के बीच data dependencies
 - [ ] Parallel execution के लिए random order
 
-और जानें: [1.4. Pass the output of the first process to the second process](#14-first-process-का-output-second-process-को-pass-करें)
+और जानें: [1.4. First process का output second process को pass करें](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1170,7 +1170,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-और जानें: [2.4. Use an operator to collect the greetings into a single input](#24-greetings-को-single-input-में-collect-करने-के-लिए-operator-use-करें)
+और जानें: [2.4. Greetings को single input में collect करने के लिए operator use करें](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1180,7 +1180,7 @@ workflow {
 - [x] जब downstream process को upstream process से सभी items की जरूरत हो
 - [ ] जब तुम data को multiple processes में split करना चाहते हो
 
-और जानें: [2.4. Use an operator to collect the greetings into a single input](#24-greetings-को-single-input-में-collect-करने-के-लिए-operator-use-करें)
+और जानें: [2.4. Greetings को single input में collect करने के लिए operator use करें](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1190,7 +1190,7 @@ Process से named output कैसे access करते हो?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-और जानें: [4.1.2. Emit the report file and name outputs](#412-report-file-emit-करें-और-outputs-name-करें)
+और जानें: [4.1.2. Report file emit करें और outputs name करें](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1200,7 +1200,7 @@ Process में output name करने के लिए correct syntax क�
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-और जानें: [4.1.2. Emit the report file and name outputs](#412-report-file-emit-करें-और-outputs-name-करें)
+और जानें: [4.1.2. Report file emit करें और outputs name करें](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1210,5 +1210,5 @@ Process को multiple inputs provide करते समय क्या true 
 - [x] Inputs का order input block में defined order से match होना चाहिए
 - [ ] एक बार में केवल दो inputs provide किए जा सकते हैं
 
-और जानें: [3. Pass more than one input to a process](#3-process-को-additional-parameters-pass-करें)
+और जानें: [3. Process को additional parameters pass करें](#3-pass-more-than-one-input-to-a-process)
 </quiz>

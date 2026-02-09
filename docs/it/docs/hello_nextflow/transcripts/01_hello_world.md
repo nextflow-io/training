@@ -160,7 +160,7 @@ Se faccio _"ls -l results"_, vedrete che questo è in realtà un soft link alla 
 
 ## 2.2. Impostiamo una posizione personalizzata
 
-"Results" è il nome predefinito per questo path. Se eseguo di nuovo il flusso di lavoro, e questa volta faccio _dash_ trattino singolo, questo è, perché è un'opzione Nextflow centrale. _" -output-dir **my** results"._ Potrei anche fare solo _"-o"_ per brevità. Poi imposterà una diversa directory base per dove i file vengono memorizzati e ancora una volta, qui in _myresults/_, ora abbiamo un _output.txt_.
+"Results" è il nome predefinito per questo path. Se eseguo di nuovo il flusso di lavoro, e questa volta faccio _dash_ trattino singolo, questo è, perché è un'opzione Nextflow centrale. _"-output-dir **my**results"._ Potrei anche fare solo _"-o"_ per brevità. Poi imposterà una diversa directory base per dove i file vengono memorizzati e ancora una volta, qui in _myresults/_, ora abbiamo un _output.txt_.
 
 Questo è fantastico, ma probabilmente non vogliamo tutti i file solo nella radice. Vogliamo un po' di organizzazione, quindi possiamo anche creare una sottodirectory qui chiamata come vogliamo. Diciamo _"path 'hello_world'"_, e lo eseguo di nuovo. _"nextflow run hello-world.nf"_. Dovrebbe andare nella directory results in una sottodirectory e sicuramente, ora sotto results qui in alto abbiamo _hello_world/_ e abbiamo _output.txt_.
 

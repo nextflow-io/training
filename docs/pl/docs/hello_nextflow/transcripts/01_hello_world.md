@@ -12,7 +12,7 @@
 
 ## Powitanie
 
-Witaj ponownie.
+Cześć i witaj ponownie.
 
 Jesteś teraz w części pierwszej kursu "Hello Nextflow" o nazwie "Hello World". W tym rozdziale zaczniemy budować zrozumienie absolutnych podstaw Nextflow'a.
 
@@ -38,31 +38,31 @@ Jak powiedziałem, wszystkie różne rozdziały w tym kursie zaczynają się od 
 
 To jest bardzo prosty skrypt, więc jeden z najprostszych jakie mogą być. Ma tylko 22 linijki długości i robi w zasadzie to samo. W rzeczywistości niektóre z tego powinny wyglądać znajomo. Możemy zobaczyć nasze polecenie bash przekierowujące do pliku tam.
 
-Dobrze. Co jeszcze? Również w tym pliku możemy zacząć widzieć niektóre z podstawowych koncepcji Nextflow'a. Mamy proces na czerwono tutaj i workflow. To są specjalne słowa kluczowe i specjalna terminologia w Nextflow.
+Dobrze. Co jeszcze? Również w tym pliku możemy zacząć widzieć niektóre z podstawowych koncepcji Nextflow'a. Mamy `process` na czerwono tutaj i `workflow`. To są specjalne słowa kluczowe i specjalna terminologia w Nextflow.
 
 ## 1.1.1. Definicja procesu
 
 Różne procesy w workflow opakowują różne jednostki logiczne Twojego workflow'u. Każdy proces robi jedną rzecz.
 
-Kiedy go uruchamiamy, generuje zadanie lub wiele zadań, które są faktycznymi krokami wykonywanymi w pipeline. Wszystkie procesy są następnie orkiestrowane w bloku workflow, który widzimy na dole, i w tym przypadku po prostu uruchamia ten jeden proces.
+Kiedy go uruchamiamy, generuje zadanie lub wiele zadań, które są faktycznymi krokami wykonywanymi w pipeline. Wszystkie procesy są następnie orkiestrowane w bloku `workflow`, który widzimy na dole, i w tym przypadku po prostu uruchamia ten jeden proces.
 
 Nazwa procesu następuje po tym słowie kluczowym tutaj i może to być w zasadzie cokolwiek. A zawartość procesu znajduje się w tych klamrach.
 
-Istnieje naprawdę tylko jeden wymóg dla procesu, którym jest to, że zawiera jakiś rodzaj bloku script lub exec. Jest to w potrójnych cudzysłowach tutaj i to jest skrypt bash, który jest zapisywany do katalogu roboczego, gdy uruchamiamy pipeline, i jest to rzecz, która faktycznie działa na Twoim komputerze lub serwerze.
+Istnieje naprawdę tylko jeden wymóg dla procesu, którym jest to, że zawiera jakiś rodzaj bloku `script` lub `exec`. Jest to w potrójnych cudzysłowach tutaj i to jest skrypt bash, który jest zapisywany do katalogu roboczego, gdy uruchamiamy pipeline, i jest to rzecz, która faktycznie działa na Twoim komputerze lub serwerze.
 
 To zazwyczaj bash, ale możesz też umieścić tutaj inny hash bang na górze i może to być skrypt Pythona lub skrypt R. Nie ma to znaczenia. Cokolwiek jest w tym skrypcie, zostanie wykonane.
 
-Jest jeszcze jedna rzecz, którą dodaliśmy do tego procesu tutaj, którą jest deklaracja wyjścia. To mówi Nextflow, że ten proces oczekuje pliku wyjściowego o nazwie output.txt. Mówi, że jest to path, więc powinien być traktowany jak plik, a nie powiedzmy, gdyby to było val, powiedziałoby, że jest jak zmienna lub wartość.
+Jest jeszcze jedna rzecz, którą dodaliśmy do tego procesu tutaj, którą jest deklaracja wyjścia. To mówi Nextflow'owi, że ten proces oczekuje pliku wyjściowego o nazwie output.txt. Mówi, że jest to `path`, więc powinien być traktowany jak plik, a nie powiedzmy, gdyby to było `val`, powiedziałoby, że jest jak zmienna lub wartość.
 
-Zauważ, że to nie tworzy tego pliku. Nie generuje go faktycznie. To robi skrypt tutaj na dole. Po prostu mówi Nextflow, aby oczekiwał pliku wyjściowego z tą nazwą.
+Zauważ, że to nie tworzy tego pliku. Nie generuje go faktycznie. To robi skrypt tutaj na dole. Po prostu mówi Nextflow'owi, aby oczekiwał pliku wyjściowego z tą nazwą.
 
 ## 1.1.2. Definicja workflow
 
-Dobrze. A na dole mamy tutaj workflow, i znowu mamy deklarację. Ta nazywa się Main. To jest odpowiednik bloku skryptu dla workflow, jeśli wolisz. To część workflow, która coś robi. I w tym przypadku mówimy, wywołaj proces o nazwie sayHello.
+Dobrze. A na dole mamy tutaj `workflow`, i znowu mamy deklarację. Ta nazywa się `main`. To jest odpowiednik bloku `script` dla workflow, jeśli wolisz. To część workflow, która coś robi. I w tym przypadku mówimy, wywołaj proces o nazwie `sayHello`.
 
 Oczywiście normalnie Twój pipeline będzie wyglądał znacznie bardziej złożenie. Prawdopodobnie będziesz mieć więcej niż jeden proces i użyjesz kanałów do orkiestracji przepływu danych między nimi. Przejdziemy do tego w kolejnych częściach tego kursu, ale na razie to wystarczy. To jest ważny pipeline, który powinien działać.
 
-Mogę nawet kliknąć preview DAG tutaj w VS Code. DAG jest reprezentacją struktury przepływu danych w pipeline, i możemy zobaczyć go wyrenderowanego po stronie jako diagram mermaid. W tym przypadku jest bardzo prosty. Jest jedno pole, które jest workflow i jeden proces, który nazywa się sayHello, ale to może wyglądać ciekawiej w miarę postępów.
+Mogę nawet kliknąć preview DAG tutaj w VS Code. DAG jest reprezentacją struktury przepływu danych w pipeline, i możemy zobaczyć go wyrenderowanego po stronie jako diagram mermaid. W tym przypadku jest bardzo prosty. Jest jedno pole, które jest workflow i jeden proces, który nazywa się `sayHello`, ale to może wyglądać ciekawiej w miarę postępów.
 
 ## 1.2. Uruchom workflow'a
 
@@ -102,7 +102,7 @@ To jest zazwyczaj bardzo długi skrypt. I to jest to, co Nextflow faktycznie wyk
 
 Ogólnie nie musisz nigdy zaglądać do tego pliku. Jest autogenerowany przez Nextflow i nie ma w nim nic szczególnie unikalnego dla Twojego pipeline'u. Ale to jest naprawdę rdzeń tego, co się uruchamia.
 
-Następny jest znacznie bardziej interesujący. _.command.sh_ to wygenerowany skrypt, który pochodzi z Twojego procesu, i tutaj możesz zobaczyć, że Nextflow dodał nagłówek Bash, a następnie wykonał nasze polecenie, które było w naszym bloku skryptu.
+Następny jest znacznie bardziej interesujący. _.command.sh_ to wygenerowany skrypt, który pochodzi z Twojego procesu, i tutaj możesz zobaczyć, że Nextflow dodał nagłówek Bash, a następnie wykonał nasze polecenie, które było w naszym bloku `script`.
 
 I to wszystko, co robi plik _.command.run_, po prostu uruchamia ten plik _.command.sh_.
 
@@ -130,11 +130,11 @@ Robimy to publikując nasze pliki.
 
 ## 2.1.1. Zadeklaruj wyjście procesu sayHello
 
-Więc jeśli wrócę do naszego skryptu, będziemy pracować w naszym bloku workflow tutaj. Powiemy mu, jakich plików oczekiwać, które pliki nas obchodzą, a następnie stworzymy nowy blok poniżej o nazwie blok wyjścia.
+Więc jeśli wrócę do naszego skryptu, będziemy pracować w naszym bloku `workflow` tutaj. Powiemy mu, jakich plików oczekiwać, które pliki nas obchodzą, a następnie stworzymy nowy blok poniżej o nazwie blok `output`.
 
 To jest nowa składnia, która pojawiła się z parserem składni i jest domyślna w wersji 26.04 Nextflow. Więc jeśli używałeś Nextflow trochę wcześniej, to jest jedna z rzeczy, które są nowe.
 
-Więc mamy blok main, a następnie powiem publish i powiem Nextflow, czego oczekiwać od publikowania. Nazwiemy to _first_output_, i nazwiemy to _sayHello.out_.
+Więc mamy blok `main`, a następnie powiem `publish` i powiem Nextflow'owi, czego oczekiwać od publikowania. Nazwiemy to _first_output_, i nazwiemy to _sayHello.out_.
 
 Przypadkowo zrobiłem tam literówkę, ale to dobra okazja, aby też wskazać niektóre funkcje rozszerzenia Nextflow VS Code. Możesz zobaczyć, że od razu dało mi małą falującą czerwoną linię pod tym mówiąc, że coś jest nie tak. A jeśli na to najadę, powie mi, że ta zmienna nie jest zdefiniowana. Nie wiem, co to jest.
 
@@ -146,9 +146,9 @@ Zauważ, że możemy odnieść się do wyjścia z tego procesu ze składnią _.o
 
 ## 2.1.2. Dodaj blok output: do skryptu
 
-Gdzie to staje się ważne, to gdy robimy nasz nowy blok tutaj, i to jest teraz poniżej bloku workflow, nie jesteśmy już wewnątrz workflow. Klamry ponownie. I tutaj po prostu mówimy Nextflow, gdzie umieścić wszystkie pliki, które są tworzone przez workflow.
+Gdzie to staje się ważne, to gdy robimy nasz nowy blok tutaj, i to jest teraz poniżej bloku `workflow`, nie jesteśmy już wewnątrz workflow. Klamry ponownie. I tutaj po prostu mówimy Nextflow'owi, gdzie umieścić wszystkie pliki, które są tworzone przez workflow.
 
-Teraz wezmę tę nazwę zmiennej, którą stworzyłem tutaj, i umieszczę ją tam i dam niektóre klamry dla tego. I powiem Nextflow, aby użył path. Ups. Path, w cudzysłowach. I użyję kropki. To po prostu mówi Nextflow, aby umieścił plik w katalogu głównym katalogu results. Więc nie w żadnych podkatalogach ani nic.
+Teraz wezmę tę nazwę zmiennej, którą stworzyłem tutaj, i umieszczę ją tam i dam niektóre klamry dla tego. I powiem Nextflow'owi, aby użył `path`. Ups. `path`, w cudzysłowach. I użyję kropki. To po prostu mówi Nextflow'owi, aby umieścił plik w katalogu głównym katalogu results. Więc nie w żadnych podkatalogach ani nic.
 
 Spróbujmy uruchomić nasz workflow ponownie. Jeśli zrobię _"nextflow run hello-world.nf"_, to miejmy nadzieję, że powinno wyglądać zasadniczo dokładnie tak samo. Nic naprawdę się nie zmieniło z Nextflow tutaj. Uruchamia te same rzeczy. Po prostu robi je w katalogach roboczych ponownie.
 
@@ -172,11 +172,11 @@ Jednakże oznacza to, że jeśli usuniesz katalog roboczy: jeśli zrobię _"rm -
 
 Więc ogólnie, powiem, że to dobra praktyka, aby kopiować pliki zamiast soft linkować, jeśli możesz, ponieważ jest to bezpieczniejsze. Po prostu bądź świadomy, że użyje to dwa razy więcej miejsca na dysku, chyba że usuniesz te katalogi robocze.
 
-Aby to zrobić z blokiem wyjścia, przejdę do pierwszego wyjścia tutaj. Ustawiłem wcześniej ścieżkę i teraz ustawię tryb i możesz zobaczyć, gdy piszę, rozszerzenie VS code sugeruje rzeczy, wie, że jest to dyrektywa wyjściowa tutaj. I powiem copy. Naciskam zapisz.
+Aby to zrobić z blokiem `output`, przejdę do pierwszego wyjścia tutaj. Ustawiłem wcześniej ścieżkę i teraz ustawię tryb i możesz zobaczyć, gdy piszę, rozszerzenie VS code sugeruje rzeczy, wie, że jest to dyrektywa wyjściowa tutaj. I powiem copy. Naciskam zapisz.
 
 Uruchommy ponownie workflow. Będzie tworzyć pliki ponownie, nowy katalog roboczy.
 
-Teraz, jeśli przejdę do _"ls -l results/hello_world/"_ możesz zobaczyć, że to jest prawdziwy plik i nie jest już soft linkiem, i Nextflow skopiował to. Dobrze wiedzieć. Więc path i mode to rzeczy, które będziesz pisał dość często.
+Teraz, jeśli przejdę do _"ls -l results/hello_world/"_ możesz zobaczyć, że to jest prawdziwy plik i nie jest już soft linkiem, i Nextflow skopiował to. Dobrze wiedzieć. Więc `path` i `mode` to rzeczy, które będziesz pisał dość często.
 
 Teraz, oczywiście, to jest bardzo proste. Uczynimy to bardziej złożonym i potężnym w miarę postępów i zobaczysz, jak uczynić te rzeczy dynamicznymi i niezbyt rozwlekłymi.
 
@@ -186,9 +186,9 @@ Teraz, powiedziałem na początku, że to jest dość nowa forma składni. Jest 
 
 Jeśli tego użyjesz, to świetnie. Odblokowuje to wiele innych fajnych funkcji w Nextflow, takich jak Nextflow Lineage, aby pomóc śledzić dziedzictwo tych plików, gdy są tworzone, i wkrótce będzie to domyślne w 26.04. A w późniejszym terminie w przyszłości będzie to jedyny sposób na pisanie Twoich workflow'ów.
 
-Jednakże, gdy jesteśmy w tej fazie przejściowej teraz, możesz dobrze zobaczyć pipeline'y w naturze, które używają czegoś o nazwie publishDir, co jest starym sposobem na to, i jest to zdefiniowane nie na poziomie workflow i wyjścia, ale jest to zdefiniowane na poziomie procesu.
+Jednakże, gdy jesteśmy w tej fazie przejściowej teraz, możesz dobrze zobaczyć pipeline'y w naturze, które używają czegoś o nazwie `publishDir`, co jest starym sposobem na to, i jest to zdefiniowane nie na poziomie workflow i wyjścia, ale jest to zdefiniowane na poziomie procesu.
 
-I ta deklaracja mówi zasadniczo to samo. Mówi, publikuj pliki wyników do katalogu o nazwie results i użyj trybu kopiowania. Więc możesz zobaczyć, że składnia jest bardzo podobna. Ale gdy piszesz nowe pipeline'y teraz, staraj się nie używać tej dyrektywy publishDir, nawet jeśli ją zobaczysz, w wynikach AI lub w dokumentacji lub innych pipeline'ach, ponieważ to jest stary sposób na to.
+I ta deklaracja mówi zasadniczo to samo. Mówi, publikuj pliki wyników do katalogu o nazwie results i użyj trybu kopiowania. Więc możesz zobaczyć, że składnia jest bardzo podobna. Ale gdy piszesz nowe pipeline'y teraz, staraj się nie używać tej dyrektywy `publishDir`, nawet jeśli ją zobaczysz, w wynikach AI lub w dokumentacji lub innych pipeline'ach, ponieważ to jest stary sposób na to.
 
 W 2026 wszyscy powinniśmy używać workflow outputs.
 
@@ -198,21 +198,21 @@ Jest naprawdę dobry. Przechodzi przez całą składnię, jak jest równoważna 
 
 ## 3.1. Zmień proces sayHello, aby oczekiwał zmiennego wejścia
 
-Dobrze, więc mamy nasz prosty skrypt, który uruchamia proces, tworzy plik, mówi Nextflow, że to wyjście, a następnie mówimy Nextflow, gdzie zapisać ten plik. To dobry początek.
+Dobrze, więc mamy nasz prosty skrypt, który uruchamia proces, tworzy plik, mówi Nextflow'owi, że to wyjście, a następnie mówimy Nextflow'owi, gdzie zapisać ten plik. To dobry początek.
 
-Ale byłoby ciekawiej, gdyby nie wszystko było zakodowane na stałe. Więc następnie pomyślmy o tym, jak powiedzieć Nextflow, że ten proces może przyjąć zmienne wejście, którym jest coś, co możemy kontrolować w czasie uruchomienia, gdy uruchamiamy workflow.
+Ale byłoby ciekawiej, gdyby nie wszystko było zakodowane na stałe. Więc następnie pomyślmy o tym, jak powiedzieć Nextflow'owi, że ten proces może przyjąć zmienne wejście, którym jest coś, co możemy kontrolować w czasie uruchomienia, gdy uruchamiamy workflow.
 
 Musimy zrobić kilka różnych rzeczy, aby to się stało.
 
 Po pierwsze, musimy powiedzieć temu procesowi, że może przyjąć zmienną wejściową i wpisujemy _input_ tutaj jako nowy blok deklaracji. I nazwiemy to _"val greeting"_.
 
-Bit val jest odpowiednikiem path tutaj na dole. Mówi Nextflow, że to jest zmienna, jak string w tym przypadku. A jeśli na to najedziesz ponownie, powie Ci z rozszerzenia, co to znaczy.
+Bit `val` jest odpowiednikiem `path` tutaj na dole. Mówi Nextflow'owi, że to jest zmienna, jak string w tym przypadku. A jeśli na to najedziesz ponownie, powie Ci z rozszerzenia, co to znaczy.
 
-Następnie powiemy Nextflow, co z tym zrobić. Nie wystarczy po prostu powiedzieć, że jest zmienna. Musisz powiedzieć w skrypcie, jak użyć tej zmiennej. Więc pozbędę się tego zakodowanego na stałe stringa tutaj i umieszczę zmienną.
+Następnie powiemy Nextflow'owi, co z tym zrobić. Nie wystarczy po prostu powiedzieć, że jest zmienna. Musisz powiedzieć w skrypcie, jak użyć tej zmiennej. Więc pozbędę się tego zakodowanego na stałe stringa tutaj i umieszczę zmienną.
 
 Szybko zrobię to bez klamer, tylko żeby Ci pokazać, że jest to dozwolone, i to jest stary sposób na to. Ale teraz z nową składnią naprawdę zalecamy umieszczenie tego w klamrach tak, i sprawia to, że jest naprawdę jasne, że to jest interpolowane przez Nextflow tutaj.
 
-Świetnie. Więc _"input greeting"_ wchodzi do _$\{greeting\}._ Ostatnia rzecz, którą musimy zrobić, to powiedzieć Nextflow na poziomie workflow, że ten proces teraz przyjmuje wejście. I aby to zrobić, zasadniczo damy mu zmienną.
+Świetnie. Więc _"input greeting"_ wchodzi do _$\{greeting\}._ Ostatnia rzecz, którą musimy zrobić, to powiedzieć Nextflow'owi na poziomie workflow, że ten proces teraz przyjmuje wejście. I aby to zrobić, zasadniczo damy mu zmienną.
 
 ## 3.2. Skonfiguruj parametr wiersza poleceń, aby przechwycić wejście użytkownika
 
@@ -230,7 +230,7 @@ Można użyć pojedynczych lub podwójnych cudzysłowów, to tylko wpływa na to
 
 Uruchamia pipeline Nextflow dokładnie w ten sam sposób. Możesz zobaczyć katalog roboczy i wszystko jest takie samo. Ale teraz jeśli przejdę do _"results/hello_world/output"_. Możemy zobaczyć nasz miły szwedzki tutaj zamiast tego.
 
-Więc dynamicznie przekazaliśmy wejście z CLI do parametru. Przekazaliśmy to jako wejście do procesu i proces to zinterpretował i umieścił to w bloku skryptu, który następnie dynamicznie zmienił wyjście tego wyniku skryptu. Całkiem fajnie.
+Więc dynamicznie przekazaliśmy wejście z CLI do parametru. Przekazaliśmy to jako wejście do procesu i proces to zinterpretował i umieścił to w bloku `script`, który następnie dynamicznie zmienił wyjście tego wyniku skryptu. Całkiem fajnie.
 
 Dość złożona logika z bardzo małą składnią tutaj. I możesz miejmy nadzieję zobaczyć, jak to teraz zaczyna się skalować. I tak naprawdę budujemy logikę i konfigurowalność naszych pipeline'ów do skryptu Nextflow.
 
@@ -244,11 +244,11 @@ To jest fajna nowa rzecz, przy okazji. W przeszłości Nextflow po prostu urucho
 
 Więc nie zawsze chcemy specyfikować każdą pojedynczą opcję. Dobrą praktyką jest określanie sensownych wartości domyślnych. Więc jak to robimy w naszym skrypcie?
 
-Zauważysz, że gdy to napisaliśmy, po prostu umieściliśmy _params.input_ bezpośrednio tam, gdzie tego używamy. Więc oczywistym rozwiązaniem jest zdefiniowanie wartości domyślnej i robimy to na górze skryptu tutaj w specjalnym bloku params w workflow. To jest w skrypcie workflow tutaj.
+Zauważysz, że gdy to napisaliśmy, po prostu umieściliśmy _params.input_ bezpośrednio tam, gdzie tego używamy. Więc oczywistym rozwiązaniem jest zdefiniowanie wartości domyślnej i robimy to na górze skryptu tutaj w specjalnym bloku `params` w `workflow`. To jest w skrypcie workflow tutaj.
 
 Znowu, trochę nowej składni tutaj, więc zwróć uwagę. To naprawdę fajne rzeczy. Mamy nazwę parametru, który będzie tu oczekiwany.
 
-A potem po tym dwukropku definiujemy typ zmiennej. Nie musisz tego robić, możesz po prostu zostawić to puste, ale jest naprawdę miłe. Mówi Nextflow, że oczekujemy stringa i traktujmy go jako taki.
+A potem po tym dwukropku definiujemy typ zmiennej. Nie musisz tego robić, możesz po prostu zostawić to puste, ale jest naprawdę miłe. Mówi Nextflow'owi, że oczekujemy stringa i traktujmy go jako taki.
 
 Jeśli chcemy liczbę zamiast tego, na przykład, moglibyśmy napisać float i to powiedziałoby, że chcemy liczby zmiennoprzecinkowej. A jeśli spróbujemy uruchomić z tym, to rzuci błąd. Jeśli damy mu string, który nie jest float. A także przekaże go jako taki. Jeśli zrobimy string, wtedy wie, że to string. I nawet jeśli ma wiodące zera i jest całkowicie numeryczny, nadal przekaże go jako faktyczny string.
 
@@ -262,11 +262,11 @@ To jest tylko wartość domyślna, więc nie oznacza to, że nadal nie możemy z
 
 Więc to w skrypcie jest tylko wartość domyślna, którą ustawiam.
 
-W miarę jak budujemy nasz workflow, aby był bardziej złożony i zawierał więcej parametrów, ten blok params na górze skryptu zacznie zbierać je wszystkie w jednym miejscu.
+W miarę jak budujemy nasz workflow, aby był bardziej złożony i zawierał więcej parametrów, ten blok `params` na górze skryptu zacznie zbierać je wszystkie w jednym miejscu.
 
 I kończysz z całkiem miłą symetrią w swoim skrypcie, gdzie faktycznie masz wszystkie swoje wejścia workflow tutaj i swoje wyjścia workflow na dole. I jest bardzo jasne, jaki jest interfejs Twojego workflow'u do świata zewnętrznego. Więc możesz bardzo szybko podjąć nowy pipeline z nową składnią i zrozumieć, jak go używać.
 
-Jeszcze jedna fajna rzecz. Nie musimy ustawiać wartości domyślnej z tym. Jeśli zrobimy params input, ale nie ustawimy wartości domyślnej, to mówi Nextflow, że ten parametr jest wymagany, i znowu pipeline nie uruchomi się bez niego, ale da Ci bardziej użyteczny komunikat o błędzie zamiast czegoś o tym, że jest null.
+Jeszcze jedna fajna rzecz. Nie musimy ustawiać wartości domyślnej z tym. Jeśli zrobimy params input, ale nie ustawimy wartości domyślnej, to mówi Nextflow'owi, że ten parametr jest wymagany, i znowu pipeline nie uruchomi się bez niego, ale da Ci bardziej użyteczny komunikat o błędzie zamiast czegoś o tym, że jest null.
 
 Więc mówi, że oczekujemy jego input jest wymagany, ale nie został określony w wierszu poleceń. Bardzo ładnie.
 
@@ -308,7 +308,7 @@ I tak czy inaczej, więc zrobiłem to i wróciło i spojrzało na zbuforowane wy
 
 To świetne. Co jeśli chcę wyczyścić te katalogi robocze? Jest ich tutaj mnóstwo. Jest mnóstwo plików. Może wiem na pewno, że chcę wznowić z ostatnich kilku uruchomień pipeline, ale nie obchodzą mnie wszystkie te sprzed tego.
 
-Wtedy mogę wybrać jedno tutaj i mogę użyć innego polecenia Nextflow, którym jest _"nextflow clean"_, i mogę zrobić _"nextflow clean"_, zrobię _"-before"_, i konkretną nazwę uruchomienia, która w tym przypadku była _reverent_pike_ i zrobię _"-n"_, co mówi Nextflow, aby po prostu zrobił dry run. Więc po prostu mówi mi, co usunie. Bez faktycznego robienia czegokolwiek, więc usunąłby te katalogi robocze.
+Wtedy mogę wybrać jedno tutaj i mogę użyć innego polecenia Nextflow, którym jest _"nextflow clean"_, i mogę zrobić _"nextflow clean"_, zrobię _"-before"_, i konkretną nazwę uruchomienia, która w tym przypadku była _reverent_pike_ i zrobię _"-n"_, co mówi Nextflow'owi, aby po prostu zrobił dry run. Więc po prostu mówi mi, co usunie. Bez faktycznego robienia czegokolwiek, więc usunąłby te katalogi robocze.
 
 To wygląda sensownie. Więc zrobię to samo polecenie ponownie, ale zamiast _"-n"_ zrobię _"-f"_, aby faktycznie wykonać czyszczenie. I tym razem faktycznie usunął wszystkie te katalogi. A jeśli wejdę i spojrzę na katalogi robocze, wygląda teraz znacznie lżej. Fantastycznie.
 

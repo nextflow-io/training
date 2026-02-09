@@ -160,7 +160,7 @@ Si je fais _« ls -l results »_, vous verrez que c'est en fait un lien symboliq
 
 ## 2.2. Définir un emplacement personnalisé
 
-« Results » est le nom par défaut pour ce chemin. Si j'exécute à nouveau le workflow, et cette fois je fais _dash_ un seul tiret, c'est parce que c'est une option Nextflow de base. _« -Output-dir **my** results »_. Je pourrais aussi simplement faire _« -o »_ pour faire court. Ensuite cela va définir un répertoire de base différent pour l'endroit où les fichiers sont stockés et encore une fois, ici dans _myresults/_, maintenant nous avons un _output.txt_.
+« Results » est le nom par défaut pour ce chemin. Si j'exécute à nouveau le workflow, et cette fois je fais _dash_ un seul tiret, c'est parce que c'est une option Nextflow de base. _« -output-dir **my** results »_. Je pourrais aussi simplement faire _« -o »_ pour faire court. Ensuite cela va définir un répertoire de base différent pour l'endroit où les fichiers sont stockés et encore une fois, ici dans _myresults/_, maintenant nous avons un _output.txt_.
 
 C'est génial, mais nous ne voulons probablement pas que tous les fichiers soient juste à la racine. Nous voulons un peu d'organisation, donc nous pouvons aussi créer un sous-répertoire ici appelé comme nous voulons. Disons _« path 'hello_world' »_, et je lance simplement cela à nouveau. _« nextflow run hello-world.nf »_. Cela devrait aller dans le répertoire results dans un sous-répertoire et effectivement, maintenant sous results ici en haut nous avons _hello_world/_ et nous avons _output.txt_.
 

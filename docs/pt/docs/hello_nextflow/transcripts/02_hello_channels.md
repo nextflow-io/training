@@ -32,13 +32,13 @@ Certo, então vamos rapidamente lembrar o que este script faz quando executamos 
 
 Isso é legal. Mas é, é bem simplista. Temos uma variável neste parâmetro, que vai para um processo que executa uma vez, e não realmente escala. E não podemos dar a ele muitos arquivos diferentes para criar aqui. Não podemos dar a ele muitas saudações diferentes. Temos apenas uma.
 
-Na realidade, o Nextflow é todo sobre escalar sua análise. Então você provavelmente quer que ele faça mais do que uma coisa. E fazemos isso com _canais_.
+Na realidade, o Nextflow é todo sobre escalar sua análise. Então você provavelmente quer que ele faça mais do que uma coisa. E fazemos isso com canais.
 
 Canais são um conceito um pouco único para muitas pessoas começando com Nextflow. Vem desses tipos de conceitos de programação funcional, e pode levar um pouco de tempo para entender, mas uma vez que você entende, eles realmente desbloqueiam o poder do Nextflow e é fundamental para como você escreve seus fluxos de trabalho.
 
 ## 1.1. Criar um canal de entrada
 
-Vamos começar pegando este script e fazendo-o usar um _canal_ em vez de apenas um _parâmetro_.
+Vamos começar pegando este script e fazendo-o usar um canal em vez de apenas um parâmetro.
 
 Vamos até o fluxo de trabalho, que é onde toda a nossa lógica de fluxo de trabalho está sobre encadear as coisas. E vou entrar aqui e vou criar um novo canal.
 
@@ -190,7 +190,7 @@ Então vamos nos livrar do nosso greetings array. E agora vamos mudar esta chann
 
 Agora aquele parâmetro não está realmente pronto para ser usado ainda. Ainda estamos dizendo que é uma string e está codificado direto aqui com um padrão, mas poderíamos sobrescrever aquela string. Agora queremos que isso seja um arquivo em vez disso. Então o tipo é diferente. Não é mais uma _String_. É um _Path_.
 
-E então podemos definir o padrão se quisermos, novamente, para um Path. E se eu olhar no explorar à esquerda, você pode ver neste repositório, neste diretório de trabalho, tenho um diretório chamado data. Tenho um arquivo lá chamado _"greetings.csv"._
+E então podemos definir o padrão se quisermos, novamente, para um Path. E se eu olhar no explorador à esquerda, você pode ver neste repositório, neste diretório de trabalho, tenho um diretório chamado data. Tenho um arquivo lá chamado _"greetings.csv"._
 
 Então posso apenas definir o padrão aqui para _"data/greetings.csv"_. Agora, quando eu executar este pipeline novamente sem nenhuma opção de linha de comando, vai usar este valor padrão. Sabe que é um path, então sabe que deve lidar com isso como um path e não uma string.
 

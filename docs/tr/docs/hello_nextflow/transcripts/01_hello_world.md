@@ -40,7 +40,7 @@ Söylediğim gibi, bu kurstaki tüm farklı bölümler bir betikle başlar ve bu
 
 Şimdi bu çok basit bir betik, yani olabildiğince basit. Sadece 22 satır uzunluğunda ve temelde aynı şeyi yapıyor. Aslında. Bunun bir kısmı tanıdık gelmelidir. Az önce yazdığımız bash komutunu görebiliriz. Bash komutumuzu orada bir dosyaya yönlendiren.
 
-Peki, başka ne var? Ayrıca, bu dosyada, Nextflow'un bazı temel kavramlarını görmeye başlayabiliriz. Burada kırmızı renkte bir süreç (process) ve bir iş akışı (workflow) var. Bunlar Nextflow'da özel anahtar kelimeler ve özel terminolojidir.
+Peki, başka ne var? Ayrıca, bu dosyada, Nextflow'un bazı temel kavramlarını görmeye başlayabiliriz. Burada kırmızı renkte bir **process** ve bir **workflow** var. Bunlar Nextflow'da özel anahtar kelimeler ve özel terminolojidir.
 
 ## 1.1.1. Süreç tanımı
 

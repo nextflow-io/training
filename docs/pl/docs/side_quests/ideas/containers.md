@@ -54,7 +54,7 @@ Dodaliśmy wyjaśniające komentarze do poniższego Dockerfile, aby pomóc Ci zr
 FROM mambaorg/micromamba:1.5.10-noble
 # Skopiuj plik conda.yml do kontenera
 COPY --chown=$MAMBA_USER:$MAMBA_USER conda.yml /tmp/conda.yml
-# Zainstaluj różne narzędzia dla Nextflow oraz pakiety z pliku conda.yml
+# Zainstaluj różne narzędzia dla Nextflow'a oraz pakiety z pliku conda.yml
 RUN micromamba install -y -n base -f /tmp/conda.yml \
     && micromamba install -y -n base conda-forge::procps-ng \
     && micromamba env export --name base --explicit > environment.lock \

@@ -35,7 +35,7 @@ docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quot
 
 출력:
 
-```console title="출력"
+```console title="Output"
 Humans are allergic to change. They love to say, 'We've always done it
 this way.' I try to fight that. That's why I have a clock on my wall
 that runs counter-clockwise.
@@ -97,7 +97,7 @@ docker build -t quote:latest containers/build
 docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 ```
 
-### 요점 정리
+### 핵심 정리
 
 Nextflow 파이프라인에서 사용하려는 도구의 컨테이너 이미지를 얻는 두 가지 방법을 배웠습니다: Seqera Containers를 사용하는 방법과 컨테이너 이미지를 직접 빌드하는 방법입니다.
 
@@ -180,7 +180,7 @@ workflow {
 
 이 연습의 해결책은 `containers/solutions/hello-containers-4.2.nf`에서 찾을 수 있습니다.
 
-### 요점 정리
+### 핵심 정리
 
 Nextflow에서 컨테이너를 사용하여 프로세스를 실행하는 방법과 파이프라인에 일부 분기 로직을 구축하는 방법을 알게 되었습니다!
 

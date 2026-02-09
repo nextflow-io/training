@@ -8,7 +8,7 @@
 
 ## 1. Wie man Container Images findet oder erstellt
 
-Einige Softwareentwickler stellen Container Images für ihre Software bereit, die auf Container-Registries wie Docker Hub verfügbar sind, aber viele tun dies nicht.
+Einige Softwareentwickler\*innen stellen Container Images für ihre Software bereit, die auf Container-Registries wie Docker Hub verfügbar sind, aber viele tun dies nicht.
 In diesem optionalen Abschnitt zeigen wir dir zwei Möglichkeiten, wie du ein Container Image für Tools erhalten kannst, die du in deinen Nextflow Pipelines verwenden möchtest: die Verwendung von Seqera Containers und das selbstständige Erstellen des Container Images.
 
 Du wirst ein Container Image für das `quote` pip-Paket erhalten/erstellen, das in der Übung am Ende dieses Abschnitts verwendet wird.
@@ -35,7 +35,7 @@ docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quot
 
 Ausgabe:
 
-```console title="Ausgabe"
+```console title="Output"
 Humans are allergic to change. They love to say, 'We've always done it
 this way.' I try to fight that. That's why I have a clock on my wall
 that runs counter-clockwise.
@@ -97,7 +97,7 @@ Nachdem es fertig erstellt wurde, kannst du das gerade erstellte Container Image
 docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 ```
 
-### Zusammenfassung
+### Fazit
 
 Du hast zwei verschiedene Möglichkeiten kennengelernt, ein Container Image für ein Tool zu erhalten, das du in deinen Nextflow Pipelines verwenden möchtest: die Verwendung von Seqera Containers und das selbstständige Erstellen des Container Images.
 
@@ -157,7 +157,7 @@ Für das `quote`-Container Image kannst du entweder das verwenden, das du selbst
 
 Du findest eine Lösung für diese Übung in `containers/solutions/hello-containers-4.1.nf`.
 
-### 2.2. Modifiziere deine Nextflow-Pipeline, um sie im `quote`- und `sayHello`-Modus ausführen zu können.
+### 2.2. Modifiziere deine Nextflow-Pipeline, um sie im `quote`- und `sayHello`-Modus ausführen zu können
 
 Füge deiner Pipeline etwas Verzweigungslogik hinzu, damit sie Eingaben akzeptieren kann, die sowohl für `quote` als auch für `sayHello` vorgesehen sind.
 Hier ist ein Beispiel, wie man eine `if`-Anweisung in einem Nextflow Workflow verwendet:
@@ -180,7 +180,7 @@ workflow {
 
 Du findest eine Lösung für diese Übung in `containers/solutions/hello-containers-4.2.nf`.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man Container in Nextflow verwendet, um Prozesse auszuführen, und wie man etwas Verzweigungslogik in deine Pipelines einbaut!
 

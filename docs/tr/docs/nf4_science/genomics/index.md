@@ -1,3 +1,22 @@
+---
+title: Genomik için Nextflow
+hide:
+  - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Tek bir örneğe varyant çağırma uygulamak için doğrusal bir iş akışı yazma
+    - İndeks dosyaları ve referans genom kaynakları gibi yardımcı dosyaları uygun şekilde işleme
+    - Örnek başına varyant çağırmayı paralelleştirmek için Nextflow'un veri akışı paradigmasından yararlanma
+    - İlgili kanal operatörlerini kullanarak çok örnekli joint calling uygulama
+  audience_prerequisites:
+    - "**Hedef kitle:** Bu kurs, veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen genomik ve ilgili alanlardaki araştırmacılar için tasarlanmıştır."
+    - "**Beceriler:** Komut satırı, temel betik kavramları ve yaygın genomik dosya formatları hakkında bir miktar bilgi sahibi olunduğu varsayılmaktadır."
+    - "**Ön koşullar:** [Hello Nextflow](../../hello_nextflow/) kursunda ele alınan temel Nextflow kavramları ve araçları."
+---
+
 # Genomik için Nextflow
 
 **Gerçek dünya genomik kullanım senaryosuna Nextflow uygulaması: GATK ile varyant çağırma üzerine uygulamalı bir kurs.**

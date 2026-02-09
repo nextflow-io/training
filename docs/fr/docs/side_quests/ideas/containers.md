@@ -35,7 +35,7 @@ docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quot
 
 Sortie :
 
-```console title="Sortie"
+```console title="Output"
 Humans are allergic to change. They love to say, 'We've always done it
 this way.' I try to fight that. That's why I have a clock on my wall
 that runs counter-clockwise.
@@ -82,7 +82,7 @@ dependencies:
 
 Copiez le contenu de ces fichiers dans les emplacements situés dans le répertoire `containers/build`, puis exécutez la commande suivante pour construire l'image de conteneur vous-même.
 
-!!! Note
+!!! note "Note"
 
     Nous utilisons l'option `-t quote:latest` pour étiqueter l'image de conteneur avec le nom `quote` et l'étiquette `latest`.
     Nous pourrons utiliser cette étiquette pour faire référence à l'image de conteneur lors de son exécution sur ce système.
@@ -143,7 +143,7 @@ Nous avons une liste de pionniers de l'informatique et de la biologie dans le fi
 
 Pour l'image de conteneur `quote`, vous pouvez soit utiliser celle que vous avez construite vous-même dans l'exercice avancé précédent, soit utiliser celle que vous avez obtenue depuis Seqera Containers.
 
-!!! Hint "Indice"
+!!! tip "Astuce"
 
     Un bon choix pour le bloc `script` de votre processus getQuote pourrait être :
         ```groovy
@@ -157,7 +157,7 @@ Pour l'image de conteneur `quote`, vous pouvez soit utiliser celle que vous avez
 
 Vous pouvez trouver une solution à cet exercice dans `containers/solutions/hello-containers-4.1.nf`.
 
-### 2.2. Modifier votre pipeline Nextflow pour lui permettre de s'exécuter en modes `quote` et `sayHello`.
+### 2.2. Modifier votre pipeline Nextflow pour lui permettre de s'exécuter en modes `quote` et `sayHello`
 
 Ajoutez une logique de branchement à votre pipeline pour lui permettre d'accepter des entrées destinées à la fois à `quote` et `sayHello`.
 Voici un exemple de la façon d'utiliser une instruction `if` dans un workflow Nextflow :
@@ -174,7 +174,7 @@ workflow {
 }
 ```
 
-!!! Hint "Indice"
+!!! tip "Astuce"
 
     Vous pouvez utiliser `new_ch = processName.out` pour assigner un nom au canal de sortie d'un processus.
 

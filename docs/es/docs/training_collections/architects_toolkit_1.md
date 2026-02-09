@@ -1,4 +1,3 @@
-```markdown
 ---
 title: Kit de Herramientas del Arquitecto I
 hide:
@@ -9,7 +8,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nuestras Colecciones de Entrenamiento proporcionan rutas de aprendizaje curadas a través de nuestros materiales de entrenamiento avanzado (llamados [Side Quests](../../side_quests)). Esta colección cubre cuatro temas esenciales que se usan frecuentemente en conjunto para construir workflows robustos y escalables.
+Nuestras Colecciones de Capacitación proporcionan rutas de aprendizaje curadas a través de nuestros materiales de capacitación avanzada (llamados [Side Quests](../../side_quests)). Esta colección cubre cuatro temas esenciales que se usan frecuentemente en conjunto para construir workflows robustos y escalables.
 
 ## Objetivos de aprendizaje
 
@@ -24,11 +23,11 @@ Estas habilidades le permitirán construir workflows de Nextflow robustos, escal
 
 ## Audiencia y prerequisitos
 
-Esta colección está diseñada para usuarios que han completado el entrenamiento básico de Nextflow y quieren profundizar en patrones avanzados de workflows, estrategias de testing, y técnicas de manejo de datos y metadatos.
+Esta colección está diseñada para usuarios que han completado la capacitación básica de Nextflow y quieren profundizar en patrones avanzados de workflows, estrategias de testing, y técnicas de manejo de datos y metadatos.
 
 **Prerequisitos**
 
-- Finalización del entrenamiento [Hello Nextflow](../../hello_nextflow/) o experiencia equivalente
+- Finalización de la capacitación [Hello Nextflow](../../hello_nextflow/) o experiencia equivalente
 - Familiaridad básica con la sintaxis y conceptos de Nextflow
 - Comprensión de patrones básicos de desarrollo de workflows
 - Experiencia con herramientas de línea de comandos
@@ -46,7 +45,7 @@ Cada Side Quest es autocontenido y cubre conceptos independientes, pero recomend
 
 ## Cómo usar esta colección
 
-Primero, haga clic con el comando en el botón "Open in GitHub Codespaces" a continuación para lanzar el entorno de entrenamiento en una pestaña separada, luego continúe leyendo mientras carga.
+Primero, haga clic con el comando en el botón "Open in GitHub Codespaces" a continuación para lanzar el entorno de capacitación en una pestaña separada, luego continúe leyendo mientras carga.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -55,9 +54,8 @@ Una vez que su entorno esté en ejecución, trabaje a través de la colección d
 1. En esta pestaña: Navegue al primer Side Quest listado arriba, que describe ejercicios de desarrollo paso a paso.
 2. En su pestaña de Codespaces: Trabaje a través de los ejercicios para el Side Quest.
 3. Cuando complete un Side Quest, regrese a esta página y navegue al siguiente en la lista de arriba.
-4. Cuando haya completado la colección, haga clic en el botón a continuación para completar una encuesta muy breve. Sus comentarios nos permiten continuar mejorando los materiales de entrenamiento para todos.
+4. Cuando haya completado la colección, haga clic en el botón a continuación para completar una encuesta muy breve. Sus comentarios nos permiten continuar mejorando los materiales de capacitación para todos.
 
 [![Take the survey](https://img.shields.io/badge/Take%20the-Survey-blue?style=flat-square)](https://seqera.typeform.com/to/Q9pc2YKw)
 
 ¿Listo para comenzar? ¡Comience con el primer módulo arriba!
-```

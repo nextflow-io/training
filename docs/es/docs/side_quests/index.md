@@ -1,6 +1,10 @@
-# Misiones Secundarias
+---
+title: Misiones Secundarias
+hide:
+  - toc
+---
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+# Misiones Secundarias
 
 Esta es una colección de mini-cursos de entrenamiento independientes que profundizan en temas específicos. Puede completarlos en cualquier orden.
 

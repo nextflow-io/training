@@ -38,9 +38,9 @@ Eso cubre los fundamentos de leer archivos CSV con `splitCsv` y crear mapas meta
 
 ## 0. Comenzar
 
-#### Abrir el codespace de entrenamiento
+#### Abrir el codespace de capacitación
 
-Si aún no lo ha hecho, asegúrese de abrir el entorno de entrenamiento como se describe en [Configuración del Entorno](../envsetup/index.md).
+Si aún no lo ha hecho, asegúrese de abrir el entorno de capacitación como se describe en [Configuración del Entorno](../envsetup/index.md).
 
 [![Abrir en GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -139,7 +139,7 @@ Si completó la misión secundaria [Metadatos en flujos de trabajo](./metadata.m
 
 !!! info
 
-    Encontraremos dos conceptos diferentes llamados `map` en este entrenamiento:
+    Encontraremos dos conceptos diferentes llamados `map` en esta capacitación:
 
     - **Estructura de datos**: El map de Groovy (equivalente a diccionarios/hashes en otros lenguajes) que almacena pares clave-valor
     - **Operador de canal**: El operador `.map()` que transforma elementos en un canal
@@ -1066,4 +1066,187 @@ nextflow run main.nf
     [[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
     [[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
     [[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-    [[id:patientB, interval:chr1], patientB_rep1_normal.bam,
+    [[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    ```
+
+Podemos ver que hemos aislado exitosamente los campos `id` e `interval`, pero aún no hemos agrupado las muestras.
+
+!!! note
+
+    Estamos descartando el campo `replicate` aquí. Esto es porque no lo necesitamos para procesamiento posterior. Después de completar este tutorial, ¡vea si puede incluirlo sin afectar la agrupación posterior!
+
+Ahora agrupemos las muestras por este nuevo elemento de agrupación, usando el [operador `groupTuple`](https://www.nextflow.io/docs/latest/operator.html#grouptuple).
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="30" hl_lines="9"
+        ch_grouped_samples = ch_combined_samples
+            .map { grouping_key, normal, tumor ->
+                [
+                    grouping_key.subMap('id', 'interval'),
+                    normal,
+                    tumor
+                ]
+              }
+              .groupTuple()
+              .view()
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="30"
+        ch_grouped_samples = ch_combined_samples
+            .map { grouping_key, normal, tumor ->
+                [
+                    grouping_key.subMap('id', 'interval'),
+                    normal,
+                    tumor
+                ]
+              }
+              .view()
+    ```
+
+¡Eso es todo! Solo agregamos una sola línea de código. Veamos qué sucede cuando lo ejecutamos:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Salida del comando"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+
+    [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    ```
+
+Note que nuestros datos han cambiado de estructura y dentro de cada elemento del canal los archivos ahora están contenidos en tuplas como `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`. Esto es porque cuando usamos `groupTuple`, Nextflow combina los archivos individuales para cada muestra de un grupo. Esto es importante recordar al intentar manejar los datos posteriormente.
+
+!!! note
+
+    [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) es lo opuesto de groupTuple. Desempaqueta los elementos en un canal y los aplana. ¡Intente agregar `transpose` y deshacer la agrupación que realizamos arriba!
+
+### Conclusión
+
+En esta sección, ha aprendido:
+
+- **Agrupar muestras relacionadas**: Cómo usar `groupTuple` para agregar muestras por atributos comunes
+- **Aislar claves de agrupación**: Cómo usar `subMap` para extraer campos específicos para agrupación
+- **Manejar estructuras de datos agrupadas**: Cómo trabajar con la estructura anidada creada por `groupTuple`
+- **Manejo de réplicas técnicas**: Cómo agrupar muestras que comparten las mismas condiciones experimentales
+
+---
+
+## Resumen
+
+En esta misión secundaria, ha aprendido cómo dividir y agrupar datos usando canales.
+
+Al modificar los datos a medida que fluyen a través del pipeline, puede construir un pipeline escalable sin usar bucles o declaraciones while, ofreciendo varias ventajas sobre enfoques más tradicionales:
+
+- Podemos escalar a tantas o tan pocas entradas como queramos sin código adicional
+- Nos enfocamos en manejar el flujo de datos a través del pipeline, en lugar de iteración
+- Podemos ser tan complejos o simples como sea necesario
+- El pipeline se vuelve más declarativo, enfocándose en qué debería suceder en lugar de cómo debería suceder
+- Nextflow optimizará la ejecución para nosotros ejecutando operaciones independientes en paralelo
+
+Dominar estas operaciones de canal le permitirá construir pipelines flexibles y escalables que manejan relaciones de datos complejas sin recurrir a bucles o programación iterativa, permitiendo que Nextflow optimice la ejecución y paralelice operaciones independientes automáticamente.
+
+### Patrones clave
+
+1.  **Crear datos de entrada estructurados:** Comenzando desde un archivo CSV con mapas meta (basándose en patrones de [Metadatos en flujos de trabajo](./metadata.md))
+
+    ```groovy
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+          [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
+    ```
+
+2.  **Dividir datos en canales separados:** Usamos `filter` para dividir datos en flujos independientes según el campo `type`
+
+    ```groovy
+    channel.filter { it.type == 'tumor' }
+    ```
+
+3.  **Unir muestras coincidentes:** Usamos `join` para recombinar muestras relacionadas según los campos `id` y `repeat`
+
+    - Unir dos canales por clave (primer elemento de la tupla)
+
+    ```groovy
+    tumor_ch.join(normal_ch)
+    ```
+
+    - Extraer clave de unión y unir por este valor
+
+    ```groovy
+    tumor_ch.map { meta, file -> [meta.id, meta, file] }
+        .join(
+          normal_ch.map { meta, file -> [meta.id, meta, file] }
+        )
+    ```
+
+    - Unir en múltiples campos usando subMap
+
+    ```groovy
+    tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+        .join(
+          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+        )
+    ```
+
+4.  **Distribuir a través de intervalos:** Usamos `combine` para crear productos cartesianos de muestras con intervalos genómicos para procesamiento paralelo.
+
+    ```groovy
+    samples_ch.combine(intervals_ch)
+    ```
+
+5.  **Agregar por claves de agrupación:** Usamos `groupTuple` para agrupar por el primer elemento en cada tupla, recolectando así muestras que comparten campos `id` e `interval` y fusionando réplicas técnicas.
+
+    ```groovy
+    channel.groupTuple()
+    ```
+
+6.  **Optimizar la estructura de datos:** Usamos `subMap` para extraer campos específicos y creamos un closure nombrado para hacer transformaciones reutilizables.
+
+    - Extraer campos específicos de un map
+
+    ```groovy
+    meta.subMap(['id', 'repeat'])
+    ```
+
+    - Usar closure nombrado para transformaciones reutilizables
+
+    ```groovy
+    getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
+    channel.map(getSampleIdAndReplicate)
+    ```
+
+### Recursos adicionales
+
+- [filter](https://www.nextflow.io/docs/latest/operator.html#filter)
+- [map](https://www.nextflow.io/docs/latest/operator.html#map)
+- [join](https://www.nextflow.io/docs/latest/operator.html#join)
+- [groupTuple](https://www.nextflow.io/docs/latest/operator.html#grouptuple)
+- [combine](https://www.nextflow.io/docs/latest/operator.html#combine)
+
+---
+
+## ¿Qué sigue?
+
+Regrese al [menú de Misiones Secundarias](./index.md) o haga clic en el botón en la parte inferior derecha de la página para pasar al siguiente tema en la lista.

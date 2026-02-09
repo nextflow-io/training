@@ -10,7 +10,7 @@ Bu yan görevde, Nextflow iş akışları için **sistematik hata ayıklama tekn
 
 - **Sözdizimi hatası ayıklama**: IDE özelliklerini ve Nextflow hata mesajlarını etkili şekilde kullanma
 - **Kanal hata ayıklama**: Veri akışı sorunlarını ve kanal yapısı problemlerini teşhis etme
-- **Process hata ayıklama**: Çalıştırma hatalarını ve kaynak sorunlarını araştırma
+- **Süreç hata ayıklama**: Çalıştırma hatalarını ve kaynak sorunlarını araştırma
 - **Yerleşik hata ayıklama araçları**: Nextflow'un önizleme modu, stub çalıştırma ve çalışma dizinlerinden yararlanma
 - **Sistematik yaklaşımlar**: Verimli hata ayıklama için dört aşamalı bir metodoloji
 
@@ -21,7 +21,7 @@ Sonunda, sinir bozucu hata mesajlarını çözümler için net yol haritalarına
 Bu yan görevi üstlenmeden önce şunları yapmalısınız:
 
 - [Hello Nextflow](../hello_nextflow/README.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olun.
-- Temel Nextflow kavramlarını ve mekanizmalarını (process'ler, kanal'lar, operatör'ler) rahatça kullanabilin
+- Temel Nextflow kavramlarını ve mekanizmalarını (süreçler, kanallar, operatörler) rahatça kullanabilin
 
 **İsteğe bağlı:** [Nextflow Geliştirme için IDE Özellikleri](./ide_features.md) yan görevini önce tamamlamanızı öneririz.
 Bu, burada yoğun olarak kullanacağımız hata ayıklamayı destekleyen IDE özelliklerinin (sözdizimi vurgulama, hata algılama vb.) kapsamlı bir şekilde ele alınmasını sağlar.
@@ -268,9 +268,9 @@ nextflow run bad_syntax.nf
     [48/cd7f54] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-### 1.2. Yanlış process anahtar kelimelerini veya yönergelerini kullanma
+### 1.2. Yanlış süreç anahtar kelimelerini veya yönergelerini kullanma
 
-Bir diğer yaygın sözdizimi hatası **geçersiz bir process tanımıdır**. Bu, gerekli blokları tanımlamayı unutursanız veya process tanımında yanlış yönergeler kullanırsanız meydana gelebilir.
+Bir diğer yaygın sözdizimi hatası **geçersiz bir süreç tanımıdır**. Bu, gerekli blokları tanımlamayı unutursanız veya süreç tanımında yanlış yönergeler kullanırsanız meydana gelebilir.
 
 #### Pipeline'ı çalıştırın
 
@@ -300,13 +300,13 @@ nextflow run invalid_process.nf
 
 #### Kodu kontrol edin
 
-Hata "Geçersiz process tanımı" belirtiyor ve sorunun etrafındaki bağlamı gösteriyor. 3-7. satırlara bakıldığında, 4. satırda `inputs:` görebiliriz, bu sorun. `invalid_process.nf` dosyasını inceleyelim:
+Hata "Geçersiz süreç tanımı" belirtiyor ve sorunun etrafındaki bağlamı gösteriyor. 3-7. satırlara bakıldığında, 4. satırda `inputs:` görebiliriz, bu sorun. `invalid_process.nf` dosyasını inceleyelim:
 
 ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    inputs:  // ERROR: Should be 'input' not 'inputs'
+    inputs:  // HATA: 'inputs' değil 'input' olmalı
     val sample_name
 
     output:
@@ -330,7 +330,7 @@ workflow {
 
 Hata bağlamındaki 4. satıra bakıldığında, sorunu tespit edebiliriz: doğru `input` yönergesi yerine `inputs` kullanıyoruz. Nextflow VSCode uzantısı bunu da işaretleyecektir:
 
-![Geçersiz process mesajı](img/invalid_process_message.png)
+![Geçersiz süreç mesajı](img/invalid_process_message.png)
 
 #### Kodu düzeltin
 
@@ -342,7 +342,7 @@ Hata bağlamındaki 4. satıra bakıldığında, sorunu tespit edebiliriz: doğr
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        input:  // Fixed: Changed 'inputs' to 'input'
+        input:  // Düzeltildi: 'inputs' yerine 'input' yapıldı
         val sample_name
 
         output:
@@ -370,7 +370,7 @@ Hata bağlamındaki 4. satıra bakıldığında, sorunu tespit edebiliriz: doğr
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        inputs:  // ERROR: Should be 'input' not 'inputs'
+        inputs:  // HATA: 'inputs' değil 'input' olmalı
         val sample_name
 
         output:
@@ -454,13 +454,13 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Script'ten önce Groovy kodunda değişkenleri tanımla
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
     """
     echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // HATA: undefined_var tanımlı değil
     """
 }
 
@@ -489,13 +489,13 @@ Hata mesajı değişkenin script şablonunda tanınmadığını belirtir ve işt
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Script'ten önce Groovy kodunda değişkenleri tanımla
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // Removed the line with undefined_var
+        """  // undefined_var içeren satır kaldırıldı
     }
 
     workflow {
@@ -517,13 +517,13 @@ Hata mesajı değişkenin script şablonunda tanınmadığını belirtir ve işt
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Script'ten önce Groovy kodunda değişkenleri tanımla
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // HATA: undefined_var tanımlı değil
         """
     }
 
@@ -595,12 +595,12 @@ process PROCESS_FILES {
     script:
     """
     prefix="${sample_name}_output"
-    echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+    echo "Processing ${sample_name}" > ${prefix}.txt  # HATA: ${prefix} Groovy sözdizimi, Bash değil
     """
 }
 ```
 
-Bu örnekte, `prefix` değişkenini Bash'te tanımlıyoruz, ancak bir Nextflow process'inde ona atıfta bulunmak için kullandığımız `$` sözdizimi (`${prefix}`) Bash değil Groovy değişkeni olarak yorumlanır. Değişken Groovy bağlamında mevcut olmadığından, 'böyle bir değişken yok' hatası alırız.
+Bu örnekte, `prefix` değişkenini Bash'te tanımlıyoruz, ancak bir Nextflow sürecinde ona atıfta bulunmak için kullandığımız `$` sözdizimi (`${prefix}`) Bash değil Groovy değişkeni olarak yorumlanır. Değişken Groovy bağlamında mevcut olmadığından, 'böyle bir değişken yok' hatası alırız.
 
 #### Kodu düzeltin
 
@@ -621,7 +621,7 @@ Bash değişkeni kullanmak istiyorsanız, dolar işaretini şu şekilde kaçırm
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > \${prefix}.txt  # Fixed: Escaped the dollar sign
+        echo "Processing ${sample_name}" > \${prefix}.txt  # Düzeltildi: Dolar işareti kaçırıldı
         """
     }
 
@@ -646,7 +646,7 @@ Bash değişkeni kullanmak istiyorsanız, dolar işaretini şu şekilde kaçırm
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+        echo "Processing ${sample_name}" > ${prefix}.txt  # HATA: ${prefix} Groovy sözdizimi, Bash değil
         """
     }
     ```
@@ -713,7 +713,7 @@ nextflow run badpractice_syntax.nf
      -- Check '.nextflow.log' file for details
     ```
 
-Hata mesajı sorunu açıkça belirtir: ifadeler (kanal tanımları gibi) bir workflow veya process bloğunun dışında script bildirimleriyle karıştırılamaz.
+Hata mesajı sorunu açıkça belirtir: ifadeler (kanal tanımları gibi) bir workflow veya süreç bloğunun dışında script bildirimleriyle karıştırılamaz.
 
 #### Kodu kontrol edin
 
@@ -722,7 +722,7 @@ Hataya neyin neden olduğunu görmek için `badpractice_syntax.nf` dosyasını i
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // HATA: Kanal workflow dışında tanımlandı
 
 process PROCESS_FILES {
     input:
@@ -732,7 +732,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Script'ten önce Groovy kodunda değişkenleri tanımla
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -767,7 +767,7 @@ Kanal tanımını workflow bloğunun içine taşıyın:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Script'ten önce Groovy kodunda değişkenleri tanımla
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -777,7 +777,7 @@ Kanal tanımını workflow bloğunun içine taşıyın:
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Workflow bloğunun içine taşındı
         PROCESS_FILES(input_ch)
     }
     ```
@@ -787,7 +787,7 @@ Kanal tanımını workflow bloğunun içine taşıyın:
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // HATA: Kanal workflow dışında tanımlandı
 
     process PROCESS_FILES {
         input:
@@ -797,7 +797,7 @@ Kanal tanımını workflow bloğunun içine taşıyın:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Script'ten önce Groovy kodunda değişkenleri tanımla
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -832,9 +832,9 @@ nextflow run badpractice_syntax.nf
 
 Girdi kanallarınızı workflow bloğu içinde tanımlanmış tutun ve genel olarak uzantının yaptığı diğer önerileri takip edin.
 
-### Çıkarımlar
+### Özet
 
-Nextflow hata mesajlarını ve IDE görsel göstergelerini kullanarak sözdizimi hatalarını sistematik olarak belirleyebilir ve düzeltebilirsiniz. Yaygın sözdizimi hataları arasında eksik parantezler, yanlış process anahtar kelimeleri, tanımsız değişkenler ve Bash ile Nextflow değişkenlerinin uygunsuz kullanımı bulunur. VSCode uzantısı bunların çoğunu çalışma zamanından önce yakalamanıza yardımcı olur. Bu sözdizimi hata ayıklama becerileri araç setinizde olduğunda, en yaygın Nextflow sözdizimi hatalarını hızlı bir şekilde çözebilecek ve daha karmaşık çalışma zamanı sorunlarıyla başa çıkmaya geçebileceksiniz.
+Nextflow hata mesajlarını ve IDE görsel göstergelerini kullanarak sözdizimi hatalarını sistematik olarak belirleyebilir ve düzeltebilirsiniz. Yaygın sözdizimi hataları arasında eksik parantezler, yanlış süreç anahtar kelimeleri, tanımsız değişkenler ve Bash ile Nextflow değişkenlerinin uygunsuz kullanımı bulunur. VSCode uzantısı bunların çoğunu çalışma zamanından önce yakalamanıza yardımcı olur. Bu sözdizimi hata ayıklama becerileri araç setinizde olduğunda, en yaygın Nextflow sözdizimi hatalarını hızlı bir şekilde çözebilecek ve daha karmaşık çalışma zamanı sorunlarıyla başa çıkmaya geçebileceksiniz.
 
 ### Sırada ne var?
 
@@ -844,7 +844,7 @@ Sözdizimi doğru olsa bile ortaya çıkan daha karmaşık kanal yapısı hatala
 
 ## 2. Kanal Yapısı Hataları
 
-Kanal yapısı hataları sözdizimi hatalarından daha inceliklidir çünkü kod sözdizimsel olarak doğrudur, ancak veri şekilleri process'lerin beklediği ile eşleşmez. Nextflow pipeline'ı çalıştırmaya çalışacaktır, ancak girdi sayısının beklediği ile eşleşmediğini bulabilir ve başarısız olabilir. Bu hatalar genellikle yalnızca çalışma zamanında görünür ve iş akışınız boyunca akan verilerin anlaşılmasını gerektirir.
+Kanal yapısı hataları sözdizimi hatalarından daha inceliklidir çünkü kod sözdizimsel olarak doğrudur, ancak veri şekilleri süreçlerin beklediği ile eşleşmez. Nextflow pipeline'ı çalıştırmaya çalışacaktır, ancak girdi sayısının beklediği ile eşleşmediğini bulabilir ve başarısız olabilir. Bu hatalar genellikle yalnızca çalışma zamanında görünür ve iş akışınız boyunca akan verilerin anlaşılmasını gerektirir.
 
 !!! tip "`.view()` ile Kanallarda Hata Ayıklama"
 
@@ -856,7 +856,7 @@ Kanal yapısı hataları sözdizimi hatalarından daha inceliklidir çünkü kod
 
 ### 2.1. Yanlış Sayıda Girdi Kanalı
 
-Bu hata, bir process'in beklediğinden farklı sayıda kanal geçirdiğinizde oluşur.
+Bu hata, bir sürecin beklediğinden farklı sayıda kanal geçirdiğinizde oluşur.
 
 #### Pipeline'ı çalıştırın
 
@@ -889,7 +889,7 @@ Hata mesajı, çağrının 1 argüman beklediğini ancak 2 aldığını açıkç
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process expects only 1 input
+        val sample_name  // Süreç yalnızca 1 girdi bekliyor
 
     output:
         path "${sample_name}_output.txt"
@@ -902,22 +902,22 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create two separate channels
+    // İki ayrı kanal oluştur
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-    // ERROR: Passing 2 channels but process expects only 1
+    // HATA: 2 kanal geçiriliyor ancak süreç yalnızca 1 bekliyor
     PROCESS_FILES(samples_ch, files_ch)
 }
 ```
 
-Process yalnızca bir tane tanımlarken birden fazla girdi kanalı sağlayan uyumsuz `PROCESS_FILES` çağrısını görmelisiniz. VSCode uzantısı ayrıca process çağrısının altını kırmızıya çizer ve fare ile üzerine geldiğinizde bir tanı mesajı sağlar:
+Process yalnızca bir tane tanımlarken birden fazla girdi kanalı sağlayan uyumsuz `PROCESS_FILES` çağrısını görmelisiniz. VSCode uzantısı ayrıca süreç çağrısının altını kırmızıya çizer ve fare ile üzerine geldiğinizde bir tanı mesajı sağlar:
 
 ![Yanlış sayıda argüman mesajı](img/incorrect_num_args.png)
 
 #### Kodu düzeltin
 
-Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç duymaz, bu nedenle yalnızca `samples_ch` kanalını geçirerek düzeltebiliriz:
+Bu özel örnek için, süreç tek bir kanal bekler ve ikinci kanala ihtiyaç duymaz, bu nedenle yalnızca `samples_ch` kanalını geçirerek düzeltebiliriz:
 
 === "Sonra"
 
@@ -926,7 +926,7 @@ Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç du
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Süreç yalnızca 1 girdi bekliyor
 
         output:
             path "${sample_name}_output.txt"
@@ -939,11 +939,11 @@ Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç du
 
     workflow {
 
-        // Create two separate channels
+        // İki ayrı kanal oluştur
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // Fixed: Pass only the channel the process expects
+        // Düzeltildi: Yalnızca sürecin beklediği kanalı geçir
         PROCESS_FILES(samples_ch)
     }
     ```
@@ -955,7 +955,7 @@ Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç du
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Süreç yalnızca 1 girdi bekliyor
 
         output:
             path "${sample_name}_output.txt"
@@ -968,11 +968,11 @@ Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç du
 
     workflow {
 
-        // Create two separate channels
+        // İki ayrı kanal oluştur
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ERROR: Passing 2 channels but process expects only 1
+        // HATA: 2 kanal geçiriliyor ancak süreç yalnızca 1 bekliyor
         PROCESS_FILES(samples_ch, files_ch)
     }
     ```
@@ -994,9 +994,9 @@ nextflow run bad_number_inputs.nf
     [48/497f7b] PROCESS_FILES (3) | 3 of 3 ✔
     ```
 
-Bu örnekten daha yaygın olarak, bir process'e ek girdiler ekleyebilir ve workflow çağrısını buna göre güncellemeyi unutabilirsiniz, bu da bu tür bir hataya yol açabilir. Neyse ki, hata mesajı uyumsuzluk hakkında oldukça açık olduğundan, bu anlaşılması ve düzeltilmesi daha kolay hatalardan biridir.
+Bu örnekten daha yaygın olarak, bir sürece ek girdiler ekleyebilir ve workflow çağrısını buna göre güncellemeyi unutabilirsiniz, bu da bu tür bir hataya yol açabilir. Neyse ki, hata mesajı uyumsuzluk hakkında oldukça açık olduğundan, bu anlaşılması ve düzeltilmesi daha kolay hatalardan biridir.
 
-### 2.2. Kanal Tükenmesi (Process Beklenenden Daha Az Çalışır)
+### 2.2. Kanal Tükenmesi (Süreç Beklenenden Daha Az Çalışır)
 
 Bazı kanal yapısı hataları çok daha inceliklidir ve hiç hata üretmezler. Muhtemelen bunların en yaygını, yeni Nextflow kullanıcılarının queue kanallarının tükenebileceğini ve öğelerin bitebileceğini anlamalarındaki zorluğu yansıtır, bu da iş akışının erken bitmesi anlamına gelir.
 
@@ -1008,7 +1008,7 @@ nextflow run exhausted.nf
 
 ??? success "Komut çıktısı"
 
-```console title="Exhausted channel output"
+```console title="Tükenmiş kanal çıktısı"
  N E X T F L O W   ~  version 25.10.2
 
 Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
@@ -1035,7 +1035,7 @@ process PROCESS_FILES {
     path "${output_prefix}.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Script'ten önce Groovy kodunda değişkenleri tanımla
     output_prefix = "${reference}_${sample_name}"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -1053,7 +1053,7 @@ workflow {
 }
 ```
 
-Process üç kez yerine yalnızca bir kez çalışır çünkü `reference_ch` kanalı, ilk process yürütmesinden sonra tükenen bir queue kanalıdır. Bir kanal tükendiğinde, diğer kanalların hala öğeleri olsa bile tüm process durur.
+Süreç üç kez yerine yalnızca bir kez çalışır çünkü `reference_ch` kanalı, ilk süreç yürütmesinden sonra tükenen bir queue kanalıdır. Bir kanal tükendiğinde, diğer kanalların hala öğeleri olsa bile tüm süreç durur.
 
 Bu, birden çok örnek arasında yeniden kullanılması gereken tek bir referans dosyanız olduğu yaygın bir desendir. Çözüm, referans kanalını süresiz olarak yeniden kullanılabilecek bir value kanalına dönüştürmektir.
 
@@ -1065,9 +1065,9 @@ Kaç dosyanın etkilendiğine bağlı olarak bunu ele almanın birkaç yolu vard
 
 **1a** `channel.value()` kullanın:
 
-```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
+```groovy title="exhausted.nf (düzeltildi - Seçenek 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    reference_ch = channel.value('baseline_reference')  // Value kanalı yeniden kullanılabilir
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1076,9 +1076,9 @@ workflow {
 
 **1b** `first()` [operatörünü](https://www.nextflow.io/docs/latest/reference/operator.html#first) kullanın:
 
-```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
+```groovy title="exhausted.nf (düzeltildi - Seçenek 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').first()  // Value kanalına dönüştür
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1087,32 +1087,32 @@ workflow {
 
 **1c.** `collect()` [operatörünü](https://www.nextflow.io/docs/latest/reference/operator.html#collect) kullanın:
 
-```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
+```groovy title="exhausted.nf (düzeltildi - Seçenek 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').collect()  // Value kanalına dönüştür
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
 }
 ```
 
-**Seçenek 2**: Daha karmaşık senaryolarda, belki de sample kanalındaki tüm örnekler için birden fazla referans dosyanız olduğunda, iki kanalı tuple'lara birleştiren yeni bir kanal oluşturmak için `combine` operatörünü kullanabilirsiniz:
+**Seçenek 2**: Daha karmaşık senaryolarda, belki de sample kanalındaki tüm örnekler için birden fazla referans dosyanız olduğunda, iki kanalı demetlere birleştiren yeni bir kanal oluşturmak için `combine` operatörünü kullanabilirsiniz:
 
-```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4" linenums="21"
+```groovy title="exhausted.nf (düzeltildi - Seçenek 2)" hl_lines="4" linenums="21"
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
-    combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
+    combined_ch = reference_ch.combine(input_ch)  // Kartezyen çarpım oluşturur
 
     PROCESS_FILES(combined_ch)
 }
 ```
 
-`.combine()` operatörü iki kanalın kartezyen çarpımını oluşturur, bu nedenle `reference_ch` içindeki her öğe `input_ch` içindeki her öğe ile eşleştirilecektir. Bu, process'in her örnek için çalışmasına izin verirken yine de referansı kullanmasını sağlar.
+`.combine()` operatörü iki kanalın kartezyen çarpımını oluşturur, bu nedenle `reference_ch` içindeki her öğe `input_ch` içindeki her öğe ile eşleştirilecektir. Bu, sürecin her örnek için çalışmasına izin verirken yine de referansı kullanmasını sağlar.
 
-Bu, process girdisinin ayarlanmasını gerektirir. Örneğimizde, process tanımının başlangıcının aşağıdaki gibi ayarlanması gerekecektir:
+Bu, süreç girdisinin ayarlanmasını gerektirir. Örneğimizde, süreç tanımının başlangıcının aşağıdaki gibi ayarlanması gerekecektir:
 
-```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="5" linenums="1"
+```groovy title="exhausted.nf (düzeltildi - Seçenek 2)" hl_lines="5" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -1145,7 +1145,7 @@ Artık yalnızca bir tane yerine üç örneğin de işlendiğini görmelisiniz.
 
 ### 2.3. Yanlış Kanal İçerik Yapısı
 
-İş akışları belirli bir karmaşıklık düzeyine ulaştığında, her kanalın iç yapılarını takip etmek biraz zor olabilir ve insanlar yaygın olarak process'in beklediği ile kanalın gerçekte içerdiği arasında uyumsuzluklar yaratırlar. Bu, daha önce tartıştığımız, kanal sayısının yanlış olduğu sorundan daha inceliklidir. Bu durumda, doğru sayıda girdi kanalına sahip olabilirsiniz, ancak bu kanallardan birinin veya daha fazlasının iç yapısı process'in beklediği ile eşleşmez.
+İş akışları belirli bir karmaşıklık düzeyine ulaştığında, her kanalın iç yapılarını takip etmek biraz zor olabilir ve insanlar yaygın olarak sürecin beklediği ile kanalın gerçekte içerdiği arasında uyumsuzluklar yaratırlar. Bu, daha önce tartıştığımız, kanal sayısının yanlış olduğu sorundan daha inceliklidir. Bu durumda, doğru sayıda girdi kanalına sahip olabilirsiniz, ancak bu kanallardan birinin veya daha fazlasının iç yapısı sürecin beklediği ile eşleşmez.
 
 #### Pipeline'ı çalıştırın
 
@@ -1187,14 +1187,14 @@ nextflow run bad_channel_shape.nf
 
 #### Kodu kontrol edin
 
-Hata mesajındaki köşeli parantezler burada ipucunu sağlar - process tuple'ı tek bir değer olarak ele alır, bu bizim istediğimiz şey değil. `bad_channel_shape.nf` dosyasını inceleyelim:
+Hata mesajındaki köşeli parantezler burada ipucunu sağlar - süreç demeti tek bir değer olarak ele alır, bu bizim istediğimiz şey değil. `bad_channel_shape.nf` dosyasını inceleyelim:
 
 ```groovy title="bad_channel_shape.nf" hl_lines="5 20-22" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Expects single value, gets tuple
+        val sample_name  // Tek değer bekliyor, demet alıyor
 
     output:
         path "${sample_name}_output.txt"
@@ -1207,7 +1207,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Kanal demetler yayınlıyor, ancak süreç tek değerler bekliyor
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
@@ -1217,13 +1217,13 @@ workflow {
 }
 ```
 
-Tuple'lardan oluşan bir kanal oluşturduğumuzu görebilirsiniz: `['sample1', 'file1.txt']`, ancak process tek bir değer bekliyor, `val sample_name`. Yürütülen komut, process'in `[sample3, file3.txt]_output.txt` adında bir dosya oluşturmaya çalıştığını gösterir, bu amaçlanan çıktı değildir.
+Demetlerden oluşan bir kanal oluşturduğumuzu görebilirsiniz: `['sample1', 'file1.txt']`, ancak süreç tek bir değer bekliyor, `val sample_name`. Yürütülen komut, sürecin `[sample3, file3.txt]_output.txt` adında bir dosya oluşturmaya çalıştığını gösterir, bu amaçlanan çıktı değildir.
 
 #### Kodu düzeltin
 
-Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir tuple kabul edecek şekilde ayarlayabiliriz:
+Bunu düzeltmek için, süreç her iki girdiyi de gerektiriyorsa süreci bir demet kabul edecek şekilde ayarlayabiliriz:
 
-=== "Seçenek 1: Process'te tuple kabul et"
+=== "Seçenek 1: Süreçte demet kabul et"
 
     === "Sonra"
 
@@ -1232,7 +1232,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), val(file_name)  // Fixed: Accept tuple
+                tuple val(sample_name), val(file_name)  // Düzeltildi: Demet kabul et
 
             output:
                 path "${sample_name}_output.txt"
@@ -1245,7 +1245,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Kanal demetler yayınlıyor, ancak süreç tek değerler bekliyor
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1262,7 +1262,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
 
         process PROCESS_FILES {
             input:
-                val sample_name  // Expects single value, gets tuple
+                val sample_name  // Tek değer bekliyor, demet alıyor
 
             output:
                 path "${sample_name}_output.txt"
@@ -1275,7 +1275,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Kanal demetler yayınlıyor, ancak süreç tek değerler bekliyor
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1292,13 +1292,13 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Kanal demetler yayınlıyor, ancak süreç tek değerler bekliyor
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
             )
-            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+            PROCESS_FILES(input_ch.map { it[0] })  // Düzeltildi: İlk öğeyi çıkar
         }
         ```
 
@@ -1307,7 +1307,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Kanal demetler yayınlıyor, ancak süreç tek değerler bekliyor
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1374,15 +1374,15 @@ nextflow run bad_channel_shape_viewed.nf
 ```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Kanal demetler yayınlıyor, ancak süreç tek değerler bekliyor
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Show original channel content
-    .map { tuple -> tuple[0] }        // Transform: Extract first element
-    .view { "After mapping: $it" }    // Debug: Show transformed channel content
+    .view { "Channel content: $it" }  // Hata ayıklama: Orijinal kanal içeriğini göster
+    .map { tuple -> tuple[0] }        // Dönüştürme: İlk öğeyi çıkar
+    .view { "After mapping: $it" }    // Hata ayıklama: Dönüştürülmüş kanal içeriğini göster
 
     PROCESS_FILES(input_ch)
 }
@@ -1392,10 +1392,10 @@ workflow {
 
 Gelecekte kanal içeriğini anlamak için `.view()` işlemlerini aşırı kullanmaktan sizi kurtarmak için yardımcı olması için bazı yorumlar eklemeniz tavsiye edilir:
 
-```groovy title="bad_channel_shape_viewed.nf (with comments)" linenums="16" hl_lines="8 9"
+```groovy title="bad_channel_shape_viewed.nf (yorumlarla)" linenums="16" hl_lines="8 9"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Kanal demetler yayınlıyor, ancak süreç tek değerler bekliyor
     input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
@@ -1432,23 +1432,23 @@ nextflow run bad_channel_shape_viewed.nf
     After mapping: sample3
     ```
 
-### Çıkarımlar
+### Özet
 
-Birçok kanal yapısı hatası geçerli Nextflow sözdizimi ile oluşturulabilir. Veri akışını anlayarak, inceleme için `.view()` operatörlerini kullanarak ve beklenmedik tuple yapılarını gösteren köşeli parantezler gibi hata mesajı desenlerini tanıyarak kanal yapısı hatalarında hata ayıklayabilirsiniz.
+Birçok kanal yapısı hatası geçerli Nextflow sözdizimi ile oluşturulabilir. Veri akışını anlayarak, inceleme için `.view()` operatörlerini kullanarak ve beklenmedik demet yapılarını gösteren köşeli parantezler gibi hata mesajı desenlerini tanıyarak kanal yapısı hatalarında hata ayıklayabilirsiniz.
 
 ### Sırada ne var?
 
-Process tanımlarından kaynaklanan hatalar hakkında bilgi edinin.
+Süreç tanımlarından kaynaklanan hatalar hakkında bilgi edinin.
 
 ---
 
-## 3. Process Yapısı Hataları
+## 3. Süreç Yapısı Hataları
 
-Process'lerle ilgili karşılaşacağınız hataların çoğu, komutu oluştururken yaptığınız hatalara veya temel yazılımla ilgili sorunlara bağlı olacaktır. Bununla birlikte, yukarıdaki kanal sorunlarına benzer şekilde, sözdizimi hatası olarak nitelendirilmeyen ancak çalışma zamanında hatalara neden olacak process tanımında hatalar yapabilirsiniz.
+Süreçlerle ilgili karşılaşacağınız hataların çoğu, komutu oluştururken yaptığınız hatalara veya temel yazılımla ilgili sorunlara bağlı olacaktır. Bununla birlikte, yukarıdaki kanal sorunlarına benzer şekilde, sözdizimi hatası olarak nitelendirilmeyen ancak çalışma zamanında hatalara neden olacak süreç tanımında hatalar yapabilirsiniz.
 
 ### 3.1. Eksik Çıktı Dosyaları
 
-Process'leri yazarken yaygın bir hata, process'in beklediği ile oluşturulan arasında uyumsuzluk yaratan bir şey yapmaktır.
+Süreçleri yazarken yaygın bir hata, sürecin beklediği ile oluşturulan arasında uyumsuzluk yaratan bir şey yapmaktır.
 
 #### Pipeline'ı çalıştırın
 
@@ -1492,4 +1492,1156 @@ nextflow run missing_output.nf
 
 #### Kodu kontrol edin
 
-Hata mesajı, process'in `sample3.txt` adında bir çıktı dosyası üretmesini beklediğini, ancak script'in aslında `sample3_output.txt` oluşturduğunu gösterir. `missing_output.nf` içindeki process tanımını inc
+Hata mesajı, sürecin `sample3.txt` adında bir çıktı dosyası üretmesini beklediğini, ancak script'in aslında `sample3_output.txt` oluşturduğunu gösterir. `missing_output.nf` içindeki süreç tanımını inceleyelim:
+
+```groovy title="missing_output.nf" linenums="3" hl_lines="6 10"
+process PROCESS_FILES {
+    input:
+    val sample_name
+
+    output:
+    path "${sample_name}.txt"  // Bekliyor: sample3.txt
+
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Oluşturuyor: sample3_output.txt
+    """
+}
+```
+
+`output:` bloğundaki çıktı dosya adı ile script'te kullanılan arasında bir uyumsuzluk olduğunu görmelisiniz. Bu uyumsuzluk sürecin başarısız olmasına neden olur. Bu tür bir hatayla karşılaşırsanız, geri dönün ve çıktıların süreç tanımınız ile çıktı bloğunuz arasında eşleştiğini kontrol edin.
+
+Sorun hala net değilse, gerçek oluşturulan çıktı dosyalarını belirlemek için çalışma dizininin kendisini kontrol edin:
+
+```bash
+❯ ls -h work/02/9604d49fb8200a74d737c72a6c98ed
+sample3_output.txt
+```
+
+Bu örnek için bu, `output:` tanımımızın aksine çıktı dosya adına bir `_output` sonekinin dahil edildiğini vurgulayacaktır.
+
+#### Kodu düzeltin
+
+Çıktı dosya adını tutarlı hale getirerek uyumsuzluğu düzeltin:
+
+=== "Sonra"
+
+    ```groovy title="missing_output.nf" hl_lines="6 10" linenums="3"
+    process PROCESS_FILES {
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}_output.txt"  // Düzeltildi: Script çıktısıyla eşleştirildi
+
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="missing_output.nf" hl_lines="6 10" linenums="3"
+    process PROCESS_FILES {
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}.txt"  // Bekliyor: sample3.txt
+
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Oluşturuyor: sample3_output.txt
+        """
+    }
+    ```
+
+#### Pipeline'ı çalıştırın
+
+```bash
+nextflow run missing_output.nf
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `missing_output.nf` [elated_hamilton] DSL2 - revision: 961938ee2b
+
+    executor >  local (3)
+    [16/1c437c] PROCESS_FILES (3) | 3 of 3 ✔
+    ```
+
+### 3.2. Eksik yazılım
+
+Başka bir hata sınıfı, yazılım sağlamadaki hatalardan kaynaklanır. `missing_software.nf` sözdizimsel olarak geçerli bir iş akışıdır, ancak kullandığı `cowpy` komutunu sağlamak için bazı harici yazılımlara bağlıdır.
+
+#### Pipeline'ı çalıştırın
+
+```bash
+nextflow run missing_software.nf
+```
+
+??? failure "Komut çıktısı"
+
+    ```console hl_lines="12 18"
+    ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+
+    Caused by:
+      Process `PROCESS_FILES (3)` terminated with an error exit status (127)
+
+
+    Command executed:
+
+      cowpy sample3 > sample3_output.txt
+
+    Command exit status:
+      127
+
+    Command output:
+      (empty)
+
+    Command error:
+      .command.sh: line 2: cowpy: command not found
+
+    Work dir:
+      /workspaces/training/side-quests/debugging/work/82/42a5bfb60c9c6ee63ebdbc2d51aa6e
+
+    Tip: you can try to figure out what's wrong by changing to the process work directory and showing the script file named `.command.sh`
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+Süreç belirttiğimiz komuta erişemiyor. Bazen bu, bir script'in iş akışı `bin` dizininde mevcut olması ancak çalıştırılabilir yapılmamış olmasından kaynaklanır. Diğer zamanlarda, yazılımın iş akışının çalıştığı konteyner veya ortamda yüklü olmamasından kaynaklanır.
+
+#### Kodu kontrol edin
+
+O `127` çıkış koduna dikkat edin - size tam olarak sorunu söyler. `missing_software.nf` dosyasını inceleyelim:
+
+```groovy title="missing_software.nf" linenums="3" hl_lines="3"
+process PROCESS_FILES {
+
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+
+    input:
+    val sample_name
+
+    output:
+    path "${sample_name}_output.txt"
+
+    script:
+    """
+    cowpy ${sample_name} > ${sample_name}_output.txt
+    """
+}
+```
+
+#### Kodu düzeltin
+
+Burada biraz samimiyetsiz davrandık ve aslında kodda yanlış bir şey yok. Sadece süreci söz konusu komuta erişimi olacak şekilde çalıştırmak için gerekli yapılandırmayı belirtmemiz gerekiyor. Bu durumda sürecin bir konteyner tanımı var, bu yüzden tek yapmamız gereken iş akışını Docker etkinleştirilmiş olarak çalıştırmak.
+
+#### Pipeline'ı çalıştırın
+
+`nextflow.config` dosyasında sizin için bir Docker profili ayarladık, böylece iş akışını şu şekilde çalıştırabilirsiniz:
+
+```bash
+nextflow run missing_software.nf -profile docker
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `missing_software.nf` [awesome_stonebraker] DSL2 - revision: 0296d12839
+
+    executor >  local (3)
+    [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
+    ```
+
+!!! note
+
+    Nextflow'un konteynerleri nasıl kullandığı hakkında daha fazla bilgi edinmek için [Hello Nextflow](../hello_nextflow/05_hello_containers.md) bölümüne bakın
+
+### 3.3. Kötü kaynak yapılandırması
+
+Üretim kullanımında, süreçlerinizde kaynakları yapılandırıyor olacaksınız. Örneğin `memory`, süreciniz için mevcut maksimum bellek miktarını tanımlar ve süreç bunu aşarsa, zamanlayıcınız genellikle süreci sonlandırır ve `137` çıkış kodu döndürür. Bunu burada gösteremeyiz çünkü `local` yürütücüsünü kullanıyoruz, ancak `time` ile benzer bir şey gösterebiliriz.
+
+#### Pipeline'ı çalıştırın
+
+`bad_resources.nf`, 1 milisaniyelik gerçekçi olmayan bir zaman sınırına sahip süreç yapılandırmasına sahiptir:
+
+```bash
+nextflow run bad_resources.nf -profile docker
+```
+
+??? failure "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `bad_resources.nf` [disturbed_elion] DSL2 - revision: 27d2066e86
+
+    executor >  local (3)
+    [c0/ded8e1] PROCESS_FILES (3) | 0 of 3 ✘
+    ERROR ~ Error executing process > 'PROCESS_FILES (2)'
+
+    Caused by:
+      Process exceeded running time limit (1ms)
+
+    Command executed:
+
+      cowpy sample2 > sample2_output.txt
+
+    Command exit status:
+      -
+
+    Command output:
+      (empty)
+
+    Work dir:
+      /workspaces/training/side-quests/debugging/work/53/f0a4cc56d6b3dc2a6754ff326f1349
+
+    Container:
+      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+#### Kodu kontrol edin
+
+`bad_resources.nf` dosyasını inceleyelim:
+
+```groovy title="bad_resources.nf" linenums="3" hl_lines="3"
+process PROCESS_FILES {
+
+    time '1 ms'  // HATA: Gerçekçi olmayan zaman sınırı
+
+    input:
+    val sample_name
+
+    output:
+    path "${sample_name}_output.txt"
+
+    script:
+    """
+    sleep 1  // 1 saniye sürüyor, ancak zaman sınırı 1ms
+    cowpy ${sample_name} > ${sample_name}_output.txt
+    """
+}
+```
+
+Sürecin bir saniyeden uzun süreceğini biliyoruz (emin olmak için içine bir uyku ekledik), ancak süreç 1 milisaniye sonra zaman aşımına uğrayacak şekilde ayarlanmış. Birisi yapılandırmasıyla biraz gerçekçi olmamış!
+
+#### Kodu düzeltin
+
+Zaman sınırını gerçekçi bir değere yükseltin:
+
+=== "Sonra"
+
+    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
+    process PROCESS_FILES {
+
+        time '100 s'  // Düzeltildi: Gerçekçi zaman sınırı
+
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}_output.txt"
+
+        script:
+        """
+        sleep 1
+        cowpy ${sample_name} > ${sample_name}_output.txt
+        """
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
+    process PROCESS_FILES {
+
+        time '1 ms'  // HATA: Gerçekçi olmayan zaman sınırı
+
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}_output.txt"
+
+        script:
+        """
+        sleep 1  // 1 saniye sürüyor, ancak zaman sınırı 1ms
+        cowpy ${sample_name} > ${sample_name}_output.txt
+        """
+    }
+    ```
+
+#### Pipeline'ı çalıştırın
+
+```bash
+nextflow run bad_resources.nf -profile docker
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `bad_resources.nf` [friendly_mcclintock] DSL2 - revision: 381567d2c1
+
+    executor >  local (3)
+    [c2/9b4c41] PROCESS_FILES (3) | 3 of 3 ✔
+    ```
+
+Hata mesajlarınızı dikkatlice okuduğunuzdan emin olursanız, bunun gibi başarısızlıklar sizi çok uzun süre şaşırtmamalıdır. Ancak kaynak yönergelerinizi uygun şekilde yapılandırabilmeniz için çalıştırdığınız komutların kaynak gereksinimlerini anladığınızdan emin olun.
+
+### 3.4. Süreç Hata Ayıklama Teknikleri
+
+Süreçler başarısız olduğunda veya beklenmedik şekilde davrandığında, neyin yanlış gittiğini araştırmak için sistematik tekniklere ihtiyacınız vardır. Çalışma dizini, süreç yürütmesinde hata ayıklamak için ihtiyacınız olan tüm bilgileri içerir.
+
+#### Çalışma Dizini İncelemesini Kullanma
+
+Süreçler için en güçlü hata ayıklama aracı, çalışma dizinini incelemektir. Bir süreç başarısız olduğunda, Nextflow o belirli süreç yürütmesi için ne olduğunu anlamak için gereken tüm dosyaları içeren bir çalışma dizini oluşturur.
+
+#### Pipeline'ı çalıştırın
+
+Çalışma dizini incelemesini göstermek için önceki `missing_output.nf` örneğini kullanalım (gerekirse bir çıktı adlandırma uyumsuzluğunu yeniden oluşturun):
+
+```bash
+nextflow run missing_output.nf
+```
+
+??? failure "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `missing_output.nf` [irreverent_payne] DSL2 - revision: 3d5117f7e2
+
+    executor >  local (3)
+    [5d/d544a4] PROCESS_FILES (2) | 0 of 3 ✘
+    ERROR ~ Error executing process > 'PROCESS_FILES (1)'
+
+    Caused by:
+      Missing output file(s) `sample1.txt` expected by process `PROCESS_FILES (1)`
+
+    Command executed:
+
+      echo "Processing sample1" > sample1_output.txt
+
+    Command exit status:
+      0
+
+    Command output:
+      (empty)
+
+    Work dir:
+      /workspaces/training/side-quests/debugging/work/1e/2011154d0b0f001cd383d7364b5244
+
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+#### Çalışma dizinini kontrol edin
+
+Bu hatayı aldığınızda, çalışma dizini tüm hata ayıklama bilgilerini içerir. Hata mesajından çalışma dizini yolunu bulun ve içeriğini inceleyin:
+
+```bash
+# Hata mesajından çalışma dizinini bulun
+ls work/02/9604d49fb8200a74d737c72a6c98ed/
+```
+
+Ardından anahtar dosyaları inceleyebilirsiniz:
+
+##### Komut Script'ini Kontrol Edin
+
+`.command.sh` dosyası tam olarak hangi komutun yürütüldüğünü gösterir:
+
+```bash
+# Yürütülen komutu görüntüle
+cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.sh
+```
+
+Bu şunları ortaya çıkarır:
+
+- **Değişken ikamesi**: Nextflow değişkenlerinin düzgün şekilde genişletilip genişletilmediği
+- **Dosya yolları**: Girdi dosyalarının doğru şekilde bulunup bulunmadığı
+- **Komut yapısı**: Script sözdiziminin doğru olup olmadığı
+
+Aranacak yaygın sorunlar:
+
+- **Eksik tırnaklar**: Boşluk içeren değişkenlerin düzgün tırnak içine alınması gerekir
+- **Yanlış dosya yolları**: Var olmayan veya yanlış konumlardaki girdi dosyaları
+- **Yanlış değişken adları**: Değişken referanslarındaki yazım hataları
+- **Eksik ortam kurulumu**: Belirli ortamlara bağlı komutlar
+
+##### Hata Çıktısını Kontrol Edin
+
+`.command.err` dosyası gerçek hata mesajlarını içerir:
+
+```bash
+# Hata çıktısını görüntüle
+cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.err
+```
+
+Bu dosya şunları gösterecektir:
+
+- **Çıkış kodları**: 127 (komut bulunamadı), 137 (sonlandırıldı), vb.
+- **İzin hataları**: Dosya erişim sorunları
+- **Yazılım hataları**: Uygulamaya özgü hata mesajları
+- **Kaynak hataları**: Bellek/zaman sınırı aşıldı
+
+##### Standart Çıktıyı Kontrol Edin
+
+`.command.out` dosyası komutunuzun ne ürettiğini gösterir:
+
+```bash
+# Standart çıktıyı görüntüle
+cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.out
+```
+
+Bu şunları doğrulamaya yardımcı olur:
+
+- **Beklenen çıktı**: Komutun doğru sonuçları üretip üretmediği
+- **Kısmi yürütme**: Komutun başlayıp yarıda başarısız olup olmadığı
+- **Hata ayıklama bilgisi**: Script'inizden herhangi bir tanı çıktısı
+
+##### Çıkış Kodunu Kontrol Edin
+
+`.exitcode` dosyası süreç için çıkış kodunu içerir:
+
+```bash
+# Çıkış kodunu görüntüle
+cat work/*/*/.exitcode
+```
+
+Yaygın çıkış kodları ve anlamları:
+
+- **Çıkış kodu 127**: Komut bulunamadı - yazılım kurulumunu kontrol edin
+- **Çıkış kodu 137**: Süreç sonlandırıldı - bellek/zaman sınırlarını kontrol edin
+
+##### Dosya Varlığını Kontrol Edin
+
+Süreçler eksik çıktı dosyaları nedeniyle başarısız olduğunda, gerçekte hangi dosyaların oluşturulduğunu kontrol edin:
+
+```bash
+# Çalışma dizinindeki tüm dosyaları listele
+ls -la work/02/9604d49fb8200a74d737c72a6c98ed/
+```
+
+Bu şunları belirlemeye yardımcı olur:
+
+- **Dosya adlandırma uyumsuzlukları**: Beklenenden farklı adlara sahip çıktı dosyaları
+- **İzin sorunları**: Oluşturulamayan dosyalar
+- **Yol sorunları**: Yanlış dizinlerde oluşturulan dosyalar
+
+Önceki örneğimizde, bu beklenen `sample3.txt` dosyamızın mevcut olmadığını, ancak `sample3_output.txt` dosyasının olduğunu doğruladı:
+
+```bash
+❯ ls -h work/02/9604d49fb8200a74d737c72a6c98ed
+sample3_output.txt
+```
+
+### Özet
+
+Süreç hata ayıklama, neyin yanlış gittiğini anlamak için çalışma dizinlerini incelemeyi gerektirir. Anahtar dosyalar arasında `.command.sh` (yürütülen script), `.command.err` (hata mesajları) ve `.command.out` (standart çıktı) bulunur. 127 (komut bulunamadı) ve 137 (süreç sonlandırıldı) gibi çıkış kodları, başarısızlık türü hakkında anında tanı ipuçları sağlar.
+
+### Sırada ne var?
+
+Nextflow'un yerleşik hata ayıklama araçları ve sorun giderme için sistematik yaklaşımlar hakkında bilgi edinin.
+
+---
+
+## 4. Yerleşik Hata Ayıklama Araçları ve İleri Teknikler
+
+Nextflow, iş akışı yürütmesinde hata ayıklama ve analiz için birkaç güçlü yerleşik araç sağlar. Bu araçlar, neyin yanlış gittiğini, nerede yanlış gittiğini ve nasıl verimli bir şekilde düzeltileceğini anlamanıza yardımcı olur.
+
+### 4.1. Gerçek Zamanlı Süreç Çıktısı
+
+Bazen çalışan süreçlerin içinde neler olduğunu görmeniz gerekir. Gerçek zamanlı süreç çıktısını etkinleştirebilirsiniz, bu size her görevin yürütülürken tam olarak ne yaptığını gösterir.
+
+#### Pipeline'ı çalıştırın
+
+Önceki örneklerimizden `bad_channel_shape_viewed.nf`, `.view()` kullanarak kanal içeriğini yazdırdı, ancak `bad_channel_shape_viewed_debug.nf` içinde gösterdiğimiz gibi, sürecin içinden değişkenleri yankılamak için `debug` yönergesini de kullanabiliriz. İş akışını çalıştırın:
+
+```bash
+nextflow run bad_channel_shape_viewed_debug.nf
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `bad_channel_shape_viewed_debug.nf` [agitated_crick] DSL2 - revision: ea3676d9ec
+
+    executor >  local (3)
+    [c6/2dac51] process > PROCESS_FILES (3) [100%] 3 of 3 ✔
+    Channel content: [sample1, file1.txt]
+    Channel content: [sample2, file2.txt]
+    Channel content: [sample3, file3.txt]
+    After mapping: sample1
+    After mapping: sample2
+    After mapping: sample3
+    Sample name inside process is sample2
+
+    Sample name inside process is sample1
+
+    Sample name inside process is sample3
+    ```
+
+#### Kodu kontrol edin
+
+`debug` yönergesinin nasıl çalıştığını görmek için `bad_channel_shape_viewed_debug.nf` dosyasını inceleyelim:
+
+```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
+process PROCESS_FILES {
+    debug true  // Gerçek zamanlı çıktıyı etkinleştir
+
+    input:
+    val sample_name
+
+    output:
+    path "${sample_name}_output.txt"
+
+    script:
+    """
+    echo "Sample name inside process is ${sample_name}"
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
+```
+
+`debug` yönergesi, bir sürecin ortamını anlamak için hızlı ve kullanışlı bir yol olabilir.
+
+### 4.2. Önizleme Modu
+
+Bazen herhangi bir süreç çalışmadan önce sorunları yakalamak istersiniz. Nextflow bu tür proaktif hata ayıklama için bir bayrak sağlar: `-preview`.
+
+#### Pipeline'ı çalıştırın
+
+Önizleme modu, komutları yürütmeden iş akışı mantığını test etmenizi sağlar. Bu, iş akışınızın yapısını hızlıca kontrol etmek ve süreçlerin herhangi bir gerçek komut çalıştırmadan doğru şekilde bağlandığından emin olmak için oldukça yararlı olabilir.
+
+!!! note
+
+    `bad_syntax.nf` dosyasını daha önce düzelttiyseniz, bu komutu çalıştırmadan önce script bloğundan sonra kapatan parantezi kaldırarak sözdizimi hatasını yeniden ekleyin.
+
+Bu komutu çalıştırın:
+
+```bash
+nextflow run bad_syntax.nf -preview
+```
+
+??? failure "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `bad_syntax.nf` [magical_mercator] DSL2 - revision: 550b9a8873
+
+    Error bad_syntax.nf:24:1: Unexpected input: '<EOF>'
+
+    ERROR ~ Script compilation failed
+
+     -- Check '.nextflow.log' file for details
+    ```
+
+Önizleme modu, herhangi bir süreç çalıştırmadan sözdizimi hatalarını erken yakalamak için özellikle yararlıdır. Yürütmeden önce iş akışı yapısını ve süreç bağlantılarını doğrular.
+
+### 4.3. Mantık Testi için Stub Çalıştırma
+
+Bazen hatalar hata ayıklaması zor olur çünkü komutlar çok uzun sürer, özel yazılım gerektirir veya karmaşık nedenlerle başarısız olur. Stub çalıştırma, gerçek komutları yürütmeden iş akışı mantığını test etmenizi sağlar.
+
+#### Pipeline'ı çalıştırın
+
+Bir Nextflow süreci geliştirirken, gerçek komutu çalıştırmadan doğru biçimde çıktılar üreten 'sahte' komutlar tanımlamak için `stub` yönergesini kullanabilirsiniz. Bu yaklaşım, gerçek yazılımın karmaşıklıklarıyla uğraşmadan önce iş akışı mantığınızın doğru olduğunu doğrulamak istediğinizde özellikle değerlidir.
+
+Örneğin, önceki `missing_software.nf` dosyamızı hatırlıyor musunuz? `-profile docker` ekleyene kadar iş akışının çalışmasını engelleyen eksik yazılıma sahip olan? `missing_software_with_stub.nf` çok benzer bir iş akışıdır. Aynı şekilde çalıştırırsak, aynı hatayı üreteceğiz:
+
+```bash
+nextflow run missing_software_with_stub.nf
+```
+
+??? failure "Komut çıktısı"
+
+    ```console hl_lines="12 18"
+    ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+
+    Caused by:
+      Process `PROCESS_FILES (3)` terminated with an error exit status (127)
+
+
+    Command executed:
+
+      cowpy sample3 > sample3_output.txt
+
+    Command exit status:
+      127
+
+    Command output:
+      (empty)
+
+    Command error:
+      .command.sh: line 2: cowpy: command not found
+
+    Work dir:
+      /workspaces/training/side-quests/debugging/work/82/42a5bfb60c9c6ee63ebdbc2d51aa6e
+
+    Tip: you can try to figure out what's wrong by changing to the process work directory and showing the script file named `.command.sh`
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+Ancak, bu iş akışı `-stub-run` ile çalıştırırsak, `docker` profili olmadan bile hata üretmeyecektir:
+
+```bash
+nextflow run missing_software_with_stub.nf -stub-run
+```
+
+??? success "Komut çıktısı"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `missing_software_with_stub.nf` [astonishing_shockley] DSL2 - revision: f1f4f05d7d
+
+    executor >  local (3)
+    [b5/2517a3] PROCESS_FILES (3) | 3 of 3 ✔
+    ```
+
+#### Kodu kontrol edin
+
+`missing_software_with_stub.nf` dosyasını inceleyelim:
+
+```groovy title="missing_software.nf (stub ile)" hl_lines="16-19" linenums="3"
+process PROCESS_FILES {
+
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+
+    input:
+    val sample_name
+
+    output:
+    path "${sample_name}_output.txt"
+
+    script:
+    """
+    cowpy ${sample_name} > ${sample_name}_output.txt
+    """
+
+    stub:
+    """
+    touch ${sample_name}_output.txt
+    """
+}
+```
+
+`missing_software.nf` dosyasına göre, bu süreç, Nextflow stub modunda çalıştırıldığında `script:` içinde belirtilen yerine kullanılacak bir komut belirten bir `stub:` yönergesine sahiptir.
+
+Burada kullandığımız `touch` komutu herhangi bir yazılıma veya uygun girdilere bağlı değildir ve tüm durumlarda çalışacaktır, bu da süreç iç yapıları hakkında endişelenmeden iş akışı mantığında hata ayıklamamıza olanak tanır.
+
+**Stub çalıştırma şunlarda hata ayıklamaya yardımcı olur:**
+
+- Kanal yapısı ve veri akışı
+- Süreç bağlantıları ve bağımlılıkları
+- Parametre yayılımı
+- Yazılım bağımlılıkları olmadan iş akışı mantığı
+
+### 4.4. Sistematik Hata Ayıklama Yaklaşımı
+
+Artık bireysel hata ayıklama tekniklerini öğrendiğinize göre - trace dosyalarından ve çalışma dizinlerinden önizleme moduna, stub çalıştırmaya ve kaynak izlemeye kadar - bunları sistematik bir metodolojide birleştirelim. Yapılandırılmış bir yaklaşıma sahip olmak, karmaşık hatalar tarafından bunalmaktan kaçınmanızı ve önemli ipuçlarını kaçırmamanızı sağlar.
+
+Bu metodoloji, öğrendiğimiz tüm araçları verimli bir iş akışında birleştirir:
+
+**Dört Aşamalı Hata Ayıklama Yöntemi:**
+
+**Aşama 1: Sözdizimi Hatası Çözümü (5 dakika)**
+
+1. VSCode veya IDE'nizde kırmızı alt çizgileri kontrol edin
+2. Sözdizimi sorunlarını belirlemek için `nextflow run workflow.nf -preview` çalıştırın
+3. Tüm sözdizimi hatalarını düzeltin (eksik parantezler, sondaki virgüller, vb.)
+4. Devam etmeden önce iş akışının başarıyla ayrıştırıldığından emin olun
+
+**Aşama 2: Hızlı Değerlendirme (5 dakika)**
+
+1. Çalışma zamanı hata mesajlarını dikkatlice okuyun
+2. Bunun bir çalışma zamanı, mantık veya kaynak hatası olup olmadığını kontrol edin
+3. Temel iş akışı mantığını test etmek için önizleme modunu kullanın
+
+**Aşama 3: Ayrıntılı Araştırma (15-30 dakika)**
+
+1. Başarısız görevin çalışma dizinini bulun
+2. Log dosyalarını inceleyin
+3. Kanalları incelemek için `.view()` operatörleri ekleyin
+4. Yürütme olmadan iş akışı mantığını test etmek için `-stub-run` kullanın
+
+**Aşama 4: Düzeltme ve Doğrulama (15 dakika)**
+
+1. Minimal hedefli düzeltmeler yapın
+2. Resume ile test edin: `nextflow run workflow.nf -resume`
+3. Tam iş akışı yürütmesini doğrulayın
+
+!!! tip "Verimli Hata Ayıklama için Resume Kullanımı"
+
+    Bir sorunu belirlediğinizde, iş akışınızın başarılı kısımlarını yeniden çalıştırarak zaman kaybetmeden düzeltmelerinizi test etmek için verimli bir yola ihtiyacınız vardır. Nextflow'un `-resume` işlevselliği hata ayıklama için paha biçilmezdir.
+
+    [Hello Nextflow](../hello_nextflow/) üzerinde çalıştıysanız `-resume` ile karşılaşmış olacaksınız ve sorun sürecinizden önceki süreçler çalışırken beklerken kendinizi kurtarmak için hata ayıklarken bundan iyi kullanım yapmanız önemlidir.
+
+    **Resume hata ayıklama stratejisi:**
+
+    1. Başarısızlığa kadar iş akışını çalıştırın
+    2. Başarısız görev için çalışma dizinini inceleyin
+    3. Belirli sorunu düzeltin
+    4. Yalnızca düzeltmeyi test etmek için resume edin
+    5. İş akışı tamamlanana kadar tekrarlayın
+
+#### Hata Ayıklama Yapılandırma Profili
+
+Bu sistematik yaklaşımı daha da verimli hale getirmek için, ihtiyacınız olan tüm araçları otomatik olarak etkinleştiren özel bir hata ayıklama yapılandırması oluşturabilirsiniz:
+
+```groovy title="nextflow.config (debug profili)" linenums="1"
+profiles {
+    debug {
+        process {
+            debug = true
+            cleanup = false
+
+            // Hata ayıklama için muhafazakar kaynaklar
+            maxForks = 1
+            memory = '2.GB'
+            cpus = 1
+        }
+    }
+}
+```
+
+Ardından pipeline'ı bu profil etkinleştirilmiş olarak çalıştırabilirsiniz:
+
+```bash
+nextflow run workflow.nf -profile debug
+```
+
+Bu profil gerçek zamanlı çıktıyı etkinleştirir, çalışma dizinlerini korur ve daha kolay hata ayıklama için paralelleştirmeyi sınırlar.
+
+### 4.5. Pratik Hata Ayıklama Alıştırması
+
+Şimdi sistematik hata ayıklama yaklaşımını pratiğe dökme zamanı. `buggy_workflow.nf` iş akışı, gerçek dünya geliştirmede karşılaşacağınız sorun türlerini temsil eden birkaç yaygın hata içerir.
+
+!!! exercise
+
+    `buggy_workflow.nf` içindeki tüm hataları belirlemek ve düzeltmek için sistematik hata ayıklama yaklaşımını kullanın. Bu iş akışı bir CSV dosyasından örnek verileri işlemeye çalışır ancak yaygın hata ayıklama senaryolarını temsil eden birden fazla kasıtlı hata içerir.
+
+    İlk hatayı görmek için iş akışını çalıştırarak başlayın:
+
+    ```bash
+    nextflow run buggy_workflow.nf
+    ```
+
+    ??? failure "Komut çıktısı"
+
+        ```console
+        N E X T F L O W   ~  version 25.10.2
+
+        Launching `buggy_workflow.nf` [wise_ramanujan] DSL2 - revision: d51a8e83fd
+
+        ERROR ~ Range [11, 12) out of bounds for length 11
+
+         -- Check '.nextflow.log' file for details
+        ```
+
+        Bu şifreli hata, `params{}` bloğunda 11-12. satırlar civarında bir ayrıştırma sorunu olduğunu gösterir. v2 ayrıştırıcısı yapısal sorunları erken yakalar.
+
+    Öğrendiğiniz dört aşamalı hata ayıklama yöntemini uygulayın:
+
+    **Aşama 1: Sözdizimi Hatası Çözümü**
+    - VSCode veya IDE'nizde kırmızı alt çizgileri kontrol edin
+    - Sözdizimi sorunlarını belirlemek için `nextflow run workflow.nf -preview` çalıştırın
+    - Tüm sözdizimi hatalarını düzeltin (eksik parantezler, sondaki virgüller, vb.)
+    - Devam etmeden önce iş akışının başarıyla ayrıştırıldığından emin olun
+
+    **Aşama 2: Hızlı Değerlendirme**
+    - Çalışma zamanı hata mesajlarını dikkatlice okuyun
+    - Hataların çalışma zamanı, mantık veya kaynakla ilgili olup olmadığını belirleyin
+    - Temel iş akışı mantığını test etmek için `-preview` modunu kullanın
+
+    **Aşama 3: Ayrıntılı Araştırma**
+    - Başarısız görevler için çalışma dizinlerini inceleyin
+    - Kanalları incelemek için `.view()` operatörleri ekleyin
+    - Çalışma dizinlerindeki log dosyalarını kontrol edin
+    - Yürütme olmadan iş akışı mantığını test etmek için `-stub-run` kullanın
+
+    **Aşama 4: Düzeltme ve Doğrulama**
+    - Hedefli düzeltmeler yapın
+    - Düzeltmeleri verimli bir şekilde test etmek için `-resume` kullanın
+    - Tam iş akışı yürütmesini doğrulayın
+
+    **Emrinizde Hata Ayıklama Araçları:**
+    ```bash
+    # Sözdizimi kontrolü için önizleme modu
+    nextflow run buggy_workflow.nf -preview
+
+    # Ayrıntılı çıktı için debug profili
+    nextflow run buggy_workflow.nf -profile debug
+
+    # Mantık testi için stub çalıştırma
+    nextflow run buggy_workflow.nf -stub-run
+
+    # Düzeltmelerden sonra resume
+    nextflow run buggy_workflow.nf -resume
+    ```
+
+    ??? solution
+        `buggy_workflow.nf`, tüm ana hata ayıklama kategorilerini kapsayan 9 veya 10 farklı hata içerir (nasıl saydığınıza bağlı olarak). İşte her hatanın sistematik bir dökümü ve nasıl düzeltileceği
+
+        Şu sözdizimi hatalarıyla başlayalım:
+
+        **Hata 1: Sözdizimi Hatası - Sondaki Virgül**
+        ```groovy linenums="21"
+        output:
+            path "${sample_id}_result.txt",  // HATA: Sondaki virgül
+        ```
+        **Düzeltme:** Sondaki virgülü kaldırın
+        ```groovy linenums="21"
+        output:
+            path "${sample_id}_result.txt"
+        ```
+
+        **Hata 2: Sözdizimi Hatası - Eksik Kapatan Parantez**
+        ```groovy linenums="24"
+        script:
+        """
+        echo "Processing: ${sample}"
+        cat ${input_file} > ${sample}_result.txt
+        """
+        // HATA: processFiles süreci için eksik kapatan parantez
+        ```
+        **Düzeltme:** Eksik kapatan parantezi ekleyin
+        ```groovy linenums="29"
+        """
+        echo "Processing: ${sample_id}"
+        cat ${input_file} > ${sample_id}_result.txt
+        """
+        }  // Eksik kapatan parantezi ekle
+        ```
+
+        **Hata 3: Değişken Adı Hatası**
+        ```groovy linenums="26"
+        echo "Processing: ${sample}"     // HATA: sample_id olmalı
+        cat ${input_file} > ${sample}_result.txt  // HATA: sample_id olmalı
+        ```
+        **Düzeltme:** Doğru girdi değişken adını kullanın
+        ```groovy linenums="26"
+        echo "Processing: ${sample_id}"
+        cat ${input_file} > ${sample_id}_result.txt
+        ```
+
+        **Hata 4: Tanımsız Değişken Hatası**
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(sample_ids)  // HATA: sample_ids tanımsız
+        ```
+        **Düzeltme:** Doğru kanalı kullanın ve örnek ID'lerini çıkarın
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(input_ch)
+        ```
+
+        Bu noktada iş akışı çalışacaktır, ancak hala hatalar alacağız (örneğin `processFiles` içinde `Path value cannot be null`), kötü kanal yapısından kaynaklanıyor.
+
+        **Hata 5: Kanal Yapısı Hatası - Yanlış Map Çıktısı**
+        ```groovy linenums="83"
+        .map { row -> row.sample_id }  // HATA: processFiles demet bekliyor
+        ```
+        **Düzeltme:** processFiles'ın beklediği demet yapısını döndürün
+        ```groovy linenums="83"
+        .map { row -> [row.sample_id, file(row.fastq_path)] }
+        ```
+
+        Ancak bu, yukarıdaki `heavyProcess()` çalıştırma düzeltmemizi bozacaktır, bu nedenle yalnızca örnek ID'lerini o sürece geçirmek için bir map kullanmamız gerekecektir:
+
+        **Hata 6: heavyProcess için kötü kanal yapısı**
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(input_ch)  // HATA: input_ch şimdi yayın başına 2 öğeye sahip- heavyProcess yalnızca 1'e (ilkine) ihtiyaç duyuyor
+        ```
+        **Düzeltme:** Doğru kanalı kullanın ve örnek ID'lerini çıkarın
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(input_ch.map{it[0]})
+        ```
+
+        Şimdi biraz daha ilerliyoruz ancak `No such variable: i` hakkında bir hata alıyoruz, çünkü bir Bash değişkenini kaçırmadık.
+
+        **Hata 7: Bash Değişkeni Kaçırma Hatası**
+        ```groovy linenums="48"
+        echo "Heavy computation $i for ${sample_id}"  // HATA: $i kaçırılmamış
+        ```
+        **Düzeltme:** Bash değişkenini kaçırın
+        ```groovy linenums="48"
+        echo "Heavy computation \${i} for ${sample_id}"
+        ```
+
+        Şimdi `Process exceeded running time limit (1ms)` alıyoruz, bu yüzden ilgili süreç için çalışma zamanı sınırını düzeltiyoruz:
+
+        **Hata 8: Kaynak Yapılandırma Hatası**
+        ```groovy linenums="36"
+        time '1 ms'  // HATA: Gerçekçi olmayan zaman sınırı
+        ```
+        **Düzeltme:** Gerçekçi bir zaman sınırına yükseltin
+        ```groovy linenums="36"
+        time '100 s'
+        ```
+
+        Sonra çözülecek bir `Missing output file(s)` hatamız var:
+
+        **Hata 9: Çıktı Dosya Adı Uyumsuzluğu**
+        ```groovy linenums="49"
+        done > ${sample_id}.txt  // HATA: Yanlış dosya adı, çıktı bildirimiyle eşleşmeli
+        ```
+        **Düzeltme:** Çıktı bildirimiyle eşleştirin
+        ```groovy linenums="49"
+        done > ${sample_id}_heavy.txt
+        ```
+
+        İlk iki süreç çalıştı, ancak üçüncüsü çalışmadı.
+
+        **Hata 10: Çıktı Dosya Adı Uyumsuzluğu**
+        ```groovy linenums="88"
+        file_ch = channel.fromPath("*.txt") // Hata: bir süreçten değil pwd'den girdi almaya çalışıyor
+        handleFiles(file_ch)
+        ```
+        **Düzeltme:** Önceki süreçten çıktıyı alın
+        ```groovy linenums="88"
+        handleFiles(heavyProcess.out)
+        ```
+
+        Bununla, tüm iş akışı çalışmalıdır.
+
+        **Tam Düzeltilmiş İş Akışı:**
+        ```groovy linenums="1"
+        #!/usr/bin/env nextflow
+
+        /*
+        * Hata ayıklama alıştırmaları için hatalı iş akışı
+        * Bu iş akışı öğrenme amaçlı birkaç kasıtlı hata içerir
+        */
+
+        params{
+            // Eksik doğrulama ile parametreler
+            input: Path = 'data/sample_data.csv'
+            output: String = 'results'
+        }
+
+        /*
+        * Girdi/çıktı uyumsuzluğu olan süreç
+        */
+        process processFiles {
+            publishDir "${params.output}/processed", mode: 'copy'
+
+            input:
+                tuple val(sample_id), path(input_file)
+
+            output:
+                path "${sample_id}_result.txt"
+
+            script:
+            """
+            echo "Processing: ${sample_id}"
+            cat ${input_file} > ${sample_id}_result.txt
+            """
+        }
+
+        /*
+        * Kaynak sorunları olan süreç
+        */
+        process heavyProcess {
+            publishDir "${params.output}/heavy", mode: 'copy'
+
+            time '100 s'
+
+            input:
+                val sample_id
+
+            output:
+                path "${sample_id}_heavy.txt"
+
+            script:
+            """
+            # Ağır hesaplamayı simüle et
+            for i in {1..1000000}; do
+                echo "Heavy computation \$i for ${sample_id}"
+            done > ${sample_id}_heavy.txt
+            """
+        }
+
+        /*
+        * Dosya işleme sorunları olan süreç
+        */
+        process handleFiles {
+            publishDir "${params.output}/files", mode: 'copy'
+
+            input:
+                path input_file
+
+            output:
+                path "processed_${input_file}"
+
+            script:
+            """
+            if [ -f "${input_file}" ]; then
+                cp ${input_file} processed_${input_file}
+            fi
+            """
+        }
+
+        /*
+        * Kanal sorunları olan ana iş akışı
+        */
+        workflow {
+
+            // Yanlış kullanımlı kanal
+            input_ch = channel
+                .fromPath(params.input)
+                .splitCsv(header: true)
+                .map { row -> [row.sample_id, file(row.fastq_path)] }
+
+            processed_ch = processFiles(input_ch)
+
+            heavy_ch = heavyProcess(input_ch.map{it[0]})
+
+            handleFiles(heavyProcess.out)
+        }
+        ```
+
+**Kapsanan Hata Kategorileri:**
+
+- **Sözdizimi hataları**: Eksik parantezler, sondaki virgüller, tanımsız değişkenler
+- **Kanal yapısı hataları**: Yanlış veri şekilleri, tanımsız kanallar
+- **Süreç hataları**: Çıktı dosya uyumsuzlukları, değişken kaçırma
+- **Kaynak hataları**: Gerçekçi olmayan zaman sınırları
+
+**Anahtar Hata Ayıklama Dersleri:**
+
+1. **Hata mesajlarını dikkatlice okuyun** - genellikle doğrudan soruna işaret ederler
+2. **Sistematik yaklaşımlar kullanın** - bir seferde bir hatayı düzeltin ve `-resume` ile test edin
+3. **Veri akışını anlayın** - kanal yapısı hataları genellikle en incelikli olanlardır
+4. **Çalışma dizinlerini kontrol edin** - süreçler başarısız olduğunda, loglar size tam olarak neyin yanlış gittiğini söyler
+
+---
+
+## Özet
+
+Bu yan görevde, Nextflow iş akışlarında hata ayıklama için bir dizi sistematik teknik öğrendiniz.
+Bu teknikleri kendi çalışmanızda uygulamak, bilgisayarınızla daha az zaman harcamanızı, sorunları daha hızlı çözmenizi ve gelecekteki sorunlardan kendinizi korumanızı sağlayacaktır.
+
+### Anahtar desenler
+
+**1. Sözdizimi hatalarını nasıl belirleyip düzeltirsiniz**:
+
+- Nextflow hata mesajlarını yorumlama ve sorunları bulma
+- Yaygın sözdizimi hataları: eksik parantezler, yanlış anahtar kelimeler, tanımsız değişkenler
+- Nextflow (Groovy) ve Bash değişkenleri arasında ayrım yapma
+- Erken hata tespiti için VS Code uzantı özelliklerini kullanma
+
+```groovy
+// Eksik parantez - IDE'de kırmızı alt çizgilere bakın
+process FOO {
+    script:
+    """
+    echo "hello"
+    """
+// } <-- eksik!
+
+// Yanlış anahtar kelime
+inputs:  // 'input:' olmalı
+
+// Tanımsız değişken - Bash değişkenleri için ters eğik çizgi ile kaçırın
+echo "${undefined_var}"      // Nextflow değişkeni (tanımlı değilse hata)
+echo "\${bash_var}"          // Bash değişkeni (kaçırılmış)
+```
+
+**2. Kanal yapısı sorunlarında nasıl hata ayıklarsınız**:
+
+- Kanal kardinalitesi ve tükenme sorunlarını anlama
+- Kanal içerik yapısı uyumsuzluklarında hata ayıklama
+- Kanal incelemesi için `.view()` operatörlerini kullanma
+- Çıktıdaki köşeli parantezler gibi hata desenlerini tanıma
+
+```groovy
+// Kanal içeriğini incele
+my_channel.view { "Content: $it" }
+
+// Queue'yu value kanalına dönüştür (tükenmeyi önler)
+reference_ch = channel.value('ref.fa')
+// veya
+reference_ch = channel.of('ref.fa').first()
+```
+
+**3. Süreç yürütme sorunlarını nasıl giderirsiniz**:
+
+- Eksik çıktı dosya hatalarını teşhis etme
+- Çıkış kodlarını anlama (eksik yazılım için 127, bellek sorunları için 137)
+- Çalışma dizinlerini ve komut dosyalarını araştırma
+- Kaynakları uygun şekilde yapılandırma
+
+```bash
+# Gerçekte ne yürütüldüğünü kontrol et
+cat work/ab/cdef12/.command.sh
+
+# Hata çıktısını kontrol et
+cat work/ab/cdef12/.command.err
+
+# Çıkış kodu 127 = komut bulunamadı
+# Çıkış kodu 137 = sonlandırıldı (bellek/zaman sınırı)
+```
+
+**4. Nextflow'un yerleşik hata ayıklama araçlarını nasıl kullanırsınız**:
+
+- Önizleme modundan ve gerçek zamanlı hata ayıklamadan yararlanma
+- Mantık testi için stub çalıştırma uygulama
+- Verimli hata ayıklama döngüleri için resume uygulama
+- Dört aşamalı sistematik hata ayıklama metodolojisini takip etme
+
+!!! tip "Hızlı Hata Ayıklama Referansı"
+
+    **Sözdizimi hataları?** → VSCode uyarılarını kontrol edin, `nextflow run workflow.nf -preview` çalıştırın
+
+    **Kanal sorunları?** → İçeriği incelemek için `.view()` kullanın: `my_channel.view()`
+
+    **Süreç başarısızlıkları?** → Çalışma dizini dosyalarını kontrol edin:
+
+    - `.command.sh` - yürütülen script
+    - `.command.err` - hata mesajları
+    - `.exitcode` - çıkış durumu (127 = komut bulunamadı, 137 = sonlandırıldı)
+
+    **Gizemli davranış?** → İş akışı mantığını test etmek için `-stub-run` ile çalıştırın
+
+    **Düzeltmeler yaptınız mı?** → Test ederken zaman kazanmak için `-resume` kullanın: `nextflow run workflow.nf -resume`
+
+---
+
+### Ek kaynaklar
+
+- [Nextflow sorun giderme kılavuzu](https://www.nextflow.io/docs/latest/troubleshooting.html): Resmi sorun giderme belgeleri
+- [Nextflow kanallarını anlama](https://www.nextflow.io/docs/latest/channel.html): Kanal türleri ve davranışına derinlemesine bakış
+- [Süreç yönergeleri referansı](https://www.nextflow.io/docs/latest/process.html#directives): Mevcut tüm süreç yapılandırma seçenekleri
+- [nf-test](https://www.nf-test.com/): Nextflow pipeline'ları için test çerçevesi
+- [Nextflow Slack topluluğu](https://www.nextflow.io/slack-invite.html): Topluluktan yardım alın
+
+Üretim iş akışları için şunları düşünün:
+
+- Ölçekte izleme ve hata ayıklama için [Seqera Platform](https://seqera.io/platform/) kurulumu
+- Tekrarlanabilir yazılım ortamları için [Wave konteynerleri](https://seqera.io/wave/) kullanımı
+
+**Unutmayın:** Etkili hata ayıklama, pratikle gelişen bir beceridir. Burada edindiğiniz sistematik metodoloji ve kapsamlı araç seti, Nextflow geliştirme yolculuğunuz boyunca size iyi hizmet edecektir.
+
+---
+
+## Sırada ne var?
+
+[Yan Görevler menüsüne](./index.md) dönün veya listedeki bir sonraki konuya geçmek için sayfanın sağ altındaki düğmeye tıklayın.

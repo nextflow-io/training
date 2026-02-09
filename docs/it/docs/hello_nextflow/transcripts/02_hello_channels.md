@@ -1,7 +1,5 @@
 # Parte 2: Hello Channels - Trascrizione Video
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [maggiori informazioni e suggerimenti per migliorare](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
-
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -16,7 +14,7 @@
 
 Ciao e bentornati alla Parte 2 di Hello Nextflow. Questo capitolo si chiama Hello Channels.
 
-I canali sono come la colla nella vostra pipeline Nextflow. Sono i pezzi che tengono insieme tutti i diversi processi, che Nextflow usa per passare tutte le informazioni e orchestrare il vostro flusso di lavoro.
+I canali sono come la colla nel vostro flusso di lavoro Nextflow. Sono i pezzi che tengono insieme tutti i diversi processi, che Nextflow usa per passare tutte le informazioni e orchestrare il vostro flusso di lavoro.
 
 C'è un'altra parte relativa ai canali che sono gli operatori. Questi sono fondamentalmente funzioni che possiamo usare sui canali per modificarne i contenuti. Addentriamoci in VS Code e vediamo dove siamo.
 
@@ -30,7 +28,7 @@ Okay, quindi ricordiamo velocemente cosa fa questo script quando eseguiamo quest
 
 ## 1. Fornire input variabili tramite un canale esplicitamente
 
-Va bene. Ma è, è abbastanza semplicistico. Abbiamo una variabile in questo parametro, che va in un processo che viene eseguito una volta, e non scala davvero. E non possiamo dargli molti file diversi da creare qui. Non possiamo dargli molti saluti diversi. Ne abbiamo solo uno.
+Va bene. Ma è abbastanza semplicistico. Abbiamo una variabile in questo parametro, che va in un processo che viene eseguito una volta, e non scala davvero. E non possiamo dargli molti file diversi da creare qui. Non possiamo dargli molti saluti diversi. Ne abbiamo solo uno.
 
 In realtà, Nextflow riguarda tutto lo scaling della vostra analisi. Quindi probabilmente volete che faccia più di una cosa. E lo facciamo con i _canali_.
 
@@ -48,7 +46,7 @@ E lo chiamerò "_greeting_ch"_. Questa è una convenzione per fare "_\_ch"_ in q
 
 E poi dirò uguale, e farò _"channel.of"._
 
-Channel è come lo spazio dei nomi per tutto ciò che riguarda i canali. "c" minuscola se avete usato Nextflow prima. E il _".of"_ è qualcosa chiamato fabbrica di canali, che è fondamentalmente un modo per creare un canale.
+**Channel** è come lo spazio dei nomi per tutto ciò che riguarda i canali. "c" minuscola se avete usato Nextflow prima. E il _".of"_ è qualcosa chiamato fabbrica di canali, che è fondamentalmente un modo per creare un canale.
 
 Ci sono molte fabbriche di canali diverse. Se faccio solo "." qui, potete vedere che VS Code ne suggerisce un sacco, ma _".of"_ è il più semplice e prende solo un input qui.
 
@@ -128,7 +126,7 @@ Questa è un po' una configurazione banale che abbiamo attraversato qui, ma sott
 
 Vale anche la pena notare che quello che abbiamo fatto qui è un po' impratico nelle situazioni di vita reale. Abbiamo preso alcuni dati di input e stiamo usando quei dati, ma stiamo anche nominando il file dopo quei dati, cosa che di solito non potete fare.
 
-Quindi nelle pipeline Nextflow più mature e reali, passerete spesso in giro un oggetto meta con tutti i metadati associati a un dato campione. Potete quindi creare nomi di file dinamici basati su quello, il che è molto più pratico.
+Quindi nei flussi di lavoro Nextflow più maturi e reali, passerete spesso in giro un oggetto meta con tutti i metadati associati a un dato campione. Potete quindi creare nomi di file dinamici basati su quello, il che è molto più pratico.
 
 Se siete interessati a come fare questo con le best practice, c'è una side quest su _training.nextflow.io_, che riguarda specificamente i metadati e le meta map, quindi potete approfondire lì per maggiori dettagli.
 
@@ -138,7 +136,7 @@ Okay. Ora esploreremo un po' come sono strutturati i canali e come differiscono 
 
 Posso usare un array in un canale? Proviamolo. Creerò un array, e l'ho copiato dai documenti, _"greetings_array"_ e _"Hello", "Bonjour"_ e _"Holà"_. E poi lo metterò qui invece delle mie stringhe codificate. Quindi dirò "channel.of" _"greetings_array"_, passando questo array in un canale. Proviamolo.
 
-Tiro su il terminale, ed eseguo la pipeline.
+Tiro su il terminale, ed eseguo il flusso di lavoro.
 
 Okay. Potete vedere che la dichiarazione view qui ha stampato il nostro array come previsto, ma poi tutto questo testo rosso, o non sarà rosso se avete ancora _"-ansi-log"_ spento, ma tutto questo testo rosso ci sta dicendo che qualcosa è andato storto.
 
@@ -172,7 +170,7 @@ Quindi quello che fa questo, perché questo viene eseguito in sequenza, vedrete 
 
 E poi questo canale greeting viene ancora creato, quindi verrà ancora passato al processo. E si spera ora il flusso di lavoro verrà eseguito. Proviamolo.
 
-Fantastico. Quindi prima di tutto è che la pipeline non è andata in crash questa volta. Abbiamo avuto tre processi che sono stati eseguiti correttamente e abbiamo un piccolo segno di spunta. E poi possiamo vedere che le nostre dichiarazioni view hanno funzionato.
+Fantastico. Quindi prima di tutto è che il flusso di lavoro non è andato in crash questa volta. Abbiamo avuto tre processi che sono stati eseguiti correttamente e abbiamo un piccolo segno di spunta. E poi possiamo vedere che le nostre dichiarazioni view hanno funzionato.
 
 Abbiamo prima _flatten_, che è quell'array che abbiamo visto prima dal fallimento, e poi abbiamo tre volte il dopo _flatten_ è stato chiamato dove abbiamo _"Hello", "Bonjour"_, e tutti quegli altri tre elementi separati nell'array, che ora sono come speravamo, tre elementi separati nel canale.
 
@@ -182,7 +180,7 @@ Molto velocemente, vorrei solo menzionare che quando stavo creando fabbriche di 
 
 ## 4. Leggere i valori di input da un file CSV
 
-Okay, come possiamo rendere questo un po' più realistico? Probabilmente non vorrete creare un sacco di codice nella vostra pipeline Nextflow con array codificati. Probabilmente vorrete prendere i dati dall'esterno quando lanciate, e quei dati saranno quasi certamente in file.
+Okay, come possiamo rendere questo un po' più realistico? Probabilmente non vorrete creare un sacco di codice nel vostro flusso di lavoro Nextflow con array codificati. Probabilmente vorrete prendere i dati dall'esterno quando lanciate, e quei dati saranno quasi certamente in file.
 
 Quindi la prossima cosa che faremo è replicare questo, ma invece di prendere i dati da un singolo parametro CLI o da una stringa o array codificati, li prenderemo da un file.
 
@@ -192,13 +190,13 @@ Ora quel parametro non è davvero pronto per essere usato ancora. Stiamo ancora 
 
 E poi possiamo impostare il default se vogliamo, ancora, a un Path. E se guardo in esplora sulla sinistra, potete vedere in questo repository, in questa directory di lavoro, ho una directory chiamata data. Ho un file lì chiamato _"greetings.csv"._
 
-Quindi posso semplicemente impostare il default qui a _"data/greetings.csv"_. Ora, quando eseguo questa pipeline di nuovo senza opzioni da riga di comando, userà questo valore predefinito. Sa che è un path, quindi sa che dovrebbe gestirlo come un path e non una stringa.
+Quindi posso semplicemente impostare il default qui a _"data/greetings.csv"_. Ora, quando eseguo questo flusso di lavoro di nuovo senza opzioni da riga di comando, userà questo valore predefinito. Sa che è un path, quindi sa che dovrebbe gestirlo come un path e non una stringa.
 
 E poi passerà quello in una fabbrica di canali da questo _params.input_ e creerà il nostro canale, che poi verrà usato in questo processo chiamato _sayHello_. Proviamolo.
 
 Okay. Fallito. Non preoccupatevi. Questo era previsto. E se state seguendo il materiale di formazione, vedrete che era previsto anche lì. Vediamo cosa sta succedendo qui.
 
-Ha provato a eseguire la pipeline. Ha provato a eseguire il processo, e ha ottenuto un errore abbastanza simile a quello che abbiamo visto prima.
+Ha provato a eseguire il flusso di lavoro. Ha provato a eseguire il processo, e ha ottenuto un errore abbastanza simile a quello che abbiamo visto prima.
 
 Qui dice: abbiamo provato a eseguire _echo_, ma invece di echeggiare i contenuti di questo file CSV, ha solo echeggiato il path. E potete vedere che è il path assoluto completo qui a questo file CSV.
 
@@ -218,7 +216,7 @@ Quindi dobbiamo analizzare questo file CSV. Dobbiamo disimballarlo, arrivare ai 
 
 Come probabilmente potete dire dal messaggio di log, vogliamo usare _splitCsv_, che è un altro operatore, un altro operatore di canale. Quindi se faccio "_dot" "s"_, e poi potete vedere che è auto-suggerito. Oops, _splitCsv_ e alcune parentesi.
 
-E poi dopo _splitCsv_, metterò un'altra dichiarazione _view_ solo così possiamo vedere come appare dopo. Eseguiamo la pipeline e vediamo cosa abbiamo.
+E poi dopo _splitCsv_, metterò un'altra dichiarazione _view_ solo così possiamo vedere come appare dopo. Eseguiamo il flusso di lavoro e vediamo cosa abbiamo.
 
 Okay. È ancora fallito, ma in un modo nuovo ed eccitante, che è un progresso.
 
@@ -232,7 +230,7 @@ Okay, quindi l'ultima volta che avevamo questo problema, abbiamo usato _flatten_
 
 Posso chiamare queste variabili, qualunque cosa. Quindi lo chiamerò _myarray_ perché non è più davvero un CSV. Proviamo ad eseguirlo di nuovo e vediamo cosa succede con _flatten_.
 
-Quindi questa volta eseguiremo, abbiamo analizzato il CSV in tre oggetti array, e poi l'abbiamo appiattito. E questa volta, è passato. E la pipeline Nextflow è stata eseguita. Tuttavia potete vedere che _flatten_ va davvero in città e appiattisce tutto. E quindi otteniamo tre voci array indipendenti per ogni riga. E quindi ha eseguito il processo tre volte per ogni riga di un CSV. E ora abbiamo un sacco di file di risultati, e 123, 456, e tutti i tipi di cose, non solo quella prima colonna del CSV, che è quello che volevamo davvero.
+Quindi questa volta eseguiremo, abbiamo analizzato il CSV in tre oggetti array, e poi l'abbiamo appiattito. E questa volta, è passato. E il flusso di lavoro Nextflow è stato eseguito. Tuttavia potete vedere che _flatten_ va davvero in città e appiattisce tutto. E quindi otteniamo tre voci array indipendenti per ogni riga. E quindi ha eseguito il processo tre volte per ogni riga di un CSV. E ora abbiamo un sacco di file di risultati, e 123, 456, e tutti i tipi di cose, non solo quella prima colonna del CSV, che è quello che volevamo davvero.
 
 ## 4.3. Usare l'operatore map() per estrarre i saluti
 
@@ -244,9 +242,9 @@ Da solo, non fa nulla. Quindi non vogliamo parentesi normali, vogliamo una closu
 
 Gli array in Nextflow sono zero based, quindi diremo solo il primo elemento, che è row zero. Se volessimo la seconda colonna, potrei essere uno o la terza colonna essere due, e così via. Possiamo restituire quello che vogliamo qui, ma restituirò solo il primo valore.
 
-E ora, possiamo eseguire la pipeline di nuovo e vedere se fa quello che ci aspettiamo.
+E ora, possiamo eseguire il flusso di lavoro di nuovo e vedere se fa quello che ci aspettiamo.
 
-Infatti, dopo _splitCsv_ abbiamo i nostri array, e poi dopo la _map,_ abbiamo le nostre belle stringhe pulite, solo _"Hello", "Bonjour"_ e _"Holà"_. E la pipeline sta ora facendo quello che vogliamo. Fantastico.
+Infatti, dopo _splitCsv_ abbiamo i nostri array, e poi dopo la _map,_ abbiamo le nostre belle stringhe pulite, solo _"Hello", "Bonjour"_ e _"Holà"_. E il flusso di lavoro sta ora facendo quello che vogliamo. Fantastico.
 
 Quindi possiamo sbarazzarci di tutti questi comandi view ora. Non ne abbiamo più bisogno.
 
@@ -256,7 +254,7 @@ Abbiamo finito il nostro tipo di debugging e questo è il codice con cui finiamo
 
 E il processo viene eseguito su ogni elemento nel canale, che è tre. E esegue il processo tre volte, dandogli tre attività. E quei risultati vengono poi pubblicati dal flusso di lavoro, raccolti dall'output del processo. Pubblicati da un flusso di lavoro e salvati nel blocco output in una sottodirectory chiamata _"hello_channels"_.
 
-Piuttosto bello. Stiamo arrivando ora a qualcosa che assomiglia di più a una pipeline Nextflow di vita reale che potreste eseguire per qualche analisi reale.
+Piuttosto bello. Stiamo arrivando ora a qualcosa che assomiglia di più a un flusso di lavoro Nextflow di vita reale che potreste eseguire per qualche analisi reale.
 
 ## Takeaway
 
@@ -264,9 +262,9 @@ Okay. Si spera che ora stiate acquisendo una sensazione di cosa sono i canali e 
 
 I canali, come ho detto all'inizio di questo video, sono la colla di Nextflow. E potete vedere qui che possiamo prendere input diversi e manipolarli e prendere quei dati e poi passarli alla logica del flusso di lavoro downstream.
 
-E questo blocco workflow qui è davvero dove costruite tutta quella parallelizzazione e tutta la logica intelligente, e spiegate a Nextflow come costruire il vostro DAG del flusso di lavoro, e come orchestrare la vostra pipeline.
+E questo blocco workflow qui è davvero dove costruite tutta quella parallelizzazione e tutta la logica intelligente, e spiegate a Nextflow come costruire il vostro DAG del flusso di lavoro, e come orchestrare il vostro flusso di lavoro.
 
-I canali non sono il concetto più facile da capire. Quindi fate una pausa, pensateci un po', magari leggete di nuovo il materiale, e assicuratevi davvero di aver assimilato questi concetti perché questo è la chiave per la vostra comprensione di Nextflow e meglio capite i canali e i diversi operatori di canale e le diverse fabbriche di canali. Più vi divertirete scrivendo Nextflow e più potenti saranno le vostre pipeline.
+I canali non sono il concetto più facile da capire. Quindi fate una pausa, pensateci un po', magari leggete di nuovo il materiale, e assicuratevi davvero di aver assimilato questi concetti perché questo è la chiave per la vostra comprensione di Nextflow e meglio capite i canali e i diversi operatori di canale e le diverse fabbriche di canali. Più vi divertirete scrivendo Nextflow e più potenti saranno i vostri flussi di lavoro.
 
 Questo non è lo stesso della programmazione normale in Python o altri linguaggi. Non stiamo usando dichiarazioni _if_ qui, questa è programmazione di flusso funzionale usando canali e operatori. Quindi è un po' diverso, ma è anche super potente.
 

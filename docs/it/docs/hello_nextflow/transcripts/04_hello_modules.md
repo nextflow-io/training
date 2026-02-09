@@ -50,7 +50,7 @@ Quindi facciamolo ora. Creerò rapidamente un nuovo file di modulo per il second
 
 E poi creerò un nuovo file per collectGreetings.nf. Taglio quello.
 
-Un sacco di tagliare, tagliare e copiare e incollare.
+Un sacco di tagliare e copiare e incollare.
 
 E ora il nostro script principale del flusso di lavoro sembra improvvisamente molto, molto più breve, molto più accessibile e molto più facile da leggere.
 
@@ -62,13 +62,13 @@ Ora, ovviamente, il lato negativo di fare questo è che se avete una pipeline gr
 
 Potete vedere che VS Code capisce cos'è questo processo e mi dà una piccola panoramica di esso quando ci passo sopra, così posso vedere senza dover andare a cercare il codice sorgente, quali sono gli input e gli output, che è tipicamente la cosa più importante quando lo sto usando in un flusso di lavoro.
 
-E anche se tengo premuto command, sono su un Mac, e clicco il nome del processo, apre il file direttamente subito. Lo porta dentro. Quindi posso semplicemente saltare lì senza nemmeno pensare a quali sono i percorsi dei file effettivi. E questo funziona ovunque, posso farlo anche, dove i processi vengono chiamati. Quindi questo rende davvero veloce.
+E anche se tengo premuto command, sono su un Mac, e clicco il nome del processo, apre il file direttamente subito. Lo porta dentro. Quindi posso semplicemente saltare lì senza nemmeno pensare a quali sono i percorsi dei file effettivi. E questo funziona ovunque, posso farlo anche dove i processi vengono chiamati. Quindi questo rende davvero veloce.
 
 ## 4.4. Eseguire il flusso di lavoro
 
 Okay, controlliamo solo che la pipeline si esegua ancora come ci aspettiamo. Quindi apriamo il terminale. Facciamo "nextflow run hello modules", e vediamo se si esegue senza problemi.
 
-Si spera che il punto di tutto questo sia che la pipeline è fondamentalmente invariata, quindi non dovreste, davvero vedere alcun cambiamento da quando l'abbiamo eseguita prima. L'output qui sembra esattamente lo stesso, e potete vedere la nostra directory results con tutti gli stessi file, quindi è fantastico. Nessun cambiamento è buono.
+Si spera che il punto di tutto questo sia che la pipeline è fondamentalmente invariata, quindi non dovreste davvero vedere alcun cambiamento da quando l'abbiamo eseguita prima. L'output qui sembra esattamente lo stesso, e potete vedere la nostra directory results con tutti gli stessi file, quindi è fantastico. Nessun cambiamento è buono.
 
 ## Una nota su nf-core/modules
 

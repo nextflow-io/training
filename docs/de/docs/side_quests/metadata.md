@@ -151,7 +151,7 @@ Da unser Datenblatt im CSV-Format vorliegt, ist dies ein Job für den [`splitCsv
 
 Nimm die folgenden Änderungen vor, um eine `splitCsv()`-Operation zum Channel-Konstruktionscode hinzuzufügen, plus eine `view()`-Operation, um zu überprüfen, dass der Inhalt der Datei korrekt in den Channel geladen wird.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="3" hl_lines="4-5"
     workflow  {
@@ -254,7 +254,7 @@ Wir können den Nextflow-`map`-Operator verwenden, um über jedes Element in uns
 
 Nimm die folgenden Änderungen am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="3" hl_lines="5-7"
     workflow  {
@@ -327,7 +327,7 @@ Wir können das tun, indem wir alle Metadaten in einem Element innerhalb des Tup
 
 Nimm die folgenden Änderungen an der `map`-Operation vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="5" hl_lines="4"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
@@ -415,7 +415,7 @@ Wir stellen dir ein vorgefertigtes Prozessmodul namens `IDENTIFY_LANGUAGE` zur V
 
 Nimm die folgende Änderung am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="1" hl_lines="3"
     #!/usr/bin/env nextflow
@@ -469,7 +469,7 @@ Jetzt, da der Prozess dem Workflow zur Verfügung steht, können wir einen Aufru
 
 Nimm die folgenden Änderungen am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="7-9"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
@@ -546,7 +546,7 @@ Und wir werden dies mit einer [`map`](https://www.nextflow.io/docs/latest/operat
 
 Hier sind die Änderungen, die du am Workflow vornehmen musst:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="13" hl_lines="3-7"
         // Führe langid aus, um die Sprache jeder Begrüßung zu identifizieren
@@ -722,7 +722,7 @@ Versuche es selbst zu schreiben, wenn du bereits weißt, wie man bedingte Anweis
 
 Du solltest am Ende die folgenden Änderungen am Workflow vornehmen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="13" hl_lines="7-19"
         // Führe langid aus, um die Sprache jeder Begrüßung zu identifizieren
@@ -860,7 +860,7 @@ Wir stellen dir ein vorgefertigtes Prozessmodul namens `COWPY` zur Verfügung, d
 
 Nimm die folgende Änderung am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="1" hl_lines="4"
     #!/usr/bin/env nextflow
@@ -936,7 +936,7 @@ Wir können das mit dem [`set`](https://www.nextflow.io/docs/latest/reference/op
 
 Ersetze im Haupt-Workflow den `.view()`-Operator durch `.set { ch_languages }` und füge eine Zeile hinzu, die testet, dass wir uns auf den Channel namentlich beziehen können.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="14" hl_lines="19 21 22"
         // Führe langid aus, um die Sprache jeder Begrüßung zu identifizieren
@@ -1023,7 +1023,7 @@ Unser Channel enthält Tupel, die als `[meta, file]` strukturiert sind, sodass w
 
 Nimm im Haupt-Workflow die folgenden Code-Änderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="34"
         // Temporär: Zugriff auf Datei und Charakter
@@ -1080,7 +1080,7 @@ Jetzt lass uns alles zusammenfügen und tatsächlich den `COWPY`-Prozess auf dem
 
 Nimm im Haupt-Workflow die folgenden Code-Änderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="34"
         // Führe cowpy aus, um ASCII-Art zu generieren
@@ -1132,4 +1132,514 @@ Wenn du ins Ergebnisverzeichnis schaust, solltest du die einzelnen Dateien sehen
     ├── cowpy-guten_tag.txt
     ├── cowpy-hallo.txt
     ├── cowpy-hello.txt
-    ├── cowpy-hola.
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+    ```
+
+    ```text title="results/cowpy-bonjour.txt"
+     _________________
+    / Bonjour         \
+    \ Salut, à demain /
+    -----------------
+      \
+        \
+                      _ _
+          | \__/|  .~    ~.
+          /oo `./      .'
+          {o__,   \    {
+            / .  . )    \
+            `-` '-' \    }
+          .(   _(   )_.'
+          '---.~_ _ _|
+    ```
+
+Dies zeigt, dass wir die Informationen in der Meta-Map verwenden konnten, um den Befehl im zweiten Schritt der Pipeline zu parametrisieren.
+
+Allerdings war, wie oben erwähnt, ein Teil des beteiligten Codes etwas umständlich, da wir Metadaten auspacken mussten, während wir uns noch im Kontext des Workflow-Bodys befanden.
+Dieser Ansatz funktioniert gut für die Verwendung einer kleinen Anzahl von Feldern aus der Meta-Map, würde aber schlecht skalieren, wenn wir viel mehr verwenden wollten.
+
+Es gibt einen anderen Operator namens `multiMap()`, der es uns ermöglicht, dies ein wenig zu optimieren, aber selbst dann ist es nicht ideal.
+
+??? info "(Optional) Alternative Version mit `multiMap()`"
+
+    Falls du dich wunderst, wir konnten nicht einfach eine einzelne `map()`-Operation schreiben, die sowohl die `file` als auch den `character` ausgibt, weil das sie als Tupel zurückgeben würde.
+    Wir mussten zwei separate `map()`-Operationen schreiben, um die `file`- und `character`-Elemente separat an den Prozess zu übergeben.
+
+    Technisch gibt es einen anderen Weg, dies durch eine einzelne Mapping-Operation zu tun, unter Verwendung des `multiMap()`-Operators, der in der Lage ist, mehrere Channels auszugeben.
+    Zum Beispiel könntest du den Aufruf zu `COWPY` oben durch den folgenden Code ersetzen:
+
+    === "Danach"
+
+        ```groovy title="main.nf" linenums="34"
+            // Führe cowpy aus, um ASCII-Art zu generieren
+            COWPY(
+                ch_languages.multiMap { meta, file ->
+                    file: file
+                    character: meta.character
+                }
+            )
+        ```
+
+    === "Vorher"
+
+        ```groovy title="main.nf" linenums="34"
+            // Führe cowpy aus, um ASCII-Art zu generieren
+            COWPY(
+                ch_languages.map { meta, file -> file },
+                ch_languages.map { meta, file -> meta.character }
+            )
+        ```
+
+    Dies produziert genau dasselbe Ergebnis.
+
+In beiden Fällen ist es umständlich, dass wir etwas Auspacken auf Workflow-Ebene machen müssen.
+
+Es wäre besser, wenn wir die gesamte Meta-Map in den Prozess einspeisen und dort auswählen könnten, was wir brauchen.
+
+### 3.3. Übergebe und verwende die gesamte Meta-Map
+
+Der Sinn der Meta-Map ist es schließlich, alle Metadaten zusammen als Bündel zu übergeben.
+Der einzige Grund, warum wir das oben nicht tun konnten, ist, dass der Prozess nicht so eingerichtet ist, dass er eine Meta-Map akzeptiert.
+Aber da wir den Prozesscode kontrollieren, können wir das ändern.
+
+Lass uns den `COWPY`-Prozess modifizieren, um die `[meta, file]`-Tupelstruktur zu akzeptieren, die wir im ersten Prozess verwendet haben, damit wir den Workflow optimieren können.
+
+Zu diesem Zweck müssen wir drei Dinge tun:
+
+1. Die Eingabedefinitionen des `COWPY`-Prozessmoduls modifizieren
+2. Den Prozessbefehl aktualisieren, um die Meta-Map zu verwenden
+3. Den Prozessaufruf im Workflow-Body aktualisieren
+
+Bereit? Los geht's!
+
+#### 3.3.1. Modifiziere die `COWPY`-Modul-Eingabe
+
+Nimm die folgenden Änderungen an der `cowpy.nf`-Moduldatei vor:
+
+=== "Danach"
+
+    ```groovy title="cowpy.nf" linenums="10" hl_lines="2"
+    input:
+    tuple val(meta), path(input_file)
+    ```
+
+=== "Vorher"
+
+    ```groovy title="cowpy.nf" linenums="10" hl_lines="2-3"
+    input:
+    path(input_file)
+    val character
+    ```
+
+Dies ermöglicht es uns, die `[meta, file]`-Tupelstruktur zu verwenden, die wir früher im Tutorial behandelt haben.
+
+Beachte, dass wir die Prozessausgabedefinition nicht aktualisiert haben, um die Meta-Map auszugeben, um das Tutorial übersichtlich zu halten, aber du kannst das gerne selbst als Übung tun, indem du dem Modell des `IDENTIFY_LANGUAGE`-Prozesses folgst.
+
+#### 3.3.2. Aktualisiere den Befehl, um das Meta-Map-Feld zu verwenden
+
+Die gesamte Meta-Map ist jetzt innerhalb des Prozesses verfügbar, sodass wir direkt aus dem Befehlsblock auf die darin enthaltenen Informationen verweisen können.
+
+Nimm die folgenden Änderungen an der `cowpy.nf`-Moduldatei vor:
+
+=== "Danach"
+
+    ```groovy title="cowpy.nf" linenums="16" hl_lines="3"
+    script:
+    """
+    cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+    """
+    ```
+
+=== "Vorher"
+
+    ```groovy title="cowpy.nf" linenums="16" hl_lines="3"
+    script:
+    """
+    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    """
+    ```
+
+Wir haben die Referenz auf den `character`-Wert, der zuvor als eigenständige Eingabe übergeben wurde, durch den Wert ersetzt, der in der Meta-Map gehalten wird, auf den wir mit `meta.character` verweisen.
+
+Jetzt lass uns den Prozessaufruf entsprechend aktualisieren.
+
+#### 3.3.3. Aktualisiere den Prozessaufruf und führe ihn aus
+
+Der Prozess erwartet jetzt, dass seine Eingabe die `[meta, file]`-Tupelstruktur verwendet, was der vorherige Prozess ausgibt, sodass wir einfach den gesamten `ch_languages`-Channel an den `COWPY`-Prozess übergeben können.
+
+Nimm die folgenden Änderungen am Haupt-Workflow vor:
+
+=== "Danach"
+
+    ```groovy title="main.nf" linenums="34" hl_lines="2"
+    // Führe cowpy aus, um ASCII-Art zu generieren
+    COWPY(ch_languages)
+    ```
+
+=== "Vorher"
+
+    ```groovy title="main.nf" linenums="34" hl_lines="3-4"
+    // Führe cowpy aus, um ASCII-Art zu generieren
+    COWPY(
+        ch_languages.map { meta, file -> file },
+        ch_languages.map { meta, file -> meta.character }
+    )
+    ```
+
+Das vereinfacht den Aufruf erheblich!
+
+Lass uns die Ergebnisse der vorherigen Ausführung löschen und es ausführen:
+
+```bash
+rm -r results
+nextflow run main.nf
+```
+
+??? success "Befehlsausgabe"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [wise_sammet] DSL2 - revision: 99797b1e92
+
+    executor >  local (14)
+    [5d/dffd4e] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+    [25/9243df] process > COWPY (7)             [100%] 7 of 7 ✔
+    ```
+
+Wenn du ins Ergebnisverzeichnis schaust, solltest du dieselben Ausgaben wie zuvor sehen, _d.h._ einzelne Dateien, die die ASCII-Art jeder Begrüßung enthalten, gesprochen vom entsprechenden Charakter.
+
+??? abstract "Verzeichnisinhalt"
+
+    ```console
+    ./results/
+    ├── cowpy-bonjour.txt
+    ├── cowpy-ciao.txt
+    ├── cowpy-guten_tag.txt
+    ├── cowpy-hallo.txt
+    ├── cowpy-hello.txt
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+    ```
+
+Dies produziert also dieselben Ergebnisse wie zuvor mit einfacherem Code.
+
+Natürlich setzt dies voraus, dass du in der Lage bist, den Prozesscode zu modifizieren.
+In einigen Fällen musst du dich möglicherweise auf bestehende Prozesse verlassen, die du nicht frei modifizieren kannst, was deine Optionen einschränkt.
+Die gute Nachricht ist, wenn du planst, Module aus dem [nf-core](https://nf-co.re/)-Projekt zu verwenden, dass nf-core-Module alle so eingerichtet sind, dass sie die `[meta, file]`-Tupelstruktur als Standard verwenden.
+
+### 3.4. Fehlerbehebung bei fehlenden erforderlichen Eingaben
+
+Der `character`-Wert ist erforderlich, damit der `COWPY`-Prozess erfolgreich ausgeführt werden kann.
+Wenn wir keinen Standardwert dafür in einer Konfigurationsdatei setzen, MÜSSEN wir einen Wert dafür im Datenblatt angeben.
+
+**Was passiert, wenn wir das nicht tun?**
+Es hängt davon ab, was das Eingabedatenblatt enthält und welche Version des Workflows wir ausführen.
+
+#### 3.4.1. Die Charakterspalte existiert, ist aber leer
+
+Nehmen wir an, wir löschen den Charakterwert für einen der Einträge in unserem Datenblatt, um einen Datenerfassungsfehler zu simulieren:
+
+```csv title="datasheet.csv" linenums="1" hl_lines="2"
+id,character,recording
+sampleA,,/workspaces/training/side-quests/metadata/data/bonjour.txt
+sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
+sampleC,sheep,/workspaces/training/side-quests/metadata/data/hallo.txt
+sampleD,turkey,/workspaces/training/side-quests/metadata/data/hello.txt
+sampleE,stegosaurus,/workspaces/training/side-quests/metadata/data/hola.txt
+sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
+sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
+```
+
+Für beide Versionen des Workflows, die wir oben verwendet haben, wird der `character`-Schlüssel für alle Einträge erstellt, wenn das Datenblatt eingelesen wird, aber für `sampleA` wird der Wert eine leere Zeichenkette sein.
+
+Dies wird einen Fehler verursachen.
+
+??? failure "Befehlsausgabe"
+
+    ```console hl_lines="8 11 16 28"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1
+
+    executor >  local (9)
+    [c1/c5dd4f] process > IDENTIFY_LANGUAGE (7) [ 85%] 6 of 7
+    [d3/b7c415] process > COWPY (2)             [  0%] 0 of 6
+    ERROR ~ Error executing process > 'COWPY (1)'
+
+    Caused by:
+      Process `COWPY (1)` terminated with an error exit status (2)
+
+
+    Command executed:
+
+      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
+
+    Command exit status:
+      2
+
+    Command output:
+      (empty)
+
+    Command error:
+      usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
+                  [-C]
+                  [msg ...]
+      cowpy: error: argument -c/--cowacter: expected one argument
+
+    Work dir:
+      /workspaces/training/side-quests/metadata/work/ca/9d49796612a54dec5ed466063c809b
+
+    Container:
+      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+Wenn Nextflow die `cowpy`-Befehlszeile für diese Probe ausführt, wird `${meta.character}` mit einer leeren Zeichenkette in der `cowpy`-Befehlszeile gefüllt, sodass das `cowpy`-Tool einen Fehler wirft, der besagt, dass kein Wert für das `-c`-Argument angegeben wurde.
+
+#### 3.4.2. Die Charakterspalte existiert nicht im Datenblatt
+
+Nehmen wir jetzt an, wir löschen die `character`-Spalte vollständig aus unserem Datenblatt:
+
+```csv title="datasheet.csv" linenums="1"
+id,recording
+sampleA,/workspaces/training/side-quests/metadata/data/bonjour.txt
+sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
+sampleC,/workspaces/training/side-quests/metadata/data/hallo.txt
+sampleD,/workspaces/training/side-quests/metadata/data/hello.txt
+sampleE,/workspaces/training/side-quests/metadata/data/hola.txt
+sampleF,/workspaces/training/side-quests/metadata/data/salut.txt
+sampleG,/workspaces/training/side-quests/metadata/data/ciao.txt
+```
+
+In diesem Fall wird der `character`-Schlüssel überhaupt nicht erstellt, wenn das Datenblatt eingelesen wird.
+
+##### 3.4.2.1. Wert auf Workflow-Ebene zugegriffen
+
+Wenn wir die Version des Codes verwenden, die wir in Abschnitt 3.2 geschrieben haben, wird Nextflow versuchen, auf den `character`-Schlüssel in der Meta-Map zuzugreifen, BEVOR der `COWPY`-Prozess aufgerufen wird.
+
+Es wird keine Elemente finden, die der Anweisung entsprechen, sodass es `COWPY` überhaupt nicht ausführen wird.
+
+??? success "Befehlsausgabe"
+
+    ```console hl_lines="7"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [desperate_montalcini] DSL2 - revision: 0dfeee3cc1
+
+    executor >  local (7)
+    [1a/df2544] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+    [-        ] process > COWPY                 -
+    ```
+
+Soweit es Nextflow betrifft, lief dieser Workflow erfolgreich!
+Allerdings wird keine der gewünschten Ausgaben produziert.
+
+##### 3.4.2.2. Wert auf Prozessebene zugegriffen
+
+Wenn wir die Version in Abschnitt 3.3 verwenden, wird Nextflow die gesamte Meta-Map an den `COWPY`-Prozess übergeben und versuchen, den Befehl auszuführen.
+
+Dies wird einen Fehler verursachen, aber einen anderen im Vergleich zum ersten Fall.
+
+??? failure "Befehlsausgabe"
+
+    ```console hl_lines="8 11 16"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [jovial_bohr] DSL2 - revision: eaaf375827
+
+    executor >  local (9)
+    [0d/ada9db] process > IDENTIFY_LANGUAGE (5) [ 85%] 6 of 7
+    [06/28065f] process > COWPY (2)             [  0%] 0 of 6
+    ERROR ~ Error executing process > 'COWPY (2)'
+
+    Caused by:
+      Process `COWPY (2)` terminated with an error exit status (1)
+
+
+    Command executed:
+
+      cat guten_tag.txt | cowpy -c null > cowpy-guten_tag.txt
+
+    Command exit status:
+      1
+
+    Command output:
+      (empty)
+
+    Command error:
+      Traceback (most recent call last):
+        File "/opt/conda/bin/cowpy", line 10, in <module>
+          sys.exit(main())
+                  ~~~~^^
+        File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main
+          print(cow(eyes=args.eyes,
+                ~~~^^^^^^^^^^^^^^^^
+                tongue=args.tongue,
+                ^^^^^^^^^^^^^^^^^^^
+                thoughts=args.thoughts
+                ^^^^^^^^^^^^^^^^^^^^^^
+                    ).milk(msg)
+                    ^
+      TypeError: 'str' object is not callable
+
+    Work dir:
+      /workspaces/training/side-quests/metadata/work/06/28065f7d9fd7d22bba084aa941b6d6
+
+    Container:
+      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+Dies geschieht, weil `meta.character` nicht existiert, sodass unser Versuch, darauf zuzugreifen, `null` zurückgibt. Als Ergebnis fügt Nextflow buchstäblich `null` in die Befehlszeile ein, was natürlich vom `cowpy`-Tool nicht erkannt wird.
+
+#### 3.4.3. Lösungen
+
+Abgesehen von der Bereitstellung eines Standardwerts als Teil der Workflow-Konfiguration gibt es zwei Dinge, die wir tun können, um dies robuster zu handhaben:
+
+1. Implementiere Eingabevalidierung in deinem Workflow, um sicherzustellen, dass das Datenblatt alle erforderlichen Informationen enthält. Du findest eine [Einführung in die Eingabevalidierung](../hello_nf-core/05_input_validation.md) im Hello nf-core-Trainingskurs. <!-- TODO (future) pending a proper Validation side quest -->
+
+2. Wenn du sicherstellen möchtest, dass jeder, der dein Prozessmodul verwendet, sofort erforderliche Eingaben identifizieren kann, kannst du auch die erforderliche Metadaten-Eigenschaft zu einer expliziten Eingabe machen.
+
+Hier ist ein Beispiel, wie das funktionieren würde.
+
+Zuerst aktualisiere auf Prozessebene die Eingabedefinition wie folgt:
+
+=== "Danach"
+
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="2"
+        input:
+        tuple val(meta), val(character), path(input_file)
+    ```
+
+=== "Vorher"
+
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="2"
+        input:
+        tuple val(meta), path(input_file)
+    ```
+
+Dann verwende auf Workflow-Ebene eine Mapping-Operation, um die `character`-Eigenschaft aus den Metadaten zu extrahieren und sie zu einer expliziten Komponente des Eingabetupels zu machen:
+
+=== "Danach"
+
+    ```groovy title="main.nf" linenums="37" hl_lines="1"
+        COWPY(ch_languages.map{meta, file -> [meta, meta.character, file]})
+    ```
+
+=== "Vorher"
+
+    ```groovy title="main.nf" linenums="37" hl_lines="1"
+        COWPY(ch_languages)
+    ```
+
+Dieser Ansatz hat den Vorteil, dass er explizit zeigt, dass `character` erforderlich ist, und macht den Prozess einfacher in anderen Kontexten wiederverwendbar.
+
+Dies hebt ein wichtiges Designprinzip hervor:
+
+**Verwende die Meta-Map für optionale, beschreibende Informationen, aber extrahiere erforderliche Werte als explizite Eingaben.**
+
+Die Meta-Map ist ausgezeichnet, um Channel-Strukturen sauber zu halten und willkürliche Channel-Strukturen zu verhindern, aber für obligatorische Elemente, die direkt in einem Prozess referenziert werden, schafft das Extrahieren als explizite Eingaben robusteren und wartbareren Code.
+
+### Fazit
+
+In diesem Abschnitt hast du gelernt, wie man Metadaten nutzt, um die Ausführung eines Prozesses anzupassen, indem man entweder auf Workflow-Ebene oder auf Prozessebene darauf zugreift.
+
+---
+
+## Ergänzende Übung
+
+Wenn du das Verwenden von Meta-Map-Informationen innerhalb eines Prozesses üben möchtest, versuche, andere Informationen aus der Meta-Map wie `lang` und `lang_group` zu verwenden, um anzupassen, wie die Ausgaben benannt und/oder organisiert werden.
+
+Versuche zum Beispiel, den Code zu modifizieren, um dieses Ergebnis zu produzieren:
+
+```console title="Ergebnisverzeichnisinhalt"
+results/
+├── germanic
+│   ├── de-guten_tag.txt
+│   ├── de-hallo.txt
+│   └── en-hello.txt
+└── romance
+    ├── es-hola.txt
+    ├── fr-bonjour.txt
+    ├── fr-salut.txt
+    └── it-ciao.txt
+```
+
+<!-- TODO (future) Provide worked out solution -->
+<!-- the renaming should use the meta inside the process -->
+<!-- the output org should use the meta in the workflow outputs -->
+
+---
+
+## Zusammenfassung
+
+In dieser Side Quest hast du erkundet, wie man effektiv mit Metadaten in Nextflow-Workflows arbeitet.
+
+Dieses Muster, Metadaten explizit und mit den Daten verbunden zu halten, ist eine zentrale Best Practice in Nextflow und bietet mehrere Vorteile gegenüber dem Hardcodieren von Dateiinformationen:
+
+- Dateimetadaten bleiben während des gesamten Workflows mit Dateien verbunden
+- Prozessverhalten kann pro Datei angepasst werden
+- Ausgabeorganisation kann Dateimetadaten widerspiegeln
+- Dateiinformationen können während der Pipeline-Ausführung erweitert werden
+
+Die Anwendung dieses Musters in deiner eigenen Arbeit wird es dir ermöglichen, robuste, wartbare Bioinformatik-Workflows zu erstellen.
+
+### Schlüsselmuster
+
+1.  **Lesen und Strukturieren von Metadaten:** Lesen von CSV-Dateien und Erstellen organisierter Metadaten-Maps, die mit deinen Datendateien verbunden bleiben.
+
+    ```groovy
+    channel.fromPath('datasheet.csv')
+      .splitCsv(header: true)
+      .map { row ->
+          [ [id:row.id, character:row.character], row.recording ]
+      }
+    ```
+
+2.  **Erweitern von Metadaten während des Workflows** Hinzufügen neuer Informationen zu deinen Metadaten, während deine Pipeline fortschreitet, durch Hinzufügen von Prozessausgaben und Ableiten von Werten durch bedingte Logik.
+
+    - Hinzufügen neuer Schlüssel basierend auf Prozessausgabe
+
+    ```groovy
+    .map { meta, file, lang ->
+      [ meta + [lang:lang], file ]
+    }
+    ```
+
+    - Hinzufügen neuer Schlüssel unter Verwendung einer bedingten Klausel
+
+    ```groovy
+    .map{ meta, file ->
+        if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+            lang_group = "germanic"
+        } else if ( meta.lang in ["fr", "es", "it"] ) {
+            lang_group = "romance"
+        } else {
+            lang_group = "unknown"
+        }
+    }
+    ```
+
+3.  **Anpassen des Prozessverhaltens:** Verwendung von Metadaten innerhalb des Prozesses.
+
+    ```groovy
+    cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+    ```
+
+### Zusätzliche Ressourcen
+
+- [map](https://www.nextflow.io/docs/latest/operator.html#map)
+- [stdout](https://www.nextflow.io/docs/latest/process.html#outputs)
+
+---
+
+## Wie geht es weiter?
+
+Kehre zum [Menü der Side Quests](./index.md) zurück oder klicke auf den Button unten rechts auf der Seite, um zum nächsten Thema in der Liste zu gelangen.

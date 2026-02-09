@@ -160,7 +160,7 @@ Se eu fizer _"ls -l results"_, você verá que isso é na verdade um link simbó
 
 ## 2.2. Defina uma localização personalizada
 
-"Results" é o nome padrão para este caminho. Se eu executar o fluxo de trabalho novamente, e desta vez eu faço _traço_ hífen simples, isso é, porque é uma opção central do Nextflow. _" -output-dir **meus** resultados"._ Também poderia apenas fazer _"-o"_ de forma abreviada. Então vai definir um diretório base diferente para onde os arquivos são armazenados e mais uma vez, aqui em _myresults/_, agora temos um _output.txt_.
+"Results" é o nome padrão para este caminho. Se eu executar o fluxo de trabalho novamente, e desta vez eu faço _traço_ hífen simples, isso é, porque é uma opção central do Nextflow. _"-output-dir **meus**resultados"._ Também poderia apenas fazer _"-o"_ de forma abreviada. Então vai definir um diretório base diferente para onde os arquivos são armazenados e mais uma vez, aqui em _myresults/_, agora temos um _output.txt_.
 
 Isso é ótimo, mas provavelmente não queremos todos os arquivos apenas na raiz. Queremos alguma organização, então também podemos criar um subdiretório aqui chamado do que quisermos. Vamos dizer _"path 'hello_world'"_, e eu apenas executo isso novamente. _"nextflow run hello-world.nf"_. Deve ir para o diretório results em um subdiretório e com certeza, agora sob results aqui no topo temos _hello_world/_ e temos _output.txt_.
 

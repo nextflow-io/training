@@ -55,7 +55,7 @@ Pour l'image de conteneur `quote`, vous pouvez soit utiliser celle que vous avez
 
 Vous pouvez trouver une solution à cet exercice dans `containers/solutions/hello-containers-4.1.nf`.
 
-### 1.2. Modifier votre pipeline Nextflow pour lui permettre de s'exécuter en modes `quote` et `sayHello`.
+### 1.2. Modifier votre pipeline Nextflow pour lui permettre de s'exécuter en modes `quote` et `sayHello`
 
 Ajoutez une logique de branchement à votre pipeline pour lui permettre d'accepter des entrées destinées à la fois à `quote` et `sayHello`.
 Voici un exemple d'utilisation d'une instruction `if` dans un workflow Nextflow :

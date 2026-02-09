@@ -10,8 +10,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Se você está tendo dificuldades para começar, ficou travado no meio do caminho ou tem perguntas adicionais, não hesite em entrar em contato!
-Nossa equipe da comunidade está aqui para ajudar, e a comunidade Nextflow em geral é muito ativa, inclusiva e sempre disposta a ajudar.
+Se você está tendo dificuldades para começar, ficou travado no meio do caminho ou tem perguntas adicionais, não hesite em entrar em contato! Nossa equipe da comunidade está aqui para ajudar, e a comunidade Nextflow em geral é muito ativa, inclusiva e sempre disposta a ajudar.
 
 Aqui estão as principais opções disponíveis, dependendo do que você está procurando.
 
@@ -47,7 +46,7 @@ Aqui estão as principais opções disponíveis, dependendo do que você está p
 
     O Seqera AI é um assistente de IA treinado com recursos do Nextflow e nf-core. Ele pode ajudá-lo a fazer debug do seu código, esclarecer conceitos do Nextflow e buscar documentação mais rapidamente. Pense nele como ter um tutor disponível 24 horas por dia, 7 dias por semana, enquanto você trabalha nos cursos.
 
-    [Pergunte ao Seqera AI:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
+    [Pergunte ao Seqera AI:material-arrow-right:](https://seqera.io/ai){ .md-button .md-button--primary .mt-1 }
 
 -   :material-book-open-variant:{ .lg .middle } __Documentação do Nextflow__
 

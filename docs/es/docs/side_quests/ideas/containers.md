@@ -35,7 +35,7 @@ docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quot
 
 Salida:
 
-```console title="Salida"
+```console title="Output"
 Humans are allergic to change. They love to say, 'We've always done it
 this way.' I try to fight that. That's why I have a clock on my wall
 that runs counter-clockwise.
@@ -103,7 +103,7 @@ Ha aprendido dos formas diferentes de obtener una imagen de contenedor para una 
 
 ### ¿Qué sigue?
 
-Tiene todo lo que necesita para continuar con el [siguiente capítulo](./04_hello_genomics.md) de esta serie de entrenamiento.
+Tiene todo lo que necesita para continuar con el [siguiente capítulo](./04_hello_genomics.md) de esta serie de capacitación.
 También puede continuar con un ejercicio opcional para obtener citas sobre pioneros de la computación/biología usando el contenedor `quote` y mostrarlas usando el contenedor `cowsay`.
 
 ---
@@ -111,7 +111,7 @@ También puede continuar con un ejercicio opcional para obtener citas sobre pion
 ## 2. Hacer que la vaca cite científicos famosos
 
 Esta sección contiene algunos ejercicios adicionales, para practicar lo que ha aprendido hasta ahora.
-Hacer estos ejercicios _no es obligatorio_ para comprender las partes posteriores del entrenamiento, pero proporcionan una forma divertida de reforzar su aprendizaje al descubrir cómo hacer que la vaca cite científicos famosos.
+Hacer estos ejercicios _no es obligatorio_ para comprender las partes posteriores de la capacitación, pero proporcionan una forma divertida de reforzar su aprendizaje al descubrir cómo hacer que la vaca cite científicos famosos.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________
@@ -188,4 +188,4 @@ Puede encontrar una solución a este ejercicio en `containers/solutions/hello-co
 
 ¡Celebre, tome un descanso para estirarse y beba algo de agua!
 
-Cuando esté listo, continúe con la Parte 3 de esta serie de entrenamiento para aprender cómo aplicar lo que ha aprendido hasta ahora a un caso de uso de análisis de datos más realista.
+Cuando esté listo, continúe con la Parte 3 de esta serie de capacitación para aprender cómo aplicar lo que ha aprendido hasta ahora a un caso de uso de análisis de datos más realista.

@@ -9,7 +9,7 @@ Créer tout cela à partir de zéro serait très fastidieux, donc la communauté
 
 Nous allons vous montrer comment utiliser ces outils pour créer une structure de pipeline, puis adapter le code du pipeline « régulier » existant sur la structure nf-core.
 
-Si vous n'êtes pas familier avec le pipeline Hello ou si vous avez besoin d'un rappel, consultez [cette page d'information](../info/hello_pipeline.md).
+Si vous n'êtes pas familier·ère avec le pipeline Hello ou si vous avez besoin d'un rappel, consultez [cette page d'information](../info/hello_pipeline.md).
 
 ---
 
@@ -24,7 +24,7 @@ Tout d'abord, nous créons la structure pour le nouveau pipeline.
 ### 1.1. Exécuter l'outil de création de pipeline basé sur un modèle
 
 Commençons par créer un nouveau pipeline avec la commande `nf-core pipelines create`.
-Cela créera une nouvelle structure de pipeline en utilisant le modèle de base nf-core, personnalisé avec un nom de pipeline, une description et un auteur.
+Cela créera une nouvelle structure de pipeline en utilisant le modèle de base nf-core, personnalisé avec un nom de pipeline, une description et un auteur·trice.
 
 ```bash
 nf-core pipelines create
@@ -289,7 +289,7 @@ Ce sont des fonctionnalités optionnelles de Nextflow qui rendent le workflow **
 
 !!! note "Workflows composables en profondeur"
 
-    La [Side Quest Workflows of Workflows](../side_quests/workflows_of_workflows.md) explore la composition de workflows de manière beaucoup plus approfondie, y compris comment composer plusieurs workflows ensemble et gérer des flux de données complexes entre eux. Nous introduisons la composabilité ici car c'est une exigence fondamentale de l'architecture du modèle nf-core, qui utilise des workflows imbriqués pour organiser l'initialisation du pipeline, le workflow d'analyse principal et les tâches de finalisation en composants séparés et réutilisables.
+    La [Quête secondaire Workflows of Workflows](../side_quests/workflows_of_workflows.md) explore la composition de workflows de manière beaucoup plus approfondie, y compris comment composer plusieurs workflows ensemble et gérer des flux de données complexes entre eux. Nous introduisons la composabilité ici car c'est une exigence fondamentale de l'architecture du modèle nf-core, qui utilise des workflows imbriqués pour organiser l'initialisation du pipeline, le workflow d'analyse principal et les tâches de finalisation en composants séparés et réutilisables.
 
 Nous allons devoir intégrer la logique pertinente de notre workflow d'intérêt dans cette structure.
 La première étape pour cela est de rendre notre workflow original composable.
@@ -311,7 +311,7 @@ Pour rappel, nous travaillons avec le workflow présenté dans notre cours de fo
 
 !!! tip "Astuce"
 
-    Si vous n'êtes pas familier avec ce pipeline ou si vous avez besoin d'un rappel, consultez [Le pipeline Hello](../info/hello_pipeline.md).
+    Si vous n'êtes pas familier·ère avec ce pipeline ou si vous avez besoin d'un rappel, consultez [Le pipeline Hello](../info/hello_pipeline.md).
 
 Nous vous fournissons une copie propre et entièrement fonctionnelle du workflow Hello Nextflow terminé dans le répertoire `original-hello` avec ses modules et le fichier CSV par défaut qu'il s'attend à utiliser comme entrée.
 
@@ -1426,4 +1426,9 @@ Et voilà ! Cela peut sembler beaucoup de travail pour accomplir le même résul
 
 ### À retenir
 
-Vous savez comment convertir un pipeline Nextflow ordinaire en un pipeline de style nf-core en utilisant le modèle nf
+Vous savez comment convertir un pipeline Nextflow ordinaire en un pipeline de style nf-core en utilisant le modèle nf-core.
+Dans le cadre de cela, vous avez appris à rendre un workflow composable, et comment identifier les éléments du modèle nf-core qui doivent le plus souvent être adaptés lors du développement d'un pipeline personnalisé de style nf-core.
+
+### Et ensuite ?
+
+Faites une pause, c'était un travail difficile ! Quand vous êtes prêt·e, passez à la [Partie 3 : Utiliser un module nf-core](./03_use_module.md) pour apprendre à exploiter les modules maintenus par la communauté depuis le dépôt nf-core/modules.

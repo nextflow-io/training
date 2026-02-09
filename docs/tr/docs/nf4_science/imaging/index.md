@@ -10,7 +10,7 @@ hide:
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bu eğitim kursu, veri analizi pipeline'larını çalıştırmak ve özelleştirmekle ilgilenen görüntüleme ve uzamsal biyoloji alanındaki araştırmacılar için tasarlanmıştır.
-Molecular Cartography uzamsal transkriptomik verilerini işlemek için kullanılan bir pipeline olan [nf-core/molkart](https://nf-co.re/molkart) kullanarak workflow'ları çalıştırma, düzenleme ve yapılandırma ile ilgili temel Nextflow kavramlarını öğretir.
+Molecular Cartography uzamsal transkriptomik verilerini işlemek için kullanılan bir pipeline olan [nf-core/molkart](https://nf-co.re/molkart) kullanarak iş akışlarını çalıştırma, düzenleme ve yapılandırma ile ilgili temel Nextflow kavramlarını öğretir.
 Burada öğrendiğiniz beceriler herhangi bir Nextflow veya nf-core pipeline'ına aktarılabilir.
 
 Hadi başlayalım! Eğitim ortamını başlatmak için aşağıdaki "Open in GitHub Codespaces" düğmesine tıklayın (tercihen ayrı bir sekmede), ardından yüklenirken okumaya devam edin.
@@ -23,7 +23,7 @@ Bu kursu tamamlayarak, görüntüleme analizi pipeline'larını çalıştırmak 
 
 Bu workshop'un sonunda şunları yapabileceksiniz:
 
-- Bir Nextflow workflow'unu yerel olarak başlatmak ve yürütmeyi izlemek
+- Bir Nextflow iş akışını yerel olarak başlatmak ve yürütmeyi izlemek
 - Nextflow tarafından oluşturulan çıktıları (sonuçları) ve log dosyalarını bulmak ve yorumlamak
 - Bir nf-core pipeline'ını test verileri ve özel girdilerle çalıştırmak
 - Profiller ve parametre dosyalarını kullanarak pipeline yürütmesini yapılandırmak

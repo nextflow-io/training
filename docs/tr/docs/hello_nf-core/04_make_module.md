@@ -1043,4 +1043,559 @@ Bu karmaşık görünebilir, bu yüzden üç bileşenin her birine bakalım:
 - **`path:`** Process adına göre çıktı dizinini belirler.
   `task.process` içinde yer alan bir process'in tam adı, iş akışı ve modül import hiyerarşisini içerir (`CORE_HELLO:HELLO:CAT_CAT` gibi).
   `tokenize` işlemleri bu hiyerarşiyi soyarak sadece process adını alır, sonra herhangi bir alt çizgiden önceki ilk kısmı alır (varsa) ve küçük harfe dönüştürür.
-  Bu, `CAT_CAT
+  Bu, `CAT_CAT` sonuçlarının `${params.outdir}/cat/` dizinine yayınlanmasını belirleyen şeydir.
+- **`mode:`** Dosyaların nasıl yayınlanacağını kontrol eder (kopyalama, sembolik bağlantı vb.).
+  Bu, `params.publish_dir_mode` parametresi aracılığıyla yapılandırılabilir.
+- **`saveAs:`** Hangi dosyaların yayınlanacağını filtreler.
+  Bu örnek, `versions.yml` dosyaları için `null` döndürerek onların yayınlanmasını engeller.
+
+Bu, çıktıları organize etmek için tutarlı bir mantık sağlar.
+
+Bir iş hattındaki tüm modüller bu kuralı benimsediğinde çıktı daha da iyi görünür, bu nedenle iş hattınızdaki diğer modüllerden `publishDir` yönergelerini silmekten çekinmeyin.
+Bu varsayılan, nf-core yönergelerini takip etmek için açıkça değiştirmediğimiz modüllere bile uygulanacaktır.
+
+Bununla birlikte, girdilerinizi farklı şekilde organize etmek isteyebilirsiniz ve iyi haber şu ki bunu yapmak kolaydır.
+
+#### 1.5.3. Varsayılanı geçersiz kılma
+
+Varsayılan `publishDir` yönergesini geçersiz kılmak için, `conf/modules.config` dosyasına kendi yönergelerinizi ekleyebilirsiniz.
+
+Örneğin, `withName:` seçicisini kullanarak tek bir process için varsayılanı geçersiz kılabilirsiniz, bu örnekte olduğu gibi 'COWPY' process'i için özel bir `publishDir` yönergesi ekliyoruz.
+
+```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
+process {
+    publishDir = [
+        path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+        mode: params.publish_dir_mode,
+        saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
+    ]
+
+    withName: 'COWPY' {
+        ext.args = { "-c ${params.character}" }
+        publishDir = [
+            path: 'my_custom_results'
+        ]
+    }
+}
+```
+
+Aslında bu değişikliği yapmayacağız, ancak bununla oynamaktan ve hangi mantığı uygulayabileceğinizi görmekten çekinmeyin.
+
+Mesele şu ki, bu sistem size her iki dünyanın da en iyisini sunar: varsayılan olarak tutarlılık ve talep üzerine yapılandırmayı özelleştirme esnekliği.
+
+Özetlemek gerekirse, şunları elde edersiniz:
+
+- **Tek doğruluk kaynağı**: Tüm yayınlama yapılandırması `modules.config` içinde yaşar
+- **Yararlı varsayılan**: Process'ler modül başına yapılandırma olmadan kutudan çıkar çıkmaz çalışır
+- **Kolay özelleştirme**: Yayınlama davranışını modül kodunda değil yapılandırmada geçersiz kılın
+- **Taşınabilir modüller**: Modüller çıktı konumlarını sabit kodlamaz
+
+Bu, mutlaka kullanmayı öğrenmeniz gereken nf-core modül özelliklerinin setini tamamlar, ancak [nf-core modül spesifikasyonlarında](https://nf-co.re/docs/guidelines/components/modules) okuyabileceğiniz başkaları da vardır.
+
+### Özet
+
+Artık yerel modülleri nf-core kurallarını takip edecek şekilde nasıl uyarlayacağınızı biliyorsunuz:
+
+- Modüllerinizi metadata demetlerini kabul edecek ve yayacak şekilde tasarlayın;
+- Modül arayüzlerini minimal ve taşınabilir tutmak için `ext.args` kullanın;
+- Yapılandırılabilir, standartlaştırılmış çıktı dosya adlandırması için `ext.prefix` kullanın;
+- Tutarlı bir sonuçlar dizin yapısı için varsayılan merkezileştirilmiş `publishDir` yönergesini benimseyin.
+
+### Sırada ne var?
+
+Modülleri kolay yoldan, şablonlar kullanarak oluşturmak için nf-core'un yerleşik şablon tabanlı araçlarını nasıl kullanacağınızı öğrenin.
+
+---
+
+## 2. nf-core araçlarıyla bir modül oluşturma
+
+Artık nf-core modül desenlerini manuel olarak uygulayarak öğrendiğinize göre, pratikte modülleri nasıl oluşturacağınıza bakalım.
+
+### 2.1. Bir şablondan modül iskeleti oluşturma
+
+İş hatları oluşturmak için var olana benzer şekilde, nf-core projesi, tüm bu desenlerin baştan itibaren yerleşik olduğu bir şablona dayalı olarak düzgün yapılandırılmış modüller oluşturmak için araçlar sağlar.
+
+#### 2.1.1. Modül oluşturma komutunu çalıştırma
+
+`nf-core modules create` komutu, öğrendiğiniz tüm kuralları zaten takip eden bir modül şablonu oluşturur.
+
+Bu komutu çalıştırarak minimal bir şablonla `COWPY` modülünün yeni bir versiyonunu oluşturalım:
+
+```bash
+nf-core modules create --empty-template COWPY
+```
+
+`--empty-template` bayrağı, temel yapıyı görmeyi kolaylaştıran, ekstra kod olmadan temiz bir başlangıç şablonu oluşturur.
+
+Komut etkileşimli olarak çalışır ve kurulum boyunca size rehberlik eder.
+Metadata'yı önceden doldurmak için Bioconda ve bio.tools gibi paket depolarından araç bilgilerini otomatik olarak arar.
+
+Birkaç yapılandırma seçeneği için isteneceksiniz:
+
+- **Yazar bilgisi**: Atıf için GitHub kullanıcı adınız
+- **Kaynak etiketi**: Önceden tanımlanmış bir hesaplama gereksinimleri seti.
+  nf-core projesi, hafif araçlar için `process_single` ve zorlu olanlar için `process_high` gibi standart etiketler sağlar.
+  Bu etiketler, farklı yürütme ortamlarında kaynak tahsisini yönetmeye yardımcı olur.
+- **Metadata gereksinimi**: Modülün bir `meta` map aracılığıyla örneğe özel bilgilere ihtiyacı olup olmadığı (veri işleme modülleri için genellikle evet).
+
+Araç, paket bilgilerini bulma ve yapıyı kurma karmaşıklığını ele alır, aracın belirli mantığını uygulamaya odaklanmanıza olanak tanır.
+
+#### 2.1.2. Modül iskeletini inceleme
+
+Araç, `modules/local/` içinde (veya nf-core/modules deposundaysanız `modules/nf-core/` içinde) tam bir modül yapısı oluşturur:
+
+??? abstract "Dizin içeriği"
+
+    ```console
+    modules/local/cowpy
+    ├── environment.yml
+    ├── main.nf
+    ├── meta.yml
+    └── tests
+        └── main.nf.test
+    ```
+
+Her dosya belirli bir amaca hizmet eder:
+
+- **`main.nf`**: Tüm nf-core desenleri yerleşik olarak process tanımı
+- **`meta.yml`**: Girdileri, çıktıları ve aracı açıklayan modül dokümantasyonu
+- **`environment.yml`**: Bağımlılıklar için Conda ortam spesifikasyonu
+- **`tests/main.nf.test`**: Modülün çalıştığını doğrulamak için nf-test test durumları
+
+!!! tip "Test hakkında daha fazla bilgi edinin"
+
+    Oluşturulan test dosyası, Nextflow iş hatları ve modülleri için bir test çerçevesi olan nf-test kullanır. Bu testleri nasıl yazacağınızı ve çalıştıracağınızı öğrenmek için [nf-test yan görevi](../side_quests/nf-test.md)'ne bakın.
+
+Oluşturulan `main.nf`, az önce öğrendiğiniz tüm desenleri ve bazı ek özellikleri içerir:
+
+```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
+process COWPY {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+        'biocontainers/YOUR-TOOL-HERE' }"
+
+    input:
+    tuple val(meta), path(input)        // Desen 1: Metadata demetleri ✓
+
+    output:
+    tuple val(meta), path("*"), emit: output
+    path "versions.yml"           , emit: versions
+
+    when:
+    task.ext.when == null || task.ext.when
+
+    script:
+    def args = task.ext.args ?: ''                // Desen 2: ext.args ✓
+    def prefix = task.ext.prefix ?: "${meta.id}"  // Desen 3: ext.prefix ✓
+
+    """
+    // Araç komutunuzu buraya ekleyin
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+
+    stub:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    echo $args
+    touch ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+}
+```
+
+Yukarıda manuel olarak uyguladığınız tüm desenlerin zaten orada olduğuna dikkat edin!
+
+Şablon ayrıca birkaç ek nf-core kuralı içerir.
+Bunlardan bazıları kutudan çıkar çıkmaz çalışırken, diğerleri aşağıda açıklandığı gibi doldurmamız gereken yer tutuculardır.
+
+**Olduğu gibi çalışan özellikler:**
+
+- **`tag "$meta.id"`**: Daha kolay takip için loglardaki process adlarına örnek ID'si ekler
+- **`label 'process_single'`**: CPU/bellek gereksinimlerini yapılandırmak için kaynak etiketi
+- **`when:` bloğu**: `task.ext.when` yapılandırması aracılığıyla koşullu yürütmeye izin verir
+
+Bu özellikler zaten işlevseldir ve modülleri daha sürdürülebilir hale getirir.
+
+**Aşağıda özelleştireceğimiz yer tutucular:**
+
+- **`input:` ve `output:` blokları**: Aracımıza uyacak şekilde güncelleyeceğimiz genel bildirimler
+- **`script:` bloğu**: `cowpy` komutunu ekleyeceğimiz bir yorum içerir
+- **`stub:` bloğu**: Doğru çıktıları üretecek şekilde güncelleyeceğimiz şablon
+- **Container ve ortam**: Paket bilgileriyle dolduracağımız yer tutucular
+
+Sonraki bölümler bu özelleştirmeleri tamamlama konusunda size yol gösterir.
+
+### 2.2. Container ve conda ortamını kurma
+
+nf-core yönergeleri, modülün bir parçası olarak hem bir container hem de bir Conda ortamı belirtmemizi gerektirir.
+
+#### 2.2.1. Container
+
+Container için, conda-forge paketleri dahil olmak üzere herhangi bir Conda paketinden otomatik olarak bir container oluşturmak için [Seqera Containers](https://seqera.io/containers/) kullanabilirsiniz.
+Bu durumda daha önce olduğu gibi aynı önceden oluşturulmuş container'ı kullanıyoruz.
+
+Varsayılan kod Docker ve Singularity arasında geçiş yapmayı teklif eder, ancak bu satırı basitleştireceğiz ve yukarıda Seqera Containers'dan aldığımız Docker container'ını belirteceğiz.
+
+=== "Sonra"
+
+```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+process COWPY {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
+```
+
+=== "Önce"
+
+```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+process COWPY {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+        'biocontainers/YOUR-TOOL-HERE' }"
+```
+
+#### 2.2.2. Conda ortamı
+
+Conda ortamı için, modül kodu `conda "${moduleDir}/environment.yml"` belirtir, bu da `environment.yml` dosyasında yapılandırılması gerektiği anlamına gelir.
+
+Modül oluşturma aracı bizi `cowpy` paketini Bioconda'da (biyoinformatik araçları için birincil kanal) bulamadığı konusunda uyardı.
+Ancak, `cowpy` conda-forge'da mevcut, bu nedenle `environment.yml`'yi şu şekilde tamamlayabilirsiniz:
+
+=== "Sonra"
+
+    ```yaml title="modules/local/cowpy/environment.yml"  linenums="1" hl_lines="1 3 5"
+    name: COWPY
+    channels:
+      - conda-forge
+    dependencies:
+      - cowpy=1.1.5
+    ```
+
+=== "Önce"
+
+    ```yaml title="modules/local/cowpy/environment.yml" linenums="1"
+    ---
+    # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json
+    channels:
+      - conda-forge
+      - bioconda
+    dependencies:
+      # TODO nf-core: List required Conda package(s).
+      #               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
+      #               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
+      - "YOUR-TOOL-HERE"
+    ```
+
+nf-core'a gönderim için varsayılanları daha yakından takip etmemiz gerekir, ancak kendi kullanımımız için kodu bu şekilde basitleştirebiliriz.
+
+!!! tip "Bioconda vs conda-forge paketleri"
+
+    - **Bioconda paketleri**: Otomatik olarak BioContainers oluşturulur, kullanıma hazır container'lar sağlar
+    - **conda-forge paketleri**: Conda tarifinden talep üzerine container'lar oluşturmak için Seqera Containers kullanabilir
+
+    Çoğu biyoinformatik araç Bioconda'dadır, ancak conda-forge araçları için Seqera Containers, konteynerleştirme için kolay bir çözüm sağlar.
+
+### 2.3. `COWPY` mantığını ekleme
+
+Şimdi `COWPY` process'inin ne yaptığına özgü kod öğelerini güncelleyelim: girdiler ve çıktılar ve script bloğu.
+
+#### 2.3.1. Girdiler ve çıktılar
+
+Oluşturulan şablon, belirli aracınız için özelleştirmeniz gereken genel girdi ve çıktı bildirimleri içerir.
+Bölüm 1'deki manuel `COWPY` modülümüze geri bakarak, bunu bir rehber olarak kullanabiliriz.
+
+Girdi ve çıktı bloklarını güncelleyin:
+
+=== "Sonra"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    input:
+    tuple val(meta), path(input_file)
+
+    output:
+    tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+    path "versions.yml"           , emit: versions
+    ```
+
+=== "Önce"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    input:
+    tuple val(meta), path(input)
+
+    output:
+    tuple val(meta), path("*"), emit: output
+    path "versions.yml"           , emit: versions
+    ```
+
+Bu şunları belirtir:
+
+- Girdi dosyası parametre adı (genel `input` yerine `input_file`)
+- Yapılandırılabilir prefix desenini kullanan çıktı dosya adı (joker karakter `*` yerine `${prefix}.txt`)
+- Açıklayıcı bir emit adı (genel `output` yerine `cowpy_output`)
+
+Sözdizimini doğrulamak için Nextflow dil sunucusunu kullanıyorsanız, `${prefix}` kısmı bu aşamada bir hata olarak işaretlenecektir çünkü henüz script bloğuna eklemedik.
+Şimdi buna geçelim.
+
+#### 2.3.2. Script bloğu
+
+Şablon, script bloğunda gerçek araç komutunu eklemeniz gereken bir yorum yer tutucusu sağlar.
+
+Daha önce manuel olarak yazdığımız modüle dayanarak, aşağıdaki düzenlemeleri yapmalıyız:
+
+=== "Sonra"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3 6"
+    script:
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    cat $input_file | cowpy $args > ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+=== "Önce"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="6"
+    script:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    // Araç komutunuzu buraya ekleyin
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+Temel değişiklikler:
+
+- `def prefix`'i sadece `prefix` olarak değiştirin (`def` olmadan) çıktı bloğunda erişilebilir hale getirmek için
+- Yorumu hem `$args` hem de `${prefix}.txt` kullanan gerçek `cowpy` komutuyla değiştirin
+
+`ext.args` ve `ext.prefix` yapılandırmasını `COWPY` process'i için `modules.config` dosyasına ekleme işini zaten yapmamış olsaydık, şimdi yapmamız gerekirdi.
+
+#### 2.3.3. Stub bloğunu uygulama
+
+Nextflow bağlamında, bir [stub](https://www.nextflow.io/docs/latest/process.html#stub) bloğu, gerçek komutu yürütmeden bir iş hattının mantığının hızlı prototiplenmesi ve test edilmesi için kullanılan hafif, sahte bir script tanımlamanıza olanak tanır.
+
+<!-- TODO (gelecek) Bu çok yüzeysel ama gerçekten açıklanmalı veya en azından stub'lar hakkında bir açıklamaya bağlantı verilmeli (referans dokümanı da pek yardımcı değil). Şu anda bu, stub'lar hakkında zaten bilmeyenler için büyük olasılıkla anlamsız olacak. -->
+
+Bu gizemli görünüyorsa çok endişelenmeyin; bunu tamlık için dahil ediyoruz ancak tamamen opsiyonel olduğu için uğraşmak istemiyorsanız stub bölümünü de silebilirsiniz.
+
+=== "Sonra"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    stub:
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    touch ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+=== "Önce"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    stub:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    echo $args
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+Temel değişiklikler:
+
+- Script bloğuyla eşleşmesi için `def prefix`'i sadece `prefix` olarak değiştirin
+- `echo $args` satırını kaldırın (bu sadece şablon yer tutucu koduydu)
+- Stub, script bloğunun ürettiğiyle eşleşen boş bir `${prefix}.txt` dosyası oluşturur
+
+Bu, gerçek aracın çalışmasını beklemeden iş akışı mantığını ve dosya işlemeyi test etmenize olanak tanır.
+
+Ortam kurulumunu (bölüm 2.2), girdileri/çıktıları (bölüm 2.3.1), script bloğunu (bölüm 2.3.2) ve stub bloğunu (bölüm 2.3.3) tamamladıktan sonra, modül test edilmeye hazırdır!
+
+### 2.4. Yeni `COWPY` modülünü değiştirin ve iş hattını çalıştırın
+
+Bu yeni `COWPY` modülü versiyonunu denemek için yapmamız gereken tek şey, `hello.nf` iş akışı dosyasındaki import ifadesini yeni dosyaya işaret edecek şekilde değiştirmektir.
+
+=== "Sonra"
+
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { COWPY                  } from '../modules/local/cowpy/main.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+=== "Önce"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+Hadi test etmek için iş hattını çalıştıralım.
+
+```bash
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+```
+
+??? success "Komut çıktısı"
+
+    ```console hl_lines="33"
+      N E X T F L O W   ~  version 25.04.3
+
+    Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de
+
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2025-12-27_08-23-51
+
+    Core Nextflow options
+      runName                   : prickly_neumann
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [be/0ecc58] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [11/8e082f] CORE_HELLO:HELLO:COWPY (test)       [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
+Bu, daha önce olduğu gibi aynı sonuçları üretir.
+
+### Özet
+
+Artık her şeyi sıfırdan yazmak yerine şablonlar kullanarak modülleri verimli bir şekilde oluşturmak için yerleşik nf-core araçlarını nasıl kullanacağınızı biliyorsunuz.
+
+### Sırada ne var?
+
+Modülleri nf-core'a katkıda bulunmanın faydalarının neler olduğunu ve ilgili ana adımların ve gereksinimlerin neler olduğunu öğrenin.
+
+---
+
+## 3. Modülleri nf-core'a geri katkıda bulunma
+
+[nf-core/modules](https://github.com/nf-core/modules) deposu, iyi test edilmiş, standartlaştırılmış modüllerin katkılarını memnuniyetle karşılar.
+
+### 3.1. Neden katkıda bulunmalı?
+
+Modüllerinizi nf-core'a katkıda bulunmak:
+
+- Araçlarınızı [nf-co.re/modules](https://nf-co.re/modules) adresindeki modüller kataloğu aracılığıyla tüm nf-core topluluğuna kullanılabilir hale getirir
+- Sürekli topluluk bakımı ve iyileştirmeleri sağlar
+- Kod incelemesi ve otomatik test yoluyla kalite güvencesi sağlar
+- Çalışmanıza görünürlük ve tanınma kazandırır
+
+### 3.2. Katkıda bulunanın kontrol listesi
+
+nf-core'a bir modül katkıda bulunmak için aşağıdaki adımlardan geçmeniz gerekecek:
+
+1. [nf-co.re/modules](https://nf-co.re/modules) adresinde zaten var olup olmadığını kontrol edin
+2. [nf-core/modules](https://github.com/nf-core/modules) deposunu fork edin
+3. Şablonu oluşturmak için `nf-core modules create` kullanın
+4. Modül mantığını ve testleri doldurun
+5. `nf-core modules test tool/subtool` ile test edin
+6. `nf-core modules lint tool/subtool` ile lint yapın
+7. Bir pull request gönderin
+
+Ayrıntılı talimatlar için [nf-core bileşenleri eğitimine](https://nf-co.re/docs/tutorials/nf-core_components/components) bakın.
+
+### 3.3. Kaynaklar
+
+- **Bileşenler eğitimi**: [Modül oluşturma ve katkıda bulunma için tam rehber](https://nf-co.re/docs/tutorials/nf-core_components/components)
+- **Modül spesifikasyonları**: [Teknik gereksinimler ve yönergeler](https://nf-co.re/docs/guidelines/components/modules)
+- **Topluluk desteği**: [nf-core Slack](https://nf-co.re/join) - `#modules` kanalına katılın
+
+### Özet
+
+Artık nf-core modüllerinin nasıl oluşturulacağını biliyorsunuz! Modülleri taşınabilir ve sürdürülebilir kılan dört temel deseni öğrendiniz:
+
+- **Metadata demetleri** metadata'yı iş akışı boyunca yayar
+- **`ext.args`** opsiyonel argümanları yapılandırma yoluyla ele alarak modül arayüzlerini basitleştirir
+- **`ext.prefix`** çıktı dosya adlandırmasını standartlaştırır
+- **Merkezileştirilmiş yayınlama** modüllerde sabit kodlanmış yerine `modules.config` içinde yapılandırılan `publishDir` aracılığıyla
+
+`COWPY`'yi adım adım dönüştürerek, bu desenlerin derin bir anlayışını geliştirdiniz, bu da sizi nf-core modülleriyle çalışmak, hata ayıklamak ve oluşturmak için donanımlı hale getirdi.
+Pratikte, bu desenlerin baştan itibaren yerleşik olduğu düzgün yapılandırılmış modüller oluşturmak için `nf-core modules create` kullanacaksınız.
+
+Son olarak, modülleri nf-core topluluğuna nasıl katkıda bulunacağınızı öğrendiniz, araçları dünya çapındaki araştırmacılara kullanılabilir hale getirirken sürekli topluluk bakımından faydalanıyorsunuz.
+
+### Sırada ne var?
+
+Hazır olduğunuzda, iş hattınıza şema tabanlı girdi doğrulamasının nasıl ekleneceğini öğrenmek için [Bölüm 5: Girdi doğrulama](./05_input_validation.md) kısmına devam edin.

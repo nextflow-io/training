@@ -16,9 +16,9 @@
 
 Bonjour et bienvenue dans la Partie 2 de Hello Nextflow. Ce chapitre s'appelle Hello Channels.
 
-Les canaux sont comme la colle de votre pipeline Nextflow. Ce sont les éléments qui maintiennent ensemble tous les différents processus, que Nextflow utilise pour faire circuler toutes les informations et orchestrer votre workflow.
+Les **canaux** sont comme la colle de votre pipeline Nextflow. Ce sont les éléments qui maintiennent ensemble tous les différents **processus**, que Nextflow utilise pour faire circuler toutes les informations et orchestrer votre workflow.
 
-Il y a un autre aspect des canaux qui concerne les opérateurs. Ce sont essentiellement des fonctions que nous pouvons utiliser sur les canaux pour modifier leur contenu. Plongeons dans VS Code et voyons où nous en sommes.
+Il y a un autre aspect des **canaux** qui concerne les **opérateurs**. Ce sont essentiellement des fonctions que nous pouvons utiliser sur les **canaux** pour modifier leur contenu. Plongeons dans VS Code et voyons où nous en sommes.
 
 J'ai beaucoup zoomé sur VS Code, donc pour garder les choses propres et organisées, j'ai supprimé tous les fichiers _.nextflow\*_ et le répertoire _work/_, ainsi que _results/_ et tout ce qui concerne le Chapitre Un. Je repars simplement à zéro ici. Mais ne vous inquiétez pas trop pour ça. Si vous ne voulez pas, vous pouvez laisser ces fichiers. Ils ne causeront aucun problème.
 
@@ -32,13 +32,13 @@ Bon, rappelons-nous rapidement ce que fait ce script quand nous exécutons ce wo
 
 C'est bien. Mais c'est assez simpliste. Nous avons une variable dans ce paramètre, qui entre dans un processus qui s'exécute une fois, et cela ne fait pas vraiment passer à l'échelle. Et nous ne pouvons pas lui donner beaucoup de fichiers différents à créer ici. Nous ne pouvons pas lui donner beaucoup de salutations différentes. Nous n'en avons qu'une.
 
-En réalité, Nextflow concerne la mise à l'échelle de votre analyse. Vous voulez donc probablement qu'il fasse plus d'une chose. Et nous faisons cela avec des _canaux_.
+En réalité, Nextflow concerne la mise à l'échelle de votre analyse. Vous voulez donc probablement qu'il fasse plus d'une chose. Et nous faisons cela avec des **canaux**.
 
-Les canaux sont un concept un peu unique pour de nombreuses personnes qui découvrent Nextflow. Cela vient de ce genre de concepts de programmation fonctionnelle, et il peut falloir un peu de temps pour bien comprendre, mais une fois que ça fait tilt, ils débloquent vraiment la puissance de Nextflow et c'est essentiel à la façon dont vous écrivez vos workflows.
+Les **canaux** sont un concept un peu unique pour de nombreuses personnes qui découvrent Nextflow. Cela vient de ce genre de concepts de programmation fonctionnelle, et il peut falloir un peu de temps pour bien comprendre, mais une fois que ça fait tilt, ils débloquent vraiment la puissance de Nextflow et c'est essentiel à la façon dont vous écrivez vos workflows.
 
 ## 1.1. Créer un canal d'entrée
 
-Commençons par prendre ce script et faire en sorte qu'il utilise un _canal_ au lieu d'un simple _param_.
+Commençons par prendre ce script et faire en sorte qu'il utilise un **canal** au lieu d'un simple **param**.
 
 Nous descendons au workflow, qui est l'endroit où toute notre logique de workflow consiste à assembler les choses. Et je vais aller ici et je vais créer un nouveau canal.
 
@@ -174,7 +174,7 @@ Et ensuite ce canal greeting est toujours créé, donc il va toujours être pass
 
 Parfait. Donc tout d'abord, le pipeline n'a pas planté cette fois. Nous avons eu trois processus qui se sont exécutés correctement et nous avons une petite coche. Et ensuite nous pouvons voir que nos instructions view ont fonctionné.
 
-Nous avons avant _flatten_, qui est ce tableau que nous avons vu avant de l'échec, et ensuite nous avons trois fois le après _flatten_ a été appelé où nous avons _"Hello", "Bonjour"_, et tous ces trois éléments séparés dans le tableau, qui sont maintenant comme nous l'espérions, trois éléments séparés dans le canal.
+Nous avons avant _flatten_, qui est ce tableau que nous avons vu avant de l'échec, et ensuite nous avons trois fois le après _flatten_ a été appelé où nous avons _"Hello", "Bonjour",_ et tous ces trois éléments séparés dans le tableau, qui sont maintenant comme nous l'espérions, trois éléments séparés dans le canal.
 
 Et vous pouvez voir que l'opérateur _view_ a été exécuté trois fois. Et c'est parce que ce canal après _flatten_ a maintenant trois éléments. Et donc l'opérateur est appelé trois fois.
 
@@ -260,15 +260,15 @@ Plutôt cool. Nous arrivons maintenant à quelque chose qui ressemble plus étro
 
 ## À retenir
 
-D'accord. J'espère que vous avez maintenant une idée de ce que sont les canaux et opérateurs Nextflow et comment les opérateurs fonctionnent sur les canaux et comment vous pouvez les créer.
+D'accord. J'espère que vous avez maintenant une idée de ce que sont les **canaux** et **opérateurs** Nextflow et comment les **opérateurs** fonctionnent sur les **canaux** et comment vous pouvez les créer.
 
-Les canaux, comme je l'ai dit au début de cette vidéo, sont la colle de Nextflow. Et vous pouvez voir ici que nous pouvons prendre différentes entrées et les manipuler et prendre ces données et ensuite les passer dans la logique de workflow en aval.
+Les **canaux**, comme je l'ai dit au début de cette vidéo, sont la colle de Nextflow. Et vous pouvez voir ici que nous pouvons prendre différentes entrées et les manipuler et prendre ces données et ensuite les passer dans la logique de workflow en aval.
 
 Et ce bloc workflow ici est vraiment l'endroit où vous construisez toute cette parallélisation et toute la logique intelligente, et expliquez à Nextflow comment construire votre DAG de workflow, et comment orchestrer votre pipeline.
 
-Les canaux ne sont pas le concept le plus facile à comprendre. Donc prenez une pause, réfléchissez un peu à cela, peut-être relisez le matériel, et assurez-vous vraiment que vous avez bien compris ces concepts parce que c'est la clé de votre compréhension de Nextflow et plus vous comprenez les canaux et les différents opérateurs de canaux et les différentes fabriques de canaux, plus vous vous amuserez à écrire Nextflow et plus vos pipelines seront puissants.
+Les **canaux** ne sont pas le concept le plus facile à comprendre. Donc prenez une pause, réfléchissez un peu à cela, peut-être relisez le matériel, et assurez-vous vraiment que vous avez bien compris ces concepts parce que c'est la clé de votre compréhension de Nextflow et plus vous comprenez les **canaux** et les différents **opérateurs** de canaux et les différentes fabriques de canaux, plus vous vous amuserez à écrire Nextflow et plus vos pipelines seront puissants.
 
-Ce n'est pas la même chose que la programmation régulière en Python ou dans d'autres langages. Nous n'utilisons pas d'instructions _if_ ici, c'est de la programmation de flux fonctionnelle utilisant des canaux et des opérateurs. Donc c'est un peu différent, mais c'est aussi super puissant.
+Ce n'est pas la même chose que la programmation régulière en Python ou dans d'autres langages. Nous n'utilisons pas d'instructions _if_ ici, c'est de la programmation de flux fonctionnelle utilisant des **canaux** et des **opérateurs**. Donc c'est un peu différent, mais c'est aussi super puissant.
 
 C'est la fin de ce chapitre. Allez faire une petite pause et je vous verrai dans la prochaine vidéo pour la partie trois où nous allons parcourir Hello Workflow, et parler un peu plus des workflows.
 

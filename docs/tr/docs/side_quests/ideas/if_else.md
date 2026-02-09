@@ -55,10 +55,10 @@ Bu alıştırmaları yapmak, eğitimin sonraki bölümlerini anlamak için _gere
 
 Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.1.nf` dosyasında bulabilirsiniz.
 
-### 1.2. Nextflow pipeline'ınızı `quote` ve `sayHello` modlarında çalışacak şekilde değiştirin.
+### 1.2. Nextflow pipeline'ınızı `quote` ve `sayHello` modlarında çalışacak şekilde değiştirin
 
 Pipeline'ınıza hem `quote` hem de `sayHello` için tasarlanmış girdileri kabul edebilmesi için dallanma mantığı ekleyin.
-İşte bir Nextflow workflow'unda `if` ifadesinin nasıl kullanılacağına dair bir örnek:
+İşte bir Nextflow iş akışında `if` ifadesinin nasıl kullanılacağına dair bir örnek:
 
 ```groovy title="hello-containers.nf"
 workflow {
@@ -78,7 +78,7 @@ workflow {
 
 Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.2.nf` dosyasında bulabilirsiniz.
 
-### Çıkarımlar
+### Özet
 
 Nextflow'da süreçleri çalıştırmak için konteynerlerin nasıl kullanılacağını ve pipeline'larınıza bazı dallanma mantıkları oluşturmayı öğrendiniz!
 

@@ -16,17 +16,17 @@
 
 Hola y bienvenido/a de vuelta a la Parte 2 de Hello Nextflow. Este capítulo se llama Hello Channels.
 
-Los canales son como el pegamento en tu pipeline de Nextflow. Son las piezas que mantienen juntos todos los diferentes procesos, que Nextflow usa para pasar toda la información y orquestar tu workflow.
+Los **canales** son como el pegamento en tu pipeline de Nextflow. Son las piezas que mantienen juntos todos los diferentes **procesos**, que Nextflow usa para pasar toda la información y orquestar tu **workflow**.
 
-Hay otra parte de los canales que son los operadores. Estos son básicamente funciones que podemos usar en los canales para modificar el contenido. Vamos a sumergirnos en VS Code y ver dónde estamos.
+Hay otra parte de los canales que son los **operadores**. Estos son básicamente funciones que podemos usar en los canales para modificar el contenido. Vamos a sumergirnos en VS Code y ver dónde estamos.
 
 Tengo mucho zoom en este VS Code, así que para mantener las cosas limpias y ordenadas, he eliminado todos los archivos _.nextflow\*_ y el directorio _work/_ y el _results/_ y todo del Capítulo Uno. Y solo estoy comenzando de nuevo aquí. Pero no te preocupes mucho por eso. Si no quieres, puedes dejar esos archivos. No causarán ningún problema.
 
 Vamos a comenzar trabajando en _hello-channels.nf_ para este capítulo, y si abro esto, debería verse muy similar al archivo en el que estábamos trabajando anteriormente. Puede ser que diferentes partes estén en diferentes lugares del script, pero todo debería ser básicamente lo mismo.
 
-Una cosa que es diferente es que la ruta en el bloque output aquí ahora es _hello_channels_ para esta parte, lo que significa que los archivos de resultado se almacenarán en un subdirectorio diferente en tus resultados si todavía tienes eso allí. Así que debería ser un lugar agradable y limpio para comenzar sin confundirse con las salidas.
+Una cosa que es diferente es que la ruta en el bloque **output** aquí ahora es _hello_channels_ para esta parte, lo que significa que los archivos de resultado se almacenarán en un subdirectorio diferente en tus resultados si todavía tienes eso allí. Así que debería ser un lugar agradable y limpio para comenzar sin confundirse con las salidas.
 
-Bien, entonces recordemos rápidamente qué hace este script cuando ejecutamos este workflow. Hacemos _"nextflow run hello-channels.nf"_. Podemos hacer _"--input myinput"_, y cuando ejecutamos esto, va a usar este parámetro, params.input, que se pasó como la variable para el proceso sayHello aquí arriba, que va a greeting y se guarda en output.txt. Y podemos ver eso en el archivo de resultados. Genial.
+Bien, entonces recordemos rápidamente qué hace este script cuando ejecutamos este **workflow**. Hacemos _"nextflow run hello-channels.nf"_. Podemos hacer _"--input myinput"_, y cuando ejecutamos esto, va a usar este parámetro, params.input, que se pasó como la variable para el proceso sayHello aquí arriba, que va a greeting y se guarda en output.txt. Y podemos ver eso en el archivo de resultados. Genial.
 
 ## 1. Proporcionar entradas variables a través de un canal explícitamente
 
@@ -34,13 +34,13 @@ Eso está bien. Pero es bastante simplista. Tenemos una variable en este paráme
 
 En realidad, Nextflow se trata de escalar tu análisis. Así que probablemente quieras que haga más de una cosa. Y hacemos eso con _canales_.
 
-Los canales son un concepto único para muchas personas que se inician en Nextflow. Proviene de estos conceptos de programación funcional, y puede tomar un poco de tiempo entenderlo, pero una vez que lo comprendes, realmente desbloquean el poder de Nextflow y es clave para cómo escribes tus workflows.
+Los **canales** son un concepto único para muchas personas que se inician en Nextflow. Proviene de estos conceptos de programación funcional, y puede tomar un poco de tiempo entenderlo, pero una vez que lo comprendes, realmente desbloquean el poder de Nextflow y es clave para cómo escribes tus workflows.
 
 ## 1.1. Crear un canal de entrada
 
 Comencemos tomando este script y haciendo que use un _canal_ en lugar de solo un _param_.
 
-Vamos al workflow, que es donde está toda nuestra lógica de workflow para unir las cosas. Y voy a entrar aquí y voy a crear un nuevo canal.
+Vamos al **workflow**, que es donde está toda nuestra lógica de workflow para unir las cosas. Y voy a entrar aquí y voy a crear un nuevo canal.
 
 Crear un nuevo canal.
 
@@ -48,7 +48,7 @@ Y voy a llamarlo "_greeting_ch"_. Esta es una convención de hacer "_\_ch"_ así
 
 Y luego voy a decir igual, y voy a hacer _"channel.of"._
 
-Channel es como el espacio de nombres para todo lo relacionado con canales. "c" minúscula si has estado usando Nextflow antes. Y el _".of"_ es algo llamado una fábrica de canales, que es básicamente una forma de crear un canal.
+**Channel** es como el espacio de nombres para todo lo relacionado con canales. "c" minúscula si has estado usando Nextflow antes. Y el _".of"_ es algo llamado una fábrica de canales, que es básicamente una forma de crear un canal.
 
 Hay muchas fábricas de canales diferentes. Si solo hago "." aquí, puedes ver que VS Code está sugiriendo muchos de ellos, pero _".of"_ es el más simple y solo toma una entrada aquí.
 
@@ -108,7 +108,7 @@ Sin embargo, esto se ha corregido para un problema con los directorios work, per
 
 ## 2.2. Asegurar que los nombres de archivo de salida serán únicos
 
-Ahora para entender esto, necesitamos volver a nuestro script de workflow. Estamos generando nuestro canal aquí, lo estamos pasando a nuestro proceso, y si miramos el proceso, estamos escribiendo el saludo en un archivo llamado _"output.txt"_ y pasando ese archivo de salida de vuelta al bloque output aquí abajo, publicándolo.
+Ahora para entender esto, necesitamos volver a nuestro script de workflow. Estamos generando nuestro canal aquí, lo estamos pasando a nuestro proceso, y si miramos el proceso, estamos escribiendo el saludo en un archivo llamado _"output.txt"_ y pasando ese archivo de salida de vuelta al bloque **output** aquí abajo, publicándolo.
 
 Sin embargo, cada tres veces que este proceso ejecuta estas tres tareas diferentes. Todas generan un archivo llamado _"output.txt"_, todos esos archivos de salida se publican en el directorio results, y todos se sobrescriben entre sí. Así que cualquier archivo de resultado que obtengas allí es solo el último que se generó, pero destruyó todos los demás. Eso no es realmente lo que queremos.
 
@@ -116,7 +116,7 @@ Sin embargo, cada tres veces que este proceso ejecuta estas tres tareas diferent
 
 Hay diferentes formas de manejar esto, pero la más simple por ahora es simplemente crear diferentes nombres de archivo únicos. Así que cada vez que la tarea se ejecute con un saludo diferente, generará un archivo de salida diferente, que ya no chocará cuando se publique. Y entonces obtendremos tres archivos de salida únicos.
 
-Hacemos esto exactamente de la misma manera. Podemos usar esta variable en cualquier lugar dentro del bloque script y podemos usarla múltiples veces.
+Hacemos esto exactamente de la misma manera. Podemos usar esta variable en cualquier lugar dentro del bloque **script** y podemos usarla múltiples veces.
 
 Así que puedo pegarla aquí, _"$\{greeting\}\_output.txt"_, y luego también necesito pegarla aquí arriba porque ya no estamos creando un archivo llamado _output.txt_. Así que si no actualizo esto, Nextflow fallará con un error diciendo que esperaba un archivo, que nunca fue generado.
 
@@ -144,7 +144,7 @@ Bien. Puedes ver que la declaración view aquí imprimió nuestro array como se 
 
 Ya no tenemos una marca verde bonita aquí. Tenemos una cruz roja, y si solo hago esto un poco más ancho para que sea más fácil de leer, Nextflow nos está diciendo qué salió mal.
 
-Así que dividamos esto sección por sección. Dice que el error fue causado por, y luego la razón del error, que son archivos de salida faltantes. Así que básicamente ese bloque output dijo que este archivo debería crearse y no lo fue. A continuación dice que este es el comando que se ejecutó. Así que esto es básicamente el contenido de ese archivo _.command.sh_. Así es como se veía después de que todas esas variables se pusieron.
+Así que dividamos esto sección por sección. Dice que el error fue causado por, y luego la razón del error, que son archivos de salida faltantes. Así que básicamente ese bloque **output** dijo que este archivo debería crearse y no lo fue. A continuación dice que este es el comando que se ejecutó. Así que esto es básicamente el contenido de ese archivo _.command.sh_. Así es como se veía después de que todas esas variables se pusieron.
 
 Y puedes ver aquí nuestro comando echo en realidad solo se ha ejecutado una vez y ha usado el array completo, pero en una representación de cadena, lo cual no es realmente lo que queríamos.
 
@@ -154,7 +154,7 @@ Bien. Entonces lo que pasó fue. Nextflow simplemente pasó este array completo 
 
 ## 3.2. Usar un operador para transformar el contenido del canal
 
-Así que necesitamos hacer algo con este canal primero, antes de que pueda ser usado. Y esto está preparando el escenario para usar operadores, que son funciones especiales que podemos usar en los canales para manipular el contenido del canal.
+Así que necesitamos hacer algo con este canal primero, antes de que pueda ser usado. Y esto está preparando el escenario para usar **operadores**, que son funciones especiales que podemos usar en los canales para manipular el contenido del canal.
 
 En este caso, vamos a usar algo llamado _flatten_. Que pasamos al final del canal aquí. Así que creamos el canal y luego ejecutamos _flatten_. Y de nuevo, si paso el cursor sobre él, me muestra la documentación para este comando directamente en VS Code, lo cual es muy útil. También puedes encontrar toda esta documentación en el sitio web de Nextflow, la documentación.
 
@@ -254,17 +254,17 @@ Así que podemos deshacernos de todos estos comandos view ahora. Ya no los neces
 
 Terminamos nuestra depuración y este es el código con el que terminamos. Tomando nuestro parámetro CLI llamado _input_, que está clasificado como un _Path_. Nextflow encuentra la ruta, la carga y entiende el archivo CSV. Devuelve todas las diferentes filas. Y luego mapeamos solo el primer elemento de esa fila en el canal que nos da el contenido del canal, que se pasa al proceso.
 
-Y el proceso se ejecuta sobre cada elemento en el canal, que son tres. Y ejecuta el proceso tres veces, dándole tres tareas. Y esos resultados se publican desde el workflow, recogidos por la salida del proceso. Publicados desde un workflow y guardados en el bloque output a un subdirectorio llamado _"hello_channels"_.
+Y el proceso se ejecuta sobre cada elemento en el canal, que son tres. Y ejecuta el proceso tres veces, dándole tres tareas. Y esos resultados se publican desde el workflow, recogidos por la salida del proceso. Publicados desde un workflow y guardados en el bloque **output** a un subdirectorio llamado _"hello_channels"_.
 
 Muy genial. Ahora estamos llegando a algo que se parece más a un pipeline de Nextflow de la vida real que podrías ejecutar para algún análisis real.
 
 ## Conclusión
 
-Bien. Con suerte ahora estás teniendo una idea de qué son los canales y operadores de Nextflow y cómo funcionan los operadores en los canales y cómo puedes crearlos.
+Bien. Con suerte ahora estás teniendo una idea de qué son los **canales** y **operadores** de Nextflow y cómo funcionan los operadores en los canales y cómo puedes crearlos.
 
 Los canales, como dije al principio de este video, son el pegamento de Nextflow. Y puedes ver aquí que podemos tomar diferentes entradas y manipularlas y tomar esos datos y luego pasarlos a la lógica del workflow posterior.
 
-Y este bloque workflow aquí es realmente donde construyes toda esa paralelización y toda la lógica inteligente, y explicas a Nextflow cómo construir tu DAG de workflow, y cómo orquestar tu pipeline.
+Y este bloque **workflow** aquí es realmente donde construyes toda esa paralelización y toda la lógica inteligente, y explicas a Nextflow cómo construir tu DAG de workflow, y cómo orquestar tu pipeline.
 
 Los canales no son el concepto más fácil de entender. Así que toma un descanso, piensa un poco sobre esto, tal vez lee el material de nuevo, y realmente asegúrate de que tienes estos conceptos claros porque esto es clave para tu comprensión de Nextflow y cuanto mejor entiendas los canales y los diferentes operadores de canal y las diferentes fábricas de canales. Más divertido tendrás escribiendo Nextflow y más poderosos serán tus pipelines.
 

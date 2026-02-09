@@ -33,7 +33,7 @@ Diese Übungen sind _nicht erforderlich_, um spätere Teile des Trainings zu ver
 ### 1.1. Modifiziere das `hello-containers.nf`-Skript, um einen getQuote-Prozess zu verwenden
 
 Wir haben eine Liste von Computer- und Biologie-Pionieren in der Datei `containers/data/pioneers.csv`.
-Auf hoher Ebene musst du für diese Übung:
+Um diese Übung abzuschließen, musst du:
 
 - Die Standard-`params.input_file` so ändern, dass sie auf die Datei `pioneers.csv` zeigt.
 - Einen `getQuote`-Prozess erstellen, der den `quote`-Container verwendet, um für jede Eingabe ein Zitat abzurufen.
@@ -55,7 +55,7 @@ Für das `quote`-Container-Image kannst du entweder das verwenden, das du selbst
 
 Du findest eine Lösung für diese Übung in `containers/solutions/hello-containers-4.1.nf`.
 
-### 1.2. Modifiziere deine Nextflow-Pipeline, um sie in den Modi `quote` und `sayHello` ausführen zu können.
+### 1.2. Modifiziere deine Nextflow-Pipeline, um sie in den Modi `quote` und `sayHello` ausführen zu können
 
 Füge deiner Pipeline etwas Verzweigungslogik hinzu, um Eingaben sowohl für `quote` als auch für `sayHello` zu akzeptieren.
 Hier ist ein Beispiel, wie du eine `if`-Anweisung in einem Nextflow-Workflow verwenden kannst:
@@ -78,11 +78,11 @@ workflow {
 
 Du findest eine Lösung für diese Übung in `containers/solutions/hello-containers-4.2.nf`.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie du Container in Nextflow verwendest, um Prozesse auszuführen, und wie du Verzweigungslogik in deine Pipelines einbaust!
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Feiere, mach eine Pause und trink etwas Wasser!
 

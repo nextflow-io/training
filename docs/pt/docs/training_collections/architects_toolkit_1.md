@@ -1,4 +1,3 @@
-```markdown
 ---
 title: Kit de Ferramentas do Arquiteto I
 hide:
@@ -42,7 +41,7 @@ Esta coleção consiste em quatro Side Quests que cobrem tópicos complementares
 3. **[Metadata](../../side_quests/metadata)** - Manipulação de metadados para itens em canais Nextflow
 4. **[Splitting and Grouping](../../side_quests/splitting_and_grouping)** - Padrões avançados de processamento de dados
 
-Cada Side Quest é independente e cobre conceitos específicos, mas recomendamos completá-los na ordem listada acima para uma progressão lógica através dos tópicos.
+Cada Side Quest é independente e cobre conceitos independentes, mas recomendamos completá-los na ordem listada acima para uma progressão lógica através dos tópicos.
 
 ## Como usar esta coleção
 
@@ -60,4 +59,3 @@ Uma vez que seu ambiente esteja em execução, trabalhe através da coleção da
 [![Take the survey](https://img.shields.io/badge/Take%20the-Survey-blue?style=flat-square)](https://seqera.typeform.com/to/Q9pc2YKw)
 
 Pronto para começar? Comece com o primeiro módulo acima!
-```

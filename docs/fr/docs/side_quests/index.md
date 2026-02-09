@@ -1,3 +1,9 @@
+---
+title: Quêtes secondaires
+hide:
+  - toc
+---
+
 # Quêtes secondaires
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
@@ -14,7 +20,7 @@ Les prérequis spécifiques de chaque mini-cours varient et sont documentés dan
 Néanmoins, tous supposent une familiarité minimale avec les éléments suivants :
 
 - Expérience avec la ligne de commande
-- Concepts et outils fondamentaux de Nextflow couverts dans le cours de formation pour débutants [Hello Nextflow](../../hello_nextflow/).
+- Concepts et outils fondamentaux de Nextflow couverts dans le cours de formation pour débutant·es [Hello Nextflow](../../hello_nextflow/).
 
 Pour les exigences techniques et la configuration de l'environnement, consultez le mini-cours [Configuration de l'environnement](../../envsetup/).
 

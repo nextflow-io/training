@@ -2,12 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Este curso de entrenamiento está dirigido a investigadores en transcriptómica y campos relacionados que estén interesados en desarrollar o personalizar pipelines de análisis de datos.
+Este curso de capacitación está dirigido a investigadores en transcriptómica y campos relacionados que estén interesados en desarrollar o personalizar pipelines de análisis de datos.
 Se basa en el entrenamiento para principiantes [Hello Nextflow](../../hello_nextflow/) y demuestra cómo usar Nextflow en el contexto específico del análisis de RNAseq masivo.
 
 Específicamente, este curso demuestra cómo implementar un pipeline simple de procesamiento de RNAseq masivo para recortar secuencias adaptadoras, alinear las lecturas a un genoma de referencia y realizar control de calidad (QC) en varias etapas.
 
-¡Comencemos! Haga clic en el botón "Open in GitHub Codespaces" a continuación para iniciar el entorno de entrenamiento (preferiblemente en una pestaña separada), luego continúe leyendo mientras se carga.
+¡Comencemos! Haga clic en el botón "Open in GitHub Codespaces" a continuación para iniciar el entorno de capacitación (preferiblemente en una pestaña separada), luego continúe leyendo mientras se carga.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -21,7 +21,7 @@ Al finalizar este taller, usted será capaz de:
 - Manejar apropiadamente archivos específicos del dominio como FASTQ y recursos de genoma de referencia
 - Manejar datos de secuenciación de extremo simple y extremo pareado
 - Aprovechar el paradigma de flujo de datos de Nextflow para paralelizar el procesamiento de RNAseq por muestra
-- Agregar reportes de QC a través de múltiples pasos y muestras usando operadores de channel relevantes
+- Agregar reportes de QC a través de múltiples pasos y muestras usando operadores de canal relevantes
 
 <!-- TODO
 - Configure pipeline execution and manage and optimize resource allocations

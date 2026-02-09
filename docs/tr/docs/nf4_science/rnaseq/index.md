@@ -24,11 +24,11 @@ Bu kursu tamamlayarak, temel Nextflow kavramlarını ve araçlarını tipik bir 
 
 Bu atölye sonunda şunları yapabileceksiniz:
 
-- Temel RNAseq işleme ve QC yöntemlerini uygulamak için doğrusal bir workflow yazmak
+- Temel RNAseq işleme ve QC yöntemlerini uygulamak için doğrusal bir iş akışı yazmak
 - FASTQ gibi alana özgü dosyaları ve genom referans kaynaklarını uygun şekilde ele almak
 - Tek uçlu ve çift uçlu dizileme verilerini işlemek
 - Nextflow'un dataflow paradigmasından yararlanarak örnek başına RNAseq işlemesini paralelleştirmek
-- İlgili channel operatörlerini kullanarak birden fazla adım ve örnek genelinde QC raporlarını birleştirmek
+- İlgili kanal operatörlerini kullanarak birden fazla adım ve örnek genelinde QC raporlarını birleştirmek
 
 <!-- TODO
 - Configure pipeline execution and manage and optimize resource allocations

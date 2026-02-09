@@ -36,10 +36,10 @@ Zu diesem Zweck arbeiten wir derzeit an einer **Sammlung von [Side Quests](../si
 
 **[Seqera Platform](https://seqera.io/) ist der beste Weg, Nextflow in der Praxis auszuführen.**
 
-Es ist eine cloudbasierte Plattform, die vom Nextflow-Entwicklungsteam entwickelt wurde und die du mit deiner eigenen Recheninfrastruktur (ob lokal, HPC oder Cloud) verbinden kannst, um das Starten und Verwalten deiner Workflows erheblich zu erleichtern sowie deine Daten zu verwalten und Analysen interaktiv in einer Cloud-Umgebung durchzuführen.
+Es ist eine cloudbasierte Plattform, die von den Entwickler\*innen von Nextflow entwickelt wurde und die du mit deiner eigenen Recheninfrastruktur (ob lokal, HPC oder Cloud) verbinden kannst, um das Starten und Verwalten deiner Workflows erheblich zu erleichtern sowie deine Daten zu verwalten und Analysen interaktiv in einer Cloud-Umgebung durchzuführen.
 
 Das Free Tier ist für jeden kostenlos nutzbar (mit Nutzungskontingenten).
-Qualifizierte Akademiker können kostenlosen Zugang auf Pro-Level (ohne Nutzungsbeschränkungen) über das [Academic Program](https://seqera.io/academic/program/) erhalten.
+Qualifizierte Akademiker\*innen können kostenlosen Zugang auf Pro-Level (ohne Nutzungsbeschränkungen) über das [Academic Program](https://seqera.io/academic/program/) erhalten.
 
 Wirf einen Blick auf die [Seqera Platform Tutorials](https://docs.seqera.io/platform/latest/getting-started/quickstart-demo/comm-showcase), um zu sehen, ob dies für dich nützlich sein könnte.
 
@@ -47,4 +47,4 @@ Wirf einen Blick auf die [Seqera Platform Tutorials](https://docs.seqera.io/plat
 
 ### Das war's für jetzt!
 
-**Viel Erfolg mit Nextflow! Zögere nicht, uns im [Community-Forum](https://community.seqera.io/) mitzuteilen, was wir sonst noch tun könnten.**
+**Viel Erfolg auf deiner Nextflow-Reise! Zögere nicht, uns im [Community-Forum](https://community.seqera.io/) mitzuteilen, was wir sonst noch tun könnten, um dir zu helfen.**

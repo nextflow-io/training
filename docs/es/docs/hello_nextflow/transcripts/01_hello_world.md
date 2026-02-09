@@ -160,7 +160,7 @@ Si hago _"ls -l results"_, verás que esto en realidad es un enlace simbólico a
 
 ## 2.2. Establecer una ubicación personalizada
 
-"Results" es el nombre por defecto para esta ruta. Si ejecuto el **workflow** de nuevo, y esta vez hago _dash_ guion simple, esto es, porque es una opción central de Nextflow. _" -output-dir **my** results"._ También podría simplemente hacer _"-o"_ para abreviar. Entonces va a establecer un directorio base diferente para dónde se almacenan los archivos y una vez más, aquí arriba en _myresults/_, ahora tenemos un _output.txt_.
+"Results" es el nombre por defecto para esta ruta. Si ejecuto el **workflow** de nuevo, y esta vez hago _dash_ guion simple, esto es, porque es una opción central de Nextflow. _"-output-dir **my**results"._ También podría simplemente hacer _"-o"_ para abreviar. Entonces va a establecer un directorio base diferente para dónde se almacenan los archivos y una vez más, aquí arriba en _myresults/_, ahora tenemos un _output.txt_.
 
 Eso es genial, pero probablemente no queremos todos los archivos solo en la raíz. Queremos algo de organización, así que también podemos crear un subdirectorio aquí llamado como queramos. Digamos _"path 'hello_world'"_, y simplemente ejecuto esto de nuevo. _"nextflow run hello-world.nf"_. Debería ir al directorio results en un subdirectorio y efectivamente, ahora bajo results aquí en la parte superior tenemos _hello_world/_ y tenemos _output.txt_.
 

@@ -41,7 +41,7 @@ Em alto nível, para completar este exercício você precisará:
 
 Para a imagem de contêiner `quote`, você pode usar a que você mesmo construiu no exercício de aprofundamento anterior ou usar a que você obteve do Seqera Containers.
 
-!!! Hint
+!!! hint "Dica"
 
     Uma boa escolha para o bloco `script` do seu processo getQuote poderia ser:
         ```groovy
@@ -72,7 +72,7 @@ workflow {
 }
 ```
 
-!!! Hint
+!!! hint "Dica"
 
     Você pode usar `new_ch = processName.out` para atribuir um nome ao canal de saída de um processo.
 
@@ -82,7 +82,7 @@ Você pode encontrar uma solução para este exercício em `containers/solutions
 
 Você sabe como usar contêineres no Nextflow para executar processos e como construir alguma lógica de ramificação em seus pipelines!
 
-### Qual é o próximo passo?
+### O que vem a seguir?
 
 Comemore, faça uma pausa para se alongar e beba água!
 
