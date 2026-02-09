@@ -279,7 +279,7 @@ You see the various file attributes printed to the console above.
 ### 1.4. Feed the file to a process
 
 The difference between strings and Path objects becomes critical when you start building actual workflows with processes.
-So far we've verified that Nextflow is now treating out input file as a file, but let's see if we can actually run something on that file in a process.
+So far we've verified that Nextflow is now treating our input file as a file, but let's see if we can actually run something on that file in a process.
 
 #### 1.4.1. Import the process and examine the code
 
