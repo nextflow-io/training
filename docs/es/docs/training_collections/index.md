@@ -1,4 +1,3 @@
-```markdown
 ---
 title: Colecciones de Entrenamiento
 hide:
@@ -28,4 +27,3 @@ Para los requisitos técnicos y la configuración del entorno, consulte el mini-
 
 Estamos trabajando activamente en el desarrollo de Side Quests y Colecciones adicionales.
 Siéntase libre de sugerir temas que considere que tendría sentido cubrir en una Colección publicando en la [sección de Training](https://community.seqera.io/c/training/) del foro de la comunidad.
-```

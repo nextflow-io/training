@@ -972,4 +972,630 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
       runName                   : silly_caravaggio
       containerEngine           : docker
       launchDir                 : /workspaces/training/hello-nf-core/core-hello
-      workDir                   : /worksp
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [db/39978e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [b5/bf6a8d] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [b7/c61842] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [46/5839d6] CORE_HELLO:HELLO:COWPY              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
+현재 작업 디렉토리를 살펴보십시오.
+이제 `core-hello-results`에는 `COWPY` 모듈의 출력도 포함되어 있습니다.
+
+??? abstract "디렉토리 내용"
+
+    ```console hl_lines="4-5"
+    core-hello-results/
+    ├── cat
+    │   └── test.txt
+    ├── cowpy
+    │   └── cowpy-test.txt
+    └── pipeline_info
+        ├── execution_report_2025-12-27_06-16-55.html
+        ├── execution_report_2025-12-27_06-23-13.html
+        ├── execution_report_2025-12-27_06-29-02.html
+        ├── execution_report_2025-12-27_06-35-56.html
+        ├── execution_timeline_2025-12-27_06-16-55.html
+        ├── execution_timeline_2025-12-27_06-23-13.html
+        ├── execution_timeline_2025-12-27_06-29-02.html
+        ├── execution_timeline_2025-12-27_06-35-56.html
+        ├── execution_trace_2025-12-27_06-16-55.txt
+        ├── execution_trace_2025-12-27_06-23-13.txt
+        ├── execution_trace_2025-12-27_06-29-02.txt
+        ├── execution_trace_2025-12-27_06-35-56.txt
+        ├── hello_software_versions.yml
+        ├── params_2025-12-27_06-17-00.json
+        ├── params_2025-12-27_06-23-17.json
+        ├── params_2025-12-27_06-29-07.json
+        ├── params_2025-12-27_06-36-01.json
+        ├── pipeline_dag_2025-12-27_06-16-55.html
+        ├── pipeline_dag_2025-12-27_06-23-13.html
+        ├── pipeline_dag_2025-12-27_06-29-02.html
+        └── pipeline_dag_2025-12-27_06-35-56.html
+    ```
+
+Nextflow가 워크플로와 모듈 이름을 기반으로 이 디렉토리 계층 구조를 생성했습니다.
+
+책임있는 코드는 `conf/modules.config` 파일에 있습니다.
+다음은 nf-core 템플릿의 일부이며 모든 프로세스에 적용되는 기본 `publishDir` 구성입니다:
+
+```groovy
+process {
+    publishDir = [
+        path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+        mode: params.publish_dir_mode,
+        saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
+    ]
+}
+```
+
+복잡해 보일 수 있으므로 세 가지 구성 요소를 살펴봅시다:
+
+- **`path:`** 프로세스 이름을 기반으로 출력 디렉토리를 결정합니다.
+  `task.process`에 포함된 프로세스의 전체 이름에는 워크플로 및 모듈 가져오기 계층 구조(예: `CORE_HELLO:HELLO:CAT_CAT`)가 포함됩니다.
+  `tokenize` 연산은 계층 구조를 제거하여 프로세스 이름만 얻은 다음, 밑줄 앞의 첫 부분을 가져오고(해당되는 경우) 소문자로 변환합니다.
+  이것이 `CAT_CAT`의 결과가 `${params.outdir}/cat/`에 발행되도록 결정하는 요소입니다.
+- **`mode:`** 파일이 발행되는 방식(복사, 심볼릭 링크 등)을 제어합니다.
+  이것은 `params.publish_dir_mode` 매개변수를 통해 구성할 수 있습니다.
+- **`saveAs:`** 어떤 파일을 발행할지 필터링합니다.
+  이 예제는 `versions.yml` 파일에 대해 `null`을 반환하여 발행을 방지합니다.
+
+이것은 출력을 구성하기 위한 일관된 로직을 제공합니다.
+
+파이프라인의 모든 모듈이 이 규칙을 채택할 때 출력은 더 좋아 보이므로, 파이프라인의 다른 모듈에서도 `publishDir` 지시문을 삭제해도 됩니다.
+이 기본값은 nf-core 가이드라인을 따르도록 명시적으로 수정하지 않은 모듈에도 적용됩니다.
+
+그렇긴 하지만, 입력을 다르게 구성하고 싶을 수 있으며, 좋은 소식은 그렇게 하기 쉽다는 것입니다.
+
+#### 1.5.3. 기본값 재정의
+
+기본 `publishDir` 지시문을 재정의하려면 `conf/modules.config` 파일에 자체 지시문을 추가하면 됩니다.
+
+예를 들어, 아래 예제처럼 `withName:` 선택기를 사용하여 단일 프로세스의 기본값을 재정의할 수 있습니다. 여기서는 'COWPY' 프로세스에 대한 사용자 지정 `publishDir` 지시문을 추가합니다.
+
+```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
+process {
+    publishDir = [
+        path: { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" },
+        mode: params.publish_dir_mode,
+        saveAs: { filename -> filename.equals('versions.yml') ? null : filename }
+    ]
+
+    withName: 'COWPY' {
+        ext.args = { "-c ${params.character}" }
+        publishDir = [
+            path: 'my_custom_results'
+        ]
+    }
+}
+```
+
+실제로 이 변경을 하지는 않을 것이지만, 자유롭게 실험하고 어떤 로직을 구현할 수 있는지 확인해 보십시오.
+
+요점은 이 시스템이 양쪽 세계의 장점을 제공한다는 것입니다: 기본적으로 일관성과 필요에 따라 구성을 사용자 정의하는 유연성.
+
+요약하자면, 다음과 같은 이점을 얻습니다:
+
+- **단일 진실 소스**: 모든 발행 구성은 `modules.config`에 있습니다
+- **유용한 기본값**: 프로세스는 모듈별 구성 없이도 즉시 작동합니다
+- **쉬운 사용자 정의**: 모듈 코드가 아닌 구성에서 발행 동작을 재정의합니다
+- **이식 가능한 모듈**: 모듈은 출력 위치를 하드코딩하지 않습니다
+
+이것으로 반드시 사용법을 배워야 할 nf-core 모듈 기능 세트가 완성되었지만, [nf-core 모듈 사양](https://nf-co.re/docs/guidelines/components/modules)에서 읽을 수 있는 다른 기능들도 있습니다.
+
+### Takeaway
+
+이제 로컬 모듈을 nf-core 규칙을 따르도록 조정하는 방법을 알게 되었습니다:
+
+- 모듈이 메타데이터 튜플을 받고 전파하도록 설계;
+- `ext.args`를 사용하여 모듈 인터페이스를 최소한으로 유지하고 이식 가능하게 만듦;
+- `ext.prefix`를 사용하여 구성 가능하고 표준화된 출력 파일 이름 지정;
+- 일관된 결과 디렉토리 구조를 위해 중앙화된 기본 `publishDir` 지시문 채택.
+
+### What's next?
+
+nf-core의 내장 템플릿 기반 도구를 사용하여 쉽게 모듈을 생성하는 방법을 알아보겠습니다.
+
+---
+
+## 2. nf-core 도구로 모듈 만들기
+
+이제 수동으로 nf-core 모듈 패턴을 적용하는 방법을 배웠으니, 실제로 모듈을 만드는 방법을 살펴보겠습니다.
+
+### 2.1. 템플릿에서 모듈 스캐폴드 생성하기
+
+파이프라인 생성에 있는 것과 유사하게, nf-core 프로젝트는 템플릿을 기반으로 적절하게 구조화된 모듈을 생성하는 도구를 제공하며, 처음부터 이러한 모든 패턴이 내장되어 있습니다.
+
+#### 2.1.1. 모듈 생성 명령 실행하기
+
+`nf-core modules create` 명령은 이미 배운 모든 규칙을 따르는 모듈 템플릿을 생성합니다.
+
+다음 명령을 실행하여 최소한의 템플릿으로 `COWPY` 모듈의 새 버전을 만들어 봅시다:
+
+```bash
+nf-core modules create --empty-template COWPY
+```
+
+`--empty-template` 플래그는 추가 코드 없이 깔끔한 스타터 템플릿을 생성하여 필수 구조를 더 쉽게 볼 수 있게 합니다.
+
+이 명령은 대화형으로 실행되어 설정을 안내합니다.
+자동으로 Bioconda 및 bio.tools와 같은 패키지 저장소에서 도구 정보를 찾아 메타데이터를 미리 채웁니다.
+
+여러 구성 옵션에 대한 프롬프트가 표시됩니다:
+
+- **작성자 정보**: 귀속을 위한 GitHub 사용자 이름
+- **리소스 레이블**: 사전 정의된 컴퓨팅 요구사항 집합.
+  nf-core 프로젝트는 가벼운 도구를 위한 `process_single` 및 요구가 많은 도구를 위한 `process_high`와 같은 표준 레이블을 제공합니다.
+  이러한 레이블은 다양한 실행 환경에서 리소스 할당을 관리하는 데 도움이 됩니다.
+- **메타데이터 요구사항**: 모듈이 `meta` 맵을 통한 샘플별 정보가 필요한지 여부(일반적으로 데이터 처리 모듈의 경우 예).
+
+이 도구는 패키지 정보를 찾고 구조를 설정하는 복잡성을 처리하므로, 도구의 특정 로직 구현에 집중할 수 있습니다.
+
+#### 2.1.2. 모듈 스캐폴드 검사하기
+
+이 도구는 `modules/local/`에 완전한 모듈 구조를 생성합니다(또는 nf-core/modules 저장소에 있는 경우 `modules/nf-core/`에 생성):
+
+??? abstract "디렉토리 내용"
+
+    ```console
+    modules/local/cowpy
+    ├── environment.yml
+    ├── main.nf
+    ├── meta.yml
+    └── tests
+        └── main.nf.test
+    ```
+
+각 파일은 특정 목적을 가지고 있습니다:
+
+- **`main.nf`**: 모든 nf-core 패턴이 내장된 프로세스 정의
+- **`meta.yml`**: 입력, 출력 및 도구를 설명하는 모듈 문서
+- **`environment.yml`**: 종속성에 대한 Conda 환경 사양
+- **`tests/main.nf.test`**: 모듈이 작동하는지 검증하는 nf-test 테스트 케이스
+
+!!! tip "테스트에 대해 더 알아보기"
+
+    생성된 테스트 파일은 Nextflow 파이프라인 및 모듈용 테스팅 프레임워크인 nf-test를 사용합니다. 이러한 테스트를 작성하고 실행하는 방법을 알아보려면 [nf-test 사이드 퀘스트](../side_quests/nf-test.md)를 참조하십시오.
+
+생성된 `main.nf`는 방금 배운 모든 패턴과 몇 가지 추가 기능을 포함합니다:
+
+```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
+process COWPY {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+        'biocontainers/YOUR-TOOL-HERE' }"
+
+    input:
+    tuple val(meta), path(input)        // Pattern 1: Metadata tuples ✓
+
+    output:
+    tuple val(meta), path("*"), emit: output
+    path "versions.yml"           , emit: versions
+
+    when:
+    task.ext.when == null || task.ext.when
+
+    script:
+    def args = task.ext.args ?: ''                // Pattern 2: ext.args ✓
+    def prefix = task.ext.prefix ?: "${meta.id}"  // Pattern 3: ext.prefix ✓
+
+    """
+    // Add your tool command here
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+
+    stub:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    echo $args
+    touch ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+}
+```
+
+위에서 수동으로 적용한 모든 패턴이 이미 존재하는 것을 확인하세요!
+
+템플릿에는 몇 가지 추가적인 nf-core 규칙도 포함되어 있습니다.
+이 중 일부는 그대로 작동하지만, 다른 일부는 아래에 설명된 대로 채워야 할 자리 표시자입니다.
+
+**그대로 작동하는 기능:**
+
+- **`tag "$meta.id"`**: 로그에서 추적하기 쉽도록 프로세스 이름에 샘플 ID 추가
+- **`label 'process_single'`**: CPU/메모리 요구 사항을 구성하기 위한 리소스 레이블
+- **`when:` 블록**: `task.ext.when` 구성을 통한 조건부 실행 허용
+
+이러한 기능은 이미 기능적이며 모듈을 더 유지보수 가능하게 만듭니다.
+
+**아래에서 사용자 지정할 자리 표시자:**
+
+- **`input:` 및 `output:` 블록**: 도구에 맞게 업데이트할 일반 선언
+- **`script:` 블록**: `cowpy` 명령을 추가할 주석이 포함되어 있음
+- **`stub:` 블록**: 올바른 출력을 생성하도록 업데이트할 템플릿
+- **컨테이너 및 환경**: 패키지 정보로 채울 자리 표시자
+
+다음 섹션에서는 이러한 사용자 지정을 완료하는 방법을 설명합니다.
+
+### 2.2. 컨테이너 및 conda 환경 설정하기
+
+nf-core 가이드라인에 따르면 모듈의 일부로 컨테이너와 Conda 환경을 모두 지정해야 합니다.
+
+#### 2.2.1. 컨테이너
+
+컨테이너의 경우, [Seqera Containers](https://seqera.io/containers/)를 사용하여 conda-forge 패키지를 포함한 모든 Conda 패키지에서 자동으로 컨테이너를 빌드할 수 있습니다.
+이 경우 이전과 동일한 미리 빌드된 컨테이너를 사용하고 있습니다.
+
+기본 코드는 Docker와 Singularity 간에 전환할 수 있지만, 위에서 Seqera Containers에서 얻은 Docker 컨테이너만 지정하도록 해당 줄을 단순화하겠습니다.
+
+=== "변경 후"
+
+```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+process COWPY {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
+```
+
+=== "변경 전"
+
+```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+process COWPY {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+        'biocontainers/YOUR-TOOL-HERE' }"
+```
+
+#### 2.2.2. Conda 환경
+
+Conda 환경의 경우, 모듈 코드는 `conda "${moduleDir}/environment.yml"`을 지정하며, 이는 `environment.yml` 파일에서 구성해야 함을 의미합니다.
+
+모듈 생성 도구는 Bioconda(생물정보학 도구를 위한 주요 채널)에서 `cowpy` 패키지를 찾을 수 없다고 경고했습니다.
+그러나 `cowpy`는 conda-forge에서 사용할 수 있으므로 다음과 같이 `environment.yml`을 완성할 수 있습니다:
+
+=== "변경 후"
+
+    ```yaml title="modules/local/cowpy/environment.yml"  linenums="1" hl_lines="1 3 5"
+    name: COWPY
+    channels:
+      - conda-forge
+    dependencies:
+      - cowpy=1.1.5
+    ```
+
+=== "변경 전"
+
+    ```yaml title="modules/local/cowpy/environment.yml" linenums="1"
+    ---
+    # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json
+    channels:
+      - conda-forge
+      - bioconda
+    dependencies:
+      # TODO nf-core: List required Conda package(s).
+      #               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
+      #               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
+      - "YOUR-TOOL-HERE"
+    ```
+
+nf-core에 제출하려면 기본값을 더 엄격하게 따라야 하지만, 자체 사용을 위해 이 방식으로 코드를 단순화할 수 있습니다.
+
+!!! tip "Bioconda vs conda-forge 패키지"
+
+    - **Bioconda 패키지**: 자동으로 BioContainers가 빌드되어 바로 사용할 수 있는 컨테이너 제공
+    - **conda-forge 패키지**: Conda 레시피에서 필요에 따라 컨테이너를 빌드하기 위해 Seqera Containers 사용 가능
+
+    대부분의 생물정보학 도구는 Bioconda에 있지만, conda-forge 도구의 경우 Seqera Containers가 컨테이너화를 위한 쉬운 솔루션을 제공합니다.
+
+### 2.3. `COWPY` 로직 연결하기
+
+이제 `COWPY` 프로세스가 수행하는 작업에 특정한 코드 요소, 즉 입력과 출력, 그리고 script 블록을 업데이트해 보겠습니다.
+
+#### 2.3.1. 입력 및 출력
+
+생성된 템플릿에는 특정 도구에 맞게 사용자 지정해야 하는 일반적인 입력 및 출력 선언이 포함되어 있습니다.
+섹션 1의 수동 `COWPY` 모듈을 다시 살펴보면 가이드로 사용할 수 있습니다.
+
+입력 및 출력 블록을 업데이트하세요:
+
+=== "변경 후"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    input:
+    tuple val(meta), path(input_file)
+
+    output:
+    tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+    path "versions.yml"           , emit: versions
+    ```
+
+=== "변경 전"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
+    input:
+    tuple val(meta), path(input)
+
+    output:
+    tuple val(meta), path("*"), emit: output
+    path "versions.yml"           , emit: versions
+    ```
+
+이것은 다음을 지정합니다:
+
+- 입력 파일 매개변수 이름(`input` 대신 `input_file`)
+- 구성 가능한 접두사 패턴을 사용한 출력 파일 이름(와일드카드 `*` 대신 `${prefix}.txt`)
+- 설명적인 emit 이름(일반적인 `output` 대신 `cowpy_output`)
+
+Nextflow 언어 서버를 사용하여 구문을 검증하는 경우, script 블록에 아직 추가하지 않았기 때문에 이 단계에서 `${prefix}` 부분이 오류로 표시될 수 있습니다.
+이제 그 부분을 살펴보겠습니다.
+
+#### 2.3.2. script 블록
+
+템플릿은 실제 도구 명령을 추가해야 하는 script 블록에 주석 자리 표시자를 제공합니다.
+
+이전에 수동으로 작성한 모듈을 기반으로 다음과 같이 편집해야 합니다:
+
+=== "변경 후"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3 6"
+    script:
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    cat $input_file | cowpy $args > ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+=== "변경 전"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="6"
+    script:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    // Add your tool command here
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+주요 변경 사항:
+
+- `def prefix`를 출력 블록에서 접근할 수 있도록 `prefix`만 남김(`def` 없이)
+- 주석을 `$args`와 `${prefix}.txt`를 모두 사용하는 실제 `cowpy` 명령으로 대체
+
+이미 `modules.config` 파일에 `COWPY` 프로세스에 대한 `ext.args` 및 `ext.prefix` 구성을 추가하지 않았다면 지금 추가해야 합니다.
+
+#### 2.3.3. stub 블록 구현하기
+
+Nextflow 컨텍스트에서 [stub](https://www.nextflow.io/docs/latest/process.html#stub) 블록을 사용하면 실제 명령을 실행하지 않고도 파이프라인의 로직을 빠르게 프로토타이핑하고 테스트할 수 있는 가벼운 더미 스크립트를 정의할 수 있습니다.
+
+<!-- TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs (the reference doc isn't terribly helpful either). Right now this is likely to be mostly meaningless to anyone who doesn't already know about stubs. -->
+
+이것이 신비하게 느껴진다면 너무 걱정하지 마십시오. 완전성을 위해 이것을 포함시키지만, 처리하고 싶지 않다면 stub 섹션을 삭제할 수도 있습니다. 완전히 선택 사항입니다.
+
+=== "변경 후"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    stub:
+    def args = task.ext.args ?: ''
+    prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    touch ${prefix}.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+=== "변경 전"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    stub:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    echo $args
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        COWPY: \$(cowpy --version)
+    END_VERSIONS
+    """
+    ```
+
+주요 변경 사항:
+
+- script 블록과 일치하도록 `def prefix`를 `prefix`만으로 변경
+- `echo $args` 줄 제거(이는 단지 템플릿 자리 표시자 코드였음)
+- stub은 script 블록이 생성하는 것과 일치하는 빈 `${prefix}.txt` 파일을 생성합니다
+
+이를 통해 실제 도구가 실행되기를 기다리지 않고도 워크플로 로직과 파일 처리를 테스트할 수 있습니다.
+
+환경 설정(섹션 2.2), 입력/출력(섹션 2.3.1), script 블록(섹션 2.3.2), stub 블록(섹션 2.3.3)을 완료했으면 모듈은 테스트할 준비가 되었습니다!
+
+### 2.4. 새 `COWPY` 모듈로 교체하고 파이프라인 실행하기
+
+이 새 버전의 `COWPY` 모듈을 시도해보기 위해 필요한 것은 `hello.nf` 워크플로 파일의 import 문을 새 파일을 가리키도록 변경하는 것뿐입니다.
+
+=== "변경 후"
+
+    ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { COWPY                  } from '../modules/local/cowpy/main.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+=== "변경 전"
+
+    ```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="10"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
+    ```
+
+테스트하기 위해 파이프라인을 실행해 봅시다.
+
+```bash
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+```
+
+??? success "명령 출력"
+
+    ```console hl_lines="33"
+      N E X T F L O W   ~  version 25.04.3
+
+    Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de
+
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2025-12-27_08-23-51
+
+    Core Nextflow options
+      runName                   : prickly_neumann
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core/core-hello
+      workDir                   : /workspaces/training/hello-nf-core/core-hello/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (8)
+    [e9/008ede] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [be/0ecc58] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔
+    [11/8e082f] CORE_HELLO:HELLO:COWPY (test)       [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
+이것은 이전과 동일한 결과를 생성합니다.
+
+### Takeaway
+
+이제 처음부터 모든 것을 작성하는 대신 템플릿을 사용하여 효율적으로 모듈을 만드는 데 내장 nf-core 도구를 사용하는 방법을 알게 되었습니다.
+
+### What's next?
+
+nf-core에 모듈을 기여하는 이점과 포함된 주요 단계 및 요구 사항에 대해 알아보세요.
+
+---
+
+## 3. nf-core에 모듈 기여하기
+
+[nf-core/modules](https://github.com/nf-core/modules) 저장소는 잘 테스트되고 표준화된 모듈의 기여를 환영합니다.
+
+### 3.1. 기여하는 이유?
+
+nf-core에 모듈을 기여하면:
+
+- [nf-co.re/modules](https://nf-co.re/modules)의 모듈 카탈로그를 통해 전체 nf-core 커뮤니티에서 도구를 사용할 수 있게 됩니다
+- 지속적인 커뮤니티 유지 관리 및 개선을 보장합니다
+- 코드 리뷰 및 자동화된 테스트를 통해 품질 보증을 제공합니다
+- 작업에 가시성과 인정을 제공합니다
+
+### 3.2. 기여자 체크리스트
+
+nf-core에 모듈을 기여하려면 다음 단계를 거쳐야 합니다:
+
+1. [nf-co.re/modules](https://nf-co.re/modules)에 이미 존재하는지 확인
+2. [nf-core/modules](https://github.com/nf-core/modules) 저장소 포크
+3. `nf-core modules create`를 사용하여 템플릿 생성
+4. 모듈 로직 및 테스트 작성
+5. `nf-core modules test tool/subtool`로 테스트
+6. `nf-core modules lint tool/subtool`로 린트
+7. 풀 리퀘스트 제출
+
+자세한 지침은 [nf-core 컴포넌트 튜토리얼](https://nf-co.re/docs/tutorials/nf-core_components/components)을 참조하십시오.
+
+### 3.3. 리소스
+
+- **컴포넌트 튜토리얼**: [모듈 생성 및 기여에 대한 전체 가이드](https://nf-co.re/docs/tutorials/nf-core_components/components)
+- **모듈 사양**: [기술 요구 사항 및 가이드라인](https://nf-co.re/docs/guidelines/components/modules)
+- **커뮤니티 지원**: [nf-core Slack](https://nf-co.re/join) - `#modules` 채널에 참여하세요
+
+### Takeaway
+
+이제 nf-core 모듈을 만드는 방법을 알게 되었습니다! 모듈을 이식 가능하고 유지보수 가능하게 만드는 네 가지 핵심 패턴을 배웠습니다:
+
+- **메타데이터 튜플**은 워크플로를 통해 메타데이터를 전파합니다
+- **`ext.args`**는 구성을 통해 선택적 인수를 처리하여 모듈 인터페이스를 단순화합니다
+- **`ext.prefix`**는 출력 파일 이름을 표준화합니다
+- **중앙화된 발행**은 모듈에 하드코딩되는 대신 `modules.config`에서 구성된 `publishDir`를 통해 이루어집니다
+
+`COWPY`를 단계별로 변환함으로써 이러한 패턴에 대한 깊은 이해를 개발하여 nf-core 모듈을 사용, 디버그 및 생성할 수 있게 되었습니다.
+실제로는 `nf-core modules create`를 사용하여 처음부터 이러한 패턴이 내장된 적절하게 구조화된 모듈을 생성할 것입니다.
+
+마지막으로, 도구를 전 세계 연구자들이 사용할 수 있게 만들면서 지속적인 커뮤니티 유지 관리의 이점을 누리면서 nf-core 커뮤니티에 모듈을 기여하는 방법을 배웠습니다.
+
+### What's next?
+
+준비가 되면 [파트 5: 입력 검증](./05_input_validation.md)으로 계속하여 파이프라인에 스키마 기반 입력 검증을 추가하는 방법을 알아보세요.
