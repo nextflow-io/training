@@ -13,6 +13,13 @@ on:
   # Manual trigger
   workflow_dispatch:
     inputs:
+      mode:
+        description: "Translation mode"
+        type: choice
+        options:
+          - normal
+          - fix
+        default: normal
       language:
         description: "Language code (empty = all)"
         type: string
@@ -47,10 +54,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           uv run -q translate.py ci-detect \
             ${{ inputs.language && format('--language "{0}"', inputs.language) || '' }} \
             ${{ inputs.since && format('--since "{0}"', inputs.since) || '' }} \
+            ${{ inputs.mode == 'fix' && '--fix' || '' }} \
             >> $GITHUB_OUTPUT
 
   translate:
@@ -75,15 +84,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: _scripts
-        run: uv run -q translate.py sync ${{ matrix.language }} --log translate-${{ matrix.language }}.json
+        run: >
+          uv run -q translate.py sync ${{ matrix.language }}
+          --log translate-${{ matrix.language }}.json
+          ${{ inputs.mode == 'fix' && '--fix' || '' }}
 
       - name: Dry run ${{ matrix.language }}
         if: ${{ inputs.dry_run }}
         env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: _scripts
-        run: uv run -q translate.py sync ${{ matrix.language }} --dry-run
+        run: >
+          uv run -q translate.py sync ${{ matrix.language }}
+          --dry-run
+          ${{ inputs.mode == 'fix' && '--fix' || '' }}
 
       - name: Upload translation artifacts
         if: ${{ !inputs.dry_run && success() }}

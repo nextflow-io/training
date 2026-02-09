@@ -65,6 +65,7 @@ MAX_RETRIES = 8
 BASE_DELAY = 2.0  # seconds, doubles each retry: 2, 4, 8, 16, 32, 64, 128, 256
 
 PRIORITY_DIRS = ["hello_nextflow", "hello_nf-core", "nf4_science", "envsetup"]
+DEFAULT_PARALLEL = 50
 
 # Comment styles by language
 HASH_COMMENT_LANGS = {"python", "py", "sh", "bash", "dockerfile", "yaml", "yml", "toml"}
@@ -102,6 +103,7 @@ class TranslationFile:
     lang_path: Path
     language: str
     prompt_changed: bool = False  # True if update triggered by prompt change
+    force_full: bool = False  # True to force full re-translation (skip incremental)
 
     @property
     def exists(self) -> bool:
@@ -887,6 +889,9 @@ async def _progress_logger(progress: TranslationProgress, interval: float = 10.0
         console.print(progress.status())
 
 
+MAX_VERIFY_RETRIES = 2  # Number of re-translation attempts after verification failure
+
+
 async def translate_file_async(
     tf: TranslationFile,
     semaphore: asyncio.Semaphore,
@@ -894,7 +899,12 @@ async def translate_file_async(
     client: anthropic.AsyncAnthropic,
     log: TranslationLog | None = None,
 ) -> None:
-    """Translate a single file (async version for parallel execution)."""
+    """Translate a single file (async version for parallel execution).
+
+    After translation and post-processing, verifies the output for structural
+    and semantic correctness. If verification fails, retries up to
+    MAX_VERIFY_RETRIES times with a full re-translation (no incremental).
+    """
     filename = str(tf.relative_path)
     entry = FileLogEntry(filename=filename, started_at=datetime.now().isoformat())
     start_time = time.time()
@@ -904,40 +914,79 @@ async def translate_file_async(
         try:
             langs = get_languages()
             en_content = tf.en_path.read_text(encoding="utf-8")
-            existing = tf.lang_path.read_text(encoding="utf-8") if tf.exists else None
+            original_existing = (
+                tf.lang_path.read_text(encoding="utf-8") if tf.exists else None
+            )
 
             entry.input_lines = en_content.count("\n") + 1
             entry.input_hash = hashlib.md5(en_content.encode()).hexdigest()[:12]
 
-            # Compute diff for incremental updates (not prompt-triggered, existing translation)
-            en_diff = None
-            if existing and not tf.prompt_changed:
-                baseline = get_translation_baseline(tf.language)
-                if baseline:
-                    en_diff = get_file_diff(tf.en_path, baseline)
+            for attempt in range(1 + MAX_VERIFY_RETRIES):
+                # On first attempt, use incremental if available (unless force_full)
+                # On retries, always force full re-translation
+                use_existing = original_existing
+                if tf.force_full or attempt > 0:
+                    # Full re-translation: pass existing only as reference, no diff
+                    en_diff = None
+                else:
+                    # Compute diff for incremental updates
+                    en_diff = None
+                    if use_existing and not tf.prompt_changed:
+                        baseline = get_translation_baseline()
+                        if baseline:
+                            en_diff = get_file_diff(tf.en_path, baseline)
 
-            prompt = build_translation_prompt(
-                tf.language, langs[tf.language], en_content, existing, en_diff
-            )
-            result = await call_claude_async(prompt, filename, client)
-            output_content = f"{result.text}\n"
+                prompt = build_translation_prompt(
+                    tf.language, langs[tf.language], en_content, use_existing, en_diff
+                )
+                result = await call_claude_async(prompt, filename, client)
+                output_content = f"{result.text}\n"
 
-            # Log API response metadata
-            entry.model = result.model
-            entry.input_tokens = result.input_tokens
-            entry.output_tokens = result.output_tokens
-            entry.stop_reason = result.stop_reason
-            entry.continuations = result.continuations
+                # Log API response metadata (overwritten on retry)
+                entry.model = result.model
+                entry.input_tokens += result.input_tokens
+                entry.output_tokens += result.output_tokens
+                entry.stop_reason = result.stop_reason
+                entry.continuations = result.continuations
 
-            tf.lang_path.parent.mkdir(parents=True, exist_ok=True)
-            tf.lang_path.write_text(output_content, encoding="utf-8", newline="\n")
-            post_process_file(tf.lang_path, tf.language)
+                tf.lang_path.parent.mkdir(parents=True, exist_ok=True)
+                tf.lang_path.write_text(output_content, encoding="utf-8", newline="\n")
+                post_process_file(tf.lang_path, tf.language)
+
+                issues = await verify_translation_async(
+                    tf.en_path, tf.lang_path, client
+                )
+
+                if not issues:
+                    break  # Verification passed
+
+                if attempt < MAX_VERIFY_RETRIES:
+                    console.print(
+                        f"[yellow]Verification failed for {filename} "
+                        f"(attempt {attempt + 1}/{1 + MAX_VERIFY_RETRIES}), "
+                        f"retrying...[/yellow]"
+                    )
+                    for issue in issues:
+                        console.print(f"  [dim]{issue}[/dim]")
+                else:
+                    entry.error = (
+                        f"Verification failed after {MAX_VERIFY_RETRIES} retries: "
+                        + "; ".join(issues)
+                    )
+                    console.print(
+                        f"[red]Verification failed for {filename} "
+                        f"after {MAX_VERIFY_RETRIES} retries:[/red]"
+                    )
+                    for issue in issues:
+                        console.print(f"  [red]{issue}[/red]")
 
             # Compute hash and changed flag AFTER post-processing
             final_content = tf.lang_path.read_text(encoding="utf-8")
             entry.output_lines = final_content.count("\n")
             entry.output_hash = hashlib.md5(final_content.encode()).hexdigest()[:12]
-            entry.changed = existing is None or existing != final_content
+            entry.changed = (
+                original_existing is None or original_existing != final_content
+            )
 
             await progress.finish_one(filename, success=True)
         except Exception as e:
@@ -1194,7 +1243,10 @@ def post_process_file(lang_path: Path, lang: str) -> bool:
 
     try:
         fixed = fix_translation(original.splitlines(), source.splitlines())
-    except StructureMismatchError:
+    except StructureMismatchError as e:
+        console.print(
+            f"[yellow]Post-process skipped for {lang_path.relative_to(REPO_ROOT)}: {e}[/yellow]"
+        )
         return False
 
     fixed_text = "\n".join(fixed) + "\n"
@@ -1202,6 +1254,264 @@ def post_process_file(lang_path: Path, lang: str) -> bool:
         lang_path.write_text(fixed_text, encoding="utf-8", newline="\n")
         return True
     return False
+
+
+# =============================================================================
+# Translation verification
+# =============================================================================
+
+VERIFY_PROMPT = """You are verifying the quality of a translated document.
+Given the first and last meaningful sentences from an English source document and its translation, check:
+1. Does the translated first sentence correspond semantically to the English first sentence?
+2. Is the translated first sentence complete (not truncated mid-sentence)?
+3. Does the translated last sentence correspond semantically to the English last sentence?
+4. Is the translated last sentence complete (not truncated mid-sentence)?
+
+Reply ONLY with a JSON object (no markdown fencing):
+{{"first_match": true/false, "first_complete": true/false, "last_match": true/false, "last_complete": true/false}}
+
+English first sentence:
+{en_first}
+
+Translated first sentence:
+{trans_first}
+
+English last sentence:
+{en_last}
+
+Translated last sentence:
+{trans_last}
+"""
+
+
+_SKIP_LINE_RE = re.compile(
+    r"^("
+    r"#{1,6}\s"  # headings
+    r"|(!{3}|\?{3}\+?)\s"  # admonitions
+    r"|===\s"  # tabs
+    r"|</?[a-zA-Z]"  # HTML tags
+    r"|!\["  # images
+    r"|\[.*\]:\s"  # link definitions
+    r"|[-*_]{3,}\s*$"  # horizontal rules
+    r")"
+)
+
+
+def _extract_meaningful_lines(lines: list[str]) -> list[str]:
+    """Extract meaningful text lines, skipping frontmatter, blanks, headings, code fences, admonitions, and pure-markup lines."""
+    meaningful = []
+    in_frontmatter = False
+    in_code = False
+    fence = ""
+
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+
+        # Track frontmatter (YAML between --- markers at start of file)
+        if i == 0 and stripped == "---":
+            in_frontmatter = True
+            continue
+        if in_frontmatter:
+            if stripped == "---":
+                in_frontmatter = False
+            continue
+
+        # Track code blocks (same approach as _iter_lines_outside_code)
+        if not in_code:
+            if m := CODE_FENCE_RE.match(stripped):
+                in_code, fence = True, m.group(1)
+                continue
+        elif stripped.startswith(fence) and stripped.strip() == fence:
+            in_code, fence = False, ""
+            continue
+        if in_code:
+            continue
+
+        if not stripped or _SKIP_LINE_RE.match(stripped):
+            continue
+
+        meaningful.append(stripped)
+
+    return meaningful
+
+
+def verify_translation_structural(en_path: Path, lang_path: Path) -> list[str]:
+    """Run structural checks on a translation file. Returns list of issues (empty = OK)."""
+    issues: list[str] = []
+
+    if not lang_path.exists():
+        issues.append("Translation file missing")
+        return issues
+
+    en_content = en_path.read_text(encoding="utf-8")
+    trans_content = lang_path.read_text(encoding="utf-8")
+    en_lines = en_content.splitlines()
+    trans_lines = trans_content.splitlines()
+
+    # Check for LLM wrapping entire output in a code fence (e.g. ```markdown)
+    first_line = trans_lines[0].strip() if trans_lines else ""
+    if re.match(r"^```\w*$", first_line):
+        issues.append(
+            f"Translation appears wrapped in a code fence (starts with '{first_line}')"
+        )
+
+    # Check structural markers
+    en_headers = extract_headers(en_lines)
+    trans_headers = extract_headers(trans_lines)
+    if len(en_headers) != len(trans_headers):
+        issues.append(
+            f"Header count mismatch: {len(trans_headers)} vs {len(en_headers)} in English"
+        )
+    else:
+        for i, (eh, th) in enumerate(zip(en_headers, trans_headers)):
+            if eh.level != th.level:
+                issues.append(
+                    f"Header level mismatch at header {i + 1}: "
+                    f"{th.level} vs {eh.level} in English"
+                )
+                break
+
+    en_blocks = extract_code_blocks(en_lines)
+    trans_blocks = extract_code_blocks(trans_lines)
+    if len(en_blocks) != len(trans_blocks):
+        issues.append(
+            f"Code block count mismatch: {len(trans_blocks)} vs {len(en_blocks)} in English"
+        )
+
+    # Check frontmatter consistency
+    en_has_frontmatter = en_lines and en_lines[0].strip() == "---"
+    trans_has_frontmatter = trans_lines and trans_lines[0].strip() == "---"
+    if en_has_frontmatter and not trans_has_frontmatter:
+        issues.append("Missing frontmatter (English has it, translation does not)")
+
+    # Check admonition count
+    admonition_re = re.compile(r"^(!{3}|\?{3}\+?)\s+\w+")
+    en_admonitions = sum(1 for l in en_lines if admonition_re.match(l.strip()))
+    trans_admonitions = sum(1 for l in trans_lines if admonition_re.match(l.strip()))
+    if (
+        en_admonitions
+        and abs(en_admonitions - trans_admonitions) > en_admonitions * 0.3
+    ):
+        issues.append(
+            f"Admonition count differs significantly: {trans_admonitions} vs {en_admonitions} in English"
+        )
+
+    return issues
+
+
+async def verify_translation_semantic_async(
+    en_path: Path,
+    lang_path: Path,
+    client: anthropic.AsyncAnthropic,
+) -> list[str]:
+    """Run semantic verification on first/last sentences. Returns list of issues."""
+    if not lang_path.exists():
+        return ["Translation file missing"]
+
+    en_lines = en_path.read_text(encoding="utf-8").splitlines()
+    trans_lines = lang_path.read_text(encoding="utf-8").splitlines()
+
+    en_meaningful = _extract_meaningful_lines(en_lines)
+    trans_meaningful = _extract_meaningful_lines(trans_lines)
+    if not en_meaningful or not trans_meaningful:
+        return []
+
+    en_first, en_last = en_meaningful[0], en_meaningful[-1]
+    trans_first, trans_last = trans_meaningful[0], trans_meaningful[-1]
+
+    prompt = VERIFY_PROMPT.format(
+        en_first=en_first,
+        trans_first=trans_first,
+        en_last=en_last,
+        trans_last=trans_last,
+    )
+
+    result = await call_claude_async(prompt, f"verify:{lang_path.name}", client)
+
+    # Parse JSON response
+    text = result.text.strip()
+    # Strip markdown fencing if present
+    if text.startswith("```"):
+        text = re.sub(r"^```\w*\n?", "", text)
+        text = re.sub(r"\n?```$", "", text)
+
+    try:
+        data = json.loads(text)
+    except json.JSONDecodeError as e:
+        raise TranslationError(
+            f"Semantic verification returned invalid JSON for {lang_path.name}: {e}\nResponse: {text!r}"
+        )
+
+    issues: list[str] = []
+    if not data.get("first_match"):
+        issues.append(f"First sentence does not match English meaning: {trans_first!r}")
+    if not data.get("first_complete"):
+        issues.append(f"First sentence appears truncated: {trans_first!r}")
+    if not data.get("last_match"):
+        issues.append(f"Last sentence does not match English meaning: {trans_last!r}")
+    if not data.get("last_complete"):
+        issues.append(f"Last sentence appears truncated: {trans_last!r}")
+    return issues
+
+
+async def verify_translation_async(
+    en_path: Path,
+    lang_path: Path,
+    client: anthropic.AsyncAnthropic,
+) -> list[str]:
+    """Full verification: structural + semantic. Returns list of issues."""
+    issues = verify_translation_structural(en_path, lang_path)
+    if lang_path.exists():
+        semantic_issues = await verify_translation_semantic_async(
+            en_path, lang_path, client
+        )
+        issues.extend(semantic_issues)
+    return issues
+
+
+async def get_broken_files(
+    lang: str, parallel: int = DEFAULT_PARALLEL
+) -> list[TranslationFile]:
+    """Scan all translation files for a language and return those with issues.
+
+    Runs full verification (structural + semantic) on every file in parallel.
+    """
+    console = Console(
+        stderr=True, force_terminal=True if os.getenv("GITHUB_ACTIONS") else None
+    )
+    check_api_key()
+    client = anthropic.AsyncAnthropic()
+    semaphore = asyncio.Semaphore(parallel)
+
+    en_files = iter_en_docs()
+
+    async def check_one(en_path: Path) -> TranslationFile | None:
+        lang_path = en_to_lang_path(en_path, lang)
+        async with semaphore:
+            issues = await verify_translation_async(en_path, lang_path, client)
+        if issues:
+            rel = en_path.relative_to(EN_DOCS)
+            console.print(f"  [red]Broken:[/red] {rel}")
+            for issue in issues:
+                console.print(f"    {issue}")
+            return TranslationFile(
+                en_path=en_path,
+                lang_path=lang_path,
+                language=lang,
+                force_full=True,
+            )
+        return None
+
+    console.print(f"[cyan]Scanning {len(en_files)} files for {lang}...[/cyan]")
+    results = await asyncio.gather(*[check_one(p) for p in en_files])
+    broken = [r for r in results if r is not None]
+
+    if broken:
+        console.print(f"[yellow]Found {len(broken)} broken files for {lang}[/yellow]")
+    else:
+        console.print(f"[green]All files OK for {lang}[/green]")
+
+    return broken
 
 
 # =============================================================================
@@ -1247,9 +1557,6 @@ def translate(
     translate_file(tf, console)
     post_process_file(tf.lang_path, lang)
     console.print(f"[green]Done:[/green] {tf.lang_path}")
-
-
-DEFAULT_PARALLEL = 50
 
 
 async def _translate_all(
@@ -1308,6 +1615,11 @@ def sync(
         help="Compare since this commit (default: auto-detect from last translation PR)",
     ),
     dry_run: bool = typer.Option(False, "--dry-run", "-n", help="Preview only"),
+    fix: bool = typer.Option(
+        False,
+        "--fix",
+        help="Fix mode: scan all translations for issues and re-translate broken files",
+    ),
     parallel: int = typer.Option(
         DEFAULT_PARALLEL,
         "--parallel",
@@ -1323,6 +1635,70 @@ def sync(
     """Sync translations: update outdated, add missing, remove orphaned."""
     console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
 
+    if fix:
+        # Fix mode: scan all files for issues and re-translate broken ones
+        console.print(
+            f"[bold magenta]Fix mode:[/bold magenta] scanning all {lang} translations for issues..."
+        )
+
+        orphaned = get_orphaned_files(lang)
+        missing = get_missing_files(lang)
+
+        if dry_run:
+            # Dry run: show orphaned/missing without API key, note that full
+            # scan for broken files requires an API key and is skipped
+            if orphaned:
+                console.print(f"[red]Would remove {len(orphaned)} orphaned:[/red]")
+                for p in orphaned:
+                    console.print(f"  {p.relative_to(REPO_ROOT)}")
+            if missing:
+                console.print(f"[blue]Would add {len(missing)} missing:[/blue]")
+                for tf in missing:
+                    console.print(f"  {tf.relative_path}")
+            console.print(
+                "[dim]Note: broken file detection requires API key and is skipped "
+                "in dry-run mode. Run without --dry-run to scan for broken files.[/dim]"
+            )
+            if not (orphaned or missing):
+                console.print(f"[green]No orphaned or missing files for {lang}[/green]")
+            return
+
+        check_api_key()
+        broken = asyncio.run(get_broken_files(lang, parallel))
+
+        if include:
+            missing = [tf for tf in missing if include in str(tf.en_path)]
+            broken = [tf for tf in broken if include in str(tf.en_path)]
+
+        # Remove orphaned
+        if orphaned:
+            console.print(f"[bold]Removing {len(orphaned)} orphaned...[/bold]")
+            for p in orphaned:
+                p.unlink()
+                console.print(f"  [red]Removed:[/red] {p.relative_to(REPO_ROOT)}")
+
+        # Deduplicate broken + missing (missing files may appear in both)
+        all_files = list({str(tf.en_path): tf for tf in broken + missing}.values())
+
+        if all_files:
+            console.print(
+                f"[bold]Re-translating {len(all_files)} files "
+                f"({len(broken)} broken + {len(missing)} missing, deduplicated) "
+                f"with parallel={parallel}[/bold]"
+            )
+            log = (
+                TranslationLog(log_file, "fix-mode", lang, parallel, len(all_files))
+                if log_file
+                else None
+            )
+            asyncio.run(_translate_all(all_files, parallel, log))
+        else:
+            console.print(f"[green]No broken or missing files found for {lang}[/green]")
+
+        console.print("[green]✓ Fix complete[/green]")
+        return
+
+    # Normal mode: baseline-based sync
     # Determine baseline commit
     if since:
         baseline = since
@@ -1411,6 +1787,11 @@ def ci_detect(
         "--since",
         help="Compare since this commit (default: auto-detect from last translation PR)",
     ),
+    fix: bool = typer.Option(
+        False,
+        "--fix",
+        help="Fix mode: detect languages with broken translations instead of outdated ones",
+    ),
 ):
     """Detect languages needing sync (GitHub Actions output)."""
     console = Console(
@@ -1425,6 +1806,43 @@ def ci_detect(
     else:
         langs = all_langs
 
+    if fix:
+        # Fix mode: scan all translations for structural/semantic issues
+        console.print(
+            "[bold magenta]Fix mode:[/bold magenta] scanning for broken translations..."
+        )
+        check_api_key()
+
+        async def _detect_broken():
+            need_sync = []
+            for lang in langs:
+                orphaned = get_orphaned_files(lang)
+                missing = get_missing_files(lang)
+                broken = await get_broken_files(lang)
+
+                if orphaned or missing or broken:
+                    need_sync.append(lang)
+                    console.print(f"[bold cyan]{lang}[/bold cyan]:")
+                    if broken:
+                        console.print(f"  [yellow]Broken:[/yellow] {len(broken)}")
+                        for tf in broken:
+                            console.print(f"    {tf.relative_path}")
+                    if missing:
+                        console.print(f"  [green]Missing:[/green] {len(missing)}")
+                        for f in missing:
+                            console.print(f"    {f.relative_path}")
+                    if orphaned:
+                        console.print(f"  [red]Orphaned:[/red] {len(orphaned)}")
+                        for f in orphaned:
+                            console.print(f"    {f.relative_to(DOCS_ROOT)}")
+            return need_sync
+
+        need_sync = asyncio.run(_detect_broken())
+        print(f"languages={json.dumps(need_sync)}")
+        print(f"has_work={'true' if need_sync else 'false'}")
+        return
+
+    # Normal mode: baseline-based detection
     # Determine baseline commit
     if since:
         baseline = since
@@ -1511,12 +1929,13 @@ def ci_delete_orphans():
 def ci_run(
     languages: str = typer.Option("[]", "--languages"),
     dry_run: bool = typer.Option(False, "--dry-run"),
+    fix: bool = typer.Option(False, "--fix", help="Fix mode"),
 ):
     """Run sync for multiple languages (CI)."""
     console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else None)
     for lang in json.loads(languages):
         console.rule(f"[bold]{lang}[/bold]")
-        sync(lang, include=None, dry_run=dry_run)
+        sync(lang, include=None, dry_run=dry_run, fix=fix)
 
 
 @app.command("ci-pr")
