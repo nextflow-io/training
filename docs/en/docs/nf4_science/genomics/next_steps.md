@@ -22,7 +22,8 @@ Through this hands-on course, you've learned how to:
 - Handle accessory files such as index files and reference genome resources appropriately
 - Leverage Nextflow's dataflow paradigm to parallelize per-sample variant calling
 - Implement multi-sample joint calling using relevant channel operators
-  You're now equipped to start applying Nextflow to genomics analysis workflows in your own work.
+
+You're now equipped to start applying Nextflow to genomics analysis workflows in your own work.
 
 ## Next steps to build your skills
 
