@@ -226,7 +226,7 @@ Umarım şimdi temelde daha önce olduğu gibi çalışmalı. Ve burada replicat
 
 Nextflow kodunda yürütüldüğünü kanıtlamak için buraya work dizinine girersem, bash script'inde değil, cat work/ command.sh'a gidebilirim ve burada sadece bu string'i doğrudan yankıladığını göreceksiniz. There were three greetings in this batch, ve bu değişken Nextflow tarafından interpolasyon yapıldı. .command.sh dosyasını yazmadan önce script bloğunda hesaplandı. Yani sonuç değişken hesaplaması temelde bu durumda compute ortamınızda yürütülmeden önce buna hard coded edilmiş durumda.
 
-Ve böylece script arasındaki o ayrımı görebilirsiniz. Bloğu burada ve üzerindeki herhangi bir şey. _Umarım bu mantıklı gelir.
+Ve böylece script arasındaki o ayrımı görebilirsiniz. Bloğu burada ve üzerindeki herhangi bir şey. \_Umarım bu mantıklı gelir.
 
 ## Özet ve test
 

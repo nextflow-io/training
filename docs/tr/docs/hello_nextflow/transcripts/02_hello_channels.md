@@ -122,7 +122,7 @@ Yani bunu buraya yapıştırabilirim, _"$\{greeting\}\_output.txt"_, ve sonra bu
 
 Yani aynısını orada yapmam gerekiyor ve bu değişkenin anlaşılması için tek tırnak değil çift tırnak kullanmam gerekiyor.
 
-Tamam, hadi deneyelim ve çalışıp çalışmadığına bakalım. İş akışını tekrar çalıştıracağız. Umarım bize üç farklı work dizinindeki üç farklı görevi gösterecektir. Ve nitekim, sol tarafta burada results klasörünün içinde artık üç farklı dosyayla üç farklı dosya adı ve her biri beklediğimiz farklı içeriklerle var. Yani dosyalar artık birbirinin üzerine yazmıyor ve her şey beklediğimiz gibi orada. 
+Tamam, hadi deneyelim ve çalışıp çalışmadığına bakalım. İş akışını tekrar çalıştıracağız. Umarım bize üç farklı work dizinindeki üç farklı görevi gösterecektir. Ve nitekim, sol tarafta burada results klasörünün içinde artık üç farklı dosyayla üç farklı dosya adı ve her biri beklediğimiz farklı içeriklerle var. Yani dosyalar artık birbirinin üzerine yazmıyor ve her şey beklediğimiz gibi orada.
 
 Burada yaşadığımız bu biraz önemsiz bir kurulum, ama dosya yayınlamanın nasıl çalıştığı hakkında anlamanız gereken bazı temel kavramları vurguluyor ve tuzak olarak düşebileceğiniz bazı şeyler. Umarım kendi iş akışlarınızda bundan kaçınabilirsiniz.
 
