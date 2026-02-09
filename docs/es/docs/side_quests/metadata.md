@@ -1280,3 +1280,362 @@ Realice las siguientes ediciones al workflow principal:
         ch_languages.map { meta, file -> file },
         ch_languages.map { meta, file -> meta.character }
     )
+    ```
+
+¡Eso simplifica la llamada significativamente!
+
+Eliminemos los resultados de la ejecución anterior y ejecutemos:
+
+```bash
+rm -r results
+nextflow run main.nf
+```
+
+??? success "Salida del comando"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [wise_sammet] DSL2 - revision: 99797b1e92
+
+    executor >  local (14)
+    [5d/dffd4e] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+    [25/9243df] process > COWPY (7)             [100%] 7 of 7 ✔
+    ```
+
+Si mira en el directorio de resultados, debería ver las mismas salidas que antes, es decir, archivos individuales que contienen el arte ASCII de cada saludo hablado por el personaje correspondiente.
+
+??? abstract "Contenido del directorio"
+
+    ```console
+    ./results/
+    ├── cowpy-bonjour.txt
+    ├── cowpy-ciao.txt
+    ├── cowpy-guten_tag.txt
+    ├── cowpy-hallo.txt
+    ├── cowpy-hello.txt
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+    ```
+
+Así que esto produce los mismos resultados que antes con código más simple.
+
+Por supuesto, esto asume que puede modificar el código del proceso.
+En algunos casos, puede que tenga que depender de procesos existentes que no tiene libertad de modificar, lo que limita sus opciones.
+La buena noticia, si planea usar módulos del proyecto [nf-core](https://nf-co.re/), es que los módulos de nf-core están todos configurados para usar la estructura de tupla `[meta, file]` como estándar.
+
+### 3.4. Solución de problemas con entradas requeridas faltantes
+
+El valor `character` es requerido para que el proceso `COWPY` se ejecute exitosamente.
+Si no establecemos un valor predeterminado en un archivo de configuración, DEBEMOS proporcionar un valor en la hoja de datos.
+
+**¿Qué sucede si no lo hacemos?**
+Depende de lo que contenga la hoja de datos de entrada y qué versión del workflow estemos ejecutando.
+
+#### 3.4.1. La columna character existe pero está vacía
+
+Digamos que eliminamos el valor de character para uno de los registros en nuestra hoja de datos para simular un error de recopilación de datos:
+
+```csv title="datasheet.csv" linenums="1" hl_lines="2"
+id,character,recording
+sampleA,,/workspaces/training/side-quests/metadata/data/bonjour.txt
+sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
+sampleC,sheep,/workspaces/training/side-quests/metadata/data/hallo.txt
+sampleD,turkey,/workspaces/training/side-quests/metadata/data/hello.txt
+sampleE,stegosaurus,/workspaces/training/side-quests/metadata/data/hola.txt
+sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
+sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
+```
+
+Para cualquiera de las versiones del workflow que hemos usado anteriormente, la clave `character` se creará para todos los registros cuando se lea la hoja de datos, pero para `sampleA` el valor será una cadena vacía.
+
+Esto causará un error.
+
+??? failure "Salida del comando"
+
+    ```console hl_lines="8 11 16 28"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1
+
+    executor >  local (9)
+    [c1/c5dd4f] process > IDENTIFY_LANGUAGE (7) [ 85%] 6 of 7
+    [d3/b7c415] process > COWPY (2)             [  0%] 0 of 6
+    ERROR ~ Error executing process > 'COWPY (1)'
+
+    Caused by:
+      Process `COWPY (1)` terminated with an error exit status (2)
+
+
+    Command executed:
+
+      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
+
+    Command exit status:
+      2
+
+    Command output:
+      (empty)
+
+    Command error:
+      usage: cowpy [-h] [-l] [-L] [-t] [-u] [-e EYES] [-c COWACTER] [-E] [-r] [-x]
+                  [-C]
+                  [msg ...]
+      cowpy: error: argument -c/--cowacter: expected one argument
+
+    Work dir:
+      /workspaces/training/side-quests/metadata/work/ca/9d49796612a54dec5ed466063c809b
+
+    Container:
+      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+Cuando Nextflow ejecuta la línea de comando de `cowpy` para esa muestra, `${meta.character}` se llena con una cadena vacía en la línea de comando de `cowpy`, por lo que la herramienta `cowpy` lanza un error diciendo que no se proporcionó ningún valor para el argumento `-c`.
+
+#### 3.4.2. La columna character no existe en la hoja de datos
+
+Ahora digamos que eliminamos la columna `character` completamente de nuestra hoja de datos:
+
+```csv title="datasheet.csv" linenums="1"
+id,recording
+sampleA,/workspaces/training/side-quests/metadata/data/bonjour.txt
+sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
+sampleC,/workspaces/training/side-quests/metadata/data/hallo.txt
+sampleD,/workspaces/training/side-quests/metadata/data/hello.txt
+sampleE,/workspaces/training/side-quests/metadata/data/hola.txt
+sampleF,/workspaces/training/side-quests/metadata/data/salut.txt
+sampleG,/workspaces/training/side-quests/metadata/data/ciao.txt
+```
+
+En este caso, la clave `character` no se creará en absoluto cuando se lea la hoja de datos.
+
+##### 3.4.2.1. Valor accedido a nivel de workflow
+
+Si estamos usando la versión del código que escribimos en la sección 3.2, Nextflow intentará acceder a la clave `character` en el mapa de metadatos ANTES de llamar al proceso `COWPY`.
+
+No encontrará ningún elemento que coincida con la instrucción, por lo que no ejecutará `COWPY` en absoluto.
+
+??? success "Salida del comando"
+
+    ```console hl_lines="7"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [desperate_montalcini] DSL2 - revision: 0dfeee3cc1
+
+    executor >  local (7)
+    [1a/df2544] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+    [-        ] process > COWPY                 -
+    ```
+
+En lo que respecta a Nextflow, ¡este workflow se ejecutó exitosamente!
+Sin embargo, no se producirá ninguna de las salidas que queremos.
+
+##### 3.4.2.2. Valor accedido a nivel de proceso
+
+Si estamos usando la versión de la sección 3.3, Nextflow pasará todo el mapa de metadatos al proceso `COWPY` e intentará ejecutar el comando.
+
+Esto causará un error, pero uno diferente en comparación con el primer caso.
+
+??? failure "Salida del comando"
+
+    ```console hl_lines="8 11 16"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [jovial_bohr] DSL2 - revision: eaaf375827
+
+    executor >  local (9)
+    [0d/ada9db] process > IDENTIFY_LANGUAGE (5) [ 85%] 6 of 7
+    [06/28065f] process > COWPY (2)             [  0%] 0 of 6
+    ERROR ~ Error executing process > 'COWPY (2)'
+
+    Caused by:
+      Process `COWPY (2)` terminated with an error exit status (1)
+
+
+    Command executed:
+
+      cat guten_tag.txt | cowpy -c null > cowpy-guten_tag.txt
+
+    Command exit status:
+      1
+
+    Command output:
+      (empty)
+
+    Command error:
+      Traceback (most recent call last):
+        File "/opt/conda/bin/cowpy", line 10, in <module>
+          sys.exit(main())
+                  ~~~~^^
+        File "/opt/conda/lib/python3.13/site-packages/cowpy/cow.py", line 1215, in main
+          print(cow(eyes=args.eyes,
+                ~~~^^^^^^^^^^^^^^^^
+                tongue=args.tongue,
+                ^^^^^^^^^^^^^^^^^^^
+                thoughts=args.thoughts
+                ^^^^^^^^^^^^^^^^^^^^^^
+                    ).milk(msg)
+                    ^
+      TypeError: 'str' object is not callable
+
+    Work dir:
+      /workspaces/training/side-quests/metadata/work/06/28065f7d9fd7d22bba084aa941b6d6
+
+    Container:
+      community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
+
+    Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+Esto sucede porque `meta.character` no existe, por lo que nuestro intento de acceder a él devuelve `null`. Como resultado, Nextflow literalmente inserta `null` en la línea de comando, lo que por supuesto no es reconocido por la herramienta `cowpy`.
+
+#### 3.4.3. Soluciones
+
+Aparte de proporcionar un valor predeterminado como parte de la configuración del workflow, hay dos cosas que podemos hacer para manejar esto de manera más robusta:
+
+1. Implementar validación de entrada en su workflow para asegurar que la hoja de datos contenga toda la información requerida. Puede encontrar una [introducción a la validación de entrada](../hello_nf-core/05_input_validation.md) en el curso de entrenamiento Hello nf-core. <!-- TODO (future) pending a proper Validation side quest -->
+
+2. Si quiere asegurarse de que cualquiera que use su módulo de proceso pueda identificar inmediatamente las entradas requeridas, también puede hacer que la propiedad de metadatos requerida sea una entrada explícita.
+
+Aquí hay un ejemplo de cómo funcionaría.
+
+Primero, a nivel de proceso, actualice la definición de entrada como sigue:
+
+=== "Después"
+
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="2"
+        input:
+        tuple val(meta), val(character), path(input_file)
+    ```
+
+=== "Antes"
+
+    ```groovy title="cowpy.nf" linenums="12" hl_lines="2"
+        input:
+        tuple val(meta), path(input_file)
+    ```
+
+Luego, a nivel de workflow, use una operación de mapeo para extraer la propiedad `character` de los metadatos y convertirla en un componente explícito de la tupla de entrada:
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="37" hl_lines="1"
+        COWPY(ch_languages.map{meta, file -> [meta, meta.character, file]})
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="37" hl_lines="1"
+        COWPY(ch_languages)
+    ```
+
+Este enfoque tiene la ventaja de mostrar explícitamente que `character` es requerido, y hace que el proceso sea más fácil de redistribuir en otros contextos.
+
+Esto destaca un principio de diseño importante:
+
+**Use el mapa de metadatos para información opcional y descriptiva, pero extraiga los valores requeridos como entradas explícitas.**
+
+El mapa de metadatos es excelente para mantener las estructuras de canales limpias y prevenir estructuras de canales arbitrarias, pero para elementos obligatorios que se referencian directamente en un proceso, extraerlos como entradas explícitas crea código más robusto y mantenible.
+
+### Conclusión
+
+En esta sección, ha aprendido cómo utilizar metadatos para personalizar la ejecución de un proceso, accediendo a ellos ya sea a nivel de workflow o a nivel de proceso.
+
+---
+
+## Ejercicio complementario
+
+Si desea practicar el uso de información del mapa de metadatos desde dentro de un proceso, intente usar otras piezas de información del mapa de metadatos como `lang` y `lang_group` para personalizar cómo se nombran y/o organizan las salidas.
+
+Por ejemplo, intente modificar el código para producir este resultado:
+
+```console title="Contenido del directorio de resultados"
+results/
+├── germanic
+│   ├── de-guten_tag.txt
+│   ├── de-hallo.txt
+│   └── en-hello.txt
+└── romance
+    ├── es-hola.txt
+    ├── fr-bonjour.txt
+    ├── fr-salut.txt
+    └── it-ciao.txt
+```
+
+<!-- TODO (future) Provide worked out solution -->
+<!-- the renaming should use the meta inside the process -->
+<!-- the output org should use the meta in the workflow outputs -->
+
+---
+
+## Resumen
+
+En esta misión secundaria, ha explorado cómo trabajar efectivamente con metadatos en workflows de Nextflow.
+
+Este patrón de mantener los metadatos explícitos y adjuntos a los datos es una práctica fundamental en Nextflow, que ofrece varias ventajas sobre codificar la información de archivos:
+
+- Los metadatos de archivos permanecen asociados con los archivos a lo largo del workflow
+- El comportamiento de los procesos se puede personalizar por archivo
+- La organización de las salidas puede reflejar los metadatos de los archivos
+- La información de los archivos se puede expandir durante la ejecución del pipeline
+
+Aplicar este patrón en su propio trabajo le permitirá construir workflows de bioinformática robustos y mantenibles.
+
+### Patrones clave
+
+1.  **Lectura y estructuración de metadatos:** Leer archivos CSV y crear mapas de metadatos organizados que permanecen asociados con sus archivos de datos.
+
+    ```groovy
+    channel.fromPath('datasheet.csv')
+      .splitCsv(header: true)
+      .map { row ->
+          [ [id:row.id, character:row.character], row.recording ]
+      }
+    ```
+
+2.  **Expansión de metadatos durante el workflow:** Agregar nueva información a sus metadatos a medida que su pipeline avanza, agregando salidas de procesos y derivando valores a través de lógica condicional.
+
+    - Agregar nuevas claves basadas en salidas de procesos
+
+    ```groovy
+    .map { meta, file, lang ->
+      [ meta + [lang:lang], file ]
+    }
+    ```
+
+    - Agregar nuevas claves usando una cláusula condicional
+
+    ```groovy
+    .map{ meta, file ->
+        if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+            lang_group = "germanic"
+        } else if ( meta.lang in ["fr", "es", "it"] ) {
+            lang_group = "romance"
+        } else {
+            lang_group = "unknown"
+        }
+    }
+    ```
+
+3.  **Personalización del comportamiento del proceso:** Usar metadatos dentro del proceso.
+
+    ```groovy
+    cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+    ```
+
+### Recursos adicionales
+
+- [map](https://www.nextflow.io/docs/latest/operator.html#map)
+- [stdout](https://www.nextflow.io/docs/latest/process.html#outputs)
+
+---
+
+## ¿Qué sigue?
+
+Regrese al [menú de Misiones Secundarias](./index.md) o haga clic en el botón en la parte inferior derecha de la página para pasar al siguiente tema de la lista.

@@ -1364,4 +1364,71 @@ tree core-hello-results
     └── pipeline_info
         ├── execution_report_2025-11-21_04-47-18.html
         ├── execution_report_2025-11-21_07-29-37.html
-        ├── execution
+        ├── execution_timeline_2025-11-21_04-47-18.html
+        ├── execution_timeline_2025-11-21_07-29-37.html
+        ├── execution_trace_2025-11-21_04-47-18.txt
+        ├── execution_trace_2025-11-21_07-29-37.txt
+        ├── hello_software_versions.yml
+        ├── params_2025-11-21_04-47-13.json
+        ├── params_2025-11-21_07-29-41.json
+        └── pipeline_dag_2025-11-21_04-47-18.html
+        └── pipeline_dag_2025-11-21_07-29-37.html
+
+    1 directory, 12 files
+    ```
+
+Du siehst, dass wir neben den Berichten aus dem ersten Lauf, als der Workflow noch nur ein Platzhalter war, eine weitere Reihe von Ausführungsberichten erhalten haben.
+Dieses Mal siehst du alle Tasks, die wie erwartet ausgeführt wurden.
+
+![Ausführungs-Timeline-Bericht für die Hello-Pipeline](./img/execution_timeline_hello.png)
+
+!!! note "Hinweis"
+
+    Erneut wurden die Tasks nicht parallel ausgeführt, da wir auf einer minimalistischen Maschine in Github Codespaces laufen.
+    Um diese parallel ausgeführt zu sehen, versuche die CPU-Zuweisung deines Codespaces und die Ressourcenlimits in der Testkonfiguration zu erhöhen.
+
+Das ist großartig, aber unsere tatsächlichen Pipeline-Ergebnisse sind nicht dort!
+
+Hier ist, was passiert ist: Wir haben nichts an den Modulen selbst geändert, daher gehen die Ausgaben, die von `publishDir`-Direktiven auf Modulebene gesteuert werden, weiterhin in ein `results`-Verzeichnis, wie in der ursprünglichen Pipeline angegeben.
+
+```bash
+tree results
+```
+
+??? abstract "Verzeichnisinhalt"
+
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── COLLECTED-test-batch-output.txt
+    ├── COLLECTED-test-output.txt
+    ├── cowpy-COLLECTED-test-batch-output.txt
+    ├── cowpy-COLLECTED-test-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+
+    0 directories, 10 files
+    ```
+
+Ah, da sind sie, gemischt mit den Ausgaben früherer Läufe der ursprünglichen Hello-Pipeline.
+
+Wenn wir möchten, dass sie ordentlich organisiert sind wie die Ausgaben der Demo-Pipeline, müssen wir ändern, wie wir die Veröffentlichung der Ausgaben einrichten.
+Wie das geht, zeigen wir dir später in diesem Trainingskurs.
+
+<!-- TODO: Dies aktualisieren, sobald wir Hello Nextflow auf Workflow-Level-Ausgaben aktualisiert haben -->
+
+Und da ist es! Es mag nach viel Arbeit aussehen, um dasselbe Ergebnis wie die ursprüngliche Pipeline zu erzielen, aber du bekommst all diese schönen Berichte automatisch generiert, und du hast jetzt eine solide Grundlage, um zusätzliche Funktionen von nf-core zu nutzen, einschließlich Eingabevalidierung und einiger nützlicher Metadaten-Handling-Fähigkeiten, die wir in einem späteren Abschnitt behandeln werden.
+
+---
+
+### Zusammenfassung
+
+Du weißt, wie man eine reguläre Nextflow-Pipeline mithilfe des nf-core-Templates in eine Pipeline im nf-core-Stil umwandelt.
+Dabei hast du gelernt, wie man einen Workflow komponierbar macht und wie man die Elemente des nf-core-Templates identifiziert, die bei der Entwicklung einer benutzerdefinierten Pipeline im nf-core-Stil am häufigsten angepasst werden müssen.
+
+### Was kommt als Nächstes?
+
+Mach eine Pause, das war harte Arbeit! Wenn du bereit bist, fahre mit [Teil 3: Ein nf-core-Modul verwenden](./03_use_module.md) fort, um zu lernen, wie du von der Community gepflegte Module aus dem nf-core/modules-Repository nutzen kannst.

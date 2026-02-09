@@ -749,4 +749,504 @@ named closure का उपयोग करने से हम कई स्थ
         getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta, file(bam) ] }
     ```
 
-अब closure एक tuple लौटाता है जहाँ पहले तत्व में `id` और `repeat` फ़ील्ड हैं, और दूसरे तत्व में केवल `type` फ़ील्ड है। यह grouping key
+अब closure एक tuple लौटाता है जहाँ पहले तत्व में `id` और `repeat` फ़ील्ड हैं, और दूसरे तत्व में केवल `type` फ़ील्ड है। यह grouping key में `id` और `repeat` जानकारी को एक बार संग्रहीत करके अतिरेक को समाप्त करता है, जबकि सभी आवश्यक जानकारी बनाए रखता है।
+
+यह देखने के लिए वर्कफ़्लो चलाएं कि यह कैसा दिखता है:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "कमांड आउटपुट"
+
+    ```console
+    [[id:patientA, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
+    ```
+
+हम देख सकते हैं कि हम grouping key में `id` और `repeat` फ़ील्ड केवल एक बार बताते हैं और हमारे पास sample data में `type` फ़ील्ड है। हमने कोई जानकारी नहीं खोई है लेकिन हमने अपने channel contents को अधिक संक्षिप्त बनाने में सफलता प्राप्त की है।
+
+### 3.6. अतिरिक्त जानकारी हटाएं
+
+हमने ऊपर डुप्लिकेट जानकारी हटा दी, लेकिन हमारे channels में अभी भी कुछ अन्य अतिरिक्त जानकारी है।
+
+शुरुआत में, हमने `filter` का उपयोग करके normal और tumor नमूनों को अलग किया, फिर `id` और `repeat` keys के आधार पर उन्हें जोड़ा। `join` ऑपरेटर उस क्रम को संरक्षित करता है जिसमें tuples मर्ज किए जाते हैं, इसलिए हमारे मामले में, बाईं ओर normal नमूने और दाईं ओर tumor नमूनों के साथ, परिणामी channel यह संरचना बनाए रखता है: `id, <normal elements>, <tumor elements>`।
+
+चूँकि हम अपने channel में प्रत्येक तत्व की स्थिति जानते हैं, हम `[type:normal]` और `[type:tumor]` metadata को हटाकर संरचना को और सरल बना सकते हैं।
+
+=== "बाद"
+
+    ```groovy title="main.nf" linenums="8" hl_lines="1"
+        getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), file ] }
+    ```
+
+=== "पहले"
+
+    ```groovy title="main.nf" linenums="8" hl_lines="1"
+        getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file ] }
+    ```
+
+परिणाम देखने के लिए फिर से चलाएं:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "कमांड आउटपुट"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [confident_leavitt] DSL2 - revision: a2303895bd
+
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    ```
+
+### निष्कर्ष
+
+इस खंड में, आपने सीखा:
+
+- **Tuples को मैनिपुलेट करना**: tuple में किसी फ़ील्ड को अलग करने के लिए `map` का उपयोग कैसे करें
+- **Tuples को जोड़ना**: पहले फ़ील्ड के आधार पर tuples को संयोजित करने के लिए `join` का उपयोग कैसे करें
+- **Joining Keys बनाना**: नई joining key बनाने के लिए `subMap` का उपयोग कैसे करें
+- **Named Closures**: map में named closure का उपयोग कैसे करें
+- **Multiple Field Joining**: अधिक सटीक मिलान के लिए कई फ़ील्ड पर join कैसे करें
+- **डेटा संरचना अनुकूलन**: अतिरिक्त जानकारी हटाकर channel संरचना को कैसे सुव्यवस्थित करें
+
+अब आपके पास एक वर्कफ़्लो है जो samplesheet को विभाजित कर सकता है, normal और tumor नमूनों को फ़िल्टर कर सकता है, उन्हें sample ID और replicate number के आधार पर जोड़ सकता है, फिर परिणाम प्रिंट कर सकता है।
+
+यह बायोइन्फॉर्मेटिक्स वर्कफ़्लो में एक सामान्य पैटर्न है जहाँ आपको स्वतंत्र रूप से प्रोसेस करने के बाद नमूनों या अन्य प्रकार के डेटा को मिलाने की आवश्यकता होती है, इसलिए यह एक उपयोगी कौशल है। अगले भाग में, हम एक नमूने को कई बार दोहराने पर नज़र डालेंगे।
+
+## 4. नमूनों को intervals में फैलाएं
+
+बायोइन्फॉर्मेटिक्स वर्कफ़्लो में एक प्रमुख पैटर्न जीनोमिक क्षेत्रों में विश्लेषण का वितरण है। उदाहरण के लिए, variant calling को जीनोम को intervals (जैसे chromosomes या छोटे क्षेत्र) में विभाजित करके समानांतर बनाया जा सकता है। यह समानांतरीकरण रणनीति कई cores या nodes में computational load वितरित करके pipeline दक्षता में काफी सुधार करती है, जिससे समग्र execution समय कम होता है।
+
+निम्नलिखित खंड में, हम प्रदर्शित करेंगे कि कई जीनोमिक intervals में अपने sample data को कैसे वितरित किया जाए। हम प्रत्येक नमूने को प्रत्येक interval के साथ जोड़ेंगे, जिससे विभिन्न जीनोमिक क्षेत्रों का समानांतर प्रोसेसिंग संभव हो सकेगा। यह intervals की संख्या से हमारे dataset का आकार गुणा कर देगा, कई स्वतंत्र विश्लेषण इकाइयां बनाएगा जिन्हें बाद में वापस एक साथ लाया जा सकता है।
+
+### 4.1. `combine` का उपयोग करके नमूनों को intervals में फैलाएं
+
+चलिए intervals का एक channel बनाकर शुरू करते हैं। चीजों को सरल रखने के लिए, हम केवल 3 intervals का उपयोग करेंगे जिन्हें हम मैन्युअल रूप से परिभाषित करेंगे। एक वास्तविक वर्कफ़्लो में, आप इन्हें किसी फ़ाइल इनपुट से पढ़ सकते हैं या बहुत सी interval फ़ाइलों के साथ एक channel बना सकते हैं।
+
+=== "बाद"
+
+    ```groovy title="main.nf" linenums="17" hl_lines="2"
+            .join(ch_tumor_samples)
+        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
+    ```
+
+=== "पहले"
+
+    ```groovy title="main.nf" linenums="17" hl_lines="2"
+            .join(ch_tumor_samples)
+        ch_joined_samples.view()
+    ```
+
+याद रखें, हम प्रत्येक नमूने को प्रत्येक interval के लिए दोहराना चाहते हैं। इसे कभी-कभी नमूनों और intervals का Cartesian product कहा जाता है। हम [`combine` ऑपरेटर](https://www.nextflow.io/docs/latest/operator.html#combine) का उपयोग करके इसे प्राप्त कर सकते हैं। यह channel 1 से प्रत्येक आइटम लेगा और इसे channel 2 में प्रत्येक आइटम के लिए दोहराएगा। चलिए अपने वर्कफ़्लो में combine ऑपरेटर जोड़ते हैं:
+
+=== "बाद"
+
+    ```groovy title="main.nf" linenums="18" hl_lines="3-5"
+        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
+
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .view()
+    ```
+
+=== "पहले"
+
+    ```groovy title="main.nf" linenums="18"
+        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
+    ```
+
+अब चलिए इसे चलाते हैं और देखते हैं क्या होता है:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "कमांड आउटपुट"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
+
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr3]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr1]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr2]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr3]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr1]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr2]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr3]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr1]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr2]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]
+    ```
+
+सफलता! हमने अपनी 3 interval सूची में प्रत्येक interval के लिए हर नमूने को दोहराया है। हमने अपने channel में आइटम की संख्या को प्रभावी रूप से तीन गुना कर दिया है।
+
+हालांकि इसे पढ़ना थोड़ा कठिन है, इसलिए अगले खंड में हम इसे व्यवस्थित करेंगे।
+
+### 4.2. Channel को व्यवस्थित करें
+
+हम अपने sample data को व्यवस्थित और पुनर्गठित करने के लिए `map` ऑपरेटर का उपयोग कर सकते हैं ताकि इसे समझना आसान हो। चलिए intervals string को पहले तत्व में joining map में ले जाते हैं।
+
+=== "बाद"
+
+    ```groovy title="main.nf" linenums="20" hl_lines="3-9"
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .map { grouping_key, normal, tumor, interval ->
+                [
+                    grouping_key + [interval: interval],
+                    normal,
+                    tumor
+                ]
+            }
+            .view()
+    ```
+
+=== "पहले"
+
+    ```groovy title="main.nf" linenums="20"
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .view()
+    ```
+
+आइए चरण दर चरण समझें कि यह map ऑपरेशन क्या करता है।
+
+सबसे पहले, हम कोड को अधिक पठनीय बनाने के लिए named parameters का उपयोग करते हैं। `grouping_key`, `normal`, `tumor` और `interval` नामों का उपयोग करके, हम tuple में तत्वों को index के बजाय नाम से संदर्भित कर सकते हैं:
+
+```groovy
+        .map { grouping_key, normal, tumor, interval ->
+```
+
+इसके बाद, हम `grouping_key` को `interval` फ़ील्ड के साथ संयोजित करते हैं। `grouping_key` एक map है जिसमें `id` और `repeat` फ़ील्ड हैं। हम `interval` के साथ एक नया map बनाते हैं और उन्हें Groovy के map addition (`+`) का उपयोग करके मर्ज करते हैं:
+
+```groovy
+                grouping_key + [interval: interval],
+```
+
+अंत में, हम इसे तीन तत्वों वाले tuple के रूप में लौटाते हैं: combined metadata map, normal sample file, और tumor sample file:
+
+```groovy
+            [
+                grouping_key + [interval: interval],
+                normal,
+                tumor
+            ]
+```
+
+चलिए इसे फिर से चलाते हैं और channel contents की जांच करते हैं:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "कमांड आउटपुट"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
+
+    [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:1, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, repeat:2, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, repeat:2, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, repeat:1, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, repeat:1, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, repeat:1, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    ```
+
+अपने डेटा को सही संरचना में बदलने के लिए `map` का उपयोग करना मुश्किल हो सकता है, लेकिन प्रभावी डेटा मैनिपुलेशन के लिए यह महत्वपूर्ण है।
+
+अब हमारे पास प्रत्येक नमूना सभी जीनोमिक intervals में दोहराया गया है, जिससे कई स्वतंत्र विश्लेषण इकाइयां बनती हैं जिन्हें समानांतर में प्रोसेस किया जा सकता है। लेकिन क्या होगा अगर हम संबंधित नमूनों को वापस एक साथ लाना चाहते हैं? अगले खंड में, हम सीखेंगे कि समान विशेषताओं वाले नमूनों को कैसे समूहित किया जाए।
+
+### निष्कर्ष
+
+इस खंड में, आपने सीखा:
+
+- **नमूनों को intervals में फैलाना**: intervals में नमूनों को दोहराने के लिए `combine` का उपयोग कैसे करें
+- **Cartesian products बनाना**: नमूनों और intervals के सभी संयोजन कैसे उत्पन्न करें
+- **Channel संरचना व्यवस्थित करना**: बेहतर पठनीयता के लिए डेटा को पुनर्गठित करने के लिए `map` का उपयोग कैसे करें
+- **समानांतर प्रोसेसिंग की तैयारी**: वितरित विश्लेषण के लिए डेटा कैसे सेट करें
+
+## 5. `groupTuple` का उपयोग करके नमूनों को एकत्रित करना
+
+पिछले खंडों में, हमने सीखा कि इनपुट फ़ाइल से डेटा को कैसे विभाजित करें और विशिष्ट फ़ील्ड (हमारे मामले में normal और tumor नमूने) के आधार पर कैसे फ़िल्टर करें। लेकिन यह केवल एक प्रकार के joining को कवर करता है। क्या होगा अगर हम किसी विशिष्ट विशेषता के आधार पर नमूनों को समूहित करना चाहते हैं? उदाहरण के लिए, matched normal-tumor pairs को जोड़ने के बजाय, हम "sampleA" के सभी नमूनों को उनके type की परवाह किए बिना एक साथ प्रोसेस करना चाह सकते हैं। यह पैटर्न बायोइन्फॉर्मेटिक्स वर्कफ़्लो में सामान्य है जहाँ आप दक्षता के कारणों के लिए संबंधित नमूनों को अलग-अलग प्रोसेस करना चाह सकते हैं, इससे पहले कि अंत में परिणामों की तुलना या संयोजन करें।
+
+Nextflow में ऐसा करने के लिए built-in methods हैं, जिनमें से मुख्य जिसे हम देखेंगे वह है `groupTuple`।
+
+चलिए शुरू करते हैं अपने सभी नमूनों को समूहित करने से जिनके `id` और `interval` फ़ील्ड समान हैं, यह एक ऐसे विश्लेषण के लिए विशिष्ट होगा जहाँ हम technical replicates को समूहित करना चाहते थे लेकिन meaningfully different नमूनों को अलग रखना चाहते थे।
+
+ऐसा करने के लिए, हमें अपने grouping variables को अलग करना चाहिए ताकि हम उन्हें isolation में उपयोग कर सकें।
+
+पहला कदम पिछले खंड में हमने जो किया उसके समान है। हमें अपने grouping variable को tuple के पहले तत्व के रूप में अलग करना होगा। याद रखें, हमारा पहला तत्व वर्तमान में `id`, `repeat` और `interval` फ़ील्ड का map है:
+
+```groovy title="main.nf" linenums="1"
+{
+  "id": "sampleA",
+  "repeat": "1",
+  "interval": "chr1"
+}
+```
+
+हम पहले की तरह `subMap` method का पुन: उपयोग करके map से अपने `id` और `interval` फ़ील्ड को अलग कर सकते हैं। पहले की तरह, हम प्रत्येक नमूने के लिए tuple के पहले तत्व पर `subMap` method लागू करने के लिए `map` ऑपरेटर का उपयोग करेंगे।
+
+=== "बाद"
+
+    ```groovy title="main.nf" linenums="20" hl_lines="11-19"
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .map { grouping_key, normal, tumor, interval ->
+                [
+                    grouping_key + [interval: interval],
+                    normal,
+                    tumor
+                ]
+            }
+
+        ch_grouped_samples = ch_combined_samples
+            .map { grouping_key, normal, tumor ->
+                [
+                    grouping_key.subMap('id', 'interval'),
+                    normal,
+                    tumor
+                ]
+              }
+              .view()
+    ```
+
+=== "पहले"
+
+    ```groovy title="main.nf" linenums="20" hl_lines="10"
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .map { grouping_key, normal, tumor, interval ->
+                [
+                    grouping_key + [interval: interval],
+                    normal,
+                    tumor
+                ]
+            }
+            .view()
+    ```
+
+चलिए इसे फिर से चलाते हैं और channel contents की जांच करते हैं:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "कमांड आउटपुट"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
+
+    [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    ```
+
+हम देख सकते हैं कि हमने `id` और `interval` फ़ील्ड को सफलतापूर्वक अलग कर लिया है, लेकिन अभी तक नमूनों को समूहित नहीं किया है।
+
+!!! note
+
+    हम यहाँ `replicate` फ़ील्ड को हटा रहे हैं। ऐसा इसलिए है क्योंकि हमें इसकी आगे की downstream प्रोसेसिंग के लिए आवश्यकता नहीं है। इस ट्यूटोरियल को पूरा करने के बाद, देखें कि क्या आप इसे बाद के grouping को प्रभावित किए बिना शामिल कर सकते हैं!
+
+अब इस नए grouping तत्व के आधार पर नमूनों को समूहित करते हैं, [`groupTuple` ऑपरेटर](https://www.nextflow.io/docs/latest/operator.html#grouptuple) का उपयोग करके।
+
+=== "बाद"
+
+    ```groovy title="main.nf" linenums="30" hl_lines="9"
+        ch_grouped_samples = ch_combined_samples
+            .map { grouping_key, normal, tumor ->
+                [
+                    grouping_key.subMap('id', 'interval'),
+                    normal,
+                    tumor
+                ]
+              }
+              .groupTuple()
+              .view()
+    ```
+
+=== "पहले"
+
+    ```groovy title="main.nf" linenums="30"
+        ch_grouped_samples = ch_combined_samples
+            .map { grouping_key, normal, tumor ->
+                [
+                    grouping_key.subMap('id', 'interval'),
+                    normal,
+                    tumor
+                ]
+              }
+              .view()
+    ```
+
+बस इतना ही! हमने केवल एक पंक्ति का कोड जोड़ा। देखते हैं कि इसे चलाने पर क्या होता है:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "कमांड आउटपुट"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+
+    [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    ```
+
+ध्यान दें कि हमारे डेटा की संरचना बदल गई है और प्रत्येक channel तत्व के भीतर फ़ाइलें अब `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]` जैसे tuples में हैं। ऐसा इसलिए है क्योंकि जब हम `groupTuple` का उपयोग करते हैं, तो Nextflow एक group के प्रत्येक नमूने के लिए अलग-अलग फ़ाइलों को संयोजित करता है। downstream डेटा को संभालने का प्रयास करते समय इसे याद रखना महत्वपूर्ण है।
+
+!!! note
+
+    [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) groupTuple का विपरीत है। यह channel में आइटम को अनपैक और flatten करता है। `transpose` जोड़कर ऊपर किए गए grouping को पूर्ववत करने का प्रयास करें!
+
+### निष्कर्ष
+
+इस खंड में, आपने सीखा:
+
+- **संबंधित नमूनों का समूहीकरण**: समान विशेषताओं के आधार पर नमूनों को एकत्रित करने के लिए `groupTuple` का उपयोग कैसे करें
+- **Grouping keys को अलग करना**: grouping के लिए विशिष्ट फ़ील्ड निकालने के लिए `subMap` का उपयोग कैसे करें
+- **Grouped डेटा संरचनाओं को संभालना**: `groupTuple` द्वारा बनाई गई nested संरचना के साथ कैसे काम करें
+- **Technical replicate handling**: समान experimental conditions साझा करने वाले नमूनों को कैसे समूहित करें
+
+---
+
+## सारांश
+
+इस side quest में, आपने channels का उपयोग करके डेटा को विभाजित और समूहित करना सीखा।
+
+Pipeline के माध्यम से बहते डेटा को संशोधित करके, आप loops या while statements का उपयोग किए बिना एक scalable pipeline बना सकते हैं, जो अधिक पारंपरिक दृष्टिकोणों की तुलना में कई फायदे प्रदान करता है:
+
+- हम बिना किसी अतिरिक्त कोड के जितने चाहें उतने या कम इनपुट के लिए scale कर सकते हैं
+- हम iteration के बजाय pipeline के माध्यम से डेटा के प्रवाह को संभालने पर ध्यान केंद्रित करते हैं
+- हम आवश्यकतानुसार जटिल या सरल हो सकते हैं
+- Pipeline अधिक declarative हो जाती है, इस पर ध्यान केंद्रित करती है कि क्या होना चाहिए बजाय इसके कि कैसे होना चाहिए
+- Nextflow स्वतंत्र operations को समानांतर में चलाकर हमारे लिए execution को optimize करेगा
+
+इन channel operations में महारत हासिल करने से आप लचीली, scalable pipelines बना सकेंगे जो loops या iterative programming का सहारा लिए बिना जटिल डेटा संबंधों को संभालती हैं, जिससे Nextflow स्वचालित रूप से execution को optimize और स्वतंत्र operations को parallelize कर सके।
+
+### प्रमुख पैटर्न
+
+1.  **Structured input data बनाना:** meta maps के साथ CSV फ़ाइल से शुरू करना ([Metadata in workflows](./metadata.md) के पैटर्न पर आधारित)
+
+    ```groovy
+    ch_samples = channel.fromPath("./data/samplesheet.csv")
+        .splitCsv(header: true)
+        .map{ row ->
+          [[id:row.id, repeat:row.repeat, type:row.type], row.bam]
+        }
+    ```
+
+2.  **डेटा को अलग channels में विभाजित करना:** हमने `type` फ़ील्ड के आधार पर डेटा को स्वतंत्र streams में विभाजित करने के लिए `filter` का उपयोग किया
+
+    ```groovy
+    channel.filter { it.type == 'tumor' }
+    ```
+
+3.  **Matched नमूनों को जोड़ना:** हमने `id` और `repeat` फ़ील्ड के आधार पर संबंधित नमूनों को पुनः संयोजित करने के लिए `join` का उपयोग किया
+
+    - key के आधार पर दो channels को join करना (tuple का पहला तत्व)
+
+    ```groovy
+    tumor_ch.join(normal_ch)
+    ```
+
+    - Joining key निकालना और इस value से join करना
+
+    ```groovy
+    tumor_ch.map { meta, file -> [meta.id, meta, file] }
+        .join(
+          normal_ch.map { meta, file -> [meta.id, meta, file] }
+        )
+    ```
+
+    - subMap का उपयोग करके कई फ़ील्ड पर join करना
+
+    ```groovy
+    tumor_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+        .join(
+          normal_ch.map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
+        )
+    ```
+
+4.  **Intervals में वितरण:** हमने समानांतर प्रोसेसिंग के लिए नमूनों के जीनोमिक intervals के साथ Cartesian products बनाने के लिए `combine` का उपयोग किया।
+
+    ```groovy
+    samples_ch.combine(intervals_ch)
+    ```
+
+5.  **Grouping keys द्वारा एकत्रीकरण:** हमने प्रत्येक tuple में पहले तत्व के आधार पर समूहित करने के लिए `groupTuple` का उपयोग किया, जिससे `id` और `interval` फ़ील्ड साझा करने वाले नमूने एकत्र होते हैं और technical replicates मर्ज होते हैं।
+
+    ```groovy
+    channel.groupTuple()
+    ```
+
+6.  **डेटा संरचना का अनुकूलन:** हमने विशिष्ट फ़ील्ड निकालने के लिए `subMap` का उपयोग किया और transformations को पुन: प्रयोज्य बनाने के लिए named closure बनाई।
+
+    - Map से विशिष्ट फ़ील्ड निकालना
+
+    ```groovy
+    meta.subMap(['id', 'repeat'])
+    ```
+
+    - पुन: प्रयोज्य transformations के लिए named closure का उपयोग करना
+
+    ```groovy
+    getSampleIdAndReplicate = { meta, file -> [meta.subMap(['id', 'repeat']), file] }
+    channel.map(getSampleIdAndReplicate)
+    ```
+
+### अतिरिक्त संसाधन
+
+- [filter](https://www.nextflow.io/docs/latest/operator.html#filter)
+- [map](https://www.nextflow.io/docs/latest/operator.html#map)
+- [join](https://www.nextflow.io/docs/latest/operator.html#join)
+- [groupTuple](https://www.nextflow.io/docs/latest/operator.html#grouptuple)
+- [combine](https://www.nextflow.io/docs/latest/operator.html#combine)
+
+---
+
+## आगे क्या है?
+
+[Side Quests के मेनू](./index.md) पर लौटें या सूची में अगले विषय पर जाने के लिए पृष्ठ के नीचे दाईं ओर बटन पर क्लिक करें।

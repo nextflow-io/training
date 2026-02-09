@@ -1426,4 +1426,9 @@ Et voilà ! Cela peut sembler beaucoup de travail pour accomplir le même résul
 
 ### À retenir
 
-Vous savez comment convertir un pipeline Nextflow ordinaire en un pipeline de style nf-core en utilisant le modèle nf
+Vous savez comment convertir un pipeline Nextflow ordinaire en un pipeline de style nf-core en utilisant le modèle nf-core.
+Dans ce cadre, vous avez appris comment rendre un workflow composable et comment identifier les éléments du modèle nf-core qui doivent le plus souvent être adaptés lors du développement d'un pipeline personnalisé de style nf-core.
+
+### Et ensuite ?
+
+Prenez une pause, c'était un travail difficile ! Quand vous êtes prêt·e, passez à la [Partie 3 : Utiliser un module nf-core](./03_use_module.md) pour apprendre à exploiter les modules maintenus par la communauté du dépôt nf-core/modules.

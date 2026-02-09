@@ -1337,4 +1337,97 @@ Tüm değişiklikleri doğru yaptıysanız, tamamlanana kadar çalışmalıdır.
     ------------------------------------------------------
     executor >  local (1)
     [ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-    [45/bb6096] CORE_
+    [45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔
+    [96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
+Gördüğünüz gibi, başlatma alt workflow'u sayesinde başlangıçta tipik nf-core özeti üretildi ve her modül için satırlar artık tam PIPELINE:WORKFLOW:modül adlarını gösteriyor.
+
+### 4.5. Pipeline çıktılarını bulma
+
+Şimdi soru şu: pipeline'ın çıktıları nerede?
+Ve cevap oldukça ilginç: sonuçlara bakmak için artık iki farklı yer var.
+
+Daha önce hatırlayabileceğiniz gibi, yeni oluşturulan workflow'un ilk çalıştırması çeşitli yürütme raporları ve meta veriler içeren `core-hello-results/` adlı bir dizin oluşturmuştu.
+
+```bash
+tree core-hello-results
+```
+
+??? abstract "Dizin içeriği"
+
+    ```console
+    core-hello-results
+    └── pipeline_info
+        ├── execution_report_2025-11-21_04-47-18.html
+        ├── execution_report_2025-11-21_07-29-37.html
+        ├── execution_timeline_2025-11-21_04-47-18.html
+        ├── execution_timeline_2025-11-21_07-29-37.html
+        ├── execution_trace_2025-11-21_04-47-18.txt
+        ├── execution_trace_2025-11-21_07-29-37.txt
+        ├── hello_software_versions.yml
+        ├── params_2025-11-21_04-47-13.json
+        ├── params_2025-11-21_07-29-41.json
+        └── pipeline_dag_2025-11-21_04-47-18.html
+        └── pipeline_dag_2025-11-21_07-29-37.html
+
+    1 directory, 12 files
+    ```
+
+Workflow henüz yalnızca bir yer tutucu iken ilk çalıştırmada elde ettiklerimize ek olarak başka bir yürütme raporu seti aldığımızı görebilirsiniz.
+Bu sefer beklendiği gibi çalıştırılan tüm görevleri görüyorsunuz.
+
+![Hello pipeline'ı için yürütme zaman çizelgesi raporu](./img/execution_timeline_hello.png)
+
+!!! note
+
+    Bir kez daha görevler paralel olarak çalıştırılmadı çünkü Github Codespaces'te minimalist bir makinede çalışıyoruz.
+    Bunların paralel çalıştığını görmek için, codespace'inizin CPU tahsisini ve test yapılandırmasındaki kaynak limitlerini artırmayı deneyin.
+
+Bu harika, ama gerçek pipeline sonuçlarımız orada değil!
+
+İşte olan: modüllerin kendilerinde hiçbir şeyi değiştirmedik, bu nedenle modül düzeyindeki `publishDir` yönergeleri tarafından işlenen çıktılar hala orijinal pipeline'da belirtildiği gibi bir `results` dizinine gidiyor.
+
+```bash
+tree results
+```
+
+??? abstract "Dizin içeriği"
+
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── COLLECTED-test-batch-output.txt
+    ├── COLLECTED-test-output.txt
+    ├── cowpy-COLLECTED-test-batch-output.txt
+    ├── cowpy-COLLECTED-test-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+
+    0 directories, 10 files
+    ```
+
+Ah, işte buradalar, orijinal Hello pipeline'ının önceki çalıştırmalarının çıktılarıyla karışmış halde.
+
+Bunların demo pipeline'ının çıktıları gibi düzgün bir şekilde organize edilmesini istiyorsak, çıktıların nasıl yayınlanacağını değiştirmemiz gerekecek.
+Bunu bu eğitim kursunun ilerleyen bölümlerinde nasıl yapacağınızı göstereceğiz.
+
+<!-- TODO: Hello Nextflow'u workflow düzeyinde çıktılar kullanacak şekilde güncelledikten sonra bunu güncelleyin -->
+
+İşte bu kadar! Orijinal pipeline ile aynı sonucu elde etmek için çok fazla iş gibi görünebilir, ancak tüm bu güzel raporları otomatik olarak oluşturuyorsunuz ve artık girdi doğrulama ve daha sonraki bir bölümde ele alacağımız bazı düzenli meta veri işleme yetenekleri dahil olmak üzere nf-core'un ek özelliklerinden yararlanmak için sağlam bir temele sahipsiniz.
+
+---
+
+### Çıkarım
+
+nf-core şablonunu kullanarak normal bir Nextflow pipeline'ını nf-core stili bir pipeline'a nasıl dönüştüreceğinizi biliyorsunuz.
+Bu süreçte, bir workflow'u nasıl birleştirilebilir yapacağınızı ve özel bir nf-core stili pipeline geliştirirken en yaygın olarak uyarlanması gereken nf-core şablon öğelerini nasıl belirleyeceğinizi öğrendiniz.
+
+### Sırada ne var?
+
+Bir mola verin, bu zorlu bir çalışmaydı! Hazır olduğunuzda, nf-core/modules deposundan topluluk tarafından bakımı yapılan modülleri nasıl kullanacağınızı öğrenmek için [Bölüm 3: Bir nf-core modülü kullanma](./03_use_module.md) bölümüne geçin.
