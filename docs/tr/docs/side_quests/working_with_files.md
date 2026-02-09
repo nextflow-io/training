@@ -30,8 +30,6 @@ Bu yan göreve başlamadan önce:
 - [Hello Nextflow](../../hello_nextflow/) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.
 - Temel Nextflow kavramları ve mekanizmalarını (process'ler, channel'lar, operatörler) rahatça kullanabiliyor olmalısınız
 
-<!-- Meta map'ler yan görevini önce yapmayı öneren kısmı kaldırdım çünkü bu daha sonra doğal olarak çalışıyor -->
-
 ---
 
 ## 0. Başlangıç
@@ -1862,7 +1860,7 @@ nextflow run main.nf
     │   │       └── patientB_stats.txt
     │   └── patientC
     │       └── 1
-    │           └── patientA_stats.txt
+    │           └── patientC_stats.txt
     └── tumor
         ├── patientA
         │   ├── 1
@@ -1874,7 +1872,7 @@ nextflow run main.nf
         │       └── patientB_stats.txt
         └── patientC
             └── 1
-                └── patientA_stats.txt
+                └── patientC_stats.txt
     ```
 
 İşte burada, tüm meta verilerimiz düzgünce organize edilmiş. Bu başarı!

@@ -1,36 +1,35 @@
 # जीनोमिक्स के लिए Nextflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](../../hello_nextflow/)</span>
 
-यह प्रशिक्षण पाठ्यक्रम जीनोमिक्स और संबंधित क्षेत्रों के शोधकर्ताओं के लिए है जो डेटा विश्लेषण pipelines विकसित करने या उन्हें अनुकूलित करने में रुचि रखते हैं।
-यह [Hello Nextflow](../../hello_nextflow/) शुरुआती प्रशिक्षण पर आधारित है और यह प्रदर्शित करता है कि जीनोमिक्स डोमेन के विशिष्ट संदर्भ में Nextflow का उपयोग कैसे करें।
+**एक व्यावहारिक पाठ्यक्रम जो Nextflow को वास्तविक दुनिया के जीनोमिक्स उपयोग के मामले में लागू करता है: GATK के साथ variant calling।**
 
-विशेष रूप से, यह पाठ्यक्रम [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) के साथ एक साधारण variant calling pipeline को लागू करने का तरीका प्रदर्शित करता है, जो high-throughput sequencing डेटा के विश्लेषण के लिए व्यापक रूप से उपयोग किया जाने वाला software package है।
+यह पाठ्यक्रम [Hello Nextflow](../../hello_nextflow/) शुरुआती प्रशिक्षण पर आधारित है और यह प्रदर्शित करता है कि जीनोमिक्स डोमेन के विशिष्ट संदर्भ में Nextflow का उपयोग कैसे करें।
+तुम [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) के साथ एक variant calling pipeline लागू करोगे, जो high-throughput sequencing डेटा के विश्लेषण के लिए व्यापक रूप से उपयोग किया जाने वाला software package है।
 
-आइए शुरू करें! प्रशिक्षण वातावरण लॉन्च करने के लिए नीचे "Open in GitHub Codespaces" बटन पर क्लिक करें (अधिमानतः एक अलग टैब में), फिर जब वह लोड हो रहा हो तब आगे पढ़ें।
+<!-- additional_information -->
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+## पाठ्यक्रम का अवलोकन
 
-## सीखने के उद्देश्य
+यह पाठ्यक्रम व्यावहारिक है, जिसमें लक्ष्य-उन्मुख अभ्यास हैं जो जानकारी को क्रमिक रूप से प्रस्तुत करने के लिए संरचित हैं।
 
-इस पाठ्यक्रम के माध्यम से काम करके, आप सीखेंगे कि एक विशिष्ट जीनोमिक्स उपयोग के मामले में बुनियादी Nextflow अवधारणाओं और टूलिंग को कैसे लागू करें।
+तुम पहले methodology को समझने के लिए terminal में manually variant calling tools चलाओगे, फिर धीरे-धीरे एक Nextflow pipeline बनाओगे जो विश्लेषण को स्वचालित और स्केल करती है।
 
-इस workshop के अंत तक आप सक्षम होंगे:
+### पाठ योजना
 
-- एक single नमूने पर variant calling लागू करने के लिए एक linear workflow लिखना
-- index फ़ाइलें और reference genome संसाधनों जैसी सहायक फ़ाइलों को उचित रूप से संभालना
-- per-sample variant calling को समानांतर करने के लिए Nextflow के dataflow paradigm का लाभ उठाना
-- प्रासंगिक channel operators का उपयोग करके multi-sample variant calling को लागू करना
-- per-step और end-to-end pipeline tests को लागू करना जो जीनोमिक्स-विशिष्ट विशेषताओं को उचित रूप से संभालते हैं
+हमने इसे तीन भागों में विभाजित किया है जो प्रत्येक जीनोमिक्स उपयोग के मामले में Nextflow को लागू करने के विशिष्ट पहलुओं पर ध्यान केंद्रित करते हैं।
 
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+| पाठ्यक्रम अध्याय                                                         | सारांश                                                                                          | अनुमानित अवधि |
+| ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ------------- |
+| [Part 1: Method overview](./01_method.md)                                | Variant calling methodology को समझना और tools को manually चलाना                               | 30 मिनट       |
+| [Part 2: Per-sample variant calling](./02_per_sample_variant_calling.md) | एक pipeline बनाना जो BAM फ़ाइलों को index करती है और variants को call करती है, फिर कई नमूनों तक स्केल करना | 60 मिनट       |
+| [Part 3: Joint calling on a cohort](./03_joint_calling.md)               | Channel operators का उपयोग करके multi-sample joint genotyping जोड़ना ताकि per-sample outputs को aggregate किया जा सके | 45 मिनट       |
 
-## पूर्वापेक्षाएँ
+इस पाठ्यक्रम के अंत तक, तुम एक विशिष्ट जीनोमिक्स उपयोग के मामले में बुनियादी Nextflow अवधारणाओं और टूलिंग को लागू कर सकोगे।
 
-पाठ्यक्रम निम्नलिखित के साथ न्यूनतम परिचय मानता है:
+पाठ्यक्रम लेने के लिए तैयार हो?
 
-- इस वैज्ञानिक डोमेन में सामान्यतः उपयोग किए जाने वाले tools और file formats
-- command line के साथ अनुभव
-- [Hello Nextflow](../../hello_nextflow/) शुरुआती प्रशिक्षण में शामिल बुनियादी Nextflow अवधारणाओं और टूलिंग
+[शुरू करें :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
 
-तकनीकी आवश्यकताओं और वातावरण सेटअप के लिए, [Environment Setup](../../envsetup/) mini-course देखें।
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>

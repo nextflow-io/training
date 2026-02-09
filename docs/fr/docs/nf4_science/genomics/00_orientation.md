@@ -1,20 +1,66 @@
-# Orientation
+# Premiers pas
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-L'environnement de formation contient tous les logiciels, le code et les données nécessaires pour suivre cette formation, vous n'avez donc rien à installer vous-même.
-Cependant, vous avez besoin d'un compte (gratuit) pour vous connecter, et vous devriez prendre quelques minutes pour vous familiariser avec l'interface.
+## Démarrer un environnement de formation
 
-Si vous ne l'avez pas encore fait, veuillez suivre [ce lien](../../../envsetup/) avant de continuer.
+Pour utiliser l'environnement pré-construit que nous fournissons sur GitHub Codespaces, cliquez sur le bouton « Open in GitHub Codespaces » ci-dessous. Pour d'autres options, consultez [Options d'environnement](../../envsetup/index.md).
 
-## Matériel fourni
+Nous recommandons d'ouvrir l'environnement de formation dans un nouvel onglet ou une nouvelle fenêtre de navigateur (utilisez clic droit, ctrl-clic ou cmd-clic selon votre équipement) afin de pouvoir continuer à lire pendant le chargement de l'environnement.
+Vous devrez garder ces instructions ouvertes en parallèle pour suivre le cours.
 
-Tout au long de cette formation, nous travaillerons dans le répertoire `nf4-science/genomics/`, dans lequel vous devez vous déplacer lorsque vous ouvrez l'espace de travail de formation.
-Ce répertoire contient tous les fichiers de code, les données de test et les fichiers accessoires dont vous aurez besoin.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-N'hésitez pas à explorer le contenu de ce répertoire ; le moyen le plus simple est d'utiliser l'explorateur de fichiers sur le côté gauche de l'espace de travail de formation dans l'interface VSCode.
-Vous pouvez également utiliser la commande `tree`.
-Tout au long de la formation, nous utilisons la sortie de `tree` pour représenter la structure et le contenu des répertoires sous une forme lisible, parfois avec des modifications mineures pour plus de clarté.
+### Bases de l'environnement
+
+Cet environnement de formation contient tous les logiciels, le code et les données nécessaires pour suivre cette formation, vous n'avez donc rien à installer vous-même.
+
+Le codespace est configuré avec une interface VSCode, qui comprend un explorateur de système de fichiers, un éditeur de code et un terminal shell.
+Toutes les instructions données pendant le cours (par exemple « ouvrez le fichier », « modifiez le code » ou « exécutez cette commande ») font référence à ces trois parties de l'interface VScode sauf indication contraire.
+
+Si vous suivez ce cours par vous-même, veuillez vous familiariser avec les [bases de l'environnement](../../envsetup/01_setup.md) pour plus de détails.
+
+### Exigences de version
+
+Cette formation est conçue pour Nextflow 25.10.2 ou ultérieur **avec le parseur de syntaxe v2 ACTIVÉ**.
+Si vous utilisez un environnement local ou personnalisé, assurez-vous d'utiliser les paramètres corrects comme documenté [ici](../../info/nxf_versions.md).
+
+## Préparez-vous à travailler
+
+Une fois votre codespace en cours d'exécution, vous devez faire deux choses avant de plonger dans la formation : définir votre répertoire de travail pour ce cours spécifique et jeter un œil au matériel fourni.
+
+### Définir le répertoire de travail
+
+Par défaut, le codespace s'ouvre avec le répertoire de travail défini à la racine de tous les cours de formation, mais pour ce cours, nous travaillerons dans le répertoire `nf4-science/genomics/`.
+
+Changez de répertoire maintenant en exécutant cette commande dans le terminal :
+
+```bash
+cd nf4-science/genomics/
+```
+
+Vous pouvez configurer VSCode pour qu'il se concentre sur ce répertoire, de sorte que seuls les fichiers pertinents s'affichent dans la barre latérale de l'explorateur de fichiers :
+
+```bash
+code .
+```
+
+!!! tip
+
+    Si pour une raison quelconque vous sortez de ce répertoire (par exemple si votre codespace se met en veille), vous pouvez toujours utiliser le chemin complet pour y revenir, en supposant que vous travaillez dans l'environnement de formation Github Codespaces :
+
+    ```bash
+    cd /workspaces/training/nf4-science/genomics
+    ```
+
+Maintenant, jetons un œil au contenu.
+
+### Explorer le matériel fourni
+
+Vous pouvez explorer le contenu de ce répertoire en utilisant l'explorateur de fichiers sur le côté gauche de l'espace de travail de formation.
+Alternativement, vous pouvez utiliser la commande `tree`.
+
+Tout au long du cours, nous utilisons la sortie de `tree` pour représenter la structure et le contenu des répertoires sous une forme lisible, parfois avec des modifications mineures pour plus de clarté.
 
 Ici, nous générons une table des matières jusqu'au deuxième niveau :
 
@@ -22,53 +68,52 @@ Ici, nous générons une table des matières jusqu'au deuxième niveau :
 tree . -L 2
 ```
 
-Si vous exécutez cette commande à l'intérieur de `nf4-science/genomics`, vous devriez voir la sortie suivante :
+??? abstract "Contenu du répertoire"
 
-```console title="Contenu du répertoire"
-
-.
-├── data
-│   ├── bam
-│   ├── ref
-│   ├── sample_bams.txt
-│   └── samplesheet.csv
-├── genomics-1.nf
-├── genomics-2.nf
-├── genomics-3.nf
-├── genomics-4.nf
-├── nextflow.config
-└── solutions
+    ```console
+    .
+    ├── data
+    │   ├── bam
+    │   ├── ref
+    │   ├── sample_bams.txt
+    │   └── samplesheet.csv
+    ├── genomics.nf
     ├── modules
-    ├── nf-test.config
-    └── tests
+    │   ├── gatk_haplotypecaller.nf
+    │   └── samtools_index.nf
+    ├── nextflow.config
+    └── solutions
+        ├── modules
+        ├── nf-test.config
+        ├── part2
+        └── tests
 
-6 directories, 8 files
+    8 directories, 8 files
+    ```
 
-```
+Cliquez sur la boîte colorée pour développer la section et voir son contenu.
+Nous utilisons des sections repliables comme celle-ci pour afficher la sortie de commande attendue ainsi que le contenu des répertoires et des fichiers de manière concise.
 
-!!!note
+- **Le fichier `genomics.nf`** est un script de workflow que vous construirez au fil du cours.
 
-    Ne vous inquiétez pas si cela semble beaucoup ; nous passerons en revue les éléments pertinents à chaque étape de la formation.
-    Ceci est juste destiné à vous donner un aperçu.
-
-**Voici un résumé de ce que vous devez savoir pour commencer :**
-
-- **Les fichiers `.nf`** sont des scripts de workflow nommés en fonction de la partie de la formation dans laquelle ils sont utilisés.
+- **Le répertoire `modules`** contient des fichiers de modules squelettes que vous remplirez pendant le cours.
 
 - **Le fichier `nextflow.config`** est un fichier de configuration qui définit des propriétés minimales de l'environnement.
   Vous pouvez l'ignorer pour l'instant.
 
-- **Le répertoire `data`** contient les données d'entrée et les ressources associées, décrites plus tard dans la formation.
+- **Le répertoire `data`** contient les données d'entrée et les ressources associées, décrites plus tard dans le cours.
 
-- **Le répertoire `solutions`** contient les fichiers de modules et les configurations de tests qui résultent des parties 3 et 4 de la formation.
+- **Le répertoire `solutions`** contient des fichiers de modules complétés et une solution pour la Partie 2 qui peut servir de point de départ pour la Partie 3.
   Ils sont destinés à être utilisés comme référence pour vérifier votre travail et résoudre tout problème.
 
-!!!tip
+## Liste de vérification de préparation
 
-    Si pour une raison quelconque vous sortez de ce répertoire, vous pouvez toujours exécuter cette commande pour y revenir :
+Pensez-vous être prêt·e à vous lancer ?
 
-    ```bash
-    cd /workspaces/training/nf4-science/genomics
-    ```
+- [ ] Je comprends l'objectif de ce cours et ses prérequis
+- [ ] Mon environnement est opérationnel
+- [ ] J'ai défini mon répertoire de travail de manière appropriée
 
-Maintenant, pour commencer la formation, cliquez sur la flèche dans le coin inférieur droit de cette page.
+Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
+
+**Pour continuer vers [Partie 1 : Aperçu de la méthode et tests manuels](./01_method.md), cliquez sur la flèche dans le coin inférieur droit de cette page.**

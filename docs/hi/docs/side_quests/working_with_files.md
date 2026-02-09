@@ -768,7 +768,7 @@ nextflow run main.nf
 === "पहले"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // एक string path से Path ऑब्जेक्ट बनाएं
+        // इंटरनेट से रिमोट फ़ाइल का उपयोग
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // फ़ाइल विशेषताएँ प्रिंट करें
@@ -1343,7 +1343,7 @@ data/patientA_rep1_normal_R{1,2}_001.fastq.gz
 === "पहले"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // channel.fromFilePairs के साथ फ़ाइलें लोड करें
+        // channel.fromPath के साथ फ़ाइलें लोड करें
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
@@ -1371,7 +1371,7 @@ nextflow run main.nf
 
 ??? failure "कमांड आउटपुट"
 
-    ```console hl_lines="7-8"
+    ```console hl_lines="7"
      N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [angry_koch] DSL2 - revision: 44fdf66105
@@ -1632,7 +1632,7 @@ Main workflow में, `.view()` ऑपरेटर को `.set { ch_samples 
         // channel.fromFilePairs के साथ फ़ाइलें लोड करें
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (sample, replicate, type) = id.tokenize('_')
            [
                [
                    id: sample,
@@ -1654,7 +1654,7 @@ Main workflow में, `.view()` ऑपरेटर को `.set { ch_samples 
         // channel.fromFilePairs के साथ फ़ाइलें लोड करें
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_files.map { id,  files ->
-           def (sample, replicate, type, readNum) = id.tokenize('_')
+           def (sample, replicate, type) = id.tokenize('_')
            [
                [
                    id: sample,
@@ -1751,7 +1751,7 @@ Process ने हमारे inputs लिए और patient metadata वा�
 बेशक, यह single patient के लिए बस single pair of फ़ाइलों को process कर रहा है, जो exactly उस तरह का high throughput नहीं है जिसकी तुम Nextflow के साथ उम्मीद कर रहे हो।
 तुम शायद एक समय में बहुत अधिक डेटा process करना चाहोगे।
 
-याद रखो `channel.fromPath()` input के रूप में एक _glob_ accept करता है, जिसका मतलब है कि यह pattern से match करने वाली किसी भी संख्या में फ़ाइलें accept कर सकता है।
+याद रखो `channel.fromFilePairs()` input के रूप में एक _glob_ accept करता है, जिसका मतलब है कि यह pattern से match करने वाली किसी भी संख्या में फ़ाइलें accept कर सकता है।
 इसलिए यदि हम सभी patients को include करना चाहते हैं, हम बस अधिक patients include करने के लिए input string modify कर सकते हैं, जैसा कि पहले passing में note किया गया था।
 
 मान लो हम जितना possible हो उतना greedy होना चाहते हैं।
@@ -1983,7 +1983,7 @@ nextflow run main.nf
     }
     ```
 
-4.  **Filenames से Patient Metadata Extract करना:** हमने filenames से metadata extract और structure करने के लिए `tokenize()` और `replace()` का उपयोग किया, उन्हें organized maps में convert करते हुए।
+4.  **Filenames सेPatient Metadata Extract करना:** हमने filenames से metadata extract और structure करने के लिए `tokenize()` और `replace()` का उपयोग किया, उन्हें organized maps में convert करते हुए।
 
     ```groovy
     def name = file.name.tokenize('_')
@@ -2006,7 +2006,7 @@ nextflow run main.nf
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_files.map { id,  files ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
+        def (sample, replicate, type) = id.tokenize('_')
         [
             [
                 id: sample,

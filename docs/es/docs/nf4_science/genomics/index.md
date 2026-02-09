@@ -1,36 +1,33 @@
 # Nextflow para Genómica
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+**Un curso práctico que aplica Nextflow a un caso de uso real de genómica: llamado de variantes con GATK.**
 
-Este curso de entrenamiento está dirigido a investigadores en genómica y campos relacionados que estén interesados en desarrollar o personalizar pipelines de análisis de datos.
-Se basa en el entrenamiento para principiantes [Hello Nextflow](../../hello_nextflow/) y demuestra cómo usar Nextflow en el contexto específico del dominio de la genómica.
+Este curso se basa en el entrenamiento para principiantes [Hello Nextflow](../../hello_nextflow/) y demuestra cómo usar Nextflow en el contexto específico del dominio de la genómica.
+Implementará un pipeline de llamado de variantes con [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un paquete de software ampliamente utilizado para analizar datos de secuenciación de alto rendimiento.
 
-Específicamente, este curso demuestra cómo implementar un pipeline simple de llamado de variantes con [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un paquete de software ampliamente utilizado para analizar datos de secuenciación de alto rendimiento.
+<!-- additional_information -->
 
-¡Comencemos! Haga clic en el botón "Open in GitHub Codespaces" a continuación para iniciar el entorno de entrenamiento (preferiblemente en una pestaña separada), luego continúe leyendo mientras se carga.
+## Descripción del curso
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+Este curso es práctico, con ejercicios orientados a objetivos estructurados para introducir información gradualmente.
 
-## Objetivos de aprendizaje
+Comenzará ejecutando las herramientas de llamado de variantes manualmente en la terminal para comprender la metodología, luego construirá progresivamente un pipeline de Nextflow que automatiza y escala el análisis.
 
-Al completar este curso, aprenderá cómo aplicar conceptos y herramientas fundamentales de Nextflow a un caso de uso típico de genómica.
+### Plan de lecciones
 
-Al final de este taller será capaz de:
+Hemos dividido esto en tres partes que se enfocan en aspectos específicos de aplicar Nextflow a un caso de uso de genómica.
 
-- Escribir un workflow lineal para aplicar llamado de variantes a una única muestra
-- Manejar archivos accesorios como archivos de índice y recursos del genoma de referencia de manera apropiada
-- Aprovechar el paradigma de flujo de datos de Nextflow para paralelizar el llamado de variantes por muestra
-- Implementar llamado de variantes de múltiples muestras utilizando operadores de canal relevantes
-- Implementar pruebas por paso y de extremo a extremo del pipeline que manejen idiosincrasias específicas de genómica de manera apropiada
+| Capítulo del curso                                                         | Resumen                                                                                                        | Duración estimada |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------- |
+| [Parte 1: Descripción del método](./01_method.md)                         | Comprender la metodología de llamado de variantes y ejecutar las herramientas manualmente                     | 30 min            |
+| [Parte 2: Llamado de variantes por muestra](./02_per_sample_variant_calling.md) | Construir un pipeline que indexa archivos BAM y llama variantes, luego escalar a múltiples muestras          | 60 min            |
+| [Parte 3: Llamado conjunto en una cohorte](./03_joint_calling.md)         | Agregar genotipado conjunto de múltiples muestras usando operadores de canal para agregar salidas por muestra | 45 min            |
 
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+Al finalizar este curso, podrá aplicar conceptos y herramientas fundamentales de Nextflow a un caso de uso típico de genómica.
 
-## Requisitos previos
+¿Listo para tomar el curso?
 
-El curso asume cierta familiaridad mínima con lo siguiente:
+[Comenzar :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
 
-- Herramientas y formatos de archivo comúnmente utilizados en este dominio científico
-- Experiencia con la línea de comandos
-- Conceptos fundamentales de Nextflow y herramientas cubiertas en el entrenamiento para principiantes [Hello Nextflow](../../hello_nextflow/)
-
-Para requisitos técnicos y configuración del entorno, consulte el mini-curso [Configuración del Entorno](../../envsetup/).
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>

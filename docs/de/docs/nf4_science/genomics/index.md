@@ -2,41 +2,51 @@
 title: Nextflow für Genomik
 hide:
   - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Einen linearen Workflow zu schreiben, um Variant Calling auf eine einzelne Probe anzuwenden
+    - Zusatzdateien wie Index-Dateien und Referenzgenom-Ressourcen angemessen zu handhaben
+    - Das Dataflow-Paradigm von Nextflow zu nutzen, um Variant Calling pro Probe zu parallelisieren
+    - Multi-Sample Joint Calling mit relevanten Channel-Operatoren zu implementieren
+  audience_prerequisites:
+    - "**Zielgruppe:** Dieser Kurs richtet sich an Forschende im Bereich Genomik und verwandten Feldern, die Datenanalyse-Pipelines entwickeln oder anpassen möchten."
+    - "**Kenntnisse:** Grundlegende Vertrautheit mit der Kommandozeile, grundlegenden Scripting-Konzepten und gängigen Dateiformaten der Genomik wird vorausgesetzt."
+    - "**Voraussetzungen:** Grundlegende Nextflow-Konzepte und -Werkzeuge, die im Kurs [Hello Nextflow](../../hello_nextflow/) behandelt werden."
 ---
 
 # Nextflow für Genomik
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+**Ein praxisorientierter Kurs, der Nextflow auf einen realen Genomik-Anwendungsfall anwendet: Variant Calling mit GATK.**
 
-Dieser Trainingskurs richtet sich an Forschende im Bereich Genomik und verwandten Feldern, die daran interessiert sind, Datenanalyse-Pipelines zu entwickeln oder anzupassen.
-Er baut auf dem [Hello Nextflow](../../hello_nextflow/) Einsteiger-Training auf und zeigt, wie du Nextflow im spezifischen Kontext der Genomik-Domäne nutzen kannst.
+Dieser Kurs baut auf dem [Hello Nextflow](../../hello_nextflow/) Einsteiger-Training auf und zeigt, wie du Nextflow im spezifischen Kontext der Genomik-Domäne nutzen kannst.
+Du wirst eine Variant-Calling-Pipeline mit [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) implementieren, einem weit verbreiteten Softwarepaket zur Analyse von High-Throughput-Sequenzierungsdaten.
 
-Konkret demonstriert dieser Kurs, wie du eine einfache Variant-Calling-Pipeline mit [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) implementierst, einem weit verbreiteten Softwarepaket zur Analyse von High-Throughput-Sequenzierungsdaten.
+<!-- additional_information -->
 
-Los geht's! Klicke auf die Schaltfläche „Open in GitHub Codespaces" unten, um die Trainingsumgebung zu starten (am besten in einem separaten Tab), und lies dann weiter, während sie lädt.
+## Kursübersicht
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+Dieser Kurs ist praxisorientiert, mit zielgerichteten Übungen, die darauf ausgelegt sind, Informationen schrittweise einzuführen.
 
-## Lernziele
+Du beginnst damit, die Variant-Calling-Tools manuell im Terminal auszuführen, um die Methodik zu verstehen, und baust dann schrittweise eine Nextflow-Pipeline auf, die die Analyse automatisiert und skaliert.
 
-Durch die Bearbeitung dieses Kurses lernst du, wie du grundlegende Nextflow-Konzepte und -Werkzeuge auf einen typischen Genomik-Anwendungsfall anwendest.
+### Lektionsplan
 
-Am Ende dieses Workshops kannst du:
+Wir haben dies in drei Teile unterteilt, die sich jeweils auf spezifische Aspekte der Anwendung von Nextflow auf einen Genomik-Anwendungsfall konzentrieren.
 
-- Einen linearen Workflow zu schreiben, um Variant Calling auf eine einzelne Probe anzuwenden
-- Zusatzdateien wie Index-Dateien und Referenzgenom-Ressourcen angemessen zu handhaben
-- Das Dataflow-Paradigma von Nextflow zu nutzen, um Variant Calling pro Probe zu parallelisieren
-- Multi-Sample Variant Calling mit relevanten Channel-Operatoren zu implementieren
-- Tests pro Schritt und Ende-zu-Ende-Pipeline-Tests zu implementieren, die genomik-spezifische Besonderheiten angemessen behandeln
+| Kurskapitel                                                               | Zusammenfassung                                                                                               | Geschätzte Dauer |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------- |
+| [Teil 1: Methodenübersicht](./01_method.md)                               | Verständnis der Variant-Calling-Methodik und manuelle Ausführung der Tools                                    | 30 Min.          |
+| [Teil 2: Variant Calling pro Probe](./02_per_sample_variant_calling.md)   | Aufbau einer Pipeline, die BAM-Dateien indexiert und Varianten aufruft, dann Skalierung auf mehrere Proben   | 60 Min.          |
+| [Teil 3: Joint Calling auf einer Kohorte](./03_joint_calling.md)          | Hinzufügen von Multi-Sample Joint Genotyping mit Channel-Operatoren zur Aggregation von Ausgaben pro Probe    | 45 Min.          |
 
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+Am Ende dieses Kurses kannst du grundlegende Nextflow-Konzepte und -Werkzeuge auf einen typischen Genomik-Anwendungsfall anwenden.
 
-## Voraussetzungen
+Bereit, den Kurs zu starten?
 
-Der Kurs setzt ein Mindestmaß an Vertrautheit mit Folgendem voraus:
+[Los geht's :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
 
-- Werkzeuge und Dateiformate, die in diesem wissenschaftlichen Bereich häufig verwendet werden
-- Erfahrung mit der Kommandozeile
-- Grundlegende Nextflow-Konzepte und -Werkzeuge, die im [Hello Nextflow](../../hello_nextflow/) Einsteiger-Training behandelt werden.
-
-Für technische Anforderungen und Umgebungs-Setup siehe den Mini-Kurs [Environment Setup](../../envsetup/).
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>

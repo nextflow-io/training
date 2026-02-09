@@ -1,9 +1,9 @@
 # Feedback-Umfrage
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-notice-icon:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Bevor du weitermachst, fülle bitte diese kurze Umfrage mit 5 Fragen aus, um das Training zu bewerten und uns Feedback zu geben.
+Bevor du weitermachst, fülle bitte diese kurze Umfrage mit 5 Fragen aus, um das Training zu bewerten, deine Erfahrungen mit uns zu teilen und uns mitzuteilen, wie wir dich auf deinem Weg mit Nextflow noch besser unterstützen können.
 
-Das Ausfüllen sollte weniger als eine Minute dauern. Vielen Dank, dass du uns hilfst, unsere Trainingsmaterialien für alle zu verbessern!
+Das Ausfüllen sollte nur ein bis zwei Minuten dauern. Vielen Dank, dass du uns hilfst, unsere Trainingsmaterialien für alle zu verbessern!
 
 <div data-tf-live="01JWWJP7GKFMSDV16VEDVCKM6G"></div><script src="//embed.typeform.com/next/embed.js"></script>

@@ -1,36 +1,33 @@
 # Genomik için Nextflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+**Gerçek dünya genomik kullanım senaryosuna Nextflow uygulaması: GATK ile varyant çağırma üzerine uygulamalı bir kurs.**
 
-Bu eğitim kursu, veri analizi pipeline'larını geliştirmek veya özelleştirmek isteyen genomik ve ilgili alanlardaki araştırmacılar için tasarlanmıştır.
-[Hello Nextflow](../../hello_nextflow/) başlangıç eğitimi üzerine inşa edilmiştir ve Nextflow'un genomik alanının özel bağlamında nasıl kullanılacağını gösterir.
+Bu kurs, [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimi üzerine inşa edilmiştir ve Nextflow'un genomik alanının özel bağlamında nasıl kullanılacağını gösterir.
+Yüksek verimli dizileme verilerini analiz etmek için yaygın olarak kullanılan bir yazılım paketi olan [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) ile bir varyant çağırma pipeline'ı uygulayacaksınız.
 
-Özellikle bu kurs, yüksek verimli dizileme verilerini analiz etmek için yaygın olarak kullanılan bir yazılım paketi olan [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) ile basit bir varyant çağırma pipeline'ının nasıl uygulanacağını göstermektedir.
+<!-- additional_information -->
 
-Haydi başlayalım! Eğitim ortamını başlatmak için aşağıdaki "Open in GitHub Codespaces" düğmesine tıklayın (tercihen ayrı bir sekmede), ardından yüklenirken okumaya devam edin.
+## Kurs genel bakış
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+Bu kurs, bilgiyi kademeli olarak tanıtmak üzere yapılandırılmış hedef odaklı alıştırmalarla uygulamalıdır.
 
-## Öğrenme hedefleri
+Metodolojini anlamak için önce terminalde varyant çağırma araçlarını manuel olarak çalıştırarak başlayacak, ardından analizi otomatikleştiren ve ölçeklendiren bir Nextflow pipeline'ını aşamalı olarak oluşturacaksınız.
 
-Bu kursta çalışarak, temel Nextflow kavramlarını ve araçlarını tipik bir genomik kullanım senaryosuna nasıl uygulayacağınızı öğreneceksiniz.
+### Ders planı
 
-Bu atölye çalışmasının sonunda şunları yapabileceksiniz:
+Bunu, her biri Nextflow'u bir genomik kullanım senaryosuna uygulamanın belirli yönlerine odaklanan üç bölüme ayırdık.
 
-- Tek bir örneğe varyant çağırma uygulamak için doğrusal bir workflow yazma
-- Dizin dosyaları ve referans genom kaynakları gibi yardımcı dosyaları uygun şekilde işleme
-- Örnek başına varyant çağırmayı paralelleştirmek için Nextflow'un veri akışı paradigmasından yararlanma
-- İlgili channel operatörlerini kullanarak çok örnekli varyant çağırma uygulama
-- Genomik-spesifik özgünlükleri uygun şekilde işleyen adım başına ve uçtan uca pipeline testleri uygulama
+| Kurs bölümü                                                    | Özet                                                                                                            | Tahmini süre |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------ |
+| [Bölüm 1: Metod genel bakış](./01_method.md)                   | Varyant çağırma metodolojisini anlama ve araçları manuel olarak çalıştırma                                      | 30 dakika    |
+| [Bölüm 2: Örnek başına varyant çağırma](./02_per_sample_variant_calling.md) | BAM dosyalarını indeksleyen ve varyant çağıran bir pipeline oluşturma, ardından birden fazla örneğe ölçeklendirme | 60 dakika    |
+| [Bölüm 3: Kohort üzerinde joint calling](./03_joint_calling.md)               | Örnek başına çıktıları toplamak için kanal operatörlerini kullanarak çok örnekli joint genotyping ekleme         | 45 dakika    |
 
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+Bu kursun sonunda, temel Nextflow kavramlarını ve araçlarını tipik bir genomik kullanım senaryosuna uygulayabileceksiniz.
 
-## Ön koşullar
+Kursa başlamaya hazır mısınız?
 
-Kurs aşağıdakilerle ilgili minimal bir aşinalık varsayar:
+[Başlayın :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
 
-- Bu bilimsel alanda yaygın olarak kullanılan araçlar ve dosya formatları
-- Komut satırı deneyimi
-- [Hello Nextflow](../../hello_nextflow/) başlangıç eğitiminde kapsanan temel Nextflow kavramları ve araçları
-
-Teknik gereksinimler ve ortam kurulumu için [Ortam Kurulumu](../../envsetup/) mini-kursuna bakın.
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>

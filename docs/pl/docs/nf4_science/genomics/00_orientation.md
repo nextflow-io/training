@@ -1,20 +1,64 @@
-# Orientacja
+# Pierwsze kroki
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+## Uruchom środowisko szkoleniowe
 
-Środowisko szkoleniowe zawiera całe oprogramowanie, kod i dane niezbędne do pracy z tym kursem szkoleniowym, więc nie musisz niczego instalować samodzielnie.
-Jednakże potrzebujesz (bezpłatnego) konta, aby się zalogować, i powinieneś/powinnaś poświęcić kilka minut na zapoznanie się z interfejsem.
+Aby skorzystać z gotowego środowiska, które udostępniamy w GitHub Codespaces, kliknij przycisk „Otwórz w GitHub Codespaces" poniżej. Inne opcje znajdziesz w sekcji [Opcje środowiska](../../envsetup/index.md).
 
-Jeśli jeszcze tego nie zrobiłeś/zrobiłaś, skorzystaj z [tego linku](../../../envsetup/) przed dalszym przejściem.
+Zalecamy otwarcie środowiska szkoleniowego w nowej karcie lub oknie przeglądarki (użyj prawego przycisku myszy, ctrl+klik lub cmd+klik w zależności od Twojego sprzętu), abyś mógł/mogła czytać instrukcje podczas ładowania środowiska.
+Będziesz potrzebować tych instrukcji otwartych równolegle, aby przejść przez kurs.
 
-## Dostarczone materiały
+[![Otwórz w GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Przez cały kurs szkoleniowy będziemy pracować w katalogu `nf4-science/genomics/`, do którego musisz przejść po otwarciu przestrzeni roboczej szkolenia.
-Ten katalog zawiera wszystkie pliki kodu, dane testowe i pliki pomocnicze, których będziesz potrzebować.
+### Podstawy środowiska
 
-Możesz swobodnie eksplorować zawartość tego katalogu; najłatwiejszym sposobem jest użycie eksploratora plików po lewej stronie przestrzeni roboczej szkolenia w interfejsie VSCode.
+To środowisko szkoleniowe zawiera całe oprogramowanie, kod i dane niezbędne do pracy z tym kursem, więc nie musisz niczego instalować samodzielnie.
+
+Codespace jest skonfigurowany z interfejsem VSCode, który obejmuje eksplorator systemu plików, edytor kodu i terminal powłoki.
+Wszystkie instrukcje podane podczas kursu (np. „otwórz plik", „edytuj kod" lub „uruchom to polecenie") odnoszą się do tych trzech części interfejsu VSCode, chyba że zaznaczono inaczej.
+
+Jeśli przechodzisz przez ten kurs samodzielnie, zapoznaj się z [podstawami środowiska](../../envsetup/01_setup.md), aby uzyskać więcej szczegółów.
+
+### Wymagania wersji
+
+To szkolenie jest zaprojektowane dla Nextflow w wersji 25.10.2 lub nowszej **z WŁĄCZONYM parserem składni v2**.
+Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że korzystasz z odpowiednich ustawień zgodnie z dokumentacją [tutaj](../../info/nxf_versions.md).
+
+## Przygotuj się do pracy
+
+Gdy Twój codespace już działa, musisz zrobić dwie rzeczy przed przystąpieniem do szkolenia: ustawić katalog roboczy dla tego konkretnego kursu i przyjrzeć się dostarczonym materiałom.
+
+### Ustaw katalog roboczy
+
+Domyślnie codespace otwiera się z katalogiem roboczym ustawionym w głównym katalogu wszystkich kursów szkoleniowych, ale w tym kursie będziemy pracować w katalogu `nf4-science/genomics/`.
+
+Przejdź teraz do tego katalogu, uruchamiając to polecenie w terminalu:
+
+```bash
+cd nf4-science/genomics/
+```
+
+Możesz ustawić VSCode tak, aby skupił się na tym katalogu, dzięki czemu tylko odpowiednie pliki będą widoczne w pasku bocznym eksploratora plików:
+
+```bash
+code .
+```
+
+!!! tip "Wskazówka"
+
+    Jeśli z jakiegokolwiek powodu wyjdziesz z tego katalogu (np. Twój codespace przejdzie w stan uśpienia), zawsze możesz użyć pełnej ścieżki, aby do niego wrócić, zakładając, że pracujesz w środowisku szkoleniowym GitHub Codespaces:
+
+    ```bash
+    cd /workspaces/training/nf4-science/genomics
+    ```
+
+Teraz spójrzmy na zawartość.
+
+### Poznaj dostarczone materiały
+
+Możesz przeglądać zawartość tego katalogu, używając eksploratora plików po lewej stronie przestrzeni roboczej szkolenia.
 Alternatywnie możesz użyć polecenia `tree`.
-W trakcie kursu używamy wyjścia z `tree` do przedstawienia struktury i zawartości katalogów w czytelnej formie, czasami z niewielkimi modyfikacjami dla przejrzystości.
+
+Przez cały kurs używamy wyjścia z `tree` do przedstawienia struktury i zawartości katalogów w czytelnej formie, czasami z niewielkimi modyfikacjami dla przejrzystości.
 
 Tutaj generujemy spis treści do drugiego poziomu w dół:
 
@@ -22,53 +66,52 @@ Tutaj generujemy spis treści do drugiego poziomu w dół:
 tree . -L 2
 ```
 
-Jeśli uruchomisz to wewnątrz `nf4-science/genomics`, powinieneś/powinnaś zobaczyć następujące wyjście:
+??? abstract "Zawartość katalogu"
 
-```console title="Zawartość katalogu"
-
-.
-├── data
-│   ├── bam
-│   ├── ref
-│   ├── sample_bams.txt
-│   └── samplesheet.csv
-├── genomics-1.nf
-├── genomics-2.nf
-├── genomics-3.nf
-├── genomics-4.nf
-├── nextflow.config
-└── solutions
+    ```console
+    .
+    ├── data
+    │   ├── bam
+    │   ├── ref
+    │   ├── sample_bams.txt
+    │   └── samplesheet.csv
+    ├── genomics.nf
     ├── modules
-    ├── nf-test.config
-    └── tests
+    │   ├── gatk_haplotypecaller.nf
+    │   └── samtools_index.nf
+    ├── nextflow.config
+    └── solutions
+        ├── modules
+        ├── nf-test.config
+        ├── part2
+        └── tests
 
-6 directories, 8 files
+    8 directories, 8 files
+    ```
 
-```
+Kliknij na kolorowe pole, aby rozwinąć sekcję i zobaczyć jej zawartość.
+Używamy rozwijanych sekcji takich jak ta, aby zwięźle wyświetlić oczekiwane wyjście poleceń oraz zawartość katalogów i plików.
 
-!!!note "Uwaga"
+- **Plik `genomics.nf`** to skrypt workflow'u, który będziesz rozbudowywać w trakcie kursu.
 
-    Nie martw się, jeśli wydaje się to dużo; przejdziemy przez odpowiednie elementy na każdym etapie kursu.
-    Ma to na celu jedynie dać Ci przegląd.
-
-**Oto podsumowanie tego, co powinieneś/powinnaś wiedzieć, aby rozpocząć:**
-
-- **Pliki `.nf`** to skrypty workflow'u, które są nazwane na podstawie tego, w jakiej części kursu są używane.
+- **Katalog `modules`** zawiera szkieletowe pliki modułów, które wypełnisz podczas kursu.
 
 - **Plik `nextflow.config`** to plik konfiguracyjny, który ustawia minimalne właściwości środowiska.
   Na razie możesz go zignorować.
 
 - **Katalog `data`** zawiera dane wejściowe i powiązane zasoby, opisane później w kursie.
 
-- **Katalog `solutions`** zawiera pliki modułów i konfiguracje testów, które są wynikiem części 3 i 4 kursu.
+- **Katalog `solutions`** zawiera ukończone pliki modułów oraz rozwiązanie części 2, które może służyć jako punkt wyjścia dla części 3.
   Są przeznaczone do użycia jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania problemów.
 
-!!!tip "Wskazówka"
+## Lista kontrolna gotowości
 
-    Jeśli z jakiegokolwiek powodu wyjdziesz z tego katalogu, zawsze możesz uruchomić to polecenie, aby do niego wrócić:
+Myślisz, że jesteś gotowy/gotowa, aby zacząć?
 
-    ```bash
-    cd /workspaces/training/nf4-science/genomics
-    ```
+- [ ] Rozumiem cel tego kursu i jego wymagania wstępne
+- [ ] Moje środowisko jest uruchomione i działa
+- [ ] Ustawiłem/ustawiłam odpowiednio mój katalog roboczy
 
-Teraz, aby rozpocząć kurs, kliknij strzałkę w prawym dolnym rogu tej strony.
+Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.
+
+**Aby przejść do [Części 1: Przegląd metody i ręczne testowanie](./01_method.md), kliknij strzałkę w prawym dolnym rogu tej strony.**

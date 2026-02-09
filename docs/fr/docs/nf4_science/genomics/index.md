@@ -1,36 +1,52 @@
+---
+title: Nextflow pour la Génomique
+hide:
+  - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Écrire un workflow linéaire pour appliquer l'appel de variants à un seul échantillon
+    - Gérer correctement les fichiers accessoires tels que les fichiers d'index et les ressources du génome de référence
+    - Exploiter le paradigme de flux de données de Nextflow pour paralléliser l'appel de variants par échantillon
+    - Implémenter l'appel de variants multi-échantillons en utilisant les opérateurs de canaux appropriés
+  audience_prerequisites:
+    - "**Public :** Cette formation est destinée aux chercheur·euses en génomique et domaines connexes qui souhaitent développer ou personnaliser des pipelines d'analyse de données."
+    - "**Compétences :** Une certaine familiarité avec la ligne de commande, les concepts de base du scripting et les formats de fichiers courants en génomique est supposée."
+    - "**Prérequis :** Concepts et outils fondamentaux de Nextflow couverts dans [Hello Nextflow](../../hello_nextflow/)."
+---
+
 # Nextflow pour la Génomique
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+**Une formation pratique appliquant Nextflow à un cas d'usage réel en génomique : l'appel de variants avec GATK.**
 
-Cette formation est destinée aux chercheur·euses en génomique et domaines connexes qui souhaitent développer ou personnaliser des pipelines d'analyse de données.
-Elle s'appuie sur la formation pour débutants [Hello Nextflow](../../hello_nextflow/) et démontre comment utiliser Nextflow dans le contexte spécifique du domaine de la génomique.
+Cette formation s'appuie sur la formation pour débutants [Hello Nextflow](../../hello_nextflow/) et démontre comment utiliser Nextflow dans le contexte spécifique du domaine de la génomique.
+Vous allez implémenter un pipeline d'appel de variants avec [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un ensemble logiciel largement utilisé pour l'analyse de données de séquençage à haut débit.
 
-Plus précisément, ce cours démontre comment implémenter un pipeline simple d'appel de variants avec [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un ensemble logiciel largement utilisé pour l'analyse de données de séquençage à haut débit.
+<!-- additional_information -->
 
-Commençons ! Cliquez sur le bouton « Open in GitHub Codespaces » ci-dessous pour lancer l'environnement de formation (de préférence dans un onglet séparé), puis poursuivez la lecture pendant le chargement.
+## Aperçu de la formation
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+Cette formation est pratique, avec des exercices orientés objectifs structurés pour introduire l'information progressivement.
 
-## Objectifs pédagogiques
+Vous commencerez par exécuter les outils d'appel de variants manuellement dans le terminal pour comprendre la méthodologie, puis vous construirez progressivement un pipeline Nextflow qui automatise et met à l'échelle l'analyse.
 
-En suivant ce cours, vous apprendrez comment appliquer les concepts et outils fondamentaux de Nextflow à un cas d'usage typique en génomique.
+### Plan de cours
 
-À la fin de cet atelier, vous serez capable de :
+Nous avons divisé cette formation en trois parties qui se concentrent chacune sur des aspects spécifiques de l'application de Nextflow à un cas d'usage en génomique.
 
-- Écrire un workflow linéaire pour appliquer l'appel de variants à un seul échantillon
-- Gérer correctement les fichiers accessoires tels que les fichiers d'index et les ressources du génome de référence
-- Exploiter le paradigme de flux de données de Nextflow pour paralléliser l'appel de variants par échantillon
-- Implémenter l'appel de variants multi-échantillons en utilisant les opérateurs de canaux appropriés
-- Implémenter des tests par étape et de bout en bout qui gèrent correctement les particularités spécifiques à la génomique
+| Chapitre de la formation                                                           | Résumé                                                                                                              | Durée estimée |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------- |
+| [Partie 1 : Aperçu de la méthode](./01_method.md)                                  | Comprendre la méthodologie d'appel de variants et exécuter les outils manuellement                                 | 30 min        |
+| [Partie 2 : Appel de variants par échantillon](./02_per_sample_variant_calling.md) | Construire un pipeline qui indexe les fichiers BAM et appelle les variants, puis mettre à l'échelle sur plusieurs échantillons | 60 min        |
+| [Partie 3 : Appel conjoint sur une cohorte](./03_joint_calling.md)                | Ajouter le génotypage conjoint multi-échantillons en utilisant les opérateurs de canaux pour agréger les sorties par échantillon | 45 min        |
 
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+À la fin de cette formation, vous serez capable d'appliquer les concepts et outils fondamentaux de Nextflow à un cas d'usage typique en génomique.
 
-## Prérequis
+Prêt·e à suivre la formation ?
 
-Le cours suppose une familiarité minimale avec les éléments suivants :
+[Commencer :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
 
-- Outils et formats de fichiers couramment utilisés dans ce domaine scientifique
-- Expérience avec la ligne de commande
-- Concepts et outils fondamentaux de Nextflow couverts dans la formation pour débutants [Hello Nextflow](../../hello_nextflow/)
-
-Pour les exigences techniques et la configuration de l'environnement, consultez le mini-cours [Configuration de l'Environnement](../../envsetup/).
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>

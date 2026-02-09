@@ -1,50 +1,46 @@
-# Następne kroki
+# Podsumowanie kursu
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+Gratulacje z okazji ukończenia kursu szkoleniowego Nextflow dla Genomiki! 🎉
 
-Gratulujemy ponownie ukończenia kursu szkoleniowego Nextflow For Genomics i dziękujemy za wypełnienie naszej ankiety!
+## Twoja droga
 
----
+Zaczęłaś/-eś od ręcznego uruchamiania narzędzi do wykrywania wariantów w terminalu, aby zrozumieć metodologię.
+Następnie zbudowałaś/-eś pipeline Nextflow'a dla pojedynczej próbki, aby zautomatyzować proces, przeskalowałaś/-eś go do obsługi wielu próbek równolegle i dodałaś/-eś wielopróbkowe wspólne genotypowanie przy użyciu operatorów kanałów.
 
-## 1. Top 3 sposoby na podniesienie umiejętności Nextflow'a
+### Co zbudowałaś/-eś
 
-Oto nasze trzy najlepsze rekomendacje dotyczące kolejnych kroków, oparte na kursie, który właśnie ukończyłeś.
+- Pipeline do wykrywania wariantów, który przyjmuje pliki BAM jako wejście i produkuje wspólnie wywołane pliki VCF jako wyjście.
+- Trzy procesy (`SAMTOOLS_INDEX`, `GATK_HAPLOTYPECALLER` i `GATK_JOINTGENOTYPING`) przechowywane w oddzielnych plikach modułów.
+- Pipeline automatycznie skaluje się do dowolnej liczby próbek wejściowych dzięki paradygmatowi przepływu danych Nextflow'a.
+- Wyniki są publikowane do katalogu o nazwie `results/`.
 
-### 1.1. Zastosuj Nextflow'a do innych przypadków użycia w analizie naukowej
+### Zdobyte umiejętności
 
-**Sprawdź stronę [Nextflow for Science](../index.md)**, aby zobaczyć listę innych krótkich, samodzielnych kursów, które pokazują, jak zastosować podstawowe koncepcje i mechanizmy przedstawione w Hello Nextflow do typowych przypadków użycia w analizie naukowej.
+Dzięki temu praktycznemu kursowi nauczyłaś/-eś się, jak:
 
-Jeśli nie widzisz Swojej dziedziny reprezentowanej przez odpowiedni przypadek użycia, daj nam znać na [forum społeczności](https://community.seqera.io/), abyśmy mogli dodać ją do naszej listy rozwojowej.
+- Napisać liniowy workflow, aby zastosować wykrywanie wariantów do pojedynczej próbki
+- Odpowiednio obsługiwać pliki pomocnicze, takie jak pliki indeksu i zasoby genomu referencyjnego
+- Wykorzystać paradygmat przepływu danych Nextflow'a do zrównoleglenia wykrywania wariantów per próbka
+- Zaimplementować wielopróbkowe wspólne wywoływanie przy użyciu odpowiednich operatorów kanałów
 
-### 1.2. Zacznij pracę z nf-core
+Jesteś teraz wyposażona/-y, aby zacząć stosować Nextflow'a do workflow'ów analizy genomicznej we własnej pracy.
 
-**[nf-core](https://nf-co.re/)** to ogólnoświatowy wysiłek współpracy mający na celu opracowanie standaryzowanych pipeline'ów open-source dla szerokiego zakresu zastosowań w badaniach naukowych.
-Projekt obejmuje [ponad 100 pipeline'ów](https://nf-co.re/pipelines/) dostępnych do użycia od razu oraz [ponad 1400 modułów procesów](https://nf-co.re/modules/), które można zintegrować z własnymi projektami, a także bogaty zestaw narzędzi deweloperskich.
+## Następne kroki w rozwijaniu umiejętności
 
-Kurs szkoleniowy **[Hello nf-core](../../hello_nf-core/index.md)** wprowadzi Cię w pipeline'y kuratorowane przez społeczność nf-core oraz framework deweloperski, zaprojektowane, aby pomóc Ci pisać powtarzalne, skalowalne i standaryzowane workflow'y. Nauczysz się, jak używać istniejących pipeline'ów nf-core, przyczyniać się do ich rozwoju, a nawet rozpocząć budowanie własnych, wspieranych przez najlepsze praktyki i żywą społeczność. Jeśli jesteś gotowy, aby zastosować Swoje umiejętności Nextflow'a w rzeczywistych projektach, to jest idealny następny krok.
+Oto nasze najlepsze sugestie, co robić dalej:
 
-### 1.3. Opanuj bardziej zaawansowane funkcje Nextflow'a
+- Zastosuj Nextflow'a do innych przypadków użycia w analizie naukowej z [Nextflow dla Nauki](../index.md)
+- Rozpocznij pracę z nf-core dzięki [Hello nf-core](../../hello_nf-core/index.md)
+- Odkryj bardziej zaawansowane funkcje Nextflow'a z [Side Quests](../../side_quests/index.md)
 
-W kursach Hello celowo utrzymujemy niski poziom złożoności technicznej, aby nie przeciążać Cię informacjami, których nie potrzebujesz, aby rozpocząć pracę z Nextflow'em.
-Kontynuując Swoją pracę, będziesz chciał nauczyć się, jak wykorzystać pełny zestaw funkcji i moc Nextflow'a.
+Na koniec zalecamy zapoznanie się z [**Seqera Platform**](https://seqera.io/) – platformą chmurową opracowaną przez twórców Nextflow'a, która jeszcze bardziej ułatwia uruchamianie i zarządzanie workflow'ami, a także zarządzanie danymi i przeprowadzanie analiz interaktywnie w dowolnym środowisku.
 
-W tym celu obecnie pracujemy nad **kolekcją [Side Quests](../side_quests/index.md)**, które mają być krótkimi, samodzielnymi kursami zagłębiającymi się w konkretne tematy, takie jak testowanie i zarządzanie metadanymi.
+## Uzyskiwanie pomocy
 
----
+W celu uzyskania zasobów pomocy i wsparcia społeczności zobacz [stronę Pomocy](../../help.md).
 
-## 2. Sprawdź Seqera Platform
+## Ankieta feedbackowa
 
-**[Seqera Platform](https://seqera.io/) to najlepszy sposób na uruchamianie Nextflow'a w praktyce.**
+Zanim przejdziesz dalej, poświęć chwilę na wypełnienie ankiety kursu! Twoja opinia pomaga nam ulepszać materiały szkoleniowe dla wszystkich.
 
-Jest to platforma chmurowa opracowana przez twórców Nextflow'a, którą można połączyć z własną infrastrukturą obliczeniową (lokalną, HPC lub chmurową), aby znacznie ułatwić uruchamianie i zarządzanie workflow'ami, a także zarządzanie danymi i przeprowadzanie analiz interaktywnie w środowisku chmurowym.
-
-Free Tier jest dostępny do bezpłatnego użytku dla wszystkich (z limitami użytkowania).
-Kwalifikujący się pracownicy naukowi mogą uzyskać bezpłatny dostęp na poziomie Pro (bez ograniczeń użytkowania) poprzez [Program Akademicki](https://seqera.io/academic/program/).
-
-Zapoznaj się z [samouczkami Seqera Platform](https://docs.seqera.io/platform/latest/getting-started/quickstart-demo/comm-showcase), aby sprawdzić, czy może to być dla Ciebie przydatne.
-
----
-
-### To wszystko na razie!
-
-**Powodzenia na Twojej drodze z Nextflow'em i nie wahaj się dać nam znać na [forum społeczności](https://community.seqera.io/), co jeszcze możemy zrobić, aby pomóc.**
+[Wypełnij ankietę :material-arrow-right:](survey.md){ .md-button .md-button--primary }
