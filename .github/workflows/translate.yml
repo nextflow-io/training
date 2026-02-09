@@ -149,7 +149,7 @@ jobs:
         if: steps.check.outputs.has_artifacts == 'true'
         run: |
           pip install pre-commit
-          pre-commit run --files docs/*/docs/**/*.md || true
+          pre-commit run --all-files || true
 
       - name: Delete orphaned translation files
         if: steps.check.outputs.has_artifacts == 'true'
