@@ -453,6 +453,7 @@ def _call_claude_once(
                 max_tokens=MAX_TOKENS,
                 timeout=REQUEST_TIMEOUT,
                 messages=messages,
+                temperature=0,
             )
         except (
             anthropic.APIConnectionError,
@@ -538,6 +539,7 @@ async def _call_claude_once_async(
                 max_tokens=MAX_TOKENS,
                 timeout=REQUEST_TIMEOUT,
                 messages=messages,
+                temperature=0,
             )
         except (
             anthropic.APIConnectionError,
