@@ -912,7 +912,7 @@ nextflow run hello-world.nf
     [72/394147] sayHello | 1 of 1 ✔
     ```
 
-??? failure "ERROR ~ Script compilation error"
+??? question "If it didn't work"
 
     If that failed with an error that looks like this:
 
