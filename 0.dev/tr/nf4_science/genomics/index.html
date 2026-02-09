@@ -1542,22 +1542,30 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#ogrenme-hedefleri" class="md-nav__link">
+  <a href="#kurs-genel-baks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Öğrenme hedefleri
+        Kurs genel bakış
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#on-kosullar" class="md-nav__link">
+    <nav class="md-nav" aria-label="Kurs genel bakış">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ders-plan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ön koşullar
+        Ders planı
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -1769,7 +1777,7 @@
   <span class="md-ellipsis">
     
   
-    Yönlendirme
+    Başlarken
   
 
     
@@ -1797,7 +1805,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Bölüm 1: Yöntemlere genel bakış ve manuel test
   
 
     
@@ -1825,7 +1833,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Per-sample variant calling
+    Bölüm 2: Örnek bazında varyant çağırma
   
 
     
@@ -1853,7 +1861,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Joint calling on a cohort
+    Bölüm 3: Kohort üzerinde birleşik çağırma
   
 
     
@@ -1909,7 +1917,7 @@
   <span class="md-ellipsis">
     
   
-    Sonraki Adımlar
+    Kurs Özeti
   
 
     
@@ -3238,22 +3246,30 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#ogrenme-hedefleri" class="md-nav__link">
+  <a href="#kurs-genel-baks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Öğrenme hedefleri
+        Kurs genel bakış
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#on-kosullar" class="md-nav__link">
+    <nav class="md-nav" aria-label="Kurs genel bakış">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ders-plan" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ön koşullar
+        Ders planı
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -3514,32 +3530,47 @@
  
 
 <h1 id="genomik-icin-nextflow">Genomik için Nextflow<a class="headerlink" href="#genomik-icin-nextflow" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay Zeka Destekli Çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
-<p>Bu eğitim kursu, veri analizi pipeline'larını geliştirmek veya özelleştirmek isteyen genomik ve ilgili alanlardaki araştırmacılar için tasarlanmıştır.
-<a href="../../hello_nextflow/">Hello Nextflow</a> başlangıç eğitimi üzerine inşa edilmiştir ve Nextflow'un genomik alanının özel bağlamında nasıl kullanılacağını gösterir.</p>
-<p>Özellikle bu kurs, yüksek verimli dizileme verilerini analiz etmek için yaygın olarak kullanılan bir yazılım paketi olan <a href="https://gatk.broadinstitute.org/">GATK</a> (Genome Analysis Toolkit) ile basit bir varyant çağırma pipeline'ının nasıl uygulanacağını göstermektedir.</p>
-<p>Haydi başlayalım! Eğitim ortamını başlatmak için aşağıdaki "Open in GitHub Codespaces" düğmesine tıklayın (tercihen ayrı bir sekmede), ardından yüklenirken okumaya devam edin.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h2 id="ogrenme-hedefleri">Öğrenme hedefleri<a class="headerlink" href="#ogrenme-hedefleri" title="Permanent link">&para;</a></h2>
-<p>Bu kursta çalışarak, temel Nextflow kavramlarını ve araçlarını tipik bir genomik kullanım senaryosuna nasıl uygulayacağınızı öğreneceksiniz.</p>
-<p>Bu atölye çalışmasının sonunda şunları yapabileceksiniz:</p>
-<ul>
-<li>Tek bir örneğe varyant çağırma uygulamak için doğrusal bir workflow yazma</li>
-<li>Dizin dosyaları ve referans genom kaynakları gibi yardımcı dosyaları uygun şekilde işleme</li>
-<li>Örnek başına varyant çağırmayı paralelleştirmek için Nextflow'un veri akışı paradigmasından yararlanma</li>
-<li>İlgili channel operatörlerini kullanarak çok örnekli varyant çağırma uygulama</li>
-<li>Genomik-spesifik özgünlükleri uygun şekilde işleyen adım başına ve uçtan uca pipeline testleri uygulama</li>
-</ul>
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+<p><strong>Gerçek dünya genomik kullanım senaryosuna Nextflow uygulaması: GATK ile varyant çağırma üzerine uygulamalı bir kurs.</strong></p>
+<p>Bu kurs, <a href="../../hello_nextflow/">Hello Nextflow</a> başlangıç eğitimi üzerine inşa edilmiştir ve Nextflow'un genomik alanının özel bağlamında nasıl kullanılacağını gösterir.
+Yüksek verimli dizileme verilerini analiz etmek için yaygın olarak kullanılan bir yazılım paketi olan <a href="https://gatk.broadinstitute.org/">GATK</a> (Genome Analysis Toolkit) ile bir varyant çağırma pipeline'ı uygulayacaksınız.</p>
+<!-- additional_information -->
 
-<h2 id="on-kosullar">Ön koşullar<a class="headerlink" href="#on-kosullar" title="Permanent link">&para;</a></h2>
-<p>Kurs aşağıdakilerle ilgili minimal bir aşinalık varsayar:</p>
-<ul>
-<li>Bu bilimsel alanda yaygın olarak kullanılan araçlar ve dosya formatları</li>
-<li>Komut satırı deneyimi</li>
-<li><a href="../../hello_nextflow/">Hello Nextflow</a> başlangıç eğitiminde kapsanan temel Nextflow kavramları ve araçları</li>
-</ul>
-<p>Teknik gereksinimler ve ortam kurulumu için <a href="../../envsetup/">Ortam Kurulumu</a> mini-kursuna bakın.</p><style type="text/css">.quiz {
+<h2 id="kurs-genel-baks">Kurs genel bakış<a class="headerlink" href="#kurs-genel-baks" title="Permanent link">&para;</a></h2>
+<p>Bu kurs, bilgiyi kademeli olarak tanıtmak üzere yapılandırılmış hedef odaklı alıştırmalarla uygulamalıdır.</p>
+<p>Metodolojini anlamak için önce terminalde varyant çağırma araçlarını manuel olarak çalıştırarak başlayacak, ardından analizi otomatikleştiren ve ölçeklendiren bir Nextflow pipeline'ını aşamalı olarak oluşturacaksınız.</p>
+<h3 id="ders-plan">Ders planı<a class="headerlink" href="#ders-plan" title="Permanent link">&para;</a></h3>
+<p>Bunu, her biri Nextflow'u bir genomik kullanım senaryosuna uygulamanın belirli yönlerine odaklanan üç bölüme ayırdık.</p>
+<table>
+<thead>
+<tr>
+<th>Kurs bölümü</th>
+<th>Özet</th>
+<th>Tahmini süre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="01_method/">Bölüm 1: Metod genel bakış</a></td>
+<td>Varyant çağırma metodolojisini anlama ve araçları manuel olarak çalıştırma</td>
+<td>30 dakika</td>
+</tr>
+<tr>
+<td><a href="02_per_sample_variant_calling/">Bölüm 2: Örnek başına varyant çağırma</a></td>
+<td>BAM dosyalarını indeksleyen ve varyant çağıran bir pipeline oluşturma, ardından birden fazla örneğe ölçeklendirme</td>
+<td>60 dakika</td>
+</tr>
+<tr>
+<td><a href="03_joint_calling/">Bölüm 3: Kohort üzerinde joint calling</a></td>
+<td>Örnek başına çıktıları toplamak için kanal operatörlerini kullanarak çok örnekli joint genotyping ekleme</td>
+<td>45 dakika</td>
+</tr>
+</tbody>
+</table>
+<p>Bu kursun sonunda, temel Nextflow kavramlarını ve araçlarını tipik bir genomik kullanım senaryosuna uygulayabileceksiniz.</p>
+<p>Kursa başlamaya hazır mısınız?</p>
+<p><a class="md-button md-button--primary" href="00_orientation/">Başlayın <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p>
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5106,13 +5137,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="00_orientation/" class="md-footer__link md-footer__link--next" aria-label="Sonraki: Yönlendirme">
+          <a href="00_orientation/" class="md-footer__link md-footer__link--next" aria-label="Sonraki: Başlarken">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Sonraki
               </span>
               <div class="md-ellipsis">
-                Yönlendirme
+                Başlarken
               </div>
             </div>
             <div class="md-footer__button md-icon">

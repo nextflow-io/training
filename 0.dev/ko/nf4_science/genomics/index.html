@@ -155,7 +155,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#nextflow" class="md-skip">
+        <a href="#nextflowcourse" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -1547,19 +1547,27 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        학습 목표
+        과정 개요
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
+    <nav class="md-nav" aria-label="과정 개요">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전제 조건
+        수업 계획
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -1771,7 +1779,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -1799,7 +1807,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    파트 1: 방법론 개요 및 수동 테스트
   
 
     
@@ -1827,7 +1835,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Per-sample variant calling
+    파트 2: 샘플별 변이 호출
   
 
     
@@ -1855,7 +1863,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Joint calling on a cohort
+    Part 3: 코호트에 대한 합동 호출
   
 
     
@@ -1911,7 +1919,7 @@
   <span class="md-ellipsis">
     
   
-    다음 단계
+    과정 요약
   
 
     
@@ -3245,19 +3253,27 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        학습 목표
+        과정 개요
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
+    <nav class="md-nav" aria-label="과정 개요">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        전제 조건
+        수업 계획
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -3519,33 +3535,79 @@
 </a>
  
 
-<h1 id="nextflow">유전체학을 위한 Nextflow<a class="headerlink" href="#nextflow" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
-<p>이 교육 과정은 데이터 분석 파이프라인을 개발하거나 맞춤화하는 데 관심이 있는 유전체학 및 관련 분야의 연구자를 위한 것입니다.
-이 과정은 <a href="../../hello_nextflow/">Hello Nextflow</a> 초급 교육을 기반으로 하며, 유전체학 도메인의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.</p>
-<p>구체적으로, 이 과정은 고처리량 시퀀싱 데이터를 분석하기 위해 널리 사용되는 소프트웨어 패키지인 <a href="https://gatk.broadinstitute.org/">GATK</a> (Genome Analysis Toolkit)를 사용하여 간단한 변이 호출 파이프라인을 구현하는 방법을 보여줍니다.</p>
-<p>시작해봅시다! 아래의 "Open in GitHub Codespaces" 버튼을 클릭하여 교육 환경을 실행하고(가급적 별도의 탭에서), 로딩되는 동안 계속 읽어주십시오.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h2 id="_1">학습 목표<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>이 과정을 통해 기초적인 Nextflow 개념과 도구를 일반적인 유전체학 사용 사례에 적용하는 방법을 배우게 됩니다.</p>
-<p>이 워크숍을 마치면 다음을 수행할 수 있게 됩니다:</p>
+<h1 id="nextflowcourse">유전체학을 위한 Nextflow<span class="index-type-badge">course</span><a class="headerlink" href="#nextflowcourse" title="Permanent link">&para;</a></h1>
+<div class="grid cards">
+<ul>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg></span> <strong>과정 요약</strong></p>
+<hr />
+<p><strong>실제 유전체학 사용 사례인 GATK를 사용한 변이 호출에 Nextflow를 적용하는 실습 과정입니다.</strong></p>
+<p>이 과정은 <a href="../../hello_nextflow/">Hello Nextflow</a> 초급 교육을 기반으로 하며, 유전체학 도메인의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
+고처리량 시퀀싱 데이터를 분석하기 위해 널리 사용되는 소프트웨어 패키지인 <a href="https://gatk.broadinstitute.org/">GATK</a> (Genome Analysis Toolkit)를 사용하여 변이 호출 파이프라인을 구현하게 됩니다.</p>
+</li>
+<li>
+<p><span class="twemoji lg middle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> <strong>추가 정보</strong></p>
+<hr />
+<details class="terminal">
+<summary>기술 요구사항</summary>
+<p>GitHub 계정 또는 Nextflow 로컬 설치가 필요합니다. 자세한 내용은 <a href="../envsetup/index.md">환경 옵션</a>을 참조하세요.</p>
+</details>
+<details class="learning">
+<summary>학습 목표</summary>
 <ul>
 <li>단일 샘플에 변이 호출을 적용하는 선형 workflow 작성하기</li>
 <li>인덱스 파일 및 참조 유전체 리소스와 같은 보조 파일을 적절하게 처리하기</li>
 <li>Nextflow의 dataflow 패러다임을 활용하여 샘플별 변이 호출을 병렬화하기</li>
 <li>관련 channel 연산자를 사용하여 다중 샘플 변이 호출 구현하기</li>
-<li>유전체학 특유의 특성을 적절하게 처리하는 단계별 및 종단간 파이프라인 테스트 구현하기</li>
 </ul>
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
-
-<h2 id="_2">전제 조건<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>이 과정은 다음에 대한 최소한의 친숙함을 가정합니다:</p>
+</details>
+<details class="people">
+<summary>대상 및 선수조건</summary>
 <ul>
-<li>이 과학 분야에서 일반적으로 사용되는 도구 및 파일 형식</li>
-<li>명령줄 경험</li>
-<li><a href="../../hello_nextflow/">Hello Nextflow</a> 초급 교육에서 다루는 기초적인 Nextflow 개념 및 도구</li>
+<li><strong>대상:</strong> 이 과정은 데이터 분석 파이프라인을 개발하거나 맞춤화하려는 유전체학 및 관련 분야의 연구자를 위해 설계되었습니다.</li>
+<li><strong>기술:</strong> 명령줄, 기본 스크립팅 개념, 일반적인 유전체학 파일 형식에 대한 어느 정도의 친숙함을 가정합니다.</li>
+<li><strong>전제 조건:</strong> <a href="../../hello_nextflow/">Hello Nextflow</a>에서 다루는 기초적인 Nextflow 개념 및 도구</li>
 </ul>
-<p>기술 요구 사항 및 환경 설정은 <a href="../../envsetup/">환경 설정</a> 단기 과정을 참조하십시오.</p><style type="text/css">.quiz {
+</details>
+</li>
+</ul>
+</div>
+<h2 id="_1">과정 개요<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>이 과정은 정보를 단계적으로 소개하도록 구성된 목표 지향적 연습을 통한 실습 과정입니다.</p>
+<p>먼저 터미널에서 변이 호출 도구를 수동으로 실행하여 방법론을 이해한 다음, 분석을 자동화하고 확장하는 Nextflow 파이프라인을 점진적으로 구축하게 됩니다.</p>
+<h3 id="_2">수업 계획<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>유전체학 사용 사례에 Nextflow를 적용하는 특정 측면에 각각 초점을 맞춘 세 부분으로 나누었습니다.</p>
+<table>
+<thead>
+<tr>
+<th>과정 챕터</th>
+<th>요약</th>
+<th>예상 소요 시간</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="01_method/">Part 1: 방법 개요</a></td>
+<td>변이 호출 방법론 이해 및 도구 수동 실행</td>
+<td>30분</td>
+</tr>
+<tr>
+<td><a href="02_per_sample_variant_calling/">Part 2: 샘플별 변이 호출</a></td>
+<td>BAM 파일을 인덱싱하고 변이를 호출하는 파이프라인 구축, 여러 샘플로 확장</td>
+<td>60분</td>
+</tr>
+<tr>
+<td><a href="03_joint_calling/">Part 3: 코호트에 대한 결합 호출</a></td>
+<td>channel 연산자를 사용하여 샘플별 출력을 집계하는 다중 샘플 결합 유전자형 추가</td>
+<td>45분</td>
+</tr>
+</tbody>
+</table>
+<p>이 과정을 마치면 기초적인 Nextflow 개념과 도구를 일반적인 유전체학 사용 사례에 적용할 수 있게 됩니다.</p>
+<p>과정을 시작할 준비가 되셨나요?</p>
+<p><a class="md-button md-button--primary" href="00_orientation/">시작하기 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p>
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5116,13 +5178,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="00_orientation/" class="md-footer__link md-footer__link--next" aria-label="다음: 오리엔테이션">
+          <a href="00_orientation/" class="md-footer__link md-footer__link--next" aria-label="다음: 시작하기">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                오리엔테이션
+                시작하기
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -1542,22 +1542,30 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#objetivos-de-aprendizaje" class="md-nav__link">
+  <a href="#descripcion-del-curso" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivos de aprendizaje
+        Descripción del curso
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#requisitos-previos" class="md-nav__link">
+    <nav class="md-nav" aria-label="Descripción del curso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plan-de-lecciones" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requisitos previos
+        Plan de lecciones
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -1769,7 +1777,7 @@
   <span class="md-ellipsis">
     
   
-    Orientación
+    Primeros pasos
   
 
     
@@ -1797,7 +1805,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    Parte 1: Descripción del método y pruebas manuales
   
 
     
@@ -1825,7 +1833,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Per-sample variant calling
+    Parte 2: Llamado de variantes por muestra
   
 
     
@@ -1853,7 +1861,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Joint calling on a cohort
+    Parte 3: Llamado conjunto de variantes en una cohorte
   
 
     
@@ -1909,7 +1917,7 @@
   <span class="md-ellipsis">
     
   
-    Próximos Pasos
+    Resumen del curso
   
 
     
@@ -3238,22 +3246,30 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#objetivos-de-aprendizaje" class="md-nav__link">
+  <a href="#descripcion-del-curso" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivos de aprendizaje
+        Descripción del curso
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#requisitos-previos" class="md-nav__link">
+    <nav class="md-nav" aria-label="Descripción del curso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plan-de-lecciones" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Requisitos previos
+        Plan de lecciones
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -3514,32 +3530,47 @@
  
 
 <h1 id="nextflow-para-genomica">Nextflow para Genómica<a class="headerlink" href="#nextflow-para-genomica" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
-<p>Este curso de entrenamiento está dirigido a investigadores en genómica y campos relacionados que estén interesados en desarrollar o personalizar pipelines de análisis de datos.
-Se basa en el entrenamiento para principiantes <a href="../../hello_nextflow/">Hello Nextflow</a> y demuestra cómo usar Nextflow en el contexto específico del dominio de la genómica.</p>
-<p>Específicamente, este curso demuestra cómo implementar un pipeline simple de llamado de variantes con <a href="https://gatk.broadinstitute.org/">GATK</a> (Genome Analysis Toolkit), un paquete de software ampliamente utilizado para analizar datos de secuenciación de alto rendimiento.</p>
-<p>¡Comencemos! Haga clic en el botón "Open in GitHub Codespaces" a continuación para iniciar el entorno de entrenamiento (preferiblemente en una pestaña separada), luego continúe leyendo mientras se carga.</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h2 id="objetivos-de-aprendizaje">Objetivos de aprendizaje<a class="headerlink" href="#objetivos-de-aprendizaje" title="Permanent link">&para;</a></h2>
-<p>Al completar este curso, aprenderá cómo aplicar conceptos y herramientas fundamentales de Nextflow a un caso de uso típico de genómica.</p>
-<p>Al final de este taller será capaz de:</p>
-<ul>
-<li>Escribir un workflow lineal para aplicar llamado de variantes a una única muestra</li>
-<li>Manejar archivos accesorios como archivos de índice y recursos del genoma de referencia de manera apropiada</li>
-<li>Aprovechar el paradigma de flujo de datos de Nextflow para paralelizar el llamado de variantes por muestra</li>
-<li>Implementar llamado de variantes de múltiples muestras utilizando operadores de canal relevantes</li>
-<li>Implementar pruebas por paso y de extremo a extremo del pipeline que manejen idiosincrasias específicas de genómica de manera apropiada</li>
-</ul>
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+<p><strong>Un curso práctico que aplica Nextflow a un caso de uso real de genómica: llamado de variantes con GATK.</strong></p>
+<p>Este curso se basa en el entrenamiento para principiantes <a href="../../hello_nextflow/">Hello Nextflow</a> y demuestra cómo usar Nextflow en el contexto específico del dominio de la genómica.
+Implementará un pipeline de llamado de variantes con <a href="https://gatk.broadinstitute.org/">GATK</a> (Genome Analysis Toolkit), un paquete de software ampliamente utilizado para analizar datos de secuenciación de alto rendimiento.</p>
+<!-- additional_information -->
 
-<h2 id="requisitos-previos">Requisitos previos<a class="headerlink" href="#requisitos-previos" title="Permanent link">&para;</a></h2>
-<p>El curso asume cierta familiaridad mínima con lo siguiente:</p>
-<ul>
-<li>Herramientas y formatos de archivo comúnmente utilizados en este dominio científico</li>
-<li>Experiencia con la línea de comandos</li>
-<li>Conceptos fundamentales de Nextflow y herramientas cubiertas en el entrenamiento para principiantes <a href="../../hello_nextflow/">Hello Nextflow</a></li>
-</ul>
-<p>Para requisitos técnicos y configuración del entorno, consulte el mini-curso <a href="../../envsetup/">Configuración del Entorno</a>.</p><style type="text/css">.quiz {
+<h2 id="descripcion-del-curso">Descripción del curso<a class="headerlink" href="#descripcion-del-curso" title="Permanent link">&para;</a></h2>
+<p>Este curso es práctico, con ejercicios orientados a objetivos estructurados para introducir información gradualmente.</p>
+<p>Comenzará ejecutando las herramientas de llamado de variantes manualmente en la terminal para comprender la metodología, luego construirá progresivamente un pipeline de Nextflow que automatiza y escala el análisis.</p>
+<h3 id="plan-de-lecciones">Plan de lecciones<a class="headerlink" href="#plan-de-lecciones" title="Permanent link">&para;</a></h3>
+<p>Hemos dividido esto en tres partes que se enfocan en aspectos específicos de aplicar Nextflow a un caso de uso de genómica.</p>
+<table>
+<thead>
+<tr>
+<th>Capítulo del curso</th>
+<th>Resumen</th>
+<th>Duración estimada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="01_method/">Parte 1: Descripción del método</a></td>
+<td>Comprender la metodología de llamado de variantes y ejecutar las herramientas manualmente</td>
+<td>30 min</td>
+</tr>
+<tr>
+<td><a href="02_per_sample_variant_calling/">Parte 2: Llamado de variantes por muestra</a></td>
+<td>Construir un pipeline que indexa archivos BAM y llama variantes, luego escalar a múltiples muestras</td>
+<td>60 min</td>
+</tr>
+<tr>
+<td><a href="03_joint_calling/">Parte 3: Llamado conjunto en una cohorte</a></td>
+<td>Agregar genotipado conjunto de múltiples muestras usando operadores de canal para agregar salidas por muestra</td>
+<td>45 min</td>
+</tr>
+</tbody>
+</table>
+<p>Al finalizar este curso, podrá aplicar conceptos y herramientas fundamentales de Nextflow a un caso de uso típico de genómica.</p>
+<p>¿Listo para tomar el curso?</p>
+<p><a class="md-button md-button--primary" href="00_orientation/">Comenzar <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p>
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5106,13 +5137,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="00_orientation/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Orientación">
+          <a href="00_orientation/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: Primeros pasos">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Siguiente
               </span>
               <div class="md-ellipsis">
-                Orientación
+                Primeros pasos
               </div>
             </div>
             <div class="md-footer__button md-icon">

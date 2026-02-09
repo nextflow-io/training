@@ -1545,19 +1545,27 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        सीखने के उद्देश्य
+        पाठ्यक्रम का अवलोकन
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
+    <nav class="md-nav" aria-label="पाठ्यक्रम का अवलोकन">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        पूर्वापेक्षाएँ
+        पाठ योजना
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -1769,7 +1777,7 @@
   <span class="md-ellipsis">
     
   
-    अभिविन्यास
+    शुरुआत करना
   
 
     
@@ -1797,7 +1805,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Method overview and manual testing
+    भाग 1: विधि का अवलोकन और मैनुअल परीक्षण
   
 
     
@@ -1825,7 +1833,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Per-sample variant calling
+    भाग 2: प्रति-नमूना वेरिएंट कॉलिंग
   
 
     
@@ -1853,7 +1861,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Joint calling on a cohort
+    भाग 3: कोहोर्ट पर जॉइंट कॉलिंग
   
 
     
@@ -1909,7 +1917,7 @@
   <span class="md-ellipsis">
     
   
-    अगले कदम
+    कोर्स सारांश
   
 
     
@@ -3241,19 +3249,27 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        सीखने के उद्देश्य
+        पाठ्यक्रम का अवलोकन
       
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
+    <nav class="md-nav" aria-label="पाठ्यक्रम का अवलोकन">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        पूर्वापेक्षाएँ
+        पाठ योजना
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li> 
   </ul>
@@ -3514,32 +3530,48 @@
  
 
 <h1 id="nextflow">जीनोमिक्स के लिए Nextflow<a class="headerlink" href="#nextflow" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI-सहायता प्राप्त अनुवाद - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">अधिक जानें और सुधार सुझाएं</a></span></p>
-<p>यह प्रशिक्षण पाठ्यक्रम जीनोमिक्स और संबंधित क्षेत्रों के शोधकर्ताओं के लिए है जो डेटा विश्लेषण pipelines विकसित करने या उन्हें अनुकूलित करने में रुचि रखते हैं।
-यह <a href="../../hello_nextflow/">Hello Nextflow</a> शुरुआती प्रशिक्षण पर आधारित है और यह प्रदर्शित करता है कि जीनोमिक्स डोमेन के विशिष्ट संदर्भ में Nextflow का उपयोग कैसे करें।</p>
-<p>विशेष रूप से, यह पाठ्यक्रम <a href="https://gatk.broadinstitute.org/">GATK</a> (Genome Analysis Toolkit) के साथ एक साधारण variant calling pipeline को लागू करने का तरीका प्रदर्शित करता है, जो high-throughput sequencing डेटा के विश्लेषण के लिए व्यापक रूप से उपयोग किया जाने वाला software package है।</p>
-<p>आइए शुरू करें! प्रशिक्षण वातावरण लॉन्च करने के लिए नीचे "Open in GitHub Codespaces" बटन पर क्लिक करें (अधिमानतः एक अलग टैब में), फिर जब वह लोड हो रहा हो तब आगे पढ़ें।</p>
-<p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<h2 id="_1">सीखने के उद्देश्य<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>इस पाठ्यक्रम के माध्यम से काम करके, आप सीखेंगे कि एक विशिष्ट जीनोमिक्स उपयोग के मामले में बुनियादी Nextflow अवधारणाओं और टूलिंग को कैसे लागू करें।</p>
-<p>इस workshop के अंत तक आप सक्षम होंगे:</p>
-<ul>
-<li>एक single नमूने पर variant calling लागू करने के लिए एक linear workflow लिखना</li>
-<li>index फ़ाइलें और reference genome संसाधनों जैसी सहायक फ़ाइलों को उचित रूप से संभालना</li>
-<li>per-sample variant calling को समानांतर करने के लिए Nextflow के dataflow paradigm का लाभ उठाना</li>
-<li>प्रासंगिक channel operators का उपयोग करके multi-sample variant calling को लागू करना</li>
-<li>per-step और end-to-end pipeline tests को लागू करना जो जीनोमिक्स-विशिष्ट विशेषताओं को उचित रूप से संभालते हैं</li>
-</ul>
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI-सहायता प्राप्त अनुवाद - <a href="../../hello_nextflow/">अधिक जानें और सुधार सुझाएं</a></span></p>
+<p><strong>एक व्यावहारिक पाठ्यक्रम जो Nextflow को वास्तविक दुनिया के जीनोमिक्स उपयोग के मामले में लागू करता है: GATK के साथ variant calling।</strong></p>
+<p>यह पाठ्यक्रम <a href="../../hello_nextflow/">Hello Nextflow</a> शुरुआती प्रशिक्षण पर आधारित है और यह प्रदर्शित करता है कि जीनोमिक्स डोमेन के विशिष्ट संदर्भ में Nextflow का उपयोग कैसे करें।
+तुम <a href="https://gatk.broadinstitute.org/">GATK</a> (Genome Analysis Toolkit) के साथ एक variant calling pipeline लागू करोगे, जो high-throughput sequencing डेटा के विश्लेषण के लिए व्यापक रूप से उपयोग किया जाने वाला software package है।</p>
+<!-- additional_information -->
 
-<h2 id="_2">पूर्वापेक्षाएँ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>पाठ्यक्रम निम्नलिखित के साथ न्यूनतम परिचय मानता है:</p>
-<ul>
-<li>इस वैज्ञानिक डोमेन में सामान्यतः उपयोग किए जाने वाले tools और file formats</li>
-<li>command line के साथ अनुभव</li>
-<li><a href="../../hello_nextflow/">Hello Nextflow</a> शुरुआती प्रशिक्षण में शामिल बुनियादी Nextflow अवधारणाओं और टूलिंग</li>
-</ul>
-<p>तकनीकी आवश्यकताओं और वातावरण सेटअप के लिए, <a href="../../envsetup/">Environment Setup</a> mini-course देखें।</p><style type="text/css">.quiz {
+<h2 id="_1">पाठ्यक्रम का अवलोकन<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>यह पाठ्यक्रम व्यावहारिक है, जिसमें लक्ष्य-उन्मुख अभ्यास हैं जो जानकारी को क्रमिक रूप से प्रस्तुत करने के लिए संरचित हैं।</p>
+<p>तुम पहले methodology को समझने के लिए terminal में manually variant calling tools चलाओगे, फिर धीरे-धीरे एक Nextflow pipeline बनाओगे जो विश्लेषण को स्वचालित और स्केल करती है।</p>
+<h3 id="_2">पाठ योजना<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>हमने इसे तीन भागों में विभाजित किया है जो प्रत्येक जीनोमिक्स उपयोग के मामले में Nextflow को लागू करने के विशिष्ट पहलुओं पर ध्यान केंद्रित करते हैं।</p>
+<table>
+<thead>
+<tr>
+<th>पाठ्यक्रम अध्याय</th>
+<th>सारांश</th>
+<th>अनुमानित अवधि</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="01_method/">Part 1: Method overview</a></td>
+<td>Variant calling methodology को समझना और tools को manually चलाना</td>
+<td>30 मिनट</td>
+</tr>
+<tr>
+<td><a href="02_per_sample_variant_calling/">Part 2: Per-sample variant calling</a></td>
+<td>एक pipeline बनाना जो BAM फ़ाइलों को index करती है और variants को call करती है, फिर कई नमूनों तक स्केल करना</td>
+<td>60 मिनट</td>
+</tr>
+<tr>
+<td><a href="03_joint_calling/">Part 3: Joint calling on a cohort</a></td>
+<td>Channel operators का उपयोग करके multi-sample joint genotyping जोड़ना ताकि per-sample outputs को aggregate किया जा सके</td>
+<td>45 मिनट</td>
+</tr>
+</tbody>
+</table>
+<p>इस पाठ्यक्रम के अंत तक, तुम एक विशिष्ट जीनोमिक्स उपयोग के मामले में बुनियादी Nextflow अवधारणाओं और टूलिंग को लागू कर सकोगे।</p>
+<p>पाठ्यक्रम लेने के लिए तैयार हो?</p>
+<p><a class="md-button md-button--primary" href="00_orientation/">शुरू करें <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p>
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5106,13 +5138,13 @@ window.mkdocsQuizConfig = {
         
         
           
-          <a href="00_orientation/" class="md-footer__link md-footer__link--next" aria-label="आगामी: अभिविन्यास">
+          <a href="00_orientation/" class="md-footer__link md-footer__link--next" aria-label="आगामी: शुरुआत करना">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 आगामी
               </span>
               <div class="md-ellipsis">
-                अभिविन्यास
+                शुरुआत करना
               </div>
             </div>
             <div class="md-footer__button md-icon">
