@@ -766,7 +766,7 @@ Bu yan görevin geri kalanında yerel örnek dosyalarımızı kullanmaya devam e
 === "Önce"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Bir dize yolundan Path nesnesi oluştur
+        // İnternetten uzak bir dosya kullanma
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
@@ -797,7 +797,7 @@ Bunu yapmanın naif bir yolu, `file()` metodunu [`channel.of()`](https://www.nex
 
 ```groovy title="Sözdizimi örneği"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
-                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
+                      [file('data/patientA_rep1_normal_R2_001.fastq.gz')])
 ```
 
 Bu çalışır, ancak hantal.

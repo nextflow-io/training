@@ -15,7 +15,7 @@ Al final de esta misión secundaria, podrá:
 - Crear objetos Path a partir de cadenas de rutas de archivo usando el método `file()` de Nextflow
 - Acceder a atributos de archivos como nombre, extensión y directorio padre
 - Manejar tanto archivos locales como remotos de manera transparente usando URIs
-- Usar canales para automatizar el manejo de archivos con `channel.fromPath()` y `channel.fromFilePairs()`
+- Usar channels para automatizar el manejo de archivos con `channel.fromPath()` y `channel.fromFilePairs()`
 - Extraer y estructurar metadata de los nombres de archivos usando manipulación de cadenas
 - Agrupar archivos relacionados usando coincidencia de patrones y expresiones glob
 - Integrar operaciones de archivos en procesos de Nextflow con el manejo apropiado de entradas
@@ -28,7 +28,7 @@ Estas habilidades le ayudarán a construir flujos de trabajo que puedan manejar 
 Antes de emprender esta misión secundaria, debería:
 
 - Haber completado el tutorial [Hello Nextflow](../../hello_nextflow/) o un curso equivalente para principiantes.
-- Sentirse cómodo usando conceptos y mecanismos básicos de Nextflow (procesos, canales, operadores)
+- Sentirse cómodo usando conceptos y mecanismos básicos de Nextflow (procesos, channels, operadores)
 
 <!-- I removed the suggestion to do the metamaps SQ first because that works more naturally after -->
 
@@ -607,7 +607,7 @@ En conjunto, estos dos ejemplos le muestran cuán importante es decirle a Nextfl
 - El método `file()` convierte una cadena de ruta en un objeto Path con el que Nextflow puede trabajar
 - Puede acceder a propiedades de archivo como `name`, `simpleName`, `extension` y `parent` [usando atributos de archivo](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
 - Usar objetos Path en lugar de cadenas permite a Nextflow gestionar apropiadamente los archivos en su workflow
-- Resultados de Entrada de Proceso: El manejo apropiado de archivos requiere objetos Path, no cadenas, para asegurar que los archivos se organicen correctamente y sean accesibles para su uso por los procesos.
+- Manejo de Entradas de Proceso: El manejo apropiado de archivos requiere objetos Path, no cadenas, para asegurar que los archivos se organicen correctamente y sean accesibles para su uso por los procesos.
 
 ---
 
@@ -768,7 +768,7 @@ Vamos a volver a usar nuestros archivos de ejemplo locales para el resto de esta
 === "Antes"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
-        // Crear un objeto Path a partir de una ruta de texto
+        // Usar un archivo remoto de internet
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Imprimir atributos del archivo
@@ -1304,7 +1304,7 @@ Va a tomar dos pasos:
 
 ### 5.1. Cambiar el channel factory a `channel.fromFilePairs()`
 
-Para usar `channel.fromFilePairs`, necesitamos especificar el patrón que Nextflow debería usar para identificar los dos miembros en un par.
+Para usar `channel.fromFilePairs`, necesitamos especificar el patrón que Nextflow debe usar para identificar los dos miembros en un par.
 
 Volviendo a nuestros datos de ejemplo, podemos formalizar el patrón de nomenclatura de la siguiente manera:
 
@@ -1312,7 +1312,7 @@ Volviendo a nuestros datos de ejemplo, podemos formalizar el patrón de nomencla
 data/patientA_rep1_normal_R{1,2}_001.fastq.gz
 ```
 
-Esto es similar al patrón glob que usamos anteriormente, excepto que este específicamente enumera las subcadenas (ya sea `1` o `2` viniendo justo después de la R) que identifican los dos miembros del par.
+Esto es similar al patrón glob que usamos anteriormente, excepto que específicamente enumera las subcadenas (ya sea `1` o `2` viniendo justo después de la R) que identifican los dos miembros del par.
 
 Actualicemos el workflow `main.nf` en consecuencia:
 
@@ -1341,7 +1341,7 @@ Actualicemos el workflow `main.nf` en consecuencia:
 === "Antes"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
-        // Cargar archivos con channel.fromFilePairs
+        // Cargar archivos con channel.fromPath
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.map { myFile ->
             def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
@@ -1358,8 +1358,8 @@ Actualicemos el workflow `main.nf` en consecuencia:
         .view()
     ```
 
-Hemos cambiado el channel factory y adaptado el patrón de coincidencia de archivos, y mientras lo hacíamos, comentamos la operación map.
-Agregaremos eso de vuelta más adelante, con algunas modificaciones.
+Hemos cambiado el channel factory y adaptado el patrón de coincidencia de archivos, y mientras estábamos en ello, comentamos la operación map.
+Agregaremos eso de vuelta más tarde, con algunas modificaciones.
 
 Ejecute el workflow para probarlo:
 
@@ -1389,7 +1389,7 @@ nextflow run main.nf
     -- Check '.nextflow.log' file for details
     ```
 
-¡Uh-oh, esta vez la ejecución falló!
+Uh-oh, ¡esta vez la ejecución falló!
 
 La parte relevante del mensaje de error está aquí:
 
@@ -1402,15 +1402,15 @@ Hasta ahora, el canal de entrada original solo contenía las rutas de archivo.
 Toda la manipulación de metadata que hemos estado haciendo no afectó realmente el contenido del canal.
 
 Ahora que estamos usando el channel factory `.fromFilePairs`, el contenido del canal resultante es diferente.
-Vemos solo un elemento de canal, compuesto de una tupla que contiene dos elementos: la parte del `simpleName` compartida por los dos archivos, que sirve como un identificador, y una tupla que contiene los dos objetos de archivo, en el formato `id, [ file1, file2 ]`.
+Vemos solo un elemento de canal, compuesto de una tupla que contiene dos elementos: la parte del `simpleName` compartida por los dos archivos, que sirve como identificador, y una tupla que contiene los dos objetos de archivo, en el formato `id, [ file1, file2 ]`.
 
-Eso es genial, porque Nextflow ha hecho el trabajo duro de extraer el nombre del paciente examinando el prefijo compartido y usándolo como un identificador de paciente.
+Eso es genial, porque Nextflow ha hecho el trabajo difícil de extraer el nombre del paciente examinando el prefijo compartido y usándolo como identificador del paciente.
 
 Sin embargo, sí rompe nuestro workflow actual.
-Si quisiéramos seguir ejecutando `COUNT_LINES` de la misma manera sin cambiar el proceso, tendríamos que aplicar una operación de mapeo para extraer las rutas de archivo.
+Si quisiéramos todavía ejecutar `COUNT_LINES` de la misma manera sin cambiar el proceso, tendríamos que aplicar una operación de mapeo para extraer las rutas de archivo.
 Pero no vamos a hacer eso, porque nuestro objetivo final es usar un proceso diferente, `ANALYZE_READS`, que maneja pares de archivos apropiadamente.
 
-Así que simplemente comentemos (o eliminemos) la llamada a `COUNT_LINES` y continuemos.
+Así que simplemente comentemos (o eliminemos) la llamada a `COUNT_LINES` y sigamos adelante.
 
 === "Después"
 
@@ -1426,7 +1426,7 @@ Así que simplemente comentemos (o eliminemos) la llamada a `COUNT_LINES` y cont
         COUNT_LINES(ch_files)
     ```
 
-También puede comentar o eliminar la declaración include de `COUNT_LINES`, pero eso no tendrá ningún efecto funcional.
+También puede comentar o eliminar la declaración include de `COUNT_LINES`, pero eso no tendrá efecto funcional.
 
 Ahora ejecutemos el workflow de nuevo:
 
@@ -1444,7 +1444,7 @@ nextflow run main.nf
     [patientA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
     ```
 
-¡Genial, esta vez el workflow tiene éxito!
+¡Yay, esta vez el workflow tiene éxito!
 
 Sin embargo, todavía necesitamos obtener el resto de la metadata del campo `id`.
 
@@ -1452,7 +1452,7 @@ Sin embargo, todavía necesitamos obtener el resto de la metadata del campo `id`
 
 Nuestra operación `map` de antes no funcionará porque no coincide con la estructura de datos, pero podemos modificarla para que funcione.
 
-Ya tenemos acceso al identificador real del paciente en la cadena que `fromFilePairs()` usó como identificador, así que podemos usar eso para extraer la metadata sin obtener el `simpleName` del objeto Path como hicimos antes.
+Ya tenemos acceso al identificador del paciente real en la cadena que `fromFilePairs()` usó como identificador, así que podemos usar eso para extraer la metadata sin obtener el `simpleName` del objeto Path como lo hicimos antes.
 
 Descomente la operación map en el workflow y haga las siguientes ediciones:
 
@@ -1499,7 +1499,7 @@ Descomente la operación map en el workflow y haga las siguientes ediciones:
 
 Esta vez el map comienza desde `id, files` en lugar de solo `myFile`, y `tokenize()` se aplica a `id` en lugar de a `myFile.simpleName`.
 
-Note también que hemos eliminado `readNum` de la línea `tokenize()`; cualquier subcadena que no nombremos específicamente (comenzando desde la izquierda) será silenciosamente eliminada.
+Note también que hemos eliminado `readNum` de la línea `tokenize()`; cualquier subcadena que no nombremos específicamente (comenzando desde la izquierda) será eliminada silenciosamente.
 Podemos hacer esto porque los archivos emparejados ahora están estrechamente asociados, así que ya no necesitamos `readNum` en el map de metadata.
 
 Ejecutemos el workflow:
@@ -1519,10 +1519,10 @@ nextflow run main.nf
     [[id:patientA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]]
     ```
 
-Y ahí está: tenemos el map de metadata (`[id:patientA, replicate:1, type:normal]`) en la primera posición de la tupla de salida, seguida por la tupla de archivos emparejados, como se pretendía.
+Y ahí está: tenemos el map de metadata (`[id:patientA, replicate:1, type:normal]`) en la primera posición de la tupla de salida, seguido de la tupla de archivos emparejados, como se pretendía.
 
 Por supuesto, esto solo recogerá y procesará ese par específico de archivos.
-Si quiere experimentar con procesar múltiples pares, puede intentar agregar comodines en el patrón de entrada y ver qué sucede.
+Si desea experimentar con el procesamiento de múltiples pares, puede intentar agregar comodines al patrón de entrada y ver qué sucede.
 Por ejemplo, intente usar `data/patientA_rep1_*_R{1,2}_001.fastq.gz`
 
 ### Conclusión
@@ -1530,7 +1530,7 @@ Por ejemplo, intente usar `data/patientA_rep1_*_R{1,2}_001.fastq.gz`
 - [`channel.fromFilePairs()` encuentra y empareja automáticamente archivos relacionados](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
 - Esto simplifica el manejo de lecturas de extremos emparejados en su pipeline
 - Los archivos emparejados pueden agruparse como tuplas `[id, [file1, file2]]`
-- La extracción de metadata puede hacerse desde el ID del archivo emparejado en lugar de archivos individuales
+- La extracción de metadata puede hacerse desde el ID de archivo emparejado en lugar de desde archivos individuales
 
 ---
 
@@ -1569,7 +1569,7 @@ Haga la siguiente edición al workflow:
 
 Puede abrir el archivo de módulo para examinar su código:
 
-```groovy title="modules/analyze_reads.nf - example de proceso" linenums="1"
+```groovy title="modules/analyze_reads.nf - ejemplo de proceso" linenums="1"
 #!/usr/bin/env nextflow
 
 process ANALYZE_READS {
@@ -1599,8 +1599,8 @@ process ANALYZE_READS {
 !!! note
 
     Las directivas `tag` y `publishDir` usan sintaxis de closure (`{ ... }`) en lugar de interpolación de cadenas (`"${...}"`).
-    Esto es porque estas directivas hacen referencia a variables de entrada (`meta`) que no están disponibles hasta el tiempo de ejecución.
-    La sintaxis de closure aplaza la evaluación hasta que el proceso realmente se ejecute.
+    Esto es porque estas directivas referencian variables de entrada (`meta`) que no están disponibles hasta el tiempo de ejecución.
+    La sintaxis de closure difiere la evaluación hasta que el proceso realmente se ejecuta.
 
 !!! note
 
@@ -1618,8 +1618,8 @@ Para ejecutarlo en nuestros datos de ejemplo, necesitaremos hacer dos cosas:
 
 #### 6.2.1. Nombrar el canal de entrada remapeado
 
-Previamente aplicamos las manipulaciones de mapeo directamente al canal de entrada.
-Para alimentar los contenidos remapeados al proceso `ANALYZE_READS` (y hacerlo de una manera que sea clara y fácil de leer) queremos crear un nuevo canal llamado `ch_samples`.
+Anteriormente aplicamos las manipulaciones de mapeo directamente al canal de entrada.
+Para alimentar el contenido remapeado al proceso `ANALYZE_READS` (y hacerlo de una manera que sea clara y fácil de leer) queremos crear un nuevo canal llamado `ch_samples`.
 
 Podemos hacer eso usando el operador [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set).
 
@@ -1643,7 +1643,7 @@ En el workflow principal, reemplace el operador `.view()` con `.set { ch_samples
         }
             .set { ch_samples }
 
-        // Temporal: echar un vistazo a ch_samples
+        // Temporal: mirar dentro de ch_samples
         ch_samples.view()
     ```
 
@@ -1685,9 +1685,9 @@ nextflow run main.nf
 
 Esto confirma que ahora podemos referirnos al canal por nombre.
 
-#### 6.2.2. Llamar al proceso sobre los datos
+#### 6.2.2. Llamar al proceso en los datos
 
-Ahora llamemos realmente al proceso `ANALYZE_READS` sobre el canal `ch_samples`.
+Ahora llamemos realmente al proceso `ANALYZE_READS` en el canal `ch_samples`.
 
 En el workflow principal, haga los siguientes cambios de código:
 
@@ -1701,7 +1701,7 @@ En el workflow principal, haga los siguientes cambios de código:
 === "Antes"
 
     ```groovy title="main.nf" linenums="23"
-        // Temporal: echar un vistazo a ch_samples
+        // Temporal: mirar dentro de ch_samples
         ch_samples.view()
     ```
 
@@ -1742,18 +1742,18 @@ Este proceso está configurado para publicar sus salidas en un directorio `resul
     Read 2 size: 10 reads
     ```
 
-El proceso tomó nuestras entradas y creó un nuevo archivo que contiene la metadata del paciente, como fue diseñado.
+El proceso tomó nuestras entradas y creó un nuevo archivo conteniendo la metadata del paciente, como fue diseñado.
 ¡Espléndido!
 
 ### 6.3. Incluir muchos más pacientes
 
-Por supuesto, esto solo está procesando un solo par de archivos para un solo paciente, que no es exactamente el tipo de alto rendimiento que espera obtener con Nextflow.
+Por supuesto, esto solo está procesando un único par de archivos para un único paciente, que no es exactamente el tipo de alto rendimiento que espera obtener con Nextflow.
 Probablemente querrá procesar muchos más datos a la vez.
 
 Recuerde que `channel.fromPath()` acepta un _glob_ como entrada, lo que significa que puede aceptar cualquier número de archivos que coincidan con el patrón.
-Por lo tanto, si queremos incluir todos los pacientes, simplemente podemos modificar la cadena de entrada para incluir más pacientes, como se señaló de paso anteriormente.
+Por lo tanto, si queremos incluir todos los pacientes, simplemente podemos modificar la cadena de entrada para incluir más pacientes, como se señaló de pasada anteriormente.
 
-Supongamos que queremos ser lo más codiciosos posible.
+Pretendamos que queremos ser tan codiciosos como sea posible.
 Haga las siguientes ediciones al workflow:
 
 === "Después"
@@ -1803,13 +1803,13 @@ El directorio de resultados ahora debería contener resultados para todos los da
 
 ¡Éxito! ¡Hemos analizado todos los pacientes de una vez! ¿Verdad?
 
-Tal vez no.
+Quizás no.
 Si mira más de cerca, tenemos un problema: ¡tenemos dos réplicas para patientA, pero solo un archivo de salida!
 Estamos sobrescribiendo el archivo de salida cada vez.
 
-### 6.4. Hacer que los archivos publicados sean únicos
+### 6.4. Hacer los archivos publicados únicos
 
-Ya que tenemos acceso a la metadata del paciente, podemos usarla para hacer que los archivos publicados sean únicos incluyendo metadata diferenciadora, ya sea en la estructura de directorios o en los nombres de archivo mismos.
+Dado que tenemos acceso a la metadata del paciente, podemos usarla para hacer los archivos publicados únicos incluyendo metadata diferenciadora, ya sea en la estructura de directorios o en los nombres de archivo mismos.
 
 Haga el siguiente cambio al workflow:
 
@@ -1825,7 +1825,7 @@ Haga el siguiente cambio al workflow:
         publishDir { "results/${meta.id}" }, mode: 'copy'
     ```
 
-Aquí mostramos la opción de usar niveles de directorio adicionales para tener en cuenta los tipos de muestra y réplicas, pero podría experimentar haciéndolo al nivel del nombre de archivo también.
+Aquí mostramos la opción de usar niveles de directorio adicionales para dar cuenta de tipos de muestra y réplicas, pero podría experimentar haciéndolo al nivel del nombre de archivo también.
 
 Ahora ejecute el pipeline una vez más, pero asegúrese de eliminar el directorio de resultados primero para darse un espacio de trabajo limpio:
 
@@ -1845,7 +1845,7 @@ nextflow run main.nf
     [e3/449081] process > ANALYZE_READS (patientC) [100%] 8 of 8 ✔
     ```
 
-Revise el directorio de resultados ahora:
+Verifique el directorio de resultados ahora:
 
 ??? abstract "Contenido del directorio"
 
@@ -1877,24 +1877,24 @@ Revise el directorio de resultados ahora:
                 └── patientC_stats.txt
     ```
 
-Y ahí está, toda nuestra metadata, cuidadosamente organizada. ¡Eso es éxito!
+Y ahí está, toda nuestra metadata, ordenadamente organizada. ¡Eso es éxito!
 
 Hay mucho más que puede hacer una vez que tiene su metadata cargada en un map como este:
 
-1. Crear directorios de salida organizados basados en atributos de pacientes
-2. Tomar decisiones en procesos basadas en propiedades de pacientes
+1. Crear directorios de salida organizados basados en atributos del paciente
+2. Tomar decisiones en procesos basadas en propiedades del paciente
 3. Dividir, unir y recombinar datos basados en valores de metadata
 
-Este patrón de mantener la metadata explícita y adjunta a los datos (en lugar de codificada en nombres de archivo) es una mejor práctica central en Nextflow que permite construir workflows de análisis robustos y mantenibles.
+Este patrón de mantener la metadata explícita y adjunta a los datos (en lugar de codificada en nombres de archivo) es una práctica fundamental en Nextflow que permite construir flujos de trabajo de análisis robustos y mantenibles.
 Puede aprender más sobre esto en la misión secundaria [Metadata and meta maps](./metadata.md).
 
 ### Conclusión
 
-- La directiva `publishDir` puede organizar salidas basándose en valores de metadata
-- La metadata en tuplas permite organización estructurada de resultados
-- Este enfoque crea workflows mantenibles con clara procedencia de datos
+- La directiva `publishDir` puede organizar salidas basadas en valores de metadata
+- La metadata en tuplas permite la organización estructurada de resultados
+- Este enfoque crea flujos de trabajo mantenibles con proveniencia de datos clara
 - Los procesos pueden tomar tuplas de metadata y archivos como entrada
-- La directiva `tag` proporciona identificación de proceso en los registros de ejecución
+- La directiva `tag` proporciona identificación de procesos en los registros de ejecución
 - La estructura del workflow separa la creación de canales de la ejecución de procesos
 
 ---
@@ -1903,7 +1903,7 @@ Puede aprender más sobre esto en la misión secundaria [Metadata and meta maps]
 
 En esta misión secundaria, ha aprendido cómo trabajar con archivos en Nextflow, desde operaciones básicas hasta técnicas más avanzadas para manejar colecciones de archivos.
 
-Aplicar estas técnicas en su propio trabajo le permitirá construir workflows más eficientes y mantenibles, especialmente cuando trabaje con grandes números de archivos con convenciones de nomenclatura complejas.
+Aplicar estas técnicas en su propio trabajo le permitirá construir flujos de trabajo más eficientes y mantenibles, especialmente cuando trabaje con grandes números de archivos con convenciones de nomenclatura complejas.
 
 ### Patrones clave
 
@@ -1962,7 +1962,7 @@ Aplicar estas técnicas en su propio trabajo le permitirá construir workflows m
     myFile = file('gs://path/to/file.txt')
     ```
 
-3.  **Cargar archivos usando el channel factory `fromPath()`:** Creamos canales a partir de patrones de archivo con `channel.fromPath()` y vimos sus atributos de archivo, incluyendo tipos de objeto.
+3.  **Cargar archivos usando el channel factory `fromPath()`:** Creamos canales a partir de patrones de archivo con `channel.fromPath()` y vimos sus atributos de archivo, incluyendo tipos de objetos.
 
     - Crear un canal a partir de un patrón de archivo
 
@@ -1982,7 +1982,7 @@ Aplicar estas técnicas en su propio trabajo le permitirá construir workflows m
     }
     ```
 
-4.  **Extraer Metadata de Paciente de Nombres de Archivo:** Usamos `tokenize()` y `replace()` para extraer y estructurar metadata de nombres de archivo, convirtiéndolos en maps organizados.
+4.  **Extraer Metadata de Pacientes de Nombres de Archivos:** Usamos `tokenize()` y `replace()` para extraer y estructurar metadata de nombres de archivos, convirtiéndolos en maps organizados.
 
     ```groovy
     def name = file.name.tokenize('_')
@@ -1992,13 +1992,13 @@ Aplicar estas técnicas en su propio trabajo le permitirá construir workflows m
     def readNum = name[3].replace('R', '')
     ```
 
-5.  **Simplificar con channel.fromFilePairs:** Usamos `channel.fromFilePairs()` para emparejar automáticamente archivos relacionados y extraer metadata de IDs de archivos emparejados.
+5.  **Simplificar con channel.fromFilePairs:** Usamos `channel.fromFilePairs()` para emparejar automáticamente archivos relacionados y extraer metadata de IDs de archivo emparejados.
 
     ```groovy
     ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
-6.  **Usar Operaciones de Archivos en Procesos:** Integramos operaciones de archivos en procesos de Nextflow con manejo apropiado de entrada, usando `publishDir` para organizar salidas basadas en metadata.
+6.  **Usar Operaciones de Archivos en Procesos:** Integramos operaciones de archivos en procesos de Nextflow con el manejo apropiado de entradas, usando `publishDir` para organizar salidas basadas en metadata.
 
     - Asociar un meta map con las entradas del proceso
 
@@ -2028,7 +2028,7 @@ Aplicar estas técnicas en su propio trabajo le permitirá construir workflows m
 
 ### Recursos adicionales
 
-- [Documentación de Nextflow: Trabajar con Archivos](https://www.nextflow.io/docs/latest/working-with-files.html)
+- [Documentación de Nextflow: Working with Files](https://www.nextflow.io/docs/latest/working-with-files.html)
 - [channel.fromPath](https://www.nextflow.io/docs/latest/reference/channel.html#frompath)
 - [channel.fromFilePairs](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
 
@@ -2036,4 +2036,4 @@ Aplicar estas técnicas en su propio trabajo le permitirá construir workflows m
 
 ## ¿Qué sigue?
 
-Vuelva al [menú de Misiones Secundarias](./index.md) o haga clic en el botón en la parte inferior derecha de la página para pasar al siguiente tema de la lista.
+Regrese al [menú de Misiones Secundarias](./index.md) o haga clic en el botón en la esquina inferior derecha de la página para pasar al siguiente tema en la lista.

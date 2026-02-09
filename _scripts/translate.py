@@ -101,6 +101,7 @@ class TranslationFile:
     en_path: Path
     lang_path: Path
     language: str
+    prompt_changed: bool = False  # True if update triggered by prompt change
 
     @property
     def exists(self) -> bool:
@@ -229,18 +230,51 @@ def get_lang_prompt(lang: str) -> str:
 
 
 def build_translation_prompt(
-    lang: str, lang_name: str, en_content: str, existing: str | None = None
+    lang: str,
+    lang_name: str,
+    en_content: str,
+    existing: str | None = None,
+    en_diff: str | None = None,
 ) -> str:
-    """Build the full prompt for translation."""
+    """Build the full prompt for translation.
+
+    Args:
+        lang: Language code (e.g., 'pt', 'es')
+        lang_name: Human-readable language name (e.g., 'português')
+        en_content: Full English source content
+        existing: Existing translation content, if updating
+        en_diff: Git diff of English changes, for incremental updates
+    """
     parts = [get_general_prompt(), get_lang_prompt(lang)]
 
     if existing:
-        parts.append(
-            "## Existing Translation\n"
-            "Update minimally: add new content, remove deleted content, "
-            "fix guideline violations, preserve correct lines exactly.\n\n"
-            f"Previous translation:\n%%%\n{existing}%%%"
-        )
+        if en_diff:
+            # Diff-aware incremental update mode
+            parts.append(
+                "## Incremental Update Mode\n\n"
+                "The English source has been updated. "
+                "The following diff shows exactly what changed:\n\n"
+                f"```diff\n{en_diff}\n```\n\n"
+                "**Instructions:**\n\n"
+                "1. Locate the corresponding section(s) in your existing translation\n"
+                "2. Update ONLY those specific sections to reflect the English changes\n"
+                "3. Preserve ALL other content exactly as-is, character for character\n"
+                "4. Do NOT rephrase, improve, or modify any sections unrelated to the diff\n\n"
+                "**Exception:** If you find major issues beyond the diff (e.g., truncated "
+                "content, missing sections, or significant errors), you may fix those as well. "
+                "The goal is to avoid unnecessary rephrasing of translations that are already "
+                "correct.\n\n"
+                f"## Existing Translation\n\n%%%\n{existing}%%%"
+            )
+        else:
+            # Full re-translation with existing as reference
+            # (prompt changed, diff too large, or diff unavailable)
+            parts.append(
+                "## Existing Translation\n"
+                "Update minimally: add new content, remove deleted content, "
+                "fix guideline violations, preserve correct lines exactly.\n\n"
+                f"Previous translation:\n%%%\n{existing}%%%"
+            )
 
     parts.append(
         f"## Task\nTranslate to {lang} ({lang_name}).\n\n"
@@ -280,6 +314,45 @@ def file_changed_since(path: Path, since_commit: str) -> bool:
         return len(commits) > 0
     except git.GitCommandError:
         return False
+
+
+def get_file_diff(path: Path, since_commit: str) -> str | None:
+    """Get the git diff for a file since a specific commit.
+
+    Args:
+        path: File path to get diff for
+        since_commit: Commit SHA to compare against
+
+    Returns:
+        The unified diff string, or None if:
+        - No changes detected
+        - Diff is too large (>20% of current file lines)
+        - Git command fails
+    """
+    try:
+        repo = _get_repo()
+        rel_path = path.relative_to(REPO_ROOT)
+
+        # Get the unified diff
+        diff = repo.git.diff(f"{since_commit}..HEAD", "--", str(rel_path))
+        if not diff:
+            return None
+
+        # Check if diff is too large (>20% of file lines)
+        # If so, fall back to full translation mode
+        file_lines = path.read_text(encoding="utf-8").count("\n") + 1
+        # Count actual change lines (starting with + or -), not context/headers
+        diff_changes = sum(
+            1
+            for line in diff.split("\n")
+            if line.startswith(("+", "-")) and not line.startswith(("+++", "---"))
+        )
+        if file_lines > 0 and diff_changes > file_lines * 0.2:
+            return None
+
+        return diff
+    except git.GitCommandError:
+        return None
 
 
 def get_translation_baseline(
@@ -396,10 +469,14 @@ def get_outdated_files(lang: str, baseline: str | None = None) -> list[Translati
 
         if prompts_changed:
             # Prompt changed: all existing translations need re-translation
-            outdated.append(TranslationFile(en_path, lang_path, lang))
+            outdated.append(
+                TranslationFile(en_path, lang_path, lang, prompt_changed=True)
+            )
         elif file_changed_since(en_path, baseline):
             # Check if English file changed since baseline
-            outdated.append(TranslationFile(en_path, lang_path, lang))
+            outdated.append(
+                TranslationFile(en_path, lang_path, lang, prompt_changed=False)
+            )
 
     return outdated
 
@@ -453,6 +530,7 @@ def _call_claude_once(
                 max_tokens=MAX_TOKENS,
                 timeout=REQUEST_TIMEOUT,
                 messages=messages,
+                temperature=0,
             )
         except (
             anthropic.APIConnectionError,
@@ -538,6 +616,7 @@ async def _call_claude_once_async(
                 max_tokens=MAX_TOKENS,
                 timeout=REQUEST_TIMEOUT,
                 messages=messages,
+                temperature=0,
             )
         except (
             anthropic.APIConnectionError,
@@ -640,8 +719,17 @@ def translate_file(tf: TranslationFile, console: Console) -> None:
     action = "[yellow]Updating[/yellow]" if existing else "[green]Translating[/green]"
     console.print(f"  {action} [magenta]{tf.relative_path}[/magenta]")
 
+    # Compute diff for incremental updates (not prompt-triggered, existing translation)
+    en_diff = None
+    if existing and not tf.prompt_changed:
+        baseline = get_translation_baseline(tf.language)
+        if baseline:
+            en_diff = get_file_diff(tf.en_path, baseline)
+            if en_diff:
+                console.print("    [dim]Using incremental update mode[/dim]")
+
     prompt = build_translation_prompt(
-        tf.language, langs[tf.language], en_content, existing
+        tf.language, langs[tf.language], en_content, existing, en_diff
     )
     result = call_claude(prompt, console)
 
@@ -821,8 +909,15 @@ async def translate_file_async(
             entry.input_lines = en_content.count("\n") + 1
             entry.input_hash = hashlib.md5(en_content.encode()).hexdigest()[:12]
 
+            # Compute diff for incremental updates (not prompt-triggered, existing translation)
+            en_diff = None
+            if existing and not tf.prompt_changed:
+                baseline = get_translation_baseline(tf.language)
+                if baseline:
+                    en_diff = get_file_diff(tf.en_path, baseline)
+
             prompt = build_translation_prompt(
-                tf.language, langs[tf.language], en_content, existing
+                tf.language, langs[tf.language], en_content, existing, en_diff
             )
             result = await call_claude_async(prompt, filename, client)
             output_content = f"{result.text}\n"

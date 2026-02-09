@@ -1,6 +1,6 @@
 # Przetwarzanie plików wejściowych
 
-Workflow'y analizy naukowej często obejmują przetwarzanie dużej liczby plików.
+Workflow naukowe często obejmują przetwarzanie dużej liczby plików.
 Nextflow zapewnia potężne narzędzia do efektywnej obsługi plików, pomagając organizować i przetwarzać dane przy minimalnym nakładzie kodu.
 
 ### Cele nauki
@@ -26,7 +26,7 @@ Te umiejętności pomogą Ci budować workflow'y, które mogą obsługiwać ró�
 Przed podjęciem tego side questa powinieneś:
 
 - Ukończyć tutorial [Hello Nextflow](../../hello_nextflow/) lub równoważny kurs dla początkujących
-- Czuć się komfortowo z podstawowymi koncepcjami i mechanizmami Nextflow (procesami, kanałami, operatorami)
+- Czuć się komfortowo z podstawowymi koncepcjami i mechanizmami Nextflow (procesy, kanały, operatory)
 
 ---
 
@@ -54,7 +54,7 @@ code .
 
 #### Przejrzyj materiały
 
-Znajdziesz prosty plik workflow'a o nazwie `main.nf`, katalog `modules` zawierający dwa pliki modułów oraz katalog `data` zawierający przykładowe pliki danych.
+Znajdziesz prosty plik workflow o nazwie `main.nf`, katalog `modules` zawierający dwa pliki modułów oraz katalog `data` zawierający przykładowe pliki danych.
 
 ??? abstract "Zawartość katalogu"
 
@@ -96,7 +96,7 @@ _Nie martw się, jeśli nie znasz tego projektu eksperymentalnego, nie jest to k
 
 #### Przejrzyj zadanie
 
-Twoim wyzwaniem jest napisanie workflow'a Nextflow, który będzie:
+Twoim wyzwaniem jest napisanie workflow Nextflow, który będzie:
 
 1. **Wczytywać** pliki wejściowe przy użyciu metod obsługi plików Nextflow
 2. **Wyodrębniać** metadane (ID pacjenta, replikat, typ próbki) ze struktury nazwy pliku
@@ -121,7 +121,7 @@ Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.
 
 ### 1.1. Zidentyfikuj typ obiektu za pomocą `.class`
 
-Spójrz na plik workflow'a `main.nf`:
+Spójrz na plik workflow `main.nf`:
 
 ```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -135,7 +135,7 @@ workflow {
 }
 ```
 
-To mini-workflow (bez żadnych procesów), który odnosi się do pojedynczej ścieżki pliku w Swoim workflow'ie, następnie wypisuje ją do konsoli wraz z jej klasą.
+To mini-workflow (bez żadnych procesów), który odnosi się do pojedynczej ścieżki pliku w workflow, następnie wypisuje ją do konsoli wraz z jej klasą.
 
 ??? info "Co to jest `.class`?"
 
@@ -158,17 +158,17 @@ nextflow run main.nf
     data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
     ```
 
-Jak widać, Nextflow wypisał ścieżkę ciągu dokładnie tak, jak ją napisaliśmy.
+Jak widać, Nextflow wypisał ścieżkę dokładnie tak, jak ją napisaliśmy.
 
 To jest tylko wyjście tekstowe; Nextflow nie zrobił z tym jeszcze nic specjalnego.
 Potwierdziliśmy również, że dla Nextflow jest to tylko ciąg znaków (klasy `java.lang.String`).
-To ma sens, ponieważ nie powiedzieliśmy jeszcze Nextflow'owi, że odpowiada to plikowi.
+To ma sens, ponieważ nie powiedzieliśmy jeszcze Nextflow, że odpowiada to plikowi.
 
 ### 1.2. Utwórz obiekt Path za pomocą file()
 
-Możemy powiedzieć Nextflow'owi, jak obsługiwać pliki, tworząc [obiekty Path](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) z ciągów znaków ścieżek.
+Możemy powiedzieć Nextflow, jak obsługiwać pliki, tworząc [obiekty Path](https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path) z ciągów znaków ścieżek.
 
-W naszym workflow'ie możemy przekonwertować ciąg ścieżki `data/patientA_rep1_normal_R1_001.fastq.gz` na obiekt Path używając metody `file()`, która zapewnia dostęp do właściwości i operacji na plikach.
+W naszym workflow możemy przekonwertować ciąg ścieżki `data/patientA_rep1_normal_R1_001.fastq.gz` na obiekt Path używając metody `file()`, która zapewnia dostęp do właściwości i operacji na plikach.
 
 Edytuj `main.nf`, aby opakować ciąg za pomocą `file()` w następujący sposób:
 
@@ -211,8 +211,8 @@ Tym razem widzisz pełną ścieżkę bezwzględną zamiast ścieżki względnej,
 Nextflow przekonwertował nasz ciąg na obiekt Path i rozwiązał go do rzeczywistej lokalizacji pliku w systemie.
 Ścieżka pliku będzie teraz bezwzględna, jak w `/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz`.
 
-Zauważ również, że klasa obiektu Path to `sun.nio.fs.UnixPath`: to sposób Nextflow'a na reprezentowanie plików lokalnych.
-Jak zobaczymy później, pliki zdalne będą miały różne nazwy klas (takie jak `nextflow.file.http.XPath` dla plików HTTP), ale wszystkie działają dokładnie w ten sam sposób i mogą być używane identycznie w Twoich workflow'ach.
+Zauważ również, że klasa obiektu Path to `sun.nio.fs.UnixPath`: to sposób Nextflow na reprezentowanie plików lokalnych.
+Jak zobaczymy później, pliki zdalne będą miały inne nazwy klas (takie jak `nextflow.file.http.XPath` dla plików HTTP), ale wszystkie działają dokładnie w ten sam sposób i mogą być używane identycznie w Twoich workflow.
 
 !!! tip
 
@@ -276,14 +276,14 @@ Widzisz różne atrybuty pliku wypisane w konsoli powyżej.
 
 ### 1.4. Przekaż plik do procesu
 
-Różnica między ciągami znaków a obiektami Path staje się krytyczna, gdy zaczniesz budować rzeczywiste workflow'y z procesami.
+Różnica między ciągami znaków a obiektami Path staje się krytyczna, gdy zaczniesz budować rzeczywiste workflow z procesami.
 Do tej pory zweryfikowaliśmy, że Nextflow traktuje teraz nasz plik wejściowy jako plik, ale zobaczmy, czy możemy faktycznie uruchomić coś na tym pliku w procesie.
 
 #### 1.4.1. Zaimportuj proces i zbadaj kod
 
 Udostępniamy wstępnie napisany moduł procesu o nazwie `COUNT_LINES`, który przyjmuje plik wejściowy i liczy, ile ma linii.
 
-Aby użyć procesu w workflow'ie, wystarczy dodać instrukcję include przed blokiem workflow:
+Aby użyć procesu w workflow, wystarczy dodać instrukcję include przed blokiem workflow:
 
 === "Po"
 
@@ -330,13 +330,13 @@ Jak widać, to dość prosty mały skrypt, który rozpakowuje plik i liczy, ile 
     Dyrektywa `debug true` w definicji procesu powoduje, że Nextflow wypisuje wyjście ze skryptu (jak liczba linii "40") bezpośrednio w logu wykonania.
     Bez tego zobaczyłbyś tylko status wykonania procesu, ale nie rzeczywiste wyjście ze skryptu.
 
-    Więcej informacji na temat debugowania workflow'ów Nextflow znajdziesz w side queście [Debugging Nextflow Workflows](debugging.md).
+    Więcej informacji na temat debugowania workflow Nextflow znajdziesz w side queście [Debugging Nextflow Workflows](debugging.md).
 
 #### 1.4.2. Dodaj wywołanie `COUNT_LINES`
 
-Teraz, gdy proces jest dostępny dla workflow'a, możemy dodać wywołanie procesu `COUNT_LINES`, aby uruchomić go na pliku wejściowym.
+Teraz, gdy proces jest dostępny dla workflow, możemy dodać wywołanie procesu `COUNT_LINES`, aby uruchomić go na pliku wejściowym.
 
-Wprowadź następujące edycje w workflow'ie:
+Wprowadź następujące edycje w workflow:
 
 === "Po"
 
@@ -402,19 +402,19 @@ Konkretnie, Nextflow wykonał następujące operacje pomyślnie:
 - Policzył linie (40 linii w tym przypadku)
 - Zakończył bez błędu
 
-Kluczem do tej płynnej operacji jest to, że wyraźnie mówimy Nextflow'owi, że nasze wejście jest plikiem i powinno być traktowane jako takie.
+Kluczem do tej płynnej operacji jest to, że wyraźnie mówimy Nextflow, że nasze wejście jest plikiem i powinno być traktowane jako takie.
 
 ### 1.5. Rozwiązywanie problemów z podstawowymi błędami wejścia pliku
 
 To często wprowadza w błąd osoby nowe w Nextflow, więc poświęćmy kilka minut na przyjrzenie się, co się dzieje, gdy robisz to źle.
 
-Są dwa główne miejsca, w których możesz źle obsłużyć plik: na poziomie workflow'a i na poziomie procesu.
+Są dwa główne miejsca, w których możesz źle obsłużyć plik: na poziomie workflow i na poziomie procesu.
 
-#### 1.5.1. Błąd na poziomie workflow'a
+#### 1.5.1. Błąd na poziomie workflow
 
 Zobaczmy, co się stanie, jeśli wrócimy do traktowania pliku jako ciągu znaków podczas określania wejścia w bloku workflow.
 
-Wprowadź następujące edycje w workflow'ie, upewniając się, że zakomentowałeś instrukcje wypisywania specyficzne dla ścieżki:
+Wprowadź następujące edycje w workflow, upewniając się, że zakomentowałeś instrukcje wypisywania specyficzne dla ścieżki:
 
 === "Po"
 
@@ -493,7 +493,7 @@ Nextflow natychmiast wykrył problem i zatrzymał się przed rozpoczęciem proce
 
 Drugim miejscem, w którym możemy zapomnieć określić, że chcemy, aby Nextflow traktował wejście jako plik, jest definicja procesu.
 
-!!! warning "Zachowaj błąd workflow'a z 1.5.1"
+!!! warning "Zachowaj błąd workflow z 1.5.1"
 
     Aby ten test działał poprawnie, zachowaj workflow w jego uszkodzonym stanie (używając zwykłego ciągu zamiast `file()`).
     W połączeniu z `val` w procesie, to powoduje błąd pokazany poniżej.
@@ -591,28 +591,28 @@ Mówi to, że system nie mógł znaleźć pliku; jednak jeśli sprawdzisz ście�
 Kiedy to uruchomiliśmy, Nextflow przekazał wartość ciągu do skryptu, ale nie _przeniósł_ rzeczywistego pliku do katalogu roboczego.
 Więc proces próbował użyć względnego ciągu, `data/patientA_rep1_normal_R1_001.fastq.gz`, ale ten plik nie istnieje w katalogu roboczym procesu.
 
-Razem wzięte, te dwa przykłady pokazują, jak ważne jest poinformowanie Nextflow'a, czy wejście powinno być obsługiwane jako plik.
+Razem wzięte, te dwa przykłady pokazują, jak ważne jest poinformowanie Nextflow, czy wejście powinno być obsługiwane jako plik.
 
 !!! note
 
     Upewnij się, że cofniesz i naprawisz oba celowe błędy przed kontynuowaniem następnej sekcji.
 
-### Podsumowanie
+### Wnioski
 
 - Ciągi ścieżek vs obiekty Path: Ciągi to tylko tekst, obiekty Path to inteligentne odniesienia do plików
 - Metoda `file()` konwertuje ciąg ścieżki na obiekt Path, z którym Nextflow może pracować
 - Możesz uzyskać dostęp do właściwości pliku, takich jak `name`, `simpleName`, `extension` i `parent` [używając atrybutów pliku](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
-- Używanie obiektów Path zamiast ciągów pozwala Nextflow'owi prawidłowo zarządzać plikami w Twoim workflow'ie
-- Wyniki wejścia procesu: Prawidłowa obsługa plików wymaga obiektów Path, a nie ciągów, aby zapewnić, że pliki są prawidłowo przenoszone i dostępne do użycia przez procesy
+- Używanie obiektów Path zamiast ciągów pozwala Nextflow prawidłowo zarządzać plikami w Twoim workflow
+- Prawidłowa obsługa plików wymaga obiektów Path, a nie ciągów, aby zapewnić, że pliki są prawidłowo przenoszone i dostępne do użycia przez procesy
 
 ---
 
 ## 2. Używanie plików zdalnych
 
-Jedną z kluczowych funkcji Nextflow'a jest możliwość płynnego przełączania między plikami lokalnymi (na tej samej maszynie) a plikami zdalnymi dostępnymi przez internet.
+Jedną z kluczowych funkcji Nextflow jest możliwość płynnego przełączania między plikami lokalnymi (na tej samej maszynie) a plikami zdalnymi dostępnymi przez internet.
 
-Jeśli robisz to dobrze, nigdy nie powinieneś potrzebować zmieniać logiki Swojego workflow'a, aby obsługiwać pliki pochodzące z różnych lokalizacji.
-Wszystko, co musisz zrobić, aby użyć pliku zdalnego, to określić odpowiedni prefiks w ścieżce pliku podczas dostarczania go do workflow'a.
+Jeśli robisz to dobrze, nigdy nie powinieneś potrzebować zmieniać logiki workflow, aby obsługiwać pliki pochodzące z różnych lokalizacji.
+Wszystko, co musisz zrobić, aby użyć pliku zdalnego, to określić odpowiedni prefiks w ścieżce pliku podczas dostarczania go do workflow.
 
 Na przykład, `/path/to/data` nie ma prefiksu, co wskazuje, że jest to 'normalna' lokalna ścieżka pliku, podczas gdy `s3://path/to/data` zawiera prefiks `s3://`, wskazując, że znajduje się w magazynie obiektów S3 Amazon.
 
@@ -626,12 +626,12 @@ Obsługiwanych jest wiele różnych protokołów:
 Aby użyć któregokolwiek z nich, po prostu określ odpowiedni prefiks w ciągu, który jest następnie technicznie nazywany identyfikatorem URI (Uniform Resource Identifier) zamiast ścieżką pliku.
 Nextflow zajmie się uwierzytelnianiem i przeniesieniem plików we właściwe miejsce, pobieraniem lub przesyłaniem oraz wszystkimi innymi operacjami na plikach, których można oczekiwać.
 
-Kluczową zaletą tego systemu jest to, że umożliwia nam przełączanie między środowiskami bez zmiany jakiejkolwiek logiki pipeline'u.
+Kluczową zaletą tego systemu jest to, że umożliwia nam przełączanie między środowiskami bez zmiany jakiejkolwiek logiki pipeline.
 Na przykład możesz rozwijać z małym, lokalnym zestawem testowym przed przełączeniem na pełnoskalowy zestaw testowy znajdujący się w zdalnym magazynie, po prostu zmieniając URI.
 
 ### 2.1. Użyj pliku z internetu
 
-Przetestujmy to, zamieniając lokalną ścieżkę, którą dostarczamy do naszego workflow'a, na ścieżkę HTTPS wskazującą na kopię tych samych danych przechowywanych w Github.
+Przetestujmy to, zamieniając lokalną ścieżkę, którą dostarczamy do naszego workflow, na ścieżkę HTTPS wskazującą na kopię tych samych danych przechowywanych w Github.
 
 !!! warning
 
@@ -721,7 +721,7 @@ Zauważ, że dla większych plików krok pobierania zajmie trochę więcej czasu
 Jednak Nextflow sprawdza, czy już ma przygotowaną kopię, aby uniknąć niepotrzebnych pobrań.
 Więc jeśli uruchomisz ponownie na tym samym pliku i nie usunąłeś przygotowanego pliku, Nextflow użyje przygotowanej kopii.
 
-To pokazuje, jak łatwo jest przełączać między danymi lokalnymi i zdalnymi za pomocą Nextflow, co jest kluczową funkcją Nextflow'a.
+To pokazuje, jak łatwo jest przełączać między danymi lokalnymi i zdalnymi za pomocą Nextflow, co jest kluczową funkcją Nextflow.
 
 !!! note
 
@@ -745,7 +745,7 @@ To pokazuje, jak łatwo jest przełączać między danymi lokalnymi i zdalnymi z
 
 ### 2.2. Wróć do pliku lokalnego
 
-Wrócimy do używania naszych lokalnych przykładowych plików przez resztę tego side questa, więc przełączmy wejście workflow'a z powrotem na oryginalny plik:
+Wrócimy do używania naszych lokalnych przykładowych plików przez resztę tego side questa, więc przełączmy wejście workflow z powrotem na oryginalny plik:
 
 === "Po"
 
@@ -775,7 +775,7 @@ Wrócimy do używania naszych lokalnych przykładowych plików przez resztę teg
         println "Parent directory: ${myFile.parent}"
     ```
 
-### Podsumowanie
+### Wnioski
 
 - Dostęp do danych zdalnych odbywa się przy użyciu URI (HTTP, FTP, S3, Azure, Google Cloud)
 - Nextflow automatycznie pobierze i przeniesie dane we właściwe miejsce, o ile te ścieżki są przekazywane do procesów
@@ -819,7 +819,7 @@ Zaktualizujmy nasz workflow, aby używał `channel.fromPath`.
         ch_files.view { myFile -> "Found file: $myFile" }
 
         // Print file attributes
-        /* Zakomentuj je na razie, wrócimy do nich później!
+        /* Comment these out for now, we'll come back to them!
         println "File object class: ${myFile.class}"
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
@@ -1012,7 +1012,7 @@ Jak widać, mamy teraz dwa obiekty Path w naszym kanale, co pokazuje, że Nextfl
 
 Używając tej metody, możemy pobrać tyle lub tak niewiele plików, ile chcemy, po prostu zmieniając wzorzec glob. Gdybyśmy uczynili go bardziej ogólnym, na przykład zastępując wszystkie zmienne części nazw plików przez `*` (_np._ `data/patient*_rep*_*_R*_001.fastq.gz`) moglibyśmy pobrać wszystkie przykładowe pliki w katalogu `data`.
 
-### Podsumowanie
+### Wnioski
 
 - `channel.fromPath()` tworzy kanał z plikami pasującymi do wzorca
 - Każdy plik jest emitowany jako oddzielny element w kanale
@@ -1027,7 +1027,7 @@ Używając tej metody, możemy pobrać tyle lub tak niewiele plików, ile chcemy
 W większości dziedzin naukowych bardzo powszechne jest kodowanie metadanych w nazwach plików zawierających dane.
 Na przykład w bioinformatyce pliki zawierające dane sekwencjonowania są często nazwane w sposób kodujący informacje o próbce, warunku, replikacie i numerze odczytu.
 
-Jeśli nazwy plików są konstruowane zgodnie ze spójną konwencją, możesz wyodrębnić te metadane w znormalizowany sposób i użyć ich w trakcie analizy.
+Jeśli nazwy plików są konstruowane zgodnie z spójną konwencją, możesz wyodrębnić te metadane w znormalizowany sposób i użyć ich w trakcie analizy.
 To jest duże „jeśli", oczywiście, i powinieneś być bardzo ostrożny, ilekroć polegasz na strukturze nazw plików; ale rzeczywistość jest taka, że to podejście jest bardzo szeroko stosowane, więc przyjrzyjmy się, jak to się robi w Nextflow.
 
 W przypadku naszych przykładowych danych wiemy, że nazwy plików zawierają konsekwentnie ustrukturyzowane metadane.
@@ -1052,7 +1052,7 @@ Zmodyfikujemy nasz workflow, aby pobrać te informacje w trzech krokach:
 
 `simpleName` jest atrybutem pliku, który odpowiada nazwie pliku pozbawionej ścieżki i rozszerzenia.
 
-Wprowadź następujące edycje w workflow'ie:
+Wprowadź następujące edycje w workflow:
 
 === "Po"
 
@@ -1113,7 +1113,7 @@ W tym momencie metadane, które chcemy, są osadzone w `simplename`, ale nie mo�
 Więc musimy podzielić `simplename` na jego komponenty.
 Na szczęście te komponenty są po prostu oddzielone podkreśleniami w oryginalnej nazwie pliku, więc możemy zastosować powszechną metodę Nextflow zwaną `tokenize()`, która jest idealna do tego zadania.
 
-Wprowadź następujące edycje w workflow'ie:
+Wprowadź następujące edycje w workflow:
 
 === "Po"
 
@@ -1196,10 +1196,10 @@ data = [id: patientA, replicate: 1, type: normal, readNum: 1]
 println data.readNum
 ```
 
-W Nextflow nazywa się to [mapą](https://nextflow.io/docs/latest/script.html#maps).
+W Nextflow nazywa się to [map](https://nextflow.io/docs/latest/script.html#maps).
 
 Przekonwertujmy teraz naszą płaską listę na mapę.
-Wprowadź następujące edycje w workflow'ie:
+Wprowadź następujące edycje w workflow:
 
 === "Po"
 
@@ -1264,9 +1264,9 @@ nextflow run main.nf
 
 Teraz metadane są czytelnie oznaczone (_np._ `[id:patientA, replicate:1, type:normal, readNum:2]`), więc dużo łatwiej jest określić, co jest czym.
 
-Będzie również dużo łatwiej faktycznie wykorzystać elementy metadanych w workflow'ie i sprawi, że nasz kod będzie łatwiejszy do odczytania i bardziej łatwy w utrzymaniu.
+Będzie również dużo łatwiej faktycznie wykorzystać elementy metadanych w workflow i sprawi, że nasz kod będzie łatwiejszy do odczytania i bardziej łatwy w utrzymaniu.
 
-### Podsumowanie
+### Wnioski
 
 - Możemy obsługiwać nazwy plików w Nextflow z mocą pełnego języka programowania
 - Możemy traktować nazwy plików jako ciągi znaków, aby wyodrębnić istotne informacje
@@ -1317,7 +1317,7 @@ Zaktualizujmy workflow `main.nf` odpowiednio:
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-        /* Zakomentuj mapowanie na razie, wrócimy do niego później!
+        /* Comment out the mapping for now, we'll come back to it!
         ch_files.map { myFile ->
             def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
@@ -1450,7 +1450,7 @@ Nasza operacja `map` z wcześniej nie zadziała, ponieważ nie pasuje do struktu
 
 Mamy już dostęp do rzeczywistego identyfikatora pacjenta w ciągu, którego `fromFilePairs()` użył jako identyfikatora, więc możemy go użyć do wyodrębnienia metadanych bez pobierania `simpleName` z obiektu Path, jak robiliśmy wcześniej.
 
-Odkomentuj operację map w workflow'ie i wprowadź następujące edycje:
+Odkomentuj operację map w workflow i wprowadź następujące edycje:
 
 === "Po"
 
@@ -1476,7 +1476,7 @@ Odkomentuj operację map w workflow'ie i wprowadź następujące edycje:
     ```groovy title="main.nf" linenums="7" hl_lines="3-5 11 13"
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-        /* Zakomentuj mapowanie na razie, wrócimy do niego później!
+        /* Comment out the mapping for now, we'll come back to it!
         ch_files.map { myFile ->
             def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
             [
@@ -1521,10 +1521,10 @@ Oczywiście to pobierze i przetworzy tylko tę konkretną parę plików.
 Jeśli chcesz poeksperymentować z przetwarzaniem wielu par, możesz spróbować dodać wieloznaczniki do wzorca wejściowego i zobaczyć, co się stanie.
 Na przykład spróbuj użyć `data/patientA_rep1_*_R{1,2}_001.fastq.gz`
 
-### Podsumowanie
+### Wnioski
 
 - [`channel.fromFilePairs()` automatycznie znajduje i paruje powiązane pliki](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
-- Upraszcza to obsługę odczytów paired-end w Twoim pipeline'ie
+- Upraszcza to obsługę odczytów paired-end w pipeline
 - Sparowane pliki mogą być grupowane jako krotki `[id, [file1, file2]]`
 - Wyodrębnianie metadanych można wykonać z ID sparowanego pliku, a nie z poszczególnych plików
 
@@ -1541,9 +1541,9 @@ Zaczynajmy.
 
 ### 6.1. Zaimportuj proces i zbadaj kod
 
-Aby użyć tego procesu w workflow'ie, po prostu musimy dodać instrukcję include modułu przed blokiem workflow.
+Aby użyć tego procesu w workflow, po prostu musimy dodać instrukcję include modułu przed blokiem workflow.
 
-Wprowadź następującą edycję w workflow'ie:
+Wprowadź następującą edycję w workflow:
 
 === "Po"
 
@@ -1603,9 +1603,9 @@ process ANALYZE_READS {
     Nazywamy naszą mapę metadanych `meta` zgodnie z konwencją.
     Aby zagłębić się w mapy meta, zobacz side quest [Metadata and meta maps](./metadata.md).
 
-### 6.2. Wywołaj proces w workflow'ie
+### 6.2. Wywołaj proces w workflow
 
-Teraz, gdy proces jest dostępny dla workflow'a, możemy dodać wywołanie procesu `ANALYZE_READS`, aby go uruchomić.
+Teraz, gdy proces jest dostępny dla workflow, możemy dodać wywołanie procesu `ANALYZE_READS`, aby go uruchomić.
 
 Aby uruchomić go na naszych przykładowych danych, będziemy musieli zrobić dwie rzeczy:
 
@@ -1619,7 +1619,7 @@ Aby przekazać przemapowaną zawartość do procesu `ANALYZE_READS` (i zrobić t
 
 Możemy to zrobić używając operatora [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set).
 
-W głównym workflow'ie zamień operator `.view()` na `.set { ch_samples }` i dodaj linię testującą, czy możemy odwołać się do kanału po nazwie.
+W głównym workflow zamień operator `.view()` na `.set { ch_samples }` i dodaj linię testującą, czy możemy odwołać się do kanału po nazwie.
 
 === "Po"
 
@@ -1685,7 +1685,7 @@ To potwierdza, że możemy teraz odwołać się do kanału po nazwie.
 
 Teraz faktycznie wywołajmy proces `ANALYZE_READS` na kanale `ch_samples`.
 
-W głównym workflow'ie wprowadź następujące zmiany w kodzie:
+W głównym workflow wprowadź następujące zmiany w kodzie:
 
 === "Po"
 
@@ -1743,14 +1743,14 @@ Wspaniale!
 
 ### 6.3. Uwzględnij o wiele więcej pacjentów
 
-Oczywiście, to tylko przetwarzanie pojedynczej pary plików dla jednego pacjenta, co nie jest dokładnie tym rodzajem wysokiej przepustowości, jakiej oczekujesz od Nextflow'a.
+Oczywiście, to tylko przetwarzanie pojedynczej pary plików dla jednego pacjenta, co nie jest dokładnie tym rodzajem wysokiej przepustowości, jakiej oczekujesz od Nextflow.
 Prawdopodobnie będziesz chciał przetwarzać dużo więcej danych na raz.
 
 Pamiętaj, że `channel.fromPath()` akceptuje _glob_ jako wejście, co oznacza, że może przyjąć dowolną liczbę plików pasujących do wzorca.
 Dlatego jeśli chcemy uwzględnić wszystkich pacjentów, możemy po prostu zmodyfikować ciąg wejściowy, aby uwzględnić więcej pacjentów, jak zauważono wcześniej.
 
 Udajmy, że chcemy być jak najbardziej chciwi.
-Wprowadź następujące edycje w workflow'ie:
+Wprowadź następujące edycje w workflow:
 
 === "Po"
 
@@ -1807,7 +1807,7 @@ Nadpisujemy plik wyjściowy za każdym razem.
 
 Ponieważ mamy dostęp do metadanych pacjenta, możemy je wykorzystać, aby uczynić opublikowane pliki unikalnymi, uwzględniając różnicujące metadane, albo w strukturze katalogów, albo w samych nazwach plików.
 
-Wprowadź następującą zmianę w workflow'ie:
+Wprowadź następującą zmianę w workflow:
 
 === "Po"
 
@@ -1881,17 +1881,17 @@ Jest o wiele więcej rzeczy, które możesz zrobić, gdy masz swoje metadane za�
 2. Podejmować decyzje w procesach w oparciu o właściwości pacjenta
 3. Dzielić, łączyć i rekombinować dane w oparciu o wartości metadanych
 
-Ten wzorzec utrzymywania metadanych w sposób wyraźny i powiązany z danymi (zamiast kodowania ich w nazwach plików) jest podstawową najlepszą praktyką w Nextflow, która umożliwia budowanie solidnych, łatwych w utrzymaniu workflow'ów analizy.
+Ten wzorzec utrzymywania metadanych w sposób wyraźny i powiązany z danymi (zamiast kodowania ich w nazwach plików) jest podstawową najlepszą praktyką w Nextflow, która umożliwia budowanie solidnych, łatwych w utrzymaniu workflow analizy.
 Możesz dowiedzieć się więcej na ten temat w side queście [Metadata and meta maps](./metadata.md).
 
-### Podsumowanie
+### Wnioski
 
 - Dyrektywa `publishDir` może organizować wyjścia w oparciu o wartości metadanych
 - Metadane w krotkach umożliwiają ustrukturyzowaną organizację wyników
-- To podejście tworzy łatwe w utrzymaniu workflow'y z jasną proweniencją danych
+- To podejście tworzy łatwe w utrzymaniu workflow z jasną proweniencją danych
 - Procesy mogą przyjmować krotki metadanych i plików jako wejście
 - Dyrektywa `tag` zapewnia identyfikację procesu w logach wykonania
-- Struktura workflow'a oddziela tworzenie kanałów od wykonywania procesów
+- Struktura workflow oddziela tworzenie kanałów od wykonywania procesów
 
 ---
 
@@ -1899,7 +1899,7 @@ Możesz dowiedzieć się więcej na ten temat w side queście [Metadata and meta
 
 W tym side queście nauczyłeś się, jak pracować z plikami w Nextflow, od podstawowych operacji do bardziej zaawansowanych technik obsługi kolekcji plików.
 
-Zastosowanie tych technik we własnej pracy umożliwi Ci budowanie bardziej efektywnych i łatwych w utrzymaniu workflow'ów, szczególnie podczas pracy z dużą liczbą plików o złożonych konwencjach nazewnictwa.
+Zastosowanie tych technik we własnej pracy umożliwi Ci budowanie bardziej efektywnych i łatwych w utrzymaniu workflow, szczególnie podczas pracy z dużą liczbą plików o złożonych konwencjach nazewnictwa.
 
 ### Kluczowe wzorce
 
@@ -1920,7 +1920,7 @@ Zastosowanie tych technik we własnej pracy umożliwi Ci budowanie bardziej efek
     println myFile.parent     // path/to
     ```
 
-2.  **Używanie plików zdalnych**: Nauczyliśmy się, jak w sposób przejrzysty przełączać między plikami lokalnymi i zdalnymi za pomocą URI, pokazując możliwość Nextflow'a obsługi plików z różnych źródeł bez zmiany logiki workflow'a.
+2.  **Używanie plików zdalnych**: Nauczyliśmy się, jak w sposób przejrzysty przełączać między plikami lokalnymi i zdalnymi za pomocą URI, pokazując możliwość Nextflow obsługi plików z różnych źródeł bez zmiany logiki workflow.
 
     - Plik lokalny
 
