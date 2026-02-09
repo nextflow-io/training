@@ -36,11 +36,11 @@ Zaczniesz od ręcznego uruchamiania narzędzi do wykrywania wariantów w termina
 
 Podzieliliśmy kurs na trzy części, z których każda koncentruje się na konkretnych aspektach stosowania Nextflow do przypadku użycia w genomice.
 
-| Rozdział kursu                                                                 | Podsumowanie                                                                                                    | Szacowany czas trwania |
-| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| [Część 1: Przegląd metody](./01_method.md)                                     | Zrozumienie metodologii wykrywania wariantów i ręczne uruchamianie narzędzi                                     | 30 min                 |
+| Rozdział kursu                                                                              | Podsumowanie                                                                                                    | Szacowany czas trwania |
+| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| [Część 1: Przegląd metody](./01_method.md)                                                  | Zrozumienie metodologii wykrywania wariantów i ręczne uruchamianie narzędzi                                     | 30 min                 |
 | [Część 2: Wykrywanie wariantów dla pojedynczych próbek](./02_per_sample_variant_calling.md) | Budowa pipeline'u indeksującego pliki BAM i wykrywającego warianty, a następnie jego skalowanie na wiele próbek | 60 min                 |
-| [Część 3: Wspólne genotypowanie kohort](./03_joint_calling.md)                 | Dodanie wielopróbkowego wspólnego genotypowania przy użyciu operatorów kanałów do agregacji wyników            | 45 min                 |
+| [Część 3: Wspólne genotypowanie kohort](./03_joint_calling.md)                              | Dodanie wielopróbkowego wspólnego genotypowania przy użyciu operatorów kanałów do agregacji wyników             | 45 min                 |
 
 Pod koniec tego kursu będziesz w stanie zastosować podstawowe koncepcje i narzędzia Nextflow do typowego przypadku użycia w genomice.
 

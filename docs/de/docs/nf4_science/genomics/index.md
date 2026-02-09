@@ -36,11 +36,11 @@ Du beginnst damit, die Variant-Calling-Tools manuell im Terminal auszuführen, u
 
 Wir haben dies in drei Teile unterteilt, die sich jeweils auf spezifische Aspekte der Anwendung von Nextflow auf einen Genomik-Anwendungsfall konzentrieren.
 
-| Kurskapitel                                                               | Zusammenfassung                                                                                               | Geschätzte Dauer |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------- |
-| [Teil 1: Methodenübersicht](./01_method.md)                               | Verständnis der Variant-Calling-Methodik und manuelle Ausführung der Tools                                    | 30 Min.          |
-| [Teil 2: Variant Calling pro Probe](./02_per_sample_variant_calling.md)   | Aufbau einer Pipeline, die BAM-Dateien indexiert und Varianten aufruft, dann Skalierung auf mehrere Proben   | 60 Min.          |
-| [Teil 3: Joint Calling auf einer Kohorte](./03_joint_calling.md)          | Hinzufügen von Multi-Sample Joint Genotyping mit Channel-Operatoren zur Aggregation von Ausgaben pro Probe    | 45 Min.          |
+| Kurskapitel                                                             | Zusammenfassung                                                                                            | Geschätzte Dauer |
+| ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------- |
+| [Teil 1: Methodenübersicht](./01_method.md)                             | Verständnis der Variant-Calling-Methodik und manuelle Ausführung der Tools                                 | 30 Min.          |
+| [Teil 2: Variant Calling pro Probe](./02_per_sample_variant_calling.md) | Aufbau einer Pipeline, die BAM-Dateien indexiert und Varianten aufruft, dann Skalierung auf mehrere Proben | 60 Min.          |
+| [Teil 3: Joint Calling auf einer Kohorte](./03_joint_calling.md)        | Hinzufügen von Multi-Sample Joint Genotyping mit Channel-Operatoren zur Aggregation von Ausgaben pro Probe | 45 Min.          |
 
 Am Ende dieses Kurses kannst du grundlegende Nextflow-Konzepte und -Werkzeuge auf einen typischen Genomik-Anwendungsfall anwenden.
 

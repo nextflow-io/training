@@ -17,11 +17,11 @@ Metodolojini anlamak için önce terminalde varyant çağırma araçlarını man
 
 Bunu, her biri Nextflow'u bir genomik kullanım senaryosuna uygulamanın belirli yönlerine odaklanan üç bölüme ayırdık.
 
-| Kurs bölümü                                                    | Özet                                                                                                            | Tahmini süre |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------ |
-| [Bölüm 1: Metod genel bakış](./01_method.md)                   | Varyant çağırma metodolojisini anlama ve araçları manuel olarak çalıştırma                                      | 30 dakika    |
+| Kurs bölümü                                                                 | Özet                                                                                                              | Tahmini süre |
+| --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------ |
+| [Bölüm 1: Metod genel bakış](./01_method.md)                                | Varyant çağırma metodolojisini anlama ve araçları manuel olarak çalıştırma                                        | 30 dakika    |
 | [Bölüm 2: Örnek başına varyant çağırma](./02_per_sample_variant_calling.md) | BAM dosyalarını indeksleyen ve varyant çağıran bir pipeline oluşturma, ardından birden fazla örneğe ölçeklendirme | 60 dakika    |
-| [Bölüm 3: Kohort üzerinde joint calling](./03_joint_calling.md)               | Örnek başına çıktıları toplamak için kanal operatörlerini kullanarak çok örnekli joint genotyping ekleme         | 45 dakika    |
+| [Bölüm 3: Kohort üzerinde joint calling](./03_joint_calling.md)             | Örnek başına çıktıları toplamak için kanal operatörlerini kullanarak çok örnekli joint genotyping ekleme          | 45 dakika    |
 
 Bu kursun sonunda, temel Nextflow kavramlarını ve araçlarını tipik bir genomik kullanım senaryosuna uygulayabileceksiniz.
 

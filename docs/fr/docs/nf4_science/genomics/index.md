@@ -36,11 +36,11 @@ Vous commencerez par exécuter les outils d'appel de variants manuellement dans 
 
 Nous avons divisé cette formation en trois parties qui se concentrent chacune sur des aspects spécifiques de l'application de Nextflow à un cas d'usage en génomique.
 
-| Chapitre de la formation                                                           | Résumé                                                                                                              | Durée estimée |
-| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------- |
-| [Partie 1 : Aperçu de la méthode](./01_method.md)                                  | Comprendre la méthodologie d'appel de variants et exécuter les outils manuellement                                 | 30 min        |
-| [Partie 2 : Appel de variants par échantillon](./02_per_sample_variant_calling.md) | Construire un pipeline qui indexe les fichiers BAM et appelle les variants, puis mettre à l'échelle sur plusieurs échantillons | 60 min        |
-| [Partie 3 : Appel conjoint sur une cohorte](./03_joint_calling.md)                | Ajouter le génotypage conjoint multi-échantillons en utilisant les opérateurs de canaux pour agréger les sorties par échantillon | 45 min        |
+| Chapitre de la formation                                                           | Résumé                                                                                                                           | Durée estimée |
+| ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| [Partie 1 : Aperçu de la méthode](./01_method.md)                                  | Comprendre la méthodologie d'appel de variants et exécuter les outils manuellement                                               | 30 min        |
+| [Partie 2 : Appel de variants par échantillon](./02_per_sample_variant_calling.md) | Construire un pipeline qui indexe les fichiers BAM et appelle les variants, puis mettre à l'échelle sur plusieurs échantillons   | 60 min        |
+| [Partie 3 : Appel conjoint sur une cohorte](./03_joint_calling.md)                 | Ajouter le génotypage conjoint multi-échantillons en utilisant les opérateurs de canaux pour agréger les sorties par échantillon | 45 min        |
 
 À la fin de cette formation, vous serez capable d'appliquer les concepts et outils fondamentaux de Nextflow à un cas d'usage typique en génomique.
 

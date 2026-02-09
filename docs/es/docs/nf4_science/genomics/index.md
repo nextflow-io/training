@@ -17,11 +17,11 @@ Comenzará ejecutando las herramientas de llamado de variantes manualmente en la
 
 Hemos dividido esto en tres partes que se enfocan en aspectos específicos de aplicar Nextflow a un caso de uso de genómica.
 
-| Capítulo del curso                                                         | Resumen                                                                                                        | Duración estimada |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------- |
-| [Parte 1: Descripción del método](./01_method.md)                         | Comprender la metodología de llamado de variantes y ejecutar las herramientas manualmente                     | 30 min            |
-| [Parte 2: Llamado de variantes por muestra](./02_per_sample_variant_calling.md) | Construir un pipeline que indexa archivos BAM y llama variantes, luego escalar a múltiples muestras          | 60 min            |
-| [Parte 3: Llamado conjunto en una cohorte](./03_joint_calling.md)         | Agregar genotipado conjunto de múltiples muestras usando operadores de canal para agregar salidas por muestra | 45 min            |
+| Capítulo del curso                                                              | Resumen                                                                                                       | Duración estimada |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------- |
+| [Parte 1: Descripción del método](./01_method.md)                               | Comprender la metodología de llamado de variantes y ejecutar las herramientas manualmente                     | 30 min            |
+| [Parte 2: Llamado de variantes por muestra](./02_per_sample_variant_calling.md) | Construir un pipeline que indexa archivos BAM y llama variantes, luego escalar a múltiples muestras           | 60 min            |
+| [Parte 3: Llamado conjunto en una cohorte](./03_joint_calling.md)               | Agregar genotipado conjunto de múltiples muestras usando operadores de canal para agregar salidas por muestra | 45 min            |
 
 Al finalizar este curso, podrá aplicar conceptos y herramientas fundamentales de Nextflow a un caso de uso típico de genómica.
 

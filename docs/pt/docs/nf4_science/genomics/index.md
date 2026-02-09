@@ -36,11 +36,11 @@ Você começará executando as ferramentas de chamada de variantes manualmente n
 
 Dividimos isso em três partes que focam em aspectos específicos da aplicação do Nextflow a um caso de uso de genômica.
 
-| Capítulo do curso                                                        | Resumo                                                                                                         | Duração estimada |
-| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- | ---------------- |
-| [Parte 1: Visão geral do método](./01_method.md)                        | Compreendendo a metodologia de chamada de variantes e executando as ferramentas manualmente                    | 30 min           |
+| Capítulo do curso                                                               | Resumo                                                                                                      | Duração estimada |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------- |
+| [Parte 1: Visão geral do método](./01_method.md)                                | Compreendendo a metodologia de chamada de variantes e executando as ferramentas manualmente                 | 30 min           |
 | [Parte 2: Chamada de variantes por amostra](./02_per_sample_variant_calling.md) | Construindo um pipeline que indexa arquivos BAM e chama variantes, depois escalando para múltiplas amostras | 60 min           |
-| [Parte 3: Chamada conjunta em uma coorte](./03_joint_calling.md)        | Adicionando genotipagem conjunta multi-amostra usando operadores de canal para agregar saídas por amostra      | 45 min           |
+| [Parte 3: Chamada conjunta em uma coorte](./03_joint_calling.md)                | Adicionando genotipagem conjunta multi-amostra usando operadores de canal para agregar saídas por amostra   | 45 min           |
 
 Ao final deste curso, você será capaz de aplicar conceitos e ferramentas fundamentais do Nextflow a um caso de uso típico de genômica.
 

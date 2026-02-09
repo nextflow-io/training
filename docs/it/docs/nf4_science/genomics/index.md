@@ -36,10 +36,10 @@ Inizierete eseguendo manualmente gli strumenti di variant calling nel terminale 
 
 Abbiamo suddiviso questo corso in tre parti che si concentrano ciascuna su aspetti specifici dell'applicazione di Nextflow a un caso d'uso della genomica.
 
-| Capitolo del corso                                                          | Sommario                                                                                                      | Durata stimata |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Parte 1: Panoramica del metodo](./01_method.md)                            | Comprensione della metodologia di variant calling ed esecuzione manuale degli strumenti                      | 30 minuti      |
-| [Parte 2: Variant calling per campione](./02_per_sample_variant_calling.md) | Costruzione di una pipeline che indicizza file BAM e chiama varianti, poi scala a più campioni               | 60 minuti      |
+| Capitolo del corso                                                          | Sommario                                                                                                       | Durata stimata |
+| --------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------- |
+| [Parte 1: Panoramica del metodo](./01_method.md)                            | Comprensione della metodologia di variant calling ed esecuzione manuale degli strumenti                        | 30 minuti      |
+| [Parte 2: Variant calling per campione](./02_per_sample_variant_calling.md) | Costruzione di una pipeline che indicizza file BAM e chiama varianti, poi scala a più campioni                 | 60 minuti      |
 | [Parte 3: Joint calling su una coorte](./03_joint_calling.md)               | Aggiunta del joint genotyping multi-campione utilizzando operatori di canale per aggregare output per campione | 45 minuti      |
 
 Al termine di questo corso, sarete in grado di applicare concetti e strumenti fondamentali di Nextflow a un caso d'uso tipico della genomica.
