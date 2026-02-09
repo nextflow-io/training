@@ -149,9 +149,9 @@ params {
 
 We need to give the `MULTIQC` process all the QC-related outputs from previous steps.
 
-For that, we're going to use the `.mix()` operator, which aggregates multiple channels into a single one.
-
-If we had four processes called A, B, C and D with a simple `.out` channel each, the syntax would look like this: `A.out.mix( B.out, C.out, D.out )`. As you can see, you apply it to the first of the channels you want to combine (doesn't matter which) and just add all the others, separated by commas, in the parenthesis that follows.
+For that, we use the `.mix()` operator, which aggregates multiple channels into a single one.
+We start from `Channel.empty()` and mix in all the output channels we want to combine.
+This is cleaner than chaining `.mix()` onto one of the output channels directly, because it treats all inputs symmetrically.
 
 In the case of our workflow, we have the following outputs to aggregate:
 
@@ -161,34 +161,22 @@ In the case of our workflow, we have the following outputs to aggregate:
 - `TRIM_GALORE.out.fastqc_reports`
 - `HISAT2_ALIGN.out.log`
 
-So the syntax example becomes:
+We mix them into a single channel, then use `.collect()` to aggregate the reports across all samples into a single list.
+Finally, we pass that list and the `report_id` parameter to the `MULTIQC` process.
 
-```groovy title="Applying .mix() in the MULTIQC call"
-        FASTQC.out.zip.mix(
-        FASTQC.out.html,
-        TRIM_GALORE.out.trimming_reports,
-        TRIM_GALORE.out.fastqc_reports,
-        HISAT2_ALIGN.out.log
-        )
-```
-
-That will collect QC reports per sample.
-But since we want to aggregate them across all samples, we need to add the `collect()` operator in order to pull the reports for all the samples into a single call to `MULTIQC`.
-And we also need to give it the `report_id` parameter.
-
-This gives us the following:
+Using intermediate variables makes each step clear:
 
 ```groovy title="The completed MULTIQC call" linenums="33"
     // Comprehensive QC report generation
-    MULTIQC(
-        FASTQC.out.zip.mix(
+    multiqc_files_ch = Channel.empty().mix(
+        FASTQC.out.zip,
         FASTQC.out.html,
         TRIM_GALORE.out.trimming_reports,
         TRIM_GALORE.out.fastqc_reports,
-        HISAT2_ALIGN.out.log
-        ).collect(),
-        params.report_id
+        HISAT2_ALIGN.out.log,
     )
+    multiqc_files_list = multiqc_files_ch.collect()
+    MULTIQC(multiqc_files_list, params.report_id)
 ```
 
 In the context of the full workflow block, it ends up looking like this:
@@ -207,18 +195,18 @@ workflow {
     TRIM_GALORE(read_ch)
 
     // Alignment to a reference genome
-    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
+    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
 
     // Comprehensive QC report generation
-    MULTIQC(
-        FASTQC.out.zip.mix(
+    multiqc_files_ch = Channel.empty().mix(
+        FASTQC.out.zip,
         FASTQC.out.html,
         TRIM_GALORE.out.trimming_reports,
         TRIM_GALORE.out.fastqc_reports,
-        HISAT2_ALIGN.out.log
-        ).collect(),
-        params.report_id
+        HISAT2_ALIGN.out.log,
     )
+    multiqc_files_list = multiqc_files_ch.collect()
+    MULTIQC(multiqc_files_list, params.report_id)
 }
 ```
 
@@ -419,16 +407,16 @@ Replace `TRIM_GALORE.out.fastqc_reports,` with `TRIM_GALORE.out.fastqc_reports_1
 
 ```groovy title="rnaseq_pe.nf" linenums="33"
     // Comprehensive QC report generation
-    MULTIQC(
-        FASTQC.out.zip.mix(
+    multiqc_files_ch = Channel.empty().mix(
+        FASTQC.out.zip,
         FASTQC.out.html,
         TRIM_GALORE.out.trimming_reports,
         TRIM_GALORE.out.fastqc_reports_1,
         TRIM_GALORE.out.fastqc_reports_2,
-        HISAT2_ALIGN.out.log
-        ).collect(),
-        params.report_id
+        HISAT2_ALIGN.out.log,
     )
+    multiqc_files_list = multiqc_files_ch.collect()
+    MULTIQC(multiqc_files_list, params.report_id)
 ```
 
 While we're on MultiQC, let's also update the `report_id` parameter default from `"all_single-end"` to `"all_paired-end"`.

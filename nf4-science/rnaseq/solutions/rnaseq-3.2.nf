@@ -36,13 +36,13 @@ workflow {
     HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
 
     // Comprehensive QC report generation
-    MULTIQC(
-        FASTQC.out.zip.mix(
-            FASTQC.out.html,
-            TRIM_GALORE.out.trimming_reports,
-            TRIM_GALORE.out.fastqc_reports,
-            HISAT2_ALIGN.out.log,
-        ).collect(),
-        params.report_id,
+    multiqc_files_ch = Channel.empty().mix(
+        FASTQC.out.zip,
+        FASTQC.out.html,
+        TRIM_GALORE.out.trimming_reports,
+        TRIM_GALORE.out.fastqc_reports,
+        HISAT2_ALIGN.out.log,
     )
+    multiqc_files_list = multiqc_files_ch.collect()
+    MULTIQC(multiqc_files_list, params.report_id)
 }
