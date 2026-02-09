@@ -4666,8 +4666,6 @@ Bilimsel analiz pipeline'larında yaygın bir gereksinim olan dosya adlarından 
 <li><a href="../../hello_nextflow/">Hello Nextflow</a> eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.</li>
 <li>Temel Nextflow kavramları ve mekanizmalarını (process'ler, channel'lar, operatörler) rahatça kullanabiliyor olmalısınız</li>
 </ul>
-<!-- Meta map'ler yan görevini önce yapmayı öneren kısmı kaldırdım çünkü bu daha sonra doğal olarak çalışıyor -->
-
 <hr />
 <h2 id="0-baslangc">0. Başlangıç<a class="headerlink" href="#0-baslangc" title="Permanent link">&para;</a></h2>
 <h4 id="egitim-codespaceini-acn">Eğitim codespace'ini açın<a class="headerlink" href="#egitim-codespaceini-acn" title="Permanent link">&para;</a></h4>
@@ -5396,7 +5394,7 @@ Ancak, blob depolama (<code>s3://</code>, <code>az://</code>, <code>gs://</code>
 <span class="normal"><a href="#__codelineno-39-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-39-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-39-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-39-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="w">    </span><span class="c1">// Bir dize yolundan Path nesnesi oluştur</span>
+<span class="normal"><a href="#__codelineno-39-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="w">    </span><span class="c1">// İnternetten uzak bir dosya kullanma</span>
 <a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-39-4" name="__codelineno-39-4"></a>
 <a id="__codelineno-39-5" name="__codelineno-39-5"></a><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
@@ -5424,7 +5422,7 @@ Ancak, blob depolama (<code>s3://</code>, <code>az://</code>, <code>gs://</code>
 <p>Şimdiye kadar tek seferde tek bir dosyayla çalışıyorduk, ancak Nextflow'da genellikle işlenecek birden fazla girdi dosyasıyla bir girdi channel'ı oluşturmak isteyeceğiz.</p>
 <p>Bunu yapmanın naif bir yolu, <code>file()</code> metodunu <a href="https://www.nextflow.io/docs/latest/reference/channel.html#of"><code>channel.of()</code></a> ile şu şekilde birleştirmek olurdu:</p>
 <div class="highlight"><span class="filename">Sözdizimi örneği</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)],</span>
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">                      </span><span class="o">[</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)])</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">                      </span><span class="o">[</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R2_001.fastq.gz&#39;</span><span class="o">)])</span>
 </code></pre></div>
 <p>Bu çalışır, ancak hantal.</p>
 <div class="admonition tip">
@@ -6507,7 +6505,7 @@ Her seferinde çıktı dosyasını üzerine yazıyoruz.</p>
 <a id="__codelineno-107-10" name="__codelineno-107-10" href="#__codelineno-107-10"></a><span class="go">│   │       └── patientB_stats.txt</span>
 <a id="__codelineno-107-11" name="__codelineno-107-11" href="#__codelineno-107-11"></a><span class="go">│   └── patientC</span>
 <a id="__codelineno-107-12" name="__codelineno-107-12" href="#__codelineno-107-12"></a><span class="go">│       └── 1</span>
-<a id="__codelineno-107-13" name="__codelineno-107-13" href="#__codelineno-107-13"></a><span class="go">│           └── patientA_stats.txt</span>
+<a id="__codelineno-107-13" name="__codelineno-107-13" href="#__codelineno-107-13"></a><span class="go">│           └── patientC_stats.txt</span>
 <a id="__codelineno-107-14" name="__codelineno-107-14" href="#__codelineno-107-14"></a><span class="go">└── tumor</span>
 <a id="__codelineno-107-15" name="__codelineno-107-15" href="#__codelineno-107-15"></a><span class="go">    ├── patientA</span>
 <a id="__codelineno-107-16" name="__codelineno-107-16" href="#__codelineno-107-16"></a><span class="go">    │   ├── 1</span>
@@ -6519,7 +6517,7 @@ Her seferinde çıktı dosyasını üzerine yazıyoruz.</p>
 <a id="__codelineno-107-22" name="__codelineno-107-22" href="#__codelineno-107-22"></a><span class="go">    │       └── patientB_stats.txt</span>
 <a id="__codelineno-107-23" name="__codelineno-107-23" href="#__codelineno-107-23"></a><span class="go">    └── patientC</span>
 <a id="__codelineno-107-24" name="__codelineno-107-24" href="#__codelineno-107-24"></a><span class="go">        └── 1</span>
-<a id="__codelineno-107-25" name="__codelineno-107-25" href="#__codelineno-107-25"></a><span class="go">            └── patientA_stats.txt</span>
+<a id="__codelineno-107-25" name="__codelineno-107-25" href="#__codelineno-107-25"></a><span class="go">            └── patientC_stats.txt</span>
 </code></pre></div>
 </details>
 <p>İşte burada, tüm meta verilerimiz düzgünce organize edilmiş. Bu başarı!</p>

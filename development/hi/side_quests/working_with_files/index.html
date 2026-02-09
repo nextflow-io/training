@@ -4780,7 +4780,7 @@ Nextflow फ़ाइलों को कुशलता से संभाल�
 <p>हम path strings से <a href="https://www.nextflow.io/docs/latest/reference/stdlib-types.html#path">Path ऑब्जेक्ट्स</a> बनाकर Nextflow को बता सकते हैं कि फ़ाइलों को कैसे संभालना है।</p>
 <p>हमारे workflow में, हम <code>file()</code> मेथड का उपयोग करके string path <code>data/patientA_rep1_normal_R1_001.fastq.gz</code> को Path ऑब्जेक्ट में बदल सकते हैं, जो फ़ाइल प्रॉपर्टीज़ और ऑपरेशंस तक पहुँच प्रदान करती है।</p>
 <p><code>main.nf</code> को एडिट करें और string को <code>file()</code> के साथ wrap करें जैसा कि नीचे दिखाया गया है:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">बाद</label><label for="__tabbed_1_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">बाद में</label><label for="__tabbed_1_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-5">5</a></span>
@@ -4833,7 +4833,7 @@ Nextflow फ़ाइलों को कुशलता से संभाल�
 <h3 id="13">1.3. फ़ाइल विशेषताओं तक पहुँचें<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p>यह क्यों सहायक है? खैर, अब जब Nextflow समझ गया है कि <code>myFile</code> एक Path ऑब्जेक्ट है न कि सिर्फ एक string, हम Path ऑब्जेक्ट की विभिन्न विशेषताओं तक पहुँच सकते हैं।</p>
 <p>चलो अपने workflow को अपडेट करते हैं ताकि built-in फ़ाइल विशेषताएँ प्रिंट हों:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">बाद</label><label for="__tabbed_2_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">बाद में</label><label for="__tabbed_2_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
@@ -4890,7 +4890,7 @@ Nextflow फ़ाइलों को कुशलता से संभाल�
 <h4 id="141-process-import">1.4.1. process को import करें और कोड की जाँच करें<a class="headerlink" href="#141-process-import" title="Permanent link">&para;</a></h4>
 <p>हम तुम्हें <code>COUNT_LINES</code> नामक एक पूर्व-लिखित process मॉड्यूल प्रदान करते हैं जो एक फ़ाइल इनपुट लेता है और गिनता है कि इसमें कितनी लाइनें हैं।</p>
 <p>workflow में process का उपयोग करने के लिए, तुम्हें workflow block से पहले एक include स्टेटमेंट जोड़ना होगा:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">बाद</label><label for="__tabbed_3_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">बाद में</label><label for="__tabbed_3_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
@@ -4955,7 +4955,7 @@ Nextflow फ़ाइलों को कुशलता से संभाल�
 <h4 id="142-count_lines">1.4.2. <code>COUNT_LINES</code> को कॉल जोड़ें<a class="headerlink" href="#142-count_lines" title="Permanent link">&para;</a></h4>
 <p>अब जब process workflow के लिए उपलब्ध है, हम इनपुट फ़ाइल पर इसे चलाने के लिए <code>COUNT_LINES</code> process को कॉल जोड़ सकते हैं।</p>
 <p>workflow में निम्नलिखित एडिट करें:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">बाद</label><label for="__tabbed_4_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">बाद में</label><label for="__tabbed_4_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
@@ -5040,7 +5040,7 @@ Nextflow फ़ाइलों को कुशलता से संभाल�
 <h4 id="151-workflow-error">1.5.1. Workflow-स्तर error<a class="headerlink" href="#151-workflow-error" title="Permanent link">&para;</a></h4>
 <p>देखते हैं क्या होता है अगर हम workflow block में इनपुट निर्दिष्ट करते समय फ़ाइल को string के रूप में मानते हैं।</p>
 <p>workflow में निम्नलिखित एडिट करें, path-विशिष्ट print statements को comment out करना सुनिश्चित करें:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">बाद</label><label for="__tabbed_5_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">बाद में</label><label for="__tabbed_5_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
@@ -5136,7 +5136,7 @@ Nextflow फ़ाइलों को कुशलता से संभाल�
 जब process में <code>val</code> के साथ जोड़ा जाता है, तो यह नीचे दिखाया गया error उत्पन्न करता है।</p>
 </div>
 <p>मॉड्यूल में निम्नलिखित एडिट करें:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">बाद</label><label for="__tabbed_6_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">बाद में</label><label for="__tabbed_6_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/count_lines.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-3">3</a></span>
@@ -5260,7 +5260,7 @@ Nextflow authentication और फ़ाइलों को सही जगह 
 <p>यह तभी काम करेगा जब तुम्हारे पास active इंटरनेट कनेक्शन है।</p>
 </div>
 <p><code>main.nf</code> फिर से खोलो और इनपुट path को निम्नानुसार बदलो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">बाद</label><label for="__tabbed_7_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">बाद में</label><label for="__tabbed_7_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
@@ -5365,7 +5365,7 @@ Nextflow authentication और फ़ाइलों को सही जगह 
 </div>
 <h3 id="22-switch">2.2. लोकल फ़ाइल पर वापस switch करें<a class="headerlink" href="#22-switch" title="Permanent link">&para;</a></h3>
 <p>हम इस side quest के बाकी हिस्से के लिए अपनी लोकल example फ़ाइलों का उपयोग करने जा रहे हैं, तो चलो workflow इनपुट को वापस original फ़ाइल पर switch करते हैं:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">बाद</label><label for="__tabbed_8_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">बाद में</label><label for="__tabbed_8_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
@@ -5438,7 +5438,7 @@ Nextflow authentication और फ़ाइलों को सही जगह 
 <p>यहाँ <a href="https://www.nextflow.io/docs/latest/reference/channel.html#frompath"><code>channel.fromPath()</code></a> आता है: एक सुविधाजनक channel factory जो एक या अधिक static फ़ाइल strings के साथ-साथ glob patterns से channel generate करने के लिए हमें आवश्यक सभी functionality bundle करती है।</p>
 <h3 id="31-channel-factory">3.1. channel factory जोड़ें<a class="headerlink" href="#31-channel-factory" title="Permanent link">&para;</a></h3>
 <p>चलो अपने workflow को अपडेट करते हैं <code>channel.fromPath</code> का उपयोग करने के लिए।</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">बाद</label><label for="__tabbed_9_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">बाद में</label><label for="__tabbed_9_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-7"> 7</a></span>
@@ -5519,7 +5519,7 @@ Nextflow authentication और फ़ाइलों को सही जगह 
 <h3 id="32-channel-attributes">3.2. channel में फ़ाइलों की attributes देखें<a class="headerlink" href="#32-channel-attributes" title="Permanent link">&para;</a></h3>
 <p>Channel factory का उपयोग करने के हमारे पहले प्रयास में, हमने code को सरल बनाया और बस फ़ाइल का नाम print किया।</p>
 <p>चलो पूर्ण फ़ाइल attributes print करने पर वापस जाते हैं:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">बाद</label><label for="__tabbed_10_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">बाद में</label><label for="__tabbed_10_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-7"> 7</a></span>
@@ -5602,7 +5602,7 @@ Nextflow authentication और फ़ाइलों को सही जगह 
 </code></pre></div>
 <p>यह वह glob pattern है जिसकी हमें आवश्यकता है।</p>
 <p>अब हमें बस channel factory में फ़ाइल path को उस glob pattern का उपयोग करने के लिए update करना है जैसा कि निम्नानुसार है:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">बाद</label><label for="__tabbed_11_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">बाद में</label><label for="__tabbed_11_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-7">7</a></span>
@@ -5684,7 +5684,7 @@ Nextflow authentication और फ़ाइलों को सही जगह 
 <h3 id="41-simplename-retrieve">4.1. <code>simpleName</code> retrieve करें<a class="headerlink" href="#41-simplename-retrieve" title="Permanent link">&para;</a></h3>
 <p><code>simpleName</code> एक फ़ाइल attribute है जो path और extension से stripped filename से correspond करता है।</p>
 <p>workflow में निम्नलिखित edits करें:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">बाद</label><label for="__tabbed_12_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">बाद में</label><label for="__tabbed_12_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-7"> 7</a></span>
@@ -5749,7 +5749,7 @@ Nextflow authentication और फ़ाइलों को सही जगह 
 इसलिए हमें <code>simplename</code> को इसके components में split करना होगा।
 सौभाग्य से, वे components original filename में बस underscores द्वारा separated हैं, इसलिए हम <code>tokenize()</code> नामक एक common Nextflow मेथड apply कर सकते हैं जो इस कार्य के लिए perfect है।</p>
 <p>workflow में निम्नलिखित edits करें:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">बाद</label><label for="__tabbed_13_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">बाद में</label><label for="__tabbed_13_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-7"> 7</a></span>
@@ -5822,7 +5822,7 @@ Nextflow authentication और फ़ाइलों को सही जगह 
 <p>Nextflow में, इसे <a href="https://nextflow.io/docs/latest/script.html#maps">map</a> कहा जाता है।</p>
 <p>चलो अब अपनी flat list को map में convert करते हैं।
 workflow में निम्नलिखित edits करें:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">बाद</label><label for="__tabbed_14_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">बाद में</label><label for="__tabbed_14_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-66-7"> 7</a></span>
@@ -5928,7 +5928,7 @@ workflow में निम्नलिखित edits करें:</p>
 </code></pre></div>
 <p>यह उस glob pattern के समान है जो हमने पहले उपयोग किया था, सिवाय इसके कि यह specifically उन substrings को enumerate करता है (या तो <code>1</code> या <code>2</code> R के ठीक बाद आ रहा है) जो pair के दो members को identify करते हैं।</p>
 <p>चलो <code>main.nf</code> workflow को accordingly update करते हैं:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">बाद</label><label for="__tabbed_15_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">बाद में</label><label for="__tabbed_15_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-7"> 7</a></span>
@@ -6039,7 +6039,7 @@ workflow में निम्नलिखित edits करें:</p>
 यदि हम अभी भी <code>COUNT_LINES</code> को process बदले बिना same तरीके से run करना चाहते थे, तो हमें file paths extract करने के लिए mapping ऑपरेशन apply करना होगा।
 लेकिन हम ऐसा नहीं करने जा रहे हैं, क्योंकि हमारा ultimate goal एक different process, <code>ANALYZE_READS</code> का उपयोग करना है, जो file pairs को appropriately handle करता है।</p>
 <p>तो चलो बस <code>COUNT_LINES</code> की call को comment out (या delete) करते हैं और आगे बढ़ते हैं।</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">बाद</label><label for="__tabbed_16_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">बाद में</label><label for="__tabbed_16_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-77-26">26</a></span>
@@ -6074,7 +6074,7 @@ workflow में निम्नलिखित edits करें:</p>
 <p>पहले का हमारा <code>map</code> ऑपरेशन काम नहीं करेगा क्योंकि यह data structure से match नहीं करता, लेकिन हम इसे काम करने के लिए modify कर सकते हैं।</p>
 <p>हमारे पास पहले से ही actual patient identifier का access उस string में है जो <code>fromFilePairs()</code> ने identifier के रूप में उपयोग किया, इसलिए हम इसका उपयोग मेटाडेटा extract करने के लिए कर सकते हैं बिना Path ऑब्जेक्ट से <code>simpleName</code> प्राप्त किए जैसा हमने पहले किया था।</p>
 <p>workflow में map ऑपरेशन को uncomment करो और निम्नलिखित edits करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">बाद</label><label for="__tabbed_17_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">बाद में</label><label for="__tabbed_17_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-81-7"> 7</a></span>
@@ -6179,7 +6179,7 @@ workflow में निम्नलिखित edits करें:</p>
 <h3 id="61-process-import-code-examine">6.1. process को import करें और code examine करें<a class="headerlink" href="#61-process-import-code-examine" title="Permanent link">&para;</a></h3>
 <p>workflow में इस process का उपयोग करने के लिए, हमें बस workflow block से पहले एक module include statement add करना होगा।</p>
 <p>workflow में निम्नलिखित edit करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">बाद</label><label for="__tabbed_18_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">बाद में</label><label for="__tabbed_18_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-85-1">1</a></span>
@@ -6196,7 +6196,7 @@ workflow में निम्नलिखित edits करें:</p>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-86-1">1</a></span>
 <span class="normal"><a href="#__codelineno-86-2">2</a></span>
-<span class="normal"><a href="#__codelineno-86-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
+<span class="normal"><a href="#__codelineno-86-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1"></a><span class="cp">#!/usr्bin/env nextflow</span>
 <a id="__codelineno-86-2" name="__codelineno-86-2"></a>
 <a id="__codelineno-86-3" name="__codelineno-86-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
@@ -6275,7 +6275,7 @@ Meta maps में deeper dive के लिए, <a href="../metadata/">Metadat
 Remapped contents को <code>ANALYZE_READS</code> process को feed करने के लिए (और इसे इस तरह से करने के लिए जो clear और पढ़ने में easy हो) हम <code>ch_samples</code> नाम का एक नया channel बनाना चाहते हैं।</p>
 <p>हम यह <a href="https://www.nextflow.io/docs/latest/reference/operator.html#set"><code>set</code></a> ऑपरेटर का उपयोग करके कर सकते हैं।</p>
 <p>Main workflow में, <code>.view()</code> ऑपरेटर को <code>.set { ch_samples }</code> से replace करो, और एक line add करो testing कि हम channel को name से refer कर सकते हैं।</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">बाद</label><label for="__tabbed_19_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">बाद में</label><label for="__tabbed_19_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-88-7"> 7</a></span>
@@ -6363,7 +6363,7 @@ Remapped contents को <code>ANALYZE_READS</code> process को feed कर�
 <h4 id="622-data-process-call">6.2.2. data पर process call करें<a class="headerlink" href="#622-data-process-call" title="Permanent link">&para;</a></h4>
 <p>अब चलो actually <code>ch_samples</code> channel पर <code>ANALYZE_READS</code> process call करते हैं।</p>
 <p>Main workflow में, निम्नलिखित code changes करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">बाद</label><label for="__tabbed_20_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:2"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">बाद में</label><label for="__tabbed_20_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-92-23">23</a></span>
@@ -6417,7 +6417,7 @@ Remapped contents को <code>ANALYZE_READS</code> process को feed कर�
 इसलिए यदि हम सभी patients को include करना चाहते हैं, हम बस अधिक patients include करने के लिए input string modify कर सकते हैं, जैसा कि पहले passing में note किया गया था।</p>
 <p>मान लो हम जितना possible हो उतना greedy होना चाहते हैं।
 workflow में निम्नलिखित edits करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="21:2"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">बाद</label><label for="__tabbed_21_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="21:2"><input checked="checked" id="__tabbed_21_1" name="__tabbed_21" type="radio" /><input id="__tabbed_21_2" name="__tabbed_21" type="radio" /><div class="tabbed-labels"><label for="__tabbed_21_1">बाद में</label><label for="__tabbed_21_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-98-7">7</a></span>
@@ -6465,7 +6465,7 @@ workflow में निम्नलिखित edits करो:</p>
 <h3 id="64-published-unique">6.4. published फ़ाइलों को unique बनाएं<a class="headerlink" href="#64-published-unique" title="Permanent link">&para;</a></h3>
 <p>चूँकि हमारे पास patient metadata तक access है, हम इसका उपयोग published फ़ाइलों को unique बनाने के लिए कर सकते हैं differentiating metadata को include करके, या तो directory structure में या filenames में ही।</p>
 <p>workflow में निम्नलिखित change करो:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="22:2"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">बाद</label><label for="__tabbed_22_2">पहले</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="22:2"><input checked="checked" id="__tabbed_22_1" name="__tabbed_22" type="radio" /><input id="__tabbed_22_2" name="__tabbed_22" type="radio" /><div class="tabbed-labels"><label for="__tabbed_22_1">बाद में</label><label for="__tabbed_22_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/analyze_reads.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-103-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-103-6" name="__codelineno-103-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;results/${meta.type}/${meta.id}/${meta.replicate}&quot;</span><span class="w"> </span><span class="o">},</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
@@ -6610,8 +6610,9 @@ workflow में निम्नलिखित edits करो:</p>
 <a id="__codelineno-117-3" name="__codelineno-117-3" href="#__codelineno-117-3"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
 <a id="__codelineno-117-4" name="__codelineno-117-4" href="#__codelineno-117-4"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
 <a id="__codelineno-117-5" name="__codelineno-117-5" href="#__codelineno-117-5"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
-<a id="__codelineno-117-6" name="__codelineno-117-6" href="#__codelineno-117-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
-<a id="__codelineno-117-7" name="__codelineno-117-7" href="#__codelineno-117-7"></a><span class="o">}</span>
+<a id="__codelineno-117-6" name="__codelineno-117-6" href="#__codelineno-117-6"></a><span class="w">    </span><span class="err">```</span><span class="n">groovy</span>
+<a id="__codelineno-117-7" name="__codelineno-117-7" href="#__codelineno-117-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
+<a id="__codelineno-117-8" name="__codelineno-117-8" href="#__codelineno-117-8"></a><span class="o">}</span>
 </code></pre></div>
 </li>
 <li>
