@@ -1,3 +1,9 @@
+---
+title: Side Quests
+hide:
+  - toc
+---
+
 # Side Quests
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>

@@ -1,4 +1,3 @@
-```yaml
 ---
 title: 아키텍트 툴킷 I
 hide:
@@ -60,4 +59,3 @@ hide:
 [![Take the survey](https://img.shields.io/badge/Take%20the-Survey-blue?style=flat-square)](https://seqera.typeform.com/to/Q9pc2YKw)
 
 시작할 준비가 되셨나요? 위의 첫 번째 모듈부터 시작하십시오!
-```

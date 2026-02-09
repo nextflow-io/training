@@ -1,4 +1,3 @@
-```yaml
 ---
 title: RNAseq için Nextflow
 hide:
@@ -45,4 +44,3 @@ Kurs, aşağıdakilerle ilgili minimal bir aşinalık varsaymaktadır:
 - [Hello Nextflow](../../hello_nextflow/) başlangıç eğitiminde ele alınan temel Nextflow kavramları ve araçları.
 
 Teknik gereksinimler ve ortam kurulumu için [Ortam Kurulumu](../../envsetup/) mini kursuna bakın.
-```

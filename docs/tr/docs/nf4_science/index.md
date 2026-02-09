@@ -1,4 +1,3 @@
-```markdown
 ---
 title: Bilim için Nextflow
 hide:
@@ -42,4 +41,3 @@ Bu kurslar, [Hello Nextflow](../hello_nextflow/) başlangıç kursunda sunulan k
     [Biyogörüntüleme için Nextflow eğitimine başlayın :material-arrow-right:](imaging/){ .md-button .md-button--primary }
 
 Topluluk forumunun [Eğitim bölümüne](https://community.seqera.io/c/training/) gönderi yaparak burada hangi diğer alanların ve kullanım durumlarının ele alınmasını istediğinizi bize bildirin.
-```

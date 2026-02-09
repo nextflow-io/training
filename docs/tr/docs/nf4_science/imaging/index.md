@@ -1,4 +1,3 @@
-```yaml
 ---
 title: Görüntüleme için Nextflow Çalıştırma
 hide:
@@ -37,4 +36,3 @@ Bu kurs aşağıdakiler konusunda minimal bir aşinalık varsayar:
 - Görüntüleme dosya formatları hakkında temel bilgi (TIFF görüntüleri, tablo verileri)
 
 Teknik gereksinimler ve ortam kurulumu için [Ortam Kurulumu](../../envsetup/) mini kursuna bakın.
-```

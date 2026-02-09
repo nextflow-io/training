@@ -1,4 +1,3 @@
-```markdown
 ---
 title: Nextflow run für Bildgebung
 hide:
@@ -37,4 +36,3 @@ Dieser Kurs setzt ein Mindestmaß an Vertrautheit mit Folgendem voraus:
 - Grundlegende Vertrautheit mit Bildgebungsdateiformaten (TIFF-Bilder, tabellarische Daten)
 
 Für technische Anforderungen und die Einrichtung der Umgebung siehe den Mini-Kurs [Umgebungseinrichtung](../../envsetup/).
-```
