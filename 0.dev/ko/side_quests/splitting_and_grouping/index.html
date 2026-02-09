@@ -2783,6 +2783,89 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 채널 구성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 요약
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#5-grouptuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. groupTuple을 사용하여 샘플 집계
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. groupTuple을 사용하여 샘플 집계">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 요약
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 연습 문제: 더 복잡한 그룹화
+      
+    </span>
+  </a>
+  
+</li>  <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 결론
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 결론">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이어지는 내용
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3024,7 +3107,7 @@
   <span class="md-ellipsis">
     
   
-    워크플로우 디버깅
+    디버깅
   
 
     
@@ -3190,7 +3273,7 @@
   <span class="md-ellipsis">
     
   
-    Architects toolkit 1
+    아키텍트 툴킷 I
   
 
     
@@ -3846,6 +3929,89 @@
     <span class="md-ellipsis">
       
         4.1. combine을 사용하여 간격에 샘플 분산
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. 채널 구성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 요약
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#5-grouptuple" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. groupTuple을 사용하여 샘플 집계
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. groupTuple을 사용하여 샘플 집계">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 요약
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 연습 문제: 더 복잡한 그룹화
+      
+    </span>
+  </a>
+  
+</li>  <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 결론
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 결론">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        이어지는 내용
       
     </span>
   </a>
@@ -4907,7 +5073,383 @@
 <p>생물정보학 워크플로의 핵심 패턴은 게놈 영역에 분석을 분산하는 것입니다. 예를 들어, 변이 호출은 게놈을 간격(염색체 또는 더 작은 영역과 같은)으로 나누어 병렬화할 수 있습니다. 이 병렬화 전략은 계산 부하를 여러 코어 또는 노드에 분산시켜 전체 실행 시간을 줄임으로써 파이프라인 효율성을 크게 향상시킵니다.</p>
 <p>다음 섹션에서는 샘플 데이터를 여러 게놈 간격에 분산하는 방법을 보여줍니다. 각 샘플을 모든 간격과 쌍으로 묶어 다른 게놈 영역의 병렬 처리를 허용합니다. 이렇게 하면 간격 수만큼 데이터 세트 크기가 배가되어 나중에 다시 가져올 수 있는 여러 독립적인 분석 단위가 생성됩니다.</p>
 <h3 id="41-combine">4.1. <code>combine</code>을 사용하여 간격에 샘플 분산<a class="headerlink" href="#41-combine" title="Permanent link">&para;</a></h3>
-<p>간격 채널을 만드는 것부터 시작하겠습니다. 간단하게 유지하기 위해 수동으로 정의할 3개의 간격만 사용합니다. 실제</p><style type="text/css">.quiz {
+<p>간격 채널을 만드는 것부터 시작하겠습니다. 간단하게 유지하기 위해 수동으로 정의할 3개의 간격만 사용합니다. 실제 워크플로에서는 이들을 파일 입력에서 읽거나 많은 간격 파일이 있는 채널을 생성할 수도 있습니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">수정 후</label><label for="__tabbed_13_2">수정 전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-17">17</a></span>
+<span class="normal"><a href="#__codelineno-55-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-17" name="__codelineno-55-17"></a><span class="w">        </span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">ch_tumor_samples</span><span class="o">)</span>
+<a id="__codelineno-55-18" name="__codelineno-55-18"></a><span class="hll"><span class="w">    </span><span class="n">ch_intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;chr1&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;chr2&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;chr3&#39;</span><span class="o">)</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-17">17</a></span>
+<span class="normal"><a href="#__codelineno-56-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="w">        </span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">ch_tumor_samples</span><span class="o">)</span>
+<a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="hll"><span class="w">    </span><span class="n">ch_joined_samples</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>이제 각 간격에 대해 각 샘플을 반복하려고 한다는 것을 기억하십시오. 이것은 때때로 샘플과 간격의 데카르트 곱이라고도 합니다. <a href="https://www.nextflow.io/docs/latest/operator.html#combine"><code>combine</code> 연산자</a>를 사용하여 이를 달성할 수 있습니다. 이는 채널 1의 모든 항목을 가져와서 채널 2의 각 항목에 대해 반복합니다. 워크플로에 combine 연산자를 추가해 보겠습니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">수정 후</label><label for="__tabbed_14_2">수정 전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-18">18</a></span>
+<span class="normal"><a href="#__codelineno-57-19">19</a></span>
+<span class="normal"><a href="#__codelineno-57-20">20</a></span>
+<span class="normal"><a href="#__codelineno-57-21">21</a></span>
+<span class="normal"><a href="#__codelineno-57-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-57-18" name="__codelineno-57-18"></a><span class="w">    </span><span class="n">ch_intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;chr1&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;chr2&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;chr3&#39;</span><span class="o">)</span>
+<a id="__codelineno-57-19" name="__codelineno-57-19"></a>
+<a id="__codelineno-57-20" name="__codelineno-57-20"></a><span class="hll"><span class="w">    </span><span class="n">ch_combined_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_joined_samples</span>
+</span><a id="__codelineno-57-21" name="__codelineno-57-21"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">ch_intervals</span><span class="o">)</span>
+</span><a id="__codelineno-57-22" name="__codelineno-57-22"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-18" name="__codelineno-58-18"></a><span class="w">    </span><span class="n">ch_intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;chr1&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;chr2&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;chr3&#39;</span><span class="o">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>이제 실행하여 어떻게 되는지 확인해 보겠습니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<details class="success">
+<summary>명령 출력</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a>
+<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b</span>
+<a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
+<a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="go">[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]</span>
+<a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a><span class="go">[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]</span>
+<a id="__codelineno-60-7" name="__codelineno-60-7" href="#__codelineno-60-7"></a><span class="go">[[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr3]</span>
+<a id="__codelineno-60-8" name="__codelineno-60-8" href="#__codelineno-60-8"></a><span class="go">[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr1]</span>
+<a id="__codelineno-60-9" name="__codelineno-60-9" href="#__codelineno-60-9"></a><span class="go">[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr2]</span>
+<a id="__codelineno-60-10" name="__codelineno-60-10" href="#__codelineno-60-10"></a><span class="go">[[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr3]</span>
+<a id="__codelineno-60-11" name="__codelineno-60-11" href="#__codelineno-60-11"></a><span class="go">[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr1]</span>
+<a id="__codelineno-60-12" name="__codelineno-60-12" href="#__codelineno-60-12"></a><span class="go">[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr2]</span>
+<a id="__codelineno-60-13" name="__codelineno-60-13" href="#__codelineno-60-13"></a><span class="go">[[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr3]</span>
+<a id="__codelineno-60-14" name="__codelineno-60-14" href="#__codelineno-60-14"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr1]</span>
+<a id="__codelineno-60-15" name="__codelineno-60-15" href="#__codelineno-60-15"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr2]</span>
+<a id="__codelineno-60-16" name="__codelineno-60-16" href="#__codelineno-60-16"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]</span>
+</code></pre></div>
+</details>
+<p>성공! 3개의 간격 목록에서 모든 간격에 대해 모든 샘플을 반복했습니다. 채널의 항목 수를 효과적으로 3배로 늘렸습니다.</p>
+<p>그러나 읽기가 조금 어려우므로 다음 섹션에서 정리하겠습니다.</p>
+<h3 id="42">4.2. 채널 구성<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p><code>map</code> 연산자를 사용하여 샘플 데이터를 정리하고 리팩터링하여 이해하기 쉽게 만들 수 있습니다. 첫 번째 요소에 있는 조인 맵으로 간격 문자열을 이동해 보겠습니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">수정 후</label><label for="__tabbed_15_2">수정 전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-20">20</a></span>
+<span class="normal"><a href="#__codelineno-61-21">21</a></span>
+<span class="normal"><a href="#__codelineno-61-22">22</a></span>
+<span class="normal"><a href="#__codelineno-61-23">23</a></span>
+<span class="normal"><a href="#__codelineno-61-24">24</a></span>
+<span class="normal"><a href="#__codelineno-61-25">25</a></span>
+<span class="normal"><a href="#__codelineno-61-26">26</a></span>
+<span class="normal"><a href="#__codelineno-61-27">27</a></span>
+<span class="normal"><a href="#__codelineno-61-28">28</a></span>
+<span class="normal"><a href="#__codelineno-61-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-61-20" name="__codelineno-61-20"></a><span class="w">    </span><span class="n">ch_combined_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_joined_samples</span>
+<a id="__codelineno-61-21" name="__codelineno-61-21"></a><span class="w">        </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">ch_intervals</span><span class="o">)</span>
+<a id="__codelineno-61-22" name="__codelineno-61-22"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">,</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">-&gt;</span>
+</span><a id="__codelineno-61-23" name="__codelineno-61-23"></a><span class="hll"><span class="w">            </span><span class="o">[</span>
+</span><a id="__codelineno-61-24" name="__codelineno-61-24"></a><span class="hll"><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
+</span><a id="__codelineno-61-25" name="__codelineno-61-25"></a><span class="hll"><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+</span><a id="__codelineno-61-26" name="__codelineno-61-26"></a><span class="hll"><span class="w">                </span><span class="n">tumor</span>
+</span><a id="__codelineno-61-27" name="__codelineno-61-27"></a><span class="hll"><span class="w">            </span><span class="o">]</span>
+</span><a id="__codelineno-61-28" name="__codelineno-61-28"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-61-29" name="__codelineno-61-29"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-20">20</a></span>
+<span class="normal"><a href="#__codelineno-62-21">21</a></span>
+<span class="normal"><a href="#__codelineno-62-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-62-20" name="__codelineno-62-20"></a><span class="w">    </span><span class="n">ch_combined_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_joined_samples</span>
+<a id="__codelineno-62-21" name="__codelineno-62-21"></a><span class="w">        </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">ch_intervals</span><span class="o">)</span>
+<a id="__codelineno-62-22" name="__codelineno-62-22"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>이 맵 연산이 단계별로 어떻게 작동하는지 분석해 보겠습니다.</p>
+<p>먼저 코드를 더 읽기 쉽게 만들기 위해 명명된 매개변수를 사용합니다. <code>grouping_key</code>, <code>normal</code>, <code>tumor</code> 및 <code>interval</code>과 같은 이름을 사용하여 인덱스 대신 이름으로 튜플의 요소를 참조할 수 있습니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">,</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">-&gt;</span>
+</code></pre></div>
+<p>다음으로, <code>grouping_key</code>와 <code>interval</code> 필드를 결합합니다. <code>grouping_key</code>는 <code>id</code> 및 <code>repeat</code> 필드를 포함하는 맵입니다. <code>interval</code>을 사용하여 새 맵을 만들고 Groovy의 맵 덧셈(<code>+</code>)을 사용하여 병합합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
+</code></pre></div>
+<p>마지막으로, 이것을 결합된 메타데이터 맵, 정상 샘플 파일 및 종양 샘플 파일의 세 요소가 있는 튜플로 반환합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
+<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a><span class="w">                </span><span class="n">tumor</span>
+<a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a><span class="w">            </span><span class="o">]</span>
+</code></pre></div>
+<p>다시 실행하여 채널 내용을 확인해 보겠습니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<details class="success">
+<summary>명령 출력</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
+<a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd</span>
+<a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
+<a id="__codelineno-67-5" name="__codelineno-67-5" href="#__codelineno-67-5"></a><span class="go">[[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-67-6" name="__codelineno-67-6" href="#__codelineno-67-6"></a><span class="go">[[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-67-7" name="__codelineno-67-7" href="#__codelineno-67-7"></a><span class="go">[[id:patientA, repeat:1, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-67-8" name="__codelineno-67-8" href="#__codelineno-67-8"></a><span class="go">[[id:patientA, repeat:2, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-67-9" name="__codelineno-67-9" href="#__codelineno-67-9"></a><span class="go">[[id:patientA, repeat:2, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-67-10" name="__codelineno-67-10" href="#__codelineno-67-10"></a><span class="go">[[id:patientA, repeat:2, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-67-11" name="__codelineno-67-11" href="#__codelineno-67-11"></a><span class="go">[[id:patientB, repeat:1, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-67-12" name="__codelineno-67-12" href="#__codelineno-67-12"></a><span class="go">[[id:patientB, repeat:1, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-67-13" name="__codelineno-67-13" href="#__codelineno-67-13"></a><span class="go">[[id:patientB, repeat:1, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-67-14" name="__codelineno-67-14" href="#__codelineno-67-14"></a><span class="go">[[id:patientC, repeat:1, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-67-15" name="__codelineno-67-15" href="#__codelineno-67-15"></a><span class="go">[[id:patientC, repeat:1, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-67-16" name="__codelineno-67-16" href="#__codelineno-67-16"></a><span class="go">[[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+</code></pre></div>
+</details>
+<p><code>map</code>을 사용하여 데이터를 올바른 구조로 변환하는 것은 어려울 수 있지만 효과적인 데이터 조작에 중요합니다.</p>
+<p>이제 모든 게놈 간격에 걸쳐 모든 샘플을 반복하여 병렬로 처리할 수 있는 여러 독립적인 분석 단위를 만들었습니다. 그러나 관련 샘플을 다시 가져오려면 어떻게 해야 할까요? 다음 섹션에서는 공통 속성을 공유하는 샘플을 그룹화하는 방법을 배우겠습니다.</p>
+<h3 id="_10">핵심 요약<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>이 섹션에서는 다음을 배웠습니다:</p>
+<ul>
+<li><strong>간격에 샘플 분산</strong>: <code>combine</code>을 사용하여 간격에 샘플을 반복하는 방법</li>
+<li><strong>데카르트 곱 생성</strong>: 샘플과 간격의 모든 조합을 생성하는 방법</li>
+<li><strong>채널 구조 구성</strong>: <code>map</code>을 사용하여 더 나은 가독성을 위해 데이터를 재구성하는 방법</li>
+<li><strong>병렬 처리 준비</strong>: 분산 분석을 위해 데이터를 설정하는 방법</li>
+</ul>
+<h2 id="5-grouptuple">5. <code>groupTuple</code>을 사용하여 샘플 집계<a class="headerlink" href="#5-grouptuple" title="Permanent link">&para;</a></h2>
+<p>이전 섹션에서는 입력 파일에서 데이터를 분할하고 특정 필드(우리 경우에는 정상 및 종양 샘플)로 필터링하는 방법을 배웠습니다. 그러나 이것은 단 하나의 조인 유형만 다룹니다. 특정 속성별로 샘플을 그룹화하려면 어떻게 해야 할까요? 예를 들어, 정상-종양 쌍을 일치시키는 대신 유형에 관계없이 "sampleA"의 모든 샘플을 함께 처리하고 싶을 수 있습니다. 이 패턴은 효율성을 위해 관련 샘플을 별도로 처리한 후 마지막에 결과를 비교하거나 결합하려는 생물정보학 워크플로에서 일반적입니다.</p>
+<p>Nextflow에는 이를 수행하는 내장 방법이 포함되어 있으며, 주로 살펴볼 것은 <code>groupTuple</code>입니다.</p>
+<p>동일한 <code>id</code> 및 <code>interval</code> 필드를 가진 모든 샘플을 그룹화하는 것부터 시작하겠습니다. 이는 기술적 복제를 그룹화하지만 의미 있는 다른 샘플은 분리해 두는 분석에 전형적일 것입니다.</p>
+<p>이를 위해 그룹화 변수를 분리하여 격리하여 사용할 수 있어야 합니다.</p>
+<p>첫 번째 단계는 이전 섹션에서 했던 것과 유사합니다. 그룹화 변수를 튜플의 첫 번째 요소로 격리해야 합니다. 현재 첫 번째 요소는 <code>id</code>, <code>repeat</code> 및 <code>interval</code> 필드의 맵입니다:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1">1</a></span>
+<span class="normal"><a href="#__codelineno-68-2">2</a></span>
+<span class="normal"><a href="#__codelineno-68-3">3</a></span>
+<span class="normal"><a href="#__codelineno-68-4">4</a></span>
+<span class="normal"><a href="#__codelineno-68-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1"></a><span class="o">{</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2"></a><span class="w">  </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;sampleA&quot;</span><span class="o">,</span>
+<a id="__codelineno-68-3" name="__codelineno-68-3"></a><span class="w">  </span><span class="s2">&quot;repeat&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="o">,</span>
+<a id="__codelineno-68-4" name="__codelineno-68-4"></a><span class="w">  </span><span class="s2">&quot;interval&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;chr1&quot;</span>
+<a id="__codelineno-68-5" name="__codelineno-68-5"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>이전과 마찬가지로 맵에서 <code>id</code> 및 <code>interval</code> 필드를 분리하기 위해 <code>subMap</code> 메서드를 다시 사용할 수 있습니다. 이전처럼 각 샘플에 대해 튜플의 첫 번째 요소에 <code>subMap</code> 메서드를 적용하기 위해 <code>map</code> 연산자를 사용합니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">수정 후</label><label for="__tabbed_16_2">수정 전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-20">20</a></span>
+<span class="normal"><a href="#__codelineno-69-21">21</a></span>
+<span class="normal"><a href="#__codelineno-69-22">22</a></span>
+<span class="normal"><a href="#__codelineno-69-23">23</a></span>
+<span class="normal"><a href="#__codelineno-69-24">24</a></span>
+<span class="normal"><a href="#__codelineno-69-25">25</a></span>
+<span class="normal"><a href="#__codelineno-69-26">26</a></span>
+<span class="normal"><a href="#__codelineno-69-27">27</a></span>
+<span class="normal"><a href="#__codelineno-69-28">28</a></span>
+<span class="normal"><a href="#__codelineno-69-29">29</a></span>
+<span class="normal"><a href="#__codelineno-69-30">30</a></span>
+<span class="normal"><a href="#__codelineno-69-31">31</a></span>
+<span class="normal"><a href="#__codelineno-69-32">32</a></span>
+<span class="normal"><a href="#__codelineno-69-33">33</a></span>
+<span class="normal"><a href="#__codelineno-69-34">34</a></span>
+<span class="normal"><a href="#__codelineno-69-35">35</a></span>
+<span class="normal"><a href="#__codelineno-69-36">36</a></span>
+<span class="normal"><a href="#__codelineno-69-37">37</a></span>
+<span class="normal"><a href="#__codelineno-69-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-69-20" name="__codelineno-69-20"></a><span class="w">    </span><span class="n">ch_combined_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_joined_samples</span>
+<a id="__codelineno-69-21" name="__codelineno-69-21"></a><span class="w">        </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">ch_intervals</span><span class="o">)</span>
+<a id="__codelineno-69-22" name="__codelineno-69-22"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">,</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-69-23" name="__codelineno-69-23"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-69-24" name="__codelineno-69-24"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
+<a id="__codelineno-69-25" name="__codelineno-69-25"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+<a id="__codelineno-69-26" name="__codelineno-69-26"></a><span class="w">                </span><span class="n">tumor</span>
+<a id="__codelineno-69-27" name="__codelineno-69-27"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-69-28" name="__codelineno-69-28"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-69-29" name="__codelineno-69-29"></a>
+<a id="__codelineno-69-30" name="__codelineno-69-30"></a><span class="hll"><span class="w">    </span><span class="n">ch_grouped_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_combined_samples</span>
+</span><a id="__codelineno-69-31" name="__codelineno-69-31"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="w"> </span><span class="o">-&gt;</span>
+</span><a id="__codelineno-69-32" name="__codelineno-69-32"></a><span class="hll"><span class="w">            </span><span class="o">[</span>
+</span><a id="__codelineno-69-33" name="__codelineno-69-33"></a><span class="hll"><span class="w">                </span><span class="n">grouping_key</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;interval&#39;</span><span class="o">),</span>
+</span><a id="__codelineno-69-34" name="__codelineno-69-34"></a><span class="hll"><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+</span><a id="__codelineno-69-35" name="__codelineno-69-35"></a><span class="hll"><span class="w">                </span><span class="n">tumor</span>
+</span><a id="__codelineno-69-36" name="__codelineno-69-36"></a><span class="hll"><span class="w">            </span><span class="o">]</span>
+</span><a id="__codelineno-69-37" name="__codelineno-69-37"></a><span class="hll"><span class="w">          </span><span class="o">}</span>
+</span><a id="__codelineno-69-38" name="__codelineno-69-38"></a><span class="hll"><span class="w">          </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-20">20</a></span>
+<span class="normal"><a href="#__codelineno-70-21">21</a></span>
+<span class="normal"><a href="#__codelineno-70-22">22</a></span>
+<span class="normal"><a href="#__codelineno-70-23">23</a></span>
+<span class="normal"><a href="#__codelineno-70-24">24</a></span>
+<span class="normal"><a href="#__codelineno-70-25">25</a></span>
+<span class="normal"><a href="#__codelineno-70-26">26</a></span>
+<span class="normal"><a href="#__codelineno-70-27">27</a></span>
+<span class="normal"><a href="#__codelineno-70-28">28</a></span>
+<span class="normal"><a href="#__codelineno-70-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-70-20" name="__codelineno-70-20"></a><span class="w">    </span><span class="n">ch_combined_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_joined_samples</span>
+<a id="__codelineno-70-21" name="__codelineno-70-21"></a><span class="w">        </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">ch_intervals</span><span class="o">)</span>
+<a id="__codelineno-70-22" name="__codelineno-70-22"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">,</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-70-23" name="__codelineno-70-23"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-70-24" name="__codelineno-70-24"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
+<a id="__codelineno-70-25" name="__codelineno-70-25"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+<a id="__codelineno-70-26" name="__codelineno-70-26"></a><span class="w">                </span><span class="n">tumor</span>
+<a id="__codelineno-70-27" name="__codelineno-70-27"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-70-28" name="__codelineno-70-28"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-70-29" name="__codelineno-70-29"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>다시 실행하여 채널 내용을 확인하십시오:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<details class="success">
+<summary>명령 출력</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
+<a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76</span>
+<a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>
+<a id="__codelineno-72-5" name="__codelineno-72-5" href="#__codelineno-72-5"></a><span class="go">[[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-72-6" name="__codelineno-72-6" href="#__codelineno-72-6"></a><span class="go">[[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-72-7" name="__codelineno-72-7" href="#__codelineno-72-7"></a><span class="go">[[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-72-8" name="__codelineno-72-8" href="#__codelineno-72-8"></a><span class="go">[[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-72-9" name="__codelineno-72-9" href="#__codelineno-72-9"></a><span class="go">[[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-72-10" name="__codelineno-72-10" href="#__codelineno-72-10"></a><span class="go">[[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-72-11" name="__codelineno-72-11" href="#__codelineno-72-11"></a><span class="go">[[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-72-12" name="__codelineno-72-12" href="#__codelineno-72-12"></a><span class="go">[[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-72-13" name="__codelineno-72-13" href="#__codelineno-72-13"></a><span class="go">[[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-72-14" name="__codelineno-72-14" href="#__codelineno-72-14"></a><span class="go">[[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-72-15" name="__codelineno-72-15" href="#__codelineno-72-15"></a><span class="go">[[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-72-16" name="__codelineno-72-16" href="#__codelineno-72-16"></a><span class="go">[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+</code></pre></div>
+</details>
+<p><code>id</code> 및 <code>interval</code> 필드를 성공적으로 분리했지만 아직 샘플을 그룹화하지 않았습니다.</p>
+<div class="admonition note">
+<p class="admonition-title">참고</p>
+<p>여기서는 <code>replicate</code> 필드를 버리고 있습니다. 이는 추가 다운스트림 처리에 필요하지 않기 때문입니다. 이 튜토리얼을 완료한 후 나중에 그룹화에 영향을 주지 않고 이를 포함할 수 있는지 확인해 보십시오!</p>
+</div>
+<p>이제 <a href="https://www.nextflow.io/docs/latest/operator.html#grouptuple"><code>groupTuple</code> 연산자</a>를 사용하여 이 새로운 그룹화 요소로 샘플을 그룹화해 보겠습니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">수정 후</label><label for="__tabbed_17_2">수정 전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-30">30</a></span>
+<span class="normal"><a href="#__codelineno-73-31">31</a></span>
+<span class="normal"><a href="#__codelineno-73-32">32</a></span>
+<span class="normal"><a href="#__codelineno-73-33">33</a></span>
+<span class="normal"><a href="#__codelineno-73-34">34</a></span>
+<span class="normal"><a href="#__codelineno-73-35">35</a></span>
+<span class="normal"><a href="#__codelineno-73-36">36</a></span>
+<span class="normal"><a href="#__codelineno-73-37">37</a></span>
+<span class="normal"><a href="#__codelineno-73-38">38</a></span>
+<span class="normal"><a href="#__codelineno-73-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-73-30" name="__codelineno-73-30"></a><span class="w">    </span><span class="n">ch_grouped_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_combined_samples</span>
+<a id="__codelineno-73-31" name="__codelineno-73-31"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-73-32" name="__codelineno-73-32"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-73-33" name="__codelineno-73-33"></a><span class="w">                </span><span class="n">grouping_key</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;interval&#39;</span><span class="o">),</span>
+<a id="__codelineno-73-34" name="__codelineno-73-34"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+<a id="__codelineno-73-35" name="__codelineno-73-35"></a><span class="w">                </span><span class="n">tumor</span>
+<a id="__codelineno-73-36" name="__codelineno-73-36"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-73-37" name="__codelineno-73-37"></a><span class="w">          </span><span class="o">}</span>
+<a id="__codelineno-73-38" name="__codelineno-73-38"></a><span class="hll"><span class="w">          </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+</span><a id="__codelineno-73-39" name="__codelineno-73-39"></a><span class="w">          </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-30">30</a></span>
+<span class="normal"><a href="#__codelineno-74-31">31</a></span>
+<span class="normal"><a href="#__codelineno-74-32">32</a></span>
+<span class="normal"><a href="#__codelineno-74-33">33</a></span>
+<span class="normal"><a href="#__codelineno-74-34">34</a></span>
+<span class="normal"><a href="#__codelineno-74-35">35</a></span>
+<span class="normal"><a href="#__codelineno-74-36">36</a></span>
+<span class="normal"><a href="#__codelineno-74-37">37</a></span>
+<span class="normal"><a href="#__codelineno-74-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-74-30" name="__codelineno-74-30"></a><span class="w">    </span><span class="n">ch_grouped_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_combined_samples</span>
+<a id="__codelineno-74-31" name="__codelineno-74-31"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-74-32" name="__codelineno-74-32"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-74-33" name="__codelineno-74-33"></a><span class="w">                </span><span class="n">grouping_key</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;interval&#39;</span><span class="o">),</span>
+<a id="__codelineno-74-34" name="__codelineno-74-34"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+<a id="__codelineno-74-35" name="__codelineno-74-35"></a><span class="w">                </span><span class="n">tumor</span>
+<a id="__codelineno-74-36" name="__codelineno-74-36"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-74-37" name="__codelineno-74-37"></a><span class="w">          </span><span class="o">}</span>
+<a id="__codelineno-74-38" name="__codelineno-74-38"></a><span class="w">          </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>이게 전부입니다! 단 한 줄의 코드를 추가했습니다. 실행하여 어떻게 되는지 확인해 보겠습니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<details class="success">
+<summary>명령 출력</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
+<a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d</span>
+<a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a>
+<a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a><span class="go">[[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]</span>
+<a id="__codelineno-76-6" name="__codelineno-76-6" href="#__codelineno-76-6"></a><span class="go">[[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]</span>
+<a id="__codelineno-76-7" name="__codelineno-76-7" href="#__codelineno-76-7"></a><span class="go">[[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]</span>
+<a id="__codelineno-76-8" name="__codelineno-76-8" href="#__codelineno-76-8"></a><span class="go">[[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-9" name="__codelineno-76-9" href="#__codelineno-76-9"></a><span class="go">[[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-10" name="__codelineno-76-10" href="#__codelineno-76-10"></a><span class="go">[[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-11" name="__codelineno-76-11" href="#__codelineno-76-11"></a><span class="go">[[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-12" name="__codelineno-76-12" href="#__codelineno-76-12"></a><span class="go">[[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="go">[[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]</span>
+</code></pre></div>
+</details>
+<p>데이터 구조가 변경되었으며 각 채널 요소 내에서 파일이 이제 <code>[patientA_rep1_normal.bam, patientA_rep2_normal.bam]</code>과 같은 튜플에 포함되어 있음에 주목하십시오. <code>groupTuple</code>을 사용하면 Nextflow는 그룹의 각 샘플에 대한 단일 파일을 결합하기 때문입니다. 다운스트림에서 데이터를 처리할 때 이 점을 기억하는 것이 중요합니다.</p>
+<div class="admonition note">
+<p class="admonition-title">참고</p>
+<p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a>는 groupTuple의 반대입니다. 채널의 항목을 풀고 평평하게 합니다. <code>transpose</code>를 추가하여 위에서 수행한 그룹화를 취소해 보십시오!</p>
+</div>
+<h3 id="_11">핵심 요약<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>이 섹션에서는 다음을 배웠습니다:</p>
+<ul>
+<li><strong>관련 샘플 그룹화</strong>: <code>groupTuple</code>을 사용하여 공통 속성별로 샘플을 집계하는 방법</li>
+<li><strong>튜플 구성</strong>: 효과적인 그룹화를 위해 데이터를 준비하는 방법</li>
+<li><strong>그룹화 필드 선택</strong>: 가장 유용한 그룹화를 얻기 위해 관련 필드 선택하는 방법</li>
+<li><strong>그룹화된 데이터 구조 이해</strong>: 그룹화된 채널 작업 시 데이터 레이아웃의 변화</li>
+</ul>
+<h2 id="6">6. 연습 문제: 더 복잡한 그룹화<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>여기서 소개한 개념을 시험할 기회입니다. 다음 두 가지 그룹화 작업을 시도해 보십시오:</p>
+<ol>
+<li>환자 ID별로 모든 샘플을 그룹화하여 복제본 또는 간격과 관계없이 환자당 하나의 항목만 갖도록 합니다.</li>
+<li>간격별로 모든 샘플을 그룹화하여 환자 ID 또는 복제본과 관계없이 간격당 하나의 항목만 갖도록 합니다.</li>
+</ol>
+<p>두 경우 모두 결과를 출력하는 <code>view</code> 메서드를 사용하고 원하는 그룹화를 얻었는지 확인하십시오.</p>
+<details class="solution">
+<summary>해답</summary>
+<p><strong>환자 ID별로 그룹화</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="n">ch_by_patient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_combined_samples</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="w">        </span><span class="o">[</span><span class="n">grouping_key</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">),</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">]</span>
+<a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-77-6" name="__codelineno-77-6" href="#__codelineno-77-6"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;By patient: $it&quot;</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div>
+<p><strong>간격별로 그룹화</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="n">ch_by_interval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_combined_samples</span>
+<a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="w">        </span><span class="o">[</span><span class="n">grouping_key</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">&#39;interval&#39;</span><span class="o">),</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">]</span>
+<a id="__codelineno-78-4" name="__codelineno-78-4" href="#__codelineno-78-4"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-78-5" name="__codelineno-78-5" href="#__codelineno-78-5"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-78-6" name="__codelineno-78-6" href="#__codelineno-78-6"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;By interval: $it&quot;</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div>
+</details>
+<h2 id="7">7. 결론<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>이 사이드 퀘스트에서는 채널 연산자를 사용하여 데이터 스트림을 조작하고 재구성하는 방법을 배웠습니다. 이러한 강력한 도구를 사용하여 복잡한 분석 워크플로를 만들고 이해하기 쉬운 Nextflow 코드로 모델링할 수 있는 방법을 배웠습니다.</p>
+<p>주요 포인트:</p>
+<ul>
+<li><code>filter</code> 및 <code>map</code>을 사용하여 샘플 선택 및 변환</li>
+<li><code>join</code>을 사용하여 관련 샘플 결합</li>
+<li><code>combine</code>을 사용하여 병렬 처리 준비</li>
+<li><code>groupTuple</code>을 사용하여 관련 데이터 그룹화</li>
+<li>메타데이터 맵을 사용하여 깨끗하고 관리 가능한 코드 구조 유지</li>
+</ul>
+<p>이러한 기술을 숙달하면 복잡한 생물정보학 워크플로를 구성하고 명확한 구조 덕분에 쉽게 이해할 수 있는 강력한 데이터 처리 파이프라인을 생성할 수 있게 될 것입니다.</p>
+<p>이러한 패턴은 생물정보학 워크플로에만 제한되지 않습니다. 임의의 데이터 요소에서 작업하는 방식이 의미가 있으며, Nextflow가 다양한 분야에 적용될 수 있는 이유 중 하나입니다.</p>
+<h3 id="_12">이어지는 내용<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>이제 다음 단계로 다른 <a href="../">사이드 퀘스트</a> 중 하나를 시도하여 Nextflow 기술을 계속 발전시키거나, <a href="../../nf4_science/">도메인별 과정</a> 중 하나를 시도하여 특정 연구 분야에 적용하는 방법을 배워보십시오.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

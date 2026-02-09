@@ -1580,6 +1580,50 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 테스트 프로필로 파이프라인 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. 파이프라인 출력 찾기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        요약
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        다음 단계
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3046,7 +3090,7 @@
   <span class="md-ellipsis">
     
   
-    워크플로우 디버깅
+    디버깅
   
 
     
@@ -3212,7 +3256,7 @@
   <span class="md-ellipsis">
     
   
-    Architects toolkit 1
+    아키텍트 툴킷 I
   
 
     
@@ -3893,6 +3937,50 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. 테스트 프로필로 파이프라인 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. 파이프라인 출력 찾기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        요약
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        다음 단계
+      
+    </span>
+  </a>
   
 </li>
         
@@ -5661,15 +5749,209 @@ nf-core 템플릿은 복잡한 유전체학 데이터 세트를 위해 설계된
 <p>이제 <code>greetings.csv</code> 파일을 테스트 입력으로 사용할 준비가 되었습니다.</p>
 <h4 id="432-testconfig">4.3.2. <code>test.config</code> 파일 업데이트<a class="headerlink" href="#432-testconfig" title="Permanent link">&para;</a></h4>
 <p>이제 다음과 같이 <code>test.config</code> 파일을 업데이트할 수 있습니다:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">변경 후</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">변경 후</label><label for="__tabbed_10_2">변경 전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-10"
-params {
-    config_</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-21">21</a></span>
+<span class="normal"><a href="#__codelineno-53-22">22</a></span>
+<span class="normal"><a href="#__codelineno-53-23">23</a></span>
+<span class="normal"><a href="#__codelineno-53-24">24</a></span>
+<span class="normal"><a href="#__codelineno-53-25">25</a></span>
+<span class="normal"><a href="#__codelineno-53-26">26</a></span>
+<span class="normal"><a href="#__codelineno-53-27">27</a></span>
+<span class="normal"><a href="#__codelineno-53-28">28</a></span>
+<span class="normal"><a href="#__codelineno-53-29">29</a></span>
+<span class="normal"><a href="#__codelineno-53-30">30</a></span>
+<span class="normal"><a href="#__codelineno-53-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-21" name="__codelineno-53-21"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-53-22" name="__codelineno-53-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
+<a id="__codelineno-53-23" name="__codelineno-53-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
+<a id="__codelineno-53-24" name="__codelineno-53-24"></a>
+<a id="__codelineno-53-25" name="__codelineno-53-25"></a><span class="w">    </span><span class="c1">// 입력 데이터</span>
+<a id="__codelineno-53-26" name="__codelineno-53-26"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/greetings.csv&quot;</span>
+</span><a id="__codelineno-53-27" name="__codelineno-53-27"></a><span class="hll">
+</span><a id="__codelineno-53-28" name="__codelineno-53-28"></a><span class="hll"><span class="w">    </span><span class="c1">// 기타 매개변수</span>
+</span><a id="__codelineno-53-29" name="__codelineno-53-29"></a><span class="hll"><span class="w">    </span><span class="n">batch</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
+</span><a id="__codelineno-53-30" name="__codelineno-53-30"></a><span class="hll"><span class="w">    </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;tux&#39;</span>
+</span><a id="__codelineno-53-31" name="__codelineno-53-31"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-21">21</a></span>
+<span class="normal"><a href="#__codelineno-54-22">22</a></span>
+<span class="normal"><a href="#__codelineno-54-23">23</a></span>
+<span class="normal"><a href="#__codelineno-54-24">24</a></span>
+<span class="normal"><a href="#__codelineno-54-25">25</a></span>
+<span class="normal"><a href="#__codelineno-54-26">26</a></span>
+<span class="normal"><a href="#__codelineno-54-27">27</a></span>
+<span class="normal"><a href="#__codelineno-54-28">28</a></span>
+<span class="normal"><a href="#__codelineno-54-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-21" name="__codelineno-54-21"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-54-22" name="__codelineno-54-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
+<a id="__codelineno-54-23" name="__codelineno-54-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
+<a id="__codelineno-54-24" name="__codelineno-54-24"></a>
+<a id="__codelineno-54-25" name="__codelineno-54-25"></a><span class="w">    </span><span class="c1">// 입력 데이터</span>
+<a id="__codelineno-54-26" name="__codelineno-54-26"></a><span class="hll"><span class="w">    </span><span class="c1">// TODO nf-core: nf-core/test-datasets에 테스트 데이터 경로 지정</span>
+</span><a id="__codelineno-54-27" name="__codelineno-54-27"></a><span class="hll"><span class="w">    </span><span class="c1">// TODO nf-core: 명령줄 플래그가 필요하지 않도록 테스트에 필요한 매개변수 제공</span>
+</span><a id="__codelineno-54-28" name="__codelineno-54-28"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">pipelines_testdata_base_path</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv&#39;</span>
+</span><a id="__codelineno-54-29" name="__codelineno-54-29"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 </div>
 </div>
-</div><style type="text/css">.quiz {
+</div>
+<p>주요 요점:</p>
+<ul>
+<li><strong><code>${projectDir}</code> 사용</strong>: 이는 메인 workflow 스크립트가 위치한 디렉토리(파이프라인 루트)를 가리키는 Nextflow 암시적 변수입니다. 이를 사용하면 파이프라인이 어디서 실행되든 경로가 작동합니다.</li>
+<li><strong>절대 경로</strong>: <code>${projectDir}</code>를 사용함으로써 절대 경로를 만들며, 이는 파이프라인과 함께 제공되는 테스트 데이터에 중요합니다.</li>
+<li><strong>테스트 데이터 위치</strong>: nf-core 파이프라인은 일반적으로 작은 테스트 파일의 경우 파이프라인 저장소 내 <code>assets/</code> 디렉토리에, 더 큰 파일의 경우 외부 테스트 데이터셋에 테스트 데이터를 저장합니다.</li>
+</ul>
+<p>또한 매우 기본적인 머신(Github Codespaces의 최소 VM과 같은)에서도 실행되도록 기본 리소스 제한을 강화하겠습니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">변경 후</label><label for="__tabbed_11_2">변경 전</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-13">13</a></span>
+<span class="normal"><a href="#__codelineno-55-14">14</a></span>
+<span class="normal"><a href="#__codelineno-55-15">15</a></span>
+<span class="normal"><a href="#__codelineno-55-16">16</a></span>
+<span class="normal"><a href="#__codelineno-55-17">17</a></span>
+<span class="normal"><a href="#__codelineno-55-18">18</a></span>
+<span class="normal"><a href="#__codelineno-55-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-13" name="__codelineno-55-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-55-14" name="__codelineno-55-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-55-15" name="__codelineno-55-15"></a><span class="hll"><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span>
+</span><a id="__codelineno-55-16" name="__codelineno-55-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;4.GB&#39;</span><span class="o">,</span>
+</span><a id="__codelineno-55-17" name="__codelineno-55-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span>
+<a id="__codelineno-55-18" name="__codelineno-55-18"></a><span class="w">    </span><span class="o">]</span>
+<a id="__codelineno-55-19" name="__codelineno-55-19"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-13">13</a></span>
+<span class="normal"><a href="#__codelineno-56-14">14</a></span>
+<span class="normal"><a href="#__codelineno-56-15">15</a></span>
+<span class="normal"><a href="#__codelineno-56-16">16</a></span>
+<span class="normal"><a href="#__codelineno-56-17">17</a></span>
+<span class="normal"><a href="#__codelineno-56-18">18</a></span>
+<span class="normal"><a href="#__codelineno-56-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="hll"><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">4</span><span class="o">,</span>
+</span><a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;15.GB&#39;</span><span class="o">,</span>
+</span><a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span>
+<a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="w">    </span><span class="o">]</span>
+<a id="__codelineno-56-19" name="__codelineno-56-19"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>이것으로 필요한 코드 수정이 완료되었습니다.</p>
+<h3 id="44">4.4. 테스트 프로필로 파이프라인 실행<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<p>많은 작업이었지만 이제 마침내 파이프라인을 실행해 볼 수 있습니다!
+아직 검증을 설정하지 않았기 때문에 명령줄에 <code>--validate_params false</code>를 추가해야 합니다(이는 나중에 다룰 것입니다).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>core-hello<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
+</code></pre></div>
+<p>모든 수정을 올바르게 수행했다면 완료될 때까지 실행되어야 합니다.</p>
+<details class="success">
+<summary>명령 출력</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="go">Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de</span>
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="go">Input/output options</span>
+<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="go">  input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv</span>
+<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="go">  outdir                    : core-hello-results</span>
+<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a>
+<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="go">Institutional config options</span>
+<a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a><span class="go">  config_profile_name       : Test profile</span>
+<a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a><span class="go">  config_profile_description: Minimal test dataset to check pipeline function</span>
+<a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a>
+<a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a><span class="go">Generic options</span>
+<a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a><span class="go">  validate_params           : false</span>
+<a id="__codelineno-58-15" name="__codelineno-58-15" href="#__codelineno-58-15"></a><span class="go">  trace_report_suffix       : 2025-11-21_07-29-37</span>
+<a id="__codelineno-58-16" name="__codelineno-58-16" href="#__codelineno-58-16"></a>
+<a id="__codelineno-58-17" name="__codelineno-58-17" href="#__codelineno-58-17"></a><span class="go">Core Nextflow options</span>
+<a id="__codelineno-58-18" name="__codelineno-58-18" href="#__codelineno-58-18"></a><span class="go">  runName                   : condescending_allen</span>
+<a id="__codelineno-58-19" name="__codelineno-58-19" href="#__codelineno-58-19"></a><span class="go">  containerEngine           : docker</span>
+<a id="__codelineno-58-20" name="__codelineno-58-20" href="#__codelineno-58-20"></a><span class="go">  launchDir                 : /workspaces/training/hello-nf-core</span>
+<a id="__codelineno-58-21" name="__codelineno-58-21" href="#__codelineno-58-21"></a><span class="go">  workDir                   : /workspaces/training/hello-nf-core/work</span>
+<a id="__codelineno-58-22" name="__codelineno-58-22" href="#__codelineno-58-22"></a><span class="go">  projectDir                : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-58-23" name="__codelineno-58-23" href="#__codelineno-58-23"></a><span class="go">  userName                  : root</span>
+<a id="__codelineno-58-24" name="__codelineno-58-24" href="#__codelineno-58-24"></a><span class="go">  profile                   : test,docker</span>
+<a id="__codelineno-58-25" name="__codelineno-58-25" href="#__codelineno-58-25"></a><span class="go">  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
+<a id="__codelineno-58-26" name="__codelineno-58-26" href="#__codelineno-58-26"></a>
+<a id="__codelineno-58-27" name="__codelineno-58-27" href="#__codelineno-58-27"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
+<a id="__codelineno-58-28" name="__codelineno-58-28" href="#__codelineno-58-28"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-58-29" name="__codelineno-58-29" href="#__codelineno-58-29"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-58-30" name="__codelineno-58-30" href="#__codelineno-58-30"></a><span class="go">[ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔</span>
+<a id="__codelineno-58-31" name="__codelineno-58-31" href="#__codelineno-58-31"></a><span class="go">[45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔</span>
+<a id="__codelineno-58-32" name="__codelineno-58-32" href="#__codelineno-58-32"></a><span class="go">[81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔</span>
+<a id="__codelineno-58-33" name="__codelineno-58-33" href="#__codelineno-58-33"></a><span class="go">[96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔</span>
+<a id="__codelineno-58-34" name="__codelineno-58-34" href="#__codelineno-58-34"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
+</code></pre></div>
+</details>
+<p>보시다시피, 초기화 subworkflow 덕분에 시작 부분에 일반적인 nf-core 요약이 생성되었으며, 각 모듈에 대한 줄은 이제 PIPELINE:WORKFLOW:module 전체 이름을 보여줍니다.</p>
+<h3 id="45">4.5. 파이프라인 출력 찾기<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
+<p>이제 질문은: 파이프라인의 출력은 어디에 있을까요?
+그리고 답은 꽤 흥미롭습니다: 결과를 찾을 수 있는 두 개의 서로 다른 장소가 있습니다.</p>
+<p>앞서 기억하실 수도 있듯이, 새로 생성된 workflow의 첫 번째 실행은 다양한 실행 보고서와 메타데이터를 포함하는 <code>core-hello-results/</code>라는 디렉토리를 생성했습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>tree<span class="w"> </span>core-hello-results
+</code></pre></div>
+<details class="abstract">
+<summary>디렉토리 내용</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">core-hello-results</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="go">└── pipeline_info</span>
+<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">    ├── execution_report_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="go">    ├── execution_report_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="go">    ├── execution_timeline_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a><span class="go">    ├── execution_timeline_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-60-7" name="__codelineno-60-7" href="#__codelineno-60-7"></a><span class="go">    ├── execution_trace_2025-11-21_04-47-18.txt</span>
+<a id="__codelineno-60-8" name="__codelineno-60-8" href="#__codelineno-60-8"></a><span class="go">    ├── execution_trace_2025-11-21_07-29-37.txt</span>
+<a id="__codelineno-60-9" name="__codelineno-60-9" href="#__codelineno-60-9"></a><span class="go">    ├── hello_software_versions.yml</span>
+<a id="__codelineno-60-10" name="__codelineno-60-10" href="#__codelineno-60-10"></a><span class="go">    ├── params_2025-11-21_04-47-13.json</span>
+<a id="__codelineno-60-11" name="__codelineno-60-11" href="#__codelineno-60-11"></a><span class="go">    ├── params_2025-11-21_07-29-41.json</span>
+<a id="__codelineno-60-12" name="__codelineno-60-12" href="#__codelineno-60-12"></a><span class="go">    └── pipeline_dag_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-60-13" name="__codelineno-60-13" href="#__codelineno-60-13"></a><span class="go">    └── pipeline_dag_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-60-14" name="__codelineno-60-14" href="#__codelineno-60-14"></a>
+<a id="__codelineno-60-15" name="__codelineno-60-15" href="#__codelineno-60-15"></a><span class="go">1 directory, 12 files</span>
+</code></pre></div>
+</details>
+<p>첫 번째 실행에서 얻은 것 외에도 추가 실행 보고서 세트를 얻은 것을 볼 수 있습니다. 이때 workflow는 여전히 플레이스홀더일 뿐이었습니다.
+이번에는 예상대로 실행된 모든 작업이 표시됩니다.</p>
+<p><img alt="Hello 파이프라인의 실행 타임라인 보고서" src="./img/execution_timeline_hello.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">참고</p>
+<p>우리가 Github Codespaces에서 최소한의 머신에서 실행하고 있기 때문에 작업이 다시 병렬로 실행되지 않았습니다.
+이들이 병렬로 실행되는 것을 보려면 codespace의 CPU 할당량과 테스트 구성의 리소스 제한을 늘려보세요.</p>
+</div>
+<p>좋습니다만, 실제 파이프라인 결과는 거기에 없습니다!</p>
+<p>다음과 같은 상황이 발생했습니다: 모듈 자체를 변경하지 않았으므로 모듈 수준 <code>publishDir</code> 지시문에 의해 처리되는 출력은 원래 파이프라인에 지정된 대로 여전히 <code>results</code> 디렉토리로 이동합니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>tree<span class="w"> </span>results
+</code></pre></div>
+<details class="abstract">
+<summary>디렉토리 내용</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go">results</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="go">├── Bonjour-output.txt</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="go">├── COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="go">├── COLLECTED-test-output.txt</span>
+<a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a><span class="go">├── cowpy-COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="go">├── cowpy-COLLECTED-test-output.txt</span>
+<a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a><span class="go">├── Hello-output.txt</span>
+<a id="__codelineno-62-8" name="__codelineno-62-8" href="#__codelineno-62-8"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-62-10" name="__codelineno-62-10" href="#__codelineno-62-10"></a><span class="go">├── UPPER-Hello-output.txt</span>
+<a id="__codelineno-62-11" name="__codelineno-62-11" href="#__codelineno-62-11"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-62-12" name="__codelineno-62-12" href="#__codelineno-62-12"></a>
+<a id="__codelineno-62-13" name="__codelineno-62-13" href="#__codelineno-62-13"></a><span class="go">0 directories, 10 files</span>
+</code></pre></div>
+</details>
+<p>아, 거기 있군요. 원래 Hello 파이프라인의 이전 실행 결과와 섞여 있습니다.</p>
+<p>데모 파이프라인의 출력처럼 깔끔하게 구성하려면 출력 게시 방법을 변경해야 합니다.
+이 교육 과정의 뒷부분에서 그 방법을 보여드리겠습니다.</p>
+<!-- TODO: Hello Nextflow가 workflow 수준 출력을 사용하도록 업데이트되면 이를 업데이트하세요 -->
+
+<p>바로 이것입니다! 원래 파이프라인과 동일한 결과를 얻기 위해 많은 작업처럼 보일 수 있지만, 자동으로 생성되는 멋진 보고서를 모두 얻을 수 있으며, 이제 입력 검증과 나중 섹션에서 다룰 일부 메타데이터 처리 기능을 포함한 nf-core의 추가 기능을 활용할 수 있는 견고한 기반을 갖추게 되었습니다.</p>
+<hr />
+<h3 id="_7">요약<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>nf-core 템플릿을 사용하여 일반 Nextflow 파이프라인을 nf-core 스타일 파이프라인으로 변환하는 방법을 알게 되었습니다.
+그 과정에서 workflow를 구성 가능하게 만드는 방법과, 사용자 정의 nf-core 스타일 파이프라인을 개발할 때 가장 일반적으로 조정해야 하는 nf-core 템플릿 요소를 식별하는 방법을 배웠습니다.</p>
+<h3 id="_8">다음 단계<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>잠시 휴식을 취하세요, 힘든 작업이었습니다! 준비가 되면 <a href="../03_use_module/">3부: nf-core 모듈 사용하기</a>로 넘어가서 nf-core/modules 저장소에서 커뮤니티가 관리하는 모듈을 활용하는 방법을 배우세요.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

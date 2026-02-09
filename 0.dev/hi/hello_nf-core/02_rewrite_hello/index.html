@@ -1541,6 +1541,89 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#43-test-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Test profile को अपडेट करें
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. Test profile को अपडेट करें">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-greetingscsv-copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1. greetings.csv फ़ाइल को copy करें
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-testconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2. test.config फ़ाइल को अपडेट करें
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-test-profile-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Test profile के साथ pipeline चलाएं
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-pipeline-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Pipeline outputs खोजें
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        निष्कर्ष
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        आगे क्या है?
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2489,7 +2572,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    इमेजिंग के लिए Nextflow run
   
 
     
@@ -2505,7 +2588,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Index
+    इमेजिंग के लिए Nextflow run
   
 
           </label>
@@ -2525,7 +2608,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    इमेजिंग के लिए Nextflow run
   
 
     
@@ -3812,6 +3895,89 @@
     <span class="md-ellipsis">
       
         4.2. Templated इनपुट channel कोड को बदलें
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-test-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Test profile को अपडेट करें
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. Test profile को अपडेट करें">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-greetingscsv-copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1. greetings.csv फ़ाइल को copy करें
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-testconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2. test.config फ़ाइल को अपडेट करें
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-test-profile-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Test profile के साथ pipeline चलाएं
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-pipeline-outputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Pipeline outputs खोजें
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        निष्कर्ष
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        आगे क्या है?
       
     </span>
   </a>
@@ -5568,7 +5734,224 @@ nf-core template जटिल genomics datasets के लिए डिज़ा
 </div>
 </div>
 <p>यह उन बदलावों को पूरा करता है जो हमें इनपुट processing को काम करने के लिए करने की आवश्यकता है।</p>
-<p>इसके वर्तमान रू</p><style type="text/css">.quiz {
+<p>इसके वर्तमान रूप में, यह हमें schema validation के लिए nf-core की built-in क्षमताओं का लाभ उठाने की अनुमति नहीं देगा, लेकिन हम इसे बाद में जोड़ सकते हैं।
+अभी के लिए, हम इसे यथासंभव सरल रखने पर ध्यान केंद्रित कर रहे हैं ताकि हम test data पर सफलतापूर्वक कुछ चला सकें।</p>
+<h3 id="43-test-profile">4.3. Test profile को अपडेट करें<a class="headerlink" href="#43-test-profile" title="Permanent link">&para;</a></h3>
+<p>Test data और parameters की बात करें तो, आइए template में प्रदान की गई उदाहरण samplesheet के बजाय <code>greetings.csv</code> mini-samplesheet का उपयोग करने के लिए इस pipeline के test profile को अपडेट करें।</p>
+<p><code>core-hello/conf</code> के तहत, हम दो templated test profiles पाते हैं: <code>test.config</code> और <code>test_full.config</code>, जो एक छोटे data sample और एक full-size sample को test करने के लिए बनाए गए हैं।
+हमारी pipeline के उद्देश्य को देखते हुए, full-size test profile सेट अप करने का वास्तव में कोई मतलब नहीं है, इसलिए <code>test_full.config</code> को ignore या delete करने के लिए स्वतंत्र महसूस करें।
+हम कुछ default parameters के साथ हमारी <code>greetings.csv</code> फ़ाइल पर चलने के लिए <code>test.config</code> सेट अप करने पर ध्यान केंद्रित करेंगे।</p>
+<h4 id="431-greetingscsv-copy">4.3.1. <code>greetings.csv</code> फ़ाइल को copy करें<a class="headerlink" href="#431-greetingscsv-copy" title="Permanent link">&para;</a></h4>
+<p>पहले हमें <code>greetings.csv</code> फ़ाइल को हमारे pipeline project में एक उपयुक्त स्थान पर copy करने की आवश्यकता है।
+आमतौर पर छोटी test फ़ाइलें <code>assets</code> डायरेक्टरी में संग्रहीत की जाती हैं, इसलिए आइए हमारी working डायरेक्टरी से फ़ाइल को copy करें।</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>cp<span class="w"> </span>greetings.csv<span class="w"> </span>core-hello/assets/.
+</code></pre></div>
+<p>अब <code>greetings.csv</code> फ़ाइल test इनपुट के रूप में उपयोग के लिए तैयार है।</p>
+<h4 id="432-testconfig">4.3.2. <code>test.config</code> फ़ाइल को अपडेट करें<a class="headerlink" href="#432-testconfig" title="Permanent link">&para;</a></h4>
+<p>अब हम <code>test.config</code> फ़ाइल को निम्नानुसार अपडेट कर सकते हैं:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">बाद में</label><label for="__tabbed_10_2">पहले</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-21">21</a></span>
+<span class="normal"><a href="#__codelineno-53-22">22</a></span>
+<span class="normal"><a href="#__codelineno-53-23">23</a></span>
+<span class="normal"><a href="#__codelineno-53-24">24</a></span>
+<span class="normal"><a href="#__codelineno-53-25">25</a></span>
+<span class="normal"><a href="#__codelineno-53-26">26</a></span>
+<span class="normal"><a href="#__codelineno-53-27">27</a></span>
+<span class="normal"><a href="#__codelineno-53-28">28</a></span>
+<span class="normal"><a href="#__codelineno-53-29">29</a></span>
+<span class="normal"><a href="#__codelineno-53-30">30</a></span>
+<span class="normal"><a href="#__codelineno-53-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-21" name="__codelineno-53-21"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-53-22" name="__codelineno-53-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
+<a id="__codelineno-53-23" name="__codelineno-53-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
+<a id="__codelineno-53-24" name="__codelineno-53-24"></a>
+<a id="__codelineno-53-25" name="__codelineno-53-25"></a><span class="w">    </span><span class="c1">// इनपुट डेटा</span>
+<a id="__codelineno-53-26" name="__codelineno-53-26"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/assets/greetings.csv&quot;</span>
+</span><a id="__codelineno-53-27" name="__codelineno-53-27"></a><span class="hll">
+</span><a id="__codelineno-53-28" name="__codelineno-53-28"></a><span class="hll"><span class="w">    </span><span class="c1">// अन्य पैरामीटर</span>
+</span><a id="__codelineno-53-29" name="__codelineno-53-29"></a><span class="hll"><span class="w">    </span><span class="n">batch</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;test&#39;</span>
+</span><a id="__codelineno-53-30" name="__codelineno-53-30"></a><span class="hll"><span class="w">    </span><span class="n">character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;tux&#39;</span>
+</span><a id="__codelineno-53-31" name="__codelineno-53-31"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-21">21</a></span>
+<span class="normal"><a href="#__codelineno-54-22">22</a></span>
+<span class="normal"><a href="#__codelineno-54-23">23</a></span>
+<span class="normal"><a href="#__codelineno-54-24">24</a></span>
+<span class="normal"><a href="#__codelineno-54-25">25</a></span>
+<span class="normal"><a href="#__codelineno-54-26">26</a></span>
+<span class="normal"><a href="#__codelineno-54-27">27</a></span>
+<span class="normal"><a href="#__codelineno-54-28">28</a></span>
+<span class="normal"><a href="#__codelineno-54-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-21" name="__codelineno-54-21"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-54-22" name="__codelineno-54-22"></a><span class="w">    </span><span class="n">config_profile_name</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Test profile&#39;</span>
+<a id="__codelineno-54-23" name="__codelineno-54-23"></a><span class="w">    </span><span class="n">config_profile_description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Minimal test dataset to check pipeline function&#39;</span>
+<a id="__codelineno-54-24" name="__codelineno-54-24"></a>
+<a id="__codelineno-54-25" name="__codelineno-54-25"></a><span class="w">    </span><span class="c1">// इनपुट डेटा</span>
+<a id="__codelineno-54-26" name="__codelineno-54-26"></a><span class="hll"><span class="w">    </span><span class="c1">// TODO nf-core: nf-core/test-datasets पर अपने test data के paths निर्दिष्ट करें</span>
+</span><a id="__codelineno-54-27" name="__codelineno-54-27"></a><span class="hll"><span class="w">    </span><span class="c1">// TODO nf-core: Test के लिए आवश्यक params दें ताकि command line flags की आवश्यकता न हो</span>
+</span><a id="__codelineno-54-28" name="__codelineno-54-28"></a><span class="hll"><span class="w">    </span><span class="n">input</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">pipelines_testdata_base_path</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv&#39;</span>
+</span><a id="__codelineno-54-29" name="__codelineno-54-29"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>मुख्य बिंदु:</p>
+<ul>
+<li><strong><code>${projectDir}</code> का उपयोग</strong>: यह एक Nextflow implicit variable है जो उस डायरेक्टरी को point करती है जहां main workflow script स्थित है (pipeline root)। इसका उपयोग सुनिश्चित करता है कि path काम करेगा चाहे pipeline कहीं से भी चलाई जाए।</li>
+<li><strong>Absolute paths</strong>: <code>${projectDir}</code> का उपयोग करके, हम एक absolute path बनाते हैं, जो pipeline के साथ ship होने वाले test data के लिए महत्वपूर्ण है।</li>
+<li><strong>Test data location</strong>: nf-core pipelines आमतौर पर छोटी test फ़ाइलों के लिए pipeline repository के भीतर <code>assets/</code> डायरेक्टरी में test data संग्रहीत करती हैं, या बड़ी फ़ाइलों के लिए external test datasets का reference देती हैं।</li>
+</ul>
+<p>और जब हम इस पर हैं, तो आइए default resource limits को कड़ा करें ताकि यह बहुत ही बुनियादी machines पर चले (जैसे Github Codespaces में minimal VMs):</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">बाद में</label><label for="__tabbed_11_2">पहले</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-13">13</a></span>
+<span class="normal"><a href="#__codelineno-55-14">14</a></span>
+<span class="normal"><a href="#__codelineno-55-15">15</a></span>
+<span class="normal"><a href="#__codelineno-55-16">16</a></span>
+<span class="normal"><a href="#__codelineno-55-17">17</a></span>
+<span class="normal"><a href="#__codelineno-55-18">18</a></span>
+<span class="normal"><a href="#__codelineno-55-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-13" name="__codelineno-55-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-55-14" name="__codelineno-55-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-55-15" name="__codelineno-55-15"></a><span class="hll"><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span>
+</span><a id="__codelineno-55-16" name="__codelineno-55-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;4.GB&#39;</span><span class="o">,</span>
+</span><a id="__codelineno-55-17" name="__codelineno-55-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span>
+<a id="__codelineno-55-18" name="__codelineno-55-18"></a><span class="w">    </span><span class="o">]</span>
+<a id="__codelineno-55-19" name="__codelineno-55-19"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-13">13</a></span>
+<span class="normal"><a href="#__codelineno-56-14">14</a></span>
+<span class="normal"><a href="#__codelineno-56-15">15</a></span>
+<span class="normal"><a href="#__codelineno-56-16">16</a></span>
+<span class="normal"><a href="#__codelineno-56-17">17</a></span>
+<span class="normal"><a href="#__codelineno-56-18">18</a></span>
+<span class="normal"><a href="#__codelineno-56-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="w">    </span><span class="n">resourceLimits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="hll"><span class="w">        </span><span class="nl">cpus:</span><span class="w"> </span><span class="mi">4</span><span class="o">,</span>
+</span><a id="__codelineno-56-16" name="__codelineno-56-16"></a><span class="hll"><span class="w">        </span><span class="nl">memory:</span><span class="w"> </span><span class="s1">&#39;15.GB&#39;</span><span class="o">,</span>
+</span><a id="__codelineno-56-17" name="__codelineno-56-17"></a><span class="w">        </span><span class="nl">time:</span><span class="w"> </span><span class="s1">&#39;1.h&#39;</span>
+<a id="__codelineno-56-18" name="__codelineno-56-18"></a><span class="w">    </span><span class="o">]</span>
+<a id="__codelineno-56-19" name="__codelineno-56-19"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>यह हमें करने के लिए आवश्यक code modifications को पूरा करता है।</p>
+<h3 id="44-test-profile-pipeline">4.4. Test profile के साथ pipeline चलाएं<a class="headerlink" href="#44-test-profile-pipeline" title="Permanent link">&para;</a></h3>
+<p>यह बहुत कुछ था, लेकिन हम अंत में pipeline चलाने की कोशिश कर सकते हैं!
+ध्यान दें कि हमें command line में <code>--validate_params false</code> जोड़ना होगा क्योंकि हमने अभी तक validation सेट अप नहीं किया है (वह बाद में आएगा)।</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>core-hello<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
+</code></pre></div>
+<p>यदि आपने सभी modifications सही तरीके से किए हैं, तो यह पूरा होने तक चलना चाहिए।</p>
+<details class="success">
+<summary>कमांड आउटपुट</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go"> N E X T F L O W   ~  version 25.04.3</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="go">Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de</span>
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="go">Input/output options</span>
+<a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="go">  input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv</span>
+<a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="go">  outdir                    : core-hello-results</span>
+<a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a>
+<a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="go">Institutional config options</span>
+<a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a><span class="go">  config_profile_name       : Test profile</span>
+<a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a><span class="go">  config_profile_description: Minimal test dataset to check pipeline function</span>
+<a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a>
+<a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a><span class="go">Generic options</span>
+<a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a><span class="go">  validate_params           : false</span>
+<a id="__codelineno-58-15" name="__codelineno-58-15" href="#__codelineno-58-15"></a><span class="go">  trace_report_suffix       : 2025-11-21_07-29-37</span>
+<a id="__codelineno-58-16" name="__codelineno-58-16" href="#__codelineno-58-16"></a>
+<a id="__codelineno-58-17" name="__codelineno-58-17" href="#__codelineno-58-17"></a><span class="go">Core Nextflow options</span>
+<a id="__codelineno-58-18" name="__codelineno-58-18" href="#__codelineno-58-18"></a><span class="go">  runName                   : condescending_allen</span>
+<a id="__codelineno-58-19" name="__codelineno-58-19" href="#__codelineno-58-19"></a><span class="go">  containerEngine           : docker</span>
+<a id="__codelineno-58-20" name="__codelineno-58-20" href="#__codelineno-58-20"></a><span class="go">  launchDir                 : /workspaces/training/hello-nf-core</span>
+<a id="__codelineno-58-21" name="__codelineno-58-21" href="#__codelineno-58-21"></a><span class="go">  workDir                   : /workspaces/training/hello-nf-core/work</span>
+<a id="__codelineno-58-22" name="__codelineno-58-22" href="#__codelineno-58-22"></a><span class="go">  projectDir                : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-58-23" name="__codelineno-58-23" href="#__codelineno-58-23"></a><span class="go">  userName                  : root</span>
+<a id="__codelineno-58-24" name="__codelineno-58-24" href="#__codelineno-58-24"></a><span class="go">  profile                   : test,docker</span>
+<a id="__codelineno-58-25" name="__codelineno-58-25" href="#__codelineno-58-25"></a><span class="go">  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
+<a id="__codelineno-58-26" name="__codelineno-58-26" href="#__codelineno-58-26"></a>
+<a id="__codelineno-58-27" name="__codelineno-58-27" href="#__codelineno-58-27"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
+<a id="__codelineno-58-28" name="__codelineno-58-28" href="#__codelineno-58-28"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-58-29" name="__codelineno-58-29" href="#__codelineno-58-29"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-58-30" name="__codelineno-58-30" href="#__codelineno-58-30"></a><span class="go">[ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔</span>
+<a id="__codelineno-58-31" name="__codelineno-58-31" href="#__codelineno-58-31"></a><span class="go">[45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔</span>
+<a id="__codelineno-58-32" name="__codelineno-58-32" href="#__codelineno-58-32"></a><span class="go">[81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔</span>
+<a id="__codelineno-58-33" name="__codelineno-58-33" href="#__codelineno-58-33"></a><span class="go">[96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔</span>
+<a id="__codelineno-58-34" name="__codelineno-58-34" href="#__codelineno-58-34"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
+</code></pre></div>
+</details>
+<p>जैसा कि आप देख सकते हैं, initialisation subworkflow की बदौलत शुरुआत में typical nf-core summary produce हुआ, और प्रत्येक module के लिए lines अब पूर्ण PIPELINE:WORKFLOW:module नाम दिखाती हैं।</p>
+<h3 id="45-pipeline-outputs">4.5. Pipeline outputs खोजें<a class="headerlink" href="#45-pipeline-outputs" title="Permanent link">&para;</a></h3>
+<p>अब सवाल है: pipeline के outputs कहाँ हैं?
+और जवाब काफी दिलचस्प है: अब results खोजने के लिए दो अलग-अलग जगहें हैं।</p>
+<p>जैसा कि आपको पहले से याद हो सकता है, नए बनाए गए workflow का पहला run <code>core-hello-results/</code> नाम की एक डायरेक्टरी produce करता है जिसमें विभिन्न execution reports और metadata होते हैं।</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>tree<span class="w"> </span>core-hello-results
+</code></pre></div>
+<details class="abstract">
+<summary>डायरेक्टरी सामग्री</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">core-hello-results</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="go">└── pipeline_info</span>
+<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">    ├── execution_report_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="go">    ├── execution_report_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="go">    ├── execution_timeline_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a><span class="go">    ├── execution_timeline_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-60-7" name="__codelineno-60-7" href="#__codelineno-60-7"></a><span class="go">    ├── execution_trace_2025-11-21_04-47-18.txt</span>
+<a id="__codelineno-60-8" name="__codelineno-60-8" href="#__codelineno-60-8"></a><span class="go">    ├── execution_trace_2025-11-21_07-29-37.txt</span>
+<a id="__codelineno-60-9" name="__codelineno-60-9" href="#__codelineno-60-9"></a><span class="go">    ├── hello_software_versions.yml</span>
+<a id="__codelineno-60-10" name="__codelineno-60-10" href="#__codelineno-60-10"></a><span class="go">    ├── params_2025-11-21_04-47-13.json</span>
+<a id="__codelineno-60-11" name="__codelineno-60-11" href="#__codelineno-60-11"></a><span class="go">    ├── params_2025-11-21_07-29-41.json</span>
+<a id="__codelineno-60-12" name="__codelineno-60-12" href="#__codelineno-60-12"></a><span class="go">    └── pipeline_dag_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-60-13" name="__codelineno-60-13" href="#__codelineno-60-13"></a><span class="go">    └── pipeline_dag_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-60-14" name="__codelineno-60-14" href="#__codelineno-60-14"></a>
+<a id="__codelineno-60-15" name="__codelineno-60-15" href="#__codelineno-60-15"></a><span class="go">1 directory, 12 files</span>
+</code></pre></div>
+</details>
+<p>आप देख सकते हैं कि पहले run से मिले reports के अलावा हमें execution reports का एक और set मिला, जब workflow अभी भी सिर्फ एक placeholder था।
+इस बार आप अपेक्षानुसार चलाए गए सभी tasks देखते हैं।</p>
+<p><img alt="Hello pipeline के लिए execution timeline report" src="./img/execution_timeline_hello.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">नोट</p>
+<p>एक बार फिर tasks parallel में नहीं चलाए गए क्योंकि हम Github Codespaces में एक minimalist machine पर चला रहे हैं।
+इन्हें parallel में चलते हुए देखने के लिए, अपने codespace का CPU allocation और test configuration में resource limits बढ़ाने का प्रयास करें।</p>
+</div>
+<p>यह बहुत अच्छा है, लेकिन हमारे actual pipeline results वहां नहीं हैं!</p>
+<p>यहाँ क्या हुआ: हमने modules में ही कुछ भी नहीं बदला, इसलिए module-level <code>publishDir</code> directives द्वारा handle किए जाने वाले outputs अभी भी original pipeline में specified <code>results</code> डायरेक्टरी में जा रहे हैं।</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>tree<span class="w"> </span>results
+</code></pre></div>
+<details class="abstract">
+<summary>डायरेक्टरी सामग्री</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go">results</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="go">├── Bonjour-output.txt</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="go">├── COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="go">├── COLLECTED-test-output.txt</span>
+<a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a><span class="go">├── cowpy-COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="go">├── cowpy-COLLECTED-test-output.txt</span>
+<a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a><span class="go">├── Hello-output.txt</span>
+<a id="__codelineno-62-8" name="__codelineno-62-8" href="#__codelineno-62-8"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-62-10" name="__codelineno-62-10" href="#__codelineno-62-10"></a><span class="go">├── UPPER-Hello-output.txt</span>
+<a id="__codelineno-62-11" name="__codelineno-62-11" href="#__codelineno-62-11"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-62-12" name="__codelineno-62-12" href="#__codelineno-62-12"></a>
+<a id="__codelineno-62-13" name="__codelineno-62-13" href="#__codelineno-62-13"></a><span class="go">0 directories, 10 files</span>
+</code></pre></div>
+</details>
+<p>आह, वे वहाँ हैं, original Hello pipeline के पहले के runs के outputs के साथ मिश्रित।</p>
+<p>यदि हम चाहते हैं कि वे demo pipeline के outputs की तरह अच्छी तरह से organize हों, तो हमें outputs को publish करने का तरीका बदलना होगा।
+इस training course में बाद में हम आपको दिखाएंगे कि यह कैसे किया जाता है।</p>
+<!-- TODO: जब हमने Hello Nextflow को workflow-level outputs उपयोग करने के लिए अपडेट कर दिया, तो इसे अपडेट करें -->
+
+<p>और यह रहा! यह original pipeline के समान परिणाम प्राप्त करने के लिए बहुत काम जैसा लग सकता है, लेकिन आपको स्वचालित रूप से generate होने वाले वे सभी बढ़िया reports मिलते हैं, और अब आपके पास nf-core की अतिरिक्त सुविधाओं का लाभ उठाने के लिए एक ठोस आधार है, जिसमें input validation और कुछ उपयोगी metadata handling क्षमताएं शामिल हैं जिन्हें हम बाद के section में cover करेंगे।</p>
+<hr />
+<h3 id="_7">निष्कर्ष<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>आप जानते हैं कि nf-core template का उपयोग करके एक regular Nextflow pipeline को nf-core style pipeline में कैसे convert किया जाए।
+इसके भाग के रूप में, आपने सीखा कि एक workflow को composable कैसे बनाया जाए, और custom nf-core style pipeline विकसित करते समय nf-core template के उन elements को कैसे पहचाना जाए जिन्हें सबसे अधिक अनुकूलित करने की आवश्यकता होती है।</p>
+<h3 id="_8">आगे क्या है?<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>एक ब्रेक लें, यह कठिन काम था! जब आप तैयार हों, तो nf-core/modules repository से community-maintained modules का लाभ उठाना सीखने के लिए <a href="../03_use_module/">भाग 3: एक nf-core module का उपयोग करें</a> पर आगे बढ़ें।</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

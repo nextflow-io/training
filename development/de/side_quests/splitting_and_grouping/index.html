@@ -1957,7 +1957,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Nextflow run für Bildgebung
   
 
     
@@ -1973,7 +1973,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Index
+    Nextflow run für Bildgebung
   
 
           </label>
@@ -1993,7 +1993,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Nextflow run für Bildgebung
   
 
     
@@ -2393,7 +2393,7 @@
   <span class="md-ellipsis">
     
   
-    Working with files
+    Verarbeitung von Dateieingaben
   
 
     
@@ -2794,8 +2794,91 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#zusammenfassung_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusammenfassung
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#5-proben-mit-grouptuple-aggregieren" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Proben mit groupTuple aggregieren
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Proben mit groupTuple aggregieren">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zusammenfassung_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusammenfassung
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#zusammenfassung_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusammenfassung
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Zusammenfassung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wichtige-muster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wichtige Muster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zusatzliche-ressourcen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusätzliche Ressourcen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#wie-geht-es-weiter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wie geht es weiter?
+      
+    </span>
+  </a>
   
 </li> 
   </ul>
@@ -3874,8 +3957,91 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#zusammenfassung_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusammenfassung
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#5-proben-mit-grouptuple-aggregieren" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Proben mit groupTuple aggregieren
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Proben mit groupTuple aggregieren">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zusammenfassung_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusammenfassung
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#zusammenfassung_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusammenfassung
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Zusammenfassung">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wichtige-muster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wichtige Muster
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zusatzliche-ressourcen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusätzliche Ressourcen
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#wie-geht-es-weiter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wie geht es weiter?
+      
+    </span>
+  </a>
   
 </li> 
   </ul>
@@ -5047,18 +5213,313 @@ Mit diesem Wissen können wir erfolgreich Channels basierend auf einem gemeinsam
 </code></pre></div>
 <details class="success">
 <summary>Befehlsausgabe</summary>
-<p>```console
-N E X T F L O W   ~  version 25.10.2</p>
-<p>Launching <code>main.nf</code> [sad_hawking] DSL2 - revision: 1f6f6250cd</p>
-<p>[[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, repeat:1, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
-[[id:patientA, repeat:2, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientA, repeat:2, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientA, repeat:2, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
-[[id:patientB, repeat:1, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
-[[id:patientB, repeat:1, interval:chr2], patientB_rep1_</p>
-</details><style type="text/css">.quiz {
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>
+<a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="go">Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd</span>
+<a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
+<a id="__codelineno-67-5" name="__codelineno-67-5" href="#__codelineno-67-5"></a><span class="go">[[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-67-6" name="__codelineno-67-6" href="#__codelineno-67-6"></a><span class="go">[[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-67-7" name="__codelineno-67-7" href="#__codelineno-67-7"></a><span class="go">[[id:patientA, repeat:1, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-67-8" name="__codelineno-67-8" href="#__codelineno-67-8"></a><span class="go">[[id:patientA, repeat:2, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-67-9" name="__codelineno-67-9" href="#__codelineno-67-9"></a><span class="go">[[id:patientA, repeat:2, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-67-10" name="__codelineno-67-10" href="#__codelineno-67-10"></a><span class="go">[[id:patientA, repeat:2, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-67-11" name="__codelineno-67-11" href="#__codelineno-67-11"></a><span class="go">[[id:patientB, repeat:1, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-67-12" name="__codelineno-67-12" href="#__codelineno-67-12"></a><span class="go">[[id:patientB, repeat:1, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-67-13" name="__codelineno-67-13" href="#__codelineno-67-13"></a><span class="go">[[id:patientB, repeat:1, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-67-14" name="__codelineno-67-14" href="#__codelineno-67-14"></a><span class="go">[[id:patientC, repeat:1, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-67-15" name="__codelineno-67-15" href="#__codelineno-67-15"></a><span class="go">[[id:patientC, repeat:1, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-67-16" name="__codelineno-67-16" href="#__codelineno-67-16"></a><span class="go">[[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+</code></pre></div>
+</details>
+<p>Die Verwendung von <code>map</code>, um deine Daten in die korrekte Struktur zu bringen, kann schwierig sein, aber es ist entscheidend für effektive Datenmanipulation.</p>
+<p>Wir haben jetzt jede Probe über alle genomischen Intervalle hinweg wiederholt, was mehrere unabhängige Analyseeinheiten erstellt, die parallel verarbeitet werden können. Aber was, wenn wir zusammengehörige Proben wieder zusammenbringen wollen? Im nächsten Abschnitt lernen wir, wie man Proben gruppiert, die gemeinsame Attribute teilen.</p>
+<h3 id="zusammenfassung_2">Zusammenfassung<a class="headerlink" href="#zusammenfassung_2" title="Permanent link">&para;</a></h3>
+<p>In diesem Abschnitt hast du gelernt:</p>
+<ul>
+<li><strong>Proben über Intervalle verteilen</strong>: Wie man <code>combine</code> verwendet, um Proben über Intervalle zu wiederholen</li>
+<li><strong>Kartesische Produkte erstellen</strong>: Wie man alle Kombinationen von Proben und Intervallen generiert</li>
+<li><strong>Channel-Struktur organisieren</strong>: Wie man <code>map</code> verwendet, um Daten für bessere Lesbarkeit umzustrukturieren</li>
+<li><strong>Vorbereitung für parallele Verarbeitung</strong>: Wie man Daten für verteilte Analyse vorbereitet</li>
+</ul>
+<h2 id="5-proben-mit-grouptuple-aggregieren">5. Proben mit <code>groupTuple</code> aggregieren<a class="headerlink" href="#5-proben-mit-grouptuple-aggregieren" title="Permanent link">&para;</a></h2>
+<p>In den vorherigen Abschnitten haben wir gelernt, wie man Daten aus einer Eingabedatei aufteilt und nach bestimmten Feldern filtert (in unserem Fall normale und Tumorproben). Aber das deckt nur eine Art der Verbindung ab. Was, wenn wir Proben nach einem bestimmten Attribut gruppieren wollen? Zum Beispiel, anstatt übereinstimmende Normal-Tumor-Paare zu verbinden, möchten wir vielleicht alle Proben von "sampleA" zusammen verarbeiten, unabhängig von ihrem Typ. Dieses Muster ist häufig in Bioinformatik-Workflows, in denen man zusammengehörige Proben aus Effizienzgründen getrennt verarbeiten möchte, bevor man die Ergebnisse am Ende vergleicht oder kombiniert.</p>
+<p>Nextflow enthält eingebaute Methoden dafür, die wichtigste, die wir uns ansehen werden, ist <code>groupTuple</code>.</p>
+<p>Beginnen wir damit, alle unsere Proben zu gruppieren, die die gleichen <code>id</code>- und <code>interval</code>-Felder haben. Dies wäre typisch für eine Analyse, bei der wir technische Replikate gruppieren, aber bedeutsam verschiedene Proben getrennt halten wollen.</p>
+<p>Dazu sollten wir unsere Gruppierungsvariablen separieren, damit wir sie isoliert verwenden können.</p>
+<p>Der erste Schritt ist ähnlich zu dem, was wir im vorherigen Abschnitt getan haben. Wir müssen unsere Gruppierungsvariable als erstes Element des Tupels isolieren. Denk daran, unser erstes Element ist derzeit eine Map der Felder <code>id</code>, <code>repeat</code> und <code>interval</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1">1</a></span>
+<span class="normal"><a href="#__codelineno-68-2">2</a></span>
+<span class="normal"><a href="#__codelineno-68-3">3</a></span>
+<span class="normal"><a href="#__codelineno-68-4">4</a></span>
+<span class="normal"><a href="#__codelineno-68-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1"></a><span class="o">{</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2"></a><span class="w">  </span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;sampleA&quot;</span><span class="o">,</span>
+<a id="__codelineno-68-3" name="__codelineno-68-3"></a><span class="w">  </span><span class="s2">&quot;repeat&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="o">,</span>
+<a id="__codelineno-68-4" name="__codelineno-68-4"></a><span class="w">  </span><span class="s2">&quot;interval&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;chr1&quot;</span>
+<a id="__codelineno-68-5" name="__codelineno-68-5"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Wir können die <code>subMap</code>-Methode von vorher wiederverwenden, um unsere <code>id</code>- und <code>interval</code>-Felder aus der Map zu isolieren. Wie zuvor verwenden wir den <code>map</code>-Operator, um die <code>subMap</code>-Methode auf das erste Element des Tupels für jede Probe anzuwenden.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Nachher</label><label for="__tabbed_16_2">Vorher</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-20">20</a></span>
+<span class="normal"><a href="#__codelineno-69-21">21</a></span>
+<span class="normal"><a href="#__codelineno-69-22">22</a></span>
+<span class="normal"><a href="#__codelineno-69-23">23</a></span>
+<span class="normal"><a href="#__codelineno-69-24">24</a></span>
+<span class="normal"><a href="#__codelineno-69-25">25</a></span>
+<span class="normal"><a href="#__codelineno-69-26">26</a></span>
+<span class="normal"><a href="#__codelineno-69-27">27</a></span>
+<span class="normal"><a href="#__codelineno-69-28">28</a></span>
+<span class="normal"><a href="#__codelineno-69-29">29</a></span>
+<span class="normal"><a href="#__codelineno-69-30">30</a></span>
+<span class="normal"><a href="#__codelineno-69-31">31</a></span>
+<span class="normal"><a href="#__codelineno-69-32">32</a></span>
+<span class="normal"><a href="#__codelineno-69-33">33</a></span>
+<span class="normal"><a href="#__codelineno-69-34">34</a></span>
+<span class="normal"><a href="#__codelineno-69-35">35</a></span>
+<span class="normal"><a href="#__codelineno-69-36">36</a></span>
+<span class="normal"><a href="#__codelineno-69-37">37</a></span>
+<span class="normal"><a href="#__codelineno-69-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-69-20" name="__codelineno-69-20"></a><span class="w">    </span><span class="n">ch_combined_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_joined_samples</span>
+<a id="__codelineno-69-21" name="__codelineno-69-21"></a><span class="w">        </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">ch_intervals</span><span class="o">)</span>
+<a id="__codelineno-69-22" name="__codelineno-69-22"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">,</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-69-23" name="__codelineno-69-23"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-69-24" name="__codelineno-69-24"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
+<a id="__codelineno-69-25" name="__codelineno-69-25"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+<a id="__codelineno-69-26" name="__codelineno-69-26"></a><span class="w">                </span><span class="n">tumor</span>
+<a id="__codelineno-69-27" name="__codelineno-69-27"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-69-28" name="__codelineno-69-28"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-69-29" name="__codelineno-69-29"></a>
+<a id="__codelineno-69-30" name="__codelineno-69-30"></a><span class="hll"><span class="w">    </span><span class="n">ch_grouped_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_combined_samples</span>
+</span><a id="__codelineno-69-31" name="__codelineno-69-31"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="w"> </span><span class="o">-&gt;</span>
+</span><a id="__codelineno-69-32" name="__codelineno-69-32"></a><span class="hll"><span class="w">            </span><span class="o">[</span>
+</span><a id="__codelineno-69-33" name="__codelineno-69-33"></a><span class="hll"><span class="w">                </span><span class="n">grouping_key</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;interval&#39;</span><span class="o">),</span>
+</span><a id="__codelineno-69-34" name="__codelineno-69-34"></a><span class="hll"><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+</span><a id="__codelineno-69-35" name="__codelineno-69-35"></a><span class="hll"><span class="w">                </span><span class="n">tumor</span>
+</span><a id="__codelineno-69-36" name="__codelineno-69-36"></a><span class="hll"><span class="w">            </span><span class="o">]</span>
+</span><a id="__codelineno-69-37" name="__codelineno-69-37"></a><span class="hll"><span class="w">          </span><span class="o">}</span>
+</span><a id="__codelineno-69-38" name="__codelineno-69-38"></a><span class="hll"><span class="w">          </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-20">20</a></span>
+<span class="normal"><a href="#__codelineno-70-21">21</a></span>
+<span class="normal"><a href="#__codelineno-70-22">22</a></span>
+<span class="normal"><a href="#__codelineno-70-23">23</a></span>
+<span class="normal"><a href="#__codelineno-70-24">24</a></span>
+<span class="normal"><a href="#__codelineno-70-25">25</a></span>
+<span class="normal"><a href="#__codelineno-70-26">26</a></span>
+<span class="normal"><a href="#__codelineno-70-27">27</a></span>
+<span class="normal"><a href="#__codelineno-70-28">28</a></span>
+<span class="normal"><a href="#__codelineno-70-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-70-20" name="__codelineno-70-20"></a><span class="w">    </span><span class="n">ch_combined_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_joined_samples</span>
+<a id="__codelineno-70-21" name="__codelineno-70-21"></a><span class="w">        </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">ch_intervals</span><span class="o">)</span>
+<a id="__codelineno-70-22" name="__codelineno-70-22"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="o">,</span><span class="w"> </span><span class="n">interval</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-70-23" name="__codelineno-70-23"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-70-24" name="__codelineno-70-24"></a><span class="w">                </span><span class="n">grouping_key</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">interval:</span><span class="w"> </span><span class="n">interval</span><span class="o">],</span>
+<a id="__codelineno-70-25" name="__codelineno-70-25"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+<a id="__codelineno-70-26" name="__codelineno-70-26"></a><span class="w">                </span><span class="n">tumor</span>
+<a id="__codelineno-70-27" name="__codelineno-70-27"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-70-28" name="__codelineno-70-28"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-70-29" name="__codelineno-70-29"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Lass uns es erneut ausführen und die Channel-Inhalte überprüfen:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<details class="success">
+<summary>Befehlsausgabe</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>
+<a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a><span class="go">Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76</span>
+<a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>
+<a id="__codelineno-72-5" name="__codelineno-72-5" href="#__codelineno-72-5"></a><span class="go">[[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-72-6" name="__codelineno-72-6" href="#__codelineno-72-6"></a><span class="go">[[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-72-7" name="__codelineno-72-7" href="#__codelineno-72-7"></a><span class="go">[[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-72-8" name="__codelineno-72-8" href="#__codelineno-72-8"></a><span class="go">[[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-72-9" name="__codelineno-72-9" href="#__codelineno-72-9"></a><span class="go">[[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-72-10" name="__codelineno-72-10" href="#__codelineno-72-10"></a><span class="go">[[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-72-11" name="__codelineno-72-11" href="#__codelineno-72-11"></a><span class="go">[[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-72-12" name="__codelineno-72-12" href="#__codelineno-72-12"></a><span class="go">[[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-72-13" name="__codelineno-72-13" href="#__codelineno-72-13"></a><span class="go">[[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-72-14" name="__codelineno-72-14" href="#__codelineno-72-14"></a><span class="go">[[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-72-15" name="__codelineno-72-15" href="#__codelineno-72-15"></a><span class="go">[[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-72-16" name="__codelineno-72-16" href="#__codelineno-72-16"></a><span class="go">[[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
+</code></pre></div>
+</details>
+<p>Wir können sehen, dass wir die <code>id</code>- und <code>interval</code>-Felder erfolgreich isoliert haben, aber die Proben noch nicht gruppiert.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Wir verwerfen hier das <code>replicate</code>-Feld. Dies liegt daran, dass wir es für die weitere nachgelagerte Verarbeitung nicht benötigen. Nachdem du dieses Tutorial abgeschlossen hast, versuche, es einzuschließen, ohne die spätere Gruppierung zu beeinflussen!</p>
+</div>
+<p>Lass uns nun die Proben mit dem <a href="https://www.nextflow.io/docs/latest/operator.html#grouptuple"><code>groupTuple</code>-Operator</a> nach diesem neuen Gruppierungselement gruppieren.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">Nachher</label><label for="__tabbed_17_2">Vorher</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-30">30</a></span>
+<span class="normal"><a href="#__codelineno-73-31">31</a></span>
+<span class="normal"><a href="#__codelineno-73-32">32</a></span>
+<span class="normal"><a href="#__codelineno-73-33">33</a></span>
+<span class="normal"><a href="#__codelineno-73-34">34</a></span>
+<span class="normal"><a href="#__codelineno-73-35">35</a></span>
+<span class="normal"><a href="#__codelineno-73-36">36</a></span>
+<span class="normal"><a href="#__codelineno-73-37">37</a></span>
+<span class="normal"><a href="#__codelineno-73-38">38</a></span>
+<span class="normal"><a href="#__codelineno-73-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-73-30" name="__codelineno-73-30"></a><span class="w">    </span><span class="n">ch_grouped_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_combined_samples</span>
+<a id="__codelineno-73-31" name="__codelineno-73-31"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-73-32" name="__codelineno-73-32"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-73-33" name="__codelineno-73-33"></a><span class="w">                </span><span class="n">grouping_key</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;interval&#39;</span><span class="o">),</span>
+<a id="__codelineno-73-34" name="__codelineno-73-34"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+<a id="__codelineno-73-35" name="__codelineno-73-35"></a><span class="w">                </span><span class="n">tumor</span>
+<a id="__codelineno-73-36" name="__codelineno-73-36"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-73-37" name="__codelineno-73-37"></a><span class="w">          </span><span class="o">}</span>
+<a id="__codelineno-73-38" name="__codelineno-73-38"></a><span class="hll"><span class="w">          </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+</span><a id="__codelineno-73-39" name="__codelineno-73-39"></a><span class="w">          </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-30">30</a></span>
+<span class="normal"><a href="#__codelineno-74-31">31</a></span>
+<span class="normal"><a href="#__codelineno-74-32">32</a></span>
+<span class="normal"><a href="#__codelineno-74-33">33</a></span>
+<span class="normal"><a href="#__codelineno-74-34">34</a></span>
+<span class="normal"><a href="#__codelineno-74-35">35</a></span>
+<span class="normal"><a href="#__codelineno-74-36">36</a></span>
+<span class="normal"><a href="#__codelineno-74-37">37</a></span>
+<span class="normal"><a href="#__codelineno-74-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-74-30" name="__codelineno-74-30"></a><span class="w">    </span><span class="n">ch_grouped_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_combined_samples</span>
+<a id="__codelineno-74-31" name="__codelineno-74-31"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">grouping_key</span><span class="o">,</span><span class="w"> </span><span class="n">normal</span><span class="o">,</span><span class="w"> </span><span class="n">tumor</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-74-32" name="__codelineno-74-32"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-74-33" name="__codelineno-74-33"></a><span class="w">                </span><span class="n">grouping_key</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;interval&#39;</span><span class="o">),</span>
+<a id="__codelineno-74-34" name="__codelineno-74-34"></a><span class="w">                </span><span class="n">normal</span><span class="o">,</span>
+<a id="__codelineno-74-35" name="__codelineno-74-35"></a><span class="w">                </span><span class="n">tumor</span>
+<a id="__codelineno-74-36" name="__codelineno-74-36"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-74-37" name="__codelineno-74-37"></a><span class="w">          </span><span class="o">}</span>
+<a id="__codelineno-74-38" name="__codelineno-74-38"></a><span class="w">          </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>Das ist alles! Wir haben nur eine einzige Zeile Code hinzugefügt. Lass uns sehen, was passiert, wenn wir es ausführen:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
+</code></pre></div>
+<details class="success">
+<summary>Befehlsausgabe</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>
+<a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="go">Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d</span>
+<a id="__codelineno-76-4" name="__codelineno-76-4" href="#__codelineno-76-4"></a>
+<a id="__codelineno-76-5" name="__codelineno-76-5" href="#__codelineno-76-5"></a><span class="go">[[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]</span>
+<a id="__codelineno-76-6" name="__codelineno-76-6" href="#__codelineno-76-6"></a><span class="go">[[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]</span>
+<a id="__codelineno-76-7" name="__codelineno-76-7" href="#__codelineno-76-7"></a><span class="go">[[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]</span>
+<a id="__codelineno-76-8" name="__codelineno-76-8" href="#__codelineno-76-8"></a><span class="go">[[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-9" name="__codelineno-76-9" href="#__codelineno-76-9"></a><span class="go">[[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-10" name="__codelineno-76-10" href="#__codelineno-76-10"></a><span class="go">[[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-11" name="__codelineno-76-11" href="#__codelineno-76-11"></a><span class="go">[[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-12" name="__codelineno-76-12" href="#__codelineno-76-12"></a><span class="go">[[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]</span>
+<a id="__codelineno-76-13" name="__codelineno-76-13" href="#__codelineno-76-13"></a><span class="go">[[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]</span>
+</code></pre></div>
+</details>
+<p>Beachte, dass sich unsere Datenstruktur geändert hat und die Dateien innerhalb jedes Channel-Elements jetzt in Tupeln wie <code>[patientA_rep1_normal.bam, patientA_rep2_normal.bam]</code> enthalten sind. Dies liegt daran, dass <code>groupTuple</code> die einzelnen Dateien für jede Probe einer Gruppe kombiniert, wenn wir es verwenden. Dies ist wichtig zu beachten, wenn man die Daten nachgelagert verarbeiten will.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a> ist das Gegenteil von groupTuple. Es entpackt die Elemente in einem Channel und flacht sie ab. Versuche, <code>transpose</code> hinzuzufügen und die Gruppierung rückgängig zu machen, die wir oben durchgeführt haben!</p>
+</div>
+<h3 id="zusammenfassung_3">Zusammenfassung<a class="headerlink" href="#zusammenfassung_3" title="Permanent link">&para;</a></h3>
+<p>In diesem Abschnitt hast du gelernt:</p>
+<ul>
+<li><strong>Zusammengehörige Proben gruppieren</strong>: Wie man <code>groupTuple</code> verwendet, um Proben nach gemeinsamen Attributen zu aggregieren</li>
+<li><strong>Gruppierungsschlüssel isolieren</strong>: Wie man <code>subMap</code> verwendet, um bestimmte Felder für die Gruppierung zu extrahieren</li>
+<li><strong>Gruppierte Datenstrukturen handhaben</strong>: Wie man mit der verschachtelten Struktur arbeitet, die von <code>groupTuple</code> erstellt wird</li>
+<li><strong>Technische Replikate handhaben</strong>: Wie man Proben gruppiert, die die gleichen experimentellen Bedingungen teilen</li>
+</ul>
+<hr />
+<h2 id="zusammenfassung_4">Zusammenfassung<a class="headerlink" href="#zusammenfassung_4" title="Permanent link">&para;</a></h2>
+<p>In dieser Side Quest hast du gelernt, wie man Daten mithilfe von Channels aufteilt und gruppiert.</p>
+<p>Indem du die Daten modifizierst, während sie durch die Pipeline fließen, kannst du eine skalierbare Pipeline ohne Schleifen oder While-Anweisungen erstellen, die mehrere Vorteile gegenüber traditionelleren Ansätzen bietet:</p>
+<ul>
+<li>Wir können auf beliebig viele oder wenige Eingaben skalieren, ohne zusätzlichen Code</li>
+<li>Wir konzentrieren uns auf den Datenfluss durch die Pipeline statt auf Iteration</li>
+<li>Wir können so komplex oder einfach wie nötig sein</li>
+<li>Die Pipeline wird deklarativer und konzentriert sich darauf, was passieren soll, statt darauf, wie es passieren soll</li>
+<li>Nextflow optimiert die Ausführung für uns, indem unabhängige Operationen parallel ausgeführt werden</li>
+</ul>
+<p>Die Beherrschung dieser Channel-Operationen ermöglicht es dir, flexible, skalierbare Pipelines zu erstellen, die komplexe Datenbeziehungen handhaben, ohne auf Schleifen oder iterative Programmierung zurückzugreifen, wobei Nextflow die Ausführung optimiert und unabhängige Operationen automatisch parallelisiert.</p>
+<h3 id="wichtige-muster">Wichtige Muster<a class="headerlink" href="#wichtige-muster" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Strukturierte Eingabedaten erstellen:</strong> Ausgehend von einer CSV-Datei mit Meta-Maps (aufbauend auf Mustern aus <a href="../metadata/">Metadaten in Workflows</a>)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="n">ch_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">&quot;./data/samplesheet.csv&quot;</span><span class="o">)</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="w">      </span><span class="o">[[</span><span class="nl">id:</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">repeat:</span><span class="n">row</span><span class="o">.</span><span class="na">repeat</span><span class="o">,</span><span class="w"> </span><span class="nl">type:</span><span class="n">row</span><span class="o">.</span><span class="na">type</span><span class="o">],</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">bam</span><span class="o">]</span>
+<a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a><span class="w">    </span><span class="o">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Daten in separate Channels aufteilen:</strong> Wir haben <code>filter</code> verwendet, um Daten basierend auf dem <code>type</code>-Feld in unabhängige Streams aufzuteilen</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;tumor&#39;</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Übereinstimmende Proben verbinden:</strong> Wir haben <code>join</code> verwendet, um zusammengehörige Proben basierend auf <code>id</code>- und <code>repeat</code>-Feldern wieder zu kombinieren</p>
+<ul>
+<li>Zwei Channels nach Schlüssel verbinden (erstes Element des Tupels)</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">normal_ch</span><span class="o">)</span>
+</code></pre></div>
+<ul>
+<li>Verbindungsschlüssel extrahieren und nach diesem Wert verbinden</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="w">    </span><span class="o">.</span><span class="na">join</span><span class="o">(</span>
+<a id="__codelineno-80-3" name="__codelineno-80-3" href="#__codelineno-80-3"></a><span class="w">      </span><span class="n">normal_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-80-4" name="__codelineno-80-4" href="#__codelineno-80-4"></a><span class="w">    </span><span class="o">)</span>
+</code></pre></div>
+<ul>
+<li>Auf mehreren Feldern mit subMap verbinden</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a><span class="n">tumor_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="w">    </span><span class="o">.</span><span class="na">join</span><span class="o">(</span>
+<a id="__codelineno-81-3" name="__codelineno-81-3" href="#__codelineno-81-3"></a><span class="w">      </span><span class="n">normal_ch</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-81-4" name="__codelineno-81-4" href="#__codelineno-81-4"></a><span class="w">    </span><span class="o">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Über Intervalle verteilen:</strong> Wir haben <code>combine</code> verwendet, um kartesische Produkte von Proben mit genomischen Intervallen für parallele Verarbeitung zu erstellen.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a><span class="n">samples_ch</span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="n">intervals_ch</span><span class="o">)</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Nach Gruppierungsschlüsseln aggregieren:</strong> Wir haben <code>groupTuple</code> verwendet, um nach dem ersten Element in jedem Tupel zu gruppieren, wodurch Proben gesammelt wurden, die <code>id</code>- und <code>interval</code>-Felder teilen und technische Replikate zusammengeführt werden.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a><span class="n">channel</span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Datenstruktur optimieren:</strong> Wir haben <code>subMap</code> verwendet, um bestimmte Felder zu extrahieren und eine benannte Closure erstellt, um Transformationen wiederverwendbar zu machen.</p>
+<ul>
+<li>Bestimmte Felder aus einer Map extrahieren</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">])</span>
+</code></pre></div>
+<ul>
+<li>Benannte Closure für wiederverwendbare Transformationen verwenden</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="n">getSampleIdAndReplicate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">([</span><span class="s1">&#39;id&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;repeat&#39;</span><span class="o">]),</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="n">channel</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">getSampleIdAndReplicate</span><span class="o">)</span>
+</code></pre></div>
+</li>
+</ol>
+<h3 id="zusatzliche-ressourcen">Zusätzliche Ressourcen<a class="headerlink" href="#zusatzliche-ressourcen" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#filter">filter</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#map">map</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#join">join</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#grouptuple">groupTuple</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#combine">combine</a></li>
+</ul>
+<hr />
+<h2 id="wie-geht-es-weiter">Wie geht es weiter?<a class="headerlink" href="#wie-geht-es-weiter" title="Permanent link">&para;</a></h2>
+<p>Kehre zum <a href="../">Menü der Side Quests</a> zurück oder klicke auf die Schaltfläche unten rechts auf der Seite, um zum nächsten Thema in der Liste zu gelangen.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -6608,7 +7069,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
         
           
-          <a href="../working_with_files/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Working with files">
+          <a href="../working_with_files/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Verarbeitung von Dateieingaben">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6618,7 +7079,7 @@ window.mkdocsQuizConfig = {
                 Zurück
               </span>
               <div class="md-ellipsis">
-                Working with files
+                Verarbeitung von Dateieingaben
               </div>
             </div>
           </a>

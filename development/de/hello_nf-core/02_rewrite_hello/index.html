@@ -1602,6 +1602,28 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#zusammenfassung_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusammenfassung
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#was-kommt-als-nachstes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Was kommt als Nächstes?
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2550,7 +2572,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Nextflow run für Bildgebung
   
 
     
@@ -2566,7 +2588,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Index
+    Nextflow run für Bildgebung
   
 
           </label>
@@ -2586,7 +2608,7 @@
   <span class="md-ellipsis">
     
   
-    Index
+    Nextflow run für Bildgebung
   
 
     
@@ -2984,7 +3006,7 @@
   <span class="md-ellipsis">
     
   
-    Working with files
+    Verarbeitung von Dateieingaben
   
 
     
@@ -3934,6 +3956,28 @@
     <span class="md-ellipsis">
       
         4.5. Die Pipeline-Ausgaben finden
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zusammenfassung_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zusammenfassung
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#was-kommt-als-nachstes_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Was kommt als Nächstes?
       
     </span>
   </a>
@@ -5850,13 +5894,64 @@ Und die Antwort ist ziemlich interessant: Es gibt jetzt zwei verschiedene Orte, 
 </code></pre></div>
 <details class="abstract">
 <summary>Verzeichnisinhalt</summary>
-<p>```console
-core-hello-results
-└── pipeline_info
-    ├── execution_report_2025-11-21_04-47-18.html
-    ├── execution_report_2025-11-21_07-29-37.html
-    ├── execution</p>
-</details><style type="text/css">.quiz {
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">core-hello-results</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="go">└── pipeline_info</span>
+<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="go">    ├── execution_report_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="go">    ├── execution_report_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="go">    ├── execution_timeline_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a><span class="go">    ├── execution_timeline_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-60-7" name="__codelineno-60-7" href="#__codelineno-60-7"></a><span class="go">    ├── execution_trace_2025-11-21_04-47-18.txt</span>
+<a id="__codelineno-60-8" name="__codelineno-60-8" href="#__codelineno-60-8"></a><span class="go">    ├── execution_trace_2025-11-21_07-29-37.txt</span>
+<a id="__codelineno-60-9" name="__codelineno-60-9" href="#__codelineno-60-9"></a><span class="go">    ├── hello_software_versions.yml</span>
+<a id="__codelineno-60-10" name="__codelineno-60-10" href="#__codelineno-60-10"></a><span class="go">    ├── params_2025-11-21_04-47-13.json</span>
+<a id="__codelineno-60-11" name="__codelineno-60-11" href="#__codelineno-60-11"></a><span class="go">    ├── params_2025-11-21_07-29-41.json</span>
+<a id="__codelineno-60-12" name="__codelineno-60-12" href="#__codelineno-60-12"></a><span class="go">    └── pipeline_dag_2025-11-21_04-47-18.html</span>
+<a id="__codelineno-60-13" name="__codelineno-60-13" href="#__codelineno-60-13"></a><span class="go">    └── pipeline_dag_2025-11-21_07-29-37.html</span>
+<a id="__codelineno-60-14" name="__codelineno-60-14" href="#__codelineno-60-14"></a>
+<a id="__codelineno-60-15" name="__codelineno-60-15" href="#__codelineno-60-15"></a><span class="go">1 directory, 12 files</span>
+</code></pre></div>
+</details>
+<p>Du siehst, dass wir neben den Berichten aus dem ersten Lauf, als der Workflow noch nur ein Platzhalter war, eine weitere Reihe von Ausführungsberichten erhalten haben.
+Dieses Mal siehst du alle Tasks, die wie erwartet ausgeführt wurden.</p>
+<p><img alt="Ausführungs-Timeline-Bericht für die Hello-Pipeline" src="./img/execution_timeline_hello.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Hinweis</p>
+<p>Erneut wurden die Tasks nicht parallel ausgeführt, da wir auf einer minimalistischen Maschine in Github Codespaces laufen.
+Um diese parallel ausgeführt zu sehen, versuche die CPU-Zuweisung deines Codespaces und die Ressourcenlimits in der Testkonfiguration zu erhöhen.</p>
+</div>
+<p>Das ist großartig, aber unsere tatsächlichen Pipeline-Ergebnisse sind nicht dort!</p>
+<p>Hier ist, was passiert ist: Wir haben nichts an den Modulen selbst geändert, daher gehen die Ausgaben, die von <code>publishDir</code>-Direktiven auf Modulebene gesteuert werden, weiterhin in ein <code>results</code>-Verzeichnis, wie in der ursprünglichen Pipeline angegeben.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>tree<span class="w"> </span>results
+</code></pre></div>
+<details class="abstract">
+<summary>Verzeichnisinhalt</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="go">results</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="go">├── Bonjour-output.txt</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="go">├── COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="go">├── COLLECTED-test-output.txt</span>
+<a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a><span class="go">├── cowpy-COLLECTED-test-batch-output.txt</span>
+<a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="go">├── cowpy-COLLECTED-test-output.txt</span>
+<a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a><span class="go">├── Hello-output.txt</span>
+<a id="__codelineno-62-8" name="__codelineno-62-8" href="#__codelineno-62-8"></a><span class="go">├── Holà-output.txt</span>
+<a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="go">├── UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-62-10" name="__codelineno-62-10" href="#__codelineno-62-10"></a><span class="go">├── UPPER-Hello-output.txt</span>
+<a id="__codelineno-62-11" name="__codelineno-62-11" href="#__codelineno-62-11"></a><span class="go">└── UPPER-Holà-output.txt</span>
+<a id="__codelineno-62-12" name="__codelineno-62-12" href="#__codelineno-62-12"></a>
+<a id="__codelineno-62-13" name="__codelineno-62-13" href="#__codelineno-62-13"></a><span class="go">0 directories, 10 files</span>
+</code></pre></div>
+</details>
+<p>Ah, da sind sie, gemischt mit den Ausgaben früherer Läufe der ursprünglichen Hello-Pipeline.</p>
+<p>Wenn wir möchten, dass sie ordentlich organisiert sind wie die Ausgaben der Demo-Pipeline, müssen wir ändern, wie wir die Veröffentlichung der Ausgaben einrichten.
+Wie das geht, zeigen wir dir später in diesem Trainingskurs.</p>
+<!-- TODO: Dies aktualisieren, sobald wir Hello Nextflow auf Workflow-Level-Ausgaben aktualisiert haben -->
+
+<p>Und da ist es! Es mag nach viel Arbeit aussehen, um dasselbe Ergebnis wie die ursprüngliche Pipeline zu erzielen, aber du bekommst all diese schönen Berichte automatisch generiert, und du hast jetzt eine solide Grundlage, um zusätzliche Funktionen von nf-core zu nutzen, einschließlich Eingabevalidierung und einiger nützlicher Metadaten-Handling-Fähigkeiten, die wir in einem späteren Abschnitt behandeln werden.</p>
+<hr />
+<h3 id="zusammenfassung_3">Zusammenfassung<a class="headerlink" href="#zusammenfassung_3" title="Permanent link">&para;</a></h3>
+<p>Du weißt, wie man eine reguläre Nextflow-Pipeline mithilfe des nf-core-Templates in eine Pipeline im nf-core-Stil umwandelt.
+Dabei hast du gelernt, wie man einen Workflow komponierbar macht und wie man die Elemente des nf-core-Templates identifiziert, die bei der Entwicklung einer benutzerdefinierten Pipeline im nf-core-Stil am häufigsten angepasst werden müssen.</p>
+<h3 id="was-kommt-als-nachstes_3">Was kommt als Nächstes?<a class="headerlink" href="#was-kommt-als-nachstes_3" title="Permanent link">&para;</a></h3>
+<p>Mach eine Pause, das war harte Arbeit! Wenn du bereit bist, fahre mit <a href="../03_use_module/">Teil 3: Ein nf-core-Modul verwenden</a> fort, um zu lernen, wie du von der Community gepflegte Module aus dem nf-core/modules-Repository nutzen kannst.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
