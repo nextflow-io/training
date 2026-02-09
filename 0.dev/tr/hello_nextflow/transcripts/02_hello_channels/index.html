@@ -1536,14 +1536,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nf4_science/genomics/01_per_sample_variant_calling/" class="md-nav__link">
+      <a href="../../../nf4_science/genomics/01_method/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Örnek başına varyant çağırma
+    Part 1: Method overview and manual testing
   
 
     
@@ -1564,14 +1564,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nf4_science/genomics/02_joint_calling/" class="md-nav__link">
+      <a href="../../../nf4_science/genomics/02_per_sample_variant_calling/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Bölüm 2: Bir kohort üzerinde birleşik çağrı yapma
+    Part 2: Per-sample variant calling
   
 
     
@@ -1592,42 +1592,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nf4_science/genomics/03_modules/" class="md-nav__link">
+      <a href="../../../nf4_science/genomics/03_joint_calling/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Bölüm 3: Kodu modüllere taşıma
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../nf4_science/genomics/04_testing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Bölüm 4: Test ekleme
+    Part 3: Joint calling on a cohort
   
 
     
@@ -3479,7 +3451,7 @@
 <p>Bunu tamamen aynı şekilde yapıyoruz. Bu değişkeni script bloğu içinde herhangi bir yerde kullanabiliriz ve birden çok kez kullanabiliriz.</p>
 <p>Yani bunu buraya yapıştırabilirim, <em>"${greeting}_output.txt"</em>, ve sonra bunu buraya da yapıştırmam gerekiyor çünkü artık <em>output.txt</em> adlı bir dosya oluşturmuyoruz. Yani bunu güncellemezsen, Nextflow hiç oluşturulmamış bir dosya beklediğini söyleyen bir hatayla çökecektir.</p>
 <p>Yani aynısını orada yapmam gerekiyor ve bu değişkenin anlaşılması için tek tırnak değil çift tırnak kullanmam gerekiyor.</p>
-<p>Tamam, hadi deneyelim ve çalışıp çalışmadığına bakalım. İş akışını tekrar çalıştıracağız. Umarım bize üç farklı work dizinindeki üç farklı görevi gösterecektir. Ve nitekim, sol tarafta burada results klasörünün içinde artık üç farklı dosyayla üç farklı dosya adı ve her biri beklediğimiz farklı içeriklerle var. Yani dosyalar artık birbirinin üzerine yazmıyor ve her şey beklediğimiz gibi orada. </p>
+<p>Tamam, hadi deneyelim ve çalışıp çalışmadığına bakalım. İş akışını tekrar çalıştıracağız. Umarım bize üç farklı work dizinindeki üç farklı görevi gösterecektir. Ve nitekim, sol tarafta burada results klasörünün içinde artık üç farklı dosyayla üç farklı dosya adı ve her biri beklediğimiz farklı içeriklerle var. Yani dosyalar artık birbirinin üzerine yazmıyor ve her şey beklediğimiz gibi orada.</p>
 <p>Burada yaşadığımız bu biraz önemsiz bir kurulum, ama dosya yayınlamanın nasıl çalıştığı hakkında anlamanız gereken bazı temel kavramları vurguluyor ve tuzak olarak düşebileceğiniz bazı şeyler. Umarım kendi iş akışlarınızda bundan kaçınabilirsiniz.</p>
 <p>Ayrıca burada yaptığımız şeyin gerçek hayat durumlarında biraz pratik olmadığını belirtmekte fayda var. Bazı girdi verilerini aldık ve bu verileri kullanıyoruz, ama aynı zamanda dosyayı bu verilerden sonra adlandırıyoruz, ki bunu genellikle yapamazsınız.</p>
 <p>Yani gerçek daha olgun Nextflow iş hatlarında, genellikle belirli bir örnekle ilişkili tüm meta verileri içeren bir meta nesnesini etrafta taşırsınız. Daha sonra buna dayalı olarak dinamik dosya adları oluşturabilirsiniz, ki bu çok daha pratiktir.</p>

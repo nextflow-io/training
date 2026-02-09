@@ -11,10 +11,6 @@
         <link rel="canonical" href="https://training.nextflow.io/pt/nf4_science/genomics/02_joint_calling/">
       
       
-        <link rel="prev" href="../01_per_sample_variant_calling/">
-      
-      
-        <link rel="next" href="../03_modules/">
       
       
         
@@ -1359,20 +1355,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -1393,7 +1387,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1436,20 +1430,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
         
           
           <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
@@ -1470,7 +1462,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1544,845 +1536,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../01_per_sample_variant_calling/" class="md-nav__link">
+      <a href="../01_method/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Parte 1: Chamada de variantes por amostra
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 2: Chamada conjunta em uma coorte
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 2: Chamada conjunta em uma coorte
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-          
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-       
-  <label class="md-nav__title" for="__toc">
-    <span class="md-nav__icon md-icon"></span>
-    On this page
-  </label>
-  <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-     <li class="md-nav__item">
-  <a href="#visao-geral-do-metodo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Visão geral do método
-      
-    </span>
-  </a>
-  
-</li>  <li class="md-nav__item">
-  <a href="#fluxo-de-trabalho" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fluxo de trabalho
-      
-    </span>
-  </a>
-  
-</li>  <li class="md-nav__item">
-  <a href="#0-aquecimento-execute-samtools-e-gatk-diretamente" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. Aquecimento: Execute Samtools e GATK diretamente
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="0. Aquecimento: Execute Samtools e GATK diretamente">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#01-indexar-um-arquivo-bam-de-entrada-com-samtools" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.1. Indexar um arquivo BAM de entrada com Samtools
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="0.1. Indexar um arquivo BAM de entrada com Samtools">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#011-iniciar-o-conteiner-samtools-interativamente" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.1.1. Iniciar o contêiner Samtools interativamente
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#012-executar-o-comando-de-indexacao-para-as-tres-amostras" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.1.2. Executar o comando de indexação para as três amostras
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#013-sair-do-conteiner-samtools" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.1.3. Sair do contêiner Samtools
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#02-chamar-variantes-com-gatk-haplotypecaller-em-modo-gvcf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.2. Chamar variantes com GATK HaplotypeCaller em modo GVCF
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="0.2. Chamar variantes com GATK HaplotypeCaller em modo GVCF">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#021-iniciar-o-conteiner-gatk-interativamente" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.2.1. Iniciar o contêiner GATK interativamente
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#022-executar-o-comando-de-chamada-de-variantes-com-a-opcao-gvcf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.2.2. Executar o comando de chamada de variantes com a opção GVCF
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#023-repetir-o-processo-nas-outras-duas-amostras" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.2.3. Repetir o processo nas outras duas amostras
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#03-executar-genotipagem-conjunta" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.3. Executar genotipagem conjunta
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="0.3. Executar genotipagem conjunta">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#031-combinar-todos-os-gvcfs-por-amostra" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.3.1. Combinar todos os GVCFs por amostra
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#032-executar-a-analise-de-genotipagem-conjunta-propriamente-dita" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.3.2. Executar a análise de genotipagem conjunta propriamente dita
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#033-sair-do-conteiner-gatk" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.3.3. Sair do contêiner GATK
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conclusao" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conclusão
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#o-que-vem-a-seguir" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        O que vem a seguir?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#1-modificar-a-etapa-de-chamada-de-variantes-por-amostra-para-produzir-um-gvcf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Modificar a etapa de chamada de variantes por amostra para produzir um GVCF
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Modificar a etapa de chamada de variantes por amostra para produzir um GVCF">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-dizer-ao-haplotypecaller-para-emitir-um-gvcf-e-atualizar-a-extensao-de-saida" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1. Dizer ao HaplotypeCaller para emitir um GVCF e atualizar a extensão de saída
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-executar-o-pipeline-para-verificar-que-voce-pode-gerar-gvcfs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2. Executar o pipeline para verificar que você pode gerar GVCFs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-atualizar-a-extensao-do-arquivo-de-saida-no-bloco-de-saidas-do-processo-tambem" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3. Atualizar a extensão do arquivo de saída no bloco de saídas do processo também
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#14-atualizar-os-alvos-de-publicacao-para-as-novas-saidas-gvcf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.4. Atualizar os alvos de publicação para as novas saídas GVCF
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#15-atualizar-o-bloco-de-saida-para-a-nova-estrutura-de-diretorio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.5. Atualizar o bloco de saída para a nova estrutura de diretório
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#16-executar-o-pipeline-novamente" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.6. Executar o pipeline novamente
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conclusao_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conclusão
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#o-que-vem-a-seguir_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        O que vem a seguir?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#2-coletar-e-combinar-os-dados-gvcf-em-todas-as-amostras" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Coletar e combinar os dados GVCF em todas as amostras
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Coletar e combinar os dados GVCF em todas as amostras">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-definir-o-processo-que-vai-combinar-os-gvcfs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1. Definir o processo que vai combinar os GVCFs
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-adicionar-um-parametro-cohort_name-com-um-valor-padrao" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2. Adicionar um parâmetro cohort_name com um valor padrão
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-reunir-as-saidas-de-gatk_haplotypecaller-entre-amostras" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. Reunir as saídas de GATK_HAPLOTYPECALLER entre amostras
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-adicionar-uma-chamada-ao-bloco-de-fluxo-de-trabalho-para-executar-gatk_genomicsdb" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4. Adicionar uma chamada ao bloco de fluxo de trabalho para executar GATK_GENOMICSDB
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#25-executar-o-fluxo-de-trabalho" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.5. Executar o fluxo de trabalho
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#26-construir-uma-linha-de-comando-com-um-argumento-v-separado-para-cada-gvcf-de-entrada" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.6. Construir uma linha de comando com um argumento -V separado para cada GVCF de entrada
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#27-executar-o-fluxo-de-trabalho-para-verificar-que-ele-gera-a-saida-genomicsdb-conforme-esperado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.7. Executar o fluxo de trabalho para verificar que ele gera a saída GenomicsDB conforme esperado
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conclusao_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conclusão
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#o-que-vem-a-seguir_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        O que vem a seguir?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#3-executar-a-etapa-de-genotipagem-conjunta-como-parte-do-mesmo-processo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Executar a etapa de genotipagem conjunta como parte do mesmo processo
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Executar a etapa de genotipagem conjunta como parte do mesmo processo">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31-renomear-o-processo-de-gatk_genomicsdb-para-gatk_jointgenotyping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1. Renomear o processo de GATK_GENOMICSDB para GATK_JOINTGENOTYPING
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-adicionar-o-comando-de-genotipagem-conjunta-ao-processo-gatk_jointgenotyping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2. Adicionar o comando de genotipagem conjunta ao processo GATK_JOINTGENOTYPING
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-adicionar-os-arquivos-do-genoma-de-referencia-as-definicoes-de-entrada-do-processo-gatk_jointgenotyping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3. Adicionar os arquivos do genoma de referência às definições de entrada do processo GATK_JOINTGENOTYPING
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-atualizar-a-definicao-de-saida-do-processo-para-emitir-o-vcf-de-chamadas-de-variantes-em-nivel-de-coorte" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4. Atualizar a definição de saída do processo para emitir o VCF de chamadas de variantes em nível de coorte
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#35-atualizar-a-chamada-do-processo-de-gatk_genomicsdb-para-gatk_jointgenotyping" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.5. Atualizar a chamada do processo de GATK_GENOMICSDB para GATK_JOINTGENOTYPING
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#36-adicionar-o-vcf-conjunto-a-secao-de-publicacao" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.6. Adicionar o VCF conjunto à seção de publicação
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#37-adicionar-os-alvos-do-vcf-conjunto-ao-bloco-de-saida" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.7. Adicionar os alvos do VCF conjunto ao bloco de saída
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#38-executar-o-fluxo-de-trabalho" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.8. Executar o fluxo de trabalho
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conclusao_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conclusão
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#o-que-vem-a-seguir_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        O que vem a seguir?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li> 
-  </ul>
-  
-</nav>
-<nav class="md-nav md-nav--secondary sidebar_resources" aria-label="Resources">
-  <label class="md-nav__title">Resources</label>
-  <ul class="md-nav__list">
-    <li class="md-nav__item">
-      <!-- Community forum (training) -->
-      <a
-        href="https://community.seqera.io/c/training/39"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"
-          ></path>
-        </svg>
-        Community forum
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Nextflow slack -->
-      <a
-        href="https://www.nextflow.io/slack-invite.html"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"
-          ></path>
-        </svg>
-        Nextflow Slack
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Github issues -->
-      <a
-        href="https://github.com/nextflow-io/training/issues"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"
-          ></path>
-        </svg>
-        GitHub issues
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Seqera AI -->
-      <a
-        href="https://seqera.io/ask-ai/chat-v2"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <?xml version="1.0" encoding="utf-8"?>
-        <!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-        <svg
-          version="1.1"
-          id="Layer_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          viewBox="80 50 350 350"
-          style="enable-background: new 0 0 500 500"
-          xml:space="preserve"
-        >
-          <style type="text/css">
-            .st0 {
-              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
-            }
-            .st1 {
-              fill: "gray";
-            }
-          </style>
-          <g>
-            <defs>
-              <rect id="SVGID_1_" x="125" y="125" width="250" height="250" />
-            </defs>
-            <clipPath
-              id="SVGID_00000183214694142566821210000012389151436317298101_"
-            >
-              <use xlink:href="#SVGID_1_" style="overflow: visible" />
-            </clipPath>
-            <g
-              style="
-                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
-              "
-            >
-              <path
-                class="st1"
-                d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
-                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
-                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
-                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
-                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
-                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
-                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
-                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
-                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
-                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
-                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
-                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
-                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
-                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
-                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"
-              />
-              <path
-                class="st1"
-                d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
-                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
-                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
-                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
-                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
-                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
-                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
-                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
-                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
-                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
-                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
-                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
-                      L375,260.4z"
-              />
-              <path
-                class="st1"
-                d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
-                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
-                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
-                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
-                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
-                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
-                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
-                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
-                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
-                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
-                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
-                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
-                      h0.4h82.5h111H375v-32.3H252.2H165.3z"
-              />
-              <path
-                class="st1"
-                d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
-                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
-                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
-                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
-                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
-                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
-                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
-                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
-                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
-                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
-                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
-                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
-                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
-                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
-                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"
-              />
-            </g>
-          </g>
-        </svg>
-        Seqera AI assistant
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Nextflow docs -->
-      <a
-        href="https://nextflow.io/docs/latest/index.html"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"
-          ></path>
-        </svg>
-        Nextflow Docs
-      </a>
-    </li>
-  </ul>
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../03_modules/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Parte 3: Movendo código para módulos
+    Part 1: Method overview and manual testing
   
 
     
@@ -2403,14 +1564,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_testing/" class="md-nav__link">
+      <a href="../02_per_sample_variant_calling/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Parte 4: Adicionando testes
+    Part 2: Per-sample variant calling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03_joint_calling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3: Joint calling on a cohort
   
 
     
@@ -7105,44 +6294,6 @@ window.mkdocsQuizConfig = {
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
-        
-          
-          <a href="../01_per_sample_variant_calling/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Parte 1: Chamada de variantes por amostra">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Anterior
-              </span>
-              <div class="md-ellipsis">
-                Parte 1: Chamada de variantes por amostra
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../03_modules/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Parte 3: Movendo código para módulos">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Próximo
-              </span>
-              <div class="md-ellipsis">
-                Parte 3: Movendo código para módulos
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">

@@ -11,10 +11,6 @@
         <link rel="canonical" href="https://training.nextflow.io/de/nf4_science/genomics/01_per_sample_variant_calling/">
       
       
-        <link rel="prev" href="../00_orientation/">
-      
-      
-        <link rel="next" href="../02_joint_calling/">
       
       
         
@@ -1359,20 +1355,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -1393,7 +1387,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1436,20 +1430,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
         
           
           <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
@@ -1470,7 +1462,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1541,866 +1533,17 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Teil 1: Variantenerkennung pro Probe
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../01_method/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Teil 1: Variantenerkennung pro Probe
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-          
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-       
-  <label class="md-nav__title" for="__toc">
-    <span class="md-nav__icon md-icon"></span>
-    On this page
-  </label>
-  <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-     <li class="md-nav__item">
-  <a href="#methodenubersicht" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Methodenübersicht
-      
-    </span>
-  </a>
-  
-</li>  <li class="md-nav__item">
-  <a href="#datensatz" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Datensatz
-      
-    </span>
-  </a>
-  
-</li>  <li class="md-nav__item">
-  <a href="#workflow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Workflow
-      
-    </span>
-  </a>
-  
-</li>  <li class="md-nav__item">
-  <a href="#0-aufwarmen-teste-die-samtools-und-gatk-befehle-interaktiv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0. Aufwärmen: Teste die Samtools- und GATK-Befehle interaktiv
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="0. Aufwärmen: Teste die Samtools- und GATK-Befehle interaktiv">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#01-indexiere-eine-bam-eingabedatei-mit-samtools" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.1. Indexiere eine BAM-Eingabedatei mit Samtools
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="0.1. Indexiere eine BAM-Eingabedatei mit Samtools">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#011-lade-den-samtools-container-herunter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.1.1. Lade den Samtools-Container herunter
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#012-starte-den-samtools-container-interaktiv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.1.2. Starte den Samtools-Container interaktiv
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#013-fuhre-den-indexierungsbefehl-aus" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.1.3. Führe den Indexierungsbefehl aus
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#014-verlasse-den-samtools-container" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.1.4. Verlasse den Samtools-Container
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#02-rufe-varianten-mit-gatk-haplotypecaller-auf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.2. Rufe Varianten mit GATK HaplotypeCaller auf
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="0.2. Rufe Varianten mit GATK HaplotypeCaller auf">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#021-lade-den-gatk-container-herunter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.2.1. Lade den GATK-Container herunter
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#022-starte-den-gatk-container-interaktiv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.2.2. Starte den GATK-Container interaktiv
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#023-fuhre-den-variantenerkennungsbefehl-aus" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.2.3. Führe den Variantenerkennungsbefehl aus
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#024-verlasse-den-gatk-container" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        0.2.4. Verlasse den GATK-Container
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zusammenfassung" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Zusammenfassung
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#was-kommt-als-nachstes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Was kommt als Nächstes?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#1-schreibe-einen-einstufigen-workflow-der-samtools-index-auf-einer-bam-datei-ausfuhrt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Schreibe einen einstufigen Workflow, der Samtools index auf einer BAM-Datei ausführt
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="1. Schreibe einen einstufigen Workflow, der Samtools index auf einer BAM-Datei ausführt">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11-definiere-den-indexierungsprozess" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1. Definiere den Indexierungsprozess
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12-fuge-eine-eingabeparameterdeklaration-hinzu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2. Füge eine Eingabeparameterdeklaration hinzu
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13-fuge-einen-workflow-block-hinzu-um-samtools_index-auszufuhren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3. Füge einen workflow-Block hinzu, um SAMTOOLS_INDEX auszuführen
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#14-fuge-einen-output-block-hinzu-um-zu-definieren-wo-ergebnisse-veroffentlicht-werden" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.4. Füge einen output-Block hinzu, um zu definieren, wo Ergebnisse veröffentlicht werden
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#15-konfiguriere-das-ausgabeverzeichnis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.5. Konfiguriere das Ausgabeverzeichnis
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#16-fuhre-den-workflow-aus-um-zu-uberprufen-dass-der-indexierungsschritt-funktioniert" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.6. Führe den Workflow aus, um zu überprüfen, dass der Indexierungsschritt funktioniert
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zusammenfassung_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Zusammenfassung
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#was-kommt-als-nachstes_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Was kommt als Nächstes?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#2-fuge-einen-zweiten-prozess-hinzu-um-gatk-haplotypecaller-auf-der-indexierten-bam-datei-auszufuhren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Füge einen zweiten Prozess hinzu, um GATK HaplotypeCaller auf der indexierten BAM-Datei auszuführen
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Füge einen zweiten Prozess hinzu, um GATK HaplotypeCaller auf der indexierten BAM-Datei auszuführen">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-definiere-den-variantenerkennungsprozess" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1. Definiere den Variantenerkennungsprozess
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-fuge-definitionen-fur-zusatzeingaben-hinzu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.2. Füge Definitionen für Zusatzeingaben hinzu
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-erstelle-variablen-um-die-zusatzdateipfade-zu-halten" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3. Erstelle Variablen, um die Zusatzdateipfade zu halten
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-fuge-einen-aufruf-zum-workflow-block-hinzu-um-gatk_haplotypecaller-auszufuhren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.4. Füge einen Aufruf zum workflow-Block hinzu, um GATK_HAPLOTYPECALLER auszuführen
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#25-aktualisiere-den-publish-abschnitt-und-den-output-block" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.5. Aktualisiere den publish-Abschnitt und den output-Block
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#26-fuhre-den-workflow-aus-um-zu-uberprufen-dass-der-variantenerkennungsschritt-funktioniert" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.6. Führe den Workflow aus, um zu überprüfen, dass der Variantenerkennungsschritt funktioniert
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zusammenfassung_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Zusammenfassung
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#was-kommt-als-nachstes_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Was kommt als Nächstes?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#3-passe-den-workflow-an-um-auf-mehreren-proben-zu-laufen" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Passe den Workflow an, um auf mehreren Proben zu laufen
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Passe den Workflow an, um auf mehreren Proben zu laufen">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31-verwandle-die-eingabeparameterdeklaration-in-ein-array-das-die-drei-proben-auflistet" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1. Verwandle die Eingabeparameterdeklaration in ein Array, das die drei Proben auflistet
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-fuhre-den-workflow-aus-um-zu-uberprufen-dass-er-auf-allen-drei-proben-lauft" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2. Führe den Workflow aus, um zu überprüfen, dass er auf allen drei Proben läuft
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3.2. Führe den Workflow aus, um zu überprüfen, dass er auf allen drei Proben läuft">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#321-uberprufe-die-work-verzeichnisse-fur-die-relevanten-aufrufe" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2.1. Überprüfe die work-Verzeichnisse für die relevanten Aufrufe
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#322-verwende-den-view-operator-um-channel-inhalte-zu-inspizieren" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2.2. Verwende den view()-Operator, um Channel-Inhalte zu inspizieren
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-andere-die-ausgabe-des-samtools_index-prozesses-in-ein-tupel-das-die-eingabedatei-und-ihren-index-zusammenhalt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3. Ändere die Ausgabe des SAMTOOLS_INDEX-Prozesses in ein Tupel, das die Eingabedatei und ihren Index zusammenhält
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-andere-die-eingabe-zum-gatk_haplotypecaller-prozess-zu-einem-tupel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.4. Ändere die Eingabe zum GATK_HAPLOTYPECALLER-Prozess zu einem Tupel
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#35-aktualisiere-den-aufruf-von-gatk_haplotypecaller-im-workflow-block" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.5. Aktualisiere den Aufruf von GATK_HAPLOTYPECALLER im workflow-Block
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#36-aktualisiere-den-publish-abschnitt-und-den-output-block-fur-das-tupel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.6. Aktualisiere den publish-Abschnitt und den output-Block für das Tupel
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#37-fuhre-den-workflow-aus-um-zu-uberprufen-dass-er-jedes-mal-korrekt-auf-allen-drei-proben-funktioniert" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.7. Führe den Workflow aus, um zu überprüfen, dass er jedes Mal korrekt auf allen drei Proben funktioniert
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zusammenfassung_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Zusammenfassung
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#was-kommt-als-nachstes_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Was kommt als Nächstes?
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>  <li class="md-nav__item">
-  <a href="#4-lasse-den-workflow-eine-textdatei-akzeptieren-die-mehrere-eingabedateien-enthalt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Lasse den Workflow eine Textdatei akzeptieren, die mehrere Eingabedateien enthält
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Lasse den Workflow eine Textdatei akzeptieren, die mehrere Eingabedateien enthält">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-untersuche-die-bereitgestellte-textdatei-die-die-eingabedateipfade-auflistet" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.1. Untersuche die bereitgestellte Textdatei, die die Eingabedateipfade auflistet
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42-aktualisiere-den-parameterstandardwert" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.2. Aktualisiere den Parameterstandardwert
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#43-aktualisiere-die-channel-factory-um-zeilen-aus-einer-datei-zu-lesen" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.3. Aktualisiere die Channel-Factory, um Zeilen aus einer Datei zu lesen
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#44-fuhre-den-workflow-aus-um-zu-uberprufen-dass-er-korrekt-funktioniert" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4.4. Führe den Workflow aus, um zu überprüfen, dass er korrekt funktioniert
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li> 
-  </ul>
-  
-</nav>
-<nav class="md-nav md-nav--secondary sidebar_resources" aria-label="Resources">
-  <label class="md-nav__title">Resources</label>
-  <ul class="md-nav__list">
-    <li class="md-nav__item">
-      <!-- Community forum (training) -->
-      <a
-        href="https://community.seqera.io/c/training/39"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"
-          ></path>
-        </svg>
-        Community forum
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Nextflow slack -->
-      <a
-        href="https://www.nextflow.io/slack-invite.html"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"
-          ></path>
-        </svg>
-        Nextflow Slack
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Github issues -->
-      <a
-        href="https://github.com/nextflow-io/training/issues"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"
-          ></path>
-        </svg>
-        GitHub issues
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Seqera AI -->
-      <a
-        href="https://seqera.io/ask-ai/chat-v2"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <?xml version="1.0" encoding="utf-8"?>
-        <!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-        <svg
-          version="1.1"
-          id="Layer_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          viewBox="80 50 350 350"
-          style="enable-background: new 0 0 500 500"
-          xml:space="preserve"
-        >
-          <style type="text/css">
-            .st0 {
-              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
-            }
-            .st1 {
-              fill: "gray";
-            }
-          </style>
-          <g>
-            <defs>
-              <rect id="SVGID_1_" x="125" y="125" width="250" height="250" />
-            </defs>
-            <clipPath
-              id="SVGID_00000183214694142566821210000012389151436317298101_"
-            >
-              <use xlink:href="#SVGID_1_" style="overflow: visible" />
-            </clipPath>
-            <g
-              style="
-                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
-              "
-            >
-              <path
-                class="st1"
-                d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
-                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
-                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
-                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
-                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
-                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
-                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
-                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
-                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
-                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
-                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
-                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
-                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
-                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
-                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"
-              />
-              <path
-                class="st1"
-                d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
-                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
-                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
-                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
-                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
-                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
-                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
-                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
-                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
-                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
-                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
-                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
-                      L375,260.4z"
-              />
-              <path
-                class="st1"
-                d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
-                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
-                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
-                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
-                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
-                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
-                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
-                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
-                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
-                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
-                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
-                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
-                      h0.4h82.5h111H375v-32.3H252.2H165.3z"
-              />
-              <path
-                class="st1"
-                d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
-                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
-                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
-                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
-                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
-                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
-                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
-                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
-                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
-                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
-                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
-                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
-                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
-                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
-                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"
-              />
-            </g>
-          </g>
-        </svg>
-        Seqera AI assistant
-      </a>
-    </li>
-    <li class="md-nav__item">
-      <!-- Nextflow docs -->
-      <a
-        href="https://nextflow.io/docs/latest/index.html"
-        target="_blank"
-        rel="noopener"
-        class="md-nav__link"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"
-          ></path>
-        </svg>
-        Nextflow Docs
-      </a>
-    </li>
-  </ul>
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../02_joint_calling/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Teil 2: Joint Calling auf einer Kohorte
+    Part 1: Method overview and manual testing
   
 
     
@@ -2421,14 +1564,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_modules/" class="md-nav__link">
+      <a href="../02_per_sample_variant_calling/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Teil 3: Code in Module verschieben
+    Part 2: Per-sample variant calling
   
 
     
@@ -2449,14 +1592,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_testing/" class="md-nav__link">
+      <a href="../03_joint_calling/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Teil 4: Tests hinzufügen
+    Part 3: Joint calling on a cohort
   
 
     
@@ -7167,44 +6310,6 @@ window.mkdocsQuizConfig = {
       
         <footer class="md-footer">
   
-    
-      
-      <nav class="md-footer__inner md-grid" aria-label="Fußzeile" >
-        
-          
-          <a href="../00_orientation/" class="md-footer__link md-footer__link--prev" aria-label="Zurück: Orientierung">
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-            </div>
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Zurück
-              </span>
-              <div class="md-ellipsis">
-                Orientierung
-              </div>
-            </div>
-          </a>
-        
-        
-          
-          <a href="../02_joint_calling/" class="md-footer__link md-footer__link--next" aria-label="Weiter: Teil 2: Joint Calling auf einer Kohorte">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                Weiter
-              </span>
-              <div class="md-ellipsis">
-                Teil 2: Joint Calling auf einer Kohorte
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
     
   
   <div class="md-footer-meta md-typeset">

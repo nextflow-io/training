@@ -1536,14 +1536,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nf4_science/genomics/01_per_sample_variant_calling/" class="md-nav__link">
+      <a href="../../../nf4_science/genomics/01_method/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    파트 1: 샘플별 변이 호출
+    Part 1: Method overview and manual testing
   
 
     
@@ -1564,14 +1564,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nf4_science/genomics/02_joint_calling/" class="md-nav__link">
+      <a href="../../../nf4_science/genomics/02_per_sample_variant_calling/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    파트 2: 코호트에 대한 조인트 콜링
+    Part 2: Per-sample variant calling
   
 
     
@@ -1592,42 +1592,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../nf4_science/genomics/03_modules/" class="md-nav__link">
+      <a href="../../../nf4_science/genomics/03_joint_calling/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    파트 3: 코드를 모듈로 이동하기
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../nf4_science/genomics/04_testing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    파트 4: 테스트 추가하기
+    Part 3: Joint calling on a cohort
   
 
     
@@ -3448,7 +3420,7 @@
 <p>.command.sh를 수행하면 여기에 단일 파일 이름만 있고 단일 파일만 해당 작업 디렉토리에 스테이징되었음을 볼 수 있습니다.</p>
 <h2 id="23">2.3. 워크플로우에 수집 단계 추가하기<a class="headerlink" href="#23" title="Permanent link">&para;</a></h2>
 <p>따라서 어떻게든 Nextflow에게 이전 프로세스의 모든 출력을 한데 모아 세 개가 아닌 단일 채널 요소로 이 다운스트림 프로세스에 제공하도록 지시해야 합니다.</p>
-<p>_collect_라는 채널 연산자로 이를 수행합니다.</p>
+<p><em>collect</em>라는 채널 연산자로 이를 수행합니다.</p>
 <p>이것은 Nextflow 파이프라인에서 항상 볼 수 있는 매우 유용한 연산자입니다. 이것은 여기의 채널이며, 이 출력 채널은 위에서 만든 것과 똑같습니다. 따라서 이전에 했던 것처럼 채널 연산자를 추가할 수 있습니다. dot을 수행한 다음 이 경우 collect, 괄호를 수행하면 됩니다.</p>
 <p>그것이 필요한 전부입니다. 그러면 이 프로세스로 전달되기 전에 이 채널을 조작합니다.</p>
 <p>무슨 일이 일어나고 있는지 보고 싶다면 여기에서도 볼 수 있습니다. 따라서 이것은 이 프로세스 실행과 전혀 관련이 없으므로 해당 프로세스를 실행한 후 어느 시점에나 넣을 수 있습니다. 하지만 동일한 출력 채널을 가져와서 .view로 보고 있고, 그런 다음 .collect.view로 다시 보고 있습니다.</p>
