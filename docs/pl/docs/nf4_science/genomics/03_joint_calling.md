@@ -669,6 +669,6 @@ Wiesz również, jak konstruować linię poleceń używając domknięć Groovy i
 
 ### Co dalej?
 
-Świętuj swój sukces i weź zasłużoną przerwę.
+Pogratuluj sobie! Ukończyłeś/-aś kurs Nextflow dla Genomiki.
 
-W kolejnej części tego kursu nauczysz się, jak uruchomić gotowy do produkcji pipeline wyszukiwania wariantów z nf-core i porównać go z pipeline'em, który zbudował(a/i)eś ręcznie.
+Przejdź do końcowego [podsumowania kursu](./next_steps.md), aby przypomnieć sobie, czego się nauczyłeś/-aś i dowiedzieć się, co dalej.

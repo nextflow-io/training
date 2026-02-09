@@ -22,7 +22,8 @@ Ensuite, vous avez construit un pipeline Nextflow pour un échantillon unique af
 - Gérer correctement les fichiers accessoires tels que les fichiers d'index et les ressources du génome de référence
 - Exploiter le paradigme de flux de données de Nextflow pour paralléliser l'appel de variants par échantillon
 - Implémenter l'appel conjoint multi-échantillons en utilisant les opérateurs de canaux appropriés
-  Vous êtes maintenant équipé·e pour commencer à appliquer Nextflow aux workflows d'analyse génomique dans votre propre travail.
+
+Vous êtes maintenant équipé·e pour commencer à appliquer Nextflow aux workflows d'analyse génomique dans votre propre travail.
 
 ## Prochaines étapes pour développer vos compétences
 

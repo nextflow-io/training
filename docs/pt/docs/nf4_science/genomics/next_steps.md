@@ -22,7 +22,8 @@ Através deste curso prático, você aprendeu como:
 - Lidar com arquivos acessórios como arquivos de índice e recursos de genoma de referência de forma apropriada
 - Aproveitar o paradigma de fluxo de dados do Nextflow para paralelizar a chamada de variantes por amostra
 - Implementar chamada conjunta de múltiplas amostras usando operadores de canal relevantes
-  Você está agora preparado para começar a aplicar Nextflow a fluxos de trabalho de análise genômica em seu próprio trabalho.
+
+Você está agora preparado para começar a aplicar Nextflow a fluxos de trabalho de análise genômica em seu próprio trabalho.
 
 ## Próximos passos para aprimorar suas habilidades
 

@@ -33,7 +33,7 @@ Te narzędzia nie są zainstalowane w środowisku GitHub Codespaces, więc będz
 
 !!! note "Uwaga"
 
-     Upewnij się, że jesteś w katalogu `nf4-science/genomics`, aby ostatnia część ścieżki pokazanej po wpisaniu `pwd` to `genomics`.
+    Upewnij się, że jesteś w katalogu `nf4-science/genomics`, aby ostatnia część ścieżki pokazanej po wpisaniu `pwd` to `genomics`.
 
 ---
 

@@ -6,4 +6,4 @@
 
 설문조사는 완료하는 데 1~2분 정도 소요됩니다. 모두를 위한 교육 자료 개선에 도움을 주셔서 감사합니다!
 
-<div data-tf-live="01JWWJP7GKFMSDV16VEDVCKM6G"></div><script src="//embed.typeform.com/next/embed.js"></script>
+<div data-tf-live="01KH1ZMJV8KYN98QXH2GXKMAAC"></div><script src="//embed.typeform.com/next/embed.js"></script>

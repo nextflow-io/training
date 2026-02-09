@@ -669,6 +669,6 @@ Você também sabe como construir uma linha de comando usando closures Groovy e 
 
 ### O que vem a seguir?
 
-Comemore seu sucesso e faça uma pausa bem merecida.
+Dê um tapinha nas costas! Você completou o curso Nextflow for Genomics.
 
-Na próxima parte deste curso, você aprenderá como executar um pipeline de chamada de variantes pronto para produção do nf-core e compará-lo ao pipeline que você construiu manualmente.
+Vá para o [resumo final do curso](./next_steps.md) para revisar o que você aprendeu e descobrir o que vem a seguir.

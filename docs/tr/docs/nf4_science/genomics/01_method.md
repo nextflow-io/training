@@ -33,7 +33,7 @@ Bu araçlar GitHub Codespaces ortamında yüklü değildir, bu yüzden onları k
 
 !!! note "Not"
 
-     `nf4-science/genomics` dizininde olduğunuzdan emin olun, böylece `pwd` yazdığınızda gösterilen yolun son kısmı `genomics` olmalıdır.
+    `nf4-science/genomics` dizininde olduğunuzdan emin olun, böylece `pwd` yazdığınızda gösterilen yolun son kısmı `genomics` olmalıdır.
 
 ---
 

@@ -669,6 +669,6 @@ Du weißt auch, wie man eine Befehlszeile mit Groovy-Closures konstruiert und wi
 
 ### Wie geht es weiter?
 
-Feiere deinen Erfolg und mach eine wohlverdiente Pause.
+Klopf dir selbst auf die Schulter! Du hast den Nextflow for Genomics-Kurs abgeschlossen.
 
-Im nächsten Teil dieses Kurses lernst du, wie man eine produktionsreife Variant-Calling-Pipeline von nf-core ausführt und sie mit der Pipeline vergleicht, die du manuell erstellt hast.
+Gehe weiter zur abschließenden [Kurszusammenfassung](./next_steps.md), um zu wiederholen, was du gelernt hast, und herauszufinden, was als Nächstes kommt.

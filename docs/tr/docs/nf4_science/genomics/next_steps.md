@@ -22,7 +22,8 @@ Bu uygulamalı kurs boyunca şunları nasıl yapacağınızı öğrendiniz:
 - İndeks dosyaları ve referans genom kaynakları gibi yardımcı dosyaları uygun şekilde işlemek
 - Örnek başına varyant çağırmayı paralelleştirmek için Nextflow'un veri akışı paradigmasından yararlanmak
 - İlgili kanal operatörlerini kullanarak çok örnekli birleşik çağırma uygulamak
-  Artık kendi çalışmanızda genomik analiz iş akışlarına Nextflow uygulamaya başlamak için donanımlısınız.
+
+Artık kendi çalışmanızda genomik analiz iş akışlarına Nextflow uygulamaya başlamak için donanımlısınız.
 
 ## Becerilerinizi geliştirmek için sonraki adımlar
 

@@ -33,9 +33,9 @@
 
 이러한 도구는 GitHub Codespaces 환경에 설치되어 있지 않으므로 컨테이너를 통해 사용하겠습니다([Hello Containers](../../hello_nextflow/05_hello_containers.md) 참조).
 
-!!! note "참고"
+!!! note
 
-     `nf4-science/genomics` 디렉토리에 있는지 확인하세요. `pwd`를 입력할 때 표시되는 경로의 마지막 부분이 `genomics`이어야 합니다.
+    `nf4-science/genomics` 디렉토리에 있는지 확인하세요. `pwd`를 입력할 때 표시되는 경로의 마지막 부분이 `genomics`이어야 합니다.
 
 ---
 
@@ -601,7 +601,7 @@ gatk GenomicsDBImport \
 이 단계의 출력은 사실상 여러 개의 다른 파일 형태로 결합된 변이 데이터를 담고 있는 추가 중첩 디렉토리 세트를 포함하는 디렉토리입니다.
 둘러볼 수는 있지만 이 데이터 저장소 형식은 사람이 직접 읽도록 만들어지지 않았다는 것을 빠르게 알 수 있습니다.
 
-!!! note "참고"
+!!! note
 
     GATK에는 필요에 따라 데이터 저장소에서 변이 호출 데이터를 검사하고 추출할 수 있게 해주는 도구가 포함되어 있습니다.
 

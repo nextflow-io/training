@@ -669,6 +669,6 @@ Ayrıca Groovy closure'ları kullanarak komut satırı oluşturmayı ve tek bir 
 
 ### Sırada ne var?
 
-Başarınızı kutlayın ve hak ettiğiniz bir ara verin.
+Kendinizi tebrik edin! Nextflow for Genomics kursunu tamamladınız.
 
-Kursun bir sonraki bölümünde, nf-core'dan üretime hazır bir varyant çağırma boru hattı çalıştırmayı ve bunu manuel olarak oluşturduğunuz boru hattıyla karşılaştırmayı öğreneceksiniz.
+Öğrendiklerinizi gözden geçirmek ve sırada ne olduğunu öğrenmek için son [kurs özetine](./next_steps.md) gidin.
