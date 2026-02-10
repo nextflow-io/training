@@ -10,17 +10,17 @@ include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
  */
 params {
     // Primary input
-    reads: Path = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+    input: Path
 
     // Reference genome archive
-    hisat2_index_zip: Path = "${projectDir}/data/genome_index.tar.gz"
+    hisat2_index_zip: Path
 }
 
 workflow {
 
     main:
     // Create input channel from a file path
-    read_ch = channel.fromPath(params.reads)
+    read_ch = channel.fromPath(params.input)
 
     // Initial quality control
     FASTQC(read_ch)

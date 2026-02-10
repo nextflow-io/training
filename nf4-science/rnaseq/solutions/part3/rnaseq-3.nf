@@ -11,20 +11,20 @@ include { MULTIQC } from './modules/multiqc.nf'
  */
 params {
     // Primary input
-    input_csv: Path = "${projectDir}/data/single-end.csv"
+    input: Path
 
     // Reference genome archive
-    hisat2_index_zip: Path = "${projectDir}/data/genome_index.tar.gz"
+    hisat2_index_zip: Path
 
     // Report ID
-    report_id: String = "all_single-end"
+    report_id: String
 }
 
 workflow {
 
     main:
     // Create input channel from the contents of a CSV file
-    read_ch = channel.fromPath(params.input_csv)
+    read_ch = channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row -> file(row.fastq_path) }
 

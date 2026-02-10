@@ -13,7 +13,7 @@ We'll do this in three stages:
     You must work through Part 1 of the course before starting this lesson.
     Specifically, working through section 1.2.3 creates the genome index file (`data/genome_index.tar.gz`) required for the alignment step in this lesson.
 
-As a starting point, we provide you with a workflow file, `rnaseq.nf`, that outlines the main parts of the workflow, as well as four module files in the `modules/` directory — `fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf`, and `multiqc.nf` — that outline the structure of each process.
+As a starting point, we provide you with a workflow file, `rnaseq.nf`, that outlines the main parts of the workflow, as well as four module files in the `modules/` directory (`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf`, and `multiqc.nf`) that outline the structure of each process.
 These files are not functional; their purpose is just to serve as scaffolds for you to fill in with the interesting parts of the code.
 
 ```groovy title="rnaseq.nf" linenums="1"
@@ -66,11 +66,11 @@ We're going to take this information and wrap it in Nextflow in three stages:
 
 ### 1.1. Set up the input
 
-We need to declare an input parameter with a default value and create an input channel.
+We need to declare an input parameter, create a test profile to provide a convenient default value, and create an input channel.
 
 #### 1.1.1. Add an input parameter declaration
 
-In `rnaseq.nf`, under the `Pipeline parameters` section, declare a parameter called `reads` with a default path pointing to one of the test FASTQ files.
+In `rnaseq.nf`, under the `Pipeline parameters` section, declare a parameter called `reads` with the type `Path`.
 
 === "After"
 
@@ -80,7 +80,7 @@ In `rnaseq.nf`, under the `Pipeline parameters` section, declare a parameter cal
      */
     params {
         // Primary input
-        reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
+        input: Path
     }
     ```
 
@@ -94,9 +94,40 @@ In `rnaseq.nf`, under the `Pipeline parameters` section, declare a parameter cal
     // Primary input
     ```
 
-Next, we need to create a channel from this parameter.
+That sets up the CLI parameter, but we don't want to type out the file path every time we run the workflow during development.
+There are multiple options for providing a default value; here we use a test profile.
 
-#### 1.1.2. Set up the input channel
+#### 1.1.2. Create a test profile with a default value in `nextflow.config`
+
+A test profile provides convenient default values for trying out a workflow without specifying inputs on the command line.
+This is a common convention in the Nextflow ecosystem (see [Hello Config](../../hello_nextflow/06_hello_config.md) for more detail).
+
+Add a `profiles` block to `nextflow.config` with a `test` profile that sets the `reads` parameter to one of the test FASTQ files.
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="3-7"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
+    ```
+
+Here, we're using `#!groovy ${projectDir}`, a built-in Nextflow variable that points to the directory where the workflow script is located.
+This makes it easy to reference data files and other resources without hardcoding absolute paths.
+
+The parameter now has a convenient default. Next, we need to create a channel from it.
+
+#### 1.1.3. Set up the input channel
 
 In the workflow block, create an input channel from the parameter value using the `.fromPath` channel factory (as used in [Hello Channels](../../hello_nextflow/02_hello_channels.md)).
 
@@ -107,7 +138,7 @@ In the workflow block, create an input channel from the parameter value using th
 
         main:
         // Create input channel from a file path
-        read_ch = channel.fromPath(params.reads)
+        read_ch = channel.fromPath(params.input)
 
         // Call processes
 
@@ -229,7 +260,7 @@ Add a call to `FASTQC` in the workflow block, passing the input channel as an ar
 
         main:
         // Create input channel from a file path
-        read_ch = channel.fromPath(params.reads)
+        read_ch = channel.fromPath(params.input)
 
         // Initial quality control
         FASTQC(read_ch)
@@ -246,7 +277,7 @@ Add a call to `FASTQC` in the workflow block, passing the input channel as an ar
 
         main:
         // Create input channel from a file path
-        read_ch = channel.fromPath(params.reads)
+        read_ch = channel.fromPath(params.input)
 
         // Call processes
 
@@ -322,10 +353,10 @@ Configure both targets to publish into a `fastqc/` subdirectory.
 
 At this point, we have a one-step QC workflow that should be fully functional.
 
-We could use the `--reads` parameter to specify an input from the command line, but during development we can be lazy and just use the default we set up in the parameter declaration.
+We run with `-profile test` to use the default value set up in the test profile, avoiding the need to write the path on the command line.
 
 ```bash
-nextflow run rnaseq.nf
+nextflow run rnaseq.nf -profile test
 ```
 
 ??? success "Command output"
@@ -475,7 +506,7 @@ Add the process call in the workflow block:
 
         main:
         // Create input channel from a file path
-        read_ch = channel.fromPath(params.reads)
+        read_ch = channel.fromPath(params.input)
 
         // Initial quality control
         FASTQC(read_ch)
@@ -496,7 +527,7 @@ Add the process call in the workflow block:
 
         main:
         // Create input channel from a file path
-        read_ch = channel.fromPath(params.reads)
+        read_ch = channel.fromPath(params.input)
 
         // Initial quality control
         FASTQC(read_ch)
@@ -586,7 +617,7 @@ The output configuration is complete.
 The workflow now includes both initial QC and adapter trimming.
 
 ```bash
-nextflow run rnaseq.nf
+nextflow run rnaseq.nf -profile test
 ```
 
 ??? success "Command output"
@@ -657,10 +688,10 @@ Add a parameter declaration for the genome index archive in `rnaseq.nf`:
     ```groovy title="rnaseq.nf" linenums="11" hl_lines="5-6"
     params {
         // Primary input
-        reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
+        input: Path
 
         // Reference genome archive
-        hisat2_index_zip: Path = "data/genome_index.tar.gz"
+        hisat2_index_zip: Path
     }
     ```
 
@@ -669,7 +700,36 @@ Add a parameter declaration for the genome index archive in `rnaseq.nf`:
     ```groovy title="rnaseq.nf" linenums="11"
     params {
         // Primary input
-        reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
+        input: Path
+    }
+    ```
+
+#### 3.1.2. Add the genome index default to the test profile
+
+Just as we did for `reads` in section 1.1.2, add a default value for the genome index to the test profile in `nextflow.config`:
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="6"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+        }
     }
     ```
 
@@ -777,7 +837,7 @@ We use `#!groovy file(params.hisat2_index_zip)` to provide the genome index arch
 
         main:
         // Create input channel from a file path
-        read_ch = channel.fromPath(params.reads)
+        read_ch = channel.fromPath(params.input)
 
         // Initial quality control
         FASTQC(read_ch)
@@ -796,7 +856,7 @@ We use `#!groovy file(params.hisat2_index_zip)` to provide the genome index arch
 
         main:
         // Create input channel from a file path
-        read_ch = channel.fromPath(params.reads)
+        read_ch = channel.fromPath(params.input)
 
         // Initial quality control
         FASTQC(read_ch)
@@ -904,7 +964,7 @@ The output configuration is complete.
 The workflow now includes all three processing steps: QC, trimming, and alignment.
 
 ```bash
-nextflow run rnaseq.nf
+nextflow run rnaseq.nf -profile test
 ```
 
 ??? success "Command output"

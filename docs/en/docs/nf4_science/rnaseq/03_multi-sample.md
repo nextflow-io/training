@@ -23,13 +23,14 @@ This part builds directly on the workflow produced by Part 2.
     cp solutions/part2/modules/fastqc.nf modules/
     cp solutions/part2/modules/trim_galore.nf modules/
     cp solutions/part2/modules/hisat2_align.nf modules/
+    cp solutions/part2/nextflow.config .
     ```
 
     This gives you a complete single-sample processing workflow.
     You can test that it runs successfully:
 
     ```bash
-    nextflow run rnaseq.nf
+    nextflow run rnaseq.nf -profile test
     ```
 
 ---
@@ -54,17 +55,17 @@ ENCSR000CPO1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO1_1.f
 ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.fastq.gz
 ```
 
-Rename the primary input parameter to `input_csv` and change the default to point to this file.
+Rename the primary input parameter to `input`.
 
 === "After"
 
     ```groovy title="rnaseq.nf" linenums="11" hl_lines="3"
     params {
         // Primary input
-        input_csv: Path = "data/single-end.csv"
+        input: Path
 
         // Reference genome archive
-        hisat2_index_zip: Path = "data/genome_index.tar.gz"
+        hisat2_index_zip: Path
     }
     ```
 
@@ -73,19 +74,49 @@ Rename the primary input parameter to `input_csv` and change the default to poin
     ```groovy title="rnaseq.nf" linenums="11"
     params {
         // Primary input
-        reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
+        reads: Path
 
         // Reference genome archive
-        hisat2_index_zip: Path = "data/genome_index.tar.gz"
+        hisat2_index_zip: Path
+    }
+    ```
+
+### 1.2. Update the test profile for multi-sample input
+
+Update the test profile in `nextflow.config` to provide the CSV file path instead of the single FASTQ path.
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="5"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        }
     }
     ```
 
 Now we need to update the channel creation to read from this CSV.
 
-### 1.2. Update the input channel factory to handle a CSV as input
+### 1.3. Update the channel factory to parse CSV input
 
 We need to load the contents of the file into the channel instead of just the file path itself.
-We use the `.splitCsv()` operator to parse the CSV format, then the `.map()` operator to extract the FASTQ file path from each row.
+We can do this using the same pattern we used in [Part 2 of Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file): applying the [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operator to parse the file, then a `map` operation to extract the FASTQ file path from each row.
 
 === "After"
 
@@ -94,7 +125,7 @@ We use the `.splitCsv()` operator to parse the CSV format, then the `.map()` ope
 
         main:
         // Create input channel from the contents of a CSV file
-        read_ch = channel.fromPath(params.input_csv)
+        read_ch = channel.fromPath(params.input)
             .splitCsv(header: true)
             .map { row -> file(row.fastq_path) }
     ```
@@ -106,17 +137,20 @@ We use the `.splitCsv()` operator to parse the CSV format, then the `.map()` ope
 
         main:
         // Create input channel from a file path
-        read_ch = channel.fromPath(params.reads)
+        read_ch = channel.fromPath(params.input)
     ```
+
+One thing that is new compared to what you encountered in the Hello Nextflow course is that this CSV has a header line, so we add `#!groovy header: true` to the `splitCsv()` call.
+That allows us to reference columns by name in the `map` operation: `#!groovy row.fastq_path` extracts the file path from the `fastq_path` column of each row.
 
 The input handling is updated and the workflow is ready to test.
 
-### 1.3. Run the workflow
+### 1.4. Run the workflow
 
 The workflow now reads sample information from a CSV file and processes all samples in parallel.
 
 ```bash
-nextflow run rnaseq.nf
+nextflow run rnaseq.nf -profile test
 ```
 
 ??? success "Command output"
@@ -176,13 +210,13 @@ Add a parameter to name the output report.
     ```groovy title="rnaseq.nf" linenums="11" hl_lines="8-9"
     params {
         // Primary input
-        input_csv: Path = "data/single-end.csv"
+        input: Path
 
         // Reference genome archive
-        hisat2_index_zip: Path = "data/genome_index.tar.gz"
+        hisat2_index_zip: Path
 
         // Report ID
-        report_id: String = "all_single-end"
+        report_id: String
     }
     ```
 
@@ -191,10 +225,39 @@ Add a parameter to name the output report.
     ```groovy title="rnaseq.nf" linenums="11"
     params {
         // Primary input
-        input_csv: Path = "data/single-end.csv"
+        input: Path
 
         // Reference genome archive
-        hisat2_index_zip: Path = "data/genome_index.tar.gz"
+        hisat2_index_zip: Path
+    }
+    ```
+
+Add the report ID default to the test profile:
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="7"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+            params.report_id = "all_single-end"
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        }
     }
     ```
 
@@ -433,7 +496,7 @@ The output configuration is complete.
 We use `-resume` so that the previous processing steps are cached and only the new MultiQC step runs.
 
 ```bash
-nextflow run rnaseq.nf -resume
+nextflow run rnaseq.nf -profile test -resume
 ```
 
 ??? success "Command output"
@@ -522,7 +585,7 @@ cp rnaseq.nf rnaseq_pe.nf
 
 Now update the parameters and input handling in the new file.
 
-#### 3.1.2. Update the primary input and report ID
+#### 3.1.2. Add a paired-end test profile
 
 We provide a second CSV file containing sample IDs and paired FASTQ file paths in the `data/` directory.
 
@@ -536,39 +599,42 @@ ENCSR000CPO1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO1_1.f
 ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.fastq.gz,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_2.fastq.gz
 ```
 
-Update the `input_csv` default to point to this file and the `report_id` to reflect the data type.
+Add a `test_pe` profile to `nextflow.config` that points to this file and uses a paired-end report ID.
 
 === "After"
 
-    ```groovy title="rnaseq_pe.nf" linenums="12" hl_lines="3 9"
-    params {
-        // Primary input
-        input_csv: Path = "data/paired-end.csv"
+    ```groovy title="nextflow.config" linenums="1" hl_lines="9-13"
+    docker.enabled = true
 
-        // Reference genome archive
-        hisat2_index_zip: Path = "data/genome_index.tar.gz"
-
-        // Report ID
-        report_id: String = "all_paired-end"
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+            params.report_id = "all_single-end"
+        }
+        test_pe {
+            params.input = "${projectDir}/data/paired-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+            params.report_id = "all_paired-end"
+        }
     }
     ```
 
 === "Before"
 
-    ```groovy title="rnaseq_pe.nf" linenums="12"
-    params {
-        // Primary input
-        input_csv: Path = "data/single-end.csv"
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
 
-        // Reference genome archive
-        hisat2_index_zip: Path = "data/genome_index.tar.gz"
-
-        // Report ID
-        report_id: String = "all_single-end"
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+            params.report_id = "all_single-end"
+        }
     }
     ```
 
-The parameter defaults are updated.
+The test profile for paired-end data is ready.
 
 #### 3.1.3. Update the channel factory
 
@@ -578,7 +644,7 @@ The `.map()` operator needs to grab both FASTQ file paths and return them as a l
 
     ```groovy title="rnaseq_pe.nf" linenums="25" hl_lines="4"
         // Create input channel from the contents of a CSV file
-        read_ch = channel.fromPath(params.input_csv)
+        read_ch = channel.fromPath(params.input)
             .splitCsv(header: true)
             .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
     ```
@@ -587,7 +653,7 @@ The `.map()` operator needs to grab both FASTQ file paths and return them as a l
 
     ```groovy title="rnaseq_pe.nf" linenums="25"
         // Create input channel from the contents of a CSV file
-        read_ch = channel.fromPath(params.input_csv)
+        read_ch = channel.fromPath(params.input)
             .splitCsv(header: true)
             .map { row -> file(row.fastq_path) }
     ```
@@ -885,7 +951,7 @@ The paired-end workflow is now fully updated and ready to run.
 We don't use `-resume` since this wouldn't cache, and there's twice as much data to process than before, but it should still complete in under a minute.
 
 ```bash
-nextflow run rnaseq_pe.nf
+nextflow run rnaseq_pe.nf -profile test_pe
 ```
 
 ??? success "Command output"

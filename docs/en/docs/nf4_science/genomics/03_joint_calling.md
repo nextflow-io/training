@@ -281,24 +281,53 @@ The joint genotyping process needs two kinds of inputs that we don't have yet: a
 #### 2.1.1. Add a `cohort_name` parameter
 
 We need to provide an arbitrary name for the cohort.
-Later in the training series you'll learn how to use sample metadata for this sort of thing, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
+Later in the training series you'll learn how to use sample metadata for this sort of thing, but for now we just declare a CLI parameter using `params`.
 
 === "After"
 
     ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
-        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+        intervals: Path
 
         // Base name for final output file
-        cohort_name: String = "family_trio"
+        cohort_name: String
     }
     ```
 
 === "Before"
 
     ```groovy title="genomics.nf" linenums="14"
-        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+        intervals: Path
     }
     ```
+
+We also add a default value for the `cohort_name` parameter in the test profile:
+
+=== "After"
+
+    ```groovy title="nextflow.config" linenums="4" hl_lines="7"
+    test {
+        params.input = "${projectDir}/data/samplesheet.csv"
+        params.reference = "${projectDir}/data/ref/ref.fasta"
+        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+        params.reference_dict = "${projectDir}/data/ref/ref.dict"
+        params.intervals = "${projectDir}/data/ref/intervals.bed"
+        params.cohort_name = "family_trio"
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config" linenums="4"
+    test {
+        params.input = "${projectDir}/data/samplesheet.csv"
+        params.reference = "${projectDir}/data/ref/ref.fasta"
+        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+        params.reference_dict = "${projectDir}/data/ref/ref.dict"
+        params.intervals = "${projectDir}/data/ref/intervals.bed"
+    }
+    ```
+
+Now we need to gather the per-sample outputs so they can be processed together.
 
 #### 2.1.2. Gather the HaplotypeCaller outputs across samples
 
@@ -310,7 +339,7 @@ Add the following lines to the `workflow` body, right after the call to GATK_HAP
 
 === "After"
 
-    ```groovy title="genomics.nf" hl_lines="4-6"
+    ```groovy title="genomics.nf" linenums="48" hl_lines="4-6"
             intervals_file
         )
 
@@ -321,7 +350,7 @@ Add the following lines to the `workflow` body, right after the call to GATK_HAP
 
 === "Before"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="48"
             intervals_file
         )
     ```
@@ -499,7 +528,7 @@ Add the call to `GATK_JOINTGENOTYPING` in the workflow body, after the `collect(
 
 === "After"
 
-    ```groovy title="genomics.nf" hl_lines="3-12"
+    ```groovy title="genomics.nf" linenums="53" hl_lines="3-12"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
         // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
@@ -516,7 +545,7 @@ Add the call to `GATK_JOINTGENOTYPING` in the workflow body, after the `collect(
 
 === "Before"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="53"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
     ```
 
@@ -534,7 +563,7 @@ Add the joint VCF and its index to the `publish:` section of the workflow:
 
 === "After"
 
-    ```groovy title="genomics.nf" hl_lines="5-6"
+    ```groovy title="genomics.nf" linenums="66" hl_lines="5-6"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -545,7 +574,7 @@ Add the joint VCF and its index to the `publish:` section of the workflow:
 
 === "Before"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="66"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -561,7 +590,7 @@ We'll put them at the root of the results directory since this is the final outp
 
 === "After"
 
-    ```groovy title="genomics.nf" hl_lines="11-16"
+    ```groovy title="genomics.nf" linenums="74" hl_lines="11-16"
     output {
         indexed_bam {
             path 'indexed_bam'
@@ -583,7 +612,7 @@ We'll put them at the root of the results directory since this is the final outp
 
 === "Before"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="74"
     output {
         indexed_bam {
             path 'indexed_bam'
