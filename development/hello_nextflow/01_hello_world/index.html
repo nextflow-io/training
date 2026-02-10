@@ -5590,32 +5590,54 @@ This will make it easy to find all configurable parameters at a glance.</p>
 <a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="go">[72/394147] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
+<details class="question">
+<summary>If it didn't work</summary>
+<p>If that failed with an error that looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>ERROR ~ Script compilation error
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>- file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>- cause: you tried to assign a value to the class &#39;java.lang.String&#39;
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>@ line 24, column 12.
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Holà mundo!&#39;
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>              ^
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>
+<a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>1 error
+<a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>
+<a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a>
+<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>-- Check &#39;.nextflow.log&#39; file for details
+</code></pre></div>
+<p>Then you're probably using the older v1 Nextflow language parser.
+This was mentioned at the start of the course, but maybe you missed it.
+Check the <a href="../../info/nxf_versions/">Nextflow versions</a> help material.</p>
+<p>In short, if you're using Nextflow <code>25.10</code> then you need to enable the v2 language parser:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
+</code></pre></div>
+</details>
 <p>The output will be in the same place as previously, but the contents should be updated with the new text.</p>
 <details class="abstract">
 <summary>File contents</summary>
-<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">Holà mundo!</span>
+<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Holà mundo!</span>
 </code></pre></div>
 </details>
 <p>Nextflow used the default value of the greeting parameter to create the output.</p>
 <h4 id="343-override-the-default-value">3.4.3. Override the default value<a class="headerlink" href="#343-override-the-default-value" title="Permanent link">&para;</a></h4>
 <p>If you provide the parameter on the command line, the CLI value will override the default value.</p>
 <p>Try it out:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Konnichiwa!&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Konnichiwa!&#39;</span>
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
-<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>
-<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="go">Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582</span>
-<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
-<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="go">[6f/a12a91] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582</span>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a><span class="go">[6f/a12a91] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
 <p>Once again, you should find the corresponding updated output in your results directory.</p>
 <details class="abstract">
 <summary>File contents</summary>
-<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="go">Konnichiwa!</span>
+<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">Konnichiwa!</span>
 </code></pre></div>
 </details>
 <div class="admonition note">
@@ -5645,15 +5667,15 @@ This means Nextflow will only run processes that you've added or modified since 
 <li>If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.</li>
 </ul>
 <p>To use it, simply add <code>-resume</code> to your command and run it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>-resume
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
-<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
-<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5</span>
-<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>
-<a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="hll"><span class="go">[62/49a1f8] sayHello | 1 of 1, cached: 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5</span>
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a><span class="hll"><span class="go">[62/49a1f8] sayHello | 1 of 1, cached: 1 ✔</span>
 </span></code></pre></div>
 </details>
 <p>The console output should look familiar, but there's one thing that's a little different compared to before.</p>
@@ -5670,34 +5692,34 @@ Here's how to do that.</p>
 <p>Whenever you launch a nextflow workflow, a line gets written to a log file called <code>history</code>, under a hidden directory called <code>.nextflow</code> in the current working directory.</p>
 <details class="abstract">
 <summary>File contents</summary>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1">1</a></span>
-<span class="normal"><a href="#__codelineno-52-2">2</a></span>
-<span class="normal"><a href="#__codelineno-52-3">3</a></span>
-<span class="normal"><a href="#__codelineno-52-4">4</a></span>
-<span class="normal"><a href="#__codelineno-52-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
-<a id="__codelineno-52-2" name="__codelineno-52-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
-<a id="__codelineno-52-3" name="__codelineno-52-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
-<a id="__codelineno-52-4" name="__codelineno-52-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
-<a id="__codelineno-52-5" name="__codelineno-52-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1">1</a></span>
+<span class="normal"><a href="#__codelineno-54-2">2</a></span>
+<span class="normal"><a href="#__codelineno-54-3">3</a></span>
+<span class="normal"><a href="#__codelineno-54-4">4</a></span>
+<span class="normal"><a href="#__codelineno-54-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
+<a id="__codelineno-54-2" name="__codelineno-54-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
+<a id="__codelineno-54-3" name="__codelineno-54-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
+<a id="__codelineno-54-4" name="__codelineno-54-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
+<a id="__codelineno-54-5" name="__codelineno-54-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 </code></pre></div></td></tr></table></div>
 </details>
 <p>This file gives you the timestamp, run name, status, revision ID, session ID and full command line for every Nextflow run that has been launched from within the current working directory.</p>
 <p>A more convenient way to access this information is to use the <code>nextflow log</code> command.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>nextflow<span class="w"> </span>log
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>nextflow<span class="w"> </span>log
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1">1</a></span>
-<span class="normal"><a href="#__codelineno-54-2">2</a></span>
-<span class="normal"><a href="#__codelineno-54-3">3</a></span>
-<span class="normal"><a href="#__codelineno-54-4">4</a></span>
-<span class="normal"><a href="#__codelineno-54-5">5</a></span>
-<span class="normal"><a href="#__codelineno-54-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
-<a id="__codelineno-54-2" name="__codelineno-54-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
-<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
-<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
-<a id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
-<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1">1</a></span>
+<span class="normal"><a href="#__codelineno-56-2">2</a></span>
+<span class="normal"><a href="#__codelineno-56-3">3</a></span>
+<span class="normal"><a href="#__codelineno-56-4">4</a></span>
+<span class="normal"><a href="#__codelineno-56-5">5</a></span>
+<span class="normal"><a href="#__codelineno-56-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
+<a id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
+<a id="__codelineno-56-4" name="__codelineno-56-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
+<a id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
+<a id="__codelineno-56-6" name="__codelineno-56-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>This will output the contents of the log file to the terminal, augmented with a header line.</p>
@@ -5715,22 +5737,22 @@ In that case, the session ID stays the same.</p>
 You can also use the Nextflow log to look up a run based on its timestamp and/or command line.</p>
 <h4 id="432-do-a-dry-run">4.3.2. Do a dry run<a class="headerlink" href="#432-do-a-dry-run" title="Permanent link">&para;</a></h4>
 <p>First we use the dry run flag <code>-n</code> to check what will be deleted given the command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>golden_cantor<span class="w"> </span>-n
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>golden_cantor<span class="w"> </span>-n
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68</span>
 </code></pre></div>
 </details>
 <p>Your output will have different task directory names and may have a different number of lines, but it should look similar to the example.</p>
 <p>If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete. Make sure to change <code>golden_cantor</code> in the example command to whatever is the corresponding latest run name in your log.</p>
 <h4 id="433-proceed-with-deletion">4.3.3. Proceed with deletion<a class="headerlink" href="#433-proceed-with-deletion" title="Permanent link">&para;</a></h4>
 <p>If the output looks as expected and you want to proceed with the deletion, re-run the command with the <code>-f</code> flag instead of <code>-n</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>golden_cantor<span class="w"> </span>-f
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>golden_cantor<span class="w"> </span>-f
 </code></pre></div>
 <details class="success">
 <summary>Command output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68</span>
 </code></pre></div>
 </details>
 <p>The output should be similar to before, but now saying 'Removed' instead of 'Would remove'.
