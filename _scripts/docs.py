@@ -29,7 +29,7 @@ import shutil
 import subprocess
 import sys
 from http.server import HTTPServer, SimpleHTTPRequestHandler
-from multiprocessing.pool import ThreadPool
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import typer
@@ -185,8 +185,8 @@ def build_all():
     cpu_count = os.cpu_count() or 1
     pool_size = min(cpu_count * 2, len(langs))
 
-    with ThreadPool(pool_size) as p:
-        p.map(build_lang, langs)
+    with ThreadPoolExecutor(max_workers=pool_size) as executor:
+        list(executor.map(build_lang, langs))
 
     console.print("[green]All builds complete[/green]")
 
