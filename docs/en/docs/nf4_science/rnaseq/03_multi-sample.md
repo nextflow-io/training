@@ -268,7 +268,7 @@ Now we need to prepare the inputs for the MultiQC process.
 We need to give the `MULTIQC` process all the QC-related outputs from previous steps bundled together.
 
 For that, we use the `.mix()` operator, which aggregates multiple channels into a single one.
-We start from `Channel.empty()` and mix in all the output channels we want to combine.
+We start from `channel.empty()` and mix in all the output channels we want to combine.
 This is cleaner than chaining `.mix()` onto one of the output channels directly, because it treats all inputs symmetrically.
 
 In our workflow, the QC-related outputs to aggregate are:
@@ -290,7 +290,7 @@ Add these lines to the workflow body after the `HISAT2_ALIGN` call:
         HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
 
         // Comprehensive QC report generation
-        multiqc_files_ch = Channel.empty().mix(
+        multiqc_files_ch = channel.empty().mix(
             FASTQC.out.zip,
             FASTQC.out.html,
             TRIM_GALORE.out.trimming_reports,
@@ -848,7 +848,7 @@ Update the `.mix()` block in `rnaseq_pe.nf` to include both:
 === "After"
 
     ```groovy title="rnaseq_pe.nf" linenums="40" hl_lines="5 6"
-        multiqc_files_ch = Channel.empty().mix(
+        multiqc_files_ch = channel.empty().mix(
             FASTQC.out.zip,
             FASTQC.out.html,
             TRIM_GALORE.out.trimming_reports,
@@ -861,7 +861,7 @@ Update the `.mix()` block in `rnaseq_pe.nf` to include both:
 === "Before"
 
     ```groovy title="rnaseq_pe.nf" linenums="40"
-        multiqc_files_ch = Channel.empty().mix(
+        multiqc_files_ch = channel.empty().mix(
             FASTQC.out.zip,
             FASTQC.out.html,
             TRIM_GALORE.out.trimming_reports,

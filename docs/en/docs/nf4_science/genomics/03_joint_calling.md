@@ -197,7 +197,7 @@ With the module, publish targets, and output block all updated, we can test the 
 Run the workflow to verify the changes work.
 
 ```bash
-nextflow run genomics.nf
+nextflow run genomics.nf -profile test
 ```
 
 ??? success "Command output"
@@ -285,7 +285,7 @@ Later in the training series you'll learn how to use sample metadata for this so
 
 === "After"
 
-    ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
+    ```groovy title="genomics.nf" linenums="18" hl_lines="3-4"
         intervals: Path
 
         // Base name for final output file
@@ -295,7 +295,7 @@ Later in the training series you'll learn how to use sample metadata for this so
 
 === "Before"
 
-    ```groovy title="genomics.nf" linenums="14"
+    ```groovy title="genomics.nf" linenums="18"
         intervals: Path
     }
     ```
@@ -507,7 +507,8 @@ Add the import statement to `genomics.nf`, below the existing import statements:
 
 === "After"
 
-    ```groovy title="genomics.nf" linenums="21" hl_lines="3"
+    ```groovy title="genomics.nf" linenums="3" hl_lines="4"
+    // Module INCLUDE statements
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
@@ -515,7 +516,8 @@ Add the import statement to `genomics.nf`, below the existing import statements:
 
 === "Before"
 
-    ```groovy title="genomics.nf" linenums="21"
+    ```groovy title="genomics.nf" linenums="3"
+    // Module INCLUDE statements
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     ```
@@ -633,7 +635,7 @@ With the process, publish targets, and output block all in place, we can test th
 Run the workflow to verify everything works.
 
 ```bash
-nextflow run genomics.nf -resume
+nextflow run genomics.nf -profile test -resume
 ```
 
 ??? success "Command output"

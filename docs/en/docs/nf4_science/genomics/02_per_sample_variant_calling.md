@@ -1218,7 +1218,7 @@ We can do this using the same pattern we used in [Part 2 of Hello Nextflow](../.
 
     ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
         // Create input channel from a CSV file listing input file paths
-        reads_ch = Channel.fromPath(params.input)
+        reads_ch = channel.fromPath(params.input)
                 .splitCsv(header: true)
                 .map { row -> file(row.reads_bam) }
     ```
@@ -1239,10 +1239,10 @@ That allows us to reference columns by name in the `map` operation: `#!groovy ro
 
 ### 4.4. Run the workflow
 
-Run the workflow one more time. This should produce the same result as before, right?
+Run the workflow one more time.
 
 ```bash
-nextflow run genomics.nf -profile test -resume
+nextflow run genomics.nf -profile test
 ```
 
 ??? success "Command output"
@@ -1252,13 +1252,12 @@ nextflow run genomics.nf -profile test -resume
 
     ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 
-    [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
-    [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
+    executor >  local (6)
+    [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+    [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3 ✔
     ```
 
-Yes! In fact, Nextflow correctly detects that the process calls are exactly the same, and doesn't even bother re-running everything, since we were running with `-resume`.
-
-And that's it! Our simple variant calling workflow has all the basic features we wanted.
+This should produce the same result as before. Our simple variant calling workflow now has all the basic features we wanted.
 
 ### Takeaway
 

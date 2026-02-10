@@ -1,5 +1,9 @@
 #!/usr/bin/env nextflow
 
+// Module INCLUDE statements
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+
 /*
  * Pipeline parameters
  */
@@ -14,15 +18,11 @@ params {
     intervals: Path
 }
 
-// Include modules
-include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
-
 workflow {
 
     main:
     // Create input channel from a CSV file listing input file paths
-    reads_ch = Channel.fromPath(params.input)
+    reads_ch = channel.fromPath(params.input)
             .splitCsv(header: true)
             .map { row -> file(row.reads_bam) }
 
