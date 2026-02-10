@@ -14,7 +14,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "Translation mode"
+        description: >-
+          normal: incrementally update translations based on English changes since the last translation PR.
+          fix: scan all existing translations for structural issues and re-translate broken files from scratch.
         type: choice
         options:
           - normal
@@ -26,10 +28,6 @@ on:
       since:
         description: "Compare since this commit (default: auto-detect from last translation PR)"
         type: string
-      dry_run:
-        description: "Dry run (preview only)"
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -56,7 +54,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          uv run -q translate.py ci-detect \
+          uv run -q python -m translate ci-detect \
             ${{ inputs.language && format('--language "{0}"', inputs.language) || '' }} \
             ${{ inputs.since && format('--since "{0}"', inputs.since) || '' }} \
             ${{ inputs.mode == 'fix' && '--fix' || '' }} \
@@ -78,31 +76,18 @@ jobs:
       - uses: astral-sh/setup-uv@v7
 
       - name: Translate ${{ matrix.language }}
-        if: ${{ !inputs.dry_run }}
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         working-directory: _scripts
         run: >
-          uv run -q translate.py sync ${{ matrix.language }}
+          uv run -q python -m translate sync ${{ matrix.language }}
           --log translate-${{ matrix.language }}.json
           ${{ inputs.mode == 'fix' && '--fix' || '' }}
 
-      - name: Dry run ${{ matrix.language }}
-        if: ${{ inputs.dry_run }}
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        working-directory: _scripts
-        run: >
-          uv run -q translate.py sync ${{ matrix.language }}
-          --dry-run
-          ${{ inputs.mode == 'fix' && '--fix' || '' }}
-
       - name: Upload translation artifacts
-        if: ${{ !inputs.dry_run && success() }}
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: translation-${{ matrix.language }}
@@ -111,7 +96,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: Upload translation log
-        if: ${{ !inputs.dry_run && always() }}
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: log-${{ matrix.language }}
@@ -121,7 +106,7 @@ jobs:
 
   merge:
     needs: [detect, translate]
-    if: always() && needs.detect.outputs.has_work == 'true' && !inputs.dry_run && !cancelled()
+    if: always() && needs.detect.outputs.has_work == 'true' && !cancelled()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -170,7 +155,7 @@ jobs:
       - name: Delete orphaned translation files
         if: steps.check.outputs.has_artifacts == 'true'
         working-directory: _scripts
-        run: uv run -q translate.py ci-delete-orphans
+        run: uv run -q python -m translate ci-delete-orphans
 
       - name: Create PR
         if: steps.check.outputs.has_artifacts == 'true'
@@ -190,4 +175,4 @@ jobs:
             # Get full commit message for body (passed via env var to handle multi-line)
             export TRIGGER_COMMIT_MESSAGE=$(git log -1 --format=%B ${{ github.sha }})
           fi
-          uv run -q translate.py ci-pr --trigger "$TRIGGER"
+          uv run -q python -m translate ci-pr --trigger "$TRIGGER"

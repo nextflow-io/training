@@ -41,7 +41,9 @@ prettier --write docs/**/*.md
     - `side_quests/` - Advanced topics
   - `mkdocs.yml` - Site navigation and configuration
 - `docs/{lang}/` - Translated content (pt, es, fr, it, ko, pl, tr)
-- `_scripts/` - Translation and build scripts
+  - `glossary.yml` - Per-language glossary for deterministic post-processing
+  - `llm-prompt.md` - Language-specific translation instructions for the LLM
+- `_scripts/` - Translation package (`translate/`) and build scripts (`docs.py`)
 - `hello-nextflow/`, `nf4-science/`, etc. - Example Nextflow scripts for lessons
 - `.github/check_headings.py` - Validates heading numbering
 
