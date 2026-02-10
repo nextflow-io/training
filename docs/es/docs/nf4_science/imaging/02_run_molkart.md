@@ -27,7 +27,7 @@ Características clave de los pipelines de nf-core:
 
 !!! tip "¿Quiere aprender más sobre nf-core?"
 
-    Para una introducción detallada al desarrollo de pipelines de nf-core, consulte el curso de entrenamiento [Hello nf-core](../../hello_nf-core/index.md).
+    Para una introducción detallada al desarrollo de pipelines de nf-core, consulte el curso de capacitación [Hello nf-core](../../hello_nf-core/index.md).
     Cubre cómo crear y personalizar pipelines de nf-core desde cero.
 
 ### 1.2. El pipeline molkart
@@ -64,7 +64,7 @@ Esto crea un directorio `molkart/` que contiene el código fuente completo del p
 
     Típicamente, ejecutaría pipelines de nf-core directamente desde GitHub usando `nextflow run nf-core/molkart -r 1.2.0`.
     Nextflow descarga automáticamente la versión del pipeline solicitada para usted en `$HOME/.nextflow/assets/nf-core/molkart` y lo ejecuta desde allí.
-    Sin embargo, para este entrenamiento, estamos clonando el pipeline a un directorio local diferente para que podamos inspeccionar el código más fácilmente.
+    Sin embargo, para esta capacitación, estamos clonando el pipeline a un directorio local diferente para que podamos inspeccionar el código más fácilmente.
 
 ### 2.1. Comprender los requisitos de contenedores
 
@@ -200,7 +200,7 @@ Esta vez, Nextflow:
     - Los contenedores aseguran reproducibilidad - las mismas versiones exactas de software se ejecutan en todas partes
     - No necesita instalar manualmente docenas de herramientas y sus dependencias
 
-    Para más detalles sobre contenedores en Nextflow, consulte [Hello Containers](../../hello_nextflow/05_hello_containers.md) del entrenamiento Hello Nextflow.
+    Para más detalles sobre contenedores en Nextflow, consulte [Hello Containers](../../hello_nextflow/05_hello_containers.md) de la capacitación Hello Nextflow.
 
 ### 2.3. Monitorear la ejecución
 
@@ -372,7 +372,7 @@ El informe incluye:
 - Métricas de calidad de segmentación
 - Número de células y puntos detectados
 
-!!! Tip
+!!! Tip "Consejo"
 
     Los informes MultiQC se incluyen típicamente en todos los pipelines de nf-core.
     Siempre proporcionan una visión general de alto nivel de la ejecución del pipeline y la calidad de los datos.
@@ -426,7 +426,7 @@ Esto muestra:
 - Uso de CPU y memoria
 - Qué tareas fueron cacheadas vs. ejecutadas
 
-!!! Tip
+!!! Tip "Consejo"
 
     Estos informes son increíblemente útiles para optimizar la asignación de recursos y solucionar problemas de rendimiento.
 
@@ -477,7 +477,7 @@ La diferencia clave con Hello World:
 - Los archivos de salida pueden ser bastante grandes (máscaras de segmentación, imágenes procesadas)
 - Múltiples archivos de entrada y salida por tarea
 
-!!! Tip
+!!! Tip "Consejo"
 
     Si un proceso falla, puede navegar a su directorio de trabajo, examinar `.command.err` para mensajes de error e incluso re-ejecutar `.command.sh` manualmente para depurar el problema.
 
@@ -551,7 +551,7 @@ Resume es particularmente valioso cuando:
 - Su conexión de red se interrumpe durante la descarga de datos
 - Desea agregar salidas adicionales sin rehacer el cómputo
 
-!!! Warning
+!!! Warning "Advertencia"
 
     Resume solo funciona si no ha cambiado los datos de entrada, el código del pipeline o los parámetros.
     Si cambia cualquiera de estos, Nextflow correctamente re-ejecutará las tareas afectadas.

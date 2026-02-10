@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-En esta quinta parte del curso de entrenamiento Hello nf-core, le mostramos cómo usar el plugin nf-schema para validar las entradas y parámetros del pipeline.
+En esta quinta parte del curso de capacitación Hello nf-core, le mostramos cómo usar el plugin nf-schema para validar las entradas y parámetros del pipeline.
 
 ??? info "Cómo comenzar desde esta sección"
 
@@ -691,7 +691,7 @@ nextflow run . --outdir core-hello-results -profile test,docker
 
 ¡Excelente! El pipeline se ejecuta correctamente y la validación pasa en silencio.
 La advertencia sobre `--character` es solo informativa ya que no está definido en el schema.
-Si lo desea, use lo que ha aprendido para agregar validación para ese parámetro también.
+¡Si lo desea, use lo que ha aprendido para agregar validación para ese parámetro también!
 
 #### 2.7.2. Probar con entrada inválida
 
@@ -791,6 +791,6 @@ Ha implementado y probado tanto la validación de parámetros como la validació
 
 ### ¿Qué sigue?
 
-¡Ha completado las cinco partes del curso de entrenamiento Hello nf-core!
+¡Ha completado las cinco partes del curso de capacitación Hello nf-core!
 
 Continúe al [Resumen](summary.md) para reflexionar sobre lo que ha construido y aprendido.

@@ -54,9 +54,9 @@ Antes de emprender esta misión secundaria, debe:
 
 ## 0. Comenzar
 
-#### Abrir el codespace de entrenamiento
+#### Abrir el codespace de capacitación
 
-Si aún no lo ha hecho, asegúrese de abrir el entorno de entrenamiento como se describe en la [Configuración del Entorno](../envsetup/index.md).
+Si aún no lo ha hecho, asegúrese de abrir el entorno de capacitación como se describe en la [Configuración del Entorno](../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -90,7 +90,7 @@ El flujo de trabajo que probaremos es un subconjunto del flujo de trabajo Hello 
 
 ??? example "¿Qué hace el flujo de trabajo Hello Nextflow?"
 
-    Si no ha realizado el entrenamiento de [Hello Nextflow](../hello_nextflow/index.md), aquí hay una descripción rápida de lo que hace este flujo de trabajo simple.
+    Si no ha realizado la capacitación de [Hello Nextflow](../hello_nextflow/index.md), aquí hay una descripción rápida de lo que hace este flujo de trabajo simple.
 
     El flujo de trabajo toma un archivo CSV que contiene saludos, ejecuta cuatro pasos de transformación consecutivos sobre ellos y produce un solo archivo de texto que contiene una imagen ASCII de un personaje divertido diciendo los saludos.
 
@@ -112,7 +112,7 @@ Puede ver el código completo del flujo de trabajo a continuación.
 
     ```groovy title="main.nf"
     /*
-    * Pipeline parameters
+    * Parámetros del pipeline
     */
     params.input_file = "greetings.csv"
 
@@ -193,7 +193,7 @@ executor >  local (6)
 
 Analicemos lo que acaba de suceder.
 
-Ejecutó el flujo de trabajo con los parámetros predeterminados, confirmó que funcionó y está satisfecho con los resultados. Esta es la esencia de las pruebas. Si trabajó en el curso de entrenamiento Hello Nextflow, habrá notado que siempre comenzamos cada sección ejecutando el flujo de trabajo que estábamos usando como punto de partida, para confirmar que todo está configurado correctamente.
+Ejecutó el flujo de trabajo con los parámetros predeterminados, confirmó que funcionó y está satisfecho con los resultados. Esta es la esencia de las pruebas. Si trabajó en el curso de capacitación Hello Nextflow, habrá notado que siempre comenzamos cada sección ejecutando el flujo de trabajo que estábamos usando como punto de partida, para confirmar que todo está configurado correctamente.
 
 Las pruebas de software esencialmente hacen este proceso por nosotros.
 
@@ -371,7 +371,7 @@ when {
 }
 ```
 
-2. nf-test verificó el estado del pipeline y lo comparó con el bloque `when`:
+2. nf-test verificó el estado del pipeline y lo comparó con el bloque `then`:
 
 ```groovy title="tests/main.nf.test"
 then {
@@ -386,6 +386,8 @@ ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-
 ```
 
 Entonces, ¿cuál fue el problema? Recuerde que el pipeline tiene un archivo greetings.csv en el directorio del proyecto. Cuando nf-test ejecuta el pipeline, buscará este archivo, pero no puede encontrarlo. El archivo está ahí, ¿qué está pasando? Bueno, si miramos la ruta, podemos ver que la prueba está ocurriendo en la ruta `./nf-test/tests/longHashString/`. Al igual que Nextflow, nf-test crea un nuevo directorio para cada prueba para mantener todo aislado. El archivo de datos no se encuentra allí, por lo que debemos corregir la ruta al archivo en la prueba original.
+
+Volvamos al archivo de prueba y cambiemos la ruta al archivo en el bloque `when`.
 
 Puede estar preguntándose cómo vamos a apuntar a la raíz del pipeline en la prueba. Dado que esta es una situación común, nf-test tiene una gama de variables globales que podemos usar para facilitarnos la vida. Puede encontrar la lista completa [aquí](https://www.nf-test.com/docs/testcases/global_variables/) pero mientras tanto usaremos la variable `projectDir`, que significa la raíz del proyecto del pipeline.
 
@@ -932,7 +934,7 @@ Ejecutemos la prueba para ver si funciona.
 nf-test test tests/main.sayhello.nf.test
 ```
 
-```console title="Falla la prueba del proceso"
+```console title="Pasa la prueba del proceso"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3

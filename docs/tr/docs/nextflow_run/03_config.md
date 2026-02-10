@@ -1,6 +1,6 @@
 # Bölüm 3: Çalıştırma yapılandırması
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bu bölümde, bir Nextflow pipeline'ının yapılandırmasını yönetmeyi keşfedeceğiz; davranışını özelleştirmek, farklı ortamlara uyarlamak ve kaynak kullanımını optimize etmek için _workflow kodunun tek bir satırını değiştirmeden_.
 
@@ -986,7 +986,7 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
     ```
 
 Neyse ki, Nextflow tüm bunları basitleştirir.
-İlgili özellikleri, `cpus`, `memory` ve `queue` gibi (tüm kullanılabilir seçenekler için [Process direktifleri](https://www.nextflow.io/docs/latest/reference/process.html#process-directives) belgesine bakın) yalnızca bir kez belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar.
+İlgili özellikleri, `cpus`, `memory` ve `queue` gibi (tüm kullanılabilir seçenekler için [Process direktifleri](https://www.nextflow.io/docs/latest/reference/process.html#process-directives) belgesine bakın) yalnızca bir kez belirtebilmeniz için standartlaştırılmış bir sözdizi sağlar.
 Ardından, çalışma zamanında, Nextflow executor ayarına göre uygun backend'e özgü betikleri oluşturmak için bu ayarları kullanacaktır.
 
 Bu standartlaştırılmış sözdizimini bir sonraki bölümde ele alacağız.

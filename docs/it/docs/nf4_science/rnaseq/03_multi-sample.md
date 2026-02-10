@@ -2,18 +2,18 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In questa parte finale del corso, porteremo il nostro semplice workflow al livello successivo trasformandolo in un potente strumento di automazione batch per gestire un numero arbitrario di campioni.
+In questa parte finale del corso, porteremo il nostro semplice flusso di lavoro al livello successivo trasformandolo in un potente strumento di automazione batch per gestire un numero arbitrario di campioni.
 E mentre ci siamo, lo modificheremo anche per accettare dati paired-end, che sono più comuni negli studi più recenti.
 
 Lo faremo in tre fasi:
 
-1. Far accettare al workflow campioni di input multipli e parallelizzare l'esecuzione
+1. Far accettare al flusso di lavoro campioni di input multipli e parallelizzare l'esecuzione
 2. Aggiungere la generazione di report QC completi
 3. Passare a dati RNAseq paired-end
 
 ---
 
-## 1. Far accettare al workflow campioni di input multipli e parallelizzare l'esecuzione
+## 1. Far accettare al flusso di lavoro campioni di input multipli e parallelizzare l'esecuzione
 
 Dovremo cambiare il modo in cui gestiamo l'input.
 
@@ -45,7 +45,7 @@ params {
 }
 ```
 
-### 1.2. Aggiornare la factory del canale di input per gestire un CSV come input
+### 1.2. Aggiornare la fabbrica del canale di input per gestire un CSV come input
 
 Vogliamo caricare il contenuto del file nel canale invece del solo percorso del file, quindi usiamo l'operatore `.splitCsv()` per analizzare il formato CSV, poi l'operatore `.map()` per acquisire l'informazione specifica che vogliamo (il percorso del file FASTQ).
 
@@ -56,7 +56,7 @@ Vogliamo caricare il contenuto del file nel canale invece del solo percorso del 
         .map { row -> file(row.fastq_path) }
 ```
 
-### 1.3. Eseguire il workflow per verificare che funzioni
+### 1.3. Eseguire il flusso di lavoro per verificare che funzioni
 
 ```bash
 nextflow run rnaseq.nf
@@ -77,7 +77,7 @@ nextflow run rnaseq.nf
 
 Questa volta vediamo che ogni passaggio viene eseguito 6 volte, su ciascuno dei 6 file di dati che abbiamo fornito.
 
-Questo è tutto ciò che è servito per far eseguire il workflow su file multipli!
+Questo è tutto ciò che è servito per far eseguire il flusso di lavoro su file multipli!
 Nextflow gestisce tutto il parallelismo per noi.
 
 ---
@@ -120,7 +120,7 @@ process MULTIQC {
 }
 ```
 
-### 2.2. Importare il modulo nel file del workflow
+### 2.2. Importare il modulo nel file del flusso di lavoro
 
 Aggiungere l'istruzione `include { MULTIQC } from './modules/multiqc.nf'` al file `rnaseq.nf`:
 
@@ -153,9 +153,9 @@ Dobbiamo dare al processo `MULTIQC` tutti gli output relativi al QC dai passaggi
 
 Per questo, useremo l'operatore `.mix()`, che aggrega più canali in uno solo.
 
-Se avessimo quattro processi chiamati A, B, C e D con un semplice canale `.out` ciascuno, la sintassi sarebbe così: `A.out.mix( B.out, C.out, D.out )`. Come si potete vedere, lo si applica al primo dei canali che si vogliono combinare (non importa quale) e si aggiungono tutti gli altri, separati da virgole, nelle parentesi che seguono.
+Se avessimo quattro processi chiamati A, B, C e D con un semplice canale `.out` ciascuno, la sintassi sarebbe così: `A.out.mix( B.out, C.out, D.out )`. Come potete vedere, lo si applica al primo dei canali che si vogliono combinare (non importa quale) e si aggiungono tutti gli altri, separati da virgole, nelle parentesi che seguono.
 
-Nel caso del nostro workflow, abbiamo i seguenti output da aggregare:
+Nel caso del nostro flusso di lavoro, abbiamo i seguenti output da aggregare:
 
 - `FASTQC.out.zip`
 - `FASTQC.out.html`
@@ -165,7 +165,7 @@ Nel caso del nostro workflow, abbiamo i seguenti output da aggregare:
 
 Quindi l'esempio di sintassi diventa:
 
-```groovy title="Applicare .mix() nella chiamata MULTIQC"
+```groovy title="Applying .mix() in the MULTIQC call"
         FASTQC.out.zip.mix(
         FASTQC.out.html,
         TRIM_GALORE.out.trimming_reports,
@@ -180,7 +180,7 @@ E dobbiamo anche dargli il parametro `report_id`.
 
 Questo ci dà quanto segue:
 
-```groovy title="La chiamata MULTIQC completa" linenums="33"
+```groovy title="The completed MULTIQC call" linenums="33"
     // Comprehensive QC report generation
     MULTIQC(
         FASTQC.out.zip.mix(
@@ -193,7 +193,7 @@ Questo ci dà quanto segue:
     )
 ```
 
-Nel contesto del blocco del workflow completo, finisce per apparire così:
+Nel contesto del blocco del flusso di lavoro completo, finisce per apparire così:
 
 ```groovy title="rnaseq.nf" linenums="18"
 workflow {
@@ -224,7 +224,7 @@ workflow {
 }
 ```
 
-### 2.5. Eseguire il workflow per verificare che funzioni
+### 2.5. Eseguire il flusso di lavoro per verificare che funzioni
 
 ```bash
 nextflow run rnaseq.nf -resume
@@ -289,12 +289,12 @@ Quell'ultimo file `all_single-end.html` è il report aggregato completo, comodam
 
 ## 3. Abilitare l'elaborazione di dati RNAseq paired-end
 
-Attualmente il nostro workflow può gestire solo dati RNAseq single-end.
+Attualmente il nostro flusso di lavoro può gestire solo dati RNAseq single-end.
 È sempre più comune vedere dati RNAseq paired-end, quindi vogliamo essere in grado di gestirli.
 
-Rendere il workflow completamente agnostico del tipo di dati richiederebbe l'uso di funzionalità del linguaggio Nextflow leggermente più avanzate, quindi non lo faremo qui, ma possiamo creare una versione per l'elaborazione paired-end per dimostrare cosa deve essere adattato.
+Rendere il flusso di lavoro completamente agnostico del tipo di dati richiederebbe l'uso di funzionalità del linguaggio Nextflow leggermente più avanzate, quindi non lo faremo qui, ma possiamo creare una versione per l'elaborazione paired-end per dimostrare cosa deve essere adattato.
 
-### 3.1. Creare una copia del workflow chiamata `rnaseq_pe.nf`
+### 3.1. Creare una copia del flusso di lavoro chiamata `rnaseq_pe.nf`
 
 ```bash
 cp rnaseq.nf rnaseq_pe.nf
@@ -329,7 +329,7 @@ params {
 }
 ```
 
-### 3.3. Aggiornare la factory del canale
+### 3.3. Aggiornare la fabbrica del canale
 
 Dobbiamo dire all'operatore `.map()` di acquisire ora entrambi i percorsi dei file FASTQ.
 
@@ -486,7 +486,7 @@ Infine, aggiornare l'istruzione di importazione del modulo per usare la versione
 include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
 ```
 
-### 3.8. Eseguire il workflow per verificare che funzioni
+### 3.8. Eseguire il flusso di lavoro per verificare che funzioni
 
 Non usiamo `-resume` poiché questo non verrebbe messo in cache, e c'è il doppio dei dati da elaborare rispetto a prima, ma dovrebbe comunque completarsi in meno di un minuto.
 
@@ -508,17 +508,17 @@ nextflow run rnaseq_pe.nf
     [e6/a3ccd9] MULTIQC          [100%] 1 of 1 ✔
     ```
 
-Ed è tutto! Ora abbiamo due versioni leggermente divergenti del nostro workflow, una per dati single-end read e una per dati paired-end.
-Il passo logico successivo sarebbe rendere il workflow in grado di accettare entrambi i tipi di dati al volo, che è al di fuori dello scopo di questo corso, ma potremmo affrontarlo in un seguito.
+Ed è tutto! Ora abbiamo due versioni leggermente divergenti del nostro flusso di lavoro, una per dati single-end read e una per dati paired-end.
+Il passo logico successivo sarebbe rendere il flusso di lavoro in grado di accettare entrambi i tipi di dati al volo, che è al di fuori dello scopo di questo corso, ma potremmo affrontarlo in un seguito.
 
 ---
 
 ### Takeaway
 
-Sapete come adattare un workflow per campione singolo per parallelizzare l'elaborazione di campioni multipli, generare un report QC completo e adattare il workflow per utilizzare dati read paired-end se necessario.
+Sapete come adattare un flusso di lavoro per campione singolo per parallelizzare l'elaborazione di campioni multipli, generare un report QC completo e adattare il flusso di lavoro per utilizzare dati read paired-end se necessario.
 
 ### Cosa seguirà?
 
-Congratulazioni, ha completato il mini-corso Nextflow Per RNAseq! Celebrate il vostro successo e prendetevi una meritata pausa!
+Congratulazioni, avete completato il mini-corso Nextflow Per RNAseq! Celebrate il vostro successo e prendetevi una meritata pausa!
 
 Successivamente, vi chiediamo di completare un breve sondaggio sulla vostra esperienza con questo corso di formazione, poi vi porteremo a una pagina con collegamenti a ulteriori risorse di formazione e collegamenti utili.

@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -372,7 +372,7 @@ O arquivo de saída final deve conter o caractere tux dizendo as saudações.
 
 É isso; agora você tem um espaço para experimentar sem modificar sua configuração 'normal'.
 
-!!! warning
+!!! warning "Aviso"
 
     Certifique-se de voltar ao diretório anterior antes de passar para a próxima seção!
 
@@ -403,7 +403,7 @@ Este arquivo de parâmetros contém um par chave-valor para cada uma das entrada
 Note o uso de dois pontos (`:`) em vez de sinais de igual (`=`) se você comparar a sintaxe com o arquivo de configuração.
 O arquivo de configuração é escrito em Groovy, enquanto o arquivo de parâmetros é escrito em YAML.
 
-!!! info
+!!! info "Info"
 
     Também fornecemos uma versão JSON do arquivo de parâmetros como exemplo, mas não vamos executar com ela aqui.
     Sinta-se livre para tentar essa por conta própria.
@@ -618,7 +618,7 @@ Agora as saídas são publicadas diretamente em `custom-outdir-cli-2/`, sem o su
         └── UPPER-Holà-output.txt
     ```
 
-!!! tip
+!!! tip "Dica"
 
     A opção `-output-dir` é usada para controlar _onde_ as saídas vão, enquanto a diretiva `path` no bloco de saída controla a _estrutura de subdiretórios_.
 
@@ -671,7 +671,7 @@ nextflow run hello-config.nf --batch my_run
 
 Isso publica saídas em `custom-outdir-config/my_run/`.
 
-!!! note
+!!! note "Nota"
 
     A opção CLI `-output-dir` tem precedência sobre a configuração `outputDir`.
     Se estiver definida, a opção de configuração será ignorada completamente.
@@ -741,7 +741,7 @@ Podemos ir além e compor caminhos de subdiretórios mais complexos.
 Na edição acima, apagamos a distinção entre `intermediates` versus saídas finais estando no nível superior.
 Vamos colocar isso de volta, e também colocar os arquivos em um subdiretório `params.batch`.
 
-!!! tip
+!!! tip "Dica"
 
     Incluir `params.batch` no `path` do bloco de saída, em vez do `outputDir` de configuração, significa que não será sobrescrito com `-output-dir` no CLI.
 
@@ -1078,7 +1078,7 @@ Agora adicionamos o URI à definição do processo `cowpy` usando a diretiva `co
 
 Para ser claro, não estamos _substituindo_ a diretiva `docker`, estamos _adicionando_ uma opção alternativa.
 
-!!! tip
+!!! tip "Dica"
 
     Existem algumas maneiras diferentes de obter o URI para um determinado pacote conda.
     Recomendamos usar a consulta de busca [Seqera Containers](https://seqera.io/containers/), que lhe dará um URI que você pode copiar e colar, mesmo que você não esteja planejando criar um contêiner a partir dele.
@@ -1093,7 +1093,7 @@ nextflow run hello-config.nf --batch conda
 
 ??? success "Saída do comando"
 
-    ```console title="Saída"
+    ```console title="Output"
     N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
@@ -1109,7 +1109,7 @@ Isso deve funcionar sem problemas e produzir as mesmas saídas de antes em `cust
 
 Nos bastidores, o Nextflow recuperou os pacotes Conda e criou o ambiente, o que normalmente requer um pouco de trabalho; então é bom que não tenhamos que fazer nada disso nós mesmos!
 
-!!! note
+!!! note "Nota"
 
     Isso executa rapidamente porque o pacote `cowpy` é bastante pequeno, mas se você estiver trabalhando com pacotes grandes, pode levar um pouco mais de tempo do que o normal na primeira vez, e você pode ver a saída do console ficar 'presa' por um minuto ou mais antes de completar.
     Isso é normal e se deve ao trabalho extra que o Nextflow faz na primeira vez que você usa um novo pacote.
@@ -1152,7 +1152,7 @@ O Nextflow suporta [muitos executores diferentes](https://nextflow.io/docs/lates
 A escolha do executor é definida por uma diretiva de processo chamada `executor`.
 Por padrão, é definido como `local`, então a seguinte configuração está implícita:
 
-```groovy title="Configuração integrada"
+```groovy title="Built-in configuration"
 process {
     executor = 'local'
 }
@@ -1166,7 +1166,7 @@ process {
 }
 ```
 
-!!! warning
+!!! warning "Aviso"
 
     Não podemos realmente testar isso no ambiente de treinamento porque não está configurado para se conectar a um HPC.
 
@@ -1180,7 +1180,7 @@ Infelizmente, cada um desses sistemas usa tecnologias, sintaxes e configuraçõe
 
     Por exemplo, o mesmo trabalho requerendo 8 CPUs e 4GB de RAM para ser executado na fila "my-science-work" precisa ser expresso das seguintes maneiras diferentes dependendo do backend.
 
-    ```bash title="Config para SLURM / submeter usando sbatch"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -1188,7 +1188,7 @@ Infelizmente, cada um desses sistemas usa tecnologias, sintaxes e configuraçõe
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="Config para PBS / submeter usando qsub"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -1196,7 +1196,7 @@ Infelizmente, cada um desses sistemas usa tecnologias, sintaxes e configuraçõe
     #PBS -l mem=4gb
     ```
 
-    ```bash title="Config para SGE / submeter usando qsub"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -1229,7 +1229,7 @@ A maioria das plataformas de computação de alto desempenho permite (e às veze
 Por padrão, o Nextflow usará uma única CPU e 2GB de memória para cada processo.
 As diretivas de processo correspondentes são chamadas `cpus` e `memory`, então a seguinte configuração está implícita:
 
-```groovy title="Configuração integrada" linenums="1"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -1339,7 +1339,7 @@ Ao mesmo tempo, vamos fingir que o processo `cowpy` requer mais recursos do que 
 
 Com esta configuração, todos os processos solicitarão 1GB de memória e uma única CPU (o padrão implícito), exceto o processo `cowpy`, que solicitará 2GB e 2 CPUs.
 
-!!! tip
+!!! tip "Dica"
 
     Se você tiver uma máquina com poucas CPUs e alocar um número alto por processo, poderá ver chamadas de processo sendo enfileiradas uma atrás da outra.
     Isso ocorre porque o Nextflow garante que não solicitemos mais CPUs do que as disponíveis.
@@ -1356,7 +1356,7 @@ Você provavelmente não notará nenhuma diferença real, pois esta é uma carga
 
 É muito útil quando seus processos têm requisitos de recursos diferentes. Ele o capacita a dimensionar corretamente as alocações de recursos que você configura para cada processo com base em dados reais, não em suposições.
 
-!!! tip
+!!! tip "Dica"
 
     Este é apenas um pequeno aperitivo do que você pode fazer para otimizar seu uso de recursos.
     O próprio Nextflow tem uma [lógica de repetição dinâmica](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) realmente interessante embutida para repetir trabalhos que falham devido a limitações de recursos.
@@ -1369,7 +1369,7 @@ Por exemplo, seu cluster pode exigir que você permaneça dentro de certos limit
 
 Você pode usar a diretiva `resourceLimits` para definir as limitações relevantes. A sintaxe se parece com isso quando está sozinha em um bloco de processo:
 
-```groovy title="Exemplo de sintaxe"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -1501,7 +1501,7 @@ nextflow run hello-config.nf -profile my_laptop
 
 Como você pode ver, isso nos permite alternar entre configurações muito convenientemente no tempo de execução.
 
-!!! warning
+!!! warning "Aviso"
 
     O perfil `univ_hpc` não será executado corretamente no ambiente de treinamento, pois não temos acesso a um agendador Slurm.
 
@@ -1518,7 +1518,7 @@ Você pode considerar isso uma alternativa ao uso de um arquivo de parâmetros.
 
 A sintaxe para expressar valores padrão neste contexto se parece com isso, para um perfil que nomeamos `test`:
 
-```groovy title="Exemplo de sintaxe"
+```groovy title="Syntax example"
     test {
         params.<parameter1>
         params.<parameter2>
@@ -1613,7 +1613,7 @@ Isso usará Docker onde possível e produzirá saídas em `custom-outdir-config/
 
 Isso significa que, desde que distribuamos quaisquer arquivos de dados de teste com o código do fluxo de trabalho, qualquer pessoa pode rapidamente experimentar o fluxo de trabalho sem ter que fornecer suas próprias entradas via linha de comando ou arquivo de parâmetros.
 
-!!! tip
+!!! tip "Dica"
 
     Podemos apontar para URLs para arquivos maiores que são armazenados externamente.
     O Nextflow os baixará automaticamente desde que haja uma conexão aberta.
@@ -1752,7 +1752,7 @@ O que tem precedência quando o mesmo parâmetro é definido tanto no arquivo de
 - [ ] O primeiro valor encontrado
 - [ ] Nenhum; causa um erro
 
-Saiba mais: [1.1. Mova os valores padrão para o `nextflow.config`](#11-mova-os-valores-padrão-para-o-nextflowconfig)
+Saiba mais: [1.1. Mova os valores padrão para o `nextflow.config`](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1770,7 +1770,7 @@ Se tanto Docker quanto Conda estão habilitados e um processo tem ambas as diret
 - [ ] O primeiro definido
 - [ ] Causa um erro
 
-Saiba mais: [3. Selecione uma tecnologia de empacotamento de software](#3-selecione-uma-tecnologia-de-empacotamento-de-software)
+Saiba mais: [3. Selecione uma tecnologia de empacotamento de software](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1788,7 +1788,7 @@ Como você define requisitos de recursos para um processo específico no arquivo
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-Saiba mais: [5.3. Defina alocações de recursos para um processo específico](#53-defina-alocações-de-recursos-para-um-processo-específico)
+Saiba mais: [5.3. Defina alocações de recursos para um processo específico](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1798,7 +1798,7 @@ Qual opção de linha de comando gera um relatório de utilização de recursos?
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-Saiba mais: [5.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos](#51-execute-o-fluxo-de-trabalho-para-gerar-um-relatório-de-utilização-de-recursos)
+Saiba mais: [5.1. Execute o fluxo de trabalho para gerar um relatório de utilização de recursos](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1808,7 +1808,7 @@ O que a diretiva `resourceLimits` faz?
 - [x] Limita os recursos máximos que podem ser solicitados
 - [ ] Monitora o uso de recursos
 
-Saiba mais: [5.5. Adicione limites de recursos](#55-adicione-limites-de-recursos)
+Saiba mais: [5.5. Adicione limites de recursos](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1818,7 +1818,7 @@ Qual é o executor padrão no Nextflow?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Saiba mais: [4. Selecione uma plataforma de execução](#4-selecione-uma-plataforma-de-execução)
+Saiba mais: [4. Selecione uma plataforma de execução](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1828,7 +1828,7 @@ Como você especifica um arquivo de parâmetros ao executar o Nextflow?
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-Saiba mais: [1.3. Use um arquivo de parâmetros](#13-use-um-arquivo-de-parâmetros)
+Saiba mais: [1.3. Use um arquivo de parâmetros](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1838,7 +1838,7 @@ Para que os perfis podem ser usados? (Selecione todas as opções que se aplicam
 - [x] Fornecer parâmetros de teste
 - [ ] Definir novos processos
 
-Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-perfis-para-alternar-entre-configurações-predefinidas)
+Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1848,5 +1848,5 @@ Como você especifica múltiplos perfis em um único comando?
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-perfis-para-alternar-entre-configurações-predefinidas)
+Saiba mais: [6. Use perfis para alternar entre configurações predefinidas](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

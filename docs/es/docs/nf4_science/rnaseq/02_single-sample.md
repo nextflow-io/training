@@ -85,7 +85,7 @@ process FASTQC {
 }
 ```
 
-Debería reconocer todas las piezas de lo que aprendió en la Parte 1 y Parte 2 de esta serie de entrenamiento; el único cambio notable es que esta vez estamos usando `mode: symlink` para la directiva `publishDir`, y estamos usando un parámetro para definir el `publishDir`.
+Debería reconocer todas las piezas de lo que aprendió en la Parte 1 y Parte 2 de esta serie de capacitación; el único cambio notable es que esta vez estamos usando `mode: symlink` para la directiva `publishDir`, y estamos usando un parámetro para definir el `publishDir`.
 
 !!! note "Nota"
 
@@ -118,7 +118,7 @@ Use una fábrica de canal básica `.fromPath()` para crear el canal de entrada:
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Crear canal de entrada from a file path
+    // Crear canal de entrada desde una ruta de archivo
     read_ch = channel.fromPath(params.reads)
 
     // Llamar procesos
@@ -131,10 +131,10 @@ workflow {
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Crear canal de entrada from a file path
+    // Crear canal de entrada desde una ruta de archivo
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // Control de calidad inicial
     FASTQC(read_ch)
 
 }
@@ -226,13 +226,13 @@ include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```groovy title="rnaseq.nf" linenums="14"
 workflow {
 
-    // Crear canal de entrada from a file path
+    // Crear canal de entrada desde una ruta de archivo
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // Control de calidad inicial
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // Recorte de adaptadores y control de calidad posterior al recorte
     TRIM_GALORE(read_ch)
 }
 ```
@@ -330,7 +330,7 @@ params {
     // Entrada principal
     reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
 
-    // Reference genome archive
+    // Archivo del genoma de referencia
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 }
 ```
@@ -344,13 +344,13 @@ Además, usamos `file (params.hisat2_index_zip)` para proporcionar a la herramie
 ```groovy title="rnaseq.nf" linenums="16"
 workflow {
 
-    // Crear canal de entrada from a file path
+    // Crear canal de entrada desde una ruta de archivo
     read_ch = channel.fromPath(params.reads)
 
-    // Initial quality control
+    // Control de calidad inicial
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // Recorte de adaptadores y control de calidad posterior al recorte
     TRIM_GALORE(read_ch)
 
     // Alineamiento a un genoma de referencia

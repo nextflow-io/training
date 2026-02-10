@@ -1,5 +1,7 @@
 # Verarbeitung von Dateieingaben
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Wissenschaftliche Analyse-Workflows beinhalten oft die Verarbeitung einer großen Anzahl von Dateien.
 Nextflow bietet leistungsstarke Werkzeuge für die effiziente Handhabung von Dateien und hilft dir dabei, deine Daten mit minimalem Code zu organisieren und zu verarbeiten.
 
@@ -174,7 +176,7 @@ In unserem Workflow können wir den String-Pfad `data/patientA_rep1_normal_R1_00
 
 Bearbeite die `main.nf`, um den String mit `file()` zu umschließen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
         // Create a Path object from a string path
@@ -216,7 +218,7 @@ Der Dateipfad wird jetzt absolut sein, wie in `/workspaces/training/side-quests/
 Beachte auch, dass die Path-Objektklasse `sun.nio.fs.UnixPath` ist: Dies ist Nextflows Art, lokale Dateien darzustellen.
 Wie wir später sehen werden, haben entfernte Dateien andere Klassennamen (wie `nextflow.file.http.XPath` für HTTP-Dateien), aber sie funktionieren alle genau gleich und können in deinen Workflows identisch verwendet werden.
 
-!!! tip
+!!! tip "Tipp"
 
     **Der wichtigste Unterschied:**
 
@@ -231,7 +233,7 @@ Warum ist das hilfreich? Nun, da Nextflow jetzt versteht, dass `myFile` ein Path
 
 Aktualisieren wir unseren Workflow, um die eingebauten Dateiattribute auszugeben:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="5" hl_lines="4-9"
         // Create a Path object from a string path
@@ -287,7 +289,7 @@ Wir stellen dir ein bereits geschriebenes Prozessmodul namens `COUNT_LINES` zur 
 
 Um den Prozess im Workflow zu verwenden, musst du nur eine Include-Anweisung vor dem Workflow-Block hinzufügen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="1" hl_lines="3"
     #!/usr/bin/env nextflow
@@ -340,7 +342,7 @@ Jetzt, da der Prozess für den Workflow verfügbar ist, können wir einen Aufruf
 
 Nimm folgende Änderungen am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="11-12"
         // Create a Path object from a string path
@@ -418,7 +420,7 @@ Sehen wir, was passiert, wenn wir zur Behandlung der Datei als String zurückkeh
 
 Nimm folgende Änderungen am Workflow vor und stelle sicher, dass du die pfadspezifischen print-Anweisungen auskommentierst:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="2 6-11"
         // Create a Path object from a string path
@@ -502,7 +504,7 @@ Die andere Stelle, an der wir vergessen könnten anzugeben, dass Nextflow die Ei
 
 Nimm folgende Änderung am Modul vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="modules/count_lines.nf" linenums="3" hl_lines="5"
     process COUNT_LINES {
@@ -595,11 +597,11 @@ Also versuchte der Prozess, den relativen String `data/patientA_rep1_normal_R1_0
 
 Zusammen zeigen diese beiden Beispiele, wie wichtig es ist, Nextflow mitzuteilen, ob eine Eingabe als Datei behandelt werden soll.
 
-!!! note
+!!! note "Hinweis"
 
     Stelle sicher, dass du beide beabsichtigten Fehler behebst, bevor du zum nächsten Abschnitt übergehst.
 
-### Zusammenfassung
+### Fazit
 
 - Pfad-Strings vs. Path-Objekte: Strings sind nur Text, Path-Objekte sind intelligente Dateireferenzen
 - Die `file()`-Methode konvertiert einen String-Pfad in ein Path-Objekt, mit dem Nextflow arbeiten kann
@@ -635,13 +637,13 @@ Du kannst zum Beispiel mit einem kleinen, lokalen Testsatz entwickeln, bevor du 
 
 Testen wir dies, indem wir den lokalen Pfad, den wir unserem Workflow zur Verfügung stellen, durch einen HTTPS-Pfad ersetzen, der auf eine Kopie derselben Daten zeigt, die in Github gespeichert sind.
 
-!!! warning
+!!! warning "Warnung"
 
     Dies funktioniert nur, wenn du eine aktive Internetverbindung hast.
 
 Öffne `main.nf` erneut und ändere den Eingabepfad wie folgt:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
         // Using a remote file from the internet
@@ -703,7 +705,7 @@ Diese bereitgestellte Datei kann dann als lokale Datei behandelt und per Symlink
 
 Du kannst überprüfen, dass das hier passiert ist, indem du den Inhalt des Arbeitsverzeichnisses am Hash-Wert des Prozesses betrachtest.
 
-??? abstract "Arbeitsverzeichnisinhalt"
+??? abstract "Work-Verzeichnis Inhalt"
 
     Wenn der Prozesshash `8a/2ab7ca` war, könntest du das Arbeitsverzeichnis untersuchen:
 
@@ -725,14 +727,14 @@ Wenn du also erneut dieselbe Datei ausführst und die bereitgestellte Datei nich
 
 Dies zeigt, wie einfach es ist, mit Nextflow zwischen lokalen und entfernten Daten zu wechseln, was eine Schlüsselfunktion von Nextflow ist.
 
-!!! note
+!!! note "Hinweis"
 
     Die eine wichtige Ausnahme zu diesem Prinzip ist, dass du keine Glob-Muster oder Verzeichnispfade mit HTTPS verwenden kannst, weil HTTPS keine mehreren Dateien auflisten kann, sodass du exakte Datei-URLs angeben musst.
     Andere Speicherprotokolle wie Blob-Speicher (`s3://`, `az://`, `gs://`) können jedoch sowohl Globs als auch Verzeichnispfade verwenden.
 
     Hier ist, wie du Glob-Muster mit Cloud-Speicher verwenden könntest:
 
-    ```groovy title="Cloud-Speicher-Beispiele (nicht in dieser Umgebung ausführbar)"
+    ```groovy title="Cloud storage examples (not runnable in this environment)"
     // S3 mit Glob-Mustern - würde mehrere Dateien abgleichen
     ch_s3_files = channel.fromPath('s3://my-bucket/data/*.fastq.gz')
 
@@ -749,7 +751,7 @@ Dies zeigt, wie einfach es ist, mit Nextflow zwischen lokalen und entfernten Dat
 
 Wir werden für den Rest dieser Side Quest zu unseren lokalen Beispieldateien zurückkehren, also wechseln wir die Workflow-Eingabe zurück zur ursprünglichen Datei:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2"
         // Create a Path object from a string path
@@ -777,7 +779,7 @@ Wir werden für den Rest dieser Side Quest zu unseren lokalen Beispieldateien zu
         println "Parent directory: ${myFile.parent}"
     ```
 
-### Zusammenfassung
+### Fazit
 
 - Auf entfernte Daten wird über einen URI zugegriffen (HTTP, FTP, S3, Azure, Google Cloud)
 - Nextflow lädt die Daten automatisch herunter und stellt sie am richtigen Ort bereit, solange diese Pfade an Prozesse übergeben werden
@@ -795,7 +797,7 @@ Bisher haben wir mit jeweils einer Datei gearbeitet, aber in Nextflow werden wir
 
 Eine naive Art, dies zu tun, wäre, die `file()`-Methode mit [`channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) zu kombinieren, wie hier:
 
-```groovy title="Syntax-Beispiel"
+```groovy title="Syntax example"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
                       [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
 ```
@@ -813,7 +815,7 @@ Hier kommt [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/
 
 Aktualisieren wir unseren Workflow, um `channel.fromPath` zu verwenden.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-3"
         // Load files with channel.fromPath
@@ -879,7 +881,7 @@ In unserem ersten Durchlauf mit der Channel Factory haben wir den Code vereinfac
 
 Kehren wir zur Ausgabe der vollständigen Dateiattribute zurück:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-9 12"
         // Load files with channel.fromPath
@@ -941,7 +943,7 @@ Es gibt mehrere Möglichkeiten, wie wir mehr Dateien in den Channel laden könnt
 Hier werden wir dir zeigen, wie du Glob-Muster verwenden kannst, die eine praktische Methode sind, um Datei- und Verzeichnisnamen basierend auf Platzhalterzeichen abzugleichen und abzurufen.
 Der Prozess des Abgleichens dieser Muster wird "Globbing" oder "Dateinamenserweiterung" genannt.
 
-!!! note
+!!! note "Hinweis"
 
     Wie bereits erwähnt, unterstützt Nextflow Globbing zur Verwaltung von Ein- und Ausgabedateien in der Mehrzahl der Fälle, außer bei HTTPS-Dateipfaden, da HTTPS keine mehreren Dateien auflisten kann.
 
@@ -962,7 +964,7 @@ Das ist das Glob-Muster, das wir brauchen.
 
 Jetzt müssen wir nur noch den Dateipfad in der Channel Factory aktualisieren, um dieses Glob-Muster zu verwenden:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7"
       // Load files with channel.fromPath
@@ -1014,7 +1016,7 @@ Wie du sehen kannst, haben wir jetzt zwei Path-Objekte in unserem Channel, was z
 
 Mit dieser Methode können wir so viele oder so wenige Dateien abrufen, wie wir möchten, indem wir einfach das Glob-Muster ändern. Wenn wir es großzügiger gestalten würden, zum Beispiel indem wir alle variablen Teile der Dateinamen durch `*` ersetzen (_z.B._ `data/patient*_rep*_*_R*_001.fastq.gz`), könnten wir alle Beispieldateien im `data`-Verzeichnis erfassen.
 
-### Zusammenfassung
+### Fazit
 
 - `channel.fromPath()` erstellt einen Channel mit Dateien, die einem Muster entsprechen
 - Jede Datei wird als separates Element im Channel ausgegeben
@@ -1046,7 +1048,7 @@ Wir werden unseren Workflow modifizieren, um diese Informationen in drei Schritt
 2. Die Metadaten mit einer Methode namens `tokenize()` trennen
 3. Eine Map verwenden, um die Metadaten zu organisieren
 
-!!! warning
+!!! warning "Warnung"
 
     Du solltest niemals sensible Informationen in Dateinamen kodieren, wie Patientennamen oder andere identifizierende Merkmale, da dies die Patientenprivatsphäre oder andere relevante Sicherheitsbeschränkungen gefährden kann.
 
@@ -1056,7 +1058,7 @@ Der `simpleName` ist ein Dateiattribut, das dem Dateinamen entspricht, der von s
 
 Nimm folgende Änderungen am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-6"
         // Load files with channel.fromPath
@@ -1117,7 +1119,7 @@ Glücklicherweise sind diese Komponenten im ursprünglichen Dateinamen einfach d
 
 Nimm folgende Änderungen am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4"
         // Load files with channel.fromPath
@@ -1203,7 +1205,7 @@ In Nextflow wird das als [Map](https://nextflow.io/docs/latest/script.html#maps)
 Lass uns unsere flache Liste jetzt in eine Map umwandeln.
 Nimm folgende Änderungen am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="4-13"
         // Load files with channel.fromPath
@@ -1268,7 +1270,7 @@ Jetzt sind die Metadaten übersichtlich beschriftet (_z.B._ `[id:patientA, repli
 
 Es wird auch viel einfacher sein, Metadatenelemente tatsächlich im Workflow zu nutzen, und macht unseren Code lesbarer und wartbarer.
 
-### Zusammenfassung
+### Fazit
 
 - Wir können Dateinamen in Nextflow mit der vollen Leistung einer Programmiersprache verarbeiten
 - Wir können die Dateinamen als Strings behandeln, um relevante Informationen zu extrahieren
@@ -1314,7 +1316,7 @@ Dies ähnelt dem Glob-Muster, das wir früher verwendet haben, außer dass es sp
 
 Aktualisieren wir den Workflow `main.nf` entsprechend:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="1-2"
         // Load files with channel.fromFilePairs
@@ -1410,7 +1412,7 @@ Aber das werden wir nicht tun, denn unser ultimatives Ziel ist es, einen anderen
 
 Lass uns also einfach den Aufruf von `COUNT_LINES` auskommentieren (oder löschen) und weitermachen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="26" hl_lines="2"
         // Count the lines in the file
@@ -1454,7 +1456,7 @@ Wir haben bereits Zugriff auf den tatsächlichen Patienten-Identifikator im Stri
 
 Entferne die Kommentare bei der Map-Operation im Workflow und nimm folgende Änderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-4 9 11 13"
         // Load files with channel.fromFilePairs
@@ -1523,7 +1525,7 @@ Natürlich wird dies nur dieses spezifische Dateipaar erfassen und verarbeiten.
 Wenn du mit der Verarbeitung mehrerer Paare experimentieren möchtest, kannst du versuchen, Wildcards in das Eingabemuster einzufügen und sehen, was passiert.
 Versuche zum Beispiel `data/patientA_rep1_*_R{1,2}_001.fastq.gz` zu verwenden.
 
-### Zusammenfassung
+### Fazit
 
 - [`channel.fromFilePairs()` findet und paart automatisch zusammengehörige Dateien](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
 - Dies vereinfacht die Handhabung von Paired-End-Reads in deiner Pipeline
@@ -1547,7 +1549,7 @@ Um diesen Prozess im Workflow zu verwenden, müssen wir nur eine Modul-Include-A
 
 Nimm folgende Änderung am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="1" hl_lines="3"
     #!/usr/bin/env nextflow
@@ -1594,13 +1596,13 @@ process ANALYZE_READS {
 }
 ```
 
-!!! note
+!!! note "Hinweis"
 
     Die `tag`- und `publishDir`-Direktiven verwenden Closure-Syntax (`{ ... }`) statt String-Interpolation (`"${...}"`).
     Das liegt daran, dass diese Direktiven auf Eingabevariablen (`meta`) verweisen, die erst zur Laufzeit verfügbar sind.
     Die Closure-Syntax schiebt die Auswertung auf, bis der Prozess tatsächlich läuft.
 
-!!! note
+!!! note "Hinweis"
 
     Wir nennen unsere Metadaten-Map konventionsgemäß `meta`.
     Für einen tieferen Einblick in Meta-Maps siehe die Side Quest [Metadata and meta maps](./metadata.md).
@@ -1623,7 +1625,7 @@ Das können wir mit dem [`set`](https://www.nextflow.io/docs/latest/reference/op
 
 Ersetze im Haupt-Workflow den `.view()`-Operator durch `.set { ch_samples }` und füge eine Zeile hinzu, die testet, dass wir den Channel per Namen referenzieren können.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="14 16-17"
         // Load files with channel.fromFilePairs
@@ -1689,7 +1691,7 @@ Lass uns nun tatsächlich den `ANALYZE_READS`-Prozess auf dem `ch_samples`-Chann
 
 Nimm im Haupt-Workflow folgende Code-Änderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="23"
         // Run the analysis
@@ -1754,7 +1756,7 @@ Wenn wir also alle Patienten einbeziehen möchten, können wir einfach den Einga
 Tun wir so, als wollten wir so großzügig wie möglich sein.
 Nimm folgende Änderungen am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="2"
         // Load files with channel.fromFilePairs
@@ -1787,7 +1789,7 @@ nextflow run main.nf
 
 Das Ergebnisverzeichnis sollte jetzt Ergebnisse für alle verfügbaren Daten enthalten.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results
@@ -1811,7 +1813,7 @@ Da wir Zugriff auf die Patienten-Metadaten haben, können wir sie verwenden, um 
 
 Nimm folgende Änderung am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="modules/analyze_reads.nf" linenums="6"
         publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
@@ -1845,7 +1847,7 @@ nextflow run main.nf
 
 Überprüfe jetzt das Ergebnisverzeichnis:
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results/
@@ -1886,7 +1888,7 @@ Es gibt noch viel mehr, was du tun kannst, sobald deine Metadaten in eine Map wi
 Dieses Muster, Metadaten explizit zu halten und an die Daten anzuhängen (anstatt sie in Dateinamen zu kodieren), ist eine zentrale Best Practice in Nextflow, die den Aufbau robuster, wartbarer Analyse-Workflows ermöglicht.
 Mehr darüber erfährst du in der Side Quest [Metadata and meta maps](./metadata.md).
 
-### Zusammenfassung
+### Fazit
 
 - Die `publishDir`-Direktive kann Ausgaben basierend auf Metadatenwerten organisieren
 - Metadaten in Tupeln ermöglichen strukturierte Organisation von Ergebnissen

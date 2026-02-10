@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=it" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -81,7 +81,7 @@ nextflow run hello-modules.nf
 
 Come in precedenza, troverete i file di output nella directory specificata nel blocco `output` (qui, `results/hello_modules/`).
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     results/hello_modules/
@@ -156,8 +156,8 @@ Una volta fatto, cancellate la definizione del processo dal file del workflow.
 
 La sintassi per includere un processo da un modulo è abbastanza semplice:
 
-```groovy title="Sintassi: dichiarazione di include"
-include { <PROCESS_NAME> } from '<percorso_al_modulo>'
+```groovy title="Syntax: include declaration"
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Inseriamola sopra il blocco `params` e compiliamola appropriatamente.
@@ -452,7 +452,7 @@ Cos'è un modulo in Nextflow?
 - [ ] Una definizione di workflow
 - [ ] Un operatore di canali
 
-Per approfondire: [2. Creare un modulo per `sayHello()`](#2-creare-un-modulo-per-sayhello)
+Per approfondire: [2. Creare un modulo per `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +462,7 @@ Quale convenzione viene tipicamente usata per memorizzare i file dei moduli?
 - [x] In una directory `modules/`
 - [ ] In una directory `lib/`
 
-Per approfondire: [1. Creare una directory per memorizzare i moduli](#1-creare-una-directory-per-memorizzare-i-moduli)
+Per approfondire: [1. Creare una directory per memorizzare i moduli](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +473,7 @@ Qual è la sintassi corretta per usare un modulo?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Per approfondire: [2.3. Aggiungere una dichiarazione di include](#23-aggiungere-una-dichiarazione-di-include-prima-del-blocco-workflow)
+Per approfondire: [2.3. Aggiungere una dichiarazione di include](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

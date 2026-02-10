@@ -62,7 +62,7 @@ tree . -L 3
         └── rnaseq_pe-3.3.nf
     ```
 
-!!!note "Hinweis"
+!!!note
 
     Keine Sorge, wenn das viel erscheint; wir gehen die relevanten Teile bei jedem Schritt des Kurses durch.
     Dies soll dir nur einen Überblick verschaffen.
@@ -83,7 +83,7 @@ tree . -L 3
   Sie sind als Referenz gedacht, um deine Arbeit zu überprüfen und eventuelle Probleme zu beheben.
   Die Nummer im Dateinamen entspricht dem Schritt des relevanten Kursteils.
 
-!!!tip "Tipp"
+!!!tip
 
     Falls du aus irgendeinem Grund dieses Verzeichnis verlässt, kannst du jederzeit diesen Befehl ausführen, um dorthin zurückzukehren:
 

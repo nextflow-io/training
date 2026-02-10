@@ -95,7 +95,7 @@ Funkcjonalnie będzie to podobne do poprzedniej konfiguracji, ale zamiast polega
 
 Oto linia kodu, której użyjemy:
 
-```console title="Składnia"
+```console title="Syntax"
 greeting_ch = channel.of('Hello Channels!')
 ```
 
@@ -914,7 +914,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
     }
     ```
 
-Widzisz, że dodaliśmy drugą instrukcję `.view`, a dla każdej z nich zastąpiliśmy puste nawiasy (`()`) nawiasami klamrowymi zawierającymi kod, taki jak `{ greeting -> "Before flatten: $greeting" }`.
+Widzisz, że dodaliśmy drugą instrukcję `.view`, a dla każdej z nich zastąpiliśmy puste nawiasy (`()`) nawiasami klamrowymi zawierającymi kod, taki jak `{ greeting -> "Przed flatten: $greeting" }`.
 
 Są to tak zwane _closures_. Kod, który zawierają, będzie wykonywany dla każdego elementu w kanale.
 Definiujemy tymczasową zmienną dla wewnętrznej wartości, tutaj nazwaną `greeting` (ale mogłaby mieć dowolną nazwę), która jest używana tylko w zakresie tej closure.
@@ -922,7 +922,7 @@ Definiujemy tymczasową zmienną dla wewnętrznej wartości, tutaj nazwaną `gre
 W tym przykładzie `$greeting` reprezentuje każdy pojedynczy element załadowany do kanału.
 To spowoduje ładnie oznaczone wyjście konsoli.
 
-!!! info "Informacja"
+!!! info "Info"
 
     W niektórych pipeline'ach możesz zobaczyć specjalną zmienną o nazwie `$it` używaną wewnątrz closures operatorów.
     Jest to _niejawna_ zmienna, która pozwala na skrócony dostęp do wewnętrznej zmiennej bez potrzeby definiowania jej za pomocą `->`.
@@ -954,8 +954,8 @@ nextflow run hello-channels.nf
 
 Tym razem działa I daje nam dodatkowy wgląd w to, jak zawartość kanału wygląda przed i po uruchomieniu operatora `flatten()`.
 
-- Pojedyncza instrukcja `Before flatten:`, ponieważ w tym momencie kanał zawiera jeden element, oryginalną tablicę.
-- Trzy oddzielne instrukcje `After flatten:`, jedną dla każdego pozdrowienia, które są teraz pojedynczymi elementami w kanale.
+- Pojedyncza instrukcja `Przed flatten:`, ponieważ w tym momencie kanał zawiera jeden element, oryginalną tablicę.
+- Trzy oddzielne instrukcje `Po flatten:`, jedną dla każdego pozdrowienia, które są teraz pojedynczymi elementami w kanale.
 
 Co ważne, oznacza to, że każdy element może być teraz przetwarzany osobno przez workflow.
 
@@ -1050,7 +1050,7 @@ W bloku workflow wprowadź następującą zmianę kodu:
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
+                             // .view { greeting -> "Po flatten: $greeting" }
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
@@ -1174,7 +1174,7 @@ W bloku workflow wprowadź następującą zmianę kodu, aby zastąpić `flatten(
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "After flatten: $greeting" }
+                             // .view { greeting -> "Po flatten: $greeting" }
         // wyemituj pozdrowienie
         sayHello(greeting_ch)
 
@@ -1252,7 +1252,7 @@ Operator [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) 
 W tym przypadku użyjemy go do wyodrębnienia tego jednego elementu, który chcemy z każdego wiersza w naszym pliku danych.
 Oto jak wygląda składnia:
 
-```groovy title="Składnia"
+```groovy title="Syntax"
 .map { row -> row[0] }
 ```
 
@@ -1336,9 +1336,9 @@ Tym razem powinno się uruchomić bez błędu.
 
 Patrząc na wyjście instrukcji `view()`, widzisz następujące rzeczy:
 
-- Pojedynczą instrukcję `Before splitCsv:`: w tym momencie kanał zawiera jeden element, oryginalną ścieżkę pliku.
-- Trzy oddzielne instrukcje `After splitCsv:`: jedną dla każdego pozdrowienia, ale każde jest zawarte w tablicy odpowiadającej tej linii w pliku.
-- Trzy oddzielne instrukcje `After map:`: jedną dla każdego pozdrowienia, które są teraz pojedynczymi elementami w kanale.
+- Pojedynczą instrukcję `Przed splitCsv:`: w tym momencie kanał zawiera jeden element, oryginalną ścieżkę pliku.
+- Trzy oddzielne instrukcje `Po splitCsv:`: jedną dla każdego pozdrowienia, ale każde jest zawarte w tablicy odpowiadającej tej linii w pliku.
+- Trzy oddzielne instrukcje `Po map:`: jedną dla każdego pozdrowienia, które są teraz pojedynczymi elementami w kanale.
 
 _Zauważ, że linie mogą pojawiać się w innej kolejności w Twoim wyjściu._
 
@@ -1379,7 +1379,7 @@ Czym jest kanał w Nextflow'ie?
 - [x] Strukturą podobną do kolejki do przekazywania danych między procesami
 - [ ] Ustawieniem konfiguracyjnym
 
-Dowiedz się więcej: [1.1. Utwórz kanał wejściowy](#11-utworz-kanal-wejsciowy)
+Dowiedz się więcej: [1.1. Utwórz kanał wejściowy](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1395,7 +1395,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Nic (kanały domyślnie nie wypisują)
 - [ ] Błąd (nieprawidłowa składnia)
 
-Dowiedz się więcej: [1.1. Utwórz kanał wejściowy](#11-utworz-kanal-wejsciowy)
+Dowiedz się więcej: [1.1. Utwórz kanał wejściowy](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1405,7 +1405,7 @@ Gdy kanał zawiera wiele wartości, jak Nextflow obsługuje wykonywanie procesu?
 - [ ] Proces uruchamia się tylko z pierwszą wartością
 - [ ] Proces uruchamia się tylko z ostatnią wartością
 
-Dowiedz się więcej: [2. Zmodyfikuj workflow, aby działał na wielu wartościach wejściowych](#2-zmodyfikuj-workflow-aby-dzialal-na-wielu-wartosciach-wejsciowych)
+Dowiedz się więcej: [2. Zmodyfikuj workflow, aby działał na wielu wartościach wejściowych](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 
 <quiz>
@@ -1415,7 +1415,7 @@ Co robi operator `flatten()`?
 - [x] Rozpakowuje tablice na pojedyncze elementy
 - [ ] Usuwa duplikaty elementów
 
-Dowiedz się więcej: [3.2.1. Dodaj operator `flatten()`](#321-dodaj-operator-flatten)
+Dowiedz się więcej: [3.2.1. Dodaj operator `flatten()`](#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
@@ -1425,7 +1425,7 @@ Jaki jest cel operatora `view()`?
 - [x] Inspekcja i debugowanie zawartości kanału
 - [ ] Zapisywanie zawartości kanału do pliku
 
-Dowiedz się więcej: [1.4. Użyj `view()` do inspekcji zawartości kanału](#14-uzyj-view-do-inspekcji-zawartosci-kanalu)
+Dowiedz się więcej: [1.4. Użyj `view()` do inspekcji zawartości kanału](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
@@ -1435,7 +1435,7 @@ Co robi `splitCsv()`?
 - [x] Parsuje plik CSV na tablice reprezentujące każdy wiersz
 - [ ] Łączy wiele plików CSV
 
-Dowiedz się więcej: [4.2. Użyj operatora `splitCsv()` do parsowania pliku](#42-uzyj-operatora-splitcsv-do-parsowania-pliku)
+Dowiedz się więcej: [4.2. Użyj operatora `splitCsv()` do parsowania pliku](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
@@ -1445,7 +1445,7 @@ Jaki jest cel operatora `map()`?
 - [x] Transformowanie każdego elementu w kanale
 - [ ] Liczenie elementów w kanale
 
-Dowiedz się więcej: [4.3. Użyj operatora `map()` do wyodrębnienia pozdrowień](#43-uzyj-operatora-map-do-wyodrebnienia-pozdrowien)
+Dowiedz się więcej: [4.3. Użyj operatora `map()` do wyodrębnienia pozdrowień](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>
@@ -1455,5 +1455,5 @@ Dlaczego ważne jest używanie dynamicznych nazw plików wyjściowych przy przet
 - [x] Aby zapobiec nadpisywaniu plików wyjściowych przez siebie nawzajem
 - [ ] Aby włączyć funkcjonalność resume
 
-Dowiedz się więcej: [2.2. Upewnij się, że nazwy plików wyjściowych będą unikalne](#22-upewnij-sie-ze-nazwy-plikow-wyjsciowych-beda-unikalne)
+Dowiedz się więcej: [2.2. Upewnij się, że nazwy plików wyjściowych będą unikalne](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>

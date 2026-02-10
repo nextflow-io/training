@@ -1,6 +1,6 @@
 # भाग 6: Hello Config - वीडियो ट्रांसक्रिप्ट
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता से अनुवादित - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -258,7 +258,7 @@ Nextflow इन conda environments को locally cache करता है, त
 
 ## 4. एक execution platform चुनें
 
-तो यह software packaging है। अन्य systems में portability का दूसरा भाग यह है कि jobs वास्तव में कहां चलती हैं। इस समय, मैं मूल रूप से अपने_laptop पर या इस Codespaces में चल रहा हूं, जो एक single computer है। कुछ भी fancy नहीं है। Nextflow jobs को जितना संभव हो सके parallelizing के बारे में थोड़ा clever हो रहा है, लेकिन यह सब एक system पर है।
+तो यह software packaging है। अन्य systems में portability का दूसरा भाग यह है कि jobs वास्तव में कहां चलती हैं। इस समय, मैं मूल रूप से अपने लैपटॉप पर या इस Codespaces में चल रहा हूं, जो एक single computer है। कुछ भी fancy नहीं है। Nextflow jobs को जितना संभव हो सके parallelizing के बारे में थोड़ा clever हो रहा है, लेकिन यह सब एक system पर है।
 
 अब, अगर तुम एक HPC पर चल रहे हो, तो तुम्हारे पास शायद किसी प्रकार का job scheduler है जैसे SLURM या PBS या कुछ, और तुम उस scheduler को jobs submit करोगे और यह सभी jobs को विभिन्न compute nodes में farm out करेगा।
 

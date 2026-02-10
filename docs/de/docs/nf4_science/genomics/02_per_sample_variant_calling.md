@@ -1,5 +1,7 @@
 # Teil 2: Varianten-Calling pro Probe
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In Teil 1 hast du die Samtools- und GATK-Befehle manuell in ihren jeweiligen Containern getestet.
 Jetzt werden wir dieselben Befehle in einen Nextflow-Workflow einbinden.
 
@@ -304,7 +306,7 @@ Fügen wir ein Ziel für `bam_index` hinzu, das in ein `bam/`-Unterverzeichnis v
     }
     ```
 
-!!! note
+!!! note "Hinweis"
 
     Standardmäßig veröffentlicht Nextflow Ausgabedateien als symbolische Links, was unnötige Duplizierung vermeidet.
     Auch wenn die Datendateien, die wir hier verwenden, sehr klein sind, können sie in der Genomik sehr groß werden.
@@ -614,7 +616,7 @@ Füge den Prozessaufruf im Workflow-Body unter `main:` hinzu:
 
 Du solltest die `*.out`-Syntax aus der Hello Nextflow-Trainingsreihe erkennen; wir teilen Nextflow mit, den von `SAMTOOLS_INDEX` ausgegebenen Kanal zu nehmen und in den `GATK_HAPLOTYPECALLER`-Prozessaufruf einzustecken.
 
-!!! note
+!!! note "Hinweis"
 
     Beachte, dass die Eingaben in exakt derselben Reihenfolge im Aufruf des Prozesses bereitgestellt werden, wie sie im input-Block des Prozesses aufgelistet sind.
     In Nextflow sind Eingaben positionsabhängig, was bedeutet, dass du _unbedingt_ dieselbe Reihenfolge befolgen musst; und natürlich muss es dieselbe Anzahl von Elementen geben.
@@ -705,7 +707,7 @@ Der erste Prozess wurde dank des Cachings übersprungen, wie erwartet, während 
 
 Du findest die Ausgabedateien im results-Verzeichnis (als symbolische Links zum work-Verzeichnis).
 
-??? abstract "Verzeichnis-Inhalt"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results/
@@ -718,7 +720,7 @@ Du findest die Ausgabedateien im results-Verzeichnis (als symbolische Links zum 
 
 Wenn du die VCF-Datei öffnest, solltest du denselben Inhalt wie in der Datei sehen, die du durch direktes Ausführen des GATK-Befehls im Container generiert hast.
 
-??? abstract "Datei-Inhalt"
+??? abstract "Dateiinhalt"
 
     ```console title="reads_mother.bam.vcf" linenums="26"
     #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -867,7 +869,7 @@ Wir werden die work-Verzeichnisse inspizieren und den `view()`-Operator verwende
 
 Schaue dir das work-Verzeichnis für den fehlgeschlagenen `GATK_HAPLOTYPECALLER`-Prozessaufruf an, der in der Konsolenausgabe aufgelistet ist.
 
-??? abstract "Verzeichnis-Inhalt"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     work/a5/fa9fd0994b6beede5fb9ea073596c2
@@ -931,7 +933,7 @@ Auch hier kann dies erfolgreich sein oder fehlschlagen. Hier ist, wie die Ausgab
 Die ersten drei Zeilen entsprechen dem Eingabekanal und die zweiten dem Ausgabekanal.
 Du kannst sehen, dass die BAM-Dateien und Index-Dateien für die drei Proben nicht in derselben Reihenfolge aufgelistet sind!
 
-!!! note
+!!! note "Hinweis"
 
     Wenn du einen Nextflow-Prozess auf einem Kanal aufrufst, der mehrere Elemente enthält, wird Nextflow versuchen, die Ausführung so weit wie möglich zu parallelisieren und sammelt Ausgaben in beliebiger Reihenfolge, in der sie verfügbar werden.
     Die Konsequenz ist, dass die entsprechenden Ausgaben in einer anderen Reihenfolge gesammelt werden können, als die ursprünglichen Eingaben eingegeben wurden.
@@ -941,7 +943,7 @@ Aber das ist nicht garantiert, weshalb manchmal (aber nicht immer) die falschen 
 
 Um dies zu beheben, müssen wir sicherstellen, dass die BAM-Dateien und ihre Index-Dateien zusammen durch die Kanäle reisen.
 
-!!! tip
+!!! tip "Tipp"
 
     Die `view()`-Statements im Workflow-Code tun nichts, daher ist es kein Problem, sie drin zu lassen.
     Allerdings werden sie deine Konsolenausgabe unübersichtlich machen, daher empfehlen wir, sie zu entfernen, wenn du mit der Fehlerbehebung fertig bist.
@@ -954,7 +956,7 @@ Die Lösung besteht darin, jede BAM-Datei mit ihrem Index in ein Tupel zu bünde
 
 Der einfachste Weg, um sicherzustellen, dass eine BAM-Datei und ihr Index eng verbunden bleiben, besteht darin, sie zusammen in ein Tupel zu verpacken, das aus der Index-Aufgabe herauskommt.
 
-!!! note
+!!! note "Hinweis"
 
     Ein **Tupel** ist eine endliche, geordnete Liste von Elementen, die häufig zum Zurückgeben mehrerer Werte aus einer Funktion verwendet wird. Tupel sind besonders nützlich, um mehrere Eingaben oder Ausgaben zwischen Prozessen zu übergeben und dabei ihre Zuordnung und Reihenfolge zu bewahren.
 
@@ -1149,7 +1151,7 @@ Wir haben bereits eine Textdatei erstellt, die die Eingabedateipfade auflistet, 
 
 Wie du sehen kannst, haben wir einen Dateipfad pro Zeile aufgelistet, und es sind absolute Pfade.
 
-!!! note
+!!! note "Hinweis"
 
     Die Dateien, die wir hier verwenden, befinden sich nur auf dem lokalen Dateisystem deiner GitHub Codespaces, aber wir könnten auch auf Dateien im Cloud-Storage zeigen.
     Wenn du nicht die bereitgestellte Codespaces-Umgebung verwendest, musst du möglicherweise die Dateipfade anpassen, um zu deinem lokalen Setup zu passen.
@@ -1232,7 +1234,7 @@ Wir können dies mit demselben Muster tun, das wir in [Teil 2 von Hello Nextflow
 Technisch könnten wir dies einfacher mit dem [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext)-Operator machen, da unsere Eingabedatei derzeit nur Dateipfade enthält.
 Durch die Verwendung des vielseitigeren `splitCsv`-Operators (ergänzt durch `map`) können wir jedoch unseren Workflow zukunftssicher machen, falls wir uns entscheiden, Metadaten zur Datei mit Dateipfaden hinzuzufügen.
 
-!!! tip
+!!! tip "Tipp"
 
     Wenn du nicht sicher bist, ob du verstehst, was die Operatoren hier tun, ist dies eine weitere großartige Gelegenheit, den `.view()`-Operator zu verwenden, um zu sehen, wie die Kanalinhalte vor und nach der Anwendung aussehen.
 

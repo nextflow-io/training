@@ -1,6 +1,6 @@
 # Yönlendirme
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 GitHub Codespaces ortamı, bu eğitim kursunu tamamlamak için gerekli tüm yazılımları, kodları ve verileri içerir, bu nedenle kendiniz herhangi bir şey yüklemenize gerek yoktur.
 Ancak, oturum açmak için (ücretsiz) bir hesaba ihtiyacınız var ve arayüze aşina olmak için birkaç dakikanızı ayırmalısınız.
@@ -39,7 +39,7 @@ Bunu `side-quests` içinde çalıştırırsanız, aşağıdaki çıktıyı görm
 - **Her dizin ayrı bir yan göreve karşılık gelir.**
   İçerikleri ilgili yan görevin sayfasında ayrıntılı olarak açıklanmıştır.
 
-- **`solutions` dizini**, her yan görevin çeşitli adımlarını tamamlamaktan kaynaklanan tamamlanmış workflow ve/veya modül scriptlerini içerir.
+- **`solutions` dizini**, her yan görevin çeşitli adımlarını tamamlamaktan kaynaklanan tamamlanmış iş akışı ve/veya modül scriptlerini içerir.
   Çalışmanızı kontrol etmek ve sorunları gidermek için referans olarak kullanılmaları amaçlanmıştır.
 
 !!!tip "İpucu"

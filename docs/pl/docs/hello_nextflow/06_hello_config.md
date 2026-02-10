@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -74,7 +74,7 @@ Aby upewnić się, że wszystko działa, uruchom skrypt raz przed wprowadzeniem 
 nextflow run hello-config.nf
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -234,7 +234,7 @@ Przetestujmy, czy działa poprawnie.
 nextflow run hello-config.nf
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -330,7 +330,7 @@ Upewnij się, że dostosujesz ścieżkę odpowiednio!
 nextflow run ../hello-config.nf
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -403,7 +403,7 @@ Ten plik parametrów zawiera parę klucz-wartość dla każdego z wejść, któr
 Zauważ użycie dwukropków (`:`) zamiast znaków równości (`=`), jeśli porównasz składnię z plikiem konfiguracyjnym.
 Plik konfiguracyjny jest napisany w Groovy, podczas gdy plik parametrów jest napisany w YAML.
 
-!!! info "Informacja"
+!!! info "Info"
 
     Dostarczamy również wersję JSON pliku parametrów jako przykład, ale nie będziemy jej tutaj uruchamiać.
     Możesz spróbować samodzielnie.
@@ -416,7 +416,7 @@ Aby uruchomić workflow z tym plikiem parametrów, po prostu dodaj `-params-file
 nextflow run hello-config.nf -params-file test-params.yaml
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -497,7 +497,7 @@ To jest zalecany sposób kontrolowania ścieżki głównej, gdzie publikowane s�
 nextflow run hello-config.nf -output-dir custom-outdir-cli/
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -829,7 +829,7 @@ Zobaczmy, jak to działa w praktyce, ustawiając zarówno `-output-dir` (lub `-o
 nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -959,7 +959,7 @@ Przetestujmy, czy działa poprawnie:
 nextflow run hello-config.nf -output-dir config-output-mode
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -1091,9 +1091,9 @@ Spróbujmy.
 nextflow run hello-config.nf --batch conda
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
-    ```console title="Wyjście"
+    ```console title="Output"
     N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
@@ -1152,7 +1152,7 @@ Nextflow obsługuje [wiele różnych executorów](https://nextflow.io/docs/lates
 Wybór executora jest ustawiany przez dyrektywę procesu o nazwie `executor`.
 Domyślnie jest ustawiony na `local`, więc następująca konfiguracja jest domyślna:
 
-```groovy title="Wbudowana konfiguracja"
+```groovy title="Built-in configuration"
 process {
     executor = 'local'
 }
@@ -1180,7 +1180,7 @@ Niestety, każdy z tych systemów używa różnych technologii, składni i konfi
 
     Na przykład, to samo zadanie wymagające 8 procesorów i 4GB RAM do wykonania w kolejce "my-science-work" musi być wyrażone w różny sposób w zależności od backendu.
 
-    ```bash title="Konfiguracja dla SLURM / wysyłanie przez sbatch"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -1188,7 +1188,7 @@ Niestety, każdy z tych systemów używa różnych technologii, składni i konfi
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="Konfiguracja dla PBS / wysyłanie przez qsub"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -1196,7 +1196,7 @@ Niestety, każdy z tych systemów używa różnych technologii, składni i konfi
     #PBS -l mem=4gb
     ```
 
-    ```bash title="Konfiguracja dla SGE / wysyłanie przez qsub"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -1229,7 +1229,7 @@ Większość platform obliczeniowych wysokiej wydajności pozwala (a czasami wym
 Domyślnie Nextflow użyje jednego procesora i 2GB pamięci dla każdego procesu.
 Odpowiednie dyrektywy procesu nazywają się `cpus` i `memory`, więc następująca konfiguracja jest domyślna:
 
-```groovy title="Wbudowana konfiguracja" linenums="1"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -1369,7 +1369,7 @@ Na przykład Twój klaster może wymagać, abyś pozostał w określonych limita
 
 Możesz użyć dyrektywy `resourceLimits`, aby ustawić odpowiednie ograniczenia. Składnia wygląda tak, gdy jest sama w bloku process:
 
-```groovy title="Przykład składni"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -1485,7 +1485,7 @@ Spróbujmy uruchomić workflow z konfiguracją `my_laptop`.
 nextflow run hello-config.nf -profile my_laptop
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -1518,10 +1518,10 @@ Możesz to uznać za alternatywę dla używania pliku parametrów.
 
 Składnia wyrażania domyślnych wartości w tym kontekście wygląda tak, dla profilu, który nazwiemy `test`:
 
-```groovy title="Przykład składni"
+```groovy title="Syntax example"
     test {
-        params.<parametr1>
-        params.<parametr2>
+        params.<parameter1>
+        params.<parameter2>
         ...
     }
 ```
@@ -1569,7 +1569,7 @@ Spróbujmy dodać profil testowy do naszego poprzedniego polecenia:
 nextflow run hello-config.nf -profile my_laptop,test
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -1641,7 +1641,7 @@ Uruchom to polecenie, aby rozwiązać konfigurację, która byłaby zastosowana 
 nextflow config
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```groovy
     params {
@@ -1685,7 +1685,7 @@ Jeśli podasz parametry wiersza poleceń, np. włączając jeden lub więcej pro
 nextflow config -profile my_laptop,test
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```groovy
     params {
@@ -1752,7 +1752,7 @@ Co ma pierwszeństwo, gdy ten sam parametr jest ustawiony zarówno w pliku konfi
 - [ ] Pierwsza napotkana wartość
 - [ ] Żadna; powoduje to błąd
 
-Dowiedz się więcej: [1.1. Przenieś domyślne wartości do `nextflow.config`](#11-przenies-domyslne-wartosci-do-nextflowconfig)
+Dowiedz się więcej: [1.1. Przenieś domyślne wartości do `nextflow.config`](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1770,7 +1770,7 @@ Jeśli zarówno Docker, jak i Conda są włączone, a proces ma obie dyrektywy, 
 - [ ] To, które jest zdefiniowane jako pierwsze
 - [ ] Powoduje to błąd
 
-Dowiedz się więcej: [3. Wybierz technologię pakowania oprogramowania](#3-wybierz-technologie-pakowania-oprogramowania)
+Dowiedz się więcej: [3. Wybierz technologię pakowania oprogramowania](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1788,7 +1788,7 @@ Jak ustawiasz wymagania zasobów dla konkretnego procesu w pliku konfiguracyjnym
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-Dowiedz się więcej: [5.3. Ustaw alokacje zasobów dla konkretnego procesu](#53-ustaw-alokacje-zasobow-dla-konkretnego-procesu)
+Dowiedz się więcej: [5.3. Ustaw alokacje zasobów dla konkretnego procesu](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1798,7 +1798,7 @@ Jaka opcja wiersza poleceń generuje raport wykorzystania zasobów?
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-Dowiedz się więcej: [5.1. Uruchom workflow, aby wygenerować raport wykorzystania zasobów](#51-uruchom-workflow-aby-wygenerowac-raport-wykorzystania-zasobow)
+Dowiedz się więcej: [5.1. Uruchom workflow, aby wygenerować raport wykorzystania zasobów](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1808,7 +1808,7 @@ Co robi dyrektywa `resourceLimits`?
 - [x] Ogranicza maksymalne zasoby, które mogą być żądane
 - [ ] Monitoruje wykorzystanie zasobów
 
-Dowiedz się więcej: [5.5. Dodaj limity zasobów](#55-dodaj-limity-zasobow)
+Dowiedz się więcej: [5.5. Dodaj limity zasobów](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1818,7 +1818,7 @@ Jaki jest domyślny executor w Nextflow?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Dowiedz się więcej: [4. Wybierz platformę wykonawczą](#4-wybierz-platforme-wykonawcza)
+Dowiedz się więcej: [4. Wybierz platformę wykonawczą](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1828,7 +1828,7 @@ Jak określasz plik parametrów podczas uruchamiania Nextflow?
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-Dowiedz się więcej: [1.3. Użyj pliku parametrów](#13-uzyj-pliku-parametrow)
+Dowiedz się więcej: [1.3. Użyj pliku parametrów](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1838,7 +1838,7 @@ Do czego mogą być używane profile? (Wybierz wszystkie pasujące)
 - [x] Dostarczanie parametrów testowych
 - [ ] Definiowanie nowych procesów
 
-Dowiedz się więcej: [6. Używaj profili do przełączania między predefiniowanymi konfiguracjami](#6-uzywaj-profili-do-przelaczania-miedzy-predefiniowanymi-konfiguracjami)
+Dowiedz się więcej: [6. Używaj profili do przełączania między predefiniowanymi konfiguracjami](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1848,5 +1848,5 @@ Jak określasz wiele profili w pojedynczym poleceniu?
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Dowiedz się więcej: [6. Używaj profili do przełączania między predefiniowanymi konfiguracjami](#6-uzywaj-profili-do-przelaczania-miedzy-predefiniowanymi-konfiguracjami)
+Dowiedz się więcej: [6. Używaj profili do przełączania między predefiniowanymi konfiguracjami](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

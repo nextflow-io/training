@@ -35,7 +35,7 @@ Estas herramientas no están instaladas en el entorno de GitHub Codespaces, así
 
 !!! note "Nota"
 
-     Asegúrate de estar en el directorio `nf4-science/genomics` para que la última parte de la ruta mostrada cuando escribes `pwd` sea `genomics`.
+    Asegúrate de estar en el directorio `nf4-science/genomics` para que la última parte de la ruta mostrada cuando escribes `pwd` sea `genomics`.
 
 ---
 
@@ -120,7 +120,7 @@ Solo necesitamos proporcionar el archivo de entrada; la herramienta generará au
 samtools index /data/bam/reads_mother.bam
 ```
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     data/bam/
@@ -276,7 +276,7 @@ El archivo de salida `reads_mother.vcf` se crea dentro de tu directorio de traba
 Sin embargo, es un archivo de prueba pequeño, por lo que puedes usar `cat` para abrirlo y ver el contenido.
 Si te desplazas hasta el inicio del archivo, encontrarás un encabezado compuesto de muchas líneas de metadatos, seguido de una lista de llamados de variantes, uno por línea.
 
-??? abstract "Contenidos del archivo"
+??? abstract "Contenido del archivo"
 
     ```console title="reads_mother.vcf" linenums="26"
     #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -360,7 +360,7 @@ samtools index /data/bam/reads_father.bam
 samtools index /data/bam/reads_son.bam
 ```
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     data/bam/
@@ -482,7 +482,7 @@ Esto crea el archivo de salida GVCF `reads_mother.g.vcf` en el directorio de tra
 
 Si usas `cat` para ver el contenido, verás que es mucho más largo que el VCF equivalente que generamos en la sección 1. Ni siquiera puedes desplazarte hasta el inicio del archivo, y la mayoría de las líneas se ven bastante diferentes de lo que vimos en el VCF.
 
-??? abstract "Contenidos del archivo"
+??? abstract "Contenido del archivo"
 
     ```console title="reads_mother.g.vcf" linenums="1674"
     20_10037292_10066351    14714   .       T       <NON_REF>       .       .       END=14718       GT:DP:GQ:MIN_DP:PL       0/0:37:99:37:0,99,1192
@@ -491,12 +491,12 @@ Si usas `cat` para ver el contenido, verás que es mucho más largo que el VCF e
     ```
 
 Estas representan regiones no variantes donde el llamador de variantes no encontró evidencia de variación, por lo que capturó algunas estadísticas que describen su nivel de confianza en la ausencia de variación.
-Esto hace posible distinguir entre dos cifras de casos muy diferentes: (1) hay datos de buena calidad que muestran que la muestra es homocigota-referencia, y (2) no hay suficientes datos buenos disponibles para hacer una determinación de cualquier manera.
+Esto hace posible distinguir entre dos casos muy diferentes: (1) hay datos de buena calidad que muestran que la muestra es homocigota-referencia, y (2) no hay suficientes datos buenos disponibles para hacer una determinación de cualquier manera.
 
 En un GVCF, típicamente hay muchas de estas líneas no variantes, con un número menor de registros de variantes dispersos entre ellas.
 Intenta ejecutar `head -176` en el GVCF para cargar solo las primeras 176 líneas del archivo para encontrar un llamado de variante real.
 
-??? abstract "Contenidos del archivo"
+??? abstract "Contenido del archivo"
 
     ```console title="reads_mother.g.vcf" linenums="174"
     20_10037292_10066351    3479    .       T       <NON_REF>       .       .       END=3479        GT:DP:GQ:MIN_DP:PL       0/0:34:36:34:0,36,906
@@ -662,7 +662,7 @@ gatk GenotypeGVCFs \
 Esto crea el archivo de salida VCF `family_trio.vcf` en el directorio de trabajo actual en el contenedor.
 Es otro archivo razonablemente pequeño, así que puedes usar `cat` en este archivo para ver su contenido, y desplazarte hacia arriba para encontrar las primeras líneas de variantes.
 
-??? abstract "Contenidos del archivo"
+??? abstract "Contenido del archivo"
 
     ```console title="family_trio.vcf" linenums="40"
     #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  reads_father    reads_mother    reads_son

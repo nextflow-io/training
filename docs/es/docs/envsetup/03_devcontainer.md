@@ -73,7 +73,7 @@ Una vez que el contenedor esté construido y ejecutándose, tendrá un entorno c
 - Nextflow
 - Docker
 - Git
-- Y todas las demás dependencias requeridas para el entrenamiento
+- Y todas las demás dependencias requeridas para la capacitación
 
 ![VS Code with devcontainer running](img/running_container.png)
 

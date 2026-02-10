@@ -1,5 +1,5 @@
 ---
-title: Training Collections
+title: Collezioni di Formazione
 hide:
   - toc
 ---
@@ -26,4 +26,4 @@ Per i requisiti tecnici e la configurazione dell'ambiente, vedere il mini-corso 
 ## Suggerire nuove collezioni
 
 Stiamo lavorando attivamente allo sviluppo di ulteriori Side Quests e Collezioni.
-Si prega di suggerire argomenti che si ritiene abbiano senso coprire in una Collezione pubblicando nella [sezione Training](https://community.seqera.io/c/training/) del forum della community.
+Sentitevi liberi di suggerire argomenti che ritenete abbiano senso coprire in una Collezione pubblicando nella [sezione Training](https://community.seqera.io/c/training/) del forum della community.

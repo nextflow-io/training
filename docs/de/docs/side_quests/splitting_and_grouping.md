@@ -29,7 +29,7 @@ Diese Fähigkeiten helfen dir, Workflows zu erstellen, die mehrere Eingabedateie
 Bevor du diese Side Quest angehst, solltest du:
 
 - Das [Hello Nextflow](../hello_nextflow/README.md)-Tutorial oder einen gleichwertigen Einsteigerkurs abgeschlossen haben.
-- Dich mit grundlegenden Nextflow-Konzepten und -Mechanismen wohl fühlen (Prozesse, Channels, Operatoren, Arbeiten mit Dateien, Meta-Daten)
+- Dich mit grundlegenden Nextflow-Konzepten und -Mechanismen wohl fühlen (Prozesse, Channels, Operatoren, Arbeiten mit Dateien, Metadaten)
 
 **Optional:** Wir empfehlen, zuerst die Side Quest [Metadaten in Workflows](./metadata.md) abzuschließen.
 Diese behandelt die Grundlagen des Einlesens von CSV-Dateien mit `splitCsv` und der Erstellung von Meta-Maps, die wir hier intensiv nutzen werden.
@@ -40,7 +40,7 @@ Diese behandelt die Grundlagen des Einlesens von CSV-Dateien mit `splitCsv` und 
 
 #### Öffne den Training-Codespace
 
-Falls du dies noch nicht getan hast, stelle sicher, dass du die Trainingsumgebung wie in [Environment Setup](../envsetup/index.md) beschrieben öffnest.
+Falls du dies noch nicht getan hast, stelle sicher, dass du die Trainingsumgebung wie in [Umgebung einrichten](../envsetup/index.md) beschrieben öffnest.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -90,7 +90,7 @@ Falls du mit Krebs-Analysen nicht vertraut bist, solltest du nur wissen, dass di
 
 Speziell für Patient A haben wir zwei Sätze technischer Replikate (Wiederholungen).
 
-!!! note
+!!! note "Hinweis"
 
     Mach dir keine Sorgen, wenn du mit diesem experimentellen Design nicht vertraut bist, es ist nicht entscheidend für das Verständnis dieses Tutorials.
 
@@ -131,13 +131,13 @@ workflow {
 }
 ```
 
-!!! note
+!!! note "Hinweis"
 
     In diesem Tutorial werden wir das Präfix `ch_` für alle Channel-Variablen verwenden, um klar anzuzeigen, dass sie Nextflow-Channels sind.
 
 Wenn du die Side Quest [Metadaten in Workflows](./metadata.md) abgeschlossen hast, wirst du dieses Muster wiedererkennen. Wir verwenden `splitCsv`, um die CSV zu lesen und strukturieren die Daten sofort mit einer Meta-Map, um Metadaten von Dateipfaden zu trennen.
 
-!!! info
+!!! info "Info"
 
     In diesem Training werden wir zwei verschiedenen Konzepten begegnen, die `map` genannt werden:
 
@@ -148,7 +148,7 @@ Wenn du die Side Quest [Metadaten in Workflows](./metadata.md) abgeschlossen has
 
 Wende diese Änderungen auf `main.nf` an:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2-6"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -198,7 +198,7 @@ Wir haben jetzt einen Channel, bei dem jedes Element ein `[meta, file]`-Tupel is
 
 Wir können den [`filter`-Operator](https://www.nextflow.io/docs/latest/operator.html#filter) verwenden, um die Daten basierend auf einer Bedingung zu filtern. Nehmen wir an, wir wollen nur normale Proben verarbeiten. Wir können dies tun, indem wir die Daten basierend auf dem `type`-Feld filtern. Lass uns dies vor dem `view`-Operator einfügen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="2" hl_lines="6"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -256,7 +256,7 @@ Dies wird mit der einzelnen Closure erreicht, die wir oben eingeführt haben:
 
 Derzeit wenden wir den Filter auf den direkt aus der CSV erstellten Channel an, aber wir wollen dies auf mehr als eine Weise filtern, also lass uns die Logik umschreiben, um einen separaten gefilterten Channel für normale Proben zu erstellen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="2" hl_lines="6 8"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -305,7 +305,7 @@ Wir haben die Daten erfolgreich gefiltert und einen separaten Channel für norma
 
 Lass uns auch einen gefilterten Channel für die Tumorproben erstellen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3-8"
         ch_normal_samples = ch_samples
@@ -350,7 +350,7 @@ nextflow run main.nf
 
 Wir haben die normalen und Tumorproben in zwei verschiedene Channels aufgeteilt und eine Closure, die an `view()` übergeben wird, verwendet, um sie in der Ausgabe unterschiedlich zu kennzeichnen: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
-### Zusammenfassung
+### Fazit
 
 In diesem Abschnitt hast du gelernt:
 
@@ -403,7 +403,7 @@ Wir können sehen, dass das `id`-Feld das erste Element in jeder Meta-Map ist. D
 
 Um das `id`-Feld zu isolieren, können wir den [`map`-Operator](https://www.nextflow.io/docs/latest/operator.html#map) verwenden, um ein neues Tupel mit dem `id`-Feld als erstes Element zu erstellen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3 6"
         ch_normal_samples = ch_samples
@@ -460,7 +460,7 @@ Jetzt können wir den `join`-Operator verwenden, um die beiden Channels basieren
 
 Noch einmal werden wir `view` verwenden, um die verbundenen Ausgaben auszugeben.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="7-9"
         ch_normal_samples = ch_samples
@@ -514,7 +514,7 @@ Es ist etwas schwer zu erkennen, weil es so breit ist, aber du solltest sehen k�
 - `tumor_meta_map`: Die Metadaten der Tumorprobe einschließlich Typ, Replikat und Pfad zur BAM-Datei
 - `tumor_sample`: Die Tumorprobe einschließlich Typ, Replikat und Pfad zur BAM-Datei
 
-!!! warning
+!!! warning "Warnung"
 
     Der `join`-Operator verwirft alle nicht übereinstimmenden Tupel. In diesem Beispiel haben wir sichergestellt, dass alle Proben für Tumor und Normal übereinstimmen, aber wenn dies nicht wahr ist, musst du den Parameter `remainder: true` verwenden, um die nicht übereinstimmenden Tupel zu behalten. Überprüfe die [Dokumentation](https://www.nextflow.io/docs/latest/operator.html#join) für weitere Details.
 
@@ -531,7 +531,7 @@ Um dies zu vermeiden, können wir auf mehreren Feldern verbinden. Es gibt tatsä
 
 Beginnen wir damit, einen neuen Verbindungsschlüssel zu erstellen. Wir können dies auf die gleiche Weise wie zuvor tun, indem wir den [`map`-Operator](https://www.nextflow.io/docs/latest/operator.html#map) verwenden, um ein neues Tupel mit den `id`- und `repeat`-Feldern als erstes Element zu erstellen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3 6"
         ch_normal_samples = ch_samples
@@ -582,7 +582,7 @@ Der vorherige Ansatz verliert die Feldnamen aus unserem Verbindungsschlüssel - 
 
 Die `subMap`-Methode extrahiert nur die angegebenen Schlüssel-Wert-Paare aus einer Map. Hier extrahieren wir nur die `id`- und `repeat`-Felder, um unseren Verbindungsschlüssel zu erstellen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="3 6"
         ch_normal_samples = ch_samples
@@ -629,7 +629,7 @@ Um Duplikation zu vermeiden und Fehler zu reduzieren, können wir eine benannte 
 
 Dazu definieren wir zuerst die Closure als neue Variable:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="2" hl_lines="7"
         ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -662,7 +662,7 @@ Beachte, dass wir den Dateipfad auch mit `file()` in ein Path-Objekt konvertiere
 
 Lass uns die Closure in unserem Workflow implementieren:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="10" hl_lines="3 6"
         ch_normal_samples = ch_samples
@@ -685,7 +685,7 @@ Lass uns die Closure in unserem Workflow implementieren:
             .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
     ```
 
-!!! note
+!!! note "Hinweis"
 
     Der `map`-Operator hat von der Verwendung von `{ }` zur Verwendung von `( )` gewechselt, um die Closure als Argument zu übergeben. Dies liegt daran, dass der `map`-Operator eine Closure als Argument erwartet und `{ }` verwendet wird, um eine anonyme Closure zu definieren. Beim Aufrufen einer benannten Closure verwende die `( )`-Syntax.
 
@@ -737,7 +737,7 @@ Wir haben viele duplizierte Daten in unserem Workflow. Jedes Element in den verb
 
 Da die `id`- und `repeat`-Felder im Gruppierungsschlüssel verfügbar sind, lass uns sie aus dem Rest jedes Channel-Elements entfernen, um Duplikation zu vermeiden. Wir können dies tun, indem wir die `subMap`-Methode verwenden, um eine neue Map nur mit dem `type`-Feld zu erstellen. Dieser Ansatz ermöglicht es uns, alle notwendigen Informationen beizubehalten und gleichzeitig Redundanz in unserer Datenstruktur zu eliminieren.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="8" hl_lines="1"
         getSampleIdAndReplicate = { meta, bam -> [ meta.subMap(['id', 'repeat']), meta.subMap(['type']), file(bam) ] }
@@ -776,7 +776,7 @@ Am Anfang haben wir die normalen und Tumorproben mit `filter` getrennt und sie d
 
 Da wir die Position jedes Elements in unserem Channel kennen, können wir die Struktur weiter vereinfachen, indem wir die Metadaten `[type:normal]` und `[type:tumor]` weglassen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="8" hl_lines="1"
         getSampleIdAndReplicate = { meta, file -> [ meta.subMap(['id', 'repeat']), file ] }
@@ -807,7 +807,7 @@ nextflow run main.nf
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
 
-### Zusammenfassung
+### Fazit
 
 In diesem Abschnitt hast du gelernt:
 
@@ -832,7 +832,7 @@ Im folgenden Abschnitt demonstrieren wir, wie du deine Probendaten über mehrere
 
 Beginnen wir damit, einen Channel von Intervallen zu erstellen. Um das Leben einfach zu halten, verwenden wir einfach 3 Intervalle, die wir manuell definieren. In einem echten Workflow könntest du diese aus einer Dateieingabe einlesen oder sogar einen Channel mit vielen Intervalldateien erstellen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="17" hl_lines="2"
             .join(ch_tumor_samples)
@@ -848,7 +848,7 @@ Beginnen wir damit, einen Channel von Intervallen zu erstellen. Um das Leben ein
 
 Denk daran, wir wollen jede Probe für jedes Intervall wiederholen. Dies wird manchmal als kartesisches Produkt der Proben und Intervalle bezeichnet. Wir können dies erreichen, indem wir den [`combine`-Operator](https://www.nextflow.io/docs/latest/operator.html#combine) verwenden. Dies nimmt jedes Element aus Channel 1 und wiederholt es für jedes Element in Channel 2. Lass uns einen combine-Operator zu unserem Workflow hinzufügen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="18" hl_lines="3-5"
         ch_intervals = channel.of('chr1', 'chr2', 'chr3')
@@ -899,7 +899,7 @@ Es ist jedoch etwas schwer zu lesen, also werden wir es im nächsten Abschnitt a
 
 Wir können den `map`-Operator verwenden, um unsere Probendaten aufzuräumen und zu refaktorieren, damit sie leichter verständlich sind. Lass uns die Intervall-Zeichenkette zur Verbindungs-Map am ersten Element verschieben.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="20" hl_lines="3-9"
         ch_combined_samples = ch_joined_samples
@@ -977,7 +977,7 @@ Die Verwendung von `map`, um deine Daten in die korrekte Struktur zu bringen, ka
 
 Wir haben jetzt jede Probe über alle genomischen Intervalle hinweg wiederholt, was mehrere unabhängige Analyseeinheiten erstellt, die parallel verarbeitet werden können. Aber was, wenn wir zusammengehörige Proben wieder zusammenbringen wollen? Im nächsten Abschnitt lernen wir, wie man Proben gruppiert, die gemeinsame Attribute teilen.
 
-### Zusammenfassung
+### Fazit
 
 In diesem Abschnitt hast du gelernt:
 
@@ -1008,7 +1008,7 @@ Der erste Schritt ist ähnlich zu dem, was wir im vorherigen Abschnitt getan hab
 
 Wir können die `subMap`-Methode von vorher wiederverwenden, um unsere `id`- und `interval`-Felder aus der Map zu isolieren. Wie zuvor verwenden wir den `map`-Operator, um die `subMap`-Methode auf das erste Element des Tupels für jede Probe anzuwenden.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="20" hl_lines="11-19"
         ch_combined_samples = ch_joined_samples
@@ -1076,13 +1076,13 @@ nextflow run main.nf
 
 Wir können sehen, dass wir die `id`- und `interval`-Felder erfolgreich isoliert haben, aber die Proben noch nicht gruppiert.
 
-!!! note
+!!! note "Hinweis"
 
     Wir verwerfen hier das `replicate`-Feld. Dies liegt daran, dass wir es für die weitere nachgelagerte Verarbeitung nicht benötigen. Nachdem du dieses Tutorial abgeschlossen hast, versuche, es einzuschließen, ohne die spätere Gruppierung zu beeinflussen!
 
 Lass uns nun die Proben mit dem [`groupTuple`-Operator](https://www.nextflow.io/docs/latest/operator.html#grouptuple) nach diesem neuen Gruppierungselement gruppieren.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="30" hl_lines="9"
         ch_grouped_samples = ch_combined_samples
@@ -1137,11 +1137,11 @@ nextflow run main.nf
 
 Beachte, dass sich unsere Datenstruktur geändert hat und die Dateien innerhalb jedes Channel-Elements jetzt in Tupeln wie `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]` enthalten sind. Dies liegt daran, dass `groupTuple` die einzelnen Dateien für jede Probe einer Gruppe kombiniert, wenn wir es verwenden. Dies ist wichtig zu beachten, wenn man die Daten nachgelagert verarbeiten will.
 
-!!! note
+!!! note "Hinweis"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) ist das Gegenteil von groupTuple. Es entpackt die Elemente in einem Channel und flacht sie ab. Versuche, `transpose` hinzuzufügen und die Gruppierung rückgängig zu machen, die wir oben durchgeführt haben!
 
-### Zusammenfassung
+### Fazit
 
 In diesem Abschnitt hast du gelernt:
 

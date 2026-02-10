@@ -218,7 +218,7 @@ La ruta del archivo ahora será absoluta, como en `/workspaces/training/side-que
 Note también que la clase del objeto Path es `sun.nio.fs.UnixPath`: esta es la forma de Nextflow de representar archivos locales.
 Como veremos más adelante, los archivos remotos tendrán nombres de clase diferentes (como `nextflow.file.http.XPath` para archivos HTTP), pero todos funcionan exactamente de la misma manera y pueden usarse de manera idéntica en sus flujos de trabajo.
 
-!!! tip
+!!! tip "Consejo"
 
     **La diferencia clave:**
 
@@ -597,7 +597,7 @@ Entonces el proceso intentó usar la cadena relativa, `data/patientA_rep1_normal
 
 En conjunto, estos dos ejemplos le muestran cuán importante es decirle a Nextflow si una entrada debe ser manejada como un archivo.
 
-!!! note
+!!! note "Nota"
 
     Asegúrese de volver atrás y corregir ambos errores intencionales antes de continuar a la siguiente sección.
 
@@ -637,7 +637,7 @@ Por ejemplo, puede desarrollar con un conjunto de prueba pequeño y local antes 
 
 Probemos esto cambiando la ruta local que estamos proporcionando a nuestro workflow con una ruta HTTPS que apunta a una copia de los mismos datos que está almacenada en Github.
 
-!!! warning
+!!! warning "Advertencia"
 
     Esto solo funcionará si tiene una conexión a internet activa.
 
@@ -705,7 +705,7 @@ Ese archivo organizado puede entonces ser tratado como un archivo local y vincul
 
 Puede verificar que eso sucedió aquí mirando el contenido del directorio de trabajo ubicado en el valor hash del proceso.
 
-??? abstract "Contenido del directorio de trabajo"
+??? abstract "Contenido del directorio work"
 
     Si el hash del proceso fue `8a/2ab7ca`, podría explorar el directorio de trabajo:
 
@@ -727,7 +727,7 @@ Entonces, si ejecuta nuevamente en el mismo archivo y no ha eliminado el archivo
 
 Esto muestra cuán fácil es cambiar entre datos locales y remotos usando Nextflow, que es una característica clave de Nextflow.
 
-!!! note
+!!! note "Nota"
 
     La única excepción importante a este principio es que no puede usar patrones glob o rutas de directorio con HTTPS porque HTTPS no puede listar múltiples archivos, por lo que debe especificar URLs de archivos exactas.
     Sin embargo, otros protocolos de almacenamiento como blob storage (`s3://`, `az://`, `gs://`) pueden usar tanto globs como rutas de directorio.
@@ -943,7 +943,7 @@ Hay varias formas en que podríamos cargar más archivos en el canal.
 Aquí vamos a mostrarle cómo usar patrones glob, que son una forma conveniente de coincidir y recuperar nombres de archivos y directorios basados en caracteres comodín.
 El proceso de coincidir estos patrones se llama "globbing" o "expansión de nombres de archivo".
 
-!!! note
+!!! note "Nota"
 
     Como se señaló anteriormente, Nextflow soporta globbing para gestionar archivos de entrada y salida en la mayoría de los casos, excepto con rutas de archivo HTTPS porque HTTPS no puede listar múltiples archivos.
 
@@ -1048,7 +1048,7 @@ Vamos a modificar nuestro workflow para recuperar esta información en tres paso
 2. Separar la metadata usando un método llamado `tokenize()`
 3. Usar un map para organizar la metadata
 
-!!! warning
+!!! warning "Advertencia"
 
     Nunca debe codificar información sensible en nombres de archivos, como nombres de pacientes u otras características identificatorias, ya que eso puede comprometer la privacidad del paciente u otras restricciones de seguridad relevantes.
 
@@ -1596,13 +1596,13 @@ process ANALYZE_READS {
 }
 ```
 
-!!! note
+!!! note "Nota"
 
     Las directivas `tag` y `publishDir` usan sintaxis de closure (`{ ... }`) en lugar de interpolación de cadenas (`"${...}"`).
     Esto es porque estas directivas referencian variables de entrada (`meta`) que no están disponibles hasta el tiempo de ejecución.
     La sintaxis de closure difiere la evaluación hasta que el proceso realmente se ejecuta.
 
-!!! note
+!!! note "Nota"
 
     Estamos llamando a nuestro map de metadata `meta` por convención.
     Para una inmersión más profunda en meta maps, vea la misión secundaria [Metadata and meta maps](./metadata.md).

@@ -2,9 +2,9 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-In diesem Teil des Kurses werden wir den einfachstmöglichen Workflow schreiben, der alle Befehle aus Teil 1 zusammenfasst, um ihre Ausführung zu automatisieren. Dabei werden wir zunächst nur eine Probe gleichzeitig verarbeiten.
+In diesem Teil des Kurses schreiben wir den einfachstmöglichen Workflow, der alle Befehle aus Teil 1 zusammenfasst, um ihre Ausführung zu automatisieren. Dabei verarbeiten wir zunächst nur eine Probe gleichzeitig.
 
-Wir werden dies in drei Schritten tun:
+Wir gehen in drei Schritten vor:
 
 1. Einen einstufigen Workflow schreiben, der den ersten QC-Schritt ausführt
 2. Adapter-Trimming und Post-Trimming-QC hinzufügen
@@ -29,7 +29,7 @@ Wir stellen dir eine Workflow-Datei, `rnaseq.nf`, zur Verfügung, die die Hauptt
 // Modul-INCLUDE-Anweisungen
 
 /*
- * Pipeline parameters
+ * Pipeline-Parameter
  */
 
 // Primäre Eingabe
@@ -47,7 +47,7 @@ Beachte, dass dieser Workflow-Code zwar korrekt, aber noch nicht funktionsfähig
 
 ### 1.1. Ein Verzeichnis zum Speichern von Modulen erstellen
 
-Wir werden eigenständige Module für jeden Prozess erstellen, um sie einfacher verwalten und wiederverwenden zu können. Erstellen wir also ein Verzeichnis zum Speichern.
+Wir erstellen eigenständige Module für jeden Prozess, um sie einfacher verwalten und wiederverwenden zu können. Erstellen wir also ein Verzeichnis zum Speichern.
 
 ```bash
 mkdir modules
@@ -176,7 +176,7 @@ ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 
 ## 2. Adapter-Trimming und Post-Trimming-Qualitätskontrolle hinzufügen
 
-Wir werden den Trim_Galore-Wrapper verwenden, der Cutadapt für das Trimming selbst und FastQC für die Post-Trimming-Qualitätskontrolle bündelt.
+Wir verwenden den Trim_Galore-Wrapper, der Cutadapt für das Trimming selbst und FastQC für die Post-Trimming-Qualitätskontrolle bündelt.
 
 ### 2.1. Ein Modul für den Trimming- und QC-Prozess erstellen
 
@@ -393,7 +393,7 @@ _Wir werden die MultiQC-Report-Aggregation in Teil 2 hinzufügen, nachdem wir de
 
 ---
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie du alle Kernschritte zur individuellen Verarbeitung von Single-End-RNAseq-Proben zusammenfasst.
 

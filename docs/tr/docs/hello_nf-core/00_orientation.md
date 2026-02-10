@@ -1,6 +1,6 @@
 # Başlarken
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eğitim ortamını başlatma
 
@@ -103,7 +103,7 @@ Beklenen komut çıktısını özlü bir şekilde dahil etmek için bunun gibi d
 
 - **`original-hello` dizini**, Hello Nextflow eğitim serisinin tamamı boyunca çalışarak üretilen kaynak kodun bir kopyasını içerir (Docker etkinleştirilmiş olarak).
 
-- **`solutions` dizini**, kursun her adımından kaynaklanan tamamlanmış workflow betiklerini içerir.
+- **`solutions` dizini**, kursun her adımından kaynaklanan tamamlanmış iş akışı betiklerini içerir.
   Bunlar, çalışmanızı kontrol etmek ve herhangi bir sorunu gidermek için referans olarak kullanılmak üzere tasarlanmıştır.
 
 ## Hazırlık kontrol listesi

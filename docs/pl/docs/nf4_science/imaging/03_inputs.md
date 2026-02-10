@@ -125,7 +125,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Ostrzeżenie"
+!!! Warning "Ostrzeżenie"
 
     Zauważ, że ścieżki w arkuszu próbek są względne względem miejsca, **z którego uruchamiasz** Nextflow'a, a nie względem miejsca, w którym znajduje się arkusz próbek.
 

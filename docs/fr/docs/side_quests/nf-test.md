@@ -12,7 +12,7 @@ Au fur et à mesure que vous développez votre pipeline, il deviendra rapidement
 
 Les tests permettent de vérifier systématiquement que chaque partie de votre pipeline fonctionne comme prévu. Les avantages pour un·e développeur·se de tests bien écrits sont énormes :
 
-- **Confiance** : Parce que les tests couvrent l'ensemble du pipeline, vous pouvez être sûr que modifier quelque chose n'affecte rien d'autre
+- **Confiance** : Parce que les tests couvrent l'ensemble du pipeline, vous pouvez être sûr·e que modifier quelque chose n'affecte rien d'autre
 - **Fiabilité** : Lorsque plusieurs développeur·ses travaillent sur le pipeline, ils et elles savent que les autres développeur·ses n'ont pas cassé le pipeline et chaque composant.
 - **Transparence** : Les tests montrent où un pipeline échoue et facilitent le suivi du problème. Ils fonctionnent également comme une forme de documentation, montrant comment exécuter un processus ou un workflow.
 - **Rapidité** : Parce que les tests sont automatisés, ils peuvent être exécutés très rapidement et de manière répétée. Vous pouvez itérer rapidement avec moins de crainte d'introduire de nouveaux bugs.

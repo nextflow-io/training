@@ -115,7 +115,7 @@ tree -L 2 $NXF_HOME/assets/
 2 directories, 0 files
 ```
 
-!!! note
+!!! note "नोट"
 
     यदि आप हमारे प्रशिक्षण वातावरण का उपयोग नहीं कर रहे हैं तो आपके सिस्टम पर पूर्ण पथ भिन्न हो सकता है।
 
@@ -162,7 +162,7 @@ pipelines
 यह [nf-core/test-datasets](https://github.com/nf-core/test-datasets) रिपॉज़िटरी में होस्ट किए गए एक छोटे test dataset का उपयोग करके चलने के लिए pipeline के लिए कॉन्फ़िगरेशन सेटिंग्स का एक न्यूनतम सेट है।
 यह छोटे पैमाने पर एक pipeline को जल्दी से आज़माने का एक शानदार तरीका है।
 
-!!! note
+!!! note "नोट"
 
     Nextflow का configuration profile सिस्टम आपको विभिन्न कंटेनर इंजन या execution वातावरण के बीच आसानी से स्विच करने की अनुमति देता है।
     अधिक विवरण के लिए, [Hello Nextflow भाग 6: Configuration](../hello_nextflow/06_hello_config.md) देखें।
@@ -197,7 +197,7 @@ params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
 
-    // इनपुट डेटा
+    // Input data
     input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
 
 }
@@ -232,7 +232,7 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 
 इसे samplesheet कहा जाता है, और यह nf-core pipelines के लिए इनपुट का सबसे आम रूप है।
 
-!!! note
+!!! note "नोट"
 
     यदि आप डेटा प्रारूप और प्रकारों से परिचित नहीं हैं तो चिंता न करें, यह आगे के लिए महत्वपूर्ण नहीं है।
 
@@ -308,7 +308,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 आप देखेंगे कि जब आप एक बुनियादी Nextflow pipeline चलाते हैं तो कंसोल आउटपुट बहुत अधिक है।
 एक हेडर है जिसमें pipeline के संस्करण, इनपुट और आउटपुट, और कॉन्फ़िगरेशन के कुछ तत्वों का सारांश शामिल है।
 
-!!! note
+!!! note "नोट"
 
     आपका आउटपुट अलग-अलग timestamps, execution नाम और फ़ाइल पथ दिखाएगा, लेकिन समग्र संरचना और process execution समान होनी चाहिए।
 
@@ -368,7 +368,7 @@ tree -L 2 demo-results
 
 ![execution timeline report](./img/execution_timeline.png)
 
-!!! note
+!!! note "नोट"
 
     यहाँ कार्य समानांतर में नहीं चलाए गए क्योंकि हम Github Codespaces में एक minimalist मशीन पर चल रहे हैं।
     इन्हें समानांतर में चलते हुए देखने के लिए, अपने codespace के CPU allocation और test configuration में resource limits को बढ़ाने का प्रयास करें।
@@ -447,7 +447,7 @@ tree -L 1 pipelines/nf-core/demo
 
 यह थोड़ा अमूर्त लग सकता है, तो आइए देखें कि `nf-core/demo` pipeline में इसका व्यवहार में कैसे उपयोग किया जाता है।
 
-!!! note
+!!! note "नोट"
 
     हम इन modular घटकों को कैसे जोड़ा जाता है इसके लिए वास्तविक कोड पर नहीं जाएंगे, क्योंकि subworkflows के उपयोग से जुड़ी कुछ अतिरिक्त जटिलता है जो भ्रमित करने वाली हो सकती है, और उसे समझना प्रशिक्षण के इस चरण में आवश्यक नहीं है।
     फिलहाल, हम समग्र संगठन और तर्क पर ध्यान केंद्रित करने जा रहे हैं।
@@ -463,7 +463,7 @@ tree -L 1 pipelines/nf-core/demo
 एक तथाकथित _entrypoint_ स्क्रिप्ट है जिसे `main.nf` कहा जाता है, जो दो प्रकार के nested workflows के लिए एक wrapper के रूप में कार्य करता है: वास्तविक विश्लेषण तर्क वाली workflow, जो `workflows/` के तहत स्थित है और `demo.nf` कहलाती है, और housekeeping workflows का एक सेट `subworkflows/` के तहत स्थित है।
 `demo.nf` workflow `modules/` के तहत स्थित **modules** को कॉल करती है; इनमें **processes** हैं जो वास्तविक विश्लेषण चरण करेंगी।
 
-!!! note
+!!! note "नोट"
 
     Subworkflows housekeeping कार्यों तक सीमित नहीं हैं, और वे process modules का उपयोग कर सकते हैं।
 
@@ -488,7 +488,7 @@ tree -L 1 pipelines/nf-core/demo
 
 `demo.nf` workflow `modules/` के तहत स्थित **modules** को कॉल करती है, जिसकी हम अगली बार समीक्षा करेंगे।
 
-!!! note
+!!! note "नोट"
 
     कुछ nf-core विश्लेषण workflows निम्न-स्तरीय subworkflows को कॉल करके nesting के अतिरिक्त स्तर प्रदर्शित करती हैं।
     यह ज्यादातर दो या अधिक modules को wrap करने के लिए उपयोग किया जाता है जो आमतौर पर एक साथ आसानी से पुन: उपयोग योग्य pipeline segments में उपयोग किए जाते हैं।
@@ -574,7 +574,7 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
 जैसा कि ऊपर बताया गया है, `nf-core/demo` pipeline में कोई विश्लेषण-विशिष्ट subworkflows शामिल नहीं हैं, इसलिए यहाँ हम जो सभी subworkflows देखते हैं वे तथाकथित 'housekeeping' या 'utility' workflows हैं, जैसा कि उनके नामों में `utils_` prefix द्वारा दर्शाया गया है।
 ये subworkflows वे हैं जो कंसोल आउटपुट में fancy nf-core header उत्पन्न करती हैं, अन्य सहायक कार्यों के बीच।
 
-!!! tip
+!!! tip "सुझाव"
 
     उनके नामकरण पैटर्न के अलावा, एक और संकेत है कि ये subworkflows कोई वास्तव में विश्लेषण-संबंधित कार्य नहीं करती हैं वह यह है कि वे किसी भी processes को बिल्कुल नहीं कॉल करती हैं।
 
@@ -640,6 +640,6 @@ SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
 
 एक ब्रेक लें! वह बहुत कुछ था। जब आप तरोताज़ा महसूस करें और तैयार हों, तो एक nf-core compatible pipeline लिखने के लिए जो आपने सीखा है उसे लागू करने के लिए अगले अनुभाग पर जाएं।
 
-!!! tip
+!!! tip "सुझाव"
 
     यदि आप अगले भाग पर जाने से पहले subworkflows के साथ workflows बनाने का तरीका सीखना चाहते हैं, तो [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest देखें।

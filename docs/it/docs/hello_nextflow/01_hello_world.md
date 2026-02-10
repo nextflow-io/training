@@ -7,12 +7,12 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Guarda [l'intera playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sul canale YouTube di Nextflow.
+:fontawesome-brands-youtube:{ .youtube } Guardate [l'intera playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) sul canale YouTube di Nextflow.
 
 :green_book: La trascrizione del video è disponibile [qui](./transcripts/01_hello_world.md).
 ///
 
-In questa prima parte del corso di formazione Hello Nextflow, introduciamo l'argomento con un esempio Hello World molto semplice e indipendente dal dominio, che costruiremo progressivamente per dimostrare l'uso della logica e dei componenti fondamentali di Nextflow.
+In questa prima parte del corso di formazione Hello Nextflow, ci addentriamo nell'argomento con un esempio Hello World molto semplice e indipendente dal dominio, che costruiremo progressivamente per dimostrare l'uso della logica e dei componenti fondamentali di Nextflow.
 
 ??? info "Cos'è un esempio Hello World?"
 
@@ -66,13 +66,13 @@ Questo non produce alcun output nel terminale.
 Il testo 'Hello World' dovrebbe ora trovarsi nel file di output che abbiamo specificato, chiamato `output.txt`.
 Potete aprirlo nell'esplora file o dalla riga di comando utilizzando l'utility `cat`, ad esempio.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="output.txt" linenums="1"
     Hello World!
     ```
 
-Questo è ciò che cercheremo di replicare con il nostro primo workflow Nextflow.
+Questo è ciò che cercheremo di replicare con il nostro primo flusso di lavoro Nextflow.
 
 ### Takeaway
 
@@ -80,15 +80,15 @@ Ora sapete come eseguire un semplice comando nel terminale che produce del testo
 
 ### Cosa c'è dopo?
 
-Scoprite come apparirebbe scritto come workflow Nextflow.
+Scoprite come apparirebbe scritto come flusso di lavoro Nextflow.
 
 ---
 
 ## 1. Esaminare lo script ed eseguirlo
 
-Vi forniamo uno script di workflow completamente funzionale, anche se minimalista, chiamato `hello-world.nf` che fa la stessa cosa di prima (scrive 'Hello World!') ma con Nextflow.
+Vi forniamo uno script di flusso di lavoro completamente funzionale, anche se minimalista, chiamato `hello-world.nf` che fa la stessa cosa di prima (scrive 'Hello World!') ma con Nextflow.
 
-Per iniziare, apriamo lo script del workflow così potete farvi un'idea di come è strutturato.
+Per iniziare, apriamo lo script del flusso di lavoro così potete farvi un'idea di come è strutturato.
 Poi lo eseguiremo e cercheremo i suoi output.
 
 ### 1.1. Esaminare il codice
@@ -122,7 +122,7 @@ Troverete lo script `hello-world.nf` nella vostra directory corrente, che dovreb
     }
     ```
 
-Uno script di workflow Nextflow include tipicamente una o più definizioni di [**process**](https://nextflow.io/docs/latest/process.html) e il [**workflow**](https://nextflow.io/docs/latest/workflow.html) stesso, più alcuni blocchi opzionali (non presenti qui) che introdurremo più avanti.
+Uno script di flusso di lavoro Nextflow include tipicamente una o più definizioni di [**process**](https://nextflow.io/docs/latest/process.html) e il [**workflow**](https://nextflow.io/docs/latest/workflow.html) stesso, più alcuni blocchi opzionali (non presenti qui) che introdurremo più avanti.
 
 Ogni **process** descrive quale/i operazione/i il corrispondente step nella pipeline dovrebbe eseguire, mentre il **workflow** descrive la logica del flusso di dati che connette i vari step.
 
@@ -179,7 +179,7 @@ In una pipeline reale, un process contiene di solito blocchi aggiuntivi come dir
 Il secondo blocco di codice descrive il **workflow** stesso.
 La definizione del workflow inizia con la parola chiave `workflow`, seguita da un nome opzionale, poi dal corpo del workflow delimitato da parentesi graffe.
 
-Qui abbiamo un **workflow** che consiste in un blocco `main:` (che dice 'questo è il corpo principale del workflow') contenente una chiamata al process `sayHello`.
+Qui abbiamo un **workflow** che consiste in un blocco `main:` (che dice 'questo è il corpo principale del flusso di lavoro') contenente una chiamata al process `sayHello`.
 
 ```groovy title="hello-world.nf" linenums="17"
 workflow {
@@ -191,20 +191,20 @@ workflow {
 ```
 
 Questa è una definizione di **workflow** molto minimale.
-In una pipeline reale, il workflow contiene tipicamente multiple chiamate a **processi** connessi da **channel**, e i processi si aspettano uno o più **input** variabili.
+In una pipeline reale, il workflow contiene tipicamente multiple chiamate a **processi** connessi da **canali**, e i processi si aspettano uno o più **input** variabili.
 
-Imparerete come aggiungere input variabili più avanti in questo modulo di formazione; e imparerete come aggiungere più processi e connetterli tramite channel nella Parte 3 di questo corso.
+Imparerete come aggiungere input variabili più avanti in questo modulo di formazione; e imparerete come aggiungere più processi e connetterli tramite canali nella Parte 3 di questo corso.
 
 !!! tip "Suggerimento"
 
-    Tecnicamente la riga `main:` non è richiesta per workflow semplici come questo, quindi potreste incontrare workflow che non ce l'hanno.
+    Tecnicamente la riga `main:` non è richiesta per flussi di lavoro semplici come questo, quindi potreste incontrare flussi di lavoro che non ce l'hanno.
     Ma ne avremo bisogno per sfruttare gli output a livello di workflow, quindi tanto vale includerla dall'inizio.
 
-### 1.2. Eseguire il workflow
+### 1.2. Eseguire il flusso di lavoro
 
 Guardare il codice non è divertente quanto eseguirlo, quindi proviamolo in pratica.
 
-#### 1.2.1. Avviare il workflow e monitorare l'esecuzione
+#### 1.2.1. Avviare il flusso di lavoro e monitorare l'esecuzione
 
 Nel terminale, eseguite il seguente comando:
 
@@ -223,7 +223,7 @@ nextflow run hello-world.nf
     [65/7be2fa] sayHello | 1 of 1 ✔
     ```
 
-Se l'output della console assomiglia a questo, congratulazioni, avete appena eseguito il vostro primo workflow Nextflow!
+Se l'output della console assomiglia a questo, congratulazioni, avete appena eseguito il vostro primo flusso di lavoro Nextflow!
 
 L'output più importante qui è l'ultima riga, che è evidenziata nell'output sopra:
 
@@ -248,7 +248,7 @@ Guardando cosa abbiamo ottenuto per l'esecuzione mostrata sopra, la riga di log 
 
 Diamo un'occhiata a cosa c'è dentro.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     work
@@ -264,7 +264,7 @@ Diamo un'occhiata a cosa c'è dentro.
             └── output.txt
     ```
 
-??? question "Non vedete la stessa cosa?"
+??? question "Non vedi la stessa cosa?"
 
     I nomi esatti delle sottodirectory saranno diversi sul vostro sistema.
 
@@ -275,10 +275,10 @@ Diamo un'occhiata a cosa c'è dentro.
     tree -a work
     ```
 
-La prima cosa che vorrete guardare è l'output effettivo del workflow, cioè il file `output.txt` prodotto dal process `sayHello`.
-Apritelo e troverete il saluto `Hello World!`, che era lo scopo del nostro workflow minimalista.
+La prima cosa che vorrete guardare è l'output effettivo del flusso di lavoro, cioè il file `output.txt` prodotto dal process `sayHello`.
+Apritelo e troverete il saluto `Hello World!`, che era lo scopo del nostro flusso di lavoro minimalista.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="output.txt"
     Hello World!
@@ -300,7 +300,7 @@ Detto questo, diamo anche un'occhiata agli altri file in quella directory. Sono 
 
 Il file `.command.sh` è particolarmente utile perché indica il comando principale che Nextflow ha eseguito, non includendo tutta la contabilità e la configurazione dell'attività/ambiente.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title=".command.sh"
     #!/bin/bash -ue
@@ -312,11 +312,11 @@ Questo corrisponde a quanto abbiamo eseguito manualmente prima.
 In questo caso è molto semplice perché il comando del process era codificato in modo fisso, ma più avanti nel corso vedrete comandi di process che coinvolgono qualche interpolazione di variabili.
 Questo rende particolarmente prezioso poter vedere esattamente come Nextflow ha interpretato il codice e quale comando è stato prodotto quando si sta risolvendo un problema in un'esecuzione fallita.
 
-### 1.3. Eseguire di nuovo il workflow
+### 1.3. Eseguire di nuovo il flusso di lavoro
 
-Provate a rieseguire il workflow alcune volte, poi guardate le directory delle attività sotto `work/`.
+Provate a rieseguire il flusso di lavoro alcune volte, poi guardate le directory delle attività sotto `work/`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     work
@@ -372,7 +372,7 @@ Provate a rieseguire il workflow alcune volte, poi guardate le directory delle a
     ```
 
 Vedete che è stata creata una nuova sottodirectory con un set completo di file di output e log per ogni esecuzione.
-Questo mostra che eseguire lo stesso workflow più volte non sovrascriverà i risultati delle esecuzioni precedenti.
+Questo mostra che eseguire lo stesso flusso di lavoro più volte non sovrascriverà i risultati delle esecuzioni precedenti.
 
 ### Takeaway
 
@@ -380,7 +380,7 @@ Sapete come decifrare un semplice script Nextflow, eseguirlo e trovare l'output 
 
 ### Cosa c'è dopo?
 
-Imparate come pubblicare gli output del workflow in una posizione più conveniente.
+Imparate come pubblicare gli output del flusso di lavoro in una posizione più conveniente.
 
 ---
 
@@ -403,7 +403,7 @@ Questo coinvolgerà due nuovi pezzi di codice:
 
 Dobbiamo aggiungere un blocco `publish:` al corpo del workflow (stesso tipo di elemento di codice del blocco `main:`) e listare l'output del process `sayHello()`.
 
-Nel file dello script del workflow `hello-world.nf`, aggiungete le seguenti righe di codice:
+Nel file dello script del flusso di lavoro `hello-world.nf`, aggiungete le seguenti righe di codice:
 
 === "Dopo"
 
@@ -436,7 +436,7 @@ Vedete che possiamo riferirci all'output del process semplicemente facendo `sayH
 
 Ora dobbiamo solo aggiungere il blocco `output:` dove verrà specificato il percorso della directory di output. Notate che questo nuovo blocco si trova **fuori** e **sotto** il blocco `workflow` all'interno dello script.
 
-Nel file dello script del workflow `hello-world.nf`, aggiungete le seguenti righe di codice:
+Nel file dello script del flusso di lavoro `hello-world.nf`, aggiungete le seguenti righe di codice:
 
 === "Dopo"
 
@@ -475,9 +475,9 @@ Nel file dello script del workflow `hello-world.nf`, aggiungete le seguenti righ
 Possiamo usare questo per assegnare percorsi specifici a qualsiasi output di process dichiarato nel blocco `workflow`.
 Più avanti imparerete modi per generare strutture di directory di output sofisticate, ma per ora stiamo semplicemente codificando in modo fisso un percorso minimo per semplicità.
 
-#### 2.1.3. Eseguire il workflow
+#### 2.1.3. Eseguire il flusso di lavoro
 
-Ora eseguite lo script del workflow modificato:
+Ora eseguite lo script del flusso di lavoro modificato:
 
 ```bash
 nextflow run hello-world.nf
@@ -498,7 +498,7 @@ L'output del terminale dovrebbe sembrare familiare. Esternamente, nulla è cambi
 
 Tuttavia, controllate il vostro esplora file: questa volta, Nextflow ha creato una nuova directory chiamata `results/`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console hl_lines="10-11 22"
     .
@@ -563,7 +563,7 @@ Per impostare una posizione personalizzata, basta modificare il `path` di conseg
 
 Poiché questo è impostato a livello del singolo output, potete specificare posizioni e sottodirectory diverse per soddisfare le vostre esigenze.
 
-#### 2.2.2. Eseguire di nuovo il workflow
+#### 2.2.2. Eseguire di nuovo il flusso di lavoro
 
 Proviamo.
 
@@ -584,7 +584,7 @@ nextflow run hello-world.nf
 
 Questa volta il risultato viene scritto nella sottodirectory specificata.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console hl_lines="2-3"
     results/
@@ -642,7 +642,7 @@ Basta aggiungere `mode 'copy'` alla definizione di output a livello di workflow 
 
 Questo imposta la modalità di pubblicazione per quello specifico output.
 
-#### 2.3.2. Eseguire di nuovo il workflow
+#### 2.3.2. Eseguire di nuovo il flusso di lavoro
 
 Proviamo.
 
@@ -663,7 +663,7 @@ nextflow run hello-world.nf
 
 Questa volta, se guardate i risultati, il file è una copia vera e propria invece di un semplice symlink.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console hl_lines="3"
     results/
@@ -704,7 +704,7 @@ Tuttavia, non raccomandiamo di usarlo in nessun nuovo lavoro poiché sarà event
 
 ### Takeaway
 
-Sapete come pubblicare gli output del workflow in una posizione più conveniente.
+Sapete come pubblicare gli output del flusso di lavoro in una posizione più conveniente.
 
 ### Cosa c'è dopo?
 
@@ -714,7 +714,7 @@ Imparate a fornire un input variabile tramite un parametro da riga di comando e 
 
 ## 3. Usare un input variabile passato dalla riga di comando
 
-Nel suo stato attuale, il nostro workflow usa un saluto codificato in modo fisso nel comando del process.
+Nel suo stato attuale, il nostro flusso di lavoro usa un saluto codificato in modo fisso nel comando del process.
 Vogliamo aggiungere un po' di flessibilità usando una variabile di input, così da poter cambiare più facilmente il saluto a runtime.
 
 Questo richiede di apportare tre serie di modifiche al nostro script:
@@ -786,14 +786,14 @@ Il simbolo `$` e le parentesi graffe (`{ }`) dicono a Nextflow che questo è un 
 
 !!! tip "Suggerimento"
 
-    Le parentesi graffe (`{ }`) erano tecnicamente opzionali nelle versioni precedenti di Nextflow, quindi potreste vedere workflow più vecchi dove questo è scritto come `echo '$greeting' > output.txt`.
+    Le parentesi graffe (`{ }`) erano tecnicamente opzionali nelle versioni precedenti di Nextflow, quindi potreste vedere flussi di lavoro più vecchi dove questo è scritto come `echo '$greeting' > output.txt`.
 
 Ora che il process `sayHello()` è pronto ad accettare un input variabile, abbiamo bisogno di un modo per fornire un valore di input alla chiamata del process a livello di workflow.
 
 ### 3.2. Impostare un parametro da riga di comando per catturare l'input dell'utente
 
 Potremmo semplicemente codificare in modo fisso un input direttamente facendo la chiamata al process `sayHello('Hello World!')`.
-Tuttavia, quando facciamo lavoro reale con il nostro workflow, vorremo essere in grado di controllare i suoi input dalla riga di comando, così da poter fare qualcosa del genere:
+Tuttavia, quando facciamo lavoro reale con il nostro flusso di lavoro, vorremo essere in grado di controllare i suoi input dalla riga di comando, così da poter fare qualcosa del genere:
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_world_input.svg"
@@ -826,7 +826,7 @@ Questo dice a Nextflow di eseguire il process `sayHello` sul valore fornito tram
 
 In effetti, abbiamo compiuto i passaggi (2) e (3) delineati all'inizio della sezione in un colpo solo.
 
-### 3.3. Eseguire il comando del workflow
+### 3.3. Eseguire il comando del flusso di lavoro
 
 Eseguiamolo!
 
@@ -849,7 +849,7 @@ Se avete fatto tutte queste modifiche correttamente, dovreste ottenere un'altra 
 
 Assicuratevi di aprire il file di output per verificare che ora abbiate la nuova versione del saluto.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_world/output.txt"
     Bonjour le monde!
@@ -884,20 +884,20 @@ params {
 }
 ```
 
-Come vedete, possiamo specificare il tipo di input che il workflow si aspetta (Nextflow 25.10.2 e successivi).
+Come vedete, possiamo specificare il tipo di input che il flusso di lavoro si aspetta (Nextflow 25.10.2 e successivi).
 La sintassi è `nome: Tipo = valore_predefinito`.
 I tipi supportati includono `String`, `Integer`, `Float`, `Boolean` e `Path`.
 
-!!! info "Nota"
+!!! info "Info"
 
-    Nei workflow più vecchi, potreste vedere quel intero blocco `params` scritto semplicemente come `input = 'Holà mundo!'`.
+    Nei flussi di lavoro più vecchi, potreste vedere quel intero blocco `params` scritto semplicemente come `input = 'Holà mundo!'`.
 
 Man mano che aggiungete più parametri alla vostra pipeline, dovreste aggiungerli tutti a questo blocco, che debbano o meno avere un valore predefinito.
 Questo renderà facile trovare tutti i parametri configurabili a colpo d'occhio.
 
-#### 3.4.2. Eseguire di nuovo il workflow senza specificare il parametro
+#### 3.4.2. Eseguire di nuovo il flusso di lavoro senza specificare il parametro
 
-Ora che avete un valore predefinito impostato, potete eseguire di nuovo il workflow senza dover specificare un valore nella riga di comando.
+Ora che avete un valore predefinito impostato, potete eseguire di nuovo il flusso di lavoro senza dover specificare un valore nella riga di comando.
 
 ```bash
 nextflow run hello-world.nf
@@ -916,7 +916,7 @@ nextflow run hello-world.nf
 
 L'output sarà nella stessa posizione di prima, ma i contenuti dovrebbero essere aggiornati con il nuovo testo.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_world/output.txt"
     Holà mundo!
@@ -947,7 +947,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
 Ancora una volta, dovreste trovare l'output aggiornato corrispondente nella vostra directory results.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_world/output.txt"
     Konnichiwa!
@@ -966,19 +966,19 @@ Sapete come usare un semplice input variabile fornito a runtime tramite un param
 
 ### Cosa c'è dopo?
 
-Imparate a gestire le esecuzioni del workflow in modo più conveniente.
+Imparate a gestire le esecuzioni del flusso di lavoro in modo più conveniente.
 
 ---
 
-## 4. Gestire le esecuzioni del workflow
+## 4. Gestire le esecuzioni del flusso di lavoro
 
-Sapere come avviare workflow e recuperare output è ottimo, ma scoprirete rapidamente che ci sono alcuni altri aspetti della gestione del workflow che vi renderanno la vita più facile, specialmente se state sviluppando i vostri workflow.
+Sapere come avviare flussi di lavoro e recuperare output è ottimo, ma scoprirete rapidamente che ci sono alcuni altri aspetti della gestione del flusso di lavoro che vi renderanno la vita più facile, specialmente se state sviluppando i vostri flussi di lavoro.
 
-Qui vi mostriamo come usare la funzione [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) per quando dovete ri-avviare lo stesso workflow, come ispezionare il log delle esecuzioni passate con [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log), e come eliminare le directory work più vecchie con [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean).
+Qui vi mostriamo come usare la funzione [`-resume`](https://nextflow.io/docs/latest/cache-and-resume.html) per quando dovete ri-avviare lo stesso flusso di lavoro, come ispezionare il log delle esecuzioni passate con [`nextflow log`](https://nextflow.io/docs/latest/reference/cli.html#log), e come eliminare le directory work più vecchie con [`nextflow clean`](https://nextflow.io/docs/latest/reference/cli.html#clean).
 
 <!-- Any other cool options we should include? Added log -->
 
-### 4.1. Ri-avviare un workflow con `-resume`
+### 4.1. Ri-avviare un flusso di lavoro con `-resume`
 
 A volte vorrete ri-eseguire una pipeline che avete già avviato in precedenza senza rifare alcuno step che è già stato completato con successo.
 
@@ -1023,9 +1023,9 @@ Nextflow vi sta letteralmente indicando l'esecuzione precedente e dicendo "Ho gi
 Che stiate sviluppando una nuova pipeline o eseguendo pipeline in produzione, a un certo punto avrete probabilmente bisogno di cercare informazioni sulle esecuzioni passate.
 Ecco come fare.
 
-Ogni volta che avviate un workflow nextflow, una riga viene scritta in un file di log chiamato `history`, sotto una directory nascosta chiamata `.nextflow` nella directory di lavoro corrente.
+Ogni volta che avviate un flusso di lavoro nextflow, una riga viene scritta in un file di log chiamato `history`, sotto una directory nascosta chiamata `.nextflow` nella directory di lavoro corrente.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```txt title=".nextflow/history" linenums="1"
     2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
@@ -1069,7 +1069,7 @@ Fortunatamente Nextflow include un utile sottocomando `clean` che potete usare p
 
 #### 4.3.1. Determinare i criteri di eliminazione
 
-Ci sono multiple [opzioni](https://nextflow.io/docs/latest/reference/cli.html#clean) per determinare cosa eliminare.
+Ci sono multiple [opzioni](https://www.nextflow.io/docs/latest/reference/cli.html#clean) per determinare cosa eliminare.
 
 Qui vi mostriamo un esempio che elimina tutte le sottodirectory dalle esecuzioni precedenti a una data esecuzione, specificata usando il suo nome di esecuzione.
 
@@ -1124,13 +1124,13 @@ Notate che questo non rimuove le sottodirectory a due caratteri (come `a3/` sopr
 
 Sapete come pubblicare output in una directory specifica, ri-avviare una pipeline senza ripetere step che erano già stati eseguiti in modo identico, e usare il comando `nextflow clean` per pulire le directory work vecchie.
 
-Più in generale, sapete come interpretare un semplice workflow Nextflow, gestire la sua esecuzione e recuperare gli output.
+Più in generale, sapete come interpretare un semplice flusso di lavoro Nextflow, gestire la sua esecuzione e recuperare gli output.
 
 ### Cosa c'è dopo?
 
 Prendetevi una piccola pausa, ve la siete meritata!
 
-Quando siete pronti, passate alla [**Parte 2: Hello Channels**](./02_hello_channels.md) per imparare come usare i channel per alimentare gli input nel vostro workflow, il che vi permetterà di sfruttare il parallelismo del flusso dati integrato di Nextflow e altre potenti funzionalità.
+Quando siete pronti, passate alla [**Parte 2: Hello Channels**](./02_hello_channels.md) per imparare come usare i canali per alimentare gli input nel vostro flusso di lavoro, il che vi permetterà di sfruttare il parallelismo del flusso dati integrato di Nextflow e altre potenti funzionalità.
 
 ---
 
@@ -1143,7 +1143,7 @@ Quali sono i componenti minimi richiesti di un process Nextflow?
 - [ ] Blocchi input, output e script
 - [ ] Solo un blocco script
 
-Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
+Approfondisci: [1.1.1. La definizione del `process`](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1153,11 +1153,11 @@ Qual è lo scopo del blocco output in un process?
 - [x] Dichiarare gli output attesi dal process
 - [ ] Definire variabili d'ambiente
 
-Approfondisci: [1.1.1. La definizione del `process`](#111-la-definizione-del-process)
+Approfondisci: [1.1.1. La definizione del `process`](#111-the-process-definition)
 </quiz>
 
 <quiz>
-Quale comando viene usato per eseguire un workflow Nextflow?
+Quale comando viene usato per eseguire un flusso di lavoro Nextflow?
 - [ ] `nextflow start`
 - [ ] `nextflow execute`
 - [x] `nextflow run`
@@ -1184,37 +1184,37 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Approfondisci: [1.2.2. Trovare l'output e i log nella directory `work`](#122-trovare-loutput-e-i-log-nella-directory-work)
+Approfondisci: [1.2.2. Trovare l'output e i log nella directory `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
 Cosa fa il flag `-resume`?
-- [ ] Riavvia il workflow dall'inizio
-- [ ] Mette in pausa il workflow
+- [ ] Riavvia il flusso di lavoro dall'inizio
+- [ ] Mette in pausa il flusso di lavoro
 - [x] Salta i processi che sono già stati completati con successo
-- [ ] Crea un backup del workflow
+- [ ] Crea un backup del flusso di lavoro
 
-Approfondisci: [4.1. Ri-avviare un workflow con `-resume`](#41-ri-avviare-un-workflow-con--resume)
+Approfondisci: [4.1. Ri-avviare un flusso di lavoro con `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
-Qual è la modalità predefinita per pubblicare gli output del workflow?
+Qual è la modalità predefinita per pubblicare gli output del flusso di lavoro?
 - [ ] Copiare i file nella directory di output
 - [x] Creare link simbolici nella directory di output
 - [ ] Spostare i file nella directory di output
 - [ ] Comprimere i file nella directory di output
 
-Approfondisci: [2.3. Impostare la modalità di pubblicazione su copy](#23-impostare-la-modalità-di-pubblicazione-su-copy)
+Approfondisci: [2.3. Impostare la modalità di pubblicazione su copy](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
-Come si passa un valore di parametro a un workflow Nextflow dalla riga di comando?
+Come si passa un valore di parametro a un flusso di lavoro Nextflow dalla riga di comando?
 - [ ] `-parameter value`
 - [ ] `--parameter:value`
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Approfondisci: [3.2. Impostare un parametro da riga di comando per catturare l'input dell'utente](#32-impostare-un-parametro-da-riga-di-comando-per-catturare-linput-dellutente)
+Approfondisci: [3.2. Impostare un parametro da riga di comando per catturare l'input dell'utente](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

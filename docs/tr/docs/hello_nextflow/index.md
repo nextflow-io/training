@@ -7,15 +7,15 @@ index_type: course
 additional_information:
     technical_requirements: true
     learning_objectives:
-        - Nextflow iş akışlarının çalıştırılmasını başlatma ve yönetme
+        - Nextflow iş akışlarının yürütülmesini başlatma ve yönetme
         - Nextflow tarafından oluşturulan çıktıları (sonuçlar) ve günlük dosyalarını bulma ve yorumlama
         - Temel sorunları giderme
         - Temel Nextflow bileşenlerinden basit bir çok adımlı iş akışı oluşturma
         - Temel kanal fabrikaları ve operatör türlerini ayırt etme ve bunları basit bir iş akışında etkili bir şekilde kullanma
-        - HPC ve bulut dahil olmak üzere yaygın hesaplama platformlarında çalışacak şekilde iş akışı yürütmeyi yapılandırma
-        - Kod modülerliği ve yazılım konteynerleri dahil olmak üzere iş akışlarını FAIR yapan tekrarlanabilirlik, taşınabilirlik ve kod yeniden kullanımı için en iyi uygulamaları uygulama
+        - HPC ve bulut dahil olmak üzere yaygın hesaplama platformlarında çalışacak şekilde boru hattı yürütmeyi yapılandırma
+        - Kod modülerliği ve yazılım konteynerleri dahil olmak üzere boru hatlarını FAIR yapan tekrarlanabilirlik, taşınabilirlik ve kod yeniden kullanımı için en iyi uygulamaları uygulama
     audience_prerequisites:
-        - "**Hedef kitle:** Bu kurs, Nextflow'a tamamen yeni olan ve kendi iş akışlarını geliştirmek isteyen öğrenciler için tasarlanmıştır."
+        - "**Hedef kitle:** Bu kurs, Nextflow'a tamamen yeni olan ve kendi boru hatlarını geliştirmek isteyen öğrenciler için tasarlanmıştır."
         - "**Beceriler:** Komut satırı, temel betik kavramları ve yaygın dosya formatları ile biraz aşinalık varsayılmaktadır."
         - "**Alan:** Alıştırmaların tümü alana bağımlı değildir, bu nedenle önceden bilimsel bilgi gerekmez."
     videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
@@ -23,9 +23,9 @@ additional_information:
 
 # Hello Nextflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Hello Nextflow, tekrarlanabilir ve ölçeklenebilir veri analizi iş akışları oluşturmaya pratik bir giriştir.**
+**Hello Nextflow, tekrarlanabilir ve ölçeklenebilir veri analizi iş akışları oluşturmaya uygulamalı bir giriştir.**
 
 Pratik örnekler ve rehberli alıştırmalar üzerinde çalışarak, süreçleri tanımlama, bunları boru hatlarına bağlama, dosya ve yazılım bağımlılıklarını yönetme, yürütmeyi zahmetsizce paralelleştirme ve farklı hesaplama ortamlarında iş akışlarını çalıştırma dahil olmak üzere Nextflow ile boru hatları geliştirmenin temellerini öğreneceksiniz.
 

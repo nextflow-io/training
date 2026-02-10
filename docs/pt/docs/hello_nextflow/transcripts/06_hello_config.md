@@ -238,7 +238,7 @@ Ou é uma boa prática fazer o que o site de material de treinamento diz para fa
 
 Note que contêineres são um pouco superiores neste aspecto, porque quando você instala algo com Conda, ainda vai descobrir todas as dependências para aquele pacote, e elas podem mudar ao longo do tempo. Chamado desvio de dependência.
 
-Então contêineres, no entanto, travam toda a pilha de toda a pilha de dependências de software até o fim, então você pode estar um pouco mais confiante que A, vai funcionar, e B, será reproduzível.
+Então contêineres, no entanto, travam toda a pilha de toda a pilha de dependências até o fim, então você pode estar um pouco mais confiante que A, vai funcionar, e B, será reproduzível.
 
 Então se você é capaz de usar Docker ou Singularity ou Apptainer, eu definitivamente recomendaria isso.
 
@@ -258,7 +258,7 @@ Note que você pode na verdade usar uma mistura de diferentes tecnologias. Entã
 
 ## 4. Selecione uma plataforma de execução
 
-Então isso é empacotamento de software. A outra parte da portabilidade para outros sistemas é onde os trabalhos realmente executam. No momento, estou executando basicamente no meu_laptop ou neste Codespaces, que é um único computador. Não há nada sofisticado. Nextflow está sendo um pouco inteligente sobre paralelizar os trabalhos da melhor forma que pode, mas está tudo em um sistema.
+Então isso é empacotamento de software. A outra parte da portabilidade para outros sistemas é onde os trabalhos realmente executam. No momento, estou executando basicamente no meu laptop ou neste Codespaces, que é um único computador. Não há nada sofisticado. Nextflow está sendo um pouco inteligente sobre paralelizar os trabalhos da melhor forma que pode, mas está tudo em um sistema.
 
 Agora, se você está executando em um HPC, você provavelmente tem algum tipo de agendador de trabalhos como SLURM ou PBS ou algo assim, e você submeterá trabalhos para aquele agendador e ele distribuirá todos os trabalhos para diferentes nós de computação.
 

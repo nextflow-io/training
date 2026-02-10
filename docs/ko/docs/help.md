@@ -20,7 +20,7 @@ hide:
 
     ---
 
-    커뮤니티 포럼에는 교육 전용 카테고리가 있어 질문을 게시하거나 교육과 관련하여 겪고 있는 문제를 보고하기에 좋은 장소입니다. 이미 질문이 올라와 있고 답변이 되어 있을 수도 있습니다!
+    저희 커뮤니티 포럼에는 교육 전용 카테고리가 있어 질문을 게시하거나 교육과 관련하여 겪고 있는 문제를 보고하기에 좋은 장소입니다. 이미 질문이 올라와 있고 답변이 되어 있을 수도 있습니다!
 
     [교육 포럼 참여하기:material-arrow-right:](https://community.seqera.io/c/training/39){ .md-button .md-button--primary .mt-1 }
 
@@ -46,7 +46,7 @@ hide:
 
     Seqera AI는 Nextflow 및 nf-core 리소스에 대해 훈련된 AI 어시스턴트입니다. 코드 디버깅, Nextflow 개념 설명, 문서 검색을 더 빠르게 도와줄 수 있습니다. 과정을 진행하는 동안 24시간 연중무휴로 이용할 수 있는 튜터라고 생각하시면 됩니다.
 
-    [Seqera AI에게 질문하기:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
+    [Seqera AI에게 질문하기:material-arrow-right:](https://seqera.io/ai/){ .md-button .md-button--primary .mt-1 }
 
 -   :material-book-open-variant:{ .lg .middle } __Nextflow 문서__
 

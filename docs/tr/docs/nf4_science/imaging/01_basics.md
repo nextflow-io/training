@@ -1,6 +1,6 @@
 # Bölüm 1: Temel işlemleri çalıştırın
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow for Bioimaging eğitim kursunun bu ilk bölümünde, temel işlemleri göstermek ve ilgili Nextflow kod bileşenlerine işaret etmek için çok basit, alan-bağımsız bir Hello World örneği kullanacağız.
 
@@ -36,7 +36,7 @@ Buradaki en önemli çıktı son satırdır (satır 6):
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Bu bize `sayHello` sürecinin bir kez başarıyla çalıştırıldığını söylüyor (`1 of 1 ✔`).
+Bu bize `sayHello` **process**'inin bir kez başarıyla çalıştırıldığını söylüyor (`1 of 1 ✔`).
 
 Bu harika, ancak merak ediyor olabilirsiniz: çıktı nerede?
 
@@ -69,12 +69,12 @@ Ancak, 'yayınlanmış' sonucun, Nextflow'un workflow'u çalıştırırken üret
 
 !!! warning "Uyarı"
 
-    Tüm workflow'lar çıktıları bir results dizinine yayınlayacak şekilde ayarlanmamış olabilir ve/veya dizin adı farklı olabilir.
+    Tüm workflow'lar çıktıları bir results dizinine yayınlayacak şekilde ayarlanmış olmayabilir ve/veya dizin adı farklı olabilir.
     Bu bölümde biraz ilerledikten sonra, bu davranışın nerede belirtildiğini nasıl öğreneceğinizi göstereceğiz.
 
 ### 1.3. `work/` dizininde orijinal çıktıyı ve günlükleri bulun
 
-Bir workflow çalıştırdığınızda, Nextflow workflow'daki her sürecin her çağrısı için (=pipeline'daki her adım) ayrı bir 'görev dizini' oluşturur.
+Bir workflow çalıştırdığınızda, Nextflow workflow'daki her **process**'in her çağrısı için (=pipeline'daki her adım) ayrı bir 'görev dizini' oluşturur.
 Her biri için gerekli girdileri hazırlar, ilgili komut(lar)ı çalıştırır ve o dizin içinde çıktıları ve günlük dosyalarını yazar; dizin benzersiz hale getirmek için otomatik olarak bir hash kullanılarak adlandırılır.
 
 Tüm bu görev dizinleri, mevcut dizininizin içinde (komutu çalıştırdığınız yerde) `work` adlı bir dizin altında bulunacaktır.
@@ -88,7 +88,7 @@ Daha önce çalıştırdığımız workflow'un konsol çıktısına geri döners
 ```
 
 Satırın `[a3/7be2fa]` ile nasıl başladığını görüyor musunuz?
-Bu, o süreç çağrısı için görev dizini yolunun kısaltılmış bir biçimidir ve `sayHello` süreç çağrısının çıktısını `work/` dizin yolu içinde nerede bulacağınızı söyler.
+Bu, o **process** çağrısı için görev dizini yolunun kısaltılmış bir biçimidir ve `sayHello` **process** çağrısının çıktısını `work/` dizin yolu içinde nerede bulacağınızı söyler.
 
 Tam yolu aşağıdaki komutu yazarak (kendi terminalinizde gördüğünüzle `a3/7be2fa` yerine koyarak) ve tab tuşuna basarak yolu otomatik tamamlayarak veya bir yıldız işareti ekleyerek bulabilirsiniz:
 
@@ -130,7 +130,7 @@ work
 
 </details>
 
-`output.txt` dosyasını hemen tanımalısınız; aslında bu, `results` dizinine yayınlanan `sayHello` sürecinin orijinal çıktısıdır.
+`output.txt` dosyasını hemen tanımalısınız; aslında bu, `results` dizinine yayınlanan `sayHello` **process**'inin orijinal çıktısıdır.
 Açarsanız, yine `Hello World!` selamlamasını bulacaksınız.
 
 <details>
@@ -147,11 +147,11 @@ Peki ya diğer tüm dosyalar?
 Bunlar, Nextflow'un görev yürütmenin bir parçası olarak yazdığı yardımcı ve günlük dosyalarıdır:
 
 - **`.command.begin`**: Görev başlatılır başlatılmaz oluşturulan gözetleyici dosya.
-- **`.command.err`**: Süreç çağrısı tarafından yayılan hata mesajları (`stderr`)
-- **`.command.log`**: Süreç çağrısı tarafından yayılan tam günlük çıktısı
-- **`.command.out`**: Süreç çağrısı tarafından düzenli çıktı (`stdout`)
-- **`.command.run`**: Süreç çağrısını çalıştırmak için Nextflow tarafından çalıştırılan tam betik
-- **`.command.sh`**: Süreç çağrısı tarafından gerçekten çalıştırılan komut
+- **`.command.err`**: **Process** çağrısı tarafından yayılan hata mesajları (`stderr`)
+- **`.command.log`**: **Process** çağrısı tarafından yayılan tam günlük çıktısı
+- **`.command.out`**: **Process** çağrısı tarafından düzenli çıktı (`stdout`)
+- **`.command.run`**: **Process** çağrısını çalıştırmak için Nextflow tarafından çalıştırılan tam betik
+- **`.command.sh`**: **Process** çağrısı tarafından gerçekten çalıştırılan komut
 - **`.exitcode`**: Komuttan kaynaklanan çıkış kodu
 
 `.command.sh` dosyası özellikle yararlıdır çünkü Nextflow'un tüm kayıt tutma ve görev/ortam kurulumu dahil edilmeden çalıştırdığı ana komutu size gösterir.
@@ -177,7 +177,7 @@ echo 'Hello World!' > output.txt
 
 İzole görev dizinlerinin çıktılarının ve günlüklerinin nasıl korunduğunu, `results` dizininin içeriğinin ise sonraki çalıştırmaların çıktısıyla nasıl üzerine yazıldığını gözlemleyin.
 
-### Çıkarım
+### Özet
 
 Basit bir Nextflow betiğini nasıl çalıştıracağınızı, çalışmasını nasıl izleyeceğinizi ve çıktılarını nasıl bulacağınızı biliyorsunuz.
 
@@ -240,8 +240,8 @@ Her **process**, pipeline'daki ilgili adımın hangi işlem(ler)i gerçekleştir
 ### 2.2. `process` tanımı
 
 Kodun ilk bloğu bir **process** tanımlar.
-Process tanımı `process` anahtar kelimesiyle başlar, ardından süreç adı ve son olarak süslü parantezlerle sınırlandırılmış süreç gövdesi gelir.
-Süreç gövdesi, çalıştırılacak komutu belirten bir script bloğu içermelidir; bu, komut satırı terminalinde çalıştırabileceğiniz herhangi bir şey olabilir.
+**Process** tanımı `process` anahtar kelimesiyle başlar, ardından **process** adı ve son olarak süslü parantezlerle sınırlandırılmış **process** gövdesi gelir.
+**Process** gövdesi, çalıştırılacak komutu belirten bir script bloğu içermelidir; bu, komut satırı terminalinde çalıştırabileceğiniz herhangi bir şey olabilir.
 
 Burada `greeting` adlı bir **input** değişkeni alan ve **output**'unu `output.txt` adlı bir dosyaya yazan `sayHello` adında bir **process**'imiz var.
 
@@ -271,7 +271,7 @@ process sayHello {
 
 </details>
 
-Bu, sadece bir `input` tanımı, bir `output` tanımı ve çalıştırılacak `script` içeren çok minimal bir süreç tanımıdır.
+Bu, sadece bir `input` tanımı, bir `output` tanımı ve çalıştırılacak `script` içeren çok minimal bir **process** tanımıdır.
 
 `input` tanımı, Nextflow'a bir tür değer (bir string, bir sayı, her ne olursa olsun) beklemesini söyleyen `val` niteleyicisini içerir.
 
@@ -285,14 +285,14 @@ Bu, sadece bir `input` tanımı, bir `output` tanımı ve çalıştırılacak `s
     Bu, komutun başarıyla çalıştırıldığını doğrulamak ve gerekirse çıktıyı aşağı akış süreçlerine aktarmak için gereklidir.
     Çıktı bloğunda bildirilenle eşleşmeyen üretilen çıktı, aşağı akış süreçlerine aktarılmayacaktır.
 
-Gerçek dünyadaki bir pipeline'da, bir süreç genellikle birazdan tanıtacağımız süreç yönergeleri gibi ek bilgiler içerir.
+Gerçek dünyadaki bir pipeline'da, bir **process** genellikle birazdan tanıtacağımız **process** yönergeleri gibi ek bilgiler içerir.
 
 ### 2.3. `workflow` tanımı
 
 İkinci kod bloğu **workflow**'un kendisini tanımlar.
-Workflow tanımı `workflow` anahtar kelimesiyle başlar, ardından isteğe bağlı bir ad ve süslü parantezlerle sınırlandırılmış workflow gövdesi gelir.
+**Workflow** tanımı `workflow` anahtar kelimesiyle başlar, ardından isteğe bağlı bir ad ve süslü parantezlerle sınırlandırılmış **workflow** gövdesi gelir.
 
-Burada, `--greeting` parametresine verdiğimiz değeri tutan `params.greeting` girdisini alan `sayHello` sürecine bir çağrıdan oluşan bir **workflow**'umuz var.
+Burada, `--greeting` parametresine verdiğimiz değeri tutan `params.greeting` girdisini alan `sayHello` **process**'ine bir çağrıdan oluşan bir **workflow**'umuz var.
 
 ```groovy title="hello-world.nf" linenums="22"
 workflow {
@@ -303,15 +303,15 @@ workflow {
 ```
 
 Bu çok minimal bir **workflow** tanımıdır.
-Gerçek dünyadaki bir pipeline'da, workflow tipik olarak **channel**'lar tarafından birbirine bağlanan **process**'lere birden fazla çağrı içerir ve değişken girdiler için varsayılan değerler ayarlanmış olabilir.
+Gerçek dünyadaki bir pipeline'da, **workflow** tipik olarak **channel**'lar tarafından birbirine bağlanan **process**'lere birden fazla çağrı içerir ve değişken girdiler için varsayılan değerler ayarlanmış olabilir.
 
 Bunu kursun 2. Bölümünde nf-core/molkart'ı çalıştırdığımızda uygulamada göreceğiz.
 
 ### 2.4. Komut satırı parametrelerinin `params` sistemi
 
-`sayHello()` süreç çağrısına sağladığımız `params.greeting`, Nextflow kodunun düzgün bir parçasıdır ve üzerine fazladan bir dakika harcamaya değer.
+`sayHello()` **process** çağrısına sağladığımız `params.greeting`, Nextflow kodunun düzgün bir parçasıdır ve üzerine fazladan bir dakika harcamaya değer.
 
-Yukarıda belirtildiği gibi, `--greeting` komut satırı parametresinin değerini `sayHello()` süreç çağrısına bu şekilde aktarıyoruz.
+Yukarıda belirtildiği gibi, `--greeting` komut satırı parametresinin değerini `sayHello()` **process** çağrısına bu şekilde aktarıyoruz.
 Aslında, sadece `params.someParameterName` bildirmek, workflow'a komut satırından `--someParameterName` adında bir parametre vermemizi sağlayacaktır.
 
 !!! Tip "İpucu"
@@ -319,7 +319,7 @@ Aslında, sadece `params.someParameterName` bildirmek, workflow'a komut satırı
     `params` sistemi kullanılarak bildirilen bu workflow parametreleri her zaman iki tire (`--`) alır.
     Bu, onları sadece bir tire (`-`) alan Nextflow seviyesi parametrelerden ayırır.
 
-### Çıkarım
+### Özet
 
 Artık basit bir Nextflow workflow'unun nasıl yapılandırıldığını ve temel bileşenlerin işlevselliği ile nasıl ilişkili olduğunu biliyorsunuz.
 
@@ -340,12 +340,12 @@ Burada size aynı workflow'u yeniden başlatmanız gerektiğinde `resume` özell
 Bazen, daha önce başlattığınız bir pipeline'ı, zaten başarıyla tamamlanmış herhangi bir işi yeniden yapmadan tekrar çalıştırmak isteyeceksiniz.
 
 Nextflow'un bunu yapmanıza izin veren `-resume` adlı bir seçeneği vardır.
-Özellikle, bu modda, tamamen aynı kod, ayarlar ve girdilerle zaten çalıştırılmış olan tüm süreçler atlanacaktır.
-Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya değiştirdiğiniz süreçleri veya yeni ayarlar veya girdiler sağladığınız süreçleri çalıştıracağı anlamına gelir.
+Özellikle, bu modda, tamamen aynı kod, ayarlar ve girdilerle zaten çalıştırılmış olan tüm **process**'ler atlanacaktır.
+Bu, Nextflow'un yalnızca son çalıştırmadan bu yana eklediğiniz veya değiştirdiğiniz **process**'leri veya yeni ayarlar veya girdiler sağladığınız **process**'leri çalıştıracağı anlamına gelir.
 
 Bunu yapmanın iki temel avantajı vardır:
 
-- Bir pipeline geliştiriyorsanız, değişikliklerinizi test etmek için yalnızca aktif olarak üzerinde çalıştığınız süreç(ler)i çalıştırmanız gerekeceğinden daha hızlı iterasyon yapabilirsiniz.
+- Bir pipeline geliştiriyorsanız, değişikliklerinizi test etmek için yalnızca aktif olarak üzerinde çalıştığınız **process**(ler)i çalıştırmanız gerekeceğinden daha hızlı iterasyon yapabilirsiniz.
 - Üretimde bir pipeline çalıştırıyorsanız ve bir şeyler ters giderse, çoğu durumda sorunu düzeltebilir ve pipeline'ı yeniden başlatabilirsiniz ve başarısızlık noktasından çalışmaya devam edecektir, bu size çok fazla zaman ve hesaplama tasarrufu sağlayabilir.
 
 Kullanmak için komutunuza `-resume` ekleyin ve çalıştırın:
@@ -364,14 +364,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
     [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
     ```
 
-Süreç durum satırına eklenmiş olan `cached:` kısmına bakın (satır 5), bu Nextflow'un bu çalışmayı zaten yaptığını tanıdığı ve önceki başarılı çalıştırmadan sonucu yeniden kullandığı anlamına gelir.
+**Process** durum satırına eklenmiş olan `cached:` kısmına bakın (satır 5), bu Nextflow'un bu çalışmayı zaten yaptığını tanıdığı ve önceki başarılı çalıştırmadan sonucu yeniden kullandığı anlamına gelir.
 
 Ayrıca çalışma alt dizini hash'inin önceki çalıştırmayla aynı olduğunu görebilirsiniz.
 Nextflow tam anlamıyla size önceki çalıştırmayı gösteriyor ve "Bunu zaten orada yaptım" diyor.
 
 !!! Tip "İpucu"
 
-    Pipeline'ınızı `resume` ile yeniden çalıştırdığınızda, Nextflow daha önce başarıyla çalıştırılan herhangi bir süreç çağrısı tarafından bir `publishDir` dizinine yazılan dosyaların üzerine yazmaz.
+    Pipeline'ınızı `resume` ile yeniden çalıştırdığınızda, Nextflow daha önce başarıyla çalıştırılan herhangi bir **process** çağrısı tarafından bir `publishDir` dizinine yazılan dosyaların üzerine yazmaz.
 
 ### 3.2. Geçmiş çalıştırmaların günlüğünü inceleyin
 
@@ -397,11 +397,11 @@ Zaman damgasına ve/veya komut satırına göre bir çalıştırmayı aramak iç
 !!! Warning "Uyarı"
 
     Geçmiş çalıştırmalardan çalışma alt dizinlerini silmek onları Nextflow'un önbelleğinden kaldırır ve bu dizinlerde depolanan tüm çıktıları siler.
-    Bu, Nextflow'un ilgili süreçleri yeniden çalıştırmadan çalıştırmayı sürdürme yeteneğini bozduğu anlamına gelir.
+    Bu, Nextflow'un ilgili **process**'leri yeniden çalıştırmadan çalıştırmayı sürdürme yeteneğini bozduğu anlamına gelir.
 
     Önem verdiğiniz veya güvenmeyi planladığınız çıktıları kaydetmek sizin sorumluluğunuzdadır! Bu amaçla `publishDir` yönergesini kullanıyorsanız, `symlink` modunu değil `copy` modunu kullandığınızdan emin olun.
 
-### Çıkarım
+### Özet
 
 Bir pipeline'ı zaten aynı şekilde çalıştırılmış adımları tekrarlamadan nasıl yeniden başlatacağınızı, çalıştırma günlüğünü nasıl inceleyeceğinizi ve eski çalışma dizinlerini temizlemek için `nextflow clean` komutunu nasıl kullanacağınızı biliyorsunuz.
 

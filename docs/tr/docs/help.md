@@ -8,7 +8,7 @@ hide:
 
 # Yardım alma
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 İster başlamakta zorlanıyor olun, ister ortada takılıp kalın veya takip soruları olsun, iletişime geçmekten çekinmeyin! Topluluk ekibimiz yardım etmek için burada ve genel olarak Nextflow topluluğu çok aktif, kapsayıcı ve yardımseverdir.
 
@@ -20,7 +20,7 @@ Aradığınıza bağlı olarak mevcut olan temel seçenekler şunlardır.
 
     ---
 
-    Topluluk forumumuzda eğitime ayrılmış bir kategori bulunmaktadır ve bu, soru sormak veya yaşadığınız sorunları bildirmek için harika bir yerdir. Sorunuzun zaten sorulmuş ve cevaplanmış olduğunu bile görebilirsiniz!
+    Topluluk forumumuzda eğitime ayrılmış bir kategori bulunmaktadır ve bu, soru sormak veya eğitimle ilgili yaşadığınız sorunları bildirmek için harika bir yerdir. Sorunuzun zaten sorulmuş ve cevaplanmış olduğunu bile görebilirsiniz!
 
     [Eğitim forumuna katılın :material-arrow-right:](https://community.seqera.io/c/training/39){ .md-button .md-button--primary .mt-1 }
 

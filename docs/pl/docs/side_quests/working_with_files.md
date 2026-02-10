@@ -1,5 +1,7 @@
 # Przetwarzanie plików wejściowych
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Workflow naukowe często obejmują przetwarzanie dużej liczby plików.
 Nextflow zapewnia potężne narzędzia do efektywnej obsługi plików, pomagając organizować i przetwarzać dane przy minimalnym nakładzie kodu.
 
@@ -214,7 +216,7 @@ Nextflow przekonwertował nasz ciąg na obiekt Path i rozwiązał go do rzeczywi
 Zauważ również, że klasa obiektu Path to `sun.nio.fs.UnixPath`: to sposób Nextflow na reprezentowanie plików lokalnych.
 Jak zobaczymy później, pliki zdalne będą miały inne nazwy klas (takie jak `nextflow.file.http.XPath` dla plików HTTP), ale wszystkie działają dokładnie w ten sam sposób i mogą być używane identycznie w Twoich workflow.
 
-!!! tip
+!!! tip "Wskazówka"
 
     **Kluczowa różnica:**
 
@@ -593,7 +595,7 @@ Więc proces próbował użyć względnego ciągu, `data/patientA_rep1_normal_R1
 
 Razem wzięte, te dwa przykłady pokazują, jak ważne jest poinformowanie Nextflow, czy wejście powinno być obsługiwane jako plik.
 
-!!! note
+!!! note "Uwaga"
 
     Upewnij się, że cofniesz i naprawisz oba celowe błędy przed kontynuowaniem następnej sekcji.
 
@@ -633,7 +635,7 @@ Na przykład możesz rozwijać z małym, lokalnym zestawem testowym przed przeł
 
 Przetestujmy to, zamieniając lokalną ścieżkę, którą dostarczamy do naszego workflow, na ścieżkę HTTPS wskazującą na kopię tych samych danych przechowywanych w Github.
 
-!!! warning
+!!! warning "Ostrzeżenie"
 
     To będzie działać tylko wtedy, gdy masz aktywne połączenie internetowe.
 
@@ -723,7 +725,7 @@ Więc jeśli uruchomisz ponownie na tym samym pliku i nie usunąłeś przygotowa
 
 To pokazuje, jak łatwo jest przełączać między danymi lokalnymi i zdalnymi za pomocą Nextflow, co jest kluczową funkcją Nextflow.
 
-!!! note
+!!! note "Uwaga"
 
     Jednym ważnym wyjątkiem od tej zasady jest to, że nie możesz używać wzorców glob ani ścieżek katalogów z HTTPS, ponieważ HTTPS nie może wymieniać wielu plików, więc musisz określić dokładne adresy URL plików.
     Jednak inne protokoły magazynowania, takie jak magazyn obiektów blob (`s3://`, `az://`, `gs://`) mogą używać zarówno globów, jak i ścieżek katalogów.
@@ -731,13 +733,13 @@ To pokazuje, jak łatwo jest przełączać między danymi lokalnymi i zdalnymi z
     Oto jak możesz używać wzorców glob z magazynem w chmurze:
 
     ```groovy title="Cloud storage examples (not runnable in this environment)"
-    // S3 with glob patterns - would match multiple files
+    // S3 ze wzorcami glob - dopasowałoby wiele plików
     ch_s3_files = channel.fromPath('s3://my-bucket/data/*.fastq.gz')
 
-    // Azure Blob Storage with glob patterns
+    // Azure Blob Storage ze wzorcami glob
     ch_azure_files = channel.fromPath('az://container/data/patient*_R{1,2}.fastq.gz')
 
-    // Google Cloud Storage with glob patterns
+    // Google Cloud Storage ze wzorcami glob
     ch_gcs_files = channel.fromPath('gs://bucket/data/sample_*.fastq.gz')
     ```
 
@@ -939,7 +941,7 @@ Jest kilka sposobów, w jakie moglibyśmy załadować więcej plików do kanału
 Tutaj pokażemy Ci, jak używać wzorców glob, które są wygodnym sposobem dopasowywania i pobierania nazw plików i katalogów na podstawie znaków wieloznacznych.
 Proces dopasowywania tych wzorców nazywa się "globbingiem" lub "rozszerzaniem nazw plików".
 
-!!! note
+!!! note "Uwaga"
 
     Jak wspomniano wcześniej, Nextflow obsługuje globbing do zarządzania plikami wejściowymi i wyjściowymi w większości przypadków, z wyjątkiem ścieżek plików HTTPS, ponieważ HTTPS nie może wymieniać wielu plików.
 
@@ -1044,7 +1046,7 @@ Zmodyfikujemy nasz workflow, aby pobrać te informacje w trzech krokach:
 2. Rozdziel metadane za pomocą metody zwanej `tokenize()`
 3. Użyj mapy do zorganizowania metadanych
 
-!!! warning
+!!! warning "Ostrzeżenie"
 
     Nigdy nie powinieneś kodować wrażliwych informacji w nazwach plików, takich jak nazwiska pacjentów lub inne cechy identyfikujące, ponieważ może to zagrozić prywatności pacjentów lub innym odpowiednim ograniczeniom bezpieczeństwa.
 
@@ -1592,13 +1594,13 @@ process ANALYZE_READS {
 }
 ```
 
-!!! note
+!!! note "Uwaga"
 
     Dyrektywy `tag` i `publishDir` używają składni closure (`{ ... }`) zamiast interpolacji ciągów (`"${...}"`).
     To dlatego, że te dyrektywy odnoszą się do zmiennych wejściowych (`meta`), które nie są dostępne do momentu wykonania.
     Składnia closure odkłada ocenę do momentu, gdy proces faktycznie się uruchomi.
 
-!!! note
+!!! note "Uwaga"
 
     Nazywamy naszą mapę metadanych `meta` zgodnie z konwencją.
     Aby zagłębić się w mapy meta, zobacz side quest [Metadata and meta maps](./metadata.md).

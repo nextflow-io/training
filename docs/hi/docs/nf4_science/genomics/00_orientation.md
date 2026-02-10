@@ -68,7 +68,7 @@ code .
 tree . -L 2
 ```
 
-??? abstract "Directory सामग्री"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     .

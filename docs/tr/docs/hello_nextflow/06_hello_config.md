@@ -1,5 +1,7 @@
 # Bölüm 6: Hello Config
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -88,7 +90,7 @@ nextflow run hello-config.nf
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde bulacaksınız (`results/hello_config/`).
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     results/hello_config/
@@ -106,7 +108,7 @@ Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen di
 
 Son ASCII sanat çıktısı `results/hello_config/` dizininde, `cowpy-COLLECTED-batch-output.txt` adı altında.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -250,7 +252,7 @@ Bu hâlâ daha önce olduğu gibi aynı çıktıyı üretiyor.
 
 Son ASCII sanat çıktısı `results/hello_config/` dizininde, daha önce olduğu gibi `cowpy-COLLECTED-batch-output.txt` adı altında.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -348,7 +350,7 @@ Bu çalıştırmada, Nextflow mevcut dizinimizdeki `nextflow.config`'i pipeline'
 
 Son çıktı dosyası, tux karakterinin selamlamaları söylediğini içermelidir.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
     _________
@@ -430,7 +432,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
 
 Son çıktı dosyası, stegosaurus karakterinin selamlamaları söylediğini içermelidir.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
     _________
@@ -511,7 +513,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 
 Bu, çıktıları `results/` yerine `custom-outdir-cli/` altında yayınlar:
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     custom-outdir-cli/
@@ -600,7 +602,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 
 Şimdi çıktılar `hello_config` alt dizini olmadan doğrudan `custom-outdir-cli-2/` altında yayınlanıyor:
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     custom-outdir-cli-2/
@@ -843,7 +845,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 
 Bu, çıktıları `custom-outdir-config-2/rep2/` altında yayınlar, belirtilen temel yol _ve_ grup adı alt dizini _ve_ sürece göre gruplanmış sonuçlarla:
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     custom-outdir-config-2
@@ -973,7 +975,7 @@ nextflow run hello-config.nf -output-dir config-output-mode
 
 Bu, çıktıları `config-output-mode/` altında yayınlar ve hepsi hâlâ düzgün kopyalar, sembolik bağlantılar değil.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     config-output-mode
@@ -1583,7 +1585,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 
 Bu, mümkün olduğunda Docker kullanacak ve çıktıları `custom-outdir-config/test` altında üretecektir ve bu sefer karakter komik ikili `dragonandcow`'dur.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________

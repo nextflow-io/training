@@ -1,5 +1,7 @@
 # Pierwsze kroki
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 ## Uruchom środowisko szkoleniowe
 
 Aby skorzystać z gotowego środowiska, które udostępniamy w GitHub Codespaces, kliknij przycisk „Otwórz w GitHub Codespaces" poniżej. Inne opcje znajdziesz w sekcji [Opcje środowiska](../../envsetup/index.md).
@@ -20,7 +22,7 @@ Jeśli przechodzisz przez ten kurs samodzielnie, zapoznaj się z [podstawami śr
 
 ### Wymagania wersji
 
-To szkolenie jest zaprojektowane dla Nextflow w wersji 25.10.2 lub nowszej **z WŁĄCZONYM parserem składni v2**.
+To szkolenie jest zaprojektowane dla Nextflow'a w wersji 25.10.2 lub nowszej **z WŁĄCZONYM parserem składni v2**.
 Jeśli używasz lokalnego lub niestandardowego środowiska, upewnij się, że korzystasz z odpowiednich ustawień zgodnie z dokumentacją [tutaj](../../info/nxf_versions.md).
 
 ## Przygotuj się do pracy

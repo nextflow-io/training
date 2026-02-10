@@ -22,7 +22,7 @@ Le workflow Hello prend un fichier CSV contenant des salutations, les écrit dan
 
 ### Étapes du workflow (processus)
 
-Les quatre étapes sont implémentées en tant que processes Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` et `cowpy`) stockés dans des fichiers de module séparés.
+Les quatre étapes sont implémentées en tant que processus Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` et `cowpy`) stockés dans des fichiers de module séparés.
 
 1. **`sayHello` :** Écrit chaque salutation dans son propre fichier de sortie (par exemple, « Hello-output.txt »)
 2. **`convertToUpper` :** Convertit chaque salutation en majuscules (par exemple, « HELLO »)

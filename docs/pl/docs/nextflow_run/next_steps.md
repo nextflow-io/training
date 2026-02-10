@@ -1,5 +1,7 @@
 # Podsumowanie kursu
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Gratulacje z okazji ukończenia kursu szkoleniowego Nextflow Run! 🎉
 
 <!-- placeholder for video -->
@@ -51,7 +53,7 @@ Oto nasze najważniejsze sugestie, co robić dalej:
 - Rozpocznij pracę z nf-core z [Hello nf-core](../hello_nf-core/index.md)
 - Poznaj techniki rozwiązywania problemów z [Debugging Side Quest](../side_quests/debugging.md)
 
-Na koniec zalecamy zapoznanie się z [**Seqera Platform**](https://seqera.io/), platformą chmurową rozwijaną przez twórców Nextflow'a, która jeszcze bardziej ułatwia uruchamianie i zarządzanie workflow'ami, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.
+Na koniec zalecamy zapoznanie się z [**Seqera Platform**](https://seqera.io/), platformą chmurową rozwijaną przez twórców Nextflow'a, która jeszcze bardziej ułatwia uruchamianie workflow'ów i zarządzanie nimi, a także zarządzanie danymi i interaktywne uruchamianie analiz w dowolnym środowisku.
 
 ## Uzyskiwanie pomocy
 

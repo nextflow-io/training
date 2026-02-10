@@ -13,25 +13,25 @@ hide:
 Il nostro obiettivo è fornire un ambiente coerente e accuratamente testato che permetta ai partecipanti di concentrarsi sull'apprendimento di Nextflow senza dover dedicare tempo e sforzi alla gestione del software.
 A tal fine, abbiamo sviluppato un ambiente containerizzato che contiene tutto il software necessario, i file di codice e i dati di esempio per lavorare attraverso tutti i nostri corsi.
 
-Questo ambiente containerizzato può essere eseguito direttamente su GitHub Codespaces o localmente in VS Code con l'estensione Devcontainers.
+Questo ambiente containerizzato può essere eseguito direttamente su Github Codespaces o localmente in VS Code con l'estensione Devcontainers.
 
 <div class="grid cards" markdown>
 
-- :material-cloud-outline:{ .lg .middle } **Github Codespaces**
+-   :material-cloud-outline:{ .lg .middle } __Github Codespaces__
 
-  ***
+    ---
 
-  GitHub Codespaces è un servizio basato sul web che ci permette di fornire un ambiente preconfigurato per la formazione, con tutti gli strumenti e i dati inclusi, supportato da macchine virtuali nel cloud. È accessibile gratuitamente a chiunque abbia un account Github.
+    GitHub Codespaces è un servizio basato sul web che ci permette di fornire un ambiente preconfigurato per la formazione, con tutti gli strumenti e i dati inclusi, supportato da macchine virtuali nel cloud. È accessibile gratuitamente a chiunque abbia un account Github.
 
-  [Usa Github Codespaces:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
+    [Usa Github Codespaces:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
 
-- :material-laptop:{ .lg .middle } **Devcontainers Locali**
+-   :material-laptop:{ .lg .middle } __Devcontainers Locali__
 
-  ***
+    ---
 
-  VS Code con Devcontainers fornisce un ambiente di sviluppo containerizzato eseguito localmente con tutti gli strumenti di formazione preconfigurati. Offre lo stesso ambiente preconfigurato di Codespaces ma funziona interamente sul vostro hardware locale.
+    VS Code con Devcontainers fornisce un ambiente di sviluppo containerizzato eseguito localmente con tutti gli strumenti di formazione preconfigurati. Offre lo stesso ambiente preconfigurato di Codespaces ma funziona interamente sul vostro hardware locale.
 
-  [Usa Devcontainers localmente :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
+    [Usa Devcontainers localmente :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
 
 </div>
 

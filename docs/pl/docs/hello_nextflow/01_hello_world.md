@@ -390,7 +390,7 @@ Jak właśnie się dowiedziałeś, wyjście utworzone przez nasz pipeline jest z
 Jest to zrobione celowo; Nextflow kontroluje ten katalog i nie powinniśmy z nim wchodzić w interakcję.
 Jednak to sprawia, że jest niewygodne pobieranie wyjść, na których nam zależy.
 
-Na szczęście Nextflow zapewnia sposób publikowania wyjść do wyznaczonego katalogu za pomocą [definicji wyjść na poziomie workflow'u](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs).
+Na szczęście Nextflow zapewnia sposób publikowania wyjść do wyznaczonego katalogu za pomocą [definicji wyjść na poziomie workflow'u](https://nextflow.io/docs/latest/workflow.html#workflow-outputs).
 
 ### 2.1. Podstawowe użycie
 
@@ -888,7 +888,7 @@ Jak widzisz, możemy określić typ wejścia, którego oczekuje workflow (Nextfl
 Składnia to `nazwa: Typ = wartość_domyślna`.
 Obsługiwane typy to `String`, `Integer`, `Float`, `Boolean` i `Path`.
 
-!!! info "Informacja"
+!!! info "Info"
 
     W starszych workflow'ach możesz zobaczyć, że cały blok `params` jest zapisany po prostu jako `input = 'Holà mundo!'`.
 
@@ -1143,7 +1143,7 @@ Jakie są minimalne wymagane komponenty procesu Nextflow'a?
 - [ ] Bloki wejścia, wyjścia i skryptu
 - [ ] Tylko blok skryptu
 
-Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
+Dowiedz się więcej: [1.1.1. Definicja process](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1153,7 +1153,7 @@ Jaki jest cel bloku output w procesie?
 - [x] Deklarowanie oczekiwanych wyjść z procesu
 - [ ] Definiowanie zmiennych środowiskowych
 
-Dowiedz się więcej: [1.1.1. Definicja process](#111-definicja-process)
+Dowiedz się więcej: [1.1.1. Definicja process](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1184,7 +1184,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Dowiedz się więcej: [1.2.2. Znajdź wyjście i dzienniki w katalogu `work`](#122-znajdz-wyjscie-i-dzienniki-w-katalogu-work)
+Dowiedz się więcej: [1.2.2. Znajdź wyjście i dzienniki w katalogu `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1194,7 +1194,7 @@ Co robi flaga `-resume`?
 - [x] Pomija procesy, które już zakończyły się pomyślnie
 - [ ] Tworzy kopię zapasową workflow'u
 
-Dowiedz się więcej: [4.1. Uruchom ponownie workflow z `-resume`](#41-uruchom-ponownie-workflow-z--resume)
+Dowiedz się więcej: [4.1. Uruchom ponownie workflow z `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1204,7 +1204,7 @@ Jaki jest domyślny tryb publikowania wyjść workflow'u?
 - [ ] Przenoszenie plików do katalogu wyjściowego
 - [ ] Kompresowanie plików w katalogu wyjściowym
 
-Dowiedz się więcej: [2.3. Ustaw tryb publikowania na kopiowanie](#23-ustaw-tryb-publikowania-na-kopiowanie)
+Dowiedz się więcej: [2.3. Ustaw tryb publikowania na kopiowanie](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1214,7 +1214,7 @@ Jak przekazujesz wartość parametru do workflow'u Nextflow'a z wiersza poleceń
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytywania danych wejściowych użytkownika](#32-skonfiguruj-parametr-wiersza-polecen-do-przechwytywania-danych-wejsciowych-uzytkownika)
+Dowiedz się więcej: [3.2. Skonfiguruj parametr wiersza poleceń do przechwytywania danych wejściowych użytkownika](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

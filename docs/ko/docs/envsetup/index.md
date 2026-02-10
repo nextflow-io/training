@@ -37,7 +37,7 @@ hide:
 
 ## 수동 설치 안내
 
-위의 옵션이 적합하지 않은 경우 소프트웨어 의존성을 수동으로 설치하고 교육 저장소를 복제하여 자체 로컬 시스템에서 이 환경을 복제할 수 있습니다.
+위의 옵션이 적합하지 않은 경우, 소프트웨어 의존성을 수동으로 설치하고 교육 저장소를 복제하여 자체 로컬 시스템에서 이 환경을 복제할 수 있습니다.
 
 [수동 설치 :material-arrow-right:](02_local.md){ .md-button .md-button--primary .mt-1 }
 
@@ -49,5 +49,5 @@ hide:
     그러나 Gitpod 제작자들은 [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) 시스템을 위해 무료 기능을 종료하기로 결정했습니다.
     그 이유로 사전 설정 없이 원클릭 개발자 환경을 제공하는 GitHub Codespaces로 전환했습니다.
 
-    Gitpod에 가입한 시기와 서비스 종료 시기에 따라 이전 클라우드 IDE에서 교육을 시작할 수 있지만 앞으로 안정적인 액세스를 보장할 수 없습니다:
+    Gitpod에 가입한 시기와 서비스 종료 시기에 따라 이전 클라우드 IDE에서 교육을 시작할 수 있지만, 앞으로 안정적인 액세스를 보장할 수 없습니다:
     [Gitpod에서 열기](https://gitpod.io/#https://github.com/nextflow-io/training).

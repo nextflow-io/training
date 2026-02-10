@@ -1,6 +1,6 @@
 # 파트 1: 방법론 개요 및 수동 테스트
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice } AI 기반 번역 - [자세히 알아보고 개선 사항 제안하기](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 변이 호출(Variant calling)은 참조 게놈에 대비하여 게놈 서열의 변이를 식별하는 것을 목표로 하는 게놈 분석 방법입니다.
 여기서는 전체 게놈 시퀀싱 데이터에서 짧은 배선 변이(short germline variants), 즉 SNP와 indel을 호출하기 위해 설계된 도구와 방법을 사용합니다.

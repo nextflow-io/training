@@ -7,7 +7,7 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Scrivere un workflow lineare per applicare il variant calling a un singolo campione
+    - Scrivere un flusso di lavoro lineare per applicare il variant calling a un singolo campione
     - Gestire appropriatamente file accessori come file indice e risorse del genoma di riferimento
     - Sfruttare il paradigma di dataflow di Nextflow per parallelizzare il variant calling per campione
     - Implementare il joint calling multi-campione utilizzando operatori di canale rilevanti
@@ -18,6 +18,8 @@ additional_information:
 ---
 
 # Nextflow per la Genomica
+
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 **Un corso pratico che applica Nextflow a un caso d'uso reale della genomica: variant calling con GATK.**
 

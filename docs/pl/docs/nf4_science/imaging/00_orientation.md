@@ -9,7 +9,7 @@ Jeśli jeszcze tego nie zrobiłeś, zrób to teraz, najlepiej w drugim oknie lub
 
 !!!warning "Wymagania dotyczące rozmiaru maszyny"
 
-    Upewnij się, że wybierasz **maszynę 8-rdzeniową** podczas tworzenia Twojego Codespace dla tego kursu szkoleniowego. Workflow'y bioimagingu wymagają dodatkowych zasobów obliczeniowych.
+    Upewnij się, że wybierasz **maszynę 8-rdzeniową** podczas tworzenia Twojego Codespace dla tego kursu szkoleniowego. Pipeline'y bioimagingu wymagają dodatkowych zasobów obliczeniowych.
 
 ## GitHub Codespaces
 

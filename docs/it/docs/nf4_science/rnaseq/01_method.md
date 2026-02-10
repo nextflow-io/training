@@ -5,7 +5,7 @@
 Esistono molteplici metodi validi per elaborare e analizzare dati RNAseq in bulk.
 Per questo corso, seguiamo il metodo descritto [qui](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) dai Dott. Simon Andrews e Laura Biggins presso il [Babraham Institute](https://www.babraham.ac.uk/).
 
-Il nostro obiettivo è sviluppare un workflow che implementi le seguenti fasi di elaborazione: eseguire il controllo qualità iniziale sulle read in un campione RNAseq in bulk, rimuovere le sequenze degli adapter dalle read, allineare le read a un genoma di riferimento e produrre un report completo di controllo qualità (QC).
+Il nostro obiettivo è sviluppare un flusso di lavoro che implementi le seguenti fasi di elaborazione: eseguire il controllo qualità iniziale sulle read in un campione RNAseq in bulk, rimuovere le sequenze degli adapter dalle read, allineare le read a un genoma di riferimento e produrre un report completo di controllo qualità (QC).
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
@@ -16,12 +16,12 @@ Il nostro obiettivo è sviluppare un workflow che implementi le seguenti fasi di
 - **HISAT2_ALIGN:** Allineare le read al genoma di riferimento utilizzando Hisat2
 - **MULTIQC:** Generare un report QC completo utilizzando MultiQC
 
-Tuttavia, prima di iniziare a scrivere qualsiasi codice del workflow, proveremo i comandi manualmente su alcuni dati di test.
+Tuttavia, prima di iniziare a scrivere qualsiasi codice del flusso di lavoro, proveremo i comandi manualmente su alcuni dati di test.
 Gli strumenti necessari non sono installati nell'ambiente GitHub Codespaces, quindi li utilizzeremo tramite container (vedere [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note "Nota"
 
-     Verificare di trovarsi nella directory `nf4-science/rnaseq`. L'ultima parte del percorso mostrato quando si digita `pwd` dovrebbe essere `rnaseq`.
+     Verificate di trovarvi nella directory `nf4-science/rnaseq`. L'ultima parte del percorso mostrato quando si digita `pwd` dovrebbe essere `rnaseq`.
 
 ---
 
@@ -265,7 +265,7 @@ genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2
 genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
 ```
 
-Li utilizzeremo tra un momento, ma prima generiamo un tarball compresso con questi file di indice del genoma; ne avremo bisogno più avanti e generarli non è tipicamente qualcosa che vogliamo fare come parte di un workflow.
+Li utilizzeremo tra un momento, ma prima generiamo un tarball compresso con questi file di indice del genoma; ne avremo bisogno più avanti e generarli non è tipicamente qualcosa che vogliamo fare come parte di un flusso di lavoro.
 
 ```bash
 tar -czvf /data/genome_index.tar.gz genome_index.*
@@ -431,8 +431,8 @@ exit
 
 ### Takeaway
 
-Sono stati testati tutti i comandi individuali in modo interattivo nei container pertinenti.
+Avete testato tutti i comandi individuali in modo interattivo nei container pertinenti.
 
-### Passi successivi
+### Cosa c'è dopo?
 
-Imparare come inserire gli stessi comandi in un workflow multi-fase che utilizza container per eseguire il lavoro.
+Imparare come inserire gli stessi comandi in un flusso di lavoro multi-fase che utilizza container per eseguire il lavoro.

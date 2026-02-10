@@ -37,7 +37,7 @@ Hello Nextflow training course के इस पहले भाग में, �
 echo 'Hello World!'
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     Hello World!
@@ -53,7 +53,7 @@ Pipelines चलाने में ज्यादातर files से data �
 echo 'Hello World!' > output.txt
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
 
@@ -66,7 +66,7 @@ echo 'Hello World!' > output.txt
 'Hello World' text अब उस output file में होना चाहिए जो हमने specify की थी, जिसका नाम `output.txt` है।
 तुम इसे file explorer में या command line से `cat` utility का उपयोग करके खोल सकते हो, उदाहरण के लिए।
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="output.txt" linenums="1"
     Hello World!
@@ -95,7 +95,7 @@ echo 'Hello World!' > output.txt
 
 तुम `hello-world.nf` script अपनी current directory में पाओगे, जो `hello-nextflow` होनी चाहिए। इसे editor pane में खोलो।
 
-??? full-code "पूरी code file"
+??? full-code "पूर्ण कोड फ़ाइल"
 
     ```groovy title="hello-world.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -212,7 +212,7 @@ Terminal में, निम्नलिखित command चलाओ:
 nextflow run hello-world.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console hl_lines="7"
     N E X T F L O W   ~  version 25.10.2
@@ -248,7 +248,7 @@ nextflow run hello-world.nf
 
 चलो देखते हैं कि वहाँ क्या है।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     work
@@ -278,7 +278,7 @@ nextflow run hello-world.nf
 पहली चीज़ जो तुम देखना चाहते हो वह है workflow का actual output, यानी `sayHello` process द्वारा produce की गई `output.txt` file।
 इसे खोलो और तुम `Hello World!` greeting पाओगे, जो हमारे minimalist workflow का point था।
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="output.txt"
     Hello World!
@@ -300,7 +300,7 @@ nextflow run hello-world.nf
 
 `.command.sh` file विशेष रूप से useful है क्योंकि यह तुम्हें बताती है कि Nextflow ने main command क्या execute की, सभी bookkeeping और task/environment setup को शामिल नहीं करते हुए।
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title=".command.sh"
     #!/bin/bash -ue
@@ -316,7 +316,7 @@ nextflow run hello-world.nf
 
 Workflow को कुछ बार फिर से चलाने का try करो, फिर `work/` के तहत task directories देखो।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     work
@@ -483,7 +483,7 @@ Workflow script file `hello-world.nf` में, code की निम्नल�
 nextflow run hello-world.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -498,7 +498,7 @@ Terminal output परिचित दिखना चाहिए। बाह�
 
 हालाँकि, अपना file explorer check करो: इस बार, Nextflow ने `results/` नामक एक new directory बनाई है।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console hl_lines="10-11 22"
     .
@@ -571,7 +571,7 @@ Custom location set करने के लिए, बस `path` को accordin
 nextflow run hello-world.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -584,7 +584,7 @@ nextflow run hello-world.nf
 
 इस बार result specified subdirectory के तहत लिखा जाता है।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console hl_lines="2-3"
     results/
@@ -650,7 +650,7 @@ Default रूप से, outputs `work` directory से symbolic links के 
 nextflow run hello-world.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -663,7 +663,7 @@ nextflow run hello-world.nf
 
 इस बार, यदि तुम results देखो, तो file एक proper copy है बजाय सिर्फ एक symlink के।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console hl_lines="3"
     results/
@@ -834,7 +834,7 @@ Effect में, हमने section की शुरुआत में outli
 nextflow run hello-world.nf --input 'Bonjour le monde!'
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -849,7 +849,7 @@ nextflow run hello-world.nf --input 'Bonjour le monde!'
 
 यह check करने के लिए output file खोलना sure करो कि तुम्हारे पास अब greeting का new version है।
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_world/output.txt"
     Bonjour le monde!
@@ -903,7 +903,7 @@ Supported types में `String`, `Integer`, `Float`, `Boolean`, और `Path`
 nextflow run hello-world.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -916,7 +916,7 @@ nextflow run hello-world.nf
 
 Output पहले जैसी same place में होगा, लेकिन contents new text के साथ updated होनी चाहिए।
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_world/output.txt"
     Holà mundo!
@@ -934,7 +934,7 @@ Try करो:
 nextflow run hello-world.nf --input 'Konnichiwa!'
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -947,7 +947,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
 एक बार फिर, तुम्हें अपनी results directory में corresponding updated output मिलनी चाहिए।
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_world/output.txt"
     Konnichiwa!
@@ -995,7 +995,7 @@ Specifically, इस mode में, कोई भी processes जो पहल
 nextflow run hello-world.nf -resume
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console hl_lines="5"
     N E X T F L O W   ~  version 25.10.2
@@ -1023,7 +1023,7 @@ Nextflow literally तुम्हें previous execution की ओर point 
 
 जब भी तुम nextflow workflow launch करते हो, current working directory में `.nextflow` नामक एक hidden directory के तहत `history` नामक एक log file में एक line लिखी जाती है।
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```txt title=".nextflow/history" linenums="1"
     2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'
@@ -1041,7 +1041,7 @@ Nextflow literally तुम्हें previous execution की ओर point 
 nextflow log
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console linenums="1"
     TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
@@ -1067,7 +1067,7 @@ Development process के दौरान, तुम typically अपनी dra
 
 #### 4.3.1. Deletion criteria determine करें
 
-यह determine करने के लिए कई [options](https://nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
+यह determine करने के लिए कई [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) हैं कि क्या delete करना है।
 
 यहाँ हम तुम्हें एक example दिखाते हैं जो given run से पहले के runs की सभी subdirectories delete करता है, इसके run name का उपयोग करके specified।
 
@@ -1084,7 +1084,7 @@ Run name machine-generated two-part string है जो `Launching (...)` conso
 nextflow clean -before golden_cantor -n
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
@@ -1102,7 +1102,7 @@ nextflow clean -before golden_cantor -n
 nextflow clean -before golden_cantor -f
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
@@ -1111,7 +1111,7 @@ nextflow clean -before golden_cantor -f
 Output पहले जैसा similar होना चाहिए, लेकिन अब 'Would remove' के बजाय 'Removed' कह रहा है।
 Note करो कि यह two-character subdirectories (जैसे ऊपर `a3/`) को remove नहीं करता लेकिन यह उनकी contents को empty कर देता है।
 
-!!! warning "चेतावनी"
+!!! Warning "चेतावनी"
 
     Past runs की work subdirectories delete करना उन्हें Nextflow के cache से remove करता है और उन directories में stored किसी भी outputs को delete करता है।
     इसका मतलब है कि यह corresponding processes को re-run किए बिना execution resume करने की Nextflow की ability break करता है।
@@ -1141,7 +1141,7 @@ Nextflow process के minimum required components क्या हैं?
 - [ ] Input, output, और script blocks
 - [ ] केवल एक script block
 
-और जानें: [1.1.1. `process` definition](#111-process-definition)
+और जानें: [1.1.1. `process` definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1151,7 +1151,7 @@ Process में output block का purpose क्या है?
 - [x] Process से expected outputs declare करना
 - [ ] Environment variables define करना
 
-और जानें: [1.1.1. `process` definition](#111-process-definition)
+और जानें: [1.1.1. `process` definition](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1182,7 +1182,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-और जानें: [1.2.2. `work` directory में output और logs खोजें](#122-work-directory-में-output-और-logs-खोजें)
+और जानें: [1.2.2. `work` directory में output और logs खोजें](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1192,7 +1192,7 @@ work/a3/7be2fa.../
 - [x] उन processes को skip करता है जो पहले से successfully complete हो चुके हैं
 - [ ] Workflow का backup बनाता है
 
-और जानें: [4.1. `-resume` के साथ workflow re-launch करें](#41--resume-के-साथ-workflow-re-launch-करें)
+और जानें: [4.1. `-resume` के साथ workflow re-launch करें](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1202,7 +1202,7 @@ Workflow outputs publish करने के लिए default mode क्या
 - [ ] Files को output directory में move करना
 - [ ] Output directory में files compress करना
 
-और जानें: [2.3. Publish mode को copy पर सेट करें](#23-publish-mode-को-copy-पर-सेट-करें)
+और जानें: [2.3. Publish mode को copy पर सेट करें](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1212,7 +1212,7 @@ Command line से Nextflow workflow को parameter value कैसे pass �
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-और जानें: [3.2. User input capture करने के लिए command-line parameter set up करें](#32-user-input-capture-करने-के-लिए-command-line-parameter-set-up-करें)
+और जानें: [3.2. User input capture करने के लिए command-line parameter set up करें](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

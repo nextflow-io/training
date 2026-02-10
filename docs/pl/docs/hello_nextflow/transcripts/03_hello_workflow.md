@@ -1,5 +1,7 @@
 # Część 3: Hello Workflow - Transkrypcja wideo
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -26,7 +28,7 @@ Mamy pojedyncze wejście workflow'a - blok params - gdzie mówimy, że oczekuje 
 
 W samym workflow'ie mamy blok main. Tworzymy kanał, parsujemy CSV na wiersze, a następnie bierzemy pierwszy element każdej tablicy i przekazujemy ten kanał do procesu, który generuje trzy zadania. Publikujemy z workflow'a wyjścia z tego procesu.
 
-Na końcu w bloku output mówimy Nextflow'owi, żeby opublikował te pliki z tego kanału do katalogu o nazwie hello_workflow. Oraz żeby skopiował te pliki, a nie tworzył dowiązań symbolicznych.
+Na końcu w bloku output mówimy Nextflow'owi, żeby opublikował te pliki z tego kanału do katalogu o nazwie hello_workflow oraz żeby skopiował te pliki, a nie tworzył dowiązań symbolicznych.
 
 ## 1. Dodanie drugiego kroku do workflow'a
 
@@ -128,7 +130,7 @@ Jeśli zrobię .command.sh, zobaczymy, że ma tylko pojedynczą nazwę pliku tut
 
 ## 2.3. Dodanie kroku zbierającego do workflow'a
 
-Więc jakoś musimy powiedzieć Nextflow, żeby zebrał wszystkie te wyjścia z poprzedniego procesu i dał je temu procesowi downstream jako pojedynczy element kanału, a nie trzy.
+Więc jakoś musimy powiedzieć Nextflow'owi, żeby zebrał wszystkie te wyjścia z poprzedniego procesu i dał je temu procesowi downstream jako pojedynczy element kanału, a nie trzy.
 
 Robimy to za pomocą operatora kanału o nazwie _collect_.
 
@@ -158,13 +160,13 @@ Tylko żeby szybko sprawdzić, czy działa. Powinno być teraz trochę czystsze,
 
 Dobra. Następnie przyjrzymy się obsłudze wielu wejść do pojedynczego procesu. Do tej pory widzicie, że wszystkie nasze procesy pobierają tylko jedną rzecz jako wejście. Wszystkie mają pojedynczą linię pod swoim wejściem.
 
-Zademonstrujemy to pozwalając Nextflow określić inny identyfikator batch, tak że może uruchomicie ten workflow wielokrotnie i możecie nadać mu inny batch ID za każdym razem.
+Zademonstrujemy to pozwalając Nextflow'owi określić inny identyfikator batch, tak że może uruchomicie ten workflow wielokrotnie i możecie nadać mu inny batch ID za każdym razem.
 
 Po prostu dodam drugą linię we wejściu tutaj dla collectGreetings. I nazwę to "val", bo to jest łańcuch znaków. Teraz to jest wartość, nie ścieżka, i nazwę to "batch_name".
 
 Następnie edytuję skrypt tutaj na dole, żeby użyć tej zmiennej, i spróbuję umieścić ją w tym samym miejscu co materiał szkoleniowy. Więc umieszczę ją w środku tej ścieżki pliku COLLECTED-$\{batch_name\}-output.
 
-Jeszcze nie skończyliśmy. Pamiętajcie, że musimy powiedzieć Nextflow, jakie będą nazwy plików wyjściowych. Więc musimy też zrobić to samo tutaj na górze: COLLECTED-$\{batch_name\}-output.txt".
+Jeszcze nie skończyliśmy. Pamiętajcie, że musimy powiedzieć Nextflow'owi, jakie będą nazwy plików wyjściowych. Więc musimy też zrobić to samo tutaj na górze: COLLECTED-$\{batch_name\}-output.txt".
 
 Fantastycznie. Nextflow teraz dostaje drugie wejście zmiennej i interpoluje to do skryptu i wyjścia.
 
@@ -194,13 +196,13 @@ There were $\{count_greetings\} greetings in this batch, i zapiszemy to do noweg
 
 Musimy jakoś to faktycznie obliczyć. Moglibyśmy zrobić tę logikę w skrypcie Bash, gdybyśmy chcieli, używając logiki Bash. Jednak możemy również po prostu robić skryptowanie bezpośrednio w kodzie Nextflow, o ile znajduje się w bloku script w procesie i nad zacytowaną sekcją.
 
-Cokolwiek tutaj nie zostanie włączone do ostatecznego wyrenderowanego skryptu i zostanie po prostu wykonane przez Nextflow, gdy renderuje zadanie.
+Cokolwiek tutaj nie zostanie włączone do ostatecznego wyrenderowanego skryptu i zostanie po prostu wykonane przez Nextflow'a, gdy renderuje zadanie.
 
 Więc tutaj po prostu robimy trochę logiki. Tworzymy nową zmienną o nazwie count_greetings. Bierzemy tutaj kanał plików wejściowych i wywołujemy na nim .size().
 
 Dobra, ta funkcja da mi tutaj liczbę do tej zmiennej, i teraz nasze ostrzeżenie zniknęło, bo ta zmienna jest definiowana.
 
-Dobra, więc tworzymy ten drugi plik w katalogu work, ale musimy powiedzieć Nextflow, żeby oczekiwał go jako opublikowane wyjście tego procesu. Więc robimy to dokładnie tą samą składnią, jakiej użyliśmy dla pierwszego pliku.
+Dobra, więc tworzymy ten drugi plik w katalogu work, ale musimy powiedzieć Nextflow'owi, żeby oczekiwał go jako opublikowane wyjście tego procesu. Więc robimy to dokładnie tą samą składnią, jakiej użyliśmy dla pierwszego pliku.
 
 Mówimy path, bo znowu, moglibyśmy publikować zmienną tutaj, gdybyśmy chcieli, z "val", ale powiemy "path". A następnie oczekiwaną nazwę pliku. Zauważcie, że nie jest tutaj podświetlona. To dlatego, że użyłem pojedynczych cudzysłowów. Muszę użyć podwójnych cudzysłowów.
 
@@ -222,7 +224,7 @@ Dobra, spróbujmy i uruchommy nasz workflow i zobaczmy, co się stanie.
 
 Mam nadzieję, że teraz powinien działać w zasadzie tak samo jak wcześniej. I otrzymamy nowy plik wyjściowy tutaj na górze o nazwie replicate_two, report. I proszę. Został otwarty i mówi, że są trzy powitania w batch, co jest tym, czego oczekiwaliśmy, więc jest idealnie.
 
-Jeśli przejdę do katalogu work tutaj tylko po to, żeby Wam udowodnić, że zostało wykonane w kodzie Nextflow, a nie w skrypcie bash, mogę przejść do cat work/ command.sh, i zobaczycie tutaj, że po prostu wypisuje ten łańcuch znaków bezpośrednio. There were three greetings in this batch, i więc ta zmienna została zinterpolowana przez Nextflow. Została obliczona w bloku script, zanim napisał plik .command.sh. Więc wynikowe obliczenie zmiennej jest w zasadzie zakodowane na stałe do tego, zanim zostanie wykonane w Waszym środowisku obliczeniowym w tym przypadku.
+Jeśli przejdę do katalogu work tutaj tylko po to, żeby Wam udowodnić, że zostało wykonane w kodzie Nextflow, a nie w skrypcie bash, mogę przejść do cat work/ command.sh, i zobaczycie tutaj, że po prostu wypisuje ten łańcuch znaków bezpośrednio. There were three greetings in this batch, i więc ta zmienna została zinterpolowana przez Nextflow'a. Została obliczona w bloku script, zanim napisał plik .command.sh. Więc wynikowe obliczenie zmiennej jest w zasadzie zakodowane na stałe do tego, zanim zostanie wykonane w Waszym środowisku obliczeniowym w tym przypadku.
 
 I więc widzicie to oddzielenie między blokiem script tutaj a wszystkim powyżej niego. Mam nadzieję, że to ma sens.
 

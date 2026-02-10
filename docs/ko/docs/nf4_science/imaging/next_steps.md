@@ -4,22 +4,22 @@
 
 Nextflow for Bioimaging 교육을 완료하신 것을 축하합니다!
 
-이제 이미징 데이터 분석을 위한 Nextflow pipeline을 실행하고 구성하는 기초 기술을 갖추셨습니다.
+이제 이미징 데이터 분석을 위한 Nextflow 파이프라인을 실행하고 구성하는 기초 기술을 갖추셨습니다.
 
 ## 학습 계속하기
 
 Nextflow 지식을 심화하기 위한 권장 다음 단계는 다음과 같습니다:
 
-### 더 많은 nf-core pipeline 탐색하기
+### 더 많은 nf-core 파이프라인 탐색하기
 
-- **모든 pipeline 둘러보기**: [https://nf-co.re/pipelines](https://nf-co.re/pipelines)
+- **모든 파이프라인 둘러보기**: [https://nf-co.re/pipelines](https://nf-co.re/pipelines)
 
-### 자신만의 pipeline 개발하기
+### 자신만의 파이프라인 개발하기
 
-Nextflow pipeline 작성 방법을 배우고 싶다면:
+Nextflow 파이프라인 작성 방법을 배우고 싶다면:
 
 - **[Hello Nextflow](../../hello_nextflow/)**: 포괄적인 Nextflow 개발 교육
-- **[Side Quests](../../side_quests/)**: pipeline 개발자를 위한 고급 주제
+- **[Side Quests](../../side_quests/)**: 파이프라인 개발자를 위한 고급 주제
 
 ### 커뮤니티 참여하기
 
@@ -34,8 +34,8 @@ Nextflow pipeline 작성 방법을 배우고 싶다면:
 
 ## 참여하기
 
-- **nf-core에 기여하기**: pipeline 또는 문서 개선에 도움을 주세요
-- **workflow 공유하기**: 자신의 pipeline을 커뮤니티에 기여하세요
+- **nf-core에 기여하기**: 파이프라인 또는 문서 개선에 도움을 주세요
+- **워크플로우 공유하기**: 자신의 파이프라인을 커뮤니티에 기여하세요
 - **이벤트 참석하기**: Nextflow Summit 및 커뮤니티 교육 세션에 참여하세요
 
 함께 학습해 주셔서 감사합니다!

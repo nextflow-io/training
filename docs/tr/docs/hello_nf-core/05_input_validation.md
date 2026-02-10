@@ -1,10 +1,10 @@
 # Bölüm 5: Girdi doğrulaması
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bu Hello nf-core eğitim kursunun beşinci bölümünde, pipeline girdi ve parametrelerini doğrulamak için nf-schema eklentisinin nasıl kullanılacağını gösteriyoruz.
 
-??? info "Bu bölüme nasıl başlanır"
+??? info "Bu bölümden nasıl başlanır"
 
     Bu bölüm, [Bölüm 4: Bir nf-core modülü oluşturma](./04_make_module.md) kısmını tamamladığınızı ve `COWPY` süreç modülünü pipeline'ınızda nf-core standartlarına göre güncellediğinizi varsayar.
 
@@ -383,7 +383,7 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 
 Pipeline başarıyla çalışmalı ve `batch` parametresi artık doğrulanıyor.
 
-### Çıkarım
+### Özet
 
 Etkileşimli `nf-core pipelines schema build` aracını kullanarak `nextflow_schema.json` dosyasına parametre eklemeyi öğrendiniz ve parametre doğrulamasını eylemde gördünüz.
 Web arayüzü sizin için tüm JSON Schema sözdizimini işleyerek, hataya açık manuel JSON düzenlemesi olmadan karmaşık parametre şemalarını yönetmeyi kolaylaştırır.
@@ -781,7 +781,7 @@ Mükemmel! Doğrulama hatayı yakaladı ve şunları gösteren net, yararlı bir
 
 İsterseniz, şemayı başka eğlenceli şekillerde ihlal eden başka selamlamalar girdi dosyaları oluşturarak bunu uygulayabilirsiniz.
 
-### Çıkarım
+### Özet
 
 Hem parametre doğrulaması hem de girdi verisi doğrulamasını uyguladınız ve test ettiniz. Pipeline'ınız artık yürütmeden önce girdileri doğrulayarak hızlı geri bildirim ve net hata mesajları sağlıyor.
 

@@ -1,6 +1,6 @@
 # Yönlendirme
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bu yönlendirme, "Open in GitHub Codespaces" düğmesine tıklayarak eğitim ortamını zaten açtığınızı varsayar.
 Henüz açmadıysanız, lütfen şimdi açın; ideal olarak ikinci bir tarayıcı penceresi veya sekmesinde açarak bu talimatlara geri dönebilirsiniz.
@@ -30,7 +30,7 @@ nextflow run nf-core/molkart -profile docker,test -stub -resume --outdir results
 Bu komut, gerekli tüm Docker imajlarını arka planda indirecektir.
 Bu çalışırken yönlendirmenin geri kalanıyla devam edebilirsiniz.
 
-!!!tip "İpucu"
+!!!tip
 
     `-stub` bayrağı, pipeline'ın gerçek veri işlemeden hızlıca çalışmasını sağlar, bu da imajları indirmek için mükemmeldir. Terminal sekmesinde ilerlemeyi izleyebilirsiniz.
 
@@ -44,7 +44,7 @@ Bu eğitim kursu boyunca, `nf4-science/imaging/` dizininde çalışacağız.
 cd nf4-science/imaging/
 ```
 
-!!!tip "İpucu"
+!!!tip
 
     Herhangi bir nedenle bu dizinden çıkarsanız, GitHub Codespaces eğitim ortamında çalıştığınızı varsayarak, her zaman tam yolu kullanarak geri dönebilirsiniz:
 

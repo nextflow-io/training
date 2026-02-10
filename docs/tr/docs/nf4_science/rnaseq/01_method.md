@@ -1,6 +1,6 @@
 # Bölüm 1: Yönteme genel bakış ve manuel test
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Toplu RNAseq verilerini işlemek ve analiz etmek için birden fazla geçerli yöntem bulunmaktadır.
 Bu kurs için, [Babraham Enstitüsü](https://www.babraham.ac.uk/)'nden Dr. Simon Andrews ve Laura Biggins tarafından [burada](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) açıklanan yöntemi takip ediyoruz.
@@ -17,7 +17,7 @@ Amacımız, aşağıdaki işleme adımlarını uygulayan bir iş akışı geliş
 - **MULTIQC:** MultiQC kullanarak kapsamlı bir QC raporu oluşturun
 
 Ancak, herhangi bir iş akışı kodu yazmaya başlamadan önce, komutları bazı test verileri üzerinde manuel olarak deneyeceğiz.
-İhtiyacımız olan araçlar GitHub Codespaces ortamında yüklü olmadığından, bunları konteynerler aracılığıyla kullanacağız (bkz. [Merhaba Konteynerler](../../hello_nextflow/05_hello_containers.md)).
+İhtiyacımız olan araçlar GitHub Codespaces ortamında yüklü olmadığından, bunları konteynerler aracılığıyla kullanacağız (bkz. [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note "Not"
 
@@ -429,7 +429,7 @@ exit
 
 ---
 
-### Çıkarımlar
+### Özet
 
 Tüm bireysel komutları ilgili konteynerlerde etkileşimli olarak test ettiniz.
 

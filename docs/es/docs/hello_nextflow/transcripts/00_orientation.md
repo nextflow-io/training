@@ -46,7 +46,7 @@ Hay un par de otras cosas importantes a tener en cuenta aquí. En primer lugar, 
 
 Otro menú desplegable en la parte superior es este, de idioma. Ahora esto es completamente nuevo para la versión 3.0. Hemos tomado el material previamente traducido, que fue hecho por humanos, a mano, y lo hemos pasado a un LLM y configurado toda esta nueva infraestructura para mantener diferentes traducciones del material de capacitación usando traducción con LLM.
 
-Así que ahora tenemos todas estas fantásticas traducciones aquí. Entonces, si quieres escuchar en coreano, puedes cargar todo el sitio web en coreano. Y seguir adelante allí. Lo mismo para todos estos otros idiomas, hindi y alemán y así sucesivamente. Voy a seguir en inglés. Ese es el idioma principal en el que escribimos el material.
+Así que ahora tenemos todas estas fantásticas traducciones aquí. Entonces, si quieres seguir en coreano, puedes cargar todo el sitio web en coreano. Y seguir adelante allí. Lo mismo para todos estos otros idiomas, hindi y alemán y así sucesivamente. Voy a seguir en inglés. Ese es el idioma principal en el que escribimos el material.
 
 Un par de otros botones si te gusta tener modo claro. En lugar de ese modo, puedes seguir el sitio web en modo claro en la parte superior aquí.
 
@@ -56,7 +56,7 @@ Y luego también todo lo que miramos está en un único repositorio de GitHub, q
 
 Bien, así que ahora tienes esto abierto en la pestaña del navegador. Vayamos a Hello Nextflow y hagamos clic. Puedes ver en la página de introducción, nos dice algunos de los requisitos, el resumen, y el plan de lecciones de aproximadamente lo que vamos a cubrir, y luego vamos a sumergirnos en los primeros pasos.
 
-Hay diferentes formas en que puedes hacer este tutorial interactivo. Si estás cómodo/a, eres bienvenido/a a hacer esto localmente en tu propia computadora con tu propia instalación de Nextflow. si hacemos clic en Opciones de entorno, puedes ver que hay más detalles sobre cómo hacer esto ya sea usando Devcontainers locales o también puedes simplemente instalar todo el software localmente, con instalación manual.
+Hay diferentes formas en que puedes hacer este tutorial interactivo. Si estás cómodo/a, eres bienvenido/a a hacer esto localmente en tu propia computadora con tu propia instalación de Nextflow. Si hacemos clic en Opciones de entorno, puedes ver que hay más detalles sobre cómo hacer esto ya sea usando Devcontainers locales o también puedes simplemente instalar todo el software localmente, con instalación manual.
 
 Estamos trabajando en hacer que esto funcione bien con Seqera Studios, así que esa es otra opción. Pero la más común en este momento es usar GitHub Codespaces.
 
@@ -106,9 +106,9 @@ Todo en el Codespace está preinstalado, así que el comando de Nextflow ya est�
 
 Bien. Cuando llegues hasta aquí, debería estar casi listo. Puedes ver ahora que ha descargado el servidor de lenguaje de Nextflow y ha configurado algunas extensiones para nosotros en VS code, incluyendo la extensión de Nextflow, que va a ser útil. Así que puedo cerrar eso y puedo cerrar el README.md.
 
-Y ahora puedes ver que tengo más en el lado izquierdo. Estoy un poco ampliado aquí, pero si reduzco puedes ver que uno de los botones dice Nextflow con el ícono de Nextflow. y eso tiene algunas cosas bonitas aquí para explorar el proyecto y cosas, a las que volveremos más tarde.
+Y ahora puedes ver que tengo más en el lado izquierdo. Estoy un poco ampliado aquí, pero si reduzco puedes ver que uno de los botones dice Nextflow con el ícono de Nextflow. Y eso tiene algunas cosas bonitas aquí para explorar el proyecto y cosas, a las que volveremos más tarde.
 
-Bien. en caso de que pierdas alguno de estos paneles, estos botones en la parte superior derecha son realmente útiles y estos solo muestran y ocultan cosas. Así que eso muestra y oculta el Explorador muestra y oculta el terminal en la parte inferior. Y así sucesivamente.
+Bien. En caso de que pierdas alguno de estos paneles, estos botones en la parte superior derecha son realmente útiles y estos solo muestran y ocultan cosas. Así que eso muestra y oculta el Explorador, muestra y oculta el terminal en la parte inferior. Y así sucesivamente.
 
 Voy a usar estos bastante porque estoy muy ampliado, así que intento ayudarte a ver todo el texto en mi pantalla, y por eso es útil poder hacer pantalla completa con el terminal y luego ocultarlo cuando estamos mirando código. Pero la mayor parte del tiempo puedes simplemente tener todo esto abierto al mismo tiempo.
 
@@ -136,7 +136,7 @@ Puedes ver aquí que también el directorio de trabajo actual ahora está dentro
 
 ## Nueva sintaxis de Nextflow para 2026
 
-hay una cosa especial que necesito mencionar en este punto. Ahora mismo, a principios de 2026, estamos comenzando a introducir diferentes características en Nextflow, y una de las grandes nuevas es un nuevo analizador de sintaxis de lenguaje dentro de Nextflow.
+Hay una cosa especial que necesito mencionar en este punto. Ahora mismo, a principios de 2026, estamos comenzando a introducir diferentes características en Nextflow, y una de las grandes nuevas es un nuevo analizador de sintaxis de lenguaje dentro de Nextflow.
 
 Básicamente el motor que lee tus archivos de Nextflow y entiende eso, para el tiempo de ejecución. Hay algunos cambios en la sintaxis, y es realmente importante que uses Nextflow con el analizador de sintaxis correcto habilitado.
 
@@ -150,11 +150,11 @@ Pero si estás ejecutando 25.10, necesitas habilitar el analizador de sintaxis e
 
 Esto se hace con una variable de entorno. Ya está configurada en el Codespaces, así que no necesitas hacer nada. Pero si estás ejecutando localmente, necesitas configurar esto, y puedo verificar esto haciendo "echo $NXF_SYNTAX_PARSER", y debería estar configurado en v2.
 
-Así que si estás ejecutando localmente, simplemente haz "export NXF_SYNTAX_PARSER=v2". Así de simple. Pero recuerda hacer eso. porque de lo contrario vas a ver algunas discrepancias extrañas y errores a medida que avanzamos.
+Así que si estás ejecutando localmente, simplemente haz "export NXF_SYNTAX_PARSER=v2". Así de simple. Pero recuerda hacer eso. Porque de lo contrario vas a ver algunas discrepancias extrañas y errores a medida que avanzamos.
 
 Si tienes alguna duda sobre cualquiera de estas cosas alrededor de la versión de Nextflow y el analizador de sintaxis, en primer lugar, recuerda, no necesitas preocuparte si estás en Codespaces. Todo debería estar configurado correctamente. Pero en segundo lugar, si vas al material de capacitación de Nextflow, si vas hacia abajo, habla sobre los requisitos de versión, hay un enlace aquí que te lleva a la página de ayuda alrededor de explorar versiones, y esto básicamente repasa todo en detalle.
 
-Vale la pena leer esto si tienes un momento. porque ayuda a aclarar cuáles son algunos de los diferentes términos, que podrías escuchar cuando comiences a usar Nextflow. Cosas como DSL1, DSL2, analizador de sintaxis uno, analizador de sintaxis dos, y así sucesivamente. Así que vale la pena solo echarle un vistazo a eso y eso repite algo de lo que acabo de decir.
+Vale la pena leer esto si tienes un momento. Porque ayuda a aclarar cuáles son algunos de los diferentes términos, que podrías escuchar cuando comiences a usar Nextflow. Cosas como DSL1, DSL2, analizador de sintaxis uno, analizador de sintaxis dos, y así sucesivamente. Así que vale la pena solo echarle un vistazo a eso y eso repite algo de lo que acabo de decir.
 
 También es realmente útil si has escrito código de Nextflow previamente y estás regresando para un repaso. Te dice algunas de las cosas que cambian y te enlaza a partes de la documentación de Nextflow, que te dice cómo actualizar tu código de Nextflow.
 

@@ -80,7 +80,7 @@ code molkart/nextflow.config
 
 Wyszukaj blok `profiles`:
 
-```groovy title="molkart/nextflow.config (fragment)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
     docker {
         docker.enabled          = true
@@ -130,7 +130,7 @@ Rozłóżmy to, co robi każda flaga:
 Ponieważ używamy `-resume`, Nextflow sprawdzi, czy coś się zmieniło od ostatniego uruchomienia.
 Jeśli parametry, wejścia i kod są takie same, wszystkie zadania będą pobrane z cache'u i pipeline zakończy się niemal natychmiast.
 
-```console title="Wyjście (fragment)"
+```console title="Output (excerpt)"
 executor >  local (12)
 ...
 [1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
@@ -151,7 +151,7 @@ Pipeline'y nf-core zawsze zawierają co najmniej dwa profile testowe:
 
 Przyjrzyjmy się bliżej profilowi `test` w molkart, który jest dołączany za pomocą dyrektywy `includeConfig`:
 
-```groovy title="molkart/nextflow.config (fragment)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
   ...
     test      { includeConfig 'conf/test.config'      }
@@ -160,7 +160,7 @@ profiles {
 
 Oznacza to, że za każdym razem gdy uruchamiamy pipeline z `-profile test`, Nextflow wczyta konfigurację z `conf/test.config`.
 
-```groovy title="molkart/conf/test.config (fragment)"
+```groovy title="molkart/conf/test.config (excerpt)"
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -246,7 +246,7 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! note "Uwaga"
+!!! Note "Uwaga"
 
     Nie możemy przetestować profilu HPC w tym środowisku szkoleniowym, ponieważ nie mamy dostępu do schedulera Slurm.
     Ale to pokazuje, jak skonfigurowałbyś go do rzeczywistego użycia.
@@ -292,7 +292,7 @@ Dla uproszczenia, pipeline'y nf-core używają [**etykiet procesów**](https://w
 Każdy proces jest oznaczony etykietą taką jak `process_low`, `process_medium` lub `process_high` w celu opisania odpowiednio niskich, średnich lub wysokich wymagań zasobów obliczeniowych.
 Te etykiety są konwertowane na konkretne żądania zasobów w jednym z plików konfiguracyjnych znajdujących się w katalogu `conf/` pipeline'u.
 
-```groovy title="molkart/conf/base.config (fragment)"
+```groovy title="molkart/conf/base.config (excerpt)"
 process {
     cpus   = { 1      * task.attempt }
     memory = { 6.GB   * task.attempt }
@@ -344,7 +344,7 @@ Jeśli spróbujemy uruchomić ten pipeline z powyższym nadpisaniem, proces `CEL
 Spowoduje to niepowodzenie pipeline'u w naszym obecnym środowisku, ponieważ nie mamy dostępnej takiej ilości pamięci RAM.
 W następnej sekcji nauczymy się, jak zapobiegać tego typu awariom.
 
-!!! tip "Wskazówka"
+!!! Tip "Wskazówka"
 
     Aby znaleźć nazwy procesów, sprawdź wyjście wykonania pipeline'u lub sprawdź `.nextflow.log`.
     Nazwy procesów mają wzór `WORKFLOW:SUBWORKFLOW:PROCESS`.
@@ -409,7 +409,7 @@ profiles {
 }
 ```
 
-!!! warning "Ostrzeżenie"
+!!! Warning "Ostrzeżenie"
 
     Ustawienie limitów zasobów zbyt nisko może spowodować niepowodzenie procesów lub spowolnić ich działanie.
     Pipeline może potrzebować użyć mniej wymagających pamięciowo algorytmów lub przetwarzać dane w mniejszych fragmentach.

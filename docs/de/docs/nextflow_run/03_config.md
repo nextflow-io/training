@@ -44,7 +44,7 @@ Lass uns das in zwei Schritten machen.
 
 Nimm die folgenden Code-Änderungen in der `nextflow.config`-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="3-10"
     docker.enabled = true
@@ -79,7 +79,7 @@ Aber im Sinne davon, die Konfiguration vollständig in die Konfigurationsdatei z
 
 Nimm die folgende Code-Änderung an der `3-main.nf` Workflow-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="3-main.nf" linenums="9" hl_lines="6"
     /*
@@ -133,7 +133,7 @@ Das produziert immer noch dieselbe Ausgabe wie zuvor.
 
 Die finale ASCII-Kunst-Ausgabe befindet sich im `results/3-main/`-Verzeichnis unter dem Namen `cowpy-COLLECTED-batch-output.txt`, wie zuvor.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/3-main/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -234,7 +234,7 @@ In diesem Lauf kombiniert Nextflow die `nextflow.config` in unserem aktuellen Ve
 
 Die finale Ausgabedatei sollte den tux-Charakter enthalten, der die Grüße sagt.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="tux-run/results/3-main/cowpy-COLLECTED-experiment-output.txt"
     _________
@@ -291,7 +291,7 @@ Diese Parameter-Datei enthält ein Schlüssel-Wert-Paar für jede der Eingaben, 
 Beachte die Verwendung von Doppelpunkten (`:`) anstelle von Gleichheitszeichen (`=`), wenn du die Syntax mit der Konfigurationsdatei vergleichst.
 Die config-Datei ist in Groovy geschrieben, während die Parameter-Datei in YAML geschrieben ist.
 
-!!! info "Hinweis"
+!!! info "Info"
 
     Wir stellen auch eine JSON-Version der Parameter-Datei als Beispiel bereit, aber wir werden hier nicht damit ausführen.
     Fühl dich frei, diese auf eigene Faust auszuprobieren.
@@ -320,7 +320,7 @@ nextflow run 3-main.nf -params-file test-params.yaml
 
 Die finale Ausgabedatei sollte den stegosaurus-Charakter enthalten, der die Grüße sagt.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/3-main/cowpy-COLLECTED-yaml-output.txt"
     _________
@@ -385,7 +385,7 @@ Um den Pfad für alle Ausgaben zu ändern, kannst du in der `nextflow.config`-Ko
 
 Füge den folgenden Code zur `nextflow.config`-Datei hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
     /*
@@ -427,7 +427,7 @@ Wir haben immer noch ein Unterverzeichnis fest codiert in den Ausgabe-Optionen, 
 
 Nimm die folgenden Code-Änderungen in der Workflow-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -507,7 +507,7 @@ nextflow run 3-main.nf --batch outdir
 
 Das produziert immer noch dieselbe Ausgabe wie zuvor, außer dass wir unsere Ausgaben diesmal unter `results_config/outdir/` finden.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results_config/outdir
@@ -535,7 +535,7 @@ Alles, was du tun musst, ist den Namen des process als `<process>.name` in der A
 
 Nimm die folgenden Änderungen in der Workflow-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -615,7 +615,7 @@ nextflow run 3-main.nf --batch pnames
 
 Das produziert immer noch dieselbe Ausgabe wie zuvor, außer dass wir unsere Ausgaben diesmal unter `results_config/pnames/` finden, und sie sind nach process gruppiert.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results_config/pnames/
@@ -647,9 +647,9 @@ Schließlich können wir im Sinne der Reduzierung der Menge an sich wiederholend
 
 Füge den folgenden Code zur `nextflow.config`-Datei hinzu:
 
-=== "Nachher"
+=== "Danach"
 
-    ```groovy title="nextflow.config" linenums="2" hl_lines="5"
+    ```groovy title="nextflow.config" linenums="12" hl_lines="5"
     /*
     * Ausgabe-Einstellungen
     */
@@ -672,7 +672,7 @@ Genau wie bei der `outputDir`-Option würde es ausreichen, `workflow.output.mode
 
 Nimm die folgenden Änderungen in der Workflow-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="3-main.nf" linenums="42"
     output {
@@ -696,7 +696,7 @@ Nimm die folgenden Änderungen in der Workflow-Datei vor:
 
 === "Vorher"
 
-    ```groovy title="3-main.nf" linenums="42" hl_lines="3 7 11 15 19"
+    ```groovy title="3-main.nf" linenums="42" hl_lines="4 8 12 16 20"
     output {
         first_output {
             path { sayHello.name }
@@ -748,7 +748,7 @@ nextflow run 3-main.nf --batch outmode
 Das produziert immer noch dieselbe Ausgabe wie zuvor, außer dass wir unsere Ausgaben diesmal unter `results_config/outmode/` finden.
 Es sind immer noch alles echte Kopien, keine Symlinks.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results_config/outmode/
@@ -807,7 +807,7 @@ Wie bereits erwähnt, unterstützt Nextflow mehrere Container-Technologien einsc
 Wir können unsere Konfigurationsdatei ändern, um Conda anstelle von Docker zu verwenden.
 Dazu setzen wir den Wert von `docker.enabled` auf `false` und fügen eine Direktive hinzu, die die Verwendung von Conda aktiviert:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="1-2"
     docker.enabled = false
@@ -829,7 +829,7 @@ Wir haben bereits die URI für ein Conda-Paket abgerufen, das das `cowpy`-Tool e
 
 Jetzt fügen wir die URI zur `cowpy` process-Definition hinzu, indem wir die `conda`-Direktive verwenden:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
     process cowpy {
@@ -850,7 +850,7 @@ Jetzt fügen wir die URI zur `cowpy` process-Definition hinzu, indem wir die `co
         input:
     ```
 
-Um das klarzustellen, wir _ersetzen_ nicht die `docker`-Direktive, wir _fügen_ eine alternative Option hinzu.
+Um das klarzustellen, wir _ersetzen_ nicht die `container`-Direktive, wir _fügen_ eine alternative Option hinzu.
 
 !!! tip "Tipp"
 
@@ -883,7 +883,7 @@ Das sollte ohne Probleme funktionieren und dieselben Ausgaben wie zuvor unter `r
 
 Hinter den Kulissen hat Nextflow die Conda-Pakete abgerufen und die Umgebung erstellt, was normalerweise etwas Arbeit erfordert; also ist es schön, dass wir nichts davon selbst machen müssen!
 
-!!! info "Hinweis"
+!!! info "Info"
 
     Das läuft schnell, weil das `cowpy`-Paket ziemlich klein ist, aber wenn du mit großen Paketen arbeitest, kann es beim ersten Mal etwas länger dauern als üblich, und du könntest sehen, dass die Konsolenausgabe für eine Minute oder so 'stecken bleibt', bevor sie abgeschlossen ist.
     Das ist normal und liegt an der zusätzlichen Arbeit, die Nextflow beim ersten Mal macht, wenn du ein neues Paket verwendest.
@@ -1069,7 +1069,7 @@ Das wird helfen, die Menge an Rechenleistung zu reduzieren, die wir verbrauchen.
 
 Gleichzeitig werden wir so tun, als ob der `cowpy` process mehr Ressourcen benötigt als die anderen, nur um zu demonstrieren, wie man Zuweisungen für einen einzelnen process anpasst.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="6-9"
     /*
@@ -1097,7 +1097,7 @@ Gleichzeitig werden wir so tun, als ob der `cowpy` process mehr Ressourcen benö
 
 Mit dieser Konfiguration werden alle processes 1GB Speicher und eine einzelne CPU (der implizierte Standard) anfordern, außer dem `cowpy` process, der 2GB und 2 CPUs anfordern wird.
 
-!!! info "Hinweis"
+!!! info "Info"
 
     Wenn du eine Maschine mit wenigen CPUs hast und du eine hohe Anzahl pro process zuweist, könntest du sehen, dass process-Aufrufe hintereinander in die Warteschlange gestellt werden.
     Das liegt daran, dass Nextflow sicherstellt, dass wir nicht mehr CPUs anfordern als verfügbar sind.
@@ -1292,7 +1292,7 @@ Genau wie für technische Konfigurationsprofile kannst du mehrere verschiedene P
 Praktischerweise schließen sich Profile nicht gegenseitig aus, sodass wir mehrere Profile in unserer Kommandozeile mit der folgenden Syntax angeben können `-profile <profil1>,<profil2>` (für eine beliebige Anzahl von Profilen).
 
 Wenn du Profile kombinierst, die Werte für dieselben Konfigurationselemente setzen und in derselben Konfigurationsdatei beschrieben sind, wird Nextflow den Konflikt lösen, indem es den Wert verwendet, den es zuletzt eingelesen hat (_d.h._ was auch immer später in der Datei kommt).
-Wenn die widersprüchlichen Einstellungen in verschiedenen Konfigurationsquellen gesetzt sind, gilt die Standard-[Rangfolge](https://www.nextflow.io/docs/latest/config.html#configuration-file).
+Wenn die widersprüchlichen Einstellungen in verschiedenen Konfigurationsquellen gesetzt sind, gilt die Standard-[Rangfolge](https://www.nextflow.io/docs/latest/config.html).
 
 Lass uns versuchen, das test-Profil zu unserem vorherigen Befehl hinzuzufügen:
 
@@ -1316,7 +1316,7 @@ nextflow run 3-main.nf -profile my_laptop,test
 
 Das wird Docker verwenden, wo möglich, und Ausgaben unter `results_config/test` produzieren, und diesmal ist der Charakter das komische Duo `dragonandcow`.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results_config/test/"
      _________

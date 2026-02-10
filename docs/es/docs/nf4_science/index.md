@@ -10,7 +10,7 @@ hide:
 
 Estos son cursos que demuestran cómo aplicar los conceptos y componentes presentados en el curso para principiantes [Hello Nextflow](../hello_nextflow/) a casos de uso científicos específicos. Cada curso consiste en una serie de módulos de entrenamiento diseñados para ayudar a los estudiantes a desarrollar sus habilidades de forma progresiva.
 
-!!! exercise "Ejercicio"
+!!! exercise "Nextflow para Genómica"
 
     !!! tip inline end ""
 
@@ -20,7 +20,7 @@ Estos son cursos que demuestran cómo aplicar los conceptos y componentes presen
 
     [Comience el entrenamiento de Nextflow para Genómica :material-arrow-right:](genomics/){ .md-button .md-button--primary }
 
-!!! exercise "Ejercicio"
+!!! exercise "Nextflow para RNAseq"
 
     !!! tip inline end ""
 
@@ -30,7 +30,7 @@ Estos son cursos que demuestran cómo aplicar los conceptos y componentes presen
 
     [Comience el entrenamiento de Nextflow para RNAseq :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
 
-!!! exercise "Ejercicio"
+!!! exercise "Nextflow para Bioimagen"
 
     !!! tip inline end ""
 

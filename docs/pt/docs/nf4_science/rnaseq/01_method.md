@@ -133,7 +133,7 @@ ls /data/reads/ENCSR000COQ1_1_fastqc*
 
 <!-- switch to tree -->
 
-```console title="Saída"
+```console title="Output"
 /data/reads/ENCSR000COQ1_1_fastqc.html  /data/reads/ENCSR000COQ1_1_fastqc.zip
 ```
 
@@ -171,7 +171,7 @@ Você pode encontrar os arquivos de saída no diretório de trabalho:
 ls ENCSR000COQ1_1*
 ```
 
-```console title="Saída"
+```console title="Output"
 ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.html
 ENCSR000COQ1_1_trimmed.fq.gz                 ENCSR000COQ1_1_trimmed_fastqc.zip
 ```
@@ -260,7 +260,7 @@ Isso cria múltiplos arquivos de índice do genoma, que você pode encontrar no 
 ls genome_index.*
 ```
 
-```console title="Saída"
+```console title="Output"
 genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2
 genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
 ```
@@ -305,7 +305,7 @@ Mais uma vez, você pode encontrar os arquivos de saída no diretório de trabal
 ls ENCSR000COQ1_1*
 ```
 
-```console title="Saída"
+```console title="Output"
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 
@@ -396,7 +396,7 @@ Os arquivos de saída estão mais uma vez no diretório de trabalho:
 ls ENCSR000COQ1_1_QC*
 ```
 
-```console title="Saída"
+```console title="Output"
 ENCSR000COQ1_1_QC.html
 
 ENCSR000COQ1_1_QC_data:
@@ -433,6 +433,6 @@ exit
 
 Você testou todos os comandos individuais interativamente nos contêineres relevantes.
 
-### Qual é o próximo passo?
+### O que vem a seguir?
 
 Aprenda como encapsular esses mesmos comandos em um fluxo de trabalho de múltiplas etapas que usa contêineres para executar o trabalho.

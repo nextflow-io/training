@@ -1,5 +1,7 @@
 # Bölüm 1: Yöntemlere genel bakış ve manuel test
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Varyant çağırma (variant calling), bir genom dizisindeki varyasyonları bir referans genoma göre tanımlamayı amaçlayan bir genomik analiz yöntemidir.
 Burada, tüm genom dizileme verilerinde kısa germline varyantları, _yani_ SNP'leri ve indelleri çağırmak için tasarlanmış araçları ve yöntemleri kullanacağız.
 
@@ -33,7 +35,7 @@ Bu araçlar GitHub Codespaces ortamında yüklü değildir, bu yüzden onları k
 
 !!! note "Not"
 
-     `nf4-science/genomics` dizininde olduğunuzdan emin olun, böylece `pwd` yazdığınızda gösterilen yolun son kısmı `genomics` olmalıdır.
+    `nf4-science/genomics` dizininde olduğunuzdan emin olun, böylece `pwd` yazdığınızda gösterilen yolun son kısmı `genomics` olmalıdır.
 
 ---
 
@@ -118,7 +120,7 @@ Yalnızca girdi dosyasını sağlamamız gerekir; araç, girdi dosya adına `.ba
 samtools index /data/bam/reads_mother.bam
 ```
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     data/bam/
@@ -358,7 +360,7 @@ samtools index /data/bam/reads_father.bam
 samtools index /data/bam/reads_son.bam
 ```
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     data/bam/
@@ -489,7 +491,7 @@ Bu, konteyner içindeki mevcut çalışma dizininde GVCF çıktı dosyası `read
     ```
 
 Bunlar, varyant çağırıcının varyasyon kanıtı bulamadığı varyant olmayan bölgeleri temsil eder, bu nedenle varyasyonun yokluğundaki güven düzeyini tanımlayan bazı istatistikleri yakaladı.
-Bu, iki çok farklı durum rakamı arasında ayrım yapmayı mümkün kılar: (1) örneğin homozigot-referans olduğunu gösteren kaliteli veri vardır ve (2) her iki şekilde de bir belirleme yapmak için yeterli kaliteli veri yoktur.
+Bu, iki çok farklı durum arasında ayrım yapmayı mümkün kılar: (1) örneğin homozigot-referans olduğunu gösteren kaliteli veri vardır ve (2) her iki şekilde de bir belirleme yapmak için yeterli kaliteli veri yoktur.
 
 Bir GVCF'de, tipik olarak bunların arasına serpiştirilmiş daha az sayıda varyant kaydıyla birlikte bu tür varyant olmayan satırlar çoktur.
 Gerçek bir varyant çağrısını bulmak için dosyanın yalnızca ilk 176 satırını yüklemek için GVCF üzerinde `head -176` çalıştırmayı deneyin.
@@ -603,7 +605,7 @@ Etrafında dolaşabilirsiniz ancak bu veri deposu formatının insanlar tarafın
 
     GATK, gerektiğinde veri deposundan varyant çağrı verilerini incelemeyi ve çıkarmayı mümkün kılan araçlar içerir.
 
-#### 2.3.2. Ortak genotipleme analizinin gerçekleştirilmesi
+#### 2.3.2. Ortak genotipleme analizini gerçekleştirin
 
 Bu ikinci adım, kohorttaki tüm örneklerde mevcut veriler ışığında varyant istatistiklerini ve bireysel genotipleri yeniden hesaplamak için GenotypeGVCFs adlı başka bir GATK aracını kullanır.
 

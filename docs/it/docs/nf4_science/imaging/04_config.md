@@ -80,7 +80,7 @@ code molkart/nextflow.config
 
 Cercare il blocco `profiles`:
 
-```groovy title="molkart/nextflow.config (estratto)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
     docker {
         docker.enabled          = true
@@ -130,7 +130,7 @@ Analizziamo cosa fa ciascun flag:
 Poiché stiamo utilizzando `-resume`, Nextflow verificherà se qualcosa è cambiato dall'ultima esecuzione.
 Se i parametri, gli input e il codice sono gli stessi, tutte le attività verranno recuperate dalla cache e la pipeline si completerà quasi istantaneamente.
 
-```console title="Output (estratto)"
+```console title="Output (excerpt)"
 executor >  local (12)
 ...
 [1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
@@ -151,7 +151,7 @@ Le pipeline nf-core includeranno sempre almeno due profili di test:
 
 Diamo un'occhiata più da vicino al profilo `test` in molkart che è incluso utilizzando la direttiva `includeConfig`:
 
-```groovy title="molkart/nextflow.config (estratto)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
   ...
     test      { includeConfig 'conf/test.config'      }
@@ -160,7 +160,7 @@ profiles {
 
 Questo significa che ogni volta che eseguiamo la pipeline con `-profile test`, Nextflow caricherà la configurazione da `conf/test.config`.
 
-```groovy title="molkart/conf/test.config (estratto)"
+```groovy title="molkart/conf/test.config (excerpt)"
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -203,7 +203,7 @@ I profili vengono applicati da sinistra a destra, quindi i profili successivi so
 Le pipeline nf-core sono fornite con profili integrati per container, test e ambienti speciali.
 È possibile combinare più profili per costruire la configurazione necessaria.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Scopri come creare i tuoi profili personalizzati per diversi ambienti di calcolo.
 
@@ -246,7 +246,7 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! note "Nota"
+!!! Note "Nota"
 
     Non possiamo testare il profilo HPC in questo ambiente di formazione poiché non abbiamo accesso a uno scheduler Slurm.
     Ma questo mostra come lo si configurerebbe per l'uso nel mondo reale.
@@ -278,7 +278,7 @@ Questo è estremamente utile per:
 I profili personalizzati consentono di passare tra diversi ambienti di calcolo con un singolo flag da riga di comando.
 Utilizzare `nextflow config` per ispezionare la configurazione risolta prima dell'esecuzione.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Scopri come personalizzare le richieste di risorse per singoli processi utilizzando il sistema di etichette dei processi di nf-core.
 
@@ -292,7 +292,7 @@ Per semplicità, le pipeline nf-core utilizzano [**etichette dei processi**](htt
 Ogni processo è etichettato con un'etichetta come `process_low`, `process_medium` o `process_high` per descrivere rispettivamente requisiti di risorse di calcolo bassi, medi o alti.
 Queste etichette vengono convertite in richieste di risorse specifiche in uno dei file di configurazione situati nella directory `conf/` della pipeline.
 
-```groovy title="molkart/conf/base.config (estratto)"
+```groovy title="molkart/conf/base.config (excerpt)"
 process {
     cpus   = { 1      * task.attempt }
     memory = { 6.GB   * task.attempt }
@@ -344,7 +344,7 @@ Se proviamo a eseguire questa pipeline con la sovrascrittura precedente, il proc
 Ciò causerà il fallimento della pipeline nel nostro ambiente attuale poiché non abbiamo così tanta RAM disponibile.
 Nella prossima sezione impareremo come prevenire questi tipi di fallimenti.
 
-!!! tip "Suggerimento"
+!!! Tip "Suggerimento"
 
     Per trovare i nomi dei processi, consultare l'output di esecuzione della pipeline o verificare `.nextflow.log`.
     I nomi dei processi seguono il modello `WORKFLOW:SUBWORKFLOW:PROCESS`.
@@ -354,7 +354,7 @@ Nella prossima sezione impareremo come prevenire questi tipi di fallimenti.
 Le pipeline nf-core utilizzano etichette dei processi per standardizzare l'allocazione delle risorse.
 È possibile sovrascrivere le risorse per etichetta (influisce su più processi) o per nome (influisce su un processo specifico).
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Scopri come gestire i limiti di risorse in ambienti con risorse limitate come GitHub Codespaces.
 
@@ -409,7 +409,7 @@ profiles {
 }
 ```
 
-!!! warning "Avviso"
+!!! Warning "Avviso"
 
     Impostare limiti di risorse troppo bassi può causare il fallimento dei processi o un'esecuzione lenta.
     La pipeline potrebbe dover utilizzare algoritmi meno intensivi in termini di memoria o elaborare i dati in blocchi più piccoli.
@@ -419,13 +419,13 @@ profiles {
 Utilizzare `resourceLimits` per eseguire pipeline in ambienti con risorse limitate limitando le richieste di risorse dei processi.
 Profili diversi possono avere limiti diversi appropriati per il loro ambiente.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Hai completato la formazione principale su Nextflow per Bioimaging!
 
 ---
 
-## Takeaway
+## Conclusione
 
 Ora comprendi come configurare le pipeline Nextflow per diversi ambienti di calcolo.
 
@@ -440,7 +440,7 @@ Competenze chiave che hai appreso:
 
 Queste competenze di configurazione sono trasferibili a qualsiasi pipeline Nextflow e ti aiuteranno a eseguire workflow in modo efficiente su macchine locali, cluster HPC e piattaforme cloud.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Congratulazioni per aver completato il corso Nextflow per Bioimaging!
 

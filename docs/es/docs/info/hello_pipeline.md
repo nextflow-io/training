@@ -10,7 +10,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-La mayoría de nuestros cursos de entrenamiento utilizan un pipeline simple e independiente del dominio para demostrar conceptos y mecanismos de Nextflow.
+La mayoría de nuestros cursos de capacitación utilizan un pipeline simple e independiente del dominio para demostrar conceptos y mecanismos de Nextflow.
 El curso Hello Nextflow muestra cómo desarrollar este pipeline paso a paso, explicando cada decisión de diseño e implementación.
 Otros entrenamientos utilizan este pipeline, o partes de él, como punto de partida.
 
@@ -22,7 +22,7 @@ El workflow Hello toma un archivo CSV que contiene saludos, los escribe en archi
 
 ### Pasos del workflow (procesos)
 
-Los cuatro pasos están implementados como processes de Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` y `cowpy`) almacenados en archivos de módulo separados.
+Los cuatro pasos están implementados como procesos de Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` y `cowpy`) almacenados en archivos de módulo separados.
 
 1. **`sayHello`:** Escribe cada saludo en su propio archivo de salida (por ejemplo, "Hello-output.txt")
 2. **`convertToUpper`:** Convierte cada saludo a mayúsculas (por ejemplo, "HELLO")

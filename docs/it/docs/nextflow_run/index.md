@@ -24,23 +24,23 @@ additional_information:
 
 **Nextflow Run è un'introduzione pratica all'esecuzione di workflow di analisi dati riproducibili e scalabili.**
 
-Lavorando attraverso esempi pratici ed esercizi guidati, imparerai i fondamenti dell'utilizzo di Nextflow, incluso come eseguire pipeline, gestire file e dipendenze software, parallelizzare l'esecuzione senza sforzo, e far girare workflow su diversi ambienti di calcolo.
+Lavorando attraverso esempi pratici ed esercizi guidati, imparerete i fondamenti dell'utilizzo di Nextflow, incluso come eseguire pipeline, gestire file e dipendenze software, parallelizzare l'esecuzione senza sforzo, e far girare workflow su diversi ambienti di calcolo.
 
-Acquisirai le competenze e la sicurezza per iniziare a eseguire workflow con Nextflow.
+Acquisirete le competenze e la sicurezza per iniziare a eseguire workflow con Nextflow.
 
 <!-- additional_information -->
 
 ## Panoramica del corso
 
-### Cosa farai
+### Cosa farete
 
 Questo corso è pratico, con esercizi orientati agli obiettivi strutturati per introdurre le informazioni gradualmente.
 
-Eseguirai diverse versioni di una pipeline Nextflow che elabora input di testo.
-Inizierai con una versione semplice che consiste in un singolo step, e progredirai eventualmente verso una versione multi-step che prende un file CSV di input di testo tabulari, esegue alcuni step di trasformazione, e produce un singolo file di testo contenente un'immagine ASCII di un personaggio che pronuncia il testo trasformato.
+Eseguirete diverse versioni di una pipeline Nextflow che elabora input di testo.
+Inizierete con una versione semplice che consiste in un singolo step, e progredirete eventualmente verso una versione multi-step che prende un file CSV di input di testo tabulari, esegue alcuni step di trasformazione, e produce un singolo file di testo contenente un'immagine ASCII di un personaggio che pronuncia il testo trasformato.
 
 Questo corso si concentra sull'esecuzione di pipeline (dal nome del comando principale `nextflow run`).
-Se cerchi un'introduzione allo sviluppo di pipeline Nextflow, consulta [Hello Nextflow](../hello_nextflow/index.md).
+Se cercate un'introduzione allo sviluppo di pipeline Nextflow, consultate [Hello Nextflow](../hello_nextflow/index.md).
 
 ### Piano delle lezioni
 
@@ -52,8 +52,8 @@ Abbiamo suddiviso questo corso in tre parti che si concentreranno ciascuna su as
 | [Parte 2: Eseguire pipeline reali](./02_pipeline.md) | Elaborazione di input complessi, esecuzione di workflow multi-step, utilizzo di container e parallelizzazione semplice | 60 min         |
 | [Parte 3: Configurazione](./03_config.md)            | Personalizzazione del comportamento della pipeline e ottimizzazione dell'utilizzo in diversi ambienti di calcolo       | 60 min         |
 
-Al termine di questo corso, sarai ben preparato per affrontare i prossimi passi nel tuo percorso verso l'esecuzione di workflow riproducibili per le tue esigenze di calcolo scientifico.
+Al termine di questo corso, sarete ben preparati per affrontare i prossimi passi nel vostro percorso verso l'esecuzione di workflow riproducibili per le vostre esigenze di calcolo scientifico.
 
-Pronto per iniziare il corso?
+Pronti per iniziare il corso?
 
 [Inizia a imparare :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }

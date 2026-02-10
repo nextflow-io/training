@@ -1,6 +1,6 @@
 # Yönelim - Video Metni
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi edinin ve iyileştirmeler önerin](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -44,7 +44,7 @@ Ve ayrıca kenar çubuğundaki tüm farklı kursları görebilirsiniz. Hello Nex
 
 Burada dikkat edilmesi gereken birkaç önemli şey daha var. Öncelikle, eğitim materyali sürümlüdür, yani burada görebilirsiniz. 3.0 latest (en son) diyor, bu kaydettiğim sırada en son kararlı sürüm. Bu zaman içinde değişecek. Zaman içinde yeni kurslar yayınlıyoruz ve materyali güncelliyoruz. Yani 3.1 veya 3.2 ise çok fazla endişelenmeyin. 4.0 ise muhtemelen yeni bir video var ve belki de onu bulmalısınız çünkü muhtemelen önemli güncellemeler olacaktır.
 
-Üstteki başka bir açılır menü de bu dil menüsü. Şimdi bu sürüm 3.0 için yepyeni. Daha önce İnsanlar tarafından elle yapılan çevrilmiş materyali aldık ve bunu bir LLM'ye aktardık ve LLM çevirisi kullanarak eğitim materyalinin farklı çevirilerini sürdürmek için bu tamamen yeni altyapıyı kurduk.
+Üstteki başka bir açılır menü de bu dil menüsü. Şimdi bu sürüm 3.0 için yepyeni. Daha önce insanlar tarafından elle yapılan çevrilmiş materyali aldık ve bunu bir LLM'ye aktardık ve LLM çevirisi kullanarak eğitim materyalinin farklı çevirilerini sürdürmek için bu tamamen yeni altyapıyı kurduk.
 
 Yani artık burada tüm bu fantastik çevirilere sahibiz. Yani Korece dinlemek istiyorsanız, tüm web sitesini Korece yükleyebilirsiniz. Ve orada takip edebilirsiniz. Aynısı tüm bu diğer diller, Hintçe ve Almanca vb. için de geçerlidir. Ben İngilizce takip edeceğim. Bu, materyali yazdığımız birincil dil gibi.
 
@@ -104,7 +104,7 @@ Ve bunun altında, tüm komutlarımızı çalıştıracağımız ve doğrudan Ne
 
 Codespace'teki her şey önceden yüklenmiş, bu nedenle Nextflow komutu zaten orada ve benzeri.
 
-Tamam. Buraya geldiğinizde, yaklaşık olarak yapılmış olmalı. Şimdi Nextflow dil sunucusunu indirdiğini ve Nextflow uzantısı da dahil olmak üzere VS code'da bizim için bazı uzantılar kurduğunu görebilirsiniz, bu yararlı olacak. Bu yüzden onu kapatabilir ve README.md'yi kapatabilir.
+Tamam. Buraya geldiğinizde, yaklaşık olarak yapılmış olmalı. Şimdi Nextflow dil sunucusunu indirdiğini ve Nextflow uzantısı da dahil olmak üzere VS code'da bizim için bazı uzantılar kurduğunu görebilirsiniz, bu yararlı olacak. Bu yüzden onu kapatabilir ve README.md'yi kapatabilirsiniz.
 
 Ve şimdi sol tarafta biraz daha fazla şey olduğunu görebilirsiniz. Burada biraz yakınlaştırdım, ama yakınlaştırmayı kaldırırsam, düğmelerden birinin Nextflow simgesiyle Nextflow yazdığını görebilirsiniz. ve bunun içinde projeyi keşfetmek için bazı güzel şeyler var ve şeyler, bunlara daha sonra geri döneceğiz.
 

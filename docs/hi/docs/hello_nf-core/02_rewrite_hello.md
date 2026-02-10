@@ -531,7 +531,7 @@ workflow {
 /*
 * Pipeline parameters
 */
-// params.greeting = 'greetings.csv' (comment out किया गया)
+// params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
@@ -544,7 +544,7 @@ include { cowpy } from './modules/cowpy.nf'
 workflow HELLO {
 
     take:
-    // channel of greetings
+    // अभिवादनों का channel
     greeting_ch
 
     main:
@@ -877,7 +877,7 @@ nf-core project में samplesheet की अवधारणा के आस
         cowpy(collectGreetings.out.outfile, params.character)
 
         //
-        // Collate and save software versions
+        // Software versions को collate और save करें
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(
@@ -906,7 +906,7 @@ nf-core project में samplesheet की अवधारणा के आस
         ch_versions = Channel.empty()
 
         //
-        // Collate and save software versions
+        // Software versions को collate और save करें
         //
         softwareVersionsToYAML(ch_versions)
             .collectFile(

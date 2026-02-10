@@ -525,7 +525,7 @@ nextflow run main.nf
 Y como se señaló anteriormente, también hemos incluido el archivo de entrada y el mapa de metadatos en la salida, lo que significa que ambos permanecen asociados con la nueva información que acabamos de producir.
 Esto resultará útil en el siguiente paso.
 
-!!! note
+!!! note "Nota"
 
     De manera más general, este patrón de mantener el mapa de metadatos asociado con los resultados facilita la asociación de resultados relacionados que comparten los mismos identificadores.
 
@@ -714,7 +714,7 @@ Aquí está la lógica condicional que queremos aplicar:
 
 Intente escribirlo usted mismo si ya sabe cómo escribir declaraciones condicionales en Nextflow.
 
-!!! tip
+!!! tip "Consejo"
 
     Puede acceder al valor de `lang` dentro de la operación map con `meta.lang`.
 
@@ -1499,7 +1499,7 @@ Esto sucede porque `meta.character` no existe, por lo que nuestro intento de acc
 
 Aparte de proporcionar un valor predeterminado como parte de la configuración del workflow, hay dos cosas que podemos hacer para manejar esto de manera más robusta:
 
-1. Implementar validación de entrada en su workflow para asegurar que la hoja de datos contenga toda la información requerida. Puede encontrar una [introducción a la validación de entrada](../hello_nf-core/05_input_validation.md) en el curso de entrenamiento Hello nf-core. <!-- TODO (future) pending a proper Validation side quest -->
+1. Implementar validación de entrada en su workflow para asegurar que la hoja de datos contenga toda la información requerida. Puede encontrar una [introducción a la validación de entrada](../hello_nf-core/05_input_validation.md) en el curso de entrenamiento Hello nf-core.
 
 2. Si quiere asegurarse de que cualquiera que use su módulo de proceso pueda identificar inmediatamente las entradas requeridas, también puede hacer que la propiedad de metadatos requerida sea una entrada explícita.
 
@@ -1567,10 +1567,6 @@ results/
     ├── fr-salut.txt
     └── it-ciao.txt
 ```
-
-<!-- TODO (future) Provide worked out solution -->
-<!-- the renaming should use the meta inside the process -->
-<!-- the output org should use the meta in the workflow outputs -->
 
 ---
 

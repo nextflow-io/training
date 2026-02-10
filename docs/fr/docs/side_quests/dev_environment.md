@@ -30,13 +30,13 @@ Ce guide se concentre sur les **fonctionnalités de productivité de l'IDE** qui
 
 !!! info "Pourquoi les fonctionnalités IDE maintenant ?"
 
-    Vous avez probablement déjà utilisé VS Code pendant le cours [Hello Nextflow](../hello_nextflow/), mais nous avons maintenu l'accent sur l'apprentissage des fondamentaux de Nextflow plutôt que sur les fonctionnalités de l'IDE. Maintenant que vous êtes à l'aise avec les concepts de base de Nextflow comme les processus, workflows, canaux et modules, vous êtes prêt·e à exploiter les fonctionnalités sophistiquées de l'IDE qui feront de vous un développeur·se plus efficace.
+    Vous avez probablement déjà utilisé VS Code pendant le cours [Hello Nextflow](../hello_nextflow/), mais nous avons maintenu l'accent sur l'apprentissage des fondamentaux de Nextflow plutôt que sur les fonctionnalités de l'IDE. Maintenant que vous êtes à l'aise avec les concepts de base de Nextflow comme les processus, workflows, canaux et modules, vous êtes prêt·e à exploiter les fonctionnalités sophistiquées de l'IDE qui feront de vous un·e développeur·se plus efficace.
 
     Considérez cela comme une « montée en compétence » de votre environnement de développement - l'éditeur que vous utilisez déjà possède des capacités bien plus puissantes qui deviennent vraiment précieuses une fois que vous comprenez ce qu'elles vous apportent.
 
 ---
 
-## 0. Configuration et Préparation
+## 0. Configuration et Échauffement
 
 Configurons un espace de travail spécifiquement pour explorer les fonctionnalités de l'IDE :
 
@@ -116,7 +116,7 @@ Puisque vous avez utilisé VS Code tout au long de Hello Nextflow, vous connaiss
 
 Vous pouvez faire glisser les panneaux ou les masquer (`Ctrl/Cmd+B` pour basculer la barre latérale) afin de personnaliser votre disposition pendant que nous travaillons sur les exemples.
 
-### Points Clés
+### À Retenir
 
 Vous avez VS Code configuré avec l'extension Nextflow et comprenez la disposition de l'espace de travail pour un développement efficace.
 
@@ -160,7 +160,7 @@ La coloration syntaxique vous aide à identifier rapidement :
 
 Cette organisation visuelle devient inestimable lorsque vous travaillez avec des workflows complexes contenant plusieurs processus et des flux de données complexes.
 
-### Points Clés
+### À Retenir
 
 Vous comprenez comment la coloration syntaxique de VS Code vous aide à lire la structure du code Nextflow et à identifier différents éléments du langage pour un développement plus rapide.
 
@@ -218,7 +218,7 @@ Vous verrez des suggestions pour :
 
 Cela fait gagner du temps lors de la configuration des processus et fonctionne dans différents contextes de configuration. Par exemple, essayez de taper `docker.` pour voir les options de configuration spécifiques à Docker.
 
-### Points Clés
+### À Retenir
 
 Vous pouvez utiliser l'auto-complétion intelligente de VS Code pour découvrir les opérations de canaux disponibles, les directives de processus et les options de configuration sans mémoriser la syntaxe.
 
@@ -260,7 +260,7 @@ Les erreurs courantes dans la syntaxe Nextflow incluent :
 
 Le serveur de langage Nextflow met en évidence ces problèmes dans le panneau Problèmes. Vous pouvez les vérifier tôt pour éviter les erreurs de syntaxe lors de l'exécution d'un pipeline.
 
-### Points Clés
+### À Retenir
 
 Vous pouvez utiliser la détection d'erreurs de VS Code et le panneau Problèmes pour détecter les erreurs de syntaxe et les problèmes avant d'exécuter votre workflow, économisant du temps et évitant la frustration.
 
@@ -372,7 +372,7 @@ Il ne s'agit que du workflow « d'entrée », mais vous pouvez également prévi
 
 Pour ce workflow, vous pouvez utiliser les nœuds du DAG pour naviguer vers les définitions de processus correspondantes dans le code. Cliquez sur un nœud, et il vous mènera à la définition de processus pertinente dans l'éditeur. Particulièrement lorsqu'un workflow atteint une grande taille, cela peut vraiment vous aider à naviguer dans le code et à comprendre comment les processus sont connectés.
 
-### Points Clés
+### À Retenir
 
 Vous pouvez naviguer efficacement dans des workflows complexes en utilisant l'aller-à-la-définition, la recherche de symboles, la recherche de références et la visualisation DAG pour comprendre la structure du code et les dépendances.
 
@@ -429,7 +429,7 @@ Cela vous montre tous les fichiers qui utilisent des répertoires de publication
 - Trouver des exemples de directives spécifiques
 - Assurer la cohérence entre les modules
 
-### Points Clés
+### À Retenir
 
 Vous pouvez gérer des projets multi-fichiers complexes en utilisant la navigation rapide entre fichiers, les éditeurs divisés et la recherche à l'échelle du projet pour travailler efficacement sur les workflows et les modules.
 
@@ -519,7 +519,7 @@ Ceci est particulièrement utile pour :
 - Ajouter des commentaires à plusieurs lignes à la fois
 - Éditer des définitions de paramètres similaires dans plusieurs processus
 
-### Points Clés
+### À Retenir
 
 Vous pouvez maintenir un code propre et lisible en utilisant le formatage automatique, les fonctionnalités de commentaires, le pliage de code, la correspondance des parenthèses et l'édition multi-lignes pour organiser efficacement des workflows complexes.
 
@@ -567,7 +567,7 @@ Pendant l'exécution du workflow, vous verrez la sortie en temps réel dans le t
 
 Cela garde tout au même endroit plutôt que de basculer entre plusieurs applications.
 
-### Points Clés
+### À Retenir
 
 Vous pouvez intégrer VS Code avec le contrôle de version et l'exécution de workflow pour gérer l'ensemble de votre processus de développement depuis une interface unique.
 
@@ -606,7 +606,7 @@ Voici quelques notes rapides sur chacune des fonctionnalités IDE discutées ci-
 
 ## Résumé
 
-Vous avez maintenant eu un tour d'horizon rapide des fonctionnalités IDE de VS Code pour le développement Nextflow. Ces outils vous rendront nettement plus productif en :
+Vous avez maintenant eu un tour d'horizon rapide des fonctionnalités IDE de VS Code pour le développement Nextflow. Ces outils vous rendront nettement plus productif·ve en :
 
 - **Réduisant les erreurs** grâce à la vérification syntaxique en temps réel
 - **Accélérant le développement** avec l'auto-complétion intelligente

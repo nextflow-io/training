@@ -1,6 +1,6 @@
 # Parte 3: Hello Workflow - Trascrizione Video
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [maggiori informazioni e suggerimenti per miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -26,13 +26,13 @@ Per ricapitolare dove siamo finora, abbiamo un singolo processo qui, con un inpu
 
 Abbiamo un singolo input del flusso di lavoro, il blocco params qui, dove diciamo che si aspetta un percorso, e il valore predefinito è data/greetings.csv, che è questo file qui sopra.
 
-Poi nel flusso di lavoro stesso, abbiamo un blocco main. Stiamo creando un canale. Stiamo analizzando il CSV in righe e poi prendendo il primo elemento di ogni array, e stiamo passando quel canale a quel processo, che poi genera tre attività, e stiamo pubblicando dal flusso di lavoro, gli output di quel processo.
+Poi nel flusso di lavoro stesso, abbiamo un blocco main. Stiamo creando un canale. Stiamo analizzando il CSV in righe e poi prendendo il primo elemento di ogni array, e stiamo passando quel canale a quel processo, che poi genera tre attività, e stiamo pubblicando dal flusso di lavoro, gli output da quel processo.
 
 E poi infine, nel blocco output, stiamo dicendo a Nextflow di pubblicare questi file da questo canale alla directory chiamata hello_workflow. E di copiare quei file piuttosto che collegarli con soft link.
 
 ## 1. Aggiungere un secondo passaggio al flusso di lavoro
 
-Okay, in questa parte aggiungeremo un secondo processo al nostro flusso di lavoro. Prenderemo gli output del processo sayHello, e li elaboreremo in un secondo passaggio, che convertirà tutte le lettere all'interno di quei file in convertToUppercase.
+Okay, in questa parte aggiungeremo un secondo processo al nostro flusso di lavoro. Prenderemo gli output del processo sayHello, e li elaboreremo in un secondo passaggio, che convertirà tutte le lettere all'interno di quei file convertToUppercase.
 
 Questo è solo un esempio stupido, è solo un po' di semplice elaborazione di stringhe ancora, ma vi mostra come possiamo prendere la logica, all'interno del flusso di lavoro.
 
@@ -44,7 +44,7 @@ Quindi questo è uno stile molto semplice di comando bash che useremo nel nostro
 
 ## 1.2. Scrivere il passaggio di conversione in maiuscolo come processo Nextflow
 
-Quindi se torno al mio script, barò un po' e copierò semplicemente il codice dalla, dalla documentazione della formazione. Ma potete vedere esattamente cosa sta succedendo.
+Quindi se torno al mio script, barò un po' e copierò semplicemente il codice dalla documentazione della formazione. Ma potete vedere esattamente cosa sta succedendo.
 
 Abbiamo un nuovo processo qui. Questo l'abbiamo chiamato convertToUpper, ma potremmo chiamarlo come vogliamo.
 

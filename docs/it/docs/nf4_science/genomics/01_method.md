@@ -1,6 +1,6 @@
 # Parte 1: Panoramica del metodo e test manuale
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [ulteriori informazioni e suggerimenti per miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Il variant calling è un metodo di analisi genomica che mira a identificare variazioni in una sequenza genomica rispetto a un genoma di riferimento.
 Qui utilizzeremo strumenti e metodi progettati per identificare varianti germinali brevi, _cioè_ SNP e indel, in dati di sequenziamento dell'intero genoma.
@@ -33,9 +33,9 @@ I due strumenti principali coinvolti sono [Samtools](https://www.htslib.org/), u
 
 Questi strumenti non sono installati nell'ambiente GitHub Codespaces, quindi li utilizzeremo tramite container (vedere [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
-!!! note
+!!! note "Nota"
 
-     Assicuratevi di trovarvi nella directory `nf4-science/genomics` in modo che l'ultima parte del percorso mostrato quando digitate `pwd` sia `genomics`.
+    Assicuratevi di trovarvi nella directory `nf4-science/genomics` in modo che l'ultima parte del percorso mostrato quando digitate `pwd` sia `genomics`.
 
 ---
 
@@ -120,7 +120,7 @@ Dobbiamo solo fornire il file di input; lo strumento genererà automaticamente u
 samtools index /data/bam/reads_mother.bam
 ```
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     data/bam/
@@ -276,7 +276,7 @@ Il file di output `reads_mother.vcf` viene creato all'interno della vostra direc
 Tuttavia, è un file di test piccolo, quindi potete usare `cat` per aprirlo e visualizzarne il contenuto.
 Se scorrete fino all'inizio del file, troverete un'intestazione composta da molte righe di metadati, seguita da una lista di varianti identificate, una per riga.
 
-??? abstract "File contents"
+??? abstract "Contenuto del file"
 
     ```console title="reads_mother.vcf" linenums="26"
     #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -360,7 +360,7 @@ samtools index /data/bam/reads_father.bam
 samtools index /data/bam/reads_son.bam
 ```
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     data/bam/
@@ -482,7 +482,7 @@ Questo crea il file di output GVCF `reads_mother.g.vcf` nella directory di lavor
 
 Se usate `cat` per visualizzarne il contenuto, vedrete che è molto più lungo del VCF equivalente che abbiamo generato nella sezione 1. Non potete nemmeno scorrere fino all'inizio del file, e la maggior parte delle righe appare abbastanza diversa da ciò che abbiamo visto nel VCF.
 
-??? abstract "File contents"
+??? abstract "Contenuto del file"
 
     ```console title="reads_mother.g.vcf" linenums="1674"
     20_10037292_10066351    14714   .       T       <NON_REF>       .       .       END=14718       GT:DP:GQ:MIN_DP:PL       0/0:37:99:37:0,99,1192
@@ -496,7 +496,7 @@ Questo rende possibile distinguere tra due casi molto diversi: (1) ci sono dati 
 In un GVCF, ci sono tipicamente molte di queste righe non varianti, con un numero minore di record di varianti sparse tra di esse.
 Provate a eseguire `head -176` sul GVCF per caricare solo le prime 176 righe del file per trovare una variante effettiva.
 
-??? abstract "File contents"
+??? abstract "Contenuto del file"
 
     ```console title="reads_mother.g.vcf" linenums="174"
     20_10037292_10066351    3479    .       T       <NON_REF>       .       .       END=3479        GT:DP:GQ:MIN_DP:PL       0/0:34:36:34:0,36,906
@@ -601,7 +601,7 @@ gatk GenomicsDBImport \
 L'output di questo passaggio è effettivamente una directory contenente un insieme di ulteriori directory nidificate che contengono i dati di varianti combinati sotto forma di più file diversi.
 Potete esplorarlo ma vedrete rapidamente che questo formato di data store non è pensato per essere letto direttamente dagli esseri umani.
 
-!!! note
+!!! note "Nota"
 
     GATK include strumenti che rendono possibile ispezionare ed estrarre dati di varianti dal data store secondo necessità.
 
@@ -662,7 +662,7 @@ gatk GenotypeGVCFs \
 Questo crea il file di output VCF `family_trio.vcf` nella directory di lavoro corrente nel container.
 È un altro file ragionevolmente piccolo quindi potete usare `cat` per visualizzarne il contenuto e scorrere verso l'alto per trovare le prime righe di varianti.
 
-??? abstract "File contents"
+??? abstract "Contenuto del file"
 
     ```console title="family_trio.vcf" linenums="40"
     #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  reads_father    reads_mother    reads_son

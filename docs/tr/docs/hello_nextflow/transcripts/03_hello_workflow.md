@@ -1,6 +1,6 @@
 # Bölüm 3: Hello Workflow - Video Transkripti
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi edinin ve iyileştirmeler önerin](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -226,7 +226,7 @@ Umarım şimdi temelde daha önce olduğu gibi çalışmalı. Ve burada replicat
 
 Nextflow kodunda yürütüldüğünü kanıtlamak için buraya work dizinine girersem, bash script'inde değil, cat work/ command.sh'a gidebilirim ve burada sadece bu string'i doğrudan yankıladığını göreceksiniz. There were three greetings in this batch, ve bu değişken Nextflow tarafından interpolasyon yapıldı. .command.sh dosyasını yazmadan önce script bloğunda hesaplandı. Yani sonuç değişken hesaplaması temelde bu durumda compute ortamınızda yürütülmeden önce buna hard coded edilmiş durumda.
 
-Ve böylece script arasındaki o ayrımı görebilirsiniz. Bloğu burada ve üzerindeki herhangi bir şey. \_Umarım bu mantıklı gelir.
+Ve böylece script arasındaki o ayrımı görebilirsiniz. Bloğu burada ve üzerindeki herhangi bir şey. Umarım bu mantıklı gelir.
 
 ## Özet ve test
 

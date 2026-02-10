@@ -125,7 +125,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Aviso"
+!!! Warning "Aviso"
 
     Observe que os caminhos na planilha de amostras são relativos a onde você **executa** o Nextflow, não onde a planilha de amostras está localizada.
 

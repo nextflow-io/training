@@ -1,6 +1,6 @@
 # Część 6: Hello Config - Transkrypcja wideo
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane sztuczną inteligencją - [dowiedz się więcej i prześlij sugestie](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -14,7 +14,7 @@
 
 ## Powitanie
 
-Witaj ponownie w części szóstej szkolenia Hello Nextflow. Ta sekcja dotyczy plików konfiguracyjnych i jest ostatnią częścią tego kursu.
+Cześć i witaj ponownie w części szóstej Hello Nextflow. Ta sekcja dotyczy plików konfiguracyjnych i jest ostatnią częścią tego kursu.
 
 Nextflow szczególnie dobrze radzi sobie z dwoma rzeczami: odtwarzalnością i przenośnością. Pliki konfiguracyjne to miejsce, gdzie widać prawdziwą siłę tej drugiej cechy. Możliwość skonfigurowania pipeline'u Nextflow'a tak, aby działał na różne sposoby i funkcjonował w różnych systemach, bez konieczności edycji podstawowego kodu pipeline'u.
 
@@ -166,7 +166,7 @@ Nie znajduje się pod żadnym zakresem. Nie pod params ani niczym. Jest na najwy
 
 I widzisz tutaj, że włączyliśmy zmienną params, params.batch, która jest częścią tego ciągu znaków. To oznacza, że możemy ponownie wykorzystywać zmienne, które pochodzą z innych miejsc. I w tym przypadku, jeśli zrobimy --batch, gdy uruchamiamy Nextflow Pipeline, otrzymamy podkatalog w naszej niestandardowej ścieżce w oparciu o to, jaka była nazwa batch.
 
-Dobra, więc wypróbujmy to i po prostu szybko zobaczmy, jak, jak wyglądają wyniki. Więc jeśli zrobię Nextflow run hello config i --batch my_run. Przypomnijmy sobie, jak wyglądała konfiguracja. Więc to custom-outdir-config.
+Dobra, więc wypróbujmy to i po prostu szybko zobaczmy, jak wyglądają wyniki. Więc jeśli zrobię Nextflow run hello config i --batch my_run. Przypomnijmy sobie, jak wyglądała konfiguracja. Więc to custom-outdir-config.
 
 Tree custom-outdir-config. I widzisz, batch nazywał się my_run. A potem mamy ten podkatalog o nazwie my_run. Więc ta dynamiczna ścieżka pliku zadziałała.
 

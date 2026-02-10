@@ -1,6 +1,6 @@
 # भाग 1: विधि का अवलोकन और मैनुअल परीक्षण
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता से अनुवाद किया गया - [और जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 वेरिएंट कॉलिंग एक जीनोमिक विश्लेषण विधि है जिसका उद्देश्य संदर्भ जीनोम की तुलना में जीनोम अनुक्रम में भिन्नता की पहचान करना है।
 यहां हम होल-जीनोम सीक्वेंसिंग डेटा में शॉर्ट जर्मलाइन वेरिएंट, _यानी_ SNPs और indels, को कॉल करने के लिए डिज़ाइन किए गए टूल्स और विधियों का उपयोग करने जा रहे हैं।
@@ -33,9 +33,9 @@
 
 ये टूल्स GitHub Codespaces वातावरण में इंस्टॉल नहीं हैं, इसलिए हम उन्हें कंटेनरों के माध्यम से उपयोग करेंगे ([Hello Containers](../../hello_nextflow/05_hello_containers.md) देखें)।
 
-!!! note
+!!! note "नोट"
 
-     सुनिश्चित करो कि तुम `nf4-science/genomics` डायरेक्टरी में हो ताकि जब तुम `pwd` टाइप करो तो पथ का अंतिम भाग `genomics` दिखे।
+    सुनिश्चित करो कि तुम `nf4-science/genomics` डायरेक्टरी में हो ताकि जब तुम `pwd` टाइप करो तो पथ का अंतिम भाग `genomics` दिखे।
 
 ---
 
@@ -120,7 +120,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
 samtools index /data/bam/reads_mother.bam
 ```
 
-??? abstract "डायरेक्टरी की सामग्री"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     data/bam/
@@ -276,7 +276,7 @@ gatk HaplotypeCaller \
 हालांकि, यह एक छोटी परीक्षण फ़ाइल है, इसलिए तुम इसे खोलने और सामग्री देखने के लिए `cat` कर सकते हो।
 अगर तुम फ़ाइल की शुरुआत तक स्क्रॉल करते हो, तो तुम्हें मेटाडेटा की कई लाइनों से बना एक हेडर मिलेगा, उसके बाद वेरिएंट कॉल की एक सूची होगी, प्रति लाइन एक।
 
-??? abstract "फ़ाइल की सामग्री"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="reads_mother.vcf" linenums="26"
     #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -360,7 +360,7 @@ samtools index /data/bam/reads_father.bam
 samtools index /data/bam/reads_son.bam
 ```
 
-??? abstract "डायरेक्टरी की सामग्री"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     data/bam/
@@ -482,7 +482,7 @@ gatk HaplotypeCaller \
 
 अगर तुम सामग्री देखने के लिए इसे `cat` करते हो, तो तुम्हें दिखेगा कि यह सेक्शन 1 में जेनरेट किए गए समकक्ष VCF की तुलना में बहुत लंबा है। तुम फ़ाइल की शुरुआत तक स्क्रॉल भी नहीं कर सकते, और अधिकांश लाइनें VCF में देखी गई चीज़ों से काफी अलग दिखती हैं।
 
-??? abstract "फ़ाइल की सामग्री"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="reads_mother.g.vcf" linenums="1674"
     20_10037292_10066351    14714   .       T       <NON_REF>       .       .       END=14718       GT:DP:GQ:MIN_DP:PL       0/0:37:99:37:0,99,1192
@@ -496,7 +496,7 @@ gatk HaplotypeCaller \
 एक GVCF में, आमतौर पर ऐसी कई गैर-वेरिएंट लाइनें होती हैं, जिनके बीच कम संख्या में वेरिएंट रिकॉर्ड बिखरे होते हैं।
 एक वास्तविक वेरिएंट कॉल खोजने के लिए GVCF पर `head -176` चलाकर फ़ाइल की पहली 176 लाइनें लोड करने का प्रयास करो।
 
-??? abstract "फ़ाइल की सामग्री"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="reads_mother.g.vcf" linenums="174"
     20_10037292_10066351    3479    .       T       <NON_REF>       .       .       END=3479        GT:DP:GQ:MIN_DP:PL       0/0:34:36:34:0,36,906
@@ -601,7 +601,7 @@ gatk GenomicsDBImport \
 इस चरण का आउटपुट प्रभावी रूप से एक डायरेक्टरी है जिसमें कई अलग-अलग फ़ाइलों के रूप में संयुक्त वेरिएंट डेटा रखने वाली आगे नेस्टेड डायरेक्टरियों का एक सेट होता है।
 तुम इसके चारों ओर घूम सकते हो लेकिन तुम जल्दी ही देखोगे कि यह डेटा स्टोर फॉर्मेट मनुष्यों द्वारा सीधे पढ़े जाने के लिए नहीं है।
 
-!!! note
+!!! note "नोट"
 
     GATK में ऐसे टूल शामिल हैं जो आवश्यकतानुसार डेटा स्टोर से वेरिएंट कॉल डेटा का निरीक्षण और निष्कर्षण संभव बनाते हैं।
 
@@ -662,7 +662,7 @@ gatk GenotypeGVCFs \
 यह कंटेनर में वर्तमान कार्यशील डायरेक्टरी में VCF आउटपुट फ़ाइल `family_trio.vcf` बनाता है।
 यह एक और उचित रूप से छोटी फ़ाइल है इसलिए तुम इसकी सामग्री देखने के लिए इस फ़ाइल को `cat` कर सकते हो, और पहली कुछ वेरिएंट लाइनों को खोजने के लिए ऊपर स्क्रॉल कर सकते हो।
 
-??? abstract "फ़ाइल की सामग्री"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="family_trio.vcf" linenums="40"
     #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  reads_father    reads_mother    reads_son

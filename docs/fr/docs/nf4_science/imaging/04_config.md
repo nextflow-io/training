@@ -246,7 +246,7 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! Note
+!!! Note "Note"
 
     Nous ne pouvons pas tester le profil HPC dans cet environnement de formation car nous n'avons pas accès à un planificateur Slurm.
     Mais cela montre comment vous le configureriez pour une utilisation réelle.

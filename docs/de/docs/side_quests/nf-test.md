@@ -13,7 +13,7 @@ Während du deine Pipeline entwickelst, wird sie schnell so komplex, dass das ma
 Testen ermöglicht es dir, systematisch zu überprüfen, dass jeder Teil deiner Pipeline wie erwartet funktioniert. Die Vorteile gut geschriebener Tests für Entwickler\*innen sind enorm:
 
 - **Vertrauen**: Da die Tests die gesamte Pipeline abdecken, kannst du sicher sein, dass Änderungen nichts anderes beeinflussen
-- **Zuverlässigkeit**: Wenn mehrere Entwickler*innen an der Pipeline arbeiten, wissen sie, dass die anderen Entwickler*innen die Pipeline und jede Komponente nicht kaputt gemacht haben.
+- **Zuverlässigkeit**: Wenn mehrere Entwickler\*innen an der Pipeline arbeiten, wissen sie, dass die anderen Entwickler\*innen die Pipeline und jede Komponente nicht kaputt gemacht haben.
 - **Transparenz**: Die Tests zeigen, wo eine Pipeline fehlschlägt, und erleichtern es, das Problem aufzuspüren. Sie dienen auch als eine Form der Dokumentation und zeigen, wie man einen Process oder Workflow ausführt.
 - **Geschwindigkeit**: Da die Tests automatisiert sind, können sie sehr schnell und wiederholt ausgeführt werden. Du kannst schnell iterieren mit weniger Angst, neue Fehler einzuführen.
 
@@ -625,7 +625,7 @@ Das ist nur die Oberfläche, wir können weiterhin Assertions schreiben, um die 
 
 Du weißt, wie man einen nf-test für eine Pipeline schreibt.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man einen Nextflow-Process testet.
 
@@ -761,8 +761,7 @@ Der Test schlägt fehl, weil der `sayHello`-Process 1 Eingabe deklariert, aber m
 
         when {
             params {
-                // Parameter hier definieren. Beispiel:
-                // outdir = "tests/results"
+                // Parameter hier definieren
             }
             process {
                 """
@@ -932,7 +931,7 @@ Lass uns den Test ausführen, um zu sehen, ob er funktioniert.
 nf-test test tests/main.sayhello.nf.test
 ```
 
-```console title="Process-Test schlägt fehl"
+```console title="Process-Test erfolgreich"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -1027,8 +1026,7 @@ Für jetzt lass uns die vorhandene data/greetings.csv-Datei wiederverwenden, unt
 
         when {
             params {
-                // Parameter hier definieren. Beispiel:
-                // outdir = "tests/results"
+                // Parameter hier definieren
             }
             process {
                 """
@@ -1098,7 +1096,7 @@ SUCCESS: Executed 1 tests in 1.811s
 
 Du weißt, wie man Tests für einen Nextflow-Process schreibt und ausführt.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man Tests für alles auf einmal ausführt!
 
@@ -1166,7 +1164,7 @@ Die Anwendung dieser Techniken in deiner eigenen Arbeit wird es dir ermöglichen
 ### Wichtige Muster
 
 1. Tests auf Pipeline-Ebene:
-   - Grundlegendes Erfolgstes
+   - Grundlegendes Erfolgstest
    - Überprüfung der Process-Anzahl
    - Überprüfung der Ausgabedatei-Existenz
 2. Tests auf Process-Ebene
@@ -1189,6 +1187,6 @@ Schau dir die [nf-test-Dokumentation](https://www.nf-test.com/) an für fortgesc
 
 ---
 
-## Was kommt als Nächstes?
+## Wie geht es weiter?
 
 Kehre zum [Menü der Side Quests](./index.md) zurück oder klicke auf den Button unten rechts auf der Seite, um zum nächsten Thema in der Liste zu gelangen.

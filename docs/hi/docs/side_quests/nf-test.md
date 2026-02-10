@@ -10,7 +10,7 @@
 
 जैसे-जैसे आप अपनी pipeline develop करते हैं, यह जल्दी ही इतनी complex हो जाएगी कि manually हर iteration को test करना slow और error-prone होगा। इसके अलावा, यदि आपको error मिलती है तो यह पता लगाना बहुत मुश्किल होगा कि आपकी pipeline में error कहां से आ रही है। यहीं पर testing काम आती है।
 
-Testing आपको systematically check करने की अनुमति देती है कि आपकी pipeline का हर भाग अपेक्षा के अनुसार काम कर रहा है। developer के लिए अच्छी तरह से लिखे गए tests के फायदे बहुत बड़े हैं:
+Testing आपको systematically check करने की अनुमति देती है कि आपकी pipeline का हर भाग अपेक्षा के अनुसार काम कर रहा है। Developer के लिए अच्छी तरह से लिखे गए tests के फायदे बहुत बड़े हैं:
 
 - **Confidence**: क्योंकि tests पूरी pipeline को cover करते हैं, आप confident रह सकते हैं कि कुछ बदलने से कुछ और प्रभावित नहीं होता है
 - **Trust**: जब कई developers pipeline पर काम करते हैं, तो वे जानते हैं कि दूसरे developers ने pipeline और हर component को break नहीं किया है
@@ -108,7 +108,7 @@ Files के विस्तृत description के लिए, [Hello Nextflow
 जिस subset के साथ हम काम करेंगे वह दो processes से बना है: `sayHello` और `convertToUpper`।
 आप नीचे पूरा workflow code देख सकते हैं।
 
-??? example "Workflow code"
+??? example "वर्कफ़्लो कोड"
 
     ```groovy title="main.nf"
     /*
@@ -273,7 +273,7 @@ nextflow_pipeline {
         when {
             params {
                 // यहाँ parameters define करें। उदाहरण:
-                // outdir = "tests/results" (output directory)
+                // outdir = "tests/results"
             }
         }
 
@@ -671,7 +671,7 @@ nextflow_process {
         when {
             params {
                 // यहाँ parameters define करें। उदाहरण:
-                // outdir = "tests/results" (output directory)
+                // outdir = "tests/results"
             }
             process {
                 """
@@ -736,7 +736,7 @@ Test fail होता है क्योंकि `sayHello` process 1 input d
         when {
             params {
                 // यहाँ parameters define करें। उदाहरण:
-                // outdir = "tests/results" (output directory)
+                // outdir = "tests/results"
             }
             process {
                 """
@@ -762,7 +762,7 @@ Test fail होता है क्योंकि `sayHello` process 1 input d
         when {
             params {
                 // यहाँ parameters define करें। उदाहरण:
-                // outdir = "tests/results" (output directory)
+                // outdir = "tests/results"
             }
             process {
                 """
@@ -875,7 +875,7 @@ SUCCESS: Executed 1 tests in 1.685s
         when {
             params {
                 // यहाँ parameters define करें। उदाहरण:
-                // outdir = "tests/results" (output directory)
+                // outdir = "tests/results"
             }
             process {
                 """
@@ -932,7 +932,7 @@ SUCCESS: Executed 1 tests in 1.685s
 nf-test test tests/main.sayhello.nf.test
 ```
 
-```console title="Process test fails"
+```console title="Process test passes"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -964,7 +964,7 @@ nextflow_process {
         when {
             params {
                 // यहाँ parameters define करें। उदाहरण:
-                // outdir = "tests/results" (output directory)
+                // outdir = "tests/results"
             }
             process {
                 """
@@ -1002,7 +1002,7 @@ nextflow_process {
         when {
             params {
                 // यहाँ parameters define करें। उदाहरण:
-                // outdir = "tests/results" (output directory)
+                // outdir = "tests/results"
             }
             process {
                 """
@@ -1028,7 +1028,7 @@ nextflow_process {
         when {
             params {
                 // यहाँ parameters define करें। उदाहरण:
-                // outdir = "tests/results" (output directory)
+                // outdir = "tests/results"
             }
             process {
                 """

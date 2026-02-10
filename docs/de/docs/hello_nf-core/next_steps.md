@@ -6,7 +6,7 @@ Herzlichen Glückwunsch zum Abschluss des Hello nf-core Trainingskurses! 🎉
 
 <!-- placeholder for video -->
 
-## Dein Fortschritt
+## Deine Lernreise
 
 Du hast damit begonnen, eine Demo-Pipeline abzurufen und auszuführen, und dich dann an die Umwandlung eines einfachen Nextflow-Workflows in eine nf-core-Pipeline herangewagt.
 Du hast gelernt, wie man ein Pipeline-Gerüst mithilfe einer Vorlage erstellt und die bestehende Pipeline auf dieses Gerüst aufpfropft.

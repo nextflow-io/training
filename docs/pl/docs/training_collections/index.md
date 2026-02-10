@@ -26,4 +26,4 @@ Wymagania techniczne i konfigurację środowiska można znaleźć w mini-kursie 
 ## Sugerowanie nowych kolekcji
 
 Aktywnie pracujemy nad rozwojem dodatkowych Side Quests i Kolekcji.
-Prosimy o sugerowanie tematów, które Twoim zdaniem warto byłoby uwzględnić w Kolekcji, poprzez publikację na [forum społeczności w sekcji Szkolenia](https://community.seqera.io/c/training/).
+Prosimy o sugerowanie tematów, które Twoim zdaniem warto byłoby uwzględnić w Kolekcji, poprzez publikację w [sekcji Szkolenia](https://community.seqera.io/c/training/) na forum społeczności.

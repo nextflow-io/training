@@ -4,7 +4,7 @@
 
 In questa quarta parte del corso di formazione Hello nf-core, vi mostreremo come creare un modulo nf-core applicando le convenzioni chiave che rendono i moduli portabili e manutenibili.
 
-Il progetto nf-core fornisce un comando (`nf-core modules create`) che genera automaticamente template di moduli correttamente strutturati, simile a quello che abbiamo utilizzato per il workflow nella Parte 2.
+Il progetto nf-core fornisce un comando (`nf-core modules create`) che genera automaticamente template di moduli correttamente strutturati, simile a quello che abbiamo utilizzato per il flusso di lavoro nella Parte 2.
 Tuttavia, per scopi didattici, inizieremo facendolo manualmente: trasformando il modulo locale `cowpy` nel vostro pipeline `core-hello` in un modulo in stile nf-core passo dopo passo.
 Successivamente, vi mostreremo come utilizzare la creazione di moduli basata su template per lavorare in modo più efficiente in futuro.
 
@@ -63,7 +63,7 @@ process cowpy {
 Applicheremo le seguenti convenzioni nf-core in modo incrementale:
 
 1. **Mettere in maiuscolo il nome del processo in `COWPY`** per seguire la convenzione.
-2. **Aggiornare `COWPY` per utilizzare tuple di metadati** per propagare i metadati dei campioni attraverso il workflow.
+2. **Aggiornare `COWPY` per utilizzare tuple di metadati** per propagare i metadati dei campioni attraverso il flusso di lavoro.
 3. **Centralizzare la configurazione degli argomenti dello strumento con `ext.args`** per aumentare la versatilità del modulo mantenendo l'interfaccia minimale.
 4. **Standardizzare la denominazione dell'output con `ext.prefix`** per promuovere la coerenza.
 5. **Centralizzare la configurazione di pubblicazione** per promuovere la coerenza.
@@ -85,8 +85,8 @@ Questa è puramente una convenzione stilistica (non c'è alcuna giustificazione 
 Dobbiamo effettuare tre serie di modifiche:
 
 1. Aggiornare il nome del processo nel modulo
-2. Aggiornare l'istruzione di import del modulo nell'intestazione del workflow
-3. Aggiornare la chiamata del processo e la dichiarazione emit nel corpo del workflow
+2. Aggiornare l'istruzione di import del modulo nell'intestazione del flusso di lavoro
+3. Aggiornare la chiamata del processo e la dichiarazione emit nel corpo del flusso di lavoro
 
 Iniziamo!
 
@@ -114,7 +114,7 @@ Se il nome del processo fosse composto da più parole, ad esempio se avessimo un
 
 #### 1.1.2. Aggiornare l'istruzione di import del modulo
 
-I nomi dei processi sono case-sensitive, quindi ora che abbiamo cambiato il nome del processo, dobbiamo aggiornare di conseguenza l'istruzione di import del modulo nell'intestazione del workflow di `hello.nf`:
+I nomi dei processi sono case-sensitive, quindi ora che abbiamo cambiato il nome del processo, dobbiamo aggiornare di conseguenza l'istruzione di import del modulo nell'intestazione del flusso di lavoro di `hello.nf`:
 
 === "Dopo"
 
@@ -200,11 +200,11 @@ Quindi ora aggiorniamo i due riferimenti al processo nel blocco workflow di `hel
     versions       = ch_versions
     ```
 
-Assicuratevi di effettuare **entrambe** le modifiche, altrimenti riceverà un errore quando eseguirà questo.
+Assicuratevi di effettuare **entrambe** le modifiche, altrimenti riceverete un errore quando eseguirete questo.
 
 #### 1.1.4. Eseguire il pipeline per testarlo
 
-Eseguiamo il workflow per verificare che tutto funzioni correttamente dopo queste modifiche.
+Eseguiamo il flusso di lavoro per verificare che tutto funzioni correttamente dopo queste modifiche.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -259,19 +259,19 @@ Nella versione attuale del pipeline `core-hello`, stiamo estraendo il file dalla
     --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
 </figure>
 
-Sarebbe meglio avere `COWPY` che accetta direttamente tuple di metadati, permettendo ai metadati di fluire attraverso il workflow, come mostrato nella metà inferiore del diagramma.
+Sarebbe meglio avere **COWPY** che accetta direttamente tuple di metadati, permettendo ai metadati di fluire attraverso il flusso di lavoro, come mostrato nella metà inferiore del diagramma.
 
 A tal fine, dovremo effettuare le seguenti modifiche:
 
 1. Aggiornare le definizioni di input e output
-2. Aggiornare la chiamata del processo nel workflow
-3. Aggiornare il blocco emit nel workflow
+2. Aggiornare la chiamata del processo nel flusso di lavoro
+3. Aggiornare il blocco emit nel flusso di lavoro
 
 Una volta fatto tutto ciò, eseguiremo il pipeline per verificare che tutto funzioni ancora come prima.
 
 #### 1.2.1. Aggiornare le definizioni di input e output
 
-Torni al file del modulo `cowpy.nf` e lo modifichi per accettare tuple di metadati come mostrato di seguito.
+Tornate al file del modulo `cowpy.nf` e modificatelo per accettare tuple di metadati come mostrato di seguito.
 
 === "Dopo"
 
@@ -300,12 +300,12 @@ Per l'output, abbiamo anche colto questa opportunità per aggiungere `emit: cowp
 
 Ora che abbiamo cambiato ciò che il processo si aspetta, dobbiamo aggiornare ciò che gli forniamo nella chiamata del processo.
 
-#### 1.2.2. Aggiornare la chiamata del processo nel workflow
+#### 1.2.2. Aggiornare la chiamata del processo nel flusso di lavoro
 
 La buona notizia è che questa modifica semplificherà la chiamata del processo.
 Ora che l'output di `CAT_CAT` e l'input di `COWPY` hanno la stessa 'forma', cioè entrambi consistono in una struttura `tuple val(meta), path(input_file)`, possiamo semplicemente connetterli direttamente invece di dover estrarre esplicitamente il file dall'output del processo `CAT_CAT`.
 
-Aprite il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorni la chiamata a `COWPY` come mostrato di seguito.
+Aprite il file del flusso di lavoro `hello.nf` (sotto `core-hello/workflows/`) e aggiornate la chiamata a `COWPY` come mostrato di seguito.
 
 === "Dopo"
 
@@ -328,9 +328,9 @@ Ora chiamiamo `COWPY` su `CAT_CAT.out.file_out` direttamente.
 
 Di conseguenza, non abbiamo più bisogno di costruire il canale `ch_for_cowpy`, quindi quella riga (e la sua riga di commento) può essere rimossa completamente.
 
-#### 1.2.3. Aggiornare il blocco emit nel workflow
+#### 1.2.3. Aggiornare il blocco emit nel flusso di lavoro
 
-Poiché `COWPY` ora emette un output nominato, `cowpy_output`, possiamo aggiornare il blocco `emit:` del workflow `hello.nf` per utilizzarlo.
+Poiché `COWPY` ora emette un output nominato, `cowpy_output`, possiamo aggiornare il blocco `emit:` del flusso di lavoro `hello.nf` per utilizzarlo.
 
 === "Dopo"
 
@@ -352,7 +352,7 @@ Questo tecnicamente non è richiesto, ma è buona pratica fare riferimento a out
 
 #### 1.2.4. Eseguire il pipeline per testarlo
 
-Eseguiamo il workflow per verificare che tutto funzioni correttamente dopo queste modifiche.
+Eseguiamo il flusso di lavoro per verificare che tutto funzioni correttamente dopo queste modifiche.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -420,14 +420,14 @@ Dovremo effettuare le seguenti modifiche:
 
 1. Aggiornare il modulo `COWPY`
 2. Configurare `ext.args` nel file `modules.config`
-3. Aggiornare il workflow `hello.nf`
+3. Aggiornare il flusso di lavoro `hello.nf`
 
 Una volta fatto tutto ciò, eseguiremo il pipeline per verificare che tutto funzioni ancora come prima.
 
 #### 1.3.1. Aggiornare il modulo `COWPY`
 
 Facciamolo.
-Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e lo modifichi per riferirsi a `ext.args` come mostrato di seguito.
+Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e modificatelo per riferirsi a `ext.args` come mostrato di seguito.
 
 === "Dopo"
 
@@ -483,7 +483,7 @@ Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e lo mo
     }
     ```
 
-Può vedere che abbiamo effettuato tre modifiche.
+Potete vedere che abbiamo effettuato tre modifiche.
 
 1. **Nel blocco `input:`, abbiamo rimosso l'input `val character`.**
    D'ora in poi, forniremo quell'argomento tramite la configurazione `ext.args` come descritto più avanti.
@@ -497,7 +497,7 @@ Può vedere che abbiamo effettuato tre modifiche.
 
 Di conseguenza, l'interfaccia del modulo è ora più semplice: si aspetta solo gli input essenziali di metadati e file.
 
-!!! note
+!!! note "Nota"
 
     L'operatore `?:` è spesso chiamato 'operatore Elvis' perché assomiglia a un viso di Elvis Presley laterale, con il carattere `?` che simboleggia l'onda nei suoi capelli.
 
@@ -553,15 +553,15 @@ Speriamo possiate immaginare di avere tutti i moduli in un pipeline con i loro `
 - L'**interfaccia del modulo rimane semplice** - Accetta solo gli input essenziali di metadati e file
 - Il **pipeline espone ancora `params.character`** - Gli utenti finali possono ancora configurarlo come prima
 - Il **modulo è ora portabile** - Può essere riutilizzato in altri pipeline senza dover aspettarsi un nome di parametro specifico
-- La configurazione è **centralizzata** in `modules.config`, mantenendo pulita la logica del workflow
+- La configurazione è **centralizzata** in `modules.config`, mantenendo pulita la logica del flusso di lavoro
 
 Utilizzando il file `modules.config` come luogo dove tutti i pipeline centralizzano la configurazione per-modulo, rendiamo i nostri moduli più riutilizzabili attraverso diversi pipeline.
 
-#### 1.3.3. Aggiornare il workflow `hello.nf`
+#### 1.3.3. Aggiornare il flusso di lavoro `hello.nf`
 
-Poiché il modulo `COWPY` non richiede più il parametro `character` come input, dobbiamo aggiornare di conseguenza la chiamata del workflow.
+Poiché il modulo `COWPY` non richiede più il parametro `character` come input, dobbiamo aggiornare di conseguenza la chiamata del flusso di lavoro.
 
-Aprite il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorni la chiamata a `COWPY` come mostrato di seguito.
+Aprite il file del flusso di lavoro `hello.nf` (sotto `core-hello/workflows/`) e aggiornate la chiamata a `COWPY` come mostrato di seguito.
 
 === "Dopo"
 
@@ -577,12 +577,12 @@ Aprite il file del workflow `hello.nf` (sotto `core-hello/workflows/`) e aggiorn
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
-Il codice del workflow è ora più pulito: non abbiamo bisogno di passare `params.character` direttamente al processo.
+Il codice del flusso di lavoro è ora più pulito: non abbiamo bisogno di passare `params.character` direttamente al processo.
 L'interfaccia del modulo è mantenuta minimale, rendendola più portabile, mentre il pipeline fornisce ancora l'opzione esplicita tramite configurazione.
 
 #### 1.3.4. Eseguire il pipeline per testarlo
 
-Verifichiamo che il workflow funzioni ancora come previsto, specificando un personaggio diverso per verificare che la configurazione `ext.args` funzioni.
+Verifichiamo che il flusso di lavoro funzioni ancora come previsto, specificando un personaggio diverso per verificare che la configurazione `ext.args` funzioni.
 
 Eseguite questo comando usando `kosh`, una delle opzioni più... enigmatiche:
 
@@ -632,7 +632,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 Questo dovrebbe essere eseguito con successo come in precedenza.
 
 Verifichiamo che la configurazione `ext.args` abbia funzionato controllando l'output.
-Trovi l'output nel file browser o utilizzi l'hash dell'attività (la parte `38/eb29ea` nell'esempio sopra) per guardare il file di output:
+Trovate l'output nel file browser o utilizzate l'hash dell'attività (la parte `38/eb29ea` nell'esempio sopra) per guardare il file di output:
 
 ```bash
 cat work/38/eb29ea*/cowpy-test.txt
@@ -662,17 +662,17 @@ cat work/38/eb29ea*/cowpy-test.txt
     |                         |
     ```
 
-Dovrebbe vedere l'arte ASCII visualizzata con il personaggio `kosh`, confermando che la configurazione `ext.args` ha funzionato!
+Dovreste vedere l'arte ASCII visualizzata con il personaggio `kosh`, confermando che la configurazione `ext.args` ha funzionato!
 
 ??? info "(Opzionale) Ispezionare il file di comando"
 
-    Se desideratete vedere esattamente come è stata applicata la configurazione, potete ispezionare il file `.command.sh`:
+    Se desiderate vedere esattamente come è stata applicata la configurazione, potete ispezionare il file `.command.sh`:
 
     ```bash
     cat work/38/eb29ea*/.command.sh
     ```
 
-    Vedrà il comando `cowpy` con l'argomento `-c kosh`:
+    Vedrete il comando `cowpy` con l'argomento `-c kosh`:
 
     ```console
     #!/usr/bin/env bash
@@ -682,10 +682,10 @@ Dovrebbe vedere l'arte ASCII visualizzata con il personaggio `kosh`, confermando
 
     Questo mostra che il file `.command.sh` è stato generato correttamente in base alla configurazione `ext.args`.
 
-Si prenda un momento per riflettere su ciò che abbiamo ottenuto qui.
+Prendetevi un momento per riflettere su ciò che abbiamo ottenuto qui.
 Questo approccio mantiene l'interfaccia del modulo focalizzata sui dati essenziali (file, metadati e eventuali parametri obbligatori per campione), mentre le opzioni che controllano il comportamento dello strumento sono gestite separatamente tramite configurazione.
 
-Questo può sembrare superfluo per uno strumento semplice come `cowpy`, ma potete fare una grande differenza per gli strumenti di analisi dati che hanno molti argomenti opzionali.
+Questo può sembrare superfluo per uno strumento semplice come `cowpy`, ma può fare una grande differenza per gli strumenti di analisi dati che hanno molti argomenti opzionali.
 
 Per riassumere i vantaggi di questo approccio:
 
@@ -693,17 +693,17 @@ Per riassumere i vantaggi di questo approccio:
 - **Flessibilità**: Gli utenti possono specificare argomenti dello strumento tramite configurazione, inclusi valori specifici per campione
 - **Coerenza**: Tutti i moduli nf-core seguono questo pattern
 - **Portabilità**: I moduli possono essere riutilizzati senza opzioni dello strumento hardcoded
-- **Nessuna modifica al workflow**: Aggiungere o modificare opzioni dello strumento non richiede l'aggiornamento del codice del workflow
+- **Nessuna modifica al flusso di lavoro**: Aggiungere o modificare opzioni dello strumento non richiede l'aggiornamento del codice del flusso di lavoro
 
-!!! note
+!!! note "Nota"
 
-    Il sistema `ext.args` ha potenti capacità aggiuntive non trattate qui, inclusa la commutazione dinamica dei valori degli argomenti in base ai metadati. Veda le [specifiche dei moduli nf-core](https://nf-co.re/docs/guidelines/components/modules) per maggiori dettagli.
+    Il sistema `ext.args` ha potenti capacità aggiuntive non trattate qui, inclusa la commutazione dinamica dei valori degli argomenti in base ai metadati. Vedete le [specifiche dei moduli nf-core](https://nf-co.re/docs/guidelines/components/modules) per maggiori dettagli.
 
 ### 1.4. Standardizzare la denominazione dell'output con `ext.prefix`
 
 Ora che abbiamo dato al processo `COWPY` accesso alla metamap, possiamo iniziare a sfruttare un altro utile pattern nf-core: denominare i file di output in base ai metadati.
 
-Qui utilizzeremo una funzionalità Nextflow chiamata `ext.prefix` che ci permetterà di standardizzare la denominazione dei file di output attraverso i moduli usando `meta.id` (l'identificatore incluso nella metamap), pur essendo ancora in grado di configurare i moduli individualmente se desiderateto.
+Qui utilizzeremo una funzionalità Nextflow chiamata `ext.prefix` che ci permetterà di standardizzare la denominazione dei file di output attraverso i moduli usando `meta.id` (l'identificatore incluso nella metamap), pur essendo ancora in grado di configurare i moduli individualmente se desiderato.
 
 Questo sarà simile a ciò che abbiamo fatto con `ext.args`, con alcune differenze che dettaglieremo man mano che procediamo.
 
@@ -713,13 +713,13 @@ Dovremo effettuare le seguenti modifiche:
 1. Aggiornare il modulo `COWPY`
 2. Configurare `ext.prefix` nel file `modules.config`
 
-(Nessuna modifica necessaria al workflow.)
+(Nessuna modifica necessaria al flusso di lavoro.)
 
 Una volta fatto ciò, eseguiremo il pipeline per verificare che tutto funzioni ancora come prima.
 
 #### 1.4.1. Aggiornare il modulo `COWPY`
 
-Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e lo modifichi per riferirsi a `ext.prefix` come mostrato di seguito.
+Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e modificatelo per riferirsi a `ext.prefix` come mostrato di seguito.
 
 === "Dopo"
 
@@ -798,11 +798,11 @@ Aprite `conf/modules.config` e aggiungete il codice di configurazione all'intern
         }
     ```
 
-Nel caso si stesse chiedendo, la closure `ext.prefix` ha accesso al pezzo corretto di metadati perché la configurazione viene valutata nel contesto dell'esecuzione del processo, dove i metadati sono disponibili.
+Nel caso vi steste chiedendo, la closure `ext.prefix` ha accesso al pezzo corretto di metadati perché la configurazione viene valutata nel contesto dell'esecuzione del processo, dove i metadati sono disponibili.
 
 #### 1.4.3. Eseguire il pipeline per testarlo
 
-Verifichiamo che il workflow funzioni ancora come previsto.
+Verifichiamo che il flusso di lavoro funzioni ancora come previsto.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -847,8 +847,8 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     -[core/hello] Pipeline completed successfully-
     ```
 
-Dia un'occhiata all'output nella directory dei risultati.
-Dovrebbe vedere il file di output cowpy con la stessa denominazione di prima: `cowpy-test.txt`, basato sul nome batch predefinito.
+Date un'occhiata all'output nella directory dei risultati.
+Dovreste vedere il file di output cowpy con la stessa denominazione di prima: `cowpy-test.txt`, basato sul nome batch predefinito.
 
 ??? abstract "Contenuto della directory"
 
@@ -863,7 +863,7 @@ Dovrebbe vedere il file di output cowpy con la stessa denominazione di prima: `c
     └── UPPER-Holà-output.txt
     ```
 
-Sentitevi liberi di cambiare la configurazione `ext.prefix` in `conf/modules.config` per convincervi che potete cambiare il pattern di denominazione senza dover apportare modifiche al codice del modulo o del workflow.
+Sentitevi liberi di cambiare la configurazione `ext.prefix` in `conf/modules.config` per convincervi che potete cambiare il pattern di denominazione senza dover apportare modifiche al codice del modulo o del flusso di lavoro.
 
 In alternativa, potete anche provare a eseguirlo di nuovo con un parametro `--batch` diverso specificato sulla riga di comando per convincervi che quella parte sia ancora personalizzabile al volo.
 
@@ -881,7 +881,7 @@ Beh, c'è un'altra modifica importante che dobbiamo fare per migliorare il nostr
 
 ### 1.5. Centralizzare la configurazione di pubblicazione
 
-Potrebbe aver notato che abbiamo pubblicato output in due directory diverse:
+Potreste aver notato che abbiamo pubblicato output in due directory diverse:
 
 - **`results`** — La directory di output originale che abbiamo utilizzato dall'inizio per i nostri moduli locali, impostata individualmente utilizzando direttive `publishDir` per-modulo;
 - **`core-hello-results`** — La directory di output impostata con `--outdir` sulla riga di comando, che ha ricevuto i log nf-core e i risultati pubblicati da `CAT_CAT`.
@@ -890,27 +890,27 @@ Questo è disordinato e subottimale; sarebbe meglio avere una posizione per tutt
 Ovviamente, potremmo andare in ciascuno dei nostri moduli locali e aggiornare manualmente la direttiva `publishDir` per utilizzare la directory `core-hello-results`, ma che dire della prossima volta che decidiamo di cambiare la directory di output?
 
 Avere moduli individuali che prendono decisioni di pubblicazione non è chiaramente la strada da percorrere, specialmente in un mondo dove lo stesso modulo potrebbe essere utilizzato in molti pipeline diversi, da persone che hanno esigenze o preferenze diverse.
-Vogliamo poter controllare dove vengono pubblicati gli output a livello di configurazione del workflow.
+Vogliamo poter controllare dove vengono pubblicati gli output a livello di configurazione del flusso di lavoro.
 
-"Ehi," potrebbe dire, "`CAT_CAT` sta inviando i suoi output a `--outdir`. Forse dovremmo copiare la sua direttiva `publishDir`?"
+"Ehi," potreste dire, "`CAT_CAT` sta inviando i suoi output a `--outdir`. Forse dovremmo copiare la sua direttiva `publishDir`?"
 
 Sì, è un'ottima idea.
 
-Tranne che non ha una direttiva `publishDir`. (Vada avanti, guardi il codice del modulo.)
+Tranne che non ha una direttiva `publishDir`. (Andate avanti, guardate il codice del modulo.)
 
-Questo perché i pipeline nf-core centralizzano il controllo a livello di workflow configurando `publishDir` in `conf/modules.config` piuttosto che nei singoli moduli.
+Questo perché i pipeline nf-core centralizzano il controllo a livello di flusso di lavoro configurando `publishDir` in `conf/modules.config` piuttosto che nei singoli moduli.
 Nello specifico, il template nf-core dichiara una direttiva `publishDir` predefinita (con una struttura di directory predefinita) che si applica a tutti i moduli a meno che non venga fornita una direttiva sovrascrivente.
 
 Non suona fantastico? Potrebbe essere che per sfruttare questa direttiva predefinita, tutto ciò che dobbiamo fare è rimuovere la direttiva `publishDir` attuale dai nostri moduli locali?
 
 Proviamolo su `COWPY` per vedere cosa succede, poi guarderemo il codice per la configurazione predefinita per capire come funziona.
 
-Infine, dimostreremo come sovrascrivere il comportamento predefinito se desiderateto.
+Infine, dimostreremo come sovrascrivere il comportamento predefinito se desiderato.
 
 #### 1.5.1. Rimuovere la direttiva `publishDir` da `COWPY`
 
 Facciamolo.
-Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e rimuova la direttiva `publishDir` come mostrato di seguito.
+Aprite il file del modulo `cowpy.nf` (sotto `core-hello/modules/local/`) e rimuovete la direttiva `publishDir` come mostrato di seguito.
 
 === "Dopo"
 
@@ -988,7 +988,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     -[core/hello] Pipeline completed successfully-
     ```
 
-Dia un'occhiata alla vostra directory di lavoro corrente.
+Date un'occhiata alla vostra directory di lavoro corrente.
 Ora `core-hello-results` contiene anche gli output del modulo `COWPY`.
 
 ??? abstract "Contenuto della directory"
@@ -1023,7 +1023,7 @@ Ora `core-hello-results` contiene anche gli output del modulo `COWPY`.
         └── pipeline_dag_2025-12-27_06-35-56.html
     ```
 
-Potete vedere che Nextflow ha creato questa gerarchia di directory basata sui nomi del workflow e del modulo.
+Potete vedere che Nextflow ha creato questa gerarchia di directory basata sui nomi del flusso di lavoro e del modulo.
 
 Il codice responsabile si trova nel file `conf/modules.config`.
 Questa è la configurazione `publishDir` predefinita che fa parte del template nf-core e si applica a tutti i processi:
@@ -1041,7 +1041,7 @@ process {
 Questo può sembrare complicato, quindi esaminiamo ciascuno dei tre componenti:
 
 - **`path:`** Determina la directory di output in base al nome del processo.
-  Il nome completo di un processo contenuto in `task.process` include la gerarchia di import di workflow e moduli (come `CORE_HELLO:HELLO:CAT_CAT`).
+  Il nome completo di un processo contenuto in `task.process` include la gerarchia di import di flussi di lavoro e moduli (come `CORE_HELLO:HELLO:CAT_CAT`).
   Le operazioni `tokenize` eliminano quella gerarchia per ottenere solo il nome del processo, poi prendono la prima parte prima di qualsiasi underscore (se applicabile), e la convertono in minuscolo.
   Questo è ciò che determina che i risultati di `CAT_CAT` vengano pubblicati in `${params.outdir}/cat/`.
 - **`mode:`** Controlla come vengono pubblicati i file (copy, symlink, ecc.).
@@ -1094,14 +1094,14 @@ Questo completa l'insieme di funzionalità dei moduli nf-core che dovreste assol
 
 ### Takeaway
 
-Ora sa come adattare i moduli locali per seguire le convenzioni nf-core:
+Ora sapete come adattare i moduli locali per seguire le convenzioni nf-core:
 
 - Progettare i vostri moduli per accettare e propagare tuple di metadati;
 - Utilizzare `ext.args` per mantenere le interfacce dei moduli minimali e portabili;
 - Utilizzare `ext.prefix` per una denominazione dei file di output configurabile e standardizzata;
 - Adottare la direttiva `publishDir` centralizzata predefinita per una struttura della directory dei risultati coerente.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Imparate come utilizzare gli strumenti integrati nf-core basati su template per creare moduli nel modo più semplice.
 
@@ -1109,7 +1109,7 @@ Imparate come utilizzare gli strumenti integrati nf-core basati su template per 
 
 ## 2. Creare un modulo con gli strumenti nf-core
 
-Ora che ha imparato i pattern dei moduli nf-core applicandoli manualmente, vediamo come creerebbe i moduli nella pratica.
+Ora che avete imparato i pattern dei moduli nf-core applicandoli manualmente, vediamo come creereste i moduli nella pratica.
 
 ### 2.1. Generare una struttura di modulo da un template
 
@@ -1117,7 +1117,7 @@ Simile a ciò che esiste per la creazione di pipeline, il progetto nf-core forni
 
 #### 2.1.1. Eseguire il comando di creazione del modulo
 
-Il comando `nf-core modules create` genera un template di modulo che segue già tutte le convenzioni che ha imparato.
+Il comando `nf-core modules create` genera un template di modulo che segue già tutte le convenzioni che avete imparato.
 
 Creiamo una nuova versione del modulo `COWPY` con un template minimale eseguendo questo comando:
 
@@ -1127,10 +1127,10 @@ nf-core modules create --empty-template COWPY
 
 Il flag `--empty-template` crea un template iniziale pulito senza codice extra, rendendo più facile vedere la struttura essenziale.
 
-Il comando viene eseguito in modo interattivo, guidandoLa attraverso la configurazione.
+Il comando viene eseguito in modo interattivo, guidandovi attraverso la configurazione.
 Cerca automaticamente le informazioni sullo strumento da repository di pacchetti come Bioconda e bio.tools per pre-popolare i metadati.
 
-Le verrà richiesto di configurare diverse opzioni:
+Vi verrà richiesto di configurare diverse opzioni:
 
 - **Informazioni sull'autore**: Il vostro nome utente GitHub per l'attribuzione
 - **Etichetta di risorsa**: Un insieme predefinito di requisiti computazionali.
@@ -1138,11 +1138,11 @@ Le verrà richiesto di configurare diverse opzioni:
   Queste etichette aiutano a gestire l'allocazione delle risorse in diversi ambienti di esecuzione.
 - **Requisito di metadati**: Se il modulo necessita di informazioni specifiche per campione tramite una mappa `meta` (di solito sì per i moduli di elaborazione dati).
 
-Lo strumento gestisce la complessità di trovare informazioni sui pacchetti e configurare la struttura, permettendoLe di concentrarSi sull'implementazione della logica specifica dello strumento.
+Lo strumento gestisce la complessità di trovare informazioni sui pacchetti e configurare la struttura, permettendovi di concentrarvi sull'implementazione della logica specifica dello strumento.
 
 #### 2.1.2. Esaminare la struttura del modulo
 
-Lo strumento crea una struttura di modulo completa in `modules/local/` (o `modules/nf-core/` se si trova nel repository nf-core/modules):
+Lo strumento crea una struttura di modulo completa in `modules/local/` (o `modules/nf-core/` se vi trovate nel repository nf-core/modules):
 
 ??? abstract "Contenuto della directory"
 
@@ -1162,11 +1162,11 @@ Ogni file serve uno scopo specifico:
 - **`environment.yml`**: Specifica dell'ambiente Conda per le dipendenze
 - **`tests/main.nf.test`**: Casi di test nf-test per validare il funzionamento del modulo
 
-!!! tip "Impari di più sui test"
+!!! tip "Imparate di più sui test"
 
-    Il file di test generato utilizza nf-test, un framework di testing per pipeline e moduli Nextflow. Per imparare come scrivere ed eseguire questi test, veda la [side quest nf-test](../side_quests/nf-test.md).
+    Il file di test generato utilizza nf-test, un framework di testing per pipeline e moduli Nextflow. Per imparare come scrivere ed eseguire questi test, vedete la [side quest nf-test](../side_quests/nf-test.md).
 
-Il `main.nf` generato include tutti i pattern che ha appena imparato, più alcune funzionalità aggiuntive:
+Il `main.nf` generato include tutti i pattern che avete appena imparato, più alcune funzionalità aggiuntive:
 
 ```groovy title="modules/local/cowpy/main.nf" hl_lines="11 21 22"
 process COWPY {
@@ -1217,7 +1217,7 @@ process COWPY {
 }
 ```
 
-Noti come tutti i pattern che ha applicato manualmente sopra sono già presenti!
+Notate come tutti i pattern che avete applicato manualmente sopra sono già presenti!
 
 Il template include anche diverse convenzioni aggiuntive di nf-core.
 Alcune di queste funzionano immediatamente, mentre altre sono segnaposto che dovremo compilare, come descritto di seguito.
@@ -1245,7 +1245,7 @@ Le linee guida nf-core richiedono di specificare sia un container che un ambient
 
 #### 2.2.1. Container
 
-Per il container, può utilizzare [Seqera Containers](https://seqera.io/containers/) per costruire automaticamente un container da qualsiasi pacchetto Conda, inclusi i pacchetti conda-forge.
+Per il container, potete utilizzare [Seqera Containers](https://seqera.io/containers/) per costruire automaticamente un container da qualsiasi pacchetto Conda, inclusi i pacchetti conda-forge.
 In questo caso stiamo usando lo stesso container precostituito di prima.
 
 Il codice predefinito offre di alternare tra Docker e Singularity, ma semplificheremo quella riga e specificheremo semplicemente il container Docker ottenuto da Seqera Containers sopra.
@@ -1279,7 +1279,7 @@ process COWPY {
 Per l'ambiente Conda, il codice del modulo specifica `conda "${moduleDir}/environment.yml"`, il che significa che deve essere configurato nel file `environment.yml`.
 
 Lo strumento di creazione del modulo ci ha avvertito che non è riuscito a trovare il pacchetto `cowpy` in Bioconda (il canale principale per gli strumenti di bioinformatica).
-Tuttavia, `cowpy` è disponibile in conda-forge, quindi è possibile completare l'`environment.yml` in questo modo:
+Tuttavia, `cowpy` è disponibile in conda-forge, quindi potete completare l'`environment.yml` in questo modo:
 
 === "Dopo"
 
@@ -1321,10 +1321,10 @@ Aggiorniamo ora gli elementi di codice specifici per ciò che fa il processo `CO
 
 #### 2.3.1. Input e output
 
-Il template generato include dichiarazioni generiche di input e output che dovrà personalizzare per il Suo strumento specifico.
+Il template generato include dichiarazioni generiche di input e output che dovrete personalizzare per il vostro strumento specifico.
 Guardando indietro al nostro modulo manuale `COWPY` della sezione 1, possiamo usarlo come guida.
 
-Aggiorni i blocchi di input e output:
+Aggiornate i blocchi di input e output:
 
 === "Dopo"
 
@@ -1354,12 +1354,12 @@ Questo specifica:
 - Il nome del file di output usando il pattern del prefisso configurabile (`${prefix}.txt` invece del carattere jolly `*`)
 - Un nome di emissione descrittivo (`cowpy_output` invece del generico `output`)
 
-Se sta usando il language server di Nextflow per validare la sintassi, la parte `${prefix}` sarà segnalata come errore in questa fase perché non l'abbiamo ancora aggiunta al blocco script.
+Se state usando il language server di Nextflow per validare la sintassi, la parte `${prefix}` sarà segnalata come errore in questa fase perché non l'avete ancora aggiunta al blocco script.
 Passiamo a quello adesso.
 
 #### 2.3.2. Il blocco script
 
-Il template fornisce un segnaposto con commento nel blocco script dove si deve aggiungere il comando effettivo dello strumento.
+Il template fornisce un segnaposto con commento nel blocco script dove dovete aggiungere il comando effettivo dello strumento.
 
 Basandoci sul modulo che abbiamo scritto manualmente in precedenza, dovremmo apportare le seguenti modifiche:
 
@@ -1402,7 +1402,7 @@ Modifiche chiave:
 - Cambiare `def prefix` in solo `prefix` (senza `def`) per renderlo accessibile nel blocco di output
 - Sostituire il commento con il comando effettivo di `cowpy` che usa sia `$args` che `${prefix}.txt`
 
-Noti che se non avessimo già fatto il lavoro di aggiunta della configurazione `ext.args` e `ext.prefix` per il processo `COWPY` al file `modules.config`, dovremmo farlo adesso.
+Notate che se non avessimo già fatto il lavoro di aggiunta della configurazione `ext.args` e `ext.prefix` per il processo `COWPY` al file `modules.config`, dovremmo farlo adesso.
 
 #### 2.3.3. Implementare il blocco stub
 
@@ -1410,7 +1410,7 @@ Nel contesto di Nextflow, un blocco [stub](https://www.nextflow.io/docs/latest/p
 
 <!-- TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs (the reference doc isn't terribly helpful either). Right now this is likely to be mostly meaningless to anyone who doesn't already know about stubs. -->
 
-Non si preoccupi troppo se questo sembra misterioso; lo includiamo per completezza ma può anche semplicemente eliminare la sezione stub se non vuole occuparsene, poiché è completamente opzionale.
+Non preoccupatevi troppo se questo sembra misterioso; lo includiamo per completezza ma potete anche semplicemente eliminare la sezione stub se non volete occuparvene, poiché è completamente opzionale.
 
 === "Dopo"
 
@@ -1452,13 +1452,13 @@ Modifiche chiave:
 - Rimuovere la riga `echo $args` (che era solo codice segnaposto del template)
 - Lo stub crea un file vuoto `${prefix}.txt` che corrisponde a ciò che il blocco script produce
 
-Questo consente di testare la logica del workflow e la gestione dei file senza attendere l'esecuzione dello strumento effettivo.
+Questo consente di testare la logica del flusso di lavoro e la gestione dei file senza attendere l'esecuzione dello strumento effettivo.
 
 Una volta completata la configurazione dell'ambiente (sezione 2.2), input/output (sezione 2.3.1), blocco script (sezione 2.3.2) e blocco stub (sezione 2.3.3), il modulo è pronto per essere testato!
 
 ### 2.4. Inserire il nuovo modulo `COWPY` ed eseguire la pipeline
 
-Tutto ciò che dobbiamo fare per provare questa nuova versione del modulo `COWPY` è cambiare la dichiarazione di importazione nel file di workflow `hello.nf` per puntare al nuovo file.
+Tutto ciò che dobbiamo fare per provare questa nuova versione del modulo `COWPY` è cambiare la dichiarazione di importazione nel file di flusso di lavoro `hello.nf` per puntare al nuovo file.
 
 === "Dopo"
 
@@ -1539,13 +1539,13 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 Questo produce gli stessi risultati di prima.
 
-### Riepilogo
+### Takeaway
 
-Ora sa come usare gli strumenti integrati di nf-core per creare moduli in modo efficiente usando template piuttosto che scrivere tutto da zero.
+Ora sapete come usare gli strumenti integrati di nf-core per creare moduli in modo efficiente usando template piuttosto che scrivere tutto da zero.
 
 ### Cosa c'è dopo?
 
-Scopra quali sono i vantaggi di contribuire moduli a nf-core e quali sono i principali passaggi e requisiti coinvolti.
+Scoprite quali sono i vantaggi di contribuire moduli a nf-core e quali sono i principali passaggi e requisiti coinvolti.
 
 ---
 
@@ -1555,16 +1555,16 @@ Il repository [nf-core/modules](https://github.com/nf-core/modules) accoglie con
 
 ### 3.1. Perché contribuire?
 
-Contribuire i Suoi moduli a nf-core:
+Contribuire i vostri moduli a nf-core:
 
-- Rende i Suoi strumenti disponibili all'intera comunità nf-core attraverso il catalogo dei moduli su [nf-co.re/modules](https://nf-co.re/modules)
+- Rende i vostri strumenti disponibili all'intera comunità nf-core attraverso il catalogo dei moduli su [nf-co.re/modules](https://nf-co.re/modules)
 - Assicura manutenzione continua della comunità e miglioramenti
 - Fornisce garanzia di qualità attraverso la revisione del codice e test automatizzati
-- Dà visibilità e riconoscimento al Suo lavoro
+- Dà visibilità e riconoscimento al vostro lavoro
 
 ### 3.2. Checklist del contributore
 
-Per contribuire un modulo a nf-core, dovrà seguire i seguenti passaggi:
+Per contribuire un modulo a nf-core, dovrete seguire i seguenti passaggi:
 
 1. Verificare se esiste già su [nf-co.re/modules](https://nf-co.re/modules)
 2. Fare il fork del repository [nf-core/modules](https://github.com/nf-core/modules)
@@ -1574,28 +1574,28 @@ Per contribuire un modulo a nf-core, dovrà seguire i seguenti passaggi:
 6. Verificare con `nf-core modules lint tool/subtool`
 7. Inviare una pull request
 
-Per istruzioni dettagliate, consulti il [tutorial dei componenti nf-core](https://nf-co.re/docs/tutorials/nf-core_components/components).
+Per istruzioni dettagliate, consultate il [tutorial dei componenti nf-core](https://nf-co.re/docs/tutorials/nf-core_components/components).
 
 ### 3.3. Risorse
 
 - **Tutorial dei componenti**: [Guida completa alla creazione e al contributo di moduli](https://nf-co.re/docs/tutorials/nf-core_components/components)
 - **Specifiche dei moduli**: [Requisiti tecnici e linee guida](https://nf-co.re/docs/guidelines/components/modules)
-- **Supporto della comunità**: [nf-core Slack](https://nf-co.re/join) - Si unisca al canale `#modules`
+- **Supporto della comunità**: [nf-core Slack](https://nf-co.re/join) - Unitevi al canale `#modules`
 
-### Riepilogo
+### Takeaway
 
-Ora sa come creare moduli nf-core! Ha imparato i quattro pattern chiave che rendono i moduli portabili e manutenibili:
+Ora sapete come creare moduli nf-core! Avete imparato i quattro pattern chiave che rendono i moduli portabili e manutenibili:
 
-- I **tuple di metadati** propagano i metadati attraverso il workflow
+- Le **tuple di metadati** propagano i metadati attraverso il flusso di lavoro
 - **`ext.args`** semplifica le interfacce dei moduli gestendo gli argomenti opzionali tramite configurazione
 - **`ext.prefix`** standardizza la nomenclatura dei file di output
 - La **pubblicazione centralizzata** tramite `publishDir` configurato in `modules.config` anziché codificato nei moduli
 
-Trasformando `COWPY` passo dopo passo, ha sviluppato una comprensione approfondita di questi pattern, rendendoLa capace di lavorare con, debuggare e creare moduli nf-core.
-In pratica, userà `nf-core modules create` per generare moduli correttamente strutturati con questi pattern integrati fin dall'inizio.
+Trasformando `COWPY` passo dopo passo, avete sviluppato una comprensione approfondita di questi pattern, rendendovi capaci di lavorare con, debuggare e creare moduli nf-core.
+In pratica, userete `nf-core modules create` per generare moduli correttamente strutturati con questi pattern integrati fin dall'inizio.
 
-Infine, ha imparato come contribuire moduli alla comunità nf-core, rendendo gli strumenti disponibili ai ricercatori di tutto il mondo beneficiando al contempo della manutenzione continua della comunità.
+Infine, avete imparato come contribuire moduli alla comunità nf-core, rendendo gli strumenti disponibili ai ricercatori di tutto il mondo beneficiando al contempo della manutenzione continua della comunità.
 
 ### Cosa c'è dopo?
 
-Quando è pronto/a, continui con la [Parte 5: Validazione dell'input](./05_input_validation.md) per imparare come aggiungere la validazione dell'input basata su schema alla Sua pipeline.
+Quando siete pronti, continuate con la [Parte 5: Validazione dell'input](./05_input_validation.md) per imparare come aggiungere la validazione dell'input basata su schema alla vostra pipeline.

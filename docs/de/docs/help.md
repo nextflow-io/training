@@ -46,7 +46,7 @@ Hier sind die wichtigsten verfügbaren Optionen, je nachdem, wonach du suchst.
 
     Seqera AI ist ein KI-Assistent, der auf Nextflow- und nf-core-Ressourcen trainiert wurde. Er kann dir helfen, deinen Code zu debuggen, Nextflow-Konzepte zu erklären und schneller nach Dokumentation zu suchen. Stell es dir wie einen Tutor vor, der rund um die Uhr verfügbar ist, während du die Kurse durcharbeitest.
 
-    [Seqera AI fragen:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
+    [Seqera AI fragen:material-arrow-right:](https://seqera.ai){ .md-button .md-button--primary .mt-1 }
 
 -   :material-book-open-variant:{ .lg .middle } __Nextflow-Dokumentation__
 

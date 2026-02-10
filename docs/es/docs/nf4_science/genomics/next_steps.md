@@ -1,6 +1,8 @@
 # Resumen del curso
 
-¡Felicitaciones por completar el curso de entrenamiento Nextflow para Genómica! 🎉
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
+¡Felicitaciones por completar el curso de capacitación Nextflow para Genómica! 🎉
 
 ## Tu recorrido
 
@@ -41,6 +43,6 @@ Para recursos de ayuda y soporte de la comunidad, consulta la [página de Ayuda]
 
 ## Encuesta de comentarios
 
-Antes de continuar, ¡por favor tómate un minuto para completar la encuesta del curso! Tus comentarios nos ayudan a mejorar nuestros materiales de entrenamiento para todos.
+Antes de continuar, ¡por favor tómate un minuto para completar la encuesta del curso! Tus comentarios nos ayudan a mejorar nuestros materiales de capacitación para todos.
 
 [Completar la encuesta :material-arrow-right:](survey.md){ .md-button .md-button--primary }

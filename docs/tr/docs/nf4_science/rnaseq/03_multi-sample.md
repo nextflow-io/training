@@ -1,6 +1,6 @@
 # Bölüm 3: Çok-örnekli paired-end uygulaması
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bu kursun son bölümünde, basit iş akışımızı bir üst seviyeye taşıyarak keyfi sayıda örneği işleyebilen güçlü bir toplu otomasyon aracına dönüştüreceğiz.
 Bunu yaparken, aynı zamanda yeni çalışmalarda daha yaygın olan paired-end verileri kabul edecek şekilde de değiştireceğiz.
@@ -87,9 +87,9 @@ Nextflow tüm paralelliği bizim için yönetiyor.
 Tüm bunlar çok sayıda QC raporu üretiyor ve bireysel raporları incelemek zorunda kalmak istemiyoruz.
 Bu, bir MultiQC raporu toplama adımı eklemek için mükemmel bir nokta!
 
-### 2.1. QC toplama işlemi için bir modül oluşturma
+### 2.1. QC toplama süreci için bir modül oluşturma
 
-`MULTIQC` işlemini barındırmak için `modules/multiqc.nf` adlı bir modül dosyası oluşturalım:
+`MULTIQC` sürecini barındırmak için `modules/multiqc.nf` adlı bir modül dosyası oluşturalım:
 
 ```bash
 touch modules/multiqc.nf
@@ -147,13 +147,13 @@ params {
 }
 ```
 
-### 2.4. İşlemi önceki adımların çıktıları üzerinde çağırma
+### 2.4. Süreci önceki adımların çıktıları üzerinde çağırma
 
-`MULTIQC` işlemine önceki adımlardan gelen tüm QC ile ilgili çıktıları vermemiz gerekiyor.
+`MULTIQC` sürecine önceki adımlardan gelen tüm QC ile ilgili çıktıları vermemiz gerekiyor.
 
 Bunun için, birden fazla kanalı tek bir kanalda toplayan `.mix()` operatörünü kullanacağız.
 
-A, B, C ve D adlı dört işlemimiz olsaydı ve her birinin basit bir `.out` kanalı olsaydı, sözdizimi şöyle görünürdü: `A.out.mix( B.out, C.out, D.out )`. Gördüğünüz gibi, onu birleştirmek istediğiniz kanalların ilkine (hangisi olduğu önemli değil) uyguluyorsunuz ve virgülle ayrılmış diğerlerini takip eden parantez içine ekliyorsunuz.
+A, B, C ve D adlı dört sürecimiz olsaydı ve her birinin basit bir `.out` kanalı olsaydı, sözdizimi şöyle görünürdü: `A.out.mix( B.out, C.out, D.out )`. Gördüğünüz gibi, onu birleştirmek istediğiniz kanalların ilkine (hangisi olduğu önemli değil) uyguluyorsunuz ve virgülle ayrılmış diğerlerini takip eden parantez içine ekliyorsunuz.
 
 İş akışımızda, toplanması gereken şu çıktılar var:
 
@@ -244,9 +244,9 @@ nextflow run rnaseq.nf -resume
     [56/e1f102] MULTIQC          [100%] 1 of 1 ✔
     ```
 
-Bu sefer önbelleğe alınmış işlem çağrılarından sonra eklenen tek bir MULTIQC çağrısı görüyoruz:
+Bu sefer önbelleğe alınmış süreç çağrılarından sonra eklenen tek bir MULTIQC çağrısı görüyoruz:
 
-Çıktıları `TRIM_GALORE` işleminde `publishDir` yönergesi tarafından belirtildiği gibi `results/trimming` altında bulabilirsiniz.
+Çıktıları `TRIM_GALORE` sürecinde `publishDir` yönergesi tarafından belirtildiği gibi `results/multiqc` altında bulabilirsiniz.
 
 ```bash
 tree -L 2 results/multiqc
@@ -342,7 +342,7 @@ Yani `row -> file(row.fastq_path)`, `row -> [file(row.fastq_1), file(row.fastq_2
         .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
 ```
 
-### 3.4. FASTQC işleminin paired-end versiyonunu oluşturma
+### 3.4. FASTQC sürecinin paired-end versiyonunu oluşturma
 
 Her iki versiyonu da elimizde bulundurmak için modülün bir kopyasını oluşturalım.
 
@@ -369,7 +369,7 @@ Yeni `fastqc_pe.nf` modül dosyasını kod düzenleyicide açın ve aşağıdaki
     """
 ```
 
-Teknik olarak bu, `FASTQC` işlemini single-end veya paired-end RNAseq verilerinden birini işleyebilecek şekilde genelleştirir.
+Teknik olarak bu, `FASTQC` sürecini single-end veya paired-end RNAseq verilerinden birini işleyebilecek şekilde genelleştirir.
 
 Son olarak, modülün paired-end versiyonunu kullanmak için modül içe aktarma ifadesini güncelleyin.
 
@@ -377,7 +377,7 @@ Son olarak, modülün paired-end versiyonunu kullanmak için modül içe aktarma
 include { FASTQC } from './modules/fastqc_pe.nf'
 ```
 
-### 3.5. TRIM_GALORE işleminin paired-end versiyonunu oluşturma
+### 3.5. TRIM_GALORE sürecinin paired-end versiyonunu oluşturma
 
 Her iki versiyonu da elimizde bulundurmak için modülün bir kopyasını oluşturun.
 
@@ -413,9 +413,9 @@ Son olarak, modülün paired-end versiyonunu kullanmak için modül içe aktarma
 include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
 ```
 
-### 3.6. MULTIQC işlemine yapılan çağrıyı TRIM_GALORE'dan iki rapor bekleyecek şekilde güncelleme
+### 3.6. MULTIQC sürecine yapılan çağrıyı TRIM_GALORE'dan iki rapor bekleyecek şekilde güncelleme
 
-`TRIM_GALORE` işlemi artık ek bir çıktı kanalı üretiyor, bu yüzden bunu MultiQC'ye beslememiz gerekiyor.
+`TRIM_GALORE` süreci artık ek bir çıktı kanalı üretiyor, bu yüzden bunu MultiQC'ye beslememiz gerekiyor.
 
 `TRIM_GALORE.out.fastqc_reports,`'i `TRIM_GALORE.out.fastqc_reports_1,` artı `TRIM_GALORE.out.fastqc_reports_2,` ile değiştirin:
 
@@ -448,7 +448,7 @@ params {
 }
 ```
 
-### 3.7. HISAT2_ALIGN işleminin paired-end versiyonunu oluşturma
+### 3.7. HISAT2_ALIGN sürecinin paired-end versiyonunu oluşturma
 
 Her iki versiyonu da elimizde bulundurmak için modülün bir kopyasını oluşturun.
 
@@ -513,7 +513,7 @@ Bir sonraki mantıklı adım, iş akışının her iki veri türünü de anında
 
 ---
 
-### Çıkarımlar
+### Özet
 
 Tek örnekli bir iş akışını birden fazla örneğin işlenmesini paralelleştirmek, kapsamlı bir QC raporu oluşturmak ve gerekirse iş akışını paired-end okuma verilerini kullanacak şekilde uyarlamak için nasıl uyarlayacağınızı biliyorsunuz.
 

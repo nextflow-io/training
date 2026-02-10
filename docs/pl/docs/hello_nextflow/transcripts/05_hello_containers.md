@@ -1,6 +1,6 @@
 # Część 5: Hello Containers - Transkrypcja wideo
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane sztuczną inteligencją - [dowiedz się więcej i zaproponuj poprawki](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -26,11 +26,11 @@ Są też Singularity czy Apptainer, które są bardzo popularne w systemach HPC 
 
 Jest jeszcze jeden dodatkowy, który jest trochę podobny, ale niekoniecznie taki sam, który Nextflow obsługuje - to Conda. Nextflow może zarządzać środowiskami Conda dla Ciebie na poziomie każdego procesu, co jest dużo lepsze niż zarządzanie własnymi środowiskami Conda. I znowu, może być dostarczany wraz z pipeline'em.
 
-Zaczniemy ten rozdział od krótkiego omówienia technologii kontenerowych, Dockera i tego, jak działają. Pierwszą połowę zrobimy ręcznie w Dockerze, żebyś zrozumiał, co dzieje się pod maską i jak to działa. Bo to jest naprawdę ważne, aby zrozumieć, co robi Nextflow i jak rozumieć, co robi Twój workflow'a, kiedy jest wykonywany.
+Zaczniemy ten rozdział od krótkiego omówienia technologii kontenerowych, Dockera i tego, jak działają. Pierwszą połowę zrobimy ręcznie w Dockerze, żebyś zrozumiał, co dzieje się pod maską i jak to działa. Bo to jest naprawdę ważne, aby zrozumieć, co robi Nextflow i jak rozumieć, co robi Twój workflow, kiedy jest wykonywany.
 
 Więc przeskoczmy do naszego Codespaces. Ponownie wszystko posprzątałem, ale jeśli przejdziesz do Hello Containers, powinieneś zobaczyć, że wszystkie nasze skrypty są tam takie same jak na końcu rozdziału o modułach. Mamy nasze różne moduły tutaj, które stworzyłem w katalogu modules.
 
-Wciąż tam są. Muszą tam być, żeby to mogło działać. Workflow'a i wyjście są takie same, z wyjątkiem tego, że zmieniliśmy ścieżkę publikacji wyjść na Hello Containers, żeby Twoje pliki trafiały do tego katalogu.
+Wciąż tam są. Muszą tam być, żeby to mogło działać. Workflow i wyjście są takie same, z wyjątkiem tego, że zmieniliśmy ścieżkę publikacji wyjść na Hello Containers, żeby Twoje pliki trafiały do tego katalogu.
 
 Możemy uruchomić to teraz, żeby sprawdzić, czy działa, jeśli chcesz, albo możemy przejść do terminala.
 
@@ -42,7 +42,7 @@ Kontenery i Docker mają dwie koncepcje, które są naprawdę ważne. Jedna nazy
 
 Kiedy już jesteś w tym kontenerze, zwykle działa on jak cały system operacyjny. Jest odcięty od świata zewnętrznego. Jest oddzielony od wszystkiego innego, i to jest dobra rzecz. Tak właśnie uzyskujemy tak dobrą powtarzalność z Nextflow'em.
 
-Ponieważ dla zadań uruchamianych wewnątrz kontenera nie mają wpływu żadne pliki konfiguracyjne w Twoim lokalnym systemie. Żadne inne zewnętrzne wpływy - działają w swoim własnym małym piaskownicy. Pliki są wtedy tworzone w bardzo, bardzo powtarzalny sposób, ponieważ używasz tych samych podstawowych bibliotek, wszystkich tych samych zależności, dokładnie tego samego oprogramowania dla każdej osoby uruchamiającej w każdym innym środowisku obliczeniowym. Co szczerze uważam za fantastyczne i niesamowite, że to działa. I nawet do dziś wciąż mnie to zachwycca, że jest to możliwe.
+Ponieważ dla zadań uruchamianych wewnątrz kontenera nie mają wpływu żadne pliki konfiguracyjne w Twoim lokalnym systemie. Żadne inne zewnętrzne wpływy - działają w swoim własnym małym piaskownicy. Pliki są wtedy tworzone w bardzo, bardzo powtarzalny sposób, ponieważ używasz tych samych podstawowych bibliotek, wszystkich tych samych zależności, dokładnie tego samego oprogramowania dla każdej osoby uruchamiającej w każdym innym środowisku obliczeniowym. Co szczerze uważam za fantastyczne i niesamowite, że to działa. I nawet do dziś wciąż mnie to zachwycą, że jest to możliwe.
 
 ## 1.1. Pobranie obrazu kontenera
 
@@ -208,7 +208,7 @@ I możesz zobaczyć, że Nextflow bierze logikę workflow'a, która jest tym, na
 
 I robi to w naprawdę przenośny sposób, żeby użytkownik końcowy pipeline'u mógł zamienić technologię, której używa: Docker, Singularity, Apptainer, Conda. To naprawdę nie ma znaczenia dla logiki pipeline'u, ale Nextflow obsłuży wszystkie podstawowe potrzeby infrastruktury, żeby działało wszędzie.
 
-I to jest naprawdę super moc Nextflow'a. To powtarzalność i przenośność. A z Nextflow'em możesz faktycznie udostępnić swój workflow'a i inne osoby mogą go uruchomić w swoich systemach i po prostu zadziała.
+I to jest naprawdę super moc Nextflow'a. To powtarzalność i przenośność. A z Nextflow'em możesz faktycznie udostępnić swój workflow i inne osoby mogą go uruchomić w swoich systemach i po prostu zadziała.
 
 To jest naprawdę, naprawdę trudna rzecz do zrobienia, a teraz wiesz, jak to zrobić również ze swoimi workflow'ami.
 

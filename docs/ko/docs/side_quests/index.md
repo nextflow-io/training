@@ -20,7 +20,7 @@ hide:
 그럼에도 불구하고, 모두 다음 항목에 대한 최소한의 익숙함을 가정합니다:
 
 - 명령줄 사용 경험
-- [Hello Nextflow](../../hello_nextflow/) 초급 교육 코스에서 다루는 기초적인 Nextflow 개념 및 도구
+- [Hello Nextflow](../../hello_nextflow/) 초급 교육 과정에서 다루는 기초적인 Nextflow 개념 및 도구
 
 기술 요구 사항 및 환경 설정에 대해서는 [Environment Setup](../../envsetup/) 단기 과정을 참고하십시오.
 

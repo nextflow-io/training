@@ -116,11 +116,11 @@ Da du VS Code während Hello Nextflow verwendet hast, bist du bereits mit den Gr
 
 Du kannst Panels herumziehen oder ausblenden (`Ctrl/Cmd+B` zum Umschalten der Seitenleiste), um dein Layout anzupassen, während wir die Beispiele durchgehen.
 
-### Zusammenfassung
+### Fazit
 
 Du hast VS Code mit der Nextflow-Erweiterung eingerichtet und verstehst das Arbeitsbereich-Layout für effiziente Entwicklung.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie Syntax-Highlighting dir hilft, die Nextflow-Codestruktur auf einen Blick zu verstehen.
 
@@ -160,11 +160,11 @@ Das Syntax-Highlighting hilft dir, schnell zu identifizieren:
 
 Diese visuelle Organisation wird unschätzbar wertvoll, wenn du mit komplexen Workflows arbeitest, die mehrere Processes und komplizierte Datenflüsse enthalten.
 
-### Zusammenfassung
+### Fazit
 
 Du verstehst, wie das Syntax-Highlighting von VS Code dir hilft, die Nextflow-Codestruktur zu lesen und verschiedene Sprachelemente für schnellere Entwicklung zu identifizieren.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie intelligente Auto-Vervollständigung das Code-Schreiben mit kontextbezogenen Vorschlägen beschleunigt.
 
@@ -218,11 +218,11 @@ Du wirst Vorschläge sehen für:
 
 Dies spart Zeit beim Konfigurieren von Processes und funktioniert über verschiedene Konfigurationsbereiche hinweg. Versuche zum Beispiel, `docker.` einzugeben, um Docker-spezifische Konfigurationsoptionen zu sehen.
 
-### Zusammenfassung
+### Fazit
 
 Du kannst die intelligente Auto-Vervollständigung von VS Code verwenden, um verfügbare Channel-Operationen, Process-Direktiven und Konfigurationsoptionen zu entdecken, ohne Syntax auswendig zu lernen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie Echtzeit-Fehlererkennung dir hilft, Probleme zu erkennen, bevor du deinen Workflow ausführst, einfach durch das Lesen des Codes.
 
@@ -260,11 +260,11 @@ Häufige Fehler in der Nextflow-Syntax umfassen:
 
 Der Nextflow Language Server hebt diese Probleme im Problems-Panel hervor. Du kannst diese frühzeitig überprüfen, um Syntaxfehler beim Ausführen einer Pipeline zu vermeiden.
 
-### Zusammenfassung
+### Fazit
 
 Du kannst die Fehlererkennung und das Problems-Panel von VS Code verwenden, um Syntaxfehler und Probleme zu erkennen, bevor du deinen Workflow ausführst, was Zeit spart und Frustration verhindert.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie du effizient zwischen Processes, Modulen und Definitionen in komplexen Workflows navigierst.
 
@@ -274,7 +274,7 @@ Lerne, wie du effizient zwischen Processes, Modulen und Definitionen in komplexe
 
 Effiziente Navigation ist entscheidend, wenn du mit komplexen Workflows arbeitest, die sich über mehrere Dateien erstrecken. Um dies zu verstehen, ersetze die Process-Definition in `basic_workflow.nf` durch einen Import für das Modul, das wir dir bereitgestellt haben:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="basic_workflow.nf" linenums="3"
     include { FASTQC } from './modules/fastqc.nf'
@@ -372,11 +372,11 @@ Dies ist nur der 'Entry'-Workflow, aber du kannst auch den DAG für die inneren 
 
 Für diesen Workflow kannst du die Knoten im DAG verwenden, um zu den entsprechenden Process-Definitionen im Code zu navigieren. Klicke auf einen Knoten, und er bringt dich zur relevanten Process-Definition im Editor. Besonders wenn ein Workflow zu einer großen Größe anwächst, kann dies dir wirklich helfen, im Code zu navigieren und zu verstehen, wie die Processes verbunden sind.
 
-### Zusammenfassung
+### Fazit
 
 Du kannst komplexe Workflows effizient navigieren, indem du Gehe-zu-Definition, Symbolsuche, Referenzen finden und DAG-Visualisierung verwendest, um Codestruktur und Abhängigkeiten zu verstehen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie du effektiv über mehrere miteinander verbundene Dateien in größeren Nextflow-Projekten hinweg arbeitest.
 
@@ -429,11 +429,11 @@ Dies zeigt dir jede Datei, die Publish-Verzeichnisse verwendet, und hilft dir:
 - Beispiele für bestimmte Direktiven zu finden
 - Konsistenz über Module hinweg sicherzustellen
 
-### Zusammenfassung
+### Fazit
 
 Du kannst komplexe Multi-Datei-Projekte verwalten, indem du schnelle Datei-Navigation, Split-Editoren und projektweite Suche verwendest, um effizient über Workflows und Module hinweg zu arbeiten.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie Code-Formatierungs- und Wartungsfunktionen deine Workflows organisiert und lesbar halten.
 
@@ -519,11 +519,11 @@ Dies ist besonders nützlich für:
 - Gleichzeitiges Hinzufügen von Kommentaren zu mehreren Zeilen
 - Bearbeiten ähnlicher Parameter-Definitionen über mehrere Processes hinweg
 
-### Zusammenfassung
+### Fazit
 
 Du kannst sauberen, lesbaren Code mit automatischer Formatierung, Kommentierungsfunktionen, Code-Faltung, Klammer-Zuordnung und mehrzeiliger Bearbeitung pflegen, um komplexe Workflows effizient zu organisieren.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie VS Code mit deinem breiteren Entwicklungs-Workflow über das bloße Bearbeiten von Code hinaus integriert.
 
@@ -567,11 +567,11 @@ Während der Workflow läuft, siehst du Echtzeit-Ausgaben im Terminal. Nach Absc
 
 Dies hält alles an einem Ort, anstatt zwischen mehreren Anwendungen zu wechseln.
 
-### Zusammenfassung
+### Fazit
 
 Du kannst VS Code mit Versionskontrolle und Workflow-Ausführung integrieren, um deinen gesamten Entwicklungsprozess von einer einzigen Oberfläche aus zu verwalten.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Sieh, wie all diese IDE-Features in deinem täglichen Entwicklungs-Workflow zusammenarbeiten.
 
@@ -616,7 +616,7 @@ Du hast jetzt eine Schnelltour durch die IDE-Features von VS Code für Nextflow-
 
 Wir erwarten nicht, dass du dich an alles erinnerst, aber jetzt weißt du, dass diese Features existieren, und du wirst sie finden können, wenn du sie brauchst. Während du weiterhin Nextflow-Workflows entwickelst, werden diese IDE-Features zur zweiten Natur, sodass du dich auf das Schreiben von hochwertigem Code konzentrieren kannst, anstatt mit Syntax und Struktur zu ringen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Wende diese IDE-Fähigkeiten an, während du andere Trainingsmodule durcharbeitest, zum Beispiel:
 

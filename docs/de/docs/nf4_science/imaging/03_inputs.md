@@ -24,7 +24,7 @@ nextflow run ./molkart \
 
 Das funktioniert, ist aber schwer zu reproduzieren, zu teilen oder zu ändern.
 Was, wenn du dieselbe Analyse nächsten Monat erneut ausführen musst?
-Was, wenn ein Kollege genau deine Einstellungen verwenden möchte?
+Was, wenn ein\*e Kolleg\*in genau deine Einstellungen verwenden möchte?
 
 ### 1.2. Lösung: Verwende eine Parameterdatei
 
@@ -125,7 +125,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Warnung"
+!!! Warning "Warnung"
 
     Beachte, dass die Pfade im Samplesheet relativ zu dem Ort sind, an dem du Nextflow **ausführst**, nicht wo sich das Samplesheet befindet.
 

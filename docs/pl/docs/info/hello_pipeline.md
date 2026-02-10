@@ -8,7 +8,7 @@ hide:
 
 # Pipeline Hello
 
-<span class="ai-translation-notice">:material-information-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Większość naszych kursów szkoleniowych używa prostego, domenowo-agnostycznego pipeline'u do demonstracji koncepcji i mechanizmów Nextflow.
 Kurs Hello Nextflow pokazuje, jak rozwijać ten pipeline krok po kroku, wyjaśniając każdą decyzję projektową i implementacyjną.
@@ -20,7 +20,7 @@ Ta strona podsumowuje stan pipeline'u po ukończeniu kursu Hello Nextflow.
 
 Workflow Hello przyjmuje plik CSV zawierający pozdrowienia, zapisuje je do oddzielnych plików, konwertuje każde na wielkie litery, zbiera je ponownie razem i generuje pojedynczy plik tekstowy zawierający obrazek ASCII zabawnej postaci wypowiadającej te pozdrowienia.
 
-### Kroki workflow (procesy)
+### Kroki workflow'u (procesy)
 
 Cztery kroki są zaimplementowane jako procesy Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` i `cowpy`) przechowywane w oddzielnych plikach modułów.
 
@@ -68,7 +68,7 @@ Wyniki są publikowane do katalogu o nazwie `results/`, a końcowe wyjście pipe
                       ^^^ ^^ ^^^ ^
 ```
 
-Możesz napotkać pewne różnice w szczegółach w zależności od kursu, w którym pipeline jest prezentowany.
+W zależności od kursu, w którym pipeline jest prezentowany, możesz napotkać pewne różnice w szczegółach.
 
 ---
 

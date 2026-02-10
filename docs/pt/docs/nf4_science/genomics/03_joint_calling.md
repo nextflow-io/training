@@ -1,5 +1,7 @@
 # Parte 3: Chamada conjunta de variantes em uma coorte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Na Parte 2, você construiu um pipeline de chamada de variantes por amostra que processou os dados de cada amostra independentemente.
 Agora vamos estendê-lo para implementar a chamada conjunta de variantes, conforme abordado na [Parte 1](01_method.md).
 
@@ -47,7 +49,7 @@ Dividimos isso em duas etapas:
 2. **Adicionar uma etapa de genotipagem conjunta que combina e genotipa os GVCFs por amostra.**
    Isso introduz o operador `collect()`, closures Groovy para construção de linha de comando e processos com múltiplos comandos.
 
-!!! note
+!!! note "Nota"
 
      Certifique-se de estar no diretório de trabalho correto:
      `cd /workspaces/training/nf4-science/genomics`
@@ -288,7 +290,7 @@ Mais adiante na série de treinamento, você aprenderá como usar metadados de a
     ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
         intervals: Path = "${projectDir}/data/ref/intervals.bed"
 
-        // Base name for final output file
+        // Nome base para o arquivo de saída final
         cohort_name: String = "family_trio"
     }
     ```
@@ -314,7 +316,7 @@ Adicione as seguintes linhas ao corpo do `workflow`, logo após a chamada a GATK
             intervals_file
         )
 
-        // Collect variant calling outputs across samples
+        // Coletar saídas de chamada de variantes entre amostras
         all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
     ```
@@ -334,7 +336,7 @@ Analisando isso:
 
 Podemos coletar os GVCFs e seus arquivos de índice separadamente (em vez de mantê-los juntos em tuplas) porque o Nextflow colocará todos os arquivos de entrada juntos para execução, então os arquivos de índice estarão presentes junto aos GVCFs.
 
-!!! tip
+!!! tip "Dica"
 
     Você pode usar o operador `view()` para inspecionar o conteúdo dos canais antes e depois de aplicar operadores de canal.
 
@@ -502,7 +504,7 @@ Adicione a chamada a `GATK_JOINTGENOTYPING` no corpo do fluxo de trabalho, após
     ```groovy title="genomics.nf" hl_lines="3-12"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
-        // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
+        // Combinar GVCFs em um armazenamento de dados GenomicsDB e aplicar genotipagem conjunta
         GATK_JOINTGENOTYPING(
             all_gvcfs_ch,
             all_idxs_ch,
@@ -656,7 +658,7 @@ Se você abrir o arquivo VCF conjunto, poderá verificar que o fluxo de trabalho
 
 Agora você tem um fluxo de trabalho de chamada conjunta de variantes automatizado e totalmente reproduzível!
 
-!!! note
+!!! note "Nota"
 
     Tenha em mente que os arquivos de dados que fornecemos cobrem apenas uma pequena porção do cromossomo 20.
     O tamanho real de um conjunto de chamadas de variantes seria contado em milhões de variantes.
@@ -669,6 +671,6 @@ Você também sabe como construir uma linha de comando usando closures Groovy e 
 
 ### O que vem a seguir?
 
-Comemore seu sucesso e faça uma pausa bem merecida.
+Dê um tapinha nas costas! Você completou o curso Nextflow for Genomics.
 
-Na próxima parte deste curso, você aprenderá como executar um pipeline de chamada de variantes pronto para produção do nf-core e compará-lo ao pipeline que você construiu manualmente.
+Vá para o [resumo final do curso](./next_steps.md) para revisar o que você aprendeu e descobrir o que vem a seguir.

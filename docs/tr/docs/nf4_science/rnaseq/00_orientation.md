@@ -1,6 +1,6 @@
 # Oryantasyon
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Eğitim ortamı, bu eğitim kursunu tamamlamak için gerekli tüm yazılımı, kodu ve veriyi içermektedir, dolayısıyla kendiniz herhangi bir şey yüklemenize gerek yoktur.
 Ancak, giriş yapmak için bir (ücretsiz) hesaba ihtiyacınız var ve arayüze aşina olmak için birkaç dakikanızı ayırmalısınız.
@@ -67,7 +67,7 @@ tree . -L 3
     Bu çok fazla gibi görünüyorsa endişelenmeyin; kursun her adımında ilgili parçaları ele alacağız.
     Bu sadece size bir genel bakış sağlamak için.
 
-**İşte başlamak için bilmeniz gerekenlerın bir özeti:**
+**İşte başlamak için bilmeniz gerekenler:**
 
 - **`rnaseq.nf` dosyası**, geliştireceğimiz iş akışı betiğinin ana hatlarıdır.
 

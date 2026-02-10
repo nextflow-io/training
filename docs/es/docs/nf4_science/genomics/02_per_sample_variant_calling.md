@@ -1,5 +1,7 @@
 # Parte 2: Llamado de variantes por muestra
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En la Parte 1, probaste los comandos de Samtools y GATK manualmente en sus respectivos contenedores.
 Ahora vamos a envolver esos mismos comandos en un workflow de Nextflow.
 
@@ -126,7 +128,7 @@ En el bloque workflow, crea un canal de entrada desde el valor del parámetro us
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Crear canal de entrada (archivo único vía parámetro CLI)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 
@@ -181,7 +183,7 @@ Adelante, completa la definición del proceso por ti mismo usando la informació
     #!/usr/bin/env nextflow
 
     /*
-     * Generate BAM index file
+     * Generar archivo de índice BAM
      */
     process SAMTOOLS_INDEX {
 
@@ -232,10 +234,10 @@ Ahora, agreguemos una llamada a `SAMTOOLS_INDEX` en el bloque workflow, pasando 
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Crear canal de entrada (archivo único vía parámetro CLI)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Create index file for input BAM file
+        // Crear archivo de índice para el archivo BAM de entrada
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -245,7 +247,7 @@ Ahora, agreguemos una llamada a `SAMTOOLS_INDEX` en el bloque workflow, pasando 
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Crear canal de entrada (archivo único vía parámetro CLI)
         reads_ch = channel.fromPath(params.reads_bam)
 
         // Call processes
@@ -401,7 +403,7 @@ Dado que nuestro nuevo proceso espera un puñado de archivos adicionales, agrega
         // Primary input
         reads_bam: Path
 
-        // Accessory files
+        // Archivos accesorios
         reference: Path
         reference_index: Path
         reference_dict: Path
@@ -456,16 +458,16 @@ Agrega variables para las rutas de archivos accesorios dentro del bloque workflo
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Crear canal de entrada (archivo único vía parámetro CLI)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Load the file paths for the accessory files (reference and intervals)
+        // Cargar las rutas de archivos para los archivos accesorios (referencia e intervalos)
         ref_file        = file(params.reference)
         ref_index_file  = file(params.reference_index)
         ref_dict_file   = file(params.reference_dict)
         intervals_file  = file(params.intervals)
 
-        // Create index file for input BAM file
+        // Crear archivo de índice para el archivo BAM de entrada
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -475,10 +477,10 @@ Agrega variables para las rutas de archivos accesorios dentro del bloque workflo
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Crear canal de entrada (archivo único vía parámetro CLI)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Create index file for input BAM file
+        // Crear archivo de índice para el archivo BAM de entrada
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -524,7 +526,7 @@ Adelante, completa la definición del proceso por ti mismo usando la informació
     #!/usr/bin/env nextflow
 
     /*
-     * Call variants with GATK HaplotypeCaller
+     * Llamar variantes con GATK HaplotypeCaller
      */
     process GATK_HAPLOTYPECALLER {
 
@@ -591,10 +593,10 @@ Agrega la llamada al proceso en el cuerpo del workflow, bajo `main:`:
 === "Después"
 
     ```groovy title="genomics.nf" linenums="33" hl_lines="4-12"
-        // Create index file for input BAM file
+        // Crear archivo de índice para el archivo BAM de entrada
         SAMTOOLS_INDEX(reads_ch)
 
-        // Call variants from the indexed BAM file
+        // Llamar variantes desde el archivo BAM indexado
         GATK_HAPLOTYPECALLER(
             reads_ch,
             SAMTOOLS_INDEX.out,
@@ -608,7 +610,7 @@ Agrega la llamada al proceso en el cuerpo del workflow, bajo `main:`:
 === "Antes"
 
     ```groovy title="genomics.nf" linenums="33"
-        // Create index file for input BAM file
+        // Crear archivo de índice para el archivo BAM de entrada
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -756,7 +758,7 @@ Primero, comenta la anotación de tipo en la declaración del parámetro, ya que
 === "Después"
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (array of three samples)
+        // Entrada principal (arreglo de tres muestras)
         reads_bam //: Path
     ```
 
@@ -894,11 +896,11 @@ Agrega estas dos líneas en el cuerpo del workflow antes de la llamada al proces
     ```groovy title="genomics.nf" hl_lines="3-5"
         SAMTOOLS_INDEX(reads_ch)
 
-        // temporary diagnostics
+        // diagnósticos temporales
         reads_ch.view()
         SAMTOOLS_INDEX.out.view()
 
-        // Call variants from the indexed BAM file
+        // Llamar variantes desde el archivo BAM indexado
         GATK_HAPLOTYPECALLER(
     ```
 
@@ -907,7 +909,7 @@ Agrega estas dos líneas en el cuerpo del workflow antes de la llamada al proces
     ```groovy title="genomics.nf"
         SAMTOOLS_INDEX(reads_ch)
 
-        // Call variants from the indexed BAM file
+        // Llamar variantes desde el archivo BAM indexado
         GATK_HAPLOTYPECALLER(
     ```
 
@@ -1163,14 +1165,14 @@ Restaura la anotación de tipo en el bloque params (ya que es una sola ruta nuev
 === "Después"
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (file of input files, one per line)
+        // Entrada principal (archivo de archivos de entrada, uno por línea)
         reads_bam: Path
     ```
 
 === "Antes"
 
     ```groovy title="genomics.nf" linenums="10"
-        // Primary input (array of three samples)
+        // Entrada principal (arreglo de tres muestras)
         reads_bam
     ```
 
@@ -1216,7 +1218,7 @@ Podemos hacer esto usando el mismo patrón que usamos en la [Parte 2 de Hello Ne
 === "Después"
 
     ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
-        // Create input channel from a CSV file listing input file paths
+        // Crear canal de entrada desde un archivo CSV listando rutas de archivos de entrada
         reads_ch = Channel.fromPath(params.reads_bam)
                 .splitCsv()
                 .map { line -> file(line[0]) }
@@ -1225,7 +1227,7 @@ Podemos hacer esto usando el mismo patrón que usamos en la [Parte 2 de Hello Ne
 === "Antes"
 
     ```groovy title="genomics.nf" linenums="24"
-        // Create input channel (single file via CLI parameter)
+        // Crear canal de entrada (archivo único vía parámetro CLI)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 

@@ -291,7 +291,7 @@ Ten plik parametrów zawiera parę klucz-wartość dla każdego z danych wejści
 Zwróć uwagę na użycie dwukropków (`:`) zamiast znaków równości (`=`), jeśli porównujesz składnię z plikiem konfiguracyjnym.
 Plik config jest napisany w Groovy, podczas gdy plik parametrów jest napisany w YAML.
 
-!!! info "Informacja"
+!!! info "Info"
 
     Dostarczamy również wersję JSON pliku parametrów jako przykład, ale nie będziemy go tutaj uruchamiać.
     Możesz spróbować tego samodzielnie.
@@ -525,7 +525,7 @@ To nadal produkuje to samo wyjście co poprzednio, z wyjątkiem tego, że tym ra
 
 Możesz połączyć to podejście z niestandardowymi definicjami ścieżek, aby skonstruować dowolną hierarchię katalogów.
 
-### 2.2. Organizuj wyjścia według proces
+### 2.2. Organizuj wyjścia według procesu
 
 Jednym z popularnych sposobów dalszej organizacji wyjść jest robienie tego według procesu, _tzn._ tworzenie podkatalogów dla każdego procesu uruchomionego w pipeline'ie.
 
@@ -823,7 +823,7 @@ Aby to zrobić, zmieńmy wartość `docker.enabled` na `false` i dodajmy dyrekty
 To pozwoli Nextflow tworzyć i wykorzystywać środowiska Conda dla procesów, które mają określone pakiety Conda.
 Co oznacza, że teraz musimy dodać jeden z nich do naszego procesu `cowpy`!
 
-### 3.2. Określ pakiet Conda w definicji process
+### 3.2. Określ pakiet Conda w definicji procesu
 
 Pobraliśmy już URI dla pakietu Conda zawierającego narzędzie `cowpy`: `conda-forge::cowpy==1.1.5`
 
@@ -883,7 +883,7 @@ To powinno działać bez problemu i produkować te same wyjścia co poprzednio w
 
 Za kulisami Nextflow pobrał pakiety Conda i utworzył środowisko, co normalnie wymaga trochę pracy; więc miło, że nie musimy nic z tego robić sami!
 
-!!! info "Informacja"
+!!! info "Info"
 
     To działa szybko, ponieważ pakiet `cowpy` jest dość mały, ale jeśli pracujesz z dużymi pakietami, może to zająć nieco więcej czasu za pierwszym razem i możesz zobaczyć, że wyjście konsoli pozostaje 'zablokowane' przez minutę lub więcej przed zakończeniem.
     To jest normalne i wynika z dodatkowej pracy, którą Nextflow wykonuje za pierwszym razem, gdy używasz nowego pakietu.
@@ -1098,7 +1098,7 @@ Jednocześnie będziemy udawać, że proces `cowpy` wymaga więcej zasobów niż
 
 Z tą konfiguracją wszystkie procesy będą żądać 1GB pamięci i jednego procesora (domniemana wartość domyślna), z wyjątkiem procesu `cowpy`, który będzie żądał 2GB i 2 procesorów.
 
-!!! info "Informacja"
+!!! info "Info"
 
     Jeśli masz maszynę z małą liczbą procesorów i przydzielasz dużą liczbę na proces, możesz zobaczyć, że wywołania procesu są kolejkowane jedno za drugim.
     To dlatego, że Nextflow zapewnia, że nie żądamy więcej procesorów niż jest dostępnych.
@@ -1606,7 +1606,7 @@ Jak odwołujesz się do nazwy procesu dynamicznie w konfiguracji ścieżki wyjś
 - [x] `#!groovy path { <process>.name }`
 - [ ] `@processName`
 
-Dowiedz się więcej: [2.2. Organizuj wyjścia według proces](#22-organizuj-wyjscia-wedlug-process)
+Dowiedz się więcej: [2.2. Organizuj wyjścia według procesu](#22-organizuj-wyjscia-wedlug-procesu)
 </quiz>
 
 <quiz>
@@ -1646,7 +1646,7 @@ Jak ustawiasz wymagania zasobowe dla konkretnego procesu o nazwie `cowpy` w plik
 - [x] `#!groovy process { withName: 'cowpy' { memory = '2.GB' } }`
 - [ ] `#!groovy resources.cowpy.memory = '2.GB'`
 
-Dowiedz się więcej: [5.3. Ustaw alokacje zasobów dla konkretnego proces](#53-ustaw-alokacje-zasobow-dla-konkretnego-process)
+Dowiedz się więcej: [5.3. Ustaw alokacje zasobów dla konkretnego procesu](#53-ustaw-alokacje-zasobow-dla-konkretnego-procesu)
 </quiz>
 
 <quiz>

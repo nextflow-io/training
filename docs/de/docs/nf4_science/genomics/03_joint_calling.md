@@ -1,5 +1,7 @@
 # Teil 3: Joint Calling für eine Kohorte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 In Teil 2 hast du eine Pipeline für das Variant Calling pro Probe erstellt, die die Daten jeder Probe unabhängig verarbeitet hat.
 Jetzt erweitern wir die Pipeline um Joint Variant Calling, wie in [Teil 1](01_method.md) beschrieben.
 
@@ -18,7 +20,7 @@ In diesem Teil des Kurses werden wir den Workflow erweitern, um Folgendes zu tun
 
 Dieser Teil baut direkt auf dem Workflow aus Teil 2 auf.
 
-??? info "Wie man von diesem Abschnitt aus beginnt"
+??? info "Wie du von diesem Abschnitt aus beginnst"
 
     Dieser Abschnitt des Kurses setzt voraus, dass du [Teil 2: Variant Calling pro Probe](./02_per_sample_variant_calling.md) abgeschlossen hast und eine funktionierende `genomics.nf`-Pipeline besitzt.
 
@@ -47,7 +49,7 @@ Wir haben dies in zwei Schritte unterteilt:
 2. **Einen Joint-Genotyping-Schritt hinzufügen, der die GVCFs pro Probe kombiniert und genotypisiert.**
    Dies führt den `collect()`-Operator, Groovy-Closures für die Befehlszeilenkonstruktion und Prozesse mit mehreren Befehlen ein.
 
-!!! note
+!!! note "Hinweis"
 
      Stelle sicher, dass du dich im richtigen Arbeitsverzeichnis befindest:
      `cd /workspaces/training/nf4-science/genomics`
@@ -288,7 +290,7 @@ Später in der Trainingsreihe lernst du, wie man Probenmetadaten für solche Zwe
     ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
         intervals: Path = "${projectDir}/data/ref/intervals.bed"
 
-        // Base name for final output file
+        // Basisname für die finale Ausgabedatei
         cohort_name: String = "family_trio"
     }
     ```
@@ -314,7 +316,7 @@ Füge die folgenden Zeilen zum `workflow`-Body hinzu, direkt nach dem Aufruf von
             intervals_file
         )
 
-        // Collect variant calling outputs across samples
+        // Variant-Calling-Ausgaben über Proben hinweg sammeln
         all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
     ```
@@ -334,7 +336,7 @@ Aufgeschlüsselt:
 
 Wir können die GVCFs und ihre Indexdateien separat sammeln (anstatt sie in Tupeln zusammenzuhalten), weil Nextflow alle Eingabedateien zusammen für die Ausführung bereitstellt, sodass die Indexdateien neben den GVCFs vorhanden sein werden.
 
-!!! tip
+!!! tip "Tipp"
 
     Du kannst den `view()`-Operator verwenden, um den Inhalt von Kanälen vor und nach der Anwendung von Kanaloperatoren zu inspizieren.
 
@@ -502,7 +504,7 @@ Füge den Aufruf von `GATK_JOINTGENOTYPING` im Workflow-Body hinzu, nach den `co
     ```groovy title="genomics.nf" hl_lines="3-12"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
-        // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
+        // GVCFs in einen GenomicsDB-Datenspeicher kombinieren und Joint Genotyping anwenden
         GATK_JOINTGENOTYPING(
             all_gvcfs_ch,
             all_idxs_ch,
@@ -656,7 +658,7 @@ Wenn du die Joint-VCF-Datei öffnest, kannst du überprüfen, dass der Workflow 
 
 Du hast jetzt einen automatisierten, vollständig reproduzierbaren Joint-Variant-Calling-Workflow!
 
-!!! note
+!!! note "Hinweis"
 
     Denke daran, dass die Datendateien, die wir dir gegeben haben, nur einen winzigen Teil von Chromosom 20 abdecken.
     Die tatsächliche Größe eines Variant-Callsets würde in Millionen von Varianten gezählt werden.
@@ -669,6 +671,6 @@ Du weißt auch, wie man eine Befehlszeile mit Groovy-Closures konstruiert und wi
 
 ### Wie geht es weiter?
 
-Feiere deinen Erfolg und mach eine wohlverdiente Pause.
+Herzlichen Glückwunsch! Du hast den Kurs Nextflow for Genomics abgeschlossen.
 
-Im nächsten Teil dieses Kurses lernst du, wie man eine produktionsreife Variant-Calling-Pipeline von nf-core ausführt und sie mit der Pipeline vergleicht, die du manuell erstellt hast.
+Gehe zur abschließenden [Kurszusammenfassung](./next_steps.md), um zu wiederholen, was du gelernt hast, und herauszufinden, was als Nächstes kommt.

@@ -312,7 +312,7 @@ Chaque ligne de processus montre :
 
 Vous savez comment lancer un pipeline nf-core avec des données de test et interpréter sa sortie d'exécution.
 
-### Et maintenant ?
+### Et ensuite ?
 
 Apprenez où trouver les résultats et comment les interpréter.
 
@@ -372,7 +372,7 @@ Le rapport inclut :
 - Métriques de qualité de segmentation
 - Nombre de cellules et de spots détectés
 
-!!! Tip
+!!! Tip "Astuce"
 
     Les rapports MultiQC sont généralement inclus dans tous les pipelines nf-core.
     Ils fournissent toujours un aperçu de haut niveau de l'exécution du pipeline et de la qualité des données.
@@ -426,7 +426,7 @@ Cela montre :
 - Utilisation du CPU et de la mémoire
 - Quelles tâches ont été mises en cache ou exécutées
 
-!!! Tip
+!!! Tip "Astuce"
 
     Ces rapports sont incroyablement utiles pour optimiser l'allocation des ressources et dépanner les problèmes de performance.
 
@@ -434,7 +434,7 @@ Cela montre :
 
 Vous savez comment localiser les sorties du pipeline, examiner les rapports de contrôle qualité et accéder aux métriques d'exécution.
 
-### Et maintenant ?
+### Et ensuite ?
 
 Apprenez le répertoire de travail et comment Nextflow gère les fichiers intermédiaires.
 
@@ -447,7 +447,7 @@ Tout comme avec notre exemple Hello World, tout le travail réel se passe dans l
 ### 4.1. Comprendre la structure du répertoire de travail
 
 Le répertoire de travail contient un sous-répertoire pour chaque tâche qui a été exécutée.
-Pour ce pipeline avec 12 tâches, il y aura 12 sous-répertoires de travail.
+Pour ce pipeline avec 22 tâches, il y aura 22 sous-répertoires de travail.
 
 Listez le répertoire de travail :
 
@@ -459,10 +459,10 @@ Cela montre les 5 premiers répertoires de tâches.
 
 ### 4.2. Inspecter un répertoire de tâche
 
-Prenez l'un des hashs de processus de segmentation de la sortie console (par ex., `[3m/4n5o6p]`) et regardez à l'intérieur :
+Prenez l'un des hashs de processus de segmentation de la sortie console (par ex., `[3e/3c0736]`) et regardez à l'intérieur :
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3e/3c0736*/
 ```
 
 Vous verrez :
@@ -477,7 +477,7 @@ La différence clé par rapport à Hello World :
 - Les fichiers de sortie peuvent être assez volumineux (masques de segmentation, images traitées)
 - Plusieurs fichiers d'entrée et de sortie par tâche
 
-!!! Tip
+!!! Tip "Astuce"
 
     Si un processus échoue, vous pouvez naviguer vers son répertoire de travail, examiner `.command.err` pour les messages d'erreur, et même réexécuter `.command.sh` manuellement pour déboguer le problème.
 
@@ -492,7 +492,7 @@ Cependant, pour les pipelines nf-core avec de gros fichiers intermédiaires, il 
 
 Vous comprenez comment les pipelines nf-core organisent leurs répertoires de travail et comment inspecter des tâches individuelles pour le débogage.
 
-### Et maintenant ?
+### Et ensuite ?
 
 Apprenez le cache Nextflow et comment reprendre les exécutions de pipeline échouées.
 
@@ -551,7 +551,7 @@ Resume est particulièrement utile quand :
 - Votre connexion réseau tombe pendant le téléchargement de données
 - Vous voulez ajouter des sorties supplémentaires sans refaire le calcul
 
-!!! Warning
+!!! Warning "Avertissement"
 
     Resume ne fonctionne que si vous n'avez pas modifié les données d'entrée, le code du pipeline ou les paramètres.
     Si vous modifiez l'un de ces éléments, Nextflow réexécutera correctement les tâches affectées.
@@ -560,6 +560,6 @@ Resume est particulièrement utile quand :
 
 Vous savez comment utiliser `-resume` pour réexécuter efficacement les pipelines sans répéter les tâches réussies.
 
-### Et maintenant ?
+### Et ensuite ?
 
 Maintenant que vous pouvez exécuter nf-core/molkart avec des données de test, vous êtes prêt·e à apprendre comment le configurer pour vos propres ensembles de données.

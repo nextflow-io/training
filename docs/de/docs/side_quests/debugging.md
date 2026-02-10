@@ -193,7 +193,7 @@ Für dieses Beispiel haben wir einen Kommentar hinterlassen, der dir zeigt, wo d
 
 Ersetze den Kommentar mit der fehlenden schließenden Klammer:
 
-=== "Nach"
+=== "Danach"
 
     ```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
     #!/usr/bin/env nextflow
@@ -336,7 +336,7 @@ Wenn wir uns Zeile 4 im Fehlerkontext ansehen, können wir das Problem erkennen:
 
 Ersetze das falsche Schlüsselwort durch das korrekte, indem du [die Dokumentation](https://www.nextflow.io/docs/latest/process.html#) konsultierst:
 
-=== "Nach"
+=== "Danach"
 
     ```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
     #!/usr/bin/env nextflow
@@ -476,7 +476,7 @@ Die Fehlermeldung zeigt an, dass die Variable im Script-Template nicht erkannt w
 
 Wenn du einen 'No such variable'-Fehler erhältst, kannst du ihn beheben, indem du entweder die Variable definierst (durch Korrektur von Eingabevariablennamen oder Bearbeitung des Groovy-Codes vor dem Script) oder sie aus dem Script-Block entfernst, wenn sie nicht benötigt wird:
 
-=== "Nach"
+=== "Danach"
 
     ```groovy title="no_such_var.nf" hl_lines="15-17" linenums="1"
     #!/usr/bin/env nextflow
@@ -595,7 +595,7 @@ process PROCESS_FILES {
     script:
     """
     prefix="${sample_name}_output"
-    echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+    echo "Processing ${sample_name}" > ${prefix}.txt  # FEHLER: ${prefix} ist Groovy-Syntax, nicht Bash
     """
 }
 ```
@@ -606,7 +606,7 @@ In diesem Beispiel definieren wir die `prefix`-Variable in Bash, aber in einem N
 
 Wenn du eine Bash-Variable verwenden möchtest, musst du das Dollarzeichen so escapen:
 
-=== "Nach"
+=== "Danach"
 
     ```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
     #!/usr/bin/env nextflow
@@ -621,7 +621,7 @@ Wenn du eine Bash-Variable verwenden möchtest, musst du das Dollarzeichen so es
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > \${prefix}.txt  # Fixed: Escaped the dollar sign
+        echo "Processing ${sample_name}" > \${prefix}.txt  # Behoben: Dollarzeichen escaped
         """
     }
 
@@ -646,7 +646,7 @@ Wenn du eine Bash-Variable verwenden möchtest, musst du das Dollarzeichen so es
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+        echo "Processing ${sample_name}" > ${prefix}.txt  # FEHLER: ${prefix} ist Groovy-Syntax, nicht Bash
         """
     }
     ```
@@ -754,7 +754,7 @@ Die VSCode Extension wird auch die `input_ch`-Variable hervorheben, da sie auße
 
 Verschiebe die Channel-Definition in den Workflow-Block:
 
-=== "Nach"
+=== "Danach"
 
     ```groovy title="badpractice_syntax.nf" hl_lines="21" linenums="1"
     #!/usr/bin/env nextflow
@@ -777,7 +777,7 @@ Verschiebe die Channel-Definition in den Workflow-Block:
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // In den Workflow-Block verschoben
         PROCESS_FILES(input_ch)
     }
     ```
@@ -832,11 +832,11 @@ nextflow run badpractice_syntax.nf
 
 Halte deine Input-Channels im Workflow-Block definiert und folge im Allgemeinen allen anderen Empfehlungen, die die Extension macht.
 
-### Zusammenfassung
+### Fazit
 
 Du kannst Syntaxfehler systematisch identifizieren und beheben, indem du Nextflow-Fehlermeldungen und IDE-visuelle Indikatoren verwendest. Häufige Syntaxfehler umfassen fehlende Klammern, falsche Process-Schlüsselwörter, undefinierte Variablen und unsachgemäße Verwendung von Bash- vs. Nextflow-Variablen. Die VSCode Extension hilft, viele davon vor der Laufzeit zu erkennen. Mit diesen Syntax-Debugging-Fähigkeiten kannst du die häufigsten Nextflow-Syntaxfehler schnell beheben und dich komplexeren Laufzeitproblemen widmen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, komplexere Channel-Strukturfehler zu debuggen, die auftreten, selbst wenn die Syntax korrekt ist.
 
@@ -851,7 +851,7 @@ Channel-Strukturfehler sind subtiler als Syntaxfehler, weil der Code syntaktisch
     Denke während dieses Abschnitts daran, dass du den `.view()`-Operator verwenden kannst, um Channel-Inhalte an jedem Punkt in deinem Workflow zu inspizieren. Dies ist eines der mächtigsten Debugging-Tools zum Verstehen von Channel-Strukturproblemen. Wir werden diese Technik in Abschnitt 2.4 im Detail erkunden, aber fühle dich frei, sie zu verwenden, während du durch die Beispiele arbeitest.
 
     ```groovy
-    my_channel.view()  // Shows what's flowing through the channel
+    my_channel.view()  // Zeigt, was durch den Channel fließt
     ```
 
 ### 2.1. Falsche Anzahl von Input-Channels
@@ -889,7 +889,7 @@ Die Fehlermeldung gibt klar an, dass der Aufruf 1 Argument erwartet, aber 2 erha
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process expects only 1 input
+        val sample_name  // Process erwartet nur 1 Eingabe
 
     output:
         path "${sample_name}_output.txt"
@@ -919,14 +919,14 @@ Du solltest den nicht übereinstimmenden `PROCESS_FILES`-Aufruf sehen, der mehre
 
 Für dieses spezifische Beispiel erwartet der Process einen einzelnen Channel und benötigt den zweiten Channel nicht, also können wir es beheben, indem wir nur den `samples_ch`-Channel übergeben:
 
-=== "Nach"
+=== "Danach"
 
     ```groovy title="bad_number_inputs.nf" hl_lines="23" linenums="1"
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Process erwartet nur 1 Eingabe
 
         output:
             path "${sample_name}_output.txt"
@@ -955,7 +955,7 @@ Für dieses spezifische Beispiel erwartet der Process einen einzelnen Channel un
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Process erwartet nur 1 Eingabe
 
         output:
             path "${sample_name}_output.txt"
@@ -1067,7 +1067,7 @@ Es gibt ein paar Möglichkeiten, dies zu adressieren, abhängig davon, wie viele
 
 ```groovy title="exhausted.nf (behoben - Option 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    reference_ch = channel.value('baseline_reference')  // Value-Channel kann wiederverwendet werden
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1078,7 +1078,7 @@ workflow {
 
 ```groovy title="exhausted.nf (behoben - Option 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').first()  // In Value-Channel umwandeln
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1089,7 +1089,7 @@ workflow {
 
 ```groovy title="exhausted.nf (behoben - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').collect()  // In Value-Channel umwandeln
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1102,7 +1102,7 @@ workflow {
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
-    combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
+    combined_ch = reference_ch.combine(input_ch)  // Erzeugt kartesisches Produkt
 
     PROCESS_FILES(combined_ch)
 }
@@ -1194,7 +1194,7 @@ Die eckigen Klammern in der Fehlermeldung liefern hier den Hinweis - der Process
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Expects single value, gets tuple
+        val sample_name  // Erwartet einzelnen Wert, erhält Tupel
 
     output:
         path "${sample_name}_output.txt"
@@ -1207,7 +1207,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Channel gibt Tupel aus, aber Process erwartet einzelne Werte
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
@@ -1225,14 +1225,14 @@ Um dies zu beheben, könnten wir, wenn der Process beide Eingaben benötigt, den
 
 === "Option 1: Tupel im Process akzeptieren"
 
-    === "Nach"
+    === "Danach"
 
         ```groovy title="bad_channel_shape.nf" hl_lines="5"  linenums="1"
         #!/usr/bin/env nextflow
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), val(file_name)  // Behoben: Tuple akzeptieren
+                tuple val(sample_name), val(file_name)  // Behoben: Tupel akzeptieren
 
             output:
                 path "${sample_name}_output.txt"
@@ -1245,7 +1245,7 @@ Um dies zu beheben, könnten wir, wenn der Process beide Eingaben benötigt, den
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Channel gibt Tupel aus, aber Process erwartet einzelne Werte
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1262,7 +1262,7 @@ Um dies zu beheben, könnten wir, wenn der Process beide Eingaben benötigt, den
 
         process PROCESS_FILES {
             input:
-                val sample_name  // Expects single value, gets tuple
+                val sample_name  // Erwartet einzelnen Wert, erhält Tupel
 
             output:
                 path "${sample_name}_output.txt"
@@ -1275,7 +1275,7 @@ Um dies zu beheben, könnten wir, wenn der Process beide Eingaben benötigt, den
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Channel gibt Tupel aus, aber Process erwartet einzelne Werte
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1287,12 +1287,12 @@ Um dies zu beheben, könnten wir, wenn der Process beide Eingaben benötigt, den
 
 === "Option 2: Erstes Element extrahieren"
 
-    === "Nach"
+    === "Danach"
 
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Channel gibt Tupel aus, aber Process erwartet einzelne Werte
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1307,7 +1307,7 @@ Um dies zu beheben, könnten wir, wenn der Process beide Eingaben benötigt, den
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Channel gibt Tupel aus, aber Process erwartet einzelne Werte
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1374,15 +1374,15 @@ Schauen wir uns `bad_channel_shape_viewed.nf` an, um zu sehen, wie `.view()` ver
 ```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Channel gibt Tupel aus, aber Process erwartet einzelne Werte
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Show original channel content
-    .map { tuple -> tuple[0] }        // Transform: Extract first element
-    .view { "After mapping: $it" }    // Debug: Show transformed channel content
+    .view { "Channel content: $it" }  // Debug: Ursprünglichen Channel-Inhalt anzeigen
+    .map { tuple -> tuple[0] }        // Transformation: Erstes Element extrahieren
+    .view { "After mapping: $it" }    // Debug: Transformierten Channel-Inhalt anzeigen
 
     PROCESS_FILES(input_ch)
 }
@@ -1395,7 +1395,7 @@ Um zu vermeiden, dass du in Zukunft übermäßig `.view()`-Operationen verwenden
 ```groovy title="bad_channel_shape_viewed.nf (mit Kommentaren)" linenums="16" hl_lines="8 9"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Channel gibt Tupel aus, aber Process erwartet einzelne Werte
     input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
@@ -1432,11 +1432,11 @@ nextflow run bad_channel_shape_viewed.nf
     After mapping: sample3
     ```
 
-### Zusammenfassung
+### Fazit
 
 Viele Channel-Strukturfehler können mit gültiger Nextflow-Syntax erstellt werden. Du kannst Channel-Strukturfehler debuggen, indem du den Datenfluss verstehst, `.view()`-Operatoren zur Inspektion verwendest und Fehlermuster wie eckige Klammern erkennst, die auf unerwartete Tupelstrukturen hinweisen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne über Fehler, die durch Process-Definitionen erzeugt werden.
 
@@ -1500,11 +1500,11 @@ process PROCESS_FILES {
     val sample_name
 
     output:
-    path "${sample_name}.txt"  // Expects: sample3.txt
+    path "${sample_name}.txt"  // Erwartet: sample3.txt
 
     script:
     """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Erstellt: sample3_output.txt
     """
 }
 ```
@@ -1524,7 +1524,7 @@ Für dieses Beispiel würde uns dies verdeutlichen, dass ein `_output`-Suffix in
 
 Behebe die Diskrepanz, indem du den Ausgabedateinamen konsistent machst:
 
-=== "Nach"
+=== "Danach"
 
     ```groovy title="missing_output.nf" hl_lines="6 10" linenums="3"
     process PROCESS_FILES {
@@ -1549,11 +1549,11 @@ Behebe die Diskrepanz, indem du den Ausgabedateinamen konsistent machst:
         val sample_name
 
         output:
-        path "${sample_name}.txt"  // Expects: sample3.txt
+        path "${sample_name}.txt"  // Erwartet: sample3.txt
 
         script:
         """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Erstellt: sample3_output.txt
         """
     }
     ```
@@ -1662,7 +1662,7 @@ nextflow run missing_software.nf -profile docker
     [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-!!! note
+!!! note "Hinweis"
 
     Um mehr darüber zu erfahren, wie Nextflow Container verwendet, siehe [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
 
@@ -1742,7 +1742,7 @@ Wir wissen, dass der Process länger als eine Sekunde dauern wird (wir haben ein
 
 Erhöhe das Zeitlimit auf einen realistischen Wert:
 
-=== "Nach"
+=== "Danach"
 
     ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
     process PROCESS_FILES {
@@ -1951,11 +1951,11 @@ In unserem früheren Beispiel bestätigte uns dies, dass während unsere erwarte
 sample3_output.txt
 ```
 
-### Zusammenfassung
+### Fazit
 
 Process-Debugging erfordert die Untersuchung von Work-Verzeichnissen, um zu verstehen, was schiefgelaufen ist. Wichtige Dateien sind `.command.sh` (das ausgeführte Script), `.command.err` (Fehlermeldungen) und `.command.out` (Standardausgabe). Exit-Codes wie 127 (Befehl nicht gefunden) und 137 (Process beendet) liefern sofortige diagnostische Hinweise auf die Art des Fehlers.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne die integrierten Debugging-Tools von Nextflow und systematische Ansätze zur Fehlerbehebung kennen.
 
@@ -2005,7 +2005,7 @@ Schauen wir uns `bad_channel_shape_viewed_debug.nf` an, um zu sehen, wie die `de
 
 ```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
 process PROCESS_FILES {
-    debug true  // Enable real-time output
+    debug true  // Echtzeit-Ausgabe aktivieren
 
     input:
     val sample_name
@@ -2031,7 +2031,7 @@ Manchmal möchtest du Probleme erkennen, bevor irgendwelche Processes ausgeführ
 
 Der Preview-Modus ermöglicht es dir, die Workflow-Logik zu testen, ohne Befehle auszuführen. Dies kann sehr nützlich sein, um schnell die Struktur deines Workflows zu überprüfen und sicherzustellen, dass Processes korrekt verbunden sind, ohne tatsächliche Befehle auszuführen.
 
-!!! note
+!!! note "Hinweis"
 
     Wenn du `bad_syntax.nf` vorhin behoben hast, führe den Syntaxfehler wieder ein, indem du die schließende Klammer nach dem Script-Block entfernst, bevor du diesen Befehl ausführst.
 
@@ -2215,7 +2215,7 @@ profiles {
             debug = true
             cleanup = false
 
-            // Conservative resources for debugging
+            // Konservative Ressourcen für Debugging
             maxForks = 1
             memory = '2.GB'
             cpus = 1
@@ -2236,7 +2236,7 @@ Dieses Profil aktiviert Echtzeit-Ausgabe, bewahrt Work-Verzeichnisse und begrenz
 
 Jetzt ist es an der Zeit, den systematischen Debugging-Ansatz in die Praxis umzusetzen. Der Workflow `buggy_workflow.nf` enthält mehrere häufige Fehler, die die Arten von Problemen repräsentieren, denen du in der realen Entwicklung begegnen wirst.
 
-!!! exercise
+!!! exercise "Übung"
 
     Verwende den systematischen Debugging-Ansatz, um alle Fehler in `buggy_workflow.nf` zu identifizieren und zu beheben. Dieser Workflow versucht, Probendaten aus einer CSV-Datei zu verarbeiten, enthält aber mehrere absichtliche Bugs, die gängige Debugging-Szenarien darstellen.
 
@@ -2299,7 +2299,7 @@ Jetzt ist es an der Zeit, den systematischen Debugging-Ansatz in die Praxis umzu
     nextflow run buggy_workflow.nf -resume
     ```
 
-    ??? solution
+    ??? solution "Lösung"
         Der `buggy_workflow.nf` enthält 9 oder 10 verschiedene Fehler (je nachdem, wie man zählt), die alle wichtigen Debugging-Kategorien abdecken. Hier ist eine systematische Aufschlüsselung jedes Fehlers und wie man ihn behebt
 
         Beginnen wir mit den Syntaxfehlern:
@@ -2357,9 +2357,9 @@ Jetzt ist es an der Zeit, den systematischen Debugging-Ansatz in die Praxis umzu
 
         **Fehler 5: Channel-Strukturfehler - Falsche Map-Ausgabe**
         ```groovy linenums="83"
-        .map { row -> row.sample_id }  // FEHLER: processFiles erwartet Tuple
+        .map { row -> row.sample_id }  // FEHLER: processFiles erwartet Tupel
         ```
-        **Lösung:** Gib die Tuple-Struktur zurück, die processFiles erwartet
+        **Lösung:** Gib die Tupel-Struktur zurück, die processFiles erwartet
         ```groovy linenums="83"
         .map { row -> [row.sample_id, file(row.fastq_path)] }
         ```
@@ -2474,7 +2474,7 @@ Jetzt ist es an der Zeit, den systematischen Debugging-Ansatz in die Praxis umzu
             """
             # Simulate heavy computation
             for i in {1..1000000}; do
-                echo "Heavy computation \$i for ${sample_id}"
+                echo "Heavy computation \${i} for ${sample_id}"
             done > ${sample_id}_heavy.txt
             """
         }
@@ -2642,6 +2642,6 @@ Für Produktions-Workflows solltest du Folgendes in Betracht ziehen:
 
 ---
 
-## Was kommt als Nächstes?
+## Wie geht es weiter?
 
 Kehre zum [Menü der Side Quests](./index.md) zurück oder klicke auf den Button unten rechts auf der Seite, um zum nächsten Thema in der Liste zu gelangen.

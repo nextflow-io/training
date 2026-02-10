@@ -246,7 +246,7 @@ nextflow run rnaseq.nf -resume
 
 Diesmal sehen wir einen einzelnen Aufruf von MULTIQC, der nach den gecachten Prozessaufrufen hinzugefügt wurde:
 
-Du findest die Ausgaben unter `results/trimming`, wie im Prozess `TRIM_GALORE` durch die Direktive `publishDir` angegeben.
+Du findest die Ausgaben unter `results/multiqc`, wie im Prozess `MULTIQC` durch die Direktive `publishDir` angegeben.
 
 ```bash
 tree -L 2 results/multiqc
@@ -513,7 +513,7 @@ Der nächste logische Schritt wäre, den Workflow so zu gestalten, dass er beide
 
 ---
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie du einen Einzelproben-Workflow anpasst, um die Verarbeitung mehrerer Proben zu parallelisieren, einen umfassenden QC-Bericht zu generieren und den Workflow bei Bedarf für Paired-End-Read-Daten anzupassen.
 

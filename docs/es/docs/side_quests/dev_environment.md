@@ -10,7 +10,7 @@ Los Entornos de Desarrollo Integrados (IDEs) modernos pueden transformar dramát
 
 ## Qué debería saber primero
 
-Esta guía asume que ha completado el curso de entrenamiento [Hello Nextflow](../hello_nextflow/) y se siente cómodo con conceptos fundamentales de Nextflow incluyendo:
+Esta guía asume que ha completado el curso de capacitación [Hello Nextflow](../hello_nextflow/) y se siente cómodo con conceptos fundamentales de Nextflow incluyendo:
 
 - **Estructura básica de workflow**: Comprensión de procesos, workflows y cómo se conectan entre sí
 - **Operaciones de canal**: Creación de canales, paso de datos entre procesos y uso de operadores básicos
@@ -36,7 +36,7 @@ Esta guía se enfoca en **características de productividad del IDE** que lo con
 
 ---
 
-## 0. Configuración y Preparación
+## 0. Configuración y Calentamiento
 
 Configuremos un espacio de trabajo específicamente para explorar características del IDE:
 
@@ -537,7 +537,7 @@ VS Code se integra bien con su flujo de trabajo de desarrollo más allá de solo
 
 !!! note "Codespaces e Integración Git"
 
-    Si está trabajando en **GitHub Codespaces**, algunas características de integración Git pueden no funcionar como se espera, particularmente atajos de teclado para Control de Fuente. También pudo haber declinado abrir el directorio como un repositorio Git durante la configuración inicial, lo cual está bien para propósitos de entrenamiento.
+    Si está trabajando en **GitHub Codespaces**, algunas características de integración Git pueden no funcionar como se espera, particularmente atajos de teclado para Control de Fuente. También pudo haber declinado abrir el directorio como un repositorio Git durante la configuración inicial, lo cual está bien para propósitos de capacitación.
 
 Si su proyecto es un repositorio git (como este lo es), VS Code muestra:
 
@@ -618,13 +618,13 @@ No esperamos que recuerde todo, pero ahora que sabe que estas características e
 
 ### ¿Qué sigue?
 
-Aplique estas habilidades del IDE mientras trabaja en otros módulos de entrenamiento, por ejemplo:
+Aplique estas habilidades del IDE mientras trabaja en otros módulos de capacitación, por ejemplo:
 
 - **[nf-test](nf-test.md)**: Cree suites de pruebas completas para sus workflows
 - **[Hello nf-core](../../hello_nf-core/)**: Construya pipelines de calidad de producción con estándares de la comunidad
 
 El verdadero poder de estas características del IDE emerge a medida que trabaja en proyectos más grandes y complejos. Comience a incorporarlas en su flujo de trabajo gradualmente—dentro de unas pocas sesiones, se volverán una segunda naturaleza y transformarán cómo aborda el desarrollo de Nextflow.
 
-Desde detectar errores antes de que lo retrasen hasta navegar bases de código complejas con facilidad, estas herramientas lo harán un desarrollador más confiado y eficiente.
+Desde detectar errores antes de que lo retrasen hasta navegar bases de código complejas con facilidad, estas herramientas lo harán un desarrollador más confiante y eficiente.
 
 ¡Feliz codificación!

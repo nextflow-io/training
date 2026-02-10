@@ -107,7 +107,7 @@ nextflow list
 tree -L 2 $NXF_HOME/assets/
 ```
 
-```console title="디렉토리 내용"
+```console title="Directory contents"
 /workspaces/.nextflow/assets/
 └── nf-core
     └── demo
@@ -115,7 +115,7 @@ tree -L 2 $NXF_HOME/assets/
 2 directories, 0 files
 ```
 
-!!! note
+!!! note "참고"
 
     교육 환경을 사용하지 않는 경우 시스템에서 전체 경로가 다를 수 있습니다.
 
@@ -134,7 +134,7 @@ ln -s $NXF_HOME/assets pipelines
 tree -L 2 pipelines
 ```
 
-```console title="디렉토리 내용"
+```console title="Directory contents"
 pipelines
 └── nf-core
     └── demo
@@ -146,7 +146,7 @@ pipelines
 
 하지만 먼저 첫 번째 nf-core 파이프라인을 실행해보겠습니다!
 
-### 요약
+### 핵심 정리
 
 이제 nf-core 웹사이트를 통해 파이프라인을 찾고 소스 코드의 로컬 사본을 가져오는 방법을 알게 되었습니다.
 
@@ -162,7 +162,7 @@ pipelines
 이것은 [nf-core/test-datasets](https://github.com/nf-core/test-datasets) 저장소에서 호스팅되는 작은 테스트 데이터셋을 사용하여 파이프라인을 실행하기 위한 최소한의 구성 설정 모음입니다.
 작은 규모로 파이프라인을 빠르게 사용해볼 수 있는 좋은 방법입니다.
 
-!!! note
+!!! note "참고"
 
     Nextflow의 configuration profile 시스템을 사용하면 다양한 컨테이너 엔진이나 실행 환경 간에 쉽게 전환할 수 있습니다.
     자세한 내용은 [Hello Nextflow Part 6: Configuration](../hello_nextflow/06_hello_config.md)을 참조하십시오.
@@ -232,7 +232,7 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 
 이것은 샘플시트라고 하며, nf-core 파이프라인에 대한 가장 일반적인 입력 형식입니다.
 
-!!! note
+!!! note "참고"
 
     데이터 형식과 유형에 익숙하지 않더라도 걱정하지 마십시오. 이후 내용에 중요하지 않습니다.
 
@@ -308,7 +308,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 기본 Nextflow 파이프라인을 실행할 때보다 콘솔 출력이 훨씬 많다는 것을 알 수 있습니다.
 파이프라인의 버전, 입력 및 출력, 그리고 몇 가지 구성 요소의 요약이 포함된 헤더가 있습니다.
 
-!!! note
+!!! note "참고"
 
     출력에는 다른 타임스탬프, 실행 이름 및 파일 경로가 표시되지만 전체 구조와 프로세스 실행은 유사해야 합니다.
 
@@ -368,14 +368,14 @@ tree -L 2 demo-results
 
 ![실행 타임라인 보고서](./img/execution_timeline.png)
 
-!!! note
+!!! note "참고"
 
     여기서 작업이 병렬로 실행되지 않은 이유는 Github Codespaces의 최소 사양 머신에서 실행하고 있기 때문입니다.
     병렬 실행을 보려면 codespace의 CPU 할당과 테스트 구성의 리소스 제한을 늘려보십시오.
 
 이러한 보고서는 모든 nf-core 파이프라인에 대해 자동으로 생성됩니다.
 
-### 요약
+### 핵심 정리
 
 내장된 test 프로파일을 사용하여 nf-core 파이프라인을 실행하는 방법과 출력을 찾을 수 있는 위치를 알게 되었습니다.
 
@@ -425,7 +425,7 @@ tree -L 1 pipelines/nf-core/demo
     └── workflows
     ```
 
-여기에는 많은 내용이 있으므로 단계별로 다루겠습니다.
+여기에는 많은 내용이 있으므로 단계적으로 다루겠습니다.
 
 먼저, 최상위 레벨에서 요약 정보가 있는 README 파일과 라이선싱, 기여 가이드라인, 인용 및 행동 강령과 같은 프로젝트 정보를 요약하는 보조 파일을 찾을 수 있습니다.
 상세한 파이프라인 문서는 `docs` 디렉토리에 있습니다.
@@ -442,12 +442,12 @@ tree -L 1 pipelines/nf-core/demo
 
 ### 3.1. 파이프라인 코드 구성요소
 
-표준 nf-core 파이프라인 코드 구성은 [Hello Nextflow](../hello_nextflow/index.md) 과정의 Part 4인 [Hello Modules](../hello_nextflow/04_hello_modules.md)에서 소개된 것처럼 코드 재사용을 극대화하도록 설계된 모듈식 구조를 따릅니다. 다만 진정한 nf-core 방식으로 약간의 복잡성이 추가되어 구현됩니다.
+표준 nf-core 파이프라인 코드 구성은 [Hello Nextflow](../hello_nextflow/04_hello_modules.md) 과정의 Part 4인 [Hello Modules](../hello_nextflow/index.md)에서 소개된 것처럼 코드 재사용을 극대화하도록 설계된 모듈식 구조를 따릅니다. 다만 진정한 nf-core 방식으로 약간의 복잡성이 추가되어 구현됩니다.
 특히, nf-core 파이프라인은 subworkflow, 즉 상위 workflow에서 가져오는 workflow 스크립트를 풍부하게 사용합니다.
 
 조금 추상적으로 들릴 수 있으므로 `nf-core/demo` 파이프라인에서 실제로 어떻게 사용되는지 살펴보겠습니다.
 
-!!! note
+!!! note "참고"
 
     이러한 모듈식 구성요소가 _어떻게_ 연결되는지에 대한 실제 코드는 다루지 않을 것입니다. subworkflow 사용과 관련된 복잡성이 혼란스러울 수 있고, 이를 이해하는 것이 교육의 현 단계에서는 필요하지 않기 때문입니다.
     지금은 전체적인 구성과 논리에 초점을 맞추겠습니다.
@@ -463,7 +463,7 @@ tree -L 1 pipelines/nf-core/demo
 `main.nf`라는 _엔트리포인트_ 스크립트가 있으며, 이는 두 종류의 중첩된 workflow에 대한 래퍼 역할을 합니다: `workflows/` 아래에 있고 `demo.nf`라고 하는 실제 분석 로직을 포함하는 workflow와 `subworkflows/` 아래에 있는 관리용 workflow 집합입니다.
 `demo.nf` workflow는 `modules/` 아래에 있는 **모듈**을 호출하며, 이들은 실제 분석 단계를 수행할 **프로세스**를 포함합니다.
 
-!!! note
+!!! note "참고"
 
     Subworkflow는 관리 기능에만 국한되지 않으며 프로세스 모듈을 사용할 수 있습니다.
 
@@ -488,7 +488,7 @@ tree -L 1 pipelines/nf-core/demo
 
 `demo.nf` workflow는 다음에 검토할 `modules/` 아래에 있는 **모듈**을 호출합니다.
 
-!!! note
+!!! note "참고"
 
     일부 nf-core 분석 workflow는 하위 레벨 subworkflow를 호출하여 추가 중첩 레벨을 표시합니다.
     이것은 주로 일반적으로 함께 사용되는 두 개 이상의 모듈을 쉽게 재사용 가능한 파이프라인 세그먼트로 적용하는 데 사용됩니다.
@@ -552,17 +552,17 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
     ```console
     pipelines/nf-core/demo/subworkflows
     ├── local
-    │   └── utils_nfcore_demo_pipeline
-    │       └── main.nf
+    │   └── utils_nfcore_demo_pipeline
+    │       └── main.nf
     └── nf-core
         ├── utils_nextflow_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
         ├── utils_nfcore_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
         └── utils_nfschema_plugin
             ├── main.nf
             ├── meta.yml
@@ -574,7 +574,7 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
 위에서 언급했듯이 `nf-core/demo` 파이프라인에는 분석 관련 subworkflow가 포함되어 있지 않으므로 여기에 표시된 모든 subworkflow는 이름의 `utils_` 접두사로 표시된 것처럼 소위 '관리용' 또는 '유틸리티' workflow입니다.
 이러한 subworkflow는 다른 보조 기능 중에서도 콘솔 출력에 멋진 nf-core 헤더를 생성하는 것입니다.
 
-!!! tip
+!!! tip "팁"
 
     명명 패턴 외에도 이러한 subworkflow가 진정한 분석 관련 기능을 수행하지 않는다는 또 다른 표시는 프로세스를 전혀 호출하지 않는다는 것입니다.
 
@@ -632,7 +632,7 @@ SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
 각 열은 기계 판독 가능한 형식으로 유형, 패턴, 설명 및 도움말 텍스트를 가질 수 있습니다.
 스키마는 자동 검증 및 유용한 오류 메시지 제공을 포함한 다양한 목적으로 사용됩니다.
 
-### 요약
+### 핵심 정리
 
 이제 nf-core 파이프라인의 주요 구성요소와 코드 구성 방법, 주요 구성 요소가 어디에 있는지, 입력 검증이 무엇을 위한 것인지 알게 되었습니다.
 
@@ -640,6 +640,6 @@ SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
 
 휴식을 취하십시오! 많은 내용이었습니다. 기분이 상쾌하고 준비가 되었을 때 다음 섹션으로 이동하여 배운 내용을 적용하여 nf-core 호환 파이프라인을 작성하십시오.
 
-!!! tip
+!!! tip "팁"
 
     다음 파트로 이동하기 전에 subworkflow를 사용하여 workflow를 구성하는 방법을 배우고 싶다면 [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest를 확인하십시오.

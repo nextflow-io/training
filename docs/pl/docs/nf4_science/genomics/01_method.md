@@ -1,12 +1,14 @@
 # Część 1: Przegląd metod i ręczne testowanie
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Wykrywanie wariantów to metoda analizy genomowej, która ma na celu identyfikację zmian w sekwencji genomu względem genomu referencyjnego.
 Tutaj użyjemy narzędzi i metod zaprojektowanych do wykrywania krótkich wariantów zarodkowych, _tzn._ SNP i indeli, w danych z sekwencjonowania całego genomu.
 
 ![Pipeline GATK](img/gatk-pipeline.png)
 
 Pełny pipeline wykrywania wariantów zazwyczaj obejmuje wiele kroków, w tym mapowanie do referencji (czasami określane jako dopasowanie genomu) oraz filtrowanie i priorytetyzację wariantów.
-Dla uproszczenia w tym szkoleniu skupimy się tylko na części dotyczącej wykrywania wariantów.
+Dla uproszczenia w tym kursie skupimy się tylko na części dotyczącej wykrywania wariantów.
 
 ### Metody
 
@@ -33,7 +35,7 @@ Te narzędzia nie są zainstalowane w środowisku GitHub Codespaces, więc będz
 
 !!! note "Uwaga"
 
-     Upewnij się, że jesteś w katalogu `nf4-science/genomics`, aby ostatnia część ścieżki pokazanej po wpisaniu `pwd` to `genomics`.
+    Upewnij się, że jesteś w katalogu `nf4-science/genomics`, aby ostatnia część ścieżki pokazanej po wpisaniu `pwd` to `genomics`.
 
 ---
 

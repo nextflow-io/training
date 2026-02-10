@@ -107,7 +107,7 @@ A saída mais importante aqui é a última linha, que está destacada na saída 
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Isso nos diz que o processo `sayHello` foi executado com sucesso uma vez (`1 of 1 ✔`).
+Isso nos diz que o **processo** `sayHello` foi executado com sucesso uma vez (`1 of 1 ✔`).
 
 Ótimo, mas você pode estar se perguntando: onde está a saída?
 
@@ -135,7 +135,7 @@ Hello World!
 Por padrão, o Nextflow salvará as saídas do pipeline em um diretório chamado `results` no seu caminho atual.
 Para mudar onde seus arquivos são publicados, use a flag CLI `-output-dir` (ou `-o` de forma abreviada)
 
-!!! danger "Aviso"
+!!! danger "Perigo"
 
     Note que `--input` tem dois traços e `-output-dir` tem um!
     Isso ocorre porque `--input` é um _parâmetro_ do pipeline e `-output-dir` é uma flag CLI central do Nextflow.
@@ -176,7 +176,7 @@ Então agora, vamos espiar sob o capô para ver onde o Nextflow realmente execut
 
 ### 2.4. Encontre a saída original e os logs no diretório `work/`
 
-Quando você executa um fluxo de trabalho, o Nextflow cria um 'diretório de tarefa' distinto para cada invocação individual de cada processo no fluxo de trabalho (=cada etapa no pipeline).
+Quando você executa um fluxo de trabalho, o Nextflow cria um 'diretório de tarefa' distinto para cada invocação individual de cada **processo** no fluxo de trabalho (=cada etapa no pipeline).
 Para cada um, ele prepara as entradas necessárias, executa a(s) instrução(ões) relevante(s) e escreve saídas e arquivos de log dentro desse diretório, que é nomeado automaticamente usando um hash para torná-lo único.
 
 Todos esses diretórios de tarefa ficarão sob um diretório chamado `work` dentro do seu diretório atual (onde você está executando o comando).
@@ -190,7 +190,7 @@ Voltando à saída do console para o fluxo de trabalho que executamos anteriorme
 ```
 
 Vê como a linha começa com `[a3/1e1535]`?
-Essa é uma forma truncada do caminho do diretório de tarefa para aquela chamada de processo, e diz onde encontrar a saída da chamada de processo `sayHello` dentro do caminho do diretório `work/`.
+Essa é uma forma truncada do caminho do diretório de tarefa para aquela chamada de **processo**, e diz onde encontrar a saída da chamada de **processo** `sayHello` dentro do caminho do diretório `work/`.
 
 Você pode encontrar o caminho completo digitando o seguinte comando (substituindo `a3/1e1535` pelo que você vê no seu próprio terminal) e pressionando a tecla tab para autocompletar o caminho ou adicionando um asterisco:
 
@@ -243,7 +243,7 @@ Há dois conjuntos de diretórios em `work/`, das duas execuções de pipeline d
 Cada execução de tarefa obtém seu próprio diretório isolado para trabalhar.
 Neste caso, o pipeline fez a mesma coisa ambas as vezes, então o conteúdo de cada diretório de tarefa é idêntico
 
-Você deve reconhecer imediatamente o arquivo `output.txt`, que é de fato a saída original do processo `sayHello` que foi publicada no diretório `results`.
+Você deve reconhecer imediatamente o arquivo `output.txt`, que é de fato a saída original do **processo** `sayHello` que foi publicada no diretório `results`.
 Se você abri-lo, encontrará a saudação `Hello World!` novamente.
 
 ```console title="work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt"
@@ -425,7 +425,7 @@ Vamos dar uma olhada mais de perto no bloco **processo** primeiro, depois olhare
 ### 3.2. A definição do `process`
 
 O primeiro bloco de código descreve um [**processo**](https://nextflow.io/docs/latest/process.html).
-A definição do processo começa com a palavra-chave `process`, seguida pelo nome do processo e finalmente o corpo do processo delimitado por chaves.
+A definição do **processo** começa com a palavra-chave `process`, seguida pelo nome do processo e finalmente o corpo do processo delimitado por chaves.
 O corpo do processo deve conter um bloco script que especifica o comando a executar, que pode ser qualquer coisa que você seria capaz de executar em um terminal de linha de comando.
 
 ```groovy title="1-hello.nf" linenums="3"
@@ -453,7 +453,7 @@ Aqui temos um **processo** chamado `sayHello` que recebe uma variável de **entr
 --8<-- "docs/en/docs/nextflow_run/img/sayhello_with_input.svg"
 </figure>
 
-Esta é uma definição de processo muito mínima que contém apenas uma definição de `input`, uma definição de `output` e o `script` a executar.
+Esta é uma definição de **processo** muito mínima que contém apenas uma definição de `input`, uma definição de `output` e o `script` a executar.
 
 A definição de `input` inclui o qualificador `val`, que diz ao Nextflow para esperar um valor de algum tipo (pode ser uma string, um número, qualquer coisa).
 
@@ -462,7 +462,7 @@ A definição de `output` inclui o qualificador `path`, que diz ao Nextflow que 
 ### 3.3. A definição do `workflow`
 
 O segundo bloco de código descreve o próprio [**fluxo de trabalho**](https://nextflow.io/docs/latest/workflow.html).
-A definição do fluxo de trabalho começa com a palavra-chave `workflow`, seguida por um nome opcional, depois o corpo do fluxo de trabalho delimitado por chaves.
+A definição do **fluxo de trabalho** começa com a palavra-chave `workflow`, seguida por um nome opcional, depois o corpo do fluxo de trabalho delimitado por chaves.
 
 Aqui temos um **fluxo de trabalho** que consiste em um bloco `main:` e um bloco `publish:`.
 O bloco `main:` é o corpo principal do fluxo de trabalho e o bloco `publish:` lista as saídas que devem ser publicadas no diretório `results`.
@@ -479,11 +479,11 @@ workflow {
 }
 ```
 
-Neste caso, o bloco `main:` contém uma chamada ao processo `sayHello` e fornece a ele uma entrada chamada `params.input` para usar como saudação.
+Neste caso, o bloco `main:` contém uma chamada ao **processo** `sayHello` e fornece a ele uma entrada chamada `params.input` para usar como saudação.
 
 Como discutiremos com mais detalhes em um momento, `params.input` contém o valor que demos ao parâmetro `--input` em nossa linha de comando.
 
-O bloco `publish:` lista a saída da chamada de processo `sayHello()`, que ele se refere como `sayHello.out` e dá o nome `first_output` (isso pode ser qualquer coisa que o autor do fluxo de trabalho quiser).
+O bloco `publish:` lista a saída da chamada de **processo** `sayHello()`, que ele se refere como `sayHello.out` e dá o nome `first_output` (isso pode ser qualquer coisa que o autor do fluxo de trabalho quiser).
 
 Esta é uma definição de **fluxo de trabalho** muito mínima.
 Em um pipeline do mundo real, o fluxo de trabalho tipicamente contém múltiplas chamadas a **processos** conectados por **canais**, e pode haver valores padrão configurados para as entradas variáveis.
@@ -493,9 +493,9 @@ Por agora, vamos dar uma olhada mais de perto em como nosso fluxo de trabalho es
 
 ### 3.4. O sistema `params` de parâmetros de linha de comando
 
-O `params.input` que fornecemos à chamada do processo `sayHello()` é um pedaço elegante de código Nextflow e vale a pena gastar um minuto extra nele.
+O `params.input` que fornecemos à chamada do **processo** `sayHello()` é um pedaço elegante de código Nextflow e vale a pena gastar um minuto extra nele.
 
-Como mencionado acima, é assim que passamos o valor do parâmetro de linha de comando `--input` para a chamada do processo `sayHello()`.
+Como mencionado acima, é assim que passamos o valor do parâmetro de linha de comando `--input` para a chamada do **processo** `sayHello()`.
 Na verdade, simplesmente declarar `params.someParameterName` é suficiente para dar ao fluxo de trabalho um parâmetro chamado `--someParameterName` da linha de comando.
 
 Aqui formalizamos essa declaração de parâmetro configurando um bloco `params` que especifica o tipo de entrada que o fluxo de trabalho espera (Nextflow 25.10.2 e posterior).
@@ -546,7 +546,7 @@ Para saber mais, veja [Publishing outputs](https://nextflow.io/docs/latest/workf
 
     Você ainda encontrará esse padrão de código por todo lugar em pipelines e módulos de processo Nextflow mais antigos, então é importante estar ciente disso.
 
-    Em vez de ter um bloco `publish:` no fluxo de trabalho e um bloco `output` no nível superior, você veria uma linha `publishDir` na definição do processo `sayHello`:
+    Em vez de ter um bloco `publish:` no fluxo de trabalho e um bloco `output` no nível superior, você veria uma linha `publishDir` na definição do **processo** `sayHello`:
 
     ```groovy title="Exemplo de sintaxe" linenums="1" hl_lines="3"
     process sayHello {
@@ -586,12 +586,12 @@ Aqui mostramos como aproveitar o recurso `resume` para quando você precisar rel
 Às vezes, você vai querer re-executar um pipeline que já executou anteriormente sem refazer qualquer trabalho que já foi concluído com sucesso.
 
 O Nextflow tem uma opção chamada `-resume` que permite fazer isso.
-Especificamente, neste modo, quaisquer processos que já foram executados com exatamente o mesmo código, configurações e entradas serão pulados.
-Isso significa que o Nextflow executará apenas processos que você adicionou ou modificou desde a última execução, ou aos quais você está fornecendo novas configurações ou entradas.
+Especificamente, neste modo, quaisquer **processos** que já foram executados com exatamente o mesmo código, configurações e entradas serão pulados.
+Isso significa que o Nextflow executará apenas **processos** que você adicionou ou modificou desde a última execução, ou aos quais você está fornecendo novas configurações ou entradas.
 
 Há duas vantagens principais em fazer isso:
 
-- Se você está no meio do desenvolvimento de um pipeline, pode iterar mais rapidamente, pois só precisa executar o(s) processo(s) em que está trabalhando ativamente para testar suas mudanças.
+- Se você está no meio do desenvolvimento de um pipeline, pode iterar mais rapidamente, pois só precisa executar o(s) **processo(s)** em que está trabalhando ativamente para testar suas mudanças.
 - Se você está executando um pipeline em produção e algo dá errado, em muitos casos você pode corrigir o problema e relançar o pipeline, e ele retomará a execução do ponto de falha, o que pode economizar muito tempo e computação.
 
 Para usá-lo, simplesmente adicione `-resume` ao seu comando e execute:
@@ -722,7 +722,7 @@ Note que isso não remove os subdiretórios de dois caracteres (como `eb/` acima
 !!! Warning "Aviso"
 
     Excluir subdiretórios de trabalho de execuções passadas os remove do cache do Nextflow e exclui quaisquer saídas que estavam armazenadas nesses diretórios.
-    Isso significa que quebra a capacidade do Nextflow de retomar a execução sem re-executar os processos correspondentes.
+    Isso significa que quebra a capacidade do Nextflow de retomar a execução sem re-executar os **processos** correspondentes.
 
     Você é responsável por salvar quaisquer saídas que você se importe! Essa é a principal razão pela qual preferimos usar o modo `copy` em vez do modo `symlink` para a diretiva `publish`.
 

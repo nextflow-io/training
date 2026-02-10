@@ -1,8 +1,8 @@
 # Bölüm 2: Tek örnek implementasyonu
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Bu kurumun bu bölümünde, Bölüm 1'de çalıştırdığımız tüm komutları otomatikleştirmek için mümkün olan en basit iş akışını yazacağız ve her seferinde yalnızca bir örnek işlemeyi hedefleyeceğiz.
+Bu kursun bu bölümünde, Bölüm 1'de çalıştırdığımız tüm komutları otomatikleştirmek için mümkün olan en basit iş akışını yazacağız ve her seferinde yalnızca bir örnek işlemeyi hedefleyeceğiz.
 
 Bunu üç aşamada yapacağız:
 
@@ -47,15 +47,15 @@ Bu iş akışı kodunun doğru ancak işlevsel olmadığını unutmayın; amacı
 
 ### 1.1. Modülleri depolamak için bir dizin oluşturun
 
-Her bir process için bağımsız modüller oluşturacağız, böylece bunları yönetmeyi ve yeniden kullanmayı kolaylaştıracağız. Hadi bunları depolamak için bir dizin oluşturalım.
+Her bir süreç için bağımsız modüller oluşturacağız, böylece bunları yönetmeyi ve yeniden kullanmayı kolaylaştıracağız. Hadi bunları depolamak için bir dizin oluşturalım.
 
 ```bash
 mkdir modules
 ```
 
-### 1.2. Kalite kontrol metrikleri toplama process'i için bir modül oluşturun
+### 1.2. Kalite kontrol metrikleri toplama süreci için bir modül oluşturun
 
-`FASTQC` process'ini barındırmak için `modules/fastqc.nf` adında bir modül dosyası oluşturalım:
+`FASTQC` sürecini barındırmak için `modules/fastqc.nf` adında bir modül dosyası oluşturalım:
 
 ```bash
 touch modules/fastqc.nf
@@ -87,7 +87,7 @@ process FASTQC {
 
 Bu eğitim serisinin Bölüm 1 ve Bölüm 2'de öğrendiklerinizden tüm parçaları tanıyor olmalısınız; dikkate değer tek değişiklik bu sefer `publishDir` yönergesi için `mode: symlink` kullanıyor olmamız ve `publishDir` tanımlamak için bir parametre kullanıyor olmamızdır.
 
-!!! note
+!!! note "Not"
 
     Burada kullandığımız veri dosyaları çok küçük olsa da, genomikte çok büyük olabilirler. Öğretim ortamında gösterim amacıyla, gereksiz dosya kopyalarından kaçınmak için 'symlink' yayınlama modunu kullanıyoruz. Bunu son iş akışlarınızda yapmamalısınız, çünkü `work` dizininizi temizlediğinizde sonuçları kaybedersiniz.
 
@@ -118,7 +118,7 @@ Girdi kanalını oluşturmak için temel bir `.fromPath()` kanal fabrikası kull
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Girdi kanalı oluştur from a file path
+    // Bir dosya yolundan girdi kanalı oluştur
     read_ch = channel.fromPath(params.reads)
 
     // Process'leri çağır
@@ -126,12 +126,12 @@ workflow {
 }
 ```
 
-### 1.6. Girdi kanalı üzerinde `FASTQC` process'ini çağırın
+### 1.6. Girdi kanalı üzerinde `FASTQC` sürecini çağırın
 
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
 
-    // Girdi kanalı oluştur from a file path
+    // Bir dosya yolundan girdi kanalı oluştur
     read_ch = channel.fromPath(params.reads)
 
     // İlk kalite kontrolü
@@ -162,7 +162,7 @@ nextflow run rnaseq.nf
 Bölüm 1'i tamamladıysanız ve konteyneri zaten çektiyseniz bu çok hızlı çalışmalıdır.
 Eğer atladıysanız, Nextflow konteyneri sizin için çekecektir; bunun gerçekleşmesi için bir şey yapmanıza gerek yok, ancak bir dakika kadar beklemeniz gerekebilir.
 
-Çıktıları `FASTQC` process'inde `publishDir` yönergesi tarafından belirtildiği şekilde `results/fastqc` altında bulabilirsiniz.
+Çıktıları `FASTQC` sürecinde `publishDir` yönergesi tarafından belirtildiği şekilde `results/fastqc` altında bulabilirsiniz.
 
 ```bash
 ls results/fastqc
@@ -178,9 +178,9 @@ ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 
 Kırpma işlemi için Cutadapt'i ve kırpma sonrası kalite kontrolü için FastQC'yi bir araya getiren Trim_Galore sarmalayıcısını kullanacağız.
 
-### 2.1. Kırpma ve kalite kontrol process'i için bir modül oluşturun
+### 2.1. Kırpma ve kalite kontrol süreci için bir modül oluşturun
 
-`TRIM_GALORE` process'ini barındırmak için `modules/trim_galore.nf` adında bir modül dosyası oluşturalım:
+`TRIM_GALORE` sürecini barındırmak için `modules/trim_galore.nf` adında bir modül dosyası oluşturalım:
 
 ```bash
 touch modules/trim_galore.nf
@@ -221,12 +221,12 @@ include { FASTQC } from './modules/fastqc.nf'
 include { TRIM_GALORE } from './modules/trim_galore.nf'
 ```
 
-### 2.3. Girdi kanalı üzerinde process'i çağırın
+### 2.3. Girdi kanalı üzerinde süreci çağırın
 
 ```groovy title="rnaseq.nf" linenums="14"
 workflow {
 
-    // Girdi kanalı oluştur from a file path
+    // Bir dosya yolundan girdi kanalı oluştur
     read_ch = channel.fromPath(params.reads)
 
     // İlk kalite kontrolü
@@ -257,7 +257,7 @@ nextflow run rnaseq.nf
 
 Bu da çok hızlı çalışmalıdır, çünkü çok küçük bir girdi dosyası üzerinde çalışıyoruz.
 
-Çıktıları `TRIM_GALORE` process'inde `publishDir` yönergesi tarafından belirtildiği şekilde `results/trimming` altında bulabilirsiniz.
+Çıktıları `TRIM_GALORE` sürecinde `publishDir` yönergesi tarafından belirtildiği şekilde `results/trimming` altında bulabilirsiniz.
 
 ```bash
 ls results/trimming
@@ -274,9 +274,9 @@ ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz
 
 Son olarak, FastQC tarzı kalite kontrol metriklerini de yayınlayacak olan Hisat2 kullanarak genom hizalama adımını çalıştırabiliriz.
 
-### 3.1. HiSat2 process'i için bir modül oluşturun
+### 3.1. HiSat2 süreci için bir modül oluşturun
 
-`HISAT2_ALIGN` process'ini barındırmak için `modules/hisat2_align.nf` adında bir modül dosyası oluşturalım:
+`HISAT2_ALIGN` sürecini barındırmak için `modules/hisat2_align.nf` adında bir modül dosyası oluşturalım:
 
 ```bash
 touch modules/hisat2_align.nf
@@ -335,7 +335,7 @@ params {
 }
 ```
 
-### 3.4. `TRIM_GALORE` tarafından çıktılanan kırpılmış okumalar üzerinde `HISAT2_ALIGN` process'ini çağırın
+### 3.4. `TRIM_GALORE` tarafından çıktılanan kırpılmış okumalar üzerinde `HISAT2_ALIGN` sürecini çağırın
 
 Kırpılmış okumalar, önceki adım tarafından çıktılanan `TRIM_GALORE.out.trimmed_reads` kanalındadır.
 
@@ -344,7 +344,7 @@ Ek olarak, Hisat2 aracına sıkıştırılmış genom dizini tarball'ını sağl
 ```groovy title="rnaseq.nf" linenums="16"
 workflow {
 
-    // Girdi kanalı oluştur from a file path
+    // Bir dosya yolundan girdi kanalı oluştur
     read_ch = channel.fromPath(params.reads)
 
     // İlk kalite kontrolü
@@ -377,7 +377,7 @@ nextflow run rnaseq.nf
     [c6/7a9f13] HISAT2_ALIGN (1) [100%] 1 of 1 ✔
     ```
 
-Çıktıları `HISAT2_ALIGN` process'inde `publishDir` yönergesi tarafından belirtildiği şekilde `results/align` altında bulabilirsiniz.
+Çıktıları `HISAT2_ALIGN` sürecinde `publishDir` yönergesi tarafından belirtildiği şekilde `results/align` altında bulabilirsiniz.
 
 ```bash
 ls results/align
@@ -393,7 +393,7 @@ _MultiQC rapor toplama işlemini Bölüm 2'de, iş akışını aynı anda birden
 
 ---
 
-### Çıkarımlar
+### Özet
 
 Tek uçlu RNAseq örneklerini tek tek işlemek için tüm temel adımları nasıl sarmalayacağınızı biliyorsunuz.
 

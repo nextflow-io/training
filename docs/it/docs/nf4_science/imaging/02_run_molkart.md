@@ -6,7 +6,7 @@ Nella Parte 1, abbiamo eseguito un semplice workflow Hello World per comprendere
 Ora eseguiremo una pipeline di bioimaging reale: **nf-core/molkart**.
 
 Questa pipeline elabora dati di trascrittomica spaziale Molecular Cartography da Resolve Bioscience.
-Tuttavia, i pattern di Nextflow che apprenderà qui si applicano a qualsiasi pipeline nf-core o workflow di produzione.
+Tuttavia, i pattern di Nextflow che apprenderete qui si applicano a qualsiasi pipeline nf-core o flusso di lavoro di produzione.
 
 ## 1. Comprendere le pipeline nf-core
 
@@ -25,9 +25,9 @@ Caratteristiche chiave delle pipeline nf-core:
 - **Controllo qualità**: Report QC automatizzati utilizzando MultiQC
 - **Supporto container**: Container predefiniti per la riproducibilità
 
-!!! tip "Desidera saperne di più su nf-core?"
+!!! tip "Desiderate saperne di più su nf-core?"
 
-    Per un'introduzione approfondita allo sviluppo di pipeline nf-core, consulti il corso di formazione [Hello nf-core](../../hello_nf-core/index.md).
+    Per un'introduzione approfondita allo sviluppo di pipeline nf-core, consultate il corso di formazione [Hello nf-core](../../hello_nf-core/index.md).
     Copre come creare e personalizzare pipeline nf-core da zero.
 
 ### 1.2. La pipeline molkart
@@ -62,7 +62,7 @@ Questo crea una directory `molkart/` contenente il codice sorgente completo dell
 
 !!! note "Perché stiamo clonando localmente?"
 
-    Tipicamente, si eseguirebbero le pipeline nf-core direttamente da GitHub usando `nextflow run nf-core/molkart -r 1.2.0`.
+    Tipicamente, eseguireste le pipeline nf-core direttamente da GitHub usando `nextflow run nf-core/molkart -r 1.2.0`.
     Nextflow scarica automaticamente la versione richiesta della pipeline in `$HOME/.nextflow/assets/nf-core/molkart` e la esegue da lì.
     Tuttavia, per questa formazione, stiamo clonando la pipeline in una directory locale diversa in modo da poter ispezionare più facilmente il codice.
 
@@ -95,7 +95,7 @@ Analizziamo questi parametri:
 
     Stiamo deliberatamente eseguendo questo senza container per dimostrare perché sono necessari.
 
-Dopo alcuni istanti, vedrà un errore come questo:
+Dopo alcuni istanti, vedrete un errore come questo:
 
 ??? failure "Output del comando"
 
@@ -129,7 +129,7 @@ Questo perché:
 
 **Da dove dovrebbero provenire questi strumenti?**
 
-Ispezioniamo uno dei moduli process per vedere come dichiara i suoi requisiti software.
+Ispezioniamo uno dei moduli **process** per vedere come dichiara i suoi requisiti software.
 
 Aprite il modulo di preprocessing CLAHE:
 
@@ -137,16 +137,16 @@ Aprite il modulo di preprocessing CLAHE:
 code molkart/modules/local/clahe/main.nf
 ```
 
-Guardi alla riga 5 - vedrà:
+Guardate alla riga 5 - vedrete:
 
 ```groovy
 container 'ghcr.io/schapirolabor/molkart-local:v0.0.4'
 ```
 
-Questa riga dice a Nextflow: "Per eseguire questo process, utilizzare l'immagine Docker `ghcr.io/schapirolabor/molkart-local:v0.0.4`, che contiene tutto il software richiesto."
+Questa riga dice a Nextflow: "Per eseguire questo **process**, utilizzare l'immagine Docker `ghcr.io/schapirolabor/molkart-local:v0.0.4`, che contiene tutto il software richiesto."
 
-Ogni process dichiara quale immagine container fornisce i suoi strumenti richiesti.
-Tuttavia, Nextflow utilizza questi container solo se glielo indica!
+Ogni **process** dichiara quale immagine container fornisce i suoi strumenti richiesti.
+Tuttavia, Nextflow utilizza questi container solo se glielo indicate!
 
 **La soluzione: Abilitare Docker nella configurazione**
 
@@ -160,7 +160,7 @@ Aprite il file di configurazione:
 code nextflow.config
 ```
 
-Cambi `docker.enabled = false` in `docker.enabled = true`:
+Cambiate `docker.enabled = false` in `docker.enabled = true`:
 
 ```groovy
 docker.enabled = true
@@ -189,7 +189,7 @@ Questa volta, Nextflow:
 
 1. Leggerà l'impostazione `docker.enabled = true` dalla configurazione
 2. Scaricherà le immagini Docker richieste (solo la prima volta)
-3. Eseguirà ogni process all'interno del suo container specificato
+3. Eseguirà ogni **process** all'interno del suo container specificato
 4. Eseguirà con successo perché tutti gli strumenti sono disponibili all'interno dei container
 
 !!! Tip "Perché i container sono importanti"
@@ -200,11 +200,11 @@ Questa volta, Nextflow:
     - I container garantiscono la riproducibilità - le stesse identiche versioni del software vengono eseguite ovunque
     - Non è necessario installare manualmente dozzine di strumenti e le loro dipendenze
 
-    Per maggiori dettagli sui container in Nextflow, consulti [Hello Containers](../../hello_nextflow/05_hello_containers.md) dalla formazione Hello Nextflow.
+    Per maggiori dettagli sui container in Nextflow, consultate [Hello Containers](../../hello_nextflow/05_hello_containers.md) dalla formazione Hello Nextflow.
 
 ### 2.3. Monitorare l'esecuzione
 
-Durante l'esecuzione della pipeline, vedrà un output simile a questo:
+Durante l'esecuzione della pipeline, vedrete un output simile a questo:
 
 ??? success "Output del comando"
 
@@ -287,52 +287,52 @@ Durante l'esecuzione della pipeline, vedrà un output simile a questo:
     Succeeded   : 22
     ```
 
-Noti come questo output sia più dettagliato rispetto al nostro esempio Hello World grazie alle convenzioni nf-core che la pipeline segue:
+Notate come questo output sia più dettagliato rispetto al nostro esempio Hello World grazie alle convenzioni nf-core che la pipeline segue:
 
 - La pipeline mostra la sua versione e il logo
 - I parametri di configurazione vengono visualizzati
-- Più process vengono eseguiti in parallelo (indicato da più righe di process)
-- I nomi dei process includono il percorso completo del modulo (es., `NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP`)
+- Più **process** vengono eseguiti in parallelo (indicato da più righe di process)
+- I nomi dei **process** includono il percorso completo del modulo (es., `NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP`)
 
 ### 2.4. Comprendere l'esecuzione dei process
 
-La riga executor `executor > local (22)` Le dice:
+La riga executor `executor > local (22)` vi dice:
 
 - **executor**: Quale ambiente di calcolo viene utilizzato (`local` = la vostra macchina)
 - **(22)**: Numero totale di attività lanciate
 
-Ogni riga di process mostra:
+Ogni riga di **process** mostra:
 
 - **Hash** (`[1a/2b3c4d]`): Identificatore della directory di lavoro (come prima)
-- **Nome del process**: Percorso completo del modulo e nome del process
+- **Nome del process**: Percorso completo del modulo e nome del **process**
 - **Identificatore input**: Nome del campione tra parentesi
 - **Progresso**: Percentuale completata e conteggio (es., `1 of 1 ✔`)
 
 ### Takeaway
 
-Sa come lanciare una pipeline nf-core con dati di test e interpretare il suo output di esecuzione.
+Sapete come lanciare una pipeline nf-core con dati di test e interpretare il suo output di esecuzione.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
-Impari dove trovare i risultati e come interpretarli.
+Imparate dove trovare i risultati e come interpretarli.
 
 ---
 
 ## 3. Trovare ed esaminare gli output
 
-Quando la pipeline viene completata con successo, vedrà un messaggio di completamento e un riepilogo dell'esecuzione.
+Quando la pipeline viene completata con successo, vedrete un messaggio di completamento e un riepilogo dell'esecuzione.
 
 ### 3.1. Localizzare la directory dei risultati
 
 Per impostazione predefinita, le pipeline nf-core scrivono gli output in una directory specificata dal parametro `outdir`, che abbiamo impostato su `results/`.
 
-Elenchi i contenuti:
+Elencate i contenuti:
 
 ```bash
 tree results/
 ```
 
-Dovrebbe vedere diverse subdirectory:
+Dovreste vedere diverse subdirectory:
 
 ```console title="results/"
 results/
@@ -372,7 +372,7 @@ Il report include:
 - Metriche di qualità della segmentazione
 - Numero di cellule e spot rilevati
 
-!!! Tip
+!!! Tip "Suggerimento"
 
     I report MultiQC sono tipicamente inclusi in tutte le pipeline nf-core.
     Forniscono sempre una panoramica ad alto livello dell'esecuzione della pipeline e della qualità dei dati.
@@ -380,28 +380,28 @@ Il report include:
 ### 3.3. Esaminare le tabelle cellula-per-trascritto
 
 L'output scientifico più importante è la tabella di conteggio cellula-per-trascritto.
-Questa Le dice quanti trascritti di ciascun tipo sono stati rilevati in ogni cellula.
+Questa vi dice quanti trascritti di ciascun tipo sono stati rilevati in ogni cellula.
 
-Navighi alla directory spot2cell:
+Navigate alla directory spot2cell:
 
 ```bash
 ls results/spot2cell/
 ```
 
-Troverà file come:
+Troverete file come:
 
 - `cellxgene_mem_only_cellpose.csv`: Tabella cellula-per-trascritto usando la segmentazione Cellpose
 - `cellxgene_mem_only_mesmer.csv`: Tabella cellula-per-trascritto usando la segmentazione Mesmer
 - `cellxgene_mem_only_stardist.csv`: Tabella cellula-per-trascritto usando la segmentazione Stardist
 
 Abbiamo eseguito solo 1 campione in questo dataset di test, ma in un esperimento reale avremmo queste tabelle per ogni campione.
-Noti come Nextflow è in grado di elaborare più metodi di segmentazione in parallelo, rendendo facile confrontare i risultati.
+Notate come Nextflow è in grado di elaborare più metodi di segmentazione in parallelo, rendendo facile confrontare i risultati.
 
 ### 3.4. Visualizzare i report di esecuzione
 
 Nextflow genera automaticamente diversi report di esecuzione.
 
-Verifichi la directory pipeline_info:
+Verificate la directory pipeline_info:
 
 ```bash
 ls results/pipeline_info/
@@ -410,9 +410,9 @@ ls results/pipeline_info/
 File chiave:
 
 - **execution_report.html**: Timeline e visualizzazione dell'utilizzo delle risorse
-- **execution_timeline.html**: Diagramma di Gantt dell'esecuzione dei process
+- **execution_timeline.html**: Diagramma di Gantt dell'esecuzione dei **process**
 - **execution_trace.txt**: Metriche dettagliate dell'esecuzione delle attività
-- **pipeline_dag.html**: Grafico aciclico diretto che mostra la struttura del workflow
+- **pipeline_dag.html**: Grafico aciclico diretto che mostra la struttura del flusso di lavoro
 
 Aprite il report di esecuzione per vedere l'utilizzo delle risorse:
 
@@ -422,21 +422,21 @@ code results/pipeline_info/execution_report.html
 
 Questo mostra:
 
-- Quanto tempo ha impiegato ogni process
+- Quanto tempo ha impiegato ogni **process**
 - Utilizzo di CPU e memoria
 - Quali attività sono state memorizzate nella cache vs. eseguite
 
-!!! Tip
+!!! Tip "Suggerimento"
 
     Questi report sono incredibilmente utili per ottimizzare l'allocazione delle risorse e risolvere problemi di prestazioni.
 
 ### Takeaway
 
-Sa come localizzare gli output della pipeline, esaminare i report di controllo qualità e accedere alle metriche di esecuzione.
+Sapete come localizzare gli output della pipeline, esaminare i report di controllo qualità e accedere alle metriche di esecuzione.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
-Impari sulla directory di lavoro e come Nextflow gestisce i file intermedi.
+Imparate sulla directory di lavoro e come Nextflow gestisce i file intermedi.
 
 ---
 
@@ -449,7 +449,7 @@ Proprio come nel nostro esempio Hello World, tutto il lavoro effettivo avviene n
 La directory di lavoro contiene una subdirectory per ogni attività che è stata eseguita.
 Per questa pipeline con 12 attività, ci saranno 12 subdirectory di lavoro.
 
-Elenchi la directory di lavoro:
+Elencate la directory di lavoro:
 
 ```bash
 ls -d work/*/*/ | head -5
@@ -459,13 +459,13 @@ Questo mostra le prime 5 directory di attività.
 
 ### 4.2. Ispezionare una directory di attività
 
-Scelga uno degli hash dei process di segmentazione dall'output della console (es., `[3m/4n5o6p]`) e guardi all'interno:
+Scegliete uno degli hash dei **process** di segmentazione dall'output della console (es., `[3m/4n5o6p]`) e guardate all'interno:
 
 ```bash
 ls -la work/3m/4n5o6p*/
 ```
 
-Vedrà:
+Vedrete:
 
 - **File .command.\***: Script di esecuzione Nextflow e log (come prima)
 - **File di input staged**: Symlink ai file di input effettivi
@@ -477,9 +477,9 @@ La differenza chiave rispetto a Hello World:
 - I file di output possono essere piuttosto grandi (maschere di segmentazione, immagini elaborate)
 - Più file di input e output per attività
 
-!!! Tip
+!!! Tip "Suggerimento"
 
-    Se un process fallisce, potete navigare alla vostra directory di lavoro, esaminare `.command.err` per i messaggi di errore e persino rieseguire `.command.sh` manualmente per il debug del problema.
+    Se un **process** fallisce, potete navigare alla sua directory di lavoro, esaminare `.command.err` per i messaggi di errore e persino rieseguire `.command.sh` manualmente per il debug del problema.
 
 ### 4.3. Pulizia della directory di lavoro
 
@@ -490,11 +490,11 @@ Tuttavia, per le pipeline nf-core con grandi file intermedi, è particolarmente 
 
 ### Takeaway
 
-Comprende come le pipeline nf-core organizzano le loro directory di lavoro e come ispezionare singole attività per il debugging.
+Comprendete come le pipeline nf-core organizzano le loro directory di lavoro e come ispezionare singole attività per il debugging.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
-Impari sulla cache di Nextflow e come riprendere esecuzioni della pipeline fallite.
+Imparate sulla cache di Nextflow e come riprendere esecuzioni della pipeline fallite.
 
 ---
 
@@ -504,7 +504,7 @@ Una delle caratteristiche più potenti di Nextflow è la capacità di riprendere
 
 ### 5.1. Il meccanismo di cache
 
-Quando esegue una pipeline con `-resume`, Nextflow:
+Quando eseguite una pipeline con `-resume`, Nextflow:
 
 1. Controlla la cache per ogni attività
 2. Se input, codice e parametri sono identici, riutilizza il risultato memorizzato nella cache
@@ -514,7 +514,7 @@ Questo è essenziale per pipeline di lunga durata dove i fallimenti potrebbero v
 
 ### 5.2. Provare resume con molkart
 
-Esegua nuovamente lo stesso comando, ma aggiunga `-resume`:
+Eseguite nuovamente lo stesso comando, ma aggiungete `-resume`:
 
 ```bash
 nextflow run ./molkart \
@@ -528,7 +528,7 @@ nextflow run ./molkart \
   -resume
 ```
 
-Dovrebbe vedere un output come: <!-- TODO: full output -->
+Dovreste vedere un output come: <!-- TODO: full output -->
 
 ```console
 executor >  local (0)
@@ -540,26 +540,26 @@ executor >  local (0)
 ...
 ```
 
-Noti `cached: 2` o `cached: 1` per ogni process - nulla è stato rieseguito!
+Notate `cached: 2` o `cached: 1` per ogni **process** - nulla è stato rieseguito!
 
 ### 5.3. Quando resume è utile
 
 Resume è particolarmente prezioso quando:
 
 - Una pipeline fallisce a causa di limiti di risorse (memoria esaurita, limite di tempo superato)
-- È necessario modificare i process a valle senza rieseguire i passaggi a monte
+- È necessario modificare i **process** a valle senza rieseguire i passaggi a monte
 - La vostra connessione di rete si interrompe durante il download dei dati
-- Desidera aggiungere output aggiuntivi senza rifare il calcolo
+- Desiderate aggiungere output aggiuntivi senza rifare il calcolo
 
-!!! Warning
+!!! Warning "Avviso"
 
-    Resume funziona solo se non ha modificato i dati di input, il codice della pipeline o i parametri.
-    Se modifica uno di questi, Nextflow rieseguirà correttamente le attività interessate.
+    Resume funziona solo se non avete modificato i dati di input, il codice della pipeline o i parametri.
+    Se modificate uno di questi, Nextflow rieseguirà correttamente le attività interessate.
 
 ### Takeaway
 
-Sa come utilizzare `-resume` per rieseguire efficientemente le pipeline senza ripetere attività riuscite.
+Sapete come utilizzare `-resume` per rieseguire efficientemente le pipeline senza ripetere attività riuscite.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Ora che potete eseguire nf-core/molkart con dati di test, siete pronti per imparare come configurarla per i vostri dataset.

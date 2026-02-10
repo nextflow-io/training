@@ -1,6 +1,8 @@
 # Kurszusammenfassung
 
-Herzlichen Glückwunsch zum Abschluss des Nextflow For Genomics Trainingskurses! 🎉
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
+Herzlichen Glückwunsch zum Abschluss des Nextflow for Genomics Trainingskurses! 🎉
 
 ## Deine Lernreise
 
@@ -33,7 +35,7 @@ Hier sind unsere wichtigsten Empfehlungen, was du als Nächstes tun kannst:
 - Starte mit nf-core mit [Hello nf-core](../../hello_nf-core/index.md)
 - Erkunde fortgeschrittenere Nextflow-Features mit den [Side Quests](../../side_quests/index.md)
 
-Abschließend empfehlen wir dir, einen Blick auf [**Seqera Platform**](https://seqera.io/) zu werfen – eine cloudbasierte Plattform, die vom Nextflow-Entwicklungsteam erstellt wurde und es dir noch einfacher macht, deine Workflows zu starten und zu verwalten, sowie deine Daten zu managen und Analysen interaktiv in jeder Umgebung auszuführen.
+Abschließend empfehlen wir dir, einen Blick auf [**Seqera Platform**](https://seqera.io/) zu werfen – eine cloudbasierte Plattform, die von den Entwickler\*innen von Nextflow erstellt wurde und es dir noch einfacher macht, deine Workflows zu starten und zu verwalten, sowie deine Daten zu managen und Analysen interaktiv in jeder Umgebung auszuführen.
 
 ## Hilfe erhalten
 

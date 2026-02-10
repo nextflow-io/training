@@ -28,7 +28,7 @@ Principais características dos pipelines nf-core:
 !!! tip "Quer aprender mais sobre nf-core?"
 
     Para uma introdução aprofundada ao desenvolvimento de pipelines nf-core, confira o curso de treinamento [Hello nf-core](../../hello_nf-core/index.md).
-    Ele abrange como criar e personalizar pipelines nf-core do zero.
+    Ele aborda como criar e personalizar pipelines nf-core do zero.
 
 ### 1.2. O pipeline molkart
 
@@ -372,7 +372,7 @@ O relatório inclui:
 - Métricas de qualidade de segmentação
 - Número de células e pontos detectados
 
-!!! Tip
+!!! Tip "Dica"
 
     Os relatórios MultiQC são normalmente incluídos em todos os pipelines nf-core.
     Eles sempre fornecem uma visão geral de alto nível da execução do pipeline e qualidade dos dados.
@@ -426,7 +426,7 @@ Isso mostra:
 - Uso de CPU e memória
 - Quais tarefas foram armazenadas em cache vs. executadas
 
-!!! Tip
+!!! Tip "Dica"
 
     Esses relatórios são incrivelmente úteis para otimizar alocação de recursos e solucionar problemas de desempenho.
 
@@ -477,7 +477,7 @@ A diferença principal do Hello World:
 - Arquivos de saída podem ser bastante grandes (máscaras de segmentação, imagens processadas)
 - Múltiplos arquivos de entrada e saída por tarefa
 
-!!! Tip
+!!! Tip "Dica"
 
     Se um processo falhar, você pode navegar até seu diretório de trabalho, examinar `.command.err` para mensagens de erro e até mesmo executar `.command.sh` manualmente para depurar o problema.
 
@@ -551,7 +551,7 @@ Resume é particularmente valioso quando:
 - Sua conexão de rede cai durante o download de dados
 - Você quer adicionar saídas adicionais sem refazer a computação
 
-!!! Warning
+!!! Warning "Aviso"
 
     Resume só funciona se você não alterou os dados de entrada, código do pipeline ou parâmetros.
     Se você alterar qualquer um destes, o Nextflow irá corretamente executar novamente as tarefas afetadas.

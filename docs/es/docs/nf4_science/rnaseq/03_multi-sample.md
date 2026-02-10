@@ -7,13 +7,13 @@ Y mientras lo hacemos, también vamos a cambiarlo para que espere datos de extre
 
 Lo haremos en tres etapas:
 
-1. Hacer que el flujo de trabajo acepte múltiples muestras de entrada y paralelice la ejecución
+1. Hacer que el workflow acepte múltiples muestras de entrada y paralelice la ejecución
 2. Agregar generación de reportes de control de calidad completos
 3. Cambiar a datos de RNAseq de extremos pareados
 
 ---
 
-## 1. Hacer que el flujo de trabajo acepte múltiples muestras de entrada y paralelice la ejecución
+## 1. Hacer que el workflow acepte múltiples muestras de entrada y paralelice la ejecución
 
 Vamos a necesitar cambiar cómo gestionamos la entrada.
 
@@ -56,7 +56,7 @@ Vamos a querer cargar los contenidos del archivo en el canal en lugar de solo la
         .map { row -> file(row.fastq_path) }
 ```
 
-### 1.3. Ejecutar el flujo de trabajo para probar que funciona
+### 1.3. Ejecutar el workflow para probar que funciona
 
 ```bash
 nextflow run rnaseq.nf
@@ -77,7 +77,7 @@ nextflow run rnaseq.nf
 
 Esta vez vemos que cada paso se ejecuta 6 veces, en cada uno de los 6 archivos de datos que proporcionamos.
 
-¡Eso es todo lo que se necesitó para que el flujo de trabajo se ejecute en múltiples archivos!
+¡Eso es todo lo que se necesitó para que el workflow se ejecute en múltiples archivos!
 Nextflow maneja todo el paralelismo por nosotros.
 
 ---
@@ -120,7 +120,7 @@ process MULTIQC {
 }
 ```
 
-### 2.2. Importar el módulo en el archivo del flujo de trabajo
+### 2.2. Importar el módulo en el archivo del workflow
 
 Agregue la declaración `include { MULTIQC } from './modules/multiqc.nf'` al archivo `rnaseq.nf`:
 
@@ -155,7 +155,7 @@ Para eso, vamos a usar el operador `.mix()`, que agrega múltiples canales en un
 
 Si tuviéramos cuatro procesos llamados A, B, C y D con un canal `.out` simple cada uno, la sintaxis se vería así: `A.out.mix( B.out, C.out, D.out )`. Como puede ver, se aplica al primero de los canales que desea combinar (no importa cuál) y simplemente agrega todos los demás, separados por comas, en el paréntesis que sigue.
 
-En el caso de nuestro flujo de trabajo, tenemos las siguientes salidas para agregar:
+En el caso de nuestro workflow, tenemos las siguientes salidas para agregar:
 
 - `FASTQC.out.zip`
 - `FASTQC.out.html`
@@ -181,7 +181,7 @@ Y también necesitamos darle el parámetro `report_id`.
 Esto nos da lo siguiente:
 
 ```groovy title="La llamada completa a MULTIQC" linenums="33"
-    // Comprehensive QC report generation
+    // Generación de reporte de control de calidad completo
     MULTIQC(
         FASTQC.out.zip.mix(
         FASTQC.out.html,
@@ -193,7 +193,7 @@ Esto nos da lo siguiente:
     )
 ```
 
-En el contexto del bloque de flujo de trabajo completo, termina viéndose así:
+En el contexto del bloque de workflow completo, termina viéndose así:
 
 ```groovy title="rnaseq.nf" linenums="18"
 workflow {
@@ -202,16 +202,16 @@ workflow {
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
 
-    /// Initial quality control
+    /// Control de calidad inicial
     FASTQC(read_ch)
 
-    // Adapter trimming and post-trimming QC
+    // Recorte de adaptadores y control de calidad post-recorte
     TRIM_GALORE(read_ch)
 
     // Alineamiento a un genoma de referencia
     HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
 
-    // Comprehensive QC report generation
+    // Generación de reporte de control de calidad completo
     MULTIQC(
         FASTQC.out.zip.mix(
         FASTQC.out.html,
@@ -224,7 +224,7 @@ workflow {
 }
 ```
 
-### 2.5. Ejecutar el flujo de trabajo para probar que funciona
+### 2.5. Ejecutar el workflow para probar que funciona
 
 ```bash
 nextflow run rnaseq.nf -resume
@@ -289,12 +289,12 @@ Ese último archivo `all_single-end.html` es el reporte agregado completo, conve
 
 ## 3. Habilitar el procesamiento de datos de RNAseq de extremos pareados
 
-Actualmente nuestro flujo de trabajo solo puede manejar datos de RNAseq de un solo extremo.
+Actualmente nuestro workflow solo puede manejar datos de RNAseq de un solo extremo.
 Es cada vez más común ver datos de RNAseq de extremos pareados, así que queremos poder manejar eso.
 
-Hacer que el flujo de trabajo sea completamente agnóstico del tipo de datos requeriría usar características del lenguaje Nextflow un poco más avanzadas, así que no vamos a hacerlo aquí, pero podemos hacer una versión de procesamiento de extremos pareados para demostrar qué necesita ser adaptado.
+Hacer que el workflow sea completamente agnóstico del tipo de datos requeriría usar características del lenguaje Nextflow un poco más avanzadas, así que no vamos a hacerlo aquí, pero podemos hacer una versión de procesamiento de extremos pareados para demostrar qué necesita ser adaptado.
 
-### 3.1. Hacer una copia del flujo de trabajo llamada `rnaseq_pe.nf`
+### 3.1. Hacer una copia del workflow llamada `rnaseq_pe.nf`
 
 ```bash
 cp rnaseq.nf rnaseq_pe.nf
@@ -420,7 +420,7 @@ El proceso `TRIM_GALORE` ahora produce un canal de salida adicional, así que ne
 Reemplace `TRIM_GALORE.out.fastqc_reports,` con `TRIM_GALORE.out.fastqc_reports_1,` más `TRIM_GALORE.out.fastqc_reports_2,`:
 
 ```groovy title="rnaseq_pe.nf" linenums="33"
-    // Comprehensive QC report generation
+    // Generación de reporte de control de calidad completo
     MULTIQC(
         FASTQC.out.zip.mix(
         FASTQC.out.html,
@@ -486,7 +486,7 @@ Finalmente, actualice la declaración de importación del módulo para usar la v
 include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
 ```
 
-### 3.8. Ejecutar el flujo de trabajo para probar que funciona
+### 3.8. Ejecutar el workflow para probar que funciona
 
 No usamos `-resume` ya que esto no usaría la caché, y hay el doble de datos para procesar que antes, pero aún así debería completarse en menos de un minuto.
 
@@ -508,17 +508,17 @@ nextflow run rnaseq_pe.nf
     [e6/a3ccd9] MULTIQC          [100%] 1 of 1 ✔
     ```
 
-¡Y eso es todo! Ahora tenemos dos versiones ligeramente divergentes de nuestro flujo de trabajo, una para datos de lecturas de un solo extremo y una para datos de extremos pareados.
-El siguiente paso lógico sería hacer que el flujo de trabajo acepte cualquier tipo de datos sobre la marcha, lo cual está fuera del alcance de este curso, pero podríamos abordar eso en un seguimiento.
+¡Y eso es todo! Ahora tenemos dos versiones ligeramente divergentes de nuestro workflow, una para datos de lecturas de un solo extremo y una para datos de extremos pareados.
+El siguiente paso lógico sería hacer que el workflow acepte cualquier tipo de datos sobre la marcha, lo cual está fuera del alcance de este curso, pero podríamos abordar eso en un seguimiento.
 
 ---
 
 ### Conclusión
 
-Usted sabe cómo adaptar un flujo de trabajo de una sola muestra para paralelizar el procesamiento de múltiples muestras, generar un reporte de control de calidad completo y adaptar el flujo de trabajo para usar datos de lecturas de extremos pareados si es necesario.
+Usted sabe cómo adaptar un workflow de una sola muestra para paralelizar el procesamiento de múltiples muestras, generar un reporte de control de calidad completo y adaptar el workflow para usar datos de lecturas de extremos pareados si es necesario.
 
 ### ¿Qué sigue?
 
 ¡Felicitaciones, ha completado el mini-curso de Nextflow para RNAseq! ¡Celebre su éxito y tome un merecido descanso!
 
-A continuación, le pedimos que complete una encuesta muy breve sobre su experiencia con este curso de entrenamiento, luego lo llevaremos a una página con enlaces a recursos de entrenamiento adicionales y enlaces útiles.
+A continuación, le pedimos que complete una encuesta muy breve sobre su experiencia con este curso de capacitación, luego lo llevaremos a una página con enlaces a recursos de capacitación adicionales y enlaces útiles.

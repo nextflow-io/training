@@ -429,7 +429,7 @@ exit
 
 ---
 
-### Zusammenfassung
+### Fazit
 
 Du hast alle einzelnen Befehle interaktiv in den entsprechenden Containern getestet.
 

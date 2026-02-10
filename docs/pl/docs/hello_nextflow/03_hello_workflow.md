@@ -1,5 +1,7 @@
 # Część 3: Hello Workflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -62,7 +64,7 @@ Aby upewnić się, że wszystko działa, uruchom skrypt raz przed wprowadzeniem 
 nextflow run hello-workflow.nf
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -306,7 +308,7 @@ Przetestujmy to używając flagi `-resume`, ponieważ już pomyślnie uruchomili
 nextflow run hello-workflow.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -542,7 +544,7 @@ Spróbujmy.
 nextflow run hello-workflow.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console hl_lines="8"
     N E X T F L O W   ~  version 25.10.2
@@ -641,7 +643,7 @@ Spróbujmy:
 nextflow run hello-workflow.nf -resume
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -874,7 +876,7 @@ Spróbujmy uruchomić to z nazwą partii w wierszu poleceń.
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -1092,7 +1094,7 @@ Spróbujmy uruchomić to z bieżącą partią pozdrowień.
 nextflow run hello-workflow.nf -resume --batch trio
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
      N E X T F L O W   ~  version 25.10.2

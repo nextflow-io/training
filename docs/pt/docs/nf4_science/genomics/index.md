@@ -19,6 +19,8 @@ additional_information:
 
 # Nextflow para Genômica
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Um curso prático aplicando Nextflow a um caso de uso real de genômica: chamada de variantes com GATK.**
 
 Este curso se baseia no treinamento para iniciantes [Hello Nextflow](../../hello_nextflow/) e demonstra como usar o Nextflow no contexto específico do domínio de genômica.

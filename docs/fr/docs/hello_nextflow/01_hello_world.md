@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=fr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=fr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -122,7 +122,7 @@ Vous trouverez le script `hello-world.nf` dans votre répertoire actuel, qui dev
     }
     ```
 
-Un script de workflow Nextflow comprend généralement une ou plusieurs définitions de [**process**](https://nextflow.io/docs/latest/process.html) et le [**workflow**](https://nextflow.io/docs/latest/workflow.html) lui-même, plus quelques blocs optionnels (non présents ici) que nous présenterons plus tard.
+Un script de workflow Nextflow comprend généralement une ou plusieurs définitions de **process** et le **workflow** lui-même, plus quelques blocs optionnels (non présents ici) que nous présenterons plus tard.
 
 Chaque **process** décrit quelle(s) opération(s) l'étape correspondante dans le pipeline devrait accomplir, tandis que le **workflow** décrit la logique de flux de données qui connecte les différentes étapes.
 
@@ -888,7 +888,7 @@ Comme vous pouvez le voir, nous pouvons spécifier le type d'entrée que le work
 La syntaxe est `nom: Type = valeur_par_defaut`.
 Les types supportés incluent `String`, `Integer`, `Float`, `Boolean` et `Path`.
 
-!!! info "Information"
+!!! info "Info"
 
     Dans les anciens workflows, vous pouvez voir que tout ce bloc `params` est écrit simplement comme `input = 'Holà mundo!'`.
 
@@ -1113,7 +1113,7 @@ nextflow clean -before golden_cantor -f
 La sortie devrait être similaire à avant, mais disant maintenant « Removed » au lieu de « Would remove ».
 Notez que cela ne supprime pas les sous-répertoires à deux caractères (comme `a3/` ci-dessus) mais vide leur contenu.
 
-!!! warning "Avertissement"
+!!! Warning "Avertissement"
 
     La suppression des sous-répertoires de travail des exécutions passées les supprime du cache de Nextflow et supprime toutes les sorties qui étaient stockées dans ces répertoires.
     Cela signifie que cela brise la capacité de Nextflow à reprendre l'exécution sans relancer les **processus** correspondants.

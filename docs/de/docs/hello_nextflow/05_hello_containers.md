@@ -1,5 +1,7 @@
 # Teil 5: Hello Containers
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=de" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -281,7 +283,7 @@ Jetzt zeigt die Ausgabe den Linux-Pinguin Tux anstelle der Standard-Kuh, weil wi
 
 Da du dich innerhalb des Containers befindest, kannst du den `cowpy`-Befehl beliebig oft ausführen und die Eingabeparameter variieren, ohne dich mit Docker-Befehlen befassen zu müssen.
 
-!!! tip "Tipp"
+!!! Tip "Tipp"
 
     Verwende das '-c'-Flag, um einen anderen Charakter auszuwählen, einschließlich:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
@@ -464,7 +466,7 @@ Jetzt müssen wir das Modul importieren und den Prozess aufrufen.
 
 Füge die Import-Deklaration über dem Workflow-Block ein und fülle sie entsprechend aus.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
     // Module einbinden
@@ -494,7 +496,7 @@ Verbinden wir den `cowpy()`-Prozess mit der Ausgabe des `collectGreetings()`-Pro
 
 Nimm im Workflow-Block folgende Code-Änderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
@@ -534,7 +536,7 @@ Beachte, dass wir einen neuen CLI-Parameter, `params.character`, deklariert habe
 
 Dies ist technisch optional, aber es ist die empfohlene Praxis und eine Gelegenheit, einen Standardwert für den Charakter festzulegen, während wir dabei sind.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
     /*
@@ -569,7 +571,7 @@ Wir müssen die Workflow-Ausgaben aktualisieren, um die Ausgabe des `cowpy`-Proz
 
 Nimm im `workflow`-Block folgende Code-Änderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-containers.nf" linenums="34" hl_lines="6"
         publish:
@@ -600,7 +602,7 @@ Wir müssen die finale `cowpy_art`-Ausgabe zum `output`-Block hinzufügen. Währ
 
 Nimm im `output`-Block folgende Code-Änderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-containers.nf" linenums="42" hl_lines="3 7 11 15 18-21"
     output {
@@ -726,7 +728,7 @@ Wir können dasselbe Image verwenden, das wir direkt im ersten Abschnitt dieses 
 
 Bearbeite das `cowpy.nf`-Modul, um die `container`-Direktive zur Prozessdefinition wie folgt hinzuzufügen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="3"
     process cowpy {
@@ -780,7 +782,7 @@ Wir haben eine `nextflow.config`-Datei mit einer einzigen Codezeile bereitgestel
 
 Jetzt ändern wir das auf `true`, um Docker zu aktivieren:
 
-=== "Nachher"
+=== "Danach"
 
     ```console title="nextflow.config" linenums="1" hl_lines="1"
     docker.enabled = true

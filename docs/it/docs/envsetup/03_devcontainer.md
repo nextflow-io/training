@@ -2,11 +2,11 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Se ha un'installazione Docker locale o è disposto a installarne una, il modo più semplice per lavorare localmente con questi materiali è utilizzare la funzionalità devcontainer di Visual Studio Code. Questo approccio fornisce tutti gli strumenti e le dipendenze necessarie senza richiedere l'installazione manuale.
+Se avete un'installazione Docker locale o siete disposti a installarne una, il modo più semplice per lavorare localmente con questi materiali è utilizzare la funzionalità devcontainer di Visual Studio Code. Questo approccio fornisce tutti gli strumenti e le dipendenze necessarie senza richiedere l'installazione manuale.
 
 ## Requisiti
 
-Per utilizzare la configurazione devcontainer locale, avrà bisogno di:
+Per utilizzare la configurazione devcontainer locale, avrete bisogno di:
 
 - [Visual Studio Code](https://code.visualstudio.com/)
 - Un'installazione Docker locale, per esempio:
@@ -24,18 +24,18 @@ Per verificare che Docker buildx sia disponibile, eseguite:
 docker buildx version
 ```
 
-Se questo comando fallisce, dovrà installare l'estensione buildx prima di procedere.
+Se questo comando fallisce, dovrete installare l'estensione buildx prima di procedere.
 
 ## Istruzioni di configurazione
 
-Segua questi passaggi per configurare il vostro ambiente locale utilizzando i devcontainer di VS Code:
+Seguite questi passaggi per configurare il vostro ambiente locale utilizzando i devcontainer di VS Code:
 
 ### Installare l'estensione "Dev Containers" in VS Code
 
-- Apra VS Code
-- Vada su Extensions (Ctrl+Shift+X o Cmd+Shift+X su macOS)
-- Cerchi "Dev Containers"
-- Clicchi su "Install"
+- Aprite VS Code
+- Andate su Extensions (Ctrl+Shift+X o Cmd+Shift+X su macOS)
+- Cercate "Dev Containers"
+- Cliccate su "Install"
 
 ![Installing Dev Containers extension in VS Code](img/install_extension.png)
 
@@ -48,26 +48,26 @@ cd training
 
 ### Aprire il repository in VS Code:
 
-- Avvii VS Code
-- Selezioni **File -> Open Folder** dal menu
-- Navighi e selezioni la cartella del repository training appena clonata
-- Clicchi su **Open**
+- Avviate VS Code
+- Selezionate **File -> Open Folder** dal menu
+- Navigate e selezionate la cartella del repository training appena clonata
+- Cliccate su **Open**
 
 ### Riaprire nel Container
 
 Se VS Code vi chiede di "Reopen in Container", cliccate su di esso. In alternativa:
 
-- Prema F1 (o Ctrl+Shift+P / Cmd+Shift+P su macOS)
-- Digiti "Dev Containers: Reopen in Container"
-- **Importante**: Quando Le viene chiesto di selezionare una configurazione, scelga la configurazione devcontainer **local-dev**
+- Premete F1 (o Ctrl+Shift+P / Cmd+Shift+P su macOS)
+- Digitate "Dev Containers: Reopen in Container"
+- **Importante**: Quando vi viene chiesto di selezionare una configurazione, scegliete la configurazione devcontainer **local-dev**
 
 ![Reopen in Container prompt](img/reopen_prompt.png)
 
 ![Selecting local configuration](img/select_local_config.png)
 
-Attenda che il container venga costruito. Questo potrebbe richiedere alcuni minuti la prima volta poiché scarica e configura tutti i componenti necessari.
+Attendete che il container venga costruito. Questo potrebbe richiedere alcuni minuti la prima volta poiché scarica e configura tutti i componenti necessari.
 
-Una volta che il container è costruito e in esecuzione, avrà un ambiente completamente configurato con tutti gli strumenti necessari installati, inclusi:
+Una volta che il container è costruito e in esecuzione, avrete un ambiente completamente configurato con tutti gli strumenti necessari installati, inclusi:
 
 - Java
 - Nextflow
@@ -99,10 +99,10 @@ Questo dovrebbe visualizzare la versione di Nextflow e le informazioni di runtim
 
 ## Risoluzione dei problemi
 
-Se riscontra problemi con la configurazione del devcontainer:
+Se riscontrate problemi con la configurazione del devcontainer:
 
 1. Assicuratevi che la vostra installazione Docker (Docker Desktop, Colima, Docker Engine, ecc.) sia in esecuzione prima di aprire il devcontainer
-2. Verifichi di aver selezionato la configurazione **local-dev** quando richiesto
-3. Verifichi che Docker buildx sia installato e funzionante eseguendo `docker buildx version`
-4. Se il container non riesce a costruirsi, provi a ricostruirlo eseguendo il comando "Dev Containers: Rebuild Container"
-5. Per problemi persistenti, consulti la [guida alla risoluzione dei problemi di VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/troubleshooting)
+2. Verificate di aver selezionato la configurazione **local-dev** quando richiesto
+3. Verificate che Docker buildx sia installato e funzionante eseguendo `docker buildx version`
+4. Se il container non riesce a costruirsi, provate a ricostruirlo eseguendo il comando "Dev Containers: Rebuild Container"
+5. Per problemi persistenti, consultate la [guida alla risoluzione dei problemi di VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/troubleshooting)

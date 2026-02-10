@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-GitHub Codespaces es una plataforma basada en web que nos permite proporcionar un entorno preconfigurado para el entrenamiento, respaldado por máquinas virtuales en la nube.
+GitHub Codespaces es una plataforma basada en web que nos permite proporcionar un entorno preconfigurado para la capacitación, respaldado por máquinas virtuales en la nube.
 La plataforma es operada por Github (que es propiedad de Microsoft), y es accesible de forma gratuita (con cuotas de uso) para cualquier persona con una cuenta de Github.
 
 !!! warning "Advertencia"
@@ -16,9 +16,9 @@ Puede crear una cuenta gratuita de GitHub desde la [página principal de GitHub]
 
 ## Iniciar su GitHub Codespace
 
-Una vez que haya iniciado sesión en GitHub, abra este enlace en su navegador para abrir el entorno de entrenamiento de Nextflow: <https://codespaces.new/nextflow-io/training?quickstart=1&ref=master>
+Una vez que haya iniciado sesión en GitHub, abra este enlace en su navegador para abrir el entorno de capacitación de Nextflow: <https://codespaces.new/nextflow-io/training?quickstart=1&ref=master>
 
-Alternativamente, puede hacer clic en el botón que se muestra a continuación, que se repite en cada curso de entrenamiento (normalmente en la página de Orientación).
+Alternativamente, puede hacer clic en el botón que se muestra a continuación, que se repite en cada curso de capacitación (normalmente en la página de Orientación).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -39,15 +39,15 @@ Sin embargo, es posible personalizar el entorno haciendo clic en el botón "Chan
 
     #### Branch
 
-    Esto le permite seleccionar una versión diferente de los materiales de entrenamiento.
+    Esto le permite seleccionar una versión diferente de los materiales de capacitación.
     La rama `master` generalmente contiene correcciones de errores y materiales que han sido recientemente desarrollados y aprobados pero que aún no se han publicado en el sitio web.
     Otras ramas contienen trabajo en progreso que puede no ser completamente funcional.
 
     #### Machine type
 
-    Esto le permite personalizar la máquina virtual que usará para trabajar en el entrenamiento.
+    Esto le permite personalizar la máquina virtual que usará para trabajar en la capacitación.
 
-    Usar una máquina con más núcleos le permite aprovechar mejor la capacidad de Nextflow para paralelizar la ejecución del flujo de trabajo.
+    Usar una máquina con más núcleos le permite aprovechar mejor la capacidad de Nextflow para paralelizar la ejecución del workflow.
     Sin embargo, consumirá su asignación de cuota gratuita más rápido, por lo que no recomendamos cambiar esta configuración a menos que se aconseje en las instrucciones del curso que planea tomar.
 
     Consulte 'Cuotas de GitHub Codespaces' a continuación para más detalles sobre las cuotas.
@@ -57,7 +57,7 @@ Sin embargo, es posible personalizar el entorno haciendo clic en el botón "Chan
 Abrir un nuevo entorno de GitHub Codespaces por primera vez puede tomar varios minutos, porque el sistema tiene que configurar su máquina virtual, así que no se preocupe si hay un tiempo de espera.
 Sin embargo, no debería tomar más de cinco minutos.
 
-## Navegar por la interfaz de entrenamiento
+## Navegar por la interfaz de capacitación
 
 Una vez que su GitHub Codespaces haya cargado, debería ver algo similar a lo siguiente (que puede abrirse en modo claro dependiendo de las preferencias de su cuenta):
 

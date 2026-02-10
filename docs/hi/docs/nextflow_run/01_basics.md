@@ -135,7 +135,7 @@ Hello World!
 डिफ़ॉल्ट रूप से, Nextflow pipeline outputs को तुम्हारे current path में `results` नाम की डायरेक्टरी में save करेगा।
 यह बदलने के लिए कि तुम्हारी फ़ाइलें कहां publish होती हैं, `-output-dir` CLI flag का उपयोग करो (या संक्षेप में `-o`)
 
-!!! danger
+!!! danger "खतरा"
 
     ध्यान दो कि `--input` में दो hyphens हैं और `-output-dir` में एक!
     यह इसलिए है क्योंकि `--input` एक pipeline _parameter_ है और `-output-dir` एक core Nextflow CLI flag है।
@@ -169,7 +169,7 @@ hello_results
 
 तो अब, हम hood के नीचे झांकने जा रहे हैं यह देखने के लिए कि Nextflow ने वास्तव में कहां काम execute किया।
 
-!!! warning "चेतावनी"
+!!! Warning "चेतावनी"
 
     सभी workflows results डायरेक्टरी में outputs publish करने के लिए सेट अप नहीं होंगी, और/या डायरेक्टरी के नाम और संरचना भिन्न हो सकती है।
     इस सेक्शन में थोड़ा आगे, हम तुम्हें दिखाएंगे कि यह व्यवहार कहां निर्दिष्ट है यह कैसे पता करें।
@@ -369,7 +369,7 @@ echo 'Hello World!' > output.txt
 
 तुम्हें `1-hello.nf` script अपनी current डायरेक्टरी में मिलेगी, जो `nextflow-run` होनी चाहिए। इसे editor pane में खोलो।
 
-??? full-code "पूर्ण code फ़ाइल"
+??? full-code "पूर्ण कोड फ़ाइल"
 
     ```groovy title="1-hello.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -719,7 +719,7 @@ nextflow clean -before backstabbing_swartz -f
 आउटपुट पहले जैसा ही होना चाहिए, लेकिन अब 'Would remove' के बजाय 'Removed' कह रहा है।
 ध्यान दो कि यह two-character subdirectories (जैसे ऊपर `eb/`) को नहीं हटाता लेकिन यह उनकी सामग्री खाली कर देता है।
 
-!!! warning "चेतावनी"
+!!! Warning "चेतावनी"
 
     पिछले runs की work subdirectories delete करने से उन्हें Nextflow के cache से हटा दिया जाता है और उन directories में stored कोई भी outputs delete हो जाते हैं।
     इसका मतलब है कि यह संबंधित processes को फिर से चलाए बिना execution resume करने की Nextflow की क्षमता को तोड़ देता है।

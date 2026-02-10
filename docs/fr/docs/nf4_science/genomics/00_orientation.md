@@ -45,7 +45,7 @@ Vous pouvez configurer VSCode pour qu'il se concentre sur ce répertoire, de sor
 code .
 ```
 
-!!! tip
+!!! tip "Astuce"
 
     Si pour une raison quelconque vous sortez de ce répertoire (par exemple si votre codespace se met en veille), vous pouvez toujours utiliser le chemin complet pour y revenir, en supposant que vous travaillez dans l'environnement de formation Github Codespaces :
 

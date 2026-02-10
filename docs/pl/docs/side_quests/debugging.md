@@ -514,7 +514,7 @@ Jeśli otrzymasz błąd 'No such variable', możesz go naprawić, definiując zm
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"
+        path "${sample_name}_processed.txt"
 
         script:
         // Zdefiniuj zmienne w kodzie Groovy przed skryptem
@@ -651,7 +651,7 @@ Jeśli chcesz użyć zmiennej Bash, musisz zmienić znaczenie znaku dolara w ten
     }
     ```
 
-To mówi Nextflow, aby interpretować to jako zmienną Bash.
+To mówi Nextflow, aby interpretował to jako zmienną Bash.
 
 #### Uruchom pipeline
 
@@ -1662,7 +1662,7 @@ nextflow run missing_software.nf -profile docker
     [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-!!! note
+!!! note "Uwaga"
 
     Aby dowiedzieć się więcej o tym, jak Nextflow używa kontenerów, zobacz [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
 
@@ -2031,7 +2031,7 @@ Czasami chcesz wychwycić problemy zanim jakiekolwiek procesy się uruchomią. N
 
 Tryb podglądu pozwala testować logikę workflow'a bez wykonywania poleceń. Może to być dość przydatne do szybkiego sprawdzenia struktury Twojego workflow'a i upewnienia się, że procesy są poprawnie połączone bez uruchamiania żadnych rzeczywistych poleceń.
 
-!!! note
+!!! note "Uwaga"
 
     Jeśli naprawiłeś wcześniej `bad_syntax.nf`, wprowadź ponownie błąd składni, usuwając nawias zamykający po bloku `script` przed uruchomieniem tego polecenia.
 
@@ -2236,7 +2236,7 @@ Ten profil włącza wyjście w czasie rzeczywistym, zachowuje katalogi robocze i
 
 Teraz czas zastosować systematyczne podejście do debugowania w praktyce. Workflow `buggy_workflow.nf` zawiera kilka typowych błędów reprezentujących typy problemów, z którymi spotkasz się w rozwoju rzeczywistych workflow'ów.
 
-!!! exercise
+!!! exercise "Ćwiczenie"
 
     Użyj systematycznego podejścia do debugowania, aby zidentyfikować i naprawić wszystkie błędy w `buggy_workflow.nf`. Ten workflow próbuje przetworzyć dane próbek z pliku CSV, ale zawiera wiele celowych błędów reprezentujących typowe scenariusze debugowania.
 
@@ -2299,7 +2299,7 @@ Teraz czas zastosować systematyczne podejście do debugowania w praktyce. Workf
     nextflow run buggy_workflow.nf -resume
     ```
 
-    ??? solution
+    ??? solution "Rozwiązanie"
         `buggy_workflow.nf` zawiera 9 lub 10 różnych błędów (w zależności od tego, jak liczysz), obejmujących wszystkie główne kategorie debugowania. Oto systematyczny podział każdego błędu i jak go naprawić.
 
         Zacznijmy od tych błędów składni:

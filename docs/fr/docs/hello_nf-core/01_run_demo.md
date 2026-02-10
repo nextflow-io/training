@@ -115,7 +115,7 @@ tree -L 2 $NXF_HOME/assets/
 2 directories, 0 files
 ```
 
-!!! note
+!!! note "Note"
 
     Le chemin complet peut différer sur votre système si vous n'utilisez pas notre environnement de formation.
 
@@ -162,7 +162,7 @@ De manière pratique, chaque pipeline nf-core est fourni avec un profil de test.
 Il s'agit d'un ensemble minimal de paramètres de configuration permettant au pipeline de s'exécuter en utilisant un petit jeu de données de test hébergé dans le dépôt [nf-core/test-datasets](https://github.com/nf-core/test-datasets).
 C'est un excellent moyen d'essayer rapidement un pipeline à petite échelle.
 
-!!! note
+!!! note "Note"
 
     Le système de profils de configuration de Nextflow vous permet de basculer facilement entre différents moteurs de conteneurs ou environnements d'exécution.
     Pour plus de détails, consultez [Hello Nextflow Partie 6 : Configuration](../hello_nextflow/06_hello_config.md).
@@ -232,9 +232,9 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 
 C'est ce qu'on appelle une feuille d'échantillons (samplesheet), et c'est la forme d'entrée la plus courante pour les pipelines nf-core.
 
-!!! note
+!!! note "Note"
 
-    Ne vous inquiétez pas si vous n'êtes pas familier avec les formats et types de données, ce n'est pas important pour la suite.
+    Ne vous inquiétez pas si vous n'êtes pas familier·ère avec les formats et types de données, ce n'est pas important pour la suite.
 
 Cela confirme donc que nous avons tout ce dont nous avons besoin pour essayer le pipeline.
 
@@ -308,7 +308,7 @@ Si votre sortie correspond à celle-ci, félicitations ! Vous venez d'exécuter 
 Vous remarquerez qu'il y a beaucoup plus de sortie console que lorsque vous exécutez un pipeline Nextflow basique.
 Il y a un en-tête qui inclut un résumé de la version du pipeline, des entrées et sorties, et quelques éléments de configuration.
 
-!!! note
+!!! note "Note"
 
     Votre sortie affichera des horodatages, des noms d'exécution et des chemins de fichiers différents, mais la structure globale et l'exécution des processus devraient être similaires.
 
@@ -368,7 +368,7 @@ Par exemple, le fichier `execution_timeline_*` vous montre quels processus ont �
 
 ![rapport de chronologie d'exécution](./img/execution_timeline.png)
 
-!!! note
+!!! note "Note"
 
     Ici, les tâches n'ont pas été exécutées en parallèle car nous fonctionnons sur une machine minimaliste dans Github Codespaces.
     Pour voir ces tâches s'exécuter en parallèle, essayez d'augmenter l'allocation CPU de votre codespace et les limites de ressources dans la configuration de test.
@@ -447,7 +447,7 @@ Plus précisément, les pipelines nf-core font un usage abondant des subworkflow
 
 Cela peut sembler un peu abstrait, alors jetons un coup d'œil à la façon dont cela est utilisé en pratique dans le pipeline `nf-core/demo`.
 
-!!! note
+!!! note "Note"
 
     Nous ne passerons pas en revue le code réel de la _façon_ dont ces composants modulaires sont connectés, car il y a une complexité supplémentaire associée à l'utilisation des subworkflows qui peut être déroutante, et comprendre cela n'est pas nécessaire à ce stade de la formation.
     Pour l'instant, nous allons nous concentrer sur l'organisation générale et la logique.
@@ -463,7 +463,7 @@ Voici à quoi ressemblent les relations entre les composants de code pertinents 
 Il y a un script dit _point d'entrée_ appelé `main.nf`, qui agit comme une enveloppe pour deux types de workflows imbriqués : le workflow contenant la logique d'analyse réelle, situé sous `workflows/` et appelé `demo.nf`, et un ensemble de workflows de gestion situés sous `subworkflows/`.
 Le workflow `demo.nf` fait appel aux **modules** situés sous `modules/` ; ceux-ci contiennent les **processus** qui effectueront les étapes d'analyse réelles.
 
-!!! note
+!!! note "Note"
 
     Les subworkflows ne sont pas limités aux fonctions de gestion, et ils peuvent utiliser des modules de processus.
 
@@ -488,7 +488,7 @@ Nous couvrirons les différences pertinentes dans la partie suivante de ce cours
 
 Le workflow `demo.nf` fait appel aux **modules** situés sous `modules/`, que nous examinerons ensuite.
 
-!!! note
+!!! note "Note"
 
     Certains workflows d'analyse nf-core affichent des niveaux supplémentaires d'imbrication en appelant des subworkflows de niveau inférieur.
     Ceci est principalement utilisé pour encapsuler deux modules ou plus qui sont couramment utilisés ensemble dans des segments de pipeline facilement réutilisables.
@@ -574,7 +574,7 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
 Comme noté ci-dessus, le pipeline `nf-core/demo` n'inclut aucun subworkflow spécifique à l'analyse, donc tous les subworkflows que nous voyons ici sont des workflows dits de 'gestion' ou 'utilitaires', comme indiqué par le préfixe `utils_` dans leurs noms.
 Ces subworkflows sont ce qui produit le joli en-tête nf-core dans la sortie console, parmi d'autres fonctions accessoires.
 
-!!! tip
+!!! tip "Astuce"
 
     Mis à part leur modèle de nommage, une autre indication que ces subworkflows n'effectuent aucune fonction véritablement liée à l'analyse est qu'ils n'appellent aucun processus du tout.
 
@@ -623,7 +623,7 @@ C'est ce qu'on appelle la validation d'entrée, et devrait idéalement être eff
 Tout comme pour la configuration, le projet nf-core a des opinions très arrêtées sur la validation des entrées, et recommande l'utilisation du [plugin nf-schema](https://nextflow-io.github.io/nf-schema/latest/), un plugin Nextflow qui fournit des capacités de validation complètes pour les pipelines Nextflow.
 
 Nous couvrirons ce sujet plus en détail dans la Partie 5 de ce cours.
-Pour l'instant, soyez simplement conscient qu'il existe deux fichiers JSON fournis à cet effet, `nextflow_schema.json` et `assets/schema_input.json`.
+Pour l'instant, soyez simplement conscient·e qu'il existe deux fichiers JSON fournis à cet effet, `nextflow_schema.json` et `assets/schema_input.json`.
 
 Le `nextflow_schema.json` est un fichier utilisé pour stocker des informations sur les paramètres du pipeline, y compris le type, la description et le texte d'aide dans un format lisible par machine.
 Ceci est utilisé à diverses fins, notamment la validation automatisée des paramètres, la génération de texte d'aide et le rendu de formulaires de paramètres interactifs dans les interfaces utilisateur.
@@ -640,6 +640,6 @@ Vous savez quels sont les principaux composants d'un pipeline nf-core et comment
 
 Faites une pause ! C'était beaucoup. Lorsque vous vous sentez rafraîchi·e et prêt·e, passez à la section suivante pour appliquer ce que vous avez appris afin d'écrire un pipeline compatible nf-core.
 
-!!! tip
+!!! tip "Astuce"
 
     Si vous souhaitez apprendre à composer des workflows avec des subworkflows avant de passer à la partie suivante, consultez la [Quête Secondaire Workflows de Workflows](../side_quests/workflows_of_workflows.md).

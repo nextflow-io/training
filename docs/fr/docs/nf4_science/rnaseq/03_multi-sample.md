@@ -40,7 +40,7 @@ params {
     // Entrée principale
     input_csv: Path = "data/single-end.csv"
 
-    // Archive de l'index du génome de référence
+    // Archive du génome de référence
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 }
 ```
@@ -139,7 +139,7 @@ params {
     // Entrée principale
     input_csv: Path = "data/single-end.csv"
 
-    // Archive de l'index du génome de référence
+    // Archive du génome de référence
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 
     // ID de rapport
@@ -165,7 +165,7 @@ Dans le cas de notre workflow, nous avons les sorties suivantes à agréger :
 
 L'exemple de syntaxe devient donc :
 
-```groovy title="Application de .mix() dans l'appel MULTIQC"
+```groovy title="Applying .mix() in the MULTIQC call"
         FASTQC.out.zip.mix(
         FASTQC.out.html,
         TRIM_GALORE.out.trimming_reports,
@@ -180,7 +180,7 @@ Et nous devons également lui donner le paramètre `report_id`.
 
 Cela nous donne ce qui suit :
 
-```groovy title="L'appel MULTIQC complet" linenums="33"
+```groovy title="The completed MULTIQC call" linenums="33"
     // Génération de rapport QC complet
     MULTIQC(
         FASTQC.out.zip.mix(
@@ -202,7 +202,7 @@ workflow {
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
 
-    /// Contrôle qualité initial
+    /// Initial quality control
     FASTQC(read_ch)
 
     // Coupe des adaptateurs et QC post-coupe
@@ -246,13 +246,13 @@ nextflow run rnaseq.nf -resume
 
 Cette fois, nous voyons un seul appel à MULTIQC ajouté après les appels de processus mis en cache :
 
-Vous pouvez trouver les sorties sous `results/trimming` comme spécifié dans le processus `TRIM_GALORE` par la directive `publishDir`.
+Vous pouvez trouver les sorties sous `results/multiqc` comme spécifié dans le processus `MULTIQC` par la directive `publishDir`.
 
 ```bash
 tree -L 2 results/multiqc
 ```
 
-```console title="Sortie"
+```console title="Output"
 results/multiqc
 ├── all_single-end_data
 │   ├── cutadapt_filtered_reads_plot.txt
@@ -321,7 +321,7 @@ params {
     // Entrée principale
     input_csv: Path = "data/paired-end.csv"
 
-    // Archive de l'index du génome de référence
+    // Archive du génome de référence
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 
     // ID de rapport
@@ -440,7 +440,7 @@ params {
     // Entrée principale
     input_csv: Path = "data/paired-end.csv"
 
-    // Archive de l'index du génome de référence
+    // Archive du génome de référence
     hisat2_index_zip: Path = "data/genome_index.tar.gz"
 
     // ID de rapport
@@ -517,7 +517,7 @@ L'étape logique suivante serait de faire en sorte que le workflow accepte l'un 
 
 Vous savez comment adapter un workflow mono-échantillon pour paralléliser le traitement de plusieurs échantillons, générer un rapport QC complet et adapter le workflow pour utiliser des données de lecture appariée si nécessaire.
 
-### Et maintenant ?
+### Et ensuite ?
 
 Félicitations, vous avez terminé le mini-cours Nextflow pour RNAseq ! Célébrez votre succès et prenez une pause bien méritée !
 

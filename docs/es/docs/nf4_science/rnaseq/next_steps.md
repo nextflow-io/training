@@ -21,7 +21,7 @@ Si no ve su dominio representado por un caso de uso relacionado, háganoslo sabe
 **[nf-core](https://nf-co.re/)** es un esfuerzo colaborativo mundial para desarrollar pipelines estandarizados de código abierto para una amplia gama de aplicaciones de investigación científica.
 El proyecto incluye [más de 100 pipelines](https://nf-co.re/pipelines/) que están disponibles para usar listos para usar y [más de 1400 módulos de procesos](https://nf-co.re/modules/) que pueden integrarse en sus propios proyectos, así como un rico conjunto de herramientas para desarrolladores.
 
-El curso de entrenamiento **[Hello nf-core](../../hello_nf-core/index.md)** le presentará los pipelines curados por la comunidad nf-core y el marco de desarrollo, diseñado para ayudarle a escribir flujos de trabajo reproducibles, escalables y estandarizados. Aprenderá cómo usar pipelines nf-core existentes, contribuir a su desarrollo e incluso comenzar a construir los suyos propios, respaldado por mejores prácticas y una comunidad vibrante. Si está listo para aplicar sus habilidades de Nextflow en proyectos del mundo real, este es el siguiente paso perfecto.
+El curso de entrenamiento **[Hello nf-core](../../hello_nf-core/index.md)** le presentará los pipelines curados por la comunidad nf-core y el marco de desarrollo, diseñado para ayudarle a escribir workflows reproducibles, escalables y estandarizados. Aprenderá cómo usar pipelines nf-core existentes, contribuir a su desarrollo e incluso comenzar a construir los suyos propios, respaldado por mejores prácticas y una comunidad vibrante. Si está listo para aplicar sus habilidades de Nextflow en proyectos del mundo real, este es el siguiente paso perfecto.
 
 ### 1.3. Domine características más avanzadas de Nextflow
 
@@ -36,7 +36,7 @@ Con ese fin, actualmente estamos trabajando en una **colección de [Misiones Sec
 
 **[Seqera Platform](https://seqera.io/) es la mejor manera de ejecutar Nextflow en la práctica.**
 
-Es una plataforma basada en la nube desarrollada por los creadores de Nextflow que puede conectar a su propia infraestructura de cómputo (ya sea local, HPC o nube) para facilitar mucho el lanzamiento y gestión de sus flujos de trabajo, así como gestionar sus datos y ejecutar análisis de forma interactiva en un entorno de nube.
+Es una plataforma basada en la nube desarrollada por los creadores de Nextflow que puede conectar a su propia infraestructura de cómputo (ya sea local, HPC o nube) para facilitar mucho el lanzamiento y gestión de sus workflows, así como gestionar sus datos y ejecutar análisis de forma interactiva en un entorno de nube.
 
 El nivel gratuito está disponible para uso gratuito por parte de todos (con cuotas de uso).
 Los académicos calificados pueden obtener acceso gratuito de nivel Pro (sin limitaciones de uso) a través del [Programa Académico](https://seqera.io/academic/program/).

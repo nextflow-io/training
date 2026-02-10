@@ -585,7 +585,7 @@ Skopiuj następujący kod do pliku `main.nf`.
 ```groovy title="original-hello/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// importuj kod workflow'u z pliku hello.nf
+// zaimportuj kod workflow'u z pliku hello.nf
 include { HELLO } from './hello.nf'
 
 // zadeklaruj parametr wejściowy

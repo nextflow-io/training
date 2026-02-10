@@ -140,7 +140,7 @@ Działa zgodnie z oczekiwaniami, ale aby uczynić go komponowalnym, musimy zmien
 
 Komponowalne workflow'y mają kilka różnic w porównaniu z tymi, które widziałeś w tutorialu 'Hello Nextflow':
 
-- Blok workflow musi być nazwany
+- Blok `workflow` musi być nazwany
 - Wejścia są deklarowane za pomocą słowa kluczowego `take:`
 - Zawartość workflow'a jest umieszczona wewnątrz bloku `main:`
 - Wyjścia są deklarowane za pomocą słowa kluczowego `emit:`
@@ -187,7 +187,7 @@ nextflow run workflows/greeting.nf
     No entry workflow specified
     ```
 
-To informuje Cię o kolejnym nowym koncepcie, 'workflow wejściowym'. Workflow wejściowy to workflow, który jest wywoływany po uruchomieniu skryptu Nextflow'a. Domyślnie Nextflow użyje nienazwanego workflow'a jako workflow'a wejściowego, gdy jest obecny, i to robiłeś do tej pory, z blokami workflow zaczynającymi się w ten sposób:
+To informuje Cię o kolejnym nowym koncepcie, 'workflow wejściowym'. Workflow wejściowy to workflow, który jest wywoływany po uruchomieniu skryptu Nextflow'a. Domyślnie Nextflow użyje nienazwanego workflow'a jako workflow'a wejściowego, gdy jest obecny, i to robiłeś do tej pory, z blokami `workflow` zaczynającymi się w ten sposób:
 
 ```groovy title="hello.nf" linenums="1"
 workflow {
@@ -222,7 +222,7 @@ workflow {
 
 ```
 
-Zauważ, że nasz wpis workflow w tym pliku jest nienazwany, i to dlatego, że będziemy go używać jako workflow'a wejściowego.
+Zauważ, że nasz wpis `workflow` w tym pliku jest nienazwany, i to dlatego, że będziemy go używać jako workflow'a wejściowego.
 
 Uruchom to i zobacz wyjście:
 
@@ -412,7 +412,7 @@ Stosowanie tych technik w Swojej pracy umożliwi Ci budowanie bardziej wyrafinow
     }
     ```
 
-2.  **Importy workflow'ów:** Zbudowaliśmy dwa niezależne moduły workflow i zaimportowaliśmy je do głównego pipeline'u za pomocą instrukcji include.
+2.  **Importy workflow'ów:** Zbudowaliśmy dwa niezależne moduły workflow i zaimportowaliśmy je do głównego pipeline'u za pomocą instrukcji `include`.
 
     - Zaimportuj pojedynczy workflow
 

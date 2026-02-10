@@ -3,16 +3,16 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 L'ambiente di formazione contiene tutto il software, il codice e i dati necessari per seguire questo corso di formazione, quindi non è necessario installare nulla autonomamente.
-Tuttavia, è necessario un account (gratuito) per effettuare l'accesso, e si dovrebbe dedicare qualche minuto per familiarizzare con l'interfaccia.
+Tuttavia, è necessario un account (gratuito) per effettuare l'accesso, e dovreste dedicare qualche minuto per familiarizzare con l'interfaccia.
 
-Se non lo ha ancora fatto, completi il mini-corso [Configurazione dell'Ambiente](../../envsetup/) prima di procedere.
+Se non lo avete ancora fatto, completate il mini-corso [Configurazione dell'Ambiente](../../envsetup/) prima di procedere.
 
 ## Materiali forniti
 
 Nel corso di questa formazione, lavoreremo nella directory `nf4-science/rnaseq/`, nella quale è necessario spostarsi all'apertura dell'ambiente di formazione.
 Questa directory contiene tutti i file di codice, i dati di test e i file accessori necessari.
 
-Si senta libero di esplorare i contenuti di questa directory; il modo più semplice per farlo è utilizzare l'esploratore di file sul lato sinistro dell'ambiente di formazione nell'interfaccia VSCode.
+Sentitevi liberi di esplorare i contenuti di questa directory; il modo più semplice per farlo è utilizzare l'esploratore di file sul lato sinistro dell'ambiente di formazione nell'interfaccia VSCode.
 In alternativa, potete utilizzare il comando `tree`.
 Nel corso della formazione, utilizziamo l'output di `tree` per rappresentare la struttura e i contenuti delle directory in una forma leggibile, talvolta con modifiche minori per chiarezza.
 
@@ -22,7 +22,7 @@ Qui generiamo un sommario dei contenuti fino al secondo livello:
 tree . -L 3
 ```
 
-??? success "Contenuti della directory"
+??? success "Contenuto della directory"
 
     ```console
     rnaseq
@@ -64,14 +64,14 @@ tree . -L 3
 
 !!!note
 
-    Non si preoccupi se questo sembra molto; esamineremo le parti pertinenti in ogni fase del corso.
+    Non preoccupatevi se questo sembra molto; esamineremo le parti pertinenti in ogni fase del corso.
     Questo è solo per fornire una panoramica generale.
 
-**Ecco un riepilogo di ciò che dovrebbe sapere per iniziare:**
+**Ecco un riepilogo di ciò che dovreste sapere per iniziare:**
 
-- **Il file `rnaseq.nf`** è la struttura dello script del workflow che svilupperemo.
+- **Il file `rnaseq.nf`** è la struttura dello script del flusso di lavoro che svilupperemo.
 
-- **Il file `nextflow.config`** è un file di configurazione che imposta proprietà minime dell'ambiente. Può ignorarlo per ora.
+- **Il file `nextflow.config`** è un file di configurazione che imposta proprietà minime dell'ambiente. Potete ignorarlo per ora.
 
 - **La directory `data`** contiene i dati di input e le risorse correlate:
 
@@ -79,7 +79,7 @@ tree . -L 3
   - _Dati RNAseq_ che sono stati ridotti a una piccola regione per mantenere ridotte le dimensioni dei file, nella directory `reads/`.
   - _File CSV_ che elencano gli ID e i percorsi dei file di dati di esempio, per l'elaborazione in batch.
 
-- **La directory `solutions`** contiene gli script del workflow completi e i moduli risultanti da ogni fase del corso.
+- **La directory `solutions`** contiene gli script del flusso di lavoro completi e i moduli risultanti da ogni fase del corso.
   Sono destinati a essere utilizzati come riferimento per verificare il proprio lavoro e risolvere eventuali problemi.
   Il numero nel nome del file corrisponde alla fase della parte pertinente del corso.
 

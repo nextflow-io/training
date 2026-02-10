@@ -32,7 +32,7 @@ additional_information:
 
 Attraverso esempi pratici ed esercizi guidati, imparerete a utilizzare e sviluppare moduli e pipeline compatibili con nf-core, e a utilizzare efficacemente gli strumenti nf-core.
 
-Acquisirà le competenze e la sicurezza per iniziare a sviluppare pipeline secondo le best practice di nf-core.
+Acquisirete le competenze e la sicurezza per iniziare a sviluppare pipeline secondo le best practice di nf-core.
 
 <!-- additional_information -->
 
@@ -40,7 +40,7 @@ Acquisirà le competenze e la sicurezza per iniziare a sviluppare pipeline secon
 
 Questo corso è progettato per essere pratico, con esercizi orientati agli obiettivi strutturati per introdurre le informazioni gradualmente.
 
-Verrà introdotto a [**nf-core**](https://nf-co.re/), uno sforzo comunitario per sviluppare e mantenere un insieme curato di pipeline scientifiche costruite utilizzando Nextflow, oltre a strumenti e linee guida rilevanti che promuovono lo sviluppo aperto, i test e la revisione tra pari ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
+Verrete introdotti a [**nf-core**](https://nf-co.re/), uno sforzo comunitario per sviluppare e mantenere un insieme curato di pipeline scientifiche costruite utilizzando Nextflow, oltre a strumenti e linee guida rilevanti che promuovono lo sviluppo aperto, i test e la revisione tra pari ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
 
 Le pipeline sviluppate dalla comunità nf-core sono progettate per essere modulari, scalabili e portabili, consentendo ai ricercatori di adattarle ed eseguirle facilmente utilizzando i propri dati e risorse di calcolo.
 Le linee guida sulle best practice applicate dal progetto garantiscono inoltre che le pipeline siano robuste, ben documentate e validate su dataset reali.

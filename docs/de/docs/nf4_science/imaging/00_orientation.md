@@ -14,7 +14,7 @@ Falls nicht, tue dies bitte jetzt, idealerweise in einem zweiten Browserfenster 
 ## GitHub Codespaces
 
 Die GitHub Codespaces-Umgebung enthält alle Software, den Code und die Daten, die notwendig sind, um diesen Trainingskurs durchzuarbeiten, sodass du nichts selbst installieren musst.
-Du benötigst jedoch einen (kostenlosen) GitHub-Account, um dich anzumelden, und wenn du mit der Oberfläche nicht vertraut bist, solltest du dir ein paar Minuten Zeit nehmen, um dich damit vertraut zu machen, indem du den Mini-Kurs [GitHub Codespaces Orientation](../../envsetup/index.md) absolvierst.
+Du benötigst jedoch einen (kostenlosen) GitHub-Account, um dich anzumelden. Falls du mit der Oberfläche nicht vertraut bist, solltest du dir ein paar Minuten Zeit nehmen, um dich damit vertraut zu machen, indem du den Mini-Kurs [GitHub Codespaces Orientation](../../envsetup/index.md) absolvierst.
 
 ## Docker-Images vorab herunterladen
 
@@ -30,7 +30,7 @@ nextflow run nf-core/molkart -profile docker,test -stub -resume --outdir results
 Dieser Befehl lädt alle notwendigen Docker-Images im Hintergrund herunter.
 Du kannst mit dem Rest der Orientierung fortfahren, während dies läuft.
 
-!!!tip "Tipp"
+!!!tip
 
     Die `-stub`-Flag ermöglicht es der Pipeline, schnell zu laufen, ohne echte Daten zu verarbeiten, was perfekt zum Herunterladen von Images ist. Du kannst den Fortschritt im Terminal-Tab überwachen.
 
@@ -44,7 +44,7 @@ Wechsle jetzt das Verzeichnis, indem du diesen Befehl im Terminal ausführst:
 cd nf4-science/imaging/
 ```
 
-!!!tip "Tipp"
+!!!tip
 
     Falls du aus irgendeinem Grund dieses Verzeichnis verlässt, kannst du jederzeit den vollständigen Pfad verwenden, um dorthin zurückzukehren, vorausgesetzt du arbeitest in der GitHub Codespaces-Trainingsumgebung:
 

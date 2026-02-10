@@ -6,7 +6,7 @@ In questa prima parte del corso di formazione Nextflow per il Bioimaging, utiliz
 
 ## 1. Eseguire il workflow
 
-Le forniamo uno script di workflow denominato `hello-world.nf` che accetta un input tramite un argomento da riga di comando chiamato `--greeting` e produce un file di testo contenente quel saluto.
+Vi forniamo uno script di workflow denominato `hello-world.nf` che accetta un input tramite un argomento da riga di comando chiamato `--greeting` e produce un file di testo contenente quel saluto.
 Non esamineremo ancora il codice; vediamo prima come si presenta la sua esecuzione.
 
 ### 1.1. Avviare il workflow e monitorare l'esecuzione
@@ -28,7 +28,7 @@ executor >  local (1)
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Congratulazioni, ha appena eseguito il suo primo workflow Nextflow!
+Congratulazioni, avete appena eseguito il vostro primo workflow Nextflow!
 
 L'output più importante qui è l'ultima riga (riga 6):
 
@@ -38,19 +38,19 @@ L'output più importante qui è l'ultima riga (riga 6):
 
 Questo ci indica che il processo `sayHello` è stato eseguito con successo una volta (`1 of 1 ✔`).
 
-È ottimo, ma potrebbe chiedersi: dove si trova l'output?
+È ottimo, ma potreste chiedervi: dove si trova l'output?
 
 ### 1.2. Trovare il file di output nella directory `results`
 
 Questo workflow è configurato per pubblicare il suo output in una directory chiamata `results`.
-Se osserva la directory corrente, vedrà che quando ha eseguito il workflow, Nextflow ha creato una nuova directory chiamata `results`, che contiene un file chiamato `output.txt`.
+Se osservate la directory corrente, vedrete che quando avete eseguito il workflow, Nextflow ha creato una nuova directory chiamata `results`, che contiene un file chiamato `output.txt`.
 
 ```console title="results/" linenums="1"
 results
 └── output.txt
 ```
 
-Aprite il file; il contenuto dovrebbe corrispondere al saluto che ha specificato dalla riga di comando.
+Aprite il file; il contenuto dovrebbe corrispondere al saluto che avete specificato dalla riga di comando.
 
 <details>
   <summary>Contenuto del file</summary>
@@ -63,18 +63,18 @@ Hello World!
 
 È ottimo, il nostro workflow ha fatto ciò che doveva fare!
 
-Tuttavia, sia consapevole che il risultato 'pubblicato' è una copia (o in alcuni casi un symlink) dell'output effettivo prodotto da Nextflow quando ha eseguito il workflow.
+Tuttavia, siate consapevoli che il risultato 'pubblicato' è una copia (o in alcuni casi un symlink) dell'output effettivo prodotto da Nextflow quando ha eseguito il workflow.
 
 Quindi ora, daremo un'occhiata dietro le quinte per vedere dove Nextflow ha effettivamente eseguito il lavoro.
 
 !!! warning "Avviso"
 
     Non tutti i workflow saranno configurati per pubblicare gli output in una directory results, e/o il nome della directory potrebbe essere diverso.
-    Un po' più avanti in questa sezione, le mostreremo come scoprire dove è specificato questo comportamento.
+    Un po' più avanti in questa sezione, vi mostreremo come scoprire dove è specificato questo comportamento.
 
 ### 1.3. Trovare l'output originale e i log nella directory `work/`
 
-Quando esegue un workflow, Nextflow crea una 'directory di attività' distinta per ogni singola invocazione di ciascun processo nel workflow (=ogni passaggio nella pipeline).
+Quando eseguite un workflow, Nextflow crea una 'directory di attività' distinta per ogni singola invocazione di ciascun processo nel workflow (=ogni passaggio nella pipeline).
 Per ognuna, preparerà gli input necessari, eseguirà le istruzioni pertinenti e scriverà output e file di log all'interno di quella directory, che viene nominata automaticamente utilizzando un hash per renderla unica.
 
 Tutte queste directory di attività risiederanno sotto una directory chiamata `work` all'interno della vostra directory corrente (dove state eseguendo il comando).
@@ -83,14 +83,14 @@ Questo potrebbe sembrare confuso, quindi vediamo come appare nella pratica.
 
 Tornando all'output della console per il workflow che abbiamo eseguito in precedenza, avevamo questa riga:
 
-```console title="Estratto dell'output del comando" linenums="6"
+```console title="Excerpt of command output" linenums="6"
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Vede come la riga inizia con `[a3/7be2fa]`?
-Questa è una forma troncata del percorso della directory di attività per quella singola chiamata di processo, e le indica dove trovare l'output della chiamata del processo `sayHello` all'interno del percorso della directory `work/`.
+Vedete come la riga inizia con `[a3/7be2fa]`?
+Questa è una forma troncata del percorso della directory di attività per quella singola chiamata di processo, e vi indica dove trovare l'output della chiamata del processo `sayHello` all'interno del percorso della directory `work/`.
 
-Può trovare il percorso completo digitando il seguente comando (sostituendo `a3/7be2fa` con ciò che vede nel suo terminale) e premendo il tasto tab per completare automaticamente il percorso o aggiungendo un asterisco:
+Potete trovare il percorso completo digitando il seguente comando (sostituendo `a3/7be2fa` con ciò che vedete nel vostro terminale) e premendo il tasto tab per completare automaticamente il percorso o aggiungendo un asterisco:
 
 ```bash
 tree work/a3/7be2fa*
@@ -102,14 +102,14 @@ Diamo un'occhiata a cosa c'è dentro.
 
 !!! Tip "Suggerimento"
 
-    Se esplora il contenuto della sottodirectory di attività nell'esploratore file di VSCode, vedrà tutti i file immediatamente.
-    Tuttavia, i file di log sono impostati per essere invisibili nel terminale, quindi se vuole utilizzare `ls` o `tree` per visualizzarli, dovrà impostare l'opzione pertinente per visualizzare i file invisibili.
+    Se esplorate il contenuto della sottodirectory di attività nell'esploratore file di VSCode, vedrete tutti i file immediatamente.
+    Tuttavia, i file di log sono impostati per essere invisibili nel terminale, quindi se volete utilizzare `ls` o `tree` per visualizzarli, dovrete impostare l'opzione pertinente per visualizzare i file invisibili.
 
     ```bash
     tree -a work
     ```
 
-I nomi esatti delle sottodirectory saranno diversi sul suo sistema.
+I nomi esatti delle sottodirectory saranno diversi sul vostro sistema.
 
 <details>
   <summary>Contenuto della directory</summary>
@@ -130,7 +130,7 @@ work
 
 </details>
 
-Dovrebbe riconoscere immediatamente il file `output.txt`, che è infatti l'output originale del processo `sayHello` che è stato pubblicato nella directory `results`.
+Dovreste riconoscere immediatamente il file `output.txt`, che è infatti l'output originale del processo `sayHello` che è stato pubblicato nella directory `results`.
 Se lo aprite, troverete di nuovo il saluto `Hello World!`.
 
 <details>
@@ -169,19 +169,19 @@ echo 'Hello World!' > output.txt
 
 !!! Tip "Suggerimento"
 
-    Quando qualcosa va storto e deve risolvere il problema, può essere utile guardare lo script `command.sh` per verificare esattamente quale comando Nextflow ha composto in base alle istruzioni del workflow, all'interpolazione delle variabili e così via.
+    Quando qualcosa va storto e dovete risolvere il problema, può essere utile guardare lo script `command.sh` per verificare esattamente quale comando Nextflow ha composto in base alle istruzioni del workflow, all'interpolazione delle variabili e così via.
 
 ### 1.4. Esercizio facoltativo: rieseguire con saluti diversi
 
-Provi a rieseguire il workflow alcune volte con valori diversi per l'argomento `--greeting`, quindi osservi sia il contenuto della directory `results/` che le directory di attività.
+Provate a rieseguire il workflow alcune volte con valori diversi per l'argomento `--greeting`, quindi osservate sia il contenuto della directory `results/` che le directory di attività.
 
-Osservi come gli output e i log delle directory di attività isolate vengono preservati, mentre il contenuto della directory `results` viene sovrascritto dall'output delle esecuzioni successive.
+Osservate come gli output e i log delle directory di attività isolate vengono preservati, mentre il contenuto della directory `results` viene sovrascritto dall'output delle esecuzioni successive.
 
 ### Takeaway
 
-Sa come eseguire un semplice script Nextflow, monitorarne l'esecuzione e trovare i suoi output.
+Sapete come eseguire un semplice script Nextflow, monitorarne l'esecuzione e trovare i suoi output.
 
-### Cosa succede dopo?
+### Cosa c'è dopo?
 
 Imparate a leggere uno script Nextflow di base e a identificare come i suoi componenti si relazionano alla sua funzionalità.
 
@@ -232,18 +232,18 @@ workflow {
 
 </details>
 
-Uno script Nextflow coinvolge due tipi principali di componenti fondamentali: uno o più **processi**, e il **workflow** stesso.
-Ogni **processo** descrive quale operazione/i deve compiere il passaggio corrispondente nella pipeline, mentre il **workflow** descrive la logica del flusso di dati che collega i vari passaggi.
+Uno script Nextflow coinvolge due tipi principali di componenti fondamentali: uno o più **process**, e il **workflow** stesso.
+Ogni **process** descrive quale operazione/i deve compiere il passaggio corrispondente nella pipeline, mentre il **workflow** descrive la logica del flusso di dati che collega i vari passaggi.
 
 Diamo prima un'occhiata più da vicino al blocco **process**, poi esamineremo il blocco **workflow**.
 
 ### 2.2. La definizione di `process`
 
-Il primo blocco di codice descrive un **processo**.
+Il primo blocco di codice descrive un **process**.
 La definizione del processo inizia con la parola chiave `process`, seguita dal nome del processo e infine dal corpo del processo delimitato da parentesi graffe.
-Il corpo del processo deve contenere un blocco script che specifica il comando da eseguire, che può essere qualsiasi cosa sia in grado di eseguire in un terminale a riga di comando.
+Il corpo del processo deve contenere un blocco script che specifica il comando da eseguire, che può essere qualsiasi cosa siate in grado di eseguire in un terminale a riga di comando.
 
-Qui abbiamo un **processo** chiamato `sayHello` che accetta una variabile di **input** chiamata `greeting` e scrive il suo **output** in un file denominato `output.txt`.
+Qui abbiamo un **process** chiamato `sayHello` che accetta una variabile di **input** chiamata `greeting` e scrive il suo **output** in un file denominato `output.txt`.
 
 <details>
   <summary>Codice</summary>
@@ -303,7 +303,7 @@ workflow {
 ```
 
 Questa è una definizione di **workflow** molto minimale.
-In una pipeline del mondo reale, il workflow contiene tipicamente più chiamate a **processi** collegati da **canali**, e potrebbero esserci valori predefiniti impostati per gli input delle variabili.
+In una pipeline del mondo reale, il workflow contiene tipicamente più chiamate a **process** collegati da **canali**, e potrebbero esserci valori predefiniti impostati per gli input delle variabili.
 
 Vedremo questo in azione quando eseguiremo nf-core/molkart nella Parte 2 del corso.
 
@@ -321,9 +321,9 @@ Infatti, semplicemente dichiarando `params.someParameterName` ci permetterà di 
 
 ### Takeaway
 
-Ora sa come è strutturato un semplice workflow Nextflow e come i componenti di base si relazionano alla sua funzionalità.
+Ora sapete come è strutturato un semplice workflow Nextflow e come i componenti di base si relazionano alla sua funzionalità.
 
-### Cosa succede dopo?
+### Cosa c'è dopo?
 
 Imparate a gestire comodamente le esecuzioni del workflow.
 
@@ -331,21 +331,21 @@ Imparate a gestire comodamente le esecuzioni del workflow.
 
 ## 3. Gestire le esecuzioni del workflow
 
-Sapere come avviare workflow e recuperare output è ottimo, ma scoprirà rapidamente che ci sono alcuni altri aspetti della gestione del workflow che renderanno la sua vita più facile.
+Sapere come avviare workflow e recuperare output è ottimo, ma scoprirete rapidamente che ci sono alcuni altri aspetti della gestione del workflow che renderanno la vostra vita più facile.
 
-Qui vi mostriamo come sfruttare la funzione `resume` per quando deve rilanciare lo stesso workflow, come ispezionare i log di esecuzione con `nextflow log`, e come eliminare le directory work più vecchie con `nextflow clean`.
+Qui vi mostriamo come sfruttare la funzione `resume` per quando dovete rilanciare lo stesso workflow, come ispezionare i log di esecuzione con `nextflow log`, e come eliminare le directory work più vecchie con `nextflow clean`.
 
 ### 3.1. Rilanciare un workflow con `-resume`
 
-A volte, vorrà rieseguire una pipeline che ha già avviato in precedenza senza rifare alcun lavoro che è già stato completato con successo.
+A volte, vorrete rieseguire una pipeline che avete già avviato in precedenza senza rifare alcun lavoro che è già stato completato con successo.
 
-Nextflow ha un'opzione chiamata `-resume` che le permette di farlo.
+Nextflow ha un'opzione chiamata `-resume` che vi permette di farlo.
 Specificamente, in questa modalità, tutti i processi che sono già stati eseguiti con esattamente lo stesso codice, impostazioni e input verranno saltati.
-Questo significa che Nextflow eseguirà solo i processi che ha aggiunto o modificato dall'ultima esecuzione, o ai quali sta fornendo nuove impostazioni o input.
+Questo significa che Nextflow eseguirà solo i processi che avete aggiunto o modificato dall'ultima esecuzione, o ai quali state fornendo nuove impostazioni o input.
 
 Ci sono due vantaggi chiave nel farlo:
 
-- Se sta sviluppando una pipeline, potete iterare più rapidamente poiché deve solo eseguire il/i processo/i su cui state lavorando attivamente per testare le vostre modifiche.
+- Se state sviluppando una pipeline, potete iterare più rapidamente poiché dovete solo eseguire il/i processo/i su cui state lavorando attivamente per testare le vostre modifiche.
 - Se state eseguendo una pipeline in produzione e qualcosa va storto, in molti casi potete risolvere il problema e rilanciare la pipeline, e riprenderà l'esecuzione dal punto di errore, il che può farvi risparmiare molto tempo e calcolo.
 
 Per utilizzarlo, aggiungete semplicemente `-resume` al vostro comando ed eseguite:
@@ -364,18 +364,18 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
     [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
     ```
 
-Cerchi il bit `cached:` che è stato aggiunto nella riga dello stato del processo (riga 5), che significa che Nextflow ha riconosciuto di aver già fatto questo lavoro e ha semplicemente riutilizzato il risultato dall'esecuzione precedente riuscita.
+Cercate il bit `cached:` che è stato aggiunto nella riga dello stato del processo (riga 5), che significa che Nextflow ha riconosciuto di aver già fatto questo lavoro e ha semplicemente riutilizzato il risultato dall'esecuzione precedente riuscita.
 
-Può anche vedere che l'hash della sottodirectory work è lo stesso dell'esecuzione precedente.
+Potete anche vedere che l'hash della sottodirectory work è lo stesso dell'esecuzione precedente.
 Nextflow vi sta letteralmente indicando l'esecuzione precedente e dicendo "L'ho già fatto lì."
 
 !!! Tip "Suggerimento"
 
-    Quando riesegue una pipeline con `resume`, Nextflow non sovrascrive nessun file scritto in una directory `publishDir` da alcuna chiamata di processo che è stata precedentemente eseguita con successo.
+    Quando rieseguite una pipeline con `resume`, Nextflow non sovrascrive nessun file scritto in una directory `publishDir` da alcuna chiamata di processo che è stata precedentemente eseguita con successo.
 
 ### 3.2. Ispezionare il log delle esecuzioni passate
 
-Ogni volta che avvia un workflow nextflow, viene scritta una riga in un file di log chiamato `history`, sotto una directory nascosta chiamata `.nextflow` nella directory di lavoro corrente.
+Ogni volta che avviate un workflow nextflow, viene scritta una riga in un file di log chiamato `history`, sotto una directory nascosta chiamata `.nextflow` nella directory di lavoro corrente.
 
 Un modo più conveniente per accedere a queste informazioni è utilizzare il comando `nextflow log`.
 
@@ -383,28 +383,28 @@ Un modo più conveniente per accedere a queste informazioni è utilizzare il com
 nextflow log
 ```
 
-Questo produrrà il contenuto del file di log nel terminale, mostrandole il timestamp, il nome dell'esecuzione, lo stato e la riga di comando completa per ogni esecuzione Nextflow che è stata avviata dall'interno della directory di lavoro corrente.
+Questo produrrà il contenuto del file di log nel terminale, mostrandovi il timestamp, il nome dell'esecuzione, lo stato e la riga di comando completa per ogni esecuzione Nextflow che è stata avviata dall'interno della directory di lavoro corrente.
 
 ### 3.3. Eliminare le directory work più vecchie
 
 Durante il processo di sviluppo, tipicamente eseguirete le vostre bozze di pipeline un gran numero di volte, il che può portare a un accumulo di molti file in molte sottodirectory.
 Poiché le sottodirectory sono nominate casualmente, è difficile dire dai loro nomi quali sono le esecuzioni più vecchie rispetto a quelle più recenti.
 
-Nextflow include un comodo sottocomando `clean` che potete eliminare automaticamente le sottodirectory work per esecuzioni passate che non vi interessano più, con diverse [opzioni](https://www.nextflow.io/docs/latest/reference/cli.html#clean) per controllare cosa verrà eliminato.
+Nextflow include un comodo sottocomando `clean` che può eliminare automaticamente le sottodirectory work per esecuzioni passate che non vi interessano più, con diverse [opzioni](https://www.nextflow.io/docs/latest/reference/cli.html#clean) per controllare cosa verrà eliminato.
 
-Può utilizzare il log Nextflow per cercare un'esecuzione in base al suo timestamp e/o alla riga di comando, quindi utilizzare `nextflow clean -before <run_name> -f` per eliminare le directory work dalle esecuzioni precedenti.
+Potete utilizzare il log Nextflow per cercare un'esecuzione in base al suo timestamp e/o alla riga di comando, quindi utilizzare `nextflow clean -before <run_name> -f` per eliminare le directory work dalle esecuzioni precedenti.
 
 !!! Warning "Avviso"
 
     L'eliminazione delle sottodirectory work dalle esecuzioni passate le rimuove dalla cache di Nextflow ed elimina qualsiasi output che era memorizzato in quelle directory.
     Questo significa che interrompe la capacità di Nextflow di riprendere l'esecuzione senza rieseguire i processi corrispondenti.
 
-    È responsabile del salvataggio di qualsiasi output che vi interessa o su cui prevedete di fare affidamento! Se sta utilizzando la direttiva `publishDir` per questo scopo, assicuratevi di utilizzare la modalità `copy`, non la modalità `symlink`.
+    Siete responsabili del salvataggio di qualsiasi output che vi interessa o su cui prevedete di fare affidamento! Se state utilizzando la direttiva `publishDir` per questo scopo, assicuratevi di utilizzare la modalità `copy`, non la modalità `symlink`.
 
 ### Takeaway
 
-Sa come rilanciare una pipeline senza ripetere i passaggi che sono già stati eseguiti in modo identico, ispezionare il log di esecuzione e utilizzare il comando `nextflow clean` per ripulire le vecchie directory work.
+Sapete come rilanciare una pipeline senza ripetere i passaggi che sono già stati eseguiti in modo identico, ispezionare il log di esecuzione e utilizzare il comando `nextflow clean` per ripulire le vecchie directory work.
 
-### Cosa succede dopo?
+### Cosa c'è dopo?
 
-Ora che comprende le operazioni di base di Nextflow, è pronto per eseguire una vera pipeline di bioimaging con nf-core/molkart.
+Ora che comprendete le operazioni di base di Nextflow, siete pronti per eseguire una vera pipeline di bioimaging con nf-core/molkart.

@@ -95,7 +95,7 @@ Funcionalmente, isso será semelhante a como tínhamos configurado antes, mas em
 
 Esta é a linha de código que vamos usar:
 
-```console title="Sintaxe"
+```console title="Syntax"
 greeting_ch = channel.of('Hello Channels!')
 ```
 
@@ -105,7 +105,7 @@ Isso cria um canal chamado `greeting_ch` usando a fábrica de canais `channel.of
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
 </figure>
 
-!!! note
+!!! note "Nota"
 
     Estamos temporariamente voltando a usar strings codificadas em vez de usar um parâmetro CLI para fins de legibilidade. Voltaremos a usar parâmetros CLI assim que tivermos coberto o que está acontecendo no nível do canal.
 
@@ -436,7 +436,7 @@ Isso é muito melhor, pelo menos para um fluxo de trabalho simples.
 Para um fluxo de trabalho complexo, ou um grande número de entradas, ter a lista completa exibida no terminal ficaria um pouco avassalador.
 É por isso que `-ansi-log false` não é o comportamento padrão.
 
-!!! tip
+!!! tip "Dica"
 
     A maneira como o status é relatado é um pouco diferente entre os dois modos de log.
     No modo condensado, o Nextflow relata se as chamadas foram concluídas com sucesso ou não.
@@ -564,7 +564,7 @@ No bloco process, faça as seguintes alterações de código:
 
 Certifique-se de substituir `output.txt` tanto na definição de saída quanto no bloco de comando `script:`.
 
-!!! tip
+!!! tip "Dica"
 
     Na definição de saída, você DEVE usar aspas duplas em torno da expressão do nome do arquivo (NÃO aspas simples), caso contrário falhará.
 
@@ -623,7 +623,7 @@ Sim! E cada uma tem o conteúdo esperado.
 
 Sucesso! Agora podemos adicionar quantas saudações quisermos sem nos preocupar com arquivos de saída sendo sobrescritos.
 
-!!! tip
+!!! tip "Dica"
 
     Na prática, nomear arquivos com base nos dados de entrada em si é quase sempre impraticável.
     A melhor maneira de gerar nomes de arquivo dinâmicos é passar metadados para um processo junto com os arquivos de entrada.
@@ -807,11 +807,11 @@ Como fazemos o Nextflow desempacotar o array e carregar as strings individuais n
 
 ### 3.2. Use um operador para transformar o conteúdo do canal
 
-É aqui que os [**operadores**](https://www.nextflow.io/docs/latest/reference/operator.html) entram em jogo.
+É aqui que os [**operadores**](https://nextflow.io/docs/latest/reference/operator.html) entram em jogo.
 Você já usou o operador `.view()`, que apenas observa o que está lá.
 Agora vamos olhar para operadores que nos permitem agir sobre o conteúdo de um canal.
 
-Se você examinar a [lista de operadores](https://www.nextflow.io/docs/latest/reference/operator.html) na documentação do Nextflow, encontrará [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), que faz exatamente o que precisamos: desempacotar o conteúdo de um array e emiti-los como itens individuais.
+Se você examinar a [lista de operadores](https://nextflow.io/docs/latest/reference/operator.html) na documentação do Nextflow, encontrará [`flatten()`](https://nextflow.io/docs/latest/reference/operator.html#flatten), que faz exatamente o que precisamos: desempacotar o conteúdo de um array e emiti-los como itens individuais.
 
 #### 3.2.1. Adicione o operador `flatten()`
 
@@ -922,7 +922,7 @@ Definimos uma variável temporária para o valor interno, aqui chamada `greeting
 Neste exemplo, `$greeting` representa cada item individual carregado no canal.
 Isso resultará em uma saída de console bem rotulada.
 
-!!! info
+!!! info "Info"
 
     Em alguns pipelines você pode ver uma variável especial chamada `$it` usada dentro de closures de operadores.
     Esta é uma variável _implícita_ que permite um acesso de forma abreviada à variável interna,
@@ -960,7 +960,7 @@ Desta vez funciona E nos dá a percepção adicional do que o conteúdo do canal
 
 Importante, isso significa que cada item agora pode ser processado separadamente pelo fluxo de trabalho.
 
-!!! tip
+!!! tip "Dica"
 
     É tecnicamente possível alcançar os mesmos resultados usando uma fábrica de canais diferente, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), que inclui uma etapa de mapeamento implícita em sua operação.
     Aqui escolhemos não usar isso para demonstrar o uso de um operador em um caso de uso simples.
@@ -1134,11 +1134,11 @@ Então ele resolveu o caminho do arquivo corretamente, mas não analisou realmen
 
 Como fazemos o Nextflow abrir o arquivo e carregar seu conteúdo no canal?
 
-Parece que precisamos de outro [operador](https://www.nextflow.io/docs/latest/reference/operator.html)!
+Parece que precisamos de outro [operador](https://nextflow.io/docs/latest/reference/operator.html)!
 
 ### 4.2. Use o operador `splitCsv()` para analisar o arquivo
 
-Olhando através da lista de operadores novamente, encontramos [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv), que é projetado para analisar e dividir texto formatado em CSV.
+Olhando através da lista de operadores novamente, encontramos [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), que é projetado para analisar e dividir texto formatado em CSV.
 
 #### 4.2.1. Aplique `splitCsv()` ao canal
 
@@ -1248,12 +1248,12 @@ Em vez disso, usaremos outro operador chamado `map()` que é realmente útil e a
 
 ### 4.3. Use o operador `map()` para extrair as saudações
 
-O operador [`map()`](https://www.nextflow.io/docs/latest/reference/operator.html#map) é uma ferramenta muito útil que nos permite fazer todos os tipos de mapeamentos para o conteúdo de um canal.
+O operador [`map()`](https://nextflow.io/docs/latest/reference/operator.html#map) é uma ferramenta muito útil que nos permite fazer todos os tipos de mapeamentos para o conteúdo de um canal.
 
 Neste caso, vamos usá-lo para extrair aquele único elemento que queremos de cada linha em nosso arquivo de dados.
 Esta é a aparência da sintaxe:
 
-```groovy title="Sintaxe"
+```groovy title="Syntax"
 .map { row -> row[0] }
 ```
 
@@ -1380,7 +1380,7 @@ O que é um canal no Nextflow?
 - [x] Uma estrutura tipo fila para passar dados entre processos
 - [ ] Uma configuração de definição
 
-Saiba mais: [1.1. Crie um canal de entrada](#11-crie-um-canal-de-entrada)
+Saiba mais: [1.1. Crie um canal de entrada](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1396,7 +1396,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Nada (canais não imprimem por padrão)
 - [ ] Um erro (sintaxe inválida)
 
-Saiba mais: [1.1. Crie um canal de entrada](#11-crie-um-canal-de-entrada)
+Saiba mais: [1.1. Crie um canal de entrada](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1406,7 +1406,7 @@ Quando um canal contém múltiplos valores, como o Nextflow lida com a execuçã
 - [ ] O processo executa apenas com o primeiro valor
 - [ ] O processo executa apenas com o último valor
 
-Saiba mais: [2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada](#2-modifique-o-fluxo-de-trabalho-para-executar-em-multiplos-valores-de-entrada)
+Saiba mais: [2. Modifique o fluxo de trabalho para executar em múltiplos valores de entrada](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 
 <quiz>
@@ -1416,7 +1416,7 @@ O que o operador `flatten()` faz?
 - [x] Desempacota arrays em elementos individuais
 - [ ] Remove elementos duplicados
 
-Saiba mais: [3.2.1. Adicione o operador `flatten()`](#321-adicione-o-operador-flatten)
+Saiba mais: [3.2.1. Adicione o operador `flatten()`](#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
@@ -1426,7 +1426,7 @@ Qual é o propósito do operador `view()`?
 - [x] Para inspecionar e depurar o conteúdo do canal
 - [ ] Para salvar o conteúdo do canal em um arquivo
 
-Saiba mais: [1.4. Use `view()` para inspecionar o conteúdo do canal](#14-use-view-para-inspecionar-o-conteudo-do-canal)
+Saiba mais: [1.4. Use `view()` para inspecionar o conteúdo do canal](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
@@ -1436,7 +1436,7 @@ O que `splitCsv()` faz?
 - [x] Analisa um arquivo CSV em arrays representando cada linha
 - [ ] Mescla múltiplos arquivos CSV
 
-Saiba mais: [4.2. Use o operador `splitCsv()` para analisar o arquivo](#42-use-o-operador-splitcsv-para-analisar-o-arquivo)
+Saiba mais: [4.2. Use o operador `splitCsv()` para analisar o arquivo](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
@@ -1446,7 +1446,7 @@ Qual é o propósito do operador `map()`?
 - [x] Para transformar cada elemento em um canal
 - [ ] Para contar elementos em um canal
 
-Saiba mais: [4.3. Use o operador `map()` para extrair as saudações](#43-use-o-operador-map-para-extrair-as-saudacoes)
+Saiba mais: [4.3. Use o operador `map()` para extrair as saudações](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>
@@ -1456,5 +1456,5 @@ Por que é importante usar nomes de arquivo de saída dinâmicos ao processar m�
 - [x] Para evitar que arquivos de saída se sobrescrevam
 - [ ] Para habilitar a funcionalidade de resume
 
-Saiba mais: [2.2. Garanta que os nomes dos arquivos de saída sejam únicos](#22-garanta-que-os-nomes-dos-arquivos-de-saida-sejam-unicos)
+Saiba mais: [2.2. Garanta que os nomes dos arquivos de saída sejam únicos](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>

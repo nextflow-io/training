@@ -1,5 +1,7 @@
 # Część 2: Wywoływanie wariantów dla poszczególnych próbek
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W Części 1 przetestowałeś polecenia Samtools i GATK ręcznie w ich odpowiednich kontenerach.
 Teraz opakujemy te same polecenia w workflow'a Nextflow'a.
 
@@ -126,7 +128,7 @@ W bloku workflow utwórz kanał wejściowy z wartości parametru używając fabr
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Utwórz kanał wejściowy (pojedynczy plik przez parametr CLI)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 
@@ -232,10 +234,10 @@ Teraz dodajmy wywołanie `SAMTOOLS_INDEX` w bloku workflow, przekazując kanał 
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Utwórz kanał wejściowy (pojedynczy plik przez parametr CLI)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Create index file for input BAM file
+        // Utwórz plik indeksu dla wejściowego pliku BAM
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -245,7 +247,7 @@ Teraz dodajmy wywołanie `SAMTOOLS_INDEX` w bloku workflow, przekazując kanał 
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Utwórz kanał wejściowy (pojedynczy plik przez parametr CLI)
         reads_ch = channel.fromPath(params.reads_bam)
 
         // Call processes
@@ -304,7 +306,7 @@ Dodajmy cel dla `bam_index`, który publikuje do podkatalogu `bam/`.
     }
     ```
 
-!!! note
+!!! note "Uwaga"
 
     Domyślnie Nextflow publikuje pliki wyjściowe jako dowiązania symboliczne, co pozwala uniknąć niepotrzebnego duplikowania.
     Mimo że pliki danych, których używamy tutaj, są bardzo małe, w genomice mogą być bardzo duże.
@@ -456,16 +458,16 @@ Dodaj zmienne dla ścieżek plików pomocniczych wewnątrz bloku workflow:
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Utwórz kanał wejściowy (pojedynczy plik przez parametr CLI)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Load the file paths for the accessory files (reference and intervals)
+        // Wczytaj ścieżki plików dla plików pomocniczych (referencja i interwały)
         ref_file        = file(params.reference)
         ref_index_file  = file(params.reference_index)
         ref_dict_file   = file(params.reference_dict)
         intervals_file  = file(params.intervals)
 
-        // Create index file for input BAM file
+        // Utwórz plik indeksu dla wejściowego pliku BAM
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -475,10 +477,10 @@ Dodaj zmienne dla ścieżek plików pomocniczych wewnątrz bloku workflow:
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Utwórz kanał wejściowy (pojedynczy plik przez parametr CLI)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Create index file for input BAM file
+        // Utwórz plik indeksu dla wejściowego pliku BAM
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -591,10 +593,10 @@ Dodaj wywołanie procesu w treści workflow, w sekcji `main:`:
 === "Po"
 
     ```groovy title="genomics.nf" linenums="33" hl_lines="4-12"
-        // Create index file for input BAM file
+        // Utwórz plik indeksu dla wejściowego pliku BAM
         SAMTOOLS_INDEX(reads_ch)
 
-        // Call variants from the indexed BAM file
+        // Wywołaj warianty z zaindeksowanego pliku BAM
         GATK_HAPLOTYPECALLER(
             reads_ch,
             SAMTOOLS_INDEX.out,
@@ -608,13 +610,13 @@ Dodaj wywołanie procesu w treści workflow, w sekcji `main:`:
 === "Przed"
 
     ```groovy title="genomics.nf" linenums="33"
-        // Create index file for input BAM file
+        // Utwórz plik indeksu dla wejściowego pliku BAM
         SAMTOOLS_INDEX(reads_ch)
     ```
 
 Powinieneś rozpoznać składnię `*.out` ze szkolenia Hello Nextflow; mówimy Nextflow'owi, aby wziął kanał wyjściowy przez `SAMTOOLS_INDEX` i podłączył go do wywołania procesu `GATK_HAPLOTYPECALLER`.
 
-!!! note
+!!! note "Uwaga"
 
     Zauważ, że wejścia są dostarczane w dokładnie tej samej kolejności w wywołaniu procesu, jak są wymienione w bloku wejściowym procesu.
     W Nextflow'ie wejścia są pozycyjne, co oznacza, że _musisz_ zachować tę samą kolejność; i oczywiście musi być taka sama liczba elementów.
@@ -756,7 +758,7 @@ Najpierw zakomentuj adnotację typu w deklaracji parametru, ponieważ tablice ni
 === "Po"
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (array of three samples)
+        // Wejście główne (tablica trzech próbek)
         reads_bam //: Path
     ```
 
@@ -894,11 +896,11 @@ Dodaj te dwie linie w treści workflow przed wywołaniem procesu `GATK_HAPLOTYPE
     ```groovy title="genomics.nf" hl_lines="3-5"
         SAMTOOLS_INDEX(reads_ch)
 
-        // temporary diagnostics
+        // tymczasowa diagnostyka
         reads_ch.view()
         SAMTOOLS_INDEX.out.view()
 
-        // Call variants from the indexed BAM file
+        // Wywołaj warianty z zaindeksowanego pliku BAM
         GATK_HAPLOTYPECALLER(
     ```
 
@@ -907,7 +909,7 @@ Dodaj te dwie linie w treści workflow przed wywołaniem procesu `GATK_HAPLOTYPE
     ```groovy title="genomics.nf"
         SAMTOOLS_INDEX(reads_ch)
 
-        // Call variants from the indexed BAM file
+        // Wywołaj warianty z zaindeksowanego pliku BAM
         GATK_HAPLOTYPECALLER(
     ```
 
@@ -931,7 +933,7 @@ Ponownie, może to zakończyć się sukcesem lub niepowodzeniem. Oto jak wygląd
 Pierwsze trzy linie odpowiadają kanałowi wejściowemu, a drugie - kanałowi wyjściowemu.
 Widać, że pliki BAM i pliki indeksów dla trzech próbek nie są wymienione w tej samej kolejności!
 
-!!! note
+!!! note "Uwaga"
 
     Gdy wywołujesz proces Nextflow'a na kanale zawierającym wiele elementów, Nextflow spróbuje zrównoleglić wykonanie tak bardzo, jak to możliwe, i zbierze wyjścia w jakiejkolwiek kolejności staną się dostępne.
     Konsekwencją jest to, że odpowiednie wyjścia mogą być zebrane w innej kolejności niż oryginalne wejścia zostały podane.
@@ -941,7 +943,7 @@ Ale nie ma gwarancji, że tak będzie, dlatego czasami (choć nie zawsze) niewł
 
 Aby to naprawić, musimy upewnić się, że pliki BAM i ich pliki indeksów podróżują razem przez kanały.
 
-!!! tip
+!!! tip "Wskazówka"
 
     Instrukcje `view()` w kodzie workflow'a nic nie robią, więc nie jest problemem ich pozostawienie.
     Jednak zaśmiecą Twoje wyjście konsoli, więc zalecamy ich usunięcie po zakończeniu rozwiązywania problemu.
@@ -954,7 +956,7 @@ Rozwiązaniem jest zapakowanie każdego pliku BAM z jego indeksem do krotki, a n
 
 Najprostszym sposobem zapewnienia, że plik BAM i jego indeks pozostaną ściśle powiązane, jest spakowanie ich razem w krotkę wychodzącą z zadania indeksowania.
 
-!!! note
+!!! note "Uwaga"
 
     **Krotka** to skończona, uporządkowana lista elementów, która jest powszechnie używana do zwracania wielu wartości z funkcji. Krotki są szczególnie przydatne do przekazywania wielu wejść lub wyjść między procesami przy jednoczesnym zachowaniu ich powiązania i kolejności.
 
@@ -1149,7 +1151,7 @@ Już stworzyliśmy plik tekstowy wymieniający ścieżki plików wejściowych, o
 
 Jak widać, wymieniliśmy jedną ścieżkę pliku w wierszu i są to ścieżki bezwzględne.
 
-!!! note
+!!! note "Uwaga"
 
     Pliki, których używamy tutaj, znajdują się po prostu w lokalnym systemie plików Twojego GitHub Codespaces, ale moglibyśmy również wskazywać pliki w pamięci chmurowej.
     Jeśli nie używasz dostarczonego środowiska Codespaces, może być konieczne dostosowanie ścieżek plików, aby pasowały do Twojej lokalnej konfiguracji.
@@ -1163,14 +1165,14 @@ Przywróć adnotację typu w bloku params (ponieważ to znowu pojedyncza ścież
 === "Po"
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (file of input files, one per line)
+        // Wejście główne (plik plików wejściowych, jeden w wierszu)
         reads_bam: Path
     ```
 
 === "Przed"
 
     ```groovy title="genomics.nf" linenums="10"
-        // Primary input (array of three samples)
+        // Wejście główne (tablica trzech próbek)
         reads_bam
     ```
 
@@ -1216,7 +1218,7 @@ Możemy to zrobić, używając tego samego wzorca, którego użyliśmy w [Częś
 === "Po"
 
     ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
-        // Create input channel from a CSV file listing input file paths
+        // Utwórz kanał wejściowy z pliku CSV wymieniającego ścieżki plików wejściowych
         reads_ch = Channel.fromPath(params.reads_bam)
                 .splitCsv()
                 .map { line -> file(line[0]) }
@@ -1225,14 +1227,14 @@ Możemy to zrobić, używając tego samego wzorca, którego użyliśmy w [Częś
 === "Przed"
 
     ```groovy title="genomics.nf" linenums="24"
-        // Create input channel (single file via CLI parameter)
+        // Utwórz kanał wejściowy (pojedynczy plik przez parametr CLI)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 
 Technicznie moglibyśmy zrobić to prościej, używając operatora [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext), ponieważ nasz plik wejściowy obecnie zawiera tylko ścieżki plików.
 Jednak używając bardziej wszechstronnego operatora `splitCsv` (uzupełnionego przez `map`), możemy przyszłościowo zabezpieczyć nasz workflow w przypadku, gdy zdecydujemy się dodać metadane do pliku zawierającego ścieżki plików.
 
-!!! tip
+!!! tip "Wskazówka"
 
     Jeśli nie jesteś pewien, że rozumiesz, co robią operatory tutaj, to kolejna świetna okazja do użycia operatora `.view()`, aby zobaczyć, jak wygląda zawartość kanału przed i po ich zastosowaniu.
 

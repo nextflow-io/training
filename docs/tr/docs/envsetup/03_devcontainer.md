@@ -1,6 +1,6 @@
 # Yerel Devcontainer'lar
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Yerel bir Docker kurulumunuz varsa veya kurmaya hazırsanız, bu materyallerle yerel olarak çalışmanın en kolay yolu Visual Studio Code'un devcontainer özelliğini kullanmaktır. Bu yaklaşım, manuel kurulum gerektirmeden gerekli tüm araçları ve bağımlılıkları sağlar.
 
@@ -53,7 +53,7 @@ cd training
 - Az önce klonladığınız training deposu klasörüne gidin ve seçin
 - **Open**'a tıklayın
 
-### Konteyner'da Yeniden Aç
+### Konteyner'da Yeniden Açın
 
 VS Code tarafından "Reopen in Container" sorulursa, tıklayın. Alternatif olarak:
 

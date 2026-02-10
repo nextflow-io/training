@@ -84,7 +84,7 @@ Você encontrará um arquivo de fluxo de trabalho principal e um arquivo CSV cha
 └── main.nf
 ```
 
-Para uma descrição detalhada dos arquivos, consulte o [warmup do Hello Nextflow](../hello_nextflow/00_orientation.md).
+Para uma descrição detalhada dos arquivos, consulte o [aquecimento do Hello Nextflow](../hello_nextflow/00_orientation.md).
 
 O fluxo de trabalho que testaremos é um subconjunto do fluxo de trabalho Hello construído em [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
@@ -371,7 +371,7 @@ when {
 }
 ```
 
-2. nf-test verificou o status do pipeline e o comparou com o bloco `when`:
+2. nf-test verificou o status do pipeline e o comparou com o bloco `then`:
 
 ```groovy title="tests/main.nf.test"
 then {
@@ -728,7 +728,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-O teste falha porque o processo `sayHello` declara 1 entrada mas foi chamado com 0 argumentos. Vamos corrigir isso adicionando uma entrada ao processo. Lembre-se de [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (e da seção de warmup acima) que nosso processo `sayHello` recebe uma única entrada de valor, que precisaremos fornecer. Também devemos corrigir o nome do teste para refletir melhor o que estamos testando.
+O teste falha porque o processo `sayHello` declara 1 entrada mas foi chamado com 0 argumentos. Vamos corrigir isso adicionando uma entrada ao processo. Lembre-se de [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (e da seção de aquecimento acima) que nosso processo `sayHello` recebe uma única entrada de valor, que precisaremos fornecer. Também devemos corrigir o nome do teste para refletir melhor o que estamos testando.
 
 **Antes:**
 
@@ -934,7 +934,7 @@ Vamos executar o teste para ver se funciona.
 nf-test test tests/main.sayhello.nf.test
 ```
 
-```console title="Teste de processo falha"
+```console title="Teste de processo passa"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3

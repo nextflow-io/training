@@ -6,10 +6,10 @@ Herzlichen Glückwunsch zum Abschluss des Nextflow Run-Trainingskurses! 🎉
 
 <!-- placeholder for video -->
 
-## Dein Fortschritt
+## Deine Lernreise
 
-Du hast mit einem sehr grundlegenden Workflow begonnen und gelernt, ihn auszuführen, die Ausgaben zu finden und seine Ausführung zu verwalten.
-Dann hast du dich durch immer komplexere Versionen dieses Workflows gearbeitet und gelernt, die wesentlichen Konzepte und Mechanismen zu erkennen, die Nextflow-Pipelines antreiben, einschließlich Channels und Operatoren, Code-Modularisierung und Container.
+Du hast mit einem sehr einfachen Workflow begonnen und gelernt, ihn auszuführen, die Ausgaben zu finden und seine Ausführung zu verwalten.
+Dann hast du dich durch immer komplexere Versionen dieses Workflows gearbeitet und gelernt, die wesentlichen Konzepte und Mechanismen zu erkennen, die Nextflow-Pipelines antreiben – einschließlich Kanäle und Operatoren, Code-Modularisierung und Container.
 Schließlich hast du gelernt, wie du die Konfiguration einer Pipeline an deine Präferenzen und deine Recheninfrastruktur anpasst.
 
 ### Was du gelernt hast
@@ -39,7 +39,7 @@ Durch diesen praxisorientierten Kurs hast du gelernt, wie man:
 - Einen Nextflow-Workflow lokal startet
 - Ausgaben (Ergebnisse) und Protokolldateien, die von Nextflow generiert werden, findet und interpretiert
 - Die Kernkomponenten von Nextflow erkennt, die einen einfachen mehrstufigen Workflow ausmachen
-- Fortgeschrittene Konzepte wie Operatoren und Channel-Factories beschreibt
+- Weiterführende Konzepte wie Operatoren und Channel-Factories beschreibt
 - Pipelines für verschiedene Rechenumgebungen konfiguriert
 
 Du bist jetzt mit dem grundlegenden Wissen ausgestattet, um bestehende Nextflow-Pipelines in deine eigene Arbeit zu integrieren.
@@ -48,7 +48,7 @@ Du bist jetzt mit dem grundlegenden Wissen ausgestattet, um bestehende Nextflow-
 
 Hier sind unsere Top-Vorschläge, was du als Nächstes tun kannst:
 
-- Führe Nextflow nicht nur aus, schreibe es! Lerne die Nextflow-Entwicklung mit [Hello Nextflow](../hello_nextflow/index.md)
+- Führe Nextflow nicht nur aus, schreibe es! Werde Nextflow-Entwickler\*in mit [Hello Nextflow](../hello_nextflow/index.md)
 - Wende Nextflow auf einen wissenschaftlichen Analyse-Anwendungsfall an mit [Nextflow for Science](../nf4_science/index.md)
 - Starte mit nf-core mit [Hello nf-core](../hello_nf-core/index.md)
 - Lerne Troubleshooting-Techniken mit der [Debugging Side Quest](../side_quests/debugging.md)

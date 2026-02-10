@@ -855,7 +855,7 @@ Certifique-se de abrir o arquivo de saída para verificar se você agora tem a n
     Bonjour le monde!
     ```
 
-Voilà!
+Tcharam!
 
 Note como a nova execução sobrescreveu o arquivo de saída publicado no diretório `results`.
 No entanto, os resultados das execuções anteriores ainda estão preservados nos diretórios de tarefa em `work`.
@@ -888,7 +888,7 @@ Como você vê, podemos especificar o tipo de entrada que o fluxo de trabalho es
 A sintaxe é `nome: Tipo = valor_padrão`.
 Os tipos suportados incluem `String`, `Integer`, `Float`, `Boolean` e `Path`.
 
-!!! info
+!!! info "Info"
 
     Em fluxos de trabalho mais antigos, você pode ver que todo o bloco `params` está escrito como apenas `input = 'Holà mundo!'`.
 
@@ -1143,7 +1143,7 @@ Quais são os componentes mínimos necessários de um processo Nextflow?
 - [ ] Blocos de entrada, saída e script
 - [ ] Apenas um bloco script
 
-Saiba mais: [1.1.1. A definição de `process`](#111-a-definição-de-process)
+Saiba mais: [1.1.1. A definição de `process`](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1153,7 +1153,7 @@ Qual é o propósito do bloco de saída em um processo?
 - [x] Declarar saídas esperadas do processo
 - [ ] Definir variáveis de ambiente
 
-Saiba mais: [1.1.1. A definição de `process`](#111-a-definição-de-process)
+Saiba mais: [1.1.1. A definição de `process`](#111-the-process-definition)
 </quiz>
 
 <quiz>
@@ -1184,7 +1184,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-Saiba mais: [1.2.2. Encontre a saída e os logs no diretório `work`](#122-encontre-a-saída-e-os-logs-no-diretório-work)
+Saiba mais: [1.2.2. Encontre a saída e os logs no diretório `work`](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 
 <quiz>
@@ -1194,7 +1194,7 @@ O que a flag `-resume` faz?
 - [x] Ignora processos que já foram concluídos com sucesso
 - [ ] Cria um backup do fluxo de trabalho
 
-Saiba mais: [4.1. Relance um fluxo de trabalho com `-resume`](#41-relance-um-fluxo-de-trabalho-com--resume)
+Saiba mais: [4.1. Relance um fluxo de trabalho com `-resume`](#41-re-launch-a-workflow-with--resume)
 </quiz>
 
 <quiz>
@@ -1204,7 +1204,7 @@ Qual é o modo padrão para publicar saídas de fluxo de trabalho?
 - [ ] Mover arquivos para o diretório de saída
 - [ ] Comprimir arquivos no diretório de saída
 
-Saiba mais: [2.3. Defina o modo de publicação para copiar](#23-defina-o-modo-de-publicação-para-copiar)
+Saiba mais: [2.3. Defina o modo de publicação para copiar](#23-set-the-publish-mode-to-copy)
 </quiz>
 
 <quiz>
@@ -1214,7 +1214,7 @@ Como você passa um valor de parâmetro para um fluxo de trabalho Nextflow a par
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-Saiba mais: [3.2. Configure um parâmetro de linha de comando para capturar a entrada do usuário](#32-configure-um-parâmetro-de-linha-de-comando-para-capturar-a-entrada-do-usuário)
+Saiba mais: [3.2. Configure um parâmetro de linha de comando para capturar a entrada do usuário](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 
 <quiz>

@@ -1,5 +1,7 @@
 # Część 3: Wspólne wyszukiwanie wariantów w kohorcie
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 W Części 2 zbudowałeś/-aś pipeline wyszukiwania wariantów dla pojedynczych próbek, który przetwarzał dane każdej próbki niezależnie.
 Teraz rozszerzymy go, aby zaimplementować wspólne wyszukiwanie wariantów, jak omówiono w [Części 1](01_method.md).
 
@@ -18,7 +20,7 @@ W tej części kursu rozszerzymy workflow'a, aby wykonywał następujące operac
 
 Ta część bazuje bezpośrednio na workflow'ie stworzonym w Części 2.
 
-??? info "Jak rozpocząć od tej sekcji"
+??? info "Jak zacząć od tej sekcji"
 
     Ta sekcja kursu zakłada, że ukończyłeś/-aś [Część 2: Wyszukiwanie wariantów dla pojedynczych próbek](./02_per_sample_variant_calling.md) i masz działający pipeline `genomics.nf`.
 
@@ -288,7 +290,7 @@ Później w serii szkoleń nauczysz się, jak używać metadanych próbek do teg
     ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
         intervals: Path = "${projectDir}/data/ref/intervals.bed"
 
-        // Base name for final output file
+        // Podstawowa nazwa dla ostatecznego pliku wyjściowego
         cohort_name: String = "family_trio"
     }
     ```
@@ -314,7 +316,7 @@ Dodaj następujące linie do treści `workflow`, zaraz po wywołaniu GATK_HAPLOT
             intervals_file
         )
 
-        // Collect variant calling outputs across samples
+        // Zbierz wyjścia wyszukiwania wariantów ze wszystkich próbek
         all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
     ```
@@ -502,7 +504,7 @@ Dodaj wywołanie `GATK_JOINTGENOTYPING` w treści workflow'a, po liniach `collec
     ```groovy title="genomics.nf" hl_lines="3-12"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
-        // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
+        // Połącz pliki GVCF w repozytorium danych GenomicsDB i zastosuj wspólne genotypowanie
         GATK_JOINTGENOTYPING(
             all_gvcfs_ch,
             all_idxs_ch,
@@ -669,6 +671,6 @@ Wiesz również, jak konstruować linię poleceń używając domknięć Groovy i
 
 ### Co dalej?
 
-Świętuj swój sukces i weź zasłużoną przerwę.
+Pogratuluj sobie! Ukończyłeś/-aś kurs Nextflow dla Genomiki.
 
-W kolejnej części tego kursu nauczysz się, jak uruchomić gotowy do produkcji pipeline wyszukiwania wariantów z nf-core i porównać go z pipeline'em, który zbudował(a/i)eś ręcznie.
+Przejdź do końcowego [podsumowania kursu](./next_steps.md), aby przejrzeć to, czego się nauczyłeś/-aś i dowiedzieć się, co dalej.

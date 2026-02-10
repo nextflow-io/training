@@ -39,7 +39,7 @@ Vous êtes maintenant équipé·e des connaissances fondamentales pour construir
 Voici nos 3 principales suggestions pour la suite :
 
 - Appliquez Nextflow à un cas d'usage d'analyse scientifique avec [Nextflow for Science](../nf4_science/index.md)
-- Explorez des fonctionnalités Nextflow plus avancées avec les [Side Quests](../side_quests/index.md)
+- Explorez des fonctionnalités Nextflow plus avancées avec les [Quêtes secondaires](../side_quests/index.md)
 - Impliquez-vous en [rejoignant la communauté nf-core](https://nf-co.re/join).
 
 Enfin, nous vous recommandons de jeter un œil à [**Seqera Platform**](https://seqera.io/), une plateforme cloud développée par les créateurs de Nextflow qui facilite encore davantage le lancement et la gestion de vos workflows, ainsi que la gestion de vos données et l'exécution d'analyses interactives dans n'importe quel environnement.

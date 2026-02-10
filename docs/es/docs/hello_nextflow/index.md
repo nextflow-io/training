@@ -7,11 +7,11 @@ index_type: course
 additional_information:
     technical_requirements: true
     learning_objectives:
-        - Iniciar y gestionar la ejecución de flujos de trabajo de Nextflow
+        - Iniciar y gestionar la ejecución de workflows de Nextflow
         - Encontrar e interpretar salidas (resultados) y archivos de registro generados por Nextflow
         - Solucionar problemas básicos
-        - Construir un flujo de trabajo simple de múltiples pasos a partir de componentes principales de Nextflow
-        - Distinguir entre tipos esenciales de channel factories y operadores y utilizarlos efectivamente en un flujo de trabajo simple
+        - Construir un workflow simple de múltiples pasos a partir de componentes principales de Nextflow
+        - Distinguir entre tipos esenciales de channel factories y operadores y utilizarlos efectivamente en un workflow simple
         - Configurar la ejecución de pipelines para ejecutar en plataformas de cómputo comunes incluyendo HPC y nube
         - Aplicar mejores prácticas de reproducibilidad, portabilidad y reutilización de código que hacen los pipelines FAIR, incluyendo modularidad del código y contenedores de software
     audience_prerequisites:
@@ -25,11 +25,11 @@ additional_information:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Hello Nextflow es una introducción práctica a la construcción de flujos de trabajo de análisis de datos reproducibles y escalables.**
+**Hello Nextflow es una introducción práctica a la construcción de workflows de análisis de datos reproducibles y escalables.**
 
-Trabajando a través de ejemplos prácticos y ejercicios guiados, aprenderá los fundamentos del desarrollo de pipelines con Nextflow, incluyendo cómo definir procesos, conectarlos en pipelines, gestionar archivos y dependencias de software, paralelizar la ejecución sin esfuerzo y ejecutar flujos de trabajo en diferentes entornos de cómputo.
+Trabajando a través de ejemplos prácticos y ejercicios guiados, aprenderá los fundamentos del desarrollo de pipelines con Nextflow, incluyendo cómo definir procesos, conectarlos en pipelines, gestionar archivos y dependencias de software, paralelizar la ejecución sin esfuerzo y ejecutar workflows en diferentes entornos de cómputo.
 
-Se llevará las habilidades y la confianza para comenzar a desarrollar y ejecutar sus propios flujos de trabajo con Nextflow.
+Se llevará las habilidades y la confianza para comenzar a desarrollar y ejecutar sus propios workflows con Nextflow.
 
 <!-- additional_information -->
 
@@ -45,14 +45,14 @@ Para evitar abrumarle con conceptos y código, hemos dividido esto en seis parte
 
 | Capítulo del curso                                    | Resumen                                                                                                          | Duración estimada |
 | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------- |
-| [Parte 1: Hello World](./01_hello_world.md)           | Componentes básicos y principios involucrados en ensamblar y ejecutar un flujo de trabajo de Nextflow            | 30 mins           |
+| [Parte 1: Hello World](./01_hello_world.md)           | Componentes básicos y principios involucrados en ensamblar y ejecutar un workflow de Nextflow                    | 30 mins           |
 | [Parte 2: Hello Channels](./02_hello_channels.md)     | Usar canales y operadores para procesar entradas y paralelizar la ejecución sin esfuerzo                         | 45 mins           |
 | [Parte 3: Hello Workflow](./03_hello_workflow.md)     | Usar canales para encadenar múltiples pasos juntos y manejar la transferencia de datos entre pasos               | 60 mins           |
 | [Parte 4: Hello Modules](./04_hello_modules.md)       | Aplicar principios de modularidad de código para aumentar la reutilización y disminuir la carga de mantenimiento | 20 mins           |
 | [Parte 5: Hello Containers](./05_hello_containers.md) | Usar contenedores como mecanismo para gestionar dependencias de software y aumentar la reproducibilidad          | 60 mins           |
 | [Parte 6: Hello Config](./06_hello_config.md)         | Personalizar el comportamiento del pipeline y optimizar el uso en diferentes entornos computacionales            | 60 mins           |
 
-Al final de este curso, estará bien preparado para abordar los próximos pasos en su viaje para desarrollar flujos de trabajo reproducibles para sus necesidades de computación científica.
+Al final de este curso, estará bien preparado para abordar los próximos pasos en su viaje para desarrollar workflows reproducibles para sus necesidades de computación científica.
 
 ¿Listo para tomar el curso?
 

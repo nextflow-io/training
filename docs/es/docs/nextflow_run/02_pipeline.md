@@ -57,7 +57,7 @@ Esto sugiere que el process `sayHello()` fue llamado tres veces, una vez en cada
 
 Veamos el directorio 'results' para ver si nuestro workflow todavía está escribiendo una copia de nuestras salidas allí.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console linenums="1" hl_lines="4-7"
     results
@@ -73,7 +73,7 @@ Veamos el directorio 'results' para ver si nuestro workflow todavía está escri
 
 Puede abrir cada uno de ellos para asegurarse de que contienen la cadena de saludo apropiada.
 
-??? abstract "Contenido de los archivos"
+??? abstract "Contenido del archivo"
 
     ```console title="results/2a-inputs/Hello-output.txt"
     Hello
@@ -98,7 +98,7 @@ Puede haber notado que la salida de consola anterior se refería a solo un direc
 
 Echemos un vistazo dentro de ese directorio de tarea `8e/0eb066`.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console title="8e/0eb066"
     work/8e/0eb066071cdb4123906b7b4ea8b047/
@@ -142,7 +142,7 @@ Esto confirma que el process `sayHello()` es llamado tres veces, y se crea un di
 
 Si miramos dentro de cada uno de los directorios de tarea listados allí, podemos verificar que cada uno corresponde a uno de los saludos.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console title="ab/1a8ece"
     work/ab/1a8ece307e53f03fce689dde904b64/
@@ -178,7 +178,7 @@ Veamos qué hace posible eso en el código del workflow.
     #!/usr/bin/env nextflow
 
     /*
-    * Usar echo para imprimir 'Hello World!' a un archivo
+    * Use echo to print 'Hello World!' to a file
     */
     process sayHello {
 
@@ -377,7 +377,7 @@ Puede ver que como se prometió, se ejecutaron múltiples pasos como parte del w
 
 Verifiquemos que eso es de hecho lo que sucedió echando un vistazo en el directorio `results`.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console linenums="1" hl_lines="8-16"
     results
@@ -406,7 +406,7 @@ Algunos de los archivos han sido agrupados en un subdirectorio llamado `intermed
 Esos dos son los resultados finales del workflow de múltiples pasos.
 Tómese un minuto para mirar los nombres de los archivos y verificar su contenido para confirmar que son lo que espera.
 
-??? abstract "Contenido de los archivos"
+??? abstract "Contenido del archivo"
 
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
@@ -431,7 +431,7 @@ Veamos el código e identifiquemos los patrones clave para workflows de múltipl
     #!/usr/bin/env nextflow
 
     /*
-    * Usar echo para imprimir 'Hello World!' a un archivo
+    * Use echo to print 'Hello World!' to a file
     */
     process sayHello {
 
@@ -448,7 +448,7 @@ Veamos el código e identifiquemos los patrones clave para workflows de múltipl
     }
 
     /*
-    * Usar una herramienta de reemplazo de texto para convertir el saludo a mayúsculas
+    * Use a text replacement tool to convert the greeting to uppercase
     */
     process convertToUpper {
 
@@ -465,7 +465,7 @@ Veamos el código e identifiquemos los patrones clave para workflows de múltipl
     }
 
     /*
-    * Recopilar saludos en mayúsculas en un único archivo de salida
+    * Collect uppercase greetings into a single output file
     */
     process collectGreetings {
 
@@ -681,7 +681,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 
 Debería ver nuevas salidas finales nombradas con su nombre de lote personalizado.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console linenums="1" hl_lines="10 12"
     results
@@ -793,7 +793,7 @@ Por supuesto, hemos preparado nuevamente un workflow adecuado para propósitos d
 --8<-- "docs/en/docs/nextflow_run/img/modules.svg"
 </figure>
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     modules/
@@ -816,7 +816,7 @@ Comience abriendo el archivo de workflow `2c-modules.nf`.
     ```groovy title="2c-modules.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Incluir módulos
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -874,7 +874,7 @@ Puede ver que la lógica del workflow es exactamente la misma que en la versión
 Sin embargo, el código del process ya no está en el archivo del workflow, y en su lugar hay declaraciones `include` que apuntan a archivos separados bajo `modules`.
 
 ```groovy title="2c-modules.nf" linenums="3"
-// Incluir módulos
+// Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -888,7 +888,7 @@ Abra uno de esos archivos y encontrará el código para el process correspondien
     #!/usr/bin/env nextflow
 
     /*
-    * Usar echo para imprimir 'Hello World!' a un archivo
+    * Use echo to print 'Hello World!' to a file
     */
     process sayHello {
 
@@ -1160,7 +1160,7 @@ El workflow es muy similar al anterior, más el paso extra para ejecutar `cowpy`
     ```groovy title="2d-container.nf" linenums="1" hl_lines="7 15 32 39 59-62"
     #!/usr/bin/env nextflow
 
-    // Incluir módulos
+    // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -1237,7 +1237,7 @@ El process `cowpy`, que envuelve el comando cowpy para generar arte ASCII, está
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generar arte ASCII con cowpy (https://github.com/jeffbuttars/cowpy)
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'

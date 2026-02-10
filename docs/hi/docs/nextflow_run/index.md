@@ -11,7 +11,9 @@ additional_information:
     - आउटपुट (परिणाम) और लॉग फ़ाइलों को खोजना और समझना
     - एक साधारण मल्टी-स्टेप workflow में मुख्य Nextflow कॉम्पोनेंट्स को पहचानना
     - HPC और cloud सहित सामान्य कंप्यूटिंग प्लेटफॉर्म पर pipeline execution को कॉन्फ़िगर करना
-    - reproducibility, portability और कोड पुन: उपयोग के लिए सर्वोत्तम प्रथाओं को समझना जो pipelines को FAIR बनाती हैं, जिसमें कोड modularity और software containers शामिल हैं
+    - {
+        "reproducibility, portability और कोड पुन": "उपयोग के लिए सर्वोत्तम प्रथाओं को सारांशित करना जो pipelines को FAIR बनाती हैं, जिसमें कोड modularity और software containers शामिल हैं",
+      }
   audience_prerequisites:
     - "**दर्शक:** यह कोर्स उन शिक्षार्थियों के लिए डिज़ाइन किया गया है जो Nextflow में बिल्कुल नए हैं और मौजूदा pipelines चलाना चाहते हैं।"
     - "**कौशल:** कमांड लाइन, बुनियादी scripting अवधारणाओं और सामान्य फ़ाइल फॉर्मेट्स से कुछ परिचितता अपेक्षित है।"

@@ -1,5 +1,7 @@
 # Prossimi Passi - Trascrizione del Video
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -20,7 +22,7 @@ Siete arrivati alla fine e avete completato il corso di formazione Hello Nextflo
 
 Non dimenticate di tornare su training.nextflow.io. Aggiungiamo sempre nuovi corsi brevi e aggiorniamo anche molto del materiale già presente. Quindi questo corso di formazione Hello Nextflow verrà aggiornato nel tempo.
 
-Questo è particolarmente importante perché stiamo aggiornando la sintassi in Nextflow, e il 2026 vedrà l'arrivo di molte nuove funzionalità, quindi questo corso avrà un aspetto leggermente diverso la prossima volta che lo faremo nel 2027.
+Questo è particolarmente importante perché stiamo aggiornando la sintassi in Nextflow, e il 2026 vedrà l'arrivo di molte nuove funzionalità, quindi questo corso avrà un aspetto e una sensazione leggermente diversi la prossima volta che lo faremo nel 2027.
 
 In particolare, voglio segnalare la pagina "Nextflow for Science". Questi sono corsi brevi progettati per seguire questo corso Hello Nextflow. E mostrano come usare Nextflow con casi d'uso specifici diversi, che si tratti di genomica o RNAseq, o tutti i tipi di cose diverse. Cerchiamo di aggiungere sempre più casi d'uso scientifici.
 

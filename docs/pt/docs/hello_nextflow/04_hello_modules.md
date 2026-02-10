@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -156,8 +156,8 @@ Uma vez feito isso, exclua a definição do processo do arquivo de fluxo de trab
 
 A sintaxe para incluir um processo de um módulo é bastante direta:
 
-```groovy title="Sintaxe: Declaração de importação"
-include { <NOME_DO_PROCESSO> } from '<caminho_para_o_módulo>'
+```groovy title="Syntax: include declaration"
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Vamos inserir isso acima do bloco `params` e preenchê-lo adequadamente.
@@ -452,7 +452,7 @@ O que é um módulo no Nextflow?
 - [ ] Uma definição de fluxo de trabalho
 - [ ] Um operador de canal
 
-Saiba mais: [2. Crie um módulo para `sayHello()`](#2-crie-um-modulo-para-sayhello)
+Saiba mais: [2. Crie um módulo para `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +462,7 @@ Qual convenção é normalmente usada para armazenar arquivos de módulo?
 - [x] Em um diretório `modules/`
 - [ ] Em um diretório `lib/`
 
-Saiba mais: [1. Crie um diretório para armazenar módulos](#1-crie-um-diretorio-para-armazenar-modulos)
+Saiba mais: [1. Crie um diretório para armazenar módulos](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +473,7 @@ Qual é a sintaxe correta para usar um módulo?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Saiba mais: [2.3. Adicione uma declaração de importação](#23-adicione-uma-declaracao-de-importacao-antes-do-bloco-de-fluxo-de-trabalho)
+Saiba mais: [2.3. Adicione uma declaração de importação](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

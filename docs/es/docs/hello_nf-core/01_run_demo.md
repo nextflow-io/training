@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-En esta primera parte del curso de entrenamiento Hello nf-core, le mostramos cómo encontrar y probar un pipeline de nf-core, entender cómo está organizado el código y reconocer en qué se diferencia del código Nextflow básico como se muestra en [Hello Nextflow](../hello_nextflow/index.md).
+En esta primera parte del curso de capacitación Hello nf-core, le mostramos cómo encontrar y probar un pipeline de nf-core, entender cómo está organizado el código y reconocer en qué se diferencia del código Nextflow básico como se muestra en [Hello Nextflow](../hello_nextflow/index.md).
 
 Vamos a utilizar un pipeline llamado nf-core/demo que es mantenido por el proyecto nf-core como parte de su inventario de pipelines para demostrar la estructura del código y las operaciones de las herramientas.
 
@@ -117,11 +117,11 @@ tree -L 2 $NXF_HOME/assets/
 
 !!! note "Nota"
 
-    La ruta completa puede diferir en su sistema si no está utilizando nuestro entorno de entrenamiento.
+    La ruta completa puede diferir en su sistema si no está utilizando nuestro entorno de capacitación.
 
 Nextflow mantiene el código fuente descargado intencionalmente 'fuera del camino' bajo el principio de que estos pipelines deben usarse más como bibliotecas que como código con el que interactuaría directamente.
 
-Sin embargo, para los propósitos de este entrenamiento, queremos poder explorar y ver qué hay allí.
+Sin embargo, para los propósitos de esta capacitación, queremos poder explorar y ver qué hay allí.
 Entonces, para facilitar eso, creemos un enlace simbólico a esa ubicación desde nuestro directorio de trabajo actual.
 
 ```bash
@@ -197,7 +197,7 @@ params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
 
-    // Datos de entrada
+    // Input data
     input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
 
 }
@@ -449,7 +449,7 @@ Eso puede sonar un poco abstracto, así que echemos un vistazo a cómo se usa es
 
 !!! note "Nota"
 
-    No revisaremos el código real de _cómo_ estos componentes modulares están conectados, porque hay cierta complejidad adicional asociada con el uso de subworkflows que puede ser confusa, y entender eso no es necesario en esta etapa del entrenamiento.
+    No revisaremos el código real de _cómo_ estos componentes modulares están conectados, porque hay cierta complejidad adicional asociada con el uso de subworkflows que puede ser confusa, y entender eso no es necesario en esta etapa de la capacitación.
     Por ahora, nos vamos a enfocar en la organización general y la lógica.
 
 #### 3.1.1. Descripción general
@@ -498,7 +498,7 @@ El workflow `demo.nf` llama a **módulos** ubicados en `modules/`, que revisarem
 
 #### 3.1.4. Los módulos
 
-Los módulos son donde vive el código del proceso, como se describe en la [Parte 4 del curso de entrenamiento Hello Nextflow](../hello_nextflow/04_hello_modules.md).
+Los módulos son donde vive el código del proceso, como se describe en la [Parte 4 del curso de capacitación Hello Nextflow](../hello_nextflow/04_hello_modules.md).
 
 En el proyecto nf-core, los módulos se organizan usando una estructura anidada multinivel que refleja tanto su origen como su contenido.
 En el nivel superior, los módulos se diferencian como `nf-core` o `local` (no parte del proyecto nf-core), y luego se colocan en un directorio nombrado según la(s) herramienta(s) que envuelven.

@@ -10,10 +10,10 @@ Le système de canaux de Nextflow est au cœur de cette flexibilité. Les canaux
 
 ### Objectifs d'apprentissage
 
-Dans cette quête annexe, vous apprendrez à diviser et regrouper des données en utilisant les opérateurs de canaux de Nextflow.
+Dans cette quête secondaire, vous apprendrez à diviser et regrouper des données en utilisant les opérateurs de canaux de Nextflow.
 Nous commencerons avec un fichier CSV contenant des informations sur les échantillons et les fichiers de données associés, puis manipulerons et réorganiserons ces données.
 
-À la fin de cette quête annexe, vous serez capable de séparer et combiner efficacement des flux de données, en utilisant les techniques suivantes :
+À la fin de cette quête secondaire, vous serez capable de séparer et combiner efficacement des flux de données, en utilisant les techniques suivantes :
 
 - Lire des données à partir de fichiers en utilisant `splitCsv`
 - Filtrer et transformer des données avec `filter` et `map`
@@ -26,12 +26,12 @@ Ces compétences vous aideront à construire des workflows capables de gérer ef
 
 ### Prérequis
 
-Avant d'entreprendre cette quête annexe, vous devez :
+Avant d'entreprendre cette quête secondaire, vous devez :
 
 - Avoir terminé le tutoriel [Hello Nextflow](../hello_nextflow/README.md) ou un cours équivalent pour débutants.
-- Être à l'aise avec les concepts et mécanismes de base de Nextflow (processes, channels, operators, travailler avec des fichiers, méta données)
+- Être à l'aise avec les concepts et mécanismes de base de Nextflow (processes, channels, operators, travailler avec des fichiers, métadonnées)
 
-**Optionnel :** Nous recommandons de compléter d'abord la quête annexe [Metadata in workflows](./metadata.md).
+**Optionnel :** Nous recommandons de compléter d'abord la quête secondaire [Metadata in workflows](./metadata.md).
 Elle couvre les fondamentaux de la lecture de fichiers CSV avec `splitCsv` et de la création de meta maps, que nous utiliserons beaucoup ici.
 
 ---
@@ -86,13 +86,13 @@ patientC,1,tumor,patientC_rep1_tumor.bam
 Cette feuille d'échantillons répertorie huit échantillons provenant de trois patients (A, B, C).
 
 Pour chaque patient, nous avons des échantillons de type `tumor` (provenant généralement de biopsies tumorales) ou `normal` (prélevés sur du tissu sain ou du sang).
-Si vous n'êtes pas familier avec l'analyse du cancer, sachez simplement que cela correspond à un modèle expérimental qui utilise des échantillons appariés tumeur/normal pour effectuer des analyses contrastives.
+Si vous n'êtes pas familier·ère avec l'analyse du cancer, sachez simplement que cela correspond à un modèle expérimental qui utilise des échantillons appariés tumeur/normal pour effectuer des analyses contrastives.
 
 Pour le patient A spécifiquement, nous avons deux ensembles de réplicats techniques (répétitions).
 
-!!! note
+!!! note "Note"
 
-    Ne vous inquiétez pas si vous n'êtes pas familier avec cette conception expérimentale, ce n'est pas critique pour comprendre ce tutoriel.
+    Ne vous inquiétez pas si vous n'êtes pas familier·ère avec cette conception expérimentale, ce n'est pas critique pour comprendre ce tutoriel.
 
 #### Examiner l'assignation
 
@@ -131,13 +131,13 @@ workflow {
 }
 ```
 
-!!! note
+!!! note "Note"
 
     Tout au long de ce tutoriel, nous utiliserons le préfixe `ch_` pour toutes les variables de canaux afin d'indiquer clairement qu'il s'agit de canaux Nextflow.
 
-Si vous avez complété la quête annexe [Metadata in workflows](./metadata.md), vous reconnaîtrez ce modèle. Nous utiliserons `splitCsv` pour lire le CSV et structurer immédiatement les données avec une meta map pour séparer les métadonnées des chemins de fichiers.
+Si vous avez complété la quête secondaire [Metadata in workflows](./metadata.md), vous reconnaîtrez ce modèle. Nous utiliserons `splitCsv` pour lire le CSV et structurer immédiatement les données avec une meta map pour séparer les métadonnées des chemins de fichiers.
 
-!!! info
+!!! info "Info"
 
     Nous rencontrerons deux concepts différents appelés `map` dans cette formation :
 
@@ -350,7 +350,7 @@ nextflow run main.nf
 
 Nous avons séparé les échantillons normaux et tumoraux dans deux canaux différents, et utilisé une closure fournie à `view()` pour les étiqueter différemment dans la sortie : `ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
-### Point clé
+### À retenir
 
 Dans cette section, vous avez appris :
 
@@ -514,7 +514,7 @@ C'est un peu difficile à dire parce que c'est très large, mais vous devriez po
 - `tumor_meta_map` : Les métadonnées de l'échantillon tumoral incluant le type, le réplicat et le chemin vers le fichier bam
 - `tumor_sample` : L'échantillon tumoral incluant le type, le réplicat et le chemin vers le fichier bam
 
-!!! warning
+!!! warning "Avertissement"
 
     L'opérateur `join` éliminera tous les tuples non appariés. Dans cet exemple, nous nous sommes assurés que tous les échantillons étaient appariés pour tumeur et normal, mais si ce n'est pas le cas, vous devez utiliser le paramètre `remainder: true` pour conserver les tuples non appariés. Consultez la [documentation](https://www.nextflow.io/docs/latest/operator.html#join) pour plus de détails.
 
@@ -685,7 +685,7 @@ Implémentons la closure dans notre workflow :
             .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
     ```
 
-!!! note
+!!! note "Note"
 
     L'opérateur `map` est passé de l'utilisation de `{ }` à l'utilisation de `( )` pour passer la closure comme argument. C'est parce que l'opérateur `map` attend une closure comme argument et `{ }` est utilisé pour définir une closure anonyme. Lors de l'appel d'une closure nommée, utilisez la syntaxe `( )`.
 
@@ -807,7 +807,7 @@ nextflow run main.nf
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
 
-### Point clé
+### À retenir
 
 Dans cette section, vous avez appris :
 
@@ -977,7 +977,7 @@ Utiliser `map` pour contraindre vos données dans la structure correcte peut êt
 
 Nous avons maintenant chaque échantillon répété sur tous les intervalles génomiques, créant plusieurs unités d'analyse indépendantes qui peuvent être traitées en parallèle. Mais que se passe-t-il si nous voulons rassembler des échantillons connexes ? Dans la section suivante, nous apprendrons comment regrouper des échantillons qui partagent des attributs communs.
 
-### Point clé
+### À retenir
 
 Dans cette section, vous avez appris :
 
@@ -1076,7 +1076,7 @@ nextflow run main.nf
 
 Nous pouvons voir que nous avons réussi à isoler les champs `id` et `interval`, mais que nous n'avons pas encore regroupé les échantillons.
 
-!!! note
+!!! note "Note"
 
     Nous écartons le champ `replicate` ici. C'est parce que nous n'en avons pas besoin pour le traitement en aval ultérieur. Après avoir terminé ce tutoriel, voyez si vous pouvez l'inclure sans affecter le regroupement ultérieur !
 
@@ -1137,11 +1137,11 @@ nextflow run main.nf
 
 Notez que notre structure de données a changé et qu'au sein de chaque élément de canal, les fichiers sont maintenant contenus dans des tuples comme `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`. C'est parce que lorsque nous utilisons `groupTuple`, Nextflow combine les fichiers individuels pour chaque échantillon d'un groupe. C'est important à retenir lorsqu'on essaie de traiter les données en aval.
 
-!!! note
+!!! note "Note"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) est l'opposé de groupTuple. Il décompresse les éléments dans un canal et les aplatit. Essayez d'ajouter `transpose` et d'annuler le regroupement que nous avons effectué ci-dessus !
 
-### Point clé
+### À retenir
 
 Dans cette section, vous avez appris :
 
@@ -1154,7 +1154,7 @@ Dans cette section, vous avez appris :
 
 ## Résumé
 
-Dans cette quête annexe, vous avez appris comment diviser et regrouper des données en utilisant des canaux.
+Dans cette quête secondaire, vous avez appris comment diviser et regrouper des données en utilisant des canaux.
 
 En modifiant les données à mesure qu'elles circulent dans le pipeline, vous pouvez construire un pipeline évolutif sans utiliser de boucles ou d'instructions while, offrant plusieurs avantages par rapport aux approches plus traditionnelles :
 
@@ -1249,4 +1249,4 @@ La maîtrise de ces opérations de canaux vous permettra de construire des pipel
 
 ## Et ensuite ?
 
-Retournez au [menu des quêtes annexes](./index.md) ou cliquez sur le bouton en bas à droite de la page pour passer au sujet suivant dans la liste.
+Retournez au [menu des quêtes secondaires](./index.md) ou cliquez sur le bouton en bas à droite de la page pour passer au sujet suivant dans la liste.

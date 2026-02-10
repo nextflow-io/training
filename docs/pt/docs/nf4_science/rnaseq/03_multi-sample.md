@@ -165,7 +165,7 @@ No caso do nosso fluxo de trabalho, temos as seguintes saídas para agregar:
 
 Então o exemplo de sintaxe se torna:
 
-```groovy title="Aplicando .mix() na chamada MULTIQC"
+```groovy title="Applying .mix() in the MULTIQC call"
         FASTQC.out.zip.mix(
         FASTQC.out.html,
         TRIM_GALORE.out.trimming_reports,
@@ -180,7 +180,7 @@ E também precisamos dar a ele o parâmetro `report_id`.
 
 Isso nos dá o seguinte:
 
-```groovy title="A chamada MULTIQC completa" linenums="33"
+```groovy title="The completed MULTIQC call" linenums="33"
     // Geração de relatório de QC abrangente
     MULTIQC(
         FASTQC.out.zip.mix(
@@ -202,7 +202,7 @@ workflow {
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
 
-    // Controle de qualidade inicial
+    /// Initial quality control
     FASTQC(read_ch)
 
     // Corte de adaptador e QC pós-corte
@@ -252,7 +252,7 @@ Você pode encontrar as saídas em `results/trimming` conforme especificado no p
 tree -L 2 results/multiqc
 ```
 
-```console title="Saída"
+```console title="Output"
 results/multiqc
 ├── all_single-end_data
 │   ├── cutadapt_filtered_reads_plot.txt

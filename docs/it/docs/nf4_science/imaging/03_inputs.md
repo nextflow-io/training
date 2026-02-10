@@ -28,7 +28,7 @@ Cosa succede se un collaboratore vuole utilizzare le vostre stesse impostazioni?
 
 ### 1.2. Soluzione: Utilizzare un file di parametri
 
-Creare un file chiamato `params.yaml`:
+Creiamo un file chiamato `params.yaml`:
 
 ```yaml title="params.yaml"
 input: "data/samplesheet.csv"
@@ -58,16 +58,16 @@ nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist"
 
 La riga sopra cambia il `segmentation_method` in `stardist` e il nome di `--outdir` in `stardist_results` invece dei parametri nel file `params.yaml`.
 Inoltre, potete vedere che il flag `-resume` ci ha permesso di riutilizzare i risultati di pre-elaborazione dall'esecuzione precedente, risparmiando tempo.
-Può utilizzare questo schema per testare rapidamente diverse variazioni della pipeline.
+Potete utilizzare questo schema per testare rapidamente diverse variazioni della pipeline.
 
 ### Takeaway
 
 I file di parametri rendono le vostre analisi riproducibili e facili da condividere.
-Li utilizzi per qualsiasi lavoro di analisi reale.
+Utilizzateli per qualsiasi lavoro di analisi reale.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
-Scopra come i samplesheet organizzano le informazioni su più campioni.
+Scoprite come i samplesheet organizzano le informazioni su più campioni.
 
 ---
 
@@ -104,7 +104,7 @@ I samplesheet accettano diversi tipi di percorso:
 - **Percorsi locali**: `data/nuclear.tiff` o `/absolute/path/to/nuclear.tiff`
 - **Cloud storage**: `s3://bucket/nuclear.tiff`, `gs://bucket/nuclear.tiff`, `az://container/nuclear.tiff`
 
-Può combinare tipi di percorso nello stesso samplesheet.
+Potete combinare tipi di percorso nello stesso samplesheet.
 
 ### 2.3. Creazione del proprio samplesheet
 
@@ -125,9 +125,9 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Avviso"
+!!! Warning "Avviso"
 
-    Noti che i percorsi nel samplesheet sono relativi a dove **esegue** Nextflow, non a dove si trova il samplesheet.
+    Notate che i percorsi nel samplesheet sono relativi a dove **eseguite** Nextflow, non a dove si trova il samplesheet.
 
 Infine, eseguiamo nf-core/molkart un'altra volta con il samplesheet con percorsi di file locali:
 
@@ -140,6 +140,6 @@ Come potete vedere, Nextflow esegue questa esecuzione in modo simile a quando i 
 I samplesheet organizzano set di dati multi-campione in modo da permettervi di definire esplicitamente i vostri metadati insieme ai percorsi dei file.
 La maggior parte delle pipeline nf-core utilizza questo pattern.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Ora che abbiamo trattato gli input, esploriamo come configurare le pipeline Nextflow per diversi ambienti di calcolo.

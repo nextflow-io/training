@@ -1,6 +1,6 @@
 # Bölüm 4: Yapılandırma
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bölüm 1-3'te Nextflow'u nasıl çalıştıracağımızı, bir nf-core pipeline'ını nasıl çalıştıracağımızı ve girdileri parametre dosyaları ve örnek listelerini kullanarak nasıl yöneteceğimizi öğrendik.
 Şimdi, **yapılandırma dosyaları** ve **profiller** kullanarak pipeline'ları farklı hesaplama ortamları için nasıl yapılandıracağımızı keşfedeceğiz.
@@ -80,7 +80,7 @@ code molkart/nextflow.config
 
 `profiles` bloğunu arayın:
 
-```groovy title="molkart/nextflow.config (alıntı)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
     docker {
         docker.enabled          = true
@@ -130,7 +130,7 @@ Her bayrağın ne yaptığını inceleyelim:
 `-resume` kullandığımız için Nextflow, son çalıştırmadan bu yana bir şeyin değişip değişmediğini kontrol edecektir.
 Parametreler, girdiler ve kod aynıysa, tüm görevler önbellekten alınacak ve pipeline neredeyse anında tamamlanacaktır.
 
-```console title="Çıktı (alıntı)"
+```console title="Output (excerpt)"
 executor >  local (12)
 ...
 [1a/2b3c4d] NFCORE_MOLKART:MOLKART:MINDAGAP_MINDAGAP (mem_only)   [100%] 2 of 2, cached: 2 ✔
@@ -151,7 +151,7 @@ nf-core pipeline'ları her zaman en az iki test profili içerecektir:
 
 `includeConfig` yönergesi kullanılarak dahil edilen molkart'taki `test` profiline daha yakından bakalım:
 
-```groovy title="molkart/nextflow.config (alıntı)"
+```groovy title="molkart/nextflow.config (excerpt)"
 profiles {
   ...
     test      { includeConfig 'conf/test.config'      }
@@ -160,7 +160,7 @@ profiles {
 
 Bu, pipeline'ı `-profile test` ile ne zaman çalıştırsak, Nextflow'un yapılandırmayı `conf/test.config` dosyasından yükleyeceği anlamına gelir.
 
-```groovy title="molkart/conf/test.config (alıntı)"
+```groovy title="molkart/conf/test.config (excerpt)"
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
@@ -198,7 +198,7 @@ Bu şunları birleştirir:
 
 Profiller soldan sağa uygulanır, bu nedenle sonraki profiller aynı değerleri ayarlarlarsa önceki olanları geçersiz kılar.
 
-### Çıkarım
+### Özet
 
 nf-core pipeline'ları konteynerler, test ve özel ortamlar için yerleşik profillerle birlikte gelir.
 İhtiyacınız olan yapılandırmayı oluşturmak için birden fazla profili birleştirebilirsiniz.
@@ -273,7 +273,7 @@ Bu şunlar için son derece kullanışlıdır:
 - Hangi değerlerin gerçekte kullanılacağını anlama
 - Birden fazla profilin nasıl etkileşime girdiğini kontrol etme
 
-### Çıkarım
+### Özet
 
 Özel profiller, tek bir komut satırı bayrağıyla farklı hesaplama ortamları arasında geçiş yapmanıza olanak tanır.
 Çalıştırmadan önce çözümlenmiş yapılandırmayı incelemek için `nextflow config` kullanın.
@@ -292,7 +292,7 @@ Basitlik için nf-core pipeline'ları, tüm pipeline'larda kaynak tahsisini stan
 Her proses, sırasıyla düşük, orta veya yüksek hesaplama kaynak gereksinimlerini tanımlamak için `process_low`, `process_medium` veya `process_high` gibi bir etiketle işaretlenir.
 Bu etiketler, pipeline'ın `conf/` dizininde bulunan yapılandırma dosyalarından birinde belirli kaynak taleplerine dönüştürülür.
 
-```groovy title="molkart/conf/base.config (alıntı)"
+```groovy title="molkart/conf/base.config (excerpt)"
 process {
     cpus   = { 1      * task.attempt }
     memory = { 6.GB   * task.attempt }
@@ -349,7 +349,7 @@ Bu tür başarısızlıkları bir sonraki bölümde nasıl önleyeceğimizi öğ
     Proses isimlerini bulmak için, pipeline yürütme çıktısına bakın veya `.nextflow.log` dosyasını kontrol edin.
     Proses isimleri `WORKFLOW:SUBWORKFLOW:PROCESS` desenini takip eder.
 
-### Çıkarım
+### Özet
 
 nf-core pipeline'ları kaynak tahsisini standartlaştırmak için process etiketlerini kullanır.
 Kaynakları etikete göre (birden fazla prosesi etkiler) veya isme göre (belirli bir prosesi etkiler) geçersiz kılabilirsiniz.
@@ -414,7 +414,7 @@ profiles {
     Kaynak limitlerini çok düşük ayarlamak proseslerin başarısız olmasına veya yavaş çalışmasına neden olabilir.
     Pipeline'ın daha az bellek yoğun algoritmalar kullanması veya verileri daha küçük parçalar halinde işlemesi gerekebilir.
 
-### Çıkarım
+### Özet
 
 Proses kaynak taleplerini sınırlayarak kaynak kısıtlı ortamlarda pipeline'ları çalıştırmak için `resourceLimits` kullanın.
 Farklı profiller, ortamlarına uygun farklı limitlere sahip olabilir.

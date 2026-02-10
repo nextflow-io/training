@@ -168,7 +168,7 @@ Você pode encontrar as saídas em `results/fastqc` conforme especificado no pro
 ls results/fastqc
 ```
 
-```console title="Saída"
+```console title="Output"
 ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 ```
 
@@ -232,7 +232,7 @@ workflow {
     // Controle de qualidade inicial
     FASTQC(read_ch)
 
-    // Corte de adaptador e QC pós-corte
+    // Remoção de adaptadores e QC pós-remoção
     TRIM_GALORE(read_ch)
 }
 ```
@@ -263,7 +263,7 @@ Você pode encontrar as saídas em `results/trimming` conforme especificado no p
 ls results/trimming
 ```
 
-```console title="Saída"
+```console title="Output"
 ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip
 ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz
 ```
@@ -335,9 +335,9 @@ params {
 }
 ```
 
-### 3.4. Chamar o processo `HISAT2_ALIGN` nos reads processados pela saída de `TRIM_GALORE`
+### 3.4. Chamar o processo `HISAT2_ALIGN` nos reads removidos pela saída de `TRIM_GALORE`
 
-Os reads processados estão no canal de saída `TRIM_GALORE.out.trimmed_reads` produzido pela etapa anterior.
+Os reads removidos estão no canal de saída `TRIM_GALORE.out.trimmed_reads` produzido pela etapa anterior.
 
 Além disso, usamos `file (params.hisat2_index_zip)` para fornecer à ferramenta Hisat2 o arquivo tarball compactado do índice do genoma.
 
@@ -350,7 +350,7 @@ workflow {
     // Controle de qualidade inicial
     FASTQC(read_ch)
 
-    // Corte de adaptador e QC pós-corte
+    // Remoção de adaptadores e QC pós-remoção
     TRIM_GALORE(read_ch)
 
     // Alinhamento a um genoma de referência
@@ -383,7 +383,7 @@ Você pode encontrar as saídas em `results/align` conforme especificado no proc
 ls results/align
 ```
 
-```console title="Saída"
+```console title="Output"
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 

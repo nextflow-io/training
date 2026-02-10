@@ -1,5 +1,7 @@
 # Parte 6: Hello Config - Trascrizione Video
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -256,7 +258,7 @@ Notate che potete effettivamente usare una miscela di diverse tecnologie. Quindi
 
 ## 4. Selezionare una piattaforma di esecuzione
 
-Quindi questo è pacchettizzazione software. L'altra parte della portabilità su altri sistemi è dove i job effettivamente vengono eseguiti. Al momento, sto eseguendo su fondamentalmente il mio_laptop o in questo Codespaces, che è un singolo computer. Non c'è niente di particolare. Nextflow sta essendo un po' intelligente nel parallelizzare i job nel miglior modo possibile, ma è tutto su un sistema.
+Quindi questo è pacchettizzazione software. L'altra parte della portabilità su altri sistemi è dove i job effettivamente vengono eseguiti. Al momento, sto eseguendo su fondamentalmente il mio laptop o in questo Codespaces, che è un singolo computer. Non c'è niente di particolare. Nextflow sta essendo un po' intelligente nel parallelizzare i job nel miglior modo possibile, ma è tutto su un sistema.
 
 Ora, se state eseguendo su un HPC, probabilmente avete qualche tipo di scheduler di job come SLURM o PBS o qualcosa del genere, e inviate job a quello scheduler e distribuirà tutti i job a diversi nodi di calcolo.
 

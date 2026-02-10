@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-En esta tercera parte del curso de entrenamiento Hello nf-core, le mostramos cómo encontrar, instalar y usar un módulo nf-core existente en su pipeline.
+En esta tercera parte del curso de capacitación Hello nf-core, le mostramos cómo encontrar, instalar y usar un módulo nf-core existente en su pipeline.
 
 Uno de los grandes beneficios de trabajar con nf-core es la capacidad de aprovechar módulos preconstruidos y probados del repositorio [nf-core/modules](https://github.com/nf-core/modules).
 En lugar de escribir cada proceso desde cero, puede instalar y usar módulos mantenidos por la comunidad que siguen las mejores prácticas.
@@ -220,7 +220,7 @@ El comando automáticamente:
 - Actualiza `modules.json` para rastrear el módulo instalado
 - Le proporciona la declaración `include` correcta para usar en su workflow
 
-!!! tip
+!!! tip "Consejo"
 
     Asegúrese siempre de que su directorio de trabajo actual sea la raíz de su proyecto de pipeline antes de ejecutar el comando de instalación del módulo.
 
@@ -230,7 +230,7 @@ Verifiquemos que el módulo se instaló correctamente:
 tree -L 4 modules
 ```
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     modules
@@ -332,7 +332,7 @@ En este punto, podría sentirse tentado a sumergirse y comenzar a editar código
 
 Vamos a abordar eso como una sección separada porque involucra un nuevo mecanismo que no hemos cubierto todavía: los mapas de metadatos.
 
-!!! note
+!!! note "Nota"
 
     Opcionalmente puede eliminar el archivo `collectGreetings.nf`:
 
@@ -360,7 +360,7 @@ Esto nos permitirá determinar si podemos simplemente tratar el nuevo módulo co
 Idealmente, esto es algo que debería hacer _antes_ de instalar el módulo, pero bueno, más vale tarde que nunca.
 (Para su información, existe un comando `uninstall` para deshacerse de los módulos que decide que ya no quiere.)
 
-!!! note
+!!! note "Nota"
 
     El proceso CAT_CAT incluye un manejo bastante ingenioso de diferentes tipos de compresión, extensiones de archivo, etc., que no son estrictamente relevantes para lo que estamos tratando de mostrarle aquí, así que ignoraremos la mayor parte y nos enfocaremos solo en las partes que son importantes.
 
@@ -499,7 +499,7 @@ No solo le permite nombrar salidas basadas en metadatos, sino que también puede
 
 !!! note "Aprenda más sobre metadatos"
 
-    Para una introducción completa sobre cómo trabajar con metadatos en workflows Nextflow, incluyendo cómo leer metadatos de hojas de muestras y usarlos para personalizar el procesamiento, consulte la [Metadatos en workflows](../side_quests/metadata) misión secundaria.
+    Para una introducción completa sobre cómo trabajar con metadatos en workflows Nextflow, incluyendo cómo leer metadatos de hojas de muestras y usarlos para personalizar el procesamiento, consulte la misión secundaria [Metadatos en workflows](../side_quests/metadata).
 
 ### 2.3. Resumir los cambios a realizar
 
@@ -528,7 +528,7 @@ Ahora que sabe todo sobre los metamapas (o suficiente para los propósitos de es
 
 Por claridad, desglosaremos esto y cubriremos cada paso por separado.
 
-!!! note
+!!! note "Nota"
 
     Todos los cambios mostrados a continuación se realizan en la lógica del workflow en el bloque `main` en el archivo de workflow `core-hello/workflows/hello.nf`.
 
@@ -738,7 +738,7 @@ La operación `.map{ meta, file -> file }` extrae el archivo de la tupla `[metad
 
 Luego, es solo cuestión de pasar `ch_for_cowpy` a `cowpy` en lugar de `collectGreetings.out.outfile` en esa última línea.
 
-!!! note
+!!! note "Nota"
 
     En la siguiente parte del curso, actualizaremos `cowpy` para trabajar con tuplas de metadatos directamente, por lo que este paso de extracción ya no será necesario.
 

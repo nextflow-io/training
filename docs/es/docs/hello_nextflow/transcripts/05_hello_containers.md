@@ -22,15 +22,15 @@ Si estabas ejecutando en un HPC, quizás usaste módulos de entorno donde los ad
 
 Pero ahora tenemos mejores formas de hacer esto. Nextflow tiene soporte integrado para diferentes tecnologías de contenedores de software. Docker es la más común. Esa es la que vamos a usar hoy. Funciona bien en Codespaces. Funciona bien en tu computadora local y funciona bien en la nube.
 
-Pero también Singularity o Apptainer, que son muy comunes en sistemas HPC y efectivamente funcionan exactamente de la misma manera. O Poman, Shifter, hay un montón de otros que son todos muy similares.
+Pero también Singularity o Apptainer, que son muy comunes en sistemas HPC y efectivamente funcionan exactamente de la misma manera. O Podman, Shifter, hay un montón de otros que son todos muy similares.
 
 El único extra, que es algo similar pero no exactamente, que Nextflow soporta es Conda. Y Nextflow puede gestionar entornos Conda para ti por proceso, lo cual es mucho mejor que hacer tus propios entornos Conda. Y nuevamente, puede enviarse con un pipeline.
 
 Vamos a comenzar este capítulo hablando un poco sobre las tecnologías de contenedores y Docker y cómo funcionan. Y vamos a hacer la primera mitad solo manualmente en Docker para que entiendas qué está pasando bajo el capó y cómo funciona esto. Porque eso es realmente importante para entender qué está haciendo Nextflow y cómo entender qué está haciendo tu workflow cuando se está ejecutando.
 
-Así que. Saltemos a nuestros Codespaces. Ahora he limpiado todo de nuevo, pero si saltamos a Hello Containers, deberías ver que todos nuestros scripts y todo están ahí igual que al final del capítulo de módulos. Así que tenemos nuestros diferentes módulos aquí, que creé en el directorio de módulos.
+Así que saltemos a nuestros Codespaces. Ahora he limpiado todo de nuevo, pero si saltamos a Hello Containers, deberías ver que todos nuestros scripts y todo están ahí igual que al final del capítulo de módulos. Así que tenemos nuestros diferentes módulos aquí, que creé en el directorio de módulos.
 
-Todavía están ahí. Necesitan estar ahí para que pueda ejecutarse. y el workflow y la salida son todos iguales excepto que hemos cambiado la ruta de publicación de salida a Hello Containers, para que tus archivos terminen en ese directorio.
+Todavía están ahí. Necesitan estar ahí para que pueda ejecutarse, y el workflow y la salida son todos iguales excepto que hemos cambiado la ruta de publicación de salida a Hello Containers, para que tus archivos terminen en ese directorio.
 
 Podemos ejecutar esto ahora para verificar que funciona si quieres, o podemos continuar con la terminal.
 
@@ -52,9 +52,9 @@ Podemos ver qué imágenes tenemos localmente con Docker haciendo "docker image 
 
 Pero vamos a agarrar una nueva haciendo "docker pull". Y eso le dice a Docker que busque una nueva imagen desde la web.
 
-Luego ponemos el URI para ese contenedor. Ahora esto podría ser una imagen docker que has construido localmente y luego enviado a internet. podría ser una imagen que otra persona ha hecho. Hay muchas, muchas, muchas formas diferentes de hacer imágenes Docker, pero posiblemente una de las formas más simples es externalizar eso, y hacer que alguien más lo haga por ti.
+Luego ponemos el URI para ese contenedor. Ahora esto podría ser una imagen docker que has construido localmente y luego enviado a internet, podría ser una imagen que otra persona ha hecho. Hay muchas, muchas, muchas formas diferentes de hacer imágenes Docker, pero posiblemente una de las formas más simples es externalizar eso, y hacer que alguien más lo haga por ti.
 
-Y lo que vamos a usar en este, tutorial es un servicio de Seqera llamado Seqera Containers.
+Y lo que vamos a usar en este tutorial es un servicio de Seqera llamado Seqera Containers.
 
 Ahora, Seqera Containers es totalmente gratis, y usa una pieza de software de código abierto que desarrollamos llamado Wave, que fue construido para gestionar contenedores de manera complementaria a Nextflow. Y maneja muchos de los casos de uso comunes con los que nos encontramos lidiando con Nextflow.
 
@@ -68,7 +68,7 @@ Y una vez que los resultados de bioconda están listados, ahora puedo ver todas 
 
 Ahora, alguien más ya ha solicitado el mismo contenedor antes y se devuelve desde un registro, así que lo obtenemos inmediatamente. Pero si nadie más hubiera pedido este paquete de software o esta combinación de paquetes de software, Wave y Seqera Containers lo construiría sobre la marcha para nosotros.
 
-Podemos copiar esta URL y también podemos ver los detalles de construcción. Y esto nos muestra qué hizo el servicio en el backend. Creó un archivo de entorno conda. Un archivo docker, y luego esto es, ejecutando el proceso de construcción docker. También ejecutó un escaneo, un escaneo de seguridad, así que puedes ver cualquier CVE. Y te dice cuándo se creó esto.
+Podemos copiar esta URL y también podemos ver los detalles de construcción. Y esto nos muestra qué hizo el servicio en el backend. Creó un archivo de entorno conda, un archivo docker, y luego esto es, ejecutando el proceso de construcción docker. También ejecutó un escaneo, un escaneo de seguridad, así que puedes ver cualquier CVE. Y te dice cuándo se creó esto.
 
 Wave y Seqera Containers pueden hacer mucho más que esto, pero este es un caso de uso simple, que es el más común. Y debería decir que estas imágenes se alojan durante al menos cinco años. Así que puedes construir estas URLs en tus pipelines y saber que no van a desaparecer pronto.
 
@@ -96,9 +96,9 @@ Y luego voy a volver aquí y voy a hacer "-it", que significa Interactivo y Term
 
 Y ahora puedes ver que el prompt, la parte antes de que escriba, ha cambiado. Este era el prompt de Codespaces donde decía el directorio, y ahora dice base y root y tmp. Así que ahora estoy dentro del contenedor, y si hago "ls", verás que los archivos que veo en este directorio son diferentes a los archivos que tengo en mi espacio de trabajo.
 
-Y de hecho, no puedo ver ninguno de los archivos de mi espacio de trabajo local de codespaces o mi unidad local dentro del contenedor Docker. El tiempo de ejecución del contenedor docker, está completamente aislado y no puede escribir o leer ningún archivo de un sistema de archivos host externo.
+Y de hecho, no puedo ver ninguno de los archivos de mi espacio de trabajo local de codespaces o mi unidad local dentro del contenedor Docker. El tiempo de ejecución del contenedor docker está completamente aislado y no puede escribir o leer ningún archivo de un sistema de archivos host externo.
 
-Sin embargo, puedo ver el software que está instalado dentro del contenedor y ejecutarlo. Así que puedo ejecutar cowpy y podemos ver un poco más sobre cómo usar cowpy. Aquí puedo hacer "cowpy 'Hello World'" y eso le dice, le dice que realmente ponga mi cita dentro de una pequeña burbuja de diálogo. Y también puedes ejecutar diferentes tipos de vacas, así que no tiene que ser una vaca. Puedes hacer un "-c". Y estoy en Suecia, así que voy a elegir un alce. Muy bonito. Le di algunos cuernos.
+Sin embargo, puedo ver el software que está instalado dentro del contenedor y ejecutarlo. Así que puedo ejecutar cowpy y podemos ver un poco más sobre cómo usar cowpy. Aquí puedo hacer "cowpy 'Hello World'" y eso le dice que realmente ponga mi cita dentro de una pequeña burbuja de diálogo. Y también puedes ejecutar diferentes tipos de vacas, así que no tiene que ser una vaca. Puedes hacer un "-c". Y estoy en Suecia, así que voy a elegir un alce. Muy bonito. Le di algunos cuernos.
 
 Y hay un montón de diferentes que puedes explorar, que puedes ver descritos en los documentos de capacitación.
 
@@ -120,7 +120,7 @@ Y luego voy a ejecutar de nuevo.
 
 En el directorio de trabajo donde me deja, que es /tmp, los archivos no están ahí. Pero si hago "ls my_project", ahí lo tenemos: todos los mismos archivos que teníamos localmente en nuestros Codespaces ahora están disponibles dentro del contenedor en esa ruta.
 
-Este es acceso de lectura y escritura, así que puedo crear nuevos archivos en este directorio y aparecerán en mi sistema de archivos host. Este directorio particular, entonces se comporta exactamente como si estuviera fuera del contenedor, así que ahora puedo leer y escribir y hacer cosas.
+Este es acceso de lectura y escritura, así que puedo crear nuevos archivos en este directorio y aparecerán en mi sistema de archivos host. Este directorio particular entonces se comporta exactamente como si estuviera fuera del contenedor, así que ahora puedo leer y escribir y hacer cosas.
 
 ## 1.3.5. Usar los datos montados
 
@@ -158,7 +158,7 @@ Bien. Ahora necesito definir el parámetro de entrada que acabamos de llamar y d
 
 Bien, intentemos ejecutarlo. Así que si hago Nextflow run hello containers, veremos qué pasa.
 
-Podría haber usado dash resume si tuviera los viejos directorios de trabajo dando vueltas. Y nuevamente, estos primeros procesos habrían sido, almacenados en caché y habría sido un poco más rápido, pero debería ser básicamente lo mismo.
+Podría haber usado dash resume si tuviera los viejos directorios de trabajo dando vueltas. Y nuevamente, estos primeros procesos habrían sido almacenados en caché y habría sido un poco más rápido, pero debería ser básicamente lo mismo.
 
 Ahora podemos ver de inmediato que ha lanzado un error cuando llegó a nuestro nuevo proceso, nos está diciendo aquí que hubo un error ejecutando el proceso cowpy y salió con un estado de salida 127. Este es el comando que intentó ejecutar. Se ve bien, se ve como esperábamos. Está tomando ese nombre de archivo de salida, que se ve correcto, lo está ejecutando con un carácter moose y tratando de guardarlo.
 
@@ -186,13 +186,13 @@ Así que si cambio eso a equals True en su lugar, docker.enabled. Y hay document
 
 Así que ahora lo hemos establecido en true, y si ejecuto Nextflow de nuevo, Nextflow ahora sabrá buscar esa imagen docker para nosotros si aún no la tenemos localmente, y luego ejecutar ese proceso con ese entorno de contenedor.
 
-Y así podemos ver que se ha ejecutado exitosamente y tenemos un pequeño tic junto a cowpy. Fantástico. Si subo y miro en el directorio de resultados, el archivo no está ahí todavía. Y eso es porque todavía necesitamos, publicar este archivo de salida igual que todos los demás.
+Y así podemos ver que se ha ejecutado exitosamente y tenemos un pequeño tic junto a cowpy. Fantástico. Si subo y miro en el directorio de resultados, el archivo no está ahí todavía. Y eso es porque todavía necesitamos publicar este archivo de salida igual que todos los demás.
 
 Así que vamos al bloque publish dentro del workflow, digamos mycowpy equals cowpy.out.
 
 Y luego aquí abajo en el bloque output, mycowpy, llaves onduladas path. Ups. Hello containers. Mode, copy.
 
-Si ejecuto de nuevo ahora, debería ejecutarse exactamente de la misma manera. Podría haber usado dash resume y olvido cada vez. Y luego subo y ahora tenemos un nuevo archivo creado llamado cowpy-COLLECTED, y ahí está mi alce diciendo BONJOUR, HELLO, HOLà Fantástico.
+Si ejecuto de nuevo ahora, debería ejecutarse exactamente de la misma manera. Podría haber usado dash resume y olvido cada vez. Y luego subo y ahora tenemos un nuevo archivo creado llamado cowpy-COLLECTED, y ahí está mi alce diciendo BONJOUR, HELLO, HOLÀ. Fantástico.
 
 Ahora, por supuesto, también podría pasar ahora "--character". ¿Cuáles son las diferentes opciones? ¿Creo que hay un pavo? Así que puedo usar character Turkey. Va a ejecutarse exactamente de la misma manera. Perdí otra oportunidad de usar dash resume, y ahora si cargamos nuestro archivo y ahora tenemos un pavo. Fantástico.
 
@@ -202,7 +202,7 @@ Bien. Última pequeña cosa. Ejecutemos rápidamente este comando de nuevo, resu
 
 Esta vez es súper rápido, vamos a ese directorio de trabajo, cd work/. Ahora si recuerdas tenemos un montón de archivos punto aquí y el que nos interesa en este caso es el que dije que casi nunca necesitamos mirar, llamado .command.run.
 
-Si hago code dot command run, lo va a abrir en el editor. Y puedo buscar en este archivo y si me desplazo hacia abajo debería ver Docker run. Y puedes ver que Nextflow está haciendo el comando docker run para nosotros, cuando Docker está habilitado en una configuración. Tiene un montón de diferentes, banderas y cosas aquí, pero puedes ver la bandera "-v" que usamos nosotros mismos cuando estábamos ejecutando. Y puedes ver que está montando el directorio del espacio de trabajo local en el contenedor, para que el contenedor pueda acceder a nuestros archivos de entrada y guardar las salidas. Y luego al final, también está ejecutando .command.sh, que es el script generado, que tiene el comando cowpy dentro.
+Si hago code dot command run, lo va a abrir en el editor. Y puedo buscar en este archivo y si me desplazo hacia abajo debería ver Docker run. Y puedes ver que Nextflow está haciendo el comando docker run para nosotros, cuando Docker está habilitado en una configuración. Tiene un montón de diferentes banderas y cosas aquí, pero puedes ver la bandera "-v" que usamos nosotros mismos cuando estábamos ejecutando. Y puedes ver que está montando el directorio del espacio de trabajo local en el contenedor, para que el contenedor pueda acceder a nuestros archivos de entrada y guardar las salidas. Y luego al final, también está ejecutando .command.sh, que es el script generado, que tiene el comando cowpy dentro.
 
 Y así puedes ver que Nextflow está tomando la lógica del workflow, que es lo que realmente nos importa, que es específica para nuestro análisis, y está haciendo todo lo inteligente detrás de escena para hacer que Docker funcione en nuestro sistema.
 
@@ -212,7 +212,7 @@ Y ese es realmente el superpoder de Nextflow. Es reproducibilidad y portabilidad
 
 Esa es una cosa realmente, realmente difícil de hacer, y ahora tú también sabes cómo hacerlo con tus workflows.
 
-Bien, eso es todo para este capítulo. si bajas al final del curso, encontrarás un, un cuestionario de nuevo sobre algunos contenedores. Espero que todo haya tenido sentido. Es una forma realmente genial de trabajar con análisis. Y si eres nuevo en contenedores, espero haberte convencido de que es el camino a seguir, y nunca mirarás atrás.
+Bien, eso es todo para este capítulo. Si bajas al final del curso, encontrarás un cuestionario de nuevo sobre algunos contenedores. Espero que todo haya tenido sentido. Es una forma realmente genial de trabajar con análisis. Y si eres nuevo en contenedores, espero haberte convencido de que es el camino a seguir, y nunca mirarás atrás.
 
 Pero con eso, toma un pequeño descanso quizás, y te unes a mí en un par de minutos para revisar la parte seis final del Hello Nextflow, que es todo sobre configuración.
 

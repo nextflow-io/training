@@ -62,7 +62,7 @@ code .
 
 Znajdziesz główny plik workflow'u i katalog `data` zawierający arkusz próbek o nazwie `samplesheet.csv`.
 
-```console title="Zawartość katalogu"
+```console title="Directory contents"
 .
 ├── data
 │   └── samplesheet.csv
@@ -90,7 +90,7 @@ Jeśli nie znasz analizy raka, wiedz tylko, że odpowiada to modelowi eksperymen
 
 Dla pacjenta A mamy konkretnie dwa zestawy replikatów technicznych (powtórzeń).
 
-!!! note
+!!! note "Uwaga"
 
     Nie martw się, jeśli nie znasz tego projektu eksperymentalnego, nie jest to kluczowe dla zrozumienia tego tutorialu.
 
@@ -131,13 +131,13 @@ workflow {
 }
 ```
 
-!!! note
+!!! note "Uwaga"
 
     W całym tym tutorialu będziemy używać prefiksu `ch_` dla wszystkich zmiennych kanałów, aby wyraźnie wskazać, że są to kanały Nextflow.
 
 Jeśli ukończyłeś misję poboczną [Metadane w workflow'ach](./metadata.md), rozpoznasz ten wzorzec. Użyjemy `splitCsv` do odczytu CSV i natychmiastowego ustrukturyzowania danych za pomocą mapy meta, aby oddzielić metadane od ścieżek plików.
 
-!!! info
+!!! info "Info"
 
     Napotkamy dwa różne koncepty nazywane `map` w tym szkoleniu:
 
@@ -514,7 +514,7 @@ Trochę trudno to powiedzieć, ponieważ jest tak szerokie, ale powinieneś być
 - `tumor_meta_map`: Metadane próbki nowotworowej, w tym typ, replikat i ścieżka do pliku bam
 - `tumor_sample`: Próbka nowotworowa, w tym typ, replikat i ścieżka do pliku bam
 
-!!! warning
+!!! warning "Ostrzeżenie"
 
     Operator `join` odrzuci wszystkie niedopasowane krotki. W tym przykładzie upewniliśmy się, że wszystkie próbki są dopasowane dla guza i normalne, ale jeśli to nie jest prawda, musisz użyć parametru `remainder: true`, aby zachować niedopasowane krotki. Sprawdź [dokumentację](https://www.nextflow.io/docs/latest/operator.html#join) po więcej szczegółów.
 
@@ -685,7 +685,7 @@ Zaimplementujmy domknięcie w naszym workflow'u:
             .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
     ```
 
-!!! note
+!!! note "Uwaga"
 
     Operator `map` zmienił się z używania `{ }` na używanie `( )` do przekazania domknięcia jako argumentu. Dzieje się tak, ponieważ operator `map` oczekuje domknięcia jako argumentu, a `{ }` jest używane do definiowania anonimowego domknięcia. Podczas wywoływania nazwanego domknięcia użyj składni `( )`.
 
@@ -1076,7 +1076,7 @@ nextflow run main.nf
 
 Widać, że pomyślnie wyodrębniliśmy pola `id` i `interval`, ale jeszcze nie zgrupowaliśmy próbek.
 
-!!! note
+!!! note "Uwaga"
 
     Odrzucamy tutaj pole `replicate`. Dzieje się tak, ponieważ nie potrzebujemy go do dalszego przetwarzania downstream. Po ukończeniu tego tutorialu zobacz, czy możesz je uwzględnić bez wpływu na późniejsze grupowanie!
 
@@ -1137,7 +1137,7 @@ nextflow run main.nf
 
 Zauważ, że nasza struktura danych się zmieniła, a w każdym elemencie kanału pliki są teraz zawarte w krotkach takich jak `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`. Dzieje się tak, ponieważ gdy używamy `groupTuple`, Nextflow łączy pojedyncze pliki dla każdej próbki z grupy. To jest ważne do zapamiętania podczas próby obsługi danych downstream.
 
-!!! note
+!!! note "Uwaga"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) jest przeciwieństwem groupTuple. Rozpakuje elementy w kanale i spłaszczy je. Spróbuj dodać `transpose` i cofnąć grupowanie, które wykonaliśmy powyżej!
 

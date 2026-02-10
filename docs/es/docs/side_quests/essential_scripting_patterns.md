@@ -1,85 +1,764 @@
+# Patrones esenciales de scripting en Nextflow
+
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
+Nextflow es un lenguaje de programación que se ejecuta en la Máquina Virtual de Java. Aunque Nextflow está construido sobre [Groovy](http://groovy-lang.org/) y comparte gran parte de su sintaxis, Nextflow es más que solo "Groovy con extensiones" -- es un lenguaje independiente con una [sintaxis](https://nextflow.io/docs/latest/reference/syntax.html) completamente especificada y una [biblioteca estándar](https://nextflow.io/docs/latest/reference/stdlib.html).
+
+Puedes escribir mucho código en Nextflow sin aventurarte más allá de la sintaxis básica para variables, mapas y listas. La mayoría de los tutoriales de Nextflow se centran en la orquestación del flujo de trabajo (canales, procesos y flujo de datos), y puedes llegar sorprendentemente lejos con solo eso.
+
+Sin embargo, cuando necesitas manipular datos, analizar nombres de archivos complejos, implementar lógica condicional o construir flujos de trabajo robustos para producción, ayuda pensar en dos aspectos distintos de tu código: **flujo de datos** (canales, operadores, procesos y workflows) y **scripting** (el código dentro de closures, funciones y scripts de procesos). Aunque esta distinción es algo arbitraria—todo es código Nextflow—proporciona un modelo mental útil para entender cuándo estás orquestando tu pipeline versus cuándo estás manipulando datos. Dominar ambos mejora dramáticamente tu capacidad para escribir flujos de trabajo claros y mantenibles.
+
+### Objetivos de aprendizaje
+
+Esta búsqueda lateral te lleva en un viaje práctico desde conceptos básicos hasta patrones listos para producción.
+Transformaremos un flujo de trabajo simple que lee CSV en un pipeline bioinformático sofisticado, evolucionándolo paso a paso a través de desafíos realistas:
+
+- **Entender límites:** Distinguir entre operaciones de flujo de datos y scripting, y entender cómo trabajan juntos
+- **Manipulación de datos:** Extraer, transformar y crear subconjuntos de mapas y colecciones usando operadores poderosos
+- **Procesamiento de cadenas:** Analizar esquemas complejos de nomenclatura de archivos con patrones regex y dominar la interpolación de variables
+- **Funciones reutilizables:** Extraer lógica compleja en funciones nombradas para flujos de trabajo más limpios y mantenibles
+- **Lógica dinámica:** Construir procesos que se adapten a diferentes tipos de entrada y usar closures para asignación dinámica de recursos
+- **Enrutamiento condicional:** Enrutar inteligentemente muestras a través de diferentes procesos basándose en sus características de metadatos
+- **Operaciones seguras:** Manejar datos faltantes con gracia usando operadores seguros ante nulos y validar entradas con mensajes de error claros
+- **Manejadores basados en configuración:** Usar manejadores de eventos de flujo de trabajo para registro, notificaciones y gestión del ciclo de vida
+
+### Prerrequisitos
+
+Antes de emprender esta búsqueda lateral, deberías:
+
+- Haber completado el tutorial [Hello Nextflow](../hello_nextflow/README.md) o un curso equivalente para principiantes.
+- Sentirte cómodo usando conceptos y mecanismos básicos de Nextflow (procesos, canales, operadores, trabajar con archivos, metadatos)
+- Tener familiaridad básica con construcciones de programación comunes (variables, mapas, listas)
+
+Este tutorial explicará conceptos de programación a medida que los encontremos, así que no necesitas experiencia extensa en programación.
+Comenzaremos con conceptos fundamentales y construiremos hasta patrones avanzados.
+
 ---
-title: Patrones esenciales de scripting
-description: Aprende técnicas avanzadas de programación en Nextflow.
-weight: 1200
----
 
-# Patrones esenciales de scripting
+## 0. Primeros pasos
 
-Esta lección te guiará a través de los patrones de programación esenciales que son fundamentales para crear flujos de trabajo efectivos de Nextflow. Cubriremos patrones para manejar la entrada de datos, transformar valores, controlar la lógica del flujo de trabajo, asignar recursos dinámicamente, y más.
+#### Abre el codespace de capacitación
 
-## Objetivos de aprendizaje
+Si aún no lo has hecho, asegúrate de abrir el entorno de capacitación como se describe en [Configuración del Entorno](../envsetup/index.md).
 
-- Entender las diferencias entre los paradigmas de flujo de datos y scripting
-- Aplicar closures, operadores ternarios, y otras técnicas de Groovy
-- Dominar técnicas para manipular metadatos y extraer información de archivos
-- Utilizar expresiones regulares y procesamiento de cadenas para analizar nombres de archivos
-- Crear funciones reutilizables para lógica compleja
-- Implementar asignación dinámica de recursos y estrategias de reintento
-- Agregar lógica condicional para controlar la ejecución del flujo de trabajo
-- Escribir código robusto utilizando operadores de navegación segura y Elvis
-- Validar entradas con mensajes de error claros
-- Utilizar event handlers para gestionar la finalización del flujo de trabajo
+[![Abrir en GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-## Prerrequisitos
+#### Muévete al directorio del proyecto
 
-- Entendimiento básico de flujos de trabajo de Nextflow
-- Familiaridad con la sintaxis de DSL2
-- Conocimiento básico de canales y procesos
-- Entorno de desarrollo configurado con Nextflow v23.04.0 o posterior
-- Acceso a Docker (o Conda) para los contenedores de software
-
-## Cómo empezar
-
-Este tutorial asume que tienes un conocimiento básico de la sintaxis de Nextflow y las operaciones de los canales.
-
-Para comenzar, navega a la carpeta `side-quests/essential_scripting_patterns`:
+Vamos a movernos al directorio donde se encuentran los archivos para este tutorial.
 
 ```bash
 cd side-quests/essential_scripting_patterns
 ```
 
-El repositorio contiene varios archivos:
+#### Revisa los materiales
 
-- `main.nf`: El flujo de trabajo principal
-- `modules/fastp.nf`: Módulo para el procesamiento de calidad con FASTP
-- `modules/generate_report.nf`: Módulo para generar reportes
-- `modules/trimgalore.nf`: Módulo para un programa alternativo de recorte
-- `data/samples.csv`: Un CSV con información de muestras
-- `data/sequences/*.fastq`: Archivos fastq de ejemplo
+Encontrarás un archivo de flujo de trabajo principal y un directorio `data` que contiene archivos de datos de ejemplo.
 
-Inspeccionemos los archivos:
-
-```bash
-cat main.nf
+```console title="Directory contents"
+.
+├── collect.nf
+├── data
+│   ├── samples.csv
+│   └── sequences
+│       ├── SAMPLE_001_S1_L001_R1_001.fastq
+│       ├── SAMPLE_002_S2_L001_R1_001.fastq
+│       └── SAMPLE_003_S3_L001_R1_001.fastq
+├── main.nf
+├── modules
+│   ├── fastp.nf
+│   ├── generate_report.nf
+│   └── trimgalore.nf
+└── nextflow.config
 ```
 
-Deberías ver un flujo de trabajo mínimo que usa inclusiones de módulos:
+Nuestro CSV de muestra contiene información sobre muestras biológicas que necesitan diferentes procesamientos basados en sus características:
+
+```console title="samples.csv"
+sample_id,organism,tissue_type,sequencing_depth,file_path,quality_score
+SAMPLE_001,human,liver,30000000,data/sequences/SAMPLE_001_S1_L001_R1_001.fastq,38.5
+SAMPLE_002,mouse,brain,25000000,data/sequences/SAMPLE_002_S2_L001_R1_001.fastq,35.2
+SAMPLE_003,human,kidney,45000000,data/sequences/SAMPLE_003_S3_L001_R1_001.fastq,42.1
+```
+
+Usaremos este conjunto de datos realista para explorar técnicas prácticas de programación que encontrarás en flujos de trabajo bioinformáticos reales.
+
+<!-- TODO: Can we make this more domain-agnostic? -->
+
+<!-- TODO: add an assignment statement? #### Review the assignment -->
+
+#### Lista de verificación de preparación
+
+¿Crees que estás listo para sumergirte?
+
+- [ ] Entiendo el objetivo de este curso y sus prerrequisitos
+- [ ] Mi codespace está funcionando
+- [ ] He configurado mi directorio de trabajo apropiadamente
+<!-- - [ ] I understand the assignment -->
+
+Si puedes marcar todas las casillas, estás listo para comenzar.
+
+---
+
+## 1. Flujo de Datos vs Scripting: Entendiendo los Límites
+
+### 1.1. Identificando Qué es Qué
+
+Al escribir flujos de trabajo de Nextflow, es importante distinguir entre **flujo de datos** (cómo se mueven los datos a través de canales y procesos) y **scripting** (el código que manipula datos y toma decisiones). Construyamos un flujo de trabajo que demuestre cómo trabajan juntos.
+
+#### 1.1.1. Flujo de Trabajo Básico de Nextflow
+
+Comienza con un flujo de trabajo simple que solo lee el archivo CSV (ya lo hemos hecho por ti en `main.nf`):
 
 ```groovy title="main.nf" linenums="1"
-include { FASTP } from './modules/fastp.nf'
-include { GENERATE_REPORT } from './modules/generate_report.nf'
-
 workflow {
     ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
-        .map { row ->
-            tuple(
-                [id: row.sample_id],
-                file(row.file_path)
-            )
-        }
-
-    ch_fastp = FASTP(ch_samples)
-    GENERATE_REPORT(ch_samples)
+        .view()
 }
 ```
 
-Los módulos también son simples:
+El bloque `workflow` define la estructura de nuestro pipeline, mientras que `channel.fromPath()` crea un canal desde una ruta de archivo. El operador `.splitCsv()` procesa el archivo CSV y convierte cada fila en una estructura de datos de tipo mapa.
+
+Ejecuta este flujo de trabajo para ver los datos CSV sin procesar:
 
 ```bash
-cat modules/fastp.nf
+nextflow run main.nf
 ```
+
+??? success "Salida del comando"
+
+    ```console
+    Launching `main.nf` [marvelous_tuckerman] DSL2 - revision: 6113e05c17
+
+    [sample_id:SAMPLE_001, organism:human, tissue_type:liver, sequencing_depth:30000000, file_path:data/sequences/SAMPLE_001_S1_L001_R1_001.fastq, quality_score:38.5]
+    [sample_id:SAMPLE_002, organism:mouse, tissue_type:brain, sequencing_depth:25000000, file_path:data/sequences/SAMPLE_002_S2_L001_R1_001.fastq, quality_score:35.2]
+    [sample_id:SAMPLE_003, organism:human, tissue_type:kidney, sequencing_depth:45000000, file_path:data/sequences/SAMPLE_003_S3_L001_R1_001.fastq, quality_score:42.1]
+    ```
+
+#### 1.1.2. Agregando el Operador Map
+
+Ahora vamos a agregar scripting para transformar los datos, usando el operador `.map()` que probablemente ya conoces. Este operador toma una 'closure' donde podemos escribir código para transformar cada elemento.
+
+!!! note "Nota"
+
+    Una **closure** es un bloque de código que puede pasarse y ejecutarse más tarde. Piensa en ella como una función que defines en línea. Las closures se escriben con llaves `{ }` y pueden tomar parámetros. ¡Son fundamentales para cómo funcionan los operadores de Nextflow y si has estado escribiendo Nextflow por un tiempo, puede que ya las hayas estado usando sin darte cuenta!
+
+Así es como se ve esa operación map:
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="3-6"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                return row
+            }
+            .view()
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="3"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .view()
+    ```
+
+Esta es nuestra primera **closure** - una función anónima que puedes pasar como argumento (similar a lambdas en Python o funciones flecha en JavaScript). Las closures son esenciales para trabajar con operadores de Nextflow.
+
+La closure `{ row -> return row }` toma un parámetro `row` (podría ser cualquier nombre: `item`, `sample`, etc.).
+
+Cuando el operador `.map()` procesa cada elemento del canal, pasa ese elemento a tu closure. Aquí, `row` contiene una fila del CSV a la vez.
+
+Aplica este cambio y ejecuta el flujo de trabajo:
+
+```bash
+nextflow run main.nf
+```
+
+Verás la misma salida que antes, porque simplemente estamos devolviendo la entrada sin cambios. Esto confirma que el operador map está funcionando correctamente. Ahora comencemos a transformar los datos.
+
+#### 1.1.3. Creando una Estructura de Datos de Tipo Mapa
+
+Ahora vamos a escribir lógica de **scripting** dentro de nuestra closure para transformar cada fila de datos. Aquí es donde procesamos elementos de datos individuales en lugar de orquestar el flujo de datos.
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="4-12"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                // Scripting para transformación de datos
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                return sample_meta
+            }
+            .view()
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="4"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                return row
+            }
+            .view()
+    ```
+
+El mapa `sample_meta` es una estructura de datos clave-valor (como diccionarios en Python, objetos en JavaScript, o hashes en Ruby) que almacena información relacionada: ID de muestra, organismo, tipo de tejido, profundidad de secuenciación y puntuación de calidad.
+
+Usamos métodos de manipulación de cadenas como `.toLowerCase()` y `.replaceAll()` para limpiar nuestros datos, y métodos de conversión de tipos como `.toInteger()` y `.toDouble()` para convertir datos de cadena del CSV en los tipos numéricos apropiados.
+
+Aplica este cambio y ejecuta el flujo de trabajo:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Salida del comando"
+
+    ```console
+    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5]
+    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2]
+    [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1]
+    ```
+
+#### 1.1.4. Agregando Lógica Condicional
+
+Ahora agreguemos más scripting - esta vez usando un operador ternario para tomar decisiones basadas en valores de datos.
+
+Haz el siguiente cambio:
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="11-12"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return sample_meta + [priority: priority]
+            }
+            .view()
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="11"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                return sample_meta
+            }
+            .view()
+    ```
+
+El operador ternario es una forma abreviada de una declaración if/else que sigue el patrón `condición ? valor_si_verdadero : valor_si_falso`. Esta línea significa: "Si la calidad es mayor que 40, usa 'high', de lo contrario usa 'normal'". Su primo, el **operador Elvis** (`?:`), proporciona valores predeterminados cuando algo es nulo o vacío - exploraremos ese patrón más adelante en este tutorial.
+
+El operador de adición de mapas `+` crea un **nuevo mapa** en lugar de modificar el existente. Esta línea crea un nuevo mapa que contiene todos los pares clave-valor de `sample_meta` más la nueva clave `priority`.
+
+!!! Note "Nota"
+
+    Nunca modifiques mapas pasados a closures - siempre crea nuevos usando `+` (por ejemplo). En Nextflow, los mismos datos a menudo fluyen a través de múltiples operaciones simultáneamente. Modificar un mapa in situ puede causar efectos secundarios impredecibles cuando otras operaciones referencian ese mismo objeto. Crear nuevos mapas asegura que cada operación tenga su propia copia limpia.
+
+Ejecuta el flujo de trabajo modificado:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Salida del comando"
+
+    ```console
+    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+    [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
+    ```
+
+Hemos agregado exitosamente lógica condicional para enriquecer nuestros metadatos con un nivel de prioridad basado en puntuaciones de calidad.
+
+#### 1.1.5. Creando Subconjuntos de Mapas con `.subMap()`
+
+Mientras que el operador `+` agrega claves a un mapa, a veces necesitas hacer lo opuesto - extraer solo claves específicas. El método `.subMap()` es perfecto para esto.
+
+Agreguemos una línea para crear una versión simplificada de nuestros metadatos que solo contenga campos de identificación:
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="12-15"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                // Scripting para transformación de datos
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def id_only = sample_meta.subMap(['id', 'organism', 'tissue'])
+                println "ID fields only: ${id_only}"
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return sample_meta + [priority: priority]
+            }
+            .view()
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="12"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                // Scripting para transformación de datos
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return sample_meta + [priority: priority]
+            }
+            .view()
+    ```
+
+Ejecuta el flujo de trabajo modificado:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Salida del comando"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
+
+    ID fields only: [id:sample_001, organism:human, tissue:liver]
+    ID fields only: [id:sample_002, organism:mouse, tissue:brain]
+    ID fields only: [id:sample_003, organism:human, tissue:kidney]
+    [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
+    [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
+    [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
+    ```
+
+Esto muestra tanto los metadatos completos mostrados por la operación `view()` como el subconjunto extraído que imprimimos con `println`.
+
+El método `.subMap()` toma una lista de claves y devuelve un nuevo mapa que contiene solo esas claves. Si una clave no existe en el mapa original, simplemente no se incluye en el resultado.
+
+Esto es particularmente útil cuando necesitas crear diferentes versiones de metadatos para diferentes procesos - algunos pueden necesitar metadatos completos mientras que otros necesitan solo campos de identificación mínimos.
+
+Ahora elimina esas declaraciones println para restaurar tu flujo de trabajo a su estado anterior, ya que no las necesitamos en adelante.
+
+!!! tip "Resumen de Operaciones de Mapas"
+
+    - **Agregar claves**: `map1 + [nueva_clave: valor]` - Crea nuevo mapa con claves adicionales
+    - **Extraer claves**: `map1.subMap(['clave1', 'clave2'])` - Crea nuevo mapa con solo las claves especificadas
+    - **Ambas operaciones crean nuevos mapas** - Los mapas originales permanecen sin cambios
+
+#### 1.1.6. Combinando Mapas y Devolviendo Resultados
+
+Hasta ahora, solo hemos estado devolviendo lo que la comunidad de Nextflow llama el 'mapa meta', y hemos estado ignorando los archivos a los que esos metadatos se relacionan. Pero si estás escribiendo flujos de trabajo de Nextflow, probablemente quieras hacer algo con esos archivos.
+
+Generemos una estructura de canal que comprenda una tupla de 2 elementos: el mapa de metadatos enriquecido y la ruta del archivo correspondiente. Este es un patrón común en Nextflow para pasar datos a procesos.
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="12"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return tuple( sample_meta + [priority: priority], file(row.file_path) )
+            }
+            .view()
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="12"
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return sample_meta + [priority: priority]
+            }
+            .view()
+    ```
+
+Aplica este cambio y ejecuta el flujo de trabajo:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Salida del comando"
+
+    ```console
+    [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+    [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+    [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+    ```
+
+Esta estructura de tupla `[meta, file]` es un patrón común en Nextflow para pasar tanto metadatos como archivos asociados a procesos.
+
+!!! note "Nota"
+
+    **Mapas y Metadatos**: Los mapas son fundamentales para trabajar con metadatos en Nextflow. Para una explicación más detallada sobre trabajar con mapas de metadatos, consulta la búsqueda lateral [Trabajar con metadatos](./metadata.md).
+
+Nuestro flujo de trabajo demuestra el patrón central: **operaciones de flujo de datos** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orquestan cómo se mueven los datos a través del pipeline, mientras que **scripting** (mapas `[clave: valor]`, métodos de cadenas, conversiones de tipos, operadores ternarios) dentro de la closure `.map()` maneja la transformación de elementos de datos individuales.
+
+### 1.2. Entendiendo Diferentes Tipos: Canal vs Lista
+
+Hasta ahora, todo bien, podemos distinguir entre operaciones de flujo de datos y scripting. ¿Pero qué pasa cuando el mismo nombre de método existe en ambos contextos?
+
+Un ejemplo perfecto es el método `collect`, que existe tanto para tipos de canal como para tipos de Lista en la biblioteca estándar de Nextflow. El método `collect()` en una Lista transforma cada elemento, mientras que el operador `collect()` en un canal reúne todas las emisiones del canal en un canal de un solo elemento.
+
+Demostremos esto con algunos datos de muestra, comenzando por refrescar lo que hace el operador `collect()` del canal. Revisa `collect.nf`:
+
+```groovy title="collect.nf" linenums="1"
+def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+
+// channel.collect() - agrupa múltiples emisiones de canal en una
+ch_input = channel.fromList(sample_ids)
+ch_input.view { sample -> "Individual channel item: ${sample}" }
+ch_collected = ch_input.collect()
+ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
+```
+
+Pasos:
+
+- Define una Lista de IDs de muestra
+- Crea un canal con `fromList()` que emite cada ID de muestra por separado
+- Imprime cada elemento con `view()` a medida que fluye
+- Reúne todos los elementos en una sola lista con el operador `collect()` del canal
+- Imprime el resultado recopilado (un solo elemento que contiene todos los IDs de muestra) con un segundo `view()`
+
+Hemos cambiado la estructura del canal, pero no hemos cambiado los datos en sí.
+
+Ejecuta el flujo de trabajo para confirmar esto:
+
+```bash
+nextflow run collect.nf
+```
+
+??? success "Salida del comando"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
+
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+    ```
+
+`view()` devuelve una salida por cada emisión del canal, así que sabemos que esta única salida contiene los 3 elementos originales agrupados en una lista.
+
+Ahora veamos el método `collect` en una Lista en acción. Modifica `collect.nf` para aplicar el método `collect` de la Lista a la lista original de IDs de muestra:
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="1" hl_lines="9-13"
+    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+
+    // channel.collect() - agrupa múltiples emisiones de canal en una
+    ch_input = channel.fromList(sample_ids)
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
+    ch_collected = ch_input.collect()
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
+
+    // List.collect() - transforma cada elemento, preserva estructura
+    def formatted_ids = sample_ids.collect { id ->
+        id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
+    }
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="1"
+    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+
+    // channel.collect() - agrupa múltiples emisiones de canal en una
+    ch_input = channel.fromList(sample_ids)
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
+    ch_collected = ch_input.collect()
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
+    ```
+
+En este nuevo fragmento:
+
+- Definimos una nueva variable `formatted_ids` que usa el método `collect` de la Lista para transformar cada ID de muestra en la lista original
+- Imprimimos el resultado usando `println`
+
+Ejecuta el flujo de trabajo modificado:
+
+```bash
+nextflow run collect.nf
+```
+
+??? success "Salida del comando"
+
+    ```console hl_lines="5"
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
+
+    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+    ```
+
+Esta vez, NO hemos cambiado la estructura de los datos, todavía tenemos 3 elementos en la lista, pero SÍ hemos transformado cada elemento usando el método `collect` de la Lista para producir una nueva lista con valores modificados. Esto es similar a usar el operador `map` en un canal, pero está operando en una estructura de datos Lista en lugar de un canal.
+
+`collect` es un caso extremo que estamos usando aquí para hacer un punto. La lección clave es que cuando estás escribiendo flujos de trabajo, siempre distingue entre **estructuras de datos** (Listas, Mapas, etc.) y **canales** (construcciones de flujo de datos). Las operaciones pueden compartir nombres pero comportarse completamente diferente dependiendo del tipo sobre el que se llaman.
+
+### 1.3. El Operador Spread (`*.`) - Abreviatura para Extracción de Propiedades
+
+Relacionado con el método `collect` de la Lista está el operador spread (`*.`), que proporciona una forma concisa de extraer propiedades de colecciones. Es esencialmente azúcar sintáctica para un patrón común de `collect`.
+
+Agreguemos una demostración a nuestro archivo `collect.nf`:
+
+=== "Después"
+
+    ```groovy title="collect.nf" linenums="1" hl_lines="15-18"
+    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+
+    // channel.collect() - agrupa múltiples emisiones de canal en una
+    ch_input = channel.fromList(sample_ids)
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
+    ch_collected = ch_input.collect()
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
+
+    // List.collect() - transforma cada elemento, preserva estructura
+    def formatted_ids = sample_ids.collect { id ->
+        id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
+    }
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+
+    // Operador spread - acceso conciso a propiedades
+    def sample_data = [[id: 's1', quality: 38.5], [id: 's2', quality: 42.1], [id: 's3', quality: 35.2]]
+    def all_ids = sample_data*.id
+    println "Spread operator result: ${all_ids}"
+    ```
+
+=== "Antes"
+
+    ```groovy title="collect.nf" linenums="1"
+    def sample_ids = ['sample_001', 'sample_002', 'sample_003']
+
+    // channel.collect() - agrupa múltiples emisiones de canal en una
+    ch_input = channel.fromList(sample_ids)
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
+    ch_collected = ch_input.collect()
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
+
+    // List.collect() - transforma cada elemento, preserva estructura
+    def formatted_ids = sample_ids.collect { id ->
+        id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
+    }
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
+    ```
+
+Ejecuta el flujo de trabajo actualizado:
+
+```bash title="Test spread operator"
+nextflow run collect.nf
+```
+
+??? success "Salida del comando"
+
+    ```console hl_lines="6"
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
+
+    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+    Spread operator result: [s1, s2, s3]
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
+    ```
+
+El operador spread `*.` es una abreviatura para un patrón común de collect:
+
+```groovy
+// Estos son equivalentes:
+def ids = samples*.id
+def ids = samples.collect { it.id }
+
+// También funciona con llamadas a métodos:
+def names = files*.getName()
+def names = files.collect { it.getName() }
+```
+
+El operador spread es particularmente útil cuando necesitas extraer una sola propiedad de una lista de objetos - es más legible que escribir la closure completa de `collect`.
+
+!!! tip "Cuándo Usar Spread vs Collect"
+
+    - **Usa spread (`*.`)** para acceso simple a propiedades: `samples*.id`, `files*.name`
+    - **Usa collect** para transformaciones o lógica compleja: `samples.collect { it.id.toUpperCase() }`, `samples.collect { [it.id, it.quality > 40] }`
+
+### Conclusión
+
+En esta sección, has aprendido:
+
+- **Flujo de datos vs scripting**: Los operadores de canal orquestan cómo fluyen los datos a través de tu pipeline, mientras que el scripting transforma elementos de datos individuales
+- **Entender tipos**: El mismo nombre de método (como `collect`) puede comportarse diferente dependiendo del tipo sobre el que se llama (Canal vs Lista)
+- **El contexto importa**: Siempre ten en cuenta si estás trabajando con canales (flujo de datos) o estructuras de datos (scripting)
+
+Entender estos límites es esencial para depuración, documentación y escribir flujos de trabajo mantenibles.
+
+A continuación profundizaremos en las capacidades de procesamiento de cadenas, que son esenciales para manejar datos del mundo real.
+
+---
+
+## 2. Procesamiento de Cadenas y Generación Dinámica de Scripts
+
+Dominar el procesamiento de cadenas separa los flujos de trabajo frágiles de los pipelines robustos. Esta sección cubre el análisis de nombres de archivos complejos, generación dinámica de scripts e interpolación de variables.
+
+### 2.1. Coincidencia de Patrones y Expresiones Regulares
+
+Los archivos bioinformáticos a menudo tienen convenciones de nomenclatura complejas que codifican metadatos. Extraigamos esto automáticamente usando coincidencia de patrones con expresiones regulares.
+
+Vamos a volver a nuestro flujo de trabajo `main.nf` y agregar algo de lógica de coincidencia de patrones para extraer información adicional de muestra de los nombres de archivos. Los archivos FASTQ en nuestro conjunto de datos siguen convenciones de nomenclatura estilo Illumina con nombres como `SAMPLE_001_S1_L001_R1_001.fastq.gz`. Estos pueden parecer crípticos, pero en realidad codifican metadatos útiles como ID de muestra, número de carril y dirección de lectura. Vamos a usar capacidades regex para analizar estos nombres.
+
+Haz el siguiente cambio a tu flujo de trabajo `main.nf` existente:
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="4" hl_lines="10-21"
+            .map { row ->
+                // Scripting para transformación de datos
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+            }
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="4" hl_lines="10-11"
+            .map { row ->
+                // Scripting para transformación de datos
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return tuple(sample_meta + [priority: priority], file(row.file_path))
+            }
+    ```
+
+Esto demuestra **conceptos clave de procesamiento de cadenas**:
+
+1. **Literales de expresión regular** usando sintaxis `~/patrón/` - esto crea un patrón regex sin necesidad de escapar barras invertidas
+2. **Coincidencia de patrones** con el operador `=~` - esto intenta hacer coincidir una cadena contra un patrón regex
+3. **Objetos Matcher** que capturan grupos con `[0][1]`, `[0][2]`, etc. - `[0]` se refiere a la coincidencia completa, `[1]`, `[2]`, etc. se refieren a grupos capturados entre paréntesis
+
+Desglosemos el patrón regex `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
+
+| Patrón              | Coincide                                    | Captura                            |
+| ------------------- | ------------------------------------------- | ---------------------------------- |
+| `^(.+)`             | Nombre de muestra desde el inicio           | Grupo 1: nombre de muestra         |
+| `_S(\d+)`           | Número de muestra `_S1`, `_S2`, etc.        | Grupo 2: número de muestra         |
+| `_L(\d{3})`         | Número de carril `_L001`                    | Grupo 3: carril (3 dígitos)        |
+| `_(R[12])`          | Dirección de lectura `_R1` o `_R2`          | Grupo 4: dirección de lectura      |
+| `_(\d{3})`          | Número de fragmento `_001`                  | Grupo 5: fragmento (3 dígitos)     |
+| `\.fastq(?:\.gz)?$` | Extensión de archivo `.fastq` o `.fastq.gz` | No capturado (?: es no capturante) |
+
+Esto analiza convenciones de nomenclatura estilo Illumina para extraer metadatos automáticamente.
+
+Ejecuta el flujo de trabajo modificado:
+
+```bash title="Test pattern matching"
+nextflow run main.nf
+```
+
+??? success "Salida del comando"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [clever_pauling] DSL2 - revision: 605d2058b4
+
+    [[id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, sample_num:1, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_001_S1_L001_R1_001.fastq]
+    [[id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, sample_num:2, lane:001, read:R1, chunk:001, priority:normal], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_002_S2_L001_R1_001.fastq]
+    [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
+    ```
+
+Esto muestra los metadatos enriquecidos desde los nombres de archivos.
+
+### 2.2. Generación Dinámica de Scripts en Procesos
+
+Los bloques de script de proceso son esencialmente cadenas multilínea que se pasan al shell. Puedes usar **lógica condicional** (if/else, operadores ternarios) para generar dinámicamente diferentes cadenas de script basadas en características de entrada. Esto es esencial para manejar diversos tipos de entrada—como lecturas de extremo único vs extremo pareado—sin duplicar definiciones de proceso.
+
+Agreguemos un proceso a nuestro flujo de trabajo que demuestre este patrón. Abre `modules/fastp.nf` y echa un vistazo:
 
 ```groovy title="modules/fastp.nf" linenums="1"
 process FASTP {
@@ -89,665 +768,367 @@ process FASTP {
     tuple val(meta), path(reads)
 
     output:
-    tuple val(meta), path("${meta.id}_trimmed.fastq.gz"), emit: fastq
-    tuple val(meta), path("${meta.id}.fastp.json"), emit: json
+    tuple val(meta), path("*_trimmed*.fastq.gz"), emit: reads
 
     script:
     """
-    fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz --json ${meta.id}.fastp.json --html ${meta.id}.fastp.html
+    fastp \\
+        --in1 ${reads[0]} \\
+        --in2 ${reads[1]} \\
+        --out1 ${meta.id}_trimmed_R1.fastq.gz \\
+        --out2 ${meta.id}_trimmed_R2.fastq.gz \\
+        --json ${meta.id}.fastp.json \\
+        --html ${meta.id}.fastp.html \\
+        --thread $task.cpus
     """
 }
 ```
 
-```bash
-cat modules/generate_report.nf
+El proceso toma archivos FASTQ como entrada y ejecuta la herramienta `fastp` para recortar adaptadores y filtrar lecturas de baja calidad. Desafortunadamente, la persona que escribió este proceso no permitió las lecturas de extremo único que tenemos en nuestro conjunto de datos de ejemplo. Agreguémoslo a nuestro flujo de trabajo y veamos qué sucede:
+
+Primero, incluye el módulo en la primera línea de tu flujo de trabajo `main.nf`:
+
+```groovy title="main.nf" linenums="1"
+include { FASTP } from './modules/fastp.nf'
 ```
+
+Luego modifica el bloque `workflow` para conectar el canal `ch_samples` al proceso `FASTP`:
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="25" hl_lines="27"
+    workflow {
+
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+            }
+
+        ch_fastp = FASTP(ch_samples)
+    }
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="25" hl_lines="26"
+    workflow {
+
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return [sample_meta + file_meta + [priority: priority], file(row.file_path)]
+            }
+            .view()
+    }
+    ```
+
+Ejecuta este flujo de trabajo modificado:
+
+```bash
+nextflow run main.nf
+```
+
+??? failure "Salida del comando"
+
+    ```console
+    ERROR ~ Error executing process > 'FASTP (3)'
+
+    Caused by:
+      Process `FASTP (3)` terminated with an error exit status (255)
+
+
+    Command executed:
+
+      fastp \
+          --in1 SAMPLE_003_S3_L001_R1_001.fastq \
+          --in2 null \
+          --out1 sample_003_trimmed_R1.fastq.gz \
+          --out2 sample_003_trimmed_R2.fastq.gz \
+          --json sample_003.fastp.json \
+          --html sample_003.fastp.html \
+          --thread 2
+
+    Command exit status:
+      255
+
+    Command output:
+      (empty)
+    ```
+
+Puedes ver que el proceso está intentando ejecutar `fastp` con un valor `null` para el segundo archivo de entrada, lo que está causando que falle. Esto es porque nuestro conjunto de datos contiene lecturas de extremo único, pero el proceso está codificado para esperar lecturas de extremo pareado (dos archivos de entrada a la vez).
+
+Arregla esto agregando lógica condicional al bloque `script:` del proceso `FASTP`. Una declaración if/else verifica el conteo de archivos de lectura y ajusta el comando en consecuencia.
+
+=== "Después"
+
+    ```groovy title="main.nf" linenums="10" hl_lines="3-27"
+        script:
+        // Detección simple de extremo único vs extremo pareado
+        def is_single = reads instanceof List ? reads.size() == 1 : true
+
+        if (is_single) {
+            def input_file = reads instanceof List ? reads[0] : reads
+            """
+            fastp \\
+                --in1 ${input_file} \\
+                --out1 ${meta.id}_trimmed.fastq.gz \\
+                --json ${meta.id}.fastp.json \\
+                --html ${meta.id}.fastp.html \\
+                --thread $task.cpus
+            """
+        } else {
+            """
+            fastp \\
+                --in1 ${reads[0]} \\
+                --in2 ${reads[1]} \\
+                --out1 ${meta.id}_trimmed_R1.fastq.gz \\
+                --out2 ${meta.id}_trimmed_R2.fastq.gz \\
+                --json ${meta.id}.fastp.json \\
+                --html ${meta.id}.fastp.html \\
+                --thread $task.cpus
+            """
+        }
+    ```
+
+=== "Antes"
+
+    ```groovy title="main.nf" linenums="10" hl_lines="2-11"
+            script:
+            """
+            fastp \\
+                --in1 ${reads[0]} \\
+                --in2 ${reads[1]} \\
+                --out1 ${meta.id}_trimmed_R1.fastq.gz \\
+                --out2 ${meta.id}_trimmed_R2.fastq.gz \\
+                --json ${meta.id}.fastp.json \\
+                --html ${meta.id}.fastp.html \\
+                --thread $task.cpus
+            """
+        }
+    ```
+
+Ahora el flujo de trabajo puede manejar tanto lecturas de extremo único como de extremo pareado con gracia. La lógica condicional verifica el número de archivos de entrada y construye el comando apropiado para `fastp`. Veamos si funciona:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "Salida del comando"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [adoring_rosalind] DSL2 - revision: 04b1cd93e9
+
+    executor >  local (3)
+    [31/a8ad4d] process > FASTP (3) [100%] 3 of 3 ✔
+    ```
+
+¡Se ve bien! Si verificamos los comandos reales que se ejecutaron (personaliza para tu hash de tarea):
+
+```console title="Check commands executed"
+cat work/31/a8ad4d95749e685a6d842d3007957f/.command.sh
+```
+
+Podemos ver que Nextflow eligió correctamente el comando correcto para lecturas de extremo único:
+
+```bash title=".command.sh"
+#!/bin/bash -ue
+fastp \
+    --in1 SAMPLE_003_S3_L001_R1_001.fastq \
+    --out1 sample_003_trimmed.fastq.gz \
+    --json sample_003.fastp.json \
+    --html sample_003.fastp.html \
+    --thread 2
+```
+
+Otro uso común de lógica de script dinámica se puede ver en [el módulo de Genómica de Nextflow para Ciencia](../../nf4science/genomics/02_joint_calling). En ese módulo, el proceso GATK que se llama puede tomar múltiples archivos de entrada, pero cada uno debe tener el prefijo `-V` para formar una línea de comando correcta. El proceso usa scripting para transformar una colección de archivos de entrada (`all_gvcfs`) en los argumentos de comando correctos:
+
+```groovy title="command line manipulation for GATK" linenums="1" hl_lines="2 5"
+    script:
+    def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
+    """
+    gatk GenomicsDBImport \
+        ${gvcfs_line} \
+        -L ${interval_list} \
+        --genomicsdb-workspace-path ${cohort_name}_gdb
+    """
+```
+
+Estos patrones de usar scripting en bloques de script de proceso son extremadamente poderosos y pueden aplicarse en muchos escenarios - desde manejar tipos de entrada variables hasta construir argumentos complejos de línea de comando desde colecciones de archivos, haciendo que tus procesos sean verdaderamente adaptables a los diversos requisitos de datos del mundo real.
+
+### 2.3. Interpolación de Variables: Variables de Nextflow y Shell
+
+Los scripts de proceso mezclan variables de Nextflow, variables de shell y sustituciones de comandos, cada una con diferente sintaxis de interpolación. Usar la sintaxis incorrecta causa errores. Exploremos estos con un proceso que crea un informe de procesamiento.
+
+Echa un vistazo al archivo de módulo `modules/generate_report.nf`:
 
 ```groovy title="modules/generate_report.nf" linenums="1"
 process GENERATE_REPORT {
-    container 'community.wave.seqera.io/library/bash:5.0'
+
+    publishDir 'results/reports', mode: 'copy'
 
     input:
     tuple val(meta), path(reads)
 
     output:
-    tuple val(meta), path("${meta.id}_report.txt"), emit: report
+    path "${meta.id}_report.txt"
 
     script:
     """
-    echo "Sample ID: ${meta.id}" > ${meta.id}_report.txt
-    echo "File processed: ${reads}" >> ${meta.id}_report.txt
-    echo "Process command: fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz" >> ${meta.id}_report.txt
+    echo "Processing ${reads}" > ${meta.id}_report.txt
+    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
     """
 }
 ```
 
-Y finalmente, veamos los datos de muestra:
+Este proceso escribe un informe simple con el ID de muestra y el nombre del archivo. Ahora ejecutémoslo para ver qué sucede cuando necesitamos mezclar diferentes tipos de variables.
 
-```bash
-cat data/samples.csv
-```
+Incluye el proceso en tu `main.nf` y agrégalo al flujo de trabajo:
 
-```csv title="data/samples.csv"
-sample_id,organism,tissue_type,sequencing_depth,quality_score,file_path
-SAMPLE_001,human,liver,30000000,38.5,./data/sequences/SAMPLE_001_S1_L001_R1_001.fastq
-SAMPLE_002,mouse,brain,25000000,35.2,./data/sequences/SAMPLE_002_S2_L001_R1_001.fastq
-SAMPLE_003,human,kidney,45000000,42.1,./data/sequences/SAMPLE_003_S3_L001_R1_001.fastq
-```
+=== "Después"
 
-Ejecutemos el flujo de trabajo base primero para asegurarnos de que funciona:
+    ```groovy title="main.nf" linenums="1" hl_lines="2 30"
+    include { FASTP } from './modules/fastp.nf'
+    include { GENERATE_REPORT } from './modules/generate_report.nf'
 
-```bash
-nextflow run main.nf
-```
+    workflow {
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
 
-Deberías ver el flujo de trabajo ejecutarse y completarse exitosamente.
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
 
-¡Ahora comencemos a mejorar el flujo de trabajo con patrones de scripting avanzados!
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+            }
 
----
-
-## 1. Entendiendo el Flujo de Datos vs. Scripting
-
-Nextflow utiliza **dos paradigmas de programación distintos**:
-
-1. **Flujo de datos**: La orquestación de canales a través de operadores (`.map`, `.filter`, `.branch`)
-2. **Scripting**: Código de Groovy ejecutado dentro de closures o bloques de script en procesos
-
-Ambos son cruciales, pero funcionan de manera diferente, por lo que esta primera sección aclarará las diferencias.
-
-### 1.1. Closures y operadores ternarios
-
-Un concepto fundamental en Nextflow es la **closure** - un bloque de código que se puede pasar como un objeto y ejecutar más tarde. Las closures son esenciales para los operadores de los canales (`map`, `filter`, etc.).
-
-Tomemos nuestro operador `.map` actual y mejorémoslo para extraer más metadatos:
-
-```groovy
-.map { row ->
-    tuple(
-        [id: row.sample_id],
-        file(row.file_path)
-    )
-}
-```
-
-El bloque `{ row -> ... }` es una closure que recibe un argumento `row`.
-
-Ahora, mejorémosla para extraer más metadatos del CSV:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="7" hl_lines="2-8"
-        .map { row ->
-            def sample_meta = [
-                id: row.sample_id.toLowerCase(),
-                organism: row.organism,
-                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                depth: row.sequencing_depth.toInteger(),
-                quality: row.quality_score.toDouble()
-            ]
-            tuple(sample_meta, file(row.file_path))
-        }
+        ch_fastp = FASTP(ch_samples)
+        GENERATE_REPORT(ch_samples)
+    }
     ```
 
-=== "Before"
+=== "Antes"
 
-    ```groovy title="main.nf" linenums="7" hl_lines="2-5"
-        .map { row ->
-            tuple(
-                [id: row.sample_id],
-                file(row.file_path)
-            )
-        }
+    ```groovy title="main.nf" linenums="1" hl_lines="1 10-29"
+    include { FASTP } from './modules/fastp.nf'
+
+    workflow {
+        ch_samples = channel.fromPath("./data/samples.csv")
+            .splitCsv(header: true)
+            .map { row ->
+                def sample_meta = [
+                    id: row.sample_id.toLowerCase(),
+                    organism: row.organism,
+                    tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
+                    depth: row.sequencing_depth.toInteger(),
+                    quality: row.quality_score.toDouble()
+                ]
+                def fastq_path = file(row.file_path)
+
+                def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
+                def file_meta = m ? [
+                    sample_num: m[0][2].toInteger(),
+                    lane: m[0][3],
+                    read: m[0][4],
+                    chunk: m[0][5]
+                ] : [:]
+
+                def priority = sample_meta.quality > 40 ? 'high' : 'normal'
+                return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
+            }
+
+        ch_fastp = FASTP(ch_samples)
+    }
     ```
 
-Ahora, modifiquemos el `main.nf` para utilizar estos metadatos adicionales. Primero, cambiemos la forma en que generamos el informe. Vamos a etiquetar las muestras de alta calidad como de "alta prioridad" usando un **operador ternario**.
+Ahora ejecuta el flujo de trabajo y verifica los informes generados en `results/reports/`. Deberían contener información básica sobre cada muestra.
 
-=== "After"
-
-    ```groovy title="main.nf" linenums="7" hl_lines="9-10"
-        .map { row ->
-            def sample_meta = [
-                id: row.sample_id.toLowerCase(),
-                organism: row.organism,
-                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                depth: row.sequencing_depth.toInteger(),
-                quality: row.quality_score.toDouble()
-            ]
-            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-            tuple(sample_meta + [priority: priority], file(row.file_path))
-        }
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="7" hl_lines="9"
-        .map { row ->
-            def sample_meta = [
-                id: row.sample_id.toLowerCase(),
-                organism: row.organism,
-                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                depth: row.sequencing_depth.toInteger(),
-                quality: row.quality_score.toDouble()
-            ]
-            tuple(sample_meta, file(row.file_path))
-        }
-    ```
-
-El operador ternario `condition ? value_if_true : value_if_false` es una forma concisa de escribir una declaración if/else. Si `sample_meta.quality > 40`, entonces `priority` será `'high'`; de lo contrario, será `'normal'`.
-
-Modificamos también el proceso `GENERATE_REPORT` para incluir los metadatos adicionales:
-
-=== "After"
-
-    ```groovy title="modules/generate_report.nf" linenums="11" hl_lines="2-7"
-    script:
-    """
-    echo "Sample ID: ${meta.id}" > ${meta.id}_report.txt
-    echo "Organism: ${meta.organism}" >> ${meta.id}_report.txt
-    echo "Tissue: ${meta.tissue}" >> ${meta.id}_report.txt
-    echo "Sequencing depth: ${meta.depth}" >> ${meta.id}_report.txt
-    echo "Quality score: ${meta.quality}" >> ${meta.id}_report.txt
-    echo "Priority: ${meta.priority}" >> ${meta.id}_report.txt
-    echo "File processed: ${reads}" >> ${meta.id}_report.txt
-    echo "Process command: fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz" >> ${meta.id}_report.txt
-    """
-    ```
-
-=== "Before"
-
-    ```groovy title="modules/generate_report.nf" linenums="11" hl_lines="2-4"
-    script:
-    """
-    echo "Sample ID: ${meta.id}" > ${meta.id}_report.txt
-    echo "File processed: ${reads}" >> ${meta.id}_report.txt
-    echo "Process command: fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz" >> ${meta.id}_report.txt
-    """
-    ```
-
-Ahora ejecutemos el flujo de trabajo actualizado:
-
-```bash
-nextflow run main.nf
-```
+<!-- TODO: add the run command -->
 
 ??? success "Salida del comando"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `main.nf` [jolly_fourier] DSL2 - revision: d3e76a7fce
-
-    executor >  local (6)
-    [a3/6b9e80] process > FASTP (sample_003)           [100%] 3 of 3 ✔
-    [29/54f4b6] process > GENERATE_REPORT (sample_001) [100%] 3 of 3 ✔
+    <!-- TODO: output -->
     ```
 
-Podemos verificar el resultado revisando uno de los archivos de informe:
+Pero, ¿qué pasa si queremos agregar información sobre cuándo y dónde ocurrió el procesamiento? Modifiquemos el proceso para usar variables de **shell** y un poco de sustitución de comandos para incluir el usuario actual, nombre de host y fecha en el informe:
 
-```console
-cat work/29/54f4b6b0eb90fed9e3a673b8e47629/sample_001_report.txt
-```
+=== "Después"
 
-Ahora deberías ver todos los metadatos incluidos:
-
-```
-Sample ID: sample_001
-Organism: human
-Tissue: liver
-Sequencing depth: 30000000
-Quality score: 38.5
-Priority: normal
-File processed: SAMPLE_001_S1_L001_R1_001.fastq
-Process command: fastp --in1 SAMPLE_001_S1_L001_R1_001.fastq --out1 sample_001_trimmed.fastq.gz
-```
-
-### 1.2. La colección 'meta' vs 'reads'
-
-En Nextflow, canales, tuplas y colecciones (como mapas y listas) son estructuras de datos fundamentales. Existe una diferencia importante entre **colecciones en el flujo de datos** (canales/operadores) y **colecciones en bloques de script**.
-
-Para demostrar esto, modifiquemos nuestro flujo de trabajo para extraer metadatos de los nombres de archivo FASTQ utilizando expresiones regulares. Es común que los nombres de los archivos FASTQ sigan una convención como: `SAMPLE_001_S1_L001_R1_001.fastq`.
-
-En este formato:
-
-- `SAMPLE_001`: ID de la muestra
-- `S1`: Número de muestra
-- `L001`: Número de carril (lane)
-- `R1`: Número de lectura (read)
-- `001`: Fragmento o trozo (chunk)
-
-Extraigamos estos metadatos del nombre del archivo FASTQ:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="7" hl_lines="12-20"
-        .map { row ->
-            def sample_meta = [
-                id: row.sample_id.toLowerCase(),
-                organism: row.organism,
-                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                depth: row.sequencing_depth.toInteger(),
-                quality: row.quality_score.toDouble()
-            ]
-            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-            def fastq_path = file(row.file_path)
-
-            // Extract metadata from filename using regex
-            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-            def file_meta = m ? [
-                sample_num: m[0][2].toInteger(),
-                lane: m[0][3],
-                read: m[0][4],
-                chunk: m[0][5]
-            ] : [:]
-
-            tuple(sample_meta + file_meta + [priority: priority], fastq_path)
-        }
+    ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
+        """
     ```
 
-=== "Before"
+=== "Antes"
 
-    ```groovy title="main.nf" linenums="7" hl_lines="10"
-        .map { row ->
-            def sample_meta = [
-                id: row.sample_id.toLowerCase(),
-                organism: row.organism,
-                tissue: row.tissue_type.replaceAll('_', ' ').toLowerCase(),
-                depth: row.sequencing_depth.toInteger(),
-                quality: row.quality_score.toDouble()
-            ]
-            def priority = sample_meta.quality > 40 ? 'high' : 'normal'
-            tuple(sample_meta + [priority: priority], file(row.file_path))
-        }
+    ```groovy title="modules/generate_report.nf" linenums="10"
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        """
     ```
 
-¡Hay mucho que desempacar aquí!
-
-1. `fastq_path.name` obtiene el nombre del archivo (sin la ruta)
-2. El operador `=~` es para coincidencia de patrones regex
-3. El patrón `/^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/` captura los componentes
-4. `m ? ... : ...` es un operador ternario que maneja el caso donde el nombre del archivo no coincide con el patrón
-5. `m[0][2]` accede al segundo grupo de captura (los índices comienzan en 1 para los grupos)
-6. La función `toInteger()` convierte la cadena capturada a un número entero
-7. `sample_meta + file_meta + [priority: priority]` fusiona los tres mapas en uno solo
-
-Ahora también modifiquemos el proceso `GENERATE_REPORT` para incluir estos nuevos metadatos:
-
-=== "After"
-
-    ```groovy title="modules/generate_report.nf" linenums="11" hl_lines="7-10"
-    script:
-    """
-    echo "Sample ID: ${meta.id}" > ${meta.id}_report.txt
-    echo "Organism: ${meta.organism}" >> ${meta.id}_report.txt
-    echo "Tissue: ${meta.tissue}" >> ${meta.id}_report.txt
-    echo "Sequencing depth: ${meta.depth}" >> ${meta.id}_report.txt
-    echo "Quality score: ${meta.quality}" >> ${meta.id}_report.txt
-    echo "Sample number: ${meta.sample_num}" >> ${meta.id}_report.txt
-    echo "Lane: ${meta.lane}" >> ${meta.id}_report.txt
-    echo "Read: ${meta.read}" >> ${meta.id}_report.txt
-    echo "Chunk: ${meta.chunk}" >> ${meta.id}_report.txt
-    echo "Priority: ${meta.priority}" >> ${meta.id}_report.txt
-    echo "File processed: ${reads}" >> ${meta.id}_report.txt
-    echo "Process command: fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz" >> ${meta.id}_report.txt
-    """
-    ```
-
-=== "Before"
-
-    ```groovy title="modules/generate_report.nf" linenums="11" hl_lines="7"
-    script:
-    """
-    echo "Sample ID: ${meta.id}" > ${meta.id}_report.txt
-    echo "Organism: ${meta.organism}" >> ${meta.id}_report.txt
-    echo "Tissue: ${meta.tissue}" >> ${meta.id}_report.txt
-    echo "Sequencing depth: ${meta.depth}" >> ${meta.id}_report.txt
-    echo "Quality score: ${meta.quality}" >> ${meta.id}_report.txt
-    echo "Priority: ${meta.priority}" >> ${meta.id}_report.txt
-    echo "File processed: ${reads}" >> ${meta.id}_report.txt
-    echo "Process command: fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz" >> ${meta.id}_report.txt
-    """
-    ```
-
-Ejecuta el flujo de trabajo de nuevo:
-
-```bash
-nextflow run main.nf
-```
-
-??? success "Salida del comando"
-
-    ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `main.nf` [jolly_hawking] DSL2 - revision: cd0a5b0d29
-
-    executor >  local (6)
-    [b3/1cb89f] process > FASTP (sample_001)           [100%] 3 of 3 ✔
-    [e6/c2f254] process > GENERATE_REPORT (sample_001) [100%] 3 of 3 ✔
-    ```
-
-Verifica uno de los archivos de informe actualizados:
-
-```console
-cat work/e6/c2f2542ec23ee6e7f0aa9c66c12e30/sample_001_report.txt
-```
-
-Ahora deberías ver los metadatos adicionales extraídos del nombre del archivo:
-
-```
-Sample ID: sample_001
-Organism: human
-Tissue: liver
-Sequencing depth: 30000000
-Quality score: 38.5
-Sample number: 1
-Lane: 001
-Read: R1
-Chunk: 001
-Priority: normal
-File processed: SAMPLE_001_S1_L001_R1_001.fastq
-Process command: fastp --in1 SAMPLE_001_S1_L001_R1_001.fastq --out1 sample_001_trimmed.fastq.gz
-```
-
-### 1.3. Operaciones de colección en cierres vs. manipulación de canales
-
-Un punto confuso común en Nextflow son las operaciones de colecciones dentro de las closures. Los métodos como `collect()` funcionan de manera diferente según el contexto:
-
-1. En los **canales de Nextflow**: `channel.collect()` es un operador que reúne todos los elementos de un canal en una sola lista
-2. En **listas y mapas de Groovy**: `list.collect {...}` aplica una función a cada elemento y devuelve una nueva lista
-
-Modifiquemos el proceso FASTP para ilustrar esta diferencia:
-
-```groovy title="modules/fastp.nf" linenums="11" hl_lines="3-5"
-script:
-"""
-# Demostración de operaciones de colección en script
-def options = ["--in1", reads, "--out1", "${meta.id}_trimmed.fastq.gz", "--json", "${meta.id}.fastp.json", "--html", "${meta.id}.fastp.html"]
-fastp ${options.join(' ')}
-"""
-```
-
-Este ejemplo usa `options.join(' ')` para unir los elementos de la lista en una sola cadena con espacios entre ellos.
-
-Sin embargo, esto dará error porque estamos tratando de ejecutar código Groovy dentro de un bloque de script bash. Cambiémoslo para mover la lógica de colección fuera del bloque de script:
-
-=== "After"
-
-    ```groovy title="modules/fastp.nf" linenums="11" hl_lines="1-3"
-    def options = ["--in1", reads, "--out1", "${meta.id}_trimmed.fastq.gz", "--json", "${meta.id}.fastp.json", "--html", "${meta.id}.fastp.html"]
-    def cmd = "fastp ${options.join(' ')}"
-
-    script:
-    """
-    $cmd
-    """
-    ```
-
-=== "Before"
-
-    ```groovy title="modules/fastp.nf" linenums="11" hl_lines="2-3"
-    script:
-    """
-    fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz --json ${meta.id}.fastp.json --html ${meta.id}.fastp.html
-    """
-    ```
-
-¡Ejecuta el flujo de trabajo de nuevo y debería funcionar! Esto demuestra el uso del scripting de Groovy para la manipulación de colecciones antes de pasar el comando al bloque de script.
-
-```bash
-nextflow run main.nf
-```
-
-??? success "Salida del comando"
-
-    ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `main.nf` [compassionate_shaw] DSL2 - revision: 3471dc57d9
-
-    executor >  local (6)
-    [32/8e94af] process > FASTP (sample_001)           [100%] 3 of 3 ✔
-    [6e/e3e56d] process > GENERATE_REPORT (sample_001) [100%] 3 of 3 ✔
-    ```
-
-### Conclusión
-
-En esta sección, hemos aprendido sobre las diferencias entre el **flujo de datos** (operaciones de canal) y el **scripting** (código dentro de closures y bloques de script). Hemos usado:
-
-- **Closures** para extraer y transformar metadatos de los datos de entrada
-- **Operadores ternarios** (`condition ? true_value : false_value`) para lógica condicional compacta
-- **Expresiones regulares** con el operador `=~` para extraer componentes de los nombres de archivos
-- **Manipulación de colecciones** como `join()` para crear cadenas de comandos
-
-Estas técnicas son fundamentales para escribir flujos de trabajo de Nextflow que sean limpios, efectivos y fáciles de mantener.
-
----
-
-## 2. Procesamiento de cadenas para manejar nombres de archivos y metadatos
-
-El procesamiento de cadenas es una tarea común en los flujos de trabajo bioinformáticos, especialmente al extraer metadatos de los nombres de archivos o generar scripts dinámicamente. Nextflow tiene potentes capacidades para manipular cadenas que son cruciales para flujos de trabajo robustos.
-
-### 2.1. Expresiones regulares para analizar nombres de archivos
-
-Ya usamos expresiones regulares para extraer metadatos de los nombres de los archivos FASTQ. Vamos a entender mejor cómo funciona el operador de coincidencia de patrones `=~`.
-
-Cuando escribes `x =~ /pattern/`:
-
-1. Crea un objeto `java.util.regex.Matcher`
-2. Si se evalúa en un contexto booleano, comprueba si hay **alguna coincidencia**
-3. Si se asigna a una variable, puedes acceder a los **grupos de captura**
-
-Veamos cómo podríamos complicar nuestro regex de fastq para manejar más variaciones:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="14" hl_lines="2"
-            // Extract metadata from filename using regex
-            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-            def file_meta = m ? [
-                sample_num: m[0][2].toInteger(),
-                lane: m[0][3],
-                read: m[0][4],
-                chunk: m[0][5]
-            ] : [:]
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="14" hl_lines="2"
-            // Extract metadata from filename using regex
-            def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq$/)
-            def file_meta = m ? [
-                sample_num: m[0][2].toInteger(),
-                lane: m[0][3],
-                read: m[0][4],
-                chunk: m[0][5]
-            ] : [:]
-    ```
-
-Ahora, `/^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/` coincidirá con tanto `.fastq` como `.fastq.gz`.
-
-!!! note "Grupos de captura en regex" - Los paréntesis `(...)` definen "grupos de captura" - `m[0]` es la coincidencia completa - `m[0][1]`, `m[0][2]`, etc. son los grupos de captura (comenzando por 1)
-
-Si tuvieras nombres de archivos con diferentes convenciones, podrías usar el operador OR (`|`) en tu regex:
-
-```groovy title="regex example"
-def m = (filename =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/ |
-                      /^(.+)_(\d{6})_([ACGT]+)_L(\d{3})_(R[12])\.fastq(?:\.gz)?$/)
-```
-
-### 2.2. Generación dinámica de scripts
-
-Otra aplicación poderosa del procesamiento de cadenas es generar dinámicamente scripts bash basados en metadatos o entradas. Esto es especialmente útil para lógica condicional dentro de los procesos.
-
-Modifiquemos el proceso `GENERATE_REPORT` para generar diferentes tipos de informes basados en la prioridad:
-
-=== "After"
-
-    ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="3-11"
-    script:
-    // Generate different report content based on priority
-    def report_content = meta.priority == 'high' ?
-    """
-    echo "HIGH PRIORITY SAMPLE" > ${meta.id}_report.txt
-    echo "===============================================" >> ${meta.id}_report.txt
-    """ :
-    """
-    echo "Standard Sample" > ${meta.id}_report.txt
-    echo "---------------------------------------------" >> ${meta.id}_report.txt
-    """
-
-    """
-    ${report_content}
-    echo "Sample ID: ${meta.id}" >> ${meta.id}_report.txt
-    echo "Organism: ${meta.organism}" >> ${meta.id}_report.txt
-    echo "Tissue: ${meta.tissue}" >> ${meta.id}_report.txt
-    echo "Sequencing depth: ${meta.depth}" >> ${meta.id}_report.txt
-    echo "Quality score: ${meta.quality}" >> ${meta.id}_report.txt
-    echo "Sample number: ${meta.sample_num}" >> ${meta.id}_report.txt
-    echo "Lane: ${meta.lane}" >> ${meta.id}_report.txt
-    echo "Read: ${meta.read}" >> ${meta.id}_report.txt
-    echo "Chunk: ${meta.chunk}" >> ${meta.id}_report.txt
-    echo "Priority: ${meta.priority}" >> ${meta.id}_report.txt
-    echo "File processed: ${reads}" >> ${meta.id}_report.txt
-    echo "Process command: fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz" >> ${meta.id}_report.txt
-    """
-    ```
-
-=== "Before"
-
-    ```groovy title="modules/generate_report.nf" linenums="11" hl_lines="2-13"
-    script:
-    """
-    echo "Sample ID: ${meta.id}" > ${meta.id}_report.txt
-    echo "Organism: ${meta.organism}" >> ${meta.id}_report.txt
-    echo "Tissue: ${meta.tissue}" >> ${meta.id}_report.txt
-    echo "Sequencing depth: ${meta.depth}" >> ${meta.id}_report.txt
-    echo "Quality score: ${meta.quality}" >> ${meta.id}_report.txt
-    echo "Sample number: ${meta.sample_num}" >> ${meta.id}_report.txt
-    echo "Lane: ${meta.lane}" >> ${meta.id}_report.txt
-    echo "Read: ${meta.read}" >> ${meta.id}_report.txt
-    echo "Chunk: ${meta.chunk}" >> ${meta.id}_report.txt
-    echo "Priority: ${meta.priority}" >> ${meta.id}_report.txt
-    echo "File processed: ${reads}" >> ${meta.id}_report.txt
-    echo "Process command: fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz" >> ${meta.id}_report.txt
-    """
-    ```
-
-Ejecutemos el flujo de trabajo para ver el resultado:
-
-```bash
-nextflow run main.nf
-```
-
-??? success "Salida del comando"
-
-    ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `main.nf` [condescending_northcutt] DSL2 - revision: 1a3c16a96f
-
-    executor >  local (6)
-    [95/e633a2] process > FASTP (sample_001)           [100%] 3 of 3 ✔
-    [a8/e4c214] process > GENERATE_REPORT (sample_001) [100%] 3 of 3 ✔
-    ```
-
-Revisemos los archivos de informe generados - busquemos específicamente el de alta prioridad:
-
-```console
-find work -name "sample_003_report.txt" -exec cat {} \;
-```
-
-Deberías ver el encabezado especial:
-
-```
-HIGH PRIORITY SAMPLE
-===============================================
-Sample ID: sample_003
-Organism: human
-...
-```
-
-### 2.3. Interpolación de variables: cuándo Nextflow evalúa vs. cuándo bash evalúa
-
-Un punto sutil pero crucial para entender es cuándo ocurre la interpolación de variables:
-
-1. `${var}` - Interpolado por Nextflow durante la compilación del script
-2. `\${var}` - Escapado, pasado literalmente a bash como `${var}` (para variables de entorno bash)
-
-Podemos ver esto en acción actualizando el proceso `GENERATE_REPORT` para usar una variable de entorno:
-
-=== "After"
-
-    ```groovy title="modules/generate_report.nf" linenums="11" hl_lines="15"
-    script:
-    // Generate different report content based on priority
-    def report_content = meta.priority == 'high' ?
-    """
-    echo "HIGH PRIORITY SAMPLE" > ${meta.id}_report.txt
-    echo "===============================================" >> ${meta.id}_report.txt
-    """ :
-    """
-    echo "Standard Sample" > ${meta.id}_report.txt
-    echo "---------------------------------------------" >> ${meta.id}_report.txt
-    """
-
-    """
-    ${report_content}
-    echo "Sample ID: ${meta.id}" >> ${meta.id}_report.txt
-    echo "Processed by: \${USER}" >> ${meta.id}_report.txt
-    echo "Organism: ${meta.organism}" >> ${meta.id}_report.txt
-    echo "Tissue: ${meta.tissue}" >> ${meta.id}_report.txt
-    echo "Sequencing depth: ${meta.depth}" >> ${meta.id}_report.txt
-    echo "Quality score: ${meta.quality}" >> ${meta.id}_report.txt
-    echo "Sample number: ${meta.sample_num}" >> ${meta.id}_report.txt
-    echo "Lane: ${meta.lane}" >> ${meta.id}_report.txt
-    echo "Read: ${meta.read}" >> ${meta.id}_report.txt
-    echo "Chunk: ${meta.chunk}" >> ${meta.id}_report.txt
-    echo "Priority: ${meta.priority}" >> ${meta.id}_report.txt
-    echo "File processed: ${reads}" >> ${meta.id}_report.txt
-    echo "Process command: fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz" >> ${meta.id}_report.txt
-    """
-    ```
-
-=== "Before"
-
-    ```groovy title="modules/generate_report.nf" linenums="11"
-    script:
-    // Generate different report content based on priority
-    def report_content = meta.priority == 'high' ?
-    """
-    echo "HIGH PRIORITY SAMPLE" > ${meta.id}_report.txt
-    echo "===============================================" >> ${meta.id}_report.txt
-    """ :
-    """
-    echo "Standard Sample" > ${meta.id}_report.txt
-    echo "---------------------------------------------" >> ${meta.id}_report.txt
-    """
-
-    """
-    ${report_content}
-    echo "Sample ID: ${meta.id}" >> ${meta.id}_report.txt
-    echo "Organism: ${meta.organism}" >> ${meta.id}_report.txt
-    echo "Tissue: ${meta.tissue}" >> ${meta.id}_report.txt
-    echo "Sequencing depth: ${meta.depth}" >> ${meta.id}_report.txt
-    echo "Quality score: ${meta.quality}" >> ${meta.id}_report.txt
-    echo "Sample number: ${meta.sample_num}" >> ${meta.id}_report.txt
-    echo "Lane: ${meta.lane}" >> ${meta.id}_report.txt
-    echo "Read: ${meta.read}" >> ${meta.id}_report.txt
-    echo "Chunk: ${meta.chunk}" >> ${meta.id}_report.txt
-    echo "Priority: ${meta.priority}" >> ${meta.id}_report.txt
-    echo "File processed: ${reads}" >> ${meta.id}_report.txt
-    echo "Process command: fastp --in1 ${reads} --out1 ${meta.id}_trimmed.fastq.gz" >> ${meta.id}_report.txt
-    """
-    ```
-
-Si ejecutamos el flujo de trabajo tal como está, fallará:
-
-```bash
-nextflow run main.nf
-```
+Si ejecutas esto, notarás un error - Nextflow intenta interpretar `${USER}` como una variable de Nextflow que no existe.
 
 ??? failure "Salida del comando"
 
@@ -759,11 +1140,35 @@ nextflow run main.nf
     ERROR ~ Script compilation failed
     ```
 
-El problema es que Nextflow intenta interpretar `${USER}` como una variable de Nextflow, pero no hay ninguna variable llamada `USER`. Necesitamos escapar el `$` para que se pase a bash, que sí tiene una variable de entorno `USER`:
+Necesitamos escaparlo para que Bash pueda manejarlo en su lugar.
 
-```groovy title="modules/generate_report.nf" linenums="15" hl_lines="1"
-    echo "Processed by: \${USER}" >> ${meta.id}_report.txt
-```
+Arregla esto escapando las variables de shell y sustituciones de comandos con una barra invertida (`\`):
+
+=== "Después"
+
+    ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: \${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: \$(hostname)" >> ${meta.id}_report.txt
+        echo "Date: \$(date)" >> ${meta.id}_report.txt
+        """
+    ```
+
+=== "Antes"
+
+    ```groovy title="modules/generate_report.nf" linenums="10"
+        script:
+        """
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
+        """
+    ```
 
 ¡Ahora funciona! La barra invertida (`\`) le dice a Nextflow "no interpretes esto, pásalo a Bash."
 
@@ -771,7 +1176,7 @@ El problema es que Nextflow intenta interpretar `${USER}` como una variable de N
 
 En esta sección, has aprendido técnicas de **procesamiento de cadenas**:
 
-- **Expresiones regulares para análisis de archivos**: Usando el operador `=~` y patrones regex (`~/patrón/`) para extraer metadatos de convenciones de nomenclatura de archivos complejos
+- **Expresiones regulares para análisis de archivos**: Usando el operador `=~` y patrones regex (`~/patrón/`) para extraer metadatos de convenciones de nomenclatura de archivos complejas
 - **Generación dinámica de scripts**: Usando lógica condicional (if/else, operadores ternarios) para generar diferentes cadenas de script basadas en características de entrada
 - **Interpolación de variables**: Entender cuándo Nextflow interpreta cadenas vs cuándo lo hace el shell
   - `${var}` - Variables de Nextflow (interpoladas por Nextflow en tiempo de compilación del flujo de trabajo)
@@ -784,13 +1189,13 @@ Estos patrones de procesamiento y generación de cadenas son esenciales para man
 
 ## 3. Creando Funciones Reutilizables
 
-La lógica compleja del flujo de trabajo en línea en los operadores de canales o definiciones de procesos reduce la legibilidad y la mantenibilidad. Las **funciones** te permiten extraer esta lógica en componentes nombrados y reutilizables.
+La lógica compleja del flujo de trabajo en línea en operadores de canales o definiciones de procesos reduce la legibilidad y mantenibilidad. Las **funciones** te permiten extraer esta lógica en componentes nombrados y reutilizables.
 
 Nuestra operación map ha crecido larga y compleja. Extraigámosla en una función reutilizable usando la palabra clave `def`.
 
 Para ilustrar cómo se ve eso con nuestro flujo de trabajo existente, haz la modificación a continuación, usando `def` para definir una función reutilizable llamada `separateMetadata`:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="1" hl_lines="4-24 29"
     include { FASTP } from './modules/fastp.nf'
@@ -828,7 +1233,7 @@ Para ilustrar cómo se ve eso con nuestro flujo de trabajo existente, haz la mod
     }
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="1" hl_lines="7-27"
     include { FASTP } from './modules/fastp.nf'
@@ -866,7 +1271,7 @@ Para ilustrar cómo se ve eso con nuestro flujo de trabajo existente, haz la mod
 
 Al extraer esta lógica en una función, hemos reducido la lógica real del flujo de trabajo a algo mucho más limpio:
 
-```groovy title="flujo de trabajo mínimo"
+```groovy title="minimal workflow"
     ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .map{ row -> separateMetadata(row) }
@@ -895,7 +1300,7 @@ nextflow run main.nf
     [7a/1b4c92] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
     ```
 
-La salida debería mostrar que ambos procesos se completan con éxito. El flujo de trabajo es ahora mucho más limpio y fácil de mantener, con toda la lógica compleja de procesamiento de metadatos encapsulada en la función `separateMetadata`.
+La salida debería mostrar que ambos procesos se completan exitosamente. El flujo de trabajo es ahora mucho más limpio y fácil de mantener, con toda la lógica compleja de procesamiento de metadatos encapsulada en la función `separateMetadata`.
 
 ### Conclusión
 
@@ -918,7 +1323,7 @@ Hasta ahora hemos usado scripting en el bloque `script` de los procesos. Pero la
 
 Actualmente, nuestro proceso FASTP utiliza recursos predeterminados. Hagámoslo más inteligente asignando más CPUs para muestras de alta profundidad. Edita `modules/fastp.nf` para incluir una directiva `cpus` dinámica y una directiva `memory` estática:
 
-=== "After"
+=== "Después"
 
     ```groovy title="modules/fastp.nf" linenums="1" hl_lines="4-5"
     process FASTP {
@@ -931,7 +1336,7 @@ Actualmente, nuestro proceso FASTP utiliza recursos predeterminados. Hagámoslo 
         tuple val(meta), path(reads)
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="modules/fastp.nf" linenums="1"
     process FASTP {
@@ -968,13 +1373,13 @@ nextflow run main.nf -ansi-log false
 
 Puedes verificar el comando exacto de `docker` que se ejecutó para ver la asignación de CPU para cualquier tarea dada:
 
-```console title="Verifica el comando docker"
+```console title="Check docker command"
 cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
 ```
 
 Deberías ver algo como:
 
-```bash title="comando docker"
+```bash title="docker command"
     docker run -i --cpu-shares 4096 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 ```
 
@@ -984,7 +1389,7 @@ En este ejemplo hemos elegido un ejemplo que solicitó 2 CPUs (`--cpu-shares 204
 
 Otro patrón poderoso es usar `task.attempt` para estrategias de reintento. Para mostrar por qué esto es útil, vamos a comenzar reduciendo la asignación de memoria a FASTP a menos de lo que necesita. Cambia la directiva `memory` en `modules/fastp.nf` a `1.GB`:
 
-=== "After"
+=== "Después"
 
     ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
     process FASTP {
@@ -997,7 +1402,7 @@ Otro patrón poderoso es usar `task.attempt` para estrategias de reintento. Para
         tuple val(meta), path(reads)
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
     process FASTP {
@@ -1038,7 +1443,7 @@ Este es un escenario muy común en flujos de trabajo del mundo real - a veces si
 
 Para hacer nuestro flujo de trabajo más robusto, podemos implementar una estrategia de reintento que aumente la asignación de memoria en cada intento, una vez más usando una closure de Groovy. Modifica la directiva `memory` para multiplicar la memoria base por `task.attempt`, y agrega directivas `errorStrategy 'retry'` y `maxRetries 2`:
 
-=== "After"
+=== "Después"
 
     ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5-7"
     process FASTP {
@@ -1053,7 +1458,7 @@ Para hacer nuestro flujo de trabajo más robusto, podemos implementar una estrat
         tuple val(meta), path(reads)
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="modules/fastp.nf" linenums="1" hl_lines="5"
     process FASTP {
@@ -1090,7 +1495,7 @@ Esto hace que tus flujos de trabajo sean tanto más eficientes (sin sobreasignar
 
 Anteriormente, usamos `.map()` con scripting para transformar datos de canales. Ahora usaremos lógica condicional para controlar qué procesos ejecutar basados en los datos, lo cual es esencial para flujos de trabajo flexibles que se adapten a diferentes tipos de muestras.
 
-Los [operadores de flujo de datos](https://nextflow.io/docs/latest/reference/operator.html) de Nextflow toman closures evaluadas en tiempo de ejecución, permitiendo lógica condicional para dirigir decisiones del flujo de trabajo basadas en el contenido del canal.
+Los [operadores de flujo de datos](https://www.nextflow.io/docs/latest/reference/operator.html) de Nextflow toman closures evaluadas en tiempo de ejecución, permitiendo lógica condicional para dirigir decisiones del flujo de trabajo basadas en el contenido del canal.
 
 ### 5.1. Enrutamiento con `.branch()`
 
@@ -1100,14 +1505,14 @@ Hemos proporcionado un proceso simple de Trimgalore en `modules/trimgalore.nf`, 
 
 Incluye el nuevo desde `modules/trimgalore.nf`:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="1" hl_lines="2"
     include { FASTP } from './modules/fastp.nf'
     include { TRIMGALORE } from './modules/trimgalore.nf'
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="1"
     include { FASTP } from './modules/fastp.nf'
@@ -1115,7 +1520,7 @@ Incluye el nuevo desde `modules/trimgalore.nf`:
 
 ... y luego modifica el flujo de trabajo `main.nf` para ramificar las muestras basadas en sus metadatos y enrutarlas a través del proceso de recorte apropiado, así:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="28" hl_lines="5-12"
         ch_samples = channel.fromPath("./data/samples.csv")
@@ -1133,7 +1538,7 @@ Incluye el nuevo desde `modules/trimgalore.nf`:
         GENERATE_REPORT(ch_samples)
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="28" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
@@ -1178,7 +1583,7 @@ Esto significa que `meta.id` solo (sin un explícito `!= null`) comprueba si el 
 
 Agrega lo siguiente antes de la operación branch:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="28" hl_lines="5-11"
         ch_samples = channel.fromPath("./data/samples.csv")
@@ -1198,7 +1603,7 @@ Agrega lo siguiente antes de la operación branch:
             }
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="28" hl_lines="5"
         ch_samples = channel.fromPath("./data/samples.csv")
@@ -1269,7 +1674,7 @@ Digamos que queremos agregar soporte para información opcional del experimento 
 
 Modifica la función `separateMetadata` para incluir un campo run_id:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="5" hl_lines="9"
     def separateMetadata(row) {
@@ -1283,7 +1688,7 @@ Modifica la función `separateMetadata` para incluir un campo run_id:
         def run_id = row.run_id.toUpperCase()
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="5"
     def separateMetadata(row) {
@@ -1324,7 +1729,7 @@ El operador de navegación segura (`?.`) devuelve `null` en lugar de lanzar una 
 
 Actualiza la función para usar navegación segura:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="4" hl_lines="9"
     def separateMetadata(row) {
@@ -1338,7 +1743,7 @@ Actualiza la función para usar navegación segura:
         def run_id = row.run_id?.toUpperCase()
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="4" hl_lines="9"
     def separateMetadata(row) {
@@ -1372,7 +1777,7 @@ El operador Elvis (`?:`) proporciona valores predeterminados cuando el lado izqu
 
 Ahora que estamos usando navegación segura, `run_id` será `null` para las muestras sin ese campo. Usemos el operador Elvis para proporcionar un valor predeterminado y agregarlo a nuestro mapa `sample_meta`:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="5" hl_lines="9-10"
     def separateMetadata(row) {
@@ -1387,7 +1792,7 @@ Ahora que estamos usando navegación segura, `run_id` será `null` para las mues
         sample_meta.run = run_id
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="5" hl_lines="9"
     def separateMetadata(row) {
@@ -1403,7 +1808,7 @@ Ahora que estamos usando navegación segura, `run_id` será `null` para las mues
 
 También agrega un operador `view()` en el flujo de trabajo para ver los resultados:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="30" hl_lines="4"
         ch_samples = channel.fromPath("./data/samples.csv")
@@ -1412,7 +1817,7 @@ También agrega un operador `view()` en el flujo de trabajo para ver los resulta
             .view()
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="30"
         ch_samples = channel.fromPath("./data/samples.csv")
@@ -1465,7 +1870,7 @@ A veces necesitas detener el flujo de trabajo inmediatamente si los parámetros 
 
 Crea una función de validación antes de tu bloque de flujo de trabajo, llámala desde el flujo de trabajo, y cambia la creación del canal para usar un parámetro para la ruta del archivo CSV. Si el parámetro falta o el archivo no existe, llama a `error()` para detener la ejecución con un mensaje claro.
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="1" hl_lines="5-20 23-24"
     include { FASTP } from './modules/fastp.nf'
@@ -1475,12 +1880,12 @@ Crea una función de validación antes de tu bloque de flujo de trabajo, llámal
     def validateInputs() {
         // Verifica que se proporcione el parámetro de entrada
         if (!params.input) {
-            error("Ruta del archivo CSV de entrada no proporcionada. Por favor, especifique --input <file.csv>")
+            error("Input CSV file path not provided. Please specify --input <file.csv>")
         }
 
         // Verifica que el archivo CSV exista
         if (!file(params.input).exists()) {
-            error("Archivo CSV de entrada no encontrado: ${params.input}")
+            error("Input CSV file not found: ${params.input}")
         }
     }
     ...
@@ -1489,7 +1894,7 @@ Crea una función de validación antes de tu bloque de flujo de trabajo, llámal
         ch_samples = channel.fromPath(params.input)
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="1"
     include { FASTP } from './modules/fastp.nf'
@@ -1515,7 +1920,7 @@ nextflow run main.nf
     Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
 
     WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
-    Ruta del archivo CSV de entrada no proporcionada. Por favor, especifique --input <file.csv>
+    Input CSV file path not provided. Please specify --input <file.csv>
     ```
 
 El flujo de trabajo se detiene inmediatamente con un mensaje de error claro en lugar de fallar misteriosamente más tarde
@@ -1533,7 +1938,7 @@ nextflow run main.nf --input ./data/nonexistent.csv
 
     Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
 
-    Archivo CSV de entrada no encontrado: ./data/nonexistent.csv
+    Input CSV file not found: ./data/nonexistent.csv
     ```
 
 Finalmente, ejecútalo con el archivo correcto:
@@ -1552,21 +1957,21 @@ Esta vez se ejecuta exitosamente.
 
 También puedes agregar validación dentro de la función `separateMetadata`. Usemos el no fatal `log.warn` para emitir advertencias para muestras con baja profundidad de secuenciación, pero aun así permitir que el flujo de trabajo continúe:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="1" hl_lines="3-6"
         def priority = sample_meta.quality > 40 ? 'high' : 'normal'
 
         // Validar que los datos tienen sentido
         if (sample_meta.depth < 30000000) {
-            log.warn "Baja profundidad de secuenciación para ${sample_meta.id}: ${sample_meta.depth}"
+            log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
         }
 
         return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
     }
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="1"
         def priority = sample_meta.quality > 40 ? 'high' : 'normal'
@@ -1592,7 +1997,7 @@ nextflow run main.nf --input ./data/samples.csv
     [ce/df5eeb] process > FASTP (2)           [100%] 2 of 2 ✔
     [-        ] process > TRIMGALORE          -
     [d1/7d2b4b] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
-    WARN: Baja profundidad de secuenciación para sample_002: 25000000
+    WARN: Low sequencing depth for sample_002: 25000000
     ```
 
 Vemos una advertencia sobre la baja profundidad de secuenciación para una de las muestras.
@@ -1620,7 +2025,7 @@ El manejador de eventos más comúnmente usado es `onComplete`, que se ejecuta c
 
 Agrega el manejador de eventos a tu archivo `main.nf`, dentro de tu definición de flujo de trabajo:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="66" hl_lines="5-16"
         ch_fastp = FASTP(trim_branches.fastp)
@@ -1629,19 +2034,19 @@ Agrega el manejador de eventos a tu archivo `main.nf`, dentro de tu definición 
 
         workflow.onComplete = {
             println ""
-            println "Resumen de ejecución del pipeline:"
+            println "Pipeline execution summary:"
             println "=========================="
-            println "Completado en: ${workflow.complete}"
-            println "Duración    : ${workflow.duration}"
-            println "Éxito       : ${workflow.success}"
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
             println "workDir     : ${workflow.workDir}"
-            println "estado salida : ${workflow.exitStatus}"
+            println "exit status : ${workflow.exitStatus}"
             println ""
         }
     }
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="66" hl_lines="4"
         ch_fastp = FASTP(trim_branches.fastp)
@@ -1663,25 +2068,25 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
     ```console
     N E X T F L O W  ~  version 25.10.2
     Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
-    WARN: Baja profundidad de secuenciación para sample_002: 25000000
+    WARN: Low sequencing depth for sample_002: 25000000
     [9b/d48e40] Submitted process > FASTP (2)
     [6a/73867a] Submitted process > GENERATE_REPORT (2)
     [79/ad0ac5] Submitted process > GENERATE_REPORT (1)
     [f3/bda6cb] Submitted process > FASTP (1)
     [34/d5b52f] Submitted process > GENERATE_REPORT (3)
 
-    Resumen de ejecución del pipeline:
+    Pipeline execution summary:
     ==========================
-    Completado en: 2025-10-10T12:14:24.885384+01:00
-    Duración    : 2.9s
-    Éxito       : true
+    Completed at: 2025-10-10T12:14:24.885384+01:00
+    Duration    : 2.9s
+    Success     : true
     workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
-    estado salida : 0
+    exit status : 0
     ```
 
 Hagámoslo más útil agregando lógica condicional:
 
-=== "After"
+=== "Después"
 
     ```groovy title="main.nf" linenums="66" hl_lines="5-22"
         ch_fastp = FASTP(trim_branches.fastp)
@@ -1690,26 +2095,26 @@ Hagámoslo más útil agregando lógica condicional:
 
         workflow.onComplete = {
             println ""
-            println "Resumen de ejecución del pipeline:"
+            println "Pipeline execution summary:"
             println "=========================="
-            println "Completado en: ${workflow.complete}"
-            println "Duración    : ${workflow.duration}"
-            println "Éxito       : ${workflow.success}"
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
             println "workDir     : ${workflow.workDir}"
-            println "estado salida : ${workflow.exitStatus}"
+            println "exit status : ${workflow.exitStatus}"
             println ""
 
             if (workflow.success) {
-                println "✅ ¡Pipeline completado exitosamente!"
+                println "✅ Pipeline completed successfully!"
             } else {
-                println "❌ ¡Pipeline falló!"
+                println "❌ Pipeline failed!"
                 println "Error: ${workflow.errorMessage}"
             }
         }
     }
     ```
 
-=== "Before"
+=== "Antes"
 
     ```groovy title="main.nf" linenums="66" hl_lines="5-16"
         ch_fastp = FASTP(trim_branches.fastp)
@@ -1718,13 +2123,13 @@ Hagámoslo más útil agregando lógica condicional:
 
         workflow.onComplete = {
             println ""
-            println "Resumen de ejecución del pipeline:"
+            println "Pipeline execution summary:"
             println "=========================="
-            println "Completado en: ${workflow.complete}"
-            println "Duración    : ${workflow.duration}"
-            println "Éxito       : ${workflow.success}"
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
             println "workDir     : ${workflow.workDir}"
-            println "estado salida : ${workflow.exitStatus}"
+            println "exit status : ${workflow.exitStatus}"
             println ""
         }
     }
@@ -1739,38 +2144,38 @@ Ahora obtenemos un resumen aún más informativo, incluyendo un mensaje de éxit
     ```console
     N E X T F L O W  ~  version 25.10.2
     Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
-    WARN: Baja profundidad de secuenciación para sample_002: 25000000
+    WARN: Low sequencing depth for sample_002: 25000000
     [e5/242efc] Submitted process > FASTP (2)
     [3b/74047c] Submitted process > GENERATE_REPORT (3)
     [8a/7a57e6] Submitted process > GENERATE_REPORT (1)
     [a8/b1a31f] Submitted process > GENERATE_REPORT (2)
     [40/648429] Submitted process > FASTP (1)
 
-    Resumen de ejecución del pipeline:
+    Pipeline execution summary:
     ==========================
-    Completado en: 2025-10-10T12:16:00.522569+01:00
-    Duración    : 3.6s
-    Éxito       : true
+    Completed at: 2025-10-10T12:16:00.522569+01:00
+    Duration    : 3.6s
+    Success     : true
     workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
-    estado salida : 0
+    exit status : 0
 
-    ✅ ¡Pipeline completado exitosamente!
+    ✅ Pipeline completed successfully!
     ```
 
 También puedes escribir el resumen en un archivo usando operaciones de archivo:
 
-```groovy title="main.nf - Escribiendo resumen a un archivo"
+```groovy title="main.nf - Writing summary to file"
 workflow {
     // ... tu código de flujo de trabajo ...
 
     workflow.onComplete = {
         def summary = """
-        Resumen de Ejecución del Pipeline
+        Pipeline Execution Summary
         ===========================
-        Completado: ${workflow.complete}
-        Duración : ${workflow.duration}
-        Éxito  : ${workflow.success}
-        Comando  : ${workflow.commandLine}
+        Completed: ${workflow.complete}
+        Duration : ${workflow.duration}
+        Success  : ${workflow.success}
+        Command  : ${workflow.commandLine}
         """
 
         println summary
@@ -1786,48 +2191,48 @@ workflow {
 
 Además de `onComplete`, hay otro manejador de eventos que puedes usar: `onError`, que se ejecuta solo si el flujo de trabajo falla:
 
-```groovy title="main.nf - manejador onError"
+```groovy title="main.nf - onError handler"
 workflow {
     // ... tu código de flujo de trabajo ...
 
     workflow.onError = {
         println "="* 50
-        println "¡Ejecución del pipeline falló!"
-        println "Mensaje de error: ${workflow.errorMessage}"
+        println "Pipeline execution failed!"
+        println "Error message: ${workflow.errorMessage}"
         println "="* 50
 
         // Escribir registro de error detallado
         def error_file = file("${workflow.launchDir}/error.log")
         error_file.text = """
-        Informe de Error del Flujo de Trabajo
+        Workflow Error Report
         =====================
-        Tiempo: ${new Date()}
+        Time: ${new Date()}
         Error: ${workflow.errorMessage}
-        Informe de error: ${workflow.errorReport ?: 'No hay informe detallado disponible'}
+        Error report: ${workflow.errorReport ?: 'No detailed report available'}
         """
 
-        println "Detalles del error escritos en: ${error_file}"
+        println "Error details written to: ${error_file}"
     }
 }
 ```
 
 Puedes usar múltiples manejadores juntos en tu script de flujo de trabajo:
 
-```groovy title="main.nf - Manejadores combinados"
+```groovy title="main.nf - Combined handlers"
 workflow {
     // ... tu código de flujo de trabajo ...
 
     workflow.onError = {
-        println "Flujo de trabajo falló: ${workflow.errorMessage}"
+        println "Workflow failed: ${workflow.errorMessage}"
     }
 
     workflow.onComplete = {
         def duration_mins = workflow.duration.toMinutes().round(2)
-        def status = workflow.success ? "ÉXITO ✅" : "FALLÓ ❌"
+        def status = workflow.success ? "SUCCESS ✅" : "FAILED ❌"
 
         println """
-        Pipeline finalizado: ${status}
-        Duración: ${duration_mins} minutos
+        Pipeline finished: ${status}
+        Duration: ${duration_mins} minutes
         """
     }
 }
@@ -1912,10 +2317,10 @@ Aplicar estos patrones en tu propio trabajo te permitirá construir flujos de tr
 
     ```groovy
     def separateMetadata(row) {
-        def sample_meta = [ /* código oculto por brevedad */ ]
+        def sample_meta = [ /* code hidden for brevity */ ]
         def fastq_path = file(row.file_path)
         def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-        def file_meta = m ? [ /* código oculto por brevedad */ ] : [:]
+        def file_meta = m ? [ /* code hidden for brevity */ ] : [:]
         def priority = sample_meta.quality > 40 ? 'high' : 'normal'
 
         return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
@@ -1967,7 +2372,7 @@ Aplicar estos patrones en tu propio trabajo te permitirá construir flujos de tr
     - Evaluación booleana con Veracidad de Groovy
 
     ```groovy
-    if (sample.files) println "Tiene archivos"
+    if (sample.files) println "Has files"
     ```
 
     - Usa `filter()` para filtrar datos con 'veracidad'
@@ -1990,7 +2395,7 @@ Aplicar estos patrones en tu propio trabajo te permitirá construir flujos de tr
     ```groovy
     try {
         def errors = validateSample(sample)
-        if (errors) throw new RuntimeException("Inválido: ${errors.join(', ')}")
+        if (errors) throw new RuntimeException("Invalid: ${errors.join(', ')}")
     } catch (Exception e) {
         println "Error: ${e.message}"
     }
@@ -2002,13 +2407,13 @@ Aplicar estos patrones en tu propio trabajo te permitirá construir flujos de tr
 
     ```groovy
     workflow.onComplete = {
-        println "Éxito       : ${workflow.success}"
-        println "estado salida : ${workflow.exitStatus}"
+        println "Success     : ${workflow.success}"
+        println "exit status : ${workflow.exitStatus}"
 
         if (workflow.success) {
-            println "✅ ¡Pipeline completado exitosamente!"
+            println "✅ Pipeline completed successfully!"
         } else {
-            println "❌ ¡Pipeline falló!"
+            println "❌ Pipeline failed!"
             println "Error: ${workflow.errorMessage}"
         }
     }
@@ -2021,12 +2426,12 @@ Aplicar estos patrones en tu propio trabajo te permitirá construir flujos de tr
         // Escribir registro de error detallado
         def error_file = file("${workflow.launchDir}/error.log")
         error_file.text = """
-        Tiempo: ${new Date()}
+        Time: ${new Date()}
         Error: ${workflow.errorMessage}
-        Informe de error: ${workflow.errorReport ?: 'No hay informe detallado disponible'}
+        Error report: ${workflow.errorReport ?: 'No detailed report available'}
         """
 
-        println "Detalles del error escritos en: ${error_file}"
+        println "Error details written to: ${error_file}"
     }
     ```
 

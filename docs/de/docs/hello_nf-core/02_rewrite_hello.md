@@ -249,7 +249,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // Channel: Samplesheet eingelesen von --input
+    ch_samplesheet // channel: Samplesheet eingelesen von --input
     main:
 
     ch_versions = channel.empty()
@@ -267,7 +267,7 @@ workflow HELLO {
 
 
     emit:
-    versions       = ch_versions                 // Channel: [ path(versions.yml) ]
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }
 
@@ -294,11 +294,11 @@ Dies sind optionale Funktionen von Nextflow, die den Workflow **komponierbar** m
 Wir müssen die relevante Logik aus unserem Workflow von Interesse in diese Struktur einbinden.
 Der erste Schritt dafür ist, unseren ursprünglichen Workflow komponierbar zu machen.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie man ein Pipeline-Gerüst mit nf-core-Tools erstellt.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man einen einfachen Workflow komponierbar macht als Vorbereitung darauf, ihn nf-core-kompatibel zu machen.
 
@@ -374,7 +374,7 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+  // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
@@ -402,7 +402,7 @@ Gehen wir die notwendigen Änderungen Schritt für Schritt durch.
 
 Zuerst geben wir dem Workflow einen Namen, damit wir ihn aus einem übergeordneten Workflow referenzieren können.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="original-hello/hello.nf" linenums="16"
     workflow HELLO {
@@ -420,18 +420,18 @@ Für Workflow-Namen gelten die gleichen Konventionen wie für Modulnamen.
 
 Ersetze nun die Kanal-Konstruktion durch eine einfache `take`-Anweisung, die erwartete Eingaben deklariert.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
         take:
-        // Channel für Begrüßungen
+        // Kanal für Begrüßungen
         greeting_ch
     ```
 
 === "Vorher"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+        // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -441,11 +441,11 @@ Dies überlässt die Details, wie die Eingaben bereitgestellt werden, dem überg
 
 Während wir dabei sind, können wir auch die Zeile `params.greeting = 'greetings.csv'` auskommentieren
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
         /*
-        * Pipeline parameters
+        * Pipeline-Parameter
         */
         //params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
@@ -456,7 +456,7 @@ Während wir dabei sind, können wir auch die Zeile `params.greeting = 'greeting
 
     ```groovy title="original-hello/hello.nf" linenums="3" hl_lines="4"
         /*
-        * Pipeline parameters
+        * Pipeline-Parameter
         */
         params.greeting = 'greetings.csv'
         params.batch = 'test-batch'
@@ -474,7 +474,7 @@ Während wir dabei sind, können wir auch die Zeile `params.greeting = 'greeting
 
 Als Nächstes füge eine `main`-Anweisung vor den restlichen Operationen hinzu, die im Körper des Workflows aufgerufen werden.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
@@ -529,9 +529,9 @@ Wenn du alle Änderungen wie beschrieben vorgenommen hast, sollte dein Workflow 
 #!/usr/bin/env nextflow
 
 /*
-* Pipeline parameters
+* Pipeline-Parameter
 */
-// params.greeting = 'greetings.csv' (auskommentiert)
+// params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
@@ -544,7 +544,7 @@ include { cowpy } from './modules/cowpy.nf'
 workflow HELLO {
 
     take:
-    // Channel für Begrüßungen
+    // Kanal für Begrüßungen
     greeting_ch
 
     main:
@@ -592,12 +592,12 @@ include { HELLO } from './hello.nf'
 params.greeting = 'greetings.csv'
 
 workflow {
-  // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+  // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // Den importierten Workflow mit dem Channel der Begrüßungen aufrufen
+  // Den importierten Workflow mit dem Kanal der Begrüßungen aufrufen
   HELLO(greeting_ch)
 
   // Die vom Workflow ausgegebenen Ergebnisse anzeigen
@@ -651,11 +651,11 @@ Wenn du alle Änderungen korrekt vorgenommen hast, sollte dies bis zum Abschluss
 
 Das bedeutet, wir haben unseren HELLO-Workflow erfolgreich auf komponierbar aktualisiert.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man einen Workflow komponierbar macht, indem man ihm einen Namen gibt und `take`-, `main`- und `emit`-Anweisungen hinzufügt, und wie man ihn aus einem Einstiegspunkt-Workflow aufruft.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man einen einfachen komponierbaren Workflow auf das nf-core-Gerüst aufpfropft.
 
@@ -690,7 +690,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 workflow HELLO {
 
     take:
-    ch_samplesheet // Channel: Samplesheet eingelesen von --input
+    ch_samplesheet // channel: Samplesheet eingelesen von --input
     main:
 
     ch_versions = channel.empty()
@@ -708,7 +708,7 @@ workflow HELLO {
 
 
     emit:
-    versions       = ch_versions                 // Channel: [ path(versions.yml) ]
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }
 
@@ -779,7 +779,7 @@ include { cowpy } from './modules/cowpy.nf'
 
 Öffne die Datei `core-hello/workflows/hello.nf` und übertrage diese Import-Anweisungen hinein, wie unten gezeigt.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="8-11"
     /*
@@ -819,7 +819,7 @@ Da dies im Wesentlichen das ist, was unsere `greetings.csv`-Datei ist, behalten 
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="21"
     take:
-    ch_samplesheet // Channel: Samplesheet eingelesen von --input
+    ch_samplesheet // channel: Samplesheet eingelesen von --input
 ```
 
 Die Eingabebehandlung wird oberhalb dieses Workflows erfolgen (nicht in dieser Codedatei).
@@ -852,13 +852,13 @@ Es gibt bereits etwas Code dort, der damit zu tun hat, die Versionen der Tools z
 Wir behalten die Initialisierung `ch_versions = channel.empty()` oben bei, fügen dann unsere Workflow-Logik ein und behalten den Versionskollationscode am Ende.
 Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Versionsinformationen ausgeben würden, die dem `ch_versions`-Kanal hinzugefügt würden, während der Workflow läuft.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="19" hl_lines="10-20"
     workflow HELLO {
 
         take:
-        ch_samplesheet // Channel: Samplesheet eingelesen von --input
+        ch_samplesheet // channel: Samplesheet eingelesen von --input
 
         main:
 
@@ -889,7 +889,7 @@ Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Version
 
 
         emit:
-        versions       = ch_versions                 // Channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
     }
     ```
@@ -900,7 +900,7 @@ Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Version
     workflow HELLO {
 
         take:
-        ch_samplesheet // Channel: Samplesheet eingelesen von --input
+        ch_samplesheet // channel: Samplesheet eingelesen von --input
         main:
 
         ch_versions = Channel.empty()
@@ -918,7 +918,7 @@ Diese Reihenfolge macht Sinn, weil in einer echten Pipeline die Prozesse Version
 
 
         emit:
-        versions       = ch_versions                 // Channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
     }
     ```
@@ -927,7 +927,7 @@ Du wirst bemerken, dass wir auch eine Leerzeile vor `main:` hinzugefügt haben, 
 
 Das sieht großartig aus, aber wir müssen noch den Namen des Kanals aktualisieren, den wir an den `sayHello()`-Prozess übergeben, von `greeting_ch` zu `ch_samplesheet`, wie unten gezeigt, damit er mit dem übereinstimmt, was unter dem `take:`-Schlüsselwort geschrieben steht.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
         // Eine Begrüßung ausgeben (aktualisiert für die nf-core-Konvention für Samplesheets)
@@ -947,29 +947,29 @@ Jetzt ist die Workflow-Logik korrekt verdrahtet.
 
 Schließlich müssen wir den `emit`-Block aktualisieren, um die Deklaration der finalen Ausgaben des Workflows einzubeziehen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="55" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
-        versions       = ch_versions                 // Channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 === "Vorher"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="55"
         emit:
-        versions       = ch_versions                 // Channel: [ path(versions.yml) ]
+        versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 Damit sind die Änderungen abgeschlossen, die wir am HELLO-Workflow selbst vornehmen müssen.
 An diesem Punkt haben wir die Gesamt-Code-Struktur erreicht, die wir umsetzen wollten.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man die Kernstücke eines komponierbaren Workflows in einen nf-core-Platzhalter-Workflow einfügt.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man die Handhabung der Eingaben im nf-core-Pipeline-Gerüst anpasst.
 
@@ -1018,7 +1018,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_hell
 workflow CORE_HELLO {
 
     take:
-    samplesheet // Channel: Samplesheet eingelesen von --input
+    samplesheet // channel: Samplesheet eingelesen von --input
 
     main:
 
@@ -1093,7 +1093,7 @@ Wenn wir diese Datei öffnen und nach unten scrollen, kommen wir zu diesem Codeb
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
-    // Channel aus der Eingabedatei erstellen, die über params.input bereitgestellt wird
+    // Kanal aus der Eingabedatei erstellen, die über params.input bereitgestellt wird
     //
 
     channel
@@ -1146,7 +1146,7 @@ Die gute Nachricht ist, dass die Bedürfnisse unserer Pipeline viel einfacher si
 Zur Erinnerung: So sah die Kanal-Konstruktion aus (wie im Solutions-Verzeichnis zu sehen):
 
 ```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
-    // Einen Channel für Eingaben aus einer CSV-Datei erstellen
+    // Einen Kanal für Eingaben aus einer CSV-Datei erstellen
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
         .map { line -> line[0] }
@@ -1154,11 +1154,11 @@ Zur Erinnerung: So sah die Kanal-Konstruktion aus (wie im Solutions-Verzeichnis 
 
 Also müssen wir das nur in den Initialisierungs-Workflow einfügen, mit kleinen Änderungen: Wir aktualisieren den Kanalnamen von `greeting_ch` zu `ch_samplesheet` und den Parameternamen von `params.greeting` zu `params.input` (siehe hervorgehobene Zeile).
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
         //
-        // Channel aus der Eingabedatei erstellen, die über params.input bereitgestellt wird
+        // Kanal aus der Eingabedatei erstellen, die über params.input bereitgestellt wird
         //
 
         ch_samplesheet = channel.fromPath(params.input)
@@ -1174,7 +1174,7 @@ Also müssen wir das nur in den Initialisierungs-Workflow einfügen, mit kleinen
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
         //
-        // Channel aus der Eingabedatei erstellen, die über params.input bereitgestellt wird
+        // Kanal aus der Eingabedatei erstellen, die über params.input bereitgestellt wird
         //
 
         channel
@@ -1230,7 +1230,7 @@ Jetzt ist die `greetings.csv`-Datei bereit, als Testeingabe verwendet zu werden.
 
 Jetzt können wir die `test.config`-Datei wie folgt aktualisieren:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-10"
     params {
@@ -1268,7 +1268,7 @@ Wichtige Punkte:
 
 Und während wir dabei sind, lass uns die Standard-Ressourcenlimits verschärfen, um sicherzustellen, dass dies auf sehr einfachen Maschinen läuft (wie den minimalen VMs in Github Codespaces):
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
     process {
@@ -1424,11 +1424,11 @@ Und da ist es! Es mag nach viel Arbeit aussehen, um dasselbe Ergebnis wie die ur
 
 ---
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man eine reguläre Nextflow-Pipeline mithilfe des nf-core-Templates in eine Pipeline im nf-core-Stil umwandelt.
 Dabei hast du gelernt, wie man einen Workflow komponierbar macht und wie man die Elemente des nf-core-Templates identifiziert, die bei der Entwicklung einer benutzerdefinierten Pipeline im nf-core-Stil am häufigsten angepasst werden müssen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Mach eine Pause, das war harte Arbeit! Wenn du bereit bist, fahre mit [Teil 3: Ein nf-core-Modul verwenden](./03_use_module.md) fort, um zu lernen, wie du von der Community gepflegte Module aus dem nf-core/modules-Repository nutzen kannst.

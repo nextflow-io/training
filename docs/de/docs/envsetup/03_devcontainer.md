@@ -84,7 +84,7 @@ Die Verwendung des Devcontainer-Ansatzes bietet mehrere Vorteile:
 - **Konsistenz**: Stellt eine konsistente Entwicklungsumgebung über verschiedene Maschinen hinweg sicher
 - **Einfachheit**: Alle Abhängigkeiten sind vorinstalliert und konfiguriert
 - **Isolation**: Die Entwicklungsumgebung ist von deinem lokalen System isoliert
-- **Reproduzierbarkeit**: Jeder, der den Devcontainer verwendet, erhält dasselbe Setup
+- **Reproduzierbarkeit**: Jede\*r, die\*der den Devcontainer verwendet, erhält dasselbe Setup
 - **Keine manuelle Installation**: Keine Notwendigkeit, Java, Nextflow und andere Tools manuell zu installieren
 
 ## Überprüfung deiner Umgebung

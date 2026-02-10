@@ -2,9 +2,9 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-En esta cuarta parte del curso de entrenamiento Hello nf-core, le mostramos cómo crear un módulo nf-core aplicando las convenciones clave que hacen que los módulos sean portables y mantenibles.
+En esta cuarta parte del curso de capacitación Hello nf-core, le mostramos cómo crear un módulo nf-core aplicando las convenciones clave que hacen que los módulos sean portables y mantenibles.
 
-El proyecto nf-core proporciona un comando (`nf-core modules create`) que genera plantillas de módulos estructuradas correctamente de forma automática, similar a lo que usamos para el flujo de trabajo en la Parte 2.
+El proyecto nf-core proporciona un comando (`nf-core modules create`) que genera plantillas de módulos estructuradas correctamente de forma automática, similar a lo que usamos para el workflow en la Parte 2.
 Sin embargo, con fines didácticos, vamos a comenzar haciéndolo manualmente: transformando el módulo local `cowpy` en su pipeline `core-hello` en un módulo de estilo nf-core paso a paso.
 Después de eso, le mostraremos cómo usar la creación de módulos basada en plantillas para trabajar de manera más eficiente en el futuro.
 
@@ -63,7 +63,7 @@ process cowpy {
 Aplicaremos las siguientes convenciones de nf-core de forma incremental:
 
 1. **Cambiar el nombre del proceso a mayúsculas `COWPY`** para seguir la convención.
-2. **Actualizar `COWPY` para usar tuplas de metadatos** para propagar los metadatos de muestra a través del flujo de trabajo.
+2. **Actualizar `COWPY` para usar tuplas de metadatos** para propagar los metadatos de muestra a través del workflow.
 3. **Centralizar la configuración de argumentos de la herramienta con `ext.args`** para aumentar la versatilidad del módulo mientras se mantiene la interfaz mínima.
 4. **Estandarizar el nombre de salida con `ext.prefix`** para promover la consistencia.
 5. **Centralizar la configuración de publicación** para promover la consistencia.
@@ -85,8 +85,8 @@ Esta es puramente una convención estilística (no hay justificación técnica),
 Necesitamos hacer tres conjuntos de cambios:
 
 1. Actualizar el nombre del proceso en el módulo
-2. Actualizar la declaración de importación del módulo en el encabezado del flujo de trabajo
-3. Actualizar la llamada al proceso y la declaración emit en el cuerpo del flujo de trabajo
+2. Actualizar la declaración de importación del módulo en el encabezado del workflow
+3. Actualizar la llamada al proceso y la declaración emit en el cuerpo del workflow
 
 ¡Comencemos!
 
@@ -114,7 +114,7 @@ Si el nombre del proceso estuviera compuesto por varias palabras, por ejemplo si
 
 #### 1.1.2. Actualizar la declaración de importación del módulo
 
-Los nombres de procesos distinguen entre mayúsculas y minúsculas, así que ahora que hemos cambiado el nombre del proceso, necesitamos actualizar la declaración de importación del módulo en consecuencia en el encabezado del flujo de trabajo de `hello.nf`:
+Los nombres de procesos distinguen entre mayúsculas y minúsculas, así que ahora que hemos cambiado el nombre del proceso, necesitamos actualizar la declaración de importación del módulo en consecuencia en el encabezado del workflow de `hello.nf`:
 
 === "Después"
 
@@ -204,7 +204,7 @@ Asegúrese de hacer **ambos** cambios, de lo contrario obtendrá un error cuando
 
 #### 1.1.4. Ejecutar el pipeline para probarlo
 
-Ejecutemos el flujo de trabajo para probar que todo está funcionando correctamente después de estos cambios.
+Ejecutemos el workflow para probar que todo está funcionando correctamente después de estos cambios.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -259,13 +259,13 @@ En la versión actual del pipeline `core-hello`, estamos extrayendo el archivo d
     --8<-- "docs/en/docs/hello_nf-core/img/cowpy-inputs.svg"
 </figure>
 
-Sería mejor que `COWPY` aceptara tuplas de metadatos directamente, permitiendo que los metadatos fluyan a través del flujo de trabajo, como se muestra en la mitad inferior del diagrama.
+Sería mejor que `COWPY` aceptara tuplas de metadatos directamente, permitiendo que los metadatos fluyan a través del workflow, como se muestra en la mitad inferior del diagrama.
 
 Para lograrlo, necesitaremos hacer los siguientes cambios:
 
 1. Actualizar las definiciones de entrada y salida
-2. Actualizar la llamada al proceso en el flujo de trabajo
-3. Actualizar el bloque emit en el flujo de trabajo
+2. Actualizar la llamada al proceso en el workflow
+3. Actualizar el bloque emit en el workflow
 
 Una vez que hayamos hecho todo eso, ejecutaremos el pipeline para probar que todo sigue funcionando como antes.
 
@@ -295,17 +295,17 @@ Regrese al archivo del módulo `cowpy.nf` y modifíquelo para aceptar tuplas de 
             path "cowpy-${input_file}"
     ```
 
-Como puede ver, cambiamos tanto la **entrada principal** como la **salida** a una tupla que sigue el patrón `tuple val(meta), path(input_file)` introducido en la Parte 3 de este entrenamiento.
+Como puede ver, cambiamos tanto la **entrada principal** como la **salida** a una tupla que sigue el patrón `tuple val(meta), path(input_file)` introducido en la Parte 3 de esta capacitación.
 Para la salida, también aprovechamos esta oportunidad para agregar `emit: cowpy_output` con el fin de dar al canal de salida un nombre descriptivo.
 
 Ahora que hemos cambiado lo que el proceso espera, necesitamos actualizar lo que le proporcionamos en la llamada al proceso.
 
-#### 1.2.2. Actualizar la llamada al proceso en el flujo de trabajo
+#### 1.2.2. Actualizar la llamada al proceso en el workflow
 
 La buena noticia es que este cambio simplificará la llamada al proceso.
 Ahora que la salida de `CAT_CAT` y la entrada de `COWPY` tienen la misma 'forma', es decir, ambas consisten en una estructura `tuple val(meta), path(input_file)`, simplemente podemos conectarlas directamente en lugar de tener que extraer el archivo explícitamente de la salida del proceso `CAT_CAT`.
 
-Abra el archivo de flujo de trabajo `hello.nf` (en `core-hello/workflows/`) y actualice la llamada a `COWPY` como se muestra a continuación.
+Abra el archivo de workflow `hello.nf` (en `core-hello/workflows/`) y actualice la llamada a `COWPY` como se muestra a continuación.
 
 === "Después"
 
@@ -328,9 +328,9 @@ Ahora llamamos a `COWPY` directamente en `CAT_CAT.out.file_out`.
 
 Como resultado, ya no necesitamos construir el canal `ch_for_cowpy`, por lo que esa línea (y su línea de comentario) se pueden eliminar por completo.
 
-#### 1.2.3. Actualizar el bloque emit en el flujo de trabajo
+#### 1.2.3. Actualizar el bloque emit en el workflow
 
-Dado que `COWPY` ahora emite una salida nombrada, `cowpy_output`, podemos actualizar el bloque `emit:` del flujo de trabajo `hello.nf` para usar eso.
+Dado que `COWPY` ahora emite una salida nombrada, `cowpy_output`, podemos actualizar el bloque `emit:` del workflow `hello.nf` para usar eso.
 
 === "Después"
 
@@ -352,7 +352,7 @@ Técnicamente esto no es requerido, pero es una buena práctica referirse a sali
 
 #### 1.2.4. Ejecutar el pipeline para probarlo
 
-Ejecutemos el flujo de trabajo para probar que todo está funcionando correctamente después de estos cambios.
+Ejecutemos el workflow para probar que todo está funcionando correctamente después de estos cambios.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -420,7 +420,7 @@ Vamos a necesitar hacer los siguientes cambios:
 
 1. Actualizar el módulo `COWPY`
 2. Configurar `ext.args` en el archivo `modules.config`
-3. Actualizar el flujo de trabajo `hello.nf`
+3. Actualizar el workflow `hello.nf`
 
 Una vez que hayamos hecho todo eso, ejecutaremos el pipeline para probar que todo sigue funcionando como antes.
 
@@ -497,7 +497,7 @@ Puede ver que hicimos tres cambios.
 
 Como resultado, la interfaz del módulo ahora es más simple: solo espera las entradas esenciales de metadatos y archivos.
 
-!!! note
+!!! note "Nota"
 
     El operador `?:` a menudo se llama 'operador Elvis' porque parece una cara de Elvis Presley de lado, con el carácter `?` simbolizando la onda en su cabello.
 
@@ -553,15 +553,15 @@ Esperamos que pueda imaginar tener todos los módulos en un pipeline con sus `ex
 - La **interfaz del módulo se mantiene simple** - Solo acepta las entradas esenciales de metadatos y archivos
 - El **pipeline todavía expone `params.character`** - Los usuarios finales aún pueden configurarlo como antes
 - El **módulo ahora es portable** - Puede reutilizarse en otros pipelines sin esperar un nombre de parámetro específico
-- La configuración está **centralizada** en `modules.config`, manteniendo limpia la lógica del flujo de trabajo
+- La configuración está **centralizada** en `modules.config`, manteniendo limpia la lógica del workflow
 
 Al usar el archivo `modules.config` como el lugar donde todos los pipelines centralizan la configuración por módulo, hacemos que nuestros módulos sean más reutilizables en diferentes pipelines.
 
-#### 1.3.3. Actualizar el flujo de trabajo `hello.nf`
+#### 1.3.3. Actualizar el workflow `hello.nf`
 
-Dado que el módulo `COWPY` ya no requiere el parámetro `character` como entrada, necesitamos actualizar la llamada del flujo de trabajo en consecuencia.
+Dado que el módulo `COWPY` ya no requiere el parámetro `character` como entrada, necesitamos actualizar la llamada del workflow en consecuencia.
 
-Abra el archivo de flujo de trabajo `hello.nf` (en `core-hello/workflows/`) y actualice la llamada a `COWPY` como se muestra a continuación.
+Abra el archivo de workflow `hello.nf` (en `core-hello/workflows/`) y actualice la llamada a `COWPY` como se muestra a continuación.
 
 === "Después"
 
@@ -577,12 +577,12 @@ Abra el archivo de flujo de trabajo `hello.nf` (en `core-hello/workflows/`) y ac
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
-El código del flujo de trabajo ahora es más limpio: no necesitamos pasar `params.character` directamente al proceso.
+El código del workflow ahora es más limpio: no necesitamos pasar `params.character` directamente al proceso.
 La interfaz del módulo se mantiene mínima, haciéndola más portable, mientras que el pipeline todavía proporciona la opción explícita a través de la configuración.
 
 #### 1.3.4. Ejecutar el pipeline para probarlo
 
-Probemos que el flujo de trabajo todavía funciona como se espera, especificando un personaje diferente para verificar que la configuración de `ext.args` está funcionando.
+Probemos que el workflow todavía funciona como se espera, especificando un personaje diferente para verificar que la configuración de `ext.args` está funcionando.
 
 Ejecute este comando usando `kosh`, una de las opciones más... enigmáticas:
 
@@ -693,9 +693,9 @@ Para resumir los beneficios de este enfoque:
 - **Flexibilidad**: Los usuarios pueden especificar argumentos de herramientas a través de la configuración, incluyendo valores específicos por muestra
 - **Consistencia**: Todos los módulos nf-core siguen este patrón
 - **Portabilidad**: Los módulos pueden reutilizarse sin opciones de herramientas codificadas
-- **Sin cambios en el flujo de trabajo**: Agregar o cambiar opciones de herramientas no requiere actualizar el código del flujo de trabajo
+- **Sin cambios en el workflow**: Agregar o cambiar opciones de herramientas no requiere actualizar el código del workflow
 
-!!! note
+!!! note "Nota"
 
     El sistema `ext.args` tiene capacidades adicionales poderosas no cubiertas aquí, incluyendo el cambio de valores de argumentos dinámicamente basado en metadatos. Consulte las [especificaciones de módulos nf-core](https://nf-co.re/docs/guidelines/components/modules) para más detalles.
 
@@ -713,7 +713,7 @@ Vamos a necesitar hacer los siguientes cambios:
 1. Actualizar el módulo `COWPY`
 2. Configurar `ext.prefix` en el archivo `modules.config`
 
-(No se necesitan cambios en el flujo de trabajo.)
+(No se necesitan cambios en el workflow.)
 
 Una vez que hayamos hecho eso, ejecutaremos el pipeline para probar que todo sigue funcionando como antes.
 
@@ -802,7 +802,7 @@ En caso de que se esté preguntando, el closure `ext.prefix` tiene acceso a la p
 
 #### 1.4.3. Ejecutar el pipeline para probarlo
 
-Probemos que el flujo de trabajo todavía funciona como se espera.
+Probemos que el workflow todavía funciona como se espera.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -863,7 +863,7 @@ Debería ver el archivo de salida de cowpy con el mismo nombre que antes: `cowpy
     └── UPPER-Holà-output.txt
     ```
 
-Siéntase libre de cambiar la configuración de `ext.prefix` en `conf/modules.config` para satisfacerse de que puede cambiar el patrón de nomenclatura sin tener que hacer ningún cambio en el código del módulo o del flujo de trabajo.
+Siéntase libre de cambiar la configuración de `ext.prefix` en `conf/modules.config` para satisfacerse de que puede cambiar el patrón de nomenclatura sin tener que hacer ningún cambio en el código del módulo o del workflow.
 
 Alternativamente, también puede intentar ejecutar esto nuevamente con un parámetro `--batch` diferente especificado en la línea de comandos para satisfacerse de que esa parte todavía es personalizable sobre la marcha.
 
@@ -890,7 +890,7 @@ Esto es desordenado y subóptimo; sería mejor tener una ubicación para todo.
 Por supuesto, podríamos ir a cada uno de nuestros módulos locales y actualizar la directiva `publishDir` manualmente para usar el directorio `core-hello-results`, pero ¿qué pasa la próxima vez que decidamos cambiar el directorio de salida?
 
 Tener módulos individuales tomando decisiones de publicación claramente no es el camino a seguir, especialmente en un mundo donde el mismo módulo podría usarse en muchos pipelines diferentes, por personas que tienen diferentes necesidades o preferencias.
-Queremos poder controlar dónde se publican las salidas al nivel de la configuración del flujo de trabajo.
+Queremos poder controlar dónde se publican las salidas al nivel de la configuración del workflow.
 
 "Oye", podría decir, "`CAT_CAT` está enviando sus salidas a `--outdir`. ¿Quizás deberíamos copiar su directiva `publishDir`?"
 
@@ -898,7 +898,7 @@ Sí, esa es una gran idea.
 
 Excepto que no tiene una directiva `publishDir`. (Adelante, mire el código del módulo.)
 
-Eso es porque los pipelines nf-core centralizan el control al nivel del flujo de trabajo configurando `publishDir` en `conf/modules.config` en lugar de en módulos individuales.
+Eso es porque los pipelines nf-core centralizan el control al nivel del workflow configurando `publishDir` en `conf/modules.config` en lugar de en módulos individuales.
 Específicamente, la plantilla nf-core declara una directiva `publishDir` predeterminada (con una estructura de directorio predefinida) que se aplica a todos los módulos a menos que se proporcione una directiva de sobrescritura.
 
 ¿No suena increíble? ¿Podría ser que para aprovechar esta directiva predeterminada, todo lo que necesitamos hacer es eliminar la directiva `publishDir` actual de nuestros módulos locales?
@@ -1023,7 +1023,7 @@ Ahora el `core-hello-results` también contiene las salidas del módulo `COWPY`.
         └── pipeline_dag_2025-12-27_06-35-56.html
     ```
 
-Puede ver que Nextflow creó esta jerarquía de directorios basada en los nombres del flujo de trabajo y del módulo.
+Puede ver que Nextflow creó esta jerarquía de directorios basada en los nombres del workflow y del módulo.
 
 El código responsable vive en el archivo `conf/modules.config`.
 Esta es la configuración `publishDir` predeterminada que forma parte de la plantilla nf-core y se aplica a todos los procesos:
@@ -1041,7 +1041,7 @@ process {
 Esto puede parecer complicado, así que veamos cada uno de los tres componentes:
 
 - **`path:`** Determina el directorio de salida basado en el nombre del proceso.
-  El nombre completo de un proceso contenido en `task.process` incluye la jerarquía de importaciones de flujo de trabajo y módulo (como `CORE_HELLO:HELLO:CAT_CAT`).
+  El nombre completo de un proceso contenido en `task.process` incluye la jerarquía de importaciones de workflow y módulo (como `CORE_HELLO:HELLO:CAT_CAT`).
   Las operaciones `tokenize` eliminan esa jerarquía para obtener solo el nombre del proceso, luego toman la primera parte antes de cualquier guion bajo (si corresponde), y la convierten a minúsculas.
   Esto es lo que determina que los resultados de `CAT_CAT` se publiquen en `${params.outdir}/cat/`.
 - **`mode:`** Controla cómo se publican los archivos (copia, enlace simbólico, etc.).
@@ -1081,7 +1081,7 @@ process {
 
 En realidad no vamos a hacer ese cambio, pero siéntase libre de jugar con esto y ver qué lógica puede implementar.
 
-El punto es que este sistema permite le da lo mejor de ambos mundos: consistencia por defecto y la flexibilidad para personalizar la configuración bajo demanda.
+El punto es que este sistema le da lo mejor de ambos mundos: consistencia por defecto y la flexibilidad para personalizar la configuración bajo demanda.
 
 Para resumir, obtiene:
 
@@ -1179,7 +1179,7 @@ process COWPY {
         'biocontainers/YOUR-TOOL-HERE' }"
 
     input:
-    tuple val(meta), path(input)        // Pattern 1: Metadata tuples ✓
+    tuple val(meta), path(input)        // Patrón 1: Tuplas de metadatos ✓
 
     output:
     tuple val(meta), path("*"), emit: output
@@ -1189,8 +1189,8 @@ process COWPY {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''                // Pattern 2: ext.args ✓
-    def prefix = task.ext.prefix ?: "${meta.id}"  // Pattern 3: ext.prefix ✓
+    def args = task.ext.args ?: ''                // Patrón 2: ext.args ✓
+    def prefix = task.ext.prefix ?: "${meta.id}"  // Patrón 3: ext.prefix ✓
 
     """
     // Add your tool command here
@@ -1539,7 +1539,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 Esto produce los mismos resultados que anteriormente.
 
-### Resumen
+### Conclusión
 
 Ahora sabe cómo usar las herramientas integradas de nf-core para crear módulos eficientemente usando plantillas en lugar de escribir todo desde cero.
 
@@ -1582,9 +1582,9 @@ Para instrucciones detalladas, consulte el [tutorial de componentes nf-core](htt
 - **Especificaciones de módulos**: [Requisitos técnicos y directrices](https://nf-co.re/docs/guidelines/components/modules)
 - **Soporte de la comunidad**: [nf-core Slack](https://nf-co.re/join) - Únase al canal `#modules`
 
-### Resumen
+### Conclusión
 
-¡Ahora sabe cómo crear módulos nf-core! Aprendió los cuatro patrones clave que hacen que los módulos sean portátiles y mantenibles:
+¡Ahora sabe cómo crear módulos nf-core! Aprendió los cuatro patrones clave que hacen que los módulos sean portables y mantenibles:
 
 - Las **tuplas de metadatos** propagan metadatos a través del workflow
 - **`ext.args`** simplifica las interfaces de módulos manejando argumentos opcionales mediante configuración

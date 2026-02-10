@@ -1,5 +1,7 @@
 # Parte 3: Joint calling su una coorte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nella Parte 2 avete costruito una pipeline di variant calling per campione che processava i dati di ciascun campione in modo indipendente.
 Ora la estenderemo per implementare il joint variant calling, come trattato nella [Parte 1](01_method.md).
 
@@ -47,7 +49,7 @@ Abbiamo suddiviso questo in due passaggi:
 2. **Aggiungere uno step di joint genotyping che combini e genotipi i GVCF per campione.**
    Questo introduce l'operatore `collect()`, le closure Groovy per la costruzione della riga di comando e i processi multi-comando.
 
-!!! note
+!!! note "Nota"
 
      Assicuratevi di essere nella directory di lavoro corretta:
      `cd /workspaces/training/nf4-science/genomics`
@@ -214,7 +216,7 @@ nextflow run genomics.nf
 
 L'output di Nextflow appare uguale a prima, ma i file `.g.vcf` e i loro file indice sono ora organizzati in subdirectory.
 
-??? abstract "Directory contents (symlink abbreviati)"
+??? abstract "Contenuto della directory (symlink abbreviati)"
 
     ```console
     results/
@@ -288,7 +290,7 @@ Più avanti nella serie di formazione imparerete come utilizzare i metadati dei 
     ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
         intervals: Path = "${projectDir}/data/ref/intervals.bed"
 
-        // Base name for final output file
+        // Nome base per il file di output finale
         cohort_name: String = "family_trio"
     }
     ```
@@ -314,7 +316,7 @@ Aggiungete le seguenti righe al corpo del `workflow`, subito dopo la chiamata a 
             intervals_file
         )
 
-        // Collect variant calling outputs across samples
+        // Raccoglie gli output di variant calling attraverso i campioni
         all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
     ```
@@ -334,7 +336,7 @@ Analizziamo questo:
 
 Possiamo raccogliere i GVCF e i loro file indice separatamente (invece di mantenerli insieme in tuple) perché Nextflow posizionerà tutti i file di input insieme per l'esecuzione, quindi i file indice saranno presenti accanto ai GVCF.
 
-!!! tip
+!!! tip "Suggerimento"
 
     Potete utilizzare l'operatore `view()` per ispezionare i contenuti dei canali prima e dopo l'applicazione degli operatori di canale.
 
@@ -502,7 +504,7 @@ Aggiungete la chiamata a `GATK_JOINTGENOTYPING` nel corpo del flusso di lavoro, 
     ```groovy title="genomics.nf" hl_lines="3-12"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
-        // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
+        // Combina i GVCF in un data store GenomicsDB e applica il joint genotyping
         GATK_JOINTGENOTYPING(
             all_gvcfs_ch,
             all_idxs_ch,
@@ -623,7 +625,7 @@ nextflow run genomics.nf -resume
 I primi due step sono in cache dall'esecuzione precedente, e il nuovo step `GATK_JOINTGENOTYPING` viene eseguito una volta sugli input raccolti da tutti e tre i campioni.
 Il file di output finale, `family_trio.joint.vcf` (e il suo indice), sono nella directory results.
 
-??? abstract "Directory contents (symlink abbreviati)"
+??? abstract "Contenuto della directory (symlink abbreviati)"
 
     ```console
     results/
@@ -656,7 +658,7 @@ Se aprite il file joint VCF, potete verificare che il flusso di lavoro abbia pro
 
 Ora avete un flusso di lavoro di joint variant calling automatizzato e completamente riproducibile!
 
-!!! note
+!!! note "Nota"
 
     Tenete presente che i file di dati che vi abbiamo fornito coprono solo una piccola porzione del cromosoma 20.
     La dimensione reale di un callset di varianti sarebbe contata in milioni di varianti.
@@ -669,6 +671,6 @@ Sapete anche come costruire una riga di comando utilizzando closure Groovy e com
 
 ### Cosa c'è dopo?
 
-Celebrate il vostro successo e prendetevi una pausa ben meritata.
+Datevi una grande pacca sulla spalla! Avete completato il corso Nextflow for Genomics.
 
-Nella prossima parte di questo corso, imparerete come eseguire una pipeline di variant calling production-ready da nf-core e confrontarla con la pipeline che avete costruito manualmente.
+Passate al [riepilogo finale del corso](./next_steps.md) per rivedere ciò che avete imparato e scoprire cosa viene dopo.

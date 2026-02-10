@@ -245,7 +245,7 @@ nextflow run main.nf
 
 작동합니다! 우리는 이름이 있는 인사말 워크플로우를 이름 없는 엔트리 `workflow` 블록이 있는 메인 워크플로우로 적용했습니다. 메인 워크플로우는 `GREETING_WORKFLOW` 워크플로우를 거의 (완전히는 아니지만) 프로세스처럼 사용하고 있으며, `names` 채널을 인수로 전달하고 있습니다.
 
-### 요점 정리
+### 핵심 정리
 
 이 섹션에서는 몇 가지 중요한 개념을 학습했습니다:
 
@@ -361,7 +361,7 @@ cat /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef
 !ECILA ,OLLEH ]04:50:71 60-30-5202[
 ```
 
-### 요점 정리
+### 핵심 정리
 
 이제 다음을 수행하는 완전한 파이프라인이 있어야 합니다:
 

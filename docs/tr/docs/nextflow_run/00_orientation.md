@@ -1,6 +1,6 @@
-# Başlangıç
+# Başlarken
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eğitim ortamını başlatın
 
@@ -22,7 +22,7 @@ Bu kursu kendi başınıza çalışıyorsanız, daha fazla ayrıntı için [orta
 
 ### Versiyon gereksinimleri
 
-Bu eğitim, v2 sözdizimi ayrıştırıcısı ETKİNLEŞTİRİLMİŞ olarak Nextflow 25.10.2 veya üstü için tasarlanmıştır.
+Bu eğitim, v2 sözdizimi ayrıştırıcısı **ETKİNLEŞTİRİLMİŞ** olarak Nextflow 25.10.2 veya üstü için tasarlanmıştır.
 Yerel veya özel bir ortam kullanıyorsanız, [burada](../info/nxf_versions.md) belgelendiği gibi doğru ayarları kullandığınızdan emin olun.
 
 ## Çalışmaya hazırlanın
@@ -97,16 +97,16 @@ tree . -L 2
 Bölümü genişletmek ve içeriğini görüntülemek için renkli kutuya tıklayın.
 Beklenen komut çıktısının yanı sıra dizin ve dosya içeriğini özlü bir şekilde görüntülemek için bu tür daraltılabilir bölümler kullanıyoruz.
 
-- **`.nf` dosyaları**, kursun hangi bölümünde kullanıldıklarına göre numaralandırılmış workflow betikleridir.
+- **`.nf` dosyaları**, kursun hangi bölümünde kullanıldıklarına göre numaralandırılmış iş akışı betikleridir.
 
 - **`nextflow.config` dosyası**, minimum ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır.
   Şimdilik görmezden gelebilirsiniz.
 
 - **`data/` altındaki `greetings.csv` dosyası**, kursun büyük bölümünde kullanacağımız girdi verilerini içerir. İlk kez tanıttığımız Bölüm 2'de (Pipeline'ları çalıştırma) açıklanmıştır.
 
-- **`test-params.*`** dosyaları, Bölüm 3'te (Yapılandırma) kullanacağımız yapılandırma dosyalarıdır. Şimdilik görmezden gelebilirsiniz.
+- **`test-params.*` dosyaları**, Bölüm 3'te (Yapılandırma) kullanacağımız yapılandırma dosyalarıdır. Şimdilik görmezden gelebilirsiniz.
 
-- **`solutions` dizini**, kursu tamamlamanın sonucunda oluşan workflow'un ve yardımcı dosyalarının (yapılandırma ve modüller) son halini içerir.
+- **`solutions` dizini**, kursu tamamlamanın sonucunda oluşan iş akışının ve yardımcı dosyalarının (yapılandırma ve modüller) son halini içerir.
   Çalışmanızı kontrol etmek ve herhangi bir sorunu gidermek için referans olarak kullanılması amaçlanmıştır.
 
 ## Hazırlık kontrol listesi

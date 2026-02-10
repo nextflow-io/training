@@ -1,5 +1,7 @@
 # Bölüm 4: Hello Modules - Video Transkripti
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -20,7 +22,7 @@ Ancak bu pipeline büyüdükçe, betik daha uzun ve daha uzun ve daha uzun hale 
 
 Nextflow modülleri, süreçleri ana betikten çıkarmamıza ve ardından bunları içe aktarmamıza olanak tanır. Bu, kodun gezinmesinin daha kolay olduğu ve ayrıca bu modül kodunu farklı pipeline'lar arasında paylaşabileceğimiz anlamına gelir.
 
-Dokümantasyonun ana sayfasındaki bu küçük diyagram konsepti güzel bir şekilde gösteriyor. Tek bir devasa betik yerine, farklı modül betiklerinden bu ayrı modül dosyalarını ekleyeceğiz ve hepsi workflow'a çekilecek, ancak hala tamamen aynı şekilde çalışacak.
+Dokümantasyonun ana sayfasındaki bu küçük diyagram konsepti güzel bir şekilde gösteriyor. Tek bir devasa betik yerine, farklı modül betiklerinden bu ayrı modül dosyalarını ekleyeceğiz ve hepsi iş akışına çekilecek, ancak hala tamamen aynı şekilde çalışacak.
 
 O halde GitHub Codespaces'e atlayalım ve etrafta biraz bakalım. Daha önceki gibi, buradaki çalışma alanımı biraz temizledim. Eski Nextflow dizinlerini ve work dizinini ve benzeri şeyleri kaldırdım. Ancak bu dosyalar hala etrafta olsa bile önemli değil.
 
@@ -42,7 +44,7 @@ VS code uzantısının burada oldukça yardımcı olduğuna dikkat edin. Bize bu
 
 Ve gerçekten hepsi bu. Sürecimiz hala burada. Aşağıda hiçbir değişiklik gerekmiyor. Süreç aynı ada sahip ve tamamen aynı şekilde yürütülüyor. Sadece sürecin asıl kodu artık ayrı bir dosyada.
 
-Nextflow workflow'unu tekrar çalıştırabiliriz, tamamen aynı şekilde çalışacak. Ve bu temelde kursun bu bölümünün geri kalanı sadece bu üç süreci kendi dosyalarına taşımak.
+Nextflow iş akışını tekrar çalıştırabiliriz, tamamen aynı şekilde çalışacak. Ve bu temelde kursun bu bölümünün geri kalanı sadece bu üç süreci kendi dosyalarına taşımak.
 
 Şimdi bunu yapalım. İkinci süreç için hızlıca yeni bir modül dosyası oluşturacağım: convertToUpper.nf. O kodu keseceğim, buraya yapıştıracağım. Ve sonra bunu da dahil edeceğim. hadi, harika.
 
@@ -50,7 +52,7 @@ Ve sonra collectGreetings.nf için yeni bir dosya oluşturacağım. Bunu kesin.
 
 Bir sürü kesme, kesme ve kopyalama ve yapıştırma.
 
-Ve şimdi ana workflow betiğimiz aniden çok daha kısa, çok daha ulaşılabilir ve okuması çok daha kolay görünüyor.
+Ve şimdi ana iş akışı betiğimiz aniden çok daha kısa, çok daha ulaşılabilir ve okuması çok daha kolay görünüyor.
 
 Ve projenin artık farklı dosyalarımızla nasıl inşa edilmeye başladığını görebilirsiniz. İstediğimiz yerlerde detaya dalabilir, pipeline'daki belirli adımları bulmak için etrafta çok daha kolay gezinebilir ve pipeline'ın ne yaptığına dair hızlı bir genel bakış alabiliriz.
 
@@ -58,11 +60,11 @@ Ve projenin artık farklı dosyalarımızla nasıl inşa edilmeye başladığın
 
 Şimdi, elbette, bunu yapmanın dezavantajı, büyük bir pipeline'ınız varsa, bir sürü modül dosyanız olacak ve bunlar birden fazla alt dizinde organize edilebilir veya her türlü şey olabilir. Şimdi, yine, burada küçük bir ipucu. VS Code uzantısı kod tabanınızda gezinmekte ve ayrıca oradaki kod hakkında size bilgi vermekte oldukça iyidir.
 
-VS Code'un bu sürecin ne olduğunu anladığını ve üzerine geldiğimde bana küçük bir genel bakış verdiğini görebilirsiniz, böylece kaynak kodunu bulup gitmek zorunda kalmadan, bir workflow'da kullanırken tipik olarak en önemli şey olan girdilerin ve çıktıların ne olduğunu görebiliyorum.
+VS Code'un bu sürecin ne olduğunu anladığını ve üzerine geldiğimde bana küçük bir genel bakış verdiğini görebilirsiniz, böylece kaynak kodunu bulup gitmek zorunda kalmadan, bir iş akışında kullanırken tipik olarak en önemli şey olan girdilerin ve çıktıların ne olduğunu görebiliyorum.
 
 Ayrıca command'ı basılı tutarsam, ben Mac'teyim, ve süreç adına tıklarsam, dosyayı doğrudan hemen açar. Onu içeri çeker. Böylece gerçek dosya yollarının ne olduğunu düşünmeden doğrudan oraya atlayabilirim. Ve bu her yerde çalışır, süreçlerin çağrıldığı yerlerde de bunu yapabilirim. Yani bu gerçekten hızlı.
 
-## 4.4. Workflow'u çalıştırın
+## 4.4. İş akışını çalıştırın
 
 Tamam, pipeline'ın hala beklediğimiz gibi çalıştığını kontrol edelim. Terminali açalım. "nextflow run hello modules" yapalım ve herhangi bir sorun olmadan çalışıp çalışmadığını görelim.
 
@@ -72,7 +74,7 @@ Umarım bunun amacı pipeline'ın temelde değişmemiş olmasıdır, bu yüzden 
 
 Bitirmeden önce, modüller söz konusu olduğunda işbirliğinin gücüne hızlıca değinmek istiyorum. Bu dosyalar benim repomda oturuyor, bu yüzden üzerlerinde nasıl işbirliği yapabileceğimiz hemen belli olmuyor. Ve bunu yapabileceğiniz birçok farklı yol var, ancak muhtemelen bunun en büyük ve en iyi bilinen örneği nf-core.
 
-Eğer nf-core web sitesine gidersem, resources'a, ve modules'e gidiyorum. nf-core'un devasa bir modül kütüphanesine sahip olduğunu görebilirsiniz, bunu görüntülediğimde 1700'ün hemen altında modül var. Ve böylece en sevdiğim araçlardan herhangi birinin adını yazabilirim, başka birinin zaten bunun için bir modül yazıp yazmadığını bulmaya gidebilirim ve burada önceden yazılmış bu modül sürecini tüm girdilerle, çıktılarla, yazılım container'larıyla, tüm bu bilgilerle görebilirim ve burada yanda kaç farklı nf-core pipeline'ının bu tek paylaşılan süreci kullandığını görebilirsiniz.
+Eğer nf-core web sitesine gidersem, resources'a, ve modules'e gidiyorum. nf-core'un devasa bir modül kütüphanesine sahip olduğunu görebilirsiniz, bunu görüntülediğimde 1700'ün hemen altında modül var. Ve böylece en sevdiğim araçlardan herhangi birinin adını yazabilirim, başka birinin zaten bunun için bir modül yazıp yazmadığını bulmaya gidebilirim ve burada önceden yazılmış bu modül sürecini tüm girdilerle, çıktılarla, yazılım konteynerlarıyla, tüm bu bilgilerle görebilirim ve burada yanda kaç farklı nf-core pipeline'ının bu tek paylaşılan süreci kullandığını görebilirsiniz.
 
 Bu biraz aşırı bir örnek, ancak bunun gerçekten bu kodu yeniden kullandığını görebilirsiniz. Ve bunun GitHub kaynağına tıklarsam, yaptığımızla tamamen aynı. Sadece bir dosyada büyük bir süreç.
 
@@ -80,6 +82,6 @@ Bu biraz aşırı bir örnek, ancak bunun gerçekten bu kodu yeniden kullandığ
 
 ## Özet
 
-Tamam, modüller için bu kadar. Size kursun kısa bir bölümü olduğunu söylemiştim. Testi kontrol edin, anladığınızdan emin olun ve her şeyin hala düzgün çalıştığından emin olun. Ve sizi bir sonraki videoda göreceğim, o video tamamen yazılım container'larıyla ilgili. Çok teşekkür ederim.
+Tamam, modüller için bu kadar. Size kursun kısa bir bölümü olduğunu söylemiştim. Testi kontrol edin, anladığınızdan emin olun ve her şeyin hala düzgün çalıştığından emin olun. Ve sizi bir sonraki videoda göreceğim, o video tamamen yazılım konteynerlarıyla ilgili. Çok teşekkür ederim.
 
 I.

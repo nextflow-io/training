@@ -246,7 +246,7 @@ nextflow run rnaseq.nf -resume
 
 이번에는 캐시된 프로세스 호출 후에 단일 MULTIQC 호출이 추가된 것을 볼 수 있습니다:
 
-`TRIM_GALORE` 프로세스의 `publishDir` 지시문에 지정된 대로 `results/trimming` 아래에서 출력을 찾을 수 있습니다.
+`MULTIQC` 프로세스의 `publishDir` 지시문에 지정된 대로 `results/multiqc` 아래에서 출력을 찾을 수 있습니다.
 
 ```bash
 tree -L 2 results/multiqc
@@ -513,7 +513,7 @@ nextflow run rnaseq_pe.nf
 
 ---
 
-### 요점 정리
+### 핵심 정리
 
 단일 샘플 워크플로우를 여러 샘플의 병렬 처리로 조정하고, 포괄적인 QC 보고서를 생성하며, 필요한 경우 paired-end 읽기 데이터를 사용하도록 워크플로우를 조정하는 방법을 알게 되었습니다.
 

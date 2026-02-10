@@ -46,7 +46,7 @@ hide:
 
     Seqera AI एक AI assistant है जो Nextflow और nf-core संसाधनों पर प्रशिक्षित है। यह तुम्हारे code को debug करने, Nextflow concepts को स्पष्ट करने और documentation को तेज़ी से खोजने में मदद कर सकता है। इसे courses के माध्यम से काम करते समय 24/7 उपलब्ध एक tutor की तरह समझो।
 
-    [Seqera AI से पूछो:material-arrow-right:](https://github.com/nextflow-io/training/issues){ .md-button .md-button--primary .mt-1 }
+    [Seqera AI से पूछो:material-arrow-right:](https://seqera.io/ai){ .md-button .md-button--primary .mt-1 }
 
 -   :material-book-open-variant:{ .lg .middle } __Nextflow documentation__
 

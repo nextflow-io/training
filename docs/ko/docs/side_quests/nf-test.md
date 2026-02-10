@@ -84,7 +84,7 @@ code .
 └── main.nf
 ```
 
-파일에 대한 자세한 설명은 [Hello Nextflow의 워밍업](../hello_nextflow/00_orientation.md)을 참조하십시오.
+파일에 대한 자세한 설명은 [Hello Nextflow의 준비 운동](../hello_nextflow/00_orientation.md)을 참조하십시오.
 
 테스트할 워크플로우는 [Hello Workflow](../hello_nextflow/03_hello_workflow.md)에서 작성한 Hello 워크플로우의 하위 집합입니다.
 
@@ -623,11 +623,11 @@ SUCCESS: Executed 2 tests in 15.165s
 
 이것은 표면에 불과하며 파이프라인의 세부 사항을 확인하기 위해 계속해서 단언문을 작성할 수 있지만 지금은 파이프라인의 내부를 테스트하는 것으로 넘어가겠습니다.
 
-### 핵심 요점
+### 핵심 정리
 
 파이프라인에 대한 nf-test를 작성하는 방법을 알고 있습니다.
 
-### 다음은?
+### 다음 단계
 
 Nextflow 프로세스를 테스트하는 방법을 배웁니다.
 
@@ -728,7 +728,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-`sayHello` 프로세스가 1개의 입력을 선언하지만 0개의 인수로 호출되었기 때문에 테스트가 실패합니다. 프로세스에 입력을 추가하여 이를 수정하겠습니다. [Hello Workflow](../hello_nextflow/03_hello_workflow.md)(및 위의 워밍업 섹션)에서 `sayHello` 프로세스가 제공해야 하는 단일 값 입력을 받는다는 것을 기억하세요. 또한 테스트하는 내용을 더 잘 반영하도록 테스트 이름을 수정해야 합니다.
+`sayHello` 프로세스가 1개의 입력을 선언하지만 0개의 인수로 호출되었기 때문에 테스트가 실패합니다. 프로세스에 입력을 추가하여 이를 수정하겠습니다. [Hello Workflow](../hello_nextflow/03_hello_workflow.md)(및 위의 준비 운동 섹션)에서 `sayHello` 프로세스가 제공해야 하는 단일 값 입력을 받는다는 것을 기억하세요. 또한 테스트하는 내용을 더 잘 반영하도록 테스트 이름을 수정해야 합니다.
 
 **변경 전:**
 
@@ -901,7 +901,7 @@ SUCCESS: Executed 1 tests in 1.685s
 
         when {
             params {
-                // define parameters here
+                // 매개변수 정의
             }
             process {
                 """
@@ -934,7 +934,7 @@ nf-test는 프로세스 출력을 리스트의 리스트로 보므로 `process.o
 nf-test test tests/main.sayhello.nf.test
 ```
 
-```console title="프로세스 테스트 실패"
+```console title="프로세스 테스트 통과"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -1096,11 +1096,11 @@ Test Process convertToUpper
 SUCCESS: Executed 1 tests in 1.811s
 ```
 
-### 핵심 요점
+### 핵심 정리
 
 Nextflow 프로세스에 대한 테스트를 작성하고 실행하는 방법을 알고 있습니다.
 
-### 다음은?
+### 다음 단계
 
 한 번에 모든 것에 대한 테스트를 실행하는 방법을 배웁니다!
 
@@ -1179,20 +1179,20 @@ SUCCESS: Executed 4 tests in 13.481s
    - 특정 콘텐츠 확인을 위한 직접 콘텐츠 단언문 사용
 4. 단일 명령으로 저장소의 모든 테스트 실행
 
-### 추가 리소스
+### 추가 자료
 
 더 고급 테스트 기능과 모범 사례는 [nf-test 문서](https://www.nf-test.com/)를 확인하세요. 다음을 수행할 수 있습니다:
 
 - 테스트에 더 포괄적인 단언문 추가
 - 엣지 케이스 및 오류 조건에 대한 테스트 작성
 - 테스트를 자동으로 실행하기 위한 연속 통합 설정
-- 워크플로우 및 모듈 테스트와 같은 다른 유형의 테스트 알아보기
+- 워크플로우 및 모듈 테스트와 같은 다른 유형의 테스트 학습
 - 더 고급 콘텐츠 검증 기술 탐색
 
 **기억하세요:** 테스트는 코드가 어떻게 동작해야 하는지에 대한 살아있는 문서입니다. 더 많은 테스트를 작성하고 단언문이 더 구체적일수록 파이프라인의 신뢰성에 대해 더 확신할 수 있습니다.
 
 ---
 
-## 다음은?
+## 다음 단계
 
 [사이드 퀘스트 메뉴](./index.md)로 돌아가거나 페이지 오른쪽 하단의 버튼을 클릭하여 목록의 다음 주제로 이동하세요.

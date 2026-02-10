@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Part 2에서는 명령줄에서 여러 매개변수를 사용하여 molkart를 실행했습니다.
-이제 입력을 관리하는 두 가지 더 나은 방법인 **매개변수 파일**과 **샘플시트**를 배우겠습니다.
+이제 입력을 관리하는 두 가지 더 나은 방법인 **매개변수 파일**과 **샘플시트**를 학습하겠습니다.
 
 ## 1. 매개변수 파일 사용하기
 
@@ -60,14 +60,14 @@ nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist"
 또한 `-resume` 플래그가 이전 실행의 전처리 결과를 재사용하여 시간을 절약했음을 확인할 수 있습니다.
 이 패턴을 사용하여 파이프라인의 다양한 변형을 빠르게 테스트할 수 있습니다.
 
-### 요점
+### 핵심 정리
 
 매개변수 파일은 분석을 재현 가능하고 공유하기 쉽게 만듭니다.
 실제 분석 작업에는 매개변수 파일을 사용하십시오.
 
 ### 다음 단계
 
-샘플시트가 여러 샘플에 대한 정보를 어떻게 구성하는지 알아보겠습니다.
+샘플시트가 여러 샘플에 대한 정보를 어떻게 구성하는지 학습하겠습니다.
 
 ---
 
@@ -125,7 +125,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "경고"
+!!! Warning "경고"
 
     샘플시트의 경로는 샘플시트가 위치한 곳이 아니라 Nextflow를 **실행**하는 위치에 상대적입니다.
 
@@ -133,9 +133,10 @@ mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 
 `nextflow run ./molkart -params-file params.yaml -resume`
 
-보시다시피 Nextflow는 파일이 Github에서 다운로드되었을 때와 유사하게 이 실행을 수행합니다. 이것은 Nextflow의 훌륭한 기능 중 하나로, 데이터가 어디에 위치하든 상관없이 적절하게 스테이징합니다.
+보시다시피 Nextflow는 파일이 Github에서 다운로드되었을 때와 유사하게 이 실행을 수행합니다.
+이것은 Nextflow의 훌륭한 기능 중 하나로, 데이터가 어디에 위치하든 상관없이 적절하게 스테이징합니다.
 
-### 요점
+### 핵심 정리
 
 샘플시트는 파일 경로와 함께 메타데이터를 명시적으로 정의할 수 있는 방식으로 다중 샘플 데이터셋을 구성합니다.
 대부분의 nf-core 파이프라인은 이 패턴을 사용합니다.

@@ -1,7 +1,9 @@
 # Parte 1: Hello World
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/tOukLxWCHiA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -115,7 +117,7 @@ Encontrará el script `hello-world.nf` en su directorio actual, que debería ser
     workflow {
 
         main:
-        // emit a greeting
+        // emite un saludo
         sayHello()
     }
     ```
@@ -183,7 +185,7 @@ Aquí tenemos un **workflow** que consiste en un bloque `main:` (que dice 'este 
 workflow {
 
     main:
-    // emit a greeting
+    // emite un saludo
     sayHello()
 }
 ```
@@ -409,7 +411,7 @@ En el archivo de script del workflow `hello-world.nf`, agregue las siguientes l�
     workflow {
 
         main:
-        // emit a greeting
+        // emite un saludo
         sayHello()
 
         publish:
@@ -423,7 +425,7 @@ En el archivo de script del workflow `hello-world.nf`, agregue las siguientes l�
     workflow {
 
         main:
-        // emit a greeting
+        // emite un saludo
         sayHello()
     }
     ```
@@ -442,7 +444,7 @@ En el archivo de script del workflow `hello-world.nf`, agregue las siguientes l�
     workflow {
 
         main:
-        // emit a greeting
+        // emite un saludo
         sayHello()
 
         publish:
@@ -462,7 +464,7 @@ En el archivo de script del workflow `hello-world.nf`, agregue las siguientes l�
     workflow {
 
         main:
-        // emit a greeting
+        // emite un saludo
         sayHello()
 
         publish:
@@ -809,14 +811,14 @@ En el bloque del workflow, haga el siguiente cambio de código:
 === "Después"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // emite un saludo
     sayHello(params.input)
     ```
 
 === "Antes"
 
     ```groovy title="hello-world.nf" linenums="23" hl_lines="2"
-    // emit a greeting
+    // emite un saludo
     sayHello()
     ```
 
@@ -886,7 +888,7 @@ Como ve, podemos especificar el tipo de entrada que el workflow espera (Nextflow
 La sintaxis es `nombre: Tipo = valor_predeterminado`.
 Los tipos soportados incluyen `String`, `Integer`, `Float`, `Boolean` y `Path`.
 
-!!! info "Información"
+!!! info "Info"
 
     En workflows más antiguos, puede ver todo ese bloque `params` escrito simplemente como `input = 'Holà mundo!'`.
 

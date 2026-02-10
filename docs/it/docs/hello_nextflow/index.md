@@ -1,24 +1,24 @@
 ---
 title: Hello Nextflow
 hide:
-  - toc
+    - toc
 page_type: index_page
 index_type: course
 additional_information:
-  technical_requirements: true
-  learning_objectives:
-    - Avviare e gestire l'esecuzione di workflow Nextflow
-    - Trovare e interpretare gli output (risultati) e i file di log generati da Nextflow
-    - Risolvere problemi di base
-    - Costruire un workflow semplice multi-step dai componenti fondamentali di Nextflow
-    - Distinguere tra tipi essenziali di channel factory e operatori e utilizzarli efficacemente in un workflow semplice
-    - Configurare l'esecuzione della pipeline per funzionare su piattaforme di calcolo comuni inclusi HPC e cloud
-    - Applicare le best practice per riproducibilità, portabilità e riutilizzo del codice che rendono le pipeline FAIR, inclusa la modularità del codice e i container software
-  audience_prerequisites:
-    - "**Pubblico:** Questo corso è progettato per chi è completamente nuovo a Nextflow e desidera sviluppare le proprie pipeline."
-    - "**Competenze:** Si presume una certa familiarità con la riga di comando, concetti di base di scripting e formati di file comuni."
-    - "**Dominio:** Gli esercizi sono tutti indipendenti dal dominio applicativo, quindi non è richiesta alcuna conoscenza scientifica preliminare."
-  videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
+    technical_requirements: true
+    learning_objectives:
+        - Avviare e gestire l'esecuzione di workflow Nextflow
+        - Trovare e interpretare gli output (risultati) e i file di log generati da Nextflow
+        - Risolvere problemi di base
+        - Costruire un workflow semplice multi-step dai componenti fondamentali di Nextflow
+        - Distinguere tra tipi essenziali di channel factory e operatori e utilizzarli efficacemente in un workflow semplice
+        - Configurare l'esecuzione della pipeline per funzionare su piattaforme di calcolo comuni inclusi HPC e cloud
+        - Applicare le best practice per riproducibilità, portabilità e riutilizzo del codice che rendono le pipeline FAIR, inclusa la modularità del codice e i container software
+    audience_prerequisites:
+        - "**Pubblico:** Questo corso è progettato per chi è completamente nuovo a Nextflow e desidera sviluppare le proprie pipeline."
+        - "**Competenze:** Si presume una certa familiarità con la riga di comando, concetti di base di scripting e formati di file comuni."
+        - "**Dominio:** Gli esercizi sono tutti indipendenti dal dominio applicativo, quindi non è richiesta alcuna conoscenza scientifica preliminare."
+    videos_playlist: https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n
 ---
 
 # Hello Nextflow
@@ -50,7 +50,7 @@ Per evitare di sovraccaricarvi con concetti e codice, abbiamo suddiviso questo i
 | [Parte 3: Hello Workflow](./03_hello_workflow.md)     | Utilizzo dei canali per concatenare più step e gestire il trasferimento di dati tra gli step                                                     | 60 min         |
 | [Parte 4: Hello Modules](./04_hello_modules.md)       | Applicazione dei principi di modularità del codice per aumentare la riusabilità e ridurre l'onere di manutenzione                                | 20 min         |
 | [Parte 5: Hello Containers](./05_hello_containers.md) | Utilizzo dei container come meccanismo per gestire le dipendenze software e aumentare la riproducibilità                                         | 60 min         |
-| [Parte 6: Hello Config](./06_hello_config.md)         | Personalizzazione del comportamento della pipeline e ottimizzazione dell'utilizzo in diversi ambienti computazionali | 60 min         |
+| [Parte 6: Hello Config](./06_hello_config.md)         | Personalizzazione del comportamento della pipeline e ottimizzazione dell'utilizzo in diversi ambienti computazionali                             | 60 min         |
 
 Al termine di questo corso, sarete ben preparati per affrontare i prossimi passi nel vostro percorso per sviluppare workflow riproducibili per le vostre esigenze di calcolo scientifico.
 

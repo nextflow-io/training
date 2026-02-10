@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -21,7 +21,7 @@
 हम Nextflow configuration के essential components जैसे process directives, executors, profiles, और parameter files को cover करेंगे।
 इन configuration options को effectively utilize करना सीखकर, तुम अपनी pipelines की flexibility, scalability, और performance enhance कर सकते हो।
 
-??? info "इस section से कैसे शुरू करें"
+??? info "इस खंड से कैसे शुरू करें"
 
     Course का यह section मानता है कि तुमने [Hello Nextflow](./index.md) course के Parts 1-5 complete कर लिए हैं और एक complete working pipeline है।
 
@@ -90,7 +90,7 @@ nextflow run hello-config.nf
 
 पहले की तरह, तुम output files को `output` block में specified directory (`results/hello_config/`) में पाओगे।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     results/hello_config/
@@ -108,7 +108,7 @@ nextflow run hello-config.nf
 
 Final ASCII art output `results/hello_config/` directory में है, `cowpy-COLLECTED-batch-output.txt` name के under।
 
-??? abstract "फ़ाइल contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -163,7 +163,7 @@ Currently, हमारा workflow command-line के through कई parameter
 
 `nextflow.config` file में following code changes करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="3-10"
     docker.enabled = true
@@ -178,7 +178,7 @@ Currently, हमारा workflow command-line के through कई parameter
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="nextflow.config" linenums="1"
     docker.enabled = true
@@ -198,7 +198,7 @@ Technically, यह workflow file में अभी भी specified default v
 
 `hello-config.nf` workflow file में following code changes करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
     /*
@@ -211,7 +211,7 @@ Technically, यह workflow file में अभी भी specified default v
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
     /*
@@ -252,7 +252,7 @@ nextflow run hello-config.nf
 
 Final ASCII art output `results/hello_config/` directory में है, `cowpy-COLLECTED-batch-output.txt` name के under, पहले जैसा ही।
 
-??? abstract "फ़ाइल contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -350,7 +350,7 @@ nextflow run ../hello-config.nf
 
 Final output file में greetings कहता हुआ tux character होना चाहिए।
 
-??? abstract "फ़ाइल contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
     _________
@@ -403,7 +403,7 @@ character: "stegosaurus"
 Note करो कि यदि तुम syntax को configuration file से compare करो तो equal signs (`=`) के बजाय colons (`:`) का use है।
 Config file Groovy में लिखी है, जबकि parameter file YAML में लिखी है।
 
-!!! info
+!!! info "जानकारी"
 
     हम example के रूप में parameter file का JSON version भी provide करते हैं लेकिन हम यहाँ इसके साथ run नहीं करने वाले।
     उसे अपने आप try करने में free feel करो।
@@ -432,7 +432,7 @@ nextflow run hello-config.nf -params-file test-params.yaml
 
 Final output file में greetings कहता हुआ stegosaurus character होना चाहिए।
 
-??? abstract "फ़ाइल contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
     _________
@@ -513,7 +513,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
 
 यह outputs को `results/` के बजाय `custom-outdir-cli/` में publish करता है:
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     custom-outdir-cli/
@@ -540,7 +540,7 @@ Notice करो कि हमारे पास अभी भी output block 
 
 Workflow file में following code changes करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -567,7 +567,7 @@ Workflow file में following code changes करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -602,7 +602,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 
 अब outputs बिना `hello_config` subdirectory के directly `custom-outdir-cli-2/` के under publish होते हैं:
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     custom-outdir-cli-2/
@@ -631,7 +631,7 @@ CLI के through output directory change करने के अलावा, 
 
 `nextflow.config` file में following code add करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
     /*
@@ -649,7 +649,7 @@ CLI के through output directory change करने के अलावा, 
     outputDir = "custom-outdir-config/${params.batch}"
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="nextflow.config" linenums="9"
     /*
@@ -682,7 +682,7 @@ nextflow run hello-config.nf --batch my_run
 
 Example के लिए, हम अपने outputs को process के अनुसार organize कर सकते हैं output path declaration में `<process>.name` reference करके:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -709,7 +709,7 @@ Example के लिए, हम अपने outputs को process के अ�
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -747,7 +747,7 @@ Example के लिए, हम अपने outputs को process के अ�
 
 पहले, config file update करो `outputDir` से `${params.batch}` remove करने के लिए (चूंकि हम इसे path declarations में move कर रहे हैं):
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="nextflow.config" linenums="12" hl_lines="4"
     /*
@@ -756,7 +756,7 @@ Example के लिए, हम अपने outputs को process के अ�
     outputDir = "custom-outdir-config/"
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="nextflow.config" linenums="12" hl_lines="4"
     /*
@@ -767,7 +767,7 @@ Example के लिए, हम अपने outputs को process के अ�
 
 फिर, workflow file में following changes करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -794,7 +794,7 @@ Example के लिए, हम अपने outputs को process के अ�
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -845,7 +845,7 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
 
 यह outputs को `custom-outdir-config-2/rep2/` में publish करता है, specified base path _और_ batch name subdirectory _और_ process द्वारा grouped results के साथ:
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     custom-outdir-config-2
@@ -875,7 +875,7 @@ Finally, repetitive code की amount reduce करने की spirit मे�
 
 `nextflow.config` file में following code add करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="nextflow.config" linenums="12" hl_lines="5"
     /*
@@ -885,7 +885,7 @@ Finally, repetitive code की amount reduce करने की spirit मे�
     workflow.output.mode = 'copy'
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="nextflow.config" linenums="12"
     /*
@@ -900,7 +900,7 @@ Configuration file में `workflow.output.mode` set करना workflow fi
 
 Workflow file में following changes करो:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-config.nf" linenums="42"
     output {
@@ -922,7 +922,7 @@ Workflow file में following changes करो:
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="4 8 12 16 20"
     output {
@@ -975,7 +975,7 @@ nextflow run hello-config.nf -output-dir config-output-mode
 
 यह outputs को `config-output-mode/` में publish करता है, और वे सभी अभी भी proper copies हैं, symlinks नहीं।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     config-output-mode
@@ -1033,14 +1033,14 @@ Fortunately हमारे लिए, Nextflow कई अन्य container te
 हम अपनी configuration file को Docker के बजाय [Conda](https://nextflow.io/docs/latest/conda.html) use करने के लिए change कर सकते हैं।
 ऐसा करने के लिए, चलो `docker.enabled` की value को `false` पर switch करते हैं, और Conda के use को enable करने वाला directive add करते हैं:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="1-2"
     docker.enabled = false
     conda.enabled = true
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="1"
     docker.enabled = true
@@ -1055,7 +1055,7 @@ Fortunately हमारे लिए, Nextflow कई अन्य container te
 
 अब हम `conda` directive का use करके URI को `cowpy` process definition में add करते हैं:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
     process cowpy {
@@ -1066,7 +1066,7 @@ Fortunately हमारे लिए, Nextflow कई अन्य container te
         input:
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="modules/cowpy.nf" linenums="4"
     process cowpy {
@@ -1180,7 +1180,7 @@ Unfortunately, इनमें से प्रत्येक system different 
 
     Example के लिए, same job जिसे 8 CPUs और 4GB RAM require होता है "my-science-work" queue पर execute होने के लिए backend के depending following different ways में express किया जाना चाहिए।
 
-    ```bash title="SLURM के लिए Config / sbatch use करके submit करें"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -1188,7 +1188,7 @@ Unfortunately, इनमें से प्रत्येक system different 
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="PBS के लिए Config / qsub use करके submit करें"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -1196,7 +1196,7 @@ Unfortunately, इनमें से प्रत्येक system different 
     #PBS -l mem=4gb
     ```
 
-    ```bash title="SGE के लिए Config / qsub use करके submit करें"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -1266,7 +1266,7 @@ Profiling show करती है कि हमारी training workflow म�
 
 अपनी `nextflow.config` file में following add करो, pipeline parameters section से पहले:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="4-9"
     docker.enabled = false
@@ -1289,7 +1289,7 @@ Profiling show करती है कि हमारी training workflow म�
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="nextflow.config" linenums="1"
     docker.enabled = false
@@ -1311,7 +1311,7 @@ Profiling show करती है कि हमारी training workflow म�
 
 साथ ही, हम pretend करेंगे कि `cowpy` process को दूसरों से अधिक resources require होती हैं, बस demonstrate करने के लिए कि individual process के लिए allocations कैसे adjust करें।
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="6-9"
     /*
@@ -1326,7 +1326,7 @@ Profiling show करती है कि हमारी training workflow म�
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="nextflow.config" linenums="4"
     /*
@@ -1416,7 +1416,7 @@ Nextflow तुम्हें कितनी भी [profiles](https://nextflo
 
 अपनी `nextflow.config` file में following add करो, pipeline parameters section के बाद लेकिन output settings से पहले:
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="nextflow.config" linenums="15" hl_lines="10-27"
     /*
@@ -1454,7 +1454,7 @@ Nextflow तुम्हें कितनी भी [profiles](https://nextflo
     workflow.output.mode = 'copy'
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="nextflow.config" linenums="15"
     /*
@@ -1585,7 +1585,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 
 यह Docker use करेगा जहाँ possible हो और `custom-outdir-config/test` के under outputs produce करेगा, और इस बार character comedic duo `dragonandcow` है।
 
-??? abstract "फ़ाइल contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
@@ -1752,7 +1752,7 @@ Final [course summary](./next_steps.md) पर जाओ review करने क
 - [ ] पहली encountered value
 - [ ] Neither; यह error cause करता है
 
-और जानें: [1.1. Default values को `nextflow.config` में move करें](#11-default-values-को-nextflowconfig-में-move-करें)
+और जानें: [1.1. Default values को `nextflow.config` में move करें](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1770,7 +1770,7 @@ Final [course summary](./next_steps.md) पर जाओ review करने क
 - [ ] पहला defined
 - [ ] यह error cause करता है
 
-और जानें: [3. Software packaging technology select करें](#3-software-packaging-technology-select-करें)
+और जानें: [3. Software packaging technology select करें](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1788,7 +1788,7 @@ Config file में specific process के लिए resource requirements �
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-और जानें: [5.3. Specific process के लिए resource allocations set करें](#53-specific-process-के-लिए-resource-allocations-set-करें)
+और जानें: [5.3. Specific process के लिए resource allocations set करें](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1798,7 +1798,7 @@ Config file में specific process के लिए resource requirements �
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-और जानें: [5.1. Resource utilization report generate करने के लिए workflow run करें](#51-resource-utilization-report-generate-करने-के-लिए-workflow-run-करें)
+और जानें: [5.1. Resource utilization report generate करने के लिए workflow run करें](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1808,7 +1808,7 @@ Config file में specific process के लिए resource requirements �
 - [x] Maximum resources को cap करता है जो request किए जा सकते हैं
 - [ ] Resource usage monitor करता है
 
-और जानें: [5.5. Resource limits add करें](#55-resource-limits-add-करें)
+और जानें: [5.5. Resource limits add करें](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1818,7 +1818,7 @@ Nextflow में default executor क्या है?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-और जानें: [4. Execution platform select करें](#4-execution-platform-select-करें)
+और जानें: [4. Execution platform select करें](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1828,7 +1828,7 @@ Nextflow run करते समय parameter file कैसे specify कर�
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-और जानें: [1.3. Parameter file use करें](#13-parameter-file-use-करें)
+और जानें: [1.3. Parameter file use करें](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1838,7 +1838,7 @@ Profiles किसके लिए use की जा सकती हैं? (�
 - [x] Test parameters provide करने के लिए
 - [ ] New processes define करने के लिए
 
-और जानें: [6. Preset configurations के बीच switch करने के लिए profiles use करें](#6-preset-configurations-के-बीच-switch-करने-के-लिए-profiles-use-करें)
+और जानें: [6. Preset configurations के बीच switch करने के लिए profiles use करें](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1848,5 +1848,5 @@ Single command में multiple profiles कैसे specify करते ह
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-और जानें: [6. Preset configurations के बीच switch करने के लिए profiles use करें](#6-preset-configurations-के-बीच-switch-करने-के-लिए-profiles-use-करें)
+और जानें: [6. Preset configurations के बीच switch करने के लिए profiles use करें](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

@@ -1,6 +1,6 @@
 # Bölüm 1: Temel işlemleri çalıştırma
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow Run eğitim kursunun bu ilk bölümünde, temel işlemleri göstermek ve ilgili Nextflow kod bileşenlerini işaret etmek için kullanacağımız çok temel, alandan bağımsız bir Hello World örneğiyle konuya yumuşak bir giriş yapıyoruz.
 
@@ -62,7 +62,7 @@ Dosya gezgininde açabilir veya örneğin `cat` yardımcı programını kullanar
     Hello World!
     ```
 
-İlk Nextflow workflow'umuzla çoğaltmaya çalışacağımız şey budur.
+İlk Nextflow iş akışımızla çoğaltmaya çalışacağımız şey budur.
 
 ### Özet
 
@@ -70,17 +70,17 @@ Artık terminalde bazı metinler çıktı veren basit bir komutu nasıl çalış
 
 ### Sırada ne var?
 
-Aynı sonucu elde eden bir Nextflow workflow'u çalıştırmanın ne gerektirdiğini öğrenin.
+Aynı sonucu elde eden bir Nextflow iş akışı çalıştırmanın ne gerektirdiğini öğrenin.
 
 ---
 
-## 2. Workflow'u çalıştırın
+## 2. İş akışını çalıştırın
 
-Size `--input` adlı bir komut satırı argümanı aracılığıyla bir girdi selamlama alan ve bu selamlamayı içeren bir metin dosyası üreten `1-hello.nf` adlı bir workflow betiği sağlıyoruz.
+Size `--input` adlı bir komut satırı argümanı aracılığıyla bir girdi selamlama alan ve bu selamlamayı içeren bir metin dosyası üreten `1-hello.nf` adlı bir iş akışı betiği sağlıyoruz.
 
 Henüz koda bakmayacağız; önce çalıştırmanın nasıl göründüğünü görelim.
 
-### 2.1. Workflow'u başlatın ve çalışmayı izleyin
+### 2.1. İş akışını başlatın ve çalışmayı izleyin
 
 Terminalde aşağıdaki komutu çalıştırın:
 
@@ -99,7 +99,7 @@ nextflow run 1-hello.nf --input 'Hello World!'
     [a3/7be2fa] sayHello | 1 of 1 ✔
     ```
 
-Konsol çıktınız buna benzer görünüyorsa, tebrikler, ilk Nextflow workflow'unuzu çalıştırdınız!
+Konsol çıktınız buna benzer görünüyorsa, tebrikler, ilk Nextflow iş akışınızı çalıştırdınız!
 
 Buradaki en önemli çıktı, yukarıdaki çıktıda vurgulanan son satırdır:
 
@@ -113,8 +113,8 @@ Bu harika, ama merak ediyor olabilirsiniz: çıktı nerede?
 
 ### 2.2. Çıktı dosyasını `results` dizininde bulun
 
-Bu workflow, çıktısını bir results dizinine yayınlamak üzere yapılandırılmıştır.
-Geçerli dizininize bakarsanız, workflow'u çalıştırdığınızda Nextflow'un `results` adında yeni bir dizin ve bunun altında `output.txt` adlı bir dosya içeren `1-hello` adlı bir alt dizin oluşturduğunu göreceksiniz.
+Bu iş akışı, çıktısını bir results dizinine yayınlamak üzere yapılandırılmıştır.
+Geçerli dizininize bakarsanız, iş akışını çalıştırdığınızda Nextflow'un `results` adında yeni bir dizin ve bunun altında `output.txt` adlı bir dosya içeren `1-hello` adlı bir alt dizin oluşturduğunu göreceksiniz.
 
 ```console title="results/"
 results
@@ -128,14 +128,14 @@ Dosyayı açın; içerik, komut satırında belirttiğiniz dizeyle eşleşmelidi
 Hello World!
 ```
 
-Harika, workflow'umuz yapması gerekeni yaptı!
+Harika, iş akışımız yapması gerekeni yaptı!
 
 ### 2.3. Sonuçları farklı bir dizine kaydedin
 
 Varsayılan olarak, Nextflow pipeline çıktılarını geçerli yolunuzda `results` adlı bir dizine kaydeder.
 Dosyalarınızın nereye yayınlanacağını değiştirmek için `-output-dir` CLI bayrağını (veya kısaca `-o`) kullanın.
 
-!!! danger "Dikkat"
+!!! danger "Tehlike"
 
     `--input`'un iki tire, `-output-dir`'in bir tire aldığını unutmayın!
     Bunun nedeni `--input`'un bir pipeline _parametresi_ ve `-output-dir`'in çekirdek bir Nextflow CLI bayrağı olmasıdır.
@@ -165,25 +165,25 @@ hello_results
 ```
 
 Bu dizindeki dosyalar öncekiyle aynıdır, sadece üst düzey dizin farklıdır.
-Ancak, her iki durumda da 'yayınlanan' sonucun, Nextflow workflow'u çalıştırdığında ürettiği gerçek çıktının bir kopyası (veya bazı durumlarda sembolik bir bağlantı) olduğunu unutmayın.
+Ancak, her iki durumda da 'yayınlanan' sonucun, Nextflow iş akışını çalıştırdığında ürettiği gerçek çıktının bir kopyası (veya bazı durumlarda sembolik bir bağlantı) olduğunu unutmayın.
 
 Şimdi, Nextflow'un işi gerçekte nerede yaptığını görmek için kaputun altına bir göz atacağız.
 
 !!! Warning "Uyarı"
 
-    Tüm workflow'lar çıktıları bir results dizinine yayınlamak üzere ayarlanmayacaktır ve/veya dizin adları ve yapısı farklı olabilir.
+    Tüm iş akışları çıktıları bir results dizinine yayınlamak üzere ayarlanmayacaktır ve/veya dizin adları ve yapısı farklı olabilir.
     Bu bölümde biraz ileride, bu davranışın nerede belirtildiğini nasıl bulacağınızı göstereceğiz.
 
 ### 2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun
 
-Bir workflow çalıştırdığınızda, Nextflow workflow'daki her bir sürecin her çağrısı için (=pipeline'daki her adım) ayrı bir 'görev dizini' oluşturur.
+Bir iş akışı çalıştırdığınızda, Nextflow iş akışındaki her bir sürecin her çağrısı için (=pipeline'daki her adım) ayrı bir 'görev dizini' oluşturur.
 Her biri için gerekli girdileri hazırlar, ilgili talimatları yürütür ve çıktıları ve log dosyalarını, benzersiz hale getirmek için otomatik olarak bir hash kullanılarak adlandırılan bu tek dizine yazar.
 
 Bu görev dizinlerinin tümü, geçerli dizininizdeki (komutu çalıştırdığınız yer) `work` adlı bir dizin altında yaşayacaktır.
 
 Bu karmaşık gelebilir, bu yüzden pratikte nasıl göründüğüne bakalım.
 
-Daha önce çalıştırdığımız workflow için konsol çıktısına geri dönersek, şu satır vardı:
+Daha önce çalıştırdığımız iş akışı için konsol çıktısına geri dönersek, şu satır vardı:
 
 ```console
 [a3/1e1535] sayHello [100%] 1 of 1 ✔
@@ -239,7 +239,7 @@ Bu, tam dizin yolunu vermeli: `work/a3/1e153543b0a7f9d2c4735ddb4ab231`
     tree -a work
     ```
 
-`work/`'de yaptığımız iki farklı pipeline çalıştırmasından iki dizin seti vardır.
+`work/`de yaptığımız iki farklı pipeline çalıştırmasından iki dizin seti vardır.
 Her görev yürütmesi, üzerinde çalışmak için kendi izole dizinini alır.
 Bu durumda pipeline her iki seferde de aynı şeyi yaptı, bu nedenle her görev dizininin içeriği özdeştir.
 
@@ -270,13 +270,13 @@ echo 'Hello World!' > output.txt
 
 ```
 
-Bu, workflow'un daha önce doğrudan komut satırında çalıştırdığımız aynı komutu oluşturduğunu doğrular.
+Bu, iş akışının daha önce doğrudan komut satırında çalıştırdığımız aynı komutu oluşturduğunu doğrular.
 
-Bir şeyler ters gittiğinde ve ne olduğunu gidermeniz gerektiğinde, Nextflow'un workflow talimatlarına, değişken enterpolasyonuna vb. göre tam olarak hangi komutu oluşturduğunu kontrol etmek için `command.sh` betiğine bakmak yararlı olabilir.
+Bir şeyler ters gittiğinde ve ne olduğunu gidermeniz gerektiğinde, Nextflow'un iş akışı talimatlarına, değişken enterpolasyonuna vb. göre tam olarak hangi komutu oluşturduğunu kontrol etmek için `command.sh` betiğine bakmak yararlı olabilir.
 
-### 2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın
+### 2.5. İş akışını farklı selamlamalarla yeniden çalıştırın
 
-Workflow'u `--input` argümanı için farklı değerlerle birkaç kez yeniden çalıştırmayı deneyin, ardından görev dizinlerine bakın.
+İş akışını `--input` argümanı için farklı değerlerle birkaç kez yeniden çalıştırmayı deneyin, ardından görev dizinlerine bakın.
 
 ??? abstract "Dizin içeriği"
 
@@ -358,9 +358,9 @@ Temel bir Nextflow betiğini nasıl okuyacağınızı ve bileşenlerinin işlevs
 
 ---
 
-## 3. Hello World workflow başlangıç betiğini inceleyin
+## 3. Hello World iş akışı başlangıç betiğini inceleyin
 
-Orada yaptığımız şey temelde workflow betiğini bir kara kutu gibi ele almaktı.
+Orada yaptığımız şey temelde iş akışı betiğini bir kara kutu gibi ele almaktı.
 Şimdi ne yaptığını gördüğümüze göre, kutuyu açalım ve içine bakalım.
 
 Buradaki amacımız Nextflow kodunun sözdizimini ezberlemek değil, ana bileşenlerin ne olduğu ve nasıl organize edildikleri hakkında temel bir sezgi oluşturmaktır.
@@ -416,7 +416,7 @@ Buradaki amacımız Nextflow kodunun sözdizimini ezberlemek değil, ana bileşe
     }
     ```
 
-Bir Nextflow workflow betiği tipik olarak bir veya daha fazla **process** tanımı, **workflow**'un kendisi ve **params** ve **output** gibi birkaç isteğe bağlı blok içerir.
+Bir Nextflow iş akışı betiği tipik olarak bir veya daha fazla **process** tanımı, **workflow**'un kendisi ve **params** ve **output** gibi birkaç isteğe bağlı blok içerir.
 
 Her **process**, pipeline'daki ilgili adımın hangi işlem(ler)i gerçekleştirmesi gerektiğini açıklarken, **workflow** çeşitli adımları birbirine bağlayan veri akışı mantığını tanımlar.
 
@@ -465,7 +465,7 @@ Bu, yalnızca bir `input` tanımı, bir `output` tanımı ve yürütülecek `scr
 Workflow tanımı `workflow` anahtar kelimesiyle başlar, ardından isteğe bağlı bir ad ve süslü parantezlerle sınırlandırılmış workflow gövdesi gelir.
 
 Burada `main:` bloğu ve `publish:` bloğundan oluşan bir **workflow**'umuz var.
-`main:` bloğu workflow'un ana gövdesidir ve `publish:` bloğu `results` dizinine yayınlanması gereken çıktıları listeler.
+`main:` bloğu iş akışının ana gövdesidir ve `publish:` bloğu `results` dizinine yayınlanması gereken çıktıları listeler.
 
 ```groovy title="1-hello.nf" linenums="27"
 workflow {
@@ -483,22 +483,22 @@ Bu durumda `main:` bloğu `sayHello` sürecine bir çağrı içerir ve selamlama
 
 Birazdan daha ayrıntılı tartışacağımız gibi, `params.input` komut satırımızda `--input` parametresine verdiğimiz değeri tutar.
 
-`publish:` bloğu, `sayHello()` süreç çağrısının çıktısını listeler, buna `sayHello.out` olarak atıfta bulunur ve `first_output` adını verir (bu, workflow yazarının istediği herhangi bir şey olabilir).
+`publish:` bloğu, `sayHello()` süreç çağrısının çıktısını listeler, buna `sayHello.out` olarak atıfta bulunur ve `first_output` adını verir (bu, iş akışı yazarının istediği herhangi bir şey olabilir).
 
 Bu çok minimal bir **workflow** tanımıdır.
-Gerçek dünya pipeline'larında, workflow tipik olarak **channel**'larla bağlanan birden fazla **process** çağrısı içerir ve değişken girdiler için varsayılan değerler ayarlanmış olabilir.
+Gerçek dünya pipeline'larında, iş akışı tipik olarak **channel**'larla bağlanan birden fazla **process** çağrısı içerir ve değişken girdiler için varsayılan değerler ayarlanmış olabilir.
 
 Kursun 2. Bölümünde buna gireceğiz.
-Şimdilik, workflow'umuzun girdileri ve çıktıları nasıl işlediğine daha yakından bakalım.
+Şimdilik, iş akışımızın girdileri ve çıktıları nasıl işlediğine daha yakından bakalım.
 
 ### 3.4. Komut satırı parametreleri için `params` sistemi
 
 `sayHello()` süreç çağrısına sağladığımız `params.input`, şık bir Nextflow kod parçasıdır ve üzerinde ekstra bir dakika harcamaya değer.
 
 Yukarıda belirtildiği gibi, `--input` komut satırı parametresinin değerini `sayHello()` süreç çağrısına bu şekilde geçiriyoruz.
-Aslında, sadece `params.someParameterName` bildirmek, workflow'a komut satırından `--someParameterName` adlı bir parametre vermek için yeterlidir.
+Aslında, sadece `params.someParameterName` bildirmek, iş akışına komut satırından `--someParameterName` adlı bir parametre vermek için yeterlidir.
 
-Burada bu parametre bildirimini, workflow'un beklediği girdi türünü belirten bir `params` bloğu kurarak resmileştirdik (Nextflow 25.10.2 ve sonrası).
+Burada bu parametre bildirimini, iş akışının beklediği girdi türünü belirten bir `params` bloğu kurarak resmileştirdik (Nextflow 25.10.2 ve sonrası).
 
 ```groovy title="1-hello.nf" linenums="20"
 /*
@@ -514,12 +514,12 @@ Daha fazla bilgi için, Nextflow referans dokümantasyonundaki [Workflow paramet
 
 !!! tip "İpucu"
 
-    `params` sistemi kullanılarak bildirilen _workflow_ parametreleri komut satırında her zaman iki tire alır (`--`).
+    `params` sistemi kullanılarak bildirilen _iş akışı_ parametreleri komut satırında her zaman iki tire alır (`--`).
     Bu, onları yalnızca bir tire alan (`-`) Nextflow düzeyindeki CLI bayraklarından ayırır.
 
 ### 3.5. `publish` direktifi
 
-Workflow'un diğer ucunda, `publish:` bloğuna zaten göz attık.
+İş akışının diğer ucunda, `publish:` bloğuna zaten göz attık.
 Bu, çıktı işleme sisteminin yarısıdır; diğer yarısı aşağıda bulunan `output` bloğudur.
 
 ```groovy title="1-hello.nf" linenums="37"
@@ -536,7 +536,7 @@ Bu, `publish:` bloğunda listelenen `first_output` çıktısının varsayılan `
 `mode 'copy'` satırı, sistemin varsayılan davranışını geçersiz kılar, bu davranış düzgün bir kopya yerine `work/` dizinindeki orijinal dosyaya sembolik bir bağlantı (veya symlink) yapmaktır.
 
 Yayınlama davranışını kontrol etmek için burada gösterilenden daha fazla seçenek vardır; daha sonra birkaçını ele alacağız.
-Bir workflow birden fazla çıktı ürettiğinde, her birinin `output` bloğunda bu şekilde listelendiğini de göreceksiniz.
+Bir iş akışı birden fazla çıktı ürettiğinde, her birinin `output` bloğunda bu şekilde listelendiğini de göreceksiniz.
 
 Daha fazla bilgi için, Nextflow referans dokümantasyonundaki [Çıktıları yayınlama](https://nextflow.io/docs/latest/workflow.html#publishing-outputs) bölümüne bakın.
 
@@ -546,7 +546,7 @@ Daha fazla bilgi için, Nextflow referans dokümantasyonundaki [Çıktıları ya
 
     Bu kod kalıbını eski Nextflow pipeline'larında ve süreç modüllerinde hala her yerde bulacaksınız, bu yüzden bunun farkında olmak önemlidir.
 
-    Workflow'da `publish:` bloğu ve üst düzeyde `output` bloğu yerine, `sayHello` süreç tanımında bir `publishDir` satırı görürdünüz:
+    İş akışında `publish:` bloğu ve üst düzeyde `output` bloğu yerine, `sayHello` süreç tanımında bir `publishDir` satırı görürdünüz:
 
     ```groovy title="Sözdizimi örneği" linenums="1" hl_lines="3"
     process sayHello {
@@ -567,21 +567,21 @@ Daha fazla bilgi için, Nextflow referans dokümantasyonundaki [Çıktıları ya
 
 ### Özet
 
-Artık basit bir Nextflow workflow'unun nasıl yapılandırıldığını ve temel bileşenlerin işlevselliğiyle nasıl ilişkili olduğunu biliyorsunuz.
+Artık basit bir Nextflow iş akışının nasıl yapılandırıldığını ve temel bileşenlerin işlevselliğiyle nasıl ilişkili olduğunu biliyorsunuz.
 
 ### Sırada ne var?
 
-Workflow çalıştırmalarınızı rahatça yönetmeyi öğrenin.
+İş akışı çalıştırmalarınızı rahatça yönetmeyi öğrenin.
 
 ---
 
-## 4. Workflow çalıştırmalarını yönetin
+## 4. İş akışı çalıştırmalarını yönetin
 
-Workflow'ları başlatmayı ve çıktıları almayı bilmek harikadır, ancak hayatınızı kolaylaştıracak workflow yönetiminin birkaç başka yönü olduğunu hızla keşfedeceksiniz.
+İş akışlarını başlatmayı ve çıktıları almayı bilmek harikadır, ancak hayatınızı kolaylaştıracak iş akışı yönetiminin birkaç başka yönü olduğunu hızla keşfedeceksiniz.
 
-Burada size aynı workflow'u yeniden başlatmanız gerektiğinde `resume` özelliğinden nasıl yararlanacağınızı, çalıştırma loglarını `nextflow log` ile nasıl inceleyeceğinizi ve eski çalışma dizinlerini `nextflow clean` ile nasıl sileceğinizi gösteriyoruz.
+Burada size aynı iş akışını yeniden başlatmanız gerektiğinde `resume` özelliğinden nasıl yararlanacağınızı, çalıştırma loglarını `nextflow log` ile nasıl inceleyeceğinizi ve eski çalışma dizinlerini `nextflow clean` ile nasıl sileceğinizi gösteriyoruz.
 
-### 4.1. `-resume` ile bir workflow'u yeniden başlatın
+### 4.1. `-resume` ile bir iş akışını yeniden başlatın
 
 Bazen, daha önce başlattığınız bir pipeline'ı, önceden başarıyla tamamlanmış herhangi bir işi yeniden yapmadan çalıştırmak isteyeceksiniz.
 
@@ -625,7 +625,7 @@ Nextflow kelimenin tam anlamıyla size önceki çalıştırmayı gösteriyor ve 
 
 ### 4.2. Geçmiş çalıştırmaların logunu inceleyin
 
-Bir nextflow workflow'u başlattığınızda, geçerli çalışma dizininde `.nextflow` adlı gizli bir dizin altında `history` adlı bir log dosyasına bir satır yazılır.
+Bir nextflow iş akışı başlattığınızda, geçerli çalışma dizininde `.nextflow` adlı gizli bir dizin altında `history` adlı bir log dosyasına bir satır yazılır.
 
 ??? abstract "Dosya içeriği"
 
@@ -734,7 +734,7 @@ Aynı şekilde zaten çalıştırılmış adımları tekrarlamadan bir pipeline'
 
 Biraz ara verin! Nextflow sözdiziminin ve temel kullanım talimatlarının yapı taşlarını yeni absorbe ettiniz.
 
-Bu eğitimin bir sonraki bölümünde, Nextflow'un birden fazla girdiyi verimli bir şekilde işlemenize, birbirine bağlı birden fazla adımdan oluşan workflow'ları çalıştırmanıza, modüler kod bileşenlerinden yararlanmanıza ve daha fazla tekrar üretilebilirlik ve taşınabilirlik için konteynerları kullanmanıza nasıl izin verdiğini gösteren Hello World pipeline'ının art arda daha gerçekçi dört versiyonuna bakacağız.
+Bu eğitimin bir sonraki bölümünde, Nextflow'un birden fazla girdiyi verimli bir şekilde işlemenize, birbirine bağlı birden fazla adımdan oluşan iş akışlarını çalıştırmanıza, modüler kod bileşenlerinden yararlanmanıza ve daha fazla tekrar üretilebilirlik ve taşınabilirlik için konteynerları kullanmanıza nasıl izin verdiğini gösteren Hello World pipeline'ının art arda daha gerçekçi dört versiyonuna bakacağız.
 
 ---
 
@@ -761,13 +761,13 @@ Daha fazla bilgi: [2.4. Orijinal çıktıyı ve logları `work/` dizininde bulun
 </quiz>
 
 <quiz>
-`-resume` olmadan bir workflow'u yeniden çalıştırdığınızda yayınlanan sonuçlara ne olur?
+`-resume` olmadan bir iş akışını yeniden çalıştırdığınızda yayınlanan sonuçlara ne olur?
 - [ ] Ayrı zaman damgalı dizinlerde korunurlar
 - [x] Yeni çalıştırma tarafından üzerine yazılırlar
 - [ ] Nextflow üzerine yazmayı engeller ve başarısız olur
 - [ ] Otomatik olarak yedeklenirler
 
-Daha fazla bilgi: [2.5. Workflow'u farklı selamlamalarla yeniden çalıştırın](#25-workflowu-farkli-selamlamalarla-yeniden-calistirin)
+Daha fazla bilgi: [2.5. İş akışını farklı selamlamalarla yeniden çalıştırın](#25-is-akisini-farkli-selamlamalarla-yeniden-calistirin)
 </quiz>
 
 <quiz>
@@ -782,7 +782,7 @@ Bu konsol çıktısı neyi gösterir?
 - [x] Nextflow önceki özdeş bir çalıştırmadan sonuçları yeniden kullandı
 - [ ] Görev manuel olarak iptal edildi
 
-Daha fazla bilgi: [4.1. `-resume` ile bir workflow'u yeniden başlatın](#41--resume-ile-bir-workflowu-yeniden-baslatin)
+Daha fazla bilgi: [4.1. `-resume` ile bir iş akışını yeniden başlatın](#41--resume-ile-bir-is-akisini-yeniden-baslatin)
 </quiz>
 
 <quiz>
@@ -796,20 +796,20 @@ Daha fazla bilgi: [4.2. Geçmiş çalıştırmaların logunu inceleyin](#42-gecm
 </quiz>
 
 <quiz>
-Bir workflow dosyasındaki `params` bloğunun amacı nedir?
+Bir iş akışı dosyasındaki `params` bloğunun amacı nedir?
 - [ ] Süreç kaynak gereksinimlerini tanımlamak
 - [ ] Executor'ı yapılandırmak
-- [x] Workflow girdi parametrelerini bildirmek ve türünü belirlemek
+- [x] İş akışı girdi parametrelerini bildirmek ve türünü belirlemek
 - [ ] Çıktı yayınlama seçeneklerini belirtmek
 
 Daha fazla bilgi: [3.4. Komut satırı parametreleri için params sistemi](#34-komut-satiri-parametreleri-icin-params-sistemi)
 </quiz>
 
 <quiz>
-Workflow'un `output` bloğunda `mode 'copy'` ne yapar?
+İş akışının `output` bloğunda `mode 'copy'` ne yapar?
 - [ ] work dizininin bir yedeğini oluşturur
 - [x] Sembolik bağlantılar yerine dosyaların tam kopyasını yapar
-- [ ] Workflow betiğini sonuçlara kopyalar
+- [ ] İş akışı betiğini sonuçlara kopyalar
 - [ ] Artımlı dosya kopyalamayı etkinleştirir
 
 Daha fazla bilgi: [3.5. publish direktifi](#35-publish-direktifi)

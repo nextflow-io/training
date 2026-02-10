@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=fr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=fr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -23,7 +23,7 @@ Tout cela est très fastidieux et ennuyeux, donc nous allons vous montrer commen
 Un **conteneur** est une unité logicielle légère, autonome et exécutable créée à partir d'une **image** de conteneur qui inclut tout ce qui est nécessaire pour exécuter une application, y compris le code, les bibliothèques système et les paramètres.
 Comme vous pouvez l'imaginer, cela va être très utile pour rendre vos pipelines plus reproductibles.
 
-Notez que nous enseignerons ceci en utilisant [Docker](https://www.docker.com/get-started/), mais gardez à l'esprit que Nextflow prend en charge [plusieurs autres technologies de conteneurs](https://www.nextflow.io/docs/latest/container.html#) également.
+Notez que nous enseignerons ceci en utilisant [Docker](https://www.docker.com/get-started/), mais gardez à l'esprit que Nextflow prend en charge [plusieurs autres technologies de conteneurs](https://nextflow.io/docs/latest/container.html) également.
 
 ??? info "Comment commencer à partir de cette section"
 
@@ -115,7 +115,7 @@ Pour utiliser un conteneur, vous téléchargez généralement ou _tirez_ une ima
 
 La syntaxe générale est la suivante :
 
-```bash title="Syntaxe"
+```bash title="Syntax"
 docker pull '<container>'
 ```
 
@@ -125,7 +125,7 @@ La partie `'<container>'` est l'adresse URI de l'image de conteneur.
 
 À titre d'exemple, tirons une image de conteneur qui contient [cowpy](https://github.com/jeffbuttars/cowpy), une implémentation Python d'un outil appelé `cowsay` qui génère de l'art ASCII pour afficher des entrées de texte arbitraires de manière amusante.
 
-```txt title="Exemple"
+```txt title="Example"
  ________________________
 < Are we having fun yet? >
  ------------------------
@@ -187,8 +187,8 @@ C'est idéal pour exécuter des commandes ponctuelles.
 
 La syntaxe générale est la suivante :
 
-```bash title="Syntaxe"
-docker run --rm '<container>' [commande de l'outil]
+```bash title="Syntax"
+docker run --rm '<container>' [tool command]
 ```
 
 La partie `docker run --rm '<container>'` est l'instruction au système de conteneur pour démarrer une instance de conteneur à partir d'une image de conteneur et exécuter une commande à l'intérieur.
@@ -283,7 +283,7 @@ Maintenant, la sortie montre le pingouin Linux, Tux, au lieu de la vache par dé
 
 Parce que vous êtes à l'intérieur du conteneur, vous pouvez exécuter la commande `cowpy` autant de fois que vous le souhaitez, en variant les paramètres d'entrée, sans avoir à vous soucier des commandes Docker.
 
-!!! tip "Astuce"
+!!! Tip "Astuce"
 
     Utilisez le flag '-c' pour choisir un personnage différent, y compris :
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
@@ -309,8 +309,8 @@ Comme noté précédemment, le conteneur est isolé du système hôte par défau
 
 Pour permettre au conteneur d'accéder au système de fichiers hôte, vous pouvez **monter** un **volume** depuis le système hôte dans le conteneur en utilisant la syntaxe suivante :
 
-```bash title="Syntaxe"
--v <chemin_extérieur>:<chemin_intérieur>
+```bash title="Syntax"
+-v <outside_path>:<inside_path>
 ```
 
 Dans notre cas, `<chemin_extérieur>` sera le répertoire de travail actuel, donc nous pouvons simplement utiliser un point (`.`), et `<chemin_intérieur>` est juste un alias que nous inventons ; appelons-le `/my_project` (le chemin intérieur doit être absolu).
@@ -1057,7 +1057,7 @@ Tout le travail difficile que nous avons dû faire manuellement dans la premièr
 
 ```txt
  _______________________
-< Hourra pour les robots...! >
+< Hurray for robots...! >
  -----------------------
                                    ,-----.
                                    |     |
@@ -1116,7 +1116,7 @@ Que fait le flag `-v` dans une commande `docker run` ?
 - [x] Monte un volume depuis le système hôte dans le conteneur
 - [ ] Spécifie la version du conteneur
 
-En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-monter-des-donnees-dans-le-conteneur)
+En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1126,7 +1126,7 @@ Pourquoi avez-vous besoin de monter des volumes lors de l'utilisation de contene
 - [x] Parce que les conteneurs sont isolés du système de fichiers hôte par défaut
 - [ ] Pour activer le réseau
 
-En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-monter-des-donnees-dans-le-conteneur)
+En savoir plus : [1.3.4. Monter des données dans le conteneur](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1136,7 +1136,7 @@ Comment spécifiez-vous un conteneur pour un processus Nextflow ?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-En savoir plus : [2.3.1. Spécifier un conteneur pour cowpy](#231-specifier-un-conteneur-pour-cowpy)
+En savoir plus : [2.3.1. Spécifier un conteneur pour cowpy](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1146,7 +1146,7 @@ Quel paramètre `nextflow.config` active Docker pour votre workflow ?
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-En savoir plus : [2.3.2. Activer l'utilisation de Docker via le fichier `nextflow.config`](#232-activer-lutilisation-de-docker-via-le-fichier-nextflowconfig)
+En savoir plus : [2.3.2. Activer l'utilisation de Docker via le fichier `nextflow.config`](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1156,5 +1156,5 @@ Que gère automatiquement Nextflow lors de l'exécution d'un processus dans un c
 - [x] Exécuter le script du processus à l'intérieur du conteneur
 - [x] Nettoyer l'instance du conteneur après l'exécution
 
-En savoir plus : [2.3.4. Inspecter comment Nextflow a lancé la tâche conteneurisée](#234-inspecter-comment-nextflow-a-lance-la-tache-contenerisee)
+En savoir plus : [2.3.4. Inspecter comment Nextflow a lancé la tâche conteneurisée](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

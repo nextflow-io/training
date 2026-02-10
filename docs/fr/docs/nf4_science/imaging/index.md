@@ -1,5 +1,5 @@
 ---
-title: Nextflow run for Imaging
+title: Nextflow run pour l'imagerie
 hide:
   - toc
 ---

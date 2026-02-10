@@ -220,7 +220,7 @@ La commande effectue automatiquement :
 - La mise à jour de `modules.json` pour suivre le module installé
 - La fourniture de l'instruction `include` correcte à utiliser dans votre workflow
 
-!!! tip
+!!! tip "Astuce"
 
     Assurez-vous toujours que votre répertoire de travail actuel est la racine de votre projet de pipeline avant d'exécuter la commande d'installation de module.
 
@@ -328,11 +328,11 @@ Le module est maintenant disponible pour le workflow, donc tout ce que nous devo
 
 Pas si vite.
 
-À ce stade, vous pourriez être tenté de vous lancer et de commencer à éditer le code, mais il vaut la peine de prendre un moment pour examiner attentivement ce que le nouveau module attend et ce qu'il produit.
+À ce stade, vous pourriez être tenté·e de vous lancer et de commencer à éditer le code, mais il vaut la peine de prendre un moment pour examiner attentivement ce que le nouveau module attend et ce qu'il produit.
 
 Nous allons traiter cela comme une section séparée car cela implique un nouveau mécanisme que nous n'avons pas encore couvert : les métadonnées sous forme de map.
 
-!!! note
+!!! note "Note"
 
     Vous pouvez éventuellement supprimer le fichier `collectGreetings.nf` :
 
@@ -360,7 +360,7 @@ Cela nous permettra de déterminer si nous pouvons simplement traiter le nouveau
 Idéalement, c'est quelque chose que vous devriez faire _avant_ même d'installer le module, mais bon, mieux vaut tard que jamais.
 (Pour information, il existe une commande `uninstall` pour se débarrasser des modules que vous décidez de ne plus vouloir.)
 
-!!! note
+!!! note "Note"
 
     Le processus CAT_CAT inclut une gestion assez intelligente de différents types de compression, d'extensions de fichiers, etc. qui ne sont pas strictement pertinents pour ce que nous essayons de vous montrer ici, donc nous ignorerons la plupart de ces éléments et nous concentrerons uniquement sur les parties importantes.
 
@@ -528,7 +528,7 @@ Maintenant que vous savez tout sur les metamaps (ou suffisamment pour les besoin
 
 Par souci de clarté, nous allons décomposer cela et couvrir chaque étape séparément.
 
-!!! note
+!!! note "Note"
 
     Tous les changements montrés ci-dessous sont apportés à la logique du workflow dans le bloc `main` dans le fichier de workflow `core-hello/workflows/hello.nf`.
 
@@ -578,8 +578,8 @@ Ajoutons ces lignes après l'appel à `convertToUpper`, en supprimant l'appel à
         // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
-        // créer une map de métadonnées avec le nom du lot comme ID
-        def cat_meta = [ id: params.batch ]
+        // collecter toutes les salutations dans un seul fichier
+        collectGreetings(convertToUpper.out.collect(), params.batch)
 
         // générer de l'art ASCII des salutations avec cowpy
         cowpy(collectGreetings.out.outfile, params.character)
@@ -738,7 +738,7 @@ L'opération `.map{ meta, file -> file }` extrait le fichier du tuple `[métadon
 
 Ensuite, il suffit de passer `ch_for_cowpy` à `cowpy` au lieu de `collectGreetings.out.outfile` dans cette dernière ligne.
 
-!!! note
+!!! note "Note"
 
     Dans la prochaine partie du cours, nous mettrons à jour `cowpy` pour qu'il fonctionne directement avec les tuples de métadonnées, donc cette étape d'extraction ne sera plus nécessaire.
 

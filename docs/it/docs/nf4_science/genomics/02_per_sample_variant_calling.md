@@ -1,5 +1,7 @@
 # Parte 2: Variant calling per campione
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nella Parte 1, avete testato manualmente i comandi di Samtools e GATK nei rispettivi container.
 Ora andremo ad integrare quegli stessi comandi in un flusso di lavoro Nextflow.
 
@@ -304,7 +306,7 @@ Aggiungiamo un target per `bam_index` che pubblica in una sottodirectory `bam/`.
     }
     ```
 
-!!! note
+!!! note "Nota"
 
     Di default, Nextflow pubblica i file di output come link simbolici, il che evita duplicazioni non necessarie.
     Anche se i file di dati che stiamo usando qui sono molto piccoli, nella genomica possono diventare molto grandi.
@@ -333,7 +335,7 @@ nextflow run genomics.nf -profile test
 
 Potete verificare che il file indice sia stato generato correttamente guardando nella directory di lavoro o nella directory results.
 
-??? abstract "Directory di lavoro"
+??? abstract "Contenuti della directory di lavoro"
 
     ```console
     work/2a/e695367b2f60df09cf826b07192dc3
@@ -341,7 +343,7 @@ Potete verificare che il file indice sia stato generato correttamente guardando 
     └── reads_mother.bam.bai
     ```
 
-??? abstract "Directory results"
+??? abstract "Contenuti della directory dei risultati"
 
     ```console
     results/
@@ -614,7 +616,7 @@ Aggiungete la chiamata al processo nel corpo del flusso di lavoro, sotto `main:`
 
 Dovreste riconoscere la sintassi `*.out` dalla serie di formazione Hello Nextflow; stiamo dicendo a Nextflow di prendere il canale in output da `SAMTOOLS_INDEX` e collegarlo alla chiamata del processo `GATK_HAPLOTYPECALLER`.
 
-!!! note
+!!! note "Nota"
 
     Notate che gli input sono forniti esattamente nello stesso ordine nella chiamata al processo come sono elencati nel blocco input del processo.
     In Nextflow, gli input sono posizionali, il che significa che _dovete_ seguire lo stesso ordine; e naturalmente ci deve essere lo stesso numero di elementi.
@@ -705,7 +707,7 @@ Il primo processo è stato saltato grazie alla cache, come previsto, mentre il s
 
 Troverete i file di output nella directory results (come link simbolici alla directory di lavoro).
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     results/
@@ -718,7 +720,7 @@ Troverete i file di output nella directory results (come link simbolici alla dir
 
 Se aprite il file VCF, dovreste vedere gli stessi contenuti del file che avete generato eseguendo il comando GATK direttamente nel container.
 
-??? abstract "File contents"
+??? abstract "Contenuto del file"
 
     ```console title="reads_mother.bam.vcf" linenums="26"
     #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -867,7 +869,7 @@ Ispezioniamo le directory di lavoro e usiamo l'operatore `view()` per capire cos
 
 Date un'occhiata all'interno della directory di lavoro per la chiamata al processo `GATK_HAPLOTYPECALLER` fallita elencata nell'output della console.
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     work/a5/fa9fd0994b6beede5fb9ea073596c2
@@ -931,7 +933,7 @@ Ancora una volta, questo può riuscire o fallire. Ecco come appare l'output dell
 Le prime tre righe corrispondono al canale di input e le seconde, al canale di output.
 Potete vedere che i file BAM e i file indice per i tre campioni non sono elencati nello stesso ordine!
 
-!!! note
+!!! note "Nota"
 
     Quando chiamate un processo Nextflow su un canale contenente più elementi, Nextflow cercherà di parallelizzare l'esecuzione il più possibile e raccoglierà gli output in qualsiasi ordine diventino disponibili.
     La conseguenza è che gli output corrispondenti possono essere raccolti in un ordine diverso da quello in cui sono stati forniti gli input originali.
@@ -941,7 +943,7 @@ Ma questo non è garantito essere il caso, motivo per cui a volte (anche se non 
 
 Per risolvere questo, dobbiamo assicurarci che i file BAM e i loro file indice viaggino insieme attraverso i canali.
 
-!!! tip
+!!! tip "Suggerimento"
 
     Le istruzioni `view()` nel codice del flusso di lavoro non fanno nulla, quindi non è un problema lasciarle.
     Tuttavia riempiranno il vostro output della console, quindi raccomandiamo di rimuoverle quando avete finito di risolvere il problema.
@@ -954,7 +956,7 @@ La soluzione è raggruppare ciascun file BAM con il suo indice in una tupla, poi
 
 Il modo più semplice per garantire che un file BAM e il suo indice rimangano strettamente associati è impacchettarli insieme in una tupla in uscita dall'attività di indicizzazione.
 
-!!! note
+!!! note "Nota"
 
     Una **tupla** è una lista finita e ordinata di elementi che è comunemente usata per restituire più valori da una funzione. Le tuple sono particolarmente utili per passare più input o output tra processi preservando la loro associazione e ordine.
 
@@ -1096,7 +1098,7 @@ Questa volta (e ogni volta) tutto dovrebbe funzionare correttamente:
 
 La directory results ora contiene sia file BAM che BAI per ciascun campione (dalla tupla), insieme agli output VCF:
 
-??? abstract "Results directory contents"
+??? abstract "Contenuti della directory dei risultati"
 
     ```console
     results/
@@ -1149,7 +1151,7 @@ Abbiamo già creato un file di testo che elenca i percorsi dei file di input, ch
 
 Come potete vedere, abbiamo elencato un percorso di file per riga, e sono percorsi assoluti.
 
-!!! note
+!!! note "Nota"
 
     I file che stiamo usando qui sono solo sul filesystem locale dei vostri GitHub Codespaces, ma potremmo anche puntare a file nello storage cloud.
     Se non state usando l'ambiente Codespaces fornito, potrebbe essere necessario adattare i percorsi dei file per corrispondere alla vostra configurazione locale.
@@ -1232,7 +1234,7 @@ Possiamo farlo usando lo stesso pattern che abbiamo usato nella [Parte 2 di Hell
 Tecnicamente potremmo farlo più semplicemente usando l'operatore [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext), poiché il nostro file di input attualmente contiene solo percorsi di file.
 Tuttavia, usando il più versatile operatore `splitCsv` (integrato da `map`), possiamo rendere il nostro flusso di lavoro a prova di futuro nel caso decidessimo di aggiungere metadati al file contenente i percorsi dei file.
 
-!!! tip
+!!! tip "Suggerimento"
 
     Se non siete sicuri di aver capito cosa stanno facendo gli operatori qui, questa è un'altra grande opportunità per usare l'operatore `.view()` per guardare come appaiono i contenuti del canale prima e dopo averli applicati.
 

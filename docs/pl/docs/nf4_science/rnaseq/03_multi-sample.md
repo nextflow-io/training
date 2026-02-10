@@ -389,7 +389,7 @@ Otwórz nowy plik modułu `trim_galore_pe.nf` w edytorze kodu i wprowadź nastę
 
 - Zmień deklarację wejścia z `path reads` na `tuple path(read1), path(read2)`
 - Zaktualizuj polecenie w bloku `script`, zastępując `$reads` przez `--paired ${read1} ${read2}`
-- Zaktualizuj deklaracje wyjścia, aby odzwierciedlały dodane pliki i różne konwencje nazewnictwa, używając symboli wieloznacznych.
+- Zaktualizuj deklaracje wyjścia, aby odzwierciedlały dodane pliki i różne konwencje nazewnictwa, używając symboli wieloznacznych, aby uniknąć konieczności wymieniania wszystkiego.
 
 ```groovy title="modules/trim_galore_pe.nf" linenums="8"
     input:

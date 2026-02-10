@@ -7,7 +7,7 @@
 Um die vorgefertigte Umgebung zu nutzen, die wir auf GitHub Codespaces bereitstellen, klicke unten auf den Button „Open in GitHub Codespaces". Für andere Optionen siehe [Umgebungsoptionen](../../envsetup/index.md).
 
 Wir empfehlen, die Trainingsumgebung in einem neuen Browser-Tab oder -Fenster zu öffnen (verwende Rechtsklick, Strg+Klick oder Cmd+Klick, je nach deinem Gerät), damit du diese Anleitung parallel zur ladenden Umgebung lesen kannst.
-Du musst diese Anleitung während des Kurses geöffnet lassen.
+Du musst diese Anleitung während des Kurses geöffnet halten.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 

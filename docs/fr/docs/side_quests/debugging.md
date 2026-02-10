@@ -595,7 +595,7 @@ process PROCESS_FILES {
     script:
     """
     prefix="${sample_name}_output"
-    echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+    echo "Processing ${sample_name}" > ${prefix}.txt  # ERREUR : ${prefix} est une syntaxe Groovy, pas Bash
     """
 }
 ```
@@ -621,7 +621,7 @@ Si vous voulez utiliser une variable Bash, vous devez échapper le signe dollar 
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > \${prefix}.txt  # Fixed: Escaped the dollar sign
+        echo "Processing ${sample_name}" > \${prefix}.txt  # Corrigé : Échappement du signe dollar
         """
     }
 
@@ -646,7 +646,7 @@ Si vous voulez utiliser une variable Bash, vous devez échapper le signe dollar 
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+        echo "Processing ${sample_name}" > ${prefix}.txt  # ERREUR : ${prefix} est une syntaxe Groovy, pas Bash
         """
     }
     ```
@@ -1008,7 +1008,7 @@ nextflow run exhausted.nf
 
 ??? success "Sortie de la commande"
 
-```console title="Exhausted channel output"
+```console title="Sortie du canal épuisé"
  N E X T F L O W   ~  version 25.10.2
 
 Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
@@ -1223,7 +1223,7 @@ Vous pouvez voir que nous générons un canal composé de tuples : `['sample1', 
 
 Pour corriger cela, si le processus nécessite les deux entrées, nous pourrions ajuster le processus pour accepter un tuple :
 
-=== "Option 1: Accepter un tuple dans le processus"
+=== "Option 1 : Accepter un tuple dans le processus"
 
     === "Après"
 
@@ -1285,7 +1285,7 @@ Pour corriger cela, si le processus nécessite les deux entrées, nous pourrions
         }
         ```
 
-=== "Option 2: Extraire le premier élément"
+=== "Option 2 : Extraire le premier élément"
 
     === "Après"
 
@@ -1662,7 +1662,7 @@ nextflow run missing_software.nf -profile docker
     [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-!!! note
+!!! note "Note"
 
     Pour en savoir plus sur l'utilisation des conteneurs par Nextflow, voir [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
 
@@ -2005,7 +2005,7 @@ Examinons `bad_channel_shape_viewed_debug.nf` pour voir comment la directive `de
 
 ```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
 process PROCESS_FILES {
-    debug true  // Enable real-time output
+    debug true  // Active la sortie en temps réel
 
     input:
     val sample_name
@@ -2031,7 +2031,7 @@ Parfois, vous voulez détecter des problèmes avant que des processus ne s'exéc
 
 Le mode preview vous permet de tester la logique du workflow sans exécuter de commandes. Cela peut être très utile pour vérifier rapidement la structure de votre workflow et s'assurer que les processus sont correctement connectés sans exécuter de commandes réelles.
 
-!!! note
+!!! note "Note"
 
     Si vous avez corrigé `bad_syntax.nf` plus tôt, réintroduisez l'erreur de syntaxe en supprimant l'accolade fermante après le bloc script avant d'exécuter cette commande.
 
@@ -2122,7 +2122,7 @@ nextflow run missing_software_with_stub.nf -stub-run
 
 Examinons `missing_software_with_stub.nf` :
 
-```groovy title="missing_software.nf (with stub)" hl_lines="16-19" linenums="3"
+```groovy title="missing_software.nf (avec stub)" hl_lines="16-19" linenums="3"
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -2208,14 +2208,14 @@ Cette méthodologie combine tous les outils que nous avons couverts en un workfl
 
 Pour rendre cette approche systématique encore plus efficace, vous pouvez créer une configuration de débogage dédiée qui active automatiquement tous les outils dont vous avez besoin :
 
-```groovy title="nextflow.config (debug profile)" linenums="1"
+```groovy title="nextflow.config (profil debug)" linenums="1"
 profiles {
     debug {
         process {
             debug = true
             cleanup = false
 
-            // Conservative resources for debugging
+            // Ressources conservatrices pour le débogage
             maxForks = 1
             memory = '2.GB'
             cpus = 1
@@ -2236,7 +2236,7 @@ Ce profil active la sortie en temps réel, préserve les répertoires de travail
 
 Il est maintenant temps de mettre en pratique l'approche systématique de débogage. Le workflow `buggy_workflow.nf` contient plusieurs erreurs courantes qui représentent les types de problèmes que vous rencontrerez dans le développement réel.
 
-!!! exercise
+!!! exercise "Exercice"
 
     Utilisez l'approche systématique de débogage pour identifier et corriger toutes les erreurs dans `buggy_workflow.nf`. Ce workflow tente de traiter des données d'échantillons à partir d'un fichier CSV mais contient plusieurs bugs intentionnels représentant des scénarios de débogage courants.
 
@@ -2299,7 +2299,7 @@ Il est maintenant temps de mettre en pratique l'approche systématique de débog
     nextflow run buggy_workflow.nf -resume
     ```
 
-    ??? solution
+    ??? solution "Solution"
         Le `buggy_workflow.nf` contient 9 ou 10 erreurs distinctes (selon la façon dont vous comptez) couvrant toutes les catégories principales de débogage. Voici une analyse systématique de chaque erreur et comment la corriger
 
         Commençons par les erreurs de syntaxe :
@@ -2427,18 +2427,18 @@ Il est maintenant temps de mettre en pratique l'approche systématique de débog
         #!/usr/bin/env nextflow
 
         /*
-        * Buggy workflow for debugging exercises
-        * This workflow contains several intentional bugs for learning purposes
+        * Workflow bugué pour les exercices de débogage
+        * Ce workflow contient plusieurs bugs intentionnels à des fins d'apprentissage
         */
 
         params{
-            // Parameters with missing validation
+            // Paramètres avec validation manquante
             input: Path = 'data/sample_data.csv'
             output: String = 'results'
         }
 
         /*
-        * Process with input/output mismatch
+        * Processus avec décalage entrée/sortie
         */
         process processFiles {
             publishDir "${params.output}/processed", mode: 'copy'
@@ -2457,7 +2457,7 @@ Il est maintenant temps de mettre en pratique l'approche systématique de débog
         }
 
         /*
-        * Process with resource issues
+        * Processus avec problèmes de ressources
         */
         process heavyProcess {
             publishDir "${params.output}/heavy", mode: 'copy'
@@ -2472,7 +2472,7 @@ Il est maintenant temps de mettre en pratique l'approche systématique de débog
 
             script:
             """
-            # Simulate heavy computation
+            # Simule un calcul lourd
             for i in {1..1000000}; do
                 echo "Heavy computation \$i for ${sample_id}"
             done > ${sample_id}_heavy.txt
@@ -2480,7 +2480,7 @@ Il est maintenant temps de mettre en pratique l'approche systématique de débog
         }
 
         /*
-        * Process with file handling issues
+        * Processus avec problèmes de gestion de fichiers
         */
         process handleFiles {
             publishDir "${params.output}/files", mode: 'copy'
@@ -2500,11 +2500,11 @@ Il est maintenant temps de mettre en pratique l'approche systématique de débog
         }
 
         /*
-        * Main workflow with channel issues
+        * Workflow principal avec problèmes de canaux
         */
         workflow {
 
-            // Channel with incorrect usage
+            // Canal avec utilisation incorrecte
             input_ch = channel
                 .fromPath(params.input)
                 .splitCsv(header: true)

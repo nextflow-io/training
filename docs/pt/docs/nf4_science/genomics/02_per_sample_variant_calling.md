@@ -1,5 +1,7 @@
 # Parte 2: Chamada de variantes por amostra
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Na Parte 1, você testou os comandos do Samtools e do GATK manualmente em seus respectivos contêineres.
 Agora vamos envolver esses mesmos comandos em um fluxo de trabalho Nextflow.
 
@@ -304,7 +306,7 @@ Vamos adicionar um alvo para `bam_index` que publica em um subdiretório `bam/`.
     }
     ```
 
-!!! note
+!!! note "Nota"
 
     Por padrão, o Nextflow publica arquivos de saída como links simbólicos, o que evita duplicação desnecessária.
     Embora os arquivos de dados que estamos usando aqui sejam muito pequenos, em genômica eles podem ficar muito grandes.
@@ -333,7 +335,7 @@ nextflow run genomics.nf -profile test
 
 Você pode verificar se o arquivo de índice foi gerado corretamente olhando no diretório de trabalho ou no diretório de resultados.
 
-??? abstract "Conteúdo do diretório de trabalho"
+??? abstract "Conteúdo do diretório work"
 
     ```console
     work/2a/e695367b2f60df09cf826b07192dc3
@@ -614,7 +616,7 @@ Adicione a chamada do processo no corpo do fluxo de trabalho, sob `main:`:
 
 Você deve reconhecer a sintaxe `*.out` da série de treinamento Hello Nextflow; estamos dizendo ao Nextflow para pegar a saída do canal por `SAMTOOLS_INDEX` e conectá-la à chamada do processo `GATK_HAPLOTYPECALLER`.
 
-!!! note
+!!! note "Nota"
 
     Observe que as entradas são fornecidas exatamente na mesma ordem na chamada do processo como estão listadas no bloco de entrada do processo.
     No Nextflow, as entradas são posicionais, o que significa que você _deve_ seguir a mesma ordem; e, é claro, deve haver o mesmo número de elementos.
@@ -931,7 +933,7 @@ Mais uma vez, isso pode ter sucesso ou falhar. Aqui está como a saída das duas
 As três primeiras linhas correspondem ao canal de entrada e a segunda, ao canal de saída.
 Você pode ver que os arquivos BAM e os arquivos de índice para as três amostras não estão listados na mesma ordem!
 
-!!! note
+!!! note "Nota"
 
     Quando você chama um processo Nextflow em um canal contendo vários elementos, o Nextflow tentará paralelizar a execução o máximo possível e coletará saídas em qualquer ordem em que fiquem disponíveis.
     A consequência é que as saídas correspondentes podem ser coletadas em uma ordem diferente da ordem em que as entradas originais foram fornecidas.
@@ -941,7 +943,7 @@ Mas isso não é garantido, e é por isso que às vezes (embora nem sempre) os a
 
 Para corrigir isso, precisamos garantir que os arquivos BAM e seus arquivos de índice viajem juntos pelos canais.
 
-!!! tip
+!!! tip "Dica"
 
     As instruções `view()` no código do fluxo de trabalho não fazem nada, então não é um problema deixá-las.
     No entanto, elas irão desordenar sua saída do console, então recomendamos removê-las quando você terminar de solucionar o problema.
@@ -954,7 +956,7 @@ A correção é empacotar cada arquivo BAM com seu índice em uma tupla, depois 
 
 A maneira mais simples de garantir que um arquivo BAM e seu índice permaneçam intimamente associados é empacotá-los juntos em uma tupla saindo da tarefa de índice.
 
-!!! note
+!!! note "Nota"
 
     Uma **tupla** é uma lista finita e ordenada de elementos que é comumente usada para retornar vários valores de uma função. As tuplas são particularmente úteis para passar várias entradas ou saídas entre processos, preservando sua associação e ordem.
 
@@ -1149,7 +1151,7 @@ Já fizemos um arquivo de texto listando os caminhos dos arquivos de entrada, ch
 
 Como você pode ver, listamos um caminho de arquivo por linha, e eles são caminhos absolutos.
 
-!!! note
+!!! note "Nota"
 
     Os arquivos que estamos usando aqui estão apenas no sistema de arquivos local do seu GitHub Codespaces, mas também poderíamos apontar para arquivos no armazenamento em nuvem.
     Se você não estiver usando o ambiente Codespaces fornecido, pode ser necessário adaptar os caminhos dos arquivos para corresponder à sua configuração local.
@@ -1232,7 +1234,7 @@ Podemos fazer isso usando o mesmo padrão que usamos na [Parte 2 do Hello Nextfl
 Tecnicamente poderíamos fazer isso mais simplesmente usando o operador [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext), já que nosso arquivo de entrada atualmente contém apenas caminhos de arquivo.
 No entanto, ao usar o operador mais versátil `splitCsv` (suplementado por `map`), podemos tornar nosso fluxo de trabalho à prova de futuro caso decidamos adicionar metadados ao arquivo contendo caminhos de arquivo.
 
-!!! tip
+!!! tip "Dica"
 
     Se você não tem confiança de que entende o que os operadores estão fazendo aqui, esta é outra ótima oportunidade para usar o operador `.view()` para ver como o conteúdo do canal se parece antes e depois de aplicá-los.
 

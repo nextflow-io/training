@@ -18,7 +18,7 @@ Questi sono corsi che dimostrano come applicare i concetti e i componenti presen
 
     Questo è un corso per ricercatori che desiderano imparare a sviluppare le proprie pipeline genomiche. Il corso utilizza un caso d'uso di variant calling per dimostrare come sviluppare una pipeline genomica semplice ma funzionale.
 
-    [Inizi la formazione Nextflow per la Genomica :material-arrow-right:](genomics/){ .md-button .md-button--primary }
+    [Iniziate la formazione Nextflow per la Genomica :material-arrow-right:](genomics/){ .md-button .md-button--primary }
 
 !!! exercise "Nextflow per RNAseq"
 
@@ -28,7 +28,7 @@ Questi sono corsi che dimostrano come applicare i concetti e i componenti presen
 
     Questo è un corso per ricercatori che desiderano imparare a sviluppare le proprie pipeline RNAseq. Il corso utilizza un caso d'uso di elaborazione RNAseq bulk per dimostrare come sviluppare una pipeline RNAseq semplice ma funzionale.
 
-    [Inizi la formazione Nextflow per RNAseq :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
+    [Iniziate la formazione Nextflow per RNAseq :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
 
 !!! exercise "Nextflow per il Bioimaging"
 
@@ -38,6 +38,6 @@ Questi sono corsi che dimostrano come applicare i concetti e i componenti presen
 
     Questo è un corso per ricercatori che desiderano imparare a eseguire e configurare pipeline di bioimaging. Il corso utilizza nf-core/molkart per dimostrare i pattern di utilizzo essenziali di Nextflow applicabili a qualsiasi pipeline.
 
-    [Inizi la formazione Nextflow per il Bioimaging :material-arrow-right:](imaging/){ .md-button .md-button--primary }
+    [Iniziate la formazione Nextflow per il Bioimaging :material-arrow-right:](imaging/){ .md-button .md-button--primary }
 
-Ci faccia sapere quali altri domini e casi d'uso vorrebbe vedere trattati qui pubblicando nella [sezione Training](https://community.seqera.io/c/training/) del forum della comunità.
+Fateci sapere quali altri domini e casi d'uso vorreste vedere trattati qui pubblicando nella [sezione Training](https://community.seqera.io/c/training/) del forum della comunità.

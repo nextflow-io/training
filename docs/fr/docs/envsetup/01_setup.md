@@ -16,7 +16,7 @@ Vous pouvez créer un compte GitHub gratuit depuis la [page d'accueil de GitHub]
 
 ## Lancement de votre GitHub Codespace
 
-Une fois connecté à GitHub, ouvrez ce lien dans votre navigateur pour ouvrir l'environnement de formation Nextflow : <https://codespaces.new/nextflow-io/training?quickstart=1&ref=master>
+Une fois connecté·e à GitHub, ouvrez ce lien dans votre navigateur pour ouvrir l'environnement de formation Nextflow : <https://codespaces.new/nextflow-io/training?quickstart=1&ref=master>
 
 Vous pouvez également cliquer sur le bouton ci-dessous, qui est répété dans chaque cours de formation (généralement sur la page d'orientation).
 
@@ -47,7 +47,7 @@ Cependant, il est possible de personnaliser l'environnement en cliquant sur le b
 
     Cela vous permet de personnaliser la machine virtuelle que vous utiliserez pour suivre la formation.
 
-    Utiliser une machine avec plus de cœurs vous permet de mieux tirer parti de la capacité de Nextflow à paralléliser l'exécution des flux de travail.
+    Utiliser une machine avec plus de cœurs vous permet de mieux tirer parti de la capacité de Nextflow à paralléliser l'exécution des workflows.
     Cependant, cela consommera plus rapidement votre quota gratuit, nous ne recommandons donc pas de modifier ce paramètre à moins que cela ne soit conseillé dans les instructions du cours que vous prévoyez de suivre.
 
     Voir « Quotas GitHub Codespaces » ci-dessous pour plus de détails sur les quotas.
@@ -77,7 +77,7 @@ Vous pouvez ajuster les proportions relatives des volets de la fenêtre comme vo
 
 ### Reprendre une session
 
-Une fois que vous avez créé un environnement, vous pouvez facilement le reprendre ou le redémarrer et continuer là où vous vous étiez arrêté.
+Une fois que vous avez créé un environnement, vous pouvez facilement le reprendre ou le redémarrer et continuer là où vous vous étiez arrêté·e.
 Votre environnement expirera après 30 minutes d'inactivité et sauvegardera vos modifications pendant 2 semaines maximum.
 
 Vous pouvez rouvrir un environnement depuis <https://github.com/codespaces/>.

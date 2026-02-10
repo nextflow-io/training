@@ -1,6 +1,6 @@
 # İş Akışlarında Hata Ayıklama
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Hata ayıklama, saatlerce süren hayal kırıklığından sizi kurtarabilecek ve sizi daha etkili bir Nextflow geliştiricisi haline getirebilecek kritik bir beceridir. Kariyeriniz boyunca, özellikle yeni başlarken, iş akışlarınızı oluştururken ve sürdürürken hatalarla karşılaşacaksınız. Sistematik hata ayıklama yaklaşımlarını öğrenmek, sorunları hızla belirlemenize ve çözmenize yardımcı olacaktır.
 
@@ -167,7 +167,7 @@ process PROCESS_FILES {
     """
     echo "Processing ${sample_name}" > ${sample_name}_output.txt
     """
-// Missing closing brace for the process
+// Eksik kapanış süslü parantezi
 
 workflow {
 
@@ -209,7 +209,7 @@ Yorumu eksik kapatan parantez ile değiştirin:
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    }  // Add the missing closing brace
+    }  // Eksik kapanış süslü parantezini ekleyin
 
     workflow {
 
@@ -237,7 +237,7 @@ Yorumu eksik kapatan parantez ile değiştirin:
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    // Missing closing brace for the process
+    // Eksik kapanış süslü parantezi
 
     workflow {
 
@@ -306,7 +306,7 @@ Hata "Geçersiz process tanımı" belirtiyor ve sorunun etrafındaki bağlamı g
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    inputs:  // ERROR: Should be 'input' not 'inputs'
+    inputs:  // HATA: 'input' olmalı, 'inputs' değil
     val sample_name
 
     output:
@@ -342,7 +342,7 @@ Hata bağlamındaki 4. satıra bakıldığında, sorunu tespit edebiliriz: doğr
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        input:  // Fixed: Changed 'inputs' to 'input'
+        input:  // Düzeltildi: 'inputs' yerine 'input' kullanıldı
         val sample_name
 
         output:
@@ -370,7 +370,7 @@ Hata bağlamındaki 4. satıra bakıldığında, sorunu tespit edebiliriz: doğr
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        inputs:  // ERROR: Should be 'input' not 'inputs'
+        inputs:  // HATA: 'input' olmalı, 'inputs' değil
         val sample_name
 
         output:
@@ -454,13 +454,13 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Script'ten önce Groovy kodunda değişkenleri tanımlayın
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
     """
     echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // HATA: undefined_var tanımlı değil
     """
 }
 
@@ -489,13 +489,13 @@ Hata mesajı değişkenin script şablonunda tanınmadığını belirtir ve işt
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Script'ten önce Groovy kodunda değişkenleri tanımlayın
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // Removed the line with undefined_var
+        """  // undefined_var içeren satır kaldırıldı
     }
 
     workflow {
@@ -517,13 +517,13 @@ Hata mesajı değişkenin script şablonunda tanınmadığını belirtir ve işt
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Script'ten önce Groovy kodunda değişkenleri tanımlayın
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // HATA: undefined_var tanımlı değil
         """
     }
 
@@ -595,7 +595,7 @@ process PROCESS_FILES {
     script:
     """
     prefix="${sample_name}_output"
-    echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+    echo "Processing ${sample_name}" > ${prefix}.txt  # HATA: ${prefix} Groovy sözdizimi, Bash değil
     """
 }
 ```
@@ -621,7 +621,7 @@ Bash değişkeni kullanmak istiyorsanız, dolar işaretini şu şekilde kaçırm
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > \${prefix}.txt  # Fixed: Escaped the dollar sign
+        echo "Processing ${sample_name}" > \${prefix}.txt  # Düzeltildi: Dolar işareti kaçırıldı
         """
     }
 
@@ -646,7 +646,7 @@ Bash değişkeni kullanmak istiyorsanız, dolar işaretini şu şekilde kaçırm
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+        echo "Processing ${sample_name}" > ${prefix}.txt  # HATA: ${prefix} Groovy sözdizimi, Bash değil
         """
     }
     ```
@@ -722,7 +722,7 @@ Hataya neyin neden olduğunu görmek için `badpractice_syntax.nf` dosyasını i
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // HATA: Kanal workflow dışında tanımlandı
 
 process PROCESS_FILES {
     input:
@@ -732,7 +732,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Script'ten önce Groovy kodunda değişkenleri tanımlayın
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -767,7 +767,7 @@ Kanal tanımını workflow bloğunun içine taşıyın:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Script'ten önce Groovy kodunda değişkenleri tanımlayın
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -777,7 +777,7 @@ Kanal tanımını workflow bloğunun içine taşıyın:
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Workflow bloğunun içine taşındı
         PROCESS_FILES(input_ch)
     }
     ```
@@ -787,7 +787,7 @@ Kanal tanımını workflow bloğunun içine taşıyın:
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // HATA: Kanal workflow dışında tanımlandı
 
     process PROCESS_FILES {
         input:
@@ -797,7 +797,7 @@ Kanal tanımını workflow bloğunun içine taşıyın:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Script'ten önce Groovy kodunda değişkenleri tanımlayın
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -889,7 +889,7 @@ Hata mesajı, çağrının 1 argüman beklediğini ancak 2 aldığını açıkç
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process expects only 1 input
+        val sample_name  // Process yalnızca 1 girdi bekliyor
 
     output:
         path "${sample_name}_output.txt"
@@ -902,11 +902,11 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create two separate channels
+    // İki ayrı kanal oluştur
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-    // ERROR: Passing 2 channels but process expects only 1
+    // HATA: 2 kanal geçiriliyor ancak process yalnızca 1 bekliyor
     PROCESS_FILES(samples_ch, files_ch)
 }
 ```
@@ -926,7 +926,7 @@ Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç du
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Process yalnızca 1 girdi bekliyor
 
         output:
             path "${sample_name}_output.txt"
@@ -939,11 +939,11 @@ Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç du
 
     workflow {
 
-        // Create two separate channels
+        // İki ayrı kanal oluştur
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // Fixed: Pass only the channel the process expects
+        // Düzeltildi: Yalnızca process'in beklediği kanalı geçir
         PROCESS_FILES(samples_ch)
     }
     ```
@@ -955,7 +955,7 @@ Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç du
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Process yalnızca 1 girdi bekliyor
 
         output:
             path "${sample_name}_output.txt"
@@ -968,11 +968,11 @@ Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç du
 
     workflow {
 
-        // Create two separate channels
+        // İki ayrı kanal oluştur
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ERROR: Passing 2 channels but process expects only 1
+        // HATA: 2 kanal geçiriliyor ancak process yalnızca 1 bekliyor
         PROCESS_FILES(samples_ch, files_ch)
     }
     ```
@@ -1035,7 +1035,7 @@ process PROCESS_FILES {
     path "${output_prefix}.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Script'ten önce Groovy kodunda değişkenleri tanımlayın
     output_prefix = "${reference}_${sample_name}"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -1067,7 +1067,7 @@ Kaç dosyanın etkilendiğine bağlı olarak bunu ele almanın birkaç yolu vard
 
 ```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    reference_ch = channel.value('baseline_reference')  // Value kanalı yeniden kullanılabilir
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1078,7 +1078,7 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').first()  // Value kanalına dönüştür
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1089,7 +1089,7 @@ workflow {
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').collect()  // Value kanalına dönüştür
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1102,7 +1102,7 @@ workflow {
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
-    combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
+    combined_ch = reference_ch.combine(input_ch)  // Kartezyen çarpım oluşturur
 
     PROCESS_FILES(combined_ch)
 }
@@ -1194,7 +1194,7 @@ Hata mesajındaki köşeli parantezler burada ipucunu sağlar - process tuple'ı
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Expects single value, gets tuple
+        val sample_name  // Tek değer bekliyor, tuple alıyor
 
     output:
         path "${sample_name}_output.txt"
@@ -1207,7 +1207,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Kanal tuple'lar yayınlıyor, ancak process tek değerler bekliyor
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
@@ -1232,7 +1232,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), val(file_name)  // Fixed: Accept tuple
+                tuple val(sample_name), val(file_name)  // Düzeltildi: Tuple kabul et
 
             output:
                 path "${sample_name}_output.txt"
@@ -1245,7 +1245,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Kanal tuple'lar yayınlıyor, ancak process tek değerler bekliyor
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1262,7 +1262,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
 
         process PROCESS_FILES {
             input:
-                val sample_name  // Expects single value, gets tuple
+                val sample_name  // Tek değer bekliyor, tuple alıyor
 
             output:
                 path "${sample_name}_output.txt"
@@ -1275,7 +1275,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Kanal tuple'lar yayınlıyor, ancak process tek değerler bekliyor
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1292,13 +1292,13 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Kanal tuple'lar yayınlıyor, ancak process tek değerler bekliyor
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
             )
-            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+            PROCESS_FILES(input_ch.map { it[0] })  // Düzeltildi: İlk öğeyi çıkar
         }
         ```
 
@@ -1307,7 +1307,7 @@ Bunu düzeltmek için, process her iki girdiyi de gerektiriyorsa process'i bir t
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Kanal tuple'lar yayınlıyor, ancak process tek değerler bekliyor
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1374,15 +1374,15 @@ nextflow run bad_channel_shape_viewed.nf
 ```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Kanal tuple'lar yayınlıyor, ancak process tek değerler bekliyor
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Show original channel content
-    .map { tuple -> tuple[0] }        // Transform: Extract first element
-    .view { "After mapping: $it" }    // Debug: Show transformed channel content
+    .view { "Channel content: $it" }  // Hata ayıklama: Orijinal kanal içeriğini göster
+    .map { tuple -> tuple[0] }        // Dönüştürme: İlk öğeyi çıkar
+    .view { "After mapping: $it" }    // Hata ayıklama: Dönüştürülmüş kanal içeriğini göster
 
     PROCESS_FILES(input_ch)
 }
@@ -1395,7 +1395,7 @@ Gelecekte kanal içeriğini anlamak için `.view()` işlemlerini aşırı kullan
 ```groovy title="bad_channel_shape_viewed.nf (with comments)" linenums="16" hl_lines="8 9"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Kanal tuple'lar yayınlıyor, ancak process tek değerler bekliyor
     input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
@@ -1500,11 +1500,11 @@ process PROCESS_FILES {
     val sample_name
 
     output:
-    path "${sample_name}.txt"  // Expects: sample3.txt
+    path "${sample_name}.txt"  // Bekliyor: sample3.txt
 
     script:
     """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Oluşturuyor: sample3_output.txt
     """
 }
 ```
@@ -1532,7 +1532,7 @@ Bu örnekte bu, `output:` tanımımızın aksine çıktı dosya adına bir `_out
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"  // Fixed: Match the script output
+        path "${sample_name}_output.txt"  // Düzeltildi: Script çıktısıyla eşleştirildi
 
         script:
         """
@@ -1549,11 +1549,11 @@ Bu örnekte bu, `output:` tanımımızın aksine çıktı dosya adına bir `_out
         val sample_name
 
         output:
-        path "${sample_name}.txt"  // Expects: sample3.txt
+        path "${sample_name}.txt"  // Bekliyor: sample3.txt
 
         script:
         """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Oluşturuyor: sample3_output.txt
         """
     }
     ```
@@ -1662,7 +1662,7 @@ nextflow run missing_software.nf -profile docker
     [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-!!! note
+!!! note "Not"
 
     Nextflow'un container'ları nasıl kullandığı hakkında daha fazla bilgi edinmek için [Hello Nextflow](../hello_nextflow/05_hello_containers.md) bölümüne bakın
 
@@ -2031,7 +2031,7 @@ Bazen herhangi bir process çalışmadan önce sorunları yakalamak istersiniz. 
 
 Önizleme modu, komutları çalıştırmadan iş akışı mantığını test etmenizi sağlar. Bu, iş akışınızın yapısını hızlıca kontrol etmek ve gerçek komutları çalıştırmadan process'lerin doğru şekilde bağlandığından emin olmak için oldukça faydalı olabilir.
 
-!!! note
+!!! note "Not"
 
     Daha önce `bad_syntax.nf` dosyasını düzelttiyseniz, bu komutu çalıştırmadan önce script bloğundan sonra kapanış süslü parantezini kaldırarak sözdizimi hatasını yeniden ekleyin.
 
@@ -2236,7 +2236,7 @@ Bu profil gerçek zamanlı çıktıyı etkinleştirir, çalışma dizinlerini ko
 
 Şimdi sistematik hata ayıklama yaklaşımını pratiğe koyma zamanı. `buggy_workflow.nf` iş akışı, gerçek dünya geliştirmede karşılaşacağınız hata türlerini temsil eden birkaç yaygın hata içerir.
 
-!!! exercise
+!!! exercise "Alıştırma"
 
     `buggy_workflow.nf` dosyasındaki tüm hataları belirlemek ve düzeltmek için sistematik hata ayıklama yaklaşımını kullanın. Bu iş akışı, bir CSV dosyasından örnek verileri işlemeye çalışır ancak yaygın hata ayıklama senaryolarını temsil eden birden fazla kasıtlı hata içerir.
 
@@ -2299,7 +2299,7 @@ Bu profil gerçek zamanlı çıktıyı etkinleştirir, çalışma dizinlerini ko
     nextflow run buggy_workflow.nf -resume
     ```
 
-    ??? solution
+    ??? solution "Çözüm"
         `buggy_workflow.nf` dosyası, tüm önemli hata ayıklama kategorilerini kapsayan 9 veya 10 farklı hata içerir (nasıl saydığınıza bağlı). Her hatanın ve nasıl düzeltileceğinin sistematik bir dökümü aşağıdadır
 
         Sözdizimi hatalarıyla başlayalım:

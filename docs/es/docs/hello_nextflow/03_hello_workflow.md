@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -109,7 +109,7 @@ Para ese fin, necesitamos hacer tres cosas:
 
 Para hacer la conversión de los saludos a mayúsculas, vamos a usar una herramienta clásica de UNIX llamada `tr` para 'reemplazo de texto', con la siguiente sintaxis:
 
-```bash title="Sintaxis"
+```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
 ```
 
@@ -1143,7 +1143,7 @@ Cuando esté listo, continúe con [**Parte 4: Hello Modules**](./04_hello_module
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Aprenda más: [1.4. Pasar la salida del primer proceso al segundo proceso](#14-pasar-la-salida-del-primer-proceso-al-segundo-proceso)
+Aprenda más: [1.4. Pasar la salida del primer proceso al segundo proceso](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1153,7 +1153,7 @@ Aprenda más: [1.4. Pasar la salida del primer proceso al segundo proceso](#14-p
 - [x] Dependencias de datos entre procesos
 - [ ] Orden aleatorio para ejecución paralela
 
-Aprenda más: [1.4. Pasar la salida del primer proceso al segundo proceso](#14-pasar-la-salida-del-primer-proceso-al-segundo-proceso)
+Aprenda más: [1.4. Pasar la salida del primer proceso al segundo proceso](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1172,7 +1172,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-Aprenda más: [2.4. Usar un operador para recopilar los saludos en una única entrada](#24-usar-un-operador-para-recopilar-los-saludos-en-una-unica-entrada)
+Aprenda más: [2.4. Usar un operador para recopilar los saludos en una única entrada](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1182,7 +1182,7 @@ Aprenda más: [2.4. Usar un operador para recopilar los saludos en una única en
 - [x] Cuando un proceso downstream necesita todos los elementos de un proceso upstream
 - [ ] Cuando quiere dividir datos a través de múltiples procesos
 
-Aprenda más: [2.4. Usar un operador para recopilar los saludos en una única entrada](#24-usar-un-operador-para-recopilar-los-saludos-en-una-unica-entrada)
+Aprenda más: [2.4. Usar un operador para recopilar los saludos en una única entrada](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1192,7 +1192,7 @@ Aprenda más: [2.4. Usar un operador para recopilar los saludos en una única en
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-Aprenda más: [4.1.2. Emitir el archivo de reporte y nombrar las salidas](#412-emitir-el-archivo-de-reporte-y-nombrar-las-salidas)
+Aprenda más: [4.1.2. Emitir el archivo de reporte y nombrar las salidas](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1202,7 +1202,7 @@ Aprenda más: [4.1.2. Emitir el archivo de reporte y nombrar las salidas](#412-e
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-Aprenda más: [4.1.2. Emitir el archivo de reporte y nombrar las salidas](#412-emitir-el-archivo-de-reporte-y-nombrar-las-salidas)
+Aprenda más: [4.1.2. Emitir el archivo de reporte y nombrar las salidas](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1212,5 +1212,5 @@ Cuando proporciona múltiples entradas a un proceso, ¿qué debe ser verdad?
 - [x] El orden de las entradas debe coincidir con el orden definido en el bloque input
 - [ ] Solo se pueden proporcionar dos entradas a la vez
 
-Aprenda más: [3. Pasar parámetros adicionales a un proceso](#3-pasar-parametros-adicionales-a-un-proceso)
+Aprenda más: [3. Pasar parámetros adicionales a un proceso](#3-pass-more-than-one-input-to-a-process)
 </quiz>

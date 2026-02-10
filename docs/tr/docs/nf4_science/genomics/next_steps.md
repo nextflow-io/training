@@ -1,5 +1,7 @@
 # Kurs Özeti
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Nextflow for Genomics eğitim kursunu tamamladığınız için tebrikler! 🎉
 
 ## Yolculuğunuz
@@ -22,7 +24,8 @@ Bu uygulamalı kurs boyunca şunları nasıl yapacağınızı öğrendiniz:
 - İndeks dosyaları ve referans genom kaynakları gibi yardımcı dosyaları uygun şekilde işlemek
 - Örnek başına varyant çağırmayı paralelleştirmek için Nextflow'un veri akışı paradigmasından yararlanmak
 - İlgili kanal operatörlerini kullanarak çok örnekli birleşik çağırma uygulamak
-  Artık kendi çalışmanızda genomik analiz iş akışlarına Nextflow uygulamaya başlamak için donanımlısınız.
+
+Artık kendi çalışmanızda genomik analiz iş akışlarına Nextflow uygulamaya başlamak için donanımlısınız.
 
 ## Becerilerinizi geliştirmek için sonraki adımlar
 

@@ -115,7 +115,7 @@ tree -L 2 $NXF_HOME/assets/
 2 directories, 0 files
 ```
 
-!!! note
+!!! note "Uwaga"
 
     Pełna ścieżka może się różnić w Twoim systemie, jeśli nie używasz naszego środowiska szkoleniowego.
 
@@ -162,7 +162,7 @@ Wygodnie, każdy pipeline nf-core jest dostarczany z profilem testowym.
 Jest to minimalny zestaw ustawień konfiguracyjnych dla pipeline'a do uruchomienia z użyciem małego zestawu danych testowych hostowanego w repozytorium [nf-core/test-datasets](https://github.com/nf-core/test-datasets).
 To świetny sposób, aby szybko wypróbować pipeline na małą skalę.
 
-!!! note
+!!! note "Uwaga"
 
     System profili konfiguracyjnych Nextflow pozwala łatwo przełączać się między różnymi silnikami kontenerów lub środowiskami wykonawczymi.
     Aby uzyskać więcej szczegółów, zobacz [Hello Nextflow Część 6: Konfiguracja](../hello_nextflow/06_hello_config.md).
@@ -232,7 +232,7 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 
 Nazywa się to samplesheet i jest to najczęstsza forma wejścia do pipeline'ów nf-core.
 
-!!! note
+!!! note "Uwaga"
 
     Nie martw się, jeśli nie jesteś zaznajomiony z formatami i typami danych, nie jest to ważne dla tego, co następuje.
 
@@ -308,7 +308,7 @@ Jeśli Twoje wyjście pasuje do tego, gratulacje! Właśnie uruchomiłeś Swój 
 Zauważysz, że jest znacznie więcej wyjścia konsoli niż podczas uruchamiania podstawowego pipeline'a Nextflow.
 Jest nagłówek, który zawiera podsumowanie wersji pipeline'a, wejść i wyjść oraz kilku elementów konfiguracji.
 
-!!! note
+!!! note "Uwaga"
 
     Twoje wyjście pokaże różne znaczniki czasu, nazwy wykonań i ścieżki plików, ale ogólna struktura i wykonanie procesów powinny być podobne.
 
@@ -368,7 +368,7 @@ Na przykład plik `execution_timeline_*` pokazuje, jakie procesy zostały urucho
 
 ![raport osi czasu wykonania](./img/execution_timeline.png)
 
-!!! note
+!!! note "Uwaga"
 
     Tutaj zadania nie zostały uruchomione równolegle, ponieważ działamy na minimalistycznej maszynie w Github Codespaces.
     Aby zobaczyć ich równoległe uruchomienie, spróbuj zwiększyć alokację CPU Swojego codespace i limity zasobów w konfiguracji testowej.
@@ -447,7 +447,7 @@ Konkretnie, pipeline'y nf-core obficie wykorzystują subworkflow'y, tj. skrypty 
 
 To może brzmieć trochę abstrakcyjnie, więc spójrzmy, jak jest to używane w praktyce w pipeline'ie `nf-core/demo`.
 
-!!! note
+!!! note "Uwaga"
 
     Nie przejdziemy przez faktyczny kod opisujący _sposób_, w jaki te komponenty modułowe są połączone, ponieważ istnieje pewna dodatkowa złożoność związana z użyciem subworkflow'ów, która może być myląca. Zrozumienie tego nie jest konieczne na tym etapie szkolenia.
     Na razie skoncentrujemy się na ogólnej organizacji i logice.
@@ -463,7 +463,7 @@ Oto jak wyglądają relacje między odpowiednimi komponentami kodu dla pipeline'
 Istnieje tak zwany skrypt _punktu wejścia_ o nazwie `main.nf`, który działa jako wrapper dla dwóch rodzajów zagnieżdżonych workflow'ów: workflow'u zawierającego rzeczywistą logikę analizy, zlokalizowanego w `workflows/` i nazwanego `demo.nf`, oraz zestawu workflow'ów pomocniczych zlokalizowanych w `subworkflows/`.
 Workflow `demo.nf` wywołuje **moduły** zlokalizowane w `modules/`; zawierają one **procesy**, które wykonają rzeczywiste kroki analizy.
 
-!!! note
+!!! note "Uwaga"
 
     Subworkflow'y nie są ograniczone do funkcji pomocniczych i mogą wykorzystywać moduły procesów.
 
@@ -488,7 +488,7 @@ Omówimy odpowiednie różnice w następnej części tego kursu, gdy zajmiemy si
 
 Workflow `demo.nf` wywołuje **moduły** zlokalizowane w `modules/`, które przejrzymy w następnej kolejności.
 
-!!! note
+!!! note "Uwaga"
 
     Niektóre workflow'y analizy nf-core wyświetlają dodatkowe poziomy zagnieżdżenia poprzez wywoływanie subworkflow'ów niższego poziomu.
     Jest to głównie używane do opakowywania dwóch lub więcej modułów, które są powszechnie używane razem, w łatwe do ponownego użycia segmenty pipeline'a.
@@ -574,7 +574,7 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
 Jak zauważono powyżej, pipeline `nf-core/demo` nie zawiera żadnych subworkflow'ów specyficznych dla analizy, więc wszystkie subworkflow'y, które tutaj widzimy, są tak zwanymi workflow'ami 'pomocniczymi' lub 'użytkowymi', jak wskazuje prefiks `utils_` w ich nazwach.
 Te subworkflow'y to te, które produkują wymyślny nagłówek nf-core w wyjściu konsoli, między innymi funkcjami akcesoriów.
 
-!!! tip
+!!! tip "Wskazówka"
 
     Poza ich wzorcem nazewnictwa, inną wskazówką, że te subworkflow'y nie wykonują żadnej naprawdę związanej z analizą funkcji, jest to, że nie wywołują żadnych procesów w ogóle.
 
@@ -640,6 +640,6 @@ Wiesz, jakie są główne komponenty pipeline'a nf-core i jak kod jest zorganizo
 
 Zrób sobie przerwę! To było dużo. Gdy poczujesz się odświeżony i gotowy, przejdź do następnej sekcji, aby zastosować to, czego się nauczyłeś, do napisania pipeline'a kompatybilnego z nf-core.
 
-!!! tip
+!!! tip "Wskazówka"
 
     Jeśli chciałbyś dowiedzieć się, jak komponować workflow z subworkflow'ów przed przejściem do następnej części, sprawdź [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest.

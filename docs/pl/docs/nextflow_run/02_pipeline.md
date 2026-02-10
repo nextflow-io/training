@@ -73,7 +73,7 @@ Tak! Widzimy nowy katalog o nazwie `2a-inputs` z trzema plikami wyjściowymi o r
 
 Możesz otworzyć każdy z nich, aby upewnić się, że zawierają odpowiedni ciąg powitania.
 
-??? abstract "Zawartość plików"
+??? abstract "Zawartość pliku"
 
     ```console title="results/2a-inputs/Hello-output.txt"
     Hello
@@ -406,7 +406,7 @@ Niektóre pliki zostały zgrupowane w podkatalogu o nazwie `intermediates`, podc
 Te dwa to końcowe wyniki wieloetapowego workflow'u.
 Poświęć chwilę, aby spojrzeć na nazwy plików i sprawdzić ich zawartość, aby potwierdzić, że są takie, jakich oczekujesz.
 
-??? abstract "Zawartość plików"
+??? abstract "Zawartość pliku"
 
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
@@ -1057,7 +1057,7 @@ ls /
 
 Widzisz, że system plików wewnątrz kontenera jest inny niż system plików na Twoim systemie hosta.
 
-!!! tip "Wskazówka"
+!!! Tip "Wskazówka"
 
     Gdy uruchamiasz kontener, jest on domyślnie odizolowany od systemu hosta.
     To oznacza, że kontener nie może uzyskać dostępu do żadnych plików w systemie hosta, chyba że wyraźnie na to pozwolisz, określając, że chcesz zamontować wolumin jako część polecenia `docker run` używając następującej składni:
@@ -1143,7 +1143,7 @@ Gdy uruchamiamy pipeline, chcemy wskazać Nextflow, jakiego obrazu użyć w każ
 Dobra wiadomość: to dokładnie to, co Nextflow zrobi za nas.
 Musimy tylko określić kontener dla każdego procesu.
 
-Aby zademonstrować, jak to działa, stworzyliśmy kolejną wersję naszego workflow'u, która uruchamia `cowpy` na pliku zebranych powitań wyprodukowanych w trzecim kroku.
+Aby zademonstrować, jak to działa, stworzyliśmy kolejną wersję naszego workflow'a, która uruchamia `cowpy` na pliku zebranych powitań wyprodukowanych w trzecim kroku.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"

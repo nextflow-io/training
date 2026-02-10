@@ -306,7 +306,7 @@ O erro indica uma "Definição de processo inválida" e mostra o contexto em tor
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    inputs:  // ERROR: Should be 'input' not 'inputs'
+    inputs:  // ERRO: Deveria ser 'input' não 'inputs'
     val sample_name
 
     output:
@@ -460,7 +460,7 @@ process PROCESS_FILES {
 
     """
     echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERRO: undefined_var não definida
     """
 }
 
@@ -523,7 +523,7 @@ Se você receber um erro 'No such variable', pode corrigi-lo definindo a variáv
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERRO: undefined_var não definida
         """
     }
 
@@ -595,7 +595,7 @@ process PROCESS_FILES {
     script:
     """
     prefix="${sample_name}_output"
-    echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+    echo "Processing ${sample_name}" > ${prefix}.txt  # ERRO: ${prefix} é sintaxe Groovy, não Bash
     """
 }
 ```
@@ -621,7 +621,7 @@ Se você quiser usar uma variável Bash, deve escapar o cifrão assim:
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > \${prefix}.txt  # Fixed: Escaped the dollar sign
+        echo "Processing ${sample_name}" > \${prefix}.txt  # Corrigido: Escapou o cifrão
         """
     }
 
@@ -646,7 +646,7 @@ Se você quiser usar uma variável Bash, deve escapar o cifrão assim:
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+        echo "Processing ${sample_name}" > ${prefix}.txt  # ERRO: ${prefix} é sintaxe Groovy, não Bash
         """
     }
     ```
@@ -722,7 +722,7 @@ Vamos examinar `badpractice_syntax.nf` para ver o que está causando o erro:
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERRO: Canal definido fora do workflow
 
 process PROCESS_FILES {
     input:
@@ -787,7 +787,7 @@ Mova a definição do canal para dentro do bloco workflow:
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERRO: Canal definido fora do workflow
 
     process PROCESS_FILES {
         input:
@@ -906,7 +906,7 @@ workflow {
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-    // ERROR: Passing 2 channels but process expects only 1
+    // ERRO: Passando 2 canais mas o processo espera apenas 1
     PROCESS_FILES(samples_ch, files_ch)
 }
 ```
@@ -1008,7 +1008,7 @@ nextflow run exhausted.nf
 
 ??? success "Saída do comando"
 
-```console title="Exhausted channel output"
+```console title="Saída de canal esgotado"
  N E X T F L O W   ~  version 25.10.2
 
 Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
@@ -1074,7 +1074,7 @@ workflow {
 }
 ```
 
-**1b** Use o operador `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
+**1b** Use o operador `first()`:
 
 ```groovy title="exhausted.nf (corrigido - Opção 1b)" hl_lines="2" linenums="21"
 workflow {
@@ -1085,7 +1085,7 @@ workflow {
 }
 ```
 
-**1c.** Use o operador `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
+**1c.** Use o operador `collect()`:
 
 ```groovy title="exhausted.nf (corrigido - Opção 1c)" hl_lines="2" linenums="21"
 workflow {
@@ -1662,7 +1662,7 @@ nextflow run missing_software.nf -profile docker
     [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-!!! note
+!!! note "Nota"
 
     Para aprender mais sobre como o Nextflow usa contêineres, veja [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
 
@@ -1720,7 +1720,7 @@ Vamos examinar `bad_resources.nf`:
 ```groovy title="bad_resources.nf" linenums="3" hl_lines="3"
 process PROCESS_FILES {
 
-    time '1 ms'  // ERROR: Unrealistic time limit
+    time '1 ms'  // ERRO: Limite de tempo não realista
 
     input:
     val sample_name
@@ -1730,7 +1730,7 @@ process PROCESS_FILES {
 
     script:
     """
-    sleep 1  // Takes 1 second, but time limit is 1ms
+    sleep 1  // Leva 1 segundo, mas o limite de tempo é 1ms
     cowpy ${sample_name} > ${sample_name}_output.txt
     """
 }
@@ -1768,7 +1768,7 @@ Aumente o limite de tempo para um valor realista:
     ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
     process PROCESS_FILES {
 
-        time '1 ms'  // ERROR: Unrealistic time limit
+        time '1 ms'  // ERRO: Limite de tempo não realista
 
         input:
         val sample_name
@@ -1778,7 +1778,7 @@ Aumente o limite de tempo para um valor realista:
 
         script:
         """
-        sleep 1  // Takes 1 second, but time limit is 1ms
+        sleep 1  // Leva 1 segundo, mas o limite de tempo é 1ms
         cowpy ${sample_name} > ${sample_name}_output.txt
         """
     }
@@ -2005,7 +2005,7 @@ Vamos examinar `bad_channel_shape_viewed_debug.nf` para ver como a diretiva `deb
 
 ```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
 process PROCESS_FILES {
-    debug true  // Enable real-time output
+    debug true  // Habilita saída em tempo real
 
     input:
     val sample_name
@@ -2031,7 +2031,7 @@ A diretiva `debug` pode ser uma maneira rápida e conveniente de entender o ambi
 
 O modo preview permite testar a lógica do workflow sem executar comandos. Isso pode ser bastante útil para verificar rapidamente a estrutura do seu workflow e garantir que os processos estejam conectados corretamente sem executar nenhum comando real.
 
-!!! note
+!!! note "Nota"
 
     Se você corrigiu `bad_syntax.nf` anteriormente, reintroduza o erro de sintaxe removendo a chave de fechamento após o bloco de script antes de executar este comando.
 
@@ -2122,7 +2122,7 @@ nextflow run missing_software_with_stub.nf -stub-run
 
 Vamos examinar `missing_software_with_stub.nf`:
 
-```groovy title="missing_software.nf (with stub)" hl_lines="16-19" linenums="3"
+```groovy title="missing_software.nf (com stub)" hl_lines="16-19" linenums="3"
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -2208,14 +2208,14 @@ Esta metodologia combina todas as ferramentas que cobrimos em um workflow eficie
 
 Para tornar esta abordagem sistemática ainda mais eficiente, você pode criar uma configuração de depuração dedicada que habilita automaticamente todas as ferramentas necessárias:
 
-```groovy title="nextflow.config (debug profile)" linenums="1"
+```groovy title="nextflow.config (perfil debug)" linenums="1"
 profiles {
     debug {
         process {
             debug = true
             cleanup = false
 
-            // Conservative resources for debugging
+            // Recursos conservadores para depuração
             maxForks = 1
             memory = '2.GB'
             cpus = 1
@@ -2236,7 +2236,7 @@ Este perfil habilita saída em tempo real, preserva diretórios de trabalho e li
 
 Agora é hora de colocar a abordagem sistemática de depuração em prática. O workflow `buggy_workflow.nf` contém vários erros comuns que representam os tipos de problemas que você encontrará no desenvolvimento real.
 
-!!! exercise
+!!! exercise "Exercício"
 
     Use a abordagem sistemática de depuração para identificar e corrigir todos os erros em `buggy_workflow.nf`. Este workflow tenta processar dados de amostra de um arquivo CSV mas contém múltiplos bugs intencionais representando cenários comuns de depuração.
 
@@ -2299,7 +2299,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
     nextflow run buggy_workflow.nf -resume
     ```
 
-    ??? solution
+    ??? solution "Solução"
         O `buggy_workflow.nf` contém 9 ou 10 erros distintos (dependendo de como você conta) cobrindo todas as principais categorias de depuração. Aqui está uma análise sistemática de cada erro e como corrigi-lo
 
         Vamos começar com os erros de sintaxe:
@@ -2307,7 +2307,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         **Erro 1: Erro de Sintaxe - Vírgula Final**
         ```groovy linenums="21"
         output:
-            path "${sample_id}_result.txt",  // ERROR: Trailing comma
+            path "${sample_id}_result.txt",  // ERRO: Vírgula final
         ```
         **Correção:** Remova a vírgula final
         ```groovy linenums="21"
@@ -2322,7 +2322,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         echo "Processing: ${sample}"
         cat ${input_file} > ${sample}_result.txt
         """
-        // ERROR: Missing closing brace for processFiles process
+        // ERRO: Chave de fechamento ausente para o processo processFiles
         ```
         **Correção:** Adicione a chave de fechamento ausente
         ```groovy linenums="29"
@@ -2330,13 +2330,13 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         echo "Processing: ${sample_id}"
         cat ${input_file} > ${sample_id}_result.txt
         """
-        }  // Add missing closing brace
+        }  // Adiciona chave de fechamento ausente
         ```
 
         **Erro 3: Erro de Nome de Variável**
         ```groovy linenums="26"
-        echo "Processing: ${sample}"     // ERROR: should be sample_id
-        cat ${input_file} > ${sample}_result.txt  // ERROR: should be sample_id
+        echo "Processing: ${sample}"     // ERRO: deveria ser sample_id
+        cat ${input_file} > ${sample}_result.txt  // ERRO: deveria ser sample_id
         ```
         **Correção:** Use o nome correto da variável de entrada
         ```groovy linenums="26"
@@ -2346,7 +2346,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
 
         **Erro 4: Erro de Variável Indefinida**
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(sample_ids)  // ERROR: sample_ids undefined
+        heavy_ch = heavyProcess(sample_ids)  // ERRO: sample_ids indefinido
         ```
         **Correção:** Use o canal correto e extraia os sample IDs
         ```groovy linenums="87"
@@ -2357,7 +2357,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
 
         **Erro 5: Erro de Estrutura de Canal - Saída Map Errada**
         ```groovy linenums="83"
-        .map { row -> row.sample_id }  // ERROR: processFiles expects tuple
+        .map { row -> row.sample_id }  // ERRO: processFiles espera tupla
         ```
         **Correção:** Retorne a estrutura de tupla que processFiles espera
         ```groovy linenums="83"
@@ -2368,7 +2368,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
 
         **Erro 6: Estrutura de canal ruim para heavyProcess**
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch)  // ERROR: input_ch now has 2 elements per emission- heavyProcess only needs 1 (the first)
+        heavy_ch = heavyProcess(input_ch)  // ERRO: input_ch agora tem 2 elementos por emissão- heavyProcess só precisa de 1 (o primeiro)
         ```
         **Correção:** Use o canal correto e extraia os sample IDs
         ```groovy linenums="87"
@@ -2379,7 +2379,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
 
         **Erro 7: Erro de Escape de Variável Bash**
         ```groovy linenums="48"
-        echo "Heavy computation $i for ${sample_id}"  // ERROR: $i not escaped
+        echo "Heavy computation $i for ${sample_id}"  // ERRO: $i não escapado
         ```
         **Correção:** Escape a variável bash
         ```groovy linenums="48"
@@ -2390,7 +2390,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
 
         **Erro 8: Erro de Configuração de Recursos**
         ```groovy linenums="36"
-        time '1 ms'  // ERROR: Unrealistic time limit
+        time '1 ms'  // ERRO: Limite de tempo não realista
         ```
         **Correção:** Aumente para um limite de tempo realista
         ```groovy linenums="36"
@@ -2401,7 +2401,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
 
         **Erro 9: Incompatibilidade de Nome de Arquivo de Saída**
         ```groovy linenums="49"
-        done > ${sample_id}.txt  // ERROR: Wrong filename, should match output declaration
+        done > ${sample_id}.txt  // ERRO: Nome de arquivo errado, deveria corresponder à declaração de saída
         ```
         **Correção:** Corresponda à declaração de saída
         ```groovy linenums="49"
@@ -2412,7 +2412,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
 
         **Erro 10: Incompatibilidade de Nome de Arquivo de Saída**
         ```groovy linenums="88"
-        file_ch = channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
+        file_ch = channel.fromPath("*.txt") // Erro: tentando pegar entrada do pwd em vez de um processo
         handleFiles(file_ch)
         ```
         **Correção:** Pegue a saída do processo anterior
@@ -2427,18 +2427,18 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         #!/usr/bin/env nextflow
 
         /*
-        * Buggy workflow for debugging exercises
-        * This workflow contains several intentional bugs for learning purposes
+        * Workflow com bugs para exercícios de depuração
+        * Este workflow contém vários bugs intencionais para fins de aprendizado
         */
 
         params{
-            // Parameters with missing validation
+            // Parâmetros com validação ausente
             input: Path = 'data/sample_data.csv'
             output: String = 'results'
         }
 
         /*
-        * Process with input/output mismatch
+        * Processo com incompatibilidade de entrada/saída
         */
         process processFiles {
             publishDir "${params.output}/processed", mode: 'copy'
@@ -2457,7 +2457,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         }
 
         /*
-        * Process with resource issues
+        * Processo com problemas de recursos
         */
         process heavyProcess {
             publishDir "${params.output}/heavy", mode: 'copy'
@@ -2472,7 +2472,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
 
             script:
             """
-            # Simulate heavy computation
+            # Simula computação pesada
             for i in {1..1000000}; do
                 echo "Heavy computation \$i for ${sample_id}"
             done > ${sample_id}_heavy.txt
@@ -2480,7 +2480,7 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         }
 
         /*
-        * Process with file handling issues
+        * Processo com problemas de manipulação de arquivos
         */
         process handleFiles {
             publishDir "${params.output}/files", mode: 'copy'
@@ -2500,11 +2500,11 @@ Agora é hora de colocar a abordagem sistemática de depuração em prática. O 
         }
 
         /*
-        * Main workflow with channel issues
+        * Workflow principal com problemas de canal
         */
         workflow {
 
-            // Channel with incorrect usage
+            // Canal com uso incorreto
             input_ch = channel
                 .fromPath(params.input)
                 .splitCsv(header: true)

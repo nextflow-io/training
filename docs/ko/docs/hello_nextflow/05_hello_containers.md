@@ -25,7 +25,7 @@
 
 여기서는 [Docker](https://www.docker.com/get-started/)를 사용하여 이를 다루지만, Nextflow가 [여러 다른 컨테이너 기술](https://www.nextflow.io/docs/latest/container.html#)도 지원한다는 점을 유의하십시오.
 
-??? info "이 섹션부터 시작하는 방법"
+??? info "이 섹션을 시작하는 방법"
 
     이 섹션은 [Hello Nextflow](./index.md) 과정의 파트 1-4를 완료하고 완전히 작동하는 파이프라인이 있다고 가정합니다.
 
@@ -466,7 +466,7 @@ process cowpy {
 
 워크플로우 블록 위에 import 선언을 삽입하고 적절하게 채웁니다.
 
-=== "수정 후"
+=== "후"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
     // 모듈 포함
@@ -476,7 +476,7 @@ process cowpy {
     include { cowpy } from './modules/cowpy.nf'
     ```
 
-=== "수정 전"
+=== "전"
 
     ```groovy title="hello-containers.nf" linenums="3"
     // 모듈 포함
@@ -496,7 +496,7 @@ process cowpy {
 
 워크플로우 블록에서 다음 코드 변경을 수행하십시오:
 
-=== "수정 후"
+=== "후"
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
@@ -514,7 +514,7 @@ process cowpy {
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-=== "수정 전"
+=== "전"
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
@@ -536,7 +536,7 @@ process cowpy {
 
 이것은 기술적으로 선택 사항이지만 권장되는 관행이며, 그러는 동안 캐릭터의 기본값을 설정할 기회입니다.
 
-=== "수정 후"
+=== "후"
 
     ```groovy title="hello-containers.nf" linenums="9" hl_lines="7"
     /*
@@ -549,7 +549,7 @@ process cowpy {
     }
     ```
 
-=== "수정 전"
+=== "전"
 
     ```groovy title="hello-containers.nf" linenums="9"
     /*
@@ -571,7 +571,7 @@ process cowpy {
 
 `workflow 블록`에서 다음 코드 변경을 수행하십시오:
 
-=== "수정 후"
+=== "후"
 
     ```groovy title="hello-containers.nf" linenums="34" hl_lines="6"
         publish:
@@ -582,7 +582,7 @@ process cowpy {
         cowpy_art = cowpy.out
     ```
 
-=== "수정 전"
+=== "전"
 
     ```groovy title="hello-containers.nf" linenums="34"
         publish:
@@ -602,7 +602,7 @@ process cowpy {
 
 `output` 블록에서 다음 코드 변경을 수행하십시오:
 
-=== "수정 후"
+=== "후"
 
     ```groovy title="hello-containers.nf" linenums="42" hl_lines="3 7 11 15 18-21"
     output {
@@ -629,7 +629,7 @@ process cowpy {
     }
     ```
 
-=== "수정 전"
+=== "전"
 
     ```groovy title="hello-containers.nf" linenums="42" hl_lines="3 7 11 15"
     output {
@@ -728,7 +728,7 @@ nextflow run hello-containers.nf -resume
 
 다음과 같이 프로세스 정의에 `container` 지시문을 추가하도록 `cowpy.nf` 모듈을 편집하십시오:
 
-=== "수정 후"
+=== "후"
 
     ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="3"
     process cowpy {
@@ -749,7 +749,7 @@ nextflow run hello-containers.nf -resume
     }
     ```
 
-=== "수정 전"
+=== "전"
 
     ```groovy title="modules/cowpy.nf" linenums="4"
     process cowpy {
@@ -782,13 +782,13 @@ Docker를 명시적으로 비활성화하는 한 줄의 코드가 포함된 `nex
 
 이제 Docker를 활성화하기 위해 `true`로 전환합시다:
 
-=== "수정 후"
+=== "후"
 
     ```console title="nextflow.config" linenums="1" hl_lines="1"
     docker.enabled = true
     ```
 
-=== "수정 전"
+=== "전"
 
     ```console title="nextflow.config" linenums="1" hl_lines="1"
     docker.enabled = false

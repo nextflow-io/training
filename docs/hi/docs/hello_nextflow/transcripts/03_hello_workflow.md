@@ -44,7 +44,7 @@
 
 ## 1.2. uppercasing स्टेप को Nextflow process के रूप में लिखो
 
-तो अगर मैं अपनी script पर वापस जाता हूँ, मैं थोड़ा चीट करने जा रहा हूँ और training के docs से कोड कॉपी करूँगा। लेकिन तुम बिल्कुल देख सकते हो कि क्या हो रहा है।
+तो अगर मैं अपनी script पर वापस जाता हूँ, मैं थोड़ा cheat करने जा रहा हूँ और training के docs से कोड कॉपी करूँगा। लेकिन तुम बिल्कुल देख सकते हो कि क्या हो रहा है।
 
 हमारे पास यहाँ एक नया process है। इसे हमने convertToUpper कहा है, लेकिन हम इसे जो चाहें कह सकते हैं।
 
@@ -182,7 +182,7 @@ order को सही प्राप्त करना वास्तव म
 
 और वास्तव में, COLLECTED-trio-output - यह ठीक से काम कर गया है। इसने हमारी फ़ाइल को rename कर दिया है। और तुम अब imagine कर सकते हो कि यह उपयोगी है क्योंकि अगर मैं इसे फिर से एक अलग batch नाम के साथ चलाता हूँ, जैसे replicate_two, तो यह हमें यहाँ ऊपर एक अलग batch नाम देने वाला है।
 
-और और यह फिर इस मामले में output फ़ाइलों को clobber नहीं करेगा। तो यह अच्छा है।
+और यह फिर इस मामले में output फ़ाइलों को clobber नहीं करेगा। तो यह अच्छा है।
 
 ## 4. collector स्टेप में एक output add करो
 
@@ -226,7 +226,7 @@ There were $\{count_greetings\} greetings in this batch, और इसे अब
 
 अगर मैं यहाँ work डायरेक्टरी में जाता हूँ बस तुम्हें prove करने के लिए कि Nextflow, code में execute किया गया था न कि bash script में, मैं cat work/ command.sh में जा सकता हूँ, और तुम यहाँ देखोगे कि यह बस इस string को सीधे echo कर रहा है। There were three greetings in this batch, और इसलिए वह variable Nextflow द्वारा interpolate किया गया था। यह .command.sh फ़ाइल लिखने से पहले script block में calculate किया गया था। तो resulting variable calculation मूल रूप से इसमें hard coded है इससे पहले कि यह इस मामले में तुम्हारे compute environment पर execute किया जाए।
 
-और इसलिए तुम script के बीच उस separation को देख सकते हो। Block यहाँ और इसके ऊपर कुछ भी। मुझे \_hope है कि यह समझ में आता है।
+और इसलिए तुम script के बीच उस separation को देख सकते हो। Block यहाँ और इसके ऊपर कुछ भी। मुझे उम्मीद है कि यह समझ में आता है।
 
 ## सारांश और क्विज़
 

@@ -291,7 +291,7 @@ Ce fichier de paramètres contient une paire clé-valeur pour chacune des entré
 Notez l'utilisation de deux-points (`:`) au lieu de signes égal (`=`) si vous comparez la syntaxe au fichier de configuration.
 Le fichier de config est écrit en Groovy, tandis que le fichier de paramètres est écrit en YAML.
 
-!!! info "Information"
+!!! info "Info"
 
     Nous fournissons également une version JSON du fichier de paramètres comme exemple mais nous n'allons pas l'exécuter ici.
     N'hésitez pas à essayer celui-là par vous-même.
@@ -883,7 +883,7 @@ Cela devrait fonctionner sans problème et produire les mêmes sorties qu'aupara
 
 En coulisses, Nextflow a récupéré les packages Conda et créé l'environnement, ce qui prend normalement un peu de travail ; donc c'est agréable de ne pas avoir à faire tout cela nous-mêmes !
 
-!!! info "Information"
+!!! info "Info"
 
     Cela s'exécute rapidement car le package `cowpy` est assez petit, mais si vous travaillez avec de gros packages, cela peut prendre un peu plus de temps que d'habitude la première fois, et vous pourriez voir la sortie console rester « bloquée » pendant une minute ou plus avant de se terminer.
     C'est normal et est dû au travail supplémentaire que Nextflow fait la première fois que vous utilisez un nouveau package.
@@ -1097,7 +1097,7 @@ En même temps, nous allons prétendre que le process `cowpy` nécessite plus de
 
 Avec cette configuration, tous les processes demanderont 1 Go de mémoire et un seul CPU (la valeur par défaut implicite), sauf le process `cowpy`, qui demandera 2 Go et 2 CPU.
 
-!!! info "Information"
+!!! info "Info"
 
     Si vous avez une machine avec peu de CPU et que vous en allouez un grand nombre par process, vous pourriez voir des appels de process mis en file d'attente les uns derrière les autres.
     C'est parce que Nextflow s'assure que nous ne demandons pas plus de CPU qu'il n'y en a de disponibles.

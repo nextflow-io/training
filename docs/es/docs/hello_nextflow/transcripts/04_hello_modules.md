@@ -1,5 +1,7 @@
 # Parte 4: Hello Modules - Transcripción del video
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -48,7 +50,7 @@ Así que hagámoslo ahora. Voy a crear rápidamente un nuevo archivo de módulo 
 
 Y luego voy a crear un nuevo archivo para collectGreetings.nf. Cortar eso.
 
-Mucho cortar, cortar y copiar y pegar.
+Mucho cortar y copiar y pegar.
 
 Y ahora nuestro script de workflow principal de repente se ve mucho, mucho más corto, mucho más accesible y mucho más fácil de leer.
 

@@ -68,7 +68,7 @@ Qui generiamo un indice dei contenuti fino al secondo livello:
 tree . -L 2
 ```
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     .
@@ -97,7 +97,7 @@ tree . -L 2
 Clicca sulla casella colorata per espandere la sezione e visualizzarne i contenuti.
 Usiamo sezioni espandibili come questa per mostrare in modo conciso l'output dei comandi previsto e i contenuti di directory e file.
 
-- **I file `.nf`** sono script di workflow numerati in base alla parte del corso in cui vengono utilizzati.
+- **I file `.nf`** sono script di flusso di lavoro numerati in base alla parte del corso in cui vengono utilizzati.
 
 - **Il file `nextflow.config`** è un file di configurazione che imposta proprietà minime dell'ambiente.
   Puoi ignorarlo per ora.
@@ -106,7 +106,7 @@ Usiamo sezioni espandibili come questa per mostrare in modo conciso l'output dei
 
 - **I file `test-params.*`** sono file di configurazione che useremo nella Parte 3 (Configurazione). Puoi ignorarli per ora.
 
-- **La directory `solutions`** contiene lo stato finale del workflow e dei suoi file accessori (config e moduli) che risultano dal completamento del corso.
+- **La directory `solutions`** contiene lo stato finale del flusso di lavoro e dei suoi file accessori (config e moduli) che risultano dal completamento del corso.
   Sono pensati per essere usati come riferimento per controllare il tuo lavoro e risolvere eventuali problemi.
 
 ## Checklist di preparazione

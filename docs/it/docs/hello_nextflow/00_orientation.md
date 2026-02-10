@@ -12,11 +12,11 @@
 :green_book: La trascrizione del video è disponibile [qui](./transcripts/00_orientation.md).
 ///
 
-!!! tip
+!!! tip "Suggerimento"
 
     I video di YouTube hanno alcune funzionalità speciali!
 
-    - :fontawesome-solid-closed-captioning: Sottotitoli di alta qualità (curati manualmente). Li attivi con l'icona :material-subtitles:
+    - :fontawesome-solid-closed-captioning: Sottotitoli di alta qualità (curati manualmente). Li attivate con l'icona :material-subtitles:
     - :material-bookmark: Capitoli video nella timeline che corrispondono alle intestazioni della pagina.
 
 ## Avviare un ambiente di formazione
@@ -33,7 +33,7 @@ Dovrete tenere queste istruzioni aperte in parallelo per lavorare attraverso il 
 Questo ambiente di formazione contiene tutto il software, il codice e i dati necessari per lavorare attraverso il corso di formazione, quindi non è necessario installare nulla.
 
 Il codespace è configurato con un'interfaccia VSCode, che include un esplora file, un editor di codice e una shell del terminale.
-Tutte le istruzioni fornite durante il corso (ad es. 'aprite il file', 'modificate il codice' o 'eseguite questo comando') si riferiscono a queste tre parti dell'interfaccia VScode, salvo diversa indicazione.
+Tutte le istruzioni fornite durante il corso (ad es. 'aprite il file', 'modificate il codice' o 'eseguite questo comando') si riferiscono a queste tre parti dell'interfaccia VSCode, salvo diversa indicazione.
 
 Se state seguendo questo corso autonomamente, familiarizzatevi con le [nozioni di base sull'ambiente](../envsetup/01_setup.md) per ulteriori dettagli.
 
@@ -62,7 +62,7 @@ Potete impostare VSCode per focalizzarsi su questa directory, in modo che solo i
 code .
 ```
 
-!!! tip
+!!! tip "Suggerimento"
 
     Se per qualsiasi motivo uscite da questa directory (ad es. il codespace va in sleep), potete sempre usare il percorso completo per tornarci, assumendo che stiate eseguendo all'interno dell'ambiente di formazione Github Codespaces:
 
@@ -85,7 +85,7 @@ Qui generiamo una tabella dei contenuti fino al secondo livello:
 tree . -L 2
 ```
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     .
@@ -112,7 +112,7 @@ tree . -L 2
 Cliccate sul riquadro colorato per espandere la sezione e visualizzarne i contenuti.
 Utilizziamo sezioni espandibili come questa per includere l'output dei comandi atteso in modo conciso.
 
-- **I file `.nf`** sono script di workflow denominati in base alla parte del corso in cui vengono utilizzati.
+- **I file `.nf`** sono script di flusso di lavoro denominati in base alla parte del corso in cui vengono utilizzati.
 
 - **Il file `nextflow.config`** è un file di configurazione che imposta proprietà minime dell'ambiente.
   Potete ignorarlo per ora.
@@ -121,7 +121,7 @@ Utilizziamo sezioni espandibili come questa per includere l'output dei comandi a
 
 - **I file `test-params.*`** sono file di configurazione che useremo nella Parte 6 (Configuration). Potete ignorarli per ora.
 
-- **La directory `solutions`** contiene gli script di workflow completati che risultano da ogni passaggio del corso.
+- **La directory `solutions`** contiene gli script di flusso di lavoro completati che risultano da ogni passaggio del corso.
   Sono pensati per essere usati come riferimento per verificare il vostro lavoro e risolvere eventuali problemi.
 
 ## Checklist di preparazione

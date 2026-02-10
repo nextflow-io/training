@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Quando si sviluppa una pipeline, ci si ritrova spesso a creare sequenze simili di processi per diversi tipi di dati o fasi di analisi. Si potrebbe finire per copiare e incollare queste sequenze di processi, con conseguente duplicazione del codice difficile da mantenere; oppure si potrebbe creare un unico workflow massiccio difficile da comprendere e modificare.
+Quando sviluppiamo una pipeline, ci ritroviamo spesso a creare sequenze simili di processi per diversi tipi di dati o fasi di analisi. Potremmo finire per copiare e incollare queste sequenze di processi, con conseguente duplicazione del codice difficile da mantenere; oppure potremmo creare un unico flusso di lavoro massiccio difficile da comprendere e modificare.
 
 Una delle funzionalità più potenti di Nextflow è la sua capacità di comporre pipeline complesse da moduli workflow più piccoli e riutilizzabili. Questo approccio modulare rende le pipeline più facili da sviluppare, testare e mantenere.
 
@@ -66,7 +66,7 @@ modules/
 
 #### Esaminare l'assegnazione
 
-La vostra sfida è assemblare questi moduli in due workflows separati che poi comporremo in un workflow principale:
+La vostra sfida è assemblare questi moduli in due workflows separati che poi comporremo in un flusso di lavoro principale:
 
 - Un `GREETING_WORKFLOW` che valida i nomi, crea i saluti e aggiunge timestamp
 - Un `TRANSFORM_WORKFLOW` che converte il testo in maiuscolo e lo inverte
@@ -86,7 +86,7 @@ Se potete spuntare tutte le caselle, siete pronti per iniziare.
 
 ## 1. Creare il Greeting Workflow
 
-Iniziamo creando un workflow che valida i nomi e genera saluti con timestamp.
+Iniziamo creando un flusso di lavoro che valida i nomi e genera saluti con timestamp.
 
 ### 1.1. Creare la struttura del workflow
 
@@ -115,7 +115,7 @@ workflow {
 }
 ```
 
-Questo è un workflow completo, con una struttura simile a quelli visti nel tutorial 'Hello Nextflow', che possiamo testare in modo indipendente. Proviamolo ora:
+Questo è un flusso di lavoro completo, con una struttura simile a quelli visti nel tutorial 'Hello Nextflow', che possiamo testare in modo indipendente. Proviamolo ora:
 
 ```bash
 nextflow run workflows/greeting.nf
@@ -166,7 +166,7 @@ workflow GREETING_WORKFLOW {
 }
 ```
 
-Potete vedere che il workflow è ora nominato e ha un blocco `take:` e `emit:`, e queste sono le connessioni che useremo per comporre un workflow di livello superiore.
+Potete vedere che il workflow è ora nominato e ha un blocco `take:` e `emit:`, e queste sono le connessioni che useremo per comporre un flusso di lavoro di livello superiore.
 Il contenuto del workflow è anche posto all'interno del blocco `main:`. Notate inoltre che abbiamo rimosso la dichiarazione del canale di input `names_ch`, poiché ora viene passato come argomento al workflow.
 
 Testiamo di nuovo il workflow per vedere se funziona come previsto:
@@ -183,13 +183,13 @@ nextflow run workflows/greeting.nf
     No entry workflow specified
     ```
 
-Questo vi informa di un altro nuovo concetto, un 'entry workflow'. L'entry workflow è il workflow che viene chiamato quando si esegue uno script Nextflow. Per impostazione predefinita, Nextflow utilizzerà un workflow senza nome come entry workflow, quando presente, ed è ciò che avete fatto finora, con blocchi workflow che iniziano così:
+Questo vi informa di un altro nuovo concetto, un 'entry workflow'. L'entry workflow è il flusso di lavoro che viene chiamato quando si esegue uno script Nextflow. Per impostazione predefinita, Nextflow utilizzerà un workflow senza nome come entry workflow, quando presente, ed è ciò che avete fatto finora, con blocchi workflow che iniziano così:
 
 ```groovy title="hello.nf" linenums="1"
 workflow {
 ```
 
-Ma il nostro greeting workflow non ha un workflow senza nome, piuttosto abbiamo un workflow nominato:
+Ma il nostro greeting workflow non ha un workflow senza nome, piuttosto abbiamo un **workflow** nominato:
 
 ```groovy title="workflows/greeting.nf" linenums="1"
 workflow GREETING_WORKFLOW {
@@ -201,7 +201,7 @@ Non abbiamo aggiunto la sintassi `take:`/`emit:` per poter chiamare direttamente
 
 ### 1.4. Creare e testare il workflow principale
 
-Ora creeremo un workflow principale che importa e utilizza il workflow `greeting`.
+Ora creeremo un flusso di lavoro principale che importa e utilizza il **workflow** `greeting`.
 
 Create `main.nf`:
 
@@ -243,17 +243,17 @@ nextflow run main.nf
     Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/ea/342168d4ba04cc899a89c56cbfd9b0/timestamped_Charlie-output.txt
     ```
 
-Funziona! Abbiamo racchiuso il greeting workflow nominato in un workflow principale con un blocco `workflow` di ingresso senza nome. Il workflow principale sta utilizzando il workflow `GREETING_WORKFLOW` quasi (non proprio) come un processo, e sta passando il canale `names` come argomento.
+Funziona! Abbiamo racchiuso il greeting workflow nominato in un flusso di lavoro principale con un blocco `workflow` di ingresso senza nome. Il flusso di lavoro principale sta utilizzando il **workflow** `GREETING_WORKFLOW` quasi (non proprio) come un processo, e sta passando il canale `names` come argomento.
 
-### Conclusioni
+### Takeaway
 
 In questa sezione, avete appreso diversi concetti importanti:
 
-- **Workflows Nominati**: Creare un workflow nominato (`GREETING_WORKFLOW`) che può essere importato e riutilizzato
-- **Interfacce di Workflow**: Definire input chiari con `take:` e output con `emit:` per creare un workflow componibile
+- **Workflows Nominati**: Creare un **workflow** nominato (`GREETING_WORKFLOW`) che può essere importato e riutilizzato
+- **Interfacce di Workflow**: Definire input chiari con `take:` e output con `emit:` per creare un **workflow** componibile
 - **Punti di Ingresso**: Comprendere che Nextflow necessita di un entry workflow senza nome per eseguire uno script
-- **Composizione di Workflow**: Importare e utilizzare un workflow nominato all'interno di un altro workflow
-- **Namespace di Workflow**: Accedere agli output del workflow utilizzando il namespace `.out` (`GREETING_WORKFLOW.out.greetings`)
+- **Composizione di Workflow**: Importare e utilizzare un **workflow** nominato all'interno di un altro **workflow**
+- **Namespace di Workflow**: Accedere agli output del **workflow** utilizzando il namespace `.out` (`GREETING_WORKFLOW.out.greetings`)
 
 Ora avete un greeting workflow funzionante che:
 
@@ -269,7 +269,7 @@ Questo approccio modulare vi consente di testare il greeting workflow in modo in
 
 ## 2. Aggiungere il Transform Workflow
 
-Ora creiamo un workflow che applica trasformazioni di testo ai saluti.
+Ora creiamo un flusso di lavoro che applica trasformazioni di testo ai saluti.
 
 ### 2.1. Creare il file del workflow
 
@@ -300,7 +300,7 @@ workflow TRANSFORM_WORKFLOW {
 }
 ```
 
-Non ripeteremo qui la spiegazione della sintassi componibile, ma notate che il workflow nominato è nuovamente dichiarato con un blocco `take:` e `emit:`, e il contenuto del workflow è posto all'interno del blocco `main:`.
+Non ripeteremo qui la spiegazione della sintassi componibile, ma notate che il **workflow** nominato è nuovamente dichiarato con un blocco `take:` e `emit:`, e il contenuto del **workflow** è posto all'interno del blocco `main:`.
 
 ### 2.3. Aggiornare il workflow principale
 
@@ -361,7 +361,7 @@ cat /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef
 !ECILA ,OLLEH ]04:50:71 60-30-5202[
 ```
 
-### Conclusioni
+### Takeaway
 
 Ora dovreste avere una pipeline completa che:
 
@@ -377,19 +377,19 @@ In questa missione secondaria, abbiamo esplorato il potente concetto di composiz
 
 Questo approccio modulare offre diversi vantaggi rispetto alle pipeline monolitiche:
 
-- Ogni workflow può essere sviluppato, testato e sottoposto a debug in modo indipendente
+- Ogni **workflow** può essere sviluppato, testato e sottoposto a debug in modo indipendente
 - I workflows possono essere riutilizzati in diverse pipeline
 - La struttura complessiva della pipeline diventa più leggibile e manutenibile
-- Le modifiche a un workflow non influenzano necessariamente gli altri se le interfacce rimangono coerenti
+- Le modifiche a un **workflow** non influenzano necessariamente gli altri se le interfacce rimangono coerenti
 - I punti di ingresso possono essere configurati per eseguire diverse parti della pipeline secondo necessità
 
-_È importante notare tuttavia che, sebbene chiamare i workflows sia un po' come chiamare i processi, non è effettivamente la stessa cosa. Non è possibile, ad esempio, eseguire un workflow N volte chiamandolo con un canale di dimensione N - sarebbe necessario passare un canale di dimensione N al workflow e iterare internamente._
+_È importante notare tuttavia che, sebbene chiamare i workflows sia un po' come chiamare i processi, non è effettivamente la stessa cosa. Non è possibile, ad esempio, eseguire un **workflow** N volte chiamandolo con un canale di dimensione N - sarebbe necessario passare un canale di dimensione N al **workflow** e iterare internamente._
 
 L'applicazione di queste tecniche nel vostro lavoro vi consentirà di costruire pipeline Nextflow più sofisticate in grado di gestire attività bioinformatiche complesse rimanendo manutenibili e scalabili.
 
 ### Modelli chiave
 
-1.  **Struttura del workflow**: Abbiamo definito input e output chiari per ogni workflow utilizzando la sintassi `take:` e `emit:`, creando interfacce ben definite tra i componenti, e racchiuso la logica del workflow all'interno del blocco `main:`.
+1.  **Struttura del workflow**: Abbiamo definito input e output chiari per ogni **workflow** utilizzando la sintassi `take:` e `emit:`, creando interfacce ben definite tra i componenti, e racchiuso la logica del **workflow** all'interno del blocco `main:`.
 
     ```groovy
     workflow EXAMPLE_WORKFLOW {
@@ -447,7 +447,7 @@ L'applicazione di queste tecniche nel vostro lavoro vi consentirà di costruire 
     }
     ```
 
-4.  **Gestione del flusso di dati:** Abbiamo imparato come accedere agli output del workflow utilizzando la notazione namespace (`WORKFLOW_NAME.out.channel_name`) e passarli ad altri workflows.
+4.  **Gestione del flusso di dati:** Abbiamo imparato come accedere agli output del **workflow** utilizzando la notazione namespace (`WORKFLOW_NAME.out.channel_name`) e passarli ad altri workflows.
 
     ```nextflow
     WORKFLOW_A(input_ch)

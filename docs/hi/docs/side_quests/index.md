@@ -8,9 +8,9 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-यह स्वतंत्र प्रशिक्षण मिनी-कोर्स का संग्रह है जो विशिष्ट विषयों में गहराई से जाते हैं। आप इन्हें किसी भी क्रम में पूरा कर सकते हैं।
+यह स्वतंत्र प्रशिक्षण मिनी-कोर्स का संग्रह है जो विशिष्ट विषयों में गहराई से जाते हैं। तुम इन्हें किसी भी क्रम में पूरा कर सकते हो।
 
-आइए शुरू करें! प्रशिक्षण वातावरण लॉन्च करने के लिए नीचे "Open in GitHub Codespaces" बटन पर क्लिक करें (अधिमानतः एक अलग टैब में), फिर इसके लोड होने के दौरान पढ़ें।
+चलो शुरू करते हैं! प्रशिक्षण वातावरण लॉन्च करने के लिए नीचे "Open in GitHub Codespaces" बटन पर क्लिक करो (अधिमानतः एक अलग टैब में), फिर इसके लोड होने के दौरान पढ़ो।
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -22,11 +22,11 @@ hide:
 - कमांड लाइन के साथ अनुभव
 - [Hello Nextflow](../../hello_nextflow/) शुरुआती प्रशिक्षण कोर्स में शामिल बुनियादी Nextflow अवधारणाएँ और टूलिंग।
 
-तकनीकी आवश्यकताओं और वातावरण सेटअप के लिए, [Environment Setup](../../envsetup/) मिनी-कोर्स देखें।
+तकनीकी आवश्यकताओं और वातावरण सेटअप के लिए, [Environment Setup](../../envsetup/) मिनी-कोर्स देखो।
 
-**यदि आप पहली बार साइड क्वेस्ट में प्रवेश कर रहे हैं, तो पहले [Orientation](./orientation.md) पेज अवश्य देखें!**
+**यदि तुम पहली बार साइड क्वेस्ट में प्रवेश कर रहे हो, तो पहले [Orientation](./orientation.md) पेज अवश्य देखो!**
 
-अन्यथा, नीचे दी गई तालिका से एक साइड क्वेस्ट चुनें।
+अन्यथा, नीचे दी गई तालिका से एक साइड क्वेस्ट चुनो।
 
 ## साइड क्वेस्ट
 
@@ -41,4 +41,4 @@ hide:
 | [Working with files](./working_with_files.md)                              | 45 मिनट                    |
 | [Debugging workflows](./debugging.md)                                      | 1 घंटा                     |
 
-हमें बताएं कि आप यहाँ किन अन्य डोमेन और उपयोग के मामलों को शामिल देखना चाहेंगे, कम्युनिटी फोरम के [Training section](https://community.seqera.io/c/training/) में पोस्ट करके।
+हमें बताओ कि तुम यहाँ किन अन्य डोमेन और उपयोग के मामलों को शामिल देखना चाहोगे, कम्युनिटी फोरम के [Training section](https://community.seqera.io/c/training/) में पोस्ट करके।

@@ -33,10 +33,10 @@ Imagine executar seu pipeline por duas horas, apenas para ele falhar porque um u
 
 Considere este exemplo:
 
-```console title="Sem validação"
+```console title="Without validation"
 $ nextflow run my-pipeline --input data.txt --output results
 
-...2 horas depois...
+...2 hours later...
 
 ERROR ~ No such file: 'data.fq.gz'
   Expected FASTQ format but received TXT
@@ -44,7 +44,7 @@ ERROR ~ No such file: 'data.fq.gz'
 
 O pipeline aceitou entradas inválidas e executou por horas antes de falhar. Com validação adequada:
 
-```console title="Com validação"
+```console title="With validation"
 $ nextflow run my-pipeline --input data.txt --output results
 
 ERROR ~ Validation of pipeline parameters failed!
@@ -125,11 +125,11 @@ Ambos os schemas usam o formato JSON Schema, um padrão amplamente adotado para 
 
 ```mermaid
 graph LR
-    A[Usuário executa o pipeline] --> B[Validação de parâmetros]
-    B -->|✓ Válido| C[Validação de dados de entrada]
-    B -->|✗ Inválido| D[Erro: Corrigir parâmetros]
-    C -->|✓ Válido| E[Pipeline executa]
-    C -->|✗ Inválido| F[Erro: Corrigir dados de entrada]
+    A[User runs pipeline] --> B[Parameter validation]
+    B -->|✓ Valid| C[Input data validation]
+    B -->|✗ Invalid| D[Error: Fix parameters]
+    C -->|✓ Valid| E[Pipeline executes]
+    C -->|✗ Invalid| F[Error: Fix input data]
 ```
 
 A validação deve acontecer **antes** de qualquer processo do pipeline executar, para fornecer feedback rápido e evitar tempo de computação desperdiçado.
@@ -197,7 +197,7 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 
 O schema de parâmetros é organizado em grupos. Aqui está o grupo `input_output_options`:
 
-```json title="core-hello/nextflow_schema.json (trecho)" linenums="8"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -309,7 +309,7 @@ A ferramenta agora atualizou seu arquivo `nextflow_schema.json` com o novo parâ
 grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-```json title="core-hello/nextflow_schema.json (trecho)" linenums="8" hl_lines="19-23"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
     "input_output_options": {
       "title": "Input/output options",
       "type": "object",
@@ -388,7 +388,7 @@ O pipeline deve executar com sucesso, e o parâmetro `batch` agora está validad
 Você aprendeu como usar a ferramenta interativa `nf-core pipelines schema build` para adicionar parâmetros ao `nextflow_schema.json` e viu a validação de parâmetros em ação.
 A interface web manipula toda a sintaxe JSON Schema para você, facilitando o gerenciamento de schemas de parâmetros complexos sem edição JSON manual propensa a erros.
 
-### Próximos passos
+### O que vem a seguir?
 
 Agora que a validação de parâmetros está funcionando, vamos adicionar validação para o conteúdo do arquivo de dados de entrada.
 
@@ -789,7 +789,7 @@ Você implementou e testou tanto a validação de parâmetros quanto a validaç�
 
     Para aprender mais sobre recursos e padrões avançados de validação, consulte a [documentação do nf-schema](https://nextflow-io.github.io/nf-schema/latest/). O comando `nf-core pipelines schema build` fornece uma GUI interativa para gerenciar schemas complexos.
 
-### Próximos passos
+### O que vem a seguir?
 
 Você completou todas as cinco partes do curso de treinamento Hello nf-core!
 

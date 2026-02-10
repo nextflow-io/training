@@ -38,7 +38,7 @@ Questa raccolta consiste di quattro Side Quests che coprono argomenti complement
 
 1. **[Workflows of Workflows](../../side_quests/workflows_of_workflows)** - Architettura e composizione complessa di workflow
 2. **[Testing with nf-test](../../side_quests/nf-test)** - Strategie di testing per workflow Nextflow
-3. **[Metadata](../../side_quests/metadata)** - Gestione dei metadata per elementi nei channel Nextflow
+3. **[Metadata](../../side_quests/metadata)** - Gestione dei metadata per elementi nei canali Nextflow
 4. **[Splitting and Grouping](../../side_quests/splitting_and_grouping)** - Pattern avanzati di elaborazione dati
 
 Ogni Side Quest è autonomo e copre concetti indipendenti, ma raccomandiamo di completarli nell'ordine elencato sopra per una progressione logica attraverso gli argomenti.

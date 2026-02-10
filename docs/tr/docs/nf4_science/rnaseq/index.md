@@ -6,7 +6,7 @@ hide:
 
 # RNAseq için Nextflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bu eğitim kursu, transkriptomik ve ilgili alanlarda veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen araştırmacılar için tasarlanmıştır.
 [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimi üzerine inşa edilmiş olup, Nextflow'un toplu RNAseq analizi bağlamında nasıl kullanılacağını göstermektedir.
@@ -23,11 +23,11 @@ Bu kursu tamamlayarak, temel Nextflow kavramlarını ve araçlarını tipik bir 
 
 Bu atölye sonunda şunları yapabileceksiniz:
 
-- Temel RNAseq işleme ve QC yöntemlerini uygulamak için doğrusal bir workflow yazmak
+- Temel RNAseq işleme ve QC yöntemlerini uygulamak için doğrusal bir iş akışı yazmak
 - FASTQ gibi alana özgü dosyaları ve genom referans kaynaklarını uygun şekilde ele almak
 - Tek uçlu ve çift uçlu dizileme verilerini işlemek
 - Nextflow'un dataflow paradigmasından yararlanarak örnek başına RNAseq işlemesini paralelleştirmek
-- İlgili channel operatörlerini kullanarak birden fazla adım ve örnek genelinde QC raporlarını birleştirmek
+- İlgili kanal operatörlerini kullanarak birden fazla adım ve örnek genelinde QC raporlarını birleştirmek
 
 <!-- TODO
 - Configure pipeline execution and manage and optimize resource allocations

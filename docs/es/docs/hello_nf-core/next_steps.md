@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-¡Felicitaciones por completar el curso de entrenamiento Hello nf-core! 🎉
+¡Felicitaciones por completar el curso de capacitación Hello nf-core! 🎉
 
 <!-- placeholder for video -->
 
@@ -38,14 +38,14 @@ Ahora estás equipado con el conocimiento fundamental para construir pipelines d
 
 Aquí están nuestras 3 principales sugerencias para lo que puedes hacer a continuación:
 
-- Aplica Nextflow a un caso de uso de análisis científico con [Nextflow para Ciencia](../nf4_science/index.md)
-- Explora características más avanzadas de Nextflow con las [Misiones Secundarias](../side_quests/index.md)
+- Aplica Nextflow a un caso de uso de análisis científico con [Nextflow for Science](../nf4_science/index.md)
+- Explora características más avanzadas de Nextflow con las [Side Quests](../side_quests/index.md)
 - Involúcrate [uniéndote a la comunidad de nf-core](https://nf-co.re/join).
 
 Finalmente, te recomendamos que eches un vistazo a [**Seqera Platform**](https://seqera.io/), una plataforma basada en la nube desarrollada por los creadores de Nextflow que hace aún más fácil lanzar y gestionar tus workflows, así como administrar tus datos y ejecutar análisis de forma interactiva en cualquier entorno.
 
 ## Encuesta de retroalimentación
 
-Antes de continuar, ¡por favor tómate un minuto para completar la encuesta del curso! Tu retroalimentación nos ayuda a mejorar nuestros materiales de entrenamiento para todos.
+Antes de continuar, ¡por favor tómate un minuto para completar la encuesta del curso! Tu retroalimentación nos ayuda a mejorar nuestros materiales de capacitación para todos.
 
 [Realizar la encuesta :material-arrow-right:](survey.md){ .md-button .md-button--primary }

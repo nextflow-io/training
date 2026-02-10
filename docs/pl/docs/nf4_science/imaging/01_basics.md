@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-W tej pierwszej części kursu szkoleniowego Nextflow dla Bioimagingu użyjemy bardzo prostego, niezależnego od dziedziny przykładu Hello World, aby zademonstrować podstawowe operacje i wskazać odpowiednie komponenty kodu Nextflow.
+W tej pierwszej części kursu szkoleniowego Nextflow dla Bioimagingu użyjemy bardzo prostego, niezależnego od dziedziny przykładu Hello World, aby zademonstrować podstawowe operacje i wskazać odpowiednie komponenty kodu Nextflow'a.
 
 ## 1. Uruchomienie workflow'u
 
@@ -28,7 +28,7 @@ executor >  local (1)
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow!
+Gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow'a!
 
 Najważniejszym wyjściem jest tutaj ostatnia linia (linia 6):
 
@@ -36,7 +36,7 @@ Najważniejszym wyjściem jest tutaj ostatnia linia (linia 6):
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-To mówi nam, że proces `sayHello` został pomyślnie wykonany raz (`1 of 1 ✔`).
+To mówi nam, że **proces** `sayHello` został pomyślnie wykonany raz (`1 of 1 ✔`).
 
 To świetnie, ale możesz się zastanawiać: gdzie jest wyjście?
 
@@ -74,7 +74,7 @@ Teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pra
 
 ### 1.3. Znalezienie oryginalnego wyjścia i logów w katalogu `work/`
 
-Kiedy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania każdego procesu w workflow'ie (czyli każdego kroku w pipeline'ie).
+Kiedy uruchamiasz workflow, Nextflow tworzy odrębny 'katalog zadania' dla każdego pojedynczego wywołania każdego **procesu** w workflow'ie (czyli każdego kroku w pipeline'ie).
 Dla każdego z nich przygotuje niezbędne wejścia, wykona odpowiednie instrukcje i zapisze wyjścia oraz pliki logów w tym samym katalogu, automatycznie nazwanym przy użyciu hasha w celu zapewnienia unikalności.
 
 Wszystkie te katalogi zadań będą znajdować się w katalogu o nazwie `work` w Twoim bieżącym katalogu (gdzie uruchamiasz polecenie).
@@ -88,7 +88,7 @@ Wracając do wyjścia konsoli dla workflow'u, który uruchomiliśmy wcześniej, 
 ```
 
 Widzisz, jak linia zaczyna się od `[a3/7be2fa]`?
-To skrócona forma ścieżki katalogu zadania dla tego jednego wywołania procesu i mówi Ci, gdzie znaleźć wyjście wywołania procesu `sayHello` w ścieżce katalogu `work/`.
+To skrócona forma ścieżki katalogu zadania dla tego jednego wywołania **procesu** i mówi Ci, gdzie znaleźć wyjście wywołania **procesu** `sayHello` w ścieżce katalogu `work/`.
 
 Możesz znaleźć pełną ścieżkę, wpisując następujące polecenie (zastępując `a3/7be2fa` tym, co widzisz w Swoim własnym terminalu) i naciskając klawisz tab, aby automatycznie uzupełnić ścieżkę, lub dodając gwiazdkę:
 
@@ -130,7 +130,7 @@ work
 
 </details>
 
-Powinieneś od razu rozpoznać plik `output.txt`, który jest w rzeczywistości oryginalnym wyjściem procesu `sayHello`, opublikowanym w katalogu `results`.
+Powinieneś od razu rozpoznać plik `output.txt`, który jest w rzeczywistości oryginalnym wyjściem **procesu** `sayHello`, opublikowanym w katalogu `results`.
 Jeśli go otworzysz, znajdziesz ponownie powitanie `Hello World!`.
 
 <details>
@@ -147,11 +147,11 @@ Co więc z tymi wszystkimi innymi plikami?
 To są pliki pomocnicze i logi, które Nextflow zapisał jako część wykonania zadania:
 
 - **`.command.begin`**: Plik wartowniczy utworzony natychmiast po uruchomieniu zadania.
-- **`.command.err`**: Komunikaty o błędach (`stderr`) wyemitowane przez wywołanie procesu
-- **`.command.log`**: Kompletny log wyjścia wyemitowany przez wywołanie procesu
-- **`.command.out`**: Regularne wyjście (`stdout`) wywołania procesu
-- **`.command.run`**: Pełny skrypt uruchomiony przez Nextflow'a w celu wykonania wywołania procesu
-- **`.command.sh`**: Polecenie, które faktycznie zostało uruchomione przez wywołanie procesu
+- **`.command.err`**: Komunikaty o błędach (`stderr`) wyemitowane przez wywołanie **procesu**
+- **`.command.log`**: Kompletny log wyjścia wyemitowany przez wywołanie **procesu**
+- **`.command.out`**: Regularne wyjście (`stdout`) wywołania **procesu**
+- **`.command.run`**: Pełny skrypt uruchomiony przez Nextflow'a w celu wykonania wywołania **procesu**
+- **`.command.sh`**: Polecenie, które faktycznie zostało uruchomione przez wywołanie **procesu**
 - **`.exitcode`**: Kod wyjścia wynikający z polecenia
 
 Plik `.command.sh` jest szczególnie przydatny, ponieważ pokazuje główne polecenie wykonane przez Nextflow'a, nie włączając całej księgowości i konfiguracji zadania/środowiska.
@@ -179,11 +179,11 @@ Zauważ, jak wyjścia i logi izolowanych katalogów zadań są zachowywane, podc
 
 ### Podsumowanie
 
-Wiesz, jak uruchomić prosty skrypt Nextflow, monitorować jego wykonanie i znaleźć jego wyjścia.
+Wiesz, jak uruchomić prosty skrypt Nextflow'a, monitorować jego wykonanie i znaleźć jego wyjścia.
 
 ### Co dalej?
 
-Dowiedz się, jak czytać podstawowy skrypt Nextflow i zidentyfikować, jak jego komponenty odnoszą się do jego funkcjonalności.
+Dowiedz się, jak czytać podstawowy skrypt Nextflow'a i zidentyfikować, jak jego komponenty odnoszą się do jego funkcjonalności.
 
 ---
 
@@ -192,7 +192,7 @@ Dowiedz się, jak czytać podstawowy skrypt Nextflow i zidentyfikować, jak jego
 To, co zrobiliśmy, to w zasadzie potraktowanie skryptu workflow'u jak czarnej skrzynki.
 Teraz, gdy zobaczyliśmy, co robi, otwórzmy pudełko i zajrzyjmy do środka.
 
-_Celem tutaj nie jest zapamiętanie składni kodu Nextflow, ale zbudowanie podstawowej intuicji dotyczącej głównych komponentów i sposobu ich organizacji._
+_Celem tutaj nie jest zapamiętanie składni kodu Nextflow'a, ale zbudowanie podstawowej intuicji dotyczącej głównych komponentów i sposobu ich organizacji._
 
 ### 2.1. Przegląd ogólnej struktury kodu
 
@@ -232,7 +232,7 @@ workflow {
 
 </details>
 
-Skrypt Nextflow obejmuje dwa główne typy podstawowych komponentów: jeden lub więcej **procesów** oraz sam **workflow**.
+Skrypt Nextflow'a obejmuje dwa główne typy podstawowych komponentów: jeden lub więcej **procesów** oraz sam **workflow**.
 Każdy **proces** opisuje, jakie operacje powinien wykonać odpowiedni krok w pipeline'ie, natomiast **workflow** opisuje logikę przepływu danych łączącą poszczególne kroki.
 
 Przyjrzyjmy się najpierw bliżej blokowi **process**, a następnie przyjrzymy się blokowi **workflow**.
@@ -240,8 +240,8 @@ Przyjrzyjmy się najpierw bliżej blokowi **process**, a następnie przyjrzymy s
 ### 2.2. Definicja `process`
 
 Pierwszy blok kodu opisuje **proces**.
-Definicja procesu zaczyna się od słowa kluczowego `process`, po którym następuje nazwa procesu, a na końcu treść procesu oddzielona klamrami.
-Treść procesu musi zawierać blok skryptu, który określa polecenie do uruchomienia; może to być wszystko, co można uruchomić w terminalu wiersza poleceń.
+Definicja **procesu** zaczyna się od słowa kluczowego `process`, po którym następuje nazwa **procesu**, a na końcu treść **procesu** oddzielona klamrami.
+Treść **procesu** musi zawierać blok `script`, który określa polecenie do uruchomienia; może to być wszystko, co można uruchomić w terminalu wiersza poleceń.
 
 Tutaj mamy **proces** o nazwie `sayHello`, który przyjmuje zmienną **wejściową** o nazwie `greeting` i zapisuje Swoje **wyjście** do pliku o nazwie `output.txt`.
 
@@ -271,7 +271,7 @@ process sayHello {
 
 </details>
 
-To bardzo minimalna definicja procesu, która zawiera tylko definicję `input`, definicję `output` oraz `script` do wykonania.
+To bardzo minimalna definicja **procesu**, która zawiera tylko definicję `input`, definicję `output` oraz `script` do wykonania.
 
 Definicja `input` zawiera kwalifikator `val`, który mówi Nextflow'owi, aby spodziewał się wartości jakiegoś rodzaju (może to być ciąg znaków, liczba, cokolwiek).
 
@@ -282,17 +282,17 @@ Definicja `output` zawiera kwalifikator `path`, który mówi Nextflow'owi, że p
     Definicja wyjścia nie _określa_, jakie wyjście zostanie utworzone.
     Po prostu _deklaruje_, gdzie znaleźć oczekiwane pliki wyjściowe, aby Nextflow mógł je znaleźć po zakończeniu wykonania.
 
-    Jest to konieczne do weryfikacji, że polecenie zostało wykonane pomyślnie oraz do przekazania wyjścia do procesów następnych, jeśli jest to potrzebne.
-    Wyjście wytworzone, które nie pasuje do tego, co jest zadeklarowane w bloku wyjścia, nie zostanie przekazane do procesów następnych.
+    Jest to konieczne do weryfikacji, że polecenie zostało wykonane pomyślnie oraz do przekazania wyjścia do **procesów** następnych, jeśli jest to potrzebne.
+    Wyjście wytworzone, które nie pasuje do tego, co jest zadeklarowane w bloku wyjścia, nie zostanie przekazane do **procesów** następnych.
 
-W rzeczywistym pipeline'ie proces zazwyczaj zawiera dodatkowe informacje, takie jak dyrektywy procesu, które przedstawimy za chwilę.
+W rzeczywistym pipeline'ie **proces** zazwyczaj zawiera dodatkowe informacje, takie jak dyrektywy **procesu**, które przedstawimy za chwilę.
 
 ### 2.3. Definicja `workflow`
 
 Drugi blok kodu opisuje sam **workflow**.
-Definicja workflow'u zaczyna się od słowa kluczowego `workflow`, po którym następuje opcjonalna nazwa, a następnie treść workflow'u oddzielona klamrami.
+Definicja **workflow'u** zaczyna się od słowa kluczowego `workflow`, po którym następuje opcjonalna nazwa, a następnie treść **workflow'u** oddzielona klamrami.
 
-Tutaj mamy **workflow**, który składa się z jednego wywołania procesu `sayHello`; przyjmuje on wejście `params.greeting`, które przechowuje wartość podaną przez nas do parametru `--greeting`.
+Tutaj mamy **workflow**, który składa się z jednego wywołania **procesu** `sayHello`; przyjmuje on wejście `params.greeting`, które przechowuje wartość podaną przez nas do parametru `--greeting`.
 
 ```groovy title="hello-world.nf" linenums="22"
 workflow {
@@ -303,15 +303,15 @@ workflow {
 ```
 
 To bardzo minimalna definicja **workflow'u**.
-W rzeczywistym pipeline'ie workflow zazwyczaj zawiera wiele wywołań **procesów** połączonych **kanałami**, i mogą być ustawione domyślne wartości dla zmiennych wejściowych.
+W rzeczywistym pipeline'ie **workflow** zazwyczaj zawiera wiele wywołań **procesów** połączonych **kanałami**, i mogą być ustawione domyślne wartości dla zmiennych wejściowych.
 
 Zobaczymy to w akcji, gdy uruchomimy nf-core/molkart w Części 2 kursu.
 
 ### 2.4. System `params` parametrów wiersza poleceń
 
-`params.greeting`, który przekazujemy do wywołania procesu `sayHello()`, to elegancki fragment kodu Nextflow i warto poświęcić na niego dodatkową minutę.
+`params.greeting`, który przekazujemy do wywołania **procesu** `sayHello()`, to elegancki fragment kodu Nextflow'a i warto poświęcić na niego dodatkową minutę.
 
-Jak wspomniano powyżej, tak przekazujemy wartość parametru wiersza poleceń `--greeting` do wywołania procesu `sayHello()`.
+Jak wspomniano powyżej, tak przekazujemy wartość parametru wiersza poleceń `--greeting` do wywołania **procesu** `sayHello()`.
 W rzeczywistości samo zadeklarowanie `params.someParameterName` umożliwi nam podanie workflow'owi parametru o nazwie `--someParameterName` z wiersza poleceń.
 
 !!! Tip "Wskazówka"
@@ -321,7 +321,7 @@ W rzeczywistości samo zadeklarowanie `params.someParameterName` umożliwi nam p
 
 ### Podsumowanie
 
-Wiesz teraz, jak jest zbudowany prosty workflow Nextflow i jak podstawowe komponenty odnoszą się do jego funkcjonalności.
+Wiesz teraz, jak jest zbudowany prosty workflow Nextflow'a i jak podstawowe komponenty odnoszą się do jego funkcjonalności.
 
 ### Co dalej?
 
@@ -340,12 +340,12 @@ Tutaj pokażemy Ci, jak wykorzystać funkcję `resume` do ponownego uruchomienia
 Czasami będziesz chciał ponownie uruchomić pipeline, który już wcześniej uruchomiłeś, bez powtarzania jakiejkolwiek pracy, która została już pomyślnie zakończona.
 
 Nextflow ma opcję o nazwie `-resume`, która pozwala Ci to zrobić.
-W szczególności, w tym trybie wszystkie procesy, które zostały już uruchomione z dokładnie tym samym kodem, ustawieniami i wejściami, zostaną pominięte.
-Oznacza to, że Nextflow uruchomi tylko procesy, które dodałeś lub zmodyfikowałeś od ostatniego uruchomienia, lub którym przekazujesz nowe ustawienia lub wejścia.
+W szczególności, w tym trybie wszystkie **procesy**, które zostały już uruchomione z dokładnie tym samym kodem, ustawieniami i wejściami, zostaną pominięte.
+Oznacza to, że Nextflow uruchomi tylko **procesy**, które dodałeś lub zmodyfikowałeś od ostatniego uruchomienia, lub którym przekazujesz nowe ustawienia lub wejścia.
 
 Są dwie kluczowe zalety tego podejścia:
 
-- Jeśli jesteś w trakcie opracowywania pipeline'u, możesz iterować szybciej, ponieważ musisz uruchomić tylko proces(y), nad którymi aktywnie pracujesz, aby przetestować Swoje zmiany.
+- Jeśli jesteś w trakcie opracowywania pipeline'u, możesz iterować szybciej, ponieważ musisz uruchomić tylko **proces(y)**, nad którymi aktywnie pracujesz, aby przetestować Swoje zmiany.
 - Jeśli uruchamiasz pipeline w środowisku produkcyjnym i coś pójdzie nie tak, w wielu przypadkach możesz naprawić problem i ponownie uruchomić pipeline, a on wznowi działanie od punktu awarii, co może zaoszczędzić Ci dużo czasu i mocy obliczeniowej.
 
 Aby z niego skorzystać, po prostu dodaj `-resume` do Swojego polecenia i uruchom je:
@@ -364,18 +364,18 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
     [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
     ```
 
-Zwróć uwagę na fragment `cached:`, który został dodany w linii statusu procesu (linia 5), co oznacza, że Nextflow rozpoznał, iż już wykonał tę pracę i po prostu ponownie wykorzystał wynik z poprzedniego pomyślnego uruchomienia.
+Zwróć uwagę na fragment `cached:`, który został dodany w linii statusu **procesu** (linia 5), co oznacza, że Nextflow rozpoznał, iż już wykonał tę pracę i po prostu ponownie wykorzystał wynik z poprzedniego pomyślnego uruchomienia.
 
 Możesz również zobaczyć, że hash podkatalogu roboczego jest taki sam jak w poprzednim uruchomieniu.
 Nextflow dosłownie wskazuje Ci na poprzednie wykonanie, mówiąc "Już to zrobiłem tam."
 
 !!! Tip "Wskazówka"
 
-    Gdy ponownie uruchamiasz pipeline z `resume`, Nextflow nie nadpisuje żadnych plików zapisanych do katalogu `publishDir` przez żadne wywołanie procesu, które zostało wcześniej pomyślnie uruchomione.
+    Gdy ponownie uruchamiasz pipeline z `resume`, Nextflow nie nadpisuje żadnych plików zapisanych do katalogu `publishDir` przez żadne wywołanie **procesu**, które zostało wcześniej pomyślnie uruchomione.
 
 ### 3.2. Przegląd logu wcześniejszych wykonań
 
-Za każdym razem, gdy uruchamiasz workflow Nextflow, linia jest zapisywana do pliku logu o nazwie `history` w ukrytym katalogu o nazwie `.nextflow` w bieżącym katalogu roboczym.
+Za każdym razem, gdy uruchamiasz workflow Nextflow'a, linia jest zapisywana do pliku logu o nazwie `history` w ukrytym katalogu o nazwie `.nextflow` w bieżącym katalogu roboczym.
 
 Bardziej wygodnym sposobem dostępu do tych informacji jest użycie polecenia `nextflow log`.
 
@@ -383,7 +383,7 @@ Bardziej wygodnym sposobem dostępu do tych informacji jest użycie polecenia `n
 nextflow log
 ```
 
-To wyświetli zawartość pliku logu w terminalu, pokazując Ci znacznik czasu, nazwę uruchomienia, status i pełną linię poleceń dla każdego uruchomienia Nextflow, które zostało uruchomione z bieżącego katalogu roboczego.
+To wyświetli zawartość pliku logu w terminalu, pokazując Ci znacznik czasu, nazwę uruchomienia, status i pełną linię poleceń dla każdego uruchomienia Nextflow'a, które zostało uruchomione z bieżącego katalogu roboczego.
 
 ### 3.3. Usuwanie starszych katalogów roboczych
 
@@ -392,12 +392,12 @@ Ponieważ podkatalogi są nazwane losowo, trudno jest stwierdzić na podstawie i
 
 Nextflow zawiera wygodne podpolecenie `clean`, które może automatycznie usuwać podkatalogi robocze dla wcześniejszych uruchomień, o które już Ci nie zależy, z kilkoma [opcjami](https://www.nextflow.io/docs/latest/reference/cli.html#clean) do kontrolowania, co zostanie usunięte.
 
-Możesz użyć logu Nextflow, aby wyszukać uruchomienie na podstawie jego znacznika czasu i/lub linii poleceń, a następnie użyć `nextflow clean -before <run_name> -f`, aby usunąć katalogi robocze z wcześniejszych uruchomień.
+Możesz użyć logu Nextflow'a, aby wyszukać uruchomienie na podstawie jego znacznika czasu i/lub linii poleceń, a następnie użyć `nextflow clean -before <run_name> -f`, aby usunąć katalogi robocze z wcześniejszych uruchomień.
 
 !!! Warning "Ostrzeżenie"
 
     Usuwanie podkatalogów roboczych z wcześniejszych uruchomień usuwa je z pamięci podręcznej Nextflow'a i usuwa wszystkie wyjścia, które były przechowywane w tych katalogach.
-    Oznacza to, że przerywa zdolność Nextflow'a do wznowienia wykonania bez ponownego uruchamiania odpowiednich procesów.
+    Oznacza to, że przerywa zdolność Nextflow'a do wznowienia wykonania bez ponownego uruchamiania odpowiednich **procesów**.
 
     Jesteś odpowiedzialny za zapisanie wszelkich wyjść, na których Ci zależy lub na których planujesz polegać! Jeśli używasz dyrektywy `publishDir` w tym celu, upewnij się, że używasz trybu `copy`, a nie trybu `symlink`.
 
@@ -407,4 +407,4 @@ Wiesz, jak ponownie uruchomić pipeline bez powtarzania kroków, które zostały
 
 ### Co dalej?
 
-Teraz, gdy rozumiesz podstawowe operacje Nextflow, jesteś gotowy, aby uruchomić prawdziwy pipeline bioimagingu z nf-core/molkart.
+Teraz, gdy rozumiesz podstawowe operacje Nextflow'a, jesteś gotowy, aby uruchomić prawdziwy pipeline bioimagingu z nf-core/molkart.

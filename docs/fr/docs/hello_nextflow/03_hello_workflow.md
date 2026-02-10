@@ -109,7 +109,7 @@ Pour ce faire, nous devons accomplir trois choses :
 
 Pour effectuer la conversion des messages de bienvenue en majuscules, nous allons utiliser un outil UNIX classique appelé `tr` pour « remplacement de texte », avec la syntaxe suivante :
 
-```bash title="Syntaxe"
+```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
 ```
 
@@ -620,8 +620,8 @@ Incluons également quelques instructions `view()` pour visualiser les états av
         collectGreetings(convertToUpper.out.collect())
 
         // instructions view optionnelles
-        convertToUpper.out.view { contents -> "Avant collect : $contents" }
-        convertToUpper.out.collect().view { contents -> "Après collect : $contents" }
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
     ```
 
@@ -653,10 +653,10 @@ nextflow run hello-workflow.nf -resume
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
-    Avant collect : /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    Avant collect : /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    Avant collect : /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    Après collect : [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
     ```
 
 Il s'exécute avec succès, bien que la sortie du journal puisse sembler un peu plus désordonnée que ceci (nous l'avons nettoyée pour la lisibilité).
@@ -708,8 +708,8 @@ Avant de passer à la section suivante, nous vous recommandons de supprimer les 
         collectGreetings(convertToUpper.out.collect())
 
         // instructions view optionnelles
-        convertToUpper.out.view { contents -> "Avant collect : $contents" }
-        convertToUpper.out.collect().view { contents -> "Après collect : $contents" }
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
 
 C'est essentiellement l'opération inverse du point 2.4.2.
@@ -946,7 +946,7 @@ Dans le bloc du processus `collectGreetings`, effectuez les modifications de cod
         count_greetings = input_files.size()
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'Il y avait ${count_greetings} messages de bienvenue dans ce lot.' > '${batch_name}-report.txt'
+        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
         """
     ```
 
@@ -1111,7 +1111,7 @@ Ouvrez-le pour vérifier que le workflow a correctement rapporté le nombre de m
 ??? abstract "Contenu du fichier"
 
     ```txt title="trio-report.txt"
-    Il y avait 3 messages de bienvenue dans ce lot.
+    There were 3 greetings in this batch.
     ```
 
 <figure class="excalidraw">
@@ -1143,7 +1143,7 @@ Comment accédez-vous à la sortie d'un processus dans le bloc workflow ?
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-En savoir plus : [1.4. Passer la sortie du premier processus au deuxième processus](#14-passer-la-sortie-du-premier-processus-au-deuxieme-processus)
+En savoir plus : [1.4. Passer la sortie du premier processus au deuxième processus](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1153,7 +1153,7 @@ Qu'est-ce qui détermine l'ordre d'exécution des processus dans Nextflow ?
 - [x] Les dépendances de données entre les processus
 - [ ] Ordre aléatoire pour l'exécution parallèle
 
-En savoir plus : [1.4. Passer la sortie du premier processus au deuxième processus](#14-passer-la-sortie-du-premier-processus-au-deuxieme-processus)
+En savoir plus : [1.4. Passer la sortie du premier processus au deuxième processus](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1172,7 +1172,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-En savoir plus : [2.4. Utiliser un opérateur pour collecter les messages de bienvenue dans une seule entrée](#24-utiliser-un-operateur-pour-collecter-les-messages-de-bienvenue-dans-une-seule-entree)
+En savoir plus : [2.4. Utiliser un opérateur pour collecter les messages de bienvenue dans une seule entrée](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1182,7 +1182,7 @@ Quand devriez-vous utiliser l'opérateur `collect()` ?
 - [x] Quand un processus en aval a besoin de tous les éléments d'un processus en amont
 - [ ] Quand vous voulez diviser les données entre plusieurs processus
 
-En savoir plus : [2.4. Utiliser un opérateur pour collecter les messages de bienvenue dans une seule entrée](#24-utiliser-un-operateur-pour-collecter-les-messages-de-bienvenue-dans-une-seule-entree)
+En savoir plus : [2.4. Utiliser un opérateur pour collecter les messages de bienvenue dans une seule entrée](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1192,7 +1192,7 @@ Comment accédez-vous à une sortie nommée d'un processus ?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-En savoir plus : [4.1.2. Émettre le fichier de rapport et nommer les sorties](#412-emettre-le-fichier-de-rapport-et-nommer-les-sorties)
+En savoir plus : [4.1.2. Émettre le fichier de rapport et nommer les sorties](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1202,7 +1202,7 @@ Quelle est la syntaxe correcte pour nommer une sortie dans un processus ?
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-En savoir plus : [4.1.2. Émettre le fichier de rapport et nommer les sorties](#412-emettre-le-fichier-de-rapport-et-nommer-les-sorties)
+En savoir plus : [4.1.2. Émettre le fichier de rapport et nommer les sorties](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1212,5 +1212,5 @@ Lors de la fourniture de plusieurs entrées à un processus, qu'est-ce qui doit 
 - [x] L'ordre des entrées doit correspondre à l'ordre défini dans le bloc d'entrée
 - [ ] Seules deux entrées peuvent être fournies à la fois
 
-En savoir plus : [3. Passer des paramètres supplémentaires à un processus](#3-passer-des-parametres-supplementaires-a-un-processus)
+En savoir plus : [3. Passer des paramètres supplémentaires à un processus](#3-pass-more-than-one-input-to-a-process)
 </quiz>

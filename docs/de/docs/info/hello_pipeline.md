@@ -10,19 +10,19 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Die meisten unserer Trainingskurse verwenden eine einfache domänenunabhängige pipeline, um Nextflow-Konzepte und -Mechanismen zu demonstrieren.
-Der Hello Nextflow-Kurs zeigt, wie diese pipeline Schritt für Schritt entwickelt wird, wobei jede Design- und Implementierungsentscheidung erklärt wird.
-Andere Trainings verwenden diese pipeline oder Teile davon als Ausgangspunkt.
+Die meisten unserer Trainingskurse verwenden eine einfache domänenunabhängige Pipeline, um Nextflow-Konzepte und -Mechanismen zu demonstrieren.
+Der Hello Nextflow-Kurs zeigt, wie diese Pipeline Schritt für Schritt entwickelt wird, wobei jede Design- und Implementierungsentscheidung erklärt wird.
+Andere Trainings verwenden diese Pipeline oder Teile davon als Ausgangspunkt.
 
-Diese Seite fasst den Zustand der pipeline nach Abschluss des Hello Nextflow-Kurses zusammen.
+Diese Seite fasst den Zustand der Pipeline nach Abschluss des Hello Nextflow-Kurses zusammen.
 
 ### Kurzbeschreibung
 
-Der Hello-workflow nimmt eine CSV-Datei mit Grüßen, schreibt sie in separate Dateien, konvertiert jede in Großbuchstaben, sammelt sie wieder zusammen und gibt eine einzelne Textdatei aus, die ein ASCII-Bild einer lustigen Figur enthält, die die Grüße sagt.
+Der Hello-Workflow nimmt eine CSV-Datei mit Grüßen, schreibt sie in separate Dateien, konvertiert jede in Großbuchstaben, sammelt sie wieder zusammen und gibt eine einzelne Textdatei aus, die ein ASCII-Bild einer lustigen Figur enthält, die die Grüße sagt.
 
 ### Workflow-Schritte (Prozesse)
 
-Die vier Schritte sind als Nextflow-processes implementiert (`sayHello`, `convertToUpper`, `collectGreetings` und `cowpy`), die in separaten Modul-Dateien gespeichert sind.
+Die vier Schritte sind als Nextflow-Prozesse (`sayHello`, `convertToUpper`, `collectGreetings` und `cowpy`) implementiert, die in separaten Modul-Dateien gespeichert sind.
 
 1. **`sayHello`:** Schreibt jeden Gruß in eine eigene Ausgabedatei (z.B. "Hello-output.txt")
 2. **`convertToUpper`:** Konvertiert jeden Gruß in Großbuchstaben (z.B. "HELLO")
@@ -37,7 +37,7 @@ Die vier Schritte sind als Nextflow-processes implementiert (`sayHello`, `conver
 
 ### Ergebnisse
 
-Die Ergebnisse werden in einem Verzeichnis namens `results/` veröffentlicht, und die endgültige Ausgabe der pipeline (bei Ausführung mit Standardparametern) ist eine Klartextdatei mit ASCII-Kunst eines Truthahns, der die Grüße in Großbuchstaben sagt.
+Die Ergebnisse werden in einem Verzeichnis namens `results/` veröffentlicht, und die endgültige Ausgabe der Pipeline (bei Ausführung mit Standardparametern) ist eine Klartextdatei mit ASCII-Kunst eines Truthahns, der die Grüße in Großbuchstaben sagt.
 
 ```txt title="results/cowpy-COLLECTED-test-batch-output.txt"
   _________
@@ -68,7 +68,7 @@ Die Ergebnisse werden in einem Verzeichnis namens `results/` veröffentlicht, un
                       ^^^ ^^ ^^^ ^
 ```
 
-Je nach Kurs, in dem die pipeline vorgestellt wird, können kleine Abweichungen in den Details auftreten.
+Je nach Kurs, in dem die Pipeline vorgestellt wird, können kleine Abweichungen in den Details auftreten.
 
 ---
 

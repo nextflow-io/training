@@ -13,7 +13,7 @@ Zrobimy to w trzech etapach:
 !!! warning "Wymaganie wstępne"
 
     Musisz przejść przez Część 1 kursu przed rozpoczęciem tej lekcji.
-    W szczególności, praca przez sekcje 2.1-3 tworzy plik indeksu genomu (`data/genome_index.tar.gz`) wymagany do kroku dopasowania w tej lekcji.
+    W szczególności praca przez sekcje 2.1-3 tworzy plik indeksu genomu (`data/genome_index.tar.gz`) wymagany do kroku dopasowania w tej lekcji.
 
 ---
 

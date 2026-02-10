@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Wichtige Hinweise"
@@ -258,7 +258,7 @@ Beachte, dass du tatsächlich eine Mischung verschiedener Technologien verwenden
 
 ## 4. Eine Ausführungsplattform auswählen
 
-Das war also Software-Packaging. Der andere Teil der Portabilität auf andere Systeme ist, wo die Jobs tatsächlich laufen. Im Moment laufe ich im Grunde auf meinem_Laptop oder in diesem Codespaces, was ein einzelner Computer ist. Es gibt nichts Ausgefallenes. Nextflow ist ein bisschen clever beim Parallelisieren der Jobs, so gut es kann, aber es ist alles auf einem System.
+Das war also Software-Packaging. Der andere Teil der Portabilität auf andere Systeme ist, wo die Jobs tatsächlich laufen. Im Moment laufe ich im Grunde auf meinem Laptop oder in diesem Codespaces, was ein einzelner Computer ist. Es gibt nichts Ausgefallenes. Nextflow ist ein bisschen clever beim Parallelisieren der Jobs, so gut es kann, aber es ist alles auf einem System.
 
 Wenn du auf einem HPC läufst, hast du wahrscheinlich irgendeine Art von Job-Scheduler wie SLURM oder PBS oder so, und du reichst Jobs an diesen Scheduler ein und er verteilt alle Jobs an verschiedene Compute-Nodes.
 

@@ -30,7 +30,7 @@ nextflow run nf-core/molkart -profile docker,test -stub -resume --outdir results
 Este comando fará o download de todas as imagens Docker necessárias em segundo plano.
 Você pode continuar com o restante da orientação enquanto isso é executado.
 
-!!!tip "Dica"
+!!!tip
 
     A flag `-stub` permite que o pipeline seja executado rapidamente sem processar dados reais, o que é perfeito para baixar imagens. Você pode monitorar o progresso na aba do terminal.
 
@@ -44,7 +44,7 @@ Mude de diretório agora executando este comando no terminal:
 cd nf4-science/imaging/
 ```
 
-!!!tip "Dica"
+!!!tip
 
     Se por qualquer motivo você sair deste diretório, você sempre pode usar o caminho completo para retornar a ele, assumindo que você está executando isso dentro do ambiente de treinamento GitHub Codespaces:
 

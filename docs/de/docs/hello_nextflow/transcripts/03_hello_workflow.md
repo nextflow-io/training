@@ -44,7 +44,7 @@ Das ist also ein sehr einfacher Stil von Bash-Befehl, den wir in unserem zweiten
 
 ## 1.2. Den Großschreib-Schritt als Nextflow-Prozess schreiben
 
-Wenn ich also zurück zu meinem Skript gehe, werde ich ein bisschen schummeln und einfach den Code aus den, aus den Docs für das Training kopieren. Aber du kannst genau sehen, was vor sich geht.
+Wenn ich also zurück zu meinem Skript gehe, werde ich ein bisschen schummeln und einfach den Code aus den Docs für das Training kopieren. Aber du kannst genau sehen, was vor sich geht.
 
 Wir haben hier einen neuen Prozess. Diesen haben wir convertToUpper genannt, aber wir könnten ihn nennen, wie wir wollen.
 
@@ -182,7 +182,7 @@ Okay. Ich kann diese Pipeline jetzt direkt mit --batch ausführen, aber lass uns
 
 Und tatsächlich, COLLECTED-trio-output - das hat richtig funktioniert. Es hat unsere Datei umbenannt. Und du kannst dir jetzt vorstellen, das ist nützlich, denn wenn ich das nochmal mit einem anderen Batch-Namen ausführe, wie replicate_two, dann wird es uns hier oben einen anderen Batch-Namen geben.
 
-Und und es wird dann die Ausgabedateien in diesem Fall nicht überschreiben. Das ist also schön.
+Und es wird dann die Ausgabedateien in diesem Fall nicht überschreiben. Das ist also schön.
 
 ## 4. Eine Ausgabe zum Sammelschritt hinzufügen
 
@@ -210,9 +210,7 @@ Wir sagen path, denn es ist, wieder, wir könnten hier eine Variable veröffentl
 
 Okay, das ist großartig. Und wir könnten jetzt anfangen, auf diese Ausgaben hier unten zuzugreifen, genau wie ich es hier gemacht habe. Aber jetzt ist es ein Array von verschiedenen Objekten, also könnte ich collectGreetings.out[0] machen, um die erste zu bekommen, oder eins, um die zweite zu bekommen, was unser neuer Report ist.
 
-Aber ich mag das nicht wirklich sehr, weil es ziemlich einfach ist, die Index-Zählung durcheinander zu bringen. Und du sitzt da und zählst viel Zeilen und du fügst eine neue Ausgabe hinzu und plötzlich bricht alles zusammen. Also
-
-ist es viel schöner, stattdessen alles per Name zu referenzieren. Und wir können das mit einem speziellen Schlüssel hier namens "emit" machen.
+Aber ich mag das nicht wirklich sehr, weil es ziemlich einfach ist, die Index-Zählung durcheinander zu bringen. Und du sitzt da und zählst viel Zeilen und du fügst eine neue Ausgabe hinzu und plötzlich bricht alles zusammen. Also ist es viel schöner, stattdessen alles per Name zu referenzieren. Und wir können das mit einem speziellen Schlüssel hier namens "emit" machen.
 
 Wir können das also nennen, wie wir wollen. Nennen wir es emit outfile, und emit reports. Wenn du diese definierst und du kannst es bei einem oder vielen machen, das liegt an dir. Jetzt kann ich hier runtergehen und stattdessen kann ich dot out dot reports gehen und es einfach per Name aufrufen, was viel einfacher ist, deinen Code zu verstehen, wenn du ihn liest, und es ist sicherer bei Änderungen im Code.
 

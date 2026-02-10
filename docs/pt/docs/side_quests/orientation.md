@@ -24,7 +24,7 @@ tree . -L 2
 
 Se você executar isso dentro de `side-quests`, deverá ver a seguinte saída:
 
-```console title="Conteúdo do diretório"
+```console title="Directory contents"
 .
 ├── metadata
 ├── nf-core
@@ -42,7 +42,7 @@ Se você executar isso dentro de `side-quests`, deverá ver a seguinte saída:
 - **O diretório `solutions`** contém os scripts de fluxo de trabalho e/ou módulo completos que resultam da execução de várias etapas de cada missão secundária.
   Eles são destinados a serem usados como referência para verificar seu trabalho e solucionar quaisquer problemas.
 
-!!!tip "Dica"
+!!!tip
 
     Se por qualquer motivo você sair deste diretório, você sempre pode executar este comando para retornar a ele:
 

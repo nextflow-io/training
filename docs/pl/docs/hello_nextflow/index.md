@@ -7,8 +7,8 @@ index_type: course
 additional_information:
     technical_requirements: true
     learning_objectives:
-        - Uruchamianie i zarządzanie wykonywaniem workflow'ów Nextflow
-        - Znajdowanie i interpretowanie wyjść (wyników) i plików dziennika generowanych przez Nextflow
+        - Uruchamianie workflow'ów Nextflow i zarządzanie ich wykonywaniem
+        - Znajdowanie i interpretowanie wyjść (wyników) oraz plików dziennika generowanych przez Nextflow
         - Rozwiązywanie podstawowych problemów
         - Budowanie prostego wieloetapowego workflow'u z podstawowych komponentów Nextflow
         - Rozróżnianie między podstawowymi typami fabryk kanałów i operatorów oraz efektywne ich wykorzystywanie w prostym workflow'ie

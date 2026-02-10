@@ -29,7 +29,7 @@ Queste competenze vi aiuteranno a costruire workflow che possono gestire file di
 Prima di intraprendere questa missione secondaria, dovreste:
 
 - Aver completato il tutorial [Hello Nextflow](../hello_nextflow/README.md) o un corso equivalente per principianti.
-- Essere a proprio agio con i concetti e meccanismi base di Nextflow (processi, canali, operatori, lavoro con file, meta data)
+- Essere a proprio agio con i concetti e meccanismi base di Nextflow (processi, canali, operatori, lavoro con file, metadata)
 
 **Opzionale:** Raccomandiamo di completare prima la missione secondaria [Metadata nei workflow](./metadata.md).
 Questa copre i fondamenti della lettura di file CSV con `splitCsv` e della creazione di meta map, che useremo intensamente qui.
@@ -62,7 +62,7 @@ code .
 
 Troverete un file workflow principale e una directory `data` contenente un samplesheet chiamato `samplesheet.csv`.
 
-```console title="Contenuti della directory"
+```console title="Directory contents"
 .
 ├── data
 │   └── samplesheet.csv
@@ -90,7 +90,7 @@ Se non avete familiarità con l'analisi del cancro, sappiate semplicemente che q
 
 Per il paziente A specificatamente, abbiamo due set di repliche tecniche.
 
-!!! note
+!!! note "Nota"
 
     Non preoccupatevi se non avete familiarità con questo disegno sperimentale, non è critico per comprendere questo tutorial.
 
@@ -131,13 +131,13 @@ workflow {
 }
 ```
 
-!!! note
+!!! note "Nota"
 
     In tutto questo tutorial, useremo il prefisso `ch_` per tutte le variabili canale per indicare chiaramente che sono canali Nextflow.
 
 Se avete completato la missione secondaria [Metadata nei workflow](./metadata.md), riconoscerete questo pattern. Useremo `splitCsv` per leggere il CSV e strutturare immediatamente i dati con una meta map per separare i metadata dai percorsi dei file.
 
-!!! info
+!!! info "Info"
 
     Incontreremo due concetti diversi chiamati `map` in questa formazione:
 
@@ -350,7 +350,7 @@ nextflow run main.nf
 
 Abbiamo separato i campioni normali e tumorali in due canali diversi, e usato una closure fornita a `view()` per etichettarli diversamente nell'output: `ch_tumor_samples.view{'Tumor sample: ' + it}`.
 
-### Sintesi
+### Takeaway
 
 In questa sezione, avete imparato:
 
@@ -514,7 +514,7 @@ nextflow run main.nf
 - `tumor_meta_map`: I metadata del campione tumorale inclusi tipo, replica e percorso al file bam
 - `tumor_sample`: Il campione tumorale inclusi tipo, replica e percorso al file bam
 
-!!! warning
+!!! warning "Avviso"
 
     L'operatore `join` scarterà qualsiasi tupla non abbinata. In questo esempio, ci siamo assicurati che tutti i campioni fossero abbinati per tumore e normale ma se questo non è vero dovete usare il parametro `remainder: true` per mantenere le tuple non abbinate. Controllate la [documentazione](https://www.nextflow.io/docs/latest/operator.html#join) per maggiori dettagli.
 
@@ -685,7 +685,7 @@ Implementiamo la closure nel nostro workflow:
             .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
     ```
 
-!!! note
+!!! note "Nota"
 
     L'operatore `map` è passato dall'usare `{ }` all'usare `( )` per passare la closure come argomento. Questo perché l'operatore `map` si aspetta una closure come argomento e `{ }` viene usato per definire una closure anonima. Quando si chiama una closure nominata, usare la sintassi `( )`.
 
@@ -807,7 +807,7 @@ nextflow run main.nf
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
 
-### Sintesi
+### Takeaway
 
 In questa sezione, avete imparato:
 
@@ -973,11 +973,11 @@ nextflow run main.nf
     [[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
 
-Usare `map` per coercere i dati nella struttura corretta può essere complicato, ma è cruciale per la manipolazione efficace dei dati.
+Usare `map` per coercire i dati nella struttura corretta può essere complicato, ma è cruciale per la manipolazione efficace dei dati.
 
 Ora abbiamo ogni campione ripetuto attraverso tutti gli intervalli genomici, creando unità di analisi indipendenti multiple che possono essere processate in parallelo. Ma cosa succede se vogliamo riportare insieme campioni correlati? Nella prossima sezione, impareremo come raggruppare campioni che condividono attributi comuni.
 
-### Sintesi
+### Takeaway
 
 In questa sezione, avete imparato:
 
@@ -1076,7 +1076,7 @@ nextflow run main.nf
 
 Possiamo vedere che abbiamo isolato con successo i campi `id` e `interval`, ma non abbiamo ancora raggruppato i campioni.
 
-!!! note
+!!! note "Nota"
 
     Qui stiamo scartando il campo `replicate`. Questo perché non ne abbiamo bisogno per l'elaborazione successiva. Dopo aver completato questo tutorial, prova a includerlo senza influenzare il raggruppamento successivo!
 
@@ -1137,11 +1137,11 @@ nextflow run main.nf
 
 Nota che la struttura dei nostri dati è cambiata e all'interno di ogni elemento del canale i file sono ora contenuti in tuple come `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`. Questo avviene perché quando usiamo `groupTuple`, Nextflow combina i singoli file per ogni campione di un gruppo. È importante ricordarlo quando si gestiscono i dati a valle.
 
-!!! note
+!!! note "Nota"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) è l'opposto di groupTuple. Decomprime gli elementi in un canale e li appiattisce. Prova ad aggiungere `transpose` e annullare il raggruppamento che abbiamo eseguito sopra!
 
-### Sintesi
+### Takeaway
 
 In questa sezione, hai imparato:
 

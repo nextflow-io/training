@@ -8,7 +8,7 @@ O projeto nf-core fornece um comando (`nf-core modules create`) que gera templat
 No entanto, para fins didáticos, vamos começar fazendo manualmente: transformar o módulo local `cowpy` em seu pipeline `core-hello` em um módulo no estilo nf-core passo a passo.
 Depois disso, mostraremos como usar a criação de módulos baseada em template para trabalhar de forma mais eficiente no futuro.
 
-??? info "Como começar desta seção"
+??? info "Como começar a partir desta seção"
 
     Esta seção pressupõe que você completou a [Parte 3: Usar um módulo nf-core](./03_use_module.md) e integrou o módulo `CAT_CAT` ao seu pipeline.
 
@@ -38,7 +38,7 @@ Este é o código atual para o módulo de processo `cowpy`:
 ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Gera arte ASCII com cowpy (https://github.com/jeffbuttars/cowpy)
+// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
     publishDir 'results', mode: 'copy'
@@ -97,14 +97,14 @@ Abra o arquivo do módulo `cowpy.nf` (em `core-hello/modules/local/`) e modifiqu
 === "Depois"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
-    // Gera arte ASCII com cowpy (https://github.com/jeffbuttars/cowpy)
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
     ```
 
 === "Antes"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
-    // Gera arte ASCII com cowpy (https://github.com/jeffbuttars/cowpy)
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process cowpy {
     ```
 
@@ -434,7 +434,7 @@ Abra o arquivo do módulo `cowpy.nf` (em `core-hello/modules/local/`) e modifiqu
     ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="18 20"
     #!/usr/bin/env nextflow
 
-    // Gera arte ASCII com cowpy (https://github.com/jeffbuttars/cowpy)
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -461,7 +461,7 @@ Abra o arquivo do módulo `cowpy.nf` (em `core-hello/modules/local/`) e modifiqu
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 20"
     #!/usr/bin/env nextflow
 
-    // Gera arte ASCII com cowpy (https://github.com/jeffbuttars/cowpy)
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -497,7 +497,7 @@ Você pode ver que fizemos três mudanças.
 
 Como resultado, a interface do módulo agora é mais simples: ela só espera as entradas essenciais de metadata e arquivo.
 
-!!! note
+!!! note "Nota"
 
     O operador `?:` é frequentemente chamado de 'operador Elvis' porque se parece com um rosto de Elvis Presley de lado, com o caractere `?` simbolizando a onda em seu cabelo.
 
@@ -695,7 +695,7 @@ Para resumir os benefícios desta abordagem:
 - **Portabilidade**: Módulos podem ser reutilizados sem opções de ferramenta codificadas
 - **Sem mudanças no fluxo de trabalho**: Adicionar ou alterar opções de ferramenta não requer atualizar o código do fluxo de trabalho
 
-!!! note
+!!! note "Nota"
 
     O sistema `ext.args` tem capacidades adicionais poderosas não cobertas aqui, incluindo alternar valores de argumentos dinamicamente com base em metadata. Veja as [especificações de módulos nf-core](https://nf-co.re/docs/guidelines/components/modules) para mais detalhes.
 
@@ -917,7 +917,7 @@ Abra o arquivo do módulo `cowpy.nf` (em `core-hello/modules/local/`) e remova a
     ```groovy title="core-hello/modules/local/cowpy.nf (trecho)" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Gera arte ASCII com cowpy (https://github.com/jeffbuttars/cowpy)
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -929,7 +929,7 @@ Abra o arquivo do módulo `cowpy.nf` (em `core-hello/modules/local/`) e remova a
     ```groovy title="core-hello/modules/local/cowpy.nf (trecho)" linenums="1" hl_lines="6"
     #!/usr/bin/env nextflow
 
-    // Gera arte ASCII com cowpy (https://github.com/jeffbuttars/cowpy)
+    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
         publishDir 'results', mode: 'copy'
@@ -1539,7 +1539,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 Isso produz os mesmos resultados de antes.
 
-### Resumo
+### Conclusão
 
 Agora você sabe como usar as ferramentas integradas do nf-core para criar módulos eficientemente usando templates em vez de escrever tudo do zero.
 
@@ -1582,9 +1582,9 @@ Para instruções detalhadas, consulte o [tutorial de componentes nf-core](https
 - **Especificações de módulos**: [Requisitos técnicos e diretrizes](https://nf-co.re/docs/guidelines/components/modules)
 - **Suporte da comunidade**: [nf-core Slack](https://nf-co.re/join) - Junte-se ao canal `#modules`
 
-### Resumo
+### Conclusão
 
-Agora você sabe como criar módulos nf-core! Você aprendeu os quatro padrões-chave que tornam os módulos portáveis e manuteníveis:
+Agora você sabe como criar módulos nf-core! Você aprendeu os quatro padrões-chave que tornam os módulos portáteis e manuteníveis:
 
 - **Tuplas de metadados** propagam metadados através do workflow
 - **`ext.args`** simplifica interfaces de módulos lidando com argumentos opcionais via configuração

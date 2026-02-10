@@ -1,6 +1,6 @@
 # Bölüm 1: Demo pipeline çalıştırma
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Hello nf-core eğitim kursunun bu ilk bölümünde, bir nf-core pipeline'ının nasıl bulunacağını ve deneneceğini, kodun nasıl düzenlendiğini ve [Hello Nextflow](../hello_nextflow/index.md)'da gösterilen düz Nextflow kodundan nasıl farklılaştığını öğreneceksiniz.
 
@@ -115,7 +115,7 @@ tree -L 2 $NXF_HOME/assets/
 2 directories, 0 files
 ```
 
-!!! note
+!!! note "Not"
 
     Eğitim ortamımızı kullanmıyorsanız, tam yol sisteminizde farklı olabilir.
 
@@ -146,7 +146,7 @@ Artık gerektiğinde kaynak koduna daha kolay göz atabiliriz.
 
 Ama önce, ilk nf-core pipeline'ımızı çalıştırmayı deneyelim!
 
-### Çıkarım
+### Özet
 
 Artık nf-core web sitesi üzerinden bir pipeline'ı nasıl bulacağınızı ve kaynak kodunun yerel bir kopyasını nasıl edineceğinizi biliyorsunuz.
 
@@ -162,7 +162,7 @@ Kolaylık sağlamak için, her nf-core pipeline'ı bir test profiliyle birlikte 
 Bu, [nf-core/test-datasets](https://github.com/nf-core/test-datasets) deposunda barındırılan küçük bir test veri setini kullanarak pipeline'ın çalıştırılması için minimum yapılandırma ayarları kümesidir.
 Küçük ölçekte bir pipeline'ı hızlıca denemenin harika bir yoludur.
 
-!!! note
+!!! note "Not"
 
     Nextflow'un yapılandırma profil sistemi, farklı konteyner motorları veya çalıştırma ortamları arasında kolayca geçiş yapmanızı sağlar.
     Daha fazla ayrıntı için [Hello Nextflow Bölüm 6: Yapılandırma](../hello_nextflow/06_hello_config.md) bölümüne bakın.
@@ -232,7 +232,7 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 
 Buna samplesheet denir ve nf-core pipeline'larına en yaygın girdi biçimidir.
 
-!!! note
+!!! note "Not"
 
     Veri formatlarına ve türlerine aşina değilseniz endişelenmeyin, takip edenler için önemli değil.
 
@@ -308,11 +308,11 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
 Temel bir Nextflow pipeline'ı çalıştırdığınızda olduğundan çok daha fazla konsol çıktısı olduğunu fark edeceksiniz.
 Pipeline'ın sürümünün, girdilerinin ve çıktılarının bir özetini ve birkaç yapılandırma öğesini içeren bir başlık vardır.
 
-!!! note
+!!! note "Not"
 
-    Çıktınız farklı zaman damgaları, çalıştırma adları ve dosya yolları gösterecektir, ancak genel yapı ve process çalıştırması benzer olmalıdır.
+    Çıktınız farklı zaman damgaları, çalıştırma adları ve dosya yolları gösterecektir, ancak genel yapı ve süreç çalıştırması benzer olmalıdır.
 
-Çalıştırma çıktısına geçerek, hangi process'lerin çalıştırıldığını bize söyleyen satırlara bakalım:
+Çalıştırma çıktısına geçerek, hangi süreçlerin çalıştırıldığını bize söyleyen satırlara bakalım:
 
 ```console
     [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
@@ -320,10 +320,10 @@ Pipeline'ın sürümünün, girdilerinin ve çıktılarının bir özetini ve bi
     [7c/78d96e] NFCORE_DEMO:DEMO:MULTIQC                 | 1 of 1 ✔
 ```
 
-Bu bize üç process'in çalıştırıldığını söyler; bunlar nf-core web sitesindeki pipeline dokümantasyon sayfasında gösterilen üç araca karşılık gelir: FASTQC, SEQTK_TRIM ve MULTIQC.
+Bu bize üç sürecin çalıştırıldığını söyler; bunlar nf-core web sitesindeki pipeline dokümantasyon sayfasında gösterilen üç araca karşılık gelir: FASTQC, SEQTK_TRIM ve MULTIQC.
 
-Burada gösterildiği gibi `NFCORE_DEMO:DEMO:MULTIQC` gibi tam process adları, tanıtıcı Hello Nextflow materyalinde görmüş olabileceğinizden daha uzundur.
-Bunlar üst workflow'larının adlarını içerir ve pipeline kodunun modülerliğini yansıtır.
+Burada gösterildiği gibi `NFCORE_DEMO:DEMO:MULTIQC` gibi tam süreç adları, tanıtıcı Hello Nextflow materyalinde görmüş olabileceğinizden daha uzundur.
+Bunlar üst iş akışlarının adlarını içerir ve pipeline kodunun modülerliğini yansıtır.
 Buna birazdan daha ayrıntılı gireceğiz.
 
 ### 2.3. Pipeline çıktılarını inceleme
@@ -364,18 +364,18 @@ Bu çok fazla görünebilir.
 
 Bu aşamada, gözlemlenmesi gereken önemli şey, sonuçların modüle göre düzenlenmiş olması ve ek olarak pipeline çalıştırması hakkında çeşitli zaman damgalı raporlar içeren `pipeline_info` adlı bir dizinin bulunmasıdır.
 
-Örneğin, `execution_timeline_*` dosyası hangi process'lerin çalıştırıldığını, hangi sırayla ve çalışmalarının ne kadar sürdüğünü gösterir:
+Örneğin, `execution_timeline_*` dosyası hangi süreçlerin çalıştırıldığını, hangi sırayla ve çalışmalarının ne kadar sürdüğünü gösterir:
 
 ![çalıştırma zaman çizelgesi raporu](./img/execution_timeline.png)
 
-!!! note
+!!! note "Not"
 
     Burada görevler paralel olarak çalıştırılmadı çünkü Github Codespaces'te minimalist bir makine üzerinde çalışıyoruz.
     Bunların paralel olarak çalıştığını görmek için, codespace'inizin CPU tahsisini ve test yapılandırmasındaki kaynak sınırlarını artırmayı deneyin.
 
 Bu raporlar tüm nf-core pipeline'ları için otomatik olarak oluşturulur.
 
-### Çıkarım
+### Özet
 
 Yerleşik test profili kullanarak bir nf-core pipeline'ını nasıl çalıştıracağınızı ve çıktılarını nerede bulacağınızı biliyorsunuz.
 
@@ -443,13 +443,13 @@ Bireysel dosyalar içindeki koda dalmak yerine, dosya hiyerarşisine ve yapısal
 ### 3.1. Pipeline kod bileşenleri
 
 Standart nf-core pipeline kod organizasyonu, [Hello Nextflow](../hello_nextflow/index.md) kursunun 4. Bölümü olan [Hello Modüller](../hello_nextflow/04_hello_modules.md)'de tanıtıldığı gibi, kod yeniden kullanımını en üst düzeye çıkarmak için tasarlanmış modüler bir yapıyı takip eder, ancak gerçek nf-core tarzında bu, biraz ek karmaşıklıkla uygulanır.
-Özellikle, nf-core pipeline'ları, yani bir üst workflow tarafından içe aktarılan workflow betiklerini bolca kullanır.
+Özellikle, nf-core pipeline'ları, yani bir üst iş akışı tarafından içe aktarılan iş akışı betiklerini bolca kullanır.
 
 Bu biraz soyut gelebilir, bu yüzden bunun pratikte `nf-core/demo` pipeline'ında nasıl kullanıldığına bakalım.
 
-!!! note
+!!! note "Not"
 
-    Bu modüler bileşenlerin _nasıl_ bağlandığına dair gerçek kodu incelemeyeceğiz, çünkü subworkflow'ların kullanımıyla ilişkili, kafa karıştırıcı olabilecek bazı ek karmaşıklıklar vardır ve bunu anlamak eğitimin bu aşamasında gerekli değildir.
+    Bu modüler bileşenlerin _nasıl_ bağlandığına dair gerçek kodu incelemeyeceğiz, çünkü alt iş akışlarının kullanımıyla ilişkili, kafa karıştırıcı olabilecek bazı ek karmaşıklıklar vardır ve bunu anlamak eğitimin bu aşamasında gerekli değildir.
     Şimdilik, genel organizasyona ve mantığa odaklanacağız.
 
 #### 3.1.1. Genel bakış
@@ -460,14 +460,14 @@ Bu biraz soyut gelebilir, bu yüzden bunun pratikte `nf-core/demo` pipeline'ınd
     --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
 </figure>
 
-`main.nf` adlı, iki tür iç içe workflow için sarmalayıcı görevi gören bir _giriş noktası_ betiği vardır: `workflows/` altında bulunan ve `demo.nf` olarak adlandırılan gerçek analiz mantığını içeren workflow ve `subworkflows/` altında bulunan bir dizi bakım workflow'u.
-`demo.nf` workflow'u `modules/` altında bulunan **modülleri** çağırır; bunlar gerçek analiz adımlarını gerçekleştirecek **process'leri** içerir.
+`main.nf` adlı, iki tür iç içe iş akışı için sarmalayıcı görevi gören bir _giriş noktası_ betiği vardır: `workflows/` altında bulunan ve `demo.nf` olarak adlandırılan gerçek analiz mantığını içeren iş akışı ve `subworkflows/` altında bulunan bir dizi bakım iş akışı.
+`demo.nf` iş akışı `modules/` altında bulunan **modülleri** çağırır; bunlar gerçek analiz adımlarını gerçekleştirecek **süreçleri** içerir.
 
-!!! note
+!!! note "Not"
 
-    Subworkflow'lar bakım işlevleriyle sınırlı değildir ve process modülleri kullanabilirler.
+    Alt iş akışları bakım işlevleriyle sınırlı değildir ve süreç modülleri kullanabilirler.
 
-    Burada gösterilen `nf-core/demo` pipeline'ı spektrumun daha basit tarafında olmaktadır, ancak diğer nf-core pipeline'ları (`nf-core/rnaseq` gibi) gerçek analizde yer alan subworkflow'lar kullanır.
+    Burada gösterilen `nf-core/demo` pipeline'ı spektrumun daha basit tarafında olmaktadır, ancak diğer nf-core pipeline'ları (`nf-core/rnaseq` gibi) gerçek analizde yer alan alt iş akışları kullanır.
 
 Şimdi, bu bileşenleri sırayla gözden geçirelim.
 
@@ -477,28 +477,28 @@ Bu biraz soyut gelebilir, bu yüzden bunun pratikte `nf-core/demo` pipeline'ınd
 Bu, pipeline'ı çalıştırmak için `nextflow run nf-core/demo` komutunu çalıştırdığınızda, Nextflow'un otomatik olarak `main.nf` betiğini bulup çalıştırdığı anlamına gelir.
 Bu, sadece nf-core pipeline'ları için değil, bu geleneksel adlandırma ve yapıyı takip eden herhangi bir Nextflow pipeline'ı için çalışır.
 
-Bir giriş noktası betiği kullanmak, gerçek analiz betiği çalıştırılmadan önce ve sonra standartlaştırılmış 'bakım' subworkflow'larını çalıştırmayı kolaylaştırır.
-Bunları, gerçek analiz workflow'unu ve modüllerini gözden geçirdikten sonra ele alacağız.
+Bir giriş noktası betiği kullanmak, gerçek analiz betiği çalıştırılmadan önce ve sonra standartlaştırılmış 'bakım' alt iş akışlarını çalıştırmayı kolaylaştırır.
+Bunları, gerçek analiz iş akışını ve modüllerini gözden geçirdikten sonra ele alacağız.
 
 #### 3.1.3. Analiz betiği: `workflows/demo.nf`
 
-`workflows/demo.nf` workflow'u, pipeline'ın merkezi mantığının saklandığı yerdir.
-Normal bir Nextflow workflow'u gibi yapılandırılmıştır, ancak bir üst workflow'dan çağrılmak üzere tasarlanmıştır, bu da birkaç ekstra özellik gerektirir.
+`workflows/demo.nf` iş akışı, pipeline'ın merkezi mantığının saklandığı yerdir.
+Normal bir Nextflow iş akışı gibi yapılandırılmıştır, ancak bir üst iş akışından çağrılmak üzere tasarlanmıştır, bu da birkaç ekstra özellik gerektirir.
 Kursun bir sonraki bölümünde, Hello Nextflow'daki basit Hello pipeline'ının nf-core uyumlu bir forma dönüştürülmesiyle uğraştığımızda ilgili farklılıkları ele alacağız.
 
-`demo.nf` workflow'u, daha sonra gözden geçireceğimiz `modules/` altında bulunan **modülleri** çağırır.
+`demo.nf` iş akışı, daha sonra gözden geçireceğimiz `modules/` altında bulunan **modülleri** çağırır.
 
-!!! note
+!!! note "Not"
 
-    Bazı nf-core analiz workflow'ları, alt düzey subworkflow'ları çağırarak ek iç içe geçme düzeyleri sergiler.
+    Bazı nf-core analiz iş akışları, alt düzey alt iş akışlarını çağırarak ek iç içe geçme düzeyleri sergiler.
     Bu çoğunlukla, yaygın olarak birlikte kullanılan iki veya daha fazla modülü kolayca yeniden kullanılabilir pipeline segmentlerine sarmak için kullanılır.
-    nf-core web sitesinde mevcut [nf-core subworkflow'larına](https://nf-co.re/subworkflows/) göz atarak bazı örnekler görebilirsiniz.
+    nf-core web sitesinde mevcut [nf-core alt iş akışlarına](https://nf-co.re/subworkflows/) göz atarak bazı örnekler görebilirsiniz.
 
-    Analiz betiği subworkflow'lar kullandığında, bunlar `subworkflows/` dizini altında saklanır.
+    Analiz betiği alt iş akışları kullandığında, bunlar `subworkflows/` dizini altında saklanır.
 
 #### 3.1.4. Modüller
 
-Modüller, [Hello Nextflow eğitim kursunun 4. Bölümünde](../hello_nextflow/04_hello_modules.md) açıklandığı gibi process kodunun bulunduğu yerdir.
+Modüller, [Hello Nextflow eğitim kursunun 4. Bölümünde](../hello_nextflow/04_hello_modules.md) açıklandığı gibi süreç kodunun bulunduğu yerdir.
 
 nf-core projesinde modüller, hem kökenlerini hem de içeriklerini yansıtan çok düzeyli iç içe geçmiş bir yapı kullanılarak düzenlenir.
 En üst düzeyde, modüller `nf-core` veya `local` (nf-core projesinin parçası değil) olarak ayırt edilir ve daha sonra sardıkları araç(lar)dan sonra adlandırılan bir dizine yerleştirilir.
@@ -534,14 +534,14 @@ tree -L 3 pipelines/nf-core/demo/modules
 Burada `fastqc` ve `multiqc` modüllerinin `nf-core` modüllerinin üst düzeyinde oturduğunu görüyorsunuz, oysa `trim` modülü ait olduğu araç kiti olan `seqtk` altında oturuyor.
 Bu durumda `local` modül yoktur.
 
-Process'i tanımlayan modül kod dosyası her zaman `main.nf` olarak adlandırılır ve şimdilik göz ardı edeceğimiz testler ve `.yml` dosyalarıyla birlikte gelir.
+Süreci tanımlayan modül kod dosyası her zaman `main.nf` olarak adlandırılır ve şimdilik göz ardı edeceğimiz testler ve `.yml` dosyalarıyla birlikte gelir.
 
-Birlikte ele alındığında, giriş noktası workflow'u, analiz workflow'u ve modüller, pipeline'ın 'ilginç' kısımlarını çalıştırmak için yeterlidir.
-Ancak, orada bakım subworkflow'ları da olduğunu biliyoruz, o yüzden şimdi onlara bakalım.
+Birlikte ele alındığında, giriş noktası iş akışı, analiz iş akışı ve modüller, pipeline'ın 'ilginç' kısımlarını çalıştırmak için yeterlidir.
+Ancak, orada bakım alt iş akışları da olduğunu biliyoruz, o yüzden şimdi onlara bakalım.
 
-#### 3.1.5. Bakım subworkflow'ları
+#### 3.1.5. Bakım alt iş akışları
 
-Modüller gibi, subworkflow'lar da `local` ve `nf-core` dizinlerine ayrılır ve her subworkflow'un kendi `main.nf` betiği, testleri ve `.yml` dosyası olan kendi iç içe dizin yapısı vardır.
+Modüller gibi, alt iş akışları da `local` ve `nf-core` dizinlerine ayrılır ve her alt iş akışının kendi `main.nf` betiği, testleri ve `.yml` dosyası olan kendi iç içe dizin yapısı vardır.
 
 ```bash
 tree -L 3 pipelines/nf-core/demo/subworkflows
@@ -571,12 +571,12 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
     9 directories, 7 files
     ```
 
-Yukarıda belirtildiği gibi, `nf-core/demo` pipeline'ı herhangi bir analize özgü subworkflow içermez, bu nedenle burada gördüğümüz tüm subworkflow'lar, adlarındaki `utils_` öneki ile gösterildiği gibi, 'bakım' veya 'yardımcı' workflow'lar olarak adlandırılır.
-Bu subworkflow'lar, diğer yardımcı işlevlerin yanı sıra konsol çıktısında süslü nf-core başlığını üreten şeydir.
+Yukarıda belirtildiği gibi, `nf-core/demo` pipeline'ı herhangi bir analize özgü alt iş akışı içermez, bu nedenle burada gördüğümüz tüm alt iş akışlar, adlarındaki `utils_` öneki ile gösterildiği gibi, 'bakım' veya 'yardımcı' iş akışlar olarak adlandırılır.
+Bu alt iş akışlar, diğer yardımcı işlevlerin yanı sıra konsol çıktısında süslü nf-core başlığını üreten şeydir.
 
-!!! tip
+!!! tip "İpucu"
 
-    Adlandırma desenlerinin yanı sıra, bu subworkflow'ların gerçekten analizle ilgili herhangi bir işlev gerçekleştirmediğinin bir başka göstergesi de hiçbir process çağırmamasıdır.
+    Adlandırma desenlerinin yanı sıra, bu alt iş akışlarının gerçekten analizle ilgili herhangi bir işlev gerçekleştirmediğinin bir başka göstergesi de hiçbir süreç çağırmamasıdır.
 
 Bu, `nf-core/demo` pipeline'ını oluşturan temel kod bileşenlerinin bir özetini tamamlar.
 Şimdi geliştirmeye dalmadan önce hakkında biraz bilgi sahibi olmanız gereken kalan öğelere bakalım: pipeline yapılandırması ve girdi doğrulama.
@@ -631,7 +631,7 @@ Bu, otomatik parametre doğrulama, yardım metni oluşturma ve UI arayüzlerinde
 Her sütun, makine tarafından okunabilir bir formatta bir tip, desen, açıklama ve yardım metnine sahip olabilir.
 Şema, otomatik doğrulama ve yararlı hata mesajları sağlama dahil olmak üzere çeşitli amaçlar için kullanılır.
 
-### Çıkarım
+### Özet
 
 Bir nf-core pipeline'ının ana bileşenlerinin neler olduğunu ve kodun nasıl düzenlendiğini; yapılandırmanın ana öğelerinin nerede bulunduğunu biliyorsunuz; ve girdi doğrulamanın ne için olduğunun farkındasınız.
 
@@ -639,6 +639,6 @@ Bir nf-core pipeline'ının ana bileşenlerinin neler olduğunu ve kodun nasıl 
 
 Bir mola verin! Bu çoktu. Kendinizi tazelenmiş ve hazır hissettiğinizde, öğrendiklerinizi bir nf-core uyumlu pipeline yazmak için uygulamak üzere bir sonraki bölüme geçin.
 
-!!! tip
+!!! tip "İpucu"
 
-    Bir sonraki bölüme geçmeden önce subworkflow'larla workflow'ların nasıl oluşturulacağını öğrenmek isterseniz, [Workflow'ların Workflow'ları](../side_quests/workflows_of_workflows.md) Yan Görevi'ne göz atın.
+    Bir sonraki bölüme geçmeden önce alt iş akışlarıyla iş akışlarının nasıl oluşturulacağını öğrenmek isterseniz, [İş Akışlarının İş Akışları](../side_quests/workflows_of_workflows.md) Yan Görevi'ne göz atın.

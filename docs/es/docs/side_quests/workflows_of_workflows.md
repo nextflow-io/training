@@ -31,9 +31,9 @@ Antes de asumir esta misión secundaria debería:
 
 ## 0. Comenzar
 
-#### Abrir el codespace de entrenamiento
+#### Abrir el codespace de capacitación
 
-Si aún no lo ha hecho, asegúrese de abrir el entorno de entrenamiento como se describe en [Configuración del Entorno](../envsetup/index.md).
+Si aún no lo ha hecho, asegúrese de abrir el entorno de capacitación como se describe en [Configuración del Entorno](../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 

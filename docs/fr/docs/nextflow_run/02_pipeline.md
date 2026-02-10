@@ -73,7 +73,7 @@ Oui ! Nous voyons un nouveau répertoire appelé `2a-inputs` avec trois fichiers
 
 Vous pouvez ouvrir chacun d'eux pour vous assurer qu'ils contiennent la chaîne de salutation appropriée.
 
-??? abstract "Contenu des fichiers"
+??? abstract "Contenu du fichier"
 
     ```console title="results/2a-inputs/Hello-output.txt"
     Hello
@@ -229,7 +229,7 @@ Encore une fois, vous n'avez pas besoin de mémoriser la syntaxe du code, mais i
 
 C'est la partie la plus intéressante : comment sommes-nous passés de la prise d'une seule valeur depuis la ligne de commande, à la prise d'un fichier CSV, son analyse et le traitement des salutations individuelles qu'il contient ?
 
-Dans Nextflow, nous faisons cela avec un **canal** : une construction de file d'attente conçue pour gérer les entrées efficacement et les faire passer d'une étape à l'autre dans les workflows multi-étapes, tout en fournissant un parallélisme intégré et de nombreux autres avantages.
+Dans Nextflow, nous faisons cela avec un [**canal**](https://nextflow.io/docs/latest/channel.html) : une construction de file d'attente conçue pour gérer les entrées efficacement et les faire passer d'une étape à l'autre dans les workflows multi-étapes, tout en fournissant un parallélisme intégré et de nombreux autres avantages.
 
 Décomposons cela.
 
@@ -250,12 +250,12 @@ Le résultat est un canal contenant `Hello`, `Bonjour`, et `Holà`.
 
     Voici ce que cette ligne signifie en langage courant :
 
-    - `channel.fromPath` est une fabrique de canal qui crée un canal à partir de chemin(s) de fichier
+    - `channel.fromPath` est une **fabrique de canal** qui crée un canal à partir de chemin(s) de fichier
     - `(params.input)` spécifie que le chemin du fichier est fourni par `--input` sur la ligne de commande
 
     En d'autres termes, cette ligne dit à Nextflow : prends le chemin de fichier donné avec `--input` et prépare-toi à traiter son contenu comme des données d'entrée.
 
-    Ensuite, les deux lignes suivantes appliquent des opérateurs qui font l'analyse réelle du fichier et le chargement des données dans la structure de données appropriée :
+    Ensuite, les deux lignes suivantes appliquent des **opérateurs** qui font l'analyse réelle du fichier et le chargement des données dans la structure de données appropriée :
 
     - `.splitCsv()` dit à Nextflow d'analyser le fichier CSV en un tableau représentant les lignes et les colonnes
     - `.map { line -> line[0] }` dit à Nextflow de prendre uniquement l'élément de la première colonne de chaque ligne
@@ -406,7 +406,7 @@ Certains des fichiers ont été regroupés dans un sous-répertoire appelé `int
 Ces deux-là sont les résultats finaux du workflow multi-étapes.
 Prenez une minute pour regarder les noms de fichiers et vérifier leur contenu pour confirmer qu'ils sont ce que vous attendez.
 
-??? abstract "Contenu des fichiers"
+??? abstract "Contenu du fichier"
 
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
@@ -631,7 +631,7 @@ En revanche, si nous n'appliquions pas `collect()` à la sortie de `convertToUpp
 --8<-- "docs/en/docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
-Il existe de nombreux autres [opérateurs](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) disponibles pour appliquer des transformations au contenu des canaux entre les appels de process.
+Il existe de nombreux autres [opérateurs](https://nextflow.io/docs/latest/reference/operator.html) disponibles pour appliquer des transformations au contenu des canaux entre les appels de process.
 
 Cela donne aux développeur·ses de pipelines beaucoup de flexibilité pour personnaliser la logique de flux de leur pipeline.
 L'inconvénient est que cela peut parfois rendre plus difficile le déchiffrage de ce que fait le pipeline.
@@ -780,7 +780,7 @@ Cela peut rendre leur développement et leur maintenance plus efficaces et durab
 
 Ici, nous allons démontrer la forme la plus courante de modularité du code dans Nextflow, qui est l'utilisation de **modules**.
 
-Dans Nextflow, un **module** est une définition de process unique qui est encapsulée par elle-même dans un fichier de code autonome.
+Dans Nextflow, un [**module**](https://nextflow.io/docs/latest/module.html) est une définition de process unique qui est encapsulée par elle-même dans un fichier de code autonome.
 Pour utiliser un module dans un workflow, vous ajoutez simplement une instruction d'importation d'une seule ligne à votre fichier de code de workflow ; ensuite vous pouvez intégrer le process dans le workflow de la même manière que vous le feriez normalement.
 Cela permet de réutiliser les définitions de process dans plusieurs workflows sans produire plusieurs copies du code.
 

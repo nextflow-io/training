@@ -57,7 +57,7 @@ Dies deutet darauf hin, dass der `sayHello()` process dreimal aufgerufen wurde, 
 
 Schauen wir uns das 'results'-Verzeichnis an, um zu sehen, ob unser Workflow immer noch eine Kopie unserer Ausgaben dorthin schreibt.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console linenums="1" hl_lines="4-7"
     results
@@ -73,7 +73,7 @@ Ja! Wir sehen ein neues Verzeichnis namens `2a-inputs` mit drei Ausgabedateien m
 
 Du kannst jede davon öffnen, um dich zu vergewissern, dass sie den entsprechenden Gruß-String enthält.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/2a-inputs/Hello-output.txt"
     Hello
@@ -98,7 +98,7 @@ Bedeutet das, dass alle drei Aufrufe von `sayHello()` innerhalb dieses einen tas
 
 Schauen wir uns dieses `8e/0eb066` task-Verzeichnis an.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console title="8e/0eb066"
     work/8e/0eb066071cdb4123906b7b4ea8b047/
@@ -142,7 +142,7 @@ Dies bestätigt, dass der `sayHello()` process dreimal aufgerufen wird, und für
 
 Wenn wir in jedes der dort aufgelisteten task-Verzeichnisse schauen, können wir überprüfen, dass jedes einem der Grüße entspricht.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console title="ab/1a8ece"
     work/ab/1a8ece307e53f03fce689dde904b64/
@@ -270,7 +270,7 @@ Das Ergebnis ist ein Kanal, der `Hello`, `Bonjour` und `Holà` enthält.
 
     Haben wir das in ein Array transformiert, das so aussieht:
 
-    ```txt title="Array-Inhalte"
+    ```txt title="Array contents"
     [[Hello,English,123],[Bonjour,French,456],[Holà,Spanish,789]]
     ```
 
@@ -377,7 +377,7 @@ Du siehst, dass wie versprochen mehrere Schritte als Teil des Workflows ausgefü
 
 Lass uns überprüfen, dass das tatsächlich passiert ist, indem wir einen Blick in das `results`-Verzeichnis werfen.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console linenums="1" hl_lines="8-16"
     results
@@ -406,7 +406,7 @@ Einige der Dateien wurden in einem Unterverzeichnis namens `intermediates` grupp
 Diese beiden sind die Endergebnisse des mehrstufigen Workflows.
 Nimm dir eine Minute Zeit, um die Dateinamen anzusehen und ihren Inhalt zu überprüfen, um zu bestätigen, dass sie das sind, was du erwartest.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
@@ -632,7 +632,7 @@ Im Gegensatz dazu würde Nextflow, wenn wir `collect()` nicht auf die Ausgabe vo
 
 So bekommen wir alle Grüße zurück in dieselbe Datei.
 
-Es gibt viele andere [Operatoren](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page), die verfügbar sind, um Transformationen auf den Inhalt von Kanälen zwischen process-Aufrufen anzuwenden.
+Es gibt viele andere [Operatoren](https://nextflow.io/docs/latest/reference/operator.html), die verfügbar sind, um Transformationen auf den Inhalt von Kanälen zwischen process-Aufrufen anzuwenden.
 
 Das gibt bei der Pipeline-Entwicklung viel Flexibilität für die Anpassung der Flusslogik.
 Der Nachteil ist, dass es manchmal schwieriger machen kann, zu entziffern, was die Pipeline tut.
@@ -682,7 +682,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 
 Du solltest neue Endausgaben sehen, die mit deinem benutzerdefinierten Batch-Namen benannt sind.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console linenums="1" hl_lines="10 12"
     results
@@ -794,7 +794,7 @@ Wir haben natürlich wieder einen geeigneten Workflow für Demonstrationszwecke 
 --8<-- "docs/en/docs/nextflow_run/img/modules.svg"
 </figure>
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     modules/
@@ -874,7 +874,7 @@ Beginne damit, die `2c-modules.nf` Workflow-Datei zu öffnen.
 Du siehst, dass die Workflow-Logik genau dieselbe ist wie in der vorherigen Version des Workflows.
 Allerdings ist der process-Code aus der Workflow-Datei verschwunden, und stattdessen gibt es `include`-Anweisungen, die auf separate Dateien unter `modules` verweisen.
 
-```groovy title="2c-modules.nf" linenums="3"
+```groovy title="hello-modules.nf" linenums="3"
 // Module einbinden
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -927,7 +927,7 @@ nextflow run 2c-modules.nf --input data/greetings.csv -resume
     Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
-    [99/79484f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+    [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
@@ -963,7 +963,7 @@ Ein viel besserer Weg, dieses Problem anzugehen, ist die Verwendung von **Contai
 
 Ein **Container** ist eine leichtgewichtige, eigenständige, ausführbare Einheit von Software, die aus einem Container-**Image** erstellt wird und alles enthält, was zum Ausführen einer Anwendung benötigt wird, einschließlich Code, Systembibliotheken und Einstellungen.
 
-!!! tip "Tipp"
+!!! Tip "Tipp"
 
     Wir vermitteln dies mit der Technologie [Docker](https://www.docker.com/get-started/), aber Nextflow unterstützt auch mehrere andere Container-Technologien.
     Du kannst mehr über Nextflow-Unterstützung für Container [hier](https://nextflow.io/docs/latest/container.html) erfahren.
@@ -1058,13 +1058,13 @@ ls /
 
 Du siehst, dass das Dateisystem innerhalb des Containers sich vom Dateisystem auf deinem Host-System unterscheidet.
 
-!!! tip "Tipp"
+!!! Tip "Tipp"
 
     Wenn du einen Container ausführst, ist er standardmäßig vom Host-System isoliert.
     Das bedeutet, dass der Container auf keine Dateien auf dem Host-System zugreifen kann, es sei denn, du erlaubst es ihm ausdrücklich, indem du angibst, dass du ein Volume als Teil des `docker run`-Befehls mounten möchtest, mit der folgenden Syntax:
 
     ```bash title="Syntax"
-    -v <außerhalb_pfad>:<innerhalb_pfad>
+    -v <outside_path>:<inside_path>
     ```
 
     Das etabliert effektiv einen Tunnel durch die Container-Wand, den du verwenden kannst, um auf diesen Teil deines Dateisystems zuzugreifen.
@@ -1314,7 +1314,7 @@ Die ersten drei Schritte wurden aus dem cache geladen, da wir sie zuvor schon au
 
 Du kannst die Ausgabe des `cowpy`-Schritts im `results`-Verzeichnis finden.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/2d-container/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -1360,7 +1360,7 @@ Das entspricht dem folgenden abgekürzten Verzeichnispfad: `work/7f/caf718`.
 
 In diesem Verzeichnis findest du die `.command.run`-Datei, die alle Befehle enthält, die Nextflow in deinem Namen im Verlauf der Pipeline-Ausführung ausgeführt hat.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="work/7f/caf71890cce1667c094d880f4b6dcc/.command.run"
     #!/bin/bash
@@ -1468,7 +1468,7 @@ In diesem Verzeichnis findest du die `.command.run`-Datei, die alle Befehle enth
 
     nxf_stage() {
         true
-        # Eingabedateien staging
+        # stage input files
         rm -f COLLECTED-batch-output.txt
         ln -s /workspaces/training/nextflow-run/work/7f/f435e3f2cf95979b5f3d7647ae6696/COLLECTED-batch-output.txt COLLECTED-batch-output.txt
     }
@@ -1553,7 +1553,7 @@ Warum erstellt Nextflow für jeden process-Aufruf ein separates task-Verzeichnis
 - [x] Um Ausführungen zu isolieren und Kollisionen zwischen Ausgaben zu vermeiden
 - [ ] Um parallele Dateikompression zu ermöglichen
 
-Mehr erfahren: [1.3. Die ursprünglichen Ausgaben und Logs finden](#13-die-ursprunglichen-ausgaben-und-logs-finden)
+Mehr erfahren: [1.3. Die ursprünglichen Ausgaben und Logs finden](#13-find-the-original-outputs-and-logs)
 </quiz>
 
 <quiz>
@@ -1563,7 +1563,7 @@ Was bewirkt die Option `-ansi-log false` beim Ausführen eines Workflows?
 - [x] Zeigt alle task-Verzeichnispfade anstatt sie auf einer Zeile zu komprimieren
 - [ ] Aktiviert den ausführlichen Debug-Modus
 
-Mehr erfahren: [1.3.2. Das Terminal mehr Details anzeigen lassen](#132-das-terminal-mehr-details-anzeigen-lassen)
+Mehr erfahren: [1.3.2. Das Terminal mehr Details anzeigen lassen](#132-make-the-terminal-show-more-details)
 
 Du kannst auch eine der folgenden Umgebungsvariablen verwenden, wenn du diesen Stil bevorzugst:
 
@@ -1582,7 +1582,7 @@ Was macht im Code `#!groovy channel.fromPath(params.input).splitCsv().map { line
 - [x] Extrahiert die erste Spalte aus jeder CSV-Zeile
 - [ ] Zählt die Anzahl der Zeilen
 
-Mehr erfahren: [1.4.1. Die Eingabedaten aus der CSV laden](#141-die-eingabedaten-aus-der-csv-laden)
+Mehr erfahren: [1.4.1. Die Eingabedaten aus der CSV laden](#141-loading-the-input-data-from-the-csv)
 </quiz>
 
 <quiz>
@@ -1592,7 +1592,7 @@ Warum ist es wichtig, den Eingabewert in Ausgabedateinamen aufzunehmen (z.B. `#!
 - [x] Um zu verhindern, dass sich Ausgabedateien beim Verarbeiten mehrerer Eingaben gegenseitig überschreiben
 - [ ] Um Dateien einfacher komprimieren zu können
 
-Mehr erfahren: [1.4.3. Wie die Ausgaben benannt werden](#143-wie-die-ausgaben-benannt-werden)
+Mehr erfahren: [1.4.3. Wie die Ausgaben benannt werden](#143-how-the-outputs-are-named)
 </quiz>
 
 <quiz>
@@ -1602,7 +1602,7 @@ Was ist der Zweck der `include`-Anweisung in einem modularisierten Workflow?
 - [ ] Konfigurationseinstellungen einzubinden
 - [ ] Dokumentationskommentare hinzuzufügen
 
-Mehr erfahren: [3. Modularisierte Pipelines ausführen](#3-modularisierte-pipelines-ausfuhren)
+Mehr erfahren: [3. Modularisierte Pipelines ausführen](#3-running-modularized-pipelines)
 </quiz>
 
 <quiz>
@@ -1612,7 +1612,7 @@ Was passiert, wenn du einen modularisierten Workflow mit `-resume` ausführst?
 - [x] Caching funktioniert normal basierend auf den generierten Job-Scripts
 - [ ] Nur die Haupt-Workflow-Datei wird gecacht
 
-Mehr erfahren: [3.2. Den Workflow ausführen](#32-den-workflow-ausfuhren)
+Mehr erfahren: [3.2. Den Workflow ausführen](#32-run-the-workflow)
 </quiz>
 
 <quiz>
@@ -1622,7 +1622,7 @@ Was gibt die `container`-Direktive in einer process-Definition an?
 - [x] Die Container-Image-URI, die für die Ausführung des process verwendet werden soll
 - [ ] Das Ausgabedateiformat
 
-Mehr erfahren: [4.2. Einen Container in einem Workflow verwenden](#42-einen-container-in-einem-workflow-verwenden)
+Mehr erfahren: [4.2. Einen Container in einem Workflow verwenden](#42-use-a-container-in-a-workflow)
 </quiz>
 
 <quiz>
@@ -1632,7 +1632,7 @@ Was enthält die Funktion `nxf_launch` in der `.command.run`-Datei?
 - [x] Den `docker run`-Befehl mit Volume-Mounts und Container-Einstellungen
 - [ ] Die process-Eingabe-Deklarationen
 
-Mehr erfahren: [4.2.4. Untersuchen, wie Nextflow die containerisierte Aufgabe gestartet hat](#424-untersuchen-wie-nextflow-die-containerisierte-aufgabe-gestartet-hat)
+Mehr erfahren: [4.2.4. Untersuchen, wie Nextflow die containerisierte Aufgabe gestartet hat](#424-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 
 <quiz>
@@ -1642,5 +1642,5 @@ Was handhabt Nextflow automatisch beim Ausführen eines containerisierten proces
 - [x] Das process-Script innerhalb des Containers ausführen
 - [x] Die Container-Instanz nach der Ausführung aufräumen
 
-Mehr erfahren: [4. Containerisierte Software verwenden](#4-containerisierte-software-verwenden)
+Mehr erfahren: [4. Containerisierte Software verwenden](#4-using-containerized-software)
 </quiz>

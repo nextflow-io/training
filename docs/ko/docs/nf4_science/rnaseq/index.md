@@ -9,7 +9,7 @@ hide:
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 이 교육 과정은 데이터 분석 파이프라인을 개발하거나 맞춤화하는 데 관심이 있는 전사체학 및 관련 분야의 연구자를 위한 것입니다.
-이 과정은 [Hello Nextflow](../../hello_nextflow/) 초급 교육을 기반으로 하며 bulk RNAseq 분석의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
+이 과정은 [Hello Nextflow](../../hello_nextflow/) 초급 교육을 기반으로 하며, bulk RNAseq 분석의 특정 맥락에서 Nextflow를 사용하는 방법을 보여줍니다.
 
 구체적으로, 이 과정은 어댑터 서열을 트리밍하고, 리드를 참조 게놈에 정렬하며, 여러 단계에서 품질 관리(QC)를 수행하는 간단한 bulk RNAseq 처리 파이프라인을 구현하는 방법을 보여줍니다.
 

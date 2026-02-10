@@ -1,7 +1,9 @@
 # Teil 1: Methodenübersicht und manuelles Testen
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Variant Calling ist eine genomische Analysemethode, die darauf abzielt, Variationen in einer Genomsequenz im Vergleich zu einem Referenzgenom zu identifizieren.
-Hier werden wir Tools und Methoden verwenden, die für das Aufrufen kurzer Keimbahnvarianten entwickelt wurden, _d. h._ SNPs und Indels, in Whole-Genome-Sequencing-Daten.
+Hier verwenden wir Tools und Methoden, die für das Aufrufen kurzer Keimbahnvarianten entwickelt wurden, _d. h._ SNPs und Indels, in Whole-Genome-Sequencing-Daten.
 
 ![GATK pipeline](img/gatk-pipeline.png)
 
@@ -33,7 +35,7 @@ Diese Tools sind nicht in der GitHub Codespaces-Umgebung installiert, daher verw
 
 !!! note "Hinweis"
 
-     Stelle sicher, dass du dich im Verzeichnis `nf4-science/genomics` befindest, sodass der letzte Teil des Pfads, der angezeigt wird, wenn du `pwd` eingibst, `genomics` ist.
+    Stelle sicher, dass du dich im Verzeichnis `nf4-science/genomics` befindest, sodass der letzte Teil des Pfads, der angezeigt wird, wenn du `pwd` eingibst, `genomics` ist.
 
 ---
 

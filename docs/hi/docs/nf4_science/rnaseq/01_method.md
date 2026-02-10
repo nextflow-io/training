@@ -11,7 +11,7 @@
 --8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
-- **FASTQC:** ट्रिमिंग से पहले FastQC का उपयोग करके read डेटा पर QC करें
+- **FASTQC:** FastQC का उपयोग करके ट्रिमिंग से पहले read डेटा पर QC करें
 - **TRIM_GALORE:** Trim Galore (Cutadapt और FastQC को बंडल करता है) का उपयोग करके adapter अनुक्रम ट्रिम करें और ट्रिमिंग के बाद QC करें
 - **HISAT2_ALIGN:** Hisat2 का उपयोग करके reads को reference genome के साथ संरेखित करें
 - **MULTIQC:** MultiQC का उपयोग करके एक व्यापक QC रिपोर्ट तैयार करें
@@ -429,7 +429,7 @@ exit
 
 ---
 
-### निष्कर्ष
+### सारांश
 
 आपने संबंधित containers में सभी व्यक्तिगत commands को इंटरैक्टिव रूप से परीक्षण किया है।
 

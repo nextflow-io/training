@@ -107,7 +107,7 @@ Die wichtigste Ausgabe hier ist die letzte Zeile, die in der obigen Ausgabe herv
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Das sagt uns, dass der `sayHello`-Prozess einmal erfolgreich ausgeführt wurde (`1 of 1 ✔`).
+Das sagt uns, dass der **Prozess** `sayHello` einmal erfolgreich ausgeführt wurde (`1 of 1 ✔`).
 
 Das ist großartig, aber du fragst dich vielleicht: wo ist die Ausgabe?
 
@@ -135,7 +135,7 @@ Das ist großartig, unser Workflow hat getan, was er sollte!
 Standardmäßig speichert Nextflow Pipeline-Ausgaben in einem Verzeichnis namens `results` in deinem aktuellen Pfad.
 Um zu ändern, wo deine Dateien veröffentlicht werden, verwende das `-output-dir` CLI-Flag (oder kurz `-o`)
 
-!!! danger
+!!! danger "Gefahr"
 
     Beachte, dass `--input` zwei Bindestriche hat und `-output-dir` einen!
     Das liegt daran, dass `--input` ein Pipeline-_Parameter_ ist und `-output-dir` ein Nextflow-CLI-Flag auf Kernebene.
@@ -169,7 +169,7 @@ Beachte jedoch, dass in beiden Fällen das 'veröffentlichte' Ergebnis eine Kopi
 
 Also werden wir jetzt unter die Haube schauen, um zu sehen, wo Nextflow die Arbeit tatsächlich ausgeführt hat.
 
-!!! warning "Warnung"
+!!! Warning "Warnung"
 
     Nicht alle Workflows werden so eingerichtet sein, dass sie Ausgaben in ein results-Verzeichnis veröffentlichen, und/oder die Verzeichnisnamen und -struktur können unterschiedlich sein.
     Etwas später in diesem Abschnitt zeigen wir dir, wie du herausfindest, wo dieses Verhalten festgelegt ist.
@@ -486,7 +486,7 @@ Wie wir gleich ausführlicher besprechen werden, enthält `params.input` den Wer
 Der `publish:`-Block listet die Ausgabe des `sayHello()`-Prozessaufrufs auf, die er als `sayHello.out` bezeichnet und den Namen `first_output` gibt (das kann alles sein, was der Workflow-Autor möchte).
 
 Dies ist eine sehr minimale **Workflow**-Definition.
-In einer realen Pipeline enthält der Workflow typischerweise mehrere Aufrufe von **Prozessen**, die durch **Channels** verbunden sind, und es können Standardwerte für die variablen Eingaben eingerichtet sein.
+In einer realen Pipeline enthält der Workflow typischerweise mehrere Aufrufe von **Prozessen**, die durch **Kanäle** verbunden sind, und es können Standardwerte für die variablen Eingaben eingerichtet sein.
 
 Wir werden das in Teil 2 des Kurses behandeln.
 Für jetzt schauen wir uns genauer an, wie unser Workflow Eingaben und Ausgaben handhabt.
@@ -719,7 +719,7 @@ nextflow clean -before backstabbing_swartz -f
 Die Ausgabe sollte ähnlich wie vorher sein, aber jetzt sagt sie 'Removed' anstelle von 'Would remove'.
 Beachte, dass dies nicht die zweistelligen Unterverzeichnisse (wie `eb/` oben) entfernt, aber ihren Inhalt leert.
 
-!!! warning "Warnung"
+!!! Warning "Warnung"
 
     Das Löschen von Work-Unterverzeichnissen von vergangenen Läufen entfernt sie aus Nextflows Cache und löscht alle Ausgaben, die in diesen Verzeichnissen gespeichert waren.
     Das bedeutet, es bricht Nextflows Fähigkeit, die Ausführung fortzusetzen, ohne die entsprechenden Prozesse erneut auszuführen.

@@ -1,7 +1,9 @@
 # Parte 3: Hello Workflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -494,7 +496,7 @@ No bloco de processo, faça a seguinte alteração de código:
 
 Em teoria, isso deve lidar com qualquer número arbitrário de arquivos de entrada.
 
-!!! tip
+!!! tip "Dica"
 
     Algumas ferramentas de linha de comando exigem fornecer um argumento (como `-input`) para cada arquivo de entrada.
     Nesse caso, teríamos que fazer um pouco de trabalho extra para compor o comando.
@@ -662,8 +664,8 @@ Ele é executado com sucesso, embora a saída de log possa parecer um pouco mais
 Desta vez a terceira etapa foi chamada apenas uma vez!
 Olhando para a saída das instruções `view()`, vemos o seguinte:
 
-- Três instruções `Antes do collect:`, uma para cada saudação: nesse ponto os caminhos dos arquivos são itens individuais no canal.
-- Uma única instrução `Depois do collect:`: os três caminhos de arquivos agora estão empacotados em um único elemento.
+- Três instruções `Before collect:`, uma para cada saudação: nesse ponto os caminhos dos arquivos são itens individuais no canal.
+- Uma única instrução `After collect:`: os três caminhos de arquivos agora estão empacotados em um único elemento.
 
 Podemos resumir isso com o seguinte diagrama:
 
@@ -683,7 +685,7 @@ Finalmente, você pode dar uma olhada no conteúdo do arquivo de saída para se 
 
 Desta vez temos todas as três saudações no arquivo de saída final. Sucesso!
 
-!!! note
+!!! note "Nota"
 
     Se você executar isso várias vezes sem `-resume`, verá que a ordem das saudações muda de uma execução para outra.
     Isso mostra que a ordem na qual os elementos fluem através das chamadas de processo não é garantida ser consistente.
@@ -862,7 +864,7 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
 
 Você vê que para fornecer múltiplas entradas a um processo, você simplesmente as lista nos parênteses da chamada, separadas por vírgulas.
 
-!!! warning
+!!! warning "Aviso"
 
     Você DEVE fornecer as entradas ao processo na MESMA ORDEM EXATA em que estão listadas no bloco de definição de entrada do processo.
 
@@ -985,7 +987,7 @@ No bloco de processo, faça a seguinte alteração de código:
 As tags `emit:` são opcionais, e poderíamos ter adicionado uma tag a apenas uma das saídas.
 Mas como dizem, por que não ambos?
 
-!!! tip
+!!! tip "Dica"
 
     Se você não nomear as saídas de um processo usando `emit:`, ainda pode acessá-las individualmente usando seu respectivo índice (baseado em zero).
     Por exemplo, você usaria `<process>.out[0]` para obter a primeira saída, `<process>.out[1]` para obter a segunda saída, e assim por diante.

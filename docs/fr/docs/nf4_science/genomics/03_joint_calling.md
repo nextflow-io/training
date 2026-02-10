@@ -49,7 +49,7 @@ Nous avons décomposé cela en deux étapes :
 2. **Ajouter une étape de génotypage joint qui combine et génotype les GVCF par échantillon.**
    Cela introduit l'opérateur `collect()`, les closures Groovy pour la construction de ligne de commande et les processus multi-commandes.
 
-!!! note
+!!! note "Note"
 
      Assurez-vous d'être dans le bon répertoire de travail :
      `cd /workspaces/training/nf4-science/genomics`
@@ -336,7 +336,7 @@ Décortiquons cela :
 
 Nous pouvons collecter les GVCF et leurs fichiers d'index séparément (au lieu de les garder ensemble dans des tuples) parce que Nextflow mettra en place tous les fichiers d'entrée ensemble pour l'exécution, donc les fichiers d'index seront présents aux côtés des GVCF.
 
-!!! tip
+!!! tip "Astuce"
 
     Vous pouvez utiliser l'opérateur `view()` pour inspecter le contenu des canaux avant et après l'application des opérateurs de canal.
 
@@ -658,7 +658,7 @@ Si vous ouvrez le fichier VCF joint, vous pouvez vérifier que le workflow a pro
 
 Vous disposez maintenant d'un workflow de variant calling joint automatisé et entièrement reproductible !
 
-!!! note
+!!! note "Note"
 
     Gardez à l'esprit que les fichiers de données que nous vous avons fournis ne couvrent qu'une toute petite portion du chromosome 20.
     La taille réelle d'un ensemble d'appels de variants se compterait en millions de variants.
@@ -671,6 +671,6 @@ Vous savez également comment construire une ligne de commande en utilisant des 
 
 ### Et ensuite ?
 
-Célébrez votre réussite et prenez une pause bien méritée.
+Félicitations ! Vous avez terminé le cours Nextflow for Genomics.
 
-Dans la prochaine partie de ce cours, vous apprendrez à exécuter un pipeline de variant calling prêt pour la production depuis nf-core et à le comparer au pipeline que vous avez construit manuellement.
+Rendez-vous au [résumé du cours](./next_steps.md) final pour revoir ce que vous avez appris et découvrir la suite.

@@ -95,7 +95,7 @@ Fonctionnellement, ce sera similaire à la configuration que nous avions avant, 
 
 Voici la ligne de code que nous allons utiliser :
 
-```console title="Syntaxe"
+```console title="Syntax"
 greeting_ch = channel.of('Hello Channels!')
 ```
 
@@ -105,7 +105,7 @@ Cela crée un canal appelé `greeting_ch` en utilisant la fabrique de canaux `ch
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
 </figure>
 
-!!! note
+!!! note "Note"
 
     Nous revenons temporairement aux chaînes codées en dur au lieu d'utiliser un paramètre CLI pour des raisons de lisibilité. Nous reviendrons à l'utilisation des paramètres CLI une fois que nous aurons couvert ce qui se passe au niveau du canal.
 
@@ -482,7 +482,7 @@ De toute façon, maintenant que nous avons les sous-répertoires de chaque appel
     └── output.txt
     ```
 
-??? abstract "Contenu des fichiers"
+??? abstract "Contenu du fichier"
 
     ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
     Bonjour
@@ -607,7 +607,7 @@ Jetez un œil au répertoire `results` pour voir si toutes les salutations de so
 
 Oui ! Et chacune a le contenu attendu.
 
-??? abstract "Contenu des fichiers"
+??? abstract "Contenu du fichier"
 
     ```console title="Bonjour-output.txt"
     Bonjour
@@ -922,7 +922,7 @@ Nous définissons une variable temporaire pour la valeur interne, ici appelée `
 Dans cet exemple, `$greeting` représente chaque élément individuel chargé dans le canal.
 Cela donnera une sortie console bien étiquetée.
 
-!!! info "Information"
+!!! info "Info"
 
     Dans certains pipelines, vous pourriez voir une variable spéciale appelée `$it` utilisée à l'intérieur des closures d'opérateurs.
     C'est une variable _implicite_ qui permet un accès raccourci à la variable interne,
@@ -1037,7 +1037,7 @@ Vous apprendrez comment gérer d'autres emplacements de données plus tard dans 
 #### 4.1.2. Passer à une fabrique de canaux conçue pour gérer un fichier
 
 Puisque nous voulons maintenant utiliser un fichier au lieu de simples chaînes comme entrée, nous ne pouvons pas utiliser la fabrique de canaux `channel.of()` d'avant.
-Nous devons passer à l'utilisation d'une nouvelle fabrique de canaux, [`channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath), qui a une fonctionnalité intégrée pour gérer les chemins de fichiers.
+Nous devons passer à l'utilisation d'une nouvelle fabrique de canaux, [`channel.fromPath()`](https://nextflow.io/docs/latest/reference/channel.html#frompath), qui a une fonctionnalité intégrée pour gérer les chemins de fichiers.
 
 Dans le bloc workflow, faites la modification de code suivante :
 
@@ -1253,7 +1253,7 @@ L'opérateur [`map()`](https://nextflow.io/docs/latest/reference/operator.html#m
 Dans ce cas, nous allons l'utiliser pour extraire cet unique élément que nous voulons de chaque ligne dans notre fichier de données.
 Voici à quoi ressemble la syntaxe :
 
-```groovy title="Syntaxe"
+```groovy title="Syntax"
 .map { row -> row[0] }
 ```
 
@@ -1380,7 +1380,7 @@ Qu'est-ce qu'un canal dans Nextflow ?
 - [x] Une structure de type file d'attente pour passer des données entre processus
 - [ ] Un paramètre de configuration
 
-En savoir plus : [1.1. Créer un canal d'entrée](#11-creer-un-canal-dentree)
+En savoir plus : [1.1. Créer un canal d'entrée](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1396,7 +1396,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Rien (les canaux n'affichent pas par défaut)
 - [ ] Une erreur (syntaxe invalide)
 
-En savoir plus : [1.1. Créer un canal d'entrée](#11-creer-un-canal-dentree)
+En savoir plus : [1.1. Créer un canal d'entrée](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1406,7 +1406,7 @@ Quand un canal contient plusieurs valeurs, comment Nextflow gère-t-il l'exécut
 - [ ] Le processus s'exécute seulement avec la première valeur
 - [ ] Le processus s'exécute seulement avec la dernière valeur
 
-En savoir plus : [2. Modifier le workflow pour s'exécuter sur plusieurs valeurs d'entrée](#2-modifier-le-workflow-pour-sexecuter-sur-plusieurs-valeurs-dentree)
+En savoir plus : [2. Modifier le workflow pour s'exécuter sur plusieurs valeurs d'entrée](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 
 <quiz>
@@ -1416,7 +1416,7 @@ Que fait l'opérateur `flatten()` ?
 - [x] Déballe les tableaux en éléments individuels
 - [ ] Supprime les éléments dupliqués
 
-En savoir plus : [3.2.1. Ajouter l'opérateur `flatten()`](#321-ajouter-loperateur-flatten)
+En savoir plus : [3.2.1. Ajouter l'opérateur `flatten()`](#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
@@ -1426,7 +1426,7 @@ Quel est le but de l'opérateur `view()` ?
 - [x] Inspecter et déboguer le contenu du canal
 - [ ] Sauvegarder le contenu du canal dans un fichier
 
-En savoir plus : [1.4. Utiliser `view()` pour inspecter le contenu du canal](#14-utiliser-view-pour-inspecter-le-contenu-du-canal)
+En savoir plus : [1.4. Utiliser `view()` pour inspecter le contenu du canal](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
@@ -1436,7 +1436,7 @@ Que fait `splitCsv()` ?
 - [x] Analyse un fichier CSV en tableaux représentant chaque ligne
 - [ ] Fusionne plusieurs fichiers CSV
 
-En savoir plus : [4.2. Utiliser l'opérateur `splitCsv()` pour analyser le fichier](#42-utiliser-loperateur-splitcsv-pour-analyser-le-fichier)
+En savoir plus : [4.2. Utiliser l'opérateur `splitCsv()` pour analyser le fichier](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
@@ -1446,7 +1446,7 @@ Quel est le but de l'opérateur `map()` ?
 - [x] Transformer chaque élément dans un canal
 - [ ] Compter les éléments dans un canal
 
-En savoir plus : [4.3. Utiliser l'opérateur `map()` pour extraire les salutations](#43-utiliser-loperateur-map-pour-extraire-les-salutations)
+En savoir plus : [4.3. Utiliser l'opérateur `map()` pour extraire les salutations](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>
@@ -1456,5 +1456,5 @@ Pourquoi est-il important d'utiliser des noms de fichiers de sortie dynamiques l
 - [x] Pour empêcher les fichiers de sortie de s'écraser mutuellement
 - [ ] Pour activer la fonctionnalité de reprise
 
-En savoir plus : [2.2. S'assurer que les noms de fichiers de sortie seront uniques](#22-sassurer-que-les-noms-de-fichiers-de-sortie-seront-uniques)
+En savoir plus : [2.2. S'assurer que les noms de fichiers de sortie seront uniques](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>

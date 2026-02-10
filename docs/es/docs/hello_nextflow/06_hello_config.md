@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -14,9 +14,9 @@
 
 Esta sección explorará cómo configurar y gestionar la configuración de su pipeline de Nextflow para que pueda personalizar su comportamiento, adaptarlo a diferentes entornos y optimizar el uso de recursos _sin alterar una sola línea del código del flujo de trabajo en sí_.
 
-Hay múltiples formas de hacer esto, que pueden usarse en combinación y se interpretan según el [orden de precedencia](https://www.nextflow.io/docs/latest/config.html) descrito en la documentación de configuración.
+Hay múltiples formas de hacer esto, que pueden usarse en combinación y se interpretan según el [orden de precedencia](https://nextflow.io/docs/latest/config.html) descrito en la documentación de configuración.
 
-En esta parte del curso, vamos a mostrarle el mecanismo de archivo de configuración más simple y común, el archivo [`nextflow.config`](https://www.nextflow.io/docs/latest/config.html), que ya encontró en la Parte 5: Hello Containers.
+En esta parte del curso, vamos a mostrarle el mecanismo de archivo de configuración más simple y común, el archivo [`nextflow.config`](https://nextflow.io/docs/latest/config.html), que ya encontró en la Parte 5: Hello Containers.
 
 Repasaremos los componentes esenciales de la configuración de Nextflow como directivas de proceso, executors, perfiles y archivos de parámetros.
 Al aprender a utilizar estas opciones de configuración efectivamente, puede mejorar la flexibilidad, escalabilidad y rendimiento de sus pipelines.
@@ -403,7 +403,7 @@ Este archivo de parámetros contiene un par clave-valor para cada una de las ent
 Note el uso de dos puntos (`:`) en lugar de signos de igual (`=`) si compara la sintaxis con el archivo de configuración.
 El archivo de configuración está escrito en Groovy, mientras que el archivo de parámetros está escrito en YAML.
 
-!!! info "Información"
+!!! info "Info"
 
     También proporcionamos una versión JSON del archivo de parámetros como ejemplo pero no vamos a ejecutarla aquí.
     Siéntase libre de probar esa por su cuenta.
@@ -1145,20 +1145,20 @@ Si los recursos de las tareas listas para ejecutar exceden los recursos disponib
 
 El executor local es conveniente y eficiente, pero está limitado a esa única máquina. Para cargas de trabajo muy grandes, puede descubrir que su máquina local es un cuello de botella, ya sea porque tiene una única tarea que requiere más recursos de los que tiene disponibles, o porque tiene tantas tareas que esperar a que una sola máquina las ejecute tomaría demasiado tiempo.
 
-Nextflow soporta [muchos executors diferentes](https://www.nextflow.io/docs/latest/executor.html), incluyendo programadores HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor y otros) así como backends de ejecución en la nube (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes y más).
+Nextflow soporta [muchos executors diferentes](https://nextflow.io/docs/latest/executor.html), incluyendo programadores HPC (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor y otros) así como backends de ejecución en la nube (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes y más).
 
 ### 4.1. Apuntar a un backend diferente
 
 La elección del executor se establece por una directiva de proceso llamada `executor`.
 Por defecto está establecido a `local`, así que la siguiente configuración está implícita:
 
-```groovy title="Configuración incorporada"
+```groovy title="Built-in configuration"
 process {
     executor = 'local'
 }
 ```
 
-Para establecer el executor para apuntar a un backend diferente, simplemente especificaría el executor que quiere usando sintaxis similar a la descrita arriba para asignaciones de recursos (vea la [documentación de executors](https://www.nextflow.io/docs/latest/executor.html) para todas las opciones).
+Para establecer el executor para apuntar a un backend diferente, simplemente especificaría el executor que quiere usando sintaxis similar a la descrita arriba para asignaciones de recursos (vea la [documentación de executors](https://nextflow.io/docs/latest/executor.html) para todas las opciones).
 
 ```groovy title="nextflow.config"
 process {
@@ -1180,7 +1180,7 @@ Desafortunadamente, cada uno de estos sistemas usa diferentes tecnologías, sint
 
     Por ejemplo, el mismo trabajo que requiere 8 CPUs y 4GB de RAM para ser ejecutado en la cola "my-science-work" necesita ser expresado de diferentes maneras dependiendo del backend.
 
-    ```bash title="Config para SLURM / enviar usando sbatch"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -1188,7 +1188,7 @@ Desafortunadamente, cada uno de estos sistemas usa diferentes tecnologías, sint
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="Config para PBS / enviar usando qsub"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -1196,7 +1196,7 @@ Desafortunadamente, cada uno de estos sistemas usa diferentes tecnologías, sint
     #PBS -l mem=4gb
     ```
 
-    ```bash title="Config para SGE / enviar usando qsub"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -1229,7 +1229,7 @@ La mayoría de las plataformas de computación de alto rendimiento permiten (y a
 Por defecto, Nextflow usará un único CPU y 2GB de memoria para cada proceso.
 Las directivas de proceso correspondientes se llaman `cpus` y `memory`, así que la siguiente configuración está implícita:
 
-```groovy title="Configuración incorporada" linenums="1"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -1258,7 +1258,7 @@ El reporte es un archivo html, que puede descargar y abrir en su navegador. Tamb
 Tómese unos minutos para revisar el reporte y ver si puede identificar algunas oportunidades para ajustar recursos.
 Asegúrese de hacer clic en las pestañas que muestran los resultados de utilización como porcentaje de lo que fue asignado.
 
-Vea [Reports](https://www.nextflow.io/docs/latest/reports.html) para documentación sobre todas las características disponibles.
+Vea [Reports](https://nextflow.io/docs/latest/reports.html) para documentación sobre todas las características disponibles.
 
 ### 5.2. Establecer asignaciones de recursos para todos los procesos
 
@@ -1359,7 +1359,7 @@ Es muy útil cuando sus procesos tienen diferentes requisitos de recursos. Le pe
 !!! tip "Consejo"
 
     Esto es solo un pequeño adelanto de lo que puede hacer para optimizar su uso de recursos.
-    Nextflow mismo tiene una [lógica de reintento dinámica](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) realmente elegante incorporada para reintentar trabajos que fallan debido a limitaciones de recursos.
+    Nextflow mismo tiene una [lógica de reintento dinámica](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) realmente elegante incorporada para reintentar trabajos que fallan debido a limitaciones de recursos.
     Adicionalmente, la Plataforma Seqera ofrece herramientas impulsadas por IA para optimizar sus asignaciones de recursos automáticamente también.
 
 ### 5.5. Agregar límites de recursos
@@ -1369,7 +1369,7 @@ Por ejemplo, su clúster puede requerir que permanezca dentro de ciertos límite
 
 Puede usar la directiva `resourceLimits` para establecer las limitaciones relevantes. La sintaxis se ve así cuando está por sí sola en un bloque process:
 
-```groovy title="Ejemplo de sintaxis"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -1518,7 +1518,7 @@ Puede considerar esto una alternativa a usar un archivo de parámetros.
 
 La sintaxis para expresar valores predeterminados en este contexto se ve así, para un perfil que nombramos `test`:
 
-```groovy title="Ejemplo de sintaxis"
+```groovy title="Syntax example"
     test {
         params.<parameter1>
         params.<parameter2>
@@ -1561,7 +1561,7 @@ Al igual que para los perfiles de configuración técnica, puede configurar múl
 Convenientemente, los perfiles no son mutuamente excluyentes, así que podemos especificar múltiples perfiles en nuestra línea de comandos usando la siguiente sintaxis `-profile <profile1>,<profile2>` (para cualquier número de perfiles).
 
 Si combina perfiles que establecen valores para los mismos elementos de configuración y están descritos en el mismo archivo de configuración, Nextflow resolverá el conflicto usando cualquier valor que haya leído último (_es decir_, lo que viene después en el archivo).
-Si las configuraciones en conflicto están establecidas en diferentes fuentes de configuración, se aplica el [orden de precedencia](https://www.nextflow.io/docs/latest/config.html) predeterminado.
+Si las configuraciones en conflicto están establecidas en diferentes fuentes de configuración, se aplica el [orden de precedencia](https://nextflow.io/docs/latest/config.html) predeterminado.
 
 Intentemos agregar el perfil de prueba a nuestro comando anterior:
 
@@ -1625,7 +1625,7 @@ Esto significa que mientras distribuyamos cualquier archivo de datos de prueba c
 Como se señaló arriba, a veces el mismo parámetro puede establecerse a diferentes valores en perfiles que quiere combinar.
 Y más generalmente, hay numerosos lugares donde los elementos de configuración pueden almacenarse, y a veces las mismas propiedades pueden establecerse a diferentes valores en diferentes lugares.
 
-Nextflow aplica un [orden de precedencia](https://www.nextflow.io/docs/latest/config.html) establecido para resolver cualquier conflicto, pero eso puede ser complicado de determinar usted mismo.
+Nextflow aplica un [orden de precedencia](https://nextflow.io/docs/latest/config.html) establecido para resolver cualquier conflicto, pero eso puede ser complicado de determinar usted mismo.
 E incluso si nada está en conflicto, puede ser tedioso buscar todos los lugares posibles donde las cosas podrían estar configuradas.
 
 Afortunadamente, Nextflow incluye una herramienta de utilidad conveniente llamada `config` que puede automatizar todo ese proceso por usted.
@@ -1752,7 +1752,7 @@ Diríjase al [resumen final del curso](./next_steps.md) para revisar lo que apre
 - [ ] El primer valor encontrado
 - [ ] Ninguno; causa un error
 
-Aprenda más: [1.1. Mover valores predeterminados a `nextflow.config`](#11-mover-valores-predeterminados-a-nextflowconfig)
+Aprenda más: [1.1. Mover valores predeterminados a `nextflow.config`](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1770,7 +1770,7 @@ Si tanto Docker como Conda están habilitados y un proceso tiene ambas directiva
 - [ ] El primero definido
 - [ ] Causa un error
 
-Aprenda más: [3. Seleccionar una tecnología de empaquetado de software](#3-seleccionar-una-tecnologia-de-empaquetado-de-software)
+Aprenda más: [3. Seleccionar una tecnología de empaquetado de software](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1788,7 +1788,7 @@ Aprenda más: [3. Seleccionar una tecnología de empaquetado de software](#3-sel
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-Aprenda más: [5.3. Establecer asignaciones de recursos para un proceso específico](#53-establecer-asignaciones-de-recursos-para-un-proceso-especifico)
+Aprenda más: [5.3. Establecer asignaciones de recursos para un proceso específico](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1798,7 +1798,7 @@ Aprenda más: [5.3. Establecer asignaciones de recursos para un proceso específ
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-Aprenda más: [5.1. Ejecutar el flujo de trabajo para generar un reporte de utilización de recursos](#51-ejecutar-el-flujo-de-trabajo-para-generar-un-reporte-de-utilizacion-de-recursos)
+Aprenda más: [5.1. Ejecutar el flujo de trabajo para generar un reporte de utilización de recursos](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1808,7 +1808,7 @@ Aprenda más: [5.1. Ejecutar el flujo de trabajo para generar un reporte de util
 - [x] Limita los recursos máximos que pueden solicitarse
 - [ ] Monitorea el uso de recursos
 
-Aprenda más: [5.5. Agregar límites de recursos](#55-agregar-limites-de-recursos)
+Aprenda más: [5.5. Agregar límites de recursos](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1818,7 +1818,7 @@ Aprenda más: [5.5. Agregar límites de recursos](#55-agregar-limites-de-recurso
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Aprenda más: [4. Seleccionar una plataforma de ejecución](#4-seleccionar-una-plataforma-de-ejecucion)
+Aprenda más: [4. Seleccionar una plataforma de ejecución](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1828,7 +1828,7 @@ Aprenda más: [4. Seleccionar una plataforma de ejecución](#4-seleccionar-una-p
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-Aprenda más: [1.3. Usar un archivo de parámetros](#13-usar-un-archivo-de-parametros)
+Aprenda más: [1.3. Usar un archivo de parámetros](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1838,7 +1838,7 @@ Aprenda más: [1.3. Usar un archivo de parámetros](#13-usar-un-archivo-de-param
 - [x] Proporcionar parámetros de prueba
 - [ ] Definir nuevos procesos
 
-Aprenda más: [6. Usar perfiles para cambiar entre configuraciones preestablecidas](#6-usar-perfiles-para-cambiar-entre-configuraciones-preestablecidas)
+Aprenda más: [6. Usar perfiles para cambiar entre configuraciones preestablecidas](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1848,5 +1848,5 @@ Aprenda más: [6. Usar perfiles para cambiar entre configuraciones preestablecid
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Aprenda más: [6. Usar perfiles para cambiar entre configuraciones preestablecidas](#6-usar-perfiles-para-cambiar-entre-configuraciones-preestablecidas)
+Aprenda más: [6. Usar perfiles para cambiar entre configuraciones preestablecidas](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

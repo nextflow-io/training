@@ -1,6 +1,6 @@
 # Bölüm 2: nf-core/molkart'ı Çalıştırma
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bölüm 1'de, Nextflow çalıştırmasının temellerini anlamak için basit bir Hello World iş akışı çalıştırdık.
 Şimdi gerçek dünyadan bir biyogörüntüleme pipeline'ı çalıştıracağız: **nf-core/molkart**.
@@ -308,7 +308,7 @@ Her işlem satırı şunları gösterir:
 - **Girdi tanımlayıcısı**: Parantez içinde örnek adı
 - **İlerleme**: Tamamlanma yüzdesi ve sayısı (örneğin, `1 of 1 ✔`)
 
-### Çıkarım
+### Özet
 
 Bir nf-core pipeline'ını test verileri ile nasıl başlatacağınızı ve çalıştırma çıktısını nasıl yorumlayacağınızı biliyorsunuz.
 
@@ -372,7 +372,7 @@ Rapor şunları içerir:
 - Segmentasyon kalite metrikleri
 - Tespit edilen hücre ve nokta sayısı
 
-!!! Tip
+!!! Tip "İpucu"
 
     MultiQC raporları genellikle tüm nf-core pipeline'larına dahil edilir.
     Her zaman pipeline çalıştırması ve veri kalitesi hakkında üst düzey bir genel bakış sağlarlar.
@@ -426,11 +426,11 @@ Bu şunları gösterir:
 - CPU ve bellek kullanımı
 - Hangi görevlerin önbellekte olduğu ve hangilerinin çalıştırıldığı
 
-!!! Tip
+!!! Tip "İpucu"
 
     Bu raporlar, kaynak tahsisini optimize etmek ve performans sorunlarını gidermek için son derece kullanışlıdır.
 
-### Çıkarım
+### Özet
 
 Pipeline çıktılarını nasıl bulacağınızı, kalite kontrol raporlarını nasıl inceleyeceğinizi ve çalıştırma metriklerine nasıl erişeceğinizi biliyorsunuz.
 
@@ -477,7 +477,7 @@ Hello World'den temel fark:
 - Çıktı dosyaları oldukça büyük olabilir (segmentasyon maskeleri, işlenmiş görüntüler)
 - Görev başına birden fazla girdi ve çıktı dosyası
 
-!!! Tip
+!!! Tip "İpucu"
 
     Bir işlem başarısız olursa, çalışma dizinine gidebilir, hata mesajları için `.command.err` dosyasını inceleyebilir ve hatta sorunu ayıklamak için `.command.sh` dosyasını manuel olarak yeniden çalıştırabilirsiniz.
 
@@ -488,7 +488,7 @@ Bölüm 1'de öğrendiğimiz gibi, eski çalıştırmalardan çalışma dizinler
 
 Ancak, büyük ara dosyalara sahip nf-core pipeline'ları için düzenli olarak temizlik yapmak özellikle önemlidir.
 
-### Çıkarım
+### Özet
 
 nf-core pipeline'larının çalışma dizinlerini nasıl düzenlediğini ve hata ayıklama için bireysel görevleri nasıl inceleyeceğinizi anlıyorsunuz.
 
@@ -551,12 +551,12 @@ Resume özellikle şu durumlarda değerlidir:
 - Veri indirme sırasında ağ bağlantınız düştüğünde
 - Hesaplamayı yeniden yapmadan ek çıktılar eklemek istediğinizde
 
-!!! Warning
+!!! Warning "Uyarı"
 
     Resume yalnızca girdi verilerini, pipeline kodunu veya parametreleri değiştirmemişseniz çalışır.
     Bunlardan herhangi birini değiştirirseniz, Nextflow etkilenen görevleri doğru bir şekilde yeniden çalıştıracaktır.
 
-### Çıkarım
+### Özet
 
 Başarılı görevleri tekrarlamadan pipeline'ları verimli bir şekilde yeniden çalıştırmak için `-resume` kullanmayı biliyorsunuz.
 

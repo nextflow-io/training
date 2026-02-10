@@ -30,23 +30,23 @@ Luego pasaremos a algunos casos de uso comunes como cambiar dónde se almacenan 
 
 Bien, comencemos. Cuando se trata de cargar archivos de configuración, Nextflow puede obtenerlos de muchos lugares diferentes, lo cual es algo bueno y también puede ser algo un poco arriesgado porque a veces puede ser un poco difícil saber de dónde está obteniendo un archivo de configuración y en qué orden carga las cosas.
 
-Así que realmente recomiendo que hagas clic en este enlace aquí, que nos lleva a la documentación de Nextflow. Y en esta página de configuración, enumera los lugares clave de donde se carga la configuración, y lo que es importante, el orden en que estas cosas se cargan.
+Así que realmente recomiendo que haga clic en este enlace aquí, que nos lleva a la documentación de Nextflow. Y en esta página de configuración, enumera los lugares clave de donde se carga la configuración, y lo que es importante, el orden en que estas cosas se cargan.
 
-Entonces puedes ver, puedes poner un archivo de configuración en tu directorio home de Nextflow, que típicamente es ".nextflow" en tu directorio home. Y ese archivo siempre será cargado por cada ejecución de Nextflow en tu sistema.
+Entonces puede ver, puede poner un archivo de configuración en su directorio home de Nextflow, que típicamente es ".nextflow" en su directorio home. Y ese archivo siempre será cargado por cada ejecución de Nextflow en su sistema.
 
-El siguiente lugar a buscar es un archivo en la raíz de tu repositorio o directorio de pipeline llamado "nextflow.config".
+El siguiente lugar a buscar es un archivo en la raíz de su repositorio o directorio de pipeline llamado "nextflow.config".
 
-Luego después de eso, otro archivo llamado "nextflow.config", pero esta vez en el directorio desde donde estás lanzando Nextflow: el directorio de lanzamiento.
+Luego después de eso, otro archivo llamado "nextflow.config", pero esta vez en el directorio desde donde está lanzando Nextflow: el directorio de lanzamiento.
 
-Finalmente, puedes proporcionar rutas de archivos de configuración en la línea de comandos con un argumento "-c", y puedes hacer eso múltiples veces. Y se aplican en el orden en que los especificas.
+Finalmente, puede proporcionar rutas de archivos de configuración en la línea de comandos con un argumento "-c", y puede hacer eso múltiples veces. Y se aplican en el orden en que los especifica.
 
-Puedes proporcionar archivos de configuración en todos estos lugares si quieres, y se cargarán iterativamente, cada uno sobrescribiendo el anterior solo en los ámbitos de configuración donde entren en conflicto.
+Puede proporcionar archivos de configuración en todos estos lugares si quiere, y se cargarán iterativamente, cada uno sobrescribiendo el anterior solo en los ámbitos de configuración donde entren en conflicto.
 
-Este es un sistema realmente poderoso porque significa que puedes establecer valores predeterminados sensatos y luego hacerte gradualmente más y más específico a medida que te concentras en esa configuración.
+Este es un sistema realmente poderoso porque significa que puede establecer valores predeterminados sensatos y luego hacerse gradualmente más y más específico a medida que se concentra en esa configuración.
 
 ## 0. Calentamiento: Ejecutar hello-config.nf
 
-Bien, cerremos esto y saltemos a nuestros Codespaces y comencemos. Como antes, he limpiado aquí, he eliminado mis directorios de resultados anteriores, mis directorios de Nextflow y work, y demás. No te preocupes si todavía tienes esos archivos por ahí. Es solo porque estoy muy acercado y las cosas se ensucian muy rápidamente de otra manera.
+Bien, cerremos esto y saltemos a nuestros Codespaces y comencemos. Como antes, he limpiado aquí, he eliminado mis directorios de resultados anteriores, mis directorios de Nextflow y work, y demás. No se preocupe si todavía tiene esos archivos por ahí. Es solo porque estoy muy acercado y las cosas se ensucian muy rápidamente de otra manera.
 
 Vamos a estar trabajando con hello-config.nf, el último archivo en nuestro directorio, y esto debería seguir desde donde lo dejamos en la sección anterior.
 
@@ -54,7 +54,7 @@ Entonces tenemos nuestros cuatro procesos diferentes, que están siendo incluido
 
 También ya tenemos un archivo "nextflow.config" del último capítulo, donde habilitamos Docker, y vamos a estar construyendo sobre este archivo hoy.
 
-Como antes, hemos cambiado la ruta de salida en este script principal a hello config, solo para que no entre en conflicto con resultados anteriores que has generado.
+Como antes, hemos cambiado la ruta de salida en este script principal a hello config, solo para que no entre en conflicto con resultados anteriores que ha generado.
 
 Bien, vamos a verificar rápidamente que todo sigue funcionando como esperamos. Abro un terminal y hago nextflow run hello-config.nf. Nextflow se carga. Debería ejecutar nuestros cuatro procesos diferentes. Generar algo de bonito arte ASCII usando cowpy y luego guardar nuestros resultados en nuestros archivos de resultados en ese directorio.
 
@@ -86,9 +86,9 @@ Para mostrar cómo podemos tener diferentes archivos de configuración con difer
 
 Así que voy a decir mkdir, y vamos a llamarlo tux-run.
 
-Y luego voy a hacer cd, cambiar directorio a tux-run. Y nota que ahora estamos en nuestro directorio de trabajo ya no está en el mismo directorio que los scripts del pipeline.
+Y luego voy a hacer cd, cambiar directorio a tux-run. Y note que ahora estamos en nuestro directorio de trabajo ya no está en el mismo directorio que los scripts del pipeline.
 
-Bien, vamos a crear un nuevo archivo "nextflow.config". Así que touch Nextflow config, y vamos a abrirlo en VS Code. También puedes ver en la barra lateral aquí que ahora estamos en este subdirectorio.
+Bien, vamos a crear un nuevo archivo "nextflow.config". Así que touch Nextflow config, y vamos a abrirlo en VS Code. También puede ver en la barra lateral aquí que ahora estamos en este subdirectorio.
 
 Ahora podemos tomar el mismo bloque params que teníamos en nuestro nextflow.config de nivel superior, copiar esto y ahora podemos cambiar estos valores.
 
@@ -98,23 +98,23 @@ Ahora hago clic en guardar ahí, y vamos a probarlo. Al igual que con data, ahor
 
 El código del pipeline no ha cambiado en absoluto, pero ahora vamos a tener dos conjuntos de configuración cargándose, y el archivo de configuración del directorio de lanzamiento debería sobrescribir los valores predeterminados, que fueron establecidos en el nextflow.config del pipeline, y deberíamos obtener diferentes conjuntos de resultados.
 
-Efectivamente, dentro de nuestro directorio aquí, dentro de tux-run, puedes ver que tenemos un directorio punto Nextflow y un directorio work y eso es porque estos se crean siempre en tu directorio de lanzamiento. Así que estos son diferentes a los work y results que teníamos de ejecuciones anteriores.
+Efectivamente, dentro de nuestro directorio aquí, dentro de tux-run, puede ver que tenemos un directorio punto Nextflow y un directorio work y eso es porque estos se crean siempre en su directorio de lanzamiento. Así que estos son diferentes a los work y results que teníamos de ejecuciones anteriores.
 
-Ahora, si miro en results, podemos ver nuestro collected y ahí está nuestro pequeño personaje tux. Así que puedes ver que esos parámetros fueron interpretados correctamente.
+Ahora, si miro en results, podemos ver nuestro collected y ahí está nuestro pequeño personaje tux. Así que puede ver que esos parámetros fueron interpretados correctamente.
 
 ## 1.3. Usar un archivo de parámetros
 
 Bien. Antes cuando estaba hablando sobre los diferentes archivos de configuración que podían cargarse, omití otro lugar del que podemos obtener configuración.
 
-Puedes obtenerla desde una línea de comandos como hemos visto con guion guion nombres de parámetros, pero también podemos proporcionar un archivo YAML o un archivo JSON, solo de params.
+Puede obtenerla desde una línea de comandos como hemos visto con guion guion nombres de parámetros, pero también podemos proporcionar un archivo YAML o un archivo JSON, solo de params.
 
-El archivo de configuración puede tener todos los diferentes tipos de ámbitos, pero estos archivos son solo parámetros, y es una forma agradable y amigable para el usuario de proporcionar muchos parámetros a la vez, y quizás una forma un poco más reproducible porque los escribes en un archivo, por lo que es fácil obtenerlos en una etapa posterior.
+El archivo de configuración puede tener todos los diferentes tipos de ámbitos, pero estos archivos son solo parámetros, y es una forma agradable y amigable para el usuario de proporcionar muchos parámetros a la vez, y quizás una forma un poco más reproducible porque los escribe en un archivo, por lo que es fácil obtenerlos en una etapa posterior.
 
 Así que volvamos a nuestro terminal y justo antes de que olvidemos, asegurémonos de volver a subir un directorio, así que ya no estoy en el subdirectorio, y voy a mirar el archivo YAML que tenemos aquí llamado test-params.yaml.
 
-Así que si solo hago code test-params.yaml, puedes ver que esto es solo un archivo YAML regular. Nada especial al respecto. Con las claves siendo nuestros nombres de parámetros, con el formato YAML así que dos puntos aquí, y luego un valor.
+Así que si solo hago code test-params.yaml, puede ver que esto es solo un archivo YAML regular. Nada especial al respecto. Con las claves siendo nuestros nombres de parámetros, con el formato YAML así que dos puntos aquí, y luego un valor.
 
-Nota que esto no es código Nextflow, así que no podemos poner cosas como variables aquí. Estos son solo valores estáticos.
+Note que esto no es código Nextflow, así que no podemos poner cosas como variables aquí. Estos son solo valores estáticos.
 
 También porque JSON en realidad se analiza como YAML, también podemos tener un archivo test-params.json, que se ve muy similar. Es solo un formato de datos diferente.
 
@@ -134,15 +134,15 @@ Y en este caso, deberíamos tener un batch llamado JSON y deberíamos tener una 
 
 Bien, así que eso ha sido principalmente pensar en las entradas al pipeline y cambiar parámetros. ¿Qué hay de las salidas?
 
-Ahora, aunque hemos estado cambiando los subdirectorios usando params, podrías haber notado que todos nuestros archivos siguen yendo a results.
+Ahora, aunque hemos estado cambiando los subdirectorios usando params, podría haber notado que todos nuestros archivos siguen yendo a results.
 
 Podemos cambiar ese directorio base al que se publican todos los archivos con un indicador de línea de comandos llamado -output-dir. Así que si hago Nextflow run hello config, y luego hago -output-dir, y vamos a llamarlo "custom-outdir-cli". No puedo escribir. Solo para que recordemos de dónde vinieron estos archivos.
 
 Esta es una opción central de Nextflow y es muy nueva. Esto fue añadido recientemente, y esta es una de las cosas que podemos hacer con el nuevo analizador de lenguaje y todo.
 
-Es un poco difícil de escribir. También puedes simplemente llamarlo "-o" si quieres. Así que si solo voy atrás. Puedo simplemente acortar eso a "-o", que es un poco más simple.
+Es un poco difícil de escribir. También puede simplemente llamarlo "-o" si quiere. Así que si solo voy atrás. Puedo simplemente acortar eso a "-o", que es un poco más simple.
 
-Bien. Ejecutamos eso. No hemos cambiado nada en nuestro pipeline o incluso en nuestro config en este punto, y debería guardar con suerte todos nuestros resultados en un directorio de nivel superior diferente. Y puedes imaginar que puedes establecer esto a básicamente cualquier ruta que quieras.
+Bien. Ejecutamos eso. No hemos cambiado nada en nuestro pipeline o incluso en nuestro config en este punto, y debería guardar con suerte todos nuestros resultados en un directorio de nivel superior diferente. Y puede imaginar que puede establecer esto a básicamente cualquier ruta que quiera.
 
 Acaba de llegar arriba. Tenemos un custom-outdir-cli, y todos los archivos están organizados ahí de exactamente la misma manera, con sus mismos subdirectorios y nombres de archivo. Así que esta es una manera realmente fácil de simplemente cambiar dónde el pipeline publica sus resultados, sin pensar demasiado en cómo esos resultados están organizados.
 
@@ -150,11 +150,11 @@ Acaba de llegar arriba. Tenemos un custom-outdir-cli, y todos los archivos está
 
 Si miro en este directorio, podemos ver que todavía tenemos un subdirectorio llamado Hello Config, que se siente un poco redundante ahora.
 
-Así que simplemente carguemos nuestro script de nuevo y ahora podemos eliminar ese subdirectorio del bloque output en la parte inferior. Porque realmente ya no lo necesitamos. Así que podemos hacer eso ahora, eliminar eso de aquí. Y luego si es solo esto, puedes eliminar eso completamente o dejarlo como una cadena vacía. Voy a dejarlo como una cadena vacía por ahora, porque vamos a volver y poner algunas cosas diferentes en su lugar en el futuro. Pero si no te importan los subdirectorios, es más limpio simplemente eliminar completamente la declaración de path ahí.
+Así que simplemente carguemos nuestro script de nuevo y ahora podemos eliminar ese subdirectorio del bloque output en la parte inferior. Porque realmente ya no lo necesitamos. Así que podemos hacer eso ahora, eliminar eso de aquí. Y luego si es solo esto, puede eliminar eso completamente o dejarlo como una cadena vacía. Voy a dejarlo como una cadena vacía por ahora, porque vamos a volver y poner algunas cosas diferentes en su lugar en el futuro. Pero si no le importan los subdirectorios, es más limpio simplemente eliminar completamente la declaración de path ahí.
 
-Bien, vamos a guardar. Solo probemos rápidamente de nuevo. De hecho voy a eliminar mi directorio "custom-outdir-cli" para que no nos confundan los archivos existentes ahí. Porque recuerda, cuando publicas cosas, no elimina los archivos que ya estaban ahí. Solo añade nuevos. Vamos a ejecutar ese comando de nuevo, custom-outdir-cli.
+Bien, vamos a guardar. Solo probemos rápidamente de nuevo. De hecho voy a eliminar mi directorio "custom-outdir-cli" para que no nos confundan los archivos existentes ahí. Porque recuerde, cuando publica cosas, no elimina los archivos que ya estaban ahí. Solo añade nuevos. Vamos a ejecutar ese comando de nuevo, custom-outdir-cli.
 
-Y ahora si haces "ls custom-outdir-cli", ya no hay más directorio ahí llamado Hello Config.
+Y ahora si hace "ls custom-outdir-cli", ya no hay más directorio ahí llamado Hello Config.
 
 ## 2.2.1. Establecer outputDir en el archivo de configuración
 
@@ -164,11 +164,11 @@ Abro el archivo "nextflow.config", cierro todo lo demás y me deshago de eso. Po
 
 No está bajo ningún ámbito. No está bajo params ni nada. Es de nivel superior, y podemos establecer esto en una cadena. Ahora una cosa simple de hacer es simplemente cambiarlo a cualquier cosa que no sea results como una cadena codificada. Pero porque esto está en un archivo Nextflow config, podemos ser un poco inteligentes aquí y también incluir variables.
 
-Y puedes ver aquí que hemos incluido una variable params, params.batch, que es parte de esta cadena. Esto significa que podemos reutilizar variables que están viniendo de otros lugares. Y en este caso, si hacemos --batch, cuando ejecutamos Nextflow Pipeline, vamos a obtener un subdirectorio en nuestra ruta personalizada basado en cuál era el nombre del batch.
+Y puede ver aquí que hemos incluido una variable params, params.batch, que es parte de esta cadena. Esto significa que podemos reutilizar variables que están viniendo de otros lugares. Y en este caso, si hacemos --batch, cuando ejecutamos Nextflow Pipeline, vamos a obtener un subdirectorio en nuestra ruta personalizada basado en cuál era el nombre del batch.
 
 Bien, así que probemos esto y solo echemos un vistazo rápido para ver cómo se ven los resultados. Así que si hago Nextflow run hello config y --batch my_run. Recordemos cómo se veía el config. Así que es custom-outdir-config.
 
-Tree custom-outdir-config. Y puedes ver que el batch se llamaba my_run. Y luego tenemos ese subdirectorio llamado my_run. Así que esa ruta de archivo dinámica funcionó.
+Tree custom-outdir-config. Y puede ver que el batch se llamaba my_run. Y luego tenemos ese subdirectorio llamado my_run. Así que esa ruta de archivo dinámica funcionó.
 
 Y no solo eso, ya no fue a un directorio results predeterminado, y no tuve que especificar nada en la línea de comandos para cambiar el directorio base. Así que hemos restablecido exitosamente el valor predeterminado para el outputDir predeterminado.
 
@@ -184,7 +184,7 @@ Ahora cuando ejecutemos, el directorio base todavía va a ser custom-outdir-conf
 
 Vamos a probar eso y ver si funciona. Así que voy a eliminar el directorio anterior para que no nos confundamos, y solo usar exactamente el mismo comando Nextflow Run.
 
-Debería ejecutarse de la misma manera. Podría estar usando dash resume en todos estos para hacerlo un poco más rápido y usar los resultados previamente calculados. Ahora, si hago tree custom-outdir-config, puedes ver que no está en results, está en nuestro directorio base con el nombre del batch. Y puedes ver que todos los resultados ahora están organizados dentro de subdirectorios nombrados después del proceso. Así que tenemos dos lugares diferentes donde estamos definiendo rutas de salida dinámicas aquí.
+Debería ejecutarse de la misma manera. Podría estar usando dash resume en todos estos para hacerlo un poco más rápido y usar los resultados previamente calculados. Ahora, si hago tree custom-outdir-config, puede ver que no está en results, está en nuestro directorio base con el nombre del batch. Y puede ver que todos los resultados ahora están organizados dentro de subdirectorios nombrados después del proceso. Así que tenemos dos lugares diferentes donde estamos definiendo rutas de salida dinámicas aquí.
 
 Bien. Última cosa, vamos a añadir de vuelta esas carpetas intermedias, que teníamos antes porque eran un poco agradables. Intermediates.
 
@@ -194,15 +194,15 @@ Así que lo que podemos hacer es que podemos sacar esa ruta dinámica del output
 
 Así que podemos hacer params.batch barra intermediates barra sayHello.name, y hacer todo esto en una cadena entre comillas dobles, para que sea interpolado por Nextflow.
 
-Ahora puedo copiar, ups. Copiar estos hacia abajo a los otros procesos. Recuerda ponerlos todos entre comillas. Y eliminar intermediates de estas salidas particulares.
+Ahora puedo copiar, ups. Copiar estos hacia abajo a los otros procesos. Recuerde ponerlos todos entre comillas. Y eliminar intermediates de estas salidas particulares.
 
-¿Bien? Se ve ligeramente más complejo ahora, pero puedes ver que realmente estamos empezando a construir una bonita estructura de directorio de salida organizada en nuestro código.
+¿Bien? Se ve ligeramente más complejo ahora, pero puede ver que realmente estamos empezando a construir una bonita estructura de directorio de salida organizada en nuestro código.
 
 Y lo que es realmente agradable es que esta complejidad extra en el código no pasa a través del CLI. Así que podemos ejecutar nuestro comando con -output-dir y cualquier variable batch, solo pensando en cómo ejecutar el pipeline y sin pensar realmente demasiado en lo que está en el código. Y nuestros archivos de salida van a ser construidos realmente bien de una manera muy bien organizada, lo cual es agradable para las personas que usan el pipeline básicamente.
 
 Genial. Mientras escribo esto, me doy cuenta de que cometí un error. Veamos si alguien me atrapó aquí. Tenemos collectGreetings.name, así que algo ha ido un poco mal. Y sí, efectivamente, accidentalmente olvidé poner estos entre llaves onduladas.
 
-Así que recuerda, ten cuidado cuando estés escribiendo tu código y asegúrate de decirle a Nextflow qué es una variable y qué es solo una cadena. Porque hará exactamente lo que le digas que haga. Y nada más. Como todos los buenos computadores. Bien, eso debería arreglarlo.
+Así que recuerde, tenga cuidado cuando esté escribiendo su código y asegúrese de decirle a Nextflow qué es una variable y qué es solo una cadena. Porque hará exactamente lo que le diga que haga. Y nada más. Como todas las buenas computadoras. Bien, eso debería arreglarlo.
 
 ## 2.3. Establecer el modo de publicación a nivel de workflow
 
@@ -224,7 +224,7 @@ Bien. Hasta ahora nos hemos estado enfocando en las entradas y las salidas, los 
 
 Para mostrar esto, vamos a cambiar de usar Docker para ejecutar cowpy, y en su lugar usaremos Conda para hacer lo mismo.
 
-Puedo hacer esto muy simplemente. Si voy a code, "nextflow.config". Si recuerdas en la parte superior, definimos docker.enabled anteriormente, y en el último capítulo para que pudiéramos usar el contenedor con cowpy dentro.
+Puedo hacer esto muy simplemente. Si voy a code, "nextflow.config". Si recuerda en la parte superior, definimos docker.enabled anteriormente, y en el último capítulo para que pudiéramos usar el contenedor con cowpy dentro.
 
 Voy a decirle a Nextflow que no use Docker. Establecer eso en false. Y voy a decir Conda enabled equals true. Así que decirle a Nextflow, por favor usa Conda.
 
@@ -232,37 +232,37 @@ Ahora simplemente habilitar Conda no es suficiente por sí solo. Justo como lo h
 
 Así que si saltamos a los modules aquí. Y abrimos el script cowpy. Podemos ver que tenemos una declaración container en la parte superior. Y el container es usado por Docker, pero también Singularity, Apptainer, y muchas de las otras herramientas de software.
 
-Pero no puede ser usado para Conda, así que tenemos una declaración separada llamada "conda", y podríamos simplemente escribir "cowpy". Y eso lo dejará a la resolución de paquetes de conda para descubrir la mejor manera de resolver eso, según tu entorno conda local.
+Pero no puede ser usado para Conda, así que tenemos una declaración separada llamada "conda", y podríamos simplemente escribir "cowpy". Y eso lo dejará a la resolución de paquetes de conda para descubrir la mejor manera de resolver eso, según su entorno conda local.
 
 O es buena práctica hacer lo que el sitio web del material de capacitación dice hacer, que es definir un canal conda específico con su notación de doble dos puntos, y definitivamente definir una versión específica del software para que cada persona que ejecute el pipeline obtenga la misma versión.
 
-Nota que los contenedores son un poco superiores en este aspecto, porque cuando instalas algo con Conda, todavía va a resolver todas las dependencias para ese paquete, y pueden cambiar con el tiempo. Llamado deriva de dependencias.
+Note que los contenedores son un poco superiores en este aspecto, porque cuando instala algo con Conda, todavía va a resolver todas las dependencias para ese paquete, y pueden cambiar con el tiempo. Llamado deriva de dependencias.
 
-Así que los contenedores, sin embargo, bloquean toda la pila de todas las dependencias de software hasta el fondo, así que puedes estar un poco más confiado de que A, va a funcionar, y B, será reproducible.
+Así que los contenedores, sin embargo, bloquean toda la pila de todas las dependencias de software hasta el fondo, así que puede estar un poco más confiado de que A, va a funcionar, y B, será reproducible.
 
-Así que si puedes usar Docker o Singularity o Apptainer, definitivamente lo recomendaría.
+Así que si puede usar Docker o Singularity o Apptainer, definitivamente lo recomendaría.
 
 Ahora lo que es agradable de esto es que el archivo de módulo, que está escrito por el desarrollador del pipeline, ahora tiene tanto Container como Conda, y así estamos diciéndole a la persona que está ejecutando este pipeline, no nos importa qué solución de empaquetado de software uses. Funcionará tanto con Docker como con Conda, y aquí es donde obtener el software en ambos casos.
 
 Podemos abrir el terminal y vamos a darle una oportunidad. Así que Nextflow run hello config --batch conda. Y la primera vez que esto se ejecute con conda, va a ser un poco lento cuando llegue a ese proceso particular, porque tiene que ejecutar "conda install".
 
-Y está creando un entorno conda especial solo para este un proceso. Así que no está usando mi entorno conda global, que tengo en mi terminal. Está creando uno solo para ese un proceso. Esto es bueno porque evita cosas como conflictos de dependencias entre diferentes procesos en tu workflow. Si tus procesos tienen herramientas que necesitan diferentes versiones de Python o cosas así, está bien porque están usando diferentes entornos conda.
+Y está creando un entorno conda especial solo para este un proceso. Así que no está usando mi entorno conda global, que tengo en mi terminal. Está creando uno solo para ese un proceso. Esto es bueno porque evita cosas como conflictos de dependencias entre diferentes procesos en su workflow. Si sus procesos tienen herramientas que necesitan diferentes versiones de Python o cosas así, está bien porque están usando diferentes entornos conda.
 
-Nextflow almacena en caché estos entornos conda localmente, puedes ver que te dice dónde está esa ruta, está en el directorio work aquí. Y así la próxima vez que ejecute este script con Conda, será mucho más rápido porque encontrará ese entorno conda existente y simplemente lo reutilizará. Pero la primera vez que lo hacemos, tiene que ir y buscarlo, resolverlo, descargar todas las dependencias, y configurar todo.
+Nextflow almacena en caché estos entornos conda localmente, puede ver que te dice dónde está esa ruta, está en el directorio work aquí. Y así la próxima vez que ejecute este script con Conda, será mucho más rápido porque encontrará ese entorno conda existente y simplemente lo reutilizará. Pero la primera vez que lo hacemos, tiene que ir y buscarlo, resolverlo, descargar todas las dependencias, y configurar todo.
 
 Bien, genial, se ejecutó. Podemos simplemente recordarnos qué está configurado actualmente el pipeline para usar. Si miramos en el archivo de configuración, era "custom-outdir-config" ahora mismo para mí. Veamos si voy hasta ese directorio base. E hice --batch conda. Ahí está nuestro subdirectorio conda. Así que funcionó y ahí está nuestra salida de cowpy.
 
 Así que buscó cowpy, lo instaló en mi sistema local usando conda, y ejecutó el proceso. Y lo que es genial es que, como ese usuario final, no tuve que pensar en absoluto sobre ninguna de la gestión de software ahí. Nextflow simplemente lo resolvió por mí. Dije, necesito usar conda en este sistema. El desarrollador del pipeline dijo qué paquetes necesitaba. Y Nextflow hizo el resto. Muy poderoso.
 
-Nota que en realidad puedes usar una mezcla de diferentes tecnologías. Así que puedo habilitar Docker para procesos específicos, y conda para otros procesos, o decir que algunos procesos deberían simplemente usar cualquier software local que tuviera instalado. Esto es bastante inusual, pero es posible, y en algunos casos, por ejemplo, si estás usando cierto software que podría ser difícil de empaquetar en Docker, tienes una escapatoria.
+Note que en realidad puede usar una mezcla de diferentes tecnologías. Así que puedo habilitar Docker para procesos específicos, y conda para otros procesos, o decir que algunos procesos deberían simplemente usar cualquier software local que tuviera instalado. Esto es bastante inusual, pero es posible, y en algunos casos, por ejemplo, si está usando cierto software que podría ser difícil de empaquetar en Docker, tiene una escapatoria.
 
 ## 4. Seleccionar una plataforma de ejecución
 
 Así que eso es empaquetado de software. La otra parte de la portabilidad a otros sistemas es dónde se ejecutan realmente los trabajos. En este momento, estoy ejecutando básicamente en mi computadora portátil o en estos Codespaces, que es una sola computadora. No hay nada elegante. Nextflow está siendo un poco inteligente sobre paralelizar los trabajos lo mejor que puede, pero todo está en un sistema.
 
-Ahora, si estás ejecutando en un HPC, probablemente tienes algún tipo de programador de trabajos como SLURM o PBS o algo, y enviarás trabajos a ese programador y distribuirá todos los trabajos a diferentes nodos de cómputo.
+Ahora, si está ejecutando en un HPC, probablemente tiene algún tipo de programador de trabajos como SLURM o PBS o algo, y enviará trabajos a ese programador y distribuirá todos los trabajos a diferentes nodos de cómputo.
 
-Otra forma de ejecutar es en la nube. Así que tal vez estés usando AWS Batch, o Azure Cloud, o Google. Y todos estos funcionan en un sistema similar donde tienes un programador y envías trabajos y se envían a diferentes lugares para ser computados.
+Otra forma de ejecutar es en la nube. Así que tal vez esté usando AWS Batch, o Azure Cloud, o Google. Y todos estos funcionan en un sistema similar donde tiene un programador y envía trabajos y se envían a diferentes lugares para ser computados.
 
 Ahora en el pasado lejano cuando comencé a hacer bioinformática, el software de todos para ejecutar análisis estaba muy atado a su infraestructura computacional, lo que lo hacía casi imposible de replicar.
 
@@ -272,25 +272,25 @@ Pero con esta separación de configuración en Nextflow, y con la capacidad de N
 
 Así que si vamos a nuestro archivo "nextflow.config", y ahora podemos poner algo de configuración a nivel de proceso. Así que si pongo en la parte superior ámbito process y puedo establecer el executor, y aquí está establecido en local, que es el predeterminado.
 
-Nota que porque esto es a nivel de proceso, podemos apuntar cosas a diferentes procesos. Y así puedes en realidad configurar executors para ser específicos de proceso y tener una ejecución híbrida, donde algunos trabajos podrían ejecutarse localmente, donde sea que el trabajo de Nextflow esté siendo ejecutado. Algunos se envían a diferentes HPC y algunos podrían enviarse a la nube. Puedes ser tan inteligente como quieras.
+Note que porque esto es a nivel de proceso, podemos apuntar cosas a diferentes procesos. Y así puede en realidad configurar executors para ser específicos de proceso y tener una ejecución híbrida, donde algunos trabajos podrían ejecutarse localmente, donde sea que el trabajo de Nextflow esté siendo ejecutado. Algunos se envían a diferentes HPC y algunos podrían enviarse a la nube. Puede ser tan inteligente como quiera.
 
-Ahora, es muy difícil demostrar esto en un entorno de capacitación como este porque no tengo un HPC al cual enviar. Pero lo que puedo hacer es si escribo slurm, podemos hacer un poco de trampa y puedes tener una idea de esto.
+Ahora, es muy difícil demostrar esto en un entorno de capacitación como este porque no tengo un HPC al cual enviar. Pero lo que puedo hacer es si escribo slurm, podemos hacer un poco de trampa y puede tener una idea de esto.
 
 Y esto es realmente más interesante para personas que están acostumbradas a ejecutar en SLURM y conocen cómo se ven los encabezados SLURM. Pero si hago Nextflow run, hello config. Va a fallar porque va a intentar enviar trabajos a un clúster que no existe. Así que obtendremos algún tipo de error sobre sbatch no estar disponible.
 
-Sí, escrito. Esa es la herramienta. Esa es la herramienta CLI que usas para enviar trabajos a un clúster slurm. Pero lo que podemos hacer es que podemos ir y mirar en nuestro directorio work aquí con command clic, abrir ese directorio y mirar el .command.run. Y puedes ver en la parte superior del archivo .command.run, tenemos nuestros encabezados sbatch, diciéndole a un clúster SLURM teórico cómo manejar este envío de trabajo.
+Sí, escrito. Esa es la herramienta. Esa es la herramienta CLI que usa para enviar trabajos a un clúster slurm. Pero lo que podemos hacer es que podemos ir y mirar en nuestro directorio work aquí con command clic, abrir ese directorio y mirar el .command.run. Y puede ver en la parte superior del archivo .command.run, tenemos nuestros encabezados sbatch, diciéndole a un clúster SLURM teórico cómo manejar este envío de trabajo.
 
-Y así puedes ver que Nextflow está siendo inteligente, está haciendo todas las cosas correctas. Solo que no teníamos un clúster al cual enviar.
+Y así puede ver que Nextflow está siendo inteligente, está haciendo todas las cosas correctas. Solo que no teníamos un clúster al cual enviar.
 
 ## 5. Controlar asignaciones de recursos computacionales
 
-¿Qué más es diferente entre diferentes infraestructuras computacionales? Otra cosa es cuántos recursos disponibles tienes, y de hecho, en muchos entornos de cómputo, es un requisito que tengas que especificar cuántos CPUs y cuánta memoria necesita un trabajo.
+¿Qué más es diferente entre diferentes infraestructuras computacionales? Otra cosa es cuántos recursos disponibles tiene, y de hecho, en muchos entornos de cómputo, es un requisito que tenga que especificar cuántos CPUs y cuánta memoria necesita un trabajo.
 
 De nuevo, Nextflow abstrae esto para nosotros, para que ya no sea específico de un solo tipo de entorno de cómputo, y podemos escribir en el ámbito a nivel de proceso aquí. CPUs equals one, memory equals two gigabytes. Nuestro pipeline no es muy exigente, así que eso debería estar bien.
 
-Ahora, solo he adivinado estos números aquí, pero ¿cómo sabes qué es una cantidad sensata de recursos para usar? Es un trabajo bastante difícil ir y escarbar a través de todos estos diferentes procesos de un gran pipeline de muchas muestras y entender cuál fue la utilización de recursos.
+Ahora, solo he adivinado estos números aquí, pero ¿cómo sabe qué es una cantidad sensata de recursos para usar? Es un trabajo bastante difícil ir y escarbar a través de todos estos diferentes procesos de un gran pipeline de muchas muestras y entender cuál fue la utilización de recursos.
 
-Así que un buen enfoque para esto es establecer estos valores en números altos para empezar, solo para que tu pipeline se ejecute sin ningún error, y luego pedirle a Nextflow que genere un reporte de uso para ti.
+Así que un buen enfoque para esto es establecer estos valores en números altos para empezar, solo para que su pipeline se ejecute sin ningún error, y luego pedirle a Nextflow que genere un reporte de uso para usted.
 
 Esto es súper fácil de hacer, así que voy a volver a un terminal. Oh, necesito recordar establecer eso de vuelta a local para que mi pipeline en realidad se ejecute. Y voy a decir Nextflow run, y voy a usar un indicador de línea de comandos -with-report.
 
@@ -304,37 +304,37 @@ Nextflow puede generar un reporte como este para cualquier pipeline y tiene info
 
 Y también hay estos gráficos sobre uso de recursos. Así que nos dice qué porcentaje de llamadas de CPU se usaron para cada proceso como un diagrama de caja aquí, porque hay muchas tareas para cada proceso, así que podemos ver la distribución.
 
-Puedes ver nuestros procesos aquí, cowpy y collectGreetings solo tenían una sola tarea, así que es solo una sola línea. Y tenemos tanto CPU como memoria y duración del trabajo, y fueron muy rápidos.
+Puede ver nuestros procesos aquí, cowpy y collectGreetings solo tenían una sola tarea, así que es solo una sola línea. Y tenemos tanto CPU como memoria y duración del trabajo, y fueron muy rápidos.
 
-Si estás usando Seqera Platform, por cierto, obtienes los mismos gráficos incorporados en la interfaz de Platform sin tener que hacer nada. Así que siempre tienes esta información al alcance de tu mano.
+Si está usando Seqera Platform, por cierto, obtiene los mismos gráficos incorporados en la interfaz de Platform sin tener que hacer nada. Así que siempre tiene esta información al alcance de su mano.
 
 Bien, así que podemos usar este reporte y en una ejecución real, y tener una idea de cuántos CPUs y cuánta memoria está siendo usada por nuestro pipeline y volver y poner esos valores de vuelta en nuestro archivo de configuración, para que la próxima vez tal vez no solicitemos tanto. Y podamos ser un poco más eficientes.
 
-Ahora puedes ponerte realmente inteligente sobre configurar archivos de configuración del pipeline. Y de nuevo, si estás usando Seqera Platform, busca un pequeño botón que se vea como una bombilla. Porque si haces clic en eso, generará un archivo de configuración altamente optimizado, que está adaptado específicamente para tus datos, tu ejecución y tu pipeline. Para ejecutarlo de la manera más eficiente posible.
+Ahora puede ponerse realmente inteligente sobre configurar archivos de configuración del pipeline. Y de nuevo, si está usando Seqera Platform, busque un pequeño botón que se vea como una bombilla. Porque si hace clic en eso, generará un archivo de configuración altamente optimizado, que está adaptado específicamente para sus datos, su ejecución y su pipeline. Para ejecutarlo de la manera más eficiente posible.
 
 Pero por ahora, voy a decir que en realidad el número predeterminado de CPUs que Nextflow estaba dando estaba bien y solo necesito un gigabyte de memoria.
 
 ## 5.3. Establecer asignaciones de recursos para un proceso específico
 
-Ahora, en la vida real, es bastante inusual que todos los procesos en tu pipeline vayan a necesitar los mismos requisitos. Podrías tener algo como MultiQC como una herramienta de reportes, que necesita muy poco en términos de recursos y se ejecuta bastante rápido.
+Ahora, en la vida real, es bastante inusual que todos los procesos en su pipeline vayan a necesitar los mismos requisitos. Podría tener algo como MultiQC como una herramienta de reportes, que necesita muy poco en términos de recursos y se ejecuta bastante rápido.
 
-Y luego tal vez tienes algo que está indexando un genoma de referencia o haciendo algún alineamiento o haciendo algún otro trabajo. No importa qué es, que toma muchos recursos. Y así para estos diferentes envíos de trabajos a un programador, quieres dar diferentes cantidades de recursos.
+Y luego tal vez tiene algo que está indexando un genoma de referencia o haciendo algún alineamiento o haciendo algún otro trabajo. No importa qué es, que toma muchos recursos. Y así para estos diferentes envíos de trabajos a un programador, quiere dar diferentes cantidades de recursos.
 
 Bajo este ámbito process, podemos definir un config, que apunta a procesos específicos de diferentes maneras.
 
-Aquí estamos usando withName, también podemos usar labels, y estos pueden usar un patrón para apuntar a uno o múltiples procesos. Aquí solo estamos diciendo cualquier proceso que tenga un nombre cowpy establecido a dos gigabytes de memoria y dos CPUs, y porque este es un selector más específico que el process de nivel superior, esto es sobrescrito en estos casos, así que puedes construir un bonito archivo de configuración aquí, que realmente adapta todos tus diferentes procesos en tu pipeline para hacerlos realmente eficientes.
+Aquí estamos usando withName, también podemos usar labels, y estos pueden usar un patrón para apuntar a uno o múltiples procesos. Aquí solo estamos diciendo cualquier proceso que tenga un nombre cowpy establecido a dos gigabytes de memoria y dos CPUs, y porque este es un selector más específico que el process de nivel superior, esto es sobrescrito en estos casos, así que puede construir un bonito archivo de configuración aquí, que realmente adapta todos sus diferentes procesos en su pipeline para hacerlos realmente eficientes.
 
 ## 5.5. Añadir límites de recursos
 
 Ahora como desarrollador de pipeline, probablemente conozco las herramientas bastante bien, y quiero que todo se ejecute lo más rápido y lo mejor posible. Así que podría ser que ponga números bastante altos para algunos de estos porque sé que se ejecutará mucho más rápido si le doy a cowpy 20 CPUs en lugar de dos.
 
-Eso está bien hasta que vas a ejecutar en tu computadora portátil o en GitHub Actions Continuous Integration test, o algún otro sistema, que tal vez no tenga 20 CPUs disponibles.
+Eso está bien hasta que va a ejecutar en su computadora portátil o en GitHub Actions Continuous Integration test, o algún otro sistema, que tal vez no tenga 20 CPUs disponibles.
 
-Ahora cuando intentas ejecutar el pipeline, fallará porque Nextflow dirá, no puedo enviar este trabajo a ninguna parte. No tengo los recursos disponibles.
+Ahora cuando intenta ejecutar el pipeline, fallará porque Nextflow dirá, no puedo enviar este trabajo a ninguna parte. No tengo los recursos disponibles.
 
 Ahora para evitar ese fallo duro, podemos añadir un poco más de configuración, que es específica de nuestro sistema ahora, llamada límites de recursos. Y eso se ve así. Está bajo el ámbito process de nuevo.
 
-Y límites de recursos, puedes especificar básicamente el techo de lo que tienes disponible. Es un mapa aquí, y puedes, dentro de este mapa, puedes establecer la memoria, los CPUs, y el tiempo.
+Y límites de recursos, puede especificar básicamente el techo de lo que tiene disponible. Es un mapa aquí, y puede, dentro de este mapa, puede establecer la memoria, los CPUs, y el tiempo.
 
 Ahora lo que sucede es cuando Nextflow envía una tarea de un proceso, mira lo que se solicita y básicamente solo hace un mínimo entre eso y eso. Así que si solicitamos 20 CPUs, pero solo cuatro están disponibles, solicitará cuatro. El pipeline no falla y usa lo más cercano a lo que fue diseñado por el desarrollador del pipeline como sea posible.
 
@@ -350,42 +350,42 @@ Estoy usando Docker localmente, conda en el HPC, y el sistema HPC tiene límites
 
 Ahora puedo ejecutar el pipeline con la opción CLI -profile, decir qué perfil quiero usar. Así que voy a usar my_laptop, y Nextflow aplicará toda la configuración dentro de ese ámbito de perfil. Así que puedo intentar eso ahora. Es el mismo comando de antes. Nextflow run hello config, y hago guion profile, guion simple porque es la opción central de Nextflow, guion profile my_laptop.
 
-Ahora va a aplicar toda esa opción de configuración por lotes. Oh, y puedes ver, dije antes que esto podría suceder que el requisito del proceso, solicitó cuatro CPUs y solo tengo dos en esta instancia de Codespaces.
+Ahora va a aplicar toda esa opción de configuración por lotes. Oh, y puede ver, dije antes que esto podría suceder que el requisito del proceso, solicitó cuatro CPUs y solo tengo dos en esta instancia de Codespaces.
 
 Así que esta es una buena oportunidad solo para probar los límites de recursos del proceso, y decir que solo tengo dos CPUs en my_laptop, o en estos Codespaces. Ahora si lo ejecutamos de nuevo, debería limitar ese requisito a dos y con suerte el pipeline se ejecutará. Genial.
 
 ## 6.2. Crear un perfil de parámetros de prueba
 
-Nota que estos perfiles no tienen que tener solo configuración sobre su infraestructura. Puedes tener agrupaciones de cualquier configuración aquí, incluyendo parámetros.
+Note que estos perfiles no tienen que tener solo configuración sobre su infraestructura. Puede tener agrupaciones de cualquier configuración aquí, incluyendo parámetros.
 
-Así que otra cosa que verás muy a menudo en los pipelines de la gente es un perfil test, que incluye parámetros, que normalmente enviarías por usuario. Pero aquí tenemos, básicamente diferentes valores predeterminados sensatos para cuando quiero ejecutar casos de prueba.
+Así que otra cosa que verá muy a menudo en los pipelines de la gente es un perfil test, que incluye parámetros, que normalmente enviaría por usuario. Pero aquí tenemos, básicamente diferentes valores predeterminados sensatos para cuando quiero ejecutar casos de prueba.
 
 Y esto es genial porque no tengo que necesariamente ir y especificar todas estas cosas, que podrían ser parámetros requeridos. De otra manera puedo simplemente decir guion profile test y simplemente se ejecutará sin problemas.
 
 Ahora algo a notar es que los perfiles también pueden ser combinados más de uno. Así que puedo hacer profile my_laptop aquí, y luego también añadir test. No hago profile dos veces. Solo hago una lista separada por comas aquí sin espacios. Y va a aplicar estos perfiles en orden. Así que tomará la configuración del perfil my_laptop, y luego aplicará la configuración de test encima.
 
-Realmente conveniente y puedes ver cómo puedes configurar muchos grupos de valores predeterminados sensatos aquí para hacer que sea fácil ejecutar tu pipeline.
+Realmente conveniente y puede ver cómo puede configurar muchos grupos de valores predeterminados sensatos aquí para hacer que sea fácil ejecutar su pipeline.
 
 ## 6.3. Usar nextflow config para ver la configuración resuelta
 
-Con suerte, te he convencido de que la resolución de configuración de Nextflow es poderosa, pero no te culparía si te estás poniendo un poco bizco en este punto después de que he dicho unas 20 formas diferentes de proporcionar configuración y dar todas estas diferentes capas como una piel de cebolla.
+Con suerte, le he convencido de que la resolución de configuración de Nextflow es poderosa, pero no le culparía si se está poniendo un poco bizco en este punto después de que he dicho unas 20 formas diferentes de proporcionar configuración y dar todas estas diferentes capas como una piel de cebolla.
 
-Así que si alguna vez te sientes inseguro sobre cuál es la configuración final resuelta para Nextflow, debes saber que hay un comando llamado "nextflow config", y podemos ejecutar eso y nos dirá cuál es la configuración resuelta en nuestra ubicación actual.
+Así que si alguna vez se siente inseguro sobre cuál es la configuración final resuelta para Nextflow, debe saber que hay un comando llamado "nextflow config", y podemos ejecutar eso y nos dirá cuál es la configuración resuelta en nuestra ubicación actual.
 
 Así que cuando lo ejecuto aquí, encuentra el archivo "nextflow.config" en el directorio de trabajo actual, y procesa toda la configuración diferente, y me da la salida resuelta.
 
-Nota que el archivo Nextflow config también puede tomar la opción CLI de perfil. Así que si le digo que resuelva en los perfiles my_laptop y test, y puedes ver que también aplicó los límites de recursos aquí de la opción de configuración my_laptop y también estableció los params, que estaban en el test.
+Note que el archivo Nextflow config también puede tomar la opción CLI de perfil. Así que si le digo que resuelva en los perfiles my_laptop y test, y puede ver que también aplicó los límites de recursos aquí de la opción de configuración my_laptop y también estableció los params, que estaban en el test.
 
-Así que esta es una buena manera solo para explorar cómo está funcionando la resolución de configuración, si tienes alguna duda.
+Así que esta es una buena manera solo para explorar cómo está funcionando la resolución de configuración, si tiene alguna duda.
 
 ## Conclusión
 
-Bien, eso es todo. Eso es Nextflow config en pocas palabras. Puedes hacer muchas cosas con config. Es realmente poderoso. Pero estos son la mayoría de los casos de uso comunes que te encontrarás haciendo, y estos conceptos se aplican a todas las diferentes opciones.
+Bien, eso es todo. Eso es Nextflow config en pocas palabras. Puede hacer muchas cosas con config. Es realmente poderoso. Pero estos son la mayoría de los casos de uso comunes que se encontrará haciendo, y estos conceptos se aplican a todas las diferentes opciones.
 
-Date una palmadita en la espalda porque este es el final del curso de capacitación Hello Nextflow. Con suerte ahora estás confiado tanto escribiendo tu propio pipeline de Nextflow desde cero, configurándolo y ejecutándolo, y conoces todos los detalles y las cosas a tener en cuenta.
+Dese una palmadita en la espalda porque este es el final del curso de capacitación Hello Nextflow. Con suerte ahora está confiado tanto escribiendo su propio pipeline de Nextflow desde cero, configurándolo y ejecutándolo, y conoce todos los detalles y las cosas a tener en cuenta.
 
-Hay un cuestionario más que puedes probar en la página de capacitación de configuración. Así que baja y prueba eso y asegúrate de haber entendido todas estas partes sobre la configuración.
+Hay un cuestionario más que puede probar en la página de capacitación de configuración. Así que baje y pruebe eso y asegúrese de haber entendido todas estas partes sobre la configuración.
 
-Y únete a nosotros en el último video solo para una conclusión rápida sobre algunos de los próximos pasos que podrían ser buenos después de este curso de capacitación.
+Y únase a nosotros en el último video solo para una conclusión rápida sobre algunos de los próximos pasos que podrían ser buenos después de este curso de capacitación.
 
-Gracias por quedarte con nosotros. Bien hecho y te veré en el próximo video.
+Gracias por quedarse con nosotros. Bien hecho y le veré en el próximo video.

@@ -1,9 +1,9 @@
 # Bölüm 3: Hello Workflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -78,7 +78,7 @@ nextflow run hello-workflow.nf
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen konumda bulacaksınız.
 Bu bölüm için, `results/hello_workflow/` altında.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     results/hello_workflow
@@ -109,7 +109,7 @@ Bu amaçla, üç şey yapmamız gerekiyor:
 
 Selamlamaları büyük harfe dönüştürmek için, 'metin değiştirme' anlamına gelen `tr` adlı klasik bir UNIX aracını aşağıdaki sözdizimi ile kullanacağız:
 
-```bash title="Sözdizimi"
+```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
 ```
 
@@ -123,7 +123,7 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 Çıktı, `Hello World` dizesinin büyük harf versiyonunu içeren `UPPER-output.txt` adlı bir metin dosyasıdır.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="UPPER-output.txt"
     HELLO WORLD
@@ -324,7 +324,7 @@ Konsol çıktısında, az önce eklediğimiz yeni sürece karşılık gelen fazl
 
 Çıktıları `output` bloğunda ayarlandığı gibi `results/hello_workflow` dizininde bulacaksınız.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     results/hello_workflow/
@@ -338,7 +338,7 @@ Konsol çıktısında, az önce eklediğimiz yeni sürece karşılık gelen fazl
 
 Bu kullanışlı! Ancak yine de ikinci sürece yapılan çağrılardan birinin work dizinine bakmaya değer.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -397,7 +397,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COL
 
 Çıktı, orijinal selamlamaların büyük harf versiyonlarını içeren `COLLECTED-output.txt` adlı bir metin dosyasıdır.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="COLLECTED-output.txt"
     HELLO
@@ -564,7 +564,7 @@ Yalnızca bir tane bekliyorduk, ama üç tane var.
 
 Şimdi son çıktı dosyasının içeriğine bakın.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/COLLECTED-output.txt"
     Holà
@@ -620,8 +620,8 @@ Kanal içeriklerinin önceki ve sonraki durumlarını görselleştirmek için bi
         collectGreetings(convertToUpper.out.collect())
 
         // isteğe bağlı view ifadeleri
-        convertToUpper.out.view { contents -> "collect öncesi: $contents" }
-        convertToUpper.out.collect().view { contents -> "collect sonrası: $contents" }
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
     ```
 
@@ -653,10 +653,10 @@ nextflow run hello-workflow.nf -resume
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
-    collect öncesi: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    collect öncesi: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    collect öncesi: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    collect sonrası: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
     ```
 
 Başarıyla çalışıyor, ancak log çıktısı bundan biraz daha dağınık görünebilir (okunabilirlik için temizledik).
@@ -675,7 +675,7 @@ Bunu şu diyagramla özetleyebiliriz:
 
 Son olarak, her şeyin doğru çalıştığından emin olmak için çıktı dosyasının içeriğine bakabilirsiniz.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/COLLECTED-output.txt"
     BONJOUR
@@ -708,8 +708,8 @@ Bir sonraki bölüme geçmeden önce, konsol çıktısını karmaşıklaştırma
         collectGreetings(convertToUpper.out.collect())
 
         // isteğe bağlı view ifadeleri
-        convertToUpper.out.view { contents -> "collect öncesi: $contents" }
-        convertToUpper.out.collect().view { contents -> "collect sonrası: $contents" }
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
 
 Bu temelde 2.4.2 noktasının ters işlemidir.
@@ -891,7 +891,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 
 Başarıyla çalışıyor ve istenen çıktıyı üretiyor:
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/COLLECTED-trio-output.txt"
     HELLO
@@ -948,7 +948,7 @@ Bu, `input_files` dizisindeki dosya sayısını almak için Nextflow'un yerleşi
         count_greetings = input_files.size()
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'Bu grupta ${count_greetings} selamlama vardı.' > '${batch_name}-report.txt'
+        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
         """
     ```
 
@@ -1066,7 +1066,7 @@ Ama şimdilik, iş akışı düzeyindeki çıktıları güncellemeyi bitirelim.
 
 === "Önce"
 
-    ```groovy title="hello-workflow.nf" linenums="86"
+    ```groovy title="hello-workflow.nf" linenums="80"
     output {
         first_output {
             path 'hello_workflow'
@@ -1110,10 +1110,10 @@ nextflow run hello-workflow.nf -resume --batch trio
 `results/hello_workflow/` dizinine bakarsanız, yeni rapor dosyasını, `trio-report.txt`'yi bulacaksınız.
 İş akışının işlenen selamlama sayısını doğru bir şekilde raporladığını doğrulamak için açın.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```txt title="trio-report.txt"
-    Bu grupta 3 selamlama vardı.
+    There were 3 greetings in this batch.
     ```
 
 <figure class="excalidraw">
@@ -1145,7 +1145,7 @@ Hazır olduğunuzda, kodunuzu daha iyi sürdürülebilirlik ve kod verimliliği 
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Daha fazla bilgi: [1.4. İlk sürecin çıktısını ikinci sürece iletin](#14-ilk-surecin-ciktisini-ikinci-surece-iletin)
+Daha fazla bilgi: [1.4. İlk sürecin çıktısını ikinci sürece iletin](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1155,7 +1155,7 @@ Nextflow'da süreç yürütme sırasını ne belirler?
 - [x] Süreçler arasındaki veri bağımlılıkları
 - [ ] Paralel yürütme için rastgele sıra
 
-Daha fazla bilgi: [1.4. İlk sürecin çıktısını ikinci sürece iletin](#14-ilk-surecin-ciktisini-ikinci-surece-iletin)
+Daha fazla bilgi: [1.4. İlk sürecin çıktısını ikinci sürece iletin](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1174,7 +1174,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-Daha fazla bilgi: [2.4. Selamlamaları tek bir girdide toplamak için bir operatör kullanın](#24-selamlamalari-tek-bir-girdide-toplamak-icin-bir-operator-kullanin)
+Daha fazla bilgi: [2.4. Selamlamaları tek bir girdide toplamak için bir operatör kullanın](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1184,7 +1184,7 @@ Daha fazla bilgi: [2.4. Selamlamaları tek bir girdide toplamak için bir operat
 - [x] Aşağı akış sürecinin yukarı akış sürecinden tüm öğelere ihtiyacı olduğunda
 - [ ] Verileri birden fazla sürece bölmek istediğinizde
 
-Daha fazla bilgi: [2.4. Selamlamaları tek bir girdide toplamak için bir operatör kullanın](#24-selamlamalari-tek-bir-girdide-toplamak-icin-bir-operator-kullanin)
+Daha fazla bilgi: [2.4. Selamlamaları tek bir girdide toplamak için bir operatör kullanın](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1194,7 +1194,7 @@ Bir süreçten adlandırılmış bir çıktıya nasıl erişirsiniz?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-Daha fazla bilgi: [4.1.2. Rapor dosyasını yayınlayın ve çıktıları adlandırın](#412-rapor-dosyasini-yayinlayin-ve-ciktilari-adlandirin)
+Daha fazla bilgi: [4.1.2. Rapor dosyasını yayınlayın ve çıktıları adlandırın](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1204,7 +1204,7 @@ Bir süreçte çıktıyı adlandırmak için doğru sözdizimi nedir?
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-Daha fazla bilgi: [4.1.2. Rapor dosyasını yayınlayın ve çıktıları adlandırın](#412-rapor-dosyasini-yayinlayin-ve-ciktilari-adlandirin)
+Daha fazla bilgi: [4.1.2. Rapor dosyasını yayınlayın ve çıktıları adlandırın](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1214,5 +1214,5 @@ Bir sürece birden fazla girdi sağlarken ne doğru olmalıdır?
 - [x] Girdilerin sırası girdi bloğunda tanımlanan sırayla eşleşmelidir
 - [ ] Aynı anda yalnızca iki girdi sağlanabilir
 
-Daha fazla bilgi: [3. Bir sürece ek parametreler iletin](#3-bir-surece-ek-parametreler-iletin)
+Daha fazla bilgi: [3. Bir sürece ek parametreler iletin](#3-pass-more-than-one-input-to-a-process)
 </quiz>

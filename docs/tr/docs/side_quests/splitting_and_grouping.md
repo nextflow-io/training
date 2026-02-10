@@ -1,6 +1,6 @@
 # Bölme ve Gruplama
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow, verilerle esnek bir şekilde çalışmak için güçlü araçlar sağlar. Temel bir özellik, verileri farklı akışlara bölmek ve ardından ilişkili öğeleri tekrar birleştirmektir. Bu, özellikle analiz için sonuçları birleştirmeden önce farklı örnek türlerini ayrı ayrı işlemeniz gereken biyoinformatik iş akışlarında değerlidir.
 
@@ -1145,6 +1145,7 @@ Verilerimizin yapısının değiştiğini ve her channel öğesinde dosyaların 
 
 Bu bölümde öğrendikleriniz:
 
+- **İlişkili örnekleri gruplama**: Ortak özelliklere göre örnekleri toplamak için `groupTuple` nasıl kullanılır
 - **Gruplama anahtarlarını izole etme**: Gruplama için belirli alanları çıkarmak üzere `subMap` nasıl kullanılır
 - **Gruplanmış veri yapılarını işleme**: `groupTuple` tarafından oluşturulan iç içe yapıyla nasıl çalışılır
 - **Teknik replik işleme**: Aynı deneysel koşulları paylaşan örnekler nasıl gruplandırılır

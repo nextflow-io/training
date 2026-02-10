@@ -28,7 +28,7 @@ Le cours de formation **[Hello nf-core](../../hello_nf-core/index.md)** vous pr�
 Dans les cours Hello, nous maintenons volontairement un niveau de complexité technique faible pour éviter de vous surcharger avec des informations dont vous n'avez pas besoin pour débuter avec Nextflow.
 Au fur et à mesure que vous progresserez dans votre travail, vous voudrez apprendre à utiliser l'ensemble complet des fonctionnalités et la puissance de Nextflow.
 
-À cette fin, nous travaillons actuellement sur une **collection de [Side Quests](../side_quests/index.md)**, qui sont conçus pour être des cours courts autonomes approfondissant des sujets spécifiques comme les tests et la gestion des métadonnées.
+À cette fin, nous travaillons actuellement sur une **collection de [Quêtes secondaires](../side_quests/index.md)**, qui sont conçues pour être des cours courts autonomes approfondissant des sujets spécifiques comme les tests et la gestion des métadonnées.
 
 ---
 

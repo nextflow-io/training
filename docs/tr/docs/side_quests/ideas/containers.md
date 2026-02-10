@@ -1,6 +1,6 @@
 # Bölüm 1: Daha Fazla Konteyner
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 [YAPILACAK]
 
@@ -82,7 +82,7 @@ dependencies:
 
 Bu dosyaların içeriğini `containers/build` dizininde bulunan taslakların içine kopyalayın, ardından konteyner imajını kendiniz oluşturmak için aşağıdaki komutu çalıştırın.
 
-!!! note "Not"
+!!! Note "Not"
 
     Konteyner imajını `quote` adı ve `latest` etiketi ile etiketlemek için `-t quote:latest` bayrağını kullanıyoruz.
     Bu sistemi çalıştırırken konteyner imajına atıfta bulunmak için bu etiketi kullanabileceğiz.
@@ -97,7 +97,7 @@ Oluşturma işlemi tamamlandıktan sonra, az önce oluşturduğunuz konteyner im
 docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 ```
 
-### Önemli Noktalar
+### Özet
 
 Nextflow pipeline'larınızda kullanmak istediğiniz bir araç için konteyner imajı almanın iki farklı yolunu öğrendiniz: Seqera Containers'ı kullanmak ve konteyner imajını kendiniz oluşturmak.
 
@@ -132,20 +132,20 @@ Bu alıştırmaları yapmak, eğitimin sonraki bölümlerini anlamak için _gere
                                                         ||     ||
 ```
 
-### 2.1. getQuote process kullanmak için `hello-containers.nf` betiğini değiştirin
+### 2.1. getQuote sürecini kullanmak için `hello-containers.nf` betiğini değiştirin
 
 `containers/data/pioneers.csv` dosyasında bilgisayar ve biyoloji öncülerinin bir listesi var.
 Üst düzeyde, bu alıştırmayı tamamlamak için şunları yapmanız gerekecek:
 
 - Varsayılan `params.input_file` parametresini `pioneers.csv` dosyasını işaret edecek şekilde değiştirin.
-- Her girdi için bir alıntı almak üzere `quote` konteynerini kullanan bir `getQuote` process oluşturun.
-- Alıntıyı görüntülemek için `getQuote` process'inin çıktısını `cowsay` process'ine bağlayın.
+- Her girdi için bir alıntı almak üzere `quote` konteynerini kullanan bir `getQuote` süreci oluşturun.
+- Alıntıyı görüntülemek için `getQuote` sürecinin çıktısını `cowsay` sürecine bağlayın.
 
 `quote` konteyner imajı için, önceki ek alıştırmada kendiniz oluşturduğunuz imajı veya Seqera Containers'dan aldığınız imajı kullanabilirsiniz.
 
-!!! tip "İpucu"
+!!! Hint "İpucu"
 
-    getQuote process'inizin `script` bloğu için iyi bir seçenek şu olabilir:
+    getQuote sürecinizin `script` bloğu için iyi bir seçenek şu olabilir:
         ```groovy
         script:
             def safe_author = author.tokenize(' ').join('-')
@@ -160,7 +160,7 @@ Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.1.nf`
 ### 2.2. Nextflow pipeline'ınızı `quote` ve `sayHello` modlarında çalışabilecek şekilde değiştirin
 
 Pipeline'ınıza hem `quote` hem de `sayHello` için tasarlanmış girdileri kabul etmesine izin verecek bazı dallanma mantığı ekleyin.
-İşte bir Nextflow workflow'unda `if` ifadesinin nasıl kullanılacağına dair bir örnek:
+İşte bir Nextflow iş akışında `if` ifadesinin nasıl kullanılacağına dair bir örnek:
 
 ```groovy title="hello-containers.nf"
 workflow {
@@ -174,15 +174,15 @@ workflow {
 }
 ```
 
-!!! tip "İpucu"
+!!! Hint "İpucu"
 
-    Bir process'in çıktı kanalına bir ad atamak için `new_ch = processName.out` kullanabilirsiniz.
+    Bir sürecin çıktı kanalına bir ad atamak için `new_ch = processName.out` kullanabilirsiniz.
 
 Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.2.nf` dosyasında bulabilirsiniz.
 
-### Önemli Noktalar
+### Özet
 
-Nextflow'da process'leri çalıştırmak için konteynerleri nasıl kullanacağınızı ve pipeline'larınıza bazı dallanma mantığını nasıl ekleyeceğinizi biliyorsunuz!
+Nextflow'da süreçleri çalıştırmak için konteynerleri nasıl kullanacağınızı ve pipeline'larınıza bazı dallanma mantığını nasıl ekleyeceğinizi biliyorsunuz!
 
 ### Sırada ne var?
 

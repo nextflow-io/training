@@ -1,5 +1,7 @@
 # Próximos Pasos - Transcripción del Video
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -34,7 +36,7 @@ Importante, también hay componentes en nf-core, casi 1700 módulos diferentes, 
 
 ## Seqera Platform
 
-A medida que aumentas tu uso con Nextflow, consulta Seqera Platform, es la mejor manera de ejecutar Nextflow. Puedes ejecutar en tu propia infraestructura, así sea HPC o AWS, Azure, Google Cloud, Oracle y más. También puedes usar nuestro propio Seqera Compute si no quieres gestionar ninguna infraestructura de cómputo en absoluto.
+A medida que aumentas tu uso con Nextflow, consulta Seqera Platform, es la mejor manera de ejecutar Nextflow. Puedes ejecutar en tu propia infraestructura, ya sea HPC o AWS, Azure, Google Cloud, Oracle y más. También puedes usar nuestro propio Seqera Compute si no quieres gestionar ninguna infraestructura de cómputo en absoluto.
 
 Seqera Platform realmente simplifica la configuración de estas infraestructuras de nube complejas con características como Batch Forge, que crea el entorno para ti. Y también ayuda mucho con la observabilidad y el registro de auditoría y cumplimiento.
 

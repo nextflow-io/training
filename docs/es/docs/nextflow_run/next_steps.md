@@ -2,14 +2,14 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-¡Felicidades por completar el curso de entrenamiento Nextflow Run!
+¡Felicidades por completar el curso de capacitación Nextflow Run! 🎉
 
 <!-- placeholder for video -->
 
 ## Su recorrido
 
 Comenzó con un workflow muy básico, y aprendió a ejecutarlo, encontrar las salidas y gestionar su ejecución.
-Luego, trabajó a través de versiones cada vez más complejas de ese workflow y aprendió a reconocer los conceptos y mecanismos esenciales que impulsan los pipelines de Nextflow, incluyendo channels y operadores, modularización de código y contenedores.
+Luego, trabajó a través de versiones cada vez más complejas de ese workflow y aprendió a reconocer los conceptos y mecanismos esenciales que impulsan los pipelines de Nextflow, incluyendo canales y operadores, modularización de código y contenedores.
 Finalmente, aprendió cómo personalizar la configuración de un pipeline para adaptarlo a sus preferencias y su infraestructura computacional.
 
 ### Lo que aprendió
@@ -17,7 +17,7 @@ Finalmente, aprendió cómo personalizar la configuración de un pipeline para a
 Ahora puede gestionar la ejecución del pipeline Hello, describir cómo está estructurado e identificar las piezas principales de código involucradas.
 
 - La forma final del workflow Hello toma como entrada un archivo CSV que contiene saludos de texto.
-- Los cuatro pasos están implementados como processes de Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` y `cowpy`) almacenados en archivos de módulos separados.
+- Los cuatro pasos están implementados como procesos de Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` y `cowpy`) almacenados en archivos de módulos separados.
 - Los resultados se publican en un directorio llamado `results/`.
 - La salida final del pipeline es un archivo de texto plano que contiene arte ASCII de un personaje diciendo los saludos en mayúsculas.
 
@@ -39,7 +39,7 @@ A través de este curso práctico, ha aprendido cómo:
 - Lanzar un workflow de Nextflow localmente
 - Encontrar e interpretar salidas (resultados) y archivos de registro generados por Nextflow
 - Reconocer los componentes principales de Nextflow que constituyen un workflow simple de múltiples pasos
-- Describir conceptos del siguiente nivel como operadores y fábricas de channels
+- Describir conceptos del siguiente nivel como operadores y fábricas de canales
 - Configurar pipelines para diferentes entornos de cómputo
 
 Ahora está equipado con el conocimiento fundamental para comenzar a integrar pipelines de Nextflow existentes en su propio trabajo.
@@ -61,6 +61,6 @@ Para recursos de ayuda y soporte de la comunidad, vea la [página de Ayuda](../h
 
 ## Encuesta de retroalimentación
 
-Antes de continuar, ¡tómese un minuto para completar la encuesta del curso! Su retroalimentación nos ayuda a mejorar nuestros materiales de entrenamiento para todos.
+Antes de continuar, ¡tómese un minuto para completar la encuesta del curso! Su retroalimentación nos ayuda a mejorar nuestros materiales de capacitación para todos.
 
 [Tomar la encuesta :material-arrow-right:](survey.md){ .md-button .md-button--primary }

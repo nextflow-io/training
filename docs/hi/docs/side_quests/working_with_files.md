@@ -1563,7 +1563,7 @@ workflow में निम्नलिखित edit करो:
 === "पहले"
 
     ```groovy title="main.nf" linenums="1"
-    #!/usr्bin/env nextflow
+    #!/usr/bin/env nextflow
 
     workflow {
     ```
@@ -1725,7 +1725,7 @@ nextflow run main.nf
 
 यह process अपने outputs को `results` डायरेक्टरी में publish करने के लिए set up है, तो वहाँ एक नज़र डालो।
 
-??? abstract "डायरेक्टरी और फ़ाइल contents"
+??? abstract "डायरेक्टरी और फ़ाइल सामग्री"
 
     ```console
     results
@@ -1790,7 +1790,7 @@ nextflow run main.nf
 
 Results डायरेक्टरी में अब सभी available डेटा के लिए results होने चाहिए।
 
-??? abstract "डायरेक्टरी contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     results
@@ -1848,7 +1848,7 @@ nextflow run main.nf
 
 अब results डायरेक्टरी check करो:
 
-??? abstract "डायरेक्टरी contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     results/
@@ -1979,12 +1979,12 @@ nextflow run main.nf
         println "File name: ${myFile.name}"
         println "Simple name: ${myFile.simpleName}"
         println "Extension: ${myFile.extension}"
-        ```groovy
+        println "Parent directory```groovy
         println "Parent directory: ${myFile.parent}"
     }
     ````
 
-4.  **Filenames सेPatient Metadata Extract करना:** हमने filenames से metadata extract और structure करने के लिए `tokenize()` और `replace()` का उपयोग किया, उन्हें organized maps में convert करते हुए।
+4.  **Filenames से Patient Metadata Extract करना:** हमने filenames से metadata extract और structure करने के लिए `tokenize()` और `replace()` का उपयोग किया, उन्हें organized maps में convert करते हुए।
 
     ```groovy
     def name = file.name.tokenize('_')

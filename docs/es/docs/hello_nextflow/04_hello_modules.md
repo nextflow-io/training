@@ -152,11 +152,11 @@ process sayHello {
 
 Una vez hecho eso, elimine la definición del proceso del archivo de workflow.
 
-### 2.3. Agregar una declaración de importación antes del bloque workflow
+### 2.3. Agregar una declaración de inclusión antes del bloque workflow
 
 La sintaxis para incluir un proceso desde un módulo es bastante sencilla:
 
-```groovy title="Sintaxis: Declaración de importación"
+```groovy title="Syntax: include declaration"
 include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
@@ -263,9 +263,9 @@ process convertToUpper {
 
 Una vez hecho eso, elimine la definición del proceso del archivo de workflow.
 
-### 3.3. Agregar una declaración de importación antes del bloque `params`
+### 3.3. Agregar una declaración de inclusión antes del bloque `params`
 
-Inserte la declaración de importación arriba del bloque `params` y complétela apropiadamente.
+Inserte la declaración de inclusión arriba del bloque `params` y complétela apropiadamente.
 
 === "Después"
 
@@ -365,9 +365,9 @@ process collectGreetings {
 
 Una vez hecho eso, elimine la definición del proceso del archivo de workflow.
 
-### 4.3. Agregar una declaración de importación antes del bloque `params`
+### 4.3. Agregar una declaración de inclusión antes del bloque `params`
 
-Inserte la declaración de importación arriba del bloque `params` y complétela apropiadamente.
+Inserte la declaración de inclusión arriba del bloque `params` y complétela apropiadamente.
 
 === "Después"
 
@@ -452,7 +452,7 @@ Cuando esté listo, continúe con [**Parte 5: Hello Containers**](./05_hello_con
 - [ ] Una definición de workflow
 - [ ] Un operador de canal
 
-Aprenda más: [2. Crear un módulo para `sayHello()`](#2-crear-un-modulo-para-sayhello)
+Aprenda más: [2. Crear un módulo para `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +462,7 @@ Aprenda más: [2. Crear un módulo para `sayHello()`](#2-crear-un-modulo-para-sa
 - [x] En un directorio `modules/`
 - [ ] En un directorio `lib/`
 
-Aprenda más: [1. Crear un directorio para almacenar módulos](#1-crear-un-directorio-para-almacenar-modulos)
+Aprenda más: [1. Crear un directorio para almacenar módulos](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +473,7 @@ Aprenda más: [1. Crear un directorio para almacenar módulos](#1-crear-un-direc
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Aprenda más: [2.3. Agregar una declaración de importación](#23-agregar-una-declaracion-de-importacion-antes-del-bloque-workflow)
+Aprenda más: [2.3. Agregar una declaración de inclusión](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

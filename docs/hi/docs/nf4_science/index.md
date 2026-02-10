@@ -40,4 +40,4 @@ hide:
 
     [Nextflow for Bioimaging प्रशिक्षण शुरू करें :material-arrow-right:](imaging/){ .md-button .md-button--primary }
 
-हमें बताएं कि आप यहां किन अन्य डोमेन और उपयोग के मामलों को कवर करना चाहेंगे, community forum के [Training अनुभाग](https://community.seqera.io/c/training/) में पोस्ट करके।
+हमें बताएं कि तुम यहां किन अन्य डोमेन और उपयोग के मामलों को कवर करना चाहोगे, community forum के [Training अनुभाग](https://community.seqera.io/c/training/) में पोस्ट करके।

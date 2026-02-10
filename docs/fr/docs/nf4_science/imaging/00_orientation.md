@@ -14,7 +14,7 @@ Si ce n'est pas le cas, veuillez le faire maintenant, idéalement dans une secon
 ## GitHub Codespaces
 
 L'environnement GitHub Codespaces contient tous les logiciels, le code et les données nécessaires pour suivre cette formation, vous n'avez donc rien à installer vous-même.
-Cependant, vous avez besoin d'un compte GitHub (gratuit) pour vous connecter, et si vous n'êtes pas familier avec l'interface, vous devriez prendre quelques minutes pour vous familiariser en complétant le mini-cours [Orientation GitHub Codespaces](../../envsetup/index.md).
+Cependant, vous avez besoin d'un compte GitHub (gratuit) pour vous connecter, et si vous n'êtes pas familier·ère avec l'interface, vous devriez prendre quelques minutes pour vous familiariser en complétant le mini-cours [Orientation GitHub Codespaces](../../envsetup/index.md).
 
 ## Pré-téléchargement des images Docker
 

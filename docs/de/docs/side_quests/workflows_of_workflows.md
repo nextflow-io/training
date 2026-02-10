@@ -12,11 +12,11 @@ In dieser Side Quest werden wir erkunden, wie man Workflow-Module entwickelt, di
 
 Am Ende dieser Side Quest kannst du:
 
-- Komplexe Pipelines in logische, wiederverwendbare Einheiten aufzuteilen
-- Jedes Workflow-Modul unabhängig zu testen
-- Workflows zu kombinieren, um neue Pipelines zu erstellen
-- Gemeinsame Workflow-Module über verschiedene Pipelines hinweg zu teilen
-- Deinen Code wartbarer und verständlicher zu machen
+- Komplexe Pipelines in logische, wiederverwendbare Einheiten aufteilen
+- Jedes Workflow-Modul unabhängig testen
+- Workflows kombinieren, um neue Pipelines zu erstellen
+- Gemeinsame Workflow-Module über verschiedene Pipelines hinweg teilen
+- Deinen Code wartbarer und verständlicher machen
 
 Diese Fähigkeiten helfen dir, komplexe Pipelines zu erstellen und dabei eine saubere, wartbare Code-Struktur beizubehalten.
 
@@ -108,7 +108,7 @@ workflow {
 
     names_ch = channel.of('Alice', 'Bob', 'Charlie')
 
-    // Chain processes: validate -> create greeting -> add timestamp
+    // Verkette Prozesse: validieren -> Begrüßung erstellen -> Zeitstempel hinzufügen
     validated_ch = VALIDATE_NAME(names_ch)
     greetings_ch = SAY_HELLO(validated_ch)
     timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
@@ -152,17 +152,17 @@ include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
 
 workflow GREETING_WORKFLOW {
     take:
-        names_ch        // Input channel with names
+        names_ch        // Eingabe-Channel mit Namen
 
     main:
-        // Chain processes: validate -> create greeting -> add timestamp
+        // Verkette Prozesse: validieren -> Begrüßung erstellen -> Zeitstempel hinzufügen
         validated_ch = VALIDATE_NAME(names_ch)
         greetings_ch = SAY_HELLO(validated_ch)
         timestamped_ch = TIMESTAMP_GREETING(greetings_ch)
 
     emit:
-        greetings = greetings_ch      // Original greetings
-        timestamped = timestamped_ch  // Timestamped greetings
+        greetings = greetings_ch      // Originale Begrüßungen
+        timestamped = timestamped_ch  // Begrüßungen mit Zeitstempel
 }
 ```
 
@@ -245,7 +245,7 @@ nextflow run main.nf
 
 Es funktioniert! Wir haben den benannten Greeting-Workflow in einen Haupt-Workflow mit einem unbenannten Entry-`workflow`-Block eingebettet. Der Haupt-Workflow verwendet den `GREETING_WORKFLOW`-Workflow fast (nicht ganz) wie einen Prozess und übergibt den `names`-Channel als Argument.
 
-### Zusammenfassung
+### Fazit
 
 In diesem Abschnitt hast du mehrere wichtige Konzepte gelernt:
 
@@ -287,16 +287,16 @@ include { REVERSE_TEXT } from '../modules/reverse_text'
 
 workflow TRANSFORM_WORKFLOW {
     take:
-        input_ch         // Input channel with messages
+        input_ch         // Eingabe-Channel mit Nachrichten
 
     main:
-        // Apply transformations in sequence
+        // Wende Transformationen nacheinander an
         upper_ch = SAY_HELLO_UPPER(input_ch)
         reversed_ch = REVERSE_TEXT(upper_ch)
 
     emit:
-        upper = upper_ch        // Uppercase greetings
-        reversed = reversed_ch  // Reversed uppercase greetings
+        upper = upper_ch        // Begrüßungen in Großbuchstaben
+        reversed = reversed_ch  // Umgekehrte Großbuchstaben-Begrüßungen
 }
 ```
 
@@ -313,13 +313,13 @@ include { TRANSFORM_WORKFLOW } from './workflows/transform'
 workflow {
     names = channel.of('Alice', 'Bob', 'Charlie')
 
-    // Run the greeting workflow
+    // Führe den Greeting-Workflow aus
     GREETING_WORKFLOW(names)
 
-    // Run the transform workflow
+    // Führe den Transform-Workflow aus
     TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
 
-    // View results
+    // Zeige Ergebnisse an
     TRANSFORM_WORKFLOW.out.upper.view { "Uppercase: $it" }
     TRANSFORM_WORKFLOW.out.reversed.view { "Reversed: $it" }
 }
@@ -361,7 +361,7 @@ cat /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef
 !ECILA ,OLLEH ]04:50:71 60-30-5202[
 ```
 
-### Zusammenfassung
+### Fazit
 
 Du solltest jetzt eine vollständige Pipeline haben, die:
 
@@ -394,16 +394,16 @@ Die Anwendung dieser Techniken in deiner eigenen Arbeit wird es dir ermöglichen
     ```groovy
     workflow EXAMPLE_WORKFLOW {
         take:
-            // Input channels are declared here
+            // Eingabe-Channels werden hier deklariert
             input_ch
 
         main:
-            // Workflow logic goes here
-            // This is where processes are called and channels are manipulated
+            // Workflow-Logik kommt hierhin
+            // Hier werden Prozesse aufgerufen und Channels manipuliert
             result_ch = SOME_PROCESS(input_ch)
 
         emit:
-            // Output channels are declared here
+            // Ausgabe-Channels werden hier deklariert
             output_ch = result_ch
     }
     ```
@@ -434,7 +434,7 @@ Die Anwendung dieser Techniken in deiner eigenen Arbeit wird es dir ermöglichen
 
     ```groovy
     workflow {
-        // This is the entry point when the script is run
+        // Dies ist der Entry-Point, wenn das Skript ausgeführt wird
         NAMED_WORKFLOW(input_ch)
     }
     ```
@@ -443,7 +443,7 @@ Die Anwendung dieser Techniken in deiner eigenen Arbeit wird es dir ermöglichen
 
     ```groovy
     workflow NAMED_WORKFLOW {
-        // Must be called from the entry workflow
+        // Muss vom Entry-Workflow aufgerufen werden
     }
     ```
 

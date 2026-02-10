@@ -220,7 +220,7 @@ O comando automaticamente:
 - Atualiza `modules.json` para rastrear o módulo instalado
 - Fornece a declaração `include` correta para usar no seu fluxo de trabalho
 
-!!! tip
+!!! tip "Dica"
 
     Sempre certifique-se de que seu diretório de trabalho atual seja a raiz do projeto do seu pipeline antes de executar o comando de instalação de módulo.
 
@@ -332,7 +332,7 @@ Neste ponto, você pode estar tentado a mergulhar e começar a editar o código,
 
 Vamos abordar isso como uma seção separada porque envolve um novo mecanismo que ainda não cobrimos: mapas de metadados.
 
-!!! note
+!!! note "Nota"
 
     Você pode opcionalmente deletar o arquivo `collectGreetings.nf`:
 
@@ -346,7 +346,7 @@ Vamos abordar isso como uma seção separada porque envolve um novo mecanismo qu
 
 Você sabe como encontrar um módulo nf-core e torná-lo disponível para o seu projeto.
 
-### Qual é o próximo passo?
+### O que vem a seguir?
 
 Avaliar o que um novo módulo requer e identificar quaisquer mudanças importantes necessárias para integrá-lo em um pipeline.
 
@@ -360,7 +360,7 @@ Isso nos permitirá determinar se podemos simplesmente tratar o novo módulo com
 Idealmente, isso é algo que você deveria fazer _antes_ mesmo de instalar o módulo, mas ei, melhor tarde do que nunca.
 (Vale ressaltar que existe um comando `uninstall` para se livrar de módulos que você decidir que não quer mais.)
 
-!!! note
+!!! note "Nota"
 
     O processo CAT_CAT inclui um tratamento bastante inteligente de diferentes tipos de compressão, extensões de arquivo e assim por diante, que não são estritamente relevantes para o que estamos tentando mostrar aqui, então vamos ignorar a maior parte e focar apenas nas partes que são importantes.
 
@@ -516,7 +516,7 @@ Isso deve resolver! Agora que temos um plano, estamos prontos para mergulhar.
 
 Você sabe como avaliar a interface de entrada e saída de um novo módulo para identificar seus requisitos, e aprendeu como os mapas de metadados são usados por pipelines nf-core para manter metadados intimamente associados aos dados conforme eles fluem por um pipeline.
 
-### Qual é o próximo passo?
+### O que vem a seguir?
 
 Integrar o novo módulo em um fluxo de trabalho.
 
@@ -528,7 +528,7 @@ Agora que você sabe tudo sobre mapas de metadados (ou o suficiente para os prop
 
 Para maior clareza, vamos dividir isso e cobrir cada passo separadamente.
 
-!!! note
+!!! note "Nota"
 
     Todas as mudanças mostradas abaixo são feitas na lógica do fluxo de trabalho no bloco `main` no arquivo de fluxo de trabalho `core-hello/workflows/hello.nf`.
 
@@ -738,7 +738,7 @@ A operação `.map{ meta, file -> file }` extrai o arquivo da tupla `[metadados,
 
 Então é só uma questão de passar `ch_for_cowpy` para `cowpy` em vez de `collectGreetings.out.outfile` naquela última linha.
 
-!!! note
+!!! note "Nota"
 
     Na próxima parte do curso, atualizaremos `cowpy` para trabalhar diretamente com tuplas de metadados, então este passo de extração não será mais necessário.
 
@@ -804,7 +804,7 @@ Você agora sabe como:
 - Criar um mapa de metadados simples para usar com um módulo nf-core
 - Integrar um módulo nf-core no seu fluxo de trabalho
 
-### Qual é o próximo passo?
+### O que vem a seguir?
 
 Aprender a adaptar seus módulos locais para seguir as convenções nf-core.
 Também mostraremos como criar novos módulos nf-core a partir de um modelo usando as ferramentas nf-core.

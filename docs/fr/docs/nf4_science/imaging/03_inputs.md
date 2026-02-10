@@ -24,7 +24,7 @@ nextflow run ./molkart \
 
 Cela fonctionne, mais c'est difficile à reproduire, partager ou modifier.
 Que faire si vous devez exécuter la même analyse le mois prochain ?
-Que faire si un collaborateur souhaite utiliser exactement vos paramètres ?
+Que faire si un·e collaborateur·trice souhaite utiliser exactement vos paramètres ?
 
 ### 1.2. Solution : Utiliser un fichier de paramètres
 
@@ -60,7 +60,7 @@ La ligne ci-dessus change le `segmentation_method` en `stardist` et le nom du `-
 De plus, vous pouvez voir que le flag `-resume` nous a permis de réutiliser les résultats de prétraitement de l'exécution précédente, ce qui économise du temps.
 Vous pouvez utiliser ce modèle pour tester rapidement différentes variations du pipeline.
 
-### Point clé
+### À retenir
 
 Les fichiers de paramètres rendent vos analyses reproductibles et faciles à partager.
 Utilisez-les pour tout travail d'analyse réel.
@@ -125,7 +125,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Avertissement"
+!!! Warning "Avertissement"
 
     Notez que les chemins dans la feuille d'échantillons sont relatifs à l'endroit où vous **exécutez** Nextflow, pas à l'endroit où se trouve la feuille d'échantillons.
 
@@ -135,7 +135,7 @@ Enfin, exécutons nf-core/molkart une fois de plus avec la feuille d'échantillo
 
 Comme vous pouvez le voir, Nextflow exécute cette exécution de manière similaire à lorsque les fichiers étaient téléchargés depuis Github. C'est l'une des grandes fonctionnalités de Nextflow : il organise les données correctement pour vous, quel que soit l'endroit où elles se trouvent.
 
-### Point clé
+### À retenir
 
 Les feuilles d'échantillons organisent les ensembles de données multi-échantillons d'une manière qui vous permet de définir explicitement vos métadonnées avec les chemins de fichiers.
 La plupart des pipelines nf-core utilisent ce modèle.

@@ -1,5 +1,7 @@
 # Parte 3: Llamado conjunto de variantes en una cohorte
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En la Parte 2, construiste un pipeline de llamado de variantes por muestra que procesaba los datos de cada muestra de forma independiente.
 Ahora vamos a extenderlo para implementar el llamado conjunto de variantes, como se cubrió en la [Parte 1](01_method.md).
 
@@ -47,7 +49,7 @@ Hemos dividido esto en dos pasos:
 2. **Agregar un paso de genotipado conjunto que combine y genotipe los GVCFs por muestra.**
    Esto introduce el operador `collect()`, closures de Groovy para construcción de líneas de comando y procesos con múltiples comandos.
 
-!!! note
+!!! note "Nota"
 
      Asegúrate de estar en el directorio de trabajo correcto:
      `cd /workspaces/training/nf4-science/genomics`
@@ -334,7 +336,7 @@ Desglosando esto:
 
 Podemos recolectar los GVCFs y sus archivos índice por separado (en lugar de mantenerlos juntos en tuplas) porque Nextflow preparará todos los archivos de entrada juntos para la ejecución, por lo que los archivos índice estarán presentes junto a los GVCFs.
 
-!!! tip
+!!! tip "Consejo"
 
     Puedes usar el operador `view()` para inspeccionar el contenido de los canales antes y después de aplicar operadores de canal.
 
@@ -656,7 +658,7 @@ Si abres el archivo VCF conjunto, puedes verificar que el workflow produjo los l
 
 ¡Ahora tienes un workflow de llamado conjunto de variantes automatizado y completamente reproducible!
 
-!!! note
+!!! note "Nota"
 
     Ten en cuenta que los archivos de datos que te proporcionamos cubren solo una pequeña porción del cromosoma 20.
     El tamaño real de un conjunto de llamados de variantes se contaría en millones de variantes.
@@ -669,6 +671,6 @@ También sabes cómo construir una línea de comando usando closures de Groovy, 
 
 ### ¿Qué sigue?
 
-Celebra tu éxito y tómate un merecido descanso.
+¡Felicidades! Has completado el curso Nextflow para Genómica.
 
-En la siguiente parte de este curso, aprenderás cómo ejecutar un pipeline de llamado de variantes listo para producción desde nf-core y compararlo con el pipeline que construiste manualmente.
+Dirígete al [resumen final del curso](./next_steps.md) para revisar lo que aprendiste y descubrir qué viene después.

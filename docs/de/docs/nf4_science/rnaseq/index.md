@@ -23,11 +23,11 @@ Durch die Bearbeitung dieses Kurses lernst du, wie man grundlegende Nextflow-Kon
 
 Am Ende dieses Workshops kannst du:
 
-- Einen linearen Workflow zu schreiben, um grundlegende RNAseq-Verarbeitungs- und QC-Methoden anzuwenden
-- Domänenspezifische Dateien wie FASTQ und Genomreferenzen angemessen zu handhaben
-- Single-End- und Paired-End-Sequenzierungsdaten zu verarbeiten
-- Nextflows Dataflow-Paradigma zu nutzen, um die RNAseq-Verarbeitung pro Probe zu parallelisieren
-- QC-Reports über mehrere Schritte und Proben hinweg mit relevanten Channel-Operatoren zu aggregieren
+- Einen linearen Workflow schreiben, um grundlegende RNAseq-Verarbeitungs- und QC-Methoden anzuwenden
+- Domänenspezifische Dateien wie FASTQ und Genomreferenzen angemessen handhaben
+- Single-End- und Paired-End-Sequenzierungsdaten verarbeiten
+- Nextflows Dataflow-Paradigma nutzen, um die RNAseq-Verarbeitung pro Probe zu parallelisieren
+- QC-Reports über mehrere Schritte und Proben hinweg mit relevanten Channel-Operatoren aggregieren
 
 <!-- TODO
 - Configure pipeline execution and manage and optimize resource allocations
@@ -41,6 +41,6 @@ Der Kurs setzt eine minimale Vertrautheit mit Folgendem voraus:
 
 - Tools und Dateiformate, die in diesem wissenschaftlichen Bereich häufig verwendet werden
 - Erfahrung mit der Kommandozeile
-- Grundlegende Nextflow-Konzepte und Tools, die im [Hello Nextflow](../../hello_nextflow/) Einsteiger-Training behandelt werden.
+- Grundlegende Nextflow-Konzepte und Tools, die im [Hello Nextflow](../../hello_nextflow/) Einsteiger-Training behandelt werden
 
 Für technische Anforderungen und Umgebungseinrichtung siehe den Mini-Kurs [Environment Setup](../../envsetup/).

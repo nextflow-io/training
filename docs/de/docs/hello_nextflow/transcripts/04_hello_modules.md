@@ -50,7 +50,7 @@ Also lass uns das jetzt tun. Ich werde schnell eine neue Moduldatei für den zwe
 
 Und dann werde ich eine neue Datei für collectGreetings.nf erstellen. Schneide das aus.
 
-Viel Schneiden, Schneiden und Kopieren und Einfügen.
+Viel Schneiden und Kopieren und Einfügen.
 
 Und jetzt sieht unser Haupt-Workflow-Skript plötzlich viel, viel kürzer aus, viel zugänglicher und viel einfacher zu lesen.
 

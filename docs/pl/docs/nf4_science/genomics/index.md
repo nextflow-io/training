@@ -19,9 +19,11 @@ additional_information:
 
 # Nextflow dla Genomiki
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Praktyczny kurs stosowania Nextflow do rzeczywistego przypadku użycia w genomice: wykrywania wariantów za pomocą GATK.**
 
-Ten kurs opiera się na [Hello Nextflow](../../hello_nextflow/) – szkoleniu dla początkujących i demonstruje, jak używać Nextflow w specyficznym kontekście dziedziny genomiki.
+Ten kurs opiera się na szkoleniu dla początkujących [Hello Nextflow](../../hello_nextflow/) i demonstruje, jak używać Nextflow w specyficznym kontekście dziedziny genomiki.
 Zaimplementujesz pipeline wykrywania wariantów z [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), szeroko stosowanym pakietem oprogramowania do analizy danych z sekwencjonowania wysokoprzepustowego.
 
 <!-- additional_information -->

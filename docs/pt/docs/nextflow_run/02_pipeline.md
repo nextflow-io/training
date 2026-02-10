@@ -73,7 +73,7 @@ Sim! Vemos um novo diretório chamado `2a-inputs` com três arquivos de saída c
 
 Você pode abrir cada um deles para se satisfazer de que contêm a string de saudação apropriada.
 
-??? abstract "Conteúdo dos arquivos"
+??? abstract "Conteúdo do arquivo"
 
     ```console title="results/2a-inputs/Hello-output.txt"
     Hello
@@ -406,7 +406,7 @@ Alguns dos arquivos foram agrupados em um subdiretório chamado `intermediates`,
 Esses dois são os resultados finais do fluxo de trabalho de múltiplas etapas.
 Tire um minuto para olhar os nomes dos arquivos e verificar seu conteúdo para confirmar que são o que você espera.
 
-??? abstract "Conteúdo dos arquivos"
+??? abstract "Conteúdo do arquivo"
 
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO

@@ -4,7 +4,7 @@
 
 W tej piątej części kursu szkoleniowego Hello nf-core pokażemy Ci, jak używać wtyczki nf-schema do walidacji danych wejściowych i parametrów pipeline'u.
 
-??? info "Jak rozpocząć od tej sekcji"
+??? info "Jak zacząć od tej sekcji"
 
     Ta sekcja zakłada, że ukończyłeś [Część 4: Tworzenie modułu nf-core](./04_make_module.md) i zaktualizowałeś moduł procesu `COWPY` do standardów nf-core w Swoim pipeline'ie.
 

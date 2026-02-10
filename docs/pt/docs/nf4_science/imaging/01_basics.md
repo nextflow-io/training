@@ -63,7 +63,7 @@ Hello World!
 
 Isso é ótimo, nosso fluxo de trabalho fez o que deveria fazer!
 
-No entanto, esteja ciente de que o resultado 'publicado' é uma cópia (ou em alguns casos um symlink) da saída real produzida pelo Nextflow quando executou o fluxo de trabalho.
+No entanto, esteja ciente de que o resultado 'publicado' é uma cópia (ou em alguns casos um link simbólico) da saída real produzida pelo Nextflow quando executou o fluxo de trabalho.
 
 Então agora, vamos olhar por baixo do capô para ver onde o Nextflow realmente executou o trabalho.
 

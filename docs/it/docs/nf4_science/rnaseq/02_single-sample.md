@@ -89,7 +89,7 @@ Dovrebbe riconoscere tutti gli elementi da quanto appreso nella Parte 1 e nella 
 
 !!! note "Nota"
 
-    Anche se i file di dati che stiamo utilizzando qui sono molto piccoli, in genomica possono diventare molto grandi. Ai fini della dimostrazione nell'ambiente di formazione, stiamo usando la modalità di pubblicazione 'symlink' per evitare copie di file non necessarie. Non dovrebbe farlo nei workflow finali, poiché perderà i risultati quando pulisce la directory `work`.
+    Anche se i file di dati che stiamo utilizzando qui sono molto piccoli, in genomica possono diventare molto grandi. Ai fini della dimostrazione nell'ambiente di formazione, stiamo usando la modalità di pubblicazione 'symlink' per evitare copie di file non necessarie. Non dovreste farlo nei workflow finali, poiché perderete i risultati quando pulite la directory `work`.
 
 ### 1.3. Importare il modulo nel file del workflow
 
@@ -113,7 +113,7 @@ params {
 
 ### 1.5. Creare un canale di input nel blocco workflow
 
-Utilizzare un factory di canale `.fromPath()` di base per creare il canale di input:
+Utilizzare una fabbrica di canali `.fromPath()` di base per creare il canale di input:
 
 ```groovy title="rnaseq.nf" linenums="13"
 workflow {
@@ -159,10 +159,10 @@ nextflow run rnaseq.nf
     [d6/d94c3a] FASTQC (1) [100%] 1 of 1 ✔
     ```
 
-Questo dovrebbe essere eseguito molto rapidamente se avete completato la Parte 1 e ha già scaricato il container.
-Se lo avete saltato, Nextflow scaricherà il container per voi; non deve fare nulla perché accada, ma potrebbe dover attendere fino a un minuto.
+Questo dovrebbe essere eseguito molto rapidamente se avete completato la Parte 1 e avete già scaricato il container.
+Se lo avete saltato, Nextflow scaricherà il container per voi; non dovete fare nulla perché accada, ma potreste dover attendere fino a un minuto.
 
-Può trovare gli output in `results/fastqc` come specificato nel processo `FASTQC` dalla direttiva `publishDir`.
+Potete trovare gli output in `results/fastqc` come specificato nel processo `FASTQC` dalla direttiva `publishDir`.
 
 ```bash
 ls results/fastqc
@@ -257,7 +257,7 @@ nextflow run rnaseq.nf
 
 Anche questo dovrebbe essere eseguito molto rapidamente, dato che stiamo lavorando su un file di input così piccolo.
 
-Può trovare gli output in `results/trimming` come specificato nel processo `TRIM_GALORE` dalla direttiva `publishDir`.
+Potete trovare gli output in `results/trimming` come specificato nel processo `TRIM_GALORE` dalla direttiva `publishDir`.
 
 ```bash
 ls results/trimming
@@ -377,7 +377,7 @@ nextflow run rnaseq.nf
     [c6/7a9f13] HISAT2_ALIGN (1) [100%] 1 of 1 ✔
     ```
 
-Può trovare gli output in `results/align` come specificato nel processo `HISAT2_ALIGN` dalla direttiva `publishDir`.
+Potete trovare gli output in `results/align` come specificato nel processo `HISAT2_ALIGN` dalla direttiva `publishDir`.
 
 ```bash
 ls results/align
@@ -395,8 +395,8 @@ _Aggiungeremo l'aggregazione dei report MultiQC nella Parte 2, dopo aver modific
 
 ### Takeaway
 
-Sa come racchiudere tutti i passaggi principali per processare campioni RNAseq single-end individualmente.
+Sapete come racchiudere tutti i passaggi principali per processare campioni RNAseq single-end individualmente.
 
-### Qual è il prossimo passo?
+### Cosa c'è dopo?
 
 Imparate come modificare il workflow per processare più campioni in parallelo, aggregare i report QC attraverso tutti i passaggi per tutti i campioni e abilitare l'esecuzione del workflow su dati RNAseq paired-end.

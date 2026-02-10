@@ -15,7 +15,7 @@ Nextflow Run 교육 과정의 첫 번째 파트에서는 매우 기본적인 도
 
 Nextflow로 적용하기 전에 터미널에서 직접 실행하는 간단한 명령으로 이 개념을 시연하여 무엇을 하는지 보여드리겠습니다.
 
-!!! tip
+!!! tip "팁"
 
     [시작하기](00_orientation.md) 페이지에 설명된 대로 지금 `nextflow-run/` 디렉토리 안에 있어야 합니다.
 
@@ -135,7 +135,7 @@ Hello World!
 기본적으로 Nextflow는 pipeline 출력을 현재 경로의 `results`라는 디렉토리에 저장합니다.
 파일이 게시되는 위치를 변경하려면 `-output-dir` CLI 플래그(또는 짧게 `-o`)를 사용하세요.
 
-!!! danger
+!!! danger "위험"
 
     `--input`은 두 개의 하이픈이 있고 `-output-dir`은 하나가 있습니다!
     이것은 `--input`이 pipeline _매개변수_이고 `-output-dir`이 코어 Nextflow CLI 플래그이기 때문입니다.
@@ -169,7 +169,7 @@ hello_results
 
 이제 Nextflow가 실제로 작업을 실행한 위치를 확인하기 위해 내부를 살펴보겠습니다.
 
-!!! Warning
+!!! Warning "경고"
 
     모든 workflow가 results 디렉토리에 출력을 게시하도록 설정되어 있는 것은 아니며, 디렉토리 이름과 구조가 다를 수 있습니다.
     이 섹션의 조금 더 뒤에서 이 동작이 어디에 지정되어 있는지 확인하는 방법을 보여드리겠습니다.
@@ -401,7 +401,7 @@ echo 'Hello World!' > output.txt
     workflow {
 
         main:
-        // emit a greeting
+        // 인사말을 내보냅니다
         sayHello(params.input)
 
         publish:
@@ -512,7 +512,7 @@ params {
 지원되는 유형에는 `String`, `Integer`, `Float`, `Boolean` 및 `Path`가 포함됩니다.
 자세히 알아보려면 Nextflow 참조 문서의 [Workflow parameters](https://nextflow.io/docs/latest/config.html#workflow-parameters)를 참조하세요.
 
-!!! tip
+!!! tip "팁"
 
     `params` 시스템을 사용하여 선언된 _workflow_ 매개변수는 항상 명령줄에서 두 개의 대시(`--`)를 사용합니다.
     이것은 하나의 대시(`-`)만 사용하는 _Nextflow 수준_ CLI 플래그와 구분됩니다.
@@ -617,7 +617,7 @@ process 상태 줄(5번째 줄)에 추가된 `cached:` 부분을 찾아보세요
 작업 하위 디렉토리 해시가 이전 실행과 동일한 것도 볼 수 있습니다.
 Nextflow는 문자 그대로 이전 실행을 가리키며 "저기서 이미 했어요"라고 말하는 것입니다.
 
-!!! tip
+!!! tip "팁"
 
     `resume`으로 pipeline을 다시 실행할 때 Nextflow는 이전에 성공적으로 실행된 실행에 의해 작업 디렉토리 외부에 게시된 파일을 덮어쓰지 않습니다.
 
@@ -719,7 +719,7 @@ nextflow clean -before backstabbing_swartz -f
 출력은 이전과 비슷해야 하지만 이제 'Would remove' 대신 'Removed'라고 표시됩니다.
 이것은 두 문자 하위 디렉토리(위의 `eb/`와 같은)를 제거하지 않지만 그 내용을 비웁니다.
 
-!!! Warning
+!!! Warning "경고"
 
     과거 실행에서 작업 하위 디렉토리를 삭제하면 Nextflow의 캐시에서 제거되고 해당 디렉토리에 저장된 모든 출력이 삭제됩니다.
     이것은 해당 process를 다시 실행하지 않고 실행을 재개하는 Nextflow의 기능을 손상시킵니다.

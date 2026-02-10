@@ -20,7 +20,7 @@ additional_information:
 
 # Nextflow Run
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 **Nextflow Run, tekrar üretilebilir ve ölçeklenebilir veri analizi workflow'larını çalıştırmaya yönelik uygulamalı bir giriştir.**
 
@@ -46,11 +46,11 @@ Nextflow pipeline'ları geliştirmeye giriş arıyorsanız, [Hello Nextflow](../
 
 Bunu, Nextflow'da yazılmış pipeline'ları çalıştırmanın ve yönetmenin belirli yönlerine odaklanacak üç bölüme ayırdık.
 
-| Kurs bölümü                                                  | Özet                                                                                                                              | Tahmini süre |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| [Bölüm 1: Temel işlemleri çalıştırma](./01_basics.md)        | Basit bir workflow'un başlatılması ve çalıştırılmasının yönetilmesi                                                               | 30 dk        |
-| [Bölüm 2: Gerçek pipeline'ları çalıştırma](./02_pipeline.md) | Karmaşık girdilerin işlenmesi, çok adımlı workflow'ların çalıştırılması, konteynerların kullanılması ve zahmetsiz paralelleştirme | 60 dk        |
-| [Bölüm 3: Çalıştırma yapılandırması](./03_config.md)         | Pipeline davranışının özelleştirilmesi ve farklı hesaplama ortamlarında kullanımın optimize edilmesi                              | 60 dk        |
+| Kurs bölümü                                                  | Özet                                                                                                                                | Tahmini süre |
+| ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| [Bölüm 1: Temel işlemleri çalıştırma](./01_basics.md)        | Basit bir workflow'un başlatılması ve çalıştırılmasının yönetilmesi                                                                 | 30 dk        |
+| [Bölüm 2: Gerçek pipeline'ları çalıştırma](./02_pipeline.md) | Karmaşık girdilerin işlenmesi, çok adımlı workflow'ların çalıştırılması, konteynerların kullanılması ve zahmetsizce paralelleştirme | 60 dk        |
+| [Bölüm 3: Çalıştırma yapılandırması](./03_config.md)         | Pipeline davranışının özelleştirilmesi ve farklı hesaplama ortamlarında kullanımın optimize edilmesi                                | 60 dk        |
 
 Bu kursun sonunda, bilimsel hesaplama ihtiyaçlarınız için tekrar üretilebilir workflow'ları çalıştırma yolculuğunuzdaki sonraki adımları atmaya hazır olacaksınız.
 

@@ -1,5 +1,7 @@
 # Parte 1: Visão geral do método e testes manuais
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Chamada de variantes é um método de análise genômica que visa identificar variações em uma sequência genômica em relação a um genoma de referência.
 Aqui vamos usar ferramentas e métodos projetados para chamar variantes germinativas curtas, _i.e._ SNPs e indels, em dados de sequenciamento de genoma completo.
 
@@ -33,7 +35,7 @@ Essas ferramentas não estão instaladas no ambiente GitHub Codespaces, então v
 
 !!! note "Nota"
 
-     Certifique-se de estar no diretório `nf4-science/genomics` para que a última parte do caminho mostrado quando você digita `pwd` seja `genomics`.
+    Certifique-se de estar no diretório `nf4-science/genomics` para que a última parte do caminho mostrado quando você digita `pwd` seja `genomics`.
 
 ---
 

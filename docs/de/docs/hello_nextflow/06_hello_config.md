@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=de" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=de" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -163,7 +163,7 @@ Lass uns das in zwei Schritten tun.
 
 Nimm folgende Code-Änderungen in der `nextflow.config`-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="3-10"
     docker.enabled = true
@@ -198,7 +198,7 @@ Aber im Sinne der vollständigen Verlagerung der Konfiguration in die Konfigurat
 
 Nimm folgende Code-Änderungen an der `hello-config.nf`-Workflow-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-config.nf" linenums="9" hl_lines="5-7"
     /*
@@ -403,7 +403,7 @@ Diese Parameterdatei enthält ein Schlüssel-Wert-Paar für jede der Eingaben, d
 Beachte die Verwendung von Doppelpunkten (`:`) anstelle von Gleichheitszeichen (`=`), wenn du die Syntax mit der Konfigurationsdatei vergleichst.
 Die Config-Datei ist in Groovy geschrieben, während die Parameterdatei in YAML geschrieben ist.
 
-!!! info
+!!! info "Info"
 
     Wir stellen auch eine JSON-Version der Parameterdatei als Beispiel bereit, aber wir werden hier nicht damit arbeiten.
     Probiere sie gerne selbst aus.
@@ -540,7 +540,7 @@ Für Ausgaben, die kein Unterverzeichnis benötigen, können wir die `path`-Dire
 
 Nimm folgende Code-Änderungen in der Workflow-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -631,7 +631,7 @@ Dies ermöglicht es uns, den Verzeichnispfad dynamisch zu setzen - nicht nur mit
 
 Füge folgenden Code zur `nextflow.config`-Datei hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="9" hl_lines="10-13"
     /*
@@ -682,7 +682,7 @@ Wir können auch Unterverzeichnis-Ausgabe-`path`-Deklarationen dynamisch setzen,
 
 Zum Beispiel können wir unsere Ausgaben nach Prozess organisieren, indem wir `<process>.name` in der Ausgabepfad-Deklaration referenzieren:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -747,7 +747,7 @@ Lass uns das zurückholen und die Dateien auch in ein `params.batch`-Unterverzei
 
 Aktualisiere zuerst die Config-Datei, um `${params.batch}` aus `outputDir` zu entfernen (da wir es in die Pfaddeklarationen verschieben):
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="12" hl_lines="4"
     /*
@@ -767,7 +767,7 @@ Aktualisiere zuerst die Config-Datei, um `${params.batch}` aus `outputDir` zu en
 
 Nimm dann folgende Änderungen in der Workflow-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-config.nf" linenums="42" hl_lines="3 7 11 15 19"
     output {
@@ -875,7 +875,7 @@ Schließlich können wir im Sinne der Reduzierung von repetitivem Code die pro-A
 
 Füge folgenden Code zur `nextflow.config`-Datei hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="12" hl_lines="5"
     /*
@@ -900,7 +900,7 @@ Das Setzen von `workflow.output.mode` in der Konfigurationsdatei reicht aus, um 
 
 Nimm folgende Änderungen in der Workflow-Datei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-config.nf" linenums="42"
     output {
@@ -1033,7 +1033,7 @@ Glücklicherweise unterstützt Nextflow mehrere andere Container-Technologien wi
 Wir können unsere Konfigurationsdatei ändern, um [Conda](https://nextflow.io/docs/latest/conda.html) anstelle von Docker zu verwenden.
 Dazu ändern wir den Wert von `docker.enabled` auf `false` und fügen eine Direktive hinzu, die die Verwendung von Conda aktiviert:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="1-2"
     docker.enabled = false
@@ -1055,7 +1055,7 @@ Wir haben bereits die URI für ein Conda-Paket abgerufen, das das `cowpy`-Tool e
 
 Jetzt fügen wir die URI zur `cowpy`-Prozessdefinition hinzu, indem wir die `conda`-Direktive verwenden:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
     process cowpy {
@@ -1093,7 +1093,7 @@ nextflow run hello-config.nf --batch conda
 
 ??? success "Befehlsausgabe"
 
-    ```console title="Ausgabe"
+    ```console title="Output"
     N E X T F L O W   ~  version 25.10.2
 
     Launching `hello-config.nf` [friendly_lamport] DSL2 - revision: 024d6361b5
@@ -1152,7 +1152,7 @@ Nextflow unterstützt [viele verschiedene Executors](https://nextflow.io/docs/la
 Die Wahl des Executors wird durch eine Prozess-Direktive namens `executor` festgelegt.
 Standardmäßig ist sie auf `local` gesetzt, daher ist die folgende Konfiguration impliziert:
 
-```groovy title="Eingebaute Konfiguration"
+```groovy title="Built-in configuration"
 process {
     executor = 'local'
 }
@@ -1180,7 +1180,7 @@ Leider verwendet jedes dieser Systeme unterschiedliche Technologien, Syntaxen un
 
     Zum Beispiel muss derselbe Job, der 8 CPUs und 4GB RAM benötigt und in der Warteschlange "my-science-work" ausgeführt werden soll, je nach Backend auf unterschiedliche Weise ausgedrückt werden.
 
-    ```bash title="Config für SLURM / Übermittlung mit sbatch"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -1188,7 +1188,7 @@ Leider verwendet jedes dieser Systeme unterschiedliche Technologien, Syntaxen un
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="Config für PBS / Übermittlung mit qsub"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -1196,7 +1196,7 @@ Leider verwendet jedes dieser Systeme unterschiedliche Technologien, Syntaxen un
     #PBS -l mem=4gb
     ```
 
-    ```bash title="Config für SGE / Übermittlung mit qsub"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -1229,7 +1229,7 @@ Die meisten Hochleistungsrechenplattformen erlauben (und erfordern manchmal), da
 Standardmäßig verwendet Nextflow eine einzelne CPU und 2GB Speicher für jeden Prozess.
 Die entsprechenden Prozess-Direktiven heißen `cpus` und `memory`, daher ist die folgende Konfiguration impliziert:
 
-```groovy title="Eingebaute Konfiguration" linenums="1"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -1266,7 +1266,7 @@ Das Profiling zeigt, dass die Prozesse in unserem Trainings-Workflow sehr leicht
 
 Füge Folgendes zu deiner `nextflow.config`-Datei hinzu, vor dem Pipeline-Parameter-Abschnitt:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="4-9"
     docker.enabled = false
@@ -1311,7 +1311,7 @@ Das wird helfen, den Rechenverbrauch zu reduzieren.
 
 Gleichzeitig werden wir so tun, als ob der `cowpy`-Prozess mehr Ressourcen benötigt als die anderen, nur um zu demonstrieren, wie man Zuweisungen für einen einzelnen Prozess anpasst.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="6-9"
     /*
@@ -1369,7 +1369,7 @@ Zum Beispiel kann dein Cluster erfordern, dass du innerhalb bestimmter Grenzen b
 
 Du kannst die `resourceLimits`-Direktive verwenden, um die relevanten Beschränkungen festzulegen. Die Syntax sieht so aus, wenn sie allein in einem Process-Block steht:
 
-```groovy title="Syntax-Beispiel"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -1416,7 +1416,7 @@ Lass uns zwei alternative Profile einrichten; eines für die Ausführung kleiner
 
 Füge Folgendes zu deiner `nextflow.config`-Datei hinzu, nach dem Pipeline-Parameter-Abschnitt, aber vor den Ausgabe-Einstellungen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="15" hl_lines="10-27"
     /*
@@ -1518,7 +1518,7 @@ Du kannst dies als Alternative zur Verwendung einer Parameterdatei betrachten.
 
 Die Syntax zum Ausdrücken von Standardwerten in diesem Kontext sieht so aus, für ein Profil, das wir `test` nennen:
 
-```groovy title="Syntax-Beispiel"
+```groovy title="Syntax example"
     test {
         params.<parameter1>
         params.<parameter2>
@@ -1752,7 +1752,7 @@ Was hat Vorrang, wenn derselbe Parameter sowohl in der Config-Datei als auch in 
 - [ ] Der zuerst angetroffene Wert
 - [ ] Keiner; es verursacht einen Fehler
 
-Mehr erfahren: [1.1. Standardwerte in `nextflow.config` verschieben](#11-standardwerte-in-nextflowconfig-verschieben)
+Mehr erfahren: [1.1. Standardwerte in `nextflow.config` verschieben](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1770,7 +1770,7 @@ Wenn sowohl Docker als auch Conda aktiviert sind und ein Prozess beide Direktive
 - [ ] Das zuerst definierte
 - [ ] Es verursacht einen Fehler
 
-Mehr erfahren: [3. Eine Software-Paketierungstechnologie auswählen](#3-eine-software-paketierungstechnologie-auswahlen)
+Mehr erfahren: [3. Eine Software-Paketierungstechnologie auswählen](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1788,7 +1788,7 @@ Wie setzt du Ressourcenanforderungen für einen bestimmten Prozess in der Config
 - [x] `#!groovy process { withName: 'processName' { memory = '4 GB' } }`
 - [ ] `#!groovy resources.processName.memory = '4 GB'`
 
-Mehr erfahren: [5.3. Ressourcenzuweisungen für einen bestimmten Prozess festlegen](#53-ressourcenzuweisungen-fur-einen-bestimmten-prozess-festlegen)
+Mehr erfahren: [5.3. Ressourcenzuweisungen für einen bestimmten Prozess festlegen](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1798,7 +1798,7 @@ Welche Befehlszeilenoption generiert einen Ressourcennutzungsbericht?
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-Mehr erfahren: [5.1. Den Workflow ausführen, um einen Ressourcennutzungsbericht zu generieren](#51-den-workflow-ausfuhren-um-einen-ressourcennutzungsbericht-zu-generieren)
+Mehr erfahren: [5.1. Den Workflow ausführen, um einen Ressourcennutzungsbericht zu generieren](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1808,7 +1808,7 @@ Was macht die `resourceLimits`-Direktive?
 - [x] Deckelt die maximalen Ressourcen, die angefordert werden können
 - [ ] Überwacht die Ressourcennutzung
 
-Mehr erfahren: [5.5. Ressourcenlimits hinzufügen](#55-ressourcenlimits-hinzufugen)
+Mehr erfahren: [5.5. Ressourcenlimits hinzufügen](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1818,7 +1818,7 @@ Was ist der Standard-Executor in Nextflow?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Mehr erfahren: [4. Eine Ausführungsplattform auswählen](#4-eine-ausfuhrungsplattform-auswahlen)
+Mehr erfahren: [4. Eine Ausführungsplattform auswählen](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1828,7 +1828,7 @@ Wie gibst du eine Parameterdatei beim Ausführen von Nextflow an?
 - [x] `-params-file params.json`
 - [ ] `--input params.json`
 
-Mehr erfahren: [1.3. Eine Parameterdatei verwenden](#13-eine-parameterdatei-verwenden)
+Mehr erfahren: [1.3. Eine Parameterdatei verwenden](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1838,7 +1838,7 @@ Wofür können Profile verwendet werden? (Wähle alle zutreffenden aus)
 - [x] Bereitstellen von Testparametern
 - [ ] Definieren neuer Prozesse
 
-Mehr erfahren: [6. Profile verwenden, um zwischen voreingestellten Konfigurationen zu wechseln](#6-profile-verwenden-um-zwischen-voreingestellten-konfigurationen-zu-wechseln)
+Mehr erfahren: [6. Profile verwenden, um zwischen voreingestellten Konfigurationen zu wechseln](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1848,5 +1848,5 @@ Wie gibst du mehrere Profile in einem einzigen Befehl an?
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Mehr erfahren: [6. Profile verwenden, um zwischen voreingestellten Konfigurationen zu wechseln](#6-profile-verwenden-um-zwischen-voreingestellten-konfigurationen-zu-wechseln)
+Mehr erfahren: [6. Profile verwenden, um zwischen voreingestellten Konfigurationen zu wechseln](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

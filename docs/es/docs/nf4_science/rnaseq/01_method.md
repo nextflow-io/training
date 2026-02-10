@@ -5,7 +5,7 @@
 Existen múltiples métodos válidos para procesar y analizar datos de RNAseq en bulk.
 Para este curso, seguimos el método descrito [aquí](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) por los Drs. Simon Andrews y Laura Biggins en el [Babraham Institute](https://www.babraham.ac.uk/).
 
-Nuestro objetivo es desarrollar un flujo de trabajo que implemente los siguientes pasos de procesamiento: ejecutar control de calidad inicial en las lecturas de una muestra de RNAseq en bulk, recortar secuencias de adaptadores de las lecturas, alinear las lecturas a un genoma de referencia y producir un informe completo de control de calidad (QC).
+Nuestro objetivo es desarrollar un workflow que implemente los siguientes pasos de procesamiento: ejecutar control de calidad inicial en las lecturas de una muestra de RNAseq en bulk, recortar secuencias de adaptadores de las lecturas, alinear las lecturas a un genoma de referencia y producir un informe completo de control de calidad (QC).
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
@@ -16,7 +16,7 @@ Nuestro objetivo es desarrollar un flujo de trabajo que implemente los siguiente
 - **HISAT2_ALIGN:** Alinear lecturas al genoma de referencia usando Hisat2
 - **MULTIQC:** Generar un informe QC completo usando MultiQC
 
-Sin embargo, antes de comenzar a escribir cualquier código de flujo de trabajo, vamos a probar los comandos manualmente con algunos datos de prueba.
+Sin embargo, antes de comenzar a escribir cualquier código de workflow, vamos a probar los comandos manualmente con algunos datos de prueba.
 Las herramientas que necesitamos no están instaladas en el entorno de GitHub Codespaces, por lo que las usaremos a través de contenedores (ver [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note "Nota"
@@ -265,7 +265,7 @@ genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2
 genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
 ```
 
-Los usaremos en un momento, pero primero generemos un archivo tar comprimido con estos archivos de índice del genoma; los necesitaremos más adelante y generar estos no es típicamente algo que queramos hacer como parte de un flujo de trabajo.
+Los usaremos en un momento, pero primero generemos un archivo tar comprimido con estos archivos de índice del genoma; los necesitaremos más adelante y generar estos no es típicamente algo que queramos hacer como parte de un workflow.
 
 ```bash
 tar -czvf /data/genome_index.tar.gz genome_index.*
@@ -435,4 +435,4 @@ Ha probado todos los comandos individuales de forma interactiva en los contenedo
 
 ### ¿Qué sigue?
 
-Aprenda a envolver esos mismos comandos en un flujo de trabajo de múltiples pasos que usa contenedores para ejecutar el trabajo.
+Aprenda a envolver esos mismos comandos en un workflow de múltiples pasos que usa contenedores para ejecutar el trabajo.

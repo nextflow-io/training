@@ -10,7 +10,7 @@ additional_information:
     - Escribir un workflow lineal para aplicar llamado de variantes a una sola muestra
     - Manejar apropiadamente archivos accesorios como archivos índice y recursos de genoma de referencia
     - Aprovechar el paradigma de flujo de datos de Nextflow para paralelizar el llamado de variantes por muestra
-    - Implementar llamado conjunto en múltiples muestras usando operadores de channel relevantes
+    - Implementar llamado conjunto en múltiples muestras usando operadores de canal relevantes
   audience_prerequisites:
     - "**Audiencia:** Este curso está diseñado para investigadores en genómica y campos relacionados que desean desarrollar o personalizar pipelines de análisis de datos."
     - "**Habilidades:** Se asume cierta familiaridad con la línea de comandos, conceptos básicos de scripting y formatos de archivo comunes de genómica."
@@ -19,9 +19,11 @@ additional_information:
 
 # Nextflow para Genómica
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Un curso práctico que aplica Nextflow a un caso de uso real de genómica: llamado de variantes con GATK.**
 
-Este curso se basa en el entrenamiento para principiantes [Hello Nextflow](../../hello_nextflow/) y demuestra cómo usar Nextflow en el contexto específico del dominio de la genómica.
+Este curso se basa en la capacitación para principiantes [Hello Nextflow](../../hello_nextflow/) y demuestra cómo usar Nextflow en el contexto específico del dominio de la genómica.
 Implementará un pipeline de llamado de variantes con [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), un paquete de software ampliamente utilizado para analizar datos de secuenciación de alto rendimiento.
 
 <!-- additional_information -->

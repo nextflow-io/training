@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-¡Felicitaciones por completar el entrenamiento de Nextflow para Bioimagen!
+¡Felicidades por completar la capacitación de Nextflow para Bioimagen!
 
 Ahora tiene las habilidades fundamentales para ejecutar y configurar pipelines de Nextflow para el análisis de datos de imagen.
 
@@ -18,7 +18,7 @@ Aquí hay algunos pasos recomendados para profundizar su conocimiento de Nextflo
 
 Si desea aprender cómo escribir pipelines de Nextflow:
 
-- **[Hello Nextflow](../../hello_nextflow/)**: Entrenamiento completo de desarrollo en Nextflow
+- **[Hello Nextflow](../../hello_nextflow/)**: Capacitación completa de desarrollo en Nextflow
 - **[Side Quests](../../side_quests/)**: Temas avanzados para desarrolladores de pipelines
 
 ### Unirse a la comunidad
@@ -36,6 +36,6 @@ Si desea aprender cómo escribir pipelines de Nextflow:
 
 - **Contribuir a nf-core**: Ayude a mejorar pipelines o documentación
 - **Compartir sus workflows**: Contribuya sus propios pipelines a la comunidad
-- **Asistir a eventos**: Únase al Nextflow Summit y sesiones de entrenamiento de la comunidad
+- **Asistir a eventos**: Únase al Nextflow Summit y sesiones de capacitación de la comunidad
 
 ¡Gracias por aprender con nosotros!

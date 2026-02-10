@@ -1,7 +1,9 @@
 # Orientamento - Trascrizione Video
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWaTV4zd?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 !!!note "Nota importante"
@@ -44,9 +46,9 @@ Ci sono un paio di altre cose importanti da notare qui. Innanzitutto, il materia
 
 Un altro menu a tendina in alto è questo, quello della lingua. Ora questo è completamente nuovo per la versione 3.0. Abbiamo preso il materiale precedentemente tradotto, che era stato fatto da esseri umani, a mano, e l'abbiamo passato in un LLM e abbiamo configurato tutta questa nuova infrastruttura per mantenere diverse traduzioni del materiale di formazione usando la traduzione LLM.
 
-Quindi ora abbiamo tutte queste fantastiche traduzioni qui. Quindi se volete seguire in coreano, potete caricare l'intero sito web in coreano. E seguire lì. Lo stesso per tutte queste altre lingue, hindi e tedesco e così via. Io seguirò in inglese. È come la lingua primaria in cui scriviamo il materiale.
+Quindi ora abbiamo tutte queste fantastiche traduzioni qui. Quindi se volete seguire in coreano, potete caricare l'intero sito web in coreano e seguire lì. Lo stesso per tutte queste altre lingue, hindi e tedesco e così via. Io seguirò in inglese. È la lingua primaria in cui scriviamo il materiale.
 
-Un paio di altri pulsanti se vi piace avere la modalità chiara. Invece di quella modalità, potete seguire il sito web in modalità chiara in alto qui.
+Un paio di altri pulsanti: se vi piace avere la modalità chiara invece di quella scura, potete seguire il sito web in modalità chiara in alto qui.
 
 E poi anche tutto ciò che guardiamo è in un singolo repository GitHub, che è open source, chiamato nextflow-io/training. E se cliccate questo pulsante in qualsiasi momento, vi porterà al repository GitHub. Ci torneremo tra un minuto.
 
@@ -106,7 +108,7 @@ Okay. Quando arrivate fin qui, dovrebbe essere quasi finito. Potete vedere ora h
 
 E ora potete vedere che ho di più sulla sinistra. Sono un po' ingrandito qui, ma se riduco lo zoom potete vedere che uno dei pulsanti dice Nextflow con l'icona Nextflow. E ha alcune cose interessanti qui dentro per esplorare il progetto e cose del genere, a cui torneremo più tardi.
 
-Okay. nel caso perdiate mai uno di questi pannelli, questi pulsanti in alto a destra sono davvero utili e questi semplicemente mostrano e nascondono le cose. Quindi quello mostra e nasconde l'Explorer mostra e nasconde il terminale in basso. E così via.
+Okay. Nel caso perdiate mai uno di questi pannelli, questi pulsanti in alto a destra sono davvero utili e questi semplicemente mostrano e nascondono le cose. Quindi quello mostra e nasconde l'Explorer, mostra e nasconde il terminale in basso. E così via.
 
 Userò questi abbastanza spesso perché sono molto ingrandito, quindi cercherò di aiutarvi a vedere tutto il testo sul mio schermo, ed è utile poter andare a schermo intero con il terminale e poi nasconderlo quando stiamo guardando il codice. Ma la maggior parte del tempo potete semplicemente avere tutte queste cose aperte allo stesso tempo.
 
@@ -142,7 +144,7 @@ Due cose vi servono per questo. Avete bisogno di una versione aggiornata di Next
 
 Se faccio di nuovo "nextflow -version", vedrete che il Codespace sta eseguendo con 25.10.2 e 25.10 è la versione minima per poter usare questa roba.
 
-Se state usando 26.04, che per me non è ancora uscita, ma uscirà presto. Allora questa eseguirà il nuovo parser di sintassi per impostazione predefinita, e non dovete fare nient'altro.
+Se state usando 26.04, che per me non è ancora uscita, ma uscirà presto, allora questa eseguirà il nuovo parser di sintassi per impostazione predefinita, e non dovete fare nient'altro.
 
 Ma se state eseguendo 25.10, dovete abilitare il parser di sintassi strict, come viene chiamato, o parser di sintassi v2.
 
@@ -164,7 +166,7 @@ Quindi i file \*.nf, sta per Nextflow. Quindi questi sono i file script Nextflow
 
 Modificheremo questi file mentre procediamo, e quindi entro la fine di ogni capitolo, i file dovrebbero apparire praticamente uguali all'inizio del capitolo per quello successivo. Ma vi diamo questi diversi file così potete sempre ricominciare da capo e non preoccuparvi troppo di rovinare la sintassi.
 
-Se dovete confrontare con qualcosa che dovrebbe funzionare definitivamente. Potete controllare nella cartella solutions, e questo è come uno stato finale per ciascuno dei capitoli, così potete confrontare ciò che avete scritto con ciò che c'è lì.
+Se dovete confrontare con qualcosa che dovrebbe funzionare definitivamente, potete controllare nella cartella solutions, e questo è come uno stato finale per ciascuno dei capitoli, così potete confrontare ciò che avete scritto con ciò che c'è lì.
 
 C'è una directory data. Questa ha solo un file greetings.csv, che useremo come dati di input di esempio in parte del corso, e cose come un file di config e alcuni parametri, che descriveremo più avanti nel corso.
 
@@ -174,4 +176,4 @@ Okay, quindi ora si spera che tutto stia funzionando. Il vostro schermo sembra u
 
 Se scorrete verso il basso fino alla fine della pagina su getting started, una piccola casella di controllo dovreste dire che capisco cosa sto facendo. Il mio ambiente è attivo e funzionante e siete impostati, state lavorando nella directory impostata correttamente sulla cartella "Hello Nextflow".
 
-Se avete spuntato tutti quelli e sembrano verdi. Possiamo continuare al prossimo video e al prossimo capitolo, che è parte uno. Hello World. Ci vediamo tra un momento.
+Se avete spuntato tutti quelli e sembrano verdi, possiamo continuare al prossimo video e al prossimo capitolo, che è parte uno. Hello World. Ci vediamo tra un momento.

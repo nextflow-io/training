@@ -87,7 +87,7 @@ process FASTQC {
 
 Vous devriez reconnaître tous les éléments de ce que vous avez appris dans les Parties 1 et 2 de cette série de formation ; le seul changement notable est que cette fois nous utilisons `mode: symlink` pour la directive `publishDir`, et nous utilisons un paramètre pour définir le `publishDir`.
 
-!!! note
+!!! note "Note"
 
     Même si les fichiers de données que nous utilisons ici sont très petits, en génomique ils peuvent devenir très volumineux. À des fins de démonstration dans l'environnement d'enseignement, nous utilisons le mode de publication 'symlink' pour éviter des copies de fichiers inutiles. Vous ne devriez pas faire cela dans vos workflows finaux, car vous perdrez les résultats lorsque vous nettoierez votre répertoire `work`.
 
@@ -389,7 +389,7 @@ ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 
 Cela complète le traitement de base que nous devons appliquer à chaque échantillon.
 
-_Nous ajouterons l'agrégation de rapports MultiQC dans la Partie 2, après avoir fait en sorte que le workflow accepte plusieurs échantillons à la fois._
+_Nous ajouterons l'agrégation de rapports MultiQC dans la Partie 3, après avoir fait en sorte que le workflow accepte plusieurs échantillons à la fois._
 
 ---
 

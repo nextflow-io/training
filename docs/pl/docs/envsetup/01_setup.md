@@ -47,7 +47,7 @@ Możliwe jest jednak dostosowanie środowiska, klikając przycisk "Change option
 
     Pozwala dostosować maszynę wirtualną, której będziesz używać do pracy ze szkoleniem.
 
-    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow'a do równoległego wykonywania workflow'ów.
+    Używanie maszyny z większą liczbą rdzeni pozwala lepiej wykorzystać zdolność Nextflow'a do paralelizacji wykonywania workflow'ów.
     Jednak zużyje to szybciej Twój darmowy limit, więc nie zalecamy zmiany tego ustawienia, chyba że wymaga tego kurs, który zamierzasz realizować.
 
     Zobacz 'Limity GitHub Codespaces' poniżej, aby uzyskać więcej szczegółów o limitach.

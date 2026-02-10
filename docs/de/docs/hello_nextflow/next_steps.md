@@ -1,5 +1,7 @@
 # Kurszusammenfassung
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Herzlichen Glückwunsch zum Abschluss des Hello Nextflow-Trainingskurses! 🎉
 
 <div class="video-wrapper">
@@ -15,11 +17,11 @@ Herzlichen Glückwunsch zum Abschluss des Hello Nextflow-Trainingskurses! 🎉
 ## Dein Weg
 
 Du hast mit einem einfachen Workflow begonnen, der einen fest codierten Befehl ausführte.
-Im Laufe von sechs Teilen hast du diesen einfachen Workflow in eine modulare mehrstufige Pipeline verwandelt, die wichtige Funktionen von Nextflow nutzt, einschließlich channels, Operatoren, integrierter Container-Unterstützung und Konfigurationsoptionen.
+Im Laufe von sechs Teilen hast du diesen einfachen Workflow in eine modulare mehrstufige Pipeline verwandelt, die wichtige Funktionen von Nextflow nutzt, einschließlich Kanälen, Operatoren, integrierter Container-Unterstützung und Konfigurationsoptionen.
 
 ### Was du gebaut hast
 
-- Die endgültige Form des Hello-Workflows nimmt als Eingabe eine CSV-Datei mit Textbegrüßungen.
+- Der fertige Hello-Workflow nimmt als Eingabe eine CSV-Datei mit Textbegrüßungen.
 - Die vier Schritte sind als Nextflow-Prozesse (`sayHello`, `convertToUpper`, `collectGreetings` und `cowpy`) implementiert, die in separaten Moduldateien gespeichert sind.
 - Die Ergebnisse werden in einem Verzeichnis namens `results/` veröffentlicht.
 - Die endgültige Ausgabe der Pipeline ist eine einfache Textdatei mit ASCII-Kunst einer Figur, die die in Großbuchstaben konvertierten Begrüßungen sagt.
@@ -51,7 +53,7 @@ Du bist jetzt mit dem Grundwissen ausgestattet, um eigene Pipelines in Nextflow 
 
 Hier sind unsere Top-3-Vorschläge, was du als Nächstes tun solltest:
 
-- Wende Nextflow auf einen wissenschaftlichen Analyse-Anwendungsfall an mit [Nextflow für die Wissenschaft](../nf4_science/index.md)
+- Wende Nextflow auf einen wissenschaftlichen Analyse-Anwendungsfall an mit [Nextflow for Science](../nf4_science/index.md)
 - Starte mit nf-core mit [Hello nf-core](../hello_nf-core/index.md)
 - Erkunde fortgeschrittenere Nextflow-Funktionen mit den [Side Quests](../side_quests/index.md)
 

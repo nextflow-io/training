@@ -57,7 +57,7 @@ cd hello-nf-core/
 
 !!! tip "팁"
 
-    어떤 이유로든 이 디렉토리를 벗어나는 경우(예: codespace가 중지 모드로 전환됨) Github Codespaces 교육 환경 내에서 실행하는 경우 전체 경로를 사용하여 언제든지 돌아갈 수 있습니다:
+    어떤 이유로든 이 디렉토리를 벗어나는 경우(예: codespace가 중지(sleep) 상태로 전환됨) Github Codespaces 교육 환경 내에서 실행하는 경우 전체 경로를 사용하여 언제든지 돌아갈 수 있습니다:
 
     ```bash
     cd /workspaces/training/hello-nf-core
@@ -103,7 +103,7 @@ tree . -L 2
 
 - **`original-hello` 디렉토리**에는 전체 Hello Nextflow 교육 시리즈를 진행하여 생성된 소스 코드의 사본이 포함되어 있습니다(Docker 활성화 상태).
 
-- **`solutions` 디렉토리**에는 과정의 각 단계에서 생성되는 완성된 workflow 스크립트가 포함되어 있습니다.
+- **`solutions` 디렉토리**에는 과정의 각 단계에서 생성되는 완성된 워크플로우 스크립트가 포함되어 있습니다.
   작업을 확인하고 문제를 해결하는 데 사용할 참조 자료로 제공됩니다.
 
 ## 준비 상태 체크리스트

@@ -220,7 +220,7 @@ Der Befehl erledigt automatisch:
 - Aktualisierung der `modules.json`, um das installierte Modul zu verfolgen
 - Bereitstellung der korrekten `include`-Anweisung zur Verwendung im Workflow
 
-!!! tip
+!!! tip "Tipp"
 
     Stelle immer sicher, dass dein aktuelles Arbeitsverzeichnis das Wurzelverzeichnis deines Pipeline-Projekts ist, bevor du den Modulinstallationsbefehl ausführst.
 
@@ -287,7 +287,7 @@ Beachte, dass die nf-core-Konvention darin besteht, Großbuchstaben für Modulna
 
 Öffne [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) und nimm folgende Ersetzung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
     /*
@@ -332,7 +332,7 @@ An diesem Punkt könntest du versucht sein, direkt einzusteigen und Code zu bear
 
 Wir werden das als separaten Abschnitt behandeln, weil es einen neuen Mechanismus beinhaltet, den wir noch nicht behandelt haben: Metadaten-Maps.
 
-!!! note
+!!! note "Hinweis"
 
     Du kannst optional die Datei `collectGreetings.nf` löschen:
 
@@ -342,11 +342,11 @@ Wir werden das als separaten Abschnitt behandeln, weil es einen neuen Mechanismu
 
     Du möchtest sie jedoch vielleicht als Referenz behalten, um die Unterschiede zwischen lokalen und nf-core-Modulen zu verstehen.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie du ein nf-core-Modul findest und es für dein Projekt verfügbar machst.
 
-### Wie geht's weiter?
+### Wie geht es weiter?
 
 Bewerte, was ein neues Modul benötigt, und identifiziere wichtige Änderungen, die nötig sind, um es in eine Pipeline zu integrieren.
 
@@ -360,7 +360,7 @@ Dadurch können wir feststellen, ob wir das neue Modul einfach als direkten Ersa
 Idealerweise solltest du das tun, _bevor_ du das Modul überhaupt installierst, aber hey, besser spät als nie.
 (Übrigens gibt es einen `uninstall`-Befehl, um Module loszuwerden, die du nicht mehr möchtest.)
 
-!!! note
+!!! note "Hinweis"
 
     Der CAT_CAT-Prozess enthält eine ziemlich clevere Handhabung verschiedener Komprimierungstypen, Dateierweiterungen usw., die für das, was wir dir hier zeigen wollen, nicht streng relevant sind, daher werden wir das meiste davon ignorieren und uns nur auf die wichtigen Teile konzentrieren.
 
@@ -512,11 +512,11 @@ Basierend auf dem, was wir überprüft haben, sind dies die wichtigsten Änderun
 
 Das sollte reichen! Jetzt, da wir einen Plan haben, sind wir bereit loszulegen.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie du die Eingabe- und Ausgabeschnittstelle eines neuen Moduls bewertest, um seine Anforderungen zu identifizieren, und du hast gelernt, wie Metamaps von nf-core-Pipelines verwendet werden, um Metadaten eng mit den Daten verbunden zu halten, während sie durch eine Pipeline fließen.
 
-### Wie geht's weiter?
+### Wie geht es weiter?
 
 Das neue Modul in einen Workflow integrieren.
 
@@ -528,7 +528,7 @@ Jetzt, da du alles über Metamaps weißt (oder zumindest genug für die Zwecke d
 
 Der Klarheit halber werden wir dies aufschlüsseln und jeden Schritt separat behandeln.
 
-!!! note
+!!! note "Hinweis"
 
     Alle unten gezeigten Änderungen werden an der Workflow-Logik im `main`-Block in der `core-hello/workflows/hello.nf` Workflow-Datei vorgenommen.
 
@@ -553,7 +553,7 @@ Ja, es ist buchstäblich so einfach, eine grundlegende Metamap zu erstellen.
 
 Lass uns diese Zeilen nach dem `convertToUpper`-Aufruf hinzufügen und den `collectGreetings`-Aufruf entfernen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="7-8"
         // Eine Begrüßung ausgeben
@@ -591,7 +591,7 @@ Dies erstellt eine einfache Metadaten-Map, bei der die `id` auf unseren Chargenn
 
 Als Nächstes transformieren wir den Kanal von Dateien in einen Kanal von Tupeln, die Metadaten und Dateien enthalten:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="10-11"
         // Eine Begrüßung ausgeben
@@ -637,7 +637,7 @@ Das ist alles, was wir tun müssen, um das Eingabe-Tupel für `CAT_CAT` einzuric
 
 Rufe nun `CAT_CAT` auf dem neu erstellten Kanal auf:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="13-14"
         // Eine Begrüßung ausgeben
@@ -687,7 +687,7 @@ Der `CAT_CAT`-Prozess produziert jedoch ein Tupel, das zusätzlich zur Ausgabeda
 
 Da `cowpy` noch keine Metadaten-Tupel akzeptiert (das werden wir im nächsten Teil des Kurses beheben), müssen wir die Ausgabedatei aus dem von `CAT_CAT` produzierten Tupel extrahieren, bevor wir sie an `cowpy` übergeben:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26" hl_lines="16-17 20"
         // Eine Begrüßung ausgeben
@@ -738,7 +738,7 @@ Die `.map{ meta, file -> file }`-Operation extrahiert die Datei aus dem `[metada
 
 Dann ist es nur noch eine Sache, `ch_for_cowpy` anstelle von `collectGreetings.out.outfile` in dieser letzten Zeile an `cowpy` zu übergeben.
 
-!!! note
+!!! note "Hinweis"
 
     Im nächsten Teil des Kurses werden wir `cowpy` aktualisieren, damit es direkt mit Metadaten-Tupeln funktioniert, sodass dieser Extraktionsschritt nicht mehr notwendig sein wird.
 
@@ -795,7 +795,7 @@ Beachte, dass `CAT_CAT` jetzt in der Liste der Prozessausführungen anstelle von
 
 Und das war's! Wir verwenden jetzt ein robustes, von der Community kuratiertes Modul anstelle von eigenem Prototyp-Code für diesen Schritt in der Pipeline.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie du:
 
@@ -804,7 +804,7 @@ Du weißt jetzt, wie du:
 - Eine einfache Metadaten-Map zur Verwendung mit einem nf-core-Modul erstellst
 - Ein nf-core-Modul in deinen Workflow integrierst
 
-### Wie geht's weiter?
+### Wie geht es weiter?
 
 Lerne, deine lokalen Module anzupassen, um nf-core-Konventionen zu folgen.
 Wir zeigen dir auch, wie du neue nf-core-Module aus einer Vorlage mit den nf-core-Werkzeugen erstellst.

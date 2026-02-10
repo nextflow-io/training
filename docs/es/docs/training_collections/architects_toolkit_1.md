@@ -1,4 +1,3 @@
-```markdown
 ---
 title: Kit de Herramientas del Arquitecto I
 hide:
@@ -60,4 +59,3 @@ Una vez que su entorno esté en ejecución, trabaje a través de la colección d
 [![Take the survey](https://img.shields.io/badge/Take%20the-Survey-blue?style=flat-square)](https://seqera.typeform.com/to/Q9pc2YKw)
 
 ¿Listo para comenzar? ¡Comience con el primer módulo arriba!
-```

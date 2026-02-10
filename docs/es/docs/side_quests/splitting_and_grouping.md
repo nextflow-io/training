@@ -90,7 +90,7 @@ Si no está familiarizado con el análisis de cáncer, solo sepa que esto corres
 
 Para el paciente A específicamente, tenemos dos conjuntos de réplicas técnicas (repeticiones).
 
-!!! note
+!!! note "Nota"
 
     No se preocupe si no está familiarizado con este diseño experimental, no es crítico para entender este tutorial.
 
@@ -131,13 +131,13 @@ workflow {
 }
 ```
 
-!!! note
+!!! note "Nota"
 
     A lo largo de este tutorial, usaremos el prefijo `ch_` para todas las variables de canal para indicar claramente que son canales de Nextflow.
 
 Si completó la misión secundaria [Metadatos en flujos de trabajo](./metadata.md), reconocerá este patrón. Usaremos `splitCsv` para leer el CSV y estructurar inmediatamente los datos con un mapa meta para separar metadatos de rutas de archivo.
 
-!!! info
+!!! info "Info"
 
     Encontraremos dos conceptos diferentes llamados `map` en este entrenamiento:
 
@@ -514,7 +514,7 @@ Es un poco difícil de ver porque es muy ancho, pero debería poder ver que las 
 - `tumor_meta_map`: Los metadatos de la muestra de tumor incluyendo tipo, réplica y ruta al archivo bam
 - `tumor_sample`: La muestra de tumor incluyendo tipo, réplica y ruta al archivo bam
 
-!!! warning
+!!! warning "Advertencia"
 
     El operador `join` descartará cualquier tupla no emparejada. En este ejemplo, nos aseguramos de que todas las muestras estuvieran emparejadas para tumor y normal, pero si esto no es cierto debe usar el parámetro `remainder: true` para mantener las tuplas no emparejadas. Consulte la [documentación](https://www.nextflow.io/docs/latest/operator.html#join) para más detalles.
 
@@ -685,7 +685,7 @@ Implementemos el closure en nuestro flujo de trabajo:
             .map { meta, file -> [meta.subMap(['id', 'repeat']), meta, file] }
     ```
 
-!!! note
+!!! note "Nota"
 
     El operador `map` ha cambiado de usar `{ }` a usar `( )` para pasar el closure como argumento. Esto es porque el operador `map` espera un closure como argumento y `{ }` se usa para definir un closure anónimo. Al llamar un closure nombrado, use la sintaxis `( )`.
 
@@ -1076,7 +1076,7 @@ nextflow run main.nf
 
 Podemos ver que hemos aislado exitosamente los campos `id` e `interval`, pero no hemos agrupado las muestras todavía.
 
-!!! note
+!!! note "Nota"
 
     Estamos descartando el campo `replicate` aquí. Esto es porque no lo necesitamos para el procesamiento posterior. Después de completar este tutorial, ¡vea si puede incluirlo sin afectar el agrupamiento posterior!
 
@@ -1137,7 +1137,7 @@ nextflow run main.nf
 
 Note que nuestra estructura de datos ha cambiado y dentro de cada elemento del canal los archivos ahora están contenidos en tuplas como `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`. Esto es porque cuando usamos `groupTuple`, Nextflow combina los archivos individuales para cada muestra de un grupo. Esto es importante de recordar al intentar manejar los datos downstream.
 
-!!! note
+!!! note "Nota"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) es lo opuesto de groupTuple. Desempaqueta los elementos en un canal y los aplana. ¡Intente agregar `transpose` y deshacer el agrupamiento que realizamos arriba!
 

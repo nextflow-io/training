@@ -36,7 +36,7 @@ La sortie la plus importante ici est la dernière ligne (ligne 6) :
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
-Cela nous indique que le processus `sayHello` a été exécuté avec succès une fois (`1 of 1 ✔`).
+Cela nous indique que le **process** `sayHello` a été exécuté avec succès une fois (`1 of 1 ✔`).
 
 C'est parfait, mais vous vous demandez peut-être : où se trouve la sortie ?
 
@@ -74,7 +74,7 @@ Maintenant, nous allons regarder sous le capot pour voir où Nextflow a réellem
 
 ### 1.3. Trouver la sortie originale et les logs dans le répertoire `work/`
 
-Lorsque vous exécutez un workflow, Nextflow crée un 'répertoire de tâche' distinct pour chaque invocation de chaque processus dans le workflow (=chaque étape du pipeline).
+Lorsque vous exécutez un workflow, Nextflow crée un 'répertoire de tâche' distinct pour chaque invocation de chaque **process** dans le workflow (=chaque étape du pipeline).
 Pour chacun, il va préparer les entrées nécessaires, exécuter la ou les instruction(s) pertinente(s) et écrire les sorties et les fichiers de log dans ce répertoire unique, qui est nommé automatiquement à l'aide d'un hash afin de le rendre unique.
 
 Tous ces répertoires de tâches se trouveront dans un répertoire appelé `work` dans votre répertoire actuel (où vous exécutez la commande).
@@ -88,7 +88,7 @@ En revenant à la sortie console du workflow que nous avons exécuté précédem
 ```
 
 Voyez comment la ligne commence par `[a3/7be2fa]` ?
-C'est une forme tronquée du chemin du répertoire de tâche pour cet appel de processus particulier, et vous indique où trouver la sortie de l'appel du processus `sayHello` dans le chemin du répertoire `work/`.
+C'est une forme tronquée du chemin du répertoire de tâche pour cet appel de **process** particulier, et vous indique où trouver la sortie de l'appel du **process** `sayHello` dans le chemin du répertoire `work/`.
 
 Vous pouvez trouver le chemin complet en tapant la commande suivante (en remplaçant `a3/7be2fa` par ce que vous voyez dans votre propre terminal) et en appuyant sur la touche tab pour compléter automatiquement le chemin ou en ajoutant un astérisque :
 
@@ -130,7 +130,7 @@ work
 
 </details>
 
-Vous devriez immédiatement reconnaître le fichier `output.txt`, qui est en fait la sortie originale du processus `sayHello` qui a été publiée dans le répertoire `results`.
+Vous devriez immédiatement reconnaître le fichier `output.txt`, qui est en fait la sortie originale du **process** `sayHello` qui a été publiée dans le répertoire `results`.
 Si vous l'ouvrez, vous retrouverez le message de salutation `Hello World!`.
 
 <details>
@@ -147,11 +147,11 @@ Alors, qu'en est-il de tous ces autres fichiers ?
 Ce sont les fichiers d'aide et de log que Nextflow a écrits dans le cadre de l'exécution de la tâche :
 
 - **`.command.begin`** : Fichier sentinelle créé dès que la tâche est lancée.
-- **`.command.err`** : Messages d'erreur (`stderr`) émis par l'appel du processus
-- **`.command.log`** : Sortie de log complète émise par l'appel du processus
-- **`.command.out`** : Sortie normale (`stdout`) par l'appel du processus
-- **`.command.run`** : Script complet exécuté par Nextflow pour exécuter l'appel du processus
-- **`.command.sh`** : La commande qui a réellement été exécutée par l'appel du processus
+- **`.command.err`** : Messages d'erreur (`stderr`) émis par l'appel du **process**
+- **`.command.log`** : Sortie de log complète émise par l'appel du **process**
+- **`.command.out`** : Sortie normale (`stdout`) par l'appel du **process**
+- **`.command.run`** : Script complet exécuté par Nextflow pour exécuter l'appel du **process**
+- **`.command.sh`** : La commande qui a réellement été exécutée par l'appel du **process**
 - **`.exitcode`** : Le code de sortie résultant de la commande
 
 Le fichier `.command.sh` est particulièrement utile car il vous montre la commande principale que Nextflow a exécutée, sans inclure toute la gestion administrative et la configuration de la tâche/environnement.
@@ -232,18 +232,18 @@ workflow {
 
 </details>
 
-Un script Nextflow implique deux types principaux de composants de base : un ou plusieurs **processus**, et le **workflow** lui-même.
-Chaque **processus** décrit quelle(s) opération(s) l'étape correspondante du pipeline doit accomplir, tandis que le **workflow** décrit la logique de flux de données qui connecte les différentes étapes.
+Un script Nextflow implique deux types principaux de composants de base : un ou plusieurs **process**, et le **workflow** lui-même.
+Chaque **process** décrit quelle(s) opération(s) l'étape correspondante du pipeline doit accomplir, tandis que le **workflow** décrit la logique de flux de données qui connecte les différentes étapes.
 
 Examinons d'abord de plus près le bloc **process**, puis nous examinerons le bloc **workflow**.
 
 ### 2.2. La définition du `process`
 
-Le premier bloc de code décrit un **processus**.
-La définition du processus commence par le mot-clé `process`, suivi du nom du processus et enfin du corps du processus délimité par des accolades.
-Le corps du processus doit contenir un bloc script qui spécifie la commande à exécuter, qui peut être n'importe quoi que vous seriez capable d'exécuter dans un terminal de ligne de commande.
+Le premier bloc de code décrit un **process**.
+La définition du **process** commence par le mot-clé `process`, suivi du nom du **process** et enfin du corps du **process** délimité par des accolades.
+Le corps du **process** doit contenir un bloc script qui spécifie la commande à exécuter, qui peut être n'importe quoi que vous seriez capable d'exécuter dans un terminal de ligne de commande.
 
-Ici, nous avons un **processus** appelé `sayHello` qui prend une variable d'**entrée** appelée `greeting` et écrit sa **sortie** dans un fichier nommé `output.txt`.
+Ici, nous avons un **process** appelé `sayHello` qui prend une variable d'**entrée** appelée `greeting` et écrit sa **sortie** dans un fichier nommé `output.txt`.
 
 <details>
   <summary>Code</summary>
@@ -271,7 +271,7 @@ process sayHello {
 
 </details>
 
-C'est une définition de processus très minimale qui contient juste une définition d'`input`, une définition d'`output` et le `script` à exécuter.
+C'est une définition de **process** très minimale qui contient juste une définition d'`input`, une définition d'`output` et le `script` à exécuter.
 
 La définition d'`input` inclut le qualificateur `val`, qui indique à Nextflow de s'attendre à une valeur d'un certain type (peut être une chaîne, un nombre, peu importe).
 
@@ -282,17 +282,17 @@ La définition d'`output` inclut le qualificateur `path`, qui indique à Nextflo
     La définition de sortie ne _détermine_ pas quelle sortie sera créée.
     Elle _déclare_ simplement où trouver le(s) fichier(s) de sortie attendu(s), afin que Nextflow puisse le chercher une fois l'exécution terminée.
 
-    Ceci est nécessaire pour vérifier que la commande a été exécutée avec succès et pour transmettre la sortie aux processus en aval si nécessaire.
-    Les sorties produites qui ne correspondent pas à ce qui est déclaré dans le bloc de sortie ne seront pas transmises aux processus en aval.
+    Ceci est nécessaire pour vérifier que la commande a été exécutée avec succès et pour transmettre la sortie aux **process** en aval si nécessaire.
+    Les sorties produites qui ne correspondent pas à ce qui est déclaré dans le bloc de sortie ne seront pas transmises aux **process** en aval.
 
-Dans un pipeline réel, un processus contient généralement des informations supplémentaires telles que des directives de processus, que nous présenterons dans un instant.
+Dans un pipeline réel, un **process** contient généralement des informations supplémentaires telles que des directives de **process**, que nous présenterons dans un instant.
 
 ### 2.3. La définition du `workflow`
 
 Le deuxième bloc de code décrit le **workflow** lui-même.
-La définition du workflow commence par le mot-clé `workflow`, suivi d'un nom optionnel, puis du corps du workflow délimité par des accolades.
+La définition du **workflow** commence par le mot-clé `workflow`, suivi d'un nom optionnel, puis du corps du **workflow** délimité par des accolades.
 
-Ici, nous avons un **workflow** qui consiste en un appel au processus `sayHello`, qui prend une entrée, `params.greeting`, qui contient la valeur que nous avons donnée au paramètre `--greeting`.
+Ici, nous avons un **workflow** qui consiste en un appel au **process** `sayHello`, qui prend une entrée, `params.greeting`, qui contient la valeur que nous avons donnée au paramètre `--greeting`.
 
 ```groovy title="hello-world.nf" linenums="22"
 workflow {
@@ -303,15 +303,15 @@ workflow {
 ```
 
 C'est une définition de **workflow** très minimale.
-Dans un pipeline réel, le workflow contient généralement plusieurs appels à des **processus** connectés par des **canaux**, et il peut y avoir des valeurs par défaut configurées pour les entrées variables.
+Dans un pipeline réel, le **workflow** contient généralement plusieurs appels à des **process** connectés par des **canaux**, et il peut y avoir des valeurs par défaut configurées pour les entrées variables.
 
 Nous verrons cela en action lorsque nous exécuterons nf-core/molkart dans la Partie 2 du cours.
 
 ### 2.4. Le système `params` de paramètres de ligne de commande
 
-Le `params.greeting` que nous fournissons à l'appel du processus `sayHello()` est un élément intéressant du code Nextflow et mérite qu'on y consacre une minute supplémentaire.
+Le `params.greeting` que nous fournissons à l'appel du **process** `sayHello()` est un élément intéressant du code Nextflow et mérite qu'on y consacre une minute supplémentaire.
 
-Comme mentionné ci-dessus, c'est ainsi que nous transmettons la valeur du paramètre de ligne de commande `--greeting` à l'appel du processus `sayHello()`.
+Comme mentionné ci-dessus, c'est ainsi que nous transmettons la valeur du paramètre de ligne de commande `--greeting` à l'appel du **process** `sayHello()`.
 En fait, le simple fait de déclarer `params.someParameterName` nous permettra de donner au workflow un paramètre nommé `--someParameterName` depuis la ligne de commande.
 
 !!! Tip "Astuce"
@@ -340,12 +340,12 @@ Nous vous montrons ici comment profiter de la fonctionnalité `resume` lorsque v
 Parfois, vous voudrez ré-exécuter un pipeline que vous avez déjà lancé précédemment sans refaire le travail qui a déjà été effectué avec succès.
 
 Nextflow a une option appelée `-resume` qui vous permet de faire cela.
-Plus précisément, dans ce mode, tous les processus qui ont déjà été exécutés avec exactement le même code, les mêmes paramètres et les mêmes entrées seront ignorés.
-Cela signifie que Nextflow n'exécutera que les processus que vous avez ajoutés ou modifiés depuis la dernière exécution, ou auxquels vous fournissez de nouveaux paramètres ou entrées.
+Plus précisément, dans ce mode, tous les **process** qui ont déjà été exécutés avec exactement le même code, les mêmes paramètres et les mêmes entrées seront ignorés.
+Cela signifie que Nextflow n'exécutera que les **process** que vous avez ajoutés ou modifiés depuis la dernière exécution, ou auxquels vous fournissez de nouveaux paramètres ou entrées.
 
 Il y a deux avantages clés à faire cela :
 
-- Si vous êtes en train de développer un pipeline, vous pouvez itérer plus rapidement puisque vous n'avez qu'à exécuter le(s) processus sur le(s)quel(s) vous travaillez activement pour tester vos modifications.
+- Si vous êtes en train de développer un pipeline, vous pouvez itérer plus rapidement puisque vous n'avez qu'à exécuter le(s) **process** sur le(s)quel(s) vous travaillez activement pour tester vos modifications.
 - Si vous exécutez un pipeline en production et que quelque chose ne va pas, dans de nombreux cas vous pouvez corriger le problème et relancer le pipeline, et il reprendra l'exécution à partir du point de défaillance, ce qui peut vous faire gagner beaucoup de temps et de calcul.
 
 Pour l'utiliser, ajoutez simplement `-resume` à votre commande et exécutez-la :
@@ -364,14 +364,14 @@ nextflow run hello-world.nf --greeting 'Hello World!' -resume
     [a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
     ```
 
-Recherchez le bit `cached:` qui a été ajouté dans la ligne de statut du processus (ligne 5), ce qui signifie que Nextflow a reconnu qu'il a déjà fait ce travail et a simplement réutilisé le résultat de l'exécution précédente réussie.
+Recherchez le bit `cached:` qui a été ajouté dans la ligne de statut du **process** (ligne 5), ce qui signifie que Nextflow a reconnu qu'il a déjà fait ce travail et a simplement réutilisé le résultat de l'exécution précédente réussie.
 
 Vous pouvez également voir que le hash du sous-répertoire work est le même que lors de l'exécution précédente.
 Nextflow vous indique littéralement l'exécution précédente et dit « J'ai déjà fait ça là-bas. »
 
 !!! Tip "Astuce"
 
-    Lorsque vous ré-exécutez un pipeline avec `resume`, Nextflow n'écrase aucun fichier écrit dans un répertoire `publishDir` par un appel de processus qui a été précédemment exécuté avec succès.
+    Lorsque vous ré-exécutez un pipeline avec `resume`, Nextflow n'écrase aucun fichier écrit dans un répertoire `publishDir` par un appel de **process** qui a été précédemment exécuté avec succès.
 
 ### 3.2. Inspecter le log des exécutions passées
 
@@ -397,7 +397,7 @@ Vous pouvez utiliser le log Nextflow pour rechercher une exécution en fonction 
 !!! Warning "Avertissement"
 
     La suppression des sous-répertoires work des exécutions passées les supprime du cache de Nextflow et supprime toutes les sorties qui étaient stockées dans ces répertoires.
-    Cela signifie que cela brise la capacité de Nextflow à reprendre l'exécution sans ré-exécuter les processus correspondants.
+    Cela signifie que cela brise la capacité de Nextflow à reprendre l'exécution sans ré-exécuter les **process** correspondants.
 
     Vous êtes responsable de la sauvegarde de toutes les sorties qui vous intéressent ou sur lesquelles vous prévoyez de vous appuyer ! Si vous utilisez la directive `publishDir` à cette fin, assurez-vous d'utiliser le mode `copy`, pas le mode `symlink`.
 

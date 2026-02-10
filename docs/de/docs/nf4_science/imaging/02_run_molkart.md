@@ -143,9 +143,9 @@ Sieh dir Zeile 5 an - du wirst sehen:
 container 'ghcr.io/schapirolabor/molkart-local:v0.0.4'
 ```
 
-Diese Zeile teilt Nextflow mit: "Um diesen Prozess auszuführen, verwende das Docker-Image `ghcr.io/schapirolabor/molkart-local:v0.0.4`, das alle erforderliche Software enthält."
+Diese Zeile teilt Nextflow mit: "Um diesen **process** auszuführen, verwende das Docker-Image `ghcr.io/schapirolabor/molkart-local:v0.0.4`, das alle erforderliche Software enthält."
 
-Jeder Prozess deklariert, welches Container-Image seine benötigten Tools bereitstellt.
+Jeder **process** deklariert, welches Container-Image seine benötigten Tools bereitstellt.
 Nextflow verwendet diese Container jedoch nur, wenn du es ihm sagst!
 
 **Die Lösung: Docker in der Konfiguration aktivieren**
@@ -312,7 +312,7 @@ Jede Prozesszeile zeigt:
 
 Du weißt, wie man eine nf-core-Pipeline mit Testdaten startet und ihre Ausführungsausgabe interpretiert.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wo du die Ergebnisse findest und wie du sie interpretierst.
 
@@ -372,7 +372,7 @@ Der Bericht enthält:
 - Segmentierungsqualitätsmetriken
 - Anzahl erkannter Zellen und Spots
 
-!!! Tip
+!!! Tip "Tipp"
 
     MultiQC-Berichte sind typischerweise in allen nf-core-Pipelines enthalten.
     Sie bieten immer einen Überblick über die Pipeline-Ausführung und Datenqualität.
@@ -426,7 +426,7 @@ Dies zeigt:
 - CPU- und Speichernutzung
 - Welche Aufgaben gecacht wurden vs. ausgeführt wurden
 
-!!! Tip
+!!! Tip "Tipp"
 
     Diese Berichte sind unglaublich nützlich für die Optimierung der Ressourcenzuteilung und die Fehlerbehebung bei Leistungsproblemen.
 
@@ -434,7 +434,7 @@ Dies zeigt:
 
 Du weißt, wie man Pipeline-Ausgaben findet, Qualitätskontrollberichte untersucht und auf Ausführungsmetriken zugreift.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne über das Work-Verzeichnis und wie Nextflow Zwischendateien verwaltet.
 
@@ -477,7 +477,7 @@ Der Hauptunterschied zu Hello World:
 - Ausgabedateien können ziemlich groß sein (Segmentierungsmasken, verarbeitete Bilder)
 - Mehrere Eingabe- und Ausgabedateien pro Aufgabe
 
-!!! Tip
+!!! Tip "Tipp"
 
     Wenn ein Prozess fehlschlägt, kannst du zu seinem Work-Verzeichnis navigieren, `.command.err` für Fehlermeldungen untersuchen und sogar `.command.sh` manuell erneut ausführen, um das Problem zu debuggen.
 
@@ -492,7 +492,7 @@ Für nf-core-Pipelines mit großen Zwischendateien ist es jedoch besonders wicht
 
 Du verstehst, wie nf-core-Pipelines ihre Work-Verzeichnisse organisieren und wie man einzelne Aufgaben zum Debuggen inspiziert.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne über den Nextflow-Cache und wie man fehlgeschlagene Pipeline-Läufe fortsetzt.
 
@@ -551,7 +551,7 @@ Resume ist besonders wertvoll, wenn:
 - Deine Netzwerkverbindung während des Datendownloads abbricht
 - Du zusätzliche Ausgaben hinzufügen möchtest, ohne Berechnungen zu wiederholen
 
-!!! Warning
+!!! Warning "Warnung"
 
     Resume funktioniert nur, wenn du die Eingabedaten, den Pipeline-Code oder die Parameter nicht geändert hast.
     Wenn du eines davon änderst, wird Nextflow betroffene Aufgaben korrekt erneut ausführen.
@@ -560,6 +560,6 @@ Resume ist besonders wertvoll, wenn:
 
 Du weißt, wie man `-resume` verwendet, um Pipelines effizient erneut auszuführen, ohne erfolgreiche Aufgaben zu wiederholen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Jetzt, da du nf-core/molkart mit Testdaten ausführen kannst, bist du bereit zu lernen, wie man es für deine eigenen Datensätze konfiguriert.

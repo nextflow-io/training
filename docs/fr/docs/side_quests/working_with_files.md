@@ -218,7 +218,7 @@ Le chemin du fichier sera maintenant absolu, comme dans `/workspaces/training/si
 Notez également que la classe de l'objet Path est `sun.nio.fs.UnixPath` : c'est la façon dont Nextflow représente les fichiers locaux.
 Comme nous le verrons plus tard, les fichiers distants auront des noms de classe différents (comme `nextflow.file.http.XPath` pour les fichiers HTTP), mais ils fonctionnent tous exactement de la même manière et peuvent être utilisés de manière identique dans vos flux de travail.
 
-!!! tip
+!!! tip "Astuce"
 
     **La différence clé :**
 
@@ -597,7 +597,7 @@ Ainsi, le processus a essayé d'utiliser la chaîne relative, `data/patientA_rep
 
 Pris ensemble, ces deux exemples vous montrent à quel point il est important d'indiquer à Nextflow si une entrée doit être gérée comme un fichier.
 
-!!! note
+!!! note "Note"
 
     Assurez-vous de revenir en arrière et de corriger les deux erreurs intentionnelles avant de continuer à la section suivante.
 
@@ -637,7 +637,7 @@ Par exemple, vous pouvez développer avec un petit ensemble de tests local avant
 
 Testons cela en remplaçant le chemin local que nous fournissons à notre flux de travail par un chemin HTTPS pointant vers une copie des mêmes données stockées dans Github.
 
-!!! warning
+!!! warning "Avertissement"
 
     Cela ne fonctionnera que si vous avez une connexion Internet active.
 
@@ -727,7 +727,7 @@ Donc, si vous réexécutez sur le même fichier et que vous n'avez pas supprimé
 
 Cela montre à quel point il est facile de basculer entre les données locales et distantes en utilisant Nextflow, ce qui est une fonctionnalité clé de Nextflow.
 
-!!! note
+!!! note "Note"
 
     La seule exception importante à ce principe est que vous ne pouvez pas utiliser de motifs glob ou de chemins de répertoires avec HTTPS car HTTPS ne peut pas lister plusieurs fichiers, vous devez donc spécifier des URL de fichiers exactes.
     Cependant, d'autres protocoles de stockage tels que le stockage blob (`s3://`, `az://`, `gs://`) peuvent utiliser à la fois des globs et des chemins de répertoires.
@@ -943,7 +943,7 @@ Il y a plusieurs façons de charger plus de fichiers dans le canal.
 Ici, nous allons vous montrer comment utiliser des motifs glob, qui sont un moyen pratique de faire correspondre et récupérer des noms de fichiers et de répertoires basés sur des caractères génériques.
 Le processus de correspondance de ces motifs est appelé "globbing" ou "expansion de nom de fichier".
 
-!!! note
+!!! note "Note"
 
     Comme indiqué précédemment, Nextflow prend en charge le globbing pour gérer les fichiers d'entrée et de sortie dans la majorité des cas, sauf avec les chemins de fichiers HTTPS car HTTPS ne peut pas lister plusieurs fichiers.
 
@@ -1048,7 +1048,7 @@ Nous allons modifier notre flux de travail pour récupérer ces informations en 
 2. Séparer les métadonnées en utilisant une méthode appelée `tokenize()`
 3. Utiliser une map pour organiser les métadonnées
 
-!!! warning
+!!! warning "Avertissement"
 
     Vous ne devriez jamais encoder d'informations sensibles dans les noms de fichiers, telles que les noms de patients ou d'autres caractéristiques d'identification, car cela peut compromettre la confidentialité des patients ou d'autres restrictions de sécurité pertinentes.
 
@@ -1596,13 +1596,13 @@ process ANALYZE_READS {
 }
 ```
 
-!!! note
+!!! note "Note"
 
     Les directives `tag` et `publishDir` utilisent la syntaxe de closure (`{ ... }`) au lieu de l'interpolation de chaîne (`"${...}"`).
     C'est parce que ces directives font référence à des variables d'entrée (`meta`) qui ne sont pas disponibles avant l'exécution.
     La syntaxe de closure reporte l'évaluation jusqu'à ce que le processus s'exécute réellement.
 
-!!! note
+!!! note "Note"
 
     Nous appelons notre map de métadonnées `meta` par convention.
     Pour une plongée plus profonde dans les meta maps, consultez la quête secondaire [Métadonnées et meta maps](./metadata.md).

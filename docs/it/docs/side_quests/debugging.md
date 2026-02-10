@@ -209,7 +209,7 @@ Sostituire il commento con la parentesi graffa di chiusura mancante:
         """
         echo "Processing ${sample_name}" > ${sample_name}_output.txt
         """
-    }  // Add the missing closing brace
+    }  // Aggiunge la parentesi graffa di chiusura mancante
 
     workflow {
 
@@ -306,7 +306,7 @@ L'errore indica una "Invalid process definition" e mostra il contesto intorno al
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    inputs:  // ERROR: Should be 'input' not 'inputs'
+    inputs:  // ERRORE: Dovrebbe essere 'input' non 'inputs'
     val sample_name
 
     output:
@@ -342,7 +342,7 @@ Sostituire la parola chiave errata con quella corretta facendo riferimento [alla
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        input:  // Fixed: Changed 'inputs' to 'input'
+        input:  // Corretto: Cambiato 'inputs' in 'input'
         val sample_name
 
         output:
@@ -370,7 +370,7 @@ Sostituire la parola chiave errata con quella corretta facendo riferimento [alla
     #!/usr/bin/env nextflow
 
     process PROCESS_FILES {
-        inputs:  // ERROR: Should be 'input' not 'inputs'
+        inputs:  // ERRORE: Dovrebbe essere 'input' non 'inputs'
         val sample_name
 
         output:
@@ -454,13 +454,13 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Definisce variabili in codice Groovy prima dello script
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
     """
     echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+    echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERRORE: undefined_var non definita
     """
 }
 
@@ -489,13 +489,13 @@ Se ricevete un errore 'No such variable', potete correggerlo definendo la variab
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Definisce variabili in codice Groovy prima dello script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        """  // Removed the line with undefined_var
+        """  // Rimossa la riga con undefined_var
     }
 
     workflow {
@@ -517,13 +517,13 @@ Se ricevete un errore 'No such variable', potete correggerlo definendo la variab
         path "${sample_name}_output.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Definisce variabili in codice Groovy prima dello script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
         """
         echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+        echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERRORE: undefined_var non definita
         """
     }
 
@@ -595,7 +595,7 @@ process PROCESS_FILES {
     script:
     """
     prefix="${sample_name}_output"
-    echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+    echo "Processing ${sample_name}" > ${prefix}.txt  # ERRORE: ${prefix} è sintassi Groovy, non Bash
     """
 }
 ```
@@ -621,7 +621,7 @@ Se volete usare una variabile Bash, dovete escludere il simbolo del dollaro in q
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > \${prefix}.txt  # Fixed: Escaped the dollar sign
+        echo "Processing ${sample_name}" > \${prefix}.txt  # Corretto: Escaped il simbolo del dollaro
         """
     }
 
@@ -646,7 +646,7 @@ Se volete usare una variabile Bash, dovete escludere il simbolo del dollaro in q
         script:
         """
         prefix="${sample_name}_output"
-        echo "Processing ${sample_name}" > ${prefix}.txt  # ERROR: ${prefix} is Groovy syntax, not Bash
+        echo "Processing ${sample_name}" > ${prefix}.txt  # ERRORE: ${prefix} è sintassi Groovy, non Bash
         """
     }
     ```
@@ -722,7 +722,7 @@ Esaminiamo `badpractice_syntax.nf` per vedere cosa sta causando l'errore:
 ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
-input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERRORE: Canale definito fuori dal workflow
 
 process PROCESS_FILES {
     input:
@@ -732,7 +732,7 @@ process PROCESS_FILES {
     path "${sample_name}_processed.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Definisce variabili in codice Groovy prima dello script
     def output_prefix = "${sample_name}_processed"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -767,7 +767,7 @@ Spostare la definizione del canale all'interno del blocco workflow:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Definisce variabili in codice Groovy prima dello script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -777,7 +777,7 @@ Spostare la definizione del canale all'interno del blocco workflow:
     }
 
     workflow {
-        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Moved inside workflow block
+        input_ch = channel.of('sample1', 'sample2', 'sample3')  // Spostato all'interno del blocco workflow
         PROCESS_FILES(input_ch)
     }
     ```
@@ -787,7 +787,7 @@ Spostare la definizione del canale all'interno del blocco workflow:
     ```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
     #!/usr/bin/env nextflow
 
-    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERROR: Channel defined outside workflow
+    input_ch = channel.of('sample1', 'sample2', 'sample3')  // ERRORE: Canale definito fuori dal workflow
 
     process PROCESS_FILES {
         input:
@@ -797,7 +797,7 @@ Spostare la definizione del canale all'interno del blocco workflow:
         path "${sample_name}_processed.txt"
 
         script:
-        // Define variables in Groovy code before the script
+        // Definisce variabili in codice Groovy prima dello script
         def output_prefix = "${sample_name}_processed"
         def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -836,7 +836,7 @@ Mantenete i vostri canali di input definiti all'interno del blocco workflow, e i
 
 Potete identificare e correggere sistematicamente gli errori di sintassi usando i messaggi di errore di Nextflow e gli indicatori visivi dell'IDE. Gli errori di sintassi comuni includono parentesi graffe mancanti, parole chiave di processo errate, variabili non definite e uso improprio di variabili Bash vs. Nextflow. L'estensione VSCode aiuta a catturare molti di questi prima del runtime. Con queste competenze di debug della sintassi nel vostro toolkit, sarete in grado di risolvere rapidamente gli errori di sintassi più comuni di Nextflow e passare ad affrontare problemi di runtime più complessi.
 
-### Prossimi passi?
+### Cosa c'è dopo?
 
 Imparate a debuggare errori di struttura dei canali più complessi che si verificano anche quando la sintassi è corretta.
 
@@ -851,7 +851,7 @@ Gli errori di struttura dei canali sono più sottili degli errori di sintassi pe
     Durante questa sezione, ricordate che potete usare l'operatore `.view()` per ispezionare il contenuto del canale in qualsiasi punto del vostro workflow. Questo è uno degli strumenti di debug più potenti per capire i problemi di struttura dei canali. Esploreremo questa tecnica in dettaglio nella sezione 2.4, ma sentitevi liberi di usarla mentre lavorate attraverso gli esempi.
 
     ```groovy
-    my_channel.view()  // Shows what's flowing through the channel
+    my_channel.view()  // Mostra cosa sta fluendo attraverso il canale
     ```
 
 ### 2.1. Numero Errato di Canali di Input
@@ -889,7 +889,7 @@ Il messaggio di errore afferma chiaramente che la chiamata si aspettava 1 argome
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Process expects only 1 input
+        val sample_name  // Il processo si aspetta solo 1 input
 
     output:
         path "${sample_name}_output.txt"
@@ -902,11 +902,11 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Create two separate channels
+    // Crea due canali separati
     samples_ch = channel.of('sample1', 'sample2', 'sample3')
     files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-    // ERROR: Passing 2 channels but process expects only 1
+    // ERRORE: Passaggio di 2 canali ma il processo ne aspetta solo 1
     PROCESS_FILES(samples_ch, files_ch)
 }
 ```
@@ -926,7 +926,7 @@ Per questo esempio specifico, il processo si aspetta un singolo canale e non ric
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Il processo si aspetta solo 1 input
 
         output:
             path "${sample_name}_output.txt"
@@ -939,11 +939,11 @@ Per questo esempio specifico, il processo si aspetta un singolo canale e non ric
 
     workflow {
 
-        // Create two separate channels
+        // Crea due canali separati
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // Fixed: Pass only the channel the process expects
+        // Corretto: Passa solo il canale che il processo si aspetta
         PROCESS_FILES(samples_ch)
     }
     ```
@@ -955,7 +955,7 @@ Per questo esempio specifico, il processo si aspetta un singolo canale e non ric
 
     process PROCESS_FILES {
         input:
-            val sample_name  // Process expects only 1 input
+            val sample_name  // Il processo si aspetta solo 1 input
 
         output:
             path "${sample_name}_output.txt"
@@ -968,11 +968,11 @@ Per questo esempio specifico, il processo si aspetta un singolo canale e non ric
 
     workflow {
 
-        // Create two separate channels
+        // Crea due canali separati
         samples_ch = channel.of('sample1', 'sample2', 'sample3')
         files_ch = channel.of('file1.txt', 'file2.txt', 'file3.txt')
 
-        // ERROR: Passing 2 channels but process expects only 1
+        // ERRORE: Passaggio di 2 canali ma il processo ne aspetta solo 1
         PROCESS_FILES(samples_ch, files_ch)
     }
     ```
@@ -1008,7 +1008,7 @@ nextflow run exhausted.nf
 
 ??? success "Output del comando"
 
-```console title="Exhausted channel output"
+```console title="Output canale esaurito"
  N E X T F L O W   ~  version 25.10.2
 
 Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
@@ -1035,7 +1035,7 @@ process PROCESS_FILES {
     path "${output_prefix}.txt"
 
     script:
-    // Define variables in Groovy code before the script
+    // Definisce variabili in codice Groovy prima dello script
     output_prefix = "${reference}_${sample_name}"
     def timestamp = new Date().format("yyyy-MM-dd")
 
@@ -1067,7 +1067,7 @@ Ci sono un paio di modi per affrontare questo a seconda di quanti file sono coin
 
 ```groovy title="exhausted.nf (corretto - Opzione 1a)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.value('baseline_reference')  // Value channel can be reused
+    reference_ch = channel.value('baseline_reference')  // Il canale value può essere riutilizzato
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1078,7 +1078,7 @@ workflow {
 
 ```groovy title="exhausted.nf (corretto - Opzione 1b)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').first()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').first()  // Converte in canale value
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1089,7 +1089,7 @@ workflow {
 
 ```groovy title="exhausted.nf (corretto - Opzione 1c)" hl_lines="2" linenums="21"
 workflow {
-    reference_ch = channel.of('baseline_reference').collect()  // Convert to value channel
+    reference_ch = channel.of('baseline_reference').collect()  // Converte in canale value
     input_ch = channel.of('sample1', 'sample2', 'sample3')
 
     PROCESS_FILES(reference_ch, input_ch)
@@ -1102,7 +1102,7 @@ workflow {
 workflow {
     reference_ch = channel.of('baseline_reference','other_reference')
     input_ch = channel.of('sample1', 'sample2', 'sample3')
-    combined_ch = reference_ch.combine(input_ch)  // Creates cartesian product
+    combined_ch = reference_ch.combine(input_ch)  // Crea prodotto cartesiano
 
     PROCESS_FILES(combined_ch)
 }
@@ -1194,7 +1194,7 @@ Le parentesi quadre nel messaggio di errore forniscono l'indizio qui - il proces
 
 process PROCESS_FILES {
     input:
-        val sample_name  // Expects single value, gets tuple
+        val sample_name  // Si aspetta un singolo valore, riceve una tupla
 
     output:
         path "${sample_name}_output.txt"
@@ -1207,7 +1207,7 @@ process PROCESS_FILES {
 
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Il canale emette tuple, ma il processo si aspetta singoli valori
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
@@ -1232,7 +1232,7 @@ Per correggere questo, se il processo richiede entrambi gli input potremmo regol
 
         process PROCESS_FILES {
             input:
-                tuple val(sample_name), val(file_name)  // Fixed: Accept tuple
+                tuple val(sample_name), val(file_name)  // Corretto: Accetta tupla
 
             output:
                 path "${sample_name}_output.txt"
@@ -1245,7 +1245,7 @@ Per correggere questo, se il processo richiede entrambi gli input potremmo regol
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Il canale emette tuple, ma il processo si aspetta singoli valori
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1262,7 +1262,7 @@ Per correggere questo, se il processo richiede entrambi gli input potremmo regol
 
         process PROCESS_FILES {
             input:
-                val sample_name  // Expects single value, gets tuple
+                val sample_name  // Si aspetta un singolo valore, riceve una tupla
 
             output:
                 path "${sample_name}_output.txt"
@@ -1275,7 +1275,7 @@ Per correggere questo, se il processo richiede entrambi gli input potremmo regol
 
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Il canale emette tuple, ma il processo si aspetta singoli valori
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1292,13 +1292,13 @@ Per correggere questo, se il processo richiede entrambi gli input potremmo regol
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Il canale emette tuple, ma il processo si aspetta singoli valori
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
               ['sample3', 'file3.txt']
             )
-            PROCESS_FILES(input_ch.map { it[0] })  // Fixed: Extract first element
+            PROCESS_FILES(input_ch.map { it[0] })  // Corretto: Estrae il primo elemento
         }
         ```
 
@@ -1307,7 +1307,7 @@ Per correggere questo, se il processo richiede entrambi gli input potremmo regol
         ```groovy title="bad_channel_shape.nf" hl_lines="9" linenums="16"
         workflow {
 
-            // Channel emits tuples, but process expects single values
+            // Il canale emette tuple, ma il processo si aspetta singoli valori
             input_ch = channel.of(
               ['sample1', 'file1.txt'],
               ['sample2', 'file2.txt'],
@@ -1374,15 +1374,15 @@ Esaminiamo `bad_channel_shape_viewed.nf` per vedere come viene usato `.view()`:
 ```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Il canale emette tuple, ma il processo si aspetta singoli valori
     input_ch = channel.of(
       ['sample1', 'file1.txt'],
       ['sample2', 'file2.txt'],
       ['sample3', 'file3.txt']
     )
-    .view { "Channel content: $it" }  // Debug: Show original channel content
-    .map { tuple -> tuple[0] }        // Transform: Extract first element
-    .view { "After mapping: $it" }    // Debug: Show transformed channel content
+    .view { "Channel content: $it" }  // Debug: Mostra il contenuto originale del canale
+    .map { tuple -> tuple[0] }        // Trasforma: Estrae il primo elemento
+    .view { "After mapping: $it" }    // Debug: Mostra il contenuto trasformato del canale
 
     PROCESS_FILES(input_ch)
 }
@@ -1395,7 +1395,7 @@ Per evitarvi di usare eccessivamente operazioni `.view()` in futuro per capire i
 ```groovy title="bad_channel_shape_viewed.nf (con commenti)" linenums="16" hl_lines="8 9"
 workflow {
 
-    // Channel emits tuples, but process expects single values
+    // Il canale emette tuple, ma il processo si aspetta singoli valori
     input_ch = channel.of(
             ['sample1', 'file1.txt'],
             ['sample2', 'file2.txt'],
@@ -1436,7 +1436,7 @@ nextflow run bad_channel_shape_viewed.nf
 
 Molti errori di struttura dei canali possono essere creati con sintassi Nextflow valida. Potete debuggare gli errori di struttura dei canali comprendendo il flusso dei dati, usando operatori `.view()` per l'ispezione e riconoscendo pattern di errore come parentesi quadre che indicano strutture di tuple inaspettate.
 
-### Prossimi passi?
+### Cosa c'è dopo?
 
 Imparate sugli errori creati dalle definizioni dei processi.
 
@@ -1500,11 +1500,11 @@ process PROCESS_FILES {
     val sample_name
 
     output:
-    path "${sample_name}.txt"  // Expects: sample3.txt
+    path "${sample_name}.txt"  // Si aspetta: sample3.txt
 
     script:
     """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Crea: sample3_output.txt
     """
 }
 ```
@@ -1532,7 +1532,7 @@ Correggete la mancata corrispondenza rendendo il nome del file di output coerent
         val sample_name
 
         output:
-        path "${sample_name}_output.txt"  // Fixed: Match the script output
+        path "${sample_name}_output.txt"  // Corretto: Corrisponde all'output dello script
 
         script:
         """
@@ -1549,11 +1549,11 @@ Correggete la mancata corrispondenza rendendo il nome del file di output coerent
         val sample_name
 
         output:
-        path "${sample_name}.txt"  // Expects: sample3.txt
+        path "${sample_name}.txt"  // Si aspetta: sample3.txt
 
         script:
         """
-        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Creates: sample3_output.txt
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt  // Crea: sample3_output.txt
         """
     }
     ```
@@ -1662,7 +1662,7 @@ nextflow run missing_software.nf -profile docker
     [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-!!! note
+!!! note "Nota"
 
     Per saperne di più su come Nextflow usa i container, vedere [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
 
@@ -1720,7 +1720,7 @@ Esaminiamo `bad_resources.nf`:
 ```groovy title="bad_resources.nf" linenums="3" hl_lines="3"
 process PROCESS_FILES {
 
-    time '1 ms'  // ERROR: Unrealistic time limit
+    time '1 ms'  // ERRORE: Limite di tempo irrealistico
 
     input:
     val sample_name
@@ -1730,7 +1730,7 @@ process PROCESS_FILES {
 
     script:
     """
-    sleep 1  // Takes 1 second, but time limit is 1ms
+    sleep 1  // Impiega 1 secondo, ma il limite di tempo è 1ms
     cowpy ${sample_name} > ${sample_name}_output.txt
     """
 }
@@ -1747,7 +1747,7 @@ Aumentare il limite di tempo a un valore realistico:
     ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
     process PROCESS_FILES {
 
-        time '100 s'  // Fixed: Realistic time limit
+        time '100 s'  // Corretto: Limite di tempo realistico
 
         input:
         val sample_name
@@ -1768,7 +1768,7 @@ Aumentare il limite di tempo a un valore realistico:
     ```groovy title="bad_resources.nf" hl_lines="3" linenums="3"
     process PROCESS_FILES {
 
-        time '1 ms'  // ERROR: Unrealistic time limit
+        time '1 ms'  // ERRORE: Limite di tempo irrealistico
 
         input:
         val sample_name
@@ -1778,7 +1778,7 @@ Aumentare il limite di tempo a un valore realistico:
 
         script:
         """
-        sleep 1  // Takes 1 second, but time limit is 1ms
+        sleep 1  // Impiega 1 secondo, ma il limite di tempo è 1ms
         cowpy ${sample_name} > ${sample_name}_output.txt
         """
     }
@@ -1955,7 +1955,7 @@ sample3_output.txt
 
 Il debug dei processi richiede l'esame delle directory di lavoro per capire cosa è andato storto. I file chiave includono `.command.sh` (lo script eseguito), `.command.err` (messaggi di errore) e `.command.out` (output standard). Codici di uscita come 127 (comando non trovato) e 137 (processo ucciso) forniscono indizi diagnostici immediati sul tipo di fallimento.
 
-### Prossimi passi?
+### Cosa c'è dopo?
 
 Imparate sugli strumenti di debug integrati di Nextflow e sugli approcci sistematici alla risoluzione dei problemi.
 
@@ -2005,7 +2005,7 @@ Esaminiamo `bad_channel_shape_viewed_debug.nf` per vedere come funziona la diret
 
 ```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
 process PROCESS_FILES {
-    debug true  // Enable real-time output
+    debug true  // Abilita output in tempo reale
 
     input:
     val sample_name
@@ -2031,7 +2031,7 @@ A volte volete catturare i problemi prima che qualsiasi processo venga eseguito.
 
 La modalità preview vi permette di testare la logica del workflow senza eseguire comandi. Questo può essere abbastanza utile per controllare rapidamente la struttura del vostro workflow e assicurarsi che i processi siano connessi correttamente senza eseguire nessun comando effettivo.
 
-!!! note
+!!! note "Nota"
 
     Se avete corretto `bad_syntax.nf` prima, reintroducete l'errore di sintassi rimuovendo la parentesi graffa di chiusura dopo il blocco script prima di eseguire questo comando.
 
@@ -2215,7 +2215,7 @@ profiles {
             debug = true
             cleanup = false
 
-            // Conservative resources for debugging
+            // Risorse conservative per il debug
             maxForks = 1
             memory = '2.GB'
             cpus = 1
@@ -2236,7 +2236,7 @@ Questo profilo abilita l'output in tempo reale, preserva le directory di lavoro 
 
 Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il workflow `buggy_workflow.nf` contiene diversi errori comuni che rappresentano i tipi di problemi che incontrerete nello sviluppo reale.
 
-!!! exercise
+!!! exercise "Esercizio"
 
     Usate l'approccio sistematico al debug per identificare e correggere tutti gli errori in `buggy_workflow.nf`. Questo workflow tenta di elaborare dati campione da un file CSV ma contiene più bug intenzionali che rappresentano scenari comuni di debug.
 
@@ -2299,7 +2299,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
     nextflow run buggy_workflow.nf -resume
     ```
 
-    ??? solution
+    ??? solution "Soluzione"
         Il `buggy_workflow.nf` contiene 9 o 10 errori distinti (a seconda di come contate) che coprono tutte le principali categorie di debug. Ecco un'analisi sistematica di ogni errore e come correggerlo
 
         Iniziamo con gli errori di sintassi:
@@ -2307,7 +2307,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
         **Errore 1: Errore di Sintassi - Virgola Finale**
         ```groovy linenums="21"
         output:
-            path "${sample_id}_result.txt",  // ERROR: Trailing comma
+            path "${sample_id}_result.txt",  // ERRORE: Virgola finale
         ```
         **Fix:** Rimuovere la virgola finale
         ```groovy linenums="21"
@@ -2322,7 +2322,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
         echo "Processing: ${sample}"
         cat ${input_file} > ${sample}_result.txt
         """
-        // ERROR: Missing closing brace for processFiles process
+        // ERRORE: Parentesi graffa di chiusura mancante per il processo processFiles
         ```
         **Fix:** Aggiungere la parentesi graffa di chiusura mancante
         ```groovy linenums="29"
@@ -2330,13 +2330,13 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
         echo "Processing: ${sample_id}"
         cat ${input_file} > ${sample_id}_result.txt
         """
-        }  // Add missing closing brace
+        }  // Aggiunge la parentesi graffa di chiusura mancante
         ```
 
         **Errore 3: Errore nel Nome della Variabile**
         ```groovy linenums="26"
-        echo "Processing: ${sample}"     // ERROR: should be sample_id
-        cat ${input_file} > ${sample}_result.txt  // ERROR: should be sample_id
+        echo "Processing: ${sample}"     // ERRORE: dovrebbe essere sample_id
+        cat ${input_file} > ${sample}_result.txt  // ERRORE: dovrebbe essere sample_id
         ```
         **Fix:** Usare il nome corretto della variabile di input
         ```groovy linenums="26"
@@ -2346,7 +2346,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
 
         **Errore 4: Errore di Variabile Non Definita**
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(sample_ids)  // ERROR: sample_ids undefined
+        heavy_ch = heavyProcess(sample_ids)  // ERRORE: sample_ids non definito
         ```
         **Fix:** Usare il canale corretto ed estrarre i sample ID
         ```groovy linenums="87"
@@ -2357,7 +2357,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
 
         **Errore 5: Errore di Struttura del Canale - Output Map Errato**
         ```groovy linenums="83"
-        .map { row -> row.sample_id }  // ERROR: processFiles expects tuple
+        .map { row -> row.sample_id }  // ERRORE: processFiles si aspetta una tupla
         ```
         **Fix:** Restituire la struttura tuple che processFiles si aspetta
         ```groovy linenums="83"
@@ -2368,7 +2368,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
 
         **Errore 6: Struttura del canale errata per heavyProcess**
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch)  // ERROR: input_ch now has 2 elements per emission- heavyProcess only needs 1 (the first)
+        heavy_ch = heavyProcess(input_ch)  // ERRORE: input_ch ora ha 2 elementi per emissione - heavyProcess ne ha bisogno solo di 1 (il primo)
         ```
         **Fix:** Usare il canale corretto ed estrarre i sample ID
         ```groovy linenums="87"
@@ -2379,7 +2379,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
 
         **Errore 7: Errore di Escape della Variabile Bash**
         ```groovy linenums="48"
-        echo "Heavy computation $i for ${sample_id}"  // ERROR: $i not escaped
+        echo "Heavy computation $i for ${sample_id}"  // ERRORE: $i non escaped
         ```
         **Fix:** Fare l'escape della variabile bash
         ```groovy linenums="48"
@@ -2390,7 +2390,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
 
         **Errore 8: Errore di Configurazione delle Risorse**
         ```groovy linenums="36"
-        time '1 ms'  // ERROR: Unrealistic time limit
+        time '1 ms'  // ERRORE: Limite di tempo irrealistico
         ```
         **Fix:** Aumentare a un limite di tempo realistico
         ```groovy linenums="36"
@@ -2401,7 +2401,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
 
         **Errore 9: Mancata Corrispondenza del Nome del File di Output**
         ```groovy linenums="49"
-        done > ${sample_id}.txt  // ERROR: Wrong filename, should match output declaration
+        done > ${sample_id}.txt  // ERRORE: Nome file errato, dovrebbe corrispondere alla dichiarazione di output
         ```
         **Fix:** Corrispondere alla dichiarazione di output
         ```groovy linenums="49"
@@ -2412,7 +2412,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
 
         **Errore 10: Mancata Corrispondenza del Nome del File di Output**
         ```groovy linenums="88"
-        file_ch = channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
+        file_ch = channel.fromPath("*.txt") // Errore: tentativo di prendere input dalla pwd invece che da un processo
         handleFiles(file_ch)
         ```
         **Fix:** Prendere l'output dal processo precedente
@@ -2427,18 +2427,18 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
         #!/usr/bin/env nextflow
 
         /*
-        * Buggy workflow for debugging exercises
-        * This workflow contains several intentional bugs for learning purposes
+        * Workflow con bug per esercizi di debug
+        * Questo workflow contiene diversi bug intenzionali per scopi di apprendimento
         */
 
         params{
-            // Parameters with missing validation
+            // Parametri con validazione mancante
             input: Path = 'data/sample_data.csv'
             output: String = 'results'
         }
 
         /*
-        * Process with input/output mismatch
+        * Processo con mancata corrispondenza input/output
         */
         process processFiles {
             publishDir "${params.output}/processed", mode: 'copy'
@@ -2457,7 +2457,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
         }
 
         /*
-        * Process with resource issues
+        * Processo con problemi di risorse
         */
         process heavyProcess {
             publishDir "${params.output}/heavy", mode: 'copy'
@@ -2472,7 +2472,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
 
             script:
             """
-            # Simulate heavy computation
+            # Simula computazione pesante
             for i in {1..1000000}; do
                 echo "Heavy computation \$i for ${sample_id}"
             done > ${sample_id}_heavy.txt
@@ -2480,7 +2480,7 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
         }
 
         /*
-        * Process with file handling issues
+        * Processo con problemi di gestione file
         */
         process handleFiles {
             publishDir "${params.output}/files", mode: 'copy'
@@ -2500,11 +2500,11 @@ Ora è il momento di mettere in pratica l'approccio sistematico al debug. Il wor
         }
 
         /*
-        * Main workflow with channel issues
+        * Workflow principale con problemi di canali
         */
         workflow {
 
-            // Channel with incorrect usage
+            // Canale con uso errato
             input_ch = channel
                 .fromPath(params.input)
                 .splitCsv(header: true)
@@ -2642,6 +2642,6 @@ Per i workflow in produzione, considerate:
 
 ---
 
-## Prossimi passi?
+## Cosa c'è dopo?
 
 Tornate al [menu delle Missioni Secondarie](./index.md) o cliccate il pulsante in basso a destra della pagina per passare al prossimo argomento nella lista.

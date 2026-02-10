@@ -165,7 +165,7 @@ params {
 
 तो सिंटैक्स उदाहरण बन जाता है:
 
-```groovy title="MULTIQC कॉल में .mix() लागू करना"
+```groovy title="Applying .mix() in the MULTIQC call"
         FASTQC.out.zip.mix(
         FASTQC.out.html,
         TRIM_GALORE.out.trimming_reports,
@@ -180,7 +180,7 @@ params {
 
 यह हमें निम्नलिखित देता है:
 
-```groovy title="पूर्ण MULTIQC कॉल" linenums="33"
+```groovy title="The completed MULTIQC call" linenums="33"
     // व्यापक QC रिपोर्ट जनरेशन
     MULTIQC(
         FASTQC.out.zip.mix(
@@ -202,7 +202,7 @@ workflow {
         .splitCsv(header:true)
         .map { row -> file(row.fastq_path) }
 
-    /// प्रारंभिक गुणवत्ता नियंत्रण
+    /// Initial quality control
     FASTQC(read_ch)
 
     // एडॉप्टर ट्रिमिंग और पोस्ट-ट्रिमिंग QC
@@ -252,7 +252,7 @@ nextflow run rnaseq.nf -resume
 tree -L 2 results/multiqc
 ```
 
-```console title="आउटपुट"
+```console title="Output"
 results/multiqc
 ├── all_single-end_data
 │   ├── cutadapt_filtered_reads_plot.txt
@@ -513,7 +513,7 @@ nextflow run rnaseq_pe.nf
 
 ---
 
-### मुख्य बातें
+### सारांश
 
 आप जानते हैं कि एकल-नमूना workflow को कई नमूनों की प्रोसेसिंग को समानांतरित करने के लिए कैसे अनुकूलित करें, एक व्यापक QC रिपोर्ट उत्पन्न करें और यदि आवश्यक हो तो युग्मित-अंत रीड डेटा का उपयोग करने के लिए workflow को अनुकूलित करें।
 

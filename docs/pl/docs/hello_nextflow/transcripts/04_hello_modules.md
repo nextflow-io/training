@@ -1,6 +1,6 @@
 # Część 4: Hello Modules - transkrypcja wideo
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez sztuczną inteligencję - [dowiedz się więcej i zaproponuj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -24,7 +24,7 @@ Moduły Nextflow'a pozwalają nam wydzielić procesy z głównego skryptu, a nas
 
 Ten mały diagram na głównej stronie dokumentacji ładnie ilustruje tę koncepcję. Zamiast jednego ogromnego skryptu będziemy dołączać te oddzielne pliki modułów z różnych skryptów modułowych, a wszystko zostanie włączone do workflow'a, ale nadal będzie działać dokładnie w ten sam sposób.
 
-Przejdźmy więc do GitHub Codespaces i przyjrzyjmy się temu bliżej. Jak poprzednio, trochę posprzątałem moje środowisko pracy. Usunąłem stare katalogi Nextflow'a, katalog work i tak dalej. Ale nie ma problemu, jeśli nadal masz te pliki.
+Przejdźmy więc do GitHub Codespaces i przyjrzyjmy się temu bliżej. Jak poprzednio, trochę posprzątałem moje środowisko pracy. Usunąłem stare katalogi Nextflow'a, katalog work i tak dalej. Nie ma jednak problemu, jeśli nadal masz te pliki.
 
 Zacznę pracę z pliku hello modules, który zasadniczo znajduje się w stanie, w jakim zostawiliśmy go na końcu poprzedniego rozdziału. Mamy tutaj nasze trzy procesy. Mamy kilka parametrów, blok workflow, w którym uruchamiamy te trzy procesy i łączymy je ze sobą za pomocą kanałów. Następnie publikujemy kanały wyjściowe i mamy blok output określający sposób publikacji tych plików.
 

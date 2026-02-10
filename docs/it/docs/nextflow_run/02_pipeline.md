@@ -57,7 +57,7 @@ Questo suggerisce che il process `sayHello()` è stato chiamato tre volte, una v
 
 Guardiamo la directory 'results' per vedere se il nostro workflow sta ancora scrivendo una copia dei nostri output lì.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console linenums="1" hl_lines="4-7"
     results
@@ -73,7 +73,7 @@ Sì! Vediamo una nuova directory chiamata `2a-inputs` con tre file di output con
 
 Puoi aprire ciascuno di essi per verificare che contengano la stringa di saluto appropriata.
 
-??? abstract "Contenuto dei file"
+??? abstract "Contenuto del file"
 
     ```console title="results/2a-inputs/Hello-output.txt"
     Hello
@@ -98,7 +98,7 @@ Significa che tutte e tre le chiamate a `sayHello()` sono state eseguite all'int
 
 Diamo un'occhiata dentro quella directory di attività `8e/0eb066`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console title="8e/0eb066"
     work/8e/0eb066071cdb4123906b7b4ea8b047/
@@ -142,7 +142,7 @@ Questo conferma che il process `sayHello()` viene chiamato tre volte, e una dire
 
 Se guardiamo dentro ciascuna delle directory di attività elencate lì, possiamo verificare che ognuna corrisponde a uno dei saluti.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console title="ab/1a8ece"
     work/ab/1a8ece307e53f03fce689dde904b64/
@@ -377,7 +377,7 @@ Vedi che come promesso, step multipli sono stati eseguiti come parte del workflo
 
 Verifichiamo che sia effettivamente ciò che è successo dando un'occhiata nella directory `results`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console linenums="1" hl_lines="8-16"
     results
@@ -406,7 +406,7 @@ Alcuni dei file sono stati raggruppati in una sottodirectory chiamata `intermedi
 Questi due sono i risultati finali del workflow multi-step.
 Prenditi un minuto per guardare i nomi dei file e controllare i loro contenuti per confermare che sono ciò che ti aspetti.
 
-??? abstract "Contenuto dei file"
+??? abstract "Contenuto del file"
 
     ```txt title="results/2b-multistep/COLLECTED-batch-output.txt"
     HELLO
@@ -681,7 +681,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv --batch test
 
 Dovresti vedere nuovi output finali nominati con il tuo nome batch personalizzato.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console linenums="1" hl_lines="10 12"
     results
@@ -793,7 +793,7 @@ Abbiamo ovviamente preparato ancora una volta un workflow adatto per scopi dimos
 --8<-- "docs/en/docs/nextflow_run/img/modules.svg"
 </figure>
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     modules/

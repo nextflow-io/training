@@ -24,7 +24,7 @@ tree . -L 2
 
 Jeśli uruchomisz to wewnątrz `side-quests`, powinieneś zobaczyć następujące wyjście:
 
-```console title="Zawartość katalogu"
+```console title="Directory contents"
 .
 ├── metadata
 ├── nf-core

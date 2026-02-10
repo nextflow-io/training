@@ -78,7 +78,7 @@ code .
 
 Troverete un file di workflow principale e un file CSV chiamato `greetings.csv` che contiene l'input alla pipeline.
 
-```console title="Contenuto della directory"
+```console title="Directory contents"
 .
 ├── greetings.csv
 └── main.nf
@@ -94,7 +94,7 @@ Il workflow che testeremo è un sottoinsieme del workflow Hello costruito in [He
 
     Il workflow prende un file CSV contenente saluti, esegue quattro passaggi di trasformazione consecutivi su di essi e produce un singolo file di testo contenente un'immagine ASCII di un personaggio divertente che dice i saluti.
 
-    I quattro passaggi sono implementati come processi Nextflow (`sayHello`, `convertToUpper`, `collectGreetings`, e `cowpy`) memorizzati in file di modulo separati.
+    I quattro passaggi sono implementati come processi Nextflow (**`sayHello`**, **`convertToUpper`**, **`collectGreetings`**, e **`cowpy`**) memorizzati in file di modulo separati.
 
     1. **`sayHello`:** Scrive ogni saluto nel proprio file di output (es. "Hello-output.txt")
     2. **`convertToUpper`:** Converte ogni saluto in maiuscolo (es. "HELLO")
@@ -105,7 +105,7 @@ Il workflow che testeremo è un sottoinsieme del workflow Hello costruito in [He
 
     In questa side quest, utilizziamo una forma intermedia del workflow Hello che contiene solo i primi due processi. <!-- TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 -->
 
-Il sottoinsieme con cui lavoreremo è composto da due processi: `sayHello` e `convertToUpper`.
+Il sottoinsieme con cui lavoreremo è composto da due processi: **`sayHello`** e **`convertToUpper`**.
 Potete vedere il codice completo del workflow qui sotto.
 
 ??? example "Codice del workflow"
@@ -256,7 +256,7 @@ SUCCESS: Generated 1 test files.
 
 Questo creerà un file `main.nf.test` all'interno della directory `tests`. Questo è il nostro file di test a livello di pipeline. Se eseguite `tree tests/` dovreste vedere qualcosa del genere:
 
-```console title="Contenuto della directory test"
+```console title="Test directory contents"
 tests/
 ├── main.nf.test
 └── nextflow.config
@@ -371,7 +371,7 @@ when {
 }
 ```
 
-2. nf-test ha controllato lo stato della pipeline e l'ha confrontato con il blocco `when`:
+2. nf-test ha controllato lo stato della pipeline e l'ha confrontato con il blocco `then`:
 
 ```groovy title="tests/main.nf.test"
 then {
@@ -386,6 +386,8 @@ ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-
 ```
 
 Quindi qual era il problema? Ricordate che la pipeline ha un file greetings.csv nella directory del progetto. Quando nf-test esegue la pipeline, cercherà questo file, ma non riesce a trovarlo. Il file è lì, cosa sta succedendo? Bene, se guardiamo il percorso possiamo vedere che il test sta avvenendo nel percorso `./nf-test/tests/longHashString/`. Proprio come Nextflow, nf-test crea una nuova directory per ogni test per mantenere tutto isolato. Il file di dati non si trova lì quindi dobbiamo correggere il percorso del file nel test originale.
+
+Torniamo al file di test e cambiamo il percorso al file nel blocco `when`.
 
 Potreste chiedervi come faremo a puntare alla radice della pipeline nel test. Poiché questa è una situazione comune, nf-test ha una serie di variabili globali che possiamo usare per facilitarci la vita. Potete trovare l'elenco completo [qui](https://www.nf-test.com/docs/testcases/global_variables/) ma nel frattempo useremo la variabile `projectDir`, che indica la radice del progetto della pipeline.
 
@@ -468,9 +470,9 @@ SUCCESS: Executed 1 tests in 5.239s
 
 ### 1.3. Aggiungere asserzioni
 
-Un controllo semplice è assicurarsi che la nostra pipeline esegua tutti i processi che ci aspettiamo e non ne salti nessuno silenziosamente. Ricordate che la nostra pipeline esegue 6 processi, uno chiamato `sayHello` e uno chiamato `convertToUpper` per ciascuno dei 3 saluti.
+Un controllo semplice è assicurarsi che la nostra pipeline esegua tutti i processi che ci aspettiamo e non ne salti nessuno silenziosamente. Ricordate che la nostra pipeline esegue 6 processi, uno chiamato **`sayHello`** e uno chiamato **`convertToUpper`** per ciascuno dei 3 saluti.
 
-Aggiungiamo un'asserzione al nostro test per verificare che la pipeline eseguite il numero atteso di processi. Aggiorneremo anche il nome del nostro test per riflettere meglio ciò che stiamo testando.
+Aggiungiamo un'asserzione al nostro test per verificare che la pipeline esegua il numero atteso di processi. Aggiorneremo anche il nome del nostro test per riflettere meglio ciò che stiamo testando.
 
 **Prima:**
 
@@ -621,11 +623,11 @@ Successo! I test passano perché la pipeline è stata completata con successo, �
 
 Questa è solo la superficie, possiamo continuare a scrivere asserzioni per verificare i dettagli della pipeline, ma per ora passiamo a testare gli elementi interni della pipeline.
 
-### Riepilogo
+### Takeaway
 
 Sapete come scrivere un nf-test per una pipeline.
 
-### Qual è il prossimo passo?
+### Cosa c'è dopo?
 
 Imparate come testare un processo Nextflow.
 
@@ -637,7 +639,7 @@ Non dobbiamo scrivere test per ogni parte della pipeline, ma più test abbiamo, 
 
 ### 2.1. Testare il processo `sayHello`
 
-Iniziamo con il processo `sayHello`.
+Iniziamo con il processo **`sayHello`**.
 
 Utilizziamo di nuovo il comando `nf-test generate` per generare test per il processo.
 
@@ -655,7 +657,7 @@ Wrote process test file '/workspaces/training/side-quests/nf-test/tests/main.con
 SUCCESS: Generated 2 test files.
 ```
 
-Concentriamoci per ora sul processo `sayhello` nel file `main.sayhello.nf.test`.
+Concentriamoci per ora sul processo **`sayhello`** nel file `main.sayhello.nf.test`.
 
 Apriamo il file e diamo un'occhiata al contenuto.
 
@@ -726,7 +728,7 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-Il test fallisce perché il processo `sayHello` dichiara 1 input ma è stato chiamato con 0 argomenti. Risolviamo questo problema aggiungendo un input al processo. Ricordate da [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (e dalla sezione di warmup sopra) che il nostro processo `sayHello` prende un singolo input di valore, che dovremo fornire. Dovremmo anche correggere il nome del test per riflettere meglio ciò che stiamo testando.
+Il test fallisce perché il processo **`sayHello`** dichiara 1 input ma è stato chiamato con 0 argomenti. Risolviamo questo problema aggiungendo un input al processo. Ricordate da [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (e dalla sezione di warmup sopra) che il nostro processo **`sayHello`** prende un singolo input di valore, che dovremo fornire. Dovremmo anche correggere il nome del test per riflettere meglio ciò che stiamo testando.
 
 **Prima:**
 
@@ -761,7 +763,7 @@ Il test fallisce perché il processo `sayHello` dichiara 1 input ma è stato chi
 
         when {
             params {
-                // define parameters here. Example:
+                // definire parametri qui. Esempio:
                 // outdir = "tests/results"
             }
             process {
@@ -802,7 +804,7 @@ Snapshot Summary:
 SUCCESS: Executed 1 tests in 1.611s
 ```
 
-Successo! Il test passa perché il processo `sayHello` è stato eseguito con successo e l'output è stato creato.
+Successo! Il test passa perché il processo **`sayHello`** è stato eseguito con successo e l'output è stato creato.
 
 ### 2.2. Verificare lo snapshot creato dal test
 
@@ -812,7 +814,7 @@ Se guardiamo il file `tests/main.sayhello.nf.test`, possiamo vedere che utilizza
 assert snapshot(process.out).match()
 ```
 
-Questo sta dicendo a nf-test di creare uno snapshot dell'output del processo `sayHello`. Diamo un'occhiata al contenuto del file di snapshot.
+Questo sta dicendo a nf-test di creare uno snapshot dell'output del processo **`sayHello`**. Diamo un'occhiata al contenuto del file di snapshot.
 
 ```console title="Contenuto del file snapshot"
 code tests/main.sayhello.nf.test.snap
@@ -826,7 +828,7 @@ Non lo stamperemo qui, ma dovreste vedere un file JSON contenente i dettagli del
 ]
 ```
 
-Questo rappresenta gli output creati dal processo `sayHello`, che stiamo testando esplicitamente. Se rieseguiamo il test, il programma verificherà che il nuovo output corrisponda all'output che è stato originariamente registrato. Questo è un modo rapido e semplice per testare che gli output del processo non cambino, ed è per questo che nf-test lo fornisce come predefinito.
+Questo rappresenta gli output creati dal processo **`sayHello`**, che stiamo testando esplicitamente. Se rieseguiamo il test, il programma verificherà che il nuovo output corrisponda all'output che è stato originariamente registrato. Questo è un modo rapido e semplice per testare che gli output del processo non cambino, ed è per questo che nf-test lo fornisce come predefinito.
 
 !!!warning "Avviso"
 
@@ -855,7 +857,7 @@ Test Process sayHello
 SUCCESS: Executed 1 tests in 1.685s
 ```
 
-Successo! Il test passa perché il processo `sayHello` è stato eseguito con successo e l'output corrisponde allo snapshot.
+Successo! Il test passa perché il processo **`sayHello`** è stato eseguito con successo e l'output corrisponde allo snapshot.
 
 ### 2.3. Alternativa agli Snapshot: Asserzioni Dirette sul Contenuto
 
@@ -932,7 +934,7 @@ Eseguiamo il test per vedere se funziona.
 nf-test test tests/main.sayhello.nf.test
 ```
 
-```console title="Il test del processo fallisce"
+```console title="Il test del processo passa"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -984,9 +986,9 @@ nextflow_process {
 }
 ```
 
-Questo è un test simile al processo `sayHello`, ma sta testando il processo `convertToUpper`. Sappiamo che questo fallirà perché proprio come con `sayHello`, il processo `convertToUpper` prende un singolo input path, ma non ne abbiamo specificato uno.
+Questo è un test simile al processo **`sayHello`**, ma sta testando il processo **`convertToUpper`**. Sappiamo che questo fallirà perché proprio come con **`sayHello`**, il processo **`convertToUpper`** prende un singolo input path, ma non ne abbiamo specificato uno.
 
-Ora dobbiamo fornire un singolo file di input al processo convertToUpper, che include del testo che vogliamo convertire in maiuscolo. Ci sono molti modi per farlo:
+Ora dobbiamo fornire un singolo file di input al processo **`convertToUpper`**, che include del testo che vogliamo convertire in maiuscolo. Ci sono molti modi per farlo:
 
 - Potremmo creare un file dedicato da testare
 - Potremmo riutilizzare il file data/greetings.csv esistente
@@ -1027,7 +1029,7 @@ Per ora, riutilizziamo il file data/greetings.csv esistente utilizzando l'esempi
 
         when {
             params {
-                // define parameters here. Example:
+                // definire parametri qui. Esempio:
                 // outdir = "tests/results"
             }
             process {
@@ -1072,7 +1074,7 @@ Snapshot Summary:
 SUCCESS: Executed 1 tests in 1.764s
 ```
 
-Notate, abbiamo creato un file di snapshot per il processo `convertToUpper` in `tests/main.converttoupper.nf.test.snap`. Se eseguiamo di nuovo il test, dovremmo vedere che nf-test passa di nuovo.
+Notate, abbiamo creato un file di snapshot per il processo **`convertToUpper`** in `tests/main.converttoupper.nf.test.snap`. Se eseguiamo di nuovo il test, dovremmo vedere che nf-test passa di nuovo.
 
 ```bash title="nf-test process convertToUpper pass"
 nf-test test tests/main.converttoupper.nf.test
@@ -1094,11 +1096,11 @@ Test Process convertToUpper
 SUCCESS: Executed 1 tests in 1.811s
 ```
 
-### Riepilogo
+### Takeaway
 
 Sapete come scrivere test per un processo Nextflow ed eseguirli.
 
-### Qual è il prossimo passo?
+### Cosa c'è dopo?
 
 Imparate come eseguire test per tutto in una volta!
 
@@ -1191,6 +1193,6 @@ Consultate la [documentazione di nf-test](https://www.nf-test.com/) per funziona
 
 ---
 
-## Qual è il prossimo passo?
+## Cosa c'è dopo?
 
 Tornate al [menu delle Side Quest](./index.md) o cliccate il pulsante in basso a destra della pagina per passare al prossimo argomento nell'elenco.

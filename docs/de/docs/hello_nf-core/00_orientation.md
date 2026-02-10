@@ -78,7 +78,7 @@ Hier erzeugen wir ein Inhaltsverzeichnis bis zur zweiten Ebene:
 tree . -L 2
 ```
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     .

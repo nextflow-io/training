@@ -26,7 +26,7 @@ additional_information:
 
 Durch praktische Beispiele und geführte Übungen lernst du die Grundlagen der Verwendung von Nextflow, einschließlich der Ausführung von Pipelines, der Verwaltung von Dateien und Software-Abhängigkeiten, der mühelosen Parallelisierung der Ausführung und der Ausführung von Workflows in verschiedenen Rechenumgebungen.
 
-Nach diesem Kurs kannst du Workflows mit Nextflow ausführen.
+Du wirst die Fähigkeiten und das Selbstvertrauen mitnehmen, um mit Nextflow Workflows auszuführen.
 
 <!-- additional_information -->
 
@@ -52,7 +52,7 @@ Wir haben dies in drei Teile unterteilt, die sich jeweils auf bestimmte Aspekte 
 | [Teil 2: Echte Pipelines ausführen](./02_pipeline.md) | Komplexe Eingaben verarbeiten, mehrstufige Workflows ausführen, Container verwenden und mühelos parallelisieren | 60 Min           |
 | [Teil 3: Konfiguration](./03_config.md)               | Pipeline-Verhalten anpassen und Nutzung in verschiedenen Rechenumgebungen optimieren                            | 60 Min           |
 
-Nach Abschluss dieses Kurses bist du bereit, reproduzierbare Workflows für deine eigenen Projekte auszuführen.
+Nach Abschluss dieses Kurses bist du gut vorbereitet, um die nächsten Schritte auf deinem Weg zur Ausführung reproduzierbarer Workflows für deine wissenschaftlichen Rechenanforderungen anzugehen.
 
 Bereit, den Kurs zu beginnen?
 

@@ -33,9 +33,9 @@ Les deux outils principaux impliqués sont [Samtools](https://www.htslib.org/), 
 
 Ces outils ne sont pas installés dans l'environnement GitHub Codespaces, nous allons donc les utiliser via des conteneurs (voir [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
-!!! note
+!!! note "Note"
 
-     Assurez-vous d'être dans le répertoire `nf4-science/genomics` afin que la dernière partie du chemin affichée lorsque vous tapez `pwd` soit `genomics`.
+    Assurez-vous d'être dans le répertoire `nf4-science/genomics` afin que la dernière partie du chemin affichée lorsque vous tapez `pwd` soit `genomics`.
 
 ---
 
@@ -95,7 +95,8 @@ docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
     community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
     ```
 
-Si vous n'avez pas téléchargé cette image auparavant, cela peut prendre une minute. Une fois terminé, vous disposez d'une copie locale de l'image du conteneur.
+Si vous n'avez pas téléchargé cette image auparavant, cela peut prendre une minute.
+Une fois terminé, vous disposez d'une copie locale de l'image du conteneur.
 
 #### 1.1.2. Lancer le conteneur Samtools en mode interactif
 
@@ -600,7 +601,7 @@ gatk GenomicsDBImport \
 La sortie de cette étape est en fait un répertoire contenant un ensemble de répertoires supplémentaires imbriqués contenant les données de variants combinées sous la forme de plusieurs fichiers différents.
 Vous pouvez l'explorer mais vous verrez rapidement que ce format de magasin de données n'est pas destiné à être lu directement par des humains.
 
-!!! note
+!!! note "Note"
 
     GATK inclut des outils qui permettent d'inspecter et d'extraire les données d'appel de variants du magasin de données selon les besoins.
 

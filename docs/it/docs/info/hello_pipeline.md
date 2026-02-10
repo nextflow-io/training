@@ -18,11 +18,11 @@ Questa pagina riassume lo stato della pipeline al completamento del corso Hello 
 
 ### Descrizione di riepilogo
 
-Il workflow Hello prende un file CSV contenente saluti, li scrive in file separati, converte ciascuno in maiuscolo, li raccoglie nuovamente insieme e produce un singolo file di testo contenente un'immagine ASCII di un personaggio divertente che pronuncia i saluti.
+Il flusso di lavoro Hello prende un file CSV contenente saluti, li scrive in file separati, converte ciascuno in maiuscolo, li raccoglie nuovamente insieme e produce un singolo file di testo contenente un'immagine ASCII di un personaggio divertente che pronuncia i saluti.
 
-### Passaggi del workflow (process)
+### Passaggi del flusso di lavoro (processi)
 
-I quattro passaggi sono implementati come process Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` e `cowpy`) memorizzati in file modulo separati.
+I quattro passaggi sono implementati come processi Nextflow (`sayHello`, `convertToUpper`, `collectGreetings` e `cowpy`) memorizzati in file modulo separati.
 
 1. **`sayHello`:** Scrive ogni saluto nel proprio file di output (es. "Hello-output.txt")
 2. **`convertToUpper`:** Converte ogni saluto in maiuscolo (es. "HELLO")
@@ -68,7 +68,7 @@ I risultati vengono pubblicati in una directory chiamata `results/`, e l'output 
                       ^^^ ^^ ^^^ ^
 ```
 
-Potrebbe incontrare alcune variazioni nei dettagli a seconda del corso in cui la pipeline è presente.
+Potreste incontrare alcune variazioni nei dettagli a seconda del corso in cui la pipeline è presente.
 
 ---
 

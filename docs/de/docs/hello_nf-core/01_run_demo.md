@@ -107,7 +107,7 @@ Standardmäßig speichert Nextflow sie unter `$NXF_HOME/assets`.
 tree -L 2 $NXF_HOME/assets/
 ```
 
-```console title="Verzeichnisinhalt"
+```console title="Directory contents"
 /workspaces/.nextflow/assets/
 └── nf-core
     └── demo
@@ -134,7 +134,7 @@ Dies erstellt eine Verknüpfung, die es einfacher macht, den gerade heruntergela
 tree -L 2 pipelines
 ```
 
-```console title="Verzeichnisinhalt"
+```console title="Directory contents"
 pipelines
 └── nf-core
     └── demo
@@ -146,7 +146,7 @@ Jetzt können wir bei Bedarf leichter in den Quellcode schauen.
 
 Aber zuerst, lass uns unsere erste nf-core Pipeline ausführen!
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie du eine Pipeline über die nf-core-Website finden und eine lokale Kopie des Quellcodes abrufen kannst.
 
@@ -375,7 +375,7 @@ Zum Beispiel zeigt dir die Datei `execution_timeline_*`, welche Prozesse ausgef�
 
 Diese Berichte werden automatisch für alle nf-core Pipelines generiert.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man eine nf-core Pipeline mit ihrem integrierten Testprofil ausführt und wo man ihre Ausgaben findet.
 
@@ -552,17 +552,17 @@ tree -L 3 pipelines/nf-core/demo/subworkflows
     ```console
     pipelines/nf-core/demo/subworkflows
     ├── local
-    │   └── utils_nfcore_demo_pipeline
-    │       └── main.nf
+    │   └── utils_nfcore_demo_pipeline
+    │       └── main.nf
     └── nf-core
         ├── utils_nextflow_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
         ├── utils_nfcore_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
+        │   ├── main.nf
+        │   ├── meta.yml
+        │   └── tests
         └── utils_nfschema_plugin
             ├── main.nf
             ├── meta.yml
@@ -632,7 +632,7 @@ Die `schema_input.json` ist eine Datei, die verwendet wird, um die Struktur des 
 Jede Spalte kann einen Typ, ein Muster, eine Beschreibung und einen Hilfetext in einem maschinenlesbaren Format haben.
 Das Schema wird für verschiedene Zwecke verwendet, einschließlich automatisierter Validierung und der Bereitstellung hilfreicher Fehlermeldungen.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, was die Hauptkomponenten einer nf-core Pipeline sind und wie der Code organisiert ist; wo sich die Hauptelemente der Konfiguration befinden; und du bist dir bewusst, wofür die Eingabevalidierung da ist.
 

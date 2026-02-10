@@ -372,7 +372,7 @@ Raport zawiera:
 - Metryki jakości segmentacji
 - Liczbę wykrytych komórek i punktów
 
-!!! Tip
+!!! Tip "Wskazówka"
 
     Raporty MultiQC są zwykle dołączane do wszystkich pipeline'ów nf-core.
     Zawsze zapewniają ogólny przegląd wykonania pipeline'u i jakości danych.
@@ -426,7 +426,7 @@ Pokazuje on:
 - Użycie CPU i pamięci
 - Które zadania były w pamięci podręcznej, a które wykonane
 
-!!! Tip
+!!! Tip "Wskazówka"
 
     Te raporty są niezwykle przydatne do optymalizacji alokacji zasobów i rozwiązywania problemów z wydajnością.
 
@@ -447,7 +447,7 @@ Tak jak w naszym przykładzie Hello World, cała rzeczywista praca odbywa się w
 ### 4.1. Zrozumienie struktury katalogu roboczego
 
 Katalog roboczy zawiera podkatalog dla każdego zadania, które zostało wykonane.
-Dla tego pipeline'u z 12 zadaniami będzie 12 podkatalogów roboczych.
+Dla tego pipeline'u z 22 zadaniami będzie 22 podkatalogi robocze.
 
 Wyświetl listę katalogu roboczego:
 
@@ -459,10 +459,10 @@ To pokazuje pierwsze 5 katalogów zadań.
 
 ### 4.2. Inspekcja katalogu zadania
 
-Wybierz jeden z hashy procesu segmentacji z wyjścia konsoli (np. `[3m/4n5o6p]`) i zajrzyj do środka:
+Wybierz jeden z hashy procesu segmentacji z wyjścia konsoli (np. `[3e/3c0736]`) i zajrzyj do środka:
 
 ```bash
-ls -la work/3m/4n5o6p*/
+ls -la work/3e/3c0736*/
 ```
 
 Zobaczysz:
@@ -477,7 +477,7 @@ Kluczowa różnica od Hello World:
 - Pliki wyjściowe mogą być dość duże (maski segmentacji, przetworzone obrazy)
 - Wiele plików wejściowych i wyjściowych na zadanie
 
-!!! Tip
+!!! Tip "Wskazówka"
 
     Jeśli proces się nie powiedzie, możesz przejść do jego katalogu roboczego, sprawdzić `.command.err` w poszukiwaniu komunikatów o błędach, a nawet ponownie uruchomić `.command.sh` ręcznie, aby debugować problem.
 
@@ -551,7 +551,7 @@ Resume jest szczególnie wartościowe, gdy:
 - Twoje połączenie sieciowe zostanie przerwane podczas pobierania danych
 - Chcesz dodać dodatkowe wyniki bez powtarzania obliczeń
 
-!!! Warning
+!!! Warning "Ostrzeżenie"
 
     Resume działa tylko wtedy, gdy nie zmieniłeś danych wejściowych, kodu pipeline'u lub parametrów.
     Jeśli zmienisz którekolwiek z nich, Nextflow poprawnie ponownie uruchomi dotknięte zadania.

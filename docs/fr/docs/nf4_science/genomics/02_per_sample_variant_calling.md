@@ -1,5 +1,7 @@
 # Partie 2 : Appel de variants par échantillon
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduction assistée par IA - [en savoir plus et suggérer des améliorations](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Dans la Partie 1, vous avez testé les commandes Samtools et GATK manuellement dans leurs conteneurs respectifs.
 Nous allons maintenant encapsuler ces mêmes commandes dans un workflow Nextflow.
 
@@ -304,7 +306,7 @@ Ajoutons une cible pour `bam_index` qui publie dans un sous-répertoire `bam/`.
     }
     ```
 
-!!! note
+!!! note "Note"
 
     Par défaut, Nextflow publie les fichiers de sortie sous forme de liens symboliques, ce qui évite une duplication inutile.
     Même si les fichiers de données que nous utilisons ici sont très petits, en génomique ils peuvent devenir très volumineux.
@@ -614,7 +616,7 @@ Ajoutez l'appel du processus dans le corps du workflow, sous `main:` :
 
 Vous devriez reconnaître la syntaxe `*.out` de la série de formation Hello Nextflow ; nous disons à Nextflow de prendre le canal produit par `SAMTOOLS_INDEX` et de le connecter à l'appel du processus `GATK_HAPLOTYPECALLER`.
 
-!!! note
+!!! note "Note"
 
     Notez que les entrées sont fournies exactement dans le même ordre dans l'appel au processus que dans le bloc input du processus.
     Dans Nextflow, les entrées sont positionnelles, ce qui signifie que vous _devez_ suivre le même ordre ; et bien sûr il doit y avoir le même nombre d'éléments.
@@ -931,7 +933,7 @@ Une fois de plus, cela peut réussir ou échouer. Voici à quoi ressemble la sor
 Les trois premières lignes correspondent au canal d'entrée et les trois suivantes, au canal de sortie.
 Vous pouvez voir que les fichiers BAM et les fichiers d'index pour les trois échantillons ne sont pas listés dans le même ordre !
 
-!!! note
+!!! note "Note"
 
     Lorsque vous appelez un processus Nextflow sur un canal contenant plusieurs éléments, Nextflow essaiera de paralléliser l'exécution autant que possible, et collectera les sorties dans l'ordre où elles deviennent disponibles.
     La conséquence est que les sorties correspondantes peuvent être collectées dans un ordre différent de celui dans lequel les entrées originales ont été fournies.
@@ -941,7 +943,7 @@ Mais cela n'est pas garanti, c'est pourquoi parfois (mais pas toujours) les mauv
 
 Pour corriger cela, nous devons nous assurer que les fichiers BAM et leurs fichiers d'index voyagent ensemble à travers les canaux.
 
-!!! tip
+!!! tip "Astuce"
 
     Les instructions `view()` dans le code du workflow ne font rien, donc ce n'est pas un problème de les laisser.
     Cependant elles encombrent votre sortie console, nous recommandons donc de les supprimer lorsque vous avez terminé le dépannage du problème.
@@ -954,7 +956,7 @@ La correction consiste à regrouper chaque fichier BAM avec son index dans un tu
 
 La façon la plus simple d'assurer qu'un fichier BAM et son index restent étroitement associés est de les emballer ensemble dans un tuple sortant de la tâche d'indexation.
 
-!!! note
+!!! note "Note"
 
     Un **tuple** est une liste finie et ordonnée d'éléments qui est couramment utilisée pour retourner plusieurs valeurs d'une fonction. Les tuples sont particulièrement utiles pour passer plusieurs entrées ou sorties entre processus tout en préservant leur association et leur ordre.
 
@@ -1149,7 +1151,7 @@ Nous avons déjà créé un fichier texte listant les chemins de fichiers d'entr
 
 Comme vous pouvez le voir, nous avons listé un chemin de fichier par ligne, et ce sont des chemins absolus.
 
-!!! note
+!!! note "Note"
 
     Les fichiers que nous utilisons ici se trouvent simplement sur le système de fichiers local de votre GitHub Codespaces, mais nous pourrions également pointer vers des fichiers dans le stockage cloud.
     Si vous n'utilisez pas l'environnement Codespaces fourni, vous devrez peut-être adapter les chemins de fichiers pour correspondre à votre configuration locale.
@@ -1232,7 +1234,7 @@ Nous pouvons faire cela en utilisant le même motif que nous avons utilisé dans
 Techniquement nous pourrions faire cela plus simplement en utilisant l'opérateur [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext), puisque notre fichier d'entrée ne contient actuellement que des chemins de fichiers.
 Cependant, en utilisant l'opérateur `splitCsv` plus polyvalent (complété par `map`), nous pouvons rendre notre workflow résistant au futur au cas où nous décidions d'ajouter des métadonnées au fichier contenant les chemins de fichiers.
 
-!!! tip
+!!! tip "Astuce"
 
     Si vous n'êtes pas sûr·e de comprendre ce que font les opérateurs ici, c'est une autre excellente occasion d'utiliser l'opérateur `.view()` pour voir à quoi ressemble le contenu du canal avant et après leur application.
 

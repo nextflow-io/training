@@ -1662,7 +1662,7 @@ nextflow run missing_software.nf -profile docker
     [38/ab20d1] PROCESS_FILES (1) | 3 of 3 ✔
     ```
 
-!!! note
+!!! note "Nota"
 
     Para aprender más sobre cómo Nextflow usa contenedores, vea [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
 
@@ -2005,7 +2005,7 @@ Examinemos `bad_channel_shape_viewed_debug.nf` para ver cómo funciona la direct
 
 ```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
 process PROCESS_FILES {
-    debug true  // Enable real-time output
+    debug true  // Habilitar salida en tiempo real
 
     input:
     val sample_name
@@ -2031,7 +2031,7 @@ A veces quiere detectar problemas antes de que se ejecute cualquier proceso. Nex
 
 El modo preview le permite probar la lógica del flujo de trabajo sin ejecutar comandos. Esto puede ser muy útil para verificar rápidamente la estructura de su flujo de trabajo y asegurar que los procesos estén conectados correctamente sin ejecutar ningún comando real.
 
-!!! note
+!!! note "Nota"
 
     Si corrigió `bad_syntax.nf` anteriormente, reintroduzca el error de sintaxis eliminando la llave de cierre después del bloque script antes de ejecutar este comando.
 
@@ -2215,7 +2215,7 @@ profiles {
             debug = true
             cleanup = false
 
-            // Conservative resources for debugging
+            // Recursos conservadores para depuración
             maxForks = 1
             memory = '2.GB'
             cpus = 1
@@ -2236,7 +2236,7 @@ Este perfil habilita la salida en tiempo real, preserva los directorios de traba
 
 Ahora es momento de poner en práctica el enfoque sistemático de depuración. El flujo de trabajo `buggy_workflow.nf` contiene varios errores comunes que representan los tipos de problemas que encontrará en el desarrollo del mundo real.
 
-!!! exercise
+!!! exercise "Ejercicio"
 
     Use el enfoque sistemático de depuración para identificar y corregir todos los errores en `buggy_workflow.nf`. Este flujo de trabajo intenta procesar datos de muestra de un archivo CSV pero contiene múltiples errores intencionales que representan escenarios comunes de depuración.
 
@@ -2299,7 +2299,7 @@ Ahora es momento de poner en práctica el enfoque sistemático de depuración. E
     nextflow run buggy_workflow.nf -resume
     ```
 
-    ??? solution
+    ??? solution "Solución"
         El `buggy_workflow.nf` contiene 9 o 10 errores distintos (dependiendo de cómo cuente) que cubren todas las categorías principales de depuración. Aquí hay un desglose sistemático de cada error y cómo corregirlo
 
         Comencemos con esos errores de sintaxis:

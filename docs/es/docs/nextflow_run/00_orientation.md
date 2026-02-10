@@ -2,18 +2,18 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-## Iniciar un entorno de entrenamiento
+## Iniciar un entorno de capacitación
 
 Para usar el entorno preconfigurado que proporcionamos en GitHub Codespaces, haga clic en el botón "Open in GitHub Codespaces" a continuación. Para otras opciones, consulte [Opciones de entorno](../envsetup/index.md).
 
-Recomendamos abrir el entorno de entrenamiento en una nueva pestaña o ventana del navegador (use clic derecho, ctrl-clic o cmd-clic dependiendo de su equipo) para que pueda seguir leyendo mientras se carga el entorno.
+Recomendamos abrir el entorno de capacitación en una nueva pestaña o ventana del navegador (use clic derecho, ctrl-clic o cmd-clic dependiendo de su equipo) para que pueda seguir leyendo mientras se carga el entorno.
 Necesitará mantener estas instrucciones abiertas en paralelo para trabajar a través del curso.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ### Conceptos básicos del entorno
 
-Este entorno de entrenamiento contiene todo el software, código y datos necesarios para trabajar a través del curso de entrenamiento, por lo que no necesita instalar nada usted mismo.
+Este entorno de capacitación contiene todo el software, código y datos necesarios para trabajar a través del curso de capacitación, por lo que no necesita instalar nada usted mismo.
 
 El codespace está configurado con una interfaz VSCode, que incluye un explorador de archivos, un editor de código y una terminal.
 Todas las instrucciones dadas durante el curso (por ejemplo, 'abrir el archivo', 'editar el código' o 'ejecutar este comando') se refieren a esas tres partes de la interfaz VSCode a menos que se especifique lo contrario.
@@ -22,16 +22,16 @@ Si está trabajando en este curso por su cuenta, familiarícese con los [concept
 
 ### Requisitos de versión
 
-Este entrenamiento está diseñado para Nextflow 25.10.2 o posterior **con el analizador de sintaxis v2 HABILITADO**.
+Esta capacitación está diseñada para Nextflow 25.10.2 o posterior **con el analizador de sintaxis v2 HABILITADO**.
 Si está usando un entorno local o personalizado, asegúrese de usar la configuración correcta como se documenta [aquí](../info/nxf_versions.md).
 
 ## Prepararse para trabajar
 
-Una vez que su codespace esté ejecutándose, hay dos cosas que necesita hacer antes de sumergirse en el entrenamiento: establecer su directorio de trabajo para este curso específico y echar un vistazo a los materiales proporcionados.
+Una vez que su codespace esté ejecutándose, hay dos cosas que necesita hacer antes de sumergirse en la capacitación: establecer su directorio de trabajo para este curso específico y echar un vistazo a los materiales proporcionados.
 
 ### Establecer el directorio de trabajo
 
-Por defecto, el codespace se abre con el directorio de trabajo establecido en la raíz de todos los cursos de entrenamiento, pero para este curso, trabajaremos en el directorio `nextflow-run/`.
+Por defecto, el codespace se abre con el directorio de trabajo establecido en la raíz de todos los cursos de capacitación, pero para este curso, trabajaremos en el directorio `nextflow-run/`.
 
 Cambie de directorio ahora ejecutando este comando en la terminal:
 
@@ -47,7 +47,7 @@ code .
 
 !!! tip "Consejo"
 
-    Si por cualquier razón sale de este directorio (por ejemplo, si su codespace entra en suspensión), siempre puede usar la ruta completa para volver a él, asumiendo que está ejecutando esto dentro del entorno de entrenamiento de GitHub Codespaces:
+    Si por cualquier razón sale de este directorio (por ejemplo, si su codespace entra en suspensión), siempre puede usar la ruta completa para volver a él, asumiendo que está ejecutando esto dentro del entorno de capacitación de GitHub Codespaces:
 
     ```bash
     cd /workspaces/training/nextflow-run
@@ -57,7 +57,7 @@ Ahora echemos un vistazo a los contenidos.
 
 ### Explorar los materiales proporcionados
 
-Puede explorar los contenidos de este directorio usando el explorador de archivos en el lado izquierdo del espacio de trabajo de entrenamiento.
+Puede explorar los contenidos de este directorio usando el explorador de archivos en el lado izquierdo del espacio de trabajo de capacitación.
 Alternativamente, puede usar el comando `tree`.
 
 A lo largo del curso, usamos la salida de `tree` para representar la estructura y contenidos del directorio de forma legible, a veces con modificaciones menores para mayor claridad.
@@ -68,7 +68,7 @@ Aquí generamos una tabla de contenidos hasta el segundo nivel:
 tree . -L 2
 ```
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     .

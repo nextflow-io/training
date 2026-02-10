@@ -64,7 +64,7 @@ Vous pouvez l'ouvrir dans l'explorateur de fichiers ou depuis la ligne de comman
 
 C'est ce que nous allons essayer de reproduire avec notre tout premier workflow Nextflow.
 
-### Récapitulatif
+### À retenir
 
 Vous savez maintenant comment exécuter une commande simple dans le terminal qui affiche du texte, et optionnellement, comment lui faire écrire la sortie dans un fichier.
 
@@ -82,7 +82,7 @@ Nous n'allons pas regarder le code pour l'instant ; voyons d'abord à quoi resse
 
 ### 2.1. Lancer le workflow et surveiller l'exécution
 
-Dans le terminal, exécutez la commande suivante :
+Dans le terminal, exécutez la commande suivante.
 
 ```bash
 nextflow run 1-hello.nf --input 'Hello World!'
@@ -135,7 +135,7 @@ C'est bien, notre workflow a fait ce qu'il était censé faire !
 Par défaut, Nextflow sauvegardera les sorties du pipeline dans un répertoire appelé `results` dans votre chemin actuel.
 Pour changer où vos fichiers sont publiés, utilisez le drapeau CLI `-output-dir` (ou `-o` en abrégé)
 
-!!! danger
+!!! danger "Danger"
 
     Notez que `--input` a deux tirets et `-output-dir` en a un seul !
     C'est parce que `--input` est un _paramètre_ du pipeline et `-output-dir` est un drapeau CLI principal de Nextflow.
@@ -165,7 +165,7 @@ hello_results
 ```
 
 Les fichiers dans ce répertoire sont les mêmes qu'avant, seul le répertoire de niveau supérieur est différent.
-Cependant, soyez conscient que dans les deux cas, le résultat « publié » est une copie (ou dans certains cas un lien symbolique) de la sortie réelle produite par Nextflow lors de l'exécution du workflow.
+Cependant, soyez conscient·e que dans les deux cas, le résultat « publié » est une copie (ou dans certains cas un lien symbolique) de la sortie réelle produite par Nextflow lors de l'exécution du workflow.
 
 Alors maintenant, nous allons jeter un coup d'œil sous le capot pour voir où Nextflow a réellement exécuté le travail.
 
@@ -348,7 +348,7 @@ En revanche, si vous regardez le répertoire `results`, il n'y a toujours qu'un 
 
 Cela vous montre que les résultats publiés seront écrasés par les exécutions suivantes, alors que les répertoires de tâches sous `work/` sont préservés.
 
-### Récapitulatif
+### À retenir
 
 Vous savez comment exécuter un script Nextflow simple, surveiller son exécution et trouver ses sorties.
 
@@ -483,7 +483,7 @@ Dans ce cas, le bloc `main:` contient un appel au **process** `sayHello` et lui 
 
 Comme nous le discuterons plus en détail dans un moment, `params.input` contient la valeur que nous avons donnée au paramètre `--input` dans notre ligne de commande.
 
-Le bloc `publish:` liste la sortie de l'appel au **process** `sayHello()`, qu'il désigne comme `sayHello.out` et lui donne le nom `first_output` (cela peut être n'importe quoi que l'auteur du workflow souhaite).
+Le bloc `publish:` liste la sortie de l'appel au **process** `sayHello()`, qu'il désigne comme `sayHello.out` et lui donne le nom `first_output` (cela peut être n'importe quoi que l'auteur·e du workflow souhaite).
 
 C'est une définition de **workflow** très minimale.
 Dans un pipeline réel, le workflow contient généralement plusieurs appels à des **processes** connectés par des **channels**, et il peut y avoir des valeurs par défaut configurées pour les entrées variables.
@@ -544,7 +544,7 @@ Pour en savoir plus, consultez [Publishing outputs](https://nextflow.io/docs/lat
 
     Jusqu'à très récemment, la façon établie de publier les sorties était de le faire au niveau de chaque **process** individuel en utilisant une directive `publishDir`.
 
-    Vous trouverez encore ce modèle de code partout dans les anciens pipelines Nextflow et les modules de **process**, il est donc important d'en être conscient.
+    Vous trouverez encore ce modèle de code partout dans les anciens pipelines Nextflow et les modules de **process**, il est donc important d'en être conscient·e.
 
     Au lieu d'avoir un bloc `publish:` dans le workflow et un bloc `output` au niveau supérieur, vous verriez une ligne `publishDir` dans la définition du **process** `sayHello` :
 
@@ -565,7 +565,7 @@ Pour en savoir plus, consultez [Publishing outputs](https://nextflow.io/docs/lat
 
     Cependant, nous ne recommandons pas d'utiliser cela dans tout nouveau travail car cela sera éventuellement interdit dans les futures versions du langage Nextflow.
 
-### Récapitulatif
+### À retenir
 
 Vous savez maintenant comment un workflow Nextflow simple est structuré, et comment les composants de base sont liés à sa fonctionnalité.
 
@@ -726,7 +726,7 @@ Notez que cela ne supprime pas les sous-répertoires de deux caractères (comme 
 
     Vous êtes responsable de sauvegarder toutes les sorties qui vous importent ! C'est la raison principale pour laquelle nous préférons utiliser le mode `copy` plutôt que le mode `symlink` pour la directive `publish`.
 
-### Récapitulatif
+### À retenir
 
 Vous savez comment relancer un pipeline sans répéter les étapes qui ont déjà été exécutées de manière identique, inspecter le log d'exécution, et utiliser la commande `nextflow clean` pour nettoyer les anciens répertoires de travail.
 

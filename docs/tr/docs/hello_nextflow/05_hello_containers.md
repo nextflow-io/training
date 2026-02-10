@@ -1,9 +1,9 @@
 # Bölüm 5: Merhaba Konteynerlar
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -23,7 +23,7 @@ Bunların hepsi çok sıkıcı ve can sıkıcı, bu nedenle size bu sorunu çok 
 Bir **konteyner**, kod, sistem kütüphaneleri ve ayarlar dahil olmak üzere bir uygulamayı çalıştırmak için gereken her şeyi içeren bir konteyner **imajından** oluşturulan hafif, bağımsız, çalıştırılabilir bir yazılım birimidir.
 Tahmin edebileceğiniz gibi, bu pipeline'larınızı daha tekrarlanabilir hale getirmek için çok yardımcı olacak.
 
-Bunu [Docker](https://www.docker.com/get-started/) kullanarak öğreteceğimizi, ancak Nextflow'un [diğer birçok konteyner teknolojisini](https://www.nextflow.io/docs/latest/container.html) de desteklediğini unutmayın.
+Bunu [Docker](https://www.docker.com/get-started/) kullanarak öğreteceğimizi, ancak Nextflow'un [diğer birçok konteyner teknolojisini](https://nextflow.io/docs/latest/container.html) de desteklediğini unutmayın.
 
 ??? info "Bu bölümden nasıl başlanır"
 
@@ -76,7 +76,7 @@ nextflow run hello-containers.nf
 
     Launching `hello-containers.nf` [nice_escher] DSL2 - revision: d5dfdc9872
 
-    executor >  local (7)
+    executor > local (7)
     [5a/ec1fa1] sayHello (2) [100%] 3 of 3 ✔
     [30/32b5b8] convertToUpper (3) [100%] 3 of 3 ✔
     [d3/be01bc] collectGreetings [100%] 1 of 1 ✔
@@ -85,7 +85,7 @@ nextflow run hello-containers.nf
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde bulacaksınız (`results/hello_containers/`).
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     results/hello_containers/
@@ -115,7 +115,7 @@ Bir konteyner kullanmak için, genellikle bir konteyner kayıt defterinden bir k
 
 Genel sözdizimi şu şekildedir:
 
-```bash title="Sözdizimi"
+```bash title="Syntax"
 docker pull '<container>'
 ```
 
@@ -125,7 +125,7 @@ docker pull '<container>'
 
 Örnek olarak, rastgele metin girdilerini eğlenceli bir şekilde görüntülemek için ASCII sanatı üreten `cowsay` adlı bir aracın python uygulaması olan [cowpy](https://github.com/jeffbuttars/cowpy) içeren bir konteyner imajı çekelim.
 
-```txt title="Örnek"
+```txt title="Example"
  ________________________
 < Are we having fun yet? >
  ------------------------
@@ -187,8 +187,8 @@ Bu, tek seferlik komutları çalıştırmak için harikadır.
 
 Genel sözdizimi şu şekildedir:
 
-```bash title="Sözdizimi"
-docker run --rm '<container>' [araç komutu]
+```bash title="Syntax"
+docker run --rm '<container>' [tool command]
 ```
 
 `docker run --rm '<container>'` kısmı, konteyner sistemine bir konteyner imajından bir konteyner örneği başlatma ve içinde bir komut yürütme talimatıdır.
@@ -283,7 +283,7 @@ cowpy "Hello Containers" -c tux
 
 Konteyner içinde olduğunuz için, Docker komutlarıyla uğraşmak zorunda kalmadan girdi parametrelerini değiştirerek `cowpy` komutunu istediğiniz kadar çalıştırabilirsiniz.
 
-!!! tip "İpucu"
+!!! Tip "İpucu"
 
     Farklı bir karakter seçmek için '-c' bayrağını kullanın, şunlar dahil:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
@@ -309,8 +309,8 @@ Daha önce belirtildiği gibi, konteyner varsayılan olarak ana sistemden izole 
 
 Konteynerin ana dosya sistemine erişmesine izin vermek için, aşağıdaki sözdizimini kullanarak ana sistemden konteynere bir **hacim (volume)** **bağlayabilirsiniz**:
 
-```bash title="Sözdizimi"
--v <dış_yol>:<iç_yol>
+```bash title="Syntax"
+-v <outside_path>:<inside_path>
 ```
 
 Bizim durumumuzda `<dış_yol>` mevcut çalışma dizini olacak, bu yüzden sadece bir nokta (`.`) kullanabiliriz ve `<iç_yol>` uydurduğumuz bir takma addır; buna `/my_project` diyelim (iç yol mutlak olmalıdır).
@@ -369,7 +369,7 @@ cat /my_project/data/greetings.csv | cowpy -c turkey
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -825,7 +825,7 @@ nextflow run hello-containers.nf -resume
 Bu sefer gerçekten çalışıyor!
 Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabilirsiniz, ancak bu sefer biraz daha düzgün organize edilmiş; yalnızca rapor ve son çıktı üst düzeyde, tüm ara dosyalar bir alt dizine taşınmış.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     results/hello_containers/
@@ -843,7 +843,7 @@ Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabi
 
 Son ASCII sanat çıktısı `results/hello_containers/` dizininde, `cowpy-COLLECTED-batch-output.txt` adı altında.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_containers/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -862,7 +862,7 @@ Son ASCII sanat çıktısı `results/hello_containers/` dizininde, `cowpy-COLLEC
               ( /  (    (        ,___    ^*+_+* )   <    <      \
               U _/     )    *--<  ) ^\-----++__)   )    )       )
                 (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-              (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^
+              (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
             (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
               *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
               \             \_)^)_)) ))^^^^^^^^^^))^^^^)
@@ -886,7 +886,7 @@ Bu, şu kısaltılmış dizin yoluna karşılık gelir: `work/98/656c6c`.
 
 Bu dizinde, Nextflow'un pipeline'ı yürütme sürecinde sizin adınıza çalıştırdığı tüm komutları içeren `.command.run` dosyasını bulacaksınız.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="work/98/656c6c90cce1667c094d880f4b6dcc/.command.run"
     #!/bin/bash
@@ -1116,7 +1116,7 @@ Konteyner imajı ile konteyner örneği arasındaki fark nedir?
 - [x] Ana sistemden konteynere bir hacim bağlar
 - [ ] Konteynerin sürümünü belirtir
 
-Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-verileri-konteynere-baglayin)
+Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1126,7 +1126,7 @@ Konteynerler kullanırken neden hacimleri bağlamanız gerekiyor?
 - [x] Konteynerler varsayılan olarak ana dosya sisteminden izole olduğu için
 - [ ] Ağı etkinleştirmek için
 
-Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-verileri-konteynere-baglayin)
+Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
@@ -1136,7 +1136,7 @@ Bir Nextflow süreci için konteyneri nasıl belirtirsiniz?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-Daha fazla bilgi: [2.3.1. cowpy için bir konteyner belirtin](#231-cowpy-icin-bir-konteyner-belirtin)
+Daha fazla bilgi: [2.3.1. cowpy için bir konteyner belirtin](#231-specify-a-container-for-cowpy)
 </quiz>
 
 <quiz>
@@ -1146,7 +1146,7 @@ Daha fazla bilgi: [2.3.1. cowpy için bir konteyner belirtin](#231-cowpy-icin-bi
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-Daha fazla bilgi: [2.3.2. `nextflow.config` dosyası aracılığıyla Docker kullanımını etkinleştirin](#232-nextflowconfig-dosyasi-araciligiyla-docker-kullanimini-etkinlestirin)
+Daha fazla bilgi: [2.3.2. `nextflow.config` dosyası aracılığıyla Docker kullanımını etkinleştirin](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 
 <quiz>
@@ -1156,5 +1156,5 @@ Bir süreci konteyner içinde çalıştırırken Nextflow otomatik olarak neyi y
 - [x] Süreç betiğini konteyner içinde çalıştırmak
 - [x] Yürütme sonrası konteyner örneğini temizlemek
 
-Daha fazla bilgi: [2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin](#234-nextflowun-konteynerlestirilmis-gorevi-nasil-baslattigini-inceleyin)
+Daha fazla bilgi: [2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

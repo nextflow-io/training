@@ -1,6 +1,6 @@
 # Dosya Girdi İşleme
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bilimsel analiz iş akışları genellikle çok sayıda dosyanın işlenmesini içerir.
 Nextflow, dosyaları verimli bir şekilde yönetmek için güçlü araçlar sağlar ve verilerinizi minimum kodla düzenlemenize ve işlemenize yardımcı olur.

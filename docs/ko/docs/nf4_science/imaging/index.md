@@ -9,7 +9,7 @@ hide:
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 이 교육 과정은 데이터 분석 파이프라인을 실행하고 사용자 정의하는 데 관심이 있는 이미징 및 공간 생물학 연구자를 위한 것입니다.
-이 과정은 Molecular Cartography 공간 전사체학 데이터를 처리하는 파이프라인인 [nf-core/molkart](https://nf-co.re/molkart)를 사용하여 워크플로우를 실행하고, 구성하고, 설정하는 것과 관련된 기본 Nextflow 개념을 가르칩니다.
+이 과정은 Molecular Cartography 공간 전사체학 데이터를 처리하는 파이프라인인 [nf-core/molkart](https://nf-co.re/molkart)를 사용하여 워크플로우를 실행하고, 구성하고, 설정하는 것과 관련된 기본 Nextflow 개념을 다룹니다.
 여기서 배우는 기술은 모든 Nextflow 또는 nf-core 파이프라인에 적용할 수 있습니다.
 
 시작해봅시다! 아래의 "Open in GitHub Codespaces" 버튼을 클릭하여 교육 환경을 실행하고(가급적 별도의 탭에서), 로드되는 동안 계속 읽어주십시오.

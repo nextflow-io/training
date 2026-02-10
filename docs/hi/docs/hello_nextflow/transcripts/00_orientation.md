@@ -1,6 +1,6 @@
 # ओरिएंटेशन - वीडियो ट्रांसक्रिप्ट
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [और जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -64,7 +64,7 @@ Codespaces, GitHub द्वारा चलाए जाने वाले र
 
 इसकी खूबसूरती यह है कि Codespace सेटअप करने के लिए बस एक क्लिक है। यह सभी के लिए समान है, और हम जानते हैं कि तुमने सभी आवश्यक चीजें पहले से इंस्टॉल कर ली हैं, इसलिए यह अच्छा और तेज है।
 
-तो सबसे पहली बात "Getting Started" पर जाना है। इस बटन को देखो, जो कहता है, *Open in Codespaces। *मैं इसे एक नए टैब में खोलने के लिए command + click करने वाला हूँ, और यह हमें GitHub पर ले जाता है।
+तो सबसे पहली बात "Getting Started" पर जाना है। इस बटन को देखो, जो कहता है, _Open in Codespaces।_ मैं इसे एक नए टैब में खोलने के लिए command + click करने वाला हूँ, और यह हमें GitHub पर ले जाता है।
 
 यह इस तरह दिखता है। हम देख सकते हैं, हमने तुम्हारे लिए यहाँ सभी विकल्प सेट कर दिए हैं। यदि तुम चाहो, तो तुम change options पर क्लिक कर सकते हो। कुछ चीजें जो तुम यहाँ कर सकते हो। तुम एक बड़ी इंस्टेंस मशीन दे सकते हो, उदाहरण के लिए, यदि तुम्हें लगता है कि यह क्रैश हो जाती है क्योंकि इसकी मेमोरी समाप्त हो जाती है या ऐसा कुछ। या प्रशिक्षण सामग्री के विशिष्ट संस्करण सेट करो। लेकिन आमतौर पर तुम बस हमने यहाँ जो सेटअप किया है उसके साथ जा सकते हो और तुम इसे देख सकते हो। इस मामले में यह, 3.0 रिलीज़ का उपयोग कर रहा है।
 

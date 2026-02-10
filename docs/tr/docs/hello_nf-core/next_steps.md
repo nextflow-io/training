@@ -1,6 +1,6 @@
 # Kurs özeti
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Hello nf-core eğitim kursunu tamamladığınız için tebrikler! 🎉
 
@@ -8,7 +8,7 @@ Hello nf-core eğitim kursunu tamamladığınız için tebrikler! 🎉
 
 ## Yolculuğunuz
 
-Bir demo pipeline'ı almayı ve çalıştırmayı öğrenerek başladınız, ardından basit bir Nextflow workflow'unu bir nf-core pipeline'ına dönüştürme görevine girdiniz.
+Bir demo pipeline'ı almayı ve çalıştırmayı öğrenerek başladınız, ardından basit bir Nextflow iş akışını bir nf-core pipeline'ına dönüştürme görevine girdiniz.
 Bir şablon kullanarak bir pipeline iskelesi oluşturmayı ve mevcut pipeline'ı bu iskeleye nasıl yerleştireceğinizi öğrendiniz.
 Daha sonra yerel modüllerden birini bir nf-core modülü ile değiştirerek, bir diğer yerel modülü nf-core standartlarına uyacak şekilde dönüştürerek ve girdi doğrulaması ekleyerek pipeline'ı kademeli olarak geliştirdiniz.
 
@@ -16,7 +16,7 @@ Daha sonra yerel modüllerden birini bir nf-core modülü ile değiştirerek, bi
 
 Final `core-hello` pipeline'ınız artık şunlara sahip:
 
-- **Standartlaştırılmış yapı**: workflows, subworkflows, modüller ve yapılandırma için düzenlenmiş dizinler içeren nf-core şablonu kullanıyor
+- **Standartlaştırılmış yapı**: iş akışları, alt iş akışları, modüller ve yapılandırma için düzenlenmiş dizinler içeren nf-core şablonu kullanıyor
 - **Topluluk modülleri**: nf-core deposundan (`cat/cat`) özel modüllerinizin yanı sıra
 - **Kapsamlı doğrulama**: pipeline çalışmadan önce hem parametreleri hem de girdi verilerini kontrol ediyor
 - **Profesyonel yapılandırma**: farklı çalıştırma ortamları için profiller içeriyor
@@ -27,7 +27,7 @@ Final `core-hello` pipeline'ınız artık şunlara sahip:
 Bu uygulamalı kurs boyunca şunları öğrendiniz:
 
 1. Mevcut bir pipeline'ı inceleyerek nf-core pipeline yapısında **gezinme ve anlama**
-2. **Workflow'ları yeniden yapılandırma**: birleştirilebilir hale getirme ve nf-core şablonuna uygun hale getirme
+2. **İş akışlarını yeniden yapılandırma**: birleştirilebilir hale getirme ve nf-core şablonuna uygun hale getirme
 3. Topluluk deposundan önceden oluşturulmuş modülleri **bulma ve entegre etme**
 4. nf-core standartlarına uygun olarak adlandırma, yapı ve meta veriler için **özel modüller oluşturma**
 5. nf-schema kullanarak hataları erken yakalamak ve net geri bildirim sağlamak için **doğrulama uygulama**
@@ -42,7 +42,7 @@ Sırada ne yapabileceğinize dair en iyi 3 önerimiz:
 - [Side Quests](../side_quests/index.md) ile daha gelişmiş Nextflow özelliklerini keşfedin
 - [nf-core topluluğuna katılarak](https://nf-co.re/join) katkıda bulunun.
 
-Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a göz atmanızı öneririz. Bu platform, workflow'larınızı başlatmayı ve yönetmeyi, verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli olarak analiz çalıştırmayı daha da kolaylaştırır.
+Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a göz atmanızı öneririz. Bu platform, iş akışlarınızı başlatmayı ve yönetmeyi, verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli olarak analiz çalıştırmayı daha da kolaylaştırır.
 
 ## Geri bildirim anketi
 

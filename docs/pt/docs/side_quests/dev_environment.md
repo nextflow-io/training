@@ -577,7 +577,7 @@ Veja como todos esses recursos do IDE trabalham juntos no seu fluxo de trabalho 
 
 ---
 
-## 8. Recapitulação e notas rápidas
+## 8. Recapitulação e Notas Rápidas
 
 Aqui estão algumas notas rápidas sobre cada um dos recursos do IDE discutidos acima:
 

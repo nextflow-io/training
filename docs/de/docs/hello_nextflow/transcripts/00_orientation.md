@@ -42,7 +42,7 @@ Nextflow for newcomers ist, wo wir sind. Hier gibt es zwei Kurse: Nextflow Run, 
 
 Du kannst auch alle verschiedenen Kurse in der Seitenleiste sehen. Ich kann zu Hello Nextflow springen und wir können alle verschiedenen Kapitel sehen, die wir zusammen durcharbeiten werden.
 
-Es gibt noch ein paar andere wichtige Dinge zu beachten. Erstens ist das Trainingsmaterial versioniert, du kannst hier oben sehen, es steht 3.0 latest, was zum Zeitpunkt meiner Aufnahme die neueste stabile Version ist. Das wird sich im Laufe der Zeit ändern. Wir bringen neue Kurse heraus und aktualisieren das Material im Laufe der Zeit. Wenn es also 3.1 oder 3.2 ist, mach dir nicht zu viele Sorgen. Wenn es 4.0 ist, gibt es wahrscheinlich ein neues Video und du solltest vielleicht danach suchen, weil es wahrscheinlich signifikante Updates geben wird.
+Es gibt noch ein paar andere wichtige Dinge zu beachten. Erstens ist das Trainingsmaterial versioniert. Du kannst hier oben sehen, es steht 3.0 latest, was zum Zeitpunkt meiner Aufnahme die neueste stabile Version ist. Das wird sich im Laufe der Zeit ändern. Wir bringen neue Kurse heraus und aktualisieren das Material im Laufe der Zeit. Wenn es also 3.1 oder 3.2 ist, mach dir nicht zu viele Sorgen. Wenn es 4.0 ist, gibt es wahrscheinlich ein neues Video und du solltest vielleicht danach suchen, weil es wahrscheinlich signifikante Updates geben wird.
 
 Ein weiteres Dropdown oben ist das für die Sprache. Das ist brandneu für Version 3.0. Wir haben das zuvor übersetzte Material, das von Menschen händisch gemacht wurde, genommen und es in ein LLM eingegeben und diese ganze neue Infrastruktur zur Pflege verschiedener Übersetzungen des Trainingsmaterials mit LLM-Übersetzung aufgebaut.
 

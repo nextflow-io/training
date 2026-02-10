@@ -21,7 +21,7 @@ Per dimostrare come funziona, sostituiremo il modulo personalizzato `collectGree
     cd core-hello
     ```
 
-    Questo fornisce una pipeline nf-core completamente funzionale pronta per l'aggiunta di moduli.
+    Questo fornisce una pipeline nf-core completamente funzionante pronta per l'aggiunta di moduli.
     È possibile verificare che funzioni correttamente eseguendo il seguente comando:
 
     ```bash
@@ -222,7 +222,7 @@ Il comando automaticamente:
 - Aggiorna `modules.json` per tracciare il modulo installato
 - Fornisce l'istruzione `include` corretta da utilizzare nel workflow
 
-!!! tip
+!!! tip "Suggerimento"
 
     Assicurarsi sempre che la directory di lavoro corrente sia la radice del progetto della pipeline prima di eseguire il comando di installazione del modulo.
 
@@ -334,7 +334,7 @@ A questo punto, si potrebbe essere tentati di immergersi e iniziare a modificare
 
 Affronteremo questo aspetto come sezione separata perché coinvolge un nuovo meccanismo che non abbiamo ancora trattato: le mappe di metadati.
 
-!!! note
+!!! note "Nota"
 
     È possibile eliminare facoltativamente il file `collectGreetings.nf`:
 
@@ -344,11 +344,11 @@ Affronteremo questo aspetto come sezione separata perché coinvolge un nuovo mec
 
     Tuttavia, potrebbe essere utile mantenerlo come riferimento per comprendere le differenze tra moduli locali e nf-core.
 
-### Riepilogo
+### Takeaway
 
 Ora si sa come trovare un modulo nf-core e renderlo disponibile al proprio progetto.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Valutare cosa richiede un nuovo modulo e identificare eventuali modifiche importanti necessarie per integrarlo in una pipeline.
 
@@ -362,7 +362,7 @@ Questo ci permetterà di determinare se possiamo semplicemente trattare il nuovo
 Idealmente questo è qualcosa che si dovrebbe fare _prima_ di installare il modulo, ma meglio tardi che mai.
 (Tanto per la cronaca, esiste un comando `uninstall` per eliminare i moduli che si decide di non volere più.)
 
-!!! note
+!!! note "Nota"
 
     Il processo CAT_CAT include una gestione piuttosto intelligente di diversi tipi di compressione, estensioni di file e così via che non sono strettamente rilevanti per ciò che stiamo cercando di mostrarvi qui, quindi ignoreremo la maggior parte di essi e ci concentreremo solo sulle parti che sono importanti.
 
@@ -514,11 +514,11 @@ In base a quanto abbiamo esaminato, queste sono le modifiche principali che dobb
 
 Questo dovrebbe essere sufficiente! Ora che abbiamo un piano, siamo pronti ad immergerci.
 
-### Riepilogo
+### Takeaway
 
 Si sa come valutare l'interfaccia di input e output di un nuovo modulo per identificare i suoi requisiti, e si è appreso come le metamap vengono utilizzate dalle pipeline nf-core per mantenere i metadati strettamente associati ai dati mentre fluiscono attraverso una pipeline.
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Integrare il nuovo modulo in un workflow.
 
@@ -530,7 +530,7 @@ Ora che sapete tutto sulle metamap (o abbastanza per gli scopi di questo corso, 
 
 Per chiarezza, suddivideremo questo processo e tratteremo ogni passaggio separatamente.
 
-!!! note
+!!! note "Nota"
 
     Tutte le modifiche mostrate di seguito sono apportate alla logica del workflow nel blocco `main` nel file del workflow `core-hello/workflows/hello.nf`.
 
@@ -740,7 +740,7 @@ L'operazione `.map{ meta, file -> file }` estrae il file dalla tupla `[metadati,
 
 Quindi è solo questione di passare `ch_for_cowpy` a `cowpy` invece di `collectGreetings.out.outfile` in quest'ultima riga.
 
-!!! note
+!!! note "Nota"
 
     Nella prossima parte del corso, aggiorneremo `cowpy` per lavorare direttamente con tuple di metadati, quindi questo passaggio di estrazione non sarà più necessario.
 
@@ -797,7 +797,7 @@ Si noti che `CAT_CAT` appare ora nell'elenco di esecuzione dei processi invece d
 
 E questo è tutto! Stiamo ora utilizzando un modulo robusto curato dalla comunità invece di codice personalizzato di livello prototipale per quel passaggio nella pipeline.
 
-### Riepilogo
+### Takeaway
 
 Ora si sa come:
 
@@ -806,7 +806,7 @@ Ora si sa come:
 - Creare una semplice mappa di metadati da utilizzare con un modulo nf-core
 - Integrare un modulo nf-core nel proprio workflow
 
-### Prossimi passi
+### Cosa c'è dopo?
 
 Imparare ad adattare i propri moduli locali per seguire le convenzioni nf-core.
 Mostreremo anche come creare nuovi moduli nf-core da un template utilizzando gli strumenti nf-core.

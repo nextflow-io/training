@@ -1,5 +1,5 @@
 ---
-title: Side Quests
+title: Misiones Secundarias
 hide:
   - toc
 ---
@@ -8,9 +8,9 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Esta es una colección de mini-cursos de entrenamiento independientes que profundizan en temas específicos. Puede completarlos en cualquier orden.
+Esta es una colección de mini-cursos de capacitación independientes que profundizan en temas específicos. Puede completarlos en cualquier orden.
 
-¡Comencemos! Haga clic en el botón "Open in GitHub Codespaces" a continuación para iniciar el entorno de entrenamiento (preferiblemente en una pestaña separada), luego continúe leyendo mientras se carga.
+¡Comencemos! Haga clic en el botón "Open in GitHub Codespaces" a continuación para iniciar el entorno de capacitación (preferiblemente en una pestaña separada), luego continúe leyendo mientras se carga.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -20,7 +20,7 @@ Los requisitos previos específicos de cada mini-curso varían y están document
 Sin embargo, todos asumen cierta familiaridad mínima con lo siguiente:
 
 - Experiencia con la línea de comandos
-- Conceptos y herramientas fundamentales de Nextflow cubiertos en el curso de entrenamiento para principiantes [Hello Nextflow](../../hello_nextflow/).
+- Conceptos y herramientas fundamentales de Nextflow cubiertos en el curso de capacitación para principiantes [Hello Nextflow](../../hello_nextflow/).
 
 Para requisitos técnicos y configuración del entorno, consulte el mini-curso [Configuración del Entorno](../../envsetup/).
 

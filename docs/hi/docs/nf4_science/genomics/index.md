@@ -7,19 +7,19 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Write a linear workflow to apply variant calling to a single sample
-    - Handle accessory files such as index files and reference genome resources appropriately
-    - Leverage Nextflow's dataflow paradigm to parallelize per-sample variant calling
-    - Implement multi-sample joint calling using relevant channel operators
+    - एक single sample पर variant calling लागू करने के लिए linear workflow लिखना
+    - Index files और reference genome resources जैसी accessory files को उचित तरीके से handle करना
+    - Per-sample variant calling को parallelize करने के लिए Nextflow के dataflow paradigm का लाभ उठाना
+    - Relevant channel operators का उपयोग करके multi-sample joint calling लागू करना
   audience_prerequisites:
-    - "**Audience:** This course is designed for researchers in genomics and related fields who want to develop or customize data analysis pipelines."
-    - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common genomics file formats is assumed."
-    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/)."
+    - "**दर्शक:** यह पाठ्यक्रम genomics और संबंधित क्षेत्रों के शोधकर्ताओं के लिए डिज़ाइन किया गया है जो data analysis pipelines विकसित या customize करना चाहते हैं।"
+    - "**कौशल:** Command line, basic scripting concepts, और common genomics file formats से कुछ परिचित होना आवश्यक है।"
+    - "**पूर्वापेक्षाएँ:** [Hello Nextflow](../../hello_nextflow/) में शामिल foundational Nextflow concepts और tooling।"
 ---
 
 # जीनोमिक्स के लिए Nextflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](../../hello_nextflow/)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 **एक व्यावहारिक पाठ्यक्रम जो Nextflow को वास्तविक दुनिया के जीनोमिक्स उपयोग के मामले में लागू करता है: GATK के साथ variant calling।**
 

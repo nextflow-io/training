@@ -12,17 +12,17 @@ Questo corso di formazione è destinato ai ricercatori nel campo dell'imaging e 
 Insegna i concetti fondamentali di Nextflow relativi all'esecuzione, all'organizzazione e alla configurazione dei workflow utilizzando [nf-core/molkart](https://nf-co.re/molkart), una pipeline per l'elaborazione di dati di trascrittomica spaziale Molecular Cartography.
 Le competenze acquisite qui sono trasferibili a qualsiasi pipeline Nextflow o nf-core.
 
-Iniziamo! Clicchi sul pulsante "Open in GitHub Codespaces" qui sotto per avviare l'ambiente di formazione (preferibilmente in una scheda separata), quindi continui a leggere mentre si carica.
+Iniziamo! Clicca sul pulsante "Open in GitHub Codespaces" qui sotto per avviare l'ambiente di formazione (preferibilmente in una scheda separata), quindi continua a leggere mentre si carica.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Obiettivi di apprendimento
 
-Lavorando attraverso questo corso, imparerà ad applicare i concetti e gli strumenti fondamentali di Nextflow all'esecuzione di pipeline di analisi di imaging.
+Lavorando attraverso questo corso, imparerai ad applicare i concetti e gli strumenti fondamentali di Nextflow all'esecuzione di pipeline di analisi di imaging.
 
-Al termine di questo workshop sarà in grado di:
+Al termine di questo workshop sarai in grado di:
 
-- Avviare un workflow Nextflow localmente e monitorarne l'esecuzione
+- Avviare un flusso di lavoro Nextflow localmente e monitorarne l'esecuzione
 - Trovare e interpretare gli output (risultati) e i file di log generati da Nextflow
 - Eseguire una pipeline nf-core con dati di test e input personalizzati
 - Configurare l'esecuzione della pipeline utilizzando profili e file di parametri
@@ -35,4 +35,4 @@ Questo corso presuppone una minima familiarità con quanto segue:
 - Esperienza con la riga di comando
 - Familiarità di base con i formati di file di imaging (immagini TIFF, dati tabulari)
 
-Per i requisiti tecnici e la configurazione dell'ambiente, consulti il mini-corso [Configurazione dell'Ambiente](../../envsetup/).
+Per i requisiti tecnici e la configurazione dell'ambiente, consulta il mini-corso [Configurazione dell'Ambiente](../../envsetup/).

@@ -23,7 +23,7 @@ Pracując nad tym kursem, nauczysz się, jak stosować podstawowe koncepcje i na
 Pod koniec tego warsztatu będziesz w stanie:
 
 - Uruchomić workflow Nextflow lokalnie i monitorować jego wykonywanie
-- Znaleźć i zinterpretować wyjścia (wyniki) oraz pliki dziennika wygenerowane przez Nextflow
+- Znaleźć i zinterpretować wyjścia (wyniki) oraz pliki dziennika wygenerowane przez Nextflow'a
 - Uruchomić pipeline nf-core z danymi testowymi oraz własnymi danymi wejściowymi
 - Skonfigurować wykonywanie pipeline'u przy użyciu profili i plików parametrów
 - Zarządzać danymi wejściowymi za pomocą arkuszy próbek i parametrów wiersza poleceń

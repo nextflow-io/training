@@ -156,8 +156,8 @@ Une fois cela fait, supprimez la définition du **process** du fichier de workfl
 
 La syntaxe pour inclure un **process** depuis un **module** est assez simple :
 
-```groovy title="Syntaxe : Déclaration d'importation"
-include { <NOM_DU_PROCESS> } from '<chemin_vers_le_module>'
+```groovy title="Syntax: include declaration"
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Insérons cela au-dessus du bloc `params` et remplissons-le de manière appropriée.
@@ -452,7 +452,7 @@ Qu'est-ce qu'un module dans Nextflow ?
 - [ ] Une définition de workflow
 - [ ] Un opérateur de canal
 
-En savoir plus : [2. Créer un module pour `sayHello()`](#2-creer-un-module-pour-sayhello)
+En savoir plus : [2. Créer un module pour `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +462,7 @@ Quelle convention est généralement utilisée pour stocker les fichiers de modu
 - [x] Dans un répertoire `modules/`
 - [ ] Dans un répertoire `lib/`
 
-En savoir plus : [1. Créer un répertoire pour stocker les modules](#1-creer-un-repertoire-pour-stocker-les-modules)
+En savoir plus : [1. Créer un répertoire pour stocker les modules](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +473,7 @@ Quelle est la syntaxe correcte pour utiliser un module ?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-En savoir plus : [2.3. Ajouter une déclaration d'importation](#23-ajouter-une-declaration-dimportation-avant-le-bloc-workflow)
+En savoir plus : [2.3. Ajouter une déclaration d'importation](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

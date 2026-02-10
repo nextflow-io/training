@@ -177,11 +177,11 @@ Versuche, den Workflow mehrmals mit verschiedenen Werten für das `--greeting` A
 
 Beobachte, wie die Ausgaben und Logs isolierter Aufgabenverzeichnisse erhalten bleiben, während der Inhalt des `results` Verzeichnisses von der Ausgabe nachfolgender Ausführungen überschrieben wird.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man ein einfaches Nextflow Skript ausführt, seine Ausführung überwacht und seine Ausgaben findet.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, wie man ein grundlegendes Nextflow Skript liest und erkennt, wie seine Komponenten mit seiner Funktionalität zusammenhängen.
 
@@ -319,11 +319,11 @@ Tatsächlich ermöglicht die einfache Deklaration von `params.someParameterName`
     Diese Workflow-Parameter, die mit dem `params` System deklariert werden, verwenden immer zwei Bindestriche (`--`).
     Dies unterscheidet sie von Nextflow-Parametern, die nur einen Bindestrich (`-`) verwenden.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie ein einfacher Nextflow Workflow strukturiert ist und wie die grundlegenden Komponenten mit seiner Funktionalität zusammenhängen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Lerne, deine Workflow-Ausführungen bequem zu verwalten.
 
@@ -401,10 +401,10 @@ Du kannst das Nextflow Log verwenden, um einen Lauf anhand seines Zeitstempels u
 
     Du bist dafür verantwortlich, alle Ausgaben zu speichern, die dir wichtig sind oder auf die du dich verlassen möchtest! Wenn du die `publishDir` Direktive für diesen Zweck verwendest, stelle sicher, dass du den `copy` Modus verwendest, nicht den `symlink` Modus.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt, wie man eine Pipeline erneut startet, ohne Schritte zu wiederholen, die bereits auf identische Weise ausgeführt wurden, das Ausführungslog einsieht und den `nextflow clean` Befehl verwendest, um alte work Verzeichnisse aufzuräumen.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Jetzt, da du grundlegende Nextflow Operationen verstehst, bist du bereit, eine echte Bioimaging Pipeline mit nf-core/molkart auszuführen.

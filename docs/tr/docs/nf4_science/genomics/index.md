@@ -1,5 +1,5 @@
 ---
-title: Nextflow for Genomics
+title: Genomik için Nextflow
 hide:
   - toc
 page_type: index_page
@@ -7,17 +7,19 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Write a linear workflow to apply variant calling to a single sample
-    - Handle accessory files such as index files and reference genome resources appropriately
-    - Leverage Nextflow's dataflow paradigm to parallelize per-sample variant calling
-    - Implement multi-sample joint calling using relevant channel operators
+    - Tek bir örneğe varyant çağırma uygulamak için doğrusal bir iş akışı yazma
+    - İndeks dosyaları ve referans genom kaynakları gibi yardımcı dosyaları uygun şekilde işleme
+    - Örnek başına varyant çağırmayı paralelleştirmek için Nextflow'un veri akışı paradigmasından yararlanma
+    - İlgili kanal operatörlerini kullanarak çok örnekli joint calling uygulama
   audience_prerequisites:
-    - "**Audience:** This course is designed for researchers in genomics and related fields who want to develop or customize data analysis pipelines."
-    - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common genomics file formats is assumed."
-    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/)."
+    - "**Hedef Kitle:** Bu kurs, veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen genomik ve ilgili alanlardaki araştırmacılar için tasarlanmıştır."
+    - "**Beceriler:** Komut satırı, temel betik kavramları ve yaygın genomik dosya formatları hakkında bir miktar aşinalık varsayılmaktadır."
+    - "**Ön Koşullar:** [Hello Nextflow](../../hello_nextflow/) kursunda ele alınan temel Nextflow kavramları ve araçları."
 ---
 
 # Genomik için Nextflow
+
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 **Gerçek dünya genomik kullanım senaryosuna Nextflow uygulaması: GATK ile varyant çağırma üzerine uygulamalı bir kurs.**
 

@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Es posible instalar todo lo que necesita para ejecutar el entrenamiento en su propio entorno local manualmente.
+Es posible instalar todo lo que necesita para ejecutar la capacitación en su propio entorno local manualmente.
 
 Aquí hemos documentado cómo hacerlo en sistemas estándar compatibles con POSIX (asumiendo una máquina personal como una laptop).
 Tenga en cuenta que algunos detalles pueden ser diferentes dependiendo de su sistema específico.
@@ -15,7 +15,7 @@ Tenga en cuenta que algunos detalles pueden ser diferentes dependiendo de su sis
 ## Requisitos generales de software
 
 Nextflow se puede usar en cualquier sistema compatible con POSIX (Linux, macOS, Windows Subsystem for Linux, etc.) con Java instalado.
-Nuestros cursos de entrenamiento tienen algunos requisitos adicionales.
+Nuestros cursos de capacitación tienen algunos requisitos adicionales.
 
 En total, necesitará tener instalado el siguiente software:
 
@@ -42,15 +42,15 @@ Recomendamos usar la opción de autoinstalación para Nextflow y la opción de P
 !!! warning "Compatibilidad de versiones"
 
     <!-- Cualquier actualización de este contenido debe copiarse a la página principal -->
-    **A partir de enero de 2026, todos nuestros cursos de entrenamiento de Nextflow requieren la versión 25.10.2 o posterior de Nextflow, con la sintaxis estricta v2 activada, a menos que se indique lo contrario.**
+    **A partir de enero de 2026, todos nuestros cursos de capacitación de Nextflow requieren la versión 25.10.2 o posterior de Nextflow, con la sintaxis estricta v2 activada, a menos que se indique lo contrario.**
 
     Para más información sobre los requisitos de versión y la sintaxis estricta v2, consulte la guía de [versiones de Nextflow](../info/nxf_versions.md).
 
-    Las versiones anteriores del material de entrenamiento correspondientes a la sintaxis anterior están disponibles a través del selector de versiones en la barra de menú de esta página web.
+    Las versiones anteriores del material de capacitación correspondientes a la sintaxis anterior están disponibles a través del selector de versiones en la barra de menú de esta página web.
 
-## Materiales de entrenamiento
+## Materiales de capacitación
 
-La forma más fácil de descargar los materiales de entrenamiento es clonar todo el repositorio usando este comando:
+La forma más fácil de descargar los materiales de capacitación es clonar todo el repositorio usando este comando:
 
 ```bash
 git clone https://github.com/nextflow-io/training.git

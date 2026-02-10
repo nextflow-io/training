@@ -30,7 +30,7 @@ Diesmal werden wir die folgenden Änderungen an unserem Workflow vornehmen, um b
 3. Einen Parameter hinzufügen, um die endgültige Ausgabedatei zu benennen, und diesen als sekundäre Eingabe an den Sammelschritt übergeben.
 4. Den Sammelschritt auch eine einfache Statistik über das Verarbeitete berichten lassen.
 
-??? info "Wie du von diesem Abschnitt aus beginnen kannst"
+??? info "Wie du von diesem Abschnitt aus beginnst"
 
     Dieser Abschnitt des Kurses setzt voraus, dass du die Teile 1-2 des [Hello Nextflow](./index.md)-Kurses abgeschlossen hast, aber wenn du mit den dort behandelten Grundlagen vertraut bist, kannst du von hier aus starten, ohne etwas Besonderes tun zu müssen.
 
@@ -78,7 +78,7 @@ nextflow run hello-workflow.nf
 Wie zuvor findest du die Ausgabedateien an dem im `output`-Block angegebenen Ort.
 Für dieses Kapitel ist es unter `results/hello_workflow/`.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results/hello_workflow
@@ -123,7 +123,7 @@ echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 
 Die Ausgabe ist eine Textdatei namens `UPPER-output.txt`, die die Großbuchstaben-Version des `Hello World`-Strings enthält.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="UPPER-output.txt"
     HELLO WORLD
@@ -324,7 +324,7 @@ In der Konsolenausgabe gibt es jetzt eine zusätzliche Zeile, die dem neuen Proc
 
 Du findest die Ausgaben im Verzeichnis `results/hello_workflow`, wie im `output`-Block festgelegt.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results/hello_workflow/
@@ -338,7 +338,7 @@ Du findest die Ausgaben im Verzeichnis `results/hello_workflow`, wie im `output`
 
 Das ist praktisch! Aber es lohnt sich trotzdem, einen Blick in das Work-Verzeichnis eines der Aufrufe des zweiten Process zu werfen.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     work/e0/ecf81b4cacc648b9b994218d5b29d7/
@@ -397,7 +397,7 @@ cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COL
 
 Die Ausgabe ist eine Textdatei namens `COLLECTED-output.txt`, die die Großbuchstaben-Versionen der ursprünglichen Begrüßungen enthält.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="COLLECTED-output.txt"
     HELLO
@@ -564,7 +564,7 @@ Wir haben nur einen erwartet, aber es sind drei.
 
 Schau dir jetzt den Inhalt der endgültigen Ausgabedatei an.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/COLLECTED-output.txt"
     Holà
@@ -675,7 +675,7 @@ Wir können das mit dem folgenden Diagramm zusammenfassen:
 
 Zum Schluss kannst du dir den Inhalt der Ausgabedatei anschauen, um dich selbst davon zu überzeugen, dass alles korrekt funktioniert hat.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/COLLECTED-output.txt"
     BONJOUR
@@ -891,7 +891,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 
 Es läuft erfolgreich und produziert die gewünschte Ausgabe:
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/COLLECTED-trio-output.txt"
     HELLO
@@ -1108,7 +1108,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 Wenn du ins Verzeichnis `results/hello_workflow/` schaust, findest du die neue Berichtsdatei `trio-report.txt`.
 Öffne sie, um zu überprüfen, dass der Workflow korrekt die Anzahl der verarbeiteten Begrüßungen berichtet hat.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```txt title="trio-report.txt"
     There were 3 greetings in this batch.
@@ -1143,7 +1143,7 @@ Wie greifst du auf die Ausgabe eines Process im Workflow-Block zu?
 - [x] `processName.out`
 - [ ] `get(processName)`
 
-Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben)
+Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1153,7 +1153,7 @@ Was bestimmt die Reihenfolge der Process-Ausführung in Nextflow?
 - [x] Datenabhängigkeiten zwischen Processes
 - [ ] Zufällige Reihenfolge für parallele Ausführung
 
-Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-die-ausgabe-des-ersten-process-an-den-zweiten-process-ubergeben)
+Mehr erfahren: [1.4. Die Ausgabe des ersten Process an den zweiten Process übergeben](#14-pass-the-output-of-the-first-process-to-the-second-process)
 </quiz>
 
 <quiz>
@@ -1172,7 +1172,7 @@ workflow {
 - [ ] `mix()`
 - [ ] `join()`
 
-Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln](#24-einen-operator-verwenden-um-die-begrussungen-in-eine-einzelne-eingabe-zu-sammeln)
+Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1182,7 +1182,7 @@ Wann solltest du den `collect()`-Operator verwenden?
 - [x] Wenn ein nachfolgender Process alle Elemente von einem vorgelagerten Process benötigt
 - [ ] Wenn du Daten auf mehrere Processes aufteilen möchtest
 
-Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln](#24-einen-operator-verwenden-um-die-begrussungen-in-eine-einzelne-eingabe-zu-sammeln)
+Mehr erfahren: [2.4. Einen Operator verwenden, um die Begrüßungen in eine einzelne Eingabe zu sammeln](#24-use-an-operator-to-collect-the-greetings-into-a-single-input)
 </quiz>
 
 <quiz>
@@ -1192,7 +1192,7 @@ Wie greifst du auf eine benannte Ausgabe von einem Process zu?
 - [x] `processName.out.outputName`
 - [ ] `output.processName.outputName`
 
-Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-die-berichtsdatei-ausgeben-und-ausgaben-benennen)
+Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1202,7 +1202,7 @@ Was ist die korrekte Syntax, um eine Ausgabe in einem Process zu benennen?
 - [x] `emit: outputName`
 - [ ] `label: outputName`
 
-Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-die-berichtsdatei-ausgeben-und-ausgaben-benennen)
+Mehr erfahren: [4.1.2. Die Berichtsdatei ausgeben und Ausgaben benennen](#412-emit-the-report-file-and-name-outputs)
 </quiz>
 
 <quiz>
@@ -1212,5 +1212,5 @@ Was muss bei der Übergabe mehrerer Eingaben an einen Process zutreffen?
 - [x] Die Reihenfolge der Eingaben muss mit der im Eingabeblock definierten Reihenfolge übereinstimmen
 - [ ] Nur zwei Eingaben können gleichzeitig übergeben werden
 
-Mehr erfahren: [3. Zusätzliche Parameter an einen Process übergeben](#3-zusatzliche-parameter-an-einen-process-ubergeben)
+Mehr erfahren: [3. Zusätzliche Parameter an einen Process übergeben](#3-pass-more-than-one-input-to-a-process)
 </quiz>

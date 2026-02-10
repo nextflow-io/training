@@ -37,7 +37,7 @@ docker pull community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd1
 
 Otrzymasz następujący wynik w konsoli podczas pobierania obrazu:
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     0.6.10--1bf8ca4e1967cd18: Pulling from library/trim-galore
@@ -66,7 +66,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/trim-galore:0.6.
 ```
 
 <!--
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -81,7 +81,7 @@ Część `-v ./data:/data` polecenia umożliwi nam dostęp do zawartości katalo
 ls /data/reads
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     ENCSR000COQ1_1.fastq.gz  ENCSR000COQ2_2.fastq.gz  ENCSR000COR2_1.fastq.gz  ENCSR000CPO1_2.fastq.gz
@@ -97,7 +97,7 @@ Uruchommy `fastqc`, aby zebrać metryki kontroli jakości danych odczytów.
 fastqc /data/reads/ENCSR000COQ1_1.fastq.gz
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     application/gzip
@@ -149,7 +149,7 @@ Flaga `--fastqc` powoduje automatyczne uruchomienie etapu zbierania QC po zakoń
 
 _Wynik jest bardzo obszerny, więc poniżej przedstawiono wersję skróconą._
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     Multicore support not enabled. Proceeding with single-core trimming.
@@ -203,7 +203,7 @@ Pobierzemy obraz kontenera z zainstalowanym `hisat2`, uruchomimy go interaktywni
 docker pull community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     Unable to find image 'community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e' locally
@@ -245,7 +245,7 @@ Wynik jest bardzo obszerny, więc poniżej przedstawiono wersję skróconą:
 
 <!-- TODO: switch to full output -->
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     Settings:
@@ -285,7 +285,7 @@ hisat2 -x genome_index -U /data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz \
     samtools view -bS -o ENCSR000COQ1_1_trimmed.bam
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     HISAT2 summary stats:
@@ -334,7 +334,7 @@ Pobierzemy obraz kontenera z zainstalowanym `multiqc`, uruchomimy go interaktywn
 docker pull community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     ad8f247edb55897c: Pulling from library/pip_multiqc
@@ -368,7 +368,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/pip_multiqc:a3c2
 multiqc /data/reads /data/trimmed /data/aligned -n ENCSR000COQ1_1_QC
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
 

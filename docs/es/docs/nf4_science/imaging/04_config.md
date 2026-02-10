@@ -246,9 +246,9 @@ nextflow run ./molkart -profile local_dev --input data/samplesheet.csv --outdir 
 nextflow run ./molkart -profile hpc_cluster --input data/samplesheet.csv --outdir results
 ```
 
-!!! note "Nota"
+!!! Note "Nota"
 
-    No podemos probar el perfil HPC en este entorno de entrenamiento ya que no tenemos acceso a un planificador Slurm.
+    No podemos probar el perfil HPC en este entorno de capacitación ya que no tenemos acceso a un planificador Slurm.
     Pero esto muestra cómo lo configurarías para uso en el mundo real.
 
 ### 3.2. Usar `nextflow config` para inspeccionar la configuración
@@ -344,7 +344,7 @@ Si intentamos ejecutar este pipeline con la sobrescritura anterior, el proceso `
 Esto causará que el pipeline falle en nuestro entorno actual ya que no tenemos tanta RAM disponible.
 Aprenderemos cómo prevenir estos tipos de fallos en la siguiente sección.
 
-!!! tip "Consejo"
+!!! Tip "Consejo"
 
     Para encontrar nombres de procesos, revisa la salida de ejecución del pipeline o verifica `.nextflow.log`.
     Los nombres de procesos siguen el patrón `WORKFLOW:SUBWORKFLOW:PROCESS`.
@@ -409,7 +409,7 @@ profiles {
 }
 ```
 
-!!! warning "Advertencia"
+!!! Warning "Advertencia"
 
     Establecer límites de recursos demasiado bajos puede causar que los procesos fallen o se ejecuten lentamente.
     El pipeline puede necesitar usar algoritmos menos intensivos en memoria o procesar datos en fragmentos más pequeños.
@@ -421,7 +421,7 @@ Diferentes perfiles pueden tener diferentes límites apropiados para su entorno.
 
 ### ¿Qué sigue?
 
-¡Has completado el entrenamiento principal de Nextflow para Bioimagen!
+¡Has completado la capacitación principal de Nextflow para Bioimagen!
 
 ---
 
@@ -449,4 +449,4 @@ Próximos pasos:
 - Completa la encuesta del curso para proporcionar retroalimentación
 - Revisa [Hello Nextflow](../hello_nextflow/index.md) para aprender más sobre el desarrollo de workflows
 - Explora [Hello nf-core](../hello_nf-core/index.md) para profundizar en las herramientas de nf-core
-- Navega otros cursos en las [colecciones de entrenamiento](../training_collections/index.md)
+- Navega otros cursos en las [colecciones de capacitación](../training_collections/index.md)

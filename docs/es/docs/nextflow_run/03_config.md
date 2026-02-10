@@ -291,7 +291,7 @@ Este archivo de parámetros contiene un par clave-valor para cada una de las ent
 Note el uso de dos puntos (`:`) en lugar de signos de igual (`=`) si compara la sintaxis con el archivo de configuración.
 El archivo config está escrito en Groovy, mientras que el archivo de parámetros está escrito en YAML.
 
-!!! info "Información"
+!!! info "Info"
 
     También proporcionamos una versión JSON del archivo de parámetros como ejemplo pero no vamos a ejecutar con él aquí.
     Siéntase libre de probar ese por su cuenta.
@@ -507,7 +507,7 @@ nextflow run 3-main.nf --batch outdir
 
 Esto todavía produce la misma salida que anteriormente, excepto que esta vez encontramos nuestras salidas bajo `results_config/outdir/`.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     results_config/outdir
@@ -615,7 +615,7 @@ nextflow run 3-main.nf --batch pnames
 
 Esto todavía produce la misma salida que anteriormente, excepto que esta vez encontramos nuestras salidas bajo `results_config/pnames/`, y están agrupadas por process.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     results_config/pnames/
@@ -748,7 +748,7 @@ nextflow run 3-main.nf --batch outmode
 Esto todavía produce la misma salida que anteriormente, excepto que esta vez encontramos nuestras salidas bajo `results_config/outmode/`.
 Todavía son todas copias propias, no symlinks.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     results_config/outmode/
@@ -883,7 +883,7 @@ Esto debería funcionar sin problemas y producir las mismas salidas que anterior
 
 Detrás de escena, Nextflow ha recuperado los paquetes Conda y creado el entorno, lo cual normalmente requiere un poco de trabajo; ¡así que es bueno que no tengamos que hacer nada de eso nosotros mismos!
 
-!!! info "Información"
+!!! info "Info"
 
     Esto se ejecuta rápidamente porque el paquete `cowpy` es bastante pequeño, pero si está trabajando con paquetes grandes, puede tomar un poco más de tiempo de lo usual la primera vez, y puede ver que la salida de la consola se queda 'atascada' por un minuto o más antes de completarse.
     Esto es normal y se debe al trabajo extra que Nextflow hace la primera vez que usa un paquete nuevo.
@@ -1097,7 +1097,7 @@ Al mismo tiempo, vamos a pretender que el process `cowpy` requiere más recursos
 
 Con esta configuración, todos los processes solicitarán 1GB de memoria y un solo CPU (el predeterminado implícito), excepto el process `cowpy`, que solicitará 2GB y 2 CPUs.
 
-!!! info "Información"
+!!! info "Info"
 
     Si tiene una máquina con pocos CPUs y asigna un número alto por process, podría ver llamadas de process siendo encoladas detrás de otras.
     Esto es porque Nextflow asegura que no solicitemos más CPUs de los que están disponibles.

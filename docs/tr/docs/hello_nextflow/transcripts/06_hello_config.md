@@ -1,6 +1,6 @@
 # Bölüm 6: Hello Config - Video Transkripti
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi edinin ve iyileştirmeler önerin](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -54,7 +54,7 @@ Yani modül dosyalarından dahil edilen dört farklı sürecimiz var. Pipeline p
 
 Son bölümden bir "nextflow.config" dosyamız da zaten var, Docker'ı etkinleştirdiğimiz yer ve bugün bu dosyayı geliştireceğiz.
 
-Daha önce olduğu gibi, daha önce oluşturduğunuz sonuçlarla çakışmaması için bu ana betikte çıktı yolunu hello config olarak değiştirdik.
+Daha önce oluşturduğunuz sonuçlarla çakışmaması için bu ana betikte çıktı yolunu hello config olarak değiştirdik.
 
 Tamam, her şeyin hâlâ beklediğimiz gibi çalıştığını hızlıca kontrol edelim. Bir terminal açıyorum ve nextflow run hello-config.nf yapıyoruz. Nextflow yükleniyor. Dört farklı sürecimizi çalıştırmalı. Cowpy kullanarak güzel asci sanatı oluşturmalı ve sonra sonuçlarımızı o dizindeki sonuç dosyalarına kaydetmeli.
 

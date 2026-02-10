@@ -8,7 +8,7 @@ hide:
 
 # Hello pipeline'ı
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Eğitim kurslarımızın çoğu, Nextflow kavramlarını ve mekanizmalarını göstermek için basit, alan bağımsız bir pipeline kullanır.
 Hello Nextflow kursu, bu pipeline'ı her tasarım ve uygulama kararını açıklayan adım adım bir şekilde nasıl geliştireceğinizi gösterir.
@@ -18,11 +18,11 @@ Bu sayfa, Hello Nextflow kursunun tamamlanmasındaki pipeline'ın durumunu özet
 
 ### Özet açıklama
 
-Hello workflow'u, selamlamalar içeren bir CSV dosyası alır, bunları ayrı dosyalara yazar, her birini büyük harfe dönüştürür, hepsini tekrar bir araya toplar ve selamlamaları söyleyen eğlenceli bir karakterin ASCII resmini içeren tek bir metin dosyası çıktılar.
+Hello iş akışı, selamlamalar içeren bir CSV dosyası alır, bunları ayrı dosyalara yazar, her birini büyük harfe dönüştürür, hepsini tekrar bir araya toplar ve selamlamaları söyleyen eğlenceli bir karakterin ASCII resmini içeren tek bir metin dosyası çıktılar.
 
-### Workflow adımları (process'ler)
+### İş akışı adımları (süreçler)
 
-Dört adım, ayrı modül dosyalarında saklanan Nextflow process'leri (`sayHello`, `convertToUpper`, `collectGreetings` ve `cowpy`) olarak uygulanmıştır.
+Dört adım, ayrı modül dosyalarında saklanan Nextflow süreçleri (`sayHello`, `convertToUpper`, `collectGreetings` ve `cowpy`) olarak uygulanmıştır.
 
 1. **`sayHello`:** Her selamlamayı kendi çıktı dosyasına yazar (örn. "Hello-output.txt")
 2. **`convertToUpper`:** Her selamlamayı büyük harfe dönüştürür (örn. "HELLO")

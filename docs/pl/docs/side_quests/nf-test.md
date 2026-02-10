@@ -2,7 +2,7 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Możliwość systematycznego testowania, czy każda część Twojego workflow działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.
+Możliwość systematycznego testowania, czy każda część Twojego workflow'u działa zgodnie z założeniami, jest kluczowa dla odtwarzalności i długoterminowej konserwacji, a także może być ogromną pomocą podczas procesu twórczego.
 
 Poświęćmy chwilę na omówienie, dlaczego testowanie jest tak ważne. Jeśli tworzysz workflow, jedną z pierwszych rzeczy, które zrobisz, jest pobranie danych testowych, o których wiesz, że są poprawne i powinny dać wynik. Dodajesz pierwszy proces do pipeline'u i podłączasz go do Swoich danych wejściowych, aby działał. Następnie, aby sprawdzić, czy wszystko działa, uruchamiasz go na danych testowych. Zakładając, że działa, przechodzisz do następnego procesu i ponownie uruchamiasz dane testowe. Powtarzasz ten proces, aż otrzymasz pipeline, z którego jesteś zadowolony.
 
@@ -12,7 +12,7 @@ W miarę rozwoju pipeline'u szybko stanie się on tak złożony, że ręczne tes
 
 Testowanie pozwala systematycznie sprawdzać, czy każda część pipeline'u działa zgodnie z oczekiwaniami. Korzyści dla programisty z dobrze napisanych testów są ogromne:
 
-- **Pewność**: Ponieważ testy obejmują cały pipeline, możesz być pewny, że zmiana czegoś nie wpłynie na nic innego
+- **Pewność**: Ponieważ testy obejmują cały pipeline, możesz być pewien, że zmiana czegoś nie wpłynie na nic innego
 - **Zaufanie**: Kiedy wielu programistów pracuje nad pipeline'em, wiedzą, że inni programiści nie zepsuli pipeline'u ani żadnego komponentu.
 - **Przejrzystość**: Testy pokazują, gdzie pipeline zawodzi i ułatwiają wyśledzenie problemu. Działają również jako forma dokumentacji, pokazując, jak uruchomić proces lub workflow.
 - **Szybkość**: Ponieważ testy są zautomatyzowane, można je uruchamiać bardzo szybko i wielokrotnie. Możesz szybko iterować z mniejszą obawą o wprowadzenie nowych błędów.
@@ -117,7 +117,7 @@ Pełny kod workflow'u możesz zobaczyć poniżej.
     params.input_file = "greetings.csv"
 
     /*
-    * Użyj echo do wypisania 'Hello World!' na standardowe wyjście
+    * Use echo to print 'Hello World!' to standard out
     */
     process sayHello {
 
@@ -136,7 +136,7 @@ Pełny kod workflow'u możesz zobaczyć poniżej.
     }
 
     /*
-    * Użyj narzędzia zamiany tekstu do przekształcenia pozdrowienia na wielkie litery
+    * Use a text replace utility to convert the greeting to uppercase
     */
     process convertToUpper {
 
@@ -369,7 +369,7 @@ when {
 }
 ```
 
-2. nf-test sprawdził status pipeline'u i porównał go z blokiem `when`:
+2. nf-test sprawdził status pipeline'u i porównał go z blokiem `then`:
 
 ```groovy title="tests/main.nf.test"
 then {
@@ -899,7 +899,7 @@ Oto jak moglibyśmy zmodyfikować nasz test, aby sprawdzić konkretną zawartoś
 
         when {
             params {
-                // define parameters here
+                // zdefiniuj parametry tutaj
             }
             process {
                 """
@@ -1185,7 +1185,7 @@ Sprawdź [dokumentację nf-test](https://www.nf-test.com/), aby poznać bardziej
 - Dowiedzieć się więcej o innych typach testów, takich jak testy workflow'ów i modułów
 - Zbadać bardziej zaawansowane techniki walidacji zawartości
 
-**Pamiętaj:** Testy są żywą dokumentacją tego, jak powinien zachowywać się Twój kod. Im więcej testów napiszesz i im bardziej szczegółowe będą Twoje asercje, tym bardziej możesz być pewny niezawodności Swojego pipeline'u.
+**Pamiętaj:** Testy są żywą dokumentacją tego, jak powinien zachowywać się Twój kod. Im więcej testów napiszesz i im bardziej szczegółowe będą Twoje asercje, tym bardziej możesz być pewien niezawodności Swojego pipeline'u.
 
 ---
 

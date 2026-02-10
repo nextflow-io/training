@@ -7,10 +7,10 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Einen linearen Workflow zu schreiben, um Variant Calling auf eine einzelne Probe anzuwenden
-    - Zusatzdateien wie Index-Dateien und Referenzgenom-Ressourcen angemessen zu handhaben
-    - Das Dataflow-Paradigm von Nextflow zu nutzen, um Variant Calling pro Probe zu parallelisieren
-    - Multi-Sample Joint Calling mit relevanten Channel-Operatoren zu implementieren
+    - Einen linearen Workflow schreiben, um Variant Calling auf eine einzelne Probe anzuwenden
+    - Zusatzdateien wie Index-Dateien und Referenzgenom-Ressourcen angemessen handhaben
+    - Das Dataflow-Paradigm von Nextflow nutzen, um Variant Calling pro Probe zu parallelisieren
+    - Multi-Sample Joint Calling mit relevanten Channel-Operatoren implementieren
   audience_prerequisites:
     - "**Zielgruppe:** Dieser Kurs richtet sich an Forschende im Bereich Genomik und verwandten Feldern, die Datenanalyse-Pipelines entwickeln oder anpassen möchten."
     - "**Kenntnisse:** Grundlegende Vertrautheit mit der Kommandozeile, grundlegenden Scripting-Konzepten und gängigen Dateiformaten der Genomik wird vorausgesetzt."
@@ -19,9 +19,11 @@ additional_information:
 
 # Nextflow für Genomik
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 **Ein praxisorientierter Kurs, der Nextflow auf einen realen Genomik-Anwendungsfall anwendet: Variant Calling mit GATK.**
 
-Dieser Kurs baut auf dem [Hello Nextflow](../../hello_nextflow/) Einsteiger-Training auf und zeigt, wie du Nextflow im spezifischen Kontext der Genomik-Domäne nutzen kannst.
+Dieser Kurs baut auf dem [Hello Nextflow](../../hello_nextflow/) Einsteiger-Training auf und zeigt, wie du Nextflow im spezifischen Kontext der Genomik nutzen kannst.
 Du wirst eine Variant-Calling-Pipeline mit [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) implementieren, einem weit verbreiteten Softwarepaket zur Analyse von High-Throughput-Sequenzierungsdaten.
 
 <!-- additional_information -->

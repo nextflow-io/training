@@ -23,7 +23,7 @@ Channels ऐसी queues हैं जो inputs को efficiently handle क�
 इस course के इस भाग में, तुम सीखोगे कि विभिन्न स्रोतों से multiple inputs handle करने के लिए channel कैसे use करें।
 तुम channel contents को आवश्यकतानुसार transform करने के लिए [**operators**](https://nextflow.io/docs/latest/reference/operator.html) use करना भी सीखोगे।
 
-??? info "इस section से कैसे शुरू करें"
+??? info "इस खंड से कैसे शुरू करें"
 
     Course का यह section मानता है कि तुमने [Hello Nextflow](./index.md) course का Part 1 complete कर लिया है, लेकिन यदि तुम उस section में covered basics से comfortable हो, तो तुम बिना कुछ special किए यहाँ से शुरू कर सकते हो।
 
@@ -49,7 +49,7 @@ output {
 nextflow run hello-channels.nf --input 'Hello Channels!'
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -62,7 +62,7 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 
 पहले की तरह, तुम `results/hello_channels` directory में `output.txt` नामक output file पाओगे (जैसा कि workflow script के `output` block में specify किया गया है, ऊपर दिखाया गया है)।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console title="results/hello_channels" hl_lines="2-3"
     results
@@ -73,7 +73,7 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
     └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_channels/output.txt"
     Hello Channels!
@@ -193,7 +193,7 @@ Workflow block में, निम्नलिखित code change करो:
 nextflow run hello-channels.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -207,7 +207,7 @@ nextflow run hello-channels.nf
 यदि तुमने दोनों edits correctly किए, तो तुम्हें एक successful execution मिलनी चाहिए।
 तुम results directory check कर सकते हो यह satisfy करने के लिए कि outcome अभी भी पहले जैसा ही है।
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_channels/output.txt"
     Hello Channels!
@@ -268,7 +268,7 @@ Exact spaces की amount matter नहीं करती जब तक यह
 nextflow run hello-channels.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console hl_lines="7"
      N E X T F L O W   ~  version 25.10.2
@@ -334,7 +334,7 @@ Documentation हमें बताती है कि यह काम कर
 nextflow run hello-channels.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console hl_lines="6"
      N E X T F L O W   ~  version 25.10.2
@@ -353,7 +353,7 @@ Execution monitor दिखाता है कि `sayHello` process के ल
 
 हालाँकि, results directory में अभी भी केवल एक output है:
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console title="results/hello_channels" hl_lines="3"
     results
@@ -364,7 +364,7 @@ Execution monitor दिखाता है कि `sayHello` process के ल
     └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="results/hello_channels/output.txt"
     Holà
@@ -382,7 +382,7 @@ _Diagram में, channel को green में represent किया गय
 Execution monitor को वापस देखते हुए, इसने हमें केवल एक subdirectory path (`f4/c9962c`) दी।
 चलो वहाँ देखते हैं।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console hl_lines="9"
     work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -396,7 +396,7 @@ Execution monitor को वापस देखते हुए, इसने �
     └── output.txt
     ```
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
     Hello
@@ -417,7 +417,7 @@ Logging को expand करके per process call एक line display कर�
 nextflow run hello-channels.nf -ansi-log false
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
      N E X T F L O W  ~  version 25.10.2
@@ -444,7 +444,7 @@ nextflow run hello-channels.nf -ansi-log false
 
 Anyway, अब जबकि हमारे पास प्रत्येक process call की subdirectories हैं, हम उनके logs और outputs खोज सकते हैं।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     work/23/871c7ec3642a898ecd5e6090d21300/
@@ -482,7 +482,7 @@ Anyway, अब जबकि हमारे पास प्रत्येक p
     └── output.txt
     ```
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
     Bonjour
@@ -578,7 +578,7 @@ Output definition और `script:` command block दोनों में `outp
 nextflow run hello-channels.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -595,7 +595,7 @@ nextflow run hello-channels.nf
 Summary view पर वापस आते हुए, output फिर से एक line पर summarize हो गया है।
 यह देखने के लिए `results` directory पर नज़र डालो कि क्या सभी output greetings वहाँ हैं।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     results/hello_channels/
@@ -607,7 +607,7 @@ Summary view पर वापस आते हुए, output फिर से �
 
 हाँ! और प्रत्येक में expected contents हैं।
 
-??? abstract "File contents"
+??? abstract "फ़ाइल सामग्री"
 
     ```console title="Bonjour-output.txt"
     Bonjour
@@ -758,7 +758,7 @@ Workflow block में, निम्नलिखित change करो:
 nextflow run hello-channels.nf
 ```
 
-??? failure "Command output"
+??? failure "कमांड आउटपुट"
 
     ```console hl_lines="7 11 16"
     N E X T F L O W   ~  version 25.10.2
@@ -811,7 +811,7 @@ nextflow run hello-channels.nf
 तुम पहले से `.view()` operator use कर चुके हो, जो बस देखता है कि वहाँ क्या है।
 अब हम उन operators को देखेंगे जो हमें channel की contents पर act करने की अनुमति देते हैं।
 
-यदि तुम Nextflow documentation में [operators की list](https://www.nextflow.io/docs/latest/reference/operator.html) skim through करते हो, तो तुम [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten) पाओगे, जो exactly वही करता है जो हमें चाहिए: array की contents unpack करना और उन्हें individual items के रूप में emit करना।
+यदि तुम Nextflow documentation में [operators की list](https://nextflow.io/docs/latest/reference/operator.html) skim through करते हो, तो तुम [`flatten()`](https://nextflow.io/docs/latest/reference/operator.html#flatten) पाओगे, जो exactly वही करता है जो हमें चाहिए: array की contents unpack करना और उन्हें individual items के रूप में emit करना।
 
 #### 3.2.1. `flatten()` operator add करें
 
@@ -938,7 +938,7 @@ Finally, तुम workflow को फिर से running try कर सकत
 nextflow run hello-channels.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console hl_lines="7-10"
      N E X T F L O W   ~  version 25.10.2
@@ -1051,7 +1051,7 @@ Workflow block में, निम्नलिखित code change करो:
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten() को uncomment करें
-                             // .view { greeting -> "Flatten के बाद: $greeting" }
+                             // .view { greeting -> "After flatten: $greeting" }
         // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
@@ -1092,7 +1092,7 @@ Workflow block में, निम्नलिखित code change करो:
 nextflow run hello-channels.nf
 ```
 
-??? failure "Command output"
+??? failure "कमांड आउटपुट"
 
     ```console hl_lines="5 6 9 14"
      N E X T F L O W   ~  version 25.10.2
@@ -1134,11 +1134,11 @@ nextflow run hello-channels.nf
 
 हम Nextflow को file open करवाकर इसकी contents को channel में load कैसे करवाएं?
 
-Sounds like हमें एक और [operator](https://www.nextflow.io/docs/latest/reference/operator.html) चाहिए!
+Sounds like हमें एक और [operator](https://nextflow.io/docs/latest/reference/operator.html) चाहिए!
 
 ### 4.2. File parse करने के लिए `splitCsv()` operator use करें
 
-Operators की list को फिर से देखते हुए, हमें [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv) मिलता है, जो CSV-formatted text को parse और split करने के लिए designed है।
+Operators की list को फिर से देखते हुए, हमें [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) मिलता है, जो CSV-formatted text को parse और split करने के लिए designed है।
 
 #### 4.2.1. Channel पर `splitCsv()` apply करें
 
@@ -1175,7 +1175,7 @@ Workflow block में, `flatten()` को `splitcsv()` (uncommented) से r
         greeting_ch = channel.fromPath(params.input)
                              .view { greeting -> "Before flatten: $greeting" }
                              // .flatten() को uncomment करें
-                             // .view { greeting -> "Flatten के बाद: $greeting" }
+                             // .view { greeting -> "After flatten: $greeting" }
         // एक अभिवादन emit करें
         sayHello(greeting_ch)
 
@@ -1195,7 +1195,7 @@ Technically हम same variable name (`greeting`) use कर सकते थ�
 nextflow run hello-channels.nf
 ```
 
-??? failure "Command output"
+??? failure "कमांड आउटपुट"
 
     ```console hl_lines="7-11 14 19"
      N E X T F L O W   ~  version 25.10.2
@@ -1315,7 +1315,7 @@ Workflow block में, निम्नलिखित code change करो:
 nextflow run hello-channels.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -1380,7 +1380,7 @@ Nextflow में channel क्या है?
 - [x] Processes के बीच data pass करने के लिए एक queue-जैसी structure
 - [ ] एक configuration setting
 
-और जानें: [1.1. Create an input channel](#11-create-an-input-channel)
+और जानें: [1.1. Input channel बनाएं](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1396,7 +1396,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] कुछ नहीं (channels default रूप से print नहीं करते)
 - [ ] एक error (invalid syntax)
 
-और जानें: [1.1. Create an input channel](#11-create-an-input-channel)
+और जानें: [1.1. Input channel बनाएं](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1406,7 +1406,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Process केवल first value के साथ run होता है
 - [ ] Process केवल last value के साथ run होता है
 
-और जानें: [2. Modify the workflow to run on multiple input values](#2-modify-the-workflow-to-run-on-multiple-input-values)
+और जानें: [2. Multiple input values पर run करने के लिए workflow modify करें](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 
 <quiz>
@@ -1416,7 +1416,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [x] Arrays को individual elements में unpack करता है
 - [ ] Duplicate elements remove करता है
 
-और जानें: [3.2.1. Add the `flatten()` operator](#321-add-the-flatten-operator)
+और जानें: [3.2.1. `flatten()` operator add करें](#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
@@ -1426,7 +1426,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [x] Channel contents inspect और debug करना
 - [ ] Channel contents को file में save करना
 
-और जानें: [1.4. Use `view()` to inspect the channel contents](#14-use-view-to-inspect-the-channel-contents)
+और जानें: [1.4. Channel contents inspect करने के लिए `view()` use करें](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
@@ -1436,7 +1436,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [x] CSV file को प्रत्येक row represent करने वाले arrays में parse करता है
 - [ ] Multiple CSV files merge करता है
 
-और जानें: [4.2. Use the `splitCsv()` operator to parse the file](#42-use-the-splitcsv-operator-to-parse-the-file)
+और जानें: [4.2. File parse करने के लिए `splitCsv()` operator use करें](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
@@ -1446,7 +1446,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [x] Channel में प्रत्येक element को transform करना
 - [ ] Channel में elements count करना
 
-और जानें: [4.3. Use the `map()` operator to extract the greetings](#43-use-the-map-operator-to-extract-the-greetings)
+और जानें: [4.3. Greetings extract करने के लिए `map()` operator use करें](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>
@@ -1456,5 +1456,5 @@ Multiple inputs process करते समय dynamic output filenames use क�
 - [x] Output files को एक दूसरे को overwrite करने से रोकने के लिए
 - [ ] Resume functionality enable करने के लिए
 
-और जानें: [2.2. Ensure the output file names will be unique](#22-ensure-the-output-file-names-will-be-unique)
+और जानें: [2.2. सुनिश्चित करें कि output file names unique होंगे](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>

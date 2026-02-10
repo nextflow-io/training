@@ -1,5 +1,7 @@
 # Kolejne kroki - transkrypcja wideo
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -48,7 +50,7 @@ Jest darmowy poziom Seqera Platform, więc możesz używać praktycznie wszystki
 
 Ok. Dalej. Jeśli kiedykolwiek będziesz potrzebować wsparcia w zakresie Nextflow'a, sprawdź community.seqera.io. Jest tam naprawdę aktywnie i mamy nadzieję Cię tam zobaczyć i omówić Twoje różne problemy i przypadki użycia, a może teraz będziesz mógł nawet pomóc innym osobom.
 
-Mamy też wiele wydarzeń. Organizujemy wydarzenia społeczności pochodzące z nf-core i Nextflow. W marcu mamy online i rozproszony hackathon nf-core, w zeszłym roku dołączyło ponad tysiąc osób z miejsc na całym świecie. Dołącz do nas, jeśli możesz.
+Mamy też wiele wydarzeń. Organizujemy wydarzenia społeczności pochodzące z nf-core i Nextflow'a. W marcu mamy online i rozproszony hackathon nf-core, w zeszłym roku dołączyło ponad tysiąc osób z miejsc na całym świecie. Dołącz do nas, jeśli możesz.
 
 A także mamy wydarzenia Nextflow Summit, jedno w Bostonie, a następnie wydarzenie w Barcelonie i online. Fantastyczne wystąpienia, gdzie możesz usłyszeć o ludziach używających Nextflow'a w naprawdę masywny, szalony i ekscytujący sposób. Są też związane z nimi hackathony i szkolenia stacjonarne.
 

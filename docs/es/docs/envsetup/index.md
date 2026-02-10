@@ -17,21 +17,21 @@ Este entorno en contenedor puede ejecutarse directamente en Github Codespaces o 
 
 <div class="grid cards" markdown>
 
-- :material-cloud-outline:{ .lg .middle } **Github Codespaces**
+-   :material-cloud-outline:{ .lg .middle } __Github Codespaces__
 
-  ***
+    ---
 
-  GitHub Codespaces es un servicio basado en web que nos permite proporcionar un entorno preconstruido para el entrenamiento, con todas las herramientas y datos incluidos, respaldado por máquinas virtuales en la nube. Es accesible de forma gratuita para cualquier persona con una cuenta de Github.
+    GitHub Codespaces es un servicio basado en web que nos permite proporcionar un entorno preconstruido para el entrenamiento, con todas las herramientas y datos incluidos, respaldado por máquinas virtuales en la nube. Es accesible de forma gratuita para cualquier persona con una cuenta de Github.
 
-  [Usar Github Codespaces:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
+    [Usar Github Codespaces:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
 
-- :material-laptop:{ .lg .middle } **Devcontainers locales**
+-   :material-laptop:{ .lg .middle } __Devcontainers locales__
 
-  ***
+    ---
 
-  VS Code con Devcontainers proporciona un entorno de desarrollo en contenedor ejecutado localmente con todas las herramientas de entrenamiento preconfiguradas. Ofrece el mismo entorno preconstruido que Codespaces pero ejecutándose completamente en su hardware local.
+    VS Code con Devcontainers proporciona un entorno de desarrollo en contenedor ejecutado localmente con todas las herramientas de entrenamiento preconfiguradas. Ofrece el mismo entorno preconstruido que Codespaces pero ejecutándose completamente en su hardware local.
 
-  [Usar Devcontainers localmente :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
+    [Usar Devcontainers localmente :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
 
 </div>
 

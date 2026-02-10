@@ -1,6 +1,6 @@
 # Bölüm 4: Hello Modules
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -81,7 +81,7 @@ nextflow run hello-modules.nf
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde bulacaksınız (burada, `results/hello_modules/`).
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     results/hello_modules/
@@ -156,8 +156,8 @@ Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
 Bir modülden süreç dahil etmenin sözdizimi oldukça basittir:
 
-```groovy title="Sözdizimi: include tanımı"
-include { <SÜREÇ_ADI> } from '<modül_yolu>'
+```groovy title="Syntax: include declaration"
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Bunu `params` bloğunun üstüne ekleyelim ve uygun şekilde dolduralım.
@@ -358,7 +358,7 @@ process collectGreetings {
     count_greetings = input_files.size()
     """
     cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-    echo 'Bu grupta ${count_greetings} selamlama vardı.' > '${batch_name}-report.txt'
+    echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
     """
 }
 ```
@@ -439,7 +439,7 @@ Bu, kodu kopyala-yapıştır yapmaktan daha iyi çünkü daha sonra modülü gel
 
 İsterseniz kısa bir mola verin.
 
-Hazır olduğunuzda, yazılım bağımlılıklarını daha kullanışlı ve tekrarlanabilir bir şekilde yönetmek için konteynerleri nasıl kullanacağınızı öğrenmek için [**Bölüm 5: Merhaba Konteynerler**](./05_hello_containers.md)'e geçin.
+Hazır olduğunuzda, yazılım bağımlılıklarını daha kullanışlı ve tekrarlanabilir bir şekilde yönetmek için konteynerleri nasıl kullanacağınızı öğrenmek için [**Bölüm 5: Hello Containers**](./05_hello_containers.md)'e geçin.
 
 ---
 
@@ -452,7 +452,7 @@ Nextflow'da modül nedir?
 - [ ] Bir iş akışı tanımı
 - [ ] Bir kanal operatörü
 
-Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-sayhello-icin-bir-modul-olusturun)
+Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +462,7 @@ Modül dosyaları için genellikle kullanılan konvansiyon nedir?
 - [x] Bir `modules/` dizininde
 - [ ] Bir `lib/` dizininde
 
-Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-modulleri-depolamak-icin-bir-dizin-olusturun)
+Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +473,7 @@ Bir modül kullanmak için doğru sözdizimi nedir?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-is-akisi-blogundan-once-bir-include-tanimi-ekleyin)
+Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

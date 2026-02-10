@@ -291,7 +291,7 @@ Questo file di parametri contiene una coppia chiave-valore per ciascuno degli in
 Notate l'uso dei due punti (`:`) invece dei segni di uguale (`=`) se confrontate la sintassi con il file di configurazione.
 Il file config è scritto in Groovy, mentre il file di parametri è scritto in YAML.
 
-!!! info "Informazione"
+!!! info "Info"
 
     Forniamo anche una versione JSON del file di parametri come esempio ma non la eseguiremo qui.
     Sentitevi liberi di provare quella da soli.
@@ -507,7 +507,7 @@ nextflow run 3-main.nf --batch outdir
 
 Questo produce ancora lo stesso output di prima, tranne che questa volta troviamo i nostri output sotto `results_config/outdir/`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     results_config/outdir
@@ -615,7 +615,7 @@ nextflow run 3-main.nf --batch pnames
 
 Questo produce ancora lo stesso output di prima, tranne che questa volta troviamo i nostri output sotto `results_config/pnames/`, e sono raggruppati per process.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     results_config/pnames/
@@ -748,7 +748,7 @@ nextflow run 3-main.nf --batch outmode
 Questo produce ancora lo stesso output di prima, tranne che questa volta troviamo i nostri output sotto `results_config/outmode/`.
 Sono ancora tutte copie vere, non symlink.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     results_config/outmode/
@@ -883,7 +883,7 @@ Questo dovrebbe funzionare senza problemi e produrre gli stessi output di prima 
 
 Dietro le quinte, Nextflow ha recuperato i pacchetti Conda e creato l'ambiente, che normalmente richiede un po' di lavoro; quindi è bello che non dobbiamo fare niente di tutto ciò noi stessi!
 
-!!! info "Informazione"
+!!! info "Info"
 
     Questo viene eseguito velocemente perché il pacchetto `cowpy` è abbastanza piccolo, ma se state lavorando con pacchetti grandi, potrebbe richiedere un po' più di tempo del solito la prima volta, e potreste vedere l'output della console rimanere 'bloccato' per un minuto circa prima di completarsi.
     Questo è normale ed è dovuto al lavoro extra che Nextflow fa la prima volta che usate un nuovo pacchetto.
@@ -931,7 +931,7 @@ Nextflow supporta [molti backend di esecuzione diversi](https://nextflow.io/docs
 La scelta dell'executor è impostata da una direttiva del process chiamata `executor`.
 Per impostazione predefinita è impostata su `local`, quindi la seguente configurazione è implicita:
 
-```groovy title="Configurazione integrata"
+```groovy title="Built-in configuration"
 process {
     executor = 'local'
 }
@@ -959,7 +959,7 @@ Sfortunatamente, ciascuno di questi sistemi usa tecnologie, sintassi e configura
 
     Per esempio, lo stesso job che richiede 8 CPU e 4GB di RAM per essere eseguito sulla coda "my-science-work" deve essere espresso in modi diversi a seconda del backend.
 
-    ```bash title="Config per SLURM / sottometti usando sbatch"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -967,7 +967,7 @@ Sfortunatamente, ciascuno di questi sistemi usa tecnologie, sintassi e configura
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="Config per PBS / sottometti usando qsub"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -975,7 +975,7 @@ Sfortunatamente, ciascuno di questi sistemi usa tecnologie, sintassi e configura
     #PBS -l mem=4gb
     ```
 
-    ```bash title="Config per SGE / sottometti usando qsub"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -1013,7 +1013,7 @@ La maggior parte delle piattaforme di calcolo ad alte prestazioni permettono (e 
 Per impostazione predefinita, Nextflow userà una singola CPU e 2GB di memoria per ogni process.
 Le corrispondenti direttive del process sono chiamate `cpus` e `memory`, quindi la seguente configurazione è implicita:
 
-```groovy title="Configurazione integrata" linenums="1"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -1097,7 +1097,7 @@ Allo stesso tempo, faremo finta che il process `cowpy` richieda più risorse deg
 
 Con questa configurazione, tutti i process richiederanno 1GB di memoria e una singola CPU (il predefinito implicito), tranne il process `cowpy`, che richiederà 2GB e 2 CPU.
 
-!!! info "Informazione"
+!!! info "Info"
 
     Se avete una macchina con poche CPU e allocate un numero elevato per process, potreste vedere chiamate ai process mettersi in coda l'una dietro l'altra.
     Questo perché Nextflow assicura che non richiediamo più CPU di quelle disponibili.
@@ -1127,7 +1127,7 @@ Per esempio, il vostro cluster potrebbe richiedere di rimanere entro certi limit
 
 Potete usare la direttiva `resourceLimits` per impostare le limitazioni rilevanti. La sintassi appare così quando è da sola in un blocco process:
 
-```groovy title="Esempio di sintassi"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -1249,10 +1249,10 @@ Potete considerare questo un'alternativa all'uso di un file di parametri.
 
 La sintassi per esprimere valori predefiniti in questo contesto appare così, per un profilo che chiamiamo `test`:
 
-```groovy title="Esempio di sintassi"
+```groovy title="Syntax example"
     test {
-        params.<parametro1>
-        params.<parametro2>
+        params.<parameter1>
+        params.<parameter2>
         ...
     }
 ```
@@ -1292,7 +1292,7 @@ Proprio come per i profili di configurazione tecnica, potete impostare molteplic
 Convenientemente, i profili non sono mutuamente esclusivi, quindi possiamo specificare profili multipli nella nostra riga di comando usando la seguente sintassi `-profile <profilo1>,<profilo2>` (per qualsiasi numero di profili).
 
 Se combinate profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto usando qualunque valore abbia letto per ultimo (_cioè_ qualunque cosa venga dopo nel file).
-Se le impostazioni in conflitto sono impostate in diverse fonti di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html#configuration-file) predefinito.
+Se le impostazioni in conflitto sono impostate in diverse fonti di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) predefinito.
 
 Proviamo ad aggiungere il profilo test al nostro comando precedente:
 
@@ -1356,7 +1356,7 @@ Questo significa che finché distribuiamo tutti i file di dati di test con il co
 Come notato sopra, a volte lo stesso parametro può essere impostato a valori diversi in profili che volete combinare.
 E più in generale, ci sono numerosi posti dove gli elementi di configurazione possono essere memorizzati, e a volte le stesse proprietà possono essere impostate a valori diversi in posti diversi.
 
-Nextflow applica un [ordine di precedenza](https://www.nextflow.io/docs/latest/config.html#configuration-file) stabilito per risolvere qualsiasi conflitto, ma può essere difficile determinarlo da soli.
+Nextflow applica un [ordine di precedenza](https://nextflow.io/docs/latest/config.html#configuration-file) stabilito per risolvere qualsiasi conflitto, ma può essere difficile determinarlo da soli.
 E anche se nulla è in conflitto, può essere noioso cercare tutti i possibili posti dove le cose potrebbero essere configurate.
 
 Fortunatamente, Nextflow include un conveniente strumento utility chiamato `config` che può automatizzare tutto quel processo per voi.
@@ -1564,7 +1564,7 @@ Quando i valori dei parametri sono impostati sia nel file del workflow che in `n
 - [ ] Il primo valore incontrato
 - [ ] Causa un errore
 
-Approfondisci: [1.1. Imposta i valori in `nextflow.config`](#11-imposta-i-valori-in-nextflowconfig)
+Approfondisci: [1.1. Imposta i valori in `nextflow.config`](#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1574,7 +1574,7 @@ Qual è la differenza di sintassi tra l'impostazione di un valore predefinito di
 - [ ] Il config usa dichiarazione tipizzata, il workflow usa assegnazione
 - [ ] Solo i file config possono impostare valori predefiniti
 
-Approfondisci: [1.1. Imposta i valori in `nextflow.config`](#11-imposta-i-valori-in-nextflowconfig)
+Approfondisci: [1.1. Imposta i valori in `nextflow.config`](#11-set-up-values-in-nextflowconfig)
 </quiz>
 
 <quiz>
@@ -1584,7 +1584,7 @@ Come specificate un file di parametri quando eseguite un workflow?
 - [x] `-params-file params.yaml`
 - [ ] `--input-params params.yaml`
 
-Approfondisci: [1.3. Usa un file di parametri](#13-usa-un-file-di-parametri)
+Approfondisci: [1.3. Usa un file di parametri](#13-use-a-parameter-file)
 </quiz>
 
 <quiz>
@@ -1594,7 +1594,7 @@ Cosa controlla l'opzione di configurazione `outputDir`?
 - [ ] La directory per i file di log
 - [ ] La posizione dei file modulo
 
-Approfondisci: [2.1. Personalizza il nome della directory outputDir](#21-personalizza-il-nome-della-directory-outputdir)
+Approfondisci: [2.1. Personalizza il nome della directory outputDir](#21-customize-the-outputdir-directory-name)
 </quiz>
 
 <quiz>
@@ -1604,7 +1604,7 @@ Come si fa riferimento dinamicamente al nome di un process nella configurazione 
 - [x] `#!groovy path { <process>.name }`
 - [ ] `@processName`
 
-Approfondisci: [2.2. Organizza gli output per process](#22-organizza-gli-output-per-process)
+Approfondisci: [2.2. Organizza gli output per process](#22-organize-outputs-by-process)
 </quiz>
 
 <quiz>
@@ -1614,7 +1614,7 @@ Se sia Docker che Conda sono abilitati e un process ha entrambe le direttive, qu
 - [ ] Il primo definito nel process
 - [ ] Causa un errore
 
-Approfondisci: [3. Seleziona una tecnologia di pacchettizzazione software](#3-seleziona-una-tecnologia-di-pacchettizzazione-software)
+Approfondisci: [3. Seleziona una tecnologia di pacchettizzazione software](#3-select-a-software-packaging-technology)
 </quiz>
 
 <quiz>
@@ -1624,7 +1624,7 @@ Qual è l'executor predefinito in Nextflow?
 - [ ] `kubernetes`
 - [ ] `aws`
 
-Approfondisci: [4. Seleziona una piattaforma di esecuzione](#4-seleziona-una-piattaforma-di-esecuzione)
+Approfondisci: [4. Seleziona una piattaforma di esecuzione](#4-select-an-execution-platform)
 </quiz>
 
 <quiz>
@@ -1634,7 +1634,7 @@ Quale comando genera un report di utilizzo delle risorse?
 - [x] `nextflow run workflow.nf -with-report report.html`
 - [ ] `nextflow run workflow.nf -profile report`
 
-Approfondisci: [5.1. Esegui il workflow per generare un report di utilizzo delle risorse](#51-esegui-il-workflow-per-generare-un-report-di-utilizzo-delle-risorse)
+Approfondisci: [5.1. Esegui il workflow per generare un report di utilizzo delle risorse](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1644,7 +1644,7 @@ Come si impostano i requisiti di risorse per un process specifico chiamato `cowp
 - [x] `#!groovy process { withName: 'cowpy' { memory = '2.GB' } }`
 - [ ] `#!groovy resources.cowpy.memory = '2.GB'`
 
-Approfondisci: [5.3. Imposta le allocazioni delle risorse per un process specifico](#53-imposta-le-allocazioni-delle-risorse-per-un-process-specifico)
+Approfondisci: [5.3. Imposta le allocazioni delle risorse per un process specifico](#53-set-resource-allocations-for-a-specific-process)
 </quiz>
 
 <quiz>
@@ -1654,7 +1654,7 @@ Cosa fa la direttiva `resourceLimits`?
 - [x] Limita le risorse massime che possono essere richieste
 - [ ] Monitora l'utilizzo delle risorse in tempo reale
 
-Approfondisci: [5.5. Aggiungi limiti alle risorse](#55-aggiungi-limiti-alle-risorse)
+Approfondisci: [5.5. Aggiungi limiti alle risorse](#55-add-resource-limits)
 </quiz>
 
 <quiz>
@@ -1664,7 +1664,7 @@ Come si specificano profili multipli in un singolo comando?
 - [x] `-profile profile1,profile2`
 - [ ] `--profile profile1 --profile profile2`
 
-Approfondisci: [6. Usa i profili per passare da una configurazione preimpostata all'altra](#6-usa-i-profili-per-passare-da-una-configurazione-preimpostata-allaltra)
+Approfondisci: [6. Usa i profili per passare da una configurazione preimpostata all'altra](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>
 
 <quiz>
@@ -1674,7 +1674,7 @@ Quale comando mostra la configurazione completamente risolta che Nextflow usereb
 - [x] `nextflow config`
 - [ ] `nextflow resolve`
 
-Approfondisci: [6.3. Usa `nextflow config` per vedere la configurazione risolta](#63-usa-nextflow-config-per-vedere-la-configurazione-risolta)
+Approfondisci: [6.3. Usa `nextflow config` per vedere la configurazione risolta](#63-use-nextflow-config-to-see-the-resolved-configuration)
 </quiz>
 
 <quiz>
@@ -1684,5 +1684,5 @@ Per cosa possono essere usati i profili? (Selezionate tutte le risposte corrette
 - [x] Fornire parametri di test per testare facilmente il workflow
 - [ ] Definire nuovi process
 
-Approfondisci: [6. Usa i profili per passare da una configurazione preimpostata all'altra](#6-usa-i-profili-per-passare-da-una-configurazione-preimpostata-allaltra)
+Approfondisci: [6. Usa i profili per passare da una configurazione preimpostata all'altra](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

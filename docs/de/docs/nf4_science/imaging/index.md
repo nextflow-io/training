@@ -22,11 +22,11 @@ Durch die Bearbeitung dieses Kurses lernst du, wie du grundlegende Nextflow-Konz
 
 Am Ende dieses Workshops kannst du:
 
-- Einen Nextflow-Workflow lokal zu starten und die Ausführung zu überwachen
-- Von Nextflow generierte Ausgaben (Ergebnisse) und Log-Dateien zu finden und zu interpretieren
-- Eine nf-core-Pipeline mit Testdaten und benutzerdefinierten Eingaben auszuführen
-- Die Pipeline-Ausführung mithilfe von Profilen und Parameterdateien zu konfigurieren
-- Eingaben mithilfe von Samplesheets und Befehlszeilenparametern zu verwalten
+- Einen Nextflow-Workflow lokal starten und die Ausführung überwachen
+- Von Nextflow generierte Ausgaben (Ergebnisse) und Log-Dateien finden und interpretieren
+- Eine nf-core-Pipeline mit Testdaten und benutzerdefinierten Eingaben ausführen
+- Die Pipeline-Ausführung mithilfe von Profilen und Parameterdateien konfigurieren
+- Eingaben mithilfe von Samplesheets und Befehlszeilenparametern verwalten
 
 ## Zielgruppe & Voraussetzungen
 

@@ -280,7 +280,7 @@ workflow HELLO {
 
 Comparado a um fluxo de trabalho Nextflow básico como o desenvolvido em [Hello Nextflow](../hello_nextflow/index.md), você notará algumas coisas novas aqui (linhas destacadas acima):
 
-- O bloco workflow tem um nome
+- O bloco **workflow** tem um nome
 - As entradas do fluxo de trabalho são declaradas usando a palavra-chave `take:` e a construção do canal é movida para o fluxo de trabalho pai
 - O conteúdo do fluxo de trabalho é colocado dentro de um bloco `main:`
 - As saídas são declaradas usando a palavra-chave `emit:`
@@ -366,7 +366,7 @@ params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Inclui módulos
+// Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -374,21 +374,21 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // cria um canal para entradas de um arquivo CSV
+  // create a channel for inputs from a CSV file
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emite uma saudação
+  // emit a greeting
   sayHello(greeting_ch)
 
-  // converte a saudação para maiúsculas
+  // convert the greeting to uppercase
   convertToUpper(sayHello.out)
 
-  // coleta todas as saudações em um arquivo
+  // collect all the greetings into one file
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // gera arte ASCII das saudações com cowpy
+  // generate ASCII art of the greetings with cowpy
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
@@ -431,7 +431,7 @@ Agora, substitua a construção do canal por uma simples declaração `take` dec
 === "Antes"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // cria um canal para entradas de um arquivo CSV
+        // criar um canal para entradas de um arquivo CSV
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -479,32 +479,32 @@ Em seguida, adicione uma declaração `main` antes das demais operações chamad
     ```groovy title="original-hello/hello.nf" linenums="22" hl_lines="1"
         main:
 
-        // emite uma saudação
+        // emitir uma saudação
         sayHello(greeting_ch)
 
-        // converte a saudação para maiúsculas
+        // converter a saudação para maiúsculas
         convertToUpper(sayHello.out)
 
-        // coleta todas as saudações em um arquivo
+        // coletar todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // gera arte ASCII das saudações com cowpy
+        // gerar arte ASCII das saudações com cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
 === "Antes"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // emite uma saudação
+        // emitir uma saudação
         sayHello(greeting_ch)
 
-        // converte a saudação para maiúsculas
+        // converter a saudação para maiúsculas
         convertToUpper(sayHello.out)
 
-        // coleta todas as saudações em um arquivo
+        // coletar todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // gera arte ASCII das saudações com cowpy
+        // gerar arte ASCII das saudações com cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -535,7 +535,7 @@ Se você fez todas as mudanças conforme descrito, seu fluxo de trabalho deve ag
 params.batch = 'test-batch'
 params.character = 'turkey'
 
-// Inclui módulos
+// Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -549,16 +549,16 @@ workflow HELLO {
 
     main:
 
-    // emite uma saudação
+    // emitir uma saudação
     sayHello(greeting_ch)
 
-    // converte a saudação para maiúsculas
+    // converter a saudação para maiúsculas
     convertToUpper(sayHello.out)
 
-    // coleta todas as saudações em um arquivo
+    // coletar todas as saudações em um arquivo
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // gera arte ASCII das saudações com cowpy
+    // gerar arte ASCII das saudações com cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
@@ -770,7 +770,7 @@ Agora vamos configurar as declarações de importação de módulos.
 Estas eram as declarações de importação no fluxo de trabalho `original-hello/hello.nf`:
 
 ```groovy title="original-hello/hello.nf" linenums="9"
-// Inclui módulos
+// Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
@@ -833,16 +833,16 @@ Como lembrete, este é o código relevante no fluxo de trabalho original, que n�
 ```groovy title="original-hello/hello.nf" linenums="22"
     main:
 
-    // emite uma saudação
+    // emitir uma saudação
     sayHello(greeting_ch)
 
-    // converte a saudação para maiúsculas
+    // converter a saudação para maiúsculas
     convertToUpper(sayHello.out)
 
-    // coleta todas as saudações em um arquivo
+    // coletar todas as saudações em um arquivo
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // gera arte ASCII das saudações com cowpy
+    // gerar arte ASCII das saudações com cowpy
     cowpy(collectGreetings.out.outfile, params.character)
 ```
 
@@ -937,7 +937,7 @@ Isso parece ótimo, mas ainda precisamos atualizar o nome do canal que estamos p
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emite uma saudação
+        // emitir uma saudação
         sayHello(greeting_ch)
     ```
 
@@ -1093,7 +1093,7 @@ Se abrirmos esse arquivo e rolarmos para baixo, chegamos a este pedaço de códi
 
 ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76"
     //
-    // Cria canal a partir do arquivo de entrada fornecido através de params.input
+    // Criar canal a partir do arquivo de entrada fornecido através de params.input
     //
 
     channel
@@ -1158,7 +1158,7 @@ Então só precisamos conectar isso no fluxo de trabalho de inicialização, com
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-7"
         //
-        // Cria canal a partir do arquivo de entrada fornecido através de params.input
+        // Criar canal a partir do arquivo de entrada fornecido através de params.input
         //
 
         ch_samplesheet = channel.fromPath(params.input)
@@ -1174,7 +1174,7 @@ Então só precisamos conectar isso no fluxo de trabalho de inicialização, com
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="76" hl_lines="5-23"
         //
-        // Cria canal a partir do arquivo de entrada fornecido através de params.input
+        // Criar canal a partir do arquivo de entrada fornecido através de params.input
         //
 
         channel

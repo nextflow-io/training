@@ -137,7 +137,7 @@ workflow {
 
 Se você completou a missão secundária [Metadados em fluxos de trabalho](./metadata.md), você reconhecerá esse padrão. Usaremos `splitCsv` para ler o CSV e imediatamente estruturar os dados com um mapa de metadados para separar metadados de caminhos de arquivo.
 
-!!! info
+!!! info "Info"
 
     Encontraremos dois conceitos diferentes chamados `map` neste treinamento:
 
@@ -1076,7 +1076,7 @@ nextflow run main.nf
 
 Podemos ver que isolamos com sucesso os campos `id` e `interval`, mas ainda não agrupamos as amostras.
 
-!!! note
+!!! note "Nota"
 
     Estamos descartando o campo `replicate` aqui. Isso ocorre porque não precisamos dele para o processamento posterior. Após concluir este tutorial, tente incluí-lo sem afetar o agrupamento posterior!
 
@@ -1137,7 +1137,7 @@ nextflow run main.nf
 
 Observe que a estrutura dos nossos dados mudou e, dentro de cada elemento do canal, os arquivos agora estão contidos em tuplas como `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`. Isso ocorre porque quando usamos `groupTuple`, o Nextflow combina os arquivos individuais de cada amostra de um grupo. É importante lembrar disso ao tentar manipular os dados a jusante.
 
-!!! note
+!!! note "Nota"
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) é o oposto de groupTuple. Ele descompacta os itens em um canal e os achata. Tente adicionar `transpose` e desfazer o agrupamento que realizamos acima!
 
@@ -1154,21 +1154,21 @@ Nesta seção, você aprendeu:
 
 ## Resumo
 
-Nesta side quest, você aprendeu como dividir e agrupar dados usando canais.
+Nesta missão secundária, você aprendeu como dividir e agrupar dados usando canais.
 
-Ao modificar os dados conforme fluem pela pipeline, você pode construir uma pipeline escalável sem usar loops ou instruções while, oferecendo várias vantagens sobre abordagens mais tradicionais:
+Ao modificar os dados conforme fluem pelo pipeline, você pode construir um pipeline escalável sem usar loops ou instruções while, oferecendo várias vantagens sobre abordagens mais tradicionais:
 
 - Podemos escalar para quantas ou poucas entradas quisermos sem código adicional
-- Focamos na gestão do fluxo de dados pela pipeline, em vez da iteração
+- Focamos na gestão do fluxo de dados pelo pipeline, em vez da iteração
 - Podemos ser tão complexos ou simples quanto necessário
-- A pipeline se torna mais declarativa, focando no que deve acontecer em vez de como deve acontecer
+- O pipeline se torna mais declarativo, focando no que deve acontecer em vez de como deve acontecer
 - O Nextflow otimizará a execução para nós executando operações independentes em paralelo
 
 Dominar essas operações de canais permitirá que você construa pipelines flexíveis e escaláveis que lidam com relações complexas de dados sem recorrer a loops ou programação iterativa, permitindo que o Nextflow otimize a execução e paralelize operações independentes automaticamente.
 
 ### Padrões chave
 
-1.  **Criação de dados de entrada estruturados:** Partindo de um arquivo CSV com meta maps (baseando-se nos padrões de [Metadata in workflows](./metadata.md))
+1.  **Criação de dados de entrada estruturados:** Partindo de um arquivo CSV com mapas de metadados (baseando-se nos padrões de [Metadados em fluxos de trabalho](./metadata.md))
 
     ```groovy
     ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -1249,4 +1249,4 @@ Dominar essas operações de canais permitirá que você construa pipelines flex
 
 ## O que vem a seguir?
 
-Volte ao [menu das Side Quests](./index.md) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.
+Volte ao [menu das Missões Secundárias](./index.md) ou clique no botão no canto inferior direito da página para avançar para o próximo tópico da lista.

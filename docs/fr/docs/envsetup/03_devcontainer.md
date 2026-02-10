@@ -102,7 +102,7 @@ Cela devrait afficher la version de Nextflow et les informations d'exécution, c
 Si vous rencontrez des problèmes avec la configuration du devcontainer :
 
 1. Assurez-vous que votre installation Docker (Docker Desktop, Colima, Docker Engine, etc.) est en cours d'exécution avant d'ouvrir le devcontainer
-2. Vérifiez que vous avez sélectionné la configuration **local-dev** lorsque vous y êtes invité
+2. Vérifiez que vous avez sélectionné la configuration **local-dev** lorsque vous y êtes invité·e
 3. Vérifiez que Docker buildx est installé et fonctionne en exécutant `docker buildx version`
 4. Si le conteneur ne parvient pas à se construire, essayez de le reconstruire en exécutant la commande « Dev Containers: Rebuild Container »
 5. Pour les problèmes persistants, consultez le [guide de dépannage Dev Containers de VS Code](https://code.visualstudio.com/docs/devcontainers/troubleshooting)

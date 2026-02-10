@@ -1,6 +1,6 @@
 # Geliştirme Ortamı
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Modern Entegre Geliştirme Ortamları (IDE'ler) Nextflow geliştirme deneyiminizi önemli ölçüde dönüştürebilir. Bu yan görev, özellikle VS Code ve Nextflow eklentisini kullanarak daha hızlı kod yazma, hataları erken yakalama ve karmaşık iş akışlarında verimli gezinme konularına odaklanır.
 
@@ -116,7 +116,7 @@ Hello Nextflow boyunca VS Code kullandığınız için temellere zaten aşinası
 
 Örnekler üzerinde çalışırken düzeninizi özelleştirmek için panelleri sürükleyebilir veya gizleyebilirsiniz (kenar çubuğunu açıp kapatmak için `Ctrl/Cmd+B`).
 
-### Çıkarım
+### Özet
 
 VS Code'u Nextflow eklentisi ile kurdunuz ve verimli geliştirme için çalışma alanı düzenini anlıyorsunuz.
 
@@ -160,7 +160,7 @@ Sözdizimi vurgulaması size şunları hızlıca belirlemenize yardımcı olur:
 
 Bu görsel organizasyon, birden fazla süreç ve karmaşık veri akışları içeren karmaşık iş akışlarıyla çalışırken paha biçilmez hale gelir.
 
-### Çıkarım
+### Özet
 
 VS Code'un sözdizimi vurgulamasının Nextflow kod yapısını okumanıza ve daha hızlı geliştirme için farklı dil öğelerini belirlemenize nasıl yardımcı olduğunu anlıyorsunuz.
 
@@ -218,7 +218,7 @@ nextflow.config dosyasını açın ve mevcut süreç yönergelerini görmek içi
 
 Bu, süreçleri yapılandırırken zamandan tasarruf sağlar ve farklı yapılandırma kapsamlarında çalışır. Örneğin, Docker'a özgü yapılandırma seçeneklerini görmek için `docker.` yazmayı deneyin.
 
-### Çıkarım
+### Özet
 
 Sözdizimini ezberlemeden mevcut kanal işlemlerini, süreç yönergelerini ve yapılandırma seçeneklerini keşfetmek için VS Code'un akıllı otomatik tamamlamasını kullanabilirsiniz.
 
@@ -260,7 +260,7 @@ Nextflow sözdizimindeki yaygın hatalar şunlardır:
 
 Nextflow dil sunucusu bu sorunları Sorunlar panelinde vurgular. Bir boru hattı çalıştırırken sözdizimi hatalarından kaçınmak için bunları erken kontrol edebilirsiniz.
 
-### Çıkarım
+### Özet
 
 İş akışınızı çalıştırmadan önce sözdizimi hatalarını ve sorunları yakalamak için VS Code'un hata algılamasını ve Sorunlar panelini kullanabilir, zamandan tasarruf edebilir ve hayal kırıklığını önleyebilirsiniz.
 
@@ -372,7 +372,7 @@ Bu sadece 'giriş' iş akışıdır, ancak yukarıdaki `workflow RNASEQ_PIPELINE
 
 Bu iş akışı için, koddaki ilgili süreç tanımlarına gitmek için DAG'deki düğümleri kullanabilirsiniz. Bir düğüme tıklayın ve sizi editörde ilgili süreç tanımına götürecektir. Özellikle bir iş akışı büyük bir boyuta ulaştığında, bu gerçekten kod etrafında gezinmenize ve süreçlerin nasıl bağlandığını anlamanıza yardımcı olabilir.
 
-### Çıkarım
+### Özet
 
 Kod yapısını ve bağımlılıkları anlamak için tanıma git, sembol arama, referansları bul ve DAG görselleştirme özelliklerini kullanarak karmaşık iş akışlarında verimli gezinebilirsiniz.
 
@@ -429,7 +429,7 @@ Bu size yayınlama dizinlerini kullanan her dosyayı gösterir ve şunlarda yard
 - Belirli yönergelerin örneklerini bulma
 - Modüller arasında tutarlılık sağlama
 
-### Çıkarım
+### Özet
 
 Hızlı dosya gezinmesi, bölünmüş editörler ve proje genelinde arama kullanarak karmaşık çok dosyalı projeleri yönetebilir ve iş akışları ve modüller arasında verimli çalışabilirsiniz.
 
@@ -519,7 +519,7 @@ Bu özellikle şunlar için kullanışlıdır:
 - Aynı anda birden fazla satıra yorum ekleme
 - Birden fazla süreçte benzer parametre tanımlarını düzenleme
 
-### Çıkarım
+### Özet
 
 Karmaşık iş akışlarını verimli bir şekilde organize etmek için otomatik biçimlendirme, yorum yapma özellikleri, kod katlama, parantez eşleştirme ve çok satırlı düzenleme kullanarak temiz, okunabilir kod koruyabilirsiniz.
 
@@ -567,7 +567,7 @@ nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results
 
 Bu, birden fazla uygulama arasında geçiş yapmak yerine her şeyi tek bir yerde tutar.
 
-### Çıkarım
+### Özet
 
 Tüm geliştirme sürecinizi tek bir arayüzden yönetmek için VS Code'u versiyon kontrol ve iş akışı yürütme ile entegre edebilirsiniz.
 

@@ -16,7 +16,7 @@ Dies sind Kurse, die zeigen, wie du die Konzepte und Komponenten aus dem [Hello 
 
         :material-run-fast: Lerne, eine Pipeline für Genomik in Nextflow zu entwickeln.
 
-    Dieser Kurs zeigt, wie eigene Genomik-Pipelines entwickelt werden können. Der Kurs verwendet einen Variant-Calling-Anwendungsfall, um zu demonstrieren, wie man eine einfache, aber funktionale Genomik-Pipeline entwickelt.
+    Dieser Kurs richtet sich an Forschende, die lernen möchten, wie sie eigene Genomik-Pipelines entwickeln können. Der Kurs verwendet einen Variant-Calling-Anwendungsfall, um zu demonstrieren, wie man eine einfache, aber funktionale Genomik-Pipeline entwickelt.
 
     [Starte das Nextflow für Genomik Training :material-arrow-right:](genomics/){ .md-button .md-button--primary }
 
@@ -26,7 +26,7 @@ Dies sind Kurse, die zeigen, wie du die Konzepte und Komponenten aus dem [Hello 
 
         :material-run-fast: Lerne, eine Pipeline für RNAseq-Datenverarbeitung in Nextflow zu entwickeln.
 
-    Dieser Kurs zeigt, wie eigene RNAseq-Pipelines entwickelt werden können. Der Kurs verwendet einen Bulk-RNAseq-Verarbeitungs-Anwendungsfall, um zu demonstrieren, wie man eine einfache, aber funktionale RNAseq-Pipeline entwickelt.
+    Dieser Kurs richtet sich an Forschende, die lernen möchten, wie sie eigene RNAseq-Pipelines entwickeln können. Der Kurs verwendet einen Bulk-RNAseq-Verarbeitungs-Anwendungsfall, um zu demonstrieren, wie man eine einfache, aber funktionale RNAseq-Pipeline entwickelt.
 
     [Starte das Nextflow für RNAseq Training :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
 
@@ -36,7 +36,7 @@ Dies sind Kurse, die zeigen, wie du die Konzepte und Komponenten aus dem [Hello 
 
         :material-run-fast: Lerne, Pipelines für Bilddaten in Nextflow auszuführen.
 
-    Dieser Kurs zeigt, wie Bioimaging-Pipelines ausgeführt und konfiguriert werden können. Der Kurs verwendet nf-core/molkart, um wesentliche Nextflow-Nutzungsmuster zu demonstrieren, die auf jede Pipeline anwendbar sind.
+    Dieser Kurs richtet sich an Forschende, die lernen möchten, wie sie Bioimaging-Pipelines ausführen und konfigurieren können. Der Kurs verwendet nf-core/molkart, um wesentliche Nextflow-Nutzungsmuster zu demonstrieren, die auf jede Pipeline anwendbar sind.
 
     [Starte das Nextflow für Bioimaging Training :material-arrow-right:](imaging/){ .md-button .md-button--primary }
 
