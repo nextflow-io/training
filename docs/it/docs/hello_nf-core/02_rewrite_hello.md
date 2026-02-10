@@ -221,7 +221,7 @@ tree core-hello-results
 
 Può dare un'occhiata ai report per vedere cosa è stato eseguito, e la risposta è: niente del tutto!
 
-![report timeline di esecuzione vuoto](./img/execution_timeline_empty.png)
+![report timeline di esecuzione vuoto](../../../en/docs/hello_nf-core/img/execution_timeline_empty.png)
 
 Diamo un'occhiata a cosa c'è effettivamente nel codice.
 
@@ -1380,7 +1380,7 @@ tree core-hello-results
 Vede che abbiamo ottenuto un altro set di report di esecuzione oltre a quelli che abbiamo ottenuto dalla prima esecuzione, quando il workflow era ancora solo un placeholder.
 Questa volta vede tutte le attività che sono state eseguite come previsto.
 
-![report timeline di esecuzione per la pipeline Hello](./img/execution_timeline_hello.png)
+![report timeline di esecuzione per la pipeline Hello](../../../en/docs/hello_nf-core/img/execution_timeline_hello.png)
 
 !!! note "Nota"
 

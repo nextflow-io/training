@@ -59,7 +59,7 @@ hide:
 
     ??? licensing "Açık kaynak lisansı ve katkı politikası"
 
-        [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+        [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](../../en/docs/assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
         Bu eğitim materyali [Seqera](https://seqera.io) tarafından geliştirilip sürdürülmekte ve topluluğun yararına açık kaynak lisansı ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) altında yayınlanmaktadır. Bu materyali lisansın kapsamı dışında bir şekilde kullanmak istiyorsanız (ticari kullanım ve yeniden dağıtım konusundaki sınırlamalara dikkat edin), lütfen talebinizi görüşmek için [community@seqera.io](mailto:community@seqera.io) adresinden bizimle iletişime geçin.
 
@@ -167,8 +167,8 @@ hide:
 
 <div markdown class="homepage_logos">
 
-![Seqera](assets/img/seqera_logo.png#only-light)
+![Seqera](../../en/docs/assets/img/seqera_logo.png#only-light)
 
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
+![Seqera](../../en/docs/assets/img/seqera_logo_dark.png#only-dark)
 
 </div>

@@ -27,8 +27,8 @@ additional_information:
 
 **Hello nf-core는 nf-core 리소스와 모범 사례 사용에 대한 실습 입문 과정입니다.**
 
-![nf-core logo](./img/nf-core-logo.png#only-light)
-![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)
+![nf-core logo](../../../en/docs/hello_nf-core/img/nf-core-logo.png#only-light)
+![nf-core logo](../../../en/docs/hello_nf-core/img/nf-core-logo-darkbg.png#only-dark)
 
 실용적인 예제와 안내된 연습을 통해 nf-core 호환 모듈과 파이프라인을 사용하고 개발하는 방법, 그리고 nf-core 도구를 효과적으로 활용하는 방법을 배우게 됩니다.
 

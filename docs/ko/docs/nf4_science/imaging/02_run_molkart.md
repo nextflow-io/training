@@ -32,7 +32,7 @@ nf-core 파이프라인의 주요 특징:
 
 ### 1.2. molkart 파이프라인
 
-![nf-core/molkart 파이프라인](img/molkart.png)
+![nf-core/molkart 파이프라인](../../../../en/docs/nf4_science/imaging/img/molkart.png)
 
 [nf-core/molkart](https://nf-co.re/molkart) 파이프라인은 공간 전사체학 이미징 데이터를 여러 단계로 처리합니다:
 

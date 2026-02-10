@@ -221,7 +221,7 @@ tree core-hello-results
 
 보고서를 살펴보면 무엇이 실행되었는지 확인할 수 있는데, 답은 아무것도 실행되지 않았다는 것입니다!
 
-![비어있는 실행 타임라인 보고서](./img/execution_timeline_empty.png)
+![비어있는 실행 타임라인 보고서](../../../en/docs/hello_nf-core/img/execution_timeline_empty.png)
 
 코드에 실제로 무엇이 있는지 살펴보겠습니다.
 
@@ -1380,7 +1380,7 @@ tree core-hello-results
 첫 번째 실행에서 얻은 것 외에도 추가 실행 보고서 세트를 얻은 것을 볼 수 있습니다. 이때 workflow는 여전히 플레이스홀더일 뿐이었습니다.
 이번에는 예상대로 실행된 모든 작업이 표시됩니다.
 
-![Hello 파이프라인의 실행 타임라인 보고서](./img/execution_timeline_hello.png)
+![Hello 파이프라인의 실행 타임라인 보고서](../../../en/docs/hello_nf-core/img/execution_timeline_hello.png)
 
 !!! note "참고"
 

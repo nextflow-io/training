@@ -221,7 +221,7 @@ tree core-hello-results
 
 Puedes echar un vistazo a los reportes para ver qué se ejecutó, y la respuesta es: ¡nada en absoluto!
 
-![reporte de línea de tiempo de ejecución vacío](./img/execution_timeline_empty.png)
+![reporte de línea de tiempo de ejecución vacío](../../../en/docs/hello_nf-core/img/execution_timeline_empty.png)
 
 Echemos un vistazo a lo que realmente hay en el código.
 
@@ -1380,7 +1380,7 @@ tree core-hello-results
 Ves que obtuvimos otro conjunto de reportes de ejecución además de los que obtuvimos de la primera ejecución, cuando el workflow era solo un placeholder.
 Esta vez ves todas las tareas que se ejecutaron como se esperaba.
 
-![reporte de línea de tiempo de ejecución para el pipeline Hello](./img/execution_timeline_hello.png)
+![reporte de línea de tiempo de ejecución para el pipeline Hello](../../../en/docs/hello_nf-core/img/execution_timeline_hello.png)
 
 !!! note "Nota"
 

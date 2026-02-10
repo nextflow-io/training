@@ -5,7 +5,7 @@
 Varyant çağırma, bir genom dizisindeki varyasyonları referans genoma göre tanımlamayı amaçlayan bir genomik analiz yöntemidir.
 Burada, tüm genom dizileme verilerinde kısa germline varyantları, _yani_ SNP'ler ve indelleri çağırmak için tasarlanmış araçları ve yöntemleri kullanacağız.
 
-![GATK pipeline](img/gatk-pipeline.png)
+![GATK pipeline](../../../../en/docs/nf4_science/genomics/img/gatk-pipeline.png)
 
 Tam bir varyant çağırma boru hattı tipik olarak referansa haritalama (bazen genom hizalama olarak da adlandırılır) ve varyant filtreleme ve önceliklendirme dahil olmak üzere birçok adım içerir.
 Basitlik için, bu kursta sadece varyant çağırma kısmına odaklanacağız.
@@ -312,7 +312,7 @@ GATK bu amaç için ortak varyant çağırma adı verilen alternatif bir yöntem
 
 Ortak varyant çağırma, her örnek için GVCF (Genomic VCF için) adı verilen özel bir varyant çıktısı türü oluşturmayı, ardından tüm örneklerden GVCF verilerini birleştirmeyi ve bir 'ortak genotipleme' istatistiksel analizi çalıştırmayı içerir.
 
-![Ortak analiz](img/joint-calling.png)
+![Ortak analiz](../../../../en/docs/nf4_science/genomics/img/joint-calling.png)
 
 Bir örneğin GVCF'sinin özel yanı, programın varyasyon kanıtı bulduğu konumlar değil, genomun hedeflenen alanındaki tüm konumlar hakkında dizi veri istatistiklerini özetleyen kayıtlar içermesidir.
 Bu, ortak genotipleme hesaplaması için kritiktir ([daha fazla okuma](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).

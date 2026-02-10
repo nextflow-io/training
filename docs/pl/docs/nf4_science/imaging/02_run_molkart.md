@@ -32,7 +32,7 @@ Kluczowe cechy pipeline'ów nf-core:
 
 ### 1.2. Pipeline molkart
 
-![Pipeline nf-core/molkart](img/molkart.png)
+![Pipeline nf-core/molkart](../../../../en/docs/nf4_science/imaging/img/molkart.png)
 
 Pipeline [nf-core/molkart](https://nf-co.re/molkart) przetwarza dane obrazowania transkryptomiki przestrzennej przez kilka etapów:
 

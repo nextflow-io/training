@@ -181,7 +181,7 @@ workflow {
 
 Bu örneğin amacı için, hatanın nerede olduğunu göstermek için size bir yorum bıraktık. Nextflow VSCode uzantısı da size neyin yanlış olabileceği konusunda bazı ipuçları vermelidir, uyumsuz parantezi kırmızıya boyar ve dosyanın erken bitişini vurgular:
 
-![Kötü sözdizimi](img/bad_syntax.png)
+![Kötü sözdizimi](../../../en/docs/side_quests/img/bad_syntax.png)
 
 **Parantez hataları için hata ayıklama stratejisi:**
 
@@ -330,7 +330,7 @@ workflow {
 
 Hata bağlamındaki 4. satıra bakıldığında, sorunu tespit edebiliriz: doğru `input` yönergesi yerine `inputs` kullanıyoruz. Nextflow VSCode uzantısı bunu da işaretleyecektir:
 
-![Geçersiz process mesajı](img/invalid_process_message.png)
+![Geçersiz process mesajı](../../../en/docs/side_quests/img/invalid_process_message.png)
 
 #### Kodu düzeltin
 
@@ -748,7 +748,7 @@ workflow {
 
 VSCode uzantısı ayrıca `input_ch` değişkenini workflow bloğunun dışında tanımlandığı için vurgulayacaktır:
 
-![Ölümcül olmayan sözdizimi hatası](img/nonlethal.png)
+![Ölümcül olmayan sözdizimi hatası](../../../en/docs/side_quests/img/nonlethal.png)
 
 #### Kodu düzeltin
 
@@ -913,7 +913,7 @@ workflow {
 
 Process yalnızca bir tane tanımlarken birden fazla girdi kanalı sağlayan uyumsuz `PROCESS_FILES` çağrısını görmelisiniz. VSCode uzantısı ayrıca process çağrısının altını kırmızıya çizer ve fare ile üzerine geldiğinizde bir tanı mesajı sağlar:
 
-![Yanlış sayıda argüman mesajı](img/incorrect_num_args.png)
+![Yanlış sayıda argüman mesajı](../../../en/docs/side_quests/img/incorrect_num_args.png)
 
 #### Kodu düzeltin
 

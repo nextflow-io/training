@@ -221,7 +221,7 @@ tree core-hello-results
 
 Możesz zajrzeć do raportów, aby zobaczyć, co zostało uruchomione, a odpowiedzią jest: nic w ogóle!
 
-![pusty raport osi czasu wykonania](./img/execution_timeline_empty.png)
+![pusty raport osi czasu wykonania](../../../en/docs/hello_nf-core/img/execution_timeline_empty.png)
 
 Spójrzmy, co faktycznie znajduje się w kodzie.
 
@@ -1380,7 +1380,7 @@ tree core-hello-results
 Widzisz, że otrzymaliśmy kolejny zestaw raportów wykonania oprócz tych, które otrzymaliśmy z pierwszego uruchomienia, gdy workflow był jeszcze tylko zastępczy.
 Tym razem widzisz wszystkie zadania, które zostały uruchomione zgodnie z oczekiwaniami.
 
-![raport osi czasu wykonania dla pipeline'u Hello](./img/execution_timeline_hello.png)
+![raport osi czasu wykonania dla pipeline'u Hello](../../../en/docs/hello_nf-core/img/execution_timeline_hello.png)
 
 !!! note "Uwaga"
 

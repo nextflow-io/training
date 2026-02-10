@@ -37,7 +37,7 @@ VS Code devcontainer'larını kullanarak yerel ortamınızı kurmak için bu ad�
 - "Dev Containers" arayın
 - "Install"a tıklayın
 
-![Installing Dev Containers extension in VS Code](img/install_extension.png)
+![Installing Dev Containers extension in VS Code](../../../en/docs/envsetup/img/install_extension.png)
 
 ### Depoyu klonlayın:
 
@@ -61,9 +61,9 @@ VS Code tarafından "Reopen in Container" sorulursa, tıklayın. Alternatif olar
 - "Dev Containers: Reopen in Container" yazın
 - **Önemli**: Yapılandırma seçmeniz istendiğinde, **local-dev** devcontainer yapılandırmasını seçin
 
-![Reopen in Container prompt](img/reopen_prompt.png)
+![Reopen in Container prompt](../../../en/docs/envsetup/img/reopen_prompt.png)
 
-![Selecting local configuration](img/select_local_config.png)
+![Selecting local configuration](../../../en/docs/envsetup/img/select_local_config.png)
 
 Konteyner'ın oluşturulmasını bekleyin. İlk seferde tüm gerekli bileşenleri indirip kurduğu için birkaç dakika sürebilir.
 
@@ -75,7 +75,7 @@ Konteyner oluşturulup çalıştırıldığında, gerekli tüm araçların yükl
 - Git
 - Ve eğitim için gereken diğer tüm bağımlılıklar
 
-![VS Code with devcontainer running](img/running_container.png)
+![VS Code with devcontainer running](../../../en/docs/envsetup/img/running_container.png)
 
 ## Devcontainer'ları Kullanmanın Avantajları
 

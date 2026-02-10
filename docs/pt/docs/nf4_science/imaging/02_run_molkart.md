@@ -32,7 +32,7 @@ Principais características dos pipelines nf-core:
 
 ### 1.2. O pipeline molkart
 
-![Pipeline nf-core/molkart](img/molkart.png)
+![Pipeline nf-core/molkart](../../../../en/docs/nf4_science/imaging/img/molkart.png)
 
 O pipeline [nf-core/molkart](https://nf-co.re/molkart) processa dados de imagem de transcriptômica espacial através de vários estágios:
 

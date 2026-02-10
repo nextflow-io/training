@@ -59,7 +59,7 @@ hide:
 
     ??? licensing "Licença de código aberto e política de contribuição"
 
-        [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+        [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](../../en/docs/assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
         Este material de treinamento é desenvolvido e mantido pela [Seqera](https://seqera.io) e lançado sob uma licença de código aberto ([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)) para o benefício da comunidade. Se você deseja usar este material de uma forma que esteja fora do escopo da licença (observe as limitações sobre uso comercial e redistribuição), entre em contato conosco em [community@seqera.io](mailto:community@seqera.io) para discutir sua solicitação.
 
@@ -167,8 +167,8 @@ hide:
 
 <div markdown class="homepage_logos">
 
-![Seqera](assets/img/seqera_logo.png#only-light)
+![Seqera](../../en/docs/assets/img/seqera_logo.png#only-light)
 
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
+![Seqera](../../en/docs/assets/img/seqera_logo_dark.png#only-dark)
 
 </div>

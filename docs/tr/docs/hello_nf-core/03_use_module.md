@@ -45,7 +45,7 @@ nf-core projesi, [https://nf-co.re/modules](https://nf-co.re/modules) adresinde 
 
 Web tarayıcınızda modüller sayfasına gidin ve 'concatenate' aramak için arama çubuğunu kullanın.
 
-![module search results](./img/module-search-results.png)
+![module search results](../../../en/docs/hello_nf-core/img/module-search-results.png)
 
 Gördüğünüz gibi, birçok sonuç var ve bunların çoğu çok spesifik dosya türlerini birleştirmek için tasarlanmış modüller.
 Bunlar arasında, genel amaçlı olan `cat_cat` adlı bir modül görmelisiniz.

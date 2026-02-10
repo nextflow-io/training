@@ -70,8 +70,8 @@ Aquí están las principales opciones disponibles según lo que esté buscando.
 
 <div markdown class="homepage_logos">
 
-![Seqera](assets/img/seqera_logo.png#only-light)
+![Seqera](../../en/docs/assets/img/seqera_logo.png#only-light)
 
-![Seqera](assets/img/seqera_logo_dark.png#only-dark)
+![Seqera](../../en/docs/assets/img/seqera_logo_dark.png#only-dark)
 
 </div>
