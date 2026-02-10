@@ -35,7 +35,7 @@ Ces outils ne sont pas installés dans l'environnement GitHub Codespaces, nous a
 
 !!! note
 
-     Assurez-vous d'être dans le répertoire `nf4-science/genomics` afin que la dernière partie du chemin affichée lorsque vous tapez `pwd` soit `genomics`.
+    Assurez-vous d'être dans le répertoire `nf4-science/genomics` afin que la dernière partie du chemin affichée lorsque vous tapez `pwd` soit `genomics`.
 
 ---
 

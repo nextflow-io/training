@@ -1,41 +1,43 @@
 # भाग 4: Hello Modules
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=hi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube channel पर [पूरी playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) देखें।
+:fontawesome-brands-youtube:{ .youtube } [पूरी प्लेलिस्ट](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) Nextflow YouTube चैनल पर देखें।
 
-:green_book: वीडियो transcript [यहाँ](./transcripts/04_hello_modules.md) उपलब्ध है।
+:green_book: वीडियो ट्रांसक्रिप्ट [यहाँ](./transcripts/04_hello_modules.md) उपलब्ध है।
 ///
 
-यह section cover करता है कि अपने workflow की development और maintenance को अधिक efficient और sustainable बनाने के लिए अपने workflow code को कैसे organize करें।
-Specifically, हम demonstrate करेंगे कि [**modules**](https://nextflow.io/docs/latest/module.html) कैसे use करें।
+यह सेक्शन बताता है कि अपने वर्कफ़्लो कोड को कैसे व्यवस्थित करें ताकि तुम्हारी पाइपलाइन का विकास और रखरखाव अधिक कुशल और टिकाऊ हो सके।
+विशेष रूप से, हम यह प्रदर्शित करने जा रहे हैं कि [**modules**](https://nextflow.io/docs/latest/module.html) का उपयोग कैसे करें।
 
-Nextflow में, एक **module** एक standalone code file है, जो अक्सर single process definition encapsulate करती है।
-Workflow में module use करने के लिए, तुम बस अपनी workflow code file में एक single-line `include` statement add करते हो; फिर तुम process को उसी तरह workflow में integrate कर सकते हो जैसे normally करते।
-यह multiple workflows में process definitions को reuse करना possible बनाता है बिना code की multiple copies produce किए।
+Nextflow में, एक **module** एक स्वतंत्र कोड फ़ाइल है, जो अक्सर एक single process परिभाषा को समाहित करती है।
+किसी वर्कफ़्लो में module का उपयोग करने के लिए, तुम बस अपनी वर्कफ़्लो कोड फ़ाइल में एक single-line `include` स्टेटमेंट जोड़ते हो; फिर तुम process को वर्कफ़्लो में उसी तरह integrate कर सकते हो जैसे तुम सामान्य रूप से करते हो।
+यह कोड की कई प्रतियाँ बनाए बिना कई वर्कफ़्लो में process परिभाषाओं को पुनः उपयोग करना संभव बनाता है।
 
-जब हमने अपना workflow develop करना शुरू किया, हमने सब कुछ एक single code file में लिखा।
-अब हम processes को individual modules में move करेंगे।
+जब हमने अपना वर्कफ़्लो विकसित करना शुरू किया, तो हमने सब कुछ एक ही कोड फ़ाइल में लिखा।
+अब हम processes को अलग-अलग modules में ले जाने वाले हैं।
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
 </figure>
 
-यह हमारे code को अधिक shareable, flexible और maintainable बनाएगा।
+इससे हमारा कोड अधिक शेयर करने योग्य, लचीला और रखरखाव योग्य हो जाएगा।
 
-??? info "इस section से कैसे शुरू करें"
+??? info "इस खंड से कैसे शुरू करें"
 
-    Course का यह section मानता है कि तुमने [Hello Nextflow](./index.md) course के Parts 1-3 complete कर लिए हैं, लेकिन यदि तुम उन sections में covered basics से comfortable हो, तो तुम बिना कुछ special किए यहाँ से शुरू कर सकते हो।
+    कोर्स का यह सेक्शन मानता है कि तुमने [Hello Nextflow](./index.md) कोर्स के भाग 1-3 पूरे कर लिए हैं, लेकिन अगर तुम उन सेक्शन में शामिल बुनियादी बातों से सहज हो, तो तुम बिना कुछ विशेष किए यहाँ से शुरू कर सकते हो।
 
 ---
 
-## 0. Warmup: `hello-modules.nf` चलाएं
+## 0. वार्मअप: `hello-modules.nf` चलाएँ
 
-हम starting point के रूप में workflow script `hello-modules.nf` use करेंगे।
-यह इस training course के Part 3 में काम करके produce की गई script के equivalent है, सिवाय इसके कि हमने output destinations बदल दी हैं:
+हम वर्कफ़्लो स्क्रिप्ट `hello-modules.nf` को शुरुआती बिंदु के रूप में उपयोग करने जा रहे हैं।
+यह इस प्रशिक्षण कोर्स के भाग 3 के माध्यम से काम करके बनाई गई स्क्रिप्ट के बराबर है, सिवाय इसके कि हमने आउटपुट गंतव्यों को बदल दिया है:
 
 ```groovy title="hello-modules.nf" linenums="37" hl_lines="3 7 11 15"
 output {
@@ -58,13 +60,13 @@ output {
 }
 ```
 
-यह sure करने के लिए कि सब कुछ काम कर रहा है, कोई भी changes करने से पहले script को एक बार run करो:
+बस यह सुनिश्चित करने के लिए कि सब कुछ काम कर रहा है, कोई भी बदलाव करने से पहले स्क्रिप्ट को एक बार चलाएँ:
 
 ```bash
 nextflow run hello-modules.nf
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
      N E X T F L O W   ~  version 25.10.2
@@ -77,9 +79,9 @@ nextflow run hello-modules.nf
     [af/479117] collectGreetings   [100%] 1 of 1 ✔
     ```
 
-पहले की तरह, तुम्हें output files `output` block में specified directory में मिलेंगी (यहाँ, `results/hello_modules/`)।
+पहले की तरह, तुम्हें आउटपुट फ़ाइलें `output` ब्लॉक में निर्दिष्ट डायरेक्टरी में मिलेंगी (यहाँ, `results/hello_modules/`)।
 
-??? abstract "Directory contents"
+??? abstract "डायरेक्टरी सामग्री"
 
     ```console
     results/hello_modules/
@@ -93,14 +95,14 @@ nextflow run hello-modules.nf
     └── UPPER-Holà-output.txt
     ```
 
-यदि यह तुम्हारे लिए काम किया, तो तुम अपने workflow code को modularize करना सीखने के लिए ready हो।
+अगर यह तुम्हारे लिए काम कर गया, तो तुम अपने वर्कफ़्लो कोड को modularize करना सीखने के लिए तैयार हो।
 
 ---
 
-## 1. Modules store करने के लिए directory बनाएं
+## 1. modules स्टोर करने के लिए एक डायरेक्टरी बनाएँ
 
-अपने modules को specific directory में store करना best practice है।
-तुम उस directory को कुछ भी कह सकते हो, लेकिन convention इसे `modules/` कहना है।
+अपने modules को एक विशिष्ट डायरेक्टरी में स्टोर करना सबसे अच्छा अभ्यास है।
+तुम उस डायरेक्टरी को जो चाहो नाम दे सकते हो, लेकिन परंपरा इसे `modules/` कहने की है।
 
 ```bash
 mkdir modules
@@ -108,26 +110,26 @@ mkdir modules
 
 ---
 
-## 2. `sayHello()` के लिए module बनाएं
+## 2. `sayHello()` के लिए एक module बनाएँ
 
-इसके simplest form में, existing process को module में turn करना little more than copy-paste operation है।
-हम module के लिए एक file stub बनाएंगे, relevant code copy करेंगे फिर इसे main workflow file से delete करेंगे।
+अपने सबसे सरल रूप में, किसी मौजूदा process को module में बदलना copy-paste ऑपरेशन से थोड़ा अधिक है।
+हम module के लिए एक फ़ाइल stub बनाने जा रहे हैं, प्रासंगिक कोड को कॉपी करेंगे फिर इसे मुख्य वर्कफ़्लो फ़ाइल से हटा देंगे।
 
-फिर हमें बस एक `include` statement add करना होगा ताकि Nextflow जान सके कि runtime पर relevant code pull करना है।
+फिर हमें बस एक `include` स्टेटमेंट जोड़ना होगा ताकि Nextflow को पता चले कि runtime पर प्रासंगिक कोड को pull करना है।
 
-### 2.1. New module के लिए file stub बनाएं
+### 2.1. नए module के लिए एक फ़ाइल stub बनाएँ
 
-चलो `sayHello.nf` नामक module के लिए एक empty file बनाते हैं।
+चलो `sayHello.nf` नाम की module के लिए एक खाली फ़ाइल बनाते हैं।
 
 ```bash
 touch modules/sayHello.nf
 ```
 
-यह हमें process code रखने के लिए एक जगह देता है।
+यह हमें process कोड रखने के लिए एक जगह देता है।
 
-### 2.2. `sayHello` process code को module file में move करें
+### 2.2. `sayHello` process कोड को module फ़ाइल में ले जाएँ
 
-Workflow file से पूरी process definition को module file में copy करो।
+पूरी process परिभाषा को वर्कफ़्लो फ़ाइल से module फ़ाइल में कॉपी करें।
 
 ```groovy title="modules/sayHello.nf" linenums="1"
 /*
@@ -148,22 +150,22 @@ process sayHello {
 }
 ```
 
-एक बार यह हो जाए, workflow file से process definition delete करो।
+एक बार यह हो जाने के बाद, वर्कफ़्लो फ़ाइल से process परिभाषा को हटा दें।
 
-### 2.3. Workflow block से पहले include declaration add करें
+### 2.3. workflow ब्लॉक से पहले एक include declaration जोड़ें
 
-Module से process include करने के लिए syntax काफी straightforward है:
+किसी module से process को include करने का syntax काफी सीधा है:
 
 ```groovy title="Syntax: include declaration"
 include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
-चलो इसे `params` block के ऊपर insert करते हैं और इसे appropriately fill out करते हैं।
+चलो इसे `params` ब्लॉक के ऊपर insert करें और इसे उचित रूप से भरें।
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // Modules को include करें
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -175,7 +177,7 @@ include { <PROCESS_NAME> } from '<path_to_module>'
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-modules.nf" linenums="44"
     /*
@@ -187,17 +189,17 @@ include { <PROCESS_NAME> } from '<path_to_module>'
     }
     ```
 
-तुम देख सकते हो कि हमने process name, `sayHello`, और module code containing file का path, `./modules/sayHello.nf`, fill in किया है।
+तुम देख सकते हो कि हमने process का नाम, `sayHello`, और module कोड वाली फ़ाइल का path, `./modules/sayHello.nf`, भर दिया है।
 
-### 2.4. Workflow चलाएं
+### 2.4. वर्कफ़्लो चलाएँ
 
-हम पहले जैसे essentially same code और inputs के साथ workflow run कर रहे हैं, तो चलो `-resume` flag के साथ run करते हैं और देखते हैं क्या होता है।
+हम अनिवार्य रूप से पहले जैसे ही कोड और inputs के साथ वर्कफ़्लो चला रहे हैं, तो चलो `-resume` flag के साथ चलाते हैं और देखते हैं कि क्या होता है।
 
 ```bash
 nextflow run hello-modules.nf -resume
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -209,40 +211,40 @@ nextflow run hello-modules.nf -resume
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
-यह बहुत जल्दी run होना चाहिए क्योंकि सब कुछ cached है।
-तुम चाहो तो published outputs check कर सकते हो।
+यह बहुत जल्दी चलना चाहिए क्योंकि सब कुछ cached है।
+प्रकाशित outputs को चेक करने के लिए स्वतंत्र महसूस करो।
 
-Nextflow ने recognize किया कि यह अभी भी same work है, भले ही code multiple files में split हो।
+Nextflow ने पहचान लिया कि यह अभी भी वही काम है जो किया जाना है, भले ही कोड कई फ़ाइलों में विभाजित हो।
 
-### सीख
+### सारांश
 
-तुम जानते हो कि process को local module में extract कैसे करें और तुम जानते हो कि ऐसा करना workflow की resumability break नहीं करता।
+तुम जानते हो कि किसी process को local module में कैसे extract करना है और तुम जानते हो कि ऐसा करने से वर्कफ़्लो की resumability नहीं टूटती।
 
-### आगे क्या?
+### आगे क्या है?
 
-More modules बनाने की practice करो।
-एक बार तुमने एक बना लिया, तो तुम एक million और बना सकते हो...
-लेकिन चलो अभी बस दो और बनाते हैं।
+और modules बनाने का अभ्यास करो।
+एक बार जब तुमने एक कर लिया, तो तुम एक मिलियन और कर सकते हो...
+लेकिन चलो अभी के लिए बस दो और करते हैं।
 
 ---
 
 ## 3. `convertToUpper()` process को modularize करें
 
-### 3.1. New module के लिए file stub बनाएं
+### 3.1. नए module के लिए एक फ़ाइल stub बनाएँ
 
-`convertToUpper.nf` नामक module के लिए एक empty file बनाओ।
+`convertToUpper.nf` नाम की module के लिए एक खाली फ़ाइल बनाएँ।
 
 ```bash
 touch modules/convertToUpper.nf
 ```
 
-### 3.2. `convertToUpper` process code को module file में move करें
+### 3.2. `convertToUpper` process कोड को module फ़ाइल में ले जाएँ
 
-Workflow file से पूरी process definition को module file में copy करो।
+पूरी process परिभाषा को वर्कफ़्लो फ़ाइल से module फ़ाइल में कॉपी करें।
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
 /*
- * अभिवादन को uppercase में बदलने के लिए text replacement tool का उपयोग करें
+ * greeting को uppercase में बदलने के लिए text replacement tool का उपयोग करें
  */
 process convertToUpper {
 
@@ -259,16 +261,16 @@ process convertToUpper {
 }
 ```
 
-एक बार यह हो जाए, workflow file से process definition delete करो।
+एक बार यह हो जाने के बाद, वर्कफ़्लो फ़ाइल से process परिभाषा को हटा दें।
 
-### 3.3. `params` block से पहले include declaration add करें
+### 3.3. `params` ब्लॉक से पहले एक include declaration जोड़ें
 
-`params` block के ऊपर include declaration insert करो और इसे appropriately fill out करो।
+`params` ब्लॉक के ऊपर include declaration insert करें और इसे उचित रूप से भरें।
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Include modules
+    // Modules को include करें
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -281,10 +283,10 @@ process convertToUpper {
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Include modules
+    // Modules को include करें
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -296,17 +298,17 @@ process convertToUpper {
     }
     ```
 
-यह बहुत familiar लगने लगना चाहिए।
+यह बहुत परिचित दिखना शुरू हो जाना चाहिए।
 
-### 3.4. Workflow फिर से चलाएं
+### 3.4. वर्कफ़्लो फिर से चलाएँ
 
-इसे `-resume` flag के साथ run करो।
+इसे `-resume` flag के साथ चलाएँ।
 
 ```bash
 nextflow run hello-modules.nf -resume
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -318,29 +320,29 @@ nextflow run hello-modules.nf -resume
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
-यह अभी भी पहले की तरह same output produce करना चाहिए।
+यह अभी भी पहले जैसा ही आउटपुट उत्पन्न करना चाहिए।
 
-दो हो गए, एक और बचा!
+दो हो गए, एक और बाकी है!
 
 ---
 
 ## 4. `collectGreetings()` process को modularize करें
 
-### 4.1. New module के लिए file stub बनाएं
+### 4.1. नए module के लिए एक फ़ाइल stub बनाएँ
 
-`collectGreetings.nf` नामक module के लिए एक empty file बनाओ।
+`collectGreetings.nf` नाम की module के लिए एक खाली फ़ाइल बनाएँ।
 
 ```bash
 touch modules/collectGreetings.nf
 ```
 
-### 4.2. `collectGreetings` process code को module file में move करें
+### 4.2. `collectGreetings` process कोड को module फ़ाइल में ले जाएँ
 
-Workflow file से पूरी process definition को module file में copy करो।
+पूरी process परिभाषा को वर्कफ़्लो फ़ाइल से module फ़ाइल में कॉपी करें।
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
 /*
- * Uppercase अभिवादनों को एक single output फ़ाइल में collect करें
+ * uppercase greetings को एक single output फ़ाइल में collect करें
  */
 process collectGreetings {
 
@@ -361,16 +363,16 @@ process collectGreetings {
 }
 ```
 
-एक बार यह हो जाए, workflow file से process definition delete करो।
+एक बार यह हो जाने के बाद, वर्कफ़्लो फ़ाइल से process परिभाषा को हटा दें।
 
-### 4.3. `params` block से पहले include declaration add करें
+### 4.3. `params` ब्लॉक से पहले एक include declaration जोड़ें
 
-`params` block के ऊपर include declaration insert करो और इसे appropriately fill out करो।
+`params` ब्लॉक के ऊपर include declaration insert करें और इसे उचित रूप से भरें।
 
-=== "After"
+=== "बाद में"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Include modules
+    // Modules को include करें
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -384,10 +386,10 @@ process collectGreetings {
     }
     ```
 
-=== "Before"
+=== "पहले"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Include modules
+    // Modules को include करें
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -402,15 +404,15 @@ process collectGreetings {
 
 आखिरी वाला!
 
-### 4.4. Workflow चलाएं
+### 4.4. वर्कफ़्लो चलाएँ
 
-इसे `-resume` flag के साथ run करो।
+इसे `-resume` flag के साथ चलाएँ।
 
 ```bash
 nextflow run hello-modules.nf -resume
 ```
 
-??? success "Command output"
+??? success "कमांड आउटपुट"
 
     ```console
     N E X T F L O W   ~  version 25.10.2
@@ -422,70 +424,70 @@ nextflow run hello-modules.nf -resume
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
-यह अभी भी पहले की तरह same output produce करना चाहिए।
+यह अभी भी पहले जैसा ही आउटपुट उत्पन्न करना चाहिए।
 
-### सीख
+### सारांश
 
-तुम जानते हो कि workflow में multiple processes को modularize कैसे करें।
+तुम जानते हो कि किसी वर्कफ़्लो में कई processes को कैसे modularize करना है।
 
-बधाई हो, तुमने यह सारा काम किया और pipeline कैसे काम करती है उसमें absolutely कुछ भी नहीं बदला!
+बधाई हो, तुमने यह सारा काम किया और पाइपलाइन के काम करने के तरीके में बिल्कुल कुछ भी नहीं बदला!
 
-Jokes aside, अब तुम्हारा code अधिक modular है, और यदि तुम एक और pipeline लिखने का decide करते हो जो उन processes में से किसी को call करती है, तुम्हें relevant module use करने के लिए बस एक short `include` statement type करना होगा।
-यह code copy-paste करने से better है, क्योंकि यदि बाद में तुम module को improve करने का decide करते हो, तुम्हारी सभी pipelines improvements inherit करेंगी।
+मज़ाक को एक तरफ रखते हुए, अब तुम्हारा कोड अधिक modular है, और अगर तुम कोई अन्य पाइपलाइन लिखने का निर्णय लेते हो जो उन processes में से किसी एक को call करती है, तो तुम्हें बस प्रासंगिक module का उपयोग करने के लिए एक छोटा `include` स्टेटमेंट टाइप करना होगा।
+यह कोड को copy-paste करने से बेहतर है, क्योंकि अगर बाद में तुम module को सुधारने का निर्णय लेते हो, तो तुम्हारी सभी पाइपलाइनें सुधारों को inherit करेंगी।
 
-### आगे क्या?
+### आगे क्या है?
 
-यदि तुम चाहो तो थोड़ा ब्रेक लो।
+अगर तुम्हें ऐसा लगता है तो थोड़ा ब्रेक लो।
 
-जब तुम ready हो, तो [**Part 5: Hello Containers**](./05_hello_containers.md) पर move करो यह सीखने के लिए कि software dependencies को अधिक conveniently और reproducibly manage करने के लिए containers कैसे use करें।
+जब तुम तैयार हो, तो [**भाग 5: Hello Containers**](./05_hello_containers.md) पर जाओ ताकि सीख सको कि software dependencies को अधिक सुविधाजनक और reproducibly तरीके से प्रबंधित करने के लिए containers का उपयोग कैसे करें।
 
 ---
 
-## Quiz
+## क्विज़
 
 <quiz>
 Nextflow में module क्या है?
-- [ ] एक configuration file
-- [x] Single process definitions contain कर सकने वाली एक standalone file
-- [ ] एक workflow definition
+- [ ] एक configuration फ़ाइल
+- [x] एक स्वतंत्र फ़ाइल जिसमें process परिभाषाएँ हो सकती हैं
+- [ ] एक workflow परिभाषा
 - [ ] एक channel operator
 
-और जानें: [2. Create a module for `sayHello()`](#2-create-a-module-for-sayhello)
+और जानें: [2. `sayHello()` के लिए एक module बनाएँ](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
-Module files store करने के लिए आम तौर पर कौन सा convention use होता है?
-- [ ] Workflow के same directory में
-- [ ] `bin/` directory में
-- [x] `modules/` directory में
-- [ ] `lib/` directory में
+module फ़ाइलों को स्टोर करने के लिए आमतौर पर किस परंपरा का उपयोग किया जाता है?
+- [ ] वर्कफ़्लो के समान डायरेक्टरी में
+- [ ] एक `bin/` डायरेक्टरी में
+- [x] एक `modules/` डायरेक्टरी में
+- [ ] एक `lib/` डायरेक्टरी में
 
-और जानें: [1. Create a directory to store modules](#1-create-a-directory-to-store-modules)
+और जानें: [1. modules स्टोर करने के लिए एक डायरेक्टरी बनाएँ](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
-Module use करने के लिए correct syntax क्या है?
+module का उपयोग करने के लिए सही syntax क्या है?
 
 - [ ] `#!groovy import { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy require { SAYHELLO } from './modules/sayhello.nf'`
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-और जानें: [2.3. Add an include declaration](#23-add-an-include-declaration-before-the-workflow-block)
+और जानें: [2.3. एक include declaration जोड़ें](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>
-Modules use करने पर `-resume` functionality का क्या होता है?
+modules का उपयोग करते समय `-resume` functionality का क्या होता है?
 - [ ] यह अब काम नहीं करती
-- [ ] इसे additional configuration की need होती है
-- [x] यह पहले जैसी ही काम करती है
+- [ ] इसे अतिरिक्त configuration की आवश्यकता होती है
+- [x] यह पहले की तरह ही काम करती है
 - [ ] यह केवल local modules के लिए काम करती है
 </quiz>
 
 <quiz>
-Modules use करने के benefits क्या हैं? (सभी लागू select करें)
-- [x] Workflows में code reusability
-- [x] आसान maintenance
-- [x] Workflow code का बेहतर organization
-- [ ] तेज़ execution speed
+modules का उपयोग करने के क्या लाभ हैं? (सभी लागू विकल्प चुनें)
+- [x] वर्कफ़्लो में कोड की पुनः उपयोगिता
+- [x] आसान रखरखाव
+- [x] वर्कफ़्लो कोड का बेहतर संगठन
+- [ ] तेज़ execution गति
 </quiz>

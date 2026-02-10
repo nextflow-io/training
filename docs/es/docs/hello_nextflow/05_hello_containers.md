@@ -1,7 +1,9 @@
 # Parte 5: Hello Containers
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=es" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -10,22 +12,22 @@
 :green_book: La transcripción del video está disponible [aquí](./transcripts/05_hello_containers.md).
 ///
 
-En las Partes 1-4 de este curso de capacitación, aprendió cómo usar los bloques de construcción básicos de Nextflow para ensamblar un workflow simple capaz de procesar algo de texto, paralelizar la ejecución si había múltiples entradas, y recopilar los resultados para procesamiento adicional.
+En las Partes 1-4 de este curso de capacitación, aprendió a usar los bloques de construcción básicos de Nextflow para ensamblar un workflow simple capaz de procesar texto, paralelizar la ejecución si había múltiples entradas y recopilar los resultados para su posterior procesamiento.
 
-Sin embargo, estaba limitado a herramientas UNIX básicas disponibles en su entorno.
-Las tareas del mundo real a menudo requieren varias herramientas y paquetes que no están incluidos por defecto.
+Sin embargo, estaba limitado a las herramientas básicas de UNIX disponibles en su entorno.
+Las tareas del mundo real a menudo requieren varias herramientas y paquetes que no están incluidos de forma predeterminada.
 Típicamente, necesitaría instalar estas herramientas, gestionar sus dependencias y resolver cualquier conflicto.
 
 Todo eso es muy tedioso y molesto, así que vamos a mostrarle cómo usar **contenedores** para resolver este problema de manera mucho más conveniente.
 
-Un **contenedor** es una unidad de software ligera, independiente y ejecutable creada a partir de una **imagen** de contenedor que incluye todo lo necesario para ejecutar una aplicación incluyendo código, bibliotecas del sistema y configuraciones.
-Como puede imaginar, eso va a ser muy útil para hacer sus pipelines más reproducibles.
+Un **contenedor** es una unidad de software ligera, independiente y ejecutable creada a partir de una **imagen** de contenedor que incluye todo lo necesario para ejecutar una aplicación, incluyendo código, bibliotecas del sistema y configuraciones.
+Como puede imaginar, eso va a ser muy útil para hacer que sus pipelines sean más reproducibles.
 
-Note que enseñaremos esto usando [Docker](https://www.docker.com/get-started/), pero tenga en cuenta que Nextflow soporta [varias otras tecnologías de contenedores](https://nextflow.io/docs/latest/container.html) también.
+Tenga en cuenta que enseñaremos esto usando [Docker](https://www.docker.com/get-started/), pero recuerde que Nextflow también admite [varias otras tecnologías de contenedores](https://nextflow.io/docs/latest/container.html).
 
 ??? info "Cómo comenzar desde esta sección"
 
-    Esta sección del curso asume que ha completado las Partes 1-4 del curso [Hello Nextflow](./index.md) y tiene un pipeline completo funcionando.
+    Esta sección del curso asume que ha completado las Partes 1-4 del curso [Hello Nextflow](./index.md) y tiene un pipeline completo y funcional.
 
     Si está comenzando el curso desde este punto, necesitará copiar el directorio `modules` desde las soluciones:
 
@@ -61,7 +63,7 @@ output {
 }
 ```
 
-Solo para asegurarse de que todo funciona, ejecute el script una vez antes de hacer cualquier cambio:
+Solo para asegurarnos de que todo funciona, ejecute el script una vez antes de hacer cualquier cambio:
 
 ```bash
 nextflow run hello-containers.nf
@@ -109,7 +111,7 @@ Sin embargo, primero vamos a repasar algunos conceptos y operaciones básicas pa
 
 ### 1.1. Descargar la imagen del contenedor
 
-Para usar un contenedor, usualmente descarga o _pull_ una imagen de contenedor de un registro de contenedores, y luego ejecuta la imagen del contenedor para crear una instancia de contenedor.
+Para usar un contenedor, generalmente descarga o _extrae_ una imagen de contenedor de un registro de contenedores, y luego ejecuta la imagen del contenedor para crear una instancia de contenedor.
 
 La sintaxis general es la siguiente:
 
@@ -117,11 +119,11 @@ La sintaxis general es la siguiente:
 docker pull '<container>'
 ```
 
-La parte `docker pull` es la instrucción al sistema de contenedores para descargar una imagen de contenedor de un repositorio.
+La parte `docker pull` es la instrucción al sistema de contenedores para extraer una imagen de contenedor de un repositorio.
 
 La parte `'<container>'` es la dirección URI de la imagen del contenedor.
 
-Como ejemplo, descarguemos una imagen de contenedor que contiene [cowpy](https://github.com/jeffbuttars/cowpy), una implementación en Python de una herramienta llamada `cowsay` que genera arte ASCII para mostrar entradas de texto arbitrarias de una manera divertida.
+Como ejemplo, extraigamos una imagen de contenedor que contiene [cowpy](https://github.com/jeffbuttars/cowpy), una implementación en Python de una herramienta llamada `cowsay` que genera arte ASCII para mostrar entradas de texto arbitrarias de una manera divertida.
 
 ```txt title="Example"
  ________________________
@@ -145,9 +147,9 @@ Como ejemplo, descarguemos una imagen de contenedor que contiene [cowpy](https:/
 ```
 
 Hay varios repositorios donde puede encontrar contenedores publicados.
-Usamos el servicio [Seqera Containers](https://seqera.io/containers/) para generar esta imagen de contenedor Docker desde el paquete Conda `cowpy`: `'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`.
+Usamos el servicio [Seqera Containers](https://seqera.io/containers/) para generar esta imagen de contenedor Docker a partir del paquete Conda `cowpy`: `'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`.
 
-Ejecute el comando de descarga completo:
+Ejecute el comando pull completo:
 
 ```bash
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -176,12 +178,12 @@ docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     ```
 
 Si nunca ha descargado la imagen antes, esto puede tardar un minuto en completarse.
-Una vez que esté hecho, tiene una copia local de la imagen del contenedor.
+Una vez que esté listo, tiene una copia local de la imagen del contenedor.
 
 ### 1.2. Usar el contenedor para ejecutar `cowpy` como un comando único
 
-Una forma muy común en que las personas usan contenedores es ejecutarlos directamente, _es decir_, no interactivamente.
-Esto es genial para ejecutar comandos únicos.
+Una forma muy común en que las personas usan contenedores es ejecutarlos directamente, _es decir_, de forma no interactiva.
+Esto es excelente para ejecutar comandos únicos.
 
 La sintaxis general es la siguiente:
 
@@ -189,13 +191,13 @@ La sintaxis general es la siguiente:
 docker run --rm '<container>' [tool command]
 ```
 
-La parte `docker run --rm '<container>'` es la instrucción al sistema de contenedores para iniciar una instancia de contenedor desde una imagen de contenedor y ejecutar un comando en ella.
+La parte `docker run --rm '<container>'` es la instrucción al sistema de contenedores para iniciar una instancia de contenedor a partir de una imagen de contenedor y ejecutar un comando en ella.
 La bandera `--rm` le dice al sistema que apague la instancia del contenedor después de que el comando se haya completado.
 
-La sintaxis `[tool command]` depende de la herramienta que esté usando y cómo esté configurado el contenedor.
+La sintaxis `[comando de herramienta]` depende de la herramienta que esté usando y de cómo esté configurado el contenedor.
 Comencemos simplemente con `cowpy`.
 
-Completamente ensamblado, el comando de ejecución del contenedor se ve así; adelante y ejecútelo.
+Completamente ensamblado, el comando de ejecución del contenedor se ve así; adelante, ejecútelo.
 
 ```bash
 docker run --rm 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' cowpy
@@ -218,12 +220,12 @@ El sistema inició el contenedor, ejecutó el comando `cowpy` con sus parámetro
 
 ### 1.3. Usar el contenedor para ejecutar `cowpy` interactivamente
 
-También puede ejecutar un contenedor interactivamente, lo que le da un prompt de shell dentro del contenedor y le permite jugar con el comando.
+También puede ejecutar un contenedor de forma interactiva, lo que le da un prompt de shell dentro del contenedor y le permite jugar con el comando.
 
 #### 1.3.1. Iniciar el contenedor
 
-Para ejecutar interactivamente, solo agregamos `-it` al comando `docker run`.
-Opcionalmente, podemos especificar el shell que queremos usar dentro del contenedor agregando _ej._ `/bin/bash` al comando.
+Para ejecutar de forma interactiva, simplemente agregamos `-it` al comando `docker run`.
+Opcionalmente, podemos especificar el shell que queremos usar dentro del contenedor agregando _p. ej._ `/bin/bash` al comando.
 
 ```bash
 docker run --rm -it 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' /bin/bash
@@ -246,12 +248,12 @@ ls /
 Usamos `ls` aquí en lugar de `tree` porque la utilidad `tree` no está disponible en este contenedor.
 Puede ver que el sistema de archivos dentro del contenedor es diferente del sistema de archivos en su sistema host.
 
-Una limitación de lo que acabamos de hacer es que el contenedor está completamente aislado del sistema host por defecto.
-Esto significa que el contenedor no puede acceder a ningún archivo en el sistema host a menos que explícitamente se lo permita.
+Una limitación de lo que acabamos de hacer es que el contenedor está completamente aislado del sistema host de forma predeterminada.
+Esto significa que el contenedor no puede acceder a ningún archivo en el sistema host a menos que usted lo permita explícitamente.
 
 Le mostraremos cómo hacer eso en un minuto.
 
-#### 1.3.2. Ejecutar el/los comando(s) de la herramienta deseada
+#### 1.3.2. Ejecutar el(los) comando(s) de herramienta deseado(s)
 
 Ahora que está dentro del contenedor, puede ejecutar el comando `cowpy` directamente y darle algunos parámetros.
 Por ejemplo, la documentación de la herramienta dice que podemos cambiar el personaje ('cowacter') con `-c`.
@@ -277,9 +279,9 @@ cowpy "Hello Containers" -c tux
         \___)=(___/
     ```
 
-Ahora la salida muestra el pingüino de Linux, Tux, en lugar de la vaca predeterminada, porque especificamos el parámetro `-c tux`.
+Ahora la salida muestra al pingüino de Linux, Tux, en lugar de la vaca predeterminada, porque especificamos el parámetro `-c tux`.
 
-Como está dentro del contenedor, puede ejecutar el comando `cowpy` tantas veces como quiera, variando los parámetros de entrada, sin tener que molestarse con los comandos de Docker.
+Debido a que está dentro del contenedor, puede ejecutar el comando `cowpy` tantas veces como desee, variando los parámetros de entrada, sin tener que preocuparse por los comandos de Docker.
 
 !!! Tip "Consejo"
 
@@ -299,11 +301,11 @@ Para salir del contenedor, puede escribir `exit` en el prompt o usar el atajo de
 exit
 ```
 
-Su prompt ahora debería estar de vuelta a lo que era antes de que iniciara el contenedor.
+Su prompt ahora debería volver a lo que era antes de iniciar el contenedor.
 
 #### 1.3.4. Montar datos en el contenedor
 
-Como se señaló anteriormente, el contenedor está aislado del sistema host por defecto.
+Como se señaló anteriormente, el contenedor está aislado del sistema host de forma predeterminada.
 
 Para permitir que el contenedor acceda al sistema de archivos del host, puede **montar** un **volumen** desde el sistema host en el contenedor usando la siguiente sintaxis:
 
@@ -311,7 +313,7 @@ Para permitir que el contenedor acceda al sistema de archivos del host, puede **
 -v <outside_path>:<inside_path>
 ```
 
-En nuestro caso `<outside_path>` será el directorio de trabajo actual, así que podemos simplemente usar un punto (`.`), y `<inside_path>` es solo un alias que inventamos; llamémoslo `/my_project` (la ruta interna debe ser absoluta).
+En nuestro caso, `<ruta_externa>` será el directorio de trabajo actual, por lo que podemos usar simplemente un punto (`.`), y `<ruta_interna>` es solo un alias que inventamos; llamémoslo `/my_project` (la ruta interna debe ser absoluta).
 
 Para montar un volumen, reemplazamos las rutas y agregamos el argumento de montaje de volumen al comando docker run de la siguiente manera:
 
@@ -394,20 +396,20 @@ Se encontrará de vuelta en su shell normal.
 
 ### Conclusión
 
-Sabe cómo descargar un contenedor y ejecutarlo ya sea como un comando único o interactivamente. También sabe cómo hacer que sus datos sean accesibles desde dentro de su contenedor, lo que le permite probar cualquier herramienta que le interese en datos reales sin tener que instalar ningún software en su sistema.
+Sabe cómo extraer un contenedor y ejecutarlo ya sea como un comando único o de forma interactiva. También sabe cómo hacer que sus datos sean accesibles desde dentro de su contenedor, lo que le permite probar cualquier herramienta que le interese con datos reales sin tener que instalar ningún software en su sistema.
 
 ### ¿Qué sigue?
 
-Aprender cómo usar contenedores para la ejecución de procesos de Nextflow.
+Aprenda cómo usar contenedores para la ejecución de procesos de Nextflow.
 
 ---
 
 ## 2. Usar contenedores en Nextflow
 
 Nextflow tiene soporte integrado para ejecutar procesos dentro de contenedores para permitirle ejecutar herramientas que no tiene instaladas en su entorno de cómputo.
-Esto significa que puede usar cualquier imagen de contenedor que desee para ejecutar sus procesos, y Nextflow se encargará de descargar la imagen, montar los datos y ejecutar el proceso dentro de ella.
+Esto significa que puede usar cualquier imagen de contenedor que desee para ejecutar sus procesos, y Nextflow se encargará de extraer la imagen, montar los datos y ejecutar el proceso dentro de ella.
 
-Para demostrar esto, vamos a agregar un paso `cowpy` al pipeline que hemos estado desarrollando, después del paso `collectGreetings`.
+Para demostrar esto, vamos a agregar un paso de `cowpy` al pipeline que hemos estado desarrollando, después del paso `collectGreetings`.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-cowpy.svg"
@@ -434,7 +436,7 @@ Podemos modelar nuestro proceso `cowpy` en los otros procesos que hemos escrito 
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-// Generate ASCII art with cowpy
+// Generar arte ASCII con cowpy
 process cowpy {
 
     input:
@@ -467,7 +469,7 @@ Inserte la declaración de importación arriba del bloque workflow y complétela
 === "Después"
 
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="5"
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -477,7 +479,7 @@ Inserte la declaración de importación arriba del bloque workflow y complétela
 === "Antes"
 
     ```groovy title="hello-containers.nf" linenums="3"
-    // Include modules
+    // Incluir módulos
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -498,17 +500,17 @@ En el bloque workflow, haga el siguiente cambio de código:
 
     ```groovy title="hello-containers.nf" linenums="19" hl_lines="12-13"
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
-        // generate ASCII art of the greetings with cowpy
+        // generar arte ASCII de los saludos con cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -516,15 +518,15 @@ En el bloque workflow, haga el siguiente cambio de código:
 
     ```groovy title="hello-containers.nf" linenums="19"
         main:
-        // create a channel for inputs from a CSV file
+        // crear un canal para entradas desde un archivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emitir un saludo
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // convertir el saludo a mayúsculas
         convertToUpper(sayHello.out)
-        // collect all the greetings into one file
+        // recopilar todos los saludos en un archivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
@@ -532,7 +534,7 @@ Note que declaramos un nuevo parámetro CLI, `params.character`, para especifica
 
 #### 2.2.3. Agregar el parámetro `character` al bloque `params`
 
-Esto es técnicamente opcional pero es la práctica recomendada y es una oportunidad para establecer un valor predeterminado para el personaje mientras estamos en ello.
+Esto es técnicamente opcional pero es la práctica recomendada y es una oportunidad para establecer un valor predeterminado para el personaje mientras lo hacemos.
 
 === "Después"
 
@@ -559,7 +561,7 @@ Esto es técnicamente opcional pero es la práctica recomendada y es una oportun
     }
     ```
 
-Ahora podemos ser perezosos y omitir escribir el parámetro character en nuestras líneas de comando.
+Ahora podemos ser perezosos y omitir escribir el parámetro de personaje en nuestras líneas de comando.
 
 #### 2.2.4. Actualizar las salidas del workflow
 
@@ -567,7 +569,7 @@ Necesitamos actualizar las salidas del workflow para publicar la salida del proc
 
 ##### 2.2.4.1. Actualizar la sección `publish:`
 
-En el bloque `workflow`, haga el siguiente cambio de código:
+En el `bloque workflow`, haga el siguiente cambio de código:
 
 === "Después"
 
@@ -590,13 +592,13 @@ En el bloque `workflow`, haga el siguiente cambio de código:
         batch_report = collectGreetings.out.report
     ```
 
-El proceso `cowpy` solo produce una salida así que podemos referirnos a ella de la manera usual agregando `.out`.
+El proceso `cowpy` solo produce una salida, por lo que podemos referirnos a ella de la manera habitual agregando `.out`.
 
 Pero por ahora, terminemos de actualizar las salidas a nivel de workflow.
 
 ##### 2.2.4.2. Actualizar el bloque `output`
 
-Necesitamos agregar la salida final `cowpy_art` al bloque `output`. Mientras estamos en ello, también editemos los destinos de publicación ya que ahora nuestro pipeline está completo y sabemos qué salidas realmente nos importan.
+Necesitamos agregar la salida final `cowpy_art` al bloque `output`. Mientras lo hacemos, también editemos los destinos de publicación ya que ahora nuestro pipeline está completo y sabemos qué salidas realmente nos importan.
 
 En el bloque `output`, haga los siguientes cambios de código:
 
@@ -662,7 +664,7 @@ Solo para recapitular, esto es lo que estamos buscando:
 
 ¿Cree que va a funcionar?
 
-Eliminemos las salidas publicadas anteriores para tener una pizarra limpia, y ejecutemos el workflow con la bandera `-resume`.
+Eliminemos las salidas publicadas anteriores para tener un estado limpio, y ejecutemos el workflow con la bandera `-resume`.
 
 ```bash
 rm -r hello_containers/
@@ -712,9 +714,9 @@ nextflow run hello-containers.nf -resume
     ```
 
 ¡Oh no, hay un error!
-El código de error dado por `error exit status (127)` significa que el ejecutable que pedimos no fue encontrado.
+El código de error dado por `error exit status (127)` significa que el ejecutable que solicitamos no se encontró.
 
-Eso tiene sentido, ya que estamos llamando a la herramienta `cowpy` pero en realidad no hemos especificado un contenedor todavía (ups).
+Eso tiene sentido, ya que estamos llamando a la herramienta `cowpy` pero aún no hemos especificado un contenedor (ups).
 
 ### 2.3. Usar un contenedor para ejecutar el proceso `cowpy`
 
@@ -766,17 +768,17 @@ Edite el módulo `cowpy.nf` para agregar la directiva `container` a la definici�
     }
     ```
 
-Esto le dice a Nextflow que _si el uso de Docker está habilitado_, debería usar la imagen de contenedor especificada aquí para ejecutar el proceso.
+Esto le dice a Nextflow que _si el uso de Docker está habilitado_, debe usar la imagen de contenedor especificada aquí para ejecutar el proceso.
 
 #### 2.3.2. Habilitar el uso de Docker a través del archivo `nextflow.config`
 
-Note que dijimos _'si el uso de Docker está habilitado'_. Por defecto, no lo está, así que necesitamos decirle a Nextflow que está permitido usar Docker.
+Note que dijimos _'si el uso de Docker está habilitado'_. De forma predeterminada, no lo está, por lo que necesitamos decirle a Nextflow que está permitido usar Docker.
 Para ese fin, vamos a anticipar ligeramente el tema de la siguiente y última parte de este curso (Parte 6), que cubre la configuración.
 
-Una de las principales formas que ofrece Nextflow para configurar la ejecución del workflow es usar un archivo `nextflow.config`.
+Una de las principales formas que Nextflow ofrece para configurar la ejecución del workflow es usar un archivo `nextflow.config`.
 Cuando tal archivo está presente en el directorio actual, Nextflow lo cargará automáticamente y aplicará cualquier configuración que contenga.
 
-Proporcionamos un archivo `nextflow.config` con una única línea de código que explícitamente deshabilita Docker: `docker.enabled = false`.
+Proporcionamos un archivo `nextflow.config` con una sola línea de código que deshabilita explícitamente Docker: `docker.enabled = false`.
 
 Ahora, cambiemos eso a `true` para habilitar Docker:
 
@@ -821,7 +823,7 @@ nextflow run hello-containers.nf -resume
     ```
 
 ¡Esta vez sí funciona!
-Como siempre puede encontrar las salidas del workflow en el directorio de resultados correspondiente, aunque esta vez están un poco más organizadas, con solo el reporte y la salida final en el nivel superior, y todos los archivos intermedios apartados en un subdirectorio.
+Como de costumbre, puede encontrar las salidas del workflow en el directorio de resultados correspondiente, aunque esta vez están un poco más ordenadas, con solo el reporte y la salida final en el nivel superior, y todos los archivos intermedios guardados en un subdirectorio.
 
 ??? abstract "Contenido del directorio"
 
@@ -874,15 +876,15 @@ La salida final de arte ASCII está en el directorio `results/hello_containers/`
 
 Y ahí está, nuestro hermoso pavo diciendo los saludos como se deseaba.
 
-#### 2.3.4. Inspeccionar cómo Nextflow lanzó la tarea containerizada
+#### 2.3.4. Inspeccionar cómo Nextflow lanzó la tarea en contenedor
 
-Como coda final a esta sección, echemos un vistazo al subdirectorio de trabajo para una de las llamadas del proceso `cowpy` para obtener un poco más de información sobre cómo Nextflow trabaja con contenedores bajo el capó.
+Como coda final de esta sección, echemos un vistazo al subdirectorio de trabajo para una de las llamadas al proceso `cowpy` para obtener un poco más de información sobre cómo funciona Nextflow con contenedores bajo el capó.
 
 Verifique la salida de su comando `nextflow run` para encontrar la ruta al subdirectorio de trabajo para el proceso `cowpy`.
-Mirando lo que obtuvimos para la ejecución mostrada arriba, la línea del log de consola para el proceso `cowpy` comienza con `[98/656c6c]`.
+Mirando lo que obtuvimos para la ejecución mostrada arriba, la línea de registro de consola para el proceso `cowpy` comienza con `[98/656c6c]`.
 Eso corresponde a la siguiente ruta de directorio truncada: `work/98/656c6c`.
 
-En ese directorio, encontrará el archivo `.command.run` que contiene todos los comandos que Nextflow ejecutó en su nombre durante el curso de la ejecución del pipeline.
+En ese directorio, encontrará el archivo `.command.run` que contiene todos los comandos que Nextflow ejecutó en su nombre en el curso de ejecutar el pipeline.
 
 ??? abstract "Contenido del archivo"
 
@@ -1048,10 +1050,10 @@ nxf_launch() {
 }
 ```
 
-Como puede ver, Nextflow está usando el comando `docker run` para lanzar la llamada del proceso.
-También monta el subdirectorio de trabajo correspondiente en el contenedor, establece el directorio de trabajo dentro del contenedor en consecuencia, y ejecuta nuestro script bash plantillado en el archivo `.command.sh`.
+Como puede ver, Nextflow está usando el comando `docker run` para lanzar la llamada al proceso.
+También monta el subdirectorio de trabajo correspondiente en el contenedor, establece el directorio de trabajo dentro del contenedor en consecuencia y ejecuta nuestro script bash con plantilla en el archivo `.command.sh`.
 
-¡Todo el trabajo duro que tuvimos que hacer manualmente en la primera sección? ¡Nextflow lo hace por nosotros detrás de escenas!
+¿Todo el trabajo duro que tuvimos que hacer manualmente en la primera sección? ¡Nextflow lo hace por nosotros detrás de escena!
 
 ```txt
  _______________________
@@ -1083,7 +1085,7 @@ Sabe cómo usar contenedores en Nextflow para ejecutar procesos.
 
 ¡Tome un descanso!
 
-Cuando esté listo, continúe con [**Parte 6: Hello Config**](./06_hello_config.md) para aprender cómo configurar la ejecución de su pipeline para adaptarse a su infraestructura así como gestionar la configuración de entradas y parámetros.
+Cuando esté listo, continúe con [**Parte 6: Hello Config**](./06_hello_config.md) para aprender cómo configurar la ejecución de su pipeline para que se ajuste a su infraestructura, así como gestionar la configuración de entradas y parámetros.
 
 ¡Es la última parte, y luego habrá terminado con este curso!
 
@@ -1109,26 +1111,26 @@ Cuando esté listo, continúe con [**Parte 6: Hello Config**](./06_hello_config.
 
 <quiz>
 ¿Qué hace la bandera `-v` en un comando `docker run`?
-- [ ] Habilita salida verbosa
+- [ ] Habilita la salida detallada
 - [ ] Valida el contenedor
-- [x] Monta un volumen del sistema host en el contenedor
+- [x] Monta un volumen desde el sistema host en el contenedor
 - [ ] Especifica la versión del contenedor
 
 Aprenda más: [1.3.4. Montar datos en el contenedor](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
-¿Por qué necesita montar volúmenes cuando usa contenedores?
+¿Por qué necesita montar volúmenes al usar contenedores?
 - [ ] Para mejorar el rendimiento del contenedor
 - [ ] Para ahorrar espacio en disco
-- [x] Porque los contenedores están aislados del sistema de archivos del host por defecto
+- [x] Porque los contenedores están aislados del sistema de archivos del host de forma predeterminada
 - [ ] Para habilitar la red
 
 Aprenda más: [1.3.4. Montar datos en el contenedor](#134-mount-data-into-the-container)
 </quiz>
 
 <quiz>
-¿Cómo especifica un contenedor para un proceso de Nextflow?
+¿Cómo se especifica un contenedor para un proceso de Nextflow?
 - [ ] `docker 'container-uri'`
 - [ ] `image 'container-uri'`
 - [x] `container 'container-uri'`
@@ -1148,11 +1150,11 @@ Aprenda más: [2.3.2. Habilitar el uso de Docker a través del archivo `nextflow
 </quiz>
 
 <quiz>
-¿Qué maneja automáticamente Nextflow cuando ejecuta un proceso en un contenedor? (Seleccione todos los que apliquen)
-- [x] Descargar la imagen del contenedor si es necesario
+¿Qué maneja automáticamente Nextflow al ejecutar un proceso en un contenedor? (Seleccione todas las que apliquen)
+- [x] Extraer la imagen del contenedor si es necesario
 - [x] Montar el directorio de trabajo
 - [x] Ejecutar el script del proceso dentro del contenedor
 - [x] Limpiar la instancia del contenedor después de la ejecución
 
-Aprenda más: [2.3.4. Inspeccionar cómo Nextflow lanzó la tarea containerizada](#234-inspect-how-nextflow-launched-the-containerized-task)
+Aprenda más: [2.3.4. Inspeccionar cómo Nextflow lanzó la tarea en contenedor](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>

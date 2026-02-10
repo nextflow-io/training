@@ -1,41 +1,43 @@
 # Teil 4: Hello Modules
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=de" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
 :fontawesome-brands-youtube:{ .youtube } Siehe [die gesamte Playlist](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) auf dem Nextflow YouTube-Kanal.
 
-:green_book: Das Videotranskript ist [hier](./transcripts/04_hello_modules.md) verfügbar.
+:green_book: Das Video-Transkript ist [hier](./transcripts/04_hello_modules.md) verfügbar.
 ///
 
 Dieser Abschnitt behandelt, wie du deinen Workflow-Code organisierst, um die Entwicklung und Wartung deiner Pipeline effizienter und nachhaltiger zu gestalten.
-Konkret werden wir demonstrieren, wie man [**Module**](https://nextflow.io/docs/latest/module.html) verwendet.
+Konkret zeigen wir dir, wie du [**Module**](https://nextflow.io/docs/latest/module.html) verwendest.
 
-In Nextflow ist ein **Modul** eine eigenständige Codedatei, die oft eine einzelne process-Definition enthält.
-Um ein Modul in einem Workflow zu verwenden, fügst du einfach eine einzeilige `include`-Anweisung zu deiner Workflow-Codedatei hinzu; dann kannst du den process genauso in den Workflow integrieren, wie du es normalerweise tun würdest.
-Das ermöglicht es, process-Definitionen in mehreren Workflows wiederzuverwenden, ohne mehrere Kopien des Codes zu produzieren.
+In Nextflow ist ein **Modul** eine eigenständige Code-Datei, die oft eine einzelne Prozess-Definition enthält.
+Um ein Modul in einem Workflow zu verwenden, fügst du einfach eine einzeilige `include`-Anweisung zu deiner Workflow-Code-Datei hinzu; dann kannst du den Prozess auf die gleiche Weise in den Workflow integrieren wie normalerweise.
+Das macht es möglich, Prozess-Definitionen in mehreren Workflows wiederzuverwenden, ohne mehrere Kopien des Codes zu erstellen.
 
-Als wir anfingen, unseren Workflow zu entwickeln, haben wir alles in einer einzigen Codedatei geschrieben.
-Jetzt werden wir die processes in einzelne Module auslagern.
+Als wir mit der Entwicklung unseres Workflows begonnen haben, haben wir alles in einer einzigen Code-Datei geschrieben.
+Jetzt werden wir die Prozesse in einzelne Module auslagern.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/modules.svg"
 </figure>
 
-Dies wird unseren Code besser teilbar, flexibler und wartbarer machen.
+Das macht unseren Code besser teilbar, flexibler und wartbarer.
 
-??? info "Wie du von diesem Abschnitt aus beginnen kannst"
+??? info "Wie du von diesem Abschnitt aus beginnst"
 
-    Dieser Abschnitt des Kurses setzt voraus, dass du die Teile 1-3 des [Hello Nextflow](./index.md)-Kurses abgeschlossen hast, aber wenn du mit den dort behandelten Grundlagen vertraut bist, kannst du von hier aus starten, ohne etwas Besonderes tun zu müssen.
+    Dieser Abschnitt des Kurses setzt voraus, dass du die Teile 1-3 des [Hello Nextflow](./index.md)-Kurses abgeschlossen hast. Wenn du jedoch mit den dort behandelten Grundlagen vertraut bist, kannst du auch hier beginnen, ohne etwas Besonderes tun zu müssen.
 
 ---
 
-## 0. Aufwärmübung: `hello-modules.nf` ausführen
+## 0. Aufwärmen: Führe `hello-modules.nf` aus
 
 Wir werden das Workflow-Skript `hello-modules.nf` als Ausgangspunkt verwenden.
-Es entspricht dem Skript, das durch das Durcharbeiten von Teil 3 dieses Trainingskurses erstellt wurde, außer dass wir die Ausgabeziele geändert haben:
+Es entspricht dem Skript, das durch die Bearbeitung von Teil 3 dieses Trainingskurses erstellt wurde, außer dass wir die Ausgabeziele geändert haben:
 
 ```groovy title="hello-modules.nf" linenums="37" hl_lines="3 7 11 15"
 output {
@@ -77,9 +79,9 @@ nextflow run hello-modules.nf
     [af/479117] collectGreetings   [100%] 1 of 1 ✔
     ```
 
-Wie zuvor findest du die Ausgabedateien in dem im `output`-Block angegebenen Verzeichnis (hier `results/hello_modules/`).
+Wie zuvor findest du die Ausgabedateien im Verzeichnis, das im `output`-Block angegeben ist (hier `results/hello_modules/`).
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results/hello_modules/
@@ -97,10 +99,10 @@ Wenn das bei dir funktioniert hat, bist du bereit zu lernen, wie du deinen Workf
 
 ---
 
-## 1. Ein Verzeichnis zum Speichern von Modulen erstellen
+## 1. Erstelle ein Verzeichnis zum Speichern von Modulen
 
-Es ist eine bewährte Praxis, deine Module in einem bestimmten Verzeichnis zu speichern.
-Du kannst dieses Verzeichnis beliebig nennen, aber die Konvention ist, es `modules/` zu nennen.
+Es ist Best Practice, deine Module in einem bestimmten Verzeichnis zu speichern.
+Du kannst dieses Verzeichnis beliebig benennen, aber die Konvention ist, es `modules/` zu nennen.
 
 ```bash
 mkdir modules
@@ -108,14 +110,14 @@ mkdir modules
 
 ---
 
-## 2. Ein Modul für `sayHello()` erstellen
+## 2. Erstelle ein Modul für `sayHello()`
 
-In seiner einfachsten Form ist das Umwandeln eines bestehenden process in ein Modul kaum mehr als eine Kopier-und-Einfüge-Operation.
-Wir werden einen Dateistub für das Modul erstellen, den relevanten Code hinüberkopieren und ihn dann aus der Haupt-Workflow-Datei löschen.
+In seiner einfachsten Form ist die Umwandlung eines bestehenden Prozesses in ein Modul kaum mehr als eine Kopier-Einfügen-Operation.
+Wir werden eine Datei-Vorlage für das Modul erstellen, den relevanten Code hinüberkopieren und ihn dann aus der Haupt-Workflow-Datei löschen.
 
-Dann müssen wir nur noch eine `include`-Anweisung hinzufügen, damit Nextflow weiß, dass es den relevanten Code zur Laufzeit einziehen soll.
+Dann müssen wir nur noch eine `include`-Anweisung hinzufügen, damit Nextflow weiß, dass es den relevanten Code zur Laufzeit einbinden soll.
 
-### 2.1. Einen Dateistub für das neue Modul erstellen
+### 2.1. Erstelle eine Datei-Vorlage für das neue Modul
 
 Lass uns eine leere Datei für das Modul namens `sayHello.nf` erstellen.
 
@@ -123,11 +125,11 @@ Lass uns eine leere Datei für das Modul namens `sayHello.nf` erstellen.
 touch modules/sayHello.nf
 ```
 
-Dies gibt uns einen Platz, um den process-Code zu platzieren.
+Das gibt uns einen Ort, an dem wir den Prozess-Code ablegen können.
 
-### 2.2. Den `sayHello`-process-Code in die Moduldatei verschieben
+### 2.2. Verschiebe den `sayHello`-Prozess-Code in die Modul-Datei
 
-Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei.
+Kopiere die gesamte Prozess-Definition von der Workflow-Datei in die Modul-Datei.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
 /*
@@ -148,22 +150,22 @@ process sayHello {
 }
 ```
 
-Sobald das erledigt ist, lösche die process-Definition aus der Workflow-Datei.
+Sobald das erledigt ist, lösche die Prozess-Definition aus der Workflow-Datei.
 
-### 2.3. Eine include-Deklaration vor dem workflow-Block hinzufügen
+### 2.3. Füge eine include-Deklaration vor dem Workflow-Block hinzu
 
-Die Syntax für das Einbinden eines process aus einem Modul ist ziemlich unkompliziert:
+Die Syntax zum Einbinden eines Prozesses aus einem Modul ist ziemlich einfach:
 
 ```groovy title="Syntax: include declaration"
 include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
-Lass uns das oberhalb des `params`-Blocks einfügen und es entsprechend ausfüllen.
+Lass uns das oberhalb des `params`-Blocks einfügen und entsprechend ausfüllen.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-modules.nf" linenums="44" hl_lines="1 2"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -187,11 +189,11 @@ Lass uns das oberhalb des `params`-Blocks einfügen und es entsprechend ausfüll
     }
     ```
 
-Du siehst, wir haben den Prozessnamen `sayHello` und den Pfad zu der Datei, die den Modulcode enthält, `./modules/sayHello.nf`, ausgefüllt.
+Du siehst, wir haben den Prozessnamen `sayHello` und den Pfad zur Datei mit dem Modul-Code `./modules/sayHello.nf` ausgefüllt.
 
-### 2.4. Den Workflow ausführen
+### 2.4. Führe den Workflow aus
 
-Wir führen den Workflow mit im Wesentlichen demselben Code und denselben Eingaben wie zuvor aus, also lass ihn uns mit dem `-resume`-Flag ausführen und sehen, was passiert.
+Wir führen den Workflow mit im Wesentlichen dem gleichen Code und den gleichen Eingaben wie zuvor aus, also lass uns mit dem `-resume`-Flag ausführen und sehen, was passiert.
 
 ```bash
 nextflow run hello-modules.nf -resume
@@ -209,26 +211,26 @@ nextflow run hello-modules.nf -resume
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
-Dies sollte sehr schnell laufen, weil alles im Cache ist.
+Das sollte sehr schnell laufen, weil alles gecacht ist.
 Du kannst gerne die veröffentlichten Ausgaben überprüfen.
 
-Nextflow hat erkannt, dass es immer noch dieselbe Arbeit zu erledigen gibt, auch wenn der Code auf mehrere Dateien aufgeteilt ist.
+Nextflow hat erkannt, dass es immer noch die gleiche Arbeit zu erledigen gibt, auch wenn der Code auf mehrere Dateien aufgeteilt ist.
 
 ### Fazit
 
-Du weißt, wie du einen process in ein lokales Modul extrahierst und weißt, dass dies die Wiederaufnahmefähigkeit des Workflows nicht beeinträchtigt.
+Du weißt, wie du einen Prozess in ein lokales Modul extrahierst, und du weißt, dass dies die Wiederaufnahmefähigkeit des Workflows nicht beeinträchtigt.
 
 ### Wie geht es weiter?
 
 Übe das Erstellen weiterer Module.
-Sobald du eines gemacht hast, kannst du eine Million weitere machen...
+Wenn du eines gemacht hast, kannst du eine Million mehr machen...
 Aber lass uns vorerst nur noch zwei weitere machen.
 
 ---
 
-## 3. Den `convertToUpper()`-process modularisieren
+## 3. Modularisiere den `convertToUpper()`-Prozess
 
-### 3.1. Einen Dateistub für das neue Modul erstellen
+### 3.1. Erstelle eine Datei-Vorlage für das neue Modul
 
 Erstelle eine leere Datei für das Modul namens `convertToUpper.nf`.
 
@@ -236,13 +238,13 @@ Erstelle eine leere Datei für das Modul namens `convertToUpper.nf`.
 touch modules/convertToUpper.nf
 ```
 
-### 3.2. Den `convertToUpper`-process-Code in die Moduldatei verschieben
+### 3.2. Verschiebe den `convertToUpper`-Prozess-Code in die Modul-Datei
 
-Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei.
+Kopiere die gesamte Prozess-Definition von der Workflow-Datei in die Modul-Datei.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
 /*
- * Verwende ein Textersetzungstool, um die Begrüßung in Großbuchstaben umzuwandeln
+ * Verwende ein Text-Ersetzungstool, um die Begrüßung in Großbuchstaben umzuwandeln
  */
 process convertToUpper {
 
@@ -259,16 +261,16 @@ process convertToUpper {
 }
 ```
 
-Sobald das erledigt ist, lösche die process-Definition aus der Workflow-Datei.
+Sobald das erledigt ist, lösche die Prozess-Definition aus der Workflow-Datei.
 
-### 3.3. Eine include-Deklaration vor dem `params`-Block hinzufügen
+### 3.3. Füge eine include-Deklaration vor dem `params`-Block hinzu
 
 Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie entsprechend aus.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-modules.nf" linenums="23" hl_lines="3"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -284,7 +286,7 @@ Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie en
 === "Vorher"
 
     ```groovy title="hello-modules.nf" linenums="23"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
 
     /*
@@ -296,9 +298,9 @@ Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie en
     }
     ```
 
-Dies sollte jetzt sehr vertraut aussehen.
+Das sollte dir langsam sehr vertraut vorkommen.
 
-### 3.4. Den Workflow erneut ausführen
+### 3.4. Führe den Workflow erneut aus
 
 Führe dies mit dem `-resume`-Flag aus.
 
@@ -318,15 +320,15 @@ nextflow run hello-modules.nf -resume
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
-Dies sollte immer noch dieselbe Ausgabe wie zuvor produzieren.
+Das sollte immer noch die gleiche Ausgabe wie zuvor erzeugen.
 
-Zwei erledigt, noch eines übrig!
+Zwei geschafft, noch einer!
 
 ---
 
-## 4. Den `collectGreetings()`-process modularisieren
+## 4. Modularisiere den `collectGreetings()`-Prozess
 
-### 4.1. Einen Dateistub für das neue Modul erstellen
+### 4.1. Erstelle eine Datei-Vorlage für das neue Modul
 
 Erstelle eine leere Datei für das Modul namens `collectGreetings.nf`.
 
@@ -334,13 +336,13 @@ Erstelle eine leere Datei für das Modul namens `collectGreetings.nf`.
 touch modules/collectGreetings.nf
 ```
 
-### 4.2. Den `collectGreetings`-process-Code in die Moduldatei verschieben
+### 4.2. Verschiebe den `collectGreetings`-Prozess-Code in die Modul-Datei
 
-Kopiere die gesamte process-Definition von der Workflow-Datei in die Moduldatei.
+Kopiere die gesamte Prozess-Definition von der Workflow-Datei in die Modul-Datei.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
 /*
- * Großbuchstaben-Begrüßungen in einer einzelnen Ausgabedatei sammeln
+ * Sammle Großbuchstaben-Begrüßungen in einer einzigen Ausgabedatei
  */
 process collectGreetings {
 
@@ -361,16 +363,16 @@ process collectGreetings {
 }
 ```
 
-Sobald das erledigt ist, lösche die process-Definition aus der Workflow-Datei.
+Sobald das erledigt ist, lösche die Prozess-Definition aus der Workflow-Datei.
 
-### 4.3. Eine include-Deklaration vor dem `params`-Block hinzufügen
+### 4.3. Füge eine include-Deklaration vor dem `params`-Block hinzu
 
 Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie entsprechend aus.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-modules.nf" linenums="3" hl_lines="4"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
@@ -387,7 +389,7 @@ Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie en
 === "Vorher"
 
     ```groovy title="hello-modules.nf" linenums="3"
-    // Include modules
+    // Module einbinden
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -400,9 +402,9 @@ Füge die include-Deklaration oberhalb des `params`-Blocks ein und fülle sie en
     }
     ```
 
-Das letzte!
+Der letzte!
 
-### 4.4. Den Workflow ausführen
+### 4.4. Führe den Workflow aus
 
 Führe dies mit dem `-resume`-Flag aus.
 
@@ -422,22 +424,22 @@ nextflow run hello-modules.nf -resume
     [1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
     ```
 
-Dies sollte immer noch dieselbe Ausgabe wie zuvor produzieren.
+Das sollte immer noch die gleiche Ausgabe wie zuvor erzeugen.
 
 ### Fazit
 
-Du weißt, wie du mehrere processes in einem Workflow modularisierst.
+Du weißt, wie du mehrere Prozesse in einem Workflow modularisierst.
 
 Herzlichen Glückwunsch, du hast all diese Arbeit geleistet und absolut nichts hat sich daran geändert, wie die Pipeline funktioniert!
 
-Scherz beiseite, jetzt ist dein Code modularer, und wenn du dich entscheidest, eine andere Pipeline zu schreiben, die einen dieser processes aufruft, musst du nur eine kurze `include`-Anweisung eingeben, um das relevante Modul zu verwenden.
-Das ist besser als den Code zu kopieren und einzufügen, denn wenn du dich später entscheidest, das Modul zu verbessern, werden alle deine Pipelines die Verbesserungen erben.
+Spaß beiseite, jetzt ist dein Code modularer, und wenn du dich entscheidest, eine weitere Pipeline zu schreiben, die einen dieser Prozesse aufruft, musst du nur eine kurze `include`-Anweisung eingeben, um das entsprechende Modul zu verwenden.
+Das ist besser als Code zu kopieren und einzufügen, denn wenn du später beschließt, das Modul zu verbessern, werden alle deine Pipelines die Verbesserungen erben.
 
 ### Wie geht es weiter?
 
 Mach eine kurze Pause, wenn du möchtest.
 
-Wenn du bereit bist, gehe zu [**Teil 5: Hello Container**](./05_hello_containers.md), um zu lernen, wie du Container verwendest, um Softwareabhängigkeiten bequemer und reproduzierbarer zu verwalten.
+Wenn du bereit bist, gehe weiter zu [**Teil 5: Hello Containers**](./05_hello_containers.md), um zu lernen, wie du Container verwendest, um Software-Abhängigkeiten bequemer und reproduzierbarer zu verwalten.
 
 ---
 
@@ -446,21 +448,21 @@ Wenn du bereit bist, gehe zu [**Teil 5: Hello Container**](./05_hello_containers
 <quiz>
 Was ist ein Modul in Nextflow?
 - [ ] Eine Konfigurationsdatei
-- [x] Eine eigenständige Datei, die process-Definitionen enthalten kann
+- [x] Eine eigenständige Datei, die Prozess-Definitionen enthalten kann
 - [ ] Eine Workflow-Definition
-- [ ] Ein channel-Operator
+- [ ] Ein Kanal-Operator
 
-Mehr erfahren: [2. Ein Modul für `sayHello()` erstellen](#2-create-a-module-for-sayhello)
+Mehr erfahren: [2. Erstelle ein Modul für `sayHello()`](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
-Welche Konvention wird typischerweise für das Speichern von Moduldateien verwendet?
-- [ ] Im selben Verzeichnis wie der Workflow
+Welche Konvention wird typischerweise zum Speichern von Modul-Dateien verwendet?
+- [ ] Im gleichen Verzeichnis wie der Workflow
 - [ ] In einem `bin/`-Verzeichnis
 - [x] In einem `modules/`-Verzeichnis
 - [ ] In einem `lib/`-Verzeichnis
 
-Mehr erfahren: [1. Ein Verzeichnis zum Speichern von Modulen erstellen](#1-create-a-directory-to-store-modules)
+Mehr erfahren: [1. Erstelle ein Verzeichnis zum Speichern von Modulen](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -471,11 +473,11 @@ Was ist die korrekte Syntax, um ein Modul zu verwenden?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Mehr erfahren: [2.3. Eine include-Deklaration hinzufügen](#23-add-an-include-declaration-before-the-workflow-block)
+Mehr erfahren: [2.3. Füge eine include-Deklaration hinzu](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>
-Was passiert mit der `-resume`-Funktionalität bei der Verwendung von Modulen?
+Was passiert mit der `-resume`-Funktionalität bei Verwendung von Modulen?
 - [ ] Sie funktioniert nicht mehr
 - [ ] Sie erfordert zusätzliche Konfiguration
 - [x] Sie funktioniert genauso wie zuvor
@@ -484,8 +486,8 @@ Was passiert mit der `-resume`-Funktionalität bei der Verwendung von Modulen?
 
 <quiz>
 Was sind die Vorteile der Verwendung von Modulen? (Wähle alle zutreffenden aus)
-- [x] Wiederverwendbarkeit von Code über Workflows hinweg
+- [x] Code-Wiederverwendbarkeit über Workflows hinweg
 - [x] Einfachere Wartung
-- [x] Bessere Organisation von Workflow-Code
+- [x] Bessere Organisation des Workflow-Codes
 - [ ] Schnellere Ausführungsgeschwindigkeit
 </quiz>

@@ -1,7 +1,9 @@
 # Parte 3: Hello Workflow
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=pt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/_aO56V3iXGI?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -11,14 +13,14 @@
 ///
 
 A maioria dos fluxos de trabalho do mundo real envolve mais de uma etapa.
-Neste módulo de treinamento, você aprenderá como conectar processos em um fluxo de trabalho de múltiplas etapas.
+Neste módulo de treinamento, você aprenderá como conectar processos em um fluxo de trabalho com múltiplas etapas.
 
 Isso ensinará a você a maneira Nextflow de realizar o seguinte:
 
 1. Fazer os dados fluírem de um processo para o próximo
 2. Coletar saídas de múltiplas chamadas de processo em uma única chamada de processo
 3. Passar parâmetros adicionais para um processo
-4. Gerenciar múltiplas saídas vindas de um processo
+4. Lidar com múltiplas saídas provenientes de um processo
 
 Para demonstrar, continuaremos construindo sobre o exemplo Hello World agnóstico de domínio das Partes 1 e 2.
 Desta vez, faremos as seguintes alterações em nosso fluxo de trabalho para refletir melhor como as pessoas constroem fluxos de trabalho reais:
@@ -26,11 +28,11 @@ Desta vez, faremos as seguintes alterações em nosso fluxo de trabalho para ref
 1. Adicionar uma segunda etapa que converte a saudação para maiúsculas.
 2. Adicionar uma terceira etapa que coleta todas as saudações transformadas e as escreve em um único arquivo.
 3. Adicionar um parâmetro para nomear o arquivo de saída final e passá-lo como uma entrada secundária para a etapa de coleta.
-4. Fazer a etapa de coleta também relatar uma estatística simples sobre o que foi processado.
+4. Fazer a etapa de coleta também reportar uma estatística simples sobre o que foi processado.
 
 ??? info "Como começar a partir desta seção"
 
-    Esta seção do curso pressupõe que você completou as Partes 1-2 do curso [Hello Nextflow](./index.md), mas se você está confortável com os conceitos básicos cobertos nessas seções, pode começar a partir daqui sem fazer nada especial.
+    Esta seção do curso assume que você completou as Partes 1-2 do curso [Hello Nextflow](./index.md), mas se você está confortável com os conceitos básicos cobertos nessas seções, pode começar daqui sem fazer nada especial.
 
 ---
 
@@ -49,14 +51,14 @@ output {
 ```
 
 Este diagrama resume a operação atual do fluxo de trabalho.
-Deve parecer familiar, exceto que agora estamos mostrando explicitamente que as saídas do processo são empacotadas em um canal, assim como as entradas eram.
-Vamos dar um bom uso a esse canal de saída em um minuto.
+Deve parecer familiar, exceto que agora estamos mostrando explicitamente que as saídas do processo são empacotadas em um canal, assim como as entradas foram.
+Vamos colocar esse canal de saída em bom uso em um minuto.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-workflow-channels.svg"
 </figure>
 
-Apenas para ter certeza de que tudo está funcionando, execute o script uma vez antes de fazer quaisquer alterações:
+Apenas para garantir que tudo está funcionando, execute o script uma vez antes de fazer qualquer alteração:
 
 ```bash
 nextflow run hello-workflow.nf
@@ -85,7 +87,7 @@ Para este capítulo, está em `results/hello_workflow/`.
     └── Holà-output.txt
     ```
 
-Se isso funcionou para você, você está pronto para aprender como montar um fluxo de trabalho de múltiplas etapas.
+Se isso funcionou para você, você está pronto para aprender como montar um fluxo de trabalho com múltiplas etapas.
 
 ---
 
@@ -101,17 +103,17 @@ Para isso, precisamos fazer três coisas:
 
 - Definir o comando que vamos usar para fazer a conversão para maiúsculas.
 - Escrever um novo processo que envolve o comando de conversão para maiúsculas.
-- Chamar o novo processo no bloco de fluxo de trabalho e configurá-lo para receber a saída do processo `sayHello()` como entrada.
+- Chamar o novo processo no bloco workflow e configurá-lo para receber a saída do processo `sayHello()` como entrada.
 
 ### 1.1. Defina o comando de conversão para maiúsculas e teste-o no terminal
 
-Para fazer a conversão das saudações para maiúsculas, vamos usar uma ferramenta UNIX clássica chamada `tr` para 'text replacement', com a seguinte sintaxe:
+Para fazer a conversão das saudações para maiúsculas, vamos usar uma ferramenta UNIX clássica chamada `tr` para 'substituição de texto', com a seguinte sintaxe:
 
 ```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
 ```
 
-Esta é uma substituição de texto muito simples que não leva em conta letras acentuadas, então por exemplo 'Holà' se tornará 'HOLà', mas fará um trabalho bom o suficiente para demonstrar os conceitos do Nextflow e isso é o que importa.
+Esta é uma substituição de texto muito ingênua que não leva em conta letras acentuadas, então por exemplo 'Holà' se tornará 'HOLà', mas fará um trabalho bom o suficiente para demonstrar os conceitos do Nextflow e isso é o que importa.
 
 Para testá-lo, podemos executar o comando `echo 'Hello World'` e direcionar sua saída para o comando `tr`:
 
@@ -133,7 +135,7 @@ Isso é basicamente o que vamos tentar fazer com nosso fluxo de trabalho.
 
 Podemos modelar nosso novo processo no primeiro, já que queremos usar todos os mesmos componentes.
 
-Adicione a seguinte definição de processo ao script de fluxo de trabalho, logo abaixo da primeira:
+Adicione a seguinte definição de processo ao script de fluxo de trabalho, logo abaixo do primeiro:
 
 ```groovy title="hello-workflow.nf" linenums="20"
 /*
@@ -154,13 +156,13 @@ process convertToUpper {
 }
 ```
 
-Neste, compomos o segundo nome de arquivo de saída baseado no nome do arquivo de entrada, de forma similar ao que fizemos originalmente para a saída do primeiro processo.
+Neste, componhamos o segundo nome de arquivo de saída com base no nome do arquivo de entrada, de forma similar ao que fizemos originalmente para a saída do primeiro processo.
 
-### 1.3. Adicione uma chamada ao novo processo no bloco de fluxo de trabalho
+### 1.3. Adicione uma chamada ao novo processo no bloco workflow
 
 Agora precisamos dizer ao Nextflow para realmente chamar o processo que acabamos de definir.
 
-No bloco de fluxo de trabalho, faça a seguinte alteração de código:
+No bloco workflow, faça a seguinte alteração de código:
 
 === "Depois"
 
@@ -168,13 +170,13 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // cria um canal para entradas a partir de um arquivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emite uma saudação
         sayHello(greeting_ch)
-        // convert the greeting to uppercase
+        // converte a saudação para maiúsculas
         convertToUpper()
 
         publish:
@@ -188,11 +190,11 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
     workflow {
 
         main:
-        // create a channel for inputs from a CSV file
+        // cria um canal para entradas a partir de um arquivo CSV
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv()
                             .map { line -> line[0] }
-        // emit a greeting
+        // emite uma saudação
         sayHello(greeting_ch)
 
         publish:
@@ -200,14 +202,14 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
     }
     ```
 
-Isso ainda não é funcional porque não especificamos o que deve ser entrada para o processo `convertToUpper()`.
+Isso ainda não está funcional porque não especificamos o que deve ser entrada para o processo `convertToUpper()`.
 
 ### 1.4. Passe a saída do primeiro processo para o segundo processo
 
 Agora precisamos fazer a saída do processo `sayHello()` fluir para o processo `convertToUpper()`.
 
 Convenientemente, o Nextflow empacota automaticamente a saída de um processo em um canal, como mostrado no diagrama na seção de aquecimento.
-Podemos nos referir ao canal de saída de um processo como `<process>.out`.
+Podemos nos referir ao canal de saída de um processo como `<processo>.out`.
 
 Então a saída do processo `sayHello` é um canal chamado `sayHello.out`, que podemos conectar diretamente na chamada para `convertToUpper()`.
 
@@ -215,25 +217,25 @@ Então a saída do processo `sayHello` é um canal chamado `sayHello.out`, que p
 --8<-- "docs/en/docs/hello_nextflow/img/hello-multistep-connector.svg"
 </figure>
 
-No bloco de fluxo de trabalho, faça a seguinte alteração de código:
+No bloco workflow, faça a seguinte alteração de código:
 
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // converte a saudação para maiúsculas
         convertToUpper(sayHello.out)
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="53" hl_lines="2"
-        // convert the greeting to uppercase
+        // converte a saudação para maiúsculas
         convertToUpper()
     ```
 
 Para um caso simples como este (uma saída para uma entrada), isso é tudo que precisamos fazer para conectar dois processos!
 
-### 1.5. Configure a publicação da saída do fluxo de trabalho
+### 1.5. Configure a publicação de saída do fluxo de trabalho
 
 Finalmente, vamos atualizar as saídas do fluxo de trabalho para publicar os resultados do segundo processo também.
 
@@ -293,9 +295,9 @@ No bloco `output`, faça a seguinte alteração de código:
 Mais uma vez, a lógica é a mesma de antes.
 
 Isso mostra que você pode controlar as configurações de saída em um nível muito granular, para cada saída individual.
-Sinta-se à vontade para tentar mudar os caminhos ou o modo de publicação para um dos processos para ver o que acontece.
+Sinta-se à vontade para tentar alterar os caminhos ou o modo de publicação para um dos processos para ver o que acontece.
 
-Claro, isso significa que estamos repetindo algumas informações aqui, o que pode se tornar inconveniente se quisermos atualizar a localização para todas as saídas da mesma forma.
+Claro, isso significa que estamos repetindo algumas informações aqui, o que pode se tornar inconveniente se quisermos atualizar o local para todas as saídas da mesma forma.
 Mais tarde no curso, você aprenderá como configurar essas definições para múltiplas saídas de forma estruturada.
 
 ### 1.6. Execute o fluxo de trabalho com `-resume`
@@ -334,7 +336,7 @@ Você encontrará as saídas no diretório `results/hello_workflow` conforme def
     └── UPPER-Holà-output.txt
     ```
 
-Isso é conveniente! Mas ainda vale a pena dar uma olhada dentro do diretório de trabalho de uma das chamadas ao segundo processo.
+Isso é conveniente! Mas ainda vale a pena dar uma olhada dentro do diretório de trabalho de uma das chamadas para o segundo processo.
 
 ??? abstract "Conteúdo do diretório"
 
@@ -344,17 +346,17 @@ Isso é conveniente! Mas ainda vale a pena dar uma olhada dentro do diretório d
     └── UPPER-Holà-output.txt
     ```
 
-Note que há dois arquivos `*-output`: a saída do primeiro processo assim como a saída do segundo.
+Observe que há dois arquivos `*-output`: a saída do primeiro processo assim como a saída do segundo.
 
-A saída do primeiro processo está lá porque o Nextflow a **preparou** (staged) ali para ter tudo o que é necessário para execução dentro do mesmo subdiretório.
+A saída do primeiro processo está lá porque o Nextflow a **preparou** lá para ter tudo o que é necessário para a execução dentro do mesmo subdiretório.
 
 No entanto, é na verdade um link simbólico apontando para o arquivo original no subdiretório da primeira chamada de processo.
 Por padrão, ao executar em uma única máquina como estamos fazendo aqui, o Nextflow usa links simbólicos em vez de cópias para preparar arquivos de entrada e intermediários.
 
-Agora, antes de prosseguir, pense em como tudo o que fizemos foi conectar a saída de `sayHello` à entrada de `convertToUpper` e os dois processos puderam ser executados em série.
-O Nextflow fez o trabalho pesado de gerenciar arquivos individuais de entrada e saída e passá-los entre os dois comandos para nós.
+Agora, antes de seguir em frente, pense em como tudo o que fizemos foi conectar a saída de `sayHello` à entrada de `convertToUpper` e os dois processos puderam ser executados em série.
+O Nextflow fez o trabalho pesado de lidar com arquivos individuais de entrada e saída e passá-los entre os dois comandos para nós.
 
-Esta é uma das razões pelas quais os canais do Nextflow são tão poderosos: eles cuidam do trabalho tedioso envolvido em conectar as etapas do fluxo de trabalho.
+Esta é uma das razões pelas quais os canais do Nextflow são tão poderosos: eles cuidam do trabalho braçal envolvido em conectar etapas de fluxo de trabalho.
 
 ### Conclusão
 
@@ -368,7 +370,7 @@ Aprenda como coletar saídas de chamadas de processo em lote e alimentá-las em 
 
 ## 2. Adicione uma terceira etapa para coletar todas as saudações
 
-Quando usamos um processo para aplicar uma transformação a cada um dos elementos em um canal, como estamos fazendo aqui para as múltiplas saudações, às vezes queremos coletar elementos do canal de saída desse processo e alimentá-los em outro processo que realiza algum tipo de análise ou soma.
+Quando usamos um processo para aplicar uma transformação a cada um dos elementos em um canal, como estamos fazendo aqui com as múltiplas saudações, às vezes queremos coletar elementos do canal de saída desse processo e alimentá-los em outro processo que realiza algum tipo de análise ou sumarização.
 
 Para demonstrar, adicionaremos uma nova etapa ao nosso pipeline que coleta todas as saudações em maiúsculas produzidas pelo processo `convertToUpper` e as escreve em um único arquivo.
 
@@ -382,9 +384,9 @@ Sem estragar a surpresa, mas isso vai envolver um operador muito útil.
 
 A etapa de coleta que queremos adicionar ao nosso fluxo de trabalho usará o comando `cat` para concatenar múltiplas saudações em maiúsculas em um único arquivo.
 
-Vamos executar o comando sozinho no terminal para verificar que funciona conforme esperado, assim como fizemos anteriormente.
+Vamos executar o comando sozinho no terminal para verificar que funciona como esperado, assim como fizemos anteriormente.
 
-Execute o seguinte em seu terminal:
+Execute o seguinte no seu terminal:
 
 ```bash
 echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
@@ -408,7 +410,7 @@ Esse é o resultado que queremos alcançar com nosso fluxo de trabalho.
 ### 2.2. Crie um novo processo para fazer a etapa de coleta
 
 Vamos criar um novo processo e chamá-lo de `collectGreetings()`.
-Podemos começar a escrevê-lo com base no que já vimos antes.
+Podemos começar a escrevê-lo com base no que vimos antes.
 
 #### 2.2.1. Escreva as partes 'óbvias' do processo
 
@@ -435,11 +437,11 @@ process collectGreetings {
 
 Isso é o que podemos escrever com confiança com base no que você aprendeu até agora.
 Mas isso não é funcional!
-Deixa de fora a(s) definição(ões) de entrada e a primeira metade do comando do script porque precisamos descobrir como escrever isso.
+Deixa de fora a(s) definição(ões) de entrada e a primeira metade do comando script porque precisamos descobrir como escrever isso.
 
 #### 2.2.2. Defina as entradas para `collectGreetings()`
 
-Precisamos coletar as saudações de todas as chamadas ao processo `convertToUpper()`.
+Precisamos coletar as saudações de todas as chamadas para o processo `convertToUpper()`.
 O que sabemos que podemos obter da etapa anterior no fluxo de trabalho?
 
 O canal de saída de `convertToUpper()` conterá os caminhos para os arquivos individuais contendo as saudações em maiúsculas.
@@ -461,7 +463,7 @@ No bloco de processo, faça a seguinte alteração de código:
           ???
     ```
 
-Note que usamos o prefixo `path` mesmo esperando que isso contenha múltiplos arquivos.
+Observe que usamos o prefixo `path` mesmo que esperemos que isso contenha múltiplos arquivos.
 
 #### 2.2.3. Componha o comando de concatenação
 
@@ -470,7 +472,7 @@ Especificamente, não podemos escrever o comando antecipadamente, então precisa
 
 Em outras palavras, se tivermos um canal de entrada contendo o elemento `[file1.txt, file2.txt, file3.txt]`, precisamos que o Nextflow transforme isso em `cat file1.txt file2.txt file3.txt`.
 
-Felizmente, o Nextflow fica feliz em fazer isso por nós se simplesmente escrevermos `cat ${input_files}` no comando do script.
+Felizmente, o Nextflow está muito feliz em fazer isso por nós se simplesmente escrevermos `cat ${input_files}` no comando script.
 
 No bloco de processo, faça a seguinte alteração de código:
 
@@ -494,7 +496,7 @@ No bloco de processo, faça a seguinte alteração de código:
 
 Em teoria, isso deve lidar com qualquer número arbitrário de arquivos de entrada.
 
-!!! tip
+!!! tip "Dica"
 
     Algumas ferramentas de linha de comando exigem fornecer um argumento (como `-input`) para cada arquivo de entrada.
     Nesse caso, teríamos que fazer um pouco de trabalho extra para compor o comando.
@@ -503,7 +505,7 @@ Em teoria, isso deve lidar com qualquer número arbitrário de arquivos de entra
 ### 2.3. Adicione a etapa de coleta ao fluxo de trabalho
 
 Agora devemos apenas precisar chamar o processo de coleta na saída da etapa de conversão para maiúsculas.
-Esse também é um canal, chamado `convertToUpper.out`.
+Isso também é um canal, chamado `convertToUpper.out`.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-connector.svg"
@@ -511,15 +513,15 @@ Esse também é um canal, chamado `convertToUpper.out`.
 
 #### 2.3.1. Conecte as chamadas de processo
 
-No bloco de fluxo de trabalho, faça a seguinte alteração de código:
+No bloco workflow, faça a seguinte alteração de código:
 
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
-        // convert the greeting to uppercase
+        // converte a saudação para maiúsculas
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -527,7 +529,7 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="75"
-        // convert the greeting to uppercase
+        // converte a saudação para maiúsculas
         convertToUpper(sayHello.out)
     }
     ```
@@ -555,9 +557,9 @@ nextflow run hello-workflow.nf -resume
     [47/50fe4a] collectGreetings (1) | 3 of 3 ✔
     ```
 
-Ele é executado com sucesso, incluindo a terceira etapa.
+Ele executa com sucesso, incluindo a terceira etapa.
 
-No entanto, olhe o número de chamadas para `collectGreetings()` na última linha.
+No entanto, observe o número de chamadas para `collectGreetings()` na última linha.
 Estávamos esperando apenas uma, mas há três.
 
 Agora dê uma olhada no conteúdo do arquivo de saída final.
@@ -574,7 +576,7 @@ Oh não. A etapa de coleta foi executada individualmente em cada saudação, o q
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-no-operator.svg"
 </figure>
 
-Precisamos fazer algo para dizer ao Nextflow explicitamente que queremos que a terceira etapa seja executada em todos os elementos no canal de saída de `convertToUpper()`.
+Precisamos fazer algo para dizer ao Nextflow explicitamente que queremos que essa terceira etapa seja executada em todos os elementos no canal de saída de `convertToUpper()`.
 
 ### 2.4. Use um operador para coletar as saudações em uma única entrada
 
@@ -584,17 +586,17 @@ Especificamente, vamos usar o operador apropriadamente chamado [`collect()`](htt
 
 #### 2.4.1. Adicione o operador `collect()`
 
-Desta vez vai parecer um pouco diferente porque não estamos adicionando o operador no contexto de uma fábrica de canal; estamos adicionando-o a um canal de saída.
+Desta vez vai parecer um pouco diferente porque não estamos adicionando o operador no contexto de uma fábrica de canais; estamos adicionando-o a um canal de saída.
 
-Pegamos o `convertToUpper.out` e acrescentamos o operador `collect()`, o que nos dá `convertToUpper.out.collect()`.
+Pegamos o `convertToUpper.out` e anexamos o operador `collect()`, o que nos dá `convertToUpper.out.collect()`.
 Podemos conectar isso diretamente na chamada do processo `collectGreetings()`.
 
-No bloco de fluxo de trabalho, faça a seguinte alteração de código:
+No bloco workflow, faça a seguinte alteração de código:
 
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect())
     }
     ```
@@ -602,7 +604,7 @@ No bloco de fluxo de trabalho, faça a seguinte alteração de código:
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="2"
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out)
     }
     ```
@@ -614,10 +616,10 @@ Vamos também incluir algumas instruções `view()` para visualizar os estados a
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
+        // instruções view opcionais
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
@@ -626,12 +628,12 @@ Vamos também incluir algumas instruções `view()` para visualizar os estados a
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect())
     }
     ```
 
-As instruções `view()` podem ir em qualquer lugar que você quiser; as colocamos logo após a chamada para legibilidade.
+As instruções `view()` podem ir onde você quiser; nós as colocamos logo após a chamada para legibilidade.
 
 #### 2.4.3. Execute o fluxo de trabalho novamente com `-resume`
 
@@ -657,13 +659,13 @@ nextflow run hello-workflow.nf -resume
     After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
     ```
 
-Ele é executado com sucesso, embora a saída de log possa parecer um pouco mais bagunçada do que isso (nós a limpamos para legibilidade).
+Ele executa com sucesso, embora a saída do log possa parecer um pouco mais bagunçada do que isso (nós a limpamos para legibilidade).
 
 Desta vez a terceira etapa foi chamada apenas uma vez!
 Olhando para a saída das instruções `view()`, vemos o seguinte:
 
-- Três instruções `Antes do collect:`, uma para cada saudação: nesse ponto os caminhos dos arquivos são itens individuais no canal.
-- Uma única instrução `Depois do collect:`: os três caminhos de arquivos agora estão empacotados em um único elemento.
+- Três instruções `Antes do collect:`, uma para cada saudação: nesse ponto os caminhos de arquivo são itens individuais no canal.
+- Uma única instrução `Depois do collect:`: os três caminhos de arquivo agora estão empacotados em um único elemento.
 
 Podemos resumir isso com o seguinte diagrama:
 
@@ -671,7 +673,7 @@ Podemos resumir isso com o seguinte diagrama:
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-WITH-operator.svg"
 </figure>
 
-Finalmente, você pode dar uma olhada no conteúdo do arquivo de saída para se convencer de que tudo funcionou corretamente.
+Finalmente, você pode dar uma olhada no conteúdo do arquivo de saída para se satisfazer de que tudo funcionou corretamente.
 
 ??? abstract "Conteúdo do arquivo"
 
@@ -683,40 +685,40 @@ Finalmente, você pode dar uma olhada no conteúdo do arquivo de saída para se 
 
 Desta vez temos todas as três saudações no arquivo de saída final. Sucesso!
 
-!!! note
+!!! note "Nota"
 
-    Se você executar isso várias vezes sem `-resume`, verá que a ordem das saudações muda de uma execução para outra.
+    Se você executar isso várias vezes sem `-resume`, verá que a ordem das saudações muda de uma execução para a próxima.
     Isso mostra que a ordem na qual os elementos fluem através das chamadas de processo não é garantida ser consistente.
 
 #### 2.4.4. Remova as instruções `view()` para legibilidade
 
-Antes de passar para a próxima seção, recomendamos que você delete as instruções `view()` para evitar poluir a saída do console.
+Antes de passar para a próxima seção, recomendamos que você exclua as instruções `view()` para evitar poluir a saída do console.
 
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="73"
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect())
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="73" hl_lines="4-6"
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect())
 
-        // optional view statements
+        // instruções view opcionais
         convertToUpper.out.view { contents -> "Before collect: $contents" }
         convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
 
-Esta é basicamente a operação inversa do ponto 2.4.2.
+Esta é basicamente a operação reversa do ponto 2.4.2.
 
 ### Conclusão
 
-Você sabe como coletar saídas de um lote de chamadas de processo e alimentá-las em uma etapa de análise conjunta ou soma.
+Você sabe como coletar saídas de um lote de chamadas de processo e alimentá-las em uma etapa de análise ou sumarização conjunta.
 
-Para recapitular, isto é o que você construiu até agora:
+Para recapitular, isso é o que você construiu até agora:
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect.svg"
@@ -730,12 +732,12 @@ Aprenda como passar mais de uma entrada para um processo.
 
 ## 3. Passe parâmetros adicionais para um processo
 
-Queremos ser capazes de nomear o arquivo de saída final com algo específico para processar lotes subsequentes de saudações sem sobrescrever os resultados finais.
+Queremos ser capazes de nomear o arquivo de saída final algo específico para processar lotes subsequentes de saudações sem sobrescrever os resultados finais.
 
-Para isso, faremos os seguintes refinamentos no fluxo de trabalho:
+Para isso, vamos fazer os seguintes refinamentos no fluxo de trabalho:
 
 - Modificar o processo coletor para aceitar um nome definido pelo usuário para o arquivo de saída (`batch_name`)
-- Adicionar um parâmetro de linha de comando ao fluxo de trabalho (`--batch`) e passá-lo ao processo coletor
+- Adicionar um parâmetro de linha de comando ao fluxo de trabalho (`--batch`) e passá-lo para o processo coletor
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-batch.svg"
@@ -768,13 +770,13 @@ No bloco de processo, faça a seguinte alteração de código:
     ```
 
 Você pode configurar seus processos para esperar quantas entradas quiser.
-Agora, todas estas estão configuradas para serem entradas obrigatórias; você _deve_ fornecer um valor para o fluxo de trabalho funcionar.
+Agora, todas estão configuradas para serem entradas obrigatórias; você _deve_ fornecer um valor para o fluxo de trabalho funcionar.
 
-Você aprenderá como gerenciar entradas obrigatórias versus opcionais mais tarde em sua jornada Nextflow.
+Você aprenderá como gerenciar entradas obrigatórias vs. opcionais mais tarde em sua jornada com Nextflow.
 
 #### 3.1.2. Use a variável `batch_name` no nome do arquivo de saída
 
-Podemos inserir a variável no nome do arquivo de saída da mesma forma que compusemos nomes de arquivos dinâmicos antes.
+Podemos inserir a variável no nome do arquivo de saída da mesma forma que compusemos nomes de arquivo dinâmicos antes.
 
 No bloco de processo, faça a seguinte alteração de código:
 
@@ -802,11 +804,11 @@ No bloco de processo, faça a seguinte alteração de código:
         """
     ```
 
-Isso configura o processo para usar o valor `batch_name` para gerar um nome de arquivo específico para a saída final do fluxo de trabalho.
+Isso configura o processo para usar o valor de `batch_name` para gerar um nome de arquivo específico para a saída final do fluxo de trabalho.
 
 ### 3.2. Adicione um parâmetro de linha de comando `batch`
 
-Agora precisamos de uma forma de fornecer o valor para `batch_name` e alimentá-lo à chamada do processo.
+Agora precisamos de uma maneira de fornecer o valor para `batch_name` e alimentá-lo para a chamada do processo.
 
 #### 3.2.1. Use `params` para configurar o parâmetro
 
@@ -844,27 +846,27 @@ Assim como demonstramos para `--input`, você pode sobrescrever esse valor padr�
 
 Para fornecer o valor do parâmetro ao processo, precisamos adicioná-lo na chamada do processo.
 
-No bloco de fluxo de trabalho, faça a seguinte alteração de código:
+No bloco workflow, faça a seguinte alteração de código:
 
 === "Depois"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect(), params.batch)
     ```
 
 === "Antes"
 
     ```groovy title="hello-workflow.nf" linenums="74" hl_lines="2"
-        // collect all the greetings into one file
+        // coleta todas as saudações em um arquivo
         collectGreetings(convertToUpper.out.collect())
     ```
 
 Você vê que para fornecer múltiplas entradas a um processo, você simplesmente as lista nos parênteses da chamada, separadas por vírgulas.
 
-!!! warning
+!!! warning "Aviso"
 
-    Você DEVE fornecer as entradas ao processo na MESMA ORDEM EXATA em que estão listadas no bloco de definição de entrada do processo.
+    Você DEVE fornecer as entradas ao processo na EXATA MESMA ORDEM em que estão listadas no bloco de definição de entrada do processo.
 
 ### 3.3. Execute o fluxo de trabalho
 
@@ -887,7 +889,7 @@ nextflow run hello-workflow.nf -resume --batch trio
     [b5/f19efe] collectGreetings   | 1 of 1 ✔
     ```
 
-Ele é executado com sucesso e produz a saída desejada:
+Ele executa com sucesso e produz a saída desejada:
 
 ??? abstract "Conteúdo do arquivo"
 
@@ -897,7 +899,7 @@ Ele é executado com sucesso e produz a saída desejada:
     HOLà
     ```
 
-Agora, contanto que especifiquemos o parâmetro apropriadamente, execuções subsequentes em outros lotes de entradas não destruirão os resultados anteriores.
+Agora, desde que especifiquemos o parâmetro apropriadamente, execuções subsequentes em outros lotes de entradas não sobrescreverão resultados anteriores.
 
 ### Conclusão
 
@@ -905,14 +907,14 @@ Você sabe como passar mais de uma entrada para um processo.
 
 ### O que vem a seguir?
 
-Aprenda como emitir múltiplas saídas e manuseá-las convenientemente.
+Aprenda como emitir múltiplas saídas e lidar com elas convenientemente.
 
 ---
 
 ## 4. Adicione uma saída à etapa coletora
 
 Até agora estivemos usando processos que produziam apenas uma saída cada.
-Conseguimos acessar suas respectivas saídas muito convenientemente usando a sintaxe `<process>.out`, que usamos tanto no contexto de passar uma saída para o próximo processo (por exemplo, `convertToUpper(sayHello.out)`) quanto no contexto da seção `publish:` (por exemplo, `first_output = sayHello.out`).
+Conseguimos acessar suas respectivas saídas muito convenientemente usando a sintaxe `<processo>.out`, que usamos tanto no contexto de passar uma saída para o próximo processo (por exemplo, `convertToUpper(sayHello.out)`) quanto no contexto da seção `publish:` (por exemplo, `first_output = sayHello.out`).
 
 O que acontece quando um processo produz mais de uma?
 Como lidamos com as múltiplas saídas?
@@ -921,19 +923,19 @@ Podemos selecionar e usar uma saída específica?
 Todas excelentes perguntas, e a resposta curta é sim, podemos!
 
 Múltiplas saídas serão empacotadas em canais separados.
-Podemos escolher dar nomes a esses canais de saída, o que torna fácil referenciá-los individualmente mais tarde, ou podemos referenciá-los por índice.
+Podemos escolher dar nomes a esses canais de saída, o que facilita referenciá-los individualmente mais tarde, ou podemos referenciá-los por índice.
 
-Para fins de demonstração, digamos que queremos contar o número de saudações que estão sendo coletadas para um determinado lote de entradas e relatá-lo em um arquivo.
+Para fins de demonstração, digamos que queremos contar o número de saudações que estão sendo coletadas para um determinado lote de entradas e reportá-lo em um arquivo.
 
-### 4.1. Modifique o processo para contar e gerar o número de saudações
+### 4.1. Modifique o processo para contar e emitir o número de saudações
 
-Isso exigirá duas mudanças-chave na definição do processo: precisamos de uma forma de contar as saudações e escrever um arquivo de relatório, então precisamos adicionar esse arquivo de relatório ao bloco `output` do processo.
+Isso exigirá duas mudanças principais na definição do processo: precisamos de uma maneira de contar as saudações e escrever um arquivo de relatório, então precisamos adicionar esse arquivo de relatório ao bloco `output` do processo.
 
 #### 4.1.1. Conte o número de saudações coletadas
 
-Convenientemente, o Nextflow nos permite adicionar código arbitrário no bloco `script:` da definição do processo, o que é muito útil para fazer coisas como essa.
+Convenientemente, o Nextflow nos permite adicionar código arbitrário no bloco `script:` da definição do processo, o que é muito útil para fazer coisas como esta.
 
-Isso significa que podemos usar a função integrada `size()` do Nextflow para obter o número de arquivos no array `input_files`, e escrever o resultado em arquivo com um comando `echo`.
+Isso significa que podemos usar a função integrada `size()` do Nextflow para obter o número de arquivos no array `input_files`, e escrever o resultado em um arquivo com um comando `echo`.
 
 No bloco de processo `collectGreetings`, faça as seguintes alterações de código:
 
@@ -963,7 +965,7 @@ A variável `count_greetings` será computada em tempo de execução.
 
 Em princípio, tudo o que precisamos fazer é adicionar o arquivo de relatório ao bloco `output:`.
 
-No entanto, enquanto estamos fazendo isso, também vamos adicionar algumas tags `emit:` às nossas declarações de saída. Estas nos permitirão selecionar as saídas por nome em vez de ter que usar índices posicionais.
+No entanto, enquanto estamos nisso, também vamos adicionar algumas tags `emit:` às nossas declarações de saída. Estas nos permitirão selecionar as saídas por nome em vez de ter que usar índices posicionais.
 
 No bloco de processo, faça a seguinte alteração de código:
 
@@ -983,12 +985,12 @@ No bloco de processo, faça a seguinte alteração de código:
     ```
 
 As tags `emit:` são opcionais, e poderíamos ter adicionado uma tag a apenas uma das saídas.
-Mas como dizem, por que não ambos?
+Mas como diz o ditado, por que não ambas?
 
-!!! tip
+!!! tip "Dica"
 
     Se você não nomear as saídas de um processo usando `emit:`, ainda pode acessá-las individualmente usando seu respectivo índice (baseado em zero).
-    Por exemplo, você usaria `<process>.out[0]` para obter a primeira saída, `<process>.out[1]` para obter a segunda saída, e assim por diante.
+    Por exemplo, você usaria `<processo>.out[0]` para obter a primeira saída, `<processo>.out[1]` para obter a segunda saída, e assim por diante.
 
     Preferimos nomear saídas porque caso contrário, é muito fácil pegar o índice errado por erro, especialmente quando o processo produz muitas saídas.
 
@@ -1003,7 +1005,7 @@ Agora que temos duas saídas saindo do processo `collectGreetings`, a saída `co
 --8<-- "docs/en/docs/hello_nextflow/img/hello-collect-report.svg"
 </figure>
 
-Precisamos atualizar as saídas do fluxo de trabalho adequadamente.
+Precisamos atualizar as saídas do fluxo de trabalho de acordo.
 
 #### 4.2.1. Atualize a seção `publish:`
 
@@ -1028,8 +1030,8 @@ No bloco `workflow`, faça a seguinte alteração de código:
         collected = collectGreetings.out
     ```
 
-Como você pode ver, referir-se a saídas específicas de processos agora é trivial.
-Quando formos adicionar mais um passo ao nosso pipeline na Parte 5 (Contêineres), poderemos facilmente nos referir a `collectGreetings.out.outfile` e passá-lo ao novo processo (spoiler: o novo processo se chama `cowpy`).
+Como você pode ver, referir-se a saídas específicas de processo agora é trivial.
+Quando formos adicionar mais uma etapa ao nosso pipeline na Parte 5 (Contêineres), seremos capazes de facilmente referir-nos a `collectGreetings.out.outfile` e passá-lo para o novo processo (spoiler: o novo processo se chama `cowpy`).
 
 Mas por enquanto, vamos terminar de atualizar as saídas no nível do fluxo de trabalho.
 
@@ -1104,7 +1106,7 @@ nextflow run hello-workflow.nf -resume --batch trio
     ```
 
 Se você olhar no diretório `results/hello_workflow/`, encontrará o novo arquivo de relatório, `trio-report.txt`.
-Abra-o para verificar que o fluxo de trabalho relatou corretamente a contagem de saudações que foram processadas.
+Abra-o para verificar que o fluxo de trabalho reportou corretamente a contagem de saudações que foram processadas.
 
 ??? abstract "Conteúdo do arquivo"
 
@@ -1120,13 +1122,13 @@ Sinta-se à vontade para adicionar mais saudações ao CSV e testar o que aconte
 
 ### Conclusão
 
-Você sabe como fazer um processo emitir múltiplas saídas nomeadas e como manuseá-las apropriadamente no nível do fluxo de trabalho.
+Você sabe como fazer um processo emitir múltiplas saídas nomeadas e como lidar com elas apropriadamente no nível do fluxo de trabalho.
 
-De forma mais geral, você entende os princípios-chave envolvidos em conectar processos de formas comuns.
+De forma mais geral, você entende os princípios-chave envolvidos em conectar processos de maneiras comuns.
 
 ### O que vem a seguir?
 
-Faça uma pausa extra longa, você a merece.
+Faça uma pausa extra longa, você mereceu.
 
 Quando estiver pronto, passe para [**Parte 4: Hello Modules**](./04_hello_modules.md) para aprender como modularizar seu código para melhor manutenibilidade e eficiência de código.
 
@@ -1135,7 +1137,7 @@ Quando estiver pronto, passe para [**Parte 4: Hello Modules**](./04_hello_module
 ## Quiz
 
 <quiz>
-Como você acessa a saída de um processo no bloco de fluxo de trabalho?
+Como você acessa a saída de um processo no bloco workflow?
 - [ ] `process.output`
 - [ ] `output.processName`
 - [x] `processName.out`
@@ -1145,9 +1147,9 @@ Saiba mais: [1.4. Passe a saída do primeiro processo para o segundo processo](#
 </quiz>
 
 <quiz>
-O que determina a ordem de execução de processos no Nextflow?
-- [ ] A ordem em que os processos são escritos no bloco de fluxo de trabalho
-- [ ] Ordem alfabética pelo nome do processo
+O que determina a ordem de execução dos processos no Nextflow?
+- [ ] A ordem em que os processos são escritos no bloco workflow
+- [ ] Ordem alfabética por nome do processo
 - [x] Dependências de dados entre processos
 - [ ] Ordem aleatória para execução paralela
 
@@ -1176,7 +1178,7 @@ Saiba mais: [2.4. Use um operador para coletar as saudações em uma única entr
 <quiz>
 Quando você deve usar o operador `collect()`?
 - [ ] Quando você quer processar itens em paralelo
-- [ ] Quando você precisa filtrar conteúdo do canal
+- [ ] Quando você precisa filtrar o conteúdo do canal
 - [x] Quando um processo downstream precisa de todos os itens de um processo upstream
 - [ ] Quando você quer dividir dados entre múltiplos processos
 
@@ -1204,7 +1206,7 @@ Saiba mais: [4.1.2. Emita o arquivo de relatório e nomeie as saídas](#412-emit
 </quiz>
 
 <quiz>
-Ao fornecer múltiplas entradas a um processo, o que deve ser verdadeiro?
+Ao fornecer múltiplas entradas para um processo, o que deve ser verdadeiro?
 - [ ] Todas as entradas devem ser do mesmo tipo
 - [ ] As entradas devem ser fornecidas em ordem alfabética
 - [x] A ordem das entradas deve corresponder à ordem definida no bloco de entrada

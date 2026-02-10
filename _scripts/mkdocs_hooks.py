@@ -95,6 +95,8 @@ def on_files(files: Files, *, config: MkDocsConfig) -> Files:
     Hook to add missing files from English as fallback.
 
     This ensures all nav items are available even if not translated.
+    Also adds non-markdown assets (images, etc.) from the English docs
+    so that relative image paths in translated markdown resolve correctly.
     """
     resolve_files(items=config.nav or [], files=files, config=config)
 
@@ -107,6 +109,30 @@ def on_files(files: Files, *, config: MkDocsConfig) -> Files:
     # Resolve extra CSS and JS
     resolve_files(items=config.extra_css, files=files, config=config)
     resolve_files(items=config.extra_javascript, files=files, config=config)
+
+    # Add non-markdown assets (images, etc.) from English docs as fallbacks.
+    # Translated directories only contain .md files; images and other static
+    # assets live exclusively in the English docs tree. Without this, relative
+    # image paths like `img/foo.png` in translated markdown would 404.
+    en_src_dir = (Path(config.docs_dir) / "../../en/docs").resolve()
+    docs_dir_path = Path(config.docs_dir).resolve()
+    if en_src_dir.is_dir() and en_src_dir != docs_dir_path:
+        existing_paths = {f.src_path for f in files}
+        for asset in en_src_dir.rglob("*"):
+            if not asset.is_file():
+                continue
+            if asset.suffix == ".md":
+                continue
+            rel = str(asset.relative_to(en_src_dir))
+            if rel not in existing_paths:
+                files.append(
+                    EnFile(
+                        path=rel,
+                        src_dir=str(en_src_dir),
+                        dest_dir=config.site_dir,
+                        use_directory_urls=config.use_directory_urls,
+                    )
+                )
 
     return files
 
