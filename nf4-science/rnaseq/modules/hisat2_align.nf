@@ -6,7 +6,6 @@
 process HISAT2_ALIGN {
 
     container
-    publishDir
 
     input:
 

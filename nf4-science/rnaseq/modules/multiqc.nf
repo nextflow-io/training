@@ -6,7 +6,6 @@
 process MULTIQC {
 
     container
-    publishDir
 
     input:
 

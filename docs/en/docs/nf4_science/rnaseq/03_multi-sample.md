@@ -80,6 +80,8 @@ Rename the primary input parameter to `input_csv` and change the default to poin
     }
     ```
 
+Now we need to update the channel creation to read from this CSV.
+
 ### 1.2. Update the input channel factory to handle a CSV as input
 
 We need to load the contents of the file into the channel instead of just the file path itself.
@@ -87,9 +89,10 @@ We use the `.splitCsv()` operator to parse the CSV format, then the `.map()` ope
 
 === "After"
 
-    ```groovy title="rnaseq.nf" linenums="19" hl_lines="3-6"
+    ```groovy title="rnaseq.nf" linenums="19" hl_lines="4-7"
     workflow {
 
+        main:
         // Create input channel from the contents of a CSV file
         read_ch = channel.fromPath(params.input_csv)
             .splitCsv(header: true)
@@ -101,11 +104,16 @@ We use the `.splitCsv()` operator to parse the CSV format, then the `.map()` ope
     ```groovy title="rnaseq.nf" linenums="19"
     workflow {
 
+        main:
         // Create input channel from a file path
         read_ch = channel.fromPath(params.reads)
     ```
 
+The input handling is updated and the workflow is ready to test.
+
 ### 1.3. Run the workflow
+
+The workflow now reads sample information from a CSV file and processes all samples in parallel.
 
 ```bash
 nextflow run rnaseq.nf
@@ -153,7 +161,7 @@ multiqc . -n <output_name>.html
 The command scans the current directory for recognized QC output files and aggregates them into a single HTML report.
 The container URI was `community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c`.
 
-We need to set up an additional parameter, prepare the inputs, write the process, and wire it in.
+We need to set up an additional parameter, prepare the inputs, write the process, wire it in, and update the output handling.
 
 ### 2.1. Set up the inputs
 
@@ -190,6 +198,8 @@ Add a parameter to name the output report.
     }
     ```
 
+Now we need to prepare the inputs for the MultiQC process.
+
 #### 2.1.2. Collect and combine QC outputs from previous steps
 
 We need to give the `MULTIQC` process all the QC-related outputs from previous steps bundled together.
@@ -225,7 +235,6 @@ Add these lines to the workflow body after the `HISAT2_ALIGN` call:
             HISAT2_ALIGN.out.log,
         )
         multiqc_files_list = multiqc_files_ch.collect()
-    }
     ```
 
 === "Before"
@@ -233,12 +242,13 @@ Add these lines to the workflow body after the `HISAT2_ALIGN` call:
     ```groovy title="rnaseq.nf" linenums="38"
         // Alignment to a reference genome
         HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
-    }
     ```
 
 Using intermediate variables makes each step clear: `multiqc_files_ch` contains all individual QC files mixed into one channel, and `multiqc_files_list` is the collected bundle ready to pass to MultiQC.
 
 ### 2.2. Write the QC aggregation process and call it in the workflow
+
+As before, we need to fill in the process definition, import the module, and add the process call.
 
 #### 2.2.1. Fill in the module for the QC aggregation process
 
@@ -257,7 +267,6 @@ Go ahead and fill in the process definition by yourself using the information pr
     process MULTIQC {
 
         container
-        publishDir
 
         input:
 
@@ -272,7 +281,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/multiqc.nf" linenums="1" hl_lines="8 9 12 13 16 17 21"
+    ```groovy title="modules/multiqc.nf" linenums="1" hl_lines="8 11 12 15 16 20"
     #!/usr/bin/env nextflow
 
     /*
@@ -281,7 +290,6 @@ Go ahead and fill in the process definition by yourself using the information pr
     process MULTIQC {
 
         container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
-        publishDir "results/multiqc", mode: 'symlink'
 
         input:
         path '*'
@@ -329,6 +337,8 @@ Add the import statement to `rnaseq.nf`:
     include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
     ```
 
+Now add the process call to the workflow.
+
 #### 2.2.3. Add the process call
 
 Pass the collected QC files and the report ID to the `MULTIQC` process:
@@ -338,17 +348,89 @@ Pass the collected QC files and the report ID to the `MULTIQC` process:
     ```groovy title="rnaseq.nf" linenums="49" hl_lines="2"
         multiqc_files_list = multiqc_files_ch.collect()
         MULTIQC(multiqc_files_list, params.report_id)
-    }
     ```
 
 === "Before"
 
     ```groovy title="rnaseq.nf" linenums="49"
         multiqc_files_list = multiqc_files_ch.collect()
+    ```
+
+The MultiQC process is now wired into the workflow.
+
+### 2.3. Update the output handling
+
+We need to add the MultiQC outputs to the publish declaration and configure where they go.
+
+#### 2.3.1. Add publish targets for the MultiQC outputs
+
+Add the MultiQC outputs to the `publish:` section:
+
+=== "After"
+
+    ```groovy title="rnaseq.nf" linenums="52" hl_lines="9-10"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+        bam = HISAT2_ALIGN.out.bam
+        align_log = HISAT2_ALIGN.out.log
+        multiqc_report = MULTIQC.out.report
+        multiqc_data = MULTIQC.out.data
     }
     ```
 
-### 2.3. Run the workflow
+=== "Before"
+
+    ```groovy title="rnaseq.nf" linenums="52"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+        bam = HISAT2_ALIGN.out.bam
+        align_log = HISAT2_ALIGN.out.log
+    }
+    ```
+
+Now we need to tell Nextflow where to put these outputs.
+
+#### 2.3.2. Configure the new output targets
+
+Add entries for the MultiQC targets in the `output {}` block, publishing them into a `multiqc/` subdirectory:
+
+=== "After"
+
+    ```groovy title="rnaseq.nf" linenums="82" hl_lines="7-12"
+        align_log {
+            path 'align'
+        }
+        multiqc_report {
+            path 'multiqc'
+        }
+        multiqc_data {
+            path 'multiqc'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="rnaseq.nf" linenums="82"
+        align_log {
+            path 'align'
+        }
+    }
+    ```
+
+The output configuration is complete.
+
+### 2.4. Run the workflow
+
+We use `-resume` so that the previous processing steps are cached and only the new MultiQC step runs.
 
 ```bash
 nextflow run rnaseq.nf -resume
@@ -370,7 +452,7 @@ nextflow run rnaseq.nf -resume
 
 A single call to MULTIQC has been added after the cached process calls.
 
-You can find the outputs under `results/multiqc` as specified by the `publishDir` directive.
+You can find the MultiQC outputs in the results directory.
 
 ```bash
 tree -L 2 results/multiqc
@@ -428,11 +510,17 @@ Making the workflow completely agnostic of the data type would require using sli
 
 ### 3.1. Copy the workflow and update the inputs
 
+We start by copying the single-end workflow file and updating it for paired-end data.
+
 #### 3.1.1. Copy the workflow file
+
+Create a copy of the workflow file to use as a starting point for the paired-end version.
 
 ```bash
 cp rnaseq.nf rnaseq_pe.nf
 ```
+
+Now update the parameters and input handling in the new file.
 
 #### 3.1.2. Update the primary input and report ID
 
@@ -480,6 +568,8 @@ Update the `input_csv` default to point to this file and the `report_id` to refl
     }
     ```
 
+The parameter defaults are updated.
+
 #### 3.1.3. Update the channel factory
 
 The `.map()` operator needs to grab both FASTQ file paths and return them as a list.
@@ -502,6 +592,8 @@ The `.map()` operator needs to grab both FASTQ file paths and return them as a l
             .map { row -> file(row.fastq_path) }
     ```
 
+The input handling is configured for paired-end data.
+
 ### 3.2. Adapt the FASTQC module for paired-end data
 
 Copy the module to create a paired-end version:
@@ -515,7 +607,7 @@ The only change needed is in the output block: since we now get two FastQC repor
 
 === "After"
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="11" hl_lines="2 3"
+    ```groovy title="modules/fastqc_pe.nf" linenums="10" hl_lines="2 3"
         output:
         path "*_fastqc.zip", emit: zip
         path "*_fastqc.html", emit: html
@@ -523,7 +615,7 @@ The only change needed is in the output block: since we now get two FastQC repor
 
 === "Before"
 
-    ```groovy title="modules/fastqc_pe.nf" linenums="11"
+    ```groovy title="modules/fastqc_pe.nf" linenums="10"
         output:
         path "${reads.simpleName}_fastqc.zip", emit: zip
         path "${reads.simpleName}_fastqc.html", emit: html
@@ -544,6 +636,8 @@ Update the import in `rnaseq_pe.nf` to use the paired-end version:
     ```groovy title="rnaseq_pe.nf" linenums="4"
     include { FASTQC } from './modules/fastqc.nf'
     ```
+
+The FASTQC module and its import are updated for paired-end data.
 
 ### 3.3. Adapt the TRIM_GALORE module for paired-end data
 
@@ -607,6 +701,8 @@ Update the import in `rnaseq_pe.nf`:
     ```groovy title="rnaseq_pe.nf" linenums="5"
     include { TRIM_GALORE } from './modules/trim_galore.nf'
     ```
+
+The TRIM_GALORE module and its import are updated for paired-end data.
 
 ### 3.4. Adapt the HISAT2_ALIGN module for paired-end data
 
@@ -676,6 +772,8 @@ Update the import in `rnaseq_pe.nf`:
     include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
     ```
 
+The HISAT2_ALIGN module and its import are updated for paired-end data.
+
 ### 3.5. Update the MultiQC aggregation for paired-end outputs
 
 The paired-end `TRIM_GALORE` process now produces two separate FastQC report channels (`fastqc_reports_1` and `fastqc_reports_2`) instead of one.
@@ -683,7 +781,7 @@ Update the `.mix()` block in `rnaseq_pe.nf` to include both:
 
 === "After"
 
-    ```groovy title="rnaseq_pe.nf" linenums="39" hl_lines="5 6"
+    ```groovy title="rnaseq_pe.nf" linenums="40" hl_lines="5 6"
         multiqc_files_ch = Channel.empty().mix(
             FASTQC.out.zip,
             FASTQC.out.html,
@@ -696,7 +794,7 @@ Update the `.mix()` block in `rnaseq_pe.nf` to include both:
 
 === "Before"
 
-    ```groovy title="rnaseq_pe.nf" linenums="39"
+    ```groovy title="rnaseq_pe.nf" linenums="40"
         multiqc_files_ch = Channel.empty().mix(
             FASTQC.out.zip,
             FASTQC.out.html,
@@ -706,7 +804,83 @@ Update the `.mix()` block in `rnaseq_pe.nf` to include both:
         )
     ```
 
-### 3.6. Run the workflow
+The MultiQC aggregation now includes both sets of paired-end FastQC reports.
+
+### 3.6. Update the output handling for paired-end outputs
+
+The `publish:` section and `output {}` block also need to reflect the two separate FastQC report channels from the paired-end `TRIM_GALORE` process.
+
+Update the `publish:` section in `rnaseq_pe.nf`:
+
+=== "After"
+
+    ```groovy title="rnaseq_pe.nf" linenums="52" hl_lines="6-7"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc_1 = TRIM_GALORE.out.fastqc_reports_1
+        trimming_fastqc_2 = TRIM_GALORE.out.fastqc_reports_2
+        bam = HISAT2_ALIGN.out.bam
+        align_log = HISAT2_ALIGN.out.log
+        multiqc_report = MULTIQC.out.report
+        multiqc_data = MULTIQC.out.data
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="rnaseq_pe.nf" linenums="52"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+        bam = HISAT2_ALIGN.out.bam
+        align_log = HISAT2_ALIGN.out.log
+        multiqc_report = MULTIQC.out.report
+        multiqc_data = MULTIQC.out.data
+    }
+    ```
+
+Update the corresponding entries in the `output {}` block:
+
+=== "After"
+
+    ```groovy title="rnaseq_pe.nf" linenums="77" hl_lines="4-9"
+        trimming_reports {
+            path 'trimming'
+        }
+        trimming_fastqc_1 {
+            path 'trimming'
+        }
+        trimming_fastqc_2 {
+            path 'trimming'
+        }
+        bam {
+            path 'align'
+        }
+    ```
+
+=== "Before"
+
+    ```groovy title="rnaseq_pe.nf" linenums="77"
+        trimming_reports {
+            path 'trimming'
+        }
+        trimming_fastqc {
+            path 'trimming'
+        }
+        bam {
+            path 'align'
+        }
+    ```
+
+The paired-end workflow is now fully updated and ready to run.
+
+### 3.7. Run the workflow
 
 We don't use `-resume` since this wouldn't cache, and there's twice as much data to process than before, but it should still complete in under a minute.
 

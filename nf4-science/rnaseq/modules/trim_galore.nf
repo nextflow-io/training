@@ -6,7 +6,6 @@
 process TRIM_GALORE {
 
     container
-    publishDir
 
     input:
 

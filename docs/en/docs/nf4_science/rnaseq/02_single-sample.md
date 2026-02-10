@@ -29,10 +29,17 @@ These files are not functional; their purpose is just to serve as scaffolds for 
 
 workflow {
 
+    main:
     // Create input channel
 
     // Call processes
 
+    publish:
+    // Declare outputs to publish
+}
+
+output {
+    // Configure publish targets
 }
 ```
 
@@ -51,10 +58,11 @@ fastqc <reads>
 The command takes a FASTQ file as input and produces a quality control report as a `.zip` archive and an `.html` summary.
 The container URI was `community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18`.
 
-We're going to take this information and wrap it in Nextflow in two stages:
+We're going to take this information and wrap it in Nextflow in three stages:
 
 1. Set up the input
 2. Write the QC process and call it in the workflow
+3. Configure the output handling
 
 ### 1.1. Set up the input
 
@@ -86,20 +94,25 @@ In `rnaseq.nf`, under the `Pipeline parameters` section, declare a parameter cal
     // Primary input
     ```
 
+Next, we need to create a channel from this parameter.
+
 #### 1.1.2. Set up the input channel
 
 In the workflow block, create an input channel from the parameter value using the `.fromPath` channel factory (as used in [Hello Channels](../../hello_nextflow/02_hello_channels.md)).
 
 === "After"
 
-    ```groovy title="rnaseq.nf" linenums="13" hl_lines="3-4"
+    ```groovy title="rnaseq.nf" linenums="13" hl_lines="4-5"
     workflow {
 
+        main:
         // Create input channel from a file path
         read_ch = channel.fromPath(params.reads)
 
         // Call processes
 
+        publish:
+        // Declare outputs to publish
     }
     ```
 
@@ -108,10 +121,13 @@ In the workflow block, create an input channel from the parameter value using th
     ```groovy title="rnaseq.nf" linenums="13"
     workflow {
 
+        main:
         // Create input channel
 
         // Call processes
 
+        publish:
+        // Declare outputs to publish
     }
     ```
 
@@ -139,7 +155,6 @@ Go ahead and fill in the process definition by yourself using the information pr
     process FASTQC {
 
         container
-        publishDir
 
         input:
 
@@ -154,7 +169,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/fastqc.nf" linenums="1" hl_lines="8 9 12 15 16 20"
+    ```groovy title="modules/fastqc.nf" linenums="1" hl_lines="8 11 14 15 19"
     #!/usr/bin/env nextflow
 
     /*
@@ -163,7 +178,6 @@ Go ahead and fill in the process definition by yourself using the information pr
     process FASTQC {
 
         container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
-        publishDir "results/fastqc", mode: 'symlink'
 
         input:
         path reads
@@ -179,16 +193,8 @@ Go ahead and fill in the process definition by yourself using the information pr
     }
     ```
 
-The `publishDir` directive tells Nextflow to publish the process outputs to a results directory.
-We use `mode: 'symlink'` to create symbolic links instead of copying files.
 The `simpleName` accessor strips all extensions from the filename, so `ENCSR000COQ1_1.fastq.gz` becomes `ENCSR000COQ1_1`.
-We use the `emit:` syntax to assign names to each output channel, which will be useful later for wiring outputs between processes.
-
-!!! note
-
-    Even though the data files we're using here are very small, in genomics they can get very large.
-    For the purposes of demonstration in the teaching environment, we're using the 'symlink' publishing mode to avoid unnecessary file copies.
-    You shouldn't do this in your final workflows, since you'll lose results when you clean up your `work` directory.
+We use the `emit:` syntax to assign names to each output channel, which will be useful for wiring outputs into the publish block.
 
 Once you've completed this, the process is complete.
 To use it in the workflow, you'll need to import the module and add a process call.
@@ -218,15 +224,18 @@ Add a call to `FASTQC` in the workflow block, passing the input channel as an ar
 
 === "After"
 
-    ```groovy title="rnaseq.nf" linenums="14" hl_lines="6-7"
+    ```groovy title="rnaseq.nf" linenums="14" hl_lines="7-8"
     workflow {
 
+        main:
         // Create input channel from a file path
         read_ch = channel.fromPath(params.reads)
 
         // Initial quality control
         FASTQC(read_ch)
 
+        publish:
+        // Declare outputs to publish
     }
     ```
 
@@ -235,15 +244,81 @@ Add a call to `FASTQC` in the workflow block, passing the input channel as an ar
     ```groovy title="rnaseq.nf" linenums="14"
     workflow {
 
+        main:
         // Create input channel from a file path
         read_ch = channel.fromPath(params.reads)
 
         // Call processes
 
+        publish:
+        // Declare outputs to publish
     }
     ```
 
-### 1.3. Run the workflow
+The workflow now loads the input and runs the QC process on it.
+Next, we need to configure how the output is published.
+
+### 1.3. Configure the output handling
+
+We need to declare which process outputs to publish and specify where they should go.
+
+#### 1.3.1. Declare outputs in the `publish:` section
+
+The `publish:` section inside the workflow block declares which process outputs should be published.
+Assign the outputs of `FASTQC` to named targets.
+
+=== "After"
+
+    ```groovy title="rnaseq.nf" linenums="23" hl_lines="2-3"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="rnaseq.nf" linenums="23"
+        publish:
+        // Declare outputs to publish
+    }
+    ```
+
+Now we need to tell Nextflow where to put the published outputs.
+
+#### 1.3.2. Configure the output targets in the `output {}` block
+
+The `output {}` block sits outside the workflow and specifies where each named target is published.
+Configure both targets to publish into a `fastqc/` subdirectory.
+
+=== "After"
+
+    ```groovy title="rnaseq.nf" linenums="28" hl_lines="2-7"
+    output {
+        fastqc_zip {
+            path 'fastqc'
+        }
+        fastqc_html {
+            path 'fastqc'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="rnaseq.nf" linenums="28"
+    output {
+        // Configure publish targets
+    }
+    ```
+
+!!! note
+
+    By default, Nextflow publishes output files as symbolic links, which avoids unnecessary duplication.
+    Even though the data files we're using here are very small, in genomics they can get very large.
+    Symlinks will break when you clean up your `work` directory, so for production workflows you may want to override the default publish mode to `'copy'`.
+
+### 1.4. Run the workflow
 
 At this point, we have a one-step QC workflow that should be fully functional.
 
@@ -267,7 +342,7 @@ nextflow run rnaseq.nf
 This should run very quickly if you worked through Part 1 and have already pulled the container.
 If you skipped it, Nextflow will pull the container for you; you don't have to do anything for it to happen, but you may need to wait up to a minute.
 
-You can check the outputs under `results/fastqc` as specified by the `publishDir` directive.
+You can check the outputs in the results directory.
 
 ```bash
 ls results/fastqc
@@ -277,9 +352,11 @@ ls results/fastqc
 ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 ```
 
+The QC reports for the sample are now published in the `fastqc/` subdirectory.
+
 ### Takeaway
 
-You know how to create a module containing a process, import it into a workflow, call it with an input channel, and publish the results.
+You know how to create a module containing a process, import it into a workflow, call it with an input channel, and publish the results using the workflow-level output block.
 
 ### What's next?
 
@@ -301,9 +378,11 @@ The command trims adapters from a FASTQ file and runs FastQC on the trimmed outp
 It produces trimmed reads, a trimming report, and FastQC reports for the trimmed reads.
 The container URI was `community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18`.
 
-We just need to write the process definition, import it, and call it in the workflow.
+We just need to write the process definition, import it, call it in the workflow, and update the output handling.
 
 ### 2.1. Write the trimming process and call it in the workflow
+
+As before, we need to fill in the process definition, import the module, and add the process call.
 
 #### 2.1.1. Fill in the module for the trimming process
 
@@ -322,7 +401,6 @@ Go ahead and fill in the process definition by yourself using the information pr
     process TRIM_GALORE {
 
         container
-        publishDir
 
         input:
 
@@ -337,7 +415,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/trim_galore.nf" linenums="1" hl_lines="8 9 12 15 16 17 21"
+    ```groovy title="modules/trim_galore.nf" linenums="1" hl_lines="8 11 14 15 16 20"
     #!/usr/bin/env nextflow
 
     /*
@@ -346,7 +424,6 @@ Go ahead and fill in the process definition by yourself using the information pr
     process TRIM_GALORE {
 
         container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
-        publishDir "results/trimming", mode: 'symlink'
 
         input:
         path reads
@@ -385,15 +462,18 @@ Update `rnaseq.nf` to import the new module:
     include { FASTQC } from './modules/fastqc.nf'
     ```
 
+Now add the process call to the workflow.
+
 #### 2.1.3. Call the trimming process on the input
 
 Add the process call in the workflow block:
 
 === "After"
 
-    ```groovy title="rnaseq.nf" linenums="15" hl_lines="9-10"
+    ```groovy title="rnaseq.nf" linenums="15" hl_lines="10-11"
     workflow {
 
+        main:
         // Create input channel from a file path
         read_ch = channel.fromPath(params.reads)
 
@@ -403,6 +483,9 @@ Add the process call in the workflow block:
         // Adapter trimming and post-trimming QC
         TRIM_GALORE(read_ch)
 
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
     }
     ```
 
@@ -411,16 +494,96 @@ Add the process call in the workflow block:
     ```groovy title="rnaseq.nf" linenums="15"
     workflow {
 
+        main:
         // Create input channel from a file path
         read_ch = channel.fromPath(params.reads)
 
         // Initial quality control
         FASTQC(read_ch)
 
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
     }
     ```
 
-### 2.2. Run the workflow
+The trimming process is now wired into the workflow.
+
+### 2.2. Update the output handling
+
+We need to add the trimming outputs to the publish declaration and configure where they go.
+
+#### 2.2.1. Add publish targets for the trimming outputs
+
+Add the trimming outputs to the `publish:` section:
+
+=== "After"
+
+    ```groovy title="rnaseq.nf" linenums="27" hl_lines="4-6"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="rnaseq.nf" linenums="27"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+    }
+    ```
+
+Now we need to tell Nextflow where to put these outputs.
+
+#### 2.2.2. Configure the new output targets
+
+Add entries for the trimming targets in the `output {}` block, publishing them into a `trimming/` subdirectory:
+
+=== "After"
+
+    ```groovy title="rnaseq.nf" linenums="35" hl_lines="8-16"
+    output {
+        fastqc_zip {
+            path 'fastqc'
+        }
+        fastqc_html {
+            path 'fastqc'
+        }
+        trimmed_reads {
+            path 'trimming'
+        }
+        trimming_reports {
+            path 'trimming'
+        }
+        trimming_fastqc {
+            path 'trimming'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="rnaseq.nf" linenums="35"
+    output {
+        fastqc_zip {
+            path 'fastqc'
+        }
+        fastqc_html {
+            path 'fastqc'
+        }
+    }
+    ```
+
+The output configuration is complete.
+
+### 2.3. Run the workflow
+
+The workflow now includes both initial QC and adapter trimming.
 
 ```bash
 nextflow run rnaseq.nf
@@ -440,7 +603,7 @@ nextflow run rnaseq.nf
 
 This should run very quickly too, since we're running on such a small input file.
 
-You can find the outputs under `results/trimming` as specified by the `publishDir` directive.
+You can find the trimming outputs in the results directory.
 
 ```bash
 ls results/trimming
@@ -450,6 +613,8 @@ ls results/trimming
 ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.zip
 ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz
 ```
+
+The trimming outputs and post-trimming QC reports are now in the `trimming/` subdirectory.
 
 ### Takeaway
 
@@ -481,13 +646,15 @@ This process requires an additional input (the genome index archive), so we need
 
 ### 3.1. Set up the inputs
 
+We need to declare a parameter for the genome index archive.
+
 #### 3.1.1. Add a parameter for the genome index
 
 Add a parameter declaration for the genome index archive in `rnaseq.nf`:
 
 === "After"
 
-    ```groovy title="rnaseq.nf" linenums="9" hl_lines="5-6"
+    ```groovy title="rnaseq.nf" linenums="11" hl_lines="5-6"
     params {
         // Primary input
         reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
@@ -499,14 +666,18 @@ Add a parameter declaration for the genome index archive in `rnaseq.nf`:
 
 === "Before"
 
-    ```groovy title="rnaseq.nf" linenums="9"
+    ```groovy title="rnaseq.nf" linenums="11"
     params {
         // Primary input
         reads: Path = "data/reads/ENCSR000COQ1_1.fastq.gz"
     }
     ```
 
+The parameter is ready; now we can create the alignment process.
+
 ### 3.2. Write the alignment process and call it in the workflow
+
+As before, we need to fill in the process definition, import the module, and add the process call.
 
 #### 3.2.1. Fill in the module for the alignment process
 
@@ -525,7 +696,6 @@ Go ahead and fill in the process definition by yourself using the information pr
     process HISAT2_ALIGN {
 
         container
-        publishDir
 
         input:
 
@@ -540,7 +710,7 @@ Go ahead and fill in the process definition by yourself using the information pr
 
 === "After"
 
-    ```groovy title="modules/hisat2_align.nf" linenums="1" hl_lines="8 9 12 13 16 17 21 22 23 24"
+    ```groovy title="modules/hisat2_align.nf" linenums="1" hl_lines="8 11 12 15 16 20 21 22 23"
     #!/usr/bin/env nextflow
 
     /*
@@ -549,7 +719,6 @@ Go ahead and fill in the process definition by yourself using the information pr
     process HISAT2_ALIGN {
 
         container "community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"
-        publishDir "results/align", mode: 'symlink'
 
         input:
         path reads
@@ -594,6 +763,8 @@ Update `rnaseq.nf` to import the new module:
     include { TRIM_GALORE } from './modules/trim_galore.nf'
     ```
 
+Now add the process call to the workflow.
+
 #### 3.2.3. Call the alignment process
 
 The trimmed reads are in the `TRIM_GALORE.out.trimmed_reads` channel output by the previous step.
@@ -601,9 +772,10 @@ We use `#!groovy file(params.hisat2_index_zip)` to provide the genome index arch
 
 === "After"
 
-    ```groovy title="rnaseq.nf" linenums="19" hl_lines="12-13"
+    ```groovy title="rnaseq.nf" linenums="19" hl_lines="14-15"
     workflow {
 
+        main:
         // Create input channel from a file path
         read_ch = channel.fromPath(params.reads)
 
@@ -615,7 +787,6 @@ We use `#!groovy file(params.hisat2_index_zip)` to provide the genome index arch
 
         // Alignment to a reference genome
         HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
-    }
     ```
 
 === "Before"
@@ -623,6 +794,7 @@ We use `#!groovy file(params.hisat2_index_zip)` to provide the genome index arch
     ```groovy title="rnaseq.nf" linenums="19"
     workflow {
 
+        main:
         // Create input channel from a file path
         read_ch = channel.fromPath(params.reads)
 
@@ -631,11 +803,105 @@ We use `#!groovy file(params.hisat2_index_zip)` to provide the genome index arch
 
         // Adapter trimming and post-trimming QC
         TRIM_GALORE(read_ch)
+    ```
 
+The alignment process is now wired into the workflow.
+
+### 3.3. Update the output handling
+
+We need to add the alignment outputs to the publish declaration and configure where they go.
+
+#### 3.3.1. Add publish targets for the alignment outputs
+
+Add the alignment outputs to the `publish:` section:
+
+=== "After"
+
+    ```groovy title="rnaseq.nf" linenums="34" hl_lines="7-8"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+        bam = HISAT2_ALIGN.out.bam
+        align_log = HISAT2_ALIGN.out.log
     }
     ```
 
-### 3.3. Run the workflow
+=== "Before"
+
+    ```groovy title="rnaseq.nf" linenums="34"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    }
+    ```
+
+Now we need to tell Nextflow where to put these outputs.
+
+#### 3.3.2. Configure the new output targets
+
+Add entries for the alignment targets in the `output {}` block, publishing them into an `align/` subdirectory:
+
+=== "After"
+
+    ```groovy title="rnaseq.nf" linenums="44" hl_lines="17-22"
+    output {
+        fastqc_zip {
+            path 'fastqc'
+        }
+        fastqc_html {
+            path 'fastqc'
+        }
+        trimmed_reads {
+            path 'trimming'
+        }
+        trimming_reports {
+            path 'trimming'
+        }
+        trimming_fastqc {
+            path 'trimming'
+        }
+        bam {
+            path 'align'
+        }
+        align_log {
+            path 'align'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="rnaseq.nf" linenums="44"
+    output {
+        fastqc_zip {
+            path 'fastqc'
+        }
+        fastqc_html {
+            path 'fastqc'
+        }
+        trimmed_reads {
+            path 'trimming'
+        }
+        trimming_reports {
+            path 'trimming'
+        }
+        trimming_fastqc {
+            path 'trimming'
+        }
+    }
+    ```
+
+The output configuration is complete.
+
+### 3.4. Run the workflow
+
+The workflow now includes all three processing steps: QC, trimming, and alignment.
 
 ```bash
 nextflow run rnaseq.nf
@@ -654,7 +920,7 @@ nextflow run rnaseq.nf
     [b6/1c6ca3] HISAT2_ALIGN (1) | 1 of 1 ✔
     ```
 
-You can find the outputs under `results/align` as specified by the `publishDir` directive.
+You can find the alignment outputs in the results directory.
 
 ```bash
 ls results/align

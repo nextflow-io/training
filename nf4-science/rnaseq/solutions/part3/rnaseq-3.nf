@@ -21,12 +21,14 @@ params {
 }
 
 workflow {
+
+    main:
     // Create input channel from the contents of a CSV file
     read_ch = channel.fromPath(params.input_csv)
         .splitCsv(header: true)
         .map { row -> file(row.fastq_path) }
 
-    /// Initial quality control
+    // Initial quality control
     FASTQC(read_ch)
 
     // Adapter trimming and post-trimming QC
@@ -45,4 +47,45 @@ workflow {
     )
     multiqc_files_list = multiqc_files_ch.collect()
     MULTIQC(multiqc_files_list, params.report_id)
+
+    publish:
+    fastqc_zip = FASTQC.out.zip
+    fastqc_html = FASTQC.out.html
+    trimmed_reads = TRIM_GALORE.out.trimmed_reads
+    trimming_reports = TRIM_GALORE.out.trimming_reports
+    trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+    bam = HISAT2_ALIGN.out.bam
+    align_log = HISAT2_ALIGN.out.log
+    multiqc_report = MULTIQC.out.report
+    multiqc_data = MULTIQC.out.data
+}
+
+output {
+    fastqc_zip {
+        path 'fastqc'
+    }
+    fastqc_html {
+        path 'fastqc'
+    }
+    trimmed_reads {
+        path 'trimming'
+    }
+    trimming_reports {
+        path 'trimming'
+    }
+    trimming_fastqc {
+        path 'trimming'
+    }
+    bam {
+        path 'align'
+    }
+    align_log {
+        path 'align'
+    }
+    multiqc_report {
+        path 'multiqc'
+    }
+    multiqc_data {
+        path 'multiqc'
+    }
 }

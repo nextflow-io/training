@@ -6,7 +6,6 @@
 process FASTQC {
 
     container
-    publishDir
 
     input:
 
