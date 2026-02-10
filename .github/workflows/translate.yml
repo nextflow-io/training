@@ -14,7 +14,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "Translation mode"
+        description: >-
+          normal: incrementally update translations based on English changes since the last translation PR.
+          fix: scan all existing translations for structural issues and re-translate broken files from scratch.
         type: choice
         options:
           - normal
