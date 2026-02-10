@@ -39,11 +39,8 @@ This part builds directly on the workflow produced by Part 2.
 
 To run on multiple samples, we need to change how we manage the input: instead of providing a single file path, we'll read sample information from a CSV file.
 
-### 1.1. Change the primary input to a CSV of file paths
-
 We provide a CSV file containing sample IDs and FASTQ file paths in the `data/` directory.
 This CSV file includes a header line.
-Note that the FASTQ file paths are absolute paths.
 
 ```csv title="data/single-end.csv" linenums="1"
 sample_id,fastq_path
@@ -55,35 +52,14 @@ ENCSR000CPO1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO1_1.f
 ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.fastq.gz
 ```
 
-Rename the primary input parameter to `input`.
+!!! warning
 
-=== "After"
+    Note that the FASTQ file paths are absolute paths.
+    If you are not running this in the training environment we provide, you will need to update the paths to match your system.
 
-    ```groovy title="rnaseq.nf" linenums="11" hl_lines="3"
-    params {
-        // Primary input
-        input: Path
+### 1.1. Change the primary input to a CSV of file paths in the test profile
 
-        // Reference genome archive
-        hisat2_index_zip: Path
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="rnaseq.nf" linenums="11"
-    params {
-        // Primary input
-        reads: Path
-
-        // Reference genome archive
-        hisat2_index_zip: Path
-    }
-    ```
-
-### 1.2. Update the test profile for multi-sample input
-
-Update the test profile in `nextflow.config` to provide the CSV file path instead of the single FASTQ path.
+First, we need to update the test profile in `nextflow.config` to provide the CSV file path instead of the single FASTQ path.
 
 === "After"
 
@@ -113,9 +89,10 @@ Update the test profile in `nextflow.config` to provide the CSV file path instea
 
 Now we need to update the channel creation to read from this CSV.
 
-### 1.3. Update the channel factory to parse CSV input
+### 1.2. Update the channel factory to parse CSV input
 
 We need to load the contents of the file into the channel instead of just the file path itself.
+
 We can do this using the same pattern we used in [Part 2 of Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file): applying the [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operator to parse the file, then a `map` operation to extract the FASTQ file path from each row.
 
 === "After"
@@ -145,7 +122,7 @@ That allows us to reference columns by name in the `map` operation: `#!groovy ro
 
 The input handling is updated and the workflow is ready to test.
 
-### 1.4. Run the workflow
+### 1.3. Run the workflow
 
 The workflow now reads sample information from a CSV file and processes all samples in parallel.
 
