@@ -1234,4 +1234,201 @@ cp greetings.csv core-hello/assets/.
 
     ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-10"
     params {
-        config_
+        config_profile_name        = 'Test profile'
+        config_profile_description = 'Minimal test dataset to check pipeline function'
+
+        // 입력 데이터
+        input  = "${projectDir}/assets/greetings.csv"
+
+        // 기타 매개변수
+        batch     = 'test'
+        character = 'tux'
+    }
+    ```
+
+=== "변경 전"
+
+    ```groovy title="core-hello/conf/test.config" linenums="21" hl_lines="6-8"
+    params {
+        config_profile_name        = 'Test profile'
+        config_profile_description = 'Minimal test dataset to check pipeline function'
+
+        // 입력 데이터
+        // TODO nf-core: nf-core/test-datasets에 테스트 데이터 경로 지정
+        // TODO nf-core: 명령줄 플래그가 필요하지 않도록 테스트에 필요한 매개변수 제공
+        input  = params.pipelines_testdata_base_path + 'viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
+    }
+    ```
+
+주요 요점:
+
+- **`${projectDir}` 사용**: 이는 메인 workflow 스크립트가 위치한 디렉토리(파이프라인 루트)를 가리키는 Nextflow 암시적 변수입니다. 이를 사용하면 파이프라인이 어디서 실행되든 경로가 작동합니다.
+- **절대 경로**: `${projectDir}`를 사용함으로써 절대 경로를 만들며, 이는 파이프라인과 함께 제공되는 테스트 데이터에 중요합니다.
+- **테스트 데이터 위치**: nf-core 파이프라인은 일반적으로 작은 테스트 파일의 경우 파이프라인 저장소 내 `assets/` 디렉토리에, 더 큰 파일의 경우 외부 테스트 데이터셋에 테스트 데이터를 저장합니다.
+
+또한 매우 기본적인 머신(Github Codespaces의 최소 VM과 같은)에서도 실행되도록 기본 리소스 제한을 강화하겠습니다:
+
+=== "변경 후"
+
+    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    process {
+        resourceLimits = [
+            cpus: 2,
+            memory: '4.GB',
+            time: '1.h'
+        ]
+    }
+    ```
+
+=== "변경 전"
+
+    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    process {
+        resourceLimits = [
+            cpus: 4,
+            memory: '15.GB',
+            time: '1.h'
+        ]
+    }
+    ```
+
+이것으로 필요한 코드 수정이 완료되었습니다.
+
+### 4.4. 테스트 프로필로 파이프라인 실행
+
+많은 작업이었지만 이제 마침내 파이프라인을 실행해 볼 수 있습니다!
+아직 검증을 설정하지 않았기 때문에 명령줄에 `--validate_params false`를 추가해야 합니다(이는 나중에 다룰 것입니다).
+
+```bash
+nextflow run core-hello --outdir core-hello-results -profile test,docker --validate_params false
+```
+
+모든 수정을 올바르게 수행했다면 완료될 때까지 실행되어야 합니다.
+
+??? success "명령 출력"
+
+    ```console
+     N E X T F L O W   ~  version 25.04.3
+
+    Launching `core-hello/main.nf` [condescending_allen] DSL2 - revision: b9e9b3b8de
+
+    Input/output options
+      input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv
+      outdir                    : core-hello-results
+
+    Institutional config options
+      config_profile_name       : Test profile
+      config_profile_description: Minimal test dataset to check pipeline function
+
+    Generic options
+      validate_params           : false
+      trace_report_suffix       : 2025-11-21_07-29-37
+
+    Core Nextflow options
+      runName                   : condescending_allen
+      containerEngine           : docker
+      launchDir                 : /workspaces/training/hello-nf-core
+      workDir                   : /workspaces/training/hello-nf-core/work
+      projectDir                : /workspaces/training/hello-nf-core/core-hello
+      userName                  : root
+      profile                   : test,docker
+      configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config
+
+    !! Only displaying parameters that differ from the pipeline defaults !!
+    ------------------------------------------------------
+    executor >  local (1)
+    [ed/727b7e] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
+    [45/bb6096] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
+    [81/7e2e34] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔
+    [96/9442a1] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
+    -[core/hello] Pipeline completed successfully-
+    ```
+
+보시다시피, 초기화 subworkflow 덕분에 시작 부분에 일반적인 nf-core 요약이 생성되었으며, 각 모듈에 대한 줄은 이제 PIPELINE:WORKFLOW:module 전체 이름을 보여줍니다.
+
+### 4.5. 파이프라인 출력 찾기
+
+이제 질문은: 파이프라인의 출력은 어디에 있을까요?
+그리고 답은 꽤 흥미롭습니다: 결과를 찾을 수 있는 두 개의 서로 다른 장소가 있습니다.
+
+앞서 기억하실 수도 있듯이, 새로 생성된 workflow의 첫 번째 실행은 다양한 실행 보고서와 메타데이터를 포함하는 `core-hello-results/`라는 디렉토리를 생성했습니다.
+
+```bash
+tree core-hello-results
+```
+
+??? abstract "디렉토리 내용"
+
+    ```console
+    core-hello-results
+    └── pipeline_info
+        ├── execution_report_2025-11-21_04-47-18.html
+        ├── execution_report_2025-11-21_07-29-37.html
+        ├── execution_timeline_2025-11-21_04-47-18.html
+        ├── execution_timeline_2025-11-21_07-29-37.html
+        ├── execution_trace_2025-11-21_04-47-18.txt
+        ├── execution_trace_2025-11-21_07-29-37.txt
+        ├── hello_software_versions.yml
+        ├── params_2025-11-21_04-47-13.json
+        ├── params_2025-11-21_07-29-41.json
+        └── pipeline_dag_2025-11-21_04-47-18.html
+        └── pipeline_dag_2025-11-21_07-29-37.html
+
+    1 directory, 12 files
+    ```
+
+첫 번째 실행에서 얻은 것 외에도 추가 실행 보고서 세트를 얻은 것을 볼 수 있습니다. 이때 workflow는 여전히 플레이스홀더일 뿐이었습니다.
+이번에는 예상대로 실행된 모든 작업이 표시됩니다.
+
+![Hello 파이프라인의 실행 타임라인 보고서](./img/execution_timeline_hello.png)
+
+!!! note "참고"
+
+    우리가 Github Codespaces에서 최소한의 머신에서 실행하고 있기 때문에 작업이 다시 병렬로 실행되지 않았습니다.
+    이들이 병렬로 실행되는 것을 보려면 codespace의 CPU 할당량과 테스트 구성의 리소스 제한을 늘려보세요.
+
+좋습니다만, 실제 파이프라인 결과는 거기에 없습니다!
+
+다음과 같은 상황이 발생했습니다: 모듈 자체를 변경하지 않았으므로 모듈 수준 `publishDir` 지시문에 의해 처리되는 출력은 원래 파이프라인에 지정된 대로 여전히 `results` 디렉토리로 이동합니다.
+
+```bash
+tree results
+```
+
+??? abstract "디렉토리 내용"
+
+    ```console
+    results
+    ├── Bonjour-output.txt
+    ├── COLLECTED-test-batch-output.txt
+    ├── COLLECTED-test-output.txt
+    ├── cowpy-COLLECTED-test-batch-output.txt
+    ├── cowpy-COLLECTED-test-output.txt
+    ├── Hello-output.txt
+    ├── Holà-output.txt
+    ├── UPPER-Bonjour-output.txt
+    ├── UPPER-Hello-output.txt
+    └── UPPER-Holà-output.txt
+
+    0 directories, 10 files
+    ```
+
+아, 거기 있군요. 원래 Hello 파이프라인의 이전 실행 결과와 섞여 있습니다.
+
+데모 파이프라인의 출력처럼 깔끔하게 구성하려면 출력 게시 방법을 변경해야 합니다.
+이 교육 과정의 뒷부분에서 그 방법을 보여드리겠습니다.
+
+<!-- TODO: Hello Nextflow가 workflow 수준 출력을 사용하도록 업데이트되면 이를 업데이트하세요 -->
+
+바로 이것입니다! 원래 파이프라인과 동일한 결과를 얻기 위해 많은 작업처럼 보일 수 있지만, 자동으로 생성되는 멋진 보고서를 모두 얻을 수 있으며, 이제 입력 검증과 나중 섹션에서 다룰 일부 메타데이터 처리 기능을 포함한 nf-core의 추가 기능을 활용할 수 있는 견고한 기반을 갖추게 되었습니다.
+
+---
+
+### 요약
+
+nf-core 템플릿을 사용하여 일반 Nextflow 파이프라인을 nf-core 스타일 파이프라인으로 변환하는 방법을 알게 되었습니다.
+그 과정에서 workflow를 구성 가능하게 만드는 방법과, 사용자 정의 nf-core 스타일 파이프라인을 개발할 때 가장 일반적으로 조정해야 하는 nf-core 템플릿 요소를 식별하는 방법을 배웠습니다.
+
+### 다음 단계
+
+잠시 휴식을 취하세요, 힘든 작업이었습니다! 준비가 되면 [3부: nf-core 모듈 사용하기](./03_use_module.md)로 넘어가서 nf-core/modules 저장소에서 커뮤니티가 관리하는 모듈을 활용하는 방법을 배우세요.

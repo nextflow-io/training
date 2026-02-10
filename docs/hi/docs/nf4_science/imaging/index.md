@@ -1,4 +1,3 @@
-```markdown
 ---
 title: इमेजिंग के लिए Nextflow run
 hide:
@@ -37,4 +36,3 @@ hide:
 - इमेजिंग फ़ाइल formats (TIFF images, tabular data) से बुनियादी परिचितता
 
 तकनीकी आवश्यकताओं और वातावरण सेटअप के लिए, [Environment Setup](../../envsetup/) मिनी-पाठ्यक्रम देखें।
-```

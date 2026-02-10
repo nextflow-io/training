@@ -1,3 +1,9 @@
+---
+title: Nextflow para RNAseq
+hide:
+  - toc
+---
+
 # Nextflow para RNAseq
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>

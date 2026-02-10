@@ -2298,10 +2298,9 @@ Zastosowanie tych wzorców w Twojej własnej pracy umożliwi Ci budowanie solidn
 
     - Przepływ danych: orkiestra kanałów
 
-    ````groovy
-    channel.fromPath('*.fast```groovy
+    ```groovy
     channel.fromPath('*.fastq').splitCsv(header: true)
-    ````
+    ```
 
     - Skryptowanie: przetwarzanie danych w kolekcjach
 

@@ -1,3 +1,9 @@
+---
+title: Training Collections
+hide:
+  - toc
+---
+
 # Collezioni di Formazione
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>

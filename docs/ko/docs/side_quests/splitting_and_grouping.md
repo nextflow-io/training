@@ -830,4 +830,375 @@ nextflow run main.nf
 
 ### 4.1. `combine`을 사용하여 간격에 샘플 분산
 
-간격 채널을 만드는 것부터 시작하겠습니다. 간단하게 유지하기 위해 수동으로 정의할 3개의 간격만 사용합니다. 실제
+간격 채널을 만드는 것부터 시작하겠습니다. 간단하게 유지하기 위해 수동으로 정의할 3개의 간격만 사용합니다. 실제 워크플로에서는 이들을 파일 입력에서 읽거나 많은 간격 파일이 있는 채널을 생성할 수도 있습니다.
+
+=== "수정 후"
+
+    ```groovy title="main.nf" linenums="17" hl_lines="2"
+            .join(ch_tumor_samples)
+        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
+    ```
+
+=== "수정 전"
+
+    ```groovy title="main.nf" linenums="17" hl_lines="2"
+            .join(ch_tumor_samples)
+        ch_joined_samples.view()
+    ```
+
+이제 각 간격에 대해 각 샘플을 반복하려고 한다는 것을 기억하십시오. 이것은 때때로 샘플과 간격의 데카르트 곱이라고도 합니다. [`combine` 연산자](https://www.nextflow.io/docs/latest/operator.html#combine)를 사용하여 이를 달성할 수 있습니다. 이는 채널 1의 모든 항목을 가져와서 채널 2의 각 항목에 대해 반복합니다. 워크플로에 combine 연산자를 추가해 보겠습니다:
+
+=== "수정 후"
+
+    ```groovy title="main.nf" linenums="18" hl_lines="3-5"
+        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
+
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .view()
+    ```
+
+=== "수정 전"
+
+    ```groovy title="main.nf" linenums="18"
+        ch_intervals = channel.of('chr1', 'chr2', 'chr3')
+    ```
+
+이제 실행하여 어떻게 되는지 확인해 보겠습니다:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "명령 출력"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [mighty_tesla] DSL2 - revision: ae013ab70b
+
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr1]
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr2]
+    [[id:patientA, repeat:1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam, chr3]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr1]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr2]
+    [[id:patientA, repeat:2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam, chr3]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr1]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr2]
+    [[id:patientB, repeat:1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam, chr3]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr1]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr2]
+    [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]
+    ```
+
+성공! 3개의 간격 목록에서 모든 간격에 대해 모든 샘플을 반복했습니다. 채널의 항목 수를 효과적으로 3배로 늘렸습니다.
+
+그러나 읽기가 조금 어려우므로 다음 섹션에서 정리하겠습니다.
+
+### 4.2. 채널 구성
+
+`map` 연산자를 사용하여 샘플 데이터를 정리하고 리팩터링하여 이해하기 쉽게 만들 수 있습니다. 첫 번째 요소에 있는 조인 맵으로 간격 문자열을 이동해 보겠습니다.
+
+=== "수정 후"
+
+    ```groovy title="main.nf" linenums="20" hl_lines="3-9"
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .map { grouping_key, normal, tumor, interval ->
+                [
+                    grouping_key + [interval: interval],
+                    normal,
+                    tumor
+                ]
+            }
+            .view()
+    ```
+
+=== "수정 전"
+
+    ```groovy title="main.nf" linenums="20"
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .view()
+    ```
+
+이 맵 연산이 단계별로 어떻게 작동하는지 분석해 보겠습니다.
+
+먼저 코드를 더 읽기 쉽게 만들기 위해 명명된 매개변수를 사용합니다. `grouping_key`, `normal`, `tumor` 및 `interval`과 같은 이름을 사용하여 인덱스 대신 이름으로 튜플의 요소를 참조할 수 있습니다:
+
+```groovy
+        .map { grouping_key, normal, tumor, interval ->
+```
+
+다음으로, `grouping_key`와 `interval` 필드를 결합합니다. `grouping_key`는 `id` 및 `repeat` 필드를 포함하는 맵입니다. `interval`을 사용하여 새 맵을 만들고 Groovy의 맵 덧셈(`+`)을 사용하여 병합합니다:
+
+```groovy
+                grouping_key + [interval: interval],
+```
+
+마지막으로, 이것을 결합된 메타데이터 맵, 정상 샘플 파일 및 종양 샘플 파일의 세 요소가 있는 튜플로 반환합니다:
+
+```groovy
+            [
+                grouping_key + [interval: interval],
+                normal,
+                tumor
+            ]
+```
+
+다시 실행하여 채널 내용을 확인해 보겠습니다:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "명령 출력"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
+
+    [[id:patientA, repeat:1, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:1, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:1, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, repeat:2, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, repeat:2, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, repeat:2, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientB, repeat:1, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, repeat:1, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, repeat:1, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientC, repeat:1, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, repeat:1, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, repeat:1, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    ```
+
+`map`을 사용하여 데이터를 올바른 구조로 변환하는 것은 어려울 수 있지만 효과적인 데이터 조작에 중요합니다.
+
+이제 모든 게놈 간격에 걸쳐 모든 샘플을 반복하여 병렬로 처리할 수 있는 여러 독립적인 분석 단위를 만들었습니다. 그러나 관련 샘플을 다시 가져오려면 어떻게 해야 할까요? 다음 섹션에서는 공통 속성을 공유하는 샘플을 그룹화하는 방법을 배우겠습니다.
+
+### 핵심 요약
+
+이 섹션에서는 다음을 배웠습니다:
+
+- **간격에 샘플 분산**: `combine`을 사용하여 간격에 샘플을 반복하는 방법
+- **데카르트 곱 생성**: 샘플과 간격의 모든 조합을 생성하는 방법
+- **채널 구조 구성**: `map`을 사용하여 더 나은 가독성을 위해 데이터를 재구성하는 방법
+- **병렬 처리 준비**: 분산 분석을 위해 데이터를 설정하는 방법
+
+## 5. `groupTuple`을 사용하여 샘플 집계
+
+이전 섹션에서는 입력 파일에서 데이터를 분할하고 특정 필드(우리 경우에는 정상 및 종양 샘플)로 필터링하는 방법을 배웠습니다. 그러나 이것은 단 하나의 조인 유형만 다룹니다. 특정 속성별로 샘플을 그룹화하려면 어떻게 해야 할까요? 예를 들어, 정상-종양 쌍을 일치시키는 대신 유형에 관계없이 "sampleA"의 모든 샘플을 함께 처리하고 싶을 수 있습니다. 이 패턴은 효율성을 위해 관련 샘플을 별도로 처리한 후 마지막에 결과를 비교하거나 결합하려는 생물정보학 워크플로에서 일반적입니다.
+
+Nextflow에는 이를 수행하는 내장 방법이 포함되어 있으며, 주로 살펴볼 것은 `groupTuple`입니다.
+
+동일한 `id` 및 `interval` 필드를 가진 모든 샘플을 그룹화하는 것부터 시작하겠습니다. 이는 기술적 복제를 그룹화하지만 의미 있는 다른 샘플은 분리해 두는 분석에 전형적일 것입니다.
+
+이를 위해 그룹화 변수를 분리하여 격리하여 사용할 수 있어야 합니다.
+
+첫 번째 단계는 이전 섹션에서 했던 것과 유사합니다. 그룹화 변수를 튜플의 첫 번째 요소로 격리해야 합니다. 현재 첫 번째 요소는 `id`, `repeat` 및 `interval` 필드의 맵입니다:
+
+```groovy title="main.nf" linenums="1"
+{
+  "id": "sampleA",
+  "repeat": "1",
+  "interval": "chr1"
+}
+```
+
+이전과 마찬가지로 맵에서 `id` 및 `interval` 필드를 분리하기 위해 `subMap` 메서드를 다시 사용할 수 있습니다. 이전처럼 각 샘플에 대해 튜플의 첫 번째 요소에 `subMap` 메서드를 적용하기 위해 `map` 연산자를 사용합니다.
+
+=== "수정 후"
+
+    ```groovy title="main.nf" linenums="20" hl_lines="11-19"
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .map { grouping_key, normal, tumor, interval ->
+                [
+                    grouping_key + [interval: interval],
+                    normal,
+                    tumor
+                ]
+            }
+
+        ch_grouped_samples = ch_combined_samples
+            .map { grouping_key, normal, tumor ->
+                [
+                    grouping_key.subMap('id', 'interval'),
+                    normal,
+                    tumor
+                ]
+              }
+              .view()
+    ```
+
+=== "수정 전"
+
+    ```groovy title="main.nf" linenums="20" hl_lines="10"
+        ch_combined_samples = ch_joined_samples
+            .combine(ch_intervals)
+            .map { grouping_key, normal, tumor, interval ->
+                [
+                    grouping_key + [interval: interval],
+                    normal,
+                    tumor
+                ]
+            }
+            .view()
+    ```
+
+다시 실행하여 채널 내용을 확인하십시오:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "명령 출력"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [hopeful_brenner] DSL2 - revision: 7f4f7fea76
+
+    [[id:patientA, interval:chr1], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, interval:chr2], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, interval:chr3], patientA_rep1_normal.bam, patientA_rep1_tumor.bam]
+    [[id:patientA, interval:chr1], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, interval:chr2], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientA, interval:chr3], patientA_rep2_normal.bam, patientA_rep2_tumor.bam]
+    [[id:patientB, interval:chr1], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, interval:chr2], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientB, interval:chr3], patientB_rep1_normal.bam, patientB_rep1_tumor.bam]
+    [[id:patientC, interval:chr1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, interval:chr2], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    [[id:patientC, interval:chr3], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
+    ```
+
+`id` 및 `interval` 필드를 성공적으로 분리했지만 아직 샘플을 그룹화하지 않았습니다.
+
+!!! note "참고"
+
+    여기서는 `replicate` 필드를 버리고 있습니다. 이는 추가 다운스트림 처리에 필요하지 않기 때문입니다. 이 튜토리얼을 완료한 후 나중에 그룹화에 영향을 주지 않고 이를 포함할 수 있는지 확인해 보십시오!
+
+이제 [`groupTuple` 연산자](https://www.nextflow.io/docs/latest/operator.html#grouptuple)를 사용하여 이 새로운 그룹화 요소로 샘플을 그룹화해 보겠습니다.
+
+=== "수정 후"
+
+    ```groovy title="main.nf" linenums="30" hl_lines="9"
+        ch_grouped_samples = ch_combined_samples
+            .map { grouping_key, normal, tumor ->
+                [
+                    grouping_key.subMap('id', 'interval'),
+                    normal,
+                    tumor
+                ]
+              }
+              .groupTuple()
+              .view()
+    ```
+
+=== "수정 전"
+
+    ```groovy title="main.nf" linenums="30"
+        ch_grouped_samples = ch_combined_samples
+            .map { grouping_key, normal, tumor ->
+                [
+                    grouping_key.subMap('id', 'interval'),
+                    normal,
+                    tumor
+                ]
+              }
+              .view()
+    ```
+
+이게 전부입니다! 단 한 줄의 코드를 추가했습니다. 실행하여 어떻게 되는지 확인해 보겠습니다:
+
+```bash
+nextflow run main.nf
+```
+
+??? success "명령 출력"
+
+    ```console
+    N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [friendly_jang] DSL2 - revision: a1bee1c55d
+
+    [[id:patientA, interval:chr1], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr2], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientA, interval:chr3], [patientA_rep1_normal.bam, patientA_rep2_normal.bam], [patientA_rep1_tumor.bam, patientA_rep2_tumor.bam]]
+    [[id:patientB, interval:chr1], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr2], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientB, interval:chr3], [patientB_rep1_normal.bam], [patientB_rep1_tumor.bam]]
+    [[id:patientC, interval:chr1], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr2], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    [[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
+    ```
+
+데이터 구조가 변경되었으며 각 채널 요소 내에서 파일이 이제 `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]`과 같은 튜플에 포함되어 있음에 주목하십시오. `groupTuple`을 사용하면 Nextflow는 그룹의 각 샘플에 대한 단일 파일을 결합하기 때문입니다. 다운스트림에서 데이터를 처리할 때 이 점을 기억하는 것이 중요합니다.
+
+!!! note "참고"
+
+    [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose)는 groupTuple의 반대입니다. 채널의 항목을 풀고 평평하게 합니다. `transpose`를 추가하여 위에서 수행한 그룹화를 취소해 보십시오!
+
+### 핵심 요약
+
+이 섹션에서는 다음을 배웠습니다:
+
+- **관련 샘플 그룹화**: `groupTuple`을 사용하여 공통 속성별로 샘플을 집계하는 방법
+- **튜플 구성**: 효과적인 그룹화를 위해 데이터를 준비하는 방법
+- **그룹화 필드 선택**: 가장 유용한 그룹화를 얻기 위해 관련 필드 선택하는 방법
+- **그룹화된 데이터 구조 이해**: 그룹화된 채널 작업 시 데이터 레이아웃의 변화
+
+## 6. 연습 문제: 더 복잡한 그룹화
+
+여기서 소개한 개념을 시험할 기회입니다. 다음 두 가지 그룹화 작업을 시도해 보십시오:
+
+1. 환자 ID별로 모든 샘플을 그룹화하여 복제본 또는 간격과 관계없이 환자당 하나의 항목만 갖도록 합니다.
+2. 간격별로 모든 샘플을 그룹화하여 환자 ID 또는 복제본과 관계없이 간격당 하나의 항목만 갖도록 합니다.
+
+두 경우 모두 결과를 출력하는 `view` 메서드를 사용하고 원하는 그룹화를 얻었는지 확인하십시오.
+
+??? solution "해답"
+
+    **환자 ID별로 그룹화**:
+
+    ```groovy
+    ch_by_patient = ch_combined_samples
+        .map { grouping_key, normal, tumor ->
+            [grouping_key.subMap('id'), normal, tumor]
+        }
+        .groupTuple()
+        .view { "By patient: $it" }
+    ```
+
+    **간격별로 그룹화**:
+
+    ```groovy
+    ch_by_interval = ch_combined_samples
+        .map { grouping_key, normal, tumor ->
+            [grouping_key.subMap('interval'), normal, tumor]
+        }
+        .groupTuple()
+        .view { "By interval: $it" }
+    ```
+
+## 7. 결론
+
+이 사이드 퀘스트에서는 채널 연산자를 사용하여 데이터 스트림을 조작하고 재구성하는 방법을 배웠습니다. 이러한 강력한 도구를 사용하여 복잡한 분석 워크플로를 만들고 이해하기 쉬운 Nextflow 코드로 모델링할 수 있는 방법을 배웠습니다.
+
+주요 포인트:
+
+- `filter` 및 `map`을 사용하여 샘플 선택 및 변환
+- `join`을 사용하여 관련 샘플 결합
+- `combine`을 사용하여 병렬 처리 준비
+- `groupTuple`을 사용하여 관련 데이터 그룹화
+- 메타데이터 맵을 사용하여 깨끗하고 관리 가능한 코드 구조 유지
+
+이러한 기술을 숙달하면 복잡한 생물정보학 워크플로를 구성하고 명확한 구조 덕분에 쉽게 이해할 수 있는 강력한 데이터 처리 파이프라인을 생성할 수 있게 될 것입니다.
+
+이러한 패턴은 생물정보학 워크플로에만 제한되지 않습니다. 임의의 데이터 요소에서 작업하는 방식이 의미가 있으며, Nextflow가 다양한 분야에 적용될 수 있는 이유 중 하나입니다.
+
+### 이어지는 내용
+
+이제 다음 단계로 다른 [사이드 퀘스트](../side_quests/index.md) 중 하나를 시도하여 Nextflow 기술을 계속 발전시키거나, [도메인별 과정](../nf4_science/index.md) 중 하나를 시도하여 특정 연구 분야에 적용하는 방법을 배워보십시오.

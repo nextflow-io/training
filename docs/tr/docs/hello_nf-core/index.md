@@ -1,4 +1,3 @@
-```yaml
 ---
 title: Hello nf-core
 hide:
@@ -54,17 +53,16 @@ Bunun yerine, başlamanıza ve nf-core'un nasıl çalıştığını anlamanıza 
 
 Bunu, nf-core kaynaklarını kullanmanın belirli yönlerine odaklanan beş bölüme ayırdık.
 
-| Kurs bölümü                                                | Özet                                                                                                                                                                                        | Tahmini süre |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| [Bölüm 1: Demo pipeline çalıştırma](./01_run_demo.md)     | Mevcut bir nf-core pipeline'ı çalıştırın ve bu pipeline'ları temel Nextflow iş akışlarından farklı kılan şeyleri anlamak için kod yapısını inceleyin                                       | 30 dakika    |
-| [Bölüm 2: Hello'yu nf-core için yeniden yazma](./02_rewrite_hello.md) | Mevcut bir iş akışını nf-core şablon iskeletine uyarlayın, [Hello Nextflow](../hello_nextflow/index.md) kursunda üretilen basit iş akışından başlayarak                                  | 60 dakika    |
-| [Bölüm 3: nf-core modülü kullanma](./03_use_module.md)    | Topluluk modülleri kütüphanesini keşfedin ve yaygın biyoinformatik araçlarını sarmalayan önceden oluşturulmuş, test edilmiş modülleri entegre etmeyi öğrenin                               | 30 dakika    |
-| [Bölüm 4: nf-core modülü oluşturma](./04_make_module.md)  | nf-core tarafından belirlenen belirli yapı, adlandırma konvansiyonları ve metadata gereksinimlerini kullanarak kendi nf-core tarzı modülünüzü oluşturun                                    | 30 dakika    |
-| [Bölüm 5: Girdi doğrulama ekleme](./05_input_validation.md) | nf-schema kullanarak hem komut satırı parametreleri hem de girdi veri dosyaları için girdi doğrulama uygulayın                                                                             | 30 dakika    |
+| Kurs bölümü                                                           | Özet                                                                                                                                                         | Tahmini süre |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| [Bölüm 1: Demo pipeline çalıştırma](./01_run_demo.md)                 | Mevcut bir nf-core pipeline'ı çalıştırın ve bu pipeline'ları temel Nextflow iş akışlarından farklı kılan şeyleri anlamak için kod yapısını inceleyin         | 30 dakika    |
+| [Bölüm 2: Hello'yu nf-core için yeniden yazma](./02_rewrite_hello.md) | Mevcut bir iş akışını nf-core şablon iskeletine uyarlayın, [Hello Nextflow](../hello_nextflow/index.md) kursunda üretilen basit iş akışından başlayarak      | 60 dakika    |
+| [Bölüm 3: nf-core modülü kullanma](./03_use_module.md)                | Topluluk modülleri kütüphanesini keşfedin ve yaygın biyoinformatik araçlarını sarmalayan önceden oluşturulmuş, test edilmiş modülleri entegre etmeyi öğrenin | 30 dakika    |
+| [Bölüm 4: nf-core modülü oluşturma](./04_make_module.md)              | nf-core tarafından belirlenen belirli yapı, adlandırma konvansiyonları ve metadata gereksinimlerini kullanarak kendi nf-core tarzı modülünüzü oluşturun      | 30 dakika    |
+| [Bölüm 5: Girdi doğrulama ekleme](./05_input_validation.md)           | nf-schema kullanarak hem komut satırı parametreleri hem de girdi veri dosyaları için girdi doğrulama uygulayın                                               | 30 dakika    |
 
 Bu kursun sonunda, nf-core projesi tarafından sunulan muazzam kaynak zenginliğinden yararlanabileceksiniz.
 
 Kursa başlamaya hazır mısınız?
 
 [Öğrenmeye başlayın :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
-```

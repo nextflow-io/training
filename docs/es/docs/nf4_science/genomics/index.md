@@ -1,3 +1,22 @@
+---
+title: Nextflow para Genómica
+hide:
+  - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Escribir un workflow lineal para aplicar llamado de variantes a una sola muestra
+    - Manejar apropiadamente archivos accesorios como archivos índice y recursos de genoma de referencia
+    - Aprovechar el paradigma de flujo de datos de Nextflow para paralelizar el llamado de variantes por muestra
+    - Implementar llamado conjunto en múltiples muestras usando operadores de channel relevantes
+  audience_prerequisites:
+    - "**Audiencia:** Este curso está diseñado para investigadores en genómica y campos relacionados que desean desarrollar o personalizar pipelines de análisis de datos."
+    - "**Habilidades:** Se asume cierta familiaridad con la línea de comandos, conceptos básicos de scripting y formatos de archivo comunes de genómica."
+    - "**Requisitos previos:** Conceptos fundamentales de Nextflow y herramientas cubiertas en [Hello Nextflow](../../hello_nextflow/)."
+---
+
 # Nextflow para Genómica
 
 **Un curso práctico que aplica Nextflow a un caso de uso real de genómica: llamado de variantes con GATK.**

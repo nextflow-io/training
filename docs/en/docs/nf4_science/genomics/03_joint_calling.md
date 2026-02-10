@@ -669,6 +669,6 @@ You also know how to construct a command line using Groovy closures, and how to 
 
 ### What's next?
 
-Celebrate your success and take a well-deserved break.
+Give yourself a big pat on the back! You have completed the Nextflow for Genomics course.
 
-In the next part of this course, you'll learn how to run a production-ready variant calling pipeline from nf-core and compare it to the pipeline you built manually.
+Head on to the final [course summary](./next_steps.md) to review what you learned and find out what comes next.

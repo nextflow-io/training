@@ -459,7 +459,7 @@ process IDENTIFY_LANGUAGE {
 보시다시피 입력 정의는 입력 채널에 방금 적용한 것과 동일한 `tuple val(meta), path(file)` 구조를 사용합니다.
 
 출력 정의는 입력과 유사한 구조의 튜플로 구성되지만 세 번째 요소로 `stdout`도 포함합니다.
-이 `tuple val(meta), path(file), <output>` 패턴은 파이프라인을 통해 흐르는 메타데이터를 입력 데이터 및 출력과 연관시켜 유지합니다.
+이 `tuple val(meta), path(file), <o>` 패턴은 파이프라인을 통해 흐르는 메타데이터를 입력 데이터 및 출력과 연관시켜 유지합니다.
 
 도구가 파일을 작성하지 않고 출력을 콘솔에 직접 출력하기 때문에 Nextflow의 [`stdout`](https://www.nextflow.io/docs/latest/process.html#outputs) 출력 한정자를 사용하고 있습니다. 그리고 명령줄에서 `sed`를 사용하여 확률 점수를 제거하고 개행 문자를 제거하여 문자열을 정리하고 언어 예측만 반환합니다.
 
@@ -1005,4 +1005,547 @@ nextflow run main.nf
     [[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/6c/114c818317d169457d6e7336d5d55b/bonjour.txt]
     [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/work/55/68c69c5efb527f3604ddb3daab8057/hallo.txt]
     [[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/work/2a/4752055ccb5d1370b0ef9da41d3993/hello.txt]
-    [[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/
+    [[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/work/f4/fcd3186dc666d5d239ffa6c37d125d/hola.txt]
+    [[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/work/c3/3b2627f733f278a7088332a5806108/salut.txt]
+    [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/work/36/cca6a7dbfa26ac24f9329787a32e9d/ciao.txt]
+    ```
+
+이것으로 이제 이름으로 채널을 참조할 수 있다는 것이 확인되었습니다.
+
+#### 3.2.2. 파일 및 캐릭터 메타데이터 액세스
+
+모듈 코드를 확인했을 때 `COWPY` 프로세스는 텍스트 파일과 `character` 값을 받을 것으로 예상한다는 것을 알았습니다.
+`COWPY` 프로세스 호출을 작성하려면 채널의 각 요소에서 해당 파일 객체와 메타데이터를 추출하는 방법을 알아야 합니다.
+
+종종 그렇듯이 가장 간단한 방법은 `map` 작업을 사용하는 것입니다.
+
+채널에는 `[meta, file]`로 구조화된 튜플이 포함되어 있으므로 `file` 객체에 직접 액세스할 수 있으며 메타 맵 내에 저장된 `character` 값은 `meta.character`로 참조할 수 있습니다.
+
+메인 워크플로에서 다음 코드 변경을 수행하십시오:
+
+=== "수정 후"
+
+    ```groovy title="main.nf" linenums="34"
+        // 임시: 파일 및 캐릭터 액세스
+        ch_languages.map { meta, file -> file }.view { file -> "File: " + file }
+        ch_languages.map { meta, file -> meta.character }.view { character -> "Character: " + character }
+    ```
+
+=== "수정 전"
+
+    ```groovy title="main.nf" linenums="34"
+        // 임시: ch_languages 살펴보기
+        ch_languages.view()
+    ```
+
+출력을 더 읽기 쉽게 만들기 위해 클로저(예: `{ file -> "File: " + file }`)를 사용하여 `.view` 작업의 출력을 더 읽기 쉽게 만들고 있습니다.
+
+이것을 실행해 봅시다:
+
+```bash
+nextflow run main.nf -resume
+```
+
+??? success "명령 출력"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `./main.nf` [cheesy_cantor] DSL2 - revision: 15af9c1ec7
+
+    [43/05df08] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
+    Character: squirrel
+    File: /workspaces/training/side-quests/metadata/work/8d/4b9498bbccb7a74f04e41877cdc3e5/bonjour.txt
+    File: /workspaces/training/side-quests/metadata/work/d3/604274985406e40d79021dea658e60/guten_tag.txt
+    Character: tux
+    Character: turkey
+    File: /workspaces/training/side-quests/metadata/work/d4/fafcc9415b61d2b0fea872e6a05e8a/hello.txt
+    File: /workspaces/training/side-quests/metadata/work/02/468ac9efb27f636715e8144b37e9a7/hallo.txt
+    Character: sheep
+    Character: moose
+    Character: stegosaurus
+    File: /workspaces/training/side-quests/metadata/work/d4/61a7e1188b4f2742bc72004e226eca/salut.txt
+    File: /workspaces/training/side-quests/metadata/work/ae/68364be238c11149c588bf6fc858b1/hola.txt
+    File: /workspaces/training/side-quests/metadata/work/43/05df081af5d879ab52e5828fa0357e/ciao.txt
+    Character: turtle
+    ```
+
+_파일 경로와 캐릭터 값이 출력에서 다른 순서로 나올 수 있습니다._
+
+이것으로 채널의 각 요소에 대한 파일과 캐릭터에 액세스할 수 있는 것이 확인되었습니다.
+
+#### 3.2.3. `COWPY` 프로세스 호출
+
+이제 모든 것을 종합하여 `ch_languages` 채널에서 `COWPY` 프로세스를 실제로 호출해 봅시다.
+
+메인 워크플로에서 다음 코드 변경을 수행하십시오:
+
+=== "수정 후"
+
+    ```groovy title="main.nf" linenums="34"
+        // cowpy를 실행하여 ASCII 아트 생성
+        COWPY(
+            ch_languages.map { meta, file -> file },
+            ch_languages.map { meta, file -> meta.character }
+        )
+    ```
+
+=== "수정 전"
+
+    ```groovy title="main.nf" linenums="34"
+        // 임시: 파일 및 캐릭터 액세스
+        ch_languages.map { meta, file -> [file, meta.character] }
+            .view()
+    ```
+
+두 맵 작업(`.view()` 문 제외)을 프로세스 호출의 입력으로 복사했습니다.
+그 사이에 쉼표를 넣는 것을 잊지 마세요!
+
+조금 번거롭지만 다음 섹션에서 어떻게 개선할 수 있는지 알아볼 것입니다.
+
+이것을 실행해 봅시다:
+
+```bash
+nextflow run main.nf -resume
+```
+
+??? success "명령 출력"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [suspicious_crick] DSL2 - revision: 25541014c5
+
+    executor >  local (7)
+    [43/05df08] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
+    [e7/317c18] COWPY (6)             [100%] 7 of 7 ✔
+    ```
+
+results 디렉토리를 확인하면 각 인사말이 해당 캐릭터에 의해 말해지는 ASCII 아트를 포함하는 개별 파일을 볼 수 있습니다.
+
+??? abstract "디렉토리 및 예제 파일 내용"
+
+    ```console
+    results/
+    ├── cowpy-bonjour.txt
+    ├── cowpy-ciao.txt
+    ├── cowpy-guten_tag.txt
+    ├── cowpy-hallo.txt
+    ├── cowpy-hello.txt
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+    ```
+
+    ```text title="results/cowpy-bonjour.txt"
+     _________________
+    / Bonjour         \
+    \ Salut, à demain /
+    -----------------
+      \
+        \
+                       _ _
+          | \__/|  .~    ~.
+          /oo `./      .'
+          {o__,   \    {
+            / .  . )    \
+            `-` '-' \    }
+          .(   _(   )_.'
+          '---.~_ _ _|
+    ```
+
+이것은 파이프라인의 두 번째 단계에서 명령을 매개변수화하기 위해 메타 맵의 정보를 사용할 수 있었다는 것을 보여줍니다.
+
+그러나 앞서 언급했듯이 워크플로 본문 컨텍스트에서 여전히 메타 데이터를 풀어야 하므로 관련 코드가 조금 번거로웠습니다.
+이 접근 방식은 메타 맵에서 소수의 필드만 사용하는 경우에는 괜찮지만 더 많은 필드를 사용하려면 확장성이 떨어집니다.
+
+조금 간소화할 수 있는 `multiMap()` 연산자가 있지만 그래도 이상적이지는 않습니다.
+
+??? info "(선택 사항) `multiMap()`을 사용한 대체 버전"
+
+    혹시 궁금하다면, 단일 `map()` 작업을 작성하여 `file`과 `character`를 모두 출력할 수 없었던 이유는 그렇게 하면 튜플로 반환되기 때문입니다.
+    프로세스에 `file`과 `character` 요소를 분리하여 제공하기 위해 두 개의 별도 `map()` 작업을 작성해야 했습니다.
+
+    기술적으로 여러 채널을 내보낼 수 있는 `multiMap()` 연산자를 사용하여 단일 매핑 작업을 통해 이를 수행하는 다른 방법이 있습니다.
+    예를 들어 위의 `COWPY` 호출을 다음 코드로 대체할 수 있습니다:
+
+    === "수정 후"
+
+        ```groovy title="main.nf" linenums="34"
+            // cowpy를 실행하여 ASCII 아트 생성
+            COWPY(
+                ch_languages.multiMap { meta, file ->
+                    file: file
+                    character: meta.character
+                }
+            )
+        ```
+
+    === "수정 전"
+
+        ```groovy title="main.nf" linenums="34"
+            // cowpy를 실행하여 ASCII 아트 생성
+            COWPY(
+                ch_languages.map { meta, file -> file },
+                ch_languages.map { meta, file -> meta.character }
+            )
+        ```
+
+    이는 정확히 동일한 결과를 생성합니다.
+
+어느 경우든 워크플로 수준에서 일부 언패킹을 수행해야 하는 것이 불편합니다.
+
+프로세스에 전체 메타 맵을 공급하고 필요한 것을 거기서 선택할 수 있다면 더 좋을 것입니다.
+
+### 3.3. 전체 메타 맵 전달 및 사용
+
+결국 메타 맵의 목적은 모든 메타데이터를 번들로 함께 전달하는 것입니다.
+위에서 그렇게 할 수 없었던 유일한 이유는 프로세스가 메타 맵을 수락하도록 설정되지 않았기 때문입니다.
+그러나 프로세스 코드를 제어하므로 변경할 수 있습니다.
+
+첫 번째 프로세스에서 사용한 것과 같은 `[meta, file]` 튜플 구조를 수용하도록 `COWPY` 프로세스를 수정하여 워크플로를 간소화해 봅시다.
+
+이를 위해 세 가지를 수행해야 합니다:
+
+1. `COWPY` 프로세스 모듈의 입력 정의 수정
+2. 메타 맵을 사용하도록 프로세스 명령 업데이트
+3. 워크플로 본문에서 프로세스 호출 업데이트
+
+준비되셨나요? 시작해 봅시다!
+
+#### 3.3.1. `COWPY` 모듈 입력 수정
+
+`cowpy.nf` 모듈 파일을 다음과 같이 편집하십시오:
+
+=== "수정 후"
+
+    ```groovy title="cowpy.nf" linenums="10" hl_lines="2"
+    input:
+    tuple val(meta), path(input_file)
+    ```
+
+=== "수정 전"
+
+    ```groovy title="cowpy.nf" linenums="10" hl_lines="2-3"
+    input:
+    path(input_file)
+    val character
+    ```
+
+이를 통해 튜토리얼 앞부분에서 다룬 `[meta, file]` 튜플 구조를 사용할 수 있습니다.
+
+이 튜토리얼을 간결하게 유지하기 위해 `IDENTIFY_LANGUAGE` 프로세스 모델에 따라 메타 맵을 출력하도록 프로세스 출력 정의를 업데이트하지 않았지만, 직접 연습해 볼 수 있습니다.
+
+#### 3.3.2. 메타 맵 필드를 사용하도록 명령 업데이트
+
+이제 전체 메타 맵을 프로세스 내에서 사용할 수 있으므로 명령 블록 내에서 직접 포함된 정보를 참조할 수 있습니다.
+
+`cowpy.nf` 모듈 파일을 다음과 같이 편집하십시오:
+
+=== "수정 후"
+
+    ```groovy title="cowpy.nf" linenums="16" hl_lines="3"
+    script:
+    """
+    cat ${input_file} | cowpy -c ${meta.character} > cowpy-${input_file}
+    """
+    ```
+
+=== "수정 전"
+
+    ```groovy title="cowpy.nf" linenums="16" hl_lines="3"
+    script:
+    """
+    cat ${input_file} | cowpy -c ${character} > cowpy-${input_file}
+    """
+    ```
+
+이전에 독립 실행형 입력으로 전달된 `character` 값에 대한 참조를 메타 맵에 보관된 값으로 대체했으며 `meta.character`를 사용하여 참조합니다.
+
+이제 그에 따라 프로세스 호출을 업데이트하겠습니다.
+
+#### 3.3.3. 프로세스 호출 업데이트 및 실행
+
+이제 프로세스는 이전 프로세스가 출력하는 것과 동일한 `[meta, file]` 튜플 구조를 갖는 입력을 기대하므로 `ch_languages` 채널 전체를 `COWPY` 프로세스에 간단히 전달할 수 있습니다.
+
+메인 워크플로를 다음과 같이 편집하십시오:
+
+=== "수정 후"
+
+    ```groovy title="main.nf" linenums="34" hl_lines="2"
+    // cowpy를 실행하여 ASCII 아트 생성
+    COWPY(ch_languages)
+    ```
+
+=== "수정 전"
+
+    ```groovy title="main.nf" linenums="34" hl_lines="3-4"
+    // cowpy를 실행하여 ASCII 아트 생성
+    COWPY(
+        ch_languages.map { meta, file -> file },
+        ch_languages.map { meta, file -> meta.character }
+    )
+    ```
+
+그러면 호출이 크게 간소화됩니다!
+
+이전 실행 결과를 삭제하고 실행해 봅시다:
+
+```bash
+rm -r results
+nextflow run main.nf
+```
+
+??? success "명령 출력"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [wise_sammet] DSL2 - revision: 99797b1e92
+
+    executor >  local (14)
+    [5d/dffd4e] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7 ✔
+    [25/9243df] process > COWPY (7)             [100%] 7 of 7 ✔
+    ```
+
+results 디렉토리를 확인하면 이전과 동일한 출력을 볼 수 있습니다. 각 캐릭터가 말하는 인사말이 포함된 ASCII 아트가 있는 개별 파일입니다.
+
+??? abstract "디렉토리 내용"
+
+    ```console
+    ./results/
+    ├── cowpy-bonjour.txt
+    ├── cowpy-ciao.txt
+    ├── cowpy-guten_tag.txt
+    ├── cowpy-hallo.txt
+    ├── cowpy-hello.txt
+    ├── cowpy-hola.txt
+    └── cowpy-salut.txt
+    ```
+
+따라서 이것은 더 간단한 코드로 이전과 동일한 결과를 생성합니다.
+
+물론 이는 프로세스 코드를 수정할 수 있다는 가정 하에 있습니다.
+경우에 따라서는 수정할 자유가 없는 기존 프로세스에 의존해야 할 수도 있으며, 이는 옵션을 제한합니다.
+[nf-core](https://nf-co.re/) 프로젝트의 모듈을 사용할 계획이라면 좋은 소식은 nf-core 모듈이 모두 표준으로 `[meta, file]` 튜플 구조를 사용하도록 설정되어 있다는 것입니다.
+
+### 3.4. 필수 입력 누락 문제 해결
+
+`character` 값은 `COWPY` 프로세스가 성공적으로 실행되기 위해 필요합니다.
+구성 파일에서 기본값을 설정하지 않으면 데이터시트에 반드시 값을 제공해야 합니다.
+
+**제공하지 않으면 어떻게 될까요?**
+입력 데이터시트에 무엇이 포함되어 있는지와 어떤 버전의 워크플로를 실행하고 있는지에 따라 달라집니다.
+
+#### 3.4.1. character 열이 존재하지만 비어 있는 경우
+
+데이터 수집 오류를 시뮬레이션하기 위해 데이터시트에서 항목 중 하나에 대한 캐릭터 값을 삭제한다고 가정해 봅시다:
+
+```csv title="datasheet.csv" linenums="1" hl_lines="2"
+id,character,recording
+sampleA,,/workspaces/training/side-quests/metadata/data/bonjour.txt
+sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
+sampleC,sheep,/workspaces/training/side-quests/metadata/data/hallo.txt
+sampleD,turkey,/workspaces/training/side-quests/metadata/data/hello.txt
+sampleE,stegosaurus,/workspaces/training/side-quests/metadata/data/hola.txt
+sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
+sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
+```
+
+위에서 사용한 워크플로 버전 모두에서 데이터시트를 읽을 때 모든 항목에 대해 `character` 키가 생성되지만 `sampleA`의 경우 값은 빈 문자열이 됩니다.
+
+이로 인해 오류가 발생할 것입니다.
+
+??? failure "명령 출력"
+
+    ```console hl_lines="8 11 16 28"
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [marvelous_hirsch] DSL2 - revision: 0dfeee3cc1
+
+    executor >  local (9)
+    [c1/c5dd4f] process > IDENTIFY_LANGUAGE (7) [ 85%] 6 of 7
+    [74/e42c8e] process > COWPY (6)             [ 85%] 6 of 7
+    Error executing process > 'COWPY (1)'
+
+    Caused by:
+      Process `COWPY (1)` terminated with an error exit status (1)
+
+    Command executed:
+
+      cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt
+
+    Command exit status:
+      1
+
+    Command output:
+      cowpy: error: argument -c/--cowacter: expected one argument
+
+    Work dir:
+      /workspaces/training/side-quests/metadata/work/c0/24c0c903f6a53e7d40d99f9ebf21b5
+
+    Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+    ```
+
+출력에서 `-c` 플래그 다음에 비어 있는 것을 볼 수 있습니다(`cat bonjour.txt | cowpy -c  > cowpy-bonjour.txt`). 이것은 `character`에 빈 문자열 값이 전달되었기 때문입니다.
+
+동일한 문제가 기본 버전(워크플로 수준에서 `character`를 추출하는 버전)과 최신 버전(프로세스 수준에서 메타 맵을 사용하는 버전) 모두에서 발생합니다.
+각 버전에 대한 오류 메시지는 동일합니다.
+
+이 문제를 해결하기 위해 다음 두 가지 방법 중 하나를 사용할 수 있습니다:
+
+- `COWPY` 프로세스의 기본 `character` 값을 제공합니다.
+- 데이터시트의 모든 행에 유효한 `character` 값이 있는지 확인합니다. `character` 값이 비어 있거나 해당 열이 완전히 누락된 경우에는 채널을 필터링합니다.
+
+#### 3.4.2. character 열이 누락된 경우
+
+만약 데이터시트에 `character` 열이 아예 없다면 어떻게 될까요?
+다음과 같은 상황을 상상해 봅시다:
+
+```csv title="datasheet.csv" linenums="1"
+id,recording
+sampleA,/workspaces/training/side-quests/metadata/data/bonjour.txt
+sampleB,/workspaces/training/side-quests/metadata/data/guten_tag.txt
+```
+
+이 경우 발생하는 상황은 워크플로 버전에 따라 다릅니다.
+
+워크플로 수준에서 `character` 값을 추출한 초기 버전에서는 `splitCsv`에서 행 맵을 검사할 때 `row.character`에 액세스하려고 하면 오류가 발생합니다.
+이 오류는 `character` 필드를 찾을 수 없기 때문에 발생합니다.
+
+프로세스 수준에서 메타 맵을 사용하는 최신 버전에서는 `character` 열이 누락되면 메타 맵에 `character` 키가 생성되지 않습니다.
+그런 다음 `COWPY` 프로세스가 `meta.character`에 액세스하려고 할 때 이 누락된 키에 액세스하려고 하므로 오류가 발생합니다.
+
+결과는 거의 동일하지만 오류 메시지와 발생 위치가 다릅니다.
+
+이 문제를 해결하는 방법도 다양합니다:
+
+- 데이터시트에 `character` 열이 있는지 확인합니다.
+- `COWPY` 프로세스에서 기본 `character` 값을 제공합니다.
+- 워크플로 수준 접근 방식: `character` 열이 누락된 경우 유효한 기본값이 있는지 확인합니다.
+- 프로세스 수준 접근 방식: `meta.character`가 없는 경우 처리하는 조건부 로직을 추가합니다.
+
+### 3.5. 조건부 출력 디렉토리
+
+`publishDir` 지시문의 맥락에서 메타 맵 값을 활용하면 특정 사용 사례에서 동적 디렉터리 경로를 쉽게 생성할 수 있습니다.
+
+이 기능을 사용하여 이전에 식별된 언어 그룹별로 출력 파일을 구성해 봅시다:
+
+=== "수정 후"
+
+    ```groovy title="cowpy.nf" linenums="7" hl_lines="2"
+    publishDir {
+        "${meta.lang_group ? 'results/' + meta.lang_group : 'results/other'}"
+    }, mode: 'copy'
+    ```
+
+=== "수정 전"
+
+    ```groovy title="cowpy.nf" linenums="7" hl_lines="1"
+    publishDir "results/", mode: 'copy'
+    ```
+
+삼항 연산자(`? :`)를 사용하여 메타 맵에 `lang_group` 키가 있는지 확인하고, 있으면 그 값을 사용하고, 없으면 기본 경로 `'results/other'`를 사용하고 있습니다.
+
+이제 워크플로를 실행해 봅시다:
+
+```bash
+rm -rf results
+nextflow run main.nf -resume
+```
+
+??? success "명령 출력"
+
+    ```console
+     N E X T F L O W   ~  version 25.10.2
+
+    Launching `main.nf` [gloomy_yalow] DSL2 - revision: 2b9cf22d5d
+
+    [da/652cc6] process > IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
+    [2c/26e40a] process > COWPY (7)             [100%] 7 of 7 ✔
+    ```
+
+결과 디렉토리를 살펴보면 출력이 이제 언어 계열에 따라 별도의 디렉토리로 구성되어 있는 것을 볼 수 있습니다:
+
+```console
+$ ls -la results/
+total 4
+drwxrwxr-x 4 jovyan users 4096 Feb 21 20:35 .
+drwxrwxr-x 5 jovyan users 4096 Feb 21 20:35 ..
+drwxrwxr-x 2 jovyan users 4096 Feb 21 20:35 germanic
+drwxrwxr-x 2 jovyan users 4096 Feb 21 20:35 romance
+
+$ ls -la results/germanic/
+total 12
+drwxrwxr-x 2 jovyan users 4096 Feb 21 20:35 .
+drwxrwxr-x 4 jovyan users 4096 Feb 21 20:35 ..
+-rw-rw-r-- 1 jovyan users  157 Feb 21 20:35 cowpy-guten_tag.txt
+-rw-rw-r-- 1 jovyan users  108 Feb 21 20:35 cowpy-hallo.txt
+-rw-rw-r-- 1 jovyan users  194 Feb 21 20:35 cowpy-hello.txt
+
+$ ls -la results/romance/
+total 16
+drwxrwxr-x 2 jovyan users 4096 Feb 21 20:35 .
+drwxrwxr-x 4 jovyan users 4096 Feb 21 20:35 ..
+-rw-rw-r-- 1 jovyan users  403 Feb 21 20:35 cowpy-bonjour.txt
+-rw-rw-r-- 1 jovyan users  316 Feb 21 20:35 cowpy-ciao.txt
+-rw-rw-r-- 1 jovyan users  301 Feb 21 20:35 cowpy-hola.txt
+-rw-rw-r-- 1 jovyan users  203 Feb 21 20:35 cowpy-salut.txt
+```
+
+이런 식으로 복잡한 출력 디렉터리 구조를 구성하는 것은 보통 관심 있는 파일 유형을 쉽게 찾고 조직할 수 있는 좋은 방법입니다.
+
+이 튜토리얼에서는 `lang_group`에 따라 파일을 게르만어와 로망스어 그룹으로 분류했습니다.
+
+### 요점
+
+이 섹션에서 다음을 학습했습니다:
+
+- **이름으로 채널 재사용**: `set` 연산자를 사용하여 프로세스의 출력 채널에 쉽게 참조할 수 있는 이름을 지정하는 방법
+- **메타 맵 값 액세스**: 프로세스 내에서 또는 워크플로 수준에서 `meta.fieldname` 구문을 사용하여 액세스하는 방법
+- **다양한 프로세스 호출 전략**: 워크플로 수준에서 개별 값을 전달하거나 전체 메타 맵을 프로세스에 전달하는 방법
+- **조건부 출력 디렉터리**: 메타데이터를 사용하여 결과 파일의 저장 위치를 동적으로 제어하는 방법
+- **오류 디버깅**: 필수 입력이 누락되었을 때 발생하는 문제를 진단하고 해결하는 방법
+
+이러한 기술은 메타데이터가 다양한 파일 그룹에 대한 처리를 지시하는 워크플로에서 특히 중요합니다.
+
+---
+
+## 4. 종합 요약
+
+이 사이드 퀘스트에서 우리는 다음을 수행했습니다:
+
+1. 단순한 데이터시트에서 메타데이터 로드
+2. 메타 맵 구조를 만들어 메타데이터를 구성
+3. 처리 중 메타데이터 추가 및 조작
+4. 프로세스에서 메타 맵 정보 활용
+5. 출력 조직화에 메타데이터 활용
+
+### 메타 맵의 핵심 이점
+
+1. **일관된 채널 구조**: 메타데이터의 양에 관계없이 `[meta, file]` 형식을 유지합니다
+2. **유연성**: 데이터가 워크플로를 통과함에 따라 정보를 추가하거나 수정합니다
+3. **모듈성**: 메타 맵을 인식하는 프로세스를 더 쉽게 공유하고 재사용할 수 있습니다
+4. **맞춤형 처리**: 파일별 속성에 기반한 조건부 실행을 활성화합니다
+5. **체계적인 출력**: 파일의 고유한 특성에 따라 출력을 구성합니다
+
+### 다음 단계
+
+이 사이드 퀘스트에서 얻은 지식을 가지고 이제 다음과 같은 작업을 할 수 있습니다:
+
+- 복잡한 samplesheet를 정리하고 파싱하여 워크플로 메타데이터로 변환
+- 기존 프로세스를 수정하거나 새 프로세스를 작성하여 메타 맵 구조 활용
+- 워크플로 전체에서 중요한 정보를 유지하고 확장하는 메타데이터 체계 설계
+- 메타데이터 속성에 따른 스마트 출력 조직화 및 처리 구성
+
+강력한 Nextflow 사용자는 가능할 때마다 메타 맵을 사용합니다. 이것은 파이프라인을 더 강력하고 유연하게 만드는 핵심 기법입니다.
+
+---
+
+## 5. 추가 참고 자료
+
+더 자세히 알아보려면:
+
+- Nextflow 연산자 참조: [관련 연산자 문서](https://www.nextflow.io/docs/latest/operator.html)
+- 데이터시트 처리: [DSL2 스타일 샘플시트 처리의 예](https://nf-co.re/docs/usage/tutorials/nf_core_dsl2_module)
+- nf-core 기여 가이드라인: [인풋 및 아웃풋 구조 규칙](https://nf-co.re/docs/contributing/guidelines)
+- 메타데이터 필터링: [Nextflow의 필터링 작업](https://www.nextflow.io/docs/latest/operator.html#filtering)
