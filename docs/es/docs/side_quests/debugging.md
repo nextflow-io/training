@@ -181,7 +181,7 @@ workflow {
 
 Para el propósito de este ejemplo, hemos dejado un comentario para mostrarle dónde está el error. La extensión de Nextflow para VSCode también debería estar dándole algunas pistas sobre lo que podría estar mal, poniendo la llave desemparejada en rojo y resaltando el final prematuro del archivo:
 
-![Bad syntax](../../../en/docs/side_quests/img/bad_syntax.png)
+![Bad syntax](img/bad_syntax.png)
 
 **Estrategia de depuración para errores de corchetes:**
 
@@ -330,7 +330,7 @@ workflow {
 
 Mirando la línea 4 en el contexto del error, podemos identificar el problema: estamos usando `inputs` en lugar de la directiva correcta `input`. La extensión de Nextflow para VSCode también marcará esto:
 
-![Invalid process message](../../../en/docs/side_quests/img/invalid_process_message.png)
+![Invalid process message](img/invalid_process_message.png)
 
 #### Corregir el código
 
@@ -748,7 +748,7 @@ workflow {
 
 La extensión de VSCode también resaltará la variable `input_ch` como definida fuera del bloque workflow:
 
-![Non-lethal syntax error](../../../en/docs/side_quests/img/nonlethal.png)
+![Non-lethal syntax error](img/nonlethal.png)
 
 #### Corregir el código
 
@@ -913,7 +913,7 @@ workflow {
 
 Debería ver la llamada desemparejada `PROCESS_FILES`, suministrando múltiples canales de entrada cuando el proceso solo define uno. La extensión de VSCode también subrayará la llamada al proceso en rojo y suministrará un mensaje de diagnóstico cuando pase el mouse:
 
-![Incorrect number of args message](../../../en/docs/side_quests/img/incorrect_num_args.png)
+![Incorrect number of args message](img/incorrect_num_args.png)
 
 #### Corregir el código
 

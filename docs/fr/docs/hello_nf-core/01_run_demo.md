@@ -18,7 +18,7 @@ Commençons par localiser le pipeline nf-core/demo sur le site web du projet à 
 
 Dans votre navigateur web, allez sur [https://nf-co.re/pipelines/](https://nf-co.re/pipelines/) et tapez `demo` dans la barre de recherche.
 
-![résultats de recherche](../../../en/docs/hello_nf-core/img/search-results.png)
+![résultats de recherche](./img/search-results.png)
 
 Cliquez sur le nom du pipeline, `demo`, pour accéder à la page de documentation du pipeline.
 
@@ -43,7 +43,7 @@ Jetez-y un coup d'œil maintenant et voyez si vous pouvez découvrir :
 
 L'onglet `Introduction` fournit un aperçu du pipeline, incluant une représentation visuelle (appelée carte de métro) et une liste des outils qui sont exécutés dans le cadre du pipeline.
 
-![carte de métro du pipeline](../../../en/docs/hello_nf-core/img/nf-core-demo-subway-cropped.png)
+![carte de métro du pipeline](./img/nf-core-demo-subway-cropped.png)
 
 1. Read QC (FASTQC)
 2. Adapter and quality trimming (SEQTK_TRIM)
@@ -366,7 +366,7 @@ Pour en savoir plus sur les sorties du pipeline `nf-core/demo`, consultez sa [pa
 
 Par exemple, le fichier `execution_timeline_*` vous montre quels processus ont été exécutés, dans quel ordre et combien de temps ils ont pris pour s'exécuter :
 
-![rapport de chronologie d'exécution](../../../en/docs/hello_nf-core/img/execution_timeline.png)
+![rapport de chronologie d'exécution](./img/execution_timeline.png)
 
 !!! note
 

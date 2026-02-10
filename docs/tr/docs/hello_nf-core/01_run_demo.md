@@ -18,7 +18,7 @@ nf-core projesi tarafından kod yapısını ve araç işlemlerini göstermek ama
 
 Web tarayıcınızda [https://nf-co.re/pipelines/](https://nf-co.re/pipelines/) adresine gidin ve arama çubuğuna `demo` yazın.
 
-![arama sonuçları](../../../en/docs/hello_nf-core/img/search-results.png)
+![arama sonuçları](./img/search-results.png)
 
 Pipeline dokümantasyon sayfasına erişmek için pipeline adına, `demo`, tıklayın.
 
@@ -43,7 +43,7 @@ Yeni bir pipeline'ı kullanmayı düşündüğünüzde, ne yaptığını ve çal
 
 `Introduction` sekmesi, görsel bir temsil (metro haritası olarak adlandırılır) ve pipeline'ın bir parçası olarak çalıştırılan araçların listesi dahil olmak üzere pipeline'a genel bir bakış sağlar.
 
-![pipeline metro haritası](../../../en/docs/hello_nf-core/img/nf-core-demo-subway-cropped.png)
+![pipeline metro haritası](./img/nf-core-demo-subway-cropped.png)
 
 1. Read QC (FASTQC)
 2. Adapter and quality trimming (SEQTK_TRIM)
@@ -366,7 +366,7 @@ Bu aşamada, gözlemlenmesi gereken önemli şey, sonuçların modüle göre dü
 
 Örneğin, `execution_timeline_*` dosyası hangi process'lerin çalıştırıldığını, hangi sırayla ve çalışmalarının ne kadar sürdüğünü gösterir:
 
-![çalıştırma zaman çizelgesi raporu](../../../en/docs/hello_nf-core/img/execution_timeline.png)
+![çalıştırma zaman çizelgesi raporu](./img/execution_timeline.png)
 
 !!! note
 

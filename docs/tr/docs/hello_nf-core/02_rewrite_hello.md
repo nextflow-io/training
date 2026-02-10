@@ -221,7 +221,7 @@ tree core-hello-results
 
 Ne çalıştırıldığını görmek için raporlara bir göz atabilirsiniz ve cevap şu: hiçbir şey!
 
-![boş yürütme zaman çizelgesi raporu](../../../en/docs/hello_nf-core/img/execution_timeline_empty.png)
+![boş yürütme zaman çizelgesi raporu](./img/execution_timeline_empty.png)
 
 Kodda gerçekte ne olduğuna bir göz atalım.
 
@@ -1379,7 +1379,7 @@ tree core-hello-results
 Workflow henüz yalnızca bir yer tutucu iken ilk çalıştırmada elde ettiklerimize ek olarak başka bir yürütme raporu seti aldığımızı görebilirsiniz.
 Bu sefer beklendiği gibi çalıştırılan tüm görevleri görüyorsunuz.
 
-![Hello pipeline'ı için yürütme zaman çizelgesi raporu](../../../en/docs/hello_nf-core/img/execution_timeline_hello.png)
+![Hello pipeline'ı için yürütme zaman çizelgesi raporu](./img/execution_timeline_hello.png)
 
 !!! note
 

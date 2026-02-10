@@ -27,8 +27,8 @@ additional_information:
 
 **Hello nf-core è un'introduzione pratica all'uso delle risorse e delle best practice di nf-core.**
 
-![nf-core logo](../../../en/docs/hello_nf-core/img/nf-core-logo.png#only-light)
-![nf-core logo](../../../en/docs/hello_nf-core/img/nf-core-logo-darkbg.png#only-dark)
+![nf-core logo](./img/nf-core-logo.png#only-light)
+![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)
 
 Attraverso esempi pratici ed esercizi guidati, imparerete a utilizzare e sviluppare moduli e pipeline compatibili con nf-core, e a utilizzare efficacemente gli strumenti nf-core.
 

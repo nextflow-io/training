@@ -5,7 +5,7 @@
 Wykrywanie wariantów to metoda analizy genomicznej, której celem jest identyfikacja zmian w sekwencji genomu względem genomu referencyjnego.
 Tutaj użyjemy narzędzi i metod zaprojektowanych do wykrywania krótkich wariantów zarodkowych, _tj._ SNP i indeli, w danych z sekwencjonowania całego genomu.
 
-![Pipeline GATK](../../../../en/docs/nf4_science/genomics/img/gatk-pipeline.png)
+![Pipeline GATK](img/gatk-pipeline.png)
 
 Pełny pipeline wykrywania wariantów zazwyczaj obejmuje wiele kroków, w tym mapowanie do referencji (czasami nazywane dopasowaniem genomu) oraz filtrowanie i priorytetyzację wariantów.
 Dla uproszczenia, w tym szkoleniu skupimy się tylko na części dotyczącej wykrywania wariantów.
@@ -312,7 +312,7 @@ GATK oferuje alternatywną metodę zwaną wspólnym wykrywaniem wariantów w tym
 
 Wspólne wykrywanie wariantów polega na wygenerowaniu specjalnego rodzaju wyjścia wariantów zwanego GVCF (Genomic VCF) dla każdej próbki, następnie połączeniu danych GVCF ze wszystkich próbek i uruchomieniu analizy statystycznej 'wspólnego genotypowania'.
 
-![Analiza wspólna](../../../../en/docs/nf4_science/genomics/img/joint-calling.png)
+![Analiza wspólna](img/joint-calling.png)
 
 To, co jest specjalne w GVCF próbki, to że zawiera rekordy podsumowujące statystyki danych sekwencjonowania o wszystkich pozycjach w docelowym obszarze genomu, nie tylko pozycjach, gdzie program znalazł dowody zmienności.
 Jest to kluczowe dla obliczeń wspólnego genotypowania ([dalsze informacje](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).

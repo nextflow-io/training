@@ -24,7 +24,7 @@ Como alternativa, você pode clicar no botão mostrado abaixo, que é repetido e
 
 Você deve ver uma página onde pode criar um novo GitHub Codespace:
 
-![Create a GitHub Codespace](../../../en/docs/envsetup/img/codespaces_create.png)
+![Create a GitHub Codespace](img/codespaces_create.png)
 
 ### Configuração
 
@@ -61,7 +61,7 @@ No entanto, não deve levar mais de cinco minutos.
 
 Depois que seu GitHub Codespaces carregar, você deve ver algo semelhante ao seguinte (que pode abrir no modo claro, dependendo das preferências da sua conta):
 
-![GitHub Codespaces welcome](../../../en/docs/envsetup/img/codespaces_welcome.png)
+![GitHub Codespaces welcome](img/codespaces_welcome.png)
 
 Esta é a interface do VSCode IDE, uma aplicação popular de desenvolvimento de código que recomendamos usar para o desenvolvimento com Nextflow.
 
@@ -84,7 +84,7 @@ Você pode reabrir um ambiente em <https://github.com/codespaces/>.
 Os ambientes anteriores serão listados.
 Clique em uma sessão para retomá-la.
 
-![List GitHub Codespace sessions](../../../en/docs/envsetup/img/codespaces_list.png)
+![List GitHub Codespace sessions](img/codespaces_list.png)
 
 Se você salvou a URL do seu ambiente GitHub Codespaces anterior, pode simplesmente abri-la no seu navegador.
 Como alternativa, clique no mesmo botão que você usou para criá-lo inicialmente:
@@ -93,7 +93,7 @@ Como alternativa, clique no mesmo botão que você usou para criá-lo inicialmen
 
 Você deve ver a sessão anterior, a opção padrão é retomá-la:
 
-![Resume a GitHub Codespace](../../../en/docs/envsetup/img/codespaces_resume.png)
+![Resume a GitHub Codespace](img/codespaces_resume.png)
 
 ### Salvando arquivos na sua máquina local
 

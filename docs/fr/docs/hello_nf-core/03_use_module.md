@@ -45,7 +45,7 @@ Le projet nf-core maintient un catalogue centralisé de modules sur [https://nf-
 
 Accédez à la page des modules dans votre navigateur web et utilisez la barre de recherche pour rechercher 'concatenate'.
 
-![résultats de recherche de module](../../../en/docs/hello_nf-core/img/module-search-results.png)
+![résultats de recherche de module](./img/module-search-results.png)
 
 Comme vous pouvez le voir, il y a pas mal de résultats, dont beaucoup sont des modules conçus pour concaténer des types de fichiers très spécifiques.
 Parmi eux, vous devriez voir un module appelé `cat_cat` qui est générique.

@@ -275,7 +275,7 @@ INFO     Writing schema with 17 params: 'nextflow_schema.json'
 
 브라우저가 열리면서 Parameter schema builder가 표시됩니다:
 
-![Schema builder 인터페이스](../../../en/docs/hello_nf-core/img/schema_build.png)
+![Schema builder 인터페이스](./img/schema_build.png)
 
 `batch` 매개변수를 추가하려면:
 
@@ -288,7 +288,7 @@ INFO     Writing schema with 17 params: 'nextflow_schema.json'
    - **Required**: 체크박스 선택
    - 선택적으로, 아이콘 선택기에서 아이콘 선택 (예: `fas fa-layer-group`)
 
-![batch 매개변수 추가](../../../en/docs/hello_nf-core/img/schema_add.png)
+![batch 매개변수 추가](./img/schema_add.png)
 
 완료되면 오른쪽 상단의 **"Finished"** 버튼을 클릭하십시오.
 

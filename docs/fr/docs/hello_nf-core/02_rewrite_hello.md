@@ -221,7 +221,7 @@ tree core-hello-results
 
 Vous pouvez jeter un œil aux rapports pour voir ce qui a été exécuté, et la réponse est : rien du tout !
 
-![rapport de chronologie d'exécution vide](../../../en/docs/hello_nf-core/img/execution_timeline_empty.png)
+![rapport de chronologie d'exécution vide](./img/execution_timeline_empty.png)
 
 Regardons ce qu'il y a réellement dans le code.
 
@@ -1380,7 +1380,7 @@ tree core-hello-results
 Vous voyez que nous avons obtenu un autre ensemble de rapports d'exécution en plus de ceux que nous avons obtenus lors de la première exécution, lorsque le workflow n'était encore qu'un substitut.
 Cette fois, vous voyez toutes les tâches qui ont été exécutées comme prévu.
 
-![rapport de chronologie d'exécution pour le pipeline Hello](../../../en/docs/hello_nf-core/img/execution_timeline_hello.png)
+![rapport de chronologie d'exécution pour le pipeline Hello](./img/execution_timeline_hello.png)
 
 !!! note "Note"
 

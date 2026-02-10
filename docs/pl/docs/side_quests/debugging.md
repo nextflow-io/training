@@ -181,7 +181,7 @@ workflow {
 
 Na potrzeby tego przykładu zostawiliśmy komentarz pokazujący, gdzie jest błąd. Rozszerzenie Nextflow VSCode powinno również dawać wskazówki o tym, co może być nie tak, podświetlając niedopasowany nawias na czerwono i zaznaczając przedwczesny koniec pliku:
 
-![Bad syntax](../../../en/docs/side_quests/img/bad_syntax.png)
+![Bad syntax](img/bad_syntax.png)
 
 **Strategia debugowania błędów nawiasów:**
 
@@ -330,7 +330,7 @@ workflow {
 
 Patrząc na linię 4 w kontekście błędu, możemy dostrzec problem: używamy `inputs` zamiast poprawnego `input`. Rozszerzenie Nextflow VSCode również oznaczy to:
 
-![Invalid process message](../../../en/docs/side_quests/img/invalid_process_message.png)
+![Invalid process message](img/invalid_process_message.png)
 
 #### Napraw kod
 
@@ -748,7 +748,7 @@ workflow {
 
 Rozszerzenie VSCode również podświetli zmienną `input_ch` jako zdefiniowaną poza blokiem `workflow`:
 
-![Non-lethal syntax error](../../../en/docs/side_quests/img/nonlethal.png)
+![Non-lethal syntax error](img/nonlethal.png)
 
 #### Napraw kod
 
@@ -913,7 +913,7 @@ workflow {
 
 Powinieneś zobaczyć niedopasowane wywołanie `PROCESS_FILES`, dostarczające wiele kanałów wejściowych, gdy proces definiuje tylko jeden. Rozszerzenie VSCode również podkreśli wywołanie procesu na czerwono i dostarczy komunikat diagnostyczny przy najechaniu myszką:
 
-![Incorrect number of args message](../../../en/docs/side_quests/img/incorrect_num_args.png)
+![Incorrect number of args message](img/incorrect_num_args.png)
 
 #### Napraw kod
 

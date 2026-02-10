@@ -275,7 +275,7 @@ Etkileşimli web arayüzünü başlatmak için `y` yazın ve Enter tuşuna bası
 
 Tarayıcınız Parametre şeması oluşturucusunu göstererek açılacaktır:
 
-![Şema oluşturucu arayüzü](../../../en/docs/hello_nf-core/img/schema_build.png)
+![Şema oluşturucu arayüzü](./img/schema_build.png)
 
 `batch` parametresini eklemek için:
 
@@ -288,7 +288,7 @@ Tarayıcınız Parametre şeması oluşturucusunu göstererek açılacaktır:
    - **Required**: onay kutusunu işaretleyin
    - İsteğe bağlı olarak, simge seçiciden bir simge seçin (örn., `fas fa-layer-group`)
 
-![Batch parametresinin eklenmesi](../../../en/docs/hello_nf-core/img/schema_add.png)
+![Batch parametresinin eklenmesi](./img/schema_add.png)
 
 İşiniz bittiğinde, sağ üstteki **"Finished"** düğmesine tıklayın.
 

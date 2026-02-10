@@ -45,7 +45,7 @@ Projekt nf-core utrzymuje scentralizowany katalog modułów pod adresem [https:/
 
 Przejdź do strony modułów w Swojej przeglądarce internetowej i użyj paska wyszukiwania, aby wyszukać 'concatenate'.
 
-![wyniki wyszukiwania modułów](../../../en/docs/hello_nf-core/img/module-search-results.png)
+![wyniki wyszukiwania modułów](./img/module-search-results.png)
 
 Jak widać, jest sporo wyników, wiele z nich to moduły zaprojektowane do łączenia bardzo specyficznych typów plików.
 Wśród nich powinieneś zobaczyć jeden o nazwie `cat_cat`, który jest ogólnego przeznaczenia.

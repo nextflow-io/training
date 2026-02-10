@@ -221,7 +221,7 @@ tree core-hello-results
 
 Você pode dar uma olhada nos relatórios para ver o que foi executado, e a resposta é: nada!
 
-![relatório de timeline de execução vazio](../../../en/docs/hello_nf-core/img/execution_timeline_empty.png)
+![relatório de timeline de execução vazio](./img/execution_timeline_empty.png)
 
 Vamos dar uma olhada no que realmente está no código.
 
@@ -1380,7 +1380,7 @@ tree core-hello-results
 Você vê que obtivemos outro conjunto de relatórios de execução além dos que obtivemos da primeira execução, quando o fluxo de trabalho ainda era apenas um placeholder.
 Desta vez você vê todas as tarefas que foram executadas como esperado.
 
-![relatório de timeline de execução para o pipeline Hello](../../../en/docs/hello_nf-core/img/execution_timeline_hello.png)
+![relatório de timeline de execução para o pipeline Hello](./img/execution_timeline_hello.png)
 
 !!! note "Nota"
 

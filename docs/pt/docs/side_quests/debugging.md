@@ -181,7 +181,7 @@ workflow {
 
 Para o propósito deste exemplo, deixamos um comentário para você mostrar onde está o erro. A extensão Nextflow do VSCode também deve estar dando algumas dicas sobre o que pode estar errado, colocando a chave incompatível em vermelho e destacando o fim prematuro do arquivo:
 
-![Bad syntax](../../../en/docs/side_quests/img/bad_syntax.png)
+![Bad syntax](img/bad_syntax.png)
 
 **Estratégia de depuração para erros de chaves:**
 
@@ -330,7 +330,7 @@ workflow {
 
 Olhando para a linha 4 no contexto do erro, podemos identificar o problema: estamos usando `inputs` em vez da diretiva correta `input`. A extensão Nextflow do VSCode também sinalizará isso:
 
-![Invalid process message](../../../en/docs/side_quests/img/invalid_process_message.png)
+![Invalid process message](img/invalid_process_message.png)
 
 #### Corrija o código
 
@@ -748,7 +748,7 @@ workflow {
 
 A extensão VSCode também destacará a variável `input_ch` como sendo definida fora do bloco workflow:
 
-![Non-lethal syntax error](../../../en/docs/side_quests/img/nonlethal.png)
+![Non-lethal syntax error](img/nonlethal.png)
 
 #### Corrija o código
 
@@ -913,7 +913,7 @@ workflow {
 
 Você deve ver a chamada `PROCESS_FILES` incompatível, fornecendo múltiplos canais de entrada quando o processo define apenas um. A extensão VSCode também sublinhará a chamada do processo em vermelho e fornecerá uma mensagem de diagnóstico quando você passar o mouse:
 
-![Incorrect number of args message](../../../en/docs/side_quests/img/incorrect_num_args.png)
+![Incorrect number of args message](img/incorrect_num_args.png)
 
 #### Corrija o código
 

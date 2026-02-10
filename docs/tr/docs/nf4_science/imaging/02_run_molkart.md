@@ -32,7 +32,7 @@ nf-core pipeline'larının temel özellikleri:
 
 ### 1.2. molkart pipeline'ı
 
-![nf-core/molkart pipeline'ı](../../../../en/docs/nf4_science/imaging/img/molkart.png)
+![nf-core/molkart pipeline'ı](img/molkart.png)
 
 [nf-core/molkart](https://nf-co.re/molkart) pipeline'ı, uzamsal transkriptomik görüntüleme verilerini birkaç aşamadan geçirerek işler:
 

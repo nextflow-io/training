@@ -5,7 +5,7 @@
 Chamada de variantes é um método de análise genômica que visa identificar variações em uma sequência genômica em relação a um genoma de referência.
 Aqui vamos usar ferramentas e métodos projetados para chamar variantes germinativas curtas, _ou seja_, SNPs e indels, em dados de sequenciamento de genoma completo.
 
-![Pipeline GATK](../../../../en/docs/nf4_science/genomics/img/gatk-pipeline.png)
+![Pipeline GATK](img/gatk-pipeline.png)
 
 Um pipeline completo de chamada de variantes normalmente envolve muitas etapas, incluindo mapeamento para a referência (às vezes chamado de alinhamento genômico) e filtragem e priorização de variantes.
 Para simplificar, neste curso vamos focar apenas na parte de chamada de variantes.
@@ -312,7 +312,7 @@ O GATK oferece um método alternativo chamado chamada conjunta de variantes para
 
 A chamada conjunta de variantes envolve gerar um tipo especial de saída de variante chamado GVCF (para Genomic VCF) para cada amostra, depois combinar os dados GVCF de todas as amostras e executar uma análise estatística de 'genotipagem conjunta'.
 
-![Análise conjunta](../../../../en/docs/nf4_science/genomics/img/joint-calling.png)
+![Análise conjunta](img/joint-calling.png)
 
 O que é especial sobre o GVCF de uma amostra é que ele contém registros resumindo estatísticas de dados de sequência sobre todas as posições na área alvo do genoma, não apenas as posições onde o programa encontrou evidência de variação.
 Isso é crítico para o cálculo de genotipagem conjunta ([leitura adicional](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).

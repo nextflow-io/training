@@ -181,7 +181,7 @@ workflow {
 
 Per gli scopi di questo esempio abbiamo lasciato un commento per mostrarvi dove si trova l'errore. L'estensione Nextflow per VSCode dovrebbe anche darvi alcuni suggerimenti su cosa potrebbe essere sbagliato, mettendo la parentesi graffa non corrispondente in rosso e evidenziando la fine prematura del file:
 
-![Bad syntax](../../../en/docs/side_quests/img/bad_syntax.png)
+![Bad syntax](img/bad_syntax.png)
 
 **Strategia di debug per errori di parentesi:**
 
@@ -330,7 +330,7 @@ workflow {
 
 Guardando la riga 4 nel contesto dell'errore, possiamo individuare il problema: stiamo usando `inputs` invece della corretta direttiva `input`. L'estensione Nextflow per VSCode segnalerà anche questo:
 
-![Invalid process message](../../../en/docs/side_quests/img/invalid_process_message.png)
+![Invalid process message](img/invalid_process_message.png)
 
 #### Correggere il codice
 
@@ -748,7 +748,7 @@ workflow {
 
 Anche l'estensione VSCode evidenzierà la variabile `input_ch` come definita fuori dal blocco workflow:
 
-![Non-lethal syntax error](../../../en/docs/side_quests/img/nonlethal.png)
+![Non-lethal syntax error](img/nonlethal.png)
 
 #### Correggere il codice
 
@@ -913,7 +913,7 @@ workflow {
 
 Dovreste vedere la chiamata a `PROCESS_FILES` non corrispondente, che fornisce più canali di input quando il processo ne definisce solo uno. L'estensione VSCode sottolineerà anche la chiamata al processo in rosso e fornirà un messaggio diagnostico quando ci passate sopra con il mouse:
 
-![Incorrect number of args message](../../../en/docs/side_quests/img/incorrect_num_args.png)
+![Incorrect number of args message](img/incorrect_num_args.png)
 
 #### Correggere il codice
 

@@ -24,7 +24,7 @@ Vous pouvez également cliquer sur le bouton ci-dessous, qui est répété dans 
 
 Vous devriez voir une page où vous pouvez créer un nouveau GitHub Codespace :
 
-![Créer un GitHub Codespace](../../../en/docs/envsetup/img/codespaces_create.png)
+![Créer un GitHub Codespace](img/codespaces_create.png)
 
 ### Configuration
 
@@ -61,7 +61,7 @@ Cependant, cela ne devrait pas prendre plus de cinq minutes.
 
 Une fois votre GitHub Codespaces chargé, vous devriez voir quelque chose de similaire à ce qui suit (qui peut s'ouvrir en mode clair selon les préférences de votre compte) :
 
-![Accueil GitHub Codespaces](../../../en/docs/envsetup/img/codespaces_welcome.png)
+![Accueil GitHub Codespaces](img/codespaces_welcome.png)
 
 Ceci est l'interface de l'IDE VSCode, une application de développement de code populaire que nous recommandons d'utiliser pour le développement Nextflow.
 
@@ -84,7 +84,7 @@ Vous pouvez rouvrir un environnement depuis <https://github.com/codespaces/>.
 Les environnements précédents seront listés.
 Cliquez sur une session pour la reprendre.
 
-![Liste des sessions GitHub Codespace](../../../en/docs/envsetup/img/codespaces_list.png)
+![Liste des sessions GitHub Codespace](img/codespaces_list.png)
 
 Si vous avez enregistré l'URL de votre environnement GitHub Codespaces précédent, vous pouvez simplement l'ouvrir dans votre navigateur.
 Sinon, cliquez sur le même bouton que vous avez utilisé pour le créer initialement :
@@ -93,7 +93,7 @@ Sinon, cliquez sur le même bouton que vous avez utilisé pour le créer initial
 
 Vous devriez voir la session précédente, l'option par défaut est de la reprendre :
 
-![Reprendre un GitHub Codespace](../../../en/docs/envsetup/img/codespaces_resume.png)
+![Reprendre un GitHub Codespace](img/codespaces_resume.png)
 
 ### Enregistrement de fichiers sur votre machine locale
 

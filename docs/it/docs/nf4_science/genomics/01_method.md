@@ -5,7 +5,7 @@
 Il variant calling è un metodo di analisi genomica che mira a identificare variazioni in una sequenza genomica rispetto a un genoma di riferimento.
 Qui utilizzeremo strumenti e metodi progettati per identificare varianti germinali brevi, _cioè_ SNP e indel, in dati di sequenziamento dell'intero genoma.
 
-![Pipeline GATK](../../../../en/docs/nf4_science/genomics/img/gatk-pipeline.png)
+![Pipeline GATK](img/gatk-pipeline.png)
 
 Una pipeline completa di variant calling comprende tipicamente molti passaggi, incluso il mapping al riferimento (a volte chiamato allineamento genomico) e il filtraggio e la prioritizzazione delle varianti.
 Per semplicità, in questo corso ci concentreremo solo sulla parte di variant calling.
@@ -312,7 +312,7 @@ GATK offre un metodo alternativo chiamato joint variant calling per questo scopo
 
 Il joint variant calling comporta la generazione di un tipo speciale di output di varianti chiamato GVCF (per Genomic VCF) per ciascun campione, quindi la combinazione dei dati GVCF di tutti i campioni e l'esecuzione di un'analisi statistica di 'joint genotyping'.
 
-![Analisi congiunta](../../../../en/docs/nf4_science/genomics/img/joint-calling.png)
+![Analisi congiunta](img/joint-calling.png)
 
 Ciò che è speciale nel GVCF di un campione è che contiene record che riassumono le statistiche dei dati di sequenza per tutte le posizioni nell'area mirata del genoma, non solo le posizioni in cui il programma ha trovato evidenze di variazione.
 Questo è fondamentale per il calcolo del joint genotyping ([ulteriori informazioni](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).

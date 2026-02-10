@@ -24,7 +24,7 @@ Alternatif olarak, aşağıda gösterilen düğmeye tıklayabilirsiniz; bu düğ
 
 Yeni bir GitHub Codespace oluşturabileceğiniz bir sayfa ile karşılaşmalısınız:
 
-![Create a GitHub Codespace](../../../en/docs/envsetup/img/codespaces_create.png)
+![Create a GitHub Codespace](img/codespaces_create.png)
 
 ### Yapılandırma
 
@@ -61,7 +61,7 @@ Ancak beş dakikadan fazla sürmemelidir.
 
 GitHub Codespaces'iniz yüklendikten sonra, aşağıdakine benzer bir şey görmelisiniz (hesap tercihlerinize bağlı olarak açık modda açılabilir):
 
-![GitHub Codespaces welcome](../../../en/docs/envsetup/img/codespaces_welcome.png)
+![GitHub Codespaces welcome](img/codespaces_welcome.png)
 
 Bu, Nextflow geliştirme için kullanmanızı önerdiğimiz popüler bir kod geliştirme uygulaması olan VSCode IDE'nin arayüzüdür.
 
@@ -84,7 +84,7 @@ Ortamınız 30 dakikalık hareketsizlikten sonra zaman aşımına uğrar ve değ
 Önceki ortamlar listelenecektir.
 Devam etmek için bir oturuma tıklayın.
 
-![List GitHub Codespace sessions](../../../en/docs/envsetup/img/codespaces_list.png)
+![List GitHub Codespace sessions](img/codespaces_list.png)
 
 Önceki GitHub Codespaces ortamınızın URL'sini kaydettiyseniz, tarayıcınızda açabilirsiniz.
 Alternatif olarak, ilk başta oluşturmak için kullandığınız düğmeye tıklayın:
@@ -93,7 +93,7 @@ Alternatif olarak, ilk başta oluşturmak için kullandığınız düğmeye tık
 
 Önceki oturumu görmelisiniz, varsayılan seçenek devam etmektir:
 
-![Resume a GitHub Codespace](../../../en/docs/envsetup/img/codespaces_resume.png)
+![Resume a GitHub Codespace](img/codespaces_resume.png)
 
 ### Dosyaları yerel makinenize kaydetme
 

@@ -5,7 +5,7 @@
 L'appel de variants est une méthode d'analyse génomique qui vise à identifier les variations dans une séquence génomique par rapport à un génome de référence.
 Nous allons utiliser ici des outils et des méthodes conçus pour appeler des variants germinaux courts, _c'est-à-dire_ des SNP et des indels, dans des données de séquençage de génome entier.
 
-![Pipeline GATK](../../../../en/docs/nf4_science/genomics/img/gatk-pipeline.png)
+![Pipeline GATK](img/gatk-pipeline.png)
 
 Un pipeline complet d'appel de variants implique généralement de nombreuses étapes, notamment l'alignement sur la référence (parfois appelé alignement du génome) ainsi que le filtrage et la priorisation des variants.
 Pour des raisons de simplicité, dans ce cours nous allons nous concentrer uniquement sur la partie appel de variants.
@@ -311,7 +311,7 @@ GATK propose une méthode alternative appelée appel de variants conjoint à cet
 
 L'appel de variants conjoint implique de générer un type spécial de sortie de variant appelé GVCF (pour Genomic VCF) pour chaque échantillon, puis de combiner les données GVCF de tous les échantillons et d'exécuter une analyse statistique de 'génotypage conjoint'.
 
-![Analyse conjointe](../../../../en/docs/nf4_science/genomics/img/joint-calling.png)
+![Analyse conjointe](img/joint-calling.png)
 
 Ce qui est spécial dans le GVCF d'un échantillon, c'est qu'il contient des enregistrements résumant les statistiques des données de séquençage pour toutes les positions dans la zone ciblée du génome, et pas seulement les positions où le programme a trouvé des preuves de variation.
 Ceci est essentiel pour le calcul du génotypage conjoint ([lecture complémentaire](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).

@@ -275,7 +275,7 @@ Digitate `y` e premete Invio per avviare l'interfaccia web interattiva.
 
 Il vostro browser si aprirà mostrando il costruttore dello schema dei parametri:
 
-![Interfaccia del costruttore dello schema](../../../en/docs/hello_nf-core/img/schema_build.png)
+![Interfaccia del costruttore dello schema](./img/schema_build.png)
 
 Per aggiungere il parametro `batch`:
 
@@ -288,7 +288,7 @@ Per aggiungere il parametro `batch`:
    - **Required**: spuntate la casella
    - Opzionalmente, selezionate un'icona dal selettore di icone (ad es., `fas fa-layer-group`)
 
-![Aggiunta del parametro batch](../../../en/docs/hello_nf-core/img/schema_add.png)
+![Aggiunta del parametro batch](./img/schema_add.png)
 
 Quando avete finito, cliccate sul pulsante **"Finished"** in alto a destra.
 

@@ -275,7 +275,7 @@ Escriba `y` y presione Enter para lanzar la interfaz web interactiva.
 
 Su navegador se abrirá mostrando el constructor de schema de parámetros:
 
-![Interfaz del constructor de schema](../../../en/docs/hello_nf-core/img/schema_build.png)
+![Interfaz del constructor de schema](./img/schema_build.png)
 
 Para agregar el parámetro `batch`:
 
@@ -288,7 +288,7 @@ Para agregar el parámetro `batch`:
    - **Required**: marque la casilla
    - Opcionalmente, seleccione un icono del selector de iconos (por ejemplo, `fas fa-layer-group`)
 
-![Agregando el parámetro batch](../../../en/docs/hello_nf-core/img/schema_add.png)
+![Agregando el parámetro batch](./img/schema_add.png)
 
 Cuando termine, haga clic en el botón **"Finished"** en la parte superior derecha.
 

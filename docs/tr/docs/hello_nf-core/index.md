@@ -27,8 +27,8 @@ additional_information:
 
 **Hello nf-core, nf-core kaynaklarını ve en iyi uygulamalarını kullanmaya yönelik uygulamalı bir giriştir.**
 
-![nf-core logo](../../../en/docs/hello_nf-core/img/nf-core-logo.png#only-light)
-![nf-core logo](../../../en/docs/hello_nf-core/img/nf-core-logo-darkbg.png#only-dark)
+![nf-core logo](./img/nf-core-logo.png#only-light)
+![nf-core logo](./img/nf-core-logo-darkbg.png#only-dark)
 
 Pratik örnekler ve rehberli alıştırmalar üzerinden çalışarak, nf-core uyumlu modüller ve pipeline'lar kullanmayı ve geliştirmeyi, ayrıca nf-core araçlarını etkili bir şekilde kullanmayı öğreneceksiniz.
 

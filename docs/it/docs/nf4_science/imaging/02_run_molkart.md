@@ -32,7 +32,7 @@ Caratteristiche chiave delle pipeline nf-core:
 
 ### 1.2. La pipeline molkart
 
-![nf-core/molkart pipeline](../../../../en/docs/nf4_science/imaging/img/molkart.png)
+![nf-core/molkart pipeline](img/molkart.png)
 
 La pipeline [nf-core/molkart](https://nf-co.re/molkart) elabora dati di imaging di trascrittomica spaziale attraverso diverse fasi:
 

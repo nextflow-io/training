@@ -37,7 +37,7 @@ Segua questi passaggi per configurare il vostro ambiente locale utilizzando i de
 - Cerchi "Dev Containers"
 - Clicchi su "Install"
 
-![Installing Dev Containers extension in VS Code](../../../en/docs/envsetup/img/install_extension.png)
+![Installing Dev Containers extension in VS Code](img/install_extension.png)
 
 ### Clonare il repository:
 
@@ -61,9 +61,9 @@ Se VS Code vi chiede di "Reopen in Container", cliccate su di esso. In alternati
 - Digiti "Dev Containers: Reopen in Container"
 - **Importante**: Quando Le viene chiesto di selezionare una configurazione, scelga la configurazione devcontainer **local-dev**
 
-![Reopen in Container prompt](../../../en/docs/envsetup/img/reopen_prompt.png)
+![Reopen in Container prompt](img/reopen_prompt.png)
 
-![Selecting local configuration](../../../en/docs/envsetup/img/select_local_config.png)
+![Selecting local configuration](img/select_local_config.png)
 
 Attenda che il container venga costruito. Questo potrebbe richiedere alcuni minuti la prima volta poiché scarica e configura tutti i componenti necessari.
 
@@ -75,7 +75,7 @@ Una volta che il container è costruito e in esecuzione, avrà un ambiente compl
 - Git
 - E tutte le altre dipendenze richieste per la formazione
 
-![VS Code with devcontainer running](../../../en/docs/envsetup/img/running_container.png)
+![VS Code with devcontainer running](img/running_container.png)
 
 ## Vantaggi dell'utilizzo dei Devcontainers
 

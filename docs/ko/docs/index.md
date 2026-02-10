@@ -59,7 +59,7 @@ hide:
 
     ??? licensing "오픈소스 라이선스 및 기여 정책"
 
-        [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](../../en/docs/assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+        [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](assets/img/cc_by-nc-sa.svg){ align=right }](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
         이 교육 자료는 [Seqera](https://seqera.io)에서 개발 및 유지 관리하며, 커뮤니티의 이익을 위해 오픈소스 라이선스([CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/))로 공개됩니다. 이 자료를 라이선스 범위를 벗어나는 방식으로 사용하고자 하는 경우(상업적 사용 및 재배포에 대한 제한 사항 참고), [community@seqera.io](mailto:community@seqera.io)로 연락하여 요청 사항을 논의해 주시기 바랍니다.
 
@@ -167,8 +167,8 @@ hide:
 
 <div markdown class="homepage_logos">
 
-![Seqera](../../en/docs/assets/img/seqera_logo.png#only-light)
+![Seqera](assets/img/seqera_logo.png#only-light)
 
-![Seqera](../../en/docs/assets/img/seqera_logo_dark.png#only-dark)
+![Seqera](assets/img/seqera_logo_dark.png#only-dark)
 
 </div>
