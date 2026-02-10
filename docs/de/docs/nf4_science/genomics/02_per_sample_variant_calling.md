@@ -1,14 +1,16 @@
-# Teil 2: Varianten-Calling pro Probe
+# Teil 2: Variantenerkennung pro Probe
+
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 In Teil 1 hast du die Samtools- und GATK-Befehle manuell in ihren jeweiligen Containern getestet.
-Jetzt werden wir dieselben Befehle in einen Nextflow-Workflow einbinden.
+Jetzt werden wir diese Befehle in einen Nextflow-Workflow einbinden.
 
 ## Aufgabe
 
-In diesem Teil des Kurses entwickeln wir einen Workflow, der Folgendes macht:
+In diesem Teil des Kurses entwickeln wir einen Workflow, der Folgendes tut:
 
-1. Eine Index-Datei für jede BAM-Eingabedatei mit [Samtools](https://www.htslib.org/) generieren
-2. GATK HaplotypeCaller auf jede BAM-Eingabedatei anwenden, um Varianten-Calls pro Probe im VCF-Format (Variant Call Format) zu generieren
+1. Eine Indexdatei für jede BAM-Eingabedatei mit [Samtools](https://www.htslib.org/) generieren
+2. GATK HaplotypeCaller auf jede BAM-Eingabedatei anwenden, um Variantenaufrufe pro Probe im VCF-Format (Variant Call Format) zu generieren
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
@@ -16,29 +18,29 @@ In diesem Teil des Kurses entwickeln wir einen Workflow, der Folgendes macht:
 
 Dies repliziert die Schritte aus Teil 1, wo du diese Befehle manuell in ihren Containern ausgeführt hast.
 
-Als Ausgangspunkt stellen wir dir eine Workflow-Datei `genomics.nf` zur Verfügung, die die Hauptteile des Workflows skizziert, sowie zwei Modul-Dateien, samtools_index.nf und gatk_haplotypecaller.nf, die die Struktur der Module beschreiben.
-Diese Dateien sind nicht funktionsfähig; ihr Zweck ist es, als Gerüst zu dienen, das du mit den interessanten Code-Teilen ausfüllen sollst.
+Als Ausgangspunkt stellen wir dir eine Workflow-Datei `genomics.nf` zur Verfügung, die die Hauptteile des Workflows skizziert, sowie zwei Moduldateien, samtools_index.nf und gatk_haplotypecaller.nf, die die Struktur der Module umreißen.
+Diese Dateien sind nicht funktionsfähig; ihr Zweck ist es lediglich, als Gerüst zu dienen, das du mit den interessanten Teilen des Codes ausfüllen kannst.
 
 ## Lernplan
 
 Um den Entwicklungsprozess lehrreicher zu gestalten, haben wir dies in vier Schritte unterteilt:
 
-1. **Einen einstufigen Workflow schreiben, der Samtools index auf einer BAM-Datei ausführt.**
-   Dies behandelt das Erstellen eines Moduls, dessen Import und den Aufruf in einem Workflow.
-2. **Einen zweiten Prozess hinzufügen, um GATK HaplotypeCaller auf der indizierten BAM-Datei auszuführen.**
-   Dies führt das Verketten von Prozess-Ausgaben zu -Eingaben ein und behandelt zusätzliche Dateien.
+1. **Einen einstufigen Workflow schreiben, der Samtools index auf eine BAM-Datei anwendet.**
+   Dies umfasst das Erstellen eines Moduls, das Importieren und Aufrufen im Workflow.
+2. **Einen zweiten Prozess hinzufügen, um GATK HaplotypeCaller auf die indizierte BAM-Datei anzuwenden.**
+   Dies führt die Verkettung von Prozessausgaben zu Eingaben ein und behandelt Hilfsdateien.
 3. **Den Workflow anpassen, um auf einem Batch von Proben zu laufen.**
-   Dies behandelt parallele Ausführung und führt Tupel ein, um zusammengehörige Dateien zusammenzuhalten.
-4. **Den Workflow so gestalten, dass er eine Textdatei mit einem Batch von Eingabedateien akzeptiert.**
+   Dies behandelt parallele Ausführung und führt Tupel ein, um zugehörige Dateien zusammenzuhalten.
+4. **Den Workflow so anpassen, dass er eine Textdatei mit einem Batch von Eingabedateien akzeptiert.**
    Dies demonstriert ein gängiges Muster zur Bereitstellung von Eingaben in großen Mengen.
 
-Jeder Schritt konzentriert sich auf einen bestimmten Aspekt der Workflow-Entwicklung.
+Jeder Schritt konzentriert sich auf einen spezifischen Aspekt der Workflow-Entwicklung.
 
 ---
 
-## 1. Einen einstufigen Workflow schreiben, der Samtools index auf einer BAM-Datei ausführt
+## 1. Einen einstufigen Workflow schreiben, der Samtools index auf eine BAM-Datei anwendet
 
-Dieser erste Schritt konzentriert sich auf die Grundlagen: eine BAM-Datei laden und einen Index dafür generieren.
+Dieser erste Schritt konzentriert sich auf die Grundlagen: Laden einer BAM-Datei und Generieren eines Index dafür.
 
 Erinnere dich an den `samtools index`-Befehl aus [Teil 1](01_method.md):
 
@@ -46,22 +48,22 @@ Erinnere dich an den `samtools index`-Befehl aus [Teil 1](01_method.md):
 samtools index '<input_bam>'
 ```
 
-Der Befehl nimmt eine BAM-Datei als Eingabe und erzeugt eine `.bai`-Index-Datei daneben.
+Der Befehl nimmt eine BAM-Datei als Eingabe und erzeugt eine `.bai`-Indexdatei daneben.
 Die Container-URI war `community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464`.
 
-Wir werden diese Informationen nehmen und in drei Phasen in Nextflow einbinden:
+Wir werden diese Informationen nehmen und in Nextflow in drei Stufen einbinden:
 
 1. Die Eingabe einrichten
-2. Den Indizierungs-Prozess schreiben und im Workflow aufrufen
+2. Den Indizierungsprozess schreiben und im Workflow aufrufen
 3. Die Ausgabeverarbeitung konfigurieren
 
 ### 1.1. Die Eingabe einrichten
 
 Wir müssen einen Eingabeparameter deklarieren, ein Testprofil erstellen, um einen praktischen Standardwert bereitzustellen, und einen Eingabekanal erstellen.
 
-#### 1.1.1. Eine Eingabeparameter-Deklaration hinzufügen
+#### 1.1.1. Eine Eingabeparameterdeklaration hinzufügen
 
-In der Haupt-Workflow-Datei `genomics.nf` unter dem Abschnitt `Pipeline parameters` deklariere einen CLI-Parameter namens `reads_bam`.
+In der Haupt-Workflow-Datei `genomics.nf` deklariere unter dem Abschnitt `Pipeline parameters` einen CLI-Parameter namens `reads_bam`.
 
 === "Danach"
 
@@ -85,15 +87,15 @@ In der Haupt-Workflow-Datei `genomics.nf` unter dem Abschnitt `Pipeline paramete
     // Primary input
     ```
 
-Das richtet den CLI-Parameter ein, aber wir möchten nicht jedes Mal den Dateipfad eintippen, wenn wir den Workflow während der Entwicklung ausführen.
+Das richtet den CLI-Parameter ein, aber wir wollen nicht jedes Mal den Dateipfad eingeben, wenn wir den Workflow während der Entwicklung ausführen.
 Es gibt mehrere Optionen, um einen Standardwert bereitzustellen; hier verwenden wir ein Testprofil.
 
 #### 1.1.2. Ein Testprofil mit einem Standardwert in `nextflow.config` erstellen
 
 Ein Testprofil bietet praktische Standardwerte zum Ausprobieren eines Workflows, ohne Eingaben auf der Kommandozeile anzugeben.
-Dies ist eine gängige Konvention im Nextflow-Ökosystem (siehe [Hello Config](../../hello_nextflow/06_hello_config.md) für mehr Details).
+Dies ist eine gängige Konvention im Nextflow-Ökosystem (siehe [Hello Config](../../hello_nextflow/06_hello_config.md) für weitere Details).
 
-Füge einen `profiles`-Block zu `nextflow.config` hinzu mit einem `test`-Profil, das den `reads_bam`-Parameter auf eine der Test-BAM-Dateien setzt.
+Füge einen `profiles`-Block zu `nextflow.config` mit einem `test`-Profil hinzu, das den Parameter `reads_bam` auf eine der Test-BAM-Dateien setzt.
 
 === "Danach"
 
@@ -114,11 +116,11 @@ Füge einen `profiles`-Block zu `nextflow.config` hinzu mit einem `test`-Profil,
     ```
 
 Hier verwenden wir `${projectDir}`, eine eingebaute Nextflow-Variable, die auf das Verzeichnis zeigt, in dem sich das Workflow-Skript befindet.
-Das erleichtert die Referenzierung von Datendateien und anderen Ressourcen, ohne absolute Pfade fest zu kodieren.
+Dies macht es einfach, auf Datendateien und andere Ressourcen zu verweisen, ohne absolute Pfade fest zu codieren.
 
 #### 1.1.3. Den Eingabekanal einrichten
 
-Im Workflow-Block erstelle einen Eingabekanal aus dem Parameterwert mit der `.fromPath`-Kanal-Factory (wie in [Hello Channels](../../hello_nextflow/02_hello_channels.md) verwendet).
+Erstelle im Workflow-Block einen Eingabekanal aus dem Parameterwert mit der `.fromPath`-Kanal-Factory (wie in [Hello Channels](../../hello_nextflow/02_hello_channels.md) verwendet).
 
 === "Danach"
 
@@ -126,7 +128,7 @@ Im Workflow-Block erstelle einen Eingabekanal aus dem Parameterwert mit der `.fr
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 
@@ -139,18 +141,18 @@ Im Workflow-Block erstelle einen Eingabekanal aus dem Parameterwert mit der `.fr
         // Create input channel
     ```
 
-Jetzt müssen wir den Prozess erstellen, um die Indizierung auf dieser Eingabe auszuführen.
+Jetzt müssen wir den Prozess erstellen, um die Indizierung auf diese Eingabe anzuwenden.
 
-### 1.2. Den Indizierungs-Prozess schreiben und im Workflow aufrufen
+### 1.2. Den Indizierungsprozess schreiben und im Workflow aufrufen
 
-Wir müssen die Prozessdefinition in der Modul-Datei schreiben, sie mit einem include-Statement in den Workflow importieren und sie auf der Eingabe aufrufen.
+Wir müssen die Prozessdefinition in der Moduldatei schreiben, sie mit einer Include-Anweisung in den Workflow importieren und sie auf die Eingabe anwenden.
 
-#### 1.2.1. Das Modul für den Indizierungs-Prozess ausfüllen
+#### 1.2.1. Das Modul für den Indizierungsprozess ausfüllen
 
-Öffne `modules/samtools_index.nf` und untersuche die Struktur der Prozessdefinition.
-Du solltest die wichtigsten strukturellen Elemente erkennen; falls nicht, erwäge, [Hello Nextflow](../../hello_nextflow/01_hello_world.md) zur Auffrischung durchzulesen.
+Öffne `modules/samtools_index.nf` und untersuche die Gliederung der Prozessdefinition.
+Du solltest die strukturellen Hauptelemente erkennen; falls nicht, lies [Hello Nextflow](../../hello_nextflow/01_hello_world.md) zur Auffrischung.
 
-Fülle die Prozessdefinition selbst aus, indem du die oben bereitgestellten Informationen verwendest, und überprüfe dann deine Arbeit mit der Lösung im Tab "Danach" unten.
+Fülle die Prozessdefinition selbst aus, indem du die oben bereitgestellten Informationen verwendest, und überprüfe dann deine Arbeit anhand der Lösung im Tab "Danach" unten.
 
 === "Vorher"
 
@@ -181,7 +183,7 @@ Fülle die Prozessdefinition selbst aus, indem du die oben bereitgestellten Info
     #!/usr/bin/env nextflow
 
     /*
-     * BAM-Index-Datei generieren
+     * BAM-Indexdatei generieren
      */
     process SAMTOOLS_INDEX {
 
@@ -205,7 +207,7 @@ Um ihn im Workflow zu verwenden, musst du das Modul importieren und einen Prozes
 
 #### 1.2.2. Das Modul einbinden
 
-Füge in `genomics.nf` ein `include`-Statement hinzu, um den Prozess für den Workflow verfügbar zu machen:
+Füge in `genomics.nf` eine `include`-Anweisung hinzu, um den Prozess für den Workflow verfügbar zu machen:
 
 === "Danach"
 
@@ -222,9 +224,9 @@ Füge in `genomics.nf` ein `include`-Statement hinzu, um den Prozess für den Wo
 
 Der Prozess ist jetzt im Workflow-Scope verfügbar.
 
-#### 1.2.3. Den Indizierungs-Prozess auf der Eingabe aufrufen
+#### 1.2.3. Den Indizierungsprozess auf die Eingabe anwenden
 
-Fügen wir nun einen Aufruf zu `SAMTOOLS_INDEX` im Workflow-Block hinzu und übergeben den Eingabekanal als Argument.
+Fügen wir nun einen Aufruf von `SAMTOOLS_INDEX` im Workflow-Block hinzu und übergeben den Eingabekanal als Argument.
 
 === "Danach"
 
@@ -232,10 +234,10 @@ Fügen wir nun einen Aufruf zu `SAMTOOLS_INDEX` im Workflow-Block hinzu und übe
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Create index file for input BAM file
+        // Indexdatei für Eingabe-BAM-Datei erstellen
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -245,22 +247,22 @@ Fügen wir nun einen Aufruf zu `SAMTOOLS_INDEX` im Workflow-Block hinzu und übe
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
         reads_ch = channel.fromPath(params.reads_bam)
 
         // Call processes
     ```
 
-Der Workflow lädt jetzt die Eingabe und führt den Indizierungs-Prozess darauf aus.
+Der Workflow lädt jetzt die Eingabe und führt den Indizierungsprozess darauf aus.
 Als Nächstes müssen wir konfigurieren, wie die Ausgabe veröffentlicht wird.
 
 ### 1.3. Die Ausgabeverarbeitung konfigurieren
 
-Wir müssen deklarieren, welche Prozessausgaben veröffentlicht werden sollen, und angeben, wo sie abgelegt werden sollen.
+Wir müssen deklarieren, welche Prozessausgaben veröffentlicht werden sollen, und angeben, wohin sie gehen sollen.
 
-#### 1.3.1. Eine Ausgabe im `publish:`-Abschnitt deklarieren
+#### 1.3.1. Eine Ausgabe im Abschnitt `publish:` deklarieren
 
-Der `publish:`-Abschnitt innerhalb des Workflow-Blocks deklariert, welche Prozessausgaben veröffentlicht werden sollen.
+Der Abschnitt `publish:` innerhalb des Workflow-Blocks deklariert, welche Prozessausgaben veröffentlicht werden sollen.
 Weise die Ausgabe von `SAMTOOLS_INDEX` einem benannten Ziel namens `bam_index` zu.
 
 === "Danach"
@@ -279,12 +281,12 @@ Weise die Ausgabe von `SAMTOOLS_INDEX` einem benannten Ziel namens `bam_index` z
     }
     ```
 
-Jetzt müssen wir Nextflow mitteilen, wo die veröffentlichte Ausgabe abgelegt werden soll.
+Jetzt müssen wir Nextflow mitteilen, wohin die veröffentlichte Ausgabe gelegt werden soll.
 
-#### 1.3.2. Das Ausgabeziel im `output {}`-Block konfigurieren
+#### 1.3.2. Das Ausgabeziel im Block `output {}` konfigurieren
 
-Der `output {}`-Block befindet sich außerhalb des Workflows und gibt an, wo jedes benannte Ziel veröffentlicht wird.
-Fügen wir ein Ziel für `bam_index` hinzu, das in ein `bam/`-Unterverzeichnis veröffentlicht.
+Der Block `output {}` befindet sich außerhalb des Workflows und gibt an, wo jedes benannte Ziel veröffentlicht wird.
+Fügen wir ein Ziel für `bam_index` hinzu, das in ein Unterverzeichnis `bam/` veröffentlicht.
 
 === "Danach"
 
@@ -304,17 +306,17 @@ Fügen wir ein Ziel für `bam_index` hinzu, das in ein `bam/`-Unterverzeichnis v
     }
     ```
 
-!!! note
+!!! note "Hinweis"
 
     Standardmäßig veröffentlicht Nextflow Ausgabedateien als symbolische Links, was unnötige Duplizierung vermeidet.
-    Auch wenn die Datendateien, die wir hier verwenden, sehr klein sind, können sie in der Genomik sehr groß werden.
+    Obwohl die Datendateien, die wir hier verwenden, sehr klein sind, können sie in der Genomik sehr groß werden.
     Symlinks funktionieren nicht mehr, wenn du dein `work`-Verzeichnis aufräumst. Für Produktions-Workflows möchtest du daher möglicherweise den Standard-Veröffentlichungsmodus auf `'copy'` überschreiben.
 
 ### 1.4. Den Workflow ausführen
 
-An diesem Punkt haben wir einen einstufigen Indizierungs-Workflow, der voll funktionsfähig sein sollte. Testen wir, ob es funktioniert!
+An diesem Punkt haben wir einen einstufigen Indizierungs-Workflow, der voll funktionsfähig sein sollte. Testen wir, ob er funktioniert!
 
-Wir können ihn mit `-profile test` ausführen, um den im Testprofil eingestellten Standardwert zu verwenden und zu vermeiden, den Pfad auf der Kommandozeile schreiben zu müssen.
+Wir können ihn mit `-profile test` ausführen, um den im Testprofil eingerichteten Standardwert zu verwenden und zu vermeiden, den Pfad auf der Kommandozeile schreiben zu müssen.
 
 ```bash
 nextflow run genomics.nf -profile test
@@ -331,7 +333,7 @@ nextflow run genomics.nf -profile test
     [2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
     ```
 
-Du kannst überprüfen, dass die Index-Datei korrekt generiert wurde, indem du im work-Verzeichnis oder im results-Verzeichnis nachschaust.
+Du kannst überprüfen, dass die Indexdatei korrekt generiert wurde, indem du im Arbeitsverzeichnis oder im Ergebnisverzeichnis nachsiehst.
 
 ??? abstract "Work-Verzeichnis Inhalt"
 
@@ -357,13 +359,13 @@ Du weißt, wie man ein Modul mit einem Prozess erstellt, es in einen Workflow im
 
 ### Wie geht es weiter?
 
-Füge einen zweiten Schritt hinzu, der die Ausgabe des Indizierungs-Prozesses nimmt und verwendet, um Varianten-Calling auszuführen.
+Füge einen zweiten Schritt hinzu, der die Ausgabe des Indizierungsprozesses nimmt und sie verwendet, um Variantenerkennung durchzuführen.
 
 ---
 
-## 2. Einen zweiten Prozess hinzufügen, um GATK HaplotypeCaller auf der indizierten BAM-Datei auszuführen
+## 2. Einen zweiten Prozess hinzufügen, um GATK HaplotypeCaller auf die indizierte BAM-Datei anzuwenden
 
-Jetzt, da wir einen Index für unsere Eingabedatei haben, können wir mit der Einrichtung des Varianten-Calling-Schritts fortfahren.
+Jetzt, da wir einen Index für unsere Eingabedatei haben, können wir mit der Einrichtung des Variantenerkennungsschritts fortfahren.
 
 Erinnere dich an den `gatk HaplotypeCaller`-Befehl aus [Teil 1](01_method.md):
 
@@ -375,24 +377,24 @@ gatk HaplotypeCaller \
         -L /data/ref/intervals.bed
 ```
 
-Der Befehl nimmt eine BAM-Datei (`-I`), ein Referenzgenom (`-R`) und eine Intervall-Datei (`-L`) und erzeugt eine VCF-Datei (`-O`) zusammen mit ihrem Index.
-Das Tool erwartet außerdem, dass der BAM-Index, der Referenz-Index und das Referenz-Dictionary zusammen mit ihren jeweiligen Dateien liegen.
+Der Befehl nimmt eine BAM-Datei (`-I`), ein Referenzgenom (`-R`) und eine Intervalldatei (`-L`) und erzeugt eine VCF-Datei (`-O`) zusammen mit ihrem Index.
+Das Tool erwartet auch, dass der BAM-Index, der Referenzindex und das Referenzwörterbuch zusammen mit ihren jeweiligen Dateien liegen.
 Die Container-URI war `community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867`.
 
-Wir folgen denselben drei Phasen wie zuvor:
+Wir folgen denselben drei Stufen wie zuvor:
 
 1. Die Eingaben einrichten
-2. Den Varianten-Calling-Prozess schreiben und im Workflow aufrufen
+2. Den Variantenerkennungsprozess schreiben und im Workflow aufrufen
 3. Die Ausgabeverarbeitung konfigurieren
 
 ### 2.1. Die Eingaben einrichten
 
-Der Varianten-Calling-Schritt erfordert mehrere zusätzliche Eingabedateien.
+Der Variantenerkennungsschritt erfordert mehrere zusätzliche Eingabedateien.
 Wir müssen Parameter dafür deklarieren, Standardwerte zum Testprofil hinzufügen und Variablen erstellen, um sie zu laden.
 
-#### 2.1.1. Parameter-Deklarationen für zusätzliche Eingaben hinzufügen
+#### 2.1.1. Parameterdeklarationen für Hilfseingaben hinzufügen
 
-Da unser neuer Prozess eine Handvoll zusätzlicher Dateien erwartet, füge Parameter-Deklarationen dafür in `genomics.nf` unter dem Abschnitt `Pipeline parameters` hinzu:
+Da unser neuer Prozess eine Handvoll zusätzlicher Dateien erwartet, füge Parameterdeklarationen dafür in `genomics.nf` unter dem Abschnitt `Pipeline parameters` hinzu:
 
 === "Danach"
 
@@ -401,7 +403,7 @@ Da unser neuer Prozess eine Handvoll zusätzlicher Dateien erwartet, füge Param
         // Primary input
         reads_bam: Path
 
-        // Accessory files
+        // Hilfsdateien
         reference: Path
         reference_index: Path
         reference_dict: Path
@@ -418,11 +420,11 @@ Da unser neuer Prozess eine Handvoll zusätzlicher Dateien erwartet, füge Param
     }
     ```
 
-Wie zuvor stellen wir Standardwerte über das Testprofil bereit, anstatt inline.
+Wie zuvor stellen wir Standardwerte über das Testprofil bereit, anstatt sie inline anzugeben.
 
-#### 2.1.2. Standardwerte für zusätzliche Dateien zum Testprofil hinzufügen
+#### 2.1.2. Standardwerte für Hilfsdateien zum Testprofil hinzufügen
 
-Genau wie wir es für `reads_bam` in Abschnitt 1.1.2 getan haben, füge Standardwerte für die zusätzlichen Dateien zum Testprofil in `nextflow.config` hinzu:
+Genau wie wir es für `reads_bam` in Abschnitt 1.1.2 getan haben, füge Standardwerte für die Hilfsdateien zum Testprofil in `nextflow.config` hinzu:
 
 === "Danach"
 
@@ -446,9 +448,9 @@ Genau wie wir es für `reads_bam` in Abschnitt 1.1.2 getan haben, füge Standard
 
 Jetzt müssen wir Variablen erstellen, die diese Dateipfade zur Verwendung im Workflow laden.
 
-#### 2.1.3. Variablen für die zusätzlichen Dateien erstellen
+#### 2.1.3. Variablen für die Hilfsdateien erstellen
 
-Füge Variablen für die zusätzlichen Dateipfade innerhalb des Workflow-Blocks hinzu:
+Füge Variablen für die Hilfsdateipfade innerhalb des Workflow-Blocks hinzu:
 
 === "Danach"
 
@@ -456,16 +458,16 @@ Füge Variablen für die zusätzlichen Dateipfade innerhalb des Workflow-Blocks 
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Load the file paths for the accessory files (reference and intervals)
+        // Dateipfade für die Hilfsdateien laden (Referenz und Intervalle)
         ref_file        = file(params.reference)
         ref_index_file  = file(params.reference_index)
         ref_dict_file   = file(params.reference_dict)
         intervals_file  = file(params.intervals)
 
-        // Create index file for input BAM file
+        // Indexdatei für Eingabe-BAM-Datei erstellen
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -475,25 +477,25 @@ Füge Variablen für die zusätzlichen Dateipfade innerhalb des Workflow-Blocks 
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Create index file for input BAM file
+        // Indexdatei für Eingabe-BAM-Datei erstellen
         SAMTOOLS_INDEX(reads_ch)
     ```
 
 Die `file()`-Syntax teilt Nextflow explizit mit, diese Eingaben als Dateipfade zu behandeln.
-Du kannst mehr darüber im Side Quest [Working with files](../../side_quests/working_with_files.md) erfahren.
+Mehr darüber erfährst du in der Side Quest [Working with files](../../side_quests/working_with_files.md).
 
-### 2.2. Den Varianten-Calling-Prozess schreiben und im Workflow aufrufen
+### 2.2. Den Variantenerkennungsprozess schreiben und im Workflow aufrufen
 
-Wir müssen die Prozessdefinition in der Modul-Datei schreiben, sie mit einem include-Statement in den Workflow importieren und sie auf den Eingabe-Reads plus der Ausgabe des Indizierungs-Schritts und den zusätzlichen Dateien aufrufen.
+Wir müssen die Prozessdefinition in der Moduldatei schreiben, sie mit einer Include-Anweisung in den Workflow importieren und sie auf die Eingabe-Reads plus die Ausgabe des Indizierungsschritts und die Hilfsdateien anwenden.
 
-#### 2.2.1. Das Modul für den Varianten-Calling-Prozess ausfüllen
+#### 2.2.1. Das Modul für den Variantenerkennungsprozess ausfüllen
 
-Öffne `modules/gatk_haplotypecaller.nf` und untersuche die Struktur der Prozessdefinition.
+Öffne `modules/gatk_haplotypecaller.nf` und untersuche die Gliederung der Prozessdefinition.
 
-Fülle die Prozessdefinition selbst aus, indem du die oben bereitgestellten Informationen verwendest, und überprüfe dann deine Arbeit mit der Lösung im Tab "Danach" unten.
+Fülle die Prozessdefinition selbst aus, indem du die oben bereitgestellten Informationen verwendest, und überprüfe dann deine Arbeit anhand der Lösung im Tab "Danach" unten.
 
 === "Vorher"
 
@@ -554,11 +556,11 @@ Fülle die Prozessdefinition selbst aus, indem du die oben bereitgestellten Info
     ```
 
 Du wirst bemerken, dass dieser Prozess mehr Eingaben hat, als der GATK-Befehl selbst benötigt.
-GATK weiß aufgrund von Namenskonventionen, wo es nach der BAM-Index-Datei und den zusätzlichen Dateien des Referenzgenoms suchen muss, aber Nextflow ist domänenunabhängig und kennt diese Konventionen nicht.
-Wir müssen sie explizit auflisten, damit Nextflow sie zur Laufzeit im Arbeitsverzeichnis bereitstellt; andernfalls wirft GATK einen Fehler über fehlende Dateien.
+GATK weiß aufgrund von Namenskonventionen, wo es nach der BAM-Indexdatei und den Hilfsdateien des Referenzgenoms suchen muss, aber Nextflow ist domänenunabhängig und kennt diese Konventionen nicht.
+Wir müssen sie explizit auflisten, damit Nextflow sie zur Laufzeit im Arbeitsverzeichnis bereitstellt; andernfalls wird GATK einen Fehler über fehlende Dateien ausgeben.
 
-Ebenso listen wir die Index-Datei der Ausgabe-VCF (`"${input_bam}.vcf.idx"`) explizit auf, damit Nextflow sie für nachfolgende Schritte im Auge behält.
-Wir verwenden die `emit:`-Syntax, um jedem Ausgabekanal einen Namen zuzuweisen, was nützlich wird, wenn wir die Ausgaben in den publish-Block einbinden.
+Ebenso listen wir die Indexdatei der Ausgabe-VCF (`"${input_bam}.vcf.idx"`) explizit auf, damit Nextflow sie für nachfolgende Schritte verfolgt.
+Wir verwenden die `emit:`-Syntax, um jedem Ausgabekanal einen Namen zuzuweisen, was nützlich wird, wenn wir die Ausgaben in den Publish-Block einbinden.
 
 Sobald du dies abgeschlossen hast, ist der Prozess fertig.
 Um ihn im Workflow zu verwenden, musst du das Modul importieren und einen Prozessaufruf hinzufügen.
@@ -591,10 +593,10 @@ Füge den Prozessaufruf im Workflow-Body unter `main:` hinzu:
 === "Danach"
 
     ```groovy title="genomics.nf" linenums="33" hl_lines="4-12"
-        // Create index file for input BAM file
+        // Indexdatei für Eingabe-BAM-Datei erstellen
         SAMTOOLS_INDEX(reads_ch)
 
-        // Call variants from the indexed BAM file
+        // Varianten aus der indizierten BAM-Datei aufrufen
         GATK_HAPLOTYPECALLER(
             reads_ch,
             SAMTOOLS_INDEX.out,
@@ -608,24 +610,24 @@ Füge den Prozessaufruf im Workflow-Body unter `main:` hinzu:
 === "Vorher"
 
     ```groovy title="genomics.nf" linenums="33"
-        // Create index file for input BAM file
+        // Indexdatei für Eingabe-BAM-Datei erstellen
         SAMTOOLS_INDEX(reads_ch)
     ```
 
-Du solltest die `*.out`-Syntax aus der Hello Nextflow-Trainingsreihe erkennen; wir teilen Nextflow mit, den von `SAMTOOLS_INDEX` ausgegebenen Kanal zu nehmen und in den `GATK_HAPLOTYPECALLER`-Prozessaufruf einzustecken.
+Du solltest die `*.out`-Syntax aus der Hello Nextflow-Trainingsreihe erkennen; wir sagen Nextflow, dass es den von `SAMTOOLS_INDEX` ausgegebenen Kanal nehmen und in den `GATK_HAPLOTYPECALLER`-Prozessaufruf einstecken soll.
 
-!!! note
+!!! note "Hinweis"
 
-    Beachte, dass die Eingaben in exakt derselben Reihenfolge im Aufruf des Prozesses bereitgestellt werden, wie sie im input-Block des Prozesses aufgelistet sind.
-    In Nextflow sind Eingaben positionsabhängig, was bedeutet, dass du _unbedingt_ dieselbe Reihenfolge befolgen musst; und natürlich muss es dieselbe Anzahl von Elementen geben.
+    Beachte, dass die Eingaben im Aufruf des Prozesses in genau derselben Reihenfolge bereitgestellt werden, wie sie im Eingabeblock des Prozesses aufgelistet sind.
+    In Nextflow sind Eingaben positionsabhängig, was bedeutet, dass du _dieselbe Reihenfolge_ einhalten musst; und natürlich muss es dieselbe Anzahl von Elementen geben.
 
 ### 2.3. Die Ausgabeverarbeitung konfigurieren
 
-Wir müssen die neuen Ausgaben zur publish-Deklaration hinzufügen und konfigurieren, wo sie hingehören.
+Wir müssen die neuen Ausgaben zur Publish-Deklaration hinzufügen und konfigurieren, wohin sie gehen.
 
-#### 2.3.1. Publish-Ziele für die Varianten-Calling-Ausgaben hinzufügen
+#### 2.3.1. Publish-Ziele für die Variantenerkennungsausgaben hinzufügen
 
-Füge die VCF- und Index-Ausgaben zum `publish:`-Abschnitt hinzu:
+Füge die VCF- und Index-Ausgaben zum Abschnitt `publish:` hinzu:
 
 === "Danach"
 
@@ -645,11 +647,11 @@ Füge die VCF- und Index-Ausgaben zum `publish:`-Abschnitt hinzu:
     }
     ```
 
-Jetzt müssen wir Nextflow mitteilen, wo die neuen Ausgaben abgelegt werden sollen.
+Jetzt müssen wir Nextflow mitteilen, wohin die neuen Ausgaben gelegt werden sollen.
 
 #### 2.3.2. Die neuen Ausgabeziele konfigurieren
 
-Füge Einträge für die `vcf`- und `vcf_idx`-Ziele im `output {}`-Block hinzu und veröffentliche beide in ein `vcf/`-Unterverzeichnis:
+Füge Einträge für die Ziele `vcf` und `vcf_idx` im Block `output {}` hinzu und veröffentliche beide in ein Unterverzeichnis `vcf/`:
 
 === "Danach"
 
@@ -677,11 +679,11 @@ Füge Einträge für die `vcf`- und `vcf_idx`-Ziele im `output {}`-Block hinzu u
     }
     ```
 
-Die VCF und ihr Index werden als separate Ziele veröffentlicht, die beide ins `vcf/`-Unterverzeichnis gehen.
+Die VCF und ihr Index werden als separate Ziele veröffentlicht, die beide in das Unterverzeichnis `vcf/` gehen.
 
 ### 2.4. Den Workflow ausführen
 
-Führe den erweiterten Workflow aus und füge diesmal `-resume` hinzu, damit wir den Indizierungs-Schritt nicht erneut ausführen müssen.
+Führe den erweiterten Workflow aus und füge diesmal `-resume` hinzu, damit wir den Indizierungsschritt nicht erneut ausführen müssen.
 
 ```bash
 nextflow run genomics.nf -profile test -resume
@@ -699,13 +701,13 @@ nextflow run genomics.nf -profile test -resume
     [53/e18e98] GATK_HAPLOTYPECALLER (1) | 1 of 1 ✔
     ```
 
-Wenn wir uns jetzt die Konsolenausgabe anschauen, sehen wir die beiden aufgelisteten Prozesse.
+Wenn wir uns jetzt die Konsolenausgabe ansehen, sehen wir die beiden aufgelisteten Prozesse.
 
 Der erste Prozess wurde dank des Cachings übersprungen, wie erwartet, während der zweite Prozess ausgeführt wurde, da er brandneu ist.
 
-Du findest die Ausgabedateien im results-Verzeichnis (als symbolische Links zum work-Verzeichnis).
+Du findest die Ausgabedateien im Ergebnisverzeichnis (als symbolische Links zum Arbeitsverzeichnis).
 
-??? abstract "Verzeichnis-Inhalt"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results/
@@ -716,9 +718,9 @@ Du findest die Ausgabedateien im results-Verzeichnis (als symbolische Links zum 
         └── reads_mother.bam.vcf.idx -> ...
     ```
 
-Wenn du die VCF-Datei öffnest, solltest du denselben Inhalt wie in der Datei sehen, die du durch direktes Ausführen des GATK-Befehls im Container generiert hast.
+Wenn du die VCF-Datei öffnest, solltest du denselben Inhalt sehen wie in der Datei, die du durch direktes Ausführen des GATK-Befehls im Container generiert hast.
 
-??? abstract "Datei-Inhalt"
+??? abstract "Dateiinhalt"
 
     ```console title="reads_mother.bam.vcf" linenums="26"
     #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -727,36 +729,36 @@ Wenn du die VCF-Datei öffnest, solltest du denselben Inhalt wie in der Datei se
     20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
     ```
 
-Das ist die Ausgabe, die uns wichtig ist, für jede Probe in unserer Studie zu generieren.
+Dies ist die Ausgabe, die wir für jede Probe in unserer Studie generieren möchten.
 
 ### Fazit
 
-Du weißt, wie man einen zweistufigen modularen Workflow erstellt, der echte Analysearbeit leistet und mit Genomik-Dateiformaten und deren Besonderheiten wie den zusätzlichen Dateien umgehen kann.
+Du weißt, wie man einen zweistufigen modularen Workflow erstellt, der echte Analysearbeit leistet und mit Eigenheiten von Genomik-Dateiformaten wie den Hilfsdateien umgehen kann.
 
 ### Wie geht es weiter?
 
-Lass den Workflow mehrere Proben in großen Mengen verarbeiten.
+Mache den Workflow so, dass er mehrere Proben in großen Mengen verarbeitet.
 
 ---
 
 ## 3. Den Workflow anpassen, um auf einem Batch von Proben zu laufen
 
-Es ist gut und schön, einen Workflow zu haben, der die Verarbeitung einer einzelnen Probe automatisieren kann, aber was ist, wenn du 1000 Proben hast?
+Es ist schön und gut, einen Workflow zu haben, der die Verarbeitung einer einzelnen Probe automatisieren kann, aber was ist, wenn du 1000 Proben hast?
 Musst du ein Bash-Skript schreiben, das durch alle deine Proben loopt?
 
-Nein, zum Glück nicht! Nimm nur eine kleine Anpassung am Code vor und Nextflow wird das auch für dich erledigen.
+Nein, zum Glück nicht! Mache einfach eine kleine Anpassung am Code und Nextflow wird das auch für dich erledigen.
 
 ### 3.1. Die Eingabe aktualisieren, um drei Proben aufzulisten
 
 Um auf mehreren Proben zu laufen, aktualisiere das Testprofil, um ein Array von Dateipfaden anstelle eines einzelnen bereitzustellen.
-Dies ist eine schnelle Möglichkeit, Multi-Sample-Ausführung zu testen; im nächsten Schritt werden wir zu einem skalierbareren Ansatz mit einer Datei von Eingaben wechseln.
+Dies ist eine schnelle Möglichkeit, die Multi-Proben-Ausführung zu testen; im nächsten Schritt wechseln wir zu einem skalierbareren Ansatz mit einer Datei von Eingaben.
 
-Kommentiere zuerst die Typ-Annotation in der Parameter-Deklaration aus, da Arrays keine typisierten Deklarationen verwenden können:
+Kommentiere zuerst die Typannotation in der Parameterdeklaration aus, da Arrays keine typisierten Deklarationen verwenden können:
 
 === "Danach"
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (array of three samples)
+        // Primäre Eingabe (Array von drei Proben)
         reads_bam //: Path
     ```
 
@@ -797,17 +799,17 @@ Aktualisiere dann das Testprofil, um alle drei Proben aufzulisten:
     }
     ```
 
-Die Kanal-Factory im Workflow-Body (`.fromPath`) akzeptiert mehrere Dateipfade genauso gut wie einen einzelnen, sodass keine weiteren Änderungen erforderlich sind.
+Die Kanal-Factory im Workflow-Body (`.fromPath`) akzeptiert mehrere Dateipfade genauso gut wie einen einzelnen, daher sind keine weiteren Änderungen erforderlich.
 
 ### 3.2. Den Workflow ausführen
 
-Versuche jetzt, den Workflow auszuführen, nachdem die Plumbing so eingerichtet ist, dass sie auf allen drei Testproben läuft.
+Versuche jetzt, den Workflow auszuführen, nachdem die Verkabelung eingerichtet ist, um auf allen drei Testproben zu laufen.
 
 ```bash
 nextflow run genomics.nf -profile test -resume
 ```
 
-Lustige Sache: Dies _könnte funktionieren_, ODER es _könnte fehlschlagen_. Zum Beispiel, hier ist ein Lauf, der erfolgreich war:
+Lustige Sache: Dies _könnte funktionieren_, ODER es _könnte fehlschlagen_. Hier ist zum Beispiel ein Lauf, der erfolgreich war:
 
 ??? success "Befehlsausgabe"
 
@@ -851,23 +853,23 @@ Wenn dein Workflow-Lauf erfolgreich war, führe ihn erneut aus, bis du einen Feh
       ...
     ```
 
-Wenn du dir die GATK-Befehlsfehlerausgabe anschaust, gibt es eine Zeile wie diese:
+Wenn du dir die GATK-Befehlsfehlerausgabe ansiehst, wird es eine Zeile wie diese geben:
 
 ```console
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
 ```
 
-Nun, das ist seltsam, wenn man bedenkt, dass wir die BAM-Dateien im ersten Schritt des Workflows explizit indiziert haben. Könnte etwas mit der Plumbing nicht stimmen?
+Nun, das ist seltsam, wenn man bedenkt, dass wir die BAM-Dateien im ersten Schritt des Workflows explizit indiziert haben. Könnte etwas mit der Verkabelung nicht stimmen?
 
 ### 3.3. Das Problem beheben
 
-Wir werden die work-Verzeichnisse inspizieren und den `view()`-Operator verwenden, um herauszufinden, was schiefgelaufen ist.
+Wir werden die Arbeitsverzeichnisse inspizieren und den Operator `view()` verwenden, um herauszufinden, was schief gelaufen ist.
 
-#### 3.3.1. Die work-Verzeichnisse für die relevanten Aufrufe überprüfen
+#### 3.3.1. Die Arbeitsverzeichnisse für die relevanten Aufrufe überprüfen
 
-Schaue dir das work-Verzeichnis für den fehlgeschlagenen `GATK_HAPLOTYPECALLER`-Prozessaufruf an, der in der Konsolenausgabe aufgelistet ist.
+Schaue in das Arbeitsverzeichnis für den fehlgeschlagenen `GATK_HAPLOTYPECALLER`-Prozessaufruf, der in der Konsolenausgabe aufgeführt ist.
 
-??? abstract "Verzeichnis-Inhalt"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     work/a5/fa9fd0994b6beede5fb9ea073596c2
@@ -881,9 +883,9 @@ Schaue dir das work-Verzeichnis für den fehlgeschlagenen `GATK_HAPLOTYPECALLER`
     └── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
     ```
 
-Achte besonders auf die Namen der BAM-Datei und des BAM-Index, die in diesem Verzeichnis aufgelistet sind: `reads_son.bam` und `reads_father.bam.bai`.
+Achte besonders auf die Namen der BAM-Datei und des BAM-Index, die in diesem Verzeichnis aufgeführt sind: `reads_son.bam` und `reads_father.bam.bai`.
 
-Was zum Teufel? Nextflow hat eine Index-Datei im work-Verzeichnis dieses Prozessaufrufs bereitgestellt, aber es ist die falsche. Wie konnte das passieren?
+Was zum Teufel? Nextflow hat eine Indexdatei im Arbeitsverzeichnis dieses Prozessaufrufs bereitgestellt, aber es ist die falsche. Wie konnte das passieren?
 
 #### 3.3.2. Den [view()-Operator](https://www.nextflow.io/docs/latest/reference/operator.html#view) verwenden, um Kanalinhalte zu inspizieren
 
@@ -894,11 +896,11 @@ Füge diese beiden Zeilen im Workflow-Body vor dem `GATK_HAPLOTYPECALLER`-Prozes
     ```groovy title="genomics.nf" hl_lines="3-5"
         SAMTOOLS_INDEX(reads_ch)
 
-        // temporary diagnostics
+        // temporäre Diagnose
         reads_ch.view()
         SAMTOOLS_INDEX.out.view()
 
-        // Call variants from the indexed BAM file
+        // Varianten aus der indizierten BAM-Datei aufrufen
         GATK_HAPLOTYPECALLER(
     ```
 
@@ -907,7 +909,7 @@ Füge diese beiden Zeilen im Workflow-Body vor dem `GATK_HAPLOTYPECALLER`-Prozes
     ```groovy title="genomics.nf"
         SAMTOOLS_INDEX(reads_ch)
 
-        // Call variants from the indexed BAM file
+        // Varianten aus der indizierten BAM-Datei aufrufen
         GATK_HAPLOTYPECALLER(
     ```
 
@@ -917,7 +919,7 @@ Führe dann den Workflow-Befehl erneut aus.
 nextflow run genomics.nf -profile test
 ```
 
-Auch hier kann dies erfolgreich sein oder fehlschlagen. Hier ist, wie die Ausgabe der beiden `.view()`-Aufrufe für einen fehlgeschlagenen Lauf aussieht:
+Auch hier kann dies erfolgreich sein oder fehlschlagen. So sieht die Ausgabe der beiden `.view()`-Aufrufe für einen fehlgeschlagenen Lauf aus:
 
 ```console
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
@@ -929,34 +931,34 @@ Auch hier kann dies erfolgreich sein oder fehlschlagen. Hier ist, wie die Ausgab
 ```
 
 Die ersten drei Zeilen entsprechen dem Eingabekanal und die zweiten dem Ausgabekanal.
-Du kannst sehen, dass die BAM-Dateien und Index-Dateien für die drei Proben nicht in derselben Reihenfolge aufgelistet sind!
+Du kannst sehen, dass die BAM-Dateien und Indexdateien für die drei Proben nicht in derselben Reihenfolge aufgelistet sind!
 
-!!! note
+!!! note "Hinweis"
 
-    Wenn du einen Nextflow-Prozess auf einem Kanal aufrufst, der mehrere Elemente enthält, wird Nextflow versuchen, die Ausführung so weit wie möglich zu parallelisieren und sammelt Ausgaben in beliebiger Reihenfolge, in der sie verfügbar werden.
-    Die Konsequenz ist, dass die entsprechenden Ausgaben in einer anderen Reihenfolge gesammelt werden können, als die ursprünglichen Eingaben eingegeben wurden.
+    Wenn du einen Nextflow-Prozess auf einem Kanal aufrufst, der mehrere Elemente enthält, wird Nextflow versuchen, die Ausführung so weit wie möglich zu parallelisieren, und wird Ausgaben in der Reihenfolge sammeln, in der sie verfügbar werden.
+    Die Konsequenz ist, dass die entsprechenden Ausgaben möglicherweise in einer anderen Reihenfolge gesammelt werden als die ursprünglichen Eingaben eingegeben wurden.
 
-Wie derzeit geschrieben, geht unser Workflow-Skript davon aus, dass die Index-Dateien aus dem Indizierungs-Schritt in derselben Mutter/Vater/Sohn-Reihenfolge herauskommen, wie die Eingaben gegeben wurden.
+Wie derzeit geschrieben, geht unser Workflow-Skript davon aus, dass die Indexdateien aus dem Indizierungsschritt in derselben Mutter/Vater/Sohn-Reihenfolge herauskommen, wie die Eingaben gegeben wurden.
 Aber das ist nicht garantiert, weshalb manchmal (aber nicht immer) die falschen Dateien im zweiten Schritt gepaart werden.
 
-Um dies zu beheben, müssen wir sicherstellen, dass die BAM-Dateien und ihre Index-Dateien zusammen durch die Kanäle reisen.
+Um dies zu beheben, müssen wir sicherstellen, dass die BAM-Dateien und ihre Indexdateien zusammen durch die Kanäle reisen.
 
-!!! tip
+!!! tip "Tipp"
 
-    Die `view()`-Statements im Workflow-Code tun nichts, daher ist es kein Problem, sie drin zu lassen.
-    Allerdings werden sie deine Konsolenausgabe unübersichtlich machen, daher empfehlen wir, sie zu entfernen, wenn du mit der Fehlerbehebung fertig bist.
+    Die `view()`-Anweisungen im Workflow-Code tun nichts, daher ist es kein Problem, sie drin zu lassen.
+    Sie werden jedoch deine Konsolenausgabe überladen, daher empfehlen wir, sie zu entfernen, wenn du mit der Fehlerbehebung fertig bist.
 
-### 3.4. Den Workflow aktualisieren, um die Index-Dateien korrekt zu handhaben
+### 3.4. Den Workflow aktualisieren, um die Indexdateien korrekt zu handhaben
 
-Die Lösung besteht darin, jede BAM-Datei mit ihrem Index in ein Tupel zu bündeln und dann den nachgelagerten Prozess und die Workflow-Plumbing entsprechend zu aktualisieren.
+Die Lösung besteht darin, jede BAM-Datei mit ihrem Index in ein Tupel zu bündeln und dann den nachgelagerten Prozess und die Workflow-Verkabelung entsprechend zu aktualisieren.
 
 #### 3.4.1. Die Ausgabe des SAMTOOLS_INDEX-Moduls in ein Tupel ändern
 
-Der einfachste Weg, um sicherzustellen, dass eine BAM-Datei und ihr Index eng verbunden bleiben, besteht darin, sie zusammen in ein Tupel zu verpacken, das aus der Index-Aufgabe herauskommt.
+Der einfachste Weg, um sicherzustellen, dass eine BAM-Datei und ihr Index eng verbunden bleiben, besteht darin, sie zusammen in ein Tupel zu packen, das aus der Indexaufgabe herauskommt.
 
-!!! note
+!!! note "Hinweis"
 
-    Ein **Tupel** ist eine endliche, geordnete Liste von Elementen, die häufig zum Zurückgeben mehrerer Werte aus einer Funktion verwendet wird. Tupel sind besonders nützlich, um mehrere Eingaben oder Ausgaben zwischen Prozessen zu übergeben und dabei ihre Zuordnung und Reihenfolge zu bewahren.
+    Ein **Tupel** ist eine endliche, geordnete Liste von Elementen, die häufig verwendet wird, um mehrere Werte von einer Funktion zurückzugeben. Tupel sind besonders nützlich, um mehrere Eingaben oder Ausgaben zwischen Prozessen zu übergeben und dabei ihre Zuordnung und Reihenfolge beizubehalten.
 
 Aktualisiere die Ausgabe in `modules/samtools_index.nf`, um die BAM-Datei einzuschließen:
 
@@ -974,11 +976,11 @@ Aktualisiere die Ausgabe in `modules/samtools_index.nf`, um die BAM-Datei einzus
         path "${input_bam}.bai"
     ```
 
-Auf diese Weise wird jede Index-Datei eng mit ihrer ursprünglichen BAM-Datei gekoppelt, und die Gesamtausgabe des Indizierungs-Schritts wird ein einzelner Kanal sein, der Dateipaare enthält.
+Auf diese Weise wird jede Indexdatei eng mit ihrer ursprünglichen BAM-Datei gekoppelt, und die Gesamtausgabe des Indizierungsschritts wird ein einzelner Kanal sein, der Dateipaare enthält.
 
 #### 3.4.2. Die Eingabe des GATK_HAPLOTYPECALLER-Moduls ändern, um ein Tupel zu akzeptieren
 
-Da wir die "Form" der Ausgabe des ersten Prozesses geändert haben, müssen wir die Eingabedefinition des zweiten Prozesses entsprechend aktualisieren.
+Da wir die 'Form' der Ausgabe des ersten Prozesses geändert haben, müssen wir die Eingabedefinition des zweiten Prozesses entsprechend aktualisieren.
 
 Aktualisiere `modules/gatk_haplotypecaller.nf`:
 
@@ -997,11 +999,11 @@ Aktualisiere `modules/gatk_haplotypecaller.nf`:
         path input_bam_index
     ```
 
-Jetzt müssen wir den Workflow aktualisieren, um die neue Tupel-Struktur im Prozessaufruf und den publish-Zielen zu reflektieren.
+Jetzt müssen wir den Workflow aktualisieren, um die neue Tupelstruktur im Prozessaufruf und den Publish-Zielen widerzuspiegeln.
 
 #### 3.4.3. Den Aufruf von GATK_HAPLOTYPECALLER im Workflow aktualisieren
 
-Wir müssen nicht mehr das ursprüngliche `reads_ch` dem `GATK_HAPLOTYPECALLER`-Prozess bereitstellen, da die BAM-Datei jetzt in die Kanalausgabe von `SAMTOOLS_INDEX` gebündelt ist.
+Wir müssen dem `GATK_HAPLOTYPECALLER`-Prozess nicht mehr den ursprünglichen `reads_ch` bereitstellen, da die BAM-Datei jetzt in die Kanalausgabe von `SAMTOOLS_INDEX` gebündelt ist.
 
 Aktualisiere den Aufruf in `genomics.nf`:
 
@@ -1020,11 +1022,11 @@ Aktualisiere den Aufruf in `genomics.nf`:
             SAMTOOLS_INDEX.out,
     ```
 
-Schließlich müssen wir die publish-Ziele aktualisieren, um die neue Ausgabestruktur zu reflektieren.
+Schließlich müssen wir die Publish-Ziele aktualisieren, um die neue Ausgabestruktur widerzuspiegeln.
 
-#### 3.4.4. Das publish-Ziel für die indizierte BAM-Ausgabe aktualisieren
+#### 3.4.4. Das Publish-Ziel für die indizierte BAM-Ausgabe aktualisieren
 
-Da die SAMTOOLS_INDEX-Ausgabe jetzt ein Tupel ist, das sowohl die BAM-Datei als auch ihren Index enthält, benenne das publish-Ziel von `bam_index` in `indexed_bam` um, um seinen Inhalt besser zu reflektieren:
+Da die SAMTOOLS_INDEX-Ausgabe jetzt ein Tupel ist, das sowohl die BAM-Datei als auch ihren Index enthält, benenne das Publish-Ziel von `bam_index` in `indexed_bam` um, um seinen Inhalt besser widerzuspiegeln:
 
 === "Danach"
 
@@ -1070,11 +1072,11 @@ Da die SAMTOOLS_INDEX-Ausgabe jetzt ein Tupel ist, das sowohl die BAM-Datei als 
     }
     ```
 
-Mit diesen Änderungen ist garantiert, dass die BAM und ihr Index zusammen reisen, sodass die Paarung immer korrekt sein wird.
+Mit diesen Änderungen ist garantiert, dass die BAM und ihr Index zusammen reisen, sodass die Paarung immer korrekt ist.
 
 ### 3.5. Den korrigierten Workflow ausführen
 
-Führe den Workflow erneut aus, um sicherzustellen, dass dies zukünftig zuverlässig funktioniert.
+Führe den Workflow erneut aus, um sicherzustellen, dass dies in Zukunft zuverlässig funktioniert.
 
 ```bash
 nextflow run genomics.nf -profile test
@@ -1094,7 +1096,7 @@ Diesmal (und jedes Mal) sollte alles korrekt laufen:
     [88/1783aa] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
     ```
 
-Das results-Verzeichnis enthält jetzt sowohl BAM- als auch BAI-Dateien für jede Probe (aus dem Tupel), zusammen mit den VCF-Ausgaben:
+Das Ergebnisverzeichnis enthält jetzt sowohl BAM- als auch BAI-Dateien für jede Probe (aus dem Tupel) zusammen mit den VCF-Ausgaben:
 
 ??? abstract "Results-Verzeichnis Inhalt"
 
@@ -1117,7 +1119,7 @@ Das results-Verzeichnis enthält jetzt sowohl BAM- als auch BAI-Dateien für jed
     ```
 
 Durch das Bündeln zugehöriger Dateien in Tupel haben wir sichergestellt, dass die richtigen Dateien immer zusammen durch den Workflow reisen.
-Der Workflow verarbeitet jetzt zuverlässig beliebig viele Proben, aber sie einzeln in der config aufzulisten ist nicht sehr skalierbar.
+Der Workflow verarbeitet jetzt zuverlässig eine beliebige Anzahl von Proben, aber sie einzeln in der Config aufzulisten ist nicht sehr skalierbar.
 Im nächsten Schritt wechseln wir zum Lesen von Eingaben aus einer Datei.
 
 ### Fazit
@@ -1130,16 +1132,16 @@ Mache es einfacher, Proben in großen Mengen zu handhaben.
 
 ---
 
-## 4. Den Workflow so gestalten, dass er eine Textdatei mit einem Batch von Eingabedateien akzeptiert
+## 4. Den Workflow so anpassen, dass er eine Textdatei mit einem Batch von Eingabedateien akzeptiert
 
-Eine sehr häufige Methode, um mehrere Dateneingabedateien einem Workflow bereitzustellen, ist es, dies mit einer Textdatei zu tun, die die Dateipfade enthält.
-Es kann so einfach sein wie eine Textdatei, die einen Dateipfad pro Zeile auflistet und sonst nichts, oder die Datei kann zusätzliche Metadaten enthalten, in welchem Fall sie oft als Samplesheet bezeichnet wird.
+Eine sehr gängige Methode, um mehrere Dateneingabedateien für einen Workflow bereitzustellen, ist dies mit einer Textdatei zu tun, die die Dateipfade enthält.
+Es kann so einfach sein wie eine Textdatei, die einen Dateipfad pro Zeile auflistet und sonst nichts, oder die Datei kann zusätzliche Metadaten enthalten, in diesem Fall wird sie oft als Samplesheet bezeichnet.
 
-Hier zeigen wir dir, wie man den einfachen Fall macht.
+Hier zeigen wir dir, wie du den einfachen Fall machst.
 
 ### 4.1. Die bereitgestellte Textdatei mit den Eingabedateipfaden untersuchen
 
-Wir haben bereits eine Textdatei erstellt, die die Eingabedateipfade auflistet, genannt `sample_bams.txt`, die du im `data/`-Verzeichnis findest.
+Wir haben bereits eine Textdatei erstellt, die die Eingabedateipfade auflistet, genannt `sample_bams.txt`, die du im Verzeichnis `data/` findest.
 
 ```txt title="sample_bams.txt"
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
@@ -1149,28 +1151,28 @@ Wir haben bereits eine Textdatei erstellt, die die Eingabedateipfade auflistet, 
 
 Wie du sehen kannst, haben wir einen Dateipfad pro Zeile aufgelistet, und es sind absolute Pfade.
 
-!!! note
+!!! note "Hinweis"
 
-    Die Dateien, die wir hier verwenden, befinden sich nur auf dem lokalen Dateisystem deiner GitHub Codespaces, aber wir könnten auch auf Dateien im Cloud-Storage zeigen.
-    Wenn du nicht die bereitgestellte Codespaces-Umgebung verwendest, musst du möglicherweise die Dateipfade anpassen, um zu deinem lokalen Setup zu passen.
+    Die Dateien, die wir hier verwenden, befinden sich nur auf dem lokalen Dateisystem deines GitHub Codespaces, aber wir könnten auch auf Dateien im Cloud-Speicher zeigen.
+    Wenn du nicht die bereitgestellte Codespaces-Umgebung verwendest, musst du möglicherweise die Dateipfade an dein lokales Setup anpassen.
 
 ### 4.2. Den Parameter und das Testprofil aktualisieren
 
-Ändere den `reads_bam`-Parameter so, dass er auf die `sample_bams.txt`-Datei zeigt, anstatt einzelne Proben aufzulisten.
+Ändere den Parameter `reads_bam` so, dass er auf die Datei `sample_bams.txt` zeigt, anstatt einzelne Proben aufzulisten.
 
-Stelle die Typ-Annotation im params-Block wieder her (da es wieder ein einzelner Pfad ist):
+Stelle die Typannotation im params-Block wieder her (da es wieder ein einzelner Pfad ist):
 
 === "Danach"
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (file of input files, one per line)
+        // Primäre Eingabe (Datei mit Eingabedateien, eine pro Zeile)
         reads_bam: Path
     ```
 
 === "Vorher"
 
     ```groovy title="genomics.nf" linenums="10"
-        // Primary input (array of three samples)
+        // Primäre Eingabe (Array von drei Proben)
         reads_bam
     ```
 
@@ -1204,19 +1206,19 @@ Aktualisiere dann das Testprofil, um auf die Textdatei zu zeigen:
     }
     ```
 
-Die Liste der Dateien lebt überhaupt nicht mehr im Code, was ein großer Schritt in die richtige Richtung ist.
+Die Liste der Dateien lebt nicht mehr im Code, was ein großer Schritt in die richtige Richtung ist.
 
 ### 4.3. Die Kanal-Factory aktualisieren, um Zeilen aus einer Datei zu lesen
 
-Derzeit behandelt unsere Eingabekanal-Factory alle Dateien, die wir ihr geben, als die Dateneingaben, die wir dem Indizierungs-Prozess zuführen möchten.
+Derzeit behandelt unsere Eingabekanal-Factory alle Dateien, die wir ihr geben, als die Dateneingaben, die wir dem Indizierungsprozess zuführen möchten.
 Da wir ihr jetzt eine Datei geben, die Eingabedateipfade auflistet, müssen wir ihr Verhalten ändern, um die Datei zu parsen und die darin enthaltenen Dateipfade als Dateneingaben zu behandeln.
 
-Wir können dies mit demselben Muster tun, das wir in [Teil 2 von Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file) verwendet haben: Anwendung des [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv)-Operators zum Parsen der Datei, dann eine `map`-Operation, um das erste Feld jeder Zeile auszuwählen.
+Wir können dies mit demselben Muster tun, das wir in [Teil 2 von Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file) verwendet haben: Anwenden des Operators [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), um die Datei zu parsen, dann eine `map`-Operation, um das erste Feld jeder Zeile auszuwählen.
 
 === "Danach"
 
     ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
-        // Create input channel from a CSV file listing input file paths
+        // Eingabekanal aus einer CSV-Datei erstellen, die Eingabedateipfade auflistet
         reads_ch = Channel.fromPath(params.reads_bam)
                 .splitCsv()
                 .map { line -> file(line[0]) }
@@ -1225,16 +1227,16 @@ Wir können dies mit demselben Muster tun, das wir in [Teil 2 von Hello Nextflow
 === "Vorher"
 
     ```groovy title="genomics.nf" linenums="24"
-        // Create input channel (single file via CLI parameter)
+        // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 
-Technisch könnten wir dies einfacher mit dem [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext)-Operator machen, da unsere Eingabedatei derzeit nur Dateipfade enthält.
-Durch die Verwendung des vielseitigeren `splitCsv`-Operators (ergänzt durch `map`) können wir jedoch unseren Workflow zukunftssicher machen, falls wir uns entscheiden, Metadaten zur Datei mit Dateipfaden hinzuzufügen.
+Technisch könnten wir dies einfacher mit dem Operator [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) tun, da unsere Eingabedatei derzeit nur Dateipfade enthält.
+Durch die Verwendung des vielseitigeren `splitCsv`-Operators (ergänzt durch `map`) können wir unseren Workflow jedoch zukunftssicher machen, falls wir uns entscheiden, Metadaten zur Datei mit Dateipfaden hinzuzufügen.
 
-!!! tip
+!!! tip "Tipp"
 
-    Wenn du nicht sicher bist, ob du verstehst, was die Operatoren hier tun, ist dies eine weitere großartige Gelegenheit, den `.view()`-Operator zu verwenden, um zu sehen, wie die Kanalinhalte vor und nach der Anwendung aussehen.
+    Wenn du nicht sicher bist, dass du verstehst, was die Operatoren hier tun, ist dies eine weitere großartige Gelegenheit, den `.view()`-Operator zu verwenden, um zu sehen, wie die Kanalinhalte vor und nach der Anwendung aussehen.
 
 ### 4.4. Den Workflow ausführen
 
@@ -1255,18 +1257,18 @@ nextflow run genomics.nf -profile test -resume
     [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
     ```
 
-Ja! Tatsächlich erkennt Nextflow korrekt, dass die Prozessaufrufe genau dieselben sind, und macht sich nicht einmal die Mühe, alles erneut auszuführen, da wir mit `-resume` liefen.
+Ja! Tatsächlich erkennt Nextflow korrekt, dass die Prozessaufrufe genau gleich sind, und macht sich nicht einmal die Mühe, alles erneut auszuführen, da wir mit `-resume` liefen.
 
-Und das war's! Unser einfacher Varianten-Calling-Workflow hat alle grundlegenden Funktionen, die wir wollten.
+Und das war's! Unser einfacher Variantenerkennungs-Workflow hat alle grundlegenden Funktionen, die wir wollten.
 
 ### Fazit
 
-Du weißt, wie man einen mehrstufigen modularen Workflow erstellt, um eine BAM-Datei zu indizieren und pro-Probe-Varianten-Calling mit GATK anzuwenden.
+Du weißt, wie man einen mehrstufigen modularen Workflow erstellt, um eine BAM-Datei zu indizieren und Variantenerkennung pro Probe mit GATK anzuwenden.
 
-Allgemeiner hast du gelernt, wie man grundlegende Nextflow-Komponenten und -Logik verwendet, um eine einfache Genomik-Pipeline zu erstellen, die echte Arbeit leistet und dabei die Eigenheiten von Genomik-Dateiformaten und Tool-Anforderungen berücksichtigt.
+Allgemeiner hast du gelernt, wie man wesentliche Nextflow-Komponenten und -Logik verwendet, um eine einfache Genomik-Pipeline zu erstellen, die echte Arbeit leistet und die Eigenheiten von Genomik-Dateiformaten und Tool-Anforderungen berücksichtigt.
 
 ### Wie geht es weiter?
 
 Feiere deinen Erfolg und mache eine extra lange Pause!
 
-Im nächsten Teil dieses Kurses lernst du, wie du diesen einfachen pro-Probe-Varianten-Calling-Workflow transformierst, um Joint-Varianten-Calling auf die Daten anzuwenden.
+Im nächsten Teil dieses Kurses lernst du, wie du diesen einfachen Variantenerkennungs-Workflow pro Probe transformierst, um gemeinsame Variantenerkennung auf die Daten anzuwenden.

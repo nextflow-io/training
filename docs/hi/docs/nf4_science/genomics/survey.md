@@ -6,4 +6,4 @@
 
 इसे पूरा करने में तुम्हें केवल एक-दो मिनट लगेंगे। हमारी प्रशिक्षण सामग्री को सभी के लिए बेहतर बनाने में मदद करने के लिए धन्यवाद!
 
-<div data-tf-live="01JWWJP7GKFMSDV16VEDVCKM6G"></div><script src="//embed.typeform.com/next/embed.js"></script>
+<div data-tf-live="01KH1ZMJV8KYN98QXH2GXKMAAC"></div><script src="//embed.typeform.com/next/embed.js"></script>

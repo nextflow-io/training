@@ -1,1 +1,1 @@
-Este es un marcador de posición para las futuras Misiones Secundarias (entrenamientos profundos). Los documentos que se encuentran aquí actualmente son borradores basados en contenido reutilizado de otros lugares.
+Este es un marcador de posición para las futuras Side Quests (capacitaciones de profundización). Los documentos que se encuentran actualmente aquí son borradores basados en contenido reciclado de otros lugares.

@@ -33,9 +33,9 @@ Las dos herramientas principales involucradas son [Samtools](https://www.htslib.
 
 Estas herramientas no están instaladas en el entorno de GitHub Codespaces, así que las usaremos a través de contenedores (ver [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
-!!! note "Nota"
+!!! note
 
-     Asegúrate de estar en el directorio `nf4-science/genomics` para que la última parte de la ruta mostrada cuando escribes `pwd` sea `genomics`.
+    Asegúrate de estar en el directorio `nf4-science/genomics` para que la última parte de la ruta mostrada cuando escribes `pwd` sea `genomics`.
 
 ---
 
@@ -601,7 +601,7 @@ gatk GenomicsDBImport \
 La salida de este paso es efectivamente un directorio que contiene un conjunto de directorios anidados adicionales que contienen los datos de variantes combinados en forma de múltiples archivos diferentes.
 Puedes explorarlo pero rápidamente verás que este formato de almacén de datos no está diseñado para ser leído directamente por humanos.
 
-!!! note "Nota"
+!!! note
 
     GATK incluye herramientas que hacen posible inspeccionar y extraer datos de llamados de variantes del almacén de datos según sea necesario.
 

@@ -671,6 +671,6 @@ Vous savez également comment construire une ligne de commande en utilisant des 
 
 ### Et ensuite ?
 
-Célébrez votre réussite et prenez une pause bien méritée.
+Félicitations ! Vous avez terminé le cours Nextflow pour la génomique.
 
-Dans la prochaine partie de ce cours, vous apprendrez à exécuter un pipeline de variant calling prêt pour la production depuis nf-core et à le comparer au pipeline que vous avez construit manuellement.
+Rendez-vous au [résumé final du cours](./next_steps.md) pour revoir ce que vous avez appris et découvrir la suite.

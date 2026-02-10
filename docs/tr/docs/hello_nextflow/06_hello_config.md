@@ -1,29 +1,31 @@
 # Bölüm 6: Hello Config
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/FcZTiE25TeA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Nextflow YouTube kanalında [tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) izleyin.
+:fontawesome-brands-youtube:{ .youtube } [Tüm oynatma listesini](https://youtube.com/playlist?list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&si=eF7cLR62goy-lc6n) Nextflow YouTube kanalında görün.
 
-:green_book: Video transkripti [burada](./transcripts/06_hello_config.md) mevcuttur.
+:green_book: Video metni [burada](./transcripts/06_hello_config.md) mevcuttur.
 ///
 
-Bu bölüm, _iş akışı kodunun tek bir satırını değiştirmeden_ davranışını özelleştirebilmeniz, farklı ortamlara uyarlayabilmeniz ve kaynak kullanımını optimize edebilmeniz için Nextflow pipeline'ınızın yapılandırmasını nasıl kuracağınızı ve yöneteceğinizi keşfedecektir.
+Bu bölümde, Nextflow pipeline'ınızın yapılandırmasını nasıl kuracağınızı ve yöneteceğinizi keşfedeceğiz; böylece _iş akışı kodunun kendisinde tek bir satır bile değiştirmeden_ davranışını özelleştirebilecek, farklı ortamlara uyarlayabilecek ve kaynak kullanımını optimize edebileceksiniz.
 
-Bunu yapmanın birden fazla yolu vardır; bunlar birlikte kullanılabilir ve [burada](https://nextflow.io/docs/latest/config.html) açıklanan öncelik sırasına göre yorumlanır.
+Bunu yapmanın birden fazla yolu vardır; bunlar birlikte kullanılabilir ve yapılandırma belgelerinde açıklanan [öncelik sırasına](https://nextflow.io/docs/latest/config.html) göre yorumlanır.
 
-Bu kursun bu bölümünde, Bölüm 5: Hello Containers'da zaten karşılaştığınız en basit ve en yaygın yapılandırma dosyası mekanizması olan [`nextflow.config`](https://nextflow.io/docs/latest/config.html) dosyasını göstereceğiz.
+Kursun bu bölümünde, size en basit ve en yaygın yapılandırma dosyası mekanizmasını göstereceğiz: Bölüm 5: Hello Containers'da zaten karşılaştığınız [`nextflow.config`](https://nextflow.io/docs/latest/config.html) dosyası.
 
-Süreç yönergeleri, yürütücüler, profiller ve parametre dosyaları gibi Nextflow yapılandırmasının temel bileşenlerini gözden geçireceğiz.
-Bu yapılandırma seçeneklerini etkin bir şekilde kullanmayı öğrenerek, pipeline'larınızın esnekliğini, ölçeklenebilirliğini ve performansını artırabilirsiniz.
+Süreç yönergeleri, yürütücüler, profiller ve parametre dosyaları gibi Nextflow yapılandırmasının temel bileşenlerini ele alacağız.
+Bu yapılandırma seçeneklerini etkili bir şekilde kullanmayı öğrenerek, pipeline'larınızın esnekliğini, ölçeklenebilirliğini ve performansını artırabilirsiniz.
 
 ??? info "Bu bölümden nasıl başlanır"
 
-    Bu kursun bu bölümü, [Hello Nextflow](./index.md) kursunun 1-5. Bölümlerini tamamladığınızı ve eksiksiz çalışan bir pipeline'ınız olduğunu varsayar.
+    Kursun bu bölümü, [Hello Nextflow](./index.md) kursunun 1-5. Bölümlerini tamamladığınızı ve eksiksiz çalışan bir pipeline'a sahip olduğunuzu varsayar.
 
-    Kursa bu noktadan başlıyorsanız, `modules` dizinini ve `nextflow.config` dosyasını çözümlerden kopyalamanız gerekecek:
+    Kursa bu noktadan başlıyorsanız, `modules` dizinini ve `nextflow.config` dosyasını çözümlerden kopyalamanız gerekecektir:
 
     ```bash
     cp -r solutions/5-hello-containers/modules .
@@ -32,14 +34,14 @@ Bu yapılandırma seçeneklerini etkin bir şekilde kullanmayı öğrenerek, pip
 
     `nextflow.config` dosyası, Docker konteynerlerinin kullanımını etkinleştiren `docker.enabled = true` satırını içerir.
 
-    Hello pipeline'ına aşina değilseniz veya bir hatırlatmaya ihtiyacınız varsa, [bu bilgi sayfasına](../info/hello_pipeline.md) bakın.
+    Hello pipeline'ına aşina değilseniz veya hatırlatmaya ihtiyacınız varsa, [bu bilgi sayfasına](../info/hello_pipeline.md) bakın.
 
 ---
 
 ## 0. Isınma: `hello-config.nf` dosyasını çalıştırın
 
 Başlangıç noktası olarak `hello-config.nf` iş akışı betiğini kullanacağız.
-Bu betik, bu eğitim kursunun 5. Bölümünde üretilen betiğe eşdeğerdir; ancak çıktı hedeflerini değiştirdik:
+Bu eğitim kursunun 5. Bölümünde üretilen betiğe eşdeğerdir, ancak çıktı hedeflerini değiştirdik:
 
 ```groovy title="hello-config.nf" linenums="37" hl_lines="3 7 11 15"
 output {
@@ -86,9 +88,9 @@ nextflow run hello-config.nf
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde bulacaksınız (`results/hello_config/`).
+Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde (`results/hello_config/`) bulacaksınız.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     results/hello_config/
@@ -104,9 +106,9 @@ Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen di
     └── batch-report.txt
     ```
 
-Son ASCII sanat çıktısı `results/hello_config/` dizininde, `cowpy-COLLECTED-batch-output.txt` adı altında.
+Son ASCII sanat çıktısı, `results/hello_config/` dizininde `cowpy-COLLECTED-batch-output.txt` adı altındadır.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -143,17 +145,15 @@ Bu sizin için çalıştıysa, pipeline'larınızı nasıl yapılandıracağın�
 
 ## 1. İş akışı girdi parametrelerini yönetin
 
-Şimdiye kadar üzerinde çalıştığımız şeyin basit bir uzantısı olan bir yapılandırma yönüyle başlayacağız: girdi parametrelerinin yönetimi.
-
-Şu anda, iş akışımız komut satırı aracılığıyla çeşitli parametre değerlerini kabul edecek şekilde ayarlanmış, varsayılan değerler iş akışı betiğinin kendisindeki bir `params` bloğunda ayarlanmış.
-Ancak, bu varsayılanları, komut satırında parametreler belirtmek veya orijinal betik dosyasını değiştirmek zorunda kalmadan geçersiz kılmak isteyebilirsiniz.
+İş akışı betiğinin kendisinde varsayılan değerler ayarlanmış olarak, komut satırı üzerinden birkaç parametre değerini kabul edecek şekilde kurulmuş olan bir yapılandırma unsuruyla başlayacağız.
+Ancak, bu varsayılanları komut satırında parametreler belirtmek veya orijinal betik dosyasını değiştirmek zorunda kalmadan geçersiz kılmak isteyebilirsiniz.
 
 Bunu yapmanın birden fazla yolu vardır; size çok yaygın olarak kullanılan üç temel yolu göstereceğiz.
 
-### 1.1. Varsayılan değerleri `nextflow.config`'e taşıyın
+### 1.1. Varsayılan değerleri `nextflow.config` dosyasına taşıyın
 
-Bu en basit yaklaşımdır, ancak ana `nextflow.config` dosyası her çalıştırma için düzenlemek isteyeceğiniz bir şey olmadığından muhtemelen en az esnek olanıdır.
-Ancak, parametreleri iş akışında _tanımlamak_ (kesinlikle oraya ait) ile _varsayılan değerler_ sağlamak (bir yapılandırma dosyasında daha uygun) arasındaki endişeleri ayırma avantajına sahiptir.
+Bu en basit yaklaşımdır, ancak ana `nextflow.config` dosyası her çalıştırma için düzenlemek isteyeceğiniz bir şey olmadığından muhtemelen en az esnektir.
+Ancak, iş akışında parametreleri _bildirme_ (ki bu kesinlikle oraya aittir) ile _varsayılan değerler_ sağlama (bunlar bir yapılandırma dosyasında daha uygun) kaygılarını ayırma avantajına sahiptir.
 
 Bunu iki adımda yapalım.
 
@@ -183,14 +183,14 @@ Bunu iki adımda yapalım.
     ```
 
 `params` bloğunu iş akışından yapılandırma dosyasına basitçe kopyalamadığımıza dikkat edin.
-Sözdizimi biraz farklı.
-İş akışı dosyasında, bunlar tip tanımlı bildirimlerdir.
-Yapılandırmada, bunlar değer atamalarıdır.
+Sözdizimi biraz farklıdır.
+İş akışı dosyasında bunlar tipli bildirimlerdir.
+Yapılandırmada bunlar değer atamalarıdır.
 
-Teknik olarak, bu hâlâ iş akışı dosyasında belirtilen varsayılan değerleri geçersiz kılmak için yeterlidir.
-Karakteri değiştirebilir, örneğin, ve yapılandırma dosyasında ayarlanan değerin iş akışı dosyasında ayarlanan değeri geçersiz kıldığından emin olmak için iş akışını çalıştırabilirsiniz.
+Teknik olarak, bu iş akışı dosyasında hala belirtilen varsayılan değerleri geçersiz kılmak için yeterlidir.
+Örneğin karakteri değiştirebilir ve yapılandırma dosyasında ayarlanan değerin iş akışı dosyasında ayarlanan değeri geçersiz kıldığından emin olmak için iş akışını çalıştırabilirsiniz.
 
-Ancak, yapılandırmayı tamamen yapılandırma dosyasına taşıma ruhuna uygun olarak, bu değerleri iş akışı dosyasından tamamen kaldıralım.
+Ancak yapılandırmayı tamamen yapılandırma dosyasına taşıma ruhuyla, bu değerleri iş akışı dosyasından tamamen kaldıralım.
 
 #### 1.1.2. İş akışı dosyasındaki `params` bloğundan değerleri kaldırın
 
@@ -226,7 +226,7 @@ Artık iş akışı dosyasının kendisi bu parametreler için herhangi bir vars
 
 #### 1.1.3. Pipeline'ı çalıştırın
 
-Doğru çalışıp çalışmadığını test edelim.
+Doğru çalıştığını test edelim.
 
 ```bash
 nextflow run hello-config.nf
@@ -246,11 +246,11 @@ nextflow run hello-config.nf
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-Bu hâlâ daha önce olduğu gibi aynı çıktıyı üretiyor.
+Bu hala daha önce olduğu gibi aynı çıktıyı üretir.
 
-Son ASCII sanat çıktısı `results/hello_config/` dizininde, daha önce olduğu gibi `cowpy-COLLECTED-batch-output.txt` adı altında.
+Son ASCII sanat çıktısı, daha önce olduğu gibi `results/hello_config/` dizininde `cowpy-COLLECTED-batch-output.txt` adı altındadır.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_config/cowpy-COLLECTED-batch-output.txt"
     _________
@@ -285,10 +285,10 @@ Son ASCII sanat çıktısı `results/hello_config/` dizininde, daha önce olduğ
 
 ### 1.2. Çalıştırmaya özgü bir yapılandırma dosyası kullanın
 
-Harika, ama bazen ana yapılandırma dosyasıyla uğraşmadan farklı varsayılan değerlerle bazı geçici deneyler yapmak isteyebilirsiniz.
-Bunu, deneyeleriniz için çalışma dizini olarak kullanacağınız bir alt dizinde yeni bir `nextflow.config` dosyası oluşturarak yapabilirsiniz.
+Bu harika, ancak bazen ana yapılandırma dosyasını karıştırmadan farklı varsayılan değerlerle bazı geçici deneyler yapmak isteyebilirsiniz.
+Bunu, deneyler için çalışma dizini olarak kullanacağınız bir alt dizinde yeni bir `nextflow.config` dosyası oluşturarak yapabilirsiniz.
 
-#### 1.2.1. Boş bir yapılandırma ile çalışma dizini oluşturun
+#### 1.2.1. Boş bir yapılandırmayla çalışma dizini oluşturun
 
 Yeni bir dizin oluşturarak ve içine girerek başlayalım:
 
@@ -297,7 +297,7 @@ mkdir -p tux-run
 cd tux-run
 ```
 
-Ardından, o dizinde boş bir yapılandırma dosyası oluşturun:
+Ardından, bu dizinde boş bir yapılandırma dosyası oluşturun:
 
 ```bash
 touch nextflow.config
@@ -317,7 +317,7 @@ params {
 }
 ```
 
-Girdi dosyasının yolunun dizin yapısını yansıtması gerektiğini unutmayın.
+Girdi dosyasının yolunun dizin yapısını yansıtması gerektiğine dikkat edin.
 
 #### 1.2.3. Pipeline'ı çalıştırın
 
@@ -342,13 +342,13 @@ nextflow run ../hello-config.nf
     [88/3ece98] cowpy              [100%] 1 of 1 ✔
     ```
 
-Bu, `tux-run/work/` ve `tux-run/results/` dahil olmak üzere `tux-run/` altında yeni bir dizi dizin oluşturacaktır.
+Bu, `tux-run/work/` ve `tux-run/results/` dahil olmak üzere `tux-run/` altında yeni bir dizin seti oluşturacaktır.
 
-Bu çalıştırmada, Nextflow mevcut dizinimizdeki `nextflow.config`'i pipeline'ın kök dizinindeki `nextflow.config` ile birleştirir ve böylece varsayılan karakteri (turkey) tux karakteriyle geçersiz kılar.
+Bu çalıştırmada, Nextflow mevcut dizinimizdeki `nextflow.config` dosyasını pipeline'ın kök dizinindeki `nextflow.config` ile birleştirir ve böylece varsayılan karakteri (turkey) tux karakteriyle geçersiz kılar.
 
-Son çıktı dosyası, tux karakterinin selamlamaları söylediğini içermelidir.
+Son çıktı dosyası, selamlamaları söyleyen tux karakterini içermelidir.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="tux-run/results/hello_config/cowpy-COLLECTED-experiment-output.txt"
     _________
@@ -378,18 +378,18 @@ Son çıktı dosyası, tux karakterinin selamlamaları söylediğini içermelidi
     cd ..
     ```
 
-Şimdi parametre değerlerini ayarlamanın başka kullanışlı bir yoluna bakalım.
+Şimdi parametre değerlerini ayarlamanın başka bir kullanışlı yoluna bakalım.
 
 ### 1.3. Bir parametre dosyası kullanın
 
 Alt dizin yaklaşımı deney yapmak için harika çalışır, ancak biraz kurulum gerektirir ve yolları buna göre uyarlamanızı gerektirir.
-Pipeline'ınızı belirli bir değer kümesiyle çalıştırmak veya başkasının minimum çabayla yapmasını sağlamak istediğinizde daha basit bir yaklaşım vardır.
+Pipeline'ınızı belirli bir değer seti ile çalıştırmak istediğinizde veya başka birinin bunu minimum çabayla yapmasını sağlamak istediğinizde daha basit bir yaklaşım vardır.
 
-Nextflow, parametreleri YAML veya JSON formatında bir [parametre dosyası](https://nextflow.io/docs/latest/config.html#params-file) aracılığıyla belirtmemize olanak tanır; bu, örneğin alternatif varsayılan değer kümelerini ve çalıştırmaya özgü parametre değerlerini yönetmeyi ve dağıtmayı çok kullanışlı hale getirir.
+Nextflow, YAML veya JSON formatında bir [parametre dosyası](https://nextflow.io/docs/latest/config.html#params-file) aracılığıyla parametreleri belirtmemize olanak tanır; bu da alternatif varsayılan değer setlerini yönetmeyi ve dağıtmayı, örneğin çalıştırmaya özgü parametre değerlerini çok kullanışlı hale getirir.
 
 #### 1.3.1. Örnek parametre dosyasını inceleyin
 
-Bunu göstermek için, mevcut dizinde `test-params.yaml` adında bir örnek parametre dosyası sağlıyoruz:
+Bunu göstermek için, mevcut dizinde `test-params.yaml` adlı bir örnek parametre dosyası sağlıyoruz:
 
 ```yaml title="test-params.yaml" linenums="1"
 input: "data/greetings.csv"
@@ -397,18 +397,18 @@ batch: "yaml"
 character: "stegosaurus"
 ```
 
-Bu parametre dosyası, belirtmek istediğimiz girdilerin her biri için bir anahtar-değer çifti içerir.
-Sözdizimini yapılandırma dosyasıyla karşılaştırırsanız, eşit işaretleri (`=`) yerine iki nokta üst üste (`:`) kullanıldığına dikkat edin.
-Yapılandırma dosyası Groovy'de yazılmışken, parametre dosyası YAML'de yazılmıştır.
+Bu parametre dosyası, belirtmek istediğimiz her girdi için bir anahtar-değer çifti içerir.
+Sözdizimini yapılandırma dosyasıyla karşılaştırırsanız, eşittir işaretleri (`=`) yerine iki nokta üst üste (`:`) kullanımına dikkat edin.
+Yapılandırma dosyası Groovy'de yazılırken, parametre dosyası YAML'de yazılır.
 
 !!! info "Bilgi"
 
-    Ayrıca parametre dosyasının bir JSON versiyonunu örnek olarak sağlıyoruz ancak burada onunla çalıştırmayacağız.
-    Onu kendi başınıza denemekten çekinmeyin.
+    Ayrıca örnek olarak parametre dosyasının JSON sürümünü de sağlıyoruz ancak burada bununla çalıştırmayacağız.
+    Bunu kendi başınıza denemekten çekinmeyin.
 
 #### 1.3.2. Pipeline'ı çalıştırın
 
-İş akışını bu parametre dosyasıyla çalıştırmak için, temel komuta `-params-file <dosyaadı>` eklemeniz yeterli.
+İş akışını bu parametre dosyasıyla çalıştırmak için, temel komuta basitçe `-params-file <dosyaadı>` ekleyin.
 
 ```bash
 nextflow run hello-config.nf -params-file test-params.yaml
@@ -428,9 +428,9 @@ nextflow run hello-config.nf -params-file test-params.yaml
     [98/c6b57b] cowpy              | 1 of 1 ✔
     ```
 
-Son çıktı dosyası, stegosaurus karakterinin selamlamaları söylediğini içermelidir.
+Son çıktı dosyası, selamlamaları söyleyen stegosaurus karakterini içermelidir.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_config/cowpy-COLLECTED-yaml-output.txt"
     _________
@@ -454,10 +454,10 @@ Son çıktı dosyası, stegosaurus karakterinin selamlamaları söylediğini iç
                         |_____|        |_____|         ~ - . _ _ _ _ _>
     ```
 
-Yalnızca birkaç parametreniz olduğunda bir parametre dosyası kullanmak aşırı gibi görünebilir, ancak bazı pipeline'lar düzinelerce parametre bekler.
-Bu durumlarda, bir parametre dosyası kullanmak, büyük komut satırları yazmak zorunda kalmadan ve iş akışı betiğini değiştirmeden çalışma zamanında parametre değerleri sağlamamıza olanak tanıyacaktır.
+Yalnızca birkaç parametre belirtmeniz gerektiğinde bir parametre dosyası kullanmak aşırıya kaçmış gibi görünebilir, ancak bazı pipeline'lar düzinelerce parametre bekler.
+Bu durumlarda, bir parametre dosyası kullanmak, çalışma zamanında devasa komut satırları yazmak ve iş akışı betiğini değiştirmek zorunda kalmadan parametre değerleri sağlamamıza olanak tanır.
 
-Ayrıca parametre kümelerini işbirlikçilere veya örneğin bir yayın için destekleyici bilgi olarak dağıtmayı kolaylaştırır.
+Ayrıca parametre setlerini işbirlikçilere dağıtmayı veya örneğin bir yayın için destekleyici bilgi olarak sunmayı kolaylaştırır.
 Bu, çalışmanızı başkaları tarafından daha tekrarlanabilir hale getirir.
 
 ### Özet
@@ -472,24 +472,24 @@ Bu, çalışmanızı başkaları tarafından daha tekrarlanabilir hale getirir.
 
 ## 2. İş akışı çıktılarını yönetin
 
-Şimdiye kadar iş akışı düzeyindeki çıktı tanımlamaları için tüm yolları sabit kodluyorduk ve birden fazla çıktı eklemeye başladığımızda belirttiğimiz gibi, biraz tekrar olabilir.
+Şimdiye kadar iş akışı düzeyindeki çıktı bildirimleri için tüm yolları sabit kodluyorduk ve birden fazla çıktı eklemeye başladığımızda belirttiğimiz gibi, biraz tekrar söz konusu olabilir.
 
-Bunu daha esnek yapılandırmak için birkaç yaygın yola bakalım.
+Bunu daha esnek olacak şekilde yapılandırabileceğiniz birkaç yaygın yola bakalım.
 
-### 2.1. `-output-dir` ile çıktı dizinini özelleştirin
+### 2.1. Çıktı dizinini `-output-dir` ile özelleştirin
 
-'Yayınlanmış' çıktılarımızın nasıl organize edileceğini kontrol ederken iki farklı önceliğimiz var:
+'Yayınlanan' çıktılarımızın nasıl organize edildiğini kontrol ederken iki farklı önceliğimiz var:
 
 - Üst düzey çıktı dizini
-- Dosyaların bu dizin içinde nasıl organize edileceği
+- Bu dizin içinde dosyaların nasıl organize edildiği
 
 Şimdiye kadar varsayılan üst düzey dizini kullanıyorduk: `results`.
-Bunu `-output-dir` CLI seçeneğini kullanarak özelleştirmeyle başlayalım.
+`-output-dir` CLI seçeneğini kullanarak bunu özelleştirerek başlayalım.
 
 #### 2.1.1. Pipeline'ı `-output-dir` ile çalıştırın
 
-`-output-dir` seçeneği (kısa hali: `-o`) tüm iş akışı çıktıları için varsayılan çıktı dizinini (`results/`) geçersiz kılar.
-Bu, çıktıların yayınlandığı kök yolu kontrol etmek için önerilen yoldur.
+`-output-dir` seçeneği (kısaltma: `-o`) tüm iş akışı çıktıları için varsayılan çıktı dizinini (`results/`) geçersiz kılar.
+Bu, çıktıların yayınlandığı kök yolu kontrol etmenin önerilen yoludur.
 
 ```bash
 nextflow run hello-config.nf -output-dir custom-outdir-cli/
@@ -509,9 +509,9 @@ nextflow run hello-config.nf -output-dir custom-outdir-cli/
     [a8/97338e] cowpy              [100%] 1 of 1 ✔
     ```
 
-Bu, çıktıları `results/` yerine `custom-outdir-cli/` altında yayınlar:
+Bu, çıktıları `results/` yerine `custom-outdir-cli/` dizinine yayınlar:
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     custom-outdir-cli/
@@ -528,13 +528,13 @@ Bu, çıktıları `results/` yerine `custom-outdir-cli/` altında yayınlar:
             └── UPPER-Holà-output.txt
     ```
 
-Çıktı bloğundaki `path` bildirimlerinden gelen `hello_config` alt dizinine hâlâ sahip olduğumuza dikkat edin.
+Çıktı bloğundaki `path` bildirimlerinden hala `hello_config` alt dizinine sahip olduğumuza dikkat edin.
 Bunu temizleyelim.
 
 #### 2.1.2. Çıktı bloğundan sabit kodlanmış yolları kaldırın
 
 `hello_config/` öneki önceki bölümlerde sabit kodlanmıştı, ancak artık çıktı yollarını esnek bir şekilde yapılandırmayı öğrendiğimize göre, bu sabit kodlamayı kaldırabiliriz.
-Alt dizine ihtiyaç duymayan çıktılar için `path` yönergesini boş bir dizeye ayarlayabiliriz veya tamamen kaldırabiliriz.
+Alt dizine ihtiyaç duymayan çıktılar için `path` yönergesini boş bir dizeye ayarlayabilir veya tamamen kaldırabiliriz.
 
 İş akışı dosyasında aşağıdaki kod değişikliklerini yapın:
 
@@ -598,9 +598,9 @@ Pipeline'ı tekrar çalıştırın:
 nextflow run hello-config.nf -output-dir custom-outdir-cli-2/
 ```
 
-Şimdi çıktılar `hello_config` alt dizini olmadan doğrudan `custom-outdir-cli-2/` altında yayınlanıyor:
+Artık çıktılar `hello_config` alt dizini olmadan doğrudan `custom-outdir-cli-2/` altında yayınlanıyor:
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     custom-outdir-cli-2/
@@ -660,25 +660,25 @@ Bu, dizin yolunu dinamik olarak ayarlamamıza olanak tanır - sadece statik dize
     }
     ```
 
-Bu, çıktı dizinini `custom-outdir-config/` artı alt dizin olarak `batch` parametresinin değerine ayarlar.
-Şimdi `--batch` parametresini ayarlayarak çıktı konumunu değiştirebilirsiniz:
+Bu, çıktı dizinini `custom-outdir-config/` artı `batch` parametresinin değerini alt dizin olarak ayarlar.
+Artık `--batch` parametresini ayarlayarak çıktı konumunu değiştirebilirsiniz:
 
 ```bash
 nextflow run hello-config.nf --batch my_run
 ```
 
-Bu, çıktıları `custom-outdir-config/my_run/` altında yayınlar.
+Bu, çıktıları `custom-outdir-config/my_run/` dizinine yayınlar.
 
 !!! note "Not"
 
     `-output-dir` CLI seçeneği, `outputDir` yapılandırma ayarından önceliklidir.
-    Eğer ayarlanmışsa, yapılandırma seçeneği tamamen yok sayılır.
+    Ayarlanırsa, yapılandırma seçeneği tamamen göz ardı edilecektir.
 
-#### 2.2.2. Grup ve süreç adlarıyla alt dizinler
+#### 2.2.2. Batch ve süreç adlarıyla alt dizinler
 
-Ayrıca, çıktı başına alt dizin çıktı `path` bildirimlerini dinamik olarak ayarlayabiliriz.
+Ayrıca çıktı başına alt dizin çıktı `path` bildirimlerini dinamik olarak ayarlayabiliriz.
 
-Örneğin, çıktı yolu bildiriminde `<süreç>.name`'e referans vererek çıktılarımızı sürece göre organize edebiliriz:
+Örneğin, çıktı yolu bildiriminde `<process>.name` referansı vererek çıktılarımızı sürece göre organize edebiliriz:
 
 === "Sonra"
 
@@ -736,14 +736,14 @@ Ayrıca, çıktı başına alt dizin çıktı `path` bildirimlerini dinamik olar
 
 Daha da ileri gidebilir ve daha karmaşık alt dizin yolları oluşturabiliriz.
 
-Yukarıdaki düzenlemede `intermediates` ile son çıktıların üst düzeyde olması arasındaki ayrımı sildik.
+Yukarıdaki düzenlemede `intermediates` ile üst düzeydeki son çıktılar arasındaki ayrımı sildik.
 Bunu geri koyalım ve ayrıca dosyaları bir `params.batch` alt dizinine koyalım.
 
 !!! tip "İpucu"
 
-    `params.batch`'i çıktı bloğu `path`'ine dahil etmek, `outputDir` yapılandırması yerine, CLI'da `-output-dir` ile üzerine yazılmayacağı anlamına gelir.
+    `params.batch` değerini `outputDir` yapılandırması yerine çıktı bloğu `path` içine dahil etmek, CLI'da `-output-dir` ile üzerine yazılmayacağı anlamına gelir.
 
-Önce, yapılandırma dosyasını `outputDir`'den `${params.batch}`'i kaldıracak şekilde güncelleyin (çünkü onu yol bildirimlerine taşıyoruz):
+İlk olarak, `outputDir` değerinden `${params.batch}` değerini kaldırmak için yapılandırma dosyasını güncelleyin (çünkü bunu yol bildirimlerine taşıyoruz):
 
 === "Sonra"
 
@@ -821,7 +821,7 @@ Ardından, iş akışı dosyasında aşağıdaki değişiklikleri yapın:
 
 #### 2.2.3. Pipeline'ı çalıştırın
 
-Bunun pratikte nasıl çalıştığını görelim, hem `-output-dir` (veya kısaca `-o`) değerini `custom-outdir-config-2` hem de grup adını komut satırından `rep2` olarak ayarlayarak:
+Bunun pratikte nasıl çalıştığını görelim, hem `-output-dir` (veya kısaca `-o`) değerini `custom-outdir-config-2` olarak hem de batch adını komut satırından `rep2` olarak ayarlayalım:
 
 ```bash
 nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
@@ -841,9 +841,9 @@ nextflow run hello-config.nf -output-dir custom-outdir-config-2 --batch rep2
     [39/5e063a] cowpy              [100%] 1 of 1 ✔
     ```
 
-Bu, çıktıları `custom-outdir-config-2/rep2/` altında yayınlar, belirtilen temel yol _ve_ grup adı alt dizini _ve_ sürece göre gruplanmış sonuçlarla:
+Bu, çıktıları belirtilen temel yol _ve_ batch adı alt dizini _ve_ sürece göre gruplandırılmış sonuçlarla `custom-outdir-config-2/rep2/` dizinine yayınlar:
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     custom-outdir-config-2
@@ -867,7 +867,7 @@ Bu, çıktıları `custom-outdir-config-2/rep2/` altında yayınlar, belirtilen 
 
 ### 2.3. Yayınlama modunu iş akışı düzeyinde ayarlayın
 
-Son olarak, tekrarlayan kod miktarını azaltma ruhuna uygun olarak, çıktı başına `mode` tanımlarını yapılandırmada tek bir satırla değiştirebiliriz.
+Son olarak, tekrarlayan kod miktarını azaltma ruhuyla, çıktı başına `mode` bildirimlerini yapılandırmada tek bir satırla değiştirebiliriz.
 
 #### 2.3.1. Yapılandırma dosyasına `workflow.output.mode` ekleyin
 
@@ -892,9 +892,9 @@ Son olarak, tekrarlayan kod miktarını azaltma ruhuna uygun olarak, çıktı ba
     outputDir = "custom-outdir-config/"
     ```
 
-Tıpkı `outputDir` seçeneği gibi, yapılandırma dosyasında `workflow.output.mode`'a bir değer vermek, iş akışı dosyasında ayarlananı geçersiz kılmak için yeterli olurdu, ancak yine de gereksiz kodu kaldıralım.
+Yapılandırma dosyasında `workflow.output.mode` ayarlamak, iş akışı dosyasında ayarlananı geçersiz kılmak için yeterlidir, ancak gereksiz kodu yine de kaldıralım.
 
-#### 2.3.2. Çıktı modunu iş akışı dosyasından kaldırın
+#### 2.3.2. İş akışı dosyasından çıktı modunu kaldırın
 
 İş akışı dosyasında aşağıdaki değişiklikleri yapın:
 
@@ -947,11 +947,11 @@ Tıpkı `outputDir` seçeneği gibi, yapılandırma dosyasında `workflow.output
     }
     ```
 
-Bu daha kısa, değil mi?
+Bu daha özlü, değil mi?
 
 #### 2.3.3. Pipeline'ı çalıştırın
 
-Doğru çalışıp çalışmadığını test edelim:
+Doğru çalıştığını test edelim:
 
 ```bash
 nextflow run hello-config.nf -output-dir config-output-mode
@@ -971,9 +971,9 @@ nextflow run hello-config.nf -output-dir config-output-mode
     [e6/1dc80e] cowpy              [100%] 1 of 1 ✔
     ```
 
-Bu, çıktıları `config-output-mode/` altında yayınlar ve hepsi hâlâ düzgün kopyalar, sembolik bağlantılar değil.
+Bu, çıktıları `config-output-mode/` dizinine yayınlar ve hepsi hala sembolik bağlantılar değil, uygun kopyalardır.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     config-output-mode
@@ -995,38 +995,38 @@ Bu, çıktıları `config-output-mode/` altında yayınlar ve hepsi hâlâ düzg
                 └── Holà-output.txt
     ```
 
-Çıktı başına mod ayarlama yolunu hâlâ kullanmak istemenizin ana nedeni, aynı iş akışı içinde karıştırıp eşleştirmek istemeniz olabilir, _yani_ bazı çıktıların kopyalanması ve bazılarının sembolik bağlantı olması.
+Çıktı başına mod ayarlama yöntemini kullanmak isteyebileceğiniz ana neden, aynı iş akışı içinde karıştırmak ve eşleştirmek istemenizdir, _yani_ bazı çıktıların kopyalanmasını ve bazılarının sembolik bağlantı olmasını sağlamak.
 
-Bu şekilde özelleştirebileceğiniz birçok başka seçenek var, ancak umarız bu size seçenek yelpazesi ve tercihlerinize uygun olarak bunları etkili bir şekilde nasıl kullanacağınız hakkında bir fikir verir.
+Bu şekilde özelleştirebileceğiniz başka birçok seçenek vardır, ancak umarım bu size seçenek yelpazesi ve tercihlerinize uygun şekilde bunları etkili bir şekilde nasıl kullanacağınız konusunda bir fikir verir.
 
 ### Özet
 
-Çıktılarınızın yayınlandığı dizinlerin adlandırılmasını ve yapısını ve iş akışı çıktısı yayınlama modunu nasıl kontrol edeceğinizi biliyorsunuz.
+Çıktılarınızın yayınlandığı dizinlerin adlandırmasını ve yapısını, ayrıca iş akışı çıktı yayınlama modunu nasıl kontrol edeceğinizi biliyorsunuz.
 
 ### Sırada ne var?
 
-İş akışı yapılandırmanızı yazılım paketleme teknolojisinden başlayarak hesaplama ortamınıza nasıl uyarlayacağınızı öğrenin.
+İş akışı yapılandırmanızı bilgi işlem ortamınıza nasıl uyarlayacağınızı, yazılım paketleme teknolojisiyle başlayarak öğrenin.
 
 ---
 
 ## 3. Bir yazılım paketleme teknolojisi seçin
 
-Şimdiye kadar girdilerin nasıl girdiğini ve çıktıların nereden çıktığını kontrol eden yapılandırma öğelerine bakıyorduk. Şimdi iş akışı yapılandırmanızı hesaplama ortamınıza uyarlamaya daha özel olarak odaklanma zamanı.
+Şimdiye kadar girdilerin nasıl girdiğini ve girdilerin nereye çıktığını kontrol eden yapılandırma öğelerine bakıyorduk. Şimdi iş akışı yapılandırmanızı bilgi işlem ortamınıza uyarlamaya daha spesifik olarak odaklanma zamanı.
 
 Bu yoldaki ilk adım, her adımda çalıştırılacak yazılım paketlerinin nereden geleceğini belirtmektir.
-Yerel hesaplama ortamında zaten yüklü mü?
-İmajları alıp bir konteyner sistemi aracılığıyla çalıştırmamız mı gerekiyor?
-Yoksa Conda paketlerini alıp yerel bir Conda ortamı mı oluşturmamız gerekiyor?
+Bunlar yerel bilgi işlem ortamında zaten yüklü mü?
+Görüntüleri almamız ve bunları bir konteyner sistemi aracılığıyla çalıştırmamız mı gerekiyor?
+Yoksa Conda paketlerini almamız ve yerel bir Conda ortamı oluşturmamız mı gerekiyor?
 
-Bu eğitim kursunun en başında (Bölüm 1-4) iş akışımızda sadece yerel olarak yüklenmiş yazılımı kullandık.
-Ardından Bölüm 5'te, Docker konteynerlerini ve Docker konteynerlerinin kullanımını etkinleştirmek için kullandığımız `nextflow.config` dosyasını tanıttık.
+Bu eğitim kursunun ilk bölümünde (Bölüm 1-4) iş akışımızda sadece yerel olarak yüklenmiş yazılımı kullandık.
+Ardından Bölüm 5'te Docker konteynerlerini ve Docker konteynerlerinin kullanımını etkinleştirmek için kullandığımız `nextflow.config` dosyasını tanıttık.
 
 Şimdi `nextflow.config` dosyası aracılığıyla alternatif bir yazılım paketleme seçeneğini nasıl yapılandırabileceğimizi görelim.
 
 ### 3.1. Yapılandırma dosyasında Docker'ı devre dışı bırakın ve Conda'yı etkinleştirin
 
-Bir HPC kümesinde çalıştığımızı ve yöneticinin güvenlik nedeniyle Docker kullanımına izin vermediğini varsayalım.
-Neyse ki bizim için, Nextflow, Singularity (HPC'de daha yaygın olarak kullanılır) gibi birden fazla başka konteyner teknolojisini ve Conda gibi yazılım paket yöneticilerini destekler.
+Bir HPC kümesinde çalıştığımızı ve yöneticinin güvenlik nedenleriyle Docker kullanımına izin vermediğini varsayalım.
+Neyse ki bizim için Nextflow, Singularity (HPC'de daha yaygın olarak kullanılır) dahil olmak üzere birden fazla başka konteyner teknolojisini ve Conda gibi yazılım paket yöneticilerini destekler.
 
 Yapılandırma dosyamızı Docker yerine [Conda](https://nextflow.io/docs/latest/conda.html) kullanacak şekilde değiştirebiliriz.
 Bunu yapmak için, `docker.enabled` değerini `false` olarak değiştirelim ve Conda kullanımını etkinleştiren bir yönerge ekleyelim:
@@ -1044,14 +1044,14 @@ Bunu yapmak için, `docker.enabled` değerini `false` olarak değiştirelim ve C
     docker.enabled = true
     ```
 
-Bu, Nextflow'un Conda paketleri belirtilmiş süreçler için Conda ortamları oluşturmasına ve kullanmasına olanak tanıyacaktır.
-Bu, şimdi `cowpy` sürecimize bunlardan birini eklememiz gerektiği anlamına gelir!
+Bu, Nextflow'un Conda paketleri belirtilmiş süreçler için Conda ortamları oluşturmasına ve kullanmasına olanak tanır.
+Bu da artık `cowpy` sürecimize bunlardan birini eklememiz gerektiği anlamına gelir!
 
 ### 3.2. Süreç tanımında bir Conda paketi belirtin
 
 `cowpy` aracını içeren bir Conda paketi için URI'yi zaten aldık: `conda-forge::cowpy==1.1.5`
 
-Şimdi `conda` yönergesini kullanarak URI'yi `cowpy` süreç tanımına ekliyoruz:
+Şimdi URI'yi `conda` yönergesini kullanarak `cowpy` süreç tanımına ekleyin:
 
 === "Sonra"
 
@@ -1074,14 +1074,14 @@ Bu, şimdi `cowpy` sürecimize bunlardan birini eklememiz gerektiği anlamına g
         input:
     ```
 
-Açık olmak gerekirse, `container` yönergesini _değiştirmiyoruz_, alternatif bir seçenek _ekliyoruz_.
+Açık olmak gerekirse, `docker` yönergesini _değiştirmiyoruz_, alternatif bir seçenek _ekliyoruz_.
 
 !!! tip "İpucu"
 
-    Belirli bir conda paketi için URI almanın birkaç farklı yolu var.
-    [Seqera Containers](https://seqera.io/containers/) arama sorgusunu kullanmanızı öneriyoruz; bu, ondan bir konteyner oluşturmayı planlamasanız bile kopyalayıp yapıştırabileceğiniz bir URI verecektir.
+    Belirli bir conda paketi için URI'yi almanın birkaç farklı yolu vardır.
+    Bir konteyner oluşturmayı planlamasanız bile kopyalayıp yapıştırabileceğiniz bir URI verecek olan [Seqera Containers](https://seqera.io/containers/) arama sorgusunu kullanmanızı öneririz.
 
-### 3.3. Conda kullanabildiğini doğrulamak için iş akışını çalıştırın
+### 3.3. Conda kullanabileceğini doğrulamak için iş akışını çalıştırın
 
 Hadi deneyelim.
 
@@ -1105,24 +1105,24 @@ nextflow run hello-config.nf --batch conda
 
 Bu sorunsuz çalışmalı ve `custom-outdir-config/conda` altında daha önce olduğu gibi aynı çıktıları üretmelidir.
 
-Perde arkasında, Nextflow Conda paketlerini aldı ve ortamı oluşturdu, bu normalde biraz iş gerektirir; bu yüzden bunların hiçbirini kendimiz yapmak zorunda kalmamamız güzel!
+Perde arkasında, Nextflow Conda paketlerini almış ve ortamı oluşturmuştur; bu normalde biraz iş gerektirir; bu yüzden bunların hiçbirini kendimiz yapmak zorunda kalmamamız güzel!
 
 !!! note "Not"
 
-    Bu hızlı çalışır çünkü `cowpy` paketi oldukça küçüktür, ancak büyük paketlerle çalışıyorsanız, ilk seferde normalden biraz daha uzun sürebilir ve konsol çıktısının tamamlanmadan önce bir dakika kadar 'takılı' kaldığını görebilirsiniz.
-    Bu normaldir ve Nextflow'un yeni bir paketi ilk kullandığınızda yaptığı ekstra işten kaynaklanır.
+    `cowpy` paketi oldukça küçük olduğu için bu hızlı çalışır, ancak büyük paketlerle çalışıyorsanız, ilk seferinde normalden biraz daha uzun sürebilir ve konsol çıktısının tamamlanmadan önce bir dakika kadar 'takılı' kaldığını görebilirsiniz.
+    Bu normaldir ve Nextflow'un yeni bir paketi ilk kez kullandığınızda yaptığı ekstra işten kaynaklanır.
 
-Bizim açımızdan, arka uçta mekanikler biraz farklı olsa da Docker ile çalıştırmakla tamamen aynı görünüyor.
+Bizim açımızdan, arka planda mekanikler biraz farklı olsa da Docker ile çalıştırmakla tamamen aynı şekilde çalışıyor gibi görünüyor.
 
-Bu, gerektiğinde Conda ortamlarıyla çalıştırmaya hazır olduğumuz anlamına gelir.
+Bu, gerekirse Conda ortamlarıyla çalıştırmaya hazır olduğumuz anlamına gelir.
 
-??? info "Docker ve Conda'yı karıştırıp eşleştirme"
+??? info "Docker ve Conda'yı karıştırma ve eşleştirme"
 
-    Bu yönergeler süreç başına atandığından, 'karıştırıp eşleştirmek' mümkündür, _yani_ kullandığınız hesaplama altyapısı her ikisini de destekliyorsa, iş akışınızdaki bazı süreçleri Docker ile ve diğerlerini Conda ile çalıştıracak şekilde yapılandırabilirsiniz.
-    Bu durumda, yapılandırma dosyanızda hem Docker hem de Conda'yı etkinleştirirsiniz.
-    Her ikisi de belirli bir süreç için mevcutsa, Nextflow konteynerlere öncelik verecektir.
+    Bu yönergeler süreç başına atandığından, örneğin kullandığınız bilgi işlem altyapısı her ikisini de destekliyorsa, iş akışınızdaki bazı süreçleri Docker ile ve diğerlerini Conda ile çalıştıracak şekilde yapılandırmak, yani 'karıştırmak ve eşleştirmek' mümkündür.
+    Bu durumda, yapılandırma dosyanızda hem Docker'ı hem de Conda'yı etkinleştirirsiniz.
+    Belirli bir süreç için her ikisi de mevcutsa, Nextflow konteynerlere öncelik verecektir.
 
-    Ve daha önce belirtildiği gibi, Nextflow birden fazla başka yazılım paketleme ve konteyner teknolojisini destekler, bu nedenle yalnızca bu ikisiyle sınırlı değilsiniz.
+    Ve daha önce belirtildiği gibi, Nextflow birden fazla başka yazılım paketleme ve konteyner teknolojisini destekler, bu nedenle sadece bu ikisiyle sınırlı değilsiniz.
 
 ### Özet
 
@@ -1130,24 +1130,24 @@ Her sürecin hangi yazılım paketini kullanması gerektiğini nasıl yapıland�
 
 ### Sırada ne var?
 
-Nextflow'un işi gerçekten yapmak için kullandığı yürütme platformunu nasıl değiştireceğinizi öğrenin.
+Nextflow tarafından işi gerçekten yapmak için kullanılan yürütme platformunu nasıl değiştireceğinizi öğrenin.
 
 ---
 
 ## 4. Bir yürütme platformu seçin
 
-Şimdiye kadar, pipeline'ımızı local yürütücüyle çalıştırıyorduk.
-Bu, her görevi Nextflow'un çalıştığı makinede yürütür.
+Şimdiye kadar pipeline'ımızı yerel yürütücü ile çalıştırıyorduk.
+Bu, her görevi Nextflow'un üzerinde çalıştığı makinede yürütür.
 Nextflow başladığında, mevcut CPU'lara ve belleğe bakar.
-Çalıştırılmaya hazır görevlerin kaynakları mevcut kaynakları aşarsa, Nextflow son görevleri, önceki görevlerden biri veya daha fazlası tamamlanıp gerekli kaynakları serbest bırakana kadar yürütmeden alıkoyacaktır.
+Çalıştırılmaya hazır görevlerin kaynakları mevcut kaynakları aşarsa, Nextflow son görevleri, önceki görevlerden biri veya daha fazlası bitene ve gerekli kaynakları serbest bırakana kadar yürütmeden geri tutar.
 
-Local yürütücü kullanışlı ve verimlidir, ancak o tek makineyle sınırlıdır. Çok büyük iş yükleri için, yerel makinenizin bir darboğaz olduğunu keşfedebilirsiniz; ya mevcut olandan daha fazla kaynak gerektiren tek bir göreviniz olduğu için ya da tek bir makinenin bunları çalıştırmasını beklemenin çok uzun süreceği kadar çok göreviniz olduğu için.
+Yerel yürütücü kullanışlı ve verimlidir, ancak tek bir makineyle sınırlıdır. Çok büyük iş yükleri için, yerel makinenizin bir darboğaz olduğunu keşfedebilirsiniz; ya sahip olduğunuzdan daha fazla kaynak gerektiren tek bir göreviniz olduğu için ya da tek bir makinenin bunları çalıştırmasını beklemenin çok uzun süreceği kadar çok göreviniz olduğu için.
 
-Nextflow, HPC zamanlayıcıları (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor ve diğerleri) dahil olmak üzere [birçok farklı yürütme arka ucunu](https://nextflow.io/docs/latest/executor.html) ve ayrıca bulut yürütme arka uçlarını (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes ve daha fazlası) destekler.
+Nextflow, HPC zamanlayıcıları (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor ve diğerleri) ve bulut yürütme arka uçları (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes ve daha fazlası) dahil olmak üzere [birçok farklı yürütücüyü](https://nextflow.io/docs/latest/executor.html) destekler.
 
 ### 4.1. Farklı bir arka ucu hedefleme
 
-Yürütücü seçimi, `executor` adlı bir süreç yönergesiyle belirlenir.
+Yürütücü seçimi, `executor` adlı bir süreç yönergesi tarafından ayarlanır.
 Varsayılan olarak `local` olarak ayarlanmıştır, bu nedenle aşağıdaki yapılandırma ima edilir:
 
 ```groovy title="Built-in configuration"
@@ -1156,7 +1156,7 @@ process {
 }
 ```
 
-Yürütücüyü farklı bir arka ucu hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklandığı gibi benzer sözdizimi kullanarak istediğiniz yürütücüyü belirtmeniz yeterlidir (tüm seçenekler için [yürütücü dokümantasyonuna](https://nextflow.io/docs/latest/executor.html) bakın).
+Yürütücüyü farklı bir arka ucu hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklanan benzer sözdizimini kullanarak istediğiniz yürütücüyü belirtirsiniz (tüm seçenekler için [yürütücü belgelerine](https://nextflow.io/docs/latest/executor.html) bakın).
 
 ```groovy title="nextflow.config"
 process {
@@ -1166,17 +1166,17 @@ process {
 
 !!! warning "Uyarı"
 
-    Bunu eğitim ortamında gerçekten test edemeyiz çünkü bir HPC'ye bağlanacak şekilde ayarlanmamış.
+    Eğitim ortamı bir HPC'ye bağlanacak şekilde kurulmadığı için bunu gerçekten test edemeyiz.
 
 ### 4.2. Yürütme parametreleri için arka uca özgü sözdizimi ile başa çıkma
 
-Çoğu yüksek performanslı hesaplama platformu, kaynak tahsisi istekleri ve sınırlamaları (örn. CPU sayısı ve bellek) ve kullanılacak iş kuyruğunun adı gibi belirli parametreleri belirtmenize izin verir (ve bazen gerektirir).
+Çoğu yüksek performanslı bilgi işlem platformu, CPU sayısı ve bellek gibi kaynak tahsis isteklerini ve sınırlamalarını ve kullanılacak iş kuyruğunun adını belirtmenize izin verir (ve bazen gerektirir).
 
-Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili zamanlayıcıya nasıl gönderilmesi gerektiğini belirlemek için farklı teknolojiler, sözdizimler ve yapılandırmalar kullanır.
+Ne yazık ki, bu sistemlerin her biri bir işin nasıl tanımlanması ve ilgili zamanlayıcıya gönderilmesi gerektiğini tanımlamak için farklı teknolojiler, sözdizimi ve yapılandırmalar kullanır.
 
 ??? abstract "Örnekler"
 
-    Örneğin, 8 CPU ve 4GB RAM gerektiren ve "my-science-work" kuyruğunda yürütülecek aynı iş, arka uca bağlı olarak aşağıdaki farklı şekillerde ifade edilmelidir.
+    Örneğin, "my-science-work" kuyruğunda yürütülmek üzere 8 CPU ve 4GB RAM gerektiren aynı işin arka uca bağlı olarak aşağıdaki farklı şekillerde ifade edilmesi gerekir.
 
     ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -1205,27 +1205,27 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
     ```
 
 Neyse ki, Nextflow tüm bunları basitleştirir.
-[`cpus`](https://nextflow.io/docs/latest/reference/process.html#cpus), [`memory`](https://nextflow.io/docs/latest/reference/process.html#memory) ve [`queue`](https://nextflow.io/docs/latest/reference/process.html#queue) gibi ilgili özellikleri (diğer özellikler için [süreç yönergelerine](https://nextflow.io/docs/latest/reference/process.html#process-directives) bakın) yalnızca bir kez belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar.
-Ardından, çalışma zamanında, Nextflow bu ayarları kullanarak yürütücü ayarına dayalı olarak uygun arka uca özgü betikleri oluşturacaktır.
+[`cpus`](https://nextflow.io/docs/latest/reference/process.html#cpus), [`memory`](https://nextflow.io/docs/latest/reference/process.html#memory) ve [`queue`](https://nextflow.io/docs/latest/reference/process.html#queue) gibi ilgili özellikleri belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar (diğer özellikler için [süreç yönergelerine](https://nextflow.io/docs/latest/reference/process.html#process-directives) bakın) sadece bir kez.
+Ardından, çalışma zamanında Nextflow, yürütücü ayarına göre uygun arka uca özgü betikleri oluşturmak için bu ayarları kullanacaktır.
 
 Bu standartlaştırılmış sözdizimini bir sonraki bölümde ele alacağız.
 
 ### Özet
 
-Artık farklı türde hesaplama altyapısı kullanmak için yürütücüyü nasıl değiştireceğinizi biliyorsunuz.
+Artık farklı türde bilgi işlem altyapılarını kullanmak için yürütücüyü nasıl değiştireceğinizi biliyorsunuz.
 
 ### Sırada ne var?
 
-Nextflow'da kaynak tahsislerini ve sınırlamalarını nasıl değerlendirip ifade edeceğinizi öğrenin.
+Nextflow'da kaynak tahsislerini ve sınırlamalarını nasıl değerlendireceğinizi ve ifade edeceğinizi öğrenin.
 
 ---
 
-## 5. Hesaplama kaynak tahsislerini kontrol edin
+## 5. Bilgi işlem kaynak tahsislerini kontrol edin
 
-Çoğu yüksek performanslı hesaplama platformu, CPU sayısı ve bellek gibi belirli kaynak tahsis parametrelerini belirtmenize izin verir (ve bazen gerektirir).
+Çoğu yüksek performanslı bilgi işlem platformu, CPU sayısı ve bellek gibi belirli kaynak tahsis parametrelerini belirtmenize izin verir (ve bazen gerektirir).
 
 Varsayılan olarak, Nextflow her süreç için tek bir CPU ve 2GB bellek kullanacaktır.
-İlgili süreç yönergeleri `cpus` ve `memory` olarak adlandırılır, bu nedenle aşağıdaki yapılandırma ima edilir:
+Karşılık gelen süreç yönergeleri `cpus` ve `memory` olarak adlandırılır, bu nedenle aşağıdaki yapılandırma ima edilir:
 
 ```groovy title="Built-in configuration" linenums="1"
 process {
@@ -1234,29 +1234,29 @@ process {
 }
 ```
 
-Bu değerleri, yapılandırma dosyanızdaki ek süreç yönergelerini kullanarak tüm süreçler veya belirli adlandırılmış süreçler için değiştirebilirsiniz.
+Bu değerleri, tüm süreçler için veya belirli adlandırılmış süreçler için, yapılandırma dosyanızda ek süreç yönergeleri kullanarak değiştirebilirsiniz.
 Nextflow bunları seçilen yürütücü için uygun talimatlara çevirecektir.
 
 Ancak hangi değerleri kullanacağınızı nasıl bilirsiniz?
 
-### 5.1. Kaynak kullanım raporu oluşturmak için iş akışını çalıştırın
+### 5.1. Bir kaynak kullanım raporu oluşturmak için iş akışını çalıştırın
 
-Süreçlerinizin ne kadar CPU ve belleğe ihtiyaç duyacağını önceden bilmiyorsanız, bazı kaynak profilleme yapabilirsiniz; yani iş akışını bazı varsayılan tahsislerle çalıştırırsınız, her sürecin ne kadar kullandığını kaydedersiniz ve oradan temel tahsisleri nasıl ayarlayacağınızı tahmin edersiniz.
+Süreçlerinizin ne kadar CPU ve belleğe ihtiyaç duyacağını önceden bilmiyorsanız, biraz kaynak profilleme yapabilirsiniz; yani iş akışını bazı varsayılan tahsislerle çalıştırır, her sürecin ne kadar kullandığını kaydeder ve oradan temel tahsisleri nasıl ayarlayacağınızı tahmin edersiniz.
 
-Kullanışlı bir şekilde, Nextflow bunu yapmak için yerleşik araçlar içerir ve istek üzerine sizin için bir rapor oluşturmaktan mutluluk duyar.
+Uygun bir şekilde, Nextflow bunu yapmak için yerleşik araçlar içerir ve talep üzerine sizin için memnuniyetle bir rapor oluşturacaktır.
 
-Bunu yapmak için, komut satırınıza `-with-report <dosyaadı>.html` ekleyin.
+Bunu yapmak için komut satırınıza `-with-report <dosyaadı>.html` ekleyin.
 
 ```bash
 nextflow run hello-config.nf -with-report report-config-1.html
 ```
 
-Rapor, tarayıcınızda indirip açabileceğiniz bir html dosyasıdır. Eğitim ortamında görüntülemek için soldaki dosya gezgininde sağ tıklayıp `Show preview`'a da tıklayabilirsiniz.
+Rapor bir html dosyasıdır, indirebilir ve tarayıcınızda açabilirsiniz. Ayrıca soldaki dosya gezgininde sağ tıklayıp eğitim ortamında görüntülemek için `Show preview` seçeneğine tıklayabilirsiniz.
 
-Raporu incelemek ve kaynakları ayarlama fırsatlarını belirleyip belirleyemeyeceğinizi görmek için birkaç dakika ayırın.
-Kullanım sonuçlarını tahsis edilenin yüzdesi olarak gösteren sekmelere tıkladığınızdan emin olun.
+Raporu incelemek ve kaynakları ayarlamak için bazı fırsatları belirleyip belirleyemeyeceğinizi görmek için birkaç dakikanızı ayırın.
+Kullanımı tahsis edilenin yüzdesi olarak gösteren sekmelere tıkladığınızdan emin olun.
 
-Mevcut tüm özellikleri açıklayan [Raporlar](https://nextflow.io/docs/latest/reports.html) dokümantasyonuna bakın.
+Mevcut tüm özellikler hakkında belgeler için [Raporlar](https://nextflow.io/docs/latest/reports.html) bölümüne bakın.
 
 ### 5.2. Tüm süreçler için kaynak tahsisleri ayarlayın
 
@@ -1303,11 +1303,11 @@ Profilleme, eğitim iş akışımızdaki süreçlerin çok hafif olduğunu göst
     }
     ```
 
-Bu, tükettiğimiz hesaplama miktarını azaltmaya yardımcı olacaktır.
+Bu, tükettiğimiz bilgi işlem miktarını azaltmaya yardımcı olacaktır.
 
 ### 5.3. Belirli bir süreç için kaynak tahsisleri ayarlayın
 
-Aynı zamanda, `cowpy` sürecinin diğerlerinden daha fazla kaynak gerektirdiğini varsayacağız, böylece bireysel bir süreç için tahsisleri nasıl ayarlayacağımızı gösterebiliriz.
+Aynı zamanda, `cowpy` sürecinin diğerlerinden daha fazla kaynak gerektirdiğini varsayacağız, sadece bireysel bir süreç için tahsisleri nasıl ayarlayacağımızı gösterebilmemiz için.
 
 === "Sonra"
 
@@ -1335,37 +1335,37 @@ Aynı zamanda, `cowpy` sürecinin diğerlerinden daha fazla kaynak gerektirdiği
     }
     ```
 
-Bu yapılandırmayla, `cowpy` süreci dışında tüm süreçler 1GB bellek ve tek bir CPU (ima edilen varsayılan) isteyecektir; `cowpy` süreci 2GB ve 2 CPU isteyecektir.
+Bu yapılandırmayla, tüm süreçler 1GB bellek ve tek bir CPU (ima edilen varsayılan) talep edecek, `cowpy` süreci hariç, bu 2GB ve 2 CPU talep edecektir.
 
 !!! tip "İpucu"
 
-    Az sayıda CPU'ya sahip bir makineniz varsa ve süreç başına yüksek sayıda tahsis ederseniz, süreç çağrılarının birbiri ardına sıraya girdiğini görebilirsiniz.
-    Bunun nedeni, Nextflow'un mevcut olandan daha fazla CPU talep etmememizi sağlamasıdır.
+    Az CPU'ya sahip bir makineniz varsa ve süreç başına yüksek bir sayı tahsis ederseniz, süreç çağrılarının birbirinin arkasında sıraya girdiğini görebilirsiniz.
+    Bunun nedeni Nextflow'un mevcut olandan daha fazla CPU talep etmememizi sağlamasıdır.
 
-### 5.4. Güncellenmiş yapılandırma ile iş akışını çalıştırın
+### 5.4. Güncellenmiş yapılandırmayla iş akışını çalıştırın
 
-Bunu deneyelim, yapılandırma değişikliklerinden önce ve sonra performansı karşılaştırabilmemiz için profilleme raporu için farklı bir dosya adı sağlayarak.
+Hadi deneyelim, yapılandırma değişikliklerinden önce ve sonra performansı karşılaştırabilmemiz için profilleme raporu için farklı bir dosya adı sağlayalım.
 
 ```bash
 nextflow run hello-config.nf -with-report report-config-2.html
 ```
 
-Bu kadar küçük bir iş yükü olduğundan muhtemelen gerçek bir fark fark etmeyeceksiniz, ancak bu, gerçek dünya bir iş akışının performansını ve kaynak gereksinimlerini analiz etmek için kullanacağınız yaklaşımdır.
+Bu çok küçük bir iş yükü olduğu için muhtemelen gerçek bir fark fark etmeyeceksiniz, ancak bu gerçek dünya iş akışının performansını ve kaynak gereksinimlerini analiz etmek için kullanacağınız yaklaşımdır.
 
-Süreçlerinizin farklı kaynak gereksinimleri olduğunda çok faydalıdır. Tahminde bulunmak yerine gerçek verilere dayalı olarak her süreç için ayarladığınız kaynak tahsislerini doğru boyutlandırmanızı sağlar.
+Süreçlerinizin farklı kaynak gereksinimleri olduğunda çok kullanışlıdır. Tahminlere değil, gerçek verilere dayalı olarak her süreç için ayarladığınız kaynak tahsislerini doğru boyutlandırmanızı sağlar.
 
 !!! tip "İpucu"
 
-    Bu, kaynak kullanımınızı optimize etmek için yapabileceklerinizin sadece küçük bir tadımıdır.
-    Nextflow'un kendisi, kaynak sınırlamaları nedeniyle başarısız olan işleri yeniden denemek için gerçekten zarif [dinamik yeniden deneme mantığı](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) yerleşik olarak içerir.
-    Ek olarak, Seqera Platform kaynak tahsislerinizi otomatik olarak optimize etmek için yapay zeka destekli araçlar da sunmaktadır.
+    Bu, kaynakların kullanımını optimize etmek için yapabileceklerinizin sadece küçük bir tadımlığıdır.
+    Nextflow'un kendisi, kaynak sınırlamaları nedeniyle başarısız olan işleri yeniden denemek için yerleşik gerçekten düzgün [dinamik yeniden deneme mantığına](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) sahiptir.
+    Ek olarak, Seqera Platform, kaynak tahsislerinizi otomatik olarak optimize etmek için yapay zeka destekli araçlar da sunar.
 
 ### 5.5. Kaynak sınırları ekleyin
 
-Hangi hesaplama yürütücüsü ve hesaplama altyapısı kullandığınıza bağlı olarak, tahsis edebileceğiniz (veya etmeniz gereken) konusunda bazı kısıtlamalar olabilir.
+Hangi bilgi işlem yürütücüsünü ve bilgi işlem altyapısını kullandığınıza bağlı olarak, tahsis edebileceğiniz (veya tahsis etmeniz gereken) şeyler üzerinde bazı kısıtlamalar olabilir.
 Örneğin, kümeniz belirli sınırlar içinde kalmanızı gerektirebilir.
 
-İlgili sınırlamaları ayarlamak için `resourceLimits` yönergesini kullanabilirsiniz. Sözdizimi, bir process bloğunda tek başına olduğunda şöyle görünür:
+İlgili sınırlamaları ayarlamak için `resourceLimits` yönergesini kullanabilirsiniz. Sözdizimi, bir süreç bloğunda tek başına olduğunda şöyle görünür:
 
 ```groovy title="Syntax example"
 process {
@@ -1379,36 +1379,36 @@ process {
 
 Nextflow bu değerleri, belirttiğiniz yürütücüye bağlı olarak uygun talimatlara çevirecektir.
 
-Bunu çalıştırmayacağız, çünkü eğitim ortamında ilgili altyapıya erişimimiz yok.
-Ancak, bu sınırları aşan kaynak tahsisleriyle iş akışını çalıştırmayı deneyecek olsaydınız, ardından `.command.run` betik dosyasındaki `sbatch` komutunu ararsanız, yürütücüye gönderilen isteklerin `resourceLimits` tarafından belirtilen değerlerde sınırlandığını görürdünüz.
+Eğitim ortamında ilgili altyapıya erişimimiz olmadığı için bunu çalıştırmayacağız.
+Ancak, bu sınırları aşan kaynak tahsisleriyle iş akışını çalıştırmayı denerseniz, ardından `.command.run` betik dosyasındaki `sbatch` komutuna bakarsanız, yürütücüye gerçekten gönderilen isteklerin `resourceLimits` tarafından belirtilen değerlerle sınırlandırıldığını görürsünüz.
 
 ??? info "Kurumsal referans yapılandırmaları"
 
-    nf-core projesi, çok çeşitli HPC ve bulut yürütücülerini kapsayan, dünya çapındaki çeşitli kurumlar tarafından paylaşılan bir [yapılandırma dosyaları koleksiyonu](https://nf-co.re/configs/) derlemiştir.
+    nf-core projesi, dünya çapındaki çeşitli kurumlar tarafından paylaşılan, çok çeşitli HPC ve bulut yürütücülerini kapsayan bir [yapılandırma dosyaları koleksiyonu](https://nf-co.re/configs/) derlemiştir.
 
-    Bu paylaşılan yapılandırmalar, hem orada çalışan ve dolayısıyla kurumlarının yapılandırmasını kutudan çıktığı gibi kullanabilen insanlar için hem de kendi altyapıları için bir yapılandırma geliştirmek isteyen insanlar için model olarak değerlidir.
+    Bu paylaşılan yapılandırmalar hem orada çalışan ve dolayısıyla kurumlarının yapılandırmasını kutudan çıkar çıkmaz kullanabilen insanlar hem de kendi altyapıları için bir yapılandırma geliştirmek isteyen insanlar için bir model olarak değerlidir.
 
 ### Özet
 
-Kaynak kullanımını değerlendirmek için profilleme raporu oluşturmayı ve tüm süreçler ve/veya bireysel süreçler için kaynak tahsislerini nasıl değiştireceğinizi ve HPC'de çalıştırma için kaynak sınırlamalarını nasıl ayarlayacağınızı biliyorsunuz.
+Kaynak kullanımını değerlendirmek için bir profilleme raporu oluşturmayı ve tüm süreçler ve/veya bireysel süreçler için kaynak tahsislerini nasıl değiştireceğinizi, ayrıca HPC'de çalıştırmak için kaynak sınırlamalarını nasıl ayarlayacağınızı biliyorsunuz.
 
 ### Sırada ne var?
 
-Önceden ayarlanmış yapılandırma profillerini nasıl kuracağınızı ve çalışma zamanında aralarında nasıl geçiş yapacağınızı öğrenin.
+Önceden ayarlanmış yapılandırma profillerini nasıl kuracağınızı ve çalışma zamanında bunlar arasında nasıl geçiş yapacağınızı öğrenin.
 
 ---
 
 ## 6. Önceden ayarlanmış yapılandırmalar arasında geçiş yapmak için profilleri kullanın
 
-Size, üzerinde çalıştığınız projeye veya kullandığınız hesaplama ortamına bağlı olarak pipeline yapılandırmanızı özelleştirebileceğiniz birkaç yol gösterdik.
+Size, üzerinde çalıştığınız projeye veya kullandığınız bilgi işlem ortamına bağlı olarak pipeline yapılandırmanızı özelleştirebileceğiniz bir dizi yol gösterdik.
 
-Hangi hesaplama altyapısını kullandığınıza bağlı olarak alternatif ayarlar arasında geçiş yapmak isteyebilirsiniz. Örneğin, dizüstü bilgisayarınızda yerel olarak geliştirip küçük ölçekli testler yapmak, ardından tam ölçekli iş yüklerini HPC veya bulutta çalıştırmak isteyebilirsiniz.
+Hangi bilgi işlem altyapısını kullandığınıza bağlı olarak alternatif ayarlar arasında geçiş yapmak isteyebilirsiniz. Örneğin, dizüstü bilgisayarınızda yerel olarak küçük ölçekli testler geliştirmek ve çalıştırmak, ardından HPC veya bulutta tam ölçekli iş yüklerini çalıştırmak isteyebilirsiniz.
 
-Nextflow, farklı yapılandırmaları tanımlayan herhangi bir sayıda [profil](https://nextflow.io/docs/latest/config.html#config-profiles) ayarlamanıza olanak tanır; bunları yapılandırma dosyasını değiştirmek yerine bir komut satırı argümanı kullanarak çalışma zamanında seçebilirsiniz.
+Nextflow, farklı yapılandırmaları tanımlayan herhangi bir sayıda [profil](https://nextflow.io/docs/latest/config.html#config-profiles) kurmanıza olanak tanır; bunları daha sonra yapılandırma dosyasının kendisini değiştirmek yerine bir komut satırı argümanı kullanarak çalışma zamanında seçebilirsiniz.
 
 ### 6.1. Yerel geliştirme ve HPC'de yürütme arasında geçiş yapmak için profiller oluşturun
 
-İki alternatif profil kuralım; biri normal bir bilgisayarda küçük ölçekli yükler çalıştırmak için, burada Docker konteynerlerini kullanacağız, ve biri Slurm zamanlayıcısına sahip bir üniversite HPC'sinde çalıştırmak için, burada Conda paketlerini kullanacağız.
+İki alternatif profil kuralım; biri normal bir bilgisayarda küçük ölçekli yükler çalıştırmak için, burada Docker konteynerlerini kullanacağız, ve biri Slurm zamanlayıcısı olan bir üniversite HPC'sinde çalıştırmak için, burada Conda paketlerini kullanacağız.
 
 #### 6.1.1. Profilleri kurun
 
@@ -1475,7 +1475,7 @@ Nextflow, farklı yapılandırmaları tanımlayan herhangi bir sayıda [profil](
 
 #### 6.1.2. İş akışını bir profille çalıştırın
 
-Nextflow komut satırımızda bir profil belirtmek için `-profile` argümanını kullanıyoruz.
+Nextflow komut satırımızda bir profil belirtmek için `-profile` argümanını kullanırız.
 
 İş akışını `my_laptop` yapılandırmasıyla çalıştırmayı deneyelim.
 
@@ -1497,19 +1497,19 @@ nextflow run hello-config.nf -profile my_laptop
     [f1/fd6520] cowpy              [100%] 1 of 1 ✔
     ```
 
-Gördüğünüz gibi, bu yapılandırmalar arasında çalışma zamanında çok kullanışlı bir şekilde geçiş yapmamıza olanak tanır.
+Gördüğünüz gibi, bu çalışma zamanında yapılandırmalar arasında çok rahat bir şekilde geçiş yapmamızı sağlar.
 
 !!! warning "Uyarı"
 
-    `univ_hpc` profili eğitim ortamında düzgün çalışmayacaktır çünkü bir Slurm zamanlayıcısına erişimimiz yok.
+    `univ_hpc` profili, bir Slurm zamanlayıcısına erişimimiz olmadığı için eğitim ortamında düzgün çalışmayacaktır.
 
-Gelecekte bunlarla her zaman birlikte olan başka yapılandırma öğeleri bulursak, bunları ilgili profile/profillere ekleyebiliriz.
+Gelecekte bunlarla her zaman birlikte ortaya çıkan başka yapılandırma öğeleri bulursak, bunları basitçe ilgili profil(ler)e ekleyebiliriz.
 Birlikte gruplandırmak istediğimiz başka yapılandırma öğeleri varsa ek profiller de oluşturabiliriz.
 
-### 6.2. Test parametreleri profili oluşturun
+### 6.2. Test parametrelerinin bir profilini oluşturun
 
-Profiller yalnızca altyapı yapılandırması için değildir.
-Başkalarının uygun girdi değerlerini kendileri toplamak zorunda kalmadan iş akışını denemesini kolaylaştırmak için iş akışı parametreleri için varsayılan değerler ayarlamak amacıyla da kullanabiliriz.
+Profiller sadece altyapı yapılandırması için değildir.
+Bunları iş akışı parametreleri için varsayılan değerler ayarlamak için de kullanabiliriz; bu, başkalarının uygun girdi değerlerini kendileri toplamak zorunda kalmadan iş akışını denemelerini kolaylaştırır.
 Bunu bir parametre dosyası kullanmaya alternatif olarak düşünebilirsiniz.
 
 #### 6.2.1. Profili kurun
@@ -1552,16 +1552,16 @@ profiles {
 }
 ```
 
-Teknik yapılandırma profilleri gibi, istediğiniz herhangi bir rastgele ad altında parametreleri belirten birden fazla farklı profil ayarlayabilirsiniz.
+Teknik yapılandırma profilleri gibi, istediğiniz herhangi bir ad altında parametreleri belirten birden fazla farklı profil kurabilirsiniz.
 
 #### 6.2.2. İş akışını test profiliyle yerel olarak çalıştırın
 
-Kullanışlı bir şekilde, profiller birbirini dışlamaz, bu nedenle `-profile <profil1>,<profil2>` sözdizimini (herhangi bir sayıda profil için) kullanarak komut satırımızda birden fazla profil belirtebiliriz.
+Uygun bir şekilde, profiller birbirini dışlamaz, bu nedenle aşağıdaki sözdizimini kullanarak komut satırımızda birden fazla profil belirtebiliriz `-profile <profil1>,<profil2>` (herhangi bir sayıda profil için).
 
-Aynı yapılandırma öğeleri için değerler ayarlayan ve aynı yapılandırma dosyasında tanımlanan profilleri birleştirirseniz, Nextflow çatışmayı en son okuduğu değeri kullanarak çözecektir (_yani_ dosyada daha sonra gelen).
+Aynı yapılandırma öğeleri için değerler ayarlayan ve aynı yapılandırma dosyasında açıklanan profilleri birleştirirseniz, Nextflow çatışmayı en son okuduğu değeri kullanarak çözecektir (_yani_ dosyada daha sonra gelen her neyse).
 Çakışan ayarlar farklı yapılandırma kaynaklarında ayarlanmışsa, varsayılan [öncelik sırası](https://nextflow.io/docs/latest/config.html) geçerlidir.
 
-Önceki komutumuzda test profilini eklemeyi deneyelim:
+Önceki komutumuza test profilini eklemeyi deneyelim:
 
 ```bash
 nextflow run hello-config.nf -profile my_laptop,test
@@ -1581,9 +1581,9 @@ nextflow run hello-config.nf -profile my_laptop,test
     [06/a1ee14] cowpy              [100%] 1 of 1 ✔
     ```
 
-Bu, mümkün olduğunda Docker kullanacak ve çıktıları `custom-outdir-config/test` altında üretecektir ve bu sefer karakter komik ikili `dragonandcow`'dur.
+Bu, mümkün olduğunda Docker kullanacak ve çıktıları `custom-outdir-config/test` altında üretecek ve bu sefer karakter komedi ikilisi `dragonandcow`.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt"
      _________
@@ -1609,27 +1609,27 @@ Bu, mümkün olduğunda Docker kullanacak ve çıktıları `custom-outdir-config
       //    \\               ///-._ _ _ _ _ _ _{^ - - - - ~
     ```
 
-Bu, test veri dosyalarını iş akışı koduyla birlikte dağıttığımız sürece, herkesin komut satırı veya parametre dosyası aracılığıyla kendi girdilerini sağlamak zorunda kalmadan iş akışını hızlıca deneyebileceği anlamına gelir.
+Bu, iş akışı koduyla herhangi bir test veri dosyası dağıttığımız sürece, herkesin komut satırı veya bir parametre dosyası aracılığıyla kendi girdilerini sağlamak zorunda kalmadan iş akışını hızlı bir şekilde deneyebileceği anlamına gelir.
 
 !!! tip "İpucu"
 
     Harici olarak depolanan daha büyük dosyalar için URL'lere işaret edebiliriz.
     Açık bir bağlantı olduğu sürece Nextflow bunları otomatik olarak indirecektir.
 
-    Daha fazla ayrıntı için, [Dosyalarla Çalışma](../side_quests/working_with_files.md) Yan Görevi'ne bakın
+    Daha fazla ayrıntı için, Yan Görev [Dosyalarla Çalışma](../side_quests/working_with_files.md) bölümüne bakın
 
 ### 6.3. Çözümlenmiş yapılandırmayı görmek için `nextflow config` kullanın
 
 Yukarıda belirtildiği gibi, bazen aynı parametre birleştirmek istediğiniz profillerde farklı değerlere ayarlanabilir.
 Ve daha genel olarak, yapılandırma öğelerinin depolanabileceği çok sayıda yer vardır ve bazen aynı özellikler farklı yerlerde farklı değerlere ayarlanabilir.
 
-Nextflow, herhangi bir çatışmayı çözmek için belirlenmiş bir [öncelik sırası](https://nextflow.io/docs/latest/config.html) uygular, ancak bunu kendiniz belirlemek zor olabilir.
-Ve hiçbir şey çakışmıyor olsa bile, şeylerin yapılandırılabileceği tüm olası yerlere bakmak sıkıcı olabilir.
+Nextflow, herhangi bir çatışmayı çözmek için bir set [öncelik sırası](https://nextflow.io/docs/latest/config.html) uygular, ancak bunu kendiniz belirlemek zor olabilir.
+Ve hiçbir şey çakışmasa bile, şeylerin yapılandırılabileceği tüm olası yerlere bakmak sıkıcı olabilir.
 
-Neyse ki, Nextflow bu tüm süreci sizin için otomatikleştirebilen `config` adlı kullanışlı bir yardımcı araç içerir.
+Neyse ki, Nextflow, tüm bu süreci sizin için otomatikleştirebilecek `config` adlı kullanışlı bir yardımcı program aracı içerir.
 
-`config` aracı mevcut çalışma dizininizdeki tüm içerikleri keşfedecek, tüm yapılandırma dosyalarını toplayacak ve Nextflow'un iş akışını çalıştırmak için kullanacağı tamamen çözümlenmiş yapılandırmayı üretecektir.
-Bu, hiçbir şey başlatmak zorunda kalmadan hangi ayarların kullanılacağını öğrenmenizi sağlar.
+`config` aracı, mevcut çalışma dizininizdeki tüm içerikleri keşfedecek, herhangi bir yapılandırma dosyasını toplayacak ve Nextflow'un iş akışını çalıştırmak için kullanacağı tamamen çözümlenmiş yapılandırmayı üretecektir.
+Bu, herhangi bir şey başlatmak zorunda kalmadan hangi ayarların kullanılacağını öğrenmenizi sağlar.
 
 #### 6.3.1. Varsayılan yapılandırmayı çözümleyin
 
@@ -1673,11 +1673,11 @@ nextflow config
     }
     ```
 
-Bu, komut satırında fazladan bir şey belirtmezseniz elde ettiğiniz temel yapılandırmayı gösterir.
+Bu, komut satırında ekstra bir şey belirtmezseniz aldığınız temel yapılandırmayı gösterir.
 
 #### 6.3.2. Belirli ayarlar etkinleştirilmiş yapılandırmayı çözümleyin
 
-Komut satırı parametreleri sağlarsanız, örn. bir veya daha fazla profili etkinleştirme veya bir parametre dosyası yükleme, komut bunları da dikkate alacaktır.
+Komut satırı parametreleri sağlarsanız, örneğin bir veya daha fazla profili etkinleştirerek veya bir parametre dosyası yükleyerek, komut bunları da ek olarak dikkate alacaktır.
 
 ```bash
 nextflow config -profile my_laptop,test
@@ -1718,18 +1718,18 @@ nextflow config -profile my_laptop,test
     }
     ```
 
-Bu, birden fazla yapılandırma katmanı içeren karmaşık projeler için özellikle faydalıdır.
+Bu, birden fazla yapılandırma katmanı içeren karmaşık projeler için özellikle kullanışlı hale gelir.
 
 ### Özet
 
-Çalışma zamanında minimum güçlükle önceden ayarlanmış bir yapılandırma seçmek için profilleri nasıl kullanacağınızı biliyorsunuz.
-Daha genel olarak, iş akışı yürütmelerinizi farklı hesaplama platformlarına uyacak şekilde yapılandırmayı ve analizlerinizin tekrarlanabilirliğini artırmayı biliyorsunuz.
+Minimum güçlükle çalışma zamanında önceden ayarlanmış bir yapılandırmayı seçmek için profilleri nasıl kullanacağınızı biliyorsunuz.
+Daha genel olarak, iş akışı yürütmelerinizi farklı bilgi işlem platformlarına uyacak şekilde nasıl yapılandıracağınızı ve analizlerinizin tekrarlanabilirliğini nasıl artıracağınızı biliyorsunuz.
 
 ### Sırada ne var?
 
-Kutlayın ve kendinize büyük bir övgü verin! İlk Nextflow geliştirici kursunuzu tamamladınız.
+Kutlayın ve kendinize büyük bir alkış verin! İlk Nextflow geliştirici kursunuzu tamamladınız.
 
-Ne öğrendiğinizi gözden geçirmek ve sırada ne olduğunu öğrenmek için son [kurs özeti](./next_steps.md)'ne gidin.
+Ne öğrendiğinizi gözden geçirmek ve sırada ne olduğunu öğrenmek için son [kurs özetine](./next_steps.md) gidin.
 
 ---
 
@@ -1744,28 +1744,28 @@ Nextflow'un otomatik olarak yüklediği yapılandırma dosyasının adı nedir?
 </quiz>
 
 <quiz>
-Aynı parametre hem yapılandırma dosyasında hem de komut satırında ayarlandığında hangisi öncelik alır?
+Aynı parametre hem yapılandırma dosyasında hem de komut satırında ayarlandığında hangisi önceliklidir?
 - [ ] Yapılandırma dosyası değeri
 - [x] Komut satırı değeri
-- [ ] İlk karşılaşılan değer
+- [ ] Karşılaşılan ilk değer
 - [ ] Hiçbiri; bir hataya neden olur
 
-Daha fazla bilgi: [1.1. Varsayılan değerleri `nextflow.config`'e taşıyın](#11-move-default-values-to-nextflowconfig)
+Daha fazla bilgi: [1.1. Varsayılan değerleri `nextflow.config` dosyasına taşıyın](#11-move-default-values-to-nextflowconfig)
 </quiz>
 
 <quiz>
 Aynı yapılandırmada hem Docker hem de Conda etkinleştirilebilir mi?
 - [x] Evet, Nextflow süreç yönergelerine bağlı olarak her ikisini de kullanabilir
 - [ ] Hayır, aynı anda yalnızca biri etkinleştirilebilir
-- [ ] Evet, ama sadece profillerde
+- [ ] Evet, ancak yalnızca profillerde
 - [ ] Hayır, birbirini dışlarlar
 </quiz>
 
 <quiz>
-Hem Docker hem de Conda etkinse ve bir süreçte her iki yönerge de varsa, hangisi öncelikli?
+Hem Docker hem de Conda etkinleştirilmişse ve bir sürecin her iki yönergesi de varsa, hangisine öncelik verilir?
 - [x] Docker (konteynerler)
 - [ ] Conda
-- [ ] İlk tanımlanan
+- [ ] Tanımlanan ilk
 - [ ] Bir hataya neden olur
 
 Daha fazla bilgi: [3. Bir yazılım paketleme teknolojisi seçin](#3-select-a-software-packaging-technology)
@@ -1790,13 +1790,13 @@ Daha fazla bilgi: [5.3. Belirli bir süreç için kaynak tahsisleri ayarlayın](
 </quiz>
 
 <quiz>
-Hangi komut satırı seçeneği kaynak kullanım raporu oluşturur?
+Bir kaynak kullanım raporu oluşturan komut satırı seçeneği nedir?
 - [ ] `-with-metrics`
 - [ ] `-with-stats`
 - [x] `-with-report`
 - [ ] `-with-profile`
 
-Daha fazla bilgi: [5.1. Kaynak kullanım raporu oluşturmak için iş akışını çalıştırın](#51-run-the-workflow-to-generate-a-resource-utilization-report)
+Daha fazla bilgi: [5.1. Bir kaynak kullanım raporu oluşturmak için iş akışını çalıştırın](#51-run-the-workflow-to-generate-a-resource-utilization-report)
 </quiz>
 
 <quiz>
@@ -1810,7 +1810,7 @@ Daha fazla bilgi: [5.5. Kaynak sınırları ekleyin](#55-add-resource-limits)
 </quiz>
 
 <quiz>
-Nextflow'daki varsayılan yürütücü nedir?
+Nextflow'da varsayılan yürütücü nedir?
 - [x] `local`
 - [ ] `slurm`
 - [ ] `kubernetes`
@@ -1830,11 +1830,11 @@ Daha fazla bilgi: [1.3. Bir parametre dosyası kullanın](#13-use-a-parameter-fi
 </quiz>
 
 <quiz>
-Profiller ne için kullanılabilir? (Uygulanabilen tümünü seçin)
-- [x] Altyapıya özgü ayarları tanımlamak
-- [x] Farklı ortamlar için kaynak sınırları ayarlamak
-- [x] Test parametreleri sağlamak
-- [ ] Yeni süreçler tanımlamak
+Profiller ne için kullanılabilir? (Tümünü seçin)
+- [x] Altyapıya özgü ayarları tanımlama
+- [x] Farklı ortamlar için kaynak sınırları ayarlama
+- [x] Test parametreleri sağlama
+- [ ] Yeni süreçler tanımlama
 
 Daha fazla bilgi: [6. Önceden ayarlanmış yapılandırmalar arasında geçiş yapmak için profilleri kullanın](#6-use-profiles-to-switch-between-preset-configurations)
 </quiz>

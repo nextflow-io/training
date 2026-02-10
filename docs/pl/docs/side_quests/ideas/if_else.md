@@ -8,8 +8,8 @@
 
 ## 1. Spraw, aby krowa cytowała słynnych naukowców
 
-Ta sekcja zawiera dodatkowe ćwiczenia pozwalające na utrwalenie dotychczas zdobytej wiedzy.
-Wykonanie tych ćwiczeń _nie jest wymagane_ do zrozumienia późniejszych części szkolenia, ale stanowi świetny sposób na sprawdzenie, jak zmusić krowę do cytowania słynnych naukowców.
+Ta sekcja zawiera kilka dodatkowych ćwiczeń, które pozwolą Ci przećwiczyć to, czego się do tej pory nauczyłeś.
+Wykonanie tych ćwiczeń _nie jest wymagane_ do zrozumienia późniejszych części szkolenia, ale stanowią one zabawny sposób na utrwalenie wiedzy poprzez wymyślenie, jak sprawić, aby krowa cytowała słynnych naukowców.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________
@@ -33,15 +33,15 @@ Wykonanie tych ćwiczeń _nie jest wymagane_ do zrozumienia późniejszych czę�
 ### 1.1. Zmodyfikuj skrypt `hello-containers.nf`, aby używał procesu getQuote
 
 Mamy listę pionierów informatyki i biologii w pliku `containers/data/pioneers.csv`.
-Na wysokim poziomie, aby wykonać to ćwiczenie, będziesz musiał:
+Ogólnie rzecz biorąc, aby ukończyć to ćwiczenie, będziesz musiał:
 
 - Zmodyfikować domyślny `params.input_file`, aby wskazywał na plik `pioneers.csv`.
-- Utworzyć proces `getQuote`, który używa kontenera `quote` do pobrania cytatu dla każdego wejścia.
+- Stworzyć proces `getQuote`, który używa kontenera `quote` do pobrania cytatu dla każdego wejścia.
 - Połączyć wyjście procesu `getQuote` z procesem `cowsay`, aby wyświetlić cytat.
 
-Dla obrazu kontenera `quote` możesz użyć albo tego, który sam zbudowałeś w poprzednim dodatkowym ćwiczeniu, albo pobrać gotowy z Seqera Containers.
+Dla obrazu kontenera `quote` możesz użyć tego, który sam zbudowałeś w poprzednim dodatkowym ćwiczeniu, lub skorzystać z tego, który otrzymałeś z Seqera Containers.
 
-!!! Hint
+!!! Hint "Podpowiedź"
 
     Dobrym wyborem dla bloku `script` Twojego procesu getQuote może być:
         ```groovy
@@ -55,9 +55,9 @@ Dla obrazu kontenera `quote` możesz użyć albo tego, który sam zbudowałeś w
 
 Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-containers-4.1.nf`.
 
-### 1.2. Zmodyfikuj Swój pipeline Nextflow, aby mógł wykonywać się w trybach `quote` i `sayHello`.
+### 1.2. Zmodyfikuj swój pipeline Nextflow, aby mógł działać w trybach `quote` i `sayHello`.
 
-Dodaj logikę rozgałęzień do Swojego pipeline'u, aby mógł akceptować dane wejściowe przeznaczone zarówno dla `quote`, jak i `sayHello`.
+Dodaj logikę rozgałęzień do swojego pipeline'u, aby mógł przyjmować dane wejściowe przeznaczone zarówno dla `quote`, jak i `sayHello`.
 Oto przykład użycia instrukcji `if` w workflow'ie Nextflow:
 
 ```groovy title="hello-containers.nf"
@@ -72,7 +72,7 @@ workflow {
 }
 ```
 
-!!! Hint
+!!! Hint "Podpowiedź"
 
     Możesz użyć `new_ch = processName.out`, aby przypisać nazwę do kanału wyjściowego procesu.
 
@@ -80,10 +80,10 @@ Rozwiązanie tego ćwiczenia znajdziesz w pliku `containers/solutions/hello-cont
 
 ### Podsumowanie
 
-Wiesz już, jak używać kontenerów w Nextflow do uruchamiania procesów oraz jak budować logikę rozgałęzień w Swoich pipeline'ach!
+Wiesz już, jak używać kontenerów w Nextflow do uruchamiania procesów oraz jak wbudować logikę rozgałęzień do swoich pipeline'ów!
 
 ### Co dalej?
 
 Świętuj, zrób sobie przerwę na rozciąganie i napij się wody!
 
-Kiedy będziesz gotowy, przejdź do Części 3 tej serii szkoleniowej, aby nauczyć się, jak zastosować dotychczas zdobytą wiedzę do bardziej realistycznego przypadku analizy danych.
+Kiedy będziesz gotowy, przejdź do Części 3 tej serii szkoleniowej, aby nauczyć się, jak zastosować to, czego się do tej pory nauczyłeś, w bardziej realistycznym przypadku analizy danych.

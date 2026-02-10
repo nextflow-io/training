@@ -1,5 +1,5 @@
 ---
-title: Nextflow dla Genomiki
+title: Nextflow dla genomiki
 hide:
   - toc
 page_type: index_page
@@ -7,46 +7,48 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Napisać liniowy workflow do wykrywania wariantów dla pojedynczej próbki
+    - Napisać liniowy workflow do wykrywania wariantów w pojedynczej próbce
     - Odpowiednio obsługiwać pliki pomocnicze, takie jak pliki indeksów i zasoby genomu referencyjnego
-    - Wykorzystać paradygmat przepływu danych Nextflow do zrównoleglenia wykrywania wariantów dla poszczególnych próbek
-    - Zaimplementować wielopróbkowe wspólne genotypowanie, używając odpowiednich operatorów kanałów
+    - Wykorzystać paradygmat przepływu danych Nextflow'a do zrównoleglenia wykrywania wariantów w próbkach
+    - Zaimplementować wspólne wywoływanie wariantów dla wielu próbek przy użyciu odpowiednich operatorów kanałów
   audience_prerequisites:
-    - "**Odbiorcy:** Ten kurs jest przeznaczony dla badaczy w dziedzinie genomiki i pokrewnych obszarach, którzy chcą tworzyć lub dostosowywać pipeline'y analizy danych."
+    - "**Odbiorcy:** Ten kurs jest przeznaczony dla badaczy w dziedzinie genomiki i pokrewnych dziedzinach, którzy chcą tworzyć lub dostosowywać pipeline'y do analizy danych."
     - "**Umiejętności:** Zakładamy pewną znajomość wiersza poleceń, podstawowych koncepcji skryptowania oraz popularnych formatów plików genomicznych."
-    - "**Wymagania wstępne:** Podstawowe koncepcje i narzędzia Nextflow omówione w [Hello Nextflow](../../hello_nextflow/)."
+    - "**Wymagania wstępne:** Podstawowe koncepcje i narzędzia Nextflow'a omówione w kursie [Hello Nextflow](../../hello_nextflow/)."
 ---
 
-# Nextflow dla Genomiki
+# Nextflow dla genomiki
 
-**Praktyczny kurs stosowania Nextflow do rzeczywistego przypadku użycia w genomice: wykrywania wariantów za pomocą GATK.**
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Ten kurs opiera się na [Hello Nextflow](../../hello_nextflow/) – szkoleniu dla początkujących i demonstruje, jak używać Nextflow w specyficznym kontekście dziedziny genomiki.
-Zaimplementujesz pipeline wykrywania wariantów z [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), szeroko stosowanym pakietem oprogramowania do analizy danych z sekwencjonowania wysokoprzepustowego.
+**Praktyczny kurs stosowania Nextflow'a w rzeczywistym przypadku użycia z genomiki: wykrywanie wariantów za pomocą GATK.**
+
+Ten kurs opiera się na szkoleniu dla początkujących [Hello Nextflow](../../hello_nextflow/) i pokazuje, jak używać Nextflow'a w konkretnym kontekście dziedziny genomiki.
+Zaimplementujesz pipeline do wykrywania wariantów za pomocą [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), szeroko stosowanego pakietu oprogramowania do analizy danych z sekwencjonowania o wysokiej przepustowości.
 
 <!-- additional_information -->
 
 ## Przegląd kursu
 
-Kurs ma charakter praktyczny, z ćwiczeniami ukierunkowanymi na cel, zorganizowanymi tak, aby stopniowo wprowadzać nowe informacje.
+Ten kurs jest praktyczny, z ćwiczeniami zorientowanymi na cel i ustrukturyzowanymi tak, aby stopniowo wprowadzać informacje.
 
-Zaczniesz od ręcznego uruchamiania narzędzi do wykrywania wariantów w terminalu, aby zrozumieć metodologię, a następnie krok po kroku zbudujesz pipeline Nextflow automatyzujący i skalujący analizę.
+Zaczniesz od ręcznego uruchamiania narzędzi do wykrywania wariantów w terminalu, aby zrozumieć metodologię, a następnie stopniowo zbudujesz pipeline Nextflow'a, który automatyzuje i skaluje analizę.
 
 ### Plan lekcji
 
-Podzieliliśmy kurs na trzy części, z których każda koncentruje się na konkretnych aspektach stosowania Nextflow do przypadku użycia w genomice.
+Podzieliliśmy to na trzy części, z których każda koncentruje się na konkretnych aspektach stosowania Nextflow'a w przypadku użycia z genomiki.
 
-| Rozdział kursu                                                                              | Podsumowanie                                                                                                    | Szacowany czas trwania |
-| ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| [Część 1: Przegląd metody](./01_method.md)                                                  | Zrozumienie metodologii wykrywania wariantów i ręczne uruchamianie narzędzi                                     | 30 min                 |
-| [Część 2: Wykrywanie wariantów dla pojedynczych próbek](./02_per_sample_variant_calling.md) | Budowa pipeline'u indeksującego pliki BAM i wykrywającego warianty, a następnie jego skalowanie na wiele próbek | 60 min                 |
-| [Część 3: Wspólne genotypowanie kohort](./03_joint_calling.md)                              | Dodanie wielopróbkowego wspólnego genotypowania przy użyciu operatorów kanałów do agregacji wyników             | 45 min                 |
+| Rozdział kursu                                                                 | Podsumowanie                                                                                                     | Szacowany czas |
+| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- | -------------- |
+| [Część 1: Przegląd metody](./01_method.md)                                     | Zrozumienie metodologii wykrywania wariantów i ręczne uruchamianie narzędzi                                      | 30 min         |
+| [Część 2: Wykrywanie wariantów w próbkach](./02_per_sample_variant_calling.md) | Budowanie pipeline'u, który indeksuje pliki BAM i wykrywa warianty, a następnie skalowanie do wielu próbek       | 60 min         |
+| [Część 3: Wspólne wywoływanie w kohorcie](./03_joint_calling.md)               | Dodawanie wielopróbkowego wspólnego genotypowania przy użyciu operatorów kanałów do agregowania wyników z próbek | 45 min         |
 
-Pod koniec tego kursu będziesz w stanie zastosować podstawowe koncepcje i narzędzia Nextflow do typowego przypadku użycia w genomice.
+Pod koniec tego kursu będziesz w stanie zastosować podstawowe koncepcje i narzędzia Nextflow'a do typowego przypadku użycia z genomiki.
 
 Gotowy, aby rozpocząć kurs?
 
-[Rozpocznij :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
+[Zacznij :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
 
 <!-- Clearfix for float -->
 <div style="content: ''; clear: both; display: table;"></div>

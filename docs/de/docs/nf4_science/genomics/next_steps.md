@@ -1,17 +1,19 @@
 # Kurszusammenfassung
 
-Herzlichen Glückwunsch zum Abschluss des Nextflow For Genomics Trainingskurses! 🎉
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
+Herzlichen Glückwunsch zum Abschluss des Nextflow for Genomics Trainingskurses! 🎉
 
 ## Deine Lernreise
 
 Du hast damit begonnen, Variant-Calling-Tools manuell im Terminal auszuführen, um die Methodik zu verstehen.
-Dann hast du eine Nextflow-Pipeline für eine einzelne Probe erstellt, um den Prozess zu automatisieren, sie auf die parallele Verarbeitung mehrerer Proben skaliert und mit Channel-Operatoren Multi-Sample-Joint-Genotyping hinzugefügt.
+Dann hast du eine Nextflow-Pipeline für eine einzelne Probe erstellt, um den Prozess zu automatisieren, sie für die parallele Verarbeitung mehrerer Proben skaliert und mit Channel-Operatoren ein gemeinsames Genotyping für mehrere Proben hinzugefügt.
 
 ### Was du erstellt hast
 
-- Eine Variant-Calling-Pipeline, die BAM-Dateien als Eingabe nimmt und gemeinsam gecallte VCF-Dateien als Ausgabe produziert.
+- Eine Variant-Calling-Pipeline, die BAM-Dateien als Eingabe nimmt und gemeinsam aufgerufene VCFs als Ausgabe erzeugt.
 - Drei Prozesse (`SAMTOOLS_INDEX`, `GATK_HAPLOTYPECALLER` und `GATK_JOINTGENOTYPING`), die in separaten Moduldateien gespeichert sind.
-- Die Pipeline skaliert automatisch auf eine beliebige Anzahl von Eingabeproben unter Verwendung des Dataflow-Paradigmas von Nextflow.
+- Die Pipeline skaliert automatisch für beliebig viele Eingabeproben durch Nextflows Dataflow-Paradigma.
 - Die Ergebnisse werden in einem Verzeichnis namens `results/` veröffentlicht.
 
 ### Erworbene Fähigkeiten
@@ -20,24 +22,24 @@ Durch diesen praxisorientierten Kurs hast du gelernt, wie du:
 
 - Einen linearen Workflow schreibst, um Variant Calling auf eine einzelne Probe anzuwenden
 - Zusatzdateien wie Index-Dateien und Referenzgenom-Ressourcen angemessen handhabst
-- Das Dataflow-Paradigma von Nextflow nutzt, um probenspezifisches Variant Calling zu parallelisieren
-- Multi-Sample-Joint-Calling mit relevanten Channel-Operatoren implementierst
+- Nextflows Dataflow-Paradigma nutzt, um Variant Calling pro Probe zu parallelisieren
+- Gemeinsames Genotyping für mehrere Proben mit relevanten Channel-Operatoren implementierst
 
-Du bist jetzt bereit, Nextflow auf Genomanalyse-Workflows in deiner eigenen Arbeit anzuwenden.
+Du bist jetzt bereit, Nextflow auf Genomik-Analyse-Workflows in deiner eigenen Arbeit anzuwenden.
 
-## Nächste Schritte, um deine Fähigkeiten auszubauen
+## Nächste Schritte zum Ausbau deiner Fähigkeiten
 
-Hier sind unsere wichtigsten Empfehlungen, was du als Nächstes tun kannst:
+Hier sind unsere Top-Empfehlungen für die nächsten Schritte:
 
-- Wende Nextflow auf andere wissenschaftliche Anwendungsfälle an mit [Nextflow for Science](../index.md)
-- Starte mit nf-core mit [Hello nf-core](../../hello_nf-core/index.md)
+- Wende Nextflow auf andere wissenschaftliche Analyse-Anwendungsfälle an mit [Nextflow for Science](../index.md)
+- Starte mit nf-core durch [Hello nf-core](../../hello_nf-core/index.md)
 - Erkunde fortgeschrittenere Nextflow-Features mit den [Side Quests](../../side_quests/index.md)
 
-Abschließend empfehlen wir dir, einen Blick auf [**Seqera Platform**](https://seqera.io/) zu werfen – eine cloudbasierte Plattform, die vom Nextflow-Entwicklungsteam erstellt wurde und es dir noch einfacher macht, deine Workflows zu starten und zu verwalten, sowie deine Daten zu managen und Analysen interaktiv in jeder Umgebung auszuführen.
+Abschließend empfehlen wir dir, einen Blick auf [**Seqera Platform**](https://seqera.io/) zu werfen, eine cloudbasierte Plattform, die von den Entwickler\*innen von Nextflow erstellt wurde und es noch einfacher macht, deine Workflows zu starten und zu verwalten sowie deine Daten zu managen und Analysen interaktiv in jeder Umgebung auszuführen.
 
 ## Hilfe erhalten
 
-Für Hilferessourcen und Community-Support siehe die [Hilfe-Seite](../../help.md).
+Hilfsressourcen und Community-Support findest du auf der [Hilfe-Seite](../../help.md).
 
 ## Feedback-Umfrage
 

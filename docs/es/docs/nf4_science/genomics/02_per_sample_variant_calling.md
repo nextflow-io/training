@@ -1,5 +1,7 @@
 # Parte 2: Llamado de variantes por muestra
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 En la Parte 1, probaste los comandos de Samtools y GATK manualmente en sus respectivos contenedores.
 Ahora vamos a envolver esos mismos comandos en un workflow de Nextflow.
 
@@ -17,14 +19,14 @@ En esta parte del curso, vamos a desarrollar un workflow que hace lo siguiente:
 Esto replica los pasos de la Parte 1, donde ejecutaste estos comandos manualmente en sus contenedores.
 
 Como punto de partida, te proporcionamos un archivo de workflow, `genomics.nf`, que describe las partes principales del workflow, así como dos archivos de módulo, samtools_index.nf y gatk_haplotypecaller.nf, que describen la estructura de los módulos.
-Estos archivos no son funcionales; su propósito es simplemente servir como esqueletos para que los completes con las partes interesantes del código.
+Estos archivos no son funcionales; su propósito es solo servir como esqueletos para que los completes con las partes interesantes del código.
 
 ## Plan de la lección
 
 Para hacer el proceso de desarrollo más educativo, lo hemos dividido en cuatro pasos:
 
 1. **Escribir un workflow de una sola etapa que ejecute Samtools index en un archivo BAM.**
-   Esto cubre crear un módulo, importarlo y llamarlo en un workflow.
+   Esto cubre la creación de un módulo, su importación y su llamado en un workflow.
 2. **Agregar un segundo proceso para ejecutar GATK HaplotypeCaller en el archivo BAM indexado.**
    Esto introduce el encadenamiento de salidas de procesos a entradas y el manejo de archivos accesorios.
 3. **Adaptar el workflow para ejecutarse en un lote de muestras.**
@@ -53,15 +55,15 @@ Vamos a tomar esta información y envolverla en Nextflow en tres etapas:
 
 1. Configurar la entrada
 2. Escribir el proceso de indexación y llamarlo en el workflow
-3. Configurar el manejo de salida
+3. Configurar el manejo de la salida
 
 ### 1.1. Configurar la entrada
 
-Necesitamos declarar un parámetro de entrada, crear un perfil de prueba para proporcionar un valor predeterminado conveniente, y crear un canal de entrada.
+Necesitamos declarar un parámetro de entrada, crear un perfil de prueba para proporcionar un valor predeterminado conveniente y crear un canal de entrada.
 
 #### 1.1.1. Agregar una declaración de parámetro de entrada
 
-En el archivo principal de workflow `genomics.nf`, bajo la sección `Pipeline parameters`, declara un parámetro CLI llamado `reads_bam`.
+En el archivo principal del workflow `genomics.nf`, bajo la sección `Pipeline parameters`, declara un parámetro CLI llamado `reads_bam`.
 
 === "Después"
 
@@ -113,12 +115,12 @@ Agrega un bloque `profiles` a `nextflow.config` con un perfil `test` que estable
     docker.enabled = true
     ```
 
-Aquí estamos usando `${projectDir}`, una variable integrada de Nextflow que apunta al directorio donde se encuentra el script del workflow.
-Esto facilita referenciar archivos de datos y otros recursos sin codificar rutas absolutas.
+Aquí, estamos usando `${projectDir}`, una variable integrada de Nextflow que apunta al directorio donde se encuentra el script del workflow.
+Esto facilita hacer referencia a archivos de datos y otros recursos sin codificar rutas absolutas.
 
 #### 1.1.3. Configurar el canal de entrada
 
-En el bloque workflow, crea un canal de entrada desde el valor del parámetro usando el channel factory `.fromPath` (como se usa en [Hello Channels](../../hello_nextflow/02_hello_channels.md)).
+En el bloque workflow, crea un canal de entrada a partir del valor del parámetro usando el channel factory `.fromPath` (como se usó en [Hello Channels](../../hello_nextflow/02_hello_channels.md)).
 
 === "Después"
 
@@ -143,7 +145,7 @@ Ahora necesitamos crear el proceso para ejecutar la indexación en esta entrada.
 
 ### 1.2. Escribir el proceso de indexación y llamarlo en el workflow
 
-Necesitamos escribir la definición del proceso en el archivo del módulo, importarlo al workflow usando una declaración include, y llamarlo en la entrada.
+Necesitamos escribir la definición del proceso en el archivo del módulo, importarlo al workflow usando una declaración include y llamarlo con la entrada.
 
 #### 1.2.1. Completar el módulo para el proceso de indexación
 
@@ -201,11 +203,11 @@ Adelante, completa la definición del proceso por ti mismo usando la informació
     ```
 
 Una vez que hayas completado esto, el proceso está completo.
-Para usarlo en el workflow, necesitarás importar el módulo y agregar una llamada al proceso.
+Para usarlo en el workflow, necesitarás importar el módulo y agregar un llamado al proceso.
 
 #### 1.2.2. Incluir el módulo
 
-En `genomics.nf`, agrega una declaración `include` para hacer el proceso disponible al workflow:
+En `genomics.nf`, agrega una declaración `include` para hacer que el proceso esté disponible para el workflow:
 
 === "Después"
 
@@ -222,9 +224,9 @@ En `genomics.nf`, agrega una declaración `include` para hacer el proceso dispon
 
 El proceso ahora está disponible en el ámbito del workflow.
 
-#### 1.2.3. Llamar el proceso de indexación en la entrada
+#### 1.2.3. Llamar al proceso de indexación con la entrada
 
-Ahora, agreguemos una llamada a `SAMTOOLS_INDEX` en el bloque workflow, pasando el canal de entrada como argumento.
+Ahora, agreguemos un llamado a `SAMTOOLS_INDEX` en el bloque workflow, pasando el canal de entrada como argumento.
 
 === "Después"
 
@@ -254,14 +256,14 @@ Ahora, agreguemos una llamada a `SAMTOOLS_INDEX` en el bloque workflow, pasando 
 El workflow ahora carga la entrada y ejecuta el proceso de indexación en ella.
 A continuación, necesitamos configurar cómo se publica la salida.
 
-### 1.3. Configurar el manejo de salida
+### 1.3. Configurar el manejo de la salida
 
-Necesitamos declarar qué salidas de proceso publicar y especificar dónde deben ir.
+Necesitamos declarar qué salidas de procesos publicar y especificar dónde deben ir.
 
 #### 1.3.1. Declarar una salida en la sección `publish:`
 
-La sección `publish:` dentro del bloque workflow declara qué salidas de proceso deben publicarse.
-Asigna la salida de `SAMTOOLS_INDEX` a un objetivo nombrado llamado `bam_index`.
+La sección `publish:` dentro del bloque workflow declara qué salidas de procesos deben publicarse.
+Asigna la salida de `SAMTOOLS_INDEX` a un destino nombrado llamado `bam_index`.
 
 === "Después"
 
@@ -279,12 +281,12 @@ Asigna la salida de `SAMTOOLS_INDEX` a un objetivo nombrado llamado `bam_index`.
     }
     ```
 
-Ahora necesitamos decirle a Nextflow dónde colocar la salida publicada.
+Ahora necesitamos decirle a Nextflow dónde poner la salida publicada.
 
-#### 1.3.2. Configurar el objetivo de salida en el bloque `output {}`
+#### 1.3.2. Configurar el destino de salida en el bloque `output {}`
 
-El bloque `output {}` se encuentra fuera del workflow y especifica dónde se publica cada objetivo nombrado.
-Agreguemos un objetivo para `bam_index` que publique en un subdirectorio `bam/`.
+El bloque `output {}` se encuentra fuera del workflow y especifica dónde se publica cada destino nombrado.
+Agreguemos un destino para `bam_index` que publique en un subdirectorio `bam/`.
 
 === "Después"
 
@@ -307,8 +309,8 @@ Agreguemos un objetivo para `bam_index` que publique en un subdirectorio `bam/`.
 !!! note "Nota"
 
     Por defecto, Nextflow publica archivos de salida como enlaces simbólicos, lo que evita duplicación innecesaria.
-    Aunque los archivos de datos que estamos usando aquí son muy pequeños, en genómica pueden ser muy grandes.
-    Los enlaces simbólicos se romperán cuando limpies tu directorio `work`, así que para workflows de producción puedes querer sobrescribir el modo de publicación predeterminado a `'copy'`.
+    Aunque los archivos de datos que estamos usando aquí son muy pequeños, en genómica pueden volverse muy grandes.
+    Los enlaces simbólicos se romperán cuando limpies tu directorio `work`, así que para workflows de producción es posible que quieras sobrescribir el modo de publicación predeterminado a `'copy'`.
 
 ### 1.4. Ejecutar el workflow
 
@@ -331,7 +333,7 @@ nextflow run genomics.nf -profile test
     [2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
     ```
 
-Puedes verificar que el archivo de índice se haya generado correctamente mirando en el directorio work o en el directorio de resultados.
+Puedes verificar que el archivo de índice se haya generado correctamente mirando en el directorio de trabajo o en el directorio de resultados.
 
 ??? abstract "Contenido del directorio work"
 
@@ -357,7 +359,7 @@ Sabes cómo crear un módulo que contiene un proceso, importarlo a un workflow, 
 
 ### ¿Qué sigue?
 
-Agregar un segundo paso que tome la salida del proceso de indexación y lo use para ejecutar el llamado de variantes.
+Agregar un segundo paso que tome la salida del proceso de indexación y la use para ejecutar el llamado de variantes.
 
 ---
 
@@ -375,20 +377,20 @@ gatk HaplotypeCaller \
         -L /data/ref/intervals.bed
 ```
 
-El comando toma un archivo BAM (`-I`), un genoma de referencia (`-R`), y un archivo de intervalos (`-L`), y produce un archivo VCF (`-O`) junto con su índice.
-La herramienta también espera que el índice BAM, el índice de referencia y el diccionario de referencia estén ubicados junto a sus respectivos archivos.
+El comando toma un archivo BAM (`-I`), un genoma de referencia (`-R`) y un archivo de intervalos (`-L`), y produce un archivo VCF (`-O`) junto con su índice.
+La herramienta también espera que el índice del BAM, el índice de referencia y el diccionario de referencia estén ubicados junto a sus respectivos archivos.
 El URI del contenedor era `community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867`.
 
 Seguimos las mismas tres etapas que antes:
 
 1. Configurar las entradas
 2. Escribir el proceso de llamado de variantes y llamarlo en el workflow
-3. Configurar el manejo de salida
+3. Configurar el manejo de la salida
 
 ### 2.1. Configurar las entradas
 
 El paso de llamado de variantes requiere varios archivos de entrada adicionales.
-Necesitamos declarar parámetros para ellos, agregar valores predeterminados al perfil de prueba, y crear variables para cargarlos.
+Necesitamos declarar parámetros para ellos, agregar valores predeterminados al perfil de prueba y crear variables para cargarlos.
 
 #### 2.1.1. Agregar declaraciones de parámetros para entradas accesorias
 
@@ -422,7 +424,7 @@ Como antes, proporcionamos valores predeterminados a través del perfil de prueb
 
 #### 2.1.2. Agregar valores predeterminados de archivos accesorios al perfil de prueba
 
-Así como hicimos para `reads_bam` en la sección 1.1.2, agrega valores predeterminados para los archivos accesorios al perfil de prueba en `nextflow.config`:
+Tal como hicimos para `reads_bam` en la sección 1.1.2, agrega valores predeterminados para los archivos accesorios al perfil de prueba en `nextflow.config`:
 
 === "Después"
 
@@ -444,7 +446,7 @@ Así como hicimos para `reads_bam` en la sección 1.1.2, agrega valores predeter
     }
     ```
 
-Ahora necesitamos crear variables que carguen estas rutas de archivos para usar en el workflow.
+Ahora necesitamos crear variables que carguen estas rutas de archivos para usarlas en el workflow.
 
 #### 2.1.3. Crear variables para los archivos accesorios
 
@@ -482,12 +484,12 @@ Agrega variables para las rutas de archivos accesorios dentro del bloque workflo
         SAMTOOLS_INDEX(reads_ch)
     ```
 
-La sintaxis `file()` le dice a Nextflow explícitamente que maneje estas entradas como rutas de archivos.
-Puedes aprender más sobre esto en la Misión Secundaria [Working with files](../../side_quests/working_with_files.md).
+La sintaxis `file()` le dice explícitamente a Nextflow que maneje estas entradas como rutas de archivos.
+Puedes aprender más sobre esto en la Misión Secundaria [Trabajando con archivos](../../side_quests/working_with_files.md).
 
 ### 2.2. Escribir el proceso de llamado de variantes y llamarlo en el workflow
 
-Necesitamos escribir la definición del proceso en el archivo del módulo, importarlo al workflow usando una declaración include, y llamarlo en las lecturas de entrada más la salida del paso de indexación y los archivos accesorios.
+Necesitamos escribir la definición del proceso en el archivo del módulo, importarlo al workflow usando una declaración include y llamarlo con las lecturas de entrada más la salida del paso de indexación y los archivos accesorios.
 
 #### 2.2.1. Completar el módulo para el proceso de llamado de variantes
 
@@ -554,14 +556,14 @@ Adelante, completa la definición del proceso por ti mismo usando la informació
     ```
 
 Notarás que este proceso tiene más entradas de las que el comando GATK en sí requiere.
-El GATK sabe buscar el archivo de índice BAM y los archivos accesorios del genoma de referencia basándose en convenciones de nomenclatura, pero Nextflow es independiente del dominio y no conoce estas convenciones.
+GATK sabe buscar el archivo de índice del BAM y los archivos accesorios del genoma de referencia basándose en convenciones de nomenclatura, pero Nextflow es agnóstico al dominio y no conoce estas convenciones.
 Necesitamos listarlos explícitamente para que Nextflow los prepare en el directorio de trabajo en tiempo de ejecución; de lo contrario, GATK arrojará un error sobre archivos faltantes.
 
-De manera similar, listamos el archivo de índice del VCF de salida (`"${input_bam}.vcf.idx"`) explícitamente para que Nextflow lleve un seguimiento de él para pasos subsecuentes.
+De manera similar, listamos explícitamente el archivo de índice del VCF de salida (`"${input_bam}.vcf.idx"`) para que Nextflow lo rastree para pasos posteriores.
 Usamos la sintaxis `emit:` para asignar un nombre a cada canal de salida, lo que será útil cuando conectemos las salidas al bloque publish.
 
 Una vez que hayas completado esto, el proceso está completo.
-Para usarlo en el workflow, necesitarás importar el módulo y agregar una llamada al proceso.
+Para usarlo en el workflow, necesitarás importar el módulo y agregar un llamado al proceso.
 
 #### 2.2.2. Importar el nuevo módulo
 
@@ -584,9 +586,9 @@ Actualiza `genomics.nf` para importar el nuevo módulo:
 
 El proceso ahora está disponible en el ámbito del workflow.
 
-#### 2.2.3. Agregar la llamada al proceso
+#### 2.2.3. Agregar el llamado al proceso
 
-Agrega la llamada al proceso en el cuerpo del workflow, bajo `main:`:
+Agrega el llamado al proceso en el cuerpo del workflow, bajo `main:`:
 
 === "Después"
 
@@ -612,18 +614,18 @@ Agrega la llamada al proceso en el cuerpo del workflow, bajo `main:`:
         SAMTOOLS_INDEX(reads_ch)
     ```
 
-Deberías reconocer la sintaxis `*.out` de la serie de capacitación Hello Nextflow; le estamos diciendo a Nextflow que tome el canal de salida de `SAMTOOLS_INDEX` y lo conecte a la llamada del proceso `GATK_HAPLOTYPECALLER`.
+Deberías reconocer la sintaxis `*.out` de la serie de capacitación Hello Nextflow; le estamos diciendo a Nextflow que tome el canal de salida de `SAMTOOLS_INDEX` y lo conecte al llamado del proceso `GATK_HAPLOTYPECALLER`.
 
 !!! note "Nota"
 
-    Observa que las entradas se proporcionan en exactamente el mismo orden en la llamada al proceso que están listadas en el bloque input del proceso.
+    Observa que las entradas se proporcionan en el mismo orden exacto en el llamado al proceso que están listadas en el bloque input del proceso.
     En Nextflow, las entradas son posicionales, lo que significa que _debes_ seguir el mismo orden; y por supuesto debe haber el mismo número de elementos.
 
-### 2.3. Configurar el manejo de salida
+### 2.3. Configurar el manejo de la salida
 
 Necesitamos agregar las nuevas salidas a la declaración publish y configurar dónde van.
 
-#### 2.3.1. Agregar objetivos de publicación para las salidas de llamado de variantes
+#### 2.3.1. Agregar destinos de publicación para las salidas del llamado de variantes
 
 Agrega las salidas VCF e índice a la sección `publish:`:
 
@@ -645,11 +647,11 @@ Agrega las salidas VCF e índice a la sección `publish:`:
     }
     ```
 
-Ahora necesitamos decirle a Nextflow dónde colocar las nuevas salidas.
+Ahora necesitamos decirle a Nextflow dónde poner las nuevas salidas.
 
-#### 2.3.2. Configurar los nuevos objetivos de salida
+#### 2.3.2. Configurar los nuevos destinos de salida
 
-Agrega entradas para los objetivos `vcf` y `vcf_idx` en el bloque `output {}`, publicando ambos en un subdirectorio `vcf/`:
+Agrega entradas para los destinos `vcf` y `vcf_idx` en el bloque `output {}`, publicando ambos en un subdirectorio `vcf/`:
 
 === "Después"
 
@@ -677,7 +679,7 @@ Agrega entradas para los objetivos `vcf` y `vcf_idx` en el bloque `output {}`, p
     }
     ```
 
-El VCF y su índice se publican como objetivos separados que ambos van al subdirectorio `vcf/`.
+El VCF y su índice se publican como destinos separados que ambos van al subdirectorio `vcf/`.
 
 ### 2.4. Ejecutar el workflow
 
@@ -701,9 +703,9 @@ nextflow run genomics.nf -profile test -resume
 
 Ahora si miramos la salida de la consola, vemos los dos procesos listados.
 
-El primer proceso fue omitido gracias al caché, como se esperaba, mientras que el segundo proceso se ejecutó ya que es completamente nuevo.
+El primer proceso se omitió gracias al almacenamiento en caché, como se esperaba, mientras que el segundo proceso se ejecutó ya que es completamente nuevo.
 
-Encontrarás los archivos de salida en el directorio de resultados (como enlaces simbólicos al directorio work).
+Encontrarás los archivos de salida en el directorio de resultados (como enlaces simbólicos al directorio de trabajo).
 
 ??? abstract "Contenido del directorio"
 
@@ -716,7 +718,7 @@ Encontrarás los archivos de salida en el directorio de resultados (como enlaces
         └── reads_mother.bam.vcf.idx -> ...
     ```
 
-Si abres el archivo VCF, deberías ver el mismo contenido que en el archivo que generaste ejecutando el comando GATK directamente en el contenedor.
+Si abres el archivo VCF, deberías ver el mismo contenido que en el archivo que generaste al ejecutar el comando GATK directamente en el contenedor.
 
 ??? abstract "Contenido del archivo"
 
@@ -727,11 +729,11 @@ Si abres el archivo VCF, deberías ver el mismo contenido que en el archivo que 
     20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
     ```
 
-Esta es la salida que nos importa generar para cada muestra en nuestro estudio.
+Esta es la salida que nos interesa generar para cada muestra en nuestro estudio.
 
 ### Conclusión
 
-Sabes cómo hacer un workflow modular de dos pasos que hace trabajo de análisis real y es capaz de lidiar con las idiosincrasias de los formatos de archivo de genómica como los archivos accesorios.
+Sabes cómo hacer un workflow modular de dos pasos que hace trabajo de análisis real y es capaz de lidiar con idiosincrasias de formatos de archivos genómicos como los archivos accesorios.
 
 ### ¿Qué sigue?
 
@@ -742,14 +744,14 @@ Hacer que el workflow maneje múltiples muestras en lote.
 ## 3. Adaptar el workflow para ejecutarse en un lote de muestras
 
 Está muy bien tener un workflow que pueda automatizar el procesamiento en una sola muestra, pero ¿qué pasa si tienes 1000 muestras?
-¿Necesitas escribir un script bash que haga un ciclo a través de todas tus muestras?
+¿Necesitas escribir un script bash que recorra todas tus muestras?
 
-¡No, gracias a Dios! Solo haz un pequeño ajuste al código y Nextflow manejará eso por ti también.
+¡No, gracias a Dios! Solo haz un pequeño ajuste al código y Nextflow también manejará eso por ti.
 
 ### 3.1. Actualizar la entrada para listar tres muestras
 
 Para ejecutar en múltiples muestras, actualiza el perfil de prueba para proporcionar un arreglo de rutas de archivos en lugar de una sola.
-Esta es una forma rápida de probar la ejecución multi-muestra; en el siguiente paso cambiaremos a un enfoque más escalable usando un archivo de entradas.
+Esta es una forma rápida de probar la ejecución de múltiples muestras; en el siguiente paso cambiaremos a un enfoque más escalable usando un archivo de entradas.
 
 Primero, comenta la anotación de tipo en la declaración del parámetro, ya que los arreglos no pueden usar declaraciones tipadas:
 
@@ -797,17 +799,17 @@ Luego actualiza el perfil de prueba para listar las tres muestras:
     }
     ```
 
-El channel factory en el cuerpo del workflow (`.fromPath`) acepta múltiples rutas de archivos tan bien como una sola, así que no se necesitan otros cambios.
+El channel factory en el cuerpo del workflow (`.fromPath`) acepta múltiples rutas de archivos tan bien como una sola, por lo que no se necesitan otros cambios.
 
 ### 3.2. Ejecutar el workflow
 
-Intenta ejecutar el workflow ahora que la plomería está configurada para ejecutarse en las tres muestras de prueba.
+Intenta ejecutar el workflow ahora que la configuración está lista para ejecutarse en las tres muestras de prueba.
 
 ```bash
 nextflow run genomics.nf -profile test -resume
 ```
 
-Cosa curiosa: esto _podría funcionar_, O _podría fallar_. Por ejemplo, aquí hay una ejecución que tuvo éxito:
+Algo curioso: esto _podría funcionar_, O _podría fallar_. Por ejemplo, aquí hay una ejecución que tuvo éxito:
 
 ??? success "Salida del comando"
 
@@ -857,15 +859,15 @@ Si miras la salida de error del comando GATK, habrá una línea como esta:
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
 ```
 
-Bueno, eso es raro, considerando que indexamos explícitamente los archivos BAM en el primer paso del workflow. ¿Podría haber algo mal con la plomería?
+Bueno, eso es extraño, considerando que indexamos explícitamente los archivos BAM en el primer paso del workflow. ¿Podría haber algo mal con la configuración?
 
 ### 3.3. Solucionar el problema
 
-Inspeccionaremos los directorios work y usaremos el operador `view()` para averiguar qué salió mal.
+Inspeccionaremos los directorios de trabajo y usaremos el operador `view()` para averiguar qué salió mal.
 
-#### 3.3.1. Verificar los directorios work para las llamadas relevantes
+#### 3.3.1. Verificar los directorios de trabajo para los llamados relevantes
 
-Echa un vistazo dentro del directorio work para la llamada al proceso `GATK_HAPLOTYPECALLER` fallida listada en la salida de la consola.
+Echa un vistazo dentro del directorio de trabajo para el llamado al proceso `GATK_HAPLOTYPECALLER` fallido listado en la salida de la consola.
 
 ??? abstract "Contenido del directorio"
 
@@ -881,13 +883,13 @@ Echa un vistazo dentro del directorio work para la llamada al proceso `GATK_HAPL
     └── ref.fasta.fai -> /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai
     ```
 
-Presta particular atención a los nombres del archivo BAM y el índice BAM que están listados en este directorio: `reads_son.bam` y `reads_father.bam.bai`.
+Presta especial atención a los nombres del archivo BAM y el índice BAM que están listados en este directorio: `reads_son.bam` y `reads_father.bam.bai`.
 
-¿Qué demonios? Nextflow ha preparado un archivo de índice en el directorio work de esta llamada al proceso, pero es el incorrecto. ¿Cómo pudo haber sucedido esto?
+¿Qué demonios? Nextflow ha preparado un archivo de índice en el directorio de trabajo de este llamado al proceso, pero es el incorrecto. ¿Cómo pudo haber pasado esto?
 
-#### 3.3.2. Usar el [operador view()](https://www.nextflow.io/docs/latest/reference/operator.html#view) para inspeccionar contenidos de canales
+#### 3.3.2. Usar el [operador view()](https://www.nextflow.io/docs/latest/reference/operator.html#view) para inspeccionar el contenido del canal
 
-Agrega estas dos líneas en el cuerpo del workflow antes de la llamada al proceso `GATK_HAPLOTYPECALLER` para ver el contenido del canal:
+Agrega estas dos líneas en el cuerpo del workflow antes del llamado al proceso `GATK_HAPLOTYPECALLER` para ver el contenido del canal:
 
 === "Después"
 
@@ -917,7 +919,7 @@ Luego ejecuta el comando del workflow nuevamente.
 nextflow run genomics.nf -profile test
 ```
 
-Una vez más, esto puede tener éxito o fallar. Aquí está lo que muestra la salida de las dos llamadas `.view()` para una ejecución fallida:
+Una vez más, esto puede tener éxito o fallar. Aquí está la salida de los dos llamados a `.view()` para una ejecución fallida:
 
 ```console
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
@@ -929,34 +931,34 @@ Una vez más, esto puede tener éxito o fallar. Aquí está lo que muestra la sa
 ```
 
 Las primeras tres líneas corresponden al canal de entrada y las segundas, al canal de salida.
-Puedes ver que los archivos BAM y los archivos de índice para las tres muestras no están listados en el mismo orden.
+Puedes ver que los archivos BAM y los archivos de índice para las tres muestras ¡no están listados en el mismo orden!
 
 !!! note "Nota"
 
-    Cuando llamas un proceso de Nextflow en un canal que contiene múltiples elementos, Nextflow intentará paralelizar la ejecución tanto como sea posible, y recolectará las salidas en cualquier orden en que estén disponibles.
+    Cuando llamas a un proceso de Nextflow en un canal que contiene múltiples elementos, Nextflow intentará paralelizar la ejecución tanto como sea posible, y recolectará las salidas en el orden en que estén disponibles.
     La consecuencia es que las salidas correspondientes pueden recolectarse en un orden diferente al que se proporcionaron las entradas originales.
 
 Como está escrito actualmente, nuestro script de workflow asume que los archivos de índice saldrán del paso de indexación listados en el mismo orden madre/padre/hijo que se dieron las entradas.
-Pero eso no está garantizado que sea el caso, razón por la cual a veces (aunque no siempre) los archivos incorrectos se emparejan en el segundo paso.
+Pero eso no está garantizado que sea el caso, por lo que a veces (aunque no siempre) los archivos incorrectos se emparejan en el segundo paso.
 
 Para arreglar esto, necesitamos asegurarnos de que los archivos BAM y sus archivos de índice viajen juntos a través de los canales.
 
 !!! tip "Consejo"
 
-    Las declaraciones `view()` en el código del workflow no hacen nada, así que no es un problema dejarlas.
-    Sin embargo, desordenarán tu salida de consola, así que recomendamos eliminarlas cuando hayas terminado de solucionar el problema.
+    Las declaraciones `view()` en el código del workflow no hacen nada, por lo que no es un problema dejarlas.
+    Sin embargo, desordenarán tu salida de consola, por lo que recomendamos eliminarlas cuando hayas terminado de solucionar el problema.
 
 ### 3.4. Actualizar el workflow para manejar los archivos de índice correctamente
 
-La solución es agrupar cada archivo BAM con su índice en una tupla, luego actualizar el proceso downstream y la plomería del workflow para que coincidan.
+La solución es agrupar cada archivo BAM con su índice en una tupla, luego actualizar el proceso descendente y la configuración del workflow para que coincidan.
 
 #### 3.4.1. Cambiar la salida del módulo SAMTOOLS_INDEX a una tupla
 
-La forma más simple de asegurar que un archivo BAM y su índice permanezcan estrechamente asociados es empaquetarlos juntos en una tupla que sale de la tarea de índice.
+La forma más simple de asegurar que un archivo BAM y su índice permanezcan estrechamente asociados es empaquetarlos juntos en una tupla que salga de la tarea de índice.
 
 !!! note "Nota"
 
-    Una **tupla** es una lista finita y ordenada de elementos que se usa comúnmente para devolver múltiples valores desde una función. Las tuplas son particularmente útiles para pasar múltiples entradas o salidas entre procesos mientras se preserva su asociación y orden.
+    Una **tupla** es una lista finita y ordenada de elementos que se usa comúnmente para devolver múltiples valores de una función. Las tuplas son particularmente útiles para pasar múltiples entradas o salidas entre procesos mientras se preserva su asociación y orden.
 
 Actualiza la salida en `modules/samtools_index.nf` para incluir el archivo BAM:
 
@@ -978,7 +980,7 @@ De esta manera, cada archivo de índice estará estrechamente acoplado con su ar
 
 #### 3.4.2. Cambiar la entrada del módulo GATK_HAPLOTYPECALLER para aceptar una tupla
 
-Ya que hemos cambiado la 'forma' de la salida del primer proceso, necesitamos actualizar la definición de entrada del segundo proceso para que coincida.
+Dado que hemos cambiado la 'forma' de la salida del primer proceso, necesitamos actualizar la definición de entrada del segundo proceso para que coincida.
 
 Actualiza `modules/gatk_haplotypecaller.nf`:
 
@@ -997,13 +999,13 @@ Actualiza `modules/gatk_haplotypecaller.nf`:
         path input_bam_index
     ```
 
-Ahora necesitamos actualizar el workflow para reflejar la nueva estructura de tupla en la llamada al proceso y los objetivos de publicación.
+Ahora necesitamos actualizar el workflow para reflejar la nueva estructura de tupla en el llamado al proceso y los destinos de publicación.
 
-#### 3.4.3. Actualizar la llamada a GATK_HAPLOTYPECALLER en el workflow
+#### 3.4.3. Actualizar el llamado a GATK_HAPLOTYPECALLER en el workflow
 
-Ya no necesitamos proporcionar el `reads_ch` original al proceso `GATK_HAPLOTYPECALLER`, ya que el archivo BAM ahora está empaquetado en la salida del canal por `SAMTOOLS_INDEX`.
+Ya no necesitamos proporcionar el `reads_ch` original al proceso `GATK_HAPLOTYPECALLER`, ya que el archivo BAM ahora está incluido en el canal de salida de `SAMTOOLS_INDEX`.
 
-Actualiza la llamada en `genomics.nf`:
+Actualiza el llamado en `genomics.nf`:
 
 === "Después"
 
@@ -1020,11 +1022,11 @@ Actualiza la llamada en `genomics.nf`:
             SAMTOOLS_INDEX.out,
     ```
 
-Finalmente, necesitamos actualizar los objetivos de publicación para reflejar la nueva estructura de salida.
+Finalmente, necesitamos actualizar los destinos de publicación para reflejar la nueva estructura de salida.
 
-#### 3.4.4. Actualizar el objetivo de publicación para la salida del BAM indexado
+#### 3.4.4. Actualizar el destino de publicación para la salida del BAM indexado
 
-Ya que la salida de SAMTOOLS_INDEX ahora es una tupla que contiene tanto el archivo BAM como su índice, renombra el objetivo de publicación de `bam_index` a `indexed_bam` para reflejar mejor su contenido:
+Dado que la salida de SAMTOOLS_INDEX ahora es una tupla que contiene tanto el archivo BAM como su índice, renombra el destino de publicación de `bam_index` a `indexed_bam` para reflejar mejor su contenido:
 
 === "Después"
 
@@ -1070,7 +1072,7 @@ Ya que la salida de SAMTOOLS_INDEX ahora es una tupla que contiene tanto el arch
     }
     ```
 
-Con estos cambios, el BAM y su índice están garantizados de viajar juntos, así que el emparejamiento siempre será correcto.
+Con estos cambios, el BAM y su índice están garantizados de viajar juntos, por lo que el emparejamiento siempre será correcto.
 
 ### 3.5. Ejecutar el workflow corregido
 
@@ -1116,8 +1118,8 @@ El directorio de resultados ahora contiene tanto archivos BAM como BAI para cada
         └── reads_son.bam.vcf.idx -> ...
     ```
 
-Al agrupar archivos asociados en tuplas, aseguramos que los archivos correctos siempre viajen juntos a través del workflow.
-El workflow ahora procesa cualquier número de muestras de manera confiable, pero listarlas individualmente en el config no es muy escalable.
+Al agrupar archivos asociados en tuplas, nos aseguramos de que los archivos correctos siempre viajen juntos a través del workflow.
+El workflow ahora procesa cualquier número de muestras de manera confiable, pero listarlas individualmente en la configuración no es muy escalable.
 En el siguiente paso, cambiaremos a leer entradas desde un archivo.
 
 ### Conclusión
@@ -1132,14 +1134,14 @@ Hacer más fácil manejar muestras en lote.
 
 ## 4. Hacer que el workflow acepte un archivo de texto que contenga un lote de archivos de entrada
 
-Una forma muy común de proporcionar múltiples archivos de datos de entrada a un workflow es hacerlo con un archivo de texto que contiene las rutas de archivos.
-Puede ser tan simple como un archivo de texto listando una ruta de archivo por línea y nada más, o el archivo puede contener metadata adicional, en cuyo caso a menudo se llama una hoja de muestras (samplesheet).
+Una forma muy común de proporcionar múltiples archivos de datos de entrada a un workflow es hacerlo con un archivo de texto que contenga las rutas de los archivos.
+Puede ser tan simple como un archivo de texto que liste una ruta de archivo por línea y nada más, o el archivo puede contener metadatos adicionales, en cuyo caso a menudo se llama samplesheet.
 
 Aquí vamos a mostrarte cómo hacer el caso simple.
 
 ### 4.1. Examinar el archivo de texto proporcionado que lista las rutas de archivos de entrada
 
-Ya hicimos un archivo de texto listando las rutas de archivos de entrada, llamado `sample_bams.txt`, que puedes encontrar en el directorio `data/`.
+Ya hicimos un archivo de texto que lista las rutas de archivos de entrada, llamado `sample_bams.txt`, que puedes encontrar en el directorio `data/`.
 
 ```txt title="sample_bams.txt"
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
@@ -1151,8 +1153,8 @@ Como puedes ver, listamos una ruta de archivo por línea, y son rutas absolutas.
 
 !!! note "Nota"
 
-    Los archivos que estamos usando aquí están simplemente en el sistema de archivos local de tu GitHub Codespaces, pero también podríamos apuntar a archivos en almacenamiento en la nube.
-    Si no estás usando el entorno de Codespaces proporcionado, es posible que necesites adaptar las rutas de archivos para que coincidan con tu configuración local.
+    Los archivos que estamos usando aquí están solo en el sistema de archivos local de tu GitHub Codespaces, pero también podríamos apuntar a archivos en almacenamiento en la nube.
+    Si no estás usando el entorno Codespaces proporcionado, es posible que necesites adaptar las rutas de archivos para que coincidan con tu configuración local.
 
 ### 4.2. Actualizar el parámetro y el perfil de prueba
 
@@ -1209,7 +1211,7 @@ La lista de archivos ya no vive en el código en absoluto, lo cual es un gran pa
 ### 4.3. Actualizar el channel factory para leer líneas de un archivo
 
 Actualmente, nuestro channel factory de entrada trata cualquier archivo que le demos como las entradas de datos que queremos alimentar al proceso de indexación.
-Ya que ahora le estamos dando un archivo que lista rutas de archivos de entrada, necesitamos cambiar su comportamiento para analizar el archivo y tratar las rutas de archivos que contiene como las entradas de datos.
+Dado que ahora le estamos dando un archivo que lista rutas de archivos de entrada, necesitamos cambiar su comportamiento para analizar el archivo y tratar las rutas de archivos que contiene como las entradas de datos.
 
 Podemos hacer esto usando el mismo patrón que usamos en la [Parte 2 de Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file): aplicando el operador [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) para analizar el archivo, luego una operación `map` para seleccionar el primer campo de cada línea.
 
@@ -1229,12 +1231,12 @@ Podemos hacer esto usando el mismo patrón que usamos en la [Parte 2 de Hello Ne
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 
-Técnicamente podríamos hacer esto de manera más simple usando el operador [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext), ya que nuestro archivo de entrada actualmente solo contiene rutas de archivos.
-Sin embargo, al usar el operador más versátil `splitCsv` (complementado con `map`), podemos hacer nuestro workflow a prueba de futuro en caso de que decidamos agregar metadata al archivo que contiene rutas de archivos.
+Técnicamente podríamos hacer esto más simplemente usando el operador [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext), ya que nuestro archivo de entrada actualmente solo contiene rutas de archivos.
+Sin embargo, al usar el operador más versátil `splitCsv` (complementado por `map`), podemos preparar nuestro workflow para el futuro en caso de que decidamos agregar metadatos al archivo que contiene rutas de archivos.
 
 !!! tip "Consejo"
 
-    Si no estás seguro de entender lo que están haciendo los operadores aquí, esta es otra gran oportunidad para usar el operador `.view()` para ver cómo se ven los contenidos del canal antes y después de aplicarlos.
+    Si no estás seguro de entender qué están haciendo los operadores aquí, esta es otra gran oportunidad para usar el operador `.view()` para ver cómo se ven los contenidos del canal antes y después de aplicarlos.
 
 ### 4.4. Ejecutar el workflow
 
@@ -1255,18 +1257,18 @@ nextflow run genomics.nf -profile test -resume
     [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
     ```
 
-¡Sí! De hecho, Nextflow detecta correctamente que las llamadas a procesos son exactamente las mismas, y ni siquiera se molesta en volver a ejecutar todo, ya que estábamos ejecutando con `-resume`.
+¡Sí! De hecho, Nextflow detecta correctamente que los llamados a procesos son exactamente los mismos, y ni siquiera se molesta en volver a ejecutar todo, ya que estábamos ejecutando con `-resume`.
 
-¡Y eso es todo! Nuestro simple workflow de llamado de variantes tiene todas las características básicas que queríamos.
+¡Y eso es todo! Nuestro workflow simple de llamado de variantes tiene todas las características básicas que queríamos.
 
 ### Conclusión
 
 Sabes cómo hacer un workflow modular de múltiples pasos para indexar un archivo BAM y aplicar llamado de variantes por muestra usando GATK.
 
-Más generalmente, has aprendido cómo usar componentes esenciales de Nextflow y lógica para construir un pipeline de genómica simple que hace trabajo real, teniendo en cuenta las idiosincrasias de los formatos de archivo de genómica y los requisitos de herramientas.
+Más generalmente, has aprendido cómo usar componentes y lógica esenciales de Nextflow para construir un pipeline de genómica simple que hace trabajo real, teniendo en cuenta las idiosincrasias de los formatos de archivos genómicos y los requisitos de las herramientas.
 
 ### ¿Qué sigue?
 
 ¡Celebra tu éxito y toma un descanso extra largo!
 
-En la siguiente parte de este curso, aprenderás cómo transformar este simple workflow de llamado de variantes por muestra para aplicar llamado de variantes conjunto a los datos.
+En la siguiente parte de este curso, aprenderás cómo transformar este workflow simple de llamado de variantes por muestra para aplicar llamado de variantes conjunto a los datos.

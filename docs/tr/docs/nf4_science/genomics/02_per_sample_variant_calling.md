@@ -1,44 +1,46 @@
-# Bölüm 2: Örnek bazında varyant çağırma
+# Bölüm 2: Örnek başına varyant çağırma
 
-Bölüm 1'de Samtools ve GATK komutlarını ilgili konteynırlarında manuel olarak test ettiniz.
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
+Bölüm 1'de, Samtools ve GATK komutlarını ilgili konteynırlarında manuel olarak test ettiniz.
 Şimdi aynı komutları bir Nextflow iş akışına dönüştüreceğiz.
 
 ## Görev
 
-Bu bölümde, aşağıdaki işlemleri yapan bir iş akışı geliştireceğiz:
+Kursun bu bölümünde, aşağıdakileri yapan bir iş akışı geliştireceğiz:
 
-1. [Samtools](https://www.htslib.org/) kullanarak her BAM girdi dosyası için bir dizin dosyası oluşturma
-2. Her BAM girdi dosyası üzerinde GATK HaplotypeCaller'ı çalıştırarak örnek bazında varyant çağrılarını VCF (Variant Call Format) formatında üretme
+1. [Samtools](https://www.htslib.org/) kullanarak her BAM girdi dosyası için bir dizin dosyası oluşturmak
+2. Her BAM girdi dosyası üzerinde GATK HaplotypeCaller'ı çalıştırarak VCF (Variant Call Format) formatında örnek başına varyant çağrıları oluşturmak
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
-Bu, Bölüm 1'deki adımları tekrar üretir; burada bu komutları konteynırlarında manuel olarak çalıştırmıştınız.
+Bu, Bölüm 1'deki adımları tekrarlar; orada bu komutları konteynırlarında manuel olarak çalıştırmıştınız.
 
-Başlangıç noktası olarak, iş akışının ana bölümlerini özetleyen bir `genomics.nf` iş akışı dosyası ve modüllerin yapısını özetleyen iki modül dosyası (samtools_index.nf ve gatk_haplotypecaller.nf) sunuyoruz.
-Bu dosyalar işlevsel değildir; amaçları sadece kodun ilginç kısımlarını doldurmanız için bir iskelet görevi görmektir.
+Başlangıç noktası olarak, size iş akışının ana bölümlerini özetleyen bir iş akışı dosyası (`genomics.nf`) ve modüllerin yapısını özetleyen iki modül dosyası (samtools_index.nf ve gatk_haplotypecaller.nf) sağlıyoruz.
+Bu dosyalar işlevsel değildir; amaçları sadece kodun ilginç kısımlarını doldurmanız için iskelet görevi görmektir.
 
 ## Ders planı
 
 Geliştirme sürecini daha eğitici hale getirmek için bunu dört adıma ayırdık:
 
-1. **Bir BAM dosyası üzerinde Samtools index çalıştıran tek aşamalı bir iş akışı yazma.**
-   Bu, bir modül oluşturma, içe aktarma ve bir iş akışında çağırma konularını kapsar.
-2. **Dizinlenmiş BAM dosyası üzerinde GATK HaplotypeCaller'ı çalıştıran ikinci bir süreç ekleme.**
-   Bu, süreç çıktılarını girdilere zincirleme ve yardımcı dosyaları işleme konularını tanıtır.
-3. **İş akışını bir örnek grubu üzerinde çalışacak şekilde uyarlama.**
+1. **Bir BAM dosyası üzerinde Samtools index çalıştıran tek aşamalı bir iş akışı yazın.**
+   Bu, bir modül oluşturmayı, içe aktarmayı ve bir iş akışında çağırmayı kapsar.
+2. **Dizinlenmiş BAM dosyası üzerinde GATK HaplotypeCaller çalıştırmak için ikinci bir süreç ekleyin.**
+   Bu, süreç çıktılarını girdilere zincirlemeyi ve yardımcı dosyaları işlemeyi tanıtır.
+3. **İş akışını bir örnek grubu üzerinde çalışacak şekilde uyarlayın.**
    Bu, paralel yürütmeyi kapsar ve ilişkili dosyaları bir arada tutmak için demetleri tanıtır.
-4. **İş akışının toplu olarak girdi dosyaları içeren bir metin dosyasını kabul etmesini sağlama.**
-   Bu, toplu olarak girdi sağlamak için yaygın bir deseni gösterir.
+4. **İş akışının toplu girdi dosyaları içeren bir metin dosyasını kabul etmesini sağlayın.**
+   Bu, toplu olarak girdi sağlamak için yaygın bir kalıbı gösterir.
 
 Her adım, iş akışı geliştirmenin belirli bir yönüne odaklanır.
 
 ---
 
-## 1. Bir BAM dosyası üzerinde Samtools index çalıştıran tek aşamalı bir iş akışı yazma
+## 1. Bir BAM dosyası üzerinde Samtools index çalıştıran tek aşamalı bir iş akışı yazın
 
-Bu ilk adım temellere odaklanır: bir BAM dosyası yükleme ve bunun için bir dizin oluşturma.
+Bu ilk adım temellere odaklanır: bir BAM dosyası yüklemek ve bunun için bir dizin oluşturmak.
 
 [Bölüm 1](01_method.md)'deki `samtools index` komutunu hatırlayın:
 
@@ -46,22 +48,22 @@ Bu ilk adım temellere odaklanır: bir BAM dosyası yükleme ve bunun için bir 
 samtools index '<input_bam>'
 ```
 
-Komut girdi olarak bir BAM dosyası alır ve yanında bir `.bai` dizin dosyası üretir.
+Komut, girdi olarak bir BAM dosyası alır ve yanında bir `.bai` dizin dosyası üretir.
 Konteyner URI'si `community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464` idi.
 
-Bu bilgiyi alıp Nextflow'da üç aşamada sarmalayacağız:
+Bu bilgiyi alacağız ve üç aşamada Nextflow'a dönüştüreceğiz:
 
-1. Girdiyi ayarlama
-2. Dizinleme sürecini yazma ve iş akışında çağırma
-3. Çıktı yönetimini yapılandırma
+1. Girdiyi ayarlayın
+2. Dizinleme sürecini yazın ve iş akışında çağırın
+3. Çıktı işlemeyi yapılandırın
 
-### 1.1. Girdiyi ayarlama
+### 1.1. Girdiyi ayarlayın
 
 Bir girdi parametresi bildirmemiz, uygun bir varsayılan değer sağlamak için bir test profili oluşturmamız ve bir girdi kanalı oluşturmamız gerekiyor.
 
-#### 1.1.1. Bir girdi parametresi bildirimi ekleme
+#### 1.1.1. Bir girdi parametresi bildirimi ekleyin
 
-Ana iş akışı dosyası `genomics.nf`'de, `Pipeline parameters` bölümü altında, `reads_bam` adında bir CLI parametresi bildirin.
+Ana iş akışı dosyası `genomics.nf`'de, `Pipeline parameters` bölümü altında, `reads_bam` adlı bir CLI parametresi bildirin.
 
 === "Sonra"
 
@@ -70,7 +72,7 @@ Ana iş akışı dosyası `genomics.nf`'de, `Pipeline parameters` bölümü alt�
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Birincil girdi
         reads_bam: Path
     }
     ```
@@ -82,18 +84,18 @@ Ana iş akışı dosyası `genomics.nf`'de, `Pipeline parameters` bölümü alt�
      * Pipeline parameters
      */
 
-    // Primary input
+    // Birincil girdi
     ```
 
 Bu, CLI parametresini ayarlar, ancak geliştirme sırasında iş akışını her çalıştırdığımızda dosya yolunu yazmak istemiyoruz.
-Varsayılan değer sağlamak için birden fazla seçenek vardır; burada bir test profili kullanıyoruz.
+Varsayılan bir değer sağlamak için birden fazla seçenek vardır; burada bir test profili kullanıyoruz.
 
-#### 1.1.2. `nextflow.config`'de varsayılan değerli bir test profili oluşturma
+#### 1.1.2. `nextflow.config` içinde varsayılan değere sahip bir test profili oluşturun
 
-Bir test profili, komut satırında girdileri belirtmeden bir iş akışını denemek için uygun varsayılan değerler sağlar.
+Bir test profili, komut satırında girdi belirtmeden bir iş akışını denemek için uygun varsayılan değerler sağlar.
 Bu, Nextflow ekosisteminde yaygın bir kuraldır (daha fazla ayrıntı için [Hello Config](../../hello_nextflow/06_hello_config.md)'e bakın).
 
-`nextflow.config`'e `reads_bam` parametresini test BAM dosyalarından birine ayarlayan bir `test` profili içeren bir `profiles` bloğu ekleyin.
+`nextflow.config` dosyasına, `reads_bam` parametresini test BAM dosyalarından birine ayarlayan bir `test` profili içeren bir `profiles` bloğu ekleyin.
 
 === "Sonra"
 
@@ -113,12 +115,12 @@ Bu, Nextflow ekosisteminde yaygın bir kuraldır (daha fazla ayrıntı için [He
     docker.enabled = true
     ```
 
-Burada, iş akışı betiğinin bulunduğu dizine işaret eden yerleşik bir Nextflow değişkeni olan `${projectDir}` kullanıyoruz.
-Bu, mutlak yolları sabit kodlamadan veri dosyalarına ve diğer kaynaklara referans vermeyi kolaylaştırır.
+Burada, iş akışı betiğinin bulunduğu dizini gösteren yerleşik bir Nextflow değişkeni olan `${projectDir}` kullanıyoruz.
+Bu, mutlak yolları sabit kodlamadan veri dosyalarına ve diğer kaynaklara başvurmayı kolaylaştırır.
 
-#### 1.1.3. Girdi kanalını ayarlama
+#### 1.1.3. Girdi kanalını ayarlayın
 
-İş akışı bloğunda, parametre değerinden `.fromPath` kanal fabrikasını kullanarak bir girdi kanalı oluşturun ([Hello Channels](../../hello_nextflow/02_hello_channels.md)'da kullanıldığı gibi).
+İş akışı bloğunda, `.fromPath` kanal fabrikasını kullanarak parametre değerinden bir girdi kanalı oluşturun ([Hello Channels](../../hello_nextflow/02_hello_channels.md)'da kullanıldığı gibi).
 
 === "Sonra"
 
@@ -126,7 +128,7 @@ Bu, mutlak yolları sabit kodlamadan veri dosyalarına ve diğer kaynaklara refe
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 
@@ -136,21 +138,21 @@ Bu, mutlak yolları sabit kodlamadan veri dosyalarına ve diğer kaynaklara refe
     workflow {
 
         main:
-        // Create input channel
+        // Girdi kanalı oluştur
     ```
 
-Şimdi bu girdi üzerinde dizinleme işlemini çalıştıracak süreci oluşturmamız gerekiyor.
+Şimdi bu girdi üzerinde dizinleme çalıştırmak için süreci oluşturmamız gerekiyor.
 
-### 1.2. Dizinleme sürecini yazma ve iş akışında çağırma
+### 1.2. Dizinleme sürecini yazın ve iş akışında çağırın
 
 Modül dosyasında süreç tanımını yazmamız, bir include ifadesi kullanarak iş akışına içe aktarmamız ve girdi üzerinde çağırmamız gerekiyor.
 
-#### 1.2.1. Dizinleme süreci için modülü doldurma
+#### 1.2.1. Dizinleme süreci için modülü doldurun
 
 `modules/samtools_index.nf` dosyasını açın ve süreç tanımının ana hatlarını inceleyin.
-Ana yapısal öğeleri tanımanız gerekir; aksi takdirde, bir hatırlatma için [Hello Nextflow](../../hello_nextflow/01_hello_world.md)'u okumayı düşünün.
+Ana yapısal öğeleri tanımalısınız; değilse, tazeleme için [Hello Nextflow](../../hello_nextflow/01_hello_world.md)'u okumayı düşünün.
 
-Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, ardından çalışmanızı aşağıdaki "Sonra" sekmesindeki çözümle kontrol edin.
+Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, ardından çalışmanızı aşağıdaki "Sonra" sekmesindeki çözümle karşılaştırın.
 
 === "Önce"
 
@@ -158,7 +160,7 @@ Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendi
     #!/usr/bin/env nextflow
 
     /*
-     * BAM dizin dosyası oluştur
+     * Generate BAM index file
      */
     process SAMTOOLS_INDEX {
 
@@ -181,7 +183,7 @@ Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendi
     #!/usr/bin/env nextflow
 
     /*
-     * BAM dizin dosyası oluştur
+     * Generate BAM index file
      */
     process SAMTOOLS_INDEX {
 
@@ -200,31 +202,31 @@ Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendi
     }
     ```
 
-Bunu tamamladıktan sonra süreç tamamlanmış olur.
+Bunu tamamladığınızda, süreç tamamlanmış olur.
 İş akışında kullanmak için modülü içe aktarmanız ve bir süreç çağrısı eklemeniz gerekir.
 
-#### 1.2.2. Modülü dahil etme
+#### 1.2.2. Modülü dahil edin
 
-`genomics.nf`'de, süreci iş akışına kullanılabilir hale getirmek için bir `include` ifadesi ekleyin:
+`genomics.nf` dosyasında, süreci iş akışında kullanılabilir hale getirmek için bir `include` ifadesi ekleyin:
 
 === "Sonra"
 
     ```groovy title="genomics.nf" linenums="3" hl_lines="2"
-    // Module INCLUDE statements
+    // Modül INCLUDE ifadeleri
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     ```
 
 === "Önce"
 
     ```groovy title="genomics.nf" linenums="3"
-    // Module INCLUDE statements
+    // Modül INCLUDE ifadeleri
     ```
 
 Süreç artık iş akışı kapsamında kullanılabilir.
 
-#### 1.2.3. Girdi üzerinde dizinleme sürecini çağırma
+#### 1.2.3. Girdi üzerinde dizinleme sürecini çağırın
 
-Şimdi, iş akışı bloğuna girdi kanalını argüman olarak geçirerek `SAMTOOLS_INDEX`'e bir çağrı ekleyelim.
+Şimdi, iş akışı bloğunda, girdi kanalını argüman olarak ileterek `SAMTOOLS_INDEX`'e bir çağrı ekleyelim.
 
 === "Sonra"
 
@@ -232,10 +234,10 @@ Süreç artık iş akışı kapsamında kullanılabilir.
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Create index file for input BAM file
+        // Girdi BAM dosyası için dizin dosyası oluştur
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -245,22 +247,22 @@ Süreç artık iş akışı kapsamında kullanılabilir.
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Call processes
+        // Süreçleri çağır
     ```
 
 İş akışı artık girdiyi yükler ve üzerinde dizinleme sürecini çalıştırır.
-Şimdi, çıktının nasıl yayınlanacağını yapılandırmamız gerekiyor.
+Ardından, çıktının nasıl yayınlanacağını yapılandırmamız gerekiyor.
 
-### 1.3. Çıktı yönetimini yapılandırma
+### 1.3. Çıktı işlemeyi yapılandırın
 
-Hangi süreç çıktılarının yayınlanacağını bildirmemiz ve nereye gideceklerini belirtmemiz gerekiyor.
+Hangi süreç çıktılarının yayınlanacağını bildirmemiz ve nereye gitmesi gerektiğini belirtmemiz gerekiyor.
 
-#### 1.3.1. `publish:` bölümünde bir çıktı bildirme
+#### 1.3.1. `publish:` bölümünde bir çıktı bildirin
 
-İş akışı bloğunun içindeki `publish:` bölümü hangi süreç çıktılarının yayınlanması gerektiğini bildirir.
+İş akışı bloğu içindeki `publish:` bölümü, hangi süreç çıktılarının yayınlanması gerektiğini bildirir.
 `SAMTOOLS_INDEX` çıktısını `bam_index` adlı bir hedefe atayın.
 
 === "Sonra"
@@ -275,15 +277,15 @@ Hangi süreç çıktılarının yayınlanacağını bildirmemiz ve nereye gidece
 
     ```groovy title="genomics.nf" linenums="22"
         publish:
-        // Declare outputs to publish
+        // Yayınlanacak çıktıları bildirin
     }
     ```
 
 Şimdi Nextflow'a yayınlanan çıktıyı nereye koyacağını söylememiz gerekiyor.
 
-#### 1.3.2. `output {}` bloğunda çıktı hedefini yapılandırma
+#### 1.3.2. `output {}` bloğunda çıktı hedefini yapılandırın
 
-`output {}` bloğu iş akışının dışında bulunur ve her adlandırılmış hedefin nereye yayınlandığını belirtir.
+`output {}` bloğu iş akışının dışında yer alır ve her adlandırılmış hedefin nerede yayınlandığını belirtir.
 `bam_index` için bir `bam/` alt dizinine yayınlayan bir hedef ekleyelim.
 
 === "Sonra"
@@ -300,21 +302,21 @@ Hangi süreç çıktılarının yayınlanacağını bildirmemiz ve nereye gidece
 
     ```groovy title="genomics.nf" linenums="26"
     output {
-        // Configure publish targets
+        // Yayınlama hedeflerini yapılandırın
     }
     ```
 
-!!! note
+!!! note "Not"
 
-    Varsayılan olarak, Nextflow çıktı dosyalarını sembolik bağlantılar olarak yayınlar, bu da gereksiz kopyalamayı önler.
+    Varsayılan olarak, Nextflow çıktı dosyalarını sembolik bağlantılar olarak yayınlar, bu da gereksiz çoğaltmayı önler.
     Burada kullandığımız veri dosyaları çok küçük olsa da, genomik alanında çok büyük olabilirler.
-    Sembolik bağlantılar `work` dizininizi temizlediğinizde bozulur, bu nedenle üretim iş akışları için varsayılan yayınlama modunu `'copy'` olarak geçersiz kılmak isteyebilirsiniz.
+    `work` dizininizi temizlediğinizde sembolik bağlantılar bozulacaktır, bu nedenle üretim iş akışları için varsayılan yayınlama modunu `'copy'` olarak geçersiz kılmak isteyebilirsiniz.
 
-### 1.4. İş akışını çalıştırma
+### 1.4. İş akışını çalıştırın
 
-Bu noktada, tam olarak işlevsel olması gereken tek adımlı bir dizinleme iş akışımız var. Çalıştığını test edelim!
+Bu noktada, tamamen işlevsel olması gereken tek adımlı bir dizinleme iş akışımız var. Çalıştığını test edelim!
 
-Test profilinde ayarlanan varsayılan değeri kullanmak ve komut satırına yolu yazmak zorunda kalmamak için `-profile test` ile çalıştırabiliriz.
+Test profilinde ayarlanan varsayılan değeri kullanmak ve komut satırına yol yazmak zorunda kalmamak için `-profile test` ile çalıştırabiliriz.
 
 ```bash
 nextflow run genomics.nf -profile test
@@ -349,19 +351,19 @@ Dizin dosyasının doğru şekilde oluşturulduğunu çalışma dizinine veya so
         └── reads_mother.bam.bai -> ...
     ```
 
-İşte orada!
+İşte burada!
 
 ### Özet
 
-Bir süreç içeren bir modül oluşturmayı, bir iş akışına içe aktarmayı, bir girdi kanalıyla çağırmayı ve sonuçları yayınlamayı biliyorsunuz.
+Bir süreç içeren bir modül oluşturmayı, bunu bir iş akışına içe aktarmayı, bir girdi kanalıyla çağırmayı ve sonuçları yayınlamayı biliyorsunuz.
 
 ### Sırada ne var?
 
-Dizinleme sürecinin çıktısını alan ve varyant çağırma işlemini çalıştırmak için kullanan ikinci bir adım ekleyin.
+Dizinleme sürecinin çıktısını alan ve varyant çağırma çalıştırmak için kullanan ikinci bir adım ekleyin.
 
 ---
 
-## 2. Dizinlenmiş BAM dosyası üzerinde GATK HaplotypeCaller'ı çalıştıran ikinci bir süreç ekleme
+## 2. Dizinlenmiş BAM dosyası üzerinde GATK HaplotypeCaller çalıştırmak için ikinci bir süreç ekleyin
 
 Artık girdi dosyamız için bir dizinimiz olduğuna göre, varyant çağırma adımını ayarlamaya geçebiliriz.
 
@@ -375,33 +377,33 @@ gatk HaplotypeCaller \
         -L /data/ref/intervals.bed
 ```
 
-Komut bir BAM dosyası (`-I`), bir referans genom (`-R`) ve bir aralık dosyası (`-L`) alır ve diziniyle birlikte bir VCF dosyası (`-O`) üretir.
+Komut bir BAM dosyası (`-I`), bir referans genom (`-R`) ve bir aralıklar dosyası (`-L`) alır ve diziniyle birlikte bir VCF dosyası (`-O`) üretir.
 Araç ayrıca BAM dizininin, referans dizininin ve referans sözlüğünün ilgili dosyalarıyla birlikte bulunmasını bekler.
 Konteyner URI'si `community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867` idi.
 
 Daha önce olduğu gibi aynı üç aşamayı izliyoruz:
 
-1. Girdileri ayarlama
-2. Varyant çağırma sürecini yazma ve iş akışında çağırma
-3. Çıktı yönetimini yapılandırma
+1. Girdileri ayarlayın
+2. Varyant çağırma sürecini yazın ve iş akışında çağırın
+3. Çıktı işlemeyi yapılandırın
 
-### 2.1. Girdileri ayarlama
+### 2.1. Girdileri ayarlayın
 
 Varyant çağırma adımı birkaç ek girdi dosyası gerektirir.
 Bunlar için parametreler bildirmemiz, test profiline varsayılan değerler eklememiz ve bunları yüklemek için değişkenler oluşturmamız gerekiyor.
 
-#### 2.1.1. Yardımcı girdiler için parametre bildirimleri ekleme
+#### 2.1.1. Yardımcı girdiler için parametre bildirimleri ekleyin
 
-Yeni sürecimiz sağlanması gereken bir avuç ek dosya beklediğinden, `genomics.nf`'de `Pipeline parameters` bölümü altında bunlar için parametre bildirimleri ekleyin:
+Yeni sürecimiz sağlanması gereken bir avuç ek dosya beklediğinden, `genomics.nf` dosyasında `Pipeline parameters` bölümü altında bunlar için parametre bildirimleri ekleyin:
 
 === "Sonra"
 
     ```groovy title="genomics.nf" linenums="9" hl_lines="5-9"
     params {
-        // Primary input
+        // Birincil girdi
         reads_bam: Path
 
-        // Accessory files
+        // Yardımcı dosyalar
         reference: Path
         reference_index: Path
         reference_dict: Path
@@ -413,16 +415,16 @@ Yeni sürecimiz sağlanması gereken bir avuç ek dosya beklediğinden, `genomic
 
     ```groovy title="genomics.nf" linenums="9"
     params {
-        // Primary input
+        // Birincil girdi
         reads_bam: Path
     }
     ```
 
-Daha önce olduğu gibi, varsayılan değerleri satır içi yerine test profili aracılığıyla sağlıyoruz.
+Daha önce olduğu gibi, satır içi yerine test profili aracılığıyla varsayılan değerler sağlıyoruz.
 
-#### 2.1.2. Test profiline yardımcı dosya varsayılanlarını ekleme
+#### 2.1.2. Test profiline yardımcı dosya varsayılanları ekleyin
 
-Bölüm 1.1.2'de `reads_bam` için yaptığımız gibi, `nextflow.config`'deki test profiline yardımcı dosyalar için varsayılan değerler ekleyin:
+Bölüm 1.1.2'de `reads_bam` için yaptığımız gibi, `nextflow.config` dosyasındaki test profiline yardımcı dosyalar için varsayılan değerler ekleyin:
 
 === "Sonra"
 
@@ -444,11 +446,11 @@ Bölüm 1.1.2'de `reads_bam` için yaptığımız gibi, `nextflow.config`'deki t
     }
     ```
 
-Şimdi bu dosya yollarını iş akışında kullanmak için yükleyen değişkenler oluşturmamız gerekiyor.
+Şimdi bu dosya yollarını iş akışında kullanmak üzere yükleyen değişkenler oluşturmamız gerekiyor.
 
-#### 2.1.3. Yardımcı dosyalar için değişkenler oluşturma
+#### 2.1.3. Yardımcı dosyalar için değişkenler oluşturun
 
-İş akışı bloğunun içine yardımcı dosya yolları için değişkenler ekleyin:
+İş akışı bloğu içinde yardımcı dosya yolları için değişkenler ekleyin:
 
 === "Sonra"
 
@@ -456,16 +458,16 @@ Bölüm 1.1.2'de `reads_bam` için yaptığımız gibi, `nextflow.config`'deki t
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Load the file paths for the accessory files (reference and intervals)
+        // Yardımcı dosyalar için dosya yollarını yükle (referans ve aralıklar)
         ref_file        = file(params.reference)
         ref_index_file  = file(params.reference_index)
         ref_dict_file   = file(params.reference_dict)
         intervals_file  = file(params.intervals)
 
-        // Create index file for input BAM file
+        // Girdi BAM dosyası için dizin dosyası oluştur
         SAMTOOLS_INDEX(reads_ch)
     ```
 
@@ -475,25 +477,25 @@ Bölüm 1.1.2'de `reads_bam` için yaptığımız gibi, `nextflow.config`'deki t
     workflow {
 
         main:
-        // Create input channel (single file via CLI parameter)
+        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
         reads_ch = channel.fromPath(params.reads_bam)
 
-        // Create index file for input BAM file
+        // Girdi BAM dosyası için dizin dosyası oluştur
         SAMTOOLS_INDEX(reads_ch)
     ```
 
 `file()` sözdizimi, Nextflow'a bu girdileri açıkça dosya yolları olarak işlemesini söyler.
-Bu konuda daha fazla bilgiyi [Working with files](../../side_quests/working_with_files.md) Yan Görevinde bulabilirsiniz.
+Bu konuda daha fazla bilgiyi [Dosyalarla çalışma](../../side_quests/working_with_files.md) Yan Görevinde öğrenebilirsiniz.
 
-### 2.2. Varyant çağırma sürecini yazma ve iş akışında çağırma
+### 2.2. Varyant çağırma sürecini yazın ve iş akışında çağırın
 
 Modül dosyasında süreç tanımını yazmamız, bir include ifadesi kullanarak iş akışına içe aktarmamız ve girdi okumaları artı dizinleme adımının çıktısı ve yardımcı dosyalar üzerinde çağırmamız gerekiyor.
 
-#### 2.2.1. Varyant çağırma süreci için modülü doldurma
+#### 2.2.1. Varyant çağırma süreci için modülü doldurun
 
 `modules/gatk_haplotypecaller.nf` dosyasını açın ve süreç tanımının ana hatlarını inceleyin.
 
-Yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, ardından çalışmanızı aşağıdaki "Sonra" sekmesindeki çözümle kontrol edin.
+Devam edin ve yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, ardından çalışmanızı aşağıdaki "Sonra" sekmesindeki çözümle karşılaştırın.
 
 === "Önce"
 
@@ -501,7 +503,7 @@ Yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, 
     #!/usr/bin/env nextflow
 
     /*
-     * GATK HaplotypeCaller ile varyant çağır
+     * Call variants with GATK HaplotypeCaller
      */
     process GATK_HAPLOTYPECALLER {
 
@@ -524,7 +526,7 @@ Yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, 
     #!/usr/bin/env nextflow
 
     /*
-     * GATK HaplotypeCaller ile varyant çağır
+     * Call variants with GATK HaplotypeCaller
      */
     process GATK_HAPLOTYPECALLER {
 
@@ -554,23 +556,23 @@ Yukarıda sağlanan bilgileri kullanarak süreç tanımını kendiniz doldurun, 
     ```
 
 Bu sürecin GATK komutunun kendisinin gerektirdiğinden daha fazla girdiye sahip olduğunu fark edeceksiniz.
-GATK, adlandırma kurallarına göre BAM dizin dosyasını ve referans genomun yardımcı dosyalarını aramayı bilir, ancak Nextflow alan-agnostiktir ve bu kuralları bilmez.
-Nextflow'un bunları çalışma dizininde çalışma zamanında aşamalandırması için açıkça listelememiz gerekir; aksi takdirde GATK eksik dosyalar hakkında bir hata verecektir.
+GATK, adlandırma kurallarına göre BAM dizin dosyasını ve referans genomun yardımcı dosyalarını aramayı bilir, ancak Nextflow alan bağımsızdır ve bu kuralları bilmez.
+Nextflow'un bunları çalışma zamanında çalışma dizininde hazırlaması için açıkça listelememiz gerekir; aksi takdirde GATK eksik dosyalar hakkında bir hata verecektir.
 
-Benzer şekilde, Nextflow'un sonraki adımlar için takip etmesi amacıyla çıktı VCF'nin dizin dosyasını (`"${input_bam}.vcf.idx"`) açıkça listeliyoruz.
-Her çıktı kanalına bir ad atamak için `emit:` sözdizimini kullanıyoruz; bu, çıktıları yayınlama bloğuna bağladığımızda faydalı olacaktır.
+Benzer şekilde, çıktı VCF'nin dizin dosyasını (`"${input_bam}.vcf.idx"`) açıkça listeliyoruz, böylece Nextflow sonraki adımlar için bunun kaydını tutar.
+Her çıktı kanalına bir ad atamak için `emit:` sözdizimini kullanıyoruz, bu da çıktıları yayınlama bloğuna bağladığımızda yararlı olacaktır.
 
-Bunu tamamladıktan sonra süreç tamamlanmış olur.
+Bunu tamamladığınızda, süreç tamamlanmış olur.
 İş akışında kullanmak için modülü içe aktarmanız ve bir süreç çağrısı eklemeniz gerekir.
 
-#### 2.2.2. Yeni modülü içe aktarma
+#### 2.2.2. Yeni modülü içe aktarın
 
-`genomics.nf`'yi yeni modülü içe aktarmak için güncelleyin:
+Yeni modülü içe aktarmak için `genomics.nf` dosyasını güncelleyin:
 
 === "Sonra"
 
     ```groovy title="genomics.nf" linenums="3" hl_lines="3"
-    // Module INCLUDE statements
+    // Modül INCLUDE ifadeleri
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     ```
@@ -578,23 +580,23 @@ Bunu tamamladıktan sonra süreç tamamlanmış olur.
 === "Önce"
 
     ```groovy title="genomics.nf" linenums="3"
-    // Module INCLUDE statements
+    // Modül INCLUDE ifadeleri
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     ```
 
 Süreç artık iş akışı kapsamında kullanılabilir.
 
-#### 2.2.3. Süreç çağrısını ekleme
+#### 2.2.3. Süreç çağrısını ekleyin
 
-İş akışı gövdesine, `main:` altına süreç çağrısını ekleyin:
+İş akışı gövdesinde, `main:` altına süreç çağrısını ekleyin:
 
 === "Sonra"
 
     ```groovy title="genomics.nf" linenums="33" hl_lines="4-12"
-        // Create index file for input BAM file
+        // Girdi BAM dosyası için dizin dosyası oluştur
         SAMTOOLS_INDEX(reads_ch)
 
-        // Call variants from the indexed BAM file
+        // Dizinlenmiş BAM dosyasından varyantları çağır
         GATK_HAPLOTYPECALLER(
             reads_ch,
             SAMTOOLS_INDEX.out,
@@ -608,24 +610,24 @@ Süreç artık iş akışı kapsamında kullanılabilir.
 === "Önce"
 
     ```groovy title="genomics.nf" linenums="33"
-        // Create index file for input BAM file
+        // Girdi BAM dosyası için dizin dosyası oluştur
         SAMTOOLS_INDEX(reads_ch)
     ```
 
-Hello Nextflow eğitim serisinden `*.out` sözdizimini tanımanız gerekir; Nextflow'a `SAMTOOLS_INDEX` tarafından çıkarılan kanalı almasını ve bunu `GATK_HAPLOTYPECALLER` süreç çağrısına bağlamasını söylüyoruz.
+Hello Nextflow eğitim serisinden `*.out` sözdizimini tanımalısınız; Nextflow'a `SAMTOOLS_INDEX` tarafından çıktılanan kanalı almasını ve bunu `GATK_HAPLOTYPECALLER` süreç çağrısına bağlamasını söylüyoruz.
 
-!!! note
+!!! note "Not"
 
-    Girdilerin, sürecin girdi bloğunda listelendikleri sırayla tamamen aynı sırada süreç çağrısında sağlandığına dikkat edin.
-    Nextflow'da girdiler konumsaldır, yani aynı sırayı _takip etmelisiniz_; ve tabii ki aynı sayıda eleman olmalıdır.
+    Girdilerin, süreç çağrısında, sürecin girdi bloğunda listelendiği sırayla tam olarak aynı sırada sağlandığına dikkat edin.
+    Nextflow'da girdiler konumsaldır, yani aynı sırayı _takip etmelisiniz_; ve elbette aynı sayıda öğe olmalıdır.
 
-### 2.3. Çıktı yönetimini yapılandırma
+### 2.3. Çıktı işlemeyi yapılandırın
 
 Yeni çıktıları yayınlama bildirimine eklememiz ve nereye gideceklerini yapılandırmamız gerekiyor.
 
-#### 2.3.1. Varyant çağırma çıktıları için yayınlama hedefleri ekleme
+#### 2.3.1. Varyant çağırma çıktıları için yayınlama hedefleri ekleyin
 
-`publish:` bölümüne VCF ve dizin çıktılarını ekleyin:
+VCF ve dizin çıktılarını `publish:` bölümüne ekleyin:
 
 === "Sonra"
 
@@ -647,9 +649,9 @@ Yeni çıktıları yayınlama bildirimine eklememiz ve nereye gideceklerini yap�
 
 Şimdi Nextflow'a yeni çıktıları nereye koyacağını söylememiz gerekiyor.
 
-#### 2.3.2. Yeni çıktı hedeflerini yapılandırma
+#### 2.3.2. Yeni çıktı hedeflerini yapılandırın
 
-`output {}` bloğuna `vcf` ve `vcf_idx` hedefleri için girdiler ekleyin, her ikisini de bir `vcf/` alt dizinine yayınlayın:
+`output {}` bloğunda `vcf` ve `vcf_idx` hedefleri için girişler ekleyin, her ikisini de bir `vcf/` alt dizinine yayınlayın:
 
 === "Sonra"
 
@@ -679,7 +681,7 @@ Yeni çıktıları yayınlama bildirimine eklememiz ve nereye gideceklerini yap�
 
 VCF ve dizini, her ikisi de `vcf/` alt dizinine giden ayrı hedefler olarak yayınlanır.
 
-### 2.4. İş akışını çalıştırma
+### 2.4. İş akışını çalıştırın
 
 Genişletilmiş iş akışını çalıştırın, bu sefer dizinleme adımını tekrar çalıştırmak zorunda kalmamak için `-resume` ekleyin.
 
@@ -701,9 +703,9 @@ nextflow run genomics.nf -profile test -resume
 
 Şimdi konsol çıktısına bakarsak, iki sürecin listelendiğini görüyoruz.
 
-İlk süreç beklendiği gibi önbellekleme sayesinde atlandı, ikinci süreç ise yepyeni olduğu için çalıştırıldı.
+İlk süreç, beklendiği gibi önbellekleme sayesinde atlandı, ikinci süreç ise yepyeni olduğu için çalıştırıldı.
 
-Çıktı dosyalarını sonuçlar dizininde bulacaksınız (çalışma dizinine sembolik bağlantılar olarak).
+Çıktı dosyalarını sonuçlar dizininde (çalışma dizinine sembolik bağlantılar olarak) bulacaksınız.
 
 ??? abstract "Dizin içeriği"
 
@@ -727,47 +729,47 @@ VCF dosyasını açarsanız, GATK komutunu doğrudan konteynırda çalıştırar
     20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
     ```
 
-Bu, çalışmamızdaki her örnek için üretmeyi önemsediğimiz çıktıdır.
+Bu, çalışmamızdaki her örnek için oluşturmayı önemsediğimiz çıktıdır.
 
 ### Özet
 
-Gerçek analiz çalışması yapan ve yardımcı dosyalar gibi genomik dosya formatı özelliklerini ele alabilen iki adımlı modüler bir iş akışını nasıl yapacağınızı biliyorsunuz.
+Gerçek analiz işi yapan ve yardımcı dosyalar gibi genomik dosya formatı özelliklerini ele alabilen iki adımlı modüler bir iş akışı yapmayı biliyorsunuz.
 
 ### Sırada ne var?
 
-İş akışının birden fazla örneği toplu olarak işlemesini sağlayın.
+İş akışını toplu olarak birden fazla örneği işleyecek şekilde yapın.
 
 ---
 
-## 3. İş akışını bir örnek grubu üzerinde çalışacak şekilde uyarlama
+## 3. İş akışını bir örnek grubu üzerinde çalışacak şekilde uyarlayın
 
-Tek bir örnek üzerinde işlemi otomatikleştirebilen bir iş akışına sahip olmak güzel, ama ya 1000 örneğiniz varsa?
-Tüm örneklerinizi döngüye alan bir bash betiği yazmanız mı gerekiyor?
+Tek bir örnek üzerinde işlemeyi otomatikleştirebilen bir iş akışına sahip olmak güzel, ama ya 1000 örneğiniz varsa?
+Tüm örnekleriniz arasında döngü yapan bir bash betiği yazmanız mı gerekiyor?
 
-Hayır, şükürler olsun! Sadece kodda küçük bir değişiklik yapın ve Nextflow bunu da sizin için halledecek.
+Hayır, şükürler olsun! Sadece kodda küçük bir değişiklik yapın ve Nextflow bunu da sizin için halledecektir.
 
-### 3.1. Girdiyi üç örneği listeleyecek şekilde güncelleme
+### 3.1. Girdiyi üç örneği listeleyecek şekilde güncelleyin
 
-Birden fazla örnek üzerinde çalıştırmak için test profilini tek bir dosya yolu yerine bir dosya yolları dizisi sağlayacak şekilde güncelleyin.
+Birden fazla örnek üzerinde çalıştırmak için, test profilini tek bir dosya yolu yerine bir dosya yolları dizisi sağlayacak şekilde güncelleyin.
 Bu, çok örnekli yürütmeyi test etmenin hızlı bir yoludur; bir sonraki adımda bir girdi dosyası kullanarak daha ölçeklenebilir bir yaklaşıma geçeceğiz.
 
-İlk olarak, diziler tür açıklamaları kullanamayacağından, parametre bildirimindeki tür açıklamasını yorumlayın:
+İlk olarak, diziler yazılı bildirimleri kullanamayacağından, parametre bildirimindeki tür açıklamasını yorumlayın:
 
 === "Sonra"
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (array of three samples)
+        // Birincil girdi (üç örnekten oluşan dizi)
         reads_bam //: Path
     ```
 
 === "Önce"
 
     ```groovy title="genomics.nf" linenums="10"
-        // Primary input
+        // Birincil girdi
         reads_bam: Path
     ```
 
-Ardından test profilini üç örneğin hepsini listeleyecek şekilde güncelleyin:
+Ardından test profilini üç örneğin tümünü listeleyecek şekilde güncelleyin:
 
 === "Sonra"
 
@@ -799,15 +801,15 @@ Ardından test profilini üç örneğin hepsini listeleyecek şekilde güncelley
 
 İş akışı gövdesindeki kanal fabrikası (`.fromPath`) tek bir dosya yolu kadar birden fazla dosya yolunu da kabul eder, bu nedenle başka değişiklik gerekmez.
 
-### 3.2. İş akışını çalıştırma
+### 3.2. İş akışını çalıştırın
 
-Artık tesisat üç test örneğinin tamamı üzerinde çalışacak şekilde ayarlandığına göre iş akışını çalıştırmayı deneyin.
+Artık tesisat üç test örneğinin tümü üzerinde çalışacak şekilde ayarlandığına göre iş akışını çalıştırmayı deneyin.
 
 ```bash
 nextflow run genomics.nf -profile test -resume
 ```
 
-İlginç olan: bu _çalışabilir_ VEYA _başarısız olabilir_. Örneğin, işte başarılı olan bir çalıştırma:
+Komik olan şu: bu _çalışabilir_ VEYA _başarısız olabilir_. Örneğin, işte başarılı olan bir çalıştırma:
 
 ??? success "Komut çıktısı"
 
@@ -821,7 +823,7 @@ nextflow run genomics.nf -profile test -resume
     [7a/89bc43] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 1 ✔
     ```
 
-İş akışı çalıştırmanız başarılı olduysa, şu gibi bir hata alana kadar tekrar çalıştırın:
+İş akışı çalıştırmanız başarılı olduysa, şuna benzer bir hata alana kadar tekrar çalıştırın:
 
 ??? failure "Komut çıktısı"
 
@@ -851,7 +853,7 @@ nextflow run genomics.nf -profile test -resume
       ...
     ```
 
-GATK komut hata çıktısına bakarsanız, şu gibi bir satır olacaktır:
+GATK komut hata çıktısına bakarsanız, şuna benzer bir satır olacaktır:
 
 ```console
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
@@ -859,13 +861,13 @@ A USER ERROR has occurred: Traversal by intervals was requested but some input f
 
 Bu garip, çünkü iş akışının ilk adımında BAM dosyalarını açıkça dizinledik. Tesisatta bir sorun olabilir mi?
 
-### 3.3. Sorunu giderme
+### 3.3. Sorunu giderin
 
 Neyin yanlış gittiğini anlamak için çalışma dizinlerini inceleyeceğiz ve `view()` operatörünü kullanacağız.
 
-#### 3.3.1. İlgili çağrılar için çalışma dizinlerini kontrol etme
+#### 3.3.1. İlgili çağrılar için çalışma dizinlerini kontrol edin
 
-Konsol çıktısında listelenen başarısız `GATK_HAPLOTYPECALLER` süreç çağrısının çalışma dizinine bakın.
+Konsol çıktısında listelenen başarısız `GATK_HAPLOTYPECALLER` süreç çağrısı için çalışma dizininin içine bakın.
 
 ??? abstract "Dizin içeriği"
 
@@ -883,9 +885,9 @@ Konsol çıktısında listelenen başarısız `GATK_HAPLOTYPECALLER` süreç ça
 
 Bu dizinde listelenen BAM dosyasının ve BAM dizininin adlarına özellikle dikkat edin: `reads_son.bam` ve `reads_father.bam.bai`.
 
-Ne? Nextflow bu süreç çağrısının çalışma dizininde bir dizin dosyası aşamalandırmış, ancak yanlış olanı. Bu nasıl oldu?
+Ne oluyor? Nextflow bu süreç çağrısının çalışma dizininde bir dizin dosyası hazırlamış, ancak yanlış olanı. Bu nasıl olabilir?
 
-#### 3.3.2. Kanal içeriğini incelemek için [view() operatörünü](https://www.nextflow.io/docs/latest/reference/operator.html#view) kullanma
+#### 3.3.2. Kanal içeriğini incelemek için [view() operatörünü](https://www.nextflow.io/docs/latest/reference/operator.html#view) kullanın
 
 Kanalın içeriğini görüntülemek için `GATK_HAPLOTYPECALLER` süreç çağrısından önce iş akışı gövdesine şu iki satırı ekleyin:
 
@@ -894,11 +896,11 @@ Kanalın içeriğini görüntülemek için `GATK_HAPLOTYPECALLER` süreç çağr
     ```groovy title="genomics.nf" hl_lines="3-5"
         SAMTOOLS_INDEX(reads_ch)
 
-        // temporary diagnostics
+        // geçici tanılama
         reads_ch.view()
         SAMTOOLS_INDEX.out.view()
 
-        // Call variants from the indexed BAM file
+        // Dizinlenmiş BAM dosyasından varyantları çağır
         GATK_HAPLOTYPECALLER(
     ```
 
@@ -907,7 +909,7 @@ Kanalın içeriğini görüntülemek için `GATK_HAPLOTYPECALLER` süreç çağr
     ```groovy title="genomics.nf"
         SAMTOOLS_INDEX(reads_ch)
 
-        // Call variants from the indexed BAM file
+        // Dizinlenmiş BAM dosyasından varyantları çağır
         GATK_HAPLOTYPECALLER(
     ```
 
@@ -917,7 +919,7 @@ Ardından iş akışı komutunu tekrar çalıştırın.
 nextflow run genomics.nf -profile test
 ```
 
-Bir kez daha, bu başarılı olabilir veya başarısız olabilir. İşte başarısız bir çalıştırma için iki `.view()` çağrısının çıktısının neye benzediği:
+Bir kez daha, bu başarılı olabilir veya başarısız olabilir. İşte başarısız bir çalıştırma için iki `.view()` çağrısının çıktısının nasıl göründüğü:
 
 ```console
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
@@ -928,37 +930,37 @@ Bir kez daha, bu başarılı olabilir veya başarısız olabilir. İşte başar�
 /workspaces/training/nf4-science/genomics/work/4d/dff681a3d137ba7d9866e3d9307bd0/reads_mother.bam.bai
 ```
 
-İlk üç satır girdi kanalına, ikincisi çıktı kanalına karşılık gelir.
+İlk üç satır girdi kanalına, ikincisi ise çıktı kanalına karşılık gelir.
 Üç örnek için BAM dosyalarının ve dizin dosyalarının aynı sırada listelenmediğini görebilirsiniz!
 
-!!! note
+!!! note "Not"
 
-    Birden fazla öğe içeren bir kanal üzerinde bir Nextflow süreci çağırdığınızda, Nextflow yürütmeyi mümkün olduğunca paralelleştirmeye çalışacak ve çıktıları kullanılabilir oldukları sırayla toplayacaktır.
-    Sonuç olarak, karşılık gelen çıktılar orijinal girdilerin verildiği farklı bir sırada toplanabilir.
+    Birden fazla öğe içeren bir kanal üzerinde bir Nextflow süreci çağırdığınızda, Nextflow yürütmeyi mümkün olduğunca paralelleştirmeye çalışacak ve çıktıları kullanılabilir hale geldikleri sırayla toplayacaktır.
+    Sonuç olarak, karşılık gelen çıktılar orijinal girdilerin verildiğinden farklı bir sırada toplanabilir.
 
-Şu anda yazıldığı gibi, iş akışı betiğimiz dizin dosyalarının dizinleme adımından girdilerin verildiği anne/baba/oğul sırasıyla aynı sırada listelenerek çıkacağını varsayıyor.
-Ancak bunun böyle olacağı garanti değildir, bu yüzden bazen (her zaman olmasa da) yanlış dosyalar ikinci adımda eşleştirilir.
+Şu anda yazıldığı gibi, iş akışı betiğimiz dizin dosyalarının dizinleme adımından girdilerin verildiği anne/baba/oğul sırasıyla aynı sırada listelenerek çıkacağını varsayar.
+Ancak bunun böyle olacağının garantisi yoktur, bu nedenle bazen (her zaman olmasa da) yanlış dosyalar ikinci adımda eşleştirilir.
 
-Bunu düzeltmek için BAM dosyalarının ve dizin dosyalarının kanallar aracılığıyla birlikte seyahat etmesini sağlamamız gerekiyor.
+Bunu düzeltmek için, BAM dosyalarının ve dizin dosyalarının kanallar aracılığıyla birlikte seyahat etmesini sağlamamız gerekir.
 
-!!! tip
+!!! tip "İpucu"
 
-    İş akışı kodundaki `view()` ifadeleri hiçbir şey yapmaz, bu nedenle bunları bırakmak sorun değildir.
+    İş akışı kodundaki `view()` ifadeleri hiçbir şey yapmaz, bu nedenle onları içeride bırakmak sorun değildir.
     Ancak konsol çıktınızı karmaşıklaştıracaklar, bu nedenle sorunu gidermeyi bitirdiğinizde bunları kaldırmanızı öneririz.
 
-### 3.4. İş akışını dizin dosyalarını doğru şekilde işleyecek şekilde güncelleme
+### 3.4. İş akışını dizin dosyalarını doğru şekilde işleyecek şekilde güncelleyin
 
-Düzeltme, her BAM dosyasını diziniyle birlikte bir demete paketlemek, ardından akış aşağısındaki süreci ve iş akışı tesisatını buna uyacak şekilde güncellemektir.
+Düzeltme, her BAM dosyasını diziniyle birlikte bir demete paketlemek, ardından aşağı akış sürecini ve iş akışı tesisatını eşleşecek şekilde güncellemektir.
 
-#### 3.4.1. SAMTOOLS_INDEX modülünün çıktısını bir demete değiştirme
+#### 3.4.1. SAMTOOLS_INDEX modülünün çıktısını bir demete değiştirin
 
 Bir BAM dosyasının ve dizininin yakından ilişkili kalmasını sağlamanın en basit yolu, bunları dizin görevinden çıkan bir demete birlikte paketlemektir.
 
-!!! note
+!!! note "Not"
 
-    **Demet**, bir fonksiyondan birden fazla değer döndürmek için yaygın olarak kullanılan sonlu, sıralı bir öğe listesidir. Demetler, birden fazla girdi veya çıktıyı ilişkilerini ve sıralarını koruyarak süreçler arasında geçirmek için özellikle yararlıdır.
+    Bir **demet**, bir fonksiyondan birden fazla değer döndürmek için yaygın olarak kullanılan sonlu, sıralı bir öğe listesidir. Demetler, ilişkilerini ve sıralarını korurken süreçler arasında birden fazla girdi veya çıktı iletmek için özellikle yararlıdır.
 
-BAM dosyasını içerecek şekilde `modules/samtools_index.nf`'deki çıktıyı güncelleyin:
+`modules/samtools_index.nf` dosyasındaki çıktıyı BAM dosyasını içerecek şekilde güncelleyin:
 
 === "Sonra"
 
@@ -976,11 +978,11 @@ BAM dosyasını içerecek şekilde `modules/samtools_index.nf`'deki çıktıyı 
 
 Bu şekilde, her dizin dosyası orijinal BAM dosyasıyla sıkı bir şekilde eşleştirilecek ve dizinleme adımının genel çıktısı dosya çiftleri içeren tek bir kanal olacaktır.
 
-#### 3.4.2. GATK_HAPLOTYPECALLER modülünün girdisini bir demet kabul edecek şekilde değiştirme
+#### 3.4.2. GATK_HAPLOTYPECALLER modülünün girdisini bir demeti kabul edecek şekilde değiştirin
 
-İlk sürecin çıktısının 'şeklini' değiştirdiğimiz için, ikinci sürecin girdi tanımını buna uyacak şekilde güncellememiz gerekiyor.
+İlk sürecin çıktısının 'şeklini' değiştirdiğimizden, ikinci sürecin girdi tanımını eşleşecek şekilde güncellememiz gerekiyor.
 
-`modules/gatk_haplotypecaller.nf`'yi güncelleyin:
+`modules/gatk_haplotypecaller.nf` dosyasını güncelleyin:
 
 === "Sonra"
 
@@ -997,13 +999,13 @@ Bu şekilde, her dizin dosyası orijinal BAM dosyasıyla sıkı bir şekilde eş
         path input_bam_index
     ```
 
-Şimdi süreç çağrısında ve yayınlama hedeflerinde yeni demet yapısını yansıtmak için iş akışını güncellememiz gerekiyor.
+Şimdi iş akışını süreç çağrısında ve yayınlama hedeflerinde yeni demet yapısını yansıtacak şekilde güncellememiz gerekiyor.
 
-#### 3.4.3. İş akışında GATK_HAPLOTYPECALLER çağrısını güncelleme
+#### 3.4.3. İş akışında GATK_HAPLOTYPECALLER çağrısını güncelleyin
 
-BAM dosyası artık `SAMTOOLS_INDEX` tarafından çıktı kanalına paketlendiği için, artık `GATK_HAPLOTYPECALLER` sürecine orijinal `reads_ch`'yi sağlamamıza gerek yok.
+Artık BAM dosyası `SAMTOOLS_INDEX` tarafından çıktılanan kanala paketlendiğinden, `GATK_HAPLOTYPECALLER` sürecine orijinal `reads_ch`'yi sağlamamıza gerek yok.
 
-`genomics.nf`'deki çağrıyı güncelleyin:
+`genomics.nf` dosyasındaki çağrıyı güncelleyin:
 
 === "Sonra"
 
@@ -1020,11 +1022,11 @@ BAM dosyası artık `SAMTOOLS_INDEX` tarafından çıktı kanalına paketlendiğ
             SAMTOOLS_INDEX.out,
     ```
 
-Son olarak, yeni çıktı yapısını yansıtmak için yayınlama hedeflerini güncellememiz gerekiyor.
+Son olarak, yayınlama hedeflerini yeni çıktı yapısını yansıtacak şekilde güncellememiz gerekiyor.
 
-#### 3.4.4. Dizinlenmiş BAM çıktısı için yayınlama hedefini güncelleme
+#### 3.4.4. Dizinlenmiş BAM çıktısı için yayınlama hedefini güncelleyin
 
-SAMTOOLS_INDEX çıktısı artık hem BAM dosyasını hem de dizinini içeren bir demet olduğundan, yayınlama hedefini `bam_index`'ten `indexed_bam`'e yeniden adlandırarak içeriğini daha iyi yansıtın:
+SAMTOOLS_INDEX çıktısı artık hem BAM dosyasını hem de dizinini içeren bir demet olduğundan, yayınlama hedefini içeriğini daha iyi yansıtmak için `bam_index`'ten `indexed_bam`'e yeniden adlandırın:
 
 === "Sonra"
 
@@ -1070,11 +1072,11 @@ SAMTOOLS_INDEX çıktısı artık hem BAM dosyasını hem de dizinini içeren bi
     }
     ```
 
-Bu değişikliklerle, BAM ve dizini birlikte seyahat etmeleri garanti edilir, bu nedenle eşleştirme her zaman doğru olacaktır.
+Bu değişikliklerle, BAM ve dizininin birlikte seyahat etmesi garanti edilir, bu nedenle eşleştirme her zaman doğru olacaktır.
 
-### 3.5. Düzeltilmiş iş akışını çalıştırma
+### 3.5. Düzeltilmiş iş akışını çalıştırın
 
-Bunun ileriye dönük güvenilir şekilde çalışacağından emin olmak için iş akışını tekrar çalıştırın.
+Bunun ileriye dönük güvenilir bir şekilde çalışacağından emin olmak için iş akışını tekrar çalıştırın.
 
 ```bash
 nextflow run genomics.nf -profile test
@@ -1094,7 +1096,7 @@ Bu sefer (ve her seferinde) her şey doğru şekilde çalışmalıdır:
     [88/1783aa] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
     ```
 
-Sonuçlar dizini artık her örnek için (demetten) hem BAM hem de BAI dosyalarını, VCF çıktılarıyla birlikte içerir:
+Sonuçlar dizini artık her örnek için hem BAM hem de BAI dosyalarını (demetten) ve VCF çıktılarını içerir:
 
 ??? abstract "Sonuçlar dizini içeriği"
 
@@ -1116,13 +1118,13 @@ Sonuçlar dizini artık her örnek için (demetten) hem BAM hem de BAI dosyalar�
         └── reads_son.bam.vcf.idx -> ...
     ```
 
-İlişkili dosyaları demetlere paketleyerek, doğru dosyaların her zaman iş akışı boyunca birlikte seyahat etmesini sağladık.
-İş akışı artık herhangi bir sayıda örneği güvenilir bir şekilde işliyor, ancak bunları yapılandırmada tek tek listelemek çok ölçeklenebilir değil.
+İlişkili dosyaları demetlere paketleyerek, doğru dosyaların iş akışı boyunca her zaman birlikte seyahat etmesini sağladık.
+İş akışı artık herhangi bir sayıda örneği güvenilir bir şekilde işler, ancak bunları yapılandırmada tek tek listelemek çok ölçeklenebilir değildir.
 Bir sonraki adımda, girdileri bir dosyadan okumaya geçeceğiz.
 
 ### Özet
 
-İş akışınızın birden fazla örnek üzerinde (bağımsız olarak) çalışmasını nasıl sağlayacağınızı biliyorsunuz.
+İş akışınızı birden fazla örnek üzerinde (bağımsız olarak) çalıştırmayı biliyorsunuz.
 
 ### Sırada ne var?
 
@@ -1130,16 +1132,16 @@ Bir sonraki adımda, girdileri bir dosyadan okumaya geçeceğiz.
 
 ---
 
-## 4. İş akışının toplu girdi dosyaları içeren bir metin dosyasını kabul etmesini sağlama
+## 4. İş akışının toplu girdi dosyaları içeren bir metin dosyasını kabul etmesini sağlayın
 
 Bir iş akışına birden fazla veri girdi dosyası sağlamanın çok yaygın bir yolu, dosya yollarını içeren bir metin dosyasıyla yapmaktır.
-Satır başına bir dosya yolu listeleyen basit bir metin dosyası kadar basit olabilir veya dosya ek meta veriler içerebilir, bu durumda genellikle örnek listesi olarak adlandırılır.
+Satır başına bir dosya yolu listeleyen ve başka hiçbir şey içermeyen bir metin dosyası kadar basit olabilir veya dosya ek meta veriler içerebilir, bu durumda genellikle örnek tablosu olarak adlandırılır.
 
 Burada size basit durumu nasıl yapacağınızı göstereceğiz.
 
-### 4.1. Sağlanan girdi dosya yollarını listeleyen metin dosyasını inceleme
+### 4.1. Girdi dosya yollarını listeleyen sağlanan metin dosyasını inceleyin
 
-Zaten `data/` dizininde bulabileceğiniz `sample_bams.txt` adlı girdi dosya yollarını listeleyen bir metin dosyası yaptık.
+`data/` dizininde bulabileceğiniz, girdi dosya yollarını listeleyen `sample_bams.txt` adlı bir metin dosyası zaten yaptık.
 
 ```txt title="sample_bams.txt"
 /workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
@@ -1147,14 +1149,14 @@ Zaten `data/` dizininde bulabileceğiniz `sample_bams.txt` adlı girdi dosya yol
 /workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
 ```
 
-Gördüğünüz gibi, satır başına bir dosya yolu listeledik ve bunlar mutlak yollar.
+Gördüğünüz gibi, satır başına bir dosya yolu listeledik ve bunlar mutlak yollardır.
 
-!!! note
+!!! note "Not"
 
-    Burada kullandığımız dosyalar sadece GitHub Codespaces'inizin yerel dosya sistemindedir, ancak bulut depolamasındaki dosyalara da işaret edebiliriz.
+    Burada kullandığımız dosyalar sadece GitHub Codespaces'inizin yerel dosya sistemindedir, ancak bulut depolamadaki dosyalara da işaret edebiliriz.
     Sağlanan Codespaces ortamını kullanmıyorsanız, dosya yollarını yerel kurulumunuza uyacak şekilde uyarlamanız gerekebilir.
 
-### 4.2. Parametreyi ve test profilini güncelleme
+### 4.2. Parametreyi ve test profilini güncelleyin
 
 `reads_bam` parametresini tek tek örnekleri listelemek yerine `sample_bams.txt` dosyasına işaret edecek şekilde değiştirin.
 
@@ -1163,14 +1165,14 @@ Params bloğundaki tür açıklamasını geri yükleyin (çünkü tekrar tek bir
 === "Sonra"
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
-        // Primary input (file of input files, one per line)
+        // Birincil girdi (satır başına bir girdi dosyası içeren dosya)
         reads_bam: Path
     ```
 
 === "Önce"
 
     ```groovy title="genomics.nf" linenums="10"
-        // Primary input (array of three samples)
+        // Birincil girdi (üç örnekten oluşan dizi)
         reads_bam
     ```
 
@@ -1204,19 +1206,19 @@ Ardından test profilini metin dosyasına işaret edecek şekilde güncelleyin:
     }
     ```
 
-Dosya listesi artık kodda hiç yaşamıyor, bu doğru yönde büyük bir adım.
+Dosya listesi artık kodda hiç yaşamıyor, bu da doğru yönde büyük bir adımdır.
 
-### 4.3. Kanal fabrikasını bir dosyadan satırları okuyacak şekilde güncelleme
+### 4.3. Kanal fabrikasını bir dosyadan satırları okuyacak şekilde güncelleyin
 
 Şu anda, girdi kanal fabrikamız kendisine verdiğimiz tüm dosyaları dizinleme sürecine beslemek istediğimiz veri girdileri olarak ele alıyor.
-Ona artık dosya yollarını listeleyen bir dosya verdiğimize göre, davranışını dosyayı ayrıştıracak ve içerdiği dosya yollarını veri girdileri olarak ele alacak şekilde değiştirmemiz gerekiyor.
+Şimdi ona dosya yollarını listeleyen bir dosya verdiğimizden, içerdiği dosya yollarını veri girdileri olarak ele alacak şekilde davranışını değiştirmemiz gerekiyor.
 
-Bunu [Hello Nextflow'un Bölüm 2](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file)'sinde kullandığımız aynı deseni kullanarak yapabiliriz: dosyayı ayrıştırmak için [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operatörünü uygulama, ardından her satırın ilk alanını seçmek için bir `map` işlemi.
+Bunu [Hello Nextflow'un Bölüm 2](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file)'sinde kullandığımız aynı kalıbı kullanarak yapabiliriz: dosyayı ayrıştırmak için [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operatörünü uygulayarak, ardından her satırın ilk alanını seçmek için bir `map` işlemi.
 
 === "Sonra"
 
     ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
-        // Create input channel from a CSV file listing input file paths
+        // Girdi dosya yollarını listeleyen bir CSV dosyasından girdi kanalı oluştur
         reads_ch = Channel.fromPath(params.reads_bam)
                 .splitCsv()
                 .map { line -> file(line[0]) }
@@ -1225,20 +1227,20 @@ Bunu [Hello Nextflow'un Bölüm 2](../../hello_nextflow/02_hello_channels.md#42-
 === "Önce"
 
     ```groovy title="genomics.nf" linenums="24"
-        // Create input channel (single file via CLI parameter)
+        // Girdi kanalı oluştur (CLI parametresi aracılığıyla tek dosya)
         reads_ch = channel.fromPath(params.reads_bam)
     ```
 
 Teknik olarak bunu [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) operatörünü kullanarak daha basit bir şekilde yapabilirdik, çünkü girdi dosyamız şu anda yalnızca dosya yolları içeriyor.
-Ancak, daha çok yönlü `splitCsv` operatörünü (`map` ile desteklenen) kullanarak, dosya yollarını içeren dosyaya meta veri eklemeye karar verme durumunda iş akışımızı geleceğe hazır hale getirebiliriz.
+Ancak, daha çok yönlü `splitCsv` operatörünü (`map` ile desteklenerek) kullanarak, dosya yollarını içeren dosyaya meta veri eklemeye karar verirsek iş akışımızı geleceğe hazır hale getirebiliriz.
 
-!!! tip
+!!! tip "İpucu"
 
-    Operatörlerin burada ne yaptığını anladığınızdan emin değilseniz, bu, kanal içeriklerinin bunları uygulamadan önce ve sonra neye benzediğine bakmak için `.view()` operatörünü kullanmak için başka bir harika fırsattır.
+    Operatörlerin burada ne yaptığını anladığınızdan emin değilseniz, bu, bunları uygulamadan önce ve sonra kanal içeriğinin nasıl göründüğüne bakmak için `.view()` operatörünü kullanmak için başka bir harika fırsattır.
 
-### 4.4. İş akışını çalıştırma
+### 4.4. İş akışını çalıştırın
 
-İş akışını bir kez daha çalıştırın. Bu, daha önce olduğu gibi aynı sonucu üretmeli, değil mi?
+İş akışını bir kez daha çalıştırın. Bu, daha öncekiyle aynı sonucu üretmeli, değil mi?
 
 ```bash
 nextflow run genomics.nf -profile test -resume
@@ -1255,18 +1257,18 @@ nextflow run genomics.nf -profile test -resume
     [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
     ```
 
-Evet! Aslında, Nextflow süreç çağrılarının tamamen aynı olduğunu doğru bir şekilde algılıyor ve `-resume` ile çalıştırdığımız için her şeyi yeniden çalıştırmaya bile zahmet etmiyor.
+Evet! Aslında, Nextflow süreç çağrılarının tamamen aynı olduğunu doğru bir şekilde algılar ve `-resume` ile çalıştırdığımızdan her şeyi yeniden çalıştırmaya bile zahmet etmez.
 
-Ve işte bu kadar! Basit varyant çağırma iş akışımız istediğimiz tüm temel özelliklere sahip.
+Ve bu kadar! Basit varyant çağırma iş akışımız istediğimiz tüm temel özelliklere sahip.
 
 ### Özet
 
-Bir BAM dosyasını dizinlemek ve GATK kullanarak örnek bazında varyant çağırma uygulamak için çok adımlı modüler bir iş akışının nasıl yapılacağını biliyorsunuz.
+Bir BAM dosyasını dizinlemek ve GATK kullanarak örnek başına varyant çağırma uygulamak için çok adımlı modüler bir iş akışı yapmayı biliyorsunuz.
 
-Daha genel olarak, gerçek iş yapan basit bir genomik boru hattı oluşturmak için temel Nextflow bileşenlerini ve mantığını nasıl kullanacağınızı öğrendiniz, genomik dosya formatlarının özelliklerini ve araç gereksinimlerini dikkate alarak.
+Daha genel olarak, genomik dosya formatlarının ve araç gereksinimlerinin özelliklerini dikkate alarak gerçek iş yapan basit bir genomik boru hattı oluşturmak için temel Nextflow bileşenlerini ve mantığını nasıl kullanacağınızı öğrendiniz.
 
 ### Sırada ne var?
 
 Başarınızı kutlayın ve ekstra uzun bir mola verin!
 
-Bu kursun bir sonraki bölümünde, bu basit örnek bazında varyant çağırma iş akışını verilere ortak varyant çağırma uygulamak için nasıl dönüştüreceğinizi öğreneceksiniz.
+Kursun bir sonraki bölümünde, bu basit örnek başına varyant çağırma iş akışını verilere ortak varyant çağırma uygulamak için nasıl dönüştüreceğinizi öğreneceksiniz.

@@ -1,0 +1,42 @@
+# Turkish translation glossary for post-processing enforcement.
+# These translations are applied deterministically, overriding LLM output.
+
+translation_notice:
+  text: "Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)"
+  homepage:
+    title: "Yapay Zeka Destekli Çeviri"
+    body: |
+      Bu çeviri yapay zeka kullanılarak oluşturulmuş ve insan çevirmenler tarafından gözden geçirilmiştir.
+      Geri bildirimlerinizi ve iyileştirme önerilerinizi memnuniyetle karşılıyoruz.
+      Daha fazla bilgi için [çeviri kılavuzumuza](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) bakın.
+
+tab_labels:
+  After: Sonra
+  Before: Önce
+
+admonition_titles:
+  note: Not
+  tip: İpucu
+  warning: Uyarı
+  info: Bilgi
+  exercise: Alıştırma
+  solution: Çözüm
+  example: Örnek
+  danger: Tehlike
+  hint: İpucu
+
+admonition_title_glossary:
+  "Command output": "Komut çıktısı"
+  "Directory contents": "Dizin içeriği"
+  "File contents": "Dosya içeriği"
+  "Scenario": Senaryo
+  "How to begin from this section": "Bu bölümden nasıl başlanır"
+  "Full code file": "Tam kod dosyası"
+  "Work directory contents": "Çalışma dizini içeriği"
+  "Results directory contents": "Sonuçlar dizini içeriği"
+  "Examples": Örnekler
+  "Directory contents (symlinks shortened)": "Dizin içeriği (sembolik bağlantılar kısaltılmış)"
+  "Don't see the same thing?": "Aynı şeyi görmüyor musunuz?"
+  "Command output (edited for clarity)": "Komut çıktısı (netlik için düzenlendi)"
+  "Directory and file contents": "Dizin ve dosya içeriği"
+  "Workflow code": "İş akışı kodu"

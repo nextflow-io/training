@@ -6,10 +6,10 @@
 
 ---
 
-## 1. Far citare dal cow scienziati famosi
+## 1. Facciamo citare alla mucca scienziati famosi
 
-Questa sezione contiene alcuni esercizi avanzati, per mettere in pratica quanto appreso finora.
-Svolgere questi esercizi _non è obbligatorio_ per comprendere le parti successive della formazione, ma forniscono un modo divertente per consolidare le conoscenze imparando a far citare dal cow scienziati famosi.
+Questa sezione contiene alcuni esercizi avanzati per mettere in pratica ciò che avete imparato finora.
+Completare questi esercizi _non è necessario_ per comprendere le parti successive della formazione, ma forniscono un modo divertente per consolidare le vostre conoscenze scoprendo come far citare alla mucca scienziati famosi.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________
@@ -30,20 +30,20 @@ Svolgere questi esercizi _non è obbligatorio_ per comprendere le parti successi
                                                         ||     ||
 ```
 
-### 1.1. Modificare lo script `hello-containers.nf` per utilizzare un processo getQuote
+### 1.1. Modificate lo script `hello-containers.nf` per utilizzare un processo getQuote
 
-Abbiamo un elenco di pionieri dell'informatica e della biologia nel file `containers/data/pioneers.csv`.
-Ad alto livello, per completare questo esercizio sarà necessario:
+Abbiamo una lista di pionieri dell'informatica e della biologia nel file `containers/data/pioneers.csv`.
+Ad alto livello, per completare questo esercizio dovrete:
 
 - Modificare il `params.input_file` predefinito per puntare al file `pioneers.csv`.
-- Creare un processo `getQuote` che utilizzi il container `quote` per recuperare una citazione per ogni input.
+- Creare un processo `getQuote` che utilizza il container `quote` per recuperare una citazione per ogni input.
 - Collegare l'output del processo `getQuote` al processo `cowsay` per visualizzare la citazione.
 
-Per l'immagine del container `quote`, è possibile utilizzare quella costruita personalmente nell'esercizio avanzato precedente oppure quella ottenuta da Seqera Containers.
+Per l'immagine del container `quote`, potete utilizzare quella che avete costruito voi stessi nell'esercizio avanzato precedente oppure quella ottenuta da Seqera Containers.
 
-!!! Hint
+!!! Hint "Suggerimento"
 
-    Una buona scelta per il blocco `script` del processo getQuote potrebbe essere:
+    Una buona scelta per il blocco `script` del vostro processo getQuote potrebbe essere:
         ```groovy
         script:
             def safe_author = author.tokenize(' ').join('-')
@@ -53,12 +53,12 @@ Per l'immagine del container `quote`, è possibile utilizzare quella costruita p
             """
         ```
 
-È possibile trovare una soluzione a questo esercizio in `containers/solutions/hello-containers-4.1.nf`.
+Potete trovare una soluzione a questo esercizio in `containers/solutions/hello-containers-4.1.nf`.
 
-### 1.2. Modificare il pipeline Nextflow per consentirne l'esecuzione nelle modalità `quote` e `sayHello`.
+### 1.2. Modificate la vostra pipeline Nextflow per consentirle di eseguire nelle modalità `quote` e `sayHello`.
 
-Aggiungere della logica di ramificazione al pipeline per consentirgli di accettare input destinati sia a `quote` che a `sayHello`.
-Ecco un esempio di come utilizzare un'istruzione `if` in un workflow Nextflow:
+Aggiungete della logica condizionale alla vostra pipeline per consentirle di accettare input destinati sia a `quote` che a `sayHello`.
+Ecco un esempio di come utilizzare un'istruzione `if` in un flusso di lavoro Nextflow:
 
 ```groovy title="hello-containers.nf"
 workflow {
@@ -72,18 +72,18 @@ workflow {
 }
 ```
 
-!!! Hint
+!!! Hint "Suggerimento"
 
-    È possibile utilizzare `new_ch = processName.out` per assegnare un nome al canale di output di un processo.
+    Potete usare `new_ch = processName.out` per assegnare un nome al canale di output di un processo.
 
-È possibile trovare una soluzione a questo esercizio in `containers/solutions/hello-containers-4.2.nf`.
+Potete trovare una soluzione a questo esercizio in `containers/solutions/hello-containers-4.2.nf`.
 
-### Conclusioni
+### Takeaway
 
-Ora sa come utilizzare i container in Nextflow per eseguire processi e come costruire della logica di ramificazione nei suoi pipeline!
+Sapete come utilizzare i container in Nextflow per eseguire processi e come costruire della logica condizionale nelle vostre pipeline!
 
-### Prossimi passi
+### Cosa c'è dopo?
 
-Celebri, prendetevi una pausa per fare stretching e beva dell'acqua!
+Festeggiate, prendetevi una pausa per sgranchirvi e bevete un po' d'acqua!
 
-Quando è pronto, passi alla Parte 3 di questa serie di formazione per imparare ad applicare quanto appreso finora a un caso d'uso di analisi dati più realistico.
+Quando siete pronti, passate alla Parte 3 di questa serie di formazione per imparare come applicare ciò che avete imparato finora a un caso d'uso di analisi dati più realistico.

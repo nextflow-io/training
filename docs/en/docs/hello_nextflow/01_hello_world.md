@@ -912,6 +912,34 @@ nextflow run hello-world.nf
     [72/394147] sayHello | 1 of 1 ✔
     ```
 
+??? question "If it didn't work"
+
+    If that failed with an error that looks like this:
+
+    ```
+    ERROR ~ Script compilation error
+    - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+    - cause: you tried to assign a value to the class 'java.lang.String'
+    @ line 24, column 12.
+          input: String = 'Holà mundo!'
+                  ^
+
+    1 error
+
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+    Then you're probably using the older v1 Nextflow language parser.
+    This was mentioned at the start of the course, but maybe you missed it.
+    Check the [Nextflow versions](../info/nxf_versions.md) help material.
+
+    In short, if you're using Nextflow `25.10` then you need to enable the v2 language parser:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 The output will be in the same place as previously, but the contents should be updated with the new text.
 
 ??? abstract "File contents"

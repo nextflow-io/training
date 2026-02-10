@@ -38,7 +38,7 @@ Found a translation error or want to suggest an improvement? Here's how to fix i
 ```mermaid
 flowchart TD
     A[Find translation error] --> B{Type of issue?}
-    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md]
+    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md<br>or glossary.yml]
     B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
     B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
     C --> F[Open PR with prompt change]
@@ -220,7 +220,7 @@ When you find an issue during review:
 ```mermaid
 flowchart TD
     A[Find translation error] --> B{Type of issue?}
-    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md]
+    B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md<br>or glossary.yml]
     B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
     B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
     C --> F[Commit prompt change to same PR]
@@ -289,14 +289,11 @@ For maintainers with `ANTHROPIC_API_KEY` access:
 ```bash
 cd _scripts
 
-# Preview what needs translating
-uv run translate.py sync pt --dry-run
-
 # Translate one file at a time
-uv run translate.py translate nf4_science/index.md --lang pt
+uv run python -m translate translate nf4_science/index.md --lang pt
 
 # Or sync all (update outdated + add missing + remove orphaned)
-uv run translate.py sync pt
+uv run python -m translate sync pt
 ```
 
 ### After Translation
@@ -320,9 +317,10 @@ uv run python docs.py new-lang <lang-code>
 
 This creates:
 
-- `docs/<lang>/mkdocs.yml` - MkDocs config
+- `docs/<lang>/mkdocs.yml` - MkDocs config (inherits from English)
 - `docs/<lang>/llm-prompt.md` - Translation prompt (requires customization)
-- `docs/<lang>/docs/.gitkeep` - Placeholder
+- `docs/<lang>/ui-strings.yml` - UI strings (copied from English, requires translation)
+- `docs/<lang>/docs/` - Directory for translated content
 
 ### Step 2: Customize the Translation Prompt
 
@@ -345,14 +343,24 @@ Edit `docs/<lang>/llm-prompt.md` to define:
 
 See existing language prompts for examples (e.g., `docs/pt/llm-prompt.md`).
 
-### Step 3: Register the Language
+### Step 3: Create the Post-Processing Glossary
 
-Add the language code to:
+Create `docs/<lang>/glossary.yml` with deterministic translations that are enforced by post-processing (independent of LLM output):
 
-1. `docs/language_names.yml` - map code to language name
-2. `docs/en/mkdocs.yml` - `extra.alternate` for language switcher
+- `translation_notice`: AI translation notice text and homepage admonition
+- `tab_labels`: canonical Before/After translations (must be consistent for MkDocs tab sync)
+- `admonition_titles`: default titles for bare admonitions (note, tip, warning, etc.)
+- `admonition_title_glossary`: translations for common titled admonitions (Command output, Directory contents, etc.)
 
-### Step 4: Generate Initial Translations
+See `docs/pt/glossary.yml` for an example.
+These translations are applied deterministically during post-processing and override whatever the LLM produces, ensuring consistency across all files.
+
+### Step 4: Register the Language
+
+1. Add the language code to `docs/language_names.yml`
+2. Run `uv run docs.py sync-language-picker` to update the language switcher
+
+### Step 5: Generate Initial Translations
 
 Use GitHub Actions:
 
@@ -360,7 +368,7 @@ Use GitHub Actions:
 2. Select the new language
 3. Select command: `sync`
 
-### Step 5: Review and Iterate
+### Step 6: Review and Iterate
 
 1. Review the PR with generated translations
 2. Update `llm-prompt.md` to fix any issues
@@ -379,14 +387,30 @@ docs/
 │   └── docs/               # English content
 ├── pt/                     # Portuguese
 │   ├── mkdocs.yml          # Inherits from en
-│   ├── llm-prompt.md       # Translation rules
+│   ├── llm-prompt.md       # Translation rules (LLM guidance)
+│   ├── glossary.yml        # Post-processing glossary (deterministic fixes)
+│   ├── ui-strings.yml      # Translated UI strings
 │   └── docs/               # Translated content
 ├── es/                     # Spanish
 │   └── ...
 └── ...
 
 _scripts/
-├── translate.py            # Translation CLI
+├── pyproject.toml          # Package metadata and dependencies
+├── translate/              # Translation CLI package (python -m translate)
+│   ├── __init__.py         # Package marker
+│   ├── __main__.py         # Entry point
+│   ├── config.py           # Constants and configuration
+│   ├── models.py           # Data structures
+│   ├── paths.py            # Path utilities
+│   ├── prompts.py          # Prompt loading
+│   ├── git_utils.py        # Git operations
+│   ├── api.py              # Claude API calls
+│   ├── postprocess.py      # Translation post-processing and glossary enforcement
+│   ├── verify.py           # Translation verification
+│   ├── progress.py         # Progress tracking
+│   ├── core.py             # Translation orchestration
+│   └── cli.py              # CLI commands
 ├── general-llm-prompt.md   # Shared translation rules
 └── docs.py                 # Build/serve CLI
 ```
@@ -406,20 +430,17 @@ cd _scripts
 ### Translation Commands
 
 ```bash
-# Preview what sync would do (no API key required)
-uv run translate.py sync <lang> --dry-run
-
 # Sync all translations (update outdated + add missing + remove orphaned)
-uv run translate.py sync <lang>
+uv run python -m translate sync <lang>
 
 # Sync with lower parallelism (default: 50 concurrent translations)
-uv run translate.py sync <lang> --parallel 10
+uv run python -m translate sync <lang> --parallel 10
 
 # Sync with filter pattern
-uv run translate.py sync <lang> --include hello_nextflow
+uv run python -m translate sync <lang> --include hello_nextflow
 
 # Translate a single file
-uv run translate.py translate <path> --lang <lang>
+uv run python -m translate translate <path> --lang <lang>
 ```
 
 ### Preview Commands (No API key required)
