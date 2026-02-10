@@ -888,7 +888,7 @@
   <span class="md-ellipsis">
     
   
-    03 hello workflow
+    भाग 3: Hello Workflow
   
 
     
@@ -1607,7 +1607,7 @@
   <span class="md-ellipsis">
     
   
-    भाग 3: कोहोर्ट पर जॉइंट कॉलिंग
+    भाग 3: कोहोर्ट पर संयुक्त कॉलिंग
   
 
     
@@ -1768,7 +1768,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        फीडबैक सर्वेक्षण
+        फीडबैक सर्वे
       
     </span>
   </a>
@@ -3342,7 +3342,7 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        फीडबैक सर्वेक्षण
+        फीडबैक सर्वे
       
     </span>
   </a>
@@ -3606,39 +3606,40 @@
  
 
 <h1 id="_1">कोर्स सारांश<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>Nextflow For Genomics प्रशिक्षण कोर्स पूरा करने पर बधाई! 🎉</p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI-सहायता प्राप्त अनुवाद - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">अधिक जानें और सुधार सुझाएं</a></span></p>
+<p>Nextflow for Genomics प्रशिक्षण कोर्स पूरा करने पर बधाई! 🎉</p>
 <h2 id="_2">तुम्हारी यात्रा<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>तुमने वेरिएंट कॉलिंग टूल्स को मैन्युअली टर्मिनल में चलाकर शुरुआत की ताकि कार्यप्रणाली को समझ सको।
-फिर तुमने प्रक्रिया को स्वचालित करने के लिए एक सिंगल-सैंपल Nextflow पाइपलाइन बनाई, इसे कई नमूनों को समानांतर में संभालने के लिए स्केल किया, और channel ऑपरेटरों का उपयोग करके मल्टी-सैंपल जॉइंट जीनोटाइपिंग जोड़ी।</p>
+<p>तुमने methodology को समझने के लिए टर्मिनल में variant calling टूल्स को manually चलाकर शुरुआत की।
+फिर तुमने प्रोसेस को automate करने के लिए एक single-sample Nextflow पाइपलाइन बनाई, इसे parallel में कई samples को handle करने के लिए scale किया, और channel operators का उपयोग करके multi-sample joint genotyping जोड़ा।</p>
 <h3 id="_3">तुमने क्या बनाया<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li>एक वेरिएंट कॉलिंग पाइपलाइन जो इनपुट के रूप में BAM फ़ाइलें लेती है और आउटपुट के रूप में जॉइंट-कॉल्ड VCF उत्पन्न करती है।</li>
-<li>तीन प्रोसेस (<code>SAMTOOLS_INDEX</code>, <code>GATK_HAPLOTYPECALLER</code>, और <code>GATK_JOINTGENOTYPING</code>) जो अलग-अलग मॉड्यूल फ़ाइलों में संग्रहीत हैं।</li>
-<li>पाइपलाइन Nextflow के डेटाफ़्लो प्रतिमान का उपयोग करके किसी भी संख्या में इनपुट नमूनों के लिए स्वचालित रूप से स्केल करती है।</li>
-<li>परिणाम <code>results/</code> नामक डायरेक्टरी में प्रकाशित होते हैं।</li>
+<li>एक variant calling पाइपलाइन जो BAM फ़ाइलों को इनपुट के रूप में लेती है और joint-called VCFs को आउटपुट के रूप में produce करती है।</li>
+<li>तीन processes (<code>SAMTOOLS_INDEX</code>, <code>GATK_HAPLOTYPECALLER</code>, और <code>GATK_JOINTGENOTYPING</code>) जो अलग-अलग module फ़ाइलों में stored हैं।</li>
+<li>पाइपलाइन Nextflow के dataflow paradigm का उपयोग करके किसी भी संख्या में इनपुट samples के लिए automatically scale हो जाती है।</li>
+<li>परिणाम <code>results/</code> नामक डायरेक्टरी में publish किए जाते हैं।</li>
 </ul>
 <h3 id="_4">प्राप्त कौशल<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>इस हैंड्स-ऑन कोर्स के माध्यम से, तुमने यह सीखा है कि कैसे:</p>
+<p>इस hands-on कोर्स के माध्यम से, तुमने सीखा है कि कैसे:</p>
 <ul>
-<li>एक सिंगल सैंपल पर वेरिएंट कॉलिंग लागू करने के लिए एक रैखिक वर्कफ़्लो लिखें</li>
-<li>इंडेक्स फ़ाइलों और रेफरेंस जीनोम संसाधनों जैसी सहायक फ़ाइलों को उचित रूप से संभालें</li>
-<li>प्रति-नमूना वेरिएंट कॉलिंग को समानांतर बनाने के लिए Nextflow के डेटाफ़्लो प्रतिमान का लाभ उठाएं</li>
-<li>संबंधित channel ऑपरेटरों का उपयोग करके मल्टी-सैंपल जॉइंट कॉलिंग को लागू करें</li>
+<li>एक single sample पर variant calling लागू करने के लिए linear workflow लिखें</li>
+<li>Index फ़ाइलों और reference genome resources जैसी accessory फ़ाइलों को उचित रूप से handle करें</li>
+<li>Per-sample variant calling को parallelize करने के लिए Nextflow के dataflow paradigm का लाभ उठाएं</li>
+<li>Relevant channel operators का उपयोग करके multi-sample joint calling को implement करें</li>
 </ul>
-<p>अब तुम अपने खुद के काम में जीनोमिक्स विश्लेषण वर्कफ़्लो में Nextflow को लागू करना शुरू करने के लिए तैयार हो।</p>
+<p>अब तुम अपने काम में genomics analysis workflows पर Nextflow लागू करना शुरू करने के लिए तैयार हो।</p>
 <h2 id="_5">अपने कौशल को बढ़ाने के लिए अगले कदम<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>यहाँ हमारी शीर्ष सिफारिशें हैं कि आगे क्या करना है:</p>
+<p>यहाँ हमारे शीर्ष सुझाव हैं कि आगे क्या करें:</p>
 <ul>
-<li><a href="../../">Nextflow for Science</a> के साथ अन्य वैज्ञानिक विश्लेषण उपयोग के मामलों में Nextflow लागू करें</li>
-<li><a href="../../../hello_nf-core/">Hello nf-core</a> के साथ nf-core के साथ शुरुआत करें</li>
-<li><a href="../../../side_quests/">Side Quests</a> के साथ अधिक उन्नत Nextflow सुविधाओं का अन्वेषण करें</li>
+<li>अन्य scientific analysis use cases पर Nextflow लागू करें <a href="../../">Nextflow for Science</a> के साथ</li>
+<li>nf-core के साथ शुरुआत करें <a href="../../../hello_nf-core/">Hello nf-core</a> के साथ</li>
+<li>अधिक advanced Nextflow features का पता लगाएं <a href="../../../side_quests/">Side Quests</a> के साथ</li>
 </ul>
-<p>अंत में, हम सुझाव देते हैं कि तुम <a href="https://seqera.io/"><strong>Seqera Platform</strong></a> पर एक नज़र डालो, Nextflow के निर्माताओं द्वारा विकसित एक क्लाउड-आधारित प्लेटफ़ॉर्म जो तुम्हारे वर्कफ़्लो को लॉन्च और प्रबंधित करना, साथ ही तुम्हारे डेटा को प्रबंधित करना और किसी भी वातावरण में इंटरैक्टिव रूप से विश्लेषण चलाना और भी आसान बनाता है।</p>
+<p>अंत में, हम recommend करते हैं कि तुम <a href="https://seqera.io/"><strong>Seqera Platform</strong></a> पर एक नज़र डालो, जो Nextflow के creators द्वारा विकसित एक cloud-based platform है जो तुम्हारे workflows को launch और manage करना, साथ ही तुम्हारे data को manage करना और किसी भी environment में interactively analyses चलाना और भी आसान बनाता है।</p>
 <h2 id="_6">मदद प्राप्त करना<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>मदद संसाधनों और समुदाय सहायता के लिए, <a href="../../../help/">Help पेज</a> देखें।</p>
-<h2 id="_7">फीडबैक सर्वेक्षण<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>आगे बढ़ने से पहले, कृपया कोर्स सर्वेक्षण को पूरा करने के लिए एक मिनट का समय निकालें! तुम्हारा फीडबैक हमें सभी के लिए अपनी प्रशिक्षण सामग्री को बेहतर बनाने में मदद करता है।</p>
-<p><a class="md-button md-button--primary" href="../survey/">सर्वेक्षण लें <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
+<p>मदद के संसाधनों और community support के लिए, <a href="../../../help/">Help page</a> देखें।</p>
+<h2 id="_7">फीडबैक सर्वे<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>आगे बढ़ने से पहले, कृपया कोर्स सर्वे को पूरा करने में एक मिनट का समय दें! तुम्हारा फीडबैक हमें सभी के लिए अपनी प्रशिक्षण सामग्री को बेहतर बनाने में मदद करता है।</p>
+<p><a class="md-button md-button--primary" href="../survey/">सर्वे लें <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

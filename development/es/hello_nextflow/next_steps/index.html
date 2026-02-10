@@ -1049,15 +1049,15 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#su-viaje" class="md-nav__link">
+  <a href="#su-recorrido" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Su viaje
+        Su recorrido
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Su viaje">
+    <nav class="md-nav" aria-label="Su recorrido">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1888,7 +1888,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 3: Llamado conjunto de variantes en una cohorte
+    Parte 3: Llamado de variantes conjunto en una cohorte
   
 
     
@@ -2788,7 +2788,7 @@
   <span class="md-ellipsis">
     
   
-    Patrones esenciales de scripting
+    Patrones Esenciales de Scripting en Nextflow
   
 
     
@@ -2926,7 +2926,7 @@
   <span class="md-ellipsis">
     
   
-    Architects toolkit 1
+    The Architect's Toolkit I
   
 
     
@@ -3273,15 +3273,15 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#su-viaje" class="md-nav__link">
+  <a href="#su-recorrido" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Su viaje
+        Su recorrido
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Su viaje">
+    <nav class="md-nav" aria-label="Su recorrido">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3586,7 +3586,8 @@
  
 
 <h1 id="resumen-del-curso">Resumen del curso<a class="headerlink" href="#resumen-del-curso" title="Permanent link">&para;</a></h1>
-<p>¡Felicitaciones por completar el curso de capacitación Hello Nextflow! 🎉</p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
+<p>¡Felicidades por completar el curso de capacitación Hello Nextflow! 🎉</p>
 <figure>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -3597,9 +3598,9 @@
 <p><img alt="📗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4d7.svg" title=":green_book:" /> Puede leer la <a href="../transcripts/07_next_steps/">transcripción del video</a> junto con el video.</p>
 </figcaption>
 </figure>
-<h2 id="su-viaje">Su viaje<a class="headerlink" href="#su-viaje" title="Permanent link">&para;</a></h2>
+<h2 id="su-recorrido">Su recorrido<a class="headerlink" href="#su-recorrido" title="Permanent link">&para;</a></h2>
 <p>Comenzó con un workflow muy básico que ejecutaba un comando codificado de forma fija.
-A lo largo de seis partes, transformó ese workflow básico en un pipeline modular de múltiples pasos que ejercita características clave de Nextflow incluyendo canales, operadores, soporte integrado para contenedores y opciones de configuración.</p>
+A lo largo de seis partes, transformó ese workflow básico en un pipeline modular de múltiples pasos que ejercita características clave de Nextflow, incluyendo canales, operadores, soporte integrado para contenedores y opciones de configuración.</p>
 <h3 id="lo-que-construyo">Lo que construyó<a class="headerlink" href="#lo-que-construyo" title="Permanent link">&para;</a></h3>
 <ul>
 <li>La forma final del workflow Hello toma como entrada un archivo CSV que contiene saludos de texto.</li>
@@ -3617,18 +3618,18 @@ A lo largo de seis partes, transformó ese workflow básico en un pipeline modul
 </figure>
 
 <ol>
-<li><strong><code>sayHello</code>:</strong> Escribe cada saludo en su propio archivo de salida (por ejemplo, "Hello-output.txt")</li>
-<li><strong><code>convertToUpper</code>:</strong> Convierte cada saludo a mayúsculas (por ejemplo, "HELLO")</li>
-<li><strong><code>collectGreetings</code>:</strong> Recopila todos los saludos en mayúsculas en un único archivo de lote</li>
+<li><strong><code>sayHello</code>:</strong> Escribe cada saludo en su propio archivo de salida (<em>p. ej.</em> "Hello-output.txt")</li>
+<li><strong><code>convertToUpper</code>:</strong> Convierte cada saludo a mayúsculas (<em>p. ej.</em> "HELLO")</li>
+<li><strong><code>collectGreetings</code>:</strong> Recopila todos los saludos en mayúsculas en un único archivo por lotes</li>
 <li><strong><code>cowpy</code>:</strong> Genera arte ASCII usando la herramienta <code>cowpy</code></li>
 </ol>
-<p>La configuración del workflow soporta proporcionar entradas y parámetros de manera flexible y reproducible.</p>
+<p>La configuración del workflow permite proporcionar entradas y parámetros de manera flexible y reproducible.</p>
 <h3 id="habilidades-adquiridas">Habilidades adquiridas<a class="headerlink" href="#habilidades-adquiridas" title="Permanent link">&para;</a></h3>
-<p>A través de este curso práctico, ha aprendido cómo:</p>
+<p>A través de este curso práctico, ha aprendido a:</p>
 <ul>
-<li>Describir y utilizar componentes principales de Nextflow suficientes para construir un workflow simple de múltiples pasos</li>
-<li>Describir conceptos de siguiente nivel como operadores y channel factories</li>
-<li>Iniciar un workflow de Nextflow localmente</li>
+<li>Describir y utilizar componentes centrales de Nextflow suficientes para construir un workflow simple de múltiples pasos</li>
+<li>Describir conceptos del siguiente nivel como operadores y factorías de canales</li>
+<li>Lanzar un workflow de Nextflow localmente</li>
 <li>Encontrar e interpretar salidas (resultados) y archivos de registro generados por Nextflow</li>
 <li>Solucionar problemas básicos</li>
 </ul>
@@ -3636,14 +3637,14 @@ A lo largo de seis partes, transformó ese workflow básico en un pipeline modul
 <h2 id="proximos-pasos-para-desarrollar-sus-habilidades">Próximos pasos para desarrollar sus habilidades<a class="headerlink" href="#proximos-pasos-para-desarrollar-sus-habilidades" title="Permanent link">&para;</a></h2>
 <p>Aquí están nuestras 3 principales sugerencias sobre qué hacer a continuación:</p>
 <ul>
-<li>Aplicar Nextflow a un caso de uso de análisis científico con <a href="../../nf4_science/">Nextflow for Science</a></li>
-<li>Comenzar con nf-core con <a href="../../hello_nf-core/">Hello nf-core</a></li>
-<li>Explorar características más avanzadas de Nextflow con los <a href="../../side_quests/">Side Quests</a></li>
+<li>Aplique Nextflow a un caso de uso de análisis científico con <a href="../../nf4_science/">Nextflow for Science</a></li>
+<li>Comience con nf-core con <a href="../../hello_nf-core/">Hello nf-core</a></li>
+<li>Explore características más avanzadas de Nextflow con las <a href="../../side_quests/">Side Quests</a></li>
 </ul>
-<p>Finalmente, le recomendamos que eche un vistazo a <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, una plataforma basada en la nube desarrollada por los creadores de Nextflow que hace aún más fácil iniciar y gestionar sus workflows, así como gestionar sus datos y ejecutar análisis interactivamente en cualquier entorno.</p>
+<p>Finalmente, le recomendamos que eche un vistazo a <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, una plataforma basada en la nube desarrollada por los creadores de Nextflow que hace aún más fácil lanzar y gestionar sus workflows, así como administrar sus datos y ejecutar análisis de forma interactiva en cualquier entorno.</p>
 <h2 id="encuesta-de-retroalimentacion">Encuesta de retroalimentación<a class="headerlink" href="#encuesta-de-retroalimentacion" title="Permanent link">&para;</a></h2>
 <p>Antes de continuar, ¡por favor tome un minuto para completar la encuesta del curso! Su retroalimentación nos ayuda a mejorar nuestros materiales de capacitación para todos.</p>
-<p><a class="md-button md-button--primary" href="../survey/">Completar la encuesta <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
+<p><a class="md-button md-button--primary" href="../survey/">Realizar la encuesta <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

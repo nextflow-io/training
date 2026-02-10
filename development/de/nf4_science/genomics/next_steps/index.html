@@ -1459,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow für Genomik
+    Nextflow for Genomics
   
 
     
@@ -1475,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow für Genomik
+    Nextflow for Genomics
   
 
           </label>
@@ -1495,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow für Genomik
+    Nextflow for Genomics
   
 
     
@@ -1579,7 +1579,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Varianten-Calling pro Probe
+    Teil 2: Variantenerkennung pro Probe
   
 
     
@@ -1747,10 +1747,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#nachste-schritte-um-deine-fahigkeiten-auszubauen" class="md-nav__link">
+  <a href="#nachste-schritte-zum-ausbau-deiner-fahigkeiten" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Nächste Schritte, um deine Fähigkeiten auszubauen
+        Nächste Schritte zum Ausbau deiner Fähigkeiten
       
     </span>
   </a>
@@ -2687,7 +2687,7 @@
   <span class="md-ellipsis">
     
   
-    Verarbeitung von Dateieingaben
+    Datei-Eingabeverarbeitung
   
 
     
@@ -2799,7 +2799,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Skriptmuster
+    Grundlegende Nextflow-Scripting-Muster
   
 
     
@@ -3321,10 +3321,10 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#nachste-schritte-um-deine-fahigkeiten-auszubauen" class="md-nav__link">
+  <a href="#nachste-schritte-zum-ausbau-deiner-fahigkeiten" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Nächste Schritte, um deine Fähigkeiten auszubauen
+        Nächste Schritte zum Ausbau deiner Fähigkeiten
       
     </span>
   </a>
@@ -3606,15 +3606,16 @@
  
 
 <h1 id="kurszusammenfassung">Kurszusammenfassung<a class="headerlink" href="#kurszusammenfassung" title="Permanent link">&para;</a></h1>
-<p>Herzlichen Glückwunsch zum Abschluss des Nextflow For Genomics Trainingskurses! 🎉</p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> KI-gestützte Übersetzung - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">mehr erfahren &amp; Verbesserungen vorschlagen</a></span></p>
+<p>Herzlichen Glückwunsch zum Abschluss des Nextflow for Genomics Trainingskurses! 🎉</p>
 <h2 id="deine-lernreise">Deine Lernreise<a class="headerlink" href="#deine-lernreise" title="Permanent link">&para;</a></h2>
 <p>Du hast damit begonnen, Variant-Calling-Tools manuell im Terminal auszuführen, um die Methodik zu verstehen.
-Dann hast du eine Nextflow-Pipeline für eine einzelne Probe erstellt, um den Prozess zu automatisieren, sie auf die parallele Verarbeitung mehrerer Proben skaliert und mit Channel-Operatoren Multi-Sample-Joint-Genotyping hinzugefügt.</p>
+Dann hast du eine Nextflow-Pipeline für eine einzelne Probe erstellt, um den Prozess zu automatisieren, sie für die parallele Verarbeitung mehrerer Proben skaliert und mit Channel-Operatoren ein gemeinsames Genotyping für mehrere Proben hinzugefügt.</p>
 <h3 id="was-du-erstellt-hast">Was du erstellt hast<a class="headerlink" href="#was-du-erstellt-hast" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Eine Variant-Calling-Pipeline, die BAM-Dateien als Eingabe nimmt und gemeinsam gecallte VCF-Dateien als Ausgabe produziert.</li>
+<li>Eine Variant-Calling-Pipeline, die BAM-Dateien als Eingabe nimmt und gemeinsam aufgerufene VCFs als Ausgabe erzeugt.</li>
 <li>Drei Prozesse (<code>SAMTOOLS_INDEX</code>, <code>GATK_HAPLOTYPECALLER</code> und <code>GATK_JOINTGENOTYPING</code>), die in separaten Moduldateien gespeichert sind.</li>
-<li>Die Pipeline skaliert automatisch auf eine beliebige Anzahl von Eingabeproben unter Verwendung des Dataflow-Paradigmas von Nextflow.</li>
+<li>Die Pipeline skaliert automatisch für beliebig viele Eingabeproben durch Nextflows Dataflow-Paradigma.</li>
 <li>Die Ergebnisse werden in einem Verzeichnis namens <code>results/</code> veröffentlicht.</li>
 </ul>
 <h3 id="erworbene-fahigkeiten">Erworbene Fähigkeiten<a class="headerlink" href="#erworbene-fahigkeiten" title="Permanent link">&para;</a></h3>
@@ -3622,20 +3623,20 @@ Dann hast du eine Nextflow-Pipeline für eine einzelne Probe erstellt, um den Pr
 <ul>
 <li>Einen linearen Workflow schreibst, um Variant Calling auf eine einzelne Probe anzuwenden</li>
 <li>Zusatzdateien wie Index-Dateien und Referenzgenom-Ressourcen angemessen handhabst</li>
-<li>Das Dataflow-Paradigma von Nextflow nutzt, um probenspezifisches Variant Calling zu parallelisieren</li>
-<li>Multi-Sample-Joint-Calling mit relevanten Channel-Operatoren implementierst</li>
+<li>Nextflows Dataflow-Paradigma nutzt, um Variant Calling pro Probe zu parallelisieren</li>
+<li>Gemeinsames Genotyping für mehrere Proben mit relevanten Channel-Operatoren implementierst</li>
 </ul>
-<p>Du bist jetzt bereit, Nextflow auf Genomanalyse-Workflows in deiner eigenen Arbeit anzuwenden.</p>
-<h2 id="nachste-schritte-um-deine-fahigkeiten-auszubauen">Nächste Schritte, um deine Fähigkeiten auszubauen<a class="headerlink" href="#nachste-schritte-um-deine-fahigkeiten-auszubauen" title="Permanent link">&para;</a></h2>
-<p>Hier sind unsere wichtigsten Empfehlungen, was du als Nächstes tun kannst:</p>
+<p>Du bist jetzt bereit, Nextflow auf Genomik-Analyse-Workflows in deiner eigenen Arbeit anzuwenden.</p>
+<h2 id="nachste-schritte-zum-ausbau-deiner-fahigkeiten">Nächste Schritte zum Ausbau deiner Fähigkeiten<a class="headerlink" href="#nachste-schritte-zum-ausbau-deiner-fahigkeiten" title="Permanent link">&para;</a></h2>
+<p>Hier sind unsere Top-Empfehlungen für die nächsten Schritte:</p>
 <ul>
-<li>Wende Nextflow auf andere wissenschaftliche Anwendungsfälle an mit <a href="../../">Nextflow for Science</a></li>
-<li>Starte mit nf-core mit <a href="../../../hello_nf-core/">Hello nf-core</a></li>
+<li>Wende Nextflow auf andere wissenschaftliche Analyse-Anwendungsfälle an mit <a href="../../">Nextflow for Science</a></li>
+<li>Starte mit nf-core durch <a href="../../../hello_nf-core/">Hello nf-core</a></li>
 <li>Erkunde fortgeschrittenere Nextflow-Features mit den <a href="../../../side_quests/">Side Quests</a></li>
 </ul>
-<p>Abschließend empfehlen wir dir, einen Blick auf <a href="https://seqera.io/"><strong>Seqera Platform</strong></a> zu werfen – eine cloudbasierte Plattform, die vom Nextflow-Entwicklungsteam erstellt wurde und es dir noch einfacher macht, deine Workflows zu starten und zu verwalten, sowie deine Daten zu managen und Analysen interaktiv in jeder Umgebung auszuführen.</p>
+<p>Abschließend empfehlen wir dir, einen Blick auf <a href="https://seqera.io/"><strong>Seqera Platform</strong></a> zu werfen, eine cloudbasierte Plattform, die von den Entwickler*innen von Nextflow erstellt wurde und es noch einfacher macht, deine Workflows zu starten und zu verwalten sowie deine Daten zu managen und Analysen interaktiv in jeder Umgebung auszuführen.</p>
 <h2 id="hilfe-erhalten">Hilfe erhalten<a class="headerlink" href="#hilfe-erhalten" title="Permanent link">&para;</a></h2>
-<p>Für Hilferessourcen und Community-Support siehe die <a href="../../../help/">Hilfe-Seite</a>.</p>
+<p>Hilfsressourcen und Community-Support findest du auf der <a href="../../../help/">Hilfe-Seite</a>.</p>
 <h2 id="feedback-umfrage">Feedback-Umfrage<a class="headerlink" href="#feedback-umfrage" title="Permanent link">&para;</a></h2>
 <p>Bevor du weitermachst, nimm dir bitte eine Minute Zeit, um die Kursumfrage auszufüllen! Dein Feedback hilft uns, unsere Trainingsmaterialien für alle zu verbessern.</p>
 <p><a class="md-button md-button--primary" href="../survey/">Zur Umfrage <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {

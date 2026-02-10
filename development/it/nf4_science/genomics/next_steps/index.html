@@ -2799,7 +2799,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern di scripting essenziali
+    Pattern di Scripting Essenziali in Nextflow
   
 
     
@@ -3606,28 +3606,29 @@
  
 
 <h1 id="riepilogo-del-corso">Riepilogo del corso<a class="headerlink" href="#riepilogo-del-corso" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduzione assistita da IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">scopri di più e suggerisci miglioramenti</a></span></p>
 <p>Congratulazioni per aver completato il corso di formazione Nextflow for Genomics! 🎉</p>
 <h2 id="il-vostro-percorso">Il vostro percorso<a class="headerlink" href="#il-vostro-percorso" title="Permanent link">&para;</a></h2>
 <p>Avete iniziato eseguendo manualmente gli strumenti di variant calling nel terminale per comprendere la metodologia.
-Poi avete costruito una pipeline Nextflow per un singolo campione per automatizzare il processo, l'avete scalata per gestire più campioni in parallelo e avete aggiunto il joint genotyping multi-campione utilizzando gli operatori di canali.</p>
+Poi avete costruito una pipeline Nextflow per un singolo campione per automatizzare il processo, l'avete scalata per gestire più campioni in parallelo e avete aggiunto il joint genotyping multi-campione utilizzando gli operatori di canale.</p>
 <h3 id="cosa-avete-costruito">Cosa avete costruito<a class="headerlink" href="#cosa-avete-costruito" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Una pipeline di variant calling che prende file BAM come input e produce VCF joint-called come output.</li>
-<li>Tre processi (<code>SAMTOOLS_INDEX</code>, <code>GATK_HAPLOTYPECALLER</code> e <code>GATK_JOINTGENOTYPING</code>) memorizzati in file moduli separati.</li>
-<li>La pipeline scala automaticamente per qualsiasi numero di campioni di input utilizzando il paradigma di dataflow di Nextflow.</li>
+<li>Tre processi (<code>SAMTOOLS_INDEX</code>, <code>GATK_HAPLOTYPECALLER</code> e <code>GATK_JOINTGENOTYPING</code>) memorizzati in file modulo separati.</li>
+<li>La pipeline scala automaticamente per qualsiasi numero di campioni di input utilizzando il paradigma dataflow di Nextflow.</li>
 <li>I risultati vengono pubblicati in una directory chiamata <code>results/</code>.</li>
 </ul>
 <h3 id="competenze-acquisite">Competenze acquisite<a class="headerlink" href="#competenze-acquisite" title="Permanent link">&para;</a></h3>
-<p>Attraverso questo corso pratico, avete imparato come:</p>
+<p>Attraverso questo corso pratico, avete imparato a:</p>
 <ul>
 <li>Scrivere un flusso di lavoro lineare per applicare il variant calling a un singolo campione</li>
-<li>Gestire appropriatamente file accessori come file indice e risorse del genoma di riferimento</li>
-<li>Sfruttare il paradigma di dataflow di Nextflow per parallelizzare il variant calling per campione</li>
-<li>Implementare il joint calling multi-campione utilizzando gli operatori di canali rilevanti</li>
+<li>Gestire appropriatamente i file accessori come i file indice e le risorse del genoma di riferimento</li>
+<li>Sfruttare il paradigma dataflow di Nextflow per parallelizzare il variant calling per campione</li>
+<li>Implementare il joint calling multi-campione utilizzando gli operatori di canale rilevanti</li>
 </ul>
 <p>Ora siete pronti per iniziare ad applicare Nextflow ai flussi di lavoro di analisi genomica nel vostro lavoro.</p>
 <h2 id="prossimi-passi-per-sviluppare-le-vostre-competenze">Prossimi passi per sviluppare le vostre competenze<a class="headerlink" href="#prossimi-passi-per-sviluppare-le-vostre-competenze" title="Permanent link">&para;</a></h2>
-<p>Ecco i nostri principali suggerimenti su cosa fare successivamente:</p>
+<p>Ecco i nostri principali suggerimenti su cosa fare dopo:</p>
 <ul>
 <li>Applicate Nextflow ad altri casi d'uso di analisi scientifica con <a href="../../">Nextflow for Science</a></li>
 <li>Iniziate con nf-core con <a href="../../../hello_nf-core/">Hello nf-core</a></li>
@@ -3635,10 +3636,10 @@ Poi avete costruito una pipeline Nextflow per un singolo campione per automatizz
 </ul>
 <p>Infine, vi consigliamo di dare un'occhiata a <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, una piattaforma basata su cloud sviluppata dai creatori di Nextflow che rende ancora più facile lanciare e gestire i vostri flussi di lavoro, oltre a gestire i vostri dati ed eseguire analisi in modo interattivo in qualsiasi ambiente.</p>
 <h2 id="ottenere-aiuto">Ottenere aiuto<a class="headerlink" href="#ottenere-aiuto" title="Permanent link">&para;</a></h2>
-<p>Per risorse di aiuto e supporto della community, consultate la <a href="../../../help/">pagina di Aiuto</a>.</p>
+<p>Per risorse di aiuto e supporto della comunità, consultate la <a href="../../../help/">pagina di aiuto</a>.</p>
 <h2 id="sondaggio-di-feedback">Sondaggio di feedback<a class="headerlink" href="#sondaggio-di-feedback" title="Permanent link">&para;</a></h2>
 <p>Prima di proseguire, dedicate un minuto a completare il sondaggio del corso! Il vostro feedback ci aiuta a migliorare i nostri materiali di formazione per tutti.</p>
-<p><a class="md-button md-button--primary" href="../survey/">Compila il sondaggio <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
+<p><a class="md-button md-button--primary" href="../survey/">Partecipa al sondaggio <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

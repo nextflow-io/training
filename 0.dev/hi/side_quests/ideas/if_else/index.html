@@ -884,7 +884,7 @@
   <span class="md-ellipsis">
     
   
-    03 hello workflow
+    भाग 3: Hello Workflow
   
 
     
@@ -1599,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    भाग 3: कोहोर्ट पर जॉइंट कॉलिंग
+    भाग 3: कोहोर्ट पर संयुक्त कॉलिंग
   
 
     
@@ -2987,12 +2987,12 @@
   <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. गाय को प्रसिद्ध वैज्ञानिकों के उद्धरण बुलवाएं
+        1. गाय को प्रसिद्ध वैज्ञानिकों के उद्धरण बोलवाएं
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. गाय को प्रसिद्ध वैज्ञानिकों के उद्धरण बुलवाएं">
+    <nav class="md-nav" aria-label="1. गाय को प्रसिद्ध वैज्ञानिकों के उद्धरण बोलवाएं">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3010,7 +3010,7 @@
   <a href="#12-nextflow-quote-sayhello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. अपनी Nextflow पाइपलाइन को quote और sayHello मोड में निष्पादित करने की अनुमति देने के लिए संशोधित करें।
+        1.2. अपनी Nextflow पाइपलाइन को quote और sayHello मोड में एक्सीक्यूट करने की अनुमति देने के लिए संशोधित करें।
       
     </span>
   </a>
@@ -3021,7 +3021,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -3032,7 +3032,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        आगे क्या?
+        आगे क्या है?
       
     </span>
   </a>
@@ -3304,9 +3304,9 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI-सहायता प्राप्त अनुवाद - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">अधिक जानें और सुधार सुझाएं</a></span></p>
 <p>[TODO]</p>
 <hr />
-<h2 id="1">1. गाय को प्रसिद्ध वैज्ञानिकों के उद्धरण बुलवाएं<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p>इस खंड में कुछ अतिरिक्त अभ्यास हैं, जो आपने अब तक जो सीखा है उसका अभ्यास करने के लिए।
-इन अभ्यासों को करना प्रशिक्षण के बाद के भागों को समझने के लिए <em>आवश्यक नहीं</em> है, लेकिन यह गाय को प्रसिद्ध वैज्ञानिकों के उद्धरण बुलवाने का तरीका सीखकर अपनी शिक्षा को मजबूत करने का एक मजेदार तरीका प्रदान करता है।</p>
+<h2 id="1">1. गाय को प्रसिद्ध वैज्ञानिकों के उद्धरण बोलवाएं<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>इस सेक्शन में कुछ स्ट्रेच एक्सरसाइज़ हैं, जो तुमने अब तक जो सीखा है उसका अभ्यास करने के लिए हैं।
+ये एक्सरसाइज़ करना ट्रेनिंग के बाद के भागों को समझने के लिए <em>आवश्यक नहीं</em> है, लेकिन गाय को प्रसिद्ध वैज्ञानिकों के उद्धरण बोलवाने का तरीका समझकर अपनी सीख को मजबूत करने का एक मज़ेदार तरीका प्रदान करती हैं।</p>
 <div class="highlight"><span class="filename">cowsay-output-Grace-Hopper.txt</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">  _________________________________________________</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go"> /                                                 \</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">| Humans are allergic to change. They love to       |</span>
@@ -3326,16 +3326,16 @@
 </code></pre></div>
 <h3 id="11-hello-containersnf-getquote">1.1. <code>hello-containers.nf</code> स्क्रिप्ट को getQuote प्रोसेस का उपयोग करने के लिए संशोधित करें<a class="headerlink" href="#11-hello-containersnf-getquote" title="Permanent link">&para;</a></h3>
 <p>हमारे पास <code>containers/data/pioneers.csv</code> फ़ाइल में कंप्यूटर और जीव विज्ञान के अग्रदूतों की एक सूची है।
-उच्च स्तर पर, इस अभ्यास को पूरा करने के लिए आपको निम्नलिखित करना होगा:</p>
+उच्च स्तर पर, इस एक्सरसाइज़ को पूरा करने के लिए तुम्हें यह करना होगा:</p>
 <ul>
 <li>डिफ़ॉल्ट <code>params.input_file</code> को <code>pioneers.csv</code> फ़ाइल की ओर इंगित करने के लिए संशोधित करें।</li>
-<li>एक <code>getQuote</code> process बनाएं जो प्रत्येक इनपुट के लिए उद्धरण लाने के लिए <code>quote</code> कंटेनर का उपयोग करे।</li>
-<li><code>getQuote</code> process के आउटपुट को <code>cowsay</code> process से कनेक्ट करें ताकि उद्धरण प्रदर्शित हो सके।</li>
+<li>एक <code>getQuote</code> प्रोसेस बनाएं जो प्रत्येक इनपुट के लिए उद्धरण प्राप्त करने के लिए <code>quote</code> कंटेनर का उपयोग करे।</li>
+<li><code>getQuote</code> प्रोसेस के आउटपुट को <code>cowsay</code> प्रोसेस से कनेक्ट करें ताकि उद्धरण प्रदर्शित हो सके।</li>
 </ul>
-<p><code>quote</code> कंटेनर इमेज के लिए, आप या तो पिछले अतिरिक्त अभ्यास में स्वयं बनाई गई इमेज का उपयोग कर सकते हैं या Seqera Containers से प्राप्त की गई इमेज का उपयोग कर सकते हैं।</p>
+<p><code>quote</code> कंटेनर इमेज के लिए, तुम या तो पिछली स्ट्रेच एक्सरसाइज़ में खुद बनाई गई इमेज का उपयोग कर सकते हो या Seqera Containers से प्राप्त इमेज का उपयोग कर सकते हो।</p>
 <div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>आपके getQuote process के <code>script</code> ब्लॉक के लिए एक अच्छा विकल्प हो सकता है:
+<p class="admonition-title">संकेत</p>
+<p>तुम्हारे getQuote प्रोसेस के <code>script</code> ब्लॉक के लिए एक अच्छा विकल्प यह हो सकता है:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nl">script:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
@@ -3344,10 +3344,10 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></p>
 </div>
-<p>आप इस अभ्यास का समाधान <code>containers/solutions/hello-containers-4.1.nf</code> में पा सकते हैं।</p>
-<h3 id="12-nextflow-quote-sayhello">1.2. अपनी Nextflow पाइपलाइन को <code>quote</code> और <code>sayHello</code> मोड में निष्पादित करने की अनुमति देने के लिए संशोधित करें।<a class="headerlink" href="#12-nextflow-quote-sayhello" title="Permanent link">&para;</a></h3>
-<p>अपनी पाइपलाइन में शाखा तर्क जोड़ें ताकि यह <code>quote</code> और <code>sayHello</code> दोनों के लिए इच्छित इनपुट स्वीकार कर सके।
-यहाँ Nextflow workflow में <code>if</code> स्टेटमेंट का उपयोग करने का एक उदाहरण है:</p>
+<p>तुम इस एक्सरसाइज़ का समाधान <code>containers/solutions/hello-containers-4.1.nf</code> में पा सकते हो।</p>
+<h3 id="12-nextflow-quote-sayhello">1.2. अपनी Nextflow पाइपलाइन को <code>quote</code> और <code>sayHello</code> मोड में एक्सीक्यूट करने की अनुमति देने के लिए संशोधित करें।<a class="headerlink" href="#12-nextflow-quote-sayhello" title="Permanent link">&para;</a></h3>
+<p>अपनी पाइपलाइन में कुछ ब्रांचिंग लॉजिक जोड़ें ताकि यह <code>quote</code> और <code>sayHello</code> दोनों के लिए इच्छित इनपुट स्वीकार कर सके।
+यहाँ Nextflow वर्कफ़्लो में <code>if</code> स्टेटमेंट का उपयोग करने का एक उदाहरण है:</p>
 <div class="highlight"><span class="filename">hello-containers.nf</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">quote</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="o">...</span>
@@ -3359,15 +3359,15 @@
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="o">}</span>
 </code></pre></div>
 <div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>आप किसी process के आउटपुट channel को नाम देने के लिए <code>new_ch = processName.out</code> का उपयोग कर सकते हैं।</p>
+<p class="admonition-title">संकेत</p>
+<p>तुम किसी प्रोसेस के आउटपुट चैनल को एक नाम असाइन करने के लिए <code>new_ch = processName.out</code> का उपयोग कर सकते हो।</p>
 </div>
-<p>आप इस अभ्यास का समाधान <code>containers/solutions/hello-containers-4.2.nf</code> में पा सकते हैं।</p>
-<h3 id="_1">निष्कर्ष<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>आप जानते हैं कि प्रोसेस चलाने के लिए Nextflow में कंटेनर का उपयोग कैसे करें, और अपनी पाइपलाइन में कुछ शाखा तर्क कैसे बनाएं!</p>
-<h3 id="_2">आगे क्या?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>जश्न मनाएं, थोड़ा ब्रेक लें और पानी पिएं!</p>
-<p>जब आप तैयार हों, तो इस प्रशिक्षण श्रृंखला के भाग 3 पर जाएं और सीखें कि आपने अब तक जो सीखा है उसे अधिक यथार्थवादी डेटा विश्लेषण उपयोग के मामले में कैसे लागू करें।</p><style type="text/css">.quiz {
+<p>तुम इस एक्सरसाइज़ का समाधान <code>containers/solutions/hello-containers-4.2.nf</code> में पा सकते हो।</p>
+<h3 id="_1">सारांश<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>तुम जानते हो कि Nextflow में प्रोसेस चलाने के लिए कंटेनर का उपयोग कैसे करें, और अपनी पाइपलाइन में कुछ ब्रांचिंग लॉजिक कैसे बनाएं!</p>
+<h3 id="_2">आगे क्या है?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>जश्न मनाओ, थोड़ा ब्रेक लो और पानी पियो!</p>
+<p>जब तुम तैयार हो, तो इस ट्रेनिंग सीरीज़ के भाग 3 पर आगे बढ़ो ताकि तुम सीख सको कि अब तक जो तुमने सीखा है उसे एक अधिक यथार्थवादी डेटा विश्लेषण उपयोग के मामले में कैसे लागू करें।</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

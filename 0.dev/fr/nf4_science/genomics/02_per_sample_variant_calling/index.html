@@ -1459,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour la Génomique
+    Nextflow for Genomics
   
 
     
@@ -1475,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow pour la Génomique
+    Nextflow for Genomics
   
 
           </label>
@@ -1495,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour la Génomique
+    Nextflow for Genomics
   
 
     
@@ -1927,10 +1927,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#223-ajouter-lappel-du-processus" class="md-nav__link">
+  <a href="#223-ajouter-lappel-de-processus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.3. Ajouter l'appel du processus
+        2.2.3. Ajouter l'appel de processus
       
     </span>
   </a>
@@ -3378,7 +3378,7 @@
   <span class="md-ellipsis">
     
   
-    Modèles de script essentiels
+    Modèles de Script Nextflow Essentiels
   
 
     
@@ -4164,10 +4164,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#223-ajouter-lappel-du-processus" class="md-nav__link">
+  <a href="#223-ajouter-lappel-de-processus" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.3. Ajouter l'appel du processus
+        2.2.3. Ajouter l'appel de processus
       
     </span>
   </a>
@@ -4764,6 +4764,7 @@
  
 
 <h1 id="partie-2-appel-de-variants-par-echantillon">Partie 2 : Appel de variants par échantillon<a class="headerlink" href="#partie-2-appel-de-variants-par-echantillon" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduction assistée par IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">en savoir plus et suggérer des améliorations</a></span></p>
 <p>Dans la Partie 1, vous avez testé les commandes Samtools et GATK manuellement dans leurs conteneurs respectifs.
 Nous allons maintenant encapsuler ces mêmes commandes dans un workflow Nextflow.</p>
 <h2 id="objectif">Objectif<a class="headerlink" href="#objectif" title="Permanent link">&para;</a></h2>
@@ -4789,8 +4790,8 @@ Nous allons maintenant encapsuler ces mêmes commandes dans un workflow Nextflow
 </figure>
 
 <p>Cela reproduit les étapes de la Partie 1, où vous avez exécuté ces commandes manuellement dans leurs conteneurs.</p>
-<p>Comme point de départ, nous vous fournissons un fichier de workflow, <code>genomics.nf</code>, qui décrit les parties principales du workflow, ainsi que deux fichiers de modules, samtools_index.nf et gatk_haplotypecaller.nf, qui décrivent la structure des modules.
-Ces fichiers ne sont pas fonctionnels ; leur but est simplement de servir de squelettes que vous devrez compléter avec les parties intéressantes du code.</p>
+<p>Comme point de départ, nous vous fournissons un fichier de workflow, <code>genomics.nf</code>, qui décrit les principales parties du workflow, ainsi que deux fichiers de modules, samtools_index.nf et gatk_haplotypecaller.nf, qui décrivent la structure des modules.
+Ces fichiers ne sont pas fonctionnels ; leur objectif est simplement de servir de squelettes que vous compléterez avec les parties intéressantes du code.</p>
 <h2 id="plan-de-la-lecon">Plan de la leçon<a class="headerlink" href="#plan-de-la-lecon" title="Permanent link">&para;</a></h2>
 <p>Afin de rendre le processus de développement plus pédagogique, nous avons divisé cela en quatre étapes :</p>
 <ol>
@@ -4799,9 +4800,9 @@ Ces fichiers ne sont pas fonctionnels ; leur but est simplement de servir de squ
 <li><strong>Ajouter un second processus pour exécuter GATK HaplotypeCaller sur le fichier BAM indexé.</strong>
    Cela introduit le chaînage des sorties de processus vers les entrées et la gestion des fichiers accessoires.</li>
 <li><strong>Adapter le workflow pour qu'il s'exécute sur un lot d'échantillons.</strong>
-   Cela couvre l'exécution parallèle et introduit les tuples pour conserver ensemble les fichiers associés.</li>
+   Cela couvre l'exécution parallèle et introduit les tuples pour garder les fichiers associés ensemble.</li>
 <li><strong>Faire en sorte que le workflow accepte un fichier texte contenant un lot de fichiers d'entrée.</strong>
-   Cela démontre un motif courant pour fournir des entrées en masse.</li>
+   Cela démontre un modèle courant pour fournir des entrées en masse.</li>
 </ol>
 <p>Chaque étape se concentre sur un aspect spécifique du développement de workflow.</p>
 <hr />
@@ -4810,7 +4811,7 @@ Ces fichiers ne sont pas fonctionnels ; leur but est simplement de servir de squ
 <p>Rappelez-vous la commande <code>samtools index</code> de la <a href="../01_method/">Partie 1</a> :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>samtools<span class="w"> </span>index<span class="w"> </span><span class="s1">&#39;&lt;input_bam&gt;&#39;</span>
 </code></pre></div>
-<p>La commande prend un fichier BAM en entrée et produit un fichier d'index <code>.bai</code> à ses côtés.
+<p>La commande prend un fichier BAM en entrée et produit un fichier d'index <code>.bai</code> à côté de celui-ci.
 L'URI du conteneur était <code>community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464</code>.</p>
 <p>Nous allons prendre ces informations et les encapsuler dans Nextflow en trois étapes :</p>
 <ol>
@@ -4835,7 +4836,7 @@ L'URI du conteneur était <code>community.wave.seqera.io/library/samtools:1.20--
 <a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="cm"> */</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="hll"><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="hll"><span class="w">    </span><span class="c1">// Primary input</span>
+</span><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="hll"><span class="w">    </span><span class="c1">// Entrée principale</span>
 </span><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="hll"><span class="w">    </span><span class="nl">reads_bam:</span><span class="w"> </span><span class="n">Path</span>
 </span><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="hll"><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
@@ -4849,15 +4850,15 @@ L'URI du conteneur était <code>community.wave.seqera.io/library/samtools:1.20--
 <a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="cm"> */</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="c1">// Primary input</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="c1">// Entrée principale</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>Cela configure le paramètre CLI, mais nous ne voulons pas saisir le chemin de fichier à chaque fois que nous exécutons le workflow pendant le développement.
-Il existe plusieurs options pour fournir une valeur par défaut ; nous utilisons ici un profil de test.</p>
+<p>Cela configure le paramètre CLI, mais nous ne voulons pas taper le chemin du fichier à chaque fois que nous exécutons le workflow pendant le développement.
+Il existe plusieurs options pour fournir une valeur par défaut ; ici nous utilisons un profil de test.</p>
 <h4 id="112-creer-un-profil-de-test-avec-une-valeur-par-defaut-dans-nextflowconfig">1.1.2. Créer un profil de test avec une valeur par défaut dans <code>nextflow.config</code><a class="headerlink" href="#112-creer-un-profil-de-test-avec-une-valeur-par-defaut-dans-nextflowconfig" title="Permanent link">&para;</a></h4>
-<p>Un profil de test fournit des valeurs par défaut pratiques pour essayer un workflow sans spécifier d'entrées en ligne de commande.
+<p>Un profil de test fournit des valeurs par défaut pratiques pour essayer un workflow sans spécifier d'entrées sur la ligne de commande.
 C'est une convention courante dans l'écosystème Nextflow (voir <a href="../../../hello_nextflow/06_hello_config/">Hello Config</a> pour plus de détails).</p>
 <p>Ajoutez un bloc <code>profiles</code> à <code>nextflow.config</code> avec un profil <code>test</code> qui définit le paramètre <code>reads_bam</code> sur l'un des fichiers BAM de test.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Après</label><label for="__tabbed_2_2">Avant</label></div>
@@ -4887,7 +4888,7 @@ C'est une convention courante dans l'écosystème Nextflow (voir <a href="../../
 <p>Ici, nous utilisons <code>${projectDir}</code>, une variable Nextflow intégrée qui pointe vers le répertoire où se trouve le script de workflow.
 Cela facilite la référence aux fichiers de données et autres ressources sans coder en dur des chemins absolus.</p>
 <h4 id="113-configurer-le-canal-dentree">1.1.3. Configurer le canal d'entrée<a class="headerlink" href="#113-configurer-le-canal-dentree" title="Permanent link">&para;</a></h4>
-<p>Dans le bloc workflow, créez un canal d'entrée à partir de la valeur du paramètre en utilisant la fabrique de canaux <code>.fromPath</code> (comme utilisé dans <a href="../../../hello_nextflow/02_hello_channels/">Hello Channels</a>).</p>
+<p>Dans le bloc workflow, créez un canal d'entrée à partir de la valeur du paramètre en utilisant la fabrique de canaux <code>.fromPath</code> (comme utilisée dans <a href="../../../hello_nextflow/02_hello_channels/">Hello Channels</a>).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Après</label><label for="__tabbed_3_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -4898,7 +4899,7 @@ Cela facilite la référence aux fichiers de données et autres ressources sans 
 <span class="normal"><a href="#__codelineno-5-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-14" name="__codelineno-5-14"></a>
 <a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="hll"><span class="w">    </span><span class="c1">// Create input channel (single file via CLI parameter)</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="hll"><span class="w">    </span><span class="c1">// Créer le canal d&#39;entrée (fichier unique via paramètre CLI)</span>
 </span><a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="hll"><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -4909,7 +4910,7 @@ Cela facilite la référence aux fichiers de données et autres ressources sans 
 <span class="normal"><a href="#__codelineno-6-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-6-14" name="__codelineno-6-14"></a>
 <a id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="w">    </span><span class="c1">// Create input channel</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="w">    </span><span class="c1">// Créer le canal d&#39;entrée</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4918,7 +4919,7 @@ Cela facilite la référence aux fichiers de données et autres ressources sans 
 <h3 id="12-ecrire-le-processus-dindexation-et-lappeler-dans-le-workflow">1.2. Écrire le processus d'indexation et l'appeler dans le workflow<a class="headerlink" href="#12-ecrire-le-processus-dindexation-et-lappeler-dans-le-workflow" title="Permanent link">&para;</a></h3>
 <p>Nous devons écrire la définition du processus dans le fichier de module, l'importer dans le workflow en utilisant une instruction include, et l'appeler sur l'entrée.</p>
 <h4 id="121-completer-le-module-pour-le-processus-dindexation">1.2.1. Compléter le module pour le processus d'indexation<a class="headerlink" href="#121-completer-le-module-pour-le-processus-dindexation" title="Permanent link">&para;</a></h4>
-<p>Ouvrez <code>modules/samtools_index.nf</code> et examinez la structure de la définition du processus.
+<p>Ouvrez <code>modules/samtools_index.nf</code> et examinez le squelette de la définition du processus.
 Vous devriez reconnaître les principaux éléments structurels ; sinon, envisagez de lire <a href="../../../hello_nextflow/01_hello_world/">Hello Nextflow</a> pour un rappel.</p>
 <p>Complétez la définition du processus par vous-même en utilisant les informations fournies ci-dessus, puis vérifiez votre travail par rapport à la solution dans l'onglet "Après" ci-dessous.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Avant</label><label for="__tabbed_4_2">Après</label></div>
@@ -5005,7 +5006,7 @@ Vous devriez reconnaître les principaux éléments structurels ; sinon, envisag
 </div>
 </div>
 </div>
-<p>Une fois que vous avez terminé, le processus est complet.
+<p>Une fois que vous avez terminé cela, le processus est complet.
 Pour l'utiliser dans le workflow, vous devrez importer le module et ajouter un appel de processus.</p>
 <h4 id="122-inclure-le-module">1.2.2. Inclure le module<a class="headerlink" href="#122-inclure-le-module" title="Permanent link">&para;</a></h4>
 <p>Dans <code>genomics.nf</code>, ajoutez une instruction <code>include</code> pour rendre le processus disponible au workflow :</p>
@@ -5013,12 +5014,12 @@ Pour l'utiliser dans le workflow, vous devrez importer le module et ajouter un a
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-3">3</a></span>
-<span class="normal"><a href="#__codelineno-9-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="c1">// Module INCLUDE statements</span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="c1">// Instructions INCLUDE de modules</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools_index.nf&#39;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="c1">// Module INCLUDE statements</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="c1">// Instructions INCLUDE de modules</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5039,10 +5040,10 @@ Pour l'utiliser dans le workflow, vous devrez importer le module et ajouter un a
 <span class="normal"><a href="#__codelineno-11-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-11-15" name="__codelineno-11-15"></a>
 <a id="__codelineno-11-16" name="__codelineno-11-16"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="c1">// Create input channel (single file via CLI parameter)</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="w">    </span><span class="c1">// Créer le canal d&#39;entrée (fichier unique via paramètre CLI)</span>
 <a id="__codelineno-11-18" name="__codelineno-11-18"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
 <a id="__codelineno-11-19" name="__codelineno-11-19"></a>
-<a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="hll"><span class="w">    </span><span class="c1">// Create index file for input BAM file</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20"></a><span class="hll"><span class="w">    </span><span class="c1">// Créer le fichier d&#39;index pour le fichier BAM d&#39;entrée</span>
 </span><a id="__codelineno-11-21" name="__codelineno-11-21"></a><span class="hll"><span class="w">    </span><span class="n">SAMTOOLS_INDEX</span><span class="o">(</span><span class="n">reads_ch</span><span class="o">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -5056,16 +5057,16 @@ Pour l'utiliser dans le workflow, vous devrez importer le module et ajouter un a
 <span class="normal"><a href="#__codelineno-12-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-14" name="__codelineno-12-14"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-12-15" name="__codelineno-12-15"></a>
 <a id="__codelineno-12-16" name="__codelineno-12-16"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">    </span><span class="c1">// Create input channel (single file via CLI parameter)</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="w">    </span><span class="c1">// Créer le canal d&#39;entrée (fichier unique via paramètre CLI)</span>
 <a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
 <a id="__codelineno-12-19" name="__codelineno-12-19"></a>
-<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">    </span><span class="c1">// Call processes</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span class="w">    </span><span class="c1">// Appeler les processus</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <p>Le workflow charge maintenant l'entrée et exécute le processus d'indexation dessus.
-Ensuite, nous devons configurer la façon dont la sortie est publiée.</p>
+Ensuite, nous devons configurer comment la sortie est publiée.</p>
 <h3 id="13-configurer-la-gestion-de-la-sortie">1.3. Configurer la gestion de la sortie<a class="headerlink" href="#13-configurer-la-gestion-de-la-sortie" title="Permanent link">&para;</a></h3>
 <p>Nous devons déclarer quelles sorties de processus publier et spécifier où elles doivent aller.</p>
 <h4 id="131-declarer-une-sortie-dans-la-section-publish">1.3.1. Déclarer une sortie dans la section <code>publish:</code><a class="headerlink" href="#131-declarer-une-sortie-dans-la-section-publish" title="Permanent link">&para;</a></h4>
@@ -5085,13 +5086,13 @@ Assignez la sortie de <code>SAMTOOLS_INDEX</code> à une cible nommée appelée 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-22">22</a></span>
 <span class="normal"><a href="#__codelineno-14-23">23</a></span>
 <span class="normal"><a href="#__codelineno-14-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-22" name="__codelineno-14-22"></a><span class="w">    </span><span class="nl">publish:</span>
-<a id="__codelineno-14-23" name="__codelineno-14-23"></a><span class="w">    </span><span class="c1">// Declare outputs to publish</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23"></a><span class="w">    </span><span class="c1">// Déclarer les sorties à publier</span>
 <a id="__codelineno-14-24" name="__codelineno-14-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>Maintenant nous devons indiquer à Nextflow où placer la sortie publiée.</p>
+<p>Maintenant nous devons dire à Nextflow où mettre la sortie publiée.</p>
 <h4 id="132-configurer-la-cible-de-sortie-dans-le-bloc-output">1.3.2. Configurer la cible de sortie dans le bloc <code>output {}</code><a class="headerlink" href="#132-configurer-la-cible-de-sortie-dans-le-bloc-output" title="Permanent link">&para;</a></h4>
 <p>Le bloc <code>output {}</code> se situe en dehors du workflow et spécifie où chaque cible nommée est publiée.
 Ajoutons une cible pour <code>bam_index</code> qui publie dans un sous-répertoire <code>bam/</code>.</p>
@@ -5113,7 +5114,7 @@ Ajoutons une cible pour <code>bam_index</code> qui publie dans un sous-répertoi
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-26">26</a></span>
 <span class="normal"><a href="#__codelineno-16-27">27</a></span>
 <span class="normal"><a href="#__codelineno-16-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-26" name="__codelineno-16-26"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-27" name="__codelineno-16-27"></a><span class="w">    </span><span class="c1">// Configure publish targets</span>
+<a id="__codelineno-16-27" name="__codelineno-16-27"></a><span class="w">    </span><span class="c1">// Configurer les cibles de publication</span>
 <a id="__codelineno-16-28" name="__codelineno-16-28"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5123,11 +5124,11 @@ Ajoutons une cible pour <code>bam_index</code> qui publie dans un sous-répertoi
 <p class="admonition-title">Note</p>
 <p>Par défaut, Nextflow publie les fichiers de sortie sous forme de liens symboliques, ce qui évite une duplication inutile.
 Même si les fichiers de données que nous utilisons ici sont très petits, en génomique ils peuvent devenir très volumineux.
-Les liens symboliques cesseront de fonctionner lorsque vous nettoierez votre répertoire <code>work</code>, donc pour les workflows de production vous voudrez peut-être remplacer le mode de publication par défaut par <code>'copy'</code>.</p>
+Les liens symboliques seront rompus lorsque vous nettoierez votre répertoire <code>work</code>, donc pour les workflows de production vous voudrez peut-être remplacer le mode de publication par défaut par <code>'copy'</code>.</p>
 </div>
 <h3 id="14-executer-le-workflow">1.4. Exécuter le workflow<a class="headerlink" href="#14-executer-le-workflow" title="Permanent link">&para;</a></h3>
 <p>À ce stade, nous avons un workflow d'indexation en une étape qui devrait être entièrement fonctionnel. Testons qu'il fonctionne !</p>
-<p>Nous pouvons l'exécuter avec <code>-profile test</code> pour utiliser la valeur par défaut configurée dans le profil de test et éviter d'avoir à écrire le chemin en ligne de commande.</p>
+<p>Nous pouvons l'exécuter avec <code>-profile test</code> pour utiliser la valeur par défaut configurée dans le profil de test et éviter d'avoir à écrire le chemin sur la ligne de commande.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
 <details class="success">
@@ -5157,9 +5158,9 @@ Les liens symboliques cesseront de fonctionner lorsque vous nettoierez votre ré
 </details>
 <p>Le voilà !</p>
 <h3 id="a-retenir">À retenir<a class="headerlink" href="#a-retenir" title="Permanent link">&para;</a></h3>
-<p>Vous savez comment créer un module contenant un processus, l'importer dans un workflow, l'appeler avec un canal d'entrée, et publier les résultats.</p>
+<p>Vous savez comment créer un module contenant un processus, l'importer dans un workflow, l'appeler avec un canal d'entrée et publier les résultats.</p>
 <h3 id="et-ensuite">Et ensuite ?<a class="headerlink" href="#et-ensuite" title="Permanent link">&para;</a></h3>
-<p>Ajouter une deuxième étape qui prend la sortie du processus d'indexation et l'utilise pour exécuter l'appel de variants.</p>
+<p>Ajouter une seconde étape qui prend la sortie du processus d'indexation et l'utilise pour exécuter l'appel de variants.</p>
 <hr />
 <h2 id="2-ajouter-un-second-processus-pour-executer-gatk-haplotypecaller-sur-le-fichier-bam-indexe">2. Ajouter un second processus pour exécuter GATK HaplotypeCaller sur le fichier BAM indexé<a class="headerlink" href="#2-ajouter-un-second-processus-pour-executer-gatk-haplotypecaller-sur-le-fichier-bam-indexe" title="Permanent link">&para;</a></h2>
 <p>Maintenant que nous avons un index pour notre fichier d'entrée, nous pouvons passer à la configuration de l'étape d'appel de variants.</p>
@@ -5170,7 +5171,7 @@ Les liens symboliques cesseront de fonctionner lorsque vous nettoierez votre ré
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">        </span>-O<span class="w"> </span>reads_mother.vcf<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">        </span>-L<span class="w"> </span>/data/ref/intervals.bed
 </code></pre></div>
-<p>La commande prend un fichier BAM (<code>-I</code>), un génome de référence (<code>-R</code>), et un fichier d'intervalles (<code>-L</code>), et produit un fichier VCF (<code>-O</code>) avec son index.
+<p>La commande prend un fichier BAM (<code>-I</code>), un génome de référence (<code>-R</code>) et un fichier d'intervalles (<code>-L</code>), et produit un fichier VCF (<code>-O</code>) ainsi que son index.
 L'outil s'attend également à ce que l'index BAM, l'index de référence et le dictionnaire de référence soient co-localisés avec leurs fichiers respectifs.
 L'URI du conteneur était <code>community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867</code>.</p>
 <p>Nous suivons les trois mêmes étapes qu'auparavant :</p>
@@ -5181,9 +5182,9 @@ L'URI du conteneur était <code>community.wave.seqera.io/library/gatk4:4.5.0.0--
 </ol>
 <h3 id="21-configurer-les-entrees">2.1. Configurer les entrées<a class="headerlink" href="#21-configurer-les-entrees" title="Permanent link">&para;</a></h3>
 <p>L'étape d'appel de variants nécessite plusieurs fichiers d'entrée supplémentaires.
-Nous devons déclarer des paramètres pour eux, ajouter des valeurs par défaut au profil de test, et créer des variables pour les charger.</p>
+Nous devons déclarer des paramètres pour eux, ajouter des valeurs par défaut au profil de test et créer des variables pour les charger.</p>
 <h4 id="211-ajouter-des-declarations-de-parametres-pour-les-entrees-accessoires">2.1.1. Ajouter des déclarations de paramètres pour les entrées accessoires<a class="headerlink" href="#211-ajouter-des-declarations-de-parametres-pour-les-entrees-accessoires" title="Permanent link">&para;</a></h4>
-<p>Puisque notre nouveau processus attend une poignée de fichiers supplémentaires à fournir, ajoutez des déclarations de paramètres pour eux dans <code>genomics.nf</code> sous la section <code>Pipeline parameters</code> :</p>
+<p>Puisque notre nouveau processus attend plusieurs fichiers supplémentaires à fournir, ajoutez des déclarations de paramètres pour eux dans <code>genomics.nf</code> sous la section <code>Pipeline parameters</code> :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Après</label><label for="__tabbed_9_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5197,10 +5198,10 @@ Nous devons déclarer des paramètres pour eux, ajouter des valeurs par défaut 
 <span class="normal"><a href="#__codelineno-22-16">16</a></span>
 <span class="normal"><a href="#__codelineno-22-17">17</a></span>
 <span class="normal"><a href="#__codelineno-22-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="w">    </span><span class="c1">// Primary input</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="w">    </span><span class="c1">// Entrée principale</span>
 <a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="w">    </span><span class="nl">reads_bam:</span><span class="w"> </span><span class="n">Path</span>
 <a id="__codelineno-22-12" name="__codelineno-22-12"></a>
-<a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="hll"><span class="w">    </span><span class="c1">// Accessory files</span>
+<a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="hll"><span class="w">    </span><span class="c1">// Fichiers accessoires</span>
 </span><a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="hll"><span class="w">    </span><span class="nl">reference:</span><span class="w"> </span><span class="n">Path</span>
 </span><a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="hll"><span class="w">    </span><span class="nl">reference_index:</span><span class="w"> </span><span class="n">Path</span>
 </span><a id="__codelineno-22-16" name="__codelineno-22-16"></a><span class="hll"><span class="w">    </span><span class="nl">reference_dict:</span><span class="w"> </span><span class="n">Path</span>
@@ -5213,7 +5214,7 @@ Nous devons déclarer des paramètres pour eux, ajouter des valeurs par défaut 
 <span class="normal"><a href="#__codelineno-23-10">10</a></span>
 <span class="normal"><a href="#__codelineno-23-11">11</a></span>
 <span class="normal"><a href="#__codelineno-23-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">    </span><span class="c1">// Primary input</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">    </span><span class="c1">// Entrée principale</span>
 <a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">    </span><span class="nl">reads_bam:</span><span class="w"> </span><span class="n">Path</span>
 <a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -5273,16 +5274,16 @@ Nous devons déclarer des paramètres pour eux, ajouter des valeurs par défaut 
 <span class="normal"><a href="#__codelineno-26-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-21" name="__codelineno-26-21"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-26-22" name="__codelineno-26-22"></a>
 <a id="__codelineno-26-23" name="__codelineno-26-23"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-26-24" name="__codelineno-26-24"></a><span class="w">    </span><span class="c1">// Create input channel (single file via CLI parameter)</span>
+<a id="__codelineno-26-24" name="__codelineno-26-24"></a><span class="w">    </span><span class="c1">// Créer le canal d&#39;entrée (fichier unique via paramètre CLI)</span>
 <a id="__codelineno-26-25" name="__codelineno-26-25"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
 <a id="__codelineno-26-26" name="__codelineno-26-26"></a>
-<a id="__codelineno-26-27" name="__codelineno-26-27"></a><span class="hll"><span class="w">    </span><span class="c1">// Load the file paths for the accessory files (reference and intervals)</span>
+<a id="__codelineno-26-27" name="__codelineno-26-27"></a><span class="hll"><span class="w">    </span><span class="c1">// Charger les chemins de fichiers pour les fichiers accessoires (référence et intervalles)</span>
 </span><a id="__codelineno-26-28" name="__codelineno-26-28"></a><span class="hll"><span class="w">    </span><span class="n">ref_file</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reference</span><span class="o">)</span>
 </span><a id="__codelineno-26-29" name="__codelineno-26-29"></a><span class="hll"><span class="w">    </span><span class="n">ref_index_file</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reference_index</span><span class="o">)</span>
 </span><a id="__codelineno-26-30" name="__codelineno-26-30"></a><span class="hll"><span class="w">    </span><span class="n">ref_dict_file</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reference_dict</span><span class="o">)</span>
 </span><a id="__codelineno-26-31" name="__codelineno-26-31"></a><span class="hll"><span class="w">    </span><span class="n">intervals_file</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">intervals</span><span class="o">)</span>
 </span><a id="__codelineno-26-32" name="__codelineno-26-32"></a>
-<a id="__codelineno-26-33" name="__codelineno-26-33"></a><span class="w">    </span><span class="c1">// Create index file for input BAM file</span>
+<a id="__codelineno-26-33" name="__codelineno-26-33"></a><span class="w">    </span><span class="c1">// Créer le fichier d&#39;index pour le fichier BAM d&#39;entrée</span>
 <a id="__codelineno-26-34" name="__codelineno-26-34"></a><span class="w">    </span><span class="n">SAMTOOLS_INDEX</span><span class="o">(</span><span class="n">reads_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5297,21 +5298,21 @@ Nous devons déclarer des paramètres pour eux, ajouter des valeurs par défaut 
 <span class="normal"><a href="#__codelineno-27-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-21" name="__codelineno-27-21"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-27-22" name="__codelineno-27-22"></a>
 <a id="__codelineno-27-23" name="__codelineno-27-23"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-27-24" name="__codelineno-27-24"></a><span class="w">    </span><span class="c1">// Create input channel (single file via CLI parameter)</span>
+<a id="__codelineno-27-24" name="__codelineno-27-24"></a><span class="w">    </span><span class="c1">// Créer le canal d&#39;entrée (fichier unique via paramètre CLI)</span>
 <a id="__codelineno-27-25" name="__codelineno-27-25"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
 <a id="__codelineno-27-26" name="__codelineno-27-26"></a>
-<a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="w">    </span><span class="c1">// Create index file for input BAM file</span>
+<a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="w">    </span><span class="c1">// Créer le fichier d&#39;index pour le fichier BAM d&#39;entrée</span>
 <a id="__codelineno-27-28" name="__codelineno-27-28"></a><span class="w">    </span><span class="n">SAMTOOLS_INDEX</span><span class="o">(</span><span class="n">reads_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>La syntaxe <code>file()</code> indique explicitement à Nextflow de traiter ces entrées comme des chemins de fichiers.
+<p>La syntaxe <code>file()</code> indique explicitement à Nextflow de gérer ces entrées comme des chemins de fichiers.
 Vous pouvez en apprendre plus à ce sujet dans la Quête secondaire <a href="../../../side_quests/working_with_files/">Working with files</a>.</p>
 <h3 id="22-ecrire-le-processus-dappel-de-variants-et-lappeler-dans-le-workflow">2.2. Écrire le processus d'appel de variants et l'appeler dans le workflow<a class="headerlink" href="#22-ecrire-le-processus-dappel-de-variants-et-lappeler-dans-le-workflow" title="Permanent link">&para;</a></h3>
 <p>Nous devons écrire la définition du processus dans le fichier de module, l'importer dans le workflow en utilisant une instruction include, et l'appeler sur les lectures d'entrée plus la sortie de l'étape d'indexation et les fichiers accessoires.</p>
 <h4 id="221-completer-le-module-pour-le-processus-dappel-de-variants">2.2.1. Compléter le module pour le processus d'appel de variants<a class="headerlink" href="#221-completer-le-module-pour-le-processus-dappel-de-variants" title="Permanent link">&para;</a></h4>
-<p>Ouvrez <code>modules/gatk_haplotypecaller.nf</code> et examinez la structure de la définition du processus.</p>
+<p>Ouvrez <code>modules/gatk_haplotypecaller.nf</code> et examinez le squelette de la définition du processus.</p>
 <p>Complétez la définition du processus par vous-même en utilisant les informations fournies ci-dessus, puis vérifiez votre travail par rapport à la solution dans l'onglet "Après" ci-dessous.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Avant</label><label for="__tabbed_12_2">Après</label></div>
 <div class="tabbed-content">
@@ -5417,12 +5418,12 @@ Vous pouvez en apprendre plus à ce sujet dans la Quête secondaire <a href="../
 </div>
 </div>
 </div>
-<p>Vous remarquerez que ce processus a plus d'entrées que ce que la commande GATK elle-même nécessite.
-GATK sait où chercher le fichier d'index BAM et les fichiers accessoires du génome de référence en se basant sur des conventions de nommage, mais Nextflow est agnostique du domaine et ne connaît pas ces conventions.
-Nous devons les lister explicitement afin que Nextflow les place dans le répertoire de travail à l'exécution ; sinon GATK générera une erreur concernant les fichiers manquants.</p>
-<p>De même, nous listons explicitement le fichier d'index du VCF de sortie (<code>"${input_bam}.vcf.idx"</code>) afin que Nextflow le suive pour les étapes suivantes.
+<p>Vous remarquerez que ce processus a plus d'entrées que la commande GATK elle-même n'en nécessite.
+GATK sait chercher le fichier d'index BAM et les fichiers accessoires du génome de référence en fonction de conventions de nommage, mais Nextflow est indépendant du domaine et ne connaît pas ces conventions.
+Nous devons les lister explicitement pour que Nextflow les place dans le répertoire de travail au moment de l'exécution ; sinon GATK générera une erreur concernant des fichiers manquants.</p>
+<p>De même, nous listons explicitement le fichier d'index du VCF de sortie (<code>"${input_bam}.vcf.idx"</code>) pour que Nextflow en garde la trace pour les étapes suivantes.
 Nous utilisons la syntaxe <code>emit:</code> pour assigner un nom à chaque canal de sortie, ce qui deviendra utile lorsque nous connecterons les sorties dans le bloc publish.</p>
-<p>Une fois que vous avez terminé, le processus est complet.
+<p>Une fois que vous avez terminé cela, le processus est complet.
 Pour l'utiliser dans le workflow, vous devrez importer le module et ajouter un appel de processus.</p>
 <h4 id="222-importer-le-nouveau-module">2.2.2. Importer le nouveau module<a class="headerlink" href="#222-importer-le-nouveau-module" title="Permanent link">&para;</a></h4>
 <p>Mettez à jour <code>genomics.nf</code> pour importer le nouveau module :</p>
@@ -5431,22 +5432,22 @@ Pour l'utiliser dans le workflow, vous devrez importer le module et ajouter un a
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-3">3</a></span>
 <span class="normal"><a href="#__codelineno-30-4">4</a></span>
-<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="c1">// Module INCLUDE statements</span>
+<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="c1">// Instructions INCLUDE de modules</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools_index.nf&#39;</span>
 <a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/gatk_haplotypecaller.nf&#39;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-3">3</a></span>
-<span class="normal"><a href="#__codelineno-31-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="c1">// Module INCLUDE statements</span>
+<span class="normal"><a href="#__codelineno-31-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="c1">// Instructions INCLUDE de modules</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAMTOOLS_INDEX</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;./modules/samtools_index.nf&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <p>Le processus est maintenant disponible dans la portée du workflow.</p>
-<h4 id="223-ajouter-lappel-du-processus">2.2.3. Ajouter l'appel du processus<a class="headerlink" href="#223-ajouter-lappel-du-processus" title="Permanent link">&para;</a></h4>
-<p>Ajoutez l'appel du processus dans le corps du workflow, sous <code>main:</code> :</p>
+<h4 id="223-ajouter-lappel-de-processus">2.2.3. Ajouter l'appel de processus<a class="headerlink" href="#223-ajouter-lappel-de-processus" title="Permanent link">&para;</a></h4>
+<p>Ajoutez l'appel de processus dans le corps du workflow, sous <code>main:</code> :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Après</label><label for="__tabbed_14_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5461,10 +5462,10 @@ Pour l'utiliser dans le workflow, vous devrez importer le module et ajouter un a
 <span class="normal"><a href="#__codelineno-32-41">41</a></span>
 <span class="normal"><a href="#__codelineno-32-42">42</a></span>
 <span class="normal"><a href="#__codelineno-32-43">43</a></span>
-<span class="normal"><a href="#__codelineno-32-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-33" name="__codelineno-32-33"></a><span class="w">    </span><span class="c1">// Create index file for input BAM file</span>
+<span class="normal"><a href="#__codelineno-32-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-33" name="__codelineno-32-33"></a><span class="w">    </span><span class="c1">// Créer le fichier d&#39;index pour le fichier BAM d&#39;entrée</span>
 <a id="__codelineno-32-34" name="__codelineno-32-34"></a><span class="w">    </span><span class="n">SAMTOOLS_INDEX</span><span class="o">(</span><span class="n">reads_ch</span><span class="o">)</span>
 <a id="__codelineno-32-35" name="__codelineno-32-35"></a>
-<a id="__codelineno-32-36" name="__codelineno-32-36"></a><span class="hll"><span class="w">    </span><span class="c1">// Call variants from the indexed BAM file</span>
+<a id="__codelineno-32-36" name="__codelineno-32-36"></a><span class="hll"><span class="w">    </span><span class="c1">// Appeler les variants à partir du fichier BAM indexé</span>
 </span><a id="__codelineno-32-37" name="__codelineno-32-37"></a><span class="hll"><span class="w">    </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="o">(</span>
 </span><a id="__codelineno-32-38" name="__codelineno-32-38"></a><span class="hll"><span class="w">        </span><span class="n">reads_ch</span><span class="o">,</span>
 </span><a id="__codelineno-32-39" name="__codelineno-32-39"></a><span class="hll"><span class="w">        </span><span class="n">SAMTOOLS_INDEX</span><span class="o">.</span><span class="na">out</span><span class="o">,</span>
@@ -5477,20 +5478,20 @@ Pour l'utiliser dans le workflow, vous devrez importer le module et ajouter un a
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-33">33</a></span>
-<span class="normal"><a href="#__codelineno-33-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-33" name="__codelineno-33-33"></a><span class="w">    </span><span class="c1">// Create index file for input BAM file</span>
+<span class="normal"><a href="#__codelineno-33-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-33" name="__codelineno-33-33"></a><span class="w">    </span><span class="c1">// Créer le fichier d&#39;index pour le fichier BAM d&#39;entrée</span>
 <a id="__codelineno-33-34" name="__codelineno-33-34"></a><span class="w">    </span><span class="n">SAMTOOLS_INDEX</span><span class="o">(</span><span class="n">reads_ch</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<p>Vous devriez reconnaître la syntaxe <code>*.out</code> de la série de formation Hello Nextflow ; nous disons à Nextflow de prendre le canal produit par <code>SAMTOOLS_INDEX</code> et de le connecter à l'appel du processus <code>GATK_HAPLOTYPECALLER</code>.</p>
+<p>Vous devriez reconnaître la syntaxe <code>*.out</code> de la série de formation Hello Nextflow ; nous disons à Nextflow de prendre le canal émis par <code>SAMTOOLS_INDEX</code> et de le brancher dans l'appel du processus <code>GATK_HAPLOTYPECALLER</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Notez que les entrées sont fournies exactement dans le même ordre dans l'appel au processus que dans le bloc input du processus.
+<p>Notez que les entrées sont fournies dans exactement le même ordre dans l'appel au processus que dans le bloc input du processus.
 Dans Nextflow, les entrées sont positionnelles, ce qui signifie que vous <em>devez</em> suivre le même ordre ; et bien sûr il doit y avoir le même nombre d'éléments.</p>
 </div>
 <h3 id="23-configurer-la-gestion-de-la-sortie">2.3. Configurer la gestion de la sortie<a class="headerlink" href="#23-configurer-la-gestion-de-la-sortie" title="Permanent link">&para;</a></h3>
-<p>Nous devons ajouter les nouvelles sorties à la déclaration publish et configurer leur destination.</p>
+<p>Nous devons ajouter les nouvelles sorties à la déclaration publish et configurer où elles vont.</p>
 <h4 id="231-ajouter-des-cibles-de-publication-pour-les-sorties-dappel-de-variants">2.3.1. Ajouter des cibles de publication pour les sorties d'appel de variants<a class="headerlink" href="#231-ajouter-des-cibles-de-publication-pour-les-sorties-dappel-de-variants" title="Permanent link">&para;</a></h4>
 <p>Ajoutez les sorties VCF et index à la section <code>publish:</code> :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Après</label><label for="__tabbed_15_2">Avant</label></div>
@@ -5517,7 +5518,7 @@ Dans Nextflow, les entrées sont positionnelles, ce qui signifie que vous <em>de
 </div>
 </div>
 </div>
-<p>Maintenant nous devons indiquer à Nextflow où placer les nouvelles sorties.</p>
+<p>Maintenant nous devons dire à Nextflow où mettre les nouvelles sorties.</p>
 <h4 id="232-configurer-les-nouvelles-cibles-de-sortie">2.3.2. Configurer les nouvelles cibles de sortie<a class="headerlink" href="#232-configurer-les-nouvelles-cibles-de-sortie" title="Permanent link">&para;</a></h4>
 <p>Ajoutez des entrées pour les cibles <code>vcf</code> et <code>vcf_idx</code> dans le bloc <code>output {}</code>, en publiant les deux dans un sous-répertoire <code>vcf/</code> :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Après</label><label for="__tabbed_16_2">Avant</label></div>
@@ -5562,7 +5563,7 @@ Dans Nextflow, les entrées sont positionnelles, ce qui signifie que vous <em>de
 </div>
 <p>Le VCF et son index sont publiés comme des cibles séparées qui vont toutes deux dans le sous-répertoire <code>vcf/</code>.</p>
 <h3 id="24-executer-le-workflow">2.4. Exécuter le workflow<a class="headerlink" href="#24-executer-le-workflow" title="Permanent link">&para;</a></h3>
-<p>Exécutez le workflow étendu, en ajoutant <code>-resume</code> cette fois pour ne pas avoir à exécuter à nouveau l'étape d'indexation.</p>
+<p>Exécutez le workflow étendu, en ajoutant <code>-resume</code> cette fois pour ne pas avoir à réexécuter l'étape d'indexation.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
@@ -5577,7 +5578,7 @@ Dans Nextflow, les entrées sont positionnelles, ce qui signifie que vous <em>de
 </code></pre></div>
 </details>
 <p>Maintenant si nous regardons la sortie console, nous voyons les deux processus listés.</p>
-<p>Le premier processus a été ignoré grâce au cache, comme prévu, tandis que le second processus a été exécuté puisqu'il est tout nouveau.</p>
+<p>Le premier processus a été ignoré grâce au cache, comme prévu, alors que le second processus a été exécuté puisqu'il est tout nouveau.</p>
 <p>Vous trouverez les fichiers de sortie dans le répertoire de résultats (sous forme de liens symboliques vers le répertoire de travail).</p>
 <details class="abstract">
 <summary>Contenu du répertoire</summary>
@@ -5603,29 +5604,29 @@ Dans Nextflow, les entrées sont positionnelles, ce qui signifie que vous <em>de
 </details>
 <p>C'est la sortie qui nous intéresse de générer pour chaque échantillon dans notre étude.</p>
 <h3 id="a-retenir_1">À retenir<a class="headerlink" href="#a-retenir_1" title="Permanent link">&para;</a></h3>
-<p>Vous savez comment créer un workflow modulaire en deux étapes qui effectue un véritable travail d'analyse et est capable de gérer les idiosyncrasies des formats de fichiers génomiques comme les fichiers accessoires.</p>
+<p>Vous savez comment créer un workflow modulaire en deux étapes qui effectue un véritable travail d'analyse et est capable de gérer les particularités des formats de fichiers génomiques comme les fichiers accessoires.</p>
 <h3 id="et-ensuite_1">Et ensuite ?<a class="headerlink" href="#et-ensuite_1" title="Permanent link">&para;</a></h3>
 <p>Faire en sorte que le workflow gère plusieurs échantillons en masse.</p>
 <hr />
 <h2 id="3-adapter-le-workflow-pour-quil-sexecute-sur-un-lot-dechantillons">3. Adapter le workflow pour qu'il s'exécute sur un lot d'échantillons<a class="headerlink" href="#3-adapter-le-workflow-pour-quil-sexecute-sur-un-lot-dechantillons" title="Permanent link">&para;</a></h2>
 <p>C'est bien d'avoir un workflow qui peut automatiser le traitement sur un seul échantillon, mais que faire si vous avez 1000 échantillons ?
 Devez-vous écrire un script bash qui boucle sur tous vos échantillons ?</p>
-<p>Non, Dieu merci ! Faites simplement une petite modification au code et Nextflow gérera cela pour vous aussi.</p>
+<p>Non, heureusement ! Faites simplement une petite modification du code et Nextflow gérera cela pour vous aussi.</p>
 <h3 id="31-mettre-a-jour-lentree-pour-lister-trois-echantillons">3.1. Mettre à jour l'entrée pour lister trois échantillons<a class="headerlink" href="#31-mettre-a-jour-lentree-pour-lister-trois-echantillons" title="Permanent link">&para;</a></h3>
 <p>Pour exécuter sur plusieurs échantillons, mettez à jour le profil de test pour fournir un tableau de chemins de fichiers au lieu d'un seul.
-C'est une façon rapide de tester l'exécution multi-échantillons ; dans la prochaine étape nous passerons à une approche plus évolutive en utilisant un fichier d'entrées.</p>
+C'est une façon rapide de tester l'exécution multi-échantillons ; dans la prochaine étape nous passerons à une approche plus évolutive utilisant un fichier d'entrées.</p>
 <p>D'abord, commentez l'annotation de type dans la déclaration du paramètre, puisque les tableaux ne peuvent pas utiliser de déclarations typées :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">Après</label><label for="__tabbed_17_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-10">10</a></span>
-<span class="normal"><a href="#__codelineno-42-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-10" name="__codelineno-42-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Primary input (array of three samples)</span>
+<span class="normal"><a href="#__codelineno-42-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-10" name="__codelineno-42-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Entrée principale (tableau de trois échantillons)</span>
 </span><a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="hll"><span class="w">    </span><span class="n">reads_bam</span><span class="w"> </span><span class="c1">//: Path</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-10">10</a></span>
-<span class="normal"><a href="#__codelineno-43-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-10" name="__codelineno-43-10"></a><span class="w">    </span><span class="c1">// Primary input</span>
+<span class="normal"><a href="#__codelineno-43-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-10" name="__codelineno-43-10"></a><span class="w">    </span><span class="c1">// Entrée principale</span>
 <a id="__codelineno-43-11" name="__codelineno-43-11"></a><span class="w">    </span><span class="nl">reads_bam:</span><span class="w"> </span><span class="n">Path</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5724,11 +5725,11 @@ C'est une façon rapide de tester l'exécution multi-échantillons ; dans la pro
 <p>Si vous regardez la sortie d'erreur de la commande GATK, il y aura une ligne comme celle-ci :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="go">A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.</span>
 </code></pre></div>
-<p>C'est bizarre, étant donné que nous avons explicitement indexé les fichiers BAM dans la première étape du workflow. Pourrait-il y avoir un problème avec la plomberie ?</p>
+<p>Eh bien, c'est bizarre, étant donné que nous avons explicitement indexé les fichiers BAM dans la première étape du workflow. Pourrait-il y avoir un problème avec la plomberie ?</p>
 <h3 id="33-depanner-le-probleme">3.3. Dépanner le problème<a class="headerlink" href="#33-depanner-le-probleme" title="Permanent link">&para;</a></h3>
 <p>Nous allons inspecter les répertoires de travail et utiliser l'opérateur <code>view()</code> pour comprendre ce qui s'est mal passé.</p>
 <h4 id="331-verifier-les-repertoires-de-travail-pour-les-appels-pertinents">3.3.1. Vérifier les répertoires de travail pour les appels pertinents<a class="headerlink" href="#331-verifier-les-repertoires-de-travail-pour-les-appels-pertinents" title="Permanent link">&para;</a></h4>
-<p>Jetez un œil à l'intérieur du répertoire de travail pour l'appel du processus <code>GATK_HAPLOTYPECALLER</code> qui a échoué, listé dans la sortie console.</p>
+<p>Jetez un œil à l'intérieur du répertoire de travail pour l'appel de processus <code>GATK_HAPLOTYPECALLER</code> échoué listé dans la sortie console.</p>
 <details class="abstract">
 <summary>Contenu du répertoire</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">work/a5/fa9fd0994b6beede5fb9ea073596c2</span>
@@ -5742,27 +5743,27 @@ C'est une façon rapide de tester l'exécution multi-échantillons ; dans la pro
 <a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a><span class="go">└── ref.fasta.fai -&gt; /workspaces/training/nf4-science/genomics/data/ref/ref.fasta.fai</span>
 </code></pre></div>
 </details>
-<p>Prêtez une attention particulière aux noms du fichier BAM et de l'index BAM qui sont listés dans ce répertoire : <code>reads_son.bam</code> et <code>reads_father.bam.bai</code>.</p>
+<p>Portez une attention particulière aux noms du fichier BAM et de l'index BAM qui sont listés dans ce répertoire : <code>reads_son.bam</code> et <code>reads_father.bam.bai</code>.</p>
 <p>Quoi ? Nextflow a placé un fichier d'index dans le répertoire de travail de cet appel de processus, mais c'est le mauvais. Comment cela a-t-il pu se produire ?</p>
-<h4 id="332-utiliser-loperateur-view-pour-inspecter-le-contenu-des-canaux">3.3.2. Utiliser l'opérateur <a href="https://www.nextflow.io/docs/latest/reference/operator.html#view">view()</a> pour inspecter le contenu des canaux<a class="headerlink" href="#332-utiliser-loperateur-view-pour-inspecter-le-contenu-des-canaux" title="Permanent link">&para;</a></h4>
-<p>Ajoutez ces deux lignes dans le corps du workflow avant l'appel du processus <code>GATK_HAPLOTYPECALLER</code> pour voir le contenu du canal :</p>
+<h4 id="332-utiliser-loperateur-view-pour-inspecter-le-contenu-des-canaux">3.3.2. Utiliser l'<a href="https://www.nextflow.io/docs/latest/reference/operator.html#view">opérateur view()</a> pour inspecter le contenu des canaux<a class="headerlink" href="#332-utiliser-loperateur-view-pour-inspecter-le-contenu-des-canaux" title="Permanent link">&para;</a></h4>
+<p>Ajoutez ces deux lignes dans le corps du workflow avant l'appel du processus <code>GATK_HAPLOTYPECALLER</code> pour visualiser le contenu du canal :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">Après</label><label for="__tabbed_19_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">genomics.nf</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="w">    </span><span class="n">SAMTOOLS_INDEX</span><span class="o">(</span><span class="n">reads_ch</span><span class="o">)</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
-<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="hll"><span class="w">    </span><span class="c1">// temporary diagnostics</span>
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="hll"><span class="w">    </span><span class="c1">// diagnostics temporaires</span>
 </span><a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a><span class="hll"><span class="w">    </span><span class="n">reads_ch</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </span><a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="hll"><span class="w">    </span><span class="n">SAMTOOLS_INDEX</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </span><a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a>
-<a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a><span class="w">    </span><span class="c1">// Call variants from the indexed BAM file</span>
+<a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a><span class="w">    </span><span class="c1">// Appeler les variants à partir du fichier BAM indexé</span>
 <a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a><span class="w">    </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="o">(</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">genomics.nf</span><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="w">    </span><span class="n">SAMTOOLS_INDEX</span><span class="o">(</span><span class="n">reads_ch</span><span class="o">)</span>
 <a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>
-<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="w">    </span><span class="c1">// Call variants from the indexed BAM file</span>
+<a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="w">    </span><span class="c1">// Appeler les variants à partir du fichier BAM indexé</span>
 <a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a><span class="w">    </span><span class="n">GATK_HAPLOTYPECALLER</span><span class="o">(</span>
 </code></pre></div>
 </div>
@@ -5771,7 +5772,7 @@ C'est une façon rapide de tester l'exécution multi-échantillons ; dans la pro
 <p>Ensuite, exécutez à nouveau la commande du workflow.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
-<p>Une fois de plus, cela peut réussir ou échouer. Voici à quoi ressemble la sortie des deux appels <code>.view()</code> pour une exécution qui a échoué :</p>
+<p>Une fois de plus, cela peut réussir ou échouer. Voici à quoi ressemble la sortie des deux appels <code>.view()</code> pour une exécution échouée :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="go">/workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam</span>
 <a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="go">/workspaces/training/nf4-science/genomics/data/bam/reads_father.bam</span>
 <a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="go">/workspaces/training/nf4-science/genomics/data/bam/reads_son.bam</span>
@@ -5779,7 +5780,7 @@ C'est une façon rapide de tester l'exécution multi-échantillons ; dans la pro
 <a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a><span class="go">/workspaces/training/nf4-science/genomics/work/cc/37894fffdf6cc84c3b0b47f9b536b7/reads_son.bam.bai</span>
 <a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a><span class="go">/workspaces/training/nf4-science/genomics/work/4d/dff681a3d137ba7d9866e3d9307bd0/reads_mother.bam.bai</span>
 </code></pre></div>
-<p>Les trois premières lignes correspondent au canal d'entrée et les trois suivantes, au canal de sortie.
+<p>Les trois premières lignes correspondent au canal d'entrée et les secondes, au canal de sortie.
 Vous pouvez voir que les fichiers BAM et les fichiers d'index pour les trois échantillons ne sont pas listés dans le même ordre !</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -5787,17 +5788,17 @@ Vous pouvez voir que les fichiers BAM et les fichiers d'index pour les trois éc
 La conséquence est que les sorties correspondantes peuvent être collectées dans un ordre différent de celui dans lequel les entrées originales ont été fournies.</p>
 </div>
 <p>Tel qu'écrit actuellement, notre script de workflow suppose que les fichiers d'index sortiront de l'étape d'indexation listés dans le même ordre mère/père/fils que les entrées ont été données.
-Mais cela n'est pas garanti, c'est pourquoi parfois (mais pas toujours) les mauvais fichiers sont appariés dans la deuxième étape.</p>
+Mais cela n'est pas garanti, c'est pourquoi parfois (mais pas toujours) les mauvais fichiers sont appariés dans la seconde étape.</p>
 <p>Pour corriger cela, nous devons nous assurer que les fichiers BAM et leurs fichiers d'index voyagent ensemble à travers les canaux.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Astuce</p>
 <p>Les instructions <code>view()</code> dans le code du workflow ne font rien, donc ce n'est pas un problème de les laisser.
-Cependant elles encombrent votre sortie console, nous recommandons donc de les supprimer lorsque vous avez terminé le dépannage du problème.</p>
+Cependant elles encombrent votre sortie console, donc nous recommandons de les supprimer lorsque vous avez fini de dépanner le problème.</p>
 </div>
 <h3 id="34-mettre-a-jour-le-workflow-pour-gerer-correctement-les-fichiers-dindex">3.4. Mettre à jour le workflow pour gérer correctement les fichiers d'index<a class="headerlink" href="#34-mettre-a-jour-le-workflow-pour-gerer-correctement-les-fichiers-dindex" title="Permanent link">&para;</a></h3>
 <p>La correction consiste à regrouper chaque fichier BAM avec son index dans un tuple, puis à mettre à jour le processus en aval et la plomberie du workflow pour correspondre.</p>
 <h4 id="341-changer-la-sortie-du-module-samtools_index-en-tuple">3.4.1. Changer la sortie du module SAMTOOLS_INDEX en tuple<a class="headerlink" href="#341-changer-la-sortie-du-module-samtools_index-en-tuple" title="Permanent link">&para;</a></h4>
-<p>La façon la plus simple d'assurer qu'un fichier BAM et son index restent étroitement associés est de les emballer ensemble dans un tuple sortant de la tâche d'indexation.</p>
+<p>La façon la plus simple de s'assurer qu'un fichier BAM et son index restent étroitement associés est de les empaqueter ensemble dans un tuple sortant de la tâche d'index.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Un <strong>tuple</strong> est une liste finie et ordonnée d'éléments qui est couramment utilisée pour retourner plusieurs valeurs d'une fonction. Les tuples sont particulièrement utiles pour passer plusieurs entrées ou sorties entre processus tout en préservant leur association et leur ordre.</p>
@@ -5819,7 +5820,7 @@ Cependant elles encombrent votre sortie console, nous recommandons donc de les s
 </div>
 </div>
 </div>
-<p>De cette façon, chaque fichier d'index sera étroitement couplé avec son fichier BAM original, et la sortie globale de l'étape d'indexation sera un seul canal contenant des paires de fichiers.</p>
+<p>De cette façon, chaque fichier d'index sera étroitement couplé avec son fichier BAM d'origine, et la sortie globale de l'étape d'indexation sera un seul canal contenant des paires de fichiers.</p>
 <h4 id="342-changer-lentree-du-module-gatk_haplotypecaller-pour-accepter-un-tuple">3.4.2. Changer l'entrée du module GATK_HAPLOTYPECALLER pour accepter un tuple<a class="headerlink" href="#342-changer-lentree-du-module-gatk_haplotypecaller-pour-accepter-un-tuple" title="Permanent link">&para;</a></h4>
 <p>Puisque nous avons changé la 'forme' de la sortie du premier processus, nous devons mettre à jour la définition d'entrée du second processus pour correspondre.</p>
 <p>Mettez à jour <code>modules/gatk_haplotypecaller.nf</code> :</p>
@@ -5841,7 +5842,7 @@ Cependant elles encombrent votre sortie console, nous recommandons donc de les s
 </div>
 </div>
 </div>
-<p>Maintenant nous devons mettre à jour le workflow pour refléter la nouvelle structure tuple dans l'appel du processus et les cibles de publication.</p>
+<p>Maintenant nous devons mettre à jour le workflow pour refléter la nouvelle structure de tuple dans l'appel de processus et les cibles de publication.</p>
 <h4 id="343-mettre-a-jour-lappel-a-gatk_haplotypecaller-dans-le-workflow">3.4.3. Mettre à jour l'appel à GATK_HAPLOTYPECALLER dans le workflow<a class="headerlink" href="#343-mettre-a-jour-lappel-a-gatk_haplotypecaller-dans-le-workflow" title="Permanent link">&para;</a></h4>
 <p>Nous n'avons plus besoin de fournir le <code>reads_ch</code> original au processus <code>GATK_HAPLOTYPECALLER</code>, puisque le fichier BAM est maintenant regroupé dans le canal de sortie par <code>SAMTOOLS_INDEX</code>.</p>
 <p>Mettez à jour l'appel dans <code>genomics.nf</code> :</p>
@@ -5865,7 +5866,7 @@ Cependant elles encombrent votre sortie console, nous recommandons donc de les s
 </div>
 <p>Enfin, nous devons mettre à jour les cibles de publication pour refléter la nouvelle structure de sortie.</p>
 <h4 id="344-mettre-a-jour-la-cible-de-publication-pour-la-sortie-bam-indexe">3.4.4. Mettre à jour la cible de publication pour la sortie BAM indexé<a class="headerlink" href="#344-mettre-a-jour-la-cible-de-publication-pour-la-sortie-bam-indexe" title="Permanent link">&para;</a></h4>
-<p>Puisque la sortie de SAMTOOLS_INDEX est maintenant un tuple contenant à la fois le fichier BAM et son index, renommez la cible de publication de <code>bam_index</code> en <code>indexed_bam</code> pour mieux refléter son contenu :</p>
+<p>Puisque la sortie de SAMTOOLS_INDEX est maintenant un tuple contenant à la fois le fichier BAM et son index, renommez la cible de publication de <code>bam_index</code> à <code>indexed_bam</code> pour mieux refléter son contenu :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="23:2"><input checked="checked" id="__tabbed_23_1" name="__tabbed_23" type="radio" /><input id="__tabbed_23_2" name="__tabbed_23" type="radio" /><div class="tabbed-labels"><label for="__tabbed_23_1">Après</label><label for="__tabbed_23_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5947,7 +5948,7 @@ Cependant elles encombrent votre sortie console, nous recommandons donc de les s
 <p>Exécutez à nouveau le workflow pour vous assurer que cela fonctionnera de manière fiable à l'avenir.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
-<p>Cette fois (et à chaque fois) tout devrait fonctionner correctement :</p>
+<p>Cette fois (et à chaque fois) tout devrait s'exécuter correctement :</p>
 <details class="success">
 <summary>Sortie de la commande</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
@@ -5980,8 +5981,8 @@ Cependant elles encombrent votre sortie console, nous recommandons donc de les s
 </code></pre></div>
 </details>
 <p>En regroupant les fichiers associés dans des tuples, nous avons assuré que les bons fichiers voyagent toujours ensemble à travers le workflow.
-Le workflow traite maintenant un nombre quelconque d'échantillons de manière fiable, mais les lister individuellement dans la configuration n'est pas très évolutif.
-Dans la prochaine étape, nous passerons à la lecture des entrées depuis un fichier.</p>
+Le workflow traite maintenant n'importe quel nombre d'échantillons de manière fiable, mais les lister individuellement dans la configuration n'est pas très évolutif.
+Dans la prochaine étape, nous passerons à la lecture des entrées à partir d'un fichier.</p>
 <h3 id="a-retenir_2">À retenir<a class="headerlink" href="#a-retenir_2" title="Permanent link">&para;</a></h3>
 <p>Vous savez comment faire en sorte que votre workflow s'exécute sur plusieurs échantillons (indépendamment).</p>
 <h3 id="et-ensuite_2">Et ensuite ?<a class="headerlink" href="#et-ensuite_2" title="Permanent link">&para;</a></h3>
@@ -5989,7 +5990,7 @@ Dans la prochaine étape, nous passerons à la lecture des entrées depuis un fi
 <hr />
 <h2 id="4-faire-en-sorte-que-le-workflow-accepte-un-fichier-texte-contenant-un-lot-de-fichiers-dentree">4. Faire en sorte que le workflow accepte un fichier texte contenant un lot de fichiers d'entrée<a class="headerlink" href="#4-faire-en-sorte-que-le-workflow-accepte-un-fichier-texte-contenant-un-lot-de-fichiers-dentree" title="Permanent link">&para;</a></h2>
 <p>Une façon très courante de fournir plusieurs fichiers de données d'entrée à un workflow est de le faire avec un fichier texte contenant les chemins de fichiers.
-Cela peut être aussi simple qu'un fichier texte listant un chemin de fichier par ligne et rien d'autre, ou le fichier peut contenir des métadonnées supplémentaires, auquel cas on l'appelle souvent un samplesheet.</p>
+Il peut être aussi simple qu'un fichier texte listant un chemin de fichier par ligne et rien d'autre, ou le fichier peut contenir des métadonnées supplémentaires, auquel cas il est souvent appelé une feuille d'échantillons (samplesheet).</p>
 <p>Ici nous allons vous montrer comment faire le cas simple.</p>
 <h3 id="41-examiner-le-fichier-texte-fourni-listant-les-chemins-de-fichiers-dentree">4.1. Examiner le fichier texte fourni listant les chemins de fichiers d'entrée<a class="headerlink" href="#41-examiner-le-fichier-texte-fourni-listant-les-chemins-de-fichiers-dentree" title="Permanent link">&para;</a></h3>
 <p>Nous avons déjà créé un fichier texte listant les chemins de fichiers d'entrée, appelé <code>sample_bams.txt</code>, que vous pouvez trouver dans le répertoire <code>data/</code>.</p>
@@ -6000,23 +6001,23 @@ Cela peut être aussi simple qu'un fichier texte listant un chemin de fichier pa
 <p>Comme vous pouvez le voir, nous avons listé un chemin de fichier par ligne, et ce sont des chemins absolus.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Les fichiers que nous utilisons ici se trouvent simplement sur le système de fichiers local de votre GitHub Codespaces, mais nous pourrions également pointer vers des fichiers dans le stockage cloud.
+<p>Les fichiers que nous utilisons ici sont simplement sur le système de fichiers local de votre GitHub Codespaces, mais nous pourrions également pointer vers des fichiers dans le stockage cloud.
 Si vous n'utilisez pas l'environnement Codespaces fourni, vous devrez peut-être adapter les chemins de fichiers pour correspondre à votre configuration locale.</p>
 </div>
 <h3 id="42-mettre-a-jour-le-parametre-et-le-profil-de-test">4.2. Mettre à jour le paramètre et le profil de test<a class="headerlink" href="#42-mettre-a-jour-le-parametre-et-le-profil-de-test" title="Permanent link">&para;</a></h3>
-<p>Changez le paramètre <code>reads_bam</code> pour qu'il pointe vers le fichier <code>sample_bams.txt</code> au lieu de lister les échantillons individuels.</p>
+<p>Changez le paramètre <code>reads_bam</code> pour pointer vers le fichier <code>sample_bams.txt</code> au lieu de lister les échantillons individuels.</p>
 <p>Restaurez l'annotation de type dans le bloc params (puisque c'est à nouveau un seul chemin) :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="24:2"><input checked="checked" id="__tabbed_24_1" name="__tabbed_24" type="radio" /><input id="__tabbed_24_2" name="__tabbed_24" type="radio" /><div class="tabbed-labels"><label for="__tabbed_24_1">Après</label><label for="__tabbed_24_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-10">10</a></span>
-<span class="normal"><a href="#__codelineno-67-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-67-10" name="__codelineno-67-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Primary input (file of input files, one per line)</span>
+<span class="normal"><a href="#__codelineno-67-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-67-10" name="__codelineno-67-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Entrée principale (fichier de fichiers d&#39;entrée, un par ligne)</span>
 </span><a id="__codelineno-67-11" name="__codelineno-67-11"></a><span class="hll"><span class="w">    </span><span class="nl">reads_bam:</span><span class="w"> </span><span class="n">Path</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-10">10</a></span>
-<span class="normal"><a href="#__codelineno-68-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-68-10" name="__codelineno-68-10"></a><span class="w">    </span><span class="c1">// Primary input (array of three samples)</span>
+<span class="normal"><a href="#__codelineno-68-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-68-10" name="__codelineno-68-10"></a><span class="w">    </span><span class="c1">// Entrée principale (tableau de trois échantillons)</span>
 <a id="__codelineno-68-11" name="__codelineno-68-11"></a><span class="w">    </span><span class="n">reads_bam</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -6069,16 +6070,16 @@ Si vous n'utilisez pas l'environnement Codespaces fourni, vous devrez peut-être
 </div>
 <p>La liste des fichiers ne vit plus du tout dans le code, ce qui est un grand pas dans la bonne direction.</p>
 <h3 id="43-mettre-a-jour-la-fabrique-de-canaux-pour-lire-les-lignes-dun-fichier">4.3. Mettre à jour la fabrique de canaux pour lire les lignes d'un fichier<a class="headerlink" href="#43-mettre-a-jour-la-fabrique-de-canaux-pour-lire-les-lignes-dun-fichier" title="Permanent link">&para;</a></h3>
-<p>Actuellement, notre fabrique de canal d'entrée traite tous les fichiers que nous lui donnons comme les données d'entrée que nous voulons fournir au processus d'indexation.
-Puisque nous lui donnons maintenant un fichier qui liste les chemins de fichiers d'entrée, nous devons changer son comportement pour analyser le fichier et traiter les chemins de fichiers qu'il contient comme les données d'entrée.</p>
-<p>Nous pouvons faire cela en utilisant le même motif que nous avons utilisé dans la <a href="../../../hello_nextflow/02_hello_channels/#42-use-the-splitcsv-operator-to-parse-the-file">Partie 2 de Hello Nextflow</a> : appliquer l'opérateur <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a> pour analyser le fichier, puis une opération <code>map</code> pour sélectionner le premier champ de chaque ligne.</p>
+<p>Actuellement, notre fabrique de canaux d'entrée traite tous les fichiers que nous lui donnons comme les entrées de données que nous voulons alimenter au processus d'indexation.
+Puisque nous lui donnons maintenant un fichier qui liste les chemins de fichiers d'entrée, nous devons changer son comportement pour analyser le fichier et traiter les chemins de fichiers qu'il contient comme les entrées de données.</p>
+<p>Nous pouvons faire cela en utilisant le même modèle que nous avons utilisé dans la <a href="../../../hello_nextflow/02_hello_channels/#42-use-the-splitcsv-operator-to-parse-the-file">Partie 2 de Hello Nextflow</a> : appliquer l'opérateur <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a> pour analyser le fichier, puis une opération <code>map</code> pour sélectionner le premier champ de chaque ligne.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="26:2"><input checked="checked" id="__tabbed_26_1" name="__tabbed_26" type="radio" /><input id="__tabbed_26_2" name="__tabbed_26" type="radio" /><div class="tabbed-labels"><label for="__tabbed_26_1">Après</label><label for="__tabbed_26_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-24">24</a></span>
 <span class="normal"><a href="#__codelineno-71-25">25</a></span>
 <span class="normal"><a href="#__codelineno-71-26">26</a></span>
-<span class="normal"><a href="#__codelineno-71-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-71-24" name="__codelineno-71-24"></a><span class="hll"><span class="w">    </span><span class="c1">// Create input channel from a CSV file listing input file paths</span>
+<span class="normal"><a href="#__codelineno-71-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-71-24" name="__codelineno-71-24"></a><span class="hll"><span class="w">    </span><span class="c1">// Créer le canal d&#39;entrée à partir d&#39;un fichier CSV listant les chemins de fichiers d&#39;entrée</span>
 </span><a id="__codelineno-71-25" name="__codelineno-71-25"></a><span class="hll"><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
 </span><a id="__codelineno-71-26" name="__codelineno-71-26"></a><span class="hll"><span class="w">            </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
 </span><a id="__codelineno-71-27" name="__codelineno-71-27"></a><span class="hll"><span class="w">            </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">])</span><span class="w"> </span><span class="o">}</span>
@@ -6086,16 +6087,16 @@ Puisque nous lui donnons maintenant un fichier qui liste les chemins de fichiers
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">genomics.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-24">24</a></span>
-<span class="normal"><a href="#__codelineno-72-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-72-24" name="__codelineno-72-24"></a><span class="w">    </span><span class="c1">// Create input channel (single file via CLI parameter)</span>
+<span class="normal"><a href="#__codelineno-72-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-72-24" name="__codelineno-72-24"></a><span class="w">    </span><span class="c1">// Créer le canal d&#39;entrée (fichier unique via paramètre CLI)</span>
 <a id="__codelineno-72-25" name="__codelineno-72-25"></a><span class="w">    </span><span class="n">reads_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads_bam</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <p>Techniquement nous pourrions faire cela plus simplement en utilisant l'opérateur <a href="https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext"><code>.splitText()</code></a>, puisque notre fichier d'entrée ne contient actuellement que des chemins de fichiers.
-Cependant, en utilisant l'opérateur <code>splitCsv</code> plus polyvalent (complété par <code>map</code>), nous pouvons rendre notre workflow résistant au futur au cas où nous décidions d'ajouter des métadonnées au fichier contenant les chemins de fichiers.</p>
+Cependant, en utilisant l'opérateur plus polyvalent <code>splitCsv</code> (complété par <code>map</code>), nous pouvons rendre notre workflow pérenne au cas où nous déciderions d'ajouter des métadonnées au fichier contenant les chemins de fichiers.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Astuce</p>
 <p>Si vous n'êtes pas sûr·e de comprendre ce que font les opérateurs ici, c'est une autre excellente occasion d'utiliser l'opérateur <code>.view()</code> pour voir à quoi ressemble le contenu du canal avant et après leur application.</p>
 </div>
 <h3 id="44-executer-le-workflow">4.4. Exécuter le workflow<a class="headerlink" href="#44-executer-le-workflow" title="Permanent link">&para;</a></h3>
@@ -6112,14 +6113,14 @@ Cependant, en utilisant l'opérateur <code>splitCsv</code> plus polyvalent (comp
 <a id="__codelineno-74-6" name="__codelineno-74-6" href="#__codelineno-74-6"></a><span class="go">[12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔</span>
 </code></pre></div>
 </details>
-<p>Oui ! En fait, Nextflow détecte correctement que les appels de processus sont exactement les mêmes, et ne se donne même pas la peine de tout ré-exécuter, puisque nous exécutions avec <code>-resume</code>.</p>
-<p>Et c'est tout ! Notre workflow simple d'appel de variants a toutes les fonctionnalités de base que nous voulions.</p>
+<p>Oui ! En fait, Nextflow détecte correctement que les appels de processus sont exactement les mêmes, et ne se donne même pas la peine de tout réexécuter, puisque nous exécutions avec <code>-resume</code>.</p>
+<p>Et c'est tout ! Notre simple workflow d'appel de variants a toutes les fonctionnalités de base que nous voulions.</p>
 <h3 id="a-retenir_3">À retenir<a class="headerlink" href="#a-retenir_3" title="Permanent link">&para;</a></h3>
-<p>Vous savez comment créer un workflow modulaire multi-étapes pour indexer un fichier BAM et appliquer l'appel de variants par échantillon en utilisant GATK.</p>
-<p>Plus généralement, vous avez appris à utiliser des composants et une logique Nextflow essentiels pour construire un pipeline génomique simple qui fait un vrai travail, en tenant compte des idiosyncrasies des formats de fichiers génomiques et des exigences des outils.</p>
+<p>Vous savez comment créer un workflow modulaire en plusieurs étapes pour indexer un fichier BAM et appliquer l'appel de variants par échantillon en utilisant GATK.</p>
+<p>Plus généralement, vous avez appris à utiliser les composants et la logique essentiels de Nextflow pour construire un pipeline génomique simple qui effectue un véritable travail, en tenant compte des particularités des formats de fichiers génomiques et des exigences des outils.</p>
 <h3 id="et-ensuite_3">Et ensuite ?<a class="headerlink" href="#et-ensuite_3" title="Permanent link">&para;</a></h3>
 <p>Célébrez votre succès et prenez une pause extra longue !</p>
-<p>Dans la prochaine partie de ce cours, vous apprendrez comment transformer ce workflow simple d'appel de variants par échantillon pour appliquer l'appel de variants conjoint aux données.</p><style type="text/css">.quiz {
+<p>Dans la prochaine partie de ce cours, vous apprendrez comment transformer ce simple workflow d'appel de variants par échantillon pour appliquer l'appel de variants conjoint aux données.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

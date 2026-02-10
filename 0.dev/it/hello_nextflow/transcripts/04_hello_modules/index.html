@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Pattern di scripting essenziali
+    Pattern di Scripting Essenziali in Nextflow
   
 
     
@@ -2993,10 +2993,10 @@
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#1-creare-una-directory-per-conservare-i-moduli" class="md-nav__link">
+  <a href="#1-creare-una-directory-per-memorizzare-i-moduli" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Creare una directory per conservare i moduli
+        1. Creare una directory per memorizzare i moduli
       
     </span>
   </a>
@@ -3305,7 +3305,7 @@
  
 
 <h1 id="parte-4-hello-modules-trascrizione-video">Parte 4: Hello Modules - Trascrizione Video<a class="headerlink" href="#parte-4-hello-modules-trascrizione-video" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduzione assistita da IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">per saperne di più e suggerire miglioramenti</a></span></p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduzione assistita da IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">scopri di più e suggerisci miglioramenti</a></span></p>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -3313,44 +3313,44 @@
 <div class="admonition note">
 <p class="admonition-title">Note importanti</p>
 <p>Questa pagina mostra solo la trascrizione. Per le istruzioni complete passo dopo passo, tornate al <a href="../../04_hello_modules/">materiale del corso</a>.</p>
-<p>I numeri delle sezioni mostrati nella trascrizione sono forniti solo a scopo indicativo e potrebbero non includere tutti i numeri di sezione presenti nei materiali.</p>
+<p>I numeri di sezione mostrati nella trascrizione sono forniti solo a scopo indicativo e potrebbero non includere tutti i numeri di sezione presenti nei materiali.</p>
 </div>
 <h2 id="benvenuti">Benvenuti<a class="headerlink" href="#benvenuti" title="Permanent link">&para;</a></h2>
-<p>Ciao e bentornati alla parte quattro di Hello Nextflow. Questa sezione è tutta sui moduli, ed è una sezione abbastanza breve del corso. Non scriveremo in realtà molto codice, si tratta più di come organizziamo il codice nella nostra pipeline.</p>
-<p>Fino ad ora, abbiamo messo tutto in un singolo file, il che va bene, ed è in realtà come costruivamo le pipeline Nextflow ai vecchi tempi.</p>
-<p>Ma man mano che la pipeline cresce, lo script diventa sempre più lungo e sempre più difficile da navigare, da mantenere, e significa anche che non possiamo davvero condividere nessuno del codice.</p>
-<p>I moduli Nextflow ci permettono di estrarre i processi da quello script principale e poi importarli. Questo significa che il codice è più facile da navigare e significa anche che possiamo condividere quel codice del modulo tra diverse pipeline.</p>
-<p>Questo piccolo diagramma sulla pagina principale della documentazione mostra bene il concetto. Invece di un unico script enorme, includeremo questi file di modulo separati, da diversi script di modulo, e tutto verrà inserito nel flusso di lavoro, ma continuerà ad essere eseguito esattamente nello stesso modo.</p>
-<p>Quindi tuffiamoci in GitHub Codespaces e diamo un'occhiata in giro. Come prima, ho ripulito un po' il mio workspace qui. Ho rimosso le vecchie directory Nextflow e la directory di lavoro e così via. Ma non importa se avete ancora quei file in giro.</p>
-<p>Inizierò a lavorare nel file hello modules, che è fondamentalmente dove l'abbiamo lasciato alla fine del capitolo precedente. Abbiamo i nostri tre processi qui dentro. Abbiamo un paio di parametri, il blocco workflow, dove eseguiamo quei tre processi e li uniamo insieme con i canali. Poi pubblichiamo i canali di output e abbiamo il blocco output che dice come pubblicare quei file.</p>
-<h2 id="1-creare-una-directory-per-conservare-i-moduli">1. Creare una directory per conservare i moduli<a class="headerlink" href="#1-creare-una-directory-per-conservare-i-moduli" title="Permanent link">&para;</a></h2>
-<p>Ora, come ho detto, non scriveremo o modificheremo davvero molto codice. Sposteremo semplicemente il codice che abbiamo già. I file di modulo Nextflow tipicamente hanno un singolo processo al loro interno, e per convenzione normalmente li conserviamo in una directory chiamata modules. Ma potete chiamarla come volete. Però terrò una directory modules nel mio repository qui, e poi creerò un file per ogni processo. Quindi dirò nuovo file, sayHello.nf.</p>
+<p>Ciao e bentornati alla parte quattro di Hello Nextflow. Questa sezione è tutta dedicata ai moduli, ed è una sezione piuttosto breve del corso. Non scriveremo molto codice, si tratta più di come organizziamo il codice nella nostra pipeline.</p>
+<p>Fino ad ora, abbiamo messo tutto in un singolo file, il che va bene, ed è in realtà così che costruivamo le pipeline Nextflow ai vecchi tempi.</p>
+<p>Ma man mano che la pipeline cresce, lo script diventa sempre più lungo e sempre più difficile da navigare, da mantenere, e significa anche che non possiamo davvero condividere nessuna parte del codice.</p>
+<p>I moduli Nextflow ci permettono di estrarre i processi da quello script principale e poi importarli. Questo significa che il codice è più facile da navigare e significa anche che possiamo condividere quel codice dei moduli tra diverse pipeline.</p>
+<p>Questo piccolo diagramma sulla pagina principale della documentazione mostra bene il concetto. Invece di un unico enorme script, includeremo questi file di moduli separati, da diversi script di moduli, e tutto verrà inserito nel flusso di lavoro, ma continuerà a funzionare esattamente nello stesso modo.</p>
+<p>Quindi saltiamo in GitHub Codespaces e diamo un'occhiata in giro. Come prima, ho ripulito un po' il mio workspace qui. Ho rimosso le vecchie directory Nextflow e la directory di lavoro e così via. Ma non importa se avete ancora quei file in giro.</p>
+<p>Comincerò a lavorare nel file hello modules, che è fondamentalmente dove l'abbiamo lasciato alla fine del capitolo precedente. Abbiamo i nostri tre processi qui dentro. Abbiamo un paio di parametri, il blocco workflow, dove eseguiamo quei tre processi e li colleghiamo insieme con i canali. Poi pubblichiamo i canali di output e abbiamo il blocco output che dice come pubblicare quei file.</p>
+<h2 id="1-creare-una-directory-per-memorizzare-i-moduli">1. Creare una directory per memorizzare i moduli<a class="headerlink" href="#1-creare-una-directory-per-memorizzare-i-moduli" title="Permanent link">&para;</a></h2>
+<p>Ora, come ho detto, non scriveremo o modificheremo molto codice. Sposteremo semplicemente il codice che abbiamo già. I file dei moduli Nextflow tipicamente hanno un singolo processo al loro interno, e per convenzione normalmente li conserviamo in una directory chiamata modules. Ma potete chiamarla come volete. Ma io manterrò una directory modules nel mio repository qui, e poi creerò un file per ogni processo. Quindi dirò nuovo file, sayHello.nf.</p>
 <h2 id="2-creare-un-modulo-per-sayhello">2. Creare un modulo per sayHello()<a class="headerlink" href="#2-creare-un-modulo-per-sayhello" title="Permanent link">&para;</a></h2>
 <p>Ora prenderò il mio processo e semplicemente selezionerò questo codice, lo taglierò dal file principale hello modules e lo incollerò qui.</p>
-<p>Ovviamente questo non fa niente da solo. Il nostro script principale ha ancora bisogno di quel processo, quindi dobbiamo rimetterlo in qualche modo. E lo facciamo con l'istruzione include.</p>
-<p>Quindi scrivo include e alcune parentesi graffe, e poi prendo il nome del processo. E dico from, e poi gli do un percorso di file relativo. Quindi dice, inizia con ./ perché è relativo da dove è salvato questo script. Quindi è modules sayHello.nf.</p>
-<p>Notate che l'estensione VS Code è piuttosto utile qui. Ci dice, se riesce a trovare questo file e se riesce a trovare un processo, che sto nominando. Se deliberatamente metto un errore di battitura qui, mi dà subito un errore e mi dirà che non riesce a trovare questo processo che sto cercando di importare. Quindi tenete d'occhio eventuali errori che trovate.</p>
+<p>Ovviamente questo non fa nulla da solo. Il nostro script principale ha ancora bisogno di quel processo, quindi dobbiamo riportarlo dentro in qualche modo. E lo facciamo con l'istruzione include.</p>
+<p>Quindi scrivo include e delle parentesi graffe, e poi prendo il nome del processo. E dico from, e poi gli do un percorso di file relativo. Quindi dice, inizia con ./ perché è relativo da dove questo script è salvato. Quindi è modules sayHello.nf.</p>
+<p>Notate che l'estensione VS Code è piuttosto utile qui. Mi dice, se riesce a trovare questo file e se riesce a trovare un processo, che sto nominando. Se metto deliberatamente un errore di battitura qui, mi dà subito un errore e mi dirà che non riesce a trovare questo processo che sto cercando di importare. Quindi tenete d'occhio eventuali errori che trovate.</p>
 <p>E questo è davvero tutto. Abbiamo ancora il nostro processo qui. Non sono necessarie modifiche qui sotto. Il processo ha lo stesso nome ed è eseguito esattamente nello stesso modo. È solo che il codice effettivo del processo è ora in un file separato.</p>
-<p>Possiamo eseguire di nuovo il flusso di lavoro Nextflow, funzionerà esattamente nello stesso modo. E questo è fondamentalmente il resto di questo capitolo del corso, ovvero spostare questi tre processi nei loro file.</p>
+<p>Possiamo eseguire di nuovo il flusso di lavoro Nextflow, funzionerà esattamente nello stesso modo. E questo è fondamentalmente il resto di questo capitolo del corso, spostare questi tre processi nei loro file.</p>
 <p>Quindi facciamolo ora. Creerò rapidamente un nuovo file di modulo per il secondo processo: convertToUpper.nf. Taglierò quel codice, lo incollerò lì. E poi includerò quello. Perfetto.</p>
 <p>E poi creerò un nuovo file per collectGreetings.nf. Taglio quello.</p>
 <p>Un sacco di tagliare, tagliare e copiare e incollare.</p>
-<p>E ora il nostro script principale del flusso di lavoro sembra improvvisamente molto, molto più breve, molto più accessibile e molto più facile da leggere.</p>
-<p>E potete vedere come il progetto ora inizia a costruirsi con i nostri diversi file. Possiamo immergerci nei dettagli nei punti che vogliamo. Navigare più facilmente per trovare passi specifici nella pipeline, e ottenere rapidamente una panoramica di cosa fa la pipeline.</p>
+<p>E ora il nostro script principale del flusso di lavoro sembra improvvisamente molto, molto più corto, molto più accessibile e molto più facile da leggere.</p>
+<p>E potete vedere come il progetto ora inizia a costruirsi con i nostri diversi file. Possiamo immergerci nei dettagli nei punti che vogliamo. Navigare per trovare passaggi specifici nella pipeline molto più facilmente, e ottenere rapidamente una panoramica di ciò che sta facendo la pipeline.</p>
 <h2 id="navigare-i-moduli-con-vs-code">Navigare i moduli con VS Code<a class="headerlink" href="#navigare-i-moduli-con-vs-code" title="Permanent link">&para;</a></h2>
-<p>Ora, ovviamente, il lato negativo di fare questo è che se avete una pipeline grande, avrete molti file di modulo e potrebbero essere organizzati in più sotto-directory o ogni genere di cose. Ora, ancora, un piccolo suggerimento qui. L'estensione VS Code è piuttosto brava a navigare la vostra base di codice per voi e anche a dirvi del codice lì.</p>
-<p>Potete vedere che VS Code capisce cos'è questo processo e mi dà una piccola panoramica di esso quando ci passo sopra, così posso vedere senza dover andare a cercare il codice sorgente, quali sono gli input e gli output, che è tipicamente la cosa più importante quando lo sto usando in un flusso di lavoro.</p>
-<p>E anche se tengo premuto command, sono su un Mac, e clicco il nome del processo, apre il file direttamente subito. Lo porta dentro. Quindi posso semplicemente saltare lì senza nemmeno pensare a quali sono i percorsi dei file effettivi. E questo funziona ovunque, posso farlo anche, dove i processi vengono chiamati. Quindi questo rende davvero veloce.</p>
+<p>Ora, ovviamente, lo svantaggio di fare questo è che se avete una grande pipeline, avrete molti file di moduli e potrebbero essere organizzati in più sottodirectory o ogni genere di cose. Ora, ancora, un piccolo suggerimento qui. L'estensione VS Code è piuttosto brava a navigare la vostra base di codice per voi e anche a dirvi del codice lì.</p>
+<p>Potete vedere che VS Code capisce cos'è questo processo e mi dà una piccola panoramica quando passo sopra, così posso vedere senza dover andare a cercare il codice sorgente, quali sono gli input e gli output, che è tipicamente la cosa più importante quando lo uso in un flusso di lavoro.</p>
+<p>E anche se tengo premuto command, sono su un Mac, e clicco sul nome del processo, apre il file direttamente subito. Lo carica. Quindi posso saltare direttamente lì senza nemmeno pensare a quali siano i percorsi effettivi dei file. E questo funziona ovunque, posso farlo anche dove i processi vengono chiamati. Quindi questo rende davvero veloce.</p>
 <h2 id="44-eseguire-il-flusso-di-lavoro">4.4. Eseguire il flusso di lavoro<a class="headerlink" href="#44-eseguire-il-flusso-di-lavoro" title="Permanent link">&para;</a></h2>
-<p>Okay, controlliamo solo che la pipeline si esegua ancora come ci aspettiamo. Quindi apriamo il terminale. Facciamo "nextflow run hello modules", e vediamo se si esegue senza problemi.</p>
-<p>Si spera che il punto di tutto questo sia che la pipeline è fondamentalmente invariata, quindi non dovreste, davvero vedere alcun cambiamento da quando l'abbiamo eseguita prima. L'output qui sembra esattamente lo stesso, e potete vedere la nostra directory results con tutti gli stessi file, quindi è fantastico. Nessun cambiamento è buono.</p>
+<p>Ok, controlliamo solo che la pipeline funzioni ancora come ci aspettiamo. Quindi apro il terminale. Facciamo "nextflow run hello modules", e vediamo se si esegue senza problemi.</p>
+<p>Si spera che tutto il punto di questo sia che la pipeline è fondamentalmente invariata, quindi non dovreste davvero vedere cambiamenti rispetto a quando l'abbiamo eseguita prima. L'output qui sembra esattamente lo stesso, e potete vedere la nostra directory results con tutti gli stessi file, quindi è fantastico. Nessun cambiamento è buono.</p>
 <h2 id="una-nota-su-nf-coremodules">Una nota su nf-core/modules<a class="headerlink" href="#una-nota-su-nf-coremodules" title="Permanent link">&para;</a></h2>
-<p>Proprio prima di concludere, voglio toccare rapidamente il potere della collaborazione quando si tratta di moduli. Questi file sono seduti nel mio repository, quindi non è ovvio immediatamente come potremmo collaborare su di essi. E ci sono molti modi diversi in cui potete farlo, ma probabilmente l'esempio più grande e più conosciuto di questo è nf-core.</p>
-<p>Se vado sul sito web nf-core, vado su resources, e moduli. Potete vedere che nf-core ha un'enorme libreria di moduli, quasi appena sotto 1700 moduli quando lo visualizzo. E così posso digitare il nome di uno qualsiasi dei miei strumenti preferiti, andare a trovare se qualcun altro ha già scritto un modulo per esso, e vedere questo processo del modulo pre-scritto qui con tutti gli input, gli output, i container software, tutte queste informazioni, e potete vedere sul lato qui, quante diverse pipeline nf-core stanno tutte usando questo singolo processo condiviso.</p>
-<p>Questo è un esempio un po' estremo, ma potete vedere che questo sta davvero riutilizzando questo codice. E se clicco attraverso al sorgente GitHub per questo, è esattamente la stessa cosa di quello che stiamo facendo. È solo un grande processo in un file.</p>
-<p>Ora dal lato nf-core, facciamo alcuni trucchi per essere in grado di condividere quei file e portarli in diversi repository. E se volete sapere di più su questo, andate a dare un'occhiata al corso che abbiamo sull'uso e la costruzione con nf-core specificamente. Ma volevo solo darvi un'idea di quanto possa essere potente questo concetto di riutilizzo del codice.</p>
+<p>Prima di concludere, voglio toccare rapidamente il potere della collaborazione quando si tratta di moduli. Questi file sono nel mio repository, quindi non è ovvio subito come potremmo collaborare su di essi. E ci sono molti modi diversi in cui potete farlo, ma probabilmente l'esempio più grande e più conosciuto di questo è nf-core.</p>
+<p>Se vado sul sito web di nf-core, vado su resources, e modules. Potete vedere che nf-core ha un'enorme libreria di moduli, quasi appena sotto 1700 moduli quando lo visualizzo. E quindi posso digitare il nome di uno qualsiasi dei miei strumenti preferiti, andare a vedere se qualcun altro ha già scritto un modulo per esso, e vedere questo processo di modulo pre-scritto qui con tutti gli input, gli output, i container software, tutte queste informazioni, e potete vedere sul lato qui, quante diverse pipeline nf-core stanno tutte usando questo singolo processo condiviso.</p>
+<p>Questo è un esempio un po' estremo, ma potete vedere che questo sta davvero riutilizzando questo codice. E se clicco attraverso al sorgente GitHub per questo, è esattamente lo stesso di quello che stiamo facendo. È solo un grande processo in un file.</p>
+<p>Ora dal lato nf-core, facciamo alcuni trucchi per essere in grado di condividere quei file e portarli in diversi repository. E se volete saperne di più su questo, andate a dare un'occhiata al corso che abbiamo sull'uso e la costruzione con nf-core specificamente. Ma volevo solo darvi un'idea di quanto possa essere potente questo concetto di riutilizzo del codice.</p>
 <h2 id="conclusione">Conclusione<a class="headerlink" href="#conclusione" title="Permanent link">&para;</a></h2>
-<p>Bene, questo è tutto per i moduli. Vi avevo detto che era una sezione breve del corso. Date un'occhiata al quiz, assicuratevi di capire e assicuratevi che tutto funzioni ancora correttamente. E vi vedrò nel prossimo video, che è tutto sui container software. Grazie mille.</p><style type="text/css">.quiz {
+<p>Bene, questo è tutto per i moduli. Vi avevo detto che era una sezione breve del corso. Date un'occhiata al quiz, assicuratevi di capire e assicuratevi che tutto funzioni ancora correttamente. E ci vediamo nel prossimo video, che è tutto sui container software. Grazie mille.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

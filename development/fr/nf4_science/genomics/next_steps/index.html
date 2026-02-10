@@ -1459,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour la Génomique
+    Nextflow for Genomics
   
 
     
@@ -1475,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow pour la Génomique
+    Nextflow for Genomics
   
 
           </label>
@@ -1495,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour la Génomique
+    Nextflow for Genomics
   
 
     
@@ -1765,10 +1765,10 @@
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#enquete-de-satisfaction" class="md-nav__link">
+  <a href="#questionnaire-de-satisfaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Enquête de satisfaction
+        Questionnaire de satisfaction
       
     </span>
   </a>
@@ -2799,7 +2799,7 @@
   <span class="md-ellipsis">
     
   
-    Modèles de script essentiels
+    Modèles de Script Nextflow Essentiels
   
 
     
@@ -3339,10 +3339,10 @@
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#enquete-de-satisfaction" class="md-nav__link">
+  <a href="#questionnaire-de-satisfaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Enquête de satisfaction
+        Questionnaire de satisfaction
       
     </span>
   </a>
@@ -3606,39 +3606,40 @@
  
 
 <h1 id="resume-du-cours">Résumé du cours<a class="headerlink" href="#resume-du-cours" title="Permanent link">&para;</a></h1>
-<p>Félicitations pour avoir terminé le cours de formation Nextflow pour la Génomique ! 🎉</p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduction assistée par IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">en savoir plus et suggérer des améliorations</a></span></p>
+<p>Félicitations pour avoir terminé le cours de formation Nextflow pour la génomique ! 🎉</p>
 <h2 id="votre-parcours">Votre parcours<a class="headerlink" href="#votre-parcours" title="Permanent link">&para;</a></h2>
 <p>Vous avez commencé par exécuter manuellement des outils d'appel de variants dans le terminal pour comprendre la méthodologie.
-Ensuite, vous avez construit un pipeline Nextflow pour un échantillon unique afin d'automatiser le processus, l'avez étendu pour gérer plusieurs échantillons en parallèle, et avez ajouté le génotypage conjoint multi-échantillons en utilisant des opérateurs de canaux.</p>
+Ensuite, vous avez construit un pipeline Nextflow pour un seul échantillon afin d'automatiser le processus, vous l'avez adapté pour traiter plusieurs échantillons en parallèle, et vous avez ajouté le génotypage conjoint multi-échantillons en utilisant des opérateurs de canaux.</p>
 <h3 id="ce-que-vous-avez-construit">Ce que vous avez construit<a class="headerlink" href="#ce-que-vous-avez-construit" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Un pipeline d'appel de variants qui prend des fichiers BAM en entrée et produit des fichiers VCF appelés conjointement en sortie.</li>
+<li>Un pipeline d'appel de variants qui prend des fichiers BAM en entrée et produit des VCF appelés conjointement en sortie.</li>
 <li>Trois processus (<code>SAMTOOLS_INDEX</code>, <code>GATK_HAPLOTYPECALLER</code> et <code>GATK_JOINTGENOTYPING</code>) stockés dans des fichiers de modules séparés.</li>
 <li>Le pipeline s'adapte automatiquement à n'importe quel nombre d'échantillons en entrée grâce au paradigme de flux de données de Nextflow.</li>
 <li>Les résultats sont publiés dans un répertoire appelé <code>results/</code>.</li>
 </ul>
 <h3 id="competences-acquises">Compétences acquises<a class="headerlink" href="#competences-acquises" title="Permanent link">&para;</a></h3>
-<p>À travers ce cours pratique, vous avez appris à :</p>
+<p>Grâce à ce cours pratique, vous avez appris à :</p>
 <ul>
-<li>Écrire un workflow linéaire pour appliquer l'appel de variants à un échantillon unique</li>
-<li>Gérer correctement les fichiers accessoires tels que les fichiers d'index et les ressources du génome de référence</li>
+<li>Écrire un workflow linéaire pour appliquer l'appel de variants à un seul échantillon</li>
+<li>Gérer de manière appropriée les fichiers accessoires tels que les fichiers d'index et les ressources du génome de référence</li>
 <li>Exploiter le paradigme de flux de données de Nextflow pour paralléliser l'appel de variants par échantillon</li>
-<li>Implémenter l'appel conjoint multi-échantillons en utilisant les opérateurs de canaux appropriés</li>
+<li>Implémenter l'appel conjoint multi-échantillons en utilisant les opérateurs de canaux pertinents</li>
 </ul>
 <p>Vous êtes maintenant équipé·e pour commencer à appliquer Nextflow aux workflows d'analyse génomique dans votre propre travail.</p>
 <h2 id="prochaines-etapes-pour-developper-vos-competences">Prochaines étapes pour développer vos compétences<a class="headerlink" href="#prochaines-etapes-pour-developper-vos-competences" title="Permanent link">&para;</a></h2>
 <p>Voici nos principales suggestions pour la suite :</p>
 <ul>
-<li>Appliquer Nextflow à d'autres cas d'usage d'analyse scientifique avec <a href="../../">Nextflow for Science</a></li>
-<li>Commencer avec nf-core grâce à <a href="../../../hello_nf-core/">Hello nf-core</a></li>
-<li>Explorer des fonctionnalités plus avancées de Nextflow avec les <a href="../../../side_quests/">Quêtes secondaires</a></li>
+<li>Appliquez Nextflow à d'autres cas d'usage d'analyse scientifique avec <a href="../../">Nextflow for Science</a></li>
+<li>Démarrez avec nf-core avec <a href="../../../hello_nf-core/">Hello nf-core</a></li>
+<li>Explorez des fonctionnalités Nextflow plus avancées avec les <a href="../../../side_quests/">Quêtes secondaires</a></li>
 </ul>
 <p>Enfin, nous vous recommandons de découvrir <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>, une plateforme cloud développée par les créateurs de Nextflow qui facilite encore davantage le lancement et la gestion de vos workflows, ainsi que la gestion de vos données et l'exécution d'analyses de manière interactive dans n'importe quel environnement.</p>
 <h2 id="obtenir-de-laide">Obtenir de l'aide<a class="headerlink" href="#obtenir-de-laide" title="Permanent link">&para;</a></h2>
-<p>Pour les ressources d'aide et le soutien de la communauté, consultez la <a href="../../../help/">page d'aide</a>.</p>
-<h2 id="enquete-de-satisfaction">Enquête de satisfaction<a class="headerlink" href="#enquete-de-satisfaction" title="Permanent link">&para;</a></h2>
-<p>Avant de continuer, veuillez prendre une minute pour répondre à l'enquête sur le cours ! Vos retours nous aident à améliorer nos supports de formation pour tous.</p>
-<p><a class="md-button md-button--primary" href="../survey/">Répondre à l'enquête <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
+<p>Pour les ressources d'aide et le support de la communauté, consultez la <a href="../../../help/">page d'aide</a>.</p>
+<h2 id="questionnaire-de-satisfaction">Questionnaire de satisfaction<a class="headerlink" href="#questionnaire-de-satisfaction" title="Permanent link">&para;</a></h2>
+<p>Avant de continuer, veuillez prendre une minute pour compléter le questionnaire du cours ! Vos retours nous aident à améliorer nos supports de formation pour tout le monde.</p>
+<p><a class="md-button md-button--primary" href="../survey/">Répondre au questionnaire <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

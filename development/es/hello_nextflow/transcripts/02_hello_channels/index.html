@@ -1599,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 3: Llamado conjunto de variantes en una cohorte
+    Parte 3: Llamado de variantes conjunto en una cohorte
   
 
     
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Patrones esenciales de scripting
+    Patrones Esenciales de Scripting en Nextflow
   
 
     
@@ -2637,7 +2637,7 @@
   <span class="md-ellipsis">
     
   
-    Architects toolkit 1
+    The Architect's Toolkit I
   
 
     
@@ -3029,28 +3029,28 @@
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#212-ejecutar-el-comando-y-ver-la-salida-del-registro" class="md-nav__link">
+  <a href="#212-ejecutar-el-comando-y-observar-la-salida-del-registro" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.2. Ejecutar el comando y ver la salida del registro
+        2.1.2. Ejecutar el comando y observar la salida del registro
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#213-ejecutar-el-comando-de-nuevo-con-la-opcion-ansi-log-false" class="md-nav__link">
+  <a href="#213-ejecutar-el-comando-nuevamente-con-la-opcion-ansi-log-false" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.3. Ejecutar el comando de nuevo con la opción -ansi-log false
+        2.1.3. Ejecutar el comando nuevamente con la opción -ansi-log false
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#22-asegurar-que-los-nombres-de-archivo-de-salida-seran-unicos" class="md-nav__link">
+  <a href="#22-asegurar-que-los-nombres-de-archivo-de-salida-sean-unicos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Asegurar que los nombres de archivo de salida serán únicos
+        2.2. Asegurar que los nombres de archivo de salida sean únicos
       
     </span>
   </a>
@@ -3386,7 +3386,7 @@
  
 
 <h1 id="parte-2-hello-channels-transcripcion-del-video">Parte 2: Hello Channels - Transcripción del Video<a class="headerlink" href="#parte-2-hello-channels-transcripcion-del-video" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias de mejora</a></span></p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
@@ -3394,140 +3394,141 @@
 <div class="admonition note">
 <p class="admonition-title">Notas importantes</p>
 <p>Esta página muestra únicamente la transcripción. Para instrucciones completas paso a paso, regrese al <a href="../../02_hello_channels/">material del curso</a>.</p>
-<p>Los números de sección mostrados en la transcripción se proporcionan solo con fines indicativos y pueden no incluir todos los números de sección de los materiales.</p>
+<p>Los números de sección mostrados en la transcripción se proporcionan solo con fines indicativos y pueden no incluir todos los números de sección en los materiales.</p>
 </div>
 <h2 id="bienvenida">Bienvenida<a class="headerlink" href="#bienvenida" title="Permanent link">&para;</a></h2>
-<p>Hola y bienvenido/a de vuelta a la Parte 2 de Hello Nextflow. Este capítulo se llama Hello Channels.</p>
-<p>Los canales son como el pegamento en tu pipeline de Nextflow. Son las piezas que mantienen juntos todos los diferentes procesos, que Nextflow usa para pasar toda la información y orquestar tu workflow.</p>
+<p>Hola y bienvenido/a de nuevo a la Parte 2 de Hello Nextflow. Este capítulo se llama Hello Channels.</p>
+<p>Los canales son como el pegamento en tu pipeline de Nextflow. Son las piezas que mantienen unidos todos los diferentes procesos, que Nextflow usa para pasar toda la información y orquestar tu workflow.</p>
 <p>Hay otra parte de los canales que son los operadores. Estos son básicamente funciones que podemos usar en los canales para modificar el contenido. Vamos a sumergirnos en VS Code y ver dónde estamos.</p>
-<p>Tengo mucho zoom en este VS Code, así que para mantener las cosas limpias y ordenadas, he eliminado todos los archivos <em>.nextflow*</em> y el directorio <em>work/</em> y el <em>results/</em> y todo del Capítulo Uno. Y solo estoy comenzando de nuevo aquí. Pero no te preocupes mucho por eso. Si no quieres, puedes dejar esos archivos. No causarán ningún problema.</p>
-<p>Vamos a comenzar trabajando en <em>hello-channels.nf</em> para este capítulo, y si abro esto, debería verse muy similar al archivo en el que estábamos trabajando anteriormente. Puede ser que diferentes partes estén en diferentes lugares del script, pero todo debería ser básicamente lo mismo.</p>
-<p>Una cosa que es diferente es que la ruta en el bloque output aquí ahora es <em>hello_channels</em> para esta parte, lo que significa que los archivos de resultado se almacenarán en un subdirectorio diferente en tus resultados si todavía tienes eso allí. Así que debería ser un lugar agradable y limpio para comenzar sin confundirse con las salidas.</p>
+<p>Estoy muy ampliado en este VS Code, así que para mantener las cosas limpias y ordenadas, he eliminado todos los archivos <em>.nextflow*</em> y el directorio <em>work/</em> y el <em>results/</em> y todo del Capítulo Uno. Y simplemente estoy empezando de cero aquí. Pero no te preocupes demasiado por eso. Si no quieres, puedes dejar esos archivos ahí. No causarán ningún problema.</p>
+<p>Vamos a comenzar trabajando en <em>hello-channels.nf</em> para este capítulo, y si abro esto, debería verse muy similar al archivo en el que estábamos trabajando anteriormente. Puede ser que diferentes partes estén en diferentes partes del script, pero todo debería ser básicamente lo mismo.</p>
+<p>Una cosa que es diferente es que la ruta en el bloque output aquí ahora es <em>hello_channels</em> para esta parte, lo que significa que los archivos de resultado se almacenarán en un subdirectorio diferente en tus resultados si todavía lo tienes ahí. Así que debería ser un lugar agradable y limpio para comenzar sin confundirse con las salidas.</p>
 <p>Bien, entonces recordemos rápidamente qué hace este script cuando ejecutamos este workflow. Hacemos <em>"nextflow run hello-channels.nf"</em>. Podemos hacer <em>"--input myinput"</em>, y cuando ejecutamos esto, va a usar este parámetro, params.input, que se pasó como la variable para el proceso sayHello aquí arriba, que va a greeting y se guarda en output.txt. Y podemos ver eso en el archivo de resultados. Genial.</p>
 <h2 id="1-proporcionar-entradas-variables-a-traves-de-un-canal-explicitamente">1. Proporcionar entradas variables a través de un canal explícitamente<a class="headerlink" href="#1-proporcionar-entradas-variables-a-traves-de-un-canal-explicitamente" title="Permanent link">&para;</a></h2>
-<p>Eso está bien. Pero es bastante simplista. Tenemos una variable en este parámetro, que va a un proceso que se ejecuta una vez, y realmente no escala. Y no podemos darle muchos archivos diferentes para crear aquí. No podemos darle muchos saludos diferentes. Solo tenemos uno.</p>
+<p>Eso es bueno. Pero es bastante simplista. Tenemos una variable en este parámetro, que va a un proceso que se ejecuta una vez, y realmente no escala. Y no podemos darle muchos archivos diferentes para crear aquí. No podemos darle muchos saludos diferentes. Solo tenemos uno.</p>
 <p>En realidad, Nextflow se trata de escalar tu análisis. Así que probablemente quieras que haga más de una cosa. Y hacemos eso con <em>canales</em>.</p>
-<p>Los canales son un concepto único para muchas personas que se inician en Nextflow. Proviene de estos conceptos de programación funcional, y puede tomar un poco de tiempo entenderlo, pero una vez que lo comprendes, realmente desbloquean el poder de Nextflow y es clave para cómo escribes tus workflows.</p>
+<p>Los canales son un concepto un poco único para muchas personas que están aprendiendo Nextflow. Viene de estos conceptos de programación funcional, y puede tomar un poco de tiempo entenderlo, pero una vez que haces clic, realmente desbloquean el poder de Nextflow y es clave para cómo escribes tus workflows.</p>
 <h2 id="11-crear-un-canal-de-entrada">1.1. Crear un canal de entrada<a class="headerlink" href="#11-crear-un-canal-de-entrada" title="Permanent link">&para;</a></h2>
-<p>Comencemos tomando este script y haciendo que use un <em>canal</em> en lugar de solo un <em>param</em>.</p>
-<p>Vamos al workflow, que es donde está toda nuestra lógica de workflow para unir las cosas. Y voy a entrar aquí y voy a crear un nuevo canal.</p>
+<p>Comencemos tomando este script y haciendo que use un <em>canal</em> en lugar de solo un <em>parámetro</em>.</p>
+<p>Vamos al workflow, que es donde está toda nuestra lógica de workflow sobre cómo unir las cosas. Y voy a entrar aquí y voy a crear un nuevo canal.</p>
 <p>Crear un nuevo canal.</p>
-<p>Y voy a llamarlo "<em>greeting_ch"</em>. Esta es una convención de hacer "<em>_ch"</em> así, solo para que puedas recordar que esta variable es un canal. Pero puedes llamarlo como quieras.</p>
+<p>Y lo voy a llamar "<em>greeting_ch"</em>. Esta es la convención de hacer "<em>_ch"</em> así, solo para que puedas recordar que esta variable es un canal. Pero puedes llamarlo como quieras.</p>
 <p>Y luego voy a decir igual, y voy a hacer <em>"channel.of".</em></p>
 <p>Channel es como el espacio de nombres para todo lo relacionado con canales. "c" minúscula si has estado usando Nextflow antes. Y el <em>".of"</em> es algo llamado una fábrica de canales, que es básicamente una forma de crear un canal.</p>
-<p>Hay muchas fábricas de canales diferentes. Si solo hago "." aquí, puedes ver que VS Code está sugiriendo muchos de ellos, pero <em>".of"</em> es el más simple y solo toma una entrada aquí.</p>
-<p>Así que puedo poner unos paréntesis y voy a decir <em>"Hello Channels!"</em>.</p>
-<p>Genial. Tengo un canal. Fantástico. Puedo guardar, podría ejecutarlo de nuevo, pero no va a pasar nada interesante. VS Code me ha dado una línea de advertencia naranja aquí y me ha dicho que esto está configurado: lo has creado, pero nunca lo has usado para nada. Este canal no se está consumiendo.</p>
-<p>Bien, entonces ¿cómo lo usamos? Muy simple. Voy a tomar esto, copiarlo, y voy a eliminar <em>params.input</em> y voy a poner <em>"greeting_ch"</em> aquí en su lugar. Así que vamos a pasar este canal como entrada a sayHello.</p>
-<p>Ten en cuenta que he codificado esta cadena por ahora. Esto es un poco un paso atrás después de nuestro bonito parámetro que usamos al final del último capítulo, pero solo mantiene las cosas simples para comenzar para que puedas ver la lógica.</p>
-<p>Bien, voy a ir a mi terminal y voy a ejecutar el workflow de nuevo. Sin ningún <em>"--input"</em> esta vez, y se va a ejecutar y va a usar ese canal que hemos creado y con suerte deberíamos tener un archivo aquí arriba en <em>results/hello_channels/</em> y ahora dice "Hello Channels!". Fantástico. Eso es lo que esperábamos, de nuestro canal aquí. Genial.</p>
+<p>Hay muchas fábricas de canales diferentes. Si solo hago "." aquí, puedes ver que VS Code está sugiriendo muchas de ellas, pero <em>".of"</em> es la más simple y solo toma una entrada aquí.</p>
+<p>Así que puedo hacer unos paréntesis y voy a decir <em>"Hello Channels!"</em>.</p>
+<p>Genial. Tengo un canal. Fantástico. Puedo guardar, podría ejecutarlo de nuevo, pero nada interesante va a pasar. VS Code me ha dado una línea de advertencia naranja aquí y me ha dicho que esto está configurado: has creado esto, pero nunca lo has usado realmente para nada. Este canal no está siendo consumido.</p>
+<p>Bien, entonces ¿cómo lo usamos? Muy simple. Voy a tomar esto, copiarlo, y voy a eliminar <em>params.input</em> y voy a poner <em>"greeting_ch"</em> aquí en su lugar. Así que vamos a pasar este canal como la entrada a sayHello.</p>
+<p>Ten en cuenta que he codificado esta cadena por ahora. Esto es un poco un paso atrás después de nuestro bonito parámetro que usamos al final del último capítulo, pero simplemente mantiene las cosas simples para empezar para que puedas ver la lógica.</p>
+<p>Bien, voy a ir a mi terminal y voy a ejecutar el workflow de nuevo. Sin ningún <em>"--input"</em> esta vez, y va a ejecutarse y va a usar ese canal que hemos creado y con suerte deberíamos tener un archivo aquí arriba en <em>results/hello_channels/</em> y ahora dice "Hello Channels!". Fantástico. Así que eso es lo que esperábamos de nuestro canal aquí. Genial.</p>
 <h2 id="14-usar-view-para-inspeccionar-el-contenido-del-canal">1.4. Usar view() para inspeccionar el contenido del canal<a class="headerlink" href="#14-usar-view-para-inspeccionar-el-contenido-del-canal" title="Permanent link">&para;</a></h2>
-<p>Una cosa más para agregar aquí, solo una introducción rápida a otra función que podemos usar en los canales llamada "<em>.view"</em>.</p>
-<p>Esto es análogo al comando <em>print</em> en Python u otros lenguajes que podrías conocer, y simplemente vuelca el contenido de este canal a la terminal cuando lo ejecutamos.</p>
+<p>Una cosa más para agregar aquí, solo una introducción rápida a otra función que podemos usar en canales llamada "<em>.view"</em>.</p>
+<p>Esto es análogo al comando <em>print</em> en Python u otros lenguajes que podrías estar acostumbrado, y simplemente vuelca el contenido de este canal a la terminal cuando lo ejecutamos.</p>
 <p>Así que hago "<em>.view"</em>, y luego si vuelvo a ejecutar el workflow, debería imprimir en la terminal cuál es el contenido de ese canal, en el momento en que lo creamos.</p>
 <p>Efectivamente, puedes ver que está impreso en la terminal aquí. <em>"Hello Channels!"</em>.</p>
 <p>Ten en cuenta que puedes dividir estas cosas en líneas si quieres, y de hecho, el formateador automático de Nextflow intentará hacer eso por ti. El espacio en blanco no es realmente importante aquí, así que puedes encadenar estas cosas una tras otra.</p>
 <h2 id="2-modificar-el-workflow-para-ejecutarse-con-multiples-valores-de-entrada">2. Modificar el workflow para ejecutarse con múltiples valores de entrada<a class="headerlink" href="#2-modificar-el-workflow-para-ejecutarse-con-multiples-valores-de-entrada" title="Permanent link">&para;</a></h2>
-<p>Bien, entonces nuestro canal tiene una cosa, lo cual es agradable, pero es básicamente lo mismo que antes. Así que hagámoslo un poco más complicado. Agreguemos algunas cosas más a nuestro canal.</p>
-<p>La fábrica de canales "<em>.of()"</em> puede tomar múltiples elementos, así que escribamos algunos más. Haremos <em>Hello, Bonjour, Hej</em>. Y luego podemos ejecutar este workflow de nuevo y veremos qué sucede.</p>
+<p>Bien, entonces nuestro canal tiene una cosa que es buena, pero es básicamente lo mismo que antes. Así que hagámoslo un poco más complicado. Agreguemos algunas cosas más a nuestro canal.</p>
+<p>La fábrica de canales "<em>.of()"</em> puede tomar múltiples elementos, así que escribamos algunos más. Haremos <em>Hello, Bonjour, Hej</em>. Y luego podemos ejecutar este workflow de nuevo y veremos qué pasa.</p>
 <p>Debería ejecutarse de nuevo. Y ahora hemos impreso. <em>"Hello", "Bonjour"</em> y <em>"Hej"</em> a la terminal con nuestra declaración view. Fantástico.</p>
-<h2 id="212-ejecutar-el-comando-y-ver-la-salida-del-registro">2.1.2. Ejecutar el comando y ver la salida del registro<a class="headerlink" href="#212-ejecutar-el-comando-y-ver-la-salida-del-registro" title="Permanent link">&para;</a></h2>
-<p>Podrías pensar que terminamos en este punto. Pero en realidad hay un problema aquí, que nos va a tropezar. Si miramos nuestro archivo de salida aquí. Puedes ver que tiene <em>"Hello"</em> adentro, pero no tiene ninguna de las otras salidas. De hecho, es solo esta.</p>
+<h2 id="212-ejecutar-el-comando-y-observar-la-salida-del-registro">2.1.2. Ejecutar el comando y observar la salida del registro<a class="headerlink" href="#212-ejecutar-el-comando-y-observar-la-salida-del-registro" title="Permanent link">&para;</a></h2>
+<p>Podrías pensar que hemos terminado en este punto. Pero en realidad hay un pequeño problema aquí, que nos va a hacer tropezar. Si miramos nuestro archivo de salida aquí. Puedes ver que tiene <em>"Hello"</em> adentro, pero no tiene ninguna de las otras salidas. De hecho, es solo este.</p>
 <p>Si ejecutamos este workflow múltiples veces, incluso podríamos ver que a veces tiene <em>"Bonjour"</em>, a veces tiene <em>"Hej"</em>. Es un poco aleatorio.</p>
 <p>Si miramos la terminal, podemos ver que se ejecutó tres veces y podemos ver las diferentes salidas de view. Pero si voy al directorio work, puedo hacer <em>"cat work"</em>. Poner este hash y expandir eso y <em>output.txt</em>. Puedes ver que este archivo en el directorio work es diferente al directorio results, y este es <em>"Hej".</em> Así que hay algo que no está funcionando bien aquí.</p>
-<p>Y la clave es que, tenemos tres tareas que se ejecutaron. La salida de Nextflow intenta resumir eso a medida que avanza el procesamiento, de modo que no se apodere completamente de toda tu terminal, y ese registro ANSI usa códigos de escape ANSI, básicamente ha sobrescrito las otras tareas. Así que solo te muestra la última que pasó a actualizarse.</p>
-<h2 id="213-ejecutar-el-comando-de-nuevo-con-la-opcion-ansi-log-false">2.1.3. Ejecutar el comando de nuevo con la opción -ansi-log false<a class="headerlink" href="#213-ejecutar-el-comando-de-nuevo-con-la-opcion-ansi-log-false" title="Permanent link">&para;</a></h2>
-<p>Hay algunas cosas que podemos hacer para realmente entender esto un poco mejor. Podemos mirar en el directorio work mismo y puedes ver todos los diferentes directorios work allí, pero eso es un poco confuso porque se mezclará con diferentes ejecuciones de Nextflow.</p>
+<p>Y la clave es que tenemos tres tareas que se ejecutaron. La salida de Nextflow intenta resumir eso a medida que avanza el procesamiento, para que no se apodere completamente de toda tu terminal, y ese registro ANSI usa códigos de escape ANSI, básicamente ha sobrescrito las otras tareas. Así que solo te muestra la última que resultó ser actualizada.</p>
+<h2 id="213-ejecutar-el-comando-nuevamente-con-la-opcion-ansi-log-false">2.1.3. Ejecutar el comando nuevamente con la opción -ansi-log false<a class="headerlink" href="#213-ejecutar-el-comando-nuevamente-con-la-opcion-ansi-log-false" title="Permanent link">&para;</a></h2>
+<p>Hay algunas cosas que podemos hacer para entender esto un poco mejor. Podemos mirar en el directorio work mismo y puedes ver todos los diferentes directorios work allí, pero eso es un poco confuso porque se mezclará con diferentes ejecuciones de Nextflow.</p>
 <p>O podemos decirle a Nextflow que no use los códigos de escape ANSI.</p>
-<p>Así que si ejecuto el comando de nuevo, pero esta vez digo <em>"-ansi-log false"</em> para apagarlo, también podría usar las variables de entorno <em>$NO_COLOR</em> o <em>"$NXF_ANSI_LOG=false"</em>. Entonces usa el tipo de estilo de registro de Nextflow más anticuado sin ninguno de estos códigos de escape. Simplemente imprime directamente a una terminal sin actualizaciones inteligentes.</p>
-<p>Y ahora podemos ver los tres de estos procesos que se ejecutaron. Y cada uno de ellos su propio hash de tarea. Y si entramos en estos directorios work, veremos los tres diferentes saludos que especificamos.</p>
+<p>Así que si ejecuto el comando de nuevo, pero esta vez digo <em>"-ansi-log false"</em> para apagarlo, también podría usar las variables de entorno <em>$NO_COLOR</em> o <em>"$NXF_ANSI_LOG=false"</em>. Entonces usa el estilo más antiguo de registro de Nextflow sin ninguno de estos códigos de escape. Simplemente imprime directamente a una terminal sin actualizaciones inteligentes.</p>
+<p>Y ahora podemos ver los tres procesos que se ejecutaron. Y cada uno de ellos su propio hash de tarea. Y si entramos en estos directorios work, veremos los tres saludos diferentes que especificamos.</p>
 <p>Así que eso tiene un poco más de sentido ahora. Con suerte entiendes que Nextflow estaba haciendo esto, solo estaba siendo un poco inteligente con lo que te mostraba en la terminal con esos directorios work.</p>
-<p>Sin embargo, esto se ha corregido para un problema con los directorios work, pero no ha corregido un problema con el archivo de salida. Todavía solo tenemos un archivo de salida que dice <em>"Hello"</em>.</p>
-<h2 id="22-asegurar-que-los-nombres-de-archivo-de-salida-seran-unicos">2.2. Asegurar que los nombres de archivo de salida serán únicos<a class="headerlink" href="#22-asegurar-que-los-nombres-de-archivo-de-salida-seran-unicos" title="Permanent link">&para;</a></h2>
+<p>Sin embargo, esto está arreglado para un problema con los directorios work, pero no ha arreglado un problema con el archivo de salida. Todavía solo tenemos un archivo de salida que dice <em>"Hello"</em>.</p>
+<h2 id="22-asegurar-que-los-nombres-de-archivo-de-salida-sean-unicos">2.2. Asegurar que los nombres de archivo de salida sean únicos<a class="headerlink" href="#22-asegurar-que-los-nombres-de-archivo-de-salida-sean-unicos" title="Permanent link">&para;</a></h2>
 <p>Ahora para entender esto, necesitamos volver a nuestro script de workflow. Estamos generando nuestro canal aquí, lo estamos pasando a nuestro proceso, y si miramos el proceso, estamos escribiendo el saludo en un archivo llamado <em>"output.txt"</em> y pasando ese archivo de salida de vuelta al bloque output aquí abajo, publicándolo.</p>
-<p>Sin embargo, cada tres veces que este proceso ejecuta estas tres tareas diferentes. Todas generan un archivo llamado <em>"output.txt"</em>, todos esos archivos de salida se publican en el directorio results, y todos se sobrescriben entre sí. Así que cualquier archivo de resultado que obtengas allí es solo el último que se generó, pero destruyó todos los demás. Eso no es realmente lo que queremos.</p>
+<p>Sin embargo, cada tres veces que este proceso ejecuta estas tres tareas diferentes. Todas generan un archivo llamado <em>"output.txt"</em>, todos esos archivos de salida se publican en el directorio results, y todos se sobrescriben entre sí. Así que cualquier archivo de resultado que obtengas allí es solo el último que se generó, pero aplastó todos los demás. Eso no es realmente lo que queremos.</p>
 <h2 id="221-construir-un-nombre-de-archivo-de-salida-dinamico">2.2.1. Construir un nombre de archivo de salida dinámico<a class="headerlink" href="#221-construir-un-nombre-de-archivo-de-salida-dinamico" title="Permanent link">&para;</a></h2>
 <p>Hay diferentes formas de manejar esto, pero la más simple por ahora es simplemente crear diferentes nombres de archivo únicos. Así que cada vez que la tarea se ejecute con un saludo diferente, generará un archivo de salida diferente, que ya no chocará cuando se publique. Y entonces obtendremos tres archivos de salida únicos.</p>
 <p>Hacemos esto exactamente de la misma manera. Podemos usar esta variable en cualquier lugar dentro del bloque script y podemos usarla múltiples veces.</p>
-<p>Así que puedo pegarla aquí, <em>"${greeting}_output.txt"</em>, y luego también necesito pegarla aquí arriba porque ya no estamos creando un archivo llamado <em>output.txt</em>. Así que si no actualizo esto, Nextflow fallará con un error diciendo que esperaba un archivo, que nunca fue generado.</p>
-<p>Así que necesito hacer lo mismo allí y necesito usar comillas dobles, no comillas simples, para que esta variable se entienda.</p>
-<p>Bien, probémoslo y veamos si funcionó. Vamos a ejecutar el workflow de nuevo. Con suerte nos mostrará las tres tareas diferentes dentro de los tres directorios work diferentes. Y efectivamente, puedes ver aquí arriba en la carpeta results aquí a la izquierda. Ahora tenemos tres archivos diferentes con tres nombres de archivo diferentes y cada uno con el contenido diferente que esperamos. Así que los archivos ya no se están sobrescribiendo entre sí, y todo está ahí como esperamos.</p>
+<p>Así que puedo pegarlo aquí, <em>"${greeting}_output.txt"</em>, y luego también necesito pegarlo aquí arriba porque ya no estamos creando un archivo llamado <em>output.txt</em>. Así que si no actualizo esto, Nextflow fallará con un error diciendo que esperaba un archivo, que nunca se generó.</p>
+<p>Así que necesito hacer lo mismo allí y necesito usar comillas dobles, no comillas simples, para que esta variable sea entendida.</p>
+<p>Bien, probémoslo y veamos si funcionó. Vamos a ejecutar el workflow de nuevo. Con suerte nos mostrará las tres tareas diferentes dentro de los tres directorios work diferentes. Y efectivamente, puedes ver aquí arriba en la carpeta results aquí a la izquierda. Ahora tenemos tres archivos diferentes con tres nombres de archivo diferentes y cada uno con el contenido diferente que esperamos. Así que los archivos ya no se están aplastando entre sí, y todo está ahí como esperamos.</p>
 <p>Esta es una configuración un poco trivial por la que hemos pasado aquí, pero subraya algunos de los conceptos clave que necesitas entender sobre cómo funciona la publicación de archivos, y algunas de las cosas en las que podrías caer como trampas. Así que con suerte puedes evitar eso en tus propios workflows.</p>
-<p>También vale la pena señalar que lo que hemos hecho aquí es un poco poco práctico en situaciones de la vida real. Hemos tomado algunos datos de entrada y estamos usando esos datos, pero también estamos nombrando el archivo con esos datos, lo cual no puedes hacer usualmente.</p>
+<p>También vale la pena señalar que lo que hemos hecho aquí es un poco poco práctico en situaciones de la vida real. Hemos tomado algunos datos de entrada y estamos usando esos datos, pero también estamos nombrando el archivo después de esos datos, lo cual generalmente no puedes hacer.</p>
 <p>Así que en pipelines de Nextflow más maduros y reales, a menudo pasarás un objeto meta con todos los metadatos asociados con una muestra dada. Luego puedes crear nombres de archivo dinámicos basados en eso, lo cual es mucho más práctico.</p>
-<p>Si te interesa cómo hacer esto con las mejores prácticas, hay una búsqueda secundaria en <em>training.nextflow.io</em>, que trata específicamente sobre metadatos y mapas meta, así que puedes profundizar allí para más detalles.</p>
+<p>Si estás interesado en cómo hacer esto con las mejores prácticas, hay una misión secundaria en <em>training.nextflow.io</em>, que trata específicamente sobre metadatos y mapas meta, así que puedes profundizar allí para más detalles.</p>
 <h2 id="3-proporcionar-multiples-entradas-a-traves-de-un-array">3. Proporcionar múltiples entradas a través de un array<a class="headerlink" href="#3-proporcionar-multiples-entradas-a-traves-de-un-array" title="Permanent link">&para;</a></h2>
 <p>Bien. A continuación vamos a explorar un poco sobre cómo están estructurados los canales y cómo difieren de otros tipos de estructuras de datos en el lenguaje de codificación. Y voy a pensar un poco sobre cómo podría potencialmente usar un array, que podría ser un concepto familiar si vienes de otros lenguajes.</p>
-<p>¿Puedo usar un array en un canal? Probémoslo. Voy a crear un array, y he copiado esto de la documentación, <em>"greetings_array"</em> y <em>"Hello", "Bonjour"</em> y <em>"Holà"</em>. Y luego voy a poner eso aquí en lugar de mis cadenas codificadas. Así que voy a decir "channel.of" <em>"greetings_array",</em> pasando este array a un canal. Probémoslo.</p>
+<p>¿Puedo usar un array en un canal? Intentémoslo. Voy a crear un array, y he copiado esto de los documentos, <em>"greetings_array"</em> y <em>"Hello", "Bonjour"</em> y <em>"Holà"</em>. Y luego voy a poner eso aquí en lugar de mis cadenas codificadas. Así que voy a decir "channel.of" <em>"greetings_array"</em>, pasando este array a un canal. Intentémoslo.</p>
 <p>Abrir la terminal, y ejecutar el pipeline.</p>
 <p>Bien. Puedes ver que la declaración view aquí imprimió nuestro array como se esperaba, pero luego todo este texto rojo, o no será rojo si todavía tienes <em>"-ansi-log"</em> apagado, pero todo este texto rojo nos está diciendo que algo salió mal.</p>
-<p>Ya no tenemos una marca verde bonita aquí. Tenemos una cruz roja, y si solo hago esto un poco más ancho para que sea más fácil de leer, Nextflow nos está diciendo qué salió mal.</p>
-<p>Así que dividamos esto sección por sección. Dice que el error fue causado por, y luego la razón del error, que son archivos de salida faltantes. Así que básicamente ese bloque output dijo que este archivo debería crearse y no lo fue. A continuación dice que este es el comando que se ejecutó. Así que esto es básicamente el contenido de ese archivo <em>.command.sh</em>. Así es como se veía después de que todas esas variables se pusieron.</p>
-<p>Y puedes ver aquí nuestro comando echo en realidad solo se ha ejecutado una vez y ha usado el array completo, pero en una representación de cadena, lo cual no es realmente lo que queríamos.</p>
+<p>Ya no tenemos una marca verde aquí. Tenemos una cruz roja, y si solo hago esto un poco más ancho para que sea más fácil de leer, Nextflow nos está diciendo qué salió mal.</p>
+<p>Así que desglosemos esto sección por sección. Dice que el error fue causado por, y luego la razón del error, que son archivos de salida faltantes. Así que básicamente ese bloque output dijo que este archivo debería ser creado y no lo fue. A continuación dice que este es el comando que se ejecutó. Así que esto es básicamente el contenido de ese archivo <em>.command.sh</em>. Así es como se veía después de que todas esas variables se pusieran.</p>
+<p>Y puedes ver aquí que nuestro comando echo en realidad solo se ha ejecutado una vez y ha usado el array completo, pero en una representación de cadena, que no es realmente lo que queríamos.</p>
 <p>Y luego el comando salió así, y ese fue el directorio work donde podemos ir y ver los archivos para entender un poco más.</p>
-<p>Bien. Entonces lo que pasó fue. Nextflow simplemente pasó este array completo como un solo elemento de canal al proceso, lo que significó que el proceso solo se ejecutó una vez. Tenía una tarea y no usó los datos en una estructura que esperábamos.</p>
+<p>Bien. Entonces lo que pasó fue que Nextflow simplemente pasó este array completo como un solo elemento de canal al proceso, lo que significó que el proceso solo se ejecutó una vez. Tuvo una tarea y no usó los datos en una estructura que esperábamos.</p>
 <h2 id="32-usar-un-operador-para-transformar-el-contenido-del-canal">3.2. Usar un operador para transformar el contenido del canal<a class="headerlink" href="#32-usar-un-operador-para-transformar-el-contenido-del-canal" title="Permanent link">&para;</a></h2>
-<p>Así que necesitamos hacer algo con este canal primero, antes de que pueda ser usado. Y esto está preparando el escenario para usar operadores, que son funciones especiales que podemos usar en los canales para manipular el contenido del canal.</p>
-<p>En este caso, vamos a usar algo llamado <em>flatten</em>. Que pasamos al final del canal aquí. Así que creamos el canal y luego ejecutamos <em>flatten</em>. Y de nuevo, si paso el cursor sobre él, me muestra la documentación para este comando directamente en VS Code, lo cual es muy útil. También puedes encontrar toda esta documentación en el sitio web de Nextflow, la documentación.</p>
-<p>Podría simplemente ejecutar este código ahora y ver si funciona, pero también es una buena oportunidad para presentar cómo hacer código dinámico dentro de operadores y dentro del código de Nextflow, que se llaman closures.</p>
+<p>Así que necesitamos hacer algo a este canal primero, antes de que pueda ser usado. Y esto está preparando el escenario para usar operadores, que son funciones especiales que podemos usar en canales para manipular el contenido del canal.</p>
+<p>En este caso, vamos a usar algo llamado <em>flatten</em>. Que pasamos al final del canal aquí. Así que creamos el canal y luego ejecutamos <em>flatten</em>. Y de nuevo, si pasamos el cursor sobre él, nos muestra la documentación para este comando directamente en VS Code, lo cual es muy útil. También puedes encontrar todos estos documentos en el sitio web de Nextflow, la documentación.</p>
+<p>Podría simplemente ejecutar este código ahora y ver si funciona, pero también es una buena oportunidad para introducir cómo hacer código dinámico dentro de operadores y dentro del código de Nextflow, que se llaman closures.</p>
 <p>Así que voy a agregar de nuevo un comando view aquí antes de que ejecutemos <em>flatten</em>. Y aquí este tiene estas llaves onduladas, que es el closure dinámico. Y solo hay algo de código arbitrario dentro de aquí que se ejecutará, dentro del contexto de un operador view.</p>
-<p>Aquí, esto dice toma el saludo, que es la entrada del operador view, y eso está aquí. Podría llamar a esto como quisiera, podría llamar a esto <em>"foo"</em> y solo necesito referirme a él como <em>"foo"</em> más tarde. Y luego digo con esto, devuelve esto.</p>
-<p>Y luego establecer devolviendo una cadena que dice antes del flatten para una variable. muy simple.</p>
-<p>Ahora voy a agregar otro exactamente igual, pero voy a decir después <em>flatten</em>.</p>
+<p>Aquí, esto está diciendo toma el saludo, que es la entrada del operador view, y eso está aquí. Podría llamar a esto como quisiera, podría llamar a esto <em>"foo"</em> y solo necesito referirme a él como <em>"foo"</em> más tarde. Y luego digo con esto, devuelve esto.</p>
+<p>Y luego establezco devolviendo una cadena que dice antes del flatten para una variable. muy simple.</p>
+<p>Ahora voy a agregar otro de estos exactamente igual, pero voy a decir después de <em>flatten</em>.</p>
 <p>Así que lo que esto hace, porque esto se ejecuta en secuencia, vas a ver cómo se ve el canal antes de que ejecutemos <em>flatten</em>, y luego de nuevo después de que ejecutemos <em>flatten</em>.</p>
-<p>Y luego este canal greeting todavía se crea, por lo que todavía se va a pasar al proceso. Y con suerte ahora el workflow se ejecutará. Probémoslo.</p>
+<p>Y luego este canal greeting todavía está creado, así que todavía va a ser pasado al proceso. Y con suerte ahora el workflow se ejecutará. Probémoslo.</p>
 <p>Genial. Así que lo primero es que el pipeline no falló esta vez. Tuvimos tres procesos que se ejecutaron correctamente y tenemos una pequeña marca de verificación. Y luego podemos ver que nuestras declaraciones view funcionaron.</p>
-<p>Tenemos antes <em>flatten</em>, que es ese array que vimos antes del fallo, y luego tenemos tres veces el después <em>flatten</em> fue llamado donde tenemos <em>"Hello", "Bonjour",</em> y todos esos otros tres elementos separados en el array, que ahora son como esperábamos, tres elementos separados en el canal.</p>
+<p>Tenemos antes de <em>flatten</em>, que es ese array que vimos antes del fallo, y luego tenemos tres veces el después de <em>flatten</em> fue llamado donde tenemos <em>"Hello", "Bonjour",</em> y todos esos otros tres elementos separados en el array, que ahora son como esperábamos, tres elementos separados en el canal.</p>
 <p>Y puedes ver que el operador <em>view</em> se ejecutó tres veces. Y eso es porque este canal después de <em>flatten</em> ahora tiene tres elementos. Y entonces el operador se llama tres veces.</p>
-<p>Muy rápidamente, solo mencionaría que cuando estaba creando fábricas de canales antes, hice <em>"."</em>, y luego vimos que había muchas formas diferentes de crear canales, y una de ellas se llama "<em>fromList"</em>. Y eso en realidad está específicamente diseñado para hacer esta misma operación. Así que podríamos haber hecho simplemente from list greetings away, y eso funcionará. Es una sintaxis un poco más limpia y agradable. Pero para los propósitos de esta demostración, queríamos hacerlo un poco más paso a paso para que pudieras ver cómo se está manipulando el canal y cómo diferentes operadores pueden cambiar lo que está en el contenido de un canal.</p>
+<p>Muy rápidamente, solo mencionaría que cuando estaba creando fábricas de canales antes, hice <em>"."</em>, y luego vimos que había muchas formas diferentes de crear canales, y una de ellas se llama "<em>fromList"</em>. Y eso está específicamente diseñado para hacer esta misma operación. Así que podríamos haber hecho simplemente from list greetings away, y eso funcionará. Es una sintaxis ligeramente más limpia y agradable. Pero para los propósitos de esta demostración, queríamos hacerlo un poco más paso a paso para que pudieras ver cómo se está manipulando el canal y cómo diferentes operadores pueden cambiar lo que está en el contenido de un canal.</p>
 <h2 id="4-leer-valores-de-entrada-desde-un-archivo-csv">4. Leer valores de entrada desde un archivo CSV<a class="headerlink" href="#4-leer-valores-de-entrada-desde-un-archivo-csv" title="Permanent link">&para;</a></h2>
-<p>Bien, ¿cómo podemos hacer esto un poco más realista? Probablemente no vas a querer estar creando mucho código en tu pipeline de Nextflow con arrays codificados. Probablemente vas a querer tomar los datos desde fuera cuando los lances, y esos datos casi seguramente estarán en archivos.</p>
-<p>Así que lo siguiente que vamos a hacer es que vamos a replicar esto, pero en lugar de tomar los datos de un solo parámetro CLI o de una cadena o array codificados, vamos a tomarlo de un archivo.</p>
-<p>Así que deshagámonos de nuestro greetings away. Y ahora vamos a cambiar esta fábrica de canales de nuevo. Acabo de decir que había un montón para elegir y hay uno llamado <em>".fromPath"</em>. Y voy a decirle que, en este caso, tome <em>params.input</em>, que es volver a nuestra entrada que estábamos usando antes.</p>
+<p>Bien, ¿cómo podemos hacer esto un poco más realista? Probablemente no vas a querer estar creando mucho código en tu pipeline de Nextflow con arrays codificados. Probablemente vas a querer tomar los datos de afuera cuando lances, y esos datos casi seguramente van a estar en archivos.</p>
+<p>Así que lo siguiente que vamos a hacer es que vamos a replicar esto, pero en lugar de tomar los datos de un solo parámetro CLI o de una cadena o array codificado, vamos a tomarlo de un archivo.</p>
+<p>Así que deshagámonos de nuestro greetings away. Y ahora vamos a cambiar esta fábrica de canales de nuevo. Acabo de decir que había un montón para elegir y hay uno llamado <em>".fromPath"</em>. Y voy a decirle que, en este caso, tome <em>params.input</em>, que está volviendo a nuestra entrada que estábamos usando antes.</p>
 <p>Ahora ese parámetro realmente no está listo para ser usado todavía. Todavía estamos diciendo que es una cadena y está codificado aquí con un valor predeterminado, pero podríamos sobrescribir esa cadena. Ahora queremos que esto sea un archivo en su lugar. Así que el tipo es diferente. Ya no es un <em>String</em>. Es un <em>Path</em>.</p>
 <p>Y luego podemos establecer el valor predeterminado si queremos, de nuevo, a un Path. Y si miro en explorar a la izquierda, puedes ver en este repositorio, en este directorio de trabajo, tengo un directorio llamado data. Tengo un archivo allí llamado <em>"greetings.csv".</em></p>
-<p>Así que solo puedo establecer el valor predeterminado aquí a <em>"data/greetings.csv"</em>. Ahora, cuando ejecute este pipeline de nuevo sin ninguna opción de línea de comandos, usará este valor predeterminado. Sabe que es una ruta, así que sabe que debería manejar eso como una ruta y no una cadena.</p>
+<p>Así que puedo simplemente establecer el valor predeterminado aquí a <em>"data/greetings.csv"</em>. Ahora, cuando ejecute este pipeline de nuevo sin ninguna opción de línea de comandos, usará este valor predeterminado. Sabe que es una ruta, así que sabe que debe manejar eso como una ruta y no una cadena.</p>
 <p>Y luego va a pasar eso a una fábrica de canales desde este <em>params.input</em> y crear nuestro canal, que luego va a ser usado en este proceso llamado <em>sayHello</em>. Probémoslo.</p>
 <p>Bien. Falló. No te preocupes. Esto era esperado. Y si estás siguiendo el material de capacitación, verás que también era esperado allí. Veamos qué está pasando aquí.</p>
-<p>Intentó ejecutar el pipeline. Intentó ejecutar el proceso, y tiene un error bastante similar al que vimos antes.</p>
+<p>Ha intentado ejecutar el pipeline. Ha intentado ejecutar el proceso, y tiene un error bastante similar al que vimos antes.</p>
 <p>Aquí dice: intentamos ejecutar <em>echo</em>, pero en lugar de hacer eco del contenido de este archivo CSV, solo hizo eco de la ruta. Y puedes ver que es la ruta absoluta completa aquí a este archivo CSV.</p>
-<p>Y luego, efectivamente, porque intentó escribir eso a esta ruta realmente complicada, realmente no sabía qué hacer. Y estaba fuera del alcance del directorio work del proceso.</p>
-<p>Mencioné al principio que Nextflow encapsula cada tarea ejecutada dentro de un directorio work especial. Y si intentas escribir datos, que están fuera de ese directorio work, Nextflow te detendrá como una precaución de seguridad. Y eso es lo que ha pasado aquí. Intentamos escribir a una ruta absoluta y Nextflow falló y nos lo impidió.</p>
+<p>Y luego, efectivamente, porque intentó escribir eso en esta ruta realmente complicada, realmente no sabía qué hacer. Y estaba fuera del alcance del directorio work del proceso.</p>
+<p>Mencioné al principio que Nextflow encapsula cada tarea ejecutada dentro de un directorio work especial. Y si intentas escribir en datos, que están fuera de ese directorio work, Nextflow te detendrá como precaución de seguridad. Y eso es lo que ha pasado aquí. Intentamos escribir en una ruta absoluta y Nextflow falló y nos impidió.</p>
 <h2 id="42-usar-el-operador-splitcsv-para-analizar-el-archivo">4.2. Usar el operador splitCsv() para analizar el archivo<a class="headerlink" href="#42-usar-el-operador-splitcsv-para-analizar-el-archivo" title="Permanent link">&para;</a></h2>
-<p>Bien, echemos un vistazo a este canal y veamos cómo se ve. Podemos hacer <em>".view",</em> y he copiado esto del sitio web. Así que <em>.view</em>, y tenemos un closure dinámico aquí y decimos un nombre de variable "<em>csv"</em> como entrada. Así que eso es el contenido del canal, y decimos antes de splitCsv, y así es como se ve.</p>
+<p>Bien, echemos un vistazo a este canal y veamos cómo se ve. Podemos hacer <em>".view",</em> y he copiado esto del sitio web. Así que <em>.view</em>, y tenemos un closure dinámico aquí y decimos un nombre de variable "<em>csv"</em> como la entrada. Así que ese es el contenido del canal, y decimos antes de splitCsv, y así es como se ve.</p>
 <p>Si lo ejecuto de nuevo, todavía fallará, pero nos mostrará qué hay dentro de este canal. No es particularmente emocionante. Es esa variable <em>path</em>. Así que puedes ver que es solo una cadena aquí porque se está imprimiendo en una terminal, pero es un objeto <em>path</em>, que contiene la información y metadatos sobre este archivo.</p>
-<p>No queremos pasar los metadatos del archivo a la entrada. Queremos pasar el contenido de ese archivo. Si miramos el archivo <em>greetings.csv</em>, puedes ver aquí que tiene estas diferentes variables aquí. <em>Hello, Bonjour, Holà</em> de nuevo. Y estas son las cosas realmente que queremos pasar a nuestro proceso, no solo el archivo en sí como un solo objeto.</p>
-<p>Así que necesitamos analizar este archivo CSV. Necesitamos desempacarlo, acceder al contenido del archivo CSV, y luego pasar el contenido dentro del canal al proceso.</p>
-<p>Como probablemente puedes decir del mensaje de registro, queremos usar el <em>splitCsv</em>, que es otro operador, otro operador de canal. Así que si hago "<em>dot" "s"</em>, y luego puedes ver que está autosugerido. Oops, <em>splitCsv</em> y algunos paréntesis.</p>
+<p>No queremos pasar los metadatos del archivo a la entrada. Queremos pasar el contenido de ese archivo. Si miramos el archivo <em>greetings.csv</em>, puedes ver aquí que tiene estas diferentes variables aquí. <em>Hello, Bonjour, Holà</em> de nuevo. Y estas son las cosas que realmente queremos estar pasando a nuestro proceso, no solo el archivo en sí como un solo objeto.</p>
+<p>Así que necesitamos analizar este archivo CSV. Necesitamos desempaquetarlo, llegar al contenido del archivo CSV, y luego pasar el contenido dentro del canal al proceso.</p>
+<p>Como probablemente puedas decir por el mensaje de registro, queremos usar el <em>splitCsv</em>, que es otro operador, otro operador de canal. Así que si hago "<em>dot" "s"</em>, y luego puedes ver que está auto sugerido. Ups, <em>splitCsv</em> y algunos paréntesis.</p>
 <p>Y luego después de <em>splitCsv</em>, voy a poner otra declaración <em>view</em> solo para que podamos ver cómo se ve después. Ejecutemos el pipeline y veamos qué tenemos.</p>
-<p>Bien. Todavía falló, pero de una manera nueva y emocionante, lo cual es progreso.</p>
-<p>Esta vez de nuevo, tenemos algún problema con nuestro script, que se ha renderizado. Ahora. Ya no tenemos la ruta final, pero tenemos un array de variables, que se ve mucho como el error que tuvimos antes cuando estábamos pasando un array como una entrada fija.</p>
-<p>Con nuestro registro del operador view, podemos ver antes <em>splitCsv</em> era la ruta. Y efectivamente, después de <em>splitCsv</em>, tenemos tres salidas diferentes y cada una de esas salidas se ve muchísimo como cada una de las filas del archivo <em>greetings.csv</em>, lo cual tiene sentido.</p>
+<p>Bien. Todavía falló, pero de una manera nueva y emocionante, que es progreso.</p>
+<p>Esta vez de nuevo, tenemos algún problema con nuestro script, que ha sido renderizado. Ahora. Ya no tenemos la ruta final, pero tenemos un array de variables, que se parece mucho al error que tuvimos antes cuando estábamos pasando un array como una entrada fija.</p>
+<p>Con nuestro registro del operador view, podemos ver que antes de <em>splitCsv</em> era la ruta. Y efectivamente, después de <em>splitCsv</em>, tenemos tres salidas diferentes y cada una de esas salidas se parece mucho a cada una de las filas del archivo <em>greetings.csv</em>, lo cual tiene sentido.</p>
 <p>Así que lo que ha pasado aquí es que Nextflow ha analizado este archivo CSV dándonos tres objetos, un array para cada línea del archivo CSV. Así que luego tres veces hemos pasado un array de variables al canal en lugar de un solo valor de cadena.</p>
-<p>Bien, entonces la última vez que tuvimos este problema, usamos <em>flatten</em>. Probemos flatten rápidamente. Y veamos qué pasa.</p>
-<p>Puedo llamar a estas variables, como sea. Así que voy a llamarlo <em>myarray</em> porque ya no es realmente un CSV. Intentemos ejecutarlo de nuevo y veamos qué pasa con <em>flatten</em>.</p>
-<p>Así que esta vez vamos a ejecutar, analizamos el CSV en tres objetos de array, y luego lo aplanamos. Y esta vez, pasó. Y el pipeline de Nextflow se ejecutó. Sin embargo puedes ver que <em>flatten</em> realmente se pone manos a la obra y aplana todo. Y entonces obtenemos tres entradas de array independientes para cada fila. Y entonces ejecutó el proceso tres veces cada fila de un CSV. Y ahora tenemos un montón de archivos de resultados, y 123, 456, y todo tipo de cosas, no solo esa primera columna del CSV, que es lo que realmente queríamos.</p>
+<p>Bien, entonces la última vez que tuvimos este problema, usamos <em>flatten</em>. Intentemos muy rápidamente. Probar flatten y ver qué pasa.</p>
+<p>Puedo llamar a estas variables como sea. Así que voy a llamarlo <em>myarray</em> porque ya no es realmente un CSV. Intentemos ejecutarlo de nuevo y veamos qué pasa con <em>flatten</em>.</p>
+<p>Así que esta vez vamos a ejecutar, analizamos el CSV en tres objetos de array, y luego lo aplanamos. Y esta vez, pasó. Y el pipeline de Nextflow se ejecutó. Sin embargo, puedes ver que <em>flatten</em> realmente se pone serio y aplana todo. Y entonces obtenemos tres entradas de array independientes para cada fila. Y entonces ejecutó el proceso tres veces cada fila de un CSV. Y ahora tenemos un montón de archivos de resultados, y 123, 456, y todo tipo de cosas, no solo esa primera columna del CSV, que es lo que realmente queríamos.</p>
 <h2 id="43-usar-el-operador-map-para-extraer-los-saludos">4.3. Usar el operador map() para extraer los saludos<a class="headerlink" href="#43-usar-el-operador-map-para-extraer-los-saludos" title="Permanent link">&para;</a></h2>
-<p>Entonces, ¿cómo accedemos solo a la primera columna? Si flatten es demasiado simplista aquí, necesitamos un operador más complejo donde podamos realmente personalizar y decirle lo que queremos del CSV.</p>
-<p>Para hacer eso, vamos a usar <em>map</em>. Básicamente <em>map</em> solo dice, ejecuta algo de código, alguna función sobre cada elemento que me den y haz algún tipo de transformación en él. Y porque es tan flexible, lo verás aparecer en el código de Nextflow todo el tiempo.</p>
-<p>Por sí mismo, no hace nada. Así que no queremos paréntesis regulares, queremos un closure aquí y necesitamos decirle qué hacer. Así que voy a decir <em>"row"</em>, porque se le están dando filas del CSV, así que es un nombre de variable lógico. Es la entrada. Y quiero devolver solo el primer elemento de ese array.</p>
-<p>Los arrays en Nextflow están basados en cero, así que vamos a decir solo el primer elemento, que es fila cero. Si quisiéramos la segunda columna, podría ser uno o la tercera columna ser dos, y así sucesivamente. Podemos devolver lo que queramos aquí, pero voy a devolver solo el primer valor.</p>
+<p>Entonces, ¿cómo llegamos solo a la primera columna? Si flatten es demasiado simplista aquí, necesitamos un operador más complejo donde realmente podamos personalizar y decirle lo que queremos del CSV.</p>
+<p>Para hacer eso, vamos a usar <em>map</em>. Básicamente <em>map</em> solo dice, ejecuta algún código, alguna función sobre cada elemento que me den y haz algún tipo de transformación en él. Y porque es tan flexible, lo verás aparecer en el código de Nextflow todo el tiempo.</p>
+<p>Por sí mismo, no hace nada. Así que no queremos paréntesis regulares, queremos un closure aquí y necesitamos decirle qué hacer. Así que voy a decir <em>"row"</em>, porque eso está recibiendo filas del CSV, así que es un nombre de variable lógico. Es la entrada. Y quiero devolver solo el primer elemento de ese array.</p>
+<p>Los arrays en Nextflow están basados en cero, así que vamos a decir solo el primer elemento, que es la fila cero. Si quisiéramos la segunda columna, podría ser uno o la tercera columna ser dos, y así sucesivamente. Podemos devolver lo que queramos aquí, pero voy a devolver solo el primer valor.</p>
 <p>Y ahora, podemos ejecutar el pipeline de nuevo y ver si hace lo que esperamos.</p>
 <p>Efectivamente, después de <em>splitCsv</em> tenemos nuestros arrays, y luego después del <em>map,</em> tenemos nuestras cadenas limpias y agradables, solo <em>"Hello", "Bonjour"</em> y <em>"Holà"</em>. Y el pipeline ahora está haciendo lo que queremos. Fantástico.</p>
 <p>Así que podemos deshacernos de todos estos comandos view ahora. Ya no los necesitamos.</p>
 <h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
-<p>Terminamos nuestra depuración y este es el código con el que terminamos. Tomando nuestro parámetro CLI llamado <em>input</em>, que está clasificado como un <em>Path</em>. Nextflow encuentra la ruta, la carga y entiende el archivo CSV. Devuelve todas las diferentes filas. Y luego mapeamos solo el primer elemento de esa fila en el canal que nos da el contenido del canal, que se pasa al proceso.</p>
-<p>Y el proceso se ejecuta sobre cada elemento en el canal, que son tres. Y ejecuta el proceso tres veces, dándole tres tareas. Y esos resultados se publican desde el workflow, recogidos por la salida del proceso. Publicados desde un workflow y guardados en el bloque output a un subdirectorio llamado <em>"hello_channels"</em>.</p>
-<p>Muy genial. Ahora estamos llegando a algo que se parece más a un pipeline de Nextflow de la vida real que podrías ejecutar para algún análisis real.</p>
+<p>Terminamos nuestra especie de depuración y este es el código con el que terminamos. Tomando nuestro parámetro CLI llamado <em>input</em>, que está clasificado como un <em>Path</em>. Nextflow encuentra la ruta, la carga y entiende el archivo CSV. Devuelve todas las diferentes filas. Y luego mapeamos solo el primer elemento de esa fila en el canal que nos da el contenido del canal, que se pasa al proceso.</p>
+<p>Y el proceso se ejecuta sobre cada elemento en el canal, que son tres. Y ejecuta el proceso tres veces, dándole tres tareas. Y esos resultados luego se publican desde el workflow, recogidos por la salida del proceso. Publicados desde un workflow y guardados en el bloque output en un subdirectorio llamado <em>"hello_channels"</em>.</p>
+<p>Bastante genial. Ahora estamos llegando a algo que se parece más a un pipeline de Nextflow de la vida real que podrías ejecutar para algún análisis real.</p>
 <h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
-<p>Bien. Con suerte ahora estás teniendo una idea de qué son los canales y operadores de Nextflow y cómo funcionan los operadores en los canales y cómo puedes crearlos.</p>
-<p>Los canales, como dije al principio de este video, son el pegamento de Nextflow. Y puedes ver aquí que podemos tomar diferentes entradas y manipularlas y tomar esos datos y luego pasarlos a la lógica del workflow posterior.</p>
+<p>Bien. Con suerte ahora estás teniendo una idea de qué son los canales y operadores de Nextflow y cómo los operadores trabajan en los canales y cómo puedes crearlos.</p>
+<p>Los canales, como dije al principio de este video, son el pegamento de Nextflow. Y puedes ver aquí que podemos tomar diferentes entradas y manipularlas y tomar esos datos y luego pasarlos a la lógica de workflow descendente.</p>
 <p>Y este bloque workflow aquí es realmente donde construyes toda esa paralelización y toda la lógica inteligente, y explicas a Nextflow cómo construir tu DAG de workflow, y cómo orquestar tu pipeline.</p>
-<p>Los canales no son el concepto más fácil de entender. Así que toma un descanso, piensa un poco sobre esto, tal vez lee el material de nuevo, y realmente asegúrate de que tienes estos conceptos claros porque esto es clave para tu comprensión de Nextflow y cuanto mejor entiendas los canales y los diferentes operadores de canal y las diferentes fábricas de canales. Más divertido tendrás escribiendo Nextflow y más poderosos serán tus pipelines.</p>
-<p>Esto no es lo mismo que la programación regular en Python u otros lenguajes. No estamos usando declaraciones <em>if</em> aquí, esto es programación funcional de flujo usando canales y operadores. Así que es un poco diferente, pero también es súper poderoso.</p>
+<p>Los canales no son el concepto más fácil de entender. Así que toma un descanso, piensa un poco sobre esto, tal vez lee el material de nuevo, y realmente asegúrate de que tienes estos conceptos claros porque esto es clave para tu comprensión de Nextflow y cuanto mejor entiendas los canales y los diferentes operadores de canal y las diferentes fábricas de canales. Más diversión tendrás escribiendo Nextflow y más poderosos serán tus pipelines.</p>
+<p>Esto no es lo mismo que la programación regular en Python u otros lenguajes. No estamos usando declaraciones <em>if</em> aquí, esto es programación de flujo funcional usando canales y operadores. Así que es un poco diferente, pero también es súper poderoso.</p>
 <p>Ese es el final de este capítulo. Ve y toma un descanso rápido y te veré en el próximo video para la parte tres donde vamos a repasar Hello Workflow, y hablar un poco más sobre los workflows.</p>
-<p>Al igual que el capítulo anterior, hay algunas preguntas de prueba en la parte inferior de la página web aquí, así que puedes hacer una repasada rápida de estas y asegurarte de que entiendes todas las diferentes partes del material que acabamos de hacer. Y aparte de eso, te veré en el próximo video. Muchas gracias.</p>
-<p>Bien.</p><style type="text/css">.quiz {
+<p>Al igual que el capítulo anterior, hay algunas preguntas de cuestionario en la parte inferior de la página web aquí, así que puedes hacer una revisión rápida de estas y asegurarte de que entiendes todas las diferentes partes del material que acabamos de hacer. Y aparte de eso, te veré en el próximo video. Muchas gracias.</p>
+<p>Bien.</p>
+<p>​</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

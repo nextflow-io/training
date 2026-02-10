@@ -1599,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 3: Llamado conjunto de variantes en una cohorte
+    Parte 3: Llamado de variantes conjunto en una cohorte
   
 
     
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Patrones esenciales de scripting
+    Patrones Esenciales de Scripting en Nextflow
   
 
     
@@ -2637,7 +2637,7 @@
   <span class="md-ellipsis">
     
   
-    Architects toolkit 1
+    The Architect's Toolkit I
   
 
     
@@ -2984,22 +2984,22 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-hacer-que-la-vaca-cite-cientificos-famosos" class="md-nav__link">
+  <a href="#1-haz-que-la-vaca-cite-cientificos-famosos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Hacer que la vaca cite científicos famosos
+        1. Haz que la vaca cite científicos famosos
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Hacer que la vaca cite científicos famosos">
+    <nav class="md-nav" aria-label="1. Haz que la vaca cite científicos famosos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#11-modificar-el-script-hello-containersnf-para-usar-un-proceso-getquote" class="md-nav__link">
+  <a href="#11-modifica-el-script-hello-containersnf-para-usar-un-proceso-getquote" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1. Modificar el script hello-containers.nf para usar un proceso getQuote
+        1.1. Modifica el script hello-containers.nf para usar un proceso getQuote
       
     </span>
   </a>
@@ -3007,10 +3007,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#12-modificar-su-pipeline-de-nextflow-para-permitir-que-se-ejecute-en-los-modos-quote-y-sayhello" class="md-nav__link">
+  <a href="#12-modifica-tu-pipeline-de-nextflow-para-permitir-que-se-ejecute-en-los-modos-quote-y-sayhello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. Modificar su pipeline de Nextflow para permitir que se ejecute en los modos quote y sayHello.
+        1.2. Modifica tu pipeline de Nextflow para permitir que se ejecute en los modos quote y sayHello.
       
     </span>
   </a>
@@ -3304,9 +3304,9 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
 <p>[TODO]</p>
 <hr />
-<h2 id="1-hacer-que-la-vaca-cite-cientificos-famosos">1. Hacer que la vaca cite científicos famosos<a class="headerlink" href="#1-hacer-que-la-vaca-cite-cientificos-famosos" title="Permanent link">&para;</a></h2>
-<p>Esta sección contiene algunos ejercicios adicionales para practicar lo que ha aprendido hasta ahora.
-Realizar estos ejercicios <em>no es obligatorio</em> para comprender las partes posteriores del entrenamiento, pero proporcionan una forma divertida de reforzar sus aprendizajes al descubrir cómo hacer que la vaca cite científicos famosos.</p>
+<h2 id="1-haz-que-la-vaca-cite-cientificos-famosos">1. Haz que la vaca cite científicos famosos<a class="headerlink" href="#1-haz-que-la-vaca-cite-cientificos-famosos" title="Permanent link">&para;</a></h2>
+<p>Esta sección contiene algunos ejercicios adicionales para practicar lo que has aprendido hasta ahora.
+Realizar estos ejercicios <em>no es obligatorio</em> para comprender las partes posteriores de la capacitación, pero proporcionan una forma divertida de reforzar tu aprendizaje al descubrir cómo hacer que la vaca cite científicos famosos.</p>
 <div class="highlight"><span class="filename">cowsay-output-Grace-Hopper.txt</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">  _________________________________________________</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go"> /                                                 \</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">| Humans are allergic to change. They love to       |</span>
@@ -3324,18 +3324,18 @@ Realizar estos ejercicios <em>no es obligatorio</em> para comprender las partes 
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="go">                                                        ||----w |</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="go">                                                        ||     ||</span>
 </code></pre></div>
-<h3 id="11-modificar-el-script-hello-containersnf-para-usar-un-proceso-getquote">1.1. Modificar el script <code>hello-containers.nf</code> para usar un proceso getQuote<a class="headerlink" href="#11-modificar-el-script-hello-containersnf-para-usar-un-proceso-getquote" title="Permanent link">&para;</a></h3>
-<p>Tenemos una lista de pioneros de la informática y la biología en el archivo <code>containers/data/pioneers.csv</code>.
-A nivel general, para completar este ejercicio necesitará:</p>
+<h3 id="11-modifica-el-script-hello-containersnf-para-usar-un-proceso-getquote">1.1. Modifica el script <code>hello-containers.nf</code> para usar un proceso getQuote<a class="headerlink" href="#11-modifica-el-script-hello-containersnf-para-usar-un-proceso-getquote" title="Permanent link">&para;</a></h3>
+<p>Tenemos una lista de pioneros de la computación y la biología en el archivo <code>containers/data/pioneers.csv</code>.
+A nivel general, para completar este ejercicio necesitarás:</p>
 <ul>
 <li>Modificar el <code>params.input_file</code> predeterminado para que apunte al archivo <code>pioneers.csv</code>.</li>
 <li>Crear un proceso <code>getQuote</code> que use el contenedor <code>quote</code> para obtener una cita para cada entrada.</li>
 <li>Conectar la salida del proceso <code>getQuote</code> al proceso <code>cowsay</code> para mostrar la cita.</li>
 </ul>
-<p>Para la imagen del contenedor <code>quote</code>, puede usar la que construyó usted mismo en el ejercicio adicional anterior o usar la que obtuvo de Seqera Containers.</p>
+<p>Para la imagen de contenedor <code>quote</code>, puedes usar la que construiste tú mismo en el ejercicio adicional anterior o usar la que obtuviste de Seqera Containers.</p>
 <div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>Una buena opción para el bloque <code>script</code> de su proceso getQuote podría ser:
+<p class="admonition-title">Pista</p>
+<p>Una buena opción para el bloque <code>script</code> de tu proceso getQuote podría ser:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nl">script:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
@@ -3344,10 +3344,10 @@ A nivel general, para completar este ejercicio necesitará:</p>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></p>
 </div>
-<p>Puede encontrar una solución a este ejercicio en <code>containers/solutions/hello-containers-4.1.nf</code>.</p>
-<h3 id="12-modificar-su-pipeline-de-nextflow-para-permitir-que-se-ejecute-en-los-modos-quote-y-sayhello">1.2. Modificar su pipeline de Nextflow para permitir que se ejecute en los modos <code>quote</code> y <code>sayHello</code>.<a class="headerlink" href="#12-modificar-su-pipeline-de-nextflow-para-permitir-que-se-ejecute-en-los-modos-quote-y-sayhello" title="Permanent link">&para;</a></h3>
-<p>Agregue algo de lógica de ramificación a su pipeline para permitir que acepte entradas destinadas tanto a <code>quote</code> como a <code>sayHello</code>.
-Aquí hay un ejemplo de cómo usar una sentencia <code>if</code> en un workflow de Nextflow:</p>
+<p>Puedes encontrar una solución a este ejercicio en <code>containers/solutions/hello-containers-4.1.nf</code>.</p>
+<h3 id="12-modifica-tu-pipeline-de-nextflow-para-permitir-que-se-ejecute-en-los-modos-quote-y-sayhello">1.2. Modifica tu pipeline de Nextflow para permitir que se ejecute en los modos <code>quote</code> y <code>sayHello</code>.<a class="headerlink" href="#12-modifica-tu-pipeline-de-nextflow-para-permitir-que-se-ejecute-en-los-modos-quote-y-sayhello" title="Permanent link">&para;</a></h3>
+<p>Agrega algo de lógica de ramificación a tu pipeline para permitir que acepte entradas destinadas tanto a <code>quote</code> como a <code>sayHello</code>.
+Aquí hay un ejemplo de cómo usar una declaración <code>if</code> en un workflow de Nextflow:</p>
 <div class="highlight"><span class="filename">hello-containers.nf</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">quote</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="o">...</span>
@@ -3359,15 +3359,15 @@ Aquí hay un ejemplo de cómo usar una sentencia <code>if</code> en un workflow 
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="o">}</span>
 </code></pre></div>
 <div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>Puede usar <code>new_ch = processName.out</code> para asignar un nombre al canal de salida de un proceso.</p>
+<p class="admonition-title">Pista</p>
+<p>Puedes usar <code>new_ch = processName.out</code> para asignar un nombre al canal de salida de un proceso.</p>
 </div>
-<p>Puede encontrar una solución a este ejercicio en <code>containers/solutions/hello-containers-4.2.nf</code>.</p>
+<p>Puedes encontrar una solución a este ejercicio en <code>containers/solutions/hello-containers-4.2.nf</code>.</p>
 <h3 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
-<p>¡Ahora sabe cómo usar contenedores en Nextflow para ejecutar procesos y cómo construir algo de lógica de ramificación en sus pipelines!</p>
+<p>¡Sabes cómo usar contenedores en Nextflow para ejecutar procesos y cómo construir algo de lógica de ramificación en tus pipelines!</p>
 <h3 id="que-sigue">¿Qué sigue?<a class="headerlink" href="#que-sigue" title="Permanent link">&para;</a></h3>
-<p>¡Celebre, tome un descanso para estirarse y beba algo de agua!</p>
-<p>Cuando esté listo, continúe con la Parte 3 de esta serie de entrenamiento para aprender cómo aplicar lo que ha aprendido hasta ahora a un caso de uso de análisis de datos más realista.</p><style type="text/css">.quiz {
+<p>¡Celebra, toma un descanso para estirarte y bebe algo de agua!</p>
+<p>Cuando estés listo/a, continúa con la Parte 3 de esta serie de capacitación para aprender cómo aplicar lo que has aprendido hasta ahora a un caso de uso de análisis de datos más realista.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

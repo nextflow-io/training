@@ -1451,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow für Genomik
+    Nextflow for Genomics
   
 
     
@@ -1467,7 +1467,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow für Genomik
+    Nextflow for Genomics
   
 
           </label>
@@ -1487,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow für Genomik
+    Nextflow for Genomics
   
 
     
@@ -1571,7 +1571,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Varianten-Calling pro Probe
+    Teil 2: Variantenerkennung pro Probe
   
 
     
@@ -2387,7 +2387,7 @@
   <span class="md-ellipsis">
     
   
-    Verarbeitung von Dateieingaben
+    Datei-Eingabeverarbeitung
   
 
     
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Skriptmuster
+    Grundlegende Nextflow-Scripting-Muster
   
 
     
@@ -3018,10 +3018,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#zusammenfassung" class="md-nav__link">
+  <a href="#fazit" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Zusammenfassung
+        Fazit
       
     </span>
   </a>
@@ -3029,10 +3029,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#was-kommt-als-nachstes" class="md-nav__link">
+  <a href="#wie-geht-es-weiter" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Was kommt als Nächstes?
+        Wie geht es weiter?
       
     </span>
   </a>
@@ -3305,8 +3305,8 @@
 <p>[TODO]</p>
 <hr />
 <h2 id="1-lass-die-kuh-beruhmte-wissenschaftlerinnen-zitieren">1. Lass die Kuh berühmte Wissenschaftler*innen zitieren<a class="headerlink" href="#1-lass-die-kuh-beruhmte-wissenschaftlerinnen-zitieren" title="Permanent link">&para;</a></h2>
-<p>Dieser Abschnitt enthält einige zusätzliche Übungen, um das Gelernte zu vertiefen.
-Diese Übungen sind <em>nicht erforderlich</em>, um spätere Teile des Trainings zu verstehen, bieten aber eine unterhaltsame Möglichkeit, deine Kenntnisse zu festigen, indem du herausfindest, wie du die Kuh berühmte Wissenschaftler*innen zitieren lassen kannst.</p>
+<p>Dieser Abschnitt enthält einige zusätzliche Übungen, um das bisher Gelernte zu üben.
+Diese Übungen sind <em>nicht erforderlich</em>, um spätere Teile des Trainings zu verstehen, bieten aber eine unterhaltsame Möglichkeit, dein Wissen zu festigen, indem du herausfindest, wie du die Kuh berühmte Wissenschaftler*innen zitieren lassen kannst.</p>
 <div class="highlight"><span class="filename">cowsay-output-Grace-Hopper.txt</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">  _________________________________________________</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go"> /                                                 \</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">| Humans are allergic to change. They love to       |</span>
@@ -3325,16 +3325,16 @@ Diese Übungen sind <em>nicht erforderlich</em>, um spätere Teile des Trainings
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="go">                                                        ||     ||</span>
 </code></pre></div>
 <h3 id="11-modifiziere-das-hello-containersnf-skript-um-einen-getquote-prozess-zu-verwenden">1.1. Modifiziere das <code>hello-containers.nf</code>-Skript, um einen getQuote-Prozess zu verwenden<a class="headerlink" href="#11-modifiziere-das-hello-containersnf-skript-um-einen-getquote-prozess-zu-verwenden" title="Permanent link">&para;</a></h3>
-<p>Wir haben eine Liste von Computer- und Biologie-Pionieren in der Datei <code>containers/data/pioneers.csv</code>.
-Auf hoher Ebene musst du für diese Übung:</p>
+<p>Wir haben eine Liste von Computer- und Biologie-Pionier*innen in der Datei <code>containers/data/pioneers.csv</code>.
+Um diese Übung zu lösen, musst du im Wesentlichen:</p>
 <ul>
-<li>Die Standard-<code>params.input_file</code> so ändern, dass sie auf die Datei <code>pioneers.csv</code> zeigt.</li>
+<li>Den Standard-<code>params.input_file</code> so ändern, dass er auf die Datei <code>pioneers.csv</code> zeigt.</li>
 <li>Einen <code>getQuote</code>-Prozess erstellen, der den <code>quote</code>-Container verwendet, um für jede Eingabe ein Zitat abzurufen.</li>
 <li>Die Ausgabe des <code>getQuote</code>-Prozesses mit dem <code>cowsay</code>-Prozess verbinden, um das Zitat anzuzeigen.</li>
 </ul>
 <p>Für das <code>quote</code>-Container-Image kannst du entweder das verwenden, das du selbst in der vorherigen zusätzlichen Übung erstellt hast, oder das von Seqera Containers.</p>
 <div class="admonition hint">
-<p class="admonition-title">Hint</p>
+<p class="admonition-title">Hinweis</p>
 <p>Eine gute Wahl für den <code>script</code>-Block deines getQuote-Prozesses könnte sein:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nl">script:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>
@@ -3344,10 +3344,10 @@ Auf hoher Ebene musst du für diese Übung:</p>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></p>
 </div>
-<p>Du findest eine Lösung für diese Übung in <code>containers/solutions/hello-containers-4.1.nf</code>.</p>
+<p>Eine Lösung zu dieser Übung findest du in <code>containers/solutions/hello-containers-4.1.nf</code>.</p>
 <h3 id="12-modifiziere-deine-nextflow-pipeline-um-sie-in-den-modi-quote-und-sayhello-ausfuhren-zu-konnen">1.2. Modifiziere deine Nextflow-Pipeline, um sie in den Modi <code>quote</code> und <code>sayHello</code> ausführen zu können.<a class="headerlink" href="#12-modifiziere-deine-nextflow-pipeline-um-sie-in-den-modi-quote-und-sayhello-ausfuhren-zu-konnen" title="Permanent link">&para;</a></h3>
-<p>Füge deiner Pipeline etwas Verzweigungslogik hinzu, um Eingaben sowohl für <code>quote</code> als auch für <code>sayHello</code> zu akzeptieren.
-Hier ist ein Beispiel, wie du eine <code>if</code>-Anweisung in einem Nextflow-Workflow verwenden kannst:</p>
+<p>Füge deiner Pipeline eine Verzweigungslogik hinzu, damit sie Eingaben sowohl für <code>quote</code> als auch für <code>sayHello</code> akzeptieren kann.
+Hier ist ein Beispiel, wie du eine <code>if</code>-Anweisung in einem Nextflow-Workflow verwendest:</p>
 <div class="highlight"><span class="filename">hello-containers.nf</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">quote</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="o">...</span>
@@ -3359,15 +3359,15 @@ Hier ist ein Beispiel, wie du eine <code>if</code>-Anweisung in einem Nextflow-W
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="o">}</span>
 </code></pre></div>
 <div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>Du kannst <code>new_ch = processName.out</code> verwenden, um dem Ausgabe-Channel eines Prozesses einen Namen zuzuweisen.</p>
+<p class="admonition-title">Hinweis</p>
+<p>Du kannst <code>new_ch = processName.out</code> verwenden, um dem Ausgabekanal eines Prozesses einen Namen zuzuweisen.</p>
 </div>
-<p>Du findest eine Lösung für diese Übung in <code>containers/solutions/hello-containers-4.2.nf</code>.</p>
-<h3 id="zusammenfassung">Zusammenfassung<a class="headerlink" href="#zusammenfassung" title="Permanent link">&para;</a></h3>
+<p>Eine Lösung zu dieser Übung findest du in <code>containers/solutions/hello-containers-4.2.nf</code>.</p>
+<h3 id="fazit">Fazit<a class="headerlink" href="#fazit" title="Permanent link">&para;</a></h3>
 <p>Du weißt jetzt, wie du Container in Nextflow verwendest, um Prozesse auszuführen, und wie du Verzweigungslogik in deine Pipelines einbaust!</p>
-<h3 id="was-kommt-als-nachstes">Was kommt als Nächstes?<a class="headerlink" href="#was-kommt-als-nachstes" title="Permanent link">&para;</a></h3>
-<p>Feiere, mach eine Pause und trink etwas Wasser!</p>
-<p>Wenn du bereit bist, fahre mit Teil 3 dieser Trainingsreihe fort, um zu lernen, wie du das bisher Gelernte auf einen realistischeren Datenanalyse-Anwendungsfall anwenden kannst.</p><style type="text/css">.quiz {
+<h3 id="wie-geht-es-weiter">Wie geht es weiter?<a class="headerlink" href="#wie-geht-es-weiter" title="Permanent link">&para;</a></h3>
+<p>Feiere deinen Erfolg, mach eine Pause und trink etwas Wasser!</p>
+<p>Wenn du bereit bist, gehe zu Teil 3 dieser Trainingsreihe über, um zu lernen, wie du das bisher Gelernte auf einen realistischeren Datenanalyse-Anwendungsfall anwendest.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

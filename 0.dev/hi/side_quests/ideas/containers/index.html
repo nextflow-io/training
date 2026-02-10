@@ -884,7 +884,7 @@
   <span class="md-ellipsis">
     
   
-    03 hello workflow
+    भाग 3: Hello Workflow
   
 
     
@@ -1599,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    भाग 3: कोहोर्ट पर जॉइंट कॉलिंग
+    भाग 3: कोहोर्ट पर संयुक्त कॉलिंग
   
 
     
@@ -3010,7 +3010,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2. कंटेनर इमेज को स्वयं बनाएं
+        1.2. कंटेनर इमेज को खुद बनाएं
       
     </span>
   </a>
@@ -3021,7 +3021,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -3046,19 +3046,19 @@
   <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. गाय को प्रसिद्ध वैज्ञानिकों का उद्धरण बोलवाएं
+        2. गाय को प्रसिद्ध वैज्ञानिकों को उद्धृत करवाएं
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. गाय को प्रसिद्ध वैज्ञानिकों का उद्धरण बोलवाएं">
+    <nav class="md-nav" aria-label="2. गाय को प्रसिद्ध वैज्ञानिकों को उद्धृत करवाएं">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-getquote-process-hello-containersnf" class="md-nav__link">
+  <a href="#21-hello-containersnf-getquote" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. getQuote process का उपयोग करने के लिए hello-containers.nf स्क्रिप्ट को संशोधित करें
+        2.1. hello-containers.nf स्क्रिप्ट को getQuote प्रोसेस का उपयोग करने के लिए संशोधित करें
       
     </span>
   </a>
@@ -3066,10 +3066,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-nextflow-pipeline-quote-sayhello" class="md-nav__link">
+  <a href="#22-nextflow-quote-sayhello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. अपने Nextflow pipeline को quote और sayHello मोड में निष्पादित होने की अनुमति देने के लिए संशोधित करें।
+        2.2. अपनी Nextflow पाइपलाइन को quote और sayHello मोड में निष्पादित करने की अनुमति देने के लिए संशोधित करें।
       
     </span>
   </a>
@@ -3080,7 +3080,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        निष्कर्ष
+        सारांश
       
     </span>
   </a>
@@ -3364,18 +3364,18 @@
 <p>[TODO]</p>
 <hr />
 <h2 id="1_1">1. कंटेनर इमेज कैसे खोजें या बनाएं<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
-<p>कुछ सॉफ़्टवेयर डेवलपर्स अपने सॉफ़्टवेयर के लिए कंटेनर इमेज प्रदान करते हैं जो Docker Hub जैसे कंटेनर रजिस्ट्री पर उपलब्ध होते हैं, लेकिन कई नहीं करते।
-इस वैकल्पिक अनुभाग में, हम आपको उन टूल्स के लिए कंटेनर इमेज प्राप्त करने के दो तरीके दिखाएंगे जिन्हें आप अपने Nextflow pipelines में उपयोग करना चाहते हैं: Seqera Containers का उपयोग करके और कंटेनर इमेज को स्वयं बनाकर।</p>
-<p>आप <code>quote</code> pip पैकेज के लिए कंटेनर इमेज प्राप्त/निर्माण करेंगे, जिसका उपयोग इस अनुभाग के अंत में अभ्यास में किया जाएगा।</p>
+<p>कुछ सॉफ़्टवेयर डेवलपर अपने सॉफ़्टवेयर के लिए कंटेनर इमेज प्रदान करते हैं जो Docker Hub जैसी कंटेनर रजिस्ट्री पर उपलब्ध होती हैं, लेकिन कई नहीं करते।
+इस वैकल्पिक सेक्शन में, हम तुम्हें दो तरीके दिखाएंगे जिनसे तुम अपनी Nextflow पाइपलाइन में उपयोग करने वाले टूल के लिए कंटेनर इमेज प्राप्त कर सकते हो: Seqera Containers का उपयोग करके और कंटेनर इमेज को खुद बनाकर।</p>
+<p>तुम <code>quote</code> pip पैकेज के लिए कंटेनर इमेज प्राप्त/बना रहे होगे, जिसका उपयोग इस सेक्शन के अंत में अभ्यास में किया जाएगा।</p>
 <h3 id="11-seqera-containers">1.1. Seqera Containers से कंटेनर इमेज प्राप्त करें<a class="headerlink" href="#11-seqera-containers" title="Permanent link">&para;</a></h3>
-<p>Seqera Containers एक मुफ्त सेवा है जो pip और conda (bioconda सहित) इंस्टॉल करने योग्य टूल्स के लिए कंटेनर इमेज बनाती है।
-<a href="https://www.seqera.io/containers/">Seqera Containers</a> पर जाएं और <code>quote</code> pip पैकेज को खोजें।</p>
+<p>Seqera Containers एक मुफ़्त सेवा है जो pip और conda (bioconda सहित) इंस्टॉल करने योग्य टूल के लिए कंटेनर इमेज बनाती है।
+<a href="https://www.seqera.io/containers/">Seqera Containers</a> पर जाओ और <code>quote</code> pip पैकेज को खोजो।</p>
 <p><img alt="Seqera Containers" src="img/seqera-containers-1.png" /></p>
-<p><code>quote</code> pip पैकेज के लिए कंटेनर इमेज का अनुरोध करने के लिए "+Add" और फिर "Get Container" पर क्लिक करें।</p>
+<p><code>quote</code> pip पैकेज के लिए कंटेनर इमेज का अनुरोध करने के लिए "+Add" और फिर "Get Container" पर क्लिक करो।</p>
 <p><img alt="Seqera Containers" src="img/seqera-containers-2.png" /></p>
-<p>यदि यह पहली बार इस पैकेज के इस संस्करण के लिए community कंटेनर बनाया जा रहा है, तो इसे पूरा होने में कुछ मिनट लग सकते हैं।
-आपके लिए बनाई गई कंटेनर इमेज के URI (जैसे <code>community.wave.seqera.io/library/pip_quote:ae07804021465ee9</code>) को कॉपी करने के लिए क्लिक करें।</p>
-<p>अब आप Grace Hopper से एक यादृच्छिक कथन प्राप्त करने के लिए <code>quote</code> कमांड चलाने हेतु कंटेनर इमेज का उपयोग कर सकते हैं।</p>
+<p>यदि यह पहली बार है कि इस पैकेज के इस संस्करण के लिए कम्युनिटी कंटेनर बनाया जा रहा है, तो इसे पूरा होने में कुछ मिनट लग सकते हैं।
+तुम्हारे लिए बनाई गई कंटेनर इमेज की URI (जैसे <code>community.wave.seqera.io/library/pip_quote:ae07804021465ee9</code>) को कॉपी करने के लिए क्लिक करो।</p>
+<p>अब तुम कंटेनर इमेज का उपयोग करके <code>quote</code> कमांड चला सकते हो और Grace Hopper से एक रैंडम कहावत प्राप्त कर सकते हो।</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>community.wave.seqera.io/library/pip_quote:ae07804021465ee9<span class="w"> </span>quote<span class="w"> </span><span class="s2">&quot;Grace Hopper&quot;</span>
 </code></pre></div>
 <p>आउटपुट:</p>
@@ -3383,16 +3383,16 @@
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="go">this way.&#39; I try to fight that. That&#39;s why I have a clock on my wall</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">that runs counter-clockwise.</span>
 </code></pre></div>
-<h3 id="12">1.2. कंटेनर इमेज को स्वयं बनाएं<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>चलिए <code>quote</code> pip पैकेज के लिए कंटेनर इमेज को स्वयं बनाने के लिए Seqera Containers वेबसाइट से कुछ बिल्ड विवरण का उपयोग करें।
-Seqera Containers वेबसाइट पर वापस जाएं और "Build Details" बटन पर क्लिक करें।</p>
-<p>पहला आइटम जिसे हम देखेंगे वह <code>Dockerfile</code> है, एक प्रकार की स्क्रिप्ट फ़ाइल जिसमें कंटेनर इमेज बनाने के लिए आवश्यक सभी कमांड होते हैं।
-हमने नीचे दिए गए Dockerfile में कुछ व्याख्यात्मक टिप्पणियां जोड़ी हैं ताकि आप समझ सकें कि प्रत्येक भाग क्या करता है।</p>
+<h3 id="12">1.2. कंटेनर इमेज को खुद बनाएं<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>चलो Seqera Containers वेबसाइट से कुछ बिल्ड विवरण का उपयोग करके <code>quote</code> pip पैकेज के लिए कंटेनर इमेज को खुद बनाते हैं।
+Seqera Containers वेबसाइट पर वापस जाओ और "Build Details" बटन पर क्लिक करो।</p>
+<p>पहली चीज़ जिसे हम देखेंगे वह <code>Dockerfile</code> है, एक प्रकार की स्क्रिप्ट फ़ाइल जिसमें कंटेनर इमेज बनाने के लिए आवश्यक सभी कमांड होते हैं।
+हमने नीचे दिए गए Dockerfile में कुछ व्याख्यात्मक कमेंट जोड़े हैं ताकि तुम समझ सको कि प्रत्येक भाग क्या करता है।</p>
 <div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># micromamba बेस docker इमेज से शुरू करें</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mambaorg/micromamba:1.5.10-noble</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c"># conda.yml फ़ाइल को कंटेनर में कॉपी करें</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span><span class="nv">$MAMBA_USER</span>:<span class="nv">$MAMBA_USER</span><span class="w"> </span>conda.yml<span class="w"> </span>/tmp/conda.yml
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c"># Nextflow के उपयोग के लिए विभिन्न यूटिलिटीज और conda.yml फ़ाइल में पैकेज इंस्टॉल करें</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c"># Nextflow के उपयोग के लिए विभिन्न यूटिलिटी और conda.yml फ़ाइल में पैकेज इंस्टॉल करें</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">RUN</span><span class="w"> </span>micromamba<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>-f<span class="w"> </span>/tmp/conda.yml<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>conda-forge::procps-ng<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--name<span class="w"> </span>base<span class="w"> </span>--explicit<span class="w"> </span>&gt;<span class="w"> </span>environment.lock<span class="w"> </span><span class="se">\</span>
@@ -3400,12 +3400,12 @@ Seqera Containers वेबसाइट पर वापस जाएं और 
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>cat<span class="w"> </span>environment.lock<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;&lt; CONDA_LOCK_END&quot;</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>clean<span class="w"> </span>-a<span class="w"> </span>-y
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c"># कंटेनर को root उपयोगकर्ता के रूप में चलाएं</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c"># कंटेनर को root यूज़र के रूप में चलाएं</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="k">USER</span><span class="w"> </span><span class="s">root</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c"># PATH वातावरण वेरिएबल को micromamba इंस्टॉलेशन डायरेक्टरी को शामिल करने के लिए सेट करें</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c"># PATH एनवायरनमेंट वेरिएबल को micromamba इंस्टॉलेशन डायरेक्टरी शामिल करने के लिए सेट करें</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MAMBA_ROOT_PREFIX</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
 </code></pre></div>
-<p>दूसरा आइटम जिसे हम देखेंगे वह <code>conda.yml</code> फ़ाइल है, जिसमें कंटेनर इमेज में इंस्टॉल किए जाने वाले पैकेजों की सूची होती है।</p>
+<p>दूसरी चीज़ जिसे हम देखेंगे वह <code>conda.yml</code> फ़ाइल है, जिसमें कंटेनर इमेज में इंस्टॉल किए जाने वाले पैकेज की सूची होती है।</p>
 <div class="highlight"><span class="filename">conda.yml</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>channels:
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>- conda-forge
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>- bioconda
@@ -3414,26 +3414,26 @@ Seqera Containers वेबसाइट पर वापस जाएं और 
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>- pip:
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  - quote==3.0.0 #
 </code></pre></div>
-<p>इन फ़ाइलों की सामग्री को <code>containers/build</code> डायरेक्टरी में स्थित स्टब्स में कॉपी करें, फिर कंटेनर इमेज को स्वयं बनाने के लिए निम्नलिखित कमांड चलाएं।</p>
+<p>इन फ़ाइलों की सामग्री को <code>containers/build</code> डायरेक्टरी में स्थित स्टब में कॉपी करो, फिर कंटेनर इमेज को खुद बनाने के लिए निम्नलिखित कमांड चलाओ।</p>
 <div class="admonition note">
 <p class="admonition-title">नोट</p>
-<p>हम कंटेनर इमेज को <code>quote</code> नाम और <code>latest</code> टैग के साथ टैग करने के लिए <code>-t quote:latest</code> फ्लैग का उपयोग करते हैं।
+<p>हम <code>-t quote:latest</code> फ्लैग का उपयोग करते हैं ताकि कंटेनर इमेज को <code>quote</code> नाम और <code>latest</code> टैग के साथ टैग किया जा सके।
 हम इस सिस्टम पर इसे चलाते समय कंटेनर इमेज को संदर्भित करने के लिए इस टैग का उपयोग कर सकेंगे।</p>
 </div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>quote:latest<span class="w"> </span>containers/build
 </code></pre></div>
-<p>बनने के बाद, आप अभी बनाई गई कंटेनर इमेज को चला सकते हैं।</p>
+<p>बिल्ड पूरा होने के बाद, तुम अभी बनाई गई कंटेनर इमेज को चला सकते हो।</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>quote:latest<span class="w"> </span>quote<span class="w"> </span><span class="s2">&quot;Margaret Oakley Dayhoff&quot;</span>
 </code></pre></div>
-<h3 id="_1">निष्कर्ष<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>आपने अपने Nextflow pipelines में उपयोग करने के लिए किसी टूल के लिए कंटेनर इमेज प्राप्त करने के दो अलग-अलग तरीके सीखे हैं: Seqera Containers का उपयोग करके और कंटेनर इमेज को स्वयं बनाकर।</p>
+<h3 id="_1">सारांश<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>तुमने अपनी Nextflow पाइपलाइन में उपयोग करने वाले टूल के लिए कंटेनर इमेज प्राप्त करने के दो अलग-अलग तरीके सीखे: Seqera Containers का उपयोग करके और कंटेनर इमेज को खुद बनाकर।</p>
 <h3 id="_2">आगे क्या है?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>इस प्रशिक्षण श्रृंखला के <a href="./04_hello_genomics.md">अगले अध्याय</a> में जारी रखने के लिए आपके पास सब कुछ है।
-आप <code>quote</code> कंटेनर का उपयोग करके कंप्यूटर/जीवविज्ञान के अग्रदूतों पर उद्धरण प्राप्त करने और <code>cowsay</code> कंटेनर का उपयोग करके उन्हें आउटपुट करने के लिए एक वैकल्पिक अभ्यास के साथ भी जारी रख सकते हैं।</p>
+<p>तुम्हारे पास इस प्रशिक्षण श्रृंखला के <a href="./04_hello_genomics.md">अगले अध्याय</a> को जारी रखने के लिए आवश्यक सब कुछ है।
+तुम <code>quote</code> कंटेनर का उपयोग करके कंप्यूटर/जीवविज्ञान के अग्रदूतों पर उद्धरण प्राप्त करने और उन्हें <code>cowsay</code> कंटेनर का उपयोग करके आउटपुट करने के लिए एक वैकल्पिक अभ्यास के साथ भी जारी रख सकते हो।</p>
 <hr />
-<h2 id="2">2. गाय को प्रसिद्ध वैज्ञानिकों का उद्धरण बोलवाएं<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>इस अनुभाग में कुछ stretch अभ्यास हैं, जो आपने अब तक सीखा है उसका अभ्यास करने के लिए।
-इन अभ्यासों को करना प्रशिक्षण के बाद के भागों को समझने के लिए <em>आवश्यक नहीं</em> है, लेकिन यह पता लगाकर कि गाय को प्रसिद्ध वैज्ञानिकों का उद्धरण कैसे बोलवाया जाए, आपकी सीख को मजबूत करने का एक मजेदार तरीका प्रदान करते हैं।</p>
+<h2 id="2">2. गाय को प्रसिद्ध वैज्ञानिकों को उद्धृत करवाएं<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>इस सेक्शन में कुछ स्ट्रेच अभ्यास हैं, जो तुमने अब तक जो सीखा है उसका अभ्यास करने के लिए।
+इन अभ्यासों को करना प्रशिक्षण के बाद के भागों को समझने के लिए <em>आवश्यक नहीं</em> है, लेकिन गाय को प्रसिद्ध वैज्ञानिकों को उद्धृत करवाने का तरीका जानने के लिए अपनी सीख को मजबूत करने का एक मज़ेदार तरीका प्रदान करते हैं।</p>
 <div class="highlight"><span class="filename">cowsay-output-Grace-Hopper.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">  _________________________________________________</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go"> /                                                 \</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">| Humans are allergic to change. They love to       |</span>
@@ -3451,18 +3451,18 @@ Seqera Containers वेबसाइट पर वापस जाएं और 
 <a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="go">                                                        ||----w |</span>
 <a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="go">                                                        ||     ||</span>
 </code></pre></div>
-<h3 id="21-getquote-process-hello-containersnf">2.1. getQuote process का उपयोग करने के लिए <code>hello-containers.nf</code> स्क्रिप्ट को संशोधित करें<a class="headerlink" href="#21-getquote-process-hello-containersnf" title="Permanent link">&para;</a></h3>
+<h3 id="21-hello-containersnf-getquote">2.1. <code>hello-containers.nf</code> स्क्रिप्ट को getQuote प्रोसेस का उपयोग करने के लिए संशोधित करें<a class="headerlink" href="#21-hello-containersnf-getquote" title="Permanent link">&para;</a></h3>
 <p>हमारे पास <code>containers/data/pioneers.csv</code> फ़ाइल में कंप्यूटर और जीवविज्ञान के अग्रदूतों की एक सूची है।
-उच्च स्तर पर, इस अभ्यास को पूरा करने के लिए आपको यह करना होगा:</p>
+उच्च स्तर पर, इस अभ्यास को पूरा करने के लिए तुम्हें यह करना होगा:</p>
 <ul>
-<li>डिफ़ॉल्ट <code>params.input_file</code> को <code>pioneers.csv</code> फ़ाइल की ओर इंगित करने के लिए संशोधित करें।</li>
-<li>एक <code>getQuote</code> process बनाएं जो प्रत्येक इनपुट के लिए उद्धरण प्राप्त करने के लिए <code>quote</code> कंटेनर का उपयोग करता है।</li>
-<li>उद्धरण प्रदर्शित करने के लिए <code>getQuote</code> process के आउटपुट को <code>cowsay</code> process से कनेक्ट करें।</li>
+<li>डिफ़ॉल्ट <code>params.input_file</code> को <code>pioneers.csv</code> फ़ाइल की ओर इंगित करने के लिए संशोधित करो।</li>
+<li>एक <code>getQuote</code> प्रोसेस बनाओ जो प्रत्येक इनपुट के लिए उद्धरण प्राप्त करने के लिए <code>quote</code> कंटेनर का उपयोग करता है।</li>
+<li>उद्धरण प्रदर्शित करने के लिए <code>getQuote</code> प्रोसेस के आउटपुट को <code>cowsay</code> प्रोसेस से कनेक्ट करो।</li>
 </ul>
-<p><code>quote</code> कंटेनर इमेज के लिए, आप या तो पिछले stretch अभ्यास में स्वयं बनाई गई इमेज का उपयोग कर सकते हैं या Seqera Containers से प्राप्त की गई इमेज का उपयोग कर सकते हैं।</p>
-<div class="admonition tip">
-<p class="admonition-title">सुझाव</p>
-<p>आपके getQuote process के <code>script</code> ब्लॉक के लिए एक अच्छा विकल्प हो सकता है:
+<p><code>quote</code> कंटेनर इमेज के लिए, तुम या तो पिछले स्ट्रेच अभ्यास में खुद बनाई गई इमेज का उपयोग कर सकते हो या Seqera Containers से प्राप्त की गई इमेज का उपयोग कर सकते हो।</p>
+<div class="admonition hint">
+<p class="admonition-title">संकेत</p>
+<p>तुम्हारे getQuote प्रोसेस के <code>script</code> ब्लॉक के लिए एक अच्छा विकल्प हो सकता है:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nl">script:</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
@@ -3471,10 +3471,10 @@ Seqera Containers वेबसाइट पर वापस जाएं और 
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></p>
 </div>
-<p>आप इस अभ्यास का समाधान <code>containers/solutions/hello-containers-4.1.nf</code> में पा सकते हैं।</p>
-<h3 id="22-nextflow-pipeline-quote-sayhello">2.2. अपने Nextflow pipeline को <code>quote</code> और <code>sayHello</code> मोड में निष्पादित होने की अनुमति देने के लिए संशोधित करें।<a class="headerlink" href="#22-nextflow-pipeline-quote-sayhello" title="Permanent link">&para;</a></h3>
-<p>अपने pipeline में कुछ branching तर्क जोड़ें ताकि यह <code>quote</code> और <code>sayHello</code> दोनों के लिए इच्छित इनपुट स्वीकार कर सके।
-यहां Nextflow workflow में <code>if</code> स्टेटमेंट का उपयोग कैसे करें इसका एक उदाहरण है:</p>
+<p>तुम इस अभ्यास का समाधान <code>containers/solutions/hello-containers-4.1.nf</code> में पा सकते हो।</p>
+<h3 id="22-nextflow-quote-sayhello">2.2. अपनी Nextflow पाइपलाइन को <code>quote</code> और <code>sayHello</code> मोड में निष्पादित करने की अनुमति देने के लिए संशोधित करें।<a class="headerlink" href="#22-nextflow-quote-sayhello" title="Permanent link">&para;</a></h3>
+<p>अपनी पाइपलाइन में कुछ ब्रांचिंग लॉजिक जोड़ो ताकि यह <code>quote</code> और <code>sayHello</code> दोनों के लिए इच्छित इनपुट स्वीकार कर सके।
+यहाँ Nextflow वर्कफ़्लो में <code>if</code> स्टेटमेंट का उपयोग करने का एक उदाहरण है:</p>
 <div class="highlight"><span class="filename">hello-containers.nf</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">quote</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="o">...</span>
@@ -3485,16 +3485,16 @@ Seqera Containers वेबसाइट पर वापस जाएं और 
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="n">cowSay</span><span class="o">(</span><span class="n">text_ch</span><span class="o">)</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="o">}</span>
 </code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">सुझाव</p>
-<p>आप किसी process के आउटपुट channel को एक नाम असाइन करने के लिए <code>new_ch = processName.out</code> का उपयोग कर सकते हैं।</p>
+<div class="admonition hint">
+<p class="admonition-title">संकेत</p>
+<p>तुम किसी प्रोसेस के आउटपुट चैनल को एक नाम असाइन करने के लिए <code>new_ch = processName.out</code> का उपयोग कर सकते हो।</p>
 </div>
-<p>आप इस अभ्यास का समाधान <code>containers/solutions/hello-containers-4.2.nf</code> में पा सकते हैं।</p>
-<h3 id="_3">निष्कर्ष<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>आप जानते हैं कि processes चलाने के लिए Nextflow में कंटेनर का उपयोग कैसे करें, और अपने pipelines में कुछ branching तर्क कैसे बनाएं!</p>
+<p>तुम इस अभ्यास का समाधान <code>containers/solutions/hello-containers-4.2.nf</code> में पा सकते हो।</p>
+<h3 id="_3">सारांश<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>तुम जानते हो कि प्रोसेस चलाने के लिए Nextflow में कंटेनर का उपयोग कैसे करें, और अपनी पाइपलाइन में कुछ ब्रांचिंग लॉजिक कैसे बनाएं!</p>
 <h3 id="_4">आगे क्या है?<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>जश्न मनाएं, एक stretch ब्रेक लें और कुछ पानी पिएं!</p>
-<p>जब आप तैयार हों, तो इस प्रशिक्षण श्रृंखला के भाग 3 पर जाएं ताकि आप सीख सकें कि अब तक आपने जो सीखा है उसे अधिक यथार्थवादी डेटा विश्लेषण उपयोग मामले पर कैसे लागू करें।</p><style type="text/css">.quiz {
+<p>जश्न मनाओ, एक स्ट्रेच ब्रेक लो और कुछ पानी पियो!</p>
+<p>जब तुम तैयार हो, तो इस प्रशिक्षण श्रृंखला के भाग 3 पर आगे बढ़ो ताकि तुम सीख सको कि अब तक जो तुमने सीखा है उसे अधिक यथार्थवादी डेटा विश्लेषण उपयोग के मामले में कैसे लागू करें।</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Verständnis und Verwaltung der Entwicklung von Nextflow-Syntaxversionen">
+        <meta name="description" content="Die Entwicklung der Nextflow-Syntaxversionen verstehen und verwalten">
       
       
       
@@ -1459,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow für Genomik
+    Nextflow for Genomics
   
 
     
@@ -1475,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow für Genomik
+    Nextflow for Genomics
   
 
           </label>
@@ -1495,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow für Genomik
+    Nextflow for Genomics
   
 
     
@@ -1579,7 +1579,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 2: Varianten-Calling pro Probe
+    Teil 2: Variantenerkennung pro Probe
   
 
     
@@ -2395,7 +2395,7 @@
   <span class="md-ellipsis">
     
   
-    Verarbeitung von Dateieingaben
+    Datei-Eingabeverarbeitung
   
 
     
@@ -2507,7 +2507,7 @@
   <span class="md-ellipsis">
     
   
-    Wesentliche Nextflow-Skriptmuster
+    Grundlegende Nextflow-Scripting-Muster
   
 
     
@@ -2999,10 +2999,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#uberprufen-und-einstellen-der-nextflow-version" class="md-nav__link">
+  <a href="#nextflow-version-prufen-und-festlegen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Überprüfen und Einstellen der Nextflow-Version
+        Nextflow-Version prüfen und festlegen
       
     </span>
   </a>
@@ -3010,10 +3010,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#aktivieren-des-v2-syntaxparsers" class="md-nav__link">
+  <a href="#den-v2-syntaxparser-aktivieren" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Aktivieren des v2-Syntaxparsers
+        Den v2-Syntaxparser aktivieren
       
     </span>
   </a>
@@ -3021,10 +3021,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#deaktivieren-des-v2-syntaxparsers" class="md-nav__link">
+  <a href="#den-v2-syntaxparser-deaktivieren" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Deaktivieren des v2-Syntaxparsers
+        Den v2-Syntaxparser deaktivieren
       
     </span>
   </a>
@@ -3032,10 +3032,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#migrieren-von-bestehendem-code" class="md-nav__link">
+  <a href="#bestehenden-code-migrieren" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Migrieren von bestehendem Code
+        Bestehenden Code migrieren
       
     </span>
   </a>
@@ -3329,10 +3329,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#uberprufen-und-einstellen-der-nextflow-version" class="md-nav__link">
+  <a href="#nextflow-version-prufen-und-festlegen" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Überprüfen und Einstellen der Nextflow-Version
+        Nextflow-Version prüfen und festlegen
       
     </span>
   </a>
@@ -3340,10 +3340,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#aktivieren-des-v2-syntaxparsers" class="md-nav__link">
+  <a href="#den-v2-syntaxparser-aktivieren" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Aktivieren des v2-Syntaxparsers
+        Den v2-Syntaxparser aktivieren
       
     </span>
   </a>
@@ -3351,10 +3351,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#deaktivieren-des-v2-syntaxparsers" class="md-nav__link">
+  <a href="#den-v2-syntaxparser-deaktivieren" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Deaktivieren des v2-Syntaxparsers
+        Den v2-Syntaxparser deaktivieren
       
     </span>
   </a>
@@ -3362,10 +3362,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#migrieren-von-bestehendem-code" class="md-nav__link">
+  <a href="#bestehenden-code-migrieren" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Migrieren von bestehendem Code
+        Bestehenden Code migrieren
       
     </span>
   </a>
@@ -3638,32 +3638,32 @@
   <h1>Nextflow-Versionen</h1>
 
 <h2 id="aktuell-unterstutzte-nextflow-syntaxversion-anforderungen">Aktuell unterstützte Nextflow-Syntaxversion &amp; Anforderungen<a class="headerlink" href="#aktuell-unterstutzte-nextflow-syntaxversion-anforderungen" title="Permanent link">&para;</a></h2>
-<p>Ab Version 3.0 des Trainingsportals basieren alle unsere Trainingskurse auf der Nextflow-Version 25.10.2, sofern auf der Kursindexseite nicht anders angegeben (außer veraltete oder anderweitig archivierte Materialien, die möglicherweise keinen Versionshinweis enthalten).</p>
-<p>Da die Kurse jetzt typisierte Eingaben auf workflow-Ebene sowie workflow-Ebene-Ausgabe-Direktiven verwenden, erfordern sie die Verwendung des V2-Syntaxparsers.
-Wenn du die Umgebung verwendest, die wir über <a href="../../envsetup/01_setup/">Github Codespaces</a> oder <a href="../../envsetup/03_devcontainer/">lokale Devcontainer</a> bereitstellen, musst du nichts unternehmen, es sei denn, dies wird in den Kursanweisungen speziell erwähnt.
-Wenn du jedoch planst, die Trainings in deiner eigenen Umgebung durchzuarbeiten (<a href="../../envsetup/02_local/">Manuelle Installation</a>), musst du sicherstellen, dass du Nextflow Version 25.10.2 oder höher mit aktiviertem v2-Syntaxparser verwendest.</p>
+<p>Ab Version 3.0 des Trainingsportals basieren alle unsere Trainingskurse auf der Nextflow-Version 25.10.2, sofern auf der Kursübersichtsseite nicht anders angegeben (mit Ausnahme veralteter oder archivierter Materialien, die möglicherweise keinen Versionshinweis enthalten).</p>
+<p>Da die Kurse jetzt typisierte Eingaben auf Workflow-Ebene sowie Workflow-Ausgabedirektiven verwenden, benötigen sie den V2-Syntaxparser.
+Wenn du die Umgebung verwendest, die wir über <a href="../../envsetup/01_setup/">Github Codespaces</a> oder <a href="../../envsetup/03_devcontainer/">lokale Devcontainer</a> bereitstellen, musst du nichts tun, sofern in den Kursanweisungen nicht ausdrücklich etwas anderes angegeben ist.
+Wenn du jedoch planst, die Trainings in deiner eigenen Umgebung zu absolvieren (<a href="../../envsetup/02_local/">Manuelle Installation</a>), musst du sicherstellen, dass du Nextflow Version 25.10.2 oder neuer mit aktiviertem v2-Syntaxparser verwendest.</p>
 <h2 id="altere-versionen-der-trainingsmaterialien">Ältere Versionen der Trainingsmaterialien<a class="headerlink" href="#altere-versionen-der-trainingsmaterialien" title="Permanent link">&para;</a></h2>
-<p>Unsere Trainingsmaterialien sind seit Februar 2025 versioniert.</p>
+<p>Unsere Trainingsmaterialien werden seit Februar 2025 versioniert.</p>
 <p>Du kannst auf ältere Versionen der Trainingsmaterialien zugreifen, die mit Nextflow-Versionen <strong>vor 25.10.2</strong> funktionieren, über das Dropdown-Menü oben auf jeder Seite, das die nummerierte Version der Trainingsmaterialien anzeigt.
 Wenn du eine ältere Version der Trainingsmaterialien auswählst, geben Links zur Trainingsumgebung automatisch die entsprechende Version der Umgebung an.</p>
 <h2 id="weitere-informationen-zu-nextflow-syntaxversionen">Weitere Informationen zu Nextflow-Syntaxversionen<a class="headerlink" href="#weitere-informationen-zu-nextflow-syntaxversionen" title="Permanent link">&para;</a></h2>
 <p>Nextflow hat zwei unterschiedliche Versionierungskonzepte, die manchmal verwechselt werden: <strong>DSL-Versionen</strong> und <strong>Syntaxparser-Versionen</strong>.</p>
-<p><strong>DSL1 vs DSL2</strong> bezieht sich auf grundlegend unterschiedliche Arten, Nextflow-pipelines zu schreiben.
-DSL1 war die ursprüngliche Syntax, bei der processes implizit über channels verbunden wurden.
-DSL2, eingeführt in Nextflow 20.07, fügte Modularitätsfunktionen hinzu: die Möglichkeit, processes und workflows aus anderen Dateien zu importieren, explizite <code>workflow</code>-Blöcke und benannte process-Ausgaben.
+<p><strong>DSL1 vs DSL2</strong> bezieht sich auf grundlegend unterschiedliche Arten, Nextflow-Pipelines zu schreiben.
+DSL1 war die ursprüngliche Syntax, bei der Prozesse implizit über Kanäle verbunden wurden.
+DSL2, eingeführt in Nextflow 20.07, fügte Modularitätsfunktionen hinzu: die Möglichkeit, Prozesse und Workflows aus anderen Dateien zu importieren, explizite <code>workflow</code>-Blöcke und benannte Prozessausgaben.
 DSL1 wurde in Nextflow 22.03 als veraltet markiert und in 22.12 entfernt.
 Aller moderner Nextflow-Code verwendet DSL2.</p>
 <p><strong>Syntaxparser v1 vs v2</strong> bezieht sich auf verschiedene Parser, die beide mit DSL2-Code funktionieren.
 Der v1-Parser ist der ursprüngliche, tolerantere Parser.
-Der v2-Parser ist strenger und ermöglicht neue Sprachfunktionen wie statische Typisierung (typisierte Eingaben und Ausgaben) und workflow-Ebene-Ausgabe-Direktiven.
-Der v2-Parser bietet auch bessere Fehlermeldungen und erkennt mehr Fehler zur Parse-Zeit statt zur Laufzeit.
+Der v2-Parser ist strenger und ermöglicht neue Sprachfunktionen wie statische Typisierung (typisierte Ein- und Ausgaben) und Ausgabedirektiven auf Workflow-Ebene.
+Der v2-Parser liefert auch bessere Fehlermeldungen und erkennt mehr Fehler zur Parse-Zeit statt zur Laufzeit.
 Der v2-Parser wird in Nextflow 26.04 zum Standard.</p>
-<p>Zusammenfassend: DSL2 ist die Sprache, die du schreibst; die Syntaxparser-Version bestimmt, wie streng diese Sprache interpretiert wird und welche erweiterten Funktionen verfügbar sind.</p>
-<h3 id="uberprufen-und-einstellen-der-nextflow-version">Überprüfen und Einstellen der Nextflow-Version<a class="headerlink" href="#uberprufen-und-einstellen-der-nextflow-version" title="Permanent link">&para;</a></h3>
-<p>Du kannst überprüfen, welche Version von Nextflow auf deinem System installiert ist, indem du den Befehl <code>nextflow --version</code> verwendest.</p>
+<p>Zusammengefasst: DSL2 ist die Sprache, die du schreibst; die Syntaxparser-Version bestimmt, wie streng diese Sprache interpretiert wird und welche erweiterten Funktionen verfügbar sind.</p>
+<h3 id="nextflow-version-prufen-und-festlegen">Nextflow-Version prüfen und festlegen<a class="headerlink" href="#nextflow-version-prufen-und-festlegen" title="Permanent link">&para;</a></h3>
+<p>Du kannst mit dem Befehl <code>nextflow --version</code> prüfen, welche Nextflow-Version auf deinem System installiert ist.</p>
 <p>Weitere Informationen zum Aktualisieren deiner Nextflow-Version findest du in der Referenzdokumentation unter <a href="https://www.nextflow.io/docs/latest/updating-nextflow.html">Updating Nextflow</a>.</p>
-<h3 id="aktivieren-des-v2-syntaxparsers">Aktivieren des v2-Syntaxparsers<a class="headerlink" href="#aktivieren-des-v2-syntaxparsers" title="Permanent link">&para;</a></h3>
-<p>Um den v2-Syntaxparser für deine aktuelle Sitzung zu <strong>aktivieren</strong>, führe den folgenden Befehl in deinem Terminal aus:</p>
+<h3 id="den-v2-syntaxparser-aktivieren">Den v2-Syntaxparser aktivieren<a class="headerlink" href="#den-v2-syntaxparser-aktivieren" title="Permanent link">&para;</a></h3>
+<p>Um den v2-Syntaxparser für deine aktuelle Sitzung zu <strong>aktivieren</strong>, führe folgenden Befehl in deinem Terminal aus:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
 </code></pre></div>
 <p>Um dies dauerhaft zu machen (bis v2 in Nextflow 26.04 zum Standard wird), füge den export-Befehl zu deinem Shell-Profil hinzu (<code>~/.bashrc</code>, <code>~/.zshrc</code>, etc.):</p>
@@ -3672,23 +3672,23 @@ Der v2-Parser wird in Nextflow 26.04 zum Standard.</p>
 </code></pre></div>
 <p>Beachte, dass die Umgebungsvariable <code>NXF_SYNTAX_PARSER=v2</code> eine vorübergehende Anforderung ist.
 Ab Nextflow 26.04 wird der v2-Parser zum Standard und diese Einstellung wird nicht mehr benötigt.</p>
-<h3 id="deaktivieren-des-v2-syntaxparsers">Deaktivieren des v2-Syntaxparsers<a class="headerlink" href="#deaktivieren-des-v2-syntaxparsers" title="Permanent link">&para;</a></h3>
-<p>Um den v2-Syntaxparser für deine aktuelle Sitzung zu <strong>deaktivieren</strong>, führe den folgenden Befehl in deinem Terminal aus:</p>
+<h3 id="den-v2-syntaxparser-deaktivieren">Den v2-Syntaxparser deaktivieren<a class="headerlink" href="#den-v2-syntaxparser-deaktivieren" title="Permanent link">&para;</a></h3>
+<p>Um den v2-Syntaxparser für deine aktuelle Sitzung zu <strong>deaktivieren</strong>, führe folgenden Befehl in deinem Terminal aus:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v1
 </code></pre></div>
 <!-- Will it be possible to disable it in versions after 26.04? -->
 
-<h3 id="migrieren-von-bestehendem-code">Migrieren von bestehendem Code<a class="headerlink" href="#migrieren-von-bestehendem-code" title="Permanent link">&para;</a></h3>
-<p>Anleitungen zur Migration von bestehendem Code zur Einhaltung neuerer Nextflow-Versionen findest du in den <a href="https://www.nextflow.io/docs/latest/migrations/index.html">Migration Notes</a> in der Referenzdokumentation.</p>
-<p>Diese beiden Artikel sind besonders hilfreich für die Migration zur neuesten Version:</p>
+<h3 id="bestehenden-code-migrieren">Bestehenden Code migrieren<a class="headerlink" href="#bestehenden-code-migrieren" title="Permanent link">&para;</a></h3>
+<p>Für Anleitungen zur Migration von bestehendem Code, um mit neueren Nextflow-Versionen kompatibel zu sein, siehe die <a href="https://www.nextflow.io/docs/latest/migrations/index.html">Migration Notes</a> in der Referenzdokumentation.</p>
+<p>Diese beiden Artikel sind besonders hilfreich für die Migration zur aktuellsten Version:</p>
 <ul>
 <li><a href="https://www.nextflow.io/docs/latest/tutorials/workflow-outputs.html">Migrating to workflow outputs</a></li>
 <li><a href="https://www.nextflow.io/docs/latest/tutorials/static-types.html">Migrating to static types</a></li>
 </ul>
-<p>Beide Funktionen werden ab Version 3.0 der Trainingsmaterialien im Einsteiger-Training behandelt.</p>
-<p>Je nach Generation des Nextflow-Codes, den du migrieren möchtest, kannst du möglicherweise den größten Teil davon mit dem Nextflow-Linter mithilfe des Befehls <code>nextflow lint -format</code> erledigen.
-Weitere Details findest du in der CLI-Referenz für <a href="https://www.nextflow.io/docs/latest/reference/cli.html#lint"><code>lint</code></a>.</p>
-<p>Wir hoffen, dass dies hilfreich sein wird.
+<p>Beide Funktionen werden ab Version 3.0 der Trainingsmaterialien im Anfängertraining behandelt.</p>
+<p>Je nachdem, welche Generation von Nextflow-Code du migrieren möchtest, kannst du möglicherweise den Großteil der Arbeit mit dem Nextflow-Linter über den Befehl <code>nextflow lint -format</code> erledigen.
+Siehe die CLI-Referenz für <a href="https://www.nextflow.io/docs/latest/reference/cli.html#lint"><code>lint</code></a> für weitere Details.</p>
+<p>Wir hoffen, dass dies hilfreich ist.
 Wenn du Hilfe benötigst, melde dich auf Slack oder im Forum.</p>
 <hr />
 <div class="homepage_logos">

@@ -1459,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    유전체학을 위한 Nextflow
+    Nextflow for Genomics
   
 
     
@@ -1475,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    유전체학을 위한 Nextflow
+    Nextflow for Genomics
   
 
           </label>
@@ -1495,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    유전체학을 위한 Nextflow
+    Nextflow for Genomics
   
 
     
@@ -1607,7 +1607,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: 코호트에 대한 합동 호출
+    파트 3: 코호트에 대한 조인트 호출
   
 
     
@@ -1725,7 +1725,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        구축한 것
+        구축한 내용
       
     </span>
   </a>
@@ -1750,7 +1750,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        기술 향상을 위한 다음 단계
+        기술을 향상시키기 위한 다음 단계
       
     </span>
   </a>
@@ -2771,7 +2771,7 @@
   <span class="md-ellipsis">
     
   
-    디버깅
+    워크플로우 디버깅
   
 
     
@@ -3299,7 +3299,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        구축한 것
+        구축한 내용
       
     </span>
   </a>
@@ -3324,7 +3324,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        기술 향상을 위한 다음 단계
+        기술을 향상시키기 위한 다음 단계
       
     </span>
   </a>
@@ -3606,38 +3606,39 @@
  
 
 <h1 id="_1">과정 요약<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>Nextflow for Genomics 교육 과정을 완료하신 것을 축하드립니다! 🎉</p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
+<p>Nextflow for Genomics 교육 과정을 완료하신 것을 축하합니다! 🎉</p>
 <h2 id="_2">여러분의 여정<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>터미널에서 variant calling 도구를 수동으로 실행하여 방법론을 이해하는 것으로 시작했습니다.
-그런 다음 프로세스를 자동화하기 위해 단일 샘플 Nextflow 파이프라인을 구축하고, 이를 확장하여 여러 샘플을 병렬로 처리하도록 했으며, 채널 연산자를 사용하여 다중 샘플 joint genotyping을 추가했습니다.</p>
-<h3 id="_3">구축한 것<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>터미널에서 변이 호출 도구를 수동으로 실행하여 방법론을 이해하는 것으로 시작했습니다.
+그런 다음 프로세스를 자동화하기 위해 단일 샘플 Nextflow 파이프라인을 구축하고, 여러 샘플을 병렬로 처리하도록 확장했으며, 채널 연산자를 사용하여 다중 샘플 공동 유전형 분석을 추가했습니다.</p>
+<h3 id="_3">구축한 내용<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li>BAM 파일을 입력으로 받아 joint-called VCF를 출력으로 생성하는 variant calling 파이프라인.</li>
+<li>BAM 파일을 입력으로 받아 공동 호출된 VCF를 출력으로 생성하는 변이 호출 파이프라인.</li>
 <li>별도의 모듈 파일에 저장된 세 개의 프로세스(<code>SAMTOOLS_INDEX</code>, <code>GATK_HAPLOTYPECALLER</code>, <code>GATK_JOINTGENOTYPING</code>).</li>
-<li>Nextflow의 데이터 흐름 패러다임을 사용하여 입력 샘플 수에 관계없이 자동으로 확장되는 파이프라인.</li>
+<li>Nextflow의 데이터플로우 패러다임을 사용하여 입력 샘플 수에 관계없이 자동으로 확장되는 파이프라인.</li>
 <li><code>results/</code> 디렉토리에 게시되는 결과.</li>
 </ul>
 <h3 id="_4">습득한 기술<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>이 실습 과정을 통해 다음 방법을 학습했습니다.</p>
+<p>이 실습 과정을 통해 다음 방법을 학습했습니다:</p>
 <ul>
-<li>단일 샘플에 variant calling을 적용하는 선형 워크플로우 작성</li>
-<li>인덱스 파일 및 참조 유전체 리소스와 같은 보조 파일을 적절하게 처리</li>
-<li>Nextflow의 데이터 흐름 패러다임을 활용하여 샘플별 variant calling 병렬화</li>
-<li>관련 채널 연산자를 사용하여 다중 샘플 joint calling 구현</li>
+<li>단일 샘플에 변이 호출을 적용하는 선형 워크플로우 작성</li>
+<li>인덱스 파일 및 참조 게놈 리소스와 같은 보조 파일을 적절하게 처리</li>
+<li>Nextflow의 데이터플로우 패러다임을 활용하여 샘플별 변이 호출 병렬화</li>
+<li>관련 채널 연산자를 사용하여 다중 샘플 공동 호출 구현</li>
 </ul>
-<p>이제 여러분은 자신의 작업에서 Nextflow를 유전체학 분석 워크플로우에 적용하기 시작할 준비가 되었습니다.</p>
-<h2 id="_5">기술 향상을 위한 다음 단계<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>다음에 수행할 작업에 대한 주요 권장 사항입니다.</p>
+<p>이제 여러분은 자신의 작업에서 유전체학 분석 워크플로우에 Nextflow를 적용할 준비가 되었습니다.</p>
+<h2 id="_5">기술을 향상시키기 위한 다음 단계<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>다음으로 할 일에 대한 주요 제안 사항은 다음과 같습니다:</p>
 <ul>
-<li><a href="../../">Nextflow for Science</a>로 다른 과학적 분석 사용 사례에 Nextflow 적용하기</li>
+<li><a href="../../">Nextflow for Science</a>로 다른 과학 분석 사용 사례에 Nextflow 적용</li>
 <li><a href="../../../hello_nf-core/">Hello nf-core</a>로 nf-core 시작하기</li>
-<li><a href="../../../side_quests/">Side Quests</a>로 더욱 고급 Nextflow 기능 탐색하기</li>
+<li><a href="../../../side_quests/">Side Quests</a>로 더 고급 Nextflow 기능 탐색</li>
 </ul>
-<p>마지막으로, Nextflow의 제작자가 개발한 클라우드 기반 플랫폼인 <strong><a href="https://seqera.io/">Seqera Platform</a></strong>을 살펴보실 것을 권장합니다. 이 플랫폼은 워크플로우를 시작하고 관리하며, 데이터를 관리하고 모든 환경에서 대화형으로 분석을 실행하는 것을 훨씬 쉽게 만들어줍니다.</p>
+<p>마지막으로, Nextflow 제작자가 개발한 클라우드 기반 플랫폼인 <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>을 살펴보시기를 권장합니다. 이 플랫폼을 사용하면 워크플로우를 더욱 쉽게 시작하고 관리할 수 있으며, 데이터를 관리하고 모든 환경에서 대화형으로 분석을 실행할 수 있습니다.</p>
 <h2 id="_6">도움 받기<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>도움 리소스 및 커뮤니티 지원은 <a href="../../../help/">도움말 페이지</a>를 참조하십시오.</p>
+<p>도움 리소스 및 커뮤니티 지원에 대해서는 <a href="../../../help/">도움말 페이지</a>를 참조하세요.</p>
 <h2 id="_7">피드백 설문조사<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>다음 단계로 넘어가기 전에, 잠시 시간을 내어 과정 설문조사를 완료해 주십시오! 여러분의 피드백은 모든 사람을 위한 교육 자료를 개선하는 데 도움이 됩니다.</p>
+<p>다음 단계로 넘어가기 전에 잠시 시간을 내어 과정 설문조사를 완료해 주세요! 여러분의 피드백은 모두를 위한 교육 자료를 개선하는 데 도움이 됩니다.</p>
 <p><a class="md-button md-button--primary" href="../survey/">설문조사 참여하기 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;

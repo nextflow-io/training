@@ -1451,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour la Génomique
+    Nextflow for Genomics
   
 
     
@@ -1467,7 +1467,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow pour la Génomique
+    Nextflow for Genomics
   
 
           </label>
@@ -1487,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour la Génomique
+    Nextflow for Genomics
   
 
     
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Modèles de script essentiels
+    Modèles de Script Nextflow Essentiels
   
 
     
@@ -2984,15 +2984,15 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-faire-citer-des-scientifiques-celebres-a-la-vache" class="md-nav__link">
+  <a href="#1-faire-citer-des-scientifiques-celebres-par-la-vache" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Faire citer des scientifiques célèbres à la vache
+        1. Faire citer des scientifiques célèbres par la vache
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Faire citer des scientifiques célèbres à la vache">
+    <nav class="md-nav" aria-label="1. Faire citer des scientifiques célèbres par la vache">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3304,9 +3304,9 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduction assistée par IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">en savoir plus et suggérer des améliorations</a></span></p>
 <p>[TODO]</p>
 <hr />
-<h2 id="1-faire-citer-des-scientifiques-celebres-a-la-vache">1. Faire citer des scientifiques célèbres à la vache<a class="headerlink" href="#1-faire-citer-des-scientifiques-celebres-a-la-vache" title="Permanent link">&para;</a></h2>
-<p>Cette section contient quelques exercices supplémentaires pour pratiquer ce que vous avez appris jusqu'à présent.
-Réaliser ces exercices n'est <em>pas obligatoire</em> pour comprendre les parties suivantes de la formation, mais ils constituent une façon amusante de renforcer vos apprentissages en découvrant comment faire citer des scientifiques célèbres à la vache.</p>
+<h2 id="1-faire-citer-des-scientifiques-celebres-par-la-vache">1. Faire citer des scientifiques célèbres par la vache<a class="headerlink" href="#1-faire-citer-des-scientifiques-celebres-par-la-vache" title="Permanent link">&para;</a></h2>
+<p>Cette section contient quelques exercices avancés pour pratiquer ce que vous avez appris jusqu'à présent.
+Faire ces exercices n'est <em>pas obligatoire</em> pour comprendre les parties suivantes de la formation, mais ils offrent une manière amusante de renforcer vos apprentissages en découvrant comment faire citer des scientifiques célèbres par la vache.</p>
 <div class="highlight"><span class="filename">cowsay-output-Grace-Hopper.txt</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="go">  _________________________________________________</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="go"> /                                                 \</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="go">| Humans are allergic to change. They love to       |</span>
@@ -3326,15 +3326,15 @@ Réaliser ces exercices n'est <em>pas obligatoire</em> pour comprendre les parti
 </code></pre></div>
 <h3 id="11-modifier-le-script-hello-containersnf-pour-utiliser-un-processus-getquote">1.1. Modifier le script <code>hello-containers.nf</code> pour utiliser un processus getQuote<a class="headerlink" href="#11-modifier-le-script-hello-containersnf-pour-utiliser-un-processus-getquote" title="Permanent link">&para;</a></h3>
 <p>Nous avons une liste de pionniers de l'informatique et de la biologie dans le fichier <code>containers/data/pioneers.csv</code>.
-De manière générale, pour compléter cet exercice, vous devrez :</p>
+À un niveau général, pour compléter cet exercice vous devrez :</p>
 <ul>
-<li>Modifier le paramètre par défaut <code>params.input_file</code> pour qu'il pointe vers le fichier <code>pioneers.csv</code>.</li>
+<li>Modifier le <code>params.input_file</code> par défaut pour qu'il pointe vers le fichier <code>pioneers.csv</code>.</li>
 <li>Créer un processus <code>getQuote</code> qui utilise le conteneur <code>quote</code> pour récupérer une citation pour chaque entrée.</li>
 <li>Connecter la sortie du processus <code>getQuote</code> au processus <code>cowsay</code> pour afficher la citation.</li>
 </ul>
-<p>Pour l'image de conteneur <code>quote</code>, vous pouvez soit utiliser celle que vous avez construite vous-même dans l'exercice supplémentaire précédent, soit utiliser celle que vous avez obtenue depuis Seqera Containers.</p>
+<p>Pour l'image de conteneur <code>quote</code>, vous pouvez soit utiliser celle que vous avez construite vous-même dans l'exercice avancé précédent, soit utiliser celle que vous avez obtenue depuis Seqera Containers.</p>
 <div class="admonition hint">
-<p class="admonition-title">Hint</p>
+<p class="admonition-title">Indice</p>
 <p>Un bon choix pour le bloc <code>script</code> de votre processus getQuote pourrait être :
     <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nl">script:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>
@@ -3359,15 +3359,15 @@ Voici un exemple d'utilisation d'une instruction <code>if</code> dans un workflo
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="o">}</span>
 </code></pre></div>
 <div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>Vous pouvez utiliser <code>new_ch = processName.out</code> pour attribuer un nom au canal de sortie d'un processus.</p>
+<p class="admonition-title">Indice</p>
+<p>Vous pouvez utiliser <code>new_ch = processName.out</code> pour assigner un nom au canal de sortie d'un processus.</p>
 </div>
 <p>Vous pouvez trouver une solution à cet exercice dans <code>containers/solutions/hello-containers-4.2.nf</code>.</p>
 <h3 id="a-retenir">À retenir<a class="headerlink" href="#a-retenir" title="Permanent link">&para;</a></h3>
 <p>Vous savez comment utiliser des conteneurs dans Nextflow pour exécuter des processus, et comment construire une logique de branchement dans vos pipelines !</p>
 <h3 id="et-ensuite">Et ensuite ?<a class="headerlink" href="#et-ensuite" title="Permanent link">&para;</a></h3>
 <p>Félicitations, prenez une pause pour vous étirer et boire de l'eau !</p>
-<p>Lorsque vous êtes prêt·e, passez à la Partie 3 de cette série de formation pour apprendre à appliquer ce que vous avez appris jusqu'à présent à un cas d'usage d'analyse de données plus réaliste.</p><style type="text/css">.quiz {
+<p>Quand vous serez prêt·e, passez à la Partie 3 de cette série de formation pour apprendre à appliquer ce que vous avez appris jusqu'à présent à un cas d'usage d'analyse de données plus réaliste.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

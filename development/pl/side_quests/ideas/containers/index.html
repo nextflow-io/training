@@ -1451,7 +1451,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow dla Genomiki
+    Nextflow dla genomiki
   
 
     
@@ -1467,7 +1467,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow dla Genomiki
+    Nextflow dla genomiki
   
 
           </label>
@@ -1487,7 +1487,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow dla Genomiki
+    Nextflow dla genomiki
   
 
     
@@ -1543,7 +1543,7 @@
   <span class="md-ellipsis">
     
   
-    Część 1: Przegląd metod i ręczne testowanie
+    Część 1: Przegląd metody i testowanie ręczne
   
 
     
@@ -1599,7 +1599,7 @@
   <span class="md-ellipsis">
     
   
-    Część 3: Wspólne wyszukiwanie wariantów w kohorcie
+    Część 3: Wspólne wywoływanie wariantów dla kohorty
   
 
     
@@ -2239,7 +2239,7 @@
   <span class="md-ellipsis">
     
   
-    Zadania Poboczne
+    Side Quests
   
 
     
@@ -2255,7 +2255,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Zadania Poboczne
+    Side Quests
   
 
           </label>
@@ -2275,7 +2275,7 @@
   <span class="md-ellipsis">
     
   
-    Zadania Poboczne
+    Side Quests
   
 
     
@@ -3066,10 +3066,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-zmodyfikuj-swoj-pipeline-nextflow-aby-umozliwic-jego-wykonanie-w-trybach-quote-i-sayhello" class="md-nav__link">
+  <a href="#22-zmodyfikuj-swoj-pipeline-nextflow-aby-mog-dziaac-w-trybach-quote-i-sayhello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. Zmodyfikuj Swój pipeline Nextflow, aby umożliwić jego wykonanie w trybach quote i sayHello.
+        2.2. Zmodyfikuj swój pipeline Nextflow, aby mógł działać w trybach quote i sayHello.
       
     </span>
   </a>
@@ -3364,16 +3364,16 @@
 <p>[TODO]</p>
 <hr />
 <h2 id="1-jak-znalezc-lub-stworzyc-obrazy-kontenerow">1. Jak znaleźć lub stworzyć obrazy kontenerów<a class="headerlink" href="#1-jak-znalezc-lub-stworzyc-obrazy-kontenerow" title="Permanent link">&para;</a></h2>
-<p>Niektórzy twórcy oprogramowania udostępniają obrazy kontenerów dla swojego oprogramowania w rejestrach kontenerów, takich jak Docker Hub, ale wielu tego nie robi.
-W tej opcjonalnej sekcji pokażemy Ci dwa sposoby na uzyskanie obrazu kontenera dla narzędzi, których chcesz użyć w Swoich pipeline'ach Nextflow: za pomocą Seqera Containers oraz samodzielne budowanie obrazu kontenera.</p>
-<p>Będziesz uzyskiwać/budować obraz kontenera dla pakietu pip <code>quote</code>, który zostanie użyty w ćwiczeniu na końcu tej sekcji.</p>
+<p>Niektórzy twórcy oprogramowania udostępniają obrazy kontenerów dla swoich narzędzi w rejestrach kontenerów takich jak Docker Hub, ale wielu tego nie robi.
+W tej opcjonalnej sekcji pokażemy Ci dwa sposoby na uzyskanie obrazu kontenera dla narzędzi, których chcesz użyć w swoich pipeline'ach Nextflow: przy użyciu Seqera Containers oraz samodzielne zbudowanie obrazu kontenera.</p>
+<p>Uzyskasz/zbudujesz obraz kontenera dla pakietu pip <code>quote</code>, który zostanie użyty w ćwiczeniu na końcu tej sekcji.</p>
 <h3 id="11-uzyskaj-obraz-kontenera-z-seqera-containers">1.1. Uzyskaj obraz kontenera z Seqera Containers<a class="headerlink" href="#11-uzyskaj-obraz-kontenera-z-seqera-containers" title="Permanent link">&para;</a></h3>
 <p>Seqera Containers to darmowa usługa, która buduje obrazy kontenerów dla narzędzi instalowanych przez pip i conda (w tym bioconda).
 Przejdź do <a href="https://www.seqera.io/containers/">Seqera Containers</a> i wyszukaj pakiet pip <code>quote</code>.</p>
 <p><img alt="Seqera Containers" src="img/seqera-containers-1.png" /></p>
 <p>Kliknij "+Add", a następnie "Get Container", aby zażądać obrazu kontenera dla pakietu pip <code>quote</code>.</p>
 <p><img alt="Seqera Containers" src="img/seqera-containers-2.png" /></p>
-<p>Jeśli po raz pierwszy budowany jest kontener społecznościowy dla tej wersji pakietu, może to potrwać kilka minut.
+<p>Jeśli jest to pierwszy raz, gdy budowany jest kontener społecznościowy dla tej wersji pakietu, może to potrwać kilka minut.
 Kliknij, aby skopiować URI (np. <code>community.wave.seqera.io/library/pip_quote:ae07804021465ee9</code>) utworzonego dla Ciebie obrazu kontenera.</p>
 <p>Możesz teraz użyć obrazu kontenera, aby uruchomić polecenie <code>quote</code> i uzyskać losowe powiedzenie Grace Hopper.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>community.wave.seqera.io/library/pip_quote:ae07804021465ee9<span class="w"> </span>quote<span class="w"> </span><span class="s2">&quot;Grace Hopper&quot;</span>
@@ -3384,15 +3384,15 @@ Kliknij, aby skopiować URI (np. <code>community.wave.seqera.io/library/pip_quot
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="go">that runs counter-clockwise.</span>
 </code></pre></div>
 <h3 id="12-zbuduj-obraz-kontenera-samodzielnie">1.2. Zbuduj obraz kontenera samodzielnie<a class="headerlink" href="#12-zbuduj-obraz-kontenera-samodzielnie" title="Permanent link">&para;</a></h3>
-<p>Wykorzystajmy szczegóły budowy ze strony Seqera Containers, aby samodzielnie zbudować obraz kontenera dla pakietu pip <code>quote</code>.
+<p>Wykorzystajmy szczegóły budowania ze strony Seqera Containers, aby samodzielnie zbudować obraz kontenera dla pakietu pip <code>quote</code>.
 Wróć na stronę Seqera Containers i kliknij przycisk "Build Details".</p>
-<p>Pierwszym elementem, na który spojrzymy, jest <code>Dockerfile</code>, rodzaj pliku skryptu zawierającego wszystkie polecenia potrzebne do zbudowania obrazu kontenera.
-Dodaliśmy wyjaśniające komentarze do poniższego Dockerfile, aby pomóc Ci zrozumieć, co robi każda część.</p>
-<div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># Zacznij od bazowego obrazu docker micromamba</span>
+<p>Pierwszym elementem, na który spojrzymy, jest <code>Dockerfile</code> — typ pliku skryptowego zawierającego wszystkie polecenia potrzebne do zbudowania obrazu kontenera.
+Dodaliśmy poniżej kilka wyjaśniających komentarzy do Dockerfile'a, aby pomóc Ci zrozumieć, co robi każda część.</p>
+<div class="highlight"><span class="filename">Dockerfile</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c"># Zacznij od bazowego obrazu dockera micromamba</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">mambaorg/micromamba:1.5.10-noble</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c"># Skopiuj plik conda.yml do kontenera</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">COPY</span><span class="w"> </span>--chown<span class="o">=</span><span class="nv">$MAMBA_USER</span>:<span class="nv">$MAMBA_USER</span><span class="w"> </span>conda.yml<span class="w"> </span>/tmp/conda.yml
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c"># Zainstaluj różne narzędzia dla Nextflow oraz pakiety z pliku conda.yml</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c"># Zainstaluj różne narzędzia dla Nextflow&#39;a oraz pakiety z pliku conda.yml</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">RUN</span><span class="w"> </span>micromamba<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>-f<span class="w"> </span>/tmp/conda.yml<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>conda-forge::procps-ng<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>micromamba<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--name<span class="w"> </span>base<span class="w"> </span>--explicit<span class="w"> </span>&gt;<span class="w"> </span>environment.lock<span class="w"> </span><span class="se">\</span>
@@ -3405,7 +3405,7 @@ Dodaliśmy wyjaśniające komentarze do poniższego Dockerfile, aby pomóc Ci zr
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="c"># Ustaw zmienną środowiskową PATH tak, aby zawierała katalog instalacji micromamba</span>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MAMBA_ROOT_PREFIX</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span>
 </code></pre></div>
-<p>Drugim elementem, na który spojrzymy, jest plik <code>conda.yml</code>, który zawiera listę pakietów, które należy zainstalować w obrazie kontenera.</p>
+<p>Drugim elementem, na który spojrzymy, jest plik <code>conda.yml</code>, który zawiera listę pakietów do zainstalowania w obrazie kontenera.</p>
 <div class="highlight"><span class="filename">conda.yml</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>channels:
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>- conda-forge
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>- bioconda
@@ -3414,11 +3414,11 @@ Dodaliśmy wyjaśniające komentarze do poniższego Dockerfile, aby pomóc Ci zr
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>- pip:
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  - quote==3.0.0 #
 </code></pre></div>
-<p>Skopiuj zawartość tych plików do zaślepek znajdujących się w katalogu <code>containers/build</code>, następnie uruchom poniższe polecenie, aby samodzielnie zbudować obraz kontenera.</p>
+<p>Skopiuj zawartość tych plików do szkieletów znajdujących się w katalogu <code>containers/build</code>, a następnie uruchom poniższe polecenie, aby samodzielnie zbudować obraz kontenera.</p>
 <div class="admonition note">
 <p class="admonition-title">Uwaga</p>
-<p>Używamy flagi <code>-t quote:latest</code>, aby oznaczyć obraz kontenera nazwą <code>quote</code> i tagiem <code>latest</code>.
-Będziemy mogli użyć tego tagu do odwoływania się do obrazu kontenera podczas uruchamiania go w tym systemie.</p>
+<p>Używamy flagi <code>-t quote:latest</code>, aby otagować obraz kontenera nazwą <code>quote</code> i tagiem <code>latest</code>.
+Będziemy mogli używać tego tagu do odwoływania się do obrazu kontenera podczas uruchamiania go w tym systemie.</p>
 </div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>quote:latest<span class="w"> </span>containers/build
 </code></pre></div>
@@ -3426,14 +3426,14 @@ Będziemy mogli użyć tego tagu do odwoływania się do obrazu kontenera podcza
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>quote:latest<span class="w"> </span>quote<span class="w"> </span><span class="s2">&quot;Margaret Oakley Dayhoff&quot;</span>
 </code></pre></div>
 <h3 id="podsumowanie">Podsumowanie<a class="headerlink" href="#podsumowanie" title="Permanent link">&para;</a></h3>
-<p>Nauczyłeś się dwóch różnych sposobów uzyskiwania obrazu kontenera dla narzędzia, którego chcesz użyć w Swoich pipeline'ach Nextflow: za pomocą Seqera Containers oraz samodzielnego budowania obrazu kontenera.</p>
+<p>Poznałeś dwa różne sposoby uzyskania obrazu kontenera dla narzędzia, którego chcesz użyć w swoich pipeline'ach Nextflow: przy użyciu Seqera Containers oraz samodzielne zbudowanie obrazu kontenera.</p>
 <h3 id="co-dalej">Co dalej?<a class="headerlink" href="#co-dalej" title="Permanent link">&para;</a></h3>
 <p>Masz wszystko, czego potrzebujesz, aby przejść do <a href="./04_hello_genomics.md">następnego rozdziału</a> tej serii szkoleniowej.
-Możesz również kontynuować opcjonalne ćwiczenie, aby pobierać cytaty pionierów informatyki/biologii za pomocą kontenera <code>quote</code> i wyświetlać je za pomocą kontenera <code>cowsay</code>.</p>
+Możesz również kontynuować opcjonalne ćwiczenie, aby pobierać cytaty pionierów informatyki i biologii przy użyciu kontenera <code>quote</code> i wyświetlać je przy użyciu kontenera <code>cowsay</code>.</p>
 <hr />
 <h2 id="2-spraw-aby-krowa-cytowaa-synnych-naukowcow">2. Spraw, aby krowa cytowała słynnych naukowców<a class="headerlink" href="#2-spraw-aby-krowa-cytowaa-synnych-naukowcow" title="Permanent link">&para;</a></h2>
-<p>Ta sekcja zawiera dodatkowe ćwiczenia, aby przećwiczyć to, czego się dotychczas nauczyłeś.
-Wykonanie tych ćwiczeń <em>nie jest wymagane</em> do zrozumienia późniejszych części szkolenia, ale stanowi zabawny sposób na utrwalenie Twojej wiedzy poprzez wymyślenie, jak sprawić, aby krowa cytowała słynnych naukowców.</p>
+<p>Ta sekcja zawiera dodatkowe ćwiczenia, aby przećwiczyć to, czego nauczyłeś się do tej pory.
+Wykonanie tych ćwiczeń <em>nie jest wymagane</em> do zrozumienia późniejszych części szkolenia, ale stanowi zabawny sposób na utrwalenie wiedzy poprzez wymyślenie, jak sprawić, aby krowa cytowała słynnych naukowców.</p>
 <div class="highlight"><span class="filename">cowsay-output-Grace-Hopper.txt</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="go">  _________________________________________________</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="go"> /                                                 \</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="go">| Humans are allergic to change. They love to       |</span>
@@ -3453,15 +3453,15 @@ Wykonanie tych ćwiczeń <em>nie jest wymagane</em> do zrozumienia późniejszyc
 </code></pre></div>
 <h3 id="21-zmodyfikuj-skrypt-hello-containersnf-aby-uzywa-procesu-getquote">2.1. Zmodyfikuj skrypt <code>hello-containers.nf</code>, aby używał procesu getQuote<a class="headerlink" href="#21-zmodyfikuj-skrypt-hello-containersnf-aby-uzywa-procesu-getquote" title="Permanent link">&para;</a></h3>
 <p>Mamy listę pionierów informatyki i biologii w pliku <code>containers/data/pioneers.csv</code>.
-Na wysokim poziomie, aby ukończyć to ćwiczenie, musisz:</p>
+Ogólnie rzecz biorąc, aby ukończyć to ćwiczenie, będziesz musiał:</p>
 <ul>
 <li>Zmodyfikować domyślny <code>params.input_file</code>, aby wskazywał na plik <code>pioneers.csv</code>.</li>
 <li>Utworzyć proces <code>getQuote</code>, który używa kontenera <code>quote</code> do pobierania cytatu dla każdego wejścia.</li>
 <li>Połączyć wyjście procesu <code>getQuote</code> z procesem <code>cowsay</code>, aby wyświetlić cytat.</li>
 </ul>
-<p>Dla obrazu kontenera <code>quote</code> możesz użyć tego, który zbudowałeś samodzielnie w poprzednim dodatkowym ćwiczeniu lub tego, który uzyskałeś z Seqera Containers.</p>
-<div class="admonition tip">
-<p class="admonition-title">Wskazówka</p>
+<p>Dla obrazu kontenera <code>quote</code> możesz użyć tego, który zbudowałeś samodzielnie w poprzednim dodatkowym ćwiczeniu, lub tego, który uzyskałeś z Seqera Containers.</p>
+<div class="admonition hint">
+<p class="admonition-title">Podpowiedź</p>
 <p>Dobrym wyborem dla bloku <code>script</code> Twojego procesu getQuote może być:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nl">script:</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>
@@ -3472,9 +3472,9 @@ Na wysokim poziomie, aby ukończyć to ćwiczenie, musisz:</p>
 </code></pre></div></p>
 </div>
 <p>Rozwiązanie tego ćwiczenia znajdziesz w pliku <code>containers/solutions/hello-containers-4.1.nf</code>.</p>
-<h3 id="22-zmodyfikuj-swoj-pipeline-nextflow-aby-umozliwic-jego-wykonanie-w-trybach-quote-i-sayhello">2.2. Zmodyfikuj Swój pipeline Nextflow, aby umożliwić jego wykonanie w trybach <code>quote</code> i <code>sayHello</code>.<a class="headerlink" href="#22-zmodyfikuj-swoj-pipeline-nextflow-aby-umozliwic-jego-wykonanie-w-trybach-quote-i-sayhello" title="Permanent link">&para;</a></h3>
-<p>Dodaj logikę rozgałęzienia do Swojego pipeline'u, aby umożliwić mu akceptowanie wejść przeznaczonych zarówno dla <code>quote</code>, jak i <code>sayHello</code>.
-Oto przykład użycia instrukcji <code>if</code> w workflow Nextflow:</p>
+<h3 id="22-zmodyfikuj-swoj-pipeline-nextflow-aby-mog-dziaac-w-trybach-quote-i-sayhello">2.2. Zmodyfikuj swój pipeline Nextflow, aby mógł działać w trybach <code>quote</code> i <code>sayHello</code>.<a class="headerlink" href="#22-zmodyfikuj-swoj-pipeline-nextflow-aby-mog-dziaac-w-trybach-quote-i-sayhello" title="Permanent link">&para;</a></h3>
+<p>Dodaj logikę rozgałęzień do swojego pipeline'u, aby mógł przyjmować dane wejściowe przeznaczone zarówno dla <code>quote</code>, jak i <code>sayHello</code>.
+Oto przykład użycia instrukcji <code>if</code> w workflow'ie Nextflow:</p>
 <div class="highlight"><span class="filename">hello-containers.nf</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">quote</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="o">...</span>
@@ -3485,16 +3485,16 @@ Oto przykład użycia instrukcji <code>if</code> w workflow Nextflow:</p>
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="n">cowSay</span><span class="o">(</span><span class="n">text_ch</span><span class="o">)</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="o">}</span>
 </code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Wskazówka</p>
+<div class="admonition hint">
+<p class="admonition-title">Podpowiedź</p>
 <p>Możesz użyć <code>new_ch = processName.out</code>, aby przypisać nazwę do kanału wyjściowego procesu.</p>
 </div>
 <p>Rozwiązanie tego ćwiczenia znajdziesz w pliku <code>containers/solutions/hello-containers-4.2.nf</code>.</p>
 <h3 id="podsumowanie_1">Podsumowanie<a class="headerlink" href="#podsumowanie_1" title="Permanent link">&para;</a></h3>
-<p>Wiesz już, jak używać kontenerów w Nextflow do uruchamiania procesów oraz jak zbudować logikę rozgałęzienia w Swoich pipeline'ach!</p>
+<p>Wiesz, jak używać kontenerów w Nextflow'ie do uruchamiania procesów oraz jak budować logikę rozgałęzień w swoich pipeline'ach!</p>
 <h3 id="co-dalej_1">Co dalej?<a class="headerlink" href="#co-dalej_1" title="Permanent link">&para;</a></h3>
-<p>Świętuj, zrób sobie przerwę na rozciąganie i wypij trochę wody!</p>
-<p>Kiedy będziesz gotowy, przejdź do Części 3 tej serii szkoleniowej, aby dowiedzieć się, jak zastosować to, czego się dotychczas nauczyłeś, do bardziej realistycznego przypadku analizy danych.</p><style type="text/css">.quiz {
+<p>Świętuj, zrób sobie przerwę na rozciąganie i napij się wody!</p>
+<p>Kiedy będziesz gotowy, przejdź do Części 3 tej serii szkoleniowej, aby nauczyć się, jak zastosować to, czego nauczyłeś się do tej pory, do bardziej realistycznego przypadku analizy danych.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
