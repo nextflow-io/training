@@ -11,7 +11,7 @@ We'll do this in three stages:
 !!! warning "Prerequisite"
 
     You must work through Part 1 of the course before starting this lesson.
-    Specifically, working through sections 2.1-3 creates the genome index file (`data/genome_index.tar.gz`) required for the alignment step in this lesson.
+    Specifically, working through section 1.2.3 creates the genome index file (`data/genome_index.tar.gz`) required for the alignment step in this lesson.
 
 ---
 
