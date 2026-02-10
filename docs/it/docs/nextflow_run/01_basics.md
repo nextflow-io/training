@@ -101,6 +101,26 @@ nextflow run 1-hello.nf --input 'Hello World!'
 
 Se l'output della tua console appare più o meno così, congratulazioni, hai appena eseguito il tuo primo workflow Nextflow!
 
+??? question "Se non ha funzionato"
+
+    Se è fallito con un errore che appare così:
+
+    ```
+    Parameter `input` was specified on the command line or params file but is not declared in the script or config
+
+    -- Check script '1-hello.nf' at line: 23 or see '.nextflow.log' file for more details
+    ```
+
+    Allora probabilmente stai usando il vecchio parser del linguaggio Nextflow v1.
+    Questo è stato menzionato all'inizio del corso, ma forse te lo sei perso.
+    Controlla il materiale di aiuto [Versioni di Nextflow](../info/nxf_versions.md).
+
+    In breve, se stai usando Nextflow `25.10` allora devi abilitare il parser del linguaggio v2:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 L'output più importante qui è l'ultima riga, che è evidenziata nell'output sopra:
 
 ```console
@@ -135,7 +155,7 @@ Ottimo, il nostro workflow ha fatto ciò che doveva fare!
 Per impostazione predefinita, Nextflow salva gli output della pipeline in una directory chiamata `results` nel tuo percorso corrente.
 Per cambiare dove i tuoi file vengono pubblicati, usa il flag CLI `-output-dir` (o `-o` in breve)
 
-!!! danger "Attenzione"
+!!! danger "Pericolo"
 
     Nota che `--input` ha due trattini e `-output-dir` ne ha uno!
     Questo perché `--input` è un _parametro_ della pipeline e `-output-dir` è un flag CLI principale di Nextflow.
@@ -202,7 +222,7 @@ Questo dovrebbe produrre il percorso completo della directory: `work/a3/1e153543
 
 Diamo un'occhiata a cosa c'è dentro.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     work
@@ -278,7 +298,7 @@ Quando qualcosa va storto e devi risolvere il problema, può essere utile guarda
 
 Prova a rieseguire il workflow alcune volte con valori diversi per l'argomento `--input`, poi guarda le directory di attività.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     work/
@@ -338,7 +358,7 @@ Vedi che una nuova sottodirectory con un set completo di file di output e log è
 
 Al contrario, se guardi la directory `results`, c'è ancora solo un set di risultati, e il contenuto del file di output corrisponde a qualunque cosa tu abbia eseguito per ultima.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console title="results/"
     results

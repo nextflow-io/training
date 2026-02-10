@@ -1,6 +1,6 @@
 # Bölüm 1: Temel işlemleri çalıştırma
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow Run eğitim kursunun bu ilk bölümünde, temel işlemleri göstermek ve ilgili Nextflow kod bileşenlerini işaret etmek için kullanacağımız çok temel, alandan bağımsız bir Hello World örneğiyle konuya yumuşak bir giriş yapıyoruz.
 
@@ -101,6 +101,26 @@ nextflow run 1-hello.nf --input 'Hello World!'
 
 Konsol çıktınız buna benzer görünüyorsa, tebrikler, ilk Nextflow workflow'unuzu çalıştırdınız!
 
+??? question "Çalışmadıysa"
+
+    Eğer şuna benzer bir hatayla başarısız olduysa:
+
+    ```
+    Parameter `input` was specified on the command line or params file but is not declared in the script or config
+
+    -- Check script '1-hello.nf' at line: 23 or see '.nextflow.log' file for more details
+    ```
+
+    Muhtemelen eski v1 Nextflow dil ayrıştırıcısını kullanıyorsunuz.
+    Bu kursun başında bahsedilmişti, ama belki kaçırmışsınızdır.
+    [Nextflow sürümleri](../info/nxf_versions.md) yardım materyalini kontrol edin.
+
+    Kısacası, Nextflow `25.10` kullanıyorsanız v2 dil ayrıştırıcısını etkinleştirmeniz gerekir:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 Buradaki en önemli çıktı, yukarıdaki çıktıda vurgulanan son satırdır:
 
 ```console
@@ -135,7 +155,7 @@ Harika, workflow'umuz yapması gerekeni yaptı!
 Varsayılan olarak, Nextflow pipeline çıktılarını geçerli yolunuzda `results` adlı bir dizine kaydeder.
 Dosyalarınızın nereye yayınlanacağını değiştirmek için `-output-dir` CLI bayrağını (veya kısaca `-o`) kullanın.
 
-!!! danger "Dikkat"
+!!! danger "Tehlike"
 
     `--input`'un iki tire, `-output-dir`'in bir tire aldığını unutmayın!
     Bunun nedeni `--input`'un bir pipeline _parametresi_ ve `-output-dir`'in çekirdek bir Nextflow CLI bayrağı olmasıdır.
