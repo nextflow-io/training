@@ -4432,7 +4432,7 @@ Alors où sont les sorties ? Y en a-t-il ?</p>
 </code></pre></div>
 </details>
 <p>Vous pouvez jeter un œil aux rapports pour voir ce qui a été exécuté, et la réponse est : rien du tout !</p>
-<p><img alt="rapport de chronologie d'exécution vide" src="./img/execution_timeline_empty.png" /></p>
+<p><img alt="rapport de chronologie d'exécution vide" src="../img/execution_timeline_empty.png" /></p>
 <p>Regardons ce qu'il y a réellement dans le code.</p>
 <h3 id="13-examiner-le-workflow-de-substitution">1.3. Examiner le workflow de substitution<a class="headerlink" href="#13-examiner-le-workflow-de-substitution" title="Permanent link">&para;</a></h3>
 <p>Si vous regardez à l'intérieur du fichier <code>main.nf</code>, vous verrez qu'il importe un workflow appelé <code>HELLO</code> depuis <code>workflows/hello</code>.</p>
@@ -5913,7 +5913,7 @@ Et la réponse est assez intéressante : il y a maintenant deux endroits différ
 </details>
 <p>Vous voyez que nous avons obtenu un autre ensemble de rapports d'exécution en plus de ceux que nous avons obtenus lors de la première exécution, lorsque le workflow n'était encore qu'un substitut.
 Cette fois, vous voyez toutes les tâches qui ont été exécutées comme prévu.</p>
-<p><img alt="rapport de chronologie d'exécution pour le pipeline Hello" src="./img/execution_timeline_hello.png" /></p>
+<p><img alt="rapport de chronologie d'exécution pour le pipeline Hello" src="../img/execution_timeline_hello.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Une fois de plus, les tâches n'ont pas été exécutées en parallèle car nous exécutons sur une machine minimaliste dans Github Codespaces.

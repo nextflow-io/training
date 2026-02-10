@@ -4183,7 +4183,7 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tradução assistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">saiba mais e sugira melhorias</a></span></p>
 <p>Chamada de variantes é um método de análise genômica que visa identificar variações em uma sequência genômica em relação a um genoma de referência.
 Aqui vamos usar ferramentas e métodos projetados para chamar variantes germinativas curtas, <em>ou seja</em>, SNPs e indels, em dados de sequenciamento de genoma completo.</p>
-<p><img alt="Pipeline GATK" src="img/gatk-pipeline.png" /></p>
+<p><img alt="Pipeline GATK" src="../img/gatk-pipeline.png" /></p>
 <p>Um pipeline completo de chamada de variantes normalmente envolve muitas etapas, incluindo mapeamento para a referência (às vezes chamado de alinhamento genômico) e filtragem e priorização de variantes.
 Para simplificar, neste curso vamos focar apenas na parte de chamada de variantes.</p>
 <h3 id="metodos">Métodos<a class="headerlink" href="#metodos" title="Permanent link">&para;</a></h3>
@@ -4430,7 +4430,7 @@ Isso é bom para olhar variantes de cada amostra isoladamente, mas produz inform
 Muitas vezes é mais interessante olhar como as chamadas de variantes diferem entre múltiplas amostras.
 O GATK oferece um método alternativo chamado chamada conjunta de variantes para este propósito.</p>
 <p>A chamada conjunta de variantes envolve gerar um tipo especial de saída de variante chamado GVCF (para Genomic VCF) para cada amostra, depois combinar os dados GVCF de todas as amostras e executar uma análise estatística de 'genotipagem conjunta'.</p>
-<p><img alt="Análise conjunta" src="img/joint-calling.png" /></p>
+<p><img alt="Análise conjunta" src="../img/joint-calling.png" /></p>
 <p>O que é especial sobre o GVCF de uma amostra é que ele contém registros resumindo estatísticas de dados de sequência sobre todas as posições na área alvo do genoma, não apenas as posições onde o programa encontrou evidência de variação.
 Isso é crítico para o cálculo de genotipagem conjunta (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants">leitura adicional</a>).</p>
 <p>O GVCF é produzido pelo GATK HaplotypeCaller, a mesma ferramenta que acabamos de testar, com um parâmetro adicional (<code>-ERC GVCF</code>).

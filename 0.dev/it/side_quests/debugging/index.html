@@ -6155,7 +6155,7 @@ Le soluzioni sono discusse inline, ma provate a risolvere ognuno da soli prima d
 <a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Per gli scopi di questo esempio abbiamo lasciato un commento per mostrarvi dove si trova l'errore. L'estensione Nextflow per VSCode dovrebbe anche darvi alcuni suggerimenti su cosa potrebbe essere sbagliato, mettendo la parentesi graffa non corrispondente in rosso e evidenziando la fine prematura del file:</p>
-<p><img alt="Bad syntax" src="img/bad_syntax.png" /></p>
+<p><img alt="Bad syntax" src="../img/bad_syntax.png" /></p>
 <p><strong>Strategia di debug per errori di parentesi:</strong></p>
 <ol>
 <li>Usare la corrispondenza delle parentesi di VS Code (posizionare il cursore vicino a una parentesi)</li>
@@ -6351,7 +6351,7 @@ Le soluzioni sono discusse inline, ma provate a risolvere ognuno da soli prima d
 <a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Guardando la riga 4 nel contesto dell'errore, possiamo individuare il problema: stiamo usando <code>inputs</code> invece della corretta direttiva <code>input</code>. L'estensione Nextflow per VSCode segnalerà anche questo:</p>
-<p><img alt="Invalid process message" src="img/invalid_process_message.png" /></p>
+<p><img alt="Invalid process message" src="../img/invalid_process_message.png" /></p>
 <h4 id="correggere-il-codice_1">Correggere il codice<a class="headerlink" href="#correggere-il-codice_1" title="Permanent link">&para;</a></h4>
 <p>Sostituire la parola chiave errata con quella corretta facendo riferimento <a href="https://www.nextflow.io/docs/latest/process.html#">alla documentazione</a>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Dopo</label><label for="__tabbed_2_2">Prima</label></div>
@@ -6895,7 +6895,7 @@ Le soluzioni sono discusse inline, ma provate a risolvere ognuno da soli prima d
 <a id="__codelineno-34-24" name="__codelineno-34-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Anche l'estensione VSCode evidenzierà la variabile <code>input_ch</code> come definita fuori dal blocco workflow:</p>
-<p><img alt="Non-lethal syntax error" src="img/nonlethal.png" /></p>
+<p><img alt="Non-lethal syntax error" src="../img/nonlethal.png" /></p>
 <h4 id="correggere-il-codice_4">Correggere il codice<a class="headerlink" href="#correggere-il-codice_4" title="Permanent link">&para;</a></h4>
 <p>Spostare la definizione del canale all'interno del blocco workflow:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Dopo</label><label for="__tabbed_5_2">Prima</label></div>
@@ -7099,7 +7099,7 @@ Le soluzioni sono discusse inline, ma provate a risolvere ognuno da soli prima d
 </span><a id="__codelineno-42-24" name="__codelineno-42-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Dovreste vedere la chiamata a <code>PROCESS_FILES</code> non corrispondente, che fornisce più canali di input quando il processo ne definisce solo uno. L'estensione VSCode sottolineerà anche la chiamata al processo in rosso e fornirà un messaggio diagnostico quando ci passate sopra con il mouse:</p>
-<p><img alt="Incorrect number of args message" src="img/incorrect_num_args.png" /></p>
+<p><img alt="Incorrect number of args message" src="../img/incorrect_num_args.png" /></p>
 <h4 id="correggere-il-codice_5">Correggere il codice<a class="headerlink" href="#correggere-il-codice_5" title="Permanent link">&para;</a></h4>
 <p>Per questo esempio specifico, il processo si aspetta un singolo canale e non richiede il secondo canale, quindi possiamo correggerlo passando solo il canale <code>samples_ch</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Dopo</label><label for="__tabbed_6_2">Prima</label></div>

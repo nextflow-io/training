@@ -4183,7 +4183,7 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduction assistée par IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">en savoir plus et suggérer des améliorations</a></span></p>
 <p>L'appel de variants est une méthode d'analyse génomique qui vise à identifier les variations dans une séquence génomique par rapport à un génome de référence.
 Nous allons utiliser ici des outils et des méthodes conçus pour appeler des variants germinaux courts, <em>c'est-à-dire</em> des SNP et des indels, dans des données de séquençage de génome entier.</p>
-<p><img alt="Pipeline GATK" src="img/gatk-pipeline.png" /></p>
+<p><img alt="Pipeline GATK" src="../img/gatk-pipeline.png" /></p>
 <p>Un pipeline complet d'appel de variants implique généralement de nombreuses étapes, notamment l'alignement sur la référence (parfois appelé alignement du génome) ainsi que le filtrage et la priorisation des variants.
 Pour des raisons de simplicité, dans ce cours nous allons nous concentrer uniquement sur la partie appel de variants.</p>
 <h3 id="methodes">Méthodes<a class="headerlink" href="#methodes" title="Permanent link">&para;</a></h3>
@@ -4429,7 +4429,7 @@ C'est bien pour examiner les variants de chaque échantillon isolément, mais ce
 Il est souvent plus intéressant d'examiner comment les appels de variants diffèrent entre plusieurs échantillons.
 GATK propose une méthode alternative appelée appel de variants conjoint à cette fin.</p>
 <p>L'appel de variants conjoint implique de générer un type spécial de sortie de variant appelé GVCF (pour Genomic VCF) pour chaque échantillon, puis de combiner les données GVCF de tous les échantillons et d'exécuter une analyse statistique de 'génotypage conjoint'.</p>
-<p><img alt="Analyse conjointe" src="img/joint-calling.png" /></p>
+<p><img alt="Analyse conjointe" src="../img/joint-calling.png" /></p>
 <p>Ce qui est spécial dans le GVCF d'un échantillon, c'est qu'il contient des enregistrements résumant les statistiques des données de séquençage pour toutes les positions dans la zone ciblée du génome, et pas seulement les positions où le programme a trouvé des preuves de variation.
 Ceci est essentiel pour le calcul du génotypage conjoint (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants">lecture complémentaire</a>).</p>
 <p>Le GVCF est produit par GATK HaplotypeCaller, le même outil que nous venons de tester, avec un paramètre supplémentaire (<code>-ERC GVCF</code>).

@@ -6155,7 +6155,7 @@ Les solutions sont discutées en ligne, mais essayez de résoudre chaque problè
 <a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Pour les besoins de cet exemple, nous avons laissé un commentaire pour vous montrer où se trouve l'erreur. L'extension VSCode Nextflow devrait également vous donner quelques indices sur ce qui pourrait ne pas aller, en mettant l'accolade mal appariée en rouge et en soulignant la fin prématurée du fichier :</p>
-<p><img alt="Bad syntax" src="img/bad_syntax.png" /></p>
+<p><img alt="Bad syntax" src="../img/bad_syntax.png" /></p>
 <p><strong>Stratégie de débogage pour les erreurs d'accolades :</strong></p>
 <ol>
 <li>Utilisez la correspondance d'accolades de VS Code (placez le curseur à côté d'une accolade)</li>
@@ -6351,7 +6351,7 @@ Les solutions sont discutées en ligne, mais essayez de résoudre chaque problè
 <a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>En regardant la ligne 4 dans le contexte de l'erreur, nous pouvons repérer le problème : nous utilisons <code>inputs</code> au lieu de la directive correcte <code>input</code>. L'extension VSCode Nextflow signalera également ceci :</p>
-<p><img alt="Invalid process message" src="img/invalid_process_message.png" /></p>
+<p><img alt="Invalid process message" src="../img/invalid_process_message.png" /></p>
 <h4 id="corriger-le-code_1">Corriger le code<a class="headerlink" href="#corriger-le-code_1" title="Permanent link">&para;</a></h4>
 <p>Remplacez le mot-clé incorrect par le bon en consultant <a href="https://www.nextflow.io/docs/latest/process.html#">la documentation</a> :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Après</label><label for="__tabbed_2_2">Avant</label></div>
@@ -6895,7 +6895,7 @@ Les solutions sont discutées en ligne, mais essayez de résoudre chaque problè
 <a id="__codelineno-34-24" name="__codelineno-34-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>L'extension VSCode soulignera également la variable <code>input_ch</code> comme étant définie en dehors du bloc workflow :</p>
-<p><img alt="Non-lethal syntax error" src="img/nonlethal.png" /></p>
+<p><img alt="Non-lethal syntax error" src="../img/nonlethal.png" /></p>
 <h4 id="corriger-le-code_4">Corriger le code<a class="headerlink" href="#corriger-le-code_4" title="Permanent link">&para;</a></h4>
 <p>Déplacez la définition du canal à l'intérieur du bloc workflow :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Après</label><label for="__tabbed_5_2">Avant</label></div>
@@ -7099,7 +7099,7 @@ Les solutions sont discutées en ligne, mais essayez de résoudre chaque problè
 </span><a id="__codelineno-42-24" name="__codelineno-42-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Vous devriez voir l'appel <code>PROCESS_FILES</code> mal apparié, fournissant plusieurs canaux d'entrée alors que le processus n'en définit qu'un. L'extension VSCode soulignera également l'appel du processus en rouge, et fournira un message de diagnostic au survol :</p>
-<p><img alt="Incorrect number of args message" src="img/incorrect_num_args.png" /></p>
+<p><img alt="Incorrect number of args message" src="../img/incorrect_num_args.png" /></p>
 <h4 id="corriger-le-code_5">Corriger le code<a class="headerlink" href="#corriger-le-code_5" title="Permanent link">&para;</a></h4>
 <p>Pour cet exemple spécifique, le processus attend un seul canal et ne nécessite pas le second canal, nous pouvons donc le corriger en passant uniquement le canal <code>samples_ch</code> :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Après</label><label for="__tabbed_6_2">Avant</label></div>

@@ -4183,7 +4183,7 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traducción asistida por IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">más información y sugerencias</a></span></p>
 <p>El llamado de variantes es un método de análisis genómico que tiene como objetivo identificar variaciones en una secuencia genómica en relación con un genoma de referencia.
 Aquí vamos a usar herramientas y métodos diseñados para llamar variantes germinales cortas, <em>es decir</em> SNPs e indels, en datos de secuenciación de genoma completo.</p>
-<p><img alt="Pipeline GATK" src="img/gatk-pipeline.png" /></p>
+<p><img alt="Pipeline GATK" src="../img/gatk-pipeline.png" /></p>
 <p>Un pipeline completo de llamado de variantes típicamente involucra muchos pasos, incluyendo el mapeo a la referencia (a veces referido como alineamiento del genoma) y el filtrado y priorización de variantes.
 Por simplicidad, en este curso nos vamos a enfocar solo en la parte de llamado de variantes.</p>
 <h3 id="metodos">Métodos<a class="headerlink" href="#metodos" title="Permanent link">&para;</a></h3>
@@ -4430,7 +4430,7 @@ Eso está bien para observar variantes de cada muestra de forma aislada, pero pr
 A menudo es más interesante observar cómo difieren los llamados de variantes entre múltiples muestras.
 GATK ofrece un método alternativo llamado llamado conjunto de variantes para este propósito.</p>
 <p>El llamado conjunto de variantes implica generar un tipo especial de salida de variantes llamada GVCF (Genomic VCF) para cada muestra, luego combinar los datos GVCF de todas las muestras y ejecutar un análisis estadístico de 'genotipado conjunto'.</p>
-<p><img alt="Análisis conjunto" src="img/joint-calling.png" /></p>
+<p><img alt="Análisis conjunto" src="../img/joint-calling.png" /></p>
 <p>Lo que es especial sobre el GVCF de una muestra es que contiene registros que resumen estadísticas de datos de secuencia sobre todas las posiciones en el área objetivo del genoma, no solo las posiciones donde el programa encontró evidencia de variación.
 Esto es crítico para el cálculo de genotipado conjunto (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants">lectura adicional</a>).</p>
 <p>El GVCF es producido por GATK HaplotypeCaller, la misma herramienta que acabamos de probar, con un parámetro adicional (<code>-ERC GVCF</code>).

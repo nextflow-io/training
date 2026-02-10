@@ -4183,7 +4183,7 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> KI-gestützte Übersetzung - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">mehr erfahren &amp; Verbesserungen vorschlagen</a></span></p>
 <p>Variant Calling ist eine genomische Analysemethode, die darauf abzielt, Variationen in einer Genomsequenz im Vergleich zu einem Referenzgenom zu identifizieren.
 Hier werden wir Tools und Methoden verwenden, die für das Calling von kurzen Keimbahnvarianten entwickelt wurden, <em>d. h.</em> SNPs und Indels, in Gesamtgenom-Sequenzierungsdaten.</p>
-<p><img alt="GATK-Pipeline" src="img/gatk-pipeline.png" /></p>
+<p><img alt="GATK-Pipeline" src="../img/gatk-pipeline.png" /></p>
 <p>Eine vollständige Variant-Calling-Pipeline umfasst typischerweise viele Schritte, einschließlich Mapping auf die Referenz (manchmal als Genom-Alignment bezeichnet) sowie Filterung und Priorisierung von Varianten.
 Der Einfachheit halber konzentrieren wir uns in diesem Kurs nur auf den Variant-Calling-Teil.</p>
 <h3 id="methoden">Methoden<a class="headerlink" href="#methoden" title="Permanent link">&para;</a></h3>
@@ -4430,7 +4430,7 @@ Das ist in Ordnung, um Varianten von jeder Probe isoliert zu betrachten, liefert
 Es ist oft interessanter zu sehen, wie sich Variantenaufrufe über mehrere Proben hinweg unterscheiden.
 GATK bietet für diesen Zweck eine alternative Methode namens Joint Variant Calling.</p>
 <p>Joint Variant Calling beinhaltet die Erzeugung einer speziellen Art von Variantenausgabe namens GVCF (für Genomic VCF) für jede Probe, dann das Kombinieren der GVCF-Daten von allen Proben und das Ausführen einer statistischen Analyse namens „Joint Genotyping".</p>
-<p><img alt="Joint-Analyse" src="img/joint-calling.png" /></p>
+<p><img alt="Joint-Analyse" src="../img/joint-calling.png" /></p>
 <p>Das Besondere an einem GVCF einer Probe ist, dass es Datensätze enthält, die Sequenzdatenstatistiken über alle Positionen im Zielbereich des Genoms zusammenfassen, nicht nur die Positionen, an denen das Programm Hinweise auf Variation gefunden hat.
 Dies ist entscheidend für die Joint-Genotyping-Berechnung (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants">weiterführende Literatur</a>).</p>
 <p>Das GVCF wird von GATK HaplotypeCaller erzeugt, demselben Tool, das wir gerade getestet haben, mit einem zusätzlichen Parameter (<code>-ERC GVCF</code>).

@@ -6155,7 +6155,7 @@ Bu, burada yoğun olarak kullanacağımız hata ayıklamayı destekleyen IDE öz
 <a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu örneğin amacı için, hatanın nerede olduğunu göstermek için size bir yorum bıraktık. Nextflow VSCode uzantısı da size neyin yanlış olabileceği konusunda bazı ipuçları vermelidir, uyumsuz parantezi kırmızıya boyar ve dosyanın erken bitişini vurgular:</p>
-<p><img alt="Kötü sözdizimi" src="img/bad_syntax.png" /></p>
+<p><img alt="Kötü sözdizimi" src="../img/bad_syntax.png" /></p>
 <p><strong>Parantez hataları için hata ayıklama stratejisi:</strong></p>
 <ol>
 <li>VS Code'un parantez eşleştirmesini kullanın (imleci bir parantezin yanına yerleştirin)</li>
@@ -6351,7 +6351,7 @@ Bu, burada yoğun olarak kullanacağımız hata ayıklamayı destekleyen IDE öz
 <a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Hata bağlamındaki 4. satıra bakıldığında, sorunu tespit edebiliriz: doğru <code>input</code> yönergesi yerine <code>inputs</code> kullanıyoruz. Nextflow VSCode uzantısı bunu da işaretleyecektir:</p>
-<p><img alt="Geçersiz process mesajı" src="img/invalid_process_message.png" /></p>
+<p><img alt="Geçersiz process mesajı" src="../img/invalid_process_message.png" /></p>
 <h4 id="kodu-duzeltin_1">Kodu düzeltin<a class="headerlink" href="#kodu-duzeltin_1" title="Permanent link">&para;</a></h4>
 <p><a href="https://www.nextflow.io/docs/latest/process.html#">Belgelere</a> başvurarak yanlış anahtar kelimeyi doğru olanla değiştirin:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Sonra</label><label for="__tabbed_2_2">Önce</label></div>
@@ -6895,7 +6895,7 @@ Bu, burada yoğun olarak kullanacağımız hata ayıklamayı destekleyen IDE öz
 <a id="__codelineno-34-24" name="__codelineno-34-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>VSCode uzantısı ayrıca <code>input_ch</code> değişkenini workflow bloğunun dışında tanımlandığı için vurgulayacaktır:</p>
-<p><img alt="Ölümcül olmayan sözdizimi hatası" src="img/nonlethal.png" /></p>
+<p><img alt="Ölümcül olmayan sözdizimi hatası" src="../img/nonlethal.png" /></p>
 <h4 id="kodu-duzeltin_4">Kodu düzeltin<a class="headerlink" href="#kodu-duzeltin_4" title="Permanent link">&para;</a></h4>
 <p>Kanal tanımını workflow bloğunun içine taşıyın:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Sonra</label><label for="__tabbed_5_2">Önce</label></div>
@@ -7099,7 +7099,7 @@ Bu, burada yoğun olarak kullanacağımız hata ayıklamayı destekleyen IDE öz
 </span><a id="__codelineno-42-24" name="__codelineno-42-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Process yalnızca bir tane tanımlarken birden fazla girdi kanalı sağlayan uyumsuz <code>PROCESS_FILES</code> çağrısını görmelisiniz. VSCode uzantısı ayrıca process çağrısının altını kırmızıya çizer ve fare ile üzerine geldiğinizde bir tanı mesajı sağlar:</p>
-<p><img alt="Yanlış sayıda argüman mesajı" src="img/incorrect_num_args.png" /></p>
+<p><img alt="Yanlış sayıda argüman mesajı" src="../img/incorrect_num_args.png" /></p>
 <h4 id="kodu-duzeltin_5">Kodu düzeltin<a class="headerlink" href="#kodu-duzeltin_5" title="Permanent link">&para;</a></h4>
 <p>Bu özel örnek için, process tek bir kanal bekler ve ikinci kanala ihtiyaç duymaz, bu nedenle yalnızca <code>samples_ch</code> kanalını geçirerek düzeltebiliriz:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Sonra</label><label for="__tabbed_6_2">Önce</label></div>

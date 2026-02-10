@@ -4183,7 +4183,7 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Tłumaczenie wspomagane przez AI - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">dowiedz się więcej i zasugeruj ulepszenia</a></span></p>
 <p>Wykrywanie wariantów to metoda analizy genomicznej, której celem jest identyfikacja zmian w sekwencji genomu względem genomu referencyjnego.
 Tutaj użyjemy narzędzi i metod zaprojektowanych do wykrywania krótkich wariantów zarodkowych, <em>tj.</em> SNP i indeli, w danych z sekwencjonowania całego genomu.</p>
-<p><img alt="Pipeline GATK" src="img/gatk-pipeline.png" /></p>
+<p><img alt="Pipeline GATK" src="../img/gatk-pipeline.png" /></p>
 <p>Pełny pipeline wykrywania wariantów zazwyczaj obejmuje wiele kroków, w tym mapowanie do referencji (czasami nazywane dopasowaniem genomu) oraz filtrowanie i priorytetyzację wariantów.
 Dla uproszczenia, w tym szkoleniu skupimy się tylko na części dotyczącej wykrywania wariantów.</p>
 <h3 id="metody">Metody<a class="headerlink" href="#metody" title="Permanent link">&para;</a></h3>
@@ -4430,7 +4430,7 @@ To jest w porządku do przeglądania wariantów z każdej próbki osobno, ale da
 Często bardziej interesujące jest spojrzenie na to, jak wykrycia wariantów różnią się między wieloma próbkami.
 GATK oferuje alternatywną metodę zwaną wspólnym wykrywaniem wariantów w tym celu.</p>
 <p>Wspólne wykrywanie wariantów polega na wygenerowaniu specjalnego rodzaju wyjścia wariantów zwanego GVCF (Genomic VCF) dla każdej próbki, następnie połączeniu danych GVCF ze wszystkich próbek i uruchomieniu analizy statystycznej 'wspólnego genotypowania'.</p>
-<p><img alt="Analiza wspólna" src="img/joint-calling.png" /></p>
+<p><img alt="Analiza wspólna" src="../img/joint-calling.png" /></p>
 <p>To, co jest specjalne w GVCF próbki, to że zawiera rekordy podsumowujące statystyki danych sekwencjonowania o wszystkich pozycjach w docelowym obszarze genomu, nie tylko pozycjach, gdzie program znalazł dowody zmienności.
 Jest to kluczowe dla obliczeń wspólnego genotypowania (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants">dalsze informacje</a>).</p>
 <p>GVCF jest produkowany przez GATK HaplotypeCaller, to samo narzędzie, które właśnie przetestowaliśmy, z dodatkowym parametrem (<code>-ERC GVCF</code>).

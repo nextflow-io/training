@@ -6155,7 +6155,7 @@ Rozwiązania są omawiane bezpośrednio, ale spróbuj rozwiązać każdy samodzi
 <a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Na potrzeby tego przykładu zostawiliśmy komentarz pokazujący, gdzie jest błąd. Rozszerzenie Nextflow VSCode powinno również dawać wskazówki o tym, co może być nie tak, podświetlając niedopasowany nawias na czerwono i zaznaczając przedwczesny koniec pliku:</p>
-<p><img alt="Bad syntax" src="img/bad_syntax.png" /></p>
+<p><img alt="Bad syntax" src="../img/bad_syntax.png" /></p>
 <p><strong>Strategia debugowania błędów nawiasów:</strong></p>
 <ol>
 <li>Użyj dopasowywania nawiasów VS Code (umieść kursor obok nawiasu)</li>
@@ -6351,7 +6351,7 @@ Rozwiązania są omawiane bezpośrednio, ale spróbuj rozwiązać każdy samodzi
 <a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Patrząc na linię 4 w kontekście błędu, możemy dostrzec problem: używamy <code>inputs</code> zamiast poprawnego <code>input</code>. Rozszerzenie Nextflow VSCode również oznaczy to:</p>
-<p><img alt="Invalid process message" src="img/invalid_process_message.png" /></p>
+<p><img alt="Invalid process message" src="../img/invalid_process_message.png" /></p>
 <h4 id="napraw-kod_1">Napraw kod<a class="headerlink" href="#napraw-kod_1" title="Permanent link">&para;</a></h4>
 <p>Zastąp nieprawidłowe słowo kluczowe poprawnym, odwołując się do <a href="https://www.nextflow.io/docs/latest/process.html#">dokumentacji</a>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Po</label><label for="__tabbed_2_2">Przed</label></div>
@@ -6895,7 +6895,7 @@ Rozwiązania są omawiane bezpośrednio, ale spróbuj rozwiązać każdy samodzi
 <a id="__codelineno-34-24" name="__codelineno-34-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Rozszerzenie VSCode również podświetli zmienną <code>input_ch</code> jako zdefiniowaną poza blokiem <code>workflow</code>:</p>
-<p><img alt="Non-lethal syntax error" src="img/nonlethal.png" /></p>
+<p><img alt="Non-lethal syntax error" src="../img/nonlethal.png" /></p>
 <h4 id="napraw-kod_4">Napraw kod<a class="headerlink" href="#napraw-kod_4" title="Permanent link">&para;</a></h4>
 <p>Przenieś definicję kanału do wnętrza bloku <code>workflow</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Po</label><label for="__tabbed_5_2">Przed</label></div>
@@ -7099,7 +7099,7 @@ Rozwiązania są omawiane bezpośrednio, ale spróbuj rozwiązać każdy samodzi
 </span><a id="__codelineno-42-24" name="__codelineno-42-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Powinieneś zobaczyć niedopasowane wywołanie <code>PROCESS_FILES</code>, dostarczające wiele kanałów wejściowych, gdy proces definiuje tylko jeden. Rozszerzenie VSCode również podkreśli wywołanie procesu na czerwono i dostarczy komunikat diagnostyczny przy najechaniu myszką:</p>
-<p><img alt="Incorrect number of args message" src="img/incorrect_num_args.png" /></p>
+<p><img alt="Incorrect number of args message" src="../img/incorrect_num_args.png" /></p>
 <h4 id="napraw-kod_5">Napraw kod<a class="headerlink" href="#napraw-kod_5" title="Permanent link">&para;</a></h4>
 <p>Dla tego konkretnego przykładu proces oczekuje pojedynczego kanału i nie wymaga drugiego kanału, więc możemy to naprawić przekazując tylko kanał <code>samples_ch</code>:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Po</label><label for="__tabbed_6_2">Przed</label></div>

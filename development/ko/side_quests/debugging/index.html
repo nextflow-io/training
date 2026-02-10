@@ -6155,7 +6155,7 @@
 <a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>이 예제의 목적을 위해 오류가 어디에 있는지 보여주는 주석을 남겨두었습니다. Nextflow VSCode 확장 프로그램도 일치하지 않는 중괄호를 빨간색으로 표시하고 파일의 조기 종료를 강조하여 무엇이 잘못되었는지에 대한 힌트를 제공해야 합니다:</p>
-<p><img alt="Bad syntax" src="img/bad_syntax.png" /></p>
+<p><img alt="Bad syntax" src="../img/bad_syntax.png" /></p>
 <p><strong>중괄호 오류에 대한 디버깅 전략:</strong></p>
 <ol>
 <li>VS Code의 중괄호 매칭 사용 (중괄호 옆에 커서 배치)</li>
@@ -6351,7 +6351,7 @@
 <a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>오류 컨텍스트의 4줄을 보면 문제를 발견할 수 있습니다: 올바른 <code>input</code> 지시문 대신 <code>inputs</code>를 사용하고 있습니다. Nextflow VSCode 확장 프로그램도 이를 표시합니다:</p>
-<p><img alt="Invalid process message" src="img/invalid_process_message.png" /></p>
+<p><img alt="Invalid process message" src="../img/invalid_process_message.png" /></p>
 <h4 id="_15">코드 수정<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
 <p><a href="https://www.nextflow.io/docs/latest/process.html#">문서</a>를 참조하여 잘못된 키워드를 올바른 것으로 교체합니다:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">후</label><label for="__tabbed_2_2">전</label></div>
@@ -6895,7 +6895,7 @@
 <a id="__codelineno-34-24" name="__codelineno-34-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>VSCode 확장 프로그램도 워크플로우 블록 외부에서 정의된 <code>input_ch</code> 변수를 강조합니다:</p>
-<p><img alt="Non-lethal syntax error" src="img/nonlethal.png" /></p>
+<p><img alt="Non-lethal syntax error" src="../img/nonlethal.png" /></p>
 <h4 id="_27">코드 수정<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h4>
 <p>채널 정의를 워크플로우 블록 내부로 이동합니다:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">후</label><label for="__tabbed_5_2">전</label></div>
@@ -7099,7 +7099,7 @@
 </span><a id="__codelineno-42-24" name="__codelineno-42-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>프로세스가 하나만 정의할 때 여러 입력 채널을 제공하는 일치하지 않는 <code>PROCESS_FILES</code> 호출을 볼 수 있어야 합니다. VSCode 확장 프로그램도 프로세스 호출에 빨간 밑줄을 그으며, 마우스를 올리면 진단 메시지를 제공합니다:</p>
-<p><img alt="Incorrect number of args message" src="img/incorrect_num_args.png" /></p>
+<p><img alt="Incorrect number of args message" src="../img/incorrect_num_args.png" /></p>
 <h4 id="_33">코드 수정<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h4>
 <p>이 특정 예제의 경우 프로세스는 단일 채널을 예상하고 두 번째 채널이 필요하지 않으므로 <code>samples_ch</code> 채널만 전달하여 수정할 수 있습니다:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">후</label><label for="__tabbed_6_2">전</label></div>

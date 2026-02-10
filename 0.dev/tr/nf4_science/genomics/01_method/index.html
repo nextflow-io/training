@@ -4183,7 +4183,7 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
 <p>Varyant çağırma, bir genom dizisindeki varyasyonları referans genoma göre tanımlamayı amaçlayan bir genomik analiz yöntemidir.
 Burada, tüm genom dizileme verilerinde kısa germline varyantları, <em>yani</em> SNP'ler ve indelleri çağırmak için tasarlanmış araçları ve yöntemleri kullanacağız.</p>
-<p><img alt="GATK pipeline" src="img/gatk-pipeline.png" /></p>
+<p><img alt="GATK pipeline" src="../img/gatk-pipeline.png" /></p>
 <p>Tam bir varyant çağırma boru hattı tipik olarak referansa haritalama (bazen genom hizalama olarak da adlandırılır) ve varyant filtreleme ve önceliklendirme dahil olmak üzere birçok adım içerir.
 Basitlik için, bu kursta sadece varyant çağırma kısmına odaklanacağız.</p>
 <h3 id="yontemler">Yöntemler<a class="headerlink" href="#yontemler" title="Permanent link">&para;</a></h3>
@@ -4430,7 +4430,7 @@ Bu, her örnekten gelen varyantlara izole olarak bakmak için iyidir, ancak sın
 Varyant çağrılarının birden fazla örnek arasında nasıl farklılık gösterdiğine bakmak genellikle daha ilginçtir.
 GATK bu amaç için ortak varyant çağırma adı verilen alternatif bir yöntem sunar.</p>
 <p>Ortak varyant çağırma, her örnek için GVCF (Genomic VCF için) adı verilen özel bir varyant çıktısı türü oluşturmayı, ardından tüm örneklerden GVCF verilerini birleştirmeyi ve bir 'ortak genotipleme' istatistiksel analizi çalıştırmayı içerir.</p>
-<p><img alt="Ortak analiz" src="img/joint-calling.png" /></p>
+<p><img alt="Ortak analiz" src="../img/joint-calling.png" /></p>
 <p>Bir örneğin GVCF'sinin özel yanı, programın varyasyon kanıtı bulduğu konumlar değil, genomun hedeflenen alanındaki tüm konumlar hakkında dizi veri istatistiklerini özetleyen kayıtlar içermesidir.
 Bu, ortak genotipleme hesaplaması için kritiktir (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants">daha fazla okuma</a>).</p>
 <p>GVCF, az önce test ettiğimiz aynı araç olan GATK HaplotypeCaller tarafından ek bir parametre (<code>-ERC GVCF</code>) ile üretilir.

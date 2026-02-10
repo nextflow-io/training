@@ -4970,16 +4970,16 @@
 <p>Eklentiyi manuel olarak kurmak için:</p>
 <ol>
 <li>VS Code'u açın</li>
-<li>Sol taraftaki eklentiler simgesine tıklayarak Extensions görünümüne gidin: <img alt="eklentiler simgesi" src="img/extensions_icon.png" /> (VSCode'u yerel olarak çalıştırıyorsanız kısayol <code>Ctrl/Cmd+Shift+X</code>)</li>
+<li>Sol taraftaki eklentiler simgesine tıklayarak Extensions görünümüne gidin: <img alt="eklentiler simgesi" src="../img/extensions_icon.png" /> (VSCode'u yerel olarak çalıştırıyorsanız kısayol <code>Ctrl/Cmd+Shift+X</code>)</li>
 <li>"Nextflow" arayın</li>
 <li>Resmi Nextflow eklentisini kurun</li>
 </ol>
-<p><img alt="Nextflow Eklentisini Kur" src="img/install_extension.png" /></p>
+<p><img alt="Nextflow Eklentisini Kur" src="../img/install_extension.png" /></p>
 <h3 id="02-calsma-alan-duzeni">0.2. Çalışma Alanı Düzeni<a class="headerlink" href="#02-calsma-alan-duzeni" title="Permanent link">&para;</a></h3>
 <p>Hello Nextflow boyunca VS Code kullandığınız için temellere zaten aşinasınız. Bu oturum için çalışma alanınızı verimli bir şekilde nasıl düzenleyeceğiniz aşağıda açıklanmıştır:</p>
 <ul>
 <li><strong>Editör Alanı</strong>: Dosyaları görüntülemek ve düzenlemek için. Dosyaları yan yana karşılaştırmak için bunu birden fazla bölmeye ayırabilirsiniz.</li>
-<li><strong>Dosya Gezgini</strong> tıklayın (<img alt="dosya gezgini simgesi" src="img/files_icon.png" />) (<code>Ctrl/Cmd+Shift+E</code>): Sisteminizdeki yerel dosyalar ve klasörler. Dosyalar arasında gezinmek için bunu solda açık tutun</li>
+<li><strong>Dosya Gezgini</strong> tıklayın (<img alt="dosya gezgini simgesi" src="../img/files_icon.png" />) (<code>Ctrl/Cmd+Shift+E</code>): Sisteminizdeki yerel dosyalar ve klasörler. Dosyalar arasında gezinmek için bunu solda açık tutun</li>
 <li><strong>Entegre Terminal</strong> (<code>Ctrl+Shift+</code> ters tırnak hem Windows hem de MacOS için): Alt kısımda bilgisayarla etkileşim için bir terminal. Nextflow veya diğer komutları çalıştırmak için bunu kullanın.</li>
 <li><strong>Sorunlar Paneli</strong> (<code>Ctrl+Shift+M</code>): VS Code algıladığı hataları ve sorunları burada gösterecektir. Bu, sorunları bir bakışta vurgulamak için kullanışlıdır.</li>
 </ul>
@@ -4993,7 +4993,7 @@
 <p>Artık çalışma alanınız hazır olduğuna göre, VS Code'un sözdizimi vurgulamasının Nextflow kodunu daha etkili bir şekilde okumanıza ve yazmanıza nasıl yardımcı olduğunu keşfedelim.</p>
 <h3 id="11-nextflow-sozdizimi-ogeleri">1.1. Nextflow Sözdizimi Öğeleri<a class="headerlink" href="#11-nextflow-sozdizimi-ogeleri" title="Permanent link">&para;</a></h3>
 <p>Sözdizimi vurgulamayı çalışırken görmek için <code>basic_workflow.nf</code>'i açın:</p>
-<p><img alt="Sözdizimi Vitrini" src="img/syntax_showcase.png" /></p>
+<p><img alt="Sözdizimi Vitrini" src="../img/syntax_showcase.png" /></p>
 <p>VS Code'un nasıl vurguladığına dikkat edin:</p>
 <ul>
 <li><strong>Anahtar kelimeler</strong> (<code>process</code>, <code>workflow</code>, <code>input</code>, <code>output</code>, <code>script</code>) farklı renklerde</li>
@@ -5027,7 +5027,7 @@
 <p>Otomatik tamamlama seçenekleri kodunuzda nerede olduğunuza bağlı olarak değişir:</p>
 <h4 id="kanal-islemleri">Kanal İşlemleri<a class="headerlink" href="#kanal-islemleri" title="Permanent link">&para;</a></h4>
 <p><code>basic_workflow.nf</code>'i tekrar açın ve workflow bloğunda <code>channel.</code> yazmayı deneyin:</p>
-<p><img alt="Kanal otomatik tamamlama" src="img/autocomplete_channel.png" /></p>
+<p><img alt="Kanal otomatik tamamlama" src="../img/autocomplete_channel.png" /></p>
 <p>Şunlar için öneriler göreceksiniz:</p>
 <ul>
 <li><code>fromPath()</code> - Dosya yollarından kanal oluştur</li>
@@ -5038,13 +5038,13 @@
 </ul>
 <p>Bu, tam metod adlarını hatırlamak zorunda kalmadan kullanılacak doğru kanal fabrikasını hızlıca bulmanıza yardımcı olur.</p>
 <p>Ayrıca kanallara uygulanabilecek operatörleri de keşfedebilirsiniz. Örneğin, mevcut işlemleri görmek için <code>FASTQC.out.html.</code> yazın:</p>
-<p><img alt="Kanal işlemleri otomatik tamamlama" src="img/autocomplete_operators.png" /></p>
+<p><img alt="Kanal işlemleri otomatik tamamlama" src="../img/autocomplete_operators.png" /></p>
 <h4 id="surec-yonergeleri">Süreç Yönergeleri<a class="headerlink" href="#surec-yonergeleri" title="Permanent link">&para;</a></h4>
 <p>Bir süreç script bloğunun içinde, mevcut çalışma zamanı özelliklerini görmek için <code>task.</code> yazın:</p>
-<p><img alt="Görev özellikleri otomatik tamamlama" src="img/autocomplete_task.png" /></p>
+<p><img alt="Görev özellikleri otomatik tamamlama" src="../img/autocomplete_task.png" /></p>
 <h4 id="yaplandrma">Yapılandırma<a class="headerlink" href="#yaplandrma" title="Permanent link">&para;</a></h4>
 <p>nextflow.config dosyasını açın ve mevcut süreç yönergelerini görmek için herhangi bir yere <code>process.</code> yazın:</p>
-<p><img alt="Yapılandırma otomatik tamamlama" src="img/autocomplete_config.png" /></p>
+<p><img alt="Yapılandırma otomatik tamamlama" src="../img/autocomplete_config.png" /></p>
 <p>Şunlar için öneriler göreceksiniz:</p>
 <ul>
 <li><code>executor</code></li>
@@ -5060,12 +5060,12 @@
 <p>VS Code'un gerçek zamanlı hata algılaması, iş akışınızı çalıştırmadan önce sorunları yakalamanıza yardımcı olur.</p>
 <h3 id="31-sozdizimi-hatas-alglama">3.1. Sözdizimi Hatası Algılama<a class="headerlink" href="#31-sozdizimi-hatas-alglama" title="Permanent link">&para;</a></h3>
 <p>Algılamayı çalışırken görmek için kasıtlı bir hata oluşturalım. <code>basic_workflow.nf</code>'i açın ve süreç adını <code>FASTQC</code>'den <code>FASTQ</code>'ya (veya başka geçersiz bir ada) değiştirin. VS Code hatayı workflow bloğunda kırmızı dalgalı alt çizgiyle hemen vurgulayacaktır:</p>
-<p><img alt="Hata alt çizgisi" src="img/error_underline.png" /></p>
+<p><img alt="Hata alt çizgisi" src="../img/error_underline.png" /></p>
 <h3 id="32-sorunlar-paneli">3.2. Sorunlar Paneli<a class="headerlink" href="#32-sorunlar-paneli" title="Permanent link">&para;</a></h3>
 <p>Bireysel hata vurgulamanın ötesinde, VS Code çalışma alanınızdaki tüm hataları, uyarıları ve bilgi mesajlarını toplayan merkezi bir Sorunlar paneli sağlar. <code>Ctrl/Cmd+Shift+M</code> ile açın ve yalnızca geçerli dosyayla ilgili hataları göstermek için filtre simgesini kullanın:</p>
-<p><img alt="Sorunlar panelini filtrele" src="img/active_file.png" /></p>
+<p><img alt="Sorunlar panelini filtrele" src="../img/active_file.png" /></p>
 <p>Sorunlu satıra doğrudan atlamak için herhangi bir soruna tıklayın</p>
-<p><img alt="Sorunlar Paneli" src="img/problems_panel.png" /></p>
+<p><img alt="Sorunlar Paneli" src="../img/problems_panel.png" /></p>
 <p>Süreç adını tekrar <code>FASTQC</code> olarak değiştirerek hatayı düzeltin.</p>
 <h3 id="33-yaygn-hata-kalplar">3.3. Yaygın Hata Kalıpları<a class="headerlink" href="#33-yaygn-hata-kalplar" title="Permanent link">&para;</a></h3>
 <p>Nextflow sözdizimindeki yaygın hatalar şunlardır:</p>
@@ -5136,10 +5136,10 @@
 </div>
 <h3 id="41-tanma-git">4.1. Tanıma Git<a class="headerlink" href="#41-tanma-git" title="Permanent link">&para;</a></h3>
 <p><code>FASTQC</code> gibi bir süreç adının üzerine fareyle gelirseniz, modül arayüzünü (girdiler ve çıktılar) içeren bir açılır pencere göreceksiniz:</p>
-<p><img alt="Tanıma git" src="img/syntax.png" /></p>
+<p><img alt="Tanıma git" src="../img/syntax.png" /></p>
 <p>Bu özellik, modül dosyasını doğrudan açmadan modül arayüzünü anlamanıza olanak tanıdığı için iş akışları yazarken özellikle değerlidir.</p>
 <p><strong>Ctrl/Cmd-tıklama</strong> kullanarak herhangi bir süreç, modül veya değişken tanımına hızlıca gidebilirsiniz. Betiğin üst kısmındaki modül dosyasına bağlantı üzerine fareyle gelin ve önerildiği gibi bağlantıyı takip edin:</p>
-<p><img alt="Bağlantıyı takip et" src="img/follow_link.png" /></p>
+<p><img alt="Bağlantıyı takip et" src="../img/follow_link.png" /></p>
 <p>Aynı şey süreç adları için de çalışır. <code>basic_workflow.nf</code>'e geri dönün ve bunu workflow bloğundaki <code>FASTQC</code> süreç adında deneyin. Bu sizi doğrudan süreç adına bağlar (bu örnekte modül dosyasıyla aynıdır, ancak çok daha büyük bir dosyanın ortasında olabilir).</p>
 <p>Bulunduğunuz yere geri dönmek için <strong>Alt+←</strong> (veya Mac'te <strong>Ctrl+-</strong>) kullanın. Bu, yerinizi kaybetmeden kodu keşfetmenin güçlü bir yoludur.</p>
 <p>Şimdi <code>complex_workflow.nf</code>'i (daha önce bahsedilen sadece gösterim amaçlı dosya) kullanarak daha karmaşık bir iş akışında gezinmeyi keşfedelim. Bu iş akışı, ayrı modül dosyalarında tanımlanan birden fazla süreç ve bazı satır içi süreçler içerir. Karmaşık çok dosyalı yapılar manuel olarak gezinmek zor olabilse de, tanımlara atlama yeteneği keşfetmeyi çok daha yönetilebilir hale getirir.</p>
@@ -5153,7 +5153,7 @@
 </ol>
 <h3 id="42-sembol-gezinmesi">4.2. Sembol Gezinmesi<a class="headerlink" href="#42-sembol-gezinmesi" title="Permanent link">&para;</a></h3>
 <p><code>complex_workflow.nf</code> hala açıkken, VSCode'un üst kısmındaki arama çubuğuna <code>@</code> yazarak dosyadaki tüm sembollerin genel görünümünü elde edebilirsiniz (klavye kısayolu <code>Ctrl/Cmd+Shift+O</code>'dur, ancak Codespaces'te çalışmayabilir). Bu, geçerli dosyadaki tüm sembolleri listeleyen sembol gezinme panelini açar:</p>
-<p><img alt="Sembol gezinmesi" src="img/symbols.png" /></p>
+<p><img alt="Sembol gezinmesi" src="../img/symbols.png" /></p>
 <p>Bu şunları gösterir:</p>
 <ul>
 <li>Tüm süreç tanımları</li>
@@ -5163,17 +5163,17 @@
 <p>Sonuçları filtrelemek için yazmaya başlayın.</p>
 <h3 id="43-tum-referanslar-bul">4.3. Tüm Referansları Bul<a class="headerlink" href="#43-tum-referanslar-bul" title="Permanent link">&para;</a></h3>
 <p>Bir sürecin veya değişkenin kod tabanınız boyunca nerede kullanıldığını anlamak çok yardımcı olabilir. Örneğin, <code>FASTQC</code> sürecine yapılan tüm referansları bulmak istiyorsanız, önce tanımına giderek başlayın. Bunu doğrudan <code>modules/fastqc.nf</code>'i açarak veya yukarıda yaptığımız gibi VS Code'un <code>Ctrl/Cmd-tıklama</code> ile hızlı gezinme özelliğini kullanarak yapabilirsiniz. Süreç tanımına ulaştıktan sonra, <code>FASTQC</code> süreç adına sağ tıklayın ve kullanıldığı tüm örnekleri görmek için bağlam menüsünden "Find All References"ı seçin.</p>
-<p><img alt="Referansları bul" src="img/references.png" /></p>
+<p><img alt="Referansları bul" src="../img/references.png" /></p>
 <p>Bu özellik, <code>FASTQC</code>'nin çalışma alanınızda referans verildiği tüm örnekleri, iki farklı iş akışındaki kullanımı dahil olmak üzere gösterir. Bu içgörü, <code>FASTQC</code> sürecindeki değişikliklerin potansiyel etkisini değerlendirmek için çok önemlidir.</p>
 <h3 id="44-anahat-paneli">4.4. Anahat Paneli<a class="headerlink" href="#44-anahat-paneli" title="Permanent link">&para;</a></h3>
-<p>Explorer kenar çubuğunda bulunan (<img alt="Explorer simgesi" src="img/files_icon.png" /> tıklayın) Outline paneli, geçerli dosyanızdaki tüm sembollerin kullanışlı bir genel görünümünü sağlar. Bu özellik, fonksiyonları, değişkenleri ve diğer anahtar öğeleri hiyerarşik bir görünümde göstererek kodunuzun yapısında hızlıca gezinmenize ve yönetmenize olanak tanır.</p>
-<p><img alt="Anahat paneli" src="img/outline.png" /></p>
+<p>Explorer kenar çubuğunda bulunan (<img alt="Explorer simgesi" src="../img/files_icon.png" /> tıklayın) Outline paneli, geçerli dosyanızdaki tüm sembollerin kullanışlı bir genel görünümünü sağlar. Bu özellik, fonksiyonları, değişkenleri ve diğer anahtar öğeleri hiyerarşik bir görünümde göstererek kodunuzun yapısında hızlıca gezinmenize ve yönetmenize olanak tanır.</p>
+<p><img alt="Anahat paneli" src="../img/outline.png" /></p>
 <p>Dosya tarayıcısını kullanmadan kodunuzun farklı bölümlerine hızlıca gitmek için Outline panelini kullanın.</p>
 <h3 id="45-dag-gorsellestirme">4.5. DAG görselleştirme<a class="headerlink" href="#45-dag-gorsellestirme" title="Permanent link">&para;</a></h3>
 <p>VS Code'un Nextflow eklentisi iş akışınızı Yönlendirilmiş Döngüsüz Grafik (DAG) olarak görselleştirebilir. Bu, veri akışını ve süreçler arasındaki bağımlılıkları anlamanıza yardımcı olur. <code>complex_workflow.nf</code>'i açın ve <code>workflow {</code>'ın üzerindeki "Preview DAG" düğmesine tıklayın (bu dosyadaki ikinci <code>workflow</code> bloğu):</p>
-<p><img alt="DAG önizlemesi" src="img/dag_preview.png" /></p>
+<p><img alt="DAG önizlemesi" src="../img/dag_preview.png" /></p>
 <p>Bu sadece 'giriş' iş akışıdır, ancak yukarıdaki <code>workflow RNASEQ_PIPELINE {</code>'nin üzerindeki "Preview DAG" düğmesine tıklayarak iç iş akışları için DAG'yi de önizleyebilirsiniz:</p>
-<p><img alt="DAG önizlemesi iç iş akışı" src="img/dag_preview_inner.png" /></p>
+<p><img alt="DAG önizlemesi iç iş akışı" src="../img/dag_preview_inner.png" /></p>
 <p>Bu iş akışı için, koddaki ilgili süreç tanımlarına gitmek için DAG'deki düğümleri kullanabilirsiniz. Bir düğüme tıklayın ve sizi editörde ilgili süreç tanımına götürecektir. Özellikle bir iş akışı büyük bir boyuta ulaştığında, bu gerçekten kod etrafında gezinmenize ve süreçlerin nasıl bağlandığını anlamanıza yardımcı olabilir.</p>
 <h3 id="ckarm_4">Çıkarım<a class="headerlink" href="#ckarm_4" title="Permanent link">&para;</a></h3>
 <p>Kod yapısını ve bağımlılıkları anlamak için tanıma git, sembol arama, referansları bul ve DAG görselleştirme özelliklerini kullanarak karmaşık iş akışlarında verimli gezinebilirsiniz.</p>
@@ -5199,7 +5199,7 @@
 <li><code>modules/fastqc.nf</code> sekmesine sağ tıklayın ve "Split Right" seçin</li>
 <li>Şimdi her iki dosyayı yan yana görebilirsiniz</li>
 </ol>
-<p><img alt="Bölünmüş editör" src="img/split_editor.png" /></p>
+<p><img alt="Bölünmüş editör" src="../img/split_editor.png" /></p>
 <p>Bu şu durumlarda paha biçilmezdir:</p>
 <ul>
 <li>Workflow çağrılarını yazarken modül arayüzlerini kontrol etme ve önizleme yeterli değil</li>
@@ -5209,7 +5209,7 @@
 <h3 id="53-proje-genelinde-arama">5.3. Proje Genelinde Arama<a class="headerlink" href="#53-proje-genelinde-arama" title="Permanent link">&para;</a></h3>
 <p>Bazen belirli kalıpların tüm projenizde nerede kullanıldığını bulmanız gerekir. Arama panelini açmak için <code>Ctrl/Cmd+Shift+F</code> tuşlarına basın.</p>
 <p>Çalışma alanı genelinde <code>publishDir</code> aramayı deneyin:</p>
-<p><img alt="Proje araması" src="img/project_search.png" /></p>
+<p><img alt="Proje araması" src="../img/project_search.png" /></p>
 <p>Bu size yayınlama dizinlerini kullanan her dosyayı gösterir ve şunlarda yardımcı olur:</p>
 <ul>
 <li>Çıktı organizasyon kalıplarını anlama</li>
@@ -5260,7 +5260,7 @@
 <p>Kodu yorumsuz hale getirmek için tekrar <strong>Ctrl+/</strong> (veya <strong>Cmd+/</strong>) kullanın.</p>
 <h4 id="genel-baks-icin-kod-katlama">Genel Bakış için Kod Katlama<a class="headerlink" href="#genel-baks-icin-kod-katlama" title="Permanent link">&para;</a></h4>
 <p><code>complex_workflow.nf</code>'de, süreç tanımlarının yanındaki küçük oklara dikkat edin. Süreçleri katlamak (daraltmak) için onlara tıklayın:</p>
-<p><img alt="Kod katlama" src="img/code_folding.png" /></p>
+<p><img alt="Kod katlama" src="../img/code_folding.png" /></p>
 <p>Bu, uygulama detaylarında kaybolmadan iş akışı yapınızın üst düzey bir genel görünümünü sağlar.</p>
 <h4 id="parantez-eslestirme">Parantez Eşleştirme<a class="headerlink" href="#parantez-eslestirme" title="Permanent link">&para;</a></h4>
 <p>İmlecinizi herhangi bir <code>{</code> veya <code>}</code> parantezinin yanına yerleştirin ve VS Code eşleşen parantezi vurgular. Eşleşen parantezler arasında atlamak için <strong>Ctrl+Shift+\</strong> (veya <strong>Cmd+Shift+\</strong>) kullanın.</p>
@@ -5301,8 +5301,8 @@
 <li>Satır içi diff görünümleri</li>
 <li>Commit ve push yetenekleri</li>
 </ul>
-<p>Git değişikliklerini görmek ve commit'leri doğrudan editörde hazırlamak için source control düğmesini (<img alt="Source control simgesi" src="img/source_control_icon.png" />) kullanarak Source Control panelini açın (<code>Ctrl+Shift+G</code> veya VSCode'u yerel olarak çalıştırıyorsanız <code>Cmd+Shift+G</code>).</p>
-<p><img alt="Source Control Paneli" src="img/source_control.png" /></p>
+<p>Git değişikliklerini görmek ve commit'leri doğrudan editörde hazırlamak için source control düğmesini (<img alt="Source control simgesi" src="../img/source_control_icon.png" />) kullanarak Source Control panelini açın (<code>Ctrl+Shift+G</code> veya VSCode'u yerel olarak çalıştırıyorsanız <code>Cmd+Shift+G</code>).</p>
+<p><img alt="Source Control Paneli" src="../img/source_control.png" /></p>
 <h3 id="72-is-akslarn-calstrma-ve-inceleme">7.2. İş Akışlarını Çalıştırma ve İnceleme<a class="headerlink" href="#72-is-akslarn-calstrma-ve-inceleme" title="Permanent link">&para;</a></h3>
 <p>Bir iş akışı çalıştıralım ve ardından sonuçları inceleyelim. Entegre terminalde (hem Windows hem de MacOS için <code>Ctrl+Shift+</code> ters tırnak), temel iş akışını çalıştırın:</p>
 <div class="highlight"><span class="filename">Temel iş akışını çalıştır</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>basic_workflow.nf<span class="w"> </span>--input<span class="w"> </span>data/sample_data.csv<span class="w"> </span>--output_dir<span class="w"> </span>results

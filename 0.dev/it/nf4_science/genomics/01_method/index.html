@@ -4183,7 +4183,7 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Traduzione assistita da IA - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">ulteriori informazioni e suggerimenti per miglioramenti</a></span></p>
 <p>Il variant calling è un metodo di analisi genomica che mira a identificare variazioni in una sequenza genomica rispetto a un genoma di riferimento.
 Qui utilizzeremo strumenti e metodi progettati per identificare varianti germinali brevi, <em>cioè</em> SNP e indel, in dati di sequenziamento dell'intero genoma.</p>
-<p><img alt="Pipeline GATK" src="img/gatk-pipeline.png" /></p>
+<p><img alt="Pipeline GATK" src="../img/gatk-pipeline.png" /></p>
 <p>Una pipeline completa di variant calling comprende tipicamente molti passaggi, incluso il mapping al riferimento (a volte chiamato allineamento genomico) e il filtraggio e la prioritizzazione delle varianti.
 Per semplicità, in questo corso ci concentreremo solo sulla parte di variant calling.</p>
 <h3 id="metodi">Metodi<a class="headerlink" href="#metodi" title="Permanent link">&para;</a></h3>
@@ -4430,7 +4430,7 @@ Questo va bene per esaminare le varianti da ciascun campione in isolamento, ma f
 È spesso più interessante osservare come le varianti identificate differiscono tra più campioni.
 GATK offre un metodo alternativo chiamato joint variant calling per questo scopo.</p>
 <p>Il joint variant calling comporta la generazione di un tipo speciale di output di varianti chiamato GVCF (per Genomic VCF) per ciascun campione, quindi la combinazione dei dati GVCF di tutti i campioni e l'esecuzione di un'analisi statistica di 'joint genotyping'.</p>
-<p><img alt="Analisi congiunta" src="img/joint-calling.png" /></p>
+<p><img alt="Analisi congiunta" src="../img/joint-calling.png" /></p>
 <p>Ciò che è speciale nel GVCF di un campione è che contiene record che riassumono le statistiche dei dati di sequenza per tutte le posizioni nell'area mirata del genoma, non solo le posizioni in cui il programma ha trovato evidenze di variazione.
 Questo è fondamentale per il calcolo del joint genotyping (<a href="https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants">ulteriori informazioni</a>).</p>
 <p>Il GVCF è prodotto da GATK HaplotypeCaller, lo stesso strumento che abbiamo appena testato, con un parametro aggiuntivo (<code>-ERC GVCF</code>).
