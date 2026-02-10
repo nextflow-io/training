@@ -16,16 +16,19 @@ def get_languages() -> dict[str, str]:
     path = DOCS_ROOT / "language_names.yml"
     if not path.exists():
         raise ConfigError(f"Language names file not found: {path}")
-    return yaml.safe_load(path.read_text(encoding="utf-8"))
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ConfigError(f"Expected dict in {path}, got {type(data).__name__}")
+    return data
 
 
 def get_translation_languages() -> list[str]:
     """Get all translation language codes (excludes English)."""
-    return [
+    return sorted(
         d.name
         for d in DOCS_ROOT.iterdir()
         if d.is_dir() and (d / "mkdocs.yml").exists() and d.name != "en"
-    ]
+    )
 
 
 def en_to_lang_path(en_path: Path, lang: str) -> Path:

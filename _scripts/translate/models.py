@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import NamedTuple
@@ -143,8 +143,9 @@ class TranslationLog:
             self.entries.append(entry)
 
     def write(self) -> None:
-        if not self.path:
-            return
+        entries = sorted(self.entries, key=lambda x: x.started_at)
+        for e in entries:
+            e.duration_s = round(e.duration_s, 2)
         data = {
             "started_at": self.started_at,
             "finished_at": datetime.now().isoformat(),
@@ -152,32 +153,11 @@ class TranslationLog:
             "language": self.language,
             "parallel": self.parallel,
             "total_files": self.total_files,
-            "files_changed": sum(1 for e in self.entries if e.changed),
-            "files_unchanged": sum(
-                1 for e in self.entries if not e.changed and not e.error
-            ),
-            "files_failed": sum(1 for e in self.entries if e.error),
-            "total_input_tokens": sum(e.input_tokens for e in self.entries),
-            "total_output_tokens": sum(e.output_tokens for e in self.entries),
-            "files": [
-                {
-                    "filename": e.filename,
-                    "started_at": e.started_at,
-                    "finished_at": e.finished_at,
-                    "duration_s": round(e.duration_s, 2),
-                    "input_lines": e.input_lines,
-                    "input_hash": e.input_hash,
-                    "output_lines": e.output_lines,
-                    "output_hash": e.output_hash,
-                    "changed": e.changed,
-                    "error": e.error,
-                    "model": e.model,
-                    "input_tokens": e.input_tokens,
-                    "output_tokens": e.output_tokens,
-                    "stop_reason": e.stop_reason,
-                    "continuations": e.continuations,
-                }
-                for e in sorted(self.entries, key=lambda x: x.started_at)
-            ],
+            "files_changed": sum(1 for e in entries if e.changed),
+            "files_unchanged": sum(1 for e in entries if not e.changed and not e.error),
+            "files_failed": sum(1 for e in entries if e.error),
+            "total_input_tokens": sum(e.input_tokens for e in entries),
+            "total_output_tokens": sum(e.output_tokens for e in entries),
+            "files": [asdict(e) for e in entries],
         }
         self.path.write_text(json.dumps(data, indent=2), encoding="utf-8")

@@ -157,7 +157,7 @@ def verify_translation_structural(en_path: Path, lang_path: Path) -> list[str]:
         issues.append("Missing frontmatter (English has it, translation does not)")
 
     # Admonition count (allow 30% variance)
-    admonition_re = re.compile(r"^(!{3}|\?{3}\+?)\s+\w+")
+    admonition_re = re.compile(r"^(!{3}|\?{3}\+?)\s+(\w[\w-]*)")
     en_admonitions = sum(1 for ln in en_lines if admonition_re.match(ln.strip()))
     trans_admonitions = sum(1 for ln in trans_lines if admonition_re.match(ln.strip()))
     if (
@@ -167,6 +167,63 @@ def verify_translation_structural(en_path: Path, lang_path: Path) -> list[str]:
         issues.append(
             f"Admonition count differs significantly: {trans_admonitions} vs {en_admonitions} in English"
         )
+
+    # Admonition keywords should be English (not translated)
+    valid_keywords = {
+        "note",
+        "tip",
+        "warning",
+        "info",
+        "abstract",
+        "success",
+        "failure",
+        "danger",
+        "bug",
+        "example",
+        "quote",
+        "question",
+        "hint",
+        "exercise",
+        "solution",
+        "full-code",
+    }
+    for ln in trans_lines:
+        m = admonition_re.match(ln.strip())
+        if m:
+            keyword = m.group(2).lower()
+            if keyword not in valid_keywords:
+                issues.append(
+                    f"Admonition keyword appears translated: '{m.group(2)}' "
+                    f"(expected English keyword)"
+                )
+                break  # report once
+
+    # Tab label consistency — all Before/After labels in a file should match
+    tab_re = re.compile(r'^===\s+"([^"]+)"')
+    tab_labels = set()
+    for ln in trans_lines:
+        m = tab_re.match(ln.strip())
+        if m:
+            tab_labels.add(m.group(1))
+    # If we have translated Before/After, there should be at most 2 unique
+    # labels for the pair (plus any custom labels). Check for known-bad
+    # patterns: more than 4 unique tab labels often signals inconsistency.
+    en_tab_labels = set()
+    for ln in en_lines:
+        m = tab_re.match(ln.strip())
+        if m:
+            en_tab_labels.add(m.group(1))
+    if en_tab_labels and len(tab_labels) > len(en_tab_labels) + 2:
+        issues.append(
+            f"Tab labels may be inconsistent: {len(tab_labels)} unique labels "
+            f"vs {len(en_tab_labels)} in English"
+        )
+
+    # Translation notice presence (skip for English source files)
+    if lang_path != en_path:
+        has_notice = "ai-translation-notice" in trans_content
+        if not has_notice:
+            issues.append("Missing AI translation notice span")
 
     return issues
 
@@ -287,8 +344,15 @@ async def get_broken_files(
         return None
 
     console.print(f"[cyan]Scanning {len(en_files)} files for {lang}...[/cyan]")
-    results = await asyncio.gather(*[check_one(p) for p in en_files])
-    broken = [r for r in results if r is not None]
+    results = await asyncio.gather(
+        *[check_one(p) for p in en_files], return_exceptions=True
+    )
+    broken: list[TranslationFile] = []
+    for r in results:
+        if isinstance(r, Exception):
+            console.print(f"  [red]Error during scan: {r}[/red]")
+        elif r is not None:
+            broken.append(r)
 
     if broken:
         console.print(f"[yellow]Found {len(broken)} broken files for {lang}[/yellow]")

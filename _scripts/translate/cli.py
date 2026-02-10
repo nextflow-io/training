@@ -13,6 +13,7 @@ import subprocess
 from pathlib import Path
 
 import typer
+from rich.console import Console
 
 from .config import (
     DOCS_ROOT,
@@ -71,7 +72,7 @@ def _sync_fix(
     include: str | None,
     parallel: int,
     log_file: Path | None,
-    console,
+    console: Console,
 ) -> None:
     """Fix mode: scan all translations for issues and re-translate broken ones."""
     console.print(
@@ -117,7 +118,7 @@ def _sync_normal(
     since: str | None,
     parallel: int,
     log_file: Path | None,
-    console,
+    console: Console,
 ) -> None:
     """Normal mode: baseline-based sync."""
     check_api_key()
@@ -166,8 +167,13 @@ def translate(
     """Translate a single file."""
     check_api_key()
 
-    if lang == "en":
-        raise typer.Exit("Cannot translate to English")
+    valid_langs = get_translation_languages()
+    if lang not in valid_langs:
+        console = make_console(stderr=True)
+        console.print(
+            f"[red]Unknown language: {lang}. Valid: {', '.join(sorted(valid_langs))}[/red]"
+        )
+        raise typer.Exit(code=1)
 
     en_path = _resolve_en_path(path)
     tf = TranslationFile(en_path, en_to_lang_path(en_path, lang), lang)
@@ -254,7 +260,10 @@ def ci_detect(
 
     if language:
         if language not in all_langs:
-            raise typer.Exit(f"Unknown language: {language}")
+            console.print(
+                f"[red]Unknown language: {language}. Valid: {', '.join(sorted(all_langs))}[/red]"
+            )
+            raise typer.Exit(code=1)
         langs = [language]
     else:
         langs = all_langs
@@ -268,7 +277,7 @@ def ci_detect(
     print(f"has_work={'true' if need_sync else 'false'}")
 
 
-def _ci_detect_fix(langs: list[str], console) -> list[str]:
+def _ci_detect_fix(langs: list[str], console: Console) -> list[str]:
     """Fix mode: scan all translations for structural/semantic issues."""
     console.print(
         "[bold magenta]Fix mode:[/bold magenta] scanning for broken translations..."
@@ -302,7 +311,9 @@ def _ci_detect_fix(langs: list[str], console) -> list[str]:
     return asyncio.run(_detect_broken())
 
 
-def _ci_detect_normal(langs: list[str], since: str | None, console) -> list[str]:
+def _ci_detect_normal(
+    langs: list[str], since: str | None, console: Console
+) -> list[str]:
     """Normal mode: baseline-based detection."""
     baseline = resolve_baseline(since, console)
 
@@ -369,7 +380,12 @@ def ci_run(
 ) -> None:
     """Run sync for multiple languages (CI)."""
     console = make_console()
-    for lang in json.loads(languages):
+    lang_list = json.loads(languages)
+    if not isinstance(lang_list, list):
+        raise ConfigError(
+            f"--languages must be a JSON array, got {type(lang_list).__name__}"
+        )
+    for lang in lang_list:
         console.rule(f"[bold]{lang}[/bold]")
         if fix:
             _sync_fix(

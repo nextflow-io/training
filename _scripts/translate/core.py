@@ -55,11 +55,12 @@ async def translate_file_async(
 
             for attempt in range(1 + MAX_VERIFY_RETRIES):
                 # On first attempt, use incremental if available (unless force_full).
-                # On retries, always force full re-translation.
-                use_existing = original_existing
+                # On retries, force full re-translation without existing reference.
                 if tf.force_full or attempt > 0:
+                    use_existing = None
                     en_diff = None
                 else:
+                    use_existing = original_existing
                     en_diff = None
                     if use_existing and not tf.prompt_changed:
                         baseline = get_translation_baseline()
@@ -140,7 +141,8 @@ async def translate_all(
 
     # Pre-compute line counts (used for sorting and progress tracking)
     file_lines = {
-        str(f.relative_path): f.en_path.read_text().count("\n") for f in files
+        str(f.relative_path): f.en_path.read_text(encoding="utf-8").count("\n")
+        for f in files
     }
 
     # Sort largest files first to avoid "long pole" problem

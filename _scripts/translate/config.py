@@ -31,7 +31,7 @@ PRIORITY_DIRS = ["hello_nextflow", "hello_nf-core", "nf4_science", "envsetup"]
 # Comment styles by language (used for code block post-processing)
 HASH_COMMENT_LANGS = {"python", "py", "sh", "bash", "dockerfile", "yaml", "yml", "toml"}
 SLASH_COMMENT_LANGS = {"console"}  # Note: json has no comments
-MIXED_COMMENT_LANGS = {"nextflow", "groovy", "nf", "java", "kotlin"}  # # and /* */
+MIXED_COMMENT_LANGS = {"nextflow", "groovy", "nf", "java", "kotlin"}  # //, # and /* */
 
 
 # ---------------------------------------------------------------------------
@@ -69,7 +69,7 @@ def make_console(*, stderr: bool = False) -> Console:
 
 def check_api_key() -> None:
     """Verify ANTHROPIC_API_KEY is set."""
-    if not os.environ.get("ANTHROPIC_API_KEY"):
+    if not os.getenv("ANTHROPIC_API_KEY"):
         raise ConfigError(
             "ANTHROPIC_API_KEY not set. Get key at https://console.anthropic.com/settings/keys"
         )

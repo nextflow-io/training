@@ -1,9 +1,4 @@
-"""Claude API interaction — async-first with sync convenience wrapper.
-
-The async path is the primary implementation. The sync path (`call_claude`)
-is a thin wrapper using `asyncio.run()`, so both paths share identical
-retry, continuation, and token-tracking logic.
-"""
+"""Claude API interaction — async-first implementation."""
 
 from __future__ import annotations
 
@@ -55,7 +50,9 @@ async def _call_once(
             )
         except _RETRYABLE as e:
             if attempt == MAX_RETRIES:
-                raise
+                raise TranslationError(
+                    f"[{label}] {type(e).__name__} after {MAX_RETRIES} retries: {e}"
+                ) from e
             base_delay = BASE_DELAY * (2**attempt)
             jitter = random.uniform(0, base_delay * 0.5)
             delay = base_delay + jitter
@@ -64,6 +61,8 @@ async def _call_once(
                 f"after {delay:.1f}s: {type(e).__name__}"
             )
             await asyncio.sleep(delay)
+        except anthropic.APIError as e:
+            raise TranslationError(f"[{label}] {type(e).__name__}: {e}") from e
 
     raise RuntimeError("Unreachable")  # pragma: no cover
 
@@ -89,9 +88,17 @@ async def call_claude_async(
     client = client or anthropic.AsyncAnthropic()
     messages: list[dict] = [{"role": "user", "content": prompt}]
 
+    def _text(msg: anthropic.types.Message) -> str:
+        if not msg.content or not hasattr(msg.content[0], "text"):
+            raise TranslationError(
+                f"[{label}] Unexpected API response: no text content block "
+                f"(stop_reason={msg.stop_reason})"
+            )
+        return msg.content[0].text
+
     # Initial request
     message = await _call_once(client, messages, label)
-    result_parts = [message.content[0].text]
+    result_parts = [_text(message)]
     total_input = message.usage.input_tokens
     total_output = message.usage.output_tokens
 
@@ -109,13 +116,13 @@ async def call_claude_async(
             f"{continuations}/{MAX_CONTINUATIONS}..."
         )
 
-        messages.append({"role": "assistant", "content": message.content[0].text})
+        messages.append({"role": "assistant", "content": _text(message)})
         messages.append(
             {"role": "user", "content": "Continue exactly where you left off."}
         )
 
         message = await _call_once(client, messages, label)
-        result_parts.append(message.content[0].text)
+        result_parts.append(_text(message))
         total_input += message.usage.input_tokens
         total_output += message.usage.output_tokens
 
@@ -127,12 +134,3 @@ async def call_claude_async(
         stop_reason=message.stop_reason,
         continuations=continuations,
     )
-
-
-def call_claude(prompt: str, label: str = "") -> TranslationResult:
-    """Synchronous convenience wrapper around call_claude_async.
-
-    Creates a fresh async client and runs the async path to completion.
-    Suitable for single-file translation from the CLI.
-    """
-    return asyncio.run(call_claude_async(prompt, label=label))

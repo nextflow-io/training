@@ -36,14 +36,14 @@ def build_translation_prompt(
 
     Args:
         lang: Language code (e.g., 'pt', 'es')
-        lang_name: Human-readable language name (e.g., 'portugues')
+        lang_name: Human-readable language name (e.g., 'português')
         en_content: Full English source content
         existing: Existing translation content, if updating
         en_diff: Git diff of English changes, for incremental updates
     """
     parts = [get_general_prompt(), get_lang_prompt(lang)]
 
-    if existing:
+    if existing is not None:
         if en_diff:
             # Diff-aware incremental update mode
             parts.append(

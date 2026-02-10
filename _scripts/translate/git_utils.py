@@ -21,46 +21,41 @@ def _get_repo() -> git.Repo:
 
 def file_changed_since(path: Path, since_commit: str) -> bool:
     """Check if file has any commits after the given commit."""
-    try:
-        commits = list(
-            _get_repo().iter_commits(
-                rev=f"{since_commit}..HEAD", paths=str(path), max_count=1
-            )
+    commits = list(
+        _get_repo().iter_commits(
+            rev=f"{since_commit}..HEAD", paths=str(path), max_count=1
         )
-        return len(commits) > 0
-    except git.GitCommandError:
-        return False
+    )
+    return len(commits) > 0
 
 
 def get_file_diff(path: Path, since_commit: str) -> str | None:
     """Get the git diff for a file since a specific commit.
 
-    Returns the unified diff string, or None if no changes,
-    diff is too large (>20% of current file lines), or git fails.
+    Returns the unified diff string, or None if no changes or
+    diff is too large (>20% of current file lines).
     """
-    try:
-        repo = _get_repo()
-        rel_path = path.relative_to(REPO_ROOT)
+    repo = _get_repo()
+    rel_path = path.relative_to(REPO_ROOT)
 
-        diff = repo.git.diff(f"{since_commit}..HEAD", "--", str(rel_path))
-        if not diff:
-            return None
-
-        # Check if diff is too large (>20% of file lines)
-        file_lines = path.read_text(encoding="utf-8").count("\n") + 1
-        diff_changes = sum(
-            1
-            for line in diff.split("\n")
-            if line.startswith(("+", "-")) and not line.startswith(("+++", "---"))
-        )
-        if file_lines > 0 and diff_changes > file_lines * 0.2:
-            return None
-
-        return diff
-    except git.GitCommandError:
+    diff = repo.git.diff(f"{since_commit}..HEAD", "--", str(rel_path))
+    if not diff:
         return None
 
+    # Check if diff is too large (>20% of file lines)
+    file_lines = path.read_text(encoding="utf-8").count("\n") + 1
+    diff_changes = sum(
+        1
+        for line in diff.split("\n")
+        if line.startswith(("+", "-")) and not line.startswith(("+++", "---"))
+    )
+    if diff_changes > file_lines * 0.2:
+        return None
 
+    return diff
+
+
+@lru_cache
 def get_translation_baseline(
     github_token: str | None = None,
     github_repository: str | None = None,
@@ -177,9 +172,9 @@ def get_outdated_files(lang: str, baseline: str | None = None) -> list[Translati
 def get_missing_files(lang: str) -> list[TranslationFile]:
     """Find English files without translations."""
     return [
-        TranslationFile(en_path, en_to_lang_path(en_path, lang), lang)
+        TranslationFile(en_path, lang_path, lang)
         for en_path in iter_en_docs()
-        if not en_to_lang_path(en_path, lang).exists()
+        if not (lang_path := en_to_lang_path(en_path, lang)).exists()
     ]
 
 
