@@ -8,8 +8,8 @@
 
 ## 1. Lass die Kuh berühmte Wissenschaftler\*innen zitieren
 
-Dieser Abschnitt enthält einige zusätzliche Übungen, um das Gelernte zu vertiefen.
-Diese Übungen sind _nicht erforderlich_, um spätere Teile des Trainings zu verstehen, bieten aber eine unterhaltsame Möglichkeit, deine Kenntnisse zu festigen, indem du herausfindest, wie du die Kuh berühmte Wissenschaftler\*innen zitieren lassen kannst.
+Dieser Abschnitt enthält einige zusätzliche Übungen, um das bisher Gelernte zu üben.
+Diese Übungen sind _nicht erforderlich_, um spätere Teile des Trainings zu verstehen, bieten aber eine unterhaltsame Möglichkeit, dein Wissen zu festigen, indem du herausfindest, wie du die Kuh berühmte Wissenschaftler\*innen zitieren lassen kannst.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________
@@ -32,16 +32,16 @@ Diese Übungen sind _nicht erforderlich_, um spätere Teile des Trainings zu ver
 
 ### 1.1. Modifiziere das `hello-containers.nf`-Skript, um einen getQuote-Prozess zu verwenden
 
-Wir haben eine Liste von Computer- und Biologie-Pionieren in der Datei `containers/data/pioneers.csv`.
-Auf hoher Ebene musst du für diese Übung:
+Wir haben eine Liste von Computer- und Biologie-Pionier\*innen in der Datei `containers/data/pioneers.csv`.
+Um diese Übung zu lösen, musst du im Wesentlichen:
 
-- Die Standard-`params.input_file` so ändern, dass sie auf die Datei `pioneers.csv` zeigt.
+- Den Standard-`params.input_file` so ändern, dass er auf die Datei `pioneers.csv` zeigt.
 - Einen `getQuote`-Prozess erstellen, der den `quote`-Container verwendet, um für jede Eingabe ein Zitat abzurufen.
 - Die Ausgabe des `getQuote`-Prozesses mit dem `cowsay`-Prozess verbinden, um das Zitat anzuzeigen.
 
 Für das `quote`-Container-Image kannst du entweder das verwenden, das du selbst in der vorherigen zusätzlichen Übung erstellt hast, oder das von Seqera Containers.
 
-!!! Hint
+!!! Hint "Hinweis"
 
     Eine gute Wahl für den `script`-Block deines getQuote-Prozesses könnte sein:
         ```groovy
@@ -53,12 +53,12 @@ Für das `quote`-Container-Image kannst du entweder das verwenden, das du selbst
             """
         ```
 
-Du findest eine Lösung für diese Übung in `containers/solutions/hello-containers-4.1.nf`.
+Eine Lösung zu dieser Übung findest du in `containers/solutions/hello-containers-4.1.nf`.
 
 ### 1.2. Modifiziere deine Nextflow-Pipeline, um sie in den Modi `quote` und `sayHello` ausführen zu können.
 
-Füge deiner Pipeline etwas Verzweigungslogik hinzu, um Eingaben sowohl für `quote` als auch für `sayHello` zu akzeptieren.
-Hier ist ein Beispiel, wie du eine `if`-Anweisung in einem Nextflow-Workflow verwenden kannst:
+Füge deiner Pipeline eine Verzweigungslogik hinzu, damit sie Eingaben sowohl für `quote` als auch für `sayHello` akzeptieren kann.
+Hier ist ein Beispiel, wie du eine `if`-Anweisung in einem Nextflow-Workflow verwendest:
 
 ```groovy title="hello-containers.nf"
 workflow {
@@ -72,18 +72,18 @@ workflow {
 }
 ```
 
-!!! Hint
+!!! Hint "Hinweis"
 
-    Du kannst `new_ch = processName.out` verwenden, um dem Ausgabe-Channel eines Prozesses einen Namen zuzuweisen.
+    Du kannst `new_ch = processName.out` verwenden, um dem Ausgabekanal eines Prozesses einen Namen zuzuweisen.
 
-Du findest eine Lösung für diese Übung in `containers/solutions/hello-containers-4.2.nf`.
+Eine Lösung zu dieser Übung findest du in `containers/solutions/hello-containers-4.2.nf`.
 
-### Zusammenfassung
+### Fazit
 
 Du weißt jetzt, wie du Container in Nextflow verwendest, um Prozesse auszuführen, und wie du Verzweigungslogik in deine Pipelines einbaust!
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
-Feiere, mach eine Pause und trink etwas Wasser!
+Feiere deinen Erfolg, mach eine Pause und trink etwas Wasser!
 
-Wenn du bereit bist, fahre mit Teil 3 dieser Trainingsreihe fort, um zu lernen, wie du das bisher Gelernte auf einen realistischeren Datenanalyse-Anwendungsfall anwenden kannst.
+Wenn du bereit bist, gehe zu Teil 3 dieser Trainingsreihe über, um zu lernen, wie du das bisher Gelernte auf einen realistischeren Datenanalyse-Anwendungsfall anwendest.

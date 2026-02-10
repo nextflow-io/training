@@ -1,3 +1,3 @@
-<!-- Posizione temporanea per note specifiche che dovranno essere generalizzate -->
+<!-- Punto di raccolta temporaneo per note specifiche che dovrebbero essere generalizzate -->
 
-Utilizziamo il prefisso `ch_` per tutte le variabili channel per indicare chiaramente che sono channel Nextflow.
+Utilizziamo il prefisso `ch_` per tutte le variabili canale per indicare chiaramente che sono canali Nextflow.

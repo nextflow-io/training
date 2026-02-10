@@ -1,35 +1,37 @@
 # Teil 1: Methodenübersicht und manuelles Testen
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Variant Calling ist eine genomische Analysemethode, die darauf abzielt, Variationen in einer Genomsequenz im Vergleich zu einem Referenzgenom zu identifizieren.
-Hier werden wir Tools und Methoden verwenden, die für das Aufrufen kurzer Keimbahnvarianten entwickelt wurden, _d. h._ SNPs und Indels, in Whole-Genome-Sequencing-Daten.
+Hier werden wir Tools und Methoden verwenden, die für das Calling von kurzen Keimbahnvarianten entwickelt wurden, _d. h._ SNPs und Indels, in Gesamtgenom-Sequenzierungsdaten.
 
-![GATK pipeline](img/gatk-pipeline.png)
+![GATK-Pipeline](img/gatk-pipeline.png)
 
-Eine vollständige Variant-Calling-Pipeline umfasst typischerweise viele Schritte, einschließlich des Mappings auf die Referenz (manchmal auch als Genomalignment bezeichnet) sowie der Filterung und Priorisierung von Varianten.
+Eine vollständige Variant-Calling-Pipeline umfasst typischerweise viele Schritte, einschließlich Mapping auf die Referenz (manchmal als Genom-Alignment bezeichnet) sowie Filterung und Priorisierung von Varianten.
 Der Einfachheit halber konzentrieren wir uns in diesem Kurs nur auf den Variant-Calling-Teil.
 
 ### Methoden
 
-Wir zeigen dir zwei Möglichkeiten, Variant Calling auf Whole-Genome-Sequencing-Proben anzuwenden, um Keimbahn-SNPs und Indels zu identifizieren.
-Zunächst beginnen wir mit einem einfachen **probenbasierten Ansatz**, der Varianten unabhängig für jede Probe aufruft.
+Wir zeigen dir zwei Möglichkeiten, Variant Calling auf Gesamtgenom-Sequenzierungsproben anzuwenden, um Keimbahn-SNPs und -Indels zu identifizieren.
+Zunächst beginnen wir mit einem einfachen **probenweisen Ansatz**, der Varianten unabhängig für jede Probe aufruft.
 Dann zeigen wir dir einen ausgefeilteren **Joint-Calling-Ansatz**, der mehrere Proben gemeinsam analysiert und genauere und informativere Ergebnisse liefert.
 
-Bevor wir mit dem Schreiben von Workflow-Code für einen der beiden Ansätze beginnen, testen wir die Befehle manuell an einigen Testdaten.
+Bevor wir uns mit dem Schreiben von Workflow-Code für einen der beiden Ansätze befassen, werden wir die Befehle manuell an einigen Testdaten ausprobieren.
 
 ### Datensatz
 
 Wir stellen die folgenden Daten und zugehörigen Ressourcen bereit:
 
-- **Ein Referenzgenom**, bestehend aus einer kleinen Region des menschlichen Chromosoms 20 (aus hg19/b37) und seinen Zubehördateien (Index und Sequenzwörterbuch).
-- **Drei Whole-Genome-Sequencing-Proben**, die einem Familientrio (Mutter, Vater und Sohn) entsprechen und auf einen kleinen Datenschnitt auf Chromosom 20 reduziert wurden, um die Dateigrößen klein zu halten.
-  Dies sind Illumina-Short-Read-Sequencing-Daten, die bereits auf das Referenzgenom gemappt wurden und im [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf)-Format (Binary Alignment Map, eine komprimierte Version von SAM, Sequence Alignment Map) bereitgestellt werden.
-- **Eine Liste genomischer Intervalle**, d. h. Koordinaten auf dem Genom, wo unsere Proben Daten haben, die für das Aufrufen von Varianten geeignet sind, bereitgestellt im BED-Format.
+- **Ein Referenzgenom**, das aus einer kleinen Region des menschlichen Chromosoms 20 (aus hg19/b37) und seinen Hilfsdateien (Index und Sequenzwörterbuch) besteht.
+- **Drei Gesamtgenom-Sequenzierungsproben**, die einem Familien-Trio (Mutter, Vater und Sohn) entsprechen und auf einen kleinen Datenausschnitt auf Chromosom 20 reduziert wurden, um die Dateigrößen klein zu halten.
+  Dies sind Illumina-Short-Read-Sequenzierungsdaten, die bereits auf das Referenzgenom gemappt wurden und im [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf)-Format (Binary Alignment Map, eine komprimierte Version von SAM, Sequence Alignment Map) bereitgestellt werden.
+- **Eine Liste genomischer Intervalle**, d. h. Koordinaten auf dem Genom, wo unsere Proben Daten haben, die für das Calling von Varianten geeignet sind, bereitgestellt im BED-Format.
 
 ### Software
 
-Die beiden Haupttools sind [Samtools](https://www.htslib.org/), ein weit verbreitetes Toolkit zur Manipulation von Sequenz-Alignment-Dateien, und [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), eine Sammlung von Tools für die Variantenerkennung, die am Broad Institute entwickelt wurde.
+Die beiden Haupttools sind [Samtools](https://www.htslib.org/), ein weit verbreitetes Toolkit zur Manipulation von Sequenz-Alignment-Dateien, und [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), eine Sammlung von Tools zur Variantenerkennung, die am Broad Institute entwickelt wurde.
 
-Diese Tools sind nicht in der GitHub Codespaces-Umgebung installiert, daher verwenden wir sie über Container (siehe [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+Diese Tools sind nicht in der GitHub-Codespaces-Umgebung installiert, daher verwenden wir sie über Container (siehe [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note "Hinweis"
 
@@ -37,15 +39,15 @@ Diese Tools sind nicht in der GitHub Codespaces-Umgebung installiert, daher verw
 
 ---
 
-## 1. Probenbasiertes Variant Calling
+## 1. Probenweises Variant Calling
 
-Beim probenbasierten Variant Calling wird jede Probe unabhängig verarbeitet: Der Variant Caller untersucht die Sequencing-Daten für jeweils eine Probe und identifiziert Positionen, an denen die Probe von der Referenz abweicht.
+Probenweises Variant Calling verarbeitet jede Probe unabhängig: Der Variant Caller untersucht die Sequenzierungsdaten für jeweils eine Probe und identifiziert Positionen, an denen sich die Probe von der Referenz unterscheidet.
 
-In diesem Abschnitt testen wir die beiden Befehle, aus denen der probenbasierte Variant-Calling-Ansatz besteht: Indexierung einer BAM-Datei mit Samtools und Aufrufen von Varianten mit GATK HaplotypeCaller.
+In diesem Abschnitt testen wir die beiden Befehle, aus denen der probenweise Variant-Calling-Ansatz besteht: Indexierung einer BAM-Datei mit Samtools und Calling von Varianten mit GATK HaplotypeCaller.
 Dies sind die Befehle, die wir in Teil 2 dieses Kurses in einen Nextflow-Workflow einbinden werden.
 
-1. Eine Indexdatei für eine BAM-Eingabedatei mit [Samtools](https://www.htslib.org/) generieren
-2. GATK HaplotypeCaller auf der indexierten BAM-Datei ausführen, um probenbasierte Variantenaufrufe im VCF-Format (Variant Call Format) zu generieren
+1. Erzeuge eine Indexdatei für eine BAM-Eingabedatei mit [Samtools](https://www.htslib.org/)
+2. Führe den GATK HaplotypeCaller auf der indexierten BAM-Datei aus, um probenweise Variantenaufrufe im VCF-Format (Variant Call Format) zu generieren
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
@@ -53,16 +55,16 @@ Dies sind die Befehle, die wir in Teil 2 dieses Kurses in einen Nextflow-Workflo
 
 Wir beginnen damit, die beiden Befehle an nur einer Probe zu testen.
 
-### 1.1. Eine BAM-Eingabedatei mit Samtools indexieren
+### 1.1. Indexiere eine BAM-Eingabedatei mit Samtools
 
-Indexdateien sind ein gängiges Merkmal bioinformatischer Dateiformate; sie enthalten Informationen über die Struktur der Hauptdatei, die es Tools wie GATK ermöglichen, auf eine Teilmenge der Daten zuzugreifen, ohne die gesamte Datei lesen zu müssen.
+Indexdateien sind ein häufiges Merkmal bioinformatischer Dateiformate; sie enthalten Informationen über die Struktur der Hauptdatei, die es Tools wie GATK ermöglichen, auf eine Teilmenge der Daten zuzugreifen, ohne die gesamte Datei lesen zu müssen.
 Dies ist wichtig, da diese Dateien sehr groß werden können.
 
-BAM-Dateien werden häufig ohne Index bereitgestellt, daher ist der erste Schritt in vielen Analyse-Workflows, einen mit `samtools index` zu generieren.
+BAM-Dateien werden oft ohne Index bereitgestellt, daher ist der erste Schritt in vielen Analyse-Workflows, einen Index mit `samtools index` zu generieren.
 
 Wir werden einen Samtools-Container herunterladen, ihn interaktiv starten und den Befehl `samtools index` auf einer der BAM-Dateien ausführen.
 
-#### 1.1.1. Den Samtools-Container herunterladen
+#### 1.1.1. Lade den Samtools-Container herunter
 
 Führe den Befehl `docker pull` aus, um das Samtools-Container-Image herunterzuladen:
 
@@ -96,23 +98,23 @@ docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 Falls du dieses Image noch nicht heruntergeladen hast, kann es eine Minute dauern, bis der Vorgang abgeschlossen ist.
 Sobald er fertig ist, hast du eine lokale Kopie des Container-Images.
 
-#### 1.1.2. Den Samtools-Container interaktiv starten
+#### 1.1.2. Starte den Samtools-Container interaktiv
 
 Um den Container interaktiv auszuführen, verwende `docker run` mit den Flags `-it`.
-Die Option `-v ./data:/data` bindet das lokale `data`-Verzeichnis in den Container ein, sodass die Tools auf die Eingabedateien zugreifen können.
+Die Option `-v ./data:/data` bindet das lokale Verzeichnis `data` in den Container ein, sodass die Tools auf die Eingabedateien zugreifen können.
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
-Dein Prompt ändert sich zu etwas wie `(base) root@a1b2c3d4e5f6:/tmp#`, was anzeigt, dass du dich jetzt im Container befindest.
+Deine Eingabeaufforderung ändert sich zu etwas wie `(base) root@a1b2c3d4e5f6:/tmp#`, was anzeigt, dass du dich jetzt im Container befindest.
 Die Datendateien sind unter `/data` zugänglich.
 
-#### 1.1.3. Den Indexierungsbefehl ausführen
+#### 1.1.3. Führe den Indexierungsbefehl aus
 
-Die [Samtools-Dokumentation](https://www.htslib.org/doc/samtools-index.html) gibt uns die Befehlszeile, die wir ausführen müssen, um eine BAM-Datei zu indexieren.
+Die [Samtools-Dokumentation](https://www.htslib.org/doc/samtools-index.html) gibt uns die Befehlszeile, um eine BAM-Datei zu indexieren.
 
-Wir müssen nur die Eingabedatei angeben; das Tool generiert automatisch einen Namen für die Ausgabedatei, indem es `.bai` an den Eingabedateinamen anhängt.
+Wir müssen nur die Eingabedatei angeben; das Tool generiert automatisch einen Namen für die Ausgabe, indem es `.bai` an den Eingabedateinamen anhängt.
 
 ```bash
 samtools index /data/bam/reads_mother.bam
@@ -130,7 +132,7 @@ samtools index /data/bam/reads_mother.bam
 
 Du solltest jetzt eine Datei namens `reads_mother.bam.bai` im selben Verzeichnis wie die ursprüngliche BAM-Eingabedatei sehen.
 
-#### 1.1.4. Den Samtools-Container verlassen
+#### 1.1.4. Verlasse den Samtools-Container
 
 Um den Container zu verlassen, gib `exit` ein.
 
@@ -138,13 +140,13 @@ Um den Container zu verlassen, gib `exit` ein.
 exit
 ```
 
-Dein Prompt sollte nun wieder dem entsprechen, was er war, bevor du den Container gestartet hast.
+Deine Eingabeaufforderung sollte jetzt wieder so sein wie vor dem Start des Containers.
 
-### 1.2. Varianten mit GATK HaplotypeCaller aufrufen
+### 1.2. Rufe Varianten mit GATK HaplotypeCaller auf
 
 Wir werden einen GATK-Container herunterladen, ihn interaktiv starten und den Befehl `gatk HaplotypeCaller` auf der BAM-Datei ausführen, die wir gerade indexiert haben.
 
-#### 1.2.1. Den GATK-Container herunterladen
+#### 1.2.1. Lade den GATK-Container herunter
 
 Führe den Befehl `docker pull` aus, um das GATK-Container-Image herunterzuladen:
 
@@ -154,7 +156,7 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 
 ??? success "Befehlsausgabe"
 
-    Einige Layer zeigen `Already exists` an, da sie mit dem Samtools-Container-Image geteilt werden, das wir zuvor heruntergeladen haben.
+    Einige Layer zeigen `Already exists`, weil sie mit dem Samtools-Container-Image geteilt werden, das wir zuvor heruntergeladen haben.
 
     ```console
     4.5.0.0--730ee8817e436867: Pulling from library/gatk4
@@ -179,7 +181,7 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 
 Dies sollte schneller gehen als der erste Download, da die beiden Container-Images die meisten ihrer Layer teilen.
 
-#### 1.2.2. Den GATK-Container interaktiv starten
+#### 1.2.2. Starte den GATK-Container interaktiv
 
 Starte den GATK-Container interaktiv mit eingebundenem Datenverzeichnis, genau wie wir es für Samtools getan haben.
 
@@ -187,16 +189,16 @@ Starte den GATK-Container interaktiv mit eingebundenem Datenverzeichnis, genau w
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-Dein Prompt ändert sich, um anzuzeigen, dass du dich jetzt im GATK-Container befindest.
+Deine Eingabeaufforderung ändert sich, um anzuzeigen, dass du dich jetzt im GATK-Container befindest.
 
-#### 1.2.3. Den Variant-Calling-Befehl ausführen
+#### 1.2.3. Führe den Variant-Calling-Befehl aus
 
-Die [GATK-Dokumentation](https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller) gibt uns die Befehlszeile, die wir ausführen müssen, um Variant Calling auf einer BAM-Datei durchzuführen.
+Die [GATK-Dokumentation](https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller) gibt uns die Befehlszeile, um Variant Calling auf einer BAM-Datei durchzuführen.
 
-Wir müssen die BAM-Eingabedatei (`-I`) sowie das Referenzgenom (`-R`), einen Namen für die Ausgabedatei (`-O`) und eine Liste genomischer Intervalle zum Analysieren (`-L`) angeben.
+Wir müssen die BAM-Eingabedatei (`-I`) sowie das Referenzgenom (`-R`), einen Namen für die Ausgabedatei (`-O`) und eine Liste genomischer Intervalle zur Analyse (`-L`) angeben.
 
-Wir müssen jedoch nicht den Pfad zur Indexdatei angeben; das Tool sucht automatisch im selben Verzeichnis danach, basierend auf der etablierten Namensgebungs- und Standortkonvention.
-Dasselbe gilt für die Zubehördateien des Referenzgenoms (Index- und Sequenzwörterbuchdateien, `*.fai` und `*.dict`).
+Wir müssen jedoch nicht den Pfad zur Indexdatei angeben; das Tool sucht automatisch danach im selben Verzeichnis, basierend auf der etablierten Namens- und Speicherortkonvention.
+Dasselbe gilt für die Hilfsdateien des Referenzgenoms (Index- und Sequenzwörterbuchdateien, `*.fai` und `*.dict`).
 
 ```bash
 gatk HaplotypeCaller \
@@ -208,7 +210,7 @@ gatk HaplotypeCaller \
 
 ??? success "Befehlsausgabe"
 
-    Das Tool erzeugt ausführliche Protokollausgaben. Die hervorgehobenen Zeilen bestätigen den erfolgreichen Abschluss.
+    Das Tool erzeugt ausführliche Logging-Ausgaben. Die hervorgehobenen Zeilen bestätigen den erfolgreichen Abschluss.
 
     ```console hl_lines="37 51 56 57"
     Using GATK jar /opt/conda/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar
@@ -270,9 +272,9 @@ gatk HaplotypeCaller \
     Runtime.totalMemory()=203423744
     ```
 
-Die Ausgabedatei `reads_mother.vcf` wird in deinem Arbeitsverzeichnis im Container erstellt, sodass du sie nicht im VS Code-Datei-Explorer sehen wirst, es sei denn, du änderst den Pfad der Ausgabedatei.
+Die Ausgabedatei `reads_mother.vcf` wird in deinem Arbeitsverzeichnis im Container erstellt, sodass du sie im VS Code-Datei-Explorer nicht sehen wirst, es sei denn, du änderst den Ausgabedateipfad.
 Es ist jedoch eine kleine Testdatei, sodass du sie mit `cat` öffnen und den Inhalt anzeigen kannst.
-Wenn du ganz nach oben zum Anfang der Datei scrollst, findest du einen Header, der aus vielen Zeilen Metadaten besteht, gefolgt von einer Liste von Variantenaufrufen, einer pro Zeile.
+Wenn du ganz nach oben zum Anfang der Datei scrollst, findest du einen Header, der aus vielen Zeilen mit Metadaten besteht, gefolgt von einer Liste von Variantenaufrufen, einer pro Zeile.
 
 ??? abstract "Dateiinhalt"
 
@@ -283,12 +285,12 @@ Wenn du ganz nach oben zum Anfang der Datei scrollst, findest du einen Header, d
     20_10037292_10066351	3529	.	T	A	155.64	.	AC=1;AF=0.500;AN=2;BaseQRankSum=-0.544;DP=21;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=7.78;ReadPosRankSum=-1.158;SOR=1.034	GT:AD:DP:GQ:PL	0/1:12,8:20:99:163,0,328
     ```
 
-Jede Zeile beschreibt eine mögliche Variante, die in den Sequencing-Daten der Probe identifiziert wurde. Für eine Anleitung zur Interpretation des VCF-Formats siehe [diesen hilfreichen Artikel](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
+Jede Zeile beschreibt eine mögliche Variante, die in den Sequenzierungsdaten der Probe identifiziert wurde. Für eine Anleitung zur Interpretation des VCF-Formats siehe [diesen hilfreichen Artikel](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
 
 Die Ausgabe-VCF-Datei wird von einer Indexdatei namens `reads_mother.vcf.idx` begleitet, die automatisch von GATK erstellt wurde.
-Sie hat dieselbe Funktion wie die BAM-Indexdatei, um Tools zu ermöglichen, Teilmengen von Daten zu suchen und abzurufen, ohne die gesamte Datei laden zu müssen.
+Sie hat dieselbe Funktion wie die BAM-Indexdatei: Sie ermöglicht es Tools, Teilmengen von Daten zu suchen und abzurufen, ohne die gesamte Datei laden zu müssen.
 
-#### 1.2.4. Den GATK-Container verlassen
+#### 1.2.4. Verlasse den GATK-Container
 
 Um den Container zu verlassen, gib `exit` ein.
 
@@ -296,8 +298,8 @@ Um den Container zu verlassen, gib `exit` ein.
 exit
 ```
 
-Dein Prompt sollte wieder normal sein.
-Damit ist der Test des probenbasierten Variant Callings abgeschlossen.
+Deine Eingabeaufforderung sollte wieder normal sein.
+Damit ist der Test des probenweisen Variant Callings abgeschlossen.
 
 ---
 
@@ -305,40 +307,40 @@ Damit ist der Test des probenbasierten Variant Callings abgeschlossen.
 
 Der Variant-Calling-Ansatz, den wir gerade verwendet haben, generiert Variantenaufrufe pro Probe.
 Das ist in Ordnung, um Varianten von jeder Probe isoliert zu betrachten, liefert aber begrenzte Informationen.
-Es ist oft interessanter zu betrachten, wie sich Variantenaufrufe über mehrere Proben hinweg unterscheiden.
-GATK bietet dafür eine alternative Methode namens Joint Variant Calling.
+Es ist oft interessanter zu sehen, wie sich Variantenaufrufe über mehrere Proben hinweg unterscheiden.
+GATK bietet für diesen Zweck eine alternative Methode namens Joint Variant Calling.
 
-Joint Variant Calling beinhaltet die Generierung einer speziellen Art von Variantenausgabe namens GVCF (für Genomic VCF) für jede Probe, dann das Kombinieren der GVCF-Daten von allen Proben und die Durchführung einer statistischen Analyse mit 'Joint Genotyping'.
+Joint Variant Calling beinhaltet die Erzeugung einer speziellen Art von Variantenausgabe namens GVCF (für Genomic VCF) für jede Probe, dann das Kombinieren der GVCF-Daten von allen Proben und das Ausführen einer statistischen Analyse namens „Joint Genotyping".
 
-![Joint analysis](img/joint-calling.png)
+![Joint-Analyse](img/joint-calling.png)
 
-Das Besondere an einem GVCF einer Probe ist, dass es Einträge enthält, die Sequenzdatenstatistiken über alle Positionen im Zielbereich des Genoms zusammenfassen, nicht nur die Positionen, an denen das Programm Hinweise auf Variation gefunden hat.
+Das Besondere an einem GVCF einer Probe ist, dass es Datensätze enthält, die Sequenzdatenstatistiken über alle Positionen im Zielbereich des Genoms zusammenfassen, nicht nur die Positionen, an denen das Programm Hinweise auf Variation gefunden hat.
 Dies ist entscheidend für die Joint-Genotyping-Berechnung ([weiterführende Literatur](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
 
 Das GVCF wird von GATK HaplotypeCaller erzeugt, demselben Tool, das wir gerade getestet haben, mit einem zusätzlichen Parameter (`-ERC GVCF`).
-Das Kombinieren der GVCFs erfolgt mit GATK GenomicsDBImport, das die probenbasierten Aufrufe in einem Datenspeicher (analog zu einer Datenbank) kombiniert.
-Die eigentliche 'Joint-Genotyping'-Analyse wird dann mit GATK GenotypeGVCFs durchgeführt.
+Das Kombinieren der GVCFs erfolgt mit GATK GenomicsDBImport, das die probenweisen Aufrufe in einen Datenspeicher (analog zu einer Datenbank) kombiniert.
+Die eigentliche „Joint-Genotyping"-Analyse wird dann mit GATK GenotypeGVCFs durchgeführt.
 
-Hier testen wir die Befehle, die zum Generieren von GVCFs und zur Durchführung des Joint Genotypings erforderlich sind.
+Hier testen wir die Befehle, die zum Generieren von GVCFs und zum Ausführen von Joint Genotyping benötigt werden.
 Dies sind die Befehle, die wir in Teil 3 dieses Kurses in einen Nextflow-Workflow einbinden werden.
 
-1. Eine Indexdatei für jede BAM-Eingabedatei mit Samtools generieren
-2. GATK HaplotypeCaller auf jeder BAM-Eingabedatei ausführen, um ein GVCF probenbasierter genomischer Variantenaufrufe zu generieren
-3. Alle GVCFs sammeln und in einem GenomicsDB-Datenspeicher kombinieren
-4. Joint Genotyping auf dem kombinierten GVCF-Datenspeicher ausführen, um eine VCF auf Kohortenebene zu erzeugen
+1. Erzeuge eine Indexdatei für jede BAM-Eingabedatei mit Samtools
+2. Führe den GATK HaplotypeCaller auf jeder BAM-Eingabedatei aus, um ein GVCF mit probenweisen genomischen Variantenaufrufen zu generieren
+3. Sammle alle GVCFs und kombiniere sie in einen GenomicsDB-Datenspeicher
+4. Führe Joint Genotyping auf dem kombinierten GVCF-Datenspeicher aus, um ein VCF auf Kohortenebene zu erzeugen
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
-Wir müssen nun alle diese Befehle testen, beginnend mit der Indexierung aller drei BAM-Dateien.
+Wir müssen jetzt alle diese Befehle testen, beginnend mit der Indexierung aller drei BAM-Dateien.
 
-### 2.1. BAM-Dateien für alle drei Proben indexieren
+### 2.1. Indexiere BAM-Dateien für alle drei Proben
 
 Im ersten Abschnitt oben haben wir nur eine BAM-Datei indexiert.
 Jetzt müssen wir alle drei Proben indexieren, damit GATK HaplotypeCaller sie verarbeiten kann.
 
-#### 2.1.1. Den Samtools-Container interaktiv starten
+#### 2.1.1. Starte den Samtools-Container interaktiv
 
 Wir haben das Samtools-Container-Image bereits heruntergeladen, sodass wir es direkt starten können:
 
@@ -346,9 +348,9 @@ Wir haben das Samtools-Container-Image bereits heruntergeladen, sodass wir es di
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
-Dein Prompt ändert sich, um anzuzeigen, dass du dich im Container befindest, mit dem Datenverzeichnis wie zuvor eingebunden.
+Deine Eingabeaufforderung ändert sich, um anzuzeigen, dass du dich im Container befindest, mit dem Datenverzeichnis wie zuvor eingebunden.
 
-#### 2.1.2. Den Indexierungsbefehl auf allen drei Proben ausführen
+#### 2.1.2. Führe den Indexierungsbefehl auf allen drei Proben aus
 
 Führe den Indexierungsbefehl auf jeder der drei BAM-Dateien aus:
 
@@ -372,7 +374,7 @@ samtools index /data/bam/reads_son.bam
 
 Dies sollte die Indexdateien im selben Verzeichnis wie die entsprechenden BAM-Dateien erzeugen.
 
-#### 2.1.3. Den Samtools-Container verlassen
+#### 2.1.3. Verlasse den Samtools-Container
 
 Um den Container zu verlassen, gib `exit` ein.
 
@@ -380,28 +382,28 @@ Um den Container zu verlassen, gib `exit` ein.
 exit
 ```
 
-Dein Prompt sollte wieder normal sein.
+Deine Eingabeaufforderung sollte wieder normal sein.
 
-### 2.2. GVCFs für alle drei Proben generieren
+### 2.2. Generiere GVCFs für alle drei Proben
 
 Um den Joint-Genotyping-Schritt auszuführen, benötigen wir GVCFs für alle drei Proben.
 
-#### 2.2.1. Den GATK-Container interaktiv starten
+#### 2.2.1. Starte den GATK-Container interaktiv
 
-Wir haben das GATK-Container-Image bereits zuvor heruntergeladen, sodass wir es direkt starten können:
+Wir haben das GATK-Container-Image bereits früher heruntergeladen, sodass wir es direkt starten können:
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-Dein Prompt ändert sich, um anzuzeigen, dass du dich im GATK-Container befindest.
+Deine Eingabeaufforderung ändert sich, um anzuzeigen, dass du dich im GATK-Container befindest.
 
-#### 2.2.2. Den Variant-Calling-Befehl mit der GVCF-Option ausführen
+#### 2.2.2. Führe den Variant-Calling-Befehl mit der GVCF-Option aus
 
 Um ein genomisches VCF (GVCF) zu erzeugen, fügen wir die Option `-ERC GVCF` zum Basisbefehl hinzu, die den GVCF-Modus des HaplotypeCaller aktiviert.
 
 Wir ändern auch die Dateierweiterung für die Ausgabedatei von `.vcf` zu `.g.vcf`.
-Dies ist technisch gesehen keine Anforderung, aber eine stark empfohlene Konvention.
+Dies ist technisch keine Anforderung, aber eine dringend empfohlene Konvention.
 
 ```bash
 gatk HaplotypeCaller \
@@ -478,7 +480,7 @@ gatk HaplotypeCaller \
 
 Dies erstellt die GVCF-Ausgabedatei `reads_mother.g.vcf` im aktuellen Arbeitsverzeichnis im Container.
 
-Wenn du sie mit `cat` öffnest, um den Inhalt anzuzeigen, wirst du sehen, dass sie viel länger ist als die entsprechende VCF, die wir in Abschnitt 1 generiert haben. Du kannst nicht einmal zum Anfang der Datei hochscrollen, und die meisten Zeilen sehen ganz anders aus als das, was wir in der VCF gesehen haben.
+Wenn du sie mit `cat` anzeigst, um den Inhalt zu sehen, wirst du feststellen, dass sie viel länger ist als das entsprechende VCF, das wir in Abschnitt 1 generiert haben. Du kannst nicht einmal zum Anfang der Datei hochscrollen, und die meisten Zeilen sehen ganz anders aus als das, was wir im VCF gesehen haben.
 
 ??? abstract "Dateiinhalt"
 
@@ -489,10 +491,10 @@ Wenn du sie mit `cat` öffnest, um den Inhalt anzuzeigen, wirst du sehen, dass s
     ```
 
 Diese repräsentieren Nicht-Varianten-Regionen, in denen der Variant Caller keine Hinweise auf Variation gefunden hat, sodass er einige Statistiken erfasst hat, die sein Vertrauensniveau in die Abwesenheit von Variation beschreiben.
-Dies macht es möglich, zwischen zwei sehr unterschiedlichen Fällen zu unterscheiden: (1) es gibt qualitativ hochwertige Daten, die zeigen, dass die Probe homozygot-referenziell ist, und (2) es gibt nicht genug gute Daten verfügbar, um in irgendeiner Weise eine Bestimmung vorzunehmen.
+Dies ermöglicht es, zwischen zwei sehr unterschiedlichen Fällen zu unterscheiden: (1) Es gibt qualitativ hochwertige Daten, die zeigen, dass die Probe homozygot-Referenz ist, und (2) Es sind nicht genügend gute Daten verfügbar, um eine Bestimmung in die eine oder andere Richtung vorzunehmen.
 
-In einem GVCF gibt es typischerweise viele solcher Nicht-Varianten-Zeilen, mit einer kleineren Anzahl von Varianteneinträgen, die darunter verstreut sind.
-Versuche `head -176` auf dem GVCF auszuführen, um nur die ersten 176 Zeilen der Datei zu laden, um einen tatsächlichen Variantenaufruf zu finden.
+In einem GVCF gibt es typischerweise viele solcher Nicht-Varianten-Zeilen, mit einer kleineren Anzahl von Variantendatensätzen, die dazwischen verstreut sind.
+Versuche, `head -176` auf dem GVCF auszuführen, um nur die ersten 176 Zeilen der Datei zu laden, um einen tatsächlichen Variantenaufruf zu finden.
 
 ??? abstract "Dateiinhalt"
 
@@ -502,13 +504,13 @@ Versuche `head -176` auf dem GVCF auszuführen, um nur die ersten 176 Zeilen der
     20_10037292_10066351    3481    .       T       <NON_REF>       .       .       END=3481        GT:DP:GQ:MIN_DP:PL       0/0:21:51:21:0,51,765
     ```
 
-Die zweite Zeile zeigt den ersten Varianteneintrag in der Datei, der der ersten Variante in der VCF-Datei entspricht, die wir uns zuvor angesehen haben.
+Die zweite Zeile zeigt den ersten Variantendatensatz in der Datei, der der ersten Variante in der VCF-Datei entspricht, die wir uns zuvor angesehen haben.
 
-Genau wie die ursprüngliche VCF wird auch die Ausgabe-GVCF-Datei von einer Indexdatei namens `reads_mother.g.vcf.idx` begleitet.
+Genau wie das ursprüngliche VCF wird auch die Ausgabe-GVCF-Datei von einer Indexdatei namens `reads_mother.g.vcf.idx` begleitet.
 
-#### 2.2.3. Den Prozess bei den anderen beiden Proben wiederholen
+#### 2.2.3. Wiederhole den Vorgang für die anderen beiden Proben
 
-Generiere GVCFs für die verbleibenden zwei Proben, indem du die untenstehenden Befehle nacheinander ausführst.
+Generiere GVCFs für die verbleibenden zwei Proben, indem du die folgenden Befehle nacheinander ausführst.
 
 ```bash
 gatk HaplotypeCaller \
@@ -528,19 +530,19 @@ gatk HaplotypeCaller \
         -ERC GVCF
 ```
 
-Sobald dies abgeschlossen ist, solltest du drei Dateien haben, die auf `.g.vcf` enden, in deinem aktuellen Verzeichnis (eine pro Probe) und ihre jeweiligen Indexdateien, die auf `.g.vcf.idx` enden.
+Sobald dies abgeschlossen ist, solltest du drei Dateien mit der Endung `.g.vcf` in deinem aktuellen Verzeichnis haben (eine pro Probe) und ihre jeweiligen Indexdateien mit der Endung `.g.vcf.idx`.
 
 Aber verlasse den Container noch nicht!
 Wir werden denselben Container im nächsten Schritt verwenden.
 
-### 2.3. Joint Genotyping ausführen
+### 2.3. Führe Joint Genotyping aus
 
 Jetzt, da wir alle GVCFs haben, können wir den Joint-Genotyping-Ansatz zur Generierung von Variantenaufrufen für eine Kohorte von Proben ausprobieren.
-Es ist eine zweistufige Methode, die darin besteht, die Daten von allen GVCFs in einem Datenspeicher zu kombinieren und dann die eigentliche Joint-Genotyping-Analyse durchzuführen, um die endgültige VCF gemeinsam aufgerufener Varianten zu generieren.
+Es ist eine zweistufige Methode, die darin besteht, die Daten aus allen GVCFs in einen Datenspeicher zu kombinieren und dann die eigentliche Joint-Genotyping-Analyse auszuführen, um das endgültige VCF mit gemeinsam aufgerufenen Varianten zu generieren.
 
-#### 2.3.1. Alle probenbasierten GVCFs kombinieren
+#### 2.3.1. Kombiniere alle probenweisen GVCFs
 
-Dieser erste Schritt verwendet ein weiteres GATK-Tool namens GenomicsDBImport, um die Daten von allen GVCFs in einem GenomicsDB-Datenspeicher zu kombinieren.
+Dieser erste Schritt verwendet ein weiteres GATK-Tool namens GenomicsDBImport, um die Daten aus allen GVCFs in einen GenomicsDB-Datenspeicher zu kombinieren.
 
 ```bash
 gatk GenomicsDBImport \
@@ -596,16 +598,16 @@ gatk GenomicsDBImport \
     Runtime.totalMemory()=305135616
     ```
 
-Die Ausgabe dieses Schritts ist im Wesentlichen ein Verzeichnis, das mehrere weitere verschachtelte Verzeichnisse enthält, die die kombinierten Variantendaten in Form mehrerer verschiedener Dateien enthalten.
+Die Ausgabe dieses Schritts ist effektiv ein Verzeichnis, das eine Reihe weiterer verschachtelter Verzeichnisse enthält, die die kombinierten Variantendaten in Form mehrerer verschiedener Dateien enthalten.
 Du kannst darin herumstöbern, aber du wirst schnell sehen, dass dieses Datenspeicherformat nicht dazu gedacht ist, direkt von Menschen gelesen zu werden.
 
 !!! note "Hinweis"
 
-    GATK enthält Tools, die es ermöglichen, Variantenaufruf-Daten aus dem Datenspeicher bei Bedarf zu inspizieren und zu extrahieren.
+    GATK enthält Tools, die es ermöglichen, Variantenaufruf-Daten aus dem Datenspeicher nach Bedarf zu inspizieren und zu extrahieren.
 
-#### 2.3.2. Die eigentliche Joint-Genotyping-Analyse ausführen
+#### 2.3.2. Führe die eigentliche Joint-Genotyping-Analyse aus
 
-Dieser zweite Schritt verwendet noch ein weiteres GATK-Tool namens GenotypeGVCFs, um Variantenstatistiken und individuelle Genotypen im Lichte der über alle Proben in der Kohorte verfügbaren Daten neu zu berechnen.
+Dieser zweite Schritt verwendet ein weiteres GATK-Tool namens GenotypeGVCFs, um Variantenstatistiken und individuelle Genotypen im Lichte der über alle Proben in der Kohorte verfügbaren Daten neu zu berechnen.
 
 ```bash
 gatk GenotypeGVCFs \
@@ -658,7 +660,7 @@ gatk GenotypeGVCFs \
     ```
 
 Dies erstellt die VCF-Ausgabedatei `family_trio.vcf` im aktuellen Arbeitsverzeichnis im Container.
-Es ist eine weitere ziemlich kleine Datei, sodass du diese Datei mit `cat` öffnen kannst, um ihren Inhalt anzuzeigen, und nach oben scrollen kannst, um die ersten paar Variantenzeilen zu finden.
+Es ist eine weitere relativ kleine Datei, sodass du diese Datei mit `cat` anzeigen kannst, um ihren Inhalt zu sehen, und nach oben scrollen kannst, um die ersten paar Variantenzeilen zu finden.
 
 ??? abstract "Dateiinhalt"
 
@@ -669,14 +671,14 @@ Es ist eine weitere ziemlich kleine Datei, sodass du diese Datei mit `cat` öffn
     20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194
     ```
 
-Dies sieht ähnlich aus wie die VCF, die wir zuvor generiert haben, außer dass wir dieses Mal Genotyp-Informationen für alle drei Proben haben.
-Die letzten drei Spalten in der Datei sind die Genotypblöcke für die Proben, aufgelistet in alphabetischer Reihenfolge.
+Dies sieht ähnlich aus wie das VCF, das wir zuvor generiert haben, außer dass wir diesmal Genotyp-Informationen für alle drei Proben haben.
+Die letzten drei Spalten in der Datei sind die Genotyp-Blöcke für die Proben, aufgelistet in alphabetischer Reihenfolge.
 
-Wenn wir uns die für unser Test-Familientrio aufgerufenen Genotypen für die allererste Variante ansehen, sehen wir, dass der Vater heterozygot-variant ist (`0/1`) und die Mutter und der Sohn beide homozygot-variant sind (`1/1`).
+Wenn wir uns die aufgerufenen Genotypen für unser Test-Familien-Trio für die allererste Variante ansehen, sehen wir, dass der Vater heterozygot-variant (`0/1`) ist und die Mutter und der Sohn beide homozygot-variant (`1/1`) sind.
 
 Das ist letztendlich die Information, die wir aus dem Datensatz extrahieren möchten!
 
-#### 2.3.3. Den GATK-Container verlassen
+#### 2.3.3. Verlasse den GATK-Container
 
 Um den Container zu verlassen, gib `exit` ein.
 
@@ -684,14 +686,14 @@ Um den Container zu verlassen, gib `exit` ein.
 exit
 ```
 
-Dein Prompt sollte wieder normal sein.
+Deine Eingabeaufforderung sollte wieder normal sein.
 Damit ist das manuelle Testen der Variant-Calling-Befehle abgeschlossen.
 
 ---
 
 ### Fazit
 
-Du weißt, wie du die Samtools-Indexierungs- und GATK-Variant-Calling-Befehle in ihren jeweiligen Containern testest, einschließlich der Generierung von GVCFs und der Durchführung von Joint Genotyping auf mehreren Proben.
+Du weißt, wie du die Samtools-Indexierungs- und GATK-Variant-Calling-Befehle in ihren jeweiligen Containern testest, einschließlich der Generierung von GVCFs und der Ausführung von Joint Genotyping auf mehreren Proben.
 
 ### Wie geht es weiter?
 

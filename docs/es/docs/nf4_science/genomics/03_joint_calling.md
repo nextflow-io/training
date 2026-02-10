@@ -1,7 +1,9 @@
-# Parte 3: Llamado conjunto de variantes en una cohorte
+# Parte 3: Llamado de variantes conjunto en una cohorte
+
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 En la Parte 2, construiste un pipeline de llamado de variantes por muestra que procesaba los datos de cada muestra de forma independiente.
-Ahora vamos a extenderlo para implementar el llamado conjunto de variantes, como se cubrió en la [Parte 1](01_method.md).
+Ahora vamos a extenderlo para implementar el llamado de variantes conjunto, como se cubrió en la [Parte 1](01_method.md).
 
 ## Asignación
 
@@ -11,12 +13,12 @@ En esta parte del curso, vamos a extender el workflow para hacer lo siguiente:
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
-1. Generar un archivo índice para cada archivo BAM de entrada usando Samtools
+1. Generar un archivo de índice para cada archivo BAM de entrada usando Samtools
 2. Ejecutar GATK HaplotypeCaller en cada archivo BAM de entrada para generar un GVCF de llamados de variantes genómicas por muestra
 3. Recolectar todos los GVCFs y combinarlos en un almacén de datos GenomicsDB
 4. Ejecutar genotipado conjunto en el almacén de datos GVCF combinado para producir un VCF a nivel de cohorte
 
-Esta parte se construye directamente sobre el workflow producido por la Parte 2.
+Esta parte se construye directamente sobre el workflow producido en la Parte 2.
 
 ??? info "Cómo comenzar desde esta sección"
 
@@ -31,8 +33,8 @@ Esta parte se construye directamente sobre el workflow producido por la Parte 2.
     cp solutions/part2/modules/* modules/
     ```
 
-    Esto te proporciona un workflow completo de llamado de variantes por muestra.
-    Puedes verificar que se ejecuta correctamente ejecutando el siguiente comando:
+    Esto te da un workflow completo de llamado de variantes por muestra.
+    Puedes probar que se ejecuta exitosamente ejecutando el siguiente comando:
 
     ```bash
     nextflow run genomics.nf -profile test
@@ -45,9 +47,9 @@ Hemos dividido esto en dos pasos:
 1. **Modificar el paso de llamado de variantes por muestra para producir un GVCF.**
    Esto cubre la actualización de comandos y salidas del proceso.
 2. **Agregar un paso de genotipado conjunto que combine y genotipe los GVCFs por muestra.**
-   Esto introduce el operador `collect()`, closures de Groovy para construcción de líneas de comando y procesos con múltiples comandos.
+   Esto introduce el operador `collect()`, closures de Groovy para construcción de línea de comandos, y procesos con múltiples comandos.
 
-!!! note
+!!! note "Nota"
 
      Asegúrate de estar en el directorio de trabajo correcto:
      `cd /workspaces/training/nf4-science/genomics`
@@ -77,7 +79,7 @@ Comparado con el comando base de HaplotypeCaller que envolvimos en la Parte 2, l
 Abre el archivo de módulo `modules/gatk_haplotypecaller.nf` para hacer dos cambios:
 
 - Agregar el parámetro `-ERC GVCF` al comando GATK HaplotypeCaller;
-- Actualizar la ruta del archivo de salida para usar la extensión correspondiente `.g.vcf`, según la convención de GATK.
+- Actualizar la ruta del archivo de salida para usar la extensión `.g.vcf` correspondiente, según la convención de GATK.
 
 Asegúrate de agregar una barra invertida (`\`) al final de la línea anterior cuando agregues `-ERC GVCF`.
 
@@ -106,7 +108,7 @@ Asegúrate de agregar una barra invertida (`\`) al final de la línea anterior c
         """
     ```
 
-También necesitamos actualizar el bloque output para que coincida con la nueva extensión de archivo.
+También necesitamos actualizar el bloque de salida para que coincida con la nueva extensión de archivo.
 Dado que cambiamos la salida del comando de `.vcf` a `.g.vcf`, el bloque `output:` del proceso debe reflejar el mismo cambio.
 
 ### 1.2. Actualizar la extensión del archivo de salida en el bloque de salidas del proceso
@@ -152,9 +154,9 @@ También organizaremos los archivos GVCF en su propio subdirectorio para mayor c
         vcf_idx = GATK_HAPLOTYPECALLER.out.idx
     ```
 
-Ahora actualiza el bloque output para que coincida.
+Ahora actualiza el bloque de salida para que coincida.
 
-### 1.4. Actualizar el bloque output para la nueva estructura de directorios
+### 1.4. Actualizar el bloque de salida para la nueva estructura de directorios
 
 También necesitamos actualizar el bloque `output` para colocar los archivos GVCF en un subdirectorio `gvcf`.
 
@@ -190,7 +192,7 @@ También necesitamos actualizar el bloque `output` para colocar los archivos GVC
     }
     ```
 
-Con el módulo, los destinos de publicación y el bloque output actualizados, podemos probar los cambios.
+Con el módulo, los destinos de publicación y el bloque de salida todos actualizados, podemos probar los cambios.
 
 ### 1.5. Ejecutar el pipeline
 
@@ -212,7 +214,7 @@ nextflow run genomics.nf
     [27/0d7eb9] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
     ```
 
-La salida de Nextflow se ve igual que antes, pero los archivos `.g.vcf` y sus archivos índice ahora están organizados en subdirectorios.
+La salida de Nextflow se ve igual que antes, pero los archivos `.g.vcf` y sus archivos de índice ahora están organizados en subdirectorios.
 
 ??? abstract "Contenido del directorio (enlaces simbólicos acortados)"
 
@@ -234,7 +236,7 @@ La salida de Nextflow se ve igual que antes, pero los archivos `.g.vcf` y sus ar
         └── reads_son.bam.bai -> */cc/fbc705*/reads_son.bam.bai
     ```
 
-Si abres uno de los archivos GVCF y lo revisas, puedes verificar que GATK HaplotypeCaller produjo archivos GVCF según lo solicitado.
+Si abres uno de los archivos GVCF y lo revisas, puedes verificar que GATK HaplotypeCaller produjo archivos GVCF como se solicitó.
 
 ### Conclusión
 
@@ -242,7 +244,7 @@ Cuando cambias el nombre del archivo de salida de un comando de herramienta, el 
 
 ### ¿Qué sigue?
 
-Aprende a recolectar el contenido de un canal y pasarlo al siguiente proceso como una única entrada.
+Aprende a recolectar el contenido de un canal y pasarlo al siguiente proceso como una sola entrada.
 
 ---
 
@@ -250,7 +252,7 @@ Aprende a recolectar el contenido de un canal y pasarlo al siguiente proceso com
 
 Ahora necesitamos recolectar los GVCFs por muestra, combinarlos en un almacén de datos GenomicsDB y ejecutar el genotipado conjunto para producir un VCF a nivel de cohorte.
 Como se cubrió en la [Parte 1](01_method.md), esta es una operación de dos herramientas: GenomicsDBImport combina los GVCFs, luego GenotypeGVCFs produce los llamados de variantes finales.
-Envolveremos ambas herramientas en un único proceso llamado `GATK_JOINTGENOTYPING`.
+Envolveremos ambas herramientas en un solo proceso llamado `GATK_JOINTGENOTYPING`.
 
 Recuerda los dos comandos de la [Parte 1](01_method.md):
 
@@ -272,11 +274,11 @@ gatk GenotypeGVCFs \
 
 El primer comando toma los GVCFs por muestra y un archivo de intervalos, y produce un almacén de datos GenomicsDB.
 El segundo toma ese almacén de datos, un genoma de referencia, y produce el VCF final a nivel de cohorte.
-La URI del contenedor es la misma que para HaplotypeCaller: `community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867`.
+El URI del contenedor es el mismo que para HaplotypeCaller: `community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867`.
 
 ### 2.1. Configurar las entradas
 
-El proceso de genotipado conjunto necesita dos tipos de entradas que aún no tenemos: un nombre arbitrario de cohorte y las salidas GVCF recolectadas de todas las muestras agrupadas juntas.
+El proceso de genotipado conjunto necesita dos tipos de entradas que aún no tenemos: un nombre de cohorte arbitrario, y las salidas GVCF recolectadas de todas las muestras agrupadas juntas.
 
 #### 2.1.1. Agregar un parámetro `cohort_name`
 
@@ -288,7 +290,7 @@ Más adelante en la serie de capacitación aprenderás cómo usar metadatos de m
     ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
         intervals: Path = "${projectDir}/data/ref/intervals.bed"
 
-        // Base name for final output file
+        // Nombre base para el archivo de salida final
         cohort_name: String = "family_trio"
     }
     ```
@@ -300,10 +302,10 @@ Más adelante en la serie de capacitación aprenderás cómo usar metadatos de m
     }
     ```
 
-#### 2.1.2. Reunir las salidas de HaplotypeCaller entre muestras
+#### 2.1.2. Reunir las salidas de HaplotypeCaller a través de las muestras
 
 Si conectáramos el canal de salida de `GATK_HAPLOTYPECALLER` directamente al nuevo proceso, Nextflow llamaría al proceso en cada GVCF de muestra por separado.
-Queremos agrupar los tres GVCFs (y sus archivos índice) para que Nextflow los entregue todos juntos a una única llamada de proceso.
+Queremos agrupar los tres GVCFs (y sus archivos de índice) para que Nextflow los entregue todos juntos a una sola llamada de proceso.
 
 Podemos hacer eso usando el operador de canal `collect()`.
 Agrega las siguientes líneas al cuerpo del `workflow`, justo después de la llamada a GATK_HAPLOTYPECALLER:
@@ -314,7 +316,7 @@ Agrega las siguientes líneas al cuerpo del `workflow`, justo después de la lla
             intervals_file
         )
 
-        // Collect variant calling outputs across samples
+        // Recolectar salidas de llamado de variantes a través de las muestras
         all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
     ```
@@ -329,18 +331,18 @@ Agrega las siguientes líneas al cuerpo del `workflow`, justo después de la lla
 Desglosando esto:
 
 1. Tomamos el canal de salida de `GATK_HAPLOTYPECALLER` usando la propiedad `.out`.
-2. Debido a que nombramos las salidas usando `emit:` en la sección 1, podemos seleccionar los GVCFs con `.vcf` y los archivos índice con `.idx`. Sin salidas nombradas, tendríamos que usar `.out[0]` y `.out[1]`.
-3. El operador `collect()` agrupa todos los archivos en un único elemento, por lo que `all_gvcfs_ch` contiene los tres GVCFs juntos, y `all_idxs_ch` contiene los tres archivos índice juntos.
+2. Debido a que nombramos las salidas usando `emit:` en la sección 1, podemos seleccionar los GVCFs con `.vcf` y los archivos de índice con `.idx`. Sin salidas nombradas, tendríamos que usar `.out[0]` y `.out[1]`.
+3. El operador `collect()` agrupa todos los archivos en un solo elemento, por lo que `all_gvcfs_ch` contiene los tres GVCFs juntos, y `all_idxs_ch` contiene los tres archivos de índice juntos.
 
-Podemos recolectar los GVCFs y sus archivos índice por separado (en lugar de mantenerlos juntos en tuplas) porque Nextflow preparará todos los archivos de entrada juntos para la ejecución, por lo que los archivos índice estarán presentes junto a los GVCFs.
+Podemos recolectar los GVCFs y sus archivos de índice por separado (en lugar de mantenerlos juntos en tuplas) porque Nextflow preparará todos los archivos de entrada juntos para la ejecución, por lo que los archivos de índice estarán presentes junto a los GVCFs.
 
-!!! tip
+!!! tip "Consejo"
 
     Puedes usar el operador `view()` para inspeccionar el contenido de los canales antes y después de aplicar operadores de canal.
 
 ### 2.2. Escribir el proceso de genotipado conjunto y llamarlo en el workflow
 
-Siguiendo el mismo patrón que usamos en la Parte 2, escribiremos la definición del proceso en un archivo de módulo, lo importaremos en el workflow y lo llamaremos sobre las entradas que acabamos de preparar.
+Siguiendo el mismo patrón que usamos en la Parte 2, escribiremos la definición del proceso en un archivo de módulo, lo importaremos al workflow y lo llamaremos con las entradas que acabamos de preparar.
 
 #### 2.2.1. Construir una cadena para dar a cada GVCF un argumento `-V`
 
@@ -367,7 +369,7 @@ Pero necesitamos que la cadena se vea así:
 -V reads_mother.bam.g.vcf -V reads_father.bam.g.vcf -V reads_son.bam.g.vcf
 ```
 
-Importante, necesitamos construir esta cadena dinámicamente a partir de los archivos que estén en el canal recolectado.
+Importante, necesitamos construir esta cadena dinámicamente a partir de cualquier archivo que esté en el canal recolectado.
 Nextflow (vía Groovy) proporciona una forma concisa de hacer esto:
 
 ```groovy
@@ -376,14 +378,14 @@ def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
 
 Desglosando esto:
 
-1. `all_gvcfs.collect { gvcf -> "-V ${gvcf}" }` itera sobre cada ruta de archivo y antepone `-V `, produciendo `["-V A.g.vcf", "-V B.g.vcf", "-V C.g.vcf"]`.
-2. `.join(' ')` los concatena con espacios: `"-V A.g.vcf -V B.g.vcf -V C.g.vcf"`.
+1. `all_gvcfs.collect { gvcf -> "-V ${gvcf}" }` itera sobre cada ruta de archivo y antepone `-V ` a ella, produciendo `["-V A.g.vcf", "-V B.g.vcf", "-V C.g.vcf"]`.
+2. `.join(' ')` las concatena con espacios: `"-V A.g.vcf -V B.g.vcf -V C.g.vcf"`.
 3. El resultado se asigna a una variable local `gvcfs_line` (definida con `def`), que podemos interpolar en la plantilla de comando.
 
 Esta línea va dentro del bloque `script:` del proceso, antes de la plantilla de comando.
-Puedes colocar código Groovy arbitrario entre `script:` y el `"""` de apertura de la plantilla de comando.
+Puedes colocar código Groovy arbitrario entre `script:` y las `"""` de apertura de la plantilla de comando.
 
-Entonces podrás referirte a toda esa cadena como `gvcfs_line` en el bloque `script:` del proceso.
+Luego podrás referirte a toda esa cadena como `gvcfs_line` en el bloque `script:` del proceso.
 
 #### 2.2.2. Completar el módulo para el proceso de genotipado conjunto
 
@@ -460,17 +462,17 @@ Adelante, completa la definición del proceso usando la información proporciona
 
 Hay varias cosas que vale la pena destacar aquí.
 
-Como antes, varias entradas están listadas aunque los comandos no las referencien directamente: `all_idxs`, `ref_index` y `ref_dict`.
-Listarlas asegura que Nextflow prepare estos archivos en el directorio de trabajo junto con los archivos que sí aparecen en los comandos, que GATK espera encontrar según convenciones de nomenclatura.
+Como anteriormente, varias entradas están listadas aunque los comandos no las referencian directamente: `all_idxs`, `ref_index` y `ref_dict`.
+Listarlas asegura que Nextflow prepare estos archivos en el directorio de trabajo junto a los archivos que sí aparecen en los comandos, que GATK espera encontrar basándose en convenciones de nomenclatura.
 
 La variable `gvcfs_line` usa el closure de Groovy descrito arriba para construir los argumentos `-V` para GenomicsDBImport.
 
 Este proceso ejecuta dos comandos en serie, tal como lo harías en la terminal.
 GenomicsDBImport combina los GVCFs por muestra en un almacén de datos, luego GenotypeGVCFs lee ese almacén de datos y produce el VCF final a nivel de cohorte.
-El almacén de datos GenomicsDB (`${cohort_name}_gdb`) es un artefacto intermedio usado solo dentro del proceso; no aparece en el bloque output.
+El almacén de datos GenomicsDB (`${cohort_name}_gdb`) es un artefacto intermedio usado solo dentro del proceso; no aparece en el bloque de salida.
 
 Una vez que hayas completado esto, el proceso está listo para usar.
-Para usarlo en el workflow, necesitarás importar el módulo y agregar una llamada al proceso.
+Para usarlo en el workflow, necesitarás importar el módulo y agregar una llamada de proceso.
 
 #### 2.2.3. Importar el módulo
 
@@ -502,7 +504,7 @@ Agrega la llamada a `GATK_JOINTGENOTYPING` en el cuerpo del workflow, después d
     ```groovy title="genomics.nf" hl_lines="3-12"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
-        // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
+        // Combinar GVCFs en un almacén de datos GenomicsDB y aplicar genotipado conjunto
         GATK_JOINTGENOTYPING(
             all_gvcfs_ch,
             all_idxs_ch,
@@ -526,7 +528,7 @@ A continuación, configuramos cómo se publican las salidas.
 ### 2.3. Configurar el manejo de salidas
 
 Necesitamos publicar las salidas del VCF conjunto.
-Agrega destinos de publicación y entradas de bloque output para los resultados de genotipado conjunto.
+Agrega destinos de publicación y entradas de bloque de salida para los resultados del genotipado conjunto.
 
 #### 2.3.1. Agregar destinos de publicación para el VCF conjunto
 
@@ -552,11 +554,11 @@ Agrega el VCF conjunto y su índice a la sección `publish:` del workflow:
         gvcf_idx = GATK_HAPLOTYPECALLER.out.idx
     ```
 
-Ahora actualiza el bloque output para que coincida.
+Ahora actualiza el bloque de salida para que coincida.
 
-#### 2.3.2. Agregar entradas de bloque output para el VCF conjunto
+#### 2.3.2. Agregar entradas de bloque de salida para el VCF conjunto
 
-Agrega entradas para los archivos VCF conjunto.
+Agrega entradas para los archivos VCF conjuntos.
 Los colocaremos en la raíz del directorio de resultados ya que esta es la salida final.
 
 === "Después"
@@ -597,7 +599,7 @@ Los colocaremos en la raíz del directorio de resultados ya que esta es la salid
     }
     ```
 
-Con el proceso, los destinos de publicación y el bloque output todos en su lugar, podemos probar el workflow completo.
+Con el proceso, los destinos de publicación y el bloque de salida todos en su lugar, podemos probar el workflow completo.
 
 ### 2.4. Ejecutar el workflow
 
@@ -620,7 +622,7 @@ nextflow run genomics.nf -resume
     [a6/7cc8ed] GATK_JOINTGENOTYPING     | 1 of 1 ✔
     ```
 
-Los primeros dos pasos están almacenados en caché de la ejecución anterior, y el nuevo paso `GATK_JOINTGENOTYPING` se ejecuta una vez sobre las entradas recolectadas de las tres muestras.
+Los primeros dos pasos están en caché de la ejecución anterior, y el nuevo paso `GATK_JOINTGENOTYPING` se ejecuta una vez en las entradas recolectadas de las tres muestras.
 El archivo de salida final, `family_trio.joint.vcf` (y su índice), están en el directorio de resultados.
 
 ??? abstract "Contenido del directorio (enlaces simbólicos acortados)"
@@ -654,21 +656,21 @@ Si abres el archivo VCF conjunto, puedes verificar que el workflow produjo los l
 20_10037292_10066351	3529	.	T	A	154.29	.	AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034	GT:AD:DP:GQ:PL	0/0:44,0:44:99:0,112,1347	0/1:12,8:20:99:163,0,328	0/0:39,0:39:99:0,105,1194
 ```
 
-¡Ahora tienes un workflow de llamado conjunto de variantes automatizado y completamente reproducible!
+¡Ahora tienes un workflow de llamado de variantes conjunto automatizado y completamente reproducible!
 
-!!! note
+!!! note "Nota"
 
-    Ten en cuenta que los archivos de datos que te proporcionamos cubren solo una pequeña porción del cromosoma 20.
+    Ten en cuenta que los archivos de datos que te dimos cubren solo una pequeña porción del cromosoma 20.
     El tamaño real de un conjunto de llamados de variantes se contaría en millones de variantes.
-    ¡Por eso usamos solo pequeños subconjuntos de datos para fines de capacitación!
+    ¡Por eso usamos solo subconjuntos pequeños de datos para propósitos de capacitación!
 
 ### Conclusión
 
-Sabes cómo recolectar salidas de un canal y agruparlas como una única entrada para otro proceso.
-También sabes cómo construir una línea de comando usando closures de Groovy, y cómo ejecutar múltiples comandos en un único proceso.
+Sabes cómo recolectar salidas de un canal y agruparlas como una sola entrada a otro proceso.
+También sabes cómo construir una línea de comandos usando closures de Groovy, y cómo ejecutar múltiples comandos en un solo proceso.
 
 ### ¿Qué sigue?
 
 ¡Date una gran palmada en la espalda! Has completado el curso Nextflow para Genómica.
 
-Dirígete al [resumen final del curso](./next_steps.md) para revisar lo que aprendiste y descubrir qué viene después.
+Dirígete al [resumen del curso](./next_steps.md) final para revisar lo que aprendiste y descubrir qué viene después.

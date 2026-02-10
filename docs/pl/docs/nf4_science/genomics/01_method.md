@@ -1,61 +1,63 @@
-# Część 1: Przegląd metod i ręczne testowanie
+# Część 1: Przegląd metody i testowanie ręczne
 
-Wykrywanie wariantów to metoda analizy genomowej, która ma na celu identyfikację zmian w sekwencji genomu względem genomu referencyjnego.
-Tutaj użyjemy narzędzi i metod zaprojektowanych do wykrywania krótkich wariantów zarodkowych, _tzn._ SNP i indeli, w danych z sekwencjonowania całego genomu.
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
+Wykrywanie wariantów to metoda analizy genomicznej, której celem jest identyfikacja zmian w sekwencji genomu względem genomu referencyjnego.
+Tutaj użyjemy narzędzi i metod zaprojektowanych do wykrywania krótkich wariantów zarodkowych, _tj._ SNP i indeli, w danych z sekwencjonowania całego genomu.
 
 ![Pipeline GATK](img/gatk-pipeline.png)
 
-Pełny pipeline wykrywania wariantów zazwyczaj obejmuje wiele kroków, w tym mapowanie do referencji (czasami określane jako dopasowanie genomu) oraz filtrowanie i priorytetyzację wariantów.
-Dla uproszczenia w tym szkoleniu skupimy się tylko na części dotyczącej wykrywania wariantów.
+Pełny pipeline wykrywania wariantów zazwyczaj obejmuje wiele kroków, w tym mapowanie do referencji (czasami nazywane dopasowaniem genomu) oraz filtrowanie i priorytetyzację wariantów.
+Dla uproszczenia, w tym szkoleniu skupimy się tylko na części dotyczącej wykrywania wariantów.
 
 ### Metody
 
 Pokażemy Ci dwa sposoby zastosowania wykrywania wariantów do próbek z sekwencjonowania całego genomu w celu identyfikacji zarodkowych SNP i indeli.
 Najpierw zaczniemy od prostego **podejścia per-próbka**, które wykrywa warianty niezależnie dla każdej próbki.
-Następnie pokażemy Ci bardziej zaawansowane **podejście z łącznym wykrywaniem (joint calling)**, które analizuje wiele próbek razem, dając dokładniejsze i bardziej informacyjne wyniki.
+Następnie pokażemy Ci bardziej zaawansowane **podejście wspólnego wykrywania**, które analizuje wiele próbek razem, dając dokładniejsze i bardziej informacyjne wyniki.
 
-Zanim zaczniemy pisać jakikolwiek kod workflow'a dla któregokolwiek podejścia, przetestujemy polecenia ręcznie na danych testowych.
+Zanim zagłębimy się w pisanie jakiegokolwiek kodu workflow'a dla któregokolwiek z podejść, przetestujemy polecenia ręcznie na danych testowych.
 
 ### Zbiór danych
 
 Udostępniamy następujące dane i powiązane zasoby:
 
 - **Genom referencyjny** składający się z małego regionu ludzkiego chromosomu 20 (z hg19/b37) oraz jego plików pomocniczych (indeks i słownik sekwencji).
-- **Trzy próbki z sekwencjonowania całego genomu** odpowiadające trio rodzinnemu (matka, ojciec i syn), które zostały zawężone do małego fragmentu danych na chromosomie 20, aby zachować małe rozmiary plików.
-  To dane z sekwencjonowania krótkich odczytów Illumina, które zostały już zmapowane do genomu referencyjnego, dostarczone w formacie [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map, skompresowana wersja SAM, Sequence Alignment Map).
-- **Lista interwałów genomowych**, czyli koordynatów na genomie, gdzie nasze próbki mają dane odpowiednie do wykrywania wariantów, dostarczone w formacie BED.
+- **Trzy próbki z sekwencjonowania całego genomu** odpowiadające trio rodzinnemu (matka, ojciec i syn), które zostały ograniczone do małego wycinka danych na chromosomie 20, aby zachować małe rozmiary plików.
+  Są to dane z sekwencjonowania Illumina krótkich odczytów, które zostały już zmapowane do genomu referencyjnego, dostarczone w formacie [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map, skompresowana wersja SAM, Sequence Alignment Map).
+- **Lista interwałów genomowych**, _tj._ współrzędnych w genomie, gdzie nasze próbki mają dane odpowiednie do wykrywania wariantów, dostarczona w formacie BED.
 
 ### Oprogramowanie
 
-Dwa główne narzędzia to [Samtools](https://www.htslib.org/), szeroko stosowany zestaw narzędzi do manipulacji plikami dopasowań sekwencji, oraz [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), zestaw narzędzi do wykrywania wariantów opracowany w Broad Institute.
+Dwa główne narzędzia to [Samtools](https://www.htslib.org/), szeroko używany zestaw narzędzi do manipulowania plikami dopasowań sekwencji, oraz [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), zestaw narzędzi do wykrywania wariantów opracowany w Broad Institute.
 
-Te narzędzia nie są zainstalowane w środowisku GitHub Codespaces, więc będziemy ich używać przez kontenery (zobacz [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+Te narzędzia nie są zainstalowane w środowisku GitHub Codespaces, więc użyjemy ich przez kontenery (zobacz [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note "Uwaga"
 
-    Upewnij się, że jesteś w katalogu `nf4-science/genomics`, aby ostatnia część ścieżki pokazanej po wpisaniu `pwd` to `genomics`.
+    Upewnij się, że jesteś w katalogu `nf4-science/genomics`, tak aby ostatnia część ścieżki pokazana po wpisaniu `pwd` to `genomics`.
 
 ---
 
 ## 1. Wykrywanie wariantów per-próbka
 
-Wykrywanie wariantów per-próbka przetwarza każdą próbkę niezależnie: narzędzie wykrywające warianty analizuje dane sekwencjonowania dla jednej próbki na raz i identyfikuje pozycje, w których próbka różni się od referencji.
+Wykrywanie wariantów per-próbka przetwarza każdą próbkę niezależnie: narzędzie do wykrywania wariantów analizuje dane sekwencjonowania dla jednej próbki na raz i identyfikuje pozycje, gdzie próbka różni się od referencji.
 
 W tej sekcji testujemy dwa polecenia składające się na podejście wykrywania wariantów per-próbka: indeksowanie pliku BAM za pomocą Samtools oraz wykrywanie wariantów za pomocą GATK HaplotypeCaller.
-To te polecenia, które opakujemy w workflow Nextflow w części 2 tego kursu.
+To są polecenia, które opakujemy w workflow Nextflow'a w Części 2 tego szkolenia.
 
-1. Wygeneruj plik indeksu dla wejściowego pliku BAM za pomocą [Samtools](https://www.htslib.org/)
-2. Uruchom GATK HaplotypeCaller na zindeksowanym pliku BAM, aby wygenerować wykrycia wariantów per-próbka w formacie VCF (Variant Call Format)
+1. Wygeneruj plik indeksu dla pliku wejściowego BAM używając [Samtools](https://www.htslib.org/)
+2. Uruchom GATK HaplotypeCaller na zaindeksowanym pliku BAM, aby wygenerować wykrycia wariantów per-próbka w formacie VCF (Variant Call Format)
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
-Zaczynamy od testowania dwóch poleceń na tylko jednej próbce.
+Zaczynamy od przetestowania dwóch poleceń na tylko jednej próbce.
 
-### 1.1. Indeksowanie wejściowego pliku BAM za pomocą Samtools
+### 1.1. Zaindeksuj plik wejściowy BAM za pomocą Samtools
 
-Pliki indeksów są powszechną cechą formatów plików bioinformatycznych; zawierają informacje o strukturze pliku głównego, które pozwalają narzędziom takim jak GATK na dostęp do podzbioru danych bez konieczności odczytywania całego pliku.
+Pliki indeksów to powszechna cecha formatów plików bioinformatycznych; zawierają informacje o strukturze pliku głównego, które pozwalają narzędziom takim jak GATK na dostęp do podzbioru danych bez konieczności czytania całego pliku.
 Jest to ważne ze względu na to, jak duże mogą być te pliki.
 
 Pliki BAM są często dostarczane bez indeksu, więc pierwszym krokiem w wielu workflow'ach analizy jest wygenerowanie go za pomocą `samtools index`.
@@ -93,7 +95,7 @@ docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
     community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
     ```
 
-Jeśli wcześniej nie pobierałeś/aś tego obrazu, ukończenie może zająć minutę.
+Jeśli nie pobierałeś wcześniej tego obrazu, może to zająć minutę.
 Po zakończeniu będziesz mieć lokalną kopię obrazu kontenera.
 
 #### 1.1.2. Uruchom kontener Samtools interaktywnie
@@ -105,14 +107,14 @@ Opcja `-v ./data:/data` montuje lokalny katalog `data` wewnątrz kontenera, aby 
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
-Twój wiersz poleceń zmienia się na coś w stylu `(base) root@a1b2c3d4e5f6:/tmp#`, co wskazuje, że jesteś teraz wewnątrz kontenera.
-Pliki danych są dostępne w katalogu `/data`.
+Twój prompt zmienia się na coś w rodzaju `(base) root@a1b2c3d4e5f6:/tmp#`, wskazując, że jesteś teraz wewnątrz kontenera.
+Pliki danych są dostępne w `/data`.
 
 #### 1.1.3. Uruchom polecenie indeksowania
 
-[Dokumentacja Samtools](https://www.htslib.org/doc/samtools-index.html) podaje nam linię poleceń do uruchomienia w celu zindeksowania pliku BAM.
+[Dokumentacja Samtools](https://www.htslib.org/doc/samtools-index.html) podaje nam linię poleceń do uruchomienia w celu zaindeksowania pliku BAM.
 
-Musimy tylko podać plik wejściowy; narzędzie automatycznie wygeneruje nazwę dla wyjścia, dodając `.bai` do nazwy pliku wejściowego.
+Musimy podać tylko plik wejściowy; narzędzie automatycznie wygeneruje nazwę dla wyjścia, dodając `.bai` do nazwy pliku wejściowego.
 
 ```bash
 samtools index /data/bam/reads_mother.bam
@@ -128,7 +130,7 @@ samtools index /data/bam/reads_mother.bam
     └── reads_son.bam
     ```
 
-Teraz powinieneś/powinnaś zobaczyć plik o nazwie `reads_mother.bam.bai` w tym samym katalogu co oryginalny plik wejściowy BAM.
+Powinieneś teraz zobaczyć plik o nazwie `reads_mother.bam.bai` w tym samym katalogu co oryginalny plik wejściowy BAM.
 
 #### 1.1.4. Wyjdź z kontenera Samtools
 
@@ -138,11 +140,11 @@ Aby wyjść z kontenera, wpisz `exit`.
 exit
 ```
 
-Twój wiersz poleceń powinien teraz wrócić do tego, co było przed uruchomieniem kontenera.
+Twój prompt powinien teraz wrócić do tego, co było przed uruchomieniem kontenera.
 
-### 1.2. Wykrywanie wariantów za pomocą GATK HaplotypeCaller
+### 1.2. Wykryj warianty za pomocą GATK HaplotypeCaller
 
-Pobierzemy kontener GATK, uruchomimy go interaktywnie i wykonamy polecenie `gatk HaplotypeCaller` na pliku BAM, który właśnie zindeksowaliśmy.
+Pobierzemy kontener GATK, uruchomimy go interaktywnie i wykonamy polecenie `gatk HaplotypeCaller` na pliku BAM, który właśnie zaindeksowaliśmy.
 
 #### 1.2.1. Pobierz kontener GATK
 
@@ -177,7 +179,7 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
     community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
     ```
 
-To powinno być szybsze niż pierwsze pobieranie, ponieważ oba obrazy kontenerów dzielą większość swoich warstw.
+Powinno to być szybsze niż pierwsze pobieranie, ponieważ oba obrazy kontenerów współdzielą większość swoich warstw.
 
 #### 1.2.2. Uruchom kontener GATK interaktywnie
 
@@ -187,7 +189,7 @@ Uruchom kontener GATK interaktywnie z zamontowanym katalogiem danych, tak jak zr
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-Twój wiersz poleceń zmienia się, wskazując, że jesteś teraz wewnątrz kontenera GATK.
+Twój prompt zmienia się, wskazując, że jesteś teraz wewnątrz kontenera GATK.
 
 #### 1.2.3. Uruchom polecenie wykrywania wariantów
 
@@ -195,7 +197,7 @@ Twój wiersz poleceń zmienia się, wskazując, że jesteś teraz wewnątrz kont
 
 Musimy podać plik wejściowy BAM (`-I`), a także genom referencyjny (`-R`), nazwę dla pliku wyjściowego (`-O`) oraz listę interwałów genomowych do analizy (`-L`).
 
-Nie musimy jednak określać ścieżki do pliku indeksu; narzędzie automatycznie go wyszuka w tym samym katalogu, na podstawie ustalonej konwencji nazewnictwa i współlokalizacji.
+Nie musimy jednak określać ścieżki do pliku indeksu; narzędzie automatycznie poszuka go w tym samym katalogu, na podstawie ustalonej konwencji nazewnictwa i kolokacji.
 To samo dotyczy plików pomocniczych genomu referencyjnego (pliki indeksu i słownika sekwencji, `*.fai` i `*.dict`).
 
 ```bash
@@ -208,7 +210,7 @@ gatk HaplotypeCaller \
 
 ??? success "Wyjście polecenia"
 
-    Narzędzie generuje szczegółowy log wyjściowy. Podświetlone linie potwierdzają pomyślne zakończenie.
+    Narzędzie produkuje szczegółowe wyjście logowania. Podświetlone linie potwierdzają pomyślne zakończenie.
 
     ```console hl_lines="37 51 56 57"
     Using GATK jar /opt/conda/share/gatk4-4.5.0.0-0/gatk-package-4.5.0.0-local.jar
@@ -272,7 +274,7 @@ gatk HaplotypeCaller \
 
 Plik wyjściowy `reads_mother.vcf` jest tworzony wewnątrz Twojego katalogu roboczego w kontenerze, więc nie zobaczysz go w eksploratorze plików VS Code, chyba że zmienisz ścieżkę pliku wyjściowego.
 Jest to jednak mały plik testowy, więc możesz użyć `cat`, aby go otworzyć i zobaczyć zawartość.
-Jeśli przewiniesz aż do początku pliku, znajdziesz nagłówek złożony z wielu linii metadanych, a następnie listę wykrytych wariantów, jeden w każdej linii.
+Jeśli przewiniesz całkowicie do początku pliku, znajdziesz nagłówek składający się z wielu linii metadanych, po których następuje lista wykrytych wariantów, jeden na linię.
 
 ??? abstract "Zawartość pliku"
 
@@ -286,7 +288,7 @@ Jeśli przewiniesz aż do początku pliku, znajdziesz nagłówek złożony z wie
 Każda linia opisuje możliwy wariant zidentyfikowany w danych sekwencjonowania próbki. Aby uzyskać wskazówki dotyczące interpretacji formatu VCF, zobacz [ten pomocny artykuł](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
 
 Plikowi wyjściowemu VCF towarzyszy plik indeksu o nazwie `reads_mother.vcf.idx`, który został automatycznie utworzony przez GATK.
-Ma tę samą funkcję co plik indeksu BAM, aby umożliwić narzędziom wyszukiwanie i pobieranie podzbiorów danych bez ładowania całego pliku.
+Ma on taką samą funkcję jak plik indeksu BAM, aby umożliwić narzędziom wyszukiwanie i pobieranie podzbiorów danych bez ładowania całego pliku.
 
 #### 1.2.4. Wyjdź z kontenera GATK
 
@@ -296,47 +298,47 @@ Aby wyjść z kontenera, wpisz `exit`.
 exit
 ```
 
-Twój wiersz poleceń powinien wrócić do normy.
+Twój prompt powinien wrócić do normy.
 To kończy test wykrywania wariantów per-próbka.
 
 ---
 
-## 2. Łączne wykrywanie w kohorcie
+## 2. Wspólne wykrywanie w kohorcie
 
-Podejście wykrywania wariantów, którego właśnie użyliśmy, generuje wykrycia wariantów per-próbka.
-Jest to w porządku do przeglądania wariantów z każdej próbki osobno, ale daje ograniczone informacje.
-Często ciekawsze jest spojrzenie na to, jak wykrycia wariantów różnią się w wielu próbkach.
-GATK oferuje alternatywną metodę zwaną łącznym wykrywaniem wariantów (joint variant calling) w tym celu.
+Podejście do wykrywania wariantów, którego właśnie użyliśmy, generuje wykrycia wariantów per-próbka.
+To jest w porządku do przeglądania wariantów z każdej próbki osobno, ale daje ograniczone informacje.
+Często bardziej interesujące jest spojrzenie na to, jak wykrycia wariantów różnią się między wieloma próbkami.
+GATK oferuje alternatywną metodę zwaną wspólnym wykrywaniem wariantów w tym celu.
 
-Łączne wykrywanie wariantów obejmuje generowanie specjalnego rodzaju wyjścia wariantów zwanego GVCF (dla Genomic VCF) dla każdej próbki, następnie łączenie danych GVCF ze wszystkich próbek i uruchamianie analizy statystycznej „łącznego genotypowania".
+Wspólne wykrywanie wariantów polega na wygenerowaniu specjalnego rodzaju wyjścia wariantów zwanego GVCF (Genomic VCF) dla każdej próbki, następnie połączeniu danych GVCF ze wszystkich próbek i uruchomieniu analizy statystycznej 'wspólnego genotypowania'.
 
-![Analiza łączna](img/joint-calling.png)
+![Analiza wspólna](img/joint-calling.png)
 
-To, co jest specjalne w GVCF próbki, to fakt, że zawiera rekordy podsumowujące statystyki danych sekwencjonowania dla wszystkich pozycji w docelowym obszarze genomu, nie tylko pozycji, w których program znalazł dowody zmienności.
-Jest to kluczowe dla obliczeń łącznego genotypowania ([więcej informacji](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
+To, co jest specjalne w GVCF próbki, to że zawiera rekordy podsumowujące statystyki danych sekwencjonowania o wszystkich pozycjach w docelowym obszarze genomu, nie tylko pozycjach, gdzie program znalazł dowody zmienności.
+Jest to kluczowe dla obliczeń wspólnego genotypowania ([dalsze informacje](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
 
-GVCF jest tworzony przez GATK HaplotypeCaller, to samo narzędzie, którego właśnie przetestowaliśmy, z dodatkowym parametrem (`-ERC GVCF`).
-Łączenie plików GVCF odbywa się za pomocą GATK GenomicsDBImport, który łączy wykrycia per-próbka w magazyn danych (analogiczny do bazy danych).
-Faktyczna analiza „łącznego genotypowania" jest następnie wykonywana za pomocą GATK GenotypeGVCFs.
+GVCF jest produkowany przez GATK HaplotypeCaller, to samo narzędzie, które właśnie przetestowaliśmy, z dodatkowym parametrem (`-ERC GVCF`).
+Łączenie GVCF odbywa się za pomocą GATK GenomicsDBImport, który łączy wykrycia per-próbka w magazyn danych (analogiczny do bazy danych).
+Właściwa analiza 'wspólnego genotypowania' jest następnie wykonywana za pomocą GATK GenotypeGVCFs.
 
-Tutaj testujemy polecenia potrzebne do generowania GVCF i uruchomienia łącznego genotypowania.
-To polecenia, które opakujemy w workflow Nextflow w części 3 tego kursu.
+Tutaj testujemy polecenia potrzebne do wygenerowania GVCF i uruchomienia wspólnego genotypowania.
+To są polecenia, które opakujemy w workflow Nextflow'a w Części 3 tego szkolenia.
 
-1. Wygeneruj plik indeksu dla każdego wejściowego pliku BAM za pomocą Samtools
-2. Uruchom GATK HaplotypeCaller na każdym wejściowym pliku BAM, aby wygenerować GVCF wykrytych wariantów genomowych per-próbka
+1. Wygeneruj plik indeksu dla każdego pliku wejściowego BAM używając Samtools
+2. Uruchom GATK HaplotypeCaller na każdym pliku wejściowym BAM, aby wygenerować GVCF wykryć wariantów genomowych per-próbka
 3. Zbierz wszystkie GVCF i połącz je w magazyn danych GenomicsDB
-4. Uruchom łączne genotypowanie na połączonym magazynie danych GVCF, aby wytworzyć VCF na poziomie kohorty
+4. Uruchom wspólne genotypowanie na połączonym magazynie danych GVCF, aby wytworzyć VCF na poziomie kohorty
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
-Teraz musimy przetestować wszystkie te polecenia, zaczynając od zindeksowania wszystkich trzech plików BAM.
+Teraz musimy przetestować wszystkie te polecenia, zaczynając od zaindeksowania wszystkich trzech plików BAM.
 
-### 2.1. Indeksowanie plików BAM dla wszystkich trzech próbek
+### 2.1. Zaindeksuj pliki BAM dla wszystkich trzech próbek
 
-W pierwszej sekcji powyżej zindeksowaliśmy tylko jeden plik BAM.
-Teraz musimy zindeksować wszystkie trzy próbki, aby GATK HaplotypeCaller mógł je przetworzyć.
+W pierwszej sekcji powyżej zaindeksowaliśmy tylko jeden plik BAM.
+Teraz musimy zaindeksować wszystkie trzy próbki, aby GATK HaplotypeCaller mógł je przetworzyć.
 
 #### 2.1.1. Uruchom kontener Samtools interaktywnie
 
@@ -346,7 +348,7 @@ Już pobraliśmy obraz kontenera Samtools, więc możemy go uruchomić bezpośre
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
-Twój wiersz poleceń zmienia się, wskazując, że jesteś wewnątrz kontenera, z zamontowanym katalogiem danych jak wcześniej.
+Twój prompt zmienia się, wskazując, że jesteś wewnątrz kontenera, z zamontowanym katalogiem danych jak poprzednio.
 
 #### 2.1.2. Uruchom polecenie indeksowania na wszystkich trzech próbkach
 
@@ -370,7 +372,7 @@ samtools index /data/bam/reads_son.bam
     └── reads_son.bam.bai
     ```
 
-To powinno wytworzyć pliki indeksów w tym samym katalogu co odpowiadające im pliki BAM.
+Powinno to wytworzyć pliki indeksów w tym samym katalogu co odpowiadające im pliki BAM.
 
 #### 2.1.3. Wyjdź z kontenera Samtools
 
@@ -380,11 +382,11 @@ Aby wyjść z kontenera, wpisz `exit`.
 exit
 ```
 
-Twój wiersz poleceń powinien wrócić do normy.
+Twój prompt powinien wrócić do normy.
 
-### 2.2. Generowanie plików GVCF dla wszystkich trzech próbek
+### 2.2. Wygeneruj GVCF dla wszystkich trzech próbek
 
-Aby uruchomić krok łącznego genotypowania, potrzebujemy plików GVCF dla wszystkich trzech próbek.
+Aby uruchomić krok wspólnego genotypowania, potrzebujemy GVCF dla wszystkich trzech próbek.
 
 #### 2.2.1. Uruchom kontener GATK interaktywnie
 
@@ -394,14 +396,14 @@ Już pobraliśmy obraz kontenera GATK wcześniej, więc możemy go uruchomić be
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-Twój wiersz poleceń zmienia się, wskazując, że jesteś wewnątrz kontenera GATK.
+Twój prompt zmienia się, wskazując, że jesteś wewnątrz kontenera GATK.
 
 #### 2.2.2. Uruchom polecenie wykrywania wariantów z opcją GVCF
 
-Aby wytworzyć genomowy VCF (GVCF), dodajemy opcję `-ERC GVCF` do podstawowego polecenia, która włącza tryb GVCF narzędzia HaplotypeCaller.
+Aby wytworzyć genomiczny VCF (GVCF), dodajemy opcję `-ERC GVCF` do podstawowego polecenia, która włącza tryb GVCF HaplotypeCaller'a.
 
-Zmieniamy też rozszerzenie pliku dla pliku wyjściowego z `.vcf` na `.g.vcf`.
-Technicznie nie jest to wymóg, ale jest to silnie zalecana konwencja.
+Zmieniamy również rozszerzenie pliku dla pliku wyjściowego z `.vcf` na `.g.vcf`.
+Technicznie nie jest to wymagane, ale jest to silnie zalecana konwencja.
 
 ```bash
 gatk HaplotypeCaller \
@@ -478,7 +480,7 @@ gatk HaplotypeCaller \
 
 To tworzy plik wyjściowy GVCF `reads_mother.g.vcf` w bieżącym katalogu roboczym w kontenerze.
 
-Jeśli użyjesz `cat`, aby zobaczyć zawartość, zobaczysz, że jest on znacznie dłuższy niż równoważny VCF, który wygenerowaliśmy w sekcji 1. Nie możesz nawet przewinąć do początku pliku, a większość linii wygląda zupełnie inaczej niż to, co widzieliśmy w VCF.
+Jeśli użyjesz `cat`, aby zobaczyć zawartość, zobaczysz, że jest znacznie dłuższy niż równoważny VCF, który wygenerowaliśmy w sekcji 1. Nie możesz nawet przewinąć do początku pliku, a większość linii wygląda zupełnie inaczej niż to, co widzieliśmy w VCF.
 
 ??? abstract "Zawartość pliku"
 
@@ -488,11 +490,11 @@ Jeśli użyjesz `cat`, aby zobaczyć zawartość, zobaczysz, że jest on znaczni
     20_10037292_10066351    14720   .       T       <NON_REF>       .       .       END=14737       GT:DP:GQ:MIN_DP:PL       0/0:42:99:37:0,100,1160
     ```
 
-Reprezentują regiony bez wariantów, w których narzędzie wykrywające warianty nie znalazło dowodów zmienności, więc przechwycono pewne statystyki opisujące jego poziom pewności w braku zmienności.
-Umożliwia to rozróżnienie między dwoma bardzo różnymi przypadkami: (1) są dane dobrej jakości pokazujące, że próbka jest homozygotyczna względem referencji, i (2) nie ma wystarczającej ilości dobrych danych, aby w ogóle dokonać ustalenia.
+Reprezentują one regiony niewariantowe, gdzie narzędzie do wykrywania wariantów nie znalazło dowodów zmienności, więc przechwyciło pewne statystyki opisujące jego poziom pewności co do braku zmienności.
+Umożliwia to rozróżnienie między dwoma bardzo różnymi przypadkami: (1) są dane dobrej jakości pokazujące, że próbka jest homozygotyczna-referencyjna, oraz (2) nie ma wystarczająco dużo dobrych danych dostępnych, aby dokonać określenia w żaden sposób.
 
-W GVCF zazwyczaj jest wiele takich linii bez wariantów, z mniejszą liczbą rekordów wariantów rozsypanych wśród nich.
-Spróbuj uruchomić `head -176` na pliku GVCF, aby załadować tylko pierwsze 176 linii pliku i znaleźć faktyczne wykrycie wariantu.
+W GVCF zazwyczaj jest wiele takich linii niewariantowych, z mniejszą liczbą rekordów wariantów rozproszonych między nimi.
+Spróbuj uruchomić `head -176` na GVCF, aby załadować tylko pierwsze 176 linii pliku i znaleźć rzeczywiste wykrycie wariantu.
 
 ??? abstract "Zawartość pliku"
 
@@ -504,11 +506,11 @@ Spróbuj uruchomić `head -176` na pliku GVCF, aby załadować tylko pierwsze 17
 
 Druga linia pokazuje pierwszy rekord wariantu w pliku, który odpowiada pierwszemu wariantowi w pliku VCF, na który patrzyliśmy wcześniej.
 
-Tak jak oryginalny VCF, plikowi wyjściowemu GVCF również towarzyszy plik indeksu o nazwie `reads_mother.g.vcf.idx`.
+Tak jak oryginalny VCF, plikowi wyjściowemu GVCF również towarzyszy plik indeksu, o nazwie `reads_mother.g.vcf.idx`.
 
-#### 2.2.3. Powtórz proces dla pozostałych dwóch próbek
+#### 2.2.3. Powtórz proces na pozostałych dwóch próbkach
 
-Wygeneruj pliki GVCF dla pozostałych dwóch próbek, uruchamiając poniższe polecenia, jedno po drugim.
+Wygeneruj GVCF dla pozostałych dwóch próbek, uruchamiając poniższe polecenia, jedno po drugim.
 
 ```bash
 gatk HaplotypeCaller \
@@ -528,19 +530,19 @@ gatk HaplotypeCaller \
         -ERC GVCF
 ```
 
-Po zakończeniu powinieneś/powinnaś mieć trzy pliki kończące się na `.g.vcf` w swoim bieżącym katalogu (jeden na próbkę) oraz ich odpowiednie pliki indeksów kończące się na `.g.vcf.idx`.
+Po zakończeniu powinieneś mieć trzy pliki kończące się na `.g.vcf` w swoim bieżącym katalogu (jeden na próbkę) oraz ich odpowiednie pliki indeksów kończące się na `.g.vcf.idx`.
 
 Ale nie wychodź z kontenera!
 Użyjemy tego samego kontenera w następnym kroku.
 
-### 2.3. Uruchomienie łącznego genotypowania
+### 2.3. Uruchom wspólne genotypowanie
 
-Teraz, gdy mamy wszystkie pliki GVCF, możemy wypróbować podejście łącznego genotypowania do generowania wykrytych wariantów dla kohorty próbek.
-Jest to metoda dwuetapowa, która składa się z połączenia danych ze wszystkich plików GVCF w magazyn danych, a następnie uruchomienia właściwej analizy łącznego genotypowania w celu wygenerowania końcowego VCF łącznie wykrytych wariantów.
+Teraz, gdy mamy wszystkie GVCF, możemy wypróbować podejście wspólnego genotypowania do generowania wykryć wariantów dla kohorty próbek.
+Jest to metoda dwuetapowa, która polega na połączeniu danych ze wszystkich GVCF w magazyn danych, a następnie uruchomieniu właściwej analizy wspólnego genotypowania w celu wygenerowania końcowego VCF wspólnie wykrytych wariantów.
 
-#### 2.3.1. Połącz wszystkie pliki GVCF per-próbka
+#### 2.3.1. Połącz wszystkie GVCF per-próbka
 
-Ten pierwszy krok używa innego narzędzia GATK, zwanego GenomicsDBImport, do połączenia danych ze wszystkich plików GVCF w magazyn danych GenomicsDB.
+Ten pierwszy krok używa innego narzędzia GATK, zwanego GenomicsDBImport, do połączenia danych ze wszystkich GVCF w magazyn danych GenomicsDB.
 
 ```bash
 gatk GenomicsDBImport \
@@ -596,16 +598,16 @@ gatk GenomicsDBImport \
     Runtime.totalMemory()=305135616
     ```
 
-Wynikiem tego kroku jest efektywnie katalog zawierający zestaw dalszych zagnieżdżonych katalogów przechowujących połączone dane wariantów w postaci wielu różnych plików.
-Możesz go przeglądać, ale szybko zobaczysz, że ten format magazynu danych nie jest przeznaczony do bezpośredniego odczytu przez ludzi.
+Wyjściem tego kroku jest w zasadzie katalog zawierający zestaw dalszych zagnieżdżonych katalogów przechowujących połączone dane wariantów w postaci wielu różnych plików.
+Możesz się w nim rozejrzeć, ale szybko zobaczysz, że ten format magazynu danych nie jest przeznaczony do bezpośredniego odczytu przez ludzi.
 
 !!! note "Uwaga"
 
-    GATK zawiera narzędzia, które umożliwiają przeglądanie i wyodrębnianie danych wykrytych wariantów z magazynu danych w razie potrzeby.
+    GATK zawiera narzędzia, które umożliwiają inspekcję i wyodrębnianie danych wykryć wariantów z magazynu danych w razie potrzeby.
 
-#### 2.3.2. Uruchom właściwą analizę łącznego genotypowania
+#### 2.3.2. Uruchom właściwą analizę wspólnego genotypowania
 
-Ten drugi krok używa jeszcze innego narzędzia GATK, zwanego GenotypeGVCFs, do ponownego obliczenia statystyk wariantów i indywidualnych genotypów w świetle danych dostępnych we wszystkich próbkach w kohorcie.
+Ten drugi krok używa jeszcze innego narzędzia GATK, zwanego GenotypeGVCFs, do ponownego obliczenia statystyk wariantów i genotypów indywidualnych w świetle danych dostępnych we wszystkich próbkach w kohorcie.
 
 ```bash
 gatk GenotypeGVCFs \
@@ -658,7 +660,7 @@ gatk GenotypeGVCFs \
     ```
 
 To tworzy plik wyjściowy VCF `family_trio.vcf` w bieżącym katalogu roboczym w kontenerze.
-Jest to kolejny dość mały plik, więc możesz użyć `cat`, aby zobaczyć jego zawartość, i przewinąć w górę, aby znaleźć pierwsze kilka linii wariantów.
+To kolejny rozsądnie mały plik, więc możesz użyć `cat` na tym pliku, aby zobaczyć jego zawartość i przewinąć w górę, aby znaleźć pierwsze kilka linii wariantów.
 
 ??? abstract "Zawartość pliku"
 
@@ -669,12 +671,12 @@ Jest to kolejny dość mały plik, więc możesz użyć `cat`, aby zobaczyć jeg
     20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194
     ```
 
-Wygląda to podobnie do VCF, który wygenerowaliśmy wcześniej, z tą różnicą, że tym razem mamy informacje na poziomie genotypu dla wszystkich trzech próbek.
-Ostatnie trzy kolumny w pliku to bloki genotypowe dla próbek, wymienione w porządku alfabetycznym.
+Wygląda to podobnie do VCF, który wygenerowaliśmy wcześniej, z tym że tym razem mamy informacje na poziomie genotypu dla wszystkich trzech próbek.
+Ostatnie trzy kolumny w pliku to bloki genotypów dla próbek, wymienione w porządku alfabetycznym.
 
-Jeśli spojrzymy na genotypy wykryte dla naszego testowego trio rodzinnego dla pierwszego wariantu, widzimy, że ojciec jest heterozygotyczny-wariantowy (`0/1`), a matka i syn są obaj homozygotyczni-wariantowi (`1/1`).
+Jeśli spojrzymy na genotypy wykryte dla naszego testowego trio rodzinnego dla pierwszego wariantu, zobaczymy, że ojciec jest heterozygotyczny-wariantowy (`0/1`), a matka i syn są obaj homozygotyczni-wariantowi (`1/1`).
 
-To ostatecznie informacja, którą chcemy wydobyć ze zbioru danych!
+To jest ostatecznie informacja, którą chcemy wyodrębnić ze zbioru danych!
 
 #### 2.3.3. Wyjdź z kontenera GATK
 
@@ -684,15 +686,15 @@ Aby wyjść z kontenera, wpisz `exit`.
 exit
 ```
 
-Twój wiersz poleceń powinien wrócić do normy.
+Twój prompt powinien wrócić do normy.
 To kończy ręczne testowanie poleceń wykrywania wariantów.
 
 ---
 
 ### Podsumowanie
 
-Wiesz, jak przetestować polecenia indeksowania Samtools i wykrywania wariantów GATK w ich odpowiednich kontenerach, w tym jak generować pliki GVCF i uruchamiać łączne genotypowanie na wielu próbkach.
+Wiesz, jak przetestować polecenia indeksowania Samtools i wykrywania wariantów GATK w ich odpowiednich kontenerach, w tym jak generować GVCF i uruchamiać wspólne genotypowanie na wielu próbkach.
 
 ### Co dalej?
 
-Naucz się, jak opakować te same polecenia w workflow'y, które używają kontenerów do wykonania pracy.
+Naucz się, jak opakować te same polecenia w workflow'y, które używają kontenerów do wykonywania pracy.

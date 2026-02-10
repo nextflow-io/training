@@ -2,44 +2,44 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tłumaczenie wspomagane przez AI - [dowiedz się więcej i zasugeruj ulepszenia](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nextflow to język programowania działający na Java Virtual Machine. Chociaż Nextflow jest zbudowany na [Groovy](http://groovy-lang.org/) i dzieli wiele elementów składni, Nextflow to coś więcej niż tylko "Groovy z rozszerzeniami" -- jest to samodzielny język z w pełni określoną [składnią](https://nextflow.io/docs/latest/reference/syntax.html) i [biblioteką standardową](https://nextflow.io/docs/latest/reference/stdlib.html).
+Nextflow to język programowania działający na maszynie wirtualnej Java. Choć Nextflow jest zbudowany na [Groovy](http://groovy-lang.org/) i dzieli z nim znaczną część składni, Nextflow to coś więcej niż tylko „Groovy z rozszerzeniami" — jest to samodzielny język z w pełni określoną [składnią](https://nextflow.io/docs/latest/reference/syntax.html) i [biblioteką standardową](https://nextflow.io/docs/latest/reference/stdlib.html).
 
-Można pisać dużo kodu w Nextflow, nie wykraczając poza podstawową składnię zmiennych, map i list. Większość tutoriali Nextflow koncentruje się na orkiestracji workflow (kanały, procesy i przepływ danych) i można zajść zaskakująco daleko, używając tylko tego.
+Możesz napisać wiele kodu w Nextflow, nie wykraczając poza podstawową składnię zmiennych, map i list. Większość tutoriali Nextflow koncentruje się na orkiestracji workflow'ów (kanały, procesy i przepływ danych) i możesz zajść zaskakująco daleko, posługując się tylko tym.
 
-Jednak gdy trzeba manipulować danymi, parsować złożone nazwy plików, implementować logikę warunkową lub budować solidne workflow produkcyjne, pomaga myślenie o dwóch odrębnych aspektach kodu: **przepływ danych** (kanały, operatory, procesy i workflow) oraz **skryptowanie** (kod wewnątrz closures, funkcji i skryptów procesów). Choć to rozróżnienie jest nieco arbitralne—to wszystko jest kodem Nextflow—zapewnia użyteczny model mentalny do zrozumienia, kiedy orkiestrujesz pipeline, a kiedy manipulujesz danymi. Opanowanie obu dramatycznie poprawia zdolność pisania przejrzystych, łatwych w utrzymaniu workflow.
+Jednak gdy musisz manipulować danymi, parsować złożone nazwy plików, implementować logikę warunkową lub budować solidne workflow'y produkcyjne, warto myśleć o dwóch odrębnych aspektach Twojego kodu: **przepływie danych** (kanały, operatory, procesy i workflow'y) oraz **skryptowaniu** (kod wewnątrz domknięć, funkcji i skryptów procesów). Choć to rozróżnienie jest nieco arbitralne — to wszystko jest kod Nextflow — dostarcza użytecznego modelu myślowego do zrozumienia, kiedy orkiestrujesz swój pipeline, a kiedy manipulujesz danymi. Opanowanie obu aspektów znacząco poprawia Twoją zdolność do pisania przejrzystych, łatwych w utrzymaniu workflow'ów.
 
 ### Cele szkolenia
 
-Ten side quest zabiera Cię w praktyczną drogę od podstawowych konceptów do wzorców gotowych do produkcji.
-Przekształcimy prosty workflow odczytujący CSV w zaawansowany pipeline bioinformatyczny, rozwijając go krok po kroku przez realistyczne wyzwania:
+Ten side quest zabierze Cię w praktyczną podróż od podstawowych koncepcji do wzorców gotowych do produkcji.
+Przekształcimy prosty workflow czytający CSV w zaawansowany pipeline bioinformatyczny, rozwijając go krok po kroku przez realistyczne wyzwania:
 
-- **Zrozumienie granic:** Rozróżnienie między operacjami przepływu danych a skryptowaniem i zrozumienie, jak współpracują
-- **Manipulacja danymi:** Wyodrębnianie, transformowanie i wybieranie podzbiorów map i kolekcji przy użyciu potężnych operatorów
-- **Przetwarzanie ciągów znaków:** Parsowanie złożonych schematów nazewnictwa plików za pomocą wzorców regex i opanowanie interpolacji zmiennych
-- **Funkcje wielokrotnego użytku:** Wyodrębnianie złożonej logiki do nazwanych funkcji dla czystszych, łatwiejszych w utrzymaniu workflow
-- **Dynamiczna logika:** Budowanie procesów, które dostosowują się do różnych typów wejściowych i używanie closures do dynamicznej alokacji zasobów
+- **Rozumienie granic:** Rozróżnianie między operacjami przepływu danych a skryptowaniem oraz zrozumienie, jak współpracują ze sobą
+- **Manipulacja danymi:** Wyodrębnianie, przekształcanie i wybieranie podzbiorów map i kolekcji przy użyciu potężnych operatorów
+- **Przetwarzanie napisów:** Parsowanie złożonych schematów nazewnictwa plików za pomocą wzorców regex i opanowanie interpolacji zmiennych
+- **Funkcje wielokrotnego użytku:** Wyodrębnianie złożonej logiki do nazwanych funkcji dla czystszych, łatwiejszych w utrzymaniu workflow'ów
+- **Dynamiczna logika:** Budowanie procesów, które dostosowują się do różnych typów wejściowych i używanie domknięć do dynamicznej alokacji zasobów
 - **Warunkowe kierowanie:** Inteligentne kierowanie próbek przez różne procesy na podstawie ich cech metadanych
-- **Bezpieczne operacje:** Bezpieczna obsługa brakujących danych z operatorami bezpiecznymi względem null i walidacja wejść z czytelnymi komunikatami błędów
-- **Obsługa zdarzeń oparta na konfiguracji:** Użycie handlerów zdarzeń workflow do logowania, powiadomień i zarządzania cyklem życia
+- **Bezpieczne operacje:** Eleganckie radzenie sobie z brakującymi danymi za pomocą operatorów bezpiecznych dla null i walidacja wejść z czytelnymi komunikatami błędów
+- **Obsługa oparta na konfiguracji:** Używanie procedur obsługi zdarzeń workflow'a do logowania, powiadomień i zarządzania cyklem życia
 
 ### Wymagania wstępne
 
-Przed przystąpieniem do tego side questa powinieneś:
+Przed podjęciem tego side questa powinieneś:
 
 - Ukończyć tutorial [Hello Nextflow](../hello_nextflow/README.md) lub równoważny kurs dla początkujących.
-- Czuć się komfortowo z podstawowymi konceptami i mechanizmami Nextflow (procesy, kanały, operatory, praca z plikami, metadane)
-- Mieć podstawową znajomość popularnych konstrukcji programistycznych (zmienne, mapy, listy)
+- Swobodnie posługiwać się podstawowymi koncepcjami i mechanizmami Nextflow (procesy, kanały, operatory, praca z plikami, metadane)
+- Mieć podstawową znajomość powszechnych konstrukcji programistycznych (zmienne, mapy, listy)
 
-Ten tutorial wyjaśni koncepty programistyczne w miarę ich pojawiania się, więc nie potrzebujesz rozległego doświadczenia programistycznego.
-Zaczniemy od fundamentalnych konceptów i zbudujemy zaawansowane wzorce.
+Ten tutorial będzie wyjaśniał koncepcje programistyczne w miarę ich napotkania, więc nie potrzebujesz rozległego doświadczenia programistycznego.
+Zaczniemy od fundamentalnych koncepcji i będziemy budować w kierunku zaawansowanych wzorców.
 
 ---
 
-## 0. Rozpoczęcie
+## 0. Pierwsze kroki
 
-#### Otwórz codespace szkoleniowy
+#### Otwórz środowisko szkoleniowe w codespace
 
-Jeśli jeszcze tego nie zrobiłeś, upewnij się, że otworzysz środowisko szkoleniowe zgodnie z opisem w [Konfiguracja Środowiska](../envsetup/index.md).
+Jeśli jeszcze tego nie zrobiłeś, upewnij się, że otworzyłeś środowisko szkoleniowe zgodnie z opisem w [Konfiguracja środowiska](../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -53,9 +53,9 @@ cd side-quests/essential_scripting_patterns
 
 #### Przejrzyj materiały
 
-Znajdziesz główny plik workflow oraz katalog `data` zawierający przykładowe pliki danych.
+Znajdziesz główny plik workflow'a oraz katalog `data` zawierający przykładowe pliki danych.
 
-```console title="Zawartość katalogu"
+```console title="Directory contents"
 .
 ├── collect.nf
 ├── data
@@ -72,7 +72,7 @@ Znajdziesz główny plik workflow oraz katalog `data` zawierający przykładowe 
 └── nextflow.config
 ```
 
-Nasz przykładowy CSV zawiera informacje o próbkach biologicznych wymagających różnego przetwarzania w zależności od ich charakterystyki:
+Nasz przykładowy CSV zawiera informacje o próbkach biologicznych, które wymagają różnego przetwarzania w zależności od ich charakterystyk:
 
 ```console title="samples.csv"
 sample_id,organism,tissue_type,sequencing_depth,file_path,quality_score
@@ -81,7 +81,7 @@ SAMPLE_002,mouse,brain,25000000,data/sequences/SAMPLE_002_S2_L001_R1_001.fastq,3
 SAMPLE_003,human,kidney,45000000,data/sequences/SAMPLE_003_S3_L001_R1_001.fastq,42.1
 ```
 
-Użyjemy tego realistycznego zbioru danych do eksploracji praktycznych technik programistycznych, z którymi spotkasz się w rzeczywistych workflow bioinformatycznych.
+Użyjemy tego realistycznego zbioru danych do eksploracji praktycznych technik programistycznych, które napotkasz w rzeczywistych workflow'ach bioinformatycznych.
 
 <!-- TODO: Can we make this more domain-agnostic? -->
 
@@ -89,26 +89,26 @@ Użyjemy tego realistycznego zbioru danych do eksploracji praktycznych technik p
 
 #### Lista kontrolna gotowości
 
-Uważasz, że jesteś gotowy do zanurzenia się?
+Myślisz, że jesteś gotowy, aby zacząć?
 
 - [ ] Rozumiem cel tego kursu i jego wymagania wstępne
-- [ ] Mój codespace jest uruchomiony
+- [ ] Mój codespace działa
 - [ ] Ustawiłem odpowiednio mój katalog roboczy
 <!-- - [ ] I understand the assignment -->
 
-Jeśli możesz zaznaczyć wszystkie pola, możesz zacząć.
+Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.
 
 ---
 
-## 1. Przepływ Danych vs Skryptowanie: Zrozumienie Granic
+## 1. Przepływ danych vs Skryptowanie: Rozumienie Granic
 
-### 1.1. Identyfikowanie Co Jest Czym
+### 1.1. Identyfikowanie Czym Jest Co
 
-Pisząc workflow w Nextflow, ważne jest rozróżnienie między **przepływem danych** (jak dane przemieszczają się przez kanały i procesy) a **skryptowaniem** (kodem, który manipuluje danymi i podejmuje decyzje). Zbudujmy workflow demonstrujący, jak współpracują.
+Pisząc workflow'y w Nextflow, ważne jest rozróżnienie między **przepływem danych** (jak dane przemieszczają się przez kanały i procesy) a **skryptowaniem** (kod, który manipuluje danymi i podejmuje decyzje). Zbudujmy workflow demonstrujący, jak współpracują ze sobą.
 
-#### 1.1.1. Podstawowy Workflow Nextflow
+#### 1.1.1. Podstawowy Workflow w Nextflow
 
-Zacznij od prostego workflow, który po prostu odczytuje plik CSV (już to zrobiliśmy dla Ciebie w `main.nf`):
+Zacznij od prostego workflow'a, który po prostu odczytuje plik CSV (zrobiliśmy to już dla Ciebie w `main.nf`):
 
 ```groovy title="main.nf" linenums="1"
 workflow {
@@ -118,7 +118,7 @@ workflow {
 }
 ```
 
-Blok `workflow` definiuje naszą strukturę pipeline, podczas gdy `channel.fromPath()` tworzy kanał ze ścieżki pliku. Operator `.splitCsv()` przetwarza plik CSV i konwertuje każdy wiersz w strukturę danych map.
+Blok `workflow` definiuje strukturę naszego pipeline'u, podczas gdy `channel.fromPath()` tworzy kanał ze ścieżki pliku. Operator `.splitCsv()` przetwarza plik CSV i konwertuje każdy wiersz na strukturę danych mapy.
 
 Uruchom ten workflow, aby zobaczyć surowe dane CSV:
 
@@ -138,11 +138,11 @@ nextflow run main.nf
 
 #### 1.1.2. Dodawanie Operatora Map
 
-Teraz dodamy skryptowanie do transformacji danych, używając operatora `.map()`, który prawdopodobnie już znasz. Ten operator przyjmuje 'closure', w którym możemy pisać kod do transformacji każdego elementu.
+Teraz dodamy skryptowanie do przekształcenia danych, używając operatora `.map()`, który prawdopodobnie już znasz. Ten operator przyjmuje 'domknięcie', w którym możemy napisać kod do przekształcenia każdego elementu.
 
 !!! note "Uwaga"
 
-    **Closure** to blok kodu, który może być przekazywany i wykonywany później. Pomyśl o tym jak o funkcji, którą definiujesz inline. Closures są zapisywane za pomocą nawiasów klamrowych `{ }` i mogą przyjmować parametry. Są fundamentalne dla działania operatorów Nextflow i jeśli od jakiegoś czasu piszesz w Nextflow, możliwe, że już ich używałeś, nie zdając sobie z tego sprawy!
+    **Domknięcie** to blok kodu, który może być przekazywany i wykonywany później. Pomyśl o nim jak o funkcji, którą definiujesz inline. Domknięcia są zapisywane za pomocą nawiasów klamrowych `{ }` i mogą przyjmować parametry. Są fundamentalne dla działania operatorów Nextflow i jeśli piszesz w Nextflow od jakiegoś czasu, możliwe, że już ich używałeś, nie zdając sobie z tego sprawy!
 
 Oto jak wygląda ta operacja map:
 
@@ -165,11 +165,11 @@ Oto jak wygląda ta operacja map:
             .view()
     ```
 
-To nasze pierwsze **closure** - funkcja anonimowa, którą możesz przekazać jako argument (podobnie jak lambdy w Python lub funkcje strzałkowe w JavaScript). Closures są niezbędne do pracy z operatorami Nextflow.
+To nasze pierwsze **domknięcie** — funkcja anonimowa, którą możesz przekazać jako argument (podobnie do lambd w Pythonie lub funkcji strzałkowych w JavaScript). Domknięcia są niezbędne do pracy z operatorami Nextflow.
 
-Closure `{ row -> return row }` przyjmuje parametr `row` (może być dowolna nazwa: `item`, `sample`, itp.).
+Domknięcie `{ row -> return row }` przyjmuje parametr `row` (może to być dowolna nazwa: `item`, `sample`, itp.).
 
-Gdy operator `.map()` przetwarza każdy element kanału, przekazuje ten element do Twojego closure. Tutaj `row` przechowuje jeden wiersz CSV na raz.
+Gdy operator `.map()` przetwarza każdy element kanału, przekazuje ten element do Twojego domknięcia. Tutaj `row` przechowuje jeden wiersz CSV na raz.
 
 Zastosuj tę zmianę i uruchom workflow:
 
@@ -177,11 +177,11 @@ Zastosuj tę zmianę i uruchom workflow:
 nextflow run main.nf
 ```
 
-Zobaczysz to samo wyjście co poprzednio, ponieważ po prostu zwracamy wejście bez zmian. To potwierdza, że operator map działa poprawnie. Teraz zacznijmy transformować dane.
+Zobaczysz to samo wyjście co wcześniej, ponieważ po prostu zwracamy wejście bez zmian. To potwierdza, że operator map działa poprawnie. Teraz zacznijmy przekształcać dane.
 
-#### 1.1.3. Tworzenie Struktury Danych Map
+#### 1.1.3. Tworzenie Struktury Danych Mapy
 
-Teraz napiszemy logikę **skryptowania** wewnątrz naszego closure, aby transformować każdy wiersz danych. To tutaj przetwarzamy pojedyncze elementy danych zamiast orkiestrować przepływ danych.
+Teraz napiszemy logikę **skryptowania** wewnątrz naszego domknięcia, aby przekształcić każdy wiersz danych. To tutaj przetwarzamy poszczególne elementy danych, zamiast orkiestrować przepływ danych.
 
 === "Po"
 
@@ -189,7 +189,7 @@ Teraz napiszemy logikę **skryptowania** wewnątrz naszego closure, aby transfor
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
-                // Skryptowanie do transformacji danych
+                // Skryptowanie do przekształcenia danych
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -213,9 +213,9 @@ Teraz napiszemy logikę **skryptowania** wewnątrz naszego closure, aby transfor
             .view()
     ```
 
-Mapa `sample_meta` to struktura danych klucz-wartość (jak słowniki w Python, obiekty w JavaScript lub hasze w Ruby) przechowująca powiązane informacje: ID próbki, organizm, typ tkanki, głębokość sekwencjonowania i wynik jakości.
+Mapa `sample_meta` to struktura danych klucz-wartość (jak słowniki w Pythonie, obiekty w JavaScript lub hasze w Ruby) przechowująca powiązane informacje: ID próbki, organizm, typ tkanki, głębokość sekwencjonowania i wynik jakości.
 
-Używamy metod manipulacji ciągami znaków jak `.toLowerCase()` i `.replaceAll()` do czyszczenia naszych danych oraz metod konwersji typów jak `.toInteger()` i `.toDouble()` do konwersji danych tekstowych z CSV na odpowiednie typy numeryczne.
+Używamy metod manipulacji napisami takich jak `.toLowerCase()` i `.replaceAll()` do czyszczenia naszych danych oraz metod konwersji typów takich jak `.toInteger()` i `.toDouble()` do konwersji danych napisowych z CSV na odpowiednie typy numeryczne.
 
 Zastosuj tę zmianę i uruchom workflow:
 
@@ -233,7 +233,7 @@ nextflow run main.nf
 
 #### 1.1.4. Dodawanie Logiki Warunkowej
 
-Teraz dodajmy więcej skryptowania - tym razem używając operatora ternarnego do podejmowania decyzji na podstawie wartości danych.
+Teraz dodajmy więcej skryptowania — tym razem używając operatora trójargumentowego do podejmowania decyzji na podstawie wartości danych.
 
 Wprowadź następującą zmianę:
 
@@ -274,13 +274,13 @@ Wprowadź następującą zmianę:
             .view()
     ```
 
-Operator ternarny to skrót dla instrukcji if/else zgodnie ze wzorcem `warunek ? wartość_jeśli_prawda : wartość_jeśli_fałsz`. Ta linia oznacza: "Jeśli jakość jest większa niż 40, użyj 'high', w przeciwnym razie użyj 'normal'". Jego kuzyn, **operator Elvis** (`?:`), zapewnia wartości domyślne, gdy coś jest null lub puste - zbadamy ten wzorzec później w tym tutorialu.
+Operator trójargumentowy to skrót dla instrukcji if/else, który podąża za wzorcem `warunek ? wartość_jeśli_prawda : wartość_jeśli_fałsz`. Ta linia oznacza: „Jeśli jakość jest większa niż 40, użyj 'high', w przeciwnym razie użyj 'normal'". Jego kuzyn, **operator Elvisa** (`?:`), dostarcza wartości domyślnych, gdy coś jest null lub puste — zbadamy ten wzorzec później w tym tutorialu.
 
-Operator dodawania map `+` tworzy **nową mapę** zamiast modyfikować istniejącą. Ta linia tworzy nową mapę zawierającą wszystkie pary klucz-wartość z `sample_meta` plus nowy klucz `priority`.
+Operator dodawania map `+` tworzy **nową mapę** zamiast modyfikować istniejącą. Ta linia tworzy nową mapę, która zawiera wszystkie pary klucz-wartość z `sample_meta` plus nowy klucz `priority`.
 
 !!! Note "Uwaga"
 
-    Nigdy nie modyfikuj map przekazanych do closures - zawsze twórz nowe używając `+` (na przykład). W Nextflow te same dane często przepływają przez wiele operacji jednocześnie. Modyfikowanie mapy w miejscu może powodować nieprzewidywalne efekty uboczne, gdy inne operacje odwołują się do tego samego obiektu. Tworzenie nowych map zapewnia, że każda operacja ma własną czystą kopię.
+    Nigdy nie modyfikuj map przekazanych do domknięć — zawsze twórz nowe używając `+` (na przykład). W Nextflow te same dane często przepływają przez wiele operacji jednocześnie. Modyfikowanie mapy w miejscu może powodować nieprzewidywalne efekty uboczne, gdy inne operacje odwołują się do tego samego obiektu. Tworzenie nowych map zapewnia, że każda operacja ma swoją własną czystą kopię.
 
 Uruchom zmodyfikowany workflow:
 
@@ -298,11 +298,11 @@ nextflow run main.nf
 
 Pomyślnie dodaliśmy logikę warunkową do wzbogacenia naszych metadanych o poziom priorytetu oparty na wynikach jakości.
 
-#### 1.1.5. Wybieranie Podzbiorów Map za pomocą `.subMap()`
+#### 1.1.5. Wybieranie Podzbiorów Map za Pomocą `.subMap()`
 
-Podczas gdy operator `+` dodaje klucze do mapy, czasami musisz zrobić coś odwrotnego - wyodrębnić tylko określone klucze. Metoda `.subMap()` jest do tego idealna.
+Podczas gdy operator `+` dodaje klucze do mapy, czasami musisz zrobić coś przeciwnego — wyodrębnić tylko określone klucze. Metoda `.subMap()` jest do tego idealna.
 
-Dodajmy linię tworzącą uproszczoną wersję naszych metadanych zawierającą tylko pola identyfikacyjne:
+Dodajmy linię, aby utworzyć uproszczoną wersję naszych metadanych, która zawiera tylko pola identyfikacyjne:
 
 === "Po"
 
@@ -310,7 +310,7 @@ Dodajmy linię tworzącą uproszczoną wersję naszych metadanych zawierającą 
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
-                // Skryptowanie do transformacji danych
+                // Skryptowanie do przekształcenia danych
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -319,7 +319,7 @@ Dodajmy linię tworzącą uproszczoną wersję naszych metadanych zawierającą 
                     quality: row.quality_score.toDouble()
                 ]
                 def id_only = sample_meta.subMap(['id', 'organism', 'tissue'])
-                println "Tylko pola ID: ${id_only}"
+                println "ID fields only: ${id_only}"
 
                 def priority = sample_meta.quality > 40 ? 'high' : 'normal'
                 return sample_meta + [priority: priority]
@@ -333,7 +333,7 @@ Dodajmy linię tworzącą uproszczoną wersję naszych metadanych zawierającą 
         ch_samples = channel.fromPath("./data/samples.csv")
             .splitCsv(header: true)
             .map { row ->
-                // Skryptowanie do transformacji danych
+                // Skryptowanie do przekształcenia danych
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -360,9 +360,9 @@ nextflow run main.nf
 
     Launching `main.nf` [peaceful_cori] DSL2 - revision: 4cc4a8340f
 
-    Tylko pola ID: [id:sample_001, organism:human, tissue:liver]
-    Tylko pola ID: [id:sample_002, organism:mouse, tissue:brain]
-    Tylko pola ID: [id:sample_003, organism:human, tissue:kidney]
+    ID fields only: [id:sample_001, organism:human, tissue:liver]
+    ID fields only: [id:sample_002, organism:mouse, tissue:brain]
+    ID fields only: [id:sample_003, organism:human, tissue:kidney]
     [id:sample_001, organism:human, tissue:liver, depth:30000000, quality:38.5, priority:normal]
     [id:sample_002, organism:mouse, tissue:brain, depth:25000000, quality:35.2, priority:normal]
     [id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, priority:high]
@@ -372,21 +372,21 @@ To pokazuje zarówno pełne metadane wyświetlone przez operację `view()`, jak 
 
 Metoda `.subMap()` przyjmuje listę kluczy i zwraca nową mapę zawierającą tylko te klucze. Jeśli klucz nie istnieje w oryginalnej mapie, po prostu nie jest uwzględniany w wyniku.
 
-Jest to szczególnie przydatne, gdy musisz tworzyć różne wersje metadanych dla różnych procesów - niektóre mogą potrzebować pełnych metadanych, podczas gdy inne potrzebują tylko minimalnych pól identyfikacyjnych.
+Jest to szczególnie użyteczne, gdy musisz utworzyć różne wersje metadanych dla różnych procesów — niektóre mogą potrzebować pełnych metadanych, podczas gdy inne potrzebują tylko minimalnych pól identyfikacyjnych.
 
-Teraz usuń te instrukcje println, aby przywrócić workflow do poprzedniego stanu, ponieważ nie będą nam potrzebne dalej.
+Teraz usuń te instrukcje println, aby przywrócić workflow do poprzedniego stanu, ponieważ nie będą nam potrzebne w dalszej części.
 
 !!! tip "Podsumowanie Operacji na Mapach"
 
     - **Dodawanie kluczy**: `map1 + [new_key: value]` - Tworzy nową mapę z dodatkowymi kluczami
-    - **Wyodrębnianie kluczy**: `map1.subMap(['key1', 'key2'])` - Tworzy nową mapę z tylko określonymi kluczami
+    - **Wyodrębnianie kluczy**: `map1.subMap(['key1', 'key2'])` - Tworzy nową mapę tylko z określonymi kluczami
     - **Obie operacje tworzą nowe mapy** - Oryginalne mapy pozostają niezmienione
 
 #### 1.1.6. Łączenie Map i Zwracanie Wyników
 
-Do tej pory zwracaliśmy tylko to, co społeczność Nextflow nazywa 'meta map', i ignorowaliśmy pliki, do których te metadane się odnoszą. Ale jeśli piszesz workflow w Nextflow, prawdopodobnie chcesz coś zrobić z tymi plikami.
+Do tej pory zwracaliśmy tylko to, co społeczność Nextflow nazywa 'mapą meta', i ignorowaliśmy pliki, do których te metadane się odnoszą. Ale jeśli piszesz workflow'y w Nextflow, prawdopodobnie chcesz coś zrobić z tymi plikami.
 
-Wyprowadźmy strukturę kanału składającą się z krotki 2 elementów: wzbogaconej mapy metadanych i odpowiadającej ścieżki pliku. Jest to powszechny wzorzec w Nextflow do przekazywania danych do procesów.
+Wyprodukujmy strukturę kanału składającą się z krotki 2 elementów: wzbogaconej mapy metadanych i odpowiadającej ścieżki pliku. To powszechny wzorzec w Nextflow do przekazywania danych do procesów.
 
 === "Po"
 
@@ -444,35 +444,35 @@ Ta struktura krotki `[meta, file]` to powszechny wzorzec w Nextflow do przekazyw
 
 !!! note "Uwaga"
 
-    **Mapy i Metadane**: Mapy są fundamentalne dla pracy z metadanymi w Nextflow. Bardziej szczegółowe wyjaśnienie pracy z mapami metadanych znajdziesz w side queście [Praca z metadanymi](./metadata.md).
+    **Mapy i Metadane**: Mapy są fundamentalne dla pracy z metadanymi w Nextflow. Aby uzyskać bardziej szczegółowe wyjaśnienie pracy z mapami metadanych, zobacz side quest [Working with metadata](./metadata.md).
 
-Nasz workflow demonstruje główny wzorzec: **operacje przepływu danych** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orkiestrują, jak dane przemieszczają się przez pipeline, podczas gdy **skryptowanie** (mapy `[key: value]`, metody na ciągach znaków, konwersje typów, operatory ternarne) wewnątrz closure `.map()` obsługuje transformację poszczególnych elementów danych.
+Nasz workflow demonstruje podstawowy wzorzec: **operacje przepływu danych** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orkiestrują, jak dane przemieszczają się przez pipeline, podczas gdy **skryptowanie** (mapy `[key: value]`, metody napisów, konwersje typów, operatory trójargumentowe) wewnątrz domknięcia `.map()` obsługuje przekształcenie poszczególnych elementów danych.
 
-### 1.2. Zrozumienie Różnych Typów: Channel vs List
+### 1.2. Rozumienie Różnych Typów: Channel vs List
 
-Do tej pory wszystko dobrze, możemy rozróżnić operacje przepływu danych od skryptowania. Ale co z przypadkiem, gdy ta sama nazwa metody istnieje w obu kontekstach?
+Do tej pory dobrze nam idzie, możemy rozróżnić między operacjami przepływu danych a skryptowaniem. Ale co z sytuacją, gdy ta sama nazwa metody istnieje w obu kontekstach?
 
-Doskonałym przykładem jest metoda `collect`, która istnieje zarówno dla typów kanałów, jak i typów List w bibliotece standardowej Nextflow. Metoda `collect()` na List transformuje każdy element, podczas gdy operator `collect()` na kanale zbiera wszystkie emisje kanału w kanał jednoelementowy.
+Doskonałym przykładem jest metoda `collect`, która istnieje zarówno dla typów kanałów, jak i typów List w bibliotece standardowej Nextflow. Metoda `collect()` na Liście przekształca każdy element, podczas gdy operator `collect()` na kanale zbiera wszystkie emisje kanału w kanał jednoelementowy.
 
-Zademonstrujmy to na przykładowych danych, zaczynając od odświeżenia wiedzy o tym, co robi operator `collect()` na kanale. Sprawdź `collect.nf`:
+Zademonstrujmy to na przykładowych danych, zaczynając od odświeżenia sobie, co robi operator `collect()` kanału. Sprawdź `collect.nf`:
 
 ```groovy title="collect.nf" linenums="1"
 def sample_ids = ['sample_001', 'sample_002', 'sample_003']
 
 // channel.collect() - grupuje wiele emisji kanału w jedną
 ch_input = channel.fromList(sample_ids)
-ch_input.view { sample -> "Pojedynczy element kanału: ${sample}" }
+ch_input.view { sample -> "Individual channel item: ${sample}" }
 ch_collected = ch_input.collect()
-ch_collected.view { list -> "wynik channel.collect(): ${list} (${list.size()} elementów zgrupowanych w 1)" }
+ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 ```
 
 Kroki:
 
-- Definiujemy listę ID próbek
-- Tworzymy kanał za pomocą `fromList()`, który emituje każde ID próbki osobno
-- Drukujemy każdy element za pomocą `view()` w miarę przepływu
-- Zbieramy wszystkie elementy w jedną listę za pomocą operatora `collect()` kanału
-- Drukujemy zebrany wynik (pojedynczy element zawierający wszystkie ID próbek) za pomocą drugiego `view()`
+- Zdefiniuj Listę ID próbek
+- Utwórz kanał za pomocą `fromList()`, który emituje każde ID próbki osobno
+- Wydrukuj każdy element za pomocą `view()` w miarę przepływu
+- Zbierz wszystkie elementy w jedną listę za pomocą operatora `collect()` kanału
+- Wydrukuj zebrany wynik (pojedynczy element zawierający wszystkie ID próbek) za pomocą drugiego `view()`
 
 Zmieniliśmy strukturę kanału, ale nie zmieniliśmy samych danych.
 
@@ -489,15 +489,15 @@ nextflow run collect.nf
 
     Launching `collect.nf` [loving_mendel] DSL2 - revision: e8d054a46e
 
-    Pojedynczy element kanału: sample_001
-    Pojedynczy element kanału: sample_002
-    Pojedynczy element kanału: sample_003
-    wynik channel.collect(): [sample_001, sample_002, sample_003] (3 elementów zgrupowanych w 1)
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
     ```
 
 `view()` zwraca wyjście dla każdej emisji kanału, więc wiemy, że to pojedyncze wyjście zawiera wszystkie 3 oryginalne elementy zgrupowane w jedną listę.
 
-Teraz zobaczmy metodę `collect` na List w akcji. Zmodyfikuj `collect.nf`, aby zastosować metodę `collect` List do oryginalnej listy ID próbek:
+Teraz zobaczmy metodę `collect` na Liście w akcji. Zmodyfikuj `collect.nf`, aby zastosować metodę `collect` Listy do oryginalnej listy ID próbek:
 
 === "Po"
 
@@ -506,15 +506,15 @@ Teraz zobaczmy metodę `collect` na List w akcji. Zmodyfikuj `collect.nf`, aby z
 
     // channel.collect() - grupuje wiele emisji kanału w jedną
     ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Pojedynczy element kanału: ${sample}" }
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { list -> "wynik channel.collect(): ${list} (${list.size()} elementów zgrupowanych w 1)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-    // List.collect() - transformuje każdy element, zachowuje strukturę
+    // List.collect() - przekształca każdy element, zachowuje strukturę
     def formatted_ids = sample_ids.collect { id ->
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
-    println "wynik List.collect(): ${formatted_ids} (${sample_ids.size()} elementów przekształconych w ${formatted_ids.size()})"
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
     ```
 
 === "Przed"
@@ -524,14 +524,14 @@ Teraz zobaczmy metodę `collect` na List w akcji. Zmodyfikuj `collect.nf`, aby z
 
     // channel.collect() - grupuje wiele emisji kanału w jedną
     ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Pojedynczy element kanału: ${sample}" }
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { list -> "wynik channel.collect(): ${list} (${list.size()} elementów zgrupowanych w 1)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
     ```
 
 W tym nowym fragmencie:
 
-- Definiujemy nową zmienną `formatted_ids`, która używa metody `collect` List do transformacji każdego ID próbki w oryginalnej liście
+- Definiujemy nową zmienną `formatted_ids`, która używa metody `collect` Listy do przekształcenia każdego ID próbki w oryginalnej liście
 - Drukujemy wynik używając `println`
 
 Uruchom zmodyfikowany workflow:
@@ -547,20 +547,20 @@ nextflow run collect.nf
 
     Launching `collect.nf` [cheeky_stonebraker] DSL2 - revision: 2d5039fb47
 
-    wynik List.collect(): [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 elementów przekształconych w 3)
-    Pojedynczy element kanału: sample_001
-    Pojedynczy element kanału: sample_002
-    Pojedynczy element kanału: sample_003
-    wynik channel.collect(): [sample_001, sample_002, sample_003] (3 elementów zgrupowanych w 1)
+    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
     ```
 
-Tym razem NIE zmieniliśmy struktury danych, wciąż mamy 3 elementy na liście, ale przekształciliśmy każdy element używając metody `collect` List, aby uzyskać nową listę ze zmodyfikowanymi wartościami. To podobne do użycia operatora `map` na kanale, ale operuje na strukturze danych List zamiast na kanale.
+Tym razem NIE zmieniliśmy struktury danych, nadal mamy 3 elementy na liście, ale przekształciliśmy każdy element używając metody `collect` Listy, aby wyprodukować nową listę ze zmodyfikowanymi wartościami. Jest to podobne do użycia operatora `map` na kanale, ale operuje na strukturze danych List zamiast na kanale.
 
-`collect` to ekstremalny przypadek, którego używamy tutaj, aby podkreślić punkt. Kluczową lekcją jest to, że pisząc workflow, zawsze rozróżniaj między **strukturami danych** (Lists, Maps, itp.) a **kanałami** (konstrukcje przepływu danych). Operacje mogą mieć te same nazwy, ale zachowują się zupełnie inaczej w zależności od typu, na którym są wywoływane.
+`collect` to ekstremalny przypadek, którego używamy tutaj, aby zilustrować punkt. Kluczową lekcją jest to, że pisząc workflow'y, zawsze rozróżniaj między **strukturami danych** (Listy, Mapy, itp.) a **kanałami** (konstrukcje przepływu danych). Operacje mogą dzielić nazwy, ale zachowują się zupełnie inaczej w zależności od typu, na którym są wywoływane.
 
-### 1.3. Operator Rozprzestrzeniania (`*.`) - Skrót do Wyodrębniania Właściwości
+### 1.3. Operator Rozproszenia (`*.`) - Skrót do Wyodrębniania Właściwości
 
-Powiązany z metodą `collect` List jest operator rozprzestrzeniania (`*.`), który zapewnia zwięzły sposób wyodrębniania właściwości z kolekcji. Jest to zasadniczo syntaktyczny cukier dla powszechnego wzorca `collect`.
+Powiązany z metodą `collect` Listy jest operator rozproszenia (`*.`), który dostarcza zwięzłego sposobu wyodrębniania właściwości z kolekcji. Jest to zasadniczo cukier składniowy dla powszechnego wzorca `collect`.
 
 Dodajmy demonstrację do naszego pliku `collect.nf`:
 
@@ -571,20 +571,20 @@ Dodajmy demonstrację do naszego pliku `collect.nf`:
 
     // channel.collect() - grupuje wiele emisji kanału w jedną
     ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Pojedynczy element kanału: ${sample}" }
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { list -> "wynik channel.collect(): ${list} (${list.size()} elementów zgrupowanych w 1)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-    // List.collect() - transformuje każdy element, zachowuje strukturę
+    // List.collect() - przekształca każdy element, zachowuje strukturę
     def formatted_ids = sample_ids.collect { id ->
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
-    println "wynik List.collect(): ${formatted_ids} (${sample_ids.size()} elementów przekształconych w ${formatted_ids.size()})"
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
 
-    // Operator rozprzestrzeniania - zwięzły dostęp do właściwości
+    // Operator rozproszenia - zwięzły dostęp do właściwości
     def sample_data = [[id: 's1', quality: 38.5], [id: 's2', quality: 42.1], [id: 's3', quality: 35.2]]
     def all_ids = sample_data*.id
-    println "Wynik operatora rozprzestrzeniania: ${all_ids}"
+    println "Spread operator result: ${all_ids}"
     ```
 
 === "Przed"
@@ -594,20 +594,20 @@ Dodajmy demonstrację do naszego pliku `collect.nf`:
 
     // channel.collect() - grupuje wiele emisji kanału w jedną
     ch_input = channel.fromList(sample_ids)
-    ch_input.view { sample -> "Pojedynczy element kanału: ${sample}" }
+    ch_input.view { sample -> "Individual channel item: ${sample}" }
     ch_collected = ch_input.collect()
-    ch_collected.view { list -> "wynik channel.collect(): ${list} (${list.size()} elementów zgrupowanych w 1)" }
+    ch_collected.view { list -> "channel.collect() result: ${list} (${list.size()} items grouped into 1)" }
 
-    // List.collect() - transformuje każdy element, zachowuje strukturę
+    // List.collect() - przekształca każdy element, zachowuje strukturę
     def formatted_ids = sample_ids.collect { id ->
         id.toUpperCase().replace('SAMPLE_', 'SPECIMEN_')
     }
-    println "wynik List.collect(): ${formatted_ids} (${sample_ids.size()} elementów przekształconych w ${formatted_ids.size()})"
+    println "List.collect() result: ${formatted_ids} (${sample_ids.size()} items transformed into ${formatted_ids.size()})"
     ```
 
 Uruchom zaktualizowany workflow:
 
-```bash title="Testuj operator rozprzestrzeniania"
+```bash title="Test spread operator"
 nextflow run collect.nf
 ```
 
@@ -618,18 +618,18 @@ nextflow run collect.nf
 
     Launching `collect.nf` [cranky_galileo] DSL2 - revision: 5f3c8b2a91
 
-    wynik List.collect(): [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 elementów przekształconych w 3)
-    Wynik operatora rozprzestrzeniania: [s1, s2, s3]
-    Pojedynczy element kanału: sample_001
-    Pojedynczy element kanału: sample_002
-    Pojedynczy element kanału: sample_003
-    wynik channel.collect(): [sample_001, sample_002, sample_003] (3 elementów zgrupowanych w 1)
+    List.collect() result: [SPECIMEN_001, SPECIMEN_002, SPECIMEN_003] (3 items transformed into 3)
+    Spread operator result: [s1, s2, s3]
+    Individual channel item: sample_001
+    Individual channel item: sample_002
+    Individual channel item: sample_003
+    channel.collect() result: [sample_001, sample_002, sample_003] (3 items grouped into 1)
     ```
 
-Operator rozprzestrzeniania `*.` jest skrótem dla powszechnego wzorca collect:
+Operator rozproszenia `*.` to skrót dla powszechnego wzorca collect:
 
 ```groovy
-// Są równoważne:
+// Te są równoważne:
 def ids = samples*.id
 def ids = samples.collect { it.id }
 
@@ -638,44 +638,44 @@ def names = files*.getName()
 def names = files.collect { it.getName() }
 ```
 
-Operator rozprzestrzeniania jest szczególnie przydatny, gdy musisz wyodrębnić pojedynczą właściwość z listy obiektów - jest bardziej czytelny niż pisanie pełnego closure `collect`.
+Operator rozproszenia jest szczególnie użyteczny, gdy musisz wyodrębnić pojedynczą właściwość z listy obiektów — jest bardziej czytelny niż wypisywanie pełnego domknięcia `collect`.
 
-!!! tip "Kiedy Używać Spread vs Collect"
+!!! tip "Kiedy Używać Rozproszenia vs Collect"
 
-    - **Użyj spread (`*.`)** do prostego dostępu do właściwości: `samples*.id`, `files*.name`
-    - **Użyj collect** do transformacji lub złożonej logiki: `samples.collect { it.id.toUpperCase() }`, `samples.collect { [it.id, it.quality > 40] }`
+    - **Użyj rozproszenia (`*.`)** dla prostego dostępu do właściwości: `samples*.id`, `files*.name`
+    - **Użyj collect** dla przekształceń lub złożonej logiki: `samples.collect { it.id.toUpperCase() }`, `samples.collect { [it.id, it.quality > 40] }`
 
-### Wnioski
+### Podsumowanie
 
 W tej sekcji nauczyłeś się:
 
-- **Przepływ danych vs skryptowanie**: Operatory kanałów orkiestrują, jak dane przepływają przez Twój pipeline, podczas gdy skryptowanie transformuje poszczególne elementy danych
-- **Zrozumienie typów**: Ta sama nazwa metody (jak `collect`) może zachowywać się inaczej w zależności od typu, na którym jest wywoływana (Channel vs List)
+- **Przepływ danych vs skryptowanie**: Operatory kanałów orkiestrują, jak dane przepływają przez Twój pipeline, podczas gdy skryptowanie przekształca poszczególne elementy danych
+- **Rozumienie typów**: Ta sama nazwa metody (jak `collect`) może zachowywać się inaczej w zależności od typu, na którym jest wywoływana (Channel vs List)
 - **Kontekst ma znaczenie**: Zawsze bądź świadomy, czy pracujesz z kanałami (przepływ danych) czy strukturami danych (skryptowanie)
 
-Zrozumienie tych granic jest niezbędne do debugowania, dokumentacji i pisania łatwych w utrzymaniu workflow.
+Rozumienie tych granic jest niezbędne do debugowania, dokumentacji i pisania łatwych w utrzymaniu workflow'ów.
 
-Następnie zagłębimy się w możliwości przetwarzania ciągów znaków, które są niezbędne do obsługi rzeczywistych danych.
+Następnie zagłębimy się w możliwości przetwarzania napisów, które są niezbędne do obsługi rzeczywistych danych.
 
 ---
 
-## 2. Przetwarzanie Ciągów Znaków i Dynamiczne Generowanie Skryptów
+## 2. Przetwarzanie Napisów i Dynamiczne Generowanie Skryptów
 
-Opanowanie przetwarzania ciągów znaków oddziela kruche workflow od solidnych pipelineów. Ta sekcja obejmuje parsowanie złożonych nazw plików, dynamiczne generowanie skryptów i interpolację zmiennych.
+Opanowanie przetwarzania napisów oddziela kruche workflow'y od solidnych pipeline'ów. Ta sekcja obejmuje parsowanie złożonych nazw plików, dynamiczne generowanie skryptów i interpolację zmiennych.
 
 ### 2.1. Dopasowywanie Wzorców i Wyrażenia Regularne
 
 Pliki bioinformatyczne często mają złożone konwencje nazewnictwa kodujące metadane. Wyodrębnijmy to automatycznie używając dopasowywania wzorców z wyrażeniami regularnymi.
 
-Wrócimy do naszego workflow `main.nf` i dodamy logikę dopasowywania wzorców, aby wyodrębnić dodatkowe informacje o próbkach z nazw plików. Pliki FASTQ w naszym zbiorze danych podążają za konwencjami nazewnictwa Illumina z nazwami jak `SAMPLE_001_S1_L001_R1_001.fastq.gz`. Mogą wyglądać enigmatycznie, ale faktycznie kodują użyteczne metadane jak ID próbki, numer pasa i kierunek odczytu. Użyjemy możliwości regex do parsowania tych nazw.
+Wrócimy do naszego workflow'a `main.nf` i dodamy logikę dopasowywania wzorców, aby wyodrębnić dodatkowe informacje o próbkach z nazw plików. Pliki FASTQ w naszym zbiorze danych podążają za konwencjami nazewnictwa w stylu Illumina z nazwami takimi jak `SAMPLE_001_S1_L001_R1_001.fastq.gz`. Mogą wyglądać tajemniczo, ale faktycznie kodują użyteczne metadane, takie jak ID próbki, numer ścieżki i kierunek odczytu. Użyjemy możliwości regex do parsowania tych nazw.
 
-Wprowadź następującą zmianę do istniejącego workflow `main.nf`:
+Wprowadź następującą zmianę do istniejącego workflow'a `main.nf`:
 
 === "Po"
 
     ```groovy title="main.nf" linenums="4" hl_lines="10-21"
             .map { row ->
-                // Skryptowanie do transformacji danych
+                // Skryptowanie do przekształcenia danych
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -702,7 +702,7 @@ Wprowadź następującą zmianę do istniejącego workflow `main.nf`:
 
     ```groovy title="main.nf" linenums="4" hl_lines="10-11"
             .map { row ->
-                // Skryptowanie do transformacji danych
+                // Skryptowanie do przekształcenia danych
                 def sample_meta = [
                     id: row.sample_id.toLowerCase(),
                     organism: row.organism,
@@ -715,28 +715,28 @@ Wprowadź następującą zmianę do istniejącego workflow `main.nf`:
             }
     ```
 
-To demonstruje kluczowe **koncepty przetwarzania ciągów znaków**:
+To demonstruje kluczowe **koncepcje przetwarzania napisów**:
 
-1. **Literały wyrażeń regularnych** używające składni `~/wzorzec/` - tworzy wzorzec regex bez konieczności escape'owania ukośników odwrotnych
-2. **Dopasowywanie wzorców** z operatorem `=~` - próbuje dopasować ciąg znaków do wzorca regex
-3. **Obiekty matcher**, które przechwytują grupy z `[0][1]`, `[0][2]`, itd. - `[0]` odnosi się do całego dopasowania, `[1]`, `[2]`, itd. odnoszą się do przechwyconych grup w nawiasach
+1. **Literały wyrażeń regularnych** używające składni `~/wzorzec/` - tworzy wzorzec regex bez potrzeby escapowania ukośników wstecznych
+2. **Dopasowywanie wzorców** za pomocą operatora `=~` - próbuje dopasować napis do wzorca regex
+3. **Obiekty dopasowujące**, które przechwytują grupy za pomocą `[0][1]`, `[0][2]`, itp. - `[0]` odnosi się do całego dopasowania, `[1]`, `[2]`, itp. odnoszą się do przechwyconych grup w nawiasach
 
-Przeanalizujmy wzorzec regex `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
+Rozbijmy wzorzec regex `^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$`:
 
-| Wzorzec             | Dopasowuje                                  | Przechwytuje                          |
-| ------------------- | ------------------------------------------- | ------------------------------------- |
-| `^(.+)`             | Nazwa próbki od początku                    | Grupa 1: nazwa próbki                 |
-| `_S(\d+)`           | Numer próbki `_S1`, `_S2`, itd.             | Grupa 2: numer próbki                 |
-| `_L(\d{3})`         | Numer pasa `_L001`                          | Grupa 3: pas (3 cyfry)                |
-| `_(R[12])`          | Kierunek odczytu `_R1` lub `_R2`            | Grupa 4: kierunek odczytu             |
-| `_(\d{3})`          | Numer fragmentu `_001`                      | Grupa 5: fragment (3 cyfry)           |
-| `\.fastq(?:\.gz)?$` | Rozszerzenie pliku `.fastq` lub `.fastq.gz` | Nieprzechwycone (?: to non-capturing) |
+| Wzorzec             | Dopasowuje                                  | Przechwytuje                              |
+| ------------------- | ------------------------------------------- | ----------------------------------------- |
+| `^(.+)`             | Nazwa próbki od początku                    | Grupa 1: nazwa próbki                     |
+| `_S(\d+)`           | Numer próbki `_S1`, `_S2`, itp.             | Grupa 2: numer próbki                     |
+| `_L(\d{3})`         | Numer ścieżki `_L001`                       | Grupa 3: ścieżka (3 cyfry)                |
+| `_(R[12])`          | Kierunek odczytu `_R1` lub `_R2`            | Grupa 4: kierunek odczytu                 |
+| `_(\d{3})`          | Numer fragmentu `_001`                      | Grupa 5: fragment (3 cyfry)               |
+| `\.fastq(?:\.gz)?$` | Rozszerzenie pliku `.fastq` lub `.fastq.gz` | Nieprzechwycone (?: to nieprzechwytujące) |
 
-To parsuje konwencje nazewnictwa Illumina, aby automatycznie wyodrębnić metadane.
+To parsuje konwencje nazewnictwa w stylu Illumina, aby automatycznie wyodrębnić metadane.
 
 Uruchom zmodyfikowany workflow:
 
-```bash title="Testuj dopasowywanie wzorców"
+```bash title="Test pattern matching"
 nextflow run main.nf
 ```
 
@@ -756,9 +756,9 @@ To pokazuje metadane wzbogacone z nazw plików.
 
 ### 2.2. Dynamiczne Generowanie Skryptów w Procesach
 
-Bloki skryptowe procesów są zasadniczo wieloliniowymi ciągami znaków, które są przekazywane do powłoki. Możesz używać **logiki warunkowej** (if/else, operatory ternarne) do dynamicznego generowania różnych ciągów skryptowych na podstawie charakterystyki wejścia. Jest to niezbędne do obsługi różnych typów wejściowych—jak odczyty single-end vs paired-end—bez duplikowania definicji procesów.
+Bloki skryptów procesów są zasadniczo wieloliniowymi napisami, które są przekazywane do powłoki. Możesz użyć **logiki warunkowej** (if/else, operatory trójargumentowe) do dynamicznego generowania różnych napisów skryptowych na podstawie charakterystyk wejściowych. Jest to niezbędne do obsługi różnorodnych typów wejściowych — takich jak odczyty single-end vs paired-end — bez duplikowania definicji procesów.
 
-Dodajmy proces do naszego workflow, który demonstruje ten wzorzec. Otwórz `modules/fastp.nf` i spójrz:
+Dodajmy proces do naszego workflow'a, który demonstruje ten wzorzec. Otwórz `modules/fastp.nf` i spójrz:
 
 ```groovy title="modules/fastp.nf" linenums="1"
 process FASTP {
@@ -784,9 +784,9 @@ process FASTP {
 }
 ```
 
-Proces przyjmuje pliki FASTQ jako wejście i uruchamia narzędzie `fastp` do przycinania adapterów i filtrowania odczytów niskiej jakości. Niestety, osoba, która napisała ten proces, nie uwzględniła odczytów single-end, które mamy w naszym przykładowym zbiorze danych. Dodajmy go do naszego workflow i zobaczmy, co się stanie:
+Proces przyjmuje pliki FASTQ jako wejście i uruchamia narzędzie `fastp` do przycinania adapterów i filtrowania odczytów niskiej jakości. Niestety osoba, która napisała ten proces, nie uwzględniła odczytów single-end, które mamy w naszym przykładowym zbiorze danych. Dodajmy go do naszego workflow'a i zobaczmy, co się stanie:
 
-Najpierw dołącz moduł w samej pierwszej linii Twojego workflow `main.nf`:
+Najpierw dołącz moduł w pierwszej linii Twojego workflow'a `main.nf`:
 
 ```groovy title="main.nf" linenums="1"
 include { FASTP } from './modules/fastp.nf'
@@ -892,15 +892,15 @@ nextflow run main.nf
       (empty)
     ```
 
-Widać, że proces próbuje uruchomić `fastp` z wartością `null` dla drugiego pliku wejściowego, co powoduje błąd. Dzieje się tak, ponieważ nasz zbiór danych zawiera odczyty single-end, ale proces jest zakodowany na stałe do oczekiwania odczytów paired-end (dwa pliki wejściowe na raz).
+Widać, że proces próbuje uruchomić `fastp` z wartością `null` dla drugiego pliku wejściowego, co powoduje jego niepowodzenie. Dzieje się tak, ponieważ nasz zbiór danych zawiera odczyty single-end, ale proces jest zakodowany na stałe, aby oczekiwać odczytów paired-end (dwa pliki wejściowe na raz).
 
-Napraw to, dodając logikę warunkową do bloku `script:` procesu `FASTP`. Instrukcja if/else sprawdza liczbę plików odczytowych i odpowiednio dostosowuje polecenie.
+Napraw to, dodając logikę warunkową do bloku `script:` procesu `FASTP`. Instrukcja if/else sprawdza liczbę plików odczytów i odpowiednio dostosowuje polecenie.
 
 === "Po"
 
     ```groovy title="main.nf" linenums="10" hl_lines="3-27"
         script:
-        // Proste wykrywanie single-end vs paired-end
+        // Prosta detekcja single-end vs paired-end
         def is_single = reads instanceof List ? reads.size() == 1 : true
 
         if (is_single) {
@@ -944,7 +944,7 @@ Napraw to, dodając logikę warunkową do bloku `script:` procesu `FASTP`. Instr
         }
     ```
 
-Teraz workflow może płynnie obsługiwać zarówno odczyty single-end, jak i paired-end. Logika warunkowa sprawdza liczbę plików wejściowych i konstruuje odpowiednie polecenie dla `fastp`. Zobaczmy, czy działa:
+Teraz workflow może elegancko obsługiwać zarówno odczyty single-end, jak i paired-end. Logika warunkowa sprawdza liczbę plików wejściowych i konstruuje odpowiednie polecenie dla `fastp`. Zobaczmy, czy działa:
 
 ```bash
 nextflow run main.nf
@@ -961,9 +961,9 @@ nextflow run main.nf
     [31/a8ad4d] process > FASTP (3) [100%] 3 of 3 ✔
     ```
 
-Wygląda dobrze! Jeśli sprawdzimy faktyczne polecenia, które zostały uruchomione (dostosuj dla Swojego hasha zadania):
+Wygląda dobrze! Jeśli sprawdzimy faktyczne polecenia, które zostały uruchomione (dostosuj dla Twojego hasha zadania):
 
-```console title="Sprawdź wykonane polecenia"
+```console title="Check commands executed"
 cat work/31/a8ad4d95749e685a6d842d3007957f/.command.sh
 ```
 
@@ -979,9 +979,9 @@ fastp \
     --thread 2
 ```
 
-Inne powszechne zastosowanie dynamicznej logiki skryptowej można zobaczyć w [module Genomics kursu Nextflow for Science](../../nf4science/genomics/02_joint_calling). W tym module wywoływany proces GATK może przyjmować wiele plików wejściowych, ale każdy musi być poprzedzony `-V`, aby utworzyć poprawną linię poleceń. Proces używa skryptowania do transformacji kolekcji plików wejściowych (`all_gvcfs`) w poprawne argumenty polecenia:
+Inne powszechne użycie dynamicznej logiki skryptowej można zobaczyć w [module Nextflow for Science Genomics](../../nf4science/genomics/02_joint_calling). W tym module wywoływany proces GATK może przyjmować wiele plików wejściowych, ale każdy musi być poprzedzony `-V`, aby utworzyć poprawną linię poleceń. Proces używa skryptowania do przekształcenia kolekcji plików wejściowych (`all_gvcfs`) w poprawne argumenty polecenia:
 
-```groovy title="manipulacja linią poleceń dla GATK" linenums="1" hl_lines="2 5"
+```groovy title="command line manipulation for GATK" linenums="1" hl_lines="2 5"
     script:
     def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
     """
@@ -992,11 +992,11 @@ Inne powszechne zastosowanie dynamicznej logiki skryptowej można zobaczyć w [m
     """
 ```
 
-Te wzorce używania skryptowania w blokach skryptowych procesów są niezwykle potężne i mogą być zastosowane w wielu scenariuszach - od obsługi zmiennych typów wejściowych po budowanie złożonych argumentów linii poleceń z kolekcji plików, czyniąc Twoje procesy naprawdę adaptacyjnymi do różnorodnych wymagań rzeczywistych danych.
+Te wzorce używania skryptowania w blokach skryptów procesów są niezwykle potężne i mogą być stosowane w wielu scenariuszach — od obsługi zmiennych typów wejściowych po budowanie złożonych argumentów linii poleceń z kolekcji plików, czyniąc Twoje procesy naprawdę adaptacyjnymi do różnorodnych wymagań rzeczywistych danych.
 
-### 2.3. Interpolacja Zmiennych: Zmienne Nextflow i Shell
+### 2.3. Interpolacja Zmiennych: Zmienne Nextflow i Powłoki
 
-Skrypty procesów mieszają zmienne Nextflow, zmienne powłoki i podstawienia poleceń, każde z inną składnią interpolacji. Użycie niewłaściwej składni powoduje błędy. Przeanalizujmy to na procesie tworzącym raport przetwarzania.
+Skrypty procesów mieszają zmienne Nextflow, zmienne powłoki i podstawienia poleceń, każde z inną składnią interpolacji. Użycie niewłaściwej składni powoduje błędy. Zbadajmy to za pomocą procesu, który tworzy raport przetwarzania.
 
 Spójrz na plik modułu `modules/generate_report.nf`:
 
@@ -1013,15 +1013,15 @@ process GENERATE_REPORT {
 
     script:
     """
-    echo "Przetwarzanie ${reads}" > ${meta.id}_report.txt
-    echo "Próbka: ${meta.id}" >> ${meta.id}_report.txt
+    echo "Processing ${reads}" > ${meta.id}_report.txt
+    echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
     """
 }
 ```
 
 Ten proces zapisuje prosty raport z ID próbki i nazwą pliku. Teraz uruchommy go, aby zobaczyć, co się dzieje, gdy musimy mieszać różne typy zmiennych.
 
-Dołącz proces w Swoim `main.nf` i dodaj go do workflow:
+Dołącz proces w swoim `main.nf` i dodaj go do workflow'a:
 
 === "Po"
 
@@ -1095,34 +1095,26 @@ Dołącz proces w Swoim `main.nf` i dodaj go do workflow:
 
 Teraz uruchom workflow i sprawdź wygenerowane raporty w `results/reports/`. Powinny zawierać podstawowe informacje o każdej próbce.
 
-```bash
-nextflow run main.nf
-```
+<!-- TODO: add the run command -->
 
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `main.nf` [boring_hawking] DSL2 - revision: 8a9f8d4e61
-
-    executor >  local (6)
-    [4d/e1c9f2] process > FASTP (2)           [100%] 3 of 3 ✔
-    [2c/7b8a43] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
+    <!-- TODO: output -->
     ```
 
-Ale co, jeśli chcemy dodać informacje o tym, kiedy i gdzie przetwarzanie miało miejsce? Zmodyfikujmy proces, aby używał zmiennych **shell** i trochę podstawienia poleceń, aby uwzględnić bieżącego użytkownika, nazwę hosta i datę w raporcie:
+Ale co, jeśli chcemy dodać informacje o tym, kiedy i gdzie nastąpiło przetwarzanie? Zmodyfikujmy proces, aby użyć zmiennych **powłoki** i trochę podstawienia poleceń, aby uwzględnić bieżącego użytkownika, nazwę hosta i datę w raporcie:
 
 === "Po"
 
     ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
         script:
         """
-        echo "Przetwarzanie ${reads}" > ${meta.id}_report.txt
-        echo "Próbka: ${meta.id}" >> ${meta.id}_report.txt
-        echo "Przetworzony przez: ${USER}" >> ${meta.id}_report.txt
-        echo "Nazwa hosta: $(hostname)" >> ${meta.id}_report.txt
-        echo "Data: $(date)" >> ${meta.id}_report.txt
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
         """
     ```
 
@@ -1131,37 +1123,37 @@ Ale co, jeśli chcemy dodać informacje o tym, kiedy i gdzie przetwarzanie miał
     ```groovy title="modules/generate_report.nf" linenums="10"
         script:
         """
-        echo "Przetwarzanie ${reads}" > ${meta.id}_report.txt
-        echo "Próbka: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
         """
     ```
 
-Jeśli uruchomisz to, zauważysz błąd - Nextflow próbuje zinterpretować `${USER}` jako zmienną Nextflow, która nie istnieje.
+Jeśli to uruchomisz, zauważysz błąd — Nextflow próbuje zinterpretować `${USER}` jako zmienną Nextflow, która nie istnieje.
 
 ??? failure "Wyjście polecenia"
 
     ```console
     Error modules/generate_report.nf:15:27: `USER` is not defined
-    │  15 |     echo "Przetworzony przez: ${USER}" >> ${meta.id}_report.txt
-    ╰     |                               ^^^^
+    │  15 |     echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+    ╰     |                           ^^^^
 
     ERROR ~ Script compilation failed
     ```
 
-Musimy to zescapować, aby Bash mógł to obsłużyć zamiast Nextflow.
+Musimy to escapować, aby Bash mógł to obsłużyć zamiast tego.
 
-Napraw to, escapując zmienne shell i podstawienia poleceń za pomocą ukośnika wstecznego (`\`):
+Napraw to, escapując zmienne powłoki i podstawienia poleceń ukośnikiem wstecznym (`\`):
 
 === "Po"
 
     ```groovy title="modules/generate_report.nf" linenums="10" hl_lines="5-7"
         script:
         """
-        echo "Przetwarzanie ${reads}" > ${meta.id}_report.txt
-        echo "Próbka: ${meta.id}" >> ${meta.id}_report.txt
-        echo "Przetworzony przez: \${USER}" >> ${meta.id}_report.txt
-        echo "Nazwa hosta: \$(hostname)" >> ${meta.id}_report.txt
-        echo "Data: \$(date)" >> ${meta.id}_report.txt
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: \${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: \$(hostname)" >> ${meta.id}_report.txt
+        echo "Date: \$(date)" >> ${meta.id}_report.txt
         """
     ```
 
@@ -1170,38 +1162,38 @@ Napraw to, escapując zmienne shell i podstawienia poleceń za pomocą ukośnika
     ```groovy title="modules/generate_report.nf" linenums="10"
         script:
         """
-        echo "Przetwarzanie ${reads}" > ${meta.id}_report.txt
-        echo "Próbka: ${meta.id}" >> ${meta.id}_report.txt
-        echo "Przetworzony przez: ${USER}" >> ${meta.id}_report.txt
-        echo "Nazwa hosta: $(hostname)" >> ${meta.id}_report.txt
-        echo "Data: $(date)" >> ${meta.id}_report.txt
+        echo "Processing ${reads}" > ${meta.id}_report.txt
+        echo "Sample: ${meta.id}" >> ${meta.id}_report.txt
+        echo "Processed by: ${USER}" >> ${meta.id}_report.txt
+        echo "Hostname: $(hostname)" >> ${meta.id}_report.txt
+        echo "Date: $(date)" >> ${meta.id}_report.txt
         """
     ```
 
-Teraz działa! Ukośnik wsteczny (`\`) mówi Nextflow "nie interpretuj tego, przekaż to do Bash."
+Teraz działa! Ukośnik wsteczny (`\`) mówi Nextflow „nie interpretuj tego, przekaż to do Bash".
 
-### Wnioski
+### Podsumowanie
 
-W tej sekcji nauczyłeś się technik **przetwarzania ciągów znaków**:
+W tej sekcji nauczyłeś się technik **przetwarzania napisów**:
 
 - **Wyrażenia regularne do parsowania plików**: Używanie operatora `=~` i wzorców regex (`~/wzorzec/`) do wyodrębniania metadanych ze złożonych konwencji nazewnictwa plików
-- **Dynamiczne generowanie skryptów**: Używanie logiki warunkowej (if/else, operatory ternarne) do generowania różnych ciągów skryptowych na podstawie charakterystyki wejścia
-- **Interpolacja zmiennych**: Zrozumienie, kiedy Nextflow interpretuje ciągi znaków, a kiedy robi to powłoka
-  - `${var}` - zmienne Nextflow (interpolowane przez Nextflow w czasie kompilacji workflow)
-  - `\${var}` - zmienne środowiskowe powłoki (escapowane, przekazywane do bash w czasie uruchomienia)
-  - `\$(cmd)` - podstawienie polecenia powłoki (escapowane, wykonywane przez bash w czasie uruchomienia)
+- **Dynamiczne generowanie skryptów**: Używanie logiki warunkowej (if/else, operatory trójargumentowe) do generowania różnych napisów skryptowych na podstawie charakterystyk wejściowych
+- **Interpolacja zmiennych**: Rozumienie, kiedy Nextflow interpretuje napisy vs kiedy robi to powłoka
+  - `${var}` - zmienne Nextflow (interpolowane przez Nextflow w czasie kompilacji workflow'a)
+  - `\${var}` - zmienne środowiskowe powłoki (escapowane, przekazywane do bash w czasie wykonania)
+  - `\$(cmd)` - podstawienie polecenia powłoki (escapowane, wykonywane przez bash w czasie wykonania)
 
-Te wzorce przetwarzania i generowania ciągów znaków są niezbędne do obsługi różnorodnych formatów plików i konwencji nazewnictwa, które napotkasz w rzeczywistych workflow bioinformatycznych.
+Te wzorce przetwarzania i generowania napisów są niezbędne do obsługi różnorodnych formatów plików i konwencji nazewnictwa, które napotkasz w rzeczywistych workflow'ach bioinformatycznych.
 
 ---
 
 ## 3. Tworzenie Funkcji Wielokrotnego Użytku
 
-Złożona logika workflow inline w operatorach kanałów lub definicjach procesów zmniejsza czytelność i łatwość w utrzymaniu. **Funkcje** pozwalają wyodrębnić tę logikę do nazwanych, wielokrotnego użytku komponentów.
+Złożona logika workflow'a inline w operatorach kanałów lub definicjach procesów zmniejsza czytelność i łatwość utrzymania. **Funkcje** pozwalają wyodrębnić tę logikę do nazwanych, wielokrotnego użytku komponentów.
 
-Nasza operacja map stała się długa i złożona. Wyodrębnijmy ją do funkcji wielokrotnego użytku używając słowa kluczowego `def`.
+Nasza operacja map urosła i stała się złożona. Wyodrębnijmy ją do funkcji wielokrotnego użytku używając słowa kluczowego `def`.
 
-Aby zilustrować, jak to wygląda z naszym istniejącym workflow, wprowadź modyfikację poniżej, używając `def` do zdefiniowania funkcji wielokrotnego użytku o nazwie `separateMetadata`:
+Aby zilustrować, jak to wygląda z naszym istniejącym workflow'em, wprowadź poniższą modyfikację, używając `def` do zdefiniowania funkcji wielokrotnego użytku o nazwie `separateMetadata`:
 
 === "Po"
 
@@ -1277,9 +1269,9 @@ Aby zilustrować, jak to wygląda z naszym istniejącym workflow, wprowadź mody
     }
     ```
 
-Wyodrębniając tę logikę do funkcji, zredukowaliśmy faktyczną logikę workflow do czegoś znacznie czystszego:
+Wyodrębniając tę logikę do funkcji, zredukowaliśmy faktyczną logikę workflow'a do czegoś znacznie czystszego:
 
-```groovy title="minimalny workflow"
+```groovy title="minimal workflow"
     ch_samples = channel.fromPath("./data/samples.csv")
         .splitCsv(header: true)
         .map{ row -> separateMetadata(row) }
@@ -1288,7 +1280,7 @@ Wyodrębniając tę logikę do funkcji, zredukowaliśmy faktyczną logikę workf
     GENERATE_REPORT(ch_samples)
 ```
 
-To sprawia, że logika workflow jest o wiele łatwiejsza do przeczytania i zrozumienia na pierwszy rzut oka. Funkcja `separateMetadata` enkapsuluje całą złożoną logikę parsowania i wzbogacania metadanych, czyniąc ją wielokrotnego użytku i łatwą do przetestowania.
+To sprawia, że logika workflow'a jest znacznie łatwiejsza do odczytania i zrozumienia na pierwszy rzut oka. Funkcja `separateMetadata` enkapsuluje całą złożoną logikę parsowania i wzbogacania metadanych, czyniąc ją wielokrotnego użytku i testowalną.
 
 Uruchom workflow, aby upewnić się, że nadal działa:
 
@@ -1308,24 +1300,24 @@ nextflow run main.nf
     [7a/1b4c92] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
     ```
 
-Wyjście powinno pokazywać, że oba procesy zakończyły się pomyślnie. Workflow jest teraz o wiele czystszy i łatwiejszy w utrzymaniu, z całą złożoną logiką przetwarzania metadanych enkapsulowaną w funkcji `separateMetadata`.
+Wyjście powinno pokazywać oba procesy kończące się pomyślnie. Workflow jest teraz znacznie czystszy i łatwiejszy w utrzymaniu, z całą złożoną logiką przetwarzania metadanych enkapsulowaną w funkcji `separateMetadata`.
 
-### Wnioski
+### Podsumowanie
 
 W tej sekcji nauczyłeś się **tworzenia funkcji**:
 
-- **Definiowanie funkcji za pomocą `def`**: Słowo kluczowe do tworzenia nazwanych funkcji (jak `def` w Python lub `function` w JavaScript)
-- **Zakres funkcji**: Funkcje zdefiniowane na poziomie skryptu są dostępne w całym workflow Nextflow
+- **Definiowanie funkcji za pomocą `def`**: Słowo kluczowe do tworzenia nazwanych funkcji (jak `def` w Pythonie lub `function` w JavaScript)
+- **Zakres funkcji**: Funkcje zdefiniowane na poziomie skryptu są dostępne w całym Twoim workflow'ie Nextflow
 - **Wartości zwracane**: Funkcje automatycznie zwracają ostatnie wyrażenie lub używają jawnego `return`
 - **Czystszy kod**: Wyodrębnianie złożonej logiki do funkcji to fundamentalna praktyka inżynierii oprogramowania w każdym języku
 
-Następnie zbadamy, jak używać closures w dyrektywach procesów do dynamicznej alokacji zasobów.
+Następnie zbadamy, jak używać domknięć w dyrektywach procesów do dynamicznej alokacji zasobów.
 
 ---
 
-## 4. Dynamiczne Dyrektywy Zasobów z Closures
+## 4. Dynamiczne Dyrektywy Zasobów z Domknięciami
 
-Do tej pory używaliśmy skryptowania w bloku `script` procesów. Ale **closures** (wprowadzone w Sekcji 1.1) są również niezwykle przydatne w dyrektywach procesów, szczególnie do dynamicznej alokacji zasobów. Dodajmy dyrektywy zasobów do naszego procesu FASTP, które dostosowują się na podstawie charakterystyki próbki.
+Do tej pory używaliśmy skryptowania w bloku `script` procesów. Ale **domknięcia** (wprowadzone w Sekcji 1.1) są również niezwykle użyteczne w dyrektywach procesów, szczególnie do dynamicznej alokacji zasobów. Dodajmy dyrektywy zasobów do naszego procesu FASTP, które dostosowują się na podstawie charakterystyk próbki.
 
 ### 4.1. Alokacja zasobów specyficzna dla próbki
 
@@ -1354,13 +1346,13 @@ Obecnie nasz proces FASTP używa domyślnych zasobów. Uczyńmy go mądrzejszym,
         tuple val(meta), path(reads)
     ```
 
-Closure `{ meta.depth > 40000000 ? 2 : 1 }` używa **operatora ternarnego** (omówionego w Sekcji 1.1) i jest ewaluowane dla każdego zadania, umożliwiając alokację zasobów per próbka. Próbki o wysokiej głębokości (>40M odczytów) otrzymują 2 CPU, podczas gdy inne otrzymują 1 CPU.
+Domknięcie `{ meta.depth > 40000000 ? 2 : 1 }` używa **operatora trójargumentowego** (omówionego w Sekcji 1.1) i jest ewaluowane dla każdego zadania, umożliwiając alokację zasobów per próbka. Próbki o wysokiej głębokości (>40M odczytów) otrzymują 2 CPU, podczas gdy inne otrzymują 1 CPU.
 
 !!! note "Dostęp do Zmiennych Wejściowych w Dyrektywach"
 
-    Closure może uzyskać dostęp do dowolnych zmiennych wejściowych (jak `meta` tutaj), ponieważ Nextflow ewaluuje te closures w kontekście każdego wykonania zadania.
+    Domknięcie może uzyskać dostęp do dowolnych zmiennych wejściowych (jak `meta` tutaj), ponieważ Nextflow ewaluuje te domknięcia w kontekście każdego wykonania zadania.
 
-Uruchom workflow ponownie z opcją `-ansi-log false`, aby ułatwić zobaczenie hashów zadań.
+Uruchom workflow ponownie z opcją `-ansi-log false`, aby łatwiej było zobaczyć hasze zadań.
 
 ```bash
 nextflow run main.nf -ansi-log false
@@ -1379,23 +1371,23 @@ nextflow run main.nf -ansi-log false
     [42/699357] Submitted process > GENERATE_REPORT (1)
     ```
 
-Możesz sprawdzić dokładne polecenie `docker`, które zostało uruchomione, aby zobaczyć alokację CPU dla dowolnego zadania:
+Możesz sprawdzić dokładne polecenie `docker`, które zostało uruchomione, aby zobaczyć alokację CPU dla danego zadania:
 
-```console title="Sprawdź polecenie docker"
+```console title="Check docker command"
 cat work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.run | grep "docker run"
 ```
 
 Powinieneś zobaczyć coś takiego:
 
-```bash title="polecenie docker"
+```bash title="docker command"
     docker run -i --cpu-shares 4096 --memory 2048m -e "NXF_TASK_WORKDIR" -v /workspaces/training/side-quests/essential_scripting_patterns:/workspaces/training/side-quests/essential_scripting_patterns -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/fastp:0.24.0--62c97b06e8447690 /bin/bash -ue /workspaces/training/side-quests/essential_scripting_patterns/work/48/6db0c9e9d8aa65e4bb4936cd3bd59e/.command.sh
 ```
 
 W tym przykładzie wybraliśmy przykład, który zażądał 2 CPU (`--cpu-shares 2048`), ponieważ była to próbka o wysokiej głębokości, ale powinieneś zobaczyć różne alokacje CPU w zależności od głębokości próbki. Spróbuj tego również dla innych zadań.
 
-### 4.2. Strategie ponownych prób
+### 4.2. Strategie ponawiania
 
-Innym potężnym wzorcem jest użycie `task.attempt` do strategii ponownych prób. Aby pokazać, dlaczego jest to przydatne, zaczniemy od zmniejszenia alokacji pamięci dla FASTP do mniej niż jest mu potrzebne. Zmień dyrektywę `memory` w `modules/fastp.nf` na `1.GB`:
+Innym potężnym wzorcem jest używanie `task.attempt` dla strategii ponawiania. Aby pokazać, dlaczego jest to użyteczne, zaczniemy od zmniejszenia alokacji pamięci dla FASTP do mniej niż potrzebuje. Zmień dyrektywę `memory` w `modules/fastp.nf` na `1.GB`:
 
 === "Po"
 
@@ -1447,9 +1439,9 @@ nextflow run main.nf
 
 To wskazuje, że proces został zabity za przekroczenie limitów pamięci.
 
-To bardzo powszechny scenariusz w rzeczywistych workflow - czasami po prostu nie wiesz, ile pamięci będzie potrzebne zadaniu, dopóki go nie uruchomisz.
+To bardzo powszechny scenariusz w rzeczywistych workflow'ach — czasami po prostu nie wiesz, ile pamięci będzie potrzebować zadanie, dopóki go nie uruchomisz.
 
-Aby uczynić nasz workflow bardziej odpornym, możemy zaimplementować strategię ponownych prób, która zwiększa alokację pamięci przy każdej próbie, ponownie używając closure Groovy. Zmodyfikuj dyrektywę `memory`, aby pomnożyć pamięć bazową przez `task.attempt`, i dodaj dyrektywy `errorStrategy 'retry'` oraz `maxRetries 2`:
+Aby uczynić nasz workflow bardziej solidnym, możemy zaimplementować strategię ponawiania, która zwiększa alokację pamięci przy każdej próbie, ponownie używając domknięcia Groovy. Zmodyfikuj dyrektywę `memory`, aby mnożyć bazową pamięć przez `task.attempt`, i dodaj dyrektywy `errorStrategy 'retry'` oraz `maxRetries 2`:
 
 === "Po"
 
@@ -1479,35 +1471,35 @@ Aby uczynić nasz workflow bardziej odpornym, możemy zaimplementować strategi�
         tuple val(meta), path(reads)
     ```
 
-Teraz, jeśli proces zawiedzie z powodu niewystarczającej pamięci, Nextflow ponowi próbę z większą ilością pamięci:
+Teraz jeśli proces zawiedzie z powodu niewystarczającej pamięci, Nextflow ponowi próbę z większą pamięcią:
 
 - Pierwsza próba: 1 GB (task.attempt = 1)
 - Druga próba: 2.GB (task.attempt = 2)
 
 ... i tak dalej, aż do limitu `maxRetries`.
 
-### Wnioski
+### Podsumowanie
 
-Dynamiczne dyrektywy z closures pozwalają Ci:
+Dynamiczne dyrektywy z domknięciami pozwalają:
 
-- Alokować zasoby na podstawie charakterystyki wejścia
-- Implementować automatyczne strategie ponownych prób z rosnącymi zasobami
+- Alokować zasoby na podstawie charakterystyk wejściowych
+- Implementować automatyczne strategie ponawiania ze zwiększającymi się zasobami
 - Łączyć wiele czynników (metadane, numer próby, priorytety)
 - Używać logiki warunkowej do złożonych obliczeń zasobów
 
-To sprawia, że Twoje workflow są zarówno bardziej wydajne (nie nadmierna alokacja), jak i bardziej odporne (automatyczne ponowienie próby z większymi zasobami).
+To sprawia, że Twoje workflow'y są zarówno bardziej wydajne (nie nadmiernie alokujące), jak i bardziej solidne (automatyczne ponawianie z większymi zasobami).
 
 ---
 
 ## 5. Logika Warunkowa i Kontrola Procesów
 
-Wcześniej używaliśmy `.map()` ze skryptowaniem do transformacji danych kanału. Teraz użyjemy logiki warunkowej, aby kontrolować, które procesy są wykonywane na podstawie danych—niezbędne dla elastycznych workflow dostosowujących się do różnych typów próbek.
+Wcześniej używaliśmy `.map()` ze skryptowaniem do przekształcania danych kanału. Teraz użyjemy logiki warunkowej do kontrolowania, które procesy są wykonywane na podstawie danych — niezbędne dla elastycznych workflow'ów dostosowujących się do różnych typów próbek.
 
-[Operatory przepływu danych](https://www.nextflow.io/docs/latest/reference/operator.html) Nextflow przyjmują closures ewaluowane w czasie wykonania, umożliwiając logice warunkowej kierowanie decyzjami workflow na podstawie zawartości kanału.
+[Operatory przepływu danych](https://www.nextflow.io/docs/latest/reference/operator.html) Nextflow przyjmują domknięcia ewaluowane w czasie wykonania, umożliwiając logice warunkowej kierowanie decyzjami workflow'a na podstawie zawartości kanału.
 
 ### 5.1. Kierowanie za pomocą `.branch()`
 
-Na przykład, powiedzmy, że nasze próbki sekwencjonowania muszą być przycięte za pomocą FASTP tylko wtedy, gdy są próbkami ludzkimi z pokryciem powyżej pewnego progu. Próbki myszy lub próbki o niskim pokryciu powinny być uruchomione z Trimgalore zamiast tego (to wymyślony przykład, ale ilustruje punkt).
+Na przykład, udajmy, że nasze próbki sekwencjonowania muszą być przycinane za pomocą FASTP tylko jeśli są próbkami ludzkimi z pokryciem powyżej pewnego progu. Próbki mysie lub próbki o niskim pokryciu powinny być uruchamiane z Trimgalore zamiast tego (to jest wymyślony przykład, ale ilustruje punkt).
 
 Dostarczyliśmy prosty proces Trimgalore w `modules/trimgalore.nf`, spójrz, jeśli chcesz, ale szczegóły nie są ważne dla tego ćwiczenia. Kluczowym punktem jest to, że chcemy kierować próbki na podstawie ich metadanych.
 
@@ -1526,7 +1518,7 @@ Dołącz nowy moduł z `modules/trimgalore.nf`:
     include { FASTP } from './modules/fastp.nf'
     ```
 
-... a następnie zmodyfikuj swój workflow `main.nf`, aby rozgałęzić próbki na podstawie ich metadanych i kierować je przez odpowiedni proces przycinania, w ten sposób:
+... a następnie zmodyfikuj swój workflow `main.nf`, aby rozgałęziać próbki na podstawie ich metadanych i kierować je przez odpowiedni proces przycinania, w ten sposób:
 
 === "Po"
 
@@ -1580,12 +1572,12 @@ Tutaj użyliśmy małych, ale potężnych wyrażeń warunkowych wewnątrz operat
 
 ### 5.2. Używanie `.filter()` z Prawdziwością
 
-Innym potężnym wzorcem do kontrolowania wykonania workflow jest operator `.filter()`, który używa closure do określenia, które elementy powinny kontynuować w pipeline. Wewnątrz closure filtra napiszesz **wyrażenia boolowskie**, które decydują, które elementy przejdą.
+Innym potężnym wzorcem do kontrolowania wykonania workflow'a jest operator `.filter()`, który używa domknięcia do określenia, które elementy powinny kontynuować w pipeline. Wewnątrz domknięcia filtra napiszesz **wyrażenia boolowskie**, które decydują, które elementy przechodzą.
 
-Nextflow (jak wiele języków dynamicznych) ma koncepcję **"prawdziwości"**, która określa, jakie wartości są ewaluowane jako `true` lub `false` w kontekstach boolowskich:
+Nextflow (jak wiele języków dynamicznych) ma koncepcję **"prawdziwości"**, która określa, jakie wartości ewaluują się do `true` lub `false` w kontekstach boolowskich:
 
-- **Prawdziwe**: Wartości nie-null, niepuste ciągi znaków, liczby niezerowe, niepuste kolekcje
-- **Fałszywe**: `null`, puste ciągi znaków `""`, zero `0`, puste kolekcje `[]` lub `[:]`, `false`
+- **Prawdziwe**: Wartości nie-null, niepuste napisy, niezerowe liczby, niepuste kolekcje
+- **Fałszywe**: `null`, puste napisy `""`, zero `0`, puste kolekcje `[]` lub `[:]`, `false`
 
 To oznacza, że samo `meta.id` (bez jawnego `!= null`) sprawdza, czy ID istnieje i nie jest puste. Użyjmy tego do odfiltrowania próbek, które nie spełniają naszych wymagań jakościowych.
 
@@ -1652,7 +1644,7 @@ Ponieważ wybraliśmy filtr, który wyklucza niektóre próbki, wykonano mniej z
 
 Wyrażenie filtra `meta.id && meta.organism && meta.depth >= 25000000` łączy prawdziwość z jawnymi porównaniami:
 
-- `meta.id && meta.organism` sprawdza, czy oba pola istnieją i nie są puste (używając prawdziwości)
+- `meta.id && meta.organism` sprawdza, że oba pola istnieją i nie są puste (używając prawdziwości)
 - `meta.depth >= 25000000` zapewnia wystarczającą głębokość sekwencjonowania za pomocą jawnego porównania
 
 !!! note "Prawdziwość w Praktyce"
@@ -1662,23 +1654,23 @@ Wyrażenie filtra `meta.id && meta.organism && meta.depth >= 25000000` łączy p
     meta.id != null && meta.id != '' && meta.organism != null && meta.organism != ''
     ```
 
-    To sprawia, że logika filtrowania jest o wiele czystsza i łatwiejsza do odczytania.
+    To sprawia, że logika filtrowania jest znacznie czystsza i łatwiejsza do odczytania.
 
-### Wnioski
+### Podsumowanie
 
-W tej sekcji nauczyłeś się używać logiki warunkowej do kontrolowania wykonania workflow, używając interfejsów closure operatorów Nextflow jak `.branch{}` i `.filter{}`, wykorzystując prawdziwość do pisania zwięzłych wyrażeń warunkowych.
+W tej sekcji nauczyłeś się używać logiki warunkowej do kontrolowania wykonania workflow'a za pomocą interfejsów domknięć operatorów Nextflow takich jak `.branch{}` i `.filter{}`, wykorzystując prawdziwość do pisania zwięzłych wyrażeń warunkowych.
 
-Nasz pipeline teraz inteligentnie kieruje próbki przez odpowiednie procesy, ale workflow produkcyjne muszą obsługiwać nieprawidłowe dane z wdziękiem. Uczyńmy nasz workflow odpornym na brakujące lub null wartości.
+Nasz pipeline teraz inteligentnie kieruje próbki przez odpowiednie procesy, ale workflow'y produkcyjne muszą elegancko obsługiwać nieprawidłowe dane. Uczyńmy nasz workflow odpornym na brakujące lub null wartości.
 
 ---
 
-## 6. Bezpieczna Nawigacja i Operatory Elvis
+## 6. Bezpieczna Nawigacja i Operatory Elvisa
 
-Nasza funkcja `separateMetadata` obecnie zakłada, że wszystkie pola CSV są obecne i prawidłowe. Ale co się dzieje z niepełnymi danymi? Dowiedzmy się.
+Nasza funkcja `separateMetadata` obecnie zakłada, że wszystkie pola CSV są obecne i prawidłowe. Ale co się dzieje z niekompletnymi danymi? Dowiedzmy się.
 
 ### 6.1. Problem: Dostęp do Właściwości, Które Nie Istnieją
 
-Powiedzmy, że chcemy dodać wsparcie dla opcjonalnych informacji o sekwencjonowaniu. W niektórych laboratoriach próbki mogą mieć dodatkowe pole dla ID uruchomienia sekwencjonowania lub numeru partii, ale nasz obecny CSV nie ma tej kolumny. Spróbujmy uzyskać do niej dostęp mimo to.
+Powiedzmy, że chcemy dodać wsparcie dla opcjonalnych informacji o przebiegu sekwencjonowania. W niektórych laboratoriach próbki mogą mieć dodatkowe pole dla ID przebiegu sekwencjonowania lub numeru partii, ale nasz obecny CSV nie ma tej kolumny. Spróbujmy uzyskać do niej dostęp mimo to.
 
 Zmodyfikuj funkcję `separateMetadata`, aby uwzględnić pole run_id:
 
@@ -1729,13 +1721,13 @@ nextflow run main.nf
 
 To powoduje awarię z NullPointerException.
 
-Problem polega na tym, że `row.run_id` zwraca `null`, ponieważ kolumna `run_id` nie istnieje w naszym CSV. Gdy próbujemy wywołać `.toUpperCase()` na `null`, dochodzi do awarii. Tu właśnie operator bezpiecznej nawigacji ratuje sytuację.
+Problem polega na tym, że `row.run_id` zwraca `null`, ponieważ kolumna `run_id` nie istnieje w naszym CSV. Gdy próbujemy wywołać `.toUpperCase()` na `null`, następuje awaria. To tutaj operator bezpiecznej nawigacji ratuje sytuację.
 
 ### 6.2. Operator Bezpiecznej Nawigacji (`?.`)
 
 Operator bezpiecznej nawigacji (`?.`) zwraca `null` zamiast rzucać wyjątek, gdy jest wywoływany na wartości `null`. Jeśli obiekt przed `?.` jest `null`, całe wyrażenie ewaluuje się do `null` bez wykonywania metody.
 
-Zaktualizuj funkcję, aby używała bezpiecznej nawigacji:
+Zaktualizuj funkcję, aby używać bezpiecznej nawigacji:
 
 === "Po"
 
@@ -1774,23 +1766,16 @@ nextflow run main.nf
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `main.nf` [fervent_lichterman] DSL2 - revision: 7a8b4c9d2e
-
-    executor >  local (6)
-    [4e/2f3a91] process > FASTP (2)           [100%] 2 of 2 ✔
-    [7c/8d5b42] process > TRIMGALORE (1)      [100%] 1 of 1 ✔
-    [3a/1e7c93] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
+    <!-- TODO: output -->
     ```
 
-Nie ma awarii! Workflow teraz obsługuje brakujące pole z wdziękiem. Gdy `row.run_id` jest `null`, operator `?.` zapobiega wywołaniu `.toUpperCase()`, a `run_id` staje się `null` zamiast powodować wyjątek.
+Brak awarii! Workflow teraz elegancko obsługuje brakujące pole. Gdy `row.run_id` jest `null`, operator `?.` zapobiega wywołaniu `.toUpperCase()`, a `run_id` staje się `null` zamiast powodować wyjątek.
 
-### 6.3. Operator Elvis (`?:`) dla Wartości Domyślnych
+### 6.3. Operator Elvisa (`?:`) dla Wartości Domyślnych
 
-Operator Elvis (`?:`) zapewnia wartości domyślne, gdy lewa strona jest "fałszywa" (jak wyjaśniono wcześniej). Nazywa się tak od Elvisa Presleya, ponieważ `?:` wygląda jak jego słynne włosy i oczy, gdy jest oglądany bokiem!
+Operator Elvisa (`?:`) dostarcza wartości domyślnych, gdy lewa strona jest "fałszywa" (jak wyjaśniono wcześniej). Jest nazwany na cześć Elvisa Presleya, ponieważ `?:` wygląda jak jego słynne włosy i oczy, gdy jest oglądany z boku!
 
-Teraz, gdy używamy bezpiecznej nawigacji, `run_id` będzie `null` dla próbek bez tego pola. Użyjmy operatora Elvis, aby zapewnić wartość domyślną i dodać ją do naszej mapy `sample_meta`:
+Teraz, gdy używamy bezpiecznej nawigacji, `run_id` będzie `null` dla próbek bez tego pola. Użyjmy operatora Elvisa, aby dostarczyć wartość domyślną i dodać ją do naszej mapy `sample_meta`:
 
 === "Po"
 
@@ -1854,36 +1839,36 @@ nextflow run main.nf
     [[id:sample_003, organism:human, tissue:kidney, depth:45000000, quality:42.1, run:UNSPECIFIED, sample_num:3, lane:001, read:R1, chunk:001, priority:high], /workspaces/training/side-quests/essential_scripting_patterns/data/sequences/SAMPLE_003_S3_L001_R1_001.fastq]
     ```
 
-Perfekcyjnie! Teraz wszystkie próbki mają pole `run` z ich rzeczywistym ID uruchomienia (wielkimi literami) lub wartością domyślną 'UNSPECIFIED'. Kombinacja `?.` i `?:` zapewnia zarówno bezpieczeństwo (bez awarii), jak i sensowne wartości domyślne.
+Idealnie! Teraz wszystkie próbki mają pole `run` z ich faktycznym ID przebiegu (wielkimi literami) lub wartością domyślną 'UNSPECIFIED'. Kombinacja `?.` i `?:` zapewnia zarówno bezpieczeństwo (brak awarii), jak i sensowne wartości domyślne.
 
 Usuń teraz operator `.view()`, teraz gdy potwierdziliśmy, że działa.
 
-!!! tip "Łączenie Bezpiecznej Nawigacji i Elvis"
+!!! tip "Łączenie Bezpiecznej Nawigacji i Elvisa"
 
-    Wzorzec `value?.method() ?: 'default'` jest powszechny w workflow produkcyjnych:
+    Wzorzec `value?.method() ?: 'default'` jest powszechny w workflow'ach produkcyjnych:
 
     - `value?.method()` - Bezpiecznie wywołuje metodę, zwraca `null`, jeśli `value` jest `null`
-    - `?: 'default'` - Zapewnia fallback, jeśli wynik jest `null`
+    - `?: 'default'` - Dostarcza wartość zastępczą, jeśli wynik jest `null`
 
-    Ten wzorzec obsługuje brakujące/niepełne dane z wdziękiem.
+    Ten wzorzec elegancko obsługuje brakujące/niekompletne dane.
 
-Używaj tych operatorów konsekwentnie w funkcjach, closures operatorów (`.map{}`, `.filter{}`), skryptach procesów i plikach konfiguracyjnych. Zapobiegają awariam podczas obsługi rzeczywistych danych.
+Używaj tych operatorów konsekwentnie w funkcjach, domknięciach operatorów (`.map{}`, `.filter{}`), skryptach procesów i plikach konfiguracyjnych. Zapobiegają awariom podczas obsługi rzeczywistych danych.
 
-### Wnioski
+### Podsumowanie
 
-- **Bezpieczna nawigacja (`?.`)**: Zapobiega awariam na wartościach null - zwraca null zamiast rzucać wyjątek
-- **Operator Elvis (`?:`)**: Zapewnia wartości domyślne - `value ?: 'default'`
+- **Bezpieczna nawigacja (`?.`)**: Zapobiega awariom na wartościach null - zwraca null zamiast rzucać wyjątek
+- **Operator Elvisa (`?:`)**: Dostarcza wartości domyślnych - `value ?: 'default'`
 - **Łączenie**: `value?.method() ?: 'default'` to powszechny wzorzec
 
-Te operatory sprawiają, że workflow są odporne na niepełne dane - niezbędne dla rzeczywistej pracy.
+Te operatory sprawiają, że workflow'y są odporne na niekompletne dane — niezbędne do pracy w rzeczywistych warunkach.
 
 ---
 
-## 7. Walidacja z `error()` i `log.warn`
+## 7. Walidacja za pomocą `error()` i `log.warn`
 
-Czasami musisz natychmiast zatrzymać workflow, jeśli parametry wejściowe są nieprawidłowe. W Nextflow możesz używać wbudowanych funkcji jak `error()` i `log.warn`, a także standardowych konstrukcji programistycznych jak instrukcje `if` i logika boolowska, aby zaimplementować logikę walidacji. Dodajmy walidację do naszego workflow.
+Czasami musisz natychmiast zatrzymać workflow, jeśli parametry wejściowe są nieprawidłowe. W Nextflow możesz użyć wbudowanych funkcji takich jak `error()` i `log.warn`, a także standardowych konstrukcji programistycznych takich jak instrukcje `if` i logika boolowska, aby zaimplementować logikę walidacji. Dodajmy walidację do naszego workflow'a.
 
-Utwórz funkcję walidacji przed blokiem workflow, wywołaj ją z workflow i zmień tworzenie kanału, aby używało parametru dla ścieżki pliku CSV. Jeśli parametr brakuje lub plik nie istnieje, wywołaj `error()`, aby zatrzymać wykonanie z wyraźnym komunikatem.
+Utwórz funkcję walidacji przed blokiem workflow, wywołaj ją z workflow'a i zmień tworzenie kanału, aby używać parametru dla ścieżki pliku CSV. Jeśli parametr brakuje lub plik nie istnieje, wywołaj `error()`, aby zatrzymać wykonanie z jasnym komunikatem.
 
 === "Po"
 
@@ -1893,14 +1878,14 @@ Utwórz funkcję walidacji przed blokiem workflow, wywołaj ją z workflow i zmi
     include { GENERATE_REPORT } from './modules/generate_report.nf'
 
     def validateInputs() {
-        // Sprawdź, czy parametr wejściowy jest podany
+        // Sprawdź, czy parametr wejściowy jest dostarczony
         if (!params.input) {
-            error("Ścieżka pliku CSV wejściowego nie jest podana. Proszę określić --input <file.csv>")
+            error("Input CSV file path not provided. Please specify --input <file.csv>")
         }
 
         // Sprawdź, czy plik CSV istnieje
         if (!file(params.input).exists()) {
-            error("Plik CSV wejściowy nie został znaleziony: ${params.input}")
+            error("Input CSV file not found: ${params.input}")
         }
     }
     ...
@@ -1935,10 +1920,10 @@ nextflow run main.nf
     Launching `main.nf` [confident_coulomb] DSL2 - revision: 07059399ed
 
     WARN: Access to undefined parameter `input` -- Initialise it to a default value eg. `params.input = some_value`
-    Ścieżka pliku CSV wejściowego nie jest podana. Proszę określić --input <file.csv>
+    Input CSV file path not provided. Please specify --input <file.csv>
     ```
 
-Workflow zatrzymuje się natychmiast z wyraźnym komunikatem błędu zamiast zawieść tajemniczo później
+Workflow zatrzymuje się natychmiast z jasnym komunikatem błędu zamiast zawodzić tajemniczo później
 
 Teraz uruchom go z nieistniejącym plikiem:
 
@@ -1953,7 +1938,7 @@ nextflow run main.nf --input ./data/nonexistent.csv
 
     Launching `main.nf` [cranky_gates] DSL2 - revision: 26839ae3eb
 
-    Plik CSV wejściowy nie został znaleziony: ./data/nonexistent.csv
+    Input CSV file not found: ./data/nonexistent.csv
     ```
 
 Na koniec uruchom go z poprawnym plikiem:
@@ -1965,19 +1950,12 @@ nextflow run main.nf --input ./data/samples.csv
 ??? success "Wyjście polecenia"
 
     ```console
-    N E X T F L O W   ~  version 25.10.2
-
-    Launching `main.nf` [trusting_brahmagupta] DSL2 - revision: 4a8c9d2e5f
-
-    executor >  local (7)
-    [5e/3f4a92] process > FASTP (2)           [100%] 2 of 2 ✔
-    [8c/6d7b43] process > TRIMGALORE (1)      [100%] 1 of 1 ✔
-    [4a/2e8c94] process > GENERATE_REPORT (1) [100%] 3 of 3 ✔
+    <!-- TODO: output -->
     ```
 
-Tym razem uruchamia się pomyślnie.
+Tym razem działa pomyślnie.
 
-Możesz również dodać walidację wewnątrz funkcji `separateMetadata`. Użyjmy niefatalnego `log.warn` do wydawania ostrzeżeń dla próbek o niskiej głębokości sekwencjonowania, ale nadal pozwolić workflow na kontynuację:
+Możesz również dodać walidację wewnątrz funkcji `separateMetadata`. Użyjmy niefatalnego `log.warn` do wydawania ostrzeżeń dla próbek o niskiej głębokości sekwencjonowania, ale nadal pozwalając workflow'owi kontynuować:
 
 === "Po"
 
@@ -1986,7 +1964,7 @@ Możesz również dodać walidację wewnątrz funkcji `separateMetadata`. Użyjm
 
         // Waliduj, czy dane mają sens
         if (sample_meta.depth < 30000000) {
-            log.warn "Niska głębokość sekwencjonowania dla ${sample_meta.id}: ${sample_meta.depth}"
+            log.warn "Low sequencing depth for ${sample_meta.id}: ${sample_meta.depth}"
         }
 
         return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
@@ -2019,33 +1997,33 @@ nextflow run main.nf --input ./data/samples.csv
     [ce/df5eeb] process > FASTP (2)           [100%] 2 of 2 ✔
     [-        ] process > TRIMGALORE          -
     [d1/7d2b4b] process > GENERATE_REPORT (3) [100%] 3 of 3 ✔
-    WARN: Niska głębokość sekwencjonowania dla sample_002: 25000000
+    WARN: Low sequencing depth for sample_002: 25000000
     ```
 
 Widzimy ostrzeżenie o niskiej głębokości sekwencjonowania dla jednej z próbek.
 
-### Wnioski
+### Podsumowanie
 
-- **`error()`**: Zatrzymuje workflow natychmiast z wyraźnym komunikatem
-- **`log.warn`**: Wydaje ostrzeżenia bez zatrzymywania workflow
-- **Wczesna walidacja**: Sprawdzaj wejścia przed przetwarzaniem, aby szybko zawieść z pomocnymi błędami
-- **Funkcje walidacji**: Twórz wielokrotnego użytku logikę walidacji, którą można wywołać na początku workflow
+- **`error()`**: Natychmiast zatrzymuje workflow z jasnym komunikatem
+- **`log.warn`**: Wydaje ostrzeżenia bez zatrzymywania workflow'a
+- **Wczesna walidacja**: Sprawdź wejścia przed przetwarzaniem, aby szybko zawieść z pomocnymi błędami
+- **Funkcje walidacji**: Twórz logikę walidacji wielokrotnego użytku, którą można wywołać na początku workflow'a
 
-Odpowiednia walidacja sprawia, że workflow są bardziej odporne i przyjazne dla użytkownika, wychwytując problemy wcześnie z wyraźnymi komunikatami błędów.
+Właściwa walidacja sprawia, że workflow'y są bardziej solidne i przyjazne dla użytkownika, wychwytując problemy wcześnie z jąsnymi komunikatami błędów.
 
 ---
 
-## 8. Handlery Zdarzeń Workflow
+## 8. Procedury Obsługi Zdarzeń Workflow'a
 
-Do tej pory pisaliśmy kod w naszych skryptach workflow i definicjach procesów. Ale jest jeszcze jedna ważna funkcja, o której powinieneś wiedzieć: handlery zdarzeń workflow.
+Do tej pory pisaliśmy kod w naszych skryptach workflow'a i definicjach procesów. Ale jest jeszcze jedna ważna funkcja, o której powinieneś wiedzieć: procedury obsługi zdarzeń workflow'a.
 
-Handlery zdarzeń to closures, które są uruchamiane w określonych punktach cyklu życia Twojego workflow. Są idealne do dodawania logowania, powiadomień lub operacji czyszczenia. Te handlery powinny być zdefiniowane w Twoim skrypcie workflow obok definicji workflow.
+Procedury obsługi zdarzeń to domknięcia, które uruchamiają się w określonych punktach cyklu życia Twojego workflow'a. Są idealne do dodawania logowania, powiadomień lub operacji czyszczenia. Te procedury powinny być zdefiniowane w Twoim skrypcie workflow'a obok definicji workflow'a.
 
-### 8.1. Handler `onComplete`
+### 8.1. Procedura Obsługi `onComplete`
 
-Najczęściej używanym handlerem zdarzeń jest `onComplete`, który jest uruchamiany, gdy workflow się kończy (czy zakończy się sukcesem, czy niepowodzeniem). Dodajmy jeden, aby podsumować wyniki naszego pipeline.
+Najczęściej używaną procedurą obsługi zdarzeń jest `onComplete`, która uruchamia się, gdy Twój workflow się kończy (niezależnie od tego, czy zakończył się sukcesem, czy niepowodzeniem). Dodajmy jedną, aby podsumować wyniki naszego pipeline'u.
 
-Dodaj handler zdarzeń do Twojego pliku `main.nf`, wewnątrz definicji workflow:
+Dodaj procedurę obsługi zdarzeń do pliku `main.nf`, wewnątrz definicji workflow'a:
 
 === "Po"
 
@@ -2056,13 +2034,13 @@ Dodaj handler zdarzeń do Twojego pliku `main.nf`, wewnątrz definicji workflow:
 
         workflow.onComplete = {
             println ""
-            println "Podsumowanie wykonania pipeline:"
+            println "Pipeline execution summary:"
             println "=========================="
-            println "Zakończono o: ${workflow.complete}"
-            println "Czas trwania    : ${workflow.duration}"
-            println "Sukces     : ${workflow.success}"
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
             println "workDir     : ${workflow.workDir}"
-            println "status wyjścia : ${workflow.exitStatus}"
+            println "exit status : ${workflow.exitStatus}"
             println ""
         }
     }
@@ -2077,7 +2055,7 @@ Dodaj handler zdarzeń do Twojego pliku `main.nf`, wewnątrz definicji workflow:
     }
     ```
 
-To closure uruchamia się, gdy workflow się kończy. Wewnątrz masz dostęp do obiektu `workflow`, który zapewnia użyteczne właściwości dotyczące wykonania.
+To domknięcie uruchamia się, gdy workflow się kończy. Wewnątrz masz dostęp do obiektu `workflow`, który dostarcza użytecznych właściwości o wykonaniu.
 
 Uruchom swój workflow, a zobaczysz to podsumowanie pojawiające się na końcu!
 
@@ -2090,20 +2068,20 @@ nextflow run main.nf --input ./data/samples.csv -ansi-log false
     ```console
     N E X T F L O W  ~  version 25.10.2
     Launching `main.nf` [marvelous_boltzmann] DSL2 - revision: a31662a7c1
-    WARN: Niska głębokość sekwencjonowania dla sample_002: 25000000
+    WARN: Low sequencing depth for sample_002: 25000000
     [9b/d48e40] Submitted process > FASTP (2)
     [6a/73867a] Submitted process > GENERATE_REPORT (2)
     [79/ad0ac5] Submitted process > GENERATE_REPORT (1)
     [f3/bda6cb] Submitted process > FASTP (1)
     [34/d5b52f] Submitted process > GENERATE_REPORT (3)
 
-    Podsumowanie wykonania pipeline:
+    Pipeline execution summary:
     ==========================
-    Zakończono o: 2025-10-10T12:14:24.885384+01:00
-    Czas trwania    : 2.9s
-    Sukces     : true
+    Completed at: 2025-10-10T12:14:24.885384+01:00
+    Duration    : 2.9s
+    Success     : true
     workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
-    status wyjścia : 0
+    exit status : 0
     ```
 
 Uczyńmy to bardziej użytecznym, dodając logikę warunkową:
@@ -2117,20 +2095,20 @@ Uczyńmy to bardziej użytecznym, dodając logikę warunkową:
 
         workflow.onComplete = {
             println ""
-            println "Podsumowanie wykonania pipeline:"
+            println "Pipeline execution summary:"
             println "=========================="
-            println "Zakończono o: ${workflow.complete}"
-            println "Czas trwania    : ${workflow.duration}"
-            println "Sukces     : ${workflow.success}"
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
             println "workDir     : ${workflow.workDir}"
-            println "status wyjścia : ${workflow.exitStatus}"
+            println "exit status : ${workflow.exitStatus}"
             println ""
 
             if (workflow.success) {
-                println "✅ Pipeline zakończony pomyślnie!"
+                println "✅ Pipeline completed successfully!"
             } else {
-                println "❌ Pipeline zakończony niepowodzeniem!"
-                println "Błąd: ${workflow.errorMessage}"
+                println "❌ Pipeline failed!"
+                println "Error: ${workflow.errorMessage}"
             }
         }
     }
@@ -2145,61 +2123,59 @@ Uczyńmy to bardziej użytecznym, dodając logikę warunkową:
 
         workflow.onComplete = {
             println ""
-            println "Podsumowanie wykonania pipeline:"
+            println "Pipeline execution summary:"
             println "=========================="
-            println "Zakończono o: ${workflow.complete}"
-            println "Czas trwania    : ${workflow.duration}"
-            println "Sukces     : ${workflow.success}"
+            println "Completed at: ${workflow.complete}"
+            println "Duration    : ${workflow.duration}"
+            println "Success     : ${workflow.success}"
             println "workDir     : ${workflow.workDir}"
-            println "status wyjścia : ${workflow.exitStatus}"
+            println "exit status : ${workflow.exitStatus}"
             println ""
         }
     }
     ```
 
-Teraz otrzymujemy jeszcze bardziej informacyjne podsumowanie, w tym komunikat sukcesu/porażki i katalog wyjściowy, jeśli jest określony:
+Teraz otrzymujemy jeszcze bardziej informacyjne podsumowanie, w tym komunikat o sukcesie/niepowodzeniu i katalog wyjściowy, jeśli został określony:
 
-```bash
-nextflow run main.nf --input ./data/samples.csv -ansi-log false
-```
+<!-- TODO: add run command -->
 
 ??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W  ~  version 25.10.2
     Launching `main.nf` [boring_linnaeus] DSL2 - revision: a31662a7c1
-    WARN: Niska głębokość sekwencjonowania dla sample_002: 25000000
+    WARN: Low sequencing depth for sample_002: 25000000
     [e5/242efc] Submitted process > FASTP (2)
     [3b/74047c] Submitted process > GENERATE_REPORT (3)
     [8a/7a57e6] Submitted process > GENERATE_REPORT (1)
     [a8/b1a31f] Submitted process > GENERATE_REPORT (2)
     [40/648429] Submitted process > FASTP (1)
 
-    Podsumowanie wykonania pipeline:
+    Pipeline execution summary:
     ==========================
-    Zakończono o: 2025-10-10T12:16:00.522569+01:00
-    Czas trwania    : 3.6s
-    Sukces     : true
+    Completed at: 2025-10-10T12:16:00.522569+01:00
+    Duration    : 3.6s
+    Success     : true
     workDir     : /workspaces/training/side-quests/essential_scripting_patterns/work
-    status wyjścia : 0
+    exit status : 0
 
-    ✅ Pipeline zakończony pomyślnie!
+    ✅ Pipeline completed successfully!
     ```
 
-Możesz również zapisać podsumowanie do pliku za pomocą operacji na plikach:
+Możesz również zapisać podsumowanie do pliku używając operacji na plikach:
 
-```groovy title="main.nf - Zapisywanie podsumowania do pliku"
+```groovy title="main.nf - Writing summary to file"
 workflow {
-    // ... kod Twojego workflow ...
+    // ... Twój kod workflow'a ...
 
     workflow.onComplete = {
         def summary = """
-        Podsumowanie Wykonania Pipeline
+        Pipeline Execution Summary
         ===========================
-        Zakończono: ${workflow.complete}
-        Czas trwania : ${workflow.duration}
-        Sukces  : ${workflow.success}
-        Polecenie  : ${workflow.commandLine}
+        Completed: ${workflow.complete}
+        Duration : ${workflow.duration}
+        Success  : ${workflow.success}
+        Command  : ${workflow.commandLine}
         """
 
         println summary
@@ -2211,67 +2187,67 @@ workflow {
 }
 ```
 
-### 8.2. Handler `onError`
+### 8.2. Procedura Obsługi `onError`
 
-Oprócz `onComplete`, istnieje jeszcze jeden handler zdarzeń, którego możesz użyć: `onError`, który uruchamia się tylko wtedy, gdy workflow zawiedzie:
+Oprócz `onComplete`, jest jeszcze jedna procedura obsługi zdarzeń, której możesz użyć: `onError`, która uruchamia się tylko jeśli workflow zawiedzie:
 
-```groovy title="main.nf - handler onError"
+```groovy title="main.nf - onError handler"
 workflow {
-    // ... kod Twojego workflow ...
+    // ... Twój kod workflow'a ...
 
     workflow.onError = {
         println "="* 50
-        println "Wykonanie pipeline zakończone niepowodzeniem!"
-        println "Komunikat błędu: ${workflow.errorMessage}"
+        println "Pipeline execution failed!"
+        println "Error message: ${workflow.errorMessage}"
         println "="* 50
 
-        // Zapisz szczegółowy log błędu
+        // Zapisz szczegółowy log błędów
         def error_file = file("${workflow.launchDir}/error.log")
         error_file.text = """
-        Raport Błędu Workflow
+        Workflow Error Report
         =====================
-        Czas: ${new Date()}
-        Błąd: ${workflow.errorMessage}
-        Raport błędu: ${workflow.errorReport ?: 'Brak szczegółowego raportu dostępnego'}
+        Time: ${new Date()}
+        Error: ${workflow.errorMessage}
+        Error report: ${workflow.errorReport ?: 'No detailed report available'}
         """
 
-        println "Szczegóły błędu zapisane do: ${error_file}"
+        println "Error details written to: ${error_file}"
     }
 }
 ```
 
-Możesz używać wielu handlerów razem w swoim skrypcie workflow:
+Możesz używać wielu procedur obsługi razem w swoim skrypcie workflow'a:
 
-```groovy title="main.nf - Połączone handlery"
+```groovy title="main.nf - Combined handlers"
 workflow {
-    // ... kod Twojego workflow ...
+    // ... Twój kod workflow'a ...
 
     workflow.onError = {
-        println "Workflow zakończony niepowodzeniem: ${workflow.errorMessage}"
+        println "Workflow failed: ${workflow.errorMessage}"
     }
 
     workflow.onComplete = {
         def duration_mins = workflow.duration.toMinutes().round(2)
-        def status = workflow.success ? "SUKCES ✅" : "NIEPOWODZENIE ❌"
+        def status = workflow.success ? "SUCCESS ✅" : "FAILED ❌"
 
         println """
-        Pipeline zakończony: ${status}
-        Czas trwania: ${duration_mins} minut
+        Pipeline finished: ${status}
+        Duration: ${duration_mins} minutes
         """
     }
 }
 ```
 
-### Wnioski
+### Podsumowanie
 
 W tej sekcji nauczyłeś się:
 
-- **Closures handlerów zdarzeń**: Closures w Twoim skrypcie workflow, które uruchamiają się w różnych punktach cyklu życia
-- **Handler `onComplete`**: Do podsumowań wykonania i raportowania wyników
-- **Handler `onError`**: Do obsługi błędów i logowania niepowodzeń
+- **Domknięcia procedur obsługi zdarzeń**: Domknięcia w Twoim skrypcie workflow'a, które uruchamiają się w różnych punktach cyklu życia
+- **Procedura obsługi `onComplete`**: Do podsumowań wykonania i raportowania wyników
+- **Procedura obsługi `onError`**: Do obsługi błędów i logowania niepowodzeń
 - **Właściwości obiektu workflow**: Dostęp do `workflow.success`, `workflow.duration`, `workflow.errorMessage`, itp.
 
-Handlery zdarzeń pokazują, jak możesz używać pełnej mocy języka Nextflow w swoich skryptach workflow, aby dodać zaawansowane możliwości logowania i powiadamiania.
+Procedury obsługi zdarzeń pokazują, jak możesz użyć pełnej mocy języka Nextflow w swoich skryptach workflow'a, aby dodać zaawansowane możliwości logowania i powiadamiania.
 
 ---
 
@@ -2279,36 +2255,36 @@ Handlery zdarzeń pokazują, jak możesz używać pełnej mocy języka Nextflow 
 
 Gratulacje, udało Ci się!
 
-W trakcie tego side questa zbudowałeś kompleksowy pipeline przetwarzania próbek, który ewoluował od podstawowej obsługi metadanych do wyrafinowanego, gotowego do produkcji workflow.
-Każda sekcja opierała się na poprzedniej, demonstrując, jak konstrukcje programistyczne przekształcają proste workflow w potężne systemy przetwarzania danych, z następującymi korzyściami:
+W trakcie tego side questa zbudowałeś kompleksowy pipeline przetwarzania próbek, który ewoluował od podstawowej obsługi metadanych do zaawansowanego, gotowego do produkcji workflow'a.
+Każda sekcja budowała na poprzedniej, demonstrując, jak konstrukcje programistyczne przekształcają proste workflow'y w potężne systemy przetwarzania danych, z następującymi korzyściami:
 
-- **Czystszy kod**: Zrozumienie przepływu danych vs skryptowanie pomaga pisać bardziej zorganizowane workflow
-- **Odporna obsługa**: Bezpieczna nawigacja i operatory Elvis sprawiają, że workflow są odporne na brakujące dane
-- **Elastyczne przetwarzanie**: Logika warunkowa pozwala Twoim workflow odpowiednio przetwarzać różne typy próbek
-- **Adaptacyjne zasoby**: Dynamiczne dyrektywy optymalizują wykorzystanie zasobów na podstawie charakterystyki wejścia
+- **Czystszy kod**: Rozumienie przepływu danych vs skryptowania pomaga pisać bardziej zorganizowane workflow'y
+- **Solidna obsługa**: Bezpieczna nawigacja i operatory Elvisa sprawiają, że workflow'y są odporne na brakujące dane
+- **Elastyczne przetwarzanie**: Logika warunkowa pozwala Twoim workflow'om odpowiednio przetwarzać różne typy próbek
+- **Adaptacyjne zasoby**: Dynamiczne dyrektywy optymalizują użycie zasobów na podstawie charakterystyk wejściowych
 
 Ta progresja odzwierciedla rzeczywistą ewolucję pipeline'ów bioinformatycznych, od prototypów badawczych obsługujących kilka próbek do systemów produkcyjnych przetwarzających tysiące próbek w laboratoriach i instytucjach.
-Każde wyzwanie, które rozwiązałeś, i wzorzec, którego się nauczyłeś, odzwierciedla rzeczywiste problemy, z którymi borykają się deweloperzy podczas skalowania workflow Nextflow.
+Każde wyzwanie, które rozwiązałeś, i wzorzec, którego się nauczyłeś, odzwierciedla rzeczywiste problemy, z którymi borykają się deweloperzy podczas skalowania workflow'ów Nextflow.
 
-Zastosowanie tych wzorców w Twojej własnej pracy umożliwi Ci budowanie solidnych, gotowych do produkcji workflow.
+Stosowanie tych wzorców w Twojej własnej pracy umożliwi Ci budowanie solidnych, gotowych do produkcji workflow'ów.
 
 ### Kluczowe wzorce
 
-1.  **Przepływ Danych vs Skryptowanie:** Nauczyłeś się rozróżniać między operacjami przepływu danych (orkiestra kanałów) a skryptowaniem (kod, który manipuluje danymi), w tym kluczowe różnice między operacjami na różnych typach, jak `collect` na Channel vs List.
+1.  **Przepływ danych vs Skryptowanie:** Nauczyłeś się rozróżniać między operacjami przepływu danych (orkiestracja kanałów) a skryptowaniem (kod, który manipuluje danymi), w tym kluczowe różnice między operacjami na różnych typach, takich jak `collect` na Channel vs List.
 
-    - Przepływ danych: orkiestra kanałów
+    - Przepływ danych: orkiestracja kanałów
 
     ```groovy
     channel.fromPath('*.fastq').splitCsv(header: true)
     ```
 
-    - Skryptowanie: przetwarzanie danych w kolekcjach
+    - Skryptowanie: przetwarzanie danych na kolekcjach
 
     ```groovy
     sample_data.collect { it.toUpperCase() }
     ```
 
-2.  **Zaawansowane Przetwarzanie Ciągów Znaków**: Opanowałeś wyrażenia regularne do parsowania nazw plików, dynamiczne generowanie skryptów w procesach i interpolację zmiennych (Nextflow vs Bash vs Shell).
+2.  **Zaawansowane Przetwarzanie Napisów**: Opanowałeś wyrażenia regularne do parsowania nazw plików, dynamiczne generowanie skryptów w procesach oraz interpolację zmiennych (Nextflow vs Bash vs Powłoka).
 
     - Dopasowywanie wzorców
 
@@ -2325,7 +2301,7 @@ Zastosowanie tych wzorców w Twojej własnej pracy umożliwi Ci budowanie solidn
     }
     ```
 
-    - Kolekcja plików do argumentów poleceń (w bloku skryptowym procesu)
+    - Kolekcja plików do argumentów polecenia (w bloku skryptu procesu)
 
     ```groovy
     script:
@@ -2335,23 +2311,23 @@ Zastosowanie tych wzorców w Twojej własnej pracy umożliwi Ci budowanie solidn
     """
     ```
 
-3.  **Tworzenie Funkcji Wielokrotnego Użytku**: Nauczyłeś się wyodrębniać złożoną logikę do nazwanych funkcji, które mogą być wywoływane z operatorów kanałów, czyniąc workflow bardziej czytelnymi i łatwiejszymi w utrzymaniu.
+3.  **Tworzenie Funkcji Wielokrotnego Użytku**: Nauczyłeś się wyodrębniać złożoną logikę do nazwanych funkcji, które mogą być wywoływane z operatorów kanałów, czyniąc workflow'y bardziej czytelnymi i łatwiejszymi w utrzymaniu.
 
     - Zdefiniuj nazwaną funkcję
 
     ```groovy
     def separateMetadata(row) {
-        def sample_meta = [ /* kod ukryty dla zwięzłości */ ]
+        def sample_meta = [ /* code hidden for brevity */ ]
         def fastq_path = file(row.file_path)
         def m = (fastq_path.name =~ /^(.+)_S(\d+)_L(\d{3})_(R[12])_(\d{3})\.fastq(?:\.gz)?$/)
-        def file_meta = m ? [ /* kod ukryty dla zwięzłości */ ] : [:]
+        def file_meta = m ? [ /* code hidden for brevity */ ] : [:]
         def priority = sample_meta.quality > 40 ? 'high' : 'normal'
 
         return tuple(sample_meta + file_meta + [priority: priority], fastq_path)
     }
     ```
 
-    - Wywołaj nazwaną funkcję w workflow
+    - Wywołaj nazwaną funkcję w workflow'ie
 
     ```groovy
     workflow {
@@ -2363,24 +2339,24 @@ Zastosowanie tych wzorców w Twojej własnej pracy umożliwi Ci budowanie solidn
     }
     ```
 
-4.  **Dynamiczne Dyrektywy Zasobów z Closures**: Zbadałeś używanie closures w dyrektywach procesów do adaptacyjnej alokacji zasobów na podstawie charakterystyki wejścia.
+4.  **Dynamiczne Dyrektywy Zasobów z Domknięciami**: Zbadałeś używanie domknięć w dyrektywach procesów do adaptacyjnej alokacji zasobów na podstawie charakterystyk wejściowych.
 
-    - Nazwane closures i kompozycja
+    - Nazwane domknięcia i kompozycja
 
     ```groovy
     def enrichData = normalizeId >> addQualityCategory >> addFlags
     def processor = generalFunction.curry(fixedParam)
     ```
 
-    - Closures z dostępem do zakresu
+    - Domknięcia z dostępem do zakresu
 
     ```groovy
     def collectStats = { data -> stats.count++; return data }
     ```
 
-5.  **Logika Warunkowa i Kontrola Procesów**: Dodałeś inteligentne kierowanie za pomocą operatorów `.branch()` i `.filter()`, wykorzystując prawdziwość do zwięzłych wyrażeń warunkowych.
+5.  **Logika Warunkowa i Kontrola Procesów**: Dodałeś inteligentne kierowanie używając operatorów `.branch()` i `.filter()`, wykorzystując prawdziwość do zwięzłych wyrażeń warunkowych.
 
-    - Użyj `.branch()` do kierowania danych przez różne gałęzie workflow
+    - Użyj `.branch()` do kierowania danych przez różne gałęzie workflow'a
 
     ```groovy
     trim_branches = ch_samples
@@ -2396,10 +2372,10 @@ Zastosowanie tych wzorców w Twojej własnej pracy umożliwi Ci budowanie solidn
     - Ewaluacja boolowska z Groovy Truth
 
     ```groovy
-    if (sample.files) println "Ma pliki"
+    if (sample.files) println "Has files"
     ```
 
-    - Użyj `filter()` do wyodrębniania podzbiorów danych z 'prawdziwością'
+    - Użyj `filter()` do wybierania podzbiorów danych z 'prawdziwością'
 
     ```groovy
     ch_valid_samples = ch_samples
@@ -2408,37 +2384,37 @@ Zastosowanie tych wzorców w Twojej własnej pracy umożliwi Ci budowanie solidn
         }
     ```
 
-6.  **Bezpieczna Nawigacja i Operatory Elvis**: Uczyniłeś pipeline odpornym na brakujące dane, używając `?.` do bezpiecznego dostępu do właściwości względem null i `?:` do zapewniania wartości domyślnych.
+6.  **Bezpieczna Nawigacja i Operatory Elvisa**: Uczyniłeś pipeline odpornym na brakujące dane używając `?.` do bezpiecznego dostępu do właściwości null i `?:` do dostarczania wartości domyślnych.
 
     ```groovy
     def id = data?.sample?.id ?: 'unknown'
     ```
 
-7.  **Walidacja z error() i log.warn**: Nauczyłeś się walidować wejścia wcześnie i szybko zawodzić z wyraźnymi komunikatami błędów.
+7.  **Walidacja za pomocą error() i log.warn**: Nauczyłeś się walidować wejścia wcześnie i szybko zawodzić z jąsnymi komunikatami błędów.
 
     ```groovy
     try {
         def errors = validateSample(sample)
-        if (errors) throw new RuntimeException("Nieprawidłowe: ${errors.join(', ')}")
+        if (errors) throw new RuntimeException("Invalid: ${errors.join(', ')}")
     } catch (Exception e) {
-        println "Błąd: ${e.message}"
+        println "Error: ${e.message}"
     }
     ```
 
-8.  **Handlery Zdarzeń Konfiguracji**: Nauczyłeś się używać handlerów zdarzeń workflow (`onComplete` i `onError`) do logowania, powiadomień i zarządzania cyklem życia.
+8.  **Procedury Obsługi Zdarzeń Konfiguracji**: Nauczyłeś się używać procedur obsługi zdarzeń workflow'a (`onComplete` i `onError`) do logowania, powiadomień i zarządzania cyklem życia.
 
     - Używanie `onComplete` do logowania i powiadamiania
 
     ```groovy
     workflow.onComplete = {
-        println "Sukces     : ${workflow.success}"
-        println "status wyjścia : ${workflow.exitStatus}"
+        println "Success     : ${workflow.success}"
+        println "exit status : ${workflow.exitStatus}"
 
         if (workflow.success) {
-            println "✅ Pipeline zakończony pomyślnie!"
+            println "✅ Pipeline completed successfully!"
         } else {
-            println "❌ Pipeline zakończony niepowodzeniem!"
-            println "Błąd: ${workflow.errorMessage}"
+            println "❌ Pipeline failed!"
+            println "Error: ${workflow.errorMessage}"
         }
     }
     ```
@@ -2447,38 +2423,38 @@ Zastosowanie tych wzorców w Twojej własnej pracy umożliwi Ci budowanie solidn
 
     ```groovy
     workflow.onError = {
-        // Zapisz szczegółowy log błędu
+        // Zapisz szczegółowy log błędów
         def error_file = file("${workflow.launchDir}/error.log")
         error_file.text = """
-        Czas: ${new Date()}
-        Błąd: ${workflow.errorMessage}
-        Raport błędu: ${workflow.errorReport ?: 'Brak szczegółowego raportu dostępnego'}
+        Time: ${new Date()}
+        Error: ${workflow.errorMessage}
+        Error report: ${workflow.errorReport ?: 'No detailed report available'}
         """
 
-        println "Szczegóły błędu zapisane do: ${error_file}"
+        println "Error details written to: ${error_file}"
     }
     ```
 
 ### Dodatkowe zasoby
 
-- [Nextflow Language Reference](https://nextflow.io/docs/latest/reference/syntax.html)
-- [Nextflow Operators](https://www.nextflow.io/docs/latest/operator.html)
-- [Nextflow Script Syntax](https://www.nextflow.io/docs/latest/script.html)
-- [Nextflow Standard Library](https://nextflow.io/docs/latest/reference/stdlib.html)
+- [Dokumentacja Języka Nextflow](https://nextflow.io/docs/latest/reference/syntax.html)
+- [Operatory Nextflow](https://www.nextflow.io/docs/latest/operator.html)
+- [Składnia Skryptów Nextflow](https://www.nextflow.io/docs/latest/script.html)
+- [Biblioteka Standardowa Nextflow](https://nextflow.io/docs/latest/reference/stdlib.html)
 
 Upewnij się, że sprawdzisz te zasoby, gdy musisz zbadać bardziej zaawansowane funkcje.
 
-Skorzystasz na praktykowaniu i rozwijaniu swoich umiejętności, aby:
+Skorzystasz z praktykowania i rozwijania swoich umiejętności, aby:
 
-- Pisać czystsze workflow z odpowiednim rozdzieleniem między przepływem danych a skryptowaniem
-- Opanować interpolację zmiennych, aby uniknąć powszechnych pułapek ze zmiennymi Nextflow, Bash i shell
-- Używać dynamicznych dyrektyw zasobów dla wydajnych, adaptacyjnych workflow
+- Pisać czystsze workflow'y z właściwym rozdzieleniem między przepływem danych a skryptowaniem
+- Opanować interpolację zmiennych, aby uniknąć powszechnych pułapek ze zmiennymi Nextflow, Bash i powłoki
+- Używać dynamicznych dyrektyw zasobów dla wydajnych, adaptacyjnych workflow'ów
 - Przekształcać kolekcje plików w poprawnie sformatowane argumenty linii poleceń
-- Obsługiwać różne konwencje nazewnictwa plików i formaty wejściowe z wdziękiem, używając regex i przetwarzania ciągów znaków
-- Budować wielokrotnego użytku, łatwy w utrzymaniu kod, używając zaawansowanych wzorców closures i programowania funkcyjnego
-- Przetwarzać i organizować złożone zbiory danych, używając operacji na kolekcjach
-- Dodawać walidację, obsługę błędów i logowanie, aby uczynić swoje workflow gotowymi do produkcji
-- Implementować zarządzanie cyklem życia workflow za pomocą handlerów zdarzeń
+- Elegancko obsługiwać różne konwencje nazewnictwa plików i formaty wejściowe używając regex i przetwarzania napisów
+- Budować kod wielokrotnego użytku i łatwy w utrzymaniu używając zaawansowanych wzorców domknięć i programowania funkcyjnego
+- Przetwarzać i organizować złożone zbiory danych używając operacji na kolekcjach
+- Dodawać walidację, obsługę błędów i logowanie, aby uczynić Twoje workflow'y gotowymi do produkcji
+- Implementować zarządzanie cyklem życia workflow'a za pomocą procedur obsługi zdarzeń
 
 ---
 

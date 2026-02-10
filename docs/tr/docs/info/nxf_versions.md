@@ -1,49 +1,49 @@
 ---
 title: Nextflow sürümleri
-description: Nextflow sözdizimi sürümlerinin evrimini anlama ve yönetme
+description: Nextflow'un sözdizimi sürümlerinin evrimini anlama ve yönetme
 hide:
   - toc
   - footer
 ---
 
-## Şu anda desteklenen Nextflow sözdizimi sürümü ve gereksinimleri
+## Mevcut desteklenen Nextflow sözdizimi sürümü ve gereksinimleri
 
-Eğitim portalının 3.0 sürümünden itibaren, tüm eğitim kurslarımız, kurs indeks sayfasında aksi belirtilmedikçe Nextflow'un 25.10.2 sürümüne dayanmaktadır (sürüm bildirimi içermeyen kullanımdan kaldırılmış veya arşivlenmiş materyaller hariç).
+Eğitim portalının 3.0 sürümü itibarıyla, kurs dizin sayfasında aksi belirtilmedikçe (kullanımdan kaldırılmış veya arşivlenmiş materyaller hariç, bunlar sürüm bildirimi içermeyebilir) tüm eğitim kurslarımız Nextflow'un 25.10.2 sürüm yayınına dayanmaktadır.
 
-Kurslar artık workflow seviyesinde tipli girdiler ve workflow seviyesinde çıktı yönergeleri kullandığından, V2 sözdizimi ayrıştırıcısının kullanılması gerekmektedir.
-[Github Codespaces](../envsetup/01_setup.md) veya [yerel devcontainer'lar](../envsetup/03_devcontainer.md) aracılığıyla sağladığımız ortamı kullanmayı planlıyorsanız, kurs talimatlarında özellikle belirtilmedikçe bir şey yapmanıza gerek yoktur.
-Ancak, eğitimleri kendi ortamınızda çalışmayı planlıyorsanız ([Manuel kurulum](../envsetup/02_local.md)), v2 sözdizimi ayrıştırıcısı etkinleştirilmiş olarak Nextflow 25.10.2 veya sonraki bir sürümü kullandığınızdan emin olmanız gerekecektir.
+Kurslar artık iş akışı seviyesinde tiplendirilmiş girdilerin yanı sıra iş akışı seviyesinde çıktı yönergelerini kullandığından, V2 sözdizimi ayrıştırıcısının kullanılmasını gerektirmektedir.
+[Github Codespaces](../envsetup/01_setup.md) veya [yerel devcontainer'lar](../envsetup/03_devcontainer.md) aracılığıyla sağladığımız ortamı kullanmayı planlıyorsanız, kurs talimatlarında özellikle belirtilmedikçe herhangi bir şey yapmanıza gerek yoktur.
+Ancak, eğitimleri kendi ortamınızda ([Manuel kurulum](../envsetup/02_local.md)) çalışmayı planlıyorsanız, v2 sözdizimi ayrıştırıcısı etkinleştirilmiş Nextflow sürüm 25.10.2 veya daha yenisini kullandığınızdan emin olmanız gerekecektir.
 
 ## Eğitim materyallerinin eski sürümleri
 
 Eğitim materyallerimiz Şubat 2025'ten beri sürümlendirilmektedir.
 
-**25.10.2 öncesi** Nextflow sürümleriyle çalışan eğitim materyallerinin eski sürümlerine, her sayfanın üstündeki eğitim materyallerinin numaralı sürümünü gösteren açılır menü öğesi aracılığıyla erişebilirsiniz.
-Eğitim materyallerinin daha eski bir sürümünü seçtiğinizde, eğitim ortamına bağlantılar otomatik olarak ortamın ilgili sürümünü belirtecektir.
+**25.10.2'den önceki** Nextflow sürümleriyle çalışan eğitim materyallerinin eski sürümlerine, her sayfanın üst kısmında eğitim materyallerinin numaralı sürümünü gösteren açılır menü öğesi aracılığıyla erişebilirsiniz.
+Eğitim materyallerinin eski bir sürümünü seçtiğinizde, eğitim ortamına olan bağlantılar otomatik olarak ortamın ilgili sürümünü belirtecektir.
 
 ## Nextflow sözdizimi sürümleri hakkında diğer bilgiler
 
-Nextflow'un bazen karıştırılan iki farklı sürümleme kavramı vardır: **DSL sürümleri** ve **sözdizimi ayrıştırıcı sürümleri**.
+Nextflow'un bazen karıştırılan iki farklı sürümleme kavramı vardır: **DSL sürümleri** ve **sözdizimi ayrıştırıcısı sürümleri**.
 
-**DSL1 ve DSL2**, Nextflow pipeline'ları yazmanın temelden farklı yollarını ifade eder.
-DSL1, process'lerin channel'lar aracılığıyla örtük olarak bağlandığı orijinal sözdizimiydi.
-Nextflow 20.07'de tanıtılan DSL2, modülerlik özellikleri ekledi: diğer dosyalardan process'leri ve workflow'ları içe aktarma yeteneği, açık `workflow` blokları ve adlandırılmış process çıktıları.
+**DSL1 vs DSL2**, Nextflow pipeline'larını yazmanın temelde farklı yollarını ifade eder.
+DSL1, süreçlerin kanallar aracılığıyla örtük olarak bağlandığı orijinal sözdizimiydi.
+Nextflow 20.07'de tanıtılan DSL2, modülerlik özellikleri ekledi: süreçleri ve iş akışlarını diğer dosyalardan içe aktarma yeteneği, açık `workflow` blokları ve adlandırılmış süreç çıktıları.
 DSL1, Nextflow 22.03'te kullanımdan kaldırıldı ve 22.12'de kaldırıldı.
 Tüm modern Nextflow kodu DSL2 kullanır.
 
-**Sözdizimi ayrıştırıcı v1 ve v2**, her ikisi de DSL2 koduyla çalışan farklı ayrıştırıcıları ifade eder.
-v1 ayrıştırıcısı, daha toleranslı olan orijinal ayrıştırıcıdır.
-v2 ayrıştırıcısı daha katıdır ve statik tipleme (tipli girdiler ve çıktılar) ile workflow seviyesinde çıktı yönergeleri gibi yeni dil özelliklerini etkinleştirir.
-v2 ayrıştırıcısı ayrıca daha iyi hata mesajları sağlar ve çalışma zamanı yerine ayrıştırma zamanında daha fazla hata yakalar.
-v2 ayrıştırıcısı Nextflow 26.04'te varsayılan olacaktır.
+**Sözdizimi ayrıştırıcısı v1 vs v2**, her ikisi de DSL2 koduyla çalışan farklı ayrıştırıcıları ifade eder.
+v1 ayrıştırıcısı, orijinal, daha esnek ayrıştırıcıdır.
+v2 ayrıştırıcısı daha katıdır ve statik tipleme (tiplendirilmiş girdiler ve çıktılar) ve iş akışı seviyesinde çıktı yönergeleri gibi yeni dil özelliklerini etkinleştirir.
+v2 ayrıştırıcısı ayrıca daha iyi hata mesajları sağlar ve daha fazla hatayı çalışma zamanında değil ayrıştırma zamanında yakalar.
+v2 ayrıştırıcısı, Nextflow 26.04'te varsayılan hale gelecektir.
 
-Özetle: DSL2 yazdığınız dildir; sözdizimi ayrıştırıcı sürümü, bu dilin ne kadar katı yorumlandığını ve hangi gelişmiş özelliklerin mevcut olduğunu belirler.
+Özetle: DSL2 yazdığınız dildir; sözdizimi ayrıştırıcısı sürümü, bu dilin ne kadar katı yorumlandığını ve hangi gelişmiş özelliklerin mevcut olduğunu belirler.
 
 ### Nextflow sürümünü kontrol etme ve ayarlama
 
-Sisteminizde hangi Nextflow sürümünün yüklü olduğunu `nextflow --version` komutuyla kontrol edebilirsiniz.
+Sisteminizde hangi Nextflow sürümünün kurulu olduğunu `nextflow --version` komutunu kullanarak kontrol edebilirsiniz.
 
-Nextflow sürümünüzü nasıl güncelleyeceğiniz hakkında daha fazla bilgi için lütfen referans belgelerindeki [Nextflow'u Güncelleme](https://www.nextflow.io/docs/latest/updating-nextflow.html) bölümüne bakın.
+Nextflow sürümünüzü nasıl güncelleyeceğiniz hakkında daha fazla bilgi için lütfen [Nextflow'u Güncelleme](https://www.nextflow.io/docs/latest/updating-nextflow.html) referans belgelerine bakın.
 
 ### v2 sözdizimi ayrıştırıcısını etkinleştirme
 
@@ -53,7 +53,7 @@ Mevcut oturumunuz için v2 sözdizimi ayrıştırıcısını **etkinleştirmek**
 export NXF_SYNTAX_PARSER=v2
 ```
 
-Bunu kalıcı hale getirmek için (v2'nin Nextflow 26.04'te varsayılan olmasını beklerken), export komutunu shell profilinize (`~/.bashrc`, `~/.zshrc`, vb.) ekleyin:
+Bunu kalıcı hale getirmek için (v2'nin Nextflow 26.04'te varsayılan hale gelmesine kadar), export komutunu kabuk profilinize (`~/.bashrc`, `~/.zshrc`, vb.) ekleyin:
 
 ```bash
 echo 'export NXF_SYNTAX_PARSER=v2' >> ~/.bashrc
@@ -61,7 +61,7 @@ source ~/.bashrc
 ```
 
 `NXF_SYNTAX_PARSER=v2` ortam değişkeninin geçici bir gereklilik olduğunu unutmayın.
-Nextflow 26.04'ten itibaren v2 ayrıştırıcısı varsayılan olacak ve bu ayar artık gerekli olmayacaktır.
+Nextflow 26.04'ten itibaren, v2 ayrıştırıcısı varsayılan hale gelecek ve bu ayara artık ihtiyaç duyulmayacaktır.
 
 ### v2 sözdizimi ayrıştırıcısını devre dışı bırakma
 
@@ -71,24 +71,24 @@ Mevcut oturumunuz için v2 sözdizimi ayrıştırıcısını **devre dışı bı
 export NXF_SYNTAX_PARSER=v1
 ```
 
-<!-- Will it be possible to disable it in versions after 26.04? -->
+<!-- 26.04'ten sonraki sürümlerde devre dışı bırakmak mümkün olacak mı? -->
 
-### Mevcut kodun taşınması
+### Mevcut kodu taşıma
 
-Mevcut kodun daha yeni Nextflow sürümlerine uyacak şekilde taşınmasına ilişkin rehberlik için lütfen referans belgelerindeki [Taşıma Notları](https://www.nextflow.io/docs/latest/migrations/index.html)'na bakın.
+Mevcut kodun Nextflow'un daha yeni sürümlerine uygun hale getirilmesi için taşıma konusunda rehberlik için lütfen referans belgelerindeki [Taşıma Notları](https://www.nextflow.io/docs/latest/migrations/index.html)'na bakın.
 
-Bu iki makale, en son sürüme taşıma için özellikle faydalıdır:
+Bu iki makale, en son sürüme taşıma için özellikle yararlıdır:
 
-- [Workflow çıktılarına taşıma](https://www.nextflow.io/docs/latest/tutorials/workflow-outputs.html)
+- [İş akışı çıktılarına taşıma](https://www.nextflow.io/docs/latest/tutorials/workflow-outputs.html)
 - [Statik tiplere taşıma](https://www.nextflow.io/docs/latest/tutorials/static-types.html)
 
 Bu özelliklerin her ikisi de eğitim materyallerinin 3.0 sürümünden başlayarak başlangıç eğitiminin bir parçası olarak ele alınmaktadır.
 
-Taşımayı planladığınız Nextflow kodunun nesline bağlı olarak, `nextflow lint -format` komutunu kullanarak Nextflow linter'ı ile çoğunu yapabilirsiniz.
+Taşımayı planladığınız Nextflow kodunun nesline bağlı olarak, çoğunu `nextflow lint -format` komutunu kullanarak Nextflow linter'ı ile yapabilirsiniz.
 Daha fazla ayrıntı için [`lint`](https://www.nextflow.io/docs/latest/reference/cli.html#lint) CLI referansına bakın.
 
-Bunun faydalı olacağını umuyoruz.
-Yardıma ihtiyacınız olursa Slack'te veya forumda bize ulaşın.
+Bunun yararlı olacağını umuyoruz.
+Yardıma ihtiyacınız varsa, Slack veya forum üzerinden ulaşın.
 
 ---
 

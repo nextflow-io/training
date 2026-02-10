@@ -1,18 +1,20 @@
 # Parte 1: Visão geral do método e testes manuais
 
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 Chamada de variantes é um método de análise genômica que visa identificar variações em uma sequência genômica em relação a um genoma de referência.
-Aqui vamos usar ferramentas e métodos projetados para chamar variantes germinativas curtas, _i.e._ SNPs e indels, em dados de sequenciamento de genoma completo.
+Aqui vamos usar ferramentas e métodos projetados para chamar variantes germinativas curtas, _ou seja_, SNPs e indels, em dados de sequenciamento de genoma completo.
 
 ![Pipeline GATK](img/gatk-pipeline.png)
 
-Um pipeline completo de chamada de variantes normalmente envolve muitas etapas, incluindo mapeamento para a referência (às vezes chamado de alinhamento do genoma) e filtragem e priorização de variantes.
+Um pipeline completo de chamada de variantes normalmente envolve muitas etapas, incluindo mapeamento para a referência (às vezes chamado de alinhamento genômico) e filtragem e priorização de variantes.
 Para simplificar, neste curso vamos focar apenas na parte de chamada de variantes.
 
 ### Métodos
 
 Vamos mostrar duas maneiras de aplicar chamada de variantes a amostras de sequenciamento de genoma completo para identificar SNPs e indels germinativos.
 Primeiro começaremos com uma **abordagem por amostra** simples que chama variantes independentemente de cada amostra.
-Em seguida, mostraremos uma **abordagem de chamada conjunta** mais sofisticada que analisa múltiplas amostras juntas, produzindo resultados mais precisos e informativos.
+Depois mostraremos uma **abordagem de chamada conjunta** mais sofisticada que analisa múltiplas amostras juntas, produzindo resultados mais precisos e informativos.
 
 Antes de mergulharmos na escrita de qualquer código de fluxo de trabalho para qualquer uma das abordagens, vamos testar os comandos manualmente em alguns dados de teste.
 
@@ -20,20 +22,20 @@ Antes de mergulharmos na escrita de qualquer código de fluxo de trabalho para q
 
 Fornecemos os seguintes dados e recursos relacionados:
 
-- **Um genoma de referência** consistindo de uma pequena região do cromossomo 20 humano (de hg19/b37) e seus arquivos acessórios (índice e dicionário de sequência).
+- **Um genoma de referência** consistindo de uma pequena região do cromossomo humano 20 (de hg19/b37) e seus arquivos acessórios (índice e dicionário de sequência).
 - **Três amostras de sequenciamento de genoma completo** correspondentes a um trio familiar (mãe, pai e filho), que foram reduzidas a uma pequena fatia de dados no cromossomo 20 para manter os tamanhos de arquivo pequenos.
-  Estes são dados de sequenciamento Illumina de reads curtos que já foram mapeados para o genoma de referência, fornecidos em formato [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map, uma versão comprimida de SAM, Sequence Alignment Map).
-- **Uma lista de intervalos genômicos**, i.e. coordenadas no genoma onde nossas amostras têm dados adequados para chamar variantes, fornecida em formato BED.
+  Estes são dados de sequenciamento Illumina de leituras curtas que já foram mapeados para o genoma de referência, fornecidos no formato [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map, uma versão comprimida de SAM, Sequence Alignment Map).
+- **Uma lista de intervalos genômicos**, ou seja, coordenadas no genoma onde nossas amostras têm dados adequados para chamar variantes, fornecida no formato BED.
 
 ### Software
 
-As duas principais ferramentas envolvidas são [Samtools](https://www.htslib.org/), um kit de ferramentas amplamente usado para manipular arquivos de alinhamento de sequência, e [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), um conjunto de ferramentas para descoberta de variantes desenvolvido no Broad Institute.
+As duas principais ferramentas envolvidas são [Samtools](https://www.htslib.org/), um kit de ferramentas amplamente usado para manipular arquivos de alinhamento de sequências, e [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), um conjunto de ferramentas para descoberta de variantes desenvolvido no Broad Institute.
 
 Essas ferramentas não estão instaladas no ambiente GitHub Codespaces, então vamos usá-las via contêineres (veja [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note "Nota"
 
-    Certifique-se de estar no diretório `nf4-science/genomics` para que a última parte do caminho mostrado quando você digita `pwd` seja `genomics`.
+    Certifique-se de estar no diretório `nf4-science/genomics` para que a última parte do caminho mostrada quando você digita `pwd` seja `genomics`.
 
 ---
 
@@ -42,7 +44,7 @@ Essas ferramentas não estão instaladas no ambiente GitHub Codespaces, então v
 A chamada de variantes por amostra processa cada amostra independentemente: o chamador de variantes examina os dados de sequenciamento de uma amostra por vez e identifica posições onde a amostra difere da referência.
 
 Nesta seção testamos os dois comandos que compõem a abordagem de chamada de variantes por amostra: indexar um arquivo BAM com Samtools e chamar variantes com GATK HaplotypeCaller.
-Estes são os comandos que vamos envolver em um fluxo de trabalho Nextflow na Parte 2 deste curso.
+Estes são os comandos que vamos encapsular em um fluxo de trabalho Nextflow na Parte 2 deste curso.
 
 1. Gerar um arquivo de índice para um arquivo de entrada BAM usando [Samtools](https://www.htslib.org/)
 2. Executar o GATK HaplotypeCaller no arquivo BAM indexado para gerar chamadas de variantes por amostra em VCF (Variant Call Format)
@@ -55,7 +57,7 @@ Começamos testando os dois comandos em apenas uma amostra.
 
 ### 1.1. Indexar um arquivo de entrada BAM com Samtools
 
-Arquivos de índice são uma característica comum de formatos de arquivo de bioinformática; eles contêm informações sobre a estrutura do arquivo principal que permite que ferramentas como GATK acessem um subconjunto dos dados sem ter que ler todo o arquivo.
+Arquivos de índice são uma característica comum dos formatos de arquivo de bioinformática; eles contêm informações sobre a estrutura do arquivo principal que permite que ferramentas como GATK acessem um subconjunto dos dados sem ter que ler o arquivo inteiro.
 Isso é importante por causa de quão grandes esses arquivos podem ficar.
 
 Arquivos BAM são frequentemente fornecidos sem um índice, então o primeiro passo em muitos fluxos de trabalho de análise é gerar um usando `samtools index`.
@@ -106,7 +108,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
 ```
 
 Seu prompt muda para algo como `(base) root@a1b2c3d4e5f6:/tmp#`, indicando que você está agora dentro do contêiner.
-Os arquivos de dados são acessíveis em `/data`.
+Os arquivos de dados estão acessíveis em `/data`.
 
 #### 1.1.3. Executar o comando de indexação
 
@@ -128,7 +130,7 @@ samtools index /data/bam/reads_mother.bam
     └── reads_son.bam
     ```
 
-Você deve agora ver um arquivo chamado `reads_mother.bam.bai` no mesmo diretório do arquivo de entrada BAM original.
+Você deve agora ver um arquivo chamado `reads_mother.bam.bai` no mesmo diretório que o arquivo de entrada BAM original.
 
 #### 1.1.4. Sair do contêiner Samtools
 
@@ -177,7 +179,7 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
     community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
     ```
 
-Isso deve ser mais rápido que o primeiro pull porque as duas imagens de contêiner compartilham a maioria de suas camadas.
+Isso deve ser mais rápido que o primeiro download porque as duas imagens de contêiner compartilham a maioria de suas camadas.
 
 #### 1.2.2. Iniciar o contêiner GATK interativamente
 
@@ -193,9 +195,9 @@ Seu prompt muda para indicar que você está agora dentro do contêiner GATK.
 
 A [documentação do GATK](https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller) nos fornece a linha de comando para executar para realizar chamada de variantes em um arquivo BAM.
 
-Precisamos fornecer o arquivo de entrada BAM (`-I`), bem como o genoma de referência (`-R`), um nome para o arquivo de saída (`-O`) e uma lista de intervalos genômicos a analisar (`-L`).
+Precisamos fornecer o arquivo de entrada BAM (`-I`) assim como o genoma de referência (`-R`), um nome para o arquivo de saída (`-O`) e uma lista de intervalos genômicos para analisar (`-L`).
 
-No entanto, não precisamos especificar o caminho para o arquivo de índice; a ferramenta procurará automaticamente por ele no mesmo diretório, com base na convenção estabelecida de nomenclatura e co-localização.
+No entanto, não precisamos especificar o caminho para o arquivo de índice; a ferramenta procurará automaticamente por ele no mesmo diretório, baseado na convenção estabelecida de nomenclatura e colocalização.
 O mesmo se aplica aos arquivos acessórios do genoma de referência (arquivos de índice e dicionário de sequência, `*.fai` e `*.dict`).
 
 ```bash
@@ -270,7 +272,7 @@ gatk HaplotypeCaller \
     Runtime.totalMemory()=203423744
     ```
 
-O arquivo de saída `reads_mother.vcf` é criado dentro do seu diretório de trabalho no contêiner, então você não o verá no explorador de arquivos do VS Code a menos que você altere o caminho do arquivo de saída.
+O arquivo de saída `reads_mother.vcf` é criado dentro do seu diretório de trabalho no contêiner, então você não o verá no explorador de arquivos do VS Code a menos que você mude o caminho do arquivo de saída.
 No entanto, é um arquivo de teste pequeno, então você pode usar `cat` para abri-lo e visualizar o conteúdo.
 Se você rolar até o início do arquivo, encontrará um cabeçalho composto de muitas linhas de metadados, seguido por uma lista de chamadas de variantes, uma por linha.
 
@@ -304,11 +306,11 @@ Isso conclui o teste de chamada de variantes por amostra.
 ## 2. Chamada conjunta em uma coorte
 
 A abordagem de chamada de variantes que acabamos de usar gera chamadas de variantes por amostra.
-Isso é adequado para analisar variantes de cada amostra isoladamente, mas fornece informações limitadas.
-Muitas vezes é mais interessante ver como as chamadas de variantes diferem entre múltiplas amostras.
-O GATK oferece um método alternativo chamado chamada de variantes conjunta para esse propósito.
+Isso é bom para olhar variantes de cada amostra isoladamente, mas produz informações limitadas.
+Muitas vezes é mais interessante olhar como as chamadas de variantes diferem entre múltiplas amostras.
+O GATK oferece um método alternativo chamado chamada conjunta de variantes para este propósito.
 
-A chamada de variantes conjunta envolve gerar um tipo especial de saída de variante chamado GVCF (para Genomic VCF) para cada amostra, então combinar os dados GVCF de todas as amostras e executar uma análise estatística de 'genotipagem conjunta'.
+A chamada conjunta de variantes envolve gerar um tipo especial de saída de variante chamado GVCF (para Genomic VCF) para cada amostra, depois combinar os dados GVCF de todas as amostras e executar uma análise estatística de 'genotipagem conjunta'.
 
 ![Análise conjunta](img/joint-calling.png)
 
@@ -317,15 +319,15 @@ Isso é crítico para o cálculo de genotipagem conjunta ([leitura adicional](ht
 
 O GVCF é produzido pelo GATK HaplotypeCaller, a mesma ferramenta que acabamos de testar, com um parâmetro adicional (`-ERC GVCF`).
 Combinar os GVCFs é feito com GATK GenomicsDBImport, que combina as chamadas por amostra em um armazenamento de dados (análogo a um banco de dados).
-A análise de 'genotipagem conjunta' real é então feita com GATK GenotypeGVCFs.
+A análise de 'genotipagem conjunta' propriamente dita é então feita com GATK GenotypeGVCFs.
 
 Aqui testamos os comandos necessários para gerar GVCFs e executar genotipagem conjunta.
-Estes são os comandos que vamos envolver em um fluxo de trabalho Nextflow na Parte 3 deste curso.
+Estes são os comandos que vamos encapsular em um fluxo de trabalho Nextflow na Parte 3 deste curso.
 
 1. Gerar um arquivo de índice para cada arquivo de entrada BAM usando Samtools
 2. Executar o GATK HaplotypeCaller em cada arquivo de entrada BAM para gerar um GVCF de chamadas de variantes genômicas por amostra
 3. Coletar todos os GVCFs e combiná-los em um armazenamento de dados GenomicsDB
-4. Executar genotipagem conjunta no armazenamento de dados GVCF combinado para produzir um VCF de nível de coorte
+4. Executar genotipagem conjunta no armazenamento de dados GVCF combinado para produzir um VCF em nível de coorte
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
@@ -348,7 +350,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
 
 Seu prompt muda para indicar que você está dentro do contêiner, com o diretório de dados montado como antes.
 
-#### 2.1.2. Executar o comando de indexação nas três amostras
+#### 2.1.2. Executar o comando de indexação em todas as três amostras
 
 Execute o comando de indexação em cada um dos três arquivos BAM:
 
@@ -370,7 +372,7 @@ samtools index /data/bam/reads_son.bam
     └── reads_son.bam.bai
     ```
 
-Isso deve produzir os arquivos de índice no mesmo diretório dos arquivos BAM correspondentes.
+Isso deve produzir os arquivos de índice no mesmo diretório que os arquivos BAM correspondentes.
 
 #### 2.1.3. Sair do contêiner Samtools
 
@@ -400,7 +402,7 @@ Seu prompt muda para indicar que você está dentro do contêiner GATK.
 
 Para produzir um VCF genômico (GVCF), adicionamos a opção `-ERC GVCF` ao comando base, que ativa o modo GVCF do HaplotypeCaller.
 
-Também alteramos a extensão do arquivo de saída de `.vcf` para `.g.vcf`.
+Também mudamos a extensão do arquivo de saída de `.vcf` para `.g.vcf`.
 Tecnicamente isso não é um requisito, mas é uma convenção fortemente recomendada.
 
 ```bash
@@ -488,7 +490,7 @@ Se você usar `cat` para visualizar o conteúdo, verá que é muito mais longo q
     20_10037292_10066351    14720   .       T       <NON_REF>       .       .       END=14737       GT:DP:GQ:MIN_DP:PL       0/0:42:99:37:0,100,1160
     ```
 
-Estas representam regiões não-variantes onde o chamador de variantes não encontrou evidência de variação, então ele capturou algumas estatísticas descrevendo seu nível de confiança na ausência de variação.
+Estas representam regiões não-variantes onde o chamador de variantes não encontrou evidência de variação, então capturou algumas estatísticas descrevendo seu nível de confiança na ausência de variação.
 Isso torna possível distinguir entre dois casos muito diferentes: (1) há dados de boa qualidade mostrando que a amostra é homozigota-referência, e (2) não há dados bons suficientes disponíveis para fazer uma determinação de qualquer forma.
 
 Em um GVCF, normalmente há muitas dessas linhas não-variantes, com um número menor de registros de variantes espalhados entre elas.
@@ -502,7 +504,7 @@ Tente executar `head -176` no GVCF para carregar apenas as primeiras 176 linhas 
     20_10037292_10066351    3481    .       T       <NON_REF>       .       .       END=3481        GT:DP:GQ:MIN_DP:PL       0/0:21:51:21:0,51,765
     ```
 
-A segunda linha mostra o primeiro registro de variante no arquivo, que corresponde à primeira variante no arquivo VCF que vimos anteriormente.
+A segunda linha mostra o primeiro registro de variante no arquivo, que corresponde à primeira variante no arquivo VCF que olhamos anteriormente.
 
 Assim como o VCF original, o arquivo de saída GVCF também é acompanhado por um arquivo de índice, chamado `reads_mother.g.vcf.idx`.
 
@@ -535,8 +537,8 @@ Vamos usar o mesmo contêiner na próxima etapa.
 
 ### 2.3. Executar genotipagem conjunta
 
-Agora que temos todos os GVCFs, podemos testar a abordagem de genotipagem conjunta para gerar chamadas de variantes para uma coorte de amostras.
-É um método de duas etapas que consiste em combinar os dados de todos os GVCFs em um armazenamento de dados, e então executar a análise de genotipagem conjunta propriamente dita para gerar o VCF final de variantes chamadas conjuntamente.
+Agora que temos todos os GVCFs, podemos experimentar a abordagem de genotipagem conjunta para gerar chamadas de variantes para uma coorte de amostras.
+É um método de duas etapas que consiste em combinar os dados de todos os GVCFs em um armazenamento de dados, depois executar a análise de genotipagem conjunta propriamente dita para gerar o VCF final de variantes chamadas conjuntamente.
 
 #### 2.3.1. Combinar todos os GVCFs por amostra
 
@@ -658,7 +660,7 @@ gatk GenotypeGVCFs \
     ```
 
 Isso cria o arquivo de saída VCF `family_trio.vcf` no diretório de trabalho atual no contêiner.
-É outro arquivo razoavelmente pequeno, então você pode usar `cat` neste arquivo para visualizar seu conteúdo, e rolar para cima para encontrar as primeiras linhas de variante.
+É outro arquivo razoavelmente pequeno, então você pode usar `cat` neste arquivo para visualizar seu conteúdo, e rolar para cima para encontrar as primeiras linhas de variantes.
 
 ??? abstract "Conteúdo do arquivo"
 
@@ -669,12 +671,12 @@ Isso cria o arquivo de saída VCF `family_trio.vcf` no diretório de trabalho at
     20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194
     ```
 
-Isso parece similar ao VCF que geramos anteriormente, exceto que desta vez temos informações de nível de genótipo para todas as três amostras.
+Isso parece similar ao VCF que geramos anteriormente, exceto que desta vez temos informações em nível de genótipo para todas as três amostras.
 As últimas três colunas no arquivo são os blocos de genótipo para as amostras, listadas em ordem alfabética.
 
-Se olharmos para os genótipos chamados para nosso trio familiar de teste para a primeira variante, vemos que o pai é heterozigoto-variante (`0/1`), e a mãe e o filho são ambos homozigoto-variante (`1/1`).
+Se olharmos os genótipos chamados para nosso trio familiar de teste para a primeira variante, vemos que o pai é heterozigoto-variante (`0/1`), e a mãe e o filho são ambos homozigotos-variante (`1/1`).
 
-Essa é, em última análise, a informação que estamos buscando extrair do conjunto de dados!
+Essa é, em última análise, a informação que estamos procurando extrair do conjunto de dados!
 
 #### 2.3.3. Sair do contêiner GATK
 
@@ -695,4 +697,4 @@ Você sabe como testar os comandos de indexação Samtools e chamada de variante
 
 ### O que vem a seguir?
 
-Aprenda como envolver esses mesmos comandos em fluxos de trabalho que usam contêineres para executar o trabalho.
+Aprenda como encapsular esses mesmos comandos em fluxos de trabalho que usam contêineres para executar o trabalho.
