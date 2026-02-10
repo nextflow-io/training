@@ -99,6 +99,26 @@ nextflow run 1-hello.nf --input 'Hello World!'
 
 If your console output looks something like that, then congratulations, you just ran your first Nextflow workflow!
 
+??? question "If it didn't work"
+
+    If that failed with an error that looks like this:
+
+    ```
+    Parameter `input` was specified on the command line or params file but is not declared in the script or config
+
+    -- Check script '1-hello.nf' at line: 23 or see '.nextflow.log' file for more details
+    ```
+
+    Then you're probably using the older v1 Nextflow language parser.
+    This was mentioned at the start of the course, but maybe you missed it.
+    Check the [Nextflow versions](../info/nxf_versions.md) help material.
+
+    In short, if you're using Nextflow `25.10` then you need to enable the v2 language parser:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 The most important output here is the last line, which is highlighted in the output above:
 
 ```console
