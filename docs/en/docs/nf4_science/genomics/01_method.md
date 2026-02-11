@@ -1167,7 +1167,7 @@ If we look at the genotypes called for our test family trio for the very first v
 
 That is ultimately the kind of information we're looking to extract from the dataset!
 
-#### 1.2.4. Move the output files
+#### 2.3.3. Move the output files
 
 As noted previously, anything that remains inside the container will be inaccessible to future work.
 Before we exit the container, we're going to move the GVCF files, the final multi-sample VCF and all their index files manually to the filesystem outside the container.
@@ -1209,7 +1209,7 @@ mv *.vcf* /data/vcf
 
 Once that's done, all the files are now accessible in your normal filesystem.
 
-#### 2.3.3. Exit the GATK container
+#### 2.3.4. Exit the GATK container
 
 To exit the container, type `exit`.
 
