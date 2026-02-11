@@ -1,4 +1,4 @@
-# Part 1: Method overview and manual testing
+# Part 1: Method overview
 
 There are multiple valid methods for processing and analyzing bulk RNAseq data.
 For this course, we are following the method described [here](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) by Drs. Simon Andrews and Laura Biggins at the [Babraham Institute](https://www.babraham.ac.uk/).
@@ -34,7 +34,7 @@ We provide the following data and related resources:
 
 The four main tools involved are [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for quality control metrics collection, [Trim Galore](https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/) for adapter trimming (bundles Cutadapt and FastQC for post-trimming QC), [HISAT2](http://daehwankimlab.github.io/hisat2/) for spliced alignment to a reference genome, and [MultiQC](https://multiqc.info/) for aggregated QC report generation.
 
-These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers retrieved via the Seqera Containers service (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note
 
@@ -55,11 +55,11 @@ We start by testing these commands on just one sample.
 
 ### 1.1. QC and adapter trimming
 
-We're going to pull a container image that has both `fastqc` and `trim_galore` installed, spin it up interactively and run the QC and trimming commands on one of the example data files.
+First, we want to run the QC and trimming commands on one of the example data files.
 
 #### 1.1.1. Pull the container
 
-Run the `docker pull` command to download the Trim Galore container image:
+Let's pull a container image that has both `fastqc` and `trim_galore` installed:
 
 ```bash
 docker pull community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
@@ -99,15 +99,21 @@ The `-v ./data:/data` option mounts our local `data/` directory so we can access
 docker run -it -v ./data:/data community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
 ```
 
+??? success "Command output"
+
+    ```console
+    (base) root@b645838b3314:/tmp#
+    ```
+
 Your prompt will change to something like `(base) root@b645838b3314:/tmp#`, which indicates that you are now inside the container.
 
-Verify that you can see the data files:
+Verify that you can see the sequence data files under `/data/reads`:
 
 ```bash
 ls /data/reads
 ```
 
-??? success "Command output"
+??? abstract "Directory contents"
 
     ```console
     ENCSR000COQ1_1.fastq.gz  ENCSR000COQ2_2.fastq.gz  ENCSR000COR2_1.fastq.gz  ENCSR000CPO1_2.fastq.gz
@@ -115,11 +121,14 @@ ls /data/reads
     ENCSR000COQ2_1.fastq.gz  ENCSR000COR1_2.fastq.gz  ENCSR000CPO1_1.fastq.gz  ENCSR000CPO2_2.fastq.gz
     ```
 
-The data files are accessible under `/data/reads`.
+With that, you are ready to try your first command.
 
 #### 1.1.3. Run the FastQC command
 
-Now run `fastqc` to collect quality control metrics on the read data.
+The method referenced above gives us the command line to run QC on a single file.
+We only need to provide the input file; the tool will automatically generate output files in the same directory as the original data.
+
+Run the `fastqc` command on one data file:
 
 ```bash
 fastqc /data/reads/ENCSR000COQ1_1.fastq.gz
@@ -159,23 +168,25 @@ You can find the output files in the same directory as the original data:
 ls /data/reads/ENCSR000COQ1_1_fastqc*
 ```
 
-```console title="Output"
-/data/reads/ENCSR000COQ1_1_fastqc.html  /data/reads/ENCSR000COQ1_1_fastqc.zip
-```
+??? abstract "Directory contents"
+
+    ```console
+    /data/reads/ENCSR000COQ1_1_fastqc.html  /data/reads/ENCSR000COQ1_1_fastqc.zip
+    ```
 
 You should see an HTML report and a ZIP archive containing the QC metrics.
+That completes the testing of the first step.
 
 #### 1.1.4. Trim adapter sequences with Trim Galore
 
-Now run `trim_galore`, which bundles Cutadapt and FastQC, to trim the adapter sequences and collect post-trimming QC metrics.
+Now let's run `trim_galore`, which bundles Cutadapt and FastQC, to trim the adapter sequences and collect post-trimming QC metrics.
+As noted above, the software is included in the same container, so no change needed there.
+
+The command is straightforward; we simply need to add the `--fastqc` flag to automatically run a QC collection step after trimming is complete.
 
 ```bash
 trim_galore --fastqc /data/reads/ENCSR000COQ1_1.fastq.gz
 ```
-
-The `--fastqc` flag causes the command to automatically run a QC collection step after trimming is complete.
-
-The output is very verbose; the most relevant lines are highlighted.
 
 ??? success "Command output"
 
@@ -307,18 +318,21 @@ The output is very verbose; the most relevant lines are highlighted.
     Analysis complete for ENCSR000COQ1_1_trimmed.fq.gz
     ```
 
+The output is very verbose, so we've highlighted the most relevant lines in the example above.
 You can find the output files in the working directory:
 
 ```bash
 ls ENCSR000COQ1_1*
 ```
 
-```console title="Output"
-ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.html
-ENCSR000COQ1_1_trimmed.fq.gz                 ENCSR000COQ1_1_trimmed_fastqc.zip
-```
+??? abstract "Directory contents"
 
-The trimmed reads, trimming report and post-trimming QC files are all in the working directory.
+    ```console
+    ENCSR000COQ1_1.fastq.gz_trimming_report.txt  ENCSR000COQ1_1_trimmed_fastqc.html
+    ENCSR000COQ1_1_trimmed.fq.gz                 ENCSR000COQ1_1_trimmed_fastqc.zip
+    ```
+
+This includes the trimmed reads, trimming report and post-trimming QC files.
 
 #### 1.1.5. Move the output files
 
@@ -329,7 +343,11 @@ mkdir /data/trimmed
 mv ENCSR000COQ1_1* /data/trimmed
 ```
 
-The files are now stored on the mounted filesystem.
+??? abstract "Directory contents"
+
+    TODO: paste tree output here
+
+The files are now accessible in your normal filesystem.
 
 #### 1.1.6. Exit the container
 
@@ -339,23 +357,21 @@ To exit the container, type `exit`.
 exit
 ```
 
-Your prompt should be back to normal, indicating you are back in the host environment.
+Your prompt should go back to normal; that completes the testing of the first two steps.
 
 ### 1.2. Align reads to the reference genome
 
-We're going to pull a container image that has `hisat2` and `samtools` installed, spin it up interactively and run the alignment command to align the trimmed RNAseq reads to a reference genome.
+Next, we want to run the alignment command to align the trimmed RNAseq reads to a reference genome.
 
 #### 1.2.1. Pull the container
 
-Run the `docker pull` command to download the HISAT2 container image:
+Let's pull a container image that has `hisat2` and `samtools` installed:
 
 ```bash
 docker pull community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
 ```
 
 ??? success "Command output"
-
-    Some layers show `Already exists` because they are shared with the Trim Galore container image we pulled earlier.
 
     ```console
     Unable to find image 'community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e' locally
@@ -377,7 +393,8 @@ docker pull community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
     Status: Downloaded newer image for community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
     ```
 
-This should be faster than the first pull because the two container images share most of their layers.
+You'll notice that some layers show `Already exists` because they are shared with the Trim Galore container image we pulled earlier.
+As a result, this pull should go faster than the first one.
 
 #### 1.2.2. Spin up the container interactively
 
@@ -396,8 +413,6 @@ HISAT2 requires the genome reference to be provided in a very specific format, a
 ```bash
 hisat2-build /data/genome.fa genome_index
 ```
-
-The output is very verbose; the most relevant lines are highlighted.
 
 ??? success "Command output"
 
@@ -634,36 +649,42 @@ The output is very verbose; the most relevant lines are highlighted.
     Total time for call to driver() for forward index: 00:00:12
     ```
 
+The output is very verbose, so we've highlighted some relevant lines in the example above.
+
 This creates multiple genome index files, which you can find in the working directory.
 
 ```bash
 ls genome_index.*
 ```
 
-```console title="Output"
-genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2
-genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
-```
+??? abstract "Directory contents"
 
-We'll use these in a moment, but first we generate a gzipped tarball with these genome index files.
-We'll need them later and generating these is not typically something we want to do as part of a workflow.
+    ```console
+    genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2
+    genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
+    ```
+
+We'll need these files later, and generating them is not typically something we want to do as part of a workflow, so we're going to generate a gzipped tarball containing the genome index files that we can easily pass around as needed.
 
 ```bash
 tar -czvf /data/genome_index.tar.gz genome_index.*
 ```
 
-```console title="Output"
-genome_index.1.ht2
-genome_index.2.ht2
-genome_index.3.ht2
-genome_index.4.ht2
-genome_index.5.ht2
-genome_index.6.ht2
-genome_index.7.ht2
-genome_index.8.ht2
-```
+??? success "Command output"
 
-This stores a `genome_index.tar.gz` tarball containing the genome index files in the `data/` directory on our filesystem, which will come in handy in Part 2 of this course.
+    ```console
+    genome_index.1.ht2
+    genome_index.2.ht2
+    genome_index.3.ht2
+    genome_index.4.ht2
+    genome_index.5.ht2
+    genome_index.6.ht2
+    genome_index.7.ht2
+    genome_index.8.ht2
+    ```
+
+We'll move the resulting `genome_index.tar.gz` tarball containing the genome index files to the `data/` directory on our filesystem in a few minutes.
+That will come in handy in Part 2 of this course.
 
 #### 1.2.4. Run the alignment command
 
@@ -689,7 +710,7 @@ hisat2 -x genome_index -U /data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz \
     ```
 
 This runs almost instantly because it's a very small test file.
-At real scale this could take a lot longer.
+At full scale, this could take a lot longer.
 
 Once again you can find the output files in the working directory:
 
@@ -697,22 +718,24 @@ Once again you can find the output files in the working directory:
 ls ENCSR000COQ1_1*
 ```
 
-```console title="Output"
-ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
-```
+??? abstract "Directory contents"
+
+    ```console title="Output"
+    ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
+    ```
 
 The alignment produced a BAM file and a log file with alignment statistics.
 
 #### 1.2.5. Move the output files
 
-As before, move the output files to a directory on the mounted filesystem so they remain accessible after we exit.
+As before, move the output files to a directory on the mounted filesystem so they remain accessible after we exit the container.
 
 ```bash
 mkdir /data/aligned
 mv ENCSR000COQ1_1* /data/aligned
 ```
 
-The files are now stored on the mounted filesystem.
+With that done, we have everything we need.
 
 #### 1.2.6. Exit the container
 
@@ -722,8 +745,13 @@ To exit the container, type `exit`.
 exit
 ```
 
-Your prompt should be back to normal.
-That concludes the single-sample processing test.
+Your prompt should go back to normal.
+That concludes the single-sample processing testing run.
+
+!!! example
+
+    Feel free to move on to [Part 2](./02_single-sample.md) right away if you'd like to get started implementing this analysis as a Nextflow workflow.
+    You'll just need to come back to complete the second round of testing before moving on to Part 3.
 
 ---
 

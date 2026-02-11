@@ -1,10 +1,10 @@
 ---
-title: Nextflow run for Imaging
+title: Imaging
 hide:
   - toc
 ---
 
-# Nextflow run for Imaging
+# Nextflow for Imaging
 
 This training course is intended for researchers in imaging and spatial biology who are interested in running and customizing data analysis pipelines.
 It teaches foundational Nextflow concepts related to running, organizing and configuring workflows using [nf-core/molkart](https://nf-co.re/molkart), a pipeline for processing Molecular Cartography spatial transcriptomics data.

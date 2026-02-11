@@ -1,5 +1,5 @@
 ---
-title: Nextflow for RNAseq
+title: RNAseq
 hide:
   - toc
 page_type: index_page

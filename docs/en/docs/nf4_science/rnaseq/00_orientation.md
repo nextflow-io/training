@@ -109,20 +109,18 @@ tree . -L 3
 Click on the colored box to expand the section and view its contents.
 We use collapsible sections like this to display expected command output as well as directory and file contents in a concise way.
 
-- **The `rnaseq.nf` file** is a workflow script that you'll build up over the course.
+- **The `rnaseq.nf` file** is a scaffold for a workflow script that you'll build up as you go through the course.
+
+- **The `modules` directory** contains scaffolds for process module that you'll fill in during the course.
 
 - **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
   You can ignore it for now.
 
-- **The `data` directory** contains input data and related resources:
-
-  - _A reference genome_ (`genome.fa`): a small region of the human chromosome 20 (from hg19/b37).
-  - _RNAseq data_ (`reads/`): FASTQ files that have been subset to a small region to keep the file sizes down.
-  - _CSV files_ (`single-end.csv` and `paired-end.csv`): samplesheets listing the IDs and paths of the example data files.
+- **The `data` directory** contains input data and related resources, described later in the course.
 
 - **The `solutions` directory** contains completed workflow scripts and modules that result from each step of the course.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
-  The number in the filename corresponds to the step of the relevant part of the course.
+  The Part 2 solution can be used as a starting point for Part 3.
 
 ## Readiness checklist
 
@@ -134,4 +132,4 @@ Think you're ready to dive in?
 
 If you can check all the boxes, you're good to go.
 
-**To continue to [Part 1: Method overview and manual testing](./01_method.md), click on the arrow in the bottom right corner of this page.**
+**To continue to [Part 1: Method overview](./01_method.md), click on the arrow in the bottom right corner of this page.**
