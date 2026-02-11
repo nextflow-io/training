@@ -23,7 +23,7 @@ This automates the steps from the first section of [Part 1: Method overview](./0
 
 As a starting point, we provide you with a workflow file, `rnaseq.nf`, that outlines the main parts of the workflow, as well as four module files in the `modules/` directory (`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf`, and `multiqc.nf`) that outline the structure of each process.
 
-??? abstract "Scaffold files"
+??? full-code "Scaffold files"
 
     ```groovy title="rnaseq.nf"
     #!/usr/bin/env nextflow

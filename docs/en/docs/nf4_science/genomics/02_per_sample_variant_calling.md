@@ -18,7 +18,7 @@ This automates the steps from the first section of [Part 1: Method overview](./0
 
 As a starting point, we provide you with a workflow file, `genomics.nf`, that outlines the main parts of the workflow, as well as two module files, `samtools_index.nf` and `gatk_haplotypecaller.nf`, that outline the structure of each process.
 
-??? abstract "Scaffold files"
+??? full-code "Scaffold files"
 
     ```groovy title="genomics.nf"
     #!/usr/bin/env nextflow
