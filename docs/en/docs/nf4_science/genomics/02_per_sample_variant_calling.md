@@ -1344,6 +1344,6 @@ More generally, you've learned how to use essential Nextflow components and logi
 
 ### What's next?
 
-Celebrate your success and take an extra long break!
+Take a break! That was a lot.
 
-In the next part of this course, you'll learn how to transform this simple per-sample variant calling workflow to apply joint variant calling to the data.
+When you're feeling refreshed, head on to [Part 3](./03_joint_calling.md), where you'll learn how to transform this simple per-sample variant calling workflow to apply joint variant calling to the data.

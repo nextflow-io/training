@@ -1228,4 +1228,4 @@ You know how to test the Samtools indexing and GATK variant calling commands in 
 
 ### What's next?
 
-Learn how to wrap those same commands into workflows that use containers to execute the work.
+Take a break, then head on to [Part 2](./02_per_sample_variant_calling.md) to learn how to wrap those same commands into workflows that use containers to execute the work.

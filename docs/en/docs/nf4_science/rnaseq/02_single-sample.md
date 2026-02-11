@@ -1115,4 +1115,6 @@ You know how to wrap all the core steps to process single-end RNAseq samples ind
 
 ### What's next?
 
-Learn how to modify the workflow to process multiple samples in parallel, aggregate QC reports across all steps for all samples, and enable running the workflow on paired-end RNAseq data.
+Take a break! That was a lot.
+
+When you're feeling refreshed, head on to [Part 3](./03_multi-sample.md), where you'll learn how to modify the workflow to process multiple samples in parallel, aggregate QC reports across all steps for all samples, and enable running the workflow on paired-end RNAseq data.

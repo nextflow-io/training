@@ -984,6 +984,6 @@ You know how to adapt a single-sample workflow to parallelize processing of mult
 
 ### What's next?
 
-Congratulations, you've completed the Nextflow For RNAseq mini-course! Celebrate your success and take a well deserved break!
+Give yourself a big pat on the back! You have completed the Nextflow for RNAseq course.
 
-Next, we ask you to complete a very short survey about your experience with this training course, then we'll take you to a page with links to further training resources and helpful links.
+Head on to the final [course summary](./next_steps.md) to review what you learned and find out what comes next.

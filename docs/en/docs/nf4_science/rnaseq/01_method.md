@@ -1089,4 +1089,4 @@ You know how to run the FastQC, Trim Galore, HISAT2 and MultiQC commands in thei
 
 ### What's next?
 
-Learn how to wrap those same commands into workflows that use containers to execute the work.
+Take a break, then head on to [Part 2](./02_single-sample.md) to learn how to wrap those same commands into workflows that use containers to execute the work.
