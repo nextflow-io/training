@@ -31,7 +31,7 @@ The two main tools involved are [Samtools](https://www.htslib.org/), a widely us
 
 These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers retrieved via the Seqera Containers service (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
-!!! note
+!!! tip
 
     Make sure you're in the `nf4-science/genomics` directory so that the last part of the path shown when you type `pwd` is `genomics`.
 
@@ -362,9 +362,9 @@ mkdir /data/vcf
 mv reads_mother.vcf* /data/vcf
 ```
 
-??? abstract "Directory contents" hl_lines="5 13-15"
+??? abstract "Directory contents"
 
-    ```console
+    ```console hl_lines="5 13-15"
     data/
     ├── bam
     │   ├── reads_father.bam
@@ -395,7 +395,7 @@ exit
 Your prompt should go back to normal.
 That concludes the per-sample variant calling test.
 
-!!! example
+!!! example "Write it as a workflow!"
 
     Feel free to move on to [Part 2](./02_per_sample_variant_calling.md) right away if you'd like to get started implementing this analysis as a Nextflow workflow.
     You'll just need to come back to complete the second round of testing before moving on to Part 3.

@@ -6,7 +6,7 @@ For this course, we are following the method described [here](https://www.bioinf
 Our goal is to develop a workflow that implements the following processing steps: run initial quality control on reads in a bulk RNAseq sample, trim adapter sequences from the reads, align the reads to a reference genome, and produce a comprehensive quality control (QC) report.
 
 <figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/rnaseq/img/preprocess.svg"
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-03.svg"
 </figure>
 
 - **FASTQC:** Perform QC on the read data before trimming using FastQC
@@ -16,7 +16,7 @@ Our goal is to develop a workflow that implements the following processing steps
 
 ### Methods
 
-We're going to show you two contexts for applying these processing steps.
+We're going to show you how to apply these processing steps in two phases.
 First we'll start with **single-sample processing** that runs the QC, trimming and alignment tools on one sample.
 Then we'll extend to **multi-sample processing** that runs the same tools on multiple samples and generates an aggregated quality control report.
 
@@ -36,7 +36,7 @@ The four main tools involved are [FastQC](https://www.bioinformatics.babraham.ac
 
 These tools are not installed in the GitHub Codespaces environment, so we'll use them via containers retrieved via the Seqera Containers service (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
-!!! note
+!!! tip
 
      Make sure you're in the `nf4-science/rnaseq` directory. The last part of the path shown when you type `pwd` should be `rnaseq`.
 
@@ -50,6 +50,10 @@ These are the commands we'll wrap into a Nextflow workflow in Part 2 of this cou
 1. Run initial QC on a FASTQ file using FastQC
 2. Trim adapter sequences and run post-trimming QC using Trim Galore
 3. Align the trimmed reads to the reference genome using HISAT2
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-02.svg"
+</figure>
 
 We start by testing these commands on just one sample.
 
@@ -754,7 +758,7 @@ exit
 Your prompt should go back to normal.
 That concludes the single-sample processing testing run.
 
-!!! example
+!!! example "Write it as a workflow!"
 
     Feel free to move on to [Part 2](./02_single-sample.md) right away if you'd like to get started implementing this analysis as a Nextflow workflow.
     You'll just need to come back to complete the second round of testing before moving on to Part 3.
@@ -775,6 +779,10 @@ These are the commands we'll wrap into a Nextflow workflow in Part 3 of this cou
 1. Run QC and trimming on additional samples using Trim Galore
 2. Run alignment on additional samples using HISAT2
 3. Aggregate all QC reports into a comprehensive report using MultiQC
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-method-03.svg"
+</figure>
 
 ### 2.1. QC and trim additional samples
 
@@ -807,13 +815,35 @@ trim_galore --fastqc /data/reads/ENCSR000COR1_1.fastq.gz
 
 Once this completes, you should have Trim Galore output files for both samples in the working directory.
 
-#### 2.1.3. Move the output files and exit
+#### 2.1.3. Move the output files
 
 Move the Trim Galore output files to the same directory we used in section 1.
 
 ```bash
 mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/trimmed
 ```
+
+??? abstract "Directory contents"
+
+    ```console
+    /data/trimmed
+    ├── ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+    ├── ENCSR000COQ1_1_trimmed.fq.gz
+    ├── ENCSR000COQ1_1_trimmed_fastqc.html
+    ├── ENCSR000COQ1_1_trimmed_fastqc.zip
+    ├── ENCSR000COQ2_1.fastq.gz_trimming_report.txt
+    ├── ENCSR000COQ2_1_trimmed.fq.gz
+    ├── ENCSR000COQ2_1_trimmed_fastqc.html
+    ├── ENCSR000COQ2_1_trimmed_fastqc.zip
+    ├── ENCSR000COR1_1.fastq.gz_trimming_report.txt
+    ├── ENCSR000COR1_1_trimmed.fq.gz
+    ├── ENCSR000COR1_1_trimmed_fastqc.html
+    └── ENCSR000COR1_1_trimmed_fastqc.zip
+    ```
+
+The files are now accessible in your normal filesystem.
+
+#### 2.1.4. Exit the container
 
 To exit the container, type `exit`.
 
@@ -888,13 +918,29 @@ hisat2 -x genome_index -U /data/trimmed/ENCSR000COR1_1_trimmed.fq.gz \
 
 Once this completes, you should have BAM and log files for both samples in the working directory.
 
-#### 2.2.4. Move the output files and exit
+#### 2.2.4. Move the output files
 
 Move the alignment output files to the same directory we used in section 1.
 
 ```bash
 mv ENCSR000COQ2_1* ENCSR000COR1_1* /data/aligned
 ```
+
+??? abstract "Directory contents"
+
+    ```console
+    /data/aligned
+    ├── ENCSR000COQ1_1_trimmed.bam
+    ├── ENCSR000COQ1_1_trimmed.hisat2.log
+    ├── ENCSR000COQ2_1_trimmed.bam
+    ├── ENCSR000COQ2_1_trimmed.hisat2.log
+    ├── ENCSR000COR1_1_trimmed.bam
+    └── ENCSR000COR1_1_trimmed.hisat2.log
+    ```
+
+The files are now accessible in your normal filesystem.
+
+#### 2.2.5. Exit the container
 
 To exit the container, type `exit`.
 

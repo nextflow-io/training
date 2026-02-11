@@ -2,46 +2,159 @@
 
 In this part of the course, we're going to write the simplest possible workflow that wraps all the commands we ran in Part 1 to automate running them, and we'll just aim to process one sample at a time.
 
-We'll do this in three stages:
-
-1. Write a single-stage workflow that runs the initial QC step
-2. Add adapter trimming and post-trimming QC
-3. Add alignment to the reference genome
-
 !!! warning "Prerequisite"
 
-    You must work through Part 1 of the course before starting this lesson.
+    You must work through [Part 1: Method overview](./01_method.md) before starting this lesson.
     Specifically, working through section 1.2.3 creates the genome index file (`data/genome_index.tar.gz`) required for the alignment step in this lesson.
 
+## Assignment
+
+In this part of the course, we're going to develop a workflow that does the following:
+
+1. Run quality control (FastQC) on input reads
+2. Trim adapters and run post-trimming QC (Trim Galore)
+3. Align trimmed reads to a reference genome (HISAT2)
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-02.svg"
+</figure>
+
+This automates the steps from the first section of [Part 1: Method overview](./01_method.md#1-single-sample-processing), where you ran these commands manually in their containers.
+
 As a starting point, we provide you with a workflow file, `rnaseq.nf`, that outlines the main parts of the workflow, as well as four module files in the `modules/` directory (`fastqc.nf`, `trim_galore.nf`, `hisat2_align.nf`, and `multiqc.nf`) that outline the structure of each process.
+
+??? abstract "Scaffold files"
+
+    ```groovy title="rnaseq.nf"
+    #!/usr/bin/env nextflow
+
+    // Module INCLUDE statements
+
+    /*
+     * Pipeline parameters
+     */
+
+    // Primary input
+
+    workflow {
+
+        main:
+        // Create input channel
+
+        // Call processes
+
+        publish:
+        // Declare outputs to publish
+    }
+
+    output {
+        // Configure publish targets
+    }
+    ```
+
+    ```groovy title="modules/fastqc.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Run FastQC on input reads
+     */
+    process FASTQC {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
+    ```groovy title="modules/trim_galore.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Trim adapters and run post-trimming QC
+     */
+    process TRIM_GALORE {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
+    ```groovy title="modules/hisat2_align.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Align reads to a reference genome
+     */
+    process HISAT2_ALIGN {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
+    ```groovy title="modules/multiqc.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Aggregate QC reports with MultiQC
+     */
+    process MULTIQC {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
 These files are not functional; their purpose is just to serve as scaffolds for you to fill in with the interesting parts of the code.
 
-```groovy title="rnaseq.nf" linenums="1"
-#!/usr/bin/env nextflow
+## Lesson plan
 
-// Module INCLUDE statements
+In order to make the development process more educational, we've broken this down into three stages:
 
-/*
- * Pipeline parameters
- */
+1. **Write a single-stage workflow that runs the initial QC step.**
+   This covers setting up a CLI parameter, creating an input channel, writing a process module, and configuring output publishing.
+2. **Add adapter trimming and post-trimming QC.**
+   This introduces chaining processes by connecting one process's output to another's input.
+3. **Add alignment to the reference genome.**
+   This covers handling additional reference inputs and working with compressed archives.
 
-// Primary input
+Each step focuses on a specific aspect of workflow development.
 
-workflow {
+!!! tip
 
-    main:
-    // Create input channel
-
-    // Call processes
-
-    publish:
-    // Declare outputs to publish
-}
-
-output {
-    // Configure publish targets
-}
-```
+     Make sure you're in the correct working directory:
+     `cd /workspaces/training/nf4-science/rnaseq`
 
 ---
 

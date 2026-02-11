@@ -14,14 +14,86 @@ In this part of the course, we're going to develop a workflow that does the foll
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
-This replicates the steps from Part 1, where you ran these commands manually in their containers.
+This automates the steps from the first section of [Part 1: Method overview](./01_method.md#1-per-sample-variant-calling), where you ran these commands manually in their containers.
 
-As a starting point, we provide you with a workflow file, `genomics.nf`, that outlines the main parts of the workflow, as well as two module files, samtools_index.nf and gatk_haplotypecaller.nf, that outline the structure of the modules.
+As a starting point, we provide you with a workflow file, `genomics.nf`, that outlines the main parts of the workflow, as well as two module files, `samtools_index.nf` and `gatk_haplotypecaller.nf`, that outline the structure of each process.
+
+??? abstract "Scaffold files"
+
+    ```groovy title="genomics.nf"
+    #!/usr/bin/env nextflow
+
+    // Module INCLUDE statements
+
+    /*
+     * Pipeline parameters
+     */
+
+    // Primary input
+
+    workflow {
+
+        main:
+        // Create input channel
+
+        // Call processes
+
+        publish:
+        // Declare outputs to publish
+    }
+
+    output {
+        // Configure publish targets
+    }
+    ```
+
+    ```groovy title="modules/samtools_index.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Generate BAM index file
+     */
+    process SAMTOOLS_INDEX {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
+    ```groovy title="modules/gatk_haplotypecaller.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Call variants with GATK HaplotypeCaller
+     */
+    process GATK_HAPLOTYPECALLER {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
 These files are not functional; their purpose is just to serve as scaffolds for you to fill in with the interesting parts of the code.
 
 ## Lesson plan
 
-In order to make the development process more educational, we've broken this down into four steps:
+In order to make the development process more educational, we've broken this down into four stages:
 
 1. **Write a single-stage workflow that runs Samtools index on a BAM file.**
    This covers creating a module, importing it, and calling it in a workflow.
@@ -33,6 +105,11 @@ In order to make the development process more educational, we've broken this dow
    This demonstrates a common pattern for providing inputs in bulk.
 
 Each step focuses on a specific aspect of workflow development.
+
+!!! tip
+
+     Make sure you're in the correct working directory:
+     `cd /workspaces/training/nf4-science/genomics`
 
 ---
 
@@ -1148,12 +1225,12 @@ NA12877,/workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
 NA12882,/workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
 ```
 
-As you can see, we listed one file path per line, and they are absolute paths.
+This CSV file includes a header line that names the columns.
 
-!!! note
+!!! warning
 
-    The files we are using here are just on your GitHub Codespaces's local filesystem, but we could also point to files in cloud storage.
-    If you are not using the provided Codespaces environment, you may need to adapt the file paths to match your local setup.
+    The file paths in the CSV are absolute paths that must match your environment.
+    If you are not running this in the training environment we provide, you will need to update the paths to match your system.
 
 ### 4.2. Update the parameter and test profile
 

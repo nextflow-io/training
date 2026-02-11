@@ -1,26 +1,11 @@
 # Part 3: Joint calling on a cohort
 
-In Part 2, you built a per-sample variant calling pipeline that processed each sample's data independently.
-Now we're going to extend it to implement joint variant calling, as covered in [Part 1](01_method.md).
-
-## Assignment
-
-In this part of the course, we're going to extend the workflow to do the following:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
-</figure>
-
-1. Generate an index file for each BAM input file using Samtools
-2. Run the GATK HaplotypeCaller on each BAM input file to generate a GVCF of per-sample genomic variant calls
-3. Collect all the GVCFs and combine them into a GenomicsDB data store
-4. Run joint genotyping on the combined GVCF data store to produce a cohort-level VCF
-
-This part builds directly on the workflow produced by Part 2.
+Previously, you built a per-sample variant calling pipeline that processed each sample's data independently.
+Now we're going to extend it to implement joint variant calling, as described in [Part 1](01_method.md) (multi-sample use case).
 
 ??? info "How to begin from this section"
 
-    This section of the course assumes you have completed [Part 2: Per-sample variant calling](./02_per_sample_variant_calling.md) and have a working `genomics.nf` pipeline.
+    This section of the course assumes you have completed [Part 1: Method Overview](./01_method.md), [Part 2: Per-sample variant calling](./02_per_sample_variant_calling.md) and have a working `genomics.nf` pipeline.
 
     If you did not complete Part 2 or want to start fresh for this part, you can use the Part 2 solution as your starting point.
     Run these commands from inside the `nf4-science/genomics/` directory:
@@ -38,16 +23,33 @@ This part builds directly on the workflow produced by Part 2.
     nextflow run genomics.nf -profile test
     ```
 
+## Assignment
+
+In this part of the course, we're going to extend the workflow to do the following:
+
+1. Generate an index file for each BAM input file using Samtools
+2. Run the GATK HaplotypeCaller on each BAM input file to generate a GVCF of per-sample genomic variant calls
+3. Collect all the GVCFs and combine them into a GenomicsDB data store
+4. Run joint genotyping on the combined GVCF data store to produce a cohort-level VCF
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
+</figure>
+
+This implements the method described in [Part 1: Method Overview](./01_method.md) (second section covering the multi-sample use case) and part builds directly on the workflow produced by [Part 2: Per-sample variant calling](./02_per_sample_variant_calling.md).
+
 ## Lesson plan
 
-We've broken this down into two steps:
+We've broken this down into two stages:
 
 1. **Modify the per-sample variant calling step to produce a GVCF.**
    This covers updating process commands and outputs.
 2. **Add a joint genotyping step that combines and genotypes the per-sample GVCFs.**
    This introduces the `collect()` operator, Groovy closures for command-line construction, and multi-command processes.
 
-!!! note
+This automates the steps from the second section of [Part 1: Method overview](./01_method.md#2-joint-calling-on-a-cohort), where you ran these commands manually in their containers.
+
+!!! tip
 
      Make sure you're in the correct working directory:
      `cd /workspaces/training/nf4-science/genomics`

@@ -1,19 +1,12 @@
 # Part 3: Multi-sample paired-end implementation
 
-In this final part of the course, we're going to take our simple workflow to the next level by turning it into a powerful batch automation tool to handle arbitrary numbers of samples.
-And while we're at it, we're also going to switch it to expect paired-end data, which is more common in newer studies.
-
-We'll do this in three stages:
-
-1. Make the workflow accept multiple input samples and parallelize execution
-2. Add comprehensive QC report generation
-3. Switch to paired-end RNAseq data
-
-This part builds directly on the workflow produced by Part 2.
+Previously, you built a per-sample variant calling pipeline that processed each sample's data independently.
+In this part of the course, we're going to take our simple workflow to the next level by turning it into a powerful batch automation tool to handle arbitrary numbers of samples.
+And while we're at it, we're also going to update it to expect paired-end data, which is more common in newer studies.
 
 ??? info "How to begin from this section"
 
-    This section of the course assumes you have completed [Part 2: Single-sample implementation](./02_single-sample.md) and have a working `rnaseq.nf` pipeline with filled-in module files.
+    This section of the course assumes you have completed [Part 1: Method Overview](./01_method.md), [Part 2: Single-sample implementation](./02_single-sample.md) and have a working `rnaseq.nf` pipeline with filled-in module files.
 
     If you did not complete Part 2 or want to start fresh for this part, you can use the Part 2 solution as your starting point.
     Run these commands from inside the `nf4-science/rnaseq/` directory:
@@ -33,6 +26,38 @@ This part builds directly on the workflow produced by Part 2.
     nextflow run rnaseq.nf -profile test
     ```
 
+## Assignment
+
+In this part of the course, we're going to extend the workflow to do the following:
+
+1. Read sample information from a CSV samplesheet
+2. Run per-sample QC, trimming, and alignment on all samples in parallel
+3. Aggregate all QC reports into a comprehensive MultiQC report
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-03.svg"
+</figure>
+
+This automates the steps from the second section of [Part 1: Method overview](./01_method.md#2-multi-sample-qc-aggregation), where you ran these commands manually in their containers.
+
+## Lesson plan
+
+We've broken this down into three stages:
+
+1. **Make the workflow accept multiple input samples.**
+   This covers switching from a single file path to a CSV samplesheet, parsing it with `splitCsv()`, and running all existing processes on multiple samples.
+2. **Add comprehensive QC report generation.**
+   This introduces the `collect()` operator to aggregate outputs across samples, and adds a MultiQC process to produce a combined report.
+3. **Switch to paired-end RNAseq data.**
+   This covers adapting processes for paired-end inputs (using tuples), creating paired-end modules, and setting up a separate test profile.
+
+This implements the method described in [Part 1: Method Overview](./01_method.md) (second section covering the multi-sample use case) and builds directly on the workflow produced by Part 2.
+
+!!! tip
+
+     Make sure you're in the correct working directory:
+     `cd /workspaces/training/nf4-science/rnaseq`
+
 ---
 
 ## 1. Make the workflow accept multiple input samples
@@ -40,7 +65,6 @@ This part builds directly on the workflow produced by Part 2.
 To run on multiple samples, we need to change how we manage the input: instead of providing a single file path, we'll read sample information from a CSV file.
 
 We provide a CSV file containing sample IDs and FASTQ file paths in the `data/` directory.
-This CSV file includes a header line.
 
 ```csv title="data/single-end.csv" linenums="1"
 sample_id,fastq_path
@@ -52,9 +76,13 @@ ENCSR000CPO1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO1_1.f
 ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.fastq.gz
 ```
 
+This CSV file includes a header line that names the columns.
+
+Note that this is still single-end read data.
+
 !!! warning
 
-    Note that the FASTQ file paths are absolute paths.
+    The file paths in the CSV are absolute paths that must match your environment.
     If you are not running this in the training environment we provide, you will need to update the paths to match your system.
 
 ### 1.1. Change the primary input to a CSV of file paths in the test profile
