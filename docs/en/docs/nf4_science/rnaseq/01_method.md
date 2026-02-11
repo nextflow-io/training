@@ -345,7 +345,13 @@ mv ENCSR000COQ1_1* /data/trimmed
 
 ??? abstract "Directory contents"
 
-    TODO: paste tree output here
+    ```console
+    /data/trimmed
+    ├── ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+    ├── ENCSR000COQ1_1_trimmed.fq.gz
+    ├── ENCSR000COQ1_1_trimmed_fastqc.html
+    └── ENCSR000COQ1_1_trimmed_fastqc.zip
+    ```
 
 The files are now accessible in your normal filesystem.
 
@@ -815,7 +821,7 @@ To exit the container, type `exit`.
 exit
 ```
 
-Your prompt should be back to normal.
+Your prompt should go back to normal.
 
 ### 2.2. Align additional samples
 
@@ -896,7 +902,7 @@ To exit the container, type `exit`.
 exit
 ```
 
-Your prompt should be back to normal.
+Your prompt should go back to normal.
 
 ### 2.3. Generate a comprehensive QC report
 
@@ -905,7 +911,7 @@ MultiQC searches through directories for compatible QC reports and aggregates ev
 
 #### 2.3.1. Pull the container
 
-Run the `docker pull` command to download the MultiQC container image:
+Let's pull a container image that has `multiqc` installed:
 
 ```bash
 docker pull community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
@@ -933,7 +939,8 @@ docker pull community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
     community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
     ```
 
-Once the download is complete, you have a local copy of the container image.
+You'll notice that some layers show `Already exists` because they are shared with the container images we pulled earlier.
+As a result, this pull should go faster than the previous ones.
 
 #### 2.3.2. Spin up the container interactively
 
@@ -980,27 +987,29 @@ The output files are in the working directory:
 ls all_samples_QC*
 ```
 
-```console title="Output"
-all_samples_QC.html
+??? abstract "Directory contents"
 
-all_samples_QC_data:
-cutadapt_filtered_reads_plot.txt                     multiqc.log
-cutadapt_trimmed_sequences_plot_3_Counts.txt         multiqc.parquet
-cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt        multiqc_citations.txt
-fastqc-status-check-heatmap.txt                      multiqc_cutadapt.txt
-fastqc_adapter_content_plot.txt                      multiqc_data.json
-fastqc_overrepresented_sequences_plot.txt            multiqc_fastqc.txt
-fastqc_per_base_n_content_plot.txt                   multiqc_general_stats.txt
-fastqc_per_base_sequence_quality_plot.txt            multiqc_hisat2.txt
-fastqc_per_sequence_gc_content_plot_Counts.txt       multiqc_software_versions.txt
-fastqc_per_sequence_gc_content_plot_Percentages.txt  multiqc_sources.txt
-fastqc_per_sequence_quality_scores_plot.txt
-fastqc_sequence_counts_plot.txt
-fastqc_sequence_duplication_levels_plot.txt
-fastqc_top_overrepresented_sequences_table.txt
-hisat2_se_plot.txt
-llms-full.txt
-```
+    ```console
+    all_samples_QC.html
+
+    all_samples_QC_data:
+    cutadapt_filtered_reads_plot.txt                     multiqc.log
+    cutadapt_trimmed_sequences_plot_3_Counts.txt         multiqc.parquet
+    cutadapt_trimmed_sequences_plot_3_Obs_Exp.txt        multiqc_citations.txt
+    fastqc-status-check-heatmap.txt                      multiqc_cutadapt.txt
+    fastqc_adapter_content_plot.txt                      multiqc_data.json
+    fastqc_overrepresented_sequences_plot.txt            multiqc_fastqc.txt
+    fastqc_per_base_n_content_plot.txt                   multiqc_general_stats.txt
+    fastqc_per_base_sequence_quality_plot.txt            multiqc_hisat2.txt
+    fastqc_per_sequence_gc_content_plot_Counts.txt       multiqc_software_versions.txt
+    fastqc_per_sequence_gc_content_plot_Percentages.txt  multiqc_sources.txt
+    fastqc_per_sequence_quality_scores_plot.txt
+    fastqc_sequence_counts_plot.txt
+    fastqc_sequence_duplication_levels_plot.txt
+    fastqc_top_overrepresented_sequences_table.txt
+    hisat2_se_plot.txt
+    llms-full.txt
+    ```
 
 The main output is the `all_samples_QC.html` report, accompanied by a data directory containing the underlying metrics.
 
@@ -1013,7 +1022,7 @@ mkdir /data/multiqc
 mv all_samples_QC* /data/multiqc
 ```
 
-The files are now stored on the mounted filesystem.
+The files are now accessible in your normal filesystem.
 
 #### 2.3.5. Exit the container
 
@@ -1023,8 +1032,8 @@ To exit the container, type `exit`.
 exit
 ```
 
-Your prompt should be back to normal.
-That concludes the manual testing of all the RNAseq processing commands.
+Your prompt should go back to normal.
+That concludes the testing of all the RNAseq processing commands.
 
 ---
 
