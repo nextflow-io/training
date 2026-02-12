@@ -4540,7 +4540,7 @@ If you scroll back up to the start of the file, you'll find a header composed of
 <a id="__codelineno-15-39" name="__codelineno-15-39"></a><span class="go">20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>In the example output above, we've higlighted the last header line, which gives the names of the columns for the tabular data that follows.
+<p>In the example output above, we've highlighted the last header line, which gives the names of the columns for the tabular data that follows.
 Each line of data describes a possible variant identified in the sample's sequencing data. For guidance on interpreting VCF format, see <a href="https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/">this helpful article</a>.</p>
 <h4 id="124-move-the-output-files">1.2.4. Move the output files<a class="headerlink" href="#124-move-the-output-files" title="Permanent link">&para;</a></h4>
 <p>Anything that remains inside the container will be inaccessible to future work.
@@ -5143,7 +5143,7 @@ This is technically not a requirement, but it is a strongly recommended conventi
 <a id="__codelineno-27-200" name="__codelineno-27-200"></a><span class="go">20_10037292_10066351	3537	.	A	&lt;NON_REF&gt;	.	.	END=3546	GT:DP:GQ:MIN_DP:PL	0/0:29:72:26:0,72,1080</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>We've once again higlighted the last header line, as well as the first three 'proper' variant calls in the file.</p>
+<p>We've once again highlighted the last header line, as well as the first three 'proper' variant calls in the file.</p>
 <p>You'll notice the variant call lines are interspersed with many non-variant lines, which represent non-variant regions where the variant caller found no evidence of variation.
 As mentioned briefly above, this is what is special about the GVCF mode of variant calling: the variant called captures some statistics describing its level of confidence in the absence of variation.
 This makes it possible to distinguish between two very different case figures: (1) there is good quality data showing that the sample is homozygous-reference, and (2) there is not enough good data available to make a determination either way.</p>
@@ -5536,7 +5536,7 @@ It's another reasonably small file, so you can run <code>cat family_trio.vcf</co
 <a id="__codelineno-37-58" name="__codelineno-37-58"></a><span class="go">20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113</span>
 </code></pre></div></td></tr></table></div>
 </details>
-<p>We've once again higlighted the last header line, which marks the start of the variant call data.</p>
+<p>We've once again highlighted the last header line, which marks the start of the variant call data.</p>
 <p>This looks similar to the VCF we generated earlier, except this time we have genotype-level information for all three samples.
 The last three columns in the file are the genotype blocks for the samples, listed in alphabetical order of their ID field, as shown in the highlighted header line.</p>
 <p>If we look at the genotypes called for our test family trio for the very first variant, we see that the father is heterozygous-variant (<code>0/1</code>), and the mother and son are both homozygous-variant (<code>1/1</code>).</p>

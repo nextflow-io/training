@@ -177,6 +177,34 @@
          <lastmod>2026-02-12</lastmod>
     </url>
     <url>
+         <loc>https://training.nextflow.io/nf4_science/_template/</loc>
+         <lastmod>2026-02-12</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/nf4_science/_template/00_orientation/</loc>
+         <lastmod>2026-02-12</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/nf4_science/_template/01_method/</loc>
+         <lastmod>2026-02-12</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/nf4_science/_template/02_single_sample/</loc>
+         <lastmod>2026-02-12</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/nf4_science/_template/03_multi_sample/</loc>
+         <lastmod>2026-02-12</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/nf4_science/_template/next_steps/</loc>
+         <lastmod>2026-02-12</lastmod>
+    </url>
+    <url>
+         <loc>https://training.nextflow.io/nf4_science/_template/survey/</loc>
+         <lastmod>2026-02-12</lastmod>
+    </url>
+    <url>
          <loc>https://training.nextflow.io/nf4_science/genomics/</loc>
          <lastmod>2026-02-12</lastmod>
     </url>
