@@ -2,8 +2,6 @@
  * Use echo to print 'Hello World!' to a file
  */
 process SAY_HELLO {
-    publishDir 'results', mode: 'copy'
-
     tag "greeting ${name}"
 
     input:

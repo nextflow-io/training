@@ -887,8 +887,6 @@ You can open the module file to examine its code:
 // Generate ASCII art with cowpy
 process COWPY {
 
-    publishDir "results/", mode: 'copy'
-
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:

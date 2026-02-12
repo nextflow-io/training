@@ -2,8 +2,6 @@
  * Use a text replacement tool to convert the greeting to uppercase
  */
 process SAY_HELLO_UPPER {
-    publishDir 'results', mode: 'copy'
-
     tag "converting ${input_file}"
 
     input:

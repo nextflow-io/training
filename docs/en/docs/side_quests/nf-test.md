@@ -119,8 +119,6 @@ You can see the full workflow code below.
     */
     process sayHello {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             val greeting
 
@@ -138,8 +136,6 @@ You can see the full workflow code below.
     */
     process convertToUpper {
 
-        publishDir 'results', mode: 'copy'
-
         input:
             path input_file
 
@@ -153,7 +149,7 @@ You can see the full workflow code below.
     }
 
     workflow {
-
+        main:
         // create a channel for inputs from a CSV file
         greeting_ch = channel.fromPath(params.input_file).splitCsv().flatten()
 
@@ -162,6 +158,15 @@ You can see the full workflow code below.
 
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
+
+        publish:
+        greetings = sayHello.out
+        upper_greetings = convertToUpper.out
+    }
+
+    output {
+        directory 'results'
+        mode 'copy'
     }
     ```
 

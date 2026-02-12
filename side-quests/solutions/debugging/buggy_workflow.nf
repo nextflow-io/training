@@ -15,7 +15,6 @@ params{
  * Process with input/output mismatch
  */
 process processFiles {
-    publishDir "${params.output}/processed", mode: 'copy'
 
     input:
     tuple val(sample_id), path(input_file)
@@ -37,7 +36,6 @@ process processFiles {
  * Process with resource issues
  */
 process heavyProcess {
-    publishDir "${params.output}/heavy", mode: 'copy'
 
     // Fixed: Increase execution time to avoid timeout
     time '100 s'
@@ -61,7 +59,6 @@ process heavyProcess {
  * Process with file handling issues
  */
 process handleFiles {
-    publishDir "${params.output}/files", mode: 'copy'
 
     input:
     path input_file
@@ -82,7 +79,7 @@ process handleFiles {
  * Main workflow with channel issues
  */
 workflow {
-
+    main:
     // Channel with incorrect usage
     input_ch = channel.fromPath(params.input)
         .splitCsv(header: true)
@@ -97,4 +94,24 @@ workflow {
     // BUG: Incorrect channel usage
     // Fixed: take output from second process
     handleFiles(heavyProcess.out)
+
+    publish:
+    processed = processFiles.out
+    heavy = heavyProcess.out
+    files = handleFiles.out
+}
+
+output {
+    directory params.output
+    mode 'copy'
+
+    processed {
+        path 'processed'
+    }
+    heavy {
+        path 'heavy'
+    }
+    files {
+        path 'files'
+    }
 }

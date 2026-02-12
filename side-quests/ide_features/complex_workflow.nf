@@ -10,7 +10,6 @@ include { MULTIQC } from './modules/utils'
 
 process TRIM_GALORE {
     tag "${sample_id}"
-    publishDir "${params.output}/trimmed", mode: 'copy'
 
     input:
     tuple val(sample_id), path(reads)
@@ -26,7 +25,6 @@ process TRIM_GALORE {
 
 process FEATURECOUNTS {
     tag "${sample_id}"
-    publishDir "${params.output}/counts", mode: 'copy'
 
     input:
     tuple val(sample_id), path(bam), path(gtf)
@@ -65,11 +63,15 @@ workflow RNASEQ_PIPELINE {
     MULTIQC(qc_files.collect())
 
     emit:
+    fastqc = FASTQC.out
+    trimmed = TRIM_GALORE.out
+    alignments = STAR_ALIGN.out
     counts = FEATURECOUNTS.out
     qc_report = MULTIQC.out
 }
 
 workflow {
+    main:
     // Input channels
     ch_reads = channel.fromPath(params.input)
         .splitCsv(header: true)
@@ -85,4 +87,32 @@ workflow {
     RNASEQ_PIPELINE.out.counts
         .collectFile(name: 'expression_matrix.txt', sort: true)
         .view { "Expression matrix created: ${it}" }
+
+    publish:
+    fastqc = RNASEQ_PIPELINE.out.fastqc
+    trimmed = RNASEQ_PIPELINE.out.trimmed
+    alignments = RNASEQ_PIPELINE.out.alignments
+    counts = RNASEQ_PIPELINE.out.counts
+    qc_report = RNASEQ_PIPELINE.out.qc_report
+}
+
+output {
+    directory params.output
+    mode 'copy'
+
+    fastqc {
+        path 'fastqc'
+    }
+    trimmed {
+        path 'trimmed'
+    }
+    alignments {
+        path 'alignments'
+    }
+    counts {
+        path 'counts'
+    }
+    qc_report {
+        path 'multiqc'
+    }
 }

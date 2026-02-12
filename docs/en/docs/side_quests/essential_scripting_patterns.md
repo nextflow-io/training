@@ -1001,8 +1001,6 @@ Take a look a the module file `modules/generate_report.nf`:
 ```groovy title="modules/generate_report.nf" linenums="1"
 process GENERATE_REPORT {
 
-    publishDir 'results/reports', mode: 'copy'
-
     input:
     tuple val(meta), path(reads)
 

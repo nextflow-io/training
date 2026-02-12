@@ -4,7 +4,7 @@ include { IDENTIFY_LANGUAGE } from './modules/langid.nf'
 include { COWPY } from './modules/cowpy.nf'
 
 workflow {
-
+    main:
     ch_datasheet = channel.fromPath("./data/datasheet.csv")
         .splitCsv(header: true)
         .map { row ->
@@ -35,4 +35,12 @@ workflow {
 
     // Run cowpy to generate ASCII art
     COWPY(ch_languages)
+
+    publish:
+    cowpy_art = COWPY.out
+}
+
+output {
+    directory 'results'
+    mode 'copy'
 }
