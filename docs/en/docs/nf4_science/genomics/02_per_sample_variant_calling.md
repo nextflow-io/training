@@ -1,7 +1,7 @@
 # Part 2: Per-sample variant calling
 
 In Part 1, you tested the Samtools and GATK commands manually in their respective containers.
-Now we're going to wrap those same commands into a Nextflow workflow.
+Next, we're going to wrap those same commands into a Nextflow workflow.
 
 ## Assignment
 
@@ -216,7 +216,7 @@ In the workflow block, create an input channel from the parameter value using th
         // Create input channel
     ```
 
-Now we need to create the process to run the indexing on this input.
+Next, we'll need to create the process to run the indexing on this input.
 
 ### 1.2. Write the indexing process and call it in the workflow
 
@@ -356,7 +356,7 @@ Assign the output of `SAMTOOLS_INDEX` to a named target called `bam_index`.
     }
     ```
 
-Now we need to tell Nextflow where to put the published output.
+Next, we'll need to tell Nextflow where to put the published output.
 
 #### 1.3.2. Configure the output target in the `output {}` block
 
@@ -495,7 +495,7 @@ Since our new process expects a handful of additional files to be provided, add 
     }
     ```
 
-As before, we provide default values through the test profile rather than inline.
+As before, we'll provide default values through the test profile rather than inline.
 
 #### 2.1.2. Add accessory file defaults to the test profile
 
@@ -521,7 +521,7 @@ Just as we did for `input` in section 1.1.2, add default values for the accessor
     }
     ```
 
-Now we need to create variables that load these file paths for use in the workflow.
+Next, we'll need to create variables that load these file paths for use in the workflow.
 
 #### 2.1.3. Create variables for the accessory files
 
@@ -722,7 +722,7 @@ Add the VCF and index outputs to the `publish:` section:
     }
     ```
 
-Now we need to tell Nextflow where to put the new outputs.
+Next, we'll need to tell Nextflow where to put the new outputs.
 
 #### 2.3.2. Configure the new output targets
 
@@ -1074,7 +1074,7 @@ Update `modules/gatk_haplotypecaller.nf`:
         path input_bam_index
     ```
 
-Now we need to update the workflow to reflect the new tuple structure in the process call and the publish targets.
+Next, we'll need to update the workflow to reflect the new tuple structure in the process call and the publish targets.
 
 #### 3.4.3. Update the call to GATK_HAPLOTYPECALLER in the workflow
 

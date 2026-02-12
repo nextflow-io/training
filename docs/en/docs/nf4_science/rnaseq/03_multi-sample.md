@@ -115,7 +115,7 @@ First, we need to update the test profile in `nextflow.config` to provide the CS
     }
     ```
 
-Now we need to update the channel creation to read from this CSV.
+Next, we'll need to update the channel creation to read from this CSV.
 
 ### 1.2. Update the channel factory to parse CSV input
 
@@ -266,7 +266,7 @@ Add the report ID default to the test profile:
     }
     ```
 
-Now we need to prepare the inputs for the MultiQC process.
+Next, we'll need to prepare the inputs for the MultiQC process.
 
 #### 2.1.2. Collect and combine QC outputs from previous steps
 
@@ -464,7 +464,7 @@ Add the MultiQC outputs to the `publish:` section:
     }
     ```
 
-Now we need to tell Nextflow where to put these outputs.
+Next, we'll need to tell Nextflow where to put these outputs.
 
 #### 2.3.2. Configure the new output targets
 

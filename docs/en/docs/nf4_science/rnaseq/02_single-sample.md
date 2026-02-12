@@ -275,7 +275,7 @@ In the workflow block, create an input channel from the parameter value using th
     }
     ```
 
-Now we need to create the process to run QC on this input.
+Next, we'll need to create the process to run QC on this input.
 
 ### 1.2. Write the QC process and call it in the workflow
 
@@ -428,7 +428,7 @@ Assign the outputs of `FASTQC` to named targets.
     }
     ```
 
-Now we need to tell Nextflow where to put the published outputs.
+Next, we'll need to tell Nextflow where to put the published outputs.
 
 #### 1.3.2. Configure the output targets in the `output {}` block
 
@@ -606,7 +606,7 @@ Update `rnaseq.nf` to import the new module:
     include { FASTQC } from './modules/fastqc.nf'
     ```
 
-Now add the process call to the workflow.
+Next, we'll add the process call to the workflow.
 
 #### 2.1.3. Call the trimming process on the input
 
@@ -682,7 +682,7 @@ Add the trimming outputs to the `publish:` section:
     }
     ```
 
-Now we need to tell Nextflow where to put these outputs.
+Next, we'll need to tell Nextflow where to put these outputs.
 
 #### 2.2.2. Configure the new output targets
 
@@ -936,7 +936,7 @@ Update `rnaseq.nf` to import the new module:
     include { TRIM_GALORE } from './modules/trim_galore.nf'
     ```
 
-Now add the process call to the workflow.
+Next, we'll add the process call to the workflow.
 
 #### 3.2.3. Call the alignment process
 
@@ -1014,7 +1014,7 @@ Add the alignment outputs to the `publish:` section:
     }
     ```
 
-Now we need to tell Nextflow where to put these outputs.
+Next, we'll we need to tell Nextflow where to put these outputs.
 
 #### 3.3.2. Configure the new output targets
 

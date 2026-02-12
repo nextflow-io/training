@@ -302,6 +302,10 @@ Later in the training series you'll learn how to use sample metadata for this so
     }
     ```
 
+We'll use this parameter for naming the final output file.
+
+#### 2.1.2. Add a default value for `cohort_name` in the test profile
+
 We also add a default value for the `cohort_name` parameter in the test profile:
 
 === "After"
@@ -329,9 +333,9 @@ We also add a default value for the `cohort_name` parameter in the test profile:
     }
     ```
 
-Now we need to gather the per-sample outputs so they can be processed together.
+Next, we'll need to gather the per-sample outputs so they can be processed together.
 
-#### 2.1.2. Gather the HaplotypeCaller outputs across samples
+#### 2.1.3. Gather the HaplotypeCaller outputs across samples
 
 If we were to plug the output channel from `GATK_HAPLOTYPECALLER` directly into the new process, Nextflow would call the process on each sample GVCF separately.
 We want to bundle all three GVCFs (and their index files) so that Nextflow hands all of them together to a single process call.
@@ -418,7 +422,7 @@ Then you'll be able to refer to that whole string as `gvcfs_line` in the `script
 
 #### 2.2.2. Fill in the module for the joint genotyping process
 
-Now we can tackle writing the full process.
+Next, we'll can tackle writing the full process.
 
 Open `modules/gatk_jointgenotyping.nf` and examine the outline of the process definition.
 
