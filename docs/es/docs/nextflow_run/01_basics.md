@@ -101,6 +101,26 @@ nextflow run 1-hello.nf --input 'Hello World!'
 
 Si su salida de consola se ve algo así, ¡felicidades, acaba de ejecutar su primer workflow de Nextflow!
 
+??? question "Si no funcionó"
+
+    Si falló con un error que se ve así:
+
+    ```
+    Parameter `input` was specified on the command line or params file but is not declared in the script or config
+
+    -- Check script '1-hello.nf' at line: 23 or see '.nextflow.log' file for more details
+    ```
+
+    Entonces probablemente está usando el analizador de lenguaje v1 más antiguo de Nextflow.
+    Esto se mencionó al inicio del curso, pero tal vez lo pasó por alto.
+    Consulte el material de ayuda [Versiones de Nextflow](../info/nxf_versions.md).
+
+    En resumen, si está usando Nextflow `25.10` entonces necesita habilitar el analizador de lenguaje v2:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 La salida más importante aquí es la última línea, que está resaltada en la salida anterior:
 
 ```console
@@ -135,7 +155,7 @@ Hello World!
 Por defecto, Nextflow guardará las salidas del pipeline en un directorio llamado `results` en su ruta actual.
 Para cambiar dónde se publican sus archivos, use la bandera CLI `-output-dir` (o `-o` para abreviar)
 
-!!! danger "Advertencia"
+!!! danger "Peligro"
 
     ¡Note que `--input` tiene dos guiones y `-output-dir` tiene uno!
     Esto es porque `--input` es un _parámetro_ del pipeline y `-output-dir` es una bandera CLI central de Nextflow.
@@ -169,7 +189,7 @@ Sin embargo, tenga en cuenta que en ambos casos el resultado 'publicado' es una 
 
 Ahora vamos a echar un vistazo bajo el capó para ver dónde ejecutó Nextflow realmente el trabajo.
 
-!!! warning "Advertencia"
+!!! Warning "Advertencia"
 
     No todos los workflows estarán configurados para publicar salidas en un directorio de resultados, y/o los nombres y estructura de directorios pueden ser diferentes.
     Un poco más adelante en esta sección, le mostraremos cómo averiguar dónde se especifica este comportamiento.
@@ -202,7 +222,7 @@ Esto debería producir la ruta completa del directorio: `work/a3/1e153543b0a7f9d
 
 Veamos qué hay ahí.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     work
@@ -278,7 +298,7 @@ Cuando algo sale mal y necesita solucionar lo que sucedió, puede ser útil mira
 
 Intente re-ejecutar el workflow algunas veces con diferentes valores para el argumento `--input`, luego mire los directorios de tarea.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console
     work/
@@ -338,7 +358,7 @@ Puede ver que se ha creado un nuevo subdirectorio con un conjunto completo de ar
 
 En contraste, si mira el directorio `results`, todavía hay solo un conjunto de resultados, y el contenido del archivo de salida corresponde a lo que ejecutó por última vez.
 
-??? abstract "Contenidos del directorio"
+??? abstract "Contenido del directorio"
 
     ```console title="results/"
     results
@@ -719,7 +739,7 @@ nextflow clean -before backstabbing_swartz -f
 La salida debería ser similar a antes, pero ahora diciendo 'Removed' en lugar de 'Would remove'.
 Note que esto no elimina los subdirectorios de dos caracteres (como `eb/` arriba) pero sí vacía su contenido.
 
-!!! warning "Advertencia"
+!!! Warning "Advertencia"
 
     Eliminar subdirectorios de trabajo de ejecuciones pasadas los elimina de la caché de Nextflow y elimina cualquier salida que se almacenó en esos directorios.
     Eso significa que rompe la capacidad de Nextflow de reanudar la ejecución sin re-ejecutar los processes correspondientes.

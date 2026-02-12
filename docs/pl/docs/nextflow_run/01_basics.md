@@ -101,6 +101,26 @@ nextflow run 1-hello.nf --input 'Hello World!'
 
 Jeśli wyjście konsoli wygląda mniej więcej tak, to gratulacje, właśnie uruchomiłeś Swój pierwszy workflow Nextflow!
 
+??? question "Jeśli nie zadziałało"
+
+    Jeśli to nie powiodło się z błędem, który wygląda tak:
+
+    ```
+    Parameter `input` was specified on the command line or params file but is not declared in the script or config
+
+    -- Check script '1-hello.nf' at line: 23 or see '.nextflow.log' file for more details
+    ```
+
+    To prawdopodobnie używasz starszego parsera języka Nextflow v1.
+    Zostało to wspomniane na początku kursu, ale może Ci to umknęło.
+    Sprawdź materiał pomocniczy [Wersje Nextflow](../info/nxf_versions.md).
+
+    Krótko mówiąc, jeśli używasz Nextflow `25.10`, musisz włączyć parser języka v2:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 Najważniejsze wyjście tutaj to ostatnia linia, która jest podświetlona w powyższym wyjściu:
 
 ```console
@@ -133,9 +153,9 @@ Hello World!
 ### 2.3. Zapisz wyniki do innego katalogu
 
 Domyślnie Nextflow zapisze wyjścia pipeline'u do katalogu o nazwie `results` w Twojej bieżącej ścieżce.
-Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI `output-dir` (lub `-o` w skrócie)
+Aby zmienić miejsce, w którym Twoje pliki są publikowane, użyj flagi CLI `-output-dir` (lub `-o` w skrócie)
 
-!!! danger "Ostrzeżenie"
+!!! danger "Niebezpieczeństwo"
 
     Zauważ, że `--input` ma dwa myślniki, a `-output-dir` ma jeden!
     Dzieje się tak dlatego, że `--input` to _parametr_ pipeline'u, a `-output-dir` to podstawowa flaga CLI Nextflow.
@@ -169,7 +189,7 @@ Jednak pamiętaj, że w obu przypadkach 'opublikowany' wynik jest kopią (lub w 
 
 Więc teraz zajrzymy pod maskę, aby zobaczyć, gdzie Nextflow faktycznie wykonał pracę.
 
-!!! warning "Ostrzeżenie"
+!!! Warning "Ostrzeżenie"
 
     Nie wszystkie workflow'y będą skonfigurowane do publikowania wyjść do katalogu results, i/lub nazwy katalogów i struktura mogą być inne.
     Trochę dalej w tej sekcji pokażemy, jak dowiedzieć się, gdzie to zachowanie jest określone.
@@ -719,7 +739,7 @@ nextflow clean -before backstabbing_swartz -f
 Wyjście powinno być podobne do poprzedniego, ale teraz mówiące 'Removed' zamiast 'Would remove'.
 Zauważ, że to nie usuwa dwuznakowych podkatalogów (jak `eb/` powyżej), ale opróżnia ich zawartość.
 
-!!! warning "Ostrzeżenie"
+!!! Warning "Ostrzeżenie"
 
     Usuwanie podkatalogów roboczych z poprzednich uruchomień usuwa je z pamięci podręcznej Nextflow i kasuje wszelkie wyjścia, które były przechowywane w tych katalogach.
     To oznacza, że psuje zdolność Nextflow'a do wznowienia wykonania bez ponownego uruchamiania odpowiednich **procesów**.

@@ -62,7 +62,7 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 
 Come in precedenza, troverete il file di output chiamato `output.txt` nella directory `results/hello_channels` (come specificato nel blocco `output` dello script del flusso di lavoro, mostrato sopra).
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console title="results/hello_channels" hl_lines="2-3"
     results
@@ -73,7 +73,7 @@ Come in precedenza, troverete il file di output chiamato `output.txt` nella dire
     └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_channels/output.txt"
     Hello Channels!
@@ -95,7 +95,7 @@ Funzionalmente sarà simile a come lo avevamo configurato prima, ma invece di fa
 
 Questa è la riga di codice che useremo:
 
-```console title="Sintassi"
+```console title="Syntax"
 greeting_ch = channel.of('Hello Channels!')
 ```
 
@@ -207,7 +207,7 @@ nextflow run hello-channels.nf
 Se avete effettuato entrambe le modifiche correttamente, dovreste ottenere un'esecuzione riuscita.
 Potete controllare la directory dei risultati per verificare che l'output sia ancora lo stesso di prima.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_channels/output.txt"
     Hello Channels!
@@ -353,7 +353,7 @@ Il monitor di esecuzione mostra che sono state effettuate `3 of 3` chiamate per 
 
 Tuttavia, c'è ancora un solo output nella directory dei risultati:
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console title="results/hello_channels" hl_lines="3"
     results
@@ -364,7 +364,7 @@ Tuttavia, c'è ancora un solo output nella directory dei risultati:
     └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_channels/output.txt"
     Holà
@@ -382,7 +382,7 @@ _Nel diagramma, il canale è rappresentato in verde, e l'ordine degli elementi �
 Guardando indietro al monitor di esecuzione, ci ha dato solo un percorso di sottodirectory (`f4/c9962c`).
 Diamo un'occhiata lì dentro.
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console hl_lines="9"
     work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -396,7 +396,7 @@ Diamo un'occhiata lì dentro.
     └── output.txt
     ```
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
     Hello
@@ -444,7 +444,7 @@ Ecco perché `-ansi-log false` non è il comportamento predefinito.
 
 Comunque, ora che abbiamo le sottodirectory di ogni chiamata di processo, possiamo cercare i loro log e output.
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     work/23/871c7ec3642a898ecd5e6090d21300/
@@ -482,7 +482,7 @@ Comunque, ora che abbiamo le sottodirectory di ogni chiamata di processo, possia
     └── output.txt
     ```
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
     Bonjour
@@ -595,7 +595,7 @@ nextflow run hello-channels.nf
 Tornando alla vista riassuntiva, l'output è di nuovo riassunto su una riga.
 Date un'occhiata alla directory `results` per vedere se tutti i saluti di output sono presenti.
 
-??? abstract "Directory contents"
+??? abstract "Contenuto della directory"
 
     ```console
     results/hello_channels/
@@ -607,7 +607,7 @@ Date un'occhiata alla directory `results` per vedere se tutti i saluti di output
 
 Sì! E ognuno ha i contenuti attesi.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="Bonjour-output.txt"
     Bonjour
@@ -807,11 +807,11 @@ Come facciamo a far sì che Nextflow spacchetti l'array e carichi le singole str
 
 ### 3.2. Usare un operatore per trasformare i contenuti del canale
 
-Qui entrano in gioco gli [**operatori**](https://www.nextflow.io/docs/latest/reference/operator.html).
+Qui entrano in gioco gli [**operatori**](https://nextflow.io/docs/latest/reference/operator.html).
 Avete già usato l'operatore `.view()`, che semplicemente guarda cosa c'è dentro.
 Ora vedremo operatori che ci permettono di agire sui contenuti di un canale.
 
-Se scorrete la [lista degli operatori](https://www.nextflow.io/docs/latest/reference/operator.html) nella documentazione di Nextflow, troverete [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), che fa esattamente ciò di cui abbiamo bisogno: spacchetta i contenuti di un array e li emette come elementi individuali.
+Se scorrete la [lista degli operatori](https://nextflow.io/docs/latest/reference/operator.html) nella documentazione di Nextflow, troverete [`flatten()`](https://nextflow.io/docs/latest/reference/operator.html#flatten), che fa esattamente ciò di cui abbiamo bisogno: spacchetta i contenuti di un array e li emette come elementi individuali.
 
 #### 3.2.1. Aggiungere l'operatore `flatten()`
 
@@ -883,9 +883,9 @@ Nel blocco workflow, effettuate la seguente modifica al codice:
         greetings_array = ['Hello','Bonjour','Holà']
         // crea un canale per gli input
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Prima di flatten: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
-                             .view { greeting -> "Dopo flatten: $greeting" }
+                             .view { greeting -> "After flatten: $greeting" }
         // emette un saluto
         sayHello(greeting_ch)
 
@@ -922,7 +922,7 @@ Definiamo una variabile temporanea per il valore interno, qui chiamata `greeting
 In questo esempio, `$greeting` rappresenta ogni singolo elemento caricato nel canale.
 Questo risulterà in un output della console ordinatamente etichettato.
 
-!!! info "Informazione"
+!!! info "Info"
 
     In alcune pipeline potrete vedere una variabile speciale chiamata `$it` usata all'interno delle closure degli operatori.
     Questa è una variabile _implicita_ che permette un accesso abbreviato alla variabile interna,
@@ -947,10 +947,10 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    Prima di flatten: [Hello, Bonjour, Holà]
-    Dopo flatten: Hello
-    Dopo flatten: Bonjour
-    Dopo flatten: Holà
+    Before flatten: [Hello, Bonjour, Holà]
+    After flatten: Hello
+    After flatten: Bonjour
+    After flatten: Holà
     ```
 
 Questa volta funziona E ci dà la comprensione aggiuntiva di come appaiono i contenuti del canale prima e dopo l'esecuzione dell'operatore `flatten()`.
@@ -1049,7 +1049,7 @@ Nel blocco workflow, effettuate la seguente modifica al codice:
         main:
         // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Prima di flatten: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "Dopo flatten: $greeting" }
         // emette un saluto
@@ -1070,9 +1070,9 @@ Nel blocco workflow, effettuate la seguente modifica al codice:
         greetings_array = ['Hello','Bonjour','Holà']
         // crea un canale per gli input
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "Prima di flatten: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
-                             .view { greeting -> "Dopo flatten: $greeting" }
+                             .view { greeting -> "After flatten: $greeting" }
         // emette un saluto
         sayHello(greeting_ch)
 
@@ -1100,7 +1100,7 @@ nextflow run hello-channels.nf
     Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
 
     [-        ] sayHello [  0%] 0 of 1
-    Prima di flatten: /workspaces/training/hello-nextflow/data/greetings.csv
+    Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
@@ -1144,7 +1144,7 @@ Guardando di nuovo la lista degli operatori, troviamo [`splitCsv()`](https://nex
 
 Per applicare l'operatore, lo aggiungiamo alla riga della fabbrica di canali come fatto in precedenza.
 
-Nel blocco workflow, effettuate la seguente modifica al codice per sostituire `flatten()` con `splitcsv()` (senza commento):
+Nel blocco workflow, effettuate la seguente modifica al codice per sostituire `flatten()` con `splitCsv()` (senza commento):
 
 === "Dopo"
 
@@ -1154,9 +1154,9 @@ Nel blocco workflow, effettuate la seguente modifica al codice per sostituire `f
         main:
         // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Prima di splitCsv: $csv" }
+                             .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "Dopo splitCsv: $csv" }
+                             .view { csv -> "After splitCsv: $csv" }
         // emette un saluto
         sayHello(greeting_ch)
 
@@ -1173,7 +1173,7 @@ Nel blocco workflow, effettuate la seguente modifica al codice per sostituire `f
         main:
         // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "Prima di flatten: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
                              // .view { greeting -> "Dopo flatten: $greeting" }
         // emette un saluto
@@ -1204,10 +1204,10 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
-    Prima di splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
-    Dopo splitCsv: [Hello, English, 123]
-    Dopo splitCsv: [Bonjour, French, 456]
-    Dopo splitCsv: [Holà, Spanish, 789]
+    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    After splitCsv: [Hello, English, 123]
+    After splitCsv: [Bonjour, French, 456]
+    After splitCsv: [Holà, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1253,7 +1253,7 @@ L'operatore [`map()`](https://nextflow.io/docs/latest/reference/operator.html#ma
 In questo caso, lo useremo per estrarre quell'unico elemento che vogliamo da ogni riga nel nostro file di dati.
 Ecco come appare la sintassi:
 
-```groovy title="Sintassi"
+```groovy title="Syntax"
 .map { row -> row[0] }
 ```
 
@@ -1273,11 +1273,11 @@ Nel blocco workflow, effettuate la seguente modifica al codice:
         main:
         // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Prima di splitCsv: $csv" }
+                             .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "Dopo splitCsv: $csv" }
+                             .view { csv -> "After splitCsv: $csv" }
                              .map { item -> item[0] }
-                             .view { csv -> "Dopo map: $csv" }
+                             .view { csv -> "After map: $csv" }
         // emette un saluto
         sayHello(greeting_ch)
 
@@ -1294,9 +1294,9 @@ Nel blocco workflow, effettuate la seguente modifica al codice:
         main:
         // crea un canale per gli input da un file CSV
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "Prima di splitCsv: $csv" }
+                             .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "Dopo splitCsv: $csv" }
+                             .view { csv -> "After splitCsv: $csv" }
         // emette un saluto
         sayHello(greeting_ch)
 
@@ -1324,13 +1324,13 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
-    Prima di splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
-    Dopo splitCsv: [Hello, English, 123]
-    Dopo splitCsv: [Bonjour, French, 456]
-    Dopo splitCsv: [Holà, Spanish, 789]
-    Dopo map: Hello
-    Dopo map: Bonjour
-    Dopo map: Holà
+    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    After splitCsv: [Hello, English, 123]
+    After splitCsv: [Bonjour, French, 456]
+    After splitCsv: [Holà, Spanish, 789]
+    After map: Hello
+    After map: Bonjour
+    After map: Holà
     ```
 
 Questa volta dovrebbe funzionare senza errori.
@@ -1380,7 +1380,7 @@ Cos'è un canale in Nextflow?
 - [x] Una struttura simile a una coda per passare dati tra processi
 - [ ] Un'impostazione di configurazione
 
-Per approfondire: [1.1. Creare un canale di input](#11-creare-un-canale-di-input)
+Per approfondire: [1.1. Creare un canale di input](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1396,7 +1396,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Niente (i canali non stampano per impostazione predefinita)
 - [ ] Un errore (sintassi non valida)
 
-Per approfondire: [1.1. Creare un canale di input](#11-creare-un-canale-di-input)
+Per approfondire: [1.1. Creare un canale di input](#11-create-an-input-channel)
 </quiz>
 
 <quiz>
@@ -1406,7 +1406,7 @@ Quando un canale contiene più valori, come gestisce Nextflow l'esecuzione del p
 - [ ] Il processo viene eseguito solo con il primo valore
 - [ ] Il processo viene eseguito solo con l'ultimo valore
 
-Per approfondire: [2. Modificare il flusso di lavoro per eseguire su più valori di input](#2-modificare-il-flusso-di-lavoro-per-eseguire-su-piu-valori-di-input)
+Per approfondire: [2. Modificare il flusso di lavoro per eseguire su più valori di input](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 
 <quiz>
@@ -1416,7 +1416,7 @@ Cosa fa l'operatore `flatten()`?
 - [x] Spacchetta gli array in elementi individuali
 - [ ] Rimuove gli elementi duplicati
 
-Per approfondire: [3.2.1. Aggiungere l'operatore `flatten()`](#321-aggiungere-loperatore-flatten)
+Per approfondire: [3.2.1. Aggiungere l'operatore `flatten()`](#321-add-the-flatten-operator)
 </quiz>
 
 <quiz>
@@ -1426,7 +1426,7 @@ Qual è lo scopo dell'operatore `view()`?
 - [x] Ispezionare e fare debug dei contenuti del canale
 - [ ] Salvare i contenuti del canale in un file
 
-Per approfondire: [1.4. Usare `view()` per ispezionare i contenuti del canale](#14-usare-view-per-ispezionare-i-contenuti-del-canale)
+Per approfondire: [1.4. Usare `view()` per ispezionare i contenuti del canale](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 
 <quiz>
@@ -1436,7 +1436,7 @@ Cosa fa `splitCsv()`?
 - [x] Analizza un file CSV in array che rappresentano ogni riga
 - [ ] Unisce più file CSV
 
-Per approfondire: [4.2. Usare l'operatore `splitCsv()` per analizzare il file](#42-usare-loperatore-splitcsv-per-analizzare-il-file)
+Per approfondire: [4.2. Usare l'operatore `splitCsv()` per analizzare il file](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 
 <quiz>
@@ -1446,7 +1446,7 @@ Qual è lo scopo dell'operatore `map()`?
 - [x] Trasformare ogni elemento in un canale
 - [ ] Contare gli elementi in un canale
 
-Per approfondire: [4.3. Usare l'operatore `map()` per estrarre i saluti](#43-usare-loperatore-map-per-estrarre-i-saluti)
+Per approfondire: [4.3. Usare l'operatore `map()` per estrarre i saluti](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 
 <quiz>
@@ -1456,5 +1456,5 @@ Perché è importante usare nomi di file di output dinamici quando si elaborano 
 - [x] Per evitare che i file di output si sovrascrivano a vicenda
 - [ ] Per abilitare la funzionalità di resume
 
-Per approfondire: [2.2. Assicurarsi che i nomi dei file di output siano unici](#22-assicurarsi-che-i-nomi-dei-file-di-output-siano-unici)
+Per approfondire: [2.2. Assicurarsi che i nomi dei file di output siano unici](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>

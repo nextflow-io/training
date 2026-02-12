@@ -1,5 +1,5 @@
 ---
-title: Nextflow para Genómica
+title: Genómica
 hide:
   - toc
 page_type: index_page

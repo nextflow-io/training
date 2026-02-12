@@ -922,7 +922,7 @@ Definimos una variable temporal para el valor interno, aquí llamada `greeting` 
 En este ejemplo, `$greeting` representa cada elemento individual cargado en el channel.
 Esto resultará en una salida de consola bien etiquetada.
 
-!!! info "Información"
+!!! info "Info"
 
     En algunos pipelines puede ver una variable especial llamada `$it` usada dentro de closures de operadores.
     Esta es una variable _implícita_ que permite un acceso abreviado a la variable interna,
@@ -1146,7 +1146,7 @@ Revisando la lista de operadores nuevamente, encontramos [`splitCsv()`](https://
 
 Para aplicar el operador, lo agregamos a la línea de la channel factory como anteriormente.
 
-En el bloque workflow, haga el siguiente cambio de código para reemplazar `flatten()` con `splitcsv()` (sin comentar):
+En el bloque workflow, haga el siguiente cambio de código para reemplazar `flatten()` con `splitCsv()` (sin comentar):
 
 === "Después"
 

@@ -1,6 +1,6 @@
 # Bölüm 2: Hello Channels
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -62,7 +62,7 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 
 Daha önce olduğu gibi, çıktı dosyasını `output.txt` adıyla `results/hello_channels` dizininde bulacaksınız (yukarıda gösterilen iş akışı betiğinin `output` bloğunda belirtildiği gibi).
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console title="results/hello_channels" hl_lines="2-3"
     results
@@ -73,7 +73,7 @@ Daha önce olduğu gibi, çıktı dosyasını `output.txt` adıyla `results/hell
     └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_channels/output.txt"
     Hello Channels!
@@ -207,7 +207,7 @@ nextflow run hello-channels.nf
 Her iki düzenlemeyi de doğru yaptıysanız, başarılı bir yürütme elde etmelisiniz.
 Sonucun hâlâ daha önce olduğu gibi olduğundan emin olmak için results dizinini kontrol edebilirsiniz.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_channels/output.txt"
     Hello Channels!
@@ -353,7 +353,7 @@ Yürütme monitörü `sayHello` süreci için `3 of 3` çağrı yapıldığını
 
 Ancak, results dizininde hâlâ yalnızca bir çıktı var:
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console title="results/hello_channels" hl_lines="3"
     results
@@ -364,7 +364,7 @@ Ancak, results dizininde hâlâ yalnızca bir çıktı var:
     └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="results/hello_channels/output.txt"
     Holà
@@ -382,7 +382,7 @@ _Diyagramda, kanal yeşil renkte temsil edilmektedir ve öğelerin sırası bir 
 Yürütme monitörüne geri baktığımızda, bize yalnızca bir alt dizin yolu verdi (`f4/c9962c`).
 Hadi oraya bir göz atalım.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console hl_lines="9"
     work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -396,7 +396,7 @@ Hadi oraya bir göz atalım.
     └── output.txt
     ```
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
     Hello
@@ -444,7 +444,7 @@ Bu nedenle `-ansi-log false` varsayılan davranış değil.
 
 Her neyse, artık her süreç çağrısının alt dizinlerine sahip olduğumuza göre, loglarına ve çıktılarına bakabiliriz.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     work/23/871c7ec3642a898ecd5e6090d21300/
@@ -482,7 +482,7 @@ Her neyse, artık her süreç çağrısının alt dizinlerine sahip olduğumuza 
     └── output.txt
     ```
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
     Bonjour
@@ -595,7 +595,7 @@ nextflow run hello-channels.nf
 Özet görünümüne geri döndüğümüzde, çıktı tekrar bir satırda özetleniyor.
 Tüm çıktı selamlamalarının orada olup olmadığını görmek için `results` dizinine bakın.
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     results/hello_channels/
@@ -607,7 +607,7 @@ Tüm çıktı selamlamalarının orada olup olmadığını görmek için `result
 
 Evet! Ve her birinin beklenen içerikleri var.
 
-??? abstract "Dosya içerikleri"
+??? abstract "Dosya içeriği"
 
     ```console title="Bonjour-output.txt"
     Bonjour
@@ -1143,7 +1143,7 @@ Operatör listesine tekrar baktığımızda, CSV formatındaki metni ayrıştır
 
 Operatörü uygulamak için, daha önce olduğu gibi kanal fabrikası satırına ekliyoruz.
 
-İş akışı bloğunda, `flatten()` yerine `splitcsv()` (yorum satırından çıkarılmış) koymak için aşağıdaki kod değişikliğini yapın:
+İş akışı bloğunda, `flatten()` yerine `splitCsv()` (yorum satırından çıkarılmış) koymak için aşağıdaki kod değişikliğini yapın:
 
 === "Sonra"
 

@@ -1,5 +1,5 @@
 ---
-title: Nextflow for Genomics
+title: Genomics
 hide:
   - toc
 page_type: index_page
@@ -19,7 +19,7 @@ additional_information:
 
 ---
 
-title: Nextflow für Genomik
+title: Genomik
 hide:
 
 - toc
@@ -28,7 +28,7 @@ hide:
   additional_information:
   technical_requirements: true
   learning_objectives: - Schreibe einen linearen Workflow, um Variantenaufruf auf eine einzelne Probe anzuwenden - Verwalte Hilfsdateien wie Indexdateien und Referenzgenom-Ressourcen angemessen - Nutze Nextflows Dataflow-Paradigma, um den Variantenaufruf pro Probe zu parallelisieren - Implementiere Multi-Sample Joint Calling mit relevanten Channel-Operatoren
-  audience_prerequisites: - "**Zielgruppe:** Dieser Kurs richtet sich an Forscher\*innen in der Genomik und verwandten Bereichen, die Datenanalyse-Pipelines entwickeln oder anpassen möchten." - "**Fähigkeiten:** Grundkenntnisse der Kommandozeile, grundlegende Skripting-Konzepte und gängige Genomik-Dateiformate werden vorausgesetzt." - "**Voraussetzungen:** Grundlegende Nextflow-Konzepte und Werkzeuge, die in [Hello Nextflow](../../hello_nextflow/) behandelt werden."
+  audience_prerequisites: - "**Zielgruppe:** Dieser Kurs richtet sich an Forscher\*innen in der Genomik und verwandten Bereichen, die Datenanalyse-Pipelines entwickeln oder anpassen möchten." - "**Fähigkeiten:** Grundkenntnisse der Kommandozeile, grundlegende Skriptkonzepte und gängige Genomik-Dateiformate werden vorausgesetzt." - "**Voraussetzungen:** Grundlegende Nextflow-Konzepte und -Werkzeuge, die in [Hello Nextflow](../../hello_nextflow/) behandelt werden."
 
 ---
 
@@ -51,15 +51,15 @@ Du beginnst damit, die Variantenaufruf-Tools manuell im Terminal auszuführen, u
 
 ### Lektionsplan
 
-Wir haben dies in drei Teile unterteilt, die sich jeweils auf spezifische Aspekte der Anwendung von Nextflow auf einen Genomik-Anwendungsfall konzentrieren.
+Wir haben dies in drei Teile unterteilt, die sich jeweils auf bestimmte Aspekte der Anwendung von Nextflow auf einen Genomik-Anwendungsfall konzentrieren.
 
-| Kurskapitel                                                             | Zusammenfassung                                                                                             | Geschätzte Dauer |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------- |
-| [Teil 1: Methodenübersicht](./01_method.md)                             | Die Variantenaufruf-Methodik verstehen und die Tools manuell ausführen                                      | 30 Min.          |
-| [Teil 2: Variantenaufruf pro Probe](./02_per_sample_variant_calling.md) | Eine Pipeline erstellen, die BAM-Dateien indiziert und Varianten aufruft, dann auf mehrere Proben skalieren | 60 Min.          |
-| [Teil 3: Joint Calling auf einer Kohorte](./03_joint_calling.md)        | Multi-Sample Joint Genotyping hinzufügen mit Channel-Operatoren, um Ausgaben pro Probe zu aggregieren       | 45 Min.          |
+| Kurskapitel                                                             | Zusammenfassung                                                                                               | Geschätzte Dauer |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------- |
+| [Teil 1: Methodenübersicht](./01_method.md)                             | Verstehen der Variantenaufruf-Methodik und manuelles Ausführen der Tools                                      | 30 Min.          |
+| [Teil 2: Variantenaufruf pro Probe](./02_per_sample_variant_calling.md) | Erstellen einer Pipeline, die BAM-Dateien indiziert und Varianten aufruft, dann Skalierung auf mehrere Proben | 60 Min.          |
+| [Teil 3: Joint Calling auf einer Kohorte](./03_joint_calling.md)        | Hinzufügen von Multi-Sample Joint Genotyping mit Channel-Operatoren zur Aggregation von Ausgaben pro Probe    | 45 Min.          |
 
-Am Ende dieses Kurses kannst du grundlegende Nextflow-Konzepte und Werkzeuge auf einen typischen Genomik-Anwendungsfall anwenden.
+Am Ende dieses Kurses wirst du in der Lage sein, grundlegende Nextflow-Konzepte und -Werkzeuge auf einen typischen Genomik-Anwendungsfall anzuwenden.
 
 Bereit, den Kurs zu beginnen?
 

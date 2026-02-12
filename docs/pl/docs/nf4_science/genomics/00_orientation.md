@@ -75,36 +75,35 @@ tree . -L 2
     ├── data
     │   ├── bam
     │   ├── ref
-    │   ├── sample_bams.txt
     │   └── samplesheet.csv
     ├── genomics.nf
     ├── modules
     │   ├── gatk_haplotypecaller.nf
+    │   ├── gatk_jointgenotyping.nf
     │   └── samtools_index.nf
     ├── nextflow.config
     └── solutions
-        ├── modules
-        ├── nf-test.config
         ├── part2
-        └── tests
+        └── part3
 
-    8 directories, 8 files
+    7 directories, 6 files
     ```
 
 Kliknij na kolorowe pole, aby rozwinąć sekcję i zobaczyć jej zawartość.
 Używamy takich zwijanych sekcji, aby wyświetlać oczekiwane wyniki poleceń, a także zawartość katalogów i plików w zwięzły sposób.
 
-- **Plik `genomics.nf`** to skrypt workflow'a, który będziesz rozbudowywać w trakcie kursu.
+- **Plik `genomics.nf`** to szkielet skryptu workflow'a, który będziesz rozbudowywać w miarę przechodzenia przez kurs.
 
-- **Katalog `modules`** zawiera szkieletowe pliki modułów, które wypełnisz podczas kursu.
+- **Katalog `modules`** zawiera szkielety modułów procesów, które wypełnisz podczas kursu.
 
 - **Plik `nextflow.config`** to plik konfiguracyjny, który ustawia minimalne właściwości środowiska.
   Na razie możesz go zignorować.
 
 - **Katalog `data`** zawiera dane wejściowe i powiązane zasoby, opisane później w kursie.
 
-- **Katalog `solutions`** zawiera ukończone pliki modułów oraz rozwiązanie Części 2, które może służyć jako punkt wyjścia do Części 3.
+- **Katalog `solutions`** zawiera ukończone skrypty workflow'ów i moduły, które powstają w wyniku każdego kroku kursu.
   Są one przeznaczone do użycia jako punkt odniesienia do sprawdzenia Twojej pracy i rozwiązywania ewentualnych problemów.
+  Rozwiązanie Części 2 może służyć jako punkt wyjścia do Części 3.
 
 ## Lista kontrolna gotowości
 
@@ -116,4 +115,4 @@ Myślisz, że jesteś gotowy/gotowa, aby zacząć?
 
 Jeśli możesz zaznaczyć wszystkie pola, możesz zaczynać.
 
-**Aby przejść do [Części 1: Przegląd metody i testowanie ręczne](./01_method.md), kliknij strzałkę w prawym dolnym rogu tej strony.**
+**Aby przejść do [Części 1: Przegląd metody](./01_method.md), kliknij strzałkę w prawym dolnym rogu tej strony.**
