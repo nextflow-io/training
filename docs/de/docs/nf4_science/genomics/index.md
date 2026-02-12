@@ -1,5 +1,5 @@
 ---
-title: Nextflow for Genomics
+title: Genomik
 hide:
   - toc
 page_type: index_page
@@ -7,29 +7,14 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Write a linear workflow to apply variant calling to a single sample
-    - Handle accessory files such as index files and reference genome resources appropriately
-    - Leverage Nextflow's dataflow paradigm to parallelize per-sample variant calling
-    - Implement multi-sample joint calling using relevant channel operators
+    - Schreibe einen linearen Workflow, um Variantenaufruf auf eine einzelne Probe anzuwenden
+    - Verwalte Hilfsdateien wie Indexdateien und Referenzgenom-Ressourcen angemessen
+    - Nutze Nextflows Dataflow-Paradigma, um den Variantenaufruf pro Probe zu parallelisieren
+    - Implementiere Multi-Sample Joint Calling mit relevanten Channel-Operatoren
   audience_prerequisites:
-    - "**Audience:** This course is designed for researchers in genomics and related fields who want to develop or customize data analysis pipelines."
-    - "**Skills:** Some familiarity with the command line, basic scripting concepts, and common genomics file formats is assumed."
-    - "**Prerequisites:** Foundational Nextflow concepts and tooling covered in [Hello Nextflow](../../hello_nextflow/)."
----
-
----
-
-title: Nextflow für Genomik
-hide:
-
-- toc
-  page_type: index_page
-  index_type: course
-  additional_information:
-  technical_requirements: true
-  learning_objectives: - Schreibe einen linearen Workflow, um Variantenaufruf auf eine einzelne Probe anzuwenden - Verwalte Hilfsdateien wie Indexdateien und Referenzgenom-Ressourcen angemessen - Nutze Nextflows Dataflow-Paradigma, um den Variantenaufruf pro Probe zu parallelisieren - Implementiere Multi-Sample Joint Calling mit relevanten Channel-Operatoren
-  audience_prerequisites: - "**Zielgruppe:** Dieser Kurs richtet sich an Forscher\*innen in der Genomik und verwandten Bereichen, die Datenanalyse-Pipelines entwickeln oder anpassen möchten." - "**Fähigkeiten:** Grundkenntnisse der Kommandozeile, grundlegende Skripting-Konzepte und gängige Genomik-Dateiformate werden vorausgesetzt." - "**Voraussetzungen:** Grundlegende Nextflow-Konzepte und Werkzeuge, die in [Hello Nextflow](../../hello_nextflow/) behandelt werden."
-
+    - "**Zielgruppe:** Dieser Kurs richtet sich an Forscher*innen in der Genomik und verwandten Bereichen, die Datenanalyse-Pipelines entwickeln oder anpassen möchten."
+    - "**Fähigkeiten:** Grundkenntnisse der Kommandozeile, grundlegende Skripting-Konzepte und gängige Genomik-Dateiformate werden vorausgesetzt."
+    - "**Voraussetzungen:** Grundlegende Nextflow-Konzepte und Werkzeuge, die in [Hello Nextflow](../../hello_nextflow/) behandelt werden."
 ---
 
 # Nextflow für Genomik

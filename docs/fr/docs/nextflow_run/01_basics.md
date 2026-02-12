@@ -101,6 +101,26 @@ nextflow run 1-hello.nf --input 'Hello World!'
 
 Si votre sortie console ressemble à cela, alors félicitations, vous venez d'exécuter votre premier workflow Nextflow !
 
+??? question "Si cela n'a pas fonctionné"
+
+    Si cela a échoué avec une erreur qui ressemble à ceci :
+
+    ```
+    Parameter `input` was specified on the command line or params file but is not declared in the script or config
+
+    -- Check script '1-hello.nf' at line: 23 or see '.nextflow.log' file for more details
+    ```
+
+    Alors vous utilisez probablement l'ancien analyseur de langage Nextflow v1.
+    Cela a été mentionné au début du cours, mais vous l'avez peut-être manqué.
+    Consultez le matériel d'aide [Versions de Nextflow](../info/nxf_versions.md).
+
+    En bref, si vous utilisez Nextflow `25.10`, vous devez activer l'analyseur de langage v2 :
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 La sortie la plus importante ici est la dernière ligne, qui est mise en surbrillance dans la sortie ci-dessus :
 
 ```console
@@ -135,7 +155,7 @@ C'est bien, notre workflow a fait ce qu'il était censé faire !
 Par défaut, Nextflow sauvegardera les sorties du pipeline dans un répertoire appelé `results` dans votre chemin actuel.
 Pour changer où vos fichiers sont publiés, utilisez le drapeau CLI `-output-dir` (ou `-o` en abrégé)
 
-!!! danger
+!!! danger "Danger"
 
     Notez que `--input` a deux tirets et `-output-dir` en a un seul !
     C'est parce que `--input` est un _paramètre_ du pipeline et `-output-dir` est un drapeau CLI principal de Nextflow.

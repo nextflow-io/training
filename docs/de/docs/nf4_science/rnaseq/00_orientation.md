@@ -1,31 +1,77 @@
-# Orientierung
+# Erste Schritte
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Die Trainingsumgebung enthält alle Software, Code und Daten, die zum Durcharbeiten dieses Trainingskurses notwendig sind, sodass du nichts selbst installieren musst.
-Allerdings benötigst du einen (kostenlosen) Account zum Anmelden, und du solltest dir ein paar Minuten Zeit nehmen, um dich mit der Benutzeroberfläche vertraut zu machen.
+## Eine Trainingsumgebung starten
 
-Falls du dies noch nicht getan hast, absolviere bitte den Mini-Kurs [Environment Setup](../../envsetup/), bevor du fortfährst.
+Um die vorgefertigte Umgebung zu nutzen, die wir auf GitHub Codespaces bereitstellen, klicke auf den Button „Open in GitHub Codespaces" unten. Für andere Optionen siehe [Umgebungsoptionen](../../envsetup/index.md).
 
-## Bereitgestellte Materialien
+Wir empfehlen, die Trainingsumgebung in einem neuen Browser-Tab oder -Fenster zu öffnen (verwende Rechtsklick, Strg-Klick oder Cmd-Klick, je nach deinem Gerät), damit du weiterlesen kannst, während die Umgebung lädt.
+Du musst diese Anleitung parallel geöffnet halten, um den Kurs durchzuarbeiten.
 
-Während dieses Trainingskurses arbeiten wir im Verzeichnis `nf4-science/rnaseq/`, in das du wechseln musst, wenn du den Trainingsarbeitsbereich öffnest.
-Dieses Verzeichnis enthält alle Code-Dateien, Testdaten und zusätzlichen Dateien, die du benötigen wirst.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Erkunde gerne den Inhalt dieses Verzeichnisses; am einfachsten geht das mit dem Datei-Explorer auf der linken Seite des Trainingsarbeitsbereichs in der VSCode-Oberfläche.
+### Grundlagen der Umgebung
+
+Diese Trainingsumgebung enthält alle Software, Code und Daten, die zum Durcharbeiten des Trainingskurses notwendig sind, sodass du nichts selbst installieren musst.
+
+Der Codespace ist mit einer VSCode-Oberfläche eingerichtet, die einen Dateisystem-Explorer, einen Code-Editor und ein Terminal-Shell umfasst.
+Alle Anweisungen während des Kurses (z. B. „öffne die Datei", „bearbeite den Code" oder „führe diesen Befehl aus") beziehen sich auf diese drei Teile der VSCode-Oberfläche, sofern nicht anders angegeben.
+
+Falls du diesen Kurs selbstständig durcharbeitest, mache dich bitte mit den [Grundlagen der Umgebung](../../envsetup/01_setup.md) vertraut, um weitere Details zu erfahren.
+
+### Versionsanforderungen
+
+Dieses Training ist für Nextflow 25.10.2 oder neuer **mit AKTIVIERTEM v2-Syntax-Parser** konzipiert.
+Falls du eine lokale oder benutzerdefinierte Umgebung verwendest, stelle bitte sicher, dass du die korrekten Einstellungen verwendest, wie [hier](../../info/nxf_versions.md) dokumentiert.
+
+## Bereit zum Arbeiten
+
+Sobald dein Codespace läuft, musst du zwei Dinge tun, bevor du ins Training einsteigst: Setze dein Arbeitsverzeichnis für diesen spezifischen Kurs und wirf einen Blick auf die bereitgestellten Materialien.
+
+### Das Arbeitsverzeichnis festlegen
+
+Standardmäßig öffnet sich der Codespace mit dem Arbeitsverzeichnis im Stammverzeichnis aller Trainingskurse, aber für diesen Kurs arbeiten wir im Verzeichnis `nf4-science/rnaseq/`.
+
+Wechsle jetzt das Verzeichnis, indem du diesen Befehl im Terminal ausführst:
+
+```bash
+cd nf4-science/rnaseq/
+```
+
+Du kannst VSCode so einstellen, dass es sich auf dieses Verzeichnis fokussiert, sodass nur die relevanten Dateien im Datei-Explorer in der Seitenleiste angezeigt werden:
+
+```bash
+code .
+```
+
+!!! tip "Tipp"
+
+    Falls du aus irgendeinem Grund dieses Verzeichnis verlässt (z. B. dein Codespace geht in den Ruhezustand), kannst du jederzeit den vollständigen Pfad verwenden, um dorthin zurückzukehren, vorausgesetzt, du arbeitest in der GitHub Codespaces-Trainingsumgebung:
+
+    ```bash
+    cd /workspaces/training/nf4-science/rnaseq
+    ```
+
+Schauen wir uns nun den Inhalt an.
+
+### Die bereitgestellten Materialien erkunden
+
+Du kannst den Inhalt dieses Verzeichnisses mit dem Datei-Explorer auf der linken Seite des Trainingsarbeitsbereichs erkunden.
 Alternativ kannst du den Befehl `tree` verwenden.
+
 Während des Kurses verwenden wir die Ausgabe von `tree`, um die Verzeichnisstruktur und den Inhalt in lesbarer Form darzustellen, manchmal mit geringfügigen Änderungen zur besseren Lesbarkeit.
 
-Hier erstellen wir ein Inhaltsverzeichnis bis zur zweiten Ebene:
+Hier erstellen wir ein Inhaltsverzeichnis bis zur dritten Ebene:
 
 ```bash
 tree . -L 3
 ```
 
-??? success "Verzeichnisinhalt"
+??? abstract "Verzeichnisinhalt"
 
     ```console
-    rnaseq
+    .
     ├── data
     │   ├── genome.fa
     │   ├── paired-end.csv
@@ -62,33 +108,30 @@ tree . -L 3
         └── rnaseq_pe-3.3.nf
     ```
 
-!!!note "Hinweis"
+Klicke auf das farbige Feld, um den Abschnitt zu erweitern und seinen Inhalt anzuzeigen.
+Wir verwenden solche ausklappbaren Abschnitte, um erwartete Befehlsausgaben sowie Verzeichnis- und Dateiinhalte auf kompakte Weise darzustellen.
 
-    Keine Sorge, wenn das viel erscheint; wir gehen die relevanten Teile bei jedem Schritt des Kurses durch.
-    Dies soll dir nur einen Überblick verschaffen.
+- **Die Datei `rnaseq.nf`** ist eine Grundstruktur für ein Workflow-Script, das du im Verlauf des Kurses aufbauen wirst.
 
-**Hier ist eine Zusammenfassung dessen, was du zum Einstieg wissen solltest:**
+- **Das Verzeichnis `modules`** enthält Grundstrukturen für Prozessmodule, die du während des Kurses ausfüllen wirst.
 
-- **Die Datei `rnaseq.nf`** ist die Grundstruktur des Workflow-Scripts, das wir entwickeln werden.
+- **Die Datei `nextflow.config`** ist eine Konfigurationsdatei, die minimale Umgebungseigenschaften festlegt.
+  Du kannst sie vorerst ignorieren.
 
-- **Die Datei `nextflow.config`** ist eine Konfigurationsdatei, die minimale Umgebungseigenschaften festlegt. Du kannst sie vorerst ignorieren.
-
-- **Das Verzeichnis `data`** enthält Eingabedaten und zugehörige Ressourcen:
-
-  - _Ein Referenzgenom_ namens `genome.fa`, das aus einer kleinen Region des menschlichen Chromosoms 20 besteht (aus hg19/b37).
-  - _RNAseq-Daten_, die auf eine kleine Region reduziert wurden, um die Dateigrößen klein zu halten, im Verzeichnis `reads/`.
-  - _CSV-Dateien_, die die IDs und Pfade der Beispieldatendateien auflisten, zur Stapelverarbeitung.
+- **Das Verzeichnis `data`** enthält Eingabedaten und zugehörige Ressourcen, die später im Kurs beschrieben werden.
 
 - **Das Verzeichnis `solutions`** enthält die fertigen Workflow-Scripts und Module, die aus jedem Schritt des Kurses resultieren.
   Sie sind als Referenz gedacht, um deine Arbeit zu überprüfen und eventuelle Probleme zu beheben.
-  Die Nummer im Dateinamen entspricht dem Schritt des relevanten Kursteils.
+  Die Lösung aus Teil 2 kann als Ausgangspunkt für Teil 3 verwendet werden.
 
-!!!tip "Tipp"
+## Bereitschafts-Checkliste
 
-    Falls du aus irgendeinem Grund dieses Verzeichnis verlässt, kannst du jederzeit diesen Befehl ausführen, um dorthin zurückzukehren:
+Denkst du, du bist bereit loszulegen?
 
-    ```bash
-    cd /workspaces/training/nf4-science/rnaseq
-    ```
+- [ ] Ich verstehe das Ziel dieses Kurses und seine Voraussetzungen
+- [ ] Meine Umgebung ist eingerichtet und läuft
+- [ ] Ich habe mein Arbeitsverzeichnis entsprechend festgelegt
 
-Um nun mit dem Kurs zu beginnen, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.
+Wenn du alle Kästchen abhaken kannst, bist du startklar.
+
+**Um mit [Teil 1: Methodenübersicht](./01_method.md) fortzufahren, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.**

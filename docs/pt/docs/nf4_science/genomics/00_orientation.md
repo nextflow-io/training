@@ -75,36 +75,35 @@ tree . -L 2
     ├── data
     │   ├── bam
     │   ├── ref
-    │   ├── sample_bams.txt
     │   └── samplesheet.csv
     ├── genomics.nf
     ├── modules
     │   ├── gatk_haplotypecaller.nf
+    │   ├── gatk_jointgenotyping.nf
     │   └── samtools_index.nf
     ├── nextflow.config
     └── solutions
-        ├── modules
-        ├── nf-test.config
         ├── part2
-        └── tests
+        └── part3
 
-    8 directories, 8 files
+    7 directories, 6 files
     ```
 
 Clique na caixa colorida para expandir a seção e visualizar seu conteúdo.
 Usamos seções recolhíveis como esta para exibir saídas de comando esperadas, bem como conteúdos de diretórios e arquivos de forma concisa.
 
-- **O arquivo `genomics.nf`** é um script de fluxo de trabalho que você construirá ao longo do curso.
+- **O arquivo `genomics.nf`** é uma estrutura base para um script de fluxo de trabalho que você construirá conforme avança no curso.
 
-- **O diretório `modules`** contém arquivos de módulo esqueleto que você preencherá durante o curso.
+- **O diretório `modules`** contém estruturas base para módulos de processo que você preencherá durante o curso.
 
 - **O arquivo `nextflow.config`** é um arquivo de configuração que define propriedades mínimas do ambiente.
   Você pode ignorá-lo por enquanto.
 
 - **O diretório `data`** contém dados de entrada e recursos relacionados, descritos posteriormente no curso.
 
-- **O diretório `solutions`** contém arquivos de módulo completos e uma solução da Parte 2 que pode servir como ponto de partida para a Parte 3.
+- **O diretório `solutions`** contém scripts de fluxo de trabalho e módulos completos que resultam de cada etapa do curso.
   Eles são destinados a serem usados como referência para verificar seu trabalho e solucionar quaisquer problemas.
+  A solução da Parte 2 pode ser usada como ponto de partida para a Parte 3.
 
 ## Lista de verificação de prontidão
 
@@ -116,4 +115,4 @@ Acha que está pronto para mergulhar?
 
 Se você pode marcar todas as caixas, está pronto para começar.
 
-**Para continuar para a [Parte 1: Visão geral do método e teste manual](./01_method.md), clique na seta no canto inferior direito desta página.**
+**Para continuar para a [Parte 1: Visão geral do método](./01_method.md), clique na seta no canto inferior direito desta página.**

@@ -699,7 +699,7 @@ process sayHello {
 }
 ```
 
-Vous trouverez encore ce modèle de code partout dans les anciens pipelines Nextflow et modules de **processus**, il est donc important d'en être conscient·e.
+Vous trouverez encore ce modèle de code partout dans les anciens pipelines Nextflow et modules de **processus**, il est donc important d'en être conscient.
 Cependant, nous ne recommandons pas de l'utiliser dans tout nouveau travail car il sera éventuellement interdit dans les futures versions du langage Nextflow.
 
 ### À retenir
@@ -888,7 +888,7 @@ Comme vous pouvez le voir, nous pouvons spécifier le type d'entrée que le work
 La syntaxe est `nom: Type = valeur_par_defaut`.
 Les types supportés incluent `String`, `Integer`, `Float`, `Boolean` et `Path`.
 
-!!! info "Information"
+!!! info "Info"
 
     Dans les anciens workflows, vous pouvez voir que tout ce bloc `params` est écrit simplement comme `input = 'Holà mundo!'`.
 
@@ -912,6 +912,34 @@ nextflow run hello-world.nf
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+    ```
+
+??? question "Si cela n'a pas fonctionné"
+
+    Si cela a échoué avec une erreur qui ressemble à ceci :
+
+    ```
+    ERROR ~ Script compilation error
+    - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+    - cause: you tried to assign a value to the class 'java.lang.String'
+    @ line 24, column 12.
+          input: String = 'Holà mundo!'
+                  ^
+
+    1 error
+
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+    Alors vous utilisez probablement l'ancien analyseur de langage Nextflow v1.
+    Cela a été mentionné au début du cours, mais vous l'avez peut-être manqué.
+    Consultez le matériel d'aide sur les [versions de Nextflow](../info/nxf_versions.md).
+
+    En bref, si vous utilisez Nextflow `25.10`, vous devez activer l'analyseur de langage v2 :
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
     ```
 
 La sortie sera au même endroit que précédemment, mais le contenu devrait être mis à jour avec le nouveau texte.
@@ -1113,7 +1141,7 @@ nextflow clean -before golden_cantor -f
 La sortie devrait être similaire à avant, mais disant maintenant « Removed » au lieu de « Would remove ».
 Notez que cela ne supprime pas les sous-répertoires à deux caractères (comme `a3/` ci-dessus) mais vide leur contenu.
 
-!!! warning "Avertissement"
+!!! Warning "Avertissement"
 
     La suppression des sous-répertoires de travail des exécutions passées les supprime du cache de Nextflow et supprime toutes les sorties qui étaient stockées dans ces répertoires.
     Cela signifie que cela brise la capacité de Nextflow à reprendre l'exécution sans relancer les **processus** correspondants.

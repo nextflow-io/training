@@ -1,50 +1,49 @@
-# Próximos Passos
+# Resumo do Curso
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Parabéns novamente por concluir o curso de treinamento Nextflow para RNAseq e obrigado por completar nossa pesquisa!
+Parabéns por concluir o curso de treinamento Nextflow para RNAseq!
 
----
+## Sua jornada
 
-## 1. As 3 principais maneiras de aprimorar suas habilidades em Nextflow
+Você começou executando ferramentas de processamento de RNAseq manualmente no terminal para entender a metodologia.
+Depois, você construiu um pipeline Nextflow para uma única amostra para automatizar o processo, escalou-o para lidar com múltiplas amostras em paralelo e o estendeu para lidar com dados paired-end e agregar relatórios de QC entre amostras.
 
-Aqui estão nossas três principais recomendações sobre o que fazer a seguir com base no curso que você acabou de concluir.
+### O que você construiu
 
-### 1.1. Aplicar Nextflow a outros casos de uso de análise científica
+- Um pipeline de processamento de RNAseq que recebe arquivos FASTQ como entrada e produz reads aparados, alinhamentos e relatórios de QC agregados como saída.
+- Processos para aparar (Trim Galore), alinhar (HISAT2), controle de qualidade (FastQC) e agregação de relatórios (MultiQC) armazenados em arquivos de módulo separados.
+- O pipeline paraleliza automaticamente o processamento de amostras de entrada usando o paradigma de fluxo de dados do Nextflow.
+- O pipeline final lida com dados de sequenciamento paired-end.
 
-**Confira a página [Nextflow para Ciência](../nf4_science/index.md)** para uma lista de outros cursos curtos e independentes que demonstram como aplicar os conceitos básicos e mecanismos apresentados no Hello Nextflow a casos de uso comuns de análise científica.
+### Habilidades adquiridas
 
-Se você não vir seu domínio representado por um caso de uso relacionável, nos avise no [fórum da Comunidade](https://community.seqera.io/) para que possamos adicioná-lo à nossa lista de desenvolvimento.
+Através deste curso prático, você aprendeu como:
 
-### 1.2. Começar com nf-core
+- Escrever um fluxo de trabalho linear para aplicar métodos básicos de processamento e QC de RNAseq
+- Lidar adequadamente com arquivos específicos do domínio, como FASTQ e recursos de genoma de referência
+- Lidar com dados de sequenciamento single-end e paired-end
+- Aproveitar o paradigma de fluxo de dados do Nextflow para paralelizar o processamento de RNAseq por amostra
+- Agregar relatórios de QC em múltiplas etapas e amostras usando operadores de canal relevantes
 
-**[nf-core](https://nf-co.re/)** é um esforço colaborativo mundial para desenvolver pipelines de código aberto padronizados para uma ampla gama de aplicações de pesquisa científica.
-O projeto inclui [mais de 100 pipelines](https://nf-co.re/pipelines/) que estão disponíveis para uso imediato e [bem mais de 1400 módulos de processo](https://nf-co.re/modules/) que podem ser integrados em seus próprios projetos, além de um rico conjunto de ferramentas para desenvolvedores.
+Você está agora preparado para começar a aplicar Nextflow a fluxos de trabalho de análise de RNAseq em seu próprio trabalho.
 
-O curso de treinamento **[Hello nf-core](../../hello_nf-core/index.md)** irá apresentá-lo aos pipelines curados pela comunidade nf-core e ao framework de desenvolvimento, projetado para ajudá-lo a escrever fluxos de trabalho reproduzíveis, escaláveis e padronizados. Você aprenderá como usar pipelines nf-core existentes, contribuir para seu desenvolvimento e até começar a construir os seus próprios, apoiado por melhores práticas e uma comunidade vibrante. Se você está pronto para aplicar suas habilidades em Nextflow em projetos do mundo real, este é o próximo passo perfeito.
+## Próximos passos para aprimorar suas habilidades
 
-### 1.3. Dominar recursos mais avançados do Nextflow
+Aqui estão nossas principais sugestões sobre o que fazer a seguir:
 
-Nos cursos Hello, mantemos o nível de complexidade técnica baixo propositalmente para evitar sobrecarregá-lo com informações que você não precisa para começar com Nextflow.
-À medida que você avança com seu trabalho, você vai querer aprender como usar o conjunto completo de recursos e o poder do Nextflow.
+- Aplicar Nextflow a outros casos de uso de análise científica com [Nextflow para Ciência](../index.md)
+- Começar com nf-core com [Hello nf-core](../../hello_nf-core/index.md)
+- Explorar recursos mais avançados do Nextflow com as [Missões Secundárias](../../side_quests/index.md)
 
-Para isso, estamos atualmente trabalhando em uma **coleção de [Missões Secundárias](../side_quests/index.md)**, que são cursos curtos e independentes que se aprofundam em tópicos específicos como testes e manipulação de metadados.
+Por fim, recomendamos que você dê uma olhada no [**Seqera Platform**](https://seqera.io/), uma plataforma baseada em nuvem desenvolvida pelos criadores do Nextflow que facilita ainda mais o lançamento e gerenciamento de seus fluxos de trabalho, bem como o gerenciamento de seus dados e a execução de análises interativamente em qualquer ambiente.
 
----
+## Obtendo ajuda
 
-## 2. Conheça o Seqera Platform
+Para recursos de ajuda e suporte da comunidade, consulte a [página de Ajuda](../../help.md).
 
-**[Seqera Platform](https://seqera.io/) é a melhor maneira de executar Nextflow na prática.**
+## Pesquisa de feedback
 
-É uma plataforma baseada em nuvem desenvolvida pelos criadores do Nextflow que você pode conectar à sua própria infraestrutura de computação (seja local, HPC ou nuvem) para facilitar muito o lançamento e gerenciamento de seus fluxos de trabalho, bem como gerenciar seus dados e executar análises interativamente em um ambiente de nuvem.
+Antes de prosseguir, por favor, reserve um minuto para completar a pesquisa do curso! Seu feedback nos ajuda a melhorar nossos materiais de treinamento para todos.
 
-O Free Tier está disponível para uso gratuito por todos (com cotas de uso).
-Acadêmicos qualificados podem obter acesso gratuito de nível Pro (sem limitações de uso) através do [Programa Acadêmico](https://seqera.io/academic/program/).
-
-Dê uma olhada nos [tutoriais do Seqera Platform](https://docs.seqera.io/platform/latest/getting-started/quickstart-demo/comm-showcase) para ver se isso pode ser útil para você.
-
----
-
-### É isso por enquanto!
-
-**Boa sorte em sua jornada com Nextflow e não hesite em nos informar no [fórum da Comunidade](https://community.seqera.io/) o que mais poderíamos fazer para ajudar.**
+[Responder à pesquisa :material-arrow-right:](survey.md){ .md-button .md-button--primary }

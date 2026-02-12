@@ -888,7 +888,7 @@ Como você vê, podemos especificar o tipo de entrada que o fluxo de trabalho es
 A sintaxe é `nome: Tipo = valor_padrão`.
 Os tipos suportados incluem `String`, `Integer`, `Float`, `Boolean` e `Path`.
 
-!!! info
+!!! info "Info"
 
     Em fluxos de trabalho mais antigos, você pode ver que todo o bloco `params` está escrito como apenas `input = 'Holà mundo!'`.
 
@@ -912,6 +912,34 @@ nextflow run hello-world.nf
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+    ```
+
+??? question "Se não funcionou"
+
+    Se isso falhou com um erro parecido com este:
+
+    ```
+    ERROR ~ Script compilation error
+    - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+    - cause: you tried to assign a value to the class 'java.lang.String'
+    @ line 24, column 12.
+          input: String = 'Holà mundo!'
+                  ^
+
+    1 error
+
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+    Então você provavelmente está usando o analisador de linguagem v1 mais antigo do Nextflow.
+    Isso foi mencionado no início do curso, mas talvez você tenha perdido.
+    Verifique o material de ajuda sobre [versões do Nextflow](../info/nxf_versions.md).
+
+    Resumindo, se você estiver usando o Nextflow `25.10`, então precisa habilitar o analisador de linguagem v2:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
     ```
 
 A saída estará no mesmo lugar que anteriormente, mas o conteúdo deve ser atualizado com o novo texto.

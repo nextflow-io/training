@@ -1,31 +1,77 @@
-# Oryantasyon
+# Başlarken
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Eğitim ortamı, bu eğitim kursunu tamamlamak için gerekli tüm yazılımı, kodu ve veriyi içermektedir, dolayısıyla kendiniz herhangi bir şey yüklemenize gerek yoktur.
-Ancak, giriş yapmak için bir (ücretsiz) hesaba ihtiyacınız var ve arayüze aşina olmak için birkaç dakikanızı ayırmalısınız.
+## Eğitim ortamını başlatın
 
-Henüz yapmadıysanız, lütfen daha ileri gitmeden önce [Ortam Kurulumu](../../envsetup/) mini kursunu tamamlayın.
+GitHub Codespaces üzerinde sağladığımız önceden hazırlanmış ortamı kullanmak için aşağıdaki "GitHub Codespaces'te Aç" düğmesine tıklayın. Diğer seçenekler için [Ortam seçenekleri](../../envsetup/index.md) sayfasına bakın.
 
-## Sağlanan materyaller
+Eğitim ortamını yeni bir tarayıcı sekmesinde veya penceresinde açmanızı öneririz (ekipmanınıza bağlı olarak sağ tıklama, ctrl-tıklama veya cmd-tıklama kullanın), böylece ortam yüklenirken okumaya devam edebilirsiniz.
+Kursu tamamlamak için bu talimatları paralel olarak açık tutmanız gerekecektir.
 
-Bu eğitim kursu boyunca, eğitim çalışma alanını açtığınızda içine girmeniz gereken `nf4-science/rnaseq/` dizininde çalışacağız.
-Bu dizin, ihtiyaç duyacağınız tüm kod dosyalarını, test verilerini ve yardımcı dosyaları içermektedir.
+[![GitHub Codespaces'te Aç](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Bu dizinin içeriğini keşfetmekten çekinmeyin; bunu yapmanın en kolay yolu VSCode arayüzündeki eğitim çalışma alanının sol tarafındaki dosya gezginini kullanmaktır.
+### Ortam temelleri
+
+Bu eğitim ortamı, eğitim kursunu tamamlamak için gerekli tüm yazılımı, kodu ve veriyi içermektedir, dolayısıyla kendiniz herhangi bir şey yüklemenize gerek yoktur.
+
+Codespace, bir dosya sistemi gezgini, bir kod düzenleyici ve bir terminal kabuğu içeren bir VSCode arayüzü ile kurulmuştur.
+Kurs boyunca verilen tüm talimatlar (örneğin 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın'), aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunur.
+
+Bu kursu kendi başınıza tamamlıyorsanız, lütfen daha fazla ayrıntı için [ortam temelleri](../../envsetup/01_setup.md) ile kendinizi tanıştırın.
+
+### Sürüm gereksinimleri
+
+Bu eğitim, Nextflow 25.10.2 veya sonrası için **v2 sözdizimi ayrıştırıcısı ETKİNLEŞTİRİLMİŞ** olarak tasarlanmıştır.
+Yerel veya özel bir ortam kullanıyorsanız, lütfen [burada](../../info/nxf_versions.md) belgelenen doğru ayarları kullandığınızdan emin olun.
+
+## Çalışmaya hazırlanın
+
+Codespace'iniz çalışmaya başladığında, eğitime dalmadan önce yapmanız gereken iki şey vardır: bu özel kurs için çalışma dizininizi ayarlayın ve sağlanan materyallere bir göz atın.
+
+### Çalışma dizinini ayarlayın
+
+Varsayılan olarak, codespace tüm eğitim kurslarının kök dizininde ayarlanmış çalışma dizini ile açılır, ancak bu kurs için `nf4-science/rnaseq/` dizininde çalışacağız.
+
+Terminalde şu komutu çalıştırarak şimdi dizini değiştirin:
+
+```bash
+cd nf4-science/rnaseq/
+```
+
+VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz, böylece dosya gezgini kenar çubuğunda yalnızca ilgili dosyalar görünür:
+
+```bash
+code .
+```
+
+!!! tip "İpucu"
+
+    Herhangi bir nedenle bu dizinden çıkarsanız (örneğin codespace'iniz uyku moduna geçerse), Github Codespaces eğitim ortamında çalıştığınızı varsayarak, oraya geri dönmek için her zaman tam yolu kullanabilirsiniz:
+
+    ```bash
+    cd /workspaces/training/nf4-science/rnaseq
+    ```
+
+Şimdi içeriğe bir göz atalım.
+
+### Sağlanan materyalleri keşfedin
+
+Bu dizinin içeriğini, eğitim çalışma alanının sol tarafındaki dosya gezginini kullanarak keşfedebilirsiniz.
 Alternatif olarak, `tree` komutunu kullanabilirsiniz.
+
 Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde göstermek için `tree` çıktısını kullanıyoruz, bazen netlik için küçük değişikliklerle.
 
-Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
+Burada üçüncü seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
 
 ```bash
 tree . -L 3
 ```
 
-??? success "Dizin içeriği"
+??? abstract "Dizin içeriği"
 
     ```console
-    rnaseq
+    .
     ├── data
     │   ├── genome.fa
     │   ├── paired-end.csv
@@ -62,33 +108,30 @@ tree . -L 3
         └── rnaseq_pe-3.3.nf
     ```
 
-!!!note
+Bölümü genişletmek ve içeriğini görüntülemek için renkli kutuya tıklayın.
+Beklenen komut çıktısını ve ayrıca dizin ve dosya içeriklerini özlü bir şekilde görüntülemek için bunun gibi daraltılabilir bölümler kullanıyoruz.
 
-    Bu çok fazla gibi görünüyorsa endişelenmeyin; kursun her adımında ilgili parçaları ele alacağız.
-    Bu sadece size bir genel bakış sağlamak için.
+- **`rnaseq.nf` dosyası**, kurs boyunca oluşturacağınız bir iş akışı betiği için bir iskelet dosyasıdır.
 
-**İşte başlamak için bilmeniz gerekenlerın bir özeti:**
+- **`modules` dizini**, kurs boyunca dolduracağınız süreç modülleri için iskeletler içerir.
 
-- **`rnaseq.nf` dosyası**, geliştireceğimiz iş akışı betiğinin ana hatlarıdır.
+- **`nextflow.config` dosyası**, minimum ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır.
+  Şimdilik bunu göz ardı edebilirsiniz.
 
-- **`nextflow.config` dosyası**, minimum ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır. Şimdilik bunu göz ardı edebilirsiniz.
-
-- **`data` dizini**, girdi verilerini ve ilgili kaynakları içerir:
-
-  - İnsan kromozomu 20'nin küçük bir bölgesinden oluşan (hg19/b37'den) `genome.fa` adlı _bir referans genom_.
-  - Dosya boyutlarını küçük tutmak için küçük bir bölgeye indirilmiş, `reads/` dizinindeki _RNAseq verileri_.
-  - Örnek veri dosyalarının kimliklerini ve yollarını listeleyen, toplu işleme için _CSV dosyaları_.
+- **`data` dizini**, girdi verilerini ve ilgili kaynakları içerir, kursun ilerleyen bölümlerinde açıklanacaktır.
 
 - **`solutions` dizini**, kursun her adımından kaynaklanan tamamlanmış iş akışı betiklerini ve modüllerini içerir.
   Bunlar, çalışmanızı kontrol etmek ve sorunları gidermek için referans olarak kullanılmak üzere tasarlanmıştır.
-  Dosya adındaki numara, kursun ilgili bölümünün adımına karşılık gelir.
+  Bölüm 2 çözümü, Bölüm 3 için başlangıç noktası olarak kullanılabilir.
 
-!!!tip
+## Hazırlık kontrol listesi
 
-    Herhangi bir nedenle bu dizinden çıkarsanız, oraya geri dönmek için her zaman şu komutu çalıştırabilirsiniz:
+Dalmaya hazır olduğunuzu mu düşünüyorsunuz?
 
-    ```bash
-    cd /workspaces/training/nf4-science/rnaseq
-    ```
+- [ ] Bu kursun amacını ve ön koşullarını anlıyorum
+- [ ] Ortamım çalışır durumda
+- [ ] Çalışma dizinini uygun şekilde ayarladım
 
-Şimdi, kursa başlamak için bu sayfanın sağ alt köşesindeki oka tıklayın.
+Tüm kutuları işaretleyebiliyorsanız, başlamaya hazırsınız.
+
+**[Bölüm 1: Yönteme genel bakış](./01_method.md) sayfasına devam etmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**

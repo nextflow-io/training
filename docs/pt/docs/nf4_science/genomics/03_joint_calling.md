@@ -2,27 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Na Parte 2, você construiu um pipeline de chamada de variantes por amostra que processou os dados de cada amostra de forma independente.
-Agora vamos estendê-lo para implementar a chamada conjunta de variantes, conforme abordado na [Parte 1](01_method.md).
-
-## Tarefa
-
-Nesta parte do curso, vamos estender o fluxo de trabalho para fazer o seguinte:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
-</figure>
-
-1. Gerar um arquivo de índice para cada arquivo BAM de entrada usando Samtools
-2. Executar o GATK HaplotypeCaller em cada arquivo BAM de entrada para gerar um GVCF de chamadas de variantes genômicas por amostra
-3. Coletar todos os GVCFs e combiná-los em um armazenamento de dados GenomicsDB
-4. Executar genotipagem conjunta no armazenamento de dados GVCF combinado para produzir um VCF em nível de coorte
-
-Esta parte se baseia diretamente no fluxo de trabalho produzido pela Parte 2.
+Anteriormente, você construiu um pipeline de chamada de variantes por amostra que processou os dados de cada amostra de forma independente.
+Agora vamos estendê-lo para implementar a chamada conjunta de variantes, conforme descrito na [Parte 1](01_method.md) (caso de uso multi-amostra).
 
 ??? info "Como começar a partir desta seção"
 
-    Esta seção do curso pressupõe que você completou a [Parte 2: Chamada de variantes por amostra](./02_per_sample_variant_calling.md) e tem um pipeline `genomics.nf` funcionando.
+    Esta seção do curso pressupõe que você completou a [Parte 1: Visão Geral do Método](./01_method.md), [Parte 2: Chamada de variantes por amostra](./02_per_sample_variant_calling.md) e tem um pipeline `genomics.nf` funcionando.
 
     Se você não completou a Parte 2 ou quer começar do zero para esta parte, pode usar a solução da Parte 2 como ponto de partida.
     Execute estes comandos de dentro do diretório `nf4-science/genomics/`:
@@ -40,6 +25,21 @@ Esta parte se baseia diretamente no fluxo de trabalho produzido pela Parte 2.
     nextflow run genomics.nf -profile test
     ```
 
+## Tarefa
+
+Nesta parte do curso, vamos estender o fluxo de trabalho para fazer o seguinte:
+
+1. Gerar um arquivo de índice para cada arquivo BAM de entrada usando Samtools
+2. Executar o GATK HaplotypeCaller em cada arquivo BAM de entrada para gerar um GVCF de chamadas de variantes genômicas por amostra
+3. Coletar todos os GVCFs e combiná-los em um armazenamento de dados GenomicsDB
+4. Executar genotipagem conjunta no armazenamento de dados GVCF combinado para produzir um VCF em nível de coorte
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
+</figure>
+
+Isso implementa o método descrito na [Parte 1: Visão Geral do Método](./01_method.md) (segunda seção cobrindo o caso de uso multi-amostra) e se baseia diretamente no fluxo de trabalho produzido pela [Parte 2: Chamada de variantes por amostra](./02_per_sample_variant_calling.md).
+
 ## Plano da lição
 
 Dividimos isso em duas etapas:
@@ -49,7 +49,9 @@ Dividimos isso em duas etapas:
 2. **Adicionar uma etapa de genotipagem conjunta que combina e genotipa os GVCFs por amostra.**
    Isso introduz o operador `collect()`, closures Groovy para construção de linha de comando e processos com múltiplos comandos.
 
-!!! note "Nota"
+Isso automatiza as etapas da segunda seção da [Parte 1: Visão geral do método](./01_method.md#2-joint-calling-on-a-cohort), onde você executou esses comandos manualmente em seus contêineres.
+
+!!! tip "Dica"
 
      Certifique-se de estar no diretório de trabalho correto:
      `cd /workspaces/training/nf4-science/genomics`
@@ -199,7 +201,7 @@ Com o módulo, alvos de publicação e bloco de saída todos atualizados, podemo
 Execute o fluxo de trabalho para verificar se as alterações funcionam.
 
 ```bash
-nextflow run genomics.nf
+nextflow run genomics.nf -profile test
 ```
 
 ??? success "Saída do comando"
@@ -283,26 +285,59 @@ O processo de genotipagem conjunta precisa de dois tipos de entradas que ainda n
 #### 2.1.1. Adicionar um parâmetro `cohort_name`
 
 Precisamos fornecer um nome arbitrário para a coorte.
-Mais adiante na série de treinamento você aprenderá como usar metadados de amostra para esse tipo de coisa, mas por enquanto apenas declaramos um parâmetro CLI usando `params` e damos a ele um valor padrão por conveniência.
+Mais adiante na série de treinamento você aprenderá como usar metadados de amostra para esse tipo de coisa, mas por enquanto apenas declaramos um parâmetro CLI usando `params`.
 
 === "Depois"
 
-    ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
-        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+    ```groovy title="genomics.nf" linenums="18" hl_lines="3-4"
+        intervals: Path
 
         // Nome base para o arquivo de saída final
-        cohort_name: String = "family_trio"
+        cohort_name: String
     }
     ```
 
 === "Antes"
 
-    ```groovy title="genomics.nf" linenums="14"
-        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+    ```groovy title="genomics.nf" linenums="18"
+        intervals: Path
     }
     ```
 
-#### 2.1.2. Reunir as saídas do HaplotypeCaller entre as amostras
+Usaremos este parâmetro para nomear o arquivo de saída final.
+
+#### 2.1.2. Adicionar um valor padrão para `cohort_name` no perfil de teste
+
+Também adicionamos um valor padrão para o parâmetro `cohort_name` no perfil de teste:
+
+=== "Depois"
+
+    ```groovy title="nextflow.config" linenums="4" hl_lines="7"
+    test {
+        params.input = "${projectDir}/data/samplesheet.csv"
+        params.reference = "${projectDir}/data/ref/ref.fasta"
+        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+        params.reference_dict = "${projectDir}/data/ref/ref.dict"
+        params.intervals = "${projectDir}/data/ref/intervals.bed"
+        params.cohort_name = "family_trio"
+    }
+    ```
+
+=== "Antes"
+
+    ```groovy title="nextflow.config" linenums="4"
+    test {
+        params.input = "${projectDir}/data/samplesheet.csv"
+        params.reference = "${projectDir}/data/ref/ref.fasta"
+        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+        params.reference_dict = "${projectDir}/data/ref/ref.dict"
+        params.intervals = "${projectDir}/data/ref/intervals.bed"
+    }
+    ```
+
+Em seguida, precisaremos reunir as saídas por amostra para que possam ser processadas juntas.
+
+#### 2.1.3. Reunir as saídas do HaplotypeCaller entre as amostras
 
 Se conectássemos o canal de saída de `GATK_HAPLOTYPECALLER` diretamente no novo processo, o Nextflow chamaria o processo em cada GVCF de amostra separadamente.
 Queremos agrupar todos os três GVCFs (e seus arquivos de índice) para que o Nextflow os entregue todos juntos a uma única chamada de processo.
@@ -312,7 +347,7 @@ Adicione as seguintes linhas ao corpo do `workflow`, logo após a chamada a GATK
 
 === "Depois"
 
-    ```groovy title="genomics.nf" hl_lines="4-6"
+    ```groovy title="genomics.nf" linenums="48" hl_lines="4-6"
             intervals_file
         )
 
@@ -323,7 +358,7 @@ Adicione as seguintes linhas ao corpo do `workflow`, logo após a chamada a GATK
 
 === "Antes"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="48"
             intervals_file
         )
     ```
@@ -389,7 +424,7 @@ Então você poderá se referir a toda essa string como `gvcfs_line` no bloco `s
 
 #### 2.2.2. Preencher o módulo para o processo de genotipagem conjunta
 
-Agora podemos abordar a escrita do processo completo.
+Em seguida, podemos abordar a escrita do processo completo.
 
 Abra `modules/gatk_jointgenotyping.nf` e examine o esboço da definição do processo.
 
@@ -480,7 +515,8 @@ Adicione a instrução de importação a `genomics.nf`, abaixo das instruções 
 
 === "Depois"
 
-    ```groovy title="genomics.nf" linenums="21" hl_lines="3"
+    ```groovy title="genomics.nf" linenums="3" hl_lines="4"
+    // Instruções INCLUDE de módulos
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
@@ -488,7 +524,8 @@ Adicione a instrução de importação a `genomics.nf`, abaixo das instruções 
 
 === "Antes"
 
-    ```groovy title="genomics.nf" linenums="21"
+    ```groovy title="genomics.nf" linenums="3"
+    // Instruções INCLUDE de módulos
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     ```
@@ -501,7 +538,7 @@ Adicione a chamada a `GATK_JOINTGENOTYPING` no corpo do fluxo de trabalho, após
 
 === "Depois"
 
-    ```groovy title="genomics.nf" hl_lines="3-12"
+    ```groovy title="genomics.nf" linenums="53" hl_lines="3-12"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
         // Combinar GVCFs em um armazenamento de dados GenomicsDB e aplicar genotipagem conjunta
@@ -518,7 +555,7 @@ Adicione a chamada a `GATK_JOINTGENOTYPING` no corpo do fluxo de trabalho, após
 
 === "Antes"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="53"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
     ```
 
@@ -536,7 +573,7 @@ Adicione o VCF conjunto e seu índice à seção `publish:` do fluxo de trabalho
 
 === "Depois"
 
-    ```groovy title="genomics.nf" hl_lines="5-6"
+    ```groovy title="genomics.nf" linenums="66" hl_lines="5-6"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -547,7 +584,7 @@ Adicione o VCF conjunto e seu índice à seção `publish:` do fluxo de trabalho
 
 === "Antes"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="66"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -563,7 +600,7 @@ Vamos colocá-los na raiz do diretório de resultados, já que esta é a saída 
 
 === "Depois"
 
-    ```groovy title="genomics.nf" hl_lines="11-16"
+    ```groovy title="genomics.nf" linenums="74" hl_lines="11-16"
     output {
         indexed_bam {
             path 'indexed_bam'
@@ -585,7 +622,7 @@ Vamos colocá-los na raiz do diretório de resultados, já que esta é a saída 
 
 === "Antes"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="74"
     output {
         indexed_bam {
             path 'indexed_bam'
@@ -606,7 +643,7 @@ Com o processo, alvos de publicação e bloco de saída todos no lugar, podemos 
 Execute o fluxo de trabalho para verificar se tudo funciona.
 
 ```bash
-nextflow run genomics.nf -resume
+nextflow run genomics.nf -profile test -resume
 ```
 
 ??? success "Saída do comando"

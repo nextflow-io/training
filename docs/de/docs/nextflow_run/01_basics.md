@@ -101,6 +101,26 @@ nextflow run 1-hello.nf --input 'Hello World!'
 
 Wenn deine Konsolenausgabe ungefähr so aussieht, dann herzlichen Glückwunsch, du hast gerade deinen ersten Nextflow-Workflow ausgeführt!
 
+??? question "Falls es nicht funktioniert hat"
+
+    Falls das mit einem Fehler fehlgeschlagen ist, der so aussieht:
+
+    ```
+    Parameter `input` was specified on the command line or params file but is not declared in the script or config
+
+    -- Check script '1-hello.nf' at line: 23 or see '.nextflow.log' file for more details
+    ```
+
+    Dann verwendest du wahrscheinlich den älteren v1 Nextflow-Sprach-Parser.
+    Dies wurde zu Beginn des Kurses erwähnt, aber vielleicht hast du es verpasst.
+    Schau dir das Hilfsmaterial zu [Nextflow-Versionen](../info/nxf_versions.md) an.
+
+    Kurz gesagt, wenn du Nextflow `25.10` verwendest, musst du den v2-Sprach-Parser aktivieren:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 Die wichtigste Ausgabe hier ist die letzte Zeile, die in der obigen Ausgabe hervorgehoben ist:
 
 ```console
@@ -135,7 +155,7 @@ Das ist großartig, unser Workflow hat getan, was er sollte!
 Standardmäßig speichert Nextflow Pipeline-Ausgaben in einem Verzeichnis namens `results` in deinem aktuellen Pfad.
 Um zu ändern, wo deine Dateien veröffentlicht werden, verwende das `-output-dir` CLI-Flag (oder kurz `-o`)
 
-!!! danger
+!!! danger "Gefahr"
 
     Beachte, dass `--input` zwei Bindestriche hat und `-output-dir` einen!
     Das liegt daran, dass `--input` ein Pipeline-_Parameter_ ist und `-output-dir` ein Nextflow-CLI-Flag auf Kernebene.
@@ -169,7 +189,7 @@ Beachte jedoch, dass in beiden Fällen das 'veröffentlichte' Ergebnis eine Kopi
 
 Also werden wir jetzt unter die Haube schauen, um zu sehen, wo Nextflow die Arbeit tatsächlich ausgeführt hat.
 
-!!! warning "Warnung"
+!!! Warning "Warnung"
 
     Nicht alle Workflows werden so eingerichtet sein, dass sie Ausgaben in ein results-Verzeichnis veröffentlichen, und/oder die Verzeichnisnamen und -struktur können unterschiedlich sein.
     Etwas später in diesem Abschnitt zeigen wir dir, wie du herausfindest, wo dieses Verhalten festgelegt ist.
@@ -719,7 +739,7 @@ nextflow clean -before backstabbing_swartz -f
 Die Ausgabe sollte ähnlich wie vorher sein, aber jetzt sagt sie 'Removed' anstelle von 'Would remove'.
 Beachte, dass dies nicht die zweistelligen Unterverzeichnisse (wie `eb/` oben) entfernt, aber ihren Inhalt leert.
 
-!!! warning "Warnung"
+!!! Warning "Warnung"
 
     Das Löschen von Work-Unterverzeichnissen von vergangenen Läufen entfernt sie aus Nextflows Cache und löscht alle Ausgaben, die in diesen Verzeichnissen gespeichert waren.
     Das bedeutet, es bricht Nextflows Fähigkeit, die Ausführung fortzusetzen, ohne die entsprechenden Prozesse erneut auszuführen.

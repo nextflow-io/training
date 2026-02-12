@@ -1,31 +1,77 @@
-# Orientamento
+# Primi passi
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-L'ambiente di formazione contiene tutto il software, il codice e i dati necessari per seguire questo corso di formazione, quindi non è necessario installare nulla autonomamente.
-Tuttavia, è necessario un account (gratuito) per effettuare l'accesso, e si dovrebbe dedicare qualche minuto per familiarizzare con l'interfaccia.
+## Avviare un ambiente di formazione
 
-Se non lo ha ancora fatto, completi il mini-corso [Configurazione dell'Ambiente](../../envsetup/) prima di procedere.
+Per utilizzare l'ambiente preconfigurato che forniamo su GitHub Codespaces, cliccate sul pulsante "Open in GitHub Codespaces" qui sotto. Per altre opzioni, consultate [Opzioni di ambiente](../../envsetup/index.md).
 
-## Materiali forniti
+Vi consigliamo di aprire l'ambiente di formazione in una nuova scheda o finestra del browser (utilizzate il clic destro, ctrl-clic o cmd-clic a seconda del vostro dispositivo) in modo da poter continuare a leggere mentre l'ambiente si carica.
+Dovrete tenere queste istruzioni aperte in parallelo per seguire il corso.
 
-Nel corso di questa formazione, lavoreremo nella directory `nf4-science/rnaseq/`, nella quale è necessario spostarsi all'apertura dell'ambiente di formazione.
-Questa directory contiene tutti i file di codice, i dati di test e i file accessori necessari.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-Si senta libero di esplorare i contenuti di questa directory; il modo più semplice per farlo è utilizzare l'esploratore di file sul lato sinistro dell'ambiente di formazione nell'interfaccia VSCode.
+### Nozioni di base sull'ambiente
+
+Questo ambiente di formazione contiene tutto il software, il codice e i dati necessari per seguire il corso di formazione, quindi non è necessario installare nulla autonomamente.
+
+Il codespace è configurato con un'interfaccia VSCode, che include un esploratore del filesystem, un editor di codice e una shell del terminale.
+Tutte le istruzioni fornite durante il corso (ad es. 'aprite il file', 'modificate il codice' o 'eseguite questo comando') si riferiscono a queste tre parti dell'interfaccia VSCode salvo diversa indicazione.
+
+Se state seguendo questo corso autonomamente, vi preghiamo di familiarizzare con le [nozioni di base sull'ambiente](../../envsetup/01_setup.md) per ulteriori dettagli.
+
+### Requisiti di versione
+
+Questa formazione è progettata per Nextflow 25.10.2 o successivo **con il parser di sintassi v2 ABILITATO**.
+Se state utilizzando un ambiente locale o personalizzato, assicuratevi di utilizzare le impostazioni corrette come documentato [qui](../../info/nxf_versions.md).
+
+## Preparatevi a lavorare
+
+Una volta che il vostro codespace è in esecuzione, ci sono due cose da fare prima di immergervi nella formazione: impostare la directory di lavoro per questo corso specifico ed esaminare i materiali forniti.
+
+### Impostare la directory di lavoro
+
+Per impostazione predefinita, il codespace si apre con la directory di lavoro impostata alla radice di tutti i corsi di formazione, ma per questo corso lavoreremo nella directory `nf4-science/rnaseq/`.
+
+Cambiate directory ora eseguendo questo comando nel terminale:
+
+```bash
+cd nf4-science/rnaseq/
+```
+
+Potete impostare VSCode per concentrarsi su questa directory, in modo che solo i file pertinenti vengano visualizzati nella barra laterale dell'esploratore di file:
+
+```bash
+code .
+```
+
+!!! tip "Suggerimento"
+
+    Se per qualsiasi motivo vi spostate fuori da questa directory (ad es. il vostro codespace va in sospensione), potete sempre utilizzare il percorso completo per ritornarvi, supponendo che stiate lavorando nell'ambiente di formazione GitHub Codespaces:
+
+    ```bash
+    cd /workspaces/training/nf4-science/rnaseq
+    ```
+
+Ora diamo un'occhiata ai contenuti.
+
+### Esplorare i materiali forniti
+
+Potete esplorare i contenuti di questa directory utilizzando l'esploratore di file sul lato sinistro dell'area di lavoro di formazione.
 In alternativa, potete utilizzare il comando `tree`.
+
 Nel corso della formazione, utilizziamo l'output di `tree` per rappresentare la struttura e i contenuti delle directory in una forma leggibile, talvolta con modifiche minori per chiarezza.
 
-Qui generiamo un sommario dei contenuti fino al secondo livello:
+Qui generiamo un sommario dei contenuti fino al terzo livello:
 
 ```bash
 tree . -L 3
 ```
 
-??? success "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
-    rnaseq
+    .
     ├── data
     │   ├── genome.fa
     │   ├── paired-end.csv
@@ -62,33 +108,30 @@ tree . -L 3
         └── rnaseq_pe-3.3.nf
     ```
 
-!!!note
+Cliccate sulla casella colorata per espandere la sezione e visualizzarne i contenuti.
+Utilizziamo sezioni comprimibili come questa per visualizzare l'output previsto dei comandi, nonché i contenuti di directory e file in modo conciso.
 
-    Non si preoccupi se questo sembra molto; esamineremo le parti pertinenti in ogni fase del corso.
-    Questo è solo per fornire una panoramica generale.
+- **Il file `rnaseq.nf`** è una struttura per uno script del flusso di lavoro che costruirete man mano che procedete nel corso.
 
-**Ecco un riepilogo di ciò che dovrebbe sapere per iniziare:**
+- **La directory `modules`** contiene strutture per i moduli di processo che compilerete durante il corso.
 
-- **Il file `rnaseq.nf`** è la struttura dello script del workflow che svilupperemo.
+- **Il file `nextflow.config`** è un file di configurazione che imposta proprietà minime dell'ambiente.
+  Potete ignorarlo per ora.
 
-- **Il file `nextflow.config`** è un file di configurazione che imposta proprietà minime dell'ambiente. Può ignorarlo per ora.
+- **La directory `data`** contiene i dati di input e le risorse correlate, descritte più avanti nel corso.
 
-- **La directory `data`** contiene i dati di input e le risorse correlate:
+- **La directory `solutions`** contiene gli script del flusso di lavoro completi e i moduli risultanti da ogni fase del corso.
+  Sono destinati a essere utilizzati come riferimento per verificare il vostro lavoro e risolvere eventuali problemi.
+  La soluzione della Parte 2 può essere utilizzata come punto di partenza per la Parte 3.
 
-  - _Un genoma di riferimento_ chiamato `genome.fa` costituito da una piccola regione del cromosoma umano 20 (da hg19/b37).
-  - _Dati RNAseq_ che sono stati ridotti a una piccola regione per mantenere ridotte le dimensioni dei file, nella directory `reads/`.
-  - _File CSV_ che elencano gli ID e i percorsi dei file di dati di esempio, per l'elaborazione in batch.
+## Lista di controllo della preparazione
 
-- **La directory `solutions`** contiene gli script del workflow completi e i moduli risultanti da ogni fase del corso.
-  Sono destinati a essere utilizzati come riferimento per verificare il proprio lavoro e risolvere eventuali problemi.
-  Il numero nel nome del file corrisponde alla fase della parte pertinente del corso.
+Pensate di essere pronti per iniziare?
 
-!!!tip
+- [ ] Comprendo l'obiettivo di questo corso e i suoi prerequisiti
+- [ ] Il mio ambiente è attivo e funzionante
+- [ ] Ho impostato la mia directory di lavoro in modo appropriato
 
-    Se per qualsiasi motivo vi spostate fuori da questa directory, potete sempre eseguire questo comando per ritornarvi:
+Se potete spuntare tutte le caselle, siete pronti per iniziare.
 
-    ```bash
-    cd /workspaces/training/nf4-science/rnaseq
-    ```
-
-Ora, per iniziare il corso, cliccate sulla freccia nell'angolo in basso a destra di questa pagina.
+**Per continuare alla [Parte 1: Panoramica del metodo](./01_method.md), cliccate sulla freccia nell'angolo in basso a destra di questa pagina.**

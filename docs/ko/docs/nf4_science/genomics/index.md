@@ -1,5 +1,5 @@
 ---
-title: Nextflow for Genomics
+title: 유전체학
 hide:
   - toc
 page_type: index_page

@@ -13,7 +13,7 @@ Dann hast du eine Nextflow-Pipeline für eine einzelne Probe erstellt, um den Pr
 
 - Eine Variant-Calling-Pipeline, die BAM-Dateien als Eingabe nimmt und gemeinsam aufgerufene VCFs als Ausgabe erzeugt.
 - Drei Prozesse (`SAMTOOLS_INDEX`, `GATK_HAPLOTYPECALLER` und `GATK_JOINTGENOTYPING`), die in separaten Moduldateien gespeichert sind.
-- Die Pipeline skaliert automatisch für beliebig viele Eingabeproben durch Nextflows Dataflow-Paradigma.
+- Die Pipeline parallelisiert automatisch die Verarbeitung der Eingabeproben durch Nextflows Dataflow-Paradigma.
 - Die Ergebnisse werden in einem Verzeichnis namens `results/` veröffentlicht.
 
 ### Erworbene Fähigkeiten

@@ -1,50 +1,49 @@
-# Sonraki Adımlar
+# Kurs Özeti
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nextflow For RNAseq eğitim kursunu tamamladığınız için tekrar tebrikler ve anketimizi doldurduğunuz için teşekkür ederiz!
+Nextflow for RNAseq eğitim kursunu tamamladığınız için tebrikler!
 
----
+## Yolculuğunuz
 
-## 1. Nextflow becerilerinizi geliştirmenin en iyi 3 yolu
+Metodolojisini anlamak için terminalde RNAseq işleme araçlarını manuel olarak çalıştırarak başladınız.
+Ardından süreci otomatikleştirmek için tek örnekli bir Nextflow pipeline'ı oluşturdunuz, bunu paralel olarak birden fazla örneği işleyecek şekilde ölçeklendirdiniz ve paired-end veriyi işlemek ve örnekler arasında QC raporlarını toplamak için genişlettiniz.
 
-Az önce tamamladığınız kursa dayanarak bir sonraki adım için en iyi üç önerimiz:
+### Oluşturduklarınız
 
-### 1.1. Nextflow'u diğer bilimsel analiz kullanım durumlarına uygulayın
+- Girdi olarak FASTQ dosyalarını alan ve çıktı olarak kırpılmış okumalar, hizalamalar ve toplanmış QC raporları üreten bir RNAseq işleme pipeline'ı.
+- Ayrı modül dosyalarında saklanan kırpma (Trim Galore), hizalama (HISAT2), kalite kontrol (FastQC) ve rapor toplama (MultiQC) için süreçler.
+- Pipeline, Nextflow'un veri akışı paradigmasını kullanarak girdi örneklerinin işlenmesini otomatik olarak paralelleştirir.
+- Son pipeline, paired-end dizileme verisini işler.
 
-**[Nextflow for Science](../nf4_science/index.md) sayfasına göz atın** - Hello Nextflow'da sunulan temel kavramların ve mekanizmaların yaygın bilimsel analiz kullanım durumlarına nasıl uygulanacağını gösteren kısa, bağımsız kursların listesi için.
+### Kazanılan Beceriler
 
-Eğer alanınızın ilişkilendirilebilir bir kullanım örneğiyle temsil edilmediğini görüyorsanız, geliştirme listemize ekleyebilmemiz için bize [Topluluk forumu](https://community.seqera.io/)'nda bildirin.
+Bu uygulamalı kurs boyunca şunları öğrendiniz:
 
-### 1.2. nf-core ile başlayın
+- Temel RNAseq işleme ve QC yöntemlerini uygulamak için doğrusal bir iş akışı yazmak
+- FASTQ ve referans genom kaynakları gibi alana özgü dosyaları uygun şekilde işlemek
+- Single-end ve paired-end dizileme verisini işlemek
+- Örnek başına RNAseq işlemeyi paralelleştirmek için Nextflow'un veri akışı paradigmasından yararlanmak
+- İlgili kanal operatörlerini kullanarak birden fazla adım ve örnek arasında QC raporlarını toplamak
 
-**[nf-core](https://nf-co.re/)**, geniş bir bilimsel araştırma uygulamaları yelpazesi için standartlaştırılmış açık kaynaklı pipeline'lar geliştirmek üzere dünya çapında bir işbirliği çabasıdır.
-Proje, kullanıma hazır [100'den fazla pipeline](https://nf-co.re/pipelines/) ve kendi projelerinize entegre edilebilecek [1400'ün üzerinde process modülü](https://nf-co.re/modules/)'nün yanı sıra zengin bir geliştirici araçları setini içerir.
+Artık kendi çalışmanızda RNAseq analiz iş akışlarına Nextflow'u uygulamaya başlamak için donanımlısınız.
 
-**[Hello nf-core](../../hello_nf-core/index.md)** eğitim kursu, size nf-core topluluk tarafından hazırlanmış pipeline'ları ve geliştirme çerçevesini tanıtacaktır; bu çerçeve, yeniden üretilebilir, ölçeklenebilir ve standartlaştırılmış workflow'lar yazmanıza yardımcı olmak için tasarlanmıştır. Mevcut nf-core pipeline'larını nasıl kullanacağınızı, geliştirilmelerine nasıl katkıda bulunacağınızı ve hatta en iyi uygulamalar ve canlı bir topluluk desteğiyle kendinizinkini nasıl oluşturmaya başlayacağınızı öğreneceksiniz. Nextflow becerilerinizi gerçek dünya projelerinde uygulamaya hazırsanız, bu mükemmel bir sonraki adımdır.
+## Becerilerinizi geliştirmek için sonraki adımlar
 
-### 1.3. Daha gelişmiş Nextflow özelliklerinde ustalaşın
+Sırada ne yapacağınıza dair en iyi önerilerimiz:
 
-Hello kurslarında, Nextflow'a başlamak için ihtiyacınız olmayan bilgilerle sizi aşırı yüklemekten kaçınmak amacıyla teknik karmaşıklık seviyesini kasıtlı olarak düşük tutuyoruz.
-Çalışmanızla ilerlerken, Nextflow'un tam özellik setini ve gücünü nasıl kullanacağınızı öğrenmek isteyeceksiniz.
+- [Nextflow for Science](../index.md) ile Nextflow'u diğer bilimsel analiz kullanım durumlarına uygulayın
+- [Hello nf-core](../../hello_nf-core/index.md) ile nf-core'a başlayın
+- [Side Quests](../../side_quests/index.md) ile daha gelişmiş Nextflow özelliklerini keşfedin
 
-Bu amaçla, şu anda test ve metadata yönetimi gibi belirli konulara derinlemesine inen kısa bağımsız kurslar olması amaçlanan **[Side Quests](../side_quests/index.md) koleksiyonu** üzerinde çalışıyoruz.
+Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen ve workflow'larınızı başlatmayı ve yönetmeyi, ayrıca verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli olarak analiz çalıştırmayı daha da kolay hale getiren bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a göz atmanızı öneririz.
 
----
+## Yardım Alma
 
-## 2. Seqera Platform'u inceleyin
+Yardım kaynakları ve topluluk desteği için [Yardım sayfası](../../help.md)'na bakın.
 
-**[Seqera Platform](https://seqera.io/), Nextflow'u pratikte çalıştırmanın en iyi yoludur.**
+## Geri Bildirim Anketi
 
-Nextflow'un yaratıcıları tarafından geliştirilen bulut tabanlı bir platformdur ve kendi bilgi işlem altyapınıza (ister yerel, ister HPC veya bulut olsun) bağlanarak workflow'larınızı başlatmayı ve yönetmeyi, ayrıca verilerinizi yönetmeyi ve bulut ortamında etkileşimli olarak analiz çalıştırmayı çok daha kolay hale getirir.
+Devam etmeden önce, lütfen kurs anketini tamamlamak için bir dakikanızı ayırın! Geri bildiriminiz, eğitim materyallerimizi herkes için geliştirmemize yardımcı olur.
 
-Ücretsiz Katman, herkes tarafından ücretsiz kullanım için mevcuttur (kullanım kotaları ile).
-Nitelikli akademisyenler, [Akademik Program](https://seqera.io/academic/program/) aracılığıyla ücretsiz Pro düzeyinde erişim alabilir (kullanım sınırlaması yok).
-
-Bunun sizin için faydalı olup olmayacağını görmek için [Seqera Platform eğitimlerine](https://docs.seqera.io/platform/latest/getting-started/quickstart-demo/comm-showcase) göz atın.
-
----
-
-### Şimdilik bu kadar!
-
-**Nextflow yolculuğunuzda iyi şanslar ve size yardımcı olmak için başka neler yapabileceğimizi [Topluluk forumu](https://community.seqera.io/)'nda bize bildirmekten çekinmeyin.**
+[Ankete katılın :material-arrow-right:](survey.md){ .md-button .md-button--primary }

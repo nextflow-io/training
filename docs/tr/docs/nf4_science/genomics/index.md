@@ -1,5 +1,5 @@
 ---
-title: Genomik için Nextflow
+title: Genomik
 hide:
   - toc
 page_type: index_page
