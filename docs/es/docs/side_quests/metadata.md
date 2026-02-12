@@ -525,7 +525,7 @@ nextflow run main.nf
 Y como se señaló anteriormente, también hemos incluido el archivo de entrada y el mapa de metadatos en la salida, lo que significa que ambos permanecen asociados con la nueva información que acabamos de producir.
 Esto resultará útil en el siguiente paso.
 
-!!! note
+!!! note "Nota"
 
     De manera más general, este patrón de mantener el mapa de metadatos asociado con los resultados facilita la asociación de resultados relacionados que comparten los mismos identificadores.
 
@@ -714,7 +714,7 @@ Aquí está la lógica condicional que queremos aplicar:
 
 Intente escribirlo usted mismo si ya sabe cómo escribir declaraciones condicionales en Nextflow.
 
-!!! tip
+!!! tip "Consejo"
 
     Puede acceder al valor de `lang` dentro de la operación map con `meta.lang`.
 
