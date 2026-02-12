@@ -2,46 +2,46 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-En cualquier análisis científico, rara vez trabajamos solo con los archivos de datos en bruto.
+En cualquier análisis científico, rara vez trabajamos solo con los archivos de datos sin procesar.
 Cada archivo viene con su propia información adicional: qué es, de dónde proviene y qué lo hace especial.
 Esta información extra es lo que llamamos metadatos.
 
 Los metadatos son datos que describen otros datos.
 Los metadatos rastrean detalles importantes sobre archivos y condiciones experimentales, y ayudan a adaptar los análisis a las características únicas de cada conjunto de datos.
 
-Piense en ello como un catálogo de biblioteca: mientras que los libros contienen el contenido real (datos en bruto), las fichas del catálogo proporcionan información esencial sobre cada libro—cuándo fue publicado, quién lo escribió, dónde encontrarlo (metadatos).
+Piénsalo como un catálogo de biblioteca: mientras que los libros contienen el contenido real (datos sin procesar), las fichas del catálogo proporcionan información esencial sobre cada libro: cuándo se publicó, quién lo escribió, dónde encontrarlo (metadatos).
 En los pipelines de Nextflow, los metadatos se pueden usar para:
 
 - Rastrear información específica de archivos a lo largo del workflow
-- Configurar procesos basándose en las características de los archivos
+- Configurar procesos según las características de los archivos
 - Agrupar archivos relacionados para análisis conjunto
 
 ### Objetivos de aprendizaje
 
 En esta misión secundaria, exploraremos cómo manejar metadatos en workflows.
-Comenzando con una hoja de datos simple (a menudo llamada samplesheet en bioinformática) que contiene información básica de archivos, aprenderá a:
+Comenzando con una hoja de datos simple (a menudo llamada samplesheet en bioinformática) que contiene información básica de archivos, aprenderás a:
 
-- Leer y procesar metadatos de archivos desde archivos CSV
+- Leer y analizar metadatos de archivos desde archivos CSV
 - Crear y manipular mapas de metadatos
 - Agregar nuevos campos de metadatos durante la ejecución del workflow
 - Usar metadatos para personalizar el comportamiento de los procesos
 
-Estas habilidades lo ayudarán a construir pipelines más robustos y flexibles que puedan manejar relaciones complejas de archivos y requisitos de procesamiento.
+Estas habilidades te ayudarán a construir pipelines más robustos y flexibles que puedan manejar relaciones de archivos complejas y requisitos de procesamiento.
 
 ### Requisitos previos
 
-Antes de embarcarse en esta misión secundaria, debería:
+Antes de emprender esta misión secundaria, deberías:
 
-- Haber completado el tutorial [Hello Nextflow](../hello_nextflow/README.md) o un curso para principiantes equivalente.
-- Sentirse cómodo usando conceptos y mecanismos básicos de Nextflow (procesos, canales, operadores)
+- Haber completado el tutorial [Hello Nextflow](../hello_nextflow/README.md) o un curso equivalente para principiantes.
+- Sentirte cómodo usando conceptos y mecanismos básicos de Nextflow (procesos, canales, operadores)
 
 ---
 
 ## 0. Primeros pasos
 
-#### Abrir el codespace de entrenamiento
+#### Abrir el codespace de capacitación
 
-Si aún no lo ha hecho, asegúrese de abrir el entorno de entrenamiento como se describe en [Configuración del Entorno](../envsetup/index.md).
+Si aún no lo has hecho, asegúrate de abrir el entorno de capacitación como se describe en [Configuración del entorno](../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -53,7 +53,7 @@ Vamos a movernos al directorio donde se encuentran los archivos para este tutori
 cd side-quests/metadata
 ```
 
-Puede configurar VSCode para enfocarse en este directorio:
+Puedes configurar VSCode para enfocarse en este directorio:
 
 ```bash
 code .
@@ -61,7 +61,7 @@ code .
 
 #### Revisar los materiales
 
-Encontrará un archivo de workflow principal y un directorio `data` que contiene una hoja de datos y un puñado de archivos de datos.
+Encontrarás un archivo de workflow principal y un directorio `data` que contiene una hoja de datos y un puñado de archivos de datos.
 
 ??? abstract "Contenido del directorio"
 
@@ -80,12 +80,12 @@ Encontrará un archivo de workflow principal y un directorio `data` que contiene
     └── nextflow.config
     ```
 
-El workflow en el archivo `main.nf` es un esqueleto que expandirá gradualmente en un workflow completamente funcional.
+El workflow en el archivo `main.nf` es un esqueleto que expandirás gradualmente en un workflow completamente funcional.
 
 La hoja de datos enumera las rutas a los archivos de datos y algunos metadatos asociados, organizados en 3 columnas:
 
-- `id`: autoexplicativo, un ID asignado al archivo
-- `character`: un nombre de personaje, que usaremos más tarde para dibujar diferentes criaturas
+- `id`: autoexplicativo, un ID dado al archivo
+- `character`: un nombre de personaje, que usaremos más adelante para dibujar diferentes criaturas
 - `data`: rutas a archivos `.txt` que contienen saludos en diferentes idiomas
 
 ```console title="datasheet.csv"
@@ -101,35 +101,35 @@ sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 
 Cada archivo de datos contiene texto de saludo en uno de cinco idiomas (fr: francés, de: alemán, es: español, it: italiano, en: inglés).
 
-También le proporcionaremos una herramienta de análisis de lenguaje en contenedor llamada `langid`.
+También te proporcionaremos una herramienta de análisis de idiomas en contenedor llamada `langid`.
 
 #### Revisar la asignación
 
-Su desafío es escribir un workflow de Nextflow que:
+Tu desafío es escribir un workflow de Nextflow que:
 
 1. **Identifique** el idioma en cada archivo automáticamente
-2. **Agrupe** archivos por familia de idiomas (idiomas germánicos vs románicos)
-3. **Personalice** el procesamiento para cada archivo basándose en su idioma y metadatos
+2. **Agrupe** archivos por familia de idiomas (idiomas germánicos vs romances)
+3. **Personalice** el procesamiento para cada archivo según su idioma y metadatos
 4. **Organice** las salidas por grupo de idiomas
 
-Esto representa un patrón típico de workflow donde los metadatos específicos de archivos impulsan las decisiones de procesamiento; exactamente el tipo de problema que los mapas de metadatos resuelven elegantemente.
+Esto representa un patrón de workflow típico donde los metadatos específicos de archivos impulsan las decisiones de procesamiento; exactamente el tipo de problema que los mapas de metadatos resuelven elegantemente.
 
 #### Lista de verificación de preparación
 
-¿Cree que está listo para comenzar?
+¿Crees que estás listo para comenzar?
 
 - [ ] Entiendo el objetivo de este curso y sus requisitos previos
-- [ ] Mi codespace está en funcionamiento
+- [ ] Mi codespace está funcionando
 - [ ] He configurado mi directorio de trabajo apropiadamente
 - [ ] Entiendo la asignación
 
-Si puede marcar todas las casillas, está listo para comenzar.
+Si puedes marcar todas las casillas, estás listo para comenzar.
 
 ---
 
 ## 1. Cargar metadatos desde una hoja de datos
 
-Abra el archivo de workflow `main.nf` para examinar el esqueleto de workflow que le proporcionamos como punto de partida.
+Abre el archivo de workflow `main.nf` para examinar el esqueleto de workflow que te damos como punto de partida.
 
 ```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -141,15 +141,15 @@ workflow  {
 }
 ```
 
-Puede ver que hemos configurado un factory de canal básico para cargar la hoja de datos de ejemplo como un archivo, pero eso aún no leerá el contenido del archivo.
+Puedes ver que hemos configurado una fábrica de canales básica para cargar la hoja de datos de ejemplo como un archivo, pero eso aún no leerá el contenido del archivo.
 Comencemos agregando eso.
 
 ### 1.1. Leer el contenido con `splitCsv`
 
-Necesitamos elegir un operador que procese el contenido del archivo apropiadamente con el mínimo esfuerzo de nuestra parte.
-Como nuestra hoja de datos está en formato CSV, este es un trabajo para el operador [`splitCsv`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv), que carga cada fila en el archivo como un elemento en el canal.
+Necesitamos elegir un operador que analice el contenido del archivo apropiadamente con el mínimo esfuerzo de nuestra parte.
+Dado que nuestra hoja de datos está en formato CSV, este es un trabajo para el operador [`splitCsv`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv), que carga cada fila del archivo como un elemento en el canal.
 
-Realice los siguientes cambios para agregar una operación `splitCsv()` al código de construcción del canal, más una operación `view()` para verificar que el contenido del archivo se esté cargando en el canal correctamente.
+Realiza los siguientes cambios para agregar una operación `splitCsv()` al código de construcción del canal, más una operación `view()` para verificar que el contenido del archivo se esté cargando correctamente en el canal.
 
 === "Después"
 
@@ -173,10 +173,10 @@ Realice los siguientes cambios para agregar una operación `splitCsv()` al códi
     }
     ```
 
-Tenga en cuenta que estamos usando la opción `header: true` para indicarle a Nextflow que lea la primera fila del archivo CSV como la fila de encabezado.
+Nota que estamos usando la opción `header: true` para decirle a Nextflow que lea la primera fila del archivo CSV como la fila de encabezado.
 
 Veamos qué sale de eso, ¿de acuerdo?
-Ejecute el workflow:
+Ejecuta el workflow:
 
 ```bash
 nextflow run main.nf
@@ -200,7 +200,7 @@ nextflow run main.nf
 
 Podemos ver que el operador ha construido un mapa de pares clave-valor para cada fila en el archivo CSV, con los encabezados de columna como claves para los valores correspondientes.
 
-Cada entrada de mapa corresponde a una columna en nuestra hoja de datos:
+Cada entrada del mapa corresponde a una columna en nuestra hoja de datos:
 
 - `id`
 - `character`
@@ -213,7 +213,7 @@ Por ejemplo, podríamos acceder al ID del archivo con `id` o a la ruta del archi
 
     En Groovy, el lenguaje de programación sobre el que se construye Nextflow, un mapa es una estructura de datos clave-valor similar a los diccionarios en Python, objetos en JavaScript o hashes en Ruby.
 
-    Aquí hay un script ejecutable que muestra cómo puede definir un mapa y acceder a su contenido en la práctica:
+    Aquí hay un script ejecutable que muestra cómo puedes definir un mapa y acceder a su contenido en la práctica:
 
     ```groovy title="examples/map_demo.nf"
     #!/usr/bin/env nextflow
@@ -221,7 +221,7 @@ Por ejemplo, podríamos acceder al ID del archivo con `id` o a la ruta del archi
     // Crear un mapa simple
     def my_map = [id:'sampleA', character:'squirrel']
 
-    // Imprimir todo el mapa
+    // Imprimir el mapa completo
     println "map: ${my_map}"
 
     // Acceder a valores individuales usando notación de punto
@@ -235,9 +235,9 @@ Por ejemplo, podríamos acceder al ID del archivo con `id` o a la ruta del archi
     nextflow run examples/map_demo.nf
     ```
 
-    Y aquí está lo que puede esperar ver en la salida:
+    Y esto es lo que puedes esperar ver en la salida:
 
-    ```console title="Salida"
+    ```console title="Output"
      N E X T F L O W   ~  version 25.10.2
 
     Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
@@ -250,9 +250,9 @@ Por ejemplo, podríamos acceder al ID del archivo con `id` o a la ruta del archi
 ### 1.2. Seleccionar campos específicos con `map`
 
 Digamos que queremos acceder a la columna `character` de la hoja de datos e imprimirla.
-Podemos usar el operador `map` de Nextflow para iterar sobre cada elemento en nuestro canal y específicamente seleccionar la entrada `character` del objeto mapa.
+Podemos usar el operador `map` de Nextflow para iterar sobre cada elemento en nuestro canal y seleccionar específicamente la entrada `character` del objeto mapa.
 
-Realice las siguientes ediciones al workflow:
+Realiza las siguientes ediciones al workflow:
 
 === "Después"
 
@@ -281,7 +281,7 @@ Realice las siguientes ediciones al workflow:
     }
     ```
 
-Ahora ejecute el workflow nuevamente:
+Ahora ejecuta el workflow nuevamente:
 
 ```bash
 nextflow run main.nf
@@ -317,15 +317,15 @@ La consecuencia práctica es que cada proceso que consuma este canal necesitarí
     tuple val(id), val(character), file(recording)
 ```
 
-Eso está bien siempre que el número de columnas en la hoja de datos no cambie.
-Sin embargo, si agrega incluso solo una columna a la hoja de datos, la forma del canal ya no coincidirá con lo que el proceso espera, y el workflow producirá errores.
-También hace que el proceso sea difícil de compartir con otros que podrían tener datos de entrada ligeramente diferentes, y podría terminar teniendo que codificar variables en el proceso que no son necesarias para el bloque de script.
+Eso está bien mientras el número de columnas en la hoja de datos no cambie.
+Sin embargo, si agregas incluso solo una columna a la hoja de datos, la forma del canal ya no coincidirá con lo que el proceso espera, y el workflow producirá errores.
+También hace que el proceso sea difícil de compartir con otros que podrían tener datos de entrada ligeramente diferentes, y podrías terminar teniendo que codificar variables en el proceso que no son necesarias para el bloque de script.
 
 Para evitar este problema, necesitamos encontrar una forma de mantener la estructura del canal consistente independientemente de cuántas columnas contenga esa hoja de datos.
 
-Podemos hacer eso recopilando todos los metadatos en un elemento dentro de la tupla, que llamaremos el mapa de metadatos, o más simplemente 'mapa de metadatos'.
+Podemos hacer eso recopilando todos los metadatos en un elemento dentro de la tupla, que llamaremos el mapa de metadatos, o más simplemente 'mapa meta'.
 
-Realice las siguientes ediciones a la operación `map`:
+Realiza las siguientes ediciones a la operación `map`:
 
 === "Después"
 
@@ -349,7 +349,7 @@ Realice las siguientes ediciones a la operación `map`:
             .view()
     ```
 
-Hemos reestructurado nuestros elementos de canal en una tupla que consta de dos elementos, el mapa de metadatos y el objeto archivo correspondiente.
+Hemos reestructurado los elementos de nuestro canal en una tupla que consiste en dos elementos, el mapa meta y el objeto de archivo correspondiente.
 
 Ejecutemos el workflow:
 
@@ -359,7 +359,7 @@ nextflow run main.nf
 
 ??? success "Salida del comando"
 
-    ```console title="Ver mapa de metadatos"
+    ```console title="View meta map"
      N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
@@ -373,9 +373,9 @@ nextflow run main.nf
     [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
     ```
 
-Ahora, cada elemento en el canal contiene primero el mapa de metadatos y segundo el objeto archivo correspondiente:
+Ahora, cada elemento en el canal contiene el mapa de metadatos primero y el objeto de archivo correspondiente segundo:
 
-```console title="Ejemplo de estructura de salida"
+```console title="Example output structure"
 [
   [id:sampleA, character:squirrel],
   /workspaces/training/side-quests/metadata/data/bonjour.txt
@@ -385,7 +385,7 @@ Ahora, cada elemento en el canal contiene primero el mapa de metadatos y segundo
 Como resultado, agregar más columnas en la hoja de datos hará que más metadatos estén disponibles en el mapa `meta`, pero no cambiará la forma del canal.
 Esto nos permite escribir procesos que consuman el canal sin tener que codificar los elementos de metadatos en la especificación de entrada:
 
-```groovy title="Ejemplo de sintaxis"
+```groovy title="Syntax example"
     input:
     tuple val(meta), file(recording)
 ```
@@ -394,26 +394,26 @@ Esta es una convención ampliamente utilizada para organizar metadatos en workfl
 
 ### Conclusión
 
-En esta sección, ha aprendido:
+En esta sección, has aprendido:
 
-- **Por qué los metadatos son importantes:** Mantener los metadatos con sus datos preserva información importante de archivos a lo largo del workflow.
+- **Por qué los metadatos son importantes:** Mantener los metadatos con tus datos preserva información importante del archivo a lo largo del workflow.
 - **Cómo leer hojas de datos:** Usar `splitCsv` para leer archivos CSV con información de encabezado y transformar filas en datos estructurados
-- **Cómo crear un mapa de metadatos:** Separar metadatos de datos de archivos usando la estructura de tupla `[ [id:value, ...], file ]`
+- **Cómo crear un mapa meta:** Separar metadatos de datos de archivo usando la estructura de tupla `[ [id:value, ...], file ]`
 
 ---
 
-## 2. Manipulando metadatos
+## 2. Manipular metadatos
 
 Ahora que tenemos nuestros metadatos cargados, ¡hagamos algo con ellos!
 
-Vamos a usar una herramienta llamada [`langid`](https://github.com/saffsd/langid.py) para identificar el idioma contenido en cada archivo de grabación de la criatura.
-La herramienta viene pre-entrenada con un conjunto de idiomas, y dado un fragmento de texto, producirá una predicción de idioma y una puntuación de probabilidad asociada, ambas a `stdout`.
+Vamos a usar una herramienta llamada [`langid`](https://github.com/saffsd/langid.py) para identificar el idioma contenido en el archivo de grabación de cada criatura.
+La herramienta viene pre-entrenada en un conjunto de idiomas, y dado un fragmento de texto, generará una predicción de idioma y una puntuación de probabilidad asociada, ambas a `stdout`.
 
 ### 2.1. Importar el proceso y examinar el código
 
-Le proporcionamos un módulo de proceso pre-escrito llamado `IDENTIFY_LANGUAGE` que envuelve la herramienta `langid`, por lo que solo necesita agregar una declaración de inclusión antes del bloque de workflow.
+Te proporcionamos un módulo de proceso pre-escrito llamado `IDENTIFY_LANGUAGE` que envuelve la herramienta `langid`, así que solo necesitas agregar una declaración de inclusión antes del bloque workflow.
 
-Realice la siguiente edición al workflow:
+Realiza la siguiente edición al workflow:
 
 === "Después"
 
@@ -433,7 +433,7 @@ Realice la siguiente edición al workflow:
     workflow {
     ```
 
-Puede abrir el archivo del módulo para examinar su código:
+Puedes abrir el archivo del módulo para examinar su código:
 
 ```groovy title="modules/langid.nf" linenums="1" hl_lines="9 12"
 #!/usr/bin/env nextflow
@@ -456,18 +456,18 @@ process IDENTIFY_LANGUAGE {
 }
 ```
 
-Como puede ver, la definición de entrada usa la misma estructura `tuple val(meta), path(file)` que acabamos de aplicar a nuestro canal de entrada.
+Como puedes ver, la definición de entrada usa la misma estructura `tuple val(meta), path(file)` que acabamos de aplicar a nuestro canal de entrada.
 
-La definición de salida está estructurada como una tupla con una estructura similar a la entrada, excepto que también contiene `stdout` como tercer elemento.
-Este patrón `tuple val(meta), path(file), <output>` mantiene los metadatos asociados tanto con los datos de entrada como con las salidas mientras fluye a través del pipeline.
+La definición de salida está estructurada como una tupla con una estructura similar a la de entrada, excepto que también contiene `stdout` como tercer elemento.
+Este patrón `tuple val(meta), path(file), <output>` mantiene los metadatos asociados tanto con los datos de entrada como con las salidas a medida que fluye a través del pipeline.
 
-Tenga en cuenta que estamos usando el calificador de salida [`stdout`](https://www.nextflow.io/docs/latest/process.html#outputs) de Nextflow aquí porque la herramienta imprime su salida directamente a la consola en lugar de escribir un archivo; y usamos `sed` en la línea de comando para eliminar la puntuación de probabilidad, limpiar la cadena eliminando caracteres de nueva línea y devolver solo la predicción de idioma.
+Nota que estamos usando el calificador de salida [`stdout`](https://www.nextflow.io/docs/latest/process.html#outputs) de Nextflow aquí porque la herramienta imprime su salida directamente a la consola en lugar de escribir un archivo; y usamos `sed` en la línea de comandos para eliminar la puntuación de probabilidad, limpiar la cadena eliminando caracteres de nueva línea y devolver solo la predicción de idioma.
 
 ### 2.2. Agregar una llamada a `IDENTIFY_LANGUAGE`
 
 Ahora que el proceso está disponible para el workflow, podemos agregar una llamada al proceso `IDENTIFY_LANGUAGE` para ejecutarlo en el canal de datos.
 
-Realice las siguientes ediciones al workflow:
+Realiza las siguientes ediciones al workflow:
 
 === "Después"
 
@@ -494,7 +494,7 @@ Realice las siguientes ediciones al workflow:
             .view()
     ```
 
-Tenga en cuenta que hemos eliminado la operación `.view()` original en la construcción del canal.
+Nota que hemos eliminado la operación `.view()` original en la construcción del canal.
 
 Ahora podemos ejecutar el workflow:
 
@@ -522,29 +522,29 @@ nextflow run main.nf
 
 ¡Excelente! Ahora tenemos una predicción de qué idioma habla cada personaje.
 
-Y como se señaló anteriormente, también hemos incluido el archivo de entrada y el mapa de metadatos en la salida, lo que significa que ambos permanecen asociados con la nueva información que acabamos de producir.
+Y como se señaló anteriormente, también hemos incluido el archivo de entrada y el mapa meta en la salida, lo que significa que ambos permanecen asociados con la nueva información que acabamos de producir.
 Esto resultará útil en el siguiente paso.
 
-!!! note
+!!! note "Nota"
 
-    De manera más general, este patrón de mantener el mapa de metadatos asociado con los resultados facilita la asociación de resultados relacionados que comparten los mismos identificadores.
+    Más generalmente, este patrón de mantener el mapa meta asociado con los resultados facilita asociar resultados relacionados que comparten los mismos identificadores.
 
-    Como ya habrá aprendido, no puede confiar en el orden de los elementos en los canales para emparejar resultados entre ellos.
-    En su lugar, debe usar claves para asociar datos correctamente, y los mapas de metadatos proporcionan una estructura ideal para este propósito.
+    Como ya habrás aprendido, no puedes confiar en el orden de los elementos en los canales para hacer coincidir resultados entre ellos.
+    En su lugar, debes usar claves para asociar datos correctamente, y los mapas meta proporcionan una estructura ideal para este propósito.
 
-    Exploramos este caso de uso en detalle en la misión secundaria [Dividir y Agrupar](./splitting_and_grouping.md).
+    Exploramos este caso de uso en detalle en la misión secundaria [Splitting & Grouping](./splitting_and_grouping.md).
 
 ### 2.3. Aumentar metadatos con salidas de procesos
 
-Dado que los resultados que acabamos de producir son en sí mismos una forma de metadatos sobre el contenido de los archivos, sería útil agregarlos a nuestro mapa de metadatos.
+Dado que los resultados que acabamos de producir son en sí mismos una forma de metadatos sobre el contenido de los archivos, sería útil agregarlos a nuestro mapa meta.
 
-Sin embargo, no queremos modificar el mapa de metadatos existente en su lugar.
+Sin embargo, no queremos modificar el mapa meta existente en su lugar.
 Desde un punto de vista técnico, es _posible_ hacer eso, pero no es seguro.
 
-Así que en su lugar, crearemos un nuevo mapa de metadatos que contenga el contenido del mapa de metadatos existente más un nuevo par clave-valor `lang: lang_id` que contenga la nueva información, usando el operador `+` (una característica de Groovy).
+Así que en su lugar, crearemos un nuevo mapa meta que contenga el contenido del mapa meta existente más un nuevo par clave-valor `lang: lang_id` que contenga la nueva información, usando el operador `+` (una característica de Groovy).
 Y combinaremos esto con una operación [`map`](https://www.nextflow.io/docs/latest/operator.html#map) para reemplazar el mapa antiguo con el nuevo.
 
-Aquí están las ediciones que necesita hacer al workflow:
+Aquí están las ediciones que necesitas hacer al workflow:
 
 === "Después"
 
@@ -566,11 +566,11 @@ Aquí están las ediciones que necesita hacer al workflow:
         IDENTIFY_LANGUAGE.out.view()
     ```
 
-Si aún no está familiarizado con el operador `+`, o si esto parece confuso, tome unos minutos para revisar la explicación detallada a continuación.
+Si aún no estás familiarizado con el operador `+`, o si esto parece confuso, tómate unos minutos para revisar la explicación detallada a continuación.
 
-??? info "Creación del nuevo mapa de metadatos usando el operador `+`"
+??? info "Creación del nuevo mapa meta usando el operador `+`"
 
-    **Primero, necesita saber que podemos fusionar el contenido de dos mapas usando el operador `+` de Groovy.**
+    **Primero, necesitas saber que podemos fusionar el contenido de dos mapas usando el operador `+` de Groovy.**
 
     Digamos que tenemos los siguientes mapas:
 
@@ -593,20 +593,20 @@ Si aún no está familiarizado con el operador `+`, o si esto parece confuso, to
 
     ¡Genial!
 
-    **¿Pero qué pasa si necesita agregar un campo que aún no es parte de un mapa?**
+    **¿Pero qué pasa si necesitas agregar un campo que aún no es parte de un mapa?**
 
-    Digamos que comienza nuevamente desde `map1`, pero la predicción de idioma no está en su propio mapa (no hay `map2`).
-    En su lugar, se mantiene en una variable llamada `lang_id`, y sabe que quiere almacenar su valor (`'fr'`) con la clave `lang`.
+    Digamos que comienzas de nuevo desde `map1`, pero la predicción de idioma no está en su propio mapa (no hay `map2`).
+    En su lugar, se mantiene en una variable llamada `lang_id`, y sabes que quieres almacenar su valor (`'fr'`) con la clave `lang`.
 
-    En realidad puede hacer lo siguiente:
+    Puedes hacer lo siguiente:
 
     ```groovy
     new_map = [map1 + [lang: lang_id]]
     ```
 
-    Aquí, `[lang: new_info]` crea un nuevo mapa sin nombre sobre la marcha, y `map1 + ` fusiona `map1` con el nuevo mapa sin nombre, produciendo el mismo contenido `new_map` que antes.
+    Aquí, `[lang: new_info]` crea un nuevo mapa sin nombre sobre la marcha, y `map1 + ` fusiona `map1` con el nuevo mapa sin nombre, produciendo el mismo contenido de `new_map` que antes.
 
-    Ordenado, ¿verdad?
+    Ingenioso, ¿verdad?
 
     **Ahora transpongamos eso al contexto de una operación `channel.map()` de Nextflow.**
 
@@ -621,10 +621,10 @@ Si aún no está familiarizado con el operador `+`, o si esto parece confuso, to
     Esto hace lo siguiente:
 
     - `map1, lang_id ->` toma los dos elementos en la tupla
-    - `[map1 + [lang: lang_id]]` crea el nuevo mapa como se detalló arriba
+    - `[map1 + [lang: lang_id]]` crea el nuevo mapa como se detalló anteriormente
 
-    La salida es un solo mapa sin nombre con el mismo contenido que `new_map` en nuestro ejemplo anterior.
-    Entonces efectivamente hemos transformado:
+    La salida es un único mapa sin nombre con el mismo contenido que `new_map` en nuestro ejemplo anterior.
+    Así que efectivamente hemos transformado:
 
     ```groovy
     [id: 'sampleA', character: 'squirrel'], 'fr'
@@ -636,13 +636,13 @@ Si aún no está familiarizado con el operador `+`, o si esto parece confuso, to
     [id: 'sampleA', character: 'squirrel', lang: 'fr']
     ```
 
-    Con suerte puede ver que si cambiamos `map1` a `meta`, eso es básicamente todo lo que necesitamos para agregar la predicción de idioma a nuestro mapa de metadatos en nuestro workflow.
+    Esperamos que puedas ver que si cambiamos `map1` a `meta`, eso es básicamente todo lo que necesitamos para agregar la predicción de idioma a nuestro mapa meta en nuestro workflow.
 
     ¡Excepto por una cosa!
 
     En el caso de nuestro workflow, **también necesitamos tener en cuenta la presencia del objeto `file` en la tupla**, que está compuesta de `meta, file, lang_id`.
 
-    Entonces el código aquí se convertiría en:
+    Así que el código aquí se convertiría en:
 
     ```groovy
     .map { meta, file, lang_id ->
@@ -650,12 +650,12 @@ Si aún no está familiarizado con el operador `+`, o si esto parece confuso, to
     }
     ```
 
-    Si está teniendo dificultades para entender por qué el `file` parece estar moviéndose en la operación `map`, imagine que en lugar de `[meta + [lang: lang_id], file]`, esa línea lee `[new_map, file]`.
+    Si tienes dificultades para entender por qué el `file` parece estar moviéndose en la operación `map`, imagina que en lugar de `[meta + [lang: lang_id], file]`, esa línea dice `[new_map, file]`.
     Esto debería dejar más claro que simplemente estamos dejando el `file` en su lugar original en segunda posición en la tupla. Simplemente hemos tomado el valor `new_info` y lo hemos incorporado al mapa que está en primera posición.
 
     **¡Y esto nos lleva de vuelta a la estructura de canal `tuple val(meta), path(file)`!**
 
-Una vez que esté seguro de entender qué está haciendo este código, ejecute el workflow para ver si funcionó:
+Una vez que estés seguro de que entiendes lo que hace este código, ejecuta el workflow para ver si funcionó:
 
 ```bash
 nextflow run main.nf -resume
@@ -678,19 +678,21 @@ nextflow run main.nf -resume
     [[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/work/4e/f722fe47271ba7ebcd69afa42964ca/ciao.txt]
     ```
 
-Sí, ¡eso lo confirma!
-Hemos reorganizado ordenadamente la salida del proceso de `meta, file, lang_id` para que `lang_id` sea ahora una de las claves en el mapa de metadatos, y las tuplas del canal se ajusten al modelo `meta, file` una vez más.
+Sí, ¡eso funciona!
+Hemos reorganizado ordenadamente la salida del proceso de `meta, file, lang_id` para que `lang_id` ahora sea una de las claves en el mapa meta, y las tuplas del canal se ajusten al modelo `meta, file` una vez más.
+
+<!-- TODO (future) Should we also show how to remove a key using subMap?! Or note where to find that. -->
 
 ### 2.4. Asignar un grupo de idiomas usando condicionales
 
-Ahora que tenemos nuestras predicciones de idioma, usemos la información para asignar algunas agrupaciones nuevas.
+Ahora que tenemos nuestras predicciones de idioma, usemos la información para asignar algunas nuevas agrupaciones.
 
-En nuestros datos de ejemplo, los idiomas usados por nuestros personajes pueden agruparse en idiomas germánicos (inglés, alemán) e idiomas románicos (francés, español, italiano).
-Podría ser útil tener esa clasificación fácilmente disponible en algún lugar más adelante en el pipeline, así que agreguemos esa información en el mapa de metadatos.
+En nuestros datos de ejemplo, los idiomas usados por nuestros personajes se pueden agrupar en idiomas germánicos (inglés, alemán) e idiomas romances (francés, español, italiano).
+Podría ser útil tener esa clasificación disponible en algún lugar más adelante en el pipeline, así que agreguemos esa información en el mapa meta.
 
-Y, buenas noticias, ¡este es otro caso que se presta perfectamente para usar el operador `map`!
+Y, buenas noticias, este es otro caso que se presta perfectamente para usar el operador `map`.
 
-Específicamente, vamos a definir una variable llamada `lang_group`, usar algo de lógica condicional simple para determinar qué valor asignar al `lang_group` para cada pieza de datos.
+Específicamente, vamos a definir una variable llamada `lang_group`, usar algo de lógica condicional simple para determinar qué valor asignar a `lang_group` para cada pieza de datos.
 
 La sintaxis general se verá así:
 
@@ -703,7 +705,7 @@ La sintaxis general se verá así:
 }
 ```
 
-Puede ver que esto es muy similar a la operación de fusión de mapa sobre la marcha que usamos en el paso anterior.
+Puedes ver que esto es muy similar a la operación de fusión de mapas sobre la marcha que usamos en el paso anterior.
 Solo necesitamos escribir las declaraciones condicionales.
 
 Aquí está la lógica condicional que queremos aplicar:
@@ -712,13 +714,13 @@ Aquí está la lógica condicional que queremos aplicar:
 - Si `lang` es alemán (`'de'`) o inglés (`'en'`), cambiar `lang_group` a `germanic`.
 - De lo contrario, si `lang` está incluido en una lista que contiene francés (`'fr'`), español (`'es'`) e italiano (`'it'`), cambiar `lang_group` a `romance`.
 
-Intente escribirlo usted mismo si ya sabe cómo escribir declaraciones condicionales en Nextflow.
+Intenta escribirlo tú mismo si ya sabes cómo escribir declaraciones condicionales en Nextflow.
 
-!!! tip
+!!! tip "Consejo"
 
-    Puede acceder al valor de `lang` dentro de la operación map con `meta.lang`.
+    Puedes acceder al valor de `lang` dentro de la operación map con `meta.lang`.
 
-Debería terminar haciendo los siguientes cambios al workflow:
+Deberías terminar haciendo los siguientes cambios al workflow:
 
 === "Después"
 
@@ -759,10 +761,12 @@ Debería terminar haciendo los siguientes cambios al workflow:
 Aquí están los puntos clave:
 
 - Usamos `def lang_group = "unknown"` para crear la variable `lang_group` con valor predeterminado establecido en `unknown`.
-- Usamos una estructura `if {} else if {}` para la lógica condicional, con pruebas alternativas `.equals()` para los dos idiomas germánicos, y una prueba de existencia en una lista para los tres idiomas románicos.
-- Usamos la operación de fusión `meta + [lang_group:lang_group]` como anteriormente para generar el mapa de metadatos actualizado.
+- Usamos una estructura `if {} else if {}` para la lógica condicional, con pruebas alternativas `.equals()` para los dos idiomas germánicos, y una prueba de existencia en una lista para los tres idiomas romances.
+- Usamos la operación de fusión `meta + [lang_group:lang_group]` como anteriormente para generar el mapa meta actualizado.
 
-Una vez que todo tenga sentido, ejecute el workflow nuevamente para ver el resultado:
+<!-- TODO (future) Add note/links to relevant docs in additional resources section -->
+
+Una vez que todo tenga sentido, ejecuta el workflow nuevamente para ver el resultado:
 
 ```bash
 nextflow run main.nf -resume
@@ -785,23 +789,23 @@ nextflow run main.nf -resume
     [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
     ```
 
-Como puede ver, los elementos del canal mantienen su estructura `[meta, file]`, pero el mapa de metadatos ahora incluye esta nueva clasificación.
+Como puedes ver, los elementos del canal mantienen su estructura `[meta, file]`, pero el mapa meta ahora incluye esta nueva clasificación.
 
 ### Conclusión
 
-En esta sección, ha aprendido cómo:
+En esta sección, has aprendido cómo:
 
-- **Aplicar metadatos de entrada a canales de salida**: Copiar metadatos de esta manera nos permite asociar resultados más adelante basándonos en el contenido de los metadatos.
-- **Crear claves personalizadas**: Creó dos nuevas claves en su mapa de metadatos, fusionándolas con `meta + [new_key:value]` en el mapa de metadatos existente. Una basada en un valor calculado de un proceso, y una basada en una condición que estableció en el operador `map`.
+- **Aplicar metadatos de entrada a canales de salida**: Copiar metadatos de esta manera nos permite asociar resultados más adelante según el contenido de los metadatos.
+- **Crear claves personalizadas**: Creaste dos nuevas claves en tu mapa meta, fusionándolas con `meta + [new_key:value]` en el mapa meta existente. Una basada en un valor calculado de un proceso, y una basada en una condición que estableciste en el operador `map`.
 
-Estos le permiten asociar metadatos nuevos y existentes con archivos a medida que avanza a través de su pipeline.
-Incluso si no está usando metadatos como parte de un proceso, mantener el mapa de metadatos asociado con los datos de esta manera facilita mantener toda la información relevante junta.
+Estos te permiten asociar metadatos nuevos y existentes con archivos a medida que avanzas a través de tu pipeline.
+Incluso si no estás usando metadatos como parte de un proceso, mantener el mapa meta asociado con los datos de esta manera facilita mantener toda la información relevante junta.
 
 ---
 
-## 3. Usando información del mapa de metadatos en un proceso
+## 3. Usar información del mapa meta en un proceso
 
-Ahora que sabe cómo crear y actualizar el mapa de metadatos, podemos llegar a la parte realmente divertida: usar realmente los metadatos en un proceso.
+Ahora que sabes cómo crear y actualizar el mapa meta, podemos llegar a la parte realmente divertida: usar realmente los metadatos en un proceso.
 
 Más específicamente, vamos a agregar un segundo paso a nuestro workflow para dibujar cada animal como arte ASCII y hacer que diga el texto grabado en una burbuja de diálogo.
 Vamos a hacer esto usando una herramienta llamada [`cowpy`](https://github.com/jeffbuttars/cowpy).
@@ -809,7 +813,7 @@ Vamos a hacer esto usando una herramienta llamada [`cowpy`](https://github.com/j
 ??? info "¿Qué hace `cowpy`?"
 
     `cowpy` es una herramienta de línea de comandos que genera arte ASCII para mostrar entradas de texto arbitrarias de una manera divertida.
-    Es una implementación en Python de la herramienta clásica [cowsay](https://en.wikipedia.org/wiki/Cowsay) de Tony Monroe.
+    Es una implementación en python de la herramienta clásica [cowsay](https://en.wikipedia.org/wiki/Cowsay) de Tony Monroe.
 
     ```console
     cowpy "Hello Nextflow"
@@ -826,7 +830,7 @@ Vamos a hacer esto usando una herramienta llamada [`cowpy`](https://github.com/j
               ||     ||
     ```
 
-    Opcionalmente, puede seleccionar un personaje (o 'cowacter') para usar en lugar de la vaca predeterminada.
+    Opcionalmente, puedes seleccionar un personaje (o 'cowacter') para usar en lugar de la vaca predeterminada.
 
     ```console
     cowpy "Hello Nextflow" -c tux
@@ -847,14 +851,14 @@ Vamos a hacer esto usando una herramienta llamada [`cowpy`](https://github.com/j
         \___)=(___/
     ```
 
-Si trabajó en el curso Hello Nextflow, ya ha visto esta herramienta en acción.
-Si no, no se preocupe; cubriremos todo lo que necesita saber a medida que avancemos.
+Si trabajaste en el curso Hello Nextflow, ya has visto esta herramienta en acción.
+Si no, no te preocupes; cubriremos todo lo que necesitas saber a medida que avancemos.
 
 ### 3.1. Importar el proceso y examinar el código
 
-Le proporcionamos un módulo de proceso pre-escrito llamado `COWPY` que envuelve la herramienta `cowpy`, por lo que solo necesita agregar una declaración de inclusión antes del bloque de workflow.
+Te proporcionamos un módulo de proceso pre-escrito llamado `COWPY` que envuelve la herramienta `cowpy`, así que solo necesitas agregar una declaración de inclusión antes del bloque workflow.
 
-Realice la siguiente edición al workflow:
+Realiza la siguiente edición al workflow:
 
 === "Después"
 
@@ -877,7 +881,7 @@ Realice la siguiente edición al workflow:
     workflow {
     ```
 
-Puede abrir el archivo del módulo para examinar su código:
+Puedes abrir el archivo del módulo para examinar su código:
 
 ```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -903,17 +907,17 @@ process COWPY {
 }
 ```
 
-Como puede ver, este proceso está actualmente diseñado para tomar un archivo de entrada (que contiene el texto a mostrar) y un valor que especifica el personaje que debe dibujarse en arte ASCII, generalmente proporcionado a nivel de workflow por un parámetro de línea de comandos.
+Como puedes ver, este proceso está actualmente diseñado para tomar un archivo de entrada (que contiene el texto a mostrar) y un valor que especifica el personaje que debe dibujarse en arte ASCII, generalmente proporcionado a nivel de workflow por un parámetro de línea de comandos.
 
-### 3.2. Pasar un campo del mapa de metadatos como entrada
+### 3.2. Pasar un campo del mapa meta como entrada
 
 Cuando usamos la herramienta `cowpy` en el curso Hello Nextflow, usamos un parámetro de línea de comandos para determinar qué personaje usar para dibujar la imagen final.
 Eso tenía sentido, porque solo estábamos generando una imagen por ejecución del pipeline.
 
 Sin embargo, en este tutorial, queremos generar una imagen apropiada para cada sujeto que estamos procesando, por lo que usar un parámetro de línea de comandos sería demasiado limitante.
 
-Buenas noticias: tenemos una columna `character` en nuestra hoja de datos y por lo tanto, en nuestro mapa de metadatos.
-Usemos eso para establecer el personaje que el proceso debería usar para cada entrada.
+Buenas noticias: tenemos una columna `character` en nuestra hoja de datos y, por lo tanto, en nuestro mapa meta.
+Usemos eso para establecer el personaje que el proceso debe usar para cada entrada.
 
 Para ese fin, necesitaremos hacer tres cosas:
 
@@ -930,7 +934,7 @@ Para alimentar el contenido de ese canal al siguiente proceso (y hacerlo de una 
 
 Podemos hacer eso usando el operador [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set).
 
-En el workflow principal, reemplace el operador `.view()` con `.set { ch_languages }`, y agregue una línea probando que podemos referirnos al canal por nombre.
+En el workflow principal, reemplaza el operador `.view()` con `.set { ch_languages }`, y agrega una línea probando que podemos referirnos al canal por nombre.
 
 === "Después"
 
@@ -1008,23 +1012,23 @@ nextflow run main.nf
 
 Esto confirma que ahora podemos referirnos al canal por nombre.
 
-#### 3.2.2. Acceder al archivo y metadatos del personaje
+#### 3.2.2. Acceder al archivo y metadatos de personaje
 
-Sabemos por mirar el código del módulo que el proceso `COWPY` espera que se le proporcione un archivo de texto y un valor `character`.
-Para escribir la llamada al proceso `COWPY`, solo necesitamos saber cómo extraer el objeto archivo correspondiente y los metadatos de cada elemento en el canal.
+Sabemos por mirar el código del módulo que el proceso `COWPY` espera recibir un archivo de texto y un valor `character`.
+Para escribir la llamada al proceso `COWPY`, solo necesitamos saber cómo extraer el objeto de archivo correspondiente y los metadatos de cada elemento en el canal.
 
 Como suele ser el caso, la forma más simple de hacer eso es usar una operación `map`.
 
-Nuestro canal contiene tuplas estructuradas como `[meta, file]`, por lo que podemos acceder al objeto `file` directamente, y podemos acceder al valor `character` almacenado dentro del mapa de metadatos refiriéndonos a él como `meta.character`.
+Nuestro canal contiene tuplas estructuradas como `[meta, file]`, por lo que podemos acceder al objeto `file` directamente, y podemos acceder al valor `character` almacenado dentro del mapa meta refiriéndonos a él como `meta.character`.
 
-En el workflow principal, realice los siguientes cambios de código:
+En el workflow principal, realiza los siguientes cambios de código:
 
 === "Después"
 
     ```groovy title="main.nf" linenums="34"
         // Temporal: acceder al archivo y personaje
-        ch_languages.map { meta, file -> file }.view { file -> "Archivo: " + file }
-        ch_languages.map { meta, file -> meta.character }.view { character -> "Personaje: " + character }
+        ch_languages.map { meta, file -> file }.view { file -> "File: " + file }
+        ch_languages.map { meta, file -> meta.character }.view { character -> "Character: " + character }
     ```
 
 === "Antes"
@@ -1034,7 +1038,7 @@ En el workflow principal, realice los siguientes cambios de código:
         ch_languages.view()
     ```
 
-Tenga en cuenta que estamos usando closures (como `{ file -> "Archivo: " + file }`) para hacer la salida de las operaciones `.view` más legible.
+Nota que estamos usando closures (como `{ file -> "File: " + file }`) para hacer la salida de las operaciones `.view` más legible.
 
 Ejecutemos esto:
 
@@ -1050,31 +1054,31 @@ nextflow run main.nf -resume
     Launching `./main.nf` [cheesy_cantor] DSL2 - revision: 15af9c1ec7
 
     [43/05df08] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
-    Personaje: squirrel
-    Archivo: /workspaces/training/side-quests/metadata/work/8d/4b9498bbccb7a74f04e41877cdc3e5/bonjour.txt
-    Archivo: /workspaces/training/side-quests/metadata/work/d3/604274985406e40d79021dea658e60/guten_tag.txt
-    Personaje: tux
-    Personaje: turkey
-    Archivo: /workspaces/training/side-quests/metadata/work/d4/fafcc9415b61d2b0fea872e6a05e8a/hello.txt
-    Archivo: /workspaces/training/side-quests/metadata/work/02/468ac9efb27f636715e8144b37e9a7/hallo.txt
-    Personaje: sheep
-    Personaje: moose
-    Personaje: stegosaurus
-    Archivo: /workspaces/training/side-quests/metadata/work/d4/61a7e1188b4f2742bc72004e226eca/salut.txt
-    Archivo: /workspaces/training/side-quests/metadata/work/ae/68364be238c11149c588bf6fc858b1/hola.txt
-    Archivo: /workspaces/training/side-quests/metadata/work/43/05df081af5d879ab52e5828fa0357e/ciao.txt
-    Personaje: turtle
+    Character: squirrel
+    File: /workspaces/training/side-quests/metadata/work/8d/4b9498bbccb7a74f04e41877cdc3e5/bonjour.txt
+    File: /workspaces/training/side-quests/metadata/work/d3/604274985406e40d79021dea658e60/guten_tag.txt
+    Character: tux
+    Character: turkey
+    File: /workspaces/training/side-quests/metadata/work/d4/fafcc9415b61d2b0fea872e6a05e8a/hello.txt
+    File: /workspaces/training/side-quests/metadata/work/02/468ac9efb27f636715e8144b37e9a7/hallo.txt
+    Character: sheep
+    Character: moose
+    Character: stegosaurus
+    File: /workspaces/training/side-quests/metadata/work/d4/61a7e1188b4f2742bc72004e226eca/salut.txt
+    File: /workspaces/training/side-quests/metadata/work/ae/68364be238c11149c588bf6fc858b1/hola.txt
+    File: /workspaces/training/side-quests/metadata/work/43/05df081af5d879ab52e5828fa0357e/ciao.txt
+    Character: turtle
     ```
 
-_Las rutas de archivo y valores de personaje pueden aparecer en un orden diferente en su salida._
+_Las rutas de archivo y valores de personaje pueden salir en un orden diferente en tu salida._
 
 Esto confirma que podemos acceder al archivo y al personaje para cada elemento en el canal.
 
 #### 3.2.3. Llamar al proceso `COWPY`
 
-Ahora pongamos todo junto y llamemos realmente al proceso `COWPY` en el canal `ch_languages`.
+Ahora juntemos todo y llamemos realmente al proceso `COWPY` en el canal `ch_languages`.
 
-En el workflow principal, realice los siguientes cambios de código:
+En el workflow principal, realiza los siguientes cambios de código:
 
 === "Después"
 
@@ -1094,8 +1098,8 @@ En el workflow principal, realice los siguientes cambios de código:
             .view()
     ```
 
-Ve que simplemente copiamos las dos operaciones map (menos las declaraciones `.view()`) como las entradas para la llamada al proceso.
-¡Solo asegúrese de no olvidar la coma entre ellas!
+Ves que simplemente copiamos las dos operaciones map (menos las declaraciones `.view()`) como las entradas a la llamada del proceso.
+¡Solo asegúrate de no olvidar la coma entre ellas!
 
 Es un poco torpe, pero veremos cómo mejorar eso en la siguiente sección.
 
@@ -1117,9 +1121,9 @@ nextflow run main.nf -resume
     [e7/317c18] COWPY (6)             [100%] 7 of 7 ✔
     ```
 
-Si mira en el directorio de resultados, debería ver los archivos individuales que contienen el arte ASCII de cada saludo hablado por el personaje correspondiente.
+Si miras en el directorio de resultados, deberías ver los archivos individuales que contienen el arte ASCII de cada saludo hablado por el personaje correspondiente.
 
-??? abstract "Directorio y contenido de archivo de ejemplo"
+??? abstract "Contenido del directorio y archivo de ejemplo"
 
     ```console
     results/
@@ -1149,20 +1153,20 @@ Si mira en el directorio de resultados, debería ver los archivos individuales q
           '---.~_ _ _|
     ```
 
-Esto muestra que pudimos usar la información en el mapa de metadatos para parametrizar el comando en el segundo paso del pipeline.
+Esto muestra que pudimos usar la información en el mapa meta para parametrizar el comando en el segundo paso del pipeline.
 
-Sin embargo, como se señaló anteriormente, parte del código involucrado fue un poco torpe, ya que tuvimos que desempaquetar metadatos mientras todavía estábamos en el contexto del cuerpo del workflow.
-Ese enfoque funciona bien para usar un pequeño número de campos del mapa de metadatos, pero escalaría pobremente si quisiéramos usar muchos más.
+Sin embargo, como se señaló anteriormente, parte del código involucrado fue un poco torpe, ya que tuvimos que desempaquetar metadatos mientras aún estábamos en el contexto del cuerpo del workflow.
+Ese enfoque funciona bien para usar un pequeño número de campos del mapa meta, pero escalaría mal si quisiéramos usar muchos más.
 
-Hay otro operador llamado `multiMap()` que nos permite optimizar esto un poco, pero incluso entonces no es ideal.
+Hay otro operador llamado `multiMap()` que nos permite simplificar esto un poco, pero incluso entonces no es ideal.
 
 ??? info "(Opcional) Versión alternativa con `multiMap()`"
 
-    En caso de que se lo esté preguntando, no podíamos simplemente escribir una sola operación `map()` que produjera tanto el `file` como el `character`, porque eso los devolvería como una tupla.
+    En caso de que te lo estés preguntando, no pudimos simplemente escribir una única operación `map()` que genere tanto el `file` como el `character`, porque eso los devolvería como una tupla.
     Tuvimos que escribir dos operaciones `map()` separadas para alimentar los elementos `file` y `character` al proceso por separado.
 
-    Técnicamente hay otra forma de hacer esto a través de una sola operación de mapeo, usando el operador `multiMap()`, que es capaz de emitir múltiples canales.
-    Por ejemplo, podría reemplazar la llamada a `COWPY` anterior con el siguiente código:
+    Técnicamente hay otra forma de hacer esto a través de una única operación de mapeo, usando el operador `multiMap()`, que es capaz de emitir múltiples canales.
+    Por ejemplo, podrías reemplazar la llamada a `COWPY` anterior con el siguiente código:
 
     === "Después"
 
@@ -1190,27 +1194,27 @@ Hay otro operador llamado `multiMap()` que nos permite optimizar esto un poco, p
 
 En cualquier caso, es incómodo que tengamos que hacer algo de desempaquetado a nivel de workflow.
 
-Sería mejor si pudiéramos alimentar todo el mapa de metadatos en el proceso y seleccionar lo que necesitamos una vez allí.
+Sería mejor si pudiéramos alimentar todo el mapa meta al proceso y elegir lo que necesitamos una vez allí.
 
-### 3.3. Pasar y usar todo el mapa de metadatos
+### 3.3. Pasar y usar todo el mapa meta
 
-El punto del mapa de metadatos es después de todo pasar todos los metadatos juntos como un paquete.
-La única razón por la que no pudimos hacer eso anteriormente es que el proceso no está configurado para aceptar un mapa de metadatos.
+El punto del mapa meta es después de todo pasar todos los metadatos juntos como un paquete.
+La única razón por la que no pudimos hacer eso anteriormente es que el proceso no está configurado para aceptar un mapa meta.
 Pero como controlamos el código del proceso, podemos cambiar eso.
 
-Modifiquemos el proceso `COWPY` para aceptar la estructura de tupla `[meta, file]` que usamos en el primer proceso para poder optimizar el workflow.
+Modifiquemos el proceso `COWPY` para aceptar la estructura de tupla `[meta, file]` que usamos en el primer proceso para que podamos simplificar el workflow.
 
 Para ese fin, necesitaremos hacer tres cosas:
 
-1. Modificar las definiciones de entrada del módulo de proceso `COWPY`
-2. Actualizar el comando del proceso para usar el mapa de metadatos
-3. Actualizar la llamada al proceso en el cuerpo del workflow
+1. Modificar las definiciones de entrada del módulo del proceso `COWPY`
+2. Actualizar el comando del proceso para usar el mapa meta
+3. Actualizar la llamada del proceso en el cuerpo del workflow
 
 ¿Listo? ¡Vamos!
 
 #### 3.3.1. Modificar la entrada del módulo `COWPY`
 
-Realice las siguientes ediciones al archivo de módulo `cowpy.nf`:
+Realiza las siguientes ediciones al archivo del módulo `cowpy.nf`:
 
 === "Después"
 
@@ -1229,13 +1233,13 @@ Realice las siguientes ediciones al archivo de módulo `cowpy.nf`:
 
 Esto nos permite usar la estructura de tupla `[meta, file]` que cubrimos anteriormente en el tutorial.
 
-Tenga en cuenta que no actualizamos la definición de salida del proceso para producir el mapa de metadatos, con el fin de mantener el tutorial simplificado, pero siéntase libre de hacerlo usted mismo como ejercicio siguiendo el modelo del proceso `IDENTIFY_LANGUAGE`.
+Nota que no actualizamos la definición de salida del proceso para generar el mapa meta, con el fin de mantener el tutorial simplificado, pero siéntete libre de hacerlo tú mismo como ejercicio siguiendo el modelo del proceso `IDENTIFY_LANGUAGE`.
 
-#### 3.3.2. Actualizar el comando para usar el campo del mapa de metadatos
+#### 3.3.2. Actualizar el comando para usar el campo del mapa meta
 
-Todo el mapa de metadatos ahora está disponible dentro del proceso, por lo que podemos referirnos a la información que contiene directamente desde dentro del bloque de comando.
+Todo el mapa meta ahora está disponible dentro del proceso, por lo que podemos referirnos a la información que contiene directamente desde dentro del bloque de comando.
 
-Realice las siguientes ediciones al archivo de módulo `cowpy.nf`:
+Realiza las siguientes ediciones al archivo del módulo `cowpy.nf`:
 
 === "Después"
 
@@ -1255,15 +1259,15 @@ Realice las siguientes ediciones al archivo de módulo `cowpy.nf`:
     """
     ```
 
-Hemos reemplazado la referencia al valor `character` previamente pasado como una entrada independiente con el valor contenido en el mapa de metadatos, al que nos referimos usando `meta.character`.
+Hemos reemplazado la referencia al valor `character` previamente pasado como entrada independiente con el valor contenido en el mapa meta, al que nos referimos usando `meta.character`.
 
-Ahora actualicemos la llamada al proceso en consecuencia.
+Ahora actualicemos la llamada del proceso en consecuencia.
 
-#### 3.3.3. Actualizar la llamada al proceso y ejecutarlo
+#### 3.3.3. Actualizar la llamada del proceso y ejecutarlo
 
-El proceso ahora espera que su entrada use la estructura de tupla `[meta, file]`, que es lo que produce el proceso anterior, por lo que simplemente podemos pasar todo el canal `ch_languages` al proceso `COWPY`.
+El proceso ahora espera que su entrada use la estructura de tupla `[meta, file]`, que es lo que el proceso anterior genera, por lo que simplemente podemos pasar todo el canal `ch_languages` al proceso `COWPY`.
 
-Realice las siguientes ediciones al workflow principal:
+Realiza las siguientes ediciones al workflow principal:
 
 === "Después"
 
@@ -1284,7 +1288,7 @@ Realice las siguientes ediciones al workflow principal:
 
 ¡Eso simplifica la llamada significativamente!
 
-Eliminemos los resultados de la ejecución anterior y ejecutemos:
+Eliminemos los resultados de la ejecución anterior y ejecutémoslo:
 
 ```bash
 rm -r results
@@ -1303,7 +1307,7 @@ nextflow run main.nf
     [25/9243df] process > COWPY (7)             [100%] 7 of 7 ✔
     ```
 
-Si mira en el directorio de resultados, debería ver las mismas salidas que antes, es decir, archivos individuales que contienen el arte ASCII de cada saludo hablado por el personaje correspondiente.
+Si miras en el directorio de resultados, deberías ver las mismas salidas que anteriormente, _es decir_, archivos individuales que contienen el arte ASCII de cada saludo hablado por el personaje correspondiente.
 
 ??? abstract "Contenido del directorio"
 
@@ -1320,21 +1324,21 @@ Si mira en el directorio de resultados, debería ver las mismas salidas que ante
 
 Así que esto produce los mismos resultados que antes con código más simple.
 
-Por supuesto, esto asume que puede modificar el código del proceso.
-En algunos casos, puede que tenga que depender de procesos existentes que no tiene libertad de modificar, lo que limita sus opciones.
-La buena noticia, si planea usar módulos del proyecto [nf-core](https://nf-co.re/), es que los módulos de nf-core están todos configurados para usar la estructura de tupla `[meta, file]` como estándar.
+Por supuesto, esto asume que puedes modificar el código del proceso.
+En algunos casos, es posible que tengas que depender de procesos existentes que no tienes libertad de modificar, lo que limita tus opciones.
+La buena noticia, si planeas usar módulos del proyecto [nf-core](https://nf-co.re/), es que todos los módulos de nf-core están configurados para usar la estructura de tupla `[meta, file]` como estándar.
 
-### 3.4. Solución de problemas con entradas requeridas faltantes
+### 3.4. Solución de problemas de entradas requeridas faltantes
 
 El valor `character` es requerido para que el proceso `COWPY` se ejecute exitosamente.
-Si no establecemos un valor predeterminado en un archivo de configuración, DEBEMOS proporcionar un valor en la hoja de datos.
+Si no establecemos un valor predeterminado para él en un archivo de configuración, DEBEMOS proporcionar un valor para él en la hoja de datos.
 
 **¿Qué sucede si no lo hacemos?**
 Depende de lo que contenga la hoja de datos de entrada y qué versión del workflow estemos ejecutando.
 
 #### 3.4.1. La columna character existe pero está vacía
 
-Digamos que eliminamos el valor de character para uno de los registros en nuestra hoja de datos para simular un error de recopilación de datos:
+Digamos que eliminamos el valor de character para una de las entradas en nuestra hoja de datos para simular un error de recopilación de datos:
 
 ```csv title="datasheet.csv" linenums="1" hl_lines="2"
 id,character,recording
@@ -1347,7 +1351,7 @@ sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
 sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 ```
 
-Para cualquiera de las versiones del workflow que hemos usado anteriormente, la clave `character` se creará para todos los registros cuando se lea la hoja de datos, pero para `sampleA` el valor será una cadena vacía.
+Para cualquier versión del workflow que hayamos usado anteriormente, la clave `character` se creará para todas las entradas cuando se lea la hoja de datos, pero para `sampleA` el valor será una cadena vacía.
 
 Esto causará un error.
 
@@ -1394,7 +1398,7 @@ Esto causará un error.
     -- Check '.nextflow.log' file for details
     ```
 
-Cuando Nextflow ejecuta la línea de comando de `cowpy` para esa muestra, `${meta.character}` se llena con una cadena vacía en la línea de comando de `cowpy`, por lo que la herramienta `cowpy` lanza un error diciendo que no se proporcionó ningún valor para el argumento `-c`.
+Cuando Nextflow ejecuta la línea de comandos `cowpy` para esa muestra, `${meta.character}` se llena con una cadena vacía en la línea de comandos `cowpy`, por lo que la herramienta `cowpy` arroja un error diciendo que no se proporcionó ningún valor para el argumento `-c`.
 
 #### 3.4.2. La columna character no existe en la hoja de datos
 
@@ -1415,7 +1419,7 @@ En este caso, la clave `character` no se creará en absoluto cuando se lea la ho
 
 ##### 3.4.2.1. Valor accedido a nivel de workflow
 
-Si estamos usando la versión del código que escribimos en la sección 3.2, Nextflow intentará acceder a la clave `character` en el mapa de metadatos ANTES de llamar al proceso `COWPY`.
+Si estamos usando la versión del código que escribimos en la sección 3.2, Nextflow intentará acceder a la clave `character` en el mapa meta ANTES de llamar al proceso `COWPY`.
 
 No encontrará ningún elemento que coincida con la instrucción, por lo que no ejecutará `COWPY` en absoluto.
 
@@ -1431,12 +1435,12 @@ No encontrará ningún elemento que coincida con la instrucción, por lo que no 
     [-        ] process > COWPY                 -
     ```
 
-En lo que respecta a Nextflow, ¡este workflow se ejecutó exitosamente!
-Sin embargo, no se producirá ninguna de las salidas que queremos.
+¡Hasta donde Nextflow sabe, este workflow se ejecutó exitosamente!
+Sin embargo, ninguna de las salidas que queremos se producirá.
 
 ##### 3.4.2.2. Valor accedido a nivel de proceso
 
-Si estamos usando la versión de la sección 3.3, Nextflow pasará todo el mapa de metadatos al proceso `COWPY` e intentará ejecutar el comando.
+Si estamos usando la versión en la sección 3.3, Nextflow pasará todo el mapa meta al proceso `COWPY` e intentará ejecutar el comando.
 
 Esto causará un error, pero uno diferente en comparación con el primer caso.
 
@@ -1493,19 +1497,19 @@ Esto causará un error, pero uno diferente en comparación con el primer caso.
     -- Check '.nextflow.log' file for details
     ```
 
-Esto sucede porque `meta.character` no existe, por lo que nuestro intento de acceder a él devuelve `null`. Como resultado, Nextflow literalmente inserta `null` en la línea de comando, lo que por supuesto no es reconocido por la herramienta `cowpy`.
+Esto sucede porque `meta.character` no existe, por lo que nuestro intento de acceder a él devuelve `null`. Como resultado, Nextflow literalmente conecta `null` en la línea de comandos, que por supuesto no es reconocido por la herramienta `cowpy`.
 
 #### 3.4.3. Soluciones
 
-Aparte de proporcionar un valor predeterminado como parte de la configuración del workflow, hay dos cosas que podemos hacer para manejar esto de manera más robusta:
+Además de proporcionar un valor predeterminado como parte de la configuración del workflow, hay dos cosas que podemos hacer para manejar esto de manera más robusta:
 
-1. Implementar validación de entrada en su workflow para asegurar que la hoja de datos contenga toda la información requerida. Puede encontrar una [introducción a la validación de entrada](../hello_nf-core/05_input_validation.md) en el curso de entrenamiento Hello nf-core. <!-- TODO (future) pending a proper Validation side quest -->
+1. Implementar validación de entrada en tu workflow para asegurar que la hoja de datos contenga toda la información requerida. Puedes encontrar una [introducción a la validación de entrada](../hello_nf-core/05_input_validation.md) en el curso de capacitación Hello nf-core. <!-- TODO (future) pending a proper Validation side quest -->
 
-2. Si quiere asegurarse de que cualquiera que use su módulo de proceso pueda identificar inmediatamente las entradas requeridas, también puede hacer que la propiedad de metadatos requerida sea una entrada explícita.
+2. Si quieres asegurarte de que cualquiera que use tu módulo de proceso pueda identificar inmediatamente las entradas requeridas, también puedes hacer que la propiedad de metadatos requerida sea una entrada explícita.
 
-Aquí hay un ejemplo de cómo funcionaría.
+Aquí hay un ejemplo de cómo funcionaría eso.
 
-Primero, a nivel de proceso, actualice la definición de entrada como sigue:
+Primero, a nivel de proceso, actualiza la definición de entrada de la siguiente manera:
 
 === "Después"
 
@@ -1521,7 +1525,7 @@ Primero, a nivel de proceso, actualice la definición de entrada como sigue:
         tuple val(meta), path(input_file)
     ```
 
-Luego, a nivel de workflow, use una operación de mapeo para extraer la propiedad `character` de los metadatos y convertirla en un componente explícito de la tupla de entrada:
+Luego, a nivel de workflow, usa una operación de mapeo para extraer la propiedad `character` de los metadatos y hacerla un componente explícito de la tupla de entrada:
 
 === "Después"
 
@@ -1535,27 +1539,27 @@ Luego, a nivel de workflow, use una operación de mapeo para extraer la propieda
         COWPY(ch_languages)
     ```
 
-Este enfoque tiene la ventaja de mostrar explícitamente que `character` es requerido, y hace que el proceso sea más fácil de redistribuir en otros contextos.
+Este enfoque tiene la ventaja de mostrar explícitamente que `character` es requerido, y hace que el proceso sea más fácil de reimplementar en otros contextos.
 
-Esto destaca un principio de diseño importante:
+Esto resalta un principio de diseño importante:
 
-**Use el mapa de metadatos para información opcional y descriptiva, pero extraiga los valores requeridos como entradas explícitas.**
+**Usa el mapa meta para información opcional y descriptiva, pero extrae valores requeridos como entradas explícitas.**
 
-El mapa de metadatos es excelente para mantener las estructuras de canales limpias y prevenir estructuras de canales arbitrarias, pero para elementos obligatorios que se referencian directamente en un proceso, extraerlos como entradas explícitas crea código más robusto y mantenible.
+El mapa meta es excelente para mantener las estructuras de canal limpias y prevenir estructuras de canal arbitrarias, pero para elementos obligatorios que se referencian directamente en un proceso, extraerlos como entradas explícitas crea código más robusto y mantenible.
 
 ### Conclusión
 
-En esta sección, ha aprendido cómo utilizar metadatos para personalizar la ejecución de un proceso, accediendo a ellos ya sea a nivel de workflow o a nivel de proceso.
+En esta sección, has aprendido cómo utilizar metadatos para personalizar la ejecución de un proceso, accediendo a ellos ya sea a nivel de workflow o a nivel de proceso.
 
 ---
 
-## Ejercicio complementario
+## Ejercicio suplementario
 
-Si desea practicar el uso de información del mapa de metadatos desde dentro de un proceso, intente usar otras piezas de información del mapa de metadatos como `lang` y `lang_group` para personalizar cómo se nombran y/o organizan las salidas.
+Si deseas practicar el uso de información del mapa meta desde dentro de un proceso, intenta usar otras piezas de información del mapa meta como `lang` y `lang_group` para personalizar cómo se nombran y/u organizan las salidas.
 
-Por ejemplo, intente modificar el código para producir este resultado:
+Por ejemplo, intenta modificar el código para producir este resultado:
 
-```console title="Contenido del directorio de resultados"
+```console title="Results directory contents"
 results/
 ├── germanic
 │   ├── de-guten_tag.txt
@@ -1576,20 +1580,20 @@ results/
 
 ## Resumen
 
-En esta misión secundaria, ha explorado cómo trabajar efectivamente con metadatos en workflows de Nextflow.
+En esta misión secundaria, has explorado cómo trabajar efectivamente con metadatos en workflows de Nextflow.
 
-Este patrón de mantener los metadatos explícitos y adjuntos a los datos es una práctica fundamental en Nextflow, que ofrece varias ventajas sobre codificar la información de archivos:
+Este patrón de mantener los metadatos explícitos y adjuntos a los datos es una práctica recomendada central en Nextflow, ofreciendo varias ventajas sobre codificar información de archivos:
 
 - Los metadatos de archivos permanecen asociados con los archivos a lo largo del workflow
-- El comportamiento de los procesos se puede personalizar por archivo
-- La organización de las salidas puede reflejar los metadatos de los archivos
-- La información de los archivos se puede expandir durante la ejecución del pipeline
+- El comportamiento del proceso se puede personalizar por archivo
+- La organización de salida puede reflejar los metadatos del archivo
+- La información del archivo se puede expandir durante la ejecución del pipeline
 
-Aplicar este patrón en su propio trabajo le permitirá construir workflows de bioinformática robustos y mantenibles.
+Aplicar este patrón en tu propio trabajo te permitirá construir workflows de bioinformática robustos y mantenibles.
 
 ### Patrones clave
 
-1.  **Lectura y estructuración de metadatos:** Leer archivos CSV y crear mapas de metadatos organizados que permanecen asociados con sus archivos de datos.
+1.  **Leer y Estructurar Metadatos:** Leer archivos CSV y crear mapas de metadatos organizados que permanezcan asociados con tus archivos de datos.
 
     ```groovy
     channel.fromPath('datasheet.csv')
@@ -1599,9 +1603,9 @@ Aplicar este patrón en su propio trabajo le permitirá construir workflows de b
       }
     ```
 
-2.  **Expansión de metadatos durante el workflow:** Agregar nueva información a sus metadatos a medida que su pipeline avanza, agregando salidas de procesos y derivando valores a través de lógica condicional.
+2.  **Expandir Metadatos Durante el Workflow** Agregar nueva información a tus metadatos a medida que tu pipeline progresa agregando salidas de procesos y derivando valores a través de lógica condicional.
 
-    - Agregar nuevas claves basadas en salidas de procesos
+    - Agregar nuevas claves basadas en la salida del proceso
 
     ```groovy
     .map { meta, file, lang ->
@@ -1623,7 +1627,7 @@ Aplicar este patrón en su propio trabajo le permitirá construir workflows de b
     }
     ```
 
-3.  **Personalización del comportamiento del proceso:** Usar metadatos dentro del proceso.
+3.  **Personalizar el Comportamiento del Proceso:** Usar metadatos dentro del proceso.
 
     ```groovy
     cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
@@ -1638,4 +1642,4 @@ Aplicar este patrón en su propio trabajo le permitirá construir workflows de b
 
 ## ¿Qué sigue?
 
-Regrese al [menú de Misiones Secundarias](./index.md) o haga clic en el botón en la parte inferior derecha de la página para pasar al siguiente tema de la lista.
+Regresa al [menú de Misiones Secundarias](./index.md) o haz clic en el botón en la parte inferior derecha de la página para pasar al siguiente tema en la lista.

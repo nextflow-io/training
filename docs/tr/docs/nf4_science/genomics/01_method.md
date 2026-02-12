@@ -1040,7 +1040,7 @@ Etrafında dolaşabilirsiniz ancak bu veri deposu formatının doğrudan insanla
 
     GATK, gerektiğinde veri deposundan varyant çağrı verilerini incelemeyi ve çıkarmayı mümkün kılan araçlar içerir.
 
-#### 2.3.2. Ortak genotipleme analizini çalıştırın
+#### #### 2.3.2. Ortak genotipleme analizini çalıştırın
 
 Bu ikinci adım, kohorttaki tüm örneklerde mevcut verilerin ışığında varyant istatistiklerini ve bireysel genotipleri yeniden hesaplamak için GenotypeGVCFs adlı başka bir GATK aracını kullanır.
 

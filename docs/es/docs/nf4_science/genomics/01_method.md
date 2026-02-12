@@ -351,7 +351,7 @@ Si te desplazas hacia el inicio del archivo, encontrarás un encabezado compuest
     20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319
     ```
 
-En la salida de ejemplo anterior, hemos resaltado la última línea del encabezado, que marca el inicio de los datos de llamados de variantes.
+En la salida de ejemplo anterior, hemos resaltado la última línea del encabezado, que da los nombres de las columnas para los datos tabulares que siguen.
 Cada línea de datos describe una posible variante identificada en los datos de secuenciación de la muestra. Para orientación sobre cómo interpretar el formato VCF, consulta [este artículo útil](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
 
 #### 1.2.4. Mover los archivos de salida
@@ -1086,7 +1086,7 @@ gatk GenotypeGVCFs \
     17:38:45.615 INFO  ProgressMeter - Starting traversal
     17:38:45.615 INFO  ProgressMeter -        Current Locus  Elapsed Minutes    Variants Processed  Variants/Minute
     17:38:45.903 WARN  InbreedingCoeff - InbreedingCoeff will not be calculated at position 20_10037292_10066351:3480 and possibly subsequent; at least 10 samples must have called genotypes
-    GENOMICSDB_TIMER,GenomicsDB iterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
+    GENOMICSDB_TIMER,GenomicsDBiterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
     17:38:46.421 INFO  ProgressMeter - 20_10037292_10066351:13953              0.0                  3390         252357.3
     17:38:46.422 INFO  ProgressMeter - Traversal complete. Processed 3390 total variants in 0.0 minutes.
     17:38:46.423 INFO  GenotypeGVCFs - Shutting down engine
