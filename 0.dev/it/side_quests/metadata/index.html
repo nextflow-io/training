@@ -4494,7 +4494,7 @@ Partendo da un semplice datasheet (spesso chiamato samplesheet in bioinformatica
 <h4 id="esaminare-i-materiali">Esaminare i materiali<a class="headerlink" href="#esaminare-i-materiali" title="Permanent link">&para;</a></h4>
 <p>Troverà un file di workflow principale e una directory <code>data</code> contenente un datasheet e una manciata di file di dati.</p>
 <details class="abstract">
-<summary>Contenuti della directory</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── data</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">│   ├── bonjour.txt</span>
@@ -4945,7 +4945,7 @@ Questo pattern <code>tuple val(meta), path(file), &lt;output&gt;</code> mantiene
 <p>E come notato in precedenza, abbiamo anche incluso il file di input e la meta map nell'output, il che significa che entrambi rimangono associati alle nuove informazioni che abbiamo appena prodotto.
 Questo si rivelerà utile nel prossimo passaggio.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">Nota</p>
 <p>Più in generale, questo pattern di mantenere la meta map associata ai risultati rende più facile associare risultati correlati che condividono gli stessi identificatori.</p>
 <p>Come avrà già imparato, non potete fare affidamento sull'ordine degli elementi nei canali per abbinare i risultati tra di essi.
 Invece, deve usare chiavi per associare correttamente i dati, e le meta map forniscono una struttura ideale per questo scopo.</p>
@@ -5022,10 +5022,10 @@ Invece, è contenuta in una variabile chiamata <code>lang_id</code>, e sa che vu
 </ul>
 <p>L'output è una singola map senza nome con gli stessi contenuti di <code>new_map</code> nel nostro esempio sopra.
 Quindi abbiamo effettivamente trasformato:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">],</span><span class="w"> </span><span class="s1">&#39;it&#39;</span>
 </code></pre></div>
 <p>in:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">&#39;fr&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="o">[</span><span class="nl">id:</span><span class="w"> </span><span class="s1">&#39;sampleA&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">character:</span><span class="w"> </span><span class="s1">&#39;squirrel&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">lang:</span><span class="w"> </span><span class="s1">&#39;it&#39;</span><span class="o">]</span>
 </code></pre></div>
 <p>Si spera che possa vedere che se cambiamo <code>map1</code> in <code>meta</code>, è fondamentalmente tutto ciò di cui abbiamo bisogno per aggiungere la previsione linguistica alla nostra meta map nel nostro workflow.</p>
 <p>Tranne una cosa!</p>
@@ -5086,7 +5086,7 @@ Dobbiamo solo scrivere le istruzioni condizionali.</p>
 </ul>
 <p>Provi a scriverlo voi stessi se sa già come scrivere istruzioni condizionali in Nextflow.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Suggerimento</p>
 <p>Può accedere al valore di <code>lang</code> all'interno dell'operazione map con <code>meta.lang</code>.</p>
 </div>
 <p>Dovrebbe finire per apportare le seguenti modifiche al workflow:</p>
@@ -5707,7 +5707,7 @@ Ma poiché controlliamo il codice del processo, possiamo cambiarlo.</p>
 </details>
 <p>Se guarda nella directory results, dovrebbe vedere gli stessi output di prima, <em>cioè</em> singoli file contenenti l'arte ASCII di ogni saluto pronunciato dal personaggio corrispondente.</p>
 <details class="abstract">
-<summary>Contenuti della directory</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="go">./results/</span>
 <a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a><span class="go">├── cowpy-bonjour.txt</span>
 <a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="go">├── cowpy-ciao.txt</span>

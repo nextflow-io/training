@@ -4568,7 +4568,7 @@ Lass uns damit beginnen, das hinzuzufügen.</p>
 <p>Wir müssen einen Operator wählen, der den Dateiinhalt mit minimalem Aufwand unsererseits passend parst.
 Da unser Datenblatt im CSV-Format vorliegt, ist dies ein Job für den <a href="https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv</code></a>-Operator, der jede Zeile in der Datei als Element im Channel lädt.</p>
 <p>Nimm die folgenden Änderungen vor, um eine <code>splitCsv()</code>-Operation zum Channel-Konstruktionscode hinzuzufügen, plus eine <code>view()</code>-Operation, um zu überprüfen, dass der Inhalt der Datei korrekt in den Channel geladen wird.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Nachher</label><label for="__tabbed_1_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Danach</label><label for="__tabbed_1_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-3">3</a></span>
@@ -4662,7 +4662,7 @@ Zum Beispiel könnten wir auf die Datei-ID mit <code>id</code> oder auf den txt-
 <p>Nehmen wir an, wir möchten auf die <code>character</code>-Spalte aus dem Datenblatt zugreifen und sie ausgeben.
 Wir können den Nextflow-<code>map</code>-Operator verwenden, um über jedes Element in unserem Channel zu iterieren und speziell den <code>character</code>-Eintrag aus dem Map-Objekt auszuwählen.</p>
 <p>Nimm die folgenden Änderungen am Workflow vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Nachher</label><label for="__tabbed_2_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Danach</label><label for="__tabbed_2_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -4736,7 +4736,7 @@ Es macht den Prozess auch schwer mit anderen zu teilen, die möglicherweise leic
 <p>Um dieses Problem zu vermeiden, müssen wir einen Weg finden, die Channel-Struktur konsistent zu halten, unabhängig davon, wie viele Spalten das Datenblatt enthält.</p>
 <p>Wir können das tun, indem wir alle Metadaten in einem Element innerhalb des Tupels sammeln, das wir die Metadaten-Map oder einfacher 'Meta-Map' nennen werden.</p>
 <p>Nimm die folgenden Änderungen an der <code>map</code>-Operation vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Nachher</label><label for="__tabbed_3_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Danach</label><label for="__tabbed_3_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
@@ -4814,7 +4814,7 @@ Das Tool ist auf eine Reihe von Sprachen vortrainiert, und bei einem Textausschn
 <h3 id="21-importiere-den-prozess-und-untersuche-den-code">2.1. Importiere den Prozess und untersuche den Code<a class="headerlink" href="#21-importiere-den-prozess-und-untersuche-den-code" title="Permanent link">&para;</a></h3>
 <p>Wir stellen dir ein vorgefertigtes Prozessmodul namens <code>IDENTIFY_LANGUAGE</code> zur Verfügung, das das <code>langid</code>-Tool umschließt, sodass du nur eine Include-Anweisung vor dem Workflow-Block hinzufügen musst.</p>
 <p>Nimm die folgende Änderung am Workflow vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Nachher</label><label for="__tabbed_4_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Danach</label><label for="__tabbed_4_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
@@ -4882,7 +4882,7 @@ Dieses <code>tuple val(meta), path(file), &lt;output&gt;</code>-Muster hält die
 <h3 id="22-fuge-einen-aufruf-zu-identify_language-hinzu">2.2. Füge einen Aufruf zu <code>IDENTIFY_LANGUAGE</code> hinzu<a class="headerlink" href="#22-fuge-einen-aufruf-zu-identify_language-hinzu" title="Permanent link">&para;</a></h3>
 <p>Jetzt, da der Prozess dem Workflow zur Verfügung steht, können wir einen Aufruf zum <code>IDENTIFY_LANGUAGE</code>-Prozess hinzufügen, um ihn auf dem Daten-Channel auszuführen.</p>
 <p>Nimm die folgenden Änderungen am Workflow vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Nachher</label><label for="__tabbed_5_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Danach</label><label for="__tabbed_5_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
@@ -4945,7 +4945,7 @@ Dieses <code>tuple val(meta), path(file), &lt;output&gt;</code>-Muster hält die
 <p>Und wie bereits erwähnt, haben wir auch die Eingabedatei und die Meta-Map in die Ausgabe aufgenommen, was bedeutet, dass beide mit den neuen Informationen verbunden bleiben, die wir gerade produziert haben.
 Dies wird sich im nächsten Schritt als nützlich erweisen.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">Hinweis</p>
 <p>Allgemeiner macht es dieses Muster, die Meta-Map mit Ergebnissen verbunden zu halten, einfacher, verwandte Ergebnisse zu verknüpfen, die dieselben Identifikatoren teilen.</p>
 <p>Wie du bereits gelernt hast, kannst du dich nicht auf die Reihenfolge der Elemente in Channels verlassen, um Ergebnisse über sie hinweg zuzuordnen.
 Stattdessen musst du Schlüssel verwenden, um Daten korrekt zuzuordnen, und Meta-Maps bieten eine ideale Struktur für diesen Zweck.</p>
@@ -4958,7 +4958,7 @@ Aus technischer Sicht ist es <em>möglich</em>, das zu tun, aber es ist unsicher
 <p>Stattdessen erstellen wir eine neue Meta-Map, die den Inhalt der bestehenden Meta-Map plus ein neues <code>lang: lang_id</code>-Schlüssel-Wert-Paar enthält, das die neuen Informationen hält, unter Verwendung des <code>+</code>-Operators (eine Groovy-Funktion).
 Und wir werden dies mit einer <a href="https://www.nextflow.io/docs/latest/operator.html#map"><code>map</code></a>-Operation kombinieren, um die alte Map durch die neue zu ersetzen.</p>
 <p>Hier sind die Änderungen, die du am Workflow vornehmen musst:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Nachher</label><label for="__tabbed_6_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Danach</label><label for="__tabbed_6_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-13">13</a></span>
@@ -5086,11 +5086,11 @@ Wir müssen nur die bedingten Anweisungen schreiben.</p>
 </ul>
 <p>Versuche es selbst zu schreiben, wenn du bereits weißt, wie man bedingte Anweisungen in Nextflow schreibt.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Tipp</p>
 <p>Du kannst auf den Wert von <code>lang</code> innerhalb der Map-Operation mit <code>meta.lang</code> zugreifen.</p>
 </div>
 <p>Du solltest am Ende die folgenden Änderungen am Workflow vornehmen:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Nachher</label><label for="__tabbed_7_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Danach</label><label for="__tabbed_7_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-13">13</a></span>
@@ -5228,7 +5228,7 @@ Wenn nicht, keine Sorge; wir werden alles abdecken, was du wissen musst, währen
 <h3 id="31-importiere-den-prozess-und-untersuche-den-code">3.1. Importiere den Prozess und untersuche den Code<a class="headerlink" href="#31-importiere-den-prozess-und-untersuche-den-code" title="Permanent link">&para;</a></h3>
 <p>Wir stellen dir ein vorgefertigtes Prozessmodul namens <code>COWPY</code> zur Verfügung, das das <code>cowpy</code>-Tool umschließt, sodass du nur eine Include-Anweisung vor dem Workflow-Block hinzufügen musst.</p>
 <p>Nimm die folgende Änderung am Workflow vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Nachher</label><label for="__tabbed_8_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Danach</label><label for="__tabbed_8_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1">1</a></span>
@@ -5320,7 +5320,7 @@ Lass uns diese verwenden, um den Charakter festzulegen, den der Prozess für jed
 Um den Inhalt dieses Channels an den nächsten Prozess weiterzugeben (und dies auf eine klare und leicht lesbare Weise zu tun), möchten wir ihm einen eigenen Namen geben, <code>ch_languages</code>.</p>
 <p>Wir können das mit dem <a href="https://www.nextflow.io/docs/latest/reference/operator.html#set"><code>set</code></a>-Operator tun.</p>
 <p>Ersetze im Haupt-Workflow den <code>.view()</code>-Operator durch <code>.set { ch_languages }</code> und füge eine Zeile hinzu, die testet, dass wir uns auf den Channel namentlich beziehen können.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Nachher</label><label for="__tabbed_9_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Danach</label><label for="__tabbed_9_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-14">14</a></span>
@@ -5436,7 +5436,7 @@ Um den Aufruf zum <code>COWPY</code>-Prozess zu schreiben, müssen wir nur wisse
 <p>Wie oft ist der einfachste Weg, das zu tun, eine <code>map</code>-Operation zu verwenden.</p>
 <p>Unser Channel enthält Tupel, die als <code>[meta, file]</code> strukturiert sind, sodass wir direkt auf das <code>file</code>-Objekt zugreifen können, und wir können auf den <code>character</code>-Wert, der innerhalb der Meta-Map gespeichert ist, zugreifen, indem wir ihn als <code>meta.character</code> referenzieren.</p>
 <p>Nimm im Haupt-Workflow die folgenden Code-Änderungen vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Nachher</label><label for="__tabbed_10_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Danach</label><label for="__tabbed_10_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-34">34</a></span>
@@ -5486,7 +5486,7 @@ Um den Aufruf zum <code>COWPY</code>-Prozess zu schreiben, müssen wir nur wisse
 <h4 id="323-rufe-den-cowpy-prozess-auf">3.2.3. Rufe den <code>COWPY</code>-Prozess auf<a class="headerlink" href="#323-rufe-den-cowpy-prozess-auf" title="Permanent link">&para;</a></h4>
 <p>Jetzt lass uns alles zusammenfügen und tatsächlich den <code>COWPY</code>-Prozess auf dem <code>ch_languages</code>-Channel aufrufen.</p>
 <p>Nimm im Haupt-Workflow die folgenden Code-Änderungen vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Nachher</label><label for="__tabbed_11_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Danach</label><label for="__tabbed_11_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-34">34</a></span>
@@ -5565,7 +5565,7 @@ Dieser Ansatz funktioniert gut, wenn man eine kleine Anzahl von Feldern aus der 
 Wir mussten zwei separate <code>map()</code>-Operationen schreiben, um die <code>file</code>- und <code>character</code>-Elemente dem Prozess separat zu übergeben.</p>
 <p>Technisch gibt es eine andere Möglichkeit, dies durch eine einzelne Mapping-Operation zu tun, unter Verwendung des <code>multiMap()</code>-Operators, der mehrere Channels ausgeben kann.
 Zum Beispiel könntest du den Aufruf von <code>COWPY</code> oben durch folgenden Code ersetzen:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Nachher</label><label for="__tabbed_12_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Danach</label><label for="__tabbed_12_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-34">34</a></span>
@@ -5615,7 +5615,7 @@ Da wir aber den Prozesscode kontrollieren, können wir das ändern.</p>
 <p>Bereit? Los geht's!</p>
 <h4 id="331-die-cowpy-moduleingabe-modifizieren">3.3.1. Die <code>COWPY</code>-Moduleingabe modifizieren<a class="headerlink" href="#331-die-cowpy-moduleingabe-modifizieren" title="Permanent link">&para;</a></h4>
 <p>Nimm die folgenden Änderungen an der <code>cowpy.nf</code>-Moduldatei vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Nachher</label><label for="__tabbed_13_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Danach</label><label for="__tabbed_13_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cowpy.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-10">10</a></span>
@@ -5638,7 +5638,7 @@ Da wir aber den Prozesscode kontrollieren, können wir das ändern.</p>
 <h4 id="332-den-befehl-aktualisieren-um-das-meta-map-feld-zu-verwenden">3.3.2. Den Befehl aktualisieren, um das Meta-Map-Feld zu verwenden<a class="headerlink" href="#332-den-befehl-aktualisieren-um-das-meta-map-feld-zu-verwenden" title="Permanent link">&para;</a></h4>
 <p>Die gesamte Meta-Map ist jetzt innerhalb des Prozesses verfügbar, sodass wir direkt aus dem Befehlsblock heraus auf die darin enthaltenen Informationen verweisen können.</p>
 <p>Nimm die folgenden Änderungen an der <code>cowpy.nf</code>-Moduldatei vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Nachher</label><label for="__tabbed_14_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Danach</label><label for="__tabbed_14_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cowpy.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-16">16</a></span>
@@ -5667,7 +5667,7 @@ Da wir aber den Prozesscode kontrollieren, können wir das ändern.</p>
 <h4 id="333-den-prozessaufruf-aktualisieren-und-ausfuhren">3.3.3. Den Prozessaufruf aktualisieren und ausführen<a class="headerlink" href="#333-den-prozessaufruf-aktualisieren-und-ausfuhren" title="Permanent link">&para;</a></h4>
 <p>Der Prozess erwartet jetzt, dass seine Eingabe die <code>[meta, file]</code>-Tupelstruktur verwendet, die der vorherige Prozess ausgibt, sodass wir einfach den gesamten <code>ch_languages</code>-Channel an den <code>COWPY</code>-Prozess übergeben können.</p>
 <p>Nimm die folgenden Änderungen am Haupt-Workflow vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Nachher</label><label for="__tabbed_15_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Danach</label><label for="__tabbed_15_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-34">34</a></span>
@@ -5707,7 +5707,7 @@ Da wir aber den Prozesscode kontrollieren, können wir das ändern.</p>
 </details>
 <p>Wenn du ins Ergebnisverzeichnis schaust, solltest du die gleichen Ausgaben wie zuvor sehen, d.h. einzelne Dateien, die die ASCII-Art jeder Begrüßung enthalten, gesprochen vom entsprechenden Charakter.</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="go">./results/</span>
 <a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a><span class="go">├── cowpy-bonjour.txt</span>
 <a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="go">├── cowpy-ciao.txt</span>
@@ -5893,7 +5893,7 @@ Allerdings werden keine der gewünschten Ausgaben produziert.</p>
 </ol>
 <p>Hier ist ein Beispiel, wie das funktionieren würde.</p>
 <p>Zunächst aktualisiere auf Prozessebene die Eingabedefinition wie folgt:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Nachher</label><label for="__tabbed_16_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Danach</label><label for="__tabbed_16_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">cowpy.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-84-12">12</a></span>
@@ -5910,7 +5910,7 @@ Allerdings werden keine der gewünschten Ausgaben produziert.</p>
 </div>
 </div>
 <p>Verwende dann auf Workflow-Ebene eine Mapping-Operation, um die <code>character</code>-Eigenschaft aus den Metadaten zu extrahieren und sie zu einer expliziten Komponente des Eingabe-Tupels zu machen:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">Nachher</label><label for="__tabbed_17_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">Danach</label><label for="__tabbed_17_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-86-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-86-37" name="__codelineno-86-37"></a><span class="hll"><span class="w">    </span><span class="n">COWPY</span><span class="o">(</span><span class="n">ch_languages</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">character</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]})</span>

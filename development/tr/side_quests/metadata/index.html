@@ -4450,7 +4450,7 @@
  
 
 <h1 id="metadata-ve-meta-mapler">Metadata ve meta map'ler<a class="headerlink" href="#metadata-ve-meta-mapler" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay Zeka Destekli Çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
 <p>Herhangi bir bilimsel analizde, sadece ham veri dosyalarıyla çalışmayız.
 Her dosya kendi ek bilgileriyle birlikte gelir: ne olduğu, nereden geldiği ve onu özel kılan nedir.
 Bu ek bilgilere metadata (üst veri) diyoruz.</p>
@@ -4945,7 +4945,7 @@ Bu <code>tuple val(meta), path(file), &lt;output&gt;</code> modeli, metadata'yı
 <p>Ve daha önce belirtildiği gibi, çıktıya girdi dosyasını ve meta map'i de dahil ettik, bu da her ikisinin de az önce ürettiğimiz yeni bilgiyle ilişkili kalması anlamına gelir.
 Bu, bir sonraki adımda faydalı olacaktır.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">Not</p>
 <p>Daha genel olarak, meta map'i sonuçlarla ilişkili tutmanın bu modeli, aynı tanımlayıcıları paylaşan ilgili sonuçları ilişkilendirmeyi kolaylaştırır.</p>
 <p>Zaten öğrenmiş olduğunuz gibi, sonuçları bunlar arasında eşleştirmek için channel'lardaki öğelerin sırasına güvenemezsiniz.
 Bunun yerine, verileri doğru şekilde ilişkilendirmek için anahtarlar kullanmalısınız ve meta map'ler bu amaç için ideal bir yapı sağlar.</p>
@@ -5036,7 +5036,7 @@ Yani etkin bir şekilde şunu dönüştürdük:</p>
 <a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="o">}</span>
 </code></pre></div>
 <p><code>file</code>'ın <code>map</code> işleminde neden dolaştığını anlamakta zorlanıyorsanız, <code>[meta + [lang: lang_id], file]</code> yerine o satırın <code>[new_map, file]</code> olduğunu hayal edin.
-Bu, basitçe <code>file</code>'ı tuple'daki ikinci pozisyondaki orijinal yerinde bıraktığımızı daha açık hale getirmelidir. Sadece <code>new_info</code> değerini aldık ve onu birinci pozisyondaki map'e katladık.</p>
+Bu, basitçe <code>file</code>'ı tuple'daki ikinci pozisyondaki orijinal yerinde bıraktığımızı daha açık hale getirmelidir. Sadece <code>lang_id</code> değerini aldık ve onu birinci pozisyondaki map'e katladık.</p>
 <p><strong>Ve bu bizi <code>tuple val(meta), path(file)</code> channel yapısına geri getiriyor!</strong></p>
 </details>
 <p>Bu kodun ne yaptığını anladığınızdan emin olduğunuzda, çalışıp çalışmadığını görmek için workflow'u çalıştırın:</p>
@@ -5086,7 +5086,7 @@ Sadece koşullu ifadeleri yazmamız gerekiyor.</p>
 </ul>
 <p>Nextflow'da koşullu ifadeleri nasıl yazacağınızı zaten biliyorsanız kendiniz yazmayı deneyin.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">İpucu</p>
 <p>Map işlemi içinde <code>lang</code> değerine <code>meta.lang</code> ile erişebilirsiniz.</p>
 </div>
 <p>Workflow'da aşağıdaki değişiklikleri yapmayı tamamlamalısınız:</p>
@@ -5728,7 +5728,7 @@ Bir yapılandırma dosyasında bunun için varsayılan bir değer belirlemiyorsa
 <p><strong>Sağlamazsak ne olur?</strong>
 Bu, girdi veri tablosunun ne içerdiğine ve workflow'un hangi versiyonunu çalıştırdığımıza bağlıdır.</p>
 <h4 id="341-character-sutunu-var-ama-bos">3.4.1. Character sütunu var ama boş<a class="headerlink" href="#341-character-sutunu-var-ama-bos" title="Permanent link">&para;</a></h4>
-<p>Bir veri toplama hatasını simüle etmek için veri tablomuzdaki girdilerden birinin character değerini sildiğimizi varsayalım:</p>
+<p>Bir veri toplama hatasını simüle etmek için veri tablomuzda girdilerden birinin character değerini sildiğimizi varsayalım:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">datasheet.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-79-1">1</a></span>
 <span class="normal"><a href="#__codelineno-79-2">2</a></span>
 <span class="normal"><a href="#__codelineno-79-3">3</a></span>
