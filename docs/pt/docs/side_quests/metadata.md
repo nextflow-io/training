@@ -525,7 +525,7 @@ Excelente! Agora temos uma previsão de que idioma cada personagem fala.
 E conforme observado anteriormente, também incluímos o arquivo de entrada e o mapa meta na saída, o que significa que ambos permanecem associados às novas informações que acabamos de produzir.
 Isso se mostrará útil no próximo passo.
 
-!!! note
+!!! note "Nota"
 
     De forma mais geral, esse padrão de manter o mapa meta associado aos resultados facilita associar resultados relacionados que compartilham os mesmos identificadores.
 
@@ -714,7 +714,7 @@ Aqui está a lógica condicional que queremos aplicar:
 
 Tente escrever você mesmo se já souber como escrever declarações condicionais em Nextflow.
 
-!!! tip
+!!! tip "Dica"
 
     Você pode acessar o valor de `lang` dentro da operação map com `meta.lang`.
 
