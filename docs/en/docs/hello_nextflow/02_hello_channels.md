@@ -1142,7 +1142,7 @@ Looking through the list of operators again, we find [`splitCsv()`](https://next
 
 To apply the operator, we append it to the channel factory line like previously.
 
-In the workflow block, make the following code change to replace `flatten()` with `splitcsv()` (uncommented):
+In the workflow block, make the following code change to replace `flatten()` with `splitCsv()` (uncommented):
 
 === "After"
 
