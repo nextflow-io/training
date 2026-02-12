@@ -627,7 +627,7 @@ nextflow run main.nf
     따라서 효과적으로 다음을 변환했습니다:
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'it'
+    [id: 'sampleA', character: 'squirrel'], 'fr'
     ```
 
     다음으로:

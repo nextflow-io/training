@@ -627,7 +627,7 @@ nextflow run main.nf
     इसलिए हमने प्रभावी रूप से परिवर्तित किया है:
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'it'
+    [id: 'sampleA', character: 'squirrel'], 'fr'
     ```
 
     में:

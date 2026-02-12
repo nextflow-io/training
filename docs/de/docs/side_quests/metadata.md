@@ -627,7 +627,7 @@ Wenn du mit dem `+`-Operator noch nicht vertraut bist oder wenn dies verwirrend 
     Wir haben also effektiv transformiert:
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'it'
+    [id: 'sampleA', character: 'squirrel'], 'fr'
     ```
 
     in:
