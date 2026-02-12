@@ -1,7 +1,8 @@
+#!/usr/bin/env nextflow
+
 process MULTIQC {
 
     container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
-    publishDir "results/multiqc", mode: 'symlink'
 
     input:
     path '*'
