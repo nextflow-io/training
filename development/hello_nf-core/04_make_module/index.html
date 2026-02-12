@@ -4741,7 +4741,7 @@ You can test that it runs successfully by running the following command:</p>
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy/main.nf&#39;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
 </span><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4765,7 +4765,7 @@ You can test that it runs successfully by running the following command:</p>
 <a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy/main.nf&#39;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
 </span><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4794,24 +4794,30 @@ You can test that it runs successfully by running the following command:</p>
 <span class="normal"><a href="#__codelineno-8-57">57</a></span>
 <span class="normal"><a href="#__codelineno-8-58">58</a></span>
 <span class="normal"><a href="#__codelineno-8-59">59</a></span>
-<span class="normal"><a href="#__codelineno-8-60">60</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-43" name="__codelineno-8-43"></a><span class="c1">// generate ASCII art of the greetings with cowpy</span>
-<a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="hll"><span class="n">COWPY</span><span class="o">(</span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">)</span>
-</span><a id="__codelineno-8-45" name="__codelineno-8-45"></a>
-<a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="c1">//</span>
-<a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="c1">// Collate and save software versions</span>
-<a id="__codelineno-8-48" name="__codelineno-8-48"></a><span class="c1">//</span>
-<a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
-<a id="__codelineno-8-50" name="__codelineno-8-50"></a><span class="w">    </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="w">        </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-8-52" name="__codelineno-8-52"></a><span class="w">        </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
-<a id="__codelineno-8-53" name="__codelineno-8-53"></a><span class="w">        </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<a id="__codelineno-8-54" name="__codelineno-8-54"></a><span class="w">        </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-8-55" name="__codelineno-8-55"></a><span class="w">    </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-8-56" name="__codelineno-8-56"></a>
-<a id="__codelineno-8-57" name="__codelineno-8-57"></a>
-<a id="__codelineno-8-58" name="__codelineno-8-58"></a><span class="nl">emit:</span>
-<a id="__codelineno-8-59" name="__codelineno-8-59"></a><span class="hll"><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">COWPY</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">cowpy_output</span>
-</span><a id="__codelineno-8-60" name="__codelineno-8-60"></a><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
+<span class="normal"><a href="#__codelineno-8-60">60</a></span>
+<span class="normal"><a href="#__codelineno-8-61">61</a></span>
+<span class="normal"><a href="#__codelineno-8-62">62</a></span>
+<span class="normal"><a href="#__codelineno-8-63">63</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-43" name="__codelineno-8-43"></a><span class="c1">// extract the file from the tuple since cowpy doesn&#39;t use metadata yet</span>
+<a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="n">ch_for_cowpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45"></a>
+<a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="c1">// generate ASCII art of the greetings with cowpy</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="hll"><span class="n">COWPY</span><span class="o">(</span><span class="n">ch_for_cowpy</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+</span><a id="__codelineno-8-48" name="__codelineno-8-48"></a>
+<a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="c1">//</span>
+<a id="__codelineno-8-50" name="__codelineno-8-50"></a><span class="c1">// Collate and save software versions</span>
+<a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="c1">//</span>
+<a id="__codelineno-8-52" name="__codelineno-8-52"></a><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
+<a id="__codelineno-8-53" name="__codelineno-8-53"></a><span class="w">    </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
+<a id="__codelineno-8-54" name="__codelineno-8-54"></a><span class="w">        </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
+<a id="__codelineno-8-55" name="__codelineno-8-55"></a><span class="w">        </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-8-56" name="__codelineno-8-56"></a><span class="w">        </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
+<a id="__codelineno-8-57" name="__codelineno-8-57"></a><span class="w">        </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-8-58" name="__codelineno-8-58"></a><span class="w">    </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-8-59" name="__codelineno-8-59"></a>
+<a id="__codelineno-8-60" name="__codelineno-8-60"></a>
+<a id="__codelineno-8-61" name="__codelineno-8-61"></a><span class="nl">emit:</span>
+<a id="__codelineno-8-62" name="__codelineno-8-62"></a><span class="hll"><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">COWPY</span><span class="o">.</span><span class="na">out</span>
+</span><a id="__codelineno-8-63" name="__codelineno-8-63"></a><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4832,24 +4838,30 @@ You can test that it runs successfully by running the following command:</p>
 <span class="normal"><a href="#__codelineno-9-57">57</a></span>
 <span class="normal"><a href="#__codelineno-9-58">58</a></span>
 <span class="normal"><a href="#__codelineno-9-59">59</a></span>
-<span class="normal"><a href="#__codelineno-9-60">60</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-43" name="__codelineno-9-43"></a><span class="c1">// generate ASCII art of the greetings with cowpy</span>
-<a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="hll"><span class="n">cowpy</span><span class="o">(</span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">)</span>
-</span><a id="__codelineno-9-45" name="__codelineno-9-45"></a>
-<a id="__codelineno-9-46" name="__codelineno-9-46"></a><span class="c1">//</span>
-<a id="__codelineno-9-47" name="__codelineno-9-47"></a><span class="c1">// Collate and save software versions</span>
-<a id="__codelineno-9-48" name="__codelineno-9-48"></a><span class="c1">//</span>
-<a id="__codelineno-9-49" name="__codelineno-9-49"></a><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
-<a id="__codelineno-9-50" name="__codelineno-9-50"></a><span class="w">    </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-9-51" name="__codelineno-9-51"></a><span class="w">        </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-9-52" name="__codelineno-9-52"></a><span class="w">        </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
-<a id="__codelineno-9-53" name="__codelineno-9-53"></a><span class="w">        </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<a id="__codelineno-9-54" name="__codelineno-9-54"></a><span class="w">        </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-9-55" name="__codelineno-9-55"></a><span class="w">    </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-9-56" name="__codelineno-9-56"></a>
-<a id="__codelineno-9-57" name="__codelineno-9-57"></a>
-<a id="__codelineno-9-58" name="__codelineno-9-58"></a><span class="nl">emit:</span>
-<a id="__codelineno-9-59" name="__codelineno-9-59"></a><span class="hll"><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">cowpy</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">cowpy_output</span>
-</span><a id="__codelineno-9-60" name="__codelineno-9-60"></a><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
+<span class="normal"><a href="#__codelineno-9-60">60</a></span>
+<span class="normal"><a href="#__codelineno-9-61">61</a></span>
+<span class="normal"><a href="#__codelineno-9-62">62</a></span>
+<span class="normal"><a href="#__codelineno-9-63">63</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-43" name="__codelineno-9-43"></a><span class="c1">// extract the file from the tuple since cowpy doesn&#39;t use metadata yet</span>
+<a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="n">ch_for_cowpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-9-45" name="__codelineno-9-45"></a>
+<a id="__codelineno-9-46" name="__codelineno-9-46"></a><span class="c1">// generate ASCII art of the greetings with cowpy</span>
+<a id="__codelineno-9-47" name="__codelineno-9-47"></a><span class="hll"><span class="n">cowpy</span><span class="o">(</span><span class="n">ch_for_cowpy</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+</span><a id="__codelineno-9-48" name="__codelineno-9-48"></a>
+<a id="__codelineno-9-49" name="__codelineno-9-49"></a><span class="c1">//</span>
+<a id="__codelineno-9-50" name="__codelineno-9-50"></a><span class="c1">// Collate and save software versions</span>
+<a id="__codelineno-9-51" name="__codelineno-9-51"></a><span class="c1">//</span>
+<a id="__codelineno-9-52" name="__codelineno-9-52"></a><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
+<a id="__codelineno-9-53" name="__codelineno-9-53"></a><span class="w">    </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
+<a id="__codelineno-9-54" name="__codelineno-9-54"></a><span class="w">        </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
+<a id="__codelineno-9-55" name="__codelineno-9-55"></a><span class="w">        </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-9-56" name="__codelineno-9-56"></a><span class="w">        </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
+<a id="__codelineno-9-57" name="__codelineno-9-57"></a><span class="w">        </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-9-58" name="__codelineno-9-58"></a><span class="w">    </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-9-59" name="__codelineno-9-59"></a>
+<a id="__codelineno-9-60" name="__codelineno-9-60"></a>
+<a id="__codelineno-9-61" name="__codelineno-9-61"></a><span class="nl">emit:</span>
+<a id="__codelineno-9-62" name="__codelineno-9-62"></a><span class="hll"><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">cowpy</span><span class="o">.</span><span class="na">out</span>
+</span><a id="__codelineno-9-63" name="__codelineno-9-63"></a><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
