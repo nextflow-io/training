@@ -89,4 +89,4 @@ tree . -L 3
     cd /workspaces/training/nf4-science/rnaseq
     ```
 
-Now, to begin the course, click on the arrow in the bottom right corner of this page.
+**To continue to [Part 1: Method overview](./01_method.md), click on the arrow in the bottom right corner of this page.**

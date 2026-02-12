@@ -29,12 +29,12 @@ Once your codespace is running, there are two things you need to do before divin
 
 ### Set the working directory
 
-By default, the codespace opens with the work directory set at the root of all training courses, but for this course, we'll be working in the `nf4-science/genomics/` directory.
+By default, the codespace opens with the work directory set at the root of all training courses, but for this course, we'll be working in the `nf4-science/{DOMAIN_DIR}/` directory.
 
 Change directory now by running this command in the terminal:
 
 ```bash
-cd nf4-science/genomics/
+cd nf4-science/{DOMAIN_DIR}/
 ```
 
 You can set VSCode to focus on this directory, so that only the relevant files show in the file explorer sidebar:
@@ -48,7 +48,7 @@ code .
     If for whatever reason you move out of this directory (e.g. your codespace goes to sleep), you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
     ```bash
-    cd /workspaces/training/nf4-science/genomics
+    cd /workspaces/training/nf4-science/{DOMAIN_DIR}
     ```
 
 Now let's have a look at the contents.
@@ -71,28 +71,25 @@ tree . -L 2
     ```console
     .
     ├── data
-    │   ├── bam
-    │   ├── ref
-    │   ├── sample_bams.txt
+    │   ├── {DATA_SUBDIRS}
     │   └── samplesheet.csv
-    ├── genomics.nf
+    ├── {DOMAIN_DIR}.nf
     ├── modules
-    │   ├── gatk_haplotypecaller.nf
-    │   └── samtools_index.nf
+    │   ├── {TOOL_A_MODULE}.nf
+    │   └── {TOOL_B_MODULE}.nf
     ├── nextflow.config
     └── solutions
         ├── modules
-        ├── nf-test.config
         ├── part2
-        └── tests
+        └── part3
 
-    8 directories, 8 files
+    N directories, N files
     ```
 
 Click on the colored box to expand the section and view its contents.
 We use collapsible sections like this to display expected command output as well as directory and file contents in a concise way.
 
-- **The `genomics.nf` file** is a workflow script that you'll build up over the course.
+- **The `{DOMAIN_DIR}.nf` file** is a workflow script that you'll build up over the course.
 
 - **The `modules` directory** contains skeleton module files that you'll fill in during the course.
 
@@ -101,7 +98,7 @@ We use collapsible sections like this to display expected command output as well
 
 - **The `data` directory** contains input data and related resources, described later in the course.
 
-- **The `solutions` directory** contains completed module files and a Part 2 solution that can serve as a starting point for Part 3.
+- **The `solutions` directory** contains completed module files and part-specific solutions that can serve as a starting point for the next part.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
 
 ## Readiness checklist
