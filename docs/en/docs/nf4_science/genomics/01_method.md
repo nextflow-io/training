@@ -349,7 +349,7 @@ If you scroll back up to the start of the file, you'll find a header composed of
     20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319
     ```
 
-In the example output above, we've higlighted the last header line, which gives the names of the columns for the tabular data that follows.
+In the example output above, we've highlighted the last header line, which gives the names of the columns for the tabular data that follows.
 Each line of data describes a possible variant identified in the sample's sequencing data. For guidance on interpreting VCF format, see [this helpful article](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
 
 #### 1.2.4. Move the output files
@@ -792,7 +792,7 @@ If you run `head -200 reads_mother.g.vcf` to view the first 200 lines of the fil
     20_10037292_10066351	3537	.	A	<NON_REF>	.	.	END=3546	GT:DP:GQ:MIN_DP:PL	0/0:29:72:26:0,72,1080
     ```
 
-We've once again higlighted the last header line, as well as the first three 'proper' variant calls in the file.
+We've once again highlighted the last header line, as well as the first three 'proper' variant calls in the file.
 
 You'll notice the variant call lines are interspersed with many non-variant lines, which represent non-variant regions where the variant caller found no evidence of variation.
 As mentioned briefly above, this is what is special about the GVCF mode of variant calling: the variant called captures some statistics describing its level of confidence in the absence of variation.
@@ -1158,7 +1158,7 @@ It's another reasonably small file, so you can run `cat family_trio.vcf` to view
     20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113
     ```
 
-We've once again higlighted the last header line, which marks the start of the variant call data.
+We've once again highlighted the last header line, which marks the start of the variant call data.
 
 This looks similar to the VCF we generated earlier, except this time we have genotype-level information for all three samples.
 The last three columns in the file are the genotype blocks for the samples, listed in alphabetical order of their ID field, as shown in the highlighted header line.
