@@ -287,7 +287,7 @@ Open up [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and make 
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -297,8 +297,8 @@ Open up [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) and make 
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
 === "Before"
