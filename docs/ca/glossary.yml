@@ -1,0 +1,42 @@
+# Catalan translation glossary for post-processing enforcement.
+# These translations are applied deterministically, overriding LLM output.
+
+translation_notice:
+  text: "Traducció assistida per IA - [més informació i suggeriments](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)"
+  homepage:
+    title: "Traducció assistida per IA"
+    body: |
+      Aquesta traducció ha estat creada utilitzant intel·ligència artificial i revisada per traductors humans.
+      Agraïm els vostres comentaris i suggeriments de millora.
+      Consulteu la nostra [guia de traducció](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) per a més informació.
+
+tab_labels:
+  After: Després
+  Before: Abans
+
+admonition_titles:
+  note: Nota
+  tip: Consell
+  warning: Advertència
+  info: Info
+  exercise: Exercici
+  solution: Solució
+  example: Exemple
+  danger: Perill
+  hint: Pista
+
+admonition_title_glossary:
+  "Command output": "Sortida de la comanda"
+  "Directory contents": "Contingut del directori"
+  "File contents": "Contingut del fitxer"
+  "Scenario": Escenari
+  "How to begin from this section": "Com començar des d'aquesta secció"
+  "Full code file": "Fitxer de codi complet"
+  "Work directory contents": "Contingut del directori work"
+  "Results directory contents": "Contingut del directori de resultats"
+  "Examples": Exemples
+  "Directory contents (symlinks shortened)": "Contingut del directori (enllaços simbòlics escurçats)"
+  "Don't see the same thing?": "No veieu el mateix?"
+  "Command output (edited for clarity)": "Sortida de la comanda (editada per claredat)"
+  "Directory and file contents": "Contingut de directori i fitxer"
+  "Workflow code": "Codi del workflow"
