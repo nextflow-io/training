@@ -11,8 +11,8 @@ Then you built a single-sample Nextflow pipeline to automate the process, scaled
 
 - An RNAseq processing pipeline that takes FASTQ files as input and produces trimmed reads, alignments and aggregated QC reports as output.
 - Processes for trimming (Trim Galore), alignment (HISAT2), quality control (FastQC) and report aggregation (MultiQC) stored in separate module files.
-- The pipeline scales automatically to any number of input samples using Nextflow's dataflow paradigm.
-- The pipeline handles both single-end and paired-end sequencing data.
+- The pipeline automatically parallelizes the processing of input samples using Nextflow's dataflow paradigm.
+- The final pipeline handles paired-end sequencing data.
 
 ### Skills acquired
 

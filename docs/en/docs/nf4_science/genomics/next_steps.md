@@ -11,7 +11,7 @@ Then you built a single-sample Nextflow pipeline to automate the process, scaled
 
 - A variant calling pipeline that takes BAM files as input and produces joint-called VCFs as output.
 - Three processes (`SAMTOOLS_INDEX`, `GATK_HAPLOTYPECALLER`, and `GATK_JOINTGENOTYPING`) stored in separate module files.
-- The pipeline scales automatically to any number of input samples using Nextflow's dataflow paradigm.
+- The pipeline automatically parallelizes the processing of input samples using Nextflow's dataflow paradigm.
 - The results are published to a directory called `results/`.
 
 ### Skills acquired
