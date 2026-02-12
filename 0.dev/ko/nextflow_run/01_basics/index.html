@@ -2057,7 +2057,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학
   
 
     
@@ -2073,7 +2073,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Genomics
+    유전체학
   
 
           </label>
@@ -2093,7 +2093,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학
   
 
     
@@ -2149,7 +2149,7 @@
   <span class="md-ellipsis">
     
   
-    파트 1: 방법론 개요 및 수동 테스트
+    파트 1: 방법론 개요
   
 
     
@@ -2308,7 +2308,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
     
@@ -2324,7 +2324,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
           </label>
@@ -2344,7 +2344,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
     
@@ -2372,7 +2372,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -2400,7 +2400,7 @@
   <span class="md-ellipsis">
     
   
-    파트 1: 방법 개요 및 수동 테스트
+    파트 1: 방법 개요
   
 
     
@@ -2484,7 +2484,7 @@
   <span class="md-ellipsis">
     
   
-    다음 단계
+    과정 요약
   
 
     
@@ -2559,7 +2559,7 @@
   <span class="md-ellipsis">
     
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
     
@@ -2575,7 +2575,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
           </label>
@@ -2595,7 +2595,7 @@
   <span class="md-ellipsis">
     
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
     
@@ -4231,7 +4231,7 @@
 <h2 id="1-hello-world">1. Hello World 직접 실행<a class="headerlink" href="#1-hello-world" title="Permanent link">&para;</a></h2>
 <p>Nextflow로 적용하기 전에 터미널에서 직접 실행하는 간단한 명령으로 이 개념을 시연하여 무엇을 하는지 보여드리겠습니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p><a href="../00_orientation/">시작하기</a> 페이지에 설명된 대로 지금 <code>nextflow-run/</code> 디렉토리 안에 있어야 합니다.</p>
 </div>
 <h3 id="11-hello">1.1. 터미널에 hello 출력하기<a class="headerlink" href="#11-hello" title="Permanent link">&para;</a></h3>
@@ -4286,53 +4286,67 @@
 </span></code></pre></div>
 </details>
 <p>콘솔 출력이 이와 비슷하다면 축하합니다. 첫 번째 Nextflow workflow를 실행했습니다!</p>
+<details class="question">
+<summary>작동하지 않는 경우</summary>
+<p>다음과 같은 오류가 발생한 경우:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Parameter `input` was specified on the command line or params file but is not declared in the script or config
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>-- Check script &#39;1-hello.nf&#39; at line: 23 or see &#39;.nextflow.log&#39; file for more details
+</code></pre></div>
+<p>이전 v1 Nextflow 언어 분석기를 사용하고 있을 가능성이 높습니다.
+이것은 과정 시작 부분에서 언급되었지만 놓쳤을 수 있습니다.
+<a href="../../info/nxf_versions/">Nextflow 버전</a> 도움말 자료를 확인하세요.</p>
+<p>간단히 말해서, Nextflow <code>25.10</code>을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
+</code></pre></div>
+</details>
 <p>여기서 가장 중요한 출력은 위 출력에서 강조된 마지막 줄입니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 <p>이것은 <code>sayHello</code> process가 한 번 성공적으로 실행되었음을 알려줍니다(<code>1 of 1 ✔</code>).</p>
 <p>훌륭합니다. 하지만 출력은 어디에 있을까요?</p>
 <h3 id="22-results">2.2. <code>results</code> 디렉토리에서 출력 파일 찾기<a class="headerlink" href="#22-results" title="Permanent link">&para;</a></h3>
 <p>이 workflow는 출력을 results 디렉토리에 게시하도록 구성되어 있습니다.
 현재 디렉토리를 보면 workflow를 실행할 때 Nextflow가 <code>results</code>라는 새 디렉토리와 그 아래에 <code>1-hello</code>라는 하위 디렉토리를 생성하고 <code>output.txt</code>라는 파일을 포함하는 것을 볼 수 있습니다.</p>
-<div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">results</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="go">└── 1-hello</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="go">    └── output.txt</span>
+<div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">results</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">└── 1-hello</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">    └── output.txt</span>
 </code></pre></div>
 <p>파일을 열어보세요. 내용은 명령줄에서 지정한 문자열과 일치해야 합니다.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">results/1-hello/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">Hello World!</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">results/1-hello/output.txt</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="go">Hello World!</span>
 </code></pre></div></td></tr></table></div>
 <p>훌륭합니다. workflow가 해야 할 일을 했습니다!</p>
 <h3 id="23">2.3. 다른 디렉토리에 결과 저장<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>기본적으로 Nextflow는 pipeline 출력을 현재 경로의 <code>results</code>라는 디렉토리에 저장합니다.
 파일이 게시되는 위치를 변경하려면 <code>-output-dir</code> CLI 플래그(또는 짧게 <code>-o</code>)를 사용하세요.</p>
 <div class="admonition danger">
-<p class="admonition-title">Danger</p>
+<p class="admonition-title">위험</p>
 <p><code>--input</code>은 두 개의 하이픈이 있고 <code>-output-dir</code>은 하나가 있습니다!
 이것은 <code>--input</code>이 pipeline _매개변수_이고 <code>-output-dir</code>이 코어 Nextflow CLI 플래그이기 때문입니다.
 나중에 더 자세히 다룹니다.</p>
 </div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-output-dir<span class="w"> </span>hello_results
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-output-dir<span class="w"> </span>hello_results
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `1-hello.nf` [hungry_celsius] DSL2 - revision: f048d6ea78</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
 <p>이제 출력이 <code>results</code> 대신 <code>hello_results</code>라는 디렉토리에 게시된 것을 볼 수 있습니다:</p>
-<div class="highlight"><span class="filename">hello_results/</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">hello_results</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="go">└── 1-hello</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="go">    └── output.txt</span>
+<div class="highlight"><span class="filename">hello_results/</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="go">hello_results</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="go">└── 1-hello</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="go">    └── output.txt</span>
 </code></pre></div>
 <p>이 디렉토리 내의 파일은 이전과 동일하며, 최상위 디렉토리만 다릅니다.
 그러나 두 경우 모두 '게시된' 결과는 Nextflow가 workflow를 실행할 때 생성한 실제 출력의 사본(또는 경우에 따라 심볼릭 링크)임을 알아두세요.</p>
 <p>이제 Nextflow가 실제로 작업을 실행한 위치를 확인하기 위해 내부를 살펴보겠습니다.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">경고</p>
 <p>모든 workflow가 results 디렉토리에 출력을 게시하도록 설정되어 있는 것은 아니며, 디렉토리 이름과 구조가 다를 수 있습니다.
 이 섹션의 조금 더 뒤에서 이 동작이 어디에 지정되어 있는지 확인하는 방법을 보여드리겠습니다.</p>
 </div>
@@ -4342,38 +4356,38 @@
 <p>이러한 모든 작업 디렉토리는 현재 디렉토리(명령을 실행하는 위치) 내의 <code>work</code>라는 디렉토리 아래에 위치합니다.</p>
 <p>혼란스럽게 들릴 수 있으므로 실제로 어떻게 보이는지 살펴보겠습니다.</p>
 <p>앞서 실행한 workflow의 콘솔 출력으로 돌아가면 다음 줄이 있었습니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">[a3/1e1535] sayHello [100%] 1 of 1 ✔</span>
 </code></pre></div>
 <p>줄이 <code>[a3/1e1535]</code>로 시작하는 것을 보셨나요?
 이것은 해당 process 호출의 작업 디렉토리 경로의 축약된 형태이며, <code>work/</code> 디렉토리 경로 내에서 <code>sayHello</code> process 호출의 출력을 찾을 위치를 알려줍니다.</p>
 <p>다음 명령을 입력하고(자신의 터미널에 표시된 것으로 <code>a3/1e1535</code>를 대체) Tab 키를 눌러 경로를 자동 완성하거나 별표를 추가하여 전체 경로를 찾을 수 있습니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ls<span class="w"> </span>work/a3/1e1535*
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>ls<span class="w"> </span>work/a3/1e1535*
 </code></pre></div>
 <p>이렇게 하면 전체 경로 디렉토리 경로가 표시됩니다: <code>work/a3/1e153543b0a7f9d2c4735ddb4ab231</code></p>
 <p>그 안에 무엇이 있는지 살펴보겠습니다.</p>
 <details class="abstract">
 <summary>디렉토리 내용</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="go">work</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="go">├── a3</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="go">│   └── 1e153543b0a7f9d2c4735ddb4ab231</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="go">│       ├── .command.begin</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="go">│       ├── .command.err</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="go">│       ├── .command.log</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="go">│       ├── .command.out</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="go">│       ├── .command.run</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="go">│       ├── .command.sh</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="go">│       ├── .exitcode</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="go">│       └── output.txt</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="go">└── a4</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="go">    └── aa3694b8808bdcc1135ef4a1187a4d</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="go">        ├── .command.begin</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="go">        ├── .command.err</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="go">        ├── .command.log</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="go">        ├── .command.out</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="go">        ├── .command.run</span>
-<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="go">        ├── .command.sh</span>
-<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="go">        ├── .exitcode</span>
-<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="go">        └── output.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">work</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="go">├── a3</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="go">│   └── 1e153543b0a7f9d2c4735ddb4ab231</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="go">└── a4</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="go">    └── aa3694b8808bdcc1135ef4a1187a4d</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="go">        ├── .command.begin</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="go">        ├── .command.err</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="go">        ├── .command.log</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="go">        ├── .command.out</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="go">        ├── .command.run</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="go">        ├── .command.sh</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="go">        ├── .exitcode</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="go">        └── output.txt</span>
 </code></pre></div>
 </details>
 <details class="question">
@@ -4381,7 +4395,7 @@
 <p>정확한 하위 디렉토리 이름은 시스템에서 다를 것입니다.</p>
 <p>VSCode 파일 탐색기에서 작업 하위 디렉토리의 내용을 찾아보면 모든 파일이 바로 표시됩니다.
 그러나 로그 파일은 터미널에서 보이지 않도록 설정되어 있으므로 <code>ls</code> 또는 <code>tree</code>를 사용하여 보려면 보이지 않는 파일을 표시하는 관련 옵션을 설정해야 합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>tree<span class="w"> </span>-a<span class="w"> </span>work
 </code></pre></div>
 </details>
 <p><code>work/</code>에는 두 세트의 디렉토리가 있으며, 이는 우리가 수행한 두 가지 다른 pipeline 실행에서 나온 것입니다.
@@ -4389,7 +4403,7 @@
 이 경우 pipeline이 두 번 모두 동일한 작업을 수행했으므로 각 작업 디렉토리의 내용은 동일합니다.</p>
 <p><code>output.txt</code> 파일을 바로 알아볼 수 있을 것입니다. 이 파일은 실제로 <code>results</code> 디렉토리에 게시된 <code>sayHello</code> process의 원본 출력입니다.
 열어보면 <code>Hello World!</code> 인사말을 다시 찾을 수 있습니다.</p>
-<div class="highlight"><span class="filename">work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="go">Hello World!</span>
+<div class="highlight"><span class="filename">work/a3/1e153543b0a7f9d2c4735ddb4ab231/output.txt</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">Hello World!</span>
 </code></pre></div>
 <p>그렇다면 다른 모든 파일들은 무엇일까요?</p>
 <p>이것들은 Nextflow가 작업 실행의 일부로 작성한 도우미 및 로그 파일입니다:</p>
@@ -4403,8 +4417,8 @@
 <li><strong><code>.exitcode</code></strong>: 명령에서 발생한 종료 코드</li>
 </ul>
 <p><code>.command.sh</code> 파일은 모든 부기 및 작업/환경 설정을 포함하지 않고 Nextflow가 실행한 기본 명령을 보여주기 때문에 특히 유용합니다.</p>
-<div class="highlight"><span class="filename">work/a3/1e153543b0a7f9d2c4735ddb4ab231/.command.sh</span><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
+<div class="highlight"><span class="filename">work/a3/1e153543b0a7f9d2c4735ddb4ab231/.command.sh</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="gp">#</span>!/bin/bash<span class="w"> </span>-ue
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">echo &#39;Hello World!&#39; &gt; output.txt</span>
 </code></pre></div>
 <p>이것은 workflow가 이전에 명령줄에서 직접 실행한 것과 동일한 명령을 구성했음을 확인합니다.</p>
 <p>문제가 발생하여 무슨 일이 있었는지 해결해야 할 때, <code>.command.sh</code> 스크립트를 보고 Nextflow가 workflow 지침, 변수 보간 등을 기반으로 어떤 명령을 구성했는지 정확히 확인하는 것이 유용할 수 있습니다.</p>
@@ -4412,66 +4426,66 @@
 <p><code>--input</code> 인수에 다른 값을 사용하여 workflow를 몇 번 더 실행한 다음 작업 디렉토리를 살펴보세요.</p>
 <details class="abstract">
 <summary>디렉토리 내용</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">work/</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="go">├── 09</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="go">│   └── 5ea8665939daf6f04724286c9b3c8a</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="go">│       ├── .command.begin</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="go">│       ├── .command.err</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="go">│       ├── .command.log</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="go">│       ├── .command.out</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="go">│       ├── .command.run</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="go">│       ├── .command.sh</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="go">│       ├── .exitcode</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="go">│       └── output.txt</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="go">├── 92</span>
-<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="go">│   └── ceb95e05d87621c92a399da9bd2067</span>
-<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="go">│       ├── .command.begin</span>
-<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="go">│       ├── .command.err</span>
-<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="go">│       ├── .command.log</span>
-<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="go">│       ├── .command.out</span>
-<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="go">│       ├── .command.run</span>
-<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="go">│       ├── .command.sh</span>
-<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="go">│       ├── .exitcode</span>
-<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="go">│       └── output.txt</span>
-<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="go">├── 93</span>
-<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="go">│   └── 6708dbc20c7efdc6769cbe477061ec</span>
-<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="go">│       ├── .command.begin</span>
-<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a><span class="go">│       ├── .command.err</span>
-<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="go">│       ├── .command.log</span>
-<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="go">│       ├── .command.out</span>
-<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="go">│       ├── .command.run</span>
-<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a><span class="go">│       ├── .command.sh</span>
-<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a><span class="go">│       ├── .exitcode</span>
-<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a><span class="go">│       └── output.txt</span>
-<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a><span class="go">├── a3</span>
-<a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a><span class="go">│   └── 1e153543b0a7f9d2c4735ddb4ab231</span>
-<a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a><span class="go">│       ├── .command.begin</span>
-<a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a><span class="go">│       ├── .command.err</span>
-<a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a><span class="go">│       ├── .command.log</span>
-<a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a><span class="go">│       ├── .command.out</span>
-<a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a><span class="go">│       ├── .command.run</span>
-<a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a><span class="go">│       ├── .command.sh</span>
-<a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a><span class="go">│       ├── .exitcode</span>
-<a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a><span class="go">│       └── output.txt</span>
-<a id="__codelineno-19-42" name="__codelineno-19-42" href="#__codelineno-19-42"></a><span class="go">└── a4</span>
-<a id="__codelineno-19-43" name="__codelineno-19-43" href="#__codelineno-19-43"></a><span class="go">    └── aa3694b8808bdcc1135ef4a1187a4d</span>
-<a id="__codelineno-19-44" name="__codelineno-19-44" href="#__codelineno-19-44"></a><span class="go">        ├── .command.begin</span>
-<a id="__codelineno-19-45" name="__codelineno-19-45" href="#__codelineno-19-45"></a><span class="go">        ├── .command.err</span>
-<a id="__codelineno-19-46" name="__codelineno-19-46" href="#__codelineno-19-46"></a><span class="go">        ├── .command.log</span>
-<a id="__codelineno-19-47" name="__codelineno-19-47" href="#__codelineno-19-47"></a><span class="go">        ├── .command.out</span>
-<a id="__codelineno-19-48" name="__codelineno-19-48" href="#__codelineno-19-48"></a><span class="go">        ├── .command.run</span>
-<a id="__codelineno-19-49" name="__codelineno-19-49" href="#__codelineno-19-49"></a><span class="go">        ├── .command.sh</span>
-<a id="__codelineno-19-50" name="__codelineno-19-50" href="#__codelineno-19-50"></a><span class="go">        ├── .exitcode</span>
-<a id="__codelineno-19-51" name="__codelineno-19-51" href="#__codelineno-19-51"></a><span class="go">        └── output.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">work/</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">├── 09</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">│   └── 5ea8665939daf6f04724286c9b3c8a</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">├── 92</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="go">│   └── ceb95e05d87621c92a399da9bd2067</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a><span class="go">├── 93</span>
+<a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a><span class="go">│   └── 6708dbc20c7efdc6769cbe477061ec</span>
+<a id="__codelineno-21-24" name="__codelineno-21-24" href="#__codelineno-21-24"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-21-25" name="__codelineno-21-25" href="#__codelineno-21-25"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-21-26" name="__codelineno-21-26" href="#__codelineno-21-26"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-21-27" name="__codelineno-21-27" href="#__codelineno-21-27"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-21-28" name="__codelineno-21-28" href="#__codelineno-21-28"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-21-29" name="__codelineno-21-29" href="#__codelineno-21-29"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-21-30" name="__codelineno-21-30" href="#__codelineno-21-30"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-21-31" name="__codelineno-21-31" href="#__codelineno-21-31"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-21-32" name="__codelineno-21-32" href="#__codelineno-21-32"></a><span class="go">├── a3</span>
+<a id="__codelineno-21-33" name="__codelineno-21-33" href="#__codelineno-21-33"></a><span class="go">│   └── 1e153543b0a7f9d2c4735ddb4ab231</span>
+<a id="__codelineno-21-34" name="__codelineno-21-34" href="#__codelineno-21-34"></a><span class="go">│       ├── .command.begin</span>
+<a id="__codelineno-21-35" name="__codelineno-21-35" href="#__codelineno-21-35"></a><span class="go">│       ├── .command.err</span>
+<a id="__codelineno-21-36" name="__codelineno-21-36" href="#__codelineno-21-36"></a><span class="go">│       ├── .command.log</span>
+<a id="__codelineno-21-37" name="__codelineno-21-37" href="#__codelineno-21-37"></a><span class="go">│       ├── .command.out</span>
+<a id="__codelineno-21-38" name="__codelineno-21-38" href="#__codelineno-21-38"></a><span class="go">│       ├── .command.run</span>
+<a id="__codelineno-21-39" name="__codelineno-21-39" href="#__codelineno-21-39"></a><span class="go">│       ├── .command.sh</span>
+<a id="__codelineno-21-40" name="__codelineno-21-40" href="#__codelineno-21-40"></a><span class="go">│       ├── .exitcode</span>
+<a id="__codelineno-21-41" name="__codelineno-21-41" href="#__codelineno-21-41"></a><span class="go">│       └── output.txt</span>
+<a id="__codelineno-21-42" name="__codelineno-21-42" href="#__codelineno-21-42"></a><span class="go">└── a4</span>
+<a id="__codelineno-21-43" name="__codelineno-21-43" href="#__codelineno-21-43"></a><span class="go">    └── aa3694b8808bdcc1135ef4a1187a4d</span>
+<a id="__codelineno-21-44" name="__codelineno-21-44" href="#__codelineno-21-44"></a><span class="go">        ├── .command.begin</span>
+<a id="__codelineno-21-45" name="__codelineno-21-45" href="#__codelineno-21-45"></a><span class="go">        ├── .command.err</span>
+<a id="__codelineno-21-46" name="__codelineno-21-46" href="#__codelineno-21-46"></a><span class="go">        ├── .command.log</span>
+<a id="__codelineno-21-47" name="__codelineno-21-47" href="#__codelineno-21-47"></a><span class="go">        ├── .command.out</span>
+<a id="__codelineno-21-48" name="__codelineno-21-48" href="#__codelineno-21-48"></a><span class="go">        ├── .command.run</span>
+<a id="__codelineno-21-49" name="__codelineno-21-49" href="#__codelineno-21-49"></a><span class="go">        ├── .command.sh</span>
+<a id="__codelineno-21-50" name="__codelineno-21-50" href="#__codelineno-21-50"></a><span class="go">        ├── .exitcode</span>
+<a id="__codelineno-21-51" name="__codelineno-21-51" href="#__codelineno-21-51"></a><span class="go">        └── output.txt</span>
 </code></pre></div>
 </details>
 <p>각 실행에 대해 완전한 출력 및 로그 파일 세트가 포함된 새 하위 디렉토리가 생성된 것을 볼 수 있습니다.</p>
 <p>반면에 <code>results</code> 디렉토리를 보면 여전히 결과 세트가 하나뿐이며 출력 파일의 내용은 마지막으로 실행한 것에 해당합니다.</p>
 <details class="abstract">
 <summary>디렉토리 내용</summary>
-<div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">results</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="go">└── 1-hello</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">    └── output.txt</span>
+<div class="highlight"><span class="filename">results/</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">results</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="go">└── 1-hello</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="go">    └── output.txt</span>
 </code></pre></div>
 </details>
 <p>이것은 게시된 결과가 후속 실행에 의해 덮어쓰여지는 반면, <code>work/</code> 아래의 작업 디렉토리는 보존된다는 것을 보여줍니다.</p>
@@ -4488,89 +4502,89 @@
 <p><code>1-hello.nf</code> 스크립트는 현재 디렉토리인 <code>nextflow-run</code>에서 찾을 수 있습니다. 편집기 창에서 열어보세요.</p>
 <details class="full-code">
 <summary>전체 코드 파일</summary>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-21-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-21-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-21-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-21-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-21-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-21-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-21-10">10</a></span>
-<span class="normal"><a href="#__codelineno-21-11">11</a></span>
-<span class="normal"><a href="#__codelineno-21-12">12</a></span>
-<span class="normal"><a href="#__codelineno-21-13">13</a></span>
-<span class="normal"><a href="#__codelineno-21-14">14</a></span>
-<span class="normal"><a href="#__codelineno-21-15">15</a></span>
-<span class="normal"><a href="#__codelineno-21-16">16</a></span>
-<span class="normal"><a href="#__codelineno-21-17">17</a></span>
-<span class="normal"><a href="#__codelineno-21-18">18</a></span>
-<span class="normal"><a href="#__codelineno-21-19">19</a></span>
-<span class="normal"><a href="#__codelineno-21-20">20</a></span>
-<span class="normal"><a href="#__codelineno-21-21">21</a></span>
-<span class="normal"><a href="#__codelineno-21-22">22</a></span>
-<span class="normal"><a href="#__codelineno-21-23">23</a></span>
-<span class="normal"><a href="#__codelineno-21-24">24</a></span>
-<span class="normal"><a href="#__codelineno-21-25">25</a></span>
-<span class="normal"><a href="#__codelineno-21-26">26</a></span>
-<span class="normal"><a href="#__codelineno-21-27">27</a></span>
-<span class="normal"><a href="#__codelineno-21-28">28</a></span>
-<span class="normal"><a href="#__codelineno-21-29">29</a></span>
-<span class="normal"><a href="#__codelineno-21-30">30</a></span>
-<span class="normal"><a href="#__codelineno-21-31">31</a></span>
-<span class="normal"><a href="#__codelineno-21-32">32</a></span>
-<span class="normal"><a href="#__codelineno-21-33">33</a></span>
-<span class="normal"><a href="#__codelineno-21-34">34</a></span>
-<span class="normal"><a href="#__codelineno-21-35">35</a></span>
-<span class="normal"><a href="#__codelineno-21-36">36</a></span>
-<span class="normal"><a href="#__codelineno-21-37">37</a></span>
-<span class="normal"><a href="#__codelineno-21-38">38</a></span>
-<span class="normal"><a href="#__codelineno-21-39">39</a></span>
-<span class="normal"><a href="#__codelineno-21-40">40</a></span>
-<span class="normal"><a href="#__codelineno-21-41">41</a></span>
-<span class="normal"><a href="#__codelineno-21-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="cm">/*</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="cm">* echo를 사용하여 &#39;Hello World!&#39;를 파일에 출력</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="cm">*/</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a>
-<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10"></a>
-<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
-<a id="__codelineno-21-13" name="__codelineno-21-13"></a>
-<a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
-<a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="o">}</span>
-<a id="__codelineno-21-19" name="__codelineno-21-19"></a>
-<a id="__codelineno-21-20" name="__codelineno-21-20"></a><span class="cm">/*</span>
-<a id="__codelineno-21-21" name="__codelineno-21-21"></a><span class="cm">* Pipeline parameters</span>
-<a id="__codelineno-21-22" name="__codelineno-21-22"></a><span class="cm">*/</span>
-<a id="__codelineno-21-23" name="__codelineno-21-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-21-24" name="__codelineno-21-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
-<a id="__codelineno-21-25" name="__codelineno-21-25"></a><span class="o">}</span>
-<a id="__codelineno-21-26" name="__codelineno-21-26"></a>
-<a id="__codelineno-21-27" name="__codelineno-21-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-21-28" name="__codelineno-21-28"></a>
-<a id="__codelineno-21-29" name="__codelineno-21-29"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-21-30" name="__codelineno-21-30"></a><span class="w">    </span><span class="c1">// emit a greeting</span>
-<a id="__codelineno-21-31" name="__codelineno-21-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-21-32" name="__codelineno-21-32"></a>
-<a id="__codelineno-21-33" name="__codelineno-21-33"></a><span class="w">    </span><span class="nl">publish:</span>
-<a id="__codelineno-21-34" name="__codelineno-21-34"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
-<a id="__codelineno-21-35" name="__codelineno-21-35"></a><span class="o">}</span>
-<a id="__codelineno-21-36" name="__codelineno-21-36"></a>
-<a id="__codelineno-21-37" name="__codelineno-21-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-21-38" name="__codelineno-21-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-21-39" name="__codelineno-21-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
-<a id="__codelineno-21-40" name="__codelineno-21-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-21-41" name="__codelineno-21-41"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-21-42" name="__codelineno-21-42"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span>
+<span class="normal"><a href="#__codelineno-23-11">11</a></span>
+<span class="normal"><a href="#__codelineno-23-12">12</a></span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span>
+<span class="normal"><a href="#__codelineno-23-15">15</a></span>
+<span class="normal"><a href="#__codelineno-23-16">16</a></span>
+<span class="normal"><a href="#__codelineno-23-17">17</a></span>
+<span class="normal"><a href="#__codelineno-23-18">18</a></span>
+<span class="normal"><a href="#__codelineno-23-19">19</a></span>
+<span class="normal"><a href="#__codelineno-23-20">20</a></span>
+<span class="normal"><a href="#__codelineno-23-21">21</a></span>
+<span class="normal"><a href="#__codelineno-23-22">22</a></span>
+<span class="normal"><a href="#__codelineno-23-23">23</a></span>
+<span class="normal"><a href="#__codelineno-23-24">24</a></span>
+<span class="normal"><a href="#__codelineno-23-25">25</a></span>
+<span class="normal"><a href="#__codelineno-23-26">26</a></span>
+<span class="normal"><a href="#__codelineno-23-27">27</a></span>
+<span class="normal"><a href="#__codelineno-23-28">28</a></span>
+<span class="normal"><a href="#__codelineno-23-29">29</a></span>
+<span class="normal"><a href="#__codelineno-23-30">30</a></span>
+<span class="normal"><a href="#__codelineno-23-31">31</a></span>
+<span class="normal"><a href="#__codelineno-23-32">32</a></span>
+<span class="normal"><a href="#__codelineno-23-33">33</a></span>
+<span class="normal"><a href="#__codelineno-23-34">34</a></span>
+<span class="normal"><a href="#__codelineno-23-35">35</a></span>
+<span class="normal"><a href="#__codelineno-23-36">36</a></span>
+<span class="normal"><a href="#__codelineno-23-37">37</a></span>
+<span class="normal"><a href="#__codelineno-23-38">38</a></span>
+<span class="normal"><a href="#__codelineno-23-39">39</a></span>
+<span class="normal"><a href="#__codelineno-23-40">40</a></span>
+<span class="normal"><a href="#__codelineno-23-41">41</a></span>
+<span class="normal"><a href="#__codelineno-23-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="cm">/*</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="cm">* echo를 사용하여 &#39;Hello World!&#39;를 파일에 출력</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="cm">*/</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a>
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13"></a>
+<a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-23-16" name="__codelineno-23-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-23-18" name="__codelineno-23-18"></a><span class="o">}</span>
+<a id="__codelineno-23-19" name="__codelineno-23-19"></a>
+<a id="__codelineno-23-20" name="__codelineno-23-20"></a><span class="cm">/*</span>
+<a id="__codelineno-23-21" name="__codelineno-23-21"></a><span class="cm">* Pipeline parameters</span>
+<a id="__codelineno-23-22" name="__codelineno-23-22"></a><span class="cm">*/</span>
+<a id="__codelineno-23-23" name="__codelineno-23-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-24" name="__codelineno-23-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
+<a id="__codelineno-23-25" name="__codelineno-23-25"></a><span class="o">}</span>
+<a id="__codelineno-23-26" name="__codelineno-23-26"></a>
+<a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-28" name="__codelineno-23-28"></a>
+<a id="__codelineno-23-29" name="__codelineno-23-29"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-23-30" name="__codelineno-23-30"></a><span class="w">    </span><span class="c1">// 인사말을 내보냅니다</span>
+<a id="__codelineno-23-31" name="__codelineno-23-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-23-32" name="__codelineno-23-32"></a>
+<a id="__codelineno-23-33" name="__codelineno-23-33"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-23-34" name="__codelineno-23-34"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
+<a id="__codelineno-23-35" name="__codelineno-23-35"></a><span class="o">}</span>
+<a id="__codelineno-23-36" name="__codelineno-23-36"></a>
+<a id="__codelineno-23-37" name="__codelineno-23-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-38" name="__codelineno-23-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-39" name="__codelineno-23-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
+<a id="__codelineno-23-40" name="__codelineno-23-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-23-41" name="__codelineno-23-41"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-23-42" name="__codelineno-23-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>Nextflow workflow 스크립트는 일반적으로 하나 이상의 <strong>process</strong> 정의, <strong>workflow</strong> 자체, 그리고 <strong>params</strong> 및 <strong>output</strong>과 같은 몇 가지 선택적 블록을 포함합니다.</p>
@@ -4580,37 +4594,37 @@
 <p>첫 번째 코드 블록은 <a href="https://nextflow.io/docs/latest/process.html"><strong>process</strong></a>를 설명합니다.
 process 정의는 <code>process</code> 키워드로 시작하고 그 뒤에 process 이름이 오고 마지막으로 중괄호로 구분된 process 본문이 옵니다.
 process 본문에는 실행할 명령을 지정하는 script 블록이 포함되어야 하며, 이 명령은 명령줄 터미널에서 실행할 수 있는 모든 것이 될 수 있습니다.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-22-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-22-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-22-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-22-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-22-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-22-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-22-10">10</a></span>
-<span class="normal"><a href="#__codelineno-22-11">11</a></span>
-<span class="normal"><a href="#__codelineno-22-12">12</a></span>
-<span class="normal"><a href="#__codelineno-22-13">13</a></span>
-<span class="normal"><a href="#__codelineno-22-14">14</a></span>
-<span class="normal"><a href="#__codelineno-22-15">15</a></span>
-<span class="normal"><a href="#__codelineno-22-16">16</a></span>
-<span class="normal"><a href="#__codelineno-22-17">17</a></span>
-<span class="normal"><a href="#__codelineno-22-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="cm">/*</span>
-<a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="cm">* echo를 사용하여 인사말을 파일에 출력</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="cm">*/</span>
-<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-22-7" name="__codelineno-22-7"></a>
-<a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-22-9" name="__codelineno-22-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
-<a id="__codelineno-22-10" name="__codelineno-22-10"></a>
-<a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
-<a id="__codelineno-22-13" name="__codelineno-22-13"></a>
-<a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-22-16" name="__codelineno-22-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
-<a id="__codelineno-22-17" name="__codelineno-22-17"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-22-18" name="__codelineno-22-18"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span>
+<span class="normal"><a href="#__codelineno-24-11">11</a></span>
+<span class="normal"><a href="#__codelineno-24-12">12</a></span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span>
+<span class="normal"><a href="#__codelineno-24-14">14</a></span>
+<span class="normal"><a href="#__codelineno-24-15">15</a></span>
+<span class="normal"><a href="#__codelineno-24-16">16</a></span>
+<span class="normal"><a href="#__codelineno-24-17">17</a></span>
+<span class="normal"><a href="#__codelineno-24-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="cm">/*</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="cm">* echo를 사용하여 인사말을 파일에 출력</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="cm">*/</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7"></a>
+<a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">greeting</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10"></a>
+<a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13"></a>
+<a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="s2">    echo &#39;${greeting}&#39; &gt; output.txt</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>여기서는 <code>greeting</code>이라는 <strong>input</strong> 변수를 받아 <code>output.txt</code>라는 파일에 <strong>output</strong>을 쓰는 <code>sayHello</code>라는 <strong>process</strong>가 있습니다.</p>
 <figure class="excalidraw">
@@ -4628,23 +4642,23 @@ process 본문에는 실행할 명령을 지정하는 script 블록이 포함되
 workflow 정의는 <code>workflow</code> 키워드로 시작하고 그 뒤에 선택적 이름이 오고, 그 다음 중괄호로 구분된 workflow 본문이 옵니다.</p>
 <p>여기서는 <code>main:</code> 블록과 <code>publish:</code> 블록으로 구성된 <strong>workflow</strong>가 있습니다.
 <code>main:</code> 블록은 workflow의 기본 본문이고 <code>publish:</code> 블록은 <code>results</code> 디렉토리에 게시되어야 하는 출력을 나열합니다.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-27">27</a></span>
-<span class="normal"><a href="#__codelineno-23-28">28</a></span>
-<span class="normal"><a href="#__codelineno-23-29">29</a></span>
-<span class="normal"><a href="#__codelineno-23-30">30</a></span>
-<span class="normal"><a href="#__codelineno-23-31">31</a></span>
-<span class="normal"><a href="#__codelineno-23-32">32</a></span>
-<span class="normal"><a href="#__codelineno-23-33">33</a></span>
-<span class="normal"><a href="#__codelineno-23-34">34</a></span>
-<span class="normal"><a href="#__codelineno-23-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-27" name="__codelineno-23-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-23-28" name="__codelineno-23-28"></a>
-<a id="__codelineno-23-29" name="__codelineno-23-29"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-23-30" name="__codelineno-23-30"></a><span class="w">    </span><span class="c1">// 인사말을 내보냅니다</span>
-<a id="__codelineno-23-31" name="__codelineno-23-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-23-32" name="__codelineno-23-32"></a>
-<a id="__codelineno-23-33" name="__codelineno-23-33"></a><span class="w">    </span><span class="nl">publish:</span>
-<a id="__codelineno-23-34" name="__codelineno-23-34"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
-<a id="__codelineno-23-35" name="__codelineno-23-35"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-27">27</a></span>
+<span class="normal"><a href="#__codelineno-25-28">28</a></span>
+<span class="normal"><a href="#__codelineno-25-29">29</a></span>
+<span class="normal"><a href="#__codelineno-25-30">30</a></span>
+<span class="normal"><a href="#__codelineno-25-31">31</a></span>
+<span class="normal"><a href="#__codelineno-25-32">32</a></span>
+<span class="normal"><a href="#__codelineno-25-33">33</a></span>
+<span class="normal"><a href="#__codelineno-25-34">34</a></span>
+<span class="normal"><a href="#__codelineno-25-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-27" name="__codelineno-25-27"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-25-28" name="__codelineno-25-28"></a>
+<a id="__codelineno-25-29" name="__codelineno-25-29"></a><span class="w">    </span><span class="nl">main:</span>
+<a id="__codelineno-25-30" name="__codelineno-25-30"></a><span class="w">    </span><span class="c1">// 인사말을 내보냅니다</span>
+<a id="__codelineno-25-31" name="__codelineno-25-31"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-25-32" name="__codelineno-25-32"></a>
+<a id="__codelineno-25-33" name="__codelineno-25-33"></a><span class="w">    </span><span class="nl">publish:</span>
+<a id="__codelineno-25-34" name="__codelineno-25-34"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sayHello</span><span class="o">.</span><span class="na">out</span>
+<a id="__codelineno-25-35" name="__codelineno-25-35"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>이 경우 <code>main:</code> 블록에는 <code>sayHello</code> process 호출이 포함되어 있으며 인사말로 사용할 <code>params.input</code>이라는 입력을 제공합니다.</p>
 <p>잠시 후 더 자세히 논의하겠지만, <code>params.input</code>은 명령줄에서 <code>--input</code> 매개변수에 제공한 값을 보유합니다.</p>
@@ -4658,39 +4672,39 @@ workflow 정의는 <code>workflow</code> 키워드로 시작하고 그 뒤에 �
 <p>위에서 언급했듯이, 이것이 <code>--input</code> 명령줄 매개변수의 값을 <code>sayHello()</code> process 호출에 전달하는 방법입니다.
 실제로 <code>params.someParameterName</code>을 선언하는 것만으로 workflow에 명령줄에서 <code>--someParameterName</code>이라는 매개변수를 부여할 수 있습니다.</p>
 <p>여기서는 workflow가 기대하는 입력 유형을 지정하는 <code>params</code> 블록을 설정하여 해당 매개변수 선언을 공식화했습니다(Nextflow 25.10.2 이상).</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-20">20</a></span>
-<span class="normal"><a href="#__codelineno-24-21">21</a></span>
-<span class="normal"><a href="#__codelineno-24-22">22</a></span>
-<span class="normal"><a href="#__codelineno-24-23">23</a></span>
-<span class="normal"><a href="#__codelineno-24-24">24</a></span>
-<span class="normal"><a href="#__codelineno-24-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-20" name="__codelineno-24-20"></a><span class="cm">/*</span>
-<a id="__codelineno-24-21" name="__codelineno-24-21"></a><span class="cm"> * Pipeline parameters</span>
-<a id="__codelineno-24-22" name="__codelineno-24-22"></a><span class="cm"> */</span>
-<a id="__codelineno-24-23" name="__codelineno-24-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-24-24" name="__codelineno-24-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
-<a id="__codelineno-24-25" name="__codelineno-24-25"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-20">20</a></span>
+<span class="normal"><a href="#__codelineno-26-21">21</a></span>
+<span class="normal"><a href="#__codelineno-26-22">22</a></span>
+<span class="normal"><a href="#__codelineno-26-23">23</a></span>
+<span class="normal"><a href="#__codelineno-26-24">24</a></span>
+<span class="normal"><a href="#__codelineno-26-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-20" name="__codelineno-26-20"></a><span class="cm">/*</span>
+<a id="__codelineno-26-21" name="__codelineno-26-21"></a><span class="cm"> * Pipeline parameters</span>
+<a id="__codelineno-26-22" name="__codelineno-26-22"></a><span class="cm"> */</span>
+<a id="__codelineno-26-23" name="__codelineno-26-23"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-26-24" name="__codelineno-26-24"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">String</span>
+<a id="__codelineno-26-25" name="__codelineno-26-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>지원되는 유형에는 <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code> 및 <code>Path</code>가 포함됩니다.
 자세히 알아보려면 Nextflow 참조 문서의 <a href="https://nextflow.io/docs/latest/config.html#workflow-parameters">Workflow parameters</a>를 참조하세요.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p><code>params</code> 시스템을 사용하여 선언된 <em>workflow</em> 매개변수는 항상 명령줄에서 두 개의 대시(<code>--</code>)를 사용합니다.
 이것은 하나의 대시(<code>-</code>)만 사용하는 <em>Nextflow 수준</em> CLI 플래그와 구분됩니다.</p>
 </div>
 <h3 id="35-publish">3.5. <code>publish</code> 지시문<a class="headerlink" href="#35-publish" title="Permanent link">&para;</a></h3>
 <p>workflow의 다른 쪽에서 <code>publish:</code> 블록을 이미 살펴보았습니다.
 그것은 출력 처리 시스템의 절반이며, 나머지 절반은 아래에 있는 <code>output</code> 블록입니다.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-37">37</a></span>
-<span class="normal"><a href="#__codelineno-25-38">38</a></span>
-<span class="normal"><a href="#__codelineno-25-39">39</a></span>
-<span class="normal"><a href="#__codelineno-25-40">40</a></span>
-<span class="normal"><a href="#__codelineno-25-41">41</a></span>
-<span class="normal"><a href="#__codelineno-25-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-37" name="__codelineno-25-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-25-38" name="__codelineno-25-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-25-39" name="__codelineno-25-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
-<a id="__codelineno-25-40" name="__codelineno-25-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-25-41" name="__codelineno-25-41"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-25-42" name="__codelineno-25-42"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">1-hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-37">37</a></span>
+<span class="normal"><a href="#__codelineno-27-38">38</a></span>
+<span class="normal"><a href="#__codelineno-27-39">39</a></span>
+<span class="normal"><a href="#__codelineno-27-40">40</a></span>
+<span class="normal"><a href="#__codelineno-27-41">41</a></span>
+<span class="normal"><a href="#__codelineno-27-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-37" name="__codelineno-27-37"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-27-38" name="__codelineno-27-38"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-27-39" name="__codelineno-27-39"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;1-hello&#39;</span>
+<a id="__codelineno-27-40" name="__codelineno-27-40"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-27-41" name="__codelineno-27-41"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-27-42" name="__codelineno-27-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>이것은 <code>publish:</code> 블록에 나열된 <code>first_output</code> 출력이 기본 <code>results</code> 출력 디렉토리 아래의 <code>1-hello</code>라는 하위 디렉토리에 복사되어야 함을 지정합니다.</p>
 <p><code>mode 'copy'</code> 줄은 <code>work/</code> 디렉토리의 원본 파일에 대한 심볼릭 링크(또는 symlink)를 만드는 대신 적절한 복사본을 만드는 시스템의 기본 동작을 재정의합니다.</p>
@@ -4702,29 +4716,29 @@ workflow 정의는 <code>workflow</code> 키워드로 시작하고 그 뒤에 �
 <p>매우 최근까지 출력을 게시하는 확립된 방법은 <code>publishDir</code> 지시문을 사용하여 각 개별 process 수준에서 수행하는 것이었습니다.</p>
 <p>이 코드 패턴은 여전히 이전 Nextflow pipeline 및 process 모듈 전체에서 찾을 수 있으므로 이를 알고 있는 것이 중요합니다.</p>
 <p>workflow의 <code>publish:</code> 블록과 최상위 수준의 <code>output</code> 블록 대신 <code>sayHello</code> process 정의에 <code>publishDir</code> 줄이 표시됩니다:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">구문 예제</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-26-10">10</a></span>
-<span class="normal"><a href="#__codelineno-26-11">11</a></span>
-<span class="normal"><a href="#__codelineno-26-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2"></a>
-<a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results/1-hello&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-</span><a id="__codelineno-26-4" name="__codelineno-26-4"></a>
-<a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
-<a id="__codelineno-26-7" name="__codelineno-26-7"></a>
-<a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
-<a id="__codelineno-26-11" name="__codelineno-26-11"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">구문 예제</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">process</span><span class="w"> </span><span class="n">sayHello</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2"></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results/1-hello&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+</span><a id="__codelineno-28-4" name="__codelineno-28-4"></a>
+<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;output.txt&#39;</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7"></a>
+<a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10"></a><span class="s2">    echo &#39;Hello World!&#39; &gt; output.txt</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>그러나 향후 Nextflow 언어 버전에서 결국 허용되지 않을 것이므로 새 작업에서 이것을 사용하는 것은 권장하지 않습니다.</p>
 </details>
@@ -4747,19 +4761,19 @@ workflow 정의는 <code>workflow</code> 키워드로 시작하고 그 뒤에 �
 <li>프로덕션에서 pipeline을 실행 중이고 문제가 발생하면 많은 경우 문제를 수정하고 pipeline을 다시 시작할 수 있으며, 실패 지점부터 실행을 재개하여 많은 시간과 컴퓨팅을 절약할 수 있습니다.</li>
 </ul>
 <p>사용하려면 명령에 <code>-resume</code>을 추가하고 실행하면 됩니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span><span class="m">1</span>-hello.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello World!&#39;</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span>
-<span class="normal"><a href="#__codelineno-28-2">2</a></span>
-<span class="normal"><a href="#__codelineno-28-3">3</a></span>
-<span class="normal"><a href="#__codelineno-28-4">4</a></span>
-<span class="normal"><a href="#__codelineno-28-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2"></a>
-<a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4"></a>
-<a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
+<span class="normal"><a href="#__codelineno-30-2">2</a></span>
+<span class="normal"><a href="#__codelineno-30-3">3</a></span>
+<span class="normal"><a href="#__codelineno-30-4">4</a></span>
+<span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2"></a>
+<a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="go">Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a>
+<a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="go">[a3/7be2fa] sayHello | 1 of 1, cached: 1 ✔</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>콘솔 출력은 익숙해 보이지만 이전과 약간 다른 점이 있습니다.</p>
@@ -4767,7 +4781,7 @@ workflow 정의는 <code>workflow</code> 키워드로 시작하고 그 뒤에 �
 <p>작업 하위 디렉토리 해시가 이전 실행과 동일한 것도 볼 수 있습니다.
 Nextflow는 문자 그대로 이전 실행을 가리키며 "저기서 이미 했어요"라고 말하는 것입니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p><code>resume</code>으로 pipeline을 다시 실행할 때 Nextflow는 이전에 성공적으로 실행된 실행에 의해 작업 디렉토리 외부에 게시된 파일을 덮어쓰지 않습니다.</p>
 <p>자세히 알아보려면 Nextflow 참조 문서의 <a href="https://nextflow.io/docs/latest/cache-and-resume.html">Cache and resume</a>을 참조하세요.</p>
 </div>
@@ -4775,34 +4789,34 @@ Nextflow는 문자 그대로 이전 실행을 가리키며 "저기서 이미 했
 <p>nextflow workflow를 시작할 때마다 현재 작업 디렉토리의 <code>.nextflow</code>라는 숨겨진 디렉토리 아래에 <code>history</code>라는 로그 파일에 줄이 기록됩니다.</p>
 <details class="abstract">
 <summary>파일 내용</summary>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
-<span class="normal"><a href="#__codelineno-29-2">2</a></span>
-<span class="normal"><a href="#__codelineno-29-3">3</a></span>
-<span class="normal"><a href="#__codelineno-29-4">4</a></span>
-<span class="normal"><a href="#__codelineno-29-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
-<a id="__codelineno-29-2" name="__codelineno-29-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
-<a id="__codelineno-29-3" name="__codelineno-29-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
-<a id="__codelineno-29-4" name="__codelineno-29-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
-<a id="__codelineno-29-5" name="__codelineno-29-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span>
+<span class="normal"><a href="#__codelineno-31-3">3</a></span>
+<span class="normal"><a href="#__codelineno-31-4">4</a></span>
+<span class="normal"><a href="#__codelineno-31-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
+<a id="__codelineno-31-2" name="__codelineno-31-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
+<a id="__codelineno-31-4" name="__codelineno-31-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
+<a id="__codelineno-31-5" name="__codelineno-31-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 </code></pre></div></td></tr></table></div>
 </details>
 <p>이 파일은 현재 작업 디렉토리 내에서 시작된 모든 Nextflow 실행에 대한 타임스탬프, 실행 이름, 상태, 리비전 ID, 세션 ID 및 전체 명령줄을 제공합니다.</p>
 <p>이 정보에 액세스하는 더 편리한 방법은 <a href="https://nextflow.io/docs/latest/reference/cli.html#log"><code>nextflow log</code></a> 명령을 사용하는 것입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nextflow<span class="w"> </span>log
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>nextflow<span class="w"> </span>log
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
-<span class="normal"><a href="#__codelineno-31-2">2</a></span>
-<span class="normal"><a href="#__codelineno-31-3">3</a></span>
-<span class="normal"><a href="#__codelineno-31-4">4</a></span>
-<span class="normal"><a href="#__codelineno-31-5">5</a></span>
-<span class="normal"><a href="#__codelineno-31-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
-<a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
-<a id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
-<a id="__codelineno-31-5" name="__codelineno-31-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
-<a id="__codelineno-31-6" name="__codelineno-31-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
+<span class="normal"><a href="#__codelineno-33-2">2</a></span>
+<span class="normal"><a href="#__codelineno-33-3">3</a></span>
+<span class="normal"><a href="#__codelineno-33-4">4</a></span>
+<span class="normal"><a href="#__codelineno-33-5">5</a></span>
+<span class="normal"><a href="#__codelineno-33-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>이렇게 하면 헤더 줄이 추가된 로그 파일의 내용이 터미널에 출력됩니다.</p>
@@ -4821,32 +4835,32 @@ Nextflow는 문자 그대로 이전 실행을 가리키며 "저기서 이미 했
 Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반으로 실행을 찾을 수도 있습니다.</p>
 <h4 id="432">4.3.2. 드라이 런 수행<a class="headerlink" href="#432" title="Permanent link">&para;</a></h4>
 <p>먼저 드라이 런 플래그 <code>-n</code>을 사용하여 명령에 따라 삭제될 항목을 확인합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-n
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-n
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
-<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
 </code></pre></div>
 </details>
 <p>출력에는 다른 작업 디렉토리 이름이 있고 줄 수가 다를 수 있지만 예제와 비슷해 보여야 합니다.</p>
 <p>줄이 출력되지 않으면 유효한 실행 이름을 제공하지 않았거나 삭제할 과거 실행이 없는 것입니다. 예제 명령의 <code>backstabbing_swartz</code>를 로그의 해당 최신 실행 이름으로 변경해야 합니다.</p>
 <h4 id="433">4.3.3. 삭제 진행<a class="headerlink" href="#433" title="Permanent link">&para;</a></h4>
 <p>출력이 예상대로 보이고 삭제를 진행하려면 <code>-n</code> 대신 <code>-f</code> 플래그로 명령을 다시 실행하세요:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-f
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>backstabbing_swartz<span class="w"> </span>-f
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
-<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883</span>
 </code></pre></div>
 </details>
 <p>출력은 이전과 비슷해야 하지만 이제 'Would remove' 대신 'Removed'라고 표시됩니다.
 이것은 두 문자 하위 디렉토리(위의 <code>eb/</code>와 같은)를 제거하지 않지만 그 내용을 비웁니다.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">경고</p>
 <p>과거 실행에서 작업 하위 디렉토리를 삭제하면 Nextflow의 캐시에서 제거되고 해당 디렉토리에 저장된 모든 출력이 삭제됩니다.
 이것은 해당 process를 다시 실행하지 않고 실행을 재개하는 Nextflow의 기능을 손상시킵니다.</p>
 <p>관심 있는 출력을 저장하는 것은 사용자의 책임입니다! 이것이 <code>publish</code> 지시문에 <code>symlink</code> 모드보다 <code>copy</code> 모드를 선호하는 주된 이유입니다.</p>

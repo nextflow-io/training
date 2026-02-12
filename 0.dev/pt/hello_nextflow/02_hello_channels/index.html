@@ -2212,7 +2212,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow para Genômica
+    Genômica
   
 
     
@@ -2228,7 +2228,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow para Genômica
+    Genômica
   
 
           </label>
@@ -2248,7 +2248,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow para Genômica
+    Genômica
   
 
     
@@ -2304,7 +2304,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 1: Visão geral do método e testes manuais
+    Parte 1: Visão geral do método
   
 
     
@@ -2463,7 +2463,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow para RNAseq
+    RNAseq
   
 
     
@@ -2479,7 +2479,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow para RNAseq
+    RNAseq
   
 
           </label>
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow para RNAseq
+    RNAseq
   
 
     
@@ -2527,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Orientação
+    Primeiros Passos
   
 
     
@@ -2555,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 1: Visão geral do método e teste manual
+    Parte 1: Visão geral do método
   
 
     
@@ -2639,7 +2639,7 @@
   <span class="md-ellipsis">
     
   
-    Próximos Passos
+    Resumo do Curso
   
 
     
@@ -2714,7 +2714,7 @@
   <span class="md-ellipsis">
     
   
-    Executar Nextflow para Imagens
+    Imagens
   
 
     
@@ -2730,7 +2730,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Executar Nextflow para Imagens
+    Imagens
   
 
           </label>
@@ -2750,7 +2750,7 @@
   <span class="md-ellipsis">
     
   
-    Executar Nextflow para Imagens
+    Imagens
   
 
     
@@ -4618,7 +4618,7 @@ Funcionalmente, isso será semelhante a como tínhamos configurado antes, mas em
 </figure>
 
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">Nota</p>
 <p>Estamos temporariamente voltando a usar strings codificadas em vez de usar um parâmetro CLI para fins de legibilidade. Voltaremos a usar parâmetros CLI assim que tivermos coberto o que está acontecendo no nível do canal.</p>
 </div>
 <p>No bloco workflow, adicione o código da fábrica de canais:</p>
@@ -4952,7 +4952,7 @@ Então o status de todas as três chamadas ao processo sayHello() estão chegand
 Para um fluxo de trabalho complexo, ou um grande número de entradas, ter a lista completa exibida no terminal ficaria um pouco avassalador.
 É por isso que <code>-ansi-log false</code> não é o comportamento padrão.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>A maneira como o status é relatado é um pouco diferente entre os dois modos de log.
 No modo condensado, o Nextflow relata se as chamadas foram concluídas com sucesso ou não.
 Neste modo expandido, ele apenas relata que foram submetidas.</p>
@@ -5089,7 +5089,7 @@ Aqui, por conveniência, vamos apenas usar a própria saudação, já que é ape
 </div>
 <p>Certifique-se de substituir <code>output.txt</code> tanto na definição de saída quanto no bloco de comando <code>script:</code>.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>Na definição de saída, você DEVE usar aspas duplas em torno da expressão do nome do arquivo (NÃO aspas simples), caso contrário falhará.</p>
 </div>
 <p>Isso deve produzir um nome de arquivo de saída único toda vez que o processo for chamado, para que possa ser distinguido das saídas de outras chamadas ao mesmo processo no diretório de saída.</p>
@@ -5133,7 +5133,7 @@ Dê uma olhada no diretório <code>results</code> para ver se todas as saudaçõ
 </details>
 <p>Sucesso! Agora podemos adicionar quantas saudações quisermos sem nos preocupar com arquivos de saída sendo sobrescritos.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>Na prática, nomear arquivos com base nos dados de entrada em si é quase sempre impraticável.
 A melhor maneira de gerar nomes de arquivo dinâmicos é passar metadados para um processo junto com os arquivos de entrada.
 Os metadados são normalmente fornecidos através de uma 'planilha de amostras' ou equivalentes.
@@ -5535,7 +5535,7 @@ sem precisar defini-la com um <code>-&gt;</code>.</p>
 </ul>
 <p>Importante, isso significa que cada item agora pode ser processado separadamente pelo fluxo de trabalho.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Dica</p>
 <p>É tecnicamente possível alcançar os mesmos resultados usando uma fábrica de canais diferente, <a href="https://nextflow.io/docs/latest/reference/channel.html#fromlist"><code>channel.fromList</code></a>, que inclui uma etapa de mapeamento implícita em sua operação.
 Aqui escolhemos não usar isso para demonstrar o uso de um operador em um caso de uso simples.</p>
 </div>
@@ -5725,7 +5725,7 @@ Então ele resolveu o caminho do arquivo corretamente, mas não analisou realmen
 <p>Olhando através da lista de operadores novamente, encontramos <a href="https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a>, que é projetado para analisar e dividir texto formatado em CSV.</p>
 <h4 id="421-aplique-splitcsv-ao-canal">4.2.1. Aplique <code>splitCsv()</code> ao canal<a class="headerlink" href="#421-aplique-splitcsv-ao-canal" title="Permanent link">&para;</a></h4>
 <p>Para aplicar o operador, anexamos ele à linha da fábrica de canais como anteriormente.</p>
-<p>No bloco workflow, faça a seguinte alteração de código para substituir <code>flatten()</code> por <code>splitcsv()</code> (descomentado):</p>
+<p>No bloco workflow, faça a seguinte alteração de código para substituir <code>flatten()</code> por <code>splitCsv()</code> (descomentado):</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Depois</label><label for="__tabbed_12_2">Antes</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

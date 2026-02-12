@@ -1459,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow per la Genomica
+    Genomica
   
 
     
@@ -1475,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow per la Genomica
+    Genomica
   
 
           </label>
@@ -1495,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow per la Genomica
+    Genomica
   
 
     
@@ -1862,7 +1862,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 1: Panoramica del metodo e test manuale
+    Parte 1: Panoramica del metodo
   
 
     
@@ -2021,7 +2021,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow per RNAseq
+    RNAseq
   
 
     
@@ -2037,7 +2037,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow per RNAseq
+    RNAseq
   
 
           </label>
@@ -2057,7 +2057,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow per RNAseq
+    RNAseq
   
 
     
@@ -2085,7 +2085,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Primi passi
   
 
     
@@ -2113,7 +2113,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 1: Panoramica del metodo e test manuali
+    Parte 1: Panoramica del metodo
   
 
     
@@ -2197,7 +2197,7 @@
   <span class="md-ellipsis">
     
   
-    Prossimi Passi
+    Riepilogo del corso
   
 
     
@@ -2272,7 +2272,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run per l'Imaging
+    Imaging
   
 
     
@@ -2288,7 +2288,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow run per l'Imaging
+    Imaging
   
 
           </label>
@@ -2308,7 +2308,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run per l'Imaging
+    Imaging
   
 
     
@@ -3683,35 +3683,33 @@ In alternativa, potete utilizzare il comando <code>tree</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tree<span class="w"> </span>.<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span>
 </code></pre></div>
 <details class="abstract">
-<summary>Contenuti della directory</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">.</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── data</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">│   ├── bam</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">│   ├── ref</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   ├── sample_bams.txt</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">│   └── samplesheet.csv</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── genomics.nf</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">├── modules</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">│   ├── gatk_haplotypecaller.nf</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   └── samplesheet.csv</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">├── genomics.nf</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── modules</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">│   ├── gatk_haplotypecaller.nf</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">│   ├── gatk_jointgenotyping.nf</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">│   └── samtools_index.nf</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">├── nextflow.config</span>
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="go">└── solutions</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    ├── modules</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="go">    ├── nf-test.config</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="go">    ├── part2</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="go">    └── tests</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="go">8 directories, 8 files</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    ├── part2</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="go">    └── part3</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="go">7 directories, 6 files</span>
 </code></pre></div>
 </details>
 <p>Cliccate sulla casella colorata per espandere la sezione e visualizzarne i contenuti.
 Utilizziamo sezioni comprimibili come questa per mostrare l'output atteso dei comandi, nonché i contenuti di directory e file in modo conciso.</p>
 <ul>
 <li>
-<p><strong>Il file <code>genomics.nf</code></strong> è uno script di flusso di lavoro che costruirete durante il corso.</p>
+<p><strong>Il file <code>genomics.nf</code></strong> è uno scaffold per uno script di flusso di lavoro che costruirete man mano che procedete nel corso.</p>
 </li>
 <li>
-<p><strong>La directory <code>modules</code></strong> contiene file di moduli scheletrici che completerete durante il corso.</p>
+<p><strong>La directory <code>modules</code></strong> contiene scaffold per moduli di processo che completerete durante il corso.</p>
 </li>
 <li>
 <p><strong>Il file <code>nextflow.config</code></strong> è un file di configurazione che imposta proprietà minime dell'ambiente.
@@ -3721,8 +3719,9 @@ Utilizziamo sezioni comprimibili come questa per mostrare l'output atteso dei co
 <p><strong>La directory <code>data</code></strong> contiene dati di input e risorse correlate, descritte più avanti nel corso.</p>
 </li>
 <li>
-<p><strong>La directory <code>solutions</code></strong> contiene file di moduli completati e una soluzione della Parte 2 che può servire come punto di partenza per la Parte 3.
-  Sono destinati ad essere utilizzati come riferimento per verificare il vostro lavoro e risolvere eventuali problemi.</p>
+<p><strong>La directory <code>solutions</code></strong> contiene script di flusso di lavoro e moduli completati che risultano da ogni passaggio del corso.
+  Sono destinati ad essere utilizzati come riferimento per verificare il vostro lavoro e risolvere eventuali problemi.
+  La soluzione della Parte 2 può essere utilizzata come punto di partenza per la Parte 3.</p>
 </li>
 </ul>
 <h2 id="lista-di-controllo-della-preparazione">Lista di controllo della preparazione<a class="headerlink" href="#lista-di-controllo-della-preparazione" title="Permanent link">&para;</a></h2>
@@ -3733,7 +3732,7 @@ Utilizziamo sezioni comprimibili come questa per mostrare l'output atteso dei co
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> Ho impostato la mia directory di lavoro appropriatamente</li>
 </ul>
 <p>Se potete spuntare tutte le caselle, siete pronti per iniziare.</p>
-<p><strong>Per continuare alla <a href="../01_method/">Parte 1: Panoramica del metodo e test manuali</a>, cliccate sulla freccia nell'angolo in basso a destra di questa pagina.</strong></p><style type="text/css">.quiz {
+<p><strong>Per continuare alla <a href="../01_method/">Parte 1: Panoramica del metodo</a>, cliccate sulla freccia nell'angolo in basso a destra di questa pagina.</strong></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5283,7 +5282,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Piede" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Nextflow per la Genomica">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Precedente: Genomica">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5293,20 +5292,20 @@ window.mkdocsQuizConfig = {
                 Precedente
               </span>
               <div class="md-ellipsis">
-                Nextflow per la Genomica
+                Genomica
               </div>
             </div>
           </a>
         
         
           
-          <a href="../01_method/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Parte 1: Panoramica del metodo e test manuale">
+          <a href="../01_method/" class="md-footer__link md-footer__link--next" aria-label="Successivo: Parte 1: Panoramica del metodo">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Successivo
               </span>
               <div class="md-ellipsis">
-                Parte 1: Panoramica del metodo e test manuale
+                Parte 1: Panoramica del metodo
               </div>
             </div>
             <div class="md-footer__button md-icon">

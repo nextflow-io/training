@@ -2323,7 +2323,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학
   
 
     
@@ -2339,7 +2339,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Genomics
+    유전체학
   
 
           </label>
@@ -2359,7 +2359,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학
   
 
     
@@ -2415,7 +2415,7 @@
   <span class="md-ellipsis">
     
   
-    파트 1: 방법론 개요 및 수동 테스트
+    파트 1: 방법론 개요
   
 
     
@@ -2574,7 +2574,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
     
@@ -2590,7 +2590,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
           </label>
@@ -2610,7 +2610,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
     
@@ -2638,7 +2638,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -2666,7 +2666,7 @@
   <span class="md-ellipsis">
     
   
-    파트 1: 방법 개요 및 수동 테스트
+    파트 1: 방법 개요
   
 
     
@@ -2750,7 +2750,7 @@
   <span class="md-ellipsis">
     
   
-    다음 단계
+    과정 요약
   
 
     
@@ -2825,7 +2825,7 @@
   <span class="md-ellipsis">
     
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
     
@@ -2841,7 +2841,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
           </label>
@@ -2861,7 +2861,7 @@
   <span class="md-ellipsis">
     
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
     
@@ -4773,7 +4773,7 @@
 <h2 id="0-hello-world">0. 준비 운동: Hello World 예제 직접 실행<a class="headerlink" href="#0-hello-world" title="Permanent link">&para;</a></h2>
 <p>Nextflow로 감싸기 전에, 터미널에서 직접 실행하는 간단한 명령으로 시작하여 무엇을 하는지 보여드리겠습니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p><a href="../00_orientation/">시작하기</a> 페이지에 설명된 대로 이제 <code>hello-nextflow/</code> 디렉토리 안에 있어야 합니다.</p>
 </div>
 <h3 id="01-hello">0.1. 터미널이 hello라고 말하게 하기<a class="headerlink" href="#01-hello" title="Permanent link">&para;</a></h3>
@@ -4911,7 +4911,7 @@
 실행이 완료된 후 Nextflow가 찾을 수 있도록 예상 출력을 단순히 <em>선언</em>합니다.
 이는 명령이 성공적으로 실행되었는지 확인하고 필요한 경우 출력을 다운스트림 프로세스에 전달하는 데 필요합니다. 출력 블록에 선언된 것과 일치하지 않는 생성된 출력은 다운스트림 프로세스로 전달되지 않습니다.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">경고</p>
 <p>이 예제는 두 개의 별도 위치(스크립트와 출력 블록)에 출력 파일 이름을 하드코딩했기 때문에 취약합니다.
 하나를 변경하고 다른 하나를 변경하지 않으면 스크립트가 중단됩니다.
 나중에 이 문제를 완화하기 위해 변수를 사용하는 방법을 배웁니다.</p>
@@ -4937,7 +4937,7 @@
 실제 파이프라인에서 워크플로우는 일반적으로 <strong>채널</strong>로 연결된 <strong>프로세스</strong>에 대한 여러 호출을 포함하고, 프로세스는 하나 이상의 변수 <strong>입력</strong>을 기대합니다.</p>
 <p>이 교육 모듈의 후반부에서 변수 입력을 추가하는 방법을 배웁니다. 그리고 이 과정의 Part 3에서 더 많은 프로세스를 추가하고 채널로 연결하는 방법을 배웁니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p>기술적으로 <code>main:</code> 줄은 이와 같은 간단한 워크플로우에는 필요하지 않으므로 이를 포함하지 않는 워크플로우를 만날 수 있습니다.
 그러나 워크플로우 수준 출력을 활용하려면 필요하므로 처음부터 포함하는 것이 좋습니다.</p>
 </div>
@@ -5090,7 +5090,7 @@
 <p>방금 배운 것처럼, 파이프라인에서 생성된 출력은 여러 계층 깊이의 작업 디렉토리에 묻혀 있습니다.
 이것은 의도적으로 수행된 것입니다. Nextflow가 이 디렉토리를 제어하며 우리는 상호 작용해서는 안 됩니다.
 그러나 이것은 관심 있는 출력을 검색하기 불편하게 만듭니다.</p>
-<p>다행히 Nextflow는 <a href="https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs">워크플로우 수준 출력 정의</a>를 사용하여 출력을 지정된 디렉토리에 게시하는 방법을 제공합니다.</p>
+<p>다행히 Nextflow는 <a href="https://nextflow.io/docs/latest/workflow.html#workflow-outputs">워크플로우 수준 출력 정의</a>를 사용하여 출력을 지정된 디렉토리에 게시하는 방법을 제공합니다.</p>
 <h3 id="21">2.1. 기본 사용법<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>이것은 두 가지 새로운 코드 조각이 필요합니다:</p>
 <ol>
@@ -5491,7 +5491,7 @@ Nextflow 여정에서 적절한 시기에 사용 방법을 보여드리겠습니
 </div>
 <p><code>$</code> 기호와 중괄호(<code>{ }</code>)는 Nextflow에게 이것이 실제 입력 값으로 대체(=보간)해야 하는 변수 이름임을 알려줍니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p>중괄호(<code>{ }</code>)는 이전 버전의 Nextflow에서는 기술적으로 선택 사항이었으므로 <code>echo '$greeting' &gt; output.txt</code>로 작성된 이전 워크플로우를 볼 수 있습니다.</p>
 </div>
 <p>이제 <code>sayHello()</code> 프로세스가 변수 입력을 받을 준비가 되었으므로 워크플로우 수준에서 프로세스 호출에 입력 값을 제공하는 방법이 필요합니다.</p>
@@ -5553,7 +5553,7 @@ Nextflow 여정에서 적절한 시기에 사용 방법을 보여드리겠습니
 <p>새 실행이 <code>results</code> 디렉토리에 게시된 출력 파일을 덮어썼습니다.
 그러나 이전 실행의 결과는 여전히 <code>work</code> 아래의 작업 디렉토리에 보존되어 있습니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p>Nextflow 수준 매개변수와 파이프라인 수준 매개변수를 쉽게 구분할 수 있습니다.</p>
 <ul>
 <li>파이프라인에 적용되는 매개변수는 항상 이중 하이픈(<code>--</code>)을 사용합니다.</li>
@@ -5580,7 +5580,7 @@ Nextflow 여정에서 적절한 시기에 사용 방법을 보여드리겠습니
 구문은 <code>name: Type = default_value</code>입니다.
 지원되는 유형에는 <code>String</code>, <code>Integer</code>, <code>Float</code>, <code>Boolean</code>, <code>Path</code>가 포함됩니다.</p>
 <div class="admonition info">
-<p class="admonition-title">Info</p>
+<p class="admonition-title">정보</p>
 <p>이전 워크플로우에서는 전체 <code>params</code> 블록이 <code>input = 'Holà mundo!'</code>로만 작성된 것을 볼 수 있습니다.</p>
 </div>
 <p>파이프라인에 더 많은 매개변수를 추가할 때 기본값을 제공해야 하든 아니든 이 블록에 모두 추가해야 합니다.
@@ -5599,36 +5599,58 @@ Nextflow 여정에서 적절한 시기에 사용 방법을 보여드리겠습니
 <a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="go">[72/394147] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
+<details class="question">
+<summary>작동하지 않았다면</summary>
+<p>다음과 같은 오류가 발생했다면:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>ERROR ~ Script compilation error
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>- file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>- cause: you tried to assign a value to the class &#39;java.lang.String&#39;
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>@ line 24, column 12.
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>      input: String = &#39;Holà mundo!&#39;
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>              ^
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>
+<a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>1 error
+<a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>
+<a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a>
+<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>-- Check &#39;.nextflow.log&#39; file for details
+</code></pre></div>
+<p>이전 v1 Nextflow 언어 분석기를 사용하고 있을 가능성이 높습니다.
+이것은 과정 시작 부분에서 언급되었지만 놓쳤을 수 있습니다.
+<a href="../../info/nxf_versions/">Nextflow 버전</a> 도움말 자료를 확인하십시오.</p>
+<p>간단히 말해서, Nextflow <code>25.10</code>을 사용하는 경우 v2 언어 분석기를 활성화해야 합니다:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_SYNTAX_PARSER</span><span class="o">=</span>v2
+</code></pre></div>
+</details>
 <p>출력은 이전과 같은 위치에 있지만 내용은 새 텍스트로 업데이트되어야 합니다.</p>
 <details class="abstract">
 <summary>파일 내용</summary>
-<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">Holà mundo!</span>
+<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">Holà mundo!</span>
 </code></pre></div>
 </details>
 <p>Nextflow는 인사말 매개변수의 기본값을 사용하여 출력을 생성했습니다.</p>
 <h4 id="343">3.4.3. 기본값 재정의<a class="headerlink" href="#343" title="Permanent link">&para;</a></h4>
 <p>명령줄에서 매개변수를 제공하면 CLI 값이 기본값을 재정의합니다.</p>
 <p>시도해 보십시오:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Konnichiwa!&#39;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Konnichiwa!&#39;</span>
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
-<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>
-<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="go">Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582</span>
-<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
-<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="go">executor &gt;  local (1)</span>
-<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="go">[6f/a12a91] sayHello | 1 of 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="go">Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582</span>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="go">executor &gt;  local (1)</span>
+<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a><span class="go">[6f/a12a91] sayHello | 1 of 1 ✔</span>
 </code></pre></div>
 </details>
 <p>다시 한번 results 디렉토리에서 해당하는 업데이트된 출력을 찾을 수 있습니다.</p>
 <details class="abstract">
 <summary>파일 내용</summary>
-<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="go">Konnichiwa!</span>
+<div class="highlight"><span class="filename">results/hello_world/output.txt</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">Konnichiwa!</span>
 </code></pre></div>
 </details>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">참고</p>
 <p>Nextflow에서는 매개변수 값을 지정할 수 있는 여러 곳이 있습니다.
 동일한 매개변수가 여러 곳에서 다른 값으로 설정된 경우 Nextflow는 <a href="https://www.nextflow.io/docs/latest/config.html">여기</a>에 설명된 우선순위에 따라 사용할 값을 결정합니다.</p>
 <p>Part 6(Configuration)에서 이에 대해 더 자세히 다룹니다.</p>
@@ -5654,15 +5676,15 @@ Nextflow 여정에서 적절한 시기에 사용 방법을 보여드리겠습니
 <li>프로덕션에서 파이프라인을 실행하고 문제가 발생하면 많은 경우 문제를 수정하고 파이프라인을 다시 실행하면 실패 지점부터 실행이 재개되어 많은 시간과 컴퓨팅을 절약할 수 있습니다.</li>
 </ul>
 <p>사용하려면 명령에 <code>-resume</code>을 추가하고 실행하기만 하면 됩니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>-resume
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-world.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
-<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
-<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5</span>
-<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>
-<a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="hll"><span class="go">[62/49a1f8] sayHello | 1 of 1, cached: 1 ✔</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5</span>
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a><span class="hll"><span class="go">[62/49a1f8] sayHello | 1 of 1, cached: 1 ✔</span>
 </span></code></pre></div>
 </details>
 <p>콘솔 출력은 익숙해 보이지만, 이전과 약간 다른 점이 있습니다.</p>
@@ -5670,7 +5692,7 @@ Nextflow 여정에서 적절한 시기에 사용 방법을 보여드리겠습니
 <p>작업 하위 디렉토리 해시가 이전 실행과 동일한 것도 볼 수 있습니다.
 Nextflow는 문자 그대로 이전 실행을 가리키며 "이미 저기서 했습니다"라고 말합니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p><code>resume</code>으로 파이프라인을 다시 실행하면 Nextflow는 이전에 성공적으로 실행된 실행에서 작업 디렉토리 외부에 게시된 파일을 덮어쓰지 않습니다.</p>
 </div>
 <h3 id="42">4.2. 과거 실행 로그 검사<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
@@ -5679,34 +5701,34 @@ Nextflow는 문자 그대로 이전 실행을 가리키며 "이미 저기서 했
 <p>nextflow 워크플로우를 시작할 때마다 현재 작업 디렉토리의 <code>.nextflow</code>라는 숨겨진 디렉토리 아래의 <code>history</code>라는 로그 파일에 줄이 기록됩니다.</p>
 <details class="abstract">
 <summary>파일 내용</summary>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1">1</a></span>
-<span class="normal"><a href="#__codelineno-52-2">2</a></span>
-<span class="normal"><a href="#__codelineno-52-3">3</a></span>
-<span class="normal"><a href="#__codelineno-52-4">4</a></span>
-<span class="normal"><a href="#__codelineno-52-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
-<a id="__codelineno-52-2" name="__codelineno-52-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
-<a id="__codelineno-52-3" name="__codelineno-52-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
-<a id="__codelineno-52-4" name="__codelineno-52-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
-<a id="__codelineno-52-5" name="__codelineno-52-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">.nextflow/history</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1">1</a></span>
+<span class="normal"><a href="#__codelineno-54-2">2</a></span>
+<span class="normal"><a href="#__codelineno-54-3">3</a></span>
+<span class="normal"><a href="#__codelineno-54-4">4</a></span>
+<span class="normal"><a href="#__codelineno-54-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a>2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input &#39;Hello World&#39;
+<a id="__codelineno-54-2" name="__codelineno-54-2"></a>2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --input Bonjour
+<a id="__codelineno-54-3" name="__codelineno-54-3"></a>2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --input &#39;Dobry den&#39;
+<a id="__codelineno-54-4" name="__codelineno-54-4"></a>2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa
+<a id="__codelineno-54-5" name="__codelineno-54-5"></a>2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --input Konnichiwa -resume
 </code></pre></div></td></tr></table></div>
 </details>
 <p>이 파일은 현재 작업 디렉토리 내에서 시작된 모든 Nextflow 실행의 타임스탬프, 실행 이름, 상태, 리비전 ID, 세션 ID 및 전체 명령줄을 제공합니다.</p>
 <p>이 정보에 액세스하는 더 편리한 방법은 <code>nextflow log</code> 명령을 사용하는 것입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>nextflow<span class="w"> </span>log
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>nextflow<span class="w"> </span>log
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1">1</a></span>
-<span class="normal"><a href="#__codelineno-54-2">2</a></span>
-<span class="normal"><a href="#__codelineno-54-3">3</a></span>
-<span class="normal"><a href="#__codelineno-54-4">4</a></span>
-<span class="normal"><a href="#__codelineno-54-5">5</a></span>
-<span class="normal"><a href="#__codelineno-54-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
-<a id="__codelineno-54-2" name="__codelineno-54-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
-<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
-<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
-<a id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
-<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1">1</a></span>
+<span class="normal"><a href="#__codelineno-56-2">2</a></span>
+<span class="normal"><a href="#__codelineno-56-3">3</a></span>
+<span class="normal"><a href="#__codelineno-56-4">4</a></span>
+<span class="normal"><a href="#__codelineno-56-5">5</a></span>
+<span class="normal"><a href="#__codelineno-56-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1"></a><span class="go">TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2"></a><span class="go">2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --input &#39;Hello World&#39;</span>
+<a id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="go">2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --input Bonjour</span>
+<a id="__codelineno-56-4" name="__codelineno-56-4"></a><span class="go">2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --input &#39;Dobry den&#39;</span>
+<a id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="go">2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa</span>
+<a id="__codelineno-56-6" name="__codelineno-56-6"></a><span class="go">2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --input Konnichiwa -resume</span>
 </code></pre></div></td></tr></table></div>
 </details>
 <p>이것은 헤더 줄이 추가된 로그 파일의 내용을 터미널에 출력합니다.</p>
@@ -5724,28 +5746,28 @@ Nextflow는 문자 그대로 이전 실행을 가리키며 "이미 저기서 했
 Nextflow 로그를 사용하여 타임스탬프 및/또는 명령줄을 기반으로 실행을 조회할 수도 있습니다.</p>
 <h4 id="432">4.3.2. 드라이 런 수행<a class="headerlink" href="#432" title="Permanent link">&para;</a></h4>
 <p>먼저 드라이 런 플래그 <code>-n</code>을 사용하여 명령이 주어졌을 때 무엇이 삭제될지 확인합니다:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>golden_cantor<span class="w"> </span>-n
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>golden_cantor<span class="w"> </span>-n
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go">Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68</span>
 </code></pre></div>
 </details>
 <p>출력에는 다른 작업 디렉토리 이름이 있고 줄 수가 다를 수 있지만 예제와 비슷하게 보일 것입니다.</p>
 <p>줄이 출력되지 않으면 유효한 실행 이름을 제공하지 않았거나 삭제할 과거 실행이 없는 것입니다. 예제 명령에서 <code>golden_cantor</code>를 로그의 해당 최신 실행 이름으로 변경하십시오.</p>
 <h4 id="433">4.3.3. 삭제 진행<a class="headerlink" href="#433" title="Permanent link">&para;</a></h4>
 <p>출력이 예상대로 보이고 삭제를 진행하려면 <code>-n</code> 대신 <code>-f</code> 플래그를 사용하여 명령을 다시 실행하십시오:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>golden_cantor<span class="w"> </span>-f
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>nextflow<span class="w"> </span>clean<span class="w"> </span>-before<span class="w"> </span>golden_cantor<span class="w"> </span>-f
 </code></pre></div>
 <details class="success">
 <summary>명령 출력</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="go">Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68</span>
 </code></pre></div>
 </details>
 <p>출력은 이전과 비슷하지만 이제 'Would remove' 대신 'Removed'라고 표시됩니다.
 이것은 두 문자 하위 디렉토리(위의 <code>a3/</code>와 같은)를 제거하지 않지만 내용을 비웁니다.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">경고</p>
 <p>과거 실행의 작업 하위 디렉토리를 삭제하면 Nextflow 캐시에서 제거되고 해당 디렉토리에 저장된 모든 출력이 삭제됩니다.
 이것은 해당 프로세스를 다시 실행하지 않고 실행을 재개하는 Nextflow의 기능을 중단시킵니다.</p>
 <p>관심 있거나 의존하려는 출력을 저장하는 것은 귀하의 책임입니다! 이것이 <code>publish</code> 지시문에 <code>symlink</code> 모드보다 <code>copy</code> 모드를 선호하는 주된 이유입니다.</p>
@@ -5766,7 +5788,7 @@ Nextflow 프로세스의 최소 필수 구성 요소는 무엇입니까?
 - [ ] 입력, 출력 및 스크립트 블록
 - [ ] 스크립트 블록만
 
-자세히 알아보기: [1.1.1. 프로세스 정의](#111-process-정의)
+자세히 알아보기: [1.1.1. 프로세스 정의](#111-the-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -5780,7 +5802,7 @@ Nextflow 프로세스의 최소 필수 구성 요소는 무엇입니까?
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>자세히 알아보기: <a href="#111-process-정의">1.1.1. 프로세스 정의</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#111-the-process-definition">1.1.1. 프로세스 정의</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5791,7 +5813,7 @@ Nextflow 프로세스의 최소 필수 구성 요소는 무엇입니까?
 - [x] 프로세스에서 예상되는 출력 선언
 - [ ] 환경 변수 정의
 
-자세히 알아보기: [1.1.1. 프로세스 정의](#111-process-정의)
+자세히 알아보기: [1.1.1. 프로세스 정의](#111-the-process-definition)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -5805,7 +5827,7 @@ Nextflow 프로세스의 최소 필수 구성 요소는 무엇입니까?
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>자세히 알아보기: <a href="#111-process-정의">1.1.1. 프로세스 정의</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#111-the-process-definition">1.1.1. 프로세스 정의</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5852,7 +5874,7 @@ work/a3/7be2fa.../
 - [ ] `.command.log`
 - [ ] `.command.out`
 
-자세히 알아보기: [1.2.2. `work` 디렉토리에서 출력 및 로그 찾기](#122-work-디렉토리에서-출력-및-로그-찾기)
+자세히 알아보기: [1.2.2. `work` 디렉토리에서 출력 및 로그 찾기](#122-find-the-output-and-logs-in-the-work-directory)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5876,7 +5898,7 @@ work/a3/7be2fa.../
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>자세히 알아보기: <a href="#122-work-디렉토리에서-출력-및-로그-찾기">1.2.2. <code>work</code> 디렉토리에서 출력 및 로그 찾기</a></p></section>
+                <section class="content hidden"><p>자세히 알아보기: <a href="#122-find-the-output-and-logs-in-the-work-directory">1.2.2. <code>work</code> 디렉토리에서 출력 및 로그 찾기</a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -5887,7 +5909,7 @@ work/a3/7be2fa.../
 - [x] 이미 성공적으로 완료된 프로세스 건너뛰기
 - [ ] 워크플로우 백업 생성
 
-자세히 알아보기: [4.1. `-resume`으로 워크플로우 다시 실행](#41--resume으로-워크플로우-다시-실행)
+자세히 알아보기: [4.1. `-resume`으로 워크플로우 다시 실행](#41-re-launch-a-workflow-with--resume)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5901,7 +5923,7 @@ work/a3/7be2fa.../
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>자세히 알아보기: <a href="#41--resume으로-워크플로우-다시-실행">4.1. <code>-resume</code>으로 워크플로우 다시 실행</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#41-re-launch-a-workflow-with--resume">4.1. <code>-resume</code>으로 워크플로우 다시 실행</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5912,7 +5934,7 @@ work/a3/7be2fa.../
 - [ ] 출력 디렉토리로 파일 이동
 - [ ] 출력 디렉토리에 파일 압축
 
-자세히 알아보기: [2.3. 게시 모드를 copy로 설정](#23-게시-모드를-copy로-설정)
+자세히 알아보기: [2.3. 게시 모드를 copy로 설정](#23-set-the-publish-mode-to-copy)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5926,7 +5948,7 @@ work/a3/7be2fa.../
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>자세히 알아보기: <a href="#23-게시-모드를-copy로-설정">2.3. 게시 모드를 copy로 설정</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#23-set-the-publish-mode-to-copy">2.3. 게시 모드를 copy로 설정</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5937,7 +5959,7 @@ work/a3/7be2fa.../
 - [x] `--parameter value`
 - [ ] `-p parameter=value`
 
-자세히 알아보기: [3.2. 사용자 입력을 캡처하기 위한 명령줄 매개변수 설정](#32-사용자-입력을-캡처하기-위한-명령줄-매개변수-설정)
+자세히 알아보기: [3.2. 사용자 입력을 캡처하기 위한 명령줄 매개변수 설정](#32-set-up-a-command-line-parameter-to-capture-user-input)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5951,7 +5973,7 @@ work/a3/7be2fa.../
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>자세히 알아보기: <a href="#32-사용자-입력을-캡처하기-위한-명령줄-매개변수-설정">3.2. 사용자 입력을 캡처하기 위한 명령줄 매개변수 설정</a></p></section>
+    <section class="content hidden"><p>자세히 알아보기: <a href="#32-set-up-a-command-line-parameter-to-capture-user-input">3.2. 사용자 입력을 캡처하기 위한 명령줄 매개변수 설정</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

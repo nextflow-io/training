@@ -2212,7 +2212,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow per la Genomica
+    Genomica
   
 
     
@@ -2228,7 +2228,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow per la Genomica
+    Genomica
   
 
           </label>
@@ -2248,7 +2248,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow per la Genomica
+    Genomica
   
 
     
@@ -2304,7 +2304,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 1: Panoramica del metodo e test manuale
+    Parte 1: Panoramica del metodo
   
 
     
@@ -2463,7 +2463,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow per RNAseq
+    RNAseq
   
 
     
@@ -2479,7 +2479,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow per RNAseq
+    RNAseq
   
 
           </label>
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow per RNAseq
+    RNAseq
   
 
     
@@ -2527,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Orientamento
+    Primi passi
   
 
     
@@ -2555,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Parte 1: Panoramica del metodo e test manuali
+    Parte 1: Panoramica del metodo
   
 
     
@@ -2639,7 +2639,7 @@
   <span class="md-ellipsis">
     
   
-    Prossimi Passi
+    Riepilogo del corso
   
 
     
@@ -2714,7 +2714,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run per l'Imaging
+    Imaging
   
 
     
@@ -2730,7 +2730,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow run per l'Imaging
+    Imaging
   
 
           </label>
@@ -2750,7 +2750,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run per l'Imaging
+    Imaging
   
 
     
@@ -4584,7 +4584,7 @@ Imparerete anche a utilizzare gli <a href="https://nextflow.io/docs/latest/refer
 </details>
 <p>Come in precedenza, troverete il file di output chiamato <code>output.txt</code> nella directory <code>results/hello_channels</code> (come specificato nel blocco <code>output</code> dello script del flusso di lavoro, mostrato sopra).</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><span class="filename">results/hello_channels</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">results</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="hll"><span class="go">├── hello_channels</span>
 </span><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="hll"><span class="go">│   └── output.txt</span>
@@ -4594,7 +4594,7 @@ Imparerete anche a utilizzare gli <a href="https://nextflow.io/docs/latest/refer
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">Hello Channels!</span>
 </code></pre></div>
 </details>
@@ -4607,7 +4607,7 @@ Imparerete anche a utilizzare gli <a href="https://nextflow.io/docs/latest/refer
 Per mantenere le cose semplici per ora, useremo la fabbrica di canali più basilare, chiamata <a href="https://nextflow.io/docs/latest/reference/channel.html#of"><code>channel.of</code></a>, che creerà un canale contenente un singolo valore.
 Funzionalmente sarà simile a come lo avevamo configurato prima, ma invece di far creare a Nextflow un canale implicitamente, ora lo stiamo facendo esplicitamente.</p>
 <p>Questa è la riga di codice che useremo:</p>
-<div class="highlight"><span class="filename">Sintassi</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">greeting_ch = channel.of(&#39;Hello Channels!&#39;)</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">greeting_ch = channel.of(&#39;Hello Channels!&#39;)</span>
 </code></pre></div>
 <p>Questo crea un canale chiamato <code>greeting_ch</code> usando la fabbrica di canali <code>channel.of()</code>, che configura un semplice canale di coda, e carica la stringa <code>'Hello Channels!'</code> da usare come valore di saluto.</p>
 <figure class="excalidraw">
@@ -4745,7 +4745,7 @@ Funzionalmente sarà simile a come lo avevamo configurato prima, ma invece di fa
 <p>Se avete effettuato entrambe le modifiche correttamente, dovreste ottenere un'esecuzione riuscita.
 Potete controllare la directory dei risultati per verificare che l'output sia ancora lo stesso di prima.</p>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">Hello Channels!</span>
 </code></pre></div>
 </details>
@@ -4883,7 +4883,7 @@ Possiamo semplicemente caricare più valori nel canale.</p>
 Il monitor di esecuzione mostra che sono state effettuate <code>3 of 3</code> chiamate per il processo <code>sayHello</code>, e vediamo i tre saluti elencati dall'istruzione <code>view()</code>, uno per riga come promesso.</p>
 <p>Tuttavia, c'è ancora un solo output nella directory dei risultati:</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><span class="filename">results/hello_channels</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">results</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">├── hello_channels</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="hll"><span class="go">│   └── output.txt</span>
@@ -4893,7 +4893,7 @@ Il monitor di esecuzione mostra che sono state effettuate <code>3 of 3</code> ch
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Holà</span>
 </code></pre></div>
 </details>
@@ -4910,7 +4910,7 @@ Riuscite a pensare al motivo?</p>
 <p>Guardando indietro al monitor di esecuzione, ci ha dato solo un percorso di sottodirectory (<code>f4/c9962c</code>).
 Diamo un'occhiata lì dentro.</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">work/f4/c9962ce91ef87480babcb86b2b9042/</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">├── .command.begin</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">├── .command.err</span>
@@ -4923,7 +4923,7 @@ Diamo un'occhiata lì dentro.</p>
 </span></code></pre></div>
 </details>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">work/f4/c9962ce91ef87480babcb86b2b9042/output.txt</span><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">Hello</span>
 </code></pre></div>
 </details>
@@ -4959,7 +4959,7 @@ In questa modalità espansa, riporta solo che sono state inviate.</p>
 </div>
 <p>Comunque, ora che abbiamo le sottodirectory di ogni chiamata di processo, possiamo cercare i loro log e output.</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">work/23/871c7ec3642a898ecd5e6090d21300/</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="go">├── .command.begin</span>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">├── .command.err</span>
@@ -4992,7 +4992,7 @@ In questa modalità espansa, riporta solo che sono state inviate.</p>
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">work/23/871c7ec3642a898ecd5e6090d21300/output.txt</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Bonjour
 </code></pre></div>
 <div class="highlight"><span class="filename">work/7f/21e2c2f3cc8833ef3858b236e5575c/output.txt</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Hello
@@ -5113,7 +5113,7 @@ Qui, per comodità, useremo semplicemente il saluto stesso poiché è solo una s
 <p>Tornando alla vista riassuntiva, l'output è di nuovo riassunto su una riga.
 Date un'occhiata alla directory <code>results</code> per vedere se tutti i saluti di output sono presenti.</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>Contenuto della directory</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">results/hello_channels/</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">├── Hello-output.txt</span>
@@ -5123,7 +5123,7 @@ Date un'occhiata alla directory <code>results</code> per vedere se tutti i salut
 </details>
 <p>Sì! E ognuno ha i contenuti attesi.</p>
 <details class="abstract">
-<summary>Contenuti del file</summary>
+<summary>Contenuto del file</summary>
 <div class="highlight"><span class="filename">Bonjour-output.txt</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">Bonjour</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">Hello-output.txt</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">Hello</span>
@@ -5342,10 +5342,10 @@ Proviamo; dovremo configurare la variabile di input e caricarla nella fabbrica d
 <p>Quindi è il 'confezionamento' che sta causando il problema.
 Come facciamo a far sì che Nextflow spacchetti l'array e carichi le singole stringhe nel canale?</p>
 <h3 id="32-usare-un-operatore-per-trasformare-i-contenuti-del-canale">3.2. Usare un operatore per trasformare i contenuti del canale<a class="headerlink" href="#32-usare-un-operatore-per-trasformare-i-contenuti-del-canale" title="Permanent link">&para;</a></h3>
-<p>Qui entrano in gioco gli <a href="https://www.nextflow.io/docs/latest/reference/operator.html"><strong>operatori</strong></a>.
+<p>Qui entrano in gioco gli <a href="https://nextflow.io/docs/latest/reference/operator.html"><strong>operatori</strong></a>.
 Avete già usato l'operatore <code>.view()</code>, che semplicemente guarda cosa c'è dentro.
 Ora vedremo operatori che ci permettono di agire sui contenuti di un canale.</p>
-<p>Se scorrete la <a href="https://www.nextflow.io/docs/latest/reference/operator.html">lista degli operatori</a> nella documentazione di Nextflow, troverete <a href="https://www.nextflow.io/docs/latest/reference/operator.html#flatten"><code>flatten()</code></a>, che fa esattamente ciò di cui abbiamo bisogno: spacchetta i contenuti di un array e li emette come elementi individuali.</p>
+<p>Se scorrete la <a href="https://nextflow.io/docs/latest/reference/operator.html">lista degli operatori</a> nella documentazione di Nextflow, troverete <a href="https://nextflow.io/docs/latest/reference/operator.html#flatten"><code>flatten()</code></a>, che fa esattamente ciò di cui abbiamo bisogno: spacchetta i contenuti di un array e li emette come elementi individuali.</p>
 <h4 id="321-aggiungere-loperatore-flatten">3.2.1. Aggiungere l'operatore <code>flatten()</code><a class="headerlink" href="#321-aggiungere-loperatore-flatten" title="Permanent link">&para;</a></h4>
 <p>Per applicare l'operatore <code>flatten()</code> al nostro canale di input, lo aggiungiamo alla dichiarazione della fabbrica di canali.</p>
 <p>Nel blocco workflow, effettuate la seguente modifica al codice:</p>
@@ -5453,9 +5453,9 @@ Ora vedremo operatori che ci permettono di agire sui contenuti di un canale.</p>
 <a id="__codelineno-49-31" name="__codelineno-49-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
 <a id="__codelineno-49-32" name="__codelineno-49-32"></a><span class="w">    </span><span class="c1">// crea un canale per gli input</span>
 <a id="__codelineno-49-33" name="__codelineno-49-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
-<a id="__codelineno-49-34" name="__codelineno-49-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Prima di flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-49-34" name="__codelineno-49-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-49-35" name="__codelineno-49-35"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
-</span><a id="__codelineno-49-36" name="__codelineno-49-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Dopo flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-49-36" name="__codelineno-49-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-49-37" name="__codelineno-49-37"></a><span class="w">    </span><span class="c1">// emette un saluto</span>
 <a id="__codelineno-49-38" name="__codelineno-49-38"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-49-39" name="__codelineno-49-39"></a>
@@ -5504,7 +5504,7 @@ Definiamo una variabile temporanea per il valore interno, qui chiamata <code>gre
 <p>In questo esempio, <code>$greeting</code> rappresenta ogni singolo elemento caricato nel canale.
 Questo risulterà in un output della console ordinatamente etichettato.</p>
 <div class="admonition info">
-<p class="admonition-title">Informazione</p>
+<p class="admonition-title">Info</p>
 <p>In alcune pipeline potrete vedere una variabile speciale chiamata <code>$it</code> usata all'interno delle closure degli operatori.
 Questa è una variabile <em>implicita</em> che permette un accesso abbreviato alla variabile interna,
 senza doverla definire con un <code>-&gt;</code>.</p>
@@ -5522,10 +5522,10 @@ senza doverla definire con un <code>-&gt;</code>.</p>
 <a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>
 <a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="go">[b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="hll"><span class="go">Prima di flatten: [Hello, Bonjour, Holà]</span>
-</span><a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a><span class="hll"><span class="go">Dopo flatten: Hello</span>
-</span><a id="__codelineno-52-9" name="__codelineno-52-9" href="#__codelineno-52-9"></a><span class="hll"><span class="go">Dopo flatten: Bonjour</span>
-</span><a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="hll"><span class="go">Dopo flatten: Holà</span>
+<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="hll"><span class="go">Before flatten: [Hello, Bonjour, Holà]</span>
+</span><a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a><span class="hll"><span class="go">After flatten: Hello</span>
+</span><a id="__codelineno-52-9" name="__codelineno-52-9" href="#__codelineno-52-9"></a><span class="hll"><span class="go">After flatten: Bonjour</span>
+</span><a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="hll"><span class="go">After flatten: Holà</span>
 </span></code></pre></div>
 </details>
 <p>Questa volta funziona E ci dà la comprensione aggiuntiva di come appaiono i contenuti del canale prima e dopo l'esecuzione dell'operatore <code>flatten()</code>.</p>
@@ -5629,7 +5629,7 @@ Dobbiamo passare a usare una nuova fabbrica di canali, <a href="https://nextflow
 <a id="__codelineno-56-29" name="__codelineno-56-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-56-30" name="__codelineno-56-30"></a><span class="hll"><span class="w">    </span><span class="c1">// crea un canale per gli input da un file CSV</span>
 </span><a id="__codelineno-56-31" name="__codelineno-56-31"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-</span><a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Prima di flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-56-33" name="__codelineno-56-33"></a><span class="hll"><span class="w">                         </span><span class="c1">// .flatten()</span>
 </span><a id="__codelineno-56-34" name="__codelineno-56-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; &quot;Dopo flatten: $greeting&quot; }</span>
 </span><a id="__codelineno-56-35" name="__codelineno-56-35"></a><span class="w">    </span><span class="c1">// emette un saluto</span>
@@ -5663,9 +5663,9 @@ Dobbiamo passare a usare una nuova fabbrica di canali, <a href="https://nextflow
 </span><a id="__codelineno-57-31" name="__codelineno-57-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
 </span><a id="__codelineno-57-32" name="__codelineno-57-32"></a><span class="hll"><span class="w">    </span><span class="c1">// crea un canale per gli input</span>
 </span><a id="__codelineno-57-33" name="__codelineno-57-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
-</span><a id="__codelineno-57-34" name="__codelineno-57-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Prima di flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-57-34" name="__codelineno-57-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-57-35" name="__codelineno-57-35"></a><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
-<a id="__codelineno-57-36" name="__codelineno-57-36"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Dopo flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-57-36" name="__codelineno-57-36"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-57-37" name="__codelineno-57-37"></a><span class="w">    </span><span class="c1">// emette un saluto</span>
 <a id="__codelineno-57-38" name="__codelineno-57-38"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-57-39" name="__codelineno-57-39"></a>
@@ -5689,7 +5689,7 @@ Abbiamo anche commentato <code>flatten()</code> e la seconda istruzione <code>vi
 <a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="go">Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5</span>
 <a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a>
 <a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="hll"><span class="go">[-        ] sayHello [  0%] 0 of 1</span>
-</span><a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="hll"><span class="go">Prima di flatten: /workspaces/training/hello-nextflow/data/greetings.csv</span>
+</span><a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="hll"><span class="go">Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv</span>
 </span><a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (1)&#39;</span>
 <a id="__codelineno-59-8" name="__codelineno-59-8" href="#__codelineno-59-8"></a>
 <a id="__codelineno-59-9" name="__codelineno-59-9" href="#__codelineno-59-9"></a><span class="hll"><span class="go">Caused by:</span>
@@ -5725,7 +5725,7 @@ Quindi ha risolto correttamente il percorso del file, ma non ha effettivamente a
 <p>Guardando di nuovo la lista degli operatori, troviamo <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a>, che è progettato per analizzare e dividere testo formattato CSV.</p>
 <h4 id="421-applicare-splitcsv-al-canale">4.2.1. Applicare <code>splitCsv()</code> al canale<a class="headerlink" href="#421-applicare-splitcsv-al-canale" title="Permanent link">&para;</a></h4>
 <p>Per applicare l'operatore, lo aggiungiamo alla riga della fabbrica di canali come fatto in precedenza.</p>
-<p>Nel blocco workflow, effettuate la seguente modifica al codice per sostituire <code>flatten()</code> con <code>splitcsv()</code> (senza commento):</p>
+<p>Nel blocco workflow, effettuate la seguente modifica al codice per sostituire <code>flatten()</code> con <code>splitCsv()</code> (senza commento):</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Dopo</label><label for="__tabbed_12_2">Prima</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5747,9 +5747,9 @@ Quindi ha risolto correttamente il percorso del file, ma non ha effettivamente a
 <a id="__codelineno-60-29" name="__codelineno-60-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-60-30" name="__codelineno-60-30"></a><span class="w">    </span><span class="c1">// crea un canale per gli input da un file CSV</span>
 <a id="__codelineno-60-31" name="__codelineno-60-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-60-32" name="__codelineno-60-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Prima di splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-60-32" name="__codelineno-60-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-60-33" name="__codelineno-60-33"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-</span><a id="__codelineno-60-34" name="__codelineno-60-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Dopo splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-60-34" name="__codelineno-60-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-60-35" name="__codelineno-60-35"></a><span class="w">    </span><span class="c1">// emette un saluto</span>
 <a id="__codelineno-60-36" name="__codelineno-60-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-60-37" name="__codelineno-60-37"></a>
@@ -5777,7 +5777,7 @@ Quindi ha risolto correttamente il percorso del file, ma non ha effettivamente a
 <a id="__codelineno-61-29" name="__codelineno-61-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-61-30" name="__codelineno-61-30"></a><span class="w">    </span><span class="c1">// crea un canale per gli input da un file CSV</span>
 <a id="__codelineno-61-31" name="__codelineno-61-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-61-32" name="__codelineno-61-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Prima di flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-61-32" name="__codelineno-61-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-61-33" name="__codelineno-61-33"></a><span class="hll"><span class="w">                         </span><span class="c1">// .flatten()</span>
 </span><a id="__codelineno-61-34" name="__codelineno-61-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; &quot;Dopo flatten: $greeting&quot; }</span>
 </span><a id="__codelineno-61-35" name="__codelineno-61-35"></a><span class="w">    </span><span class="c1">// emette un saluto</span>
@@ -5804,10 +5804,10 @@ Tecnicamente avremmo potuto usare lo stesso nome di variabile (<code>greeting</c
 <a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a>
 <a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a><span class="go">[24/76da2f] sayHello (2) [  0%] 0 of 3 ✘</span>
-<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="hll"><span class="go">Prima di splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
-</span><a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="hll"><span class="go">Dopo splitCsv: [Hello, English, 123]</span>
-</span><a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="hll"><span class="go">Dopo splitCsv: [Bonjour, French, 456]</span>
-</span><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="hll"><span class="go">Dopo splitCsv: [Holà, Spanish, 789]</span>
+<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="hll"><span class="go">Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
+</span><a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="hll"><span class="go">After splitCsv: [Hello, English, 123]</span>
+</span><a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="hll"><span class="go">After splitCsv: [Bonjour, French, 456]</span>
+</span><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="hll"><span class="go">After splitCsv: [Holà, Spanish, 789]</span>
 </span><a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (2)&#39;</span>
 </span><a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a>
 <a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a><span class="go">Caused by:</span>
@@ -5849,7 +5849,7 @@ Quindi come spacchettamo questo?</p>
 <p>L'operatore <a href="https://nextflow.io/docs/latest/reference/operator.html#map"><code>map()</code></a> è un piccolo strumento molto utile che ci permette di fare ogni tipo di mappatura sui contenuti di un canale.</p>
 <p>In questo caso, lo useremo per estrarre quell'unico elemento che vogliamo da ogni riga nel nostro file di dati.
 Ecco come appare la sintassi:</p>
-<div class="highlight"><span class="filename">Sintassi</span><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
 <p>Questo significa 'per ogni riga nel canale, prendi l'elemento 0 (primo) che contiene'.</p>
 <p>Quindi applichiamolo al nostro parsing CSV.</p>
@@ -5878,11 +5878,11 @@ Ecco come appare la sintassi:</p>
 <a id="__codelineno-65-29" name="__codelineno-65-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-65-30" name="__codelineno-65-30"></a><span class="w">    </span><span class="c1">// crea un canale per gli input da un file CSV</span>
 <a id="__codelineno-65-31" name="__codelineno-65-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-65-32" name="__codelineno-65-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Prima di splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-65-32" name="__codelineno-65-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-65-33" name="__codelineno-65-33"></a><span class="w">                         </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-<a id="__codelineno-65-34" name="__codelineno-65-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Dopo splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-65-34" name="__codelineno-65-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-65-35" name="__codelineno-65-35"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">item</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-65-36" name="__codelineno-65-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Dopo map: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-65-36" name="__codelineno-65-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After map: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-65-37" name="__codelineno-65-37"></a><span class="w">    </span><span class="c1">// emette un saluto</span>
 <a id="__codelineno-65-38" name="__codelineno-65-38"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-65-39" name="__codelineno-65-39"></a>
@@ -5910,9 +5910,9 @@ Ecco come appare la sintassi:</p>
 <a id="__codelineno-66-29" name="__codelineno-66-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-66-30" name="__codelineno-66-30"></a><span class="w">    </span><span class="c1">// crea un canale per gli input da un file CSV</span>
 <a id="__codelineno-66-31" name="__codelineno-66-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-66-32" name="__codelineno-66-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Prima di splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-66-32" name="__codelineno-66-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-66-33" name="__codelineno-66-33"></a><span class="w">                         </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-<a id="__codelineno-66-34" name="__codelineno-66-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Dopo splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-66-34" name="__codelineno-66-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-66-35" name="__codelineno-66-35"></a><span class="w">    </span><span class="c1">// emette un saluto</span>
 <a id="__codelineno-66-36" name="__codelineno-66-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-66-37" name="__codelineno-66-37"></a>
@@ -5936,13 +5936,13 @@ Ecco come appare la sintassi:</p>
 <a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a>
 <a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-68-6" name="__codelineno-68-6" href="#__codelineno-68-6"></a><span class="go">[54/6eebe3] sayHello (3) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">Prima di splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
-<a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="go">Dopo splitCsv: [Hello, English, 123]</span>
-<a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">Dopo splitCsv: [Bonjour, French, 456]</span>
-<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">Dopo splitCsv: [Holà, Spanish, 789]</span>
-<a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">Dopo map: Hello</span>
-<a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a><span class="go">Dopo map: Bonjour</span>
-<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">Dopo map: Holà</span>
+<a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
+<a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="go">After splitCsv: [Hello, English, 123]</span>
+<a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">After splitCsv: [Bonjour, French, 456]</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">After splitCsv: [Holà, Spanish, 789]</span>
+<a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">After map: Hello</span>
+<a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a><span class="go">After map: Bonjour</span>
+<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">After map: Holà</span>
 </code></pre></div>
 </details>
 <p>Questa volta dovrebbe funzionare senza errori.</p>
@@ -5987,7 +5987,7 @@ Cos'è un canale in Nextflow?
 - [x] Una struttura simile a una coda per passare dati tra processi
 - [ ] Un'impostazione di configurazione
 
-Per approfondire: [1.1. Creare un canale di input](#11-creare-un-canale-di-input)
+Per approfondire: [1.1. Creare un canale di input](#11-create-an-input-channel)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -6001,7 +6001,7 @@ Per approfondire: [1.1. Creare un canale di input](#11-creare-un-canale-di-input
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#11-creare-un-canale-di-input">1.1. Creare un canale di input</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#11-create-an-input-channel">1.1. Creare un canale di input</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6018,7 +6018,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Niente (i canali non stampano per impostazione predefinita)
 - [ ] Un errore (sintassi non valida)
 
-Per approfondire: [1.1. Creare un canale di input](#11-creare-un-canale-di-input)
+Per approfondire: [1.1. Creare un canale di input](#11-create-an-input-channel)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -6035,7 +6035,7 @@ Per approfondire: [1.1. Creare un canale di input](#11-creare-un-canale-di-input
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>Per approfondire: <a href="#11-creare-un-canale-di-input">1.1. Creare un canale di input</a></p></section>
+                <section class="content hidden"><p>Per approfondire: <a href="#11-create-an-input-channel">1.1. Creare un canale di input</a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -6046,7 +6046,7 @@ Quando un canale contiene più valori, come gestisce Nextflow l'esecuzione del p
 - [ ] Il processo viene eseguito solo con il primo valore
 - [ ] Il processo viene eseguito solo con l'ultimo valore
 
-Per approfondire: [2. Modificare il flusso di lavoro per eseguire su più valori di input](#2-modificare-il-flusso-di-lavoro-per-eseguire-su-piu-valori-di-input)
+Per approfondire: [2. Modificare il flusso di lavoro per eseguire su più valori di input](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -6060,7 +6060,7 @@ Per approfondire: [2. Modificare il flusso di lavoro per eseguire su più valori
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#2-modificare-il-flusso-di-lavoro-per-eseguire-su-piu-valori-di-input">2. Modificare il flusso di lavoro per eseguire su più valori di input</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#2-modify-the-workflow-to-run-on-multiple-input-values">2. Modificare il flusso di lavoro per eseguire su più valori di input</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6071,7 +6071,7 @@ Cosa fa l'operatore `flatten()`?
 - [x] Spacchetta gli array in elementi individuali
 - [ ] Rimuove gli elementi duplicati
 
-Per approfondire: [3.2.1. Aggiungere l'operatore `flatten()`](#321-aggiungere-loperatore-flatten)
+Per approfondire: [3.2.1. Aggiungere l'operatore `flatten()`](#321-add-the-flatten-operator)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -6085,7 +6085,7 @@ Per approfondire: [3.2.1. Aggiungere l'operatore `flatten()`](#321-aggiungere-lo
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#321-aggiungere-loperatore-flatten">3.2.1. Aggiungere l'operatore <code>flatten()</code></a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#321-add-the-flatten-operator">3.2.1. Aggiungere l'operatore <code>flatten()</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6096,7 +6096,7 @@ Qual è lo scopo dell'operatore `view()`?
 - [x] Ispezionare e fare debug dei contenuti del canale
 - [ ] Salvare i contenuti del canale in un file
 
-Per approfondire: [1.4. Usare `view()` per ispezionare i contenuti del canale](#14-usare-view-per-ispezionare-i-contenuti-del-canale)
+Per approfondire: [1.4. Usare `view()` per ispezionare i contenuti del canale](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -6110,7 +6110,7 @@ Per approfondire: [1.4. Usare `view()` per ispezionare i contenuti del canale](#
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#14-usare-view-per-ispezionare-i-contenuti-del-canale">1.4. Usare <code>view()</code> per ispezionare i contenuti del canale</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#14-use-view-to-inspect-the-channel-contents">1.4. Usare <code>view()</code> per ispezionare i contenuti del canale</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6121,7 +6121,7 @@ Cosa fa `splitCsv()`?
 - [x] Analizza un file CSV in array che rappresentano ogni riga
 - [ ] Unisce più file CSV
 
-Per approfondire: [4.2. Usare l'operatore `splitCsv()` per analizzare il file](#42-usare-loperatore-splitcsv-per-analizzare-il-file)
+Per approfondire: [4.2. Usare l'operatore `splitCsv()` per analizzare il file](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -6135,7 +6135,7 @@ Per approfondire: [4.2. Usare l'operatore `splitCsv()` per analizzare il file](#
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#42-usare-loperatore-splitcsv-per-analizzare-il-file">4.2. Usare l'operatore <code>splitCsv()</code> per analizzare il file</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#42-use-the-splitcsv-operator-to-parse-the-file">4.2. Usare l'operatore <code>splitCsv()</code> per analizzare il file</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6146,7 +6146,7 @@ Qual è lo scopo dell'operatore `map()`?
 - [x] Trasformare ogni elemento in un canale
 - [ ] Contare gli elementi in un canale
 
-Per approfondire: [4.3. Usare l'operatore `map()` per estrarre i saluti](#43-usare-loperatore-map-per-estrarre-i-saluti)
+Per approfondire: [4.3. Usare l'operatore `map()` per estrarre i saluti](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6160,7 +6160,7 @@ Per approfondire: [4.3. Usare l'operatore `map()` per estrarre i saluti](#43-usa
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#43-usare-loperatore-map-per-estrarre-i-saluti">4.3. Usare l'operatore <code>map()</code> per estrarre i saluti</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#43-use-the-map-operator-to-extract-the-greetings">4.3. Usare l'operatore <code>map()</code> per estrarre i saluti</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6171,7 +6171,7 @@ Perché è importante usare nomi di file di output dinamici quando si elaborano 
 - [x] Per evitare che i file di output si sovrascrivano a vicenda
 - [ ] Per abilitare la funzionalità di resume
 
-Per approfondire: [2.2. Assicurarsi che i nomi dei file di output siano unici](#22-assicurarsi-che-i-nomi-dei-file-di-output-siano-unici)
+Per approfondire: [2.2. Assicurarsi che i nomi dei file di output siano unici](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
@@ -6185,7 +6185,7 @@ Per approfondire: [2.2. Assicurarsi che i nomi dei file di output siano unici](#
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Per approfondire: <a href="#22-assicurarsi-che-i-nomi-dei-file-di-output-siano-unici">2.2. Assicurarsi che i nomi dei file di output siano unici</a></p></section>
+    <section class="content hidden"><p>Per approfondire: <a href="#22-ensure-the-output-file-names-will-be-unique">2.2. Assicurarsi che i nomi dei file di output siano unici</a></p></section>
 </div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;

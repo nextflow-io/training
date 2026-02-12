@@ -2212,7 +2212,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow dla genomiki
+    Genomika
   
 
     
@@ -2228,7 +2228,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow dla genomiki
+    Genomika
   
 
           </label>
@@ -2248,7 +2248,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow dla genomiki
+    Genomika
   
 
     
@@ -2304,7 +2304,7 @@
   <span class="md-ellipsis">
     
   
-    Część 1: Przegląd metody i testowanie ręczne
+    Część 1: Przegląd metody
   
 
     
@@ -2463,7 +2463,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow dla RNAseq
+    RNAseq
   
 
     
@@ -2479,7 +2479,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow dla RNAseq
+    RNAseq
   
 
           </label>
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow dla RNAseq
+    RNAseq
   
 
     
@@ -2527,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Orientacja
+    Pierwsze kroki
   
 
     
@@ -2555,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Część 1: Przegląd metody i manualne testowanie
+    Część 1: Przegląd metody
   
 
     
@@ -2639,7 +2639,7 @@
   <span class="md-ellipsis">
     
   
-    Następne kroki
+    Podsumowanie kursu
   
 
     
@@ -2714,7 +2714,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run dla Obrazowania
+    Obrazowanie
   
 
     
@@ -2730,7 +2730,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow run dla Obrazowania
+    Obrazowanie
   
 
           </label>
@@ -2750,7 +2750,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run dla Obrazowania
+    Obrazowanie
   
 
     
@@ -5504,7 +5504,7 @@ Definiujemy tymczasową zmienną dla wewnętrznej wartości, tutaj nazwaną <cod
 <p>W tym przykładzie <code>$greeting</code> reprezentuje każdy pojedynczy element załadowany do kanału.
 To spowoduje ładnie oznaczone wyjście konsoli.</p>
 <div class="admonition info">
-<p class="admonition-title">Informacja</p>
+<p class="admonition-title">Info</p>
 <p>W niektórych pipeline'ach możesz zobaczyć specjalną zmienną o nazwie <code>$it</code> używaną wewnątrz closures operatorów.
 Jest to <em>niejawna</em> zmienna, która pozwala na skrócony dostęp do wewnętrznej zmiennej bez potrzeby definiowania jej za pomocą <code>-&gt;</code>.</p>
 <p>Preferujemy być jawni, aby pomóc w czytelności kodu, więc składnia <code>$it</code> jest odradzana i będzie stopniowo wycofywana z języka Nextflow.</p>
@@ -5724,7 +5724,7 @@ Więc poprawnie rozpoznał ścieżkę pliku, ale faktycznie nie sparsował jego 
 <p>Przeglądając ponownie listę operatorów, znajdujemy <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a>, który jest zaprojektowany do parsowania i dzielenia tekstu w formacie CSV.</p>
 <h4 id="421-zastosuj-splitcsv-do-kanau">4.2.1. Zastosuj <code>splitCsv()</code> do kanału<a class="headerlink" href="#421-zastosuj-splitcsv-do-kanau" title="Permanent link">&para;</a></h4>
 <p>Aby zastosować operator, dodajemy go do linii fabryki kanałów, jak poprzednio.</p>
-<p>W bloku workflow wprowadź następującą zmianę kodu, aby zastąpić <code>flatten()</code> przez <code>splitcsv()</code> (odkomentowane):</p>
+<p>W bloku workflow wprowadź następującą zmianę kodu, aby zastąpić <code>flatten()</code> przez <code>splitCsv()</code> (odkomentowane):</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Po</label><label for="__tabbed_12_2">Przed</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

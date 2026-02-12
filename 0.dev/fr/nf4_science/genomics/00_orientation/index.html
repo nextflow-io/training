@@ -1459,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Génomique
   
 
     
@@ -1475,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Genomics
+    Génomique
   
 
           </label>
@@ -1495,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Génomique
   
 
     
@@ -1862,7 +1862,7 @@
   <span class="md-ellipsis">
     
   
-    Partie 1 : Présentation de la méthode et tests manuels
+    Partie 1 : Présentation de la méthode
   
 
     
@@ -2021,7 +2021,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour l'ARNseq
+    ARNseq
   
 
     
@@ -2037,7 +2037,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow pour l'ARNseq
+    ARNseq
   
 
           </label>
@@ -2057,7 +2057,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour l'ARNseq
+    ARNseq
   
 
     
@@ -2085,7 +2085,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Premiers pas
   
 
     
@@ -2113,7 +2113,7 @@
   <span class="md-ellipsis">
     
   
-    Partie 1 : Aperçu de la méthode et tests manuels
+    Partie 1 : Aperçu de la méthode
   
 
     
@@ -2197,7 +2197,7 @@
   <span class="md-ellipsis">
     
   
-    Prochaines Étapes
+    Résumé du cours
   
 
     
@@ -2272,7 +2272,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Imagerie
   
 
     
@@ -2288,7 +2288,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow run for Imaging
+    Imagerie
   
 
           </label>
@@ -2308,7 +2308,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Imagerie
   
 
     
@@ -3669,7 +3669,7 @@ Si vous utilisez un environnement local ou personnalisé, assurez-vous d'utilise
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">Astuce</p>
 <p>Si pour une raison quelconque vous sortez de ce répertoire (par exemple si votre codespace se met en veille), vous pouvez toujours utiliser le chemin complet pour y revenir, en supposant que vous travaillez dans l'environnement de formation Github Codespaces :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/nf4-science/genomics
 </code></pre></div>
@@ -3688,30 +3688,28 @@ Alternativement, vous pouvez utiliser la commande <code>tree</code>.</p>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── data</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">│   ├── bam</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">│   ├── ref</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   ├── sample_bams.txt</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">│   └── samplesheet.csv</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── genomics.nf</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">├── modules</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">│   ├── gatk_haplotypecaller.nf</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   └── samplesheet.csv</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">├── genomics.nf</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── modules</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">│   ├── gatk_haplotypecaller.nf</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">│   ├── gatk_jointgenotyping.nf</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">│   └── samtools_index.nf</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">├── nextflow.config</span>
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="go">└── solutions</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    ├── modules</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="go">    ├── nf-test.config</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="go">    ├── part2</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="go">    └── tests</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="go">8 directories, 8 files</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    ├── part2</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="go">    └── part3</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="go">7 directories, 6 files</span>
 </code></pre></div>
 </details>
 <p>Cliquez sur la boîte colorée pour développer la section et voir son contenu.
 Nous utilisons des sections repliables comme celle-ci pour afficher la sortie de commande attendue ainsi que le contenu des répertoires et des fichiers de manière concise.</p>
 <ul>
 <li>
-<p><strong>Le fichier <code>genomics.nf</code></strong> est un script de workflow que vous construirez au fil du cours.</p>
+<p><strong>Le fichier <code>genomics.nf</code></strong> est une structure de base pour un script de workflow que vous construirez au fur et à mesure du cours.</p>
 </li>
 <li>
-<p><strong>Le répertoire <code>modules</code></strong> contient des fichiers de modules squelettes que vous remplirez pendant le cours.</p>
+<p><strong>Le répertoire <code>modules</code></strong> contient des structures de base pour les modules de processus que vous remplirez pendant le cours.</p>
 </li>
 <li>
 <p><strong>Le fichier <code>nextflow.config</code></strong> est un fichier de configuration qui définit des propriétés minimales de l'environnement.
@@ -3721,8 +3719,9 @@ Nous utilisons des sections repliables comme celle-ci pour afficher la sortie de
 <p><strong>Le répertoire <code>data</code></strong> contient les données d'entrée et les ressources associées, décrites plus tard dans le cours.</p>
 </li>
 <li>
-<p><strong>Le répertoire <code>solutions</code></strong> contient des fichiers de modules complétés et une solution pour la Partie 2 qui peut servir de point de départ pour la Partie 3.
-  Ils sont destinés à être utilisés comme référence pour vérifier votre travail et résoudre tout problème.</p>
+<p><strong>Le répertoire <code>solutions</code></strong> contient les scripts de workflow et modules complétés qui résultent de chaque étape du cours.
+  Ils sont destinés à être utilisés comme référence pour vérifier votre travail et résoudre tout problème.
+  La solution de la Partie 2 peut être utilisée comme point de départ pour la Partie 3.</p>
 </li>
 </ul>
 <h2 id="liste-de-verification-de-preparation">Liste de vérification de préparation<a class="headerlink" href="#liste-de-verification-de-preparation" title="Permanent link">&para;</a></h2>
@@ -3733,7 +3732,7 @@ Nous utilisons des sections repliables comme celle-ci pour afficher la sortie de
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> J'ai défini mon répertoire de travail de manière appropriée</li>
 </ul>
 <p>Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.</p>
-<p><strong>Pour continuer vers <a href="../01_method/">Partie 1 : Aperçu de la méthode et tests manuels</a>, cliquez sur la flèche dans le coin inférieur droit de cette page.</strong></p><style type="text/css">.quiz {
+<p><strong>Pour continuer vers <a href="../01_method/">Partie 1 : Aperçu de la méthode</a>, cliquez sur la flèche dans le coin inférieur droit de cette page.</strong></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5283,7 +5282,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="Pied de page" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Nextflow for Genomics">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Précédent: Génomique">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5293,20 +5292,20 @@ window.mkdocsQuizConfig = {
                 Précédent
               </span>
               <div class="md-ellipsis">
-                Nextflow for Genomics
+                Génomique
               </div>
             </div>
           </a>
         
         
           
-          <a href="../01_method/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Partie 1 : Présentation de la méthode et tests manuels">
+          <a href="../01_method/" class="md-footer__link md-footer__link--next" aria-label="Suivant: Partie 1 : Présentation de la méthode">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Suivant
               </span>
               <div class="md-ellipsis">
-                Partie 1 : Présentation de la méthode et tests manuels
+                Partie 1 : Présentation de la méthode
               </div>
             </div>
             <div class="md-footer__button md-icon">

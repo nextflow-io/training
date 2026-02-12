@@ -2212,7 +2212,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학
   
 
     
@@ -2228,7 +2228,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Genomics
+    유전체학
   
 
           </label>
@@ -2248,7 +2248,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학
   
 
     
@@ -2304,7 +2304,7 @@
   <span class="md-ellipsis">
     
   
-    파트 1: 방법론 개요 및 수동 테스트
+    파트 1: 방법론 개요
   
 
     
@@ -2463,7 +2463,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
     
@@ -2479,7 +2479,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
           </label>
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
     
@@ -2527,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -2555,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    파트 1: 방법 개요 및 수동 테스트
+    파트 1: 방법 개요
   
 
     
@@ -2639,7 +2639,7 @@
   <span class="md-ellipsis">
     
   
-    다음 단계
+    과정 요약
   
 
     
@@ -2714,7 +2714,7 @@
   <span class="md-ellipsis">
     
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
     
@@ -2730,7 +2730,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
           </label>
@@ -2750,7 +2750,7 @@
   <span class="md-ellipsis">
     
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
     
@@ -4550,7 +4550,7 @@ Channel은 입력을 효율적으로 처리하고 다단계 workflow에서 한 �
 <p>이 파트에서는 다양한 소스에서 여러 입력을 처리하기 위해 channel을 사용하는 방법을 배웁니다.
 또한 필요에 따라 channel 내용을 변환하기 위해 <a href="https://nextflow.io/docs/latest/reference/operator.html"><strong>연산자</strong></a>를 사용하는 방법도 배웁니다.</p>
 <details class="info">
-<summary>이 섹션부터 시작하는 방법</summary>
+<summary>이 섹션을 시작하는 방법</summary>
 <p>이 섹션은 <a href="../">Hello Nextflow</a> 과정의 파트 1을 완료했다고 가정하지만, 해당 섹션에서 다룬 기본 사항에 익숙하다면 특별한 준비 없이 여기서 시작할 수 있습니다.</p>
 </details>
 <hr />
@@ -4618,11 +4618,11 @@ Channel은 입력을 효율적으로 처리하고 다단계 workflow에서 한 �
 </figure>
 
 <div class="admonition note">
-<p class="admonition-title">Note</p>
+<p class="admonition-title">참고</p>
 <p>가독성을 위해 CLI 매개변수 대신 임시로 하드코딩된 문자열로 전환합니다. Channel 수준에서 무슨 일이 일어나는지 다룬 후에 CLI 매개변수 사용으로 돌아갈 것입니다.</p>
 </div>
 <p>workflow 블록에서 channel 팩토리 코드를 추가하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">수정 후</label><label for="__tabbed_1_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">후</label><label for="__tabbed_1_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-27">27</a></span>
@@ -4674,7 +4674,7 @@ Channel은 입력을 효율적으로 처리하고 다단계 workflow에서 한 �
 <h3 id="12-process-channel">1.2. Process 호출에 channel을 입력으로 추가<a class="headerlink" href="#12-process-channel" title="Permanent link">&para;</a></h3>
 <p>이제 새로 생성한 channel을 <code>sayHello()</code> process 호출에 연결하여 이전에 직접 제공하던 CLI 매개변수를 대체해야 합니다.</p>
 <p>workflow 블록에서 다음 코드 변경을 수행하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">수정 후</label><label for="__tabbed_2_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">후</label><label for="__tabbed_2_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-27">27</a></span>
@@ -4757,7 +4757,7 @@ results 디렉토리를 확인하여 결과가 이전과 동일한지 확인할 
 <p>지금은 channel의 내용을 검사하기 위해 <a href="https://www.nextflow.io/docs/latest/reference/operator.html#view"><code>view()</code></a>라는 매우 간단한 연산자를 사용하는 방법만 보여드리겠습니다.
 <code>view()</code>를 Python의 <code>print()</code> 문이나 다른 언어의 동등한 것과 같은 디버깅 도구로 생각할 수 있습니다.</p>
 <p>workflow 블록에 이 작은 라인을 추가하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">수정 후</label><label for="__tabbed_3_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">후</label><label for="__tabbed_3_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-27">27</a></span>
@@ -4841,7 +4841,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <p><code>'Hello'</code>, <code>'Bonjour'</code>, <code>'Holà'</code>로 만들어 봅시다.</p>
 <h4 id="211">2.1.1. 더 많은 인사말 추가<a class="headerlink" href="#211" title="Permanent link">&para;</a></h4>
 <p>workflow 블록 전에 다음 코드 변경을 수행하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">수정 후</label><label for="__tabbed_4_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">후</label><label for="__tabbed_4_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-30">30</a></span>
@@ -4952,7 +4952,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 복잡한 workflow나 많은 수의 입력의 경우 전체 목록이 터미널에 출력되면 다소 압도적일 수 있습니다.
 그래서 <code>-ansi-log false</code>가 기본 동작이 아닙니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p>상태가 보고되는 방식은 두 로깅 모드 간에 약간 다릅니다.
 압축 모드에서 Nextflow는 호출이 성공적으로 완료되었는지 여부를 보고합니다.
 이 확장 모드에서는 제출되었다는 것만 보고합니다.</p>
@@ -5027,7 +5027,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 
 <h4 id="221">2.2.1. 동적 출력 파일 이름 구성<a class="headerlink" href="#221" title="Permanent link">&para;</a></h4>
 <p>process 블록에서 다음 코드 변경을 수행하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">수정 후</label><label for="__tabbed_5_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">후</label><label for="__tabbed_5_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-6"> 6</a></span>
@@ -5089,7 +5089,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </div>
 <p>출력 정의와 <code>script:</code> 명령 블록 모두에서 <code>output.txt</code>를 교체해야 합니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p>출력 정의에서 출력 파일명 표현식 주위에 큰따옴표를 사용해야 합니다(작은따옴표가 아님). 그렇지 않으면 실패합니다.</p>
 </div>
 <p>이렇게 하면 process가 호출될 때마다 고유한 출력 파일 이름이 생성되어 출력 디렉토리에서 동일한 process에 대한 다른 호출의 출력과 구별될 수 있습니다.</p>
@@ -5133,7 +5133,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 </details>
 <p>성공입니다! 이제 출력 파일이 덮어쓰여지는 것에 대해 걱정하지 않고 원하는 만큼 많은 인사말을 추가할 수 있습니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p>실제로 입력 데이터 자체를 기반으로 파일 이름을 지정하는 것은 거의 항상 비실용적입니다.
 동적 파일 이름을 생성하는 더 좋은 방법은 입력 파일과 함께 메타데이터를 process에 전달하는 것입니다.
 메타데이터는 일반적으로 'sample sheet' 또는 이와 동등한 것을 통해 제공됩니다.
@@ -5163,7 +5163,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 시도해 봅시다. 입력 변수를 설정하고 channel 팩토리에 로드해야 합니다.</p>
 <h4 id="311">3.1.1. 입력 변수 설정<a class="headerlink" href="#311" title="Permanent link">&para;</a></h4>
 <p>방금 상상한 <code>greetings_array</code> 변수를 workflow 블록에 추가하여 현실로 만들어 봅시다:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">수정 후</label><label for="__tabbed_6_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">후</label><label for="__tabbed_6_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-27">27</a></span>
@@ -5227,7 +5227,7 @@ Channel에 여러 값을 로드하기만 하면 됩니다.</p>
 <h4 id="312-channel">3.1.2. Channel 팩토리에 인사말 배열을 입력으로 설정<a class="headerlink" href="#312-channel" title="Permanent link">&para;</a></h4>
 <p>이제 channel 팩토리에 현재 하드코딩된 값 <code>'Hello','Bonjour','Holà'</code>를 방금 생성한 <code>greetings_array</code>로 교체할 것입니다.</p>
 <p>workflow 블록에서 다음 변경을 수행하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">수정 후</label><label for="__tabbed_7_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">후</label><label for="__tabbed_7_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-27">27</a></span>
@@ -5349,7 +5349,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <h4 id="321-flatten">3.2.1. <code>flatten()</code> 연산자 추가<a class="headerlink" href="#321-flatten" title="Permanent link">&para;</a></h4>
 <p>입력 channel에 <code>flatten()</code> 연산자를 적용하려면 channel 팩토리 선언에 추가합니다.</p>
 <p>workflow 블록에서 다음 코드 변경을 수행하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">수정 후</label><label for="__tabbed_8_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">후</label><label for="__tabbed_8_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-27">27</a></span>
@@ -5428,7 +5428,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <p>이것이 작동하는지 테스트하기 위해 바로 실행할 수 있지만, 그러는 김에 channel 내용을 검사하는 방식을 개선하겠습니다.</p>
 <p><code>flatten()</code> 연산자가 적용되기 전과 후의 내용이 어떻게 보이는지 대조할 수 있도록 두 번째 것을 추가하고, 출력에서 더 명확하게 레이블이 지정되도록 약간의 코드를 추가하겠습니다.</p>
 <p>workflow 블록에서 다음 코드 변경을 수행하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">수정 후</label><label for="__tabbed_9_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">후</label><label for="__tabbed_9_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-27">27</a></span>
@@ -5504,7 +5504,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <p>이 예에서 <code>$greeting</code>은 channel에 로드된 각 개별 항목을 나타냅니다.
 이렇게 하면 깔끔하게 레이블이 지정된 콘솔 출력이 생성됩니다.</p>
 <div class="admonition info">
-<p class="admonition-title">Info</p>
+<p class="admonition-title">정보</p>
 <p>일부 파이프라인에서는 연산자 클로저 내에서 <code>$it</code>라는 특수 변수가 사용되는 것을 볼 수 있습니다.
 이것은 <code>-&gt;</code>로 정의할 필요 없이 내부 변수에 대한 단축 액세스를 허용하는 <em>암묵적</em> 변수입니다.</p>
 <p>코드 명확성을 위해 명시적으로 표현하는 것을 선호하므로, <code>$it</code> 구문은 권장되지 않으며 Nextflow 언어에서 점차 단계적으로 제거될 것입니다.</p>
@@ -5534,7 +5534,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 </ul>
 <p>중요한 것은 이제 각 항목이 workflow에서 별도로 처리될 수 있다는 것입니다.</p>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
+<p class="admonition-title">팁</p>
 <p>작동에 암묵적 매핑 단계를 포함하는 다른 channel 팩토리인 <a href="https://nextflow.io/docs/latest/reference/channel.html#fromlist"><code>channel.fromList</code></a>를 사용하여 기술적으로 동일한 결과를 얻을 수 있습니다.
 여기서는 간단한 사용 사례에서 연산자 사용을 시연하기 위해 이를 사용하지 않기로 했습니다.</p>
 </div>
@@ -5573,7 +5573,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <p>파트 1에서 설정한 <code>params.input</code> 매개변수를 기억하십니까?
 인사말이 포함된 CSV 파일을 가리키도록 업데이트하겠습니다.</p>
 <p>매개변수 선언을 다음과 같이 편집하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">수정 후</label><label for="__tabbed_10_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">후</label><label for="__tabbed_10_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-20">20</a></span>
@@ -5607,7 +5607,7 @@ Nextflow가 배열을 풀고 개별 문자열을 channel에 로드하도록 하�
 <p>이제 입력으로 단순 문자열 대신 파일을 사용하고자 하므로 이전의 <code>channel.of()</code> channel 팩토리를 사용할 수 없습니다.
 파일 경로 처리를 위한 일부 내장 기능이 있는 새로운 channel 팩토리 <a href="https://nextflow.io/docs/latest/reference/channel.html#frompath"><code>channel.fromPath()</code></a>를 사용하도록 전환해야 합니다.</p>
 <p>workflow 블록에서 다음 코드 변경을 수행하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">수정 후</label><label for="__tabbed_11_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">후</label><label for="__tabbed_11_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-27">27</a></span>
@@ -5724,8 +5724,8 @@ Nextflow가 파일 경로 자체를 문자열 값으로 사용하여 단일 proc
 <p>연산자 목록을 다시 살펴보면, CSV 형식 텍스트를 구문 분석하고 분할하도록 설계된 <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a>를 찾을 수 있습니다.</p>
 <h4 id="421-channel-splitcsv">4.2.1. Channel에 <code>splitCsv()</code> 적용<a class="headerlink" href="#421-channel-splitcsv" title="Permanent link">&para;</a></h4>
 <p>연산자를 적용하려면 이전처럼 channel 팩토리 라인에 추가합니다.</p>
-<p>workflow 블록에서 <code>flatten()</code>을 <code>splitcsv()</code>로 교체(주석 해제)하는 다음 코드 변경을 수행하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">수정 후</label><label for="__tabbed_12_2">수정 전</label></div>
+<p>workflow 블록에서 <code>flatten()</code>을 <code>splitCsv()</code>로 교체(주석 해제)하는 다음 코드 변경을 수행하십시오:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">후</label><label for="__tabbed_12_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-27">27</a></span>
@@ -5854,7 +5854,7 @@ Nextflow가 파일 경로 자체를 문자열 값으로 사용하여 단일 proc
 <p>이것을 CSV 구문 분석에 적용해 봅시다.</p>
 <h4 id="431-channel-map">4.3.1. Channel에 <code>map()</code> 적용<a class="headerlink" href="#431-channel-map" title="Permanent link">&para;</a></h4>
 <p>workflow 블록에서 다음 코드 변경을 수행하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">수정 후</label><label for="__tabbed_13_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">후</label><label for="__tabbed_13_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-27">27</a></span>

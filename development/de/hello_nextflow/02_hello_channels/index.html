@@ -2212,7 +2212,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Genomics
   
 
     
@@ -2228,7 +2228,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Genomics
+    Genomics
   
 
           </label>
@@ -2248,7 +2248,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Genomics
   
 
     
@@ -2304,7 +2304,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 1: Methodenübersicht und manuelles Testen
+    Teil 1: Methodenübersicht
   
 
     
@@ -2463,7 +2463,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow für RNAseq
+    RNAseq
   
 
     
@@ -2479,7 +2479,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow für RNAseq
+    RNAseq
   
 
           </label>
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow für RNAseq
+    RNAseq
   
 
     
@@ -2527,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Orientierung
+    Erste Schritte
   
 
     
@@ -2555,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Teil 1: Methodenübersicht und manuelles Testen
+    Teil 1: Methodenübersicht
   
 
     
@@ -2639,7 +2639,7 @@
   <span class="md-ellipsis">
     
   
-    Nächste Schritte
+    Kurszusammenfassung
   
 
     
@@ -2714,7 +2714,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run für Bildgebung
+    Bildgebung
   
 
     
@@ -2730,7 +2730,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow run für Bildgebung
+    Bildgebung
   
 
           </label>
@@ -2750,7 +2750,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run für Bildgebung
+    Bildgebung
   
 
     
@@ -4550,7 +4550,7 @@ Channels sind Warteschlangen, die entwickelt wurden, um Eingaben effizient zu ha
 <p>In diesem Teil des Kurses lernst du, wie du einen Channel verwendest, um mehrere Eingaben aus verschiedenen Quellen zu handhaben.
 Du lernst auch, <a href="https://nextflow.io/docs/latest/reference/operator.html"><strong>Operatoren</strong></a> zu verwenden, um Channel-Inhalte nach Bedarf zu transformieren.</p>
 <details class="info">
-<summary>Wie du von diesem Abschnitt aus beginnen kannst</summary>
+<summary>Wie du von diesem Abschnitt aus beginnst</summary>
 <p>Dieser Abschnitt des Kurses setzt voraus, dass du Teil 1 des <a href="../">Hello Nextflow</a>-Kurses abgeschlossen hast, aber wenn du mit den dort behandelten Grundlagen vertraut bist, kannst du von hier aus starten, ohne etwas Besonderes tun zu müssen.</p>
 </details>
 <hr />
@@ -4584,7 +4584,7 @@ Es entspricht dem Skript, das durch das Durcharbeiten von Teil 1 dieses Training
 </details>
 <p>Wie zuvor findest du die Ausgabedatei <code>output.txt</code> im Verzeichnis <code>results/hello_channels</code> (wie im <code>output</code>-Block des Workflow-Skripts oben angegeben).</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><span class="filename">results/hello_channels</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">results</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="hll"><span class="go">├── hello_channels</span>
 </span><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="hll"><span class="go">│   └── output.txt</span>
@@ -4594,7 +4594,7 @@ Es entspricht dem Skript, das durch das Durcharbeiten von Teil 1 dieses Training
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">Hello Channels!</span>
 </code></pre></div>
 </details>
@@ -4622,7 +4622,7 @@ Funktional wird dies ähnlich sein wie zuvor, aber anstatt Nextflow einen Channe
 <p>Wir wechseln vorübergehend zurück zu fest codierten Strings, anstatt einen CLI-Parameter zu verwenden, um die Lesbarkeit zu verbessern. Wir werden zurück zu CLI-Parametern wechseln, sobald wir behandelt haben, was auf Ebene des Channels passiert.</p>
 </div>
 <p>Füge im Workflow-Block den Channel Factory-Code hinzu:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Nachher</label><label for="__tabbed_1_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Danach</label><label for="__tabbed_1_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-27">27</a></span>
@@ -4674,7 +4674,7 @@ Funktional wird dies ähnlich sein wie zuvor, aber anstatt Nextflow einen Channe
 <h3 id="12-den-channel-als-eingabe-zum-prozess-aufruf-hinzufugen">1.2. Den Channel als Eingabe zum Prozess-Aufruf hinzufügen<a class="headerlink" href="#12-den-channel-als-eingabe-zum-prozess-aufruf-hinzufugen" title="Permanent link">&para;</a></h3>
 <p>Jetzt müssen wir unseren neu erstellten Channel tatsächlich in den <code>sayHello()</code>-Prozess-Aufruf einbinden und den CLI-Parameter ersetzen, den wir zuvor direkt bereitgestellt haben.</p>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Nachher</label><label for="__tabbed_2_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Danach</label><label for="__tabbed_2_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-27">27</a></span>
@@ -4745,7 +4745,7 @@ Funktional wird dies ähnlich sein wie zuvor, aber anstatt Nextflow einen Channe
 <p>Wenn du beide Änderungen korrekt vorgenommen hast, solltest du eine erfolgreiche Ausführung erhalten.
 Du kannst das Ergebnisverzeichnis überprüfen, um dich zu vergewissern, dass das Ergebnis noch dasselbe ist wie zuvor.</p>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">Hello Channels!</span>
 </code></pre></div>
 </details>
@@ -4757,7 +4757,7 @@ Das mag so erscheinen, als würden wir mehr Code für keinen greifbaren Nutzen s
 <p>Vorerst zeigen wir dir nur, wie du einen super einfachen Operator namens <a href="https://www.nextflow.io/docs/latest/reference/operator.html#view"><code>view()</code></a> verwendest, um die Inhalte eines Channels zu inspizieren.
 Du kannst <code>view()</code> als Debugging-Werkzeug betrachten, wie eine <code>print()</code>-Anweisung in Python oder deren Äquivalent in anderen Sprachen.</p>
 <p>Füge diese kleine Zeile zum Workflow-Block hinzu:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Nachher</label><label for="__tabbed_3_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Danach</label><label for="__tabbed_3_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-27">27</a></span>
@@ -4841,7 +4841,7 @@ Wir können einfach mehrere Werte in den Channel laden.</p>
 <p>Machen wir sie zu <code>'Hello'</code>, <code>'Bonjour'</code> und <code>'Holà'</code>.</p>
 <h4 id="211-weitere-begruungen-hinzufugen">2.1.1. Weitere Begrüßungen hinzufügen<a class="headerlink" href="#211-weitere-begruungen-hinzufugen" title="Permanent link">&para;</a></h4>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Nachher</label><label for="__tabbed_4_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Danach</label><label for="__tabbed_4_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-30">30</a></span>
@@ -4883,7 +4883,7 @@ Wir können einfach mehrere Werte in den Channel laden.</p>
 Der Ausführungsmonitor zeigt, dass <code>3 von 3</code> Aufrufe für den <code>sayHello</code>-Prozess gemacht wurden, und wir sehen die drei Begrüßungen, die durch die <code>view()</code>-Anweisung aufgelistet werden, eine pro Zeile wie versprochen.</p>
 <p>Allerdings gibt es im Ergebnisverzeichnis immer noch nur eine Ausgabe:</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><span class="filename">results/hello_channels</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">results</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">├── hello_channels</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="hll"><span class="go">│   └── output.txt</span>
@@ -4893,7 +4893,7 @@ Der Ausführungsmonitor zeigt, dass <code>3 von 3</code> Aufrufe für den <code>
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Holà</span>
 </code></pre></div>
 </details>
@@ -4910,7 +4910,7 @@ Kannst du dir vorstellen, warum das so sein könnte?</p>
 <p>Wenn wir zurück auf den Ausführungsmonitor schauen, hat er uns nur einen Unterverzeichnispfad gegeben (<code>f4/c9962c</code>).
 Lass uns dort hineinschauen.</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">work/f4/c9962ce91ef87480babcb86b2b9042/</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">├── .command.begin</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">├── .command.err</span>
@@ -4923,7 +4923,7 @@ Lass uns dort hineinschauen.</p>
 </span></code></pre></div>
 </details>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">work/f4/c9962ce91ef87480babcb86b2b9042/output.txt</span><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">Hello</span>
 </code></pre></div>
 </details>
@@ -4959,7 +4959,7 @@ In diesem erweiterten Modus wird nur gemeldet, dass sie eingereicht wurden.</p>
 </div>
 <p>Wie auch immer, jetzt da wir die Unterverzeichnisse jedes Prozess-Aufrufs haben, können wir nach ihren Logs und Ausgaben suchen.</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">work/23/871c7ec3642a898ecd5e6090d21300/</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="go">├── .command.begin</span>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">├── .command.err</span>
@@ -4992,7 +4992,7 @@ In diesem erweiterten Modus wird nur gemeldet, dass sie eingereicht wurden.</p>
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">work/23/871c7ec3642a898ecd5e6090d21300/output.txt</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Bonjour
 </code></pre></div>
 <div class="highlight"><span class="filename">work/7f/21e2c2f3cc8833ef3858b236e5575c/output.txt</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Hello
@@ -5027,7 +5027,7 @@ Hier werden wir der Einfachheit halber nur die Begrüßung selbst verwenden, da 
 
 <h4 id="221-einen-dynamischen-ausgabedateinamen-konstruieren">2.2.1. Einen dynamischen Ausgabedateinamen konstruieren<a class="headerlink" href="#221-einen-dynamischen-ausgabedateinamen-konstruieren" title="Permanent link">&para;</a></h4>
 <p>Nimm im Prozess-Block die folgenden Codeänderungen vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Nachher</label><label for="__tabbed_5_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Danach</label><label for="__tabbed_5_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-6"> 6</a></span>
@@ -5113,7 +5113,7 @@ Hier werden wir der Einfachheit halber nur die Begrüßung selbst verwenden, da 
 <p>Zurück in der Zusammenfassungsansicht wird die Ausgabe wieder auf einer Zeile zusammengefasst.
 Schau in das <code>results</code>-Verzeichnis, um zu sehen, ob alle Ausgabebegrüßungen da sind.</p>
 <details class="abstract">
-<summary>Verzeichnisinhalte</summary>
+<summary>Verzeichnisinhalt</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">results/hello_channels/</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">├── Hello-output.txt</span>
@@ -5123,7 +5123,7 @@ Schau in das <code>results</code>-Verzeichnis, um zu sehen, ob alle Ausgabebegr�
 </details>
 <p>Ja! Und sie haben jeweils die erwarteten Inhalte.</p>
 <details class="abstract">
-<summary>Dateiinhalte</summary>
+<summary>Dateiinhalt</summary>
 <div class="highlight"><span class="filename">Bonjour-output.txt</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">Bonjour</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">Hello-output.txt</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">Hello</span>
@@ -5163,7 +5163,7 @@ Was ist, wenn wir diese mehreren Eingaben auf eine andere Weise bereitstellen wo
 Lass uns es versuchen; wir müssen die Eingabevariable einrichten und sie in die Channel Factory laden.</p>
 <h4 id="311-die-eingabevariable-einrichten">3.1.1. Die Eingabevariable einrichten<a class="headerlink" href="#311-die-eingabevariable-einrichten" title="Permanent link">&para;</a></h4>
 <p>Lass uns die <code>greetings_array</code>-Variable, die wir uns gerade vorgestellt haben, Realität werden lassen, indem wir sie zum Workflow-Block hinzufügen:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Nachher</label><label for="__tabbed_6_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Danach</label><label for="__tabbed_6_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-27">27</a></span>
@@ -5227,7 +5227,7 @@ Lass uns es versuchen; wir müssen die Eingabevariable einrichten und sie in die
 <h4 id="312-das-array-von-begruungen-als-eingabe-fur-die-channel-factory-setzen">3.1.2. Das Array von Begrüßungen als Eingabe für die Channel Factory setzen<a class="headerlink" href="#312-das-array-von-begruungen-als-eingabe-fur-die-channel-factory-setzen" title="Permanent link">&para;</a></h4>
 <p>Jetzt werden wir die Werte <code>'Hello','Bonjour','Holà'</code>, die derzeit in der Channel Factory fest codiert sind, durch das <code>greetings_array</code> ersetzen, das wir gerade erstellt haben.</p>
 <p>Nimm im Workflow-Block die folgende Änderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Nachher</label><label for="__tabbed_7_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Danach</label><label for="__tabbed_7_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-27">27</a></span>
@@ -5349,7 +5349,7 @@ Jetzt werden wir uns Operatoren ansehen, die es uns ermöglichen, auf die Inhalt
 <h4 id="321-den-flatten-operator-hinzufugen">3.2.1. Den <code>flatten()</code>-Operator hinzufügen<a class="headerlink" href="#321-den-flatten-operator-hinzufugen" title="Permanent link">&para;</a></h4>
 <p>Um den <code>flatten()</code>-Operator auf unseren Eingabe-Channel anzuwenden, hängen wir ihn an die Channel Factory-Deklaration an.</p>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Nachher</label><label for="__tabbed_8_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Danach</label><label for="__tabbed_8_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-27">27</a></span>
@@ -5428,7 +5428,7 @@ Jetzt werden wir uns Operatoren ansehen, die es uns ermöglichen, auf die Inhalt
 <p>Wir könnten dies jetzt sofort ausführen, um zu testen, ob es funktioniert, aber während wir dabei sind, werden wir verfeinern, wie wir die Channel-Inhalte inspizieren.</p>
 <p>Wir wollen den Inhalt vor und nach der Anwendung des <code>flatten()</code>-Operators vergleichen können, also werden wir ein zweites hinzufügen, UND wir werden etwas Code hinzufügen, um sie in der Ausgabe deutlicher zu beschriften.</p>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Nachher</label><label for="__tabbed_9_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">Danach</label><label for="__tabbed_9_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-27">27</a></span>
@@ -5574,7 +5574,7 @@ Höchstwahrscheinlich haben wir eine oder mehrere Dateien, die die zu verarbeite
 <p>Erinnerst du dich an den <code>params.input</code>-Parameter, den wir in Teil 1 eingerichtet haben?
 Wir werden ihn aktualisieren, um auf die CSV-Datei zu zeigen, die unsere Begrüßungen enthält.</p>
 <p>Nimm die folgende Änderung an der Parameterdeklaration vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Nachher</label><label for="__tabbed_10_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Danach</label><label for="__tabbed_10_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-20">20</a></span>
@@ -5608,7 +5608,7 @@ Wie du mit anderen Datenspeicherorten umgehst, lernst du in späteren Kursen.</p
 <p>Da wir jetzt eine Datei anstelle von einfachen Strings als Eingabe verwenden wollen, können wir die <code>channel.of()</code> Channel Factory von vorher nicht verwenden.
 Wir müssen zu einer neuen Channel Factory wechseln, <a href="https://nextflow.io/docs/latest/reference/channel.html#frompath"><code>channel.fromPath()</code></a>, die einige eingebaute Funktionalitäten für das Handhaben von Dateipfaden hat.</p>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Nachher</label><label for="__tabbed_11_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Danach</label><label for="__tabbed_11_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-27">27</a></span>
@@ -5725,8 +5725,8 @@ Also hat es den Dateipfad korrekt aufgelöst, aber es hat nicht wirklich seinen 
 <p>Wenn wir wieder durch die Liste der Operatoren schauen, finden wir <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a>, das dafür ausgelegt ist, CSV-formatierten Text zu parsen und zu teilen.</p>
 <h4 id="421-splitcsv-auf-den-channel-anwenden">4.2.1. <code>splitCsv()</code> auf den Channel anwenden<a class="headerlink" href="#421-splitcsv-auf-den-channel-anwenden" title="Permanent link">&para;</a></h4>
 <p>Um den Operator anzuwenden, hängen wir ihn wie zuvor an die Channel Factory-Zeile an.</p>
-<p>Nimm im Workflow-Block die folgende Codeänderung vor, um <code>flatten()</code> durch <code>splitcsv()</code> zu ersetzen (nicht auskommentiert):</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Nachher</label><label for="__tabbed_12_2">Vorher</label></div>
+<p>Nimm im Workflow-Block die folgende Codeänderung vor, um <code>flatten()</code> durch <code>splitCsv()</code> zu ersetzen (nicht auskommentiert):</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Danach</label><label for="__tabbed_12_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-27">27</a></span>
@@ -5855,7 +5855,7 @@ So sieht die Syntax aus:</p>
 <p>Also wenden wir das auf unser CSV-Parsing an.</p>
 <h4 id="431-map-auf-den-channel-anwenden">4.3.1. <code>map()</code> auf den Channel anwenden<a class="headerlink" href="#431-map-auf-den-channel-anwenden" title="Permanent link">&para;</a></h4>
 <p>Nimm im Workflow-Block die folgende Codeänderung vor:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Nachher</label><label for="__tabbed_13_2">Vorher</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Danach</label><label for="__tabbed_13_2">Vorher</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-channels.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-27">27</a></span>

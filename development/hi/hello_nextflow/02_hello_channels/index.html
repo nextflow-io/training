@@ -2212,7 +2212,7 @@
   <span class="md-ellipsis">
     
   
-    जीनोमिक्स के लिए Nextflow
+    जीनोमिक्स
   
 
     
@@ -2228,7 +2228,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    जीनोमिक्स के लिए Nextflow
+    जीनोमिक्स
   
 
           </label>
@@ -2248,7 +2248,7 @@
   <span class="md-ellipsis">
     
   
-    जीनोमिक्स के लिए Nextflow
+    जीनोमिक्स
   
 
     
@@ -2304,7 +2304,7 @@
   <span class="md-ellipsis">
     
   
-    भाग 1: विधि का अवलोकन और मैनुअल परीक्षण
+    भाग 1: विधि का अवलोकन
   
 
     
@@ -2463,7 +2463,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq के लिए Nextflow
+    RNAseq
   
 
     
@@ -2479,7 +2479,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq के लिए Nextflow
+    RNAseq
   
 
           </label>
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq के लिए Nextflow
+    RNAseq
   
 
     
@@ -2527,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    परिचय
+    शुरू करना
   
 
     
@@ -2555,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    भाग 1: विधि का अवलोकन और मैनुअल परीक्षण
+    भाग 1: विधि का अवलोकन
   
 
     
@@ -2639,7 +2639,7 @@
   <span class="md-ellipsis">
     
   
-    अगले कदम
+    कोर्स सारांश
   
 
     
@@ -2714,7 +2714,7 @@
   <span class="md-ellipsis">
     
   
-    इमेजिंग के लिए Nextflow run
+    इमेजिंग
   
 
     
@@ -2730,7 +2730,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    इमेजिंग के लिए Nextflow run
+    इमेजिंग
   
 
           </label>
@@ -2750,7 +2750,7 @@
   <span class="md-ellipsis">
     
   
-    इमेजिंग के लिए Nextflow run
+    इमेजिंग
   
 
     
@@ -4550,7 +4550,7 @@ Channels ऐसी queues हैं जो inputs को efficiently handle क�
 <p>इस course के इस भाग में, तुम सीखोगे कि विभिन्न स्रोतों से multiple inputs handle करने के लिए channel कैसे use करें।
 तुम channel contents को आवश्यकतानुसार transform करने के लिए <a href="https://nextflow.io/docs/latest/reference/operator.html"><strong>operators</strong></a> use करना भी सीखोगे।</p>
 <details class="info">
-<summary>इस section से कैसे शुरू करें</summary>
+<summary>इस खंड से कैसे शुरू करें</summary>
 <p>Course का यह section मानता है कि तुमने <a href="../">Hello Nextflow</a> course का Part 1 complete कर लिया है, लेकिन यदि तुम उस section में covered basics से comfortable हो, तो तुम बिना कुछ special किए यहाँ से शुरू कर सकते हो।</p>
 </details>
 <hr />
@@ -4573,7 +4573,7 @@ Channels ऐसी queues हैं जो inputs को efficiently handle क�
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf<span class="w"> </span>--input<span class="w"> </span><span class="s1">&#39;Hello Channels!&#39;</span>
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">Launching `hello-channels.nf` [wise_jennings] DSL2 - revision: b24f4902d6</span>
@@ -4584,7 +4584,7 @@ Channels ऐसी queues हैं जो inputs को efficiently handle क�
 </details>
 <p>पहले की तरह, तुम <code>results/hello_channels</code> directory में <code>output.txt</code> नामक output file पाओगे (जैसा कि workflow script के <code>output</code> block में specify किया गया है, ऊपर दिखाया गया है)।</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>डायरेक्टरी सामग्री</summary>
 <div class="highlight"><span class="filename">results/hello_channels</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">results</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="hll"><span class="go">├── hello_channels</span>
 </span><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="hll"><span class="go">│   └── output.txt</span>
@@ -4594,7 +4594,7 @@ Channels ऐसी queues हैं जो inputs को efficiently handle क�
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>File contents</summary>
+<summary>फ़ाइल सामग्री</summary>
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">Hello Channels!</span>
 </code></pre></div>
 </details>
@@ -4733,7 +4733,7 @@ Functionally यह पहले जैसे set up के similar होगा
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `hello-channels.nf` [fabulous_crick] DSL2 - revision: 23e20f76e8</span>
@@ -4745,7 +4745,7 @@ Functionally यह पहले जैसे set up के similar होगा
 <p>यदि तुमने दोनों edits correctly किए, तो तुम्हें एक successful execution मिलनी चाहिए।
 तुम results directory check कर सकते हो यह satisfy करने के लिए कि outcome अभी भी पहले जैसा ही है।</p>
 <details class="abstract">
-<summary>File contents</summary>
+<summary>फ़ाइल सामग्री</summary>
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="go">Hello Channels!</span>
 </code></pre></div>
 </details>
@@ -4816,7 +4816,7 @@ Functionally यह पहले जैसे set up के similar होगा
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="go">Launching `hello-channels.nf` [scruffy_shaw] DSL2 - revision: 2ede41e14a</span>
@@ -4867,7 +4867,7 @@ Functionally यह पहले जैसे set up के similar होगा
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `hello-channels.nf` [amazing_crick] DSL2 - revision: 59a9a5888a</span>
@@ -4883,7 +4883,7 @@ Functionally यह पहले जैसे set up के similar होगा
 Execution monitor दिखाता है कि <code>sayHello</code> process के लिए <code>3 of 3</code> calls किए गए, और हम <code>view()</code> statement द्वारा enumerate किए गए तीन greetings देखते हैं, जैसा promised एक per line।</p>
 <p>हालाँकि, results directory में अभी भी केवल एक output है:</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>डायरेक्टरी सामग्री</summary>
 <div class="highlight"><span class="filename">results/hello_channels</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">results</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">├── hello_channels</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="hll"><span class="go">│   └── output.txt</span>
@@ -4893,7 +4893,7 @@ Execution monitor दिखाता है कि <code>sayHello</code> process
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>File contents</summary>
+<summary>फ़ाइल सामग्री</summary>
 <div class="highlight"><span class="filename">results/hello_channels/output.txt</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">Holà</span>
 </code></pre></div>
 </details>
@@ -4910,7 +4910,7 @@ Execution monitor दिखाता है कि <code>sayHello</code> process
 <p>Execution monitor को वापस देखते हुए, इसने हमें केवल एक subdirectory path (<code>f4/c9962c</code>) दी।
 चलो वहाँ देखते हैं।</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>डायरेक्टरी सामग्री</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="go">work/f4/c9962ce91ef87480babcb86b2b9042/</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">├── .command.begin</span>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">├── .command.err</span>
@@ -4923,7 +4923,7 @@ Execution monitor दिखाता है कि <code>sayHello</code> process
 </span></code></pre></div>
 </details>
 <details class="abstract">
-<summary>File contents</summary>
+<summary>फ़ाइल सामग्री</summary>
 <div class="highlight"><span class="filename">work/f4/c9962ce91ef87480babcb86b2b9042/output.txt</span><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="go">Hello</span>
 </code></pre></div>
 </details>
@@ -4936,7 +4936,7 @@ Execution monitor दिखाता है कि <code>sayHello</code> process
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf<span class="w"> </span>-ansi-log<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go"> N E X T F L O W  ~  version 25.10.2</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="go">Launching `hello-channels.nf` [desperate_monod] DSL2 - revision: 59a9a5888a</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go">Hello</span>
@@ -4959,7 +4959,7 @@ Condensed mode में, Nextflow report करता है कि calls succe
 </div>
 <p>Anyway, अब जबकि हमारे पास प्रत्येक process call की subdirectories हैं, हम उनके logs और outputs खोज सकते हैं।</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>डायरेक्टरी सामग्री</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="go">work/23/871c7ec3642a898ecd5e6090d21300/</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="go">├── .command.begin</span>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">├── .command.err</span>
@@ -4992,7 +4992,7 @@ Condensed mode में, Nextflow report करता है कि calls succe
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>File contents</summary>
+<summary>फ़ाइल सामग्री</summary>
 <div class="highlight"><span class="filename">work/23/871c7ec3642a898ecd5e6090d21300/output.txt</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Bonjour
 </code></pre></div>
 <div class="highlight"><span class="filename">work/7f/21e2c2f3cc8833ef3858b236e5575c/output.txt</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Hello
@@ -5098,7 +5098,7 @@ Specifically, हमें first process को dynamically file name generate �
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="go">Launching `hello-channels.nf` [sharp_minsky] DSL2 - revision: 16a291febe</span>
@@ -5113,7 +5113,7 @@ Specifically, हमें first process को dynamically file name generate �
 <p>Summary view पर वापस आते हुए, output फिर से एक line पर summarize हो गया है।
 यह देखने के लिए <code>results</code> directory पर नज़र डालो कि क्या सभी output greetings वहाँ हैं।</p>
 <details class="abstract">
-<summary>Directory contents</summary>
+<summary>डायरेक्टरी सामग्री</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">results/hello_channels/</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">├── Hello-output.txt</span>
@@ -5123,7 +5123,7 @@ Specifically, हमें first process को dynamically file name generate �
 </details>
 <p>हाँ! और प्रत्येक में expected contents हैं।</p>
 <details class="abstract">
-<summary>File contents</summary>
+<summary>फ़ाइल सामग्री</summary>
 <div class="highlight"><span class="filename">Bonjour-output.txt</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">Bonjour</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">Hello-output.txt</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">Hello</span>
@@ -5297,7 +5297,7 @@ Metadata typically 'sample sheet' या equivalents के माध्यम �
 <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
 </code></pre></div>
 <details class="failure">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7</span>
@@ -5345,7 +5345,7 @@ Metadata typically 'sample sheet' या equivalents के माध्यम �
 <p>यहीं <a href="https://nextflow.io/docs/latest/reference/operator.html"><strong>operators</strong></a> play में आते हैं।
 तुम पहले से <code>.view()</code> operator use कर चुके हो, जो बस देखता है कि वहाँ क्या है।
 अब हम उन operators को देखेंगे जो हमें channel की contents पर act करने की अनुमति देते हैं।</p>
-<p>यदि तुम Nextflow documentation में <a href="https://www.nextflow.io/docs/latest/reference/operator.html">operators की list</a> skim through करते हो, तो तुम <a href="https://www.nextflow.io/docs/latest/reference/operator.html#flatten"><code>flatten()</code></a> पाओगे, जो exactly वही करता है जो हमें चाहिए: array की contents unpack करना और उन्हें individual items के रूप में emit करना।</p>
+<p>यदि तुम Nextflow documentation में <a href="https://nextflow.io/docs/latest/reference/operator.html">operators की list</a> skim through करते हो, तो तुम <a href="https://nextflow.io/docs/latest/reference/operator.html#flatten"><code>flatten()</code></a> पाओगे, जो exactly वही करता है जो हमें चाहिए: array की contents unpack करना और उन्हें individual items के रूप में emit करना।</p>
 <h4 id="321-flatten-operator-add">3.2.1. <code>flatten()</code> operator add करें<a class="headerlink" href="#321-flatten-operator-add" title="Permanent link">&para;</a></h4>
 <p>हमारे input channel पर <code>flatten()</code> operator apply करने के लिए, हम इसे channel factory declaration में append करते हैं।</p>
 <p>Workflow block में, निम्नलिखित code change करो:</p>
@@ -5515,7 +5515,7 @@ Metadata typically 'sample sheet' या equivalents के माध्यम �
 <div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>
 <a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a><span class="go">Launching `hello-channels.nf` [sleepy_gutenberg] DSL2 - revision: 1db4f760ee</span>
@@ -5683,7 +5683,7 @@ Most likely, हमारे पास एक या अधिक files हो�
 <div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
 </code></pre></div>
 <details class="failure">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>
 <a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="go">Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5</span>
@@ -5720,12 +5720,12 @@ Most likely, हमारे पास एक या अधिक files हो�
 ऐसा लगता है Nextflow ने file path itself को string value के रूप में use करके single process call run करने की कोशिश की।
 तो इसने file path correctly resolve किया है, लेकिन इसने actually इसकी contents parse नहीं की, जो हम चाहते थे।</p>
 <p>हम Nextflow को file open करवाकर इसकी contents को channel में load कैसे करवाएं?</p>
-<p>Sounds like हमें एक और <a href="https://www.nextflow.io/docs/latest/reference/operator.html">operator</a> चाहिए!</p>
+<p>Sounds like हमें एक और <a href="https://nextflow.io/docs/latest/reference/operator.html">operator</a> चाहिए!</p>
 <h3 id="42-file-parse-splitcsv-operator-use">4.2. File parse करने के लिए <code>splitCsv()</code> operator use करें<a class="headerlink" href="#42-file-parse-splitcsv-operator-use" title="Permanent link">&para;</a></h3>
-<p>Operators की list को फिर से देखते हुए, हमें <a href="https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a> मिलता है, जो CSV-formatted text को parse और split करने के लिए designed है।</p>
+<p>Operators की list को फिर से देखते हुए, हमें <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a> मिलता है, जो CSV-formatted text को parse और split करने के लिए designed है।</p>
 <h4 id="421-channel-splitcsv-apply">4.2.1. Channel पर <code>splitCsv()</code> apply करें<a class="headerlink" href="#421-channel-splitcsv-apply" title="Permanent link">&para;</a></h4>
 <p>Operator apply करने के लिए, हम इसे पहले की तरह channel factory line में append करते हैं।</p>
-<p>Workflow block में, <code>flatten()</code> को <code>splitcsv()</code> (uncommented) से replace करने के लिए निम्नलिखित code change करो:</p>
+<p>Workflow block में, <code>flatten()</code> को <code>splitCsv()</code> (uncommented) से replace करने के लिए निम्नलिखित code change करो:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">बाद में</label><label for="__tabbed_12_2">पहले</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5797,7 +5797,7 @@ Technically हम same variable name (<code>greeting</code>) use कर सक�
 <div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
 </code></pre></div>
 <details class="failure">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a>
 <a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="go">Launching `hello-channels.nf` [insane_fermat] DSL2 - revision: 8e62fcbeb1</span>
@@ -5929,7 +5929,7 @@ Syntax ऐसा दिखता है:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-channels.nf
 </code></pre></div>
 <details class="success">
-<summary>Command output</summary>
+<summary>कमांड आउटपुट</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>
 <a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">Launching `hello-channels.nf` [focused_volhard] DSL2 - revision: de435e45be</span>

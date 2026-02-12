@@ -2212,7 +2212,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Génomique
   
 
     
@@ -2228,7 +2228,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Genomics
+    Génomique
   
 
           </label>
@@ -2248,7 +2248,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    Génomique
   
 
     
@@ -2304,7 +2304,7 @@
   <span class="md-ellipsis">
     
   
-    Partie 1 : Présentation de la méthode et tests manuels
+    Partie 1 : Présentation de la méthode
   
 
     
@@ -2463,7 +2463,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour l'ARNseq
+    ARNseq
   
 
     
@@ -2479,7 +2479,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow pour l'ARNseq
+    ARNseq
   
 
           </label>
@@ -2499,7 +2499,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow pour l'ARNseq
+    ARNseq
   
 
     
@@ -2527,7 +2527,7 @@
   <span class="md-ellipsis">
     
   
-    Orientation
+    Premiers pas
   
 
     
@@ -2555,7 +2555,7 @@
   <span class="md-ellipsis">
     
   
-    Partie 1 : Aperçu de la méthode et tests manuels
+    Partie 1 : Aperçu de la méthode
   
 
     
@@ -2639,7 +2639,7 @@
   <span class="md-ellipsis">
     
   
-    Prochaines Étapes
+    Résumé du cours
   
 
     
@@ -2714,7 +2714,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Imagerie
   
 
     
@@ -2730,7 +2730,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow run for Imaging
+    Imagerie
   
 
           </label>
@@ -2750,7 +2750,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow run for Imaging
+    Imagerie
   
 
     
@@ -4607,7 +4607,7 @@ Il est équivalent au script produit en suivant la Partie 1 de ce cours de forma
 Pour garder les choses simples pour l'instant, nous allons utiliser la fabrique de canaux la plus basique, appelée <a href="https://nextflow.io/docs/latest/reference/channel.html#of"><code>channel.of</code></a>, qui créera un canal contenant une seule valeur.
 Fonctionnellement, ce sera similaire à la configuration que nous avions avant, mais au lieu de laisser Nextflow créer un canal implicitement, nous le faisons explicitement maintenant.</p>
 <p>Voici la ligne de code que nous allons utiliser :</p>
-<div class="highlight"><span class="filename">Syntaxe</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">greeting_ch = channel.of(&#39;Hello Channels!&#39;)</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go">greeting_ch = channel.of(&#39;Hello Channels!&#39;)</span>
 </code></pre></div>
 <p>Cela crée un canal appelé <code>greeting_ch</code> en utilisant la fabrique de canaux <code>channel.of()</code>, qui configure un simple canal de file d'attente, et charge la chaîne <code>'Hello Channels!'</code> à utiliser comme valeur de salutation.</p>
 <figure class="excalidraw">
@@ -4992,7 +4992,7 @@ Dans ce mode étendu, il rapporte seulement qu'ils ont été soumis.</p>
 </code></pre></div>
 </details>
 <details class="abstract">
-<summary>Contenu des fichiers</summary>
+<summary>Contenu du fichier</summary>
 <div class="highlight"><span class="filename">work/23/871c7ec3642a898ecd5e6090d21300/output.txt</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Bonjour
 </code></pre></div>
 <div class="highlight"><span class="filename">work/7f/21e2c2f3cc8833ef3858b236e5575c/output.txt</span><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>Hello
@@ -5123,7 +5123,7 @@ Jetez un œil au répertoire <code>results</code> pour voir si toutes les saluta
 </details>
 <p>Oui ! Et chacune a le contenu attendu.</p>
 <details class="abstract">
-<summary>Contenu des fichiers</summary>
+<summary>Contenu du fichier</summary>
 <div class="highlight"><span class="filename">Bonjour-output.txt</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">Bonjour</span>
 </code></pre></div>
 <div class="highlight"><span class="filename">Hello-output.txt</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="go">Hello</span>
@@ -5504,7 +5504,7 @@ Nous définissons une variable temporaire pour la valeur interne, ici appelée <
 <p>Dans cet exemple, <code>$greeting</code> représente chaque élément individuel chargé dans le canal.
 Cela donnera une sortie console bien étiquetée.</p>
 <div class="admonition info">
-<p class="admonition-title">Information</p>
+<p class="admonition-title">Info</p>
 <p>Dans certains pipelines, vous pourriez voir une variable spéciale appelée <code>$it</code> utilisée à l'intérieur des closures d'opérateurs.
 C'est une variable <em>implicite</em> qui permet un accès raccourci à la variable interne,
 sans avoir besoin de la définir avec un <code>-&gt;</code>.</p>
@@ -5606,7 +5606,7 @@ Nous allons le mettre à jour pour pointer vers le fichier CSV contenant nos sal
 Vous apprendrez comment gérer d'autres emplacements de données plus tard dans votre parcours Nextflow.</p>
 <h4 id="412-passer-a-une-fabrique-de-canaux-concue-pour-gerer-un-fichier">4.1.2. Passer à une fabrique de canaux conçue pour gérer un fichier<a class="headerlink" href="#412-passer-a-une-fabrique-de-canaux-concue-pour-gerer-un-fichier" title="Permanent link">&para;</a></h4>
 <p>Puisque nous voulons maintenant utiliser un fichier au lieu de simples chaînes comme entrée, nous ne pouvons pas utiliser la fabrique de canaux <code>channel.of()</code> d'avant.
-Nous devons passer à l'utilisation d'une nouvelle fabrique de canaux, <a href="https://www.nextflow.io/docs/latest/reference/channel.html#frompath"><code>channel.fromPath()</code></a>, qui a une fonctionnalité intégrée pour gérer les chemins de fichiers.</p>
+Nous devons passer à l'utilisation d'une nouvelle fabrique de canaux, <a href="https://nextflow.io/docs/latest/reference/channel.html#frompath"><code>channel.fromPath()</code></a>, qui a une fonctionnalité intégrée pour gérer les chemins de fichiers.</p>
 <p>Dans le bloc workflow, faites la modification de code suivante :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Après</label><label for="__tabbed_11_2">Avant</label></div>
 <div class="tabbed-content">
@@ -5725,7 +5725,7 @@ Donc il a résolu le chemin du fichier correctement, mais il n'a pas réellement
 <p>En parcourant à nouveau la liste des opérateurs, nous trouvons <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a>, qui est conçu pour analyser et diviser le texte au format CSV.</p>
 <h4 id="421-appliquer-splitcsv-au-canal">4.2.1. Appliquer <code>splitCsv()</code> au canal<a class="headerlink" href="#421-appliquer-splitcsv-au-canal" title="Permanent link">&para;</a></h4>
 <p>Pour appliquer l'opérateur, nous l'ajoutons à la ligne de la fabrique de canaux comme précédemment.</p>
-<p>Dans le bloc workflow, faites la modification de code suivante pour remplacer <code>flatten()</code> par <code>splitcsv()</code> (décommenté) :</p>
+<p>Dans le bloc workflow, faites la modification de code suivante pour remplacer <code>flatten()</code> par <code>splitCsv()</code> (décommenté) :</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Après</label><label for="__tabbed_12_2">Avant</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5849,7 +5849,7 @@ Alors comment déballer cela ?</p>
 <p>L'opérateur <a href="https://nextflow.io/docs/latest/reference/operator.html#map"><code>map()</code></a> est un petit outil très pratique qui nous permet de faire toutes sortes de mappings sur le contenu d'un canal.</p>
 <p>Dans ce cas, nous allons l'utiliser pour extraire cet unique élément que nous voulons de chaque ligne dans notre fichier de données.
 Voici à quoi ressemble la syntaxe :</p>
-<div class="highlight"><span class="filename">Syntaxe</span><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">row</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
 <p>Cela signifie « pour chaque ligne dans le canal, prendre le 0ème (premier) élément qu'elle contient ».</p>
 <p>Appliquons donc cela à notre analyse CSV.</p>
@@ -5987,7 +5987,7 @@ Qu'est-ce qu'un canal dans Nextflow ?
 - [x] Une structure de type file d'attente pour passer des données entre processus
 - [ ] Un paramètre de configuration
 
-En savoir plus : [1.1. Créer un canal d'entrée](#11-creer-un-canal-dentree)
+En savoir plus : [1.1. Créer un canal d'entrée](#11-create-an-input-channel)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -6001,7 +6001,7 @@ En savoir plus : [1.1. Créer un canal d'entrée](#11-creer-un-canal-dentree)
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#11-creer-un-canal-dentree">1.1. Créer un canal d'entrée</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#11-create-an-input-channel">1.1. Créer un canal d'entrée</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6018,7 +6018,7 @@ channel.of('Hello', 'Bonjour', 'Hola')
 - [ ] Rien (les canaux n'affichent pas par défaut)
 - [ ] Une erreur (syntaxe invalide)
 
-En savoir plus : [1.1. Créer un canal d'entrée](#11-creer-un-canal-dentree)
+En savoir plus : [1.1. Créer un canal d'entrée](#11-create-an-input-channel)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -6035,7 +6035,7 @@ En savoir plus : [1.1. Créer un canal d'entrée](#11-creer-un-canal-dentree)
                     <div class="quiz-feedback hidden"></div>
 
                 </form>
-                <section class="content hidden"><p>En savoir plus : <a href="#11-creer-un-canal-dentree">1.1. Créer un canal d'entrée</a></p></section>
+                <section class="content hidden"><p>En savoir plus : <a href="#11-create-an-input-channel">1.1. Créer un canal d'entrée</a></p></section>
             </div>
 
 <!-- mkdocs-quiz-source
@@ -6046,7 +6046,7 @@ Quand un canal contient plusieurs valeurs, comment Nextflow gère-t-il l'exécut
 - [ ] Le processus s'exécute seulement avec la première valeur
 - [ ] Le processus s'exécute seulement avec la dernière valeur
 
-En savoir plus : [2. Modifier le workflow pour s'exécuter sur plusieurs valeurs d'entrée](#2-modifier-le-workflow-pour-sexecuter-sur-plusieurs-valeurs-dentree)
+En savoir plus : [2. Modifier le workflow pour s'exécuter sur plusieurs valeurs d'entrée](#2-modify-the-workflow-to-run-on-multiple-input-values)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -6060,7 +6060,7 @@ En savoir plus : [2. Modifier le workflow pour s'exécuter sur plusieurs valeurs
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#2-modifier-le-workflow-pour-sexecuter-sur-plusieurs-valeurs-dentree">2. Modifier le workflow pour s'exécuter sur plusieurs valeurs d'entrée</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#2-modify-the-workflow-to-run-on-multiple-input-values">2. Modifier le workflow pour s'exécuter sur plusieurs valeurs d'entrée</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6071,7 +6071,7 @@ Que fait l'opérateur `flatten()` ?
 - [x] Déballe les tableaux en éléments individuels
 - [ ] Supprime les éléments dupliqués
 
-En savoir plus : [3.2.1. Ajouter l'opérateur `flatten()`](#321-ajouter-loperateur-flatten)
+En savoir plus : [3.2.1. Ajouter l'opérateur `flatten()`](#321-add-the-flatten-operator)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -6085,7 +6085,7 @@ En savoir plus : [3.2.1. Ajouter l'opérateur `flatten()`](#321-ajouter-loperate
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#321-ajouter-loperateur-flatten">3.2.1. Ajouter l'opérateur <code>flatten()</code></a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#321-add-the-flatten-operator">3.2.1. Ajouter l'opérateur <code>flatten()</code></a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6096,7 +6096,7 @@ Quel est le but de l'opérateur `view()` ?
 - [x] Inspecter et déboguer le contenu du canal
 - [ ] Sauvegarder le contenu du canal dans un fichier
 
-En savoir plus : [1.4. Utiliser `view()` pour inspecter le contenu du canal](#14-utiliser-view-pour-inspecter-le-contenu-du-canal)
+En savoir plus : [1.4. Utiliser `view()` pour inspecter le contenu du canal](#14-use-view-to-inspect-the-channel-contents)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -6110,7 +6110,7 @@ En savoir plus : [1.4. Utiliser `view()` pour inspecter le contenu du canal](#14
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#14-utiliser-view-pour-inspecter-le-contenu-du-canal">1.4. Utiliser <code>view()</code> pour inspecter le contenu du canal</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#14-use-view-to-inspect-the-channel-contents">1.4. Utiliser <code>view()</code> pour inspecter le contenu du canal</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6121,7 +6121,7 @@ Que fait `splitCsv()` ?
 - [x] Analyse un fichier CSV en tableaux représentant chaque ligne
 - [ ] Fusionne plusieurs fichiers CSV
 
-En savoir plus : [4.2. Utiliser l'opérateur `splitCsv()` pour analyser le fichier](#42-utiliser-loperateur-splitcsv-pour-analyser-le-fichier)
+En savoir plus : [4.2. Utiliser l'opérateur `splitCsv()` pour analyser le fichier](#42-use-the-splitcsv-operator-to-parse-the-file)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -6135,7 +6135,7 @@ En savoir plus : [4.2. Utiliser l'opérateur `splitCsv()` pour analyser le fichi
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#42-utiliser-loperateur-splitcsv-pour-analyser-le-fichier">4.2. Utiliser l'opérateur <code>splitCsv()</code> pour analyser le fichier</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#42-use-the-splitcsv-operator-to-parse-the-file">4.2. Utiliser l'opérateur <code>splitCsv()</code> pour analyser le fichier</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6146,7 +6146,7 @@ Quel est le but de l'opérateur `map()` ?
 - [x] Transformer chaque élément dans un canal
 - [ ] Compter les éléments dans un canal
 
-En savoir plus : [4.3. Utiliser l'opérateur `map()` pour extraire les salutations](#43-utiliser-loperateur-map-pour-extraire-les-salutations)
+En savoir plus : [4.3. Utiliser l'opérateur `map()` pour extraire les salutations](#43-use-the-map-operator-to-extract-the-greetings)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -6160,7 +6160,7 @@ En savoir plus : [4.3. Utiliser l'opérateur `map()` pour extraire les salutatio
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#43-utiliser-loperateur-map-pour-extraire-les-salutations">4.3. Utiliser l'opérateur <code>map()</code> pour extraire les salutations</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#43-use-the-map-operator-to-extract-the-greetings">4.3. Utiliser l'opérateur <code>map()</code> pour extraire les salutations</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -6171,7 +6171,7 @@ Pourquoi est-il important d'utiliser des noms de fichiers de sortie dynamiques l
 - [x] Pour empêcher les fichiers de sortie de s'écraser mutuellement
 - [ ] Pour activer la fonctionnalité de reprise
 
-En savoir plus : [2.2. S'assurer que les noms de fichiers de sortie seront uniques](#22-sassurer-que-les-noms-de-fichiers-de-sortie-seront-uniques)
+En savoir plus : [2.2. S'assurer que les noms de fichiers de sortie seront uniques](#22-ensure-the-output-file-names-will-be-unique)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-7">
@@ -6185,7 +6185,7 @@ En savoir plus : [2.2. S'assurer que les noms de fichiers de sortie seront uniqu
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>En savoir plus : <a href="#22-sassurer-que-les-noms-de-fichiers-de-sortie-seront-uniques">2.2. S'assurer que les noms de fichiers de sortie seront uniques</a></p></section>
+    <section class="content hidden"><p>En savoir plus : <a href="#22-ensure-the-output-file-names-will-be-unique">2.2. S'assurer que les noms de fichiers de sortie seront uniques</a></p></section>
 </div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;

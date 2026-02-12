@@ -1459,7 +1459,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학
   
 
     
@@ -1475,7 +1475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Nextflow for Genomics
+    유전체학
   
 
           </label>
@@ -1495,7 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Nextflow for Genomics
+    유전체학
   
 
     
@@ -1862,7 +1862,7 @@
   <span class="md-ellipsis">
     
   
-    파트 1: 방법론 개요 및 수동 테스트
+    파트 1: 방법론 개요
   
 
     
@@ -2021,7 +2021,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
     
@@ -2037,7 +2037,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
           </label>
@@ -2057,7 +2057,7 @@
   <span class="md-ellipsis">
     
   
-    RNAseq을 위한 Nextflow
+    RNAseq
   
 
     
@@ -2085,7 +2085,7 @@
   <span class="md-ellipsis">
     
   
-    오리엔테이션
+    시작하기
   
 
     
@@ -2113,7 +2113,7 @@
   <span class="md-ellipsis">
     
   
-    파트 1: 방법 개요 및 수동 테스트
+    파트 1: 방법 개요
   
 
     
@@ -2197,7 +2197,7 @@
   <span class="md-ellipsis">
     
   
-    다음 단계
+    과정 요약
   
 
     
@@ -2272,7 +2272,7 @@
   <span class="md-ellipsis">
     
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
     
@@ -2288,7 +2288,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
           </label>
@@ -2308,7 +2308,7 @@
   <span class="md-ellipsis">
     
   
-    이미징을 위한 Nextflow 실행
+    이미징
   
 
     
@@ -3688,30 +3688,28 @@
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── data</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">│   ├── bam</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="go">│   ├── ref</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   ├── sample_bams.txt</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">│   └── samplesheet.csv</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── genomics.nf</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">├── modules</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">│   ├── gatk_haplotypecaller.nf</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="go">│   └── samplesheet.csv</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="go">├── genomics.nf</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="go">├── modules</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="go">│   ├── gatk_haplotypecaller.nf</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="go">│   ├── gatk_jointgenotyping.nf</span>
 <a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="go">│   └── samtools_index.nf</span>
 <a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="go">├── nextflow.config</span>
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="go">└── solutions</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    ├── modules</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="go">    ├── nf-test.config</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="go">    ├── part2</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="go">    └── tests</span>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="go">8 directories, 8 files</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="go">    ├── part2</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="go">    └── part3</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="go">7 directories, 6 files</span>
 </code></pre></div>
 </details>
 <p>색상이 있는 상자를 클릭하여 섹션을 확장하고 내용을 확인하십시오.
 이와 같은 접을 수 있는 섹션을 사용하여 예상되는 명령 출력과 디렉토리 및 파일 내용을 간결한 방식으로 표시합니다.</p>
 <ul>
 <li>
-<p><strong><code>genomics.nf</code> 파일</strong>은 과정을 진행하면서 구축할 워크플로우 스크립트입니다.</p>
+<p><strong><code>genomics.nf</code> 파일</strong>은 과정을 진행하면서 구축할 워크플로우 스크립트의 기본 틀입니다.</p>
 </li>
 <li>
-<p><strong><code>modules</code> 디렉토리</strong>에는 과정 중에 채워 넣을 스켈레톤 모듈 파일이 포함되어 있습니다.</p>
+<p><strong><code>modules</code> 디렉토리</strong>에는 과정 중에 채워 넣을 프로세스 모듈의 기본 틀이 포함되어 있습니다.</p>
 </li>
 <li>
 <p><strong><code>nextflow.config</code> 파일</strong>은 최소한의 환경 속성을 설정하는 구성 파일입니다.
@@ -3721,8 +3719,9 @@
 <p><strong><code>data</code> 디렉토리</strong>에는 과정 후반부에 설명될 입력 데이터와 관련 리소스가 포함되어 있습니다.</p>
 </li>
 <li>
-<p><strong><code>solutions</code> 디렉토리</strong>에는 완성된 모듈 파일과 Part 3의 시작점으로 사용할 수 있는 Part 2 해결책이 포함되어 있습니다.
-  이는 작업을 확인하고 문제를 해결하기 위한 참조 자료로 사용됩니다.</p>
+<p><strong><code>solutions</code> 디렉토리</strong>에는 과정의 각 단계에서 완성되는 워크플로우 스크립트와 모듈이 포함되어 있습니다.
+  이는 작업을 확인하고 문제를 해결하기 위한 참조 자료로 사용됩니다.
+  Part 2 해결책은 Part 3의 시작점으로 사용할 수 있습니다.</p>
 </li>
 </ul>
 <h2 id="_8">준비 확인 목록<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -3733,7 +3732,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox"/><span class="task-list-indicator"></span></label> 작업 디렉토리를 적절하게 설정했습니다</li>
 </ul>
 <p>모든 항목을 확인할 수 있다면 시작할 준비가 된 것입니다.</p>
-<p><strong><a href="../01_method/">Part 1: 방법 개요 및 수동 테스트</a>로 계속 진행하려면 이 페이지 오른쪽 하단의 화살표를 클릭하십시오.</strong></p><style type="text/css">.quiz {
+<p><strong><a href="../01_method/">Part 1: 방법 개요</a>로 계속 진행하려면 이 페이지 오른쪽 하단의 화살표를 클릭하십시오.</strong></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -5283,7 +5282,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="이전: Nextflow for Genomics">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="이전: 유전체학">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -5293,20 +5292,20 @@ window.mkdocsQuizConfig = {
                 이전
               </span>
               <div class="md-ellipsis">
-                Nextflow for Genomics
+                유전체학
               </div>
             </div>
           </a>
         
         
           
-          <a href="../01_method/" class="md-footer__link md-footer__link--next" aria-label="다음: 파트 1: 방법론 개요 및 수동 테스트">
+          <a href="../01_method/" class="md-footer__link md-footer__link--next" aria-label="다음: 파트 1: 방법론 개요">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                파트 1: 방법론 개요 및 수동 테스트
+                파트 1: 방법론 개요
               </div>
             </div>
             <div class="md-footer__button md-icon">
