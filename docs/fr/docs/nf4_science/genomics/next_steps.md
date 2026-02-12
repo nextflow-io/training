@@ -13,7 +13,7 @@ Ensuite, vous avez construit un pipeline Nextflow pour un seul échantillon afin
 
 - Un pipeline d'appel de variants qui prend des fichiers BAM en entrée et produit des VCF appelés conjointement en sortie.
 - Trois processus (`SAMTOOLS_INDEX`, `GATK_HAPLOTYPECALLER` et `GATK_JOINTGENOTYPING`) stockés dans des fichiers de modules séparés.
-- Le pipeline s'adapte automatiquement à n'importe quel nombre d'échantillons en entrée grâce au paradigme de flux de données de Nextflow.
+- Le pipeline parallélise automatiquement le traitement des échantillons en entrée grâce au paradigme de flux de données de Nextflow.
 - Les résultats sont publiés dans un répertoire appelé `results/`.
 
 ### Compétences acquises

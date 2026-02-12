@@ -13,7 +13,7 @@ Poi avete costruito una pipeline Nextflow per un singolo campione per automatizz
 
 - Una pipeline di variant calling che prende file BAM come input e produce VCF joint-called come output.
 - Tre processi (`SAMTOOLS_INDEX`, `GATK_HAPLOTYPECALLER` e `GATK_JOINTGENOTYPING`) memorizzati in file modulo separati.
-- La pipeline scala automaticamente per qualsiasi numero di campioni di input utilizzando il paradigma dataflow di Nextflow.
+- La pipeline parallelizza automaticamente l'elaborazione dei campioni di input utilizzando il paradigma dataflow di Nextflow.
 - I risultati vengono pubblicati in una directory chiamata `results/`.
 
 ### Competenze acquisite

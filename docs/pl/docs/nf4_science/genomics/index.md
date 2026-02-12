@@ -1,5 +1,5 @@
 ---
-title: Nextflow dla genomiki
+title: Genomika
 hide:
   - toc
 page_type: index_page

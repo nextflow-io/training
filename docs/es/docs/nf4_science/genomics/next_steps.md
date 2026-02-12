@@ -13,7 +13,7 @@ Luego construiste un pipeline de Nextflow para una sola muestra para automatizar
 
 - Un pipeline de llamado de variantes que toma archivos BAM como entrada y produce VCFs con llamado conjunto como salida.
 - Tres procesos (`SAMTOOLS_INDEX`, `GATK_HAPLOTYPECALLER` y `GATK_JOINTGENOTYPING`) almacenados en archivos de módulo separados.
-- El pipeline escala automáticamente a cualquier número de muestras de entrada usando el paradigma de flujo de datos de Nextflow.
+- El pipeline paraleliza automáticamente el procesamiento de muestras de entrada usando el paradigma de flujo de datos de Nextflow.
 - Los resultados se publican en un directorio llamado `results/`.
 
 ### Habilidades adquiridas

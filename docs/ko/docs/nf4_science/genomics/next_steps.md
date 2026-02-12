@@ -13,7 +13,7 @@ Nextflow for Genomics 교육 과정을 완료하신 것을 축하합니다! 🎉
 
 - BAM 파일을 입력으로 받아 공동 호출된 VCF를 출력으로 생성하는 변이 호출 파이프라인.
 - 별도의 모듈 파일에 저장된 세 개의 프로세스(`SAMTOOLS_INDEX`, `GATK_HAPLOTYPECALLER`, `GATK_JOINTGENOTYPING`).
-- Nextflow의 데이터플로우 패러다임을 사용하여 입력 샘플 수에 관계없이 자동으로 확장되는 파이프라인.
+- Nextflow의 데이터플로우 패러다임을 사용하여 입력 샘플 처리를 자동으로 병렬화하는 파이프라인.
 - `results/` 디렉토리에 게시되는 결과.
 
 ### 습득한 기술

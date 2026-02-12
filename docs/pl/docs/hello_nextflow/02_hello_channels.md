@@ -922,7 +922,7 @@ Definiujemy tymczasową zmienną dla wewnętrznej wartości, tutaj nazwaną `gre
 W tym przykładzie `$greeting` reprezentuje każdy pojedynczy element załadowany do kanału.
 To spowoduje ładnie oznaczone wyjście konsoli.
 
-!!! info "Informacja"
+!!! info "Info"
 
     W niektórych pipeline'ach możesz zobaczyć specjalną zmienną o nazwie `$it` używaną wewnątrz closures operatorów.
     Jest to _niejawna_ zmienna, która pozwala na skrócony dostęp do wewnętrznej zmiennej bez potrzeby definiowania jej za pomocą `->`.
@@ -1143,7 +1143,7 @@ Przeglądając ponownie listę operatorów, znajdujemy [`splitCsv()`](https://ne
 
 Aby zastosować operator, dodajemy go do linii fabryki kanałów, jak poprzednio.
 
-W bloku workflow wprowadź następującą zmianę kodu, aby zastąpić `flatten()` przez `splitcsv()` (odkomentowane):
+W bloku workflow wprowadź następującą zmianę kodu, aby zastąpić `flatten()` przez `splitCsv()` (odkomentowane):
 
 === "Po"
 

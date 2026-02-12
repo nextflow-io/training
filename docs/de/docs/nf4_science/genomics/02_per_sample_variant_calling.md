@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 In Teil 1 hast du die Samtools- und GATK-Befehle manuell in ihren jeweiligen Containern getestet.
-Jetzt werden wir diese Befehle in einen Nextflow-Workflow einbinden.
+Als Nächstes werden wir diese Befehle in einen Nextflow-Workflow einbinden.
 
 ## Aufgabe
 
@@ -16,14 +16,86 @@ In diesem Teil des Kurses entwickeln wir einen Workflow, der Folgendes tut:
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
-Dies repliziert die Schritte aus Teil 1, wo du diese Befehle manuell in ihren Containern ausgeführt hast.
+Dies automatisiert die Schritte aus dem ersten Abschnitt von [Teil 1: Methodenübersicht](./01_method.md#1-per-sample-variant-calling), wo du diese Befehle manuell in ihren Containern ausgeführt hast.
 
-Als Ausgangspunkt stellen wir dir eine Workflow-Datei `genomics.nf` zur Verfügung, die die Hauptteile des Workflows skizziert, sowie zwei Moduldateien, samtools_index.nf und gatk_haplotypecaller.nf, die die Struktur der Module umreißen.
+Als Ausgangspunkt stellen wir dir eine Workflow-Datei `genomics.nf` zur Verfügung, die die Hauptteile des Workflows skizziert, sowie zwei Moduldateien, `samtools_index.nf` und `gatk_haplotypecaller.nf`, die die Struktur jedes Prozesses umreißen.
+
+??? full-code "Gerüstdateien"
+
+    ```groovy title="genomics.nf"
+    #!/usr/bin/env nextflow
+
+    // Module INCLUDE statements
+
+    /*
+     * Pipeline parameters
+     */
+
+    // Primary input
+
+    workflow {
+
+        main:
+        // Create input channel
+
+        // Call processes
+
+        publish:
+        // Declare outputs to publish
+    }
+
+    output {
+        // Configure publish targets
+    }
+    ```
+
+    ```groovy title="modules/samtools_index.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Generate BAM index file
+     */
+    process SAMTOOLS_INDEX {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
+    ```groovy title="modules/gatk_haplotypecaller.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Call variants with GATK HaplotypeCaller
+     */
+    process GATK_HAPLOTYPECALLER {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
 Diese Dateien sind nicht funktionsfähig; ihr Zweck ist es lediglich, als Gerüst zu dienen, das du mit den interessanten Teilen des Codes ausfüllen kannst.
 
 ## Lernplan
 
-Um den Entwicklungsprozess lehrreicher zu gestalten, haben wir dies in vier Schritte unterteilt:
+Um den Entwicklungsprozess lehrreicher zu gestalten, haben wir dies in vier Stufen unterteilt:
 
 1. **Einen einstufigen Workflow schreiben, der Samtools index auf eine BAM-Datei anwendet.**
    Dies umfasst das Erstellen eines Moduls, das Importieren und Aufrufen im Workflow.
@@ -34,13 +106,18 @@ Um den Entwicklungsprozess lehrreicher zu gestalten, haben wir dies in vier Schr
 4. **Den Workflow so anpassen, dass er eine Textdatei mit einem Batch von Eingabedateien akzeptiert.**
    Dies demonstriert ein gängiges Muster zur Bereitstellung von Eingaben in großen Mengen.
 
-Jeder Schritt konzentriert sich auf einen spezifischen Aspekt der Workflow-Entwicklung.
+Jede Stufe konzentriert sich auf einen spezifischen Aspekt der Workflow-Entwicklung.
+
+!!! tip "Tipp"
+
+     Stelle sicher, dass du im richtigen Arbeitsverzeichnis bist:
+     `cd /workspaces/training/nf4-science/genomics`
 
 ---
 
 ## 1. Einen einstufigen Workflow schreiben, der Samtools index auf eine BAM-Datei anwendet
 
-Dieser erste Schritt konzentriert sich auf die Grundlagen: Laden einer BAM-Datei und Generieren eines Index dafür.
+Diese erste Stufe konzentriert sich auf die Grundlagen: Laden einer BAM-Datei und Generieren eines Index dafür.
 
 Erinnere dich an den `samtools index`-Befehl aus [Teil 1](01_method.md):
 
@@ -63,7 +140,7 @@ Wir müssen einen Eingabeparameter deklarieren, ein Testprofil erstellen, um ein
 
 #### 1.1.1. Eine Eingabeparameterdeklaration hinzufügen
 
-In der Haupt-Workflow-Datei `genomics.nf` deklariere unter dem Abschnitt `Pipeline parameters` einen CLI-Parameter namens `reads_bam`.
+In der Haupt-Workflow-Datei `genomics.nf` deklariere unter dem Abschnitt `Pipeline parameters` einen CLI-Parameter namens `input`.
 
 === "Danach"
 
@@ -73,7 +150,7 @@ In der Haupt-Workflow-Datei `genomics.nf` deklariere unter dem Abschnitt `Pipeli
      */
     params {
         // Primary input
-        reads_bam: Path
+        input: Path
     }
     ```
 
@@ -95,7 +172,7 @@ Es gibt mehrere Optionen, um einen Standardwert bereitzustellen; hier verwenden 
 Ein Testprofil bietet praktische Standardwerte zum Ausprobieren eines Workflows, ohne Eingaben auf der Kommandozeile anzugeben.
 Dies ist eine gängige Konvention im Nextflow-Ökosystem (siehe [Hello Config](../../hello_nextflow/06_hello_config.md) für weitere Details).
 
-Füge einen `profiles`-Block zu `nextflow.config` mit einem `test`-Profil hinzu, das den Parameter `reads_bam` auf eine der Test-BAM-Dateien setzt.
+Füge einen `profiles`-Block zu `nextflow.config` mit einem `test`-Profil hinzu, das den Parameter `input` auf eine der Test-BAM-Dateien setzt.
 
 === "Danach"
 
@@ -104,7 +181,7 @@ Füge einen `profiles`-Block zu `nextflow.config` mit einem `test`-Profil hinzu,
 
     profiles {
         test {
-            params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+            params.input = "${projectDir}/data/bam/reads_mother.bam"
         }
     }
     ```
@@ -129,7 +206,7 @@ Erstelle im Workflow-Block einen Eingabekanal aus dem Parameterwert mit der `.fr
 
         main:
         // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
     ```
 
 === "Vorher"
@@ -141,7 +218,7 @@ Erstelle im Workflow-Block einen Eingabekanal aus dem Parameterwert mit der `.fr
         // Create input channel
     ```
 
-Jetzt müssen wir den Prozess erstellen, um die Indizierung auf diese Eingabe anzuwenden.
+Als Nächstes müssen wir den Prozess erstellen, um die Indizierung auf diese Eingabe anzuwenden.
 
 ### 1.2. Den Indizierungsprozess schreiben und im Workflow aufrufen
 
@@ -235,7 +312,7 @@ Fügen wir nun einen Aufruf von `SAMTOOLS_INDEX` im Workflow-Block hinzu und üb
 
         main:
         // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
 
         // Indexdatei für Eingabe-BAM-Datei erstellen
         SAMTOOLS_INDEX(reads_ch)
@@ -248,7 +325,7 @@ Fügen wir nun einen Aufruf von `SAMTOOLS_INDEX` im Workflow-Block hinzu und üb
 
         main:
         // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
 
         // Call processes
     ```
@@ -281,7 +358,7 @@ Weise die Ausgabe von `SAMTOOLS_INDEX` einem benannten Ziel namens `bam_index` z
     }
     ```
 
-Jetzt müssen wir Nextflow mitteilen, wohin die veröffentlichte Ausgabe gelegt werden soll.
+Als Nächstes müssen wir Nextflow mitteilen, wohin die veröffentlichte Ausgabe gelegt werden soll.
 
 #### 1.3.2. Das Ausgabeziel im Block `output {}` konfigurieren
 
@@ -401,7 +478,7 @@ Da unser neuer Prozess eine Handvoll zusätzlicher Dateien erwartet, füge Param
     ```groovy title="genomics.nf" linenums="9" hl_lines="5-9"
     params {
         // Primary input
-        reads_bam: Path
+        input: Path
 
         // Hilfsdateien
         reference: Path
@@ -416,21 +493,21 @@ Da unser neuer Prozess eine Handvoll zusätzlicher Dateien erwartet, füge Param
     ```groovy title="genomics.nf" linenums="9"
     params {
         // Primary input
-        reads_bam: Path
+        input: Path
     }
     ```
 
-Wie zuvor stellen wir Standardwerte über das Testprofil bereit, anstatt sie inline anzugeben.
+Wie zuvor werden wir Standardwerte über das Testprofil bereitstellen, anstatt sie inline anzugeben.
 
 #### 2.1.2. Standardwerte für Hilfsdateien zum Testprofil hinzufügen
 
-Genau wie wir es für `reads_bam` in Abschnitt 1.1.2 getan haben, füge Standardwerte für die Hilfsdateien zum Testprofil in `nextflow.config` hinzu:
+Genau wie wir es für `input` in Abschnitt 1.1.2 getan haben, füge Standardwerte für die Hilfsdateien zum Testprofil in `nextflow.config` hinzu:
 
 === "Danach"
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="3-6"
     test {
-        params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+        params.input = "${projectDir}/data/bam/reads_mother.bam"
         params.reference = "${projectDir}/data/ref/ref.fasta"
         params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
         params.reference_dict = "${projectDir}/data/ref/ref.dict"
@@ -442,11 +519,11 @@ Genau wie wir es für `reads_bam` in Abschnitt 1.1.2 getan haben, füge Standard
 
     ```groovy title="nextflow.config" linenums="4"
     test {
-        params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+        params.input = "${projectDir}/data/bam/reads_mother.bam"
     }
     ```
 
-Jetzt müssen wir Variablen erstellen, die diese Dateipfade zur Verwendung im Workflow laden.
+Als Nächstes müssen wir Variablen erstellen, die diese Dateipfade zur Verwendung im Workflow laden.
 
 #### 2.1.3. Variablen für die Hilfsdateien erstellen
 
@@ -459,7 +536,7 @@ Füge Variablen für die Hilfsdateipfade innerhalb des Workflow-Blocks hinzu:
 
         main:
         // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
 
         // Dateipfade für die Hilfsdateien laden (Referenz und Intervalle)
         ref_file        = file(params.reference)
@@ -478,7 +555,7 @@ Füge Variablen für die Hilfsdateipfade innerhalb des Workflow-Blocks hinzu:
 
         main:
         // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
 
         // Indexdatei für Eingabe-BAM-Datei erstellen
         SAMTOOLS_INDEX(reads_ch)
@@ -647,7 +724,7 @@ Füge die VCF- und Index-Ausgaben zum Abschnitt `publish:` hinzu:
     }
     ```
 
-Jetzt müssen wir Nextflow mitteilen, wohin die neuen Ausgaben gelegt werden sollen.
+Als Nächstes müssen wir Nextflow mitteilen, wohin die neuen Ausgaben gelegt werden sollen.
 
 #### 2.3.2. Die neuen Ausgabeziele konfigurieren
 
@@ -759,14 +836,14 @@ Kommentiere zuerst die Typannotation in der Parameterdeklaration aus, da Arrays 
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
         // Primäre Eingabe (Array von drei Proben)
-        reads_bam //: Path
+        input //: Path
     ```
 
 === "Vorher"
 
     ```groovy title="genomics.nf" linenums="10"
         // Primary input
-        reads_bam: Path
+        input: Path
     ```
 
 Aktualisiere dann das Testprofil, um alle drei Proben aufzulisten:
@@ -775,7 +852,7 @@ Aktualisiere dann das Testprofil, um alle drei Proben aufzulisten:
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="2-6"
     test {
-        params.reads_bam = [
+        params.input = [
             "${projectDir}/data/bam/reads_mother.bam",
             "${projectDir}/data/bam/reads_father.bam",
             "${projectDir}/data/bam/reads_son.bam"
@@ -791,7 +868,7 @@ Aktualisiere dann das Testprofil, um alle drei Proben aufzulisten:
 
     ```groovy title="nextflow.config" linenums="4"
     test {
-        params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+        params.input = "${projectDir}/data/bam/reads_mother.bam"
         params.reference = "${projectDir}/data/ref/ref.fasta"
         params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
         params.reference_dict = "${projectDir}/data/ref/ref.dict"
@@ -893,7 +970,7 @@ Füge diese beiden Zeilen im Workflow-Body vor dem `GATK_HAPLOTYPECALLER`-Prozes
 
 === "Danach"
 
-    ```groovy title="genomics.nf" hl_lines="3-5"
+    ```groovy title="genomics.nf" linenums="36" hl_lines="3-5"
         SAMTOOLS_INDEX(reads_ch)
 
         // temporäre Diagnose
@@ -906,7 +983,7 @@ Füge diese beiden Zeilen im Workflow-Body vor dem `GATK_HAPLOTYPECALLER`-Prozes
 
 === "Vorher"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="36"
         SAMTOOLS_INDEX(reads_ch)
 
         // Varianten aus der indizierten BAM-Datei aufrufen
@@ -999,7 +1076,7 @@ Aktualisiere `modules/gatk_haplotypecaller.nf`:
         path input_bam_index
     ```
 
-Jetzt müssen wir den Workflow aktualisieren, um die neue Tupelstruktur im Prozessaufruf und den Publish-Zielen widerzuspiegeln.
+Als Nächstes müssen wir den Workflow aktualisieren, um die neue Tupelstruktur im Prozessaufruf und den Publish-Zielen widerzuspiegeln.
 
 #### 3.4.3. Den Aufruf von GATK_HAPLOTYPECALLER im Workflow aktualisieren
 
@@ -1132,33 +1209,34 @@ Mache es einfacher, Proben in großen Mengen zu handhaben.
 
 ---
 
-## 4. Den Workflow so anpassen, dass er eine Textdatei mit einem Batch von Eingabedateien akzeptiert
+## 4. Den Workflow so anpassen, dass er eine CSV-Datei mit einem Batch von Eingabedateien akzeptiert
 
 Eine sehr gängige Methode, um mehrere Dateneingabedateien für einen Workflow bereitzustellen, ist dies mit einer Textdatei zu tun, die die Dateipfade enthält.
 Es kann so einfach sein wie eine Textdatei, die einen Dateipfad pro Zeile auflistet und sonst nichts, oder die Datei kann zusätzliche Metadaten enthalten, in diesem Fall wird sie oft als Samplesheet bezeichnet.
 
 Hier zeigen wir dir, wie du den einfachen Fall machst.
 
-### 4.1. Die bereitgestellte Textdatei mit den Eingabedateipfaden untersuchen
+### 4.1. Die bereitgestellte CSV-Datei mit den Eingabedateipfaden untersuchen
 
-Wir haben bereits eine Textdatei erstellt, die die Eingabedateipfade auflistet, genannt `sample_bams.txt`, die du im Verzeichnis `data/` findest.
+Wir haben bereits eine CSV-Datei erstellt, die die Eingabedateipfade auflistet, genannt `samplesheet.csv`, die du im Verzeichnis `data/` findest.
 
-```txt title="sample_bams.txt"
-/workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
-/workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
-/workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
+```txt title="samplesheet.csv"
+sample_id,reads_bam
+NA12878,/workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
+NA12877,/workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
+NA12882,/workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
 ```
 
-Wie du sehen kannst, haben wir einen Dateipfad pro Zeile aufgelistet, und es sind absolute Pfade.
+Diese CSV-Datei enthält eine Kopfzeile, die die Spalten benennt.
 
-!!! note "Hinweis"
+!!! warning "Warnung"
 
-    Die Dateien, die wir hier verwenden, befinden sich nur auf dem lokalen Dateisystem deines GitHub Codespaces, aber wir könnten auch auf Dateien im Cloud-Speicher zeigen.
-    Wenn du nicht die bereitgestellte Codespaces-Umgebung verwendest, musst du möglicherweise die Dateipfade an dein lokales Setup anpassen.
+    Die Dateipfade in der CSV sind absolute Pfade, die zu deiner Umgebung passen müssen.
+    Wenn du dies nicht in der von uns bereitgestellten Trainingsumgebung ausführst, musst du die Pfade an dein System anpassen.
 
 ### 4.2. Den Parameter und das Testprofil aktualisieren
 
-Ändere den Parameter `reads_bam` so, dass er auf die Datei `sample_bams.txt` zeigt, anstatt einzelne Proben aufzulisten.
+Ändere den Parameter `input` so, dass er auf die Datei `samplesheet.csv` zeigt, anstatt einzelne Proben aufzulisten.
 
 Stelle die Typannotation im params-Block wieder her (da es wieder ein einzelner Pfad ist):
 
@@ -1166,14 +1244,14 @@ Stelle die Typannotation im params-Block wieder her (da es wieder ein einzelner 
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
         // Primäre Eingabe (Datei mit Eingabedateien, eine pro Zeile)
-        reads_bam: Path
+        input: Path
     ```
 
 === "Vorher"
 
     ```groovy title="genomics.nf" linenums="10"
         // Primäre Eingabe (Array von drei Proben)
-        reads_bam
+        input
     ```
 
 Aktualisiere dann das Testprofil, um auf die Textdatei zu zeigen:
@@ -1182,7 +1260,7 @@ Aktualisiere dann das Testprofil, um auf die Textdatei zu zeigen:
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="2"
     test {
-        params.reads_bam = "${projectDir}/data/sample_bams.txt"
+        params.input = "${projectDir}/data/samplesheet.csv"
         params.reference = "${projectDir}/data/ref/ref.fasta"
         params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
         params.reference_dict = "${projectDir}/data/ref/ref.dict"
@@ -1194,7 +1272,7 @@ Aktualisiere dann das Testprofil, um auf die Textdatei zu zeigen:
 
     ```groovy title="nextflow.config" linenums="4"
     test {
-        params.reads_bam = [
+        params.input = [
             "${projectDir}/data/bam/reads_mother.bam",
             "${projectDir}/data/bam/reads_father.bam",
             "${projectDir}/data/bam/reads_son.bam"
@@ -1208,31 +1286,31 @@ Aktualisiere dann das Testprofil, um auf die Textdatei zu zeigen:
 
 Die Liste der Dateien lebt nicht mehr im Code, was ein großer Schritt in die richtige Richtung ist.
 
-### 4.3. Die Kanal-Factory aktualisieren, um Zeilen aus einer Datei zu lesen
+### 4.3. Die Kanal-Factory aktualisieren, um CSV-Eingaben zu parsen
 
 Derzeit behandelt unsere Eingabekanal-Factory alle Dateien, die wir ihr geben, als die Dateneingaben, die wir dem Indizierungsprozess zuführen möchten.
 Da wir ihr jetzt eine Datei geben, die Eingabedateipfade auflistet, müssen wir ihr Verhalten ändern, um die Datei zu parsen und die darin enthaltenen Dateipfade als Dateneingaben zu behandeln.
 
-Wir können dies mit demselben Muster tun, das wir in [Teil 2 von Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file) verwendet haben: Anwenden des Operators [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), um die Datei zu parsen, dann eine `map`-Operation, um das erste Feld jeder Zeile auszuwählen.
+Wir können dies mit demselben Muster tun, das wir in [Teil 2 von Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file) verwendet haben: Anwenden des Operators [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv), um die Datei zu parsen, dann eine `map`-Operation, um den Dateipfad aus jeder Zeile zu extrahieren.
 
 === "Danach"
 
     ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
         // Eingabekanal aus einer CSV-Datei erstellen, die Eingabedateipfade auflistet
-        reads_ch = Channel.fromPath(params.reads_bam)
-                .splitCsv()
-                .map { line -> file(line[0]) }
+        reads_ch = channel.fromPath(params.input)
+                .splitCsv(header: true)
+                .map { row -> file(row.reads_bam) }
     ```
 
 === "Vorher"
 
     ```groovy title="genomics.nf" linenums="24"
         // Eingabekanal erstellen (einzelne Datei über CLI-Parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
     ```
 
-Technisch könnten wir dies einfacher mit dem Operator [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) tun, da unsere Eingabedatei derzeit nur Dateipfade enthält.
-Durch die Verwendung des vielseitigeren `splitCsv`-Operators (ergänzt durch `map`) können wir unseren Workflow jedoch zukunftssicher machen, falls wir uns entscheiden, Metadaten zur Datei mit Dateipfaden hinzuzufügen.
+Eine Sache, die neu ist im Vergleich zu dem, was du im Hello Nextflow-Kurs kennengelernt hast, ist, dass diese CSV eine Kopfzeile hat, also fügen wir `#!groovy header: true` zum `splitCsv()`-Aufruf hinzu.
+Das ermöglicht es uns, Spalten in der `map`-Operation nach Namen zu referenzieren: `#!groovy row.reads_bam` extrahiert den Dateipfad aus der Spalte `reads_bam` jeder Zeile.
 
 !!! tip "Tipp"
 
@@ -1240,10 +1318,10 @@ Durch die Verwendung des vielseitigeren `splitCsv`-Operators (ergänzt durch `ma
 
 ### 4.4. Den Workflow ausführen
 
-Führe den Workflow noch einmal aus. Dies sollte dasselbe Ergebnis wie zuvor liefern, oder?
+Führe den Workflow noch einmal aus.
 
 ```bash
-nextflow run genomics.nf -profile test -resume
+nextflow run genomics.nf -profile test
 ```
 
 ??? success "Befehlsausgabe"
@@ -1253,13 +1331,12 @@ nextflow run genomics.nf -profile test -resume
 
     ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 
-    [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
-    [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
+    executor >  local (6)
+    [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+    [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3 ✔
     ```
 
-Ja! Tatsächlich erkennt Nextflow korrekt, dass die Prozessaufrufe genau gleich sind, und macht sich nicht einmal die Mühe, alles erneut auszuführen, da wir mit `-resume` liefen.
-
-Und das war's! Unser einfacher Variantenerkennungs-Workflow hat alle grundlegenden Funktionen, die wir wollten.
+Dies sollte dasselbe Ergebnis wie zuvor liefern. Unser einfacher Variantenerkennungs-Workflow hat jetzt alle grundlegenden Funktionen, die wir wollten.
 
 ### Fazit
 
@@ -1269,6 +1346,6 @@ Allgemeiner hast du gelernt, wie man wesentliche Nextflow-Komponenten und -Logik
 
 ### Wie geht es weiter?
 
-Feiere deinen Erfolg und mache eine extra lange Pause!
+Mache eine Pause! Das war eine Menge.
 
-Im nächsten Teil dieses Kurses lernst du, wie du diesen einfachen Variantenerkennungs-Workflow pro Probe transformierst, um gemeinsame Variantenerkennung auf die Daten anzuwenden.
+Wenn du dich erfrischt fühlst, gehe weiter zu [Teil 3](./03_joint_calling.md), wo du lernst, wie du diesen einfachen Variantenerkennungs-Workflow pro Probe transformierst, um gemeinsame Variantenerkennung auf die Daten anzuwenden.

@@ -1,46 +1,55 @@
 ---
-title: Nextflow per RNAseq
+title: RNAseq
 hide:
   - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Scrivere un flusso di lavoro lineare per applicare metodi di elaborazione e QC di base per RNAseq
+    - Gestire appropriatamente file specifici del dominio come FASTQ e risorse di genomi di riferimento
+    - Gestire dati di sequenziamento single-end e paired-end
+    - Sfruttare il paradigma dataflow di Nextflow per parallelizzare l'elaborazione RNAseq per campione
+    - Aggregare report di QC attraverso più fasi e campioni utilizzando operatori di canale rilevanti
+  audience_prerequisites:
+    - "**Pubblico:** Questo corso è progettato per ricercatori in trascrittomica e campi correlati che desiderano sviluppare o personalizzare pipeline di analisi dati."
+    - "**Competenze:** Si presuppone una certa familiarità con la riga di comando, concetti di scripting di base e formati di file RNAseq comuni."
+    - "**Prerequisiti:** Concetti e strumenti fondamentali di Nextflow trattati in [Hello Nextflow](../../hello_nextflow/)."
 ---
 
 # Nextflow per RNAseq
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Questo corso di formazione è destinato a ricercatori in trascrittomica e campi correlati interessati allo sviluppo o alla personalizzazione di pipeline di analisi dati.
-Si basa sulla formazione per principianti [Hello Nextflow](../../hello_nextflow/) e dimostra come utilizzare Nextflow nel contesto specifico dell'analisi RNAseq bulk.
+**Un corso pratico che applica Nextflow a un caso d'uso reale di trascrittomica: elaborazione di RNAseq bulk con Trim Galore, HISAT2 e FastQC.**
 
-In particolare, questo corso dimostra come implementare una semplice pipeline di elaborazione RNAseq bulk per rimuovere le sequenze adattatrici, allineare le letture a un genoma di riferimento ed eseguire il controllo qualità (QC) in diverse fasi.
+Questo corso si basa sulla formazione per principianti [Hello Nextflow](../../hello_nextflow/) e dimostra come utilizzare Nextflow nel contesto specifico dell'analisi RNAseq bulk.
+Implementerete una pipeline di elaborazione che rimuove le sequenze adattatrici, allinea le letture a un genoma di riferimento ed esegue il controllo qualità (QC) in diverse fasi.
 
-Cominciamo! Clicchi sul pulsante "Open in GitHub Codespaces" qui sotto per avviare l'ambiente di formazione (preferibilmente in una scheda separata), quindi continui a leggere mentre si carica.
+<!-- additional_information -->
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+## Panoramica del corso
 
-## Obiettivi di apprendimento
+Questo corso è pratico, con esercizi orientati agli obiettivi strutturati per introdurre le informazioni gradualmente.
 
-Seguendo questo corso, imparerà ad applicare i concetti e gli strumenti fondamentali di Nextflow a un caso d'uso tipico di RNAseq.
+Inizierete eseguendo manualmente gli strumenti di elaborazione nel terminale per comprendere la metodologia, quindi costruirete progressivamente una pipeline Nextflow che automatizza e scala l'analisi.
 
-Al termine di questo workshop sarà in grado di:
+### Piano delle lezioni
 
-- Scrivere un workflow lineare per applicare metodi di elaborazione e QC di base per RNAseq
-- Gestire appropriatamente file specifici del dominio come FASTQ e risorse di genomi di riferimento
-- Gestire dati di sequenziamento single-end e paired-end
-- Sfruttare il paradigma dataflow di Nextflow per parallelizzare l'elaborazione RNAseq per campione
-- Aggregare report di QC attraverso più fasi e campioni utilizzando operatori di canale appropriati
+Abbiamo suddiviso il corso in tre parti che si concentrano ciascuna su aspetti specifici dell'applicazione di Nextflow a un caso d'uso RNAseq.
 
-<!-- TODO
-- Configure pipeline execution and manage and optimize resource allocations
-- Implement per-step and end-to-end pipeline tests that handle RNAseq-specific idiosyncrasies appropriately
--->
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+| Capitolo del corso                                                         | Riepilogo                                                                                                                   | Durata stimata |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| [Parte 1: Panoramica del metodo](./01_method.md)                           | Comprensione della metodologia di elaborazione RNAseq ed esecuzione manuale degli strumenti                                 | 30 minuti      |
+| [Parte 2: Implementazione per singolo campione](./02_single-sample.md)     | Costruzione di una pipeline che elabora, allinea e controlla la qualità di un singolo campione, quindi scala a più campioni | 60 minuti      |
+| [Parte 3: Implementazione multi-campione paired-end](./03_multi-sample.md) | Estensione della pipeline per gestire dati paired-end e aggregare report di QC attraverso i campioni                        | 45 minuti      |
 
-## Prerequisiti
+Al termine di questo corso, sarete in grado di applicare concetti e strumenti fondamentali di Nextflow a un caso d'uso tipico di RNAseq.
 
-Il corso presuppone una minima familiarità con quanto segue:
+Pronti per iniziare il corso?
 
-- Strumenti e formati di file comunemente utilizzati in questo dominio scientifico
-- Esperienza con la riga di comando
-- Concetti e strumenti fondamentali di Nextflow trattati nella formazione per principianti [Hello Nextflow](../../hello_nextflow/)
+[Inizia :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
 
-Per i requisiti tecnici e la configurazione dell'ambiente, consulti il mini-corso [Configurazione dell'Ambiente](../../envsetup/).
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>

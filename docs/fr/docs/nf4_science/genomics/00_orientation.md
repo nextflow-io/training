@@ -45,7 +45,7 @@ Vous pouvez configurer VSCode pour qu'il se concentre sur ce répertoire, de sor
 code .
 ```
 
-!!! tip
+!!! tip "Astuce"
 
     Si pour une raison quelconque vous sortez de ce répertoire (par exemple si votre codespace se met en veille), vous pouvez toujours utiliser le chemin complet pour y revenir, en supposant que vous travaillez dans l'environnement de formation Github Codespaces :
 
@@ -75,36 +75,35 @@ tree . -L 2
     ├── data
     │   ├── bam
     │   ├── ref
-    │   ├── sample_bams.txt
     │   └── samplesheet.csv
     ├── genomics.nf
     ├── modules
     │   ├── gatk_haplotypecaller.nf
+    │   ├── gatk_jointgenotyping.nf
     │   └── samtools_index.nf
     ├── nextflow.config
     └── solutions
-        ├── modules
-        ├── nf-test.config
         ├── part2
-        └── tests
+        └── part3
 
-    8 directories, 8 files
+    7 directories, 6 files
     ```
 
 Cliquez sur la boîte colorée pour développer la section et voir son contenu.
 Nous utilisons des sections repliables comme celle-ci pour afficher la sortie de commande attendue ainsi que le contenu des répertoires et des fichiers de manière concise.
 
-- **Le fichier `genomics.nf`** est un script de workflow que vous construirez au fil du cours.
+- **Le fichier `genomics.nf`** est une structure de base pour un script de workflow que vous construirez au fur et à mesure du cours.
 
-- **Le répertoire `modules`** contient des fichiers de modules squelettes que vous remplirez pendant le cours.
+- **Le répertoire `modules`** contient des structures de base pour les modules de processus que vous remplirez pendant le cours.
 
 - **Le fichier `nextflow.config`** est un fichier de configuration qui définit des propriétés minimales de l'environnement.
   Vous pouvez l'ignorer pour l'instant.
 
 - **Le répertoire `data`** contient les données d'entrée et les ressources associées, décrites plus tard dans le cours.
 
-- **Le répertoire `solutions`** contient des fichiers de modules complétés et une solution pour la Partie 2 qui peut servir de point de départ pour la Partie 3.
+- **Le répertoire `solutions`** contient les scripts de workflow et modules complétés qui résultent de chaque étape du cours.
   Ils sont destinés à être utilisés comme référence pour vérifier votre travail et résoudre tout problème.
+  La solution de la Partie 2 peut être utilisée comme point de départ pour la Partie 3.
 
 ## Liste de vérification de préparation
 
@@ -116,4 +115,4 @@ Pensez-vous être prêt·e à vous lancer ?
 
 Si vous pouvez cocher toutes les cases, vous êtes prêt·e à commencer.
 
-**Pour continuer vers [Partie 1 : Aperçu de la méthode et tests manuels](./01_method.md), cliquez sur la flèche dans le coin inférieur droit de cette page.**
+**Pour continuer vers [Partie 1 : Aperçu de la méthode](./01_method.md), cliquez sur la flèche dans le coin inférieur droit de cette page.**

@@ -1,6 +1,6 @@
 # Başlarken
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eğitim ortamını başlatın
 
@@ -75,36 +75,35 @@ tree . -L 2
     ├── data
     │   ├── bam
     │   ├── ref
-    │   ├── sample_bams.txt
     │   └── samplesheet.csv
     ├── genomics.nf
     ├── modules
     │   ├── gatk_haplotypecaller.nf
+    │   ├── gatk_jointgenotyping.nf
     │   └── samtools_index.nf
     ├── nextflow.config
     └── solutions
-        ├── modules
-        ├── nf-test.config
         ├── part2
-        └── tests
+        └── part3
 
-    8 directories, 8 files
+    7 directories, 6 files
     ```
 
 Bölümü genişletmek ve içeriğini görüntülemek için renkli kutuya tıklayın.
 Beklenen komut çıktısını ve ayrıca dizin ve dosya içeriklerini özlü bir şekilde görüntülemek için bu şekilde katlanabilir bölümler kullanıyoruz.
 
-- **`genomics.nf` dosyası**, kurs boyunca oluşturacağınız bir iş akışı betiğidir.
+- **`genomics.nf` dosyası**, kurs boyunca oluşturacağınız bir iş akışı betiği için bir iskelet yapıdır.
 
-- **`modules` dizini**, kurs boyunca dolduracağınız iskelet modül dosyalarını içerir.
+- **`modules` dizini**, kurs boyunca dolduracağınız süreç modülleri için iskelet yapılar içerir.
 
 - **`nextflow.config` dosyası**, minimal ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır.
   Şimdilik bunu göz ardı edebilirsiniz.
 
 - **`data` dizini**, girdi verilerini ve ilgili kaynakları içerir; kursta daha sonra açıklanacaktır.
 
-- **`solutions` dizini**, tamamlanmış modül dosyalarını ve Bölüm 3 için başlangıç noktası olarak hizmet edebilecek bir Bölüm 2 çözümünü içerir.
+- **`solutions` dizini**, kursun her adımından kaynaklanan tamamlanmış iş akışı betiklerini ve modüllerini içerir.
   Bunlar, çalışmanızı kontrol etmek ve sorunları gidermek için referans olarak kullanılması amaçlanmıştır.
+  Bölüm 2 çözümü, Bölüm 3 için başlangıç noktası olarak kullanılabilir.
 
 ## Hazırlık kontrol listesi
 
@@ -116,4 +115,4 @@ Dalışa hazır olduğunuzu mu düşünüyorsunuz?
 
 Tüm kutuları işaretleyebiliyorsanız, hazırsınız.
 
-**[Bölüm 1: Metoda genel bakış ve manuel test](./01_method.md) bölümüne devam etmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**
+**[Bölüm 1: Metoda genel bakış](./01_method.md) bölümüne devam etmek için bu sayfanın sağ alt köşesindeki oka tıklayın.**

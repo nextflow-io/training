@@ -101,6 +101,26 @@ nextflow run 1-hello.nf --input 'Hello World!'
 
 यदि तुम्हारा console आउटपुट कुछ इस तरह दिखता है, तो बधाई हो, तुमने अभी-अभी अपना पहला Nextflow workflow चलाया है!
 
+??? question "यदि यह काम नहीं किया"
+
+    यदि यह इस तरह की error के साथ fail हुआ:
+
+    ```
+    Parameter `input` was specified on the command line or params file but is not declared in the script or config
+
+    -- Check script '1-hello.nf' at line: 23 or see '.nextflow.log' file for more details
+    ```
+
+    तो तुम शायद पुराने v1 Nextflow language parser का उपयोग कर रहे हो।
+    इसका उल्लेख कोर्स की शुरुआत में किया गया था, लेकिन शायद तुमने इसे miss कर दिया।
+    [Nextflow versions](../info/nxf_versions.md) help material देखो।
+
+    संक्षेप में, यदि तुम Nextflow `25.10` का उपयोग कर रहे हो तो तुम्हें v2 language parser enable करना होगा:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 यहां सबसे महत्वपूर्ण आउटपुट अंतिम पंक्ति है, जो ऊपर के आउटपुट में हाइलाइट किया गया है:
 
 ```console
@@ -135,7 +155,7 @@ Hello World!
 डिफ़ॉल्ट रूप से, Nextflow pipeline outputs को तुम्हारे current path में `results` नाम की डायरेक्टरी में save करेगा।
 यह बदलने के लिए कि तुम्हारी फ़ाइलें कहां publish होती हैं, `-output-dir` CLI flag का उपयोग करो (या संक्षेप में `-o`)
 
-!!! danger
+!!! danger "खतरा"
 
     ध्यान दो कि `--input` में दो hyphens हैं और `-output-dir` में एक!
     यह इसलिए है क्योंकि `--input` एक pipeline _parameter_ है और `-output-dir` एक core Nextflow CLI flag है।
@@ -169,7 +189,7 @@ hello_results
 
 तो अब, हम hood के नीचे झांकने जा रहे हैं यह देखने के लिए कि Nextflow ने वास्तव में कहां काम execute किया।
 
-!!! warning "चेतावनी"
+!!! Warning "चेतावनी"
 
     सभी workflows results डायरेक्टरी में outputs publish करने के लिए सेट अप नहीं होंगी, और/या डायरेक्टरी के नाम और संरचना भिन्न हो सकती है।
     इस सेक्शन में थोड़ा आगे, हम तुम्हें दिखाएंगे कि यह व्यवहार कहां निर्दिष्ट है यह कैसे पता करें।
@@ -369,7 +389,7 @@ echo 'Hello World!' > output.txt
 
 तुम्हें `1-hello.nf` script अपनी current डायरेक्टरी में मिलेगी, जो `nextflow-run` होनी चाहिए। इसे editor pane में खोलो।
 
-??? full-code "पूर्ण code फ़ाइल"
+??? full-code "पूर्ण कोड फ़ाइल"
 
     ```groovy title="1-hello.nf" linenums="1"
     #!/usr/bin/env nextflow
@@ -719,7 +739,7 @@ nextflow clean -before backstabbing_swartz -f
 आउटपुट पहले जैसा ही होना चाहिए, लेकिन अब 'Would remove' के बजाय 'Removed' कह रहा है।
 ध्यान दो कि यह two-character subdirectories (जैसे ऊपर `eb/`) को नहीं हटाता लेकिन यह उनकी सामग्री खाली कर देता है।
 
-!!! warning "चेतावनी"
+!!! Warning "चेतावनी"
 
     पिछले runs की work subdirectories delete करने से उन्हें Nextflow के cache से हटा दिया जाता है और उन directories में stored कोई भी outputs delete हो जाते हैं।
     इसका मतलब है कि यह संबंधित processes को फिर से चलाए बिना execution resume करने की Nextflow की क्षमता को तोड़ देता है।
