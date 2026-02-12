@@ -2415,7 +2415,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         ```
         **Fix:** Take the output from the previous process
         ```groovy linenums="88"
-        handleFiles(heavyProcess.out)
+        file_ch = handleFiles(heavy_ch)
         ```
 
         With that, the whole workflow should run.
@@ -2509,18 +2509,15 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 
             heavy_ch = heavyProcess(input_ch.map{it[0]})
 
-            handleFiles(heavyProcess.out)
+            file_ch = handleFiles(heavy_ch)
 
             publish:
-            processed = processFiles.out
-            heavy = heavyProcess.out
-            files = handleFiles.out
+            processed = processed_ch
+            heavy = heavy_ch
+            files = file_ch
         }
 
         output {
-            directory params.output
-            mode 'copy'
-
             processed {
                 path 'processed'
             }

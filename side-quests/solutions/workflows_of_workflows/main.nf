@@ -22,6 +22,10 @@ workflow {
 }
 
 output {
-    directory 'results'
-    mode 'copy'
+    greetings {
+    }
+    upper {
+    }
+    reversed {
+    }
 }

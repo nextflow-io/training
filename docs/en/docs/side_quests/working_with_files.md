@@ -1691,23 +1691,22 @@ In the main workflow, make the following code changes:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="2 20 23 24 27 28 29 30 31"
+    ```groovy title="main.nf" linenums="5" hl_lines="2 5 7 14 17 18 20 21 24 25 26 27 28"
     workflow {
         main:
         // Load files with channel.fromFilePairs
         ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-        ch_files.map { id,  files ->
+        ch_samples = ch_files.map { id,  files ->
            def (sample, replicate, type, readNum) = id.tokenize('_')
-           [
+           tuple(
                [
                    id: sample,
                    replicate: replicate.replace('rep', ''),
                    type: type
                ],
                files
-           ]
+           )
         }
-            .set { ch_samples }
 
         // Run the analysis
         ANALYZE_READS(ch_samples)
@@ -1717,9 +1716,6 @@ In the main workflow, make the following code changes:
     }
 
     output {
-        directory 'results'
-        mode 'copy'
-
         analysis_results {
             path { meta, file -> "${meta.id}" }
         }
@@ -2056,18 +2052,17 @@ Applying these techniques in your own work will enable you to build more efficie
 
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_files.map { id,  files ->
+    ch_samples = ch_files.map { id,  files ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
-        [
+        tuple(
             [
                 id: sample,
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],
-             files
-        ]
+            files
+        )
     }
-        .set { ch_samples }
 
     ANALYZE_READS(ch_samples)
     ```
@@ -2076,9 +2071,6 @@ Applying these techniques in your own work will enable you to build more efficie
 
     ```groovy
     output {
-        directory 'results'
-        mode 'copy'
-
         analysis_results {
             path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
         }

@@ -93,18 +93,15 @@ workflow {
 
     // BUG: Incorrect channel usage
     // Fixed: take output from second process
-    handleFiles(heavyProcess.out)
+    file_ch = handleFiles(heavy_ch)
 
     publish:
-    processed = processFiles.out
-    heavy = heavyProcess.out
-    files = handleFiles.out
+    processed = processed_ch
+    heavy = heavy_ch
+    files = file_ch
 }
 
 output {
-    directory params.output
-    mode 'copy'
-
     processed {
         path 'processed'
     }

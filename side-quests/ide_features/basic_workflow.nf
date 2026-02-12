@@ -54,9 +54,6 @@ workflow {
 }
 
 output {
-    directory params.output_dir
-    mode 'copy'
-
     fastqc_html {
         path 'fastqc'
     }

@@ -56,6 +56,8 @@ workflow {
 }
 
 output {
-    directory 'results'
-    mode 'copy'
+    greetings {
+    }
+    upper_greetings {
+    }
 }

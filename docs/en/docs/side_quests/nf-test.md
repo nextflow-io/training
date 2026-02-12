@@ -165,8 +165,10 @@ You can see the full workflow code below.
     }
 
     output {
-        directory 'results'
-        mode 'copy'
+        greetings {
+        }
+        upper_greetings {
+        }
     }
     ```
 

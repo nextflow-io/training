@@ -94,9 +94,6 @@ workflow {
 }
 
 output {
-    directory params.output
-    mode 'copy'
-
     processed {
         path 'processed'
     }

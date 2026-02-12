@@ -94,9 +94,6 @@ workflow {
 }
 
 output {
-    directory 'results'
-    mode 'copy'
-
     reports {
         path 'reports'
     }

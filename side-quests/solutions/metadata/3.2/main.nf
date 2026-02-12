@@ -44,6 +44,6 @@ workflow {
 }
 
 output {
-    directory 'results'
-    mode 'copy'
+    cowpy_art {
+    }
 }

@@ -97,9 +97,6 @@ workflow {
 }
 
 output {
-    directory params.output
-    mode 'copy'
-
     fastqc {
         path 'fastqc'
     }
