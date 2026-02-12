@@ -50,6 +50,7 @@ workflow HELLO {
 
 
     emit:
+    cowpy_hellos   = cowpy.out
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }
