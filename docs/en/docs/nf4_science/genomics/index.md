@@ -1,5 +1,5 @@
 ---
-title: Nextflow for Genomics
+title: Genomics
 hide:
   - toc
 page_type: index_page

@@ -1,7 +1,7 @@
 # Part 2: Per-sample variant calling
 
 In Part 1, you tested the Samtools and GATK commands manually in their respective containers.
-Now we're going to wrap those same commands into a Nextflow workflow.
+Next, we're going to wrap those same commands into a Nextflow workflow.
 
 ## Assignment
 
@@ -14,14 +14,86 @@ In this part of the course, we're going to develop a workflow that does the foll
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
-This replicates the steps from Part 1, where you ran these commands manually in their containers.
+This automates the steps from the first section of [Part 1: Method overview](./01_method.md#1-per-sample-variant-calling), where you ran these commands manually in their containers.
 
-As a starting point, we provide you with a workflow file, `genomics.nf`, that outlines the main parts of the workflow, as well as two module files, samtools_index.nf and gatk_haplotypecaller.nf, that outline the structure of the modules.
+As a starting point, we provide you with a workflow file, `genomics.nf`, that outlines the main parts of the workflow, as well as two module files, `samtools_index.nf` and `gatk_haplotypecaller.nf`, that outline the structure of each process.
+
+??? full-code "Scaffold files"
+
+    ```groovy title="genomics.nf"
+    #!/usr/bin/env nextflow
+
+    // Module INCLUDE statements
+
+    /*
+     * Pipeline parameters
+     */
+
+    // Primary input
+
+    workflow {
+
+        main:
+        // Create input channel
+
+        // Call processes
+
+        publish:
+        // Declare outputs to publish
+    }
+
+    output {
+        // Configure publish targets
+    }
+    ```
+
+    ```groovy title="modules/samtools_index.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Generate BAM index file
+     */
+    process SAMTOOLS_INDEX {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
+    ```groovy title="modules/gatk_haplotypecaller.nf"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Call variants with GATK HaplotypeCaller
+     */
+    process GATK_HAPLOTYPECALLER {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
 These files are not functional; their purpose is just to serve as scaffolds for you to fill in with the interesting parts of the code.
 
 ## Lesson plan
 
-In order to make the development process more educational, we've broken this down into four steps:
+In order to make the development process more educational, we've broken this down into four stages:
 
 1. **Write a single-stage workflow that runs Samtools index on a BAM file.**
    This covers creating a module, importing it, and calling it in a workflow.
@@ -33,6 +105,11 @@ In order to make the development process more educational, we've broken this dow
    This demonstrates a common pattern for providing inputs in bulk.
 
 Each step focuses on a specific aspect of workflow development.
+
+!!! tip
+
+     Make sure you're in the correct working directory:
+     `cd /workspaces/training/nf4-science/genomics`
 
 ---
 
@@ -61,7 +138,7 @@ We need to declare an input parameter, create a test profile to provide a conven
 
 #### 1.1.1. Add an input parameter declaration
 
-In the main workflow file `genomics.nf`, under the `Pipeline parameters` section, declare a CLI parameter called `reads_bam`.
+In the main workflow file `genomics.nf`, under the `Pipeline parameters` section, declare a CLI parameter called `input`.
 
 === "After"
 
@@ -71,7 +148,7 @@ In the main workflow file `genomics.nf`, under the `Pipeline parameters` section
      */
     params {
         // Primary input
-        reads_bam: Path
+        input: Path
     }
     ```
 
@@ -93,7 +170,7 @@ There are multiple options for providing a default value; here we use a test pro
 A test profile provides convenient default values for trying out a workflow without specifying inputs on the command line.
 This is a common convention in the Nextflow ecosystem (see [Hello Config](../../hello_nextflow/06_hello_config.md) for more detail).
 
-Add a `profiles` block to `nextflow.config` with a `test` profile that sets the `reads_bam` parameter to one of the test BAM files.
+Add a `profiles` block to `nextflow.config` with a `test` profile that sets the `input` parameter to one of the test BAM files.
 
 === "After"
 
@@ -102,7 +179,7 @@ Add a `profiles` block to `nextflow.config` with a `test` profile that sets the 
 
     profiles {
         test {
-            params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+            params.input = "${projectDir}/data/bam/reads_mother.bam"
         }
     }
     ```
@@ -127,7 +204,7 @@ In the workflow block, create an input channel from the parameter value using th
 
         main:
         // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
     ```
 
 === "Before"
@@ -139,7 +216,7 @@ In the workflow block, create an input channel from the parameter value using th
         // Create input channel
     ```
 
-Now we need to create the process to run the indexing on this input.
+Next, we'll need to create the process to run the indexing on this input.
 
 ### 1.2. Write the indexing process and call it in the workflow
 
@@ -233,7 +310,7 @@ Now, let's add a call to `SAMTOOLS_INDEX` in the workflow block, passing the inp
 
         main:
         // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
 
         // Create index file for input BAM file
         SAMTOOLS_INDEX(reads_ch)
@@ -246,7 +323,7 @@ Now, let's add a call to `SAMTOOLS_INDEX` in the workflow block, passing the inp
 
         main:
         // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
 
         // Call processes
     ```
@@ -279,7 +356,7 @@ Assign the output of `SAMTOOLS_INDEX` to a named target called `bam_index`.
     }
     ```
 
-Now we need to tell Nextflow where to put the published output.
+Next, we'll need to tell Nextflow where to put the published output.
 
 #### 1.3.2. Configure the output target in the `output {}` block
 
@@ -399,7 +476,7 @@ Since our new process expects a handful of additional files to be provided, add 
     ```groovy title="genomics.nf" linenums="9" hl_lines="5-9"
     params {
         // Primary input
-        reads_bam: Path
+        input: Path
 
         // Accessory files
         reference: Path
@@ -414,21 +491,21 @@ Since our new process expects a handful of additional files to be provided, add 
     ```groovy title="genomics.nf" linenums="9"
     params {
         // Primary input
-        reads_bam: Path
+        input: Path
     }
     ```
 
-As before, we provide default values through the test profile rather than inline.
+As before, we'll provide default values through the test profile rather than inline.
 
 #### 2.1.2. Add accessory file defaults to the test profile
 
-Just as we did for `reads_bam` in section 1.1.2, add default values for the accessory files to the test profile in `nextflow.config`:
+Just as we did for `input` in section 1.1.2, add default values for the accessory files to the test profile in `nextflow.config`:
 
 === "After"
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="3-6"
     test {
-        params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+        params.input = "${projectDir}/data/bam/reads_mother.bam"
         params.reference = "${projectDir}/data/ref/ref.fasta"
         params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
         params.reference_dict = "${projectDir}/data/ref/ref.dict"
@@ -440,11 +517,11 @@ Just as we did for `reads_bam` in section 1.1.2, add default values for the acce
 
     ```groovy title="nextflow.config" linenums="4"
     test {
-        params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+        params.input = "${projectDir}/data/bam/reads_mother.bam"
     }
     ```
 
-Now we need to create variables that load these file paths for use in the workflow.
+Next, we'll need to create variables that load these file paths for use in the workflow.
 
 #### 2.1.3. Create variables for the accessory files
 
@@ -457,7 +534,7 @@ Add variables for the accessory file paths inside the workflow block:
 
         main:
         // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
 
         // Load the file paths for the accessory files (reference and intervals)
         ref_file        = file(params.reference)
@@ -476,7 +553,7 @@ Add variables for the accessory file paths inside the workflow block:
 
         main:
         // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
 
         // Create index file for input BAM file
         SAMTOOLS_INDEX(reads_ch)
@@ -645,7 +722,7 @@ Add the VCF and index outputs to the `publish:` section:
     }
     ```
 
-Now we need to tell Nextflow where to put the new outputs.
+Next, we'll need to tell Nextflow where to put the new outputs.
 
 #### 2.3.2. Configure the new output targets
 
@@ -757,14 +834,14 @@ First, comment out the type annotation in the parameter declaration, since array
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
         // Primary input (array of three samples)
-        reads_bam //: Path
+        input //: Path
     ```
 
 === "Before"
 
     ```groovy title="genomics.nf" linenums="10"
         // Primary input
-        reads_bam: Path
+        input: Path
     ```
 
 Then update the test profile to list all three samples:
@@ -773,7 +850,7 @@ Then update the test profile to list all three samples:
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="2-6"
     test {
-        params.reads_bam = [
+        params.input = [
             "${projectDir}/data/bam/reads_mother.bam",
             "${projectDir}/data/bam/reads_father.bam",
             "${projectDir}/data/bam/reads_son.bam"
@@ -789,7 +866,7 @@ Then update the test profile to list all three samples:
 
     ```groovy title="nextflow.config" linenums="4"
     test {
-        params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+        params.input = "${projectDir}/data/bam/reads_mother.bam"
         params.reference = "${projectDir}/data/ref/ref.fasta"
         params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
         params.reference_dict = "${projectDir}/data/ref/ref.dict"
@@ -891,7 +968,7 @@ Add these two lines in the workflow body before the `GATK_HAPLOTYPECALLER` proce
 
 === "After"
 
-    ```groovy title="genomics.nf" hl_lines="3-5"
+    ```groovy title="genomics.nf" linenums="36" hl_lines="3-5"
         SAMTOOLS_INDEX(reads_ch)
 
         // temporary diagnostics
@@ -904,7 +981,7 @@ Add these two lines in the workflow body before the `GATK_HAPLOTYPECALLER` proce
 
 === "Before"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="36"
         SAMTOOLS_INDEX(reads_ch)
 
         // Call variants from the indexed BAM file
@@ -997,7 +1074,7 @@ Update `modules/gatk_haplotypecaller.nf`:
         path input_bam_index
     ```
 
-Now we need to update the workflow to reflect the new tuple structure in the process call and the publish targets.
+Next, we'll need to update the workflow to reflect the new tuple structure in the process call and the publish targets.
 
 #### 3.4.3. Update the call to GATK_HAPLOTYPECALLER in the workflow
 
@@ -1137,26 +1214,27 @@ It can be as simple as a text file listing one file path per line and nothing el
 
 Here we are going to show you how to do the simple case.
 
-### 4.1. Examine the provided text file listing the input file paths
+### 4.1. Examine the provided CSV file listing the input file paths
 
-We already made a text file listing the input file paths, called `sample_bams.txt`, which you can find in the `data/` directory.
+We already made a CSV file listing the input file paths, called `samplesheet.csv`, which you can find in the `data/` directory.
 
-```txt title="sample_bams.txt"
-/workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
-/workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
-/workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
+```txt title="samplesheet.csv"
+sample_id,reads_bam
+NA12878,/workspaces/training/nf4-science/genomics/data/bam/reads_mother.bam
+NA12877,/workspaces/training/nf4-science/genomics/data/bam/reads_father.bam
+NA12882,/workspaces/training/nf4-science/genomics/data/bam/reads_son.bam
 ```
 
-As you can see, we listed one file path per line, and they are absolute paths.
+This CSV file includes a header line that names the columns.
 
-!!! note
+!!! warning
 
-    The files we are using here are just on your GitHub Codespaces's local filesystem, but we could also point to files in cloud storage.
-    If you are not using the provided Codespaces environment, you may need to adapt the file paths to match your local setup.
+    The file paths in the CSV are absolute paths that must match your environment.
+    If you are not running this in the training environment we provide, you will need to update the paths to match your system.
 
 ### 4.2. Update the parameter and test profile
 
-Switch the `reads_bam` parameter to point to the `sample_bams.txt` file instead of listing individual samples.
+Switch the `input` parameter to point to the `samplesheet.csv` file instead of listing individual samples.
 
 Restore the type annotation in the params block (since it's a single path again):
 
@@ -1164,14 +1242,14 @@ Restore the type annotation in the params block (since it's a single path again)
 
     ```groovy title="genomics.nf" linenums="10" hl_lines="1-2"
         // Primary input (file of input files, one per line)
-        reads_bam: Path
+        input: Path
     ```
 
 === "Before"
 
     ```groovy title="genomics.nf" linenums="10"
         // Primary input (array of three samples)
-        reads_bam
+        input
     ```
 
 Then update the test profile to point to the text file:
@@ -1180,7 +1258,7 @@ Then update the test profile to point to the text file:
 
     ```groovy title="nextflow.config" linenums="4" hl_lines="2"
     test {
-        params.reads_bam = "${projectDir}/data/sample_bams.txt"
+        params.input = "${projectDir}/data/samplesheet.csv"
         params.reference = "${projectDir}/data/ref/ref.fasta"
         params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
         params.reference_dict = "${projectDir}/data/ref/ref.dict"
@@ -1192,7 +1270,7 @@ Then update the test profile to point to the text file:
 
     ```groovy title="nextflow.config" linenums="4"
     test {
-        params.reads_bam = [
+        params.input = [
             "${projectDir}/data/bam/reads_mother.bam",
             "${projectDir}/data/bam/reads_father.bam",
             "${projectDir}/data/bam/reads_son.bam"
@@ -1206,31 +1284,31 @@ Then update the test profile to point to the text file:
 
 The list of files no longer lives in the code at all, which is a big step in the right direction.
 
-### 4.3. Update the channel factory to read lines from a file
+### 4.3. Update the channel factory to parse CSV input
 
 Currently, our input channel factory treats any files we give it as the data inputs we want to feed to the indexing process.
 Since we're now giving it a file that lists input file paths, we need to change its behavior to parse the file and treat the file paths it contains as the data inputs.
 
-We can do this using the same pattern we used in [Part 2 of Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file): applying the [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operator to parse the file, then a `map` operation to select the first field of each line.
+We can do this using the same pattern we used in [Part 2 of Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file): applying the [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operator to parse the file, then a `map` operation to extract the file path from each row.
 
 === "After"
 
     ```groovy title="genomics.nf" linenums="24" hl_lines="1-4"
         // Create input channel from a CSV file listing input file paths
-        reads_ch = Channel.fromPath(params.reads_bam)
-                .splitCsv()
-                .map { line -> file(line[0]) }
+        reads_ch = channel.fromPath(params.input)
+                .splitCsv(header: true)
+                .map { row -> file(row.reads_bam) }
     ```
 
 === "Before"
 
     ```groovy title="genomics.nf" linenums="24"
         // Create input channel (single file via CLI parameter)
-        reads_ch = channel.fromPath(params.reads_bam)
+        reads_ch = channel.fromPath(params.input)
     ```
 
-Technically we could do this more simply using the [`.splitText()`](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) operator, since our input file currently only contains file paths.
-However, by using the more versatile `splitCsv` operator (supplemented by `map`), we can future-proof our workflow in case we decide to add metadata to the file containing file paths.
+One thing that is new compared to what you encountered in the Hello Nextflow course is that this CSV has a header line, so we add `#!groovy header: true` to the `splitCsv()` call.
+That allows us to reference columns by name in the `map` operation: `#!groovy row.reads_bam` extracts the file path from the `reads_bam` column of each row.
 
 !!! tip
 
@@ -1238,10 +1316,10 @@ However, by using the more versatile `splitCsv` operator (supplemented by `map`)
 
 ### 4.4. Run the workflow
 
-Run the workflow one more time. This should produce the same result as before, right?
+Run the workflow one more time.
 
 ```bash
-nextflow run genomics.nf -profile test -resume
+nextflow run genomics.nf -profile test
 ```
 
 ??? success "Command output"
@@ -1251,13 +1329,12 @@ nextflow run genomics.nf -profile test -resume
 
     ┃ Launching `genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 
-    [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
-    [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
+    executor >  local (6)
+    [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+    [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3 ✔
     ```
 
-Yes! In fact, Nextflow correctly detects that the process calls are exactly the same, and doesn't even bother re-running everything, since we were running with `-resume`.
-
-And that's it! Our simple variant calling workflow has all the basic features we wanted.
+This should produce the same result as before. Our simple variant calling workflow now has all the basic features we wanted.
 
 ### Takeaway
 
@@ -1267,6 +1344,6 @@ More generally, you've learned how to use essential Nextflow components and logi
 
 ### What's next?
 
-Celebrate your success and take an extra long break!
+Take a break! That was a lot.
 
-In the next part of this course, you'll learn how to transform this simple per-sample variant calling workflow to apply joint variant calling to the data.
+When you're feeling refreshed, head on to [Part 3](./03_joint_calling.md), where you'll learn how to transform this simple per-sample variant calling workflow to apply joint variant calling to the data.

@@ -1,34 +1,34 @@
 #!/usr/bin/env nextflow
 
+// Module INCLUDE statements
+include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
+include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
+include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
+
 /*
  * Pipeline parameters
  */
 params {
     // Primary input (file of input files, one per line)
-    reads_bam: Path = "${projectDir}/data/sample_bams.txt"
+    input: Path
 
     // Accessory files
-    reference: Path = "${projectDir}/data/ref/ref.fasta"
-    reference_index: Path = "${projectDir}/data/ref/ref.fasta.fai"
-    reference_dict: Path = "${projectDir}/data/ref/ref.dict"
-    intervals: Path = "${projectDir}/data/ref/intervals.bed"
+    reference: Path
+    reference_index: Path
+    reference_dict: Path
+    intervals: Path
 
     // Base name for final output file
-    cohort_name: String = "family_trio"
+    cohort_name: String
 }
-
-// Include modules
-include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
-include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
-include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
 
 workflow {
 
     main:
     // Create input channel from a CSV file listing input file paths
-    reads_ch = Channel.fromPath(params.reads_bam)
-            .splitCsv()
-            .map { line -> file(line[0]) }
+    reads_ch = channel.fromPath(params.input)
+            .splitCsv(header: true)
+            .map { row -> file(row.reads_bam) }
 
     // Load the file paths for the accessory files (reference and intervals)
     ref_file        = file(params.reference)
