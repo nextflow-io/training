@@ -182,6 +182,9 @@ extra:
     - name: English
       link: /
       lang: en
+    - name: Català
+      link: /ca/
+      lang: ca
     - name: deutsch
       link: /de/
       lang: de
