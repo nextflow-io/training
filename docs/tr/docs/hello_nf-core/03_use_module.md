@@ -1,6 +1,6 @@
 # Bölüm 3: Bir nf-core modülü kullanma
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Hello nf-core eğitim kursunun bu üçüncü bölümünde, mevcut bir nf-core modülünü nasıl bulacağınızı, kuracağınızı ve pipeline'ınızda kullanacağınızı gösteriyoruz.
 
@@ -9,7 +9,7 @@ Her işlemi sıfırdan yazmak yerine, en iyi uygulamaları takip eden topluluk t
 
 Bunun nasıl çalıştığını göstermek için, `core-hello` pipeline'ındaki özel `collectGreetings` modülünü nf-core/modules'ten `cat/cat` modülü ile değiştireceğiz.
 
-??? info "Bu bölüme nasıl başlanır"
+??? info "Bu bölümden nasıl başlanır"
 
     Kursun bu bölümü, [Bölüm 2: Hello'yu nf-core için yeniden yazma](./02_rewrite_hello.md) bölümünü tamamladığınızı ve çalışan bir `core-hello` pipeline'ına sahip olduğunuzu varsayar.
 
@@ -220,7 +220,7 @@ Komut otomatik olarak:
 - Kurulu modülü izlemek için `modules.json` dosyasını günceller
 - Workflow'unuzda kullanmak için doğru `include` ifadesini size sağlar
 
-!!! tip
+!!! tip "İpucu"
 
     Modül kurulum komutunu çalıştırmadan önce geçerli çalışma dizininizin pipeline projenizin kök dizini olduğundan emin olun.
 
@@ -289,7 +289,7 @@ nf-core kuralının modülleri içe aktarırken büyük harf kullanmak olduğunu
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -299,8 +299,8 @@ nf-core kuralının modülleri içe aktarırken büyük harf kullanmak olduğunu
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
 === "Önce"
@@ -332,7 +332,7 @@ Bu noktada, koda dalıp düzenlemeye başlamak cazip gelebilir, ancak yeni modü
 
 Bunu ayrı bir bölüm olarak ele alacağız çünkü henüz ele almadığımız yeni bir mekanizma içeriyor: metadata map'leri (metadata haritaları).
 
-!!! note
+!!! note "Not"
 
     İsteğe bağlı olarak `collectGreetings.nf` dosyasını silebilirsiniz:
 
@@ -360,7 +360,7 @@ Bu, yeni modülü doğrudan yerine geçecek bir modül olarak kullanıp kullanam
 İdeal olarak bu, modülü kurmadan _önce_ yapmanız gereken bir şeydir, ama hiç olmamasından iyidir.
 (Değeri bilinsin ki, artık istemediğinize karar verdiğiniz modüllerden kurtulmak için bir `uninstall` komutu vardır.)
 
-!!! note
+!!! note "Not"
 
     CAT_CAT işlemi, farklı sıkıştırma türleri, dosya uzantıları ve benzeri konularla ilgili oldukça akıllı bir işleme içerir, bunlar burada size göstermeye çalıştığımız şeyle doğrudan alakalı değil, bu yüzden çoğunu görmezden geleceğiz ve yalnızca önemli olan kısımlara odaklanacağız.
 
@@ -528,7 +528,7 @@ Artık metamap'ler hakkında her şeyi bildiğinize göre (veya en azından bu k
 
 Netlik adına, bunu parçalara ayıracağız ve her adımı ayrı ayrı ele alacağız.
 
-!!! note
+!!! note "Not"
 
     Aşağıda gösterilen tüm değişiklikler `core-hello/workflows/hello.nf` workflow dosyasındaki `main` bloğundaki workflow mantığına yapılır.
 
@@ -702,7 +702,7 @@ Ancak, `CAT_CAT` işlemi çıktı dosyasına ek olarak metamap'i de içeren bir 
         // metadata ve dosyaları demet formatında içeren bir kanal oluştur
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concatenate the greetings
+        // selamlamaları birleştir
         CAT_CAT(ch_for_cat)
 
         // cowpy henüz metadata kullanmadığı için dosyayı demetten çıkar
@@ -727,7 +727,7 @@ Ancak, `CAT_CAT` işlemi çıktı dosyasına ek olarak metamap'i de içeren bir 
         // metadata ve dosyaları demet formatında içeren bir kanal oluştur
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concatenate the greetings
+        // selamlamaları birleştir
         CAT_CAT(ch_for_cat)
 
         // cowpy ile ASCII art oluştur
@@ -738,7 +738,7 @@ Ancak, `CAT_CAT` işlemi çıktı dosyasına ek olarak metamap'i de içeren bir 
 
 Ardından o son satırda `collectGreetings.out.outfile` yerine `ch_for_cowpy`'yi `cowpy`'ye iletmek yeterlidir.
 
-!!! note
+!!! note "Not"
 
     Kursun sonraki bölümünde, `cowpy`'yi doğrudan metadata demetleriyle çalışacak şekilde güncelleyeceğiz, böylece bu çıkarma adımı artık gerekli olmayacak.
 
