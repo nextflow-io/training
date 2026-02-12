@@ -627,7 +627,7 @@ Se non ha ancora familiarità con l'operatore `+`, o se questo sembra confuso, s
     Quindi abbiamo effettivamente trasformato:
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'it'
+    [id: 'sampleA', character: 'squirrel'], 'fr'
     ```
 
     in:
