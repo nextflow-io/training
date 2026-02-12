@@ -75,36 +75,35 @@ tree . -L 2
     ├── data
     │   ├── bam
     │   ├── ref
-    │   ├── sample_bams.txt
     │   └── samplesheet.csv
     ├── genomics.nf
     ├── modules
     │   ├── gatk_haplotypecaller.nf
+    │   ├── gatk_jointgenotyping.nf
     │   └── samtools_index.nf
     ├── nextflow.config
     └── solutions
-        ├── modules
-        ├── nf-test.config
         ├── part2
-        └── tests
+        └── part3
 
-    8 directories, 8 files
+    7 directories, 6 files
     ```
 
 Klicke auf das farbige Feld, um den Abschnitt zu erweitern und seinen Inhalt anzuzeigen.
 Wir verwenden klappbare Abschnitte wie diesen, um erwartete Befehlsausgaben sowie Verzeichnis- und Dateiinhalte kompakt darzustellen.
 
-- **Die Datei `genomics.nf`** ist ein Workflow-Skript, das du im Verlauf des Kurses aufbaust.
+- **Die Datei `genomics.nf`** ist ein Gerüst für ein Workflow-Skript, das du im Verlauf des Kurses aufbaust.
 
-- **Das Verzeichnis `modules`** enthält Skeleton-Moduldateien, die du während des Kurses ausfüllst.
+- **Das Verzeichnis `modules`** enthält Gerüste für Prozessmodule, die du während des Kurses ausfüllst.
 
 - **Die Datei `nextflow.config`** ist eine Konfigurationsdatei, die minimale Umgebungseigenschaften festlegt.
   Du kannst sie vorerst ignorieren.
 
 - **Das Verzeichnis `data`** enthält Eingabedaten und zugehörige Ressourcen, die später im Kurs beschrieben werden.
 
-- **Das Verzeichnis `solutions`** enthält fertige Moduldateien und eine Lösung für Teil 2, die als Ausgangspunkt für Teil 3 dienen kann.
+- **Das Verzeichnis `solutions`** enthält fertige Workflow-Skripte und Module, die aus jedem Schritt des Kurses resultieren.
   Sie sind als Referenz gedacht, um deine Arbeit zu überprüfen und eventuelle Probleme zu beheben.
+  Die Lösung für Teil 2 kann als Ausgangspunkt für Teil 3 verwendet werden.
 
 ## Checkliste zur Bereitschaft
 
@@ -116,4 +115,4 @@ Glaubst du, du bist bereit einzusteigen?
 
 Wenn du alle Kästchen abhaken kannst, kann es losgehen.
 
-**Um mit [Teil 1: Methodenübersicht und manuelle Tests](./01_method.md) fortzufahren, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.**
+**Um mit [Teil 1: Methodenübersicht](./01_method.md) fortzufahren, klicke auf den Pfeil in der unteren rechten Ecke dieser Seite.**

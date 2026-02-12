@@ -1,5 +1,5 @@
 ---
-title: जीनोमिक्स के लिए Nextflow
+title: जीनोमिक्स
 hide:
   - toc
 page_type: index_page
@@ -19,7 +19,7 @@ additional_information:
 
 # जीनोमिक्स के लिए Nextflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](../../hello_nextflow/)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI-सहायता प्राप्त अनुवाद - [अधिक जानें और सुधार सुझाएं](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 **एक व्यावहारिक पाठ्यक्रम जो Nextflow को वास्तविक दुनिया के जीनोमिक्स उपयोग के मामले में लागू करता है: GATK के साथ variant calling।**
 

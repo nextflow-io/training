@@ -68,43 +68,42 @@ Qui generiamo un indice dei contenuti fino al secondo livello:
 tree . -L 2
 ```
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     .
     ├── data
     │   ├── bam
     │   ├── ref
-    │   ├── sample_bams.txt
     │   └── samplesheet.csv
     ├── genomics.nf
     ├── modules
     │   ├── gatk_haplotypecaller.nf
+    │   ├── gatk_jointgenotyping.nf
     │   └── samtools_index.nf
     ├── nextflow.config
     └── solutions
-        ├── modules
-        ├── nf-test.config
         ├── part2
-        └── tests
+        └── part3
 
-    8 directories, 8 files
+    7 directories, 6 files
     ```
 
 Cliccate sulla casella colorata per espandere la sezione e visualizzarne i contenuti.
 Utilizziamo sezioni comprimibili come questa per mostrare l'output atteso dei comandi, nonché i contenuti di directory e file in modo conciso.
 
-- **Il file `genomics.nf`** è uno script di flusso di lavoro che costruirete durante il corso.
+- **Il file `genomics.nf`** è uno scaffold per uno script di flusso di lavoro che costruirete man mano che procedete nel corso.
 
-- **La directory `modules`** contiene file di moduli scheletrici che completerete durante il corso.
+- **La directory `modules`** contiene scaffold per moduli di processo che completerete durante il corso.
 
 - **Il file `nextflow.config`** è un file di configurazione che imposta proprietà minime dell'ambiente.
   Potete ignorarlo per ora.
 
 - **La directory `data`** contiene dati di input e risorse correlate, descritte più avanti nel corso.
 
-- **La directory `solutions`** contiene file di moduli completati e una soluzione della Parte 2 che può servire come punto di partenza per la Parte 3.
+- **La directory `solutions`** contiene script di flusso di lavoro e moduli completati che risultano da ogni passaggio del corso.
   Sono destinati ad essere utilizzati come riferimento per verificare il vostro lavoro e risolvere eventuali problemi.
+  La soluzione della Parte 2 può essere utilizzata come punto di partenza per la Parte 3.
 
 ## Lista di controllo della preparazione
 
@@ -116,4 +115,4 @@ Pensate di essere pronti per immergervi?
 
 Se potete spuntare tutte le caselle, siete pronti per iniziare.
 
-**Per continuare alla [Parte 1: Panoramica del metodo e test manuali](./01_method.md), cliccate sulla freccia nell'angolo in basso a destra di questa pagina.**
+**Per continuare alla [Parte 1: Panoramica del metodo](./01_method.md), cliccate sulla freccia nell'angolo in basso a destra di questa pagina.**

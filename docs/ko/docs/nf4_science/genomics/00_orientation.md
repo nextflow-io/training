@@ -75,36 +75,35 @@ tree . -L 2
     ├── data
     │   ├── bam
     │   ├── ref
-    │   ├── sample_bams.txt
     │   └── samplesheet.csv
     ├── genomics.nf
     ├── modules
     │   ├── gatk_haplotypecaller.nf
+    │   ├── gatk_jointgenotyping.nf
     │   └── samtools_index.nf
     ├── nextflow.config
     └── solutions
-        ├── modules
-        ├── nf-test.config
         ├── part2
-        └── tests
+        └── part3
 
-    8 directories, 8 files
+    7 directories, 6 files
     ```
 
 색상이 있는 상자를 클릭하여 섹션을 확장하고 내용을 확인하십시오.
 이와 같은 접을 수 있는 섹션을 사용하여 예상되는 명령 출력과 디렉토리 및 파일 내용을 간결한 방식으로 표시합니다.
 
-- **`genomics.nf` 파일**은 과정을 진행하면서 구축할 워크플로우 스크립트입니다.
+- **`genomics.nf` 파일**은 과정을 진행하면서 구축할 워크플로우 스크립트의 기본 틀입니다.
 
-- **`modules` 디렉토리**에는 과정 중에 채워 넣을 스켈레톤 모듈 파일이 포함되어 있습니다.
+- **`modules` 디렉토리**에는 과정 중에 채워 넣을 프로세스 모듈의 기본 틀이 포함되어 있습니다.
 
 - **`nextflow.config` 파일**은 최소한의 환경 속성을 설정하는 구성 파일입니다.
   지금은 무시하셔도 됩니다.
 
 - **`data` 디렉토리**에는 과정 후반부에 설명될 입력 데이터와 관련 리소스가 포함되어 있습니다.
 
-- **`solutions` 디렉토리**에는 완성된 모듈 파일과 Part 3의 시작점으로 사용할 수 있는 Part 2 해결책이 포함되어 있습니다.
+- **`solutions` 디렉토리**에는 과정의 각 단계에서 완성되는 워크플로우 스크립트와 모듈이 포함되어 있습니다.
   이는 작업을 확인하고 문제를 해결하기 위한 참조 자료로 사용됩니다.
+  Part 2 해결책은 Part 3의 시작점으로 사용할 수 있습니다.
 
 ## 준비 확인 목록
 
@@ -116,4 +115,4 @@ tree . -L 2
 
 모든 항목을 확인할 수 있다면 시작할 준비가 된 것입니다.
 
-**[Part 1: 방법 개요 및 수동 테스트](./01_method.md)로 계속 진행하려면 이 페이지 오른쪽 하단의 화살표를 클릭하십시오.**
+**[Part 1: 방법 개요](./01_method.md)로 계속 진행하려면 이 페이지 오른쪽 하단의 화살표를 클릭하십시오.**

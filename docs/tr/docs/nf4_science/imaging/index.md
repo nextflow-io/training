@@ -1,12 +1,12 @@
 ---
-title: Görüntüleme için Nextflow Çalıştırma
+title: Görüntüleme
 hide:
   - toc
 ---
 
-# Görüntüleme için Nextflow Çalıştırma
+# Görüntüleme için Nextflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bu eğitim kursu, veri analizi pipeline'larını çalıştırmak ve özelleştirmekle ilgilenen görüntüleme ve uzamsal biyoloji alanındaki araştırmacılar için tasarlanmıştır.
 Molecular Cartography uzamsal transkriptomik verilerini işlemek için kullanılan bir pipeline olan [nf-core/molkart](https://nf-co.re/molkart) kullanarak workflow'ları çalıştırma, düzenleme ve yapılandırma ile ilgili temel Nextflow kavramlarını öğretir.

@@ -1,10 +1,10 @@
 ---
-title: 이미징을 위한 Nextflow 실행
+title: 이미징
 hide:
   - toc
 ---
 
-# 이미징을 위한 Nextflow 실행
+# Nextflow for Imaging
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 

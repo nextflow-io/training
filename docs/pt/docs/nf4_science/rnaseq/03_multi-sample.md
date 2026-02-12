@@ -2,26 +2,71 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Tradução assistida por IA - [saiba mais e sugira melhorias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nesta parte final do curso, vamos levar nosso fluxo de trabalho simples ao próximo nível, transformando-o em uma poderosa ferramenta de automação em lote para lidar com números arbitrários de amostras.
-E enquanto fazemos isso, também vamos alterá-lo para esperar dados paired-end, que são mais comuns em estudos mais recentes.
+Anteriormente, você construiu um pipeline de chamada de variantes por amostra que processava os dados de cada amostra independentemente.
+Nesta parte do curso, vamos levar nosso fluxo de trabalho simples ao próximo nível, transformando-o em uma poderosa ferramenta de automação em lote para lidar com números arbitrários de amostras.
+E enquanto fazemos isso, também vamos atualizá-lo para esperar dados paired-end, que são mais comuns em estudos mais recentes.
 
-Faremos isso em três etapas:
+??? info "Como começar a partir desta seção"
 
-1. Fazer o fluxo de trabalho aceitar múltiplas amostras de entrada e paralelizar a execução
-2. Adicionar geração abrangente de relatório de QC
-3. Mudar para dados de RNAseq paired-end
+    Esta seção do curso assume que você completou a [Parte 1: Visão Geral do Método](./01_method.md), [Parte 2: Implementação de amostra única](./02_single-sample.md) e tem um pipeline `rnaseq.nf` funcional com arquivos de módulo preenchidos.
+
+    Se você não completou a Parte 2 ou quer começar do zero para esta parte, você pode usar a solução da Parte 2 como seu ponto de partida.
+    Execute estes comandos de dentro do diretório `nf4-science/rnaseq/`:
+
+    ```bash
+    cp solutions/part2/rnaseq-2.nf rnaseq.nf
+    cp solutions/part2/modules/fastqc.nf modules/
+    cp solutions/part2/modules/trim_galore.nf modules/
+    cp solutions/part2/modules/hisat2_align.nf modules/
+    cp solutions/part2/nextflow.config .
+    ```
+
+    Isso lhe dá um fluxo de trabalho completo de processamento de amostra única.
+    Você pode testar se ele executa com sucesso:
+
+    ```bash
+    nextflow run rnaseq.nf -profile test
+    ```
+
+## Tarefa
+
+Nesta parte do curso, vamos estender o fluxo de trabalho para fazer o seguinte:
+
+1. Ler informações de amostra de uma planilha CSV
+2. Executar QC por amostra, corte e alinhamento em todas as amostras em paralelo
+3. Agregar todos os relatórios de QC em um relatório MultiQC abrangente
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nf4_science/rnaseq/img/rnaseq-wf-03.svg"
+</figure>
+
+Isso automatiza as etapas da segunda seção da [Parte 1: Visão Geral do Método](./01_method.md#2-multi-sample-qc-aggregation), onde você executou esses comandos manualmente em seus contêineres.
+
+## Plano de aula
+
+Dividimos isso em três estágios:
+
+1. **Fazer o fluxo de trabalho aceitar múltiplas amostras de entrada.**
+   Isso cobre a mudança de um único caminho de arquivo para uma planilha CSV, analisando-a com `splitCsv()`, e executando todos os processos existentes em múltiplas amostras.
+2. **Adicionar geração abrangente de relatório de QC.**
+   Isso introduz o operador `collect()` para agregar saídas entre amostras, e adiciona um processo MultiQC para produzir um relatório combinado.
+3. **Mudar para dados de RNAseq paired-end.**
+   Isso cobre a adaptação de processos para entradas paired-end (usando tuplas), criação de módulos paired-end, e configuração de um perfil de teste separado.
+
+Isso implementa o método descrito na [Parte 1: Visão Geral do Método](./01_method.md) (segunda seção cobrindo o caso de uso de múltiplas amostras) e se baseia diretamente no fluxo de trabalho produzido pela Parte 2.
+
+!!! tip "Dica"
+
+     Certifique-se de estar no diretório de trabalho correto:
+     `cd /workspaces/training/nf4-science/rnaseq`
 
 ---
 
-## 1. Fazer o fluxo de trabalho aceitar múltiplas amostras de entrada e paralelizar a execução
+## 1. Fazer o fluxo de trabalho aceitar múltiplas amostras de entrada
 
-Vamos precisar mudar como gerenciamos a entrada.
-
-### 1.1. Mudar a entrada primária para ser um CSV de caminhos de arquivos em vez de um único arquivo
+Para executar em múltiplas amostras, precisamos mudar como gerenciamos a entrada: em vez de fornecer um único caminho de arquivo, vamos ler informações de amostra de um arquivo CSV.
 
 Fornecemos um arquivo CSV contendo IDs de amostra e caminhos de arquivos FASTQ no diretório `data/`.
-Este arquivo CSV inclui uma linha de cabeçalho.
-Note que os caminhos dos arquivos FASTQ são caminhos absolutos.
 
 ```csv title="data/single-end.csv" linenums="1"
 sample_id,fastq_path
@@ -33,33 +78,86 @@ ENCSR000CPO1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO1_1.f
 ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.fastq.gz
 ```
 
-Vamos renomear o parâmetro de entrada primária para `input_csv` e mudar o valor padrão para ser o caminho para o arquivo `single-end.csv`.
+Este arquivo CSV inclui uma linha de cabeçalho que nomeia as colunas.
 
-```groovy title="rnaseq.nf" linenums="13"
-params {
-    // Entrada primária
-    input_csv: Path = "data/single-end.csv"
+Note que estes ainda são dados de leitura single-end.
 
-    // Arquivo do genoma de referência
-    hisat2_index_zip: Path = "data/genome_index.tar.gz"
-}
-```
+!!! warning "Aviso"
 
-### 1.2. Atualizar a fábrica de canal de entrada para lidar com um CSV como entrada
+    Os caminhos de arquivo no CSV são caminhos absolutos que devem corresponder ao seu ambiente.
+    Se você não está executando isso no ambiente de treinamento que fornecemos, você precisará atualizar os caminhos para corresponder ao seu sistema.
 
-Vamos querer carregar o conteúdo do arquivo no canal em vez de apenas o caminho do arquivo em si, então usamos o operador `.splitCsv()` para analisar o formato CSV, depois o operador `.map()` para pegar a informação específica que queremos (o caminho do arquivo FASTQ).
+### 1.1. Mudar a entrada primária para um CSV de caminhos de arquivos no perfil de teste
 
-```groovy title="rnaseq.nf" linenums="16"
-    // Cria canal de entrada a partir do conteúdo de um arquivo CSV
-    read_ch = channel.fromPath(params.input_csv)
-        .splitCsv(header:true)
-        .map { row -> file(row.fastq_path) }
-```
+Primeiro, precisamos atualizar o perfil de teste em `nextflow.config` para fornecer o caminho do arquivo CSV em vez do caminho FASTQ único.
 
-### 1.3. Executar o fluxo de trabalho para testar se funciona
+=== "Depois"
+
+    ```groovy title="nextflow.config" linenums="1" hl_lines="5"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        }
+    }
+    ```
+
+=== "Antes"
+
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/reads/ENCSR000COQ1_1.fastq.gz"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        }
+    }
+    ```
+
+Em seguida, precisaremos atualizar a criação do canal para ler deste CSV.
+
+### 1.2. Atualizar a fábrica de canal para analisar entrada CSV
+
+Precisamos carregar o conteúdo do arquivo no canal em vez de apenas o caminho do arquivo em si.
+
+Podemos fazer isso usando o mesmo padrão que usamos na [Parte 2 do Hello Nextflow](../../hello_nextflow/02_hello_channels.md#42-use-the-splitcsv-operator-to-parse-the-file): aplicando o operador [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) para analisar o arquivo, depois uma operação `map` para extrair o caminho do arquivo FASTQ de cada linha.
+
+=== "Depois"
+
+    ```groovy title="rnaseq.nf" linenums="19" hl_lines="4-7"
+    workflow {
+
+        main:
+        // Cria canal de entrada a partir do conteúdo de um arquivo CSV
+        read_ch = channel.fromPath(params.input)
+            .splitCsv(header: true)
+            .map { row -> file(row.fastq_path) }
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq.nf" linenums="19"
+    workflow {
+
+        main:
+        // Cria canal de entrada a partir de um caminho de arquivo
+        read_ch = channel.fromPath(params.input)
+    ```
+
+Uma coisa que é nova comparada ao que você encontrou no curso Hello Nextflow é que este CSV tem uma linha de cabeçalho, então adicionamos `#!groovy header: true` à chamada `splitCsv()`.
+Isso nos permite referenciar colunas por nome na operação `map`: `#!groovy row.fastq_path` extrai o caminho do arquivo da coluna `fastq_path` de cada linha.
+
+O tratamento de entrada está atualizado e o fluxo de trabalho está pronto para testar.
+
+### 1.3. Executar o fluxo de trabalho
+
+O fluxo de trabalho agora lê informações de amostra de um arquivo CSV e processa todas as amostras em paralelo.
 
 ```bash
-nextflow run rnaseq.nf
+nextflow run rnaseq.nf -profile test
 ```
 
 ??? success "Saída do comando"
@@ -75,87 +173,112 @@ nextflow run rnaseq.nf
     [68/4c27b5] HISAT2_ALIGN (6) [100%] 6 of 6 ✔
     ```
 
-Desta vez vemos cada etapa sendo executada 6 vezes, em cada um dos 6 arquivos de dados que fornecemos.
+Desta vez cada etapa é executada 6 vezes, uma vez para cada amostra no arquivo CSV.
 
-Foi só isso que precisamos para fazer o fluxo de trabalho executar em múltiplos arquivos!
+Foi só isso que precisamos para fazer o fluxo de trabalho executar em múltiplos arquivos.
 O Nextflow lida com todo o paralelismo para nós.
+
+### Conclusão
+
+Você sabe como mudar de uma entrada de arquivo único para entrada de múltiplas amostras baseada em CSV que o Nextflow processa em paralelo.
+
+### O que vem a seguir?
+
+Adicionar uma etapa de agregação de relatório de QC que combina métricas de todas as amostras.
 
 ---
 
 ## 2. Agregar métricas de QC de pré-processamento em um único relatório MultiQC
 
 Tudo isso produz muitos relatórios de QC, e não queremos ter que vasculhar relatórios individuais.
-Este é o ponto perfeito para colocar uma etapa de agregação de relatório MultiQC!
+Este é o ponto perfeito para colocar uma etapa de agregação de relatório MultiQC.
 
-### 2.1. Criar um módulo para o processo de agregação de QC
-
-Vamos criar um arquivo de módulo chamado `modules/multiqc.nf` para abrigar o processo `MULTIQC`:
+Lembre-se do comando `multiqc` da [Parte 1](01_method.md):
 
 ```bash
-touch modules/multiqc.nf
+multiqc . -n <output_name>.html
 ```
 
-Abra o arquivo no editor de código e copie o seguinte código nele:
+O comando escaneia o diretório atual em busca de arquivos de saída de QC reconhecidos e os agrega em um único relatório HTML.
+O URI do contêiner era `community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c`.
 
-```groovy title="modules/multiqc.nf" linenums="1"
-#!/usr/bin/env nextflow
+Precisamos configurar um parâmetro adicional, preparar as entradas, escrever o processo, conectá-lo, e atualizar o tratamento de saída.
 
-process MULTIQC {
+### 2.1. Configurar as entradas
 
-    container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
-    publishDir "results/multiqc", mode: 'symlink'
+O processo MultiQC precisa de um parâmetro de nome de relatório e as saídas de QC coletadas de todas as etapas anteriores agrupadas juntas.
 
-    input:
-    path '*'
-    val output_name
+#### 2.1.1. Adicionar um parâmetro `report_id`
 
-    output:
-    path "${output_name}.html", emit: report
-    path "${output_name}_data", emit: data
+Adicione um parâmetro para nomear o relatório de saída.
 
-    script:
-    """
-    multiqc . -n ${output_name}.html
-    """
-}
-```
+=== "Depois"
 
-### 2.2. Importar o módulo no arquivo do fluxo de trabalho
+    ```groovy title="rnaseq.nf" linenums="11" hl_lines="8-9"
+    params {
+        // Entrada primária
+        input: Path
 
-Adicione a instrução `include { MULTIQC } from './modules/multiqc.nf'` ao arquivo `rnaseq.nf`:
+        // Arquivo do genoma de referência
+        hisat2_index_zip: Path
 
-```groovy title="rnaseq.nf" linenums="3"
-// Declarações de INCLUDE de módulo
-include { FASTQC } from './modules/fastqc.nf'
-include { TRIM_GALORE } from './modules/trim_galore.nf'
-include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
-include { MULTIQC } from './modules/multiqc.nf'
-```
+        // ID do relatório
+        report_id: String
+    }
+    ```
 
-### 2.3. Adicionar um parâmetro `report_id` e dar a ele um padrão sensato
+=== "Antes"
 
-```groovy title="rnaseq.nf" linenums="9"
-params {
-    // Entrada primária
-    input_csv: Path = "data/single-end.csv"
+    ```groovy title="rnaseq.nf" linenums="11"
+    params {
+        // Entrada primária
+        input: Path
 
-    // Arquivo do genoma de referência
-    hisat2_index_zip: Path = "data/genome_index.tar.gz"
+        // Arquivo do genoma de referência
+        hisat2_index_zip: Path
+    }
+    ```
 
-    // ID do relatório
-    report_id: String = "all_single-end"
-}
-```
+Adicione o padrão do ID do relatório ao perfil de teste:
 
-### 2.4. Chamar o processo nas saídas das etapas anteriores
+=== "Depois"
 
-Precisamos dar ao processo `MULTIQC` todas as saídas relacionadas a QC das etapas anteriores.
+    ```groovy title="nextflow.config" linenums="1" hl_lines="7"
+    docker.enabled = true
 
-Para isso, vamos usar o operador `.mix()`, que agrega múltiplos canais em um único.
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+            params.report_id = "all_single-end"
+        }
+    }
+    ```
 
-Se tivéssemos quatro processos chamados A, B, C e D com um canal simples `.out` cada, a sintaxe seria assim: `A.out.mix( B.out, C.out, D.out )`. Como você pode ver, você aplica ao primeiro dos canais que deseja combinar (não importa qual) e apenas adiciona todos os outros, separados por vírgulas, nos parênteses que seguem.
+=== "Antes"
 
-No caso do nosso fluxo de trabalho, temos as seguintes saídas para agregar:
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
+
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+        }
+    }
+    ```
+
+Em seguida, precisaremos preparar as entradas para o processo MultiQC.
+
+#### 2.1.2. Coletar e combinar saídas de QC das etapas anteriores
+
+Precisamos dar ao processo `MULTIQC` todas as saídas relacionadas a QC das etapas anteriores agrupadas juntas.
+
+Para isso, usamos o operador `.mix()`, que agrega múltiplos canais em um único.
+Começamos de `channel.empty()` e misturamos todos os canais de saída que queremos combinar.
+Isso é mais limpo do que encadear `.mix()` diretamente em um dos canais de saída, porque trata todas as entradas simetricamente.
+
+No nosso fluxo de trabalho, as saídas relacionadas a QC para agregar são:
 
 - `FASTQC.out.zip`
 - `FASTQC.out.html`
@@ -163,71 +286,224 @@ No caso do nosso fluxo de trabalho, temos as seguintes saídas para agregar:
 - `TRIM_GALORE.out.fastqc_reports`
 - `HISAT2_ALIGN.out.log`
 
-Então o exemplo de sintaxe se torna:
+Nós as misturamos em um único canal, depois usamos `.collect()` para agregar os relatórios de todas as amostras em uma única lista.
 
-```groovy title="Aplicando .mix() na chamada MULTIQC"
-        FASTQC.out.zip.mix(
-        FASTQC.out.html,
-        TRIM_GALORE.out.trimming_reports,
-        TRIM_GALORE.out.fastqc_reports,
-        HISAT2_ALIGN.out.log
+Adicione estas linhas ao corpo do fluxo de trabalho após a chamada `HISAT2_ALIGN`:
+
+=== "Depois"
+
+    ```groovy title="rnaseq.nf" linenums="38" hl_lines="4-13"
+        // Alinhamento a um genoma de referência
+        HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
+
+        // Geração de relatório de QC abrangente
+        multiqc_files_ch = channel.empty().mix(
+            FASTQC.out.zip,
+            FASTQC.out.html,
+            TRIM_GALORE.out.trimming_reports,
+            TRIM_GALORE.out.fastqc_reports,
+            HISAT2_ALIGN.out.log,
         )
-```
+        multiqc_files_list = multiqc_files_ch.collect()
+    ```
 
-Isso coletará relatórios de QC por amostra.
-Mas como queremos agregá-los em todas as amostras, precisamos adicionar o operador `collect()` para reunir os relatórios de todas as amostras em uma única chamada ao `MULTIQC`.
-E também precisamos dar a ele o parâmetro `report_id`.
+=== "Antes"
 
-Isso nos dá o seguinte:
+    ```groovy title="rnaseq.nf" linenums="38"
+        // Alinhamento a um genoma de referência
+        HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file(params.hisat2_index_zip))
+    ```
 
-```groovy title="A chamada MULTIQC completa" linenums="33"
-    // Geração de relatório de QC abrangente
-    MULTIQC(
-        FASTQC.out.zip.mix(
-        FASTQC.out.html,
-        TRIM_GALORE.out.trimming_reports,
-        TRIM_GALORE.out.fastqc_reports,
-        HISAT2_ALIGN.out.log
-        ).collect(),
-        params.report_id
-    )
-```
+Usar variáveis intermediárias torna cada etapa clara: `multiqc_files_ch` contém todos os arquivos de QC individuais misturados em um canal, e `multiqc_files_list` é o pacote coletado pronto para passar ao MultiQC.
 
-No contexto do bloco completo do fluxo de trabalho, acaba ficando assim:
+### 2.2. Escrever o processo de agregação de QC e chamá-lo no fluxo de trabalho
 
-```groovy title="rnaseq.nf" linenums="18"
-workflow {
-    // Cria canal de entrada a partir do conteúdo de um arquivo CSV
-    read_ch = channel.fromPath(params.input_csv)
-        .splitCsv(header:true)
-        .map { row -> file(row.fastq_path) }
+Como antes, precisamos preencher a definição do processo, importar o módulo e adicionar a chamada do processo.
 
-    // Controle de qualidade inicial
-    FASTQC(read_ch)
+#### 2.2.1. Preencher o módulo para o processo de agregação de QC
 
-    // Corte de adaptador e QC pós-corte
-    TRIM_GALORE(read_ch)
+Abra `modules/multiqc.nf` e examine o esboço da definição do processo.
 
-    // Alinhamento a um genoma de referência
-    HISAT2_ALIGN(TRIM_GALORE.out.trimmed_reads, file (params.hisat2_index_zip))
+Vá em frente e preencha a definição do processo por si mesmo usando as informações fornecidas acima, depois verifique seu trabalho contra a solução na aba "Depois" abaixo.
 
-    // Geração de relatório de QC abrangente
-    MULTIQC(
-        FASTQC.out.zip.mix(
-        FASTQC.out.html,
-        TRIM_GALORE.out.trimming_reports,
-        TRIM_GALORE.out.fastqc_reports,
-        HISAT2_ALIGN.out.log
-        ).collect(),
-        params.report_id
-    )
-}
-```
+=== "Antes"
 
-### 2.5. Executar o fluxo de trabalho para testar se funciona
+    ```groovy title="modules/multiqc.nf" linenums="1"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Agregar relatórios de QC com MultiQC
+     */
+    process MULTIQC {
+
+        container
+
+        input:
+
+        output:
+
+        script:
+        """
+
+        """
+    }
+    ```
+
+=== "Depois"
+
+    ```groovy title="modules/multiqc.nf" linenums="1" hl_lines="8 11 12 15 16 20"
+    #!/usr/bin/env nextflow
+
+    /*
+     * Agregar relatórios de QC com MultiQC
+     */
+    process MULTIQC {
+
+        container "community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c"
+
+        input:
+        path '*'
+        val output_name
+
+        output:
+        path "${output_name}.html", emit: report
+        path "${output_name}_data", emit: data
+
+        script:
+        """
+        multiqc . -n ${output_name}.html
+        """
+    }
+    ```
+
+Este processo usa `#!groovy path '*'` como o qualificador de entrada para os arquivos de QC.
+O curinga `'*'` diz ao Nextflow para preparar todos os arquivos coletados no diretório de trabalho sem exigir nomes específicos.
+A entrada `val output_name` é uma string que controla o nome do arquivo do relatório.
+
+O comando `multiqc .` escaneia o diretório atual (onde todos os arquivos de QC preparados estão) e gera o relatório.
+
+Uma vez que você tenha completado isso, o processo está pronto para usar.
+
+#### 2.2.2. Incluir o módulo
+
+Adicione a instrução de importação a `rnaseq.nf`:
+
+=== "Depois"
+
+    ```groovy title="rnaseq.nf" linenums="3" hl_lines="5"
+    // Declarações de INCLUDE de módulo
+    include { FASTQC } from './modules/fastqc.nf'
+    include { TRIM_GALORE } from './modules/trim_galore.nf'
+    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+    include { MULTIQC } from './modules/multiqc.nf'
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq.nf" linenums="3"
+    // Declarações de INCLUDE de módulo
+    include { FASTQC } from './modules/fastqc.nf'
+    include { TRIM_GALORE } from './modules/trim_galore.nf'
+    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+    ```
+
+Agora adicione a chamada do processo ao fluxo de trabalho.
+
+#### 2.2.3. Adicionar a chamada do processo
+
+Passe os arquivos de QC coletados e o ID do relatório ao processo `MULTIQC`:
+
+=== "Depois"
+
+    ```groovy title="rnaseq.nf" linenums="49" hl_lines="2"
+        multiqc_files_list = multiqc_files_ch.collect()
+        MULTIQC(multiqc_files_list, params.report_id)
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq.nf" linenums="49"
+        multiqc_files_list = multiqc_files_ch.collect()
+    ```
+
+O processo MultiQC agora está conectado ao fluxo de trabalho.
+
+### 2.3. Atualizar o tratamento de saída
+
+Precisamos adicionar as saídas do MultiQC à declaração de publicação e configurar para onde elas vão.
+
+#### 2.3.1. Adicionar alvos de publicação para as saídas do MultiQC
+
+Adicione as saídas do MultiQC à seção `publish:`:
+
+=== "Depois"
+
+    ```groovy title="rnaseq.nf" linenums="52" hl_lines="9-10"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+        bam = HISAT2_ALIGN.out.bam
+        align_log = HISAT2_ALIGN.out.log
+        multiqc_report = MULTIQC.out.report
+        multiqc_data = MULTIQC.out.data
+    }
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq.nf" linenums="52"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+        bam = HISAT2_ALIGN.out.bam
+        align_log = HISAT2_ALIGN.out.log
+    }
+    ```
+
+Em seguida, precisaremos dizer ao Nextflow onde colocar essas saídas.
+
+#### 2.3.2. Configurar os novos alvos de saída
+
+Adicione entradas para os alvos do MultiQC no bloco `output {}`, publicando-os em um subdiretório `multiqc/`:
+
+=== "Depois"
+
+    ```groovy title="rnaseq.nf" linenums="82" hl_lines="7-12"
+        align_log {
+            path 'align'
+        }
+        multiqc_report {
+            path 'multiqc'
+        }
+        multiqc_data {
+            path 'multiqc'
+        }
+    }
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq.nf" linenums="82"
+        align_log {
+            path 'align'
+        }
+    }
+    ```
+
+A configuração de saída está completa.
+
+### 2.4. Executar o fluxo de trabalho
+
+Usamos `-resume` para que as etapas de processamento anteriores sejam armazenadas em cache e apenas a nova etapa MultiQC seja executada.
 
 ```bash
-nextflow run rnaseq.nf -resume
+nextflow run rnaseq.nf -profile test -resume
 ```
 
 ??? success "Saída do comando"
@@ -244,9 +520,9 @@ nextflow run rnaseq.nf -resume
     [56/e1f102] MULTIQC          [100%] 1 of 1 ✔
     ```
 
-Desta vez vemos uma única chamada ao MULTIQC adicionada após as chamadas de processo em cache:
+Uma única chamada ao MULTIQC foi adicionada após as chamadas de processo em cache.
 
-Você pode encontrar as saídas em `results/trimming` conforme especificado no processo `TRIM_GALORE` pela diretiva `publishDir`.
+Você pode encontrar as saídas do MultiQC no diretório de resultados.
 
 ```bash
 tree -L 2 results/multiqc
@@ -285,6 +561,14 @@ results/multiqc
 
 Esse último arquivo `all_single-end.html` é o relatório agregado completo, convenientemente empacotado em um arquivo HTML fácil de navegar.
 
+### Conclusão
+
+Você sabe como coletar saídas de múltiplos canais, agrupá-las com `.mix()` e `.collect()`, e passá-las para um processo de agregação.
+
+### O que vem a seguir?
+
+Adaptar o fluxo de trabalho para lidar com dados de RNAseq paired-end.
+
 ---
 
 ## 3. Habilitar o processamento de dados de RNAseq paired-end
@@ -294,15 +578,23 @@ Agora nosso fluxo de trabalho só pode lidar com dados de RNAseq single-end.
 
 Fazer o fluxo de trabalho completamente agnóstico do tipo de dado exigiria o uso de recursos de linguagem Nextflow um pouco mais avançados, então não vamos fazer isso aqui, mas podemos fazer uma versão de processamento paired-end para demonstrar o que precisa ser adaptado.
 
-### 3.1. Fazer uma cópia do fluxo de trabalho chamada `rnaseq_pe.nf`
+### 3.1. Copiar o fluxo de trabalho e atualizar as entradas
+
+Começamos copiando o arquivo do fluxo de trabalho single-end e atualizando-o para dados paired-end.
+
+#### 3.1.1. Copiar o arquivo do fluxo de trabalho
+
+Crie uma cópia do arquivo do fluxo de trabalho para usar como ponto de partida para a versão paired-end.
 
 ```bash
 cp rnaseq.nf rnaseq_pe.nf
 ```
 
-### 3.2. Modificar o `input_csv` padrão para apontar para os dados paired-end
+Agora atualize os parâmetros e o tratamento de entrada no novo arquivo.
 
-Fornecemos um segundo arquivo CSV contendo IDs de amostra e caminhos de arquivos FASTQ pareados no diretório `data/`
+#### 3.1.2. Adicionar um perfil de teste paired-end
+
+Fornecemos um segundo arquivo CSV contendo IDs de amostra e caminhos de arquivos FASTQ pareados no diretório `data/`.
 
 ```csv title="data/paired-end.csv" linenums="1"
 sample_id,fastq_1,fastq_2
@@ -314,184 +606,359 @@ ENCSR000CPO1,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO1_1.f
 ENCSR000CPO2,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_1.fastq.gz,/workspaces/training/nf4-science/rnaseq/data/reads/ENCSR000CPO2_2.fastq.gz
 ```
 
-Vamos mudar o padrão de `input_csv` para ser o caminho para o arquivo `paired-end.csv`.
+Adicione um perfil `test_pe` a `nextflow.config` que aponta para este arquivo e usa um ID de relatório paired-end.
 
-```groovy title="rnaseq_pe.nf" linenums="15"
-params {
-    // Entrada primária
-    input_csv: Path = "data/paired-end.csv"
+=== "Depois"
 
-    // Arquivo do genoma de referência
-    hisat2_index_zip: Path = "data/genome_index.tar.gz"
+    ```groovy title="nextflow.config" linenums="1" hl_lines="9-13"
+    docker.enabled = true
 
-    // ID do relatório
-    report_id: String = "all_single-end"
-}
-```
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+            params.report_id = "all_single-end"
+        }
+        test_pe {
+            params.input = "${projectDir}/data/paired-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+            params.report_id = "all_paired-end"
+        }
+    }
+    ```
 
-### 3.3. Atualizar a fábrica de canal
+=== "Antes"
 
-Precisamos dizer ao operador `.map()` para pegar ambos os caminhos de arquivo FASTQ agora.
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
 
-Então `row -> file(row.fastq_path)` se torna `row -> [file(row.fastq_1), file(row.fastq_2)]`
+    profiles {
+        test {
+            params.input = "${projectDir}/data/single-end.csv"
+            params.hisat2_index_zip = "${projectDir}/data/genome_index.tar.gz"
+            params.report_id = "all_single-end"
+        }
+    }
+    ```
 
-```groovy title="rnaseq_pe.nf" linenums="19"
-    // Cria canal de entrada a partir do conteúdo de um arquivo CSV
-    read_ch = channel.fromPath(params.input_csv)
-        .splitCsv(header:true)
-        .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
-```
+O perfil de teste para dados paired-end está pronto.
 
-### 3.4. Fazer uma versão paired-end do processo FASTQC
+#### 3.1.3. Atualizar a fábrica de canal
 
-Vamos fazer uma cópia do módulo para que possamos ter ambas as versões à mão.
+O operador `.map()` precisa pegar ambos os caminhos de arquivo FASTQ e retorná-los como uma lista.
+
+=== "Depois"
+
+    ```groovy title="rnaseq_pe.nf" linenums="25" hl_lines="4"
+        // Cria canal de entrada a partir do conteúdo de um arquivo CSV
+        read_ch = channel.fromPath(params.input)
+            .splitCsv(header: true)
+            .map { row -> [file(row.fastq_1), file(row.fastq_2)] }
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq_pe.nf" linenums="25"
+        // Cria canal de entrada a partir do conteúdo de um arquivo CSV
+        read_ch = channel.fromPath(params.input)
+            .splitCsv(header: true)
+            .map { row -> file(row.fastq_path) }
+    ```
+
+O tratamento de entrada está configurado para dados paired-end.
+
+### 3.2. Adaptar o módulo FASTQC para dados paired-end
+
+Copie o módulo para criar uma versão paired-end:
 
 ```bash
 cp modules/fastqc.nf modules/fastqc_pe.nf
 ```
 
-Abra o novo arquivo de módulo `fastqc_pe.nf` no editor de código e faça as seguintes mudanças de código:
+A entrada do processo FASTQC não precisa mudar — quando o Nextflow recebe uma lista de dois arquivos, ele prepara ambos e `reads` se expande para ambos os nomes de arquivo.
+A única mudança necessária é no bloco de saída: já que agora obtemos dois relatórios FastQC por amostra, mudamos de padrões baseados em `simpleName` para curingas.
 
-- Mude `fastqc $reads` para `fastqc ${reads}` no bloco `script` (linha 17) para que a entrada `reads` seja desempacotada, já que agora é uma tupla de dois caminhos em vez de um único caminho.
-- Substitua `${reads.simpleName}` por um curinga (`*`) para evitar ter que lidar com os arquivos de saída individualmente.
+=== "Depois"
 
-```groovy title="modules/fastqc_pe.nf" linenums="8"
-    input:
-    path reads
+    ```groovy title="modules/fastqc_pe.nf" linenums="10" hl_lines="2 3"
+        output:
+        path "*_fastqc.zip", emit: zip
+        path "*_fastqc.html", emit: html
+    ```
 
-    output:
-    path "*_fastqc.zip", emit: zip
-    path "*_fastqc.html", emit: html
+=== "Antes"
 
-    script:
-    """
-    fastqc ${reads}
-    """
-```
+    ```groovy title="modules/fastqc_pe.nf" linenums="10"
+        output:
+        path "${reads.simpleName}_fastqc.zip", emit: zip
+        path "${reads.simpleName}_fastqc.html", emit: html
+    ```
 
-Tecnicamente isso generaliza o processo `FASTQC` de uma forma que o torna capaz de lidar com dados de RNAseq single-end ou paired-end.
+Isso generaliza o processo de uma forma que o torna capaz de lidar com dados de RNAseq single-end ou paired-end.
 
-Finalmente, atualize a instrução de importação do módulo para usar a versão paired-end do módulo.
+Atualize a importação em `rnaseq_pe.nf` para usar a versão paired-end:
 
-```groovy title="rnaseq_pe.nf" linenums="4"
-include { FASTQC } from './modules/fastqc_pe.nf'
-```
+=== "Depois"
 
-### 3.5. Fazer uma versão paired-end do processo TRIM_GALORE
+    ```groovy title="rnaseq_pe.nf" linenums="4" hl_lines="1"
+    include { FASTQC } from './modules/fastqc_pe.nf'
+    ```
 
-Faça uma cópia do módulo para que possamos ter ambas as versões à mão.
+=== "Antes"
+
+    ```groovy title="rnaseq_pe.nf" linenums="4"
+    include { FASTQC } from './modules/fastqc.nf'
+    ```
+
+O módulo FASTQC e sua importação estão atualizados para dados paired-end.
+
+### 3.3. Adaptar o módulo TRIM_GALORE para dados paired-end
+
+Copie o módulo para criar uma versão paired-end:
 
 ```bash
 cp modules/trim_galore.nf modules/trim_galore_pe.nf
 ```
 
-Abra o novo arquivo de módulo `trim_galore_pe.nf` no editor de código e faça as seguintes mudanças de código:
+Este módulo precisa de mudanças mais substanciais:
 
-- Mude a declaração de entrada de `path reads` para `tuple path(read1), path(read2)`
-- Atualize o comando no bloco `script`, substituindo `$reads` por `--paired ${read1} ${read2}`
-- Atualize as declarações de saída para refletir os arquivos adicionados e diferentes convenções de nomenclatura, usando curingas para evitar ter que listar tudo.
+- A entrada muda de um único caminho para uma tupla de dois caminhos
+- O comando adiciona a flag `--paired` e recebe ambos os arquivos de leitura
+- A saída muda para refletir os arquivos adicionados e diferentes convenções de nomenclatura do Trim Galore, produzindo relatórios FastQC separados para cada arquivo de leitura
 
-```groovy title="modules/trim_galore_pe.nf" linenums="8"
-    input:
-    tuple path(read1), path(read2)
+=== "Depois"
 
-    output:
-    tuple path("*_val_1.fq.gz"), path("*_val_2.fq.gz"), emit: trimmed_reads
-    path "*_trimming_report.txt", emit: trimming_reports
-    path "*_val_1_fastqc.{zip,html}", emit: fastqc_reports_1
-    path "*_val_2_fastqc.{zip,html}", emit: fastqc_reports_2
+    ```groovy title="modules/trim_galore_pe.nf" linenums="8" hl_lines="2 5 7 8 12"
+        input:
+        tuple path(read1), path(read2)
 
-    script:
-    """
-    trim_galore --fastqc --paired ${read1} ${read2}
-    """
-```
+        output:
+        tuple path("*_val_1.fq.gz"), path("*_val_2.fq.gz"), emit: trimmed_reads
+        path "*_trimming_report.txt", emit: trimming_reports
+        path "*_val_1_fastqc.{zip,html}", emit: fastqc_reports_1
+        path "*_val_2_fastqc.{zip,html}", emit: fastqc_reports_2
 
-Finalmente, atualize a instrução de importação do módulo para usar a versão paired-end do módulo.
+        script:
+        """
+        trim_galore --fastqc --paired ${read1} ${read2}
+        """
+    ```
 
-```groovy title="rnaseq_pe.nf" linenums="5"
-include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
-```
+=== "Antes"
 
-### 3.6. Atualizar a chamada ao processo MULTIQC para esperar dois relatórios de TRIM_GALORE
+    ```groovy title="modules/trim_galore_pe.nf" linenums="8"
+        input:
+        path reads
 
-O processo `TRIM_GALORE` agora produz um canal de saída adicional, então precisamos alimentar isso ao MultiQC.
+        output:
+        path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
+        path "${reads}_trimming_report.txt", emit: trimming_reports
+        path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
 
-Substitua `TRIM_GALORE.out.fastqc_reports,` por `TRIM_GALORE.out.fastqc_reports_1,` mais `TRIM_GALORE.out.fastqc_reports_2,`:
+        script:
+        """
+        trim_galore --fastqc ${reads}
+        """
+    ```
 
-```groovy title="rnaseq_pe.nf" linenums="33"
-    // Geração de relatório de QC abrangente
-    MULTIQC(
-        FASTQC.out.zip.mix(
-        FASTQC.out.html,
-        TRIM_GALORE.out.trimming_reports,
-        TRIM_GALORE.out.fastqc_reports_1,
-        TRIM_GALORE.out.fastqc_reports_2,
-        HISAT2_ALIGN.out.log
-        ).collect(),
-        params.report_id
-    )
-```
+Atualize a importação em `rnaseq_pe.nf`:
 
-Já que estamos no MultiQC, vamos também atualizar o padrão do parâmetro `report_id` de `"all_single-end"` para `"all_paired-end"`.
+=== "Depois"
 
-```groovy title="rnaseq_pe.nf" linenums="9"
-params {
-    // Entrada primária
-    input_csv: Path = "data/paired-end.csv"
+    ```groovy title="rnaseq_pe.nf" linenums="5" hl_lines="1"
+    include { TRIM_GALORE } from './modules/trim_galore_pe.nf'
+    ```
 
-    // Arquivo do genoma de referência
-    hisat2_index_zip: Path = "data/genome_index.tar.gz"
+=== "Antes"
 
-    // ID do relatório
-    report_id: String = "all_paired-end"
-}
-```
+    ```groovy title="rnaseq_pe.nf" linenums="5"
+    include { TRIM_GALORE } from './modules/trim_galore.nf'
+    ```
 
-### 3.7. Fazer uma versão paired-end do processo HISAT2_ALIGN
+O módulo TRIM_GALORE e sua importação estão atualizados para dados paired-end.
 
-Faça uma cópia do módulo para que possamos ter ambas as versões à mão.
+### 3.4. Adaptar o módulo HISAT2_ALIGN para dados paired-end
+
+Copie o módulo para criar uma versão paired-end:
 
 ```bash
 cp modules/hisat2_align.nf modules/hisat2_align_pe.nf
 ```
 
-Abra o novo arquivo de módulo `hisat2_align_pe.nf` no editor de código e faça as seguintes mudanças de código:
+Este módulo precisa de mudanças similares:
 
-- Mude a declaração de entrada de `path reads` para `tuple path(read1), path(read2)`
-- Atualize o comando no bloco `script`, substituindo `-U $reads` por `-1 ${read1} -2 ${read2}`
-- Substitua todas as instâncias de `${reads.simpleName}` por `${read1.simpleName}` no comando no bloco `script` bem como nas declarações de saída.
+- A entrada muda de um único caminho para uma tupla de dois caminhos
+- O comando HISAT2 muda de `-U` (não pareado) para argumentos de leitura `-1` e `-2` (pareados)
+- Todos os usos de `reads.simpleName` mudam para `read1.simpleName` já que agora referenciamos um membro específico do par
 
-```groovy title="modules/hisat2_align_pe.nf" linenums="8"
-    input:
-    tuple path(read1), path(read2)
-    path index_zip
+=== "Depois"
 
-    output:
-    path "${read1.simpleName}.bam", emit: bam
-    path "${read1.simpleName}.hisat2.log", emit: log
+    ```groovy title="modules/hisat2_align_pe.nf" linenums="8" hl_lines="2 6 7 12 13 14"
+        input:
+        tuple path(read1), path(read2)
+        path index_zip
 
-    script:
-    """
-    tar -xzvf $index_zip
-    hisat2 -x ${index_zip.simpleName} -1 ${read1} -2 ${read2} \
-        --new-summary --summary-file ${read1.simpleName}.hisat2.log | \
-        samtools view -bS -o ${read1.simpleName}.bam
-    """
-```
+        output:
+        path "${read1.simpleName}.bam", emit: bam
+        path "${read1.simpleName}.hisat2.log", emit: log
 
-Finalmente, atualize a instrução de importação do módulo para usar a versão paired-end do módulo.
+        script:
+        """
+        tar -xzvf ${index_zip}
+        hisat2 -x ${index_zip.simpleName} -1 ${read1} -2 ${read2} \
+            --new-summary --summary-file ${read1.simpleName}.hisat2.log | \
+            samtools view -bS -o ${read1.simpleName}.bam
+        """
+    ```
 
-```groovy title="rnaseq_pe.nf" linenums="5"
-include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
-```
+=== "Antes"
 
-### 3.8. Executar o fluxo de trabalho para testar se funciona
+    ```groovy title="modules/hisat2_align_pe.nf" linenums="8"
+        input:
+        path reads
+        path index_zip
+
+        output:
+        path "${reads.simpleName}.bam", emit: bam
+        path "${reads.simpleName}.hisat2.log", emit: log
+
+        script:
+        """
+        tar -xzvf ${index_zip}
+        hisat2 -x ${index_zip.simpleName} -U ${reads} \
+            --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
+            samtools view -bS -o ${reads.simpleName}.bam
+        """
+    ```
+
+Atualize a importação em `rnaseq_pe.nf`:
+
+=== "Depois"
+
+    ```groovy title="rnaseq_pe.nf" linenums="6" hl_lines="1"
+    include { HISAT2_ALIGN } from './modules/hisat2_align_pe.nf'
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq_pe.nf" linenums="6"
+    include { HISAT2_ALIGN } from './modules/hisat2_align.nf'
+    ```
+
+O módulo HISAT2_ALIGN e sua importação estão atualizados para dados paired-end.
+
+### 3.5. Atualizar a agregação MultiQC para saídas paired-end
+
+O processo `TRIM_GALORE` paired-end agora produz dois canais de relatório FastQC separados (`fastqc_reports_1` e `fastqc_reports_2`) em vez de um.
+Atualize o bloco `.mix()` em `rnaseq_pe.nf` para incluir ambos:
+
+=== "Depois"
+
+    ```groovy title="rnaseq_pe.nf" linenums="40" hl_lines="5 6"
+        multiqc_files_ch = channel.empty().mix(
+            FASTQC.out.zip,
+            FASTQC.out.html,
+            TRIM_GALORE.out.trimming_reports,
+            TRIM_GALORE.out.fastqc_reports_1,
+            TRIM_GALORE.out.fastqc_reports_2,
+            HISAT2_ALIGN.out.log,
+        )
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq_pe.nf" linenums="40"
+        multiqc_files_ch = channel.empty().mix(
+            FASTQC.out.zip,
+            FASTQC.out.html,
+            TRIM_GALORE.out.trimming_reports,
+            TRIM_GALORE.out.fastqc_reports,
+            HISAT2_ALIGN.out.log,
+        )
+    ```
+
+A agregação MultiQC agora inclui ambos os conjuntos de relatórios FastQC paired-end.
+
+### 3.6. Atualizar o tratamento de saída para saídas paired-end
+
+A seção `publish:` e o bloco `output {}` também precisam refletir os dois canais de relatório FastQC separados do processo `TRIM_GALORE` paired-end.
+
+Atualize a seção `publish:` em `rnaseq_pe.nf`:
+
+=== "Depois"
+
+    ```groovy title="rnaseq_pe.nf" linenums="52" hl_lines="6-7"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc_1 = TRIM_GALORE.out.fastqc_reports_1
+        trimming_fastqc_2 = TRIM_GALORE.out.fastqc_reports_2
+        bam = HISAT2_ALIGN.out.bam
+        align_log = HISAT2_ALIGN.out.log
+        multiqc_report = MULTIQC.out.report
+        multiqc_data = MULTIQC.out.data
+    }
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq_pe.nf" linenums="52"
+        publish:
+        fastqc_zip = FASTQC.out.zip
+        fastqc_html = FASTQC.out.html
+        trimmed_reads = TRIM_GALORE.out.trimmed_reads
+        trimming_reports = TRIM_GALORE.out.trimming_reports
+        trimming_fastqc = TRIM_GALORE.out.fastqc_reports
+        bam = HISAT2_ALIGN.out.bam
+        align_log = HISAT2_ALIGN.out.log
+        multiqc_report = MULTIQC.out.report
+        multiqc_data = MULTIQC.out.data
+    }
+    ```
+
+Atualize as entradas correspondentes no bloco `output {}`:
+
+=== "Depois"
+
+    ```groovy title="rnaseq_pe.nf" linenums="77" hl_lines="4-9"
+        trimming_reports {
+            path 'trimming'
+        }
+        trimming_fastqc_1 {
+            path 'trimming'
+        }
+        trimming_fastqc_2 {
+            path 'trimming'
+        }
+        bam {
+            path 'align'
+        }
+    ```
+
+=== "Antes"
+
+    ```groovy title="rnaseq_pe.nf" linenums="77"
+        trimming_reports {
+            path 'trimming'
+        }
+        trimming_fastqc {
+            path 'trimming'
+        }
+        bam {
+            path 'align'
+        }
+    ```
+
+O fluxo de trabalho paired-end agora está totalmente atualizado e pronto para executar.
+
+### 3.7. Executar o fluxo de trabalho
 
 Não usamos `-resume` já que isso não usaria cache, e há duas vezes mais dados para processar do que antes, mas ainda deve ser completado em menos de um minuto.
 
 ```bash
-nextflow run rnaseq_pe.nf
+nextflow run rnaseq_pe.nf -profile test_pe
 ```
 
 ??? success "Saída do comando"
@@ -508,17 +975,17 @@ nextflow run rnaseq_pe.nf
     [e6/a3ccd9] MULTIQC          [100%] 1 of 1 ✔
     ```
 
-E é isso! Agora temos duas versões ligeiramente divergentes do nosso fluxo de trabalho, uma para dados de leitura single-end e uma para dados paired-end.
+Agora temos duas versões ligeiramente divergentes do nosso fluxo de trabalho, uma para dados de leitura single-end e uma para dados paired-end.
 O próximo passo lógico seria fazer o fluxo de trabalho aceitar qualquer tipo de dado dinamicamente, o que está fora do escopo deste curso, mas podemos abordar isso em um acompanhamento.
 
 ---
 
 ### Conclusão
 
-Você sabe como adaptar um fluxo de trabalho de amostra única para paralelizar o processamento de múltiplas amostras, gerar um relatório de QC abrangente e adaptar o fluxo de trabalho para usar dados de leitura paired-end se necessário.
+Você sabe como adaptar um fluxo de trabalho de amostra única para paralelizar o processamento de múltiplas amostras, gerar um relatório de QC abrangente e adaptar o fluxo de trabalho para usar dados de leitura paired-end.
 
 ### O que vem a seguir?
 
-Parabéns, você completou o mini-curso Nextflow Para RNAseq! Celebre seu sucesso e faça uma pausa bem merecida!
+Dê um grande tapinha nas costas! Você completou o curso Nextflow para RNAseq.
 
-Em seguida, pedimos que você complete uma pesquisa muito breve sobre sua experiência com este curso de treinamento, então vamos levá-lo a uma página com links para recursos de treinamento adicionais e links úteis.
+Vá para o [resumo final do curso](./next_steps.md) para revisar o que você aprendeu e descobrir o que vem a seguir.

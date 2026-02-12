@@ -13,7 +13,7 @@ Ardından süreci otomatikleştirmek için tek örnekli bir Nextflow pipeline'ı
 
 - Girdi olarak BAM dosyalarını alan ve çıktı olarak ortak çağrılmış VCF'ler üreten bir varyant çağırma pipeline'ı.
 - Ayrı modül dosyalarında saklanan üç süreç (`SAMTOOLS_INDEX`, `GATK_HAPLOTYPECALLER` ve `GATK_JOINTGENOTYPING`).
-- Nextflow'un veri akışı paradigmasını kullanarak herhangi bir sayıda girdi örneğine otomatik olarak ölçeklenen pipeline.
+- Nextflow'un veri akışı paradigmasını kullanarak girdi örneklerinin işlenmesini otomatik olarak paralel hale getiren pipeline.
 - Sonuçlar `results/` adlı bir dizine yayınlanır.
 
 ### Kazanılan beceriler
