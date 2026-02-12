@@ -627,7 +627,7 @@ Workflow'da yapmanız gereken düzenlemeler şunlardır:
     Yani etkin bir şekilde şunu dönüştürdük:
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'it'
+    [id: 'sampleA', character: 'squirrel'], 'fr'
     ```
 
     şuna:

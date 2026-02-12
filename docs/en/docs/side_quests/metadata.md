@@ -625,7 +625,7 @@ If you're not yet familiar with the `+` operator, or if this seems confusing, ta
     So we've effectively transformed:
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'it'
+    [id: 'sampleA', character: 'squirrel'], 'fr'
     ```
 
     into:
