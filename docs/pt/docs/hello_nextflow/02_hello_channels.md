@@ -105,7 +105,7 @@ Isso cria um canal chamado `greeting_ch` usando a fábrica de canais `channel.of
 --8<-- "docs/en/docs/hello_nextflow/img/hello-pipeline-channel.svg"
 </figure>
 
-!!! note
+!!! note "Nota"
 
     Estamos temporariamente voltando a usar strings codificadas em vez de usar um parâmetro CLI para fins de legibilidade. Voltaremos a usar parâmetros CLI assim que tivermos coberto o que está acontecendo no nível do canal.
 
@@ -436,7 +436,7 @@ Isso é muito melhor, pelo menos para um fluxo de trabalho simples.
 Para um fluxo de trabalho complexo, ou um grande número de entradas, ter a lista completa exibida no terminal ficaria um pouco avassalador.
 É por isso que `-ansi-log false` não é o comportamento padrão.
 
-!!! tip
+!!! tip "Dica"
 
     A maneira como o status é relatado é um pouco diferente entre os dois modos de log.
     No modo condensado, o Nextflow relata se as chamadas foram concluídas com sucesso ou não.
@@ -564,7 +564,7 @@ No bloco process, faça as seguintes alterações de código:
 
 Certifique-se de substituir `output.txt` tanto na definição de saída quanto no bloco de comando `script:`.
 
-!!! tip
+!!! tip "Dica"
 
     Na definição de saída, você DEVE usar aspas duplas em torno da expressão do nome do arquivo (NÃO aspas simples), caso contrário falhará.
 
@@ -623,7 +623,7 @@ Sim! E cada uma tem o conteúdo esperado.
 
 Sucesso! Agora podemos adicionar quantas saudações quisermos sem nos preocupar com arquivos de saída sendo sobrescritos.
 
-!!! tip
+!!! tip "Dica"
 
     Na prática, nomear arquivos com base nos dados de entrada em si é quase sempre impraticável.
     A melhor maneira de gerar nomes de arquivo dinâmicos é passar metadados para um processo junto com os arquivos de entrada.
@@ -922,7 +922,7 @@ Definimos uma variável temporária para o valor interno, aqui chamada `greeting
 Neste exemplo, `$greeting` representa cada item individual carregado no canal.
 Isso resultará em uma saída de console bem rotulada.
 
-!!! info
+!!! info "Info"
 
     Em alguns pipelines você pode ver uma variável especial chamada `$it` usada dentro de closures de operadores.
     Esta é uma variável _implícita_ que permite um acesso de forma abreviada à variável interna,
@@ -960,7 +960,7 @@ Desta vez funciona E nos dá a percepção adicional do que o conteúdo do canal
 
 Importante, isso significa que cada item agora pode ser processado separadamente pelo fluxo de trabalho.
 
-!!! tip
+!!! tip "Dica"
 
     É tecnicamente possível alcançar os mesmos resultados usando uma fábrica de canais diferente, [`channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), que inclui uma etapa de mapeamento implícita em sua operação.
     Aqui escolhemos não usar isso para demonstrar o uso de um operador em um caso de uso simples.
@@ -1144,7 +1144,7 @@ Olhando através da lista de operadores novamente, encontramos [`splitCsv()`](ht
 
 Para aplicar o operador, anexamos ele à linha da fábrica de canais como anteriormente.
 
-No bloco workflow, faça a seguinte alteração de código para substituir `flatten()` por `splitcsv()` (descomentado):
+No bloco workflow, faça a seguinte alteração de código para substituir `flatten()` por `splitCsv()` (descomentado):
 
 === "Depois"
 

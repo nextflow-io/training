@@ -2,27 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traduzione assistita da IA - [scopri di più e suggerisci miglioramenti](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Nella Parte 2, avete costruito una pipeline di variant calling per-campione che processava i dati di ciascun campione in modo indipendente.
-Ora la estenderemo per implementare il joint variant calling, come trattato nella [Parte 1](01_method.md).
-
-## Compito
-
-In questa parte del corso, estenderemo il flusso di lavoro per fare quanto segue:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
-</figure>
-
-1. Generare un file indice per ciascun file BAM di input usando Samtools
-2. Eseguire GATK HaplotypeCaller su ciascun file BAM di input per generare un GVCF delle chiamate di varianti genomiche per-campione
-3. Raccogliere tutti i GVCF e combinarli in un data store GenomicsDB
-4. Eseguire il joint genotyping sul data store GVCF combinato per produrre un VCF a livello di coorte
-
-Questa parte si basa direttamente sul flusso di lavoro prodotto dalla Parte 2.
+In precedenza, avete costruito una pipeline di variant calling per-campione che processava i dati di ciascun campione in modo indipendente.
+Ora la estenderemo per implementare il joint variant calling, come descritto nella [Parte 1](01_method.md) (caso d'uso multi-campione).
 
 ??? info "Come iniziare da questa sezione"
 
-    Questa sezione del corso presuppone che abbiate completato la [Parte 2: Variant calling per-campione](./02_per_sample_variant_calling.md) e che abbiate una pipeline `genomics.nf` funzionante.
+    Questa sezione del corso presuppone che abbiate completato la [Parte 1: Panoramica del metodo](./01_method.md), la [Parte 2: Variant calling per-campione](./02_per_sample_variant_calling.md) e che abbiate una pipeline `genomics.nf` funzionante.
 
     Se non avete completato la Parte 2 o volete ripartire da zero per questa parte, potete usare la soluzione della Parte 2 come punto di partenza.
     Eseguite questi comandi dall'interno della directory `nf4-science/genomics/`:
@@ -40,16 +25,33 @@ Questa parte si basa direttamente sul flusso di lavoro prodotto dalla Parte 2.
     nextflow run genomics.nf -profile test
     ```
 
+## Compito
+
+In questa parte del corso, estenderemo il flusso di lavoro per fare quanto segue:
+
+1. Generare un file indice per ciascun file BAM di input usando Samtools
+2. Eseguire GATK HaplotypeCaller su ciascun file BAM di input per generare un GVCF delle chiamate di varianti genomiche per-campione
+3. Raccogliere tutti i GVCF e combinarli in un data store GenomicsDB
+4. Eseguire il joint genotyping sul data store GVCF combinato per produrre un VCF a livello di coorte
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
+</figure>
+
+Questo implementa il metodo descritto nella [Parte 1: Panoramica del metodo](./01_method.md) (seconda sezione che copre il caso d'uso multi-campione) e si basa direttamente sul flusso di lavoro prodotto dalla [Parte 2: Variant calling per-campione](./02_per_sample_variant_calling.md).
+
 ## Piano della lezione
 
-Abbiamo suddiviso questo in due passaggi:
+Abbiamo suddiviso questo in due fasi:
 
 1. **Modificare il passaggio di variant calling per-campione per produrre un GVCF.**
    Questo copre l'aggiornamento dei comandi e degli output del processo.
 2. **Aggiungere un passaggio di joint genotyping che combina e genotipizza i GVCF per-campione.**
    Questo introduce l'operatore `collect()`, le closure Groovy per la costruzione della riga di comando e i processi multi-comando.
 
-!!! note "Nota"
+Questo automatizza i passaggi della seconda sezione della [Parte 1: Panoramica del metodo](./01_method.md#2-joint-calling-on-a-cohort), dove avete eseguito questi comandi manualmente nei loro container.
+
+!!! tip "Suggerimento"
 
      Assicuratevi di essere nella directory di lavoro corretta:
      `cd /workspaces/training/nf4-science/genomics`
@@ -199,7 +201,7 @@ Con il modulo, i target di publish e il blocco output tutti aggiornati, possiamo
 Eseguite il flusso di lavoro per verificare che le modifiche funzionino.
 
 ```bash
-nextflow run genomics.nf
+nextflow run genomics.nf -profile test
 ```
 
 ??? success "Output del comando"
@@ -283,26 +285,59 @@ Il processo di joint genotyping necessita di due tipi di input che non abbiamo a
 #### 2.1.1. Aggiungere un parametro `cohort_name`
 
 Dobbiamo fornire un nome arbitrario per la coorte.
-Più avanti nella serie di formazione imparerete come usare i metadati dei campioni per questo tipo di cose, ma per ora dichiariamo semplicemente un parametro CLI usando `params` e gli diamo un valore predefinito per comodità.
+Più avanti nella serie di formazione imparerete come usare i metadati dei campioni per questo tipo di cose, ma per ora dichiariamo semplicemente un parametro CLI usando `params`.
 
 === "Dopo"
 
-    ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
-        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+    ```groovy title="genomics.nf" linenums="18" hl_lines="3-4"
+        intervals: Path
 
         // Nome base per il file di output finale
-        cohort_name: String = "family_trio"
+        cohort_name: String
     }
     ```
 
 === "Prima"
 
-    ```groovy title="genomics.nf" linenums="14"
-        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+    ```groovy title="genomics.nf" linenums="18"
+        intervals: Path
     }
     ```
 
-#### 2.1.2. Raccogliere gli output di HaplotypeCaller attraverso i campioni
+Useremo questo parametro per nominare il file di output finale.
+
+#### 2.1.2. Aggiungere un valore predefinito per `cohort_name` nel profilo test
+
+Aggiungiamo anche un valore predefinito per il parametro `cohort_name` nel profilo test:
+
+=== "Dopo"
+
+    ```groovy title="nextflow.config" linenums="4" hl_lines="7"
+    test {
+        params.input = "${projectDir}/data/samplesheet.csv"
+        params.reference = "${projectDir}/data/ref/ref.fasta"
+        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+        params.reference_dict = "${projectDir}/data/ref/ref.dict"
+        params.intervals = "${projectDir}/data/ref/intervals.bed"
+        params.cohort_name = "family_trio"
+    }
+    ```
+
+=== "Prima"
+
+    ```groovy title="nextflow.config" linenums="4"
+    test {
+        params.input = "${projectDir}/data/samplesheet.csv"
+        params.reference = "${projectDir}/data/ref/ref.fasta"
+        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+        params.reference_dict = "${projectDir}/data/ref/ref.dict"
+        params.intervals = "${projectDir}/data/ref/intervals.bed"
+    }
+    ```
+
+Successivamente, dovremo raccogliere gli output per-campione in modo che possano essere processati insieme.
+
+#### 2.1.3. Raccogliere gli output di HaplotypeCaller attraverso i campioni
 
 Se dovessimo collegare il canale di output da `GATK_HAPLOTYPECALLER` direttamente al nuovo processo, Nextflow chiamerebbe il processo su ciascun GVCF di campione separatamente.
 Vogliamo raggruppare tutti e tre i GVCF (e i loro file indice) in modo che Nextflow li passi tutti insieme a una singola chiamata di processo.
@@ -312,7 +347,7 @@ Aggiungete le seguenti righe al corpo del `workflow`, subito dopo la chiamata a 
 
 === "Dopo"
 
-    ```groovy title="genomics.nf" hl_lines="4-6"
+    ```groovy title="genomics.nf" linenums="48" hl_lines="4-6"
             intervals_file
         )
 
@@ -323,7 +358,7 @@ Aggiungete le seguenti righe al corpo del `workflow`, subito dopo la chiamata a 
 
 === "Prima"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="48"
             intervals_file
         )
     ```
@@ -389,7 +424,7 @@ Poi sarete in grado di riferirvi a quella intera stringa come `gvcfs_line` nel b
 
 #### 2.2.2. Riempire il modulo per il processo di joint genotyping
 
-Ora possiamo affrontare la scrittura del processo completo.
+Successivamente, possiamo affrontare la scrittura del processo completo.
 
 Aprite `modules/gatk_jointgenotyping.nf` ed esaminate la struttura della definizione del processo.
 
@@ -480,7 +515,8 @@ Aggiungete l'istruzione import a `genomics.nf`, sotto le istruzioni import esist
 
 === "Dopo"
 
-    ```groovy title="genomics.nf" linenums="21" hl_lines="3"
+    ```groovy title="genomics.nf" linenums="3" hl_lines="4"
+    // Module INCLUDE statements
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
@@ -488,7 +524,8 @@ Aggiungete l'istruzione import a `genomics.nf`, sotto le istruzioni import esist
 
 === "Prima"
 
-    ```groovy title="genomics.nf" linenums="21"
+    ```groovy title="genomics.nf" linenums="3"
+    // Module INCLUDE statements
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     ```
@@ -501,7 +538,7 @@ Aggiungete la chiamata a `GATK_JOINTGENOTYPING` nel corpo del flusso di lavoro, 
 
 === "Dopo"
 
-    ```groovy title="genomics.nf" hl_lines="3-12"
+    ```groovy title="genomics.nf" linenums="53" hl_lines="3-12"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
         // Combina i GVCF in un data store GenomicsDB e applica il joint genotyping
@@ -518,7 +555,7 @@ Aggiungete la chiamata a `GATK_JOINTGENOTYPING` nel corpo del flusso di lavoro, 
 
 === "Prima"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="53"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
     ```
 
@@ -536,7 +573,7 @@ Aggiungete il VCF joint e il suo indice alla sezione `publish:` del flusso di la
 
 === "Dopo"
 
-    ```groovy title="genomics.nf" hl_lines="5-6"
+    ```groovy title="genomics.nf" linenums="66" hl_lines="5-6"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -547,7 +584,7 @@ Aggiungete il VCF joint e il suo indice alla sezione `publish:` del flusso di la
 
 === "Prima"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="66"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -563,7 +600,7 @@ Li metteremo alla radice della directory results poiché questo è l'output fina
 
 === "Dopo"
 
-    ```groovy title="genomics.nf" hl_lines="11-16"
+    ```groovy title="genomics.nf" linenums="74" hl_lines="11-16"
     output {
         indexed_bam {
             path 'indexed_bam'
@@ -585,7 +622,7 @@ Li metteremo alla radice della directory results poiché questo è l'output fina
 
 === "Prima"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="74"
     output {
         indexed_bam {
             path 'indexed_bam'
@@ -606,7 +643,7 @@ Con il processo, i target di publish e il blocco output tutti a posto, possiamo 
 Eseguite il flusso di lavoro per verificare che tutto funzioni.
 
 ```bash
-nextflow run genomics.nf -resume
+nextflow run genomics.nf -profile test -resume
 ```
 
 ??? success "Output del comando"

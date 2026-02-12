@@ -2,27 +2,12 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Bölüm 2'de, her örneğin verisini bağımsız olarak işleyen örnek başına varyant çağrı boru hattı oluşturdunuz.
-Şimdi bunu genişleterek [Bölüm 1](01_method.md)'de ele alınan ortak varyant çağrısını uygulayacağız.
-
-## Görev
-
-Kursun bu bölümünde, iş akışını aşağıdakileri yapacak şekilde genişleteceğiz:
-
-<figure class="excalidraw">
---8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
-</figure>
-
-1. Samtools kullanarak her BAM girdi dosyası için bir dizin dosyası oluşturun
-2. Her BAM girdi dosyası üzerinde GATK HaplotypeCaller'ı çalıştırarak örnek başına genomik varyant çağrılarının bir GVCF'sini oluşturun
-3. Tüm GVCF'leri toplayın ve bunları bir GenomicsDB veri deposunda birleştirin
-4. Birleştirilmiş GVCF veri deposu üzerinde ortak genotipleme çalıştırarak kohort düzeyinde bir VCF üretin
-
-Bu bölüm doğrudan Bölüm 2'de üretilen iş akışı üzerine inşa edilmiştir.
+Daha önce, her örneğin verisini bağımsız olarak işleyen örnek başına varyant çağrı boru hattı oluşturdunuz.
+Şimdi bunu genişleterek [Bölüm 1](01_method.md)'de açıklanan ortak varyant çağrısını uygulayacağız (çok örnekli kullanım durumu).
 
 ??? info "Bu bölümden nasıl başlanır"
 
-    Kursun bu bölümü, [Bölüm 2: Örnek başına varyant çağrısı](./02_per_sample_variant_calling.md)'nı tamamladığınızı ve çalışan bir `genomics.nf` boru hattınız olduğunu varsayar.
+    Kursun bu bölümü, [Bölüm 1: Yönteme Genel Bakış](./01_method.md), [Bölüm 2: Örnek başına varyant çağrısı](./02_per_sample_variant_calling.md)'nı tamamladığınızı ve çalışan bir `genomics.nf` boru hattınız olduğunu varsayar.
 
     Bölüm 2'yi tamamlamadıysanız veya bu bölüm için yeni başlamak istiyorsanız, Bölüm 2 çözümünü başlangıç noktanız olarak kullanabilirsiniz.
     Bu komutları `nf4-science/genomics/` dizininin içinden çalıştırın:
@@ -40,16 +25,33 @@ Bu bölüm doğrudan Bölüm 2'de üretilen iş akışı üzerine inşa edilmiş
     nextflow run genomics.nf -profile test
     ```
 
+## Görev
+
+Kursun bu bölümünde, iş akışını aşağıdakileri yapacak şekilde genişleteceğiz:
+
+1. Samtools kullanarak her BAM girdi dosyası için bir dizin dosyası oluşturun
+2. Her BAM girdi dosyası üzerinde GATK HaplotypeCaller'ı çalıştırarak örnek başına genomik varyant çağrılarının bir GVCF'sini oluşturun
+3. Tüm GVCF'leri toplayın ve bunları bir GenomicsDB veri deposunda birleştirin
+4. Birleştirilmiş GVCF veri deposu üzerinde ortak genotipleme çalıştırarak kohort düzeyinde bir VCF üretin
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
+</figure>
+
+Bu, [Bölüm 1: Yönteme Genel Bakış](./01_method.md)'ta açıklanan yöntemi uygular (çok örnekli kullanım durumunu kapsayan ikinci bölüm) ve doğrudan [Bölüm 2: Örnek başına varyant çağrısı](./02_per_sample_variant_calling.md) tarafından üretilen iş akışı üzerine inşa edilmiştir.
+
 ## Ders planı
 
-Bunu iki adıma ayırdık:
+Bunu iki aşamaya ayırdık:
 
 1. **Örnek başına varyant çağrı adımını bir GVCF üretecek şekilde değiştirin.**
    Bu, süreç komutlarını ve çıktılarını güncellemeyi kapsar.
 2. **Örnek başına GVCF'leri birleştiren ve genotipleyerek ortak genotipleme adımı ekleyin.**
    Bu, `collect()` operatörünü, komut satırı oluşturma için Groovy closure'larını ve çoklu komutlu süreçleri tanıtır.
 
-!!! note "Not"
+Bu, [Bölüm 1: Yönteme genel bakış](./01_method.md#2-joint-calling-on-a-cohort)'ın ikinci bölümündeki adımları otomatikleştirir; burada bu komutları konteynerlerinde manuel olarak çalıştırmıştınız.
+
+!!! tip "İpucu"
 
      Doğru çalışma dizininde olduğunuzdan emin olun:
      `cd /workspaces/training/nf4-science/genomics`
@@ -199,7 +201,7 @@ Modül, yayınlama hedefleri ve çıktı bloğunun tümü güncellendiğinde, de
 Değişikliklerin çalıştığını doğrulamak için iş akışını çalıştırın.
 
 ```bash
-nextflow run genomics.nf
+nextflow run genomics.nf -profile test
 ```
 
 ??? success "Komut çıktısı"
@@ -283,26 +285,59 @@ Ortak genotipleme süreci henüz sahip olmadığımız iki tür girdi gerektirir
 #### 2.1.1. Bir `cohort_name` parametresi ekleyin
 
 Kohort için rastgele bir ad sağlamamız gerekiyor.
-Eğitim serisinin ilerleyen bölümlerinde bu tür şeyler için örnek meta verilerini nasıl kullanacağınızı öğreneceksiniz, ancak şimdilik sadece `params` kullanarak bir CLI parametresi bildiriyoruz ve kolaylık için ona bir varsayılan değer veriyoruz.
+Eğitim serisinin ilerleyen bölümlerinde bu tür şeyler için örnek meta verilerini nasıl kullanacağınızı öğreneceksiniz, ancak şimdilik sadece `params` kullanarak bir CLI parametresi bildiriyoruz.
 
 === "Sonra"
 
-    ```groovy title="genomics.nf" linenums="14" hl_lines="3-4"
-        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+    ```groovy title="genomics.nf" linenums="18" hl_lines="3-4"
+        intervals: Path
 
         // Nihai çıktı dosyası için temel ad
-        cohort_name: String = "family_trio"
+        cohort_name: String
     }
     ```
 
 === "Önce"
 
-    ```groovy title="genomics.nf" linenums="14"
-        intervals: Path = "${projectDir}/data/ref/intervals.bed"
+    ```groovy title="genomics.nf" linenums="18"
+        intervals: Path
     }
     ```
 
-#### 2.1.2. HaplotypeCaller çıktılarını örnekler arasında toplayın
+Bu parametreyi nihai çıktı dosyasını adlandırmak için kullanacağız.
+
+#### 2.1.2. Test profilinde `cohort_name` için varsayılan değer ekleyin
+
+Ayrıca test profilinde `cohort_name` parametresi için bir varsayılan değer ekliyoruz:
+
+=== "Sonra"
+
+    ```groovy title="nextflow.config" linenums="4" hl_lines="7"
+    test {
+        params.input = "${projectDir}/data/samplesheet.csv"
+        params.reference = "${projectDir}/data/ref/ref.fasta"
+        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+        params.reference_dict = "${projectDir}/data/ref/ref.dict"
+        params.intervals = "${projectDir}/data/ref/intervals.bed"
+        params.cohort_name = "family_trio"
+    }
+    ```
+
+=== "Önce"
+
+    ```groovy title="nextflow.config" linenums="4"
+    test {
+        params.input = "${projectDir}/data/samplesheet.csv"
+        params.reference = "${projectDir}/data/ref/ref.fasta"
+        params.reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+        params.reference_dict = "${projectDir}/data/ref/ref.dict"
+        params.intervals = "${projectDir}/data/ref/intervals.bed"
+    }
+    ```
+
+Ardından, örnek başına çıktıları birlikte işlenebilmeleri için toplamamız gerekecek.
+
+#### 2.1.3. HaplotypeCaller çıktılarını örnekler arasında toplayın
 
 `GATK_HAPLOTYPECALLER`'dan gelen çıktı kanalını doğrudan yeni sürece bağlasaydık, Nextflow süreci her örnek GVCF'si üzerinde ayrı ayrı çağırırdı.
 Her üç GVCF'yi (ve dizin dosyalarını) paketlemek istiyoruz, böylece Nextflow hepsini birlikte tek bir süreç çağrısına verir.
@@ -312,7 +347,7 @@ GATK_HAPLOTYPECALLER çağrısından hemen sonra `workflow` gövdesine aşağıd
 
 === "Sonra"
 
-    ```groovy title="genomics.nf" hl_lines="4-6"
+    ```groovy title="genomics.nf" linenums="48" hl_lines="4-6"
             intervals_file
         )
 
@@ -323,7 +358,7 @@ GATK_HAPLOTYPECALLER çağrısından hemen sonra `workflow` gövdesine aşağıd
 
 === "Önce"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="48"
             intervals_file
         )
     ```
@@ -389,7 +424,7 @@ Ardından sürecin `script:` bloğunda bu string'in tamamına `gvcfs_line` olara
 
 #### 2.2.2. Ortak genotipleme süreci için modülü doldurun
 
-Şimdi tam süreci yazmaya başlayabiliriz.
+Ardından, tam süreci yazmaya başlayabiliriz.
 
 `modules/gatk_jointgenotyping.nf` dosyasını açın ve süreç tanımının ana hatlarını inceleyin.
 
@@ -480,7 +515,8 @@ Mevcut içe aktarma ifadelerinin altına `genomics.nf` dosyasına içe aktarma i
 
 === "Sonra"
 
-    ```groovy title="genomics.nf" linenums="21" hl_lines="3"
+    ```groovy title="genomics.nf" linenums="3" hl_lines="4"
+    // Modül INCLUDE ifadeleri
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     include { GATK_JOINTGENOTYPING } from './modules/gatk_jointgenotyping.nf'
@@ -488,7 +524,8 @@ Mevcut içe aktarma ifadelerinin altına `genomics.nf` dosyasına içe aktarma i
 
 === "Önce"
 
-    ```groovy title="genomics.nf" linenums="21"
+    ```groovy title="genomics.nf" linenums="3"
+    // Modül INCLUDE ifadeleri
     include { SAMTOOLS_INDEX } from './modules/samtools_index.nf'
     include { GATK_HAPLOTYPECALLER } from './modules/gatk_haplotypecaller.nf'
     ```
@@ -501,7 +538,7 @@ Süreç artık iş akışı kapsamında kullanılabilir.
 
 === "Sonra"
 
-    ```groovy title="genomics.nf" hl_lines="3-12"
+    ```groovy title="genomics.nf" linenums="53" hl_lines="3-12"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
         // GVCF'leri bir GenomicsDB veri deposunda birleştir ve ortak genotipleme uygula
@@ -518,7 +555,7 @@ Süreç artık iş akışı kapsamında kullanılabilir.
 
 === "Önce"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="53"
         all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
     ```
 
@@ -536,7 +573,7 @@ Ortak genotipleme sonuçları için yayınlama hedefleri ve çıktı bloğu gird
 
 === "Sonra"
 
-    ```groovy title="genomics.nf" hl_lines="5-6"
+    ```groovy title="genomics.nf" linenums="66" hl_lines="5-6"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -547,7 +584,7 @@ Ortak genotipleme sonuçları için yayınlama hedefleri ve çıktı bloğu gird
 
 === "Önce"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="66"
         publish:
         indexed_bam = SAMTOOLS_INDEX.out
         gvcf = GATK_HAPLOTYPECALLER.out.vcf
@@ -563,7 +600,7 @@ Bu nihai çıktı olduğu için bunları sonuçlar dizininin kök dizinine koyac
 
 === "Sonra"
 
-    ```groovy title="genomics.nf" hl_lines="11-16"
+    ```groovy title="genomics.nf" linenums="74" hl_lines="11-16"
     output {
         indexed_bam {
             path 'indexed_bam'
@@ -585,7 +622,7 @@ Bu nihai çıktı olduğu için bunları sonuçlar dizininin kök dizinine koyac
 
 === "Önce"
 
-    ```groovy title="genomics.nf"
+    ```groovy title="genomics.nf" linenums="74"
     output {
         indexed_bam {
             path 'indexed_bam'
@@ -606,7 +643,7 @@ Süreç, yayınlama hedefleri ve çıktı bloğunun tümü yerinde olduğunda, e
 Her şeyin çalıştığını doğrulamak için iş akışını çalıştırın.
 
 ```bash
-nextflow run genomics.nf -resume
+nextflow run genomics.nf -profile test -resume
 ```
 
 ??? success "Komut çıktısı"

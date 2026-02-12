@@ -1,10 +1,10 @@
 ---
-title: Nextflow run for Imaging
+title: Imaging
 hide:
   - toc
 ---
 
-# Nextflow run for Imaging
+# Nextflow para Imaging
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 

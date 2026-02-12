@@ -75,36 +75,35 @@ tree . -L 2
     ├── data
     │   ├── bam
     │   ├── ref
-    │   ├── sample_bams.txt
     │   └── samplesheet.csv
     ├── genomics.nf
     ├── modules
     │   ├── gatk_haplotypecaller.nf
+    │   ├── gatk_jointgenotyping.nf
     │   └── samtools_index.nf
     ├── nextflow.config
     └── solutions
-        ├── modules
-        ├── nf-test.config
         ├── part2
-        └── tests
+        └── part3
 
-    8 directories, 8 files
+    7 directories, 6 files
     ```
 
 Haga clic en el cuadro de color para expandir la sección y ver su contenido.
 Usamos secciones plegables como esta para mostrar la salida esperada de comandos, así como el contenido de directorios y archivos de forma concisa.
 
-- **El archivo `genomics.nf`** es un script de workflow que construirá a lo largo del curso.
+- **El archivo `genomics.nf`** es una estructura base para un script de workflow que construirá a medida que avanza en el curso.
 
-- **El directorio `modules`** contiene archivos de módulo esqueleto que completará durante el curso.
+- **El directorio `modules`** contiene estructuras base para módulos de proceso que completará durante el curso.
 
 - **El archivo `nextflow.config`** es un archivo de configuración que establece propiedades mínimas del entorno.
   Puede ignorarlo por ahora.
 
 - **El directorio `data`** contiene datos de entrada y recursos relacionados, descritos más adelante en el curso.
 
-- **El directorio `solutions`** contiene archivos de módulo completados y una solución de la Parte 2 que puede servir como punto de partida para la Parte 3.
+- **El directorio `solutions`** contiene scripts de workflow y módulos completados que resultan de cada paso del curso.
   Están destinados a ser usados como referencia para verificar su trabajo y solucionar cualquier problema.
+  La solución de la Parte 2 puede usarse como punto de partida para la Parte 3.
 
 ## Lista de verificación de preparación
 
@@ -116,4 +115,4 @@ Usamos secciones plegables como esta para mostrar la salida esperada de comandos
 
 Si puede marcar todas las casillas, está listo para comenzar.
 
-**Para continuar a la [Parte 1: Descripción general del método y pruebas manuales](./01_method.md), haga clic en la flecha en la esquina inferior derecha de esta página.**
+**Para continuar a la [Parte 1: Descripción general del método](./01_method.md), haga clic en la flecha en la esquina inferior derecha de esta página.**

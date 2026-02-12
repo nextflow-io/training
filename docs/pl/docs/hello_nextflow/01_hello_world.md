@@ -888,7 +888,7 @@ Jak widzisz, możemy określić typ wejścia, którego oczekuje workflow (Nextfl
 Składnia to `nazwa: Typ = wartość_domyślna`.
 Obsługiwane typy to `String`, `Integer`, `Float`, `Boolean` i `Path`.
 
-!!! info "Informacja"
+!!! info "Info"
 
     W starszych workflow'ach możesz zobaczyć, że cały blok `params` jest zapisany po prostu jako `input = 'Holà mundo!'`.
 
@@ -912,6 +912,34 @@ nextflow run hello-world.nf
 
     executor >  local (1)
     [72/394147] sayHello | 1 of 1 ✔
+    ```
+
+??? question "Jeśli nie zadziałało"
+
+    Jeśli to nie powiodło się z błędem, który wygląda tak:
+
+    ```
+    ERROR ~ Script compilation error
+    - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+    - cause: you tried to assign a value to the class 'java.lang.String'
+    @ line 24, column 12.
+          input: String = 'Holà mundo!'
+                  ^
+
+    1 error
+
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+    Prawdopodobnie używasz starszego parsera języka Nextflow v1.
+    Zostało to wspomniane na początku kursu, ale może Ci to umknęło.
+    Sprawdź materiały pomocnicze [Wersje Nextflow](../info/nxf_versions.md).
+
+    Krótko mówiąc, jeśli używasz Nextflow `25.10`, musisz włączyć parser języka v2:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
     ```
 
 Wyjście będzie w tym samym miejscu co poprzednio, ale zawartość powinna być zaktualizowana o nowy tekst.

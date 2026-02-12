@@ -1,46 +1,55 @@
 ---
-title: RNAseq için Nextflow
+title: RNAseq
 hide:
   - toc
+page_type: index_page
+index_type: course
+additional_information:
+  technical_requirements: true
+  learning_objectives:
+    - Temel RNAseq işleme ve QC yöntemlerini uygulamak için doğrusal bir iş akışı yazmak
+    - FASTQ gibi alana özgü dosyaları ve genom referans kaynaklarını uygun şekilde ele almak
+    - Tek uçlu ve çift uçlu dizileme verilerini işlemek
+    - Nextflow'un veri akışı paradigmasından yararlanarak örnek başına RNAseq işlemesini paralelleştirmek
+    - İlgili kanal operatörleri kullanarak birden fazla adım ve örnek genelinde QC raporlarını birleştirmek
+  audience_prerequisites:
+    - "**Hedef Kitle:** Bu kurs, veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen transkriptomik ve ilgili alanlardaki araştırmacılar için tasarlanmıştır."
+    - "**Beceriler:** Komut satırı, temel betik kavramları ve yaygın RNAseq dosya formatları ile bir miktar aşinalık varsayılmaktadır."
+    - "**Ön Koşullar:** [Hello Nextflow](../../hello_nextflow/) eğitiminde ele alınan temel Nextflow kavramları ve araçları."
 ---
 
 # RNAseq için Nextflow
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Bu eğitim kursu, transkriptomik ve ilgili alanlarda veri analizi pipeline'ları geliştirmek veya özelleştirmek isteyen araştırmacılar için tasarlanmıştır.
-[Hello Nextflow](../../hello_nextflow/) başlangıç eğitimi üzerine inşa edilmiş olup, Nextflow'un toplu RNAseq analizi bağlamında nasıl kullanılacağını göstermektedir.
+**Nextflow'u gerçek dünya transkriptomik kullanım durumuna uygulayan uygulamalı bir kurs: Trim Galore, HISAT2 ve FastQC ile toplu RNAseq işleme.**
 
-Özellikle, bu kurs adaptör dizilerini kırpmak, okumaları genom referansına hizalamak ve birkaç aşamada kalite kontrol (QC) gerçekleştirmek için basit bir toplu RNAseq işleme pipeline'ının nasıl uygulanacağını göstermektedir.
+Bu kurs, [Hello Nextflow](../../hello_nextflow/) başlangıç eğitimi üzerine inşa edilmiş olup, Nextflow'un toplu RNAseq analizi bağlamında nasıl kullanılacağını göstermektedir.
+Adaptör dizilerini kırpan, okumaları genom referansına hizalayan ve birkaç aşamada kalite kontrol (QC) gerçekleştiren bir işleme pipeline'ı uygulayacaksınız.
 
-Hadi başlayalım! Eğitim ortamını başlatmak için aşağıdaki "Open in GitHub Codespaces" düğmesine tıklayın (tercihen ayrı bir sekmede), ardından yüklenirken okumaya devam edin.
+<!-- additional_information -->
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+## Kursa genel bakış
 
-## Öğrenim hedefleri
+Bu kurs uygulamalı olup, bilgiyi kademeli olarak tanıtmak üzere yapılandırılmış hedef odaklı alıştırmalar içermektedir.
 
-Bu kursu tamamlayarak, temel Nextflow kavramlarını ve araçlarını tipik bir RNAseq kullanım durumuna nasıl uygulayacağınızı öğreneceksiniz.
+İşleme araçlarını terminalde manuel olarak çalıştırarak metodolojiyi anlamakla başlayacak, ardından analizi otomatikleştiren ve ölçeklendiren bir Nextflow pipeline'ını aşamalı olarak oluşturacaksınız.
 
-Bu atölye sonunda şunları yapabileceksiniz:
+### Ders planı
 
-- Temel RNAseq işleme ve QC yöntemlerini uygulamak için doğrusal bir workflow yazmak
-- FASTQ gibi alana özgü dosyaları ve genom referans kaynaklarını uygun şekilde ele almak
-- Tek uçlu ve çift uçlu dizileme verilerini işlemek
-- Nextflow'un dataflow paradigmasından yararlanarak örnek başına RNAseq işlemesini paralelleştirmek
-- İlgili channel operatörlerini kullanarak birden fazla adım ve örnek genelinde QC raporlarını birleştirmek
+Bunu, her biri Nextflow'u bir RNAseq kullanım durumuna uygulamanın belirli yönlerine odaklanan üç bölüme ayırdık.
 
-<!-- TODO
-- Configure pipeline execution and manage and optimize resource allocations
-- Implement per-step and end-to-end pipeline tests that handle RNAseq-specific idiosyncrasies appropriately
--->
-<!-- TODO for future expansion: add metadata/samplesheet handling -->
+| Kurs bölümü                                                     | Özet                                                                                                                           | Tahmini süre |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| [Bölüm 1: Yönteme genel bakış](./01_method.md)                  | RNAseq işleme metodolojisini anlamak ve araçları manuel olarak çalıştırmak                                                     | 30 dakika    |
+| [Bölüm 2: Tek örnekli uygulama](./02_single-sample.md)          | Tek bir örneği kırpan, hizalayan ve QC yapan bir pipeline oluşturmak, ardından birden fazla örneği işlemek için ölçeklendirmek | 60 dakika    |
+| [Bölüm 3: Çok örnekli çift uçlu uygulama](./03_multi-sample.md) | Pipeline'ı çift uçlu veriyi işlemek ve örnekler genelinde QC raporlarını birleştirmek için genişletmek                         | 45 dakika    |
 
-## Ön koşullar
+Bu kursun sonunda, temel Nextflow kavramlarını ve araçlarını tipik bir RNAseq kullanım durumuna uygulayabileceksiniz.
 
-Kurs, aşağıdakilerle ilgili minimal bir aşinalık varsaymaktadır:
+Kursa başlamaya hazır mısınız?
 
-- Bu bilimsel alanda yaygın olarak kullanılan araçlar ve dosya formatları
-- Komut satırı deneyimi
-- [Hello Nextflow](../../hello_nextflow/) başlangıç eğitiminde ele alınan temel Nextflow kavramları ve araçları.
+[Başlayın :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
 
-Teknik gereksinimler ve ortam kurulumu için [Ortam Kurulumu](../../envsetup/) mini kursuna bakın.
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>

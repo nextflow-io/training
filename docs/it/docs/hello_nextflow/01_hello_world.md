@@ -66,7 +66,7 @@ Questo non produce alcun output nel terminale.
 Il testo 'Hello World' dovrebbe ora trovarsi nel file di output che abbiamo specificato, chiamato `output.txt`.
 Potete aprirlo nell'esplora file o dalla riga di comando utilizzando l'utility `cat`, ad esempio.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="output.txt" linenums="1"
     Hello World!
@@ -248,7 +248,7 @@ Guardando cosa abbiamo ottenuto per l'esecuzione mostrata sopra, la riga di log 
 
 Diamo un'occhiata a cosa c'è dentro.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     work
@@ -264,7 +264,7 @@ Diamo un'occhiata a cosa c'è dentro.
             └── output.txt
     ```
 
-??? question "Non vedete la stessa cosa?"
+??? question "Non vedi la stessa cosa?"
 
     I nomi esatti delle sottodirectory saranno diversi sul vostro sistema.
 
@@ -278,7 +278,7 @@ Diamo un'occhiata a cosa c'è dentro.
 La prima cosa che vorrete guardare è l'output effettivo del workflow, cioè il file `output.txt` prodotto dal process `sayHello`.
 Apritelo e troverete il saluto `Hello World!`, che era lo scopo del nostro workflow minimalista.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="output.txt"
     Hello World!
@@ -300,7 +300,7 @@ Detto questo, diamo anche un'occhiata agli altri file in quella directory. Sono 
 
 Il file `.command.sh` è particolarmente utile perché indica il comando principale che Nextflow ha eseguito, non includendo tutta la contabilità e la configurazione dell'attività/ambiente.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title=".command.sh"
     #!/bin/bash -ue
@@ -316,7 +316,7 @@ Questo rende particolarmente prezioso poter vedere esattamente come Nextflow ha 
 
 Provate a rieseguire il workflow alcune volte, poi guardate le directory delle attività sotto `work/`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     work
@@ -498,7 +498,7 @@ L'output del terminale dovrebbe sembrare familiare. Esternamente, nulla è cambi
 
 Tuttavia, controllate il vostro esplora file: questa volta, Nextflow ha creato una nuova directory chiamata `results/`.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console hl_lines="10-11 22"
     .
@@ -584,7 +584,7 @@ nextflow run hello-world.nf
 
 Questa volta il risultato viene scritto nella sottodirectory specificata.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console hl_lines="2-3"
     results/
@@ -663,7 +663,7 @@ nextflow run hello-world.nf
 
 Questa volta, se guardate i risultati, il file è una copia vera e propria invece di un semplice symlink.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console hl_lines="3"
     results/
@@ -849,7 +849,7 @@ Se avete fatto tutte queste modifiche correttamente, dovreste ottenere un'altra 
 
 Assicuratevi di aprire il file di output per verificare che ora abbiate la nuova versione del saluto.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_world/output.txt"
     Bonjour le monde!
@@ -888,7 +888,7 @@ Come vedete, possiamo specificare il tipo di input che il workflow si aspetta (N
 La sintassi è `nome: Tipo = valore_predefinito`.
 I tipi supportati includono `String`, `Integer`, `Float`, `Boolean` e `Path`.
 
-!!! info "Nota"
+!!! info "Info"
 
     Nei workflow più vecchi, potreste vedere quel intero blocco `params` scritto semplicemente come `input = 'Holà mundo!'`.
 
@@ -914,9 +914,37 @@ nextflow run hello-world.nf
     [72/394147] sayHello | 1 of 1 ✔
     ```
 
+??? question "Se non ha funzionato"
+
+    Se è fallito con un errore che assomiglia a questo:
+
+    ```
+    ERROR ~ Script compilation error
+    - file : /workspaces/training/hello-nextflow/solutions/1-hello-world/hello-world-3.nf
+    - cause: you tried to assign a value to the class 'java.lang.String'
+    @ line 24, column 12.
+          input: String = 'Holà mundo!'
+                  ^
+
+    1 error
+
+
+    -- Check '.nextflow.log' file for details
+    ```
+
+    Allora probabilmente state usando il vecchio parser del linguaggio Nextflow v1.
+    Questo è stato menzionato all'inizio del corso, ma forse ve lo siete perso.
+    Controllate il materiale di aiuto sulle [versioni di Nextflow](../info/nxf_versions.md).
+
+    In breve, se state usando Nextflow `25.10` allora dovete abilitare il parser del linguaggio v2:
+
+    ```bash
+    export NXF_SYNTAX_PARSER=v2
+    ```
+
 L'output sarà nella stessa posizione di prima, ma i contenuti dovrebbero essere aggiornati con il nuovo testo.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_world/output.txt"
     Holà mundo!
@@ -947,7 +975,7 @@ nextflow run hello-world.nf --input 'Konnichiwa!'
 
 Ancora una volta, dovreste trovare l'output aggiornato corrispondente nella vostra directory results.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```console title="results/hello_world/output.txt"
     Konnichiwa!
@@ -1025,7 +1053,7 @@ Ecco come fare.
 
 Ogni volta che avviate un workflow nextflow, una riga viene scritta in un file di log chiamato `history`, sotto una directory nascosta chiamata `.nextflow` nella directory di lavoro corrente.
 
-??? abstract "Contenuti del file"
+??? abstract "Contenuto del file"
 
     ```txt title=".nextflow/history" linenums="1"
     2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --input 'Hello World'

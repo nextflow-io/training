@@ -23,7 +23,7 @@ Channels sind Warteschlangen, die entwickelt wurden, um Eingaben effizient zu ha
 In diesem Teil des Kurses lernst du, wie du einen Channel verwendest, um mehrere Eingaben aus verschiedenen Quellen zu handhaben.
 Du lernst auch, [**Operatoren**](https://nextflow.io/docs/latest/reference/operator.html) zu verwenden, um Channel-Inhalte nach Bedarf zu transformieren.
 
-??? info "Wie du von diesem Abschnitt aus beginnen kannst"
+??? info "Wie du von diesem Abschnitt aus beginnst"
 
     Dieser Abschnitt des Kurses setzt voraus, dass du Teil 1 des [Hello Nextflow](./index.md)-Kurses abgeschlossen hast, aber wenn du mit den dort behandelten Grundlagen vertraut bist, kannst du von hier aus starten, ohne etwas Besonderes tun zu müssen.
 
@@ -62,7 +62,7 @@ nextflow run hello-channels.nf --input 'Hello Channels!'
 
 Wie zuvor findest du die Ausgabedatei `output.txt` im Verzeichnis `results/hello_channels` (wie im `output`-Block des Workflow-Skripts oben angegeben).
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console title="results/hello_channels" hl_lines="2-3"
     results
@@ -73,7 +73,7 @@ Wie zuvor findest du die Ausgabedatei `output.txt` im Verzeichnis `results/hello
     └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/hello_channels/output.txt"
     Hello Channels!
@@ -111,7 +111,7 @@ Dies erstellt einen Channel namens `greeting_ch` unter Verwendung der `channel.o
 
 Füge im Workflow-Block den Channel Factory-Code hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
     workflow {
@@ -149,7 +149,7 @@ Jetzt müssen wir unseren neu erstellten Channel tatsächlich in den `sayHello()
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -207,7 +207,7 @@ nextflow run hello-channels.nf
 Wenn du beide Änderungen korrekt vorgenommen hast, solltest du eine erfolgreiche Ausführung erhalten.
 Du kannst das Ergebnisverzeichnis überprüfen, um dich zu vergewissern, dass das Ergebnis noch dasselbe ist wie zuvor.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/hello_channels/output.txt"
     Hello Channels!
@@ -227,7 +227,7 @@ Du kannst `view()` als Debugging-Werkzeug betrachten, wie eine `print()`-Anweisu
 
 Füge diese kleine Zeile zum Workflow-Block hinzu:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -308,7 +308,7 @@ Machen wir sie zu `'Hello'`, `'Bonjour'` und `'Holà'`.
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="30" hl_lines="2"
     // Einen Channel für Eingaben erstellen
@@ -353,7 +353,7 @@ Der Ausführungsmonitor zeigt, dass `3 von 3` Aufrufe für den `sayHello`-Prozes
 
 Allerdings gibt es im Ergebnisverzeichnis immer noch nur eine Ausgabe:
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console title="results/hello_channels" hl_lines="3"
     results
@@ -364,7 +364,7 @@ Allerdings gibt es im Ergebnisverzeichnis immer noch nur eine Ausgabe:
     └── output.txt -> /workspaces/training/hello-nextflow/work/8c/79499c11beea6e9d43605141f2817f/output.txt
     ```
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="results/hello_channels/output.txt"
     Holà
@@ -382,7 +382,7 @@ _Im Diagramm wird der Channel in Grün dargestellt, und die Reihenfolge der Elem
 Wenn wir zurück auf den Ausführungsmonitor schauen, hat er uns nur einen Unterverzeichnispfad gegeben (`f4/c9962c`).
 Lass uns dort hineinschauen.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console hl_lines="9"
     work/f4/c9962ce91ef87480babcb86b2b9042/
@@ -396,7 +396,7 @@ Lass uns dort hineinschauen.
     └── output.txt
     ```
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="work/f4/c9962ce91ef87480babcb86b2b9042/output.txt"
     Hello
@@ -444,7 +444,7 @@ Deshalb ist `-ansi-log false` nicht das Standardverhalten.
 
 Wie auch immer, jetzt da wir die Unterverzeichnisse jedes Prozess-Aufrufs haben, können wir nach ihren Logs und Ausgaben suchen.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     work/23/871c7ec3642a898ecd5e6090d21300/
@@ -482,7 +482,7 @@ Wie auch immer, jetzt da wir die Unterverzeichnisse jedes Prozess-Aufrufs haben,
     └── output.txt
     ```
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```txt title="work/23/871c7ec3642a898ecd5e6090d21300/output.txt"
     Bonjour
@@ -526,7 +526,7 @@ Hier werden wir der Einfachheit halber nur die Begrüßung selbst verwenden, da 
 
 Nimm im Prozess-Block die folgenden Codeänderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="6" hl_lines="7 11"
     process sayHello {
@@ -595,7 +595,7 @@ nextflow run hello-channels.nf
 Zurück in der Zusammenfassungsansicht wird die Ausgabe wieder auf einer Zeile zusammengefasst.
 Schau in das `results`-Verzeichnis, um zu sehen, ob alle Ausgabebegrüßungen da sind.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     results/hello_channels/
@@ -607,7 +607,7 @@ Schau in das `results`-Verzeichnis, um zu sehen, ob alle Ausgabebegrüßungen da
 
 Ja! Und sie haben jeweils die erwarteten Inhalte.
 
-??? abstract "Dateiinhalte"
+??? abstract "Dateiinhalt"
 
     ```console title="Bonjour-output.txt"
     Bonjour
@@ -666,7 +666,7 @@ Lass uns es versuchen; wir müssen die Eingabevariable einrichten und sie in die
 
 Lass uns die `greetings_array`-Variable, die wir uns gerade vorgestellt haben, Realität werden lassen, indem wir sie zum Workflow-Block hinzufügen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4 5"
     workflow {
@@ -710,7 +710,7 @@ Jetzt werden wir die Werte `'Hello','Bonjour','Holà'`, die derzeit in der Chann
 
 Nimm im Workflow-Block die folgende Änderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -819,7 +819,7 @@ Um den `flatten()`-Operator auf unseren Eingabe-Channel anzuwenden, hängen wir 
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="9"
     workflow {
@@ -873,7 +873,7 @@ Wir wollen den Inhalt vor und nach der Anwendung des `flatten()`-Operators vergl
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="8-10"
     workflow {
@@ -922,7 +922,7 @@ Wir definieren eine temporäre Variable für den inneren Wert, hier `greeting` g
 In diesem Beispiel repräsentiert `$greeting` jedes einzelne Element, das in den Channel geladen wurde.
 Dies führt zu sauber beschrifteter Konsolenausgabe.
 
-!!! info
+!!! info "Info"
 
     In einigen Pipelines siehst du möglicherweise eine spezielle Variable namens `$it`, die innerhalb von Operator-Closures verwendet wird.
     Dies ist eine _implizite_ Variable, die einen Kurzform-Zugriff auf die innere Variable ermöglicht,
@@ -1011,7 +1011,7 @@ Wir werden ihn aktualisieren, um auf die CSV-Datei zu zeigen, die unsere Begrü�
 
 Nimm die folgende Änderung an der Parameterdeklaration vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="20" hl_lines="5"
     /*
@@ -1041,7 +1041,7 @@ Wir müssen zu einer neuen Channel Factory wechseln, [`channel.fromPath()`](http
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="4-8"
     workflow {
@@ -1144,9 +1144,9 @@ Wenn wir wieder durch die Liste der Operatoren schauen, finden wir [`splitCsv()`
 
 Um den Operator anzuwenden, hängen wir ihn wie zuvor an die Channel Factory-Zeile an.
 
-Nimm im Workflow-Block die folgende Codeänderung vor, um `flatten()` durch `splitcsv()` zu ersetzen (nicht auskommentiert):
+Nimm im Workflow-Block die folgende Codeänderung vor, um `flatten()` durch `splitCsv()` zu ersetzen (nicht auskommentiert):
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="6-8"
     workflow {
@@ -1265,7 +1265,7 @@ Also wenden wir das auf unser CSV-Parsing an.
 
 Nimm im Workflow-Block die folgende Codeänderung vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="9 10"
     workflow {
