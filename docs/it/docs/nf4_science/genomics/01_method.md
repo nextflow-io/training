@@ -13,7 +13,7 @@ Per semplicità, in questo corso ci concentreremo solo sulla parte di variant ca
 ### Metodi
 
 Vi mostreremo due modi per applicare il variant calling a campioni di sequenziamento dell'intero genoma per identificare SNP e indel germinali.
-Inizieremo con un semplice **approccio per campione** che identifica le varianti indipendentemente per ciascun campione.
+Prima inizieremo con un semplice **approccio per campione** che identifica le varianti indipendentemente per ciascun campione.
 Poi vi mostreremo un approccio più sofisticato di **joint calling** che analizza più campioni insieme, producendo risultati più accurati e informativi.
 
 Prima di addentrarci nella scrittura di qualsiasi codice per il flusso di lavoro per entrambi gli approcci, testeremo i comandi manualmente su alcuni dati di test.

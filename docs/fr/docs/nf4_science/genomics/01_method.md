@@ -1070,7 +1070,7 @@ gatk GenotypeGVCFs \
     17:38:45.222 INFO  GenotypeGVCFs - Picard Version: 3.1.1
     17:38:45.222 INFO  GenotypeGVCFs - Built for Spark Version: 3.5.0
     17:38:45.222 INFO  GenotypeGVCFs - HTSJDK Defaults.COMPRESSION_LEVEL : 2
-    17:38:45.222 INFO  GenotypeGVCFs - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
+    17:38:45.222 INFO  GenotypeGVCFs- HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
     17:38:45.222 INFO  GenotypeGVCFs - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
     17:38:45.222 INFO  GenotypeGVCFs - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
     17:38:45.223 INFO  GenotypeGVCFs - Deflater: IntelDeflater
