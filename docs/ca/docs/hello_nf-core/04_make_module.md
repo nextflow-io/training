@@ -128,7 +128,7 @@ Els noms de procés distingeixen entre majúscules i minúscules, així que ara 
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -144,7 +144,7 @@ Els noms de procés distingeixen entre majúscules i minúscules, així que ara 
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy/main.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -156,9 +156,12 @@ Així que ara actualitzem les dues referències al procés al bloc workflow de `
 
 === "Després"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extract the file from the tuple since cowpy doesn't use metadata yet
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // generate ASCII art of the greetings with cowpy
-    COWPY(CAT_CAT.out.file_out)
+    COWPY(ch_for_cowpy, params.character)
 
     //
     // Collate and save software versions
@@ -173,15 +176,18 @@ Així que ara actualitzem les dues referències al procés al bloc workflow de `
 
 
     emit:
-    cowpy_hellos   = COWPY.out.cowpy_output
+    cowpy_hellos   = COWPY.out
     versions       = ch_versions
     ```
 
 === "Abans"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extract the file from the tuple since cowpy doesn't use metadata yet
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // generate ASCII art of the greetings with cowpy
-    cowpy(CAT_CAT.out.file_out)
+    cowpy(ch_for_cowpy, params.character)
 
     //
     // Collate and save software versions
@@ -196,7 +202,7 @@ Així que ara actualitzem les dues referències al procés al bloc workflow de `
 
 
     emit:
-    cowpy_hellos   = cowpy.out.cowpy_output
+    cowpy_hellos   = cowpy.out
     versions       = ch_versions
     ```
 

@@ -81,7 +81,7 @@ Jednak jeśli znasz, możesz przekierować listę do `grep`, aby znaleźć konkr
 nf-core modules list remote | grep 'cat/cat'
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     │ cat/cat
@@ -99,7 +99,7 @@ nf-core modules info cat/cat
 
 To wyświetla dokumentację modułu, w tym jego wejścia, wyjścia i podstawowe informacje o użyciu.
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -168,7 +168,7 @@ nf-core modules install cat/cat
 Narzędzie może najpierw poprosić Cię o określenie typu repozytorium.
 (Jeśli nie, przejdź do "Na końcu narzędzie przystąpi do instalacji modułu.")
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
 
@@ -191,7 +191,7 @@ Jeśli tak, naciśnij enter, aby zaakceptować domyślną odpowiedź (`Pipeline`
 
 Narzędzie następnie zaoferuje zmianę konfiguracji Twojego projektu, aby uniknąć tego monitu w przyszłości.
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
         INFO     To avoid this prompt in the future, add the 'repository_type' key to your .nf-core.yml file.
@@ -203,7 +203,7 @@ Naciśnij enter, aby zaakceptować domyślną odpowiedź (tak).
 
 Na końcu narzędzie przystąpi do instalacji modułu.
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     INFO Config added to '.nf-core.yml'
@@ -220,7 +220,7 @@ Polecenie automatycznie:
 - Aktualizuje `modules.json`, aby śledzić zainstalowany moduł
 - Dostarcza Ci prawidłową instrukcję `include` do użycia w Swoim workflow'ie
 
-!!! tip
+!!! tip "Wskazówka"
 
     Zawsze upewnij się, że Twój bieżący katalog roboczy to katalog główny projektu pipeline przed uruchomieniem polecenia instalacji modułu.
 
@@ -256,7 +256,7 @@ Możesz również zweryfikować instalację, prosząc narzędzie nf-core o wyśw
 nf-core modules list local
 ```
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     INFO     Repository type: pipeline
@@ -289,7 +289,7 @@ Otwórz [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) i dokonaj
 
 === "Po"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -299,8 +299,8 @@ Otwórz [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) i dokonaj
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
 === "Przed"
@@ -332,7 +332,7 @@ W tym momencie możesz być kuszony, aby zacząć edytować kod, ale warto pośw
 
 Zajmiemy się tym jako osobną sekcją, ponieważ obejmuje to nowy mechanizm, którego jeszcze nie omówiliśmy: mapy metadanych.
 
-!!! note
+!!! note "Uwaga"
 
     Opcjonalnie możesz usunąć plik `collectGreetings.nf`:
 
@@ -360,7 +360,7 @@ Pozwoli nam to określić, czy możemy po prostu traktować nowy moduł jako zam
 Najlepiej byłoby zrobić to _przed_ zainstalowaniem modułu, ale hej, lepiej późno niż wcale.
 (Na marginesie, istnieje polecenie `uninstall`, aby pozbyć się modułów, których nie chcesz już używać.)
 
-!!! note
+!!! note "Uwaga"
 
     Proces CAT_CAT zawiera dość sprytne obsługiwanie różnych typów kompresji, rozszerzeń plików itp., które nie są ściśle istotne dla tego, co próbujemy Ci tutaj pokazać, więc zignorujemy większość z tego i skupimy się tylko na częściach, które są ważne.
 
@@ -528,7 +528,7 @@ Teraz, gdy wiesz wszystko o metamapach (lub wystarczająco dużo dla celów tego
 
 Dla jasności podzielimy to i omówimy każdy krok osobno.
 
-!!! note
+!!! note "Uwaga"
 
     Wszystkie zmiany pokazane poniżej są dokonywane w logice workflow'u w bloku `main` w pliku workflow'u `core-hello/workflows/hello.nf`.
 
@@ -738,7 +738,7 @@ Operacja `.map{ meta, file -> file }` wyodrębnia plik z krotki `[metadata, file
 
 Następnie wystarczy przekazać `ch_for_cowpy` do `cowpy` zamiast `collectGreetings.out.outfile` w tej ostatniej linii.
 
-!!! note
+!!! note "Uwaga"
 
     W następnej części kursu zaktualizujemy `cowpy`, aby pracował bezpośrednio z krotkami metadanych, więc ten krok ekstrakcji nie będzie już potrzebny.
 
@@ -752,7 +752,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 To powinno działać dość szybko.
 
-??? success "Wynik polecenia"
+??? success "Wyjście polecenia"
 
     ```console
     N E X T F L O W ~ version 25.04.3

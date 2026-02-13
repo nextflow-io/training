@@ -38,11 +38,11 @@ Comenzarás ejecutando las herramientas de análisis manualmente en la terminal 
 
 Hemos dividido esto en tres partes que se enfocan en aspectos específicos de aplicar Nextflow a un caso de uso de {DOMAIN}.
 
-| Capítulo del curso                                                | Resumen                                                                                                                 | Duración estimada |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------- |
-| [Parte 1: Descripción general del método](./01_method.md)         | Comprender la metodología de {METHOD} y ejecutar las herramientas manualmente                                          | 30 mins           |
-| [Parte 2: Procesamiento de una sola muestra](./02_single_sample.md) | Construir un pipeline que {PART2_SUMMARY}, luego escalar a múltiples muestras                                          | 60 mins           |
-| [Parte 3: Agregación de múltiples muestras](./03_multi_sample.md)  | Agregar {AGGREGATION_SUMMARY} de múltiples muestras usando operadores de canal para agregar salidas por muestra | 45 mins           |
+| Capítulo del curso                                                  | Resumen                                                                                                         | Duración estimada |
+| ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------- |
+| [Parte 1: Descripción general del método](./01_method.md)           | Comprender la metodología de {METHOD} y ejecutar las herramientas manualmente                                   | 30 mins           |
+| [Parte 2: Procesamiento de una sola muestra](./02_single_sample.md) | Construir un pipeline que {PART2_SUMMARY}, luego escalar a múltiples muestras                                   | 60 mins           |
+| [Parte 3: Agregación de múltiples muestras](./03_multi_sample.md)   | Agregar {AGGREGATION_SUMMARY} de múltiples muestras usando operadores de canal para agregar salidas por muestra | 45 mins           |
 
 Al final de este curso, podrás aplicar conceptos fundamentales de Nextflow y herramientas a un caso de uso típico de {DOMAIN}.
 

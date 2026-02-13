@@ -1,6 +1,6 @@
 # Bölüm 4: Bir nf-core modülü oluşturma
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Hello nf-core eğitim kursunun bu dördüncü bölümünde, modülleri taşınabilir ve sürdürülebilir kılan temel kuralları uygulayarak bir nf-core modülünün nasıl oluşturulacağını göstereceğiz.
 
@@ -8,7 +8,7 @@ nf-core projesi, Bölüm 2'de iş akışı için kullandığımıza benzer şeki
 Ancak öğretim amaçları için, manuel olarak başlayacağız: `core-hello` iş hattınızdaki yerel `cowpy` modülünü adım adım nf-core tarzı bir modüle dönüştüreceğiz.
 Bundan sonra, gelecekte daha verimli çalışmak için şablon tabanlı modül oluşturma yöntemini size göstereceğiz.
 
-??? info "Bu bölüme nasıl başlanır"
+??? info "Bu bölümden nasıl başlanır"
 
     Bu bölüm, [Bölüm 3: Bir nf-core modülü kullanma](./03_use_module.md) kısmını tamamladığınızı ve `CAT_CAT` modülünü iş hattınıza entegre ettiğinizi varsayar.
 
@@ -128,7 +128,7 @@ Process adları büyük/küçük harfe duyarlıdır, bu nedenle process adını 
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -144,7 +144,7 @@ Process adları büyük/küçük harfe duyarlıdır, bu nedenle process adını 
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy/main.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -156,9 +156,12 @@ Process çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
 
 === "Sonra"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extract the file from the tuple since cowpy doesn't use metadata yet
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // cowpy ile selamlamaların ASCII sanatını oluştur
-    COWPY(CAT_CAT.out.file_out)
+    COWPY(ch_for_cowpy, params.character)
 
     //
     // Collate and save software versions
@@ -173,15 +176,18 @@ Process çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
 
 
     emit:
-    cowpy_hellos   = COWPY.out.cowpy_output
+    cowpy_hellos   = COWPY.out
     versions       = ch_versions
     ```
 
 === "Önce"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extract the file from the tuple since cowpy doesn't use metadata yet
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // cowpy ile selamlamaların ASCII sanatını oluştur
-    cowpy(CAT_CAT.out.file_out)
+    cowpy(ch_for_cowpy, params.character)
 
     //
     // Collate and save software versions
@@ -196,7 +202,7 @@ Process çağrılarını güncellemek zorunda kalmamak için import ifadesinde b
 
 
     emit:
-    cowpy_hellos   = cowpy.out.cowpy_output
+    cowpy_hellos   = cowpy.out
     versions       = ch_versions
     ```
 
@@ -497,7 +503,7 @@ Hadi yapalım.
 
 Sonuç olarak, modül arayüzü artık daha basit: sadece temel metadata ve dosya girdilerini bekliyor.
 
-!!! note
+!!! note "Not"
 
     `?:` operatörü genellikle 'Elvis operatörü' olarak adlandırılır çünkü yanal olarak Elvis Presley yüzüne benzer, `?` karakteri saçındaki dalgayı simgeler.
 
@@ -695,7 +701,7 @@ Bu yaklaşımın faydalarını özetlemek gerekirse:
 - **Taşınabilirlik**: Modüller sabit kodlanmış araç seçenekleri olmadan yeniden kullanılabilir
 - **İş akışı değişikliği yok**: Araç seçeneklerini eklemek veya değiştirmek iş akışı kodunu güncellemeyi gerektirmez
 
-!!! note
+!!! note "Not"
 
     `ext.args` sistemi, burada ele alınmayan, metadata'ya göre argüman değerlerini dinamik olarak değiştirme dahil olmak üzere güçlü ek yeteneklere sahiptir. Daha fazla ayrıntı için [nf-core modül spesifikasyonlarına](https://nf-co.re/docs/guidelines/components/modules) bakın.
 
@@ -1051,16 +1057,16 @@ Bu karmaşık görünebilir, bu yüzden üç bileşenin her birine bakalım:
 
 Bu, çıktıları düzenlemek için tutarlı bir mantık sağlar.
 
-Bir pipeline'daki tüm modüller bu convention'ı benimsediğinde çıktı daha da iyi görünür, bu yüzden pipeline'ınızdaki diğer modüllerden `publishDir` directive'lerini silmekten çekinmeyin.
+Bir iş hattındaki tüm modüller bu kuralı benimsediğinde çıktı daha da iyi görünür, bu yüzden iş hattınızdaki diğer modüllerden `publishDir` yönergelerini silmekten çekinmeyin.
 Bu varsayılan, nf-core yönergelerini takip etmek için açıkça değiştirmediğimiz modüllere bile uygulanacaktır.
 
-Bununla birlikte, girdilerinizi farklı şekilde düzenlemek isteyebilirsiniz ve iyi haber şu ki bunu yapmak kolaydır.
+Bununla birlikte, çıktılarınızı farklı şekilde düzenlemek isteyebilirsiniz ve iyi haber şu ki bunu yapmak kolaydır.
 
 #### 1.5.3. Varsayılanı geçersiz kılma
 
-Varsayılan `publishDir` directive'ini geçersiz kılmak için, `conf/modules.config` dosyasına kendi directive'lerinizi ekleyebilirsiniz.
+Varsayılan `publishDir` yönergesini geçersiz kılmak için, `conf/modules.config` dosyasına kendi yönergelerinizi ekleyebilirsiniz.
 
-Örneğin, `withName:` seçicisini kullanarak tek bir process için varsayılanı geçersiz kılabilirsiniz, bu örnekte 'COWPY' process'i için özel bir `publishDir` directive ekliyoruz.
+Örneğin, `withName:` seçicisini kullanarak tek bir process için varsayılanı geçersiz kılabilirsiniz, bu örnekte 'COWPY' process'i için özel bir `publishDir` yönergesi ekliyoruz.
 
 ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
 process {
@@ -1094,12 +1100,12 @@ Bu, kesinlikle öğrenmeniz gereken nf-core modül özelliklerinin setini tamaml
 
 ### Özet
 
-Artık yerel modülleri nf-core convention'larına uyacak şekilde nasıl uyarlayacağınızı biliyorsunuz:
+Artık yerel modülleri nf-core kurallarına uyacak şekilde nasıl uyarlayacağınızı biliyorsunuz:
 
-- Modüllerinizi metadata tuple'ları kabul edecek ve iletecek şekilde tasarlayın;
+- Modüllerinizi metadata demetlerini kabul edecek ve iletecek şekilde tasarlayın;
 - Modül arayüzlerini minimal ve taşınabilir tutmak için `ext.args` kullanın;
 - Yapılandırılabilir, standartlaştırılmış çıktı dosya adlandırması için `ext.prefix` kullanın;
-- Tutarlı bir sonuç dizin yapısı için varsayılan merkezi `publishDir` directive'ini benimseyin.
+- Tutarlı bir sonuç dizin yapısı için varsayılan merkezi `publishDir` yönergesini benimseyin.
 
 ### Sırada ne var?
 
@@ -1113,11 +1119,11 @@ Artık nf-core modül kalıplarını manuel olarak uygulayarak öğrendiniz, şi
 
 ### 2.1. Şablondan modül iskeleti oluşturma
 
-Pipeline'lar oluşturmak için var olana benzer şekilde, nf-core projesi baştan tüm bu kalıplarla birlikte düzgün yapılandırılmış modüller oluşturmak için araçlar sağlar.
+İş hatları oluşturmak için var olana benzer şekilde, nf-core projesi baştan tüm bu kalıplarla birlikte düzgün yapılandırılmış modüller oluşturmak için araçlar sağlar.
 
 #### 2.1.1. Modül oluşturma komutunu çalıştırma
 
-`nf-core modules create` komutu, öğrendiğiniz tüm convention'ları zaten takip eden bir modül şablonu oluşturur.
+`nf-core modules create` komutu, öğrendiğiniz tüm kuralları zaten takip eden bir modül şablonu oluşturur.
 
 Bu komutu çalıştırarak minimal bir şablonla `COWPY` modülünün yeni bir versiyonunu oluşturalım:
 
@@ -1164,7 +1170,7 @@ Her dosya belirli bir amaca hizmet eder:
 
 !!! tip "Test hakkında daha fazla bilgi"
 
-    Oluşturulan test dosyası, Nextflow pipeline'ları ve modülleri için bir test framework'ü olan nf-test'i kullanır. Bu testleri nasıl yazacağınızı ve çalıştıracağınızı öğrenmek için [nf-test yan görevi](../side_quests/nf-test.md)'ne bakın.
+    Oluşturulan test dosyası, Nextflow iş hatları ve modülleri için bir test framework'ü olan nf-test'i kullanır. Bu testleri nasıl yazacağınızı ve çalıştıracağınızı öğrenmek için [nf-test yan görevi](../side_quests/nf-test.md)'ne bakın.
 
 Oluşturulan `main.nf`, az önce öğrendiğiniz tüm kalıpları ve bazı ek özellikleri içerir:
 
@@ -1179,7 +1185,7 @@ process COWPY {
         'biocontainers/YOUR-TOOL-HERE' }"
 
     input:
-    tuple val(meta), path(input)        // Pattern 1: Metadata tuples ✓
+    tuple val(meta), path(input)        // Kalıp 1: Metadata demetleri ✓
 
     output:
     tuple val(meta), path("*"), emit: output
@@ -1189,8 +1195,8 @@ process COWPY {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''                // Pattern 2: ext.args ✓
-    def prefix = task.ext.prefix ?: "${meta.id}"  // Pattern 3: ext.prefix ✓
+    def args = task.ext.args ?: ''                // Kalıp 2: ext.args ✓
+    def prefix = task.ext.prefix ?: "${meta.id}"  // Kalıp 3: ext.prefix ✓
 
     """
     // Add your tool command here
@@ -1219,12 +1225,12 @@ process COWPY {
 
 Yukarıda manuel olarak uyguladığınız tüm kalıpların zaten mevcut olduğuna dikkat edin!
 
-Şablon ayrıca birkaç ek nf-core convention'ı içerir.
+Şablon ayrıca birkaç ek nf-core kuralı içerir.
 Bunlardan bazıları kutudan çıktığı gibi çalışır, diğerleri ise aşağıda açıklandığı gibi doldurmamız gereken yer tutuculardır.
 
 **Olduğu gibi çalışan özellikler:**
 
-- **`tag "$meta.id"`**: Daha kolay takip için log'lardaki process adlarına örnek ID'sini ekler
+- **`tag "$meta.id"`**: Daha kolay takip için loglardaki process adlarına örnek ID'sini ekler
 - **`label 'process_single'`**: CPU/bellek gereksinimlerini yapılandırmak için kaynak etiketi
 - **`when:` bloğu**: `task.ext.when` yapılandırması aracılığıyla koşullu çalıştırmaya izin verir
 
@@ -1406,7 +1412,7 @@ Temel değişiklikler:
 
 #### 2.3.3. Stub bloğunu uygulama
 
-Nextflow bağlamında, bir [stub](https://www.nextflow.io/docs/latest/process.html#stub) bloğu, gerçek komutu çalıştırmadan bir pipeline'ın mantığının hızlı prototipleme ve testi için kullanılan hafif, kukla bir script tanımlamanıza olanak tanır.
+Nextflow bağlamında, bir [stub](https://www.nextflow.io/docs/latest/process.html#stub) bloğu, gerçek komutu çalıştırmadan bir iş hattının mantığının hızlı prototipleme ve testi için kullanılan hafif, kukla bir script tanımlamanıza olanak tanır.
 
 <!-- TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs (the reference doc isn't terribly helpful either). Right now this is likely to be mostly meaningless to anyone who doesn't already know about stubs. -->
 
@@ -1456,7 +1462,7 @@ Bu, gerçek aracın çalışmasını beklemeden iş akışı mantığını ve do
 
 Ortam kurulumunu (bölüm 2.2), girdiler/çıktılar (bölüm 2.3.1), script bloğu (bölüm 2.3.2) ve stub bloğu (bölüm 2.3.3) tamamladıktan sonra modül teste hazırdır!
 
-### 2.4. Yeni `COWPY` modülünü yerleştirme ve pipeline'ı çalıştırma
+### 2.4. Yeni `COWPY` modülünü yerleştirme ve iş hattını çalıştırma
 
 `COWPY` modülünün bu yeni versiyonunu denemek için tek yapmamız gereken, `hello.nf` iş akışı dosyasındaki import ifadesini yeni dosyaya yönlendirmektir.
 
@@ -1492,7 +1498,7 @@ Ortam kurulumunu (bölüm 2.2), girdiler/çıktılar (bölüm 2.3.1), script blo
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
-Test etmek için pipeline'ı çalıştıralım.
+Test etmek için iş hattını çalıştıralım.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -1586,7 +1592,7 @@ Ayrıntılı talimatlar için [nf-core bileşenler öğretici](https://nf-co.re/
 
 Artık nf-core modülleri nasıl oluşturulacağını biliyorsunuz! Modülleri taşınabilir ve bakımı kolay kılan dört temel kalıbı öğrendiniz:
 
-- **Metadata tuple'ları** iş akışı boyunca metadata'yı iletir
+- **Metadata demetleri** iş akışı boyunca metadata'yı iletir
 - **`ext.args`** isteğe bağlı argümanları yapılandırma aracılığıyla işleyerek modül arayüzlerini basitleştirir
 - **`ext.prefix`** çıktı dosya adlandırmasını standartlaştırır
 - **Merkezi yayınlama** modüllerde sabit kodlanmak yerine `modules.config`'de yapılandırılan `publishDir` aracılığıyla
@@ -1598,4 +1604,4 @@ Son olarak, nf-core topluluğuna modül katkıda bulunmayı öğrendiniz; araçl
 
 ### Sırada ne var?
 
-Hazır olduğunuzda, pipeline'ınıza şema tabanlı girdi doğrulama eklemeyi öğrenmek için [Bölüm 5: Girdi doğrulama](./05_input_validation.md)'ya devam edin.
+Hazır olduğunuzda, iş hattınıza şema tabanlı girdi doğrulama eklemeyi öğrenmek için [Bölüm 5: Girdi doğrulama](./05_input_validation.md)'ya devam edin.

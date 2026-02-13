@@ -18,22 +18,18 @@ additional_information:
 ---
 
 ---
+
 title: Nextflow für {DOMAIN}
 hide:
-  - toc
-page_type: index_page
-index_type: course
-additional_information:
+
+- toc
+  page_type: index_page
+  index_type: course
+  additional_information:
   technical_requirements: true
-  learning_objectives:
-    - Schreibe einen linearen Workflow, um {METHOD} auf eine einzelne Probe anzuwenden
-    - Verarbeite zusätzliche Dateien wie {ACCESSORY_FILES} angemessen
-    - Nutze Nextflows Dataflow-Paradigma, um die Verarbeitung pro Probe zu parallelisieren
-    - Implementiere Multi-Sample-Aggregation mit relevanten Channel-Operatoren
-  audience_prerequisites:
-    - "**Zielgruppe:** Dieser Kurs richtet sich an Forscher\*innen im Bereich {DOMAIN} und verwandten Feldern, die Datenanalyse-Pipelines entwickeln oder anpassen möchten."
-    - "**Fähigkeiten:** Grundkenntnisse der Kommandozeile, grundlegende Skripting-Konzepte und gängige {DOMAIN}-Dateiformate werden vorausgesetzt."
-    - "**Voraussetzungen:** Grundlegende Nextflow-Konzepte und -Werkzeuge, die in [Hello Nextflow](../../hello_nextflow/) behandelt werden."
+  learning_objectives: - Schreibe einen linearen Workflow, um {METHOD} auf eine einzelne Probe anzuwenden - Verarbeite zusätzliche Dateien wie {ACCESSORY_FILES} angemessen - Nutze Nextflows Dataflow-Paradigma, um die Verarbeitung pro Probe zu parallelisieren - Implementiere Multi-Sample-Aggregation mit relevanten Channel-Operatoren
+  audience_prerequisites: - "**Zielgruppe:** Dieser Kurs richtet sich an Forscher\*innen im Bereich {DOMAIN} und verwandten Feldern, die Datenanalyse-Pipelines entwickeln oder anpassen möchten." - "**Fähigkeiten:** Grundkenntnisse der Kommandozeile, grundlegende Skripting-Konzepte und gängige {DOMAIN}-Dateiformate werden vorausgesetzt." - "**Voraussetzungen:** Grundlegende Nextflow-Konzepte und -Werkzeuge, die in [Hello Nextflow](../../hello_nextflow/) behandelt werden."
+
 ---
 
 # Nextflow für {DOMAIN}
@@ -57,11 +53,11 @@ Du beginnst damit, die Analyse-Tools manuell im Terminal auszuführen, um die Me
 
 Wir haben den Kurs in drei Teile unterteilt, die sich jeweils auf spezifische Aspekte der Anwendung von Nextflow auf einen {DOMAIN}-Anwendungsfall konzentrieren.
 
-| Kurskapitel                                               | Zusammenfassung                                                                                                                | Geschätzte Dauer |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| [Teil 1: Methodenübersicht](./01_method.md)               | Verstehen der {METHOD}-Methodik und manuelles Ausführen der Tools                                                              | 30 Min.          |
-| [Teil 2: Einzelproben-Verarbeitung](./02_single_sample.md) | Erstellen einer Pipeline, die {PART2_SUMMARY}, und anschließende Skalierung auf mehrere Proben                                | 60 Min.          |
-| [Teil 3: Multi-Sample-Aggregation](./03_multi_sample.md)  | Hinzufügen von Multi-Sample-{AGGREGATION_SUMMARY} mithilfe von Channel-Operatoren zur Aggregation von Proben-spezifischen Ausgaben | 45 Min.          |
+| Kurskapitel                                                | Zusammenfassung                                                                                                                    | Geschätzte Dauer |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| [Teil 1: Methodenübersicht](./01_method.md)                | Verstehen der {METHOD}-Methodik und manuelles Ausführen der Tools                                                                  | 30 Min.          |
+| [Teil 2: Einzelproben-Verarbeitung](./02_single_sample.md) | Erstellen einer Pipeline, die {PART2_SUMMARY}, und anschließende Skalierung auf mehrere Proben                                     | 60 Min.          |
+| [Teil 3: Multi-Sample-Aggregation](./03_multi_sample.md)   | Hinzufügen von Multi-Sample-{AGGREGATION_SUMMARY} mithilfe von Channel-Operatoren zur Aggregation von Proben-spezifischen Ausgaben | 45 Min.          |
 
 Nach Abschluss dieses Kurses kannst du grundlegende Nextflow-Konzepte und -Werkzeuge auf einen typischen {DOMAIN}-Anwendungsfall anwenden.
 

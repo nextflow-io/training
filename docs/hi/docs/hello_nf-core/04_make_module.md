@@ -8,7 +8,7 @@ nf-core प्रोजेक्ट एक कमांड (`nf-core modules cre
 हालाँकि, शिक्षण उद्देश्यों के लिए, हम मैन्युअल रूप से शुरू करने जा रहे हैं: आपके `core-hello` पाइपलाइन में स्थानीय `cowpy` मॉड्यूल को चरण-दर-चरण nf-core-शैली के मॉड्यूल में बदलना।
 इसके बाद, हम आपको दिखाएंगे कि भविष्य में अधिक कुशलता से काम करने के लिए टेम्पलेट-आधारित मॉड्यूल निर्माण का उपयोग कैसे करें।
 
-??? info "इस सेक्शन से कैसे शुरू करें"
+??? info "इस खंड से कैसे शुरू करें"
 
     यह सेक्शन मानता है कि आपने [भाग 3: nf-core मॉड्यूल का उपयोग करें](./03_use_module.md) पूरा कर लिया है और अपनी पाइपलाइन में `CAT_CAT` मॉड्यूल को एकीकृत कर लिया है।
 
@@ -128,7 +128,7 @@ process cowpy {
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -144,7 +144,7 @@ process cowpy {
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy/main.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -156,9 +156,12 @@ process cowpy {
 
 === "बाद में"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // tuple से file extract करें क्योंकि cowpy अभी metadata का उपयोग नहीं करता
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
-    COWPY(CAT_CAT.out.file_out)
+    COWPY(ch_for_cowpy, params.character)
 
     //
     // Collate and save software versions
@@ -173,15 +176,18 @@ process cowpy {
 
 
     emit:
-    cowpy_hellos   = COWPY.out.cowpy_output
+    cowpy_hellos   = COWPY.out
     versions       = ch_versions
     ```
 
 === "पहले"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // tuple से file extract करें क्योंकि cowpy अभी metadata का उपयोग नहीं करता
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // cowpy के साथ अभिवादनों का ASCII art जनरेट करें
-    cowpy(CAT_CAT.out.file_out)
+    cowpy(ch_for_cowpy, params.character)
 
     //
     // Collate and save software versions
@@ -196,7 +202,7 @@ process cowpy {
 
 
     emit:
-    cowpy_hellos   = cowpy.out.cowpy_output
+    cowpy_hellos   = cowpy.out
     versions       = ch_versions
     ```
 
@@ -497,7 +503,7 @@ Nextflow रनटाइम पर उन आर्गुमेंट को उ
 
 परिणामस्वरूप, मॉड्यूल इंटरफ़ेस अब सरल है: यह केवल आवश्यक मेटाडेटा और फ़ाइल इनपुट की अपेक्षा करता है।
 
-!!! note
+!!! note "नोट"
 
     `?:` ऑपरेटर को अक्सर 'Elvis ऑपरेटर' कहा जाता है क्योंकि यह बगल से Elvis Presley के चेहरे की तरह दिखता है, `?` कैरेक्टर उनके बालों में लहर का प्रतीक है।
 
@@ -695,7 +701,7 @@ cat work/38/eb29ea*/cowpy-test.txt
 - **पोर्टेबिलिटी**: मॉड्यूल को हार्डकोडेड टूल विकल्पों के बिना पुन: उपयोग किया जा सकता है
 - **कोई workflow परिवर्तन नहीं**: टूल विकल्पों को जोड़ने या बदलने के लिए workflow कोड को अपडेट करने की आवश्यकता नहीं है
 
-!!! note
+!!! note "नोट"
 
     `ext.args` सिस्टम में शक्तिशाली अतिरिक्त क्षमताएँ हैं जो यहाँ कवर नहीं की गई हैं, जिसमें मेटाडेटा के आधार पर आर्गुमेंट मानों को गतिशील रूप से स्विच करना शामिल है। अधिक विवरण के लिए [nf-core मॉड्यूल विशिष्टताएँ](https://nf-co.re/docs/guidelines/components/modules) देखें।
 

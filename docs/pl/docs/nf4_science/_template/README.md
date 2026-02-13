@@ -65,32 +65,32 @@ Opiera się na wspólnych wzorcach znalezionych w kursach Genomics i RNAseq.
 
 ### Symbole zastępcze narzędzi
 
-| Symbol zastępczy                      | Opis                                | Przykład (Genomics)                                 |
-| ------------------------------------- | ----------------------------------- | --------------------------------------------------- |
-| `{TOOL_A}` / `{TOOL_B}`               | Nazwy wyświetlane narzędzi          | Samtools / GATK                                     |
-| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | Adresy URL dokumentacji narzędzi    | https://www.htslib.org/                             |
-| `{TOOL_A_CONTAINER_URI}`              | Pełny URI kontenera                 | community.wave.seqera.io/library/samtools:1.20--... |
-| `{TOOL_A_MODULE}` / `{TOOL_B_MODULE}` | Nazwy plików modułów (bez .nf)      | samtools_index / gatk_haplotypecaller               |
-| `{TOOL_A_PROCESS_NAME}`               | Nazwa procesu WIELKIMI LITERAMI     | SAMTOOLS_INDEX                                      |
-| `{TOOL_A_COMMAND}`                    | Polecenie powłoki do uruchomienia   | samtools index '<input_bam>'                        |
+| Symbol zastępczy                      | Opis                              | Przykład (Genomics)                                 |
+| ------------------------------------- | --------------------------------- | --------------------------------------------------- |
+| `{TOOL_A}` / `{TOOL_B}`               | Nazwy wyświetlane narzędzi        | Samtools / GATK                                     |
+| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | Adresy URL dokumentacji narzędzi  | https://www.htslib.org/                             |
+| `{TOOL_A_CONTAINER_URI}`              | Pełny URI kontenera               | community.wave.seqera.io/library/samtools:1.20--... |
+| `{TOOL_A_MODULE}` / `{TOOL_B_MODULE}` | Nazwy plików modułów (bez .nf)    | samtools_index / gatk_haplotypecaller               |
+| `{TOOL_A_PROCESS_NAME}`               | Nazwa procesu WIELKIMI LITERAMI   | SAMTOOLS_INDEX                                      |
+| `{TOOL_A_COMMAND}`                    | Polecenie powłoki do uruchomienia | samtools index '<input_bam>'                        |
 
 ### Symbole zastępcze wejścia/wyjścia
 
-| Symbol zastępczy       | Opis                                  | Przykład (Genomics)  |
-| ---------------------- | ------------------------------------- | -------------------- |
-| `{PRIMARY_INPUT_TYPE}` | Główny typ pliku wejściowego          | BAM file             |
-| `{PRIMARY_PARAM_NAME}` | Nazwa parametru Nextflow'a            | reads_bam            |
-| `{TEST_INPUT_PATH}`    | Ścieżka do danych testowych w data/   | bam/reads_mother.bam |
-| `{FINAL_OUTPUT_TYPE}`  | Końcowy typ wyjścia pipeline'u        | joint-called VCFs    |
+| Symbol zastępczy       | Opis                                | Przykład (Genomics)  |
+| ---------------------- | ----------------------------------- | -------------------- |
+| `{PRIMARY_INPUT_TYPE}` | Główny typ pliku wejściowego        | BAM file             |
+| `{PRIMARY_PARAM_NAME}` | Nazwa parametru Nextflow'a          | reads_bam            |
+| `{TEST_INPUT_PATH}`    | Ścieżka do danych testowych w data/ | bam/reads_mother.bam |
+| `{FINAL_OUTPUT_TYPE}`  | Końcowy typ wyjścia pipeline'u      | joint-called VCFs    |
 
 ### Symbole zastępcze treści
 
-| Symbol zastępczy        | Opis                                                |
-| ----------------------- | --------------------------------------------------- |
-| `{PART2_SUMMARY}`       | Jednoliniowe podsumowanie zakresu Części 2          |
-| `{AGGREGATION_SUMMARY}` | Jednoliniowe podsumowanie kroku agregacji           |
-| `{PROCESS_LIST}`        | Lista nazw procesów oddzielonych przecinkami        |
-| `{TYPEFORM_ID}`         | Identyfikator osadzenia Typeform dla ankiety        |
+| Symbol zastępczy        | Opis                                         |
+| ----------------------- | -------------------------------------------- |
+| `{PART2_SUMMARY}`       | Jednoliniowe podsumowanie zakresu Części 2   |
+| `{AGGREGATION_SUMMARY}` | Jednoliniowe podsumowanie kroku agregacji    |
+| `{PROCESS_LIST}`        | Lista nazw procesów oddzielonych przecinkami |
+| `{TYPEFORM_ID}`         | Identyfikator osadzenia Typeform dla ankiety |
 
 ## Struktura pedagogiczna
 
