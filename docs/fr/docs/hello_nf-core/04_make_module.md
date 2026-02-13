@@ -128,7 +128,7 @@ Les noms de processus sont sensibles à la casse, donc maintenant que nous avons
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -144,7 +144,7 @@ Les noms de processus sont sensibles à la casse, donc maintenant que nous avons
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy/main.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -156,9 +156,12 @@ Maintenant, mettons à jour les deux références au processus dans le bloc work
 
 === "Après"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extraire le fichier du tuple puisque cowpy n'utilise pas encore les métadonnées
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // générer de l'art ASCII des salutations avec cowpy
-    COWPY(CAT_CAT.out.file_out)
+    COWPY(ch_for_cowpy, params.character)
 
     //
     // Rassembler et enregistrer les versions des logiciels
@@ -173,15 +176,18 @@ Maintenant, mettons à jour les deux références au processus dans le bloc work
 
 
     emit:
-    cowpy_hellos   = COWPY.out.cowpy_output
+    cowpy_hellos   = COWPY.out
     versions       = ch_versions
     ```
 
 === "Avant"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extraire le fichier du tuple puisque cowpy n'utilise pas encore les métadonnées
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // générer de l'art ASCII des salutations avec cowpy
-    cowpy(CAT_CAT.out.file_out)
+    cowpy(ch_for_cowpy, params.character)
 
     //
     // Rassembler et enregistrer les versions des logiciels
@@ -196,7 +202,7 @@ Maintenant, mettons à jour les deux références au processus dans le bloc work
 
 
     emit:
-    cowpy_hellos   = cowpy.out.cowpy_output
+    cowpy_hellos   = cowpy.out
     versions       = ch_versions
     ```
 
@@ -497,7 +503,7 @@ Vous pouvez voir que nous avons fait trois modifications.
 
 Par conséquent, l'interface du module est maintenant plus simple : elle n'attend que les entrées essentielles de métadonnées et de fichiers.
 
-!!! note
+!!! note "Note"
 
     L'opérateur `?:` est souvent appelé 'opérateur Elvis' car il ressemble à un visage d'Elvis Presley de côté, avec le caractère `?` symbolisant la vague dans ses cheveux.
 
@@ -695,7 +701,7 @@ Pour résumer les avantages de cette approche :
 - **Portabilité** : Les modules peuvent être réutilisés sans options d'outils codées en dur
 - **Pas de changements de workflow** : L'ajout ou la modification d'options d'outils ne nécessite pas de mise à jour du code du workflow
 
-!!! note
+!!! note "Note"
 
     Le système `ext.args` a des capacités supplémentaires puissantes non couvertes ici, y compris le changement dynamique des valeurs d'arguments en fonction des métadonnées. Consultez les [spécifications des modules nf-core](https://nf-co.re/docs/guidelines/components/modules) pour plus de détails.
 
@@ -1586,7 +1592,7 @@ Pour des instructions détaillées, consultez le [tutoriel des composants nf-cor
 
 Vous savez maintenant comment créer des modules nf-core ! Vous avez appris les quatre modèles clés qui rendent les modules portables et maintenables :
 
-- Les **tuplets de métadonnées** propagent les métadonnées à travers le workflow
+- Les **tuples de métadonnées** propagent les métadonnées à travers le workflow
 - **`ext.args`** simplifie les interfaces de modules en gérant les arguments optionnels via la configuration
 - **`ext.prefix`** standardise la dénomination des fichiers de sortie
 - La **publication centralisée** via `publishDir` configuré dans `modules.config` plutôt que codé en dur dans les modules

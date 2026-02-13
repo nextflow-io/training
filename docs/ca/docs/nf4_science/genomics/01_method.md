@@ -1082,18 +1082,19 @@ gatk GenotypeGVCFs \
     17:38:45.561 INFO  NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field InbreedingCoeff  - the field will NOT be part of INFO fields in the generated VCF records
     17:38:45.561 INFO  NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field MLEAC  - the field will NOT be part of INFO fields in the generated VCF records
     17:38:45.```console
-561 INFO  NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field MLEAF  - the field will NOT be part of INFO fields in the generated VCF records
-    17:38:45.577 INFO  GenotypeGVCFs - Done initializing engine
-    17:38:45.615 INFO  ProgressMeter - Starting traversal
-    17:38:45.615 INFO  ProgressMeter -        Current Locus  Elapsed Minutes    Variants Processed  Variants/Minute
-    17:38:45.903 WARN  InbreedingCoeff - InbreedingCoeff will not be calculated at position 20_10037292_10066351:3480 and possibly subsequent; at least 10 samples must have called genotypes
-    GENOMICSDB_TIMER,GenomicsDB iterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
-    17:38:46.421 INFO  ProgressMeter - 20_10037292_10066351:13953              0.0                  3390         252357.3
-    17:38:46.422 INFO  ProgressMeter - Traversal complete. Processed 3390 total variants in 0.0 minutes.
-    17:38:46.423 INFO  GenotypeGVCFs - Shutting down engine
-    [February 11, 2026 at 5:38:46 PM GMT] org.broadinstitute.hellbender.tools.walkers.GenotypeGVCFs done. Elapsed time: 0.02 minutes.
-    Runtime.totalMemory()=203423744
-    ```
+
+561 INFO NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field MLEAF - the field will NOT be part of INFO fields in the generated VCF records
+17:38:45.577 INFO GenotypeGVCFs - Done initializing engine
+17:38:45.615 INFO ProgressMeter - Starting traversal
+17:38:45.615 INFO ProgressMeter - Current Locus Elapsed Minutes Variants Processed Variants/Minute
+17:38:45.903 WARN InbreedingCoeff - InbreedingCoeff will not be calculated at position 20_10037292_10066351:3480 and possibly subsequent; at least 10 samples must have called genotypes
+GENOMICSDB_TIMER,GenomicsDB iterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
+17:38:46.421 INFO ProgressMeter - 20_10037292_10066351:13953 0.0 3390 252357.3
+17:38:46.422 INFO ProgressMeter - Traversal complete. Processed 3390 total variants in 0.0 minutes.
+17:38:46.423 INFO GenotypeGVCFs - Shutting down engine
+[February 11, 2026 at 5:38:46 PM GMT] org.broadinstitute.hellbender.tools.walkers.GenotypeGVCFs done. Elapsed time: 0.02 minutes.
+Runtime.totalMemory()=203423744
+```
 
 Això crea el fitxer de sortida VCF `family_trio.vcf` al directori de treball actual del contenidor, així com el seu índex, `family_trio.vcf.idx`.
 És un altre fitxer raonablement petit, així que podeu executar `cat family_trio.vcf` per veure el contingut del fitxer, i desplaçar-vos cap avall per trobar les primeres línies de variants.

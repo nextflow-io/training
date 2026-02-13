@@ -220,7 +220,7 @@ O comando automaticamente:
 - Atualiza `modules.json` para rastrear o módulo instalado
 - Fornece a declaração `include` correta para usar no seu fluxo de trabalho
 
-!!! tip
+!!! tip "Dica"
 
     Sempre certifique-se de que seu diretório de trabalho atual seja a raiz do projeto do seu pipeline antes de executar o comando de instalação de módulo.
 
@@ -289,7 +289,7 @@ Abra [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) e faça a se
 
 === "Depois"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -299,8 +299,8 @@ Abra [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) e faça a se
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
 === "Antes"
@@ -332,7 +332,7 @@ Neste ponto, você pode estar tentado a mergulhar e começar a editar o código,
 
 Vamos abordar isso como uma seção separada porque envolve um novo mecanismo que ainda não cobrimos: mapas de metadados.
 
-!!! note
+!!! note "Nota"
 
     Você pode opcionalmente deletar o arquivo `collectGreetings.nf`:
 
@@ -360,7 +360,7 @@ Isso nos permitirá determinar se podemos simplesmente tratar o novo módulo com
 Idealmente, isso é algo que você deveria fazer _antes_ mesmo de instalar o módulo, mas ei, melhor tarde do que nunca.
 (Vale ressaltar que existe um comando `uninstall` para se livrar de módulos que você decidir que não quer mais.)
 
-!!! note
+!!! note "Nota"
 
     O processo CAT_CAT inclui um tratamento bastante inteligente de diferentes tipos de compressão, extensões de arquivo e assim por diante, que não são estritamente relevantes para o que estamos tentando mostrar aqui, então vamos ignorar a maior parte e focar apenas nas partes que são importantes.
 
@@ -528,7 +528,7 @@ Agora que você sabe tudo sobre mapas de metadados (ou o suficiente para os prop
 
 Para maior clareza, vamos dividir isso e cobrir cada passo separadamente.
 
-!!! note
+!!! note "Nota"
 
     Todas as mudanças mostradas abaixo são feitas na lógica do fluxo de trabalho no bloco `main` no arquivo de fluxo de trabalho `core-hello/workflows/hello.nf`.
 
@@ -738,7 +738,7 @@ A operação `.map{ meta, file -> file }` extrai o arquivo da tupla `[metadados,
 
 Então é só uma questão de passar `ch_for_cowpy` para `cowpy` em vez de `collectGreetings.out.outfile` naquela última linha.
 
-!!! note
+!!! note "Nota"
 
     Na próxima parte do curso, atualizaremos `cowpy` para trabalhar diretamente com tuplas de metadados, então este passo de extração não será mais necessário.
 

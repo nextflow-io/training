@@ -8,7 +8,7 @@ O projeto nf-core fornece um comando (`nf-core modules create`) que gera templat
 No entanto, para fins didáticos, vamos começar fazendo manualmente: transformar o módulo local `cowpy` em seu pipeline `core-hello` em um módulo no estilo nf-core passo a passo.
 Depois disso, mostraremos como usar a criação de módulos baseada em template para trabalhar de forma mais eficiente no futuro.
 
-??? info "Como começar desta seção"
+??? info "Como começar a partir desta seção"
 
     Esta seção pressupõe que você completou a [Parte 3: Usar um módulo nf-core](./03_use_module.md) e integrou o módulo `CAT_CAT` ao seu pipeline.
 
@@ -128,7 +128,7 @@ Os nomes dos processos diferenciam maiúsculas de minúsculas, então agora que 
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -144,7 +144,7 @@ Os nomes dos processos diferenciam maiúsculas de minúsculas, então agora que 
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy/main.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -156,9 +156,12 @@ Então agora vamos atualizar as duas referências ao processo no bloco workflow 
 
 === "Depois"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extrai o arquivo da tupla já que cowpy ainda não usa metadata
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // gera arte ASCII das saudações com cowpy
-    COWPY(CAT_CAT.out.file_out)
+    COWPY(ch_for_cowpy, params.character)
 
     //
     // Agrupar e salvar versões de software
@@ -173,15 +176,18 @@ Então agora vamos atualizar as duas referências ao processo no bloco workflow 
 
 
     emit:
-    cowpy_hellos   = COWPY.out.cowpy_output
+    cowpy_hellos   = COWPY.out
     versions       = ch_versions
     ```
 
 === "Antes"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extrai o arquivo da tupla já que cowpy ainda não usa metadata
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // gera arte ASCII das saudações com cowpy
-    cowpy(CAT_CAT.out.file_out)
+    cowpy(ch_for_cowpy, params.character)
 
     //
     // Agrupar e salvar versões de software
@@ -196,7 +202,7 @@ Então agora vamos atualizar as duas referências ao processo no bloco workflow 
 
 
     emit:
-    cowpy_hellos   = cowpy.out.cowpy_output
+    cowpy_hellos   = cowpy.out
     versions       = ch_versions
     ```
 
@@ -317,7 +323,7 @@ Abra o arquivo de fluxo de trabalho `hello.nf` (em `core-hello/workflows/`) e at
 === "Antes"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
-        // extract the file from the tuple since cowpy doesn't use metadata yet
+        // extrai o arquivo da tupla já que cowpy ainda não usa metadata
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
         // gera arte ASCII das saudações com cowpy
@@ -497,7 +503,7 @@ Você pode ver que fizemos três mudanças.
 
 Como resultado, a interface do módulo agora é mais simples: ela só espera as entradas essenciais de metadata e arquivo.
 
-!!! note
+!!! note "Nota"
 
     O operador `?:` é frequentemente chamado de 'operador Elvis' porque se parece com um rosto de Elvis Presley de lado, com o caractere `?` simbolizando a onda em seu cabelo.
 
@@ -695,7 +701,7 @@ Para resumir os benefícios desta abordagem:
 - **Portabilidade**: Módulos podem ser reutilizados sem opções de ferramenta codificadas
 - **Sem mudanças no fluxo de trabalho**: Adicionar ou alterar opções de ferramenta não requer atualizar o código do fluxo de trabalho
 
-!!! note
+!!! note "Nota"
 
     O sistema `ext.args` tem capacidades adicionais poderosas não cobertas aqui, incluindo alternar valores de argumentos dinamicamente com base em metadata. Veja as [especificações de módulos nf-core](https://nf-co.re/docs/guidelines/components/modules) para mais detalhes.
 

@@ -128,7 +128,7 @@ Los nombres de procesos distinguen entre mayúsculas y minúsculas, así que aho
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -144,7 +144,7 @@ Los nombres de procesos distinguen entre mayúsculas y minúsculas, así que aho
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy/main.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -156,9 +156,12 @@ Así que ahora actualicemos las dos referencias al proceso en el bloque workflow
 
 === "Después"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extract the file from the tuple since cowpy doesn't use metadata yet
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // generar arte ASCII de los saludos con cowpy
-    COWPY(CAT_CAT.out.file_out)
+    COWPY(ch_for_cowpy, params.character)
 
     //
     // Recopilar y guardar versiones de software
@@ -173,15 +176,18 @@ Así que ahora actualicemos las dos referencias al proceso en el bloque workflow
 
 
     emit:
-    cowpy_hellos   = COWPY.out.cowpy_output
+    cowpy_hellos   = COWPY.out
     versions       = ch_versions
     ```
 
 === "Antes"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    // extract the file from the tuple since cowpy doesn't use metadata yet
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // generar arte ASCII de los saludos con cowpy
-    cowpy(CAT_CAT.out.file_out)
+    cowpy(ch_for_cowpy, params.character)
 
     //
     // Recopilar y guardar versiones de software
@@ -196,7 +202,7 @@ Así que ahora actualicemos las dos referencias al proceso en el bloque workflow
 
 
     emit:
-    cowpy_hellos   = cowpy.out.cowpy_output
+    cowpy_hellos   = cowpy.out
     versions       = ch_versions
     ```
 
@@ -497,7 +503,7 @@ Puede ver que hicimos tres cambios.
 
 Como resultado, la interfaz del módulo ahora es más simple: solo espera las entradas esenciales de metadatos y archivos.
 
-!!! note
+!!! note "Nota"
 
     El operador `?:` a menudo se llama 'operador Elvis' porque parece una cara de Elvis Presley de lado, con el carácter `?` simbolizando la onda en su cabello.
 
@@ -695,7 +701,7 @@ Para resumir los beneficios de este enfoque:
 - **Portabilidad**: Los módulos pueden reutilizarse sin opciones de herramientas codificadas
 - **Sin cambios en el flujo de trabajo**: Agregar o cambiar opciones de herramientas no requiere actualizar el código del flujo de trabajo
 
-!!! note
+!!! note "Nota"
 
     El sistema `ext.args` tiene capacidades adicionales poderosas no cubiertas aquí, incluyendo el cambio de valores de argumentos dinámicamente basado en metadatos. Consulte las [especificaciones de módulos nf-core](https://nf-co.re/docs/guidelines/components/modules) para más detalles.
 

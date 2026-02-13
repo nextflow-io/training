@@ -55,42 +55,42 @@
 
 ### कोर्स-स्तर के प्लेसहोल्डर
 
-| प्लेसहोल्डर                 | विवरण                           | उदाहरण (Genomics)                         |
-| ---------------------------- | ------------------------------- | ------------------------------------------ |
-| `{DOMAIN}`                   | डोमेन नाम (टाइटल केस)          | Genomics                                   |
-| `{DOMAIN_DIR}`               | डायरेक्टरी नाम (लोअरकेस)       | genomics                                   |
-| `{METHOD}`                   | विश्लेषण विधि का नाम           | variant calling                            |
-| `{METHOD_SHORT_DESCRIPTION}` | एक-पंक्ति विधि विवरण           | variant calling with GATK                  |
+| प्लेसहोल्डर                  | विवरण                               | उदाहरण (Genomics)                          |
+| ---------------------------- | ----------------------------------- | ------------------------------------------ |
+| `{DOMAIN}`                   | डोमेन नाम (टाइटल केस)               | Genomics                                   |
+| `{DOMAIN_DIR}`               | डायरेक्टरी नाम (लोअरकेस)            | genomics                                   |
+| `{METHOD}`                   | विश्लेषण विधि का नाम                | variant calling                            |
+| `{METHOD_SHORT_DESCRIPTION}` | एक-पंक्ति विधि विवरण                | variant calling with GATK                  |
 | `{ACCESSORY_FILES}`          | उपयोग की गई सहायक फ़ाइलों के प्रकार | index files and reference genome resources |
 
 ### टूल प्लेसहोल्डर
 
-| प्लेसहोल्डर                          | विवरण                          | उदाहरण (Genomics)                                  |
+| प्लेसहोल्डर                           | विवरण                          | उदाहरण (Genomics)                                   |
 | ------------------------------------- | ------------------------------ | --------------------------------------------------- |
 | `{TOOL_A}` / `{TOOL_B}`               | टूल डिस्प्ले नाम               | Samtools / GATK                                     |
-| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | टूल डॉक्यूमेंटेशन URLs        | https://www.htslib.org/                             |
+| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | टूल डॉक्यूमेंटेशन URLs         | https://www.htslib.org/                             |
 | `{TOOL_A_CONTAINER_URI}`              | पूरा कंटेनर URI                | community.wave.seqera.io/library/samtools:1.20--... |
 | `{TOOL_A_MODULE}` / `{TOOL_B_MODULE}` | मॉड्यूल फ़ाइलनाम (.nf के बिना) | samtools_index / gatk_haplotypecaller               |
 | `{TOOL_A_PROCESS_NAME}`               | UPPERCASE प्रोसेस नाम          | SAMTOOLS_INDEX                                      |
-| `{TOOL_A_COMMAND}`                    | चलाने के लिए शेल कमांड        | samtools index '<input_bam>'                        |
+| `{TOOL_A_COMMAND}`                    | चलाने के लिए शेल कमांड         | samtools index '<input_bam>'                        |
 
 ### इनपुट/आउटपुट प्लेसहोल्डर
 
-| प्लेसहोल्डर            | विवरण                           | उदाहरण (Genomics)   |
-| ---------------------- | ------------------------------- | -------------------- |
-| `{PRIMARY_INPUT_TYPE}` | प्राथमिक इनपुट फ़ाइल प्रकार    | BAM file             |
-| `{PRIMARY_PARAM_NAME}` | Nextflow पैरामीटर नाम           | reads_bam            |
-| `{TEST_INPUT_PATH}`    | data/ में टेस्ट इनपुट का पाथ   | bam/reads_mother.bam |
-| `{FINAL_OUTPUT_TYPE}`  | अंतिम पाइपलाइन आउटपुट प्रकार   | joint-called VCFs    |
+| प्लेसहोल्डर            | विवरण                        | उदाहरण (Genomics)    |
+| ---------------------- | ---------------------------- | -------------------- |
+| `{PRIMARY_INPUT_TYPE}` | प्राथमिक इनपुट फ़ाइल प्रकार  | BAM file             |
+| `{PRIMARY_PARAM_NAME}` | Nextflow पैरामीटर नाम        | reads_bam            |
+| `{TEST_INPUT_PATH}`    | data/ में टेस्ट इनपुट का पाथ | bam/reads_mother.bam |
+| `{FINAL_OUTPUT_TYPE}`  | अंतिम पाइपलाइन आउटपुट प्रकार | joint-called VCFs    |
 
 ### सामग्री प्लेसहोल्डर
 
-| प्लेसहोल्डर             | विवरण                                      |
-| ----------------------- | ------------------------------------------ |
-| `{PART2_SUMMARY}`       | भाग 2 के दायरे का एक-पंक्ति सारांश        |
-| `{AGGREGATION_SUMMARY}` | एकत्रीकरण चरण का एक-पंक्ति सारांश         |
-| `{PROCESS_LIST}`        | प्रोसेस नामों की कॉमा-सेपरेटेड सूची       |
-| `{TYPEFORM_ID}`         | सर्वे के लिए Typeform embed ID            |
+| प्लेसहोल्डर             | विवरण                               |
+| ----------------------- | ----------------------------------- |
+| `{PART2_SUMMARY}`       | भाग 2 के दायरे का एक-पंक्ति सारांश  |
+| `{AGGREGATION_SUMMARY}` | एकत्रीकरण चरण का एक-पंक्ति सारांश   |
+| `{PROCESS_LIST}`        | प्रोसेस नामों की कॉमा-सेपरेटेड सूची |
+| `{TYPEFORM_ID}`         | सर्वे के लिए Typeform embed ID      |
 
 ## शैक्षणिक संरचना
 
