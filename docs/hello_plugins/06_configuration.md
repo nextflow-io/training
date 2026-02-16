@@ -209,6 +209,7 @@ nextflow run main.nf -ansi-log false
 ```console title="Expected output"
 N E X T F L O W  ~  version 25.10.2
 Launching `main.nf` [stoic_wegener] DSL2 - revision: 63f3119fbc
+WARN: Unrecognized config option 'greeting.taskCounter.verbose'
 Pipeline is starting! 🚀
 Reversed: olleH
 Reversed: ruojnoB
@@ -228,6 +229,12 @@ Decorated: *** Hallo ***
 Pipeline complete! 👋
 📈 Final task count: 5
 ```
+
+!!! note
+
+    The "Unrecognized config option" warning appears because Nextflow doesn't know about the `greeting` scope yet.
+    The config values still work via `session.config.navigate()`, but Nextflow flags them as unrecognized.
+    This warning goes away in Section 4 when you register a formal config scope class.
 
 ---
 
@@ -401,7 +408,6 @@ package training.plugin
 
 import nextflow.config.spec.ConfigOption
 import nextflow.config.spec.ConfigScope
-import nextflow.config.spec.Description
 import nextflow.config.spec.ScopeName
 
 /**
@@ -426,16 +432,22 @@ class GreetingConfig implements ConfigScope {
         this.suffix = opts.suffix as String ?: '***'
     }
 
+    /**
+     * Enable or disable the plugin entirely.
+     */
     @ConfigOption
-    @Description('Enable or disable the plugin entirely')
     boolean enabled = true
 
+    /**
+     * Prefix for decorated greetings.
+     */
     @ConfigOption
-    @Description('Prefix for decorated greetings')
     String prefix = '***'
 
+    /**
+     * Suffix for decorated greetings.
+     */
     @ConfigOption
-    @Description('Suffix for decorated greetings')
     String suffix = '***'
 }
 ```
@@ -445,19 +457,18 @@ Key points:
 - **`@ScopeName('greeting')`**: Maps to the `greeting { }` block in config
 - **`implements ConfigScope`**: Required interface for config classes
 - **`@ConfigOption`**: Each field becomes a configuration option
-- **`@Description`**: Provides documentation for language server support
+- **Javadoc comments**: Document each option for language server support
 - **Constructors**: Both no-arg and Map constructors are needed
 
 ### 4.2. Add nested configuration
 
 Now add the `taskCounter` nested scope for the verbose option:
 
-```groovy title="GreetingConfig.groovy (final version)" linenums="1" hl_lines="28-29 41-55"
+```groovy title="GreetingConfig.groovy (final version)" linenums="1" hl_lines="28-30 51-64"
 package training.plugin
 
 import nextflow.config.spec.ConfigOption
 import nextflow.config.spec.ConfigScope
-import nextflow.config.spec.Description
 import nextflow.config.spec.ScopeName
 
 /**
@@ -486,18 +497,27 @@ class GreetingConfig implements ConfigScope {
         }
     }
 
+    /**
+     * Enable or disable the plugin entirely.
+     */
     @ConfigOption
-    @Description('Enable or disable the plugin entirely')
     boolean enabled = true
 
+    /**
+     * Prefix for decorated greetings.
+     */
     @ConfigOption
-    @Description('Prefix for decorated greetings')
     String prefix = '***'
 
+    /**
+     * Suffix for decorated greetings.
+     */
     @ConfigOption
-    @Description('Suffix for decorated greetings')
     String suffix = '***'
 
+    /**
+     * Task counter configuration
+     */
     TaskCounterConfig taskCounter = new TaskCounterConfig()
 
     static class TaskCounterConfig implements ConfigScope {
@@ -507,7 +527,6 @@ class GreetingConfig implements ConfigScope {
         }
 
         @ConfigOption
-        @Description('Show per-task completion messages')
         boolean verbose = true
     }
 }
