@@ -1,8 +1,9 @@
 # Part 5: Trace Observers
 
-In Part 1, we saw that plugins can provide many types of extensions.
-So far we've implemented custom functions.
-This part explores **trace observers**, which let you hook into workflow lifecycle events.
+Trace observers let your plugin respond to workflow events.
+In this section, you'll build an observer that counts completed tasks and prints a summary.
+
+This enables use cases like custom reports, Slack notifications, metrics collection, or integration with external monitoring systems.
 
 !!! tip "Starting from here?"
 
@@ -16,8 +17,7 @@ This part explores **trace observers**, which let you hook into workflow lifecyc
 
 ## 1. Understanding the existing trace observer
 
-Remember the "Pipeline is starting!" message when you ran the pipeline?
-That came from the `GreetingObserver` class in your plugin.
+The "Pipeline is starting!" message when you ran the pipeline came from the `GreetingObserver` class in your plugin.
 
 Look at the observer code:
 
@@ -37,14 +37,13 @@ Trace observers can respond to many events:
 | `onProcessCached`   | A cached task is reused |
 | `onFilePublish`     | A file is published     |
 
-This enables powerful use cases like custom reports, Slack notifications, or metrics collection.
+For a complete list, see the [TraceObserverV2 interface](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserverV2.groovy) in the Nextflow source.
 
 ---
 
-## 2. Try it: Add a task counter observer
+## 2. Add a task counter observer
 
 Rather than modifying the existing observer, create a new one that counts completed tasks.
-We'll build it up progressively: first a minimal version, then add features.
 
 ### 2.1. Create a minimal observer
 
@@ -54,8 +53,7 @@ Create a new file:
 touch nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy
 ```
 
-Start with the simplest possible observer.
-Just print a message when any task completes:
+Start with the simplest possible observer that prints a message when any task completes:
 
 ```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1"
 package training.plugin
@@ -104,7 +102,7 @@ class GreetingFactory implements TraceObserverFactory {
 }
 ```
 
-Edit `GreetingFactory.groovy` to add our new observer:
+Edit `GreetingFactory.groovy` to add the new observer:
 
 === "After"
 
@@ -151,7 +149,11 @@ You should see "✓ Task completed!" printed five times (once per task):
 ```
 
 Our observer is responding to task completion events.
-The next step makes it more useful.
+
+??? exercise "Customize the message"
+
+    Try changing the message in `onProcessComplete` to something of your own, rebuild, and rerun.
+    This confirms the full edit-build-run cycle works for observers.
 
 ### 2.4. Add counting logic
 
@@ -230,12 +232,9 @@ Pipeline complete! 👋
 !!! tip "Why `-ansi-log false`?"
 
     By default, Nextflow's ANSI progress display overwrites previous lines to show a clean, updating view of progress.
-    This means you'd only see the *final* task count, not the intermediate "Tasks completed so far" messages.
-    They'd be overwritten as new output arrives.
+    This means you'd only see the *final* task count, not the intermediate messages.
 
     Using `-ansi-log false` disables this behavior and shows all output sequentially, which is essential when testing observers that print messages during execution.
-    Without this flag, you might think your observer isn't working when it actually is.
-    The output is just being overwritten.
 
 ---
 

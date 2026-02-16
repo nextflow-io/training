@@ -4,14 +4,15 @@ This page will help you set up your environment and navigate through the trainin
 
 !!! warning "Development sections are advanced"
 
-    Using existing plugins (Parts 1-2) is straightforward and valuable for all Nextflow users.
+    Using existing plugins (Part 1) is straightforward and valuable for all Nextflow users.
 
-    However, **developing your own plugins** (Parts 3-7) is an advanced topic.
-    It involves Java/Groovy programming, build tools, and software engineering concepts that may be unfamiliar if you come from a pure bioinformatics background.
+    However, **developing your own plugins** (Parts 2-7) is an advanced topic.
+    It involves Java/Groovy programming, build tools, and software engineering concepts.
+    Many successful Nextflow plugin authors don't have a Java development background.
 
     Most Nextflow users will never need to develop plugins.
     The existing plugin ecosystem covers the vast majority of use cases.
-    If development sections feel challenging, focus on Parts 1-2 and bookmark the rest for later.
+    If development sections feel challenging, focus on Part 1 and bookmark the rest for later.
 
 ---
 
@@ -25,7 +26,7 @@ If you haven't yet done so, make sure to open the training environment as descri
 
 ## 2. Verify Java installation
 
-For plugin development (Parts 3-7), you need Java 21 or later.
+For plugin development (Parts 2-7), you need Java 21 or later.
 Check that Java is available:
 
 ```bash
@@ -49,9 +50,8 @@ The training Codespace comes with Java pre-installed.
     **Gradle** is a build tool that compiles code, runs tests, and packages software.
     You don't need to understand Gradle deeply; we'll use simple commands like `./gradlew build`.
 
-    The good news: you don't need to be an expert in any of these.
-    Many successful Nextflow plugin authors come from bioinformatics backgrounds, not Java development.
-    We'll explain the relevant concepts as we go, and the plugin template handles most of the complexity for you.
+    You don't need to be an expert in any of these.
+    The plugin template handles most of the complexity for you.
 
 ---
 
@@ -70,7 +70,8 @@ cd hello-plugins
 ├── greetings.csv
 ├── main.nf
 ├── nextflow.config
-└── random_id_example.nf
+├── random_id_example.nf
+└── solutions/
 ```
 
 We have a simple greeting pipeline and materials for both using and developing plugins.
@@ -79,14 +80,13 @@ We have a simple greeting pipeline and materials for both using and developing p
 
 ## 5. What we'll cover
 
-This training is organized into two parts:
+This training is organized into two tracks:
 
-**Using plugins (Parts 1-2):**
+**Using plugins (Part 1):**
 
-- Understand plugin architecture and extension types
 - Discover, install, and use existing plugins like `nf-hello`
 
-**Developing plugins (Parts 3-7):**
+**Developing plugins (Parts 2-7):**
 
 - Create a plugin project with `nf-greeting`
 - Implement custom functions
@@ -107,6 +107,6 @@ This training is organized into two parts:
 
 ### What's next?
 
-In the next section, you'll learn about plugin architecture and start using existing plugins.
+In the next section, you'll start using an existing plugin in a workflow.
 
 [Continue to Part 1 :material-arrow-right:](01_plugin_basics.md){ .md-button .md-button--primary }

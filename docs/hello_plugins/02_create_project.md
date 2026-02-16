@@ -1,6 +1,6 @@
 # Part 2: Create a Plugin Project
 
-In this section, you'll scaffold a new plugin project and understand how the generated components work together.
+In this section, you'll scaffold a new plugin project and examine the generated files.
 
 !!! tip "Starting from here?"
 
@@ -17,15 +17,14 @@ In this section, you'll scaffold a new plugin project and understand how the gen
 
 ---
 
-## 1. Using the plugin create command
+## 1. Create the plugin project
 
-The easiest way to create a plugin is with the built-in command:
+The built-in `nextflow plugin create` command scaffolds a complete plugin project:
 
 ```bash
 nextflow plugin create nf-greeting training
 ```
 
-This scaffolds a complete plugin project.
 The first argument is the plugin name, and the second is your organization name (used for the package namespace).
 
 !!! tip "Manual creation"
@@ -34,37 +33,7 @@ The first argument is the plugin name, and the second is your organization name 
 
 ---
 
-## 2. Understand the plugin architecture
-
-Before diving into the generated files, here's how the pieces fit together:
-
-```mermaid
-graph TD
-    A[GreetingPlugin] -->|registers| B[GreetingExtension]
-    A -->|registers| C[GreetingFactory]
-    C -->|creates| D[GreetingObserver]
-
-    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
-    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
-
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-```
-
-| Class               | Purpose                                              |
-| ------------------- | ---------------------------------------------------- |
-| `GreetingPlugin`    | Entry point that registers all extension points      |
-| `GreetingExtension` | Contains `@Function` methods callable from workflows |
-| `GreetingFactory`   | Creates trace observer instances                     |
-| `GreetingObserver`  | Hooks into workflow lifecycle events                 |
-
-This separation keeps concerns organized: functions go in the Extension, event handling goes in Observers created by the Factory.
-
----
-
-## 3. Examine the generated project
+## 2. Examine the project structure
 
 Change into the plugin directory:
 
@@ -112,12 +81,9 @@ You should see:
 
 ---
 
-## 4. Explore the key files
+## 3. Explore the build configuration
 
-With the project scaffolded, we need to understand how the pieces fit together.
-The two most important files for project configuration are `settings.gradle` and `build.gradle`.
-
-### 4.1. settings.gradle
+### 3.1. settings.gradle
 
 This file identifies the project:
 
@@ -131,7 +97,7 @@ rootProject.name = 'nf-greeting'
 
 The name here must match what you'll put in `nextflow.config` when using the plugin.
 
-### 4.2. build.gradle
+### 3.2. build.gradle
 
 The build file is where most configuration happens:
 
@@ -165,45 +131,82 @@ The `nextflowPlugin` block configures:
 
 - `nextflowVersion`: Minimum Nextflow version required
 - `provider`: Your name or organization
-- `className`: The main plugin class (uses your package name)
+- `className`: The main plugin class (the entry point that Nextflow loads first, specified in `build.gradle`)
 - `extensionPoints`: Classes providing extensions (functions, observers, etc.)
+
+### 3.3. Update nextflowVersion
+
+Update `nextflowVersion` in `build.gradle` to `25.10.0` for config language server support (used in Part 6):
+
+=== "After"
+
+    ```groovy title="build.gradle" hl_lines="2"
+    nextflowPlugin {
+        nextflowVersion = '25.10.0'
+
+        provider = 'training'
+    ```
+
+=== "Before"
+
+    ```groovy title="build.gradle" hl_lines="2"
+    nextflowPlugin {
+        nextflowVersion = '24.10.0'
+
+        provider = 'training'
+    ```
 
 ---
 
-## 5. Explore the source files
+## 4. Tour the source files
 
-The actual plugin code lives in `src/main/groovy/training/plugin/`.
-Each file has a specific role, corresponding to the architecture diagram from section 2.
-
-Open each file to see what the template generated:
+The plugin code lives in `src/main/groovy/training/plugin/`.
+Examine each file to see what the template generated:
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingPlugin.groovy
 ```
 
-This is the entry point. It extends `BasePlugin` and is the class referenced in `build.gradle`.
-Nextflow loads this class first, which then registers the other components.
+`GreetingPlugin` is the plugin entry point, specified in `build.gradle` via `className`.
+Nextflow loads this class first, which registers the other components.
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingExtension.groovy
 ```
 
 The extension class holds functions marked with `@Function` that become callable from Nextflow workflows.
-This is where you'll add most of your plugin's functionality.
+This is where you'll add most of your plugin's functionality (Part 3).
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingFactory.groovy
 ```
 
 The factory creates trace observer instances when workflows start.
-This indirection allows observers to be configured based on session settings.
+You'll work with this in Part 5.
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingObserver.groovy
 ```
 
 The observer hooks into workflow lifecycle events like start, task completion, and end.
-The template includes messages that print "Pipeline is starting!" and "Pipeline complete!"
+The template includes messages that print "Pipeline is starting!" and "Pipeline complete!" (Part 5).
+
+??? info "How the components relate"
+
+    ```mermaid
+    graph TD
+        A[GreetingPlugin] -->|registers| B[GreetingExtension]
+        A -->|registers| C[GreetingFactory]
+        C -->|creates| D[GreetingObserver]
+
+        B -->|provides| E["@Function methods<br/>(callable from workflows)"]
+        D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
+
+        style A fill:#e1f5fe
+        style B fill:#fff3e0
+        style C fill:#fff3e0
+        style D fill:#fff3e0
+    ```
 
 ---
 
@@ -212,13 +215,13 @@ The template includes messages that print "Pipeline is starting!" and "Pipeline 
 You learned that:
 
 - The `nextflow plugin create` command scaffolds a complete project
-- Plugins have four main components: Plugin (entry point), Extension (functions), Factory (creates observers), and Observer (lifecycle hooks)
-- The `build.gradle` file configures plugin metadata, dependencies, and extension points
+- `build.gradle` configures plugin metadata, dependencies, and extension points
+- The plugin has four main components: Plugin (entry point), Extension (functions), Factory (creates observers), and Observer (lifecycle hooks)
 
 ---
 
 ## What's next?
 
-Now we'll implement custom functions in the Extension class.
+Now you'll implement custom functions in the Extension class, build the plugin, and use it in a workflow.
 
 [Continue to Part 3 :material-arrow-right:](03_custom_functions.md){ .md-button .md-button--primary }

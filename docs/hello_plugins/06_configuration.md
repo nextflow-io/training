@@ -1,7 +1,7 @@
 # Part 6: Configuration
 
-In this section, you'll make your plugin configurable by reading settings from `nextflow.config`.
-Users will be able to customize plugin behavior without modifying code.
+Users should be able to control your plugin from `nextflow.config` without editing code.
+In this section, you'll add configuration options to your plugin using two approaches.
 
 !!! tip "Starting from here?"
 
@@ -10,6 +10,10 @@ Users will be able to customize plugin behavior without modifying code.
     ```bash
     cp -r solutions/5-observers/* .
     ```
+
+!!! info "Official documentation"
+
+    For comprehensive configuration details, see the [Nextflow config scopes documentation](https://nextflow.io/docs/latest/developer/config-scopes.html).
 
 Nextflow provides two approaches for plugin configuration:
 
@@ -39,20 +43,18 @@ greeting {
 }
 ```
 
-This approach works well for quick prototyping and simple plugins.
-
 ---
 
-## 2. Try it: Make the task counter configurable
+## 2. Make the task counter configurable
 
-This exercise adds configuration options to:
+Add configuration options to:
 
 1. Enable/disable the entire greeting plugin
 2. Control whether per-task counter messages are shown
 
 ### 2.1. Update TaskCounterObserver
 
-First, edit `TaskCounterObserver.groovy` to accept a configuration flag:
+Edit `TaskCounterObserver.groovy` to accept a configuration flag:
 
 === "After"
 
@@ -125,13 +127,13 @@ First, edit `TaskCounterObserver.groovy` to accept a configuration flag:
 
 The key changes:
 
-- **Line 14**: Add a `verbose` flag to control whether per-task messages are printed
+- **Line 14**: A `verbose` flag controls whether per-task messages are printed
 - **Lines 17-19**: Constructor that accepts the verbose setting
 - **Lines 24-26**: Only print per-task messages if `verbose` is true
 
 ### 2.2. Update the Factory
 
-Now update `GreetingFactory.groovy` to read the configuration and pass it to the observer:
+Update `GreetingFactory.groovy` to read the configuration and pass it to the observer:
 
 === "After"
 
@@ -175,7 +177,7 @@ Rebuild and reinstall the plugin:
 cd nf-greeting && make assemble && make install && cd ..
 ```
 
-Now update `nextflow.config` to disable the per-task messages:
+Update `nextflow.config` to disable the per-task messages:
 
 === "After"
 
@@ -229,10 +231,9 @@ Pipeline complete! 👋
 
 ---
 
-## 3. Try it: Make the decorator configurable
+## 3. Make the decorator configurable
 
 This exercise makes the `decorateGreeting` function use configurable prefix/suffix.
-We'll intentionally make a common mistake to understand how Groovy/Java handles variables.
 
 ### 3.1. Add the configuration reading (this will fail!)
 
@@ -260,7 +261,7 @@ class GreetingExtension extends PluginExtensionPoint {
     }
 ```
 
-Now try to build:
+Try to build:
 
 ```bash
 cd nf-greeting && make assemble
@@ -268,7 +269,7 @@ cd nf-greeting && make assemble
 
 ### 3.2. Observe the error
 
-The build fails with an error like:
+The build fails:
 
 ```console
 > Task :compileGroovy FAILED
@@ -280,8 +281,7 @@ GreetingExtension.groovy: 30: [Static type checking] - The variable [prefix] is 
 GreetingExtension.groovy: 31: [Static type checking] - The variable [suffix] is undeclared.
 ```
 
-**What went wrong?** In Groovy (and Java), you can't just use a variable.
-You must _declare_ it first.
+In Groovy (and Java), you must _declare_ a variable before using it.
 We're trying to assign values to `prefix` and `suffix`, but we never told the class that these variables exist.
 
 ### 3.3. Fix by declaring instance variables
@@ -371,7 +371,7 @@ Decorated: >>> Bonjour <<<
 ...
 ```
 
-The decorator now uses our custom prefix and suffix.
+The decorator now uses your custom prefix and suffix.
 
 ---
 
@@ -384,31 +384,80 @@ The `session.config.navigate()` approach works, but has limitations:
 - Manual type conversion with `as String`, `as boolean`, etc.
 
 For production plugins, Nextflow provides a formal configuration system using annotations.
-This creates a schema that documents available options.
+By creating a config scope class, you define a new top-level configuration block, equivalent to how built-in scopes like `process {}` or `docker {}` work.
 
-### 4.1. Understanding the annotations
+### 4.1. Create the config class (minimal version)
 
-| Annotation              | Purpose                                               |
-| ----------------------- | ----------------------------------------------------- |
-| `@ScopeName('name')`    | Declares a configuration block (e.g., `greeting { }`) |
-| `@ConfigOption`         | Marks a field as a configuration option               |
-| `ConfigScope` interface | Must be implemented by config classes                 |
-
-### 4.2. Create a configuration class
-
-Create a new file `GreetingConfig.groovy`:
+Create a new file:
 
 ```bash
 touch nf-greeting/src/main/groovy/training/plugin/GreetingConfig.groovy
 ```
 
-Add the configuration class:
+Start with a minimal config class for the `enabled`, `prefix`, and `suffix` options:
 
 ```groovy title="GreetingConfig.groovy" linenums="1"
 package training.plugin
 
 import nextflow.config.spec.ConfigOption
 import nextflow.config.spec.ConfigScope
+import nextflow.config.spec.Description
+import nextflow.config.spec.ScopeName
+
+/**
+ * Configuration options for the nf-greeting plugin.
+ *
+ * Users configure these in nextflow.config:
+ *
+ *     greeting {
+ *         enabled = true
+ *         prefix = '>>>'
+ *         suffix = '<<<'
+ *     }
+ */
+@ScopeName('greeting')
+class GreetingConfig implements ConfigScope {
+
+    GreetingConfig() {}
+
+    GreetingConfig(Map opts) {
+        this.enabled = opts.enabled as Boolean ?: true
+        this.prefix = opts.prefix as String ?: '***'
+        this.suffix = opts.suffix as String ?: '***'
+    }
+
+    @ConfigOption
+    @Description('Enable or disable the plugin entirely')
+    boolean enabled = true
+
+    @ConfigOption
+    @Description('Prefix for decorated greetings')
+    String prefix = '***'
+
+    @ConfigOption
+    @Description('Suffix for decorated greetings')
+    String suffix = '***'
+}
+```
+
+Key points:
+
+- **`@ScopeName('greeting')`**: Maps to the `greeting { }` block in config
+- **`implements ConfigScope`**: Required interface for config classes
+- **`@ConfigOption`**: Each field becomes a configuration option
+- **`@Description`**: Provides documentation for language server support
+- **Constructors**: Both no-arg and Map constructors are needed
+
+### 4.2. Add nested configuration
+
+Now add the `taskCounter` nested scope for the verbose option:
+
+```groovy title="GreetingConfig.groovy (final version)" linenums="1" hl_lines="28-29 41-55"
+package training.plugin
+
+import nextflow.config.spec.ConfigOption
+import nextflow.config.spec.ConfigScope
+import nextflow.config.spec.Description
 import nextflow.config.spec.ScopeName
 
 /**
@@ -437,27 +486,18 @@ class GreetingConfig implements ConfigScope {
         }
     }
 
-    /**
-     * Enable or disable the plugin entirely.
-     */
     @ConfigOption
+    @Description('Enable or disable the plugin entirely')
     boolean enabled = true
 
-    /**
-     * Prefix for decorated greetings.
-     */
     @ConfigOption
+    @Description('Prefix for decorated greetings')
     String prefix = '***'
 
-    /**
-     * Suffix for decorated greetings.
-     */
     @ConfigOption
+    @Description('Suffix for decorated greetings')
     String suffix = '***'
 
-    /**
-     * Task counter configuration
-     */
     TaskCounterConfig taskCounter = new TaskCounterConfig()
 
     static class TaskCounterConfig implements ConfigScope {
@@ -467,23 +507,19 @@ class GreetingConfig implements ConfigScope {
         }
 
         @ConfigOption
+        @Description('Show per-task completion messages')
         boolean verbose = true
     }
 }
 ```
 
-Key points:
-
-- **`@ScopeName('greeting')`**: Maps to the `greeting { }` block in config
-- **`implements ConfigScope`**: Required interface for config classes
-- **`@ConfigOption`**: Each field becomes a configuration option
-- **Nested class**: For nested paths like `taskCounter.verbose`, use a nested class
-- **Constructors**: Both no-arg and Map constructors are needed
-- **Default values**: Set directly on the fields
+For nested paths like `taskCounter.verbose`, use a nested class that also implements `ConfigScope`.
 
 ### 4.3. Register the config class
 
-Update `build.gradle` to register the config class as an extension point:
+Every class that implements `ExtensionPoint` needs to be listed in `extensionPoints` in `build.gradle` for the Nextflow plugin system to find it.
+
+Update `build.gradle`:
 
 === "After"
 
@@ -504,26 +540,22 @@ Update `build.gradle` to register the config class as an extension point:
     ]
     ```
 
+Note the difference between the factory and extension points registration:
+
+- **`extensionPoints` in `build.gradle`**: Compile-time registration. Tells the Nextflow plugin system which classes implement extension points.
+- **Factory `create()` method**: Runtime registration. The factory creates observer instances when a workflow actually starts.
+
 ### 4.4. Build and test
 
-The config class provides documentation and schema validation.
-Your code continues using `session.config.navigate()` for reading values:
+The config class provides documentation and validation for your plugin's configuration options.
+Your code continues using `session.config.navigate()` for reading values at runtime. Both work together.
 
 ```bash
 cd nf-greeting && make assemble && make install && cd ..
 nextflow run main.nf -ansi-log false
 ```
 
-The behavior is identical, but now your configuration is:
-
-- **Self-documenting**: The config class shows all available options
-- **Structured**: Nested configuration is explicit
-
-!!! note "Config class vs runtime access"
-
-    The config class primarily serves as documentation and schema definition.
-    Runtime value access still uses `session.config.navigate()`.
-    This is the pattern used by most Nextflow plugins including nf-validation.
+The behavior is identical, but now your configuration is self-documenting and structured.
 
 ---
 
@@ -534,9 +566,6 @@ The behavior is identical, but now your configuration is:
 | Quick prototype or simple plugin    | `session.config.navigate()` only          |
 | Production plugin with many options | Add `ConfigScope` class for documentation |
 | Plugin you'll share publicly        | Add `ConfigScope` class for documentation |
-
-For this training, the `navigate()` approach is sufficient.
-Adding a config class helps users understand available options.
 
 ---
 

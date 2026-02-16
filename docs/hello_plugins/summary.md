@@ -6,16 +6,9 @@ Congratulations on completing the Hello Plugins training.
 
 ## What you learned
 
-**If you completed Parts 1-2**, you now know how to discover, configure, and use existing plugins to extend your Nextflow pipelines.
-This knowledge will help you leverage the growing ecosystem of community plugins.
+**If you completed Part 1**, you now know how to discover, configure, and use existing plugins to extend your Nextflow pipelines.
 
-**If you completed Parts 3-7**, you've also learned how to create your own plugins, implementing custom functions, trace observers, and more.
-Plugin development opens up powerful possibilities for:
-
-- Sharing reusable functions across your organization
-- Integrating with external services and APIs
-- Custom monitoring and reporting
-- Supporting new execution platforms
+**If you completed Parts 2-7**, you've also learned how to create your own plugins, implementing custom functions, trace observers, configuration scopes, and more.
 
 ---
 
@@ -24,10 +17,11 @@ Plugin development opens up powerful possibilities for:
 - [ ] Java 21+ installed
 - [ ] Create project with `nextflow plugin create <name> <org>`
 - [ ] Implement extension class with `@Function` methods
-- [ ] Optionally add `TraceObserver` implementations for workflow events
-- [ ] Write unit tests
 - [ ] Build with `make assemble`
+- [ ] Write unit tests and run with `make test`
 - [ ] Install with `make install`
+- [ ] Optionally add `TraceObserver` implementations for workflow events
+- [ ] Optionally add `ConfigScope` for plugin configuration
 - [ ] Enable in `nextflow.config` with `plugins { id 'plugin-id' }`
 - [ ] Import functions with `include { fn } from 'plugin/plugin-id'`
 
@@ -70,9 +64,11 @@ workflow {
 
 ## Extension point summary
 
-| Type     | Annotation  | Purpose                 |
-| -------- | ----------- | ----------------------- |
-| Function | `@Function` | Callable from workflows |
+| Type                | Class/Annotation    | Purpose                                     |
+| ------------------- | ------------------- | ------------------------------------------- |
+| Function            | `@Function`         | Callable from workflows                     |
+| Trace Observer      | `TraceObserver`     | Hook into workflow lifecycle events          |
+| Configuration Scope | `@ScopeName`        | Define plugin configuration in nextflow.config |
 
 ---
 
@@ -82,6 +78,7 @@ workflow {
 
 - [Using plugins](https://www.nextflow.io/docs/latest/plugins/plugins.html): comprehensive guide to installing and configuring plugins
 - [Developing plugins](https://www.nextflow.io/docs/latest/plugins/developing-plugins.html): detailed plugin development reference
+- [Config scopes](https://nextflow.io/docs/latest/developer/config-scopes.html): creating configuration scopes for plugins
 
 **Plugin discovery:**
 
@@ -92,7 +89,3 @@ workflow {
 
 - [nf-hello](https://github.com/nextflow-io/nf-hello): simple example plugin (great starting point)
 - [Nextflow plugins repository](https://github.com/nextflow-io/plugins): collection of official plugins for reference
-
----
-
-Whether you're using existing plugins or building your own, you now have the tools to extend Nextflow beyond its core capabilities.
