@@ -3,6 +3,7 @@ package training.plugin
 import nextflow.config.spec.ConfigOption
 import nextflow.config.spec.ConfigScope
 import nextflow.config.spec.ScopeName
+import nextflow.script.dsl.Description
 
 /**
  * Configuration options for the nf-greeting plugin.
@@ -30,27 +31,18 @@ class GreetingConfig implements ConfigScope {
         }
     }
 
-    /**
-     * Enable or disable the plugin entirely.
-     */
     @ConfigOption
+    @Description('Enable or disable the plugin entirely')
     boolean enabled = true
 
-    /**
-     * Prefix for decorated greetings.
-     */
     @ConfigOption
+    @Description('Prefix for decorated greetings')
     String prefix = '***'
 
-    /**
-     * Suffix for decorated greetings.
-     */
     @ConfigOption
+    @Description('Suffix for decorated greetings')
     String suffix = '***'
 
-    /**
-     * Task counter configuration
-     */
     TaskCounterConfig taskCounter = new TaskCounterConfig()
 
     static class TaskCounterConfig implements ConfigScope {
@@ -60,6 +52,7 @@ class GreetingConfig implements ConfigScope {
         }
 
         @ConfigOption
+        @Description('Show per-task completion messages')
         boolean verbose = true
     }
 }

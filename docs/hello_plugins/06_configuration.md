@@ -409,6 +409,7 @@ package training.plugin
 import nextflow.config.spec.ConfigOption
 import nextflow.config.spec.ConfigScope
 import nextflow.config.spec.ScopeName
+import nextflow.script.dsl.Description
 
 /**
  * Configuration options for the nf-greeting plugin.
@@ -432,22 +433,16 @@ class GreetingConfig implements ConfigScope {
         this.suffix = opts.suffix as String ?: '***'
     }
 
-    /**
-     * Enable or disable the plugin entirely.
-     */
     @ConfigOption
+    @Description('Enable or disable the plugin entirely')
     boolean enabled = true
 
-    /**
-     * Prefix for decorated greetings.
-     */
     @ConfigOption
+    @Description('Prefix for decorated greetings')
     String prefix = '***'
 
-    /**
-     * Suffix for decorated greetings.
-     */
     @ConfigOption
+    @Description('Suffix for decorated greetings')
     String suffix = '***'
 }
 ```
@@ -457,19 +452,20 @@ Key points:
 - **`@ScopeName('greeting')`**: Maps to the `greeting { }` block in config
 - **`implements ConfigScope`**: Required interface for config classes
 - **`@ConfigOption`**: Each field becomes a configuration option
-- **Javadoc comments**: Document each option for language server support
+- **`@Description`**: Documents each option for language server support (imported from `nextflow.script.dsl`)
 - **Constructors**: Both no-arg and Map constructors are needed
 
 ### 4.2. Add nested configuration
 
 Now add the `taskCounter` nested scope for the verbose option:
 
-```groovy title="GreetingConfig.groovy (final version)" linenums="1" hl_lines="28-30 51-64"
+```groovy title="GreetingConfig.groovy (final version)" linenums="1" hl_lines="29-31 46 48-57"
 package training.plugin
 
 import nextflow.config.spec.ConfigOption
 import nextflow.config.spec.ConfigScope
 import nextflow.config.spec.ScopeName
+import nextflow.script.dsl.Description
 
 /**
  * Configuration options for the nf-greeting plugin.
@@ -497,27 +493,18 @@ class GreetingConfig implements ConfigScope {
         }
     }
 
-    /**
-     * Enable or disable the plugin entirely.
-     */
     @ConfigOption
+    @Description('Enable or disable the plugin entirely')
     boolean enabled = true
 
-    /**
-     * Prefix for decorated greetings.
-     */
     @ConfigOption
+    @Description('Prefix for decorated greetings')
     String prefix = '***'
 
-    /**
-     * Suffix for decorated greetings.
-     */
     @ConfigOption
+    @Description('Suffix for decorated greetings')
     String suffix = '***'
 
-    /**
-     * Task counter configuration
-     */
     TaskCounterConfig taskCounter = new TaskCounterConfig()
 
     static class TaskCounterConfig implements ConfigScope {
@@ -527,6 +514,7 @@ class GreetingConfig implements ConfigScope {
         }
 
         @ConfigOption
+        @Description('Show per-task completion messages')
         boolean verbose = true
     }
 }
