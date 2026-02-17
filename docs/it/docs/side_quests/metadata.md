@@ -63,7 +63,7 @@ code .
 
 Troverà un file di workflow principale e una directory `data` contenente un datasheet e una manciata di file di dati.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     .
@@ -525,7 +525,7 @@ Eccellente! Ora abbiamo una previsione per quale lingua parla ogni personaggio.
 E come notato in precedenza, abbiamo anche incluso il file di input e la meta map nell'output, il che significa che entrambi rimangono associati alle nuove informazioni che abbiamo appena prodotto.
 Questo si rivelerà utile nel prossimo passaggio.
 
-!!! note
+!!! note "Nota"
 
     Più in generale, questo pattern di mantenere la meta map associata ai risultati rende più facile associare risultati correlati che condividono gli stessi identificatori.
 
@@ -633,7 +633,7 @@ Se non ha ancora familiarità con l'operatore `+`, o se questo sembra confuso, s
     in:
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel', lang: 'fr']
+    [id: 'sampleA', character: 'squirrel', lang: 'it']
     ```
 
     Si spera che possa vedere che se cambiamo `map1` in `meta`, è fondamentalmente tutto ciò di cui abbiamo bisogno per aggiungere la previsione linguistica alla nostra meta map nel nostro workflow.
@@ -716,7 +716,7 @@ Ecco la logica condizionale che vogliamo applicare:
 
 Provi a scriverlo voi stessi se sa già come scrivere istruzioni condizionali in Nextflow.
 
-!!! tip
+!!! tip "Suggerimento"
 
     Può accedere al valore di `lang` all'interno dell'operazione map con `meta.lang`.
 
@@ -1309,7 +1309,7 @@ nextflow run main.nf
 
 Se guarda nella directory results, dovrebbe vedere gli stessi output di prima, _cioè_ singoli file contenenti l'arte ASCII di ogni saluto pronunciato dal personaggio corrispondente.
 
-??? abstract "Contenuti della directory"
+??? abstract "Contenuto della directory"
 
     ```console
     ./results/

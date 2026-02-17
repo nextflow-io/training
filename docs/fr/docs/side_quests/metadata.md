@@ -525,7 +525,7 @@ Excellent ! Nous avons maintenant une prédiction de la langue parlée par chaqu
 Et comme noté précédemment, nous avons également inclus le fichier d'entrée et la meta map dans la sortie, ce qui signifie que les deux restent associés aux nouvelles informations que nous venons de produire.
 Cela s'avérera utile dans l'étape suivante.
 
-!!! note
+!!! note "Note"
 
     Plus généralement, ce modèle consistant à garder la meta map associée aux résultats facilite l'association de résultats liés qui partagent les mêmes identifiants.
 
@@ -627,7 +627,7 @@ Si vous n'êtes pas encore familier avec l'opérateur `+`, ou si cela semble dé
     Donc nous avons effectivement transformé :
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'it'
+    [id: 'sampleA', character: 'squirrel'], 'fr'
     ```
 
     en :
@@ -714,7 +714,7 @@ Voici la logique conditionnelle que nous voulons appliquer :
 
 Essayez de l'écrire vous-même si vous savez déjà comment écrire des instructions conditionnelles dans Nextflow.
 
-!!! tip
+!!! tip "Astuce"
 
     Vous pouvez accéder à la valeur de `lang` dans l'opération map avec `meta.lang`.
 

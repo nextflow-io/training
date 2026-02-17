@@ -151,7 +151,7 @@ Da unser Datenblatt im CSV-Format vorliegt, ist dies ein Job für den [`splitCsv
 
 Nimm die folgenden Änderungen vor, um eine `splitCsv()`-Operation zum Channel-Konstruktionscode hinzuzufügen, plus eine `view()`-Operation, um zu überprüfen, dass der Inhalt der Datei korrekt in den Channel geladen wird.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="3" hl_lines="4-5"
     workflow  {
@@ -254,7 +254,7 @@ Wir können den Nextflow-`map`-Operator verwenden, um über jedes Element in uns
 
 Nimm die folgenden Änderungen am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="3" hl_lines="5-7"
     workflow  {
@@ -327,7 +327,7 @@ Wir können das tun, indem wir alle Metadaten in einem Element innerhalb des Tup
 
 Nimm die folgenden Änderungen an der `map`-Operation vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="5" hl_lines="4"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
@@ -415,7 +415,7 @@ Wir stellen dir ein vorgefertigtes Prozessmodul namens `IDENTIFY_LANGUAGE` zur V
 
 Nimm die folgende Änderung am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="1" hl_lines="3"
     #!/usr/bin/env nextflow
@@ -469,7 +469,7 @@ Jetzt, da der Prozess dem Workflow zur Verfügung steht, können wir einen Aufru
 
 Nimm die folgenden Änderungen am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="7" hl_lines="7-9"
         ch_datasheet = channel.fromPath("./data/datasheet.csv")
@@ -525,7 +525,7 @@ Ausgezeichnet! Wir haben jetzt eine Vorhersage darüber, welche Sprache jeder Ch
 Und wie bereits erwähnt, haben wir auch die Eingabedatei und die Meta-Map in die Ausgabe aufgenommen, was bedeutet, dass beide mit den neuen Informationen verbunden bleiben, die wir gerade produziert haben.
 Dies wird sich im nächsten Schritt als nützlich erweisen.
 
-!!! note
+!!! note "Hinweis"
 
     Allgemeiner macht es dieses Muster, die Meta-Map mit Ergebnissen verbunden zu halten, einfacher, verwandte Ergebnisse zu verknüpfen, die dieselben Identifikatoren teilen.
 
@@ -546,7 +546,7 @@ Und wir werden dies mit einer [`map`](https://www.nextflow.io/docs/latest/operat
 
 Hier sind die Änderungen, die du am Workflow vornehmen musst:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="13" hl_lines="3-7"
         // Führe langid aus, um die Sprache jeder Begrüßung zu identifizieren
@@ -627,7 +627,7 @@ Wenn du mit dem `+`-Operator noch nicht vertraut bist oder wenn dies verwirrend 
     Wir haben also effektiv transformiert:
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'it'
+    [id: 'sampleA', character: 'squirrel'], 'fr'
     ```
 
     in:
@@ -716,13 +716,13 @@ Hier ist die bedingte Logik, die wir anwenden wollen:
 
 Versuche es selbst zu schreiben, wenn du bereits weißt, wie man bedingte Anweisungen in Nextflow schreibt.
 
-!!! tip
+!!! tip "Tipp"
 
     Du kannst auf den Wert von `lang` innerhalb der Map-Operation mit `meta.lang` zugreifen.
 
 Du solltest am Ende die folgenden Änderungen am Workflow vornehmen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="13" hl_lines="7-19"
         // Führe langid aus, um die Sprache jeder Begrüßung zu identifizieren
@@ -860,7 +860,7 @@ Wir stellen dir ein vorgefertigtes Prozessmodul namens `COWPY` zur Verfügung, d
 
 Nimm die folgende Änderung am Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="1" hl_lines="4"
     #!/usr/bin/env nextflow
@@ -936,7 +936,7 @@ Wir können das mit dem [`set`](https://www.nextflow.io/docs/latest/reference/op
 
 Ersetze im Haupt-Workflow den `.view()`-Operator durch `.set { ch_languages }` und füge eine Zeile hinzu, die testet, dass wir uns auf den Channel namentlich beziehen können.
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="14" hl_lines="19 21 22"
         // Führe langid aus, um die Sprache jeder Begrüßung zu identifizieren
@@ -1023,7 +1023,7 @@ Unser Channel enthält Tupel, die als `[meta, file]` strukturiert sind, sodass w
 
 Nimm im Haupt-Workflow die folgenden Code-Änderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="34"
         // Temporär: Zugriff auf Datei und Charakter
@@ -1080,7 +1080,7 @@ Jetzt lass uns alles zusammenfügen und tatsächlich den `COWPY`-Prozess auf dem
 
 Nimm im Haupt-Workflow die folgenden Code-Änderungen vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="34"
         // Führe cowpy aus, um ASCII-Art zu generieren
@@ -1168,7 +1168,7 @@ Es gibt einen weiteren Operator namens `multiMap()`, der es uns ermöglicht, die
     Technisch gibt es eine andere Möglichkeit, dies durch eine einzelne Mapping-Operation zu tun, unter Verwendung des `multiMap()`-Operators, der mehrere Channels ausgeben kann.
     Zum Beispiel könntest du den Aufruf von `COWPY` oben durch folgenden Code ersetzen:
 
-    === "Nachher"
+    === "Danach"
 
         ```groovy title="main.nf" linenums="34"
             // Führe cowpy aus, um ASCII-Art zu generieren
@@ -1216,7 +1216,7 @@ Bereit? Los geht's!
 
 Nimm die folgenden Änderungen an der `cowpy.nf`-Moduldatei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="cowpy.nf" linenums="10" hl_lines="2"
     input:
@@ -1241,7 +1241,7 @@ Die gesamte Meta-Map ist jetzt innerhalb des Prozesses verfügbar, sodass wir di
 
 Nimm die folgenden Änderungen an der `cowpy.nf`-Moduldatei vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="cowpy.nf" linenums="16" hl_lines="3"
     script:
@@ -1269,7 +1269,7 @@ Der Prozess erwartet jetzt, dass seine Eingabe die `[meta, file]`-Tupelstruktur 
 
 Nimm die folgenden Änderungen am Haupt-Workflow vor:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="34" hl_lines="2"
     // Führe cowpy aus, um ASCII-Art zu generieren
@@ -1309,7 +1309,7 @@ nextflow run main.nf
 
 Wenn du ins Ergebnisverzeichnis schaust, solltest du die gleichen Ausgaben wie zuvor sehen, d.h. einzelne Dateien, die die ASCII-Art jeder Begrüßung enthalten, gesprochen vom entsprechenden Charakter.
 
-??? abstract "Verzeichnisinhalte"
+??? abstract "Verzeichnisinhalt"
 
     ```console
     ./results/
@@ -1511,7 +1511,7 @@ Hier ist ein Beispiel, wie das funktionieren würde.
 
 Zunächst aktualisiere auf Prozessebene die Eingabedefinition wie folgt:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="cowpy.nf" linenums="12" hl_lines="2"
         input:
@@ -1527,7 +1527,7 @@ Zunächst aktualisiere auf Prozessebene die Eingabedefinition wie folgt:
 
 Verwende dann auf Workflow-Ebene eine Mapping-Operation, um die `character`-Eigenschaft aus den Metadaten zu extrahieren und sie zu einer expliziten Komponente des Eingabe-Tupels zu machen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="main.nf" linenums="37" hl_lines="1"
         COWPY(ch_languages.map{meta, file -> [meta, meta.character, file]})

@@ -525,7 +525,7 @@ Doskonale! Mamy teraz przewidywanie, w jakim języku mówi każda postać.
 I jak wspomniano wcześniej, uwzględniliśmy również plik wejściowy i mapę meta w wyjściu, co oznacza, że oba pozostają powiązane z nowymi informacjami, które właśnie wygenerowaliśmy.
 To okaże się przydatne w następnym kroku.
 
-!!! note
+!!! note "Uwaga"
 
     Bardziej ogólnie, ten wzorzec utrzymywania mapy meta powiązanej z wynikami ułatwia kojarzenie powiązanych wyników, które dzielą te same identyfikatory.
 
@@ -627,7 +627,7 @@ Jeśli nie jesteś jeszcze zaznajomiony z operatorem `+`, lub jeśli wydaje się
     Więc skutecznie przekształciliśmy:
 
     ```groovy
-    [id: 'sampleA', character: 'squirrel'], 'it'
+    [id: 'sampleA', character: 'squirrel'], 'fr'
     ```
 
     w:
@@ -714,7 +714,7 @@ Oto logika warunkowa, którą chcemy zastosować:
 
 Spróbuj napisać to sam, jeśli już wiesz, jak pisać instrukcje warunkowe w Nextflow.
 
-!!! tip
+!!! tip "Wskazówka"
 
     Możesz uzyskać dostęp do wartości `lang` wewnątrz operacji map za pomocą `meta.lang`.
 
