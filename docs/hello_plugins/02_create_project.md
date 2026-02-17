@@ -20,13 +20,13 @@ Now you'll create your own, starting with a project template that handles the bu
 
 ## 1. Create the plugin project
 
-The built-in `nextflow plugin create` command scaffolds a complete plugin project:
+The built-in `nextflow plugin create` command generates a complete plugin project:
 
 ```bash
 nextflow plugin create nf-greeting training
 ```
 
-The first argument is the plugin name, and the second is your organization name (used for the package namespace).
+The first argument is the plugin name, and the second is your organization name (used to organize the generated code into folders).
 
 !!! tip "Manual creation"
 
@@ -133,7 +133,7 @@ The `nextflowPlugin` block configures:
 - `nextflowVersion`: Minimum Nextflow version required
 - `provider`: Your name or organization
 - `className`: The main plugin class (the entry point that Nextflow loads first, specified in `build.gradle`)
-- `extensionPoints`: Classes providing extensions (functions, observers, etc.)
+- `extensionPoints`: Classes that add features to Nextflow (your functions, monitoring, etc.)
 
 ### 3.3. Update nextflowVersion
 
@@ -216,8 +216,8 @@ The template includes messages that print "Pipeline is starting!" and "Pipeline 
 
 You learned that:
 
-- The `nextflow plugin create` command scaffolds a complete project
-- `build.gradle` configures plugin metadata, dependencies, and extension points
+- The `nextflow plugin create` command generates a complete starter project
+- `build.gradle` configures plugin metadata, dependencies, and which classes provide features
 - The plugin has four main components: Plugin (entry point), Extension (functions), Factory (creates monitors), and Observer (responds to workflow events)
 
 ---

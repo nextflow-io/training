@@ -35,7 +35,7 @@ By the end of this training, you will be able to:
 
 **Developing plugins (Parts 2-6):**
 
-- Create a new plugin project using Nextflow's scaffolding command
+- Create a new plugin project using Nextflow's built-in project generator
 - Implement custom functions callable from workflows
 - Build, test, and install your plugin locally
 - Monitor workflow events (e.g., task completion, pipeline start/end) for custom logging or notifications
@@ -50,7 +50,7 @@ Use an existing plugin from the registry in a Nextflow workflow.
 
 #### Part 2: Create a plugin project
 
-Scaffold a new plugin project and examine its structure.
+Generate a new plugin project and examine its structure.
 
 #### Part 3: Custom functions
 
