@@ -180,6 +180,19 @@ flowchart TD
 - The system uses git commit timestamps to detect outdated files
 - **Prompt changes trigger automatic re-translation** of affected files
 
+### Excluding Directories from Translation
+
+To prevent specific directories under `docs/en/docs/` from being translated, add them to `_scripts/translate/translate_config.yml`:
+
+```yaml
+exclude_dirs:
+  - side_quests
+  - archive
+```
+
+Excluded directories are skipped during sync (both new and outdated detection) and are not flagged as orphaned.
+Pages in excluded directories still appear on translated sites, showing the English content with a "Translation in Progress" admonition.
+
 ---
 
 ## Reviewing Translation PRs
@@ -401,6 +414,7 @@ _scripts/
 │   ├── __init__.py         # Package marker
 │   ├── __main__.py         # Entry point
 │   ├── config.py           # Constants and configuration
+│   ├── translate_config.yml# Translation scope config (exclude dirs, etc.)
 │   ├── models.py           # Data structures
 │   ├── paths.py            # Path utilities
 │   ├── prompts.py          # Prompt loading

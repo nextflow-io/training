@@ -7,7 +7,7 @@ from pathlib import Path
 
 import yaml
 
-from .config import DOCS_ROOT, EN_DOCS, PRIORITY_DIRS, ConfigError
+from .config import DOCS_ROOT, EN_DOCS, PRIORITY_DIRS, ConfigError, get_exclude_dirs
 
 
 @lru_cache
@@ -41,17 +41,27 @@ def lang_to_en_path(lang_path: Path, lang: str) -> Path:
     return EN_DOCS / lang_path.relative_to(DOCS_ROOT / lang / "docs")
 
 
+def _is_excluded(path: Path, exclude_dirs: set[str]) -> bool:
+    """Check if a path falls under an excluded directory."""
+    if not exclude_dirs:
+        return False
+    rel = path.relative_to(EN_DOCS)
+    return bool(rel.parts) and rel.parts[0] in exclude_dirs
+
+
 def iter_en_docs() -> list[Path]:
     """List all English docs in priority order.
 
     Priority directories are listed first, then remaining files.
     Within each group, files are sorted alphabetically.
+    Directories listed in translate_config.yml ``exclude_dirs`` are skipped.
     """
+    exclude_dirs = get_exclude_dirs()
     paths: list[Path] = []
     seen: set[Path] = set()
 
     def add(p: Path) -> None:
-        if p not in seen:
+        if p not in seen and not _is_excluded(p, exclude_dirs):
             paths.append(p)
             seen.add(p)
 

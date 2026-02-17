@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import os
+from functools import lru_cache
 from pathlib import Path
 
+import yaml
 from rich.console import Console
 
 # Paths (resolved relative to this file: _scripts/translate/config.py)
@@ -12,6 +14,7 @@ REPO_ROOT = Path(__file__).parent.parent.parent
 DOCS_ROOT = REPO_ROOT / "docs"
 EN_DOCS = DOCS_ROOT / "en" / "docs"
 SCRIPTS_DIR = REPO_ROOT / "_scripts"
+TRANSLATE_CONFIG = Path(__file__).parent / "translate_config.yml"
 
 # Claude API settings
 MODEL = "claude-sonnet-4-5"
@@ -27,6 +30,23 @@ MAX_CONTINUATIONS = 5  # Max continuation requests for very large files
 MAX_VERIFY_RETRIES = 2  # Re-translation attempts after verification failure
 DEFAULT_PARALLEL = 50
 PRIORITY_DIRS = ["hello_nextflow", "hello_nf-core", "nf4_science", "envsetup"]
+
+
+@lru_cache
+def get_translate_config() -> dict:
+    """Load translation configuration from translate_config.yml."""
+    if not TRANSLATE_CONFIG.exists():
+        return {}
+    data = yaml.safe_load(TRANSLATE_CONFIG.read_text(encoding="utf-8"))
+    return data if isinstance(data, dict) else {}
+
+
+def get_exclude_dirs() -> set[str]:
+    """Return the set of directory names to exclude from translation."""
+    cfg = get_translate_config()
+    dirs = cfg.get("exclude_dirs", [])
+    return set(dirs) if isinstance(dirs, list) else set()
+
 
 # Comment styles by language (used for code block post-processing)
 HASH_COMMENT_LANGS = {"python", "py", "sh", "bash", "dockerfile", "yaml", "yml", "toml"}

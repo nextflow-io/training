@@ -9,7 +9,14 @@ from pathlib import Path
 
 import git
 
-from .config import DOCS_ROOT, REPO_ROOT, SCRIPTS_DIR, ConfigError
+from .config import (
+    DOCS_ROOT,
+    EN_DOCS,
+    REPO_ROOT,
+    SCRIPTS_DIR,
+    ConfigError,
+    get_exclude_dirs,
+)
 from .models import TranslationFile
 from .paths import en_to_lang_path, iter_en_docs, lang_to_en_path
 
@@ -179,11 +186,24 @@ def get_missing_files(lang: str) -> list[TranslationFile]:
 
 
 def get_orphaned_files(lang: str) -> list[Path]:
-    """Find translation files without English source."""
+    """Find translation files without English source.
+
+    Translations in excluded directories are not flagged as orphaned,
+    since their English sources are intentionally skipped.
+    """
     lang_docs = DOCS_ROOT / lang / "docs"
     if not lang_docs.exists():
         return []
-    return [p for p in lang_docs.rglob("*.md") if not lang_to_en_path(p, lang).exists()]
+    exclude_dirs = get_exclude_dirs()
+    orphaned = []
+    for p in lang_docs.rglob("*.md"):
+        # Skip files in excluded directories
+        rel = p.relative_to(lang_docs)
+        if rel.parts and rel.parts[0] in exclude_dirs:
+            continue
+        if not lang_to_en_path(p, lang).exists():
+            orphaned.append(p)
+    return orphaned
 
 
 def gather_work(
