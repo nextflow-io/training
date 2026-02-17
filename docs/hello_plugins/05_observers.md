@@ -37,7 +37,7 @@ Trace observers can respond to many events:
 | `onProcessCached`   | A cached task is reused |
 | `onFilePublish`     | A file is published     |
 
-For a complete list, see the [TraceObserverV2 interface](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserverV2.groovy) in the Nextflow source.
+For a complete list, see the [TraceObserver interface](https://github.com/nextflow-io/nextflow/blob/master/modules/nextflow/src/main/groovy/nextflow/trace/TraceObserver.groovy) in the Nextflow source.
 
 ---
 
