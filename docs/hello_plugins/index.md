@@ -6,7 +6,7 @@ hide:
 
 # Hello Plugins
 
-Nextflow's plugin system allows you to extend the language with custom functions, executors, trace observers, and more.
+Nextflow's plugin system allows you to extend the language with custom functions, monitoring hooks, execution backends, and more.
 Plugins enable the community to add features to Nextflow without modifying its core, making them ideal for sharing reusable functionality across pipelines.
 
 During this training, you will learn how to use existing plugins and optionally create your own.
@@ -16,7 +16,7 @@ During this training, you will learn how to use existing plugins and optionally 
 This training is designed for two audiences:
 
 1. **All Nextflow users** (Part 1): Discover, install, and use existing plugins to extend your pipelines.
-2. **Developers** (Parts 2-6): Create your own plugins with custom functions, observers, and configuration.
+2. **Developers** (Parts 2-6): Create your own plugins with custom functions, workflow monitoring, and configuration.
 
 **Prerequisites**
 
@@ -38,7 +38,7 @@ By the end of this training, you will be able to:
 - Create a new plugin project using Nextflow's scaffolding command
 - Implement custom functions callable from workflows
 - Build, test, and install your plugin locally
-- Create trace observers to hook into workflow lifecycle events
+- Monitor workflow events (e.g., task completion, pipeline start/end) for custom logging or notifications
 - Add configuration options to make plugins customizable
 - Distribute your plugin
 
@@ -60,9 +60,9 @@ Implement custom functions, build your plugin, and run it in a workflow.
 
 Write and run unit tests using the Spock framework.
 
-#### Part 5: Trace observers
+#### Part 5: Workflow monitoring
 
-Hook into workflow lifecycle events to build a task counter.
+Respond to events like task completion to build a task counter.
 
 #### Part 6: Configuration & Distribution
 

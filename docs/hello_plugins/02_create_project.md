@@ -183,14 +183,14 @@ This is where you'll add most of your plugin's functionality (Part 3).
 cat src/main/groovy/training/plugin/GreetingFactory.groovy
 ```
 
-The factory creates trace observer instances when workflows start.
+The factory creates monitoring components that respond to workflow events.
 You'll work with this in Part 5.
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingObserver.groovy
 ```
 
-The observer hooks into workflow lifecycle events like start, task completion, and end.
+The observer runs code when things happen in the workflow, like when a task completes or the pipeline finishes.
 The template includes messages that print "Pipeline is starting!" and "Pipeline complete!" (Part 5).
 
 ??? info "How the components relate"
@@ -218,7 +218,7 @@ You learned that:
 
 - The `nextflow plugin create` command scaffolds a complete project
 - `build.gradle` configures plugin metadata, dependencies, and extension points
-- The plugin has four main components: Plugin (entry point), Extension (functions), Factory (creates observers), and Observer (lifecycle hooks)
+- The plugin has four main components: Plugin (entry point), Extension (functions), Factory (creates monitors), and Observer (responds to workflow events)
 
 ---
 

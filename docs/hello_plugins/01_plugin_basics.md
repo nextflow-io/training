@@ -87,16 +87,16 @@ Nextflow handles installing and updating plugins on your behalf.
 
 ## 2. How plugins work
 
-Plugins extend Nextflow through well-defined extension points:
+Plugins extend Nextflow through several types of extension:
 
-| Extension Type  | Purpose                                  | Example                 |
-| --------------- | ---------------------------------------- | ----------------------- |
-| Functions       | Custom functions callable from workflows | `samplesheetToList()`   |
-| Executors       | Custom task execution backends           | AWS Batch, Kubernetes   |
-| Filesystems     | Custom storage backends                  | S3, Azure Blob          |
-| Trace Observers | Monitor workflow execution               | Custom logging, metrics |
+| Extension Type     | What it does                             | Example                          |
+| ------------------ | ---------------------------------------- | -------------------------------- |
+| Functions          | Add custom functions callable from workflows | `samplesheetToList()`        |
+| Workflow monitors  | Respond to events like task completion   | Custom logging, Slack alerts     |
+| Executors          | Add task execution backends              | AWS Batch, Kubernetes            |
+| Filesystems        | Add storage backends                     | S3, Azure Blob                   |
 
-Functions and trace observers are the most common types for plugin authors.
+Functions and workflow monitors (called "trace observers" in the Nextflow API) are the most common types for plugin authors.
 Executors and filesystems are typically created by platform vendors.
 
 ---
@@ -118,7 +118,7 @@ You learned that:
 - Plugins are declared in `nextflow.config` with `plugins { id 'plugin-name@version' }`
 - Import plugin functions with `include { function } from 'plugin/plugin-id'`
 - The [Nextflow Plugin Registry](https://registry.nextflow.io/) lists available plugins
-- Plugins extend Nextflow through functions, observers, executors, and filesystems
+- Plugins extend Nextflow through functions, workflow monitors, executors, and filesystems
 
 ---
 

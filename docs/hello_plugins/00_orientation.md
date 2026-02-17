@@ -91,7 +91,7 @@ This training is organized into two tracks:
 - Create a plugin project with `nf-greeting`
 - Implement custom functions
 - Build, test, and install locally
-- Add trace observers for lifecycle events
+- Monitor workflow events for custom logging or notifications
 - Make plugins configurable
 - Distribute your plugin
 
