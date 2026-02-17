@@ -1,7 +1,7 @@
-# Part 6: Configuration
+# Part 6: Configuration & Distribution
 
 Users should be able to control your plugin from `nextflow.config` without editing code.
-In this section, you'll add configuration options to your plugin using two approaches.
+In this section, you'll add configuration options to your plugin using two approaches, then learn how to share your plugin.
 
 !!! tip "Starting from here?"
 
@@ -206,35 +206,61 @@ Run the pipeline and observe that only the final count appears:
 nextflow run main.nf -ansi-log false
 ```
 
-```console title="Expected output"
-N E X T F L O W  ~  version 25.10.2
-Launching `main.nf` [stoic_wegener] DSL2 - revision: 63f3119fbc
-WARN: Unrecognized config option 'greeting.taskCounter.verbose'
-Pipeline is starting! 🚀
-Reversed: olleH
-Reversed: ruojnoB
-Reversed: àloH
-Reversed: oaiC
-Reversed: ollaH
-[5e/9c1f21] Submitted process > SAY_HELLO (2)
-[20/8f6f91] Submitted process > SAY_HELLO (1)
-[6d/496bae] Submitted process > SAY_HELLO (4)
-[5c/a7fe10] Submitted process > SAY_HELLO (3)
-[48/18199f] Submitted process > SAY_HELLO (5)
-Decorated: *** Hello ***
-Decorated: *** Bonjour ***
-Decorated: *** Holà ***
-Decorated: *** Ciao ***
-Decorated: *** Hallo ***
-Pipeline complete! 👋
-📈 Final task count: 5
-```
+??? example "Output"
+
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [stoic_wegener] DSL2 - revision: 63f3119fbc
+    WARN: Unrecognized config option 'greeting.taskCounter.verbose'
+    Pipeline is starting! 🚀
+    Reversed: olleH
+    Reversed: ruojnoB
+    Reversed: àloH
+    Reversed: oaiC
+    Reversed: ollaH
+    [5e/9c1f21] Submitted process > SAY_HELLO (2)
+    [20/8f6f91] Submitted process > SAY_HELLO (1)
+    [6d/496bae] Submitted process > SAY_HELLO (4)
+    [5c/a7fe10] Submitted process > SAY_HELLO (3)
+    [48/18199f] Submitted process > SAY_HELLO (5)
+    Decorated: *** Hello ***
+    Decorated: *** Bonjour ***
+    Decorated: *** Holà ***
+    Decorated: *** Ciao ***
+    Decorated: *** Hallo ***
+    Pipeline complete! 👋
+    📈 Final task count: 5
+    ```
+
+    Note the "Unrecognized config option" warning on line 3.
 
 !!! note
 
     The "Unrecognized config option" warning appears because Nextflow doesn't know about the `greeting` scope yet.
     The config values still work via `session.config.navigate()`, but Nextflow flags them as unrecognized.
-    This warning goes away in Section 4 when you register a formal config scope class.
+    This goes away in Section 4 when you register a formal config scope class.
+
+??? exercise "Disable the plugin entirely"
+
+    Try setting `greeting.enabled = false` in `nextflow.config` and run the pipeline again.
+    What changes in the output?
+
+    ??? solution
+
+        ```groovy title="nextflow.config" hl_lines="6"
+        plugins {
+            id 'nf-greeting@0.1.0'
+        }
+
+        greeting {
+            enabled = false
+        }
+        ```
+
+        The "Pipeline is starting!", "Pipeline complete!", and task count messages all disappear because the factory returns an empty list when `enabled` is false.
+        The pipeline itself still runs, but no observers are active.
+
+        Remember to set `enabled` back to `true` (or remove the line) before continuing.
 
 ---
 
@@ -372,7 +398,7 @@ Run the pipeline:
 nextflow run main.nf -ansi-log false
 ```
 
-```console title="Expected output (partial)"
+```console title="Output (partial)"
 Decorated: >>> Hello <<<
 Decorated: >>> Bonjour <<<
 ...
@@ -566,13 +592,48 @@ The behavior is identical, but now your configuration is self-documenting and st
 
 ---
 
-## 5. Summary
+## 5. Distribution
 
-| Use case                            | Recommended approach                      |
-| ----------------------------------- | ----------------------------------------- |
-| Quick prototype or simple plugin    | `session.config.navigate()` only          |
-| Production plugin with many options | Add `ConfigScope` class for documentation |
-| Plugin you'll share publicly        | Add `ConfigScope` class for documentation |
+Once your plugin is working locally, you can share it with others through the Nextflow plugin registry.
+
+### 5.1. Versioning
+
+Follow [semantic versioning](https://semver.org/) for your releases:
+
+| Version change             | When to use                       | Example                                   |
+| -------------------------- | --------------------------------- | ----------------------------------------- |
+| **MAJOR** (1.0.0 → 2.0.0) | Breaking changes                  | Removing a function, changing return types |
+| **MINOR** (1.0.0 → 1.1.0) | New features, backward compatible | Adding a new function                     |
+| **PATCH** (1.0.0 → 1.0.1) | Bug fixes, backward compatible    | Fixing a bug in existing function         |
+
+Update the version in `build.gradle` before each release:
+
+```groovy title="build.gradle"
+version = '1.0.0'  // Use semantic versioning: MAJOR.MINOR.PATCH
+```
+
+### 5.2. Publishing to the registry
+
+The [Nextflow plugin registry](https://registry.nextflow.io/) is the official way to share plugins with the community.
+
+The publishing workflow:
+
+1. Claim your plugin name on the [registry](https://registry.nextflow.io/) (sign in with your GitHub account)
+2. Configure your API credentials in `~/.gradle/gradle.properties`
+3. Run tests to verify everything works: `make test`
+4. Publish with `make release`
+
+For step-by-step instructions, see the [official publishing documentation](https://www.nextflow.io/docs/latest/guides/gradle-plugin.html#publishing-a-plugin).
+
+Once published, users install your plugin without any local setup:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-greeting@1.0.0'
+}
+```
+
+Nextflow automatically downloads the plugin from the registry on first use.
 
 ---
 
@@ -584,11 +645,18 @@ You learned that:
 - `@ScopeName` and `@ConfigOption` annotations create self-documenting configuration
 - Configuration can be applied to both observers and extension functions
 - Variables must be declared before use in Groovy/Java
+- Use semantic versioning and the public registry to distribute plugins
+
+| Use case                            | Recommended approach                      |
+| ----------------------------------- | ----------------------------------------- |
+| Quick prototype or simple plugin    | `session.config.navigate()` only          |
+| Production plugin with many options | Add `ConfigScope` class for documentation |
+| Plugin you'll share publicly        | Add `ConfigScope` class for documentation |
 
 ---
 
 ## What's next?
 
-The next section covers how to share your plugin with others.
+You've completed the plugin development training.
 
-[Continue to Part 7 :material-arrow-right:](07_distribution.md){ .md-button .md-button--primary }
+[Continue to Summary :material-arrow-right:](summary.md){ .md-button .md-button--primary }

@@ -1,6 +1,7 @@
 # Part 2: Create a Plugin Project
 
-In this section, you'll scaffold a new plugin project and examine the generated files.
+You've seen how plugins extend Nextflow with reusable functionality.
+Now you'll create your own, starting with a project template that handles the build configuration for you.
 
 !!! tip "Starting from here?"
 
@@ -136,7 +137,8 @@ The `nextflowPlugin` block configures:
 
 ### 3.3. Update nextflowVersion
 
-Update `nextflowVersion` in `build.gradle` to `25.10.0` for config language server support (used in Part 6):
+The template generates a `nextflowVersion` value that may be outdated.
+Update it to match your installed Nextflow version for full compatibility:
 
 === "After"
 

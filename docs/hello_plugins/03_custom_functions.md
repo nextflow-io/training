@@ -174,7 +174,7 @@ Install the plugin to your local plugins directory:
 make install
 ```
 
-??? example "Expected output"
+??? example "Install output"
 
     ```console
     > Task :installPlugin
@@ -307,6 +307,23 @@ nextflow run main.nf
     The "Pipeline is starting!" and "Pipeline complete!" messages come from the `GreetingObserver` trace observer included in the generated plugin template.
 
 Your first plugin function is working. The full cycle is: edit code, `make assemble`, `make install`, run the pipeline.
+
+??? exercise "Try a different transformation"
+
+    Change the `map` closure to pass a different string to `reverseGreeting`, like your own name.
+    No rebuild is needed since the plugin function is already installed; just edit `main.nf` and rerun.
+
+    ??? solution
+
+        ```groovy
+        greeting_ch
+            .map { greeting -> reverseGreeting('Nextflow') }
+            .view { reversed -> "Reversed: $reversed" }
+        ```
+
+        ```console title="Output (partial)"
+        Reversed: wolftxeN
+        ```
 
 ---
 

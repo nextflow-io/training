@@ -43,7 +43,6 @@ nav:
       - hello_plugins/04_build_and_test.md
       - hello_plugins/05_observers.md
       - hello_plugins/06_configuration.md
-      - hello_plugins/07_distribution.md
       - hello_plugins/summary.md
       - hello_plugins/next_steps.md
       - hello_plugins/survey.md

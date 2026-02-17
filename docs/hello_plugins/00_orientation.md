@@ -6,7 +6,7 @@ This page will help you set up your environment and navigate through the trainin
 
     Using existing plugins (Part 1) is straightforward and valuable for all Nextflow users.
 
-    However, **developing your own plugins** (Parts 2-7) is an advanced topic.
+    However, **developing your own plugins** (Parts 2-6) is an advanced topic.
     It involves Java/Groovy programming, build tools, and software engineering concepts.
     Many successful Nextflow plugin authors don't have a Java development background.
 
@@ -26,7 +26,7 @@ If you haven't yet done so, make sure to open the training environment as descri
 
 ## 2. Verify Java installation
 
-For plugin development (Parts 2-7), you need Java 21 or later.
+For plugin development (Parts 2-6), you need Java 21 or later.
 Check that Java is available:
 
 ```bash
@@ -86,7 +86,7 @@ This training is organized into two tracks:
 
 - Discover, install, and use existing plugins like `nf-hello`
 
-**Developing plugins (Parts 2-7):**
+**Developing plugins (Parts 2-6):**
 
 - Create a plugin project with `nf-greeting`
 - Implement custom functions

@@ -16,13 +16,13 @@ During this training, you will learn how to use existing plugins and optionally 
 This training is designed for two audiences:
 
 1. **All Nextflow users** (Part 1): Discover, install, and use existing plugins to extend your pipelines.
-2. **Developers** (Parts 2-7): Create your own plugins with custom functions, observers, and configuration.
+2. **Developers** (Parts 2-6): Create your own plugins with custom functions, observers, and configuration.
 
 **Prerequisites**
 
 - A GitHub account OR a local installation as described [here](../envsetup/02_local).
 - Completed the [Hello Nextflow](../hello_nextflow/index.md) course or equivalent.
-- For plugin development (Parts 2-7): Java 21+ installed and basic familiarity with object-oriented programming.
+- For plugin development (Parts 2-6): Java 21+ installed and basic familiarity with object-oriented programming.
 
 ## Learning objectives
 
@@ -33,7 +33,7 @@ By the end of this training, you will be able to:
 - Install and configure existing plugins in your workflows
 - Import and use plugin functions
 
-**Developing plugins (Parts 2-7):**
+**Developing plugins (Parts 2-6):**
 
 - Create a new plugin project using Nextflow's scaffolding command
 - Implement custom functions callable from workflows
@@ -64,13 +64,9 @@ Write and run unit tests using the Spock framework.
 
 Hook into workflow lifecycle events to build a task counter.
 
-#### Part 6: Configuration
+#### Part 6: Configuration & Distribution
 
-Read settings from `nextflow.config` to make your plugin customizable.
-
-#### Part 7: Distribution
-
-Publish your plugin for others to use.
+Read settings from `nextflow.config` to make your plugin customizable, then learn how to share it.
 
 Ready to take the course?
 

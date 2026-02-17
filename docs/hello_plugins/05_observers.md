@@ -139,7 +139,7 @@ nextflow run main.nf -ansi-log false
 
 You should see "✓ Task completed!" printed five times (once per task):
 
-```console title="Expected output (partial)"
+```console title="Output (partial)"
 ...
 [be/bd8e72] Submitted process > SAY_HELLO (2)
 ✓ Task completed!
@@ -201,33 +201,37 @@ cd nf-greeting && make assemble && make install && cd ..
 nextflow run main.nf -ansi-log false
 ```
 
-```console title="Expected output"
-N E X T F L O W  ~  version 25.10.2
-Launching `main.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
-Pipeline is starting! 🚀
-Reversed: olleH
-Reversed: ruojnoB
-Reversed: àloH
-Reversed: oaiC
-Reversed: ollaH
-[be/bd8e72] Submitted process > SAY_HELLO (2)
-[5b/d24c2b] Submitted process > SAY_HELLO (1)
-[14/1f9dbe] Submitted process > SAY_HELLO (3)
-Decorated: *** Bonjour ***
-Decorated: *** Hello ***
-[85/a6b3ad] Submitted process > SAY_HELLO (4)
-📊 Tasks completed so far: 1
-📊 Tasks completed so far: 2
-Decorated: *** Holà ***
-📊 Tasks completed so far: 3
-Decorated: *** Ciao ***
-[3c/be6686] Submitted process > SAY_HELLO (5)
-📊 Tasks completed so far: 4
-Decorated: *** Hallo ***
-📊 Tasks completed so far: 5
-Pipeline complete! 👋
-📈 Final task count: 5
-```
+??? example "Output"
+
+    ```console
+    N E X T F L O W  ~  version 25.10.2
+    Launching `main.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
+    Pipeline is starting! 🚀
+    Reversed: olleH
+    Reversed: ruojnoB
+    Reversed: àloH
+    Reversed: oaiC
+    Reversed: ollaH
+    [be/bd8e72] Submitted process > SAY_HELLO (2)
+    [5b/d24c2b] Submitted process > SAY_HELLO (1)
+    [14/1f9dbe] Submitted process > SAY_HELLO (3)
+    Decorated: *** Bonjour ***
+    Decorated: *** Hello ***
+    [85/a6b3ad] Submitted process > SAY_HELLO (4)
+    📊 Tasks completed so far: 1
+    📊 Tasks completed so far: 2
+    Decorated: *** Holà ***
+    📊 Tasks completed so far: 3
+    Decorated: *** Ciao ***
+    [3c/be6686] Submitted process > SAY_HELLO (5)
+    📊 Tasks completed so far: 4
+    Decorated: *** Hallo ***
+    📊 Tasks completed so far: 5
+    Pipeline complete! 👋
+    📈 Final task count: 5
+    ```
+
+    The counter messages are interleaved with task submissions because observers run as tasks complete.
 
 !!! tip "Why `-ansi-log false`?"
 
@@ -250,6 +254,6 @@ You learned that:
 
 ## What's next?
 
-The next section shows how plugins can read configuration from `nextflow.config`.
+The next section shows how plugins can read configuration from `nextflow.config`, and how to share your plugin.
 
 [Continue to Part 6 :material-arrow-right:](06_configuration.md){ .md-button .md-button--primary }

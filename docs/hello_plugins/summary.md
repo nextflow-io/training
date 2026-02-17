@@ -8,7 +8,7 @@ Congratulations on completing the Hello Plugins training.
 
 **If you completed Part 1**, you now know how to discover, configure, and use existing plugins to extend your Nextflow pipelines.
 
-**If you completed Parts 2-7**, you've also learned how to create your own plugins, implementing custom functions, trace observers, configuration scopes, and more.
+**If you completed Parts 2-6**, you've also learned how to create your own plugins, implementing custom functions, trace observers, configuration scopes, and more.
 
 ---
 

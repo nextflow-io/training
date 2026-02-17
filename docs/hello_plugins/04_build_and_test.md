@@ -134,6 +134,28 @@ make test
     "BUILD SUCCESSFUL" means everything worked.
     If any test fails, you'll see detailed error messages.
 
+??? exercise "Add an edge case test"
+
+    Add a test that checks `reverseGreeting` handles an empty string.
+    What should `reverseGreeting('')` return?
+    Add the test, run `make test`, and verify it passes.
+
+    ??? solution
+
+        Add this test method to `GreetingExtensionTest.groovy`:
+
+        ```groovy
+        def 'should handle empty string'() {
+            given:
+            def ext = new GreetingExtension()
+
+            expect:
+            ext.reverseGreeting('') == ''
+        }
+        ```
+
+        An empty string reversed is still an empty string.
+
 ---
 
 ## 5. View the test report
