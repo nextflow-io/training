@@ -38,10 +38,10 @@ Vous commencerez par exécuter les outils d'analyse manuellement dans le termina
 
 Nous avons divisé ce cours en trois parties qui se concentrent chacune sur des aspects spécifiques de l'application de Nextflow à un cas d'usage en {DOMAIN}.
 
-| Chapitre du cours                                         | Résumé                                                                                                                  | Durée estimée |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------- |
-| [Partie 1 : Aperçu de la méthode](./01_method.md)         | Comprendre la méthodologie {METHOD} et exécuter les outils manuellement                                                 | 30 min        |
-| [Partie 2 : Traitement mono-échantillon](./02_single_sample.md) | Construire un pipeline qui {PART2_SUMMARY}, puis le mettre à l'échelle pour plusieurs échantillons                     | 60 min        |
+| Chapitre du cours                                                | Résumé                                                                                                                                       | Durée estimée |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| [Partie 1 : Aperçu de la méthode](./01_method.md)                | Comprendre la méthodologie {METHOD} et exécuter les outils manuellement                                                                      | 30 min        |
+| [Partie 2 : Traitement mono-échantillon](./02_single_sample.md)  | Construire un pipeline qui {PART2_SUMMARY}, puis le mettre à l'échelle pour plusieurs échantillons                                           | 60 min        |
 | [Partie 3 : Agrégation multi-échantillons](./03_multi_sample.md) | Ajouter l'agrégation multi-échantillons {AGGREGATION_SUMMARY} en utilisant des opérateurs de canaux pour agréger les sorties par échantillon | 45 min        |
 
 À la fin de ce cours, vous serez capable d'appliquer les concepts et outils fondamentaux de Nextflow à un cas d'usage typique en {DOMAIN}.

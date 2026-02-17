@@ -53,13 +53,13 @@ En canvi, ens centrarem en els conceptes essencials que t'ajudaran a començar i
 
 Hem dividit això en cinc parts que se centraran cadascuna en aspectes específics de l'ús de recursos nf-core.
 
-| Capítol del curs                                           | Resum                                                                                                                                                                      | Durada estimada |
-| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| Capítol del curs                                                | Resum                                                                                                                                                                   | Durada estimada |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
 | [Part 1: Executar un pipeline de demostració](./01_run_demo.md) | Executar un pipeline nf-core existent i examinar la seva estructura de codi per tenir una idea del que fa aquests pipelines diferents dels workflows bàsics de Nextflow | 30 min          |
-| [Part 2: Reescriure Hello per a nf-core](./02_rewrite_hello.md) | Adaptar un workflow existent a l'estructura de la plantilla nf-core, començant pel workflow senzill produït al curs [Hello Nextflow](../hello_nextflow/index.md)         | 60 min          |
-| [Part 3: Utilitzar un mòdul nf-core](./03_use_module.md)  | Explorar la biblioteca de mòduls de la comunitat i aprendre a integrar mòduls preconstruïts i provats que encapsulen eines bioinformàtiques comunes                       | 30 min          |
-| [Part 4: Crear un mòdul nf-core](./04_make_module.md)     | Crear el teu propi mòdul a l'estil nf-core utilitzant l'estructura específica, convencions de nomenclatura i requisits de metadades establerts per nf-core                | 30 min          |
-| [Part 5: Afegir validació d'entrada](./05_input_validation.md) | Implementar validació d'entrada tant per a paràmetres de línia de comandes com per a fitxers de dades d'entrada utilitzant nf-schema                                     | 30 min          |
+| [Part 2: Reescriure Hello per a nf-core](./02_rewrite_hello.md) | Adaptar un workflow existent a l'estructura de la plantilla nf-core, començant pel workflow senzill produït al curs [Hello Nextflow](../hello_nextflow/index.md)        | 60 min          |
+| [Part 3: Utilitzar un mòdul nf-core](./03_use_module.md)        | Explorar la biblioteca de mòduls de la comunitat i aprendre a integrar mòduls preconstruïts i provats que encapsulen eines bioinformàtiques comunes                     | 30 min          |
+| [Part 4: Crear un mòdul nf-core](./04_make_module.md)           | Crear el teu propi mòdul a l'estil nf-core utilitzant l'estructura específica, convencions de nomenclatura i requisits de metadades establerts per nf-core              | 30 min          |
+| [Part 5: Afegir validació d'entrada](./05_input_validation.md)  | Implementar validació d'entrada tant per a paràmetres de línia de comandes com per a fitxers de dades d'entrada utilitzant nf-schema                                    | 30 min          |
 
 Al final d'aquest curs, podràs aprofitar l'enorme riquesa de recursos que ofereix el projecte nf-core.
 

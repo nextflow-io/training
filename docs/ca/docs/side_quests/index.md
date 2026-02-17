@@ -30,15 +30,15 @@ En cas contrari, seleccioneu una missió secundària de la taula següent.
 
 ## Missions Secundàries
 
-| Missió Secundària                                                                      | Temps Estimat per a Ensenyament |
-| -------------------------------------------------------------------------------------- | ------------------------------- |
-| [Recorregut per l'entorn de desenvolupament de Nextflow](./ide_features.md)           | 45 minuts                       |
-| [Patrons Essencials de Programació amb Nextflow](./essential_scripting_patterns.md)   | 90 minuts                       |
-| [Metadades en workflows](./metadata.md)                                                | 45 minuts                       |
-| [Divisió i Agrupació](./splitting_and_grouping.md)                                    | 45 minuts                       |
-| [Proves amb nf-test](./nf-test.md)                                                     | 1 hora                          |
-| [Workflows de workflows](./workflows_of_workflows.md)                                  | 30 minuts                       |
-| [Treballar amb fitxers](./working_with_files.md)                                      | 45 minuts                       |
-| [Depuració de workflows](./debugging.md)                                               | 1 hora                          |
+| Missió Secundària                                                                   | Temps Estimat per a Ensenyament |
+| ----------------------------------------------------------------------------------- | ------------------------------- |
+| [Recorregut per l'entorn de desenvolupament de Nextflow](./ide_features.md)         | 45 minuts                       |
+| [Patrons Essencials de Programació amb Nextflow](./essential_scripting_patterns.md) | 90 minuts                       |
+| [Metadades en workflows](./metadata.md)                                             | 45 minuts                       |
+| [Divisió i Agrupació](./splitting_and_grouping.md)                                  | 45 minuts                       |
+| [Proves amb nf-test](./nf-test.md)                                                  | 1 hora                          |
+| [Workflows de workflows](./workflows_of_workflows.md)                               | 30 minuts                       |
+| [Treballar amb fitxers](./working_with_files.md)                                    | 45 minuts                       |
+| [Depuració de workflows](./debugging.md)                                            | 1 hora                          |
 
 Feu-nos saber quins altres dominis i casos d'ús us agradaria veure coberts aquí publicant a la [secció de Formació](https://community.seqera.io/c/training/) del fòrum de la comunitat.

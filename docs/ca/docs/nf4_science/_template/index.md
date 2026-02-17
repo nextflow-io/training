@@ -38,11 +38,11 @@ Començareu executant les eines d'anàlisi manualment al terminal per entendre l
 
 Hem dividit això en tres parts que se centren cadascuna en aspectes específics de l'aplicació de Nextflow a un cas d'ús de {DOMAIN}.
 
-| Capítol del curs                                          | Resum                                                                                                                | Durada estimada |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------------- |
-| [Part 1: Visió general del mètode](./01_method.md)       | Comprendre la metodologia de {METHOD} i executar les eines manualment                                                | 30 min          |
-| [Part 2: Processament d'una sola mostra](./02_single_sample.md) | Construir un pipeline que {PART2_SUMMARY}, i després escalar a múltiples mostres                                    | 60 min          |
-| [Part 3: Agregació de múltiples mostres](./03_multi_sample.md)  | Afegir {AGGREGATION_SUMMARY} de múltiples mostres utilitzant operadors de canal per agregar sortides per mostra     | 45 min          |
+| Capítol del curs                                                | Resum                                                                                                           | Durada estimada |
+| --------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------- |
+| [Part 1: Visió general del mètode](./01_method.md)              | Comprendre la metodologia de {METHOD} i executar les eines manualment                                           | 30 min          |
+| [Part 2: Processament d'una sola mostra](./02_single_sample.md) | Construir un pipeline que {PART2_SUMMARY}, i després escalar a múltiples mostres                                | 60 min          |
+| [Part 3: Agregació de múltiples mostres](./03_multi_sample.md)  | Afegir {AGGREGATION_SUMMARY} de múltiples mostres utilitzant operadors de canal per agregar sortides per mostra | 45 min          |
 
 Al final d'aquest curs, podreu aplicar conceptes fonamentals de Nextflow i eines a un cas d'ús típic de {DOMAIN}.
 

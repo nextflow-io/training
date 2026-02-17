@@ -55,13 +55,13 @@ Questo è un template generico per creare un nuovo corso specifico per dominio s
 
 ### Placeholder a livello di corso
 
-| Placeholder                  | Descrizione                                | Esempio (Genomics)                         |
-| ---------------------------- | ------------------------------------------ | ------------------------------------------ |
-| `{DOMAIN}`                   | Nome del dominio (title case)              | Genomics                                   |
-| `{DOMAIN_DIR}`               | Nome della directory (minuscolo)           | genomics                                   |
-| `{METHOD}`                   | Nome del metodo di analisi                 | variant calling                            |
-| `{METHOD_SHORT_DESCRIPTION}` | Descrizione del metodo in una riga         | variant calling with GATK                  |
-| `{ACCESSORY_FILES}`          | Tipi di file accessori utilizzati          | index files and reference genome resources |
+| Placeholder                  | Descrizione                        | Esempio (Genomics)                         |
+| ---------------------------- | ---------------------------------- | ------------------------------------------ |
+| `{DOMAIN}`                   | Nome del dominio (title case)      | Genomics                                   |
+| `{DOMAIN_DIR}`               | Nome della directory (minuscolo)   | genomics                                   |
+| `{METHOD}`                   | Nome del metodo di analisi         | variant calling                            |
+| `{METHOD_SHORT_DESCRIPTION}` | Descrizione del metodo in una riga | variant calling with GATK                  |
+| `{ACCESSORY_FILES}`          | Tipi di file accessori utilizzati  | index files and reference genome resources |
 
 ### Placeholder degli strumenti
 
@@ -76,21 +76,21 @@ Questo è un template generico per creare un nuovo corso specifico per dominio s
 
 ### Placeholder di input/output
 
-| Placeholder            | Descrizione                       | Esempio (Genomics)   |
-| ---------------------- | --------------------------------- | -------------------- |
-| `{PRIMARY_INPUT_TYPE}` | Tipo di file di input primario    | BAM file             |
-| `{PRIMARY_PARAM_NAME}` | Nome del parametro Nextflow       | reads_bam            |
-| `{TEST_INPUT_PATH}`    | Percorso all'input di test in data/ | bam/reads_mother.bam |
+| Placeholder            | Descrizione                          | Esempio (Genomics)   |
+| ---------------------- | ------------------------------------ | -------------------- |
+| `{PRIMARY_INPUT_TYPE}` | Tipo di file di input primario       | BAM file             |
+| `{PRIMARY_PARAM_NAME}` | Nome del parametro Nextflow          | reads_bam            |
+| `{TEST_INPUT_PATH}`    | Percorso all'input di test in data/  | bam/reads_mother.bam |
 | `{FINAL_OUTPUT_TYPE}`  | Tipo di output finale della pipeline | joint-called VCFs    |
 
 ### Placeholder dei contenuti
 
-| Placeholder             | Descrizione                                      |
-| ----------------------- | ------------------------------------------------ |
-| `{PART2_SUMMARY}`       | Riepilogo in una riga dell'ambito della Parte 2  |
+| Placeholder             | Descrizione                                         |
+| ----------------------- | --------------------------------------------------- |
+| `{PART2_SUMMARY}`       | Riepilogo in una riga dell'ambito della Parte 2     |
 | `{AGGREGATION_SUMMARY}` | Riepilogo in una riga del passaggio di aggregazione |
-| `{PROCESS_LIST}`        | Lista separata da virgole dei nomi dei processi  |
-| `{TYPEFORM_ID}`         | ID di embed Typeform per il sondaggio            |
+| `{PROCESS_LIST}`        | Lista separata da virgole dei nomi dei processi     |
+| `{TYPEFORM_ID}`         | ID di embed Typeform per il sondaggio               |
 
 ## Struttura pedagogica
 
