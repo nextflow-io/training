@@ -55,24 +55,24 @@ Es basa en els patrons comuns trobats als cursos de Genòmica i RNAseq.
 
 ### Marcadors de posició a nivell de curs
 
-| Marcador de posició          | Descripció                                | Exemple (Genòmica)                                 |
-| ---------------------------- | ----------------------------------------- | -------------------------------------------------- |
-| `{DOMAIN}`                   | Nom del domini (majúscules inicials)      | Genomics                                           |
-| `{DOMAIN_DIR}`               | Nom del directori (minúscules)            | genomics                                           |
-| `{METHOD}`                   | Nom del mètode d'anàlisi                  | variant calling                                    |
-| `{METHOD_SHORT_DESCRIPTION}` | Descripció d'una línia del mètode         | variant calling with GATK                          |
-| `{ACCESSORY_FILES}`          | Tipus de fitxers accessoris utilitzats    | index files and reference genome resources         |
+| Marcador de posició          | Descripció                             | Exemple (Genòmica)                         |
+| ---------------------------- | -------------------------------------- | ------------------------------------------ |
+| `{DOMAIN}`                   | Nom del domini (majúscules inicials)   | Genomics                                   |
+| `{DOMAIN_DIR}`               | Nom del directori (minúscules)         | genomics                                   |
+| `{METHOD}`                   | Nom del mètode d'anàlisi               | variant calling                            |
+| `{METHOD_SHORT_DESCRIPTION}` | Descripció d'una línia del mètode      | variant calling with GATK                  |
+| `{ACCESSORY_FILES}`          | Tipus de fitxers accessoris utilitzats | index files and reference genome resources |
 
 ### Marcadors de posició d'eines
 
-| Marcador de posició                   | Descripció                         | Exemple (Genòmica)                                  |
-| ------------------------------------- | ---------------------------------- | --------------------------------------------------- |
-| `{TOOL_A}` / `{TOOL_B}`               | Noms de visualització de les eines | Samtools / GATK                                     |
-| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | URLs de documentació de les eines  | https://www.htslib.org/                             |
-| `{TOOL_A_CONTAINER_URI}`              | URI complet del contenidor         | community.wave.seqera.io/library/samtools:1.20--... |
-| `{TOOL_A_MODULE}` / `{TOOL_B_MODULE}` | Noms de fitxer de mòdul (sense .nf)| samtools_index / gatk_haplotypecaller               |
-| `{TOOL_A_PROCESS_NAME}`               | Nom del procés en MAJÚSCULES       | SAMTOOLS_INDEX                                      |
-| `{TOOL_A_COMMAND}`                    | La comanda shell a executar        | samtools index '<input_bam>'                        |
+| Marcador de posició                   | Descripció                          | Exemple (Genòmica)                                  |
+| ------------------------------------- | ----------------------------------- | --------------------------------------------------- |
+| `{TOOL_A}` / `{TOOL_B}`               | Noms de visualització de les eines  | Samtools / GATK                                     |
+| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | URLs de documentació de les eines   | https://www.htslib.org/                             |
+| `{TOOL_A_CONTAINER_URI}`              | URI complet del contenidor          | community.wave.seqera.io/library/samtools:1.20--... |
+| `{TOOL_A_MODULE}` / `{TOOL_B_MODULE}` | Noms de fitxer de mòdul (sense .nf) | samtools_index / gatk_haplotypecaller               |
+| `{TOOL_A_PROCESS_NAME}`               | Nom del procés en MAJÚSCULES        | SAMTOOLS_INDEX                                      |
+| `{TOOL_A_COMMAND}`                    | La comanda shell a executar         | samtools index '<input_bam>'                        |
 
 ### Marcadors de posició d'entrada/sortida
 
@@ -85,12 +85,12 @@ Es basa en els patrons comuns trobats als cursos de Genòmica i RNAseq.
 
 ### Marcadors de posició de contingut
 
-| Marcador de posició     | Descripció                                        |
-| ----------------------- | ------------------------------------------------- |
-| `{PART2_SUMMARY}`       | Resum d'una línia de l'abast de la Part 2        |
-| `{AGGREGATION_SUMMARY}` | Resum d'una línia del pas d'agregació            |
-| `{PROCESS_LIST}`        | Llista separada per comes de noms de processos   |
-| `{TYPEFORM_ID}`         | ID d'incrustació de Typeform per a l'enquesta    |
+| Marcador de posició     | Descripció                                     |
+| ----------------------- | ---------------------------------------------- |
+| `{PART2_SUMMARY}`       | Resum d'una línia de l'abast de la Part 2      |
+| `{AGGREGATION_SUMMARY}` | Resum d'una línia del pas d'agregació          |
+| `{PROCESS_LIST}`        | Llista separada per comes de noms de processos |
+| `{TYPEFORM_ID}`         | ID d'incrustació de Typeform per a l'enquesta  |
 
 ## Estructura pedagògica
 

@@ -94,10 +94,10 @@ nf-schema és el successor del plugin nf-validation obsolet i utilitza l'estànd
 
 Un pipeline nf-core utilitzarà dos fitxers d'esquema separats, que corresponen a dos tipus de validació:
 
-| Fitxer d'esquema           | Propòsit                  | Valida                                                       |
-| -------------------------- | ------------------------- | ------------------------------------------------------------ |
-| `nextflow_schema.json`     | Validació de paràmetres   | Indicadors de línia de comandes: `--input`, `--outdir`, `--batch` |
-| `assets/schema_input.json` | Validació de dades d'entrada | Continguts de fulls de mostra i fitxers d'entrada           |
+| Fitxer d'esquema           | Propòsit                     | Valida                                                            |
+| -------------------------- | ---------------------------- | ----------------------------------------------------------------- |
+| `nextflow_schema.json`     | Validació de paràmetres      | Indicadors de línia de comandes: `--input`, `--outdir`, `--batch` |
+| `assets/schema_input.json` | Validació de dades d'entrada | Continguts de fulls de mostra i fitxers d'entrada                 |
 
 Ambdós esquemes utilitzen el format JSON Schema, un estàndard àmpliament adoptat per descriure i validar estructures de dades.
 

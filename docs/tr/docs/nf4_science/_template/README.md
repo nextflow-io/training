@@ -55,42 +55,42 @@ Genomik ve RNAseq kurslarında bulunan yaygın kalıplara dayanmaktadır.
 
 ### Kurs düzeyinde yer tutucular
 
-| Yer Tutucu                   | Açıklama                           | Örnek (Genomik)                                  |
-| ---------------------------- | ---------------------------------- | ------------------------------------------------ |
-| `{DOMAIN}`                   | Alan adı (başlık harfleriyle)      | Genomics                                         |
-| `{DOMAIN_DIR}`               | Dizin adı (küçük harflerle)        | genomics                                         |
-| `{METHOD}`                   | Analiz yöntemi adı                 | variant calling                                  |
-| `{METHOD_SHORT_DESCRIPTION}` | Tek satırlık yöntem açıklaması     | variant calling with GATK                        |
-| `{ACCESSORY_FILES}`          | Kullanılan yardımcı dosya türleri  | index files and reference genome resources       |
+| Yer Tutucu                   | Açıklama                          | Örnek (Genomik)                            |
+| ---------------------------- | --------------------------------- | ------------------------------------------ |
+| `{DOMAIN}`                   | Alan adı (başlık harfleriyle)     | Genomics                                   |
+| `{DOMAIN_DIR}`               | Dizin adı (küçük harflerle)       | genomics                                   |
+| `{METHOD}`                   | Analiz yöntemi adı                | variant calling                            |
+| `{METHOD_SHORT_DESCRIPTION}` | Tek satırlık yöntem açıklaması    | variant calling with GATK                  |
+| `{ACCESSORY_FILES}`          | Kullanılan yardımcı dosya türleri | index files and reference genome resources |
 
 ### Araç yer tutucuları
 
-| Yer Tutucu                            | Açıklama                       | Örnek (Genomik)                                     |
-| ------------------------------------- | ------------------------------ | --------------------------------------------------- |
-| `{TOOL_A}` / `{TOOL_B}`               | Araç görünen adları            | Samtools / GATK                                     |
-| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | Araç dokümantasyon URL'leri    | https://www.htslib.org/                             |
-| `{TOOL_A_CONTAINER_URI}`              | Tam konteyner URI'si           | community.wave.seqera.io/library/samtools:1.20--... |
+| Yer Tutucu                            | Açıklama                         | Örnek (Genomik)                                     |
+| ------------------------------------- | -------------------------------- | --------------------------------------------------- |
+| `{TOOL_A}` / `{TOOL_B}`               | Araç görünen adları              | Samtools / GATK                                     |
+| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | Araç dokümantasyon URL'leri      | https://www.htslib.org/                             |
+| `{TOOL_A_CONTAINER_URI}`              | Tam konteyner URI'si             | community.wave.seqera.io/library/samtools:1.20--... |
 | `{TOOL_A_MODULE}` / `{TOOL_B_MODULE}` | Modül dosya adları (.nf olmadan) | samtools_index / gatk_haplotypecaller               |
-| `{TOOL_A_PROCESS_NAME}`               | BÜYÜK HARF süreç adı           | SAMTOOLS_INDEX                                      |
-| `{TOOL_A_COMMAND}`                    | Çalıştırılacak kabuk komutu    | samtools index '<input_bam>'                        |
+| `{TOOL_A_PROCESS_NAME}`               | BÜYÜK HARF süreç adı             | SAMTOOLS_INDEX                                      |
+| `{TOOL_A_COMMAND}`                    | Çalıştırılacak kabuk komutu      | samtools index '<input_bam>'                        |
 
 ### Girdi/Çıktı yer tutucuları
 
-| Yer Tutucu             | Açıklama                        | Örnek (Genomik)      |
-| ---------------------- | ------------------------------- | -------------------- |
-| `{PRIMARY_INPUT_TYPE}` | Birincil girdi dosya türü       | BAM file             |
-| `{PRIMARY_PARAM_NAME}` | Nextflow parametre adı          | reads_bam            |
-| `{TEST_INPUT_PATH}`    | data/ içindeki test girdi yolu  | bam/reads_mother.bam |
-| `{FINAL_OUTPUT_TYPE}`  | Son pipeline çıktı türü         | joint-called VCFs    |
+| Yer Tutucu             | Açıklama                       | Örnek (Genomik)      |
+| ---------------------- | ------------------------------ | -------------------- |
+| `{PRIMARY_INPUT_TYPE}` | Birincil girdi dosya türü      | BAM file             |
+| `{PRIMARY_PARAM_NAME}` | Nextflow parametre adı         | reads_bam            |
+| `{TEST_INPUT_PATH}`    | data/ içindeki test girdi yolu | bam/reads_mother.bam |
+| `{FINAL_OUTPUT_TYPE}`  | Son pipeline çıktı türü        | joint-called VCFs    |
 
 ### İçerik yer tutucuları
 
-| Yer Tutucu              | Açıklama                                  |
-| ----------------------- | ----------------------------------------- |
-| `{PART2_SUMMARY}`       | Bölüm 2 kapsamının tek satırlık özeti     |
-| `{AGGREGATION_SUMMARY}` | Toplama adımının tek satırlık özeti       |
-| `{PROCESS_LIST}`        | Virgülle ayrılmış süreç adları listesi    |
-| `{TYPEFORM_ID}`         | Anket için Typeform embed ID'si           |
+| Yer Tutucu              | Açıklama                               |
+| ----------------------- | -------------------------------------- |
+| `{PART2_SUMMARY}`       | Bölüm 2 kapsamının tek satırlık özeti  |
+| `{AGGREGATION_SUMMARY}` | Toplama adımının tek satırlık özeti    |
+| `{PROCESS_LIST}`        | Virgülle ayrılmış süreç adları listesi |
+| `{TYPEFORM_ID}`         | Anket için Typeform embed ID'si        |
 
 ## Pedagojik yapı
 
