@@ -55,13 +55,13 @@ Il est basé sur les modèles communs trouvés dans les cours Genomics et RNAseq
 
 ### Placeholders au niveau du cours
 
-| Placeholder                  | Description                                | Exemple (Genomics)                                                |
-| ---------------------------- | ------------------------------------------ | ----------------------------------------------------------------- |
-| `{DOMAIN}`                   | Nom du domaine (casse titre)               | Genomics                                                          |
-| `{DOMAIN_DIR}`               | Nom du répertoire (minuscules)             | genomics                                                          |
-| `{METHOD}`                   | Nom de la méthode d'analyse                | variant calling                                                   |
-| `{METHOD_SHORT_DESCRIPTION}` | Description de la méthode en une ligne     | variant calling with GATK                                         |
-| `{ACCESSORY_FILES}`          | Types de fichiers accessoires utilisés     | fichiers d'index et ressources du génome de référence             |
+| Placeholder                  | Description                            | Exemple (Genomics)                                    |
+| ---------------------------- | -------------------------------------- | ----------------------------------------------------- |
+| `{DOMAIN}`                   | Nom du domaine (casse titre)           | Genomics                                              |
+| `{DOMAIN_DIR}`               | Nom du répertoire (minuscules)         | genomics                                              |
+| `{METHOD}`                   | Nom de la méthode d'analyse            | variant calling                                       |
+| `{METHOD_SHORT_DESCRIPTION}` | Description de la méthode en une ligne | variant calling with GATK                             |
+| `{ACCESSORY_FILES}`          | Types de fichiers accessoires utilisés | fichiers d'index et ressources du génome de référence |
 
 ### Placeholders des outils
 
@@ -76,17 +76,17 @@ Il est basé sur les modèles communs trouvés dans les cours Genomics et RNAseq
 
 ### Placeholders d'entrée/sortie
 
-| Placeholder            | Description                            | Exemple (Genomics)   |
-| ---------------------- | -------------------------------------- | -------------------- |
-| `{PRIMARY_INPUT_TYPE}` | Type de fichier d'entrée principal     | fichier BAM          |
-| `{PRIMARY_PARAM_NAME}` | Nom du paramètre Nextflow              | reads_bam            |
+| Placeholder            | Description                             | Exemple (Genomics)   |
+| ---------------------- | --------------------------------------- | -------------------- |
+| `{PRIMARY_INPUT_TYPE}` | Type de fichier d'entrée principal      | fichier BAM          |
+| `{PRIMARY_PARAM_NAME}` | Nom du paramètre Nextflow               | reads_bam            |
 | `{TEST_INPUT_PATH}`    | Chemin vers l'entrée de test dans data/ | bam/reads_mother.bam |
-| `{FINAL_OUTPUT_TYPE}`  | Type de sortie finale du pipeline      | VCFs joint-called    |
+| `{FINAL_OUTPUT_TYPE}`  | Type de sortie finale du pipeline       | VCFs joint-called    |
 
 ### Placeholders de contenu
 
-| Placeholder             | Description                                       |
-| ----------------------- | ------------------------------------------------- |
+| Placeholder             | Description                                      |
+| ----------------------- | ------------------------------------------------ |
 | `{PART2_SUMMARY}`       | Résumé en une ligne de la portée de la Partie 2  |
 | `{AGGREGATION_SUMMARY}` | Résumé en une ligne de l'étape d'agrégation      |
 | `{PROCESS_LIST}`        | Liste des noms de processus séparés par virgules |

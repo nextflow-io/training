@@ -55,24 +55,24 @@ Está basada en los patrones comunes encontrados en los cursos de Genómica y RN
 
 ### Marcadores de posición a nivel de curso
 
-| Marcador de posición         | Descripción                                | Ejemplo (Genómica)                                                |
-| ---------------------------- | ------------------------------------------ | ----------------------------------------------------------------- |
-| `{DOMAIN}`                   | Nombre del dominio (mayúsculas y minúsculas) | Genomics                                                          |
-| `{DOMAIN_DIR}`               | Nombre del directorio (minúsculas)         | genomics                                                          |
-| `{METHOD}`                   | Nombre del método de análisis              | variant calling                                                   |
-| `{METHOD_SHORT_DESCRIPTION}` | Descripción del método en una línea        | variant calling with GATK                                         |
-| `{ACCESSORY_FILES}`          | Tipos de archivos accesorios utilizados    | index files and reference genome resources                        |
+| Marcador de posición         | Descripción                                  | Ejemplo (Genómica)                         |
+| ---------------------------- | -------------------------------------------- | ------------------------------------------ |
+| `{DOMAIN}`                   | Nombre del dominio (mayúsculas y minúsculas) | Genomics                                   |
+| `{DOMAIN_DIR}`               | Nombre del directorio (minúsculas)           | genomics                                   |
+| `{METHOD}`                   | Nombre del método de análisis                | variant calling                            |
+| `{METHOD_SHORT_DESCRIPTION}` | Descripción del método en una línea          | variant calling with GATK                  |
+| `{ACCESSORY_FILES}`          | Tipos de archivos accesorios utilizados      | index files and reference genome resources |
 
 ### Marcadores de posición de herramientas
 
-| Marcador de posición                  | Descripción                         | Ejemplo (Genómica)                                  |
-| ------------------------------------- | ----------------------------------- | --------------------------------------------------- |
+| Marcador de posición                  | Descripción                              | Ejemplo (Genómica)                                  |
+| ------------------------------------- | ---------------------------------------- | --------------------------------------------------- |
 | `{TOOL_A}` / `{TOOL_B}`               | Nombres de visualización de herramientas | Samtools / GATK                                     |
-| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | URLs de documentación de herramientas | https://www.htslib.org/                             |
-| `{TOOL_A_CONTAINER_URI}`              | URI completo del contenedor         | community.wave.seqera.io/library/samtools:1.20--... |
+| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | URLs de documentación de herramientas    | https://www.htslib.org/                             |
+| `{TOOL_A_CONTAINER_URI}`              | URI completo del contenedor              | community.wave.seqera.io/library/samtools:1.20--... |
 | `{TOOL_A_MODULE}` / `{TOOL_B_MODULE}` | Nombres de archivos de módulos (sin .nf) | samtools_index / gatk_haplotypecaller               |
-| `{TOOL_A_PROCESS_NAME}`               | Nombre del proceso en MAYÚSCULAS    | SAMTOOLS_INDEX                                      |
-| `{TOOL_A_COMMAND}`                    | El comando shell a ejecutar         | samtools index '<input_bam>'                        |
+| `{TOOL_A_PROCESS_NAME}`               | Nombre del proceso en MAYÚSCULAS         | SAMTOOLS_INDEX                                      |
+| `{TOOL_A_COMMAND}`                    | El comando shell a ejecutar              | samtools index '<input_bam>'                        |
 
 ### Marcadores de posición de entrada/salida
 
@@ -85,8 +85,8 @@ Está basada en los patrones comunes encontrados en los cursos de Genómica y RN
 
 ### Marcadores de posición de contenido
 
-| Marcador de posición    | Descripción                                      |
-| ----------------------- | ------------------------------------------------ |
+| Marcador de posición    | Descripción                                     |
+| ----------------------- | ----------------------------------------------- |
 | `{PART2_SUMMARY}`       | Resumen de una línea del alcance de la Parte 2  |
 | `{AGGREGATION_SUMMARY}` | Resumen de una línea del paso de agregación     |
 | `{PROCESS_LIST}`        | Lista separada por comas de nombres de procesos |

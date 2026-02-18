@@ -38,10 +38,10 @@ Você começará executando as ferramentas de análise manualmente no terminal p
 
 Dividimos isso em três partes que focam em aspectos específicos da aplicação do Nextflow a um caso de uso de {DOMAIN}.
 
-| Capítulo do curso                                         | Resumo                                                                                                      | Duração estimada |
-| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------- |
-| [Parte 1: Visão geral do método](./01_method.md)          | Compreendendo a metodologia de {METHOD} e executando as ferramentas manualmente                            | 30 min           |
-| [Parte 2: Processamento de amostra única](./02_single_sample.md) | Construindo um pipeline que {PART2_SUMMARY}, depois escalando para múltiplas amostras                      | 60 min           |
+| Capítulo do curso                                                | Resumo                                                                                                             | Duração estimada |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------- |
+| [Parte 1: Visão geral do método](./01_method.md)                 | Compreendendo a metodologia de {METHOD} e executando as ferramentas manualmente                                    | 30 min           |
+| [Parte 2: Processamento de amostra única](./02_single_sample.md) | Construindo um pipeline que {PART2_SUMMARY}, depois escalando para múltiplas amostras                              | 60 min           |
 | [Parte 3: Agregação de múltiplas amostras](./03_multi_sample.md) | Adicionando {AGGREGATION_SUMMARY} de múltiplas amostras usando operadores de canal para agregar saídas por amostra | 45 min           |
 
 Ao final deste curso, você será capaz de aplicar conceitos fundamentais do Nextflow e ferramentas a um caso de uso típico de {DOMAIN}.

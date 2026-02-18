@@ -39,11 +39,11 @@ Començareu executant les eines de processament manualment al terminal per enten
 
 Hem dividit això en tres parts que se centren cadascuna en aspectes específics de l'aplicació de Nextflow a un cas d'ús d'RNAseq.
 
-| Capítol del curs                                                       | Resum                                                                                                                                | Durada estimada |
-| ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
-| [Part 1: Visió general del mètode](./01_method.md)                    | Comprendre la metodologia de processament d'RNAseq i executar les eines manualment                                                  | 30 min          |
-| [Part 2: Implementació d'una sola mostra](./02_single-sample.md)      | Construir un pipeline que retalla, alinea i fa QC d'una sola mostra, i després escalar per gestionar múltiples mostres             | 60 min          |
-| [Part 3: Implementació multi-mostra paired-end](./03_multi-sample.md) | Estendre el pipeline per gestionar dades paired-end i agregar informes de control de qualitat a través de les mostres              | 45 min          |
+| Capítol del curs                                                      | Resum                                                                                                                  | Durada estimada |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------- |
+| [Part 1: Visió general del mètode](./01_method.md)                    | Comprendre la metodologia de processament d'RNAseq i executar les eines manualment                                     | 30 min          |
+| [Part 2: Implementació d'una sola mostra](./02_single-sample.md)      | Construir un pipeline que retalla, alinea i fa QC d'una sola mostra, i després escalar per gestionar múltiples mostres | 60 min          |
+| [Part 3: Implementació multi-mostra paired-end](./03_multi-sample.md) | Estendre el pipeline per gestionar dades paired-end i agregar informes de control de qualitat a través de les mostres  | 45 min          |
 
 Al final d'aquest curs, podreu aplicar conceptes fonamentals de Nextflow i eines a un cas d'ús típic d'RNAseq.
 
