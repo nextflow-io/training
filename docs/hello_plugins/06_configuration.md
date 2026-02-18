@@ -580,15 +580,15 @@ Note the difference between the factory and extension points registration:
 
 ### 4.4. Build and test
 
-The config class provides documentation and validation for your plugin's configuration options.
-Your code continues using `session.config.navigate()` for reading values at runtime. Both work together.
+The `ConfigScope` class doesn't change how your code reads configuration at runtime; your factory and extension still use `session.config.navigate()`.
+What it does is register the `greeting {}` scope with Nextflow, which eliminates the "Unrecognized config option" warning and enables tooling support.
 
 ```bash
 cd nf-greeting && make assemble && make install && cd ..
 nextflow run main.nf -ansi-log false
 ```
 
-The behavior is identical, but now your configuration is self-documenting and structured.
+The pipeline behavior is the same, but the warning is gone and your configuration options are now formally documented within the plugin.
 
 ---
 

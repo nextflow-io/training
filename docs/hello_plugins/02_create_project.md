@@ -106,7 +106,8 @@ The build file is where most configuration happens:
 cat build.gradle
 ```
 
-Key sections:
+The file contains several sections.
+The most important is the `nextflowPlugin` block:
 
 ```groovy title="build.gradle"
 plugins {
@@ -169,8 +170,9 @@ Examine each file to see what the template generated:
 cat src/main/groovy/training/plugin/GreetingPlugin.groovy
 ```
 
-`GreetingPlugin` is the plugin entry point, specified in `build.gradle` via `className`.
-Nextflow loads this class first, which registers the other components.
+`GreetingPlugin` is the plugin entry point that you specified in `build.gradle` via `className`.
+When Nextflow loads your plugin, this is the first class it instantiates.
+You won't need to modify this file; it's generated automatically.
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingExtension.groovy
@@ -183,8 +185,8 @@ This is where you'll add most of your plugin's functionality (Part 3).
 cat src/main/groovy/training/plugin/GreetingFactory.groovy
 ```
 
-The factory creates monitoring components that respond to workflow events.
-You'll work with this in Part 5.
+The factory is responsible for creating observer instances when a workflow starts.
+You'll work with this in Part 5 when you add a task counter.
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingObserver.groovy

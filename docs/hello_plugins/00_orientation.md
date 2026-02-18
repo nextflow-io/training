@@ -6,13 +6,12 @@ This page will help you set up your environment and navigate through the trainin
 
     Using existing plugins (Part 1) is straightforward and valuable for all Nextflow users.
 
-    However, **developing your own plugins** (Parts 2-6) is an advanced topic.
-    It involves Java/Groovy programming, build tools, and software engineering concepts.
-    Many successful Nextflow plugin authors don't have a Java development background.
+    Parts 2-6 cover building your own plugins, which many Nextflow developers may never need to do.
+    However, creating a plugin can be a good way to share reusable functions across pipelines or within a team.
+    These lessons involve Groovy code, build tools, and concepts that may be new if your background is in scripting or data analysis rather than software engineering.
+    No prior Java or Groovy experience is required; the lessons explain these concepts as they come up.
 
-    Most Nextflow users will never need to develop plugins.
-    The existing plugin ecosystem covers the vast majority of use cases.
-    If development sections feel challenging, focus on Part 1 and bookmark the rest for later.
+    If the development sections feel challenging, focus on Part 1 and return to the rest when you have a specific plugin idea in mind.
 
 ---
 

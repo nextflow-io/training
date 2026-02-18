@@ -25,8 +25,8 @@ Look at the observer code:
 cat nf-greeting/src/main/groovy/training/plugin/GreetingObserver.groovy
 ```
 
-This observer hooks into workflow lifecycle events.
-Trace observers can respond to many events:
+The observer implements methods that Nextflow calls at specific points during execution.
+Each method corresponds to a lifecycle event:
 
 | Method              | When it's called        |
 | ------------------- | ----------------------- |
@@ -148,7 +148,8 @@ You should see "✓ Task completed!" printed five times (once per task):
 ...
 ```
 
-Our observer is responding to task completion events.
+The observer is working.
+Each time a task finishes, Nextflow calls `onProcessComplete`, and our implementation prints a message.
 
 ??? exercise "Customize the message"
 

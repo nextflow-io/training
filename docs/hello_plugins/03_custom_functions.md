@@ -306,7 +306,8 @@ nextflow run main.nf
 
     The "Pipeline is starting!" and "Pipeline complete!" messages come from the `GreetingObserver` trace observer included in the generated plugin template.
 
-Your first plugin function is working. The full cycle is: edit code, `make assemble`, `make install`, run the pipeline.
+Your first plugin function is working in a real workflow.
+You've now completed the full development cycle: edit the plugin code, build with `make assemble`, install with `make install`, and run the pipeline.
 
 ??? exercise "Try a different transformation"
 

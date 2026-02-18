@@ -110,11 +110,8 @@ Pipeline complete! 👋
 (Your random strings will be different.
 The plugin version generates lowercase strings, while the local version used mixed case and digits.)
 
-The first run downloads the plugin automatically.
-Any pipeline using `nf-hello@0.5.0` gets the exact same `randomString` function.
-
-The development burden is on the plugin developer, not the pipeline developer.
-Nextflow handles installing and updating plugins on your behalf.
+The first time you use a plugin, Nextflow downloads it automatically from the registry.
+After that, any pipeline that declares `nf-hello@0.5.0` gets the exact same `randomString` function without needing to copy code between projects.
 
 ---
 
