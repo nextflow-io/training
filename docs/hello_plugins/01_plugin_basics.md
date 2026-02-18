@@ -89,12 +89,12 @@ Nextflow handles installing and updating plugins on your behalf.
 
 Plugins extend Nextflow through several types of extension:
 
-| Extension Type     | What it does                             | Example                          |
-| ------------------ | ---------------------------------------- | -------------------------------- |
-| Functions          | Add custom functions callable from workflows | `samplesheetToList()`        |
-| Workflow monitors  | Respond to events like task completion   | Custom logging, Slack alerts     |
-| Executors          | Add task execution backends              | AWS Batch, Kubernetes            |
-| Filesystems        | Add storage backends                     | S3, Azure Blob                   |
+| Extension Type    | What it does                                 | Example                      |
+| ----------------- | -------------------------------------------- | ---------------------------- |
+| Functions         | Add custom functions callable from workflows | `samplesheetToList()`        |
+| Workflow monitors | Respond to events like task completion       | Custom logging, Slack alerts |
+| Executors         | Add task execution backends                  | AWS Batch, Kubernetes        |
+| Filesystems       | Add storage backends                         | S3, Azure Blob               |
 
 Functions and workflow monitors (called "trace observers" in the Nextflow API) are the most common types for plugin authors.
 Executors and filesystems are typically created by platform vendors.

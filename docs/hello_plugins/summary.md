@@ -64,11 +64,11 @@ workflow {
 
 ## Extension point summary
 
-| Type                | Class/Annotation    | Purpose                                     |
-| ------------------- | ------------------- | ------------------------------------------- |
-| Function            | `@Function`         | Callable from workflows                     |
-| Trace Observer      | `TraceObserver`     | Hook into workflow lifecycle events          |
-| Configuration Scope | `@ScopeName`        | Define plugin configuration in nextflow.config |
+| Type                | Class/Annotation | Purpose                                        |
+| ------------------- | ---------------- | ---------------------------------------------- |
+| Function            | `@Function`      | Callable from workflows                        |
+| Trace Observer      | `TraceObserver`  | Hook into workflow lifecycle events            |
+| Configuration Scope | `@ScopeName`     | Define plugin configuration in nextflow.config |
 
 ---
 
