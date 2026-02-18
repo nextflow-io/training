@@ -55,42 +55,42 @@ Ele é baseado nos padrões comuns encontrados nos cursos de Genômica e RNAseq.
 
 ### Placeholders de nível de curso
 
-| Placeholder                  | Descrição                                | Exemplo (Genômica)                                  |
-| ---------------------------- | ---------------------------------------- | --------------------------------------------------- |
-| `{DOMAIN}`                   | Nome do domínio (título em maiúsculas)   | Genomics                                            |
-| `{DOMAIN_DIR}`               | Nome do diretório (minúsculas)           | genomics                                            |
-| `{METHOD}`                   | Nome do método de análise                | variant calling                                     |
-| `{METHOD_SHORT_DESCRIPTION}` | Descrição do método em uma linha         | variant calling with GATK                           |
-| `{ACCESSORY_FILES}`          | Tipos de arquivos acessórios utilizados  | index files and reference genome resources          |
+| Placeholder                  | Descrição                               | Exemplo (Genômica)                         |
+| ---------------------------- | --------------------------------------- | ------------------------------------------ |
+| `{DOMAIN}`                   | Nome do domínio (título em maiúsculas)  | Genomics                                   |
+| `{DOMAIN_DIR}`               | Nome do diretório (minúsculas)          | genomics                                   |
+| `{METHOD}`                   | Nome do método de análise               | variant calling                            |
+| `{METHOD_SHORT_DESCRIPTION}` | Descrição do método em uma linha        | variant calling with GATK                  |
+| `{ACCESSORY_FILES}`          | Tipos de arquivos acessórios utilizados | index files and reference genome resources |
 
 ### Placeholders de ferramentas
 
-| Placeholder                           | Descrição                          | Exemplo (Genômica)                                  |
-| ------------------------------------- | ---------------------------------- | --------------------------------------------------- |
-| `{TOOL_A}` / `{TOOL_B}`               | Nomes de exibição das ferramentas  | Samtools / GATK                                     |
-| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | URLs da documentação das ferramentas | https://www.htslib.org/                           |
-| `{TOOL_A_CONTAINER_URI}`              | URI completo do contêiner          | community.wave.seqera.io/library/samtools:1.20--... |
-| `{TOOL_A_MODULE}` / `{TOOL_B_MODULE}` | Nomes dos arquivos de módulo (sem .nf) | samtools_index / gatk_haplotypecaller           |
-| `{TOOL_A_PROCESS_NAME}`               | Nome do processo em MAIÚSCULAS     | SAMTOOLS_INDEX                                      |
-| `{TOOL_A_COMMAND}`                    | O comando shell a ser executado    | samtools index '<input_bam>'                        |
+| Placeholder                           | Descrição                              | Exemplo (Genômica)                                  |
+| ------------------------------------- | -------------------------------------- | --------------------------------------------------- |
+| `{TOOL_A}` / `{TOOL_B}`               | Nomes de exibição das ferramentas      | Samtools / GATK                                     |
+| `{TOOL_A_URL}` / `{TOOL_B_URL}`       | URLs da documentação das ferramentas   | https://www.htslib.org/                             |
+| `{TOOL_A_CONTAINER_URI}`              | URI completo do contêiner              | community.wave.seqera.io/library/samtools:1.20--... |
+| `{TOOL_A_MODULE}` / `{TOOL_B_MODULE}` | Nomes dos arquivos de módulo (sem .nf) | samtools_index / gatk_haplotypecaller               |
+| `{TOOL_A_PROCESS_NAME}`               | Nome do processo em MAIÚSCULAS         | SAMTOOLS_INDEX                                      |
+| `{TOOL_A_COMMAND}`                    | O comando shell a ser executado        | samtools index '<input_bam>'                        |
 
 ### Placeholders de entrada/saída
 
-| Placeholder            | Descrição                           | Exemplo (Genômica)   |
-| ---------------------- | ----------------------------------- | -------------------- |
-| `{PRIMARY_INPUT_TYPE}` | Tipo de arquivo de entrada primário | BAM file             |
-| `{PRIMARY_PARAM_NAME}` | Nome do parâmetro Nextflow          | reads_bam            |
+| Placeholder            | Descrição                              | Exemplo (Genômica)   |
+| ---------------------- | -------------------------------------- | -------------------- |
+| `{PRIMARY_INPUT_TYPE}` | Tipo de arquivo de entrada primário    | BAM file             |
+| `{PRIMARY_PARAM_NAME}` | Nome do parâmetro Nextflow             | reads_bam            |
 | `{TEST_INPUT_PATH}`    | Caminho para entrada de teste em data/ | bam/reads_mother.bam |
-| `{FINAL_OUTPUT_TYPE}`  | Tipo de saída final do pipeline     | joint-called VCFs    |
+| `{FINAL_OUTPUT_TYPE}`  | Tipo de saída final do pipeline        | joint-called VCFs    |
 
 ### Placeholders de conteúdo
 
-| Placeholder             | Descrição                                      |
-| ----------------------- | ---------------------------------------------- |
-| `{PART2_SUMMARY}`       | Resumo de uma linha do escopo da Parte 2       |
-| `{AGGREGATION_SUMMARY}` | Resumo de uma linha da etapa de agregação      |
+| Placeholder             | Descrição                                         |
+| ----------------------- | ------------------------------------------------- |
+| `{PART2_SUMMARY}`       | Resumo de uma linha do escopo da Parte 2          |
+| `{AGGREGATION_SUMMARY}` | Resumo de uma linha da etapa de agregação         |
 | `{PROCESS_LIST}`        | Lista separada por vírgulas de nomes de processos |
-| `{TYPEFORM_ID}`         | ID de incorporação do Typeform para a pesquisa |
+| `{TYPEFORM_ID}`         | ID de incorporação do Typeform para a pesquisa    |
 
 ## Estrutura pedagógica
 

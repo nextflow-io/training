@@ -38,11 +38,11 @@ Zaczniesz od ręcznego uruchamiania narzędzi analitycznych w terminalu, aby zro
 
 Podzieliliśmy to na trzy części, z których każda koncentruje się na konkretnych aspektach stosowania Nextflow'a do przypadku użycia w {DOMAIN}.
 
-| Rozdział kursu                                            | Podsumowanie                                                                                                  | Szacowany czas |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Część 1: Przegląd metody](./01_method.md)                | Zrozumienie metodologii {METHOD} i ręczne uruchamianie narzędzi                                               | 30 min         |
-| [Część 2: Przetwarzanie pojedynczej próbki](./02_single_sample.md) | Budowanie pipeline'u, który {PART2_SUMMARY}, a następnie skalowanie do wielu próbek                           | 60 min         |
-| [Część 3: Agregacja wielu próbek](./03_multi_sample.md)  | Dodawanie {AGGREGATION_SUMMARY} dla wielu próbek przy użyciu operatorów kanałów do agregacji wyników próbek | 45 min         |
+| Rozdział kursu                                                     | Podsumowanie                                                                                                | Szacowany czas |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- | -------------- |
+| [Część 1: Przegląd metody](./01_method.md)                         | Zrozumienie metodologii {METHOD} i ręczne uruchamianie narzędzi                                             | 30 min         |
+| [Część 2: Przetwarzanie pojedynczej próbki](./02_single_sample.md) | Budowanie pipeline'u, który {PART2_SUMMARY}, a następnie skalowanie do wielu próbek                         | 60 min         |
+| [Część 3: Agregacja wielu próbek](./03_multi_sample.md)            | Dodawanie {AGGREGATION_SUMMARY} dla wielu próbek przy użyciu operatorów kanałów do agregacji wyników próbek | 45 min         |
 
 Pod koniec tego kursu będziesz w stanie zastosować podstawowe koncepcje i narzędzia Nextflow'a do typowego przypadku użycia w {DOMAIN}.
 
