@@ -1927,17 +1927,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#233-moure-els-fitxers-de-sortida" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3.3. Moure els fitxers de sortida
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#234-sortir-del-contenidor-gatk" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3922,17 +3911,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#233-moure-els-fitxers-de-sortida" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.3.3. Moure els fitxers de sortida
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#234-sortir-del-contenidor-gatk" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5422,183 +5400,134 @@ Running:
 17:38:45.561 INFO  NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field MLEAC  - the field will NOT be part of INFO fields in the generated VCF records
 17:38:45.</code>console</p>
 </details>
-<p>561 INFO  NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field MLEAF  - the field will NOT be part of INFO fields in the generated VCF records
-    17:38:45.577 INFO  GenotypeGVCFs - Done initializing engine
-    17:38:45.615 INFO  ProgressMeter - Starting traversal
-    17:38:45.615 INFO  ProgressMeter -        Current Locus  Elapsed Minutes    Variants Processed  Variants/Minute
-    17:38:45.903 WARN  InbreedingCoeff - InbreedingCoeff will not be calculated at position 20_10037292_10066351:3480 and possibly subsequent; at least 10 samples must have called genotypes
-    GENOMICSDB_TIMER,GenomicsDB iterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
-    17:38:46.421 INFO  ProgressMeter - 20_10037292_10066351:13953              0.0                  3390         252357.3
-    17:38:46.422 INFO  ProgressMeter - Traversal complete. Processed 3390 total variants in 0.0 minutes.
-    17:38:46.423 INFO  GenotypeGVCFs - Shutting down engine
-    [February 11, 2026 at 5:38:46 PM GMT] org.broadinstitute.hellbender.tools.walkers.GenotypeGVCFs done. Elapsed time: 0.02 minutes.
-    Runtime.totalMemory()=203423744
-    ```</p>
-<p>Això crea el fitxer de sortida VCF <code>family_trio.vcf</code> al directori de treball actual del contenidor, així com el seu índex, <code>family_trio.vcf.idx</code>.
-És un altre fitxer raonablement petit, així que podeu executar <code>cat family_trio.vcf</code> per veure el contingut del fitxer, i desplaçar-vos cap avall per trobar les primeres línies de variants.</p>
-<details class="abstract">
-<summary>Contingut del fitxer (abreujat)</summary>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">family_trio.vcf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-36-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-36-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-36-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-36-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-36-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-36-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-36-10">10</a></span>
-<span class="normal"><a href="#__codelineno-36-11">11</a></span>
-<span class="normal"><a href="#__codelineno-36-12">12</a></span>
-<span class="normal"><a href="#__codelineno-36-13">13</a></span>
-<span class="normal"><a href="#__codelineno-36-14">14</a></span>
-<span class="normal"><a href="#__codelineno-36-15">15</a></span>
-<span class="normal"><a href="#__codelineno-36-16">16</a></span>
-<span class="normal"><a href="#__codelineno-36-17">17</a></span>
-<span class="normal"><a href="#__codelineno-36-18">18</a></span>
-<span class="normal"><a href="#__codelineno-36-19">19</a></span>
-<span class="normal"><a href="#__codelineno-36-20">20</a></span>
-<span class="normal"><a href="#__codelineno-36-21">21</a></span>
-<span class="normal"><a href="#__codelineno-36-22">22</a></span>
-<span class="normal"><a href="#__codelineno-36-23">23</a></span>
-<span class="normal"><a href="#__codelineno-36-24">24</a></span>
-<span class="normal"><a href="#__codelineno-36-25">25</a></span>
-<span class="normal"><a href="#__codelineno-36-26">26</a></span>
-<span class="normal"><a href="#__codelineno-36-27">27</a></span>
-<span class="normal"><a href="#__codelineno-36-28">28</a></span>
-<span class="normal"><a href="#__codelineno-36-29">29</a></span>
-<span class="normal"><a href="#__codelineno-36-30">30</a></span>
-<span class="normal"><a href="#__codelineno-36-31">31</a></span>
-<span class="normal"><a href="#__codelineno-36-32">32</a></span>
-<span class="normal"><a href="#__codelineno-36-33">33</a></span>
-<span class="normal"><a href="#__codelineno-36-34">34</a></span>
-<span class="normal"><a href="#__codelineno-36-35">35</a></span>
-<span class="normal"><a href="#__codelineno-36-36">36</a></span>
-<span class="normal"><a href="#__codelineno-36-37">37</a></span>
-<span class="normal"><a href="#__codelineno-36-38">38</a></span>
-<span class="normal"><a href="#__codelineno-36-39">39</a></span>
-<span class="normal"><a href="#__codelineno-36-40">40</a></span>
-<span class="normal"><a href="#__codelineno-36-41">41</a></span>
-<span class="normal"><a href="#__codelineno-36-42">42</a></span>
-<span class="normal"><a href="#__codelineno-36-43">43</a></span>
-<span class="normal"><a href="#__codelineno-36-44">44</a></span>
-<span class="normal"><a href="#__codelineno-36-45">45</a></span>
-<span class="normal"><a href="#__codelineno-36-46">46</a></span>
-<span class="normal"><a href="#__codelineno-36-47">47</a></span>
-<span class="normal"><a href="#__codelineno-36-48">48</a></span>
-<span class="normal"><a href="#__codelineno-36-49">49</a></span>
-<span class="normal"><a href="#__codelineno-36-50">50</a></span>
-<span class="normal"><a href="#__codelineno-36-51">51</a></span>
-<span class="normal"><a href="#__codelineno-36-52">52</a></span>
-<span class="normal"><a href="#__codelineno-36-53">53</a></span>
-<span class="normal"><a href="#__codelineno-36-54">54</a></span>
-<span class="normal"><a href="#__codelineno-36-55">55</a></span>
-<span class="normal"><a href="#__codelineno-36-56">56</a></span>
-<span class="normal"><a href="#__codelineno-36-57">57</a></span>
-<span class="normal"><a href="#__codelineno-36-58">58</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="gp">#</span><span class="c1">#fileformat=VCFv4.2</span>
-<a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="gp">#</span><span class="c1">#ALT=&lt;ID=NON_REF,Description=&quot;Represents any possible alternative allele not already represented at this location by REF and ALT&quot;&gt;</span>
-<a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=LowQual,Description=&quot;Low quality&quot;&gt;</span>
-<a id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="gp">#</span><span class="c1">#FILTER=&lt;ID=PASS,Description=&quot;All filters passed&quot;&gt;</span>
-<a id="__codelineno-36-5" name="__codelineno-36-5"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description=&quot;Allelic depths for the ref and alt alleles in the order listed&quot;&gt;</span>
-<a id="__codelineno-36-6" name="__codelineno-36-6"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth (reads with MQ=255 or with bad mates are filtered)&quot;&gt;</span>
-<a id="__codelineno-36-7" name="__codelineno-36-7"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description=&quot;Genotype Quality&quot;&gt;</span>
-<a id="__codelineno-36-8" name="__codelineno-36-8"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;</span>
-<a id="__codelineno-36-9" name="__codelineno-36-9"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=MIN_DP,Number=1,Type=Integer,Description=&quot;Minimum DP observed within the GVCF block&quot;&gt;</span>
-<a id="__codelineno-36-10" name="__codelineno-36-10"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PGT,Number=1,Type=String,Description=&quot;Physical phasing haplotype information, describing how the alternate alleles are phased in relation to one another; will always be heterozygous and is not intended to describe called alleles&quot;&gt;</span>
-<a id="__codelineno-36-11" name="__codelineno-36-11"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PID,Number=1,Type=String,Description=&quot;Physical phasing ID information, where each unique ID within a given sample (but not across samples) connects records within a phasing group&quot;&gt;</span>
-<a id="__codelineno-36-12" name="__codelineno-36-12"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description=&quot;Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification&quot;&gt;</span>
-<a id="__codelineno-36-13" name="__codelineno-36-13"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description=&quot;Phasing set (typically the position of the first variant in the set)&quot;&gt;</span>
-<a id="__codelineno-36-14" name="__codelineno-36-14"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=RGQ,Number=1,Type=Integer,Description=&quot;Unconditional reference genotype confidence, encoded as a phred quality -10*log10 p(genotype call is wrong)&quot;&gt;</span>
-<a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="gp">#</span><span class="c1">#FORMAT=&lt;ID=SB,Number=4,Type=Integer,Description=&quot;Per-sample component statistics which comprise the Fisher&#39;s Exact Test to detect strand bias.&quot;&gt;</span>
-<a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenomicsDBImport,CommandLine=&quot;GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abreujat]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:37:07 PM GMT&quot;&gt;</span>
-<a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=GenotypeGVCFs,CommandLine=&quot;GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abreujat]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:38:45 PM GMT&quot;&gt;</span>
-<a id="__codelineno-36-18" name="__codelineno-36-18"></a><span class="gp">#</span><span class="c1">#GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abreujat]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:51:00 PM GMT&quot;&gt;</span>
-<a id="__codelineno-36-19" name="__codelineno-36-19"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AC,Number=A,Type=Integer,Description=&quot;Allele count in genotypes, for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-36-20" name="__codelineno-36-20"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AF,Number=A,Type=Float,Description=&quot;Allele Frequency, for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-36-21" name="__codelineno-36-21"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=AN,Number=1,Type=Integer,Description=&quot;Total number of alleles in called genotypes&quot;&gt;</span>
-<a id="__codelineno-36-22" name="__codelineno-36-22"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=BaseQRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities&quot;&gt;</span>
-<a id="__codelineno-36-23" name="__codelineno-36-23"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth; some reads may have been filtered&quot;&gt;</span>
-<a id="__codelineno-36-24" name="__codelineno-36-24"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=END,Number=1,Type=Integer,Description=&quot;Stop position of the interval&quot;&gt;</span>
-<a id="__codelineno-36-25" name="__codelineno-36-25"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ExcessHet,Number=1,Type=Float,Description=&quot;Phred-scaled p-value for exact test of excess heterozygosity&quot;&gt;</span>
-<a id="__codelineno-36-26" name="__codelineno-36-26"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=FS,Number=1,Type=Float,Description=&quot;Phred-scaled p-value using Fisher&#39;s exact test to detect strand bias&quot;&gt;</span>
-<a id="__codelineno-36-27" name="__codelineno-36-27"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=InbreedingCoeff,Number=1,Type=Float,Description=&quot;Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation&quot;&gt;</span>
-<a id="__codelineno-36-28" name="__codelineno-36-28"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAC,Number=A,Type=Integer,Description=&quot;Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-36-29" name="__codelineno-36-29"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MLEAF,Number=A,Type=Float,Description=&quot;Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed&quot;&gt;</span>
-<a id="__codelineno-36-30" name="__codelineno-36-30"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQ,Number=1,Type=Float,Description=&quot;RMS Mapping Quality&quot;&gt;</span>
-<a id="__codelineno-36-31" name="__codelineno-36-31"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=MQRankSum,Number=1,Type=Float,Description=&quot;Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities&quot;&gt;</span>
-<a id="__codelineno-36-32" name="__codelineno-36-32"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=QD,Number=1,Type=Float,Description=&quot;Variant Confidence/Quality by Depth&quot;&gt;</span>
-<a id="__codelineno-36-33" name="__codelineno-36-33"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=RAW_MQandDP,Number=2,Type=Integer,Description=&quot;Raw data (sum of squared MQ and total depth) for improved RMS Mapping Quality calculation. Incompatible with deprecated RAW_MQ formulation.&quot;&gt;</span>
-<a id="__codelineno-36-34" name="__codelineno-36-34"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=ReadPosRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias&quot;&gt;</span>
-<a id="__codelineno-36-35" name="__codelineno-36-35"></a><span class="gp">#</span><span class="c1">#INFO=&lt;ID=SOR,Number=1,Type=Float,Description=&quot;Symmetric Odds Ratio of 2x2 contingency table to detect strand bias&quot;&gt;</span>
-<a id="__codelineno-36-36" name="__codelineno-36-36"></a><span class="gp">#</span><span class="c1">#contig=&lt;ID=20_10037292_10066351,length=29059&gt;</span>
-<a id="__codelineno-36-37" name="__codelineno-36-37"></a><span class="gp">#</span><span class="c1">#source=GenomicsDBImport</span>
-<a id="__codelineno-36-38" name="__codelineno-36-38"></a><span class="gp">#</span><span class="c1">#source=GenotypeGVCFs</span>
-<a id="__codelineno-36-39" name="__codelineno-36-39"></a><span class="hll"><span class="gp">#</span><span class="c1">#source=HaplotypeCaller</span>
-</span><a id="__codelineno-36-40" name="__codelineno-36-40"></a><span class="gp">#</span>CHROM<span class="w">  </span>POS<span class="w">     </span>ID<span class="w">      </span>REF<span class="w">     </span>ALT<span class="w">     </span>QUAL<span class="w">    </span>FILTER<span class="w">  </span>INFO<span class="w">    </span>FORMAT<span class="w">  </span>reads_father<span class="w">    </span>reads_mother<span class="w">    </span>reads_son
-<a id="__codelineno-36-41" name="__codelineno-36-41"></a><span class="go">20_10037292_10066351    3480    .       C       CT      1625.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487    GT:AD:DP:GQ:PL  0/1:15,16:31:99:367,0,375       1/1:0,18:18:54:517,54,0 1/1:0,26:26:78:756,78,0</span>
-<a id="__codelineno-36-42" name="__codelineno-36-42"></a><span class="go">20_10037292_10066351    3520    .       AT      A       1678.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=1.03;DP=80;ExcessHet=0.0000;FS=2.290;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=22.39;ReadPosRankSum=0.701;SOR=0.730  GT:AD:DP:GQ:PL  0/1:18,13:31:99:296,0,424       1/1:0,18:18:54:623,54,0 1/1:0,26:26:78:774,78,0</span>
-<a id="__codelineno-36-43" name="__codelineno-36-43"></a><span class="go">20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194</span>
-<a id="__codelineno-36-44" name="__codelineno-36-44"></a><span class="go">20_10037292_10066351    4012    .       C       T       3950.73 .       AC=6;AF=1.00;AN=6;DP=127;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=31.86;SOR=0.725    GT:AD:DP:GQ:PL  1/1:0,46:46:99:1446,137,0   1/1:0,43:43:99:1412,129,0        1/1:0,35:35:99:1106,105,0</span>
-<a id="__codelineno-36-45" name="__codelineno-36-45"></a><span class="go">20_10037292_10066351    4409    .       A       ATATG   2478.69 .       AC=6;AF=1.00;AN=6;DP=96;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=33.95;SOR=0.963     GT:AD:DP:GQ:PL  1/1:0,28:28:90:969,90,0 1/1:0,21:21:69:724,69,0      1/1:0,24:24:72:799,72,0</span>
-<a id="__codelineno-36-46" name="__codelineno-36-46"></a><span class="go">20_10037292_10066351    4464    .       T       TA      620.25  .       AC=1;AF=0.167;AN=6;BaseQRankSum=0.108;DP=102;ExcessHet=0.0000;FS=0.000;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=19.38;ReadPosRankSum=1.27;SOR=0.892 GT:AD:DP:GQ:PGT:PID:PL:PS       0|1:15,17:32:99:0|1:4464_T_TA:629,0,554:4464    0/0:30,0:30:78:.:.:0,78,1170 0/0:39,0:39:99:.:.:0,108,1286</span>
-<a id="__codelineno-36-47" name="__codelineno-36-47"></a><span class="go">20_10037292_10066351    4465    .       T       TA      620.25  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-2.250e-01;DP=101;ExcessHet=0.0000;FS=0.000;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=19.38;ReadPosRankSum=0.910;SOR=0.892   GT:AD:DP:GQ:PGT:PID:PL:PS       0|1:15,17:32:99:0|1:4464_T_TA:629,0,554:4464    0/0:30,0:30:78:.:.:0,78,1170 0/0:39,0:39:99:.:.:0,108,1286</span>
-<a id="__codelineno-36-48" name="__codelineno-36-48"></a><span class="go">20_10037292_10066351    5027    .       C       T       3339.73 .       AC=6;AF=1.00;AN=6;DP=108;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=31.51;SOR=0.731    GT:AD:DP:GQ:PL  1/1:0,36:36:99:1164,108,0   1/1:0,26:26:77:798,77,0  1/1:0,44:44:99:1391,132,0</span>
-<a id="__codelineno-36-49" name="__codelineno-36-49"></a><span class="go">20_10037292_10066351    5469    .       A       G       2725.93 .       AC=5;AF=0.833;AN=6;BaseQRankSum=-3.665e+00;DP=113;ExcessHet=0.0000;FS=6.914;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=24.34;ReadPosRankSum=1.50;SOR=0.320    GT:AD:DP:GQ:PL  0/1:18,23:41:99:553,0,486       1/1:0,42:42:99:1311,126,0       1/1:0,29:29:86:876,86,0</span>
-<a id="__codelineno-36-50" name="__codelineno-36-50"></a><span class="go">20_10037292_10066351    7557    .       A       G       2257.93 .       AC=5;AF=0.833;AN=6;BaseQRankSum=-1.362e+00;DP=111;ExcessHet=0.0000;FS=3.400;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.50;ReadPosRankSum=1.11;SOR=0.566    GT:AD:DP:GQ:PL  0/1:19,15:34:99:313,0,493       1/1:0,34:34:99:949,100,0        1/1:0,37:37:99:1010,108,0</span>
-<a id="__codelineno-36-51" name="__codelineno-36-51"></a><span class="go">20_10037292_10066351    7786    .       G       T       3503.73 .       AC=6;AF=1.00;AN=6;DP=114;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=31.28;SOR=0.970    GT:AD:DP:GQ:PL  1/1:0,34:34:99:1066,102,0   1/1:0,34:34:99:1057,102,0        1/1:0,44:44:99:1394,132,0</span>
-<a id="__codelineno-36-52" name="__codelineno-36-52"></a><span class="go">20_10037292_10066351    8350    .       G       C       2663.93 .       AC=5;AF=0.833;AN=6;BaseQRankSum=-1.608e+00;DP=106;ExcessHet=0.0000;FS=5.378;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=25.37;ReadPosRankSum=-1.870e-01;SOR=0.950      GT:AD:DP:GQ:PL  0/1:16,14:30:99:356,0,430       1/1:0,39:39:99:1176,115,0       1/1:0,36:36:99:1146,108,0</span>
-<a id="__codelineno-36-53" name="__codelineno-36-53"></a><span class="go">20_10037292_10066351    8886    .       AAGAAAGAAAG     A       3037.69 .       AC=6;AF=1.00;AN=6;DP=89;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=25.36;SOR=2.269     GT:AD:DP:GQ:PL  1/1:0,18:18:55:804,55,0      1/1:0,29:29:88:1282,88,0        1/1:0,22:22:67:965,67,0</span>
-<a id="__codelineno-36-54" name="__codelineno-36-54"></a><span class="go">20_10037292_10066351    9536    .       T       C       1089.95 .       AC=3;AF=0.500;AN=6;BaseQRankSum=-5.640e-01;DP=82;ExcessHet=0.0000;FS=12.258;MLEAC=3;MLEAF=0.500;MQ=60.00;MQRankSum=0.00;QD=20.57;ReadPosRankSum=0.860;SOR=0.373   GT:AD:DP:GQ:PL  1/1:0,32:32:95:950,95,0 0/0:29,0:29:81:0,81,1215        0/1:14,7:21:99:156,0,353</span>
-<a id="__codelineno-36-55" name="__codelineno-36-55"></a><span class="go">20_10037292_10066351    13375   .       C       T       724.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=0.171;DP=121;ExcessHet=0.0000;FS=7.398;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=12.71;ReadPosRankSum=0.415;SOR=1.688        GT:AD:DP:GQ:PL  0/1:28,29:57:99:733,0,679       0/0:29,0:29:81:0,81,1215        0/0:34,0:34:99:0,99,1485</span>
-<a id="__codelineno-36-56" name="__codelineno-36-56"></a><span class="go">20_10037292_10066351    13536   .       T       C       1025.16 .       AC=2;AF=0.333;AN=6;BaseQRankSum=1.63;DP=118;ExcessHet=0.9691;FS=1.719;MLEAC=2;MLEAF=0.333;MQ=60.00;MQRankSum=0.00;QD=11.65;ReadPosRankSum=-2.000e-01;SOR=0.904    GT:AD:DP:GQ:PL  0/1:21,23:44:99:591,0,526       0/1:26,18:44:99:445,0,672       0/0:29,0:29:84:0,84,1260</span>
-<a id="__codelineno-36-57" name="__codelineno-36-57"></a><span class="go">20_10037292_10066351    14156   .       T       C       438.16  .       AC=2;AF=0.333;AN=6;BaseQRankSum=3.20;DP=96;ExcessHet=0.9691;FS=2.381;MLEAC=2;MLEAF=0.333;MQ=60.00;MQRankSum=0.00;QD=7.82;ReadPosRankSum=1.13;SOR=0.592    GT:AD:DP:GQ:PL  0/1:25,11:36:99:258,0,676       0/1:12,8:20:99:191,0,319        0/0:38,0:38:99:0,99,1117</span>
-<a id="__codelineno-36-58" name="__codelineno-36-58"></a><span class="go">20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113</span>
-</code></pre></div></td></tr></table></div>
-</details>
-<p>Hem destacat una vegada més l'última línia de capçalera, que marca l'inici de les dades de crides de variants.</p>
-<p>Això sembla similar al VCF que vam generar abans, excepte que aquesta vegada tenim informació a nivell de genotip per a les tres mostres.
-Les últimes tres columnes del fitxer són els blocs de genotip per a les mostres, llistades en ordre alfabètic del seu camp ID, com es mostra a la línia de capçalera destacada.</p>
-<p>Si mirem els genotips cridats per al nostre trio familiar de prova per a la primera variant, veiem que el pare és heterozigot-variant (<code>0/1</code>), i la mare i el fill són tots dos homozigots-variant (<code>1/1</code>).</p>
-<p>Aquesta és en última instància el tipus d'informació que busquem extreure del conjunt de dades!</p>
-<h4 id="233-moure-els-fitxers-de-sortida">2.3.3. Moure els fitxers de sortida<a class="headerlink" href="#233-moure-els-fitxers-de-sortida" title="Permanent link">&para;</a></h4>
-<p>Com s'ha esmentat anteriorment, qualsevol cosa que romangui dins del contenidor serà inaccessible per a treballs futurs.
-Abans de sortir del contenidor, mourem els fitxers GVCF, el VCF final multi-mostra i tots els seus fitxers d'índex manualment al sistema de fitxers fora del contenidor.
-D'aquesta manera, tindrem alguna cosa per comparar quan construïm el nostre workflow per automatitzar tot aquest treball.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>mv<span class="w"> </span>*.vcf*<span class="w"> </span>/data/vcf
+<p>561 INFO NativeGenomicsDB - pid=221 tid=222 No valid combination operation found for INFO field MLEAF - the field will NOT be part of INFO fields in the generated VCF records
+17:38:45.577 INFO GenotypeGVCFs - Done initializing engine
+17:38:45.615 INFO ProgressMeter - Starting traversal
+17:38:45.615 INFO ProgressMeter - Current Locus Elapsed Minutes Variants Processed Variants/Minute
+17:38:45.903 WARN InbreedingCoeff - InbreedingCoeff will not be calculated at position 20_10037292_10066351:3480 and possibly subsequent; at least 10 samples must have called genotypes
+GENOMICSDB_TIMER,GenomicsDB iterator next() timer,Wall-clock time(s),0.07757032800000006,Cpu time(s),0.07253379200000037
+17:38:46.421 INFO ProgressMeter - 20_10037292_10066351:13953 0.0 3390 252357.3
+17:38:46.422 INFO ProgressMeter - Traversal complete. Processed 3390 total variants in 0.0 minutes.
+17:38:46.423 INFO GenotypeGVCFs - Shutting down engine
+[February 11, 2026 at 5:38:46 PM GMT] org.broadinstitute.hellbender.tools.walkers.GenotypeGVCFs done. Elapsed time: 0.02 minutes.
+Runtime.totalMemory()=203423744</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>Això crea el fitxer de sortida VCF `family_trio.vcf` al directori de treball actual del contenidor, així com el seu índex, `family_trio.vcf.idx`.
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>És un altre fitxer raonablement petit, així que podeu executar `cat family_trio.vcf` per veure el contingut del fitxer, i desplaçar-vos cap avall per trobar les primeres línies de variants.
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>??? abstract &quot;Contingut del fitxer (abreujat)&quot;
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>    ```console title=&quot;family_trio.vcf&quot; linenums=&quot;1&quot; hl_lines=&quot;39&quot;
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>    ##fileformat=VCFv4.2
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>    ##ALT=&lt;ID=NON_REF,Description=&quot;Represents any possible alternative allele not already represented at this location by REF and ALT&quot;&gt;
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>    ##FILTER=&lt;ID=LowQual,Description=&quot;Low quality&quot;&gt;
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>    ##FILTER=&lt;ID=PASS,Description=&quot;All filters passed&quot;&gt;
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>    ##FORMAT=&lt;ID=AD,Number=R,Type=Integer,Description=&quot;Allelic depths for the ref and alt alleles in the order listed&quot;&gt;
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>    ##FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth (reads with MQ=255 or with bad mates are filtered)&quot;&gt;
+<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a>    ##FORMAT=&lt;ID=GQ,Number=1,Type=Integer,Description=&quot;Genotype Quality&quot;&gt;
+<a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a>    ##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;
+<a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>    ##FORMAT=&lt;ID=MIN_DP,Number=1,Type=Integer,Description=&quot;Minimum DP observed within the GVCF block&quot;&gt;
+<a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a>    ##FORMAT=&lt;ID=PGT,Number=1,Type=String,Description=&quot;Physical phasing haplotype information, describing how the alternate alleles are phased in relation to one another; will always be heterozygous and is not intended to describe called alleles&quot;&gt;
+<a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a>    ##FORMAT=&lt;ID=PID,Number=1,Type=String,Description=&quot;Physical phasing ID information, where each unique ID within a given sample (but not across samples) connects records within a phasing group&quot;&gt;
+<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>    ##FORMAT=&lt;ID=PL,Number=G,Type=Integer,Description=&quot;Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification&quot;&gt;
+<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a>    ##FORMAT=&lt;ID=PS,Number=1,Type=Integer,Description=&quot;Phasing set (typically the position of the first variant in the set)&quot;&gt;
+<a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a>    ##FORMAT=&lt;ID=RGQ,Number=1,Type=Integer,Description=&quot;Unconditional reference genotype confidence, encoded as a phred quality -10*log10 p(genotype call is wrong)&quot;&gt;
+<a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a>    ##FORMAT=&lt;ID=SB,Number=4,Type=Integer,Description=&quot;Per-sample component statistics which comprise the Fisher&#39;s Exact Test to detect strand bias.&quot;&gt;
+<a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a>    ##GATKCommandLine=&lt;ID=GenomicsDBImport,CommandLine=&quot;GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abreujat]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:37:07 PM GMT&quot;&gt;
+<a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a>    ##GATKCommandLine=&lt;ID=GenotypeGVCFs,CommandLine=&quot;GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abreujat]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 5:38:45 PM GMT&quot;&gt;
+<a id="__codelineno-36-24" name="__codelineno-36-24" href="#__codelineno-36-24"></a>    ##GATKCommandLine=&lt;ID=HaplotypeCaller,CommandLine=&quot;HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abreujat]&quot;,Version=&quot;4.5.0.0&quot;,Date=&quot;February 11, 2026 at 4:51:00 PM GMT&quot;&gt;
+<a id="__codelineno-36-25" name="__codelineno-36-25" href="#__codelineno-36-25"></a>    ##INFO=&lt;ID=AC,Number=A,Type=Integer,Description=&quot;Allele count in genotypes, for each ALT allele, in the same order as listed&quot;&gt;
+<a id="__codelineno-36-26" name="__codelineno-36-26" href="#__codelineno-36-26"></a>    ##INFO=&lt;ID=AF,Number=A,Type=Float,Description=&quot;Allele Frequency, for each ALT allele, in the same order as listed&quot;&gt;
+<a id="__codelineno-36-27" name="__codelineno-36-27" href="#__codelineno-36-27"></a>    ##INFO=&lt;ID=AN,Number=1,Type=Integer,Description=&quot;Total number of alleles in called genotypes&quot;&gt;
+<a id="__codelineno-36-28" name="__codelineno-36-28" href="#__codelineno-36-28"></a>    ##INFO=&lt;ID=BaseQRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt Vs. Ref base qualities&quot;&gt;
+<a id="__codelineno-36-29" name="__codelineno-36-29" href="#__codelineno-36-29"></a>    ##INFO=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Approximate read depth; some reads may have been filtered&quot;&gt;
+<a id="__codelineno-36-30" name="__codelineno-36-30" href="#__codelineno-36-30"></a>    ##INFO=&lt;ID=END,Number=1,Type=Integer,Description=&quot;Stop position of the interval&quot;&gt;
+<a id="__codelineno-36-31" name="__codelineno-36-31" href="#__codelineno-36-31"></a>    ##INFO=&lt;ID=ExcessHet,Number=1,Type=Float,Description=&quot;Phred-scaled p-value for exact test of excess heterozygosity&quot;&gt;
+<a id="__codelineno-36-32" name="__codelineno-36-32" href="#__codelineno-36-32"></a>    ##INFO=&lt;ID=FS,Number=1,Type=Float,Description=&quot;Phred-scaled p-value using Fisher&#39;s exact test to detect strand bias&quot;&gt;
+<a id="__codelineno-36-33" name="__codelineno-36-33" href="#__codelineno-36-33"></a>    ##INFO=&lt;ID=InbreedingCoeff,Number=1,Type=Float,Description=&quot;Inbreeding coefficient as estimated from the genotype likelihoods per-sample when compared against the Hardy-Weinberg expectation&quot;&gt;
+<a id="__codelineno-36-34" name="__codelineno-36-34" href="#__codelineno-36-34"></a>    ##INFO=&lt;ID=MLEAC,Number=A,Type=Integer,Description=&quot;Maximum likelihood expectation (MLE) for the allele counts (not necessarily the same as the AC), for each ALT allele, in the same order as listed&quot;&gt;
+<a id="__codelineno-36-35" name="__codelineno-36-35" href="#__codelineno-36-35"></a>    ##INFO=&lt;ID=MLEAF,Number=A,Type=Float,Description=&quot;Maximum likelihood expectation (MLE) for the allele frequency (not necessarily the same as the AF), for each ALT allele, in the same order as listed&quot;&gt;
+<a id="__codelineno-36-36" name="__codelineno-36-36" href="#__codelineno-36-36"></a>    ##INFO=&lt;ID=MQ,Number=1,Type=Float,Description=&quot;RMS Mapping Quality&quot;&gt;
+<a id="__codelineno-36-37" name="__codelineno-36-37" href="#__codelineno-36-37"></a>    ##INFO=&lt;ID=MQRankSum,Number=1,Type=Float,Description=&quot;Z-score From Wilcoxon rank sum test of Alt vs. Ref read mapping qualities&quot;&gt;
+<a id="__codelineno-36-38" name="__codelineno-36-38" href="#__codelineno-36-38"></a>    ##INFO=&lt;ID=QD,Number=1,Type=Float,Description=&quot;Variant Confidence/Quality by Depth&quot;&gt;
+<a id="__codelineno-36-39" name="__codelineno-36-39" href="#__codelineno-36-39"></a>    ##INFO=&lt;ID=RAW_MQandDP,Number=2,Type=Integer,Description=&quot;Raw data (sum of squared MQ and total depth) for improved RMS Mapping Quality calculation. Incompatible with deprecated RAW_MQ formulation.&quot;&gt;
+<a id="__codelineno-36-40" name="__codelineno-36-40" href="#__codelineno-36-40"></a>    ##INFO=&lt;ID=ReadPosRankSum,Number=1,Type=Float,Description=&quot;Z-score from Wilcoxon rank sum test of Alt vs. Ref read position bias&quot;&gt;
+<a id="__codelineno-36-41" name="__codelineno-36-41" href="#__codelineno-36-41"></a>    ##INFO=&lt;ID=SOR,Number=1,Type=Float,Description=&quot;Symmetric Odds Ratio of 2x2 contingency table to detect strand bias&quot;&gt;
+<a id="__codelineno-36-42" name="__codelineno-36-42" href="#__codelineno-36-42"></a>    ##contig=&lt;ID=20_10037292_10066351,length=29059&gt;
+<a id="__codelineno-36-43" name="__codelineno-36-43" href="#__codelineno-36-43"></a>    ##source=GenomicsDBImport
+<a id="__codelineno-36-44" name="__codelineno-36-44" href="#__codelineno-36-44"></a>    ##source=GenotypeGVCFs
+<a id="__codelineno-36-45" name="__codelineno-36-45" href="#__codelineno-36-45"></a>    ##source=HaplotypeCaller
+<a id="__codelineno-36-46" name="__codelineno-36-46" href="#__codelineno-36-46"></a>    #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  reads_father    reads_mother    reads_son
+<a id="__codelineno-36-47" name="__codelineno-36-47" href="#__codelineno-36-47"></a>    20_10037292_10066351    3480    .       C       CT      1625.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487    GT:AD:DP:GQ:PL  0/1:15,16:31:99:367,0,375       1/1:0,18:18:54:517,54,0 1/1:0,26:26:78:756,78,0
+<a id="__codelineno-36-48" name="__codelineno-36-48" href="#__codelineno-36-48"></a>    20_10037292_10066351    3520    .       AT      A       1678.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=1.03;DP=80;ExcessHet=0.0000;FS=2.290;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=22.39;ReadPosRankSum=0.701;SOR=0.730  GT:AD:DP:GQ:PL  0/1:18,13:31:99:296,0,424       1/1:0,18:18:54:623,54,0 1/1:0,26:26:78:774,78,0
+<a id="__codelineno-36-49" name="__codelineno-36-49" href="#__codelineno-36-49"></a>    20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194
+<a id="__codelineno-36-50" name="__codelineno-36-50" href="#__codelineno-36-50"></a>    20_10037292_10066351    4012    .       C       T       3950.73 .       AC=6;AF=1.00;AN=6;DP=127;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=31.86;SOR=0.725    GT:AD:DP:GQ:PL  1/1:0,46:46:99:1446,137,0   1/1:0,43:43:99:1412,129,0        1/1:0,35:35:99:1106,105,0
+<a id="__codelineno-36-51" name="__codelineno-36-51" href="#__codelineno-36-51"></a>    20_10037292_10066351    4409    .       A       ATATG   2478.69 .       AC=6;AF=1.00;AN=6;DP=96;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=33.95;SOR=0.963     GT:AD:DP:GQ:PL  1/1:0,28:28:90:969,90,0 1/1:0,21:21:69:724,69,0      1/1:0,24:24:72:799,72,0
+<a id="__codelineno-36-52" name="__codelineno-36-52" href="#__codelineno-36-52"></a>    20_10037292_10066351    4464    .       T       TA      620.25  .       AC=1;AF=0.167;AN=6;BaseQRankSum=0.108;DP=102;ExcessHet=0.0000;FS=0.000;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=19.38;ReadPosRankSum=1.27;SOR=0.892 GT:AD:DP:GQ:PGT:PID:PL:PS       0|1:15,17:32:99:0|1:4464_T_TA:629,0,554:4464    0/0:30,0:30:78:.:.:0,78,1170 0/0:39,0:39:99:.:.:0,108,1286
+<a id="__codelineno-36-53" name="__codelineno-36-53" href="#__codelineno-36-53"></a>    20_10037292_10066351    4465    .       T       TA      620.25  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-2.250e-01;DP=101;ExcessHet=0.0000;FS=0.000;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=19.38;ReadPosRankSum=0.910;SOR=0.892   GT:AD:DP:GQ:PGT:PID:PL:PS       0|1:15,17:32:99:0|1:4464_T_TA:629,0,554:4464    0/0:30,0:30:78:.:.:0,78,1170 0/0:39,0:39:99:.:.:0,108,1286
+<a id="__codelineno-36-54" name="__codelineno-36-54" href="#__codelineno-36-54"></a>    20_10037292_10066351    5027    .       C       T       3339.73 .       AC=6;AF=1.00;AN=6;DP=108;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=31.51;SOR=0.731    GT:AD:DP:GQ:PL  1/1:0,36:36:99:1164,108,0   1/1:0,26:26:77:798,77,0  1/1:0,44:44:99:1391,132,0
+<a id="__codelineno-36-55" name="__codelineno-36-55" href="#__codelineno-36-55"></a>    20_10037292_10066351    5469    .       A       G       2725.93 .       AC=5;AF=0.833;AN=6;BaseQRankSum=-3.665e+00;DP=113;ExcessHet=0.0000;FS=6.914;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=24.34;ReadPosRankSum=1.50;SOR=0.320    GT:AD:DP:GQ:PL  0/1:18,23:41:99:553,0,486       1/1:0,42:42:99:1311,126,0       1/1:0,29:29:86:876,86,0
+<a id="__codelineno-36-56" name="__codelineno-36-56" href="#__codelineno-36-56"></a>    20_10037292_10066351    7557    .       A       G       2257.93 .       AC=5;AF=0.833;AN=6;BaseQRankSum=-1.362e+00;DP=111;ExcessHet=0.0000;FS=3.400;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.50;ReadPosRankSum=1.11;SOR=0.566    GT:AD:DP:GQ:PL  0/1:19,15:34:99:313,0,493       1/1:0,34:34:99:949,100,0        1/1:0,37:37:99:1010,108,0
+<a id="__codelineno-36-57" name="__codelineno-36-57" href="#__codelineno-36-57"></a>    20_10037292_10066351    7786    .       G       T       3503.73 .       AC=6;AF=1.00;AN=6;DP=114;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=31.28;SOR=0.970    GT:AD:DP:GQ:PL  1/1:0,34:34:99:1066,102,0   1/1:0,34:34:99:1057,102,0        1/1:0,44:44:99:1394,132,0
+<a id="__codelineno-36-58" name="__codelineno-36-58" href="#__codelineno-36-58"></a>    20_10037292_10066351    8350    .       G       C       2663.93 .       AC=5;AF=0.833;AN=6;BaseQRankSum=-1.608e+00;DP=106;ExcessHet=0.0000;FS=5.378;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=25.37;ReadPosRankSum=-1.870e-01;SOR=0.950      GT:AD:DP:GQ:PL  0/1:16,14:30:99:356,0,430       1/1:0,39:39:99:1176,115,0       1/1:0,36:36:99:1146,108,0
+<a id="__codelineno-36-59" name="__codelineno-36-59" href="#__codelineno-36-59"></a>    20_10037292_10066351    8886    .       AAGAAAGAAAG     A       3037.69 .       AC=6;AF=1.00;AN=6;DP=89;ExcessHet=0.0000;FS=0.000;MLEAC=6;MLEAF=1.00;MQ=60.00;QD=25.36;SOR=2.269     GT:AD:DP:GQ:PL  1/1:0,18:18:55:804,55,0      1/1:0,29:29:88:1282,88,0        1/1:0,22:22:67:965,67,0
+<a id="__codelineno-36-60" name="__codelineno-36-60" href="#__codelineno-36-60"></a>    20_10037292_10066351    9536    .       T       C       1089.95 .       AC=3;AF=0.500;AN=6;BaseQRankSum=-5.640e-01;DP=82;ExcessHet=0.0000;FS=12.258;MLEAC=3;MLEAF=0.500;MQ=60.00;MQRankSum=0.00;QD=20.57;ReadPosRankSum=0.860;SOR=0.373   GT:AD:DP:GQ:PL  1/1:0,32:32:95:950,95,0 0/0:29,0:29:81:0,81,1215        0/1:14,7:21:99:156,0,353
+<a id="__codelineno-36-61" name="__codelineno-36-61" href="#__codelineno-36-61"></a>    20_10037292_10066351    13375   .       C       T       724.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=0.171;DP=121;ExcessHet=0.0000;FS=7.398;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=12.71;ReadPosRankSum=0.415;SOR=1.688        GT:AD:DP:GQ:PL  0/1:28,29:57:99:733,0,679       0/0:29,0:29:81:0,81,1215        0/0:34,0:34:99:0,99,1485
+<a id="__codelineno-36-62" name="__codelineno-36-62" href="#__codelineno-36-62"></a>    20_10037292_10066351    13536   .       T       C       1025.16 .       AC=2;AF=0.333;AN=6;BaseQRankSum=1.63;DP=118;ExcessHet=0.9691;FS=1.719;MLEAC=2;MLEAF=0.333;MQ=60.00;MQRankSum=0.00;QD=11.65;ReadPosRankSum=-2.000e-01;SOR=0.904    GT:AD:DP:GQ:PL  0/1:21,23:44:99:591,0,526       0/1:26,18:44:99:445,0,672       0/0:29,0:29:84:0,84,1260
+<a id="__codelineno-36-63" name="__codelineno-36-63" href="#__codelineno-36-63"></a>    20_10037292_10066351    14156   .       T       C       438.16  .       AC=2;AF=0.333;AN=6;BaseQRankSum=3.20;DP=96;ExcessHet=0.9691;FS=2.381;MLEAC=2;MLEAF=0.333;MQ=60.00;MQRankSum=0.00;QD=7.82;ReadPosRankSum=1.13;SOR=0.592    GT:AD:DP:GQ:PL  0/1:25,11:36:99:258,0,676       0/1:12,8:20:99:191,0,319        0/0:38,0:38:99:0,99,1117
+<a id="__codelineno-36-64" name="__codelineno-36-64" href="#__codelineno-36-64"></a>    20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113
+<a id="__codelineno-36-65" name="__codelineno-36-65" href="#__codelineno-36-65"></a>    ```
+<a id="__codelineno-36-66" name="__codelineno-36-66" href="#__codelineno-36-66"></a>
+<a id="__codelineno-36-67" name="__codelineno-36-67" href="#__codelineno-36-67"></a>Hem destacat una vegada més l&#39;última línia de capçalera, que marca l&#39;inici de les dades de crides de variants.
+<a id="__codelineno-36-68" name="__codelineno-36-68" href="#__codelineno-36-68"></a>
+<a id="__codelineno-36-69" name="__codelineno-36-69" href="#__codelineno-36-69"></a>Això sembla similar al VCF que vam generar abans, excepte que aquesta vegada tenim informació a nivell de genotip per a les tres mostres.
+<a id="__codelineno-36-70" name="__codelineno-36-70" href="#__codelineno-36-70"></a>Les últimes tres columnes del fitxer són els blocs de genotip per a les mostres, llistades en ordre alfabètic del seu camp ID, com es mostra a la línia de capçalera destacada.
+<a id="__codelineno-36-71" name="__codelineno-36-71" href="#__codelineno-36-71"></a>
+<a id="__codelineno-36-72" name="__codelineno-36-72" href="#__codelineno-36-72"></a>Si mirem els genotips cridats per al nostre trio familiar de prova per a la primera variant, veiem que el pare és heterozigot-variant (`0/1`), i la mare i el fill són tots dos homozigots-variant (`1/1`).
+<a id="__codelineno-36-73" name="__codelineno-36-73" href="#__codelineno-36-73"></a>
+<a id="__codelineno-36-74" name="__codelineno-36-74" href="#__codelineno-36-74"></a>Aquesta és en última instància el tipus d&#39;informació que busquem extreure del conjunt de dades!
+<a id="__codelineno-36-75" name="__codelineno-36-75" href="#__codelineno-36-75"></a>
+<a id="__codelineno-36-76" name="__codelineno-36-76" href="#__codelineno-36-76"></a>#### 2.3.3. Moure els fitxers de sortida
+<a id="__codelineno-36-77" name="__codelineno-36-77" href="#__codelineno-36-77"></a>
+<a id="__codelineno-36-78" name="__codelineno-36-78" href="#__codelineno-36-78"></a>Com s&#39;ha esmentat anteriorment, qualsevol cosa que romangui dins del contenidor serà inaccessible per a treballs futurs.
+<a id="__codelineno-36-79" name="__codelineno-36-79" href="#__codelineno-36-79"></a>Abans de sortir del contenidor, mourem els fitxers GVCF, el VCF final multi-mostra i tots els seus fitxers d&#39;índex manualment al sistema de fitxers fora del contenidor.
+<a id="__codelineno-36-80" name="__codelineno-36-80" href="#__codelineno-36-80"></a>D&#39;aquesta manera, tindrem alguna cosa per comparar quan construïm el nostre workflow per automatitzar tot aquest treball.
+<a id="__codelineno-36-81" name="__codelineno-36-81" href="#__codelineno-36-81"></a>
+<a id="__codelineno-36-82" name="__codelineno-36-82" href="#__codelineno-36-82"></a>```bash
+<a id="__codelineno-36-83" name="__codelineno-36-83" href="#__codelineno-36-83"></a>mv *.vcf* /data/vcf
 </code></pre></div>
 <details class="abstract">
 <summary>Contingut del directori" hl_lines="14-19 22-23</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">data</span>
-<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="go">├── bam</span>
-<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">│   ├── reads_father.bam</span>
-<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="go">│   ├── reads_father.bam.bai</span>
-<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="go">│   ├── reads_mother.bam</span>
-<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="go">│   ├── reads_mother.bam.bai</span>
-<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a><span class="go">│   ├── reads_son.bam</span>
-<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="go">│   └── reads_son.bam.bai</span>
-<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="go">├── ref</span>
-<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="go">│   ├── intervals.bed</span>
-<a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a><span class="go">│   ├── ref.dict</span>
-<a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="go">│   ├── ref.fasta</span>
-<a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="go">│   └── ref.fasta.fai</span>
-<a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a><span class="go">├── samplesheet.csv</span>
-<a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a><span class="go">└── vcf</span>
-<a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a><span class="go">    ├── family_trio.vcf</span>
-<a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a><span class="go">    ├── family_trio.vcf.idx</span>
-<a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a><span class="go">    ├── reads_father.g.vcf</span>
-<a id="__codelineno-38-19" name="__codelineno-38-19" href="#__codelineno-38-19"></a><span class="go">    ├── reads_father.g.vcf.idx</span>
-<a id="__codelineno-38-20" name="__codelineno-38-20" href="#__codelineno-38-20"></a><span class="go">    ├── reads_mother.g.vcf</span>
-<a id="__codelineno-38-21" name="__codelineno-38-21" href="#__codelineno-38-21"></a><span class="go">    ├── reads_mother.g.vcf.idx</span>
-<a id="__codelineno-38-22" name="__codelineno-38-22" href="#__codelineno-38-22"></a><span class="go">    ├── reads_mother.vcf</span>
-<a id="__codelineno-38-23" name="__codelineno-38-23" href="#__codelineno-38-23"></a><span class="go">    ├── reads_mother.vcf.idx</span>
-<a id="__codelineno-38-24" name="__codelineno-38-24" href="#__codelineno-38-24"></a><span class="go">    ├── reads_son.g.vcf</span>
-<a id="__codelineno-38-25" name="__codelineno-38-25" href="#__codelineno-38-25"></a><span class="go">    └── reads_son.g.vcf.idx</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">data</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="go">├── bam</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="go">│   ├── reads_father.bam</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="go">│   ├── reads_father.bam.bai</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="go">│   ├── reads_mother.bam</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="go">│   ├── reads_mother.bam.bai</span>
+<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="go">│   ├── reads_son.bam</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="go">│   └── reads_son.bam.bai</span>
+<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="go">├── ref</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="go">│   ├── intervals.bed</span>
+<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="go">│   ├── ref.dict</span>
+<a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a><span class="go">│   ├── ref.fasta</span>
+<a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a><span class="go">│   └── ref.fasta.fai</span>
+<a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a><span class="go">├── samplesheet.csv</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a><span class="go">└── vcf</span>
+<a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a><span class="go">    ├── family_trio.vcf</span>
+<a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a><span class="go">    ├── family_trio.vcf.idx</span>
+<a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a><span class="go">    ├── reads_father.g.vcf</span>
+<a id="__codelineno-37-19" name="__codelineno-37-19" href="#__codelineno-37-19"></a><span class="go">    ├── reads_father.g.vcf.idx</span>
+<a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a><span class="go">    ├── reads_mother.g.vcf</span>
+<a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a><span class="go">    ├── reads_mother.g.vcf.idx</span>
+<a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a><span class="go">    ├── reads_mother.vcf</span>
+<a id="__codelineno-37-23" name="__codelineno-37-23" href="#__codelineno-37-23"></a><span class="go">    ├── reads_mother.vcf.idx</span>
+<a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a><span class="go">    ├── reads_son.g.vcf</span>
+<a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a><span class="go">    └── reads_son.g.vcf.idx</span>
 </code></pre></div>
 </details>
 <p>Un cop fet això, tots els fitxers són ara accessibles al vostre sistema de fitxers normal.</p>
 <h4 id="234-sortir-del-contenidor-gatk">2.3.4. Sortir del contenidor GATK<a class="headerlink" href="#234-sortir-del-contenidor-gatk" title="Permanent link">&para;</a></h4>
 <p>Per sortir del contenidor, escriviu <code>exit</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nb">exit</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="nb">exit</span>
 </code></pre></div>
 <p>El vostre prompt hauria de tornar a la normalitat.
 Això conclou la prova manual de les comandes de crida conjunta de variants.</p>
