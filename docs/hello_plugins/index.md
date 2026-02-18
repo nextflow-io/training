@@ -13,14 +13,9 @@ During this training, you will learn how to use existing plugins and optionally 
 
 ## Audience & prerequisites
 
-Using existing plugins (Part 1) is straightforward and valuable for all Nextflow users.
-
-Parts 2-6 cover building your own plugins, which many Nextflow developers may never need to do.
-However, creating a plugin can be a good way to share reusable functions across pipelines or within a team.
-These lessons involve Groovy code, build tools, and concepts that may be new if your background is in scripting or data analysis rather than software engineering.
-No prior Java or Groovy experience is required; the lessons explain these concepts as they come up.
-
-If the development sections feel challenging, focus on Part 1 and return to the rest when you have a specific plugin idea in mind.
+Part 1 covers using existing plugins and is relevant to all Nextflow users.
+Parts 2-6 cover building your own plugins and involve Groovy code and build tools.
+No prior Java or Groovy experience is required.
 
 **Prerequisites**
 

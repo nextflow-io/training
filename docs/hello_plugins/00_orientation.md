@@ -72,14 +72,13 @@ tree -L 1
 .
 ├── greetings.csv
 ├── greetings_schema.json
-├── main.nf
+├── greet.nf
+├── hello.nf
 ├── nextflow.config
-├── random_id_example.nf
-├── schema_example.nf
 └── solutions/
 ```
 
-We have a simple greeting pipeline and materials for both using and developing plugins.
+The directory contains two pipeline files: `hello.nf` for the Part 1 exercises (using existing plugins) and `greet.nf` for Parts 2-6 (building your own plugin).
 
 ---
 

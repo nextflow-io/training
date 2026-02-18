@@ -134,7 +134,7 @@ Edit `GreetingFactory.groovy` to add the new observer:
 
 ```bash
 cd nf-greeting && make assemble && make install && cd ..
-nextflow run main.nf -ansi-log false
+nextflow run greet.nf -ansi-log false
 ```
 
 You should see "✓ Task completed!" printed five times (once per task):
@@ -199,14 +199,14 @@ Rebuild and test:
 
 ```bash
 cd nf-greeting && make assemble && make install && cd ..
-nextflow run main.nf -ansi-log false
+nextflow run greet.nf -ansi-log false
 ```
 
 ??? example "Output"
 
     ```console
     N E X T F L O W  ~  version 25.10.2
-    Launching `main.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
+    Launching `greet.nf` [pensive_engelbart] DSL2 - revision: 85fefd90d0
     Pipeline is starting! 🚀
     Reversed: olleH
     Reversed: ruojnoB

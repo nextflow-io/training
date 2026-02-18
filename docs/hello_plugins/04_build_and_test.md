@@ -96,22 +96,6 @@ class GreetingExtensionTest extends Specification {
         expect:
         ext.decorateGreeting('Hello') == '*** Hello ***'
     }
-
-    def 'should create friendly greeting with default name'() {
-        given:
-        def ext = new GreetingExtension()
-
-        expect:
-        ext.friendlyGreeting('Hello') == 'Hello, World!'
-    }
-
-    def 'should create friendly greeting with custom name'() {
-        given:
-        def ext = new GreetingExtension()
-
-        expect:
-        ext.friendlyGreeting('Hello', 'Alice') == 'Hello, Alice!'
-    }
 }
 ```
 
@@ -156,13 +140,39 @@ make test
 
         An empty string reversed is still an empty string.
 
+??? exercise "Test friendlyGreeting"
+
+    If you completed the `friendlyGreeting` exercise in Part 3, add tests for it.
+    Test both the default name and a custom name.
+
+    ??? solution
+
+        ```groovy
+        def 'should create friendly greeting with default name'() {
+            given:
+            def ext = new GreetingExtension()
+
+            expect:
+            ext.friendlyGreeting('Hello') == 'Hello, World!'
+        }
+
+        def 'should create friendly greeting with custom name'() {
+            given:
+            def ext = new GreetingExtension()
+
+            expect:
+            ext.friendlyGreeting('Hello', 'Alice') == 'Hello, Alice!'
+        }
+        ```
+
 ---
 
 ## 5. View the test report
 
 Gradle generates an HTML test report with detailed results for each test.
 
-Start a simple web server in the test report directory:
+Start a simple web server in the test report directory.
+The `pushd` command saves your current directory so you can return to it later:
 
 ```bash
 pushd build/reports/tests/test
@@ -176,10 +186,16 @@ Click through to your test class to see individual test results:
 
 The report shows each test method, its duration, and whether it passed or failed.
 
-Press ++ctrl+c++ in the terminal to stop the server when you're done, then return to the plugin directory:
+Press ++ctrl+c++ in the terminal to stop the server when you're done, then return to the previous directory with `popd`:
 
 ```bash
 popd
+```
+
+Go back to the main project directory:
+
+```bash
+cd ..
 ```
 
 ---

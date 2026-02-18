@@ -181,8 +181,10 @@ Update `nextflow.config` to disable the per-task messages:
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="5-7"
+    ```groovy title="nextflow.config" linenums="1" hl_lines="7-10"
+    // Configuration for plugin development exercises
     plugins {
+        id 'nf-schema@2.6.1'
         id 'nf-greeting@0.1.0'
     }
 
@@ -195,7 +197,9 @@ Update `nextflow.config` to disable the per-task messages:
 === "Before"
 
     ```groovy title="nextflow.config" linenums="1"
+    // Configuration for plugin development exercises
     plugins {
+        id 'nf-schema@2.6.1'
         id 'nf-greeting@0.1.0'
     }
     ```
@@ -203,14 +207,14 @@ Update `nextflow.config` to disable the per-task messages:
 Run the pipeline and observe that only the final count appears:
 
 ```bash
-nextflow run main.nf -ansi-log false
+nextflow run greet.nf -ansi-log false
 ```
 
 ??? example "Output"
 
     ```console
     N E X T F L O W  ~  version 25.10.2
-    Launching `main.nf` [stoic_wegener] DSL2 - revision: 63f3119fbc
+    Launching `greet.nf` [stoic_wegener] DSL2 - revision: 63f3119fbc
     WARN: Unrecognized config option 'greeting.taskCounter.verbose'
     Pipeline is starting! 🚀
     Reversed: olleH
@@ -247,8 +251,10 @@ nextflow run main.nf -ansi-log false
 
     ??? solution
 
-        ```groovy title="nextflow.config" hl_lines="6"
+        ```groovy title="nextflow.config" hl_lines="8"
+        // Configuration for plugin development exercises
         plugins {
+            id 'nf-schema@2.6.1'
             id 'nf-greeting@0.1.0'
         }
 
@@ -368,8 +374,10 @@ Update `nextflow.config` to customize the decoration:
 
 === "After"
 
-    ```groovy title="nextflow.config" hl_lines="7-8"
+    ```groovy title="nextflow.config" hl_lines="9-10"
+    // Configuration for plugin development exercises
     plugins {
+        id 'nf-schema@2.6.1'
         id 'nf-greeting@0.1.0'
     }
 
@@ -383,7 +391,9 @@ Update `nextflow.config` to customize the decoration:
 === "Before"
 
     ```groovy title="nextflow.config"
+    // Configuration for plugin development exercises
     plugins {
+        id 'nf-schema@2.6.1'
         id 'nf-greeting@0.1.0'
     }
 
@@ -395,7 +405,7 @@ Update `nextflow.config` to customize the decoration:
 Run the pipeline:
 
 ```bash
-nextflow run main.nf -ansi-log false
+nextflow run greet.nf -ansi-log false
 ```
 
 ```console title="Output (partial)"
@@ -585,7 +595,7 @@ What it does is register the `greeting {}` scope with Nextflow, which eliminates
 
 ```bash
 cd nf-greeting && make assemble && make install && cd ..
-nextflow run main.nf -ansi-log false
+nextflow run greet.nf -ansi-log false
 ```
 
 The pipeline behavior is the same, but the warning is gone and your configuration options are now formally documented within the plugin.

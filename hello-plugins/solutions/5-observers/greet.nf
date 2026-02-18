@@ -1,5 +1,6 @@
 #!/usr/bin/env nextflow
 
+include { samplesheetToList } from 'plugin/nf-schema'
 // Import custom functions from our plugin
 include { reverseGreeting } from 'plugin/nf-greeting'
 include { decorateGreeting } from 'plugin/nf-greeting'
@@ -20,9 +21,8 @@ process SAY_HELLO {
 }
 
 workflow {
-    greeting_ch = channel.fromPath(params.input)
-                        .splitCsv(header: true)
-                        .map { row -> row.greeting }
+    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+                        .map { row -> row[0] }
 
     // Demonstrate using reverseGreeting function
     greeting_ch

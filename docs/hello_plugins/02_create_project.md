@@ -214,6 +214,99 @@ The template includes messages that print "Pipeline is starting!" and "Pipeline 
 
 ---
 
+## 5. Build, install, and run
+
+Compile the plugin and install it locally:
+
+```bash
+make assemble && make install
+```
+
+??? example "Build output"
+
+    The first time you run this, Gradle will download itself (this may take a minute):
+
+    ```console
+    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
+    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
+
+    Welcome to Gradle 8.14!
+    ...
+
+    Deprecated Gradle features were used in this build...
+
+    BUILD SUCCESSFUL in 23s
+    4 actionable tasks: 4 executed
+    ```
+
+    **The warnings are expected.**
+
+    - **"Downloading gradle..."**: This only happens the first time. Subsequent builds are much faster.
+    - **"Deprecated Gradle features..."**: This warning comes from the plugin template, not your code. It's safe to ignore.
+    - **"BUILD SUCCESSFUL"**: This is what matters. Your plugin compiled without errors.
+
+??? info "What is `./gradlew`?"
+
+    The `./gradlew` script is the **Gradle wrapper**, a small script included with the project that automatically downloads and runs the correct version of Gradle.
+
+    This means you don't need Gradle installed on your system.
+    The `make` commands in the Makefile are shortcuts that call `./gradlew` for you.
+
+Go back to the pipeline directory:
+
+```bash
+cd ..
+```
+
+Add the nf-greeting plugin to `nextflow.config`:
+
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="4"
+    // Configuration for plugin development exercises
+    plugins {
+        id 'nf-schema@2.6.1'
+        id 'nf-greeting@0.1.0'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    // Configuration for plugin development exercises
+    plugins {
+        id 'nf-schema@2.6.1'
+    }
+    ```
+
+!!! note "Version required for local plugins"
+
+    When using locally installed plugins, you must specify the version (e.g., `nf-greeting@0.1.0`).
+    Published plugins in the registry can use just the name.
+
+Run the pipeline:
+
+```bash
+nextflow run greet.nf
+```
+
+```console title="Output"
+Pipeline is starting! 🚀
+Output: Hello
+Output: Bonjour
+Output: Holà
+Output: Ciao
+Output: Hallo
+Pipeline complete! 👋
+```
+
+(Your output order may differ.)
+
+The "Pipeline is starting!" and "Pipeline complete!" messages come from the `GreetingObserver` in your plugin.
+The pipeline itself is unchanged; the observer runs automatically because it's registered in the factory.
+
+---
+
 ## Takeaway
 
 You learned that:
@@ -221,11 +314,12 @@ You learned that:
 - The `nextflow plugin create` command generates a complete starter project
 - `build.gradle` configures plugin metadata, dependencies, and which classes provide features
 - The plugin has four main components: Plugin (entry point), Extension (functions), Factory (creates monitors), and Observer (responds to workflow events)
+- The development cycle is: edit code, `make assemble`, `make install`, run the pipeline
 
 ---
 
 ## What's next?
 
-Now you'll implement custom functions in the Extension class, build the plugin, and use it in a workflow.
+Now you'll implement custom functions in the Extension class and use them in the workflow.
 
 [Continue to Part 3 :material-arrow-right:](03_custom_functions.md){ .md-button .md-button--primary }

@@ -26,61 +26,63 @@ The next exercises show you function plugins and an observer plugin, so you can 
 
 Function plugins add callable functions that you import into your workflows.
 You'll try two: nf-hello (a simple example) and nf-schema (a widely-used real-world plugin).
+Both exercises modify the same `hello.nf` pipeline, so you can see how plugins enhance an existing workflow.
 
-### 2.1. nf-hello: replace a local function
+### 2.1. nf-hello: add random IDs
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
-You'll start with a workflow that defines this function locally, then replace it with the plugin version.
-This demonstrates the core plugin workflow: declare a plugin, import its functions, and use them like any other Nextflow function.
+You'll add it to the greeting pipeline to generate unique IDs for each greeting.
 
 #### 2.1.1. See the starting point
 
-The `random_id_example.nf` file contains a workflow with a local `randomString` function:
+Look at the pipeline:
 
 ```bash
-cat random_id_example.nf
+cat hello.nf
 ```
 
 ```groovy title="Output"
 #!/usr/bin/env nextflow
 
-/**
- * Generate a random alphanumeric string
- */
-def randomString(int length) {
-    def chars = ('a'..'z') + ('A'..'Z') + ('0'..'9')
-    def random = new Random()
-    return (1..length).collect { chars[random.nextInt(chars.size())] }.join()
+params.input = 'greetings.csv'
+
+process SAY_HELLO {
+    input:
+        val greeting
+    output:
+        stdout
+    script:
+    """
+    echo '$greeting'
+    """
 }
 
 workflow {
-    // Generate random IDs for each sample
-    Channel.of('sample_A', 'sample_B', 'sample_C')
-        .map { sample -> "${sample}_${randomString(8)}" }
-        .view()
+    greeting_ch = channel.fromPath(params.input)
+                        .splitCsv(header: true)
+                        .map { row -> row.greeting }
+    SAY_HELLO(greeting_ch)
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
 }
 ```
 
-The workflow creates a channel of three sample names and appends a random string to each one.
-The `randomString` function is defined locally at the top of the file.
+The pipeline reads greetings from `greetings.csv`, extracts the greeting text, and passes each one to the `SAY_HELLO` process.
 
 Run it:
 
 ```bash
-nextflow run random_id_example.nf
+nextflow run hello.nf
 ```
 
 ```console title="Output"
-sample_A_Pmlkc9S0
-sample_B_ErYxlPsF
-sample_C_AJvSgOVt
+Output: Hello
+Output: Bonjour
+Output: Holà
+Output: Ciao
+Output: Hallo
 ```
 
-(Your random strings will differ.)
-
-This works, but the `randomString` function is defined inside this script.
-If you wanted to use it in another pipeline, you'd have to copy it.
-A plugin solves this by packaging the function so any pipeline can import it.
+(Your output order may differ.)
 
 #### 2.1.2. Configure the plugin
 
@@ -98,20 +100,63 @@ Nextflow automatically downloads them from the registry at runtime.
 
 #### 2.1.3. Use the plugin function
 
-Update `random_id_example.nf` to import `randomString` from the plugin instead of defining it locally:
+Update `hello.nf` to import `randomString` from the plugin and use it to append a unique ID to each greeting:
 
-```groovy title="random_id_example.nf"
-#!/usr/bin/env nextflow
+=== "After"
 
-include { randomString } from 'plugin/nf-hello'
+    ```groovy title="hello.nf" hl_lines="3 21"
+    #!/usr/bin/env nextflow
 
-workflow {
-    // Generate random IDs for each sample
-    Channel.of('sample_A', 'sample_B', 'sample_C')
-        .map { sample -> "${sample}_${randomString(8)}" }
-        .view()
-}
-```
+    include { randomString } from 'plugin/nf-hello'
+
+    params.input = 'greetings.csv'
+
+    process SAY_HELLO {
+        input:
+            val greeting
+        output:
+            stdout
+        script:
+        """
+        echo '$greeting'
+        """
+    }
+
+    workflow {
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv(header: true)
+                            .map { row -> "${row.greeting}_${randomString(8)}" }
+        SAY_HELLO(greeting_ch)
+        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="hello.nf" hl_lines="19"
+    #!/usr/bin/env nextflow
+
+    params.input = 'greetings.csv'
+
+    process SAY_HELLO {
+        input:
+            val greeting
+        output:
+            stdout
+        script:
+        """
+        echo '$greeting'
+        """
+    }
+
+    workflow {
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv(header: true)
+                            .map { row -> row.greeting }
+        SAY_HELLO(greeting_ch)
+        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+    }
+    ```
 
 Import plugin functions with `include { function } from 'plugin/plugin-id'`.
 This is the same `include` syntax used for Nextflow modules, with a `plugin/` prefix.
@@ -120,22 +165,26 @@ You can see the [source code for `randomString`](https://github.com/nextflow-io/
 #### 2.1.4. Run it
 
 ```bash
-nextflow run random_id_example.nf
+nextflow run hello.nf
 ```
 
 ```console title="Output"
 Pipeline is starting! 🚀
-sample_A_xcwzhtbm
-sample_B_yqurtfsq
-sample_C_lpxepimu
+Output: Hello_yqvtclcc
+Output: Bonjour_vwwpyzcs
+Output: Holà_wrghmgab
+Output: Ciao_noniajuy
+Output: Hallo_tvrtuxtp
 Pipeline complete! 👋
 ```
 
-(Your random strings will be different.
-The plugin version generates lowercase strings, while the local version used mixed case and digits.)
+(Your random strings will differ.)
+
+Each greeting now has a random 8-character suffix.
+The "Pipeline is starting!" and "Pipeline complete!" messages come from nf-hello's built-in observer, which demonstrates that a single plugin can provide both functions and observers.
 
 The first time you use a plugin, Nextflow downloads it automatically from the registry.
-After that, any pipeline that declares `nf-hello@0.5.0` gets the exact same `randomString` function without needing to copy code between projects.
+After that, any pipeline that declares `nf-hello@0.5.0` gets the exact same `randomString` function without copying code between projects.
 
 You've now seen the three steps for using a function plugin: declare it in `nextflow.config`, import the function with `include`, and call it in your workflow.
 The next exercise applies these same steps to a real-world plugin.
@@ -145,14 +194,7 @@ The next exercise applies these same steps to a real-world plugin.
 The [nf-schema](https://github.com/nextflow-io/nf-schema) plugin is one of the most widely-used Nextflow plugins.
 It provides `samplesheetToList`, a function that parses CSV/TSV files using a JSON schema that defines the expected columns and types.
 
-In `main.nf`, the pipeline reads `greetings.csv` using `splitCsv` and a manual `map`:
-
-```groovy
-greeting_ch = channel.fromPath(params.input)
-                    .splitCsv(header: true)
-                    .map { row -> row.greeting }
-```
-
+The pipeline currently reads `greetings.csv` using `splitCsv` and a manual `map`.
 The nf-schema plugin can replace this with validated, schema-driven parsing.
 A JSON schema file (`greetings_schema.json`) is provided in the exercise directory.
 
@@ -207,80 +249,90 @@ Update `nextflow.config` to include both plugins:
     }
     ```
 
-#### 2.2.3. See the starting point
+#### 2.2.3. Update hello.nf to use samplesheetToList
 
-The `schema_example.nf` file reads `greetings.csv` using the same `splitCsv` + `map` pattern from `main.nf`:
-
-```bash
-cat schema_example.nf
-```
-
-```groovy title="Output"
-#!/usr/bin/env nextflow
-
-params.input = 'greetings.csv'
-
-workflow {
-    Channel.fromPath(params.input)
-        .splitCsv(header: true)
-        .map { row -> row.greeting }
-        .view { greeting -> "Greeting: $greeting" }
-}
-```
-
-#### 2.2.4. Update it to use samplesheetToList
-
-Replace the `splitCsv` + `map` pattern with `samplesheetToList`:
+Replace the `splitCsv` input with `samplesheetToList`:
 
 === "After"
 
-    ```groovy title="schema_example.nf" hl_lines="3 7-8"
+    ```groovy title="hello.nf" hl_lines="4 20 21"
     #!/usr/bin/env nextflow
 
+    include { randomString } from 'plugin/nf-hello'
     include { samplesheetToList } from 'plugin/nf-schema'
 
     params.input = 'greetings.csv'
 
+    process SAY_HELLO {
+        input:
+            val greeting
+        output:
+            stdout
+        script:
+        """
+        echo '$greeting'
+        """
+    }
+
     workflow {
-        Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-            .map { row -> row[0] }
-            .view { greeting -> "Greeting: $greeting" }
+        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+                            .map { row -> "${row[0]}_${randomString(8)}" }
+        SAY_HELLO(greeting_ch)
+        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
     ```
 
 === "Before"
 
-    ```groovy title="schema_example.nf"
+    ```groovy title="hello.nf" hl_lines="19 20 21"
     #!/usr/bin/env nextflow
+
+    include { randomString } from 'plugin/nf-hello'
 
     params.input = 'greetings.csv'
 
+    process SAY_HELLO {
+        input:
+            val greeting
+        output:
+            stdout
+        script:
+        """
+        echo '$greeting'
+        """
+    }
+
     workflow {
-        Channel.fromPath(params.input)
-            .splitCsv(header: true)
-            .map { row -> row.greeting }
-            .view { greeting -> "Greeting: $greeting" }
+        greeting_ch = channel.fromPath(params.input)
+                            .splitCsv(header: true)
+                            .map { row -> "${row.greeting}_${randomString(8)}" }
+        SAY_HELLO(greeting_ch)
+        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
     ```
 
 Instead of `splitCsv` and a manual `map` to extract fields, `samplesheetToList` parses the CSV according to the schema.
 Each row becomes a list of values in column order, so `row[0]` is the greeting and `row[1]` is the language.
 
-#### 2.2.5. Run it
+#### 2.2.4. Run it
 
 ```bash
-nextflow run schema_example.nf
+nextflow run hello.nf
 ```
 
 ```console title="Output"
-Greeting: Hello
-Greeting: Bonjour
-Greeting: Holà
-Greeting: Ciao
-Greeting: Hallo
+Pipeline is starting! 🚀
+Output: Hello_diozjdwm
+Output: Bonjour_speathmm
+Output: Holà_dllxnzap
+Output: Ciao_wzueddzc
+Output: Hallo_hsxwrjbh
+Pipeline complete! 👋
 ```
 
-The result is the same, but the schema adds validation.
+(Your random strings will differ.)
+
+The output is the same, but the schema adds validation.
 In real pipelines, `samplesheetToList` is used to parse complex sample sheets with many columns, where manual `splitCsv` + `map` would be error-prone.
 
 Both nf-hello and nf-schema are function plugins: they provide functions that you import with `include` and call in your workflow code.
@@ -320,7 +372,7 @@ Update `nextflow.config`:
 ### 3.2. Run the pipeline
 
 ```bash
-nextflow run main.nf
+nextflow run hello.nf
 ```
 
 You'll see additional log messages from the plugin during execution, including some warnings.
@@ -360,34 +412,6 @@ This plugin works entirely through the observer mechanism.
 It hooks into workflow lifecycle events to collect resource metrics, then generates its report when the pipeline completes.
 No `include` statement is needed because it doesn't provide functions; it runs automatically once declared in the config.
 
-### 3.4. Clean up
-
-Remove the nf-schema and nf-co2footprint plugins from `nextflow.config` before continuing (they add noise to the output in later exercises):
-
-=== "After"
-
-    ```groovy title="nextflow.config"
-    plugins {
-        id 'nf-hello@0.5.0'
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="nextflow.config"
-    plugins {
-        id 'nf-hello@0.5.0'
-        id 'nf-schema@2.6.1'
-        id 'nf-co2footprint'
-    }
-    ```
-
-Also clean up the generated files:
-
-```bash
-rm -f co2footprint_*
-```
-
 You've now tried function plugins (imported with `include`) and an observer plugin (activated through config alone).
 These are the two most common extension types, but as the table in section 1 shows, plugins can also add executors and filesystems.
 
@@ -400,6 +424,30 @@ The [Nextflow Plugin Registry](https://registry.nextflow.io/) is the central hub
 ![The nf-hello plugin page on registry.nextflow.io](img/plugin-registry-nf-hello.png)
 
 Each plugin page shows its description, available versions, installation instructions, and links to documentation.
+
+---
+
+## 5. Prepare for plugin development
+
+The following sections (Parts 2-6) use a separate pipeline file, `greet.nf`, which relies on nf-schema but not nf-hello or nf-co2footprint.
+
+Update `nextflow.config` to keep only nf-schema:
+
+```groovy title="nextflow.config"
+// Configuration for plugin development exercises
+plugins {
+    id 'nf-schema@2.6.1'
+}
+```
+
+Remove the co2footprint output files:
+
+```bash
+rm -f co2footprint_*
+```
+
+The `hello.nf` file retains your Part 1 work for reference.
+Going forward, you'll work with `greet.nf`.
 
 ---
 

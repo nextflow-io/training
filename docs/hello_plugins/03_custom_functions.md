@@ -1,6 +1,6 @@
 # Part 3: Custom Functions
 
-By the end of this section, you'll have three custom functions in your plugin, built and installed locally, running in a real workflow.
+By the end of this section, you'll have custom functions in your plugin, built and installed locally, running in a real workflow.
 
 !!! tip "Starting from here?"
 
@@ -10,15 +10,15 @@ By the end of this section, you'll have three custom functions in your plugin, b
     cp -r solutions/2-create-project/* .
     ```
 
-    Then change into the plugin directory:
-
-    ```bash
-    cd nf-greeting
-    ```
-
 ---
 
 ## 1. See what the template generated
+
+Change into the plugin directory:
+
+```bash
+cd nf-greeting
+```
 
 Functions are defined in classes that extend `PluginExtensionPoint`.
 Open the extension file to see what the template created:
@@ -138,54 +138,33 @@ Build the plugin:
 make assemble
 ```
 
-??? example "Build output"
-
-    The first time you run this, Gradle will download itself (this may take a minute):
-
-    ```console
-    Downloading https://services.gradle.org/distributions/gradle-8.14-bin.zip
-    ...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
-
-    Welcome to Gradle 8.14!
-    ...
-
-    Deprecated Gradle features were used in this build...
-
-    BUILD SUCCESSFUL in 23s
-    4 actionable tasks: 4 executed
-    ```
-
-    **The warnings are expected.**
-
-    - **"Downloading gradle..."**: This only happens the first time. Subsequent builds are much faster.
-    - **"Deprecated Gradle features..."**: This warning comes from the plugin template, not your code. It's safe to ignore.
-    - **"BUILD SUCCESSFUL"**: This is what matters. Your plugin compiled without errors.
-
-??? info "What is `./gradlew`?"
-
-    The `./gradlew` script is the **Gradle wrapper**, a small script included with the project that automatically downloads and runs the correct version of Gradle.
-
-    This means you don't need Gradle installed on your system.
-    The `make` commands in the Makefile are shortcuts that call `./gradlew` for you.
-
-Install the plugin to your local plugins directory:
+Install the plugin:
 
 ```bash
 make install
 ```
 
-??? example "Install output"
+!!! tip "If the build fails"
 
-    ```console
-    > Task :installPlugin
-    Plugin nf-greeting installed successfully!
-    Installation location: /home/codespace/.nextflow/plugins
-    Installation location determined by - Default location (~/.nextflow/plugins)
+    Build errors usually point to a specific problem.
+    Common issues include:
 
-    BUILD SUCCESSFUL in 1s
-    ```
+    - **Syntax errors**: A missing bracket, quote, or semicolon. The error message usually includes a line number.
+    - **Import errors**: A class name is misspelled or the import statement is missing.
+    - **Type errors**: You're passing the wrong type of data to a function.
 
-This copies the plugin to `$NXF_HOME/plugins/` (typically `~/.nextflow/plugins/`), where Nextflow can find it.
+    Read the error message carefully.
+    It often tells you exactly what's wrong and where.
+    If you're stuck, compare your code character-by-character with the examples.
+
+??? warning "Common runtime issues"
+
+    Even if the build succeeds, you might encounter issues when running:
+
+    - **"Plugin not found"**: Did you run `make install`? The plugin must be installed locally before Nextflow can use it.
+    - **"Unknown function"**: Check that you've imported the function with `include { functionName } from 'plugin/nf-greeting'`.
+    - **Wrong directory**: Make sure you're in the right directory. Use `pwd` to check, and `cd ..` or `cd nf-greeting` as needed.
+    - **IDE showing errors**: The VS Code Nextflow extension may show warnings for plugin imports. If the build succeeds and Nextflow runs correctly, you can ignore these.
 
 ---
 
@@ -197,28 +176,14 @@ Go back to the pipeline directory:
 cd ..
 ```
 
-Edit `nextflow.config` to add the `nf-greeting` plugin:
-
-```groovy title="nextflow.config"
-// Configuration for plugin development exercises
-plugins {
-    id 'nf-greeting@0.1.0'
-}
-```
-
-!!! note "Version required for local plugins"
-
-    When using locally installed plugins, you must specify the version (e.g., `nf-greeting@0.1.0`).
-    Published plugins in the registry can use just the name.
-
-Edit `main.nf` to import and use `reverseGreeting`:
+Edit `greet.nf` to import and use `reverseGreeting`:
 
 === "After"
 
-    ```groovy title="main.nf" hl_lines="3-4 24-26" linenums="1"
+    ```groovy title="greet.nf" hl_lines="4 23-25" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Import custom function from our plugin
+    include { samplesheetToList } from 'plugin/nf-schema'
     include { reverseGreeting } from 'plugin/nf-greeting'
 
     params.input = 'greetings.csv'
@@ -235,9 +200,8 @@ Edit `main.nf` to import and use `reverseGreeting`:
     }
 
     workflow {
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv(header: true)
-                            .map { row -> row.greeting }
+        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+                            .map { row -> row[0] }
 
         greeting_ch
             .map { greeting -> reverseGreeting(greeting) }
@@ -250,8 +214,10 @@ Edit `main.nf` to import and use `reverseGreeting`:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1"
+    ```groovy title="greet.nf" linenums="1"
     #!/usr/bin/env nextflow
+
+    include { samplesheetToList } from 'plugin/nf-schema'
 
     params.input = 'greetings.csv'
 
@@ -267,9 +233,8 @@ Edit `main.nf` to import and use `reverseGreeting`:
     }
 
     workflow {
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv(header: true)
-                            .map { row -> row.greeting }
+        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+                            .map { row -> row[0] }
         SAY_HELLO(greeting_ch)
         SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
@@ -278,7 +243,7 @@ Edit `main.nf` to import and use `reverseGreeting`:
 Run the pipeline:
 
 ```bash
-nextflow run main.nf
+nextflow run greet.nf
 ```
 
 ??? example "Output"
@@ -286,7 +251,7 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `main.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
 
     Pipeline is starting! 🚀
     executor >  local (5)
@@ -304,15 +269,13 @@ nextflow run main.nf
     Pipeline complete! 👋
     ```
 
-    The "Pipeline is starting!" and "Pipeline complete!" messages come from the `GreetingObserver` trace observer included in the generated plugin template.
-
-Your first plugin function is working in a real workflow.
-You've now completed the full development cycle: edit the plugin code, build with `make assemble`, install with `make install`, and run the pipeline.
+Your first custom plugin function is working in a real workflow.
+The same `include { ... } from 'plugin/...'` pattern you used with nf-hello and nf-schema in Part 1 works with your own plugin.
 
 ??? exercise "Try a different transformation"
 
     Change the `map` closure to pass a different string to `reverseGreeting`, like your own name.
-    No rebuild is needed since the plugin function is already installed; just edit `main.nf` and rerun.
+    No rebuild is needed since the plugin function is already installed; just edit `greet.nf` and rerun.
 
     ??? solution
 
@@ -392,13 +355,14 @@ Build, install, and update the workflow:
 cd nf-greeting && make assemble && make install && cd ..
 ```
 
-Update `main.nf` to also import and use `decorateGreeting`:
+Update `greet.nf` to also import and use `decorateGreeting`:
 
 === "After"
 
-    ```groovy title="main.nf" hl_lines="5 15-16 18" linenums="1"
+    ```groovy title="greet.nf" hl_lines="4-6 16-17 19 33" linenums="1"
     #!/usr/bin/env nextflow
 
+    include { samplesheetToList } from 'plugin/nf-schema'
     // Import custom functions from our plugin
     include { reverseGreeting } from 'plugin/nf-greeting'
     include { decorateGreeting } from 'plugin/nf-greeting'
@@ -419,9 +383,8 @@ Update `main.nf` to also import and use `decorateGreeting`:
     }
 
     workflow {
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv(header: true)
-                            .map { row -> row.greeting }
+        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+                            .map { row -> row[0] }
 
         // Demonstrate using reverseGreeting function
         greeting_ch
@@ -435,10 +398,10 @@ Update `main.nf` to also import and use `decorateGreeting`:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="1" hl_lines="4 16"
+    ```groovy title="greet.nf" linenums="1" hl_lines="4 15 28"
     #!/usr/bin/env nextflow
 
-    // Import custom function from our plugin
+    include { samplesheetToList } from 'plugin/nf-schema'
     include { reverseGreeting } from 'plugin/nf-greeting'
 
     params.input = 'greetings.csv'
@@ -455,9 +418,8 @@ Update `main.nf` to also import and use `decorateGreeting`:
     }
 
     workflow {
-        greeting_ch = channel.fromPath(params.input)
-                            .splitCsv(header: true)
-                            .map { row -> row.greeting }
+        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+                            .map { row -> row[0] }
 
         greeting_ch
             .map { greeting -> reverseGreeting(greeting) }
@@ -469,7 +431,7 @@ Update `main.nf` to also import and use `decorateGreeting`:
     ```
 
 ```bash
-nextflow run main.nf
+nextflow run greet.nf
 ```
 
 ??? example "Output"
@@ -477,7 +439,7 @@ nextflow run main.nf
     ```console
     N E X T F L O W   ~  version 25.10.2
 
-    Launching `main.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
+    Launching `greet.nf` [elated_marconi] DSL2 - revision: cd8d52c97c
 
     Pipeline is starting! 🚀
     executor >  local (5)
@@ -497,40 +459,16 @@ nextflow run main.nf
 
 Plugin functions work in both process scripts (like `decorateGreeting` inside `SAY_HELLO`) and workflow operations (like `reverseGreeting` in a `map`).
 
----
+??? exercise "Add a function with default parameters"
 
-## 6. Add friendlyGreeting
+    Add a third function, `friendlyGreeting`, that combines a greeting with a name.
+    Use a default parameter value so the name is optional.
 
-Add a third function that demonstrates default parameter values.
+    ??? solution
 
-Add this method after `decorateGreeting` in `GreetingExtension.groovy`:
+        Add this method after `decorateGreeting` in `GreetingExtension.groovy`:
 
-=== "After"
-
-    ```groovy title="GreetingExtension.groovy" linenums="24" hl_lines="24-30"
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
-
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * Reverse a greeting string
-         */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
-
-        /**
-         * Decorate a greeting with celebratory markers
-         */
-        @Function
-        String decorateGreeting(String greeting) {
-            return "*** ${greeting} ***"
-        }
-
+        ```groovy
         /**
          * Convert greeting to a friendly format with a name
          */
@@ -538,69 +476,16 @@ Add this method after `decorateGreeting` in `GreetingExtension.groovy`:
         String friendlyGreeting(String greeting, String name = 'World') {
             return "${greeting}, ${name}!"
         }
+        ```
 
-    }
-    ```
+        The `String name = 'World'` syntax provides a default value, just like in Python.
+        Users can call `friendlyGreeting('Hello')` or `friendlyGreeting('Hello', 'Alice')`.
 
-=== "Before"
+        Build and install, then try it in a `map`:
 
-    ```groovy title="GreetingExtension.groovy" linenums="24"
-    @CompileStatic
-    class GreetingExtension extends PluginExtensionPoint {
-
-        @Override
-        protected void init(Session session) {
-        }
-
-        /**
-         * Reverse a greeting string
-         */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
-        }
-
-        /**
-         * Decorate a greeting with celebratory markers
-         */
-        @Function
-        String decorateGreeting(String greeting) {
-            return "*** ${greeting} ***"
-        }
-
-    }
-    ```
-
-The `String name = 'World'` syntax provides a default value, just like in Python.
-Users can call `friendlyGreeting('Hello')` or `friendlyGreeting('Hello', 'Alice')`.
-
-Build and install:
-
-```bash
-cd nf-greeting && make assemble && make install && cd ..
-```
-
-!!! tip "If the build fails"
-
-    Build errors can be intimidating, but they usually point to a specific problem.
-    Common issues include:
-
-    - **Syntax errors**: A missing bracket, quote, or semicolon. The error message usually includes a line number.
-    - **Import errors**: A class name is misspelled or the import statement is missing.
-    - **Type errors**: You're passing the wrong type of data to a function.
-
-    Read the error message carefully.
-    It often tells you exactly what's wrong and where.
-    If you're stuck, compare your code character-by-character with the examples.
-
-??? warning "Common runtime issues"
-
-    Even if the build succeeds, you might encounter issues when running:
-
-    - **"Plugin not found"**: Did you run `make install`? The plugin must be installed locally before Nextflow can use it.
-    - **"Unknown function"**: Check that you've imported the function with `include { functionName } from 'plugin/nf-greeting'`.
-    - **Wrong directory**: Make sure you're in the right directory. Use `pwd` to check, and `cd ..` or `cd nf-greeting` as needed.
-    - **IDE showing errors**: The VS Code Nextflow extension may show warnings for plugin imports. If the build succeeds and Nextflow runs correctly, you can ignore these.
+        ```bash
+        cd nf-greeting && make assemble && make install && cd ..
+        ```
 
 ---
 
@@ -609,7 +494,7 @@ cd nf-greeting && make assemble && make install && cd ..
 You learned that:
 
 - Functions are defined with the `@Function` annotation in `PluginExtensionPoint` subclasses
-- The development cycle is: edit code, `make assemble`, `make install`, run the pipeline
+- Plugin functions imported with `include` work identically whether from your own plugin or an existing one
 - Plugin functions work in both process scripts and workflow operations
 - Methods can accept parameters with default values
 
