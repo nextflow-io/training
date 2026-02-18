@@ -7,7 +7,8 @@ In this section, you'll use an existing plugin in a Nextflow workflow, then lear
 ## 1. Use a plugin in a workflow
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
-You'll replace a local function with the plugin version to see how plugins work in practice.
+In this exercise, you'll start with a workflow that defines this function locally, then replace it with the plugin version.
+This demonstrates the core plugin workflow: declare a plugin, import its functions, and use them like any other Nextflow function.
 
 ### 1.1. See the starting point
 
