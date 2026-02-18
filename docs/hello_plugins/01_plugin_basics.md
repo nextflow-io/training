@@ -18,14 +18,45 @@ The `random_id_example.nf` file contains a workflow with a local `randomString` 
 cat random_id_example.nf
 ```
 
-Run it to see the output:
+```groovy title="Output"
+#!/usr/bin/env nextflow
+
+/**
+ * Generate a random alphanumeric string
+ */
+def randomString(int length) {
+    def chars = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+    def random = new Random()
+    return (1..length).collect { chars[random.nextInt(chars.size())] }.join()
+}
+
+workflow {
+    // Generate random IDs for each sample
+    Channel.of('sample_A', 'sample_B', 'sample_C')
+        .map { sample -> "${sample}_${randomString(8)}" }
+        .view()
+}
+```
+
+The workflow creates a channel of three sample names and appends a random string to each one.
+The `randomString` function is defined locally at the top of the file.
+
+Run it:
 
 ```bash
 nextflow run random_id_example.nf
 ```
 
-This works, but the function is trapped in this file.
-The plugin version can be shared across any pipeline.
+```console title="Output"
+sample_A_Pmlkc9S0
+sample_B_ErYxlPsF
+sample_C_AJvSgOVt
+```
+
+(Your random strings will differ.)
+
+This works, but the function is defined in this file and can't be reused elsewhere.
+A plugin version can be shared across any pipeline.
 
 ### 1.2. Configure the plugin
 
