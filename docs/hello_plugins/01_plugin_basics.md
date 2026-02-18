@@ -18,17 +18,22 @@ Plugins extend Nextflow through several types of extension:
 Functions and workflow monitors (called "trace observers" in the Nextflow API) are the most common types for plugin authors.
 Executors and filesystems are typically created by platform vendors.
 
-The next three exercises show you function plugins and an observer plugin, so you can see both types in action.
+The next exercises show you function plugins and an observer plugin, so you can see both types in action.
 
 ---
 
-## 2. Use a function plugin: nf-hello
+## 2. Use function plugins
+
+Function plugins add callable functions that you import into your workflows.
+You'll try two: nf-hello (a simple example) and nf-schema (a widely-used real-world plugin).
+
+### 2.1. nf-hello: replace a local function
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
-In this exercise, you'll start with a workflow that defines this function locally, then replace it with the plugin version.
+You'll start with a workflow that defines this function locally, then replace it with the plugin version.
 This demonstrates the core plugin workflow: declare a plugin, import its functions, and use them like any other Nextflow function.
 
-### 2.1. See the starting point
+#### 2.1.1. See the starting point
 
 The `random_id_example.nf` file contains a workflow with a local `randomString` function:
 
@@ -77,7 +82,7 @@ This works, but the `randomString` function is defined inside this script.
 If you wanted to use it in another pipeline, you'd have to copy it.
 A plugin solves this by packaging the function so any pipeline can import it.
 
-### 2.2. Configure the plugin
+#### 2.1.2. Configure the plugin
 
 Add the plugin to your `nextflow.config`:
 
@@ -91,7 +96,7 @@ plugins {
 Plugins are declared in `nextflow.config` using the `plugins {}` block.
 Nextflow automatically downloads them from the registry at runtime.
 
-### 2.3. Use the plugin function
+#### 2.1.3. Use the plugin function
 
 Update `random_id_example.nf` to import `randomString` from the plugin instead of defining it locally:
 
@@ -112,7 +117,7 @@ Import plugin functions with `include { function } from 'plugin/plugin-id'`.
 This is the same `include` syntax used for Nextflow modules, with a `plugin/` prefix.
 You can see the [source code for `randomString`](https://github.com/nextflow-io/nf-hello/blob/e67bddebfa589c7ae51f41bf780c92068dc09e93/plugins/nf-hello/src/main/nextflow/hello/HelloExtension.groovy#L110) in the nf-hello repository on GitHub.
 
-### 2.4. Run it
+#### 2.1.4. Run it
 
 ```bash
 nextflow run random_id_example.nf
@@ -132,9 +137,7 @@ The plugin version generates lowercase strings, while the local version used mix
 The first time you use a plugin, Nextflow downloads it automatically from the registry.
 After that, any pipeline that declares `nf-hello@0.5.0` gets the exact same `randomString` function without needing to copy code between projects.
 
----
-
-## 3. Use a function plugin: nf-schema
+### 2.2. nf-schema: validated CSV parsing
 
 The [nf-schema](https://github.com/nextflow-io/nf-schema) plugin is one of the most widely-used Nextflow plugins.
 It provides `samplesheetToList`, a function that parses CSV/TSV files using a JSON schema that defines the expected columns and types.
@@ -150,7 +153,7 @@ greeting_ch = channel.fromPath(params.input)
 The nf-schema plugin can replace this with validated, schema-driven parsing.
 A JSON schema file (`greetings_schema.json`) is provided in the exercise directory.
 
-### 3.1. Look at the schema
+#### 2.2.1. Look at the schema
 
 ```bash
 cat greetings_schema.json
@@ -180,7 +183,7 @@ cat greetings_schema.json
 The schema defines two columns (`greeting` and `language`) and marks `greeting` as required.
 If someone passes a CSV missing the `greeting` column, nf-schema catches the error before the pipeline runs.
 
-### 3.2. Add nf-schema to the config
+#### 2.2.2. Add nf-schema to the config
 
 Update `nextflow.config` to include both plugins:
 
@@ -201,7 +204,7 @@ Update `nextflow.config` to include both plugins:
     }
     ```
 
-### 3.3. See the starting point
+#### 2.2.3. See the starting point
 
 The `schema_example.nf` file reads `greetings.csv` using the same `splitCsv` + `map` pattern from `main.nf`:
 
@@ -222,7 +225,7 @@ workflow {
 }
 ```
 
-### 3.4. Update it to use samplesheetToList
+#### 2.2.4. Update it to use samplesheetToList
 
 Replace the `splitCsv` + `map` pattern with `samplesheetToList`:
 
@@ -260,7 +263,7 @@ Replace the `splitCsv` + `map` pattern with `samplesheetToList`:
 Instead of `splitCsv` and a manual `map` to extract fields, `samplesheetToList` parses the CSV according to the schema.
 Each row becomes a list of values in column order, so `row[0]` is the greeting and `row[1]` is the language.
 
-### 3.5. Run it
+#### 2.2.5. Run it
 
 ```bash
 nextflow run schema_example.nf
@@ -279,13 +282,13 @@ In real pipelines, `samplesheetToList` is used to parse complex sample sheets wi
 
 ---
 
-## 4. Use an observer plugin: nf-co2footprint
+## 3. Use an observer plugin: nf-co2footprint
 
 Not all plugins provide functions to import.
 The [nf-co2footprint](https://github.com/nextflow-io/nf-co2footprint) plugin uses a **trace observer** to monitor your pipeline's resource usage and estimate its carbon footprint.
 You don't need to change any pipeline code; just add it to the config.
 
-### 4.1. Add nf-co2footprint to the config
+### 3.1. Add nf-co2footprint to the config
 
 Update `nextflow.config`:
 
@@ -308,7 +311,7 @@ Update `nextflow.config`:
     }
     ```
 
-### 4.2. Run the pipeline
+### 3.2. Run the pipeline
 
 ```bash
 nextflow run main.nf
@@ -325,7 +328,7 @@ At the end, look for a line like:
 
 (Your numbers will differ.)
 
-### 4.3. View the report
+### 3.3. View the report
 
 The plugin generates output files in your working directory:
 
@@ -351,7 +354,7 @@ This plugin works entirely through the observer mechanism.
 It hooks into workflow lifecycle events to collect resource metrics, then generates its report when the pipeline completes.
 No `include` statement is needed because it doesn't provide functions; it runs automatically once declared in the config.
 
-### 4.4. Clean up
+### 3.4. Clean up
 
 Remove the nf-schema and nf-co2footprint plugins from `nextflow.config` before continuing (they add noise to the output in later exercises):
 
@@ -381,7 +384,7 @@ rm -f co2footprint_*
 
 ---
 
-## 5. Discovering plugins
+## 4. Discovering plugins
 
 The [Nextflow Plugin Registry](https://registry.nextflow.io/) is the central hub for finding available plugins.
 
