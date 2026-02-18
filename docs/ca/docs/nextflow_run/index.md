@@ -46,11 +46,11 @@ Si busques una introducció al desenvolupament de pipelines de Nextflow, consult
 
 Hem dividit això en tres parts que se centraran cadascuna en aspectes específics de l'execució i gestió de pipelines escrits en Nextflow.
 
-| Capítol del curs                                      | Resum                                                                                                                                                | Durada estimada |
-| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| [Part 1: Operacions bàsiques d'execució](./01_basics.md) | Llançar i gestionar l'execució d'un workflow senzill                                                                                                 | 30 minuts       |
-| [Part 2: Executar pipelines reals](./02_pipeline.md)    | Processar entrades complexes, executar workflows de múltiples passos, utilitzar contenidors i paral·lelitzar l'execució sense esforç                | 60 minuts       |
-| [Part 3: Configuració d'execució](./03_config.md)       | Personalitzar el comportament del pipeline i optimitzar l'ús en diferents entorns computacionals                                                    | 60 minuts       |
+| Capítol del curs                                         | Resum                                                                                                                                | Durada estimada |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
+| [Part 1: Operacions bàsiques d'execució](./01_basics.md) | Llançar i gestionar l'execució d'un workflow senzill                                                                                 | 30 minuts       |
+| [Part 2: Executar pipelines reals](./02_pipeline.md)     | Processar entrades complexes, executar workflows de múltiples passos, utilitzar contenidors i paral·lelitzar l'execució sense esforç | 60 minuts       |
+| [Part 3: Configuració d'execució](./03_config.md)        | Personalitzar el comportament del pipeline i optimitzar l'ús en diferents entorns computacionals                                     | 60 minuts       |
 
 Al final d'aquest curs, estaràs ben preparat/da per abordar els següents passos en el teu viatge per executar workflows reproduïbles per a les teves necessitats de computació científica.
 

@@ -38,11 +38,11 @@ Inizierete eseguendo gli strumenti di analisi manualmente nel terminale per comp
 
 Abbiamo suddiviso il corso in tre parti che si concentrano ciascuna su aspetti specifici dell'applicazione di Nextflow a un caso d'uso in {DOMAIN}.
 
-| Capitolo del corso                                        | Riepilogo                                                                                                      | Durata stimata |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------- |
-| [Parte 1: Panoramica del metodo](./01_method.md)          | Comprensione della metodologia {METHOD} ed esecuzione manuale degli strumenti                                  | 30 min         |
-| [Parte 2: Elaborazione singolo campione](./02_single_sample.md) | Costruzione di una pipeline che {PART2_SUMMARY}, quindi scalatura a più campioni                               | 60 min         |
-| [Parte 3: Aggregazione multi-campione](./03_multi_sample.md)   | Aggiunta di {AGGREGATION_SUMMARY} multi-campione utilizzando operatori di canale per aggregare output per campione | 45 min         |
+| Capitolo del corso                                              | Riepilogo                                                                                                          | Durata stimata |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------- |
+| [Parte 1: Panoramica del metodo](./01_method.md)                | Comprensione della metodologia {METHOD} ed esecuzione manuale degli strumenti                                      | 30 min         |
+| [Parte 2: Elaborazione singolo campione](./02_single_sample.md) | Costruzione di una pipeline che {PART2_SUMMARY}, quindi scalatura a più campioni                                   | 60 min         |
+| [Parte 3: Aggregazione multi-campione](./03_multi_sample.md)    | Aggiunta di {AGGREGATION_SUMMARY} multi-campione utilizzando operatori di canale per aggregare output per campione | 45 min         |
 
 Al termine di questo corso, sarete in grado di applicare concetti fondamentali di Nextflow e strumenti a un caso d'uso tipico in {DOMAIN}.
 

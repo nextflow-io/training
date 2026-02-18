@@ -38,11 +38,11 @@ Metodolojiyi anlamak için analiz araçlarını terminalde manuel olarak çalı�
 
 Bunu, her biri Nextflow'u bir {DOMAIN} kullanım senaryosuna uygulamanın belirli yönlerine odaklanan üç bölüme ayırdık.
 
-| Kurs bölümü                                               | Özet                                                                                                                | Tahmini süre |
-| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------ |
-| [Bölüm 1: Metoda genel bakış](./01_method.md)             | {METHOD} metodolojisini anlama ve araçları manuel olarak çalıştırma                                                 | 30 dakika    |
-| [Bölüm 2: Tek örnekli işleme](./02_single_sample.md)      | {PART2_SUMMARY} yapan bir boru hattı oluşturma, ardından birden fazla örneğe ölçeklendirme                          | 60 dakika    |
-| [Bölüm 3: Çok örnekli toplama](./03_multi_sample.md)      | Örnek başına çıktıları toplamak için kanal operatörlerini kullanarak çok örnekli {AGGREGATION_SUMMARY} ekleme       | 45 dakika    |
+| Kurs bölümü                                          | Özet                                                                                                          | Tahmini süre |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------ |
+| [Bölüm 1: Metoda genel bakış](./01_method.md)        | {METHOD} metodolojisini anlama ve araçları manuel olarak çalıştırma                                           | 30 dakika    |
+| [Bölüm 2: Tek örnekli işleme](./02_single_sample.md) | {PART2_SUMMARY} yapan bir boru hattı oluşturma, ardından birden fazla örneğe ölçeklendirme                    | 60 dakika    |
+| [Bölüm 3: Çok örnekli toplama](./03_multi_sample.md) | Örnek başına çıktıları toplamak için kanal operatörlerini kullanarak çok örnekli {AGGREGATION_SUMMARY} ekleme | 45 dakika    |
 
 Bu kursun sonunda, temel Nextflow kavramlarını ve araçlarını tipik bir {DOMAIN} kullanım senaryosuna uygulayabileceksiniz.
 
