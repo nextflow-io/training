@@ -1,6 +1,6 @@
 # Part 1: Plugin Basics
 
-In this section, you'll use an existing plugin in a Nextflow workflow, then learn how plugins extend Nextflow.
+In this section, you'll use three different plugins to see how they extend Nextflow in different ways.
 
 ---
 
@@ -130,9 +130,188 @@ Plugins extend Nextflow through several types of extension:
 Functions and workflow monitors (called "trace observers" in the Nextflow API) are the most common types for plugin authors.
 Executors and filesystems are typically created by platform vendors.
 
+The nf-hello plugin from section 1 provides a **function** (`randomString`).
+The next two exercises show you a real-world function plugin and an observer plugin, so you can see both types in action.
+
 ---
 
-## 3. Discovering plugins
+## 3. Use a function plugin: nf-schema
+
+The [nf-schema](https://github.com/nextflow-io/nf-schema) plugin is one of the most widely-used Nextflow plugins.
+It provides `samplesheetToList`, a function that parses CSV/TSV files using a JSON schema that defines the expected columns and types.
+
+In `main.nf`, the pipeline reads `greetings.csv` using `splitCsv` and a manual `map`:
+
+```groovy
+greeting_ch = channel.fromPath(params.input)
+                    .splitCsv(header: true)
+                    .map { row -> row.greeting }
+```
+
+The nf-schema plugin can replace this with validated, schema-driven parsing.
+A JSON schema file (`greetings_schema.json`) is provided in the exercise directory.
+
+### 3.1. Look at the schema
+
+```bash
+cat greetings_schema.json
+```
+
+```json title="Output"
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "greeting": {
+        "type": "string",
+        "description": "The greeting text"
+      },
+      "language": {
+        "type": "string",
+        "description": "The language of the greeting"
+      }
+    },
+    "required": ["greeting"]
+  }
+}
+```
+
+The schema defines two columns (`greeting` and `language`) and marks `greeting` as required.
+If someone passes a CSV missing the `greeting` column, nf-schema catches the error before the pipeline runs.
+
+### 3.2. Add nf-schema to the config
+
+Update `nextflow.config` to include both plugins:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-hello@0.5.0'
+    id 'nf-schema@2.6.1'
+}
+```
+
+### 3.3. Create a workflow that uses samplesheetToList
+
+Create a new file `schema_example.nf`:
+
+```groovy title="schema_example.nf"
+#!/usr/bin/env nextflow
+
+include { samplesheetToList } from 'plugin/nf-schema'
+
+params.input = 'greetings.csv'
+
+workflow {
+    Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        .map { row -> row[0] }
+        .view { greeting -> "Greeting: $greeting" }
+}
+```
+
+Instead of `splitCsv` and a manual `map` to extract fields, `samplesheetToList` parses the CSV according to the schema.
+Each row becomes a list of values in column order, so `row[0]` is the greeting and `row[1]` is the language.
+
+### 3.4. Run it
+
+```bash
+nextflow run schema_example.nf
+```
+
+```console title="Output"
+Greeting: Hello
+Greeting: Bonjour
+Greeting: Holà
+Greeting: Ciao
+Greeting: Hallo
+```
+
+The result is the same, but the schema adds validation.
+In real pipelines, `samplesheetToList` is used to parse complex sample sheets with many columns, where manual `splitCsv` + `map` would be error-prone.
+
+---
+
+## 4. Use an observer plugin: nf-co2footprint
+
+Not all plugins provide functions to import.
+The [nf-co2footprint](https://github.com/nextflow-io/nf-co2footprint) plugin uses a **trace observer** to monitor your pipeline's resource usage and estimate its carbon footprint.
+You don't need to change any pipeline code; just add it to the config.
+
+### 4.1. Add nf-co2footprint to the config
+
+Update `nextflow.config`:
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-hello@0.5.0'
+    id 'nf-schema@2.6.1'
+    id 'nf-co2footprint'
+}
+```
+
+### 4.2. Run the pipeline
+
+```bash
+nextflow run main.nf
+```
+
+You'll see additional log messages from the plugin during execution, including some warnings.
+These are normal; the plugin is estimating resource usage with limited information from this small example.
+
+At the end, look for a line like:
+
+```console title="Output (partial)"
+🌱 The workflow run used 163.4 uWh of electricity, resulting in the release of 78.43 ug of CO₂ equivalents into the atmosphere.
+```
+
+(Your numbers will differ.)
+
+### 4.3. View the report
+
+The plugin generates output files in your working directory:
+
+```bash
+ls co2footprint_*
+```
+
+```console title="Output"
+co2footprint_report_<timestamp>.html
+co2footprint_summary_<timestamp>.txt
+co2footprint_trace_<timestamp>.txt
+```
+
+Look at the summary:
+
+```bash
+cat co2footprint_summary_*.txt
+```
+
+The summary converts the CO2 estimate into relatable comparisons, like the equivalent distance driven by car or the time a tree would need to sequester the same amount.
+
+This plugin works entirely through the observer mechanism.
+It hooks into workflow lifecycle events to collect resource metrics, then generates its report when the pipeline completes.
+No `include` statement is needed because it doesn't provide functions; it runs automatically once declared in the config.
+
+### 4.4. Clean up
+
+Remove the co2footprint plugin from `nextflow.config` before continuing (it adds noise to the output in later exercises):
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-hello@0.5.0'
+}
+```
+
+Also clean up the generated files:
+
+```bash
+rm -f co2footprint_*
+```
+
+---
+
+## 5. Discovering plugins
 
 The [Nextflow Plugin Registry](https://registry.nextflow.io/) is the central hub for finding available plugins.
 
@@ -144,12 +323,18 @@ Each plugin page shows its description, available versions, installation instruc
 
 ## Takeaway
 
-You learned that:
+You used three different plugins:
+
+- **nf-hello**: A function plugin providing `randomString`, imported with `include`
+- **nf-schema**: A function plugin providing `samplesheetToList` for schema-validated CSV parsing
+- **nf-co2footprint**: An observer plugin that monitors resource usage automatically, with no `include` needed
+
+Key patterns:
 
 - Plugins are declared in `nextflow.config` with `plugins { id 'plugin-name@version' }`
-- Import plugin functions with `include { function } from 'plugin/plugin-id'`
+- Function plugins require `include { function } from 'plugin/plugin-id'`
+- Observer plugins work automatically once declared in the config
 - The [Nextflow Plugin Registry](https://registry.nextflow.io/) lists available plugins
-- Plugins extend Nextflow through functions, workflow monitors, executors, and filesystems
 
 ---
 

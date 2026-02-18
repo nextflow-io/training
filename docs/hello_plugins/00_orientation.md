@@ -71,6 +71,7 @@ tree -L 1
 ```console
 .
 ├── greetings.csv
+├── greetings_schema.json
 ├── main.nf
 ├── nextflow.config
 ├── random_id_example.nf
