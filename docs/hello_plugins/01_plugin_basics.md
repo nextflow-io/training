@@ -1,16 +1,34 @@
 # Part 1: Plugin Basics
 
-In this section, you'll use three different plugins to see how they extend Nextflow in different ways.
+In this section, you'll learn how plugins extend Nextflow, then try three different plugins to see them in action.
 
 ---
 
-## 1. Use a plugin in a workflow
+## 1. How plugins work
+
+Plugins extend Nextflow through several types of extension:
+
+| Extension Type    | What it does                                 | Example                      |
+| ----------------- | -------------------------------------------- | ---------------------------- |
+| Functions         | Add custom functions callable from workflows | `samplesheetToList()`        |
+| Workflow monitors | Respond to events like task completion       | Custom logging, Slack alerts |
+| Executors         | Add task execution backends                  | AWS Batch, Kubernetes        |
+| Filesystems       | Add storage backends                         | S3, Azure Blob               |
+
+Functions and workflow monitors (called "trace observers" in the Nextflow API) are the most common types for plugin authors.
+Executors and filesystems are typically created by platform vendors.
+
+The next three exercises show you function plugins and an observer plugin, so you can see both types in action.
+
+---
+
+## 2. Use a function plugin: nf-hello
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
 In this exercise, you'll start with a workflow that defines this function locally, then replace it with the plugin version.
 This demonstrates the core plugin workflow: declare a plugin, import its functions, and use them like any other Nextflow function.
 
-### 1.1. See the starting point
+### 2.1. See the starting point
 
 The `random_id_example.nf` file contains a workflow with a local `randomString` function:
 
@@ -59,7 +77,7 @@ This works, but the `randomString` function is defined inside this script.
 If you wanted to use it in another pipeline, you'd have to copy it.
 A plugin solves this by packaging the function so any pipeline can import it.
 
-### 1.2. Configure the plugin
+### 2.2. Configure the plugin
 
 Add the plugin to your `nextflow.config`:
 
@@ -73,7 +91,7 @@ plugins {
 Plugins are declared in `nextflow.config` using the `plugins {}` block.
 Nextflow automatically downloads them from the registry at runtime.
 
-### 1.3. Use the plugin function
+### 2.3. Use the plugin function
 
 Update `random_id_example.nf` to import `randomString` from the plugin instead of defining it locally:
 
@@ -94,7 +112,7 @@ Import plugin functions with `include { function } from 'plugin/plugin-id'`.
 This is the same `include` syntax used for Nextflow modules, with a `plugin/` prefix.
 You can see the [source code for `randomString`](https://github.com/nextflow-io/nf-hello/blob/e67bddebfa589c7ae51f41bf780c92068dc09e93/plugins/nf-hello/src/main/nextflow/hello/HelloExtension.groovy#L110) in the nf-hello repository on GitHub.
 
-### 1.4. Run it
+### 2.4. Run it
 
 ```bash
 nextflow run random_id_example.nf
@@ -113,25 +131,6 @@ The plugin version generates lowercase strings, while the local version used mix
 
 The first time you use a plugin, Nextflow downloads it automatically from the registry.
 After that, any pipeline that declares `nf-hello@0.5.0` gets the exact same `randomString` function without needing to copy code between projects.
-
----
-
-## 2. How plugins work
-
-Plugins extend Nextflow through several types of extension:
-
-| Extension Type    | What it does                                 | Example                      |
-| ----------------- | -------------------------------------------- | ---------------------------- |
-| Functions         | Add custom functions callable from workflows | `samplesheetToList()`        |
-| Workflow monitors | Respond to events like task completion       | Custom logging, Slack alerts |
-| Executors         | Add task execution backends                  | AWS Batch, Kubernetes        |
-| Filesystems       | Add storage backends                         | S3, Azure Blob               |
-
-Functions and workflow monitors (called "trace observers" in the Nextflow API) are the most common types for plugin authors.
-Executors and filesystems are typically created by platform vendors.
-
-The nf-hello plugin from section 1 provides a **function** (`randomString`).
-The next two exercises show you a real-world function plugin and an observer plugin, so you can see both types in action.
 
 ---
 
