@@ -22,7 +22,7 @@ This training is designed for two audiences:
 
 - A GitHub account OR a local installation as described [here](../envsetup/02_local).
 - Completed the [Hello Nextflow](../hello_nextflow/index.md) course or equivalent.
-- For plugin development (Parts 2-6): Java 21+ installed and basic familiarity with object-oriented programming.
+- For plugin development (Parts 2-6): Java 21+ installed. No prior Java or Groovy experience required; concepts are explained as they come up.
 
 ## Learning objectives
 
