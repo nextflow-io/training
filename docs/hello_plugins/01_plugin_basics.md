@@ -388,8 +388,8 @@ Also clean up the generated files:
 rm -f co2footprint_*
 ```
 
-You've now seen both types of plugin in action: function plugins that you import and call, and observer plugins that work automatically through the config.
-Between these two mechanisms, plugins can extend Nextflow in almost any direction.
+You've now tried function plugins (imported with `include`) and an observer plugin (activated through config alone).
+These are the two most common extension types, but as the table in section 1 shows, plugins can also add executors and filesystems.
 
 ---
 
