@@ -28,10 +28,11 @@ Function plugins add callable functions that you import into your workflows.
 You'll try two: nf-hello (a simple example) and nf-schema (a widely-used real-world plugin).
 Both exercises modify the same `hello.nf` pipeline, so you can see how plugins enhance an existing workflow.
 
-### 2.1. nf-hello: add random IDs
+### 2.1. nf-hello: replace hand-written code
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
-You'll add it to the greeting pipeline to generate unique IDs for each greeting.
+The pipeline already defines its own inline `randomString` function.
+You'll replace that hand-written code with the plugin version.
 
 #### 2.1.1. See the starting point
 
@@ -45,6 +46,15 @@ cat hello.nf
 #!/usr/bin/env nextflow
 
 params.input = 'greetings.csv'
+
+/**
+ * Generate a random alphanumeric string
+ */
+def randomString(int length) {
+    def chars = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+    def random = new Random()
+    return (1..length).collect { chars[random.nextInt(chars.size())] }.join()
+}
 
 process SAY_HELLO {
     input:
@@ -60,13 +70,13 @@ process SAY_HELLO {
 workflow {
     greeting_ch = channel.fromPath(params.input)
                         .splitCsv(header: true)
-                        .map { row -> row.greeting }
+                        .map { row -> "${row.greeting}_${randomString(8)}" }
     SAY_HELLO(greeting_ch)
     SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
 }
 ```
 
-The pipeline reads greetings from `greetings.csv`, extracts the greeting text, and passes each one to the `SAY_HELLO` process.
+The pipeline defines its own `randomString` function inline, then uses it to append a random ID to each greeting.
 
 Run it:
 
@@ -75,14 +85,14 @@ nextflow run hello.nf
 ```
 
 ```console title="Output"
-Output: Hello
-Output: Bonjour
-Output: Holà
-Output: Ciao
-Output: Hallo
+Output: Hello_aBcDeFgH
+Output: Bonjour_xYzWvUtS
+Output: Holà_qRsPdMnK
+Output: Ciao_jLhGfEcB
+Output: Hallo_tNwOiAuR
 ```
 
-(Your output order may differ.)
+(Your output order and random strings will differ.)
 
 #### 2.1.2. Configure the plugin
 
@@ -100,11 +110,11 @@ Nextflow automatically downloads them from the registry at runtime.
 
 #### 2.1.3. Use the plugin function
 
-Update `hello.nf` to import `randomString` from the plugin and use it to append a unique ID to each greeting:
+Replace the inline `randomString` function with the plugin version:
 
 === "After"
 
-    ```groovy title="hello.nf" hl_lines="3 21"
+    ```groovy title="hello.nf" hl_lines="3"
     #!/usr/bin/env nextflow
 
     include { randomString } from 'plugin/nf-hello'
@@ -133,10 +143,19 @@ Update `hello.nf` to import `randomString` from the plugin and use it to append 
 
 === "Before"
 
-    ```groovy title="hello.nf" hl_lines="19"
+    ```groovy title="hello.nf" hl_lines="5-12"
     #!/usr/bin/env nextflow
 
     params.input = 'greetings.csv'
+
+    /**
+     * Generate a random alphanumeric string
+     */
+    def randomString(int length) {
+        def chars = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+        def random = new Random()
+        return (1..length).collect { chars[random.nextInt(chars.size())] }.join()
+    }
 
     process SAY_HELLO {
         input:
@@ -152,12 +171,13 @@ Update `hello.nf` to import `randomString` from the plugin and use it to append 
     workflow {
         greeting_ch = channel.fromPath(params.input)
                             .splitCsv(header: true)
-                            .map { row -> row.greeting }
+                            .map { row -> "${row.greeting}_${randomString(8)}" }
         SAY_HELLO(greeting_ch)
         SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
     ```
 
+The `include` statement replaces 7 lines of hand-written code with a single import from a tested, versioned plugin.
 Import plugin functions with `include { function } from 'plugin/plugin-id'`.
 This is the same `include` syntax used for Nextflow modules, with a `plugin/` prefix.
 You can see the [source code for `randomString`](https://github.com/nextflow-io/nf-hello/blob/e67bddebfa589c7ae51f41bf780c92068dc09e93/plugins/nf-hello/src/main/nextflow/hello/HelloExtension.groovy#L110) in the nf-hello repository on GitHub.
@@ -180,11 +200,11 @@ Pipeline complete! 👋
 
 (Your random strings will differ.)
 
-Each greeting now has a random 8-character suffix.
+The output still has random suffixes, but now `randomString` comes from the nf-hello plugin instead of inline code.
 The "Pipeline is starting!" and "Pipeline complete!" messages come from nf-hello's built-in observer, which demonstrates that a single plugin can provide both functions and observers.
 
 The first time you use a plugin, Nextflow downloads it automatically from the registry.
-After that, any pipeline that declares `nf-hello@0.5.0` gets the exact same `randomString` function without copying code between projects.
+After that, any pipeline that declares `nf-hello@0.5.0` gets the exact same tested `randomString` function without copying code between projects.
 
 You've now seen the three steps for using a function plugin: declare it in `nextflow.config`, import the function with `include`, and call it in your workflow.
 The next exercise applies these same steps to a real-world plugin.
