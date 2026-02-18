@@ -137,6 +137,9 @@ The plugin version generates lowercase strings, while the local version used mix
 The first time you use a plugin, Nextflow downloads it automatically from the registry.
 After that, any pipeline that declares `nf-hello@0.5.0` gets the exact same `randomString` function without needing to copy code between projects.
 
+You've now seen the three steps for using a function plugin: declare it in `nextflow.config`, import the function with `include`, and call it in your workflow.
+The next exercise applies these same steps to a real-world plugin.
+
 ### 2.2. nf-schema: validated CSV parsing
 
 The [nf-schema](https://github.com/nextflow-io/nf-schema) plugin is one of the most widely-used Nextflow plugins.
@@ -280,6 +283,9 @@ Greeting: Hallo
 The result is the same, but the schema adds validation.
 In real pipelines, `samplesheetToList` is used to parse complex sample sheets with many columns, where manual `splitCsv` + `map` would be error-prone.
 
+Both nf-hello and nf-schema are function plugins: they provide functions that you import with `include` and call in your workflow code.
+The next exercise shows a different type of plugin that works without any `include` statements at all.
+
 ---
 
 ## 3. Use an observer plugin: nf-co2footprint
@@ -381,6 +387,9 @@ Also clean up the generated files:
 ```bash
 rm -f co2footprint_*
 ```
+
+You've now seen both types of plugin in action: function plugins that you import and call, and observer plugins that work automatically through the config.
+Between these two mechanisms, plugins can extend Nextflow in almost any direction.
 
 ---
 
