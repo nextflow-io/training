@@ -65,7 +65,11 @@ cd hello-plugins
 
 ## 4. Review the materials
 
-```console title="Directory contents"
+```bash
+tree -L 1
+```
+
+```console
 .
 ├── greetings.csv
 ├── main.nf
