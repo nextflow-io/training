@@ -202,28 +202,66 @@ Update `nextflow.config` to include both plugins:
     }
     ```
 
-### 3.3. Create a workflow that uses samplesheetToList
+### 3.3. See the starting point
 
-Create a new file `schema_example.nf`:
+The `schema_example.nf` file reads `greetings.csv` using the same `splitCsv` + `map` pattern from `main.nf`:
 
-```groovy title="schema_example.nf"
+```bash
+cat schema_example.nf
+```
+
+```groovy title="Output"
 #!/usr/bin/env nextflow
-
-include { samplesheetToList } from 'plugin/nf-schema'
 
 params.input = 'greetings.csv'
 
 workflow {
-    Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-        .map { row -> row[0] }
+    Channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> row.greeting }
         .view { greeting -> "Greeting: $greeting" }
 }
 ```
 
+### 3.4. Update it to use samplesheetToList
+
+Replace the `splitCsv` + `map` pattern with `samplesheetToList`:
+
+=== "After"
+
+    ```groovy title="schema_example.nf" hl_lines="3 7-8"
+    #!/usr/bin/env nextflow
+
+    include { samplesheetToList } from 'plugin/nf-schema'
+
+    params.input = 'greetings.csv'
+
+    workflow {
+        Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+            .map { row -> row[0] }
+            .view { greeting -> "Greeting: $greeting" }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="schema_example.nf"
+    #!/usr/bin/env nextflow
+
+    params.input = 'greetings.csv'
+
+    workflow {
+        Channel.fromPath(params.input)
+            .splitCsv(header: true)
+            .map { row -> row.greeting }
+            .view { greeting -> "Greeting: $greeting" }
+    }
+    ```
+
 Instead of `splitCsv` and a manual `map` to extract fields, `samplesheetToList` parses the CSV according to the schema.
 Each row becomes a list of values in column order, so `row[0]` is the greeting and `row[1]` is the language.
 
-### 3.4. Run it
+### 3.5. Run it
 
 ```bash
 nextflow run schema_example.nf

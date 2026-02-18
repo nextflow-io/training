@@ -75,6 +75,7 @@ tree -L 1
 ├── main.nf
 ├── nextflow.config
 ├── random_id_example.nf
+├── schema_example.nf
 └── solutions/
 ```
 
