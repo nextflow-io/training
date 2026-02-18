@@ -185,12 +185,22 @@ If someone passes a CSV missing the `greeting` column, nf-schema catches the err
 
 Update `nextflow.config` to include both plugins:
 
-```groovy title="nextflow.config"
-plugins {
-    id 'nf-hello@0.5.0'
-    id 'nf-schema@2.6.1'
-}
-```
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="3"
+    plugins {
+        id 'nf-hello@0.5.0'
+        id 'nf-schema@2.6.1'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    plugins {
+        id 'nf-hello@0.5.0'
+    }
+    ```
 
 ### 3.3. Create a workflow that uses samplesheetToList
 
@@ -242,13 +252,24 @@ You don't need to change any pipeline code; just add it to the config.
 
 Update `nextflow.config`:
 
-```groovy title="nextflow.config"
-plugins {
-    id 'nf-hello@0.5.0'
-    id 'nf-schema@2.6.1'
-    id 'nf-co2footprint'
-}
-```
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="4"
+    plugins {
+        id 'nf-hello@0.5.0'
+        id 'nf-schema@2.6.1'
+        id 'nf-co2footprint'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    plugins {
+        id 'nf-hello@0.5.0'
+        id 'nf-schema@2.6.1'
+    }
+    ```
 
 ### 4.2. Run the pipeline
 
@@ -295,13 +316,25 @@ No `include` statement is needed because it doesn't provide functions; it runs a
 
 ### 4.4. Clean up
 
-Remove the co2footprint plugin from `nextflow.config` before continuing (it adds noise to the output in later exercises):
+Remove the nf-schema and nf-co2footprint plugins from `nextflow.config` before continuing (they add noise to the output in later exercises):
 
-```groovy title="nextflow.config"
-plugins {
-    id 'nf-hello@0.5.0'
-}
-```
+=== "After"
+
+    ```groovy title="nextflow.config"
+    plugins {
+        id 'nf-hello@0.5.0'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    plugins {
+        id 'nf-hello@0.5.0'
+        id 'nf-schema@2.6.1'
+        id 'nf-co2footprint'
+    }
+    ```
 
 Also clean up the generated files:
 
