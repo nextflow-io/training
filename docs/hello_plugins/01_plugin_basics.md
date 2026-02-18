@@ -55,8 +55,9 @@ sample_C_AJvSgOVt
 
 (Your random strings will differ.)
 
-This works, but the function is defined in this file and can't be reused elsewhere.
-A plugin version can be shared across any pipeline.
+This works, but the `randomString` function is defined inside this script.
+If you wanted to use it in another pipeline, you'd have to copy it.
+A plugin solves this by packaging the function so any pipeline can import it.
 
 ### 1.2. Configure the plugin
 
