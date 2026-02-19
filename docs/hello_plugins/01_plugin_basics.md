@@ -178,7 +178,7 @@ Replace the inline `randomString` function with the plugin version:
     ```
 
 The `include` statement replaces 7 lines of hand-written code with a single import from a tested, versioned plugin.
-Import plugin functions with `include { function } from 'plugin/plugin-id'`.
+Import plugin functions with `#!groovy include { function } from 'plugin/plugin-id'`.
 This is the same `include` syntax used for Nextflow modules, with a `plugin/` prefix.
 You can see the [source code for `randomString`](https://github.com/nextflow-io/nf-hello/blob/e67bddebfa589c7ae51f41bf780c92068dc09e93/plugins/nf-hello/src/main/nextflow/hello/HelloExtension.groovy#L110) in the nf-hello repository on GitHub.
 
@@ -481,8 +481,8 @@ You used three different plugins:
 
 Key patterns:
 
-- Plugins are declared in `nextflow.config` with `plugins { id 'plugin-name@version' }`
-- Function plugins require `include { function } from 'plugin/plugin-id'`
+- Plugins are declared in `nextflow.config` with `#!groovy plugins { id 'plugin-name@version' }`
+- Function plugins require `#!groovy include { function } from 'plugin/plugin-id'`
 - Observer plugins work automatically once declared in the config
 - The [Nextflow Plugin Registry](https://registry.nextflow.io/) lists available plugins
 
