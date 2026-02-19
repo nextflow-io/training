@@ -31,8 +31,7 @@ Both exercises modify the same `hello.nf` pipeline, so you can see how plugins e
 ### 2.1. nf-hello: replace hand-written code
 
 The [nf-hello](https://github.com/nextflow-io/nf-hello) plugin provides a `randomString` function that generates random strings.
-The pipeline already defines its own inline `randomString` function.
-You'll replace that hand-written code with the plugin version.
+The pipeline already defines its own inline version of this function, which you'll replace with the one from the plugin.
 
 #### 2.1.1. See the starting point
 
@@ -105,8 +104,7 @@ plugins {
 }
 ```
 
-Plugins are declared in `nextflow.config` using the `plugins {}` block.
-Nextflow automatically downloads them from the registry at runtime.
+Plugins are declared in `nextflow.config` using the `plugins {}` block, and Nextflow automatically downloads them from the registry at runtime.
 
 #### 2.1.3. Use the plugin function
 
@@ -178,8 +176,7 @@ Replace the inline `randomString` function with the plugin version:
     ```
 
 The `include` statement replaces 7 lines of hand-written code with a single import from a tested, versioned plugin.
-Import plugin functions with `#!groovy include { function } from 'plugin/plugin-id'`.
-This is the same `include` syntax used for Nextflow modules, with a `plugin/` prefix.
+The syntax `#!groovy include { function } from 'plugin/plugin-id'` is the same `include` used for Nextflow modules, with a `plugin/` prefix.
 You can see the [source code for `randomString`](https://github.com/nextflow-io/nf-hello/blob/e67bddebfa589c7ae51f41bf780c92068dc09e93/plugins/nf-hello/src/main/nextflow/hello/HelloExtension.groovy#L110) in the nf-hello repository on GitHub.
 
 #### 2.1.4. Run it
@@ -203,8 +200,7 @@ Pipeline complete! 👋
 The output still has random suffixes, but now `randomString` comes from the nf-hello plugin instead of inline code.
 The "Pipeline is starting!" and "Pipeline complete!" messages come from nf-hello's built-in observer, which demonstrates that a single plugin can provide both functions and observers.
 
-The first time you use a plugin, Nextflow downloads it automatically from the registry.
-After that, any pipeline that declares `nf-hello@0.5.0` gets the exact same tested `randomString` function without copying code between projects.
+Nextflow downloads plugins automatically the first time they're used, so any pipeline that declares `nf-hello@0.5.0` gets the exact same tested `randomString` function without copying code between projects.
 
 You've now seen the three steps for using a function plugin: declare it in `nextflow.config`, import the function with `include`, and call it in your workflow.
 The next exercise applies these same steps to a real-world plugin.
@@ -214,9 +210,8 @@ The next exercise applies these same steps to a real-world plugin.
 The [nf-schema](https://github.com/nextflow-io/nf-schema) plugin is one of the most widely-used Nextflow plugins.
 It provides `samplesheetToList`, a function that parses CSV/TSV files using a JSON schema that defines the expected columns and types.
 
-The pipeline currently reads `greetings.csv` using `splitCsv` and a manual `map`.
-The nf-schema plugin can replace this with validated, schema-driven parsing.
-A JSON schema file (`greetings_schema.json`) is provided in the exercise directory.
+The pipeline currently reads `greetings.csv` using `splitCsv` and a manual `map`, but nf-schema can replace this with validated, schema-driven parsing.
+A JSON schema file (`greetings_schema.json`) is already provided in the exercise directory.
 
 #### 2.2.1. Look at the schema
 
@@ -352,8 +347,8 @@ Pipeline complete! 👋
 
 (Your random strings will differ.)
 
-The output is the same, but the schema adds validation.
-In real pipelines, `samplesheetToList` is used to parse complex sample sheets with many columns, where manual `splitCsv` + `map` would be error-prone.
+The output is the same, but now the schema validates the CSV structure before the pipeline runs.
+In real pipelines with complex sample sheets and many columns, this kind of validation prevents errors that manual `splitCsv` + `map` would miss.
 
 Both nf-hello and nf-schema are function plugins: they provide functions that you import with `include` and call in your workflow code.
 The next exercise shows a different type of plugin that works without any `include` statements at all.
@@ -395,8 +390,7 @@ Update `nextflow.config`:
 nextflow run hello.nf
 ```
 
-You'll see additional log messages from the plugin during execution, including some warnings.
-These are normal; the plugin is estimating resource usage with limited information from this small example.
+You'll see additional log messages and warnings from the plugin during execution, which are normal; the plugin is estimating resource usage with limited information from this small example.
 
 At the end, look for a line like:
 
@@ -428,8 +422,7 @@ cat co2footprint_summary_*.txt
 
 The summary converts the CO2 estimate into relatable comparisons, like the equivalent distance driven by car or the time a tree would need to sequester the same amount.
 
-This plugin works entirely through the observer mechanism.
-It hooks into workflow lifecycle events to collect resource metrics, then generates its report when the pipeline completes.
+This plugin works entirely through the observer mechanism, hooking into workflow lifecycle events to collect resource metrics and generate its report when the pipeline completes.
 No `include` statement is needed because it doesn't provide functions; it runs automatically once declared in the config.
 
 You've now tried function plugins (imported with `include`) and an observer plugin (activated through config alone).
@@ -466,8 +459,7 @@ Remove the co2footprint output files:
 rm -f co2footprint_*
 ```
 
-The `hello.nf` file retains your Part 1 work for reference.
-Going forward, you'll work with `greet.nf`.
+The `hello.nf` file retains your Part 1 work for reference; going forward, you'll work with `greet.nf`.
 
 ---
 
