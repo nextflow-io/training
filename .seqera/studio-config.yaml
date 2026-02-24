@@ -5,7 +5,7 @@ session:
   description: "Nextflow training materials development environment"
   template:
     kind: "registry"
-    registry: "public.cr.seqera.io/platform/data-studio-vscode:1.101.2-0.10"
+    registry: "ghcr.io/seqera-services/data-studio-vscode:1.101.2-0.10"
   clone:
     enabled: true
     path: "/workspace/training"
