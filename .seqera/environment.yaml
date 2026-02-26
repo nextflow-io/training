@@ -11,3 +11,4 @@ dependencies:
   - nf-core
   - pre-commit
   - mkdocs-quiz>=1.5.2
+  - tree
