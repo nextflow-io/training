@@ -107,7 +107,7 @@ This displays documentation about the module, including its inputs, outputs, and
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.4.1 - https://nf-co.re
+        nf-core/tools version 3.5.2 - https://nf-co.re
 
 
     ╭─ Module: cat/cat  ─────────────────────────────────────────────────╮
@@ -163,8 +163,7 @@ cd core-hello
 nf-core modules install cat/cat
 ```
 
-The tool may first prompt you to specify a repository type.
-(If not, skip down to "Finally, the tool will proceed to install the module.")
+The tool will proceed to install the module.
 
 ??? success "Command output"
 
@@ -176,36 +175,9 @@ The tool may first prompt you to specify a repository type.
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.4.1 - https://nf-co.re
+    nf-core/tools version 3.5.2 - https://nf-co.re
 
 
-    WARNING  'repository_type' not defined in .nf-core.yml
-    ? Is this repository a pipeline or a modules repository? (Use arrow keys)
-    » Pipeline
-      Modules repository
-    ```
-
-If so, press enter to accept the default response (`Pipeline`) and continue.
-
-The tool will then offer to amend the configuration of your project to avoid this prompt in the future.
-
-??? success "Command output"
-
-    ```console
-        INFO     To avoid this prompt in the future, add the 'repository_type' key to your .nf-core.yml file.
-        ? Would you like me to add this config now? [y/n] (y):
-    ```
-
-Might as well take advantage of this convenient tooling!
-Press enter to accept the default response (yes).
-
-Finally, the tool will proceed to install the module.
-
-??? success "Command output"
-
-    ```console
-    INFO Config added to '.nf-core.yml'
-    INFO Reinstalling modules found in 'modules.json' but missing from directory:
     INFO Installing 'cat/cat'
     INFO Use the following statement to include this module:
 
@@ -278,7 +250,7 @@ Let's replace the `include` statement for the `collectGreetings` module with the
 As a reminder, the module install tool gave us the exact statement to use:
 
 ```groovy title="Import statement produced by install command"
-include { CAT_CAT } from '../modules/nf-core/cat/cat/main'`
+include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
 ```
 
 Note that the nf-core convention is to use uppercase for module names when importing them.
@@ -627,7 +599,7 @@ Next, transform the channel of files into a channel of tuples containing metadat
 The line we've added achieves two things:
 
 - `.collect()` gathers all files from the `convertToUpper` output into a single list
-- `.map { files -> tuple(cat_meta, files) }` creates a tuple of `[metadata, files]` in the format `CAT_CAT` expects
+- `#!groovy .map { files -> tuple(cat_meta, files) }` creates a tuple of `[metadata, files]` in the format `CAT_CAT` expects
 
 That is all we need to do to set up the input tuple for `CAT_CAT`.
 
@@ -732,7 +704,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-The `.map{ meta, file -> file }` operation extracts the file from the `[metadata, file]` tuple produced by `CAT_CAT` into a new channel, `ch_for_cowpy`.
+The `#!groovy .map{ meta, file -> file }` operation extracts the file from the `[metadata, file]` tuple produced by `CAT_CAT` into a new channel, `ch_for_cowpy`.
 
 Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile` in that last line.
 
