@@ -11,10 +11,6 @@ session:
     path: "/workspace/training"
   dependencies:
     condaEnvironmentFile: "environment.yaml"
-  computeRequirements:
-    awsBatch:
-      cpu: 8
-      memory: 32768
   environmentVariables:
     - name: NXF_HOME
       value: "/workspace/.nextflow"
