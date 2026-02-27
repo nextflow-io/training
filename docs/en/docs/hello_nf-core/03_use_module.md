@@ -138,9 +138,9 @@ This displays documentation about the module, including its inputs, outputs, and
                           │gzipped if file_out ends with    │
                           │".gz"                            │
     ╶─────────────────────┼─────────────────────────────────┼────────────╴
-    versions_cat         │                                 │
+    versions             │                                 │
     ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      versions_cat (tuple)│Software version information     │
+      versions.yml  (file)│File containing software versions│versions.yml
                           ╵                                 ╵
 
     💻  Installation command: nf-core modules install cat/cat
@@ -367,15 +367,15 @@ process CAT_CAT {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pigz:2.8' :
-        'biocontainers/pigz:2.8' }"
+        'https://depot.galaxyproject.org/singularity/pigz:2.3.4' :
+        'biocontainers/pigz:2.3.4' }"
 
     input:
     tuple val(meta), path(files_in)
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
-    tuple val("${task.process}"), val("pigz"), eval("pigz --version 2>&1 | sed 's/pigz //g'"), topic: versions, emit: versions_cat
+    path "versions.yml"               , emit: versions
 ```
 
 The CAT_CAT module takes a single input, but that input is a tuple containing two things:
@@ -386,7 +386,7 @@ The CAT_CAT module takes a single input, but that input is a tuple containing tw
 Upon completion, CAT_CAT delivers its outputs in two parts:
 
 - Another tuple containing the metamap and the concatenated output file, emitted with the `file_out` tag;
-- A version tuple published to the `versions` topic channel for software version tracking.
+- A `versions.yml` file that captures information about the software version that was used, emitted with the `versions` tag.
 
 Note also that by default, the output file will be named based on an identifier that is part of the metadata (code not shown here).
 
@@ -397,7 +397,7 @@ This may seem like a lot to keep track of just looking at the code, so here's a 
 </figure>
 
 You can see that the two modules have similar input requirements in terms of content (a set of input files plus some metadata) but very different expectations for how that content is packaged.
-Ignoring the versions output for now, their main output is equivalent too (a concatenated file), except CAT_CAT also emits the metamap in conjunction with the output file.
+Ignoring the versions file for now, their main output is equivalent too (a concatenated file), except CAT_CAT also emits the metamap in conjunction with the output file.
 
 The packaging differences will be fairly easy to deal with, as you'll see in a little bit.
 However, to understand the metamap part, we need to introduce you to some additional context.
@@ -504,7 +504,7 @@ For the sake of clarity, we'll break this down and cover each step separately.
 
 ### 3.1. Create a metadata map
 
-First, we need to create a metadata map for `CAT_CAT`, keeping in mind that nf-core modules require the metamap to contain at least an `id` field.
+First, we need to create a metadata map for `CAT_CAT`, keeping in mind that nf-core modules require the metamap to at least an `id` field.
 
 Since we don't need any other metadata, we can keep it simple and use something like this:
 
@@ -622,7 +622,7 @@ Now call `CAT_CAT` on the newly created channel:
         // create a channel with metadata and files in tuple format
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concatenate the greetings
+        // concatenate files using the nf-core cat/cat module
         CAT_CAT(ch_for_cat)
 
         // generate ASCII art of the greetings with cowpy
@@ -704,7 +704,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-The `#!groovy .map { meta, file -> file }` operation extracts the file from the `[metadata, file]` tuple produced by `CAT_CAT` into a new channel, `ch_for_cowpy`.
+The `#!groovy .map{ meta, file -> file }` operation extracts the file from the `[metadata, file]` tuple produced by `CAT_CAT` into a new channel, `ch_for_cowpy`.
 
 Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile` in that last line.
 
