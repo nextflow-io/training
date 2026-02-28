@@ -132,13 +132,13 @@ graph LR
 
 Validation should happen **before** any pipeline processes run, to provide fast feedback and prevent wasted compute time.
 
-Now let's apply these principles in practice, starting with parameter validation.
+The following sections apply these principles in practice, starting with parameter validation.
 
 ---
 
 ## 1. Parameter validation (nextflow_schema.json)
 
-Let's start by adding parameter validation to our pipeline. This validates command-line flags like `--input`, `--outdir`, and `--batch`.
+Start by adding parameter validation to the pipeline. This validates command-line flags like `--input`, `--outdir`, and `--batch`.
 
 ### 1.1. Configure validation to skip input file validation
 
@@ -187,7 +187,7 @@ This configuration tells nf-schema to:
 
 ### 1.2. Examine the parameter schema
 
-Let's look at a section of the `nextflow_schema.json` file that came with our pipeline template:
+Examine a section of the `nextflow_schema.json` file that came with the pipeline template:
 
 ```bash
 grep -A 25 '"input_output_options"' nextflow_schema.json
@@ -337,7 +337,7 @@ You should see that the `batch` parameter has been added to the schema with the 
 
 ### 1.5. Test parameter validation
 
-Now let's test that parameter validation works correctly.
+Test parameter validation by running two scenarios.
 
 First, try running without the required `input` parameter:
 
@@ -356,7 +356,7 @@ nextflow run . --outdir test-results -profile docker
     * Missing required parameter(s): input, batch
     ```
 
-Perfect! The validation catches the missing required parameter before the pipeline runs.
+The validation catches the missing required parameter before the pipeline runs.
 
 Now try with a valid set of parameters:
 
@@ -388,7 +388,7 @@ The web interface handles all the JSON Schema syntax for you, making it easy to 
 
 ### What's next?
 
-Now that parameter validation is working, let's add validation for the input data file contents.
+With parameter validation working, the next step is to add validation for the input data file contents.
 
 ---
 
@@ -399,7 +399,7 @@ Whereas parameter validation checks command-line flags, input data validation en
 
 ### 2.1. Understand the greetings.csv format
 
-Let's remind ourselves what our input looks like:
+As a reminder, the input file looks like this:
 
 ```bash
 cat assets/greetings.csv
@@ -560,7 +560,7 @@ The `samplesheetToList` function:
 3. Returns a Groovy list where each entry corresponds to a row
 4. Throws helpful error messages if validation fails
 
-Let's update the input handling code:
+Update the input handling code:
 
 Open `subworkflows/local/utils_nfcore_hello_pipeline/main.nf` and locate the section where we create the input channel (around line 80).
 
@@ -623,7 +623,7 @@ Now update the channel creation code:
         versions    = ch_versions
     ```
 
-Let's break down what changed:
+The key changes:
 
 1. **`samplesheetToList(params.input, "${projectDir}/assets/schema_input.json")`**: Validates the input file against our schema and returns a list
 2. **`Channel.fromList(...)`**: Converts the list into a Nextflow channel
@@ -659,7 +659,7 @@ Now nf-schema will validate both parameter types AND the input file contents.
 
 ### 2.7. Test input validation
 
-Let's verify that our validation works by testing both valid and invalid inputs.
+Verify that validation works by testing both valid and invalid inputs.
 
 #### 2.7.1. Test with valid input
 
@@ -687,13 +687,13 @@ nextflow run . --outdir core-hello-results -profile test,docker
     -[core/hello] Pipeline completed successfully-
     ```
 
-Great! The pipeline runs successfully and validation passes silently.
-The warning about `--character` is just informational since it's not defined in the schema.
-If you want, use what you've learned to add validation for that parameter too!
+The pipeline runs successfully and validation passes silently.
+The warning about `--character` is informational; it is not defined in the schema.
+You can apply the same approach to add validation for the `--character` parameter.
 
 #### 2.7.2. Test with invalid input
 
-Passing validation is always a good feeling, but let's make sure that the validation will actually catch errors.
+To confirm the validation also catches errors, test it with an invalid input.
 
 To create a test file with an invalid column name, start by making a copy of the `greetings.csv` file:
 
@@ -769,7 +769,7 @@ nextflow run . --input assets/invalid_greetings.csv --outdir test-results -profi
      -- Check script 'subworkflows/nf-core/utils_nfschema_plugin/main.nf' at line: 68 or see '.nextflow.log' file for more details
     ```
 
-Perfect! The validation caught the error and provided a clear, helpful error message pointing to:
+The validation caught the error and provided a clear error message pointing to:
 
 - Which file failed validation
 - Which entry (row 1, the first data row) has the problem
@@ -777,7 +777,7 @@ Perfect! The validation caught the error and provided a clear, helpful error mes
 
 The schema validation ensures that input files have the correct structure before the pipeline runs, saving time and preventing confusing errors later in execution.
 
-If you'd like to practice this, feel free to create other greetings input files that violate the schema in other fun ways.
+To practice further, create additional greetings input files that violate the schema in different ways.
 
 ### Takeaway
 
