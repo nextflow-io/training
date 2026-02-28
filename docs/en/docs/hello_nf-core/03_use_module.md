@@ -704,7 +704,7 @@ Since `cowpy` doesn't accept metadata tuples yet (we'll fix this in the next par
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-The `#!groovy .map{ meta, file -> file }` operation extracts the file from the `[metadata, file]` tuple produced by `CAT_CAT` into a new channel, `ch_for_cowpy`.
+The `#!groovy .map { meta, file -> file }` operation extracts the file from the `[metadata, file]` tuple produced by `CAT_CAT` into a new channel, `ch_for_cowpy`.
 
 Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collectGreetings.out.outfile` in that last line.
 
