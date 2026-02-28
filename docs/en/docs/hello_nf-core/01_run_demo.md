@@ -10,7 +10,7 @@ Make sure your working directory is set to `hello-nf-core/` as instructed on the
 
 ## 1. Find and retrieve the nf-core/demo pipeline
 
-Let's start by locating the nf-core/demo pipeline on the project website at [nf-co.re](https://nf-co.re), which centralizes all information such as: general documentation and help articles, documentation for each of the pipelines, blog posts, event announcements and so forth.
+Start by locating the nf-core/demo pipeline on the project website at [nf-co.re](https://nf-co.re), which centralizes all information such as: general documentation and help articles, documentation for each of the pipelines, blog posts, event announcements and so forth.
 
 ### 1.1. Find the pipeline on the website
 
@@ -61,14 +61,13 @@ nextflow run nf-core/demo \
 You'll notice that the example command does NOT specify a workflow file, just the reference to the pipeline repository, `nf-core/demo`.
 
 When invoked this way, Nextflow will assume that the code is organized in a certain way.
-Let's retrieve the code so we can examine this structure.
 
 ### 1.2. Retrieve the pipeline code
 
-Once we've determined that the pipeline appears to be suitable for our purposes, let's try it out.
-Fortunately Nextflow makes it easy to retrieve pipelines from correctly-formatted repositories without having to download anything manually.
+Once the pipeline appears to be suitable, retrieve the code to examine its structure.
+Nextflow makes it easy to retrieve pipelines from correctly-formatted repositories without having to download anything manually.
 
-Let's return to the terminal and run the following:
+Run the following command in the terminal:
 
 ```bash
 nextflow pull nf-core/demo
@@ -120,7 +119,7 @@ tree -L 2 $NXF_HOME/assets/
 Nextflow keeps the downloaded source code intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
 
 However, for the purposes of this training, we want to be able to poke around and see what's in there.
-So to make that easier, let's create a symbolic link to that location from our current working directory.
+To make that easier, create a symbolic link to that location from the current working directory.
 
 ```bash
 ln -s $NXF_HOME/assets pipelines
@@ -142,7 +141,7 @@ pipelines
 
 Now we can more easily peek into the source code as needed.
 
-But first, let's try running our first nf-core pipeline!
+The next section covers running the pipeline.
 
 ### Takeaway
 
@@ -232,13 +231,13 @@ This is called a samplesheet, and is the most common form of input to nf-core pi
 
 !!! note
 
-    Don't worry if you're not familiar with the data formats and types, it's not important for what follows.
+    Familiarity with these data formats and types is not required for what follows.
 
 So this confirms that we have everything we need to try out the pipeline.
 
 ### 2.2. Run the pipeline
 
-Let's decide to use Docker for the container system and `demo-results` as the output directory, and we're ready to run the test command:
+Using Docker for the container system and `demo-results` as the output directory, run the test command:
 
 ```bash
 nextflow run nf-core/demo -profile docker,test --outdir demo-results
@@ -301,7 +300,7 @@ nextflow run nf-core/demo -profile docker,test --outdir demo-results
     -[nf-core/demo] Pipeline completed successfully-
     ```
 
-If your output matches that, congratulations! You've just run your first nf-core pipeline.
+If your output matches that, you have successfully run your first nf-core pipeline.
 
 You'll notice that there is a lot more console output than when you run a basic Nextflow pipeline.
 There's a header that includes a summary of the pipeline's version, inputs and outputs, and a few elements of configuration.
@@ -310,7 +309,7 @@ There's a header that includes a summary of the pipeline's version, inputs and o
 
     Your output will show different timestamps, execution names, and file paths, but the overall structure and process execution should be similar.
 
-Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
+The execution output includes lines that tell us what processes were run:
 
 ```console
     [ff/a6976b] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     | 3 of 3 ✔
@@ -326,7 +325,7 @@ We'll go into more detail about that in a little bit.
 
 ### 2.3. Examine the pipeline's outputs
 
-Finally, let's have a look at the `demo-results` directory produced by the pipeline.
+Examine the `demo-results` directory produced by the pipeline.
 
 ```bash
 tree -L 2 demo-results
@@ -385,12 +384,12 @@ Learn how the pipeline code is organized.
 
 ## 3. Examine the pipeline code structure
 
-Now that we've successfully run the pipeline as users, let's shift our perspective to look at how nf-core pipelines are structured internally.
+Having run the pipeline as users, this section examines how nf-core pipelines are structured internally.
 
 The nf-core project enforces strong guidelines for how pipelines are structured, and for how the code is organized, configured and documented.
-Understanding how this is all organized is the first step toward developing your own nf-core-compatible pipelines, which we will tackle in Part 2 of this course.
+Understanding this organization is the first step toward developing nf-core-compatible pipelines, which Part 2 of this course covers.
 
-Let's have a look at how the pipeline code is organized in the `nf-core/demo` repository, using the `pipelines` symlink we created earlier.
+The pipeline code is organized in the `nf-core/demo` repository, accessible via the `pipelines` symlink created earlier.
 
 You can either use `tree` or use the file explorer to find and open the `nf-core/demo` directory.
 
@@ -425,30 +424,29 @@ tree -L 1 pipelines/nf-core/demo
 
 There's a lot going on in there, so we'll tackle this step by step.
 
-First, let's note that at the top level, you can find a README file with summary information, as well as accessory files that summarize project information such as licensing, contribution guidelines, citation and code of conduct.
+At the top level, there is a README file with summary information, as well as accessory files that summarize project information such as licensing, contribution guidelines, citation and code of conduct.
 Detailed pipeline documentation is located in the `docs` directory.
 All of this content is used to generate the web pages on the nf-core website programmatically, so they're always up to date with the code.
 
-Now, for the rest, we're going to divide our exploration in three stages:
+The exploration covers three stages:
 
 1. Pipeline code components (`main.nf`, `workflows`, `subworkflows`, `modules`)
 2. Pipeline configuration
 3. Inputs and validation
 
-Let's start with the pipeline code components.
-We're going to focus on the file hierarchy and structural organization, rather than diving into the code within individual files.
+Starting with the pipeline code components, the focus is on file hierarchy and structural organization rather than the code within individual files.
 
 ### 3.1. Pipeline code components
 
 The standard nf-core pipeline code organization follows a modular structure that is designed to maximize code reuse, as introduced in [Hello Modules](../hello_nextflow/04_hello_modules.md), Part 4 of the [Hello Nextflow](../hello_nextflow/index.md) course, although in true nf-core fashion, this is implemented with a bit of additional complexity.
 Specifically, nf-core pipelines make abundant use of subworkflows, i.e. workflow scripts that are imported by a parent workflow.
 
-That may sound a bit abstract, so let's take a look how this is used in practice in the `nf-core/demo` pipeline.
+The following shows how this is used in practice in the `nf-core/demo` pipeline.
 
 !!! note
 
     We won't go over the actual code for _how_ these modular components are connected, because there is some additional complexity associated with the use of subworkflows that can be confusing, and understanding that is not necessary at this stage of the training.
-    For now, we're going to focus on the overall organization and logic.
+    For now, the focus is on the overall organization and logic.
 
 #### 3.1.1. General overview
 
@@ -467,7 +465,7 @@ The `demo.nf` workflow calls on **modules** located under `modules/`; these cont
 
     The `nf-core/demo` pipeline shown here happens to be on the simpler side on the spectrum, but other nf-core pipelines (such as `nf-core/rnaseq`) utilize subworkflows that are involved in the actual analysis.
 
-Now, let's review these components in turn.
+The following sections review these components in turn.
 
 #### 3.1.2. The entrypoint script: `main.nf`
 
@@ -535,7 +533,7 @@ In this case there are no `local` modules.
 The module code file describing the process is always called `main.nf`, and is accompanied by tests and `.yml` files which we'll ignore for now.
 
 Taken together, the entrypoint workflow, analysis workflow and modules are sufficient for running the 'interesting' parts of the pipeline.
-However, we know there are also housekeeping subworkflows in there, so let's look at those now.
+There are also housekeeping subworkflows, covered in the next section.
 
 #### 3.1.5. The housekeeping subworkflows
 
@@ -577,7 +575,7 @@ These subworkflows are what produces the fancy nf-core header in the console out
     Aside from their naming pattern, another indication that these subworkflows do not perform any truly analysis-related function is that they do not call any processes at all.
 
 This completes the round-up of core code components that constitute the `nf-core/demo` pipeline.
-Now let's take a look at the remaining elements that you should know a little bit about before diving into development: pipeline configuration and input validation.
+The remaining elements to cover before starting development are pipeline configuration and input validation.
 
 ### 3.2. Pipeline configuration
 
@@ -636,7 +634,7 @@ You know what are the main components of an nf-core pipeline and how the code is
 
 ### What's next?
 
-Take a break! That was a lot. When you're feeling refreshed and ready, move on to the next section to apply what you've learned to write an nf-core compatible pipeline.
+When ready, move on to the next section to apply what you've learned to write an nf-core compatible pipeline.
 
 !!! tip
 
