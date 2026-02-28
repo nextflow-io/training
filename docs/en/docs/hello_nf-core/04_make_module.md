@@ -1467,7 +1467,7 @@ In the Nextflow context, a [stub](https://www.nextflow.io/docs/latest/process.ht
 
 <!-- TODO (future) This is super glossed over but should really be explained or at least link out to an explanation about stubs (the reference doc isn't terribly helpful either). Right now this is likely to be mostly meaningless to anyone who doesn't already know about stubs. -->
 
-The stub section is completely optional and can be deleted if not needed.
+Don't worry too much if this seems mysterious; we include this for completeness but you can also just delete the stub section if you don't want to deal with it, as it's completely optional.
 
 === "After"
 
