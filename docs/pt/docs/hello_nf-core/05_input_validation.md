@@ -263,7 +263,7 @@ Você deve ver algo assim:
 | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                       `._,._,'
 
-nf-core/tools version 3.4.1 - https://nf-co.re
+nf-core/tools version 3.5.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
@@ -388,7 +388,7 @@ O pipeline deve executar com sucesso, e o parâmetro `batch` agora está validad
 Você aprendeu como usar a ferramenta interativa `nf-core pipelines schema build` para adicionar parâmetros ao `nextflow_schema.json` e viu a validação de parâmetros em ação.
 A interface web manipula toda a sintaxe JSON Schema para você, facilitando o gerenciamento de schemas de parâmetros complexos sem edição JSON manual propensa a erros.
 
-### Próximos passos
+### O que vem a seguir?
 
 Agora que a validação de parâmetros está funcionando, vamos adicionar validação para o conteúdo do arquivo de dados de entrada.
 
@@ -789,7 +789,7 @@ Você implementou e testou tanto a validação de parâmetros quanto a validaç�
 
     Para aprender mais sobre recursos e padrões avançados de validação, consulte a [documentação do nf-schema](https://nextflow-io.github.io/nf-schema/latest/). O comando `nf-core pipelines schema build` fornece uma GUI interativa para gerenciar schemas complexos.
 
-### Próximos passos
+### O que vem a seguir?
 
 Você completou todas as cinco partes do curso de treinamento Hello nf-core!
 

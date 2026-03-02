@@ -263,7 +263,7 @@ Debería ver algo como esto:
 | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                       `._,._,'
 
-nf-core/tools version 3.4.1 - https://nf-co.re
+nf-core/tools version 3.5.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)

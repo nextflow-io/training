@@ -4,7 +4,7 @@
 
 In diesem fünften Teil des Hello nf-core Trainingskurses zeigen wir dir, wie du das nf-schema Plugin verwendest, um Pipeline-Eingaben und Parameter zu validieren.
 
-??? info "Wie du von diesem Abschnitt aus beginnen kannst"
+??? info "Wie du von diesem Abschnitt aus beginnst"
 
     Dieser Abschnitt setzt voraus, dass du [Teil 4: Ein nf-core Modul erstellen](./04_make_module.md) abgeschlossen und das `COWPY` Prozessmodul auf nf-core Standards in deiner Pipeline aktualisiert hast.
 
@@ -156,7 +156,7 @@ Da wir zuerst an der Parametervalidierung arbeiten (dieser Abschnitt) und das Ei
 
 Öffne `nextflow.config` und finde den `validation` Block (um Zeile 246). Füge `ignoreParams` hinzu, um die Eingabedatei-Validierung zu überspringen:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" hl_lines="3" linenums="246"
     validation {
@@ -263,7 +263,7 @@ Du solltest etwas Ähnliches sehen:
 | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                       `._,._,'
 
-nf-core/tools version 3.4.1 - https://nf-co.re
+nf-core/tools version 3.5.2 - https://nf-co.re
 
 INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 17 params)
@@ -388,7 +388,7 @@ Die Pipeline sollte erfolgreich laufen, und der `batch` Parameter wird nun valid
 Du hast gelernt, wie du das interaktive `nf-core pipelines schema build` Tool verwendest, um Parameter zu `nextflow_schema.json` hinzuzufügen und hast Parametervalidierung in Aktion gesehen.
 Die Web-Oberfläche übernimmt die gesamte JSON Schema Syntax für dich und macht es einfach, komplexe Parameter-Schemas ohne fehleranfällige manuelle JSON-Bearbeitung zu verwalten.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Jetzt, wo die Parametervalidierung funktioniert, fügen wir Validierung für die Eingabedatei-Inhalte hinzu.
 
@@ -441,7 +441,7 @@ Wir müssen es durch ein einfacheres Schema für unseren Begrüßungs-Anwendungs
 
 Öffne `assets/schema_input.json` und ersetze die `properties` und `required` Abschnitte:
 
-=== "Nachher"
+=== "Danach"
 
     ```json title="assets/schema_input.json" linenums="1" hl_lines="10-25 27"
     {
@@ -530,7 +530,7 @@ Wenn nf-schema eine CSV-Datei liest, erwartet es, dass die erste Zeile Spaltenü
 
 Für unseren einfachen Fall müssen wir unserer Greetings-Datei eine Kopfzeile hinzufügen:
 
-=== "Nachher"
+=== "Danach"
 
     ```csv title="assets/greetings.csv" linenums="1" hl_lines="1"
     greeting,language,score
@@ -596,7 +596,7 @@ include { UTILS_NEXTFLOW_PIPELINE   } from '../../nf-core/utils_nextflow_pipelin
 
 Aktualisiere nun den Code zur Channel-Erstellung:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="80" hl_lines="4"
         //
@@ -638,7 +638,7 @@ Jetzt, wo wir das Eingabedaten-Schema konfiguriert haben, können wir die vorüb
 
 Öffne `nextflow.config` und entferne die `ignoreParams` Zeile aus dem `validation` Block:
 
-=== "Nachher"
+=== "Danach"
 
     ```groovy title="nextflow.config" linenums="246"
     validation {
@@ -705,7 +705,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
 
 Öffne nun die Datei und ändere den Namen der ersten Spalte in der Kopfzeile von `greeting` zu `message`:
 
-=== "Nachher"
+=== "Danach"
 
     ```csv title="tmp_invalid_greetings.csv" hl_lines="1" linenums="1"
     message,language,score
@@ -789,7 +789,7 @@ Du hast sowohl Parametervalidierung als auch Eingabedatenvalidierung implementie
 
     Um mehr über erweiterte Validierungsfunktionen und -muster zu erfahren, schaue dir die [nf-schema Dokumentation](https://nextflow-io.github.io/nf-schema/latest/) an. Der `nf-core pipelines schema build` Befehl bietet eine interaktive GUI zur Verwaltung komplexer Schemas.
 
-### Was kommt als Nächstes?
+### Wie geht es weiter?
 
 Du hast alle fünf Teile des Hello nf-core Trainingskurses abgeschlossen!
 

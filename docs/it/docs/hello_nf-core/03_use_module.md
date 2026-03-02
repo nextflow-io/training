@@ -109,7 +109,7 @@ Questo visualizza la documentazione sul modulo, inclusi input, output e informaz
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.4.1 - https://nf-co.re
+        nf-core/tools version 3.5.2 - https://nf-co.re
 
 
     ╭─ Module: cat/cat  ─────────────────────────────────────────────────╮
@@ -141,9 +141,9 @@ Questo visualizza la documentazione sul modulo, inclusi input, output e informaz
                           │con gzip se file_out termina con │
                           │".gz"                            │
     ╶─────────────────────┼─────────────────────────────────┼────────────╴
-    versions             │                                 │
+    versions_cat         │                                 │
     ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      versions.yml  (file)│File contenente le versioni del  │versions.yml
+      versions_cat (tuple)│Informazioni sulla versione del  │
                           │software                         │
                           ╵                                 ╵
 
@@ -167,8 +167,7 @@ cd core-hello
 nf-core modules install cat/cat
 ```
 
-Lo strumento potrebbe prima richiedere di specificare un tipo di repository.
-(In caso contrario, saltare alla parte "Infine, lo strumento procederà con l'installazione del modulo.")
+Lo strumento procederà con l'installazione del modulo.
 
 ??? success "Output del comando"
 
@@ -180,38 +179,11 @@ Lo strumento potrebbe prima richiedere di specificare un tipo di repository.
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.4.1 - https://nf-co.re
+    nf-core/tools version 3.5.2 - https://nf-co.re
 
 
-    WARNING  'repository_type' non definito in .nf-core.yml
-    ? Questo repository è una pipeline o un repository di moduli? (Usa i tasti freccia)
-    » Pipeline
-      Repository di moduli
-    ```
-
-Se appare, premere invio per accettare la risposta predefinita (`Pipeline`) e continuare.
-
-Lo strumento offrirà quindi di modificare la configurazione del progetto per evitare questo prompt in futuro.
-
-??? success "Output del comando"
-
-    ```console
-        INFO     Per evitare questo prompt in futuro, aggiungere la chiave 'repository_type' al file .nf-core.yml.
-        ? Desideri che aggiunga questa configurazione ora? [y/n] (y):
-    ```
-
-Tanto vale approfittare di questo strumento conveniente!
-Premere invio per accettare la risposta predefinita (sì).
-
-Infine, lo strumento procederà con l'installazione del modulo.
-
-??? success "Output del comando"
-
-    ```console
-    INFO Configurazione aggiunta a '.nf-core.yml'
-    INFO Reinstallazione dei moduli trovati in 'modules.json' ma mancanti dalla directory:
-    INFO Installazione di 'cat/cat'
-    INFO Utilizzare la seguente istruzione per includere questo modulo:
+    INFO Installing 'cat/cat'
+    INFO Use the following statement to include this module:
 
         include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
     ```
@@ -222,7 +194,7 @@ Il comando automaticamente:
 - Aggiorna `modules.json` per tracciare il modulo installato
 - Fornisce l'istruzione `include` corretta da utilizzare nel workflow
 
-!!! tip
+!!! tip "Suggerimento"
 
     Assicurarsi sempre che la directory di lavoro corrente sia la radice del progetto della pipeline prima di eseguire il comando di installazione del modulo.
 
@@ -261,11 +233,11 @@ nf-core modules list local
 ??? success "Output del comando"
 
     ```console
-    INFO     Tipo di repository: pipeline
-    INFO     Moduli installati in '.':
+    INFO     Repository type: pipeline
+    INFO     Modules installed in '.':
 
     ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-    ┃ Nome Modulo ┃ Repository      ┃ Version SHA ┃ Messaggio                              ┃ Data       ┃
+    ┃ Module Name ┃ Repository      ┃ Version SHA ┃ Message                                ┃ Date       ┃
     ┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
     │ cat/cat     │ nf-core/modules │ 41dfa3f     │ update meta.yml of all modules (#8747) │ 2025-07-07 │
     └─────────────┴─────────────────┴─────────────┴────────────────────────────────────────┴────────────┘
@@ -282,7 +254,7 @@ Sostituiamo l'istruzione `include` per il modulo `collectGreetings` con quella p
 Come promemoria, lo strumento di installazione del modulo ci ha fornito l'esatta istruzione da utilizzare:
 
 ```groovy title="Istruzione di importazione prodotta dal comando di installazione"
-include { CAT_CAT } from '../modules/nf-core/cat/cat/main'`
+include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
 ```
 
 Si noti che la convenzione nf-core prevede l'uso di maiuscole per i nomi dei moduli quando li si importa.
@@ -291,7 +263,7 @@ Aprire [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) e apportar
 
 === "Dopo"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -301,8 +273,8 @@ Aprire [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) e apportar
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
 === "Prima"
@@ -334,7 +306,7 @@ A questo punto, si potrebbe essere tentati di immergersi e iniziare a modificare
 
 Affronteremo questo aspetto come sezione separata perché coinvolge un nuovo meccanismo che non abbiamo ancora trattato: le mappe di metadati.
 
-!!! note
+!!! note "Nota"
 
     È possibile eliminare facoltativamente il file `collectGreetings.nf`:
 
@@ -362,7 +334,7 @@ Questo ci permetterà di determinare se possiamo semplicemente trattare il nuovo
 Idealmente questo è qualcosa che si dovrebbe fare _prima_ di installare il modulo, ma meglio tardi che mai.
 (Tanto per la cronaca, esiste un comando `uninstall` per eliminare i moduli che si decide di non volere più.)
 
-!!! note
+!!! note "Nota"
 
     Il processo CAT_CAT include una gestione piuttosto intelligente di diversi tipi di compressione, estensioni di file e così via che non sono strettamente rilevanti per ciò che stiamo cercando di mostrarvi qui, quindi ignoreremo la maggior parte di essi e ci concentreremo solo sulle parti che sono importanti.
 
@@ -399,15 +371,15 @@ process CAT_CAT {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pigz:2.3.4' :
-        'biocontainers/pigz:2.3.4' }"
+        'https://depot.galaxyproject.org/singularity/pigz:2.8' :
+        'biocontainers/pigz:2.8' }"
 
     input:
     tuple val(meta), path(files_in)
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
-    path "versions.yml"               , emit: versions
+    tuple val("${task.process}"), val("pigz"), eval("pigz --version 2>&1 | sed 's/pigz //g'"), topic: versions, emit: versions_cat
 ```
 
 Il modulo CAT_CAT accetta un singolo input, ma quell'input è una tupla contenente due cose:
@@ -418,7 +390,7 @@ Il modulo CAT_CAT accetta un singolo input, ma quell'input è una tupla contenen
 Al completamento, CAT_CAT fornisce i suoi output in due parti:
 
 - Un'altra tupla contenente la metamap e il file di output concatenato, emessa con il tag `file_out`;
-- Un file `versions.yml` che cattura informazioni sulla versione del software utilizzata, emesso con il tag `versions`.
+- Una tupla di versione pubblicata nel canale topic `versions` per il tracciamento delle versioni del software.
 
 Si noti anche che per impostazione predefinita, il file di output sarà denominato in base a un identificatore che fa parte dei metadati (codice non mostrato qui).
 
@@ -429,7 +401,7 @@ Questo potrebbe sembrare molto da tenere a mente guardando solo il codice, quind
 </figure>
 
 Potete vedere che i due moduli hanno requisiti di input simili in termini di contenuto (un insieme di file di input più alcuni metadati) ma aspettative molto diverse per come quel contenuto è confezionato.
-Ignorando per ora il file delle versioni, anche il loro output principale è equivalente (un file concatenato), tranne che CAT_CAT emette anche la metamap insieme al file di output.
+Ignorando per ora l'output delle versioni, anche il loro output principale è equivalente (un file concatenato), tranne che CAT_CAT emette anche la metamap insieme al file di output.
 
 Le differenze di confezionamento saranno abbastanza facili da gestire, come vedrete tra poco.
 Tuttavia, per comprendere la parte della metamap, dobbiamo introdurre qualche contesto aggiuntivo.
@@ -530,13 +502,13 @@ Ora che sapete tutto sulle metamap (o abbastanza per gli scopi di questo corso, 
 
 Per chiarezza, suddivideremo questo processo e tratteremo ogni passaggio separatamente.
 
-!!! note
+!!! note "Nota"
 
     Tutte le modifiche mostrate di seguito sono apportate alla logica del workflow nel blocco `main` nel file del workflow `core-hello/workflows/hello.nf`.
 
 ### 3.1. Creare una mappa di metadati
 
-Per prima cosa, dobbiamo creare una mappa di metadati per `CAT_CAT`, tenendo presente che i moduli nf-core richiedono che la metamap abbia almeno un campo `id`.
+Per prima cosa, dobbiamo creare una mappa di metadati per `CAT_CAT`, tenendo presente che i moduli nf-core richiedono che la metamap contenga almeno un campo `id`.
 
 Poiché non abbiamo bisogno di altri metadati, possiamo mantenerla semplice e usare qualcosa come questo:
 
@@ -631,7 +603,7 @@ Successivamente, trasformare il canale di file in un canale di tuple contenenti 
 La riga che abbiamo aggiunto realizza due cose:
 
 - `.collect()` raccoglie tutti i file dall'output di `convertToUpper` in un singolo elenco
-- `.map { files -> tuple(cat_meta, files) }` crea una tupla di `[metadati, file]` nel formato che `CAT_CAT` si aspetta
+- `#!groovy .map { files -> tuple(cat_meta, files) }` crea una tupla di `[metadati, file]` nel formato che `CAT_CAT` si aspetta
 
 Questo è tutto ciò che dobbiamo fare per configurare la tupla di input per `CAT_CAT`.
 
@@ -654,7 +626,7 @@ Ora chiamare `CAT_CAT` sul canale appena creato:
         // creare un canale con metadati e file in formato tupla
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concatenare i file utilizzando il modulo nf-core cat/cat
+        // concatenare i saluti
         CAT_CAT(ch_for_cat)
 
         // generare arte ASCII dei saluti con cowpy
@@ -736,11 +708,11 @@ Poiché `cowpy` non accetta ancora tuple di metadati (risolveremo questo problem
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-L'operazione `.map{ meta, file -> file }` estrae il file dalla tupla `[metadati, file]` prodotta da `CAT_CAT` in un nuovo canale, `ch_for_cowpy`.
+L'operazione `#!groovy .map { meta, file -> file }` estrae il file dalla tupla `[metadati, file]` prodotta da `CAT_CAT` in un nuovo canale, `ch_for_cowpy`.
 
 Quindi è solo questione di passare `ch_for_cowpy` a `cowpy` invece di `collectGreetings.out.outfile` in quest'ultima riga.
 
-!!! note
+!!! note "Nota"
 
     Nella prossima parte del corso, aggiorneremo `cowpy` per lavorare direttamente con tuple di metadati, quindi questo passaggio di estrazione non sarà più necessario.
 
