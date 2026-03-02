@@ -303,6 +303,13 @@ Compared to a basic Nextflow workflow like the one developed in [Hello Nextflow]
 
 These are optional features of Nextflow that make the workflow **composable**, meaning that it can be called from within another workflow.
 
+!!! note "The `Channel.topic` block"
+
+    You may have noticed the `def topic_versions = Channel.topic("versions")` block starting at line 17.
+    This is boilerplate housekeeping code that collects software version information from all modules automatically.
+    nf-core is rolling out this mechanism across all pipelines in 2026, so you'll see it in all new pipelines going forward.
+    Part 4 of this course explains how it works in detail.
+
 !!! note "Composable workflows in depth"
 
     The [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
@@ -753,7 +760,9 @@ workflow HELLO {
 */
 ```
 
-Overall this code does very little aside from some housekeeping that has to do with capturing the version of any software tools that get run in the pipeline.
+The highlighted lines define the composable workflow structure: `workflow HELLO {`, `take:`, `main:`, and `emit:`.
+The large block between lines 17–34 is more substantial: it handles software version capture using topic channels, a mechanism nf-core is rolling out across all pipelines in 2026.
+We'll explain it in Part 4; for now, treat it as boilerplate that you can leave untouched.
 
 We need to add the relevant code from the composable version of the original workflow that we developed in section 2.
 
@@ -766,7 +775,8 @@ We're going to tackle this in the following stages:
 
 !!! note
 
-    We're going to ignore the version capture for this first pass and will look at how to wire that up in a later part of this training.
+    We're going to ignore the version capture block for this first pass.
+    Part 4 explains how it works.
 
 ### 3.1. Copy the modules and set up module imports
 

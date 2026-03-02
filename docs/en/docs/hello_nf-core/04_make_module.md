@@ -1094,7 +1094,37 @@ To summarize, you get:
 - **Easy customization**: Override publishing behavior in config, not in module code
 - **Portable modules**: Modules don't hardcode output locations
 
-This completes the set of nf-core module features you should absolutely learn to use, but there are others which you can read about in the [nf-core modules specifications](https://nf-co.re/docs/guidelines/components/modules).
+### 1.6. Version capture with topic channels
+
+Reproducibility is a core principle of nf-core: every pipeline run records exactly which software versions were used, so results can be reproduced and compared across runs.
+nf-core pipelines therefore write a combined software versions report to `pipeline_info/` at the end of every run, collecting version information from every module that ran.
+The mechanism that handles this collection is the `Channel.topic("versions")` block you saw in the placeholder workflow in Part 2.
+
+Topic channels are a Nextflow broadcast mechanism: any process can publish to a named topic, and any subscriber receives everything published to that topic.
+nf-core modules publish their version information to the `"versions"` topic directly from within their script block.
+The workflow subscribes once and collects everything, regardless of how many modules the pipeline has:
+
+```groovy title="workflows/hello.nf (excerpt)"
+def topic_versions = Channel.topic("versions")
+    .distinct()
+    .branch { entry ->
+        versions_file: entry instanceof Path   // legacy versions.yml files
+        versions_tuple: true                   // tuple-format entries
+    }
+
+softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+    .mix(topic_versions_string)
+    .collectFile(
+        storeDir: "${params.outdir}/pipeline_info",
+        name:  'hello_software_' + 'versions.yml',
+        sort: true,
+        newLine: true
+    ).set { ch_collated_versions }
+```
+
+For backwards compatibility during the transition, nf-core modules currently also write a `versions.yml` file in the script block and emit it with `emit: versions` — which is what you added to `COWPY` in section 2.1.
+In the old approach, every workflow had to manually collect these files from each module individually and pass them along: `ch_versions = ch_versions.mix(COWPY.out.versions)`, `ch_versions = ch_versions.mix(CAT_CAT.out.versions)`, and so on for every module in the pipeline.
+The `versions_file` branch in the topic channel block handles these legacy files, so both styles are supported simultaneously.
 
 ### Takeaway
 
@@ -1103,7 +1133,10 @@ You now know how to adapt local modules to follow nf-core conventions:
 - Design your modules to accept and propagate metadata tuples;
 - Use `ext.args` to keep module interfaces minimal and portable;
 - Use `ext.prefix` for configurable, standardized output file naming;
-- Adopt the default centralized `publishDir` directive for a consistent results directory structure.
+- Adopt the default centralized `publishDir` directive for a consistent results directory structure;
+- Understand how topic channels collect software versions from all modules automatically.
+
+For further reading on module conventions, see the [nf-core modules specifications](https://nf-co.re/docs/guidelines/components/modules).
 
 ### What's next?
 
