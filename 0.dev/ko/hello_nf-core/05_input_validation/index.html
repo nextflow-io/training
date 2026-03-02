@@ -1464,7 +1464,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        정리
+        핵심 정리
       
     </span>
   </a>
@@ -1606,7 +1606,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        정리
+        핵심 정리
       
     </span>
   </a>
@@ -3648,7 +3648,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        정리
+        핵심 정리
       
     </span>
   </a>
@@ -3790,7 +3790,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        정리
+        핵심 정리
       
     </span>
   </a>
@@ -4200,7 +4200,7 @@ nf-schema는 모든 Nextflow workflow에서 작동하지만, 모든 nf-core 파�
 <p>검증 동작은 <code>nextflow.config</code>의 <code>validation{}</code> 범위를 통해 제어됩니다.</p>
 <p>매개변수 검증을 먼저 작업할 것이고(이 섹션) 섹션 2까지 입력 데이터 스키마를 구성하지 않을 것이므로, 일시적으로 nf-schema에게 <code>input</code> 매개변수의 파일 내용 검증을 건너뛰도록 지시해야 합니다.</p>
 <p><code>nextflow.config</code>를 열고 <code>validation</code> 블록을 찾으십시오(246줄 근처). 입력 파일 검증을 건너뛰기 위해 <code>ignoreParams</code>를 추가하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">수정 후</label><label for="__tabbed_1_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">후</label><label for="__tabbed_1_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-246">246</a></span>
@@ -4324,7 +4324,7 @@ workflow 스크립트의 다른 곳(<code>main.nf</code> 또는 모듈 파일)�
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="go">| \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="go">                                      `._,._,&#39;</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">nf-core/tools version 3.4.1 - https://nf-co.re</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="go">nf-core/tools version 3.5.2 - https://nf-co.re</span>
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="go">INFO     [✓] Default parameters match schema validation</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="go">INFO     [✓] Pipeline schema looks valid (found 17 params)</span>
@@ -4437,7 +4437,7 @@ workflow 스크립트의 다른 곳(<code>main.nf</code> 또는 모듈 파일)�
 </code></pre></div>
 </details>
 <p>파이프라인이 성공적으로 실행되어야 하며 <code>batch</code> 매개변수가 이제 검증됩니다.</p>
-<h3 id="_1">정리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h3 id="_1">핵심 정리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p>대화형 <code>nf-core pipelines schema build</code> 도구를 사용하여 <code>nextflow_schema.json</code>에 매개변수를 추가하는 방법을 배웠고 실제로 매개변수 검증을 확인했습니다.
 웹 인터페이스가 모든 JSON Schema 구문을 처리해 주므로 오류가 발생하기 쉬운 수동 JSON 편집 없이도 복잡한 매개변수 스키마를 쉽게 관리할 수 있습니다.</p>
 <h3 id="_2">다음 단계는?<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
@@ -4476,7 +4476,7 @@ workflow 스크립트의 다른 곳(<code>main.nf</code> 또는 모듈 파일)�
 <p>nf-core 파이프라인 템플릿은 paired-end 시퀀싱 데이터를 위해 설계된 기본 <code>assets/schema_input.json</code>을 포함합니다.
 이를 우리의 인사말 사용 사례에 맞는 더 간단한 스키마로 교체해야 합니다.</p>
 <p><code>assets/schema_input.json</code>을 열고 <code>properties</code>와 <code>required</code> 섹션을 교체하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">수정 후</label><label for="__tabbed_2_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">후</label><label for="__tabbed_2_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/schema_input.json</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
@@ -4622,7 +4622,7 @@ workflow 스크립트의 다른 곳(<code>main.nf</code> 또는 모듈 파일)�
 <h3 id="24-greetingscsv">2.4. greetings.csv 파일에 헤더 추가<a class="headerlink" href="#24-greetingscsv" title="Permanent link">&para;</a></h3>
 <p>nf-schema가 CSV 파일을 읽을 때, 스키마의 필드 이름과 일치하는 컬럼 헤더가 첫 번째 행에 있어야 합니다.</p>
 <p>우리의 간단한 경우, 인사말 파일에 헤더 라인을 추가해야 합니다:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">수정 후</label><label for="__tabbed_3_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">후</label><label for="__tabbed_3_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">assets/greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
@@ -4699,7 +4699,7 @@ workflow 스크립트의 다른 곳(<code>main.nf</code> 또는 모듈 파일)�
 <a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">UTILS_NEXTFLOW_PIPELINE</span><span class="w">   </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../../nf-core/utils_nextflow_pipeline&#39;</span>
 </code></pre></div></td></tr></table></div>
 <p>이제 channel 생성 코드를 업데이트하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">수정 후</label><label for="__tabbed_4_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">후</label><label for="__tabbed_4_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-80">80</a></span>
@@ -4754,7 +4754,7 @@ workflow 스크립트의 다른 곳(<code>main.nf</code> 또는 모듈 파일)�
 <p>이제 입력 데이터 스키마를 구성했으므로, 앞서 추가한 임시 무시 설정을 제거할 수 있습니다.</p>
 <h3 id="26">2.6. 입력 검증 재활성화<a class="headerlink" href="#26" title="Permanent link">&para;</a></h3>
 <p><code>nextflow.config</code>를 열고 <code>validation</code> 블록에서 <code>ignoreParams</code> 라인을 제거하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">수정 후</label><label for="__tabbed_5_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">후</label><label for="__tabbed_5_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-246">246</a></span>
@@ -4813,7 +4813,7 @@ workflow 스크립트의 다른 곳(<code>main.nf</code> 또는 모듈 파일)�
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>cp<span class="w"> </span>assets/greetings.csv<span class="w"> </span>assets/invalid_greetings.csv
 </code></pre></div>
 <p>이제 파일을 열고 헤더 라인에서 첫 번째 컬럼의 이름을 <code>greeting</code>에서 <code>message</code>로 변경하십시오:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">수정 후</label><label for="__tabbed_6_2">수정 전</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">후</label><label for="__tabbed_6_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tmp_invalid_greetings.csv</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
@@ -4888,7 +4888,7 @@ workflow 스크립트의 다른 곳(<code>main.nf</code> 또는 모듈 파일)�
 </ul>
 <p>스키마 검증은 파이프라인이 실행되기 전에 입력 파일이 올바른 구조를 가지고 있는지 확인하여 시간을 절약하고 나중에 실행 중 혼란스러운 오류를 방지합니다.</p>
 <p>연습하고 싶다면 스키마를 다른 재미있는 방식으로 위반하는 다른 인사말 입력 파일을 자유롭게 만들어 보십시오.</p>
-<h3 id="_3">정리<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_3">핵심 정리<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>매개변수 검증과 입력 데이터 검증을 모두 구현하고 테스트했습니다. 파이프라인이 이제 실행 전에 입력을 검증하여 빠른 피드백과 명확한 오류 메시지를 제공합니다.</p>
 <div class="admonition tip">
 <p class="admonition-title">추가 읽을거리</p>

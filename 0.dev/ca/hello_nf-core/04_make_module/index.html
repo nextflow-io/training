@@ -1602,6 +1602,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#16-captura-de-versions-amb-topic-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6. Captura de versions amb topic channels
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6. Captura de versions amb topic channels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-afegir-informacio-de-versio-a-cowpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6.1. Afegir informació de versió a COWPY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-executar-el-pipeline-i-inspeccionar-linforme-de-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6.2. Executar el pipeline i inspeccionar l'informe de versions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#conclusio" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4087,6 +4126,45 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#16-captura-de-versions-amb-topic-channels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6. Captura de versions amb topic channels
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6. Captura de versions amb topic channels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-afegir-informacio-de-versio-a-cowpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6.1. Afegir informació de versió a COWPY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-executar-el-pipeline-i-inspeccionar-linforme-de-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.6.2. Executar el pipeline i inspeccionar l'informe de versions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#conclusio" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4657,30 +4735,26 @@ Pots comprovar que s'executa correctament executant la següent comanda:</p>
 <span class="normal"><a href="#__codelineno-2-17">17</a></span>
 <span class="normal"><a href="#__codelineno-2-18">18</a></span>
 <span class="normal"><a href="#__codelineno-2-19">19</a></span>
-<span class="normal"><a href="#__codelineno-2-20">20</a></span>
-<span class="normal"><a href="#__codelineno-2-21">21</a></span>
-<span class="normal"><a href="#__codelineno-2-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="n">process</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">process</span><span class="w"> </span><span class="n">cowpy</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14"></a>
-<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17"></a>
-<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="s2">    cat $input_file | cowpy -c &quot;$character&quot; &gt; cowpy-${input_file}</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="o">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">input_file</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;cowpy-${input_file}&quot;</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="s2">    cat $input_file | cowpy -c &quot;$character&quot; &gt; cowpy-${input_file}</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Aplicarem les següents convencions nf-core de manera incremental:</p>
 <ol>
@@ -4750,7 +4824,7 @@ Pots comprovar que s'executa correctament executant la següent comanda:</p>
 <a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
 <a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy/main.nf&#39;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
 </span><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4774,7 +4848,7 @@ Pots comprovar que s'executa correctament executant la següent comanda:</p>
 <a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy/main.nf&#39;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">cowpy</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
 </span><a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -4803,24 +4877,66 @@ Pots comprovar que s'executa correctament executant la següent comanda:</p>
 <span class="normal"><a href="#__codelineno-8-57">57</a></span>
 <span class="normal"><a href="#__codelineno-8-58">58</a></span>
 <span class="normal"><a href="#__codelineno-8-59">59</a></span>
-<span class="normal"><a href="#__codelineno-8-60">60</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-43" name="__codelineno-8-43"></a><span class="c1">// generate ASCII art of the greetings with cowpy</span>
-<a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="hll"><span class="n">COWPY</span><span class="o">(</span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">)</span>
-</span><a id="__codelineno-8-45" name="__codelineno-8-45"></a>
-<a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="c1">//</span>
-<a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="c1">// Collate and save software versions</span>
-<a id="__codelineno-8-48" name="__codelineno-8-48"></a><span class="c1">//</span>
-<a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
-<a id="__codelineno-8-50" name="__codelineno-8-50"></a><span class="w">    </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="w">        </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-8-52" name="__codelineno-8-52"></a><span class="w">        </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
-<a id="__codelineno-8-53" name="__codelineno-8-53"></a><span class="w">        </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<a id="__codelineno-8-54" name="__codelineno-8-54"></a><span class="w">        </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-8-55" name="__codelineno-8-55"></a><span class="w">    </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-8-56" name="__codelineno-8-56"></a>
-<a id="__codelineno-8-57" name="__codelineno-8-57"></a>
-<a id="__codelineno-8-58" name="__codelineno-8-58"></a><span class="nl">emit:</span>
-<a id="__codelineno-8-59" name="__codelineno-8-59"></a><span class="hll"><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">COWPY</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">cowpy_output</span>
-</span><a id="__codelineno-8-60" name="__codelineno-8-60"></a><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
+<span class="normal"><a href="#__codelineno-8-60">60</a></span>
+<span class="normal"><a href="#__codelineno-8-61">61</a></span>
+<span class="normal"><a href="#__codelineno-8-62">62</a></span>
+<span class="normal"><a href="#__codelineno-8-63">63</a></span>
+<span class="normal"><a href="#__codelineno-8-64">64</a></span>
+<span class="normal"><a href="#__codelineno-8-65">65</a></span>
+<span class="normal"><a href="#__codelineno-8-66">66</a></span>
+<span class="normal"><a href="#__codelineno-8-67">67</a></span>
+<span class="normal"><a href="#__codelineno-8-68">68</a></span>
+<span class="normal"><a href="#__codelineno-8-69">69</a></span>
+<span class="normal"><a href="#__codelineno-8-70">70</a></span>
+<span class="normal"><a href="#__codelineno-8-71">71</a></span>
+<span class="normal"><a href="#__codelineno-8-72">72</a></span>
+<span class="normal"><a href="#__codelineno-8-73">73</a></span>
+<span class="normal"><a href="#__codelineno-8-74">74</a></span>
+<span class="normal"><a href="#__codelineno-8-75">75</a></span>
+<span class="normal"><a href="#__codelineno-8-76">76</a></span>
+<span class="normal"><a href="#__codelineno-8-77">77</a></span>
+<span class="normal"><a href="#__codelineno-8-78">78</a></span>
+<span class="normal"><a href="#__codelineno-8-79">79</a></span>
+<span class="normal"><a href="#__codelineno-8-80">80</a></span>
+<span class="normal"><a href="#__codelineno-8-81">81</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-43" name="__codelineno-8-43"></a><span class="c1">// extract the file from the tuple since cowpy doesn&#39;t use metadata yet</span>
+<a id="__codelineno-8-44" name="__codelineno-8-44"></a><span class="n">ch_for_cowpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-8-45" name="__codelineno-8-45"></a>
+<a id="__codelineno-8-46" name="__codelineno-8-46"></a><span class="c1">// generate ASCII art of the greetings with cowpy</span>
+<a id="__codelineno-8-47" name="__codelineno-8-47"></a><span class="hll"><span class="n">COWPY</span><span class="o">(</span><span class="n">ch_for_cowpy</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+</span><a id="__codelineno-8-48" name="__codelineno-8-48"></a>
+<a id="__codelineno-8-49" name="__codelineno-8-49"></a><span class="c1">//</span>
+<a id="__codelineno-8-50" name="__codelineno-8-50"></a><span class="c1">// Collate and save software versions</span>
+<a id="__codelineno-8-51" name="__codelineno-8-51"></a><span class="c1">//</span>
+<a id="__codelineno-8-52" name="__codelineno-8-52"></a><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-8-53" name="__codelineno-8-53"></a><span class="w">    </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
+<a id="__codelineno-8-54" name="__codelineno-8-54"></a><span class="w">    </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-8-55" name="__codelineno-8-55"></a><span class="w">        </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
+<a id="__codelineno-8-56" name="__codelineno-8-56"></a><span class="w">        </span><span class="nl">versions_tuple:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-8-57" name="__codelineno-8-57"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-8-58" name="__codelineno-8-58"></a>
+<a id="__codelineno-8-59" name="__codelineno-8-59"></a><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
+<a id="__codelineno-8-60" name="__codelineno-8-60"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-8-61" name="__codelineno-8-61"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-8-62" name="__codelineno-8-62"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-8-63" name="__codelineno-8-63"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
+<a id="__codelineno-8-64" name="__codelineno-8-64"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-8-65" name="__codelineno-8-65"></a><span class="w">        </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
+<a id="__codelineno-8-66" name="__codelineno-8-66"></a><span class="w">        </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-8-67" name="__codelineno-8-67"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-8-68" name="__codelineno-8-68"></a>
+<a id="__codelineno-8-69" name="__codelineno-8-69"></a><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
+<a id="__codelineno-8-70" name="__codelineno-8-70"></a><span class="w">    </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
+<a id="__codelineno-8-71" name="__codelineno-8-71"></a><span class="w">    </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
+<a id="__codelineno-8-72" name="__codelineno-8-72"></a><span class="w">        </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
+<a id="__codelineno-8-73" name="__codelineno-8-73"></a><span class="w">        </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-8-74" name="__codelineno-8-74"></a><span class="w">        </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
+<a id="__codelineno-8-75" name="__codelineno-8-75"></a><span class="w">        </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-8-76" name="__codelineno-8-76"></a><span class="w">    </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-8-77" name="__codelineno-8-77"></a>
+<a id="__codelineno-8-78" name="__codelineno-8-78"></a>
+<a id="__codelineno-8-79" name="__codelineno-8-79"></a><span class="nl">emit:</span>
+<a id="__codelineno-8-80" name="__codelineno-8-80"></a><span class="hll"><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">COWPY</span><span class="o">.</span><span class="na">out</span>
+</span><a id="__codelineno-8-81" name="__codelineno-8-81"></a><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4841,24 +4957,66 @@ Pots comprovar que s'executa correctament executant la següent comanda:</p>
 <span class="normal"><a href="#__codelineno-9-57">57</a></span>
 <span class="normal"><a href="#__codelineno-9-58">58</a></span>
 <span class="normal"><a href="#__codelineno-9-59">59</a></span>
-<span class="normal"><a href="#__codelineno-9-60">60</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-43" name="__codelineno-9-43"></a><span class="c1">// generate ASCII art of the greetings with cowpy</span>
-<a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="hll"><span class="n">cowpy</span><span class="o">(</span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">)</span>
-</span><a id="__codelineno-9-45" name="__codelineno-9-45"></a>
-<a id="__codelineno-9-46" name="__codelineno-9-46"></a><span class="c1">//</span>
-<a id="__codelineno-9-47" name="__codelineno-9-47"></a><span class="c1">// Collate and save software versions</span>
-<a id="__codelineno-9-48" name="__codelineno-9-48"></a><span class="c1">//</span>
-<a id="__codelineno-9-49" name="__codelineno-9-49"></a><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
-<a id="__codelineno-9-50" name="__codelineno-9-50"></a><span class="w">    </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-9-51" name="__codelineno-9-51"></a><span class="w">        </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-9-52" name="__codelineno-9-52"></a><span class="w">        </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
-<a id="__codelineno-9-53" name="__codelineno-9-53"></a><span class="w">        </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<a id="__codelineno-9-54" name="__codelineno-9-54"></a><span class="w">        </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-9-55" name="__codelineno-9-55"></a><span class="w">    </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-9-56" name="__codelineno-9-56"></a>
-<a id="__codelineno-9-57" name="__codelineno-9-57"></a>
-<a id="__codelineno-9-58" name="__codelineno-9-58"></a><span class="nl">emit:</span>
-<a id="__codelineno-9-59" name="__codelineno-9-59"></a><span class="hll"><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">cowpy</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">cowpy_output</span>
-</span><a id="__codelineno-9-60" name="__codelineno-9-60"></a><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
+<span class="normal"><a href="#__codelineno-9-60">60</a></span>
+<span class="normal"><a href="#__codelineno-9-61">61</a></span>
+<span class="normal"><a href="#__codelineno-9-62">62</a></span>
+<span class="normal"><a href="#__codelineno-9-63">63</a></span>
+<span class="normal"><a href="#__codelineno-9-64">64</a></span>
+<span class="normal"><a href="#__codelineno-9-65">65</a></span>
+<span class="normal"><a href="#__codelineno-9-66">66</a></span>
+<span class="normal"><a href="#__codelineno-9-67">67</a></span>
+<span class="normal"><a href="#__codelineno-9-68">68</a></span>
+<span class="normal"><a href="#__codelineno-9-69">69</a></span>
+<span class="normal"><a href="#__codelineno-9-70">70</a></span>
+<span class="normal"><a href="#__codelineno-9-71">71</a></span>
+<span class="normal"><a href="#__codelineno-9-72">72</a></span>
+<span class="normal"><a href="#__codelineno-9-73">73</a></span>
+<span class="normal"><a href="#__codelineno-9-74">74</a></span>
+<span class="normal"><a href="#__codelineno-9-75">75</a></span>
+<span class="normal"><a href="#__codelineno-9-76">76</a></span>
+<span class="normal"><a href="#__codelineno-9-77">77</a></span>
+<span class="normal"><a href="#__codelineno-9-78">78</a></span>
+<span class="normal"><a href="#__codelineno-9-79">79</a></span>
+<span class="normal"><a href="#__codelineno-9-80">80</a></span>
+<span class="normal"><a href="#__codelineno-9-81">81</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-43" name="__codelineno-9-43"></a><span class="c1">// extract the file from the tuple since cowpy doesn&#39;t use metadata yet</span>
+<a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="n">ch_for_cowpy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">file_out</span><span class="o">.</span><span class="na">map</span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-9-45" name="__codelineno-9-45"></a>
+<a id="__codelineno-9-46" name="__codelineno-9-46"></a><span class="c1">// generate ASCII art of the greetings with cowpy</span>
+<a id="__codelineno-9-47" name="__codelineno-9-47"></a><span class="hll"><span class="n">cowpy</span><span class="o">(</span><span class="n">ch_for_cowpy</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">character</span><span class="o">)</span>
+</span><a id="__codelineno-9-48" name="__codelineno-9-48"></a>
+<a id="__codelineno-9-49" name="__codelineno-9-49"></a><span class="c1">//</span>
+<a id="__codelineno-9-50" name="__codelineno-9-50"></a><span class="c1">// Collate and save software versions</span>
+<a id="__codelineno-9-51" name="__codelineno-9-51"></a><span class="c1">//</span>
+<a id="__codelineno-9-52" name="__codelineno-9-52"></a><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-9-53" name="__codelineno-9-53"></a><span class="w">    </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
+<a id="__codelineno-9-54" name="__codelineno-9-54"></a><span class="w">    </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-9-55" name="__codelineno-9-55"></a><span class="w">        </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
+<a id="__codelineno-9-56" name="__codelineno-9-56"></a><span class="w">        </span><span class="nl">versions_tuple:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-9-57" name="__codelineno-9-57"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-9-58" name="__codelineno-9-58"></a>
+<a id="__codelineno-9-59" name="__codelineno-9-59"></a><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
+<a id="__codelineno-9-60" name="__codelineno-9-60"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-9-61" name="__codelineno-9-61"></a><span class="w">        </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-9-62" name="__codelineno-9-62"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-9-63" name="__codelineno-9-63"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
+<a id="__codelineno-9-64" name="__codelineno-9-64"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-9-65" name="__codelineno-9-65"></a><span class="w">        </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
+<a id="__codelineno-9-66" name="__codelineno-9-66"></a><span class="w">        </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-9-67" name="__codelineno-9-67"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-9-68" name="__codelineno-9-68"></a>
+<a id="__codelineno-9-69" name="__codelineno-9-69"></a><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
+<a id="__codelineno-9-70" name="__codelineno-9-70"></a><span class="w">    </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
+<a id="__codelineno-9-71" name="__codelineno-9-71"></a><span class="w">    </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
+<a id="__codelineno-9-72" name="__codelineno-9-72"></a><span class="w">        </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
+<a id="__codelineno-9-73" name="__codelineno-9-73"></a><span class="w">        </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-9-74" name="__codelineno-9-74"></a><span class="w">        </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
+<a id="__codelineno-9-75" name="__codelineno-9-75"></a><span class="w">        </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-9-76" name="__codelineno-9-76"></a><span class="w">    </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-9-77" name="__codelineno-9-77"></a>
+<a id="__codelineno-9-78" name="__codelineno-9-78"></a>
+<a id="__codelineno-9-79" name="__codelineno-9-79"></a><span class="nl">emit:</span>
+<a id="__codelineno-9-80" name="__codelineno-9-80"></a><span class="hll"><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">cowpy</span><span class="o">.</span><span class="na">out</span>
+</span><a id="__codelineno-9-81" name="__codelineno-9-81"></a><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5099,30 +5257,26 @@ Obre el fitxer del mòdul <code>cowpy.nf</code> (sota <code>core-hello/modules/l
 <span class="normal"><a href="#__codelineno-20-17">17</a></span>
 <span class="normal"><a href="#__codelineno-20-18">18</a></span>
 <span class="normal"><a href="#__codelineno-20-19">19</a></span>
-<span class="normal"><a href="#__codelineno-20-20">20</a></span>
-<span class="normal"><a href="#__codelineno-20-21">21</a></span>
-<span class="normal"><a href="#__codelineno-20-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-20-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 <a id="__codelineno-20-5" name="__codelineno-20-5"></a>
-<a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7"></a>
-<a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
-<a id="__codelineno-20-10" name="__codelineno-20-10"></a>
-<a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
-<a id="__codelineno-20-13" name="__codelineno-20-13"></a>
-<a id="__codelineno-20-14" name="__codelineno-20-14"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;cowpy-${input_file}&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">cowpy_output</span>
-<a id="__codelineno-20-16" name="__codelineno-20-16"></a>
-<a id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-</span><a id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="hll"><span class="s2">    cat $input_file | cowpy $args &gt; cowpy-${input_file}</span>
-</span><a id="__codelineno-20-21" name="__codelineno-20-21"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-20-22" name="__codelineno-20-22"></a><span class="o">}</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8"></a>
+<a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11"></a>
+<a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;cowpy-${input_file}&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">cowpy_output</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14"></a>
+<a id="__codelineno-20-15" name="__codelineno-20-15"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+</span><a id="__codelineno-20-17" name="__codelineno-20-17"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-20-18" name="__codelineno-20-18"></a><span class="hll"><span class="s2">    cat $input_file | cowpy $args &gt; cowpy-${input_file}</span>
+</span><a id="__codelineno-20-19" name="__codelineno-20-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-20-20" name="__codelineno-20-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5145,30 +5299,26 @@ Obre el fitxer del mòdul <code>cowpy.nf</code> (sota <code>core-hello/modules/l
 <span class="normal"><a href="#__codelineno-21-17">17</a></span>
 <span class="normal"><a href="#__codelineno-21-18">18</a></span>
 <span class="normal"><a href="#__codelineno-21-19">19</a></span>
-<span class="normal"><a href="#__codelineno-21-20">20</a></span>
-<span class="normal"><a href="#__codelineno-21-21">21</a></span>
-<span class="normal"><a href="#__codelineno-21-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-21-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a>
-<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a>
-<a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10"></a>
-<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
-<a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
-</span><a id="__codelineno-21-14" name="__codelineno-21-14"></a>
-<a id="__codelineno-21-15" name="__codelineno-21-15"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;cowpy-${input_file}&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">cowpy_output</span>
-<a id="__codelineno-21-17" name="__codelineno-21-17"></a>
-<a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-21-19" name="__codelineno-21-19"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-21-20" name="__codelineno-21-20"></a><span class="hll"><span class="s2">    cat $input_file | cowpy -c &quot;$character&quot; &gt; cowpy-${input_file}</span>
-</span><a id="__codelineno-21-21" name="__codelineno-21-21"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-21-22" name="__codelineno-21-22"></a><span class="o">}</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8"></a>
+<a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="hll"><span class="w">        </span><span class="n">val</span><span class="w"> </span><span class="n">character</span>
+</span><a id="__codelineno-21-12" name="__codelineno-21-12"></a>
+<a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="w">        </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;cowpy-${input_file}&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">cowpy_output</span>
+<a id="__codelineno-21-15" name="__codelineno-21-15"></a>
+<a id="__codelineno-21-16" name="__codelineno-21-16"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-21-17" name="__codelineno-21-17"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="hll"><span class="s2">    cat $input_file | cowpy -c &quot;$character&quot; &gt; cowpy-${input_file}</span>
+</span><a id="__codelineno-21-19" name="__codelineno-21-19"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-21-20" name="__codelineno-21-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5582,15 +5732,11 @@ Obre el fitxer del mòdul <code>cowpy.nf</code> (sota <code>core-hello/modules/l
 <span class="normal"><a href="#__codelineno-41-2">2</a></span>
 <span class="normal"><a href="#__codelineno-41-3">3</a></span>
 <span class="normal"><a href="#__codelineno-41-4">4</a></span>
-<span class="normal"><a href="#__codelineno-41-5">5</a></span>
-<span class="normal"><a href="#__codelineno-41-6">6</a></span>
-<span class="normal"><a href="#__codelineno-41-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-41-2" name="__codelineno-41-2"></a>
-<a id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
-<a id="__codelineno-41-4" name="__codelineno-41-4"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-41-5" name="__codelineno-41-5"></a>
-<a id="__codelineno-41-6" name="__codelineno-41-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
-<a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
+<span class="normal"><a href="#__codelineno-41-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3"></a>
+<a id="__codelineno-41-4" name="__codelineno-41-4"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5600,17 +5746,13 @@ Obre el fitxer del mòdul <code>cowpy.nf</code> (sota <code>core-hello/modules/l
 <span class="normal"><a href="#__codelineno-42-4">4</a></span>
 <span class="normal"><a href="#__codelineno-42-5">5</a></span>
 <span class="normal"><a href="#__codelineno-42-6">6</a></span>
-<span class="normal"><a href="#__codelineno-42-7">7</a></span>
-<span class="normal"><a href="#__codelineno-42-8">8</a></span>
-<span class="normal"><a href="#__codelineno-42-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
-<a id="__codelineno-42-2" name="__codelineno-42-2"></a>
-<a id="__codelineno-42-3" name="__codelineno-42-3"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
-<a id="__codelineno-42-4" name="__codelineno-42-4"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-42-5" name="__codelineno-42-5"></a>
-<a id="__codelineno-42-6" name="__codelineno-42-6"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-</span><a id="__codelineno-42-7" name="__codelineno-42-7"></a>
-<a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
-<a id="__codelineno-42-9" name="__codelineno-42-9"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
+<span class="normal"><a href="#__codelineno-42-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1"></a><span class="c1">// Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3"></a>
+<a id="__codelineno-42-4" name="__codelineno-42-4"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">&#39;results&#39;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+</span><a id="__codelineno-42-5" name="__codelineno-42-5"></a>
+<a id="__codelineno-42-6" name="__codelineno-42-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span>
+<a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s1">&#39;conda-forge::cowpy==1.1.5&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5692,6 +5834,12 @@ Ara el <code>core-hello-results</code> també conté les sortides del mòdul <co
 </code></pre></div>
 </details>
 <p>Pots veure que Nextflow ha creat aquesta jerarquia de directoris basant-se en els noms del workflow i del mòdul.</p>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Potser notes <code>hello_software_versions.yml</code> a <code>pipeline_info/</code>.
+Actualment només conté informació de versions de <code>CAT_CAT</code>, perquè <code>COWPY</code> encara no informa de la seva versió.
+La secció 1.6 explica com afegir-ho.</p>
+</div>
 <p>El codi responsable viu al fitxer <code>conf/modules.config</code>.
 Aquesta és la configuració <code>publishDir</code> per defecte que forma part de la plantilla nf-core i s'aplica a tots els processos:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
@@ -5757,15 +5905,59 @@ Aquest valor per defecte s'aplicarà fins i tot a mòduls que no vam modificar e
 <li><strong>Personalització fàcil</strong>: Sobreescriu el comportament de publicació a la configuració, no al codi del mòdul</li>
 <li><strong>Mòduls portables</strong>: Els mòduls no codifiquen ubicacions de sortida</li>
 </ul>
-<p>Això completa el conjunt de funcionalitats de mòduls nf-core que absolutament hauries d'aprendre a utilitzar, però n'hi ha d'altres sobre les quals pots llegir a les <a href="https://nf-co.re/docs/guidelines/components/modules">especificacions de mòduls nf-core</a>.</p>
+<h3 id="16-captura-de-versions-amb-topic-channels">1.6. Captura de versions amb topic channels<a class="headerlink" href="#16-captura-de-versions-amb-topic-channels" title="Permanent link">&para;</a></h3>
+<p>La reproductibilitat és un principi fonamental d'nf-core: cada execució del pipeline registra exactament quines versions de programari s'han utilitzat, de manera que els resultats es puguin reproduir i comparar entre execucions.
+L'informe <code>hello_software_versions.yml</code> a <code>pipeline_info/</code> és com els pipelines nf-core compleixen aquest requisit.</p>
+<p>El mecanisme que hi ha darrere és els <strong>topic channels</strong>: una funcionalitat de difusió de Nextflow on qualsevol procés pot publicar dades a un tema amb nom, i qualsevol subscriptor rep tot el que s'ha publicat a aquell tema, independentment d'on provingui al pipeline.
+nf-core l'està desplegant a tots els pipelines el 2026.
+Els mòduls publiquen la seva versió com a tupla directament al bloc output utilitzant la paraula clau <code>topic:</code>, i el workflow se subscriu una vegada per recollir-les totes.</p>
+<h4 id="161-afegir-informacio-de-versio-a-cowpy">1.6.1. Afegir informació de versió a <code>COWPY</code><a class="headerlink" href="#161-afegir-informacio-de-versio-a-cowpy" title="Permanent link">&para;</a></h4>
+<p>Obre el fitxer del mòdul <code>cowpy.nf</code> i afegeix una línia de sortida de versió com es mostra a continuació.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Després</label><label for="__tabbed_13_2">Abans</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/modules/local/cowpy.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-13">13</a></span>
+<span class="normal"><a href="#__codelineno-48-14">14</a></span>
+<span class="normal"><a href="#__codelineno-48-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-13" name="__codelineno-48-13"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-48-14" name="__codelineno-48-14"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${prefix}.txt&quot;</span><span class="o">)</span><span class="w">                                    </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">cowpy_output</span>
+<a id="__codelineno-48-15" name="__codelineno-48-15"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;${task.process}&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s1">&#39;cowpy&#39;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;1.1.5&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">topic:</span><span class="w"> </span><span class="n">versions</span><span class="w"> </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions_cowpy</span>
+</span></code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/modules/local/cowpy.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-13">13</a></span>
+<span class="normal"><a href="#__codelineno-49-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-13" name="__codelineno-49-13"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-49-14" name="__codelineno-49-14"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${prefix}.txt&quot;</span><span class="o">)</span><span class="w">  </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">cowpy_output</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<p>La nova línia publica una tupla <code>[nom_procés, nom_eina, versió]</code> al canal de tema <code>"versions"</code>.
+No cal fer cap canvi al bloc script — la versió es declara estàticament al bloc output.</p>
+<h4 id="162-executar-el-pipeline-i-inspeccionar-linforme-de-versions">1.6.2. Executar el pipeline i inspeccionar l'informe de versions<a class="headerlink" href="#162-executar-el-pipeline-i-inspeccionar-linforme-de-versions" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
+</code></pre></div>
+<p>Obre <code>core-hello-results/pipeline_info/hello_software_versions.yml</code> i ara veuràs ambdós mòduls:</p>
+<div class="highlight"><span class="filename">core-hello-results/pipeline_info/hello_software_versions.yml</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="nt">CAT_CAT</span><span class="p">:</span>
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="w">  </span><span class="nt">pigz</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.8</span>
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="nt">COWPY</span><span class="p">:</span>
+<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a><span class="w">  </span><span class="nt">cowpy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.1.5</span>
+</code></pre></div>
+<p>La col·lecció del costat del workflow — el bloc <code>Channel.topic("versions")</code> que vas veure al workflow de marcador de posició a la Part 2 — se subscriu al tema i escriu aquest informe combinat automàticament.</p>
+<div class="admonition note">
+<p class="admonition-title">Compatibilitat amb versions anteriors</p>
+<p>La branca <code>versions_file</code> al bloc del topic channel del workflow existeix per gestionar mòduls que encara no s'han actualitzat per utilitzar <code>topic: versions</code> i encara escriuen un fitxer <code>versions.yml</code> al bloc script amb <code>emit: versions</code>.
+Ambdós estils estan suportats simultàniament durant la transició.</p>
+</div>
 <h3 id="conclusio">Conclusió<a class="headerlink" href="#conclusio" title="Permanent link">&para;</a></h3>
 <p>Ara saps com adaptar mòduls locals per seguir les convencions nf-core:</p>
 <ul>
 <li>Dissenya els teus mòduls per acceptar i propagar tuples de metadades;</li>
 <li>Utilitza <code>ext.args</code> per mantenir les interfícies de mòdul mínimes i portables;</li>
 <li>Utilitza <code>ext.prefix</code> per a nomenament de fitxers de sortida configurable i estandarditzat;</li>
-<li>Adopta la directiva <code>publishDir</code> centralitzada per defecte per a una estructura de directori de resultats consistent.</li>
+<li>Adopta la directiva <code>publishDir</code> centralitzada per defecte per a una estructura de directori de resultats consistent;</li>
+<li>Comprèn com els topic channels recullen versions de programari de tots els mòduls automàticament.</li>
 </ul>
+<p>Per a més informació sobre les convencions de mòduls, consulta les <a href="https://nf-co.re/docs/guidelines/components/modules">especificacions de mòduls nf-core</a>.</p>
 <h3 id="que-segueix">Què segueix?<a class="headerlink" href="#que-segueix" title="Permanent link">&para;</a></h3>
 <p>Aprèn com utilitzar les eines integrades d'nf-core basades en plantilles per crear mòduls de manera fàcil.</p>
 <hr />
@@ -5776,7 +5968,7 @@ Aquest valor per defecte s'aplicarà fins i tot a mòduls que no vam modificar e
 <h4 id="211-executar-la-comanda-de-creacio-de-modul">2.1.1. Executar la comanda de creació de mòdul<a class="headerlink" href="#211-executar-la-comanda-de-creacio-de-modul" title="Permanent link">&para;</a></h4>
 <p>La comanda <code>nf-core modules create</code> genera una plantilla de mòdul que ja segueix totes les convencions que has après.</p>
 <p>Creem una nova versió del mòdul <code>COWPY</code> amb una plantilla mínima executant aquesta comanda:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>create<span class="w"> </span>--empty-template<span class="w"> </span>COWPY
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nf-core<span class="w"> </span>modules<span class="w"> </span>create<span class="w"> </span>--empty-template<span class="w"> </span>COWPY
 </code></pre></div>
 <p>La bandera <code>--empty-template</code> crea una plantilla inicial neta sense codi extra, facilitant veure l'estructura essencial.</p>
 <p>La comanda s'executa de manera interactiva, guiant-te a través de la configuració.
@@ -5794,12 +5986,12 @@ Busca automàticament informació de l'eina des de repositoris de paquets com Bi
 <p>L'eina crea una estructura de mòdul completa a <code>modules/local/</code> (o <code>modules/nf-core/</code> si estàs al repositori nf-core/modules):</p>
 <details class="abstract">
 <summary>Contingut del directori</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="go">modules/local/cowpy</span>
-<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="go">├── environment.yml</span>
-<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="go">├── main.nf</span>
-<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="go">├── meta.yml</span>
-<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="go">└── tests</span>
-<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="go">    └── main.nf.test</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">modules/local/cowpy</span>
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="go">├── environment.yml</span>
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">├── main.nf</span>
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="go">├── meta.yml</span>
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a><span class="go">└── tests</span>
+<a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a><span class="go">    └── main.nf.test</span>
 </code></pre></div>
 </details>
 <p>Cada fitxer té un propòsit específic:</p>
@@ -5814,52 +6006,40 @@ Busca automàticament informació de l'eina des de repositoris de paquets com Bi
 <p>El fitxer de prova generat utilitza nf-test, un framework de proves per a pipelines i mòduls Nextflow. Per aprendre com escriure i executar aquestes proves, consulta la <a href="../../side_quests/nf-test/">missió secundària nf-test</a>.</p>
 </div>
 <p>El <code>main.nf</code> generat inclou tots els patrons que acabes d'aprendre, més algunes funcionalitats addicionals:</p>
-<div class="highlight"><span class="filename">modules/local/cowpy/main.nf</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;$meta.id&quot;</span>
-<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="s1">&#39;process_single&#39;</span>
-<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>
-<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s2">&quot;${moduleDir}/environment.yml&quot;</span>
-<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;${ workflow.containerEngine == &#39;singularity&#39; &amp;&amp; !task.ext.singularity_pull_docker_container ?</span>
-<a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a><span class="s2">        &#39;https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE&#39;:</span>
-<a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a><span class="s2">        &#39;biocontainers/YOUR-TOOL-HERE&#39; }&quot;</span>
-<a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a>
-<a id="__codelineno-50-10" name="__codelineno-50-10" href="#__codelineno-50-10"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-50-11" name="__codelineno-50-11" href="#__codelineno-50-11"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input</span><span class="o">)</span><span class="w">        </span><span class="c1">// Patró 1: Tuples de metadades ✓</span>
-</span><a id="__codelineno-50-12" name="__codelineno-50-12" href="#__codelineno-50-12"></a>
-<a id="__codelineno-50-13" name="__codelineno-50-13" href="#__codelineno-50-13"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-50-14" name="__codelineno-50-14" href="#__codelineno-50-14"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">output</span>
-<a id="__codelineno-50-15" name="__codelineno-50-15" href="#__codelineno-50-15"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;versions.yml&quot;</span><span class="w">           </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions</span>
-<a id="__codelineno-50-16" name="__codelineno-50-16" href="#__codelineno-50-16"></a>
-<a id="__codelineno-50-17" name="__codelineno-50-17" href="#__codelineno-50-17"></a><span class="w">    </span><span class="nl">when:</span>
-<a id="__codelineno-50-18" name="__codelineno-50-18" href="#__codelineno-50-18"></a><span class="w">    </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">when</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">when</span>
-<a id="__codelineno-50-19" name="__codelineno-50-19" href="#__codelineno-50-19"></a>
-<a id="__codelineno-50-20" name="__codelineno-50-20" href="#__codelineno-50-20"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-50-21" name="__codelineno-50-21" href="#__codelineno-50-21"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">                </span><span class="c1">// Patró 2: ext.args ✓</span>
-</span><a id="__codelineno-50-22" name="__codelineno-50-22" href="#__codelineno-50-22"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span><span class="w">  </span><span class="c1">// Patró 3: ext.prefix ✓</span>
-</span><a id="__codelineno-50-23" name="__codelineno-50-23" href="#__codelineno-50-23"></a>
-<a id="__codelineno-50-24" name="__codelineno-50-24" href="#__codelineno-50-24"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-50-25" name="__codelineno-50-25" href="#__codelineno-50-25"></a><span class="s2">    // Add your tool command here</span>
-<a id="__codelineno-50-26" name="__codelineno-50-26" href="#__codelineno-50-26"></a>
-<a id="__codelineno-50-27" name="__codelineno-50-27" href="#__codelineno-50-27"></a><span class="s2">    cat &lt;&lt;-END_VERSIONS &gt; versions.yml</span>
-<a id="__codelineno-50-28" name="__codelineno-50-28" href="#__codelineno-50-28"></a><span class="s2">    &quot;${task.process}&quot;:</span>
-<a id="__codelineno-50-29" name="__codelineno-50-29" href="#__codelineno-50-29"></a><span class="s2">        COWPY: \$(cowpy --version)</span>
-<a id="__codelineno-50-30" name="__codelineno-50-30" href="#__codelineno-50-30"></a><span class="s2">    END_VERSIONS</span>
-<a id="__codelineno-50-31" name="__codelineno-50-31" href="#__codelineno-50-31"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-50-32" name="__codelineno-50-32" href="#__codelineno-50-32"></a>
-<a id="__codelineno-50-33" name="__codelineno-50-33" href="#__codelineno-50-33"></a><span class="w">    </span><span class="nl">stub:</span>
-<a id="__codelineno-50-34" name="__codelineno-50-34" href="#__codelineno-50-34"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<a id="__codelineno-50-35" name="__codelineno-50-35" href="#__codelineno-50-35"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
-<a id="__codelineno-50-36" name="__codelineno-50-36" href="#__codelineno-50-36"></a>
-<a id="__codelineno-50-37" name="__codelineno-50-37" href="#__codelineno-50-37"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-50-38" name="__codelineno-50-38" href="#__codelineno-50-38"></a><span class="s2">    echo $args</span>
-<a id="__codelineno-50-39" name="__codelineno-50-39" href="#__codelineno-50-39"></a><span class="s2">    touch ${prefix}.txt</span>
-<a id="__codelineno-50-40" name="__codelineno-50-40" href="#__codelineno-50-40"></a>
-<a id="__codelineno-50-41" name="__codelineno-50-41" href="#__codelineno-50-41"></a><span class="s2">    cat &lt;&lt;-END_VERSIONS &gt; versions.yml</span>
-<a id="__codelineno-50-42" name="__codelineno-50-42" href="#__codelineno-50-42"></a><span class="s2">    &quot;${task.process}&quot;:</span>
-<a id="__codelineno-50-43" name="__codelineno-50-43" href="#__codelineno-50-43"></a><span class="s2">        COWPY: \$(cowpy --version)</span>
-<a id="__codelineno-50-44" name="__codelineno-50-44" href="#__codelineno-50-44"></a><span class="s2">    END_VERSIONS</span>
-<a id="__codelineno-50-45" name="__codelineno-50-45" href="#__codelineno-50-45"></a><span class="s2">    &quot;&quot;&quot;</span>
-<a id="__codelineno-50-46" name="__codelineno-50-46" href="#__codelineno-50-46"></a><span class="o">}</span>
+<div class="highlight"><span class="filename">modules/local/cowpy/main.nf</span><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;$meta.id&quot;</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="s1">&#39;process_single&#39;</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>
+<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s2">&quot;${moduleDir}/environment.yml&quot;</span>
+<a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;${ workflow.containerEngine == &#39;singularity&#39; &amp;&amp; !task.ext.singularity_pull_docker_container ?</span>
+<a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a><span class="s2">        &#39;https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE&#39;:</span>
+<a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="s2">        &#39;biocontainers/YOUR-TOOL-HERE&#39; }&quot;</span>
+<a id="__codelineno-54-9" name="__codelineno-54-9" href="#__codelineno-54-9"></a>
+<a id="__codelineno-54-10" name="__codelineno-54-10" href="#__codelineno-54-10"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-54-11" name="__codelineno-54-11" href="#__codelineno-54-11"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input</span><span class="o">)</span><span class="w">        </span><span class="c1">// Patró 1: Tuples de metadades ✓</span>
+</span><a id="__codelineno-54-12" name="__codelineno-54-12" href="#__codelineno-54-12"></a>
+<a id="__codelineno-54-13" name="__codelineno-54-13" href="#__codelineno-54-13"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-54-14" name="__codelineno-54-14" href="#__codelineno-54-14"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">output</span>
+<a id="__codelineno-54-15" name="__codelineno-54-15" href="#__codelineno-54-15"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;${task.process}&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s1">&#39;cowpy&#39;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;1.1.5&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">topic:</span><span class="w"> </span><span class="n">versions</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions_cowpy</span>
+<a id="__codelineno-54-16" name="__codelineno-54-16" href="#__codelineno-54-16"></a>
+<a id="__codelineno-54-17" name="__codelineno-54-17" href="#__codelineno-54-17"></a><span class="w">    </span><span class="nl">when:</span>
+<a id="__codelineno-54-18" name="__codelineno-54-18" href="#__codelineno-54-18"></a><span class="w">    </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">when</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">when</span>
+<a id="__codelineno-54-19" name="__codelineno-54-19" href="#__codelineno-54-19"></a>
+<a id="__codelineno-54-20" name="__codelineno-54-20" href="#__codelineno-54-20"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-54-21" name="__codelineno-54-21" href="#__codelineno-54-21"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w">                </span><span class="c1">// Patró 2: ext.args ✓</span>
+</span><a id="__codelineno-54-22" name="__codelineno-54-22" href="#__codelineno-54-22"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span><span class="w">  </span><span class="c1">// Patró 3: ext.prefix ✓</span>
+</span><a id="__codelineno-54-23" name="__codelineno-54-23" href="#__codelineno-54-23"></a>
+<a id="__codelineno-54-24" name="__codelineno-54-24" href="#__codelineno-54-24"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-54-25" name="__codelineno-54-25" href="#__codelineno-54-25"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-54-26" name="__codelineno-54-26" href="#__codelineno-54-26"></a>
+<a id="__codelineno-54-27" name="__codelineno-54-27" href="#__codelineno-54-27"></a><span class="w">    </span><span class="nl">stub:</span>
+<a id="__codelineno-54-28" name="__codelineno-54-28" href="#__codelineno-54-28"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-54-29" name="__codelineno-54-29" href="#__codelineno-54-29"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
+<a id="__codelineno-54-30" name="__codelineno-54-30" href="#__codelineno-54-30"></a>
+<a id="__codelineno-54-31" name="__codelineno-54-31" href="#__codelineno-54-31"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-54-32" name="__codelineno-54-32" href="#__codelineno-54-32"></a><span class="s2">    echo $args</span>
+<a id="__codelineno-54-33" name="__codelineno-54-33" href="#__codelineno-54-33"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-54-34" name="__codelineno-54-34" href="#__codelineno-54-34"></a><span class="o">}</span>
 </code></pre></div>
 <p>Nota com tots els patrons que vas aplicar manualment anteriorment ja hi són!</p>
 <p>La plantilla també inclou diverses convencions addicionals d'nf-core.
@@ -5869,13 +6049,14 @@ Algunes d'aquestes funcionen immediatament, mentre que d'altres són marcadors d
 <li><strong><code>tag "$meta.id"</code></strong>: Afegeix l'ID de mostra als noms de procés als logs per a un seguiment més fàcil</li>
 <li><strong><code>label 'process_single'</code></strong>: Etiqueta de recursos per configurar requisits de CPU/memòria</li>
 <li><strong>Bloc <code>when:</code></strong>: Permet execució condicional mitjançant configuració <code>task.ext.when</code></li>
+<li><strong>Sortida <code>topic: versions</code></strong>: Informació de versions via topic channel, tal com es cobreix a la secció 1.6</li>
 </ul>
 <p>Aquestes funcionalitats ja són funcionals i fan que els mòduls siguin més mantenibles.</p>
 <p><strong>Marcadors de posició que personalitzarem a continuació:</strong></p>
 <ul>
 <li><strong>Blocs <code>input:</code> i <code>output:</code></strong>: Declaracions genèriques que actualitzarem per coincidir amb la nostra eina</li>
-<li><strong>Bloc <code>script:</code></strong>: Conté un comentari on afegirem la comanda <code>cowpy</code></li>
-<li><strong>Bloc <code>stub:</code></strong>: Plantilla que actualitzarem per produir les sortides correctes</li>
+<li><strong>Bloc <code>script:</code></strong>: Buit — afegirem la comanda <code>cowpy</code> aquí</li>
+<li><strong>Bloc <code>stub:</code></strong>: L'actualitzarem per produir les sortides correctes</li>
 <li><strong>Container i entorn</strong>: Marcadors de posició que omplirem amb informació de paquets</li>
 </ul>
 <p>Les següents seccions expliquen com completar aquestes personalitzacions.</p>
@@ -5885,44 +6066,42 @@ Algunes d'aquestes funcionen immediatament, mentre que d'altres són marcadors d
 <p>Per al contenidor, pots utilitzar <a href="https://seqera.io/containers/">Seqera Containers</a> per construir automàticament un contenidor des de qualsevol paquet Conda, incloent paquets conda-forge.
 En aquest cas estem utilitzant el mateix contenidor preconstruït que anteriorment.</p>
 <p>El codi per defecte ofereix alternar entre Docker i Singularity, però simplificarem aquesta línia i només especificarem el contenidor Docker que vam obtenir de Seqera Containers anteriorment.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Després</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Després</label><label for="__tabbed_14_2">Abans</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block"></div>
-</div>
-</div>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-3">3</a></span>
-<span class="normal"><a href="#__codelineno-51-4">4</a></span>
-<span class="normal"><a href="#__codelineno-51-5">5</a></span>
-<span class="normal"><a href="#__codelineno-51-6">6</a></span>
-<span class="normal"><a href="#__codelineno-51-7">7</a></span>
-<span class="normal"><a href="#__codelineno-51-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-3" name="__codelineno-51-3"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-51-4" name="__codelineno-51-4"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;$meta.id&quot;</span>
-<a id="__codelineno-51-5" name="__codelineno-51-5"></a><span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="s1">&#39;process_single&#39;</span>
-<a id="__codelineno-51-6" name="__codelineno-51-6"></a>
-<a id="__codelineno-51-7" name="__codelineno-51-7"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s2">&quot;${moduleDir}/environment.yml&quot;</span>
-<a id="__codelineno-51-8" name="__codelineno-51-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&quot;</span>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-3">3</a></span>
+<span class="normal"><a href="#__codelineno-55-4">4</a></span>
+<span class="normal"><a href="#__codelineno-55-5">5</a></span>
+<span class="normal"><a href="#__codelineno-55-6">6</a></span>
+<span class="normal"><a href="#__codelineno-55-7">7</a></span>
+<span class="normal"><a href="#__codelineno-55-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;$meta.id&quot;</span>
+<a id="__codelineno-55-5" name="__codelineno-55-5"></a><span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="s1">&#39;process_single&#39;</span>
+<a id="__codelineno-55-6" name="__codelineno-55-6"></a>
+<a id="__codelineno-55-7" name="__codelineno-55-7"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s2">&quot;${moduleDir}/environment.yml&quot;</span>
+<a id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&quot;</span>
 </span></code></pre></div></td></tr></table></div>
-<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Abans</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
 </div>
-</div>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-52-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-52-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-52-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-52-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-52-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-52-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-52-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-3" name="__codelineno-52-3"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-52-4" name="__codelineno-52-4"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;$meta.id&quot;</span>
-<a id="__codelineno-52-5" name="__codelineno-52-5"></a><span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="s1">&#39;process_single&#39;</span>
-<a id="__codelineno-52-6" name="__codelineno-52-6"></a>
-<a id="__codelineno-52-7" name="__codelineno-52-7"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s2">&quot;${moduleDir}/environment.yml&quot;</span>
-<a id="__codelineno-52-8" name="__codelineno-52-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;${ workflow.containerEngine == &#39;singularity&#39; &amp;&amp; !task.ext.singularity_pull_docker_container ?</span>
-</span><a id="__codelineno-52-9" name="__codelineno-52-9"></a><span class="s2">        &#39;https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE&#39;:</span>
-<a id="__codelineno-52-10" name="__codelineno-52-10"></a><span class="s2">        &#39;biocontainers/YOUR-TOOL-HERE&#39; }&quot;</span>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-56-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-56-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-56-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-56-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-56-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-56-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-56-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-3" name="__codelineno-56-3"></a><span class="n">process</span><span class="w"> </span><span class="n">COWPY</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-56-4" name="__codelineno-56-4"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">&quot;$meta.id&quot;</span>
+<a id="__codelineno-56-5" name="__codelineno-56-5"></a><span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="s1">&#39;process_single&#39;</span>
+<a id="__codelineno-56-6" name="__codelineno-56-6"></a>
+<a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">    </span><span class="n">conda</span><span class="w"> </span><span class="s2">&quot;${moduleDir}/environment.yml&quot;</span>
+<a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="hll"><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;${ workflow.containerEngine == &#39;singularity&#39; &amp;&amp; !task.ext.singularity_pull_docker_container ?</span>
+</span><a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="s2">        &#39;https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE&#39;:</span>
+<a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="s2">        &#39;biocontainers/YOUR-TOOL-HERE&#39; }&quot;</span>
 </code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <h4 id="222-entorn-conda">2.2.2. Entorn Conda<a class="headerlink" href="#222-entorn-conda" title="Permanent link">&para;</a></h4>
 <p>Per a l'entorn Conda, el codi del mòdul especifica <code>conda "${moduleDir}/environment.yml"</code> el que significa que hauria d'estar configurat al fitxer <code>environment.yml</code>.</p>
 <p>L'eina de creació de mòduls ens va advertir que no podia trobar el paquet <code>cowpy</code> a Bioconda (el canal principal per a eines bioinformàtiques).
@@ -5930,37 +6109,37 @@ No obstant això, <code>cowpy</code> està disponible a conda-forge, així que p
 <div class="tabbed-set tabbed-alternate" data-tabs="15:2"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><input id="__tabbed_15_2" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">Després</label><label for="__tabbed_15_2">Abans</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/environment.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
-<span class="normal"><a href="#__codelineno-53-2">2</a></span>
-<span class="normal"><a href="#__codelineno-53-3">3</a></span>
-<span class="normal"><a href="#__codelineno-53-4">4</a></span>
-<span class="normal"><a href="#__codelineno-53-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a><span class="hll"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">COWPY</span>
-</span><a id="__codelineno-53-2" name="__codelineno-53-2"></a><span class="nt">channels</span><span class="p">:</span>
-<a id="__codelineno-53-3" name="__codelineno-53-3"></a><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
-</span><a id="__codelineno-53-4" name="__codelineno-53-4"></a><span class="nt">dependencies</span><span class="p">:</span>
-<a id="__codelineno-53-5" name="__codelineno-53-5"></a><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cowpy=1.1.5</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/environment.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-1">1</a></span>
+<span class="normal"><a href="#__codelineno-57-2">2</a></span>
+<span class="normal"><a href="#__codelineno-57-3">3</a></span>
+<span class="normal"><a href="#__codelineno-57-4">4</a></span>
+<span class="normal"><a href="#__codelineno-57-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1"></a><span class="hll"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">COWPY</span>
+</span><a id="__codelineno-57-2" name="__codelineno-57-2"></a><span class="nt">channels</span><span class="p">:</span>
+<a id="__codelineno-57-3" name="__codelineno-57-3"></a><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+</span><a id="__codelineno-57-4" name="__codelineno-57-4"></a><span class="nt">dependencies</span><span class="p">:</span>
+<a id="__codelineno-57-5" name="__codelineno-57-5"></a><span class="hll"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cowpy=1.1.5</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/environment.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-54-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-54-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-54-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-54-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-54-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-54-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-54-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-54-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-54-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="nn">---</span>
-<a id="__codelineno-54-2" name="__codelineno-54-2"></a><span class="c1"># yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json</span>
-<a id="__codelineno-54-3" name="__codelineno-54-3"></a><span class="nt">channels</span><span class="p">:</span>
-<a id="__codelineno-54-4" name="__codelineno-54-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
-<a id="__codelineno-54-5" name="__codelineno-54-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bioconda</span>
-<a id="__codelineno-54-6" name="__codelineno-54-6"></a><span class="nt">dependencies</span><span class="p">:</span>
-<a id="__codelineno-54-7" name="__codelineno-54-7"></a><span class="w">  </span><span class="c1"># TODO nf-core: List required Conda package(s).</span>
-<a id="__codelineno-54-8" name="__codelineno-54-8"></a><span class="w">  </span><span class="c1">#               Software MUST be pinned to channel (i.e. &quot;bioconda&quot;), version (i.e. &quot;1.10&quot;).</span>
-<a id="__codelineno-54-9" name="__codelineno-54-9"></a><span class="w">  </span><span class="c1">#               For Conda, the build (i.e. &quot;h9402c20_2&quot;) must be EXCLUDED to support installation on different operating systems.</span>
-<a id="__codelineno-54-10" name="__codelineno-54-10"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;YOUR-TOOL-HERE&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/environment.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-58-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-58-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-58-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-58-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-58-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-58-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-58-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-58-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-58-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1"></a><span class="nn">---</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2"></a><span class="c1"># yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3"></a><span class="nt">channels</span><span class="p">:</span>
+<a id="__codelineno-58-4" name="__codelineno-58-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conda-forge</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bioconda</span>
+<a id="__codelineno-58-6" name="__codelineno-58-6"></a><span class="nt">dependencies</span><span class="p">:</span>
+<a id="__codelineno-58-7" name="__codelineno-58-7"></a><span class="w">  </span><span class="c1"># TODO nf-core: List required Conda package(s).</span>
+<a id="__codelineno-58-8" name="__codelineno-58-8"></a><span class="w">  </span><span class="c1">#               Software MUST be pinned to channel (i.e. &quot;bioconda&quot;), version (i.e. &quot;1.10&quot;).</span>
+<a id="__codelineno-58-9" name="__codelineno-58-9"></a><span class="w">  </span><span class="c1">#               For Conda, the build (i.e. &quot;h9402c20_2&quot;) must be EXCLUDED to support installation on different operating systems.</span>
+<a id="__codelineno-58-10" name="__codelineno-58-10"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;YOUR-TOOL-HERE&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5983,31 +6162,31 @@ Mirant enrere al nostre mòdul <code>COWPY</code> manual de la secció 1, podem 
 <div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Després</label><label for="__tabbed_16_2">Abans</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-55-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-55-10">10</a></span>
-<span class="normal"><a href="#__codelineno-55-11">11</a></span>
-<span class="normal"><a href="#__codelineno-55-12">12</a></span>
-<span class="normal"><a href="#__codelineno-55-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-55-8" name="__codelineno-55-8"></a><span class="nl">input:</span>
-<a id="__codelineno-55-9" name="__codelineno-55-9"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
-</span><a id="__codelineno-55-10" name="__codelineno-55-10"></a>
-<a id="__codelineno-55-11" name="__codelineno-55-11"></a><span class="nl">output:</span>
-<a id="__codelineno-55-12" name="__codelineno-55-12"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${prefix}.txt&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">cowpy_output</span>
-</span><a id="__codelineno-55-13" name="__codelineno-55-13"></a><span class="n">path</span><span class="w"> </span><span class="s2">&quot;versions.yml&quot;</span><span class="w">           </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-59-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-59-10">10</a></span>
+<span class="normal"><a href="#__codelineno-59-11">11</a></span>
+<span class="normal"><a href="#__codelineno-59-12">12</a></span>
+<span class="normal"><a href="#__codelineno-59-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-8" name="__codelineno-59-8"></a><span class="nl">input:</span>
+<a id="__codelineno-59-9" name="__codelineno-59-9"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input_file</span><span class="o">)</span>
+</span><a id="__codelineno-59-10" name="__codelineno-59-10"></a>
+<a id="__codelineno-59-11" name="__codelineno-59-11"></a><span class="nl">output:</span>
+<a id="__codelineno-59-12" name="__codelineno-59-12"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;${prefix}.txt&quot;</span><span class="o">)</span><span class="w">                                       </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">cowpy_output</span>
+</span><a id="__codelineno-59-13" name="__codelineno-59-13"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="s2">&quot;${task.process}&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s1">&#39;cowpy&#39;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;1.1.5&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">topic:</span><span class="w"> </span><span class="n">versions</span><span class="w">    </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions_cowpy</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-56-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-56-10">10</a></span>
-<span class="normal"><a href="#__codelineno-56-11">11</a></span>
-<span class="normal"><a href="#__codelineno-56-12">12</a></span>
-<span class="normal"><a href="#__codelineno-56-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="nl">input:</span>
-<a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
-</span><a id="__codelineno-56-10" name="__codelineno-56-10"></a>
-<a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="nl">output:</span>
-<a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">output</span>
-</span><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="n">path</span><span class="w"> </span><span class="s2">&quot;versions.yml&quot;</span><span class="w">           </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-60-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-60-10">10</a></span>
+<span class="normal"><a href="#__codelineno-60-11">11</a></span>
+<span class="normal"><a href="#__codelineno-60-12">12</a></span>
+<span class="normal"><a href="#__codelineno-60-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-60-8" name="__codelineno-60-8"></a><span class="nl">input:</span>
+<a id="__codelineno-60-9" name="__codelineno-60-9"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">input</span><span class="o">)</span>
+</span><a id="__codelineno-60-10" name="__codelineno-60-10"></a>
+<a id="__codelineno-60-11" name="__codelineno-60-11"></a><span class="nl">output:</span>
+<a id="__codelineno-60-12" name="__codelineno-60-12"></a><span class="hll"><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">output</span>
+</span><a id="__codelineno-60-13" name="__codelineno-60-13"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="s2">&quot;${task.process}&quot;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s1">&#39;cowpy&#39;</span><span class="o">),</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="s2">&quot;1.1.5&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">topic:</span><span class="w"> </span><span class="n">versions</span><span class="w">    </span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">versions_cowpy</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -6021,60 +6200,40 @@ Mirant enrere al nostre mòdul <code>COWPY</code> manual de la secció 1, podem 
 <p>Si estàs utilitzant el servidor de llenguatge Nextflow per validar la sintaxi, la part <code>${prefix}</code> es marcarà com un error en aquesta etapa perquè encara no l'hem afegit al bloc script.
 Fem-ho ara.</p>
 <h4 id="232-el-bloc-script">2.3.2. El bloc script<a class="headerlink" href="#232-el-bloc-script" title="Permanent link">&para;</a></h4>
-<p>La plantilla proporciona un comentari marcador de posició al bloc script on hauries d'afegir la comanda real de l'eina.</p>
+<p>La plantilla genera un bloc script buit que has d'omplir amb la comanda real de l'eina.</p>
 <p>Basant-nos en el mòdul que vam escriure manualment anteriorment, hauríem de fer les següents edicions:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="17:2"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><input id="__tabbed_17_2" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">Després</label><label for="__tabbed_17_2">Abans</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-15">15</a></span>
-<span class="normal"><a href="#__codelineno-57-16">16</a></span>
-<span class="normal"><a href="#__codelineno-57-17">17</a></span>
-<span class="normal"><a href="#__codelineno-57-18">18</a></span>
-<span class="normal"><a href="#__codelineno-57-19">19</a></span>
-<span class="normal"><a href="#__codelineno-57-20">20</a></span>
-<span class="normal"><a href="#__codelineno-57-21">21</a></span>
-<span class="normal"><a href="#__codelineno-57-22">22</a></span>
-<span class="normal"><a href="#__codelineno-57-23">23</a></span>
-<span class="normal"><a href="#__codelineno-57-24">24</a></span>
-<span class="normal"><a href="#__codelineno-57-25">25</a></span>
-<span class="normal"><a href="#__codelineno-57-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-57-15" name="__codelineno-57-15"></a><span class="nl">script:</span>
-<a id="__codelineno-57-16" name="__codelineno-57-16"></a><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<a id="__codelineno-57-17" name="__codelineno-57-17"></a><span class="hll"><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
-</span><a id="__codelineno-57-18" name="__codelineno-57-18"></a>
-<a id="__codelineno-57-19" name="__codelineno-57-19"></a><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-57-20" name="__codelineno-57-20"></a><span class="hll"><span class="s2">cat $input_file | cowpy $args &gt; ${prefix}.txt</span>
-</span><a id="__codelineno-57-21" name="__codelineno-57-21"></a>
-<a id="__codelineno-57-22" name="__codelineno-57-22"></a><span class="s2">cat &lt;&lt;-END_VERSIONS &gt; versions.yml</span>
-<a id="__codelineno-57-23" name="__codelineno-57-23"></a><span class="s2">&quot;${task.process}&quot;:</span>
-<a id="__codelineno-57-24" name="__codelineno-57-24"></a><span class="s2">    COWPY: \$(cowpy --version)</span>
-<a id="__codelineno-57-25" name="__codelineno-57-25"></a><span class="s2">END_VERSIONS</span>
-<a id="__codelineno-57-26" name="__codelineno-57-26"></a><span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-15">15</a></span>
+<span class="normal"><a href="#__codelineno-61-16">16</a></span>
+<span class="normal"><a href="#__codelineno-61-17">17</a></span>
+<span class="normal"><a href="#__codelineno-61-18">18</a></span>
+<span class="normal"><a href="#__codelineno-61-19">19</a></span>
+<span class="normal"><a href="#__codelineno-61-20">20</a></span>
+<span class="normal"><a href="#__codelineno-61-21">21</a></span>
+<span class="normal"><a href="#__codelineno-61-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-61-15" name="__codelineno-61-15"></a><span class="nl">script:</span>
+<a id="__codelineno-61-16" name="__codelineno-61-16"></a><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-61-17" name="__codelineno-61-17"></a><span class="hll"><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
+</span><a id="__codelineno-61-18" name="__codelineno-61-18"></a>
+<a id="__codelineno-61-19" name="__codelineno-61-19"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-61-20" name="__codelineno-61-20"></a><span class="hll"><span class="s2">cat $input_file | cowpy $args &gt; ${prefix}.txt</span>
+</span><a id="__codelineno-61-21" name="__codelineno-61-21"></a>
+<a id="__codelineno-61-22" name="__codelineno-61-22"></a><span class="s2">&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-15">15</a></span>
-<span class="normal"><a href="#__codelineno-58-16">16</a></span>
-<span class="normal"><a href="#__codelineno-58-17">17</a></span>
-<span class="normal"><a href="#__codelineno-58-18">18</a></span>
-<span class="normal"><a href="#__codelineno-58-19">19</a></span>
-<span class="normal"><a href="#__codelineno-58-20">20</a></span>
-<span class="normal"><a href="#__codelineno-58-21">21</a></span>
-<span class="normal"><a href="#__codelineno-58-22">22</a></span>
-<span class="normal"><a href="#__codelineno-58-23">23</a></span>
-<span class="normal"><a href="#__codelineno-58-24">24</a></span>
-<span class="normal"><a href="#__codelineno-58-25">25</a></span>
-<span class="normal"><a href="#__codelineno-58-26">26</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-58-15" name="__codelineno-58-15"></a><span class="nl">script:</span>
-<a id="__codelineno-58-16" name="__codelineno-58-16"></a><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<a id="__codelineno-58-17" name="__codelineno-58-17"></a><span class="kt">def</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
-<a id="__codelineno-58-18" name="__codelineno-58-18"></a>
-<a id="__codelineno-58-19" name="__codelineno-58-19"></a><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-58-20" name="__codelineno-58-20"></a><span class="hll"><span class="s2">// Add your tool command here</span>
-</span><a id="__codelineno-58-21" name="__codelineno-58-21"></a>
-<a id="__codelineno-58-22" name="__codelineno-58-22"></a><span class="s2">cat &lt;&lt;-END_VERSIONS &gt; versions.yml</span>
-<a id="__codelineno-58-23" name="__codelineno-58-23"></a><span class="s2">&quot;${task.process}&quot;:</span>
-<a id="__codelineno-58-24" name="__codelineno-58-24"></a><span class="s2">    COWPY: \$(cowpy --version)</span>
-<a id="__codelineno-58-25" name="__codelineno-58-25"></a><span class="s2">END_VERSIONS</span>
-<a id="__codelineno-58-26" name="__codelineno-58-26"></a><span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-15">15</a></span>
+<span class="normal"><a href="#__codelineno-62-16">16</a></span>
+<span class="normal"><a href="#__codelineno-62-17">17</a></span>
+<span class="normal"><a href="#__codelineno-62-18">18</a></span>
+<span class="normal"><a href="#__codelineno-62-19">19</a></span>
+<span class="normal"><a href="#__codelineno-62-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-62-15" name="__codelineno-62-15"></a><span class="nl">script:</span>
+<a id="__codelineno-62-16" name="__codelineno-62-16"></a><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-62-17" name="__codelineno-62-17"></a><span class="hll"><span class="kt">def</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
+</span><a id="__codelineno-62-18" name="__codelineno-62-18"></a>
+<a id="__codelineno-62-19" name="__codelineno-62-19"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-62-20" name="__codelineno-62-20"></a><span class="s2">&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -6082,7 +6241,7 @@ Fem-ho ara.</p>
 <p>Canvis clau:</p>
 <ul>
 <li>Canviar <code>def prefix</code> a només <code>prefix</code> (sense <code>def</code>) per fer-lo accessible al bloc output</li>
-<li>Reemplaçar el comentari amb la comanda <code>cowpy</code> real que utilitza tant <code>$args</code> com <code>${prefix}.txt</code></li>
+<li>Omplir la comanda <code>cowpy</code> real que utilitza tant <code>$args</code> com <code>${prefix}.txt</code></li>
 </ul>
 <p>Nota que si no haguéssim fet ja el treball d'afegir la configuració <code>ext.args</code> i <code>ext.prefix</code> per al procés <code>COWPY</code> al fitxer <code>modules.config</code>, hauríem de fer-ho ara.</p>
 <h4 id="233-implementar-el-bloc-stub">2.3.3. Implementar el bloc stub<a class="headerlink" href="#233-implementar-el-bloc-stub" title="Permanent link">&para;</a></h4>
@@ -6091,55 +6250,37 @@ Fem-ho ara.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="18:2"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><input id="__tabbed_18_2" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">Després</label><label for="__tabbed_18_2">Abans</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-27">27</a></span>
-<span class="normal"><a href="#__codelineno-59-28">28</a></span>
-<span class="normal"><a href="#__codelineno-59-29">29</a></span>
-<span class="normal"><a href="#__codelineno-59-30">30</a></span>
-<span class="normal"><a href="#__codelineno-59-31">31</a></span>
-<span class="normal"><a href="#__codelineno-59-32">32</a></span>
-<span class="normal"><a href="#__codelineno-59-33">33</a></span>
-<span class="normal"><a href="#__codelineno-59-34">34</a></span>
-<span class="normal"><a href="#__codelineno-59-35">35</a></span>
-<span class="normal"><a href="#__codelineno-59-36">36</a></span>
-<span class="normal"><a href="#__codelineno-59-37">37</a></span>
-<span class="normal"><a href="#__codelineno-59-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-27" name="__codelineno-59-27"></a><span class="nl">stub:</span>
-<a id="__codelineno-59-28" name="__codelineno-59-28"></a><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<a id="__codelineno-59-29" name="__codelineno-59-29"></a><span class="hll"><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
-</span><a id="__codelineno-59-30" name="__codelineno-59-30"></a>
-<a id="__codelineno-59-31" name="__codelineno-59-31"></a><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-59-32" name="__codelineno-59-32"></a><span class="hll"><span class="s2">touch ${prefix}.txt</span>
-</span><a id="__codelineno-59-33" name="__codelineno-59-33"></a>
-<a id="__codelineno-59-34" name="__codelineno-59-34"></a><span class="s2">cat &lt;&lt;-END_VERSIONS &gt; versions.yml</span>
-<a id="__codelineno-59-35" name="__codelineno-59-35"></a><span class="s2">&quot;${task.process}&quot;:</span>
-<a id="__codelineno-59-36" name="__codelineno-59-36"></a><span class="s2">    COWPY: \$(cowpy --version)</span>
-<a id="__codelineno-59-37" name="__codelineno-59-37"></a><span class="s2">END_VERSIONS</span>
-<a id="__codelineno-59-38" name="__codelineno-59-38"></a><span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-27">27</a></span>
+<span class="normal"><a href="#__codelineno-63-28">28</a></span>
+<span class="normal"><a href="#__codelineno-63-29">29</a></span>
+<span class="normal"><a href="#__codelineno-63-30">30</a></span>
+<span class="normal"><a href="#__codelineno-63-31">31</a></span>
+<span class="normal"><a href="#__codelineno-63-32">32</a></span>
+<span class="normal"><a href="#__codelineno-63-33">33</a></span>
+<span class="normal"><a href="#__codelineno-63-34">34</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-63-27" name="__codelineno-63-27"></a><span class="nl">stub:</span>
+<a id="__codelineno-63-28" name="__codelineno-63-28"></a><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-63-29" name="__codelineno-63-29"></a><span class="hll"><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
+</span><a id="__codelineno-63-30" name="__codelineno-63-30"></a>
+<a id="__codelineno-63-31" name="__codelineno-63-31"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-63-32" name="__codelineno-63-32"></a><span class="hll"><span class="s2">touch ${prefix}.txt</span>
+</span><a id="__codelineno-63-33" name="__codelineno-63-33"></a>
+<a id="__codelineno-63-34" name="__codelineno-63-34"></a><span class="s2">&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-27">27</a></span>
-<span class="normal"><a href="#__codelineno-60-28">28</a></span>
-<span class="normal"><a href="#__codelineno-60-29">29</a></span>
-<span class="normal"><a href="#__codelineno-60-30">30</a></span>
-<span class="normal"><a href="#__codelineno-60-31">31</a></span>
-<span class="normal"><a href="#__codelineno-60-32">32</a></span>
-<span class="normal"><a href="#__codelineno-60-33">33</a></span>
-<span class="normal"><a href="#__codelineno-60-34">34</a></span>
-<span class="normal"><a href="#__codelineno-60-35">35</a></span>
-<span class="normal"><a href="#__codelineno-60-36">36</a></span>
-<span class="normal"><a href="#__codelineno-60-37">37</a></span>
-<span class="normal"><a href="#__codelineno-60-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-60-27" name="__codelineno-60-27"></a><span class="nl">stub:</span>
-<a id="__codelineno-60-28" name="__codelineno-60-28"></a><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<a id="__codelineno-60-29" name="__codelineno-60-29"></a><span class="hll"><span class="kt">def</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
-</span><a id="__codelineno-60-30" name="__codelineno-60-30"></a>
-<a id="__codelineno-60-31" name="__codelineno-60-31"></a><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-60-32" name="__codelineno-60-32"></a><span class="hll"><span class="s2">echo $args</span>
-</span><a id="__codelineno-60-33" name="__codelineno-60-33"></a>
-<a id="__codelineno-60-34" name="__codelineno-60-34"></a><span class="s2">cat &lt;&lt;-END_VERSIONS &gt; versions.yml</span>
-<a id="__codelineno-60-35" name="__codelineno-60-35"></a><span class="s2">&quot;${task.process}&quot;:</span>
-<a id="__codelineno-60-36" name="__codelineno-60-36"></a><span class="s2">    COWPY: \$(cowpy --version)</span>
-<a id="__codelineno-60-37" name="__codelineno-60-37"></a><span class="s2">END_VERSIONS</span>
-<a id="__codelineno-60-38" name="__codelineno-60-38"></a><span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-64-27">27</a></span>
+<span class="normal"><a href="#__codelineno-64-28">28</a></span>
+<span class="normal"><a href="#__codelineno-64-29">29</a></span>
+<span class="normal"><a href="#__codelineno-64-30">30</a></span>
+<span class="normal"><a href="#__codelineno-64-31">31</a></span>
+<span class="normal"><a href="#__codelineno-64-32">32</a></span>
+<span class="normal"><a href="#__codelineno-64-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-64-27" name="__codelineno-64-27"></a><span class="nl">stub:</span>
+<a id="__codelineno-64-28" name="__codelineno-64-28"></a><span class="kt">def</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<a id="__codelineno-64-29" name="__codelineno-64-29"></a><span class="hll"><span class="kt">def</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">task</span><span class="o">.</span><span class="na">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s2">&quot;${meta.id}&quot;</span>
+</span><a id="__codelineno-64-30" name="__codelineno-64-30"></a>
+<a id="__codelineno-64-31" name="__codelineno-64-31"></a><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-64-32" name="__codelineno-64-32"></a><span class="s2">echo $args</span>
+<a id="__codelineno-64-33" name="__codelineno-64-33"></a><span class="s2">&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -6157,94 +6298,94 @@ Fem-ho ara.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="19:2"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><input id="__tabbed_19_2" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">Després</label><label for="__tabbed_19_2">Abans</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-61-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-61-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-61-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-61-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-61-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-61-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-61-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-61-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-61-10">10</a></span>
-<span class="normal"><a href="#__codelineno-61-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1"></a><span class="cm">/*</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-61-3" name="__codelineno-61-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
-<a id="__codelineno-61-4" name="__codelineno-61-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-61-5" name="__codelineno-61-5"></a><span class="cm">*/</span>
-<a id="__codelineno-61-6" name="__codelineno-61-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-<a id="__codelineno-61-7" name="__codelineno-61-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
-<a id="__codelineno-61-8" name="__codelineno-61-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
-<a id="__codelineno-61-9" name="__codelineno-61-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
-<a id="__codelineno-61-10" name="__codelineno-61-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy/main.nf&#39;</span>
-</span><a id="__codelineno-61-11" name="__codelineno-61-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-65-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-65-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-65-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-65-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-65-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-65-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-65-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-65-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-65-10">10</a></span>
+<span class="normal"><a href="#__codelineno-65-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1"></a><span class="cm">/*</span>
+<a id="__codelineno-65-2" name="__codelineno-65-2"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-65-3" name="__codelineno-65-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
+<a id="__codelineno-65-4" name="__codelineno-65-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-65-5" name="__codelineno-65-5"></a><span class="cm">*/</span>
+<a id="__codelineno-65-6" name="__codelineno-65-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
+<a id="__codelineno-65-7" name="__codelineno-65-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
+<a id="__codelineno-65-8" name="__codelineno-65-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
+<a id="__codelineno-65-9" name="__codelineno-65-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
+<a id="__codelineno-65-10" name="__codelineno-65-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy/main.nf&#39;</span>
+</span><a id="__codelineno-65-11" name="__codelineno-65-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-62-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-62-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-62-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-62-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-62-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-62-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-62-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-62-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-62-10">10</a></span>
-<span class="normal"><a href="#__codelineno-62-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1"></a><span class="cm">/*</span>
-<a id="__codelineno-62-2" name="__codelineno-62-2"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-62-3" name="__codelineno-62-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
-<a id="__codelineno-62-4" name="__codelineno-62-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-62-5" name="__codelineno-62-5"></a><span class="cm">*/</span>
-<a id="__codelineno-62-6" name="__codelineno-62-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
-<a id="__codelineno-62-7" name="__codelineno-62-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
-<a id="__codelineno-62-8" name="__codelineno-62-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
-<a id="__codelineno-62-9" name="__codelineno-62-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
-<a id="__codelineno-62-10" name="__codelineno-62-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
-</span><a id="__codelineno-62-11" name="__codelineno-62-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/cowpy/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-66-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-66-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-66-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-66-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-66-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-66-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-66-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-66-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-66-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-66-10">10</a></span>
+<span class="normal"><a href="#__codelineno-66-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1"></a><span class="cm">/*</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-66-3" name="__codelineno-66-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
+<a id="__codelineno-66-4" name="__codelineno-66-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-66-5" name="__codelineno-66-5"></a><span class="cm">*/</span>
+<a id="__codelineno-66-6" name="__codelineno-66-6"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">paramsSummaryMap</span><span class="w">       </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/nf-schema&#39;</span>
+<a id="__codelineno-66-7" name="__codelineno-66-7"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">softwareVersionsToYAML</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../subworkflows/nf-core/utils_nfcore_pipeline&#39;</span>
+<a id="__codelineno-66-8" name="__codelineno-66-8"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sayHello</span><span class="w">               </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/sayHello.nf&#39;</span>
+<a id="__codelineno-66-9" name="__codelineno-66-9"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">convertToUpper</span><span class="w">         </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/convertToUpper.nf&#39;</span>
+<a id="__codelineno-66-10" name="__codelineno-66-10"></a><span class="hll"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">COWPY</span><span class="w">                  </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/local/cowpy.nf&#39;</span>
+</span><a id="__codelineno-66-11" name="__codelineno-66-11"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">CAT_CAT</span><span class="w">                </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/nf-core/cat/cat/main&#39;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <p>Executem el pipeline per provar-lo.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--outdir<span class="w"> </span>core-hello-results<span class="w"> </span>-profile<span class="w"> </span>test,docker<span class="w"> </span>--validate_params<span class="w"> </span><span class="nb">false</span>
 </code></pre></div>
 <details class="success">
 <summary>Sortida de la comanda</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="go">  N E X T F L O W   ~  version 25.04.3</span>
-<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>
-<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a><span class="go">Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de</span>
-<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a>
-<a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a><span class="go">Input/output options</span>
-<a id="__codelineno-64-6" name="__codelineno-64-6" href="#__codelineno-64-6"></a><span class="go">  input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv</span>
-<a id="__codelineno-64-7" name="__codelineno-64-7" href="#__codelineno-64-7"></a><span class="go">  outdir                    : core-hello-results</span>
-<a id="__codelineno-64-8" name="__codelineno-64-8" href="#__codelineno-64-8"></a>
-<a id="__codelineno-64-9" name="__codelineno-64-9" href="#__codelineno-64-9"></a><span class="go">Institutional config options</span>
-<a id="__codelineno-64-10" name="__codelineno-64-10" href="#__codelineno-64-10"></a><span class="go">  config_profile_name       : Test profile</span>
-<a id="__codelineno-64-11" name="__codelineno-64-11" href="#__codelineno-64-11"></a><span class="go">  config_profile_description: Minimal test dataset to check pipeline function</span>
-<a id="__codelineno-64-12" name="__codelineno-64-12" href="#__codelineno-64-12"></a>
-<a id="__codelineno-64-13" name="__codelineno-64-13" href="#__codelineno-64-13"></a><span class="go">Generic options</span>
-<a id="__codelineno-64-14" name="__codelineno-64-14" href="#__codelineno-64-14"></a><span class="go">  validate_params           : false</span>
-<a id="__codelineno-64-15" name="__codelineno-64-15" href="#__codelineno-64-15"></a><span class="go">  trace_report_suffix       : 2025-12-27_08-23-51</span>
-<a id="__codelineno-64-16" name="__codelineno-64-16" href="#__codelineno-64-16"></a>
-<a id="__codelineno-64-17" name="__codelineno-64-17" href="#__codelineno-64-17"></a><span class="go">Core Nextflow options</span>
-<a id="__codelineno-64-18" name="__codelineno-64-18" href="#__codelineno-64-18"></a><span class="go">  runName                   : prickly_neumann</span>
-<a id="__codelineno-64-19" name="__codelineno-64-19" href="#__codelineno-64-19"></a><span class="go">  containerEngine           : docker</span>
-<a id="__codelineno-64-20" name="__codelineno-64-20" href="#__codelineno-64-20"></a><span class="go">  launchDir                 : /workspaces/training/hello-nf-core/core-hello</span>
-<a id="__codelineno-64-21" name="__codelineno-64-21" href="#__codelineno-64-21"></a><span class="go">  workDir                   : /workspaces/training/hello-nf-core/core-hello/work</span>
-<a id="__codelineno-64-22" name="__codelineno-64-22" href="#__codelineno-64-22"></a><span class="go">  projectDir                : /workspaces/training/hello-nf-core/core-hello</span>
-<a id="__codelineno-64-23" name="__codelineno-64-23" href="#__codelineno-64-23"></a><span class="go">  userName                  : root</span>
-<a id="__codelineno-64-24" name="__codelineno-64-24" href="#__codelineno-64-24"></a><span class="go">  profile                   : test,docker</span>
-<a id="__codelineno-64-25" name="__codelineno-64-25" href="#__codelineno-64-25"></a><span class="go">  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
-<a id="__codelineno-64-26" name="__codelineno-64-26" href="#__codelineno-64-26"></a>
-<a id="__codelineno-64-27" name="__codelineno-64-27" href="#__codelineno-64-27"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
-<a id="__codelineno-64-28" name="__codelineno-64-28" href="#__codelineno-64-28"></a><span class="go">------------------------------------------------------</span>
-<a id="__codelineno-64-29" name="__codelineno-64-29" href="#__codelineno-64-29"></a><span class="go">executor &gt;  local (8)</span>
-<a id="__codelineno-64-30" name="__codelineno-64-30" href="#__codelineno-64-30"></a><span class="go">[e9/008ede] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔</span>
-<a id="__codelineno-64-31" name="__codelineno-64-31" href="#__codelineno-64-31"></a><span class="go">[f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-64-32" name="__codelineno-64-32" href="#__codelineno-64-32"></a><span class="go">[be/0ecc58] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔</span>
-<a id="__codelineno-64-33" name="__codelineno-64-33" href="#__codelineno-64-33"></a><span class="hll"><span class="go">[11/8e082f] CORE_HELLO:HELLO:COWPY (test)       [100%] 1 of 1 ✔</span>
-</span><a id="__codelineno-64-34" name="__codelineno-64-34" href="#__codelineno-64-34"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go">  N E X T F L O W   ~  version 25.04.3</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a>
+<a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">Launching `./main.nf` [prickly_neumann] DSL2 - revision: b9e9b3b8de</span>
+<a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a>
+<a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a><span class="go">Input/output options</span>
+<a id="__codelineno-68-6" name="__codelineno-68-6" href="#__codelineno-68-6"></a><span class="go">  input                     : /workspaces/training/hello-nf-core/core-hello/assets/greetings.csv</span>
+<a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">  outdir                    : core-hello-results</span>
+<a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a>
+<a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">Institutional config options</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">  config_profile_name       : Test profile</span>
+<a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">  config_profile_description: Minimal test dataset to check pipeline function</span>
+<a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a>
+<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">Generic options</span>
+<a id="__codelineno-68-14" name="__codelineno-68-14" href="#__codelineno-68-14"></a><span class="go">  validate_params           : false</span>
+<a id="__codelineno-68-15" name="__codelineno-68-15" href="#__codelineno-68-15"></a><span class="go">  trace_report_suffix       : 2025-12-27_08-23-51</span>
+<a id="__codelineno-68-16" name="__codelineno-68-16" href="#__codelineno-68-16"></a>
+<a id="__codelineno-68-17" name="__codelineno-68-17" href="#__codelineno-68-17"></a><span class="go">Core Nextflow options</span>
+<a id="__codelineno-68-18" name="__codelineno-68-18" href="#__codelineno-68-18"></a><span class="go">  runName                   : prickly_neumann</span>
+<a id="__codelineno-68-19" name="__codelineno-68-19" href="#__codelineno-68-19"></a><span class="go">  containerEngine           : docker</span>
+<a id="__codelineno-68-20" name="__codelineno-68-20" href="#__codelineno-68-20"></a><span class="go">  launchDir                 : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-68-21" name="__codelineno-68-21" href="#__codelineno-68-21"></a><span class="go">  workDir                   : /workspaces/training/hello-nf-core/core-hello/work</span>
+<a id="__codelineno-68-22" name="__codelineno-68-22" href="#__codelineno-68-22"></a><span class="go">  projectDir                : /workspaces/training/hello-nf-core/core-hello</span>
+<a id="__codelineno-68-23" name="__codelineno-68-23" href="#__codelineno-68-23"></a><span class="go">  userName                  : root</span>
+<a id="__codelineno-68-24" name="__codelineno-68-24" href="#__codelineno-68-24"></a><span class="go">  profile                   : test,docker</span>
+<a id="__codelineno-68-25" name="__codelineno-68-25" href="#__codelineno-68-25"></a><span class="go">  configFiles               : /workspaces/training/hello-nf-core/core-hello/nextflow.config</span>
+<a id="__codelineno-68-26" name="__codelineno-68-26" href="#__codelineno-68-26"></a>
+<a id="__codelineno-68-27" name="__codelineno-68-27" href="#__codelineno-68-27"></a><span class="go">!! Only displaying parameters that differ from the pipeline defaults !!</span>
+<a id="__codelineno-68-28" name="__codelineno-68-28" href="#__codelineno-68-28"></a><span class="go">------------------------------------------------------</span>
+<a id="__codelineno-68-29" name="__codelineno-68-29" href="#__codelineno-68-29"></a><span class="go">executor &gt;  local (8)</span>
+<a id="__codelineno-68-30" name="__codelineno-68-30" href="#__codelineno-68-30"></a><span class="go">[e9/008ede] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔</span>
+<a id="__codelineno-68-31" name="__codelineno-68-31" href="#__codelineno-68-31"></a><span class="go">[f0/d70cfe] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔</span>
+<a id="__codelineno-68-32" name="__codelineno-68-32" href="#__codelineno-68-32"></a><span class="go">[be/0ecc58] CORE_HELLO:HELLO:CAT_CAT (test)     [100%] 1 of 1 ✔</span>
+<a id="__codelineno-68-33" name="__codelineno-68-33" href="#__codelineno-68-33"></a><span class="hll"><span class="go">[11/8e082f] CORE_HELLO:HELLO:COWPY (test)       [100%] 1 of 1 ✔</span>
+</span><a id="__codelineno-68-34" name="__codelineno-68-34" href="#__codelineno-68-34"></a><span class="go">-[core/hello] Pipeline completed successfully-</span>
 </code></pre></div>
 </details>
 <p>Això produeix els mateixos resultats que anteriorment.</p>
