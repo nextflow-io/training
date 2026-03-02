@@ -109,7 +109,7 @@ Cela affiche la documentation sur le module, y compris ses entrées, ses sorties
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.4.1 - https://nf-co.re
+        nf-core/tools version 3.5.2 - https://nf-co.re
 
 
     ╭─ Module: cat/cat  ─────────────────────────────────────────────────╮
@@ -140,9 +140,9 @@ Cela affiche la documentation sur le module, y compris ses entrées, ses sorties
                           │gzipped if file_out ends with    │
                           │".gz"                            │
     ╶─────────────────────┼─────────────────────────────────┼────────────╴
-    versions             │                                 │
+    versions_cat         │                                 │
     ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      versions.yml  (file)│File containing software versions│versions.yml
+      versions_cat (tuple)│Software version information     │
                           ╵                                 ╵
 
     💻  Installation command: nf-core modules install cat/cat
@@ -165,8 +165,7 @@ cd core-hello
 nf-core modules install cat/cat
 ```
 
-L'outil peut d'abord vous demander de spécifier un type de dépôt.
-(Sinon, passez directement à "Enfin, l'outil procédera à l'installation du module.")
+L'outil procédera à l'installation du module.
 
 ??? success "Sortie de la commande"
 
@@ -178,36 +177,9 @@ L'outil peut d'abord vous demander de spécifier un type de dépôt.
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.4.1 - https://nf-co.re
+    nf-core/tools version 3.5.2 - https://nf-co.re
 
 
-    WARNING  'repository_type' not defined in .nf-core.yml
-    ? Is this repository a pipeline or a modules repository? (Use arrow keys)
-    » Pipeline
-      Modules repository
-    ```
-
-Si c'est le cas, appuyez sur Entrée pour accepter la réponse par défaut (`Pipeline`) et continuer.
-
-L'outil proposera ensuite de modifier la configuration de votre projet pour éviter cette invite à l'avenir.
-
-??? success "Sortie de la commande"
-
-    ```console
-        INFO     To avoid this prompt in the future, add the 'repository_type' key to your .nf-core.yml file.
-        ? Would you like me to add this config now? [y/n] (y):
-    ```
-
-Autant profiter de cet outil pratique !
-Appuyez sur Entrée pour accepter la réponse par défaut (oui).
-
-Enfin, l'outil procédera à l'installation du module.
-
-??? success "Sortie de la commande"
-
-    ```console
-    INFO Config added to '.nf-core.yml'
-    INFO Reinstalling modules found in 'modules.json' but missing from directory:
     INFO Installing 'cat/cat'
     INFO Use the following statement to include this module:
 
@@ -220,7 +192,7 @@ La commande effectue automatiquement :
 - La mise à jour de `modules.json` pour suivre le module installé
 - La fourniture de l'instruction `include` correcte à utiliser dans votre workflow
 
-!!! tip
+!!! tip "Astuce"
 
     Assurez-vous toujours que votre répertoire de travail actuel est la racine de votre projet de pipeline avant d'exécuter la commande d'installation de module.
 
@@ -280,7 +252,7 @@ Remplaçons l'instruction `include` pour le module `collectGreetings` par celle 
 Pour rappel, l'outil d'installation de module nous a donné l'instruction exacte à utiliser :
 
 ```groovy title="Instruction d'importation produite par la commande d'installation"
-include { CAT_CAT } from '../modules/nf-core/cat/cat/main'`
+include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
 ```
 
 Notez que la convention nf-core est d'utiliser des majuscules pour les noms de modules lors de leur importation.
@@ -289,7 +261,7 @@ Ouvrez [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) et effectu
 
 === "Après"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -299,8 +271,8 @@ Ouvrez [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) et effectu
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
 === "Avant"
@@ -332,7 +304,7 @@ Pas si vite.
 
 Nous allons traiter cela comme une section séparée car cela implique un nouveau mécanisme que nous n'avons pas encore couvert : les métadonnées sous forme de map.
 
-!!! note
+!!! note "Note"
 
     Vous pouvez éventuellement supprimer le fichier `collectGreetings.nf` :
 
@@ -360,7 +332,7 @@ Cela nous permettra de déterminer si nous pouvons simplement traiter le nouveau
 Idéalement, c'est quelque chose que vous devriez faire _avant_ même d'installer le module, mais bon, mieux vaut tard que jamais.
 (Pour information, il existe une commande `uninstall` pour se débarrasser des modules que vous décidez de ne plus vouloir.)
 
-!!! note
+!!! note "Note"
 
     Le processus CAT_CAT inclut une gestion assez intelligente de différents types de compression, d'extensions de fichiers, etc. qui ne sont pas strictement pertinents pour ce que nous essayons de vous montrer ici, donc nous ignorerons la plupart de ces éléments et nous concentrerons uniquement sur les parties importantes.
 
@@ -397,15 +369,15 @@ process CAT_CAT {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pigz:2.3.4' :
-        'biocontainers/pigz:2.3.4' }"
+        'https://depot.galaxyproject.org/singularity/pigz:2.8' :
+        'biocontainers/pigz:2.8' }"
 
     input:
     tuple val(meta), path(files_in)
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
-    path "versions.yml"               , emit: versions
+    tuple val("${task.process}"), val("pigz"), eval("pigz --version 2>&1 | sed 's/pigz //g'"), topic: versions, emit: versions_cat
 ```
 
 Le module CAT_CAT prend une seule entrée, mais cette entrée est un tuple contenant deux choses :
@@ -416,7 +388,7 @@ Le module CAT_CAT prend une seule entrée, mais cette entrée est un tuple conte
 Une fois terminé, CAT_CAT livre ses sorties en deux parties :
 
 - Un autre tuple contenant le metamap et le fichier de sortie concaténé, émis avec l'étiquette `file_out` ;
-- Un fichier `versions.yml` qui capture des informations sur la version du logiciel qui a été utilisée, émis avec l'étiquette `versions`.
+- Un tuple de version publié dans le canal topic `versions` pour le suivi des versions de logiciels.
 
 Notez également que par défaut, le fichier de sortie sera nommé en fonction d'un identifiant qui fait partie des métadonnées (code non montré ici).
 
@@ -427,7 +399,7 @@ Cela peut sembler beaucoup à retenir en regardant simplement le code, voici don
 </figure>
 
 Vous pouvez voir que les deux modules ont des exigences d'entrée similaires en termes de contenu (un ensemble de fichiers d'entrée plus quelques métadonnées) mais des attentes très différentes quant à la façon dont ce contenu est empaqueté.
-En ignorant le fichier versions pour l'instant, leur sortie principale est également équivalente (un fichier concaténé), sauf que CAT_CAT émet également le metamap conjointement avec le fichier de sortie.
+En ignorant la sortie versions pour l'instant, leur sortie principale est également équivalente (un fichier concaténé), sauf que CAT_CAT émet également le metamap conjointement avec le fichier de sortie.
 
 Les différences d'empaquetage seront assez faciles à gérer, comme vous le verrez dans un instant.
 Cependant, pour comprendre la partie metamap, nous devons vous présenter un contexte supplémentaire.
@@ -528,7 +500,7 @@ Maintenant que vous savez tout sur les metamaps (ou suffisamment pour les besoin
 
 Par souci de clarté, nous allons décomposer cela et couvrir chaque étape séparément.
 
-!!! note
+!!! note "Note"
 
     Tous les changements montrés ci-dessous sont apportés à la logique du workflow dans le bloc `main` dans le fichier de workflow `core-hello/workflows/hello.nf`.
 
@@ -578,8 +550,8 @@ Ajoutons ces lignes après l'appel à `convertToUpper`, en supprimant l'appel à
         // convertir la salutation en majuscules
         convertToUpper(sayHello.out)
 
-        // créer une map de métadonnées avec le nom du lot comme ID
-        def cat_meta = [ id: params.batch ]
+        // rassembler toutes les salutations dans un seul fichier
+        collectGreetings(convertToUpper.out.collect(), params.batch)
 
         // générer de l'art ASCII des salutations avec cowpy
         cowpy(collectGreetings.out.outfile, params.character)
@@ -629,7 +601,7 @@ Ensuite, transformez le canal de fichiers en un canal de tuples contenant des m�
 La ligne que nous avons ajoutée accomplit deux choses :
 
 - `.collect()` rassemble tous les fichiers de la sortie `convertToUpper` dans une seule liste
-- `.map { files -> tuple(cat_meta, files) }` crée un tuple de `[métadonnées, fichiers]` dans le format attendu par `CAT_CAT`
+- `#!groovy .map { files -> tuple(cat_meta, files) }` crée un tuple de `[métadonnées, fichiers]` dans le format attendu par `CAT_CAT`
 
 C'est tout ce que nous devons faire pour configurer le tuple d'entrée pour `CAT_CAT`.
 
@@ -652,7 +624,7 @@ Maintenant, appelez `CAT_CAT` sur le canal nouvellement créé :
         // créer un canal avec des métadonnées et des fichiers au format tuple
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concaténer les fichiers en utilisant le module nf-core cat/cat
+        // concaténer les salutations
         CAT_CAT(ch_for_cat)
 
         // générer de l'art ASCII des salutations avec cowpy
@@ -734,11 +706,11 @@ Puisque `cowpy` n'accepte pas encore les tuples de métadonnées (nous corrigero
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-L'opération `.map{ meta, file -> file }` extrait le fichier du tuple `[métadonnées, fichier]` produit par `CAT_CAT` dans un nouveau canal, `ch_for_cowpy`.
+L'opération `#!groovy .map { meta, file -> file }` extrait le fichier du tuple `[métadonnées, fichier]` produit par `CAT_CAT` dans un nouveau canal, `ch_for_cowpy`.
 
 Ensuite, il suffit de passer `ch_for_cowpy` à `cowpy` au lieu de `collectGreetings.out.outfile` dans cette dernière ligne.
 
-!!! note
+!!! note "Note"
 
     Dans la prochaine partie du cours, nous mettrons à jour `cowpy` pour qu'il fonctionne directement avec les tuples de métadonnées, donc cette étape d'extraction ne sera plus nécessaire.
 
