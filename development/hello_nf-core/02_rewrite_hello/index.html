@@ -43,7 +43,7 @@
       
       
       <link rel="icon" href="../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
     
     
       
@@ -4301,7 +4301,7 @@ This will create a new pipeline scaffold using the nf-core base template, custom
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">    | \| |       \__, \__/ |  \ |___     \`-._,-`-,</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">                                          `._,._,&#39;</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">    nf-core/tools version 3.4.1 - https://nf-co.re</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="go">    nf-core/tools version 3.5.2 - https://nf-co.re</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
 <a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
 <a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="go">INFO     Launching interactive nf-core pipeline creation tool.</span>
@@ -4479,7 +4479,25 @@ So where are the outputs? Are there any?</p>
 <span class="normal"><a href="#__codelineno-10-41">41</a></span>
 <span class="normal"><a href="#__codelineno-10-42">42</a></span>
 <span class="normal"><a href="#__codelineno-10-43">43</a></span>
-<span class="normal"><a href="#__codelineno-10-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cm">/*</span>
+<span class="normal"><a href="#__codelineno-10-44">44</a></span>
+<span class="normal"><a href="#__codelineno-10-45">45</a></span>
+<span class="normal"><a href="#__codelineno-10-46">46</a></span>
+<span class="normal"><a href="#__codelineno-10-47">47</a></span>
+<span class="normal"><a href="#__codelineno-10-48">48</a></span>
+<span class="normal"><a href="#__codelineno-10-49">49</a></span>
+<span class="normal"><a href="#__codelineno-10-50">50</a></span>
+<span class="normal"><a href="#__codelineno-10-51">51</a></span>
+<span class="normal"><a href="#__codelineno-10-52">52</a></span>
+<span class="normal"><a href="#__codelineno-10-53">53</a></span>
+<span class="normal"><a href="#__codelineno-10-54">54</a></span>
+<span class="normal"><a href="#__codelineno-10-55">55</a></span>
+<span class="normal"><a href="#__codelineno-10-56">56</a></span>
+<span class="normal"><a href="#__codelineno-10-57">57</a></span>
+<span class="normal"><a href="#__codelineno-10-58">58</a></span>
+<span class="normal"><a href="#__codelineno-10-59">59</a></span>
+<span class="normal"><a href="#__codelineno-10-60">60</a></span>
+<span class="normal"><a href="#__codelineno-10-61">61</a></span>
+<span class="normal"><a href="#__codelineno-10-62">62</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="cm">/*</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
@@ -4504,25 +4522,43 @@ So where are the outputs? Are there any?</p>
 <a id="__codelineno-10-23" name="__codelineno-10-23"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-10-24" name="__codelineno-10-24"></a><span class="w">    </span><span class="c1">// Collate and save software versions</span>
 <a id="__codelineno-10-25" name="__codelineno-10-25"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="w">    </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
-<a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
-<a id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<a id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-10-32" name="__codelineno-10-32"></a><span class="w">        </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-10-33" name="__codelineno-10-33"></a>
-<a id="__codelineno-10-34" name="__codelineno-10-34"></a>
-<a id="__codelineno-10-35" name="__codelineno-10-35"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
-</span><a id="__codelineno-10-36" name="__codelineno-10-36"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
-<a id="__codelineno-10-37" name="__codelineno-10-37"></a>
-<a id="__codelineno-10-38" name="__codelineno-10-38"></a><span class="o">}</span>
-<a id="__codelineno-10-39" name="__codelineno-10-39"></a>
-<a id="__codelineno-10-40" name="__codelineno-10-40"></a><span class="cm">/*</span>
-<a id="__codelineno-10-41" name="__codelineno-10-41"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-10-42" name="__codelineno-10-42"></a><span class="cm">    THE END</span>
-<a id="__codelineno-10-43" name="__codelineno-10-43"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-10-44" name="__codelineno-10-44"></a><span class="cm">*/</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27"></a><span class="w">        </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
+<a id="__codelineno-10-28" name="__codelineno-10-28"></a><span class="w">        </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-10-29" name="__codelineno-10-29"></a><span class="w">            </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
+<a id="__codelineno-10-30" name="__codelineno-10-30"></a><span class="w">            </span><span class="nl">versions_tuple:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-10-31" name="__codelineno-10-31"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-10-32" name="__codelineno-10-32"></a>
+<a id="__codelineno-10-33" name="__codelineno-10-33"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
+<a id="__codelineno-10-34" name="__codelineno-10-34"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-10-35" name="__codelineno-10-35"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-10-36" name="__codelineno-10-36"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-10-37" name="__codelineno-10-37"></a><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
+<a id="__codelineno-10-38" name="__codelineno-10-38"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-10-39" name="__codelineno-10-39"></a><span class="w">            </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
+<a id="__codelineno-10-40" name="__codelineno-10-40"></a><span class="w">            </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-10-41" name="__codelineno-10-41"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-10-42" name="__codelineno-10-42"></a>
+<a id="__codelineno-10-43" name="__codelineno-10-43"></a><span class="w">    </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
+<a id="__codelineno-10-44" name="__codelineno-10-44"></a><span class="w">        </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
+<a id="__codelineno-10-45" name="__codelineno-10-45"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
+<a id="__codelineno-10-46" name="__codelineno-10-46"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-10-48" name="__codelineno-10-48"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
+<a id="__codelineno-10-49" name="__codelineno-10-49"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-10-50" name="__codelineno-10-50"></a><span class="w">        </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-10-51" name="__codelineno-10-51"></a>
+<a id="__codelineno-10-52" name="__codelineno-10-52"></a>
+<a id="__codelineno-10-53" name="__codelineno-10-53"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
+</span><a id="__codelineno-10-54" name="__codelineno-10-54"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
+<a id="__codelineno-10-55" name="__codelineno-10-55"></a>
+<a id="__codelineno-10-56" name="__codelineno-10-56"></a><span class="o">}</span>
+<a id="__codelineno-10-57" name="__codelineno-10-57"></a>
+<a id="__codelineno-10-58" name="__codelineno-10-58"></a><span class="cm">/*</span>
+<a id="__codelineno-10-59" name="__codelineno-10-59"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-10-60" name="__codelineno-10-60"></a><span class="cm">    THE END</span>
+<a id="__codelineno-10-61" name="__codelineno-10-61"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-10-62" name="__codelineno-10-62"></a><span class="cm">*/</span>
 </code></pre></div></td></tr></table></div>
 <p>Compared to a basic Nextflow workflow like the one developed in <a href="../../hello_nextflow/">Hello Nextflow</a>, you'll notice a few things that are new here (highlighted lines above):</p>
 <ul>
@@ -4532,6 +4568,13 @@ So where are the outputs? Are there any?</p>
 <li>Outputs are declared using the <code>emit:</code> keyword</li>
 </ul>
 <p>These are optional features of Nextflow that make the workflow <strong>composable</strong>, meaning that it can be called from within another workflow.</p>
+<div class="admonition note">
+<p class="admonition-title">The <code>Channel.topic</code> block</p>
+<p>You may have noticed the <code>def topic_versions = Channel.topic("versions")</code> block starting at line 17.
+This is boilerplate housekeeping code that collects software version information from all modules automatically.
+nf-core is rolling out this mechanism across all pipelines in 2026, so you'll see it in all new pipelines going forward.
+Part 4 of this course explains how it works in detail.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Composable workflows in depth</p>
 <p>The <a href="../../side_quests/workflows_of_workflows/">Workflows of Workflows</a> Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.</p>
@@ -5023,7 +5066,25 @@ We want to integrate the composable workflow we just developed into the nf-core 
 <span class="normal"><a href="#__codelineno-30-41">41</a></span>
 <span class="normal"><a href="#__codelineno-30-42">42</a></span>
 <span class="normal"><a href="#__codelineno-30-43">43</a></span>
-<span class="normal"><a href="#__codelineno-30-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="cm">/*</span>
+<span class="normal"><a href="#__codelineno-30-44">44</a></span>
+<span class="normal"><a href="#__codelineno-30-45">45</a></span>
+<span class="normal"><a href="#__codelineno-30-46">46</a></span>
+<span class="normal"><a href="#__codelineno-30-47">47</a></span>
+<span class="normal"><a href="#__codelineno-30-48">48</a></span>
+<span class="normal"><a href="#__codelineno-30-49">49</a></span>
+<span class="normal"><a href="#__codelineno-30-50">50</a></span>
+<span class="normal"><a href="#__codelineno-30-51">51</a></span>
+<span class="normal"><a href="#__codelineno-30-52">52</a></span>
+<span class="normal"><a href="#__codelineno-30-53">53</a></span>
+<span class="normal"><a href="#__codelineno-30-54">54</a></span>
+<span class="normal"><a href="#__codelineno-30-55">55</a></span>
+<span class="normal"><a href="#__codelineno-30-56">56</a></span>
+<span class="normal"><a href="#__codelineno-30-57">57</a></span>
+<span class="normal"><a href="#__codelineno-30-58">58</a></span>
+<span class="normal"><a href="#__codelineno-30-59">59</a></span>
+<span class="normal"><a href="#__codelineno-30-60">60</a></span>
+<span class="normal"><a href="#__codelineno-30-61">61</a></span>
+<span class="normal"><a href="#__codelineno-30-62">62</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="cm">/*</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 <a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="cm">    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
@@ -5048,27 +5109,47 @@ We want to integrate the composable workflow we just developed into the nf-core 
 <a id="__codelineno-30-23" name="__codelineno-30-23"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-30-24" name="__codelineno-30-24"></a><span class="w">    </span><span class="c1">// Collate and save software versions</span>
 <a id="__codelineno-30-25" name="__codelineno-30-25"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-30-26" name="__codelineno-30-26"></a><span class="w">    </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
-<a id="__codelineno-30-27" name="__codelineno-30-27"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-30-28" name="__codelineno-30-28"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-30-29" name="__codelineno-30-29"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
-<a id="__codelineno-30-30" name="__codelineno-30-30"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<a id="__codelineno-30-31" name="__codelineno-30-31"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-30-32" name="__codelineno-30-32"></a><span class="w">        </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-30-33" name="__codelineno-30-33"></a>
-<a id="__codelineno-30-34" name="__codelineno-30-34"></a>
-<a id="__codelineno-30-35" name="__codelineno-30-35"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-30-36" name="__codelineno-30-36"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
-<a id="__codelineno-30-37" name="__codelineno-30-37"></a>
-<a id="__codelineno-30-38" name="__codelineno-30-38"></a><span class="o">}</span>
-<a id="__codelineno-30-39" name="__codelineno-30-39"></a>
-<a id="__codelineno-30-40" name="__codelineno-30-40"></a><span class="cm">/*</span>
-<a id="__codelineno-30-41" name="__codelineno-30-41"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-30-42" name="__codelineno-30-42"></a><span class="cm">    THE END</span>
-<a id="__codelineno-30-43" name="__codelineno-30-43"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-<a id="__codelineno-30-44" name="__codelineno-30-44"></a><span class="cm">*/</span>
+<a id="__codelineno-30-26" name="__codelineno-30-26"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-30-27" name="__codelineno-30-27"></a><span class="w">        </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
+<a id="__codelineno-30-28" name="__codelineno-30-28"></a><span class="w">        </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-30-29" name="__codelineno-30-29"></a><span class="w">            </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
+<a id="__codelineno-30-30" name="__codelineno-30-30"></a><span class="w">            </span><span class="nl">versions_tuple:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-30-31" name="__codelineno-30-31"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-30-32" name="__codelineno-30-32"></a>
+<a id="__codelineno-30-33" name="__codelineno-30-33"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
+<a id="__codelineno-30-34" name="__codelineno-30-34"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-30-35" name="__codelineno-30-35"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-30-36" name="__codelineno-30-36"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-30-37" name="__codelineno-30-37"></a><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
+<a id="__codelineno-30-38" name="__codelineno-30-38"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-30-39" name="__codelineno-30-39"></a><span class="w">            </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
+<a id="__codelineno-30-40" name="__codelineno-30-40"></a><span class="w">            </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-30-41" name="__codelineno-30-41"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-30-42" name="__codelineno-30-42"></a>
+<a id="__codelineno-30-43" name="__codelineno-30-43"></a><span class="w">    </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
+<a id="__codelineno-30-44" name="__codelineno-30-44"></a><span class="w">        </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
+<a id="__codelineno-30-45" name="__codelineno-30-45"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
+<a id="__codelineno-30-46" name="__codelineno-30-46"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
+<a id="__codelineno-30-47" name="__codelineno-30-47"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-30-48" name="__codelineno-30-48"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
+<a id="__codelineno-30-49" name="__codelineno-30-49"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-30-50" name="__codelineno-30-50"></a><span class="w">        </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-30-51" name="__codelineno-30-51"></a>
+<a id="__codelineno-30-52" name="__codelineno-30-52"></a>
+<a id="__codelineno-30-53" name="__codelineno-30-53"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-30-54" name="__codelineno-30-54"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
+<a id="__codelineno-30-55" name="__codelineno-30-55"></a>
+<a id="__codelineno-30-56" name="__codelineno-30-56"></a><span class="o">}</span>
+<a id="__codelineno-30-57" name="__codelineno-30-57"></a>
+<a id="__codelineno-30-58" name="__codelineno-30-58"></a><span class="cm">/*</span>
+<a id="__codelineno-30-59" name="__codelineno-30-59"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-30-60" name="__codelineno-30-60"></a><span class="cm">    THE END</span>
+<a id="__codelineno-30-61" name="__codelineno-30-61"></a><span class="cm">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<a id="__codelineno-30-62" name="__codelineno-30-62"></a><span class="cm">*/</span>
 </code></pre></div></td></tr></table></div>
-<p>Overall this code does very little aside from some housekeeping that has to do with capturing the version of any software tools that get run in the pipeline.</p>
+<p>The highlighted lines define the composable workflow structure: <code>workflow HELLO {</code>, <code>take:</code>, <code>main:</code>, and <code>emit:</code>.
+The large block between lines 17–34 is more substantial: it handles software version capture using topic channels, a mechanism nf-core is rolling out across all pipelines in 2026.
+We'll explain it in Part 4; for now, treat it as boilerplate that you can leave untouched.</p>
 <p>We need to add the relevant code from the composable version of the original workflow that we developed in section 2.</p>
 <p>We're going to tackle this in the following stages:</p>
 <ol>
@@ -5079,7 +5160,8 @@ We want to integrate the composable workflow we just developed into the nf-core 
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We're going to ignore the version capture for this first pass and will look at how to wire that up in a later part of this training.</p>
+<p>We're going to ignore the version capture block for this first pass.
+Part 4 explains how it works.</p>
 </div>
 <h3 id="31-copy-the-modules-and-set-up-module-imports">3.1. Copy the modules and set up module imports<a class="headerlink" href="#31-copy-the-modules-and-set-up-module-imports" title="Permanent link">&para;</a></h3>
 <p>The four processes from our Hello Nextflow workflow are stored as modules in <code>original-hello/modules/</code>.
@@ -5245,7 +5327,25 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 <span class="normal"><a href="#__codelineno-39-52">52</a></span>
 <span class="normal"><a href="#__codelineno-39-53">53</a></span>
 <span class="normal"><a href="#__codelineno-39-54">54</a></span>
-<span class="normal"><a href="#__codelineno-39-55">55</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-19" name="__codelineno-39-19"></a><span class="n">workflow</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-39-55">55</a></span>
+<span class="normal"><a href="#__codelineno-39-56">56</a></span>
+<span class="normal"><a href="#__codelineno-39-57">57</a></span>
+<span class="normal"><a href="#__codelineno-39-58">58</a></span>
+<span class="normal"><a href="#__codelineno-39-59">59</a></span>
+<span class="normal"><a href="#__codelineno-39-60">60</a></span>
+<span class="normal"><a href="#__codelineno-39-61">61</a></span>
+<span class="normal"><a href="#__codelineno-39-62">62</a></span>
+<span class="normal"><a href="#__codelineno-39-63">63</a></span>
+<span class="normal"><a href="#__codelineno-39-64">64</a></span>
+<span class="normal"><a href="#__codelineno-39-65">65</a></span>
+<span class="normal"><a href="#__codelineno-39-66">66</a></span>
+<span class="normal"><a href="#__codelineno-39-67">67</a></span>
+<span class="normal"><a href="#__codelineno-39-68">68</a></span>
+<span class="normal"><a href="#__codelineno-39-69">69</a></span>
+<span class="normal"><a href="#__codelineno-39-70">70</a></span>
+<span class="normal"><a href="#__codelineno-39-71">71</a></span>
+<span class="normal"><a href="#__codelineno-39-72">72</a></span>
+<span class="normal"><a href="#__codelineno-39-73">73</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-19" name="__codelineno-39-19"></a><span class="n">workflow</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-39-20" name="__codelineno-39-20"></a>
 <a id="__codelineno-39-21" name="__codelineno-39-21"></a><span class="w">    </span><span class="nl">take:</span>
 <a id="__codelineno-39-22" name="__codelineno-39-22"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="c1">// channel: samplesheet read in from --input</span>
@@ -5269,19 +5369,37 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 <a id="__codelineno-39-40" name="__codelineno-39-40"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-39-41" name="__codelineno-39-41"></a><span class="w">    </span><span class="c1">// Collate and save software versions</span>
 <a id="__codelineno-39-42" name="__codelineno-39-42"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-39-43" name="__codelineno-39-43"></a><span class="w">    </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
-<a id="__codelineno-39-44" name="__codelineno-39-44"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-39-45" name="__codelineno-39-45"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-39-46" name="__codelineno-39-46"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
-<a id="__codelineno-39-47" name="__codelineno-39-47"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<a id="__codelineno-39-48" name="__codelineno-39-48"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-39-49" name="__codelineno-39-49"></a><span class="w">        </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-39-50" name="__codelineno-39-50"></a>
-<a id="__codelineno-39-51" name="__codelineno-39-51"></a>
-<a id="__codelineno-39-52" name="__codelineno-39-52"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-39-53" name="__codelineno-39-53"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
-<a id="__codelineno-39-54" name="__codelineno-39-54"></a>
-<a id="__codelineno-39-55" name="__codelineno-39-55"></a><span class="o">}</span>
+<a id="__codelineno-39-43" name="__codelineno-39-43"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-39-44" name="__codelineno-39-44"></a><span class="w">        </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
+<a id="__codelineno-39-45" name="__codelineno-39-45"></a><span class="w">        </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-39-46" name="__codelineno-39-46"></a><span class="w">            </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
+<a id="__codelineno-39-47" name="__codelineno-39-47"></a><span class="w">            </span><span class="nl">versions_tuple:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-39-48" name="__codelineno-39-48"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-39-49" name="__codelineno-39-49"></a>
+<a id="__codelineno-39-50" name="__codelineno-39-50"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
+<a id="__codelineno-39-51" name="__codelineno-39-51"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-39-52" name="__codelineno-39-52"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-39-53" name="__codelineno-39-53"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-39-54" name="__codelineno-39-54"></a><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
+<a id="__codelineno-39-55" name="__codelineno-39-55"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-39-56" name="__codelineno-39-56"></a><span class="w">            </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
+<a id="__codelineno-39-57" name="__codelineno-39-57"></a><span class="w">            </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-39-58" name="__codelineno-39-58"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-39-59" name="__codelineno-39-59"></a>
+<a id="__codelineno-39-60" name="__codelineno-39-60"></a><span class="w">    </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
+<a id="__codelineno-39-61" name="__codelineno-39-61"></a><span class="w">        </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
+<a id="__codelineno-39-62" name="__codelineno-39-62"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
+<a id="__codelineno-39-63" name="__codelineno-39-63"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
+<a id="__codelineno-39-64" name="__codelineno-39-64"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-39-65" name="__codelineno-39-65"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
+<a id="__codelineno-39-66" name="__codelineno-39-66"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-39-67" name="__codelineno-39-67"></a><span class="w">        </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-39-68" name="__codelineno-39-68"></a>
+<a id="__codelineno-39-69" name="__codelineno-39-69"></a>
+<a id="__codelineno-39-70" name="__codelineno-39-70"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-39-71" name="__codelineno-39-71"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
+<a id="__codelineno-39-72" name="__codelineno-39-72"></a>
+<a id="__codelineno-39-73" name="__codelineno-39-73"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5308,7 +5426,25 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 <span class="normal"><a href="#__codelineno-40-39">39</a></span>
 <span class="normal"><a href="#__codelineno-40-40">40</a></span>
 <span class="normal"><a href="#__codelineno-40-41">41</a></span>
-<span class="normal"><a href="#__codelineno-40-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-19" name="__codelineno-40-19"></a><span class="n">workflow</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-40-42">42</a></span>
+<span class="normal"><a href="#__codelineno-40-43">43</a></span>
+<span class="normal"><a href="#__codelineno-40-44">44</a></span>
+<span class="normal"><a href="#__codelineno-40-45">45</a></span>
+<span class="normal"><a href="#__codelineno-40-46">46</a></span>
+<span class="normal"><a href="#__codelineno-40-47">47</a></span>
+<span class="normal"><a href="#__codelineno-40-48">48</a></span>
+<span class="normal"><a href="#__codelineno-40-49">49</a></span>
+<span class="normal"><a href="#__codelineno-40-50">50</a></span>
+<span class="normal"><a href="#__codelineno-40-51">51</a></span>
+<span class="normal"><a href="#__codelineno-40-52">52</a></span>
+<span class="normal"><a href="#__codelineno-40-53">53</a></span>
+<span class="normal"><a href="#__codelineno-40-54">54</a></span>
+<span class="normal"><a href="#__codelineno-40-55">55</a></span>
+<span class="normal"><a href="#__codelineno-40-56">56</a></span>
+<span class="normal"><a href="#__codelineno-40-57">57</a></span>
+<span class="normal"><a href="#__codelineno-40-58">58</a></span>
+<span class="normal"><a href="#__codelineno-40-59">59</a></span>
+<span class="normal"><a href="#__codelineno-40-60">60</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-19" name="__codelineno-40-19"></a><span class="n">workflow</span><span class="w"> </span><span class="n">HELLO</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-40-20" name="__codelineno-40-20"></a>
 <a id="__codelineno-40-21" name="__codelineno-40-21"></a><span class="w">    </span><span class="nl">take:</span>
 <a id="__codelineno-40-22" name="__codelineno-40-22"></a><span class="w">    </span><span class="n">ch_samplesheet</span><span class="w"> </span><span class="c1">// channel: samplesheet read in from --input</span>
@@ -5319,19 +5455,37 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 <a id="__codelineno-40-27" name="__codelineno-40-27"></a><span class="w">    </span><span class="c1">//</span>
 <a id="__codelineno-40-28" name="__codelineno-40-28"></a><span class="w">    </span><span class="c1">// Collate and save software versions</span>
 <a id="__codelineno-40-29" name="__codelineno-40-29"></a><span class="w">    </span><span class="c1">//</span>
-<a id="__codelineno-40-30" name="__codelineno-40-30"></a><span class="w">    </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">)</span>
-<a id="__codelineno-40-31" name="__codelineno-40-31"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
-<a id="__codelineno-40-32" name="__codelineno-40-32"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
-<a id="__codelineno-40-33" name="__codelineno-40-33"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
-<a id="__codelineno-40-34" name="__codelineno-40-34"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<a id="__codelineno-40-35" name="__codelineno-40-35"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-40-36" name="__codelineno-40-36"></a><span class="w">        </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-40-37" name="__codelineno-40-37"></a>
-<a id="__codelineno-40-38" name="__codelineno-40-38"></a>
-<a id="__codelineno-40-39" name="__codelineno-40-39"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-40-40" name="__codelineno-40-40"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
-<a id="__codelineno-40-41" name="__codelineno-40-41"></a>
-<a id="__codelineno-40-42" name="__codelineno-40-42"></a><span class="o">}</span>
+<a id="__codelineno-40-30" name="__codelineno-40-30"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">topic</span><span class="o">(</span><span class="s2">&quot;versions&quot;</span><span class="o">)</span>
+<a id="__codelineno-40-31" name="__codelineno-40-31"></a><span class="w">        </span><span class="o">.</span><span class="na">distinct</span><span class="o">()</span>
+<a id="__codelineno-40-32" name="__codelineno-40-32"></a><span class="w">        </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-40-33" name="__codelineno-40-33"></a><span class="w">            </span><span class="nl">versions_file:</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="k">instanceof</span><span class="w"> </span><span class="n">Path</span>
+<a id="__codelineno-40-34" name="__codelineno-40-34"></a><span class="w">            </span><span class="nl">versions_tuple:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-40-35" name="__codelineno-40-35"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-40-36" name="__codelineno-40-36"></a>
+<a id="__codelineno-40-37" name="__codelineno-40-37"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">topic_versions_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_tuple</span>
+<a id="__codelineno-40-38" name="__codelineno-40-38"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool</span><span class="o">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-40-39" name="__codelineno-40-39"></a><span class="w">            </span><span class="o">[</span><span class="w"> </span><span class="n">process</span><span class="o">[</span><span class="n">process</span><span class="o">.</span><span class="na">lastIndexOf</span><span class="o">(</span><span class="s1">&#39;:&#39;</span><span class="o">)+</span><span class="mi">1</span><span class="o">..-</span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="s2">&quot;  ${tool}: ${version}&quot;</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-40-40" name="__codelineno-40-40"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-40-41" name="__codelineno-40-41"></a><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">(</span><span class="nl">by:</span><span class="mi">0</span><span class="o">)</span>
+<a id="__codelineno-40-42" name="__codelineno-40-42"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">process</span><span class="o">,</span><span class="w"> </span><span class="n">tool_versions</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-40-43" name="__codelineno-40-43"></a><span class="w">            </span><span class="n">tool_versions</span><span class="o">.</span><span class="na">unique</span><span class="o">().</span><span class="na">sort</span><span class="o">()</span>
+<a id="__codelineno-40-44" name="__codelineno-40-44"></a><span class="w">            </span><span class="s2">&quot;${process}:\n${tool_versions.join(&#39;\n&#39;)}&quot;</span>
+<a id="__codelineno-40-45" name="__codelineno-40-45"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-40-46" name="__codelineno-40-46"></a>
+<a id="__codelineno-40-47" name="__codelineno-40-47"></a><span class="w">    </span><span class="n">softwareVersionsToYAML</span><span class="o">(</span><span class="n">ch_versions</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions</span><span class="o">.</span><span class="na">versions_file</span><span class="o">))</span>
+<a id="__codelineno-40-48" name="__codelineno-40-48"></a><span class="w">        </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">topic_versions_string</span><span class="o">)</span>
+<a id="__codelineno-40-49" name="__codelineno-40-49"></a><span class="w">        </span><span class="o">.</span><span class="na">collectFile</span><span class="o">(</span>
+<a id="__codelineno-40-50" name="__codelineno-40-50"></a><span class="w">            </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s2">&quot;${params.outdir}/pipeline_info&quot;</span><span class="o">,</span>
+<a id="__codelineno-40-51" name="__codelineno-40-51"></a><span class="w">            </span><span class="nl">name:</span><span class="w">  </span><span class="s1">&#39;hello_software_&#39;</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;versions.yml&#39;</span><span class="o">,</span>
+<a id="__codelineno-40-52" name="__codelineno-40-52"></a><span class="w">            </span><span class="nl">sort:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
+<a id="__codelineno-40-53" name="__codelineno-40-53"></a><span class="w">            </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-40-54" name="__codelineno-40-54"></a><span class="w">        </span><span class="o">).</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">ch_collated_versions</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-40-55" name="__codelineno-40-55"></a>
+<a id="__codelineno-40-56" name="__codelineno-40-56"></a>
+<a id="__codelineno-40-57" name="__codelineno-40-57"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-40-58" name="__codelineno-40-58"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
+<a id="__codelineno-40-59" name="__codelineno-40-59"></a>
+<a id="__codelineno-40-60" name="__codelineno-40-60"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5360,17 +5514,17 @@ This ordering makes sense because in a real pipeline, the processes would emit v
 <div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">After</label><label for="__tabbed_8_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-55">55</a></span>
-<span class="normal"><a href="#__codelineno-43-56">56</a></span>
-<span class="normal"><a href="#__codelineno-43-57">57</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-55" name="__codelineno-43-55"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-43-56" name="__codelineno-43-56"></a><span class="hll"><span class="w">    </span><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">cowpy</span><span class="o">.</span><span class="na">out</span>
-</span><a id="__codelineno-43-57" name="__codelineno-43-57"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-69">69</a></span>
+<span class="normal"><a href="#__codelineno-43-70">70</a></span>
+<span class="normal"><a href="#__codelineno-43-71">71</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-69" name="__codelineno-43-69"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-43-70" name="__codelineno-43-70"></a><span class="hll"><span class="w">    </span><span class="n">cowpy_hellos</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">cowpy</span><span class="o">.</span><span class="na">out</span>
+</span><a id="__codelineno-43-71" name="__codelineno-43-71"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-55">55</a></span>
-<span class="normal"><a href="#__codelineno-44-56">56</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-44-55" name="__codelineno-44-55"></a><span class="w">    </span><span class="nl">emit:</span>
-<a id="__codelineno-44-56" name="__codelineno-44-56"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/workflows/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-69">69</a></span>
+<span class="normal"><a href="#__codelineno-44-70">70</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-44-69" name="__codelineno-44-69"></a><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-44-70" name="__codelineno-44-70"></a><span class="w">    </span><span class="n">versions</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">ch_versions</span><span class="w">                 </span><span class="c1">// channel: [ path(versions.yml) ]</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5643,10 +5797,10 @@ So let's have a look at the top level <code>main.nf</code> entrypoint workflow t
 <span class="normal"><a href="#__codelineno-49-11">11</a></span>
 <span class="normal"><a href="#__codelineno-49-12">12</a></span>
 <span class="normal"><a href="#__codelineno-49-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-10" name="__codelineno-49-10"></a><span class="w">    </span><span class="c1">// create a channel for inputs from a CSV file</span>
-<a id="__codelineno-49-11" name="__codelineno-49-11"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
-<a id="__codelineno-49-12" name="__codelineno-49-12"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-<a id="__codelineno-49-13" name="__codelineno-49-13"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-</span></code></pre></div></td></tr></table></div>
+<a id="__codelineno-49-11" name="__codelineno-49-11"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+</span><a id="__codelineno-49-12" name="__codelineno-49-12"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
+<a id="__codelineno-49-13" name="__codelineno-49-13"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">line</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 <p>So we just need to plug that into the initialisation workflow, with minor changes: we update the channel name from <code>greeting_ch</code> to <code>ch_samplesheet</code>, and the parameter name from <code>params.greeting</code> to <code>params.input</code> (see highlighted line).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">After</label><label for="__tabbed_9_2">Before</label></div>
 <div class="tabbed-content">
@@ -5806,7 +5960,7 @@ Typically small test files are stored in the <code>assets</code> directory, so l
 <div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">After</label><label for="__tabbed_11_2">Before</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-13">13</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-13">13</a></span>
 <span class="normal"><a href="#__codelineno-55-14">14</a></span>
 <span class="normal"><a href="#__codelineno-55-15">15</a></span>
 <span class="normal"><a href="#__codelineno-55-16">16</a></span>
@@ -5822,7 +5976,7 @@ Typically small test files are stored in the <code>assets</code> directory, so l
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/config/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-13">13</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/conf/test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-13">13</a></span>
 <span class="normal"><a href="#__codelineno-56-14">14</a></span>
 <span class="normal"><a href="#__codelineno-56-15">15</a></span>
 <span class="normal"><a href="#__codelineno-56-16">16</a></span>
