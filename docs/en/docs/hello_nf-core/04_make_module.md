@@ -1247,7 +1247,7 @@ process COWPY {
 
     output:
     tuple val(meta), path("*"), emit: output
-    path "versions.yml"           , emit: versions
+    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
 
     when:
     task.ext.when == null || task.ext.when
@@ -1257,12 +1257,6 @@ process COWPY {
     def prefix = task.ext.prefix ?: "${meta.id}"  // Pattern 3: ext.prefix ✓
 
     """
-    // Add your tool command here
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
 
     stub:
@@ -1271,12 +1265,6 @@ process COWPY {
 
     """
     echo $args
-    touch ${prefix}.txt
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
 }
 ```
@@ -1291,14 +1279,15 @@ Some of these work out of the box, while others are placeholders we'll need to f
 - **`tag "$meta.id"`**: Adds sample ID to process names in logs for easier tracking
 - **`label 'process_single'`**: Resource label for configuring CPU/memory requirements
 - **`when:` block**: Allows conditional execution via `task.ext.when` configuration
+- **`topic: versions` output**: Version reporting via topic channel, as covered in section 1.6
 
 These features are already functional and make modules more maintainable.
 
 **Placeholders we'll customize below:**
 
 - **`input:` and `output:` blocks**: Generic declarations we'll update to match our tool
-- **`script:` block**: Contains a comment where we'll add the `cowpy` command
-- **`stub:` block**: Template we'll update to produce the correct outputs
+- **`script:` block**: Empty — we'll add the `cowpy` command here
+- **`stub:` block**: We'll update to produce the correct outputs
 - **Container and environment**: Placeholders we'll fill with package information
 
 The next sections walk through completing these customizations.
