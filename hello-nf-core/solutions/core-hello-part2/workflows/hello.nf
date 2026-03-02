@@ -25,7 +25,7 @@ workflow HELLO {
 
     ch_versions = channel.empty()
 
-        // emit a greeting
+    // emit a greeting (updated to use the nf-core convention for samplesheets)
     sayHello(ch_samplesheet)
 
     // convert the greeting to uppercase

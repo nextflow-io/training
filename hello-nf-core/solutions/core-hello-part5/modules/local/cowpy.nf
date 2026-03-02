@@ -5,10 +5,11 @@ process COWPY {
     conda 'conda-forge::cowpy==1.1.5'
 
     input:
-    tuple val(meta), path(input_file)
+        tuple val(meta), path(input_file)
 
     output:
-    tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
+        tuple val(meta), path("${prefix}.txt")                                    , emit: cowpy_output
+        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions , emit: versions_cowpy
 
     script:
     def args = task.ext.args ?: ''

@@ -23,7 +23,7 @@ workflow HELLO {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // emit a greeting
     sayHello(ch_samplesheet)

@@ -23,7 +23,7 @@ workflow HELLO {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // emit a greeting
     sayHello(ch_samplesheet)
@@ -75,7 +75,7 @@ workflow HELLO {
 
     emit:
     cowpy_hellos   = COWPY.out.cowpy_output
-    versions       = ch_versions
+    versions       = ch_versions                 // channel: [ path(versions.yml) ]
 
 }
 
