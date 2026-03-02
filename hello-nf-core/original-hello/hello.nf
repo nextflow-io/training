@@ -3,7 +3,7 @@
 /*
  * Pipeline parameters
  */
-// params.greeting = 'greetings.csv'
+params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
@@ -13,13 +13,12 @@ include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
 include { cowpy } from './modules/cowpy.nf'
 
-workflow HELLO {
+workflow {
 
-    take:
-    // channel of greetings
-    greeting_ch
-
-    main:
+    // create a channel for inputs from a CSV file
+    greeting_ch = channel.fromPath(params.greeting)
+                        .splitCsv()
+                        .map { line -> line[0] }
 
     // emit a greeting
     sayHello(greeting_ch)
@@ -32,7 +31,4 @@ workflow HELLO {
 
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
-
-    emit:
-    cowpy_hellos = cowpy.out
 }
