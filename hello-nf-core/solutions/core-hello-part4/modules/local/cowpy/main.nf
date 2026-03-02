@@ -11,8 +11,8 @@ process COWPY {
     tuple val(meta), path(input_file)
 
     output:
-    tuple val(meta), path("${prefix}.txt")  , emit: cowpy_output
-    path "versions.yml"                     , emit: versions
+    tuple val(meta), path("${prefix}.txt")                                       , emit: cowpy_output
+    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions    , emit: versions_cowpy
 
     when:
     task.ext.when == null || task.ext.when
@@ -24,10 +24,6 @@ process COWPY {
     """
     cat $input_file | cowpy $args > ${prefix}.txt
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
 
     stub:
@@ -37,10 +33,5 @@ process COWPY {
     """
     touch ${prefix}.txt
 
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
 }

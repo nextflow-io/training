@@ -34,8 +34,6 @@ In this section, we'll apply nf-core conventions to the local `cowpy` module in 
 This is the current code for the `cowpy` process module:
 
 ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
@@ -154,7 +152,7 @@ So now let's update the two references to the process in the workflow block of `
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
     // extract the file from the tuple since cowpy doesn't use metadata yet
     ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
@@ -164,7 +162,25 @@ So now let's update the two references to the process in the workflow block of `
     //
     // Collate and save software versions
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
@@ -180,7 +196,7 @@ So now let's update the two references to the process in the workflow block of `
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 20"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
     // extract the file from the tuple since cowpy doesn't use metadata yet
     ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
@@ -190,7 +206,25 @@ So now let's update the two references to the process in the workflow block of `
     //
     // Collate and save software versions
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
@@ -435,9 +469,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 === "After"
 
-    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="18 20"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -462,9 +494,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify i
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 20"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 18"
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -763,7 +793,7 @@ You can see we made three changes.
 2. **In the command line, we replaced `cowpy-${input_file}` with `${prefix}.txt`.**
    This is where Nextflow will inject the value of `prefix` determined by the line above.
 
-3. **In the `output:` block, we replaced `path("cowpy-${input_file}")` with `path("${prefix}.txt")`.\*\***
+3. **In the `output:` block, we replaced `path("cowpy-${input_file}")` with `path("${prefix}.txt")`.**
    This simply reiterates what the file path will be according to what is written in the command line.
 
 As a result, the output file name is now constructed using a sensible default (the identifier from the metamap) combined with the appropriate file format extension.
@@ -919,8 +949,6 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and remove t
 === "After"
 
     ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1"
-    #!/usr/bin/env nextflow
-
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -930,9 +958,7 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and remove t
 
 === "Before"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1" hl_lines="6"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="core-hello/modules/local/cowpy.nf (excerpt)" linenums="1" hl_lines="4"
     // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -1029,6 +1055,12 @@ Now the `core-hello-results` also contains the outputs of the `COWPY` module.
 
 You can see that Nextflow created this hierarchy of directories based on the names of the workflow and of the module.
 
+!!! note
+
+    You may notice `hello_software_versions.yml` in `pipeline_info/`.
+    It currently only contains version information from `CAT_CAT`, because `COWPY` doesn't report its version yet.
+    Section 1.6 covers how to add that.
+
 The code responsible lives in the `conf/modules.config` file.
 This is the default `publishDir` configuration that is part of the nf-core template and applies to all processes:
 
@@ -1094,7 +1126,58 @@ To summarize, you get:
 - **Easy customization**: Override publishing behavior in config, not in module code
 - **Portable modules**: Modules don't hardcode output locations
 
-This completes the set of nf-core module features you should absolutely learn to use, but there are others which you can read about in the [nf-core modules specifications](https://nf-co.re/docs/guidelines/components/modules).
+### 1.6. Version capture with topic channels
+
+Reproducibility is a core principle of nf-core: every pipeline run records exactly which software versions were used, so results can be reproduced and compared across runs.
+The `hello_software_versions.yml` report in `pipeline_info/` is how nf-core pipelines fulfil this requirement.
+
+The mechanism behind it is **topic channels**: a Nextflow broadcast feature where any process can publish data to a named topic, and any subscriber receives everything published to that topic — regardless of where it comes from in the pipeline.
+nf-core is rolling this out across all pipelines in 2026.
+Modules publish their version as a tuple directly in the output block using the `topic:` keyword, and the workflow subscribes once to collect them all.
+
+#### 1.6.1. Add version reporting to `COWPY`
+
+Open the `cowpy.nf` module file and add a version output line as shown below.
+
+=== "After"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13" hl_lines="3"
+        output:
+        tuple val(meta), path("${prefix}.txt")                                    , emit: cowpy_output
+        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions , emit: versions_cowpy
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13"
+        output:
+        tuple val(meta), path("${prefix}.txt")  , emit: cowpy_output
+    ```
+
+The new line publishes a `[process_name, tool_name, version]` tuple to the `"versions"` topic channel.
+No changes to the script block are needed — the version is declared statically in the output block.
+
+#### 1.6.2. Run the pipeline and inspect the versions report
+
+```bash
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+```
+
+Open `core-hello-results/pipeline_info/hello_software_versions.yml` and you'll now see both modules:
+
+```yaml title="core-hello-results/pipeline_info/hello_software_versions.yml"
+CAT_CAT:
+  pigz: 2.8
+COWPY:
+  cowpy: 1.1.5
+```
+
+The workflow-side collection — the `Channel.topic("versions")` block you saw in the placeholder workflow in Part 2 — subscribes to the topic and writes this combined report automatically.
+
+!!! note "Backwards compatibility"
+
+    The `versions_file` branch in the workflow's topic channel block exists to handle modules that haven't yet been updated to use `topic: versions` and still write a `versions.yml` file in the script block with `emit: versions`.
+    Both styles are supported simultaneously during the transition.
 
 ### Takeaway
 
@@ -1103,7 +1186,10 @@ You now know how to adapt local modules to follow nf-core conventions:
 - Design your modules to accept and propagate metadata tuples;
 - Use `ext.args` to keep module interfaces minimal and portable;
 - Use `ext.prefix` for configurable, standardized output file naming;
-- Adopt the default centralized `publishDir` directive for a consistent results directory structure.
+- Adopt the default centralized `publishDir` directive for a consistent results directory structure;
+- Understand how topic channels collect software versions from all modules automatically.
+
+For further reading on module conventions, see the [nf-core modules specifications](https://nf-co.re/docs/guidelines/components/modules).
 
 ### What's next?
 
@@ -1187,7 +1273,7 @@ process COWPY {
 
     output:
     tuple val(meta), path("*"), emit: output
-    path "versions.yml"           , emit: versions
+    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
 
     when:
     task.ext.when == null || task.ext.when
@@ -1197,12 +1283,6 @@ process COWPY {
     def prefix = task.ext.prefix ?: "${meta.id}"  // Pattern 3: ext.prefix ✓
 
     """
-    // Add your tool command here
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
 
     stub:
@@ -1211,12 +1291,6 @@ process COWPY {
 
     """
     echo $args
-    touch ${prefix}.txt
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
 }
 ```
@@ -1231,14 +1305,15 @@ Some of these work out of the box, while others are placeholders we'll need to f
 - **`tag "$meta.id"`**: Adds sample ID to process names in logs for easier tracking
 - **`label 'process_single'`**: Resource label for configuring CPU/memory requirements
 - **`when:` block**: Allows conditional execution via `task.ext.when` configuration
+- **`topic: versions` output**: Version reporting via topic channel, as covered in section 1.6
 
 These features are already functional and make modules more maintainable.
 
 **Placeholders we'll customize below:**
 
 - **`input:` and `output:` blocks**: Generic declarations we'll update to match our tool
-- **`script:` block**: Contains a comment where we'll add the `cowpy` command
-- **`stub:` block**: Template we'll update to produce the correct outputs
+- **`script:` block**: Empty — we'll add the `cowpy` command here
+- **`stub:` block**: We'll update to produce the correct outputs
 - **Container and environment**: Placeholders we'll fill with package information
 
 The next sections walk through completing these customizations.
@@ -1256,27 +1331,27 @@ The default code offers to toggle between Docker and Singularity, but we're goin
 
 === "After"
 
-```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
-process COWPY {
-    tag "$meta.id"
-    label 'process_single'
+    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+    process COWPY {
+        tag "$meta.id"
+        label 'process_single'
 
-    conda "${moduleDir}/environment.yml"
-    container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
-```
+        conda "${moduleDir}/environment.yml"
+        container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
+    ```
 
 === "Before"
 
-```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
-process COWPY {
-    tag "$meta.id"
-    label 'process_single'
+    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+    process COWPY {
+        tag "$meta.id"
+        label 'process_single'
 
-    conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-        'biocontainers/YOUR-TOOL-HERE' }"
-```
+        conda "${moduleDir}/environment.yml"
+        container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+            'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+            'biocontainers/YOUR-TOOL-HERE' }"
+    ```
 
 #### 2.2.2. Conda environment
 
@@ -1337,8 +1412,8 @@ Update the input and output blocks:
     tuple val(meta), path(input_file)
 
     output:
-    tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("${prefix}.txt")                                       , emit: cowpy_output
+    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions    , emit: versions_cowpy
     ```
 
 === "Before"
@@ -1349,7 +1424,7 @@ Update the input and output blocks:
 
     output:
     tuple val(meta), path("*"), emit: output
-    path "versions.yml"           , emit: versions
+    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions    , emit: versions_cowpy
     ```
 
 This specifies:
@@ -1363,7 +1438,7 @@ Let's get to that now.
 
 #### 2.3.2. The script block
 
-The template provides a comment placeholder in the script block where you should add the actual tool command.
+The template generates an empty script block that you need to fill in with the actual tool command.
 
 Based on the module we wrote manually earlier, we should make the following edits:
 
@@ -1377,34 +1452,24 @@ Based on the module we wrote manually earlier, we should make the following edit
     """
     cat $input_file | cowpy $args > ${prefix}.txt
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
     ```
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3"
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    // Add your tool command here
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
     ```
 
 Key changes:
 
 - Change `def prefix` to just `prefix` (without `def`) to make it accessible in the output block
-- Replace the comment with the actual `cowpy` command that uses both `$args` and `${prefix}.txt`
+- Fill in the actual `cowpy` command that uses both `$args` and `${prefix}.txt`
 
 Note that if we hadn't already done the work of adding the `ext.args` and `ext.prefix` configuration for the `COWPY` process to the `modules.config` file, we would need to do that now.
 
@@ -1426,27 +1491,18 @@ Don't worry too much if this seems mysterious; we include this for completeness 
     """
     touch ${prefix}.txt
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
     ```
 
 === "Before"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
     echo $args
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
     ```
 
