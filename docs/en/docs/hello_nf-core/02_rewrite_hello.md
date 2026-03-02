@@ -21,8 +21,8 @@ First, we create the scaffold for the new pipeline.
 
 ### 1.1. Run the template-based pipeline creation tool
 
-Create a new pipeline with the `nf-core pipelines create` command.
-This creates a new pipeline scaffold using the nf-core base template, customized with a pipeline name, description, and author.
+Let's start by creating a new pipeline with the `nf-core pipelines create` command.
+This will create a new pipeline scaffold using the nf-core base template, customized with a pipeline name, description, and author.
 
 ```bash
 nf-core pipelines create
@@ -221,6 +221,8 @@ You can take a peek at the reports to see what was run, and the answer is: nothi
 
 ![empty execution timeline report](./img/execution_timeline_empty.png)
 
+Let's have a look at what is actually in the code.
+
 ### 1.3. Examine the placeholder workflow
 
 If you look inside the `main.nf` file, you'll see it imports a workflow called `HELLO` from `workflows/hello`.
@@ -368,7 +370,7 @@ nextflow run original-hello/hello.nf
     [94/542280] cowpy              | 1 of 1 ✔
     ```
 
-Open the `hello.nf` workflow file to inspect the code, shown in full below (not counting the processes, which are in modules):
+Let's open the `hello.nf` workflow file to inspect the code, which is shown in full below (not counting the processes, which are in modules):
 
 ```groovy title="original-hello/hello.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -410,11 +412,11 @@ workflow {
 As you can see, this workflow was written as a simple unnamed workflow that can be run on its own.
 In order to make it runnable from within a parent workflow as the nf-core template requires, we need to make it **composable**.
 
-The following sections walk through the necessary changes one by one.
+Let's walk through the necessary changes one by one.
 
 ### 2.1. Name the workflow
 
-First, give the workflow a name so it can be referred to from a parent workflow.
+First, let's give the workflow a name so we can refer to it from a parent workflow.
 
 === "After"
 
@@ -585,8 +587,8 @@ That is going to be defined in the parent workflow, also called the **entrypoint
 
 ### 2.6. Make a dummy entrypoint workflow
 
-Before integrating the composable workflow into the nf-core scaffold, verify it works correctly.
-Create a simple dummy entrypoint workflow to test the composable workflow in isolation.
+Before integrating our composable workflow into the complex nf-core scaffold, let's verify it works correctly.
+We can make a simple dummy entrypoint workflow to test the composable workflow in isolation.
 
 Create a blank file named `main.nf` in the same`original-hello` directory.
 
@@ -636,7 +638,8 @@ There are two important observations to make here:
 
 ### 2.7. Test that the workflow runs
 
-With all the pieces in place, run the workflow to verify it works:
+We finally have all the pieces we need to verify that the composable workflow works.
+Let's run it!
 
 ```bash
 nextflow run ./original-hello
@@ -676,14 +679,14 @@ Learn how to graft a basic composable workflow onto the nf-core scaffold.
 
 ## 3. Fit the updated workflow logic into the placeholder workflow
 
-With the composable workflow verified, return to the nf-core pipeline scaffold created in section 1.
+Now that we've verified our composable workflow works correctly, let's return to the nf-core pipeline scaffold we created in section 1.
 We want to integrate the composable workflow we just developed into the nf-core template structure, so the end result should look something like this.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nf-core/img/core-hello.svg"
 </figure>
 
-The current content of the `HELLO` workflow in `core-hello/workflows/hello.nf` (the nf-core scaffold) is as follows.
+So how do we make that happen? Let's have a look at the current content of the `HELLO` workflow in `core-hello/workflows/hello.nf` (the nf-core scaffold).
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="1"
 /*
@@ -770,7 +773,7 @@ We're going to tackle this in the following stages:
 The four processes from our Hello Nextflow workflow are stored as modules in `original-hello/modules/`.
 We need to copy those modules into the nf-core project structure (under `core-hello/modules/local/`) and add import statements to the nf-core workflow file.
 
-Copy the module files from `original-hello/` to `core-hello/`:
+First let's copy the module files from `original-hello/` to `core-hello/`:
 
 ```bash
 mkdir -p core-hello/modules/local/
@@ -796,7 +799,7 @@ tree core-hello/modules
     1 directory, 4 files
     ```
 
-Next, set up the module import statements.
+Now let's set up the module import statements.
 
 These were the import statements in the `original-hello/hello.nf` workflow:
 
@@ -1052,7 +1055,7 @@ The nf-core template comes with sophisticated input handling designed for comple
 The first step is to figure out where the input handling is done.
 
 You may recall that when we rewrote the Hello Nextflow workflow to be composable, we moved the input parameter declaration up one level, in the `main.nf` entrypoint workflow.
-The top level `main.nf` entrypoint workflow created as part of the pipeline scaffold looks like this:
+So let's have a look at the top level `main.nf` entrypoint workflow that was created as part of the pipeline scaffold:
 
 ```groovy title="core-hello/main.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -1276,16 +1279,16 @@ For now, we're focused on keeping it as simple as possible to get to something w
 
 ### 4.3. Update the test profile
 
-Update the test profile for this pipeline to use the `greetings.csv` mini-samplesheet instead of the example samplesheet provided in the template.
+Speaking of test data and parameters, let's update the test profile for this pipeline to use the `greetings.csv` mini-samplesheet instead of the example samplesheet provided in the template.
 
 Under `core-hello/conf`, we find two templated test profiles: `test.config` and `test_full.config`, which are meant to test a small data sample and a full-size one.
-Given the purpose of this pipeline, there is no point in setting up a full-size test profile, so you can ignore or delete `test_full.config`.
+Given the purpose of our pipeline, there's not really a point to setting up a full-size test profile, so feel free to ignore or delete `test_full.config`.
 We're going to focus on setting up `test.config` to run on our `greetings.csv` file with a few default parameters.
 
 #### 4.3.1. Copy over the `greetings.csv` file
 
 First we need to copy the `greetings.csv` file to an appropriate place in our pipeline project.
-Typically small test files are stored in the `assets` directory, so copy the file over from the working directory.
+Typically small test files are stored in the `assets` directory, so let's copy the file over from our working directory.
 
 ```bash
 cp greetings.csv core-hello/assets/.
@@ -1333,7 +1336,7 @@ Key points:
 - **Absolute paths**: By using `${projectDir}`, we create an absolute path, which is important for test data that ships with the pipeline.
 - **Test data location**: nf-core pipelines typically store test data in the `assets/` directory within the pipeline repository for small test files, or reference external test datasets for larger files.
 
-Also tighten the default resource limits to ensure this will run on very basic machines (like the minimal VMs in Github Codespaces):
+And while we're at it, let's tighten the default resource limits to ensure this will run on very basic machines (like the minimal VMs in Github Codespaces):
 
 === "After"
 

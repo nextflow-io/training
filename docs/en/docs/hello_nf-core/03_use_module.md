@@ -30,10 +30,12 @@ To demonstrate how this works, we'll replace the custom `collectGreetings` modul
 
 ## 1. Find and install a suitable nf-core module
 
-This section covers how to find an existing nf-core module and install it into the pipeline.
+First, let's learn how to find an existing nf-core module and install it into our pipeline.
 
-The goal is to replace the `collectGreetings` process, which uses the Unix `cat` command to concatenate multiple greeting files into one.
+We'll aim to replace the `collectGreetings` process, which uses the Unix `cat` command to concatenate multiple greeting files into one.
 Concatenating files is a very common operation, so it stands to reason that there might already be a module in nf-core designed for that purpose.
+
+Let's dive in.
 
 ### 1.1. Browse available modules on the nf-core website
 
@@ -192,7 +194,7 @@ The command automatically:
 
     Always make sure your current working directory is the root of your pipeline project before running the module installation command.
 
-Check that the module was installed correctly:
+Let's check that the module was installed correctly:
 
 ```bash
 tree -L 4 modules
@@ -243,7 +245,7 @@ However, to actually use the new module, we need to import it into our pipeline.
 
 ### 1.5. Update the module imports
 
-Replace the `include` statement for the `collectGreetings` module with the one for `CAT_CAT` in the imports section of the `workflows/hello.nf` workflow.
+Let's replace the `include` statement for the `collectGreetings` module with the one for `CAT_CAT` in the imports section of the `workflows/hello.nf` workflow.
 
 As a reminder, the module install tool gave us the exact statement to use:
 
@@ -296,7 +298,7 @@ The module is now available to the workflow, so all we need to do is swap out th
 
 Not so fast.
 
-Before editing code, examine carefully what the new module expects and what it produces.
+At this point, you might be tempted to dive in and start editing code, but it's worth taking a moment to examine carefully what the new module expects and what it produces.
 
 We're going to tackle that as a separate section because it involves a new mechanism we haven't covered yet: metadata maps.
 
@@ -325,8 +327,8 @@ Assess what a new module requires and identify any important changes needed in o
 Specifically, we need to examine the **interface** of the module, i.e. its input and output definitions, and compare it to the interface of the module we're seeking to replace.
 This will allow us to determine whether we can just treat the new module as a drop-in replacement or whether we'll need to adapt some of the wiring.
 
-Ideally this is something you should do _before_ installing the module.
-Note that there is an `uninstall` command to remove modules you no longer want.
+Ideally this is something you should do _before_ you even install the module, but hey, better late than never.
+(For what it's worth, there is an `uninstall` command to get rid of modules you decide you no longer want.)
 
 !!! note
 
@@ -402,8 +404,8 @@ However, to understand the metamap part, we need to introduce you to some additi
 
 ### 2.2. Understanding metamaps
 
-The CAT_CAT module expects a metadata map as part of its input tuple.
-The following explains what that is.
+We just told you that the CAT_CAT module expects a metadata map as part of its input tuple.
+Let's take a few minutes to take a closer look at what that is.
 
 The **metadata map**, often referred to as **metamap** for short, is a Groovy-style map containing information about units of data.
 In the context of Nextflow pipelines, units of data can be anything you want: individual samples, batches of samples, or entire datasets.
@@ -422,7 +424,7 @@ Or in a case where the metadata is attached at the batch level:
 [id: 'batch1', date: '25.10.01']
 ```
 
-In the context of the `CAT_CAT` process, the input files must be packaged into a tuple with a metamap, and the metamap is also part of the output tuple.
+Now let's put this in the context of the `CAT_CAT` process, which expects the input files to be packaged into a tuple with a metamap, and outputs the metamap as part of the output tuple as well.
 
 ```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="2 5"
 input:
@@ -478,7 +480,7 @@ Based on what we've reviewed, these are the major changes we need to make to our
 - Switch the call from `collectGreetings()` to `CAT_CAT`;
 - Extract the output file from the tuple produced by the `CAT_CAT` process before passing it to `cowpy`.
 
-With the plan in place, the next section covers the implementation.
+That should do the trick! Now that we've got a plan, we're ready to dive in.
 
 ### Takeaway
 
@@ -519,7 +521,7 @@ def cat_meta = [id: params.batch]
 
 Yes, it is literally that simple to create a basic metamap.
 
-Add these lines after the `convertToUpper` call, removing the `collectGreetings` call:
+Let's add these lines after the `convertToUpper` call, removing the `collectGreetings` call:
 
 === "After"
 
@@ -712,7 +714,7 @@ Then it's just a matter of passing `ch_for_cowpy` to `cowpy` instead of `collect
 
 ### 3.5. Test the workflow
 
-Test that the workflow works with the newly integrated `cat/cat` module:
+Let's test that the workflow works with the newly integrated `cat/cat` module:
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -761,7 +763,7 @@ This should run reasonably quickly.
 
 Notice that `CAT_CAT` now appears in the process execution list instead of `collectGreetings`.
 
-The pipeline now uses a robust community-curated module instead of custom prototype-grade code for that step.
+And that's it! We're now using a robust community-curated module instead of custom prototype-grade code for that step in the pipeline.
 
 ### Takeaway
 
