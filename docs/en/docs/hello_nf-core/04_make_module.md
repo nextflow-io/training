@@ -1029,6 +1029,12 @@ Now the `core-hello-results` also contains the outputs of the `COWPY` module.
 
 You can see that Nextflow created this hierarchy of directories based on the names of the workflow and of the module.
 
+!!! note
+
+    You may notice `hello_software_versions.yml` in `pipeline_info/`.
+    It currently only contains version information from `CAT_CAT`, because `COWPY` doesn't report its version yet.
+    Section 1.6 covers how to add that.
+
 The code responsible lives in the `conf/modules.config` file.
 This is the default `publishDir` configuration that is part of the nf-core template and applies to all processes:
 
@@ -1097,34 +1103,55 @@ To summarize, you get:
 ### 1.6. Version capture with topic channels
 
 Reproducibility is a core principle of nf-core: every pipeline run records exactly which software versions were used, so results can be reproduced and compared across runs.
-nf-core pipelines therefore write a combined software versions report to `pipeline_info/` at the end of every run, collecting version information from every module that ran.
-The mechanism that handles this collection is the `Channel.topic("versions")` block you saw in the placeholder workflow in Part 2.
+The `hello_software_versions.yml` report in `pipeline_info/` is how nf-core pipelines fulfil this requirement.
 
-Topic channels are a Nextflow broadcast mechanism: any process can publish to a named topic, and any subscriber receives everything published to that topic.
-nf-core modules publish their version information to the `"versions"` topic directly from within their script block.
-The workflow subscribes once and collects everything, regardless of how many modules the pipeline has:
+The mechanism behind it is **topic channels**: a Nextflow broadcast feature where any process can publish data to a named topic, and any subscriber receives everything published to that topic — regardless of where it comes from in the pipeline.
+nf-core is rolling this out across all pipelines in 2026.
+Modules publish their version as a tuple directly in the output block using the `topic:` keyword, and the workflow subscribes once to collect them all.
 
-```groovy title="workflows/hello.nf (excerpt)"
-def topic_versions = Channel.topic("versions")
-    .distinct()
-    .branch { entry ->
-        versions_file: entry instanceof Path   // legacy versions.yml files
-        versions_tuple: true                   // tuple-format entries
-    }
+#### 1.6.1. Add version reporting to `COWPY`
 
-softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
-    .mix(topic_versions_string)
-    .collectFile(
-        storeDir: "${params.outdir}/pipeline_info",
-        name:  'hello_software_' + 'versions.yml',
-        sort: true,
-        newLine: true
-    ).set { ch_collated_versions }
+Open the `cowpy.nf` module file and add a version output line as shown below.
+
+=== "After"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13" hl_lines="3"
+        output:
+        tuple val(meta), path("${prefix}.txt")                                    , emit: cowpy_output
+        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions , emit: versions_cowpy
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13"
+        output:
+        tuple val(meta), path("${prefix}.txt")  , emit: cowpy_output
+    ```
+
+The new line publishes a `[process_name, tool_name, version]` tuple to the `"versions"` topic channel.
+No changes to the script block are needed — the version is declared statically in the output block.
+
+#### 1.6.2. Run the pipeline and inspect the versions report
+
+```bash
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
-For backwards compatibility during the transition, nf-core modules currently also write a `versions.yml` file in the script block and emit it with `emit: versions` — which is what you added to `COWPY` in section 2.1.
-In the old approach, every workflow had to manually collect these files from each module individually and pass them along: `ch_versions = ch_versions.mix(COWPY.out.versions)`, `ch_versions = ch_versions.mix(CAT_CAT.out.versions)`, and so on for every module in the pipeline.
-The `versions_file` branch in the topic channel block handles these legacy files, so both styles are supported simultaneously.
+Open `core-hello-results/pipeline_info/hello_software_versions.yml` and you'll now see both modules:
+
+```yaml title="core-hello-results/pipeline_info/hello_software_versions.yml"
+CORE_HELLO:HELLO:CAT_CAT:
+  pigz: 2.3.4
+CORE_HELLO:HELLO:COWPY:
+  cowpy: 1.1.5
+```
+
+The workflow-side collection — the `Channel.topic("versions")` block you saw in the placeholder workflow in Part 2 — subscribes to the topic and writes this combined report automatically.
+
+!!! note "Backwards compatibility"
+
+    The `versions_file` branch in the workflow's topic channel block exists to handle modules that haven't yet been updated to use `topic: versions` and still write a `versions.yml` file in the script block with `emit: versions`.
+    Both styles are supported simultaneously during the transition.
 
 ### Takeaway
 
