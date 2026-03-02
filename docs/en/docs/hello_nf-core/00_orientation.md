@@ -61,7 +61,7 @@ cd hello-nf-core/
     cd /workspaces/training/hello-nf-core
     ```
 
-The contents of this directory are described below.
+Now let's have a look at the contents of this directory.
 
 ### Explore the materials provided
 
@@ -106,7 +106,7 @@ We use collapsible sections like this to include expected command output in a co
 
 ## Readiness checklist
 
-Use this checklist to confirm you're ready to proceed:
+Think you're ready to dive in?
 
 - [ ] I understand the goal of this course and its prerequisites
 - [ ] My environment is up and running

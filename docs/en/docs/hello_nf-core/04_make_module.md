@@ -3,8 +3,8 @@
 In this fourth part of the Hello nf-core training course, we show you how to create an nf-core module by applying the key conventions that make modules portable and maintainable.
 
 The nf-core project provides a command (`nf-core modules create`) that generates properly structured module templates automatically, similar to what we used for the workflow in Part 2.
-However, for teaching purposes, this section starts by doing it manually: transforming the local `cowpy` module in your `core-hello` pipeline into an nf-core-style module step-by-step.
-After that, it covers template-based module creation for working more efficiently in practice.
+However, for teaching purposes, we're going to start by doing it manually: transforming the local `cowpy` module in your `core-hello` pipeline into an nf-core-style module step-by-step.
+After that, we'll show you how to use the template-based module creation to work more efficiently in the future.
 
 ??? info "How to begin from this section"
 
@@ -76,13 +76,15 @@ After each step, we'll run the pipeline to test that everything works as expecte
 
 ### 1.1. Uppercase the process name
 
-This is purely a stylistic convention (there is no technical justification) but it is the norm for nf-core modules.
+This is purely a stylistic convention (there is no technical justification) but since it is the norm for nf-core modules, let's comply.
 
-Three sets of changes are required:
+We need to make three sets of changes:
 
 1. Update the process name in the module
 2. Update the module import statement in the workflow header
 3. Update the process call and emit declaration in the workflow body
+
+Let's get started!
 
 #### 1.1.1. Update the process name in the module
 
@@ -146,7 +148,7 @@ We could use an alias in the import statement to avoid having to update calls to
 
 #### 1.1.3. Update the process call and emit declaration
 
-Update the two references to the process in the workflow block of `hello.nf`:
+So now let's update the two references to the process in the workflow block of `hello.nf`:
 
 === "After"
 
@@ -240,7 +242,7 @@ Be sure to make **both** changes, otherwise you will get an error when you run t
 
 #### 1.1.4. Run the pipeline to test it
 
-Run the workflow to test that everything is working correctly after these changes.
+Let's run the workflow to test that everything is working correctly after these changes.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -285,7 +287,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
     -[core/hello] Pipeline completed successfully-
     ```
 
-The pipeline works. The next section covers more substantial changes.
+Alright, this works! Now let's move on to making more substantial changes.
 
 ### 1.2. Update `COWPY` to use metadata tuples
 
@@ -334,7 +336,7 @@ Return to the `cowpy.nf` module file and modify it to accept metadata tuples as 
 As you can see, we changed both the **main input** and the **output** to a tuple that follows the `tuple val(meta), path(input_file)` pattern introduced in Part 3 of this training.
 For the output, we also took this opportunity to add `emit: cowpy_output` in order to give the output channel a descriptive name.
 
-With the process inputs and outputs updated, the process call in the workflow also needs updating.
+Now that we've changed what the process expects, we need to update what we provide to it in the process call.
 
 #### 1.2.2. Update the process call in the workflow
 
@@ -388,7 +390,7 @@ This is technically not required, but it's good practice to refer to named outpu
 
 #### 1.2.4. Run the pipeline to test it
 
-Run the workflow to test that everything is working correctly after these changes.
+Let's run the workflow to test that everything is working correctly after these changes.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -437,7 +439,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 The pipeline should run successfully, with metadata now flowing from `CAT_CAT` through `COWPY`.
 
 That completes what we needed to do to make `COWPY` handle metadata tuples.
-The next section covers additional nf-core module patterns.
+Now, let's look at what else we can do to take advantage of nf-core module patterns.
 
 ### 1.3. Centralize tool argument configuration with `ext.args`
 
@@ -451,7 +453,8 @@ Instead of declaring process inputs for every tool option, you write the module 
 Then it's just a matter of setting up the `ext.args` variable to hold the arguments and values you want to use in the `modules.config` file, which consolidates configuration details for all modules.
 Nextflow will add those arguments with their values into the tool command line at runtime.
 
-Applying this approach to the `COWPY` module requires the following changes:
+Let's apply this approach to the `COWPY` module.
+We're going to need to make the following changes:
 
 1. Update the `COWPY` module
 2. Configure `ext.args` in the `modules.config` file
@@ -461,6 +464,7 @@ Once we've done all that, we'll run the pipeline to test that everything still w
 
 #### 1.3.1. Update the `COWPY` module
 
+Let's do it.
 Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and modify it to reference `ext.args` as shown below.
 
 === "After"
@@ -533,9 +537,9 @@ As a result, the module interface is now simpler: it only expects the essential 
 
 #### 1.3.2. Configure `ext.args` in the `modules.config` file
 
-Now that the `character` declaration is out of the module, add it to `ext.args` in the `modules.config` configuration file.
+Now that we've taken the `character` declaration out of the module, we've got to add it to `ext.args` in the `modules.config` configuration file.
 
-Add this chunk of code to the `process {}` block:
+Specifically, we're going to add this little chunk of code to the `process {}` block:
 
 ```groovy title="Code to add"
 withName: 'COWPY' {
@@ -545,6 +549,8 @@ withName: 'COWPY' {
 
 The `withName:` syntax assigns this configuration to the `COWPY` process only, and `ext.args = { "-c ${params.character}" }` simply composes a string that will include the value of the `character` parameter.
 Note the use of curly braces, which tell Nextflow to evaluate the value of the parameter at runtime.
+
+Makes sense? Let's add it in.
 
 Open `conf/modules.config` and add the configuration code inside the `process {}` block as shown below.
 
@@ -610,7 +616,7 @@ The module interface is kept minimal, making it more portable, while the pipelin
 
 #### 1.3.4. Run the pipeline to test it
 
-Test that the workflow still works as expected, specifying a different character to verify that the `ext.args` configuration is working.
+Let's test that the workflow still works as expected, specifying a different character to verify that the `ext.args` configuration is working.
 
 Run this command using `kosh`, one of the more... enigmatic options:
 
@@ -659,7 +665,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 This should run successfully as previously.
 
-Verify that the `ext.args` configuration worked by checking the output.
+Let's verify that the `ext.args` configuration worked by checking the output.
 Find the output in the file browser or use the task hash (the `38/eb29ea` part in the example above) to look at the output file:
 
 ```bash
@@ -729,13 +735,14 @@ To summarize the benefits of this approach:
 
 ### 1.4. Standardize output naming with `ext.prefix`
 
-With the `COWPY` process having access to the metamap, it can now take advantage of another useful nf-core pattern: naming output files based on metadata.
+Now that we've given the `COWPY` process access to the metamap, we can start taking advantage of another useful nf-core pattern: naming output files based on metadata.
 
-The `ext.prefix` feature standardizes output file naming across modules using `meta.id` (the identifier included in the metamap), while still allowing per-module configuration.
+Here we're going to use a Nextflow feature called `ext.prefix` that will allow us to standardize output file naming across modules using `meta.id` (the identifier included in the metamap), while still being able to configure modules individually if desired.
 
-This is similar to what was done with `ext.args`, with a few differences detailed below.
+This will be similar to what we did with `ext.args`, with a few differences that we'll detail as we go.
 
-Applying this approach to the `COWPY` module requires the following changes:
+Let's apply this approach to the `COWPY` module.
+We're going to need to make the following changes:
 
 1. Update the `COWPY` module
 2. Configure `ext.prefix` in the `modules.config` file
@@ -804,6 +811,8 @@ ext.prefix = { "cowpy-${meta.id}" }
 This will compose the string we want.
 Note that once again we use curly braces, this time to tell Nextflow to evaluate the value of `meta.id` at runtime.
 
+Let's add it in.
+
 Open `conf/modules.config` and add the configuration code inside the `process {}` block as shown below.
 
 === "After"
@@ -827,7 +836,7 @@ In case you're wondering, the `ext.prefix` closure has access to the correct pie
 
 #### 1.4.3. Run the pipeline to test it
 
-Test that the workflow still works as expected.
+Let's test that the workflow still works as expected.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -926,14 +935,15 @@ Except it doesn't have a `publishDir` directive. (Go ahead, look at the module c
 That's because nf-core pipelines centralize control at the workflow level by configuring `publishDir` in `conf/modules.config` rather than in individual modules.
 Specifically, the nf-core template declares a default `publishDir` directive (with a predefined directory structure) that applies to all modules unless an overriding directive is provide.
 
-To take advantage of this default directive, remove the current `publishDir` directive from the local modules.
+Doesn't that sound awesome? Could it be that to take advantage of this default directive, all we need to do is remove the current `publishDir` directive from our local modules?
 
-The following tests this on `COWPY`, then examines the default configuration code to understand how it works.
+Let's try that out on `COWPY` to see what happens, then we'll look at the code for the default configuration to understand how it works.
 
 Finally, we'll demonstrate how to override the default behavior if desired.
 
 #### 1.5.1. Remove the `publishDir` directive from `COWPY`
 
+Let's do this.
 Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and remove the `publishDir` directive as shown below.
 
 === "After"
@@ -959,9 +969,11 @@ Open the `cowpy.nf` module file (under `core-hello/modules/local/`) and remove t
 
     ```
 
+That's it!
+
 #### 1.5.2. Run the pipeline to test it
 
-Run the pipeline to see the effect of this change.
+Let's have a look at what happens if we run the pipeline now.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
@@ -1062,7 +1074,7 @@ process {
 }
 ```
 
-Breaking this down into three components:
+This may look complicated, so let's look at each of the three components:
 
 - **`path:`** Determines the output directory based on the process name.
   The full name of a process contained in `task.process` includes the hierarchy of workflow and module imports (such as `CORE_HELLO:HELLO:CAT_CAT`).
@@ -1075,8 +1087,7 @@ Breaking this down into three components:
 
 This provides a consistent logic for organizing outputs.
 
-The output looks even better when all modules in a pipeline adopt this convention.
-You can delete the `publishDir` directives from the other modules in your pipeline to apply it more broadly.
+The output looks even better when all the modules in a pipeline adopt this convention, so feel free to go delete the `publishDir` directives from the other modules in your pipeline.
 This default will be applied even to modules that we didn't explicitly modify to follow nf-core guidelines.
 
 That being said, you may decide you want to organize your inputs differently, and the good news is that it's easy to do so.
@@ -1104,7 +1115,7 @@ process {
 }
 ```
 
-This example is left as an exercise.
+We're not actually going to make that change, but feel free to play with this and see what logic you can implement.
 
 The point is that this system allows gives you the best of both worlds: consistency by default and the flexibility to customize the configuration on demand.
 
@@ -1188,7 +1199,7 @@ Learn how to use nf-core's built-in template-based tools to create modules the e
 
 ## 2. Create a module with the nf-core tooling
 
-Having learned the nf-core module patterns by applying them manually, this section shows how to create modules in practice.
+Now that you've learned the nf-core module patterns by applying them manually, let's look at how you would create modules in practice.
 
 ### 2.1. Generate a module scaffold from a template
 
@@ -1198,7 +1209,7 @@ Similar to what exists for creating pipelines, the nf-core project provides tool
 
 The `nf-core modules create` command generates a module template that already follows all the conventions you've learned.
 
-Create a new version of the `COWPY` module with a minimal template by running this command:
+Let's create a new version of the `COWPY` module with a minimal template by running this command:
 
 ```bash
 nf-core modules create --empty-template COWPY
@@ -1284,7 +1295,7 @@ process COWPY {
 }
 ```
 
-Notice how all the patterns applied manually above are already present.
+Notice how all the patterns you applied manually above are already there!
 
 The template also includes several additional nf-core conventions.
 Some of these work out of the box, while others are placeholders we'll need to fill in, as described below.
@@ -1316,7 +1327,7 @@ The nf-core guidelines require that we specify both a container and a Conda envi
 For the container, you can use [Seqera Containers](https://seqera.io/containers/) to automatically build a container from any Conda package, including conda-forge packages.
 In this case we are using the same prebuilt container as previously.
 
-The default code toggles between Docker and Singularity, but for this exercise simplify that line to just specify the Docker container from Seqera Containers.
+The default code offers to toggle between Docker and Singularity, but we're going to simplify that line and just specify the Docker container we got from Seqera Containers above.
 
 === "After"
 
@@ -1385,7 +1396,7 @@ For submission to nf-core, we would have to follow the defaults more closely, bu
 
 ### 2.3. Plug in the `COWPY` logic
 
-Update the code elements specific to what the `COWPY` process does: the inputs and outputs, and the script block.
+Now let's update the code elements that are specific to what the `COWPY` process does: the inputs and outputs, and the script block.
 
 #### 2.3.1. Inputs and outputs
 
@@ -1423,6 +1434,7 @@ This specifies:
 - A descriptive emit name (`cowpy_output` instead of generic `output`)
 
 If you're using the Nextflow language server to validate syntax, the `${prefix}` part will be flagged as an error at this stage because we haven't added it to the script block yet.
+Let's get to that now.
 
 #### 2.3.2. The script block
 
@@ -1540,7 +1552,7 @@ All we need to do to try out this new version of the `COWPY` module is to switch
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
-Run the pipeline to test it.
+Let's run the pipeline to test it.
 
 ```bash
 nextflow run . --outdir core-hello-results -profile test,docker --validate_params false

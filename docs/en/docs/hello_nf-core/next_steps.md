@@ -1,6 +1,6 @@
 # Course summary
 
-You have completed the Hello nf-core training course.
+Congratulations on completing the Hello nf-core training course! 🎉
 
 <!-- placeholder for video -->
 
@@ -44,6 +44,6 @@ Finally, we recommend you have a look at [**Seqera Platform**](https://seqera.io
 
 ## Feedback survey
 
-Before moving on, please take a minute to complete the course survey. Your feedback helps improve the training materials.
+Before you move on, please take a minute to complete the course survey! Your feedback helps us improve our training materials for everyone.
 
 [Take the survey :material-arrow-right:](survey.md){ .md-button .md-button--primary }
