@@ -209,6 +209,10 @@ Compile the plugin and install it locally:
 make assemble && make install
 ```
 
+The `make` command runs tasks defined in the project's `Makefile`.
+Here, `make assemble` compiles the plugin code and `make install` copies the result to `~/.nextflow/plugins/nf-greeting-0.1.0/`, where Nextflow looks for locally installed plugins.
+You don't need to understand how `make` works; just use it as shown.
+
 ??? example "Build output"
 
     The first time you run this, Gradle will download itself (this may take a minute):

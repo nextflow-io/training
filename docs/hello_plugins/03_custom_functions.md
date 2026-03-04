@@ -550,6 +550,8 @@ You learned that:
 
 ## What's next?
 
-Now you'll write unit tests to verify your functions work correctly.
+Your functions work, but so far you've only verified that by running the full pipeline and checking the output by eye.
+That approach doesn't scale: as you add more functions, you need a faster way to check that each one behaves correctly, especially after making changes.
+The next section introduces unit tests, which let you verify individual functions automatically without running a pipeline.
 
 [Continue to Part 4 :material-arrow-right:](04_build_and_test.md){ .md-button .md-button--primary }
