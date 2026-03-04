@@ -228,15 +228,18 @@ cd nf-greeting && make assemble && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-You should see "✓ Task completed!" printed five times (once per task):
+You should see "✓ Task completed!" printed five times (once per task), interleaved with the existing pipeline output:
 
 ```console title="Output (partial)"
 ...
-[be/bd8e72] Submitted process > SAY_HELLO (2)
+[9b/df7630] Submitted process > SAY_HELLO (4)
+Decorated: *** Hello ***
 ✓ Task completed!
-[5b/d24c2b] Submitted process > SAY_HELLO (1)
+✓ Task completed!
+Decorated: *** Holà ***
 ✓ Task completed!
 ...
+Pipeline complete! 👋
 ```
 
 The observer is working.
