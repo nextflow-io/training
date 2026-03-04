@@ -50,7 +50,8 @@ You'll start with the simple approach, then upgrade to the formal approach.
 
 ## 1. Simple configuration with navigate()
 
-The `session.config.navigate()` method reads nested configuration values:
+Before changing any plugin code, here is the basic mechanism.
+The `session.config.navigate()` method reads nested configuration values from `nextflow.config`:
 
 ```groovy
 // Read 'greeting.enabled' from nextflow.config, defaulting to true
@@ -69,14 +70,19 @@ greeting {
 
 ## 2. Make the task counter configurable
 
-Add configuration options to:
+Right now, every pipeline run prints a message for each completed task.
+For a pipeline with hundreds of tasks, that creates a lot of noise.
+Users should be able to turn these messages off, or disable the plugin entirely, without modifying your source code.
 
-1. Enable/disable the entire greeting plugin
-2. Control whether per-task counter messages are shown
+To make that possible, two things need to change:
+
+1. The observer needs to accept a setting that controls its behavior
+2. The factory needs to read that setting from `nextflow.config` and pass it to the observer
 
 ### 2.1. Update TaskCounterObserver
 
-Edit `TaskCounterObserver.groovy` to accept a configuration flag:
+The observer currently prints a message for every task unconditionally.
+To make this controllable, it needs to accept a `verbose` flag from outside:
 
 === "After"
 
@@ -159,7 +165,8 @@ The key changes:
 
 ### 2.2. Update the Factory
 
-Update `GreetingFactory.groovy` to read the configuration and pass it to the observer:
+The observer can now accept a `verbose` flag, but nothing reads `nextflow.config` and passes it in yet.
+The factory is where this happens, because the factory has access to the Nextflow session and its configuration.
 
 === "After"
 
@@ -298,7 +305,10 @@ nextflow run greet.nf -ansi-log false
 
 ## 3. Make the decorator configurable
 
-This exercise makes the `decorateGreeting` function use configurable prefix/suffix.
+The `decorateGreeting` function wraps every greeting in `*** ... ***`.
+Users might want different markers, but right now the only way to change them is to edit the source code and rebuild.
+
+This is the same pattern as section 2 (read config, use it at runtime), but applied to a function extension instead of an observer.
 
 ### 3.1. Add the configuration reading (this will fail!)
 
@@ -446,14 +456,14 @@ The decorator now uses your custom prefix and suffix.
 
 ## 4. Formal configuration with ConfigScope
 
-The `session.config.navigate()` approach works, but has limitations:
+The configuration works, but Nextflow still prints "Unrecognized config option" warnings because it doesn't know the `greeting` scope exists.
+The `session.config.navigate()` approach also has practical limitations:
 
 - No IDE autocompletion for users writing `nextflow.config`
 - Configuration options aren't self-documenting
 - Manual type conversion with `as String`, `as boolean`, etc.
 
-For production plugins, Nextflow provides a formal configuration system using annotations.
-By creating a config scope class, you define a new top-level configuration block in `nextflow.config`.
+Registering a formal config scope class fixes the warning and addresses all three issues.
 This is the same mechanism behind the `#!groovy validation {}` and `#!groovy co2footprint {}` blocks you used in Part 1.
 
 ### 4.1. Create the config class (minimal version)
@@ -525,7 +535,8 @@ Key points:
 
 ### 4.2. Add nested configuration
 
-Now add the `taskCounter` nested scope for the verbose option:
+The minimal version covers `enabled`, `prefix`, and `suffix`, but the `taskCounter.verbose` option uses a nested path.
+To support that, add a nested class:
 
 ```groovy title="GreetingConfig.groovy (final version)" linenums="1" hl_lines="29-31 46 48-57"
 package training.plugin
@@ -592,9 +603,8 @@ For nested paths like `taskCounter.verbose`, use a nested class that also implem
 
 ### 4.3. Register the config class
 
-Every class that implements `ExtensionPoint` needs to be listed in `extensionPoints` in `build.gradle` for the Nextflow plugin system to find it.
-
-Update `build.gradle`:
+Creating the class isn't enough on its own.
+Nextflow needs to know it exists, so you register it in `build.gradle` alongside the other extension points.
 
 === "After"
 
