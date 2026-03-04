@@ -22,26 +22,25 @@ In this section, you'll write and run tests using the Spock testing framework.
 ## 1. Why test?
 
 A successful build means the code compiles, but not that it works correctly.
-Tests verify your functions behave as expected and help catch bugs when you make changes later.
+Unit tests are small pieces of code that automatically check if your functions produce the right output for a given input.
+For example, a test might check that `#!groovy reverseGreeting("Hello")` returns `"olleH"`.
 
-??? info "What are unit tests?"
+Tests are valuable because:
 
-    **Unit tests** are small pieces of code that automatically check if your functions work correctly.
-    Each test calls a function with known inputs and checks that the output matches what you expect.
-
-    For example, if you have a function that reverses strings, a test might check that `reverse("Hello")` returns `"olleH"`.
-
-    Tests are valuable because:
-
-    - They catch bugs before users do
-    - They give you confidence to make changes without breaking things
-    - They serve as documentation showing how functions should be used
+- They catch bugs before users do
+- They give you confidence to make changes without breaking things
+- They serve as documentation showing how functions should be used
 
 ---
 
 ## 2. Understanding Spock tests
 
-The plugin template uses [Spock](https://spockframework.org/), a testing framework for Groovy that reads almost like plain English.
+The plugin template uses [Spock](https://spockframework.org/), a testing framework for Groovy.
+Spock is already configured in the project (via `build.gradle`), so you don't need to install anything.
+
+If you've used testing tools before (like `pytest` in Python or `testthat` in R), Spock fills the same role: you write small functions that call your code with known inputs and check the outputs.
+The difference is that Spock uses labelled blocks (`given:`, `expect:`, `when:`, `then:`) that read almost like plain English.
+
 Here's the basic structure:
 
 ```groovy
