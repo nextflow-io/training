@@ -4,7 +4,8 @@ Your plugin has custom functions and an observer, but everything is hardcoded.
 Users can't turn the task counter off, or change how it behaves, without editing the source code and rebuilding.
 
 Nextflow plugins can read settings from `nextflow.config`, giving users control over plugin behavior the same way they configure other parts of a pipeline.
-In this section, you'll make the task counter configurable, then learn how to share your finished plugin.
+In Part 1, you used this capability when `#!groovy validation {}` controlled how nf-schema handled unrecognized headers and `#!groovy co2footprint {}` set the location for carbon intensity calculations.
+In this section, you'll build the same capability into your own plugin, then learn how to share it.
 
 !!! tip "Starting from here?"
 
@@ -434,7 +435,7 @@ The `session.config.navigate()` approach works, but has limitations:
 - Manual type conversion with `as String`, `as boolean`, etc.
 
 For production plugins, Nextflow provides a formal configuration system using annotations.
-By creating a config scope class, you define a new top-level configuration block, equivalent to how built-in scopes like `process {}` or `docker {}` work.
+By creating a config scope class, you define a new top-level configuration block, the same mechanism that plugins like nf-schema and nf-co2footprint use for their `#!groovy validation {}` and `#!groovy co2footprint {}` scopes.
 
 ### 4.1. Create the config class (minimal version)
 
