@@ -55,11 +55,11 @@ import nextflow.plugin.extension.PluginExtensionPoint
  * Implements a custom function which can be imported by
  * Nextflow scripts.
  */
-@CompileStatic
-class GreetingExtension extends PluginExtensionPoint {
+@CompileStatic                                         // (1)!
+class GreetingExtension extends PluginExtensionPoint { // (2)!
 
     @Override
-    protected void init(Session session) {
+    protected void init(Session session) {             // (3)!
     }
 
     /**
@@ -67,13 +67,18 @@ class GreetingExtension extends PluginExtensionPoint {
      *
      * @param target
      */
-    @Function
+    @Function                                          // (4)!
     void sayHello(String target) {
         println "Hello, ${target}!"
     }
 
 }
 ```
+
+1. Tells Groovy to check types at compile time, catching errors earlier
+2. Base class for all plugin function providers
+3. Called when the plugin loads; use for initialization
+4. Makes this method callable from workflows via `include`
 
 The template includes a sample `sayHello` function.
 The `@Function` annotation is what makes a method callable from Nextflow workflows.
@@ -256,13 +261,17 @@ Edit `greet.nf` to import and use `reverseGreeting`:
             .map { row -> row[0] }
 
         greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }
-            .view { reversed -> "Reversed: $reversed" }
+            .map { greeting -> reverseGreeting(greeting) }  // (1)!
+            .view { reversed -> "Reversed: $reversed" }     // (2)!
 
         SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
+        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }  // (3)!
     }
     ```
+
+    1. Apply the plugin function to transform each value in the channel
+    2. Print each result to the console without consuming the channel
+    3. `SAY_HELLO.out` accesses the process outputs as a channel
 
 === "Before"
 
@@ -372,11 +381,13 @@ Edit `GreetingExtension.groovy` to add `decorateGreeting` after `reverseGreeting
          */
         @Function
         String decorateGreeting(String greeting) {
-            return "*** ${greeting} ***"
+            return "*** ${greeting} ***"             // (1)!
         }
 
     }
     ```
+
+    1. Groovy string interpolation: `#!groovy ${...}` inserts the variable's value into the string
 
 === "Before"
 
@@ -417,7 +428,7 @@ Update `greet.nf` to also import and use `decorateGreeting`:
     include { samplesheetToList } from 'plugin/nf-schema'
     // Import custom functions from our plugin
     include { reverseGreeting } from 'plugin/nf-greeting'
-    include { decorateGreeting } from 'plugin/nf-greeting'
+    include { decorateGreeting } from 'plugin/nf-greeting'  // (1)!
 
     params.input = 'greetings.csv'
 
@@ -428,7 +439,7 @@ Update `greet.nf` to also import and use `decorateGreeting`:
             stdout
         script:
         // Use our custom plugin function to decorate the greeting
-        def decorated = decorateGreeting(greeting)
+        def decorated = decorateGreeting(greeting)  // (2)!
         """
         echo '$decorated'
         """
@@ -447,6 +458,9 @@ Update `greet.nf` to also import and use `decorateGreeting`:
         SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
     }
     ```
+
+    1. Multiple functions from the same plugin need separate `include` statements
+    2. Plugin functions work inside process `script:` blocks too
 
 === "Before"
 

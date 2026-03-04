@@ -53,21 +53,26 @@ import nextflow.trace.TraceObserver
  * Implements an observer that allows implementing custom
  * logic on nextflow execution events.
  */
-@Slf4j
+@Slf4j                                              // (1)!
 @CompileStatic
-class GreetingObserver implements TraceObserver {
+class GreetingObserver implements TraceObserver {    // (2)!
 
     @Override
-    void onFlowCreate(Session session) {
+    void onFlowCreate(Session session) {            // (3)!
         println "Pipeline is starting! 🚀"
     }
 
     @Override
-    void onFlowComplete() {
+    void onFlowComplete() {                         // (4)!
         println "Pipeline complete! 👋"
     }
 }
 ```
+
+1. Adds a logger for writing to Nextflow's log file
+2. Interface for hooking into workflow lifecycle events
+3. Called when the workflow starts; receives the session for accessing config
+4. Called when the workflow finishes successfully
 
 The observer implements methods that Nextflow calls at specific points during execution.
 Each method corresponds to a lifecycle event:

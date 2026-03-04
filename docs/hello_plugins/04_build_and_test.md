@@ -77,14 +77,14 @@ import spock.lang.Specification
 /**
  * Tests for the greeting extension functions
  */
-class GreetingExtensionTest extends Specification {
+class GreetingExtensionTest extends Specification {  // (1)!
 
     def 'should reverse a greeting'() {
         given:
-        def ext = new GreetingExtension()
+        def ext = new GreetingExtension()            // (2)!
 
         expect:
-        ext.reverseGreeting('Hello') == 'olleH'
+        ext.reverseGreeting('Hello') == 'olleH'     // (3)!
         ext.reverseGreeting('Bonjour') == 'ruojnoB'
     }
 
@@ -97,6 +97,10 @@ class GreetingExtensionTest extends Specification {
     }
 }
 ```
+
+1. All Spock test classes extend `Specification`
+2. Create an instance of your extension to test directly, without running a pipeline
+3. Each line in `expect:` is an assertion; the test passes only if all are `true`
 
 ---
 
