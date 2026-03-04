@@ -471,12 +471,25 @@ Update `nextflow.config`:
 nextflow run hello.nf
 ```
 
-You'll see additional log messages and warnings from the plugin during execution, which are normal; the plugin is estimating resource usage with limited information from this small example.
+The plugin produces several INFO and WARN messages during execution.
+These are normal for a small example running on a local machine:
+
+```console title="Output (partial)"
+INFO - [nf-co2footprint] nf-co2footprint plugin  ~  version 1.1.0
+WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.
+INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.
+...
+WARN - [nf-co2footprint] Could not find CPU model "..." in given TDP data table. Using default CPU power draw value (11.41 W).
+WARN - [nf-co2footprint] 🔁 Requested memory is null for task 2. Using maximum consumed memory/peak_rss (0.0 GB) for CO₂e footprint computation.
+```
+
+The warnings about zone, CPU model, and memory appear because the plugin can't detect the full hardware details of a local training environment.
+In a production environment (e.g., an HPC cluster or cloud), these values would be available and the estimates more accurate.
 
 At the end, look for a line like:
 
 ```console title="Output (partial)"
-🌱 The workflow run used 163.4 uWh of electricity, resulting in the release of 78.43 ug of CO₂ equivalents into the atmosphere.
+🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.
 ```
 
 (Your numbers will differ.)
