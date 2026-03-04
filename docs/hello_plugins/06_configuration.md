@@ -72,17 +72,17 @@ Edit `TaskCounterObserver.groovy` to accept a configuration flag:
     @CompileStatic
     class TaskCounterObserver implements TraceObserver {
 
-        private final boolean verbose
+        private final boolean verbose   // (1)!
         private int taskCount = 0
 
-        TaskCounterObserver(boolean verbose) {
+        TaskCounterObserver(boolean verbose) {  // (2)!
             this.verbose = verbose
         }
 
         @Override
         void onProcessComplete(TaskHandler handler, TraceRecord trace) {
             taskCount++
-            if (verbose) {
+            if (verbose) {              // (3)!
                 println "📊 Tasks completed so far: ${taskCount}"
             }
         }
@@ -93,6 +93,10 @@ Edit `TaskCounterObserver.groovy` to accept a configuration flag:
         }
     }
     ```
+
+    1. A `verbose` flag controls whether per-task messages are printed
+    2. Constructor accepts the verbose setting from the factory
+    3. Only print per-task messages when `verbose` is `true`
 
 === "Before"
 
@@ -127,9 +131,9 @@ Edit `TaskCounterObserver.groovy` to accept a configuration flag:
 
 The key changes:
 
-- **Line 14**: A `verbose` flag controls whether per-task messages are printed
-- **Lines 17-19**: Constructor that accepts the verbose setting
-- **Lines 24-26**: Only print per-task messages if `verbose` is true
+- A `verbose` flag controls whether per-task messages are printed
+- The constructor accepts the verbose setting from the factory
+- Per-task messages only print when `verbose` is `true`
 
 ### 2.2. Update the Factory
 
@@ -458,18 +462,18 @@ import nextflow.script.dsl.Description
  *         suffix = '<<<'
  *     }
  */
-@ScopeName('greeting')
-class GreetingConfig implements ConfigScope {
+@ScopeName('greeting')                       // (1)!
+class GreetingConfig implements ConfigScope { // (2)!
 
     GreetingConfig() {}
 
-    GreetingConfig(Map opts) {
+    GreetingConfig(Map opts) {               // (3)!
         this.enabled = opts.enabled as Boolean ?: true
         this.prefix = opts.prefix as String ?: '***'
         this.suffix = opts.suffix as String ?: '***'
     }
 
-    @ConfigOption
+    @ConfigOption                            // (4)!
     @Description('Enable or disable the plugin entirely')
     boolean enabled = true
 
@@ -482,6 +486,11 @@ class GreetingConfig implements ConfigScope {
     String suffix = '***'
 }
 ```
+
+1. Maps to the `#!groovy greeting { }` block in `nextflow.config`
+2. Required interface for config classes
+3. Both no-arg and Map constructors are needed for Nextflow to instantiate the config
+4. `@ConfigOption` marks a field as a configuration option; `@Description` documents it for tooling
 
 Key points:
 

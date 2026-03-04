@@ -118,13 +118,17 @@ Edit `src/main/groovy/training/plugin/GreetingExtension.groovy` to replace the `
         /**
          * Reverse a greeting string
          */
-        @Function
-        String reverseGreeting(String greeting) {
-            return greeting.reverse()
+        @Function                                // (1)!
+        String reverseGreeting(String greeting) { // (2)!
+            return greeting.reverse()             // (3)!
         }
 
     }
     ```
+
+    1. Makes the method callable from Nextflow workflows
+    2. Takes a String, returns a String
+    3. Groovy's built-in string reversal method
 
 === "Before"
 

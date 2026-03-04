@@ -103,7 +103,7 @@ Start with the simplest possible observer that prints a message when any task co
 package training.plugin
 
 import groovy.transform.CompileStatic
-import nextflow.processor.TaskHandler
+import nextflow.processor.TaskHandler       // (1)!
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -111,14 +111,18 @@ import nextflow.trace.TraceRecord
  * Observer that responds to task completion
  */
 @CompileStatic
-class TaskCounterObserver implements TraceObserver {
+class TaskCounterObserver implements TraceObserver {  // (2)!
 
     @Override
-    void onProcessComplete(TaskHandler handler, TraceRecord trace) {
+    void onProcessComplete(TaskHandler handler, TraceRecord trace) {  // (3)!
         println "✓ Task completed!"
     }
 }
 ```
+
+1. Import the required classes: `TraceObserver`, `TaskHandler`, and `TraceRecord`
+2. Create a class that `implements TraceObserver`
+3. Override `onProcessComplete` to run code when a task finishes
 
 This is the minimum needed:
 
@@ -242,26 +246,30 @@ import nextflow.trace.TraceRecord
 @CompileStatic
 class TaskCounterObserver implements TraceObserver {
 
-    private int taskCount = 0
+    private int taskCount = 0                // (1)!
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        taskCount++
+        taskCount++                          // (2)!
         println "📊 Tasks completed so far: ${taskCount}"
     }
 
     @Override
-    void onFlowComplete() {
+    void onFlowComplete() {                  // (3)!
         println "📈 Final task count: ${taskCount}"
     }
 }
 ```
 
+1. A private instance variable that persists across method calls
+2. Increment the counter and print the running total each time a task completes
+3. `onFlowComplete` is called once when the workflow finishes, perfect for a summary
+
 The key additions:
 
-- **Line 14**: A private instance variable `taskCount` persists across method calls
-- **Lines 18-19**: Increment the counter and print the running total
-- **Lines 22-24**: `onFlowComplete` is called once when the workflow finishes, perfect for a summary
+- A private instance variable `taskCount` persists across method calls
+- `onProcessComplete` increments the counter and prints the running total
+- `onFlowComplete` is called once when the workflow finishes, perfect for a summary
 
 Rebuild and test:
 

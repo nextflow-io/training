@@ -121,17 +121,22 @@ plugins {
 version = '0.1.0'
 
 nextflowPlugin {
-    nextflowVersion = '24.10.0'
+    nextflowVersion = '24.10.0'       // (1)!
 
-    provider = 'training'
-    className = 'training.plugin.GreetingPlugin'
-    extensionPoints = [
+    provider = 'training'             // (2)!
+    className = 'training.plugin.GreetingPlugin'  // (3)!
+    extensionPoints = [               // (4)!
         'training.plugin.GreetingExtension',
         'training.plugin.GreetingFactory'
     ]
 
 }
 ```
+
+1. **`nextflowVersion`**: Minimum Nextflow version required
+2. **`provider`**: Your name or organization
+3. **`className`**: The main plugin class, the entry point that Nextflow loads first
+4. **`extensionPoints`**: Classes that add features to Nextflow (your functions, monitoring, etc.)
 
 The `nextflowPlugin` block configures:
 
