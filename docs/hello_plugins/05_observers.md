@@ -292,6 +292,12 @@ class TaskCounterObserver implements TraceObserver {
 2. `taskCount++` adds one to the counter. This line runs every time a task completes, so the count grows as the workflow progresses.
 3. `onFlowComplete` is a second lifecycle hook. It runs once when the workflow finishes, making it a good place to print a summary.
 
+In summary:
+
+- `taskCount` persists across method calls, accumulating a count over the whole run
+- `onProcessComplete` increments the counter and prints the running total each time a task finishes
+- `onFlowComplete` runs once at the end, printing the final count
+
 Rebuild and test:
 
 ```bash
@@ -352,6 +358,8 @@ You learned that:
 
 ## What's next?
 
-The next section shows how plugins can read configuration from `nextflow.config`, and how to share your plugin.
+The task counter works, but it's always on.
+In a real plugin, users should be able to enable or disable features, or adjust behavior, from `nextflow.config` without editing the plugin source code.
+The next section shows how to make your observer configurable and how to share your finished plugin with others.
 
 [Continue to Part 6 :material-arrow-right:](06_configuration.md){ .md-button .md-button--primary }

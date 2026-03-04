@@ -1,7 +1,10 @@
 # Part 6: Configuration & Distribution
 
-Users should be able to control your plugin from `nextflow.config` without editing code.
-In this section, you'll add configuration options to your plugin using two approaches, then learn how to share your plugin.
+Your plugin has custom functions and an observer, but everything is hardcoded.
+Users can't turn the task counter off, or change how it behaves, without editing the source code and rebuilding.
+
+Nextflow plugins can read settings from `nextflow.config`, giving users control over plugin behavior the same way they configure other parts of a pipeline.
+In this section, you'll make the task counter configurable, then learn how to share your finished plugin.
 
 !!! tip "Starting from here?"
 
