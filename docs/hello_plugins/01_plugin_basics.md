@@ -67,18 +67,13 @@ process SAY_HELLO {
 }
 
 workflow {
-    greeting_ch = channel.fromPath(params.input)      // (1)!
-        .splitCsv(header: true)                       // (2)!
-        .map { row -> "${row.greeting}_${randomString(8)}" }  // (3)!
+    greeting_ch = channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> "${row.greeting}_${randomString(8)}" }
     SAY_HELLO(greeting_ch)
-    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }  // (4)!
+    SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
 }
 ```
-
-1. Create a channel from the file path
-2. Parse the CSV, using the first row as column names
-3. Transform each row: combine the greeting with a random suffix
-4. Print each process output to the console
 
 The pipeline defines its own `randomString` function inline, then uses it to append a random ID to each greeting.
 
@@ -305,15 +300,12 @@ Replace the `splitCsv` input with `samplesheetToList`:
     }
 
     workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))  // (1)!
-            .map { row -> "${row[0]}_${randomString(8)}" }  // (2)!
+        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+            .map { row -> "${row[0]}_${randomString(8)}" }
         SAY_HELLO(greeting_ch)
         SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
     ```
-
-    1. Parse the CSV according to the schema, returning each row as a list of values
-    2. `row[0]` accesses the first column (greeting) by position instead of by name
 
 === "Before"
 

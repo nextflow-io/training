@@ -261,17 +261,13 @@ Edit `greet.nf` to import and use `reverseGreeting`:
             .map { row -> row[0] }
 
         greeting_ch
-            .map { greeting -> reverseGreeting(greeting) }  // (1)!
-            .view { reversed -> "Reversed: $reversed" }     // (2)!
+            .map { greeting -> reverseGreeting(greeting) }
+            .view { reversed -> "Reversed: $reversed" }
 
         SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }  // (3)!
+        SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
     ```
-
-    1. Apply the plugin function to transform each value in the channel
-    2. Print each result to the console without consuming the channel
-    3. `SAY_HELLO.out` accesses the process outputs as a channel
 
 === "Before"
 
