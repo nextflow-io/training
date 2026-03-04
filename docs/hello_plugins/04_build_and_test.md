@@ -17,6 +17,12 @@ In this section, you'll write and run tests using the Spock testing framework.
     cd nf-greeting
     ```
 
+Make sure you're in the plugin directory:
+
+```bash
+cd nf-greeting
+```
+
 ---
 
 ## 1. Why test?
