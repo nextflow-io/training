@@ -514,7 +514,23 @@ Look at the summary:
 cat co2footprint_summary_*.txt
 ```
 
-The summary converts the CO2 estimate into relatable comparisons, like the equivalent distance driven by car or the time a tree would need to sequester the same amount.
+```console title="Output"
+Total CO₂e footprint measures of this workflow run (including cached tasks):
+  CO₂e emissions: 60.84 ug
+  Energy consumption: 126.76 uWh
+  CO₂e emissions (market): -
+
+Which equals:
+  - 3.48E-7 km travelled by car
+  - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere
+  - 1.22E-7 % of a flight from Paris to London
+```
+
+(Your numbers will differ.)
+
+The first section shows the raw energy and emissions figures.
+The "Which equals" section puts those numbers in perspective by converting them to familiar equivalents.
+The summary also includes a section listing the plugin's configuration options and a citation to the [Green Algorithms](https://doi.org/10.1002/advs.202100707) research paper that the calculation method is based on.
 
 This plugin works entirely through the observer mechanism, hooking into workflow lifecycle events to collect resource metrics and generate its report when the pipeline completes.
 No `include` statement is needed because it doesn't provide functions; it runs automatically once declared in the config.
