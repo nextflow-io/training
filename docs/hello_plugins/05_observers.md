@@ -92,12 +92,16 @@ For a complete list, see the [TraceObserver interface](https://github.com/nextfl
 
 ## 2. Add a task counter observer
 
-Rather than modifying the existing observer, create a new one that counts completed tasks.
-This involves three files:
+The goal is to build an observer that counts completed tasks and prints a summary at the end.
+Rather than modifying the existing `GreetingObserver`, you'll create a separate observer class for this.
+Adding a new observer to a plugin requires two things: writing the observer class, and registering it in the factory so Nextflow loads it.
 
-1. **Create** `TaskCounterObserver.groovy` with a minimal implementation
-2. **Edit** `GreetingFactory.groovy` to register the new observer so Nextflow knows about it
-3. **Enhance** `TaskCounterObserver.groovy` to track a running count and print a summary
+Here's the plan:
+
+1. Write a minimal `TaskCounterObserver.groovy` that prints a message on task completion
+2. Register it in `GreetingFactory.groovy` so Nextflow creates it
+3. Build and verify it works
+4. Enhance the observer with counting logic and a summary
 
 ### 2.1. Create a minimal observer
 
