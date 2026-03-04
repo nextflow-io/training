@@ -74,8 +74,13 @@ class GreetingObserver implements TraceObserver {    // (2)!
 3. Called when the workflow starts; receives the session for accessing config
 4. Called when the workflow finishes successfully
 
-The observer implements methods that Nextflow calls at specific points during execution.
-Each method corresponds to a lifecycle event:
+There are three things to notice here:
+
+1. **The class implements `TraceObserver`**: `TraceObserver` is an interface defined by Nextflow. An interface is a contract: it defines a set of methods that your class promises to provide. By writing `implements TraceObserver`, you're telling Nextflow "this class can respond to workflow events."
+2. **Override methods for specific events**: The `TraceObserver` interface defines methods like `onFlowCreate` and `onFlowComplete`. You override the ones you care about to provide your own behavior. Any methods you don't override are simply ignored.
+3. **The factory registers the observer**: `GreetingObserver` doesn't register itself. The `GreetingFactory` class (which you'll see in section 2.2) creates observer instances and hands them to Nextflow. Without this registration step, Nextflow wouldn't know about the observer.
+
+The full set of lifecycle events you can hook into:
 
 | Method              | When it's called        |
 | ------------------- | ----------------------- |
