@@ -199,7 +199,9 @@ Pipeline complete! 👋
 (Your random strings will differ.)
 
 The output still has random suffixes, but now `randomString` comes from the nf-hello plugin instead of inline code.
-The "Pipeline is starting!" and "Pipeline complete!" messages come from nf-hello's built-in observer, which demonstrates that a single plugin can provide both functions and observers.
+The "Pipeline is starting!" and "Pipeline complete!" messages are new.
+They come from a workflow monitor built into nf-hello that prints messages when the pipeline starts and finishes (the table in section 1 calls these "workflow monitors").
+This shows that a single plugin can provide both functions and monitors.
 
 Nextflow downloads plugins automatically the first time they're used, so any pipeline that declares `nf-hello@0.5.0` gets the exact same tested `randomString` function without copying code between projects.
 
