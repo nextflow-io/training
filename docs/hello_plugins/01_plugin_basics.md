@@ -91,11 +91,11 @@ Output: Ciao_jLhGfEcB
 Output: Hallo_tNwOiAuR
 ```
 
-(Your output order and random strings will differ.)
+Your output order and random strings will differ, and if you run the script again you'll get a different set of random greetings.
 
 #### 2.1.2. Configure the plugin
 
-Add the plugin to your `nextflow.config`:
+Now let's replace the inline function with one from a plugin. Add this plugin to your `nextflow.config`:
 
 ```groovy title="nextflow.config"
 // Configuration for plugin development exercises
@@ -104,7 +104,8 @@ plugins {
 }
 ```
 
-Plugins are declared in `nextflow.config` using the `plugins {}` block, and Nextflow automatically downloads them from the registry at runtime.
+Plugins are declared in `nextflow.config` using the `plugins {}` block.
+Nextflow automatically downloads them from the [Nextflow Plugin Registry](https://registry.nextflow.io/), a central repository of community and official plugins.
 
 #### 2.1.3. Use the plugin function
 
