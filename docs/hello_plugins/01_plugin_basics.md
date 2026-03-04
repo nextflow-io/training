@@ -216,6 +216,13 @@ It provides `samplesheetToList`, a function that parses CSV/TSV files using a JS
 The pipeline currently reads `greetings.csv` using `splitCsv` and a manual `map`, but nf-schema can replace this with validated, schema-driven parsing.
 A JSON schema file (`greetings_schema.json`) is already provided in the exercise directory.
 
+??? info "What is a schema?"
+
+    A schema is a formal description of what valid data looks like.
+    It defines things like which columns are expected, what type each value should be (string, number, etc.), and which fields are required.
+
+    Think of it as a contract: if the input data doesn't match the schema, the tool can catch the problem early instead of letting it cause confusing errors later in the pipeline.
+
 #### 2.2.1. Look at the schema
 
 ```bash
