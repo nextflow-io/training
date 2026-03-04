@@ -37,14 +37,16 @@ In this section, you'll do the same for your own plugin.
 
     For comprehensive configuration details, see the [Nextflow config scopes documentation](https://nextflow.io/docs/latest/developer/config-scopes.html).
 
-Nextflow provides two approaches for reading configuration in plugin code:
+Nextflow provides two approaches for plugin configuration, and they serve different purposes:
 
-| Approach                    | Best for                           | Trade-offs                              |
+| Approach                    | Purpose                            | Trade-offs                              |
 | -------------------------- | ---------------------------------- | --------------------------------------- |
-| `session.config.navigate()` | Quick prototyping, simple plugins  | No IDE support, manual type conversion  |
-| `@ConfigScope` classes      | Production plugins, complex config | More code, but type-safe and documented |
+| `session.config.navigate()` | **Read** config values at runtime  | No IDE support, manual type conversion  |
+| `@ConfigScope` classes      | **Declare** what config options exist | More code, but type-safe and documented |
 
-You'll start with the simple approach, then upgrade to the formal approach.
+These two approaches work together.
+`navigate()` is how your plugin code reads values; `ConfigScope` is how you tell Nextflow (and tooling) what options your plugin accepts.
+You'll start with `navigate()` alone, see its limitations, then add a `ConfigScope` class on top.
 
 ---
 
@@ -65,6 +67,10 @@ greeting {
     enabled = false
 }
 ```
+
+There is a catch: Nextflow doesn't know the `greeting` scope exists.
+The value still gets read correctly, but Nextflow prints an "Unrecognized config option" warning because nothing has declared `greeting` as a valid scope.
+You'll see this warning in Section 2 and fix it in Section 4.
 
 ---
 
@@ -456,12 +462,30 @@ The decorator now uses your custom prefix and suffix.
 
 ## 4. Formal configuration with ConfigScope
 
-The configuration works, but Nextflow still prints "Unrecognized config option" warnings because it doesn't know the `greeting` scope exists.
-The `session.config.navigate()` approach also has practical limitations:
+Your plugin configuration works, but Nextflow still prints "Unrecognized config option" warnings.
+That is because `session.config.navigate()` only reads values; nothing has told Nextflow that `greeting` is a valid config scope.
 
+A `ConfigScope` class fills that gap.
+It declares what options your plugin accepts, their types, and their defaults.
+It does **not** replace your `navigate()` calls. Instead, it works alongside them:
+
+```mermaid
+flowchart LR
+    A["nextflow.config\ngreeting { ... }"] --> B["ConfigScope\n<i>declares valid options</i>"]
+    A --> C["navigate()\n<i>reads values at runtime</i>"]
+    B -. "validates &\ndocuments" .-> A
+    C -- "provides values to" --> D["Plugin code\n<i>factory, extension</i>"]
+
+    style B fill:#e8f5e9,stroke:#4caf50
+    style C fill:#e3f2fd,stroke:#2196f3
+```
+
+Without a `ConfigScope` class, `navigate()` still works, but:
+
+- Nextflow warns about unrecognized options (as you've seen)
 - No IDE autocompletion for users writing `nextflow.config`
 - Configuration options aren't self-documenting
-- Manual type conversion with `as String`, `as boolean`, etc.
+- Type conversion is manual (`as String`, `as boolean`)
 
 Registering a formal config scope class fixes the warning and addresses all three issues.
 This is the same mechanism behind the `#!groovy validation {}` and `#!groovy co2footprint {}` blocks you used in Part 1.
@@ -632,15 +656,19 @@ Note the difference between the factory and extension points registration:
 
 ### 4.4. Build and test
 
-The `ConfigScope` class doesn't change how your code reads configuration at runtime; your factory and extension still use `session.config.navigate()`.
-What it does is register the `greeting {}` scope with Nextflow, which eliminates the "Unrecognized config option" warning and enables tooling support.
-
 ```bash
 cd nf-greeting && make assemble && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
-The pipeline behavior is the same, but the warning is gone and your configuration options are now formally documented within the plugin.
+The pipeline behavior is identical, but the "Unrecognized config option" warning is gone.
+
+!!! note "What changed and what didn't"
+
+    Your `GreetingFactory` and `GreetingExtension` still use `session.config.navigate()` to read values at runtime.
+    None of that code changed.
+    The `ConfigScope` class is a parallel declaration that tells Nextflow what options exist.
+    Both pieces are needed: `ConfigScope` declares, `navigate()` reads.
 
 Your plugin now has the same structure as the plugins you used in Part 1.
 When nf-schema exposes a `#!groovy validation {}` block or nf-co2footprint exposes a `#!groovy co2footprint {}` block, they use exactly this pattern: a `ConfigScope` class with annotated fields, registered as an extension point.
@@ -700,17 +728,17 @@ Nextflow automatically downloads the plugin from the registry on first use.
 
 You learned that:
 
-- `session.config.navigate()` provides simple, quick configuration reading
-- `@ScopeName` and `@ConfigOption` annotations create self-documenting configuration
+- `session.config.navigate()` **reads** config values at runtime
+- `@ConfigScope` classes **declare** what config options exist; they work alongside `navigate()`, not instead of it
 - Configuration can be applied to both observers and extension functions
 - Variables must be declared before use in Groovy/Java
 - Use semantic versioning and the public registry to distribute plugins
 
-| Use case                            | Recommended approach                      |
-| ----------------------------------- | ----------------------------------------- |
-| Quick prototype or simple plugin    | `session.config.navigate()` only          |
-| Production plugin with many options | Add `ConfigScope` class for documentation |
-| Plugin you'll share publicly        | Add `ConfigScope` class for documentation |
+| Use case                            | Recommended approach                                  |
+| ----------------------------------- | ----------------------------------------------------- |
+| Quick prototype or simple plugin    | `session.config.navigate()` only                      |
+| Production plugin with many options | Add a `ConfigScope` class alongside your `navigate()` calls |
+| Plugin you'll share publicly        | Add a `ConfigScope` class alongside your `navigate()` calls |
 
 ---
 
