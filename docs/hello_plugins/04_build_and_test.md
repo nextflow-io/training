@@ -69,6 +69,8 @@ This structure makes tests readable: "Given an extension object, expect that `re
 
 ## 3. Write the tests
 
+Write tests for the two functions you created in Part 3: `reverseGreeting` and `decorateGreeting`.
+
 ### 3.1. Create the test class
 
 ```bash

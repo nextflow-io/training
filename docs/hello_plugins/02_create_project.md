@@ -40,6 +40,8 @@ The first argument is the plugin name, and the second is your organization name 
 
 ## 2. Examine the project structure
 
+Before writing any code, look at what the template generated so you know where things go.
+
 Change into the plugin directory:
 
 ```bash
@@ -87,6 +89,9 @@ You should see:
 ---
 
 ## 3. Explore the build configuration
+
+The build configuration tells Gradle how to compile your plugin and tells Nextflow how to load it.
+Two files matter most.
 
 ### 3.1. settings.gradle
 
@@ -210,6 +215,8 @@ graph TD
 ---
 
 ## 5. Build, install, and run
+
+The template includes working code out of the box, so you can build and run it right away to verify the project is set up correctly.
 
 Compile the plugin and install it locally:
 

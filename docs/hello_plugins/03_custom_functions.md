@@ -14,6 +14,8 @@ By the end of this section, you'll have custom functions in your plugin, built a
 
 ## 1. See what the template generated
 
+Before writing your own functions, look at the example function the template created to understand the pattern.
+
 Change into the plugin directory:
 
 ```bash
@@ -106,7 +108,8 @@ Without it, the method exists only inside the plugin code.
 
 ## 2. Replace sayHello with reverseGreeting
 
-Replace the template's `sayHello` function with a function that reverses a greeting string.
+The template's `sayHello` function is a placeholder.
+Replace it with your own function to see the full cycle of writing, building, and using a plugin function.
 
 Edit `src/main/groovy/training/plugin/GreetingExtension.groovy` to replace the `sayHello` method:
 
@@ -226,6 +229,9 @@ make install
 ---
 
 ## 4. Use your function in a workflow
+
+The plugin is built and installed.
+The next step is to use `reverseGreeting` in a workflow to verify it works end-to-end.
 
 Go back to the pipeline directory:
 
@@ -350,7 +356,8 @@ The same `include { ... } from 'plugin/...'` pattern you used with nf-hello and 
 
 ## 5. Add decorateGreeting
 
-Add a second function that wraps a greeting with decorative markers.
+A plugin can provide multiple functions.
+Add a second one that wraps a greeting with decorative markers; you'll make it configurable in Part 6.
 
 Edit `GreetingExtension.groovy` to add `decorateGreeting` after `reverseGreeting`, before the closing brace of the class:
 
