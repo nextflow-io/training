@@ -420,7 +420,53 @@ WARN: Found the following unidentified headers in greetings.csv:
 Required columns cause hard errors; optional columns cause warnings.
 This is the kind of early feedback that saves debugging time in real pipelines with dozens of columns.
 
-Restore `greetings.csv` to its original state before continuing:
+#### 2.2.6. Configure validation behavior
+
+The warning about `lang` is useful, but you can control its severity through configuration.
+Plugins can define configuration scopes in `nextflow.config` that control their behavior.
+
+Add a `validation` block to make unrecognized headers cause an error instead of a warning:
+
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="6-10"
+    plugins {
+        id 'nf-hello@0.5.0'
+        id 'nf-schema@2.6.1'
+    }
+
+    validation {
+        logging {
+            unrecognisedHeaders = "error"
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    plugins {
+        id 'nf-hello@0.5.0'
+        id 'nf-schema@2.6.1'
+    }
+    ```
+
+Run the pipeline again with the same `lang` column still in place:
+
+```bash
+nextflow run hello.nf
+```
+
+```console title="Output (partial)"
+Found the following unidentified headers in greetings.csv:
+	- lang
+ -- Check script 'hello.nf' at line: 20 or see '.nextflow.log' file for more details
+```
+
+The pipeline now fails instead of warning.
+The pipeline code didn't change; only the configuration did.
+
+Restore `greetings.csv` to its original state and remove the `validation` block before continuing:
 
 ```csv title="greetings.csv"
 greeting,language
@@ -429,6 +475,13 @@ Bonjour,French
 Holà,Spanish
 Ciao,Italian
 Hallo,German
+```
+
+```groovy title="nextflow.config"
+plugins {
+    id 'nf-hello@0.5.0'
+    id 'nf-schema@2.6.1'
+}
 ```
 
 Both nf-hello and nf-schema are function plugins: they provide functions that you import with `include` and call in your workflow code.
@@ -532,6 +585,56 @@ The first section shows the raw energy and emissions figures.
 The "Which equals" section puts those numbers in perspective by converting them to familiar equivalents.
 The summary also includes a section listing the plugin's configuration options and a citation to the [Green Algorithms](https://doi.org/10.1002/advs.202100707) research paper that the calculation method is based on.
 
+### 3.4. Configure the plugin
+
+The "Target zone null" warning from section 3.2 appeared because the plugin had no location configured.
+Each plugin can define its own configuration scope in `nextflow.config`.
+
+Add a `co2footprint` block to set your location:
+
+=== "After"
+
+    ```groovy title="nextflow.config" hl_lines="7-9"
+    plugins {
+        id 'nf-hello@0.5.0'
+        id 'nf-schema@2.6.1'
+        id 'nf-co2footprint'
+    }
+
+    co2footprint {
+        location = 'GB'
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="nextflow.config"
+    plugins {
+        id 'nf-hello@0.5.0'
+        id 'nf-schema@2.6.1'
+        id 'nf-co2footprint'
+    }
+    ```
+
+!!! tip
+
+    Use your own country code if you prefer (e.g., `'US'`, `'DE'`, `'FR'`).
+
+Run the pipeline:
+
+```bash
+nextflow run hello.nf
+```
+
+```console title="Output (partial)"
+INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 163.92 gCO₂eq/kWh.
+```
+
+The zone warning is gone.
+The plugin now uses GB-specific carbon intensity (163.92 gCO₂eq/kWh) instead of the global fallback (480.0 gCO₂eq/kWh).
+
+In Part 6, you'll create a configuration scope for your own plugin.
+
 This plugin works entirely through the observer mechanism, hooking into workflow lifecycle events to collect resource metrics and generate its report when the pipeline completes.
 No `include` statement is needed because it doesn't provide functions; it runs automatically once declared in the config.
 
@@ -586,6 +689,7 @@ Key patterns:
 - Plugins are declared in `nextflow.config` with `#!groovy plugins { id 'plugin-name@version' }`
 - Function plugins require `#!groovy include { function } from 'plugin/plugin-id'`
 - Observer plugins work automatically once declared in the config
+- Plugins can define configuration scopes (e.g., `#!groovy validation {}`, `#!groovy co2footprint {}`) to customize behavior
 - The [Nextflow Plugin Registry](https://registry.nextflow.io/) lists available plugins
 
 ---
