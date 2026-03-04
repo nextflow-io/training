@@ -21,7 +21,6 @@ No prior Java or Groovy experience is required.
 
 - A GitHub account OR a local installation as described [here](../envsetup/02_local).
 - Completed the [Hello Nextflow](../hello_nextflow/index.md) course or equivalent.
-- For plugin development (Parts 2-6): Java 21+ installed.
 
 ## Learning objectives
 

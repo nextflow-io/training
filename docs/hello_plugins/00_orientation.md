@@ -25,15 +25,14 @@ If you haven't yet done so, make sure to open the training environment as descri
 
 ## 2. Verify Java installation
 
-For plugin development (Parts 2-6), you need Java 21 or later.
-Check that Java is available:
+Plugin development (Parts 2-6) requires Java 21 or later, which is included in the training environment.
+Verify it's available:
 
 ```bash
 java -version
 ```
 
 You should see Java 21 or later.
-The training Codespace comes with Java pre-installed.
 
 ??? info "What are Java, Groovy, and Gradle?"
 
@@ -104,8 +103,8 @@ This training is organized into two tracks:
 ## 6. Readiness checklist
 
 - [ ] My codespace is running
+- [ ] Java is installed (for plugin development parts)
 - [ ] I'm in the `hello-plugins` directory
-- [ ] Java is installed (required for plugin development parts)
 
 ---
 
