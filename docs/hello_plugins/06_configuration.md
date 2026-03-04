@@ -3,10 +3,27 @@
 Your plugin has custom functions and an observer, but everything is hardcoded.
 Users can't turn the task counter off, or change how it behaves, without editing the source code and rebuilding.
 
-Nextflow plugins can read settings from `nextflow.config`, giving users control over plugin behavior.
-You already saw this in Part 1: adding a `#!groovy validation {}` block changed how nf-schema handled unrecognized headers, and adding a `#!groovy co2footprint {}` block told nf-co2footprint which country to use for carbon intensity.
+In Part 1, you used `#!groovy validation {}` and `#!groovy co2footprint {}` blocks in `nextflow.config` to control how nf-schema and nf-co2footprint behaved.
 Those config blocks exist because the plugin authors built that capability in.
-In this section, you'll do the same for your own plugin, then learn how to share it.
+In this section, you'll do the same for your own plugin.
+
+**Objectives:**
+
+1. Let users enable/disable the plugin and control per-task messages through `nextflow.config`
+2. Let users customize the greeting decorator's prefix and suffix
+3. Register a formal config scope so Nextflow recognizes the `#!groovy greeting {}` block
+4. Learn how to version and distribute a finished plugin
+
+**What you'll change:**
+
+| File                       | Change                                           |
+| -------------------------- | ------------------------------------------------ |
+| `TaskCounterObserver.groovy` | Accept a `verbose` flag from the factory         |
+| `GreetingFactory.groovy`   | Read config values and pass them to the observer |
+| `GreetingExtension.groovy` | Read prefix/suffix config in `init()`            |
+| `GreetingConfig.groovy`    | New file: formal `@ConfigScope` class            |
+| `build.gradle`             | Register the config class as an extension point  |
+| `nextflow.config`          | Add a `#!groovy greeting {}` block to test it    |
 
 !!! tip "Starting from here?"
 
@@ -20,14 +37,14 @@ In this section, you'll do the same for your own plugin, then learn how to share
 
     For comprehensive configuration details, see the [Nextflow config scopes documentation](https://nextflow.io/docs/latest/developer/config-scopes.html).
 
-Nextflow provides two approaches for plugin configuration:
+Nextflow provides two approaches for reading configuration in plugin code:
 
 | Approach                    | Best for                           | Trade-offs                              |
-| --------------------------- | ---------------------------------- | --------------------------------------- |
+| -------------------------- | ---------------------------------- | --------------------------------------- |
 | `session.config.navigate()` | Quick prototyping, simple plugins  | No IDE support, manual type conversion  |
 | `@ConfigScope` classes      | Production plugins, complex config | More code, but type-safe and documented |
 
-We'll start with the simple approach, then upgrade to the formal approach.
+You'll start with the simple approach, then upgrade to the formal approach.
 
 ---
 
