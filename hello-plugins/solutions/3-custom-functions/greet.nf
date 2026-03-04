@@ -22,7 +22,7 @@ process SAY_HELLO {
 
 workflow {
     greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-                        .map { row -> row[0] }
+        .map { row -> row[0] }
 
     // Demonstrate using reverseGreeting function
     greeting_ch

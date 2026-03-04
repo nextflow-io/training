@@ -17,7 +17,7 @@ process SAY_HELLO {
 
 workflow {
     greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-                        .map { row -> row[0] }
+        .map { row -> row[0] }
     SAY_HELLO(greeting_ch)
     SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
 }

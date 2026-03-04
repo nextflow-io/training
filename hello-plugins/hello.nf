@@ -24,8 +24,8 @@ process SAY_HELLO {
 
 workflow {
     greeting_ch = channel.fromPath(params.input)
-                        .splitCsv(header: true)
-                        .map { row -> "${row.greeting}_${randomString(8)}" }
+        .splitCsv(header: true)
+        .map { row -> "${row.greeting}_${randomString(8)}" }
     SAY_HELLO(greeting_ch)
     SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
 }

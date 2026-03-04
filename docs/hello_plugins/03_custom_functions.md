@@ -201,7 +201,7 @@ Edit `greet.nf` to import and use `reverseGreeting`:
 
     workflow {
         greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-                            .map { row -> row[0] }
+            .map { row -> row[0] }
 
         greeting_ch
             .map { greeting -> reverseGreeting(greeting) }
@@ -234,7 +234,7 @@ Edit `greet.nf` to import and use `reverseGreeting`:
 
     workflow {
         greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-                            .map { row -> row[0] }
+            .map { row -> row[0] }
         SAY_HELLO(greeting_ch)
         SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
@@ -384,7 +384,7 @@ Update `greet.nf` to also import and use `decorateGreeting`:
 
     workflow {
         greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-                            .map { row -> row[0] }
+            .map { row -> row[0] }
 
         // Demonstrate using reverseGreeting function
         greeting_ch
@@ -419,7 +419,7 @@ Update `greet.nf` to also import and use `decorateGreeting`:
 
     workflow {
         greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-                            .map { row -> row[0] }
+            .map { row -> row[0] }
 
         greeting_ch
             .map { greeting -> reverseGreeting(greeting) }

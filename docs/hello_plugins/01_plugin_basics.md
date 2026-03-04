@@ -68,8 +68,8 @@ process SAY_HELLO {
 
 workflow {
     greeting_ch = channel.fromPath(params.input)
-                        .splitCsv(header: true)
-                        .map { row -> "${row.greeting}_${randomString(8)}" }
+        .splitCsv(header: true)
+        .map { row -> "${row.greeting}_${randomString(8)}" }
     SAY_HELLO(greeting_ch)
     SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
 }
@@ -133,8 +133,8 @@ Replace the inline `randomString` function with the plugin version:
 
     workflow {
         greeting_ch = channel.fromPath(params.input)
-                            .splitCsv(header: true)
-                            .map { row -> "${row.greeting}_${randomString(8)}" }
+            .splitCsv(header: true)
+            .map { row -> "${row.greeting}_${randomString(8)}" }
         SAY_HELLO(greeting_ch)
         SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
@@ -169,8 +169,8 @@ Replace the inline `randomString` function with the plugin version:
 
     workflow {
         greeting_ch = channel.fromPath(params.input)
-                            .splitCsv(header: true)
-                            .map { row -> "${row.greeting}_${randomString(8)}" }
+            .splitCsv(header: true)
+            .map { row -> "${row.greeting}_${randomString(8)}" }
         SAY_HELLO(greeting_ch)
         SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
@@ -301,7 +301,7 @@ Replace the `splitCsv` input with `samplesheetToList`:
 
     workflow {
         greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
-                            .map { row -> "${row[0]}_${randomString(8)}" }
+            .map { row -> "${row[0]}_${randomString(8)}" }
         SAY_HELLO(greeting_ch)
         SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
@@ -329,8 +329,8 @@ Replace the `splitCsv` input with `samplesheetToList`:
 
     workflow {
         greeting_ch = channel.fromPath(params.input)
-                            .splitCsv(header: true)
-                            .map { row -> "${row.greeting}_${randomString(8)}" }
+            .splitCsv(header: true)
+            .map { row -> "${row.greeting}_${randomString(8)}" }
         SAY_HELLO(greeting_ch)
         SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
     }
