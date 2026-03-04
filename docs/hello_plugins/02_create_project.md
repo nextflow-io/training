@@ -168,36 +168,135 @@ Update it to match your installed Nextflow version for full compatibility:
 ## 4. Tour the source files
 
 The plugin code lives in `src/main/groovy/training/plugin/`.
-Examine each file to see what the template generated:
+Examine each file to see what the template generated.
+
+### 4.1. GreetingPlugin (entry point)
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingPlugin.groovy
 ```
 
-`GreetingPlugin` is the plugin entry point that you specified in `build.gradle` via `className`.
+Below the license header, you'll see:
+
+```groovy title="GreetingPlugin.groovy"
+package training.plugin
+
+import groovy.transform.CompileStatic
+import nextflow.plugin.BasePlugin
+import org.pf4j.PluginWrapper
+
+@CompileStatic
+class GreetingPlugin extends BasePlugin {
+
+    GreetingPlugin(PluginWrapper wrapper) {
+        super(wrapper)
+    }
+}
+```
+
+This is the entry point that you specified in `build.gradle` via `className`.
 When Nextflow loads your plugin, this is the first class it instantiates.
-You won't need to modify this file; it's generated automatically.
+The class extends `BasePlugin` and passes a `wrapper` object to the parent, which handles plugin lifecycle management.
+You won't need to modify this file.
+
+### 4.2. GreetingExtension (functions)
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingExtension.groovy
 ```
 
+```groovy title="GreetingExtension.groovy"
+package training.plugin
+
+import groovy.transform.CompileStatic
+import nextflow.Session
+import nextflow.plugin.extension.Function
+import nextflow.plugin.extension.PluginExtensionPoint
+
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint {
+
+    @Override
+    protected void init(Session session) {
+    }
+
+    @Function
+    void sayHello(String target) {
+        println "Hello, ${target}!"
+    }
+
+}
+```
+
 The extension class holds functions marked with `@Function` that become callable from Nextflow workflows.
+The template includes a sample `sayHello` function that prints a greeting.
+The `init` method runs once when the plugin loads and can be used to read configuration (Part 6).
 This is where you'll add most of your plugin's functionality (Part 3).
+
+### 4.3. GreetingFactory (creates observers)
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingFactory.groovy
 ```
 
-The factory is responsible for creating observer instances when a workflow starts.
+```groovy title="GreetingFactory.groovy"
+package training.plugin
+
+import groovy.transform.CompileStatic
+import nextflow.Session
+import nextflow.trace.TraceObserver
+import nextflow.trace.TraceObserverFactory
+
+@CompileStatic
+class GreetingFactory implements TraceObserverFactory {
+
+    @Override
+    Collection<TraceObserver> create(Session session) {
+        return List.<TraceObserver>of(new GreetingObserver())
+    }
+
+}
+```
+
+The factory creates observer instances when a workflow starts.
+Nextflow calls the `create` method and expects a list of `TraceObserver` objects back.
+Here it creates a single `GreetingObserver`.
 You'll work with this in Part 5 when you add a task counter.
+
+### 4.4. GreetingObserver (lifecycle hooks)
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingObserver.groovy
 ```
 
-The observer runs code when things happen in the workflow, like when a task completes or the pipeline finishes.
-The template includes messages that print "Pipeline is starting!" and "Pipeline complete!" (Part 5).
+```groovy title="GreetingObserver.groovy"
+package training.plugin
+
+import groovy.transform.CompileStatic
+import groovy.util.logging.Slf4j
+import nextflow.Session
+import nextflow.trace.TraceObserver
+
+@Slf4j
+@CompileStatic
+class GreetingObserver implements TraceObserver {
+
+    @Override
+    void onFlowCreate(Session session) {
+        println "Pipeline is starting! 🚀"
+    }
+
+    @Override
+    void onFlowComplete() {
+        println "Pipeline complete! 👋"
+    }
+}
+```
+
+The observer implements `TraceObserver`, which defines methods that Nextflow calls at different points in the workflow lifecycle.
+The template overrides two: `onFlowCreate` (called when the pipeline starts) and `onFlowComplete` (called when it finishes).
+These are the source of the "Pipeline is starting!" and "Pipeline complete!" messages you saw when running with nf-hello in Part 1.
+You'll extend this observer in Part 5.
 
 ??? info "How the components relate"
 
