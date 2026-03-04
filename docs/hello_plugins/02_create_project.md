@@ -178,24 +178,26 @@ There are four source files, each with a distinct role:
 | `GreetingObserver.groovy` | Runs code in response to workflow lifecycle events | Part 5 |
 
 You don't need to read these files now.
-Each one is introduced in detail when you first modify it.
+Each one is introduced in detail in the parts listed above, when you first modify it.
 
-??? info "How the components relate"
+Here is how the components relate:
 
-    ```mermaid
-    graph TD
-        A[GreetingPlugin] -->|registers| B[GreetingExtension]
-        A -->|registers| C[GreetingFactory]
-        C -->|creates| D[GreetingObserver]
+`GreetingPlugin` is the entry point. It registers `GreetingExtension`, which provides `@Function` methods that workflows can call, and `GreetingFactory`, which creates a `GreetingObserver` to respond to lifecycle events like pipeline start and completion.
 
-        B -->|provides| E["@Function methods<br/>(callable from workflows)"]
-        D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
+```mermaid
+graph TD
+    A[GreetingPlugin] -->|registers| B[GreetingExtension]
+    A -->|registers| C[GreetingFactory]
+    C -->|creates| D[GreetingObserver]
 
-        style A fill:#e1f5fe
-        style B fill:#fff3e0
-        style C fill:#fff3e0
-        style D fill:#fff3e0
-    ```
+    B -->|provides| E["@Function methods<br/>(callable from workflows)"]
+    D -->|hooks into| F["Lifecycle events<br/>(onFlowCreate, onProcessComplete, etc.)"]
+
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#fff3e0
+    style D fill:#fff3e0
+```
 
 ---
 
@@ -287,7 +289,7 @@ Pipeline complete! 👋
 
 (Your output order may differ.)
 
-The "Pipeline is starting!" and "Pipeline complete!" messages come from the `GreetingObserver` in your plugin.
+The "Pipeline is starting!" and "Pipeline complete!" messages look familiar from the nf-hello plugin in Part 1, but this time they come from the `GreetingObserver` in your own plugin.
 The pipeline itself is unchanged; the observer runs automatically because it's registered in the factory.
 
 ---
