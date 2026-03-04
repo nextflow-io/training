@@ -187,7 +187,10 @@ Each one is introduced in detail in the parts listed above, when you first modif
 
 Here is how the components relate:
 
-`GreetingPlugin` is the entry point. It registers `GreetingExtension`, which provides `@Function` methods that workflows can call, and `GreetingFactory`, which creates a `GreetingObserver` to respond to lifecycle events like pipeline start and completion.
+`GreetingPlugin` is the entry point that Nextflow loads first.
+It registers two components: `GreetingExtension` and `GreetingFactory`.
+`GreetingExtension` provides the functions (marked with `@Function`) that workflows can call.
+`GreetingFactory` creates a `GreetingObserver` when a workflow starts, which responds to events like pipeline start and completion.
 
 ```mermaid
 graph TD

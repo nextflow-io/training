@@ -87,7 +87,7 @@ This training is organized into two tracks:
 
 **Using plugins (Part 1):**
 
-- Discover, install, and use existing plugins like `nf-hello`
+- Discover, install, configure, and use existing plugins like `nf-hello`
 
 **Developing plugins (Parts 2-6):**
 

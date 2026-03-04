@@ -44,7 +44,7 @@ By the end of this training, you will be able to:
 
 #### Part 1: Plugin basics
 
-Use an existing plugin from the registry in a Nextflow workflow.
+Use existing plugins in a Nextflow workflow and configure their behavior.
 
 #### Part 2: Create a plugin project
 

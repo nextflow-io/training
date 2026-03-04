@@ -20,8 +20,8 @@ Change into the plugin directory:
 cd nf-greeting
 ```
 
-Functions are defined in classes that extend `PluginExtensionPoint`.
-Open the extension file to see what the template created:
+The template created an extension file where plugin functions are defined.
+Open it to see the starting point:
 
 ```bash
 cat src/main/groovy/training/plugin/GreetingExtension.groovy
@@ -76,7 +76,7 @@ class GreetingExtension extends PluginExtensionPoint { // (2)!
 ```
 
 1. Tells Groovy to check types at compile time, catching errors earlier
-2. Base class for all plugin function providers
+2. The class your extension builds on. Nextflow requires this to recognize your functions.
 3. Called when the plugin loads; use for initialization
 4. Makes this method callable from workflows via `include`
 
