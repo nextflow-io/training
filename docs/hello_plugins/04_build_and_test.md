@@ -284,6 +284,8 @@ Click through to your test class to see individual test results:
 ![Test report showing all tests passed](./img/test_report.png)
 
 The report shows each test method, its duration, and whether it passed or failed.
+Both tests pass: `should reverse a greeting` and `should decorate a greeting` confirm that your custom functions produce the expected output.
+If a test were to fail, the report would show the expected vs. actual values, making it straightforward to identify the problem.
 
 Press ++ctrl+c++ in the terminal to stop the server when you're done, then return to the previous directory with `popd`:
 
@@ -311,6 +313,8 @@ You learned that:
 
 ## What's next?
 
-The next section explores trace observers for hooking into workflow lifecycle events.
+So far, your plugin adds custom functions that pipelines can call.
+Plugins can also react to workflow events (a task completing, a file being published, the pipeline finishing) using trace observers.
+In the next section, you'll build an observer that counts completed tasks and prints a summary when the pipeline finishes.
 
 [Continue to Part 5 :material-arrow-right:](05_observers.md){ .md-button .md-button--primary }
