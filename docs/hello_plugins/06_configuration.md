@@ -674,8 +674,13 @@ Your plugin now has the same structure as the plugins you used in Part 1.
 When nf-schema exposes a `#!groovy validation {}` block or nf-co2footprint exposes a `#!groovy co2footprint {}` block, they use exactly this pattern: a `ConfigScope` class with annotated fields, registered as an extension point.
 Your `#!groovy greeting {}` block works the same way.
 
-With functions, an observer, and a configuration scope in place, the plugin is feature-complete.
-The final step is getting it into other people's hands.
+Your plugin now has all the pieces of a production plugin:
+
+- **Custom functions** (`reverseGreeting`, `decorateGreeting`) that pipeline authors can call from their scripts
+- **Trace observers** (`GreetingObserver`, `TaskCounterObserver`) that react to pipeline lifecycle events
+- **User-facing configuration** via a `greeting {}` block in `nextflow.config`, backed by both `navigate()` for reading and `ConfigScope` for validation
+
+All that remains is getting it into other people's hands.
 
 ---
 
