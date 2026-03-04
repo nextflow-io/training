@@ -275,20 +275,27 @@ Add the nf-greeting plugin to `nextflow.config`:
 Run the pipeline:
 
 ```bash
-nextflow run greet.nf
+nextflow run greet.nf -ansi-log false
 ```
+
+The `-ansi-log false` flag disables the animated progress display so that all output, including observer messages, is printed in order.
 
 ```console title="Output"
 Pipeline is starting! 🚀
-Output: Hello
+[bc/f10449] Submitted process > SAY_HELLO (1)
+[9a/f7bcb2] Submitted process > SAY_HELLO (2)
+[6c/aff748] Submitted process > SAY_HELLO (3)
+[de/8937ef] Submitted process > SAY_HELLO (4)
+[98/c9a7d6] Submitted process > SAY_HELLO (5)
 Output: Bonjour
+Output: Hello
 Output: Holà
 Output: Ciao
 Output: Hallo
 Pipeline complete! 👋
 ```
 
-(Your output order may differ.)
+(Your output order and work directory hashes will differ.)
 
 The "Pipeline is starting!" and "Pipeline complete!" messages look familiar from the nf-hello plugin in Part 1, but this time they come from the `GreetingObserver` in your own plugin.
 The pipeline itself is unchanged; the observer runs automatically because it's registered in the factory.
