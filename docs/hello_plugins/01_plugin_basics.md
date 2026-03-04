@@ -360,6 +360,77 @@ Pipeline complete! 👋
 The output is the same, but now the schema validates the CSV structure before the pipeline runs.
 In real pipelines with complex sample sheets and many columns, this kind of validation prevents errors that manual `splitCsv` + `map` would miss.
 
+#### 2.2.5. See validation in action
+
+To see what schema validation catches, try introducing errors into `greetings.csv`.
+
+Rename the required `greeting` column to `message`:
+
+```csv title="greetings.csv" hl_lines="1"
+message,language
+Hello,English
+Bonjour,French
+Holà,Spanish
+Ciao,Italian
+Hallo,German
+```
+
+Run the pipeline:
+
+```bash
+nextflow run hello.nf
+```
+
+```console title="Output"
+ERROR ~ Validation of samplesheet failed!
+
+The following errors have been detected in greetings.csv:
+
+-> Entry 1: Missing required field(s): greeting
+-> Entry 2: Missing required field(s): greeting
+-> Entry 3: Missing required field(s): greeting
+-> Entry 4: Missing required field(s): greeting
+-> Entry 5: Missing required field(s): greeting
+```
+
+The pipeline refuses to run because the schema requires a `greeting` column and can't find one.
+
+Now restore the required column but rename the optional `language` column to `lang`:
+
+```csv title="greetings.csv" hl_lines="1"
+greeting,lang
+Hello,English
+Bonjour,French
+Holà,Spanish
+Ciao,Italian
+Hallo,German
+```
+
+```bash
+nextflow run hello.nf
+```
+
+This time the pipeline runs, but prints a warning:
+
+```console title="Output (partial)"
+WARN: Found the following unidentified headers in greetings.csv:
+	- lang
+```
+
+Required columns cause hard errors; optional columns cause warnings.
+This is the kind of early feedback that saves debugging time in real pipelines with dozens of columns.
+
+Restore `greetings.csv` to its original state before continuing:
+
+```csv title="greetings.csv"
+greeting,language
+Hello,English
+Bonjour,French
+Holà,Spanish
+Ciao,Italian
+Hallo,German
+```
+
 Both nf-hello and nf-schema are function plugins: they provide functions that you import with `include` and call in your workflow code.
 The next exercise shows a different type of plugin that works without any `include` statements at all.
 
