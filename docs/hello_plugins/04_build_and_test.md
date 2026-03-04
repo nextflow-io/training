@@ -95,7 +95,8 @@ class GreetingExtensionTest extends Specification {  // (1)!
 ### 3.2. Test reverseGreeting
 
 Add a test method inside the class body.
-This is where the `given:`/`expect:` structure from section 2 becomes practice:
+The `given:` block creates a `GreetingExtension` instance, and the `expect:` block checks that `reverseGreeting` correctly reverses two different inputs.
+This tests the function directly, without running a pipeline.
 
 === "After"
 
@@ -140,7 +141,8 @@ This is where the `given:`/`expect:` structure from section 2 becomes practice:
 
 ### 3.3. Test decorateGreeting
 
-Add a second test method after the first one:
+Add a second test method after the first one.
+This one verifies that `decorateGreeting` wraps the input string with `***` on each side.
 
 === "After"
 
