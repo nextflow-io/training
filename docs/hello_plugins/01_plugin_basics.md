@@ -423,9 +423,9 @@ This is the kind of early feedback that saves debugging time in real pipelines w
 #### 2.2.6. Configure validation behavior
 
 The warning about `lang` is useful, but you can control its severity through configuration.
-Plugins can define configuration scopes in `nextflow.config` that control their behavior.
+The nf-schema plugin defines a `validation` configuration scope with options that control how validation behaves.
 
-Add a `validation` block to make unrecognized headers cause an error instead of a warning:
+Add a `validation` block to `nextflow.config` to make unrecognized headers cause an error instead of a warning:
 
 === "After"
 
@@ -588,9 +588,9 @@ The summary also includes a section listing the plugin's configuration options a
 ### 3.4. Configure the plugin
 
 The "Target zone null" warning from section 3.2 appeared because the plugin had no location configured.
-Each plugin can define its own configuration scope in `nextflow.config`.
+The nf-co2footprint plugin defines a `co2footprint` configuration scope where you can set your geographic location.
 
-Add a `co2footprint` block to set your location:
+Add a `co2footprint` block to `nextflow.config`:
 
 === "After"
 
