@@ -642,6 +642,13 @@ nextflow run greet.nf -ansi-log false
 
 The pipeline behavior is the same, but the warning is gone and your configuration options are now formally documented within the plugin.
 
+Your plugin now has the same structure as the plugins you used in Part 1.
+When nf-schema exposes a `#!groovy validation {}` block or nf-co2footprint exposes a `#!groovy co2footprint {}` block, they use exactly this pattern: a `ConfigScope` class with annotated fields, registered as an extension point.
+Your `#!groovy greeting {}` block works the same way.
+
+With functions, an observer, and a configuration scope in place, the plugin is feature-complete.
+The final step is getting it into other people's hands.
+
 ---
 
 ## 5. Distribution
