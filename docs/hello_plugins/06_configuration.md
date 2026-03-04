@@ -3,9 +3,10 @@
 Your plugin has custom functions and an observer, but everything is hardcoded.
 Users can't turn the task counter off, or change how it behaves, without editing the source code and rebuilding.
 
-Nextflow plugins can read settings from `nextflow.config`, giving users control over plugin behavior the same way they configure other parts of a pipeline.
-In Part 1, you used this capability when `#!groovy validation {}` controlled how nf-schema handled unrecognized headers and `#!groovy co2footprint {}` set the location for carbon intensity calculations.
-In this section, you'll build the same capability into your own plugin, then learn how to share it.
+Nextflow plugins can read settings from `nextflow.config`, giving users control over plugin behavior.
+You already saw this in Part 1: adding a `#!groovy validation {}` block changed how nf-schema handled unrecognized headers, and adding a `#!groovy co2footprint {}` block told nf-co2footprint which country to use for carbon intensity.
+Those config blocks exist because the plugin authors built that capability in.
+In this section, you'll do the same for your own plugin, then learn how to share it.
 
 !!! tip "Starting from here?"
 
@@ -435,7 +436,8 @@ The `session.config.navigate()` approach works, but has limitations:
 - Manual type conversion with `as String`, `as boolean`, etc.
 
 For production plugins, Nextflow provides a formal configuration system using annotations.
-By creating a config scope class, you define a new top-level configuration block, the same mechanism that plugins like nf-schema and nf-co2footprint use for their `#!groovy validation {}` and `#!groovy co2footprint {}` scopes.
+By creating a config scope class, you define a new top-level configuration block in `nextflow.config`.
+This is the same mechanism behind the `#!groovy validation {}` and `#!groovy co2footprint {}` blocks you used in Part 1.
 
 ### 4.1. Create the config class (minimal version)
 
