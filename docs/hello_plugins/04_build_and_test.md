@@ -67,13 +67,15 @@ This structure makes tests readable: "Given an extension object, expect that `re
 
 ---
 
-## 3. Create the test file
+## 3. Write the tests
+
+### 3.1. Create the test class
 
 ```bash
 touch src/test/groovy/training/plugin/GreetingExtensionTest.groovy
 ```
 
-Open it in your editor and add the following content:
+Open it in your editor and add the empty test class skeleton:
 
 ```groovy title="src/test/groovy/training/plugin/GreetingExtensionTest.groovy" linenums="1"
 package training.plugin
@@ -85,28 +87,114 @@ import spock.lang.Specification
  */
 class GreetingExtensionTest extends Specification {  // (1)!
 
-    def 'should reverse a greeting'() {
-        given:
-        def ext = new GreetingExtension()            // (2)!
-
-        expect:
-        ext.reverseGreeting('Hello') == 'olleH'     // (3)!
-        ext.reverseGreeting('Bonjour') == 'ruojnoB'
-    }
-
-    def 'should decorate a greeting'() {
-        given:
-        def ext = new GreetingExtension()
-
-        expect:
-        ext.decorateGreeting('Hello') == '*** Hello ***'
-    }
 }
 ```
 
-1. All Spock test classes extend `Specification`
-2. Create an instance of your extension to test directly, without running a pipeline
-3. Each line in `expect:` is an assertion; the test passes only if all are `true`
+1. All Spock test classes extend `Specification`. This is the starting point for any Spock test file.
+
+### 3.2. Test reverseGreeting
+
+Add a test method inside the class body.
+This is where the `given:`/`expect:` structure from section 2 becomes practice:
+
+=== "After"
+
+    ```groovy title="GreetingExtensionTest.groovy" linenums="1" hl_lines="10-17"
+    package training.plugin
+
+    import spock.lang.Specification
+
+    /**
+     * Tests for the greeting extension functions
+     */
+    class GreetingExtensionTest extends Specification {
+
+        def 'should reverse a greeting'() {
+            given:
+            def ext = new GreetingExtension()            // (1)!
+
+            expect:
+            ext.reverseGreeting('Hello') == 'olleH'     // (2)!
+            ext.reverseGreeting('Bonjour') == 'ruojnoB'
+        }
+    }
+    ```
+
+    1. Create an instance of your extension to test directly, without running a pipeline
+    2. Each line in `expect:` is an assertion; the test passes only if all are `true`
+
+=== "Before"
+
+    ```groovy title="GreetingExtensionTest.groovy" linenums="1"
+    package training.plugin
+
+    import spock.lang.Specification
+
+    /**
+     * Tests for the greeting extension functions
+     */
+    class GreetingExtensionTest extends Specification {
+
+    }
+    ```
+
+### 3.3. Test decorateGreeting
+
+Add a second test method after the first one:
+
+=== "After"
+
+    ```groovy title="GreetingExtensionTest.groovy" linenums="1" hl_lines="18-25"
+    package training.plugin
+
+    import spock.lang.Specification
+
+    /**
+     * Tests for the greeting extension functions
+     */
+    class GreetingExtensionTest extends Specification {
+
+        def 'should reverse a greeting'() {
+            given:
+            def ext = new GreetingExtension()
+
+            expect:
+            ext.reverseGreeting('Hello') == 'olleH'
+            ext.reverseGreeting('Bonjour') == 'ruojnoB'
+        }
+
+        def 'should decorate a greeting'() {
+            given:
+            def ext = new GreetingExtension()
+
+            expect:
+            ext.decorateGreeting('Hello') == '*** Hello ***'
+        }
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="GreetingExtensionTest.groovy" linenums="1" hl_lines="18"
+    package training.plugin
+
+    import spock.lang.Specification
+
+    /**
+     * Tests for the greeting extension functions
+     */
+    class GreetingExtensionTest extends Specification {
+
+        def 'should reverse a greeting'() {
+            given:
+            def ext = new GreetingExtension()
+
+            expect:
+            ext.reverseGreeting('Hello') == 'olleH'
+            ext.reverseGreeting('Bonjour') == 'ruojnoB'
+        }
+    }
+    ```
 
 ---
 
