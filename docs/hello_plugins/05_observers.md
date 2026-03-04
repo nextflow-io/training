@@ -252,7 +252,12 @@ Each time a task finishes, Nextflow calls `onProcessComplete`, and our implement
 
 ### 2.4. Add counting logic
 
-Update `TaskCounterObserver.groovy` to track a count and report a summary:
+The minimal observer proves the hook works, but it doesn't track anything.
+The next version adds a counter variable (`taskCount`) that starts at zero.
+Each time a task completes, the counter goes up by one.
+When the entire workflow finishes, the observer prints the final total.
+
+Update `TaskCounterObserver.groovy` with the highlighted changes:
 
 ```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="14 18-19 22-24"
 package training.plugin
@@ -283,15 +288,9 @@ class TaskCounterObserver implements TraceObserver {
 }
 ```
 
-1. A private instance variable that persists across method calls
-2. Increment the counter and print the running total each time a task completes
-3. `onFlowComplete` is called once when the workflow finishes, perfect for a summary
-
-The key additions:
-
-- A private instance variable `taskCount` persists across method calls
-- `onProcessComplete` increments the counter and prints the running total
-- `onFlowComplete` is called once when the workflow finishes, perfect for a summary
+1. `taskCount` is a variable that belongs to the observer object. It keeps its value between method calls, so it can accumulate a count across the whole workflow run. `private` means only this class can access it.
+2. `taskCount++` adds one to the counter. This line runs every time a task completes, so the count grows as the workflow progresses.
+3. `onFlowComplete` is a second lifecycle hook. It runs once when the workflow finishes, making it a good place to print a summary.
 
 Rebuild and test:
 
