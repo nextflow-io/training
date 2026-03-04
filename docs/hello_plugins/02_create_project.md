@@ -235,6 +235,7 @@ make assemble && make install
 ??? info "What is `./gradlew`?"
 
     The `./gradlew` script is the **Gradle wrapper**, a small script included with the project that automatically downloads and runs the correct version of Gradle.
+    (If you're unfamiliar with Gradle, see the [Java, Groovy, and Gradle primer](00_orientation.md#2-verify-java-installation) in the Orientation.)
 
     This means you don't need Gradle installed on your system.
     The `make` commands in the Makefile are shortcuts that call `./gradlew` for you.
