@@ -471,10 +471,10 @@ It does **not** replace your `navigate()` calls. Instead, it works alongside the
 
 ```mermaid
 flowchart LR
-    A["nextflow.config\ngreeting { ... }"] --> B["ConfigScope\n<i>declares valid options</i>"]
-    A --> C["navigate()\n<i>reads values at runtime</i>"]
-    B -. "validates &\ndocuments" .-> A
-    C -- "provides values to" --> D["Plugin code\n<i>factory, extension</i>"]
+    A["nextflow.config<br/>greeting { ... }"] --> B["ConfigScope<br/><i>declares valid options</i>"]
+    A --> C["navigate()<br/><i>reads values at runtime</i>"]
+    B -. "validates &<br/>documents" .-> A
+    C -- "provides values to" --> D["Plugin code<br/><i>factory, extension</i>"]
 
     style B fill:#e8f5e9,stroke:#4caf50
     style C fill:#e3f2fd,stroke:#2196f3
