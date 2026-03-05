@@ -1,0 +1,46 @@
+# German translation glossary for post-processing enforcement.
+# These translations are applied deterministically, overriding LLM output.
+
+# AI translation notice (span format for regular pages)
+translation_notice:
+  text: "KI-gestützte Übersetzung - [mehr erfahren & Verbesserungen vorschlagen](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)"
+  homepage:
+    title: "KI-gestützte Übersetzung"
+    body: |
+      Diese Übersetzung wurde mit künstlicher Intelligenz erstellt und von menschlichen Übersetzern überprüft.
+      Wir freuen uns über Feedback und Verbesserungsvorschläge.
+      Weitere Informationen findest du in unserer [Übersetzungsanleitung](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md).
+
+# Tab labels (must be consistent for MkDocs tab synchronization)
+tab_labels:
+  After: Danach
+  Before: Vorher
+
+# Bare admonition titles (keyword → default translated title)
+admonition_titles:
+  note: Hinweis
+  tip: Tipp
+  warning: Warnung
+  info: Info
+  exercise: Übung
+  solution: Lösung
+  example: Beispiel
+  danger: Gefahr
+  hint: Hinweis
+
+# Standard admonition title translations (high-frequency titles)
+admonition_title_glossary:
+  "Command output": Befehlsausgabe
+  "Directory contents": Verzeichnisinhalt
+  "File contents": Dateiinhalt
+  "Scenario": Szenario
+  "How to begin from this section": "Wie du von diesem Abschnitt aus beginnst"
+  "Full code file": "Vollständige Code-Datei"
+  "Work directory contents": "Work-Verzeichnis Inhalt"
+  "Results directory contents": "Results-Verzeichnis Inhalt"
+  "Examples": Beispiele
+  "Directory contents (symlinks shortened)": "Verzeichnisinhalt (Symlinks gekürzt)"
+  "Don't see the same thing?": "Siehst du nicht dasselbe?"
+  "Command output (edited for clarity)": "Befehlsausgabe (zur Klarheit bearbeitet)"
+  "Directory and file contents": "Verzeichnis- und Dateiinhalte"
+  "Workflow code": Workflow-Code

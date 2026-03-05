@@ -1,0 +1,24 @@
+# UI strings for translation - English source
+# These strings are used by index_page_hook.py for course landing pages
+# and in mkdocs.yml for cookie consent.
+#
+# When adding a new language, copy this file to docs/<lang>/ui-strings.yml
+# and translate all values.
+
+index_page:
+  course_summary: "Course summary"
+  additional_information: "Additional information"
+  technical_requirements: "Technical requirements"
+  learning_objectives: "Learning objectives"
+  audience_prerequisites: "Audience & prerequisites"
+  course_videos: "Course videos"
+
+defaults:
+  technical_requirements: >-
+    You will need a GitHub account OR a local installation of Nextflow.
+    See [Environment options](../envsetup/index.md) for more details.
+  videos: >-
+    Videos are available for each chapter, featuring an instructor working
+    through the exercises. The video for each part of the course is embedded
+    at the top of the corresponding page.
+  view_playlist: "View the playlist on YouTube"

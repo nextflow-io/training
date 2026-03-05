@@ -1,0 +1,20 @@
+# UI strings for translation - Turkish (Türkçe)
+# Bu dizeler, kurs giriş sayfaları için index_page_hook.py tarafından
+# ve çerez onayı için mkdocs.yml'de kullanılır.
+
+index_page:
+  course_summary: "Kurs Özeti"
+  additional_information: "Ek Bilgiler"
+  technical_requirements: "Teknik Gereksinimler"
+  learning_objectives: "Öğrenme Hedefleri"
+  audience_prerequisites: "Hedef Kitle ve Ön Koşullar"
+  course_videos: "Kurs Videoları"
+
+defaults:
+  technical_requirements: >-
+    Bir GitHub hesabına VEYA yerel bir Nextflow kurulumuna ihtiyacınız olacak.
+    Daha fazla ayrıntı için [Ortam seçenekleri](../envsetup/index.md) sayfasına bakın.
+  videos: >-
+    Her bölüm için eğitmenin alıştırmaları yaptığı videolar mevcuttur.
+    Kursun her bölümüne ait video, ilgili sayfanın üst kısmına yerleştirilmiştir.
+  view_playlist: "YouTube'da oynatma listesini görüntüle"

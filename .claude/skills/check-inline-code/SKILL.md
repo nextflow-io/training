@@ -7,6 +7,8 @@ description: Review inline code in markdown files for proper formatting and synt
 
 Review inline code in markdown files for proper formatting and appropriate use of syntax highlighting.
 
+See [../shared/repo-conventions.md](../shared/repo-conventions.md) for file conventions.
+
 ## What to Check
 
 ### 1. Missing Backticks

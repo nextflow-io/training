@@ -1,0 +1,1 @@
+Ceci est un espace réservé pour les futures Quêtes secondaires (formations approfondies). Les documents actuellement présents ici sont des ébauches basées sur du contenu recyclé provenant d'autres sources.

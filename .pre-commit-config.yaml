@@ -20,8 +20,8 @@ repos:
       - id: trailing-whitespace
         exclude_types:
           - svg
-        exclude: hello-plugins/.*/COPYING$
+        exclude: (^hello-nf-core/solutions/core-hello-.*/)|(hello-plugins/.*/COPYING$)
       - id: end-of-file-fixer
         exclude_types:
           - svg
-        exclude: hello-plugins/.*/COPYING$
+        exclude: (^hello-nf-core/solutions/core-hello-.*/)|(hello-plugins/.*/COPYING$)

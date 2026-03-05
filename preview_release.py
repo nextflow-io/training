@@ -19,6 +19,7 @@ See CONTRIBUTING.md for full documentation.
 """
 
 import atexit
+import concurrent.futures
 import hashlib
 import json
 import os
@@ -46,6 +47,7 @@ WORK_DIR = Path(".preview-release")
 CERTS_DIR = WORK_DIR / "certs"
 SITE_DIR = WORK_DIR / "site"
 CADDYFILE = WORK_DIR / "Caddyfile"
+DOCS_DIR = Path("docs")
 
 # Rich console
 console = Console()
@@ -205,6 +207,15 @@ def check_dependencies():
     status_msg("setup", "mkcert CA trusted by system", success=True)
 
 
+def discover_languages() -> list[str]:
+    """Discover all available language directories with mkdocs.yml."""
+    languages = []
+    for lang_dir in sorted(DOCS_DIR.iterdir()):
+        if lang_dir.is_dir() and (lang_dir / "mkdocs.yml").exists():
+            languages.append(lang_dir.name)
+    return languages
+
+
 def generate_certificates():
     """Generate TLS certificates for the domain."""
     status_msg("setup", "Generating certificates...")
@@ -279,77 +290,117 @@ def fetch_gh_pages():
         )
 
 
-def compute_source_hash():
-    """Compute a hash of source files to detect changes."""
+def compute_source_hash(lang: str) -> str:
+    """Compute a hash of source files for a specific language to detect changes."""
     hasher = hashlib.md5()
+    source_path = DOCS_DIR / lang
 
-    # Hash key source directories and files
-    source_paths = [
-        Path("docs"),
-        Path("mkdocs.yml"),
-    ]
-
-    for source_path in source_paths:
-        if not source_path.exists():
-            continue
-        if source_path.is_file():
-            hasher.update(source_path.read_bytes())
-        else:
-            # For directories, hash all markdown and config files
-            for file in sorted(source_path.rglob("*")):
-                if file.is_file() and file.suffix in (
-                    ".md",
-                    ".yml",
-                    ".yaml",
-                    ".css",
-                    ".js",
-                    ".html",
-                ):
-                    try:
-                        hasher.update(str(file).encode())
-                        hasher.update(file.read_bytes())
-                    except (IOError, OSError):
-                        pass
+    for file in sorted(source_path.rglob("*")):
+        if file.is_file() and file.suffix in (
+            ".md",
+            ".yml",
+            ".yaml",
+            ".css",
+            ".js",
+            ".html",
+        ):
+            hasher.update(str(file).encode())
+            hasher.update(file.read_bytes())
 
     return hasher.hexdigest()[:12]
 
 
-def build_docs(version: str):
-    """Build docs for the specified version using Docker."""
-    version_dir = SITE_DIR / version
-    hash_file = WORK_DIR / f"{version}.hash"
+def get_lang_paths(version: str, lang: str) -> tuple[Path, Path]:
+    """Get output directory and hash file paths for a language.
 
-    # Compute current source hash
-    current_hash = compute_source_hash()
+    English is built at the version root, other languages in subdirectories.
+    """
+    if lang == "en":
+        return SITE_DIR / version, WORK_DIR / f"{version}-{lang}.hash"
+    return SITE_DIR / version / lang, WORK_DIR / f"{version}-{lang}.hash"
 
-    # Check if we can skip the build
-    if (
-        version_dir.exists()
-        and (version_dir / "index.html").exists()
+
+def is_cached(output_dir: Path, hash_file: Path, current_hash: str) -> bool:
+    """Check if a build is cached and up-to-date."""
+    return (
+        output_dir.exists()
+        and (output_dir / "index.html").exists()
         and hash_file.exists()
-    ):
-        stored_hash = hash_file.read_text().strip()
-        if stored_hash == current_hash:
-            status_msg(
-                "setup",
-                f"v{version} already built [dim](source unchanged)[/dim]",
-                success=True,
-            )
-            return
-        else:
-            status_msg("setup", "Source files changed, rebuilding...")
-            shutil.rmtree(version_dir)
+        and hash_file.read_text().strip() == current_hash
+    )
 
-    # Ensure clean build directory (use rm -rf to handle root-owned files from Docker)
-    if version_dir.exists():
-        run_cmd(["rm", "-rf", str(version_dir)], check=False)
-    version_dir.mkdir(parents=True, exist_ok=True)
-    # Make directory world-writable so Docker container can write to it
-    run_cmd(["chmod", "-R", "777", str(version_dir)], check=False)
 
-    # Get absolute paths
+def build_single_language(
+    version: str, lang: str, repo_root: Path
+) -> tuple[str, bool, str]:
+    """Build docs for a single language. Returns (lang, success, error_message)."""
+    output_dir, hash_file = get_lang_paths(version, lang)
+    current_hash = compute_source_hash(lang)
+
+    if is_cached(output_dir, hash_file, current_hash):
+        return (lang, True, "cached")
+
+    # Clean and prepare build directory
+    if output_dir.exists():
+        subprocess.run(["rm", "-rf", str(output_dir)], check=False)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    subprocess.run(["chmod", "-R", "777", str(output_dir)], check=False)
+
+    # Build using Docker
+    result = subprocess.run(
+        [
+            "docker",
+            "run",
+            "--rm",
+            "-v",
+            f"{repo_root}:/docs",
+            "-w",
+            f"/docs/docs/{lang}",
+            "ghcr.io/nextflow-io/training-mkdocs:latest",
+            "build",
+            "-d",
+            f"/docs/{output_dir}",
+        ],
+        capture_output=True,
+        text=True,
+    )
+
+    if result.returncode != 0:
+        return (lang, False, result.stderr + result.stdout)
+
+    hash_file.write_text(current_hash)
+    return (lang, True, "built")
+
+
+def build_docs(version: str, languages: list[str], parallel: bool = True):
+    """Build docs for the specified version and languages using Docker."""
     repo_root = Path.cwd().resolve()
+    (SITE_DIR / version).mkdir(parents=True, exist_ok=True)
 
+    # Check which languages need building
+    to_build = []
+    cached = []
+    for lang in languages:
+        output_dir, hash_file = get_lang_paths(version, lang)
+        if is_cached(output_dir, hash_file, compute_source_hash(lang)):
+            cached.append(lang)
+        else:
+            to_build.append(lang)
+
+    if cached:
+        status_msg(
+            "setup",
+            f"Cached: {', '.join(cached)} [dim](source unchanged)[/dim]",
+            success=True,
+        )
+
+    if not to_build:
+        status_msg("setup", f"v{version} already built", success=True)
+        return
+
+    status_msg("setup", f"Building: {', '.join(to_build)}...")
+
+    failed = []
     with Progress(
         TextColumn(""),
         SpinnerColumn(),
@@ -357,38 +408,43 @@ def build_docs(version: str):
         console=console,
         transient=True,
     ) as progress:
-        progress.add_task(
-            f"Building v{version} docs (this may take a few minutes)...", total=None
-        )
+        if parallel and len(to_build) > 1:
+            progress.add_task(
+                f"Building {len(to_build)} languages in parallel...", total=None
+            )
+            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
+                futures = {
+                    executor.submit(
+                        build_single_language, version, lang, repo_root
+                    ): lang
+                    for lang in to_build
+                }
+                for future in concurrent.futures.as_completed(futures):
+                    lang, success, msg = future.result()
+                    if not success:
+                        failed.append((lang, msg))
+        else:
+            for lang in to_build:
+                progress.add_task(f"Building {lang}...", total=None)
+                lang, success, msg = build_single_language(version, lang, repo_root)
+                if not success:
+                    failed.append((lang, msg))
 
-        result = run_cmd(
-            [
-                "docker",
-                "run",
-                "--rm",
-                "-v",
-                f"{repo_root}:/docs",
-                "-e",
-                "CARDS=false",
-                "ghcr.io/nextflow-io/training-mkdocs:latest",
-                "build",
-                "-d",
-                f"/docs/{WORK_DIR}/site/{version}",
-            ],
-            check=False,
-            capture=True,
+    if failed:
+        status_msg(
+            "setup",
+            f"Build failed for: {', '.join(l for l, _ in failed)}",
+            success=False,
         )
-
-    if result.returncode != 0:
-        status_msg("setup", "Docker build failed", success=False)
-        console.print(result.stderr)
-        console.print(result.stdout)
+        for lang, msg in failed:
+            console.print(f"[red]{lang}:[/red] {msg}")
         sys.exit(1)
 
-    # Save hash for future cache checks
-    hash_file.write_text(current_hash)
-
-    status_msg("setup", f"v{version} built successfully", success=True)
+    status_msg(
+        "setup",
+        f"v{version} built successfully ({len(languages)} languages)",
+        success=True,
+    )
 
 
 def update_versions_json(version: str):
@@ -538,8 +594,20 @@ def run_server(version: str):
     is_flag=True,
     help="Delete work directory on exit (default: keep for faster restart)",
 )
+@click.option(
+    "--all-languages",
+    "-a",
+    is_flag=True,
+    help="Build all languages (default: English only)",
+)
+@click.option(
+    "--sequential",
+    "-s",
+    is_flag=True,
+    help="Build languages sequentially instead of in parallel",
+)
 @click.pass_context
-def cli(ctx, version: str | None, clean: bool):
+def cli(ctx, version: str | None, clean: bool, all_languages: bool, sequential: bool):
     """
     **Preview Release** - Serve training docs locally at production URL.
 
@@ -550,6 +618,9 @@ def cli(ctx, version: str | None, clean: bool):
     **First-time setup:** Run `mkcert -install` once as your regular user.
 
     **Note:** Do not run with sudo. The script will prompt for sudo when needed.
+
+    **Languages:** By default, only English is built for faster iteration.
+    Use `--all-languages` to build all available translations.
     """
     global _keep_files
     _keep_files = not clean
@@ -559,7 +630,7 @@ def cli(ctx, version: str | None, clean: bool):
         return
 
     # Ensure we're in the repo root
-    if not Path("mkdocs.yml").exists():
+    if not Path("docs/en/mkdocs.yml").exists():
         console.print("[red]Error:[/red] Must be run from the training repository root")
         sys.exit(1)
 
@@ -572,6 +643,14 @@ def cli(ctx, version: str | None, clean: bool):
             )
             sys.exit(1)
 
+        # Determine which languages to build
+        if all_languages:
+            languages = discover_languages()
+            status_msg("setup", f"Building all languages: {', '.join(languages)}")
+        else:
+            languages = ["en"]
+            status_msg("setup", "Building English only (use -a for all languages)")
+
         # Register cleanup handlers
         atexit.register(cleanup)
         signal.signal(signal.SIGINT, lambda s, f: sys.exit(0))
@@ -582,7 +661,7 @@ def cli(ctx, version: str | None, clean: bool):
         modify_hosts()  # Do this early so user isn't prompted after long build
         generate_certificates()
         fetch_gh_pages()
-        build_docs(version)
+        build_docs(version, languages, parallel=not sequential)
         update_versions_json(version)
         create_caddyfile()
 
@@ -597,7 +676,7 @@ def cli(ctx, version: str | None, clean: bool):
 def status():
     """Show current preview release status."""
     # Ensure we're in the repo root
-    if not Path("mkdocs.yml").exists():
+    if not Path("docs/en/mkdocs.yml").exists():
         console.print("[red]Error:[/red] Must be run from the training repository root")
         sys.exit(1)
 

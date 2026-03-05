@@ -1,0 +1,42 @@
+# Spanish translation glossary for post-processing enforcement.
+# These translations are applied deterministically, overriding LLM output.
+
+translation_notice:
+  text: "Traducción asistida por IA - [más información y sugerencias](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)"
+  homepage:
+    title: "Traducción asistida por IA"
+    body: |
+      Esta traducción fue creada utilizando inteligencia artificial y revisada por traductores humanos.
+      Agradecemos sus comentarios y sugerencias de mejora.
+      Consulte nuestra [guía de traducción](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md) para más información.
+
+tab_labels:
+  After: Después
+  Before: Antes
+
+admonition_titles:
+  note: Nota
+  tip: Consejo
+  warning: Advertencia
+  info: Info
+  exercise: Ejercicio
+  solution: Solución
+  example: Ejemplo
+  danger: Peligro
+  hint: Pista
+
+admonition_title_glossary:
+  "Command output": "Salida del comando"
+  "Directory contents": "Contenido del directorio"
+  "File contents": "Contenido del archivo"
+  "Scenario": Escenario
+  "How to begin from this section": "Cómo comenzar desde esta sección"
+  "Full code file": "Archivo de código completo"
+  "Work directory contents": "Contenido del directorio work"
+  "Results directory contents": "Contenido del directorio de resultados"
+  "Examples": Ejemplos
+  "Directory contents (symlinks shortened)": "Contenido del directorio (enlaces simbólicos acortados)"
+  "Don't see the same thing?": "¿No ve lo mismo?"
+  "Command output (edited for clarity)": "Salida del comando (editada para claridad)"
+  "Directory and file contents": "Contenido de directorio y archivo"
+  "Workflow code": "Código del flujo de trabajo"

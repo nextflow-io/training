@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 

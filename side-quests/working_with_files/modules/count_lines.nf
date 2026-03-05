@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 process COUNT_LINES {
     debug true
 

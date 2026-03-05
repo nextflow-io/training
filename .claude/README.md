@@ -165,7 +165,8 @@ Claude will automatically use these skills when appropriate, or you can mention 
 
 - DSL2 syntax only
 - UPPERCASE process names
-- Always include shebang: `#!/usr/bin/env nextflow`
+- Always include shebang: `#!/usr/bin/env nextflow` in scripts with an entry workflow
+- Do not include shebang in module files, i.e. `**/modules/*.nf`
 - Use params for configurable values: `params.input = 'default'`
 
 ### Code Blocks
@@ -208,7 +209,7 @@ Automatically runs heading validation when you submit a prompt:
 
 4. **Update Navigation**
 
-   - Manually edit mkdocs.yml to add new content
+   - Manually edit `docs/en/mkdocs.yml` to add new content
    - Or just ask Claude to update it
 
 5. **Preview Locally**
@@ -233,5 +234,6 @@ Consider also using:
 ## Additional Resources
 
 - **CONTRIBUTING.md** - Full contribution guidelines
+- **TRANSLATING.md** - Translation guide (all translations are AI-generated)
 - **Training Site** - https://training.nextflow.io
 - **Nextflow Docs** - https://www.nextflow.io/docs/latest/

@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 /*
  * Collect uppercase greetings into a single output file
  */

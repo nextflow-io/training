@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 /*
     * Generate ASCII art with cowpy
 */

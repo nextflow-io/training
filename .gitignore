@@ -7,8 +7,17 @@ work
 results
 transcript-index
 .vscode
-site/
 .playwright-mcp/
 .preview-release/
 __pycache__
 *.pyc
+
+# Build outputs
+site/
+site_build/
+docs/*/site/
+docs/*/site_build/
+
+# Python virtual environments
+.venv/
+_scripts/.venv/
