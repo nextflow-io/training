@@ -180,12 +180,12 @@ Update it to match your installed Nextflow version for full compatibility:
 The plugin source code lives in `src/main/groovy/training/plugin/`.
 There are four source files, each with a distinct role:
 
-| File | Role | Modified in |
-| --- | --- | --- |
-| `GreetingPlugin.groovy` | Entry point that Nextflow loads first | Never (generated) |
-| `GreetingExtension.groovy` | Defines functions callable from workflows | Part 3 |
-| `GreetingFactory.groovy` | Creates observer instances when a workflow starts | Part 5 |
-| `GreetingObserver.groovy` | Runs code in response to workflow lifecycle events | Part 5 |
+| File                       | Role                                               | Modified in       |
+| -------------------------- | -------------------------------------------------- | ----------------- |
+| `GreetingPlugin.groovy`    | Entry point that Nextflow loads first              | Never (generated) |
+| `GreetingExtension.groovy` | Defines functions callable from workflows          | Part 3            |
+| `GreetingFactory.groovy`   | Creates observer instances when a workflow starts  | Part 5            |
+| `GreetingObserver.groovy`  | Runs code in response to workflow lifecycle events | Part 5            |
 
 You don't need to read these files now.
 Each one is introduced in detail in the parts listed above, when you first modify it.

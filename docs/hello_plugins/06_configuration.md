@@ -16,14 +16,14 @@ In this section, you'll do the same for your own plugin.
 
 **What you'll change:**
 
-| File                       | Change                                           |
-| -------------------------- | ------------------------------------------------ |
+| File                         | Change                                           |
+| ---------------------------- | ------------------------------------------------ |
 | `TaskCounterObserver.groovy` | Accept a `verbose` flag from the factory         |
-| `GreetingFactory.groovy`   | Read config values and pass them to the observer |
-| `GreetingExtension.groovy` | Read prefix/suffix config in `init()`            |
-| `GreetingConfig.groovy`    | New file: formal `@ConfigScope` class            |
-| `build.gradle`             | Register the config class as an extension point  |
-| `nextflow.config`          | Add a `#!groovy greeting {}` block to test it    |
+| `GreetingFactory.groovy`     | Read config values and pass them to the observer |
+| `GreetingExtension.groovy`   | Read prefix/suffix config in `init()`            |
+| `GreetingConfig.groovy`      | New file: formal `@ConfigScope` class            |
+| `build.gradle`               | Register the config class as an extension point  |
+| `nextflow.config`            | Add a `#!groovy greeting {}` block to test it    |
 
 !!! tip "Starting from here?"
 
@@ -39,9 +39,9 @@ In this section, you'll do the same for your own plugin.
 
 Nextflow provides two approaches for plugin configuration, and they serve different purposes:
 
-| Approach                    | Purpose                            | Trade-offs                              |
-| -------------------------- | ---------------------------------- | --------------------------------------- |
-| `session.config.navigate()` | **Read** config values at runtime  | No IDE support, manual type conversion  |
+| Approach                    | Purpose                               | Trade-offs                              |
+| --------------------------- | ------------------------------------- | --------------------------------------- |
+| `session.config.navigate()` | **Read** config values at runtime     | No IDE support, manual type conversion  |
 | `@ConfigScope` classes      | **Declare** what config options exist | More code, but type-safe and documented |
 
 These two approaches work together.
@@ -739,9 +739,9 @@ You learned that:
 - Variables must be declared before use in Groovy/Java
 - Use semantic versioning and the public registry to distribute plugins
 
-| Use case                            | Recommended approach                                  |
-| ----------------------------------- | ----------------------------------------------------- |
-| Quick prototype or simple plugin    | `session.config.navigate()` only                      |
+| Use case                            | Recommended approach                                        |
+| ----------------------------------- | ----------------------------------------------------------- |
+| Quick prototype or simple plugin    | `session.config.navigate()` only                            |
 | Production plugin with many options | Add a `ConfigScope` class alongside your `navigate()` calls |
 | Plugin you'll share publicly        | Add a `ConfigScope` class alongside your `navigate()` calls |
 
