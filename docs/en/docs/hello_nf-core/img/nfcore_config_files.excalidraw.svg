@@ -1,0 +1,82 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" width="1100" height="680">
+  <!-- svg-source:excalidraw -->
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrow-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8b5cf6"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="680" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="550" y="35" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#1e1e1e">nf-core Configuration Files</text>
+
+  <!-- Top: nextflow.config -->
+  <rect x="400" y="60" width="300" height="52" rx="10" fill="#d0bfff" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="550" y="92" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#5b21b6">nextflow.config</text>
+  <text x="550" y="130" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#757575">Loads all other configs, sets defaults</text>
+
+  <!-- Arrows from nextflow.config -->
+  <line x1="450" y1="112" x2="230" y2="195" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <line x1="550" y1="112" x2="550" y2="195" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow-purple)"/>
+  <line x1="650" y1="112" x2="870" y2="195" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow-purple)"/>
+
+  <!-- Left: base.config zone -->
+  <rect x="30" y="200" width="370" height="310" rx="12" fill="#dbe4ff" fill-opacity="0.25" stroke="#4a9eed" stroke-width="1"/>
+
+  <rect x="80" y="215" width="270" height="48" rx="10" fill="#a5d8ff" stroke="#4a9eed" stroke-width="2"/>
+  <text x="215" y="245" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#1e3a5f">conf/base.config</text>
+
+  <text x="70" y="290" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#2563eb">Resource labels:</text>
+  <text x="85" y="315" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">process_low      2 CPUs, 12 GB</text>
+  <text x="85" y="338" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">process_medium   6 CPUs, 36 GB</text>
+  <text x="85" y="361" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">process_high    12 CPUs, 72 GB</text>
+
+  <text x="70" y="400" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#2563eb">Override with:</text>
+  <rect x="70" y="412" width="300" height="34" rx="6" fill="#ffffff" stroke="#4a9eed" stroke-width="1"/>
+  <text x="220" y="434" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#1e1e1e">withName: 'FASTQC' { cpus = 2 }</text>
+  <text x="70" y="468" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#757575">in your custom.config passed via -c</text>
+
+  <!-- Center: modules.config zone -->
+  <rect x="420" y="200" width="370" height="310" rx="12" fill="#ffd8a8" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1"/>
+
+  <rect x="460" y="215" width="290" height="48" rx="10" fill="#ffd8a8" stroke="#f59e0b" stroke-width="2"/>
+  <text x="605" y="245" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#7c2d12">conf/modules.config</text>
+
+  <text x="450" y="290" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#c05000">Per-process settings:</text>
+  <text x="465" y="315" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">FASTQC:</text>
+  <text x="485" y="338" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">ext.args = '--quiet'</text>
+  <text x="465" y="365" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">MULTIQC:</text>
+  <text x="485" y="388" font-family="Courier New, monospace" font-size="13" fill="#1e1e1e">ext.args = title from params</text>
+
+  <text x="450" y="418" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#c05000">Override with:</text>
+  <rect x="450" y="430" width="310" height="34" rx="6" fill="#ffffff" stroke="#f59e0b" stroke-width="1"/>
+  <text x="605" y="452" text-anchor="middle" font-family="Courier New, monospace" font-size="13" fill="#1e1e1e">withName: 'X' { ext.args = '...' }</text>
+  <text x="450" y="486" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#757575">in your custom.config passed via -c</text>
+
+  <!-- Right: test.config zone -->
+  <rect x="810" y="200" width="270" height="310" rx="12" fill="#b2f2bb" fill-opacity="0.25" stroke="#22c55e" stroke-width="1"/>
+
+  <rect x="830" y="215" width="230" height="48" rx="10" fill="#b2f2bb" stroke="#22c55e" stroke-width="2"/>
+  <text x="945" y="245" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#15803d">conf/test.config</text>
+
+  <text x="840" y="290" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#15803d">Test profile settings:</text>
+  <text x="855" y="315" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">resourceLimits</text>
+  <text x="870" y="338" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">cpus: 4, memory: 4 GB</text>
+  <text x="855" y="370" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">params.input</text>
+  <text x="870" y="393" font-family="Courier New, monospace" font-size="13" fill="#1e1e1e">test samplesheet URL</text>
+
+  <text x="840" y="430" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#15803d">Activated via:</text>
+  <rect x="840" y="445" width="220" height="34" rx="6" fill="#ffffff" stroke="#22c55e" stroke-width="1"/>
+  <text x="950" y="467" text-anchor="middle" font-family="Courier New, monospace" font-size="14" fill="#1e1e1e">-profile test</text>
+
+  <text x="855" y="500" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#757575">Also: conf/test_full.config for</text>
+  <text x="855" y="516" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#757575">full-sized test datasets</text>
+
+  <!-- Bottom: your custom.config -->
+  <rect x="200" y="570" width="700" height="52" rx="10" fill="#fff3bf" stroke="#f59e0b" stroke-width="2"/>
+  <text x="550" y="602" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="bold" fill="#92400e">Your custom.config  (passed via -c)  overrides any of the above</text>
+</svg>
