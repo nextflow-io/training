@@ -186,7 +186,7 @@ To prevent specific directories under `docs/en/docs/` from being translated, add
 
 ```yaml
 exclude_dirs:
-  - side_quests
+  - example_docs_set
   - archive
 ```
 
