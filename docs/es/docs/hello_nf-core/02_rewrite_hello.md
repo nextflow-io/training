@@ -73,7 +73,7 @@ Una vez que la TUI se cierre, deberías ver la siguiente salida en la consola.
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.4.1 - https://nf-co.re
+        nf-core/tools version 3.5.2 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.
@@ -231,7 +231,7 @@ Si miras dentro del archivo `main.nf`, verás que importa un workflow llamado `H
 
 Esto es equivalente al workflow `workflows/demo.nf` que encontramos en la Parte 1, y sirve como workflow placeholder para nuestro workflow de interés, con algo de funcionalidad nf-core ya en su lugar.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 35"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -257,7 +257,25 @@ workflow HELLO {
     //
     // Recopilar y guardar versiones de software
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
@@ -286,6 +304,13 @@ Comparado con un workflow básico de Nextflow como el desarrollado en [Hello Nex
 - Las salidas se declaran usando la palabra clave `emit:`
 
 Estas son características opcionales de Nextflow que hacen que el workflow sea **componible**, lo que significa que puede ser llamado desde dentro de otro workflow.
+
+!!! note "El bloque `Channel.topic`"
+
+    Puede que hayas notado el bloque `def topic_versions = Channel.topic("versions")` que comienza en la línea 17.
+    Este es código de mantenimiento estándar que recopila información de versiones de software de todos los módulos automáticamente.
+    nf-core está implementando este mecanismo en todos los pipelines en 2026, por lo que lo verás en todos los nuevos pipelines a partir de ahora.
+    La Parte 4 de este curso explica cómo funciona en detalle.
 
 !!! note "Workflows componibles en profundidad"
 
@@ -698,7 +723,25 @@ workflow HELLO {
     //
     // Recopilar y guardar versiones de software
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
@@ -719,7 +762,9 @@ workflow HELLO {
 */
 ```
 
-En general, este código hace muy poco aparte de algunas tareas de mantenimiento que tienen que ver con capturar la versión de cualquier herramienta de software que se ejecute en el pipeline.
+Las líneas destacadas definen la estructura del workflow componible: `workflow HELLO {`, `take:`, `main:` y `emit:`.
+El bloque extenso entre las líneas 17–34 es más sustancial: maneja la captura de versiones de software usando topic channels, un mecanismo que nf-core está implementando en todos los pipelines en 2026.
+Lo explicaremos en la Parte 4; por ahora, trátalo como código estándar que puedes dejar sin modificar.
 
 Necesitamos agregar el código relevante del workflow componible original que desarrollamos en la sección 2.
 
@@ -732,7 +777,8 @@ Vamos a abordar esto en las siguientes etapas:
 
 !!! note "Nota"
 
-    Vamos a ignorar la captura de versión por este primer paso y veremos cómo conectar eso en una parte posterior de este entrenamiento.
+    Vamos a ignorar el bloque de captura de versiones por este primer paso.
+    La Parte 4 explica cómo funciona.
 
 ### 3.1. Copiar los módulos y configurar las importaciones de módulos
 
@@ -879,7 +925,25 @@ Este orden tiene sentido porque en un pipeline real, los procesos emitirían inf
         //
         // Recopilar y guardar versiones de software
         //
-        softwareVersionsToYAML(ch_versions)
+        def topic_versions = Channel.topic("versions")
+            .distinct()
+            .branch { entry ->
+                versions_file: entry instanceof Path
+                versions_tuple: true
+            }
+
+        def topic_versions_string = topic_versions.versions_tuple
+            .map { process, tool, version ->
+                [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            }
+            .groupTuple(by:0)
+            .map { process, tool_versions ->
+                tool_versions.unique().sort()
+                "${process}:\n${tool_versions.join('\n')}"
+            }
+
+        softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+            .mix(topic_versions_string)
             .collectFile(
                 storeDir: "${params.outdir}/pipeline_info",
                 name:  'hello_software_'  + 'versions.yml',
@@ -908,7 +972,25 @@ Este orden tiene sentido porque en un pipeline real, los procesos emitirían inf
         //
         // Recopilar y guardar versiones de software
         //
-        softwareVersionsToYAML(ch_versions)
+        def topic_versions = Channel.topic("versions")
+            .distinct()
+            .branch { entry ->
+                versions_file: entry instanceof Path
+                versions_tuple: true
+            }
+
+        def topic_versions_string = topic_versions.versions_tuple
+            .map { process, tool, version ->
+                [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            }
+            .groupTuple(by:0)
+            .map { process, tool_versions ->
+                tool_versions.unique().sort()
+                "${process}:\n${tool_versions.join('\n')}"
+            }
+
+        softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+            .mix(topic_versions_string)
             .collectFile(
                 storeDir: "${params.outdir}/pipeline_info",
                 name:  'hello_software_'  + 'versions.yml',
@@ -949,7 +1031,7 @@ Finalmente, necesitamos actualizar el bloque `emit` para incluir la declaración
 
 === "Después"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="55" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // canal: [ path(versions.yml) ]
@@ -957,7 +1039,7 @@ Finalmente, necesitamos actualizar el bloque `emit` para incluir la declaración
 
 === "Antes"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="55"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
         emit:
         versions       = ch_versions                 // canal: [ path(versions.yml) ]
     ```
@@ -1145,7 +1227,7 @@ La buena noticia es que las necesidades de nuestro pipeline son mucho más simpl
 
 Como recordatorio, así se veía la construcción del canal (como se ve en el directorio de soluciones):
 
-```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
+```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="2"
     // crear un canal para entradas desde un archivo CSV
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
@@ -1270,7 +1352,7 @@ Y ya que estamos en eso, ajustemos los límites de recursos predeterminados para
 
 === "Después"
 
-    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3-4"
     process {
         resourceLimits = [
             cpus: 2,
@@ -1282,7 +1364,7 @@ Y ya que estamos en eso, ajustemos los límites de recursos predeterminados para
 
 === "Antes"
 
-    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3-4"
     process {
         resourceLimits = [
             cpus: 4,

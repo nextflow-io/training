@@ -109,7 +109,7 @@ Això mostra documentació sobre el mòdul, incloent les seves entrades, sortide
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.4.1 - https://nf-co.re
+        nf-core/tools version 3.5.2 - https://nf-co.re
 
 
     ╭─ Module: cat/cat  ─────────────────────────────────────────────────╮
@@ -140,9 +140,9 @@ Això mostra documentació sobre el mòdul, incloent les seves entrades, sortide
                           │gzipped if file_out ends with    │
                           │".gz"                            │
     ╶─────────────────────┼─────────────────────────────────┼────────────╴
-    versions             │                                 │
+    versions_cat         │                                 │
     ╶─────────────────────┼─────────────────────────────────┼────────────╴
-      versions.yml  (file)│File containing software versions│versions.yml
+      versions_cat (tuple)│Software version information     │
                           ╵                                 ╵
 
     💻  Installation command: nf-core modules install cat/cat
@@ -165,8 +165,7 @@ cd core-hello
 nf-core modules install cat/cat
 ```
 
-L'eina pot primer demanar-vos que especifiqueu un tipus de repositori.
-(Si no, salteu a "Finalment, l'eina procedirà a instal·lar el mòdul.")
+L'eina procedirà a instal·lar el mòdul.
 
 ??? success "Sortida de la comanda"
 
@@ -178,36 +177,9 @@ L'eina pot primer demanar-vos que especifiqueu un tipus de repositori.
     | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                           `._,._,'
 
-    nf-core/tools version 3.4.1 - https://nf-co.re
+    nf-core/tools version 3.5.2 - https://nf-co.re
 
 
-    WARNING  'repository_type' not defined in .nf-core.yml
-    ? Is this repository a pipeline or a modules repository? (Use arrow keys)
-    » Pipeline
-      Modules repository
-    ```
-
-Si és així, premeu enter per acceptar la resposta per defecte (`Pipeline`) i continuar.
-
-L'eina oferirà després modificar la configuració del vostre projecte per evitar aquesta pregunta en el futur.
-
-??? success "Sortida de la comanda"
-
-    ```console
-        INFO     To avoid this prompt in the future, add the 'repository_type' key to your .nf-core.yml file.
-        ? Would you like me to add this config now? [y/n] (y):
-    ```
-
-Val la pena aprofitar aquesta eina convenient!
-Premeu enter per acceptar la resposta per defecte (sí).
-
-Finalment, l'eina procedirà a instal·lar el mòdul.
-
-??? success "Sortida de la comanda"
-
-    ```console
-    INFO Config added to '.nf-core.yml'
-    INFO Reinstalling modules found in 'modules.json' but missing from directory:
     INFO Installing 'cat/cat'
     INFO Use the following statement to include this module:
 
@@ -280,7 +252,7 @@ Substituïm la declaració `include` del mòdul `collectGreetings` per la de `CA
 Com a recordatori, l'eina d'instal·lació de mòduls ens va proporcionar la declaració exacta a utilitzar:
 
 ```groovy title="Import statement produced by install command"
-include { CAT_CAT } from '../modules/nf-core/cat/cat/main'`
+include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
 ```
 
 Tingueu en compte que la convenció nf-core és utilitzar majúscules per als noms de mòduls quan s'importen.
@@ -289,7 +261,7 @@ Obriu [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) i feu la su
 
 === "Després"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="11"
     /*
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -299,8 +271,8 @@ Obriu [core-hello/workflows/hello.nf](core-hello/workflows/hello.nf) i feu la su
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     include { cowpy                  } from '../modules/local/cowpy.nf'
+    include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
 === "Abans"
@@ -397,15 +369,15 @@ process CAT_CAT {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/pigz:2.3.4' :
-        'biocontainers/pigz:2.3.4' }"
+        'https://depot.galaxyproject.org/singularity/pigz:2.8' :
+        'biocontainers/pigz:2.8' }"
 
     input:
     tuple val(meta), path(files_in)
 
     output:
     tuple val(meta), path("${prefix}"), emit: file_out
-    path "versions.yml"               , emit: versions
+    tuple val("${task.process}"), val("pigz"), eval("pigz --version 2>&1 | sed 's/pigz //g'"), topic: versions, emit: versions_cat
 ```
 
 El mòdul CAT_CAT pren una sola entrada, però aquesta entrada és una tupla que conté dues coses:
@@ -416,7 +388,7 @@ El mòdul CAT_CAT pren una sola entrada, però aquesta entrada és una tupla que
 En completar-se, CAT_CAT lliura les seves sortides en dues parts:
 
 - Una altra tupla que conté el metamap i el fitxer de sortida concatenat, emès amb l'etiqueta `file_out`;
-- Un fitxer `versions.yml` que captura informació sobre la versió del programari que s'ha utilitzat, emès amb l'etiqueta `versions`.
+- Una tupla de versió publicada al canal de tema `versions` per al seguiment de versions de programari.
 
 Tingueu en compte també que per defecte, el fitxer de sortida es nomenarà basant-se en un identificador que forma part de les metadades (codi no mostrat aquí).
 
@@ -427,7 +399,7 @@ Això pot semblar molt a tenir en compte només mirant el codi, així que aquí 
 </figure>
 
 Podeu veure que els dos mòduls tenen requisits d'entrada similars pel que fa al contingut (un conjunt de fitxers d'entrada més algunes metadades) però expectatives molt diferents sobre com s'empaqueta aquest contingut.
-Ignorant el fitxer de versions per ara, la seva sortida principal també és equivalent (un fitxer concatenat), excepte que CAT_CAT també emet el metamap conjuntament amb el fitxer de sortida.
+Ignorant la sortida de versions per ara, la seva sortida principal també és equivalent (un fitxer concatenat), excepte que CAT_CAT també emet el metamap conjuntament amb el fitxer de sortida.
 
 Les diferències d'empaquetament seran força fàcils de gestionar, com veureu d'aquí a poc.
 No obstant això, per entendre la part del metamap, hem d'introduir-vos a algun context addicional.
@@ -534,7 +506,7 @@ Per claredat, dividirem això i cobrirem cada pas per separat.
 
 ### 3.1. Crear un mapa de metadades
 
-Primer, hem de crear un mapa de metadades per a `CAT_CAT`, tenint en compte que els mòduls nf-core requereixen que el metamap tingui almenys un camp `id`.
+Primer, hem de crear un mapa de metadades per a `CAT_CAT`, tenint en compte que els mòduls nf-core requereixen que el metamap contingui almenys un camp `id`.
 
 Com que no necessitem cap altra metadada, podem mantenir-ho simple i utilitzar quelcom així:
 
@@ -629,7 +601,7 @@ A continuació, transformeu el canal de fitxers en un canal de tuples que contin
 La línia que hem afegit aconsegueix dues coses:
 
 - `.collect()` recull tots els fitxers de la sortida de `convertToUpper` en una sola llista
-- `.map { files -> tuple(cat_meta, files) }` crea una tupla de `[metadades, fitxers]` en el format que `CAT_CAT` espera
+- `#!groovy .map { files -> tuple(cat_meta, files) }` crea una tupla de `[metadades, fitxers]` en el format que `CAT_CAT` espera
 
 Això és tot el que necessitem fer per configurar la tupla d'entrada per a `CAT_CAT`.
 
@@ -652,7 +624,7 @@ Ara cridem `CAT_CAT` sobre el canal acabat de crear:
         // crea un canal amb metadades i fitxers en format tupla
         ch_for_cat = convertToUpper.out.collect().map { files -> tuple(cat_meta, files) }
 
-        // concatena els fitxers utilitzant el modul nf-core cat/cat
+        // concatena les salutacions
         CAT_CAT(ch_for_cat)
 
         // genera art ASCII de les salutacions amb cowpy
@@ -734,7 +706,7 @@ Com que `cowpy` encara no accepta tuples de metadades (ho arreglarem a la següe
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
-L'operació `.map{ meta, file -> file }` extreu el fitxer de la tupla `[metadades, fitxer]` produïda per `CAT_CAT` en un nou canal, `ch_for_cowpy`.
+L'operació `#!groovy .map { meta, file -> file }` extreu el fitxer de la tupla `[metadades, fitxer]` produïda per `CAT_CAT` en un nou canal, `ch_for_cowpy`.
 
 Llavors només cal passar `ch_for_cowpy` a `cowpy` en lloc de `collectGreetings.out.outfile` en aquesta última línia.
 

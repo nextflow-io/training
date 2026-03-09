@@ -2,13 +2,14 @@ name: Translate
 
 on:
   # Automatic: when English content or prompts change
-  push:
-    branches:
-      - master
-    paths:
-      - "docs/en/docs/**/*.md"
-      - "docs/*/llm-prompt.md"
-      - "_scripts/general-llm-prompt.md"
+  # Commented out to save API costs - run manually as needed
+  # push:
+  #   branches:
+  #     - master
+  #   paths:
+  #     - "docs/en/docs/**/*.md"
+  #     - "docs/*/llm-prompt.md"
+  #     - "_scripts/general-llm-prompt.md"
 
   # Manual trigger
   workflow_dispatch:

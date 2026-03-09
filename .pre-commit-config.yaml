@@ -19,6 +19,8 @@ repos:
       - id: trailing-whitespace
         exclude_types:
           - svg
+        exclude: ^hello-nf-core/solutions/core-hello-.*/
       - id: end-of-file-fixer
         exclude_types:
           - svg
+        exclude: ^hello-nf-core/solutions/core-hello-.*/

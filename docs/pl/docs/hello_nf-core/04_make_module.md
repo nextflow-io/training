@@ -8,7 +8,7 @@ Projekt nf-core udostępnia polecenie (`nf-core modules create`), które automat
 Jednak w celach edukacyjnych zaczniemy od wykonania tego ręcznie: przekształcenia lokalnego komponentu `cowpy` w Twoim pipeline'ie `core-hello` w moduł w stylu nf-core krok po kroku.
 Następnie pokażemy, jak korzystać z tworzenia modułów opartych na szablonach, aby pracować wydajniej w przyszłości.
 
-??? info "Jak rozpocząć od tej sekcji"
+??? info "Jak zacząć od tej sekcji"
 
     Ta sekcja zakłada, że ukończyłeś [Część 3: Użycie modułu nf-core](./03_use_module.md) i zintegrowałeś moduł `CAT_CAT` ze Swoim pipeline'em.
 
@@ -36,8 +36,6 @@ W tej sekcji zastosujemy konwencje nf-core do lokalnego modułu `cowpy` w Twoim 
 To jest aktualny kod modułu procesu `cowpy`:
 
 ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1"
-#!/usr/bin/env nextflow
-
 // Wygeneruj grafikę ASCII za pomocą cowpy (https://github.com/jeffbuttars/cowpy)
 process cowpy {
 
@@ -94,14 +92,14 @@ Zaczynajmy!
 
 Otwórz plik modułu `cowpy.nf` (w `core-hello/modules/local/`) i zmodyfikuj nazwę procesu na wielkie litery:
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
     // Wygeneruj grafikę ASCII za pomocą cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="3" hl_lines="2"
     // Wygeneruj grafikę ASCII za pomocą cowpy (https://github.com/jeffbuttars/cowpy)
@@ -116,7 +114,7 @@ Gdyby nazwa procesu składała się z kilku słów, na przykład gdybyśmy mieli
 
 Nazwy procesów są wrażliwe na wielkość liter, więc teraz, gdy zmieniliśmy nazwę procesu, musimy odpowiednio zaktualizować instrukcję importu modułu w nagłówku workflow'u pliku `hello.nf`:
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
     /*
@@ -128,11 +126,11 @@ Nazwy procesów są wrażliwe na wielkość liter, więc teraz, gdy zmieniliśmy
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { COWPY                  } from '../modules/local/cowpy/main.nf'
+    include { COWPY                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="10"
     /*
@@ -144,7 +142,7 @@ Nazwy procesów są wrażliwe na wielkość liter, więc teraz, gdy zmieniliśmy
     include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
     include { sayHello               } from '../modules/local/sayHello.nf'
     include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-    include { cowpy                  } from '../modules/local/cowpy/main.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
@@ -154,16 +152,37 @@ Moglibyśmy użyć aliasu w instrukcji importu, aby uniknąć konieczności aktu
 
 Teraz zaktualizujmy dwa odwołania do procesu w bloku workflow'u pliku `hello.nf`:
 
-=== "Po zmianach"
+=== "Po"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    // wyodrębnij plik z krotki, ponieważ cowpy nie używa jeszcze metadanych
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // wygeneruj grafikę ASCII powitań za pomocą cowpy
-    COWPY(CAT_CAT.out.file_out)
+    COWPY(ch_for_cowpy, params.character)
 
     //
     // Zbierz i zapisz wersje oprogramowania
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
@@ -173,20 +192,41 @@ Teraz zaktualizujmy dwa odwołania do procesu w bloku workflow'u pliku `hello.nf
 
 
     emit:
-    cowpy_hellos   = COWPY.out.cowpy_output
+    cowpy_hellos   = COWPY.out
     versions       = ch_versions
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2 17"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="5 38"
+    // wyodrębnij plik z krotki, ponieważ cowpy nie używa jeszcze metadanych
+    ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
+
     // wygeneruj grafikę ASCII powitań za pomocą cowpy
-    cowpy(CAT_CAT.out.file_out)
+    cowpy(ch_for_cowpy, params.character)
 
     //
     // Zbierz i zapisz wersje oprogramowania
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
@@ -196,7 +236,7 @@ Teraz zaktualizujmy dwa odwołania do procesu w bloku workflow'u pliku `hello.nf
 
 
     emit:
-    cowpy_hellos   = cowpy.out.cowpy_output
+    cowpy_hellos   = cowpy.out
     versions       = ch_versions
     ```
 
@@ -273,7 +313,7 @@ Po wykonaniu wszystkich tych czynności uruchomimy pipeline, aby sprawdzić, czy
 
 Wróć do pliku modułu `cowpy.nf` i zmodyfikuj go, aby akceptował krotki metadanych, jak pokazano poniżej.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="11" hl_lines="2 6"
         input:
@@ -284,7 +324,7 @@ Wróć do pliku modułu `cowpy.nf` i zmodyfikuj go, aby akceptował krotki metad
             tuple val(meta), path("cowpy-${input_file}"), emit: cowpy_output
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="11" hl_lines="2 6"
         input:
@@ -307,17 +347,17 @@ Teraz, gdy wyjście `CAT_CAT` i wejście `COWPY` mają tę samą 'kształt', tzn
 
 Otwórz plik workflow `hello.nf` (w `core-hello/workflows/`) i zaktualizuj wywołanie `COWPY`, jak pokazano poniżej.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="2"
         // wygeneruj grafikę ASCII powitań za pomocą cowpy
         COWPY(CAT_CAT.out.file_out, params.character)
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="43" hl_lines="1-2 5"
-        // extract the file from the tuple since cowpy doesn't use metadata yet
+        // wyodrębnij plik z krotki, ponieważ cowpy nie używa jeszcze metadanych
         ch_for_cowpy = CAT_CAT.out.file_out.map{ meta, file -> file }
 
         // wygeneruj grafikę ASCII powitań za pomocą cowpy
@@ -332,7 +372,7 @@ W rezultacie nie musimy już konstruować kanału `ch_for_cowpy`, więc ta linia
 
 Ponieważ `COWPY` teraz emituje nazwane wyjście `cowpy_output`, możemy zaktualizować blok `emit:` workflow `hello.nf`, aby z niego korzystał.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
         emit:
@@ -340,7 +380,7 @@ Ponieważ `COWPY` teraz emituje nazwane wyjście `cowpy_output`, możemy zaktual
         versions       = ch_versions
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="60" hl_lines="2"
         emit:
@@ -429,11 +469,9 @@ Po wykonaniu wszystkich tych czynności uruchomimy pipeline, aby sprawdzić, czy
 Zróbmy to.
 Otwórz plik modułu `cowpy.nf` (w `core-hello/modules/local/`) i zmodyfikuj go, aby odwoływał się do `ext.args`, jak pokazano poniżej.
 
-=== "Po zmianach"
+=== "Po"
 
-    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="18 20"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="modules/local/cowpy.nf" linenums="1" hl_lines="16 18"
     // Wygeneruj grafikę ASCII za pomocą cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -456,11 +494,9 @@ Otwórz plik modułu `cowpy.nf` (w `core-hello/modules/local/`) i zmodyfikuj go,
     }
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="13 20"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="11 18"
     // Wygeneruj grafikę ASCII za pomocą cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -497,7 +533,7 @@ Jak widać, wprowadziliśmy trzy zmiany.
 
 W rezultacie interfejs modułu jest teraz prostszy: oczekuje tylko podstawowych metadanych i wejść plikowych.
 
-!!! note
+!!! note "Uwaga"
 
     Operator `?:` jest często nazywany 'operatorem Elvisa', ponieważ wygląda jak twarz Elvisa Presleya z profilu, gdzie znak `?` symbolizuje falę we włosach.
 
@@ -520,7 +556,7 @@ Ma sens? Dodajmy to.
 
 Otwórz `conf/modules.config` i dodaj kod konfiguracyjny wewnątrz bloku `process {}`, jak pokazano poniżej.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/conf/modules.config" linenums="13" hl_lines="8-10"
     process {
@@ -536,7 +572,7 @@ Otwórz `conf/modules.config` i dodaj kod konfiguracyjny wewnątrz bloku `proces
     }
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="core-hello/conf/modules.config" linenums="13"
     process {
@@ -563,14 +599,14 @@ Ponieważ moduł `COWPY` nie wymaga już parametru `character` jako wejścia, mu
 
 Otwórz plik workflow `hello.nf` (w `core-hello/workflows/`) i zaktualizuj wywołanie `COWPY`, jak pokazano poniżej.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // wygeneruj grafikę ASCII powitań za pomocą cowpy
         COWPY(CAT_CAT.out.file_out)
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="39" hl_lines="2"
         // wygeneruj grafikę ASCII powitań za pomocą cowpy
@@ -695,7 +731,7 @@ Podsumowując korzyści tego podejścia:
 - **Przenośność**: Moduły mogą być ponownie użyte bez zakodowanych opcji narzędzia
 - **Brak zmian w workflow'ie**: Dodawanie lub zmiana opcji narzędzia nie wymaga aktualizacji kodu workflow'u
 
-!!! note
+!!! note "Uwaga"
 
     System `ext.args` ma potężne dodatkowe możliwości, których nie omówiono tutaj, w tym dynamiczne przełączanie wartości argumentów na podstawie metadanych. Zobacz [specyfikacje modułów nf-core](https://nf-co.re/docs/guidelines/components/modules) po więcej szczegółów.
 
@@ -721,7 +757,7 @@ Po wykonaniu tego uruchomimy pipeline, aby sprawdzić, czy wszystko nadal dział
 
 Otwórz plik modułu `cowpy.nf` (w `core-hello/modules/local/`) i zmodyfikuj go, aby odwoływał się do `ext.prefix`, jak pokazano poniżej.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 6 8"
         output:
@@ -736,7 +772,7 @@ Otwórz plik modułu `cowpy.nf` (w `core-hello/modules/local/`) i zmodyfikuj go,
     }
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="core-hello/modules/local/cowpy.nf" linenums="1" hl_lines="2 7"
         output:
@@ -781,7 +817,7 @@ Dodajmy to.
 
 Otwórz `conf/modules.config` i dodaj kod konfiguracyjny wewnątrz bloku `process {}`, jak pokazano poniżej.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/conf/modules.config" linenums="21" hl_lines="3"
         withName: 'COWPY' {
@@ -790,7 +826,7 @@ Otwórz `conf/modules.config` i dodaj kod konfiguracyjny wewnątrz bloku `proces
         }
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="core-hello/conf/modules.config" linenums="21"
         withName: 'COWPY' {
@@ -912,11 +948,9 @@ Na koniec pokażemy, jak w razie potrzeby przesłonić domyślne zachowanie.
 Zróbmy to.
 Otwórz plik modułu `cowpy.nf` (w `core-hello/modules/local/`) i usuń dyrektywę `publishDir`, jak pokazano poniżej.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="core-hello/modules/local/cowpy.nf (fragment)" linenums="1"
-    #!/usr/bin/env nextflow
-
     // Wygeneruj grafikę ASCII za pomocą cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -924,11 +958,9 @@ Otwórz plik modułu `cowpy.nf` (w `core-hello/modules/local/`) i usuń dyrektyw
         conda 'conda-forge::cowpy==1.1.5'
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
-    ```groovy title="core-hello/modules/local/cowpy.nf (fragment)" linenums="1" hl_lines="6"
-    #!/usr/bin/env nextflow
-
+    ```groovy title="core-hello/modules/local/cowpy.nf (fragment)" linenums="1" hl_lines="4"
     // Wygeneruj grafikę ASCII za pomocą cowpy (https://github.com/jeffbuttars/cowpy)
     process COWPY {
 
@@ -1025,6 +1057,12 @@ Teraz `core-hello-results` zawiera również wyjścia modułu `COWPY`.
 
 Widać, że Nextflow utworzył tę hierarchię katalogów na podstawie nazw workflow'u i modułu.
 
+!!! note "Uwaga"
+
+    Możesz zauważyć plik `hello_software_versions.yml` w `pipeline_info/`.
+    Zawiera on obecnie tylko informacje o wersji z `CAT_CAT`, ponieważ `COWPY` jeszcze nie raportuje swojej wersji.
+    Sekcja 1.6 opisuje, jak to dodać.
+
 Kod odpowiedzialny za to znajduje się w pliku `conf/modules.config`.
 Jest to domyślna konfiguracja `publishDir`, która jest częścią szablonu nf-core i ma zastosowanie do wszystkich procesów:
 
@@ -1090,16 +1128,70 @@ Podsumowując, otrzymujesz:
 - **Łatwe dostosowanie**: Przesłoń zachowanie publikowania w konfiguracji, a nie w kodzie modułu
 - **Przenośne moduły**: Moduły nie kodują na stałe lokalizacji wyjściowych
 
-To kończy zestaw funkcji modułów nf-core, których bezwzględnie powinieneś się nauczyć używać, ale są inne, o których możesz przeczytać w [specyfikacjach modułów nf-core](https://nf-co.re/docs/guidelines/components/modules).
+### 1.6. Rejestrowanie wersji za pomocą kanałów tematycznych
 
-### Wnioski
+Odtwarzalność jest podstawową zasadą nf-core: każde uruchomienie pipeline'u rejestruje dokładnie, które wersje oprogramowania zostały użyte, dzięki czemu wyniki można odtworzyć i porównać między uruchomieniami.
+Raport `hello_software_versions.yml` w `pipeline_info/` to sposób, w jaki pipeline'y nf-core spełniają to wymaganie.
+
+Mechanizmem stojącym za tym są **kanały tematyczne**: funkcja rozgłaszania Nextflow, w której dowolny proces może publikować dane do nazwanego tematu, a każdy subskrybent otrzymuje wszystko opublikowane w tym temacie — niezależnie od tego, skąd pochodzi w pipeline'ie.
+nf-core wdraża to rozwiązanie we wszystkich pipeline'ach w 2026 roku.
+Moduły publikują swoją wersję jako krotkę bezpośrednio w bloku wyjścia za pomocą słowa kluczowego `topic:`, a workflow subskrybuje raz, aby zebrać je wszystkie.
+
+#### 1.6.1. Dodanie raportowania wersji do `COWPY`
+
+Otwórz plik modułu `cowpy.nf` i dodaj linię wyjścia wersji, jak pokazano poniżej.
+
+=== "Po"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13" hl_lines="3"
+        output:
+        tuple val(meta), path("${prefix}.txt")                                    , emit: cowpy_output
+        tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions , emit: versions_cowpy
+    ```
+
+=== "Przed"
+
+    ```groovy title="core-hello/modules/local/cowpy.nf" linenums="13"
+        output:
+        tuple val(meta), path("${prefix}.txt")  , emit: cowpy_output
+    ```
+
+Nowa linia publikuje krotkę `[process_name, tool_name, version]` do kanału tematycznego `"versions"`.
+Nie są potrzebne żadne zmiany w bloku script — wersja jest deklarowana statycznie w bloku wyjścia.
+
+#### 1.6.2. Uruchomienie pipeline'a i sprawdzenie raportu wersji
+
+```bash
+nextflow run . --outdir core-hello-results -profile test,docker --validate_params false
+```
+
+Otwórz `core-hello-results/pipeline_info/hello_software_versions.yml` i zobaczysz teraz oba moduły:
+
+```yaml title="core-hello-results/pipeline_info/hello_software_versions.yml"
+CAT_CAT:
+  pigz: 2.8
+COWPY:
+  cowpy: 1.1.5
+```
+
+Kolekcja po stronie workflow'u — blok `Channel.topic("versions")`, który widziałeś w zastępczym workflow'ie w Części 2 — subskrybuje temat i automatycznie zapisuje ten zbiorczy raport.
+
+!!! note "Zgodność wsteczna"
+
+    Gałąź `versions_file` w bloku kanału tematycznego workflow'u istnieje po to, aby obsługiwać moduły, które nie zostały jeszcze zaktualizowane do używania `topic: versions` i nadal zapisują plik `versions.yml` w bloku script za pomocą `emit: versions`.
+    Oba style są obsługiwane jednocześnie podczas przejścia.
+
+### Podsumowanie
 
 Teraz wiesz, jak dostosować lokalne moduły, aby były zgodne z konwencjami nf-core:
 
 - Projektuj Swoje moduły tak, aby akceptowały i propagowały krotki metadanych;
 - Używaj `ext.args`, aby interfejsy modułów były minimalne i przenośne;
 - Używaj `ext.prefix` dla konfigurowalnego, standaryzowanego nazewnictwa plików wyjściowych;
-- Przyjmij domyślną scentralizowaną dyrektywę `publishDir` dla spójnej struktury katalogu wyników.
+- Przyjmij domyślną scentralizowaną dyrektywę `publishDir` dla spójnej struktury katalogu wyników;
+- Rozumiej, jak kanały tematyczne automatycznie zbierają wersje oprogramowania ze wszystkich modułów.
+
+Aby dowiedzieć się więcej o konwencjach modułów, zapoznaj się ze [specyfikacjami modułów nf-core](https://nf-co.re/docs/guidelines/components/modules).
 
 ### Co dalej?
 
@@ -1162,7 +1254,7 @@ Każdy plik służy określonemu celowi:
 - **`environment.yml`**: Specyfikacja środowiska Conda dla zależności
 - **`tests/main.nf.test`**: Przypadki testowe nf-test do walidacji działania modułu
 
-!!! tip "Dowiedz się więcej o testowaniu"
+!!! tip "Wskazówka"
 
     Wygenerowany plik testowy używa nf-test, frameworka testowego dla pipeline'ów i modułów Nextflow. Aby dowiedzieć się, jak pisać i uruchamiać te testy, zobacz [zadanie dodatkowe nf-test](../side_quests/nf-test.md).
 
@@ -1183,7 +1275,7 @@ process COWPY {
 
     output:
     tuple val(meta), path("*"), emit: output
-    path "versions.yml"           , emit: versions
+    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions, emit: versions_cowpy
 
     when:
     task.ext.when == null || task.ext.when
@@ -1193,12 +1285,6 @@ process COWPY {
     def prefix = task.ext.prefix ?: "${meta.id}"  // Wzorzec 3: ext.prefix ✓
 
     """
-    // Dodaj polecenie Twojego narzędzia tutaj
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
 
     stub:
@@ -1207,12 +1293,6 @@ process COWPY {
 
     """
     echo $args
-    touch ${prefix}.txt
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
 }
 ```
@@ -1227,14 +1307,15 @@ Niektóre z nich działają od razu, podczas gdy inne są zastępcze, które bę
 - **`tag "$meta.id"`**: Dodaje identyfikator próbki do nazw procesów w logach, ułatwiając śledzenie
 - **`label 'process_single'`**: Etykieta zasobów do konfigurowania wymagań CPU/pamięci
 - **`when:` blok**: Pozwala na warunkowe wykonanie poprzez konfigurację `task.ext.when`
+- **Wyjście `topic: versions`**: Raportowanie wersji za pomocą kanału tematycznego, omówione w sekcji 1.6
 
 Te funkcje są już funkcjonalne i sprawiają, że moduły są łatwiejsze w utrzymaniu.
 
 **Zastępcze, które dostosujemy poniżej:**
 
 - **Bloki `input:` i `output:`**: Ogólne deklaracje, które zaktualizujemy, aby dopasować nasze narzędzie
-- **Blok `script:`**: Zawiera komentarz, w którym dodamy polecenie `cowpy`
-- **Blok `stub:`**: Szablon, który zaktualizujemy, aby produkował poprawne wyjścia
+- **Blok `script:`**: Pusty — dodamy tutaj polecenie `cowpy`
+- **Blok `stub:`**: Zaktualizujemy go, aby produkował poprawne wyjścia
 - **Kontener i środowisko**: Zastępcze, które wypełnimy informacjami o pakietach
 
 Kolejne sekcje przeprowadzą Cię przez ukończenie tych dostosowań.
@@ -1250,29 +1331,29 @@ W tym przypadku używamy tego samego wstępnie zbudowanego kontenera co wcześni
 
 Domyślny kod oferuje przełączanie między Dockerem a Singularity, ale uprościmy tę linię i po prostu określimy kontener Docker, który otrzymaliśmy z Seqera Containers powyżej.
 
-=== "Po zmianach"
+=== "Po"
 
-```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
-process COWPY {
-    tag "$meta.id"
-    label 'process_single'
+    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+    process COWPY {
+        tag "$meta.id"
+        label 'process_single'
 
-    conda "${moduleDir}/environment.yml"
-    container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
-```
+        conda "${moduleDir}/environment.yml"
+        container "community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273"
+    ```
 
-=== "Przed zmianami"
+=== "Przed"
 
-```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
-process COWPY {
-    tag "$meta.id"
-    label 'process_single'
+    ```groovy title="modules/local/cowpy/main.nf" linenums="3" hl_lines="6"
+    process COWPY {
+        tag "$meta.id"
+        label 'process_single'
 
-    conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
-        'biocontainers/YOUR-TOOL-HERE' }"
-```
+        conda "${moduleDir}/environment.yml"
+        container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+            'https://depot.galaxyproject.org/singularity/YOUR-TOOL-HERE':
+            'biocontainers/YOUR-TOOL-HERE' }"
+    ```
 
 #### 2.2.2. Środowisko Conda
 
@@ -1281,7 +1362,7 @@ Dla środowiska Conda kod modułu określa `conda "${moduleDir}/environment.yml"
 Narzędzie do tworzenia modułów ostrzegło nas, że nie może znaleźć pakietu `cowpy` w Bioconda (głównym kanale dla narzędzi bioinformatycznych).
 Jednak `cowpy` jest dostępny w conda-forge, więc możesz uzupełnić `environment.yml` w ten sposób:
 
-=== "Po zmianach"
+=== "Po"
 
     ```yaml title="modules/local/cowpy/environment.yml"  linenums="1" hl_lines="1 3 5"
     name: COWPY
@@ -1291,7 +1372,7 @@ Jednak `cowpy` jest dostępny w conda-forge, więc możesz uzupełnić `environm
       - cowpy=1.1.5
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```yaml title="modules/local/cowpy/environment.yml" linenums="1"
     ---
@@ -1326,18 +1407,18 @@ Patrząc wstecz na nasz ręczny moduł `COWPY` z sekcji 1, możemy użyć tego j
 
 Zaktualizuj bloki wejść i wyjść:
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
     input:
     tuple val(meta), path(input_file)
 
     output:
-    tuple val(meta), path("${prefix}.txt"), emit: cowpy_output
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("${prefix}.txt")                                       , emit: cowpy_output
+    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions    , emit: versions_cowpy
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="modules/local/cowpy/main.nf" linenums="8" hl_lines="2 5"
     input:
@@ -1345,7 +1426,7 @@ Zaktualizuj bloki wejść i wyjść:
 
     output:
     tuple val(meta), path("*"), emit: output
-    path "versions.yml"           , emit: versions
+    tuple val("${task.process}"), val('cowpy'), val("1.1.5"), topic: versions    , emit: versions_cowpy
     ```
 
 To określa:
@@ -1359,11 +1440,11 @@ Przejdźmy do tego teraz.
 
 #### 2.3.2. Blok script
 
-Szablon zapewnia zastępczy komentarz w bloku script, w którym powinieneś dodać rzeczywiste polecenie narzędzia.
+Szablon generuje pusty blok script, który należy wypełnić rzeczywistym poleceniem narzędzia.
 
 Na podstawie modułu, który napisaliśmy ręcznie wcześniej, powinniśmy wykonać następujące edycje:
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3 6"
     script:
@@ -1373,34 +1454,24 @@ Na podstawie modułu, który napisaliśmy ręcznie wcześniej, powinniśmy wykon
     """
     cat $input_file | cowpy $args > ${prefix}.txt
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="15" hl_lines="3"
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    // Dodaj polecenie Twojego narzędzia tutaj
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
     ```
 
 Kluczowe zmiany:
 
 - Zmień `def prefix` na po prostu `prefix` (bez `def`), aby uczynić go dostępnym w bloku wyjścia
-- Zastąp komentarz rzeczywistym poleceniem `cowpy`, które używa zarówno `$args`, jak i `${prefix}.txt`
+- Wypełnij rzeczywistym poleceniem `cowpy`, które używa zarówno `$args`, jak i `${prefix}.txt`
 
 Zauważ, że gdybyśmy nie wykonali już pracy dodania konfiguracji `ext.args` i `ext.prefix` dla procesu `COWPY` do pliku `modules.config`, musielibyśmy to teraz zrobić.
 
@@ -1410,7 +1481,7 @@ W kontekście Nextflow blok [stub](https://www.nextflow.io/docs/latest/process.h
 
 Nie martw się zbytnio, jeśli wydaje się to tajemnicze; dołączamy to dla kompletności, ale możesz również po prostu usunąć sekcję stub, jeśli nie chcesz się tym zajmować, ponieważ jest całkowicie opcjonalna.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
     stub:
@@ -1420,27 +1491,18 @@ Nie martw się zbytnio, jeśli wydaje się to tajemnicze; dołączamy to dla kom
     """
     touch ${prefix}.txt
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
-    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3 6"
+    ```groovy title="modules/local/cowpy/main.nf" linenums="27" hl_lines="3"
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
     echo $args
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        COWPY: \$(cowpy --version)
-    END_VERSIONS
     """
     ```
 
@@ -1458,7 +1520,7 @@ Po ukończeniu konfiguracji środowiska (sekcja 2.2), wejść/wyjść (sekcja 2.
 
 Wszystko, co musimy zrobić, aby wypróbować tę nową wersję modułu `COWPY`, to przełączyć instrukcję importu w pliku workflow `hello.nf`, aby wskazywała na nowy plik.
 
-=== "Po zmianach"
+=== "Po"
 
     ```groovy title="workflows/hello.nf" linenums="1" hl_lines="10"
     /*
@@ -1474,7 +1536,7 @@ Wszystko, co musimy zrobić, aby wypróbować tę nową wersję modułu `COWPY`,
     include { CAT_CAT                } from '../modules/nf-core/cat/cat/main'
     ```
 
-=== "Przed zmianami"
+=== "Przed"
 
     ```groovy title="modules/local/cowpy/main.nf" linenums="1" hl_lines="10"
     /*
@@ -1537,7 +1599,7 @@ nextflow run . --outdir core-hello-results -profile test,docker --validate_param
 
 To produkuje te same wyniki co wcześniej.
 
-### Wnioski
+### Podsumowanie
 
 Teraz wiesz, jak używać wbudowanych narzędzi nf-core do wydajnego tworzenia modułów przy użyciu szablonów zamiast pisania wszystkiego od podstaw.
 
@@ -1580,7 +1642,7 @@ Szczegółowe instrukcje znajdziesz w [samouczku komponentów nf-core](https://n
 - **Specyfikacje modułów**: [Wymagania techniczne i wytyczne](https://nf-co.re/docs/guidelines/components/modules)
 - **Wsparcie społeczności**: [Slack nf-core](https://nf-co.re/join) - Dołącz do kanału `#modules`
 
-### Wnioski
+### Podsumowanie
 
 Teraz wiesz, jak tworzyć moduły nf-core! Nauczyłeś się czterech kluczowych wzorców, które sprawiają, że moduły są przenośne i łatwe w utrzymaniu:
 

@@ -1,13 +1,11 @@
 repository_type: pipeline
 
-nf_core_version: 3.4.1
+nf_core_version: 3.5.2
 
 lint:
   files_unchanged:
     - .github/CONTRIBUTING.md
-    - .prettierignore
-    - .prettierignore
-    - .prettierignore
+    - assets/sendmail_template.txt
     - CODE_OF_CONDUCT.md
     - assets/nf-core-hello_logo_light.png
     - docs/images/nf-core-hello_logo_light.png
@@ -17,6 +15,10 @@ lint:
     - .github/PULL_REQUEST_TEMPLATE.md
     - assets/email_template.txt
     - docs/README.md
+    - .prettierignore
+    - .github/CONTRIBUTING.md
+    - LICENSE
+    - .prettierignore
     - .github/ISSUE_TEMPLATE/bug_report.yml
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/ISSUE_TEMPLATE/feature_request.yml
@@ -26,24 +28,15 @@ lint:
     - .github/workflows/linting.yml
     - .github/CONTRIBUTING.md
     - .github/.dockstore.yml
-    - .github/CONTRIBUTING.md
-    - assets/sendmail_template.txt
     - .prettierignore
-    - LICENSE
+    - .prettierignore
   nextflow_config:
     - manifest.name
     - manifest.homePage
   nf_test_content: false
   multiqc_config: false
   files_exist:
-    - .github/workflows/nf-test.yml
-    - .github/actions/get-shards/action.yml
-    - .github/actions/nf-test/action.yml
-    - nf-test.config
-    - tests/default.nf.test
-    - assets/email_template.html
-    - assets/sendmail_template.txt
-    - assets/email_template.txt
+    - assets/multiqc_config.yml
     - CODE_OF_CONDUCT.md
     - assets/nf-core-hello_logo_light.png
     - docs/images/nf-core-hello_logo_light.png
@@ -51,25 +44,32 @@ lint:
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
+    - LICENSE
+    - CITATIONS.md
+    - .prettierignore
+    - .prettierrc.yml
+    - .github/workflows/nf-test.yml
+    - .github/actions/get-shards/action.yml
+    - .github/actions/nf-test/action.yml
+    - nf-test.config
+    - tests/default.nf.test
+    - CHANGELOG.md
     - .github/ISSUE_TEMPLATE/bug_report.yml
     - .github/ISSUE_TEMPLATE/feature_request.yml
     - .github/PULL_REQUEST_TEMPLATE.md
     - .github/CONTRIBUTING.md
     - .github/.dockstore.yml
-    - CHANGELOG.md
-    - assets/multiqc_config.yml
+    - conf/igenomes.config
+    - conf/igenomes_ignored.config
+    - assets/email_template.html
+    - assets/sendmail_template.txt
+    - assets/email_template.txt
     - .github/workflows/branch.yml
     - .github/workflows/nf-test.yml
     - .github/actions/get-shards/action.yml
     - .github/actions/nf-test/action.yml
     - .github/workflows/linting_comment.yml
     - .github/workflows/linting.yml
-    - .prettierignore
-    - .prettierrc.yml
-    - conf/igenomes.config
-    - conf/igenomes_ignored.config
-    - CITATIONS.md
-    - LICENSE
   readme:
     - nextflow_badge
     - nextflow_badge
@@ -79,7 +79,7 @@ template:
   org: core
   name: hello
   description: A basic nf-core style version of Hello Nextflow
-  author: pinin4fjords
+  author: your-name
   version: 1.0.0dev
   force: true
   outdir: .

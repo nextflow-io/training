@@ -17,7 +17,7 @@ SCRIPTS_DIR = REPO_ROOT / "_scripts"
 TRANSLATE_CONFIG = Path(__file__).parent / "translate_config.yml"
 
 # Claude API settings
-MODEL = "claude-sonnet-4-5"
+MODEL = "claude-sonnet-4-6"
 MAX_TOKENS = 32768  # Large enough for biggest docs (~60KB source)
 REQUEST_TIMEOUT = 600.0  # 10 minute timeout per API request
 
