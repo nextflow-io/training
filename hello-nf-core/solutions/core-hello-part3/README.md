@@ -51,7 +51,7 @@ nextflow run core/hello \
 
 ## Credits
 
-core/hello was originally written by pinin4fjords.
+core/hello was originally written by your-name.
 
 We thank the following people for their extensive assistance in the development of this pipeline:
 

@@ -73,7 +73,7 @@ Un cop es tanqui la TUI, hauríeu de veure la següent sortida a la consola.
         | \| |       \__, \__/ |  \ |___     \`-._,-`-,
                                               `._,._,'
 
-        nf-core/tools version 3.4.1 - https://nf-co.re
+        nf-core/tools version 3.5.2 - https://nf-co.re
 
 
     INFO     Launching interactive nf-core pipeline creation tool.
@@ -231,7 +231,7 @@ Si mireu dins del fitxer `main.nf`, veureu que importa un workflow anomenat `HEL
 
 Això és equivalent al workflow `workflows/demo.nf` que vam trobar a la Part 1, i serveix com a workflow de marcador de posició per al nostre workflow d'interès, amb alguna funcionalitat nf-core ja en el seu lloc.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 35"
+```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 53"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -257,7 +257,25 @@ workflow HELLO {
     //
     // Collate and save software versions
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
@@ -286,6 +304,13 @@ En comparació amb un workflow bàsic de Nextflow com el desenvolupat a [Hello N
 - Les sortides es declaren utilitzant la paraula clau `emit:`
 
 Aquestes són funcionalitats opcionals de Nextflow que fan que el workflow sigui **composable**, és a dir, que es pot cridar des de dins d'un altre workflow.
+
+!!! note "El bloc `Channel.topic`"
+
+    Potser haureu notat el bloc `def topic_versions = Channel.topic("versions")` que comença a la línia 17.
+    Aquest és codi de manteniment estàndard que recull informació de versions de programari de tots els mòduls automàticament.
+    nf-core està desplegant aquest mecanisme a tots els pipelines el 2026, de manera que el veureu a tots els nous pipelines d'ara endavant.
+    La Part 4 d'aquest curs explica com funciona en detall.
 
 !!! note "Workflows composables en profunditat"
 
@@ -374,21 +399,21 @@ include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
-  // create a channel for inputs from a CSV file
+  // crea un canal per a entrades des d'un fitxer CSV
   greeting_ch = channel.fromPath(params.greeting)
                       .splitCsv()
                       .map { line -> line[0] }
 
-  // emit a greeting
+  // emet una salutacio
   sayHello(greeting_ch)
 
-  // convert the greeting to uppercase
+  // converteix la salutacio a majuscules
   convertToUpper(sayHello.out)
 
-  // collect all the greetings into one file
+  // recull totes les salutacions en un fitxer
   collectGreetings(convertToUpper.out.collect(), params.batch)
 
-  // generate ASCII art of the greetings with cowpy
+  // genera art ASCII de les salutacions amb cowpy
   cowpy(collectGreetings.out.outfile, params.character)
 }
 ```
@@ -431,7 +456,7 @@ Ara, substituïu la construcció del canal per una simple declaració `take` que
 === "Abans"
 
     ```groovy title="original-hello/hello.nf" linenums="18"
-        // create a channel for inputs from a CSV file
+        // crea un canal per a entrades des d'un fitxer CSV
         greeting_ch = channel.fromPath(params.greeting)
                             .splitCsv()
                             .map { line -> line[0] }
@@ -495,16 +520,16 @@ A continuació, afegiu una declaració `main` abans de la resta d'operacions cri
 === "Abans"
 
     ```groovy title="original-hello/hello.nf" linenums="21"
-        // emit a greeting
+        // emet una salutacio
         sayHello(greeting_ch)
 
-        // convert the greeting to uppercase
+        // converteix la salutacio a majuscules
         convertToUpper(sayHello.out)
 
-        // collect all the greetings into one file
+        // recull totes les salutacions en un fitxer
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
-        // generate ASCII art of the greetings with cowpy
+        // genera art ASCII de les salutacions amb cowpy
         cowpy(collectGreetings.out.outfile, params.character)
     ```
 
@@ -698,7 +723,25 @@ workflow HELLO {
     //
     // Collate and save software versions
     //
-    softwareVersionsToYAML(ch_versions)
+    def topic_versions = Channel.topic("versions")
+        .distinct()
+        .branch { entry ->
+            versions_file: entry instanceof Path
+            versions_tuple: true
+        }
+
+    def topic_versions_string = topic_versions.versions_tuple
+        .map { process, tool, version ->
+            [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+        }
+        .groupTuple(by:0)
+        .map { process, tool_versions ->
+            tool_versions.unique().sort()
+            "${process}:\n${tool_versions.join('\n')}"
+        }
+
+    softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+        .mix(topic_versions_string)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
             name:  'hello_software_'  + 'versions.yml',
@@ -719,7 +762,9 @@ workflow HELLO {
 */
 ```
 
-En general, aquest codi fa molt poc a part d'algunes tasques de manteniment que tenen a veure amb capturar la versió de qualsevol eina de programari que s'executi al pipeline.
+Les línies destacades defineixen l'estructura del workflow composable: `workflow HELLO {`, `take:`, `main:` i `emit:`.
+El gran bloc entre les línies 17–34 és més substancial: gestiona la captura de versions de programari utilitzant topic channels, un mecanisme que nf-core està desplegant a tots els pipelines el 2026.
+Ho explicarem a la Part 4; de moment, tracteu-lo com a codi estàndard que podeu deixar sense modificar.
 
 Necessitem afegir el codi rellevant de la versió composable del workflow original que vam desenvolupar a la secció 2.
 
@@ -732,7 +777,8 @@ Abordarem això en les següents etapes:
 
 !!! note "Nota"
 
-    Ignorarem la captura de versions per a aquesta primera passada i veurem com connectar-ho en una part posterior d'aquesta formació.
+    Ignorarem el bloc de captura de versions per a aquesta primera passada.
+    La Part 4 explica com funciona.
 
 ### 3.1. Copiar els mòduls i configurar les importacions de mòduls
 
@@ -879,7 +925,25 @@ Aquest ordre té sentit perquè en un pipeline real, els processos emetrien info
         //
         // Collate and save software versions
         //
-        softwareVersionsToYAML(ch_versions)
+        def topic_versions = Channel.topic("versions")
+            .distinct()
+            .branch { entry ->
+                versions_file: entry instanceof Path
+                versions_tuple: true
+            }
+
+        def topic_versions_string = topic_versions.versions_tuple
+            .map { process, tool, version ->
+                [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            }
+            .groupTuple(by:0)
+            .map { process, tool_versions ->
+                tool_versions.unique().sort()
+                "${process}:\n${tool_versions.join('\n')}"
+            }
+
+        softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+            .mix(topic_versions_string)
             .collectFile(
                 storeDir: "${params.outdir}/pipeline_info",
                 name:  'hello_software_'  + 'versions.yml',
@@ -908,7 +972,25 @@ Aquest ordre té sentit perquè en un pipeline real, els processos emetrien info
         //
         // Collate and save software versions
         //
-        softwareVersionsToYAML(ch_versions)
+        def topic_versions = Channel.topic("versions")
+            .distinct()
+            .branch { entry ->
+                versions_file: entry instanceof Path
+                versions_tuple: true
+            }
+
+        def topic_versions_string = topic_versions.versions_tuple
+            .map { process, tool, version ->
+                [ process[process.lastIndexOf(':')+1..-1], "  ${tool}: ${version}" ]
+            }
+            .groupTuple(by:0)
+            .map { process, tool_versions ->
+                tool_versions.unique().sort()
+                "${process}:\n${tool_versions.join('\n')}"
+            }
+
+        softwareVersionsToYAML(ch_versions.mix(topic_versions.versions_file))
+            .mix(topic_versions_string)
             .collectFile(
                 storeDir: "${params.outdir}/pipeline_info",
                 name:  'hello_software_'  + 'versions.yml',
@@ -949,7 +1031,7 @@ Finalment, necessitem actualitzar el bloc `emit` per incloure la declaració de 
 
 === "Després"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="55" hl_lines="2"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69" hl_lines="2"
         emit:
         cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -957,7 +1039,7 @@ Finalment, necessitem actualitzar el bloc `emit` per incloure la declaració de 
 
 === "Abans"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="55"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="69"
         emit:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
@@ -1145,7 +1227,7 @@ La bona notícia és que les necessitats del nostre pipeline són molt més simp
 
 Com a recordatori, així és com es veia la construcció del canal (tal com es veu al directori de solucions):
 
-```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="4"
+```groovy title="solutions/composable-hello/main.nf" linenums="10" hl_lines="2"
     // crea un canal per a entrades des d'un fitxer CSV
     greeting_ch = channel.fromPath(params.greeting)
         .splitCsv()
@@ -1270,7 +1352,7 @@ I mentre hi som, ajustem els límits de recursos per defecte per assegurar que a
 
 === "Després"
 
-    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3-4"
     process {
         resourceLimits = [
             cpus: 2,
@@ -1282,7 +1364,7 @@ I mentre hi som, ajustem els límits de recursos per defecte per assegurar que a
 
 === "Abans"
 
-    ```groovy title="core-hello/config/test.config" linenums="13" hl_lines="3-4"
+    ```groovy title="core-hello/conf/test.config" linenums="13" hl_lines="3-4"
     process {
         resourceLimits = [
             cpus: 4,
