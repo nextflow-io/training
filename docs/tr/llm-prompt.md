@@ -9,7 +9,52 @@ The target language for this translation is **Turkish** (`tr`).
 - Prefer active voice when possible.
 - Pay strict attention to vowel harmony in all suffixes and borrowed-word inflections.
 
-### 1.1. Sentence Structure (Word Order)
+### 1.1. Punctuation: Comma, Semicolon, and Period
+
+Turkish uses commas, semicolons, and periods differently from English. Do not mirror English punctuation mechanically.
+
+**Comma (virgül)** — use sparingly:
+
+- No comma before "ve" (and) in lists:
+  ```
+  Wrong:  modüler, ölçeklenebilir, ve taşınabilir
+  Correct: modüler, ölçeklenebilir ve taşınabilir
+  ```
+- No comma before participial (sıfat-fiil) phrases — these are embedded in Turkish with no comma:
+  ```
+  Wrong:  Nextflow kullanılarak oluşturulmuş, küratörlüğü yapılmış pipeline'lar
+  Correct: Nextflow kullanılarak oluşturulmuş pipeline'lar
+  ```
+- Comma before clause connectors like "bu da", "bu nedenle", "bu sayede" is correct:
+  ```
+  Correct: Pipeline'lar taşınabilir olacak şekilde tasarlanmıştır, bu da
+           araştırmacıların kendi verileriyle kolayca çalıştırmasını sağlar.
+  ```
+
+**Semicolon (noktalı virgül)** — use to join closely related independent clauses, or to separate list items that already contain commas:
+
+```
+Correct: Pipeline'lar modüler ve ölçeklenebilirdir; araştırmacılar bunları
+         kendi hesaplama kaynaklarıyla kolayca çalıştırabilir.
+```
+
+Do not use a semicolon where a period would be cleaner.
+
+**Period (nokta)** — prefer over comma chains:
+
+When an English sentence is long and comma-heavy, split it into shorter Turkish sentences with periods rather than preserving the comma chain.
+
+```
+Wrong (comma chain):
+  nf-core, açık geliştirmeyi, test etmeyi ve akran değerlendirmesini teşvik eden,
+  topluluk tarafından geliştirilen pipeline'lar sunan bir projedir.
+
+Correct (split into sentences):
+  nf-core, topluluk tarafından geliştirilen pipeline'lar sunan bir projedir.
+  Proje; açık geliştirmeyi, test etmeyi ve akran değerlendirmesini teşvik eder.
+```
+
+### 1.2. Sentence Structure (Word Order)
 
 Turkish is a **verb-final, left-branching** language. Subordinate and participial clauses that appear at the **end** of an English sentence must be moved to **before** the main clause in Turkish.
 
