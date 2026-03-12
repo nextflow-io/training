@@ -1,6 +1,6 @@
 # Başlangıç
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 ## Eğitim ortamını başlatın
 
@@ -97,7 +97,7 @@ tree . -L 2
 Bölümü genişletmek ve içeriğini görüntülemek için renkli kutuya tıklayın.
 Beklenen komut çıktısının yanı sıra dizin ve dosya içeriğini özlü bir şekilde görüntülemek için bu tür daraltılabilir bölümler kullanıyoruz.
 
-- **`.nf` dosyaları**, kursun hangi bölümünde kullanıldıklarına göre numaralandırılmış workflow betikleridir.
+- **`.nf` dosyaları**, kursun hangi bölümünde kullanıldıklarına göre numaralandırılmış iş akışı betikleridir.
 
 - **`nextflow.config` dosyası**, minimum ortam özelliklerini ayarlayan bir yapılandırma dosyasıdır.
   Şimdilik görmezden gelebilirsiniz.
@@ -106,7 +106,7 @@ Beklenen komut çıktısının yanı sıra dizin ve dosya içeriğini özlü bir
 
 - **`test-params.*`** dosyaları, Bölüm 3'te (Yapılandırma) kullanacağımız yapılandırma dosyalarıdır. Şimdilik görmezden gelebilirsiniz.
 
-- **`solutions` dizini**, kursu tamamlamanın sonucunda oluşan workflow'un ve yardımcı dosyalarının (yapılandırma ve modüller) son halini içerir.
+- **`solutions` dizini**, kursu tamamlamanın sonucunda oluşan iş akışının ve yardımcı dosyalarının (yapılandırma ve modüller) son halini içerir.
   Çalışmanızı kontrol etmek ve herhangi bir sorunu gidermek için referans olarak kullanılması amaçlanmıştır.
 
 ## Hazırlık kontrol listesi

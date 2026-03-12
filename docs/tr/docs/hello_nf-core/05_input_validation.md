@@ -60,7 +60,7 @@ Pipeline hemen net, eyleme dönüştürülebilir hata mesajlarıyla başarısız
 ### 0.2. nf-schema eklentisi
 
 [nf-schema eklentisi](https://nextflow-io.github.io/nf-schema/latest/), Nextflow pipeline'ları için kapsamlı doğrulama yetenekleri sağlayan bir Nextflow eklentisidir.
-nf-schema herhangi bir Nextflow workflow'u ile çalışsa da, tüm nf-core pipeline'ları için standart doğrulama çözümüdür.
+nf-schema herhangi bir Nextflow iş akışıyla çalışsa da, tüm nf-core pipeline'ları için standart doğrulama çözümüdür.
 
 nf-schema birkaç temel işlev sağlar:
 
@@ -92,7 +92,7 @@ nf-schema, kullanımdan kaldırılmış nf-validation eklentisinin halefidir ve 
 
 ### 0.3. İki tür doğrulama için iki şema dosyası
 
-Bir nf-core pipeline'ı, iki doğrulama türüne karşılık gelen iki ayrı şema dosyası kullanacaktır:
+Bir nf-core pipeline'ı, iki doğrulama türüne karşılık gelen iki ayrı şema dosyası kullanır:
 
 | Şema Dosyası               | Amaç                     | Doğruladığı                                               |
 | -------------------------- | ------------------------ | --------------------------------------------------------- |
@@ -132,9 +132,9 @@ graph LR
     C -->|✗ Geçersiz| F[Hata: Girdi verisini düzeltin]
 ```
 
-Doğrulama, herhangi bir pipeline süreci çalışmadan **önce** gerçekleşmeli, böylece hızlı geri bildirim sağlanır ve hesaplama süresi boşa harcanmaz.
+Doğrulama, herhangi bir pipeline süreci çalışmadan **önce** gerçekleşmeli; böylece hızlı geri bildirim sağlanır ve hesaplama süresi boşa harcanmaz.
 
-Şimdi bu ilkeleri uygulamaya koyalım, parametre doğrulamasıyla başlayarak.
+Şimdi bu ilkeleri uygulamaya koyalım; parametre doğrulamasıyla başlayarak.
 
 ---
 
@@ -148,7 +148,7 @@ nf-core pipeline şablonu nf-schema ile birlikte gelir ve zaten kurulmuş ve yap
 
 - nf-schema eklentisi `nextflow.config` içindeki `plugins{}` bloğu aracılığıyla kurulur
 - Parametre doğrulaması varsayılan olarak `params.validate_params = true` aracılığıyla etkinleştirilir
-- Doğrulama, pipeline başlatma sırasında `UTILS_NFSCHEMA_PLUGIN` alt workflow'u tarafından gerçekleştirilir
+- Doğrulama, pipeline başlatma sırasında `UTILS_NFSCHEMA_PLUGIN` alt iş akışı tarafından gerçekleştirilir
 
 Doğrulama davranışı `nextflow.config` içindeki `validation{}` kapsamı aracılığıyla kontrol edilir.
 
@@ -439,7 +439,7 @@ Bunu her nesnenin en azından bir `greeting` alanına sahip olduğu bir nesne di
 nf-core pipeline şablonu, çift sonlu dizileme verisi için tasarlanmış varsayılan bir `assets/schema_input.json` içerir.
 Bunu selamlamalar kullanım senaryomuz için daha basit bir şema ile değiştirmemiz gerekiyor.
 
-`assets/schema_input.json` dosyasını açın ve `properties` ve `required` bölümlerini değiştirin:
+`assets/schema_input.json` dosyasını açın ve `properties` ile `required` bölümlerini değiştirin:
 
 === "Sonra"
 
@@ -570,7 +570,7 @@ Yapmamız gerekenler:
 
 1. `samplesheetToList` fonksiyonunu kullan (şablonda zaten içe aktarılmış)
 2. Girdiyi doğrula ve ayrıştır
-3. Workflow'umuz için sadece selamlama dizilerini çıkar
+3. İş akışımız için sadece selamlama dizilerini çıkar
 
 İlk olarak, `samplesheetToList` fonksiyonunun dosyanın üst kısmında zaten içe aktarıldığını unutmayın (nf-core şablonu bunu varsayılan olarak içerir):
 
@@ -723,7 +723,7 @@ cp assets/greetings.csv assets/invalid_greetings.csv
     Holà,es,98
     ```
 
-Bu, şemamızla eşleşmez, bu nedenle doğrulama bir hata atmalıdır.
+Bu, şemamızla eşleşmez; bu nedenle doğrulama bir hata atmalıdır.
 
 Pipeline'ı bu geçersiz girdi ile çalıştırmayı deneyin:
 

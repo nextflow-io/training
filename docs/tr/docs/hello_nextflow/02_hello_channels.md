@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 /// caption
@@ -883,9 +883,9 @@ Bunu hemen test etmek için çalıştırabiliriz, ancak bu sırada kanal içerik
         greetings_array = ['Hello','Bonjour','Holà']
         // girdiler için bir kanal oluştur
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "flatten öncesi: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
-                             .view { greeting -> "flatten sonrası: $greeting" }
+                             .view { greeting -> "After flatten: $greeting" }
         // bir selamlama yayınla
         sayHello(greeting_ch)
 
@@ -914,7 +914,7 @@ Bunu hemen test etmek için çalıştırabiliriz, ancak bu sırada kanal içerik
     }
     ```
 
-İkinci bir `.view` ifadesi eklediğimizi ve her biri için boş parantezleri (`()`) biraz kod içeren süslü parantezlerle değiştirdiğimizi görüyorsunuz, örneğin `{ greeting -> "flatten öncesi: $greeting" }`.
+İkinci bir `.view` ifadesi eklediğimizi ve her biri için boş parantezleri (`()`) biraz kod içeren süslü parantezlerle değiştirdiğimizi görüyorsunuz, örneğin `{ greeting -> "Before flatten: $greeting" }`.
 
 Bunlara _closure_ denir. İçerdikleri kod, kanaldaki her öğe için yürütülecektir.
 İç değer için burada `greeting` adında (ancak herhangi bir rastgele ad olabilir) geçici bir değişken tanımlıyoruz, bu yalnızca o closure kapsamında kullanılır.
@@ -946,16 +946,16 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔
-    flatten öncesi: [Hello, Bonjour, Holà]
-    flatten sonrası: Hello
-    flatten sonrası: Bonjour
-    flatten sonrası: Holà
+    Before flatten: [Hello, Bonjour, Holà]
+    After flatten: Hello
+    After flatten: Bonjour
+    After flatten: Holà
     ```
 
 Bu sefer çalışıyor VE `flatten()` operatörünü çalıştırmadan önce ve sonra kanal içeriklerinin nasıl göründüğüne dair ek bilgi veriyor.
 
-- Tek bir `flatten öncesi:` ifadesi görüyorsunuz çünkü o noktada kanal bir öğe içeriyor, orijinal dizi.
-- Sonra, artık kanalda bireysel öğeler olan her selamlama için bir tane olmak üzere üç ayrı `flatten sonrası:` ifadesi görüyorsunuz.
+- Tek bir `Before flatten:` ifadesi görüyorsunuz çünkü o noktada kanal bir öğe içeriyor, orijinal dizi.
+- Sonra, artık kanalda bireysel öğeler olan her selamlama için bir tane olmak üzere üç ayrı `After flatten:` ifadesi görüyorsunuz.
 
 Önemli olarak, bu her öğenin artık iş akışı tarafından ayrı ayrı işlenebileceği anlamına gelir.
 
@@ -1048,9 +1048,9 @@ Dosya yollarını işlemek için yerleşik işlevselliğe sahip yeni bir kanal f
         main:
         // bir CSV dosyasından girdiler için bir kanal oluştur
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "flatten öncesi: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "flatten sonrası: $greeting" }
+                             // .view { greeting -> "After flatten: $greeting" }
         // bir selamlama yayınla
         sayHello(greeting_ch)
 
@@ -1069,9 +1069,9 @@ Dosya yollarını işlemek için yerleşik işlevselliğe sahip yeni bir kanal f
         greetings_array = ['Hello','Bonjour','Holà']
         // girdiler için bir kanal oluştur
         greeting_ch = channel.of(greetings_array)
-                             .view { greeting -> "flatten öncesi: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
                              .flatten()
-                             .view { greeting -> "flatten sonrası: $greeting" }
+                             .view { greeting -> "After flatten: $greeting" }
         // bir selamlama yayınla
         sayHello(greeting_ch)
 
@@ -1099,7 +1099,7 @@ nextflow run hello-channels.nf
     Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5
 
     [-        ] sayHello [  0%] 0 of 1
-    flatten öncesi: /workspaces/training/hello-nextflow/data/greetings.csv
+    Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv
     ERROR ~ Error executing process > 'sayHello (1)'
 
     Caused by:
@@ -1137,7 +1137,7 @@ Görünüşe göre başka bir [operatöre](https://nextflow.io/docs/latest/refer
 
 ### 4.2. Dosyayı ayrıştırmak için `splitCsv()` operatörünü kullanın
 
-Operatör listesine tekrar baktığımızda, CSV formatındaki metni ayrıştırmak ve bölmek için tasarlanmış [`splitCsv()`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv) operatörünü buluyoruz.
+Operatör listesine tekrar baktığımızda, CSV formatındaki metni ayrıştırmak ve bölmek için tasarlanmış [`splitCsv()`](https://nextflow.io/docs/latest/reference/operator.html#splitcsv) operatörünü buluyoruz.
 
 #### 4.2.1. `splitCsv()`'yi kanala uygulayın
 
@@ -1153,9 +1153,9 @@ Operatörü uygulamak için, daha önce olduğu gibi kanal fabrikası satırına
         main:
         // bir CSV dosyasından girdiler için bir kanal oluştur
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "splitCsv öncesi: $csv" }
+                             .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "splitCsv sonrası: $csv" }
+                             .view { csv -> "After splitCsv: $csv" }
         // bir selamlama yayınla
         sayHello(greeting_ch)
 
@@ -1172,9 +1172,9 @@ Operatörü uygulamak için, daha önce olduğu gibi kanal fabrikası satırına
         main:
         // bir CSV dosyasından girdiler için bir kanal oluştur
         greeting_ch = channel.fromPath(params.input)
-                             .view { greeting -> "flatten öncesi: $greeting" }
+                             .view { greeting -> "Before flatten: $greeting" }
                              // .flatten()
-                             // .view { greeting -> "flatten sonrası: $greeting" }
+                             // .view { greeting -> "After flatten: $greeting" }
         // bir selamlama yayınla
         sayHello(greeting_ch)
 
@@ -1203,10 +1203,10 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [24/76da2f] sayHello (2) [  0%] 0 of 3 ✘
-    splitCsv öncesi: /workspaces/training/hello-nextflow/data/greetings.csv
-    splitCsv sonrası: [Hello, English, 123]
-    splitCsv sonrası: [Bonjour, French, 456]
-    splitCsv sonrası: [Holà, Spanish, 789]
+    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    After splitCsv: [Hello, English, 123]
+    After splitCsv: [Bonjour, French, 456]
+    After splitCsv: [Holà, Spanish, 789]
     ERROR ~ Error executing process > 'sayHello (2)'
 
     Caused by:
@@ -1272,11 +1272,11 @@ Bu, 'kanaldaki her satır için, içerdiği 0. (birinci) öğeyi al' anlamına g
         main:
         // bir CSV dosyasından girdiler için bir kanal oluştur
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "splitCsv öncesi: $csv" }
+                             .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "splitCsv sonrası: $csv" }
+                             .view { csv -> "After splitCsv: $csv" }
                              .map { item -> item[0] }
-                             .view { csv -> "map sonrası: $csv" }
+                             .view { csv -> "After map: $csv" }
         // bir selamlama yayınla
         sayHello(greeting_ch)
 
@@ -1293,9 +1293,9 @@ Bu, 'kanaldaki her satır için, içerdiği 0. (birinci) öğeyi al' anlamına g
         main:
         // bir CSV dosyasından girdiler için bir kanal oluştur
         greeting_ch = channel.fromPath(params.input)
-                             .view { csv -> "splitCsv öncesi: $csv" }
+                             .view { csv -> "Before splitCsv: $csv" }
                              .splitCsv()
-                             .view { csv -> "splitCsv sonrası: $csv" }
+                             .view { csv -> "After splitCsv: $csv" }
         // bir selamlama yayınla
         sayHello(greeting_ch)
 
@@ -1323,22 +1323,22 @@ nextflow run hello-channels.nf
 
     executor >  local (3)
     [54/6eebe3] sayHello (3) [100%] 3 of 3 ✔
-    splitCsv öncesi: /workspaces/training/hello-nextflow/data/greetings.csv
-    splitCsv sonrası: [Hello, English, 123]
-    splitCsv sonrası: [Bonjour, French, 456]
-    splitCsv sonrası: [Holà, Spanish, 789]
-    map sonrası: Hello
-    map sonrası: Bonjour
-    map sonrası: Holà
+    Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv
+    After splitCsv: [Hello, English, 123]
+    After splitCsv: [Bonjour, French, 456]
+    After splitCsv: [Holà, Spanish, 789]
+    After map: Hello
+    After map: Bonjour
+    After map: Holà
     ```
 
 Bu sefer hatasız çalışmalı.
 
 `view()` ifadelerinin çıktısına bakarak şunları görüyorsunuz:
 
-- Tek bir `splitCsv öncesi:` ifadesi: o noktada kanal bir öğe içeriyor, orijinal dosya yolu.
-- Üç ayrı `splitCsv sonrası:` ifadesi: her selamlama için bir tane, ama her biri dosyadaki o satıra karşılık gelen bir dizi içinde bulunuyor.
-- Üç ayrı `map sonrası:` ifadesi: her selamlama için bir tane, bunlar artık kanalda bireysel öğeler.
+- Tek bir `Before splitCsv:` ifadesi: o noktada kanal bir öğe içeriyor, orijinal dosya yolu.
+- Üç ayrı `After splitCsv:` ifadesi: her selamlama için bir tane, ama her biri dosyadaki o satıra karşılık gelen bir dizi içinde bulunuyor.
+- Üç ayrı `After map:` ifadesi: her selamlama için bir tane, bunlar artık kanalda bireysel öğeler.
 
 _Satırların çıktınızda farklı bir sırada görünebileceğini unutmayın._
 
