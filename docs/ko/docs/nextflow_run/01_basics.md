@@ -412,7 +412,7 @@ echo 'Hello World!' > output.txt
     }
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: String
@@ -522,7 +522,7 @@ workflow {
 
 ```groovy title="1-hello.nf" linenums="20"
 /*
- * Pipeline parameters
+ * 파이프라인 매개변수
  */
 params {
     input: String
