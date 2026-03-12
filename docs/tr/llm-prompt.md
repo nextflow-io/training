@@ -77,6 +77,14 @@ This applies to all trailing English phrases such as:
 - "by running..." → "...çalıştırarak, [ana cümle]"
 - "before doing X..." → "X yapmadan önce, [ana cümle]"
 
+### 1.3. Handling Long Introductory Phrases and Complex Sentences
+
+When translating structures like "You will be introduced to [X]...":
+
+- If [X] is very long, start with "X ile tanışacaksınız" or move the main subject to the beginning as an independent sentence.
+- If the source sentence has too many subordinate clauses, split it into two meaningful parts instead of forcing a single complex inverted sentence.
+  - **Preferred structure**: "X ile tanışacaksınız. Bu oluşum aynı zamanda Y ve Z'yi de içerir."
+
 ## 2. Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
@@ -244,6 +252,9 @@ These terms should be translated in prose (but kept in English in code):
 | collect       | toplamak                 |
 | wrap          | kapsamak                 |
 | overview      | giriş                    |
+| peer review   | hakem değerlendirmesi    |
+| curated set   | özenle seçilmiş / denetlenmiş koleksiyon |
+| community effort | topluluk girişimi / topluluk çabası |
 
 ## 7. Admonition Titles
 
