@@ -179,7 +179,7 @@ workflow 코드에서 무엇이 이를 가능하게 하는지 살펴보겠습니
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * echo를 사용하여 'Hello World!'를 파일에 출력
     */
     process sayHello {
 
@@ -196,7 +196,7 @@ workflow 코드에서 무엇이 이를 가능하게 하는지 살펴보겠습니
     }
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: Path
@@ -434,7 +434,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * echo를 사용하여 'Hello World!'를 파일에 출력
     */
     process sayHello {
 
@@ -451,7 +451,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     }
 
     /*
-    * Use a text replacement tool to convert the greeting to uppercase
+    * 텍스트 치환 도구를 사용하여 인사말을 대문자로 변환
     */
     process convertToUpper {
 
@@ -468,7 +468,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     }
 
     /*
-    * Collect uppercase greetings into a single output file
+    * 대문자로 변환된 인사말을 하나의 출력 파일로 모음
     */
     process collectGreetings {
 
@@ -489,7 +489,7 @@ nextflow run 2b-multistep.nf --input data/greetings.csv
     }
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: Path
