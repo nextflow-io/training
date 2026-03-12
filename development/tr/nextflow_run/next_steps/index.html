@@ -1330,7 +1330,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -3612,20 +3612,20 @@
  
 
 <h1 id="kurs-ozeti">Kurs özeti<a class="headerlink" href="#kurs-ozeti" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay Zeka Destekli Çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
-<p>Nextflow Run eğitim kursunu tamamladığınız için tebrikler!</p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
+<p>Nextflow Run eğitim kursunu tamamladığınız için tebrikler! 🎉</p>
 <!-- placeholder for video -->
 
 <h2 id="yolculugunuz">Yolculuğunuz<a class="headerlink" href="#yolculugunuz" title="Permanent link">&para;</a></h2>
-<p>Çok temel bir workflow ile başladınız ve onu çalıştırmayı, çıktıları bulmayı ve çalışmasını yönetmeyi öğrendiniz.
-Ardından, bu workflow'un giderek daha karmaşık versiyonları üzerinde çalıştınız ve channel'lar ile operatörler, kod modülerleştirme ve konteynerlar dahil Nextflow pipeline'larına güç veren temel kavramları ve mekanizmaları tanımayı öğrendiniz.
+<p>Çok temel bir iş akışı ile başladınız ve onu çalıştırmayı, çıktıları bulmayı ve çalışmasını yönetmeyi öğrendiniz.
+Ardından, bu iş akışının giderek daha karmaşık versiyonları üzerinde çalıştınız ve kanal'lar ile operatörler, kod modülerleştirme ve konteynerlar dahil Nextflow pipeline'larına güç veren temel kavramları ve mekanizmaları tanımayı öğrendiniz.
 Son olarak, tercihlerinize ve hesaplama altyapınıza uyması için bir pipeline'ın yapılandırmasını nasıl özelleştireceğinizi öğrendiniz.</p>
 <h3 id="ne-ogrendiniz">Ne öğrendiniz<a class="headerlink" href="#ne-ogrendiniz" title="Permanent link">&para;</a></h3>
-<p>Artık Hello pipeline'ının çalışmasını yönetebilir, nasıl yapılandırıldığını tanımlayabilir ve dahil olan ana kod parçalarını tanımlayabilirsiniz.</p>
+<p>Artık Hello pipeline'ının çalışmasını yönetebilir, nasıl yapılandırıldığını tanımlayabilir ve dahil olan ana kod parçalarını belirleyebilirsiniz.</p>
 <ul>
-<li>Hello workflow'unun son hali, girdi olarak metin selamlamaları içeren bir CSV dosyası alır.</li>
-<li>Dört adım, ayrı modül dosyalarında saklanan Nextflow process'leri olarak uygulanır (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> ve <code>cowpy</code>).</li>
-<li>Sonuçlar <code>results/</code> adlı bir dizine yayınlanır.</li>
+<li>Hello iş akışının son hali, girdi olarak metin selamlamaları içeren bir CSV dosyası alır.</li>
+<li>Dört adım, ayrı modül dosyalarında saklanan Nextflow süreçleri olarak uygulanır (<code>sayHello</code>, <code>convertToUpper</code>, <code>collectGreetings</code> ve <code>cowpy</code>).</li>
+<li>Sonuçlar <code>results/</code> adlı bir dizine yayımlanır.</li>
 <li>Pipeline'ın nihai çıktısı, büyük harfli selamlamaları söyleyen bir karakterin ASCII art'ını içeren düz metin dosyasıdır.</li>
 </ul>
 <figure class="excalidraw">
@@ -3640,17 +3640,17 @@ Son olarak, tercihlerinize ve hesaplama altyapınıza uyması için bir pipeline
 <ol>
 <li><strong><code>sayHello</code>:</strong> Her selamlamayı kendi çıktı dosyasına yazar (örn. "Hello-output.txt")</li>
 <li><strong><code>convertToUpper</code>:</strong> Her selamlamayı büyük harfe dönüştürür (örn. "HELLO")</li>
-<li><strong><code>collectGreetings</code>:</strong> Tüm büyük harfli selamlamaları tek bir batch dosyasına toplar</li>
+<li><strong><code>collectGreetings</code>:</strong> Tüm büyük harfli selamlamaları tek bir toplu dosyaya toplar</li>
 <li><strong><code>cowpy</code>:</strong> <code>cowpy</code> aracını kullanarak ASCII art oluşturur</li>
 </ol>
-<p>Workflow yapılandırması, girdilerin ve parametrelerin esnek, tekrar üretilebilir bir şekilde sağlanmasını destekler.</p>
+<p>İş akışı yapılandırması, girdilerin ve parametrelerin esnek, tekrar üretilebilir bir şekilde sağlanmasını destekler.</p>
 <h3 id="kazanlan-beceriler">Kazanılan beceriler<a class="headerlink" href="#kazanlan-beceriler" title="Permanent link">&para;</a></h3>
 <p>Bu uygulamalı kurs sayesinde şunları öğrendiniz:</p>
 <ul>
-<li>Nextflow workflow'unu yerel olarak başlatma</li>
+<li>Nextflow iş akışını yerel olarak başlatma</li>
 <li>Nextflow tarafından oluşturulan çıktıları (sonuçlar) ve log dosyalarını bulma ve yorumlama</li>
-<li>Basit çok adımlı bir workflow'u oluşturan temel Nextflow bileşenlerini tanıma</li>
-<li>Operatörler ve channel factory'leri gibi ileri adım kavramlarını tanımlama</li>
+<li>Basit çok adımlı bir iş akışını oluşturan temel Nextflow bileşenlerini tanıma</li>
+<li>Operatörler ve kanal factory'leri gibi ileri adım kavramlarını tanımlama</li>
 <li>Pipeline'ları farklı hesaplama ortamları için yapılandırma</li>
 </ul>
 <p>Artık mevcut Nextflow pipeline'larını kendi çalışmanıza entegre etmeye başlamak için temel bilgilerle donatıldınız.</p>
@@ -3662,7 +3662,7 @@ Son olarak, tercihlerinize ve hesaplama altyapınıza uyması için bir pipeline
 <li><a href="../../hello_nf-core/">Hello nf-core</a> ile nf-core'a başlayın</li>
 <li><a href="../../side_quests/debugging/">Debugging Side Quest</a> ile hata ayıklama tekniklerini öğrenin</li>
 </ul>
-<p>Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen bulut tabanlı bir platform olan <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>'a bakmanızı öneririz; workflow'larınızı başlatmayı ve yönetmeyi, verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli analizler çalıştırmayı çok daha kolay hale getirir.</p>
+<p>Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen bulut tabanlı bir platform olan <a href="https://seqera.io/"><strong>Seqera Platform</strong></a>'a bakmanızı öneririz; iş akışlarınızı başlatmayı ve yönetmeyi, verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli analizler çalıştırmayı çok daha kolay hale getirir.</p>
 <h2 id="yardm-alma">Yardım alma<a class="headerlink" href="#yardm-alma" title="Permanent link">&para;</a></h2>
 <p>Yardım kaynakları ve topluluk desteği için <a href="../../help/">Yardım sayfasına</a> bakın.</p>
 <h2 id="geri-bildirim-anketi">Geri bildirim anketi<a class="headerlink" href="#geri-bildirim-anketi" title="Permanent link">&para;</a></h2>

@@ -2011,7 +2011,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -5114,12 +5114,13 @@ Bu eğitim kursunun 5. Bölümünde üretilen betiğe eşdeğerdir, ancak çıkt
 <p>Bu sizin için çalıştıysa, pipeline'larınızı nasıl yapılandıracağınızı öğrenmeye hazırsınız.</p>
 <hr />
 <h2 id="1-is-aks-girdi-parametrelerini-yonetin">1. İş akışı girdi parametrelerini yönetin<a class="headerlink" href="#1-is-aks-girdi-parametrelerini-yonetin" title="Permanent link">&para;</a></h2>
-<p>İş akışı betiğinin kendisinde varsayılan değerler ayarlanmış olarak, komut satırı üzerinden birkaç parametre değerini kabul edecek şekilde kurulmuş olan bir yapılandırma unsuruyla başlayacağız.
+<p>Şimdiye kadar üzerinde çalıştığımız konunun basit bir uzantısı olan bir yapılandırma unsuruyla başlayacağız: girdi parametrelerinin yönetimi.</p>
+<p>Şu anda iş akışımız, iş akışı betiğinin kendisindeki bir <code>params</code> bloğunda varsayılan değerler ayarlanmış olarak komut satırı üzerinden birkaç parametre değerini kabul edecek şekilde kurulmuştur.
 Ancak, bu varsayılanları komut satırında parametreler belirtmek veya orijinal betik dosyasını değiştirmek zorunda kalmadan geçersiz kılmak isteyebilirsiniz.</p>
 <p>Bunu yapmanın birden fazla yolu vardır; size çok yaygın olarak kullanılan üç temel yolu göstereceğiz.</p>
 <h3 id="11-varsaylan-degerleri-nextflowconfig-dosyasna-tasyn">1.1. Varsayılan değerleri <code>nextflow.config</code> dosyasına taşıyın<a class="headerlink" href="#11-varsaylan-degerleri-nextflowconfig-dosyasna-tasyn" title="Permanent link">&para;</a></h3>
 <p>Bu en basit yaklaşımdır, ancak ana <code>nextflow.config</code> dosyası her çalıştırma için düzenlemek isteyeceğiniz bir şey olmadığından muhtemelen en az esnektir.
-Ancak, iş akışında parametreleri <em>bildirme</em> (ki bu kesinlikle oraya aittir) ile <em>varsayılan değerler</em> sağlama (bunlar bir yapılandırma dosyasında daha uygun) kaygılarını ayırma avantajına sahiptir.</p>
+Bununla birlikte, iş akışında parametreleri <em>bildirme</em> (ki bu kesinlikle oraya aittir) ile <em>varsayılan değerler</em> sağlama (bunlar bir yapılandırma dosyasında daha uygun) kaygılarını ayırma avantajına sahiptir.</p>
 <p>Bunu iki adımda yapalım.</p>
 <h4 id="111-yaplandrma-dosyasnda-bir-params-blogu-olusturun">1.1.1. Yapılandırma dosyasında bir <code>params</code> bloğu oluşturun<a class="headerlink" href="#111-yaplandrma-dosyasnda-bir-params-blogu-olusturun" title="Permanent link">&para;</a></h4>
 <p><code>nextflow.config</code> dosyasında aşağıdaki kod değişikliklerini yapın:</p>
@@ -5568,7 +5569,7 @@ Alt dizine ihtiyaç duymayan çıktılar için <code>path</code> yönergesini bo
 </div>
 <h3 id="22-dinamik-ckt-yollar">2.2. Dinamik çıktı yolları<a class="headerlink" href="#22-dinamik-ckt-yollar" title="Permanent link">&para;</a></h3>
 <p>CLI üzerinden çıktı dizinini değiştirmenin yanı sıra, <code>outputDir</code> kullanarak yapılandırma dosyasında özel bir varsayılan değer de ayarlayabiliriz.
-Bu, dizin yolunu dinamik olarak ayarlamamıza olanak tanır - sadece statik dizeler kullanmakla kalmaz.</p>
+Bu, dizin yolunu dinamik olarak ayarlamamıza olanak tanır; yalnızca statik dizeler kullanmakla sınırlı kalmayız.</p>
 <h4 id="221-yaplandrma-dosyasnda-outputdir-ayarlayn">2.2.1. Yapılandırma dosyasında <code>outputDir</code> ayarlayın<a class="headerlink" href="#221-yaplandrma-dosyasnda-outputdir-ayarlayn" title="Permanent link">&para;</a></h4>
 <p><code>nextflow.config</code> dosyasına aşağıdaki kodu ekleyin:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Sonra</label><label for="__tabbed_4_2">Önce</label></div>
@@ -5632,7 +5633,7 @@ Artık <code>--batch</code> parametresini ayarlayarak çıktı konumunu değişt
 Ayarlanırsa, yapılandırma seçeneği tamamen göz ardı edilecektir.</p>
 </div>
 <h4 id="222-batch-ve-surec-adlaryla-alt-dizinler">2.2.2. Batch ve süreç adlarıyla alt dizinler<a class="headerlink" href="#222-batch-ve-surec-adlaryla-alt-dizinler" title="Permanent link">&para;</a></h4>
-<p>Ayrıca çıktı başına alt dizin çıktı <code>path</code> bildirimlerini dinamik olarak ayarlayabiliriz.</p>
+<p>Ayrıca çıktı başına alt dizin <code>path</code> bildirimlerini dinamik olarak ayarlayabiliriz.</p>
 <p>Örneğin, çıktı yolu bildiriminde <code>&lt;process&gt;.name</code> referansı vererek çıktılarımızı sürece göre organize edebiliriz:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Sonra</label><label for="__tabbed_5_2">Önce</label></div>
 <div class="tabbed-content">
@@ -5860,7 +5861,7 @@ Bunu geri koyalım ve ayrıca dosyaları bir <code>params.batch</code> alt dizin
 </div>
 </div>
 <h4 id="223-pipeline-calstrn">2.2.3. Pipeline'ı çalıştırın<a class="headerlink" href="#223-pipeline-calstrn" title="Permanent link">&para;</a></h4>
-<p>Bunun pratikte nasıl çalıştığını görelim, hem <code>-output-dir</code> (veya kısaca <code>-o</code>) değerini <code>custom-outdir-config-2</code> olarak hem de batch adını komut satırından <code>rep2</code> olarak ayarlayalım:</p>
+<p>Bunun pratikte nasıl çalıştığını görelim; hem <code>-output-dir</code> (veya kısaca <code>-o</code>) değerini <code>custom-outdir-config-2</code> olarak hem de batch adını komut satırından <code>rep2</code> olarak ayarlayalım:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-config.nf<span class="w"> </span>-output-dir<span class="w"> </span>custom-outdir-config-2<span class="w"> </span>--batch<span class="w"> </span>rep2
 </code></pre></div>
 <details class="success">
@@ -6057,7 +6058,7 @@ Bunu geri koyalım ve ayrıca dosyaları bir <code>params.batch</code> alt dizin
 <a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a><span class="go">            └── Holà-output.txt</span>
 </code></pre></div>
 </details>
-<p>Çıktı başına mod ayarlama yöntemini kullanmak isteyebileceğiniz ana neden, aynı iş akışı içinde karıştırmak ve eşleştirmek istemenizdir, <em>yani</em> bazı çıktıların kopyalanmasını ve bazılarının sembolik bağlantı olmasını sağlamak.</p>
+<p>Çıktı başına mod ayarlama yöntemini kullanmak isteyebileceğiniz ana neden, aynı iş akışı içinde karıştırmak ve eşleştirmek istemenizdir; <em>yani</em> bazı çıktıların kopyalanmasını ve bazılarının sembolik bağlantı olmasını sağlamak.</p>
 <p>Bu şekilde özelleştirebileceğiniz başka birçok seçenek vardır, ancak umarım bu size seçenek yelpazesi ve tercihlerinize uygun şekilde bunları etkili bir şekilde nasıl kullanacağınız konusunda bir fikir verir.</p>
 <h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
 <p>Çıktılarınızın yayınlandığı dizinlerin adlandırmasını ve yapısını, ayrıca iş akışı çıktı yayınlama modunu nasıl kontrol edeceğinizi biliyorsunuz.</p>
@@ -6065,7 +6066,7 @@ Bunu geri koyalım ve ayrıca dosyaları bir <code>params.batch</code> alt dizin
 <p>İş akışı yapılandırmanızı bilgi işlem ortamınıza nasıl uyarlayacağınızı, yazılım paketleme teknolojisiyle başlayarak öğrenin.</p>
 <hr />
 <h2 id="3-bir-yazlm-paketleme-teknolojisi-secin">3. Bir yazılım paketleme teknolojisi seçin<a class="headerlink" href="#3-bir-yazlm-paketleme-teknolojisi-secin" title="Permanent link">&para;</a></h2>
-<p>Şimdiye kadar girdilerin nasıl girdiğini ve girdilerin nereye çıktığını kontrol eden yapılandırma öğelerine bakıyorduk. Şimdi iş akışı yapılandırmanızı bilgi işlem ortamınıza uyarlamaya daha spesifik olarak odaklanma zamanı.</p>
+<p>Şimdiye kadar girdilerin nasıl girdiğini ve çıktıların nereye gittiğini kontrol eden yapılandırma öğelerine bakıyorduk. Şimdi iş akışı yapılandırmanızı bilgi işlem ortamınıza uyarlamaya daha spesifik olarak odaklanma zamanı.</p>
 <p>Bu yoldaki ilk adım, her adımda çalıştırılacak yazılım paketlerinin nereden geleceğini belirtmektir.
 Bunlar yerel bilgi işlem ortamında zaten yüklü mü?
 Görüntüleri almamız ve bunları bir konteyner sistemi aracılığıyla çalıştırmamız mı gerekiyor?
@@ -6164,7 +6165,7 @@ Bu normaldir ve Nextflow'un yeni bir paketi ilk kez kullandığınızda yaptığ
 <p>Bu yönergeler süreç başına atandığından, örneğin kullandığınız bilgi işlem altyapısı her ikisini de destekliyorsa, iş akışınızdaki bazı süreçleri Docker ile ve diğerlerini Conda ile çalıştıracak şekilde yapılandırmak, yani 'karıştırmak ve eşleştirmek' mümkündür.
 Bu durumda, yapılandırma dosyanızda hem Docker'ı hem de Conda'yı etkinleştirirsiniz.
 Belirli bir süreç için her ikisi de mevcutsa, Nextflow konteynerlere öncelik verecektir.</p>
-<p>Ve daha önce belirtildiği gibi, Nextflow birden fazla başka yazılım paketleme ve konteyner teknolojisini destekler, bu nedenle sadece bu ikisiyle sınırlı değilsiniz.</p>
+<p>Ve daha önce belirtildiği gibi, Nextflow birden fazla başka yazılım paketleme ve konteyner teknolojisini destekler; bu nedenle sadece bu ikisiyle sınırlı değilsiniz.</p>
 </details>
 <h3 id="ozet_2">Özet<a class="headerlink" href="#ozet_2" title="Permanent link">&para;</a></h3>
 <p>Her sürecin hangi yazılım paketini kullanması gerektiğini nasıl yapılandıracağınızı ve teknolojiler arasında nasıl geçiş yapacağınızı biliyorsunuz.</p>
@@ -6222,7 +6223,7 @@ Varsayılan olarak <code>local</code> olarak ayarlanmıştır, bu nedenle aşağ
 </code></pre></div>
 </details>
 <p>Neyse ki, Nextflow tüm bunları basitleştirir.
-<a href="https://nextflow.io/docs/latest/reference/process.html#cpus"><code>cpus</code></a>, <a href="https://nextflow.io/docs/latest/reference/process.html#memory"><code>memory</code></a> ve <a href="https://nextflow.io/docs/latest/reference/process.html#queue"><code>queue</code></a> gibi ilgili özellikleri belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar (diğer özellikler için <a href="https://nextflow.io/docs/latest/reference/process.html#process-directives">süreç yönergelerine</a> bakın) sadece bir kez.
+<a href="https://nextflow.io/docs/latest/reference/process.html#cpus"><code>cpus</code></a>, <a href="https://nextflow.io/docs/latest/reference/process.html#memory"><code>memory</code></a> ve <a href="https://nextflow.io/docs/latest/reference/process.html#queue"><code>queue</code></a> gibi ilgili özellikleri belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar (diğer özellikler için <a href="https://nextflow.io/docs/latest/reference/process.html#process-directives">süreç yönergelerine</a> bakın); bunu yalnızca bir kez yapmanız yeterlidir.
 Ardından, çalışma zamanında Nextflow, yürütücü ayarına göre uygun arka uca özgü betikleri oluşturmak için bu ayarları kullanacaktır.</p>
 <p>Bu standartlaştırılmış sözdizimini bir sonraki bölümde ele alacağız.</p>
 <h3 id="ozet_3">Özet<a class="headerlink" href="#ozet_3" title="Permanent link">&para;</a></h3>
@@ -6251,12 +6252,12 @@ Nextflow bunları seçilen yürütücü için uygun talimatlara çevirecektir.</
 <p>Bunu yapmak için komut satırınıza <code>-with-report &lt;dosyaadı&gt;.html</code> ekleyin.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-config.nf<span class="w"> </span>-with-report<span class="w"> </span>report-config-1.html
 </code></pre></div>
-<p>Rapor bir html dosyasıdır, indirebilir ve tarayıcınızda açabilirsiniz. Ayrıca soldaki dosya gezgininde sağ tıklayıp eğitim ortamında görüntülemek için <code>Show preview</code> seçeneğine tıklayabilirsiniz.</p>
+<p>Rapor bir html dosyasıdır; indirebilir ve tarayıcınızda açabilirsiniz. Ayrıca soldaki dosya gezgininde sağ tıklayıp eğitim ortamında görüntülemek için <code>Show preview</code> seçeneğine tıklayabilirsiniz.</p>
 <p>Raporu incelemek ve kaynakları ayarlamak için bazı fırsatları belirleyip belirleyemeyeceğinizi görmek için birkaç dakikanızı ayırın.
 Kullanımı tahsis edilenin yüzdesi olarak gösteren sekmelere tıkladığınızdan emin olun.</p>
 <p>Mevcut tüm özellikler hakkında belgeler için <a href="https://nextflow.io/docs/latest/reports.html">Raporlar</a> bölümüne bakın.</p>
 <h3 id="52-tum-surecler-icin-kaynak-tahsisleri-ayarlayn">5.2. Tüm süreçler için kaynak tahsisleri ayarlayın<a class="headerlink" href="#52-tum-surecler-icin-kaynak-tahsisleri-ayarlayn" title="Permanent link">&para;</a></h3>
-<p>Profilleme, eğitim iş akışımızdaki süreçlerin çok hafif olduğunu gösteriyor, bu yüzden varsayılan bellek tahsisini süreç başına 1GB'a düşürelim.</p>
+<p>Profilleme, eğitim iş akışımızdaki süreçlerin çok hafif olduğunu gösteriyor; bu yüzden varsayılan bellek tahsisini süreç başına 1GB'a düşürelim.</p>
 <p><code>nextflow.config</code> dosyanıza, pipeline parametreleri bölümünden önce aşağıdakileri ekleyin:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Sonra</label><label for="__tabbed_12_2">Önce</label></div>
 <div class="tabbed-content">
@@ -6326,7 +6327,7 @@ Kullanımı tahsis edilenin yüzdesi olarak gösteren sekmelere tıkladığını
 </div>
 <p>Bu, tükettiğimiz bilgi işlem miktarını azaltmaya yardımcı olacaktır.</p>
 <h3 id="53-belirli-bir-surec-icin-kaynak-tahsisleri-ayarlayn">5.3. Belirli bir süreç için kaynak tahsisleri ayarlayın<a class="headerlink" href="#53-belirli-bir-surec-icin-kaynak-tahsisleri-ayarlayn" title="Permanent link">&para;</a></h3>
-<p>Aynı zamanda, <code>cowpy</code> sürecinin diğerlerinden daha fazla kaynak gerektirdiğini varsayacağız, sadece bireysel bir süreç için tahsisleri nasıl ayarlayacağımızı gösterebilmemiz için.</p>
+<p>Aynı zamanda, <code>cowpy</code> sürecinin diğerlerinden daha fazla kaynak gerektirdiğini varsayacağız; yalnızca bireysel bir süreç için tahsisleri nasıl ayarlayacağımızı gösterebilmemiz için.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="13:2"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><input id="__tabbed_13_2" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">Sonra</label><label for="__tabbed_13_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -6367,14 +6368,14 @@ Kullanımı tahsis edilenin yüzdesi olarak gösteren sekmelere tıkladığını
 </div>
 </div>
 </div>
-<p>Bu yapılandırmayla, tüm süreçler 1GB bellek ve tek bir CPU (ima edilen varsayılan) talep edecek, <code>cowpy</code> süreci hariç, bu 2GB ve 2 CPU talep edecektir.</p>
+<p>Bu yapılandırmayla, tüm süreçler 1GB bellek ve tek bir CPU (ima edilen varsayılan) talep edecek; <code>cowpy</code> süreci hariç, bu 2GB ve 2 CPU talep edecektir.</p>
 <div class="admonition tip">
 <p class="admonition-title">İpucu</p>
 <p>Az CPU'ya sahip bir makineniz varsa ve süreç başına yüksek bir sayı tahsis ederseniz, süreç çağrılarının birbirinin arkasında sıraya girdiğini görebilirsiniz.
 Bunun nedeni Nextflow'un mevcut olandan daha fazla CPU talep etmememizi sağlamasıdır.</p>
 </div>
 <h3 id="54-guncellenmis-yaplandrmayla-is-aksn-calstrn">5.4. Güncellenmiş yapılandırmayla iş akışını çalıştırın<a class="headerlink" href="#54-guncellenmis-yaplandrmayla-is-aksn-calstrn" title="Permanent link">&para;</a></h3>
-<p>Hadi deneyelim, yapılandırma değişikliklerinden önce ve sonra performansı karşılaştırabilmemiz için profilleme raporu için farklı bir dosya adı sağlayalım.</p>
+<p>Hadi deneyelim; yapılandırma değişikliklerinden önce ve sonra performansı karşılaştırabilmemiz için profilleme raporu için farklı bir dosya adı sağlayalım.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-config.nf<span class="w"> </span>-with-report<span class="w"> </span>report-config-2.html
 </code></pre></div>
 <p>Bu çok küçük bir iş yükü olduğu için muhtemelen gerçek bir fark fark etmeyeceksiniz, ancak bu gerçek dünya iş akışının performansını ve kaynak gereksinimlerini analiz etmek için kullanacağınız yaklaşımdır.</p>
@@ -6415,7 +6416,7 @@ Ancak, bu sınırları aşan kaynak tahsisleriyle iş akışını çalıştırma
 <p>Hangi bilgi işlem altyapısını kullandığınıza bağlı olarak alternatif ayarlar arasında geçiş yapmak isteyebilirsiniz. Örneğin, dizüstü bilgisayarınızda yerel olarak küçük ölçekli testler geliştirmek ve çalıştırmak, ardından HPC veya bulutta tam ölçekli iş yüklerini çalıştırmak isteyebilirsiniz.</p>
 <p>Nextflow, farklı yapılandırmaları tanımlayan herhangi bir sayıda <a href="https://nextflow.io/docs/latest/config.html#config-profiles">profil</a> kurmanıza olanak tanır; bunları daha sonra yapılandırma dosyasının kendisini değiştirmek yerine bir komut satırı argümanı kullanarak çalışma zamanında seçebilirsiniz.</p>
 <h3 id="61-yerel-gelistirme-ve-hpcde-yurutme-arasnda-gecis-yapmak-icin-profiller-olusturun">6.1. Yerel geliştirme ve HPC'de yürütme arasında geçiş yapmak için profiller oluşturun<a class="headerlink" href="#61-yerel-gelistirme-ve-hpcde-yurutme-arasnda-gecis-yapmak-icin-profiller-olusturun" title="Permanent link">&para;</a></h3>
-<p>İki alternatif profil kuralım; biri normal bir bilgisayarda küçük ölçekli yükler çalıştırmak için, burada Docker konteynerlerini kullanacağız, ve biri Slurm zamanlayıcısı olan bir üniversite HPC'sinde çalıştırmak için, burada Conda paketlerini kullanacağız.</p>
+<p>İki alternatif profil kuralım; biri normal bir bilgisayarda küçük ölçekli yükler çalıştırmak için (burada Docker konteynerlerini kullanacağız) ve biri Slurm zamanlayıcısı olan bir üniversite HPC'sinde çalıştırmak için (burada Conda paketlerini kullanacağız).</p>
 <h4 id="611-profilleri-kurun">6.1.1. Profilleri kurun<a class="headerlink" href="#611-profilleri-kurun" title="Permanent link">&para;</a></h4>
 <p><code>nextflow.config</code> dosyanıza, pipeline parametreleri bölümünden sonra ancak çıktı ayarlarından önce aşağıdakileri ekleyin:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="14:2"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><input id="__tabbed_14_2" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">Sonra</label><label for="__tabbed_14_2">Önce</label></div>
@@ -6551,7 +6552,7 @@ Birlikte gruplandırmak istediğimiz başka yapılandırma öğeleri varsa ek pr
 Bunları iş akışı parametreleri için varsayılan değerler ayarlamak için de kullanabiliriz; bu, başkalarının uygun girdi değerlerini kendileri toplamak zorunda kalmadan iş akışını denemelerini kolaylaştırır.
 Bunu bir parametre dosyası kullanmaya alternatif olarak düşünebilirsiniz.</p>
 <h4 id="621-profili-kurun">6.2.1. Profili kurun<a class="headerlink" href="#621-profili-kurun" title="Permanent link">&para;</a></h4>
-<p>Bu bağlamda varsayılan değerleri ifade etme sözdizimi şöyle görünür, <code>test</code> olarak adlandırdığımız bir profil için:</p>
+<p>Bu bağlamda varsayılan değerleri ifade etme sözdizimi şöyle görünür; <code>test</code> olarak adlandırdığımız bir profil için:</p>
 <div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="w">    </span><span class="n">test</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a><span class="w">        </span><span class="n">params</span><span class="o">.&lt;</span><span class="n">parameter1</span><span class="o">&gt;</span>
 <a id="__codelineno-73-3" name="__codelineno-73-3" href="#__codelineno-73-3"></a><span class="w">        </span><span class="n">params</span><span class="o">.&lt;</span><span class="n">parameter2</span><span class="o">&gt;</span>
@@ -6607,7 +6608,7 @@ Bunu bir parametre dosyası kullanmaya alternatif olarak düşünebilirsiniz.</p
 </code></pre></div></td></tr></table></div>
 <p>Teknik yapılandırma profilleri gibi, istediğiniz herhangi bir ad altında parametreleri belirten birden fazla farklı profil kurabilirsiniz.</p>
 <h4 id="622-is-aksn-test-profiliyle-yerel-olarak-calstrn">6.2.2. İş akışını test profiliyle yerel olarak çalıştırın<a class="headerlink" href="#622-is-aksn-test-profiliyle-yerel-olarak-calstrn" title="Permanent link">&para;</a></h4>
-<p>Uygun bir şekilde, profiller birbirini dışlamaz, bu nedenle aşağıdaki sözdizimini kullanarak komut satırımızda birden fazla profil belirtebiliriz <code>-profile &lt;profil1&gt;,&lt;profil2&gt;</code> (herhangi bir sayıda profil için).</p>
+<p>Uygun bir şekilde, profiller birbirini dışlamaz; bu nedenle aşağıdaki sözdizimini kullanarak komut satırımızda birden fazla profil belirtebiliriz: <code>-profile &lt;profil1&gt;,&lt;profil2&gt;</code> (herhangi bir sayıda profil için).</p>
 <p>Aynı yapılandırma öğeleri için değerler ayarlayan ve aynı yapılandırma dosyasında açıklanan profilleri birleştirirseniz, Nextflow çatışmayı en son okuduğu değeri kullanarak çözecektir (<em>yani</em> dosyada daha sonra gelen her neyse).
 Çakışan ayarlar farklı yapılandırma kaynaklarında ayarlanmışsa, varsayılan <a href="https://nextflow.io/docs/latest/config.html">öncelik sırası</a> geçerlidir.</p>
 <p>Önceki komutumuza test profilini eklemeyi deneyelim:</p>
@@ -6626,7 +6627,7 @@ Bunu bir parametre dosyası kullanmaya alternatif olarak düşünebilirsiniz.</p
 <a id="__codelineno-76-9" name="__codelineno-76-9" href="#__codelineno-76-9"></a><span class="go">[06/a1ee14] cowpy              [100%] 1 of 1 ✔</span>
 </code></pre></div>
 </details>
-<p>Bu, mümkün olduğunda Docker kullanacak ve çıktıları <code>custom-outdir-config/test</code> altında üretecek ve bu sefer karakter komedi ikilisi <code>dragonandcow</code>.</p>
+<p>Bu, mümkün olduğunda Docker kullanacak ve çıktıları <code>custom-outdir-config/test</code> altında üretecek; bu sefer karakter komedi ikilisi <code>dragonandcow</code>.</p>
 <details class="abstract">
 <summary>Dosya içeriği</summary>
 <div class="highlight"><span class="filename">custom-outdir-config/test/cowpy/cowpy-COLLECTED-test-output.txt</span><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="go"> _________</span>
@@ -6657,11 +6658,11 @@ Bunu bir parametre dosyası kullanmaya alternatif olarak düşünebilirsiniz.</p
 <p class="admonition-title">İpucu</p>
 <p>Harici olarak depolanan daha büyük dosyalar için URL'lere işaret edebiliriz.
 Açık bir bağlantı olduğu sürece Nextflow bunları otomatik olarak indirecektir.</p>
-<p>Daha fazla ayrıntı için, Yan Görev <a href="../../side_quests/working_with_files/">Dosyalarla Çalışma</a> bölümüne bakın</p>
+<p>Daha fazla ayrıntı için, Yan Görev <a href="../../side_quests/working_with_files/">Dosyalarla Çalışma</a> bölümüne bakın.</p>
 </div>
 <h3 id="63-cozumlenmis-yaplandrmay-gormek-icin-nextflow-config-kullann">6.3. Çözümlenmiş yapılandırmayı görmek için <code>nextflow config</code> kullanın<a class="headerlink" href="#63-cozumlenmis-yaplandrmay-gormek-icin-nextflow-config-kullann" title="Permanent link">&para;</a></h3>
 <p>Yukarıda belirtildiği gibi, bazen aynı parametre birleştirmek istediğiniz profillerde farklı değerlere ayarlanabilir.
-Ve daha genel olarak, yapılandırma öğelerinin depolanabileceği çok sayıda yer vardır ve bazen aynı özellikler farklı yerlerde farklı değerlere ayarlanabilir.</p>
+Daha genel olarak, yapılandırma öğelerinin depolanabileceği çok sayıda yer vardır ve bazen aynı özellikler farklı yerlerde farklı değerlere ayarlanabilir.</p>
 <p>Nextflow, herhangi bir çatışmayı çözmek için bir set <a href="https://nextflow.io/docs/latest/config.html">öncelik sırası</a> uygular, ancak bunu kendiniz belirlemek zor olabilir.
 Ve hiçbir şey çakışmasa bile, şeylerin yapılandırılabileceği tüm olası yerlere bakmak sıkıcı olabilir.</p>
 <p>Neyse ki, Nextflow, tüm bu süreci sizin için otomatikleştirebilecek <code>config</code> adlı kullanışlı bir yardımcı program aracı içerir.</p>

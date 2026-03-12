@@ -1036,7 +1036,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -5201,9 +5201,9 @@ Ardından, çıktının nasıl yayınlanacağını yapılandırmamız gerekiyor.
 </div>
 <div class="admonition note">
 <p class="admonition-title">Not</p>
-<p>Varsayılan olarak, Nextflow çıktı dosyalarını sembolik bağlantılar olarak yayınlar, bu da gereksiz çoğaltmayı önler.
+<p>Varsayılan olarak, Nextflow çıktı dosyalarını sembolik bağlantılar olarak yayınlar; bu, gereksiz çoğaltmayı önler.
 Burada kullandığımız veri dosyaları çok küçük olsa da, genomik alanında çok büyük olabilirler.
-<code>work</code> dizininizi temizlediğinizde sembolik bağlantılar bozulacaktır, bu nedenle üretim iş akışları için varsayılan yayınlama modunu <code>'copy'</code> olarak geçersiz kılmak isteyebilirsiniz.</p>
+<code>work</code> dizininizi temizlediğinizde sembolik bağlantılar bozulacaktır; bu nedenle üretim iş akışları için varsayılan yayınlama modunu <code>'copy'</code> olarak geçersiz kılmak isteyebilirsiniz.</p>
 </div>
 <h3 id="14-is-aksn-calstrn">1.4. İş akışını çalıştırın<a class="headerlink" href="#14-is-aksn-calstrn" title="Permanent link">&para;</a></h3>
 <p>Bu noktada, tamamen işlevsel olması gereken tek adımlı bir dizinleme iş akışımız var. Çalıştığını test edelim!</p>
@@ -5501,7 +5501,7 @@ Bu konuda daha fazla bilgiyi <a href="../../../side_quests/working_with_files/">
 GATK, adlandırma kurallarına göre BAM dizin dosyasını ve referans genomun yardımcı dosyalarını aramayı bilir, ancak Nextflow alan bağımsızdır ve bu kuralları bilmez.
 Nextflow'un bunları çalışma zamanında çalışma dizininde hazırlaması için açıkça listelememiz gerekir; aksi takdirde GATK eksik dosyalar hakkında bir hata verecektir.</p>
 <p>Benzer şekilde, çıktı VCF'nin dizin dosyasını (<code>"${input_bam}.vcf.idx"</code>) açıkça listeliyoruz, böylece Nextflow sonraki adımlar için bunun kaydını tutar.
-Her çıktı kanalına bir ad atamak için <code>emit:</code> sözdizimini kullanıyoruz, bu da çıktıları yayınlama bloğuna bağladığımızda yararlı olacaktır.</p>
+Her çıktı kanalına bir ad atamak için <code>emit:</code> sözdizimini kullanıyoruz; bu, çıktıları yayınlama bloğuna bağladığımızda yararlı olacaktır.</p>
 <p>Bunu tamamladığınızda, süreç tamamlanmış olur.
 İş akışında kullanmak için modülü içe aktarmanız ve bir süreç çağrısı eklemeniz gerekir.</p>
 <h4 id="222-yeni-modulu-ice-aktarn">2.2.2. Yeni modülü içe aktarın<a class="headerlink" href="#222-yeni-modulu-ice-aktarn" title="Permanent link">&para;</a></h4>
@@ -5567,7 +5567,7 @@ Her çıktı kanalına bir ad atamak için <code>emit:</code> sözdizimini kulla
 <div class="admonition note">
 <p class="admonition-title">Not</p>
 <p>Girdilerin, süreç çağrısında, sürecin girdi bloğunda listelendiği sırayla tam olarak aynı sırada sağlandığına dikkat edin.
-Nextflow'da girdiler konumsaldır, yani aynı sırayı <em>takip etmelisiniz</em>; ve elbette aynı sayıda öğe olmalıdır.</p>
+Nextflow'da girdiler konumsaldır; yani aynı sırayı <em>takip etmelisiniz</em> ve elbette aynı sayıda öğe olmalıdır.</p>
 </div>
 <h3 id="23-ckt-islemeyi-yaplandrn">2.3. Çıktı işlemeyi yapılandırın<a class="headerlink" href="#23-ckt-islemeyi-yaplandrn" title="Permanent link">&para;</a></h3>
 <p>Yeni çıktıları yayınlama bildirimine eklememiz ve nereye gideceklerini yapılandırmamız gerekiyor.</p>
@@ -5599,7 +5599,7 @@ Nextflow'da girdiler konumsaldır, yani aynı sırayı <em>takip etmelisiniz</em
 </div>
 <p>Ardından, Nextflow'a yeni çıktıları nereye koyacağını söylememiz gerekecek.</p>
 <h4 id="232-yeni-ckt-hedeflerini-yaplandrn">2.3.2. Yeni çıktı hedeflerini yapılandırın<a class="headerlink" href="#232-yeni-ckt-hedeflerini-yaplandrn" title="Permanent link">&para;</a></h4>
-<p><code>output {}</code> bloğunda <code>vcf</code> ve <code>vcf_idx</code> hedefleri için girişler ekleyin, her ikisini de bir <code>vcf/</code> alt dizinine yayınlayın:</p>
+<p><code>output {}</code> bloğunda <code>vcf</code> ve <code>vcf_idx</code> hedefleri için girişler ekleyin; her ikisini de bir <code>vcf/</code> alt dizinine yayınlayın:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="16:2"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><input id="__tabbed_16_2" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">Sonra</label><label for="__tabbed_16_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5642,7 +5642,7 @@ Nextflow'da girdiler konumsaldır, yani aynı sırayı <em>takip etmelisiniz</em
 </div>
 <p>VCF ve dizini, her ikisi de <code>vcf/</code> alt dizinine giden ayrı hedefler olarak yayınlanır.</p>
 <h3 id="24-is-aksn-calstrn">2.4. İş akışını çalıştırın<a class="headerlink" href="#24-is-aksn-calstrn" title="Permanent link">&para;</a></h3>
-<p>Genişletilmiş iş akışını çalıştırın, bu sefer dizinleme adımını tekrar çalıştırmak zorunda kalmamak için <code>-resume</code> ekleyin.</p>
+<p>Genişletilmiş iş akışını çalıştırın; bu sefer dizinleme adımını tekrar çalıştırmak zorunda kalmamak için <code>-resume</code> ekleyin.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
@@ -5657,7 +5657,7 @@ Nextflow'da girdiler konumsaldır, yani aynı sırayı <em>takip etmelisiniz</em
 </code></pre></div>
 </details>
 <p>Şimdi konsol çıktısına bakarsak, iki sürecin listelendiğini görüyoruz.</p>
-<p>İlk süreç, beklendiği gibi önbellekleme sayesinde atlandı, ikinci süreç ise yepyeni olduğu için çalıştırıldı.</p>
+<p>İlk süreç, beklendiği gibi önbellekleme sayesinde atlandı; ikinci süreç ise yepyeni olduğu için çalıştırıldı.</p>
 <p>Çıktı dosyalarını sonuçlar dizininde (çalışma dizinine sembolik bağlantılar olarak) bulacaksınız.</p>
 <details class="abstract">
 <summary>Dizin içeriği</summary>
@@ -5756,7 +5756,7 @@ Bu, çok örnekli yürütmeyi test etmenin hızlı bir yoludur; bir sonraki adı
 </div>
 </div>
 </div>
-<p>İş akışı gövdesindeki kanal fabrikası (<code>.fromPath</code>) tek bir dosya yolu kadar birden fazla dosya yolunu da kabul eder, bu nedenle başka değişiklik gerekmez.</p>
+<p>İş akışı gövdesindeki kanal fabrikası (<code>.fromPath</code>) tek bir dosya yolu kadar birden fazla dosya yolunu da kabul eder; bu nedenle başka değişiklik gerekmez.</p>
 <h3 id="32-is-aksn-calstrn">3.2. İş akışını çalıştırın<a class="headerlink" href="#32-is-aksn-calstrn" title="Permanent link">&para;</a></h3>
 <p>Artık tesisat üç test örneğinin tümü üzerinde çalışacak şekilde ayarlandığına göre iş akışını çalıştırmayı deneyin.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-resume
@@ -5877,12 +5877,12 @@ Bu, çok örnekli yürütmeyi test etmenin hızlı bir yoludur; bir sonraki adı
 Sonuç olarak, karşılık gelen çıktılar orijinal girdilerin verildiğinden farklı bir sırada toplanabilir.</p>
 </div>
 <p>Şu anda yazıldığı gibi, iş akışı betiğimiz dizin dosyalarının dizinleme adımından girdilerin verildiği anne/baba/oğul sırasıyla aynı sırada listelenerek çıkacağını varsayar.
-Ancak bunun böyle olacağının garantisi yoktur, bu nedenle bazen (her zaman olmasa da) yanlış dosyalar ikinci adımda eşleştirilir.</p>
+Ancak bunun böyle olacağının garantisi yoktur; bu nedenle bazen (her zaman olmasa da) yanlış dosyalar ikinci adımda eşleştirilir.</p>
 <p>Bunu düzeltmek için, BAM dosyalarının ve dizin dosyalarının kanallar aracılığıyla birlikte seyahat etmesini sağlamamız gerekir.</p>
 <div class="admonition tip">
 <p class="admonition-title">İpucu</p>
-<p>İş akışı kodundaki <code>view()</code> ifadeleri hiçbir şey yapmaz, bu nedenle onları içeride bırakmak sorun değildir.
-Ancak konsol çıktınızı karmaşıklaştıracaklar, bu nedenle sorunu gidermeyi bitirdiğinizde bunları kaldırmanızı öneririz.</p>
+<p>İş akışı kodundaki <code>view()</code> ifadeleri hiçbir şey yapmaz; bu nedenle onları içeride bırakmak sorun değildir.
+Ancak konsol çıktınızı karmaşıklaştıracaklar; bu nedenle sorunu gidermeyi bitirdiğinizde bunları kaldırmanızı öneririz.</p>
 </div>
 <h3 id="34-is-aksn-dizin-dosyalarn-dogru-sekilde-isleyecek-sekilde-guncelleyin">3.4. İş akışını dizin dosyalarını doğru şekilde işleyecek şekilde güncelleyin<a class="headerlink" href="#34-is-aksn-dizin-dosyalarn-dogru-sekilde-isleyecek-sekilde-guncelleyin" title="Permanent link">&para;</a></h3>
 <p>Düzeltme, her BAM dosyasını diziniyle birlikte bir demete paketlemek, ardından aşağı akış sürecini ve iş akışı tesisatını eşleşecek şekilde güncellemektir.</p>
@@ -6032,7 +6032,7 @@ Ancak konsol çıktınızı karmaşıklaştıracaklar, bu nedenle sorunu giderme
 </div>
 </div>
 </div>
-<p>Bu değişikliklerle, BAM ve dizininin birlikte seyahat etmesi garanti edilir, bu nedenle eşleştirme her zaman doğru olacaktır.</p>
+<p>Bu değişikliklerle, BAM ve dizininin birlikte seyahat etmesi garanti edilir; bu nedenle eşleştirme her zaman doğru olacaktır.</p>
 <h3 id="35-duzeltilmis-is-aksn-calstrn">3.5. Düzeltilmiş iş akışını çalıştırın<a class="headerlink" href="#35-duzeltilmis-is-aksn-calstrn" title="Permanent link">&para;</a></h3>
 <p>Bunun ileriye dönük güvenilir bir şekilde çalışacağından emin olmak için iş akışını tekrar çalıştırın.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>genomics.nf<span class="w"> </span>-profile<span class="w"> </span><span class="nb">test</span>
@@ -6070,7 +6070,7 @@ Ancak konsol çıktınızı karmaşıklaştıracaklar, bu nedenle sorunu giderme
 </code></pre></div>
 </details>
 <p>İlişkili dosyaları demetlere paketleyerek, doğru dosyaların iş akışı boyunca her zaman birlikte seyahat etmesini sağladık.
-İş akışı artık herhangi bir sayıda örneği güvenilir bir şekilde işler, ancak bunları yapılandırmada tek tek listelemek çok ölçeklenebilir değildir.
+İş akışı artık herhangi bir sayıda örneği güvenilir bir şekilde işler; ancak bunları yapılandırmada tek tek listelemek çok ölçeklenebilir değildir.
 Bir sonraki adımda, girdileri bir dosyadan okumaya geçeceğiz.</p>
 <h3 id="ozet_2">Özet<a class="headerlink" href="#ozet_2" title="Permanent link">&para;</a></h3>
 <p>İş akışınızı birden fazla örnek üzerinde (bağımsız olarak) çalıştırmayı biliyorsunuz.</p>
@@ -6079,7 +6079,7 @@ Bir sonraki adımda, girdileri bir dosyadan okumaya geçeceğiz.</p>
 <hr />
 <h2 id="4-is-aksnn-toplu-girdi-dosyalar-iceren-bir-metin-dosyasn-kabul-etmesini-saglayn">4. İş akışının toplu girdi dosyaları içeren bir metin dosyasını kabul etmesini sağlayın<a class="headerlink" href="#4-is-aksnn-toplu-girdi-dosyalar-iceren-bir-metin-dosyasn-kabul-etmesini-saglayn" title="Permanent link">&para;</a></h2>
 <p>Bir iş akışına birden fazla veri girdi dosyası sağlamanın çok yaygın bir yolu, dosya yollarını içeren bir metin dosyasıyla yapmaktır.
-Satır başına bir dosya yolu listeleyen ve başka hiçbir şey içermeyen bir metin dosyası kadar basit olabilir veya dosya ek meta veriler içerebilir, bu durumda genellikle örnek tablosu olarak adlandırılır.</p>
+Satır başına bir dosya yolu listeleyen ve başka hiçbir şey içermeyen bir metin dosyası kadar basit olabilir ya da dosya ek meta veriler içerebilir; bu durumda genellikle örnek tablosu olarak adlandırılır.</p>
 <p>Burada size basit durumu nasıl yapacağınızı göstereceğiz.</p>
 <h3 id="41-girdi-dosya-yollarn-listeleyen-saglanan-csv-dosyasn-inceleyin">4.1. Girdi dosya yollarını listeleyen sağlanan CSV dosyasını inceleyin<a class="headerlink" href="#41-girdi-dosya-yollarn-listeleyen-saglanan-csv-dosyasn-inceleyin" title="Permanent link">&para;</a></h3>
 <p><code>data/</code> dizininde bulabileceğiniz, girdi dosya yollarını listeleyen <code>samplesheet.csv</code> adlı bir CSV dosyası zaten yaptık.</p>
@@ -6158,7 +6158,7 @@ Bunu sağladığımız eğitim ortamında çalıştırmıyorsanız, yolları sis
 </div>
 </div>
 </div>
-<p>Dosya listesi artık kodda hiç yaşamıyor, bu da doğru yönde büyük bir adımdır.</p>
+<p>Dosya listesi artık kodda hiç yaşamıyor; bu, doğru yönde büyük bir adımdır.</p>
 <h3 id="43-kanal-fabrikasn-csv-girdisini-ayrstracak-sekilde-guncelleyin">4.3. Kanal fabrikasını CSV girdisini ayrıştıracak şekilde güncelleyin<a class="headerlink" href="#43-kanal-fabrikasn-csv-girdisini-ayrstracak-sekilde-guncelleyin" title="Permanent link">&para;</a></h3>
 <p>Şu anda, girdi kanal fabrikamız kendisine verdiğimiz tüm dosyaları dizinleme sürecine beslemek istediğimiz veri girdileri olarak ele alıyor.
 Şimdi ona dosya yollarını listeleyen bir dosya verdiğimizden, içerdiği dosya yollarını veri girdileri olarak ele alacak şekilde davranışını değiştirmemiz gerekiyor.</p>
@@ -6183,7 +6183,7 @@ Bunu sağladığımız eğitim ortamında çalıştırmıyorsanız, yolları sis
 </div>
 </div>
 </div>
-<p>Hello Nextflow kursunda karşılaştığınıza kıyasla yeni olan bir şey, bu CSV'nin bir başlık satırına sahip olmasıdır, bu nedenle <code>splitCsv()</code> çağrısına <code class="highlight"><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span></code> ekliyoruz.
+<p>Hello Nextflow kursunda karşılaştığınıza kıyasla yeni olan bir şey, bu CSV'nin bir başlık satırına sahip olmasıdır; bu nedenle <code>splitCsv()</code> çağrısına <code class="highlight"><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span></code> ekliyoruz.
 Bu, <code>map</code> işleminde sütunlara ada göre başvurmamızı sağlar: <code class="highlight"><span class="n">row</span><span class="o">.</span><span class="na">reads_bam</span></code>, her satırın <code>reads_bam</code> sütunundan dosya yolunu çıkarır.</p>
 <div class="admonition tip">
 <p class="admonition-title">İpucu</p>

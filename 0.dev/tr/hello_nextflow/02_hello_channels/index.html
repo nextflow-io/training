@@ -1793,7 +1793,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -4541,7 +4541,7 @@
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
 <figure>
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/yDR66fzAMOg?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <figcaption>
@@ -5461,9 +5461,9 @@ Zaten <code>.view()</code> operatörünü kullandınız, bu sadece içinde ne ol
 <a id="__codelineno-49-31" name="__codelineno-49-31"></a><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
 <a id="__codelineno-49-32" name="__codelineno-49-32"></a><span class="w">    </span><span class="c1">// girdiler için bir kanal oluştur</span>
 <a id="__codelineno-49-33" name="__codelineno-49-33"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
-<a id="__codelineno-49-34" name="__codelineno-49-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;flatten öncesi: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-49-34" name="__codelineno-49-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-49-35" name="__codelineno-49-35"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
-</span><a id="__codelineno-49-36" name="__codelineno-49-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;flatten sonrası: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-49-36" name="__codelineno-49-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-49-37" name="__codelineno-49-37"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
 <a id="__codelineno-49-38" name="__codelineno-49-38"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-49-39" name="__codelineno-49-39"></a>
@@ -5506,7 +5506,7 @@ Zaten <code>.view()</code> operatörünü kullandınız, bu sadece içinde ne ol
 </div>
 </div>
 </div>
-<p>İkinci bir <code>.view</code> ifadesi eklediğimizi ve her biri için boş parantezleri (<code>()</code>) biraz kod içeren süslü parantezlerle değiştirdiğimizi görüyorsunuz, örneğin <code>{ greeting -&gt; "flatten öncesi: $greeting" }</code>.</p>
+<p>İkinci bir <code>.view</code> ifadesi eklediğimizi ve her biri için boş parantezleri (<code>()</code>) biraz kod içeren süslü parantezlerle değiştirdiğimizi görüyorsunuz, örneğin <code>{ greeting -&gt; "Before flatten: $greeting" }</code>.</p>
 <p>Bunlara <em>closure</em> denir. İçerdikleri kod, kanaldaki her öğe için yürütülecektir.
 İç değer için burada <code>greeting</code> adında (ancak herhangi bir rastgele ad olabilir) geçici bir değişken tanımlıyoruz, bu yalnızca o closure kapsamında kullanılır.</p>
 <p>Bu örnekte, <code>$greeting</code> kanalda yüklenen her bir öğeyi temsil eder.
@@ -5529,16 +5529,16 @@ Bu, <code>-&gt;</code> ile tanımlamaya gerek kalmadan iç değişkene kısa yol
 <a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>
 <a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a><span class="go">[b1/6a1e15] sayHello (2) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="hll"><span class="go">flatten öncesi: [Hello, Bonjour, Holà]</span>
-</span><a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a><span class="hll"><span class="go">flatten sonrası: Hello</span>
-</span><a id="__codelineno-52-9" name="__codelineno-52-9" href="#__codelineno-52-9"></a><span class="hll"><span class="go">flatten sonrası: Bonjour</span>
-</span><a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="hll"><span class="go">flatten sonrası: Holà</span>
+<a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a><span class="hll"><span class="go">Before flatten: [Hello, Bonjour, Holà]</span>
+</span><a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a><span class="hll"><span class="go">After flatten: Hello</span>
+</span><a id="__codelineno-52-9" name="__codelineno-52-9" href="#__codelineno-52-9"></a><span class="hll"><span class="go">After flatten: Bonjour</span>
+</span><a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="hll"><span class="go">After flatten: Holà</span>
 </span></code></pre></div>
 </details>
 <p>Bu sefer çalışıyor VE <code>flatten()</code> operatörünü çalıştırmadan önce ve sonra kanal içeriklerinin nasıl göründüğüne dair ek bilgi veriyor.</p>
 <ul>
-<li>Tek bir <code>flatten öncesi:</code> ifadesi görüyorsunuz çünkü o noktada kanal bir öğe içeriyor, orijinal dizi.</li>
-<li>Sonra, artık kanalda bireysel öğeler olan her selamlama için bir tane olmak üzere üç ayrı <code>flatten sonrası:</code> ifadesi görüyorsunuz.</li>
+<li>Tek bir <code>Before flatten:</code> ifadesi görüyorsunuz çünkü o noktada kanal bir öğe içeriyor, orijinal dizi.</li>
+<li>Sonra, artık kanalda bireysel öğeler olan her selamlama için bir tane olmak üzere üç ayrı <code>After flatten:</code> ifadesi görüyorsunuz.</li>
 </ul>
 <p>Önemli olarak, bu her öğenin artık iş akışı tarafından ayrı ayrı işlenebileceği anlamına gelir.</p>
 <div class="admonition tip">
@@ -5638,9 +5638,9 @@ Dosya yollarını işlemek için yerleşik işlevselliğe sahip yeni bir kanal f
 <a id="__codelineno-56-29" name="__codelineno-56-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-56-30" name="__codelineno-56-30"></a><span class="hll"><span class="w">    </span><span class="c1">// bir CSV dosyasından girdiler için bir kanal oluştur</span>
 </span><a id="__codelineno-56-31" name="__codelineno-56-31"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-</span><a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;flatten öncesi: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-56-32" name="__codelineno-56-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-56-33" name="__codelineno-56-33"></a><span class="hll"><span class="w">                         </span><span class="c1">// .flatten()</span>
-</span><a id="__codelineno-56-34" name="__codelineno-56-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; &quot;flatten sonrası: $greeting&quot; }</span>
+</span><a id="__codelineno-56-34" name="__codelineno-56-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; &quot;After flatten: $greeting&quot; }</span>
 </span><a id="__codelineno-56-35" name="__codelineno-56-35"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
 <a id="__codelineno-56-36" name="__codelineno-56-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-56-37" name="__codelineno-56-37"></a>
@@ -5672,9 +5672,9 @@ Dosya yollarını işlemek için yerleşik işlevselliğe sahip yeni bir kanal f
 </span><a id="__codelineno-57-31" name="__codelineno-57-31"></a><span class="hll"><span class="w">    </span><span class="n">greetings_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;Hello&#39;</span><span class="o">,</span><span class="s1">&#39;Bonjour&#39;</span><span class="o">,</span><span class="s1">&#39;Holà&#39;</span><span class="o">]</span>
 </span><a id="__codelineno-57-32" name="__codelineno-57-32"></a><span class="hll"><span class="w">    </span><span class="c1">// girdiler için bir kanal oluştur</span>
 </span><a id="__codelineno-57-33" name="__codelineno-57-33"></a><span class="hll"><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">greetings_array</span><span class="o">)</span>
-</span><a id="__codelineno-57-34" name="__codelineno-57-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;flatten öncesi: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-57-34" name="__codelineno-57-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-57-35" name="__codelineno-57-35"></a><span class="w">                         </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
-<a id="__codelineno-57-36" name="__codelineno-57-36"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;flatten sonrası: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-57-36" name="__codelineno-57-36"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-57-37" name="__codelineno-57-37"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
 <a id="__codelineno-57-38" name="__codelineno-57-38"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-57-39" name="__codelineno-57-39"></a>
@@ -5698,7 +5698,7 @@ Ayrıca <code>flatten()</code> ve ikinci <code>view()</code> ifadesini yorum sat
 <a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="go">Launching `hello-channels.nf` [peaceful_poisson] DSL2 - revision: a286c08ad5</span>
 <a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a>
 <a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="hll"><span class="go">[-        ] sayHello [  0%] 0 of 1</span>
-</span><a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="hll"><span class="go">flatten öncesi: /workspaces/training/hello-nextflow/data/greetings.csv</span>
+</span><a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="hll"><span class="go">Before flatten: /workspaces/training/hello-nextflow/data/greetings.csv</span>
 </span><a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (1)&#39;</span>
 <a id="__codelineno-59-8" name="__codelineno-59-8" href="#__codelineno-59-8"></a>
 <a id="__codelineno-59-9" name="__codelineno-59-9" href="#__codelineno-59-9"></a><span class="hll"><span class="go">Caused by:</span>
@@ -5731,7 +5731,7 @@ Dosya yolunu doğru şekilde çözümledi, ancak istediğimiz şey olan içeriğ
 <p>Nextflow'un dosyayı açmasını ve içeriğini kanala yüklemesini nasıl sağlarız?</p>
 <p>Görünüşe göre başka bir <a href="https://nextflow.io/docs/latest/reference/operator.html">operatöre</a> ihtiyacımız var!</p>
 <h3 id="42-dosyay-ayrstrmak-icin-splitcsv-operatorunu-kullann">4.2. Dosyayı ayrıştırmak için <code>splitCsv()</code> operatörünü kullanın<a class="headerlink" href="#42-dosyay-ayrstrmak-icin-splitcsv-operatorunu-kullann" title="Permanent link">&para;</a></h3>
-<p>Operatör listesine tekrar baktığımızda, CSV formatındaki metni ayrıştırmak ve bölmek için tasarlanmış <a href="https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a> operatörünü buluyoruz.</p>
+<p>Operatör listesine tekrar baktığımızda, CSV formatındaki metni ayrıştırmak ve bölmek için tasarlanmış <a href="https://nextflow.io/docs/latest/reference/operator.html#splitcsv"><code>splitCsv()</code></a> operatörünü buluyoruz.</p>
 <h4 id="421-splitcsvyi-kanala-uygulayn">4.2.1. <code>splitCsv()</code>'yi kanala uygulayın<a class="headerlink" href="#421-splitcsvyi-kanala-uygulayn" title="Permanent link">&para;</a></h4>
 <p>Operatörü uygulamak için, daha önce olduğu gibi kanal fabrikası satırına ekliyoruz.</p>
 <p>İş akışı bloğunda, <code>flatten()</code> yerine <code>splitCsv()</code> (yorum satırından çıkarılmış) koymak için aşağıdaki kod değişikliğini yapın:</p>
@@ -5756,9 +5756,9 @@ Dosya yolunu doğru şekilde çözümledi, ancak istediğimiz şey olan içeriğ
 <a id="__codelineno-60-29" name="__codelineno-60-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-60-30" name="__codelineno-60-30"></a><span class="w">    </span><span class="c1">// bir CSV dosyasından girdiler için bir kanal oluştur</span>
 <a id="__codelineno-60-31" name="__codelineno-60-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-60-32" name="__codelineno-60-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;splitCsv öncesi: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-60-32" name="__codelineno-60-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-60-33" name="__codelineno-60-33"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-</span><a id="__codelineno-60-34" name="__codelineno-60-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;splitCsv sonrası: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-60-34" name="__codelineno-60-34"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-60-35" name="__codelineno-60-35"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
 <a id="__codelineno-60-36" name="__codelineno-60-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-60-37" name="__codelineno-60-37"></a>
@@ -5786,9 +5786,9 @@ Dosya yolunu doğru şekilde çözümledi, ancak istediğimiz şey olan içeriğ
 <a id="__codelineno-61-29" name="__codelineno-61-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-61-30" name="__codelineno-61-30"></a><span class="w">    </span><span class="c1">// bir CSV dosyasından girdiler için bir kanal oluştur</span>
 <a id="__codelineno-61-31" name="__codelineno-61-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-61-32" name="__codelineno-61-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;flatten öncesi: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-61-32" name="__codelineno-61-32"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">greeting</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before flatten: $greeting&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-61-33" name="__codelineno-61-33"></a><span class="hll"><span class="w">                         </span><span class="c1">// .flatten()</span>
-</span><a id="__codelineno-61-34" name="__codelineno-61-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; &quot;flatten sonrası: $greeting&quot; }</span>
+</span><a id="__codelineno-61-34" name="__codelineno-61-34"></a><span class="hll"><span class="w">                         </span><span class="c1">// .view { greeting -&gt; &quot;After flatten: $greeting&quot; }</span>
 </span><a id="__codelineno-61-35" name="__codelineno-61-35"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
 <a id="__codelineno-61-36" name="__codelineno-61-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-61-37" name="__codelineno-61-37"></a>
@@ -5813,10 +5813,10 @@ Teknik olarak aynı değişken adını (<code>greeting</code>) kullanabilirdik a
 <a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a>
 <a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a><span class="go">[24/76da2f] sayHello (2) [  0%] 0 of 3 ✘</span>
-<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="hll"><span class="go">splitCsv öncesi: /workspaces/training/hello-nextflow/data/greetings.csv</span>
-</span><a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="hll"><span class="go">splitCsv sonrası: [Hello, English, 123]</span>
-</span><a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="hll"><span class="go">splitCsv sonrası: [Bonjour, French, 456]</span>
-</span><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="hll"><span class="go">splitCsv sonrası: [Holà, Spanish, 789]</span>
+<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="hll"><span class="go">Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
+</span><a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="hll"><span class="go">After splitCsv: [Hello, English, 123]</span>
+</span><a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="hll"><span class="go">After splitCsv: [Bonjour, French, 456]</span>
+</span><a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="hll"><span class="go">After splitCsv: [Holà, Spanish, 789]</span>
 </span><a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a><span class="hll"><span class="go">ERROR ~ Error executing process &gt; &#39;sayHello (2)&#39;</span>
 </span><a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a>
 <a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a><span class="go">Caused by:</span>
@@ -5887,11 +5887,11 @@ Sözdizimi şöyle görünüyor:</p>
 <a id="__codelineno-65-29" name="__codelineno-65-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-65-30" name="__codelineno-65-30"></a><span class="w">    </span><span class="c1">// bir CSV dosyasından girdiler için bir kanal oluştur</span>
 <a id="__codelineno-65-31" name="__codelineno-65-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-65-32" name="__codelineno-65-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;splitCsv öncesi: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-65-32" name="__codelineno-65-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-65-33" name="__codelineno-65-33"></a><span class="w">                         </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-<a id="__codelineno-65-34" name="__codelineno-65-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;splitCsv sonrası: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-65-34" name="__codelineno-65-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-65-35" name="__codelineno-65-35"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">item</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-65-36" name="__codelineno-65-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;map sonrası: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-65-36" name="__codelineno-65-36"></a><span class="hll"><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After map: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-65-37" name="__codelineno-65-37"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
 <a id="__codelineno-65-38" name="__codelineno-65-38"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-65-39" name="__codelineno-65-39"></a>
@@ -5919,9 +5919,9 @@ Sözdizimi şöyle görünüyor:</p>
 <a id="__codelineno-66-29" name="__codelineno-66-29"></a><span class="w">    </span><span class="nl">main:</span>
 <a id="__codelineno-66-30" name="__codelineno-66-30"></a><span class="w">    </span><span class="c1">// bir CSV dosyasından girdiler için bir kanal oluştur</span>
 <a id="__codelineno-66-31" name="__codelineno-66-31"></a><span class="w">    </span><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-66-32" name="__codelineno-66-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;splitCsv öncesi: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-66-32" name="__codelineno-66-32"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-66-33" name="__codelineno-66-33"></a><span class="w">                         </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
-<a id="__codelineno-66-34" name="__codelineno-66-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;splitCsv sonrası: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-66-34" name="__codelineno-66-34"></a><span class="w">                         </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After splitCsv: $csv&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-66-35" name="__codelineno-66-35"></a><span class="w">    </span><span class="c1">// bir selamlama yayınla</span>
 <a id="__codelineno-66-36" name="__codelineno-66-36"></a><span class="w">    </span><span class="n">sayHello</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
 <a id="__codelineno-66-37" name="__codelineno-66-37"></a>
@@ -5945,21 +5945,21 @@ Sözdizimi şöyle görünüyor:</p>
 <a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a>
 <a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a><span class="go">executor &gt;  local (3)</span>
 <a id="__codelineno-68-6" name="__codelineno-68-6" href="#__codelineno-68-6"></a><span class="go">[54/6eebe3] sayHello (3) [100%] 3 of 3 ✔</span>
-<a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">splitCsv öncesi: /workspaces/training/hello-nextflow/data/greetings.csv</span>
-<a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="go">splitCsv sonrası: [Hello, English, 123]</span>
-<a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">splitCsv sonrası: [Bonjour, French, 456]</span>
-<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">splitCsv sonrası: [Holà, Spanish, 789]</span>
-<a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">map sonrası: Hello</span>
-<a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a><span class="go">map sonrası: Bonjour</span>
-<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">map sonrası: Holà</span>
+<a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="go">Before splitCsv: /workspaces/training/hello-nextflow/data/greetings.csv</span>
+<a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="go">After splitCsv: [Hello, English, 123]</span>
+<a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="go">After splitCsv: [Bonjour, French, 456]</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="go">After splitCsv: [Holà, Spanish, 789]</span>
+<a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="go">After map: Hello</span>
+<a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a><span class="go">After map: Bonjour</span>
+<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="go">After map: Holà</span>
 </code></pre></div>
 </details>
 <p>Bu sefer hatasız çalışmalı.</p>
 <p><code>view()</code> ifadelerinin çıktısına bakarak şunları görüyorsunuz:</p>
 <ul>
-<li>Tek bir <code>splitCsv öncesi:</code> ifadesi: o noktada kanal bir öğe içeriyor, orijinal dosya yolu.</li>
-<li>Üç ayrı <code>splitCsv sonrası:</code> ifadesi: her selamlama için bir tane, ama her biri dosyadaki o satıra karşılık gelen bir dizi içinde bulunuyor.</li>
-<li>Üç ayrı <code>map sonrası:</code> ifadesi: her selamlama için bir tane, bunlar artık kanalda bireysel öğeler.</li>
+<li>Tek bir <code>Before splitCsv:</code> ifadesi: o noktada kanal bir öğe içeriyor, orijinal dosya yolu.</li>
+<li>Üç ayrı <code>After splitCsv:</code> ifadesi: her selamlama için bir tane, ama her biri dosyadaki o satıra karşılık gelen bir dizi içinde bulunuyor.</li>
+<li>Üç ayrı <code>After map:</code> ifadesi: her selamlama için bir tane, bunlar artık kanalda bireysel öğeler.</li>
 </ul>
 <p><em>Satırların çıktınızda farklı bir sırada görünebileceğini unutmayın.</em></p>
 <figure class="excalidraw">

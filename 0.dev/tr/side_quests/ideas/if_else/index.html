@@ -1032,7 +1032,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -3354,7 +3354,7 @@ Bu alıştırmaları yapmak, eğitimin sonraki bölümlerini anlamak için <em>g
 </div>
 <p>Bu alıştırmanın çözümünü <code>containers/solutions/hello-containers-4.1.nf</code> dosyasında bulabilirsiniz.</p>
 <h3 id="12-nextflow-pipelinenz-quote-ve-sayhello-modlarnda-calsabilecek-sekilde-degistirin">1.2. Nextflow pipeline'ınızı <code>quote</code> ve <code>sayHello</code> modlarında çalışabilecek şekilde değiştirin.<a class="headerlink" href="#12-nextflow-pipelinenz-quote-ve-sayhello-modlarnda-calsabilecek-sekilde-degistirin" title="Permanent link">&para;</a></h3>
-<p>Pipeline'ınıza hem <code>quote</code> hem de <code>sayHello</code> için tasarlanmış girdileri kabul edebilmesi için dallanma mantığı ekleyin.
+<p>Pipeline'ınıza hem <code>quote</code> hem de <code>sayHello</code> için tasarlanmış girdileri kabul edebilmesi amacıyla dallanma mantığı ekleyin.
 İşte bir Nextflow iş akışında <code>if</code> ifadesinin nasıl kullanılacağına dair bir örnek:</p>
 <div class="highlight"><span class="filename">hello-containers.nf</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">quote</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>

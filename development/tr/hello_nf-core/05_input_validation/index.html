@@ -1036,7 +1036,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -4110,7 +4110,7 @@ Başarılı bir şekilde çalıştığını aşağıdaki komutu çalıştırarak
 <p>Pipeline hemen net, eyleme dönüştürülebilir hata mesajlarıyla başarısız olur. Bu zaman, hesaplama kaynakları ve hayal kırıklığı tasarrufu sağlar.</p>
 <h3 id="02-nf-schema-eklentisi">0.2. nf-schema eklentisi<a class="headerlink" href="#02-nf-schema-eklentisi" title="Permanent link">&para;</a></h3>
 <p><a href="https://nextflow-io.github.io/nf-schema/latest/">nf-schema eklentisi</a>, Nextflow pipeline'ları için kapsamlı doğrulama yetenekleri sağlayan bir Nextflow eklentisidir.
-nf-schema herhangi bir Nextflow workflow'u ile çalışsa da, tüm nf-core pipeline'ları için standart doğrulama çözümüdür.</p>
+nf-schema herhangi bir Nextflow iş akışıyla çalışsa da, tüm nf-core pipeline'ları için standart doğrulama çözümüdür.</p>
 <p>nf-schema birkaç temel işlev sağlar:</p>
 <ul>
 <li><strong>Parametre doğrulaması</strong>: <code>nextflow_schema.json</code> dosyasına karşı pipeline parametrelerini doğrular</li>
@@ -4136,7 +4136,7 @@ nf-schema herhangi bir Nextflow workflow'u ile çalışsa da, tüm nf-core pipel
 <p>Kurulduktan sonra, <code>include { functionName } from 'plugin/plugin-name'</code> sözdizimini kullanarak eklentilerden fonksiyonları içe aktarabilirsiniz.</p>
 </details>
 <h3 id="03-iki-tur-dogrulama-icin-iki-sema-dosyas">0.3. İki tür doğrulama için iki şema dosyası<a class="headerlink" href="#03-iki-tur-dogrulama-icin-iki-sema-dosyas" title="Permanent link">&para;</a></h3>
-<p>Bir nf-core pipeline'ı, iki doğrulama türüne karşılık gelen iki ayrı şema dosyası kullanacaktır:</p>
+<p>Bir nf-core pipeline'ı, iki doğrulama türüne karşılık gelen iki ayrı şema dosyası kullanır:</p>
 <table>
 <thead>
 <tr>
@@ -4185,8 +4185,8 @@ nf-schema herhangi bir Nextflow workflow'u ile çalışsa da, tüm nf-core pipel
     B --&gt;|✗ Geçersiz| D[Hata: Parametreleri düzeltin]
     C --&gt;|✓ Geçerli| E[Pipeline çalışır]
     C --&gt;|✗ Geçersiz| F[Hata: Girdi verisini düzeltin]</code></pre>
-<p>Doğrulama, herhangi bir pipeline süreci çalışmadan <strong>önce</strong> gerçekleşmeli, böylece hızlı geri bildirim sağlanır ve hesaplama süresi boşa harcanmaz.</p>
-<p>Şimdi bu ilkeleri uygulamaya koyalım, parametre doğrulamasıyla başlayarak.</p>
+<p>Doğrulama, herhangi bir pipeline süreci çalışmadan <strong>önce</strong> gerçekleşmeli; böylece hızlı geri bildirim sağlanır ve hesaplama süresi boşa harcanmaz.</p>
+<p>Şimdi bu ilkeleri uygulamaya koyalım; parametre doğrulamasıyla başlayarak.</p>
 <hr />
 <h2 id="1-parametre-dogrulamas-nextflow_schemajson">1. Parametre doğrulaması (nextflow_schema.json)<a class="headerlink" href="#1-parametre-dogrulamas-nextflow_schemajson" title="Permanent link">&para;</a></h2>
 <p>Pipeline'ımıza parametre doğrulaması ekleyerek başlayalım. Bu, <code>--input</code>, <code>--outdir</code> ve <code>--batch</code> gibi komut satırı bayraklarını doğrular.</p>
@@ -4195,7 +4195,7 @@ nf-schema herhangi bir Nextflow workflow'u ile çalışsa da, tüm nf-core pipel
 <ul>
 <li>nf-schema eklentisi <code>nextflow.config</code> içindeki <code>plugins{}</code> bloğu aracılığıyla kurulur</li>
 <li>Parametre doğrulaması varsayılan olarak <code>params.validate_params = true</code> aracılığıyla etkinleştirilir</li>
-<li>Doğrulama, pipeline başlatma sırasında <code>UTILS_NFSCHEMA_PLUGIN</code> alt workflow'u tarafından gerçekleştirilir</li>
+<li>Doğrulama, pipeline başlatma sırasında <code>UTILS_NFSCHEMA_PLUGIN</code> alt iş akışı tarafından gerçekleştirilir</li>
 </ul>
 <p>Doğrulama davranışı <code>nextflow.config</code> içindeki <code>validation{}</code> kapsamı aracılığıyla kontrol edilir.</p>
 <p>İlk olarak parametre doğrulaması üzerinde çalışacağımız (bu bölüm) ve girdi verisi şemasını bölüm 2'ye kadar yapılandırmayacağımız için, geçici olarak nf-schema'ya <code>input</code> parametresinin dosya içeriğini doğrulamayı atlamasını söylememiz gerekiyor.</p>
@@ -4475,7 +4475,7 @@ Parametre doğrulaması komut satırı bayraklarını kontrol ederken, girdi ver
 <h3 id="23-sema-dosyasn-guncelleyin">2.3. Şema dosyasını güncelleyin<a class="headerlink" href="#23-sema-dosyasn-guncelleyin" title="Permanent link">&para;</a></h3>
 <p>nf-core pipeline şablonu, çift sonlu dizileme verisi için tasarlanmış varsayılan bir <code>assets/schema_input.json</code> içerir.
 Bunu selamlamalar kullanım senaryomuz için daha basit bir şema ile değiştirmemiz gerekiyor.</p>
-<p><code>assets/schema_input.json</code> dosyasını açın ve <code>properties</code> ve <code>required</code> bölümlerini değiştirin:</p>
+<p><code>assets/schema_input.json</code> dosyasını açın ve <code>properties</code> ile <code>required</code> bölümlerini değiştirin:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Sonra</label><label for="__tabbed_2_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -4661,7 +4661,7 @@ Bunu selamlamalar kullanım senaryomuz için daha basit bir şema ile değiştir
 <ol>
 <li><code>samplesheetToList</code> fonksiyonunu kullan (şablonda zaten içe aktarılmış)</li>
 <li>Girdiyi doğrula ve ayrıştır</li>
-<li>Workflow'umuz için sadece selamlama dizilerini çıkar</li>
+<li>İş akışımız için sadece selamlama dizilerini çıkar</li>
 </ol>
 <p>İlk olarak, <code>samplesheetToList</code> fonksiyonunun dosyanın üst kısmında zaten içe aktarıldığını unutmayın (nf-core şablonu bunu varsayılan olarak içerir):</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
@@ -4837,7 +4837,7 @@ Doğrulama çalıştığı için artık <code>--validate_params false</code> kul
 </div>
 </div>
 </div>
-<p>Bu, şemamızla eşleşmez, bu nedenle doğrulama bir hata atmalıdır.</p>
+<p>Bu, şemamızla eşleşmez; bu nedenle doğrulama bir hata atmalıdır.</p>
 <p>Pipeline'ı bu geçersiz girdi ile çalıştırmayı deneyin:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>--input<span class="w"> </span>assets/invalid_greetings.csv<span class="w"> </span>--outdir<span class="w"> </span>test-results<span class="w"> </span>-profile<span class="w"> </span>docker
 </code></pre></div>

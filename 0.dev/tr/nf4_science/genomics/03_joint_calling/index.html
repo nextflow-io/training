@@ -1036,7 +1036,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -4492,7 +4492,7 @@ GATK_HAPLOTYPECALLER çağrısından hemen sonra <code>workflow</code> gövdesin
 <li>Bölüm 1'de <code>emit:</code> kullanarak çıktıları adlandırdığımız için, GVCF'leri <code>.vcf</code> ile ve dizin dosyalarını <code>.idx</code> ile seçebiliriz. Adlandırılmış çıktılar olmadan, <code>.out[0]</code> ve <code>.out[1]</code> kullanmak zorunda kalırdık.</li>
 <li><code>collect()</code> operatörü tüm dosyaları tek bir öğede paketler, böylece <code>all_gvcfs_ch</code> üç GVCF'yi birlikte içerir ve <code>all_idxs_ch</code> üç dizin dosyasını birlikte içerir.</li>
 </ol>
-<p>GVCF'leri ve dizin dosyalarını ayrı ayrı toplayabiliriz (bunları demetler halinde birlikte tutmanın aksine) çünkü Nextflow tüm girdi dosyalarını yürütme için birlikte sahneler, bu nedenle dizin dosyaları GVCF'lerin yanında mevcut olacaktır.</p>
+<p>GVCF'leri ve dizin dosyalarını ayrı ayrı toplayabiliriz (bunları demetler halinde birlikte tutmanın aksine) çünkü Nextflow tüm girdi dosyalarını yürütme için birlikte sahneler; bu nedenle dizin dosyaları GVCF'lerin yanında mevcut olacaktır.</p>
 <div class="admonition tip">
 <p class="admonition-title">İpucu</p>
 <p>Kanal operatörlerini uygulamadan önce ve sonra kanalların içeriğini incelemek için <code>view()</code> operatörünü kullanabilirsiniz.</p>

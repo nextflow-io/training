@@ -1032,7 +1032,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -3026,10 +3026,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#onemli-noktalar" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Önemli Noktalar
+        Özet
       
     </span>
   </a>
@@ -3085,10 +3085,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#onemli-noktalar_1" class="md-nav__link">
+  <a href="#ozet_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Önemli Noktalar
+        Özet
       
     </span>
   </a>
@@ -3368,7 +3368,7 @@
  
 
 <h1 id="bolum-1-daha-fazla-konteyner">Bölüm 1: Daha Fazla Konteyner<a class="headerlink" href="#bolum-1-daha-fazla-konteyner" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay Zeka Destekli Çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
 <p>[YAPILACAK]</p>
 <hr />
 <h2 id="1-konteyner-imajlarn-nasl-bulabilir-veya-olusturabilirsiniz">1. Konteyner imajlarını nasıl bulabilir veya oluşturabilirsiniz<a class="headerlink" href="#1-konteyner-imajlarn-nasl-bulabilir-veya-olusturabilirsiniz" title="Permanent link">&para;</a></h2>
@@ -3433,7 +3433,7 @@ Bu sistemi çalıştırırken konteyner imajına atıfta bulunmak için bu etike
 <p>Oluşturma işlemi tamamlandıktan sonra, az önce oluşturduğunuz konteyner imajını çalıştırabilirsiniz.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>quote:latest<span class="w"> </span>quote<span class="w"> </span><span class="s2">&quot;Margaret Oakley Dayhoff&quot;</span>
 </code></pre></div>
-<h3 id="onemli-noktalar">Önemli Noktalar<a class="headerlink" href="#onemli-noktalar" title="Permanent link">&para;</a></h3>
+<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
 <p>Nextflow pipeline'larınızda kullanmak istediğiniz bir araç için konteyner imajı almanın iki farklı yolunu öğrendiniz: Seqera Containers'ı kullanmak ve konteyner imajını kendiniz oluşturmak.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
 <p>Bu eğitim serisinin <a href="./04_hello_genomics.md">sonraki bölümüne</a> devam etmek için ihtiyacınız olan her şeye sahipsiniz.
@@ -3464,13 +3464,13 @@ Bu alıştırmaları yapmak, eğitimin sonraki bölümlerini anlamak için <em>g
 Üst düzeyde, bu alıştırmayı tamamlamak için şunları yapmanız gerekecek:</p>
 <ul>
 <li>Varsayılan <code>params.input_file</code> parametresini <code>pioneers.csv</code> dosyasını işaret edecek şekilde değiştirin.</li>
-<li>Her girdi için bir alıntı almak üzere <code>quote</code> konteynerini kullanan bir <code>getQuote</code> process oluşturun.</li>
-<li>Alıntıyı görüntülemek için <code>getQuote</code> process'inin çıktısını <code>cowsay</code> process'ine bağlayın.</li>
+<li>Her girdi için bir alıntı almak üzere <code>quote</code> konteynerini kullanan bir <code>getQuote</code> süreci oluşturun.</li>
+<li>Alıntıyı görüntülemek için <code>getQuote</code> sürecinin çıktısını <code>cowsay</code> sürecine bağlayın.</li>
 </ul>
 <p><code>quote</code> konteyner imajı için, önceki ek alıştırmada kendiniz oluşturduğunuz imajı veya Seqera Containers'dan aldığınız imajı kullanabilirsiniz.</p>
-<div class="admonition tip">
+<div class="admonition hint">
 <p class="admonition-title">İpucu</p>
-<p>getQuote process'inizin <code>script</code> bloğu için iyi bir seçenek şu olabilir:
+<p>getQuote sürecinizin <code>script</code> bloğu için iyi bir seçenek şu olabilir:
     <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nl">script:</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">safe_author</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">author</span><span class="o">.</span><span class="na">tokenize</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">).</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
@@ -3482,7 +3482,7 @@ Bu alıştırmaları yapmak, eğitimin sonraki bölümlerini anlamak için <em>g
 <p>Bu alıştırmanın çözümünü <code>containers/solutions/hello-containers-4.1.nf</code> dosyasında bulabilirsiniz.</p>
 <h3 id="22-nextflow-pipelinenz-quote-ve-sayhello-modlarnda-calsabilecek-sekilde-degistirin">2.2. Nextflow pipeline'ınızı <code>quote</code> ve <code>sayHello</code> modlarında çalışabilecek şekilde değiştirin<a class="headerlink" href="#22-nextflow-pipelinenz-quote-ve-sayhello-modlarnda-calsabilecek-sekilde-degistirin" title="Permanent link">&para;</a></h3>
 <p>Pipeline'ınıza hem <code>quote</code> hem de <code>sayHello</code> için tasarlanmış girdileri kabul etmesine izin verecek bazı dallanma mantığı ekleyin.
-İşte bir Nextflow workflow'unda <code>if</code> ifadesinin nasıl kullanılacağına dair bir örnek:</p>
+İşte bir Nextflow iş akışında <code>if</code> ifadesinin nasıl kullanılacağına dair bir örnek:</p>
 <div class="highlight"><span class="filename">hello-containers.nf</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">quote</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">        </span><span class="o">...</span>
@@ -3493,16 +3493,16 @@ Bu alıştırmaları yapmak, eğitimin sonraki bölümlerini anlamak için <em>g
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="n">cowSay</span><span class="o">(</span><span class="n">text_ch</span><span class="o">)</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="o">}</span>
 </code></pre></div>
-<div class="admonition tip">
+<div class="admonition hint">
 <p class="admonition-title">İpucu</p>
-<p>Bir process'in çıktı kanalına bir ad atamak için <code>new_ch = processName.out</code> kullanabilirsiniz.</p>
+<p>Bir sürecin çıktı kanalına bir ad atamak için <code>new_ch = processName.out</code> kullanabilirsiniz.</p>
 </div>
 <p>Bu alıştırmanın çözümünü <code>containers/solutions/hello-containers-4.2.nf</code> dosyasında bulabilirsiniz.</p>
-<h3 id="onemli-noktalar_1">Önemli Noktalar<a class="headerlink" href="#onemli-noktalar_1" title="Permanent link">&para;</a></h3>
-<p>Nextflow'da process'leri çalıştırmak için konteynerleri nasıl kullanacağınızı ve pipeline'larınıza bazı dallanma mantığını nasıl ekleyeceğinizi biliyorsunuz!</p>
+<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
+<p>Nextflow'da süreçleri çalıştırmak için konteynerleri nasıl kullanacağınızı ve pipeline'larınıza bazı dallanma mantığını nasıl ekleyeceğinizi biliyorsunuz!</p>
 <h3 id="srada-ne-var_1">Sırada ne var?<a class="headerlink" href="#srada-ne-var_1" title="Permanent link">&para;</a></h3>
 <p>Kutlama yapın, bir germe molası verin ve biraz su için!</p>
-<p>Hazır olduğunuzda, şimdiye kadar öğrendiklerinizi daha gerçekçi bir veri analizi kullanım durumuna nasıl uygulayacağınızı öğrenmek için bu eğitim serisinin Bölüm 3'üne geçin.</p><style type="text/css">.quiz {
+<p>Hazır olduğunuzda, şimdiye kadar öğrendiklerinizi daha gerçekçi bir veri analizi kullanım durumuna nasıl uygulayacağınızı öğrenmek için bu eğitim serisinin 3. Bölümü'ne geçin.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

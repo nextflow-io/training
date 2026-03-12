@@ -1036,7 +1036,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -2754,10 +2754,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -2835,10 +2835,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm_1" class="md-nav__link">
+  <a href="#ozet_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -2886,7 +2886,7 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozet_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Özet
@@ -3736,10 +3736,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -3817,10 +3817,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm_1" class="md-nav__link">
+  <a href="#ozet_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -3868,7 +3868,7 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozet_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Özet
@@ -4172,14 +4172,14 @@
  
 
 <h1 id="nf-test-ile-test-etme">nf-test ile Test Etme<a class="headerlink" href="#nf-test-ile-test-etme" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay Zeka Destekli Çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
 <p>İş akışınızın her bir parçasının yapması gerekeni yaptığını sistematik olarak test edebilmek, tekrarlanabilirlik ve uzun vadeli bakım için kritik öneme sahiptir ve geliştirme sürecinde büyük bir yardımcı olabilir.</p>
 <p>Test etmenin neden bu kadar önemli olduğu hakkında biraz konuşalım. Bir iş akışı geliştiriyorsanız, yapacağınız ilk şeylerden biri geçerli olduğunu bildiğiniz ve sonuç üretmesi gereken bazı test verilerini almaktır. Pipeline'a ilk süreci ekler ve çalışması için girdilerinize bağlarsınız. Ardından, her şeyin çalıştığını kontrol etmek için test verileri üzerinde çalıştırırsınız. Bunun işe yaradığını varsayarsak, bir sonraki sürece geçer ve test verilerini tekrar çalıştırırsınız. Pipeline'dan memnun kalana kadar bu süreci tekrarlarsınız.</p>
 <p>Ardından, belki de <code>--skip_process</code> gibi basit bir doğru ya da yanlış parametresi eklersiniz. Şimdi pipeline'ı beklendiği gibi çalıştığından emin olmak için her parametre ile bir kez olmak üzere iki kez çalıştırmalısınız. Ama bekleyin, <code>--skip_process</code>'in gerçekten süreci atladığını nasıl kontrol ederiz? Çıktıları incelemeli veya log dosyalarını kontrol etmeliyiz! Bu zahmetli ve hataya açık bir durumdur.</p>
 <p>İş akışınızı geliştirirken, her iterasyonu manuel olarak test etmek hızla o kadar karmaşık hale gelir ki yavaş ve hataya açık olur. Dahası, bir hata bulursanız hatanın pipeline'ınızda tam olarak nereden kaynaklandığını belirlemek çok zor olacaktır. Test etme işte burada devreye girer.</p>
 <p>Test etme, pipeline'ınızın her bir parçasının beklendiği gibi çalıştığını sistematik olarak kontrol etmenizi sağlar. İyi yazılmış testlerin bir geliştirici için faydaları çok büyüktür:</p>
 <ul>
-<li><strong>Güven</strong>: Testler tüm pipeline'ı kapsadığı için, bir şeyi değiştirmenin başka bir şeyi etkilemediğinden emin olabilirsiniz</li>
+<li><strong>Güven</strong>: Testler tüm pipeline'ı kapsadığı için, bir şeyi değiştirmenin başka bir şeyi etkilemediğinden emin olabilirsiniz.</li>
 <li><strong>Güvenilirlik</strong>: Birden fazla geliştirici pipeline üzerinde çalıştığında, diğer geliştiricilerin pipeline'ı ve her bileşeni bozmadığını bilirler.</li>
 <li><strong>Şeffaflık</strong>: Testler, pipeline'ın nerede başarısız olduğunu gösterir ve sorunu takip etmeyi kolaylaştırır. Ayrıca bir tür dokümantasyon işlevi görürler ve bir sürecin veya iş akışının nasıl çalıştırılacağını gösterirler.</li>
 <li><strong>Hız</strong>: Testler otomatik olduğu için çok hızlı ve tekrarlı bir şekilde çalıştırılabilir. Yeni hatalar ekleme korkusu daha az olarak hızlı iterasyon yapabilirsiniz.</li>
@@ -4201,7 +4201,7 @@
 <li>Projenizde nf-test'i başlatma</li>
 <li>Modül seviyesi ve iş akışı seviyesi testler oluşturma</li>
 <li>Yaygın onaylama türlerini ekleme</li>
-<li>Snapshot'ların ne zaman kullanılacağını vs. içerik onaylamalarını anlama</li>
+<li>Snapshot'ların ne zaman kullanılacağını ve içerik onaylamalarından ne zaman yararlanılacağını anlama</li>
 <li>Tüm bir proje için testleri çalıştırma</li>
 </ul>
 <p>Bu beceriler, pipeline projelerinizde kapsamlı bir test stratejisi uygulamanıza yardımcı olarak onların daha sağlam ve sürdürülebilir olmasını sağlayacaktır.</p>
@@ -4209,7 +4209,7 @@
 <p>Bu yan görevi üstlenmeden önce:</p>
 <ul>
 <li><a href="../hello_nextflow/README.md">Hello Nextflow</a> eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.</li>
-<li>Temel Nextflow kavramlarını ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) kullanma konusunda rahat olmalısınız</li>
+<li>Temel Nextflow kavramlarını ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) kullanma konusunda rahat olmalısınız.</li>
 </ul>
 <hr />
 <h2 id="0-baslayn">0. Başlayın<a class="headerlink" href="#0-baslayn" title="Permanent link">&para;</a></h2>
@@ -4321,7 +4321,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <p>"Dur, ne? Sadece iş akışını çalıştırdım ve işe yaradı! Bu nasıl bir test?"</p>
 <p>İyi soru!</p>
 <p>Az önce ne olduğunu inceleyelim.</p>
-<p>İş akışını varsayılan parametrelerle çalıştırdınız, çalıştığını onayladınız ve sonuçlardan memnunsunuz. Bu, test etmenin özüdür. Hello Nextflow eğitim kursunu çalıştıysanız, her bölüme her zaman kullandığımız iş akışını çalıştırarak başladığımızı fark etmişsinizdir, her şeyin doğru şekilde kurulduğunu onaylamak için.</p>
+<p>İş akışını varsayılan parametrelerle çalıştırdınız, çalıştığını onayladınız ve sonuçlardan memnunsunuz. Bu, test etmenin özüdür. Hello Nextflow eğitim kursunu çalıştıysanız, her bölüme her zaman kullandığımız iş akışını çalıştırarak başladığımızı fark etmişsinizdir; her şeyin doğru şekilde kurulduğunu onaylamak için.</p>
 <p>Yazılım testi esasen bu süreci bizim için yapar.</p>
 <h4 id="gorevi-gozden-gecirin">Görevi gözden geçirin<a class="headerlink" href="#gorevi-gozden-gecirin" title="Permanent link">&para;</a></h4>
 <p>Zorluk, herhangi bir değişiklik yapılması durumunda her parçanın beklendiği gibi çalışmaya devam ettiğini doğrulamayı kolaylaştırmak için bu iş akışına nf-test kullanarak standartlaştırılmış testler eklemektir.</p>
@@ -4337,7 +4337,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <p>Tüm kutuları işaretleyebiliyorsanız, başlamaya hazırsınız.</p>
 <hr />
 <h2 id="1-nf-testi-baslatn">1. <code>nf-test</code>'i başlatın<a class="headerlink" href="#1-nf-testi-baslatn" title="Permanent link">&para;</a></h2>
-<p><code>nf-test</code> paketi, projemiz için test geliştirmeye başlamamız için birkaç şeyi ayarlayan bir başlatma komutu sağlar.</p>
+<p><code>nf-test</code> paketi, projemiz için test geliştirmeye başlamamız amacıyla birkaç şeyi ayarlayan bir başlatma komutu sağlar.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nf-test<span class="w"> </span>init
 </code></pre></div>
 <p>Bu, aşağıdaki çıktıyı üretmelidir:</p>
@@ -4400,7 +4400,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </ul>
 <p>Düz Türkçe ile, testin mantığı şöyle okunur:
 "<strong>When</strong> bu <em>parametreler</em> bu <em>pipeline</em>'a sağlandığında, <strong>then</strong> bu sonuçları görmeyi bekliyoruz."</p>
-<p>Bu işlevsel bir test değildir, bir sonraki bölümde bunu nasıl işlevsel bir teste dönüştüreceğimizi göstereceğiz.</p>
+<p>Bu işlevsel bir test değildir; bir sonraki bölümde bunu nasıl işlevsel bir teste dönüştüreceğimizi göstereceğiz.</p>
 <h3 id="test-adlar-hakknda-bir-not">Test Adları Hakkında Bir Not<a class="headerlink" href="#test-adlar-hakknda-bir-not" title="Permanent link">&para;</a></h3>
 <p>Yukarıdaki örnekte, yalnızca pipeline'ın başarılı bir şekilde çalışıp çalışmadığını kontrol eden temel bir test için uygun olan varsayılan "Should run without failures" adını kullandık. Ancak, daha spesifik test durumları ekledikçe, gerçekte neyi test ettiğimizi gösteren daha açıklayıcı adlar kullanmalıyız. Örneğin:</p>
 <ul>
@@ -4458,7 +4458,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="o">}</span>
 </code></pre></div>
 <ol>
-<li>nf-test, pipeline'ın durumunu kontrol etti ve <code>when</code> bloğuyla karşılaştırdı:</li>
+<li>nf-test, pipeline'ın durumunu kontrol etti ve <code>then</code> bloğuyla karşılaştırdı:</li>
 </ol>
 <div class="highlight"><span class="filename">tests/main.nf.test</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="n">workflow</span><span class="o">.</span><span class="na">success</span>
@@ -4467,33 +4467,39 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <p>nf-test'in pipeline'ın başarısız olduğunu nasıl bildirdiğine ve Nextflow'dan hata mesajını sağladığına dikkat edin:</p>
 <div class="highlight"><span class="filename">Hata</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/greetings.csv</span>
 </code></pre></div>
-<p>Peki sorun neydi? Pipeline'ın proje dizininde bir greetings.csv dosyası olduğunu hatırlayın. nf-test pipeline'ı çalıştırdığında bu dosyayı arayacaktır, ancak bulamaz. Dosya orada, ne oluyor? Yola bakarsak testin <code>./nf-test/tests/longHashString/</code> yolunda gerçekleştiğini görebiliriz. Tıpkı Nextflow gibi, nf-test de her şeyi izole tutmak için her test için yeni bir dizin oluşturur. Veri dosyası orada bulunmadığı için orijinal testteki dosyanın yolunu düzeltmeliyiz.</p>
+<p>Peki sorun neydi? Pipeline'ın proje dizininde bir <code>greetings.csv</code> dosyası olduğunu hatırlayın. nf-test pipeline'ı çalıştırdığında bu dosyayı arayacaktır, ancak bulamaz. Dosya orada, ne oluyor? Yola bakarsak testin <code>./nf-test/tests/longHashString/</code> yolunda gerçekleştiğini görebiliriz. Tıpkı Nextflow gibi, nf-test de her şeyi izole tutmak için her test için yeni bir dizin oluşturur. Veri dosyası orada bulunmadığı için orijinal testteki dosyanın yolunu düzeltmeliyiz.</p>
 <p>Test dosyasına geri dönelim ve <code>when</code> bloğundaki dosyanın yolunu değiştirelim.</p>
-<p>Testte pipeline'ın köküne nasıl işaret edeceğimizi merak ediyor olabilirsiniz. Bu yaygın bir durum olduğu için, nf-test hayatımızı kolaylaştırmak için bir dizi global değişken sağlar. Tam listeyi <a href="https://www.nf-test.com/docs/testcases/global_variables/">burada</a> bulabilirsiniz, ancak şimdilik pipeline projesinin kökü anlamına gelen <code>projectDir</code> değişkenini kullanacağız.</p>
-<p><em>Önce:</em></p>
+<p>Testte pipeline'ın köküne nasıl işaret edeceğimizi merak ediyor olabilirsiniz. Bu yaygın bir durum olduğu için, nf-test hayatımızı kolaylaştırmak amacıyla bir dizi global değişken sağlar. Tam listeyi <a href="https://www.nf-test.com/docs/testcases/global_variables/">burada</a> bulabilirsiniz, ancak şimdilik pipeline projesinin kökü anlamına gelen <code>projectDir</code> değişkenini kullanacağız.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Sonra</label><label for="__tabbed_1_2">Önce</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
 <span class="normal"><a href="#__codelineno-17-3">3</a></span>
 <span class="normal"><a href="#__codelineno-17-4">4</a></span>
-<span class="normal"><a href="#__codelineno-17-5">5</a></span>
-<span class="normal"><a href="#__codelineno-17-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">when</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-17-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">    </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="hll"><span class="w">        </span><span class="c1">// define parameters here. Example:</span>
-</span><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="hll"><span class="w">        </span><span class="c1">// outdir = &quot;tests/results&quot;</span>
-</span><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="o">}</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="hll"><span class="w">        </span><span class="n">input_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/greetings.csv&quot;</span>
+</span><a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><em>Sonra:</em></p>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
 <span class="normal"><a href="#__codelineno-18-4">4</a></span>
-<span class="normal"><a href="#__codelineno-18-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">when</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-18-5">5</a></span>
+<span class="normal"><a href="#__codelineno-18-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="hll"><span class="w">        </span><span class="n">input_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/greetings.csv&quot;</span>
-</span><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="o">}</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="hll"><span class="w">        </span><span class="c1">// define parameters here. Example:</span>
+</span><a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="hll"><span class="w">        </span><span class="c1">// outdir = &quot;tests/results&quot;</span>
+</span><a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <p>İşe yarayıp yaramadığını görmek için testi tekrar çalıştıralım.</p>
 <div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
@@ -4541,8 +4547,10 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </code></pre></div>
 <h3 id="13-onaylamalar-ekleyin">1.3. Onaylamalar ekleyin<a class="headerlink" href="#13-onaylamalar-ekleyin" title="Permanent link">&para;</a></h3>
 <p>Basit bir kontrol, pipeline'ımızın beklediğimiz tüm süreçleri çalıştırdığından ve hiçbirini sessizce atlamadığından emin olmaktır. Pipeline'ımızın 3 selamlamanın her biri için bir <code>sayHello</code> ve bir <code>convertToUpper</code> olmak üzere 6 süreç çalıştırdığını hatırlayın.</p>
-<p>Testımıze pipeline'ın beklenen sayıda süreci çalıştırdığını kontrol etmek için bir onaylama ekleyelim. Ayrıca test adımızı test ettiğimiz şeyi daha iyi yansıtacak şekilde güncelleyelim.</p>
-<p><strong>Önce:</strong></p>
+<p>Testımıza pipeline'ın beklenen sayıda süreci çalıştırdığını kontrol etmek için bir onaylama ekleyelim. Ayrıca test adımızı test ettiğimiz şeyi daha iyi yansıtacak şekilde güncelleyelim.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Sonra</label><label for="__tabbed_2_2">Önce</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -4555,7 +4563,8 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-23-10">10</a></span>
 <span class="normal"><a href="#__codelineno-23-11">11</a></span>
 <span class="normal"><a href="#__codelineno-23-12">12</a></span>
-<span class="normal"><a href="#__codelineno-23-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-23-13">13</a></span>
+<span class="normal"><a href="#__codelineno-23-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run successfully with correct number of processes&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-23-2" name="__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -4565,11 +4574,13 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-23-8" name="__codelineno-23-8"></a>
 <a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">workflow</span><span class="o">.</span><span class="na">success</span>
-<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-23-12" name="__codelineno-23-12"></a>
-<a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">workflow</span><span class="o">.</span><span class="na">trace</span><span class="o">.</span><span class="na">tasks</span><span class="o">().</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">6</span>
+</span><a id="__codelineno-23-12" name="__codelineno-23-12"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-23-13" name="__codelineno-23-13"></a>
+<a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>Sonra:</strong></p>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -4582,8 +4593,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-24-10">10</a></span>
 <span class="normal"><a href="#__codelineno-24-11">11</a></span>
 <span class="normal"><a href="#__codelineno-24-12">12</a></span>
-<span class="normal"><a href="#__codelineno-24-13">13</a></span>
-<span class="normal"><a href="#__codelineno-24-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run successfully with correct number of processes&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-24-2" name="__codelineno-24-2"></a>
 <a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -4593,12 +4603,14 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-24-8" name="__codelineno-24-8"></a>
 <a id="__codelineno-24-9" name="__codelineno-24-9"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">workflow</span><span class="o">.</span><span class="na">success</span>
-<a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">workflow</span><span class="o">.</span><span class="na">trace</span><span class="o">.</span><span class="na">tasks</span><span class="o">().</span><span class="na">size</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">6</span>
-</span><a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-24-13" name="__codelineno-24-13"></a>
-<a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a>
+<a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Test adı artık gerçekte neyi doğruladığımızı daha iyi yansıtıyor - sadece pipeline'ın başarısız olmadan çalıştığını değil, aynı zamanda beklenen sayıda süreci çalıştırdığını.</p>
+</div>
+</div>
+</div>
+<p>Test adı artık gerçekte neyi doğruladığımızı daha iyi yansıtıyor; sadece pipeline'ın başarısız olmadan çalıştığını değil, aynı zamanda beklenen sayıda süreci çalıştırdığını.</p>
 <p>İşe yarayıp yaramadığını görmek için testi tekrar çalıştıralım.</p>
 <div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
@@ -4616,8 +4628,10 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </code></pre></div>
 <p>Başarılı! Pipeline başarıyla çalışıyor ve test geçiyor. Artık genel durumun yanı sıra pipeline'ın ayrıntılarını da test etmeye başladık.</p>
 <h3 id="14-ckty-test-edin">1.4. Çıktıyı test edin<a class="headerlink" href="#14-ckty-test-edin" title="Permanent link">&para;</a></h3>
-<p>Testımıze çıktı dosyasının oluşturulduğunu kontrol etmek için bir onaylama ekleyelim. Sonuçları yorumlamayı kolaylaştırmak için bilgilendirici bir adla ayrı bir test olarak ekleyeceğiz.</p>
-<p><strong>Önce:</strong></p>
+<p>Testımıza çıktı dosyasının oluşturulduğunu kontrol etmek için bir onaylama ekleyelim. Sonuçları yorumlamayı kolaylaştırmak için bilgilendirici bir adla ayrı bir test olarak ekleyeceğiz.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Sonra</label><label for="__tabbed_3_2">Önce</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -4631,7 +4645,26 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-27-11">11</a></span>
 <span class="normal"><a href="#__codelineno-27-12">12</a></span>
 <span class="normal"><a href="#__codelineno-27-13">13</a></span>
-<span class="normal"><a href="#__codelineno-27-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run successfully with correct number of processes&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-27-14">14</a></span>
+<span class="normal"><a href="#__codelineno-27-15">15</a></span>
+<span class="normal"><a href="#__codelineno-27-16">16</a></span>
+<span class="normal"><a href="#__codelineno-27-17">17</a></span>
+<span class="normal"><a href="#__codelineno-27-18">18</a></span>
+<span class="normal"><a href="#__codelineno-27-19">19</a></span>
+<span class="normal"><a href="#__codelineno-27-20">20</a></span>
+<span class="normal"><a href="#__codelineno-27-21">21</a></span>
+<span class="normal"><a href="#__codelineno-27-22">22</a></span>
+<span class="normal"><a href="#__codelineno-27-23">23</a></span>
+<span class="normal"><a href="#__codelineno-27-24">24</a></span>
+<span class="normal"><a href="#__codelineno-27-25">25</a></span>
+<span class="normal"><a href="#__codelineno-27-26">26</a></span>
+<span class="normal"><a href="#__codelineno-27-27">27</a></span>
+<span class="normal"><a href="#__codelineno-27-28">28</a></span>
+<span class="normal"><a href="#__codelineno-27-29">29</a></span>
+<span class="normal"><a href="#__codelineno-27-30">30</a></span>
+<span class="normal"><a href="#__codelineno-27-31">31</a></span>
+<span class="normal"><a href="#__codelineno-27-32">32</a></span>
+<span class="normal"><a href="#__codelineno-27-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run successfully with correct number of processes&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -4645,8 +4678,28 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-27-12" name="__codelineno-27-12"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-27-13" name="__codelineno-27-13"></a>
 <a id="__codelineno-27-14" name="__codelineno-27-14"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
+</span><a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="hll">
+</span><a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should produce correct output files&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="hll">
+</span><a id="__codelineno-27-18" name="__codelineno-27-18"></a><span class="hll"><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-27-19" name="__codelineno-27-19"></a><span class="hll"><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-27-20" name="__codelineno-27-20"></a><span class="hll"><span class="w">                </span><span class="n">input_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/greetings.csv&quot;</span>
+</span><a id="__codelineno-27-21" name="__codelineno-27-21"></a><span class="hll"><span class="w">            </span><span class="o">}</span>
+</span><a id="__codelineno-27-22" name="__codelineno-27-22"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-27-23" name="__codelineno-27-23"></a><span class="hll">
+</span><a id="__codelineno-27-24" name="__codelineno-27-24"></a><span class="hll"><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-27-25" name="__codelineno-27-25"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Bonjour-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-26" name="__codelineno-27-26"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Hello-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-27" name="__codelineno-27-27"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Holà-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-28" name="__codelineno-27-28"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Bonjour-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-29" name="__codelineno-27-29"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Hello-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-30" name="__codelineno-27-30"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Holà-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
+</span><a id="__codelineno-27-31" name="__codelineno-27-31"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-27-32" name="__codelineno-27-32"></a><span class="hll">
+</span><a id="__codelineno-27-33" name="__codelineno-27-33"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
-<p><strong>Sonra:</strong></p>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -4660,26 +4713,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-28-11">11</a></span>
 <span class="normal"><a href="#__codelineno-28-12">12</a></span>
 <span class="normal"><a href="#__codelineno-28-13">13</a></span>
-<span class="normal"><a href="#__codelineno-28-14">14</a></span>
-<span class="normal"><a href="#__codelineno-28-15">15</a></span>
-<span class="normal"><a href="#__codelineno-28-16">16</a></span>
-<span class="normal"><a href="#__codelineno-28-17">17</a></span>
-<span class="normal"><a href="#__codelineno-28-18">18</a></span>
-<span class="normal"><a href="#__codelineno-28-19">19</a></span>
-<span class="normal"><a href="#__codelineno-28-20">20</a></span>
-<span class="normal"><a href="#__codelineno-28-21">21</a></span>
-<span class="normal"><a href="#__codelineno-28-22">22</a></span>
-<span class="normal"><a href="#__codelineno-28-23">23</a></span>
-<span class="normal"><a href="#__codelineno-28-24">24</a></span>
-<span class="normal"><a href="#__codelineno-28-25">25</a></span>
-<span class="normal"><a href="#__codelineno-28-26">26</a></span>
-<span class="normal"><a href="#__codelineno-28-27">27</a></span>
-<span class="normal"><a href="#__codelineno-28-28">28</a></span>
-<span class="normal"><a href="#__codelineno-28-29">29</a></span>
-<span class="normal"><a href="#__codelineno-28-30">30</a></span>
-<span class="normal"><a href="#__codelineno-28-31">31</a></span>
-<span class="normal"><a href="#__codelineno-28-32">32</a></span>
-<span class="normal"><a href="#__codelineno-28-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run successfully with correct number of processes&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-28-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run successfully with correct number of processes&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2"></a>
 <a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -4693,26 +4727,10 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-28-13" name="__codelineno-28-13"></a>
 <a id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
-</span><a id="__codelineno-28-15" name="__codelineno-28-15"></a><span class="hll">
-</span><a id="__codelineno-28-16" name="__codelineno-28-16"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should produce correct output files&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-28-17" name="__codelineno-28-17"></a><span class="hll">
-</span><a id="__codelineno-28-18" name="__codelineno-28-18"></a><span class="hll"><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-28-19" name="__codelineno-28-19"></a><span class="hll"><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-28-20" name="__codelineno-28-20"></a><span class="hll"><span class="w">                </span><span class="n">input_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/greetings.csv&quot;</span>
-</span><a id="__codelineno-28-21" name="__codelineno-28-21"></a><span class="hll"><span class="w">            </span><span class="o">}</span>
-</span><a id="__codelineno-28-22" name="__codelineno-28-22"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
-</span><a id="__codelineno-28-23" name="__codelineno-28-23"></a><span class="hll">
-</span><a id="__codelineno-28-24" name="__codelineno-28-24"></a><span class="hll"><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-28-25" name="__codelineno-28-25"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Bonjour-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-28-26" name="__codelineno-28-26"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Hello-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-28-27" name="__codelineno-28-27"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/Holà-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-28-28" name="__codelineno-28-28"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Bonjour-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-28-29" name="__codelineno-28-29"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Hello-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-28-30" name="__codelineno-28-30"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s2">&quot;$launchDir/results/UPPER-Holà-output.txt&quot;</span><span class="o">).</span><span class="na">exists</span><span class="o">()</span>
-</span><a id="__codelineno-28-31" name="__codelineno-28-31"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
-</span><a id="__codelineno-28-32" name="__codelineno-28-32"></a><span class="hll">
-</span><a id="__codelineno-28-33" name="__codelineno-28-33"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <p>İşe yarayıp yaramadığını görmek için testi tekrar çalıştırın.</p>
 <div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
@@ -4732,8 +4750,8 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a><span class="go">SUCCESS: Executed 2 tests in 15.165s</span>
 </code></pre></div>
 <p>Başarılı! Testler geçer çünkü pipeline başarıyla tamamlandı, doğru sayıda süreç çalıştı ve çıktı dosyaları oluşturuldu. Bu aynı zamanda testleriniz için bilgilendirici adlar sağlamanın ne kadar yararlı olduğunu göstermelidir.</p>
-<p>Bu sadece yüzey, pipeline'ın ayrıntılarını kontrol etmek için onaylamalar yazmaya devam edebiliriz, ancak şimdilik pipeline'ın içini test etmeye geçelim.</p>
-<h3 id="ckarm">Çıkarım<a class="headerlink" href="#ckarm" title="Permanent link">&para;</a></h3>
+<p>Bu sadece yüzey; pipeline'ın ayrıntılarını kontrol etmek için onaylamalar yazmaya devam edebiliriz, ancak şimdilik pipeline'ın içini test etmeye geçelim.</p>
+<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
 <p>Bir pipeline için nf-test yazmayı biliyorsunuz.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
 <p>Bir Nextflow sürecini test etmeyi öğrenin.</p>
@@ -4815,7 +4833,9 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-35-24" name="__codelineno-35-24" href="#__codelineno-35-24"></a><span class="go">FAILURE: Executed 1 tests in 4.884s (1 failed)</span>
 </code></pre></div>
 <p>Test başarısız oluyor çünkü <code>sayHello</code> süreci 1 girdi bildiriyor ancak 0 argümanla çağrıldı. Sürece bir girdi ekleyerek bunu düzeltelim. <a href="../../hello_nextflow/03_hello_workflow/">Hello Workflow</a>'dan (ve yukarıdaki ısınma bölümünden) <code>sayHello</code> sürecimizin sağlamamız gereken tek bir değer girdisi aldığını hatırlayın. Ayrıca test adını test ettiğimiz şeyi daha iyi yansıtacak şekilde düzeltmeliyiz.</p>
-<p><strong>Önce:</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Sonra</label><label for="__tabbed_4_2">Önce</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.sayhello.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -4835,8 +4855,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-36-17">17</a></span>
 <span class="normal"><a href="#__codelineno-36-18">18</a></span>
 <span class="normal"><a href="#__codelineno-36-19">19</a></span>
-<span class="normal"><a href="#__codelineno-36-20">20</a></span>
-<span class="normal"><a href="#__codelineno-36-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-36-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures and produce correct output&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-36-2" name="__codelineno-36-2"></a>
 <a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -4845,20 +4864,20 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-36-7" name="__codelineno-36-7"></a><span class="w">            </span><span class="o">}</span>
 <a id="__codelineno-36-8" name="__codelineno-36-8"></a><span class="w">            </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-36-9" name="__codelineno-36-9"></a><span class="w">                </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-36-10" name="__codelineno-36-10"></a><span class="hll"><span class="s2">                // define inputs of the process here. Example:</span>
-</span><a id="__codelineno-36-11" name="__codelineno-36-11"></a><span class="hll"><span class="s2">                // input[0] = file(&quot;test-file.txt&quot;)</span>
-</span><a id="__codelineno-36-12" name="__codelineno-36-12"></a><span class="s2">                &quot;&quot;&quot;</span>
-<a id="__codelineno-36-13" name="__codelineno-36-13"></a><span class="w">            </span><span class="o">}</span>
-<a id="__codelineno-36-14" name="__codelineno-36-14"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-36-15" name="__codelineno-36-15"></a>
-<a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
-<a id="__codelineno-36-18" name="__codelineno-36-18"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
-<a id="__codelineno-36-19" name="__codelineno-36-19"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-36-20" name="__codelineno-36-20"></a>
-<a id="__codelineno-36-21" name="__codelineno-36-21"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-36-10" name="__codelineno-36-10"></a><span class="hll"><span class="s2">                input[0] = &quot;hello&quot;</span>
+</span><a id="__codelineno-36-11" name="__codelineno-36-11"></a><span class="s2">                &quot;&quot;&quot;</span>
+<a id="__codelineno-36-12" name="__codelineno-36-12"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-36-13" name="__codelineno-36-13"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-36-14" name="__codelineno-36-14"></a>
+<a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-36-16" name="__codelineno-36-16"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
+<a id="__codelineno-36-17" name="__codelineno-36-17"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
+<a id="__codelineno-36-18" name="__codelineno-36-18"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-36-19" name="__codelineno-36-19"></a>
+<a id="__codelineno-36-20" name="__codelineno-36-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>Sonra:</strong></p>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.sayhello.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -4878,7 +4897,8 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-37-17">17</a></span>
 <span class="normal"><a href="#__codelineno-37-18">18</a></span>
 <span class="normal"><a href="#__codelineno-37-19">19</a></span>
-<span class="normal"><a href="#__codelineno-37-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures and produce correct output&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-37-20">20</a></span>
+<span class="normal"><a href="#__codelineno-37-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-37-2" name="__codelineno-37-2"></a>
 <a id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -4887,18 +4907,22 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="w">            </span><span class="o">}</span>
 <a id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="w">            </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="w">                </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="hll"><span class="s2">                input[0] = &quot;hello&quot;</span>
-</span><a id="__codelineno-37-11" name="__codelineno-37-11"></a><span class="s2">                &quot;&quot;&quot;</span>
-<a id="__codelineno-37-12" name="__codelineno-37-12"></a><span class="w">            </span><span class="o">}</span>
-<a id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-37-14" name="__codelineno-37-14"></a>
-<a id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
-<a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
-<a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-37-19" name="__codelineno-37-19"></a>
-<a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="hll"><span class="s2">                // define inputs of the process here. Example:</span>
+</span><a id="__codelineno-37-11" name="__codelineno-37-11"></a><span class="hll"><span class="s2">                // input[0] = file(&quot;test-file.txt&quot;)</span>
+</span><a id="__codelineno-37-12" name="__codelineno-37-12"></a><span class="s2">                &quot;&quot;&quot;</span>
+<a id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-37-15" name="__codelineno-37-15"></a>
+<a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
+<a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
+<a id="__codelineno-37-19" name="__codelineno-37-19"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-37-20" name="__codelineno-37-20"></a>
+<a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <p>İşe yarayıp yaramadığını görmek için testi tekrar çalıştıralım.</p>
 <div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
@@ -4932,9 +4956,9 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">    </span><span class="s2">&quot;hello-output.txt:md5,b1946ac92492d2347c6235b4d2611184&quot;</span>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="p">]</span>
 </code></pre></div>
-<p>Bu, açıkça test ettiğimiz <code>sayHello</code> süreci tarafından oluşturulan çıktıları temsil eder. Testi yeniden çalıştırırsak, program yeni çıktının başlangıçta kaydedilen çıktıyla eşleşip eşleşmediğini kontrol edecektir. Bu, süreç çıktılarının değişmediğini test etmenin hızlı, basit bir yoludur, bu nedenle nf-test bunu varsayılan olarak sağlar.</p>
+<p>Bu, açıkça test ettiğimiz <code>sayHello</code> süreci tarafından oluşturulan çıktıları temsil eder. Testi yeniden çalıştırırsak, program yeni çıktının başlangıçta kaydedilen çıktıyla eşleşip eşleşmediğini kontrol edecektir. Bu, süreç çıktılarının değişmediğini test etmenin hızlı ve basit bir yoludur; nf-test bu nedenle bunu varsayılan olarak sağlar.</p>
 <div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p class="admonition-title">Uyarı</p>
 <p>Bu, orijinal çalıştırmada kaydettiğimiz çıktının doğru olduğundan emin olmamız gerektiği anlamına gelir!</p>
 </div>
 <p>Gelecekteki geliştirme sırasında, kodda çıktının farklı olmasına neden olan bir şey değişirse, test başarısız olacak ve değişikliğin beklenip beklenmediğini belirlememiz gerekecektir.</p>
@@ -4961,12 +4985,14 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <h3 id="23-snapshotlara-alternatif-dogrudan-icerik-onaylamalar">2.3. Snapshot'lara Alternatif: Doğrudan İçerik Onaylamaları<a class="headerlink" href="#23-snapshotlara-alternatif-dogrudan-icerik-onaylamalar" title="Permanent link">&para;</a></h3>
 <p>Snapshot'lar çıktıdaki herhangi bir değişikliği yakalamak için harika olsa da, bazen tüm dosyanın eşleşmesi konusunda bu kadar katı olmadan belirli içeriği doğrulamak isteyebilirsiniz. Örneğin:</p>
 <ul>
-<li>Çıktının bazı kısımları değişebilir (zaman damgaları, rastgele kimlikler, vb.) ancak belirli anahtar içerik mevcut olmalıdır</li>
+<li>Çıktının bazı kısımları değişebilir (zaman damgaları, rastgele kimlikler vb.) ancak belirli anahtar içerik mevcut olmalıdır</li>
 <li>Çıktıda belirli desenler veya değerleri kontrol etmek istediğinizde</li>
 <li>Testi başarıyı neyin oluşturduğu konusunda daha açık hale getirmek istediğinizde</li>
 </ul>
-<p>Testımızı belirli içeriği kontrol edecek şekilde nasıl değiştirebileceğimiz aşağıda:</p>
-<p><strong>Önce:</strong></p>
+<p>Testımızı belirli içeriği kontrol edecek şekilde nasıl değiştirebileceğimiz aşağıda gösterilmiştir:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Sonra</label><label for="__tabbed_5_2">Önce</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.sayhello.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -4986,28 +5012,29 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-43-17">17</a></span>
 <span class="normal"><a href="#__codelineno-43-18">18</a></span>
 <span class="normal"><a href="#__codelineno-43-19">19</a></span>
-<span class="normal"><a href="#__codelineno-43-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures and produce correct output&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-43-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures and contain expected greeting&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-43-2" name="__codelineno-43-2"></a>
 <a id="__codelineno-43-3" name="__codelineno-43-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-43-4" name="__codelineno-43-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-43-5" name="__codelineno-43-5"></a><span class="hll"><span class="w">                </span><span class="c1">// define parameters here. Example:</span>
-</span><a id="__codelineno-43-6" name="__codelineno-43-6"></a><span class="hll"><span class="w">                </span><span class="c1">// outdir = &quot;tests/results&quot;</span>
-</span><a id="__codelineno-43-7" name="__codelineno-43-7"></a><span class="w">            </span><span class="o">}</span>
-<a id="__codelineno-43-8" name="__codelineno-43-8"></a><span class="w">            </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-43-9" name="__codelineno-43-9"></a><span class="w">                </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-43-10" name="__codelineno-43-10"></a><span class="s2">                input[0] = &quot;hello&quot;</span>
-<a id="__codelineno-43-11" name="__codelineno-43-11"></a><span class="s2">                &quot;&quot;&quot;</span>
-<a id="__codelineno-43-12" name="__codelineno-43-12"></a><span class="w">            </span><span class="o">}</span>
-<a id="__codelineno-43-13" name="__codelineno-43-13"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-43-14" name="__codelineno-43-14"></a>
-<a id="__codelineno-43-15" name="__codelineno-43-15"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-43-16" name="__codelineno-43-16"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
-<a id="__codelineno-43-17" name="__codelineno-43-17"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
+<a id="__codelineno-43-5" name="__codelineno-43-5"></a><span class="hll"><span class="w">                </span><span class="c1">// parametreleri burada tanımlayın</span>
+</span><a id="__codelineno-43-6" name="__codelineno-43-6"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-43-7" name="__codelineno-43-7"></a><span class="w">            </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-43-8" name="__codelineno-43-8"></a><span class="w">                </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-43-9" name="__codelineno-43-9"></a><span class="s2">                input[0] = &quot;hello&quot;</span>
+<a id="__codelineno-43-10" name="__codelineno-43-10"></a><span class="s2">                &quot;&quot;&quot;</span>
+<a id="__codelineno-43-11" name="__codelineno-43-11"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-43-12" name="__codelineno-43-12"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-43-13" name="__codelineno-43-13"></a>
+<a id="__codelineno-43-14" name="__codelineno-43-14"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-43-15" name="__codelineno-43-15"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
+<a id="__codelineno-43-16" name="__codelineno-43-16"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]).</span><span class="na">readLines</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="s1">&#39;hello&#39;</span><span class="o">)</span>
+</span><a id="__codelineno-43-17" name="__codelineno-43-17"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="o">!</span><span class="n">path</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]).</span><span class="na">readLines</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="s1">&#39;HELLO&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-43-18" name="__codelineno-43-18"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-43-19" name="__codelineno-43-19"></a>
 <a id="__codelineno-43-20" name="__codelineno-43-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>Sonra:</strong></p>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.sayhello.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -5027,39 +5054,42 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-44-17">17</a></span>
 <span class="normal"><a href="#__codelineno-44-18">18</a></span>
 <span class="normal"><a href="#__codelineno-44-19">19</a></span>
-<span class="normal"><a href="#__codelineno-44-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures and contain expected greeting&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-44-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures and produce correct output&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-44-2" name="__codelineno-44-2"></a>
 <a id="__codelineno-44-3" name="__codelineno-44-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-44-5" name="__codelineno-44-5"></a><span class="hll"><span class="w">                </span><span class="c1">// parametreleri burada tanımlayın</span>
-</span><a id="__codelineno-44-6" name="__codelineno-44-6"></a><span class="w">            </span><span class="o">}</span>
-<a id="__codelineno-44-7" name="__codelineno-44-7"></a><span class="w">            </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-44-8" name="__codelineno-44-8"></a><span class="w">                </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-44-9" name="__codelineno-44-9"></a><span class="s2">                input[0] = &quot;hello&quot;</span>
-<a id="__codelineno-44-10" name="__codelineno-44-10"></a><span class="s2">                &quot;&quot;&quot;</span>
-<a id="__codelineno-44-11" name="__codelineno-44-11"></a><span class="w">            </span><span class="o">}</span>
-<a id="__codelineno-44-12" name="__codelineno-44-12"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-44-13" name="__codelineno-44-13"></a>
-<a id="__codelineno-44-14" name="__codelineno-44-14"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-44-15" name="__codelineno-44-15"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
-<a id="__codelineno-44-16" name="__codelineno-44-16"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]).</span><span class="na">readLines</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="s1">&#39;hello&#39;</span><span class="o">)</span>
-</span><a id="__codelineno-44-17" name="__codelineno-44-17"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="o">!</span><span class="n">path</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]).</span><span class="na">readLines</span><span class="o">().</span><span class="na">contains</span><span class="o">(</span><span class="s1">&#39;HELLO&#39;</span><span class="o">)</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5"></a><span class="hll"><span class="w">                </span><span class="c1">// define parameters here. Example:</span>
+</span><a id="__codelineno-44-6" name="__codelineno-44-6"></a><span class="hll"><span class="w">                </span><span class="c1">// outdir = &quot;tests/results&quot;</span>
+</span><a id="__codelineno-44-7" name="__codelineno-44-7"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-44-8" name="__codelineno-44-8"></a><span class="w">            </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-44-9" name="__codelineno-44-9"></a><span class="w">                </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-44-10" name="__codelineno-44-10"></a><span class="s2">                input[0] = &quot;hello&quot;</span>
+<a id="__codelineno-44-11" name="__codelineno-44-11"></a><span class="s2">                &quot;&quot;&quot;</span>
+<a id="__codelineno-44-12" name="__codelineno-44-12"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-44-13" name="__codelineno-44-13"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-44-14" name="__codelineno-44-14"></a>
+<a id="__codelineno-44-15" name="__codelineno-44-15"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-44-16" name="__codelineno-44-16"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
+<a id="__codelineno-44-17" name="__codelineno-44-17"></a><span class="hll"><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
 </span><a id="__codelineno-44-18" name="__codelineno-44-18"></a><span class="w">        </span><span class="o">}</span>
 <a id="__codelineno-44-19" name="__codelineno-44-19"></a>
 <a id="__codelineno-44-20" name="__codelineno-44-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>nf-test'in süreç çıktılarını liste listeleri olarak gördüğüne dikkat edin, bu nedenle <code>process.out[0][0]</code> bu süreçten ilk kanal öğesinin (veya 'emisyonunun') ilk kısmını getiriyor.</p>
+</div>
+</div>
+</div>
+<p>nf-test'in süreç çıktılarını liste listeleri olarak gördüğüne dikkat edin; bu nedenle <code>process.out[0][0]</code> bu süreçten ilk kanal öğesinin (veya 'emisyonunun') ilk kısmını getiriyor.</p>
 <p>Bu yaklaşım:</p>
 <ul>
 <li>Çıktıda tam olarak ne beklediğimizi açık hale getirir</li>
 <li>Çıktıdaki alakasız değişikliklere karşı daha dayanıklıdır</li>
 <li>Testler başarısız olduğunda daha iyi hata mesajları sağlar</li>
-<li>Daha karmaşık doğrulamalara izin verir (regex desenleri, sayısal karşılaştırmalar, vb.)</li>
+<li>Daha karmaşık doğrulamalara izin verir (regex desenleri, sayısal karşılaştırmalar vb.)</li>
 </ul>
 <p>İşe yarayıp yaramadığını görmek için testi çalıştıralım.</p>
 <div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Süreç testi başarısız</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">Süreç testi başarılı</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5106,14 +5136,16 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-47-29" name="__codelineno-47-29" href="#__codelineno-47-29"></a><span class="o">}</span>
 </code></pre></div>
 <p>Bu, <code>sayHello</code> sürecine benzer bir testtir, ancak <code>convertToUpper</code> sürecini test ediyor. Bunun başarısız olacağını biliyoruz çünkü tıpkı <code>sayHello</code> gibi, <code>convertToUpper</code> süreci tek bir yol girdisi alır, ancak biz bir tane belirtmedik.</p>
-<p>Şimdi convertToUpper sürecine büyük harfe dönüştürmek istediğimiz bazı metinler içeren tek bir girdi dosyası sağlamamız gerekiyor. Bunu yapmanın birçok yolu var:</p>
+<p>Şimdi <code>convertToUpper</code> sürecine büyük harfe dönüştürmek istediğimiz bazı metinler içeren tek bir girdi dosyası sağlamamız gerekiyor. Bunu yapmanın birçok yolu var:</p>
 <ul>
 <li>Test için özel bir dosya oluşturabiliriz</li>
-<li>Mevcut data/greetings.csv dosyasını yeniden kullanabiliriz</li>
+<li>Mevcut <code>greetings.csv</code> dosyasını yeniden kullanabiliriz</li>
 <li>Test içinde anında oluşturabiliriz</li>
 </ul>
-<p>Şimdilik, pipeline seviyesi testinde kullandığımız örneği kullanarak mevcut data/greetings.csv dosyasını yeniden kullanalım. Daha önce olduğu gibi, testi test ettiğimiz şeyi daha iyi yansıtacak şekilde adlandırabiliriz, ancak bu sefer içeriği belirli dizeler için kontrol etmek yerine (diğer süreçte yaptığımız gibi) 'snapshot' ile bırakalım.</p>
-<p><strong>Önce:</strong></p>
+<p>Şimdilik, pipeline seviyesi testinde kullandığımız örneği kullanarak mevcut <code>greetings.csv</code> dosyasını yeniden kullanalım. Daha önce olduğu gibi, testi test ettiğimiz şeyi daha iyi yansıtacak şekilde adlandırabiliriz, ancak bu sefer içeriği belirli dizeler için kontrol etmek yerine (diğer süreçte yaptığımız gibi) snapshot ile bırakalım.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Sonra</label><label for="__tabbed_6_2">Önce</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.converttoupper.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
@@ -5133,8 +5165,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-48-17">17</a></span>
 <span class="normal"><a href="#__codelineno-48-18">18</a></span>
 <span class="normal"><a href="#__codelineno-48-19">19</a></span>
-<span class="normal"><a href="#__codelineno-48-20">20</a></span>
-<span class="normal"><a href="#__codelineno-48-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-48-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures and produce correct output&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-48-2" name="__codelineno-48-2"></a>
 <a id="__codelineno-48-3" name="__codelineno-48-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-48-4" name="__codelineno-48-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -5143,20 +5174,20 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-48-7" name="__codelineno-48-7"></a><span class="w">            </span><span class="o">}</span>
 <a id="__codelineno-48-8" name="__codelineno-48-8"></a><span class="w">            </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-48-9" name="__codelineno-48-9"></a><span class="w">                </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-48-10" name="__codelineno-48-10"></a><span class="hll"><span class="s2">                // define inputs of the process here. Example:</span>
-</span><a id="__codelineno-48-11" name="__codelineno-48-11"></a><span class="hll"><span class="s2">                // input[0] = file(&quot;test-file.txt&quot;)</span>
-</span><a id="__codelineno-48-12" name="__codelineno-48-12"></a><span class="s2">                &quot;&quot;&quot;</span>
-<a id="__codelineno-48-13" name="__codelineno-48-13"></a><span class="w">            </span><span class="o">}</span>
-<a id="__codelineno-48-14" name="__codelineno-48-14"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-48-15" name="__codelineno-48-15"></a>
-<a id="__codelineno-48-16" name="__codelineno-48-16"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-48-17" name="__codelineno-48-17"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
-<a id="__codelineno-48-18" name="__codelineno-48-18"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
-<a id="__codelineno-48-19" name="__codelineno-48-19"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-48-20" name="__codelineno-48-20"></a>
-<a id="__codelineno-48-21" name="__codelineno-48-21"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-48-10" name="__codelineno-48-10"></a><span class="hll"><span class="s2">                input[0] = &quot;${projectDir}/greetings.csv&quot;</span>
+</span><a id="__codelineno-48-11" name="__codelineno-48-11"></a><span class="s2">                &quot;&quot;&quot;</span>
+<a id="__codelineno-48-12" name="__codelineno-48-12"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-48-13" name="__codelineno-48-13"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-48-14" name="__codelineno-48-14"></a>
+<a id="__codelineno-48-15" name="__codelineno-48-15"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-48-16" name="__codelineno-48-16"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
+<a id="__codelineno-48-17" name="__codelineno-48-17"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
+<a id="__codelineno-48-18" name="__codelineno-48-18"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-48-19" name="__codelineno-48-19"></a>
+<a id="__codelineno-48-20" name="__codelineno-48-20"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>Sonra:</strong></p>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/main.converttoupper.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
@@ -5176,7 +5207,8 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <span class="normal"><a href="#__codelineno-49-17">17</a></span>
 <span class="normal"><a href="#__codelineno-49-18">18</a></span>
 <span class="normal"><a href="#__codelineno-49-19">19</a></span>
-<span class="normal"><a href="#__codelineno-49-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures and produce correct output&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-49-20">20</a></span>
+<span class="normal"><a href="#__codelineno-49-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-49-2" name="__codelineno-49-2"></a>
 <a id="__codelineno-49-3" name="__codelineno-49-3"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-49-4" name="__codelineno-49-4"></a><span class="w">            </span><span class="n">params</span><span class="w"> </span><span class="o">{</span>
@@ -5185,18 +5217,22 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-49-7" name="__codelineno-49-7"></a><span class="w">            </span><span class="o">}</span>
 <a id="__codelineno-49-8" name="__codelineno-49-8"></a><span class="w">            </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-49-9" name="__codelineno-49-9"></a><span class="w">                </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-49-10" name="__codelineno-49-10"></a><span class="hll"><span class="s2">                input[0] = &quot;${projectDir}/greetings.csv&quot;</span>
-</span><a id="__codelineno-49-11" name="__codelineno-49-11"></a><span class="s2">                &quot;&quot;&quot;</span>
-<a id="__codelineno-49-12" name="__codelineno-49-12"></a><span class="w">            </span><span class="o">}</span>
-<a id="__codelineno-49-13" name="__codelineno-49-13"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-49-14" name="__codelineno-49-14"></a>
-<a id="__codelineno-49-15" name="__codelineno-49-15"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-49-16" name="__codelineno-49-16"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
-<a id="__codelineno-49-17" name="__codelineno-49-17"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
-<a id="__codelineno-49-18" name="__codelineno-49-18"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-49-19" name="__codelineno-49-19"></a>
-<a id="__codelineno-49-20" name="__codelineno-49-20"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-49-10" name="__codelineno-49-10"></a><span class="hll"><span class="s2">                // define inputs of the process here. Example:</span>
+</span><a id="__codelineno-49-11" name="__codelineno-49-11"></a><span class="hll"><span class="s2">                // input[0] = file(&quot;test-file.txt&quot;)</span>
+</span><a id="__codelineno-49-12" name="__codelineno-49-12"></a><span class="s2">                &quot;&quot;&quot;</span>
+<a id="__codelineno-49-13" name="__codelineno-49-13"></a><span class="w">            </span><span class="o">}</span>
+<a id="__codelineno-49-14" name="__codelineno-49-14"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-49-15" name="__codelineno-49-15"></a>
+<a id="__codelineno-49-16" name="__codelineno-49-16"></a><span class="w">        </span><span class="n">then</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-49-17" name="__codelineno-49-17"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
+<a id="__codelineno-49-18" name="__codelineno-49-18"></a><span class="w">            </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
+<a id="__codelineno-49-19" name="__codelineno-49-19"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-49-20" name="__codelineno-49-20"></a>
+<a id="__codelineno-49-21" name="__codelineno-49-21"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
 <p>Ve testi çalıştırın!</p>
 <div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
 </code></pre></div>
@@ -5236,7 +5272,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a>
 <a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="go">SUCCESS: Executed 1 tests in 1.811s</span>
 </code></pre></div>
-<h3 id="ckarm_1">Çıkarım<a class="headerlink" href="#ckarm_1" title="Permanent link">&para;</a></h3>
+<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
 <p>Bir Nextflow süreci için test yazmayı ve çalıştırmayı biliyorsunuz.</p>
 <h3 id="srada-ne-var_1">Sırada ne var?<a class="headerlink" href="#srada-ne-var_1" title="Permanent link">&para;</a></h3>
 <p>Her şey için aynı anda testleri nasıl çalıştıracağınızı öğrenin!</p>
@@ -5274,7 +5310,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </code></pre></div>
 <p>Buna bakın! Tek bir komutla her süreç için 1 ve tüm pipeline için 2 olmak üzere 4 test çalıştırdık. Büyük bir kod tabanında bunun ne kadar güçlü olduğunu hayal edin!</p>
 <hr />
-<h2 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h2>
+<h2 id="ozet_2">Özet<a class="headerlink" href="#ozet_2" title="Permanent link">&para;</a></h2>
 <p>Bu yan görevde, bireysel süreçler için testler oluşturmanın yanı sıra tüm pipeline için uçtan uca testler oluşturmak üzere nf-test'in özelliklerinden yararlanmayı öğrendiniz.
 Artık çıktı doğrulama için iki ana yaklaşımın, snapshot'ların ve doğrudan içerik onaylamalarının ve her birinin ne zaman kullanılacağının farkındasınız.
 Ayrıca testleri tek tek veya tüm bir proje için nasıl çalıştıracağınızı biliyorsunuz.</p>

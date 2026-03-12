@@ -1652,7 +1652,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -4256,10 +4256,10 @@
  
 
 <h1 id="bolum-5-merhaba-konteynerlar">Bölüm 5: Merhaba Konteynerlar<a class="headerlink" href="#bolum-5-merhaba-konteynerlar" title="Permanent link">&para;</a></h1>
-<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay Zeka Destekli Çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
 <figure>
 <div class="video-wrapper">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1&amp;cc_lang_pref=tr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Xqr--bKEN9U?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 <figcaption>
@@ -4339,7 +4339,7 @@ Bu betik, bu eğitim kursunun 4. Bölümünde üretilen betiğe eşdeğerdir; an
 </details>
 <p>Daha önce olduğu gibi, çıktı dosyalarını <code>output</code> bloğunda belirtilen dizinde bulacaksınız (<code>results/hello_containers/</code>).</p>
 <details class="abstract">
-<summary>Dizin içerikleri</summary>
+<summary>Dizin içeriği</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="go">results/hello_containers/</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="go">├── Bonjour-output.txt</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="go">├── COLLECTED-batch-output.txt</span>
@@ -4438,14 +4438,14 @@ Sadece <code>cowpy</code> ile başlayalım.</p>
 </details>
 <p>Sistem konteyneri başlattı, <code>cowpy</code> komutunu parametreleriyle çalıştırdı, çıktıyı konsola gönderdi ve son olarak konteyner örneğini kapattı.</p>
 <h3 id="13-cowpyyi-etkilesimli-olarak-calstrmak-icin-konteyneri-kullann">1.3. <code>cowpy</code>'yi etkileşimli olarak çalıştırmak için konteyneri kullanın<a class="headerlink" href="#13-cowpyyi-etkilesimli-olarak-calstrmak-icin-konteyneri-kullann" title="Permanent link">&para;</a></h3>
-<p>Bir konteyneri etkileşimli olarak da çalıştırabilirsiniz, bu size konteyner içinde bir kabuk istemi verir ve komutla oynamanıza olanak tanır.</p>
+<p>Bir konteyneri etkileşimli olarak da çalıştırabilirsiniz; bu size konteyner içinde bir kabuk istemi verir ve komutla oynamanıza olanak tanır.</p>
 <h4 id="131-konteyneri-baslatn">1.3.1. Konteyneri başlatın<a class="headerlink" href="#131-konteyneri-baslatn" title="Permanent link">&para;</a></h4>
 <p>Etkileşimli olarak çalıştırmak için, <code>docker run</code> komutuna <code>-it</code> eklememiz yeterli.
 İsteğe bağlı olarak, komutun sonuna <em>örn.</em> <code>/bin/bash</code> ekleyerek konteyner içinde kullanmak istediğimiz kabuğu belirtebiliriz.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span><span class="s1">&#39;community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273&#39;</span><span class="w"> </span>/bin/bash
 </code></pre></div>
-<p>İsteminizin <code>(base) root@b645838b3314:/tmp#</code> gibi bir şeye dönüştüğüne dikkat edin, bu artık konteyner içinde olduğunuzu gösterir.</p>
-<p>Bunu doğrulamak için dosya sisteminin kökünden dizin içeriklerini listelemek için <code>ls /</code> komutunu çalıştırabilirsiniz:</p>
+<p>İsteminizin <code>(base) root@b645838b3314:/tmp#</code> gibi bir şeye dönüştüğüne dikkat edin; bu artık konteyner içinde olduğunuzu gösterir.</p>
+<p>Bunu doğrulamak için dosya sisteminin kökünden dizin içeriklerini listelemek üzere <code>ls /</code> komutunu çalıştırabilirsiniz:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ls<span class="w"> </span>/
 </code></pre></div>
 <details class="abstract">
@@ -4517,7 +4517,7 @@ Ancak dosya sistemine erişimimiz olmadığı için yapamayız.</p>
 <p>Bu, dosya sisteminizin o kısmına erişmek için kullanabileceğiniz konteyner duvarından bir tünel oluşturdu.</p>
 <h4 id="135-baglanms-verileri-kullann">1.3.5. Bağlanmış verileri kullanın<a class="headerlink" href="#135-baglanms-verileri-kullann" title="Permanent link">&para;</a></h4>
 <p>Artık çalışma dizinini konteynere bağladığımıza göre, <code>greetings.csv</code> dosyasının içeriğini görüntülemek için <code>cowpy</code> komutunu kullanabiliriz.</p>
-<p>Bunu yapmak için, CSV dosyasının içeriğini <code>cowpy</code> komutuna yönlendirmek için <code>cat /my_project/data/greetings.csv |</code> kullanacağız.</p>
+<p>Bunu yapmak için, CSV dosyasının içeriğini <code>cowpy</code> komutuna yönlendirmek üzere <code>cat /my_project/data/greetings.csv |</code> kullanacağız.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>cat<span class="w"> </span>/my_project/data/greetings.csv<span class="w"> </span><span class="p">|</span><span class="w"> </span>cowpy<span class="w"> </span>-c<span class="w"> </span>turkey
 </code></pre></div>
 <details class="success">
@@ -4538,7 +4538,7 @@ Ancak dosya sistemine erişimimiz olmadığı için yapamayız.</p>
 <a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a><span class="go">          ( /  (    (        ,___    ^*+_+* )   &lt;    &lt;      \</span>
 <a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="go">          U _/     )    *--&lt;  ) ^\-----++__)   )    )       )</span>
 <a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="go">            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /</span>
-<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="go">          (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^</span>
+<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a><span class="go">          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^</span>
 <a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a><span class="go">        (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)</span>
 <a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="go">          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^</span>
 <a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a><span class="go">          \             \_)^)_)) ))^^^^^^^^^^))^^^^)</span>
@@ -4559,12 +4559,12 @@ Nextflow iş akışımızın daha iyi bir iş çıkaracağını zaten biliyoruz!
 </code></pre></div>
 <p>Normal kabuğunuza geri döneceksiniz.</p>
 <h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
-<p>Bir konteyneri nasıl çekip tek seferlik veya etkileşimli olarak çalıştıracağınızı biliyorsunuz. Ayrıca verilerinizi konteynerinizin içinden erişilebilir hale getirmeyi biliyorsunuz, bu da sisteminize herhangi bir yazılım yüklemeden ilgilendiğiniz herhangi bir aracı gerçek veriler üzerinde denemenizi sağlar.</p>
+<p>Bir konteyneri nasıl çekip tek seferlik veya etkileşimli olarak çalıştıracağınızı biliyorsunuz. Ayrıca verilerinizi konteynerinizin içinden erişilebilir hale getirmeyi biliyorsunuz; bu da sisteminize herhangi bir yazılım yüklemeden ilgilendiğiniz herhangi bir aracı gerçek veriler üzerinde denemenizi sağlar.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
 <p>Nextflow'da süreçlerin yürütülmesi için konteynerleri nasıl kullanacağınızı öğrenin.</p>
 <hr />
 <h2 id="2-nextflowda-konteynerleri-kullann">2. Nextflow'da konteynerleri kullanın<a class="headerlink" href="#2-nextflowda-konteynerleri-kullann" title="Permanent link">&para;</a></h2>
-<p>Nextflow, hesaplama ortamınızda yüklü olmayan araçları çalıştırmanıza izin vermek için süreçleri konteynerler içinde çalıştırmak için yerleşik desteğe sahiptir.
+<p>Nextflow, hesaplama ortamınızda yüklü olmayan araçları çalıştırmanıza izin vermek için süreçleri konteynerler içinde çalıştırmak üzere yerleşik desteğe sahiptir.
 Bu, süreçlerinizi çalıştırmak için istediğiniz herhangi bir konteyner imajını kullanabileceğiniz ve Nextflow'un imajı çekme, verileri bağlama ve süreci içinde çalıştırma işlemlerini halledeceği anlamına gelir.</p>
 <p>Bunu göstermek için, geliştirdiğimiz pipeline'a <code>collectGreetings</code> adımından sonra bir <code>cowpy</code> adımı ekleyeceğiz.</p>
 <figure class="excalidraw">
@@ -4719,7 +4719,7 @@ Bu, süreçlerinizi çalıştırmak için istediğiniz herhangi bir konteyner im
 </div>
 <p>Selamlamaları hangi karakterin söylemesini istediğimizi belirtmek için yeni bir CLI parametresi olan <code>params.character</code> tanımladığımıza dikkat edin.</p>
 <h4 id="223-character-parametresini-params-bloguna-ekleyin">2.2.3. <code>character</code> parametresini <code>params</code> bloğuna ekleyin<a class="headerlink" href="#223-character-parametresini-params-bloguna-ekleyin" title="Permanent link">&para;</a></h4>
-<p>Bu teknik olarak isteğe bağlıdır ama önerilen bir pratiktir ve bu arada karakter için varsayılan bir değer belirleme fırsatıdır.</p>
+<p>Bu teknik olarak isteğe bağlıdır; ancak önerilen bir pratiktir ve bu arada karakter için varsayılan bir değer belirleme fırsatıdır.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Sonra</label><label for="__tabbed_3_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -4760,7 +4760,7 @@ Bu, süreçlerinizi çalıştırmak için istediğiniz herhangi bir konteyner im
 </div>
 <p>Artık tembel olabilir ve komut satırlarımızda karakter parametresini yazmayı atlayabiliriz.</p>
 <h4 id="224-is-aks-cktlarn-guncelleyin">2.2.4. İş akışı çıktılarını güncelleyin<a class="headerlink" href="#224-is-aks-cktlarn-guncelleyin" title="Permanent link">&para;</a></h4>
-<p><code>cowpy</code> sürecinin çıktısını yayınlamak için iş akışı çıktılarını güncellememiz gerekiyor.</p>
+<p><code>cowpy</code> sürecinin çıktısını yayımlamak için iş akışı çıktılarını güncellememiz gerekiyor.</p>
 <h5 id="2241-publish-bolumunu-guncelleyin">2.2.4.1. <code>publish:</code> bölümünü güncelleyin<a class="headerlink" href="#2241-publish-bolumunu-guncelleyin" title="Permanent link">&para;</a></h5>
 <p><code>workflow</code> bloğunda, aşağıdaki kod değişikliğini yapın:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Sonra</label><label for="__tabbed_4_2">Önce</label></div>
@@ -4796,7 +4796,7 @@ Bu, süreçlerinizi çalıştırmak için istediğiniz herhangi bir konteyner im
 <p><code>cowpy</code> süreci yalnızca bir çıktı üretir, bu yüzden <code>.out</code> ekleyerek her zamanki şekilde atıfta bulunabiliriz.</p>
 <p>Ama şimdilik, iş akışı düzeyindeki çıktıları güncellemeyi bitirelim.</p>
 <h5 id="2242-output-blogunu-guncelleyin">2.2.4.2. <code>output</code> bloğunu güncelleyin<a class="headerlink" href="#2242-output-blogunu-guncelleyin" title="Permanent link">&para;</a></h5>
-<p>Son <code>cowpy_art</code> çıktısını <code>output</code> bloğuna eklememiz gerekiyor. Bu arada, pipeline'ımız artık tamamlandığı ve hangi çıktıları gerçekten önemsediğimizi bildiğimiz için yayınlama hedeflerini de düzenleyelim.</p>
+<p>Son <code>cowpy_art</code> çıktısını <code>output</code> bloğuna eklememiz gerekiyor. Bu arada, pipeline'ımız artık tamamlandığı ve hangi çıktıları gerçekten önemsediğimizi bildiğimiz için yayımlama hedeflerini de düzenleyelim.</p>
 <p><code>output</code> bloğunda, aşağıdaki kod değişikliklerini yapın:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Sonra</label><label for="__tabbed_5_2">Önce</label></div>
 <div class="tabbed-content">
@@ -4886,7 +4886,7 @@ Bu, süreçlerinizi çalıştırmak için istediğiniz herhangi bir konteyner im
 </div>
 </div>
 </div>
-<p>Artık yayınlanan çıktılar biraz daha düzenli olacak.</p>
+<p>Artık yayımlanan çıktılar biraz daha düzenli olacak.</p>
 <h4 id="225-is-aksn-calstrn">2.2.5. İş akışını çalıştırın<a class="headerlink" href="#225-is-aksn-calstrn" title="Permanent link">&para;</a></h4>
 <p>Özetlemek gerekirse, hedeflediğimiz şey şu:</p>
 <figure class="excalidraw">
@@ -4899,7 +4899,7 @@ Bu, süreçlerinizi çalıştırmak için istediğiniz herhangi bir konteyner im
 </figure>
 
 <p>Çalışacağını düşünüyor musunuz?</p>
-<p>Temiz bir sayfa açmak için önceki yayınlanmış çıktıları silelim ve iş akışını <code>-resume</code> bayrağıyla çalıştıralım.</p>
+<p>Temiz bir sayfa açmak için önceki yayımlanan çıktıları silelim ve iş akışını <code>-resume</code> bayrağıyla çalıştıralım.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>rm<span class="w"> </span>-r<span class="w"> </span>hello_containers/
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-containers.nf<span class="w"> </span>-resume
 </code></pre></div>
@@ -5064,9 +5064,9 @@ Bu, modülerlik, kod bakımı ve tekrarlanabilirlik için daha iyidir.</p>
 </code></pre></div>
 </details>
 <p>Bu sefer gerçekten çalışıyor!
-Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabilirsiniz, ancak bu sefer biraz daha düzgün organize edilmiş; yalnızca rapor ve son çıktı üst düzeyde, tüm ara dosyalar bir alt dizine taşınmış.</p>
+Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabilirsiniz; ancak bu sefer biraz daha düzgün organize edilmiş: yalnızca rapor ve son çıktı üst düzeyde, tüm ara dosyalar bir alt dizine taşınmış.</p>
 <details class="abstract">
-<summary>Dizin içerikleri</summary>
+<summary>Dizin içeriği</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="go">results/hello_containers/</span>
 <a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="go">├── cowpy-COLLECTED-batch-output.txt</span>
 <a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="go">├── intermediates</span>
@@ -5082,7 +5082,7 @@ Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabi
 </details>
 <p>Son ASCII sanat çıktısı <code>results/hello_containers/</code> dizininde, <code>cowpy-COLLECTED-batch-output.txt</code> adı altında.</p>
 <details class="abstract">
-<summary>Dosya içerikleri</summary>
+<summary>Dosya içeriği</summary>
 <div class="highlight"><span class="filename">results/hello_containers/cowpy-COLLECTED-batch-output.txt</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">_________</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="go">/ HOLà    \</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">| HELLO   |</span>
@@ -5099,7 +5099,7 @@ Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabi
 <a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a><span class="go">          ( /  (    (        ,___    ^*+_+* )   &lt;    &lt;      \</span>
 <a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a><span class="go">          U _/     )    *--&lt;  ) ^\-----++__)   )    )       )</span>
 <a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="go">            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /</span>
-<a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="go">          (      /  (_))^)) )  )  ))^^^^^))^^^)__/     +^^</span>
+<a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="go">          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^</span>
 <a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="go">        (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)</span>
 <a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a><span class="go">          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^</span>
 <a id="__codelineno-46-20" name="__codelineno-46-20" href="#__codelineno-46-20"></a><span class="go">          \             \_)^)_)) ))^^^^^^^^^^))^^^^)</span>
@@ -5114,12 +5114,12 @@ Her zamanki gibi iş akışı çıktılarını ilgili sonuçlar dizininde bulabi
 <p>İşte orada, istenildiği gibi selamlamaları söyleyen güzel hindimiz.</p>
 <h4 id="234-nextflowun-konteynerlestirilmis-gorevi-nasl-baslattgn-inceleyin">2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin<a class="headerlink" href="#234-nextflowun-konteynerlestirilmis-gorevi-nasl-baslattgn-inceleyin" title="Permanent link">&para;</a></h4>
 <p>Bu bölümün son notası olarak, Nextflow'un kaputun altında konteynerlerle nasıl çalıştığı hakkında biraz daha bilgi edinmek için <code>cowpy</code> süreç çağrılarından birinin work alt dizinine bakalım.</p>
-<p><code>cowpy</code> süreci için work alt dizininin yolunu bulmak için <code>nextflow run</code> komutunuzun çıktısını kontrol edin.
+<p><code>cowpy</code> süreci için work alt dizininin yolunu bulmak üzere <code>nextflow run</code> komutunuzun çıktısını kontrol edin.
 Yukarıda gösterilen çalışmadan aldığımıza bakıldığında, <code>cowpy</code> süreci için konsol log satırı <code>[98/656c6c]</code> ile başlıyor.
 Bu, şu kısaltılmış dizin yoluna karşılık gelir: <code>work/98/656c6c</code>.</p>
 <p>Bu dizinde, Nextflow'un pipeline'ı yürütme sürecinde sizin adınıza çalıştırdığı tüm komutları içeren <code>.command.run</code> dosyasını bulacaksınız.</p>
 <details class="abstract">
-<summary>Dosya içerikleri</summary>
+<summary>Dosya içeriği</summary>
 <div class="highlight"><span class="filename">work/98/656c6c90cce1667c094d880f4b6dcc/.command.run</span><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="gp">#</span>!/bin/bash
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="gp">#</span><span class="c1">## ---</span>
 <a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="gp">#</span><span class="c1">## name: &#39;cowpy&#39;</span>
@@ -5362,7 +5362,7 @@ Konteyner imajı ile konteyner örneği arasındaki fark nedir?
 - [x] Ana sistemden konteynere bir hacim bağlar
 - [ ] Konteynerin sürümünü belirtir
 
-Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-verileri-konteynere-baglayin)
+Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-mount-data-into-the-container)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -5376,7 +5376,7 @@ Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-verileri-konteyne
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#134-verileri-konteynere-baglayin">1.3.4. Verileri konteynere bağlayın</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#134-mount-data-into-the-container">1.3.4. Verileri konteynere bağlayın</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5387,7 +5387,7 @@ Konteynerler kullanırken neden hacimleri bağlamanız gerekiyor?
 - [x] Konteynerler varsayılan olarak ana dosya sisteminden izole olduğu için
 - [ ] Ağı etkinleştirmek için
 
-Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-verileri-konteynere-baglayin)
+Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-mount-data-into-the-container)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-3">
@@ -5401,7 +5401,7 @@ Daha fazla bilgi: [1.3.4. Verileri konteynere bağlayın](#134-verileri-konteyne
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#134-verileri-konteynere-baglayin">1.3.4. Verileri konteynere bağlayın</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#134-mount-data-into-the-container">1.3.4. Verileri konteynere bağlayın</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5412,7 +5412,7 @@ Bir Nextflow süreci için konteyneri nasıl belirtirsiniz?
 - [x] `container 'container-uri'`
 - [ ] `use 'container-uri'`
 
-Daha fazla bilgi: [2.3.1. cowpy için bir konteyner belirtin](#231-cowpy-icin-bir-konteyner-belirtin)
+Daha fazla bilgi: [2.3.1. cowpy için bir konteyner belirtin](#231-specify-a-container-for-cowpy)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-4">
@@ -5426,7 +5426,7 @@ Daha fazla bilgi: [2.3.1. cowpy için bir konteyner belirtin](#231-cowpy-icin-bi
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#231-cowpy-icin-bir-konteyner-belirtin">2.3.1. cowpy için bir konteyner belirtin</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#231-specify-a-container-for-cowpy">2.3.1. cowpy için bir konteyner belirtin</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5437,7 +5437,7 @@ Daha fazla bilgi: [2.3.1. cowpy için bir konteyner belirtin](#231-cowpy-icin-bi
 - [ ] `#!groovy container.engine = 'docker'`
 - [ ] `#!groovy docker.activate = true`
 
-Daha fazla bilgi: [2.3.2. `nextflow.config` dosyası aracılığıyla Docker kullanımını etkinleştirin](#232-nextflowconfig-dosyasi-araciligiyla-docker-kullanimini-etkinlestirin)
+Daha fazla bilgi: [2.3.2. `nextflow.config` dosyası aracılığıyla Docker kullanımını etkinleştirin](#232-enable-use-of-docker-via-the-nextflowconfig-file)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-5">
@@ -5451,7 +5451,7 @@ Daha fazla bilgi: [2.3.2. `nextflow.config` dosyası aracılığıyla Docker kul
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#232-nextflowconfig-dosyasi-araciligiyla-docker-kullanimini-etkinlestirin">2.3.2. <code>nextflow.config</code> dosyası aracılığıyla Docker kullanımını etkinleştirin</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#232-enable-use-of-docker-via-the-nextflowconfig-file">2.3.2. <code>nextflow.config</code> dosyası aracılığıyla Docker kullanımını etkinleştirin</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -5462,7 +5462,7 @@ Bir süreci konteyner içinde çalıştırırken Nextflow otomatik olarak neyi y
 - [x] Süreç betiğini konteyner içinde çalıştırmak
 - [x] Yürütme sonrası konteyner örneğini temizlemek
 
-Daha fazla bilgi: [2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin](#234-nextflowun-konteynerlestirilmis-gorevi-nasil-baslattigini-inceleyin)
+Daha fazla bilgi: [2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin](#234-inspect-how-nextflow-launched-the-containerized-task)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-6">
@@ -5476,7 +5476,7 @@ Daha fazla bilgi: [2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl baş
         <div class="quiz-feedback hidden"></div>
         <button type="submit" class="quiz-button">Submit</button>
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#234-nextflowun-konteynerlestirilmis-gorevi-nasil-baslattigini-inceleyin">2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#234-inspect-how-nextflow-launched-the-containerized-task">2.3.4. Nextflow'un konteynerleştirilmiş görevi nasıl başlattığını inceleyin</a></p></section>
 </div><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;

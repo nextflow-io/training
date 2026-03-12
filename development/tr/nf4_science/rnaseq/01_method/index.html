@@ -1036,7 +1036,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -2282,10 +2282,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarmlar" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarımlar
+        Özet
       
     </span>
   </a>
@@ -4103,10 +4103,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarmlar" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarımlar
+        Özet
       
     </span>
   </a>
@@ -4417,7 +4417,7 @@ Ardından, aynı araçları birden fazla örnek üzerinde çalıştıran ve topl
 </ul>
 <h3 id="yazlm">Yazılım<a class="headerlink" href="#yazlm" title="Permanent link">&para;</a></h3>
 <p>İlgili dört ana araç, kalite kontrol metriklerini toplamak için <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>, adaptör kırpma için <a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim Galore</a> (Cutadapt ve FastQC'yi kırpma sonrası QC için bir araya getirir), referans genoma eklenmiş hizalama için <a href="http://daehwankimlab.github.io/hisat2/">HISAT2</a> ve toplu QC raporu oluşturma için <a href="https://multiqc.info/">MultiQC</a>'dir.</p>
-<p>Bu araçlar GitHub Codespaces ortamında yüklü olmadığından, bunları Seqera Containers hizmeti aracılığıyla alınan konteynerler üzerinden kullanacağız (bkz. <a href="../../../hello_nextflow/05_hello_containers/">Merhaba Konteynerler</a>).</p>
+<p>Bu araçlar GitHub Codespaces ortamında yüklü olmadığından, bunları Seqera Containers hizmeti aracılığıyla alınan konteynerler üzerinden kullanacağız (bkz. <a href="../../../hello_nextflow/05_hello_containers/">Hello Containers</a>).</p>
 <div class="admonition tip">
 <p class="admonition-title">İpucu</p>
 <p><code>nf4-science/rnaseq</code> dizininde olduğunuzdan emin olun. <code>pwd</code> yazdığınızda gösterilen yolun son kısmı <code>rnaseq</code> olmalıdır.</p>
@@ -4478,7 +4478,7 @@ Tamamlandığında, konteyner imajının yerel bir kopyasına sahip olursunuz.</
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp gp-VirtualEnv">(base)</span> <span class="gp">root@b645838b3314:/tmp#</span>
 </code></pre></div>
 </details>
-<p>İsteminiz <code>(base) root@b645838b3314:/tmp#</code> gibi bir şeye dönüşecek, bu da artık konteynerin içinde olduğunuzu gösterir.</p>
+<p>İsteminiz <code>(base) root@b645838b3314:/tmp#</code> gibi bir şeye dönüşecek; bu, artık konteynerin içinde olduğunuzu gösterir.</p>
 <p>Dizi veri dosyalarını <code>/data/reads</code> altında görebildiğinizi doğrulayın:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ls<span class="w"> </span>/data/reads
 </code></pre></div>
@@ -4535,7 +4535,7 @@ Yalnızca girdi dosyasını sağlamamız gerekir; araç otomatik olarak orijinal
 Bu, ilk adımın testini tamamlar.</p>
 <h4 id="114-trim-galore-ile-adaptor-dizilerini-krpn">1.1.4. Trim Galore ile adaptör dizilerini kırpın<a class="headerlink" href="#114-trim-galore-ile-adaptor-dizilerini-krpn" title="Permanent link">&para;</a></h4>
 <p>Şimdi adaptör dizilerini kırpmak ve kırpma sonrası QC metriklerini toplamak için Cutadapt ve FastQC'yi bir araya getiren <code>trim_galore</code>'ı çalıştıralım.
-Yukarıda belirtildiği gibi, yazılım aynı konteynere dahildir, bu nedenle orada değişiklik gerekmez.</p>
+Yukarıda belirtildiği gibi, yazılım aynı konteynere dahildir; bu nedenle orada herhangi bir değişiklik gerekmez.</p>
 <p>Komut basittir; kırpma tamamlandıktan sonra otomatik olarak bir QC toplama adımı çalıştırmak için <code>--fastqc</code> bayrağını eklememiz yeterlidir.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>trim_galore<span class="w"> </span>--fastqc<span class="w"> </span>/data/reads/ENCSR000COQ1_1.fastq.gz
 </code></pre></div>
@@ -4726,15 +4726,15 @@ Yukarıda belirtildiği gibi, yazılım aynı konteynere dahildir, bu nedenle or
 <a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="go">Status: Downloaded newer image for community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e</span>
 </code></pre></div>
 </details>
-<p>Bazı katmanların <code>Already exists</code> gösterdiğini fark edeceksiniz çünkü bunlar daha önce çektiğimiz Trim Galore konteyner imajıyla paylaşılmaktadır.
+<p>Bazı katmanların <code>Already exists</code> gösterdiğini fark edeceksiniz; bunun nedeni, bu katmanların daha önce çektiğimiz Trim Galore konteyner imajıyla paylaşılmasıdır.
 Sonuç olarak, bu çekme işlemi ilkinden daha hızlı olmalıdır.</p>
 <h4 id="122-konteyneri-etkilesimli-olarak-baslatn">1.2.2. Konteyneri etkileşimli olarak başlatın<a class="headerlink" href="#122-konteyneri-etkilesimli-olarak-baslatn" title="Permanent link">&para;</a></h4>
-<p>Konteyneri etkileşimli olarak başlatın, ilgili konteyner URI'si değiştirilerek daha öncekiyle aynı yaklaşımı kullanın.</p>
+<p>Konteyneri etkileşimli olarak başlatın; ilgili konteyner URI'si değiştirilerek daha öncekiyle aynı yaklaşımı kullanın.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
 </code></pre></div>
 <p>İsteminiz, konteynerin içinde olduğunuzu belirtmek için tekrar değişecektir.</p>
 <h4 id="123-genom-dizin-dosyalarn-olusturun">1.2.3. Genom dizin dosyalarını oluşturun<a class="headerlink" href="#123-genom-dizin-dosyalarn-olusturun" title="Permanent link">&para;</a></h4>
-<p>HISAT2, genom referansının çok özel bir biçimde sağlanmasını gerektirir ve sağladığımız <code>genome.fa</code> FASTA dosyasını doğrudan kullanamaz, bu nedenle bu fırsatı ilgili kaynakları oluşturmak için kullanacağız.</p>
+<p>HISAT2, genom referansının çok özel bir biçimde sağlanmasını gerektirir ve sağladığımız <code>genome.fa</code> FASTA dosyasını doğrudan kullanamaz; bu nedenle bu fırsatı ilgili kaynakları oluşturmak için kullanacağız.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>hisat2-build<span class="w"> </span>/data/genome.fa<span class="w"> </span>genome_index
 </code></pre></div>
 <details class="success">
@@ -4981,7 +4981,7 @@ Sonuç olarak, bu çekme işlemi ilkinden daha hızlı olmalıdır.</p>
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="go">genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2</span>
 </code></pre></div>
 </details>
-<p>Bu dosyalara daha sonra ihtiyacımız olacak ve bunları oluşturmak tipik olarak bir iş akışının parçası olarak yapmak istediğimiz bir şey değildir, bu nedenle gerektiğinde kolayca aktarabileceğimiz genom dizin dosyalarını içeren sıkıştırılmış bir tarball oluşturacağız.</p>
+<p>Bu dosyalara daha sonra ihtiyacımız olacak; bunları oluşturmak tipik olarak bir iş akışının parçası olarak yapmak istediğimiz bir şey değildir. Bu nedenle, gerektiğinde kolayca aktarabileceğimiz genom dizin dosyalarını içeren sıkıştırılmış bir tarball oluşturacağız.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>tar<span class="w"> </span>-czvf<span class="w"> </span>/data/genome_index.tar.gz<span class="w"> </span>genome_index.*
 </code></pre></div>
 <details class="success">
@@ -4999,7 +4999,7 @@ Sonuç olarak, bu çekme işlemi ilkinden daha hızlı olmalıdır.</p>
 <p>Genom dizin dosyalarını içeren ortaya çıkan <code>genome_index.tar.gz</code> tarball'ını birkaç dakika içinde dosya sistemimizde <code>data/</code> dizinine taşıyacağız.
 Bu, bu kursun 2. Bölümünde işimize yarayacaktır.</p>
 <h4 id="124-hizalama-komutunu-calstrn">1.2.4. Hizalama komutunu çalıştırın<a class="headerlink" href="#124-hizalama-komutunu-calstrn" title="Permanent link">&para;</a></h4>
-<p>Şimdi hizalama komutunu çalıştırabiliriz, bu komut <code>hisat2</code> ile hizalama adımını gerçekleştirir ve ardından çıktıyı bir BAM dosyası olarak yazmak için <code>samtools</code>'a aktarır.</p>
+<p>Şimdi hizalama komutunu çalıştırabiliriz; bu komut <code>hisat2</code> ile hizalama adımını gerçekleştirir ve ardından çıktıyı bir BAM dosyası olarak yazmak için <code>samtools</code>'a aktarır.</p>
 <p>Okuma verisi girdisi, önceki adımda <code>trim_galore</code> ile oluşturduğumuz <code>/data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz</code> dosyasıdır.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>hisat2<span class="w"> </span>-x<span class="w"> </span>genome_index<span class="w"> </span>-U<span class="w"> </span>/data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span>--new-summary<span class="w"> </span>--summary-file<span class="w"> </span>ENCSR000COQ1_1_trimmed.hisat2.log<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
@@ -5027,7 +5027,7 @@ Gerçek ölçekte bu çok daha uzun sürebilir.</p>
 </details>
 <p>Hizalama bir BAM dosyası ve hizalama istatistiklerini içeren bir log dosyası üretti.</p>
 <h4 id="125-ckt-dosyalarn-tasyn">1.2.5. Çıktı dosyalarını taşıyın<a class="headerlink" href="#125-ckt-dosyalarn-tasyn" title="Permanent link">&para;</a></h4>
-<p>Daha önce olduğu gibi, çıktı dosyalarını bağlı dosya sistemindeki bir dizine taşıyın, böylece konteynerden çıktıktan sonra erişilebilir kalırlar.</p>
+<p>Daha önce olduğu gibi, çıktı dosyalarını bağlı dosya sistemindeki bir dizine taşıyın; böylece konteynerden çıktıktan sonra erişilebilir kalırlar.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>mkdir<span class="w"> </span>/data/aligned
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>mv<span class="w"> </span>ENCSR000COQ1_1*<span class="w"> </span>/data/aligned
 </code></pre></div>
@@ -5065,9 +5065,9 @@ Bunlar, bu kursun 3. Bölümünde bir Nextflow iş akışına saracağımız kom
 
 <h3 id="21-ek-ornekleri-qc-ve-krpma">2.1. Ek örnekleri QC ve kırpma<a class="headerlink" href="#21-ek-ornekleri-qc-ve-krpma" title="Permanent link">&para;</a></h3>
 <p>Örnek başına QC ve kırpma komutları, bölüm 1.1'de çalıştırdığımızla aynıdır.
-Konteyner imajını zaten çektik, bu nedenle doğrudan başlatabiliriz.</p>
+Konteyner imajını zaten çektik; bu nedenle doğrudan başlatabiliriz.</p>
 <h4 id="211-konteyneri-baslatn">2.1.1. Konteyneri başlatın<a class="headerlink" href="#211-konteyneri-baslatn" title="Permanent link">&para;</a></h4>
-<p>Bu konteyner imajını bölüm 1.1'de zaten çektik, bu nedenle doğrudan başlatabiliriz:</p>
+<p>Bu konteyner imajını bölüm 1.1'de zaten çektik; bu nedenle doğrudan başlatabiliriz:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
 </code></pre></div>
 <p>İsteminiz, konteynerin içinde olduğunuzu belirtmek için değişir.</p>
@@ -5111,7 +5111,7 @@ Konteyner imajını zaten çektik, bu nedenle doğrudan başlatabiliriz.</p>
 <p>Hizalama komutları, bölüm 1.2'de çalıştırdığımızla aynıdır.
 Orijinal dizin dosyaları artık var olmayan bir konteyner içinde oluşturulduğundan, daha önce kaydettiğimiz tarball'dan genom dizinini çıkarmamız gerekir.</p>
 <h4 id="221-konteyneri-baslatn">2.2.1. Konteyneri başlatın<a class="headerlink" href="#221-konteyneri-baslatn" title="Permanent link">&para;</a></h4>
-<p>Bu konteyner imajını bölüm 1.2'de zaten çektik, bu nedenle doğrudan başlatabiliriz:</p>
+<p>Bu konteyner imajını bölüm 1.2'de zaten çektik; bu nedenle doğrudan başlatabiliriz:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span>./data:/data<span class="w"> </span>community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
 </code></pre></div>
 <p>İsteminiz, konteynerin içinde olduğunuzu belirtmek için değişir.</p>
@@ -5200,7 +5200,7 @@ MultiQC, uyumlu QC raporları için dizinlerde arama yapar ve bulduğu her şeyi
 <a id="__codelineno-48-17" name="__codelineno-48-17" href="#__codelineno-48-17"></a><span class="go">community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c</span>
 </code></pre></div>
 </details>
-<p>Bazı katmanların <code>Already exists</code> gösterdiğini fark edeceksiniz çünkü bunlar daha önce çektiğimiz konteyner imajlarıyla paylaşılmaktadır.
+<p>Bazı katmanların <code>Already exists</code> gösterdiğini fark edeceksiniz; bunun nedeni, bu katmanların daha önce çektiğimiz konteyner imajlarıyla paylaşılmasıdır.
 Sonuç olarak, bu çekme işlemi öncekilerden daha hızlı olmalıdır.</p>
 <h4 id="232-konteyneri-etkilesimli-olarak-baslatn">2.3.2. Konteyneri etkileşimli olarak başlatın<a class="headerlink" href="#232-konteyneri-etkilesimli-olarak-baslatn" title="Permanent link">&para;</a></h4>
 <p>Konteyneri, daha önce olduğu gibi veri dizini bağlı olarak etkileşimli olarak başlatın.</p>
@@ -5208,7 +5208,7 @@ Sonuç olarak, bu çekme işlemi öncekilerden daha hızlı olmalıdır.</p>
 </code></pre></div>
 <p>İsteminiz, konteynerin içinde olduğunuzu belirtmek için değişecektir.</p>
 <h4 id="233-multiqc-komutunu-calstrn">2.3.3. MultiQC komutunu çalıştırın<a class="headerlink" href="#233-multiqc-komutunu-calstrn" title="Permanent link">&para;</a></h4>
-<p><code>multiqc</code>'yi çalıştırın, üç örneğin tümü için QC ile ilgili çıktı dosyalarını sakladığımız dizinlere işaret edin.
+<p><code>multiqc</code>'yi çalıştırın; üç örneğin tümü için QC ile ilgili çıktı dosyalarını sakladığımız dizinlere işaret edin.
 <code>-n</code> bayrağı çıktı raporunun adını ayarlar.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>multiqc<span class="w"> </span>/data/reads<span class="w"> </span>/data/trimmed<span class="w"> </span>/data/aligned<span class="w"> </span>-n<span class="w"> </span>all_samples_QC
 </code></pre></div>
@@ -5228,7 +5228,7 @@ Sonuç olarak, bu çekme işlemi öncekilerden daha hızlı olmalıdır.</p>
 </span><a id="__codelineno-51-12" name="__codelineno-51-12" href="#__codelineno-51-12"></a><span class="hll"><span class="go">          multiqc | MultiQC complete</span>
 </span></code></pre></div>
 </details>
-<p>Burada aracın üç örneğin tümü için QC raporlarını bulduğunu görüyoruz: <code>fastqc</code> ile yaptığımız ilk QC, <code>cutadapt</code>'ten (via <code>trim_galore</code>) kırpma sonrası raporlar ve <code>hisat2</code> tarafından üretilen hizalama sonrası QC.</p>
+<p>Burada aracın üç örneğin tümü için QC raporlarını bulduğunu görüyoruz: <code>fastqc</code> ile yaptığımız ilk QC, <code>cutadapt</code>'ten (<code>trim_galore</code> aracılığıyla) kırpma sonrası raporlar ve <code>hisat2</code> tarafından üretilen hizalama özetleri.</p>
 <p>Çıktı dosyaları çalışma dizinindedir:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>ls<span class="w"> </span>all_samples_QC*
 </code></pre></div>
@@ -5269,7 +5269,7 @@ Sonuç olarak, bu çekme işlemi öncekilerden daha hızlı olmalıdır.</p>
 <p>İsteminiz normale dönmelidir.
 Bu, tüm RNAseq işleme komutlarının testini sonlandırır.</p>
 <hr />
-<h3 id="ckarmlar">Çıkarımlar<a class="headerlink" href="#ckarmlar" title="Permanent link">&para;</a></h3>
+<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
 <p>FastQC, Trim Galore, HISAT2 ve MultiQC komutlarını ilgili konteynerlerinde nasıl çalıştıracağınızı biliyorsunuz; birden fazla örneği işlemeyi ve QC raporlarını toplamayı da içerir.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
 <p>Bir mola verin, ardından aynı komutları çalışmayı yürütmek için konteynerler kullanan iş akışlarına nasıl saracağınızı öğrenmek için <a href="../02_single-sample/">Bölüm 2</a>'ye geçin.</p><style type="text/css">.quiz {

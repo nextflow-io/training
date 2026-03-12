@@ -1036,7 +1036,7 @@
   <span class="md-ellipsis">
     
   
-    Geri bildirim anketi
+    Geri Bildirim Anketi
   
 
     
@@ -1976,10 +1976,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -2152,10 +2152,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm_1" class="md-nav__link">
+  <a href="#ozet_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -2305,10 +2305,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm_2" class="md-nav__link">
+  <a href="#ozet_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -3708,10 +3708,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -3884,10 +3884,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm_1" class="md-nav__link">
+  <a href="#ozet_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -4037,10 +4037,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ckarm_2" class="md-nav__link">
+  <a href="#ozet_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Çıkarım
+        Özet
       
     </span>
   </a>
@@ -4322,7 +4322,7 @@
 <h1 id="bolum-3-cok-ornekli-paired-end-uygulamas">Bölüm 3: Çok-örnekli paired-end uygulaması<a class="headerlink" href="#bolum-3-cok-ornekli-paired-end-uygulamas" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
 <p>Daha önce, her örneğin verilerini bağımsız olarak işleyen örnek başına bir varyant çağırma boru hattı oluşturdunuz.
-Bu kursun bu bölümünde, basit iş akışımızı bir üst seviyeye taşıyarak keyfi sayıda örneği işleyebilen güçlü bir toplu otomasyon aracına dönüştüreceğiz.
+Kursun bu bölümünde, basit iş akışımızı bir üst seviyeye taşıyarak keyfi sayıda örneği işleyebilen güçlü bir toplu otomasyon aracına dönüştüreceğiz.
 Bunu yaparken, aynı zamanda yeni çalışmalarda daha yaygın olan paired-end verileri kabul edecek şekilde de güncelleyeceğiz.</p>
 <details class="info">
 <summary>Bu bölümden nasıl başlanır</summary>
@@ -4474,7 +4474,7 @@ Bunu sağladığımız eğitim ortamında çalıştırmıyorsanız, yolları sis
 </div>
 </div>
 </div>
-<p>Hello Nextflow kursunda karşılaştığınız şeye kıyasla yeni olan bir şey, bu CSV'nin bir başlık satırına sahip olmasıdır, bu yüzden <code>splitCsv()</code> çağrısına <code class="highlight"><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span></code> ekliyoruz.
+<p>Hello Nextflow kursunda karşılaştığınız şeye kıyasla yeni olan bir şey, bu CSV'nin bir başlık satırına sahip olmasıdır; bu yüzden <code>splitCsv()</code> çağrısına <code class="highlight"><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span></code> ekliyoruz.
 Bu, <code>map</code> işleminde sütunlara ada göre başvurmamızı sağlar: <code class="highlight"><span class="n">row</span><span class="o">.</span><span class="na">fastq_path</span></code>, her satırın <code>fastq_path</code> sütunundan dosya yolunu çıkarır.</p>
 <p>Girdi işleme güncellendi ve iş akışı test edilmeye hazır.</p>
 <h3 id="13-is-aksn-calstrma">1.3. İş akışını çalıştırma<a class="headerlink" href="#13-is-aksn-calstrma" title="Permanent link">&para;</a></h3>
@@ -4496,7 +4496,7 @@ Bu, <code>map</code> işleminde sütunlara ada göre başvurmamızı sağlar: <c
 <p>Bu sefer her adım 6 kez çalıştırılıyor, CSV dosyasındaki her örnek için bir kez.</p>
 <p>İş akışını birden fazla dosya üzerinde çalıştırmak için gereken tek şey buydu.
 Nextflow tüm paralelliği bizim için yönetiyor.</p>
-<h3 id="ckarm">Çıkarım<a class="headerlink" href="#ckarm" title="Permanent link">&para;</a></h3>
+<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
 <p>Tek dosyalı girdiden, Nextflow'un paralel olarak işlediği CSV tabanlı çok-örnekli girdiye nasıl geçeceğinizi biliyorsunuz.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
 <p>Tüm örneklerden metrikleri birleştiren bir QC raporu toplama adımı ekleyin.</p>
@@ -4604,7 +4604,7 @@ Konteyner URI'si <code>community.wave.seqera.io/library/pip_multiqc:a3c26f6199d6
 <p><code>MULTIQC</code> sürecine önceki adımlardan gelen tüm QC ile ilgili çıktıları bir arada vermemiz gerekiyor.</p>
 <p>Bunun için, birden fazla kanalı tek bir kanalda toplayan <code>.mix()</code> operatörünü kullanıyoruz.
 <code>channel.empty()</code>'den başlıyoruz ve birleştirmek istediğimiz tüm çıktı kanallarını karıştırıyoruz.
-Bu, <code>.mix()</code>'i doğrudan çıktı kanallarından birine zincirleme yapmaktan daha temizdir, çünkü tüm girdileri simetrik olarak ele alır.</p>
+Bu, <code>.mix()</code>'i doğrudan çıktı kanallarından birine zincirleme yapmaktan daha temizdir; çünkü tüm girdileri simetrik olarak ele alır.</p>
 <p>İş akışımızda, toplanması gereken QC ile ilgili çıktılar şunlardır:</p>
 <ul>
 <li><code>FASTQC.out.zip</code></li>
@@ -4850,7 +4850,7 @@ Bu, <code>.mix()</code>'i doğrudan çıktı kanallarından birine zincirleme ya
 </div>
 <p>Ardından, Nextflow'a bu çıktıları nereye koyacağını söylememiz gerekecek.</p>
 <h4 id="232-yeni-ckt-hedeflerini-yaplandrma">2.3.2. Yeni çıktı hedeflerini yapılandırma<a class="headerlink" href="#232-yeni-ckt-hedeflerini-yaplandrma" title="Permanent link">&para;</a></h4>
-<p><code>output {}</code> bloğunda MultiQC hedefleri için girdiler ekleyin, bunları bir <code>multiqc/</code> alt dizinine yayınlayın:</p>
+<p><code>output {}</code> bloğunda MultiQC hedefleri için girdiler ekleyin; bunları bir <code>multiqc/</code> alt dizinine yayınlayın:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Sonra</label><label for="__tabbed_10_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -4939,15 +4939,15 @@ Bu, <code>.mix()</code>'i doğrudan çıktı kanallarından birine zincirleme ya
 <a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a><span class="go">└── all_single-end.html</span>
 </code></pre></div>
 <p>Son <code>all_single-end.html</code> dosyası, göz atmayı kolaylaştıran tek bir HTML dosyasında pratik bir şekilde paketlenmiş tam toplu rapordur.</p>
-<h3 id="ckarm_1">Çıkarım<a class="headerlink" href="#ckarm_1" title="Permanent link">&para;</a></h3>
+<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
 <p>Birden fazla kanaldan çıktıları nasıl toplayacağınızı, bunları <code>.mix()</code> ve <code>.collect()</code> ile nasıl paketleyeceğinizi ve bir toplama sürecine nasıl geçireceğinizi biliyorsunuz.</p>
 <h3 id="srada-ne-var_1">Sırada ne var?<a class="headerlink" href="#srada-ne-var_1" title="Permanent link">&para;</a></h3>
 <p>İş akışını paired-end RNAseq verilerini işleyecek şekilde uyarlayın.</p>
 <hr />
 <h2 id="3-paired-end-rnaseq-verilerinin-islenmesini-etkinlestirme">3. Paired-end RNAseq verilerinin işlenmesini etkinleştirme<a class="headerlink" href="#3-paired-end-rnaseq-verilerinin-islenmesini-etkinlestirme" title="Permanent link">&para;</a></h2>
 <p>Şu anda iş akışımız yalnızca single-end RNAseq verilerini işleyebiliyor.
-Paired-end RNAseq verilerini görmek giderek daha yaygın hale geliyor, bu nedenle bunu da işleyebilmek istiyoruz.</p>
-<p>İş akışını veri türünden tamamen bağımsız hale getirmek biraz daha gelişmiş Nextflow dil özelliklerini kullanmayı gerektirecektir, bu yüzden bunu burada yapmayacağız, ancak neyin uyarlanması gerektiğini göstermek için paired-end işleme versiyonu yapabiliriz.</p>
+Paired-end RNAseq verilerini görmek giderek daha yaygın hale geliyor; bu nedenle bunu da işleyebilmek istiyoruz.</p>
+<p>İş akışını veri türünden tamamen bağımsız hale getirmek biraz daha gelişmiş Nextflow dil özelliklerini kullanmayı gerektirecektir; bu yüzden bunu burada yapmayacağız, ancak neyin uyarlanması gerektiğini göstermek için paired-end işleme versiyonu yapabiliriz.</p>
 <h3 id="31-is-aksn-kopyalama-ve-girdileri-guncelleme">3.1. İş akışını kopyalama ve girdileri güncelleme<a class="headerlink" href="#31-is-aksn-kopyalama-ve-girdileri-guncelleme" title="Permanent link">&para;</a></h3>
 <p>Single-end iş akışı dosyasını kopyalayarak başlıyoruz ve paired-end veriler için güncelliyoruz.</p>
 <h4 id="311-is-aks-dosyasn-kopyalama">3.1.1. İş akışı dosyasını kopyalama<a class="headerlink" href="#311-is-aks-dosyasn-kopyalama" title="Permanent link">&para;</a></h4>
@@ -5421,7 +5421,7 @@ Her ikisini de dahil etmek için <code>rnaseq_pe.nf</code> dosyasındaki <code>.
 </div>
 <p>Paired-end iş akışı artık tamamen güncellendi ve çalıştırılmaya hazır.</p>
 <h3 id="37-is-aksn-calstrma">3.7. İş akışını çalıştırma<a class="headerlink" href="#37-is-aksn-calstrma" title="Permanent link">&para;</a></h3>
-<p>Bu önbelleğe almayacağı ve işlenecek verilerin öncekinden iki kat daha fazla olduğu için <code>-resume</code> kullanmıyoruz, ancak yine de bir dakikadan kısa sürede tamamlanması gerekiyor.</p>
+<p>Bu önbelleğe almayacağı ve işlenecek verilerin öncekinden iki kat daha fazla olduğu için <code>-resume</code> kullanmıyoruz; ancak yine de bir dakikadan kısa sürede tamamlanması gerekiyor.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>rnaseq_pe.nf<span class="w"> </span>-profile<span class="w"> </span>test_pe
 </code></pre></div>
 <details class="success">
@@ -5440,7 +5440,7 @@ Her ikisini de dahil etmek için <code>rnaseq_pe.nf</code> dosyasındaki <code>.
 <p>Şimdi iş akışımızın biri single-end okuma verileri için, diğeri paired-end veriler için olmak üzere biraz farklılaşan iki versiyonuna sahibiz.
 Bir sonraki mantıklı adım, iş akışının her iki veri türünü de anında kabul etmesini sağlamak olacaktır; bu, bu kursun kapsamı dışındadır, ancak bunu bir takip kursunda ele alabiliriz.</p>
 <hr />
-<h3 id="ckarm_2">Çıkarım<a class="headerlink" href="#ckarm_2" title="Permanent link">&para;</a></h3>
+<h3 id="ozet_2">Özet<a class="headerlink" href="#ozet_2" title="Permanent link">&para;</a></h3>
 <p>Tek örnekli bir iş akışını birden fazla örneğin işlenmesini paralelleştirmek, kapsamlı bir QC raporu oluşturmak ve iş akışını paired-end okuma verilerini kullanacak şekilde uyarlamak için nasıl uyarlayacağınızı biliyorsunuz.</p>
 <h3 id="srada-ne-var_2">Sırada ne var?<a class="headerlink" href="#srada-ne-var_2" title="Permanent link">&para;</a></h3>
 <p>Kendinize büyük bir alkış verin! Nextflow for RNAseq kursunu tamamladınız.</p>
