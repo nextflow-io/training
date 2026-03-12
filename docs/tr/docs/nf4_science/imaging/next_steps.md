@@ -1,6 +1,6 @@
 # Sonraki adımlar
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow Biogörüntüleme eğitimini tamamladığınız için tebrikler!
 
@@ -35,7 +35,7 @@ Nextflow pipeline'ları yazmayı öğrenmek istiyorsanız:
 ## Dahil olun
 
 - **nf-core'a katkıda bulunun**: Pipeline'ları veya dokümantasyonu geliştirmeye yardımcı olun
-- **Workflow'larınızı paylaşın**: Kendi pipeline'larınızı topluluğa katkı olarak sunun
+- **İş akışlarınızı paylaşın**: Kendi pipeline'larınızı topluluğa katkı olarak sunun
 - **Etkinliklere katılın**: Nextflow Summit ve topluluk eğitim oturumlarına katılın
 
 Bizimle öğrendiğiniz için teşekkür ederiz!

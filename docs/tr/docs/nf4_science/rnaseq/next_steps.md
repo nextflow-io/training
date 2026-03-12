@@ -28,7 +28,7 @@ Bu uygulamalı kurs boyunca şunları öğrendiniz:
 
 Artık kendi çalışmanızda RNAseq analiz iş akışlarına Nextflow'u uygulamaya başlamak için donanımlısınız.
 
-## Becerilerinizi geliştirmek için sonraki adımlar
+## Becerilerinizi Geliştirmek İçin Sonraki Adımlar
 
 Sırada ne yapacağınıza dair en iyi önerilerimiz:
 
@@ -36,7 +36,7 @@ Sırada ne yapacağınıza dair en iyi önerilerimiz:
 - [Hello nf-core](../../hello_nf-core/index.md) ile nf-core'a başlayın
 - [Side Quests](../../side_quests/index.md) ile daha gelişmiş Nextflow özelliklerini keşfedin
 
-Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen ve workflow'larınızı başlatmayı ve yönetmeyi, ayrıca verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli olarak analiz çalıştırmayı daha da kolay hale getiren bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a göz atmanızı öneririz.
+Son olarak, Nextflow'un yaratıcıları tarafından geliştirilen ve iş akışlarınızı başlatmayı ve yönetmeyi, ayrıca verilerinizi yönetmeyi ve herhangi bir ortamda etkileşimli olarak analiz çalıştırmayı daha da kolay hale getiren bulut tabanlı bir platform olan [**Seqera Platform**](https://seqera.io/)'a göz atmanızı öneririz.
 
 ## Yardım Alma
 

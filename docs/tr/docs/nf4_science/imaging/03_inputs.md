@@ -1,6 +1,6 @@
 # Bölüm 3: Girdileri düzenleme
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bölüm 2'de molkart'ı komut satırında birden fazla parametre ile çalıştırdık.
 Şimdi girdileri yönetmek için iki daha iyi yaklaşım öğreneceğiz: **parametre dosyaları** ve **örnek tabloları**.
@@ -46,7 +46,7 @@ Artık komutunuz şu hale gelir:
 nextflow run ./molkart -params-file params.yaml -resume
 ```
 
-Bu kadar! Parametre dosyası tam yapılandırmanızı belgelendirir ve tekrar çalıştırmayı veya paylaşmayı kolaylaştırır.
+Bu kadar! Parametre dosyası tam yapılandırmanızı belgeler ve tekrar çalıştırmayı ya da paylaşmayı kolaylaştırır.
 
 ### 1.3. Parametreleri geçersiz kılma
 
@@ -58,9 +58,9 @@ nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist"
 
 Yukarıdaki satır, `segmentation_method`'u `stardist` olarak değiştirir ve `--outdir` adını `params.yaml` dosyasındaki parametreler yerine `stardist_results` olarak ayarlar.
 Ayrıca, `-resume` bayrağının önceki çalıştırmadaki ön işleme sonuçlarını yeniden kullanmamıza izin vererek zaman tasarrufu sağladığını görebilirsiniz.
-Bu kalıbı, ardışık düzenin farklı varyasyonlarını hızlıca test etmek için kullanabilirsiniz.
+Bu kalıbı, boru hattının farklı varyasyonlarını hızlıca test etmek için kullanabilirsiniz.
 
-### Çıkarım
+### Özet
 
 Parametre dosyaları analizlerinizi tekrar üretilebilir ve paylaşımı kolay hale getirir.
 Gerçek analiz çalışmaları için bunları kullanın.
@@ -125,7 +125,7 @@ sample,nuclear_image,spot_table,membrane_image
 mem_only,data/nuclear.tiff,data/spots.txt,data/membrane.tiff
 ```
 
-!!! warning "Uyarı"
+!!! Warning "Uyarı"
 
     Örnek tablosundaki yolların, örnek tablosunun bulunduğu yere değil, Nextflow'u **çalıştırdığınız** yere göre göreceli olduğuna dikkat edin.
 
@@ -133,13 +133,13 @@ Son olarak, yerel dosya yollarına sahip örnek tablosuyla nf-core/molkart'ı bi
 
 `nextflow run ./molkart -params-file params.yaml -resume`
 
-Gördüğünüz gibi, Nextflow bu çalıştırmayı dosyalar Github'dan indirildiğinde olduğu gibi benzer şekilde yürütür. Bu, Nextflow'un harika özelliklerinden biridir, verinin nerede bulunduğuna bakılmaksızın verileri sizin için uygun şekilde hazırlar.
+Gördüğünüz gibi, Nextflow bu çalıştırmayı dosyalar Github'dan indirildiğinde olduğu gibi benzer şekilde yürütür. Bu, Nextflow'un harika özelliklerinden biridir; veri nerede bulunursa bulunsun, sizin için uygun şekilde hazırlar.
 
-### Çıkarım
+### Özet
 
 Örnek tabloları, dosya yollarıyla birlikte meta verilerinizi açıkça tanımlamanıza olanak tanıyan bir şekilde çok örnekli veri setlerini düzenler.
-Çoğu nf-core ardışık düzeni bu kalıbı kullanır.
+Çoğu nf-core boru hattı bu kalıbı kullanır.
 
 ### Sırada ne var?
 
-Artık girdileri ele aldığımıza göre, Nextflow ardışık düzenlerini farklı hesaplama ortamları için nasıl yapılandıracağımızı keşfedelim.
+Artık girdileri ele aldığımıza göre, Nextflow boru hatlarını farklı hesaplama ortamları için nasıl yapılandıracağımızı keşfedelim.

@@ -1,6 +1,6 @@
 # Bölüm 4: Hello Modules
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/43Ot-f0iOME?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -81,7 +81,7 @@ nextflow run hello-modules.nf
 
 Daha önce olduğu gibi, çıktı dosyalarını `output` bloğunda belirtilen dizinde bulacaksınız (burada, `results/hello_modules/`).
 
-??? abstract "Dizin içerikleri"
+??? abstract "Dizin içeriği"
 
     ```console
     results/hello_modules/
@@ -439,7 +439,7 @@ Bu, kodu kopyala-yapıştır yapmaktan daha iyi çünkü daha sonra modülü gel
 
 İsterseniz kısa bir mola verin.
 
-Hazır olduğunuzda, yazılım bağımlılıklarını daha kullanışlı ve tekrarlanabilir bir şekilde yönetmek için konteynerleri nasıl kullanacağınızı öğrenmek için [**Bölüm 5: Merhaba Konteynerler**](./05_hello_containers.md)'e geçin.
+Hazır olduğunuzda, yazılım bağımlılıklarını daha kullanışlı ve tekrarlanabilir bir şekilde yönetmek için konteynerleri nasıl kullanacağınızı öğrenmek üzere [**Bölüm 5: Hello Containers**](./05_hello_containers.md)'a geçin.
 
 ---
 
