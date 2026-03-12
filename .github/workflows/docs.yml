@@ -25,7 +25,7 @@ jobs:
     outputs:
       languages: ${{ steps.find.outputs.languages }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           sparse-checkout: docs
 
@@ -45,9 +45,9 @@ jobs:
       matrix:
         lang: ${{ fromJson(needs.discover-languages.outputs.languages) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -57,7 +57,7 @@ jobs:
       - name: Build ${{ matrix.lang }} docs
         run: mkdocs build -f docs/${{ matrix.lang }}/mkdocs.yml -d ${{ github.workspace }}/site-${{ matrix.lang }}
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: site-${{ matrix.lang }}
           path: site-${{ matrix.lang }}/
@@ -93,15 +93,15 @@ jobs:
           echo "IS_RELEASE=$IS_RELEASE" >> $GITHUB_ENV
           echo "Building docs version: $VERSION (alias: $ALIAS, is_release: $IS_RELEASE)"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           path: artifacts
 
