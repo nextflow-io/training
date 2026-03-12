@@ -113,7 +113,8 @@ Then use the GitHub Actions workflow to regenerate:
 2. Select the language and `sync` command
 3. The workflow will regenerate the translation with your prompt changes
 
-When prompts are merged to master, GitHub Actions automatically re-translates affected files to comply with the new guidelines.
+Translation runs are triggered manually by maintainers, typically ahead of a new release.
+Resulting translation PRs should be merged promptly to avoid them stacking up or becoming outdated.
 
 ### Why AI-Only?
 
