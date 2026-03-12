@@ -23,7 +23,7 @@ Her iki yaklaşım için herhangi bir iş akışı kodu yazmaya dalmadan önce, 
 Aşağıdaki verileri ve ilgili kaynakları sağlıyoruz:
 
 - İnsan kromozom 20'sinin küçük bir bölgesinden (hg19/b37'den) oluşan **bir referans genom** ve yardımcı dosyaları (indeks ve dizi sözlüğü).
-- Bir aile üçlüsüne (anne, baba ve oğul) karşılık gelen **üç tüm genom dizileme örneği**, dosya boyutlarını küçük tutmak için kromozom 20'deki küçük bir veri dilimine indirgenmişlerdir.
+- Bir aile üçlüsüne (anne, baba ve oğul) karşılık gelen **üç tüm genom dizileme örneği**; dosya boyutlarını küçük tutmak için kromozom 20'deki küçük bir veri dilimine indirgenmişlerdir.
   Bu, referans genoma zaten haritalanmış Illumina kısa okuma dizileme verileridir ve [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) formatında (Binary Alignment Map, SAM'in sıkıştırılmış versiyonu, Sequence Alignment Map) sağlanmıştır.
 - **Bir genomik aralıklar listesi**, yani örneklerimizin varyant çağırmaya uygun verilere sahip olduğu genomdaki koordinatlar, BED formatında sağlanmıştır.
 
@@ -31,11 +31,11 @@ Aşağıdaki verileri ve ilgili kaynakları sağlıyoruz:
 
 İlgili iki ana araç, dizi hizalama dosyalarını manipüle etmek için yaygın olarak kullanılan bir araç seti olan [Samtools](https://www.htslib.org/) ve Broad Institute'da geliştirilen varyant keşfi için bir araç seti olan [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit)'dir.
 
-Bu araçlar GitHub Codespaces ortamında yüklü değildir, bu nedenle bunları Seqera Containers servisi aracılığıyla alınan konteynerlar ile kullanacağız (bkz. [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+Bu araçlar GitHub Codespaces ortamında yüklü değildir; bu nedenle bunları Seqera Containers servisi aracılığıyla alınan konteynerlar ile kullanacağız (bkz. [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! tip "İpucu"
 
-    `nf4-science/genomics` dizininde olduğunuzdan emin olun, böylece `pwd` yazdığınızda gösterilen yolun son kısmı `genomics` olsun.
+    `nf4-science/genomics` dizininde olduğunuzdan emin olun; böylece `pwd` yazdığınızda gösterilen yolun son kısmı `genomics` olsun.
 
 ---
 
@@ -58,9 +58,9 @@ Bunlar, bu kursun 2. Bölümünde bir Nextflow iş akışına sarmalayacağımı
 ### 1.1. Samtools ile bir BAM girdi dosyasını indeksleyin
 
 İndeks dosyaları, biyoinformatik dosya formatlarının yaygın bir özelliğidir; ana dosyanın yapısı hakkında bilgi içerirler ve GATK gibi araçların tüm dosyayı okumak zorunda kalmadan verilerin bir alt kümesine erişmesine olanak tanırlar.
-Bu, bu dosyaların ne kadar büyük olabileceği nedeniyle önemlidir.
+Bu, söz konusu dosyaların ne kadar büyük olabileceği göz önüne alındığında önemlidir.
 
-BAM dosyaları genellikle indeks olmadan sağlanır, bu nedenle birçok analiz iş akışındaki ilk adım `samtools index` kullanarak bir tane oluşturmaktır.
+BAM dosyaları genellikle indeks olmadan sağlanır; bu nedenle birçok analiz iş akışındaki ilk adım `samtools index` kullanarak bir tane oluşturmaktır.
 
 Bir Samtools konteynerını çekeceğiz, etkileşimli olarak başlatacağız ve BAM dosyalarından biri üzerinde `samtools index` komutunu çalıştıracağız.
 
@@ -101,7 +101,7 @@ Tamamlandığında, konteyner imajının yerel bir kopyasına sahip olursunuz.
 #### 1.1.2. Samtools konteynerını etkileşimli olarak başlatın
 
 Konteynerı etkileşimli olarak çalıştırmak için `-it` bayraklarıyla `docker run` kullanın.
-`-v ./data:/data` seçeneği, yerel `data` dizinini konteynere bağlar, böylece araçlar girdi dosyalarına erişebilir.
+`-v ./data:/data` seçeneği, yerel `data` dizinini konteynere bağlar; böylece araçlar girdi dosyalarına erişebilir.
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
@@ -113,7 +113,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
     (base) root@1409896f77b1:/tmp#
     ```
 
-İsteminizin `(base) root@a1b2c3d4e5f6:/tmp#` gibi bir şeye değiştiğini fark edeceksiniz, bu da artık konteyner içinde olduğunuzu gösterir.
+İsteminizin `(base) root@a1b2c3d4e5f6:/tmp#` gibi bir şeye değiştiğini fark edeceksiniz; bu, artık konteyner içinde olduğunuzu gösterir.
 
 Dizi veri dosyalarını `/data/bam` altında görebildiğinizi doğrulayın:
 
@@ -178,7 +178,7 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 
 ??? success "Komut çıktısı"
 
-    Bazı katmanlar `Already exists` gösterir çünkü daha önce çektiğimiz Samtools konteyner imajıyla paylaşılırlar.
+    Bazı katmanlar `Already exists` gösterir; çünkü daha önce çektiğimiz Samtools konteyner imajıyla paylaşılırlar.
 
     ```console
     4.5.0.0--730ee8817e436867: Pulling from library/gatk4
@@ -201,7 +201,7 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
     community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
     ```
 
-Bu, ilk çekimden daha hızlı olmalıdır çünkü iki konteyner imajı katmanlarının çoğunu paylaşır.
+İki konteyner imajı katmanlarının çoğunu paylaştığından, bu işlem ilk çekimden daha hızlı olmalıdır.
 
 #### 1.2.2. GATK konteynerını etkileşimli olarak başlatın
 
@@ -292,7 +292,7 @@ gatk HaplotypeCaller \
     Runtime.totalMemory()=203423744
     ```
 
-Günlük çıktısı çok ayrıntılıdır, bu nedenle yukarıdaki örnekte en ilgili satırları vurguladık.
+Günlük çıktısı çok ayrıntılıdır; bu nedenle yukarıdaki örnekte en ilgili satırları vurguladık.
 
 Çıktı dosyaları, `reads_mother.vcf` ve indeks dosyası `reads_mother.vcf.idx`, konteynerdeki çalışma dizininizin içinde oluşturulur.
 
@@ -302,7 +302,7 @@ Günlük çıktısı çok ayrıntılıdır, bu nedenle yukarıdaki örnekte en i
     conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
     ```
 
-VCF dosyası, birazdan göreceğimiz gibi varyant çağrılarını içerir ve indeks dosyası, araçların tüm dosyayı yüklemeden veri alt kümelerini aramasına ve almasına olanak tanımak için BAM indeks dosyasıyla aynı işleve sahiptir.
+VCF dosyası, birazdan göreceğimiz gibi varyant çağrılarını içerir; indeks dosyası ise araçların tüm dosyayı yüklemeden veri alt kümelerini aramasına ve almasına olanak tanımak için BAM indeks dosyasıyla aynı işleve sahiptir.
 
 VCF bir metin formatı olduğundan ve bu küçük bir test dosyası olduğundan, içeriğini açmak ve görüntülemek için `cat reads_mother.vcf` komutunu çalıştırabilirsiniz.
 Dosyanın başlangıcına kadar yukarı kaydırırsanız, birçok satır meta veriden oluşan bir başlık ve ardından satır başına bir tane olmak üzere varyant çağrılarının bir listesini bulacaksınız.
@@ -317,7 +317,7 @@ Dosyanın başlangıcına kadar yukarı kaydırırsanız, birçok satır meta ve
     ##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
     ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
     ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
-    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [kısaltılmış]",Version="4.5.0.0",Date="February 11, 2026 at 4:23:43 PM GMT">
+    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --output reads_mother.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:23:43 PM GMT">
     ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
@@ -357,7 +357,7 @@ Her veri satırı, örneğin dizileme verilerinde tanımlanan olası bir varyant
 #### 1.2.4. Çıktı dosyalarını taşıyın
 
 Konteyner içinde kalan her şey gelecekteki çalışmalara erişilemez olacaktır.
-BAM indeks dosyası doğrudan bağlı dosya sistemindeki `/data/bam` dizininde oluşturuldu, ancak VCF dosyası ve indeksi oluşturulmadı, bu nedenle bu ikisini manuel olarak taşımamız gerekiyor.
+BAM indeks dosyası doğrudan bağlı dosya sistemindeki `/data/bam` dizininde oluşturuldu; ancak VCF dosyası ve indeksi oluşturulmadı, bu nedenle bu ikisini manuel olarak taşımamız gerekiyor.
 
 ```bash
 mkdir /data/vcf
@@ -407,7 +407,7 @@ Bu, örnek başına varyant çağırma testini tamamlar.
 ## 2. Bir kohort üzerinde ortak çağırma
 
 Az önce kullandığımız varyant çağırma yaklaşımı örnek başına varyant çağrıları üretir.
-Bu, her örnekten gelen varyantlara izole olarak bakmak için iyidir, ancak sınırlı bilgi verir.
+Bu, her örnekten gelen varyantlara izole olarak bakmak için iyidir; ancak sınırlı bilgi verir.
 Varyant çağrılarının birden fazla örnek arasında nasıl farklılık gösterdiğine bakmak genellikle daha ilginçtir.
 GATK bu amaç için ortak varyant çağırma adı verilen alternatif bir yöntem sunar.
 
@@ -443,7 +443,7 @@ Yukarıdaki ilk bölümde, sadece bir BAM dosyasını indeksledik.
 
 #### 2.1.1. Samtools konteynerını etkileşimli olarak başlatın
 
-Samtools konteyner imajını zaten çektik, bu nedenle doğrudan başlatabiliriz:
+Samtools konteyner imajını zaten çektik; bu nedenle doğrudan başlatabiliriz:
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
@@ -491,7 +491,7 @@ Ortak genotipleme adımını çalıştırmak için üç örneğin tümü için G
 
 #### 2.2.1. GATK konteynerını etkileşimli olarak başlatın
 
-GATK konteyner imajını daha önce çektik, bu nedenle doğrudan başlatabiliriz:
+GATK konteyner imajını daha önce çektik; bu nedenle doğrudan başlatabiliriz:
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
@@ -501,10 +501,10 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 
 #### 2.2.2. GVCF seçeneğiyle varyant çağırma komutunu çalıştırın
 
-Genomik bir VCF (GVCF) üretmek için, temel komuta `-ERC GVCF` seçeneğini ekliyoruz, bu da HaplotypeCaller'ın GVCF modunu açar.
+Genomik bir VCF (GVCF) üretmek için, temel komuta `-ERC GVCF` seçeneğini ekliyoruz; bu da HaplotypeCaller'ın GVCF modunu açar.
 
 Ayrıca çıktı dosyası için dosya uzantısını `.vcf`'den `.g.vcf`'ye değiştiriyoruz.
-Bu teknik olarak bir gereklilik değildir, ancak güçlü bir şekilde önerilen bir kuraldır.
+Bu teknik olarak bir gereklilik değildir; ancak güçlü bir şekilde önerilen bir kuraldır.
 
 ```bash
 gatk HaplotypeCaller \
@@ -587,7 +587,7 @@ Bu, konteynerdeki mevcut çalışma dizininde GVCF çıktı dosyası `reads_moth
     conda.yml  hsperfdata_root  reads_mother.g.vcf  reads_mother.g.vcf.idx
     ```
 
-Dosya içeriğinin ilk 200 satırını görüntülemek için `head -200 reads_mother.g.vcf` komutunu çalıştırırsanız, 1. bölümde oluşturduğumuz eşdeğer VCF'den çok daha uzun olduğunu göreceksiniz ve satırların çoğu VCF'de gördüklerimizden oldukça farklı görünür.
+Dosya içeriğinin ilk 200 satırını görüntülemek için `head -200 reads_mother.g.vcf` komutunu çalıştırırsanız, 1. bölümde oluşturduğumuz eşdeğer VCF'den çok daha uzun olduğunu göreceksiniz; satırların çoğu da VCF'de gördüklerimizden oldukça farklı görünür.
 
 ??? abstract "Dosya içeriği (kısaltılmış)" hl_lines="92 175 191 195"
 
@@ -605,7 +605,7 @@ Dosya içeriğinin ilk 200 satırını görüntülemek için `head -200 reads_mo
     ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
     ##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)">
     ##FORMAT=<ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias.">
-    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [kısaltılmış]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
+    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
     ##GVCFBlock0-1=minGQ=0(inclusive),maxGQ=1(exclusive)
     ##GVCFBlock1-2=minGQ=1(inclusive),maxGQ=2(exclusive)
     ##GVCFBlock10-11=minGQ=10(inclusive),maxGQ=11(exclusive)
@@ -796,7 +796,7 @@ Dosya içeriğinin ilk 200 satırını görüntülemek için `head -200 reads_mo
 
 Bir kez daha son başlık satırını ve dosyadaki ilk üç 'gerçek' varyant çağrısını vurguladık.
 
-Varyant çağrı satırlarının aralarına serpiştirilmiş birçok varyant olmayan satırla karıştığını fark edeceksiniz, bunlar varyant çağırıcının varyasyon kanıtı bulmadığı varyant olmayan bölgeleri temsil eder.
+Varyant çağrı satırlarının aralarına serpiştirilmiş birçok varyant olmayan satırla karıştığını fark edeceksiniz; bunlar varyant çağırıcının varyasyon kanıtı bulmadığı varyant olmayan bölgeleri temsil eder.
 Yukarıda kısaca belirtildiği gibi, varyant çağırmanın GVCF modunun özel yanı budur: varyant çağırıcı, varyasyonun yokluğuna olan güven düzeyini tanımlayan bazı istatistikleri yakalar.
 Bu, iki çok farklı durumu ayırt etmeyi mümkün kılar: (1) örneğin homozigot-referans olduğunu gösteren iyi kaliteli veriler vardır ve (2) her iki şekilde de bir belirleme yapmak için yeterli iyi veri yoktur.
 
@@ -1034,13 +1034,13 @@ gatk GenomicsDBImport \
     ```
 
 Bu adımın çıktısı, birleştirilmiş varyant verilerini birden fazla farklı dosya biçiminde tutan daha fazla iç içe dizin içeren bir dizindir.
-Etrafında dolaşabilirsiniz ancak bu veri deposu formatının doğrudan insanlar tarafından okunması amaçlanmadığını hızlıca göreceksiniz.
+Etrafında dolaşabilirsiniz; ancak bu veri deposu formatının doğrudan insanlar tarafından okunması amaçlanmadığını hızlıca göreceksiniz.
 
 !!! tip "İpucu"
 
     GATK, gerektiğinde veri deposundan varyant çağrı verilerini incelemeyi ve çıkarmayı mümkün kılan araçlar içerir.
 
-#### #### 2.3.2. Ortak genotipleme analizini çalıştırın
+#### 2.3.2. Ortak genotipleme analizini çalıştırın
 
 Bu ikinci adım, kohorttaki tüm örneklerde mevcut verilerin ışığında varyant istatistiklerini ve bireysel genotipleri yeniden hesaplamak için GenotypeGVCFs adlı başka bir GATK aracını kullanır.
 
@@ -1095,7 +1095,7 @@ gatk GenotypeGVCFs \
     ```
 
 Bu, konteynerdeki mevcut çalışma dizininde VCF çıktı dosyası `family_trio.vcf`'yi ve indeksini `family_trio.vcf.idx`'yi oluşturur.
-Bu da makul derecede küçük bir dosyadır, bu nedenle dosya içeriğini görüntülemek için `cat family_trio.vcf` komutunu çalıştırabilir ve ilk birkaç varyant satırını bulmak için aşağı kaydırabilirsiniz.
+Bu da makul derecede küçük bir dosyadır; bu nedenle dosya içeriğini görüntülemek için `cat family_trio.vcf` komutunu çalıştırabilir ve ilk birkaç varyant satırını bulmak için aşağı kaydırabilirsiniz.
 
 ??? abstract "Dosya içeriği (kısaltılmış)" hl_lines="39"
 
@@ -1115,9 +1115,9 @@ Bu da makul derecede küçük bir dosyadır, bu nedenle dosya içeriğini görü
     ##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)">
     ##FORMAT=<ID=RGQ,Number=1,Type=Integer,Description="Unconditional reference genotype confidence, encoded as a phred quality -10*log10 p(genotype call is wrong)">
     ##FORMAT=<ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias.">
-    ##GATKCommandLine=<ID=GenomicsDBImport,CommandLine="GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [kısaltılmış]",Version="4.5.0.0",Date="February 11, 2026 at 5:37:07 PM GMT">
-    ##GATKCommandLine=<ID=GenotypeGVCFs,CommandLine="GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [kısaltılmış]",Version="4.5.0.0",Date="February 11, 2026 at 5:38:45 PM GMT">
-    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [kısaltılmış]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
+    ##GATKCommandLine=<ID=GenomicsDBImport,CommandLine="GenomicsDBImport --genomicsdb-workspace-path family_trio_gdb --variant reads_mother.g.vcf --variant reads_father.g.vcf --variant reads_son.g.vcf --intervals /data/ref/intervals.bed [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 5:37:07 PM GMT">
+    ##GATKCommandLine=<ID=GenotypeGVCFs,CommandLine="GenotypeGVCFs --output family_trio.vcf --variant gendb://family_trio_gdb --reference /data/ref/ref.fasta --include-non-variant-sites false [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 5:38:45 PM GMT">
+    ##GATKCommandLine=<ID=HaplotypeCaller,CommandLine="HaplotypeCaller --emit-ref-confidence GVCF --output reads_mother.g.vcf --intervals /data/ref/intervals.bed --input /data/bam/reads_mother.bam --reference /data/ref/ref.fasta [abridged]",Version="4.5.0.0",Date="February 11, 2026 at 4:51:00 PM GMT">
     ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
     ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
@@ -1162,7 +1162,7 @@ Bu da makul derecede küçük bir dosyadır, bu nedenle dosya içeriğini görü
 
 Bir kez daha varyant çağrı verilerinin başlangıcını işaret eden son başlık satırını vurguladık.
 
-Bu, daha önce oluşturduğumuz VCF'ye benzer görünüyor, ancak bu sefer üç örneğin tümü için genotip düzeyinde bilgiye sahibiz.
+Bu, daha önce oluşturduğumuz VCF'ye benzer görünüyor; ancak bu sefer üç örneğin tümü için genotip düzeyinde bilgiye sahibiz.
 Dosyadaki son üç sütun, vurgulanan başlık satırında gösterildiği gibi ID alanlarının alfabetik sırasına göre listelenen örnekler için genotip bloklarıdır.
 
 Test aile üçlümüz için ilk varyant için çağrılan genotiplere bakarsak, babanın heterozigot-varyant (`0/1`) ve anne ile oğulun her ikisinin de homozigot-varyant (`1/1`) olduğunu görüyoruz.
@@ -1230,4 +1230,4 @@ Samtools indeksleme ve GATK varyant çağırma komutlarını ilgili konteynerlar
 
 ### Sırada ne var?
 
-Bir mola verin, ardından aynı komutları, işi yürütmek için konteynerlar kullanan iş akışlarına nasıl sarmalayacağınızı öğrenmek için [Bölüm 2](./02_per_sample_variant_calling.md)'ye geçin.
+Bir mola verin, ardından aynı komutları konteynerlar kullanan iş akışlarına nasıl sarmalayacağınızı öğrenmek için [Bölüm 2](./02_per_sample_variant_calling.md)'ye geçin.

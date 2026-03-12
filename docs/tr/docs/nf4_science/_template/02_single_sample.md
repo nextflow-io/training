@@ -72,7 +72,7 @@ Ana iş akışı dosyası `{DOMAIN_DIR}.nf`'de, `Pipeline parameters` bölümü 
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Birincil girdi
         {PRIMARY_PARAM_NAME}: Path
     }
     ```
@@ -84,10 +84,10 @@ Ana iş akışı dosyası `{DOMAIN_DIR}.nf`'de, `Pipeline parameters` bölümü 
      * Pipeline parameters
      */
 
-    // Primary input
+    // Birincil girdi
     ```
 
-Bu, CLI parametresini ayarlar, ancak geliştirme sırasında iş akışını her çalıştırdığımızda dosya yolunu yazmak istemiyoruz.
+Bu, CLI parametresini ayarlar; ancak geliştirme sırasında iş akışını her çalıştırdığımızda dosya yolunu yazmak istemiyoruz.
 Varsayılan bir değer sağlamak için birden fazla seçenek vardır; burada bir test profili kullanıyoruz.
 
 #### 1.1.2. `nextflow.config` dosyasında varsayılan değere sahip bir test profili oluşturun

@@ -1,6 +1,6 @@
 # Geri bildirim anketi
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Devam etmeden önce, lütfen bu kısa 5 soruluk anketi tamamlayarak eğitimi değerlendirin, deneyiminiz hakkındaki geri bildirimlerinizi paylaşın ve Nextflow yolculuğunuzda size yardımcı olmak için başka neler yapabileceğimizi bize bildirin.
 
