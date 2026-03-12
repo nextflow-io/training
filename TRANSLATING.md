@@ -22,7 +22,7 @@ The key insight: **to fix a translation, fix the prompt** - not the translated f
 ### Contents
 
 - [How to Improve Existing Translations](#how-to-improve-existing-translations)
-- [How Automatic Translation Updates Work](#how-automatic-translation-updates-work)
+- [How Translation Updates Work](#how-translation-updates-work)
 - [Reviewing Translation PRs](#reviewing-translation-prs)
 - [How to Add a Missing Course](#how-to-add-a-missing-course)
 - [How to Add a New Language](#how-to-add-a-new-language)
@@ -144,16 +144,20 @@ Good prompt improvements include:
 
 ---
 
-## How Automatic Translation Updates Work
+## How Translation Updates Work
 
-Translations are automatically updated via GitHub Actions when:
+Translation runs are triggered manually via the GitHub Actions workflow, typically ahead of a new release of the training materials (but can be done at any time).
+A maintainer triggers the workflow, which detects what has changed and updates the relevant translations.
 
-1. **English source files change** → Outdated translations are updated
-2. **Translation prompts change** → Existing translations are fixed to comply with new guidelines
+The workflow handles three types of changes:
+
+1. **English source files changed** → Outdated translations are updated
+2. **Language-specific prompt changed** → That language's translations are fixed to comply with new guidelines
+3. **General prompt changed** → All languages are re-translated
 
 ```mermaid
 flowchart TD
-    A[Change detected] --> B{What changed?}
+    A[Maintainer triggers<br>translation workflow] --> B{What changed<br>since last run?}
     B -->|English content| C[Detect outdated translations]
     B -->|Language prompt| D[Fix that language's translations]
     B -->|General prompt| E[Fix ALL languages]
@@ -166,7 +170,7 @@ flowchart TD
     I --> J
     J --> K[Human review]
     K --> L{Approved?}
-    L -->|Yes| M[Merge PR]
+    L -->|Yes| M[Merge PR promptly]
     L -->|No| N[Update llm-prompt.md]
     N --> O[Re-run translation]
     O --> K
@@ -174,17 +178,19 @@ flowchart TD
 
 ### Key Points
 
+- Translation runs are **triggered manually**, not automatically on push
+- Runs are typically done **ahead of a new release**, but can be triggered at any time
 - The AI makes **minimal changes**, updating only sections that changed in English
 - Translations preserve line-by-line structure for easy diff review
 - Each language gets a separate PR for independent review/merge
 - The system uses git commit timestamps to detect outdated files
-- **Prompt changes trigger automatic re-translation** of affected files
+- **Translation PRs should be merged promptly** to avoid them stacking up or becoming outdated
 
 ---
 
 ## Reviewing Translation PRs
 
-When reviewing a translation PR (whether automatic or triggered manually), follow these guidelines:
+When reviewing a translation PR, follow these guidelines:
 
 ### What to Check
 
