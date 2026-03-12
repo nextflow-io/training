@@ -830,7 +830,7 @@ workflow에서 모듈을 사용하려면 workflow 코드 파일에 한 줄 impor
     include { collectGreetings } from './modules/collectGreetings.nf'
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: Path
@@ -896,7 +896,7 @@ include { collectGreetings } from './modules/collectGreetings.nf'
     #!/usr/bin/env nextflow
 
     /*
-    * Use echo to print 'Hello World!' to a file
+    * echo를 사용하여 'Hello World!'를 파일에 출력
     */
     process sayHello {
 
@@ -1177,7 +1177,7 @@ workflow는 `cowpy`를 실행하는 추가 단계를 제외하고 이전 것과 
     include { cowpy } from './modules/cowpy.nf'
 
     /*
-    * Pipeline parameters
+    * 파이프라인 매개변수
     */
     params {
         input: Path
@@ -1247,7 +1247,7 @@ ASCII 아트를 생성하기 위해 cowpy 명령을 적용하는 `cowpy` process
     ```groovy title="modules/cowpy.nf" linenums="1"
     #!/usr/bin/env nextflow
 
-    // Generate ASCII art with cowpy (https://github.com/jeffbuttars/cowpy)
+    // cowpy로 ASCII 아트 생성 (https://github.com/jeffbuttars/cowpy)
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
