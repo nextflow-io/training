@@ -2,7 +2,17 @@ name: Translate
 
 on:
   # Translations are triggered manually by maintainers, typically ahead of a new release.
-  # Resulting translation PRs should be merged promptly to avoid them stacking up or becoming outdated.
+  # Automatic: when English content or prompts change
+  # [EDIT] Commented out to save API costs - run manually as needed
+  # push:
+  #   branches:
+  #     - master
+  #   paths:
+  #     - "docs/en/docs/**/*.md"
+  #     - "docs/*/llm-prompt.md"
+  #     - "_scripts/general-llm-prompt.md"
+
+  # Manual trigger
   workflow_dispatch:
     inputs:
       mode:
