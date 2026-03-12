@@ -186,6 +186,7 @@ def verify_translation_structural(en_path: Path, lang_path: Path) -> list[str]:
         "exercise",
         "solution",
         "full-code",
+        "terminal",
     }
     for ln in trans_lines:
         m = admonition_re.match(ln.strip())

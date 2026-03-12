@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Daha önce, her örneğin verilerini bağımsız olarak işleyen örnek başına bir varyant çağırma boru hattı oluşturdunuz.
-Bu kursun bu bölümünde, basit iş akışımızı bir üst seviyeye taşıyarak keyfi sayıda örneği işleyebilen güçlü bir toplu otomasyon aracına dönüştüreceğiz.
+Kursun bu bölümünde, basit iş akışımızı bir üst seviyeye taşıyarak keyfi sayıda örneği işleyebilen güçlü bir toplu otomasyon aracına dönüştüreceğiz.
 Bunu yaparken, aynı zamanda yeni çalışmalarda daha yaygın olan paired-end verileri kabul edecek şekilde de güncelleyeceğiz.
 
 ??? info "Bu bölümden nasıl başlanır"
@@ -147,7 +147,7 @@ Bunu [Hello Nextflow'un Bölüm 2'sinde](../../hello_nextflow/02_hello_channels.
         read_ch = channel.fromPath(params.input)
     ```
 
-Hello Nextflow kursunda karşılaştığınız şeye kıyasla yeni olan bir şey, bu CSV'nin bir başlık satırına sahip olmasıdır, bu yüzden `splitCsv()` çağrısına `#!groovy header: true` ekliyoruz.
+Hello Nextflow kursunda karşılaştığınız şeye kıyasla yeni olan bir şey, bu CSV'nin bir başlık satırına sahip olmasıdır; bu yüzden `splitCsv()` çağrısına `#!groovy header: true` ekliyoruz.
 Bu, `map` işleminde sütunlara ada göre başvurmamızı sağlar: `#!groovy row.fastq_path`, her satırın `fastq_path` sütunundan dosya yolunu çıkarır.
 
 Girdi işleme güncellendi ve iş akışı test edilmeye hazır.
@@ -178,7 +178,7 @@ Bu sefer her adım 6 kez çalıştırılıyor, CSV dosyasındaki her örnek içi
 İş akışını birden fazla dosya üzerinde çalıştırmak için gereken tek şey buydu.
 Nextflow tüm paralelliği bizim için yönetiyor.
 
-### Çıkarım
+### Özet
 
 Tek dosyalı girdiden, Nextflow'un paralel olarak işlediği CSV tabanlı çok-örnekli girdiye nasıl geçeceğinizi biliyorsunuz.
 
@@ -276,7 +276,7 @@ Ardından, MultiQC süreci için girdileri hazırlamamız gerekecek.
 
 Bunun için, birden fazla kanalı tek bir kanalda toplayan `.mix()` operatörünü kullanıyoruz.
 `channel.empty()`'den başlıyoruz ve birleştirmek istediğimiz tüm çıktı kanallarını karıştırıyoruz.
-Bu, `.mix()`'i doğrudan çıktı kanallarından birine zincirleme yapmaktan daha temizdir, çünkü tüm girdileri simetrik olarak ele alır.
+Bu, `.mix()`'i doğrudan çıktı kanallarından birine zincirleme yapmaktan daha temizdir; çünkü tüm girdileri simetrik olarak ele alır.
 
 İş akışımızda, toplanması gereken QC ile ilgili çıktılar şunlardır:
 
@@ -470,7 +470,7 @@ Ardından, Nextflow'a bu çıktıları nereye koyacağını söylememiz gerekece
 
 #### 2.3.2. Yeni çıktı hedeflerini yapılandırma
 
-`output {}` bloğunda MultiQC hedefleri için girdiler ekleyin, bunları bir `multiqc/` alt dizinine yayınlayın:
+`output {}` bloğunda MultiQC hedefleri için girdiler ekleyin; bunları bir `multiqc/` alt dizinine yayınlayın:
 
 === "Sonra"
 
@@ -561,7 +561,7 @@ results/multiqc
 
 Son `all_single-end.html` dosyası, göz atmayı kolaylaştıran tek bir HTML dosyasında pratik bir şekilde paketlenmiş tam toplu rapordur.
 
-### Çıkarım
+### Özet
 
 Birden fazla kanaldan çıktıları nasıl toplayacağınızı, bunları `.mix()` ve `.collect()` ile nasıl paketleyeceğinizi ve bir toplama sürecine nasıl geçireceğinizi biliyorsunuz.
 
@@ -574,9 +574,9 @@ Birden fazla kanaldan çıktıları nasıl toplayacağınızı, bunları `.mix()
 ## 3. Paired-end RNAseq verilerinin işlenmesini etkinleştirme
 
 Şu anda iş akışımız yalnızca single-end RNAseq verilerini işleyebiliyor.
-Paired-end RNAseq verilerini görmek giderek daha yaygın hale geliyor, bu nedenle bunu da işleyebilmek istiyoruz.
+Paired-end RNAseq verilerini görmek giderek daha yaygın hale geliyor; bu nedenle bunu da işleyebilmek istiyoruz.
 
-İş akışını veri türünden tamamen bağımsız hale getirmek biraz daha gelişmiş Nextflow dil özelliklerini kullanmayı gerektirecektir, bu yüzden bunu burada yapmayacağız, ancak neyin uyarlanması gerektiğini göstermek için paired-end işleme versiyonu yapabiliriz.
+İş akışını veri türünden tamamen bağımsız hale getirmek biraz daha gelişmiş Nextflow dil özelliklerini kullanmayı gerektirecektir; bu yüzden bunu burada yapmayacağız, ancak neyin uyarlanması gerektiğini göstermek için paired-end işleme versiyonu yapabiliriz.
 
 ### 3.1. İş akışını kopyalama ve girdileri güncelleme
 
@@ -955,7 +955,7 @@ Paired-end iş akışı artık tamamen güncellendi ve çalıştırılmaya hazı
 
 ### 3.7. İş akışını çalıştırma
 
-Bu önbelleğe almayacağı ve işlenecek verilerin öncekinden iki kat daha fazla olduğu için `-resume` kullanmıyoruz, ancak yine de bir dakikadan kısa sürede tamamlanması gerekiyor.
+Bu önbelleğe almayacağı ve işlenecek verilerin öncekinden iki kat daha fazla olduğu için `-resume` kullanmıyoruz; ancak yine de bir dakikadan kısa sürede tamamlanması gerekiyor.
 
 ```bash
 nextflow run rnaseq_pe.nf -profile test_pe
@@ -980,7 +980,7 @@ Bir sonraki mantıklı adım, iş akışının her iki veri türünü de anında
 
 ---
 
-### Çıkarım
+### Özet
 
 Tek örnekli bir iş akışını birden fazla örneğin işlenmesini paralelleştirmek, kapsamlı bir QC raporu oluşturmak ve iş akışını paired-end okuma verilerini kullanacak şekilde uyarlamak için nasıl uyarlayacağınızı biliyorsunuz.
 

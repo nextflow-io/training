@@ -369,7 +369,7 @@ Bunu parçalara ayıralım:
 2. Bölüm 1'de `emit:` kullanarak çıktıları adlandırdığımız için, GVCF'leri `.vcf` ile ve dizin dosyalarını `.idx` ile seçebiliriz. Adlandırılmış çıktılar olmadan, `.out[0]` ve `.out[1]` kullanmak zorunda kalırdık.
 3. `collect()` operatörü tüm dosyaları tek bir öğede paketler, böylece `all_gvcfs_ch` üç GVCF'yi birlikte içerir ve `all_idxs_ch` üç dizin dosyasını birlikte içerir.
 
-GVCF'leri ve dizin dosyalarını ayrı ayrı toplayabiliriz (bunları demetler halinde birlikte tutmanın aksine) çünkü Nextflow tüm girdi dosyalarını yürütme için birlikte sahneler, bu nedenle dizin dosyaları GVCF'lerin yanında mevcut olacaktır.
+GVCF'leri ve dizin dosyalarını ayrı ayrı toplayabiliriz (bunları demetler halinde birlikte tutmanın aksine) çünkü Nextflow tüm girdi dosyalarını yürütme için birlikte sahneler; bu nedenle dizin dosyaları GVCF'lerin yanında mevcut olacaktır.
 
 !!! tip "İpucu"
 

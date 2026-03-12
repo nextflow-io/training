@@ -1,6 +1,6 @@
 # Bölüm 2: nf-core/molkart'ı Çalıştırma
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Bölüm 1'de, Nextflow çalıştırmasının temellerini anlamak için basit bir Hello World iş akışı çalıştırdık.
 Şimdi gerçek dünyadan bir biyogörüntüleme pipeline'ı çalıştıracağız: **nf-core/molkart**.
@@ -15,7 +15,7 @@ Pipeline'ı çalıştırmadan önce, nf-core'un ne olduğunu ve iş akışların
 ### 1.1. nf-core nedir?
 
 [nf-core](https://nf-co.re/), topluluk tarafından yönlendirilen yüksek kaliteli Nextflow pipeline'ları koleksiyonudur.
-Tüm nf-core pipeline'ları aynı yapı ve kurallara uyar, bu da birini çalıştırmayı öğrendiğinizde herhangi birini çalıştırabileceğiniz anlamına gelir.
+Tüm nf-core pipeline'ları aynı yapı ve kurallara uyar; bu da birini çalıştırmayı öğrendiğinizde herhangi birini çalıştırabileceğiniz anlamına gelir.
 
 nf-core pipeline'larının temel özellikleri:
 
@@ -64,7 +64,7 @@ Bu, tam pipeline kaynak kodunu içeren bir `molkart/` dizini oluşturur.
 
     Genellikle, nf-core pipeline'larını doğrudan GitHub'dan `nextflow run nf-core/molkart -r 1.2.0` kullanarak çalıştırırsınız.
     Nextflow, istenen pipeline sürümünü sizin için otomatik olarak `$HOME/.nextflow/assets/nf-core/molkart` dizinine indirir ve oradan çalıştırır.
-    Ancak, bu eğitim için, kodu daha kolay inceleyebilmemiz için pipeline'ı farklı bir yerel dizine klonluyoruz.
+    Ancak, bu eğitim için kodu daha kolay inceleyebilmemiz amacıyla pipeline'ı farklı bir yerel dizine klonluyoruz.
 
 ### 2.1. Konteyner gereksinimlerini anlama
 
@@ -146,7 +146,7 @@ container 'ghcr.io/schapirolabor/molkart-local:v0.0.4'
 Bu satır Nextflow'a şunu söyler: "Bu işlemi çalıştırmak için, gerekli tüm yazılımları içeren `ghcr.io/schapirolabor/molkart-local:v0.0.4` Docker imajını kullan."
 
 Her işlem, hangi konteyner imajının gerekli araçları sağladığını bildirir.
-Ancak, Nextflow bu konteynerları yalnızca ona söylerseniz kullanır!
+Ancak Nextflow bu konteynerları yalnızca ona söylerseniz kullanır!
 
 **Çözüm: Yapılandırmada Docker'ı etkinleştirin**
 
@@ -185,12 +185,12 @@ nextflow run ./molkart \
   --outdir results
 ```
 
-Bu sefer, Nextflow:
+Bu sefer Nextflow:
 
 1. Yapılandırmadan `docker.enabled = true` ayarını okuyacak
 2. Gerekli Docker imajlarını çekecek (yalnızca ilk seferde)
 3. Her işlemi belirtilen konteyner içinde çalıştıracak
-4. Tüm araçlar konteynerler içinde mevcut olduğu için başarıyla çalıştıracak
+4. Tüm araçlar konteynerler içinde mevcut olduğu için başarıyla çalışacak
 
 !!! Tip "Konteynerlar neden önemlidir"
 
@@ -308,7 +308,7 @@ Her işlem satırı şunları gösterir:
 - **Girdi tanımlayıcısı**: Parantez içinde örnek adı
 - **İlerleme**: Tamamlanma yüzdesi ve sayısı (örneğin, `1 of 1 ✔`)
 
-### Çıkarım
+### Özet
 
 Bir nf-core pipeline'ını test verileri ile nasıl başlatacağınızı ve çalıştırma çıktısını nasıl yorumlayacağınızı biliyorsunuz.
 
@@ -324,7 +324,7 @@ Pipeline başarıyla tamamlandığında, bir tamamlanma mesajı ve çalıştırm
 
 ### 3.1. Sonuçlar dizinini bulma
 
-Varsayılan olarak, nf-core pipeline'ları çıktıları `outdir` parametresiyle belirtilen bir dizine yazar, bunu `results/` olarak ayarladık.
+Varsayılan olarak, nf-core pipeline'ları çıktıları `outdir` parametresiyle belirtilen bir dizine yazar; bunu `results/` olarak ayarladık.
 
 İçeriği listeleyin:
 
@@ -372,7 +372,7 @@ Rapor şunları içerir:
 - Segmentasyon kalite metrikleri
 - Tespit edilen hücre ve nokta sayısı
 
-!!! Tip
+!!! Tip "İpucu"
 
     MultiQC raporları genellikle tüm nf-core pipeline'larına dahil edilir.
     Her zaman pipeline çalıştırması ve veri kalitesi hakkında üst düzey bir genel bakış sağlarlar.
@@ -394,7 +394,7 @@ ls results/spot2cell/
 - `cellxgene_mem_only_mesmer.csv`: Mesmer segmentasyonu kullanarak hücre-transkript tablosu
 - `cellxgene_mem_only_stardist.csv`: Stardist segmentasyonu kullanarak hücre-transkript tablosu
 
-Bu test veri setinde sadece 1 örnek çalıştırdık, ancak gerçek bir deneyde bu tabloları her örnek için elde ederdik.
+Bu test veri setinde yalnızca 1 örnek çalıştırdık, ancak gerçek bir deneyde bu tabloları her örnek için elde ederdik.
 Nextflow'un birden fazla segmentasyon yöntemini paralel olarak işleyerek sonuçları karşılaştırmayı nasıl kolaylaştırdığına dikkat edin.
 
 ### 3.4. Çalıştırma raporlarını görüntüleme
@@ -426,11 +426,11 @@ Bu şunları gösterir:
 - CPU ve bellek kullanımı
 - Hangi görevlerin önbellekte olduğu ve hangilerinin çalıştırıldığı
 
-!!! Tip
+!!! Tip "İpucu"
 
     Bu raporlar, kaynak tahsisini optimize etmek ve performans sorunlarını gidermek için son derece kullanışlıdır.
 
-### Çıkarım
+### Özet
 
 Pipeline çıktılarını nasıl bulacağınızı, kalite kontrol raporlarını nasıl inceleyeceğinizi ve çalıştırma metriklerine nasıl erişeceğinizi biliyorsunuz.
 
@@ -447,7 +447,7 @@ Hello World örneğimizde olduğu gibi, tüm gerçek çalışma `work/` dizinind
 ### 4.1. Çalışma dizini yapısını anlama
 
 Çalışma dizini, çalıştırılan her görev için bir alt dizin içerir.
-22 göreve sahip bu pipeline için 22 çalışma alt dizini olacaktır.
+12 göreve sahip bu pipeline için 12 çalışma alt dizini olacaktır.
 
 Çalışma dizinini listeleyin:
 
@@ -477,7 +477,7 @@ Hello World'den temel fark:
 - Çıktı dosyaları oldukça büyük olabilir (segmentasyon maskeleri, işlenmiş görüntüler)
 - Görev başına birden fazla girdi ve çıktı dosyası
 
-!!! Tip
+!!! Tip "İpucu"
 
     Bir işlem başarısız olursa, çalışma dizinine gidebilir, hata mesajları için `.command.err` dosyasını inceleyebilir ve hatta sorunu ayıklamak için `.command.sh` dosyasını manuel olarak yeniden çalıştırabilirsiniz.
 
@@ -488,7 +488,7 @@ Bölüm 1'de öğrendiğimiz gibi, eski çalıştırmalardan çalışma dizinler
 
 Ancak, büyük ara dosyalara sahip nf-core pipeline'ları için düzenli olarak temizlik yapmak özellikle önemlidir.
 
-### Çıkarım
+### Özet
 
 nf-core pipeline'larının çalışma dizinlerini nasıl düzenlediğini ve hata ayıklama için bireysel görevleri nasıl inceleyeceğinizi anlıyorsunuz.
 
@@ -551,12 +551,12 @@ Resume özellikle şu durumlarda değerlidir:
 - Veri indirme sırasında ağ bağlantınız düştüğünde
 - Hesaplamayı yeniden yapmadan ek çıktılar eklemek istediğinizde
 
-!!! Warning
+!!! Warning "Uyarı"
 
     Resume yalnızca girdi verilerini, pipeline kodunu veya parametreleri değiştirmemişseniz çalışır.
     Bunlardan herhangi birini değiştirirseniz, Nextflow etkilenen görevleri doğru bir şekilde yeniden çalıştıracaktır.
 
-### Çıkarım
+### Özet
 
 Başarılı görevleri tekrarlamadan pipeline'ları verimli bir şekilde yeniden çalıştırmak için `-resume` kullanmayı biliyorsunuz.
 

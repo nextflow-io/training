@@ -276,6 +276,49 @@ TAB_LABEL_RE = re.compile(r'^(\s*===\s*)"(.*)"(.*)$')
 ADMONITION_RE = re.compile(r"^(!{3}|\?{3}\+?)\s+(\w[\w-]*)\s*(.*)")
 NOTICE_SPAN_RE = re.compile(r'class="ai-translation-notice"')
 
+# Matches the full notice span line (used for stripping LLM-generated notices)
+_NOTICE_SPAN_LINE_RE = re.compile(
+    r'^\s*<span\s+class="ai-translation-notice".*?</span>\s*$'
+)
+# Matches the start of a notice admonition block
+_NOTICE_ADMN_START_RE = re.compile(r"^\s*!!! note\b.*$")
+
+
+def strip_translation_notice(lines: list[str]) -> list[str]:
+    """Remove any AI translation notice the LLM may have inserted.
+
+    Handles both span-style and admonition-style notices so that
+    ``ensure_translation_notice`` can add the canonical version later.
+    Returns a new list with the notice lines removed.
+    """
+    result: list[str] = []
+    i = 0
+    while i < len(lines):
+        # Span-style notice (single line)
+        if _NOTICE_SPAN_LINE_RE.match(lines[i]):
+            # Also skip surrounding blank lines to avoid double-blanks
+            i += 1
+            continue
+        # Any line mentioning the notice class (catch partial/malformed spans)
+        if NOTICE_SPAN_RE.search(lines[i]):
+            i += 1
+            continue
+        # Admonition-style notice: !!! note block referencing TRANSLATING.md
+        if _NOTICE_ADMN_START_RE.match(lines[i]):
+            # Look ahead to see if this admonition block references TRANSLATING.md
+            block_end = i + 1
+            while block_end < len(lines) and (
+                lines[block_end].strip() == "" or lines[block_end].startswith("    ")
+            ):
+                block_end += 1
+            block_text = "\n".join(lines[i:block_end])
+            if "TRANSLATING.md" in block_text or "ai-translation" in block_text.lower():
+                i = block_end
+                continue
+        result.append(lines[i])
+        i += 1
+    return result
+
 
 @lru_cache
 def load_glossary(lang: str) -> dict:
@@ -750,8 +793,15 @@ def post_process_file(lang_path: Path, lang: str) -> bool:
     source_text = en_path.read_text(encoding="utf-8")
 
     source_lines = source_text.splitlines()
+
+    # Strip any translation notice the LLM may have inserted before running
+    # paired fixes.  The notice contains a markdown link that does not exist
+    # in the English source, causing a link-count mismatch and aborting all
+    # paired fixes.  ``ensure_translation_notice`` re-adds it canonically later.
+    cleaned_lines = strip_translation_notice(original.splitlines())
+
     try:
-        fixed = fix_translation(original.splitlines(), source_lines, lang)
+        fixed = fix_translation(cleaned_lines, source_lines, lang)
     except StructureMismatchError as e:
         console = make_console()
         console.print(
@@ -759,7 +809,7 @@ def post_process_file(lang_path: Path, lang: str) -> bool:
             f"{lang_path.relative_to(REPO_ROOT)}: {e}[/yellow]"
         )
         # Paired fixes failed, but still apply glossary-based fixes
-        fixed = original.splitlines()
+        fixed = cleaned_lines
         fixed = fix_admonitions(fixed, source_lines, lang)
         fixed = fix_tab_labels(fixed, source_lines, lang)
 
