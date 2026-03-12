@@ -8,6 +8,7 @@ The target language for this translation is **Turkish** (`tr`).
 - Follow Turkish Language Association (TDK) spelling conventions (kurallar).
 - Prefer active voice when possible.
 - Pay strict attention to vowel harmony in all suffixes and borrowed-word inflections.
+- **Tone**: Maintain the educational future tense (`öğreneceksiniz`, `yapacaksınız`) found in the source, but ensure the phrasing is natural and free of "translation smell" (anlamsız kelime dizilimleri).
 
 ### 1.1. Punctuation: Comma, Semicolon, and Period
 
@@ -87,9 +88,9 @@ When translating structures like "You will be introduced to [X]...":
 
 ### 1.4. Sentence-Initial '-ing' Phrases
 
-When translating sentences starting with '-ing' structures (e.g., "Working through practical examples..."), connect them to the main verb or use a more direct narrative instead of a literal participial translation.
+When translating sentences starting with long '-ing' phrases (e.g., "Working through..."), do not detach them from the main clause. Use Turkish adverbial participles (zarf-fiil: `-arak`, `-erek`) to connect them fluently to the main verb.
 
-- **Example**: Instead of "...çalışarak öğreneceksiniz", use "Pratik örnekler ve rehberli alıştırmalarla; nf-core uyumlu modülleri kullanmayı öğreneceksiniz".
+- **Example**: "Working through practical examples..." → "Pratik örnekler üzerinden çalışarak..."
 
 ### 1.5. Handling "Because" in Long Sentences
 
@@ -105,11 +106,13 @@ When translating 'Summary/Özet' sections in tables or lists, use a consistent m
 
 - **Definitions**: Avoid clunky passive structures like "X olarak adlandırılır". Instead, use more natural phrasing like "X adı verilen...".
   - *Example*: Instead of "Metro haritası olarak adlandırılır", use "metro haritası (subway map) adı verilen görsel temsil".
-- **"And so forth"**: Translate as "ve benzeri içerikler" to complete the sentence naturally.
+- **Direct Narrative**: Instead of structures like "Buna şu denir ve bu şudur", use fluid engineering language like "X olarak adlandırılan bu yapı...".
+- **"And so forth"**: Translate as "ve benzerleri" to complete the sentence naturally.
 - **"Out of the way"**: Translate as "ayrı bir yerde" or "erişimi doğrudan olmayan" depending on context.
 - **"Poke around"**: Translate as "kodu incelemek" or "kurcalamak".
-- **Direct Narrative**: Instead of clunky structures like "Buna şu denir ve bu şudur", use fluid engineering language like "X olarak adlandırılan bu yapı...".
 - **Fluency**: Use natural equivalents like "Sizin belirleyeceğiniz bir isim" instead of translation-heavy phrases like "Bunun için uydurulabilecek bir ad".
+- **Placeholders**: When describing symbols like `< >` in command line examples, refer to them as "yer tutucular".
+- **Engineering Terminology**: If a term refers to both a biological process and a software component, prioritize engineering terminology (e.g., "Read trimming" → "Okuma kırpma işlemi").
 
 ## 2. Translation Context Rules
 
@@ -125,6 +128,24 @@ For example:
 - In prose: "Giriş kanalı dosyaları alır..." (translate "channel" to "kanal")
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
 - In comments: `// emit a greeting` → `// bir selamlama yayınla`
+
+### Specific Nextflow Keywords
+
+- **`take`, `main`, `topic`**: Keep these keywords in English within code blocks.
+- **Prose Translation**: When explaining these structures in text, use Turkish equivalents:
+  - `take` / `main` → "iş akışı girişi" or "kanal tanımı".
+  - `emit` vs `publish`: Use "yayınlamak" for internal data flow (`emit`) and "yayımlamak" for writing files externally (`publish`).
+
+### Groovy Data Types
+
+- Keep specific Groovy/Nextflow types in English to maintain technical accuracy: **Closure**, **Map**, **List**, **Channel**, **Value**, **Queue**.
+- Translate general references: "list of files" → "dosya listesi".
+
+### Code Block Titles
+
+Translate descriptive titles in code blocks, but keep filenames intact.
+- `title="Syntax"` → `title="Sözdizimi"`
+- `title="main.nf"` → `title="main.nf"`
 
 ## 3. Code Comments
 
@@ -249,7 +270,7 @@ These terms should be translated in prose (but kept in English in code):
 | channel       | kanal                    |
 | process       | süreç                    |
 | workflow      | iş akışı                 |
-| pipeline      | boru hattı / pipeline    |
+| pipeline      | pipeline / iş hattı      |
 | directive     | yönerge                  |
 | container     | konteyner                |
 | input         | girdi                    |
@@ -267,7 +288,7 @@ These terms should be translated in prose (but kept in English in code):
 | training      | eğitim                   |
 | module        | modül                    |
 | command       | komut                    |
-| index         | dizin (index for files)  |
+| index         | indeks (BWA/Samtools) / indis (dizi) |
 | run           | çalıştırmak / çalıştırma |
 | conventions   | kurallar / gelenekler    |
 | best practices| en iyi uygulamalar       |
@@ -279,8 +300,8 @@ These terms should be translated in prose (but kept in English in code):
 | executor      | yürütücü                 |
 | configuration | yapılandırma             |
 | resume        | devam ettirme            |
-| publish       | yayımlamak               |
-| emit          | yayınlamak               |
+| publish       | yayımlamak (dosya çıkışı)|
+| emit          | yayınlamak (veri akışı)  |
 | collect       | toplamak                 |
 | wrap          | kapsamak                 |
 | overview      | giriş                    |
