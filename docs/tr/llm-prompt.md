@@ -85,6 +85,22 @@ When translating structures like "You will be introduced to [X]...":
 - If the source sentence has too many subordinate clauses, split it into two meaningful parts instead of forcing a single complex inverted sentence.
   - **Preferred structure**: "X ile tanışacaksınız. Bu oluşum aynı zamanda Y ve Z'yi de içerir."
 
+### 1.4. Sentence-Initial '-ing' Phrases
+
+When translating sentences starting with '-ing' structures (e.g., "Working through practical examples..."), connect them to the main verb or use a more direct narrative instead of a literal participial translation.
+
+- **Example**: Instead of "...çalışarak öğreneceksiniz", use "Pratik örnekler ve rehberli alıştırmalarla; nf-core uyumlu modülleri kullanmayı öğreneceksiniz".
+
+### 1.5. Handling "Because" in Long Sentences
+
+If a sentence is connected by "because" and is very long, split it into two sentences. End the first sentence with a period and start the new sentence with "Zira," or "Bunun nedeni," to improve readability.
+
+### 1.6. Actions in Summaries/Lists
+
+When translating 'Summary/Özet' sections in tables or lists, use a consistent mood. If an action is described (Run, Explore, Create), use either the infinitive (`-mak`/`-mek`) or simple present tense.
+
+- **Example**: "Mevcut bir pipeline'ı çalıştırmak" or "...çalıştırılır".
+
 ## 2. Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
@@ -242,7 +258,12 @@ These terms should be translated in prose (but kept in English in code):
 | command       | komut                    |
 | index         | dizin (index for files)  |
 | run           | çalıştırmak / çalıştırma |
-| conventions   | kurallar                 |
+| conventions   | kurallar / gelenekler    |
+| best practices| en iyi uygulamalar       |
+| portable      | taşınabilir              |
+| robust        | dayanıklı / güçlü        |
+| validation    | doğrulama                |
+| reproducibility | tekrarlanabilirlik     |
 | script        | betik / script           |
 | executor      | yürütücü                 |
 | configuration | yapılandırma             |
