@@ -71,6 +71,7 @@ Correct (Turkish word order):
 ```
 
 This applies to all trailing English phrases such as:
+
 - "starting from..." → "...dan/den başlayarak, [ana cümle]"
 - "using..." → "...kullanarak, [ana cümle]"
 - "by running..." → "...çalıştırarak, [ana cümle]"
@@ -106,14 +107,14 @@ params.greeting = "Hello" // varsayılan selamlamayı ayarla
 
 When an English technical term is used in a Turkish sentence, attach Turkish suffixes with an apostrophe. Apply vowel harmony based on the **last vowel sound** of the English word as it is pronounced in Turkish.
 
-| English term | Last vowel (sound) | Suffix example       | Turkish form        |
-| ------------ | ------------------ | -------------------- | ------------------- |
-| workflow     | o → back-rounded   | locative: -'da/-'de  | workflow'da         |
-| channel      | e → front          | ablative: -'den/-'dan| channel'dan         |
-| pipeline     | a → back           | dative: -'a/-'e      | pipeline'a          |
-| process      | e → front          | genitive: -'in/-'ın  | process'in          |
-| script       | i → front          | locative: -'de/-'da  | script'te           |
-| container    | e → front          | plural: -'ler/-'lar  | container'lar       |
+| English term | Last vowel (sound) | Suffix example        | Turkish form  |
+| ------------ | ------------------ | --------------------- | ------------- |
+| workflow     | o → back-rounded   | locative: -'da/-'de   | workflow'da   |
+| channel      | e → front          | ablative: -'den/-'dan | channel'dan   |
+| pipeline     | a → back           | dative: -'a/-'e       | pipeline'a    |
+| process      | e → front          | genitive: -'in/-'ın   | process'in    |
+| script       | i → front          | locative: -'de/-'da   | script'te     |
+| container    | e → front          | plural: -'ler/-'lar   | container'lar |
 
 **Rule**: Never add a suffix directly without an apostrophe (e.g., `workflowda` ✗ → `workflow'da` ✓).
 
@@ -208,42 +209,41 @@ Correct:
 
 These terms should be translated in prose (but kept in English in code):
 
-| English      | Turkish                  |
-| ------------ | ------------------------ |
-| channel      | kanal                    |
-| process      | süreç                    |
-| workflow     | iş akışı                 |
-| pipeline     | boru hattı / pipeline    |
-| directive    | yönerge                  |
-| container    | konteyner                |
-| input        | girdi                    |
-| output       | çıktı                    |
-| task         | görev                    |
-| tuple        | demet                    |
-| operator     | operatör                 |
-| parameter    | parametre                |
-| environment  | ortam                    |
-| directory    | dizin                    |
-| file         | dosya                    |
-| sample       | örnek                    |
-| alignment    | hizalama                 |
-| reference    | referans                 |
-| training     | eğitim                   |
-| module       | modül                    |
-| command      | komut                    |
-| index        | dizin (index for files)  |
-| run          | çalıştırmak / çalıştırma |
-| conventions  | kurallar                 |
-| script       | betik / script           |
-| executor     | yürütücü                 |
-| configuration| yapılandırma             |
-| resume       | devam ettirme            |
-| publish      | yayımlamak               |
-| emit         | yayınlamak               |
-| collect      | toplamak                 |
-| wrap         | kapsamak                 |
-| overview     | giriş                    | 
-
+| English       | Turkish                  |
+| ------------- | ------------------------ |
+| channel       | kanal                    |
+| process       | süreç                    |
+| workflow      | iş akışı                 |
+| pipeline      | boru hattı / pipeline    |
+| directive     | yönerge                  |
+| container     | konteyner                |
+| input         | girdi                    |
+| output        | çıktı                    |
+| task          | görev                    |
+| tuple         | demet                    |
+| operator      | operatör                 |
+| parameter     | parametre                |
+| environment   | ortam                    |
+| directory     | dizin                    |
+| file          | dosya                    |
+| sample        | örnek                    |
+| alignment     | hizalama                 |
+| reference     | referans                 |
+| training      | eğitim                   |
+| module        | modül                    |
+| command       | komut                    |
+| index         | dizin (index for files)  |
+| run           | çalıştırmak / çalıştırma |
+| conventions   | kurallar                 |
+| script        | betik / script           |
+| executor      | yürütücü                 |
+| configuration | yapılandırma             |
+| resume        | devam ettirme            |
+| publish       | yayımlamak               |
+| emit          | yayınlamak               |
+| collect       | toplamak                 |
+| wrap          | kapsamak                 |
+| overview      | giriş                    |
 
 ## 7. Admonition Titles
 
