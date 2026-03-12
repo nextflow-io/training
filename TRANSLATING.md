@@ -5,7 +5,7 @@ This document describes how translations work for the Nextflow training material
 <!-- prettier-ignore-start -->
 > [!WARNING]
 > **All translations are generated and maintained by AI.**
-> Do not submit manual translations - they will be overwritten by automated updates.
+> Do not submit manual translations - they will be overwritten the next time the translation workflow runs.
 > Instead, improve the translation prompts to fix issues permanently.
 <!-- prettier-ignore-end -->
 
@@ -14,7 +14,7 @@ This document describes how translations work for the Nextflow training material
 Translations are managed through a combination of:
 
 1. **LLM prompts** that define translation rules and glossaries
-2. **GitHub Actions** that automatically regenerate translations
+2. **GitHub Actions** that regenerate translations when triggered
 3. **Human review** to catch errors and improve prompts
 
 The key insight: **to fix a translation, fix the prompt** - not the translated file.
@@ -44,11 +44,12 @@ flowchart TD
     C --> F[Open PR with prompt change]
     D --> F
     E --> F
-    F --> G[Trigger translation workflow<br>on PR branch]
-    G --> H[Review updated translation]
-    H --> I{Correct?}
-    I -->|Yes| J[Merge PR]
-    I -->|No| B
+    F --> G[Merge prompt PR to master]
+    G --> H[Trigger translation workflow<br>via Actions → Translate → Run workflow]
+    H --> I[Review translation PR]
+    I --> J{Correct?}
+    J -->|Yes| K[Merge translation PR]
+    J -->|No| B
 ```
 
 > [!NOTE]
@@ -69,12 +70,15 @@ The **only** sustainable way to fix translations is to improve the LLM prompts:
    - Edit `_scripts/general-llm-prompt.md`
    - Add rules with before/after examples
 
-3. **Re-run the translation** via GitHub Actions:
+3. **Merge the prompt change** to `master`
+
+4. **Trigger the translation workflow** via GitHub Actions:
 
    - Go to **Actions** → **Translate** → **Run workflow**
-   - Select language and command (`sync`)
+   - Select language and mode (`normal`)
+   - The workflow detects that prompts changed and re-translates all files for that language
 
-4. **Submit a PR** with both the prompt change and regenerated translation
+5. **Review the translation PR** created by the workflow
 
 ### Why Not Edit Translations Directly?
 
@@ -146,34 +150,33 @@ Good prompt improvements include:
 
 ## How Translation Updates Work
 
-Translation runs are triggered manually via the GitHub Actions workflow, typically ahead of a new release of the training materials (but can be done at any time).
-A maintainer triggers the workflow, which detects what has changed and updates the relevant translations.
-
-The workflow handles three types of changes:
+Translation runs are triggered manually via the GitHub Actions workflow (**Actions** → **Translate** → **Run workflow**), typically ahead of a new release of the training materials (but can be done at any time).
+The workflow detects what has changed since the last translation run and updates accordingly:
 
 1. **English source files changed** → Outdated translations are updated
-2. **Language-specific prompt changed** → That language's translations are fixed to comply with new guidelines
+2. **Language-specific prompt changed** → That language's translations are re-translated
 3. **General prompt changed** → All languages are re-translated
 
 ```mermaid
 flowchart TD
-    A[Maintainer triggers<br>translation workflow] --> B{What changed<br>since last run?}
-    B -->|English content| C[Detect outdated translations]
-    B -->|Language prompt| D[Fix that language's translations]
-    B -->|General prompt| E[Fix ALL languages]
-    C --> F{Any outdated?}
-    F -->|No| G[Done]
-    F -->|Yes| H[AI updates changed sections]
-    D --> I[AI reviews & fixes translations]
-    E --> I
-    H --> J[Create PR for each language]
-    I --> J
-    J --> K[Human review]
-    K --> L{Approved?}
-    L -->|Yes| M[Merge PR promptly]
-    L -->|No| N[Update llm-prompt.md]
-    N --> O[Re-run translation]
-    O --> K
+    A[Maintainer triggers<br>translation workflow] --> B[Detect baseline from<br>last translation PR]
+    B --> C{What changed<br>since baseline?}
+    C -->|English content| D[Find outdated translations]
+    C -->|Language prompt| E[Mark ALL translations<br>for that language outdated]
+    C -->|General prompt| F[Mark ALL languages outdated]
+    D --> G{Any outdated?}
+    G -->|No| H[Done]
+    G -->|Yes| I[AI updates changed sections<br>using incremental diffs]
+    E --> J[AI re-translates<br>affected files]
+    F --> J
+    I --> K[Post-process and verify]
+    J --> K
+    K --> L[Create PR with<br>updated translations]
+    L --> M[Human review]
+    M --> N{Approved?}
+    N -->|Yes| O[Merge PR promptly]
+    N -->|No| P[Update llm-prompt.md<br>and re-run workflow]
+    P --> A
 ```
 
 ### Key Points
@@ -181,9 +184,10 @@ flowchart TD
 - Translation runs are **triggered manually**, not automatically on push
 - Runs are typically done **ahead of a new release**, but can be triggered at any time
 - The AI makes **minimal changes**, updating only sections that changed in English
+- When prompts change, all translations for the affected language(s) are re-translated
 - Translations preserve line-by-line structure for easy diff review
-- Each language gets a separate PR for independent review/merge
-- The system uses git commit timestamps to detect outdated files
+- Each run creates a single PR containing updates for all affected languages
+- The system uses the last merged translation PR's commit SHA as the baseline for change detection
 - **Translation PRs should be merged promptly** to avoid them stacking up or becoming outdated
 
 ---
@@ -217,7 +221,7 @@ When reviewing a translation PR, follow these guidelines:
 <!-- prettier-ignore-start -->
 > [!CAUTION]
 > **Do NOT suggest changes directly to translation PRs.**
-> Direct edits will be overwritten on the next automatic update.
+> Direct edits will be overwritten the next time the translation workflow runs.
 > Instead, update the translation prompts and re-run the translation.
 <!-- prettier-ignore-end -->
 
@@ -229,43 +233,45 @@ flowchart TD
     B -->|Wrong term| C[Update glossary in<br>docs/LANG/llm-prompt.md<br>or glossary.yml]
     B -->|Wrong style/tone| D[Update grammar rules in<br>docs/LANG/llm-prompt.md]
     B -->|Structural issue| E[Update rules in<br>_scripts/general-llm-prompt.md]
-    C --> F[Commit prompt change to same PR]
+    C --> F[Close translation PR]
     D --> F
     E --> F
-    F --> G[Trigger translation workflow]
-    G --> H[Review updated translation]
+    F --> G[Merge prompt fix to master]
+    G --> H[Re-trigger translation workflow]
+    H --> I[Review new translation PR]
 ```
 
 #### Workflow for Fixing Issues
 
-1. **Edit the appropriate prompt file** in the same PR branch:
+1. **Close the translation PR** (the translations will be regenerated)
 
-   - Language-specific issues → `docs/<lang>/llm-prompt.md`
-   - General formatting issues → `_scripts/general-llm-prompt.md`
+2. **Merge the prompt fix to master**:
 
-2. **Trigger the translation workflow** to regenerate:
+   - Language-specific issues → edit `docs/<lang>/llm-prompt.md`
+   - General formatting issues → edit `_scripts/general-llm-prompt.md`
+
+3. **Re-trigger the translation workflow**:
 
    - Go to **Actions** → **Translate** → **Run workflow**
-   - Select the language and `sync`
-   - Target the PR branch (not `master`)
+   - Select the language and `normal` mode
+   - The workflow creates a new PR with updated translations
 
-3. **Review the updated translation** to verify the fix
-
-4. **Approve and merge** once the translation is correct
+4. **Review the new translation PR** to verify the fix
 
 #### Example: Fixing a Wrong Term
 
 If "workflow" is incorrectly translated as "flujo" instead of "flujo de trabajo" in Spanish:
 
-1. In the PR branch, edit `docs/es/llm-prompt.md`
-2. Add or update the glossary entry:
+1. Close the current translation PR
+2. Edit `docs/es/llm-prompt.md` and add or update the glossary entry:
 
    | English  | Spanish                        |
    | -------- | ------------------------------ |
    | workflow | flujo de trabajo (NOT "flujo") |
 
-3. Run the translation workflow targeting this branch
-4. Verify the fix in the updated PR
+3. Merge the prompt change to master
+4. Re-trigger the translation workflow
+5. Verify the fix in the new translation PR
 
 ### Approving PRs
 
@@ -285,8 +291,8 @@ If a language exists but is missing content (e.g., Portuguese has `hello_nextflo
 
 1. Go to **Actions** → **Translate** → **Run workflow**
 2. Select language (e.g., `pt`)
-3. Select command: `sync`
-4. The workflow creates a PR with translations
+3. Select mode: `normal`
+4. The workflow detects missing translations and creates a PR
 
 ### Using the CLI (Requires API Key)
 
@@ -372,7 +378,7 @@ Use GitHub Actions:
 
 1. Go to **Actions** → **Translate** → **Run workflow**
 2. Select the new language
-3. Select command: `sync`
+3. Select mode: `normal`
 
 ### Step 6: Review and Iterate
 
