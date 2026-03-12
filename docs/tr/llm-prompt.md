@@ -108,6 +108,8 @@ When translating 'Summary/Özet' sections in tables or lists, use a consistent m
 - **"And so forth"**: Translate as "ve benzeri içerikler" to complete the sentence naturally.
 - **"Out of the way"**: Translate as "ayrı bir yerde" or "erişimi doğrudan olmayan" depending on context.
 - **"Poke around"**: Translate as "kodu incelemek" or "kurcalamak".
+- **Direct Narrative**: Instead of clunky structures like "Buna şu denir ve bu şudur", use fluid engineering language like "X olarak adlandırılan bu yapı...".
+- **Fluency**: Use natural equivalents like "Sizin belirleyeceğiniz bir isim" instead of translation-heavy phrases like "Bunun için uydurulabilecek bir ad".
 
 ## 2. Translation Context Rules
 
@@ -116,6 +118,7 @@ When translating 'Summary/Özet' sections in tables or lists, use a consistent m
 1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run).
 2. **In code comments**: TRANSLATE comments to Turkish (they are not executable).
 3. **In prose/explanatory text**: Follow the glossary below for translations.
+4. **Filenames**: Never translate technical filenames (e.g., `main.nf`, `demo.nf`).
 
 For example:
 
