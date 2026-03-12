@@ -4,6 +4,7 @@
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
+include { cowpy } from './modules/cowpy.nf'
 
 /*
  * Pipeline parameters
@@ -11,6 +12,7 @@ include { collectGreetings } from './modules/collectGreetings.nf'
 params {
     input: Path = 'data/greetings.csv'
     batch: String = 'batch'
+    character: String = 'turkey'
 }
 
 workflow {
@@ -26,28 +28,35 @@ workflow {
     convertToUpper(sayHello.out)
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
+    // generate ASCII art of the greetings with cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
 
     publish:
     first_output = sayHello.out
     uppercased = convertToUpper.out
     collected = collectGreetings.out.outfile
     batch_report = collectGreetings.out.report
+    cowpy_art = cowpy.out
 }
 
 output {
     first_output {
-        path 'hello_containers'
+        path 'hello_containers/intermediates'
         mode 'copy'
     }
     uppercased {
-        path 'hello_containers'
+        path 'hello_containers/intermediates'
         mode 'copy'
     }
     collected {
-        path 'hello_containers'
+        path 'hello_containers/intermediates'
         mode 'copy'
     }
     batch_report {
+        path 'hello_containers'
+        mode 'copy'
+    }
+    cowpy_art {
         path 'hello_containers'
         mode 'copy'
     }

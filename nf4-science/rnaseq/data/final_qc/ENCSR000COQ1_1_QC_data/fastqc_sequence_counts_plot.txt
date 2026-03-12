@@ -1,0 +1,2 @@
+Sample	Unique Reads	Duplicate Reads
+ENCSR000COQ1_1	17034.0	10782.0

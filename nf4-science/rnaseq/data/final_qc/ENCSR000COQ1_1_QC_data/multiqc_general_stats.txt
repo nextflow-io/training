@@ -1,0 +1,2 @@
+Sample	hisat2-overall_alignment_rate	cutadapt-percent_trimmed	fastqc-percent_duplicates	fastqc-percent_gc	fastqc-avg_sequence_length	fastqc-median_sequence_length	fastqc-percent_fails	fastqc-total_sequences
+ENCSR000COQ1_1	94.43	0.6300330744895025	38.765458728789184	51.0	76.0	76	18.181818181818183	0.027816

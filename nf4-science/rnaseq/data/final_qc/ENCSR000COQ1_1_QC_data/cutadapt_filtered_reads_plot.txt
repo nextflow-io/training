@@ -1,0 +1,2 @@
+Sample	Reads passing filters
+ENCSR000COQ1_1	27816.0

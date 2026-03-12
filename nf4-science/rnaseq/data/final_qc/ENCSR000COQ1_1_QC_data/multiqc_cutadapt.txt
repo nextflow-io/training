@@ -1,0 +1,2 @@
+Sample	cutadapt_version	r_processed	r_with_adapters	r_written	bp_processed	quality_trimmed	bp_written	percent_trimmed
+ENCSR000COQ1_1	4.9	27816	9173	27816	2114016	0	2100697	0.6300330744895025

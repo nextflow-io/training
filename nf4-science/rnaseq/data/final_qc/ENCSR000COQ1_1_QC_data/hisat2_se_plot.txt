@@ -1,0 +1,2 @@
+Sample	SE mapped uniquely	SE multimapped	SE not aligned
+ENCSR000COQ1_1	25410.0	856.0	1550.0
