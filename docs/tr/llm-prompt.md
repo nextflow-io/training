@@ -101,6 +101,14 @@ When translating 'Summary/Özet' sections in tables or lists, use a consistent m
 
 - **Example**: "Mevcut bir pipeline'ı çalıştırmak" or "...çalıştırılır".
 
+### 1.7. Specific Idioms and Definitions
+
+- **Definitions**: Avoid clunky passive structures like "X olarak adlandırılır". Instead, use more natural phrasing like "X adı verilen...".
+  - *Example*: Instead of "Metro haritası olarak adlandırılır", use "metro haritası (subway map) adı verilen görsel temsil".
+- **"And so forth"**: Translate as "ve benzeri içerikler" to complete the sentence naturally.
+- **"Out of the way"**: Translate as "ayrı bir yerde" or "erişimi doğrudan olmayan" depending on context.
+- **"Poke around"**: Translate as "kodu incelemek" or "kurcalamak".
+
 ## 2. Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
@@ -276,6 +284,9 @@ These terms should be translated in prose (but kept in English in code):
 | peer review   | hakem değerlendirmesi    |
 | curated set   | özenle seçilmiş / denetlenmiş koleksiyon |
 | community effort | topluluk girişimi / topluluk çabası |
+| retrieve      | çekmek / almak / indirmek|
+| pull          | çekmek / indirmek        |
+| plain code    | yalın kod / standart kod |
 
 ## 7. Admonition Titles
 
@@ -291,8 +302,8 @@ These terms should be translated in prose (but kept in English in code):
 ## 8. Section Headers
 
 | English           | Turkish        |
-| ----------------- | -------------- |
-| Takeaway          | Özet           |
+| ----------------- | ------------------------ |
+| Takeaway          | Özetle / Öğrendiklerimiz |
 | What's next?      | Sırada ne var? |
 | Warmup            | Isınma         |
 | Environment Setup | Ortam Kurulumu |
