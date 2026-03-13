@@ -11,7 +11,7 @@ The target language for this translation is **Korean** (`ko`).
 - Preserve personality and humor where present (e.g., "그동안 차 한 잔을 준비하거나" for suggesting a tea break)
 - **Avoid run-on sentences**: Split long, complex sentences into shorter ones or use commas (,) appropriately to improve readability
 - **Natural phrasing**: When translating "introduce information", prefer "학습하다" (learn) or "다루다" (cover) instead of direct translation like "소개하다"
-  - **Avoid literal translations of English metaphors** such as "dive into", "jump into", or "dig into".  
+  - **Avoid literal translations of English metaphors** such as "dive into", "jump into", or "dig into".
   - Use neutral verbs instead, such as:
     - 시작하다
     - 진행하다
@@ -23,20 +23,24 @@ The target language for this translation is **Korean** (`ko`).
 Avoid literal translations of English instructional phrasing commonly used in tutorials.
 
 English documentation often uses phrases like:
+
 - "let’s run the workflow"
 - "now we will look at"
 - "next we will configure"
 
 In Korean technical documentation, prefer direct instructional forms such as:
+
 - 실행합니다
 - 확인합니다
 - 다음 단계에서는
 
 Example:
-- "Let's run the workflow."  
+
+- "Let's run the workflow."
   → **워크플로를 실행합니다.**
 
 Not:
+
 - **워크플로를 실행해 보겠습니다.**
 
 ## 2. Translation Context Rules
@@ -56,6 +60,7 @@ For example:
 ### 2.1 Terminology Rules
 
 Use the following terminology mappings when translating technical documentation:
+
 - Translate **"configuration"** as **설정** in software contexts.
   Avoid translating it as **구성** unless referring to system composition or architecture.
 - Translate **"argument"** as **인자** in programming contexts (e.g., command-line argument → 명령줄 인자).
@@ -100,6 +105,7 @@ For UI elements, consider including English in parentheses to help users match t
 - "**파일 탐색기(File Explorer)**"
 
 When translating UI instructions that refer to keyboard shortcuts:
+
 - Translate **"depending on your equipment"** as **사용 중인 운영체제에 따라** when referring to OS differences (e.g., Ctrl vs Cmd)
 - Avoid literal translations such as **장비에 따라**
 
@@ -168,20 +174,20 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 
 ### Transliterations (음차)
 
-| English   | Korean     | Notes                      |
-| --------- | ---------- | -------------------------- |
-| workflow  | 워크플로  | Standard transliteration used in Korean technical documentation     |
-| pipeline  | 파이프라인 | Common transliteration     |
-| terminal  | 터미널     | Common transliteration     |
-| container | 컨테이너   | Common transliteration     |
-| sidebar   | 사이드바   | Common transliteration     |
-| module    | 모듈       | Common transliteration     |
-| sample    | 샘플       | Common transliteration     |
-| tuple     | 튜플       | Common transliteration     |
-| index     | 인덱스     | Common transliteration     |
-| core      | 코어       | Common transliteration     |
-| directory | 디렉토리   | Transliteration acceptable |
-| file      | 파일       | Transliteration            |
+| English   | Korean     | Notes                                                           |
+| --------- | ---------- | --------------------------------------------------------------- |
+| workflow  | 워크플로   | Standard transliteration used in Korean technical documentation |
+| pipeline  | 파이프라인 | Common transliteration                                          |
+| terminal  | 터미널     | Common transliteration                                          |
+| container | 컨테이너   | Common transliteration                                          |
+| sidebar   | 사이드바   | Common transliteration                                          |
+| module    | 모듈       | Common transliteration                                          |
+| sample    | 샘플       | Common transliteration                                          |
+| tuple     | 튜플       | Common transliteration                                          |
+| index     | 인덱스     | Common transliteration                                          |
+| core      | 코어       | Common transliteration                                          |
+| directory | 디렉토리   | Transliteration acceptable                                      |
+| file      | 파일       | Transliteration                                                 |
 
 ### Actual Translations
 
