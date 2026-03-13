@@ -132,6 +132,7 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | core      | 코어       | Common transliteration     |
 | directory | 디렉토리   | Transliteration acceptable |
 | file      | 파일       | Transliteration            |
+|genome reference |레퍼런스 게놈 |Common transliteration  |
 
 ### Actual Translations
 
