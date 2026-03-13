@@ -165,7 +165,9 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | lowercase     | 소문자      | Actual translation                                                      |
 | materials     | 자료        | Actual translation                                                      |
 | course        | 과정        | Actual translation                                                      |
-| guided exercise | 유도형 실습 | Mixed                                                                 |
+| guided exercise | 유도형 실습 | Not 안내 연습                                                          |
+| Customizing pipeline behavior | 파이프라인 동작의 맞춤화 | NOT 파이프라인 동작 사용자 정의                |
+| transcriptomics imaging | 전사체 이미지 | Actual translation                                           |
 
 ### Parsing Note
 
