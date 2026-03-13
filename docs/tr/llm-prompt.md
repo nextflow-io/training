@@ -105,7 +105,7 @@ When translating 'Summary/Özet' sections in tables or lists, use a consistent m
 ### 1.7. Specific Idioms and Definitions
 
 - **Definitions**: Avoid clunky passive structures like "X olarak adlandırılır". Instead, use more natural phrasing like "X adı verilen...".
-  - *Example*: Instead of "Metro haritası olarak adlandırılır", use "metro haritası (subway map) adı verilen görsel temsil".
+  - _Example_: Instead of "Metro haritası olarak adlandırılır", use "metro haritası (subway map) adı verilen görsel temsil".
 - **Direct Narrative**: Instead of structures like "Buna şu denir ve bu şudur", use fluid engineering language like "X olarak adlandırılan bu yapı...".
 - **"And so forth"**: Translate as "ve benzerleri" to complete the sentence naturally.
 - **"Out of the way"**: Translate as "ayrı bir yerde" or "erişimi doğrudan olmayan" depending on context.
@@ -144,6 +144,7 @@ For example:
 ### Code Block Titles
 
 Translate descriptive titles in code blocks, but keep filenames intact.
+
 - `title="Syntax"` → `title="Sözdizimi"`
 - `title="main.nf"` → `title="main.nf"`
 
@@ -265,52 +266,52 @@ Correct:
 
 These terms should be translated in prose (but kept in English in code):
 
-| English       | Turkish                  |
-| ------------- | ------------------------ |
-| channel       | kanal                    |
-| process       | süreç                    |
-| workflow      | iş akışı                 |
-| pipeline      | pipeline / iş hattı      |
-| directive     | yönerge                  |
-| container     | konteyner                |
-| input         | girdi                    |
-| output        | çıktı                    |
-| task          | görev                    |
-| tuple         | demet                    |
-| operator      | operatör                 |
-| parameter     | parametre                |
-| environment   | ortam                    |
-| directory     | dizin                    |
-| file          | dosya                    |
-| sample        | örnek                    |
-| alignment     | hizalama                 |
-| reference     | referans                 |
-| training      | eğitim                   |
-| module        | modül                    |
-| command       | komut                    |
-| index         | indeks (BWA/Samtools) / indis (dizi) |
-| run           | çalıştırmak / çalıştırma |
-| conventions   | kurallar / gelenekler    |
-| best practices| en iyi uygulamalar       |
-| portable      | taşınabilir              |
-| robust        | dayanıklı / güçlü        |
-| validation    | doğrulama                |
-| reproducibility | tekrarlanabilirlik     |
-| script        | betik / script           |
-| executor      | yürütücü                 |
-| configuration | yapılandırma             |
-| resume        | devam ettirme            |
-| publish       | yayımlamak (dosya çıkışı)|
-| emit          | yayınlamak (veri akışı)  |
-| collect       | toplamak                 |
-| wrap          | kapsamak                 |
-| overview      | giriş                    |
-| peer review   | hakem değerlendirmesi    |
-| curated set   | özenle seçilmiş / denetlenmiş koleksiyon |
-| community effort | topluluk girişimi / topluluk çabası |
-| retrieve      | çekmek / almak / indirmek|
-| pull          | çekmek / indirmek        |
-| plain code    | yalın kod / standart kod |
+| English          | Turkish                                  |
+| ---------------- | ---------------------------------------- |
+| channel          | kanal                                    |
+| process          | süreç                                    |
+| workflow         | iş akışı                                 |
+| pipeline         | pipeline / iş hattı                      |
+| directive        | yönerge                                  |
+| container        | konteyner                                |
+| input            | girdi                                    |
+| output           | çıktı                                    |
+| task             | görev                                    |
+| tuple            | demet                                    |
+| operator         | operatör                                 |
+| parameter        | parametre                                |
+| environment      | ortam                                    |
+| directory        | dizin                                    |
+| file             | dosya                                    |
+| sample           | örnek                                    |
+| alignment        | hizalama                                 |
+| reference        | referans                                 |
+| training         | eğitim                                   |
+| module           | modül                                    |
+| command          | komut                                    |
+| index            | indeks (BWA/Samtools) / indis (dizi)     |
+| run              | çalıştırmak / çalıştırma                 |
+| conventions      | kurallar / gelenekler                    |
+| best practices   | en iyi uygulamalar                       |
+| portable         | taşınabilir                              |
+| robust           | dayanıklı / güçlü                        |
+| validation       | doğrulama                                |
+| reproducibility  | tekrarlanabilirlik                       |
+| script           | betik / script                           |
+| executor         | yürütücü                                 |
+| configuration    | yapılandırma                             |
+| resume           | devam ettirme                            |
+| publish          | yayımlamak (dosya çıkışı)                |
+| emit             | yayınlamak (veri akışı)                  |
+| collect          | toplamak                                 |
+| wrap             | kapsamak                                 |
+| overview         | giriş                                    |
+| peer review      | hakem değerlendirmesi                    |
+| curated set      | özenle seçilmiş / denetlenmiş koleksiyon |
+| community effort | topluluk girişimi / topluluk çabası      |
+| retrieve         | çekmek / almak / indirmek                |
+| pull             | çekmek / indirmek                        |
+| plain code       | yalın kod / standart kod                 |
 
 ## 7. Admonition Titles
 
@@ -325,13 +326,13 @@ These terms should be translated in prose (but kept in English in code):
 
 ## 8. Section Headers
 
-| English           | Turkish        |
+| English           | Turkish                  |
 | ----------------- | ------------------------ |
 | Takeaway          | Özetle / Öğrendiklerimiz |
-| What's next?      | Sırada ne var? |
-| Warmup            | Isınma         |
-| Environment Setup | Ortam Kurulumu |
-| Getting Started   | Başlarken      |
+| What's next?      | Sırada ne var?           |
+| Warmup            | Isınma                   |
+| Environment Setup | Ortam Kurulumu           |
+| Getting Started   | Başlarken                |
 
 ## 9. Tab Labels
 
