@@ -165,6 +165,7 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | lowercase     | 소문자      | Actual translation                                                      |
 | materials     | 자료        | Actual translation                                                      |
 | course        | 과정        | Actual translation                                                      |
+| Nextflow command | Nextflow 명령어 | Actual translation                                                      |
 
 ### Parsing Note
 
