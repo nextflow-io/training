@@ -2,350 +2,350 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://training.nextflow.io/pl/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/help/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/envsetup/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/envsetup/01_setup/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/envsetup/02_local/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/envsetup/03_devcontainer/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/00_orientation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/01_hello_world/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/02_hello_channels/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/03_hello_workflow/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/04_hello_modules/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/05_hello_containers/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/06_hello_config/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/next_steps/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/survey/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/transcripts/00_orientation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/transcripts/01_hello_world/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/transcripts/02_hello_channels/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/transcripts/03_hello_workflow/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/transcripts/04_hello_modules/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/transcripts/05_hello_containers/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/transcripts/06_hello_config/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nextflow/transcripts/07_next_steps/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nf-core/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nf-core/00_orientation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nf-core/01_run_demo/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nf-core/02_rewrite_hello/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nf-core/03_use_module/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nf-core/04_make_module/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nf-core/05_input_validation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nf-core/next_steps/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/hello_nf-core/survey/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/info/conventions/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/info/hello_pipeline/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/info/nxf_versions/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nextflow_run/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nextflow_run/00_orientation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nextflow_run/01_basics/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nextflow_run/02_pipeline/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nextflow_run/03_config/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nextflow_run/next_steps/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nextflow_run/survey/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/_template/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/_template/00_orientation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/_template/01_method/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/_template/02_single_sample/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/_template/03_multi_sample/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/_template/next_steps/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/_template/survey/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/genomics/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/genomics/00_orientation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/genomics/01_method/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/genomics/02_per_sample_variant_calling/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/genomics/03_joint_calling/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/genomics/next_steps/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/genomics/survey/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/imaging/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/imaging/00_orientation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/imaging/01_basics/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/imaging/02_run_molkart/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/imaging/03_inputs/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/imaging/04_config/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/imaging/next_steps/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/imaging/survey/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/rnaseq/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/rnaseq/00_orientation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/rnaseq/01_method/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/rnaseq/02_single-sample/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/rnaseq/03_multi-sample/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/rnaseq/next_steps/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/nf4_science/rnaseq/survey/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/debugging/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/dev_environment/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/essential_scripting_patterns/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/metadata/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/nf-test/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/orientation/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/splitting_and_grouping/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/workflows_of_workflows/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/working_with_files/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/ideas/containers/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/side_quests/ideas/if_else/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/training_collections/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
     <url>
          <loc>https://training.nextflow.io/pl/training_collections/architects_toolkit_1/</loc>
-         <lastmod>2026-03-12</lastmod>
+         <lastmod>2026-03-13</lastmod>
     </url>
 </urlset>
