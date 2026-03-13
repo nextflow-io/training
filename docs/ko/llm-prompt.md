@@ -147,6 +147,7 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | standalone    | 단독        | Not 독립 (political independence)                                       |
 | mini-course   | 단기 과정   | Not 미니 과정 (too casual)                                              |
 | wrap          | 적용하다    | Not 래핑하다 (sounds like physical packaging)                           |
+| nested        | 내포된      | Not 중첩된 (sounds like 'overlapped')                                   |
 | training      | 교육        | Actual translation                                                      |
 | environment   | 환경        | Actual translation                                                      |
 | repository    | 저장소      | Actual translation                                                      |
@@ -168,6 +169,7 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | guided exercise | 유도형 실습 | Not 안내 연습                                                          |
 | Customizing pipeline behavior | 파이프라인 동작의 맞춤화 | NOT 파이프라인 동작 사용자 정의                |
 | transcriptomics imaging | 전사체 이미지 | Actual translation                                           |
+
 
 ### Parsing Note
 
