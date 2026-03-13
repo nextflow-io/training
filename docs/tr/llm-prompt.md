@@ -8,6 +8,7 @@ The target language for this translation is **Turkish** (`tr`).
 - Follow Turkish Language Association (TDK) spelling conventions (kurallar).
 - Prefer active voice when possible.
 - Pay strict attention to vowel harmony in all suffixes and borrowed-word inflections.
+- **Tone**: Maintain the educational future tense (`öğreneceksiniz`, `yapacaksınız`) found in the source, but ensure the phrasing is natural and free of "translation smell" (anlamsız kelime dizilimleri).
 
 ### 1.1. Punctuation: Comma, Semicolon, and Period
 
@@ -77,6 +78,42 @@ This applies to all trailing English phrases such as:
 - "by running..." → "...çalıştırarak, [ana cümle]"
 - "before doing X..." → "X yapmadan önce, [ana cümle]"
 
+### 1.3. Handling Long Introductory Phrases and Complex Sentences
+
+When translating structures like "You will be introduced to [X]...":
+
+- If [X] is very long, start with "X ile tanışacaksınız" or move the main subject to the beginning as an independent sentence.
+- If the source sentence has too many subordinate clauses, split it into two meaningful parts instead of forcing a single complex inverted sentence.
+  - **Preferred structure**: "X ile tanışacaksınız. Bu oluşum aynı zamanda Y ve Z'yi de içerir."
+
+### 1.4. Sentence-Initial '-ing' Phrases
+
+When translating sentences starting with long '-ing' phrases (e.g., "Working through..."), do not detach them from the main clause. Use Turkish adverbial participles (zarf-fiil: `-arak`, `-erek`) to connect them fluently to the main verb.
+
+- **Example**: "Working through practical examples..." → "Pratik örnekler üzerinden çalışarak..."
+
+### 1.5. Handling "Because" in Long Sentences
+
+If a sentence is connected by "because" and is very long, split it into two sentences. End the first sentence with a period and start the new sentence with "Zira," or "Bunun nedeni," to improve readability.
+
+### 1.6. Actions in Summaries/Lists
+
+When translating 'Summary/Özet' sections in tables or lists, use a consistent mood. If an action is described (Run, Explore, Create), use either the infinitive (`-mak`/`-mek`) or simple present tense.
+
+- **Example**: "Mevcut bir pipeline'ı çalıştırmak" or "...çalıştırılır".
+
+### 1.7. Specific Idioms and Definitions
+
+- **Definitions**: Avoid clunky passive structures like "X olarak adlandırılır". Instead, use more natural phrasing like "X adı verilen...".
+  - _Example_: Instead of "Metro haritası olarak adlandırılır", use "metro haritası (subway map) adı verilen görsel temsil".
+- **Direct Narrative**: Instead of structures like "Buna şu denir ve bu şudur", use fluid engineering language like "X olarak adlandırılan bu yapı...".
+- **"And so forth"**: Translate as "ve benzerleri" to complete the sentence naturally.
+- **"Out of the way"**: Translate as "ayrı bir yerde" or "erişimi doğrudan olmayan" depending on context.
+- **"Poke around"**: Translate as "kodu incelemek" or "kurcalamak".
+- **Fluency**: Use natural equivalents like "Sizin belirleyeceğiniz bir isim" instead of translation-heavy phrases like "Bunun için uydurulabilecek bir ad".
+- **Placeholders**: When describing symbols like `< >` in command line examples, refer to them as "yer tutucular".
+- **Engineering Terminology**: If a term refers to both a biological process and a software component, prioritize engineering terminology (e.g., "Read trimming" → "Okuma kırpma işlemi").
+
 ## 2. Translation Context Rules
 
 **Important distinction**: Some technical terms have different translation rules depending on context:
@@ -84,12 +121,32 @@ This applies to all trailing English phrases such as:
 1. **In code blocks**: Keep ALL Nextflow syntax in English (the code must run).
 2. **In code comments**: TRANSLATE comments to Turkish (they are not executable).
 3. **In prose/explanatory text**: Follow the glossary below for translations.
+4. **Filenames**: Never translate technical filenames (e.g., `main.nf`, `demo.nf`).
 
 For example:
 
 - In prose: "Giriş kanalı dosyaları alır..." (translate "channel" to "kanal")
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
 - In comments: `// emit a greeting` → `// bir selamlama yayınla`
+
+### Specific Nextflow Keywords
+
+- **`take`, `main`, `topic`**: Keep these keywords in English within code blocks.
+- **Prose Translation**: When explaining these structures in text, use Turkish equivalents:
+  - `take` / `main` → "iş akışı girişi" or "kanal tanımı".
+  - `emit` vs `publish`: Use "yayınlamak" for internal data flow (`emit`) and "yayımlamak" for writing files externally (`publish`).
+
+### Groovy Data Types
+
+- Keep specific Groovy/Nextflow types in English to maintain technical accuracy: **Closure**, **Map**, **List**, **Channel**, **Value**, **Queue**.
+- Translate general references: "list of files" → "dosya listesi".
+
+### Code Block Titles
+
+Translate descriptive titles in code blocks, but keep filenames intact.
+
+- `title="Syntax"` → `title="Sözdizimi"`
+- `title="main.nf"` → `title="main.nf"`
 
 ## 3. Code Comments
 
@@ -209,41 +266,52 @@ Correct:
 
 These terms should be translated in prose (but kept in English in code):
 
-| English       | Turkish                  |
-| ------------- | ------------------------ |
-| channel       | kanal                    |
-| process       | süreç                    |
-| workflow      | iş akışı                 |
-| pipeline      | boru hattı / pipeline    |
-| directive     | yönerge                  |
-| container     | konteyner                |
-| input         | girdi                    |
-| output        | çıktı                    |
-| task          | görev                    |
-| tuple         | demet                    |
-| operator      | operatör                 |
-| parameter     | parametre                |
-| environment   | ortam                    |
-| directory     | dizin                    |
-| file          | dosya                    |
-| sample        | örnek                    |
-| alignment     | hizalama                 |
-| reference     | referans                 |
-| training      | eğitim                   |
-| module        | modül                    |
-| command       | komut                    |
-| index         | dizin (index for files)  |
-| run           | çalıştırmak / çalıştırma |
-| conventions   | kurallar                 |
-| script        | betik / script           |
-| executor      | yürütücü                 |
-| configuration | yapılandırma             |
-| resume        | devam ettirme            |
-| publish       | yayımlamak               |
-| emit          | yayınlamak               |
-| collect       | toplamak                 |
-| wrap          | kapsamak                 |
-| overview      | giriş                    |
+| English          | Turkish                                  |
+| ---------------- | ---------------------------------------- |
+| channel          | kanal                                    |
+| process          | süreç                                    |
+| workflow         | iş akışı                                 |
+| pipeline         | pipeline / iş hattı                      |
+| directive        | yönerge                                  |
+| container        | konteyner                                |
+| input            | girdi                                    |
+| output           | çıktı                                    |
+| task             | görev                                    |
+| tuple            | demet                                    |
+| operator         | operatör                                 |
+| parameter        | parametre                                |
+| environment      | ortam                                    |
+| directory        | dizin                                    |
+| file             | dosya                                    |
+| sample           | örnek                                    |
+| alignment        | hizalama                                 |
+| reference        | referans                                 |
+| training         | eğitim                                   |
+| module           | modül                                    |
+| command          | komut                                    |
+| index            | indeks (BWA/Samtools) / indis (dizi)     |
+| run              | çalıştırmak / çalıştırma                 |
+| conventions      | kurallar / gelenekler                    |
+| best practices   | en iyi uygulamalar                       |
+| portable         | taşınabilir                              |
+| robust           | dayanıklı / güçlü                        |
+| validation       | doğrulama                                |
+| reproducibility  | tekrarlanabilirlik                       |
+| script           | betik / script                           |
+| executor         | yürütücü                                 |
+| configuration    | yapılandırma                             |
+| resume           | devam ettirme                            |
+| publish          | yayımlamak (dosya çıkışı)                |
+| emit             | yayınlamak (veri akışı)                  |
+| collect          | toplamak                                 |
+| wrap             | kapsamak                                 |
+| overview         | giriş                                    |
+| peer review      | hakem değerlendirmesi                    |
+| curated set      | özenle seçilmiş / denetlenmiş koleksiyon |
+| community effort | topluluk girişimi / topluluk çabası      |
+| retrieve         | çekmek / almak / indirmek                |
+| pull             | çekmek / indirmek                        |
+| plain code       | yalın kod / standart kod                 |
 
 ## 7. Admonition Titles
 
@@ -258,13 +326,13 @@ These terms should be translated in prose (but kept in English in code):
 
 ## 8. Section Headers
 
-| English           | Turkish        |
-| ----------------- | -------------- |
-| Takeaway          | Özet           |
-| What's next?      | Sırada ne var? |
-| Warmup            | Isınma         |
-| Environment Setup | Ortam Kurulumu |
-| Getting Started   | Başlarken      |
+| English           | Turkish                  |
+| ----------------- | ------------------------ |
+| Takeaway          | Özetle / Öğrendiklerimiz |
+| What's next?      | Sırada ne var?           |
+| Warmup            | Isınma                   |
+| Environment Setup | Ortam Kurulumu           |
+| Getting Started   | Başlarken                |
 
 ## 9. Tab Labels
 
