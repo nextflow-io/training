@@ -132,21 +132,23 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | core      | 코어       | Common transliteration     |
 | directory | 디렉토리   | Transliteration acceptable |
 | file      | 파일       | Transliteration            |
+| assembling| 구성      | Transliteration            |
+| paired-end| 페어드 엔드 | Transliteration            |
 
 ### Actual Translations
 
 | English       | Korean      | Notes                                                                   |
 | ------------- | ----------- | ----------------------------------------------------------------------- |
-| archived      | 아카이브된  | Transliteration, not 보관된 (standard for tech contexts)                |
+| archived      | 아카이브된  | Transliteration, not 보관된 (standard for tech contexts)                 |
 | channel       | 채널        | Transliteration but treated as translation                              |
-| dependency    | 의존성      | Not 종속성 (의존성 is standard in Korean tech community)                |
-| gradually     | 단계적으로  | Not 점진적으로 (단계적으로 = step-by-step, better for tutorials)        |
-| parser        | 분석기      | Not 파서 (more formal, e.g., AWS uses 로그 분석기 for "Log parser")     |
+| dependency    | 의존성      | Not 종속성 (의존성 is standard in Korean tech community)                 |
+| gradually     | 단계적으로  | Not 점진적으로 (단계적으로 = step-by-step, better for tutorials)          |
+| parser        | 분석기      | Not 파서 (more formal, e.g., AWS uses 로그 분석기 for "Log parser")      |
 | process       | 프로세스    | Transliteration but treated as translation                              |
-| sleep         | 중지(sleep) | Not 절전 (power saving). Context: "Codespace goes to sleep" = 중지 상태 |
+| sleep         | 중지(sleep) | Not 절전 (power saving). Context: "Codespace goes to sleep" = 중지 상태  |
 | standalone    | 단독        | Not 독립 (political independence)                                       |
-| mini-course   | 단기 과정   | Not 미니 과정 (too casual)                                              |
-| wrap          | 적용하다    | Not 래핑하다 (sounds like physical packaging)                           |
+| mini-course   | 단기 과정   | Not 미니 과정 (too casual)                                               |
+| wrap          | 적용하다    | Not 래핑하다 (sounds like physical packaging)                            |
 | training      | 교육        | Actual translation                                                      |
 | environment   | 환경        | Actual translation                                                      |
 | repository    | 저장소      | Actual translation                                                      |
@@ -165,7 +167,8 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | lowercase     | 소문자      | Actual translation                                                      |
 | materials     | 자료        | Actual translation                                                      |
 | course        | 과정        | Actual translation                                                      |
-| Nextflow command | Nextflow 명령어 | Actual translation                                                      |
+| Nextflow command | Nextflow 명령어 | Actual translation                                               |
+| aggregate     | 결합        | Actual translation                                                      |
 
 ### Parsing Note
 
