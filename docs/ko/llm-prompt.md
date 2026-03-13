@@ -57,7 +57,7 @@ For example:
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
 - In comments: `// emit a greeting` → `// 인사말을 내보냅니다`
 
-### 2.1 Terminology Rules
+### 2.1. Terminology Rules
 
 Use the following terminology mappings when translating technical documentation:
 
