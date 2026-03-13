@@ -134,6 +134,7 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | file      | 파일       | Transliteration            |
 | assembling| 구성      | Transliteration            |
 | paired-end| 페어드 엔드 | Transliteration            |
+|genome reference |레퍼런스 게놈 |Common transliteration  |
 
 ### Actual Translations
 
@@ -149,6 +150,9 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | standalone    | 단독        | Not 독립 (political independence)                                       |
 | mini-course   | 단기 과정   | Not 미니 과정 (too casual)                                               |
 | wrap          | 적용하다    | Not 래핑하다 (sounds like physical packaging)                            |
+| mini-course   | 단기 과정   | Not 미니 과정 (too casual)                                              |
+| wrap          | 적용하다    | Not 래핑하다 (sounds like physical packaging)                           |
+| nested        | 내포된      | Not 중첩된 (sounds like 'overlapped')                                   |
 | training      | 교육        | Actual translation                                                      |
 | environment   | 환경        | Actual translation                                                      |
 | repository    | 저장소      | Actual translation                                                      |
@@ -169,6 +173,12 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | course        | 과정        | Actual translation                                                      |
 | Nextflow command | Nextflow 명령어 | Actual translation                                               |
 | aggregate     | 결합        | Actual translation                                                      |
+| list of genomic intervals | 유전체 구간 목록 | Actual translation                                       |
+| germline      | 생식세포     | Actual translation                                                     |
+| guided exercise | 유도형 실습 | Not 안내 연습                                                          |
+| Customizing pipeline behavior | 파이프라인 동작의 맞춤화 | NOT 파이프라인 동작 사용자 정의                |
+| transcriptomics imaging | 전사체 이미지 | Actual translation                                           |
+
 
 ### Parsing Note
 
@@ -203,3 +213,4 @@ Note: "parser" is translated as 분석기, but "parsing" is typically transliter
 | Before  | 전     |
 | Gitpod  | Gitpod |
 | Local   | 로컬   |
+
