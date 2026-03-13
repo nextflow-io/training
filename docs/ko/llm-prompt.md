@@ -133,6 +133,8 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | directory | 디렉토리   | Transliteration acceptable |
 | file      | 파일       | Transliteration            |
 | assembling| 구성      | Transliteration            |
+| paired-end| 페어드 엔드 | Transliteration            |
+
 ### Actual Translations
 
 | English       | Korean      | Notes                                                                   |
