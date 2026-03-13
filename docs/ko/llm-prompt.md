@@ -165,6 +165,8 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | lowercase     | 소문자      | Actual translation                                                      |
 | materials     | 자료        | Actual translation                                                      |
 | course        | 과정        | Actual translation                                                      |
+| list of genomic intervals | 유전체 구간 목록 | Actual translation                                       |
+
 
 ### Parsing Note
 
