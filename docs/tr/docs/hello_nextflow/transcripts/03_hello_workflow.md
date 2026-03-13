@@ -210,9 +210,7 @@ Tamam, work dizininde o ikinci dosyayı oluşturuyoruz, ama Nextflow'a bunu bu s
 
 Tamam, bu harika. Artık bu çıktılara burada tıpkı burada yaptığım gibi erişebiliriz. Ama şimdi bu farklı nesnelerin bir dizisi; bu yüzden ilkini almak için `collectGreetings.out[0]` veya yeni raporumuz olan ikincisini almak için `[1]` yapabilirim.
 
-Ama bunu yapmayı pek sevmiyorum çünkü indeks saymayı karıştırmak oldukça kolay. Oturmuş çok fazla satır sayıyorsunuz, yeni bir çıktı ekliyorsunuz ve aniden her şey bozuluyor. Bu yüzden
-
-her şeyi isme göre referans vermek çok daha güzel. Bunu burada `emit` adlı özel bir anahtar ile yapabiliriz.
+Ama bunu yapmayı pek sevmiyorum çünkü indeks saymayı karıştırmak oldukça kolay. Oturmuş çok fazla satır sayıyorsunuz, yeni bir çıktı ekliyorsunuz ve aniden her şey bozuluyor. Bu yüzden her şeyi isme göre referans vermek çok daha güzel. Bunu burada `emit` adlı özel bir anahtar ile yapabiliriz.
 
 Buna istediğimiz her şeyi çağırabiliriz. `emit outfile` ve `emit reports` diyelim. Bunları tanımlarsanız - bunu bir ya da birçok üzerinde yapabilirsiniz, size kalmış - artık buraya gidip bunun yerine `.out.reports` yapabilir ve sadece isme göre çağırabilirim. Bu, kodunuzu okuduğunuzda anlamak çok daha kolay ve koddaki değişikliklere karşı daha güvenli.
 
@@ -228,7 +226,7 @@ Nextflow kodunda yürütüldüğünü kanıtlamak için work dizinine girersem -
 
 Böylece script bloğu ile onun üzerindeki herhangi bir şey arasındaki o ayrımı görebilirsiniz. Umarım bu mantıklı gelir.
 
-## Özet ve test
+## Özetle ve test
 
 Tamam, Hello Nextflow'un bu bölümünün sonu. Yani daha önce olduğu gibi, gidin ve testi kontrol edin. Bunu web sayfasında veya CLI'da yapın, bazı sorulardan geçin ve kapsadığımız materyalden bazılarını anladığınızı kontrol edin. Anlamadığınız herhangi bir şeyi vurgulayan bir şey olup olmadığına bakın. Çok fazla soru değil. Yapmak güzel ve kolay. Ya da bunu burada web sayfasında da yapabilirsiniz.
 

@@ -33,10 +33,10 @@ Pipeline'ınızı iki saat boyunca çalıştırdığınızı, ancak bir kullanı
 
 Bu örneği düşünün:
 
-```console title="Doğrulama olmadan"
+```console title="Without validation"
 $ nextflow run my-pipeline --input data.txt --output results
 
-...2 saat sonra...
+...2 hours later...
 
 ERROR ~ No such file: 'data.fq.gz'
   Expected FASTQ format but received TXT
@@ -44,7 +44,7 @@ ERROR ~ No such file: 'data.fq.gz'
 
 Pipeline geçersiz girdileri kabul etti ve başarısız olmadan önce saatlerce çalıştı. Uygun doğrulama ile:
 
-```console title="Doğrulama ile"
+```console title="With validation"
 $ nextflow run my-pipeline --input data.txt --output results
 
 ERROR ~ Validation of pipeline parameters failed!
@@ -125,11 +125,11 @@ Her iki şema da JSON Schema formatını kullanır; bu, veri yapılarını tanı
 
 ```mermaid
 graph LR
-    A[Kullanıcı pipeline'ı çalıştırır] --> B[Parametre doğrulaması]
-    B -->|✓ Geçerli| C[Girdi verisi doğrulaması]
-    B -->|✗ Geçersiz| D[Hata: Parametreleri düzeltin]
-    C -->|✓ Geçerli| E[Pipeline çalışır]
-    C -->|✗ Geçersiz| F[Hata: Girdi verisini düzeltin]
+    A[User runs pipeline] --> B[Parameter validation]
+    B -->|✓ Valid| C[Input data validation]
+    B -->|✗ Invalid| D[Error: Fix parameters]
+    C -->|✓ Valid| E[Pipeline executes]
+    C -->|✗ Invalid| F[Error: Fix input data]
 ```
 
 Doğrulama, herhangi bir pipeline süreci çalışmadan **önce** gerçekleşmeli; böylece hızlı geri bildirim sağlanır ve hesaplama süresi boşa harcanmaz.
@@ -197,7 +197,7 @@ grep -A 25 '"input_output_options"' nextflow_schema.json
 
 Parametre şeması gruplara ayrılmıştır. İşte `input_output_options` grubu:
 
-```json title="core-hello/nextflow_schema.json (alıntı)" linenums="8"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8"
         "input_output_options": {
             "title": "Input/output options",
             "type": "object",
@@ -309,7 +309,7 @@ Araç şimdi `nextflow_schema.json` dosyanızı yeni `batch` parametresiyle gün
 grep -A 25 '"input_output_options"' nextflow_schema.json
 ```
 
-```json title="core-hello/nextflow_schema.json (alıntı)" linenums="8" hl_lines="19-23"
+```json title="core-hello/nextflow_schema.json (excerpt)" linenums="8" hl_lines="19-23"
     "input_output_options": {
       "title": "Input/output options",
       "type": "object",
@@ -383,7 +383,7 @@ nextflow run . --input assets/greetings.csv --outdir results --batch my-batch -p
 
 Pipeline başarıyla çalışmalı ve `batch` parametresi artık doğrulanıyor.
 
-### Özet
+### Özetle
 
 Etkileşimli `nf-core pipelines schema build` aracını kullanarak `nextflow_schema.json` dosyasına parametre eklemeyi öğrendiniz ve parametre doğrulamasını eylemde gördünüz.
 Web arayüzü sizin için tüm JSON Schema sözdizimini işleyerek, hataya açık manuel JSON düzenlemesi olmadan karmaşık parametre şemalarını yönetmeyi kolaylaştırır.
@@ -781,7 +781,7 @@ Mükemmel! Doğrulama hatayı yakaladı ve şunları gösteren net, yararlı bir
 
 İsterseniz, şemayı başka eğlenceli şekillerde ihlal eden başka selamlamalar girdi dosyaları oluşturarak bunu uygulayabilirsiniz.
 
-### Özet
+### Özetle
 
 Hem parametre doğrulaması hem de girdi verisi doğrulamasını uyguladınız ve test ettiniz. Pipeline'ınız artık yürütmeden önce girdileri doğrulayarak hızlı geri bildirim ve net hata mesajları sağlıyor.
 

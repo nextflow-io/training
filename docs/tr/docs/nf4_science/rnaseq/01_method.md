@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Toplu RNAseq verilerini işlemek ve analiz etmek için birden fazla geçerli yöntem bulunmaktadır.
-Bu kurs için, [Babraham Enstitüsü](https://www.babraham.ac.uk/)'nden Dr. Simon Andrews ve Laura Biggins tarafından [burada](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) açıklanan yöntemi takip ediyoruz.
+Bu kurs için, [Babraham Enstitüsü](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf)'nden Dr. Simon Andrews ve Laura Biggins tarafından [burada](https://www.babraham.ac.uk/) açıklanan yöntemi takip ediyoruz.
 
 Amacımız, aşağıdaki işleme adımlarını uygulayan bir iş akışı geliştirmektir: toplu RNAseq örneğindeki okumalar üzerinde ilk kalite kontrolünü çalıştırmak, okumalardan adaptör dizilerini kırpmak, okumaları referans genoma hizalamak ve kapsamlı bir kalite kontrol (QC) raporu oluşturmak.
 
@@ -732,7 +732,7 @@ ls ENCSR000COQ1_1*
 
 ??? abstract "Dizin içeriği"
 
-    ```console title="Çıktı"
+    ```console title="Output"
     ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
     ```
 
@@ -1085,7 +1085,7 @@ Bu, tüm RNAseq işleme komutlarının testini sonlandırır.
 
 ---
 
-### Özet
+### Özetle
 
 FastQC, Trim Galore, HISAT2 ve MultiQC komutlarını ilgili konteynerlerinde nasıl çalıştıracağınızı biliyorsunuz; birden fazla örneği işlemeyi ve QC raporlarını toplamayı da içerir.
 

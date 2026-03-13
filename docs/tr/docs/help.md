@@ -10,6 +10,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+
 İster başlamakta zorlanıyor olun, ister ortada takılıp kalın veya takip soruları olsun, iletişime geçmekten çekinmeyin! Topluluk ekibimiz yardım etmek için burada ve genel olarak Nextflow topluluğu çok aktif, kapsayıcı ve yardımseverdir.
 
 Aradığınıza bağlı olarak mevcut olan temel seçenekler şunlardır.

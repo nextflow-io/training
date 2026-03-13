@@ -2,13 +2,13 @@
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Daha önce, her örneğin verilerini bağımsız olarak işleyen örnek başına bir varyant çağırma boru hattı oluşturdunuz.
+Daha önce, her örneğin verilerini bağımsız olarak işleyen örnek başına bir varyant çağırma pipeline'ı oluşturdunuz.
 Kursun bu bölümünde, basit iş akışımızı bir üst seviyeye taşıyarak keyfi sayıda örneği işleyebilen güçlü bir toplu otomasyon aracına dönüştüreceğiz.
 Bunu yaparken, aynı zamanda yeni çalışmalarda daha yaygın olan paired-end verileri kabul edecek şekilde de güncelleyeceğiz.
 
 ??? info "Bu bölümden nasıl başlanır"
 
-    Kursun bu bölümü, [Bölüm 1: Yönteme Genel Bakış](./01_method.md) ve [Bölüm 2: Tek-örnekli uygulama](./02_single-sample.md) bölümlerini tamamladığınızı ve doldurulmuş modül dosyalarına sahip çalışan bir `rnaseq.nf` boru hattınız olduğunu varsayar.
+    Kursun bu bölümü, [Bölüm 1: Yönteme Genel Bakış](./01_method.md) ve [Bölüm 2: Tek-örnekli uygulama](./02_single-sample.md) bölümlerini tamamladığınızı ve doldurulmuş modül dosyalarına sahip çalışan bir `rnaseq.nf` pipeline'ınız olduğunu varsayar.
 
     Bölüm 2'yi tamamlamadıysanız veya bu bölüm için yeni başlamak istiyorsanız, Bölüm 2 çözümünü başlangıç noktanız olarak kullanabilirsiniz.
     Bu komutları `nf4-science/rnaseq/` dizininin içinden çalıştırın:
@@ -178,7 +178,7 @@ Bu sefer her adım 6 kez çalıştırılıyor, CSV dosyasındaki her örnek içi
 İş akışını birden fazla dosya üzerinde çalıştırmak için gereken tek şey buydu.
 Nextflow tüm paralelliği bizim için yönetiyor.
 
-### Özet
+### Özetle
 
 Tek dosyalı girdiden, Nextflow'un paralel olarak işlediği CSV tabanlı çok-örnekli girdiye nasıl geçeceğinizi biliyorsunuz.
 
@@ -474,7 +474,7 @@ Ardından, Nextflow'a bu çıktıları nereye koyacağını söylememiz gerekece
 
 === "Sonra"
 
-    ```groovy title="rnaseq.nf" linenums="82" hl_lines="4-9"
+    ```groovy title="rnaseq.nf" linenums="82" hl_lines="7-12"
         align_log {
             path 'align'
         }
@@ -528,7 +528,7 @@ MultiQC çıktılarını sonuçlar dizininde bulabilirsiniz.
 tree -L 2 results/multiqc
 ```
 
-```console title="Çıktı"
+```console title="Output"
 results/multiqc
 ├── all_single-end_data
 │   ├── cutadapt_filtered_reads_plot.txt
@@ -561,7 +561,7 @@ results/multiqc
 
 Son `all_single-end.html` dosyası, göz atmayı kolaylaştıran tek bir HTML dosyasında pratik bir şekilde paketlenmiş tam toplu rapordur.
 
-### Özet
+### Özetle
 
 Birden fazla kanaldan çıktıları nasıl toplayacağınızı, bunları `.mix()` ve `.collect()` ile nasıl paketleyeceğinizi ve bir toplama sürecine nasıl geçireceğinizi biliyorsunuz.
 
@@ -980,7 +980,7 @@ Bir sonraki mantıklı adım, iş akışının her iki veri türünü de anında
 
 ---
 
-### Özet
+### Özetle
 
 Tek örnekli bir iş akışını birden fazla örneğin işlenmesini paralelleştirmek, kapsamlı bir QC raporu oluşturmak ve iş akışını paired-end okuma verilerini kullanacak şekilde uyarlamak için nasıl uyarlayacağınızı biliyorsunuz.
 

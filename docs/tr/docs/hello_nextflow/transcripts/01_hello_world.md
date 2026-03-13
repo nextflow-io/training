@@ -24,7 +24,7 @@ Terminalde yalnızca Bash kullanarak çok basit şeyler yaparak başlayacağız;
 
 ## 0. Isınma
 
-O hâlde gerçekten basit bir yerden başlayalım. Terminale bir şey yazdırmak için "echo" ile başlayalım: "Hello World". Enter'a basıyorum ve bu terminale gidiyor. Hello World. Umarım bu kursu izleyen herkes için sürpriz olmamıştır.
+O zaman gerçekten basit bir yerden başlayalım. Terminale bir şey yazdırmak için "echo" ile başlayalım. "Hello World". Enter'a basıyorum ve bu terminale gidiyor. Hello World. Umarım bu kursu izleyen herkes için sürpriz olmamıştır.
 
 Tamam, bununla bir şeyler yapalım. Sadece terminale yazdırmak yerine bir dosyaya yazalım. Klavyemde yukarı ok tuşuna basıyorum; bu Bash geçmişini döngüsel olarak gösteriyor ve son komutumu veriyor. Sonuna küçük bir büyüktür işareti ekleyeceğim; bu, komutun çıktısını bir dosyaya yönlendiriyor. Dosyayı output.txt olarak adlandıracağım.
 
@@ -36,35 +36,35 @@ Bunu terminalde cat gibi bir komutla görüntüleyebiliriz. cat output.txt yazı
 
 Pekâlâ. Basit olduğunu söylemiştim. Sırada ne var? Bu süreci alıp tekrar deneyelim; ancak bu sefer Nextflow içinde yapalım.
 
-Dediğim gibi, bu kursun tüm farklı bölümleri bir betikle başlıyor ve bu bölümün betiği Hello World olarak adlandırılmış. O hâlde Hello World'ü bulacağım. Tek tıkladığımda önizleme gösteriyor; düzenleyicide açmak için çift tıklıyorum. Terminali de hızlıca kapatıyorum.
+Dediğim gibi, bu kursun tüm farklı bölümleri bir betikle başlıyor ve bu bölümün betiği Hello World olarak adlandırılıyor. O yüzden Hello World'ü bulacağım. Tek tıklayınca önizleme gösteriyor; düzenleyicide açmak için çift tıklıyorum. Terminali de hızlıca kapatıyorum.
 
 Bu çok basit bir betik; olabildiğince sade. Yalnızca 22 satır uzunluğunda ve temelde aynı şeyi yapıyor. Hatta bir kısmı tanıdık gelecektir. Az önce yazdığımız şey bu. Bash komutunun bir dosyaya yönlendirildiğini görebiliyoruz.
 
-Tamam. Başka ne var? Ayrıca bu dosyada Nextflow'un bazı temel kavramlarını görmeye başlayabiliriz. Burada kırmızıyla bir process ve bir workflow görüyoruz. Bunlar Nextflow'daki özel anahtar kelimeler ve özel terminoloji.
+Tamam. Başka ne var? Ayrıca bu dosyada Nextflow'un temel kavramlarından bazılarını görmeye başlayabiliriz. Burada kırmızıyla bir process ve bir workflow var. Bunlar Nextflow'daki özel anahtar kelimeler ve özel terminoloji.
 
 ## 1.1.1. Process Tanımı
 
 Bir iş akışı içindeki farklı süreçler, iş akışınızın farklı mantıksal birimlerini kapsar. Her süreç tek bir şey yapar.
 
-Çalıştırdığımızda bir görev ya da birden fazla görev oluşturur; bunlar bir boru hattının gerçek yürütme adımlarıdır. Tüm süreçler daha sonra altta gördüğümüz bir workflow bloğu içinde düzenlenir; bu örnekte yalnızca o tek süreci çalıştırır.
+Çalıştırdığımızda bir görev ya da birden fazla görev oluşturur; bunlar bir pipeline'ın gerçek yürütme adımlarıdır. Tüm süreçler daha sonra altta gördüğümüz bir workflow bloğu içinde düzenlenir; bu örnekte yalnızca o tek süreci çalıştırır.
 
 Süreç adı bu anahtar kelimeyi takip eder ve bu ad neredeyse her şey olabilir. Sürecin içeriği ise bu süslü parantezlerin içindedir.
 
-Bir process için gerçek anlamda tek gereksinim, bir tür script veya exec bloğu içermesidir. Bu, üçlü tırnak işaretleri içindedir ve boru hattını çalıştırdığımızda çalışma dizinine yazılan Bash betiğidir; bilgisayarınızda veya sunucunuzda gerçekten çalışan şey budur.
+Bir süreç için gerçekten tek bir gereklilik vardır: bir tür script veya exec bloğu içermesi gerekir. Bu, üçlü tırnak işaretleri içindedir ve pipeline'ı çalıştırdığımızda çalışma dizinine yazılan Bash betiğidir; bilgisayarınızda veya sunucunuzda gerçekten çalışan şey budur.
 
-Bu genellikle Bash'tir; ancak en üste farklı bir shebang ekleyebilirsiniz ve bu bir Python betiği ya da R betiği olabilir. Fark etmez. Bu betikteki her şey yürütülecektir.
+Bu genellikle Bash'tir, ancak en üste farklı bir shebang ekleyebilirsiniz; Python betiği veya R betiği de olabilir. Fark etmez. Bu betikteki her şey yürütülecektir.
 
-Bu sürece eklediğimiz bir diğer şey ise çıktı bildirimidir. Bu, Nextflow'a bu sürecin output.txt adlı bir çıktı dosyası beklediğini söyler. Bunun bir path olduğunu belirtir; dolayısıyla bir dosya gibi ele alınmalıdır. Örneğin bu val olsaydı, bir değişken veya değer gibi ele alınacağını söylerdi.
+Bu sürece eklediğimiz bir diğer şey ise çıktı bildirimidir. Bu, Nextflow'a bu sürecin output.txt adlı bir çıktı dosyası beklediğini söyler. Bunun bir path olduğunu belirtir; dolayısıyla bir dosya gibi ele alınmalıdır. Örneğin bu val olsaydı, bir değişken veya değer gibi ele alınacaktı.
 
-Bunun bu dosyayı oluşturmadığını unutmayın. Gerçekte oluşturan, aşağıdaki betiktir. Bu yalnızca Nextflow'a bu dosya adıyla bir çıktı dosyası beklemesini söyler.
+Bu dosyayı oluşturmadığını unutmayın. Gerçekte onu oluşturan aşağıdaki betiktir. Bu yalnızca Nextflow'a bu dosya adıyla bir çıktı dosyası beklemesini söyler.
 
 ## 1.1.2. Workflow Tanımı
 
-Tamam. Altta bir workflow var ve yine bir bildirim görüyoruz. Bu bildirim Main olarak adlandırılmış. Bu, bir betik bloğunun iş akışı karşılığıdır diyebiliriz. İş akışının bir şey yaptığı kısımdır. Bu örnekte sayHello adlı süreci çağırıyoruz.
+Tamam. Altta bir workflow var ve yine bir bildirim var. Bu Main olarak adlandırılmış. Bu, bir betik bloğunun iş akışı eşdeğeridir diyebiliriz. İş akışının bir şey yaptığı kısımdır. Bu örnekte sayHello adlı süreci çağırıyoruz.
 
-Elbette boru hattınız normalde bundan çok daha karmaşık görünecektir. Muhtemelen birden fazla süreciniz olacak ve aralarındaki veri akışını düzenlemek için kanallar kullanacaksınız. Bunu bu kursun sonraki bölümlerinde ele alacağız; ancak şimdilik bu yeterli. Bu geçerli bir boru hattı ve çalışması gerekiyor.
+Elbette normalde pipeline'ınız bundan çok daha karmaşık görünecektir. Muhtemelen birden fazla süreciniz olacak ve aralarındaki veri akışını düzenlemek için kanallar kullanacaksınız. Bunu bu kursun sonraki bölümlerinde ele alacağız; ancak şimdilik bu yeterli. Bu geçerli bir pipeline ve çalışması gerekiyor.
 
-VS Code'da buradaki DAG önizlemesine bile tıklayabilirim. DAG veya DAG, boru hattındaki veri akışı yapısının bir temsilidir; yan tarafta bir mermaid diyagramı olarak işlendiğini görebiliriz. Bu örnekte çok basit: iş akışını temsil eden bir kutu ve sayHello adlı bir süreç var; ancak ilerledikçe daha ilginç görünebilir.
+VS Code'da buradaki DAG önizlemesine bile tıklayabilirim. DAG veya DAG, pipeline'daki veri akışı yapısının bir temsilidir ve yan tarafta bir mermaid diyagramı olarak render edildiğini görebiliriz. Bu örnekte çok basit: bir kutu var, bu iş akışı; bir de sayHello adlı süreç. Ancak ilerledikçe bu daha ilginç görünebilir.
 
 ## 1.2. İş Akışını Çalıştırma
 
@@ -72,59 +72,59 @@ Tamam, bu iş akışını çalıştırmayı deneyelim ve ne olduğunu görelim.
 
 Altta terminali tekrar açacağım, çıktıyı temizleyeceğim ve Nextflow Run yazacağım. Ardından betik adını yazacağım: hello-world.nf. Enter'a basıyorum.
 
-Tamam, en üstte Nextflow'un çalıştığını, hangi sürümün çalıştığını, betik adını ve diğer bilgileri gösteren standart bilgiler var.
+Tamam, üstte bazı standart bilgiler var; bunlar Nextflow'un çalıştığını, hangi sürümün çalıştığını, betik adını ve diğer bilgileri gösteriyor.
 
-Gerçekten aradığımız önemli şey _şurada_; yürütülen farklı görevlerin özeti.
+Gerçekten aradığımız önemli şey _burada_: yürütülen farklı görevlerin özeti.
 
-Sizinkinde küçük yeşil bir tik işareti varsa, tebrikler. İlk boru hattınızı çalıştırdınız. Harika.
+Sizinkinde küçük yeşil bir tik işareti varsa, tebrikler. İlk pipeline'ınızı çalıştırdınız. Harika.
 
-Burada çalışan sürecin adı yazıyor: Say Hello. Bir kez çalıştığını ve başarılı olduğunu söylüyor. Bu, ilerledikçe güncellenir; dolayısıyla daha büyük bir boru hattı çalıştırırken ilerleme burada gösterilir. Ancak bu çok küçük olduğu için neredeyse anında çalışıyor.
+Burada çalışan sürecin adı yazıyor: Say Hello. Bir kez çalıştığını ve başarılı olduğunu söylüyor. Bu ilerledikçe güncelleniyor; dolayısıyla daha büyük bir pipeline çalıştırırken ilerlemeyi burada göreceksiniz. Ancak bu çok küçük olduğu için neredeyse anında çalışıyor.
 
 ## 1.2.2. Çıktıyı ve Günlükleri Work Dizininde Bulma
 
-Bir Nextflow boru hattı çalıştırdığınızda, bu süreçlerin her biri birbirine bağlanır ve her süreç, daha önce söylediğim gibi, bir veya birden fazla görev oluşturabilir. Bu örnekte bu süreçten tek bir görev elde ettik. Yalnızca bir kez çalıştı ve bu görev _hash_'i altında tamamlandı.
+Bir Nextflow pipeline'ı çalıştırdığınızda, bu süreçlerin her biri birbirine bağlanır ve her süreç, daha önce söylediğim gibi, bir veya birden fazla görev oluşturabilir. Bu örnekte bu süreçten tek bir görev vardı. Yalnızca bir kez çalıştı ve bu görev _hash_'i altında tamamlandı.
 
-Nextflow, çalışma dizininizdeki dosyalarla doğrudan ilgilenmez; work adlı özel bir klasör oluşturur. "ls" yaparsam burada belirdiğini göreceğiz: _work_. Bu klasörün içinde çalışan her görev için alt dizinler bulunur. Bu, söz konusu hash ile eşleşiyor. "ls work/c4" yaparsam ve ardından kısaltılmış ama 203 ile başlayan kısmı görürsem, bu boru hattını çalıştırdığımızda bu süreç tarafından oluşturulan çalışma dizinidir. Bunu yan tarafta da görebilirsiniz.
+Nextflow, çalışma dizininizdeki dosyalarla doğrudan ilgilenmez; work adlı özel bir klasör oluşturur. "ls" yaparsam burada belirdiğini göreceğiz: _work_. İçinde çalışan her görev için alt dizinler var. Bu hash ile eşleşiyor. "ls work/c4" yaparsam ve ardından kısaltılmış ama 203 ile başlayan kısmı görürsem, bu pipeline'ı çalıştırdığımızda bu süreç tarafından oluşturulan çalışma dizinidir. Bunu yan tarafta da görebilirsiniz.
 
 Bu dosyaları listelediğimde output.txt dosyasının oluşturulduğunu görebilirsiniz. Burada da görebilirsiniz. Ayrıca normal "ls" ile görünmeyen bir sürü gizli dosya var.
 
-output.txt'ye tıklarsam, çıktımız orada. Harika. Boru hattı çalıştı.
+output.txt'ye tıklarsam, çıktımız orada. Harika. Pipeline çalıştı.
 
-Özünde tek satırlık bir Bash betiği çalıştırmak için oldukça fazla şablon kod gibi görünebilir; ancak süreçlerimiz daha karmaşık hâle geldikçe daha anlamlı olacak. Nextflow'daki bu work dizini ve oluşturulan bu dosyalar, Nextflow'u bu kadar güçlü kılan şeyin gerçek omurgasıdır.
+Temelde tek satırlık bir Bash betiği çalıştırmak için oldukça fazla şablon kod gibi görünebilir; ancak süreçlerimiz daha karmaşık hale geldikçe daha mantıklı gelecek. Nextflow'daki bu work dizini ve oluşturulan bu dosyalar, Nextflow'u bu kadar güçlü kılan şeyin gerçek omurgasıdır.
 
-Her görev, boru hattının her öğesi diğer tüm görevlerden yalıtılmıştır. Yeniden üretilebilir. Birbirleriyle çakışmıyorlar ve her şey paralel çalışabiliyor. Alıştığınızda gerçekten güzel bir yöntem; çünkü bu yalıtım sayesinde tek bir göreve girip tam olarak ne olduğunu görebilir ve hata ayıklayabilirsiniz.
+Her görev, pipeline'ın her öğesi diğer tüm görevlerden izole edilmiştir. Tekrarlanabilir. Birbirleriyle çakışmıyorlar ve her şey paralel çalışabilir. Bu izolasyon sayesinde alıştığınızda gerçekten güzel bir yöntem; tek bir göreve girip tam olarak ne olduğunu görebilir ve hata ayıklayabilirsiniz.
 
-Work dizinindeki diğer dosyalara hızlıca bakalım. Yukarıdan aşağıya, _.command.begin_ adlı bir dosya var. Bu boş. Nextflow'un "tamam, görevi başlatıyorum" dediği, sentinel dosya olarak adlandırılan bir dosya. Burada ilginç bir şey yok.
+Work dizinindeki bu diğer dosyalara hızlıca bakalım. Yukarıdan aşağıya, _.command.begin_ adlı bir dosya var. Bu boş. Nextflow'un "tamam, görevi başlatıyorum" dediği, sentinel dosya olarak adlandırılan bir dosya. Burada ilginç bir şey yok.
 
-Ardından _.command.error_, _.command.log_ ve _.command.out_ var. Bunların hepsi çalışan Bash komutunun veya betiğin çıktılarıdır. Bu standart hata. Bu standart çıktı. Bu ise ikisinin çıktıkları sırayla birleşimi. Böylece mantıksal sırayı elde edersiniz.
+Ardından _.command.error_, _.command.log_ ve _.command.out_ var. Bunların hepsi çalışan Bash komutundan veya bu betikten gelen çıktılar. Bu standart hata. Bu standart çıktı. Bu ikisi çıktıkları sırayla birleştirilmiş hali. Böylece mantıksal sırayı görürsünüz.
 
-Tamam, bunlar da bu örnek için boştu; pek ilginç değil. Ancak _.command.run_'a gelince işler daha ilginç hâle geliyor.
+Tamam, bunlar da bu örnekte boştu; pek ilginç değil. Ancak _.command.run_'a gelince işler daha ilginç hale geliyor.
 
-Bu genellikle çok uzun bir betiktir. Nextflow'un gerçekte yürüttüğü şey budur. Buraya girerseniz Nextflow'un tüm iç mantığını görmeye başlarsınız; ne yaptığını ve sürecinizi nasıl yürüttüğünü anlarsınız. Bu, nerede çalıştığınıza bağlıdır: yerel olarak mı çalışıyoruz yoksa SLURM'a bir iş olarak mı gönderiyoruz? İkinci durumda en üstte SLURM başlıkları olacaktır. Tüm bu farklı kurulumlar.
+Bu genellikle çok uzun bir betiktir. Nextflow'un gerçekte yürüttüğü şey budur. Buraya girerseniz Nextflow'un tüm iç mantığını görmeye başlarsınız; ne yaptığını ve sürecinizi nasıl yürüttüğünü anlarsınız. Bu, yerel olarak mı çalıştığınıza yoksa SLURM'a bir iş olarak mı gönderdiğinize bağlı olarak değişir; ikinci durumda üstte SLURM başlıkları olacaktır. Tüm bu farklı kurulumlar.
 
-Genel olarak bu dosyaya hiçbir zaman bakmanız gerekmez. Nextflow tarafından otomatik olarak oluşturulur ve boru hattınıza özgü gerçekten özel bir şey içermez. Ama çalışan şeyin özü budur.
+Genel olarak bu dosyaya hiçbir zaman bakmanız gerekmez. Nextflow tarafından otomatik olarak oluşturulur ve pipeline'ınıza özgü gerçekten özel bir şey içermez. Ama çalışan şeyin özü budur.
 
-Bir sonraki dosya çok daha ilginç. _.command.sh_, sürecinizden gelen oluşturulmuş betiktir; burada Nextflow'un Bash başlığını eklediğini ve ardından betik bloğumuzda yer alan komutumuzu yürüttüğünü görebilirsiniz.
+Bir sonraki dosya çok daha ilginç. _.command.sh_, sürecinizden gelen oluşturulmuş betiktir. Burada Nextflow'un Bash başlığını eklediğini ve ardından betik bloğumuzda bulunan komutumuzu yürüttüğünü görebilirsiniz.
 
 _.command.run_ dosyasının yaptığı tek şey bu _.command.sh_ dosyasını çalıştırmaktır.
 
-Bu gerçekten kullanışlı bir dosyadır; bir şeyi hata ayıklamaya çalışırken ve Nextflow boru hattınızın mantığının beklediğiniz şeyi yapıp yapmadığını kontrol ederken en çok baktığınız dosya genellikle budur.
+Bu gerçekten kullanışlı bir dosya; bir şeyi hata ayıklamaya çalışırken ve Nextflow pipeline'ınızın mantığının beklediğiniz şeyi yapıp yapmadığını kontrol ederken en çok baktığınız dosya genellikle budur.
 
 Son olarak _.exitcode_ adlı bir dosya var; bu, görevden çıkış kodunu yakalar. Bu örnekte başarılıydı, dolayısıyla çıkış kodu sıfırdı.
 
-Bir şeyler ters giderse, bellek yetersizliği veya başka bir sorun nedeniyle başarısız olursa, ne yanlış gittiğini anlamak için bu dosya çok kullanışlıdır.
+Bir şeyler ters giderse, bellek yetersizliği veya başka bir sorun nedeniyle başarısız olursa, ne yanlış gittiğini anlamak için bu çok kullanışlıdır.
 
 ## 1.3. İş Akışını Tekrar Çalıştırma
 
-Work dizinleri hakkında anlaşılması gereken bir şey daha var: Bu boru hattını tekrar tekrar çalıştırmaya devam edersem, yani _"nextflow run hello-world.nf"_ yaparsam, tam olarak aynı şeyi yapacak; ancak bu sefer yeni bir görev kimliği olacak. Bu hash'in farklı olduğunu görebilirsiniz ve şimdi work'e bakarsam iki hash dizini var. Bunlar yine birbirinden ayrı.
+Work dizinleri hakkında anlaşılması gereken bir şey daha var: bu pipeline'ı tekrar tekrar çalıştırmaya devam edersem, yani _"nextflow run hello-world.nf"_ yaparsam, tam olarak aynı şeyi yapacak; ancak bu sefer yeni bir görev kimliği olacak. Bu hash'in farklı olduğunu görebilirsiniz ve şimdi work'e bakarsam iki hash dizini var. Bunlar yine birbirinden ayrı.
 
-Dolayısıyla bir Nextflow iş akışını her çalıştırdığınızda, cache kullanan resume'u kullanmadığınız sürece (buna daha sonra değineceğiz), bu süreçleri birbirinden ayrı yeni work dizinlerinde yeniden çalıştıracaktır. Dosya adı çakışması yaşamazsınız, bu tür sorunlarla karşılaşmazsınız. Her şey yalıtılmış ve temiz.
+Dolayısıyla bir Nextflow iş akışını her çalıştırdığınızda, cache kullanan resume'u kullanmadığınız sürece (buna daha sonra değineceğiz), bu süreçleri birbirinden ayrı yeni work dizinlerinde yeniden çalıştıracak. Dosya adı çakışması yaşamazsınız, bu tür sorunlarla karşılaşmazsınız. Her şey izole ve temiz.
 
-Bu dizine girersek tüm aynı dosyaları ve sıfırdan yeniden oluşturulmuş aynı _output.txt_'yi görebiliriz.
+Bu dizine girersek tüm aynı dosyaları ve sıfırdan yeniden oluşturulmuş aynı _output.txt_'yi görebilirsiniz.
 
 ## 2. Çıktıları Yayımlama
 
-Tamam, bu Nextflow'un kendi içinde harika; boru hattınızı çalıştırırken her şeyin birbirinden ayrı, temiz ve yönetilebilir olmasını sağlıyor.
+Tamam, bu Nextflow'un kendi içinde harika; pipeline'ınızı çalıştırırken her şeyin birbirinden ayrı, temiz ve yönetilebilir olmasını sağlıyor.
 
 Ancak sonuçlarınızı incelemeye çalışan biri için pek kullanışlı değil. Sonuç dosyalarınızı bulmak için binlerce farklı work dizinini karıştırmak istemezsiniz. Zaten bunu yapmanız da gerekmiyor. Work dizinleri, dosyalarınızın oluşturulduğu nihai konum olarak tasarlanmamıştır.
 
@@ -132,27 +132,27 @@ Bunu dosyalarımızı yayımlayarak yapıyoruz.
 
 ## 2.1.1. sayHello Sürecinin Çıktısını Bildirme
 
-Betiğimize geri dönersek, iş akışı bloğumuzda çalışacağız. Hangi dosyaları beklediğimizi, hangi dosyalarla ilgilendiğimizi söyleyeceğiz; ardından output bloğu adlı yeni bir blok oluşturacağız.
+Betiğimize geri dönersek, iş akışı bloğumuzda çalışacağız. Hangi dosyaları beklediğimizi, hangi dosyalarla ilgilendiğimizi söyleyeceğiz ve ardından altında output bloğu adlı yeni bir blok oluşturacağız.
 
-Bu, Nextflow'un 26.04 sürümünde varsayılan olarak gelen sözdizimi ayrıştırıcısıyla birlikte gelen yeni sözdizimidir. Dolayısıyla daha önce biraz Nextflow kullandıysanız, bu yeni olan şeylerden biridir.
+Bu, Nextflow'un 26.04 sürümünde varsayılan olarak gelen sözdizimi ayrıştırıcısıyla birlikte gelen yeni sözdizimidir. Daha önce biraz Nextflow kullandıysanız, bu yeni olan şeylerden biridir.
 
-Main bloğumuz var ve şimdi publish yazacağım; Nextflow'a yayımlama hakkında ne bekleyeceğini söyleyeceğim. Buna _first_output_ diyeceğiz ve _sayHello.out_ olarak adlandıracağız.
+main bloğumuz var ve şimdi publish diyeceğim ve Nextflow'a yayımlamadan ne bekleyeceğini söyleyeceğim. Buna _first_output_ diyeceğiz ve _sayHello.out_ olarak adlandıracağız.
 
-Orada yanlışlıkla bir yazım hatası yaptım; ancak bu, Nextflow VS Code uzantısının bazı özelliklerini de vurgulamak için iyi bir fırsat. Hemen altında kırmızı dalgalı bir çizgi belirdi ve bir şeylerin yanlış olduğunu söylüyor. Üzerine geldiğimde bu değişkenin tanımlı olmadığını söylüyor.
+Orada yanlışlıkla bir yazım hatası yaptım, ancak bu aynı zamanda Nextflow VS Code uzantısının bazı özelliklerini de vurgulamak için iyi bir fırsat. Hemen altında küçük kırmızı dalgalı bir çizgi belirdi; bir şeylerin yanlış olduğunu söylüyor. Üzerine gelince bu değişkenin tanımlı olmadığını söylüyor.
 
-Bu örnekte oldukça açık; bir yazım hatası yaptım. sayHello yazmak istedim ve dalgalı çizgi kayboluyor.
+Bu örnekte oldukça açık; yazım hatası yaptım. sayHello yazmak istedim ve dalgalı çizgi kayboluyor.
 
-Şimdi mor renkte. Nextflow sözdizimi ayrıştırıcısı bunun bir süreç olduğunu biliyor ve üzerine geldiğimde bu sürecin nasıl göründüğünün kısaltılmış bir temsilini veriyor. Böylece bir bakışta herhangi bir girdi almadığını ve bu çıktıyı verdiğini hızlıca görebiliyorum. VS Code'da bu uzantıyla çalışmak, kod yazarken size çok sayıda bağlamsal bilgi sağlıyor.
+Şimdi mor renkte. Nextflow sözdizimi ayrıştırıcısı bunun bir süreç olduğunu biliyor ve üzerine gelince bu sürecin nasıl göründüğünün kısaltılmış bir temsilini veriyor. Böylece bir bakışta hiçbir girdi almadığını ve bu çıktıyı verdiğini hızlıca görebiliyorum. VS Code'da bu uzantıyla çalışmak, kod yazarken size çok sayıda bağlamsal bilgi sağlıyor.
 
 Bu sürecin çıktısına _.out_ sözdizimi ile başvurabileceğimizi unutmayın. Şu an buna istediğimiz adı verebiliriz; bu yalnızca rastgele bir değişken adıdır.
 
 ## 2.1.2. Betiğe Bir output: Bloğu Ekleme
 
-Önemli hâle geldiği yer, buradaki yeni bloğumuzdur; bu artık workflow bloğunun altında, workflow'un içinde değil. Yine süslü parantezler. Burada Nextflow'a iş akışı tarafından oluşturulan tüm dosyaları nereye koyacağını söylüyoruz.
+Önemli hale geldiği yer, buradaki yeni bloğumuzu yaptığımızda; bu artık workflow bloğunun altında, workflow'un içinde değiliz. Yine süslü parantezler. Burada Nextflow'a iş akışı tarafından oluşturulan tüm dosyaları nereye koyacağını söylüyoruz.
 
-Şimdi burada oluşturduğum değişken adını alacağım, oraya koyacağım ve bunun için süslü parantezler ekleyeceğim. Nextflow'a bir path kullanmasını söyleyeceğim. Hata. Tırnak içinde path. Ve nokta kullanacağım. Bu yalnızca Nextflow'a dosyayı sonuçlar dizininin köküne koymasını söylüyor. Herhangi bir alt dizin veya benzeri bir şey yok.
+Şimdi burada oluşturduğum bu değişken adını alacağım, oraya koyacağım ve bunun için süslü parantezler ekleyeceğim. Nextflow'a bir path kullanmasını söyleyeceğim. Hata. Tırnak içinde path. Ve nokta kullanacağım. Bu yalnızca Nextflow'a dosyayı sonuçlar dizininin köküne koymasını söylüyor. Herhangi bir alt dizin veya benzeri bir şey yok.
 
-İş akışımızı tekrar çalıştırmayı deneyelim. _"nextflow run hello-world.nf"_ yaparsam, temelde tamamen aynı görünmesi gerekiyor. Nextflow'da gerçekten hiçbir şey değişmedi. Aynı şeyleri çalıştırıyor. Sadece bunları yine work dizinlerinde yapıyor.
+İş akışımızı tekrar çalıştırmayı deneyelim. _"nextflow run hello-world.nf"_ yaparsam, umarım temelde tamamen aynı görünecektir. Nextflow açısından gerçekten hiçbir şey değişmedi. Aynı şeyleri çalıştırıyor. Sadece bunları yine work dizinlerinde yapıyor.
 
 Ancak şimdi _"ls results/"_ yaparsam, burada results adında yeni bir dizin oluşturulduğunu göreceksiniz; bu, iş akışı yayımlaması için varsayılan temel dizindir. İçinde output.txt adlı bir dosya var.
 
@@ -160,176 +160,176 @@ _"ls -l results"_ yaparsam, bunun aslında work dizinine yumuşak bağlantılı 
 
 ## 2.2. Özel Bir Konum Belirleme
 
-"Results", bu path için varsayılan addır. İş akışını tekrar çalıştırırsam ve bu sefer tek kısa çizgi yaparsam (bu bir çekirdek Nextflow seçeneği olduğu için), _"-output-dir **my**results"_ yazarsam. Kısaca _"-o"_ da yapılabilir. Bu, dosyaların depolandığı temel dizin için farklı bir konum belirleyecek ve bir kez daha _myresults/_'da bir _output.txt_ olacak.
+"Results" bu path için varsayılan addır. İş akışını tekrar çalıştırırsam ve bu sefer tek tire ile _"-output-dir **my**results"_ yaparsam (çünkü bu bir çekirdek Nextflow seçeneği), kısaca _"-o"_ da yapılabilir. Bu, dosyaların depolandığı yer için farklı bir temel dizin belirleyecek ve bir kez daha, _myresults/_'da artık bir _output.txt_ var.
 
-Bu harika; ancak muhtemelen tüm dosyaların kökte olmasını istemiyoruz. Biraz düzen istiyoruz; dolayısıyla burada istediğimiz adda bir alt dizin de oluşturabiliriz. Diyelim ki _"path 'hello_world'"_ yazalım ve bunu tekrar çalıştırayım: _"nextflow run hello-world.nf"_. Sonuçlar dizinine ve bir alt dizine gitmesi gerekiyor; gerçekten de şimdi en üstte results altında _hello_world/_ ve _output.txt_ var.
+Bu harika, ancak muhtemelen tüm dosyaların kökte olmasını istemiyoruz. Biraz organizasyon istiyoruz; bu yüzden burada istediğimiz adda bir alt dizin de oluşturabiliriz. Diyelim ki _"path 'hello_world'"_ ve bunu tekrar çalıştırıyorum. _"nextflow run hello-world.nf"_. Sonuçlar dizinine bir alt dizine gitmeli ve gerçekten de şimdi üstteki results altında _hello_world/_ ve _output.txt_ var.
 
-Dikkat edilmesi gereken önemli bir nokta: eski _output.txt_ dosyası hâlâ orada. Bunu yaptığınızda sonuçlar dizini silinmiyor. Yalnızca yeni dosyalar oraya kopyalanıyor. Aynı dosya adına sahip dosyaların üzerine yazılır; ancak eski dosyalar temizlenmez. Dolayısıyla boru hatlarını yeniden çalıştırırken biraz dikkatli olmanız gerekiyor. Zaten orada olan dosyaların üzerine yazmak istemiyorsanız boş bir dizin kullandığınızdan emin olun.
+Dikkat edilmesi gereken önemli bir şey: eski _output.txt_ dosyası hâlâ orada. Bunu yaptığınızda sonuçlar dizini silinmiyor. Sadece yeni dosyalar oraya kopyalanıyor. Aynı dosya adına sahip dosyaların üzerine yazacaklar, ancak eskileri temizlemeyecekler. Bu nedenle pipeline'ları yeniden çalıştırırken biraz dikkatli olmanız gerekiyor. Zaten orada olan dosyaların üzerine yazmak istemiyorsanız boş bir dizin kullandığınızdan emin olun.
 
-## 2.3. Yayımlama Modunu copy Olarak Ayarlama
+## 2.3. Yayımlama Modunu Kopyalama Olarak Ayarlama
 
-Tamam, bu dosyaların yumuşak bağlantılar olduğundan bahsetmiştim. _"ls -l results/hello_world/"_ yaparsam, work dizinine yumuşak bağlantı verdiğini görebilirsiniz. HPC gibi bir ortamda çalışıyorsanız ve bunlar gerçekten büyük dosyalardır ve bunları kopyalamak istemiyorsanız bu genellikle iyi bir şeydir; çünkü dosyaların dosya sisteminde yalnızca bir kez depolandığı anlamına gelir.
+Tamam, bu dosyaların yumuşak bağlantılar olduğundan bahsetmiştim. _"ls -l results/hello_world/"_ yaparsam, work dizinine yumuşak bağlantı verdiğini görebilirsiniz. Bu, HPC gibi bir ortamda çalışıyorsanız ve bunlar gerçekten büyük dosyalarsa ve bunları kopyalamak istemiyorsanız genellikle iyi bir şeydir; çünkü dosyaların dosya sisteminde yalnızca bir kez depolandığı anlamına gelir.
 
-Ancak work dizinini silerseniz: _"rm -r work"_ yapıp oluşturulan tüm ara dosyaları temizlersem, şimdi bu dosyayı okumaya çalışırsam (_"results/hello_world/"_), artık var olmayan bir dosyaya yumuşak bağlantı gösterecek ve veriler sonsuza dek kaybolacak; bu pek de iyi olmayabilir.
+Ancak work dizinini silerseniz: _"rm -r work"_ yapıp oluşturulan tüm ara dosyaları temizlersem. Şimdi bu dosyayı okumaya çalışırsam _"results/hello_world/"_. Artık var olmayan bir dosyaya yumuşak bağlantı gösterecek ve veriler sonsuza dek kaybolacak ve geri alınamayacak; bu pek iyi olmayabilir.
 
-Bu nedenle genellikle yapabiliyorsanız yumuşak bağlantı yerine dosyaları kopyalamanın iyi bir uygulama olduğunu söylüyorum; çünkü daha güvenli. Yalnızca bu work dizinlerini silmediğiniz sürece iki kat daha fazla disk alanı kullanacağının farkında olun.
+Bu nedenle genel olarak, yapabiliyorsanız yumuşak bağlantı yerine dosyaları kopyalamanın iyi bir uygulama olduğunu söylüyorum; çünkü daha güvenli. Sadece bu work dizinlerini silmediğiniz sürece iki kat daha fazla disk alanı kullanacağını unutmayın.
 
-Bunu output bloğuyla yapmak için buradaki ilk çıktıya gideceğim. Daha önce path'i ayarladım ve şimdi mode'u ayarlayacağım; yazarken VS Code uzantısının burada bir çıktı yönergesi olduğunu bilerek öneriler sunduğunu görebilirsiniz. copy diyeceğim. Kaydediyorum.
+Bunu output bloğuyla yapmak için, buradaki ilk çıktıya gideceğim. Daha önce path'i ayarladım ve şimdi mode'u ayarlayacağım. Yazarken VS Code uzantısının öneriler sunduğunu görebilirsiniz; bunun bir output yönergesi olduğunu biliyor. copy diyeceğim. Kaydediyorum.
 
 İş akışını yeniden çalıştıralım. Dosyaları yeniden oluşturacak, yeni work dizini.
 
 Şimdi _"ls -l results/hello_world/"_ yaparsam, bunun gerçek bir dosya olduğunu ve artık yumuşak bağlantı olmadığını görebilirsiniz; Nextflow bunu kopyaladı. Bunu bilmek güzel. Dolayısıyla path ve mode, kendinizi oldukça sık yazarken bulacağınız şeyler.
 
-Elbette bu çok basit. Bunu ilerledikçe daha karmaşık ve güçlü hâle getireceğiz; bu şeyleri nasıl dinamik ve çok ayrıntılı olmayan bir şekilde yapacağınızı göreceksiniz.
+Elbette bu çok basit. Bunu ilerledikçe daha karmaşık ve güçlü hale getireceğiz; bu şeyleri nasıl dinamik ve çok ayrıntılı olmayan bir şekilde yapacağınızı göreceksiniz.
 
 ## 2.4. Süreç Düzeyindeki publishDir Yönergeleri Hakkında Not
 
-Şimdi, buna başlarken söylediğim gibi, bu oldukça yeni bir sözdizimi biçimidir. Bunu kaydederken yalnızca Nextflow'un en son sürümlerinde mevcuttur ve Workflow Outputs olarak adlandırılmaktadır.
+Şimdi, buna başlarken söylediğim gibi, bu oldukça yeni bir sözdizimi biçimi. Bunu kaydederken yalnızca Nextflow'un en son sürümlerinde mevcut ve Workflow Outputs olarak adlandırılıyor.
 
-Bunu kullanırsanız harika. Nextflow içindeki pek çok başka harika özelliğin kilidini açar; örneğin bu dosyaların oluşturulurken kökenini izlemeye yardımcı olan Nextflow Lineage gibi. Yakında 26.04'te varsayılan olacak. Gelecekte ise iş akışlarınızı yazmanın tek yolu bu olacak.
+Bunu kullanırsanız harika. Nextflow içinde Nextflow Lineage gibi pek çok başka harika özelliğin kilidini açıyor; bu dosyalar oluşturulurken kökenlerini takip etmeye yardımcı oluyor. Yakında 26.04'te varsayılan olacak. Ve gelecekte belirli bir tarihte, iş akışlarınızı yazmanın tek yolu bu olacak.
 
-Ancak şu anda bu geçiş aşamasındayken, doğada publishDir adlı bir şey kullanan boru hatlarıyla karşılaşabilirsiniz; bu eski yöntemdir ve iş akışı ile çıktı düzeyinde değil, süreç düzeyinde tanımlanır.
+Ancak şu anda bu geçiş aşamasındayken, kullandığınız gerçek dünya pipeline'larında publishDir adlı bir şey görebilirsiniz; bu eski yöntemdir ve bu, iş akışı ve çıktı düzeyinde değil, süreç düzeyinde tanımlanır.
 
-Bu bildirim temelde aynı şeyi söylüyor. Sonuç dosyalarını results adlı bir dizine yayımla ve copy modunu kullan diyor. Sözdiziminin çok benzer olduğunu görebilirsiniz. Ancak artık yeni boru hatları yazarken, AI sonuçlarında, belgelerde veya diğer boru hatlarında göreseniz bile bu publishDir yönergesini kullanmamaya çalışın; çünkü bu eski yöntemdir.
+Bu bildirim temelde aynı şeyi söylüyor. Sonuç dosyalarını results adlı bir dizine yayımla ve kopyalama modunu kullan diyor. Sözdiziminin çok benzer olduğunu görebilirsiniz. Ancak artık yeni pipeline'lar yazarken, yapay zeka sonuçlarında, belgelerde veya diğer pipeline'larda göreseniz bile bu publishDir yönergesini kullanmamaya çalışın; çünkü bu eski yöntemdir.
 
 2026'da hepimiz workflow outputs kullanıyor olmalıyız.
 
-Bunların tümü belgelenmiştir; bunu yapıyorsanız ve daha önce Nextflow kullandıysanız, buradaki Nextflow belgelerine gidebilirsiniz: nextflow.io/docs/. Eğiticiler bölümüne kaydırırsam, _Migrating to Workflow Outputs_ adlı bir eğitici var.
+Bunu yapıyorsanız ve daha önce Nextflow kullandıysanız, Nextflow belgelerine gidebilirsiniz: nextflow.io/docs/. Eğiticiler bölümüne kaydırırsam, _Migrating to Workflow Outputs_ adlı bir eğitici var.
 
-Gerçekten iyi. Tüm sözdizimini, eski sözdizimle nasıl eşdeğer olduğunu, neden değiştirdiğimizi ele alıyor; bir zaman çizelgesi ve her şey var. Çok sayıda örnekle tüm farklı senaryoları inceliyor. Böylece mevcut Nextflow kodunu yeni sözdizimine kolayca dönüştürebilirsiniz.
+Gerçekten iyi. Tüm sözdizimini, eski sözdizimle nasıl eşdeğer olduğunu, neden değiştirdiğimizi ele alıyor; bir zaman çizelgesi ve her şey var. Çok sayıda örnekle tüm farklı senaryoları ele alıyor. Böylece mevcut Nextflow kodunu yeni sözdizimine kolayca dönüştürebilirsiniz.
 
 ## 3.1. sayHello Sürecini Değişken Girdi Bekleyecek Şekilde Değiştirme
 
 Tamam, basit betiğimiz var; bir süreç çalıştırıyor, bir dosya oluşturuyor, Nextflow'a bunun bir çıktı olduğunu söylüyor ve ardından Nextflow'a bu dosyayı nereye kaydedeceğini söylüyoruz. Bu iyi bir başlangıç.
 
-Ancak her şey sabit kodlanmış olmasaydı daha ilginç olurdu. O hâlde, bu sürecin bir iş akışı başlatırken çalışma zamanında kontrol edebileceğimiz değişken bir girdi alabileceğini Nextflow'a nasıl söyleyeceğimizi düşünelim.
+Ancak her şey sabit kodlanmış olmasaydı daha ilginç olurdu. Şimdi, bu sürecin bir değişken girdi alabileceğini Nextflow'a nasıl söyleyeceğimizi düşünelim; bu, bir iş akışı başlattığımızda çalışma zamanında kontrol edebileceğimiz bir şeydir.
 
 Bunu gerçekleştirmek için birkaç farklı şey yapmamız gerekiyor.
 
 Öncelikle, bu sürece bir girdi değişkeni kabul edebileceğini söylememiz gerekiyor; yeni bir bildirim bloğu olarak buraya _input_ yazıyoruz. Buna _"val greeting"_ diyeceğiz.
 
-val kısmı, aşağıdaki path'in karşılığıdır. Nextflow'a bunun bir değişken olduğunu söylüyor; bu örnekte bir string gibi. Üzerine tekrar gelirseniz, uzantı bunun ne anlama geldiğini söylüyor.
+val kısmı, aşağıdaki path'in eşdeğeridir. Nextflow'a bunun bir değişken olduğunu söylüyor; bu örnekte bir string gibi. Üzerine tekrar gelirseniz, uzantı bunun ne anlama geldiğini söylüyor.
 
-Ardından Nextflow'a bununla ne yapacağını söyleyeceğiz. Bir değişken olduğunu söylemek yeterli değil. Betik içinde bu değişkeni nasıl kullanacağınızı belirtmeniz gerekiyor. Bu nedenle buradaki sabit kodlanmış string'i kaldıracağım ve bir değişken koyacağım.
+Ardından Nextflow'a bununla ne yapacağını söyleyeceğiz. Bir değişken olduğunu söylemek yeterli değil. Betik içinde bu değişkeni nasıl kullanacağınızı belirtmeniz gerekiyor. Bu yüzden buradaki sabit kodlanmış string'i kaldıracağım ve bir değişken koyacağım.
 
-Bunu süslü parantezler olmadan hızlıca yapacağım; bunun izin verilen ve eski stil bir yöntem olduğunu göstermek için. Ancak yeni sözdizimi ile bunu gerçekten süslü parantezlerin içine koymayı öneriyoruz; bu şekilde bunun Nextflow tarafından burada enterpolasyon yapıldığı çok açık oluyor.
+Bunu süslü parantezler olmadan hızlıca yapacağım; bunun izin verilen ve eski stil bir yöntem olduğunu göstermek için. Ancak yeni sözdizimi ile bunu gerçekten süslü parantezlerin içine koymayı öneriyoruz; bu, Nextflow tarafından burada enterpolasyon yapıldığını çok net hale getiriyor.
 
 Harika. Yani _"input greeting"_, _$\{greeting\}_ içine gidiyor. Son olarak, iş akışı düzeyinde Nextflow'a bu sürecin artık bir girdi aldığını söylememiz gerekiyor. Bunu yapmak için temelde ona bir değişken vereceğiz.
 
 ## 3.2. Kullanıcı Girdisini Yakalamak İçin Bir Komut Satırı Parametresi Ayarlama
 
-Bunu yeniden Hello World gibi sabit kodlayabiliriz ve bu gayet iyi çalışır; ancak açıkçası bize herhangi bir avantaj sağlamaz. Bunu çalışma zamanında yapılandırabilmek istedik; dolayısıyla Nextflow'u başlatırken CLI'da yapabilmek istiyoruz.
+Bunu yeniden Hello World gibi sabit kodlayabiliriz ve bu gayet iyi çalışır; ancak açıkçası bize hiçbir avantaj sağlamaz. Bunu çalışma zamanında yapılandırabilmek istedik; Nextflow'u başlattığınızda CLI'da yapabilmek istiyoruz.
 
 Bunu yapmanın yolu, _params_ adlı özel bir Nextflow kavramıdır. Buna _params.input_ diyeceğiz.
 
-Bu, bu girdi değişkenini CLI'da açığa çıkarır ve Nextflow'u başlatırken çift kısa çizgi kullandığımız yer burasıdır.
+Bu, bu girdi değişkenini CLI'da açığa çıkarır ve Nextflow'u başlatırken çift tire kullandığımız yer burasıdır.
 
-Buna istediğim adı verebilirim; _hello_, _greeting_ diyebilirim. Fark etmez. Orada ne yaparsam, bir boru hattı başlatırken CLI seçeneği olarak açığa çıkacaktır. Bu Nextflow'un gerçek bir sihir numarası; çünkü bu parametrelerle iş akışı betiğinizi çok hızlı bir şekilde oluşturabileceğiniz anlamına geliyor ve esasen boru hattınız için özel bir CLI oluşturuyorsunuz; bu da başlatırken farklı seçenekleri anında özelleştirmeyi gerçekten kolaylaştırıyor.
+Buna istediğim adı verebilirim; _hello_, _greeting_ diyebilirim. Fark etmez. Oraya ne yazarsam, bir pipeline başlatırken CLI seçeneği olarak açığa çıkacak. Bu Nextflow'un gerçek bir sihir numarası; çünkü bu parametrelerle iş akışı betiğinizi çok hızlı bir şekilde oluşturabileceğiniz anlamına geliyor. Temelde pipeline'ınız için özel bir CLI oluşturuyorsunuz; başlatırken farklı seçenekleri anında özelleştirmeyi gerçekten kolaylaştırıyor.
 
-O hâlde deneyelim. Terminale geri dönelim. _"nextflow run"_ komutumuz burada. Şimdi daha önce gördüğümüz _"params.input"_ ile eşleşen _"--input"_ yapacağım. Sanırım belgelerde Fransızca. Geraldine Fransızca konuşmayı seviyor. Ben İsveç'te yaşadığım için İsveççe yapacağım. "_Hej Världen_" diyeceğim ve Enter'a basacağım.
+O zaman deneyelim. Terminale geri dönelim. _"nextflow run"_ komutumuz burada. Şimdi daha önce gördüğümüz _"params.input"_ ile eşleşen _"--input"_ yapacağım. Sanırım belgelerde Fransızca. Geraldine Fransızca konuşmayı seviyor. Ben İsveç'te yaşadığım için İsveççe yapacağım. "_Hej Världen_" diyeceğim ve Enter'a basacağım.
 
-Tek tırnak veya çift tırnak kullanılabilir; bu yalnızca Bash'in bunu nasıl yorumladığını etkiler.
+Tek tırnak veya çift tırnak kullanabilirsiniz; bu yalnızca Bash'in bunu nasıl yorumladığını etkiler.
 
-Nextflow boru hattını tamamen aynı şekilde çalıştırıyor. Çalışma dizinini ve her şeyin aynı olduğunu görebilirsiniz. Ancak şimdi _"results/hello_world/output"_'a gidersem, bunun yerine güzel İsveçcemizi görebiliriz.
+Nextflow pipeline'ını tamamen aynı şekilde çalıştırıyor. Çalışma dizinini ve her şeyin aynı olduğunu görebilirsiniz. Ancak şimdi _"results/hello_world/output"_'a gidersem. Bunun yerine güzel İsveçcemizi görebiliyoruz.
 
 Yani CLI'dan bir parametreye dinamik olarak bir girdi ilettik. Bunu sürece girdi olarak ilettik ve süreç bunu yorumlayarak bir betik bloğuna koydu; bu da o betik sonucunun çıktısını dinamik olarak değiştirdi. Oldukça harika.
 
-Burada çok az sözdizimi ile oldukça karmaşık bir mantık. Umarım bunun artık nasıl ölçeklendiğini görebiliyorsunuzdur. Boru hatlarımızın mantığını ve özelleştirilebilirliğini Nextflow betiğine gerçekten bu şekilde yerleştiriyoruz.
+Burada çok az sözdizimi ile oldukça karmaşık bir mantık. Umarım bunun artık nasıl ölçeklendiğini görebiliyorsunuzdur. Pipeline'larımızın mantığını ve özelleştirilebilirliğini Nextflow betiğine bu şekilde gerçekten yerleştiriyoruz.
 
 ## 3.4. Komut Satırı Parametreleri İçin Varsayılan Değerleri Kullanma
 
-Tamam, bu harika. Ancak şu anda sorun şu: Bu boru hattını her çalıştırdığımda, çalışması için --input yapmam gerekiyor.
+Tamam, bu harika. Ancak şu an sorun şu: bu pipeline'ı her çalıştırdığımda, çalışması için --input yapmam gerekiyor.
 
-Bu parametresiz çalıştırmayı denersem, Nextflow bu parametreye ihtiyaç duyduğunu ancak ayarlanmadığını söyleyen bir hata verecek; dolayısıyla ne yapacağını bilmiyordu.
+Bu parametre olmadan çalıştırmayı denersem, Nextflow bu parametreye ihtiyaç duyduğunu ancak ayarlanmadığını söyleyen bir hata verecek. Ne yapacağını bilmiyordu.
 
-Bu arada bu harika yeni bir şey. Geçmişte Nextflow boş bir string ile çalışırdı ve anlaması güç tüm türden garip hatalar alırdınız. Ancak yeni Nextflow sözdizimi ayrıştırıcısında biraz daha dikkatli davranıyor ve hemen söylüyor.
+Bu arada bu harika yeni bir şey. Geçmişte Nextflow boş bir string ile çalışırdı ve anlaşılması güç tüm türlerde garip hatalar alırdınız. Ancak yeni Nextflow sözdizimi ayrıştırıcısında biraz daha dikkatli davranıyor ve hemen söylüyor.
 
-Dolayısıyla her zaman her seçeneği belirtmek istemeyiz. Makul varsayılanlar belirtmek iyi bir uygulamadır. Peki bunu betiğimizde nasıl yapıyoruz?
+Bu nedenle her zaman her seçeneği belirtmek istemeyiz. Makul varsayılanlar belirlemek iyi bir uygulamadır. Peki bunu betiğimizde nasıl yapıyoruz?
 
-Bunu yazarken, _params.input_'i kullandığımız yere doğrudan koyduğumuzu fark edeceksiniz. Dolayısıyla açık çözüm bir varsayılan tanımlamaktır; bunu iş akışındaki özel bir params bloğunda betiğin en üstünde yapıyoruz. Bu iş akışı betiğinde.
+Bunu yazarken _params.input_'i doğrudan kullandığımız yere koyduğumuzu fark edeceksiniz. Dolayısıyla açık çözüm bir varsayılan tanımlamaktır ve bunu iş akışındaki özel bir params bloğunda betiğin en üstünde yapıyoruz. Bu iş akışı betiğinde.
 
 Yine burada bazı yeni sözdizimi var; dikkat edin. Bu gerçekten harika şeyler. Burada beklenen parametrenin adı var.
 
-Ardından bu iki nokta üst üste karakterinden sonra değişkenin türünü tanımlıyoruz. Bunu yapmak zorunda değilsiniz; boş bırakabilirsiniz; ancak gerçekten güzel. Nextflow'a bir string beklediğimizi ve buna göre davranmasını söylüyor.
+Bu iki nokta üst üste karakterinden sonra değişkenin türünü tanımlıyoruz. Bunu yapmak zorunda değilsiniz; boş bırakabilirsiniz, ancak gerçekten güzel. Nextflow'a bir string beklediğimizi ve buna göre davranmasını söylüyor.
 
-Bunun yerine bir sayı istiyorsak, örneğin float yazabiliriz; bu kayan noktalı bir sayı istediğimizi söyler. Bunu bir string ile çalıştırmayı denersek, float olmayan bir string verdiğimiz için hata verecektir. String olarak geçirirsek, bunun bir string olduğunu bilir. Baştaki sıfırları olsa ve tamamen sayısal olsa bile, yine de gerçek bir string olarak geçirecektir.
+Bunun yerine bir sayı istiyorsak, örneğin float yazabiliriz; bu kayan noktalı bir sayı istediğimizi söyler. Bununla çalıştırmayı denersek, float olmayan bir string verirsek hata verecektir. String olarak geçirirsek, string olduğunu bilir. Baştaki sıfırları olsa ve tamamen sayısal olsa bile, yine de gerçek bir string olarak geçirecektir.
 
-Dolayısıyla bu tür güvenliği Nextflow'un çok yeni bir özelliğidir; ancak kodunuzu yazmayı ve çalıştırmayı daha güvenli hâle getirmek için gerçekten güçlüdür.
+Bu tür güvenliği Nextflow'un çok yeni bir özelliği; ancak kodunuzu yazmayı ve çalıştırmayı daha güvenli hale getirmek için gerçekten güçlü.
 
-Ardından bir eşittir işareti ve burada varsayılan değer var. Nextflow başlangıçta Barselona'da yazılmıştır; dolayısıyla varsayılan olarak biraz İspanyolca olması uygun görünüyor: _"Holà mundo!"_.
+Ardından eşittir sembolü ve ardından buradaki varsayılan değer var. Nextflow başlangıçta Barselona'da yazıldı; bu nedenle varsayılan olarak biraz İspanyolca olması uygun görünüyor: _"Holà mundo!"_.
 
-Tamam, o betiği kaydediyorum, geri dönüyorum, betiği _--input_ olmadan tekrar çalıştırıyorum. Bu sefer çalışması ve _results_'ta yeni dosyamızı oluşturması gerekiyor. Bu dosyada şimdi _"Holà mundo!"_ yazıyor.
+Tamam, o betiği kaydediyorum, geri dönüyorum, betiği _--input_ olmadan tekrar çalıştırıyorum. Bu sefer çalışmalı ve _results_'ta yeni dosyamızı oluşturmalı. Bu dosyada artık _"Holà mundo!"_ yazıyor.
 
-Ancak bu yalnızca bir varsayılan; dolayısıyla daha önce yaptığımız şeyi hâlâ yapamayacağımız anlamına gelmiyor. Geri dönüp eski betiğimi bulursam, _"Hej Världen"_, komut satırında _--input_ yaptığım için bu varsayılanın üzerine yazacak ve output.txt dosyasında yeniden kullanacaktır.
+Ancak bu yalnızca bir varsayılan; dolayısıyla daha önce yaptığımız şeyi hâlâ yapamayacağımız anlamına gelmiyor. Geri dönüp eski betiğimi bulursam, _"Hej Världen"_, komut satırında _--input_ yaptığım için bu varsayılanın üzerine yazacak ve output.txt dosyasında yeniden kullanacak.
 
 Yani betikteki bu yalnızca ayarladığım varsayılan değerdir.
 
-İş akışımızı daha karmaşık hâle getirip daha fazla parametre ekledikçe, betiğin en üstündeki bu params bloğu hepsini tek bir yerde toplamaya başlayacak.
+İş akışımızı daha karmaşık hale getirip daha fazla parametre ekledikçe, betiğin en üstündeki bu params bloğu hepsini tek bir yerde toplamaya başlayacak.
 
-Betiğinizde oldukça güzel bir simetri elde ediyorsunuz; burada tüm iş akışı girdileriniz en üstte ve iş akışı çıktılarınız en altta yer alıyor. İş akışınızın dış dünyayla arayüzünün ne olduğu çok açık. Dolayısıyla yeni sözdizimi ile yeni bir boru hattını çok hızlı bir şekilde alıp nasıl kullanacağınızı anlayabilirsiniz.
+Betiğinizde oldukça güzel bir simetri elde ediyorsunuz; burada tüm iş akışı girdileriniz ve altta iş akışı çıktılarınız var. İş akışınızın dış dünyayla arayüzünün ne olduğu çok net. Böylece yeni sözdizimi ile yeni bir pipeline'ı çok hızlı alıp nasıl kullanacağınızı anlayabilirsiniz.
 
-Son bir harika şey daha. Bununla bir varsayılan değer ayarlamak zorunda değiliz. params input yapıp varsayılan değer ayarlamazsak, Nextflow'a bu parametrenin zorunlu olduğunu söyler; yine boru hattı onsuz çalışmayı reddeder; ancak null hakkında bir şey yerine daha kullanışlı bir hata mesajı verir.
+Son bir harika şey daha. Bununla bir varsayılan değer ayarlamak zorunda değiliz. params input yapıp varsayılan değer ayarlamazsak, Nextflow'a bu parametrenin zorunlu olduğunu söylüyor; yine pipeline, bu olmadan çalışmayı reddedecek, ancak null hakkında bir şey yerine daha kullanışlı bir hata mesajı verecek.
 
-Yani girdinin beklendiğini, zorunlu olduğunu ancak komut satırında belirtilmediğini söylüyor. Çok güzel.
+Yani girdinin zorunlu olduğunu ancak komut satırında belirtilmediğini söylüyor. Çok güzel.
 
-Tamam, umarım artık Nextflow boru hattınızı değişken girdiler ve parametrelerle nasıl kuracağınız, varsayılanı nasıl ayarlayacağınız, türleri nasıl ayarlayacağınız (Boolean doğru/yanlış bayrağı veya integer ya da farklı türler olabilir), bunları iş akışınıza nasıl ileteceğiniz, nereye gittiği ve ardından sürecinize nasıl enterpolasyon yapıldığı konusunda netlik kazandı. Ayrıca Nextflow'u başlatırken bunları komut satırında nasıl özelleştireceğinizi de biliyorsunuz. Bu, basit Bash komutumuza kıyasla daha ilginç görünmeye başlıyor.
+Tamam, umarım artık Nextflow pipeline'ınızı değişken girdiler ve parametrelerle nasıl kuracağınız, varsayılanı nasıl ayarlayacağınız, türleri nasıl ayarlayacağınız (Boolean doğru/yanlış bayrağı, integer veya farklı türler olabilir), bunları iş akışınıza nasıl ileteceğiniz, nereye gittiği ve ardından sürecinize nasıl enterpolasyon yapıldığı konusunda net bir fikriniz var. Ayrıca Nextflow'u başlatırken bunları komut satırında nasıl özelleştireceğinizi de biliyorsunuz. Bu, basit Bash komutumuza kıyasla daha ilginç görünmeye başlıyor.
 
 ## 4. İş Akışı Yürütmelerini Yönetme
 
-Tamam. Sırada ne var? Bu bölümün son kısmında, tüm farklı iş akışı yürütmelerini nasıl yöneteceğimiz hakkında biraz konuşacağız. Kenar çubuğuma ve Explorer'da work'ün altına bakarsanız, bir sürü farklı boru hattı çalıştırdığımı ve bu work dizinlerinin oldukça uzadığını, çok sayıda olduğunu göreceksiniz.
+Tamam. Sırada ne var? Bu bölümün son kısmında, tüm farklı iş akışı yürütmelerini nasıl yöneteceğimiz hakkında biraz konuşacağız. Kenar çubuğuma ve Explorer'da work'ün altına bakarsanız, bir sürü farklı pipeline çalıştırdığımı ve bu work dizinlerinin oldukça uzadığını, çok sayıda olduğunu göreceksiniz.
 
-Diğer bir şey de, daha önce söylediğim gibi, bu boru hattını her yeniden çalıştırdığımda yeni bir work dizinleri seti oluşturuyor ve tüm süreçleri sıfırdan yeniden çalıştırıyor; bu iyi bir şey. Bu amaçlanan davranış. Yeniden üretilebilir ve her şeyi taze bir şekilde yeniden oluşturuyor. Ancak açıkçası, çok uzun süren süreçler çalıştırıyorsanız, boru hattı yarı yolda çöktüyse veya boru hattının sonunda bir şeyi değiştirdiyseniz, her zaman baştan başlamak zorunda kalmak can sıkıcı.
+Diğer bir şey de, daha önce söylediğim gibi, bu pipeline'ı her yeniden çalıştırdığımda yeni bir work dizinleri seti oluşturuyor ve tüm süreçleri sıfırdan yeniden çalıştırıyor. Bu iyi bir şey. Amaçlanan davranış bu. Tekrarlanabilir ve her şeyi taze bir şekilde yeniden oluşturuyor. Ancak açıkçası, çok uzun süren süreçler çalıştırıyorsanız, yarı yolda çöktüyse veya pipeline'ın sonunda bir şeyi değiştirdiyseniz, her zaman pipeline'ın başından başlamak zorunda kalmak can sıkıcı.
 
 ## 4.1. Bir İş Akışını -resume ile Yeniden Başlatma
 
-Neyse ki Nextflow, daha önce neyin çalıştırıldığını ve neyin mevcut olduğunu bilmekte gerçekten iyidir; eski sonuçları yeniden kullanmak çok basittir. Komutun sonuna yeni bir bayrak ekliyoruz: _"-resume"_.
+Neyse ki Nextflow, daha önce neyin çalıştırıldığını ve neyin mevcut olduğunu bilmekte gerçekten iyidir; eski sonuçları yeniden kullanmak çok basit. Komutun sonuna yeni bir bayrak ekliyoruz: _"-resume"_.
 
-Şimdi, input'ta iki kısa çizgi olduğuna dikkat edin; çünkü bu bir parametredir. resume'da yalnızca bir kısa çizgi var; çünkü bu bir çekirdek Nextflow seçeneğidir.
+Şimdi, input'ta iki tire var çünkü bu bir parametredir. resume'da yalnızca bir tire var çünkü bu bir çekirdek Nextflow seçeneğidir.
 
-Uzun süredir Nextflow kullansanız bile insanları sürekli şaşırtıyor. Dolayısıyla her zaman bir veya iki kısa çizgiyi hatırlayın. Çekirdek bir Nextflow seçeneği olup olmadığına bağlıdır.
+Uzun süredir Nextflow kullansanız bile insanları sürekli şaşırtıyor. Bu nedenle her zaman bir veya iki tire olduğunu hatırlayın. Çekirdek bir Nextflow seçeneği mi olduğuna bağlı.
 
-Tamam, şimdi _-resume_ yapıyorum ve tam olarak aynı iş akışını tekrar çalıştırıyorum. Bu sefer bir temel farkla neredeyse tamamen aynı görünmesi gerekiyor.
+Tamam, şimdi _-resume_ yapıyorum ve tam olarak aynı iş akışını tekrar çalıştırıyorum. Bu sefer tek önemli farkla neredeyse tamamen aynı görünmeli.
 
-Buradaki çıktıda sonuçların önbelleğe alındığını görebilirsiniz. Aslında bu görev hash'i önceki çalıştırmayla tamamen aynı ve o work dizinini bütünüyle yeniden kullandı. Girdiler, çıktılar ve betik değiştirilmemişti. Dolayısıyla o dosyayı oradan alıyor ve boru hattında aşağı akış adımları varsa, bunları boru hattının bir sonraki adımına iletirdi.
+Çıktıda sonuçların önbelleğe alındığını görebilirsiniz. Aslında bu görev hash'i önceki çalıştırmayla tamamen aynı ve o work dizinini bütünüyle yeniden kullandı. Girdiler, çıktılar ve betik değiştirilmemişti. Bu nedenle o dosyayı oradan alıyor ve süreçte aşağı akış adımları varsa, bunları pipeline'daki bir sonraki adıma iletirdi.
 
-Yani boru hattının tamamını baştan sona çalıştırıyor; ancak yapabildiği her görev için önbelleğe alınmış sonuçları kullanıyor.
+Yani pipeline'ı baştan sona çalıştırıyor, ancak yapabildiği her görev için önbelleğe alınmış sonuçları kullanıyor.
 
-_-resume_ yaptığınızda, çalışma dizininizdeki son boru hattı çalıştırmasını devam ettirir; ne olursa olsun. Ancak aslında orada yaptığınız herhangi bir önceki çalıştırmadan devam edebilirsiniz. Şimdiye kadar oldukça fazla yaptık.
+_-resume_ yaptığınızda, çalışma dizininizdeki son pipeline çalıştırmasını devam ettirir; ne olursa olsun. Ancak aslında orada yaptığınız herhangi bir önceki çalıştırmadan devam edebilirsiniz. Şimdiye kadar oldukça fazla yaptık.
 
 ## 4.2. Geçmiş Yürütmelerin Günlüğünü İnceleme
 
 Hepsine bakmak için _"nextflow run"_ yerine _"nextflow log"_ yapabiliriz; bu bize tüm bu farklı çalıştırmaları gösteren güzel bir çıktı verecek. Ekranımı biraz küçültmem gerekiyor ki görebilelim; tüm bu farklı çalıştırmalar, ne zaman yaptığımız, oturum kimliği, komut ve her şey.
 
-Buraya bakabilir ve bunlardan herhangi birinin çalıştırma adını alıp ardından o belirli olanlardan birini devam ettirebiliriz. Geri gidip _hungry_ekeblad_ adlı olanı devam ettirebilirim. Bunu _resume_'dan sonra koyuyorum.
+Buraya bakabilir ve bunlardan herhangi birinin çalıştırma adını alıp o belirli olanlardan birini devam ettirebiliriz. Geri gidip _hungry_ekeblad_ adlı olanı devam ettirebilirim. Bunu _resume_'dan sonra koyuyorum.
 
-Bu arada merak ediyorsanız, tüm bu sıfatlar ve bilim insanı adları Nextflow kaynak kodundadır. Gidip bularak favori bilim insanınızı ekleyerek Nextflow'a ilk pull request'inizi yapmak için gerçekten iyi bir yol.
+Bu arada merak ediyorsanız, tüm bu sıfatlar ve bilim insanı adları Nextflow kaynak kodunda. Gidip bularak ve favori bilim insanınızı ekleyerek Nextflow'a ilk pull request'inizi göndermek için gerçekten iyi bir yol.
 
 Her neyse, bunu yaptım ve geri gidip bu iş akışı çalıştırmasından önbelleğe alınmış sonuçlara baktı, hâlâ yeniden kullanabileceğini fark etti ve kullandı. Yani önbelleğe alınmış sonuçları tekrar aldım.
 
 ## 4.3. Eski Work Dizinlerini Silme
 
-Harika. Peki bu work dizinlerini temizlemek istersem ne olur? Burada çok sayıda var. Çok sayıda dosya var. Belki son birkaç boru hattı çalıştırmasından devam etmek istediğimi kesinlikle biliyorum; ancak öncekilerle ilgilenmiyorum.
+Harika. Peki bu work dizinlerini temizlemek istersem? Burada çok sayıda var. Çok sayıda dosya var. Belki son birkaç pipeline çalıştırmasından devam etmek istediğimi kesinlikle biliyorum, ancak öncekilerle ilgilenmiyorum.
 
-O zaman buradan birini seçebilir ve başka bir Nextflow komutu kullanabilirim: _"nextflow clean"_. _"nextflow clean"_ yapacağım, _"-before"_ yapacağım ve bu örnekte _reverent_pike_ olan belirli çalıştırma adını belirteceğim; ardından _"-n"_ yapacağım; bu Nextflow'a yalnızca kuru çalıştırma yapmasını söylüyor. Yani gerçekte hiçbir şey yapmadan neyi sileceğini söylüyor. Bu work dizinlerini kaldıracaktı.
+O zaman buradan birini seçebilir ve başka bir Nextflow komutu kullanabilirim: _"nextflow clean"_. _"nextflow clean"_ yapacağım, _"-before"_ yapacağım ve bu örnekte _reverent_pike_ olan belirli çalıştırma adını belirteceğim. _"-n"_ yapacağım; bu Nextflow'a yalnızca kuru çalıştırma yapmasını söylüyor. Yani gerçekten hiçbir şey yapmadan neyi sileceğini söylüyor. Bu work dizinlerini kaldıracak.
 
-Bu mantıklı görünüyor. O hâlde aynı komutu tekrar yapacağım; ancak _"-n"_ yerine gerçekten temizleme yapmak için _"-f"_ kullanacağım. Bu sefer tüm bu dizinleri gerçekten kaldırdı. Work dizinlerine bakarsam, artık çok daha hafif görünüyor. Harika.
+Mantıklı görünüyor. Aynı komutu tekrar yapacağım, ancak _"-n"_ yerine gerçekten temizleme yapmak için _"-f"_ kullanacağım. Bu sefer tüm bu dizinleri gerçekten kaldırdı. Work dizinlerine bakarsam, artık çok daha hafif görünüyor. Harika.
 
 İşte yerel work dizinlerinizin tümünü önbelleği tamamen yok etmeden oldukça güvenli bir şekilde temizlemenin yolu. Yani isterseniz hâlâ devam edebilirsiniz.
 
-Bu bayrakların ne işe yaradığını unutursanız, her Nextflow komutu için _"nextflow help"_ ve ardından komutun adını yapabilirsiniz. _"nextflow help clean"_ yaparsam, tüm farklı seçenekleri görebilirsiniz: _-after, -before, -but_; bu temizleme davranışını yapılandırmanın tüm farklı yolları. Oldukça harika.
+Bu bayrakların ne olduğunu unutursanız, her Nextflow komutu için _"nextflow help"_ ve ardından komutun adını yapabilirsiniz. _"nextflow help clean"_ yaparsam, tüm farklı seçenekleri görebilirsiniz: _-after, -before, -but_; bu temizleme davranışını yapılandırmanın tüm farklı yolları. Oldukça harika.
 
-## Özet
+## Özetle
 
-Tamam, Hello Nextflow'un birinci bölümünün sonu bu. Kursun oldukça yoğun bir başlangıcı; ancak umarım artık bir Nextflow betiğinin nasıl göründüğü hakkında oldukça iyi bir anlayışa sahipsinizdir: farklı temel parçalar, süreçler, iş akışları, çıktılar ve parametreler. Bunları komut satırından temel geçersiz kılmalarla nasıl yapılandıracağınızı, dinamik bir betikle dinamik bir girdi bloğunu nasıl oluşturacağınızı ve tüm iş yükü yürütmelerinizi nasıl yöneteceğinizi biliyorsunuz: neleri çalıştırdığınızı görme, devam ettirme, temizleme. Çok şey var. Uzun bir yol kat ettiniz. Dolayısıyla bir mola vermek, kısa bir yürüyüş yapmak ve bir fincan çay içmek istiyorsanız, şimdi muhtemelen iyi bir zaman. Hak ettiniz.
+Tamam, Hello Nextflow'un birinci bölümünün sonu bu. Kursa oldukça yoğun bir başlangıç, ancak umarım artık bir Nextflow betiğinin nasıl göründüğü hakkında oldukça iyi bir anlayışa sahipsinizdir: farklı temel parçalar, süreçler, iş akışları, çıktılar ve parametreler. Bunları komut satırından temel geçersiz kılmalarla nasıl yapılandıracağınızı, dinamik bir betikle dinamik bir girdi bloğunu nasıl oluşturacağınızı ve tüm iş yükü yürütmelerinizi nasıl yöneteceğinizi biliyorsunuz: daha önce ne çalıştırdığınızı görme, devam ettirme, temizleme. Çok şey var. Uzun bir yol kat ettiniz. Bu nedenle kısa bir mola verip etrafta biraz dolaşmak ve bir fincan çay içmek istiyorsanız, şimdi tam zamanı. Hak ettiniz.
 
-Buradan itibaren temelde bu temel üzerine inşa ediyoruz. Bunu nasıl daha karmaşık, daha güçlü hâle getirebiliriz? Nasıl daha esnek hâle getirebiliriz? Analizimizi ölçekte yapmak istediğimiz şeyleri nasıl yapabiliriz?
+Buradan itibaren temelde bu temel üzerine inşa ediyoruz. Bunu nasıl daha karmaşık, daha güçlü hale getirebiliriz? Nasıl daha esnek hale getirebiliriz? Analizimizi ölçekte yapmak istediğimiz şeyleri nasıl yapabiliriz?
 
-## Sınav
+## Quiz
 
-Şimdi web sayfasında birinci bölüme, hello world'e kaydırırsanız küçük bir sınav göreceksiniz; bu, Nextflow eğitiminin bu sürümü için yaptığımız yeni bir şey. Geçip bu bölümde yaptığımız tüm materyali anladığınızı kontrol etmek için kendinizi sınayabilirsiniz.
+Şimdi web sayfasında birinci bölüme, hello world'e kaydırırsanız küçük bir quiz göreceksiniz; bu, Nextflow eğitiminin bu sürümü için yaptığımız yeni bir şey. Üzerinden geçip bu bölümde yaptığımız tüm materyali anlayıp anlamadığınızı kontrol edebilirsiniz.
 
-Bu bize gönderilmiyor veya herhangi bir yere kaydedilmiyor; yalnızca tarayıcınızda saklanıyor. Dolayısıyla cevaplarınızın ne olduğunu bilmiyoruz; ancak hiçbir şeyi kaçırmadığınızı veya yanlış anlamadığınızı kontrol etmek için küçük bir öz değerlendirme. İstediğiniz kadar deneyebilirsiniz.
+Bu bize gönderilmiyor veya herhangi bir yere kaydedilmiyor; yalnızca tarayıcınızda saklanıyor. Yani cevaplarınızı bilmiyoruz, ancak hiçbir şeyi kaçırıp kaçırmadığınızı veya yanlış anlayıp anlamadığınızı kontrol etmek için küçük bir öz değerlendirme. İstediğiniz kadar deneyebilirsiniz.
 
-Benim gibi VS Code örneğinizde terminalde kalmak istiyorsanız, _quiz_ komutunu yazıp hangi bölümde olduğunuzu söyleyebilirsiniz. _"Hello World"_ yapıyoruz ve ardından web tarayıcısındakiyle tamamen aynı sınav sorularını, ancak yalnızca terminalinizde yapabilirsiniz.
+Benim gibi VS Code örneğinizdeki terminalde kalmak istiyorsanız, _quiz_ komutunu yazıp hangi bölümde olduğunuzu söyleyebilirsiniz. _"Hello World"_ yapıyoruz ve ardından web tarayıcısındaki quiz sorularının tamamen aynısını, ancak yalnızca terminalinizde yapabilirsiniz.
 
-Harika. Tamam. Umarım bundan keyif alırsınız. Biraz eğlenin ve Nextflow kanalları hakkında konuşmak için bir dakika içinde bir sonraki bölümde görüşürüz.
+Harika. Tamam. Umarım keyif alırsınız. Biraz eğlenin ve kanallar hakkında konuşmak için bir dakika içinde bir sonraki bölümde görüşürüz.

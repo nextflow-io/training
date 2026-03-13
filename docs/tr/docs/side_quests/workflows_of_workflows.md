@@ -14,7 +14,7 @@ Bu yan görevin sonunda şunları yapabileceksiniz:
 
 - Karmaşık pipeline'ları mantıksal, yeniden kullanılabilir birimlere ayırma
 - Her workflow modülünü bağımsız olarak test etme
-- Yeni pipeline'lar oluşturmak için workflow'ları birleştirme
+- Yeni pipeline'lar oluşturmak için workflow'ları bir araya getirme
 - Ortak workflow modüllerini farklı pipeline'lar arasında paylaşma
 - Kodunuzu daha bakımı kolay ve anlaşılır hale getirme
 
@@ -55,13 +55,13 @@ code .
 
 'Hello Nextflow'da öğrendiklerinizin üzerine inşa eden birkaç süreç tanımı içeren bir `modules` dizini bulacaksınız:
 
-```console title="Dizin içeriği"
+```console title="Directory contents"
 modules/
-├── say_hello.nf             # Bir selamlama oluşturur (Hello Nextflow'dan)
-├── say_hello_upper.nf       # Büyük harfe dönüştürür (Hello Nextflow'dan)
-├── timestamp_greeting.nf    # Selamlamalara zaman damgası ekler
-├── validate_name.nf         # Girdi isimlerini doğrular
-└── reverse_text.nf          # Metin içeriğini tersine çevirir
+├── say_hello.nf             # Creates a greeting (from Hello Nextflow)
+├── say_hello_upper.nf       # Converts to uppercase (from Hello Nextflow)
+├── timestamp_greeting.nf    # Adds timestamps to greetings
+├── validate_name.nf         # Validates input names
+└── reverse_text.nf          # Reverses text content
 ```
 
 #### Görevi inceleyin
@@ -92,7 +92,7 @@ Tüm kutuları işaretleyebiliyorsanız, başlamaya hazırsınız.
 
 ### 1.1. Workflow yapısını oluşturma
 
-```bash title="Workflow dizini ve dosyası oluşturma"
+```bash title="Create workflow directory and file"
 mkdir -p workflows
 touch workflows/greeting.nf
 ```
@@ -149,7 +149,7 @@ Greeting workflow'unu bu yapıya uygun hale getirelim. Kodu aşağıdaki gibi de
 
 <!-- TODO: switch to before/after tabs -->
 
-```groovy title="workflows/greeting.nf" linenums="1" hl_lines="5 6 8 14 15 16"
+```groovy title="workflows/greeting.nf" linenums="1" hl_lines="6 7 9 15 16 17"
 include { VALIDATE_NAME } from '../modules/validate_name'
 include { SAY_HELLO } from '../modules/say_hello'
 include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
@@ -216,8 +216,8 @@ workflow {
     names = channel.of('Alice', 'Bob', 'Charlie')
     GREETING_WORKFLOW(names)
 
-    GREETING_WORKFLOW.out.greetings.view { "Orijinal: $it" }
-    GREETING_WORKFLOW.out.timestamped.view { "Zaman damgalı: $it" }
+    GREETING_WORKFLOW.out.greetings.view { "Original: $it" }
+    GREETING_WORKFLOW.out.timestamped.view { "Timestamped: $it" }
 }
 
 ```
@@ -249,7 +249,7 @@ nextflow run main.nf
 
 Çalışıyor! Adlandırılmış greeting workflow'unu, adlandırılmamış bir giriş `workflow` bloğuna sahip bir ana workflow'a sardık. Ana workflow, `GREETING_WORKFLOW` workflow'unu neredeyse (tam olarak değil) bir süreç gibi kullanıyor ve `names` kanalını argüman olarak geçiriyor.
 
-### Özet
+### Özetle
 
 Bu bölümde birkaç önemli kavram öğrendiniz:
 
@@ -324,8 +324,8 @@ workflow {
     TRANSFORM_WORKFLOW(GREETING_WORKFLOW.out.timestamped)
 
     // Sonuçları görüntüle
-    TRANSFORM_WORKFLOW.out.upper.view { "Büyük harf: $it" }
-    TRANSFORM_WORKFLOW.out.reversed.view { "Tersine çevrilmiş: $it" }
+    TRANSFORM_WORKFLOW.out.upper.view { "Uppercase: $it" }
+    TRANSFORM_WORKFLOW.out.reversed.view { "Reversed: $it" }
 }
 ```
 
@@ -361,11 +361,11 @@ Tersine çevrilmiş dosyalardan birine bakarsanız, bunun selamlamanın büyük 
 cat /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
 ```
 
-```console title="Tersine çevrilmiş dosya içeriği"
+```console title="Reversed file content"
 !ECILA ,OLLEH ]04:50:71 60-30-5202[
 ```
 
-### Özet
+### Özetle
 
 Artık şunları yapan tam bir pipeline'ınız olmalı:
 

@@ -390,7 +390,7 @@ Az önce öğrendiğiniz gibi, iş akışımız tarafından üretilen çıktı, 
 Bu kasıtlı olarak yapılır; Nextflow bu dizini kontrol eder ve biz onunla etkileşime girmememiz gerekir.
 Ancak bu, önemsediğimiz çıktıları almayı zorlaştırır.
 
-Neyse ki Nextflow, [iş akışı düzeyinde çıktı tanımlarını](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs) kullanarak çıktıları belirlenmiş bir dizine yayınlamanın bir yolunu sağlar.
+Neyse ki Nextflow, [iş akışı düzeyinde çıktı tanımlarını](https://nextflow.io/docs/latest/workflow.html#workflow-outputs) kullanarak çıktıları belirlenmiş bir dizine yayınlamanın bir yolunu sağlar.
 
 ### 2.1. Temel kullanım
 

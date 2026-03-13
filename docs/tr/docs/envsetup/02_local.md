@@ -24,7 +24,7 @@ Toplamda, aşağıdaki yazılımların yüklü olması gerekir:
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Conda](https://conda.io/) 4.5 (veya sonrası)
-- [Nextflow eklentisi](https://www.nextflow.io/docs/latest/developer-env.html#devenv-nextflow) ile [VSCode](https://code.visualstudio.com)
+- [Nextflow eklentisi](https://code.visualstudio.com) ile [VSCode](https://www.nextflow.io/docs/latest/developer-env.html#devenv-nextflow)
 
 VSCode uygulaması teknik olarak isteğe bağlıdır, ancak kurslar üzerinde çalışırken ve genel olarak Nextflow geliştirme çalışmalarınız için kullanmanızı şiddetle öneririz.
 

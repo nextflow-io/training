@@ -14,9 +14,9 @@
 
 ## Hoş geldiniz ve arka plan
 
-Merhaba ve Hello Nextflow'a tekrar hoş geldiniz. Bu, Hello Containers adlı beşinci bölüm. Kursun bu bölümünde, bir boru hattı için yazılım gereksinimlerini nasıl kapsülleyeceğimizi konuşacağız; böylece boru hattını çalıştıran kişilerin yazılımı yüklemeyi düşünmelerine gerek kalmayacak.
+Merhaba ve Hello Nextflow'a tekrar hoş geldiniz. Bu, Hello Containers adlı beşinci bölüm. Kursun bu bölümünde, bir pipeline için yazılım gereksinimlerini nasıl kapsülleyeceğimizi konuşacağız; böylece pipeline'ı çalıştıran kişilerin yazılımı yüklemeyi düşünmelerine gerek kalmayacak.
 
-Benim kadar uzun süredir biyoinformatikte çalışıyorsanız, sık sık "kötü eski günler" dediğim zamanları hatırlayabilirsiniz. Başkasının boru hattını çalıştırmak veya çalışmalarını tekrarlamak istediğinizde, kullandıkları tüm farklı yazılım araçlarını aynı sürümlerde makinenizde derlemek için saatler veya günler harcardınız; bu gerçek bir kabusту. Gerçekten zordu.
+Benim kadar uzun süredir biyoinformatikte çalışıyorsanız, sık sık "kötü eski günler" dediğim zamanları hatırlayabilirsiniz. Başkasının pipeline'ını çalıştırmak veya çalışmalarını tekrarlamak istediğinizde, kullandıkları tüm farklı yazılım araçlarını aynı sürümlerde makinenizde derlemek için saatler veya günler harcardınız; bu gerçek bir kabusту. Gerçekten zordu.
 
 Bir HPC üzerinde çalışıyorsanız, sistem yöneticilerinin sizin için yazılım yüklemeye çalıştığı ortam modüllerini kullanmış olabilirsiniz. Bu yöntem işe yarıyordu, ama yine de kusurlu bir çözümdü.
 
@@ -24,7 +24,7 @@ Ama şimdi bunu yapmanın daha iyi yolları var. Nextflow'un farklı yazılım k
 
 Bunların yanı sıra, HPC sistemlerinde çok yaygın olan ve temelde tamamen aynı şekilde çalışan Singularity veya Apptainer da mevcuttur. Podman, Shifter ve bunlara çok benzeyen başka araçlar da var.
 
-Nextflow'un desteklediği, benzer ama tam olarak aynı olmayan bir diğer seçenek ise Conda'dır. Nextflow, süreç bazında Conda ortamlarını sizin için yönetebilir; bu, kendi Conda ortamlarınızı kendiniz oluşturmaktan çok daha iyidir. Üstelik bir boru hattıyla birlikte gönderilebilir.
+Nextflow'un desteklediği, benzer ama tam olarak aynı olmayan bir diğer seçenek ise Conda'dır. Nextflow, süreç bazında Conda ortamlarını sizin için yönetebilir; bu, kendi Conda ortamlarınızı kendiniz oluşturmaktan çok daha iyidir. Üstelik bir pipeline ile birlikte gönderilebilir.
 
 Bu bölüme konteyner teknolojileri, Docker ve bunların nasıl çalıştığı hakkında biraz konuşarak başlayacağız. İlk yarıyı yalnızca Docker'da manuel olarak yapacağız; böylece perde arkasında neler olduğunu ve bunun nasıl çalıştığını anlayacaksınız. Nextflow'un ne yaptığını ve iş akışınızın çalıştırıldığında ne yaptığını anlamak için bu gerçekten önemlidir.
 
@@ -48,7 +48,7 @@ Bir container içinde çalışan görevler, yerel sisteminizdeki herhangi bir ya
 
 Docker imajlarını ve Docker'ı deneyeceğiz. Sisteminizde çalıştırdığınızda Docker, bilgisayarınızda veya bu durumda kod alanında, geçmişte indirilen ve kullanılan tüm farklı imajları ve üzerine inşa edildikleri farklı katmanları takip eden bir docker kayıt defteri tutar.
 
-Docker ile yerel olarak hangi imajlara sahip olduğumuzu `docker image ls` komutuyla görebiliriz. Bu durumda burada bir sürü Docker imajı olduğunu görebilirsiniz; bunların hepsi bu Codespaces'i kurmakla ilgilidir. Hepsi dev container'lar ve benzeri şeylerle ilgili. Bu yüzden onlar hakkında çok fazla endişelenmenize gerek yok. Ama kurs ilerledikçe daha fazla imaj ekleyip indirdikçe o listeyi kontrol edebilirsiniz; yerel kayıt defterinin çektiğimiz tüm bu şeyleri takip ettiğini göreceksiniz.
+Docker ile yerel olarak hangi imajlara sahip olduğumuzu `docker image ls` komutuyla görebiliriz. Bu durumda burada bir sürü Docker imajı olduğunu görebilirsiniz; bunların hepsi bu Codespaces'i kurmakla ilgilidir. Hepsi dev container'lar ve benzerleriyle ilgili. Bu yüzden onlar hakkında çok fazla endişelenmenize gerek yok. Ama kurs ilerledikçe daha fazla imaj ekleyip indirdikçe o listeyi kontrol edebilirsiniz; yerel kayıt defterinin çektiğimiz tüm bu şeyleri takip ettiğini göreceksiniz.
 
 Yeni bir tane almak için `docker pull` komutunu kullanacağız. Bu komut Docker'a web'den yeni bir imaj getirmesini söyler.
 
@@ -70,7 +70,7 @@ Başka biri daha önce aynı container'ı istemiş ve bir kayıt defterinden dö
 
 Bu URL'yi kopyalayabiliriz ve ayrıca yapı ayrıntılarını görebiliriz. Bu, hizmetin arka planda ne yaptığını gösterir: bir conda ortam dosyası oluşturdu, bir docker dosyası oluşturdu ve ardından docker yapı sürecini çalıştırdı. Ayrıca bir güvenlik taraması çalıştırdı; böylece herhangi bir CVE'yi görebilirsiniz. Ne zaman oluşturulduğunu da söyler.
 
-Wave ve Seqera Containers bundan çok daha fazlasını yapabilir, ama bu en yaygın olan basit bir kullanım durumudur. Bu imajların en az beş yıl boyunca barındırıldığını da belirtmeliyim. Yani bu URL'leri boru hatlarınıza yerleştirebilir ve yakın zamanda kaybolmayacaklarını bilebilirsiniz.
+Wave ve Seqera Containers bundan çok daha fazlasını yapabilir, ama bu en yaygın olan basit bir kullanım durumudur. Bu imajların en az beş yıl boyunca barındırıldığını da belirtmeliyim. Yani bu URL'leri pipeline'larınıza yerleştirebilir ve yakın zamanda kaybolmayacaklarını bilebilirsiniz.
 
 Böylece cowpy için docker imajımın URL'sini aldım.
 
@@ -136,7 +136,7 @@ Konteyner kullanmak gerçekten havalı. Umarım mantıklıdır. Bu container'lar
 
 Ama tüm bu aynı süreci Nextflow içinde nasıl yaparız? Kendimiz bir sürü Docker komutu çalıştırmak istemiyoruz. Nextflow'un tüm bunları bizim için halletmesini istiyoruz.
 
-Öyleyse bunu çözelim. Boru hattımıza cowpy çalıştırmak için yeni bir süreç ekleyeceğiz. Yeni sürecimiz için yeni bir modül oluşturalım. Modüller dizinine gidin, buna `cowPy.nf` diyelim ve ardından eğitim materyalinden kodu kopyalayacağım.
+Öyleyse bunu çözelim. Pipeline'ımıza cowpy çalıştırmak için yeni bir süreç ekleyeceğiz. Yeni sürecimiz için yeni bir modül oluşturalım. Modüller dizinine gidin, buna `cowPy.nf` diyelim ve ardından eğitim materyalinden kodu kopyalayacağım.
 
 Sürecin çok basit olduğunu görebilirsiniz. Şimdiye kadar yaptıklarımıza çok benziyor: girdi dosyamız olan bir `path` ile bir girdi bloğumuz var ve ayrıca burada bir `value` var; bu bir karakter olacak, yani isterseniz yine bir geyik kullanabiliriz.
 
@@ -180,7 +180,7 @@ Ne yazık ki, süreç için bir container tanımlamış olmamıza rağmen tamame
 
 Bunu yeni bir yapılandırma dosyası oluşturarak yapacağız. `touch nextflow.config` diyeceğim.
 
-Bu, boru hattını başlatırken çalışma dizininde bulunursa otomatik olarak yüklenecek özel bir dosya adıdır. Bu `nextflow.config` dosyasına girersem, aslında zaten var olduğunu görebilirsiniz; bunu unutmuştum. Burada `docker.enabled` zaten var, ama `false`'a ayarlı; bu varsayılan değerdir.
+Bu, pipeline'ı başlatırken çalışma dizininde bulunursa otomatik olarak yüklenecek özel bir dosya adıdır. Bu `nextflow.config` dosyasına girersem, aslında zaten var olduğunu görebilirsiniz; bunu unutmuştum. Burada `docker.enabled` zaten var, ama `false`'a ayarlı; bu varsayılan değerdir.
 
 Bunu `true`'ya eşit olacak şekilde değiştirirsem, `docker.enabled`. Bu yapılandırma kapsamlarının tümü için Nextflow dokümanlarında referans dokümanları var. Ayrıca VS Code uzantısıyla üzerine geldiğimde, bununla ilgili dokümanları çekiyor ve bunun ne anlama geldiğini ve nasıl ayarlanacağını söylüyor.
 
@@ -206,7 +206,7 @@ Bu sefer süper hızlı. Hadi bu çalışma dizinine gidelim: `cd work/`. Hatır
 
 Böylece Nextflow'un iş akışı mantığını aldığını görebilirsiniz; bu gerçekten önemsediğimiz şeydir, analizimize özgü olandır. Nextflow, sistemimizde Docker'ın çalışmasını sağlamak için tüm akıllı perde arkası işleri yapıyor.
 
-Bunu gerçekten taşınabilir bir şekilde yapıyor; böylece boru hattının son kullanıcısı kullandıkları teknolojiyi değiştirebilir: Docker, Singularity, Apptainer, Conda. Bu, boru hattı mantığı açısından gerçekten önemli değil; ama Nextflow tüm temel altyapı ihtiyaçlarını halledecek, böylece her yerde çalışır.
+Bunu gerçekten taşınabilir bir şekilde yapıyor; böylece pipeline'ın son kullanıcısı kullandıkları teknolojiyi değiştirebilir: Docker, Singularity, Apptainer, Conda. Bu, pipeline mantığı açısından gerçekten önemli değil; ama Nextflow tüm temel altyapı ihtiyaçlarını halledecek, böylece her yerde çalışır.
 
 Ve bu gerçekten Nextflow'un süper gücüdür: tekrarlanabilirlik ve taşınabilirlik. Nextflow ile iş akışınızı gerçekten paylaşabilirsiniz; diğer insanlar kendi sistemlerinde çalıştırabilir ve sadece çalışır.
 

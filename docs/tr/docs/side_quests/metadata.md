@@ -237,7 +237,7 @@ Bu harika! Belirli alanlara her dosyadan erişmeyi kolaylaştırıyor.
 
     Çıktıda görmeyi bekleyebileceğiniz şey:
 
-    ```console title="Çıktı"
+    ```console title="Output"
      N E X T F L O W   ~  version 25.10.2
 
     Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
@@ -359,7 +359,7 @@ nextflow run main.nf
 
 ??? success "Komut çıktısı"
 
-    ```console title="Meta map'i görüntüle"
+    ```console title="View meta map"
      N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
@@ -375,7 +375,7 @@ nextflow run main.nf
 
 Artık kanaldaki her öğe önce metadata map'i, sonra da karşılık gelen dosya nesnesini içerir:
 
-```console title="Örnek çıktı yapısı"
+```console title="Example output structure"
 [
   [id:sampleA, character:squirrel],
   /workspaces/training/side-quests/metadata/data/bonjour.txt
@@ -385,7 +385,7 @@ Artık kanaldaki her öğe önce metadata map'i, sonra da karşılık gelen dosy
 Sonuç olarak, veri tablosuna daha fazla sütun eklemek `meta` map'inde daha fazla metadata kullanılabilir hale getirecek; ancak kanal şeklini değiştirmeyecektir.
 Bu, metadata öğelerini girdi belirtimine sabit kodlamak zorunda kalmadan kanalı tüketen süreçler yazmamızı sağlar:
 
-```groovy title="Sözdizimi örneği"
+```groovy title="Syntax example"
     input:
     tuple val(meta), file(recording)
 ```
@@ -1559,7 +1559,7 @@ Bir sürecin içinden meta map bilgilerini kullanma pratiği yapmak istiyorsanı
 
 Örneğin, bu sonucu üretmek için kodu değiştirmeyi deneyin:
 
-```console title="Results dizini içeriği"
+```console title="Results directory contents"
 results/
 ├── germanic
 │   ├── de-guten_tag.txt
