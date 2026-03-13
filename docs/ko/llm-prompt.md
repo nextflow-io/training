@@ -165,6 +165,7 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | lowercase     | 소문자      | Actual translation                                                      |
 | materials     | 자료        | Actual translation                                                      |
 | course        | 과정        | Actual translation                                                      |
+| Customizing pipeline behavior | 파이프라인 동작의 맞춤화 | NOT 파이프라인 동작 사용자 정의                   |
 
 ### Parsing Note
 
