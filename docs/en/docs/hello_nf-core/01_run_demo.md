@@ -1,8 +1,8 @@
 # Part 1: Run a demo pipeline
 
-In this first part of the Hello nf-core training course, we show you how to find and try out an nf-core pipeline, understand how the code is organized, and recognize how it differs from plain Nextflow code as shown in [Hello Nextflow](../hello_nextflow/index.md).
+In this first part of the Hello nf-core training course, we show you how to find and try out an nf-core pipeline, configure and customize it for your needs, and understand how input validation protects against common errors.
 
-We are going to use a pipeline called nf-core/demo that is maintained by the nf-core project as part of its inventory of pipelines for demonstrating code structure and tool operations.
+We are going to use a pipeline called nf-core/demo that is maintained by the nf-core project as part of its inventory of pipelines for demonstration and training purposes.
 
 Make sure your working directory is set to `hello-nf-core/` as instructed on the [Getting started](./00_orientation.md) page.
 
@@ -119,30 +119,23 @@ tree -L 2 $NXF_HOME/assets/
 
 Nextflow keeps the downloaded source code intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
 
-However, for the purposes of this training, we want to be able to poke around and see what's in there.
-So to make that easier, let's create a symbolic link to that location from our current working directory.
+??? note "Optional: Create a symlink to explore the source code"
 
-```bash
-ln -s $NXF_HOME/assets pipelines
-```
+    To make it easier to browse the pipeline source code later, create a symbolic link to the assets directory:
 
-This creates a shortcut that makes it easier to explore the code we just downloaded.
+    ```bash
+    ln -s $NXF_HOME/assets pipelines
+    ```
 
-```bash
-tree -L 2 pipelines
-```
+    This creates a shortcut so you can explore the code with `tree -L 2 pipelines` or open files directly.
+    We will use this in Part 2 when examining how nf-core pipelines are structured internally.
 
-```console title="Directory contents"
-pipelines
-└── nf-core
-    └── demo
+!!! tip
 
-2 directories, 0 files
-```
+    You can also browse any nf-core pipeline's source code on GitHub, e.g. [github.com/nf-core/demo](https://github.com/nf-core/demo).
+    Every nf-core pipeline follows the same directory layout, so once you know the structure, you can find configuration files, modules, and workflows for any pipeline the same way.
 
-Now we can more easily peek into the source code as needed.
-
-But first, let's try running our first nf-core pipeline!
+Now, on to running the pipeline!
 
 ### Takeaway
 
@@ -168,7 +161,14 @@ It's a great way to quickly try out a pipeline at small scale.
 ### 2.1. Examine the test profile
 
 It's good practice to check what a pipeline's test profile specifies before running it.
-The `test` profile for `nf-core/demo` lives in the configuration file `conf/test.config` and is shown below.
+The `test` profile for `nf-core/demo` lives in the configuration file `conf/test.config`.
+You can find it locally inside the pipeline source that `nextflow pull` downloaded:
+
+```bash
+code $NXF_HOME/assets/nf-core/demo/conf/test.config
+```
+
+Here is the content of that file:
 
 ```groovy title="conf/test.config" linenums="1" hl_lines="8 26"
 /*
@@ -204,8 +204,7 @@ params {
 You'll notice right away that the comment block at the top includes a usage example showing how to run the pipeline with this test profile.
 
 ```groovy title="conf/test.config" linenums="7"
-Use as follows:
-        nextflow run nf-core/demo -profile test,<docker/singularity> --outdir <OUTDIR>
+don        nextflow run nf-core/demo -profile test,<docker/singularity> --outdir <OUTDIR>
 ```
 
 The only things we need to supply are what's shown between carets in the example command: `<docker/singularity>` and `<OUTDIR>`.
@@ -310,6 +309,23 @@ There's a header that includes a summary of the pipeline's version, inputs and o
 
     Your output will show different timestamps, execution names, and file paths, but the overall structure and process execution should be similar.
 
+Notice the line near the top of the output:
+
+```console
+Launching `https://github.com/nf-core/demo` [magical_pauling] DSL2 - revision: db7f526ce1 [master]
+```
+
+This tells you which revision of the pipeline was used.
+Because we did not specify a version, Nextflow used the latest commit on `master`.
+For reproducible runs, you should pin a specific release using the `-r` flag:
+
+```bash
+nextflow run nf-core/demo -r 1.0.2 -profile docker,test --outdir demo-results
+```
+
+This ensures that the same pipeline code is used every time, regardless of new commits or releases.
+For this training we omit `-r` for simplicity, but in production you should always specify it.
+
 Moving on to the execution output, let's have a look at the lines that tell us what processes were run:
 
 ```console
@@ -322,7 +338,7 @@ This tells us that three processes were run, corresponding to the three tools sh
 
 The full process names as shown here, such as `NFCORE_DEMO:DEMO:MULTIQC`, are longer than what you may have seen in the introductory Hello Nextflow material.
 These include the names of their parent workflows and reflect the modularity of the pipeline code.
-We'll go into more detail about that in a little bit.
+We'll go into more detail about that in Part 2 of this course.
 
 ### 2.3. Examine the pipeline's outputs
 
@@ -379,264 +395,252 @@ You know how to run an nf-core pipeline using its built-in test profile and wher
 
 ### What's next?
 
-Learn how the pipeline code is organized.
+Learn how to configure and customize the pipeline.
 
 ---
 
-## 3. Examine the pipeline code structure
+## 3. Configure and customize the pipeline
 
-Now that we've successfully run the pipeline as users, let's shift our perspective to look at how nf-core pipelines are structured internally.
-
-The nf-core project enforces strong guidelines for how pipelines are structured, and for how the code is organized, configured and documented.
-Understanding how this is all organized is the first step toward developing your own nf-core-compatible pipelines, which we will tackle in Part 2 of this course.
-
-Let's have a look at how the pipeline code is organized in the `nf-core/demo` repository, using the `pipelines` symlink we created earlier.
-
-You can either use `tree` or use the file explorer to find and open the `nf-core/demo` directory.
-
-```bash
-tree -L 1 pipelines/nf-core/demo
-```
-
-??? abstract "Directory contents"
-
-    ```console
-    pipelines/nf-core/demo
-    ├── assets
-    ├── CHANGELOG.md
-    ├── CITATIONS.md
-    ├── CODE_OF_CONDUCT.md
-    ├── conf
-    ├── docs
-    ├── LICENSE
-    ├── main.nf
-    ├── modules
-    ├── modules.json
-    ├── nextflow.config
-    ├── nextflow_schema.json
-    ├── nf-test.config
-    ├── README.md
-    ├── ro-crate-metadata.json
-    ├── subworkflows
-    ├── tests
-    ├── tower.yml
-    └── workflows
-    ```
-
-There's a lot going on in there, so we'll tackle this step by step.
-
-First, let's note that at the top level, you can find a README file with summary information, as well as accessory files that summarize project information such as licensing, contribution guidelines, citation and code of conduct.
-Detailed pipeline documentation is located in the `docs` directory.
-All of this content is used to generate the web pages on the nf-core website programmatically, so they're always up to date with the code.
-
-Now, for the rest, we're going to divide our exploration in three stages:
-
-1. Pipeline code components (`main.nf`, `workflows`, `subworkflows`, `modules`)
-2. Pipeline configuration
-3. Inputs and validation
-
-Let's start with the pipeline code components.
-We're going to focus on the file hierarchy and structural organization, rather than diving into the code within individual files.
-
-### 3.1. Pipeline code components
-
-The standard nf-core pipeline code organization follows a modular structure that is designed to maximize code reuse, as introduced in [Hello Modules](../hello_nextflow/04_hello_modules.md), Part 4 of the [Hello Nextflow](../hello_nextflow/index.md) course, although in true nf-core fashion, this is implemented with a bit of additional complexity.
-Specifically, nf-core pipelines make abundant use of subworkflows, i.e. workflow scripts that are imported by a parent workflow.
-
-That may sound a bit abstract, so let's take a look how this is used in practice in the `nf-core/demo` pipeline.
-
-!!! note
-
-    We won't go over the actual code for _how_ these modular components are connected, because there is some additional complexity associated with the use of subworkflows that can be confusing, and understanding that is not necessary at this stage of the training.
-    For now, we're going to focus on the overall organization and logic.
-
-#### 3.1.1. General overview
-
-Here is what the relationships between the relevant code components look like for the `nf-core/demo` pipeline:
+Nextflow distinguishes between **parameters** (what a pipeline processes) and **configuration** (how it runs).
+nf-core builds on this by requiring all parameters to be formally defined in a JSON schema file (`nextflow_schema.json`).
+This schema records each parameter's type, description, default value, and grouping.
+It powers the `--help` output, automated validation at startup, the Parameters tab on the nf-core website that you explored in section 1, and launch forms in tools like Seqera Platform.
 
 <figure class="excalidraw">
-    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+    --8<-- "docs/en/docs/hello_nf-core/img/params_vs_config.excalidraw.svg"
 </figure>
 
-There is a so-called _entrypoint_ script called `main.nf`, which acts as a wrapper for two kinds of nested workflows: the workflow containing the actual analysis logic, located under `workflows/` and called `demo.nf`, and a set of housekeeping workflows located under `subworkflows/`.
-The `demo.nf` workflow calls on **modules** located under `modules/`; these contain the **processes** that will perform the actual analysis steps.
+### 3.1. Get help
 
-!!! note
+nf-core pipelines use the [nf-schema plugin](https://nextflow-io.github.io/nf-schema/latest/) to generate structured, grouped `--help` output automatically from the schema file.
 
-    Subworkflows are not limited to housekeeping functions, and they can make use of process modules.
-
-    The `nf-core/demo` pipeline shown here happens to be on the simpler side on the spectrum, but other nf-core pipelines (such as `nf-core/rnaseq`) utilize subworkflows that are involved in the actual analysis.
-
-Now, let's review these components in turn.
-
-#### 3.1.2. The entrypoint script: `main.nf`
-
-The `main.nf` script is the entrypoint that Nextflow starts from when we execute `nextflow run nf-core/demo`.
-That means when you run `nextflow run nf-core/demo` to run the pipeline, Nextflow automatically finds and executes the `main.nf` script.
-This works for any Nextflow pipeline that follows this conventional naming and structure, not just nf-core pipelines.
-
-Using an entrypoint script makes it easy to run standardized 'housekeeping' subworkflows before and after the actual analysis script gets run.
-We'll go over those after we've reviewed the actual analysis workflow and its modules.
-
-#### 3.1.3. The analysis script: `workflows/demo.nf`
-
-The `workflows/demo.nf` workflow is where the central logic of the pipeline is stored.
-It is structured much like a normal Nextflow workflow, except it is designed to be called from a parent workflow, which requires a few extra features.
-We'll cover the relevant differences in the next part of this course, when we tackle the conversion of the simple Hello pipeline from Hello Nextflow into an nf-core-compatible form.
-
-The `demo.nf` workflow calls on **modules** located under `modules/`, which we'll review next.
-
-!!! note
-
-    Some nf-core analysis workflows display additional levels of nesting by calling on lower-level subworkflows.
-    This is mostly used for wrapping two or more modules that are commonly used together into easily reusable pipeline segments.
-    You can see some examples by browsing available [nf-core subworkflows](https://nf-co.re/subworkflows/) on the nf-core website.
-
-    When the analysis script uses subworkflows, those are stored under the `subworkflows/` directory.
-
-#### 3.1.4. The modules
-
-The modules are where the process code lives, as described in [Part 4 of the Hello Nextflow training course](../hello_nextflow/04_hello_modules.md).
-
-In the nf-core project, modules are organized using a multi-level nested structure that reflect both their origin and their contents.
-At the top level, modules are differentiated as either `nf-core` or `local` (not part of the nf-core project), and then further placed into a directory named after the tool(s) they wrap.
-If the tool belongs to a toolkit (i.e. a package containing multiple tools) then there is an intermediate directory level named after the toolkit.
-
-You can see this applied in practice to the `nf-core/demo` pipeline modules:
+Run the help command for the demo pipeline:
 
 ```bash
-tree -L 3 pipelines/nf-core/demo/modules
+nextflow run nf-core/demo --help
 ```
 
-??? abstract "Directory contents"
-
-    ```console
-    pipelines/nf-core/demo/modules
-    └── nf-core
-        ├── fastqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        ├── multiqc
-        │   ├── environment.yml
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        └── seqtk
-            └── trim
-
-    7 directories, 6 files
-    ```
-
-Here you see that the `fastqc` and `multiqc` modules sit at the top level within the `nf-core` modules, whereas the `trim` module sits under the toolkit that it belongs to, `seqtk`.
-In this case there are no `local` modules.
-
-The module code file describing the process is always called `main.nf`, and is accompanied by tests and `.yml` files which we'll ignore for now.
-
-Taken together, the entrypoint workflow, analysis workflow and modules are sufficient for running the 'interesting' parts of the pipeline.
-However, we know there are also housekeeping subworkflows in there, so let's look at those now.
-
-#### 3.1.5. The housekeeping subworkflows
-
-Like modules, subworkflows are differentiated into `local` and `nf-core` directories, and each subworkflow has its own nested directory structure with its own `main.nf` script, tests and `.yml` file.
-
-```bash
-tree -L 3 pipelines/nf-core/demo/subworkflows
-```
-
-??? abstract "Directory contents"
-
-    ```console
-    pipelines/nf-core/demo/subworkflows
-    ├── local
-    │   └── utils_nfcore_demo_pipeline
-    │       └── main.nf
-    └── nf-core
-        ├── utils_nextflow_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        ├── utils_nfcore_pipeline
-        │   ├── main.nf
-        │   ├── meta.yml
-        │   └── tests
-        └── utils_nfschema_plugin
-            ├── main.nf
-            ├── meta.yml
-            └── tests
-
-    9 directories, 7 files
-    ```
-
-As noted above, the `nf-core/demo` pipeline does not include any analysis-specific subworkflows, so all the subworkflows we see here are so-called 'housekeeping' or 'utility' workflows, as denoted by the `utils_` prefix in their names.
-These subworkflows are what produces the fancy nf-core header in the console output, among other accessory functions.
+The output groups parameters into categories (Input/output options, Reference genome options, etc.) with types and descriptions for each one.
+In plain Nextflow pipelines, `--help` only works if the developer implemented it manually.
 
 !!! tip
 
-    Aside from their naming pattern, another indication that these subworkflows do not perform any truly analysis-related function is that they do not call any processes at all.
+    Use `--help --show_hidden` to see additional parameters that are hidden by default, such as `--publish_dir_mode` or `--monochrome_logs`.
 
-This completes the round-up of core code components that constitute the `nf-core/demo` pipeline.
-Now let's take a look at the remaining elements that you should know a little bit about before diving into development: pipeline configuration and input validation.
+### 3.2. Set parameters
 
-### 3.2. Pipeline configuration
+As covered in [Hello Config](../hello_nextflow/06_hello_config.md), you can override parameters on the command line with `--param_name` or collect them in a YAML file and pass it with `-params-file`.
+Both approaches work the same way with nf-core pipelines.
 
-You've learned previously that Nextflow offers many options for configuring pipeline execution, be it in terms of inputs and parameters, computing resources, and other aspects of orchestration.
-The nf-core project applies highly standardized guidelines for pipeline configuration that aim to build on Nextflow's flexible customization options in a way that provides greater consistency and maintainability across pipelines.
+For example, to skip the trimming step:
 
-The central configuration file `nextflow.config` is used to set default values for parameters and other configuration options.
-The majority of these configuration options are applied by default while others (e.g., software dependency profiles) are included as optional profiles.
-
-There are several additional configuration files that are stored in the `conf` folder and which can be added to the configuration by default or optionally as profiles:
-
-- `base.config`: A 'blank slate' config file, appropriate for general use on most high-performance computing environments. This defines broad bins of resource usage, for example, which are convenient to apply to modules.
-- `modules.config`: Additional module directives and arguments.
-- `test.config`: A profile to run the pipeline with minimal test data, which we used when we ran the demo pipeline.
-- `test_full.config`: A profile to run the pipeline with a full-sized test dataset.
-
-We will touch a few of those files later in the course.
-
-### 3.3. Inputs and validation
-
-As we noted earlier, when we examined the `nf-core/demo` pipeline's test profile, it is designed to take as input a samplesheet containing file paths and sample identifiers.
-The file paths linked to real data located in the `nf-core/test-datasets` repository.
-
-An example samplesheet is also provided under the `assets` directory, although the paths in this one are not real.
-
-```csv title="assets/samplesheet.csv" linenums="1"
-sample,fastq_1,fastq_2
-SAMPLE_PAIRED_END,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz
-SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
-
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-notrim --skip_trim
 ```
 
-This particular samplesheet is fairly simple, but some pipelines run on samplesheets that are more complex, with a lot more metadata associated with the primary inputs.
+The `SEQTK_TRIM` process no longer appears in the output.
 
-Unfortunately, because these files can be difficult to check by eye, improper formatting of input data is a very common source of pipeline failures.
-A related problem is when parameters are provided incorrectly.
+nf-core discourages setting parameters inside config files using `params { }` blocks.
+Parameters defined in a custom config file passed with `-c` may not override defaults already set in the pipeline's own `nextflow.config`, depending on Nextflow's configuration precedence rules.
+Using `--param_name` on the command line or `-params-file` is more reliable, as these always take precedence.
 
-The solution to these problems is to run automated validation checks on all input files to ensure they contain the expected types of information, formatted correctly, and on parameters to ensure they are of the expected type.
-This is called input validation, and should ideally be done _before_ trying to run a pipeline, rather than waiting for the pipeline to fail to find out there was a problem with the inputs.
+!!! warning
 
-Just like for configuration, the nf-core project is very opinionated about input validation, and recommends the use of the [nf-schema plugin](https://nextflow-io.github.io/nf-schema/latest/), a Nextflow plugin that provides comprehensive validation capabilities for Nextflow pipelines.
+    As a rule of thumb: if it appears in the `--help` output, set it via the command line or a params file. Everything else belongs in a config file.
 
-We'll cover this topic in more detail in Part 5 of this course.
-For now, just be aware that there are two JSON files provided for that purpose, `nextflow_schema.json` and `assets/schema_input.json`.
+### 3.3. Input validation
 
-The `nextflow_schema.json` is a file used to store information about the pipeline parameters including type, description and help text in a machine readable format.
-This is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
+nf-core pipelines use the [nf-schema plugin](https://nextflow-io.github.io/nf-schema/latest/) to validate inputs at startup, before any processes run.
+Because all parameters are defined in the `nextflow_schema.json` schema, nf-schema can check that every parameter you pass is recognized and has the correct value.
 
-The `schema_input.json` is a file used to define the input samplesheet structure.
-Each column can have a type, pattern, description and help text in a machine readable format.
-The schema is used for various purposes, including automated validation, and providing helpful error messages.
+#### 3.3.1. Unrecognized parameters
+
+Try passing a parameter that does not exist:
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results --foobar "invalid"
+```
+
+The console output includes a warning:
+
+```console
+WARN: The following invalid input values have been detected:
+
+* --foobar: invalid
+```
+
+The pipeline still runs, but the warning alerts you that `--foobar` is not a recognized parameter.
+This catches typos like `--outDir` instead of `--outdir` before you waste compute time wondering why the output went to the wrong place.
+
+#### 3.3.2. Invalid parameter values
+
+Validation also checks parameter **values**.
+The `--skip_trim` parameter is a boolean flag, so passing a string value causes the pipeline to fail immediately:
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results --skip_trim yes
+```
+
+```console
+ERROR ~ Validation of pipeline parameters failed!
+
+The following invalid input values have been detected:
+
+* --skip_trim (yes): Value is [string] but should be [boolean]
+```
+
+The pipeline stops before any processes run, saving you from a failed or incorrect execution.
+Boolean parameters should be passed as flags (`--skip_trim`) without a value, or set to `true`/`false` in a params file.
+
+#### 3.3.3. Samplesheet validation
+
+nf-schema also validates the input samplesheet against a schema.
+The `nf-core/demo` pipeline expects a CSV file with columns `sample`, `fastq_1`, and `fastq_2`.
+This is defined in a schema file (`assets/schema_input.json`) that specifies the expected structure, column types, and constraints.
+
+To see this in action, create a samplesheet with a missing column and a non-existent file path:
+
+```csv title="malformed_samplesheet.csv"
+sample,fastq_1
+SAMPLE1,/not/a/real/file.fastq.gz
+```
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results --input malformed_samplesheet.csv
+```
+
+The pipeline fails immediately with a clear error message:
+
+```console
+ERROR ~ Validation of pipeline parameters failed!
+
+The following invalid input values have been detected:
+
+* --input (malformed_samplesheet.csv): Validation of file failed:
+    -> Entry 1: Error for field 'fastq_1' (/not/a/real/file.fastq.gz): the file or directory
+       '/not/a/real/file.fastq.gz' does not exist
+```
+
+The error identifies the exact entry and field that caused the problem, so you can fix your samplesheet without having to debug a mid-pipeline failure.
+
+!!! tip
+
+    We cover how to define these schemas from the developer side in [Part 5](./05_input_validation.md) of this course.
+
+### 3.4. Customize configuration
+
+Configuration controls **how** the pipeline runs: resource allocation, tool-specific arguments, where jobs execute, and which software packaging system to use.
+
+nf-core pipelines include default configuration in `nextflow.config` and the `conf/` directory.
+Before overriding anything, it helps to know where the defaults live.
+
+You already saw in section 2.1 that the pipeline source code lives in `$NXF_HOME/assets`.
+List the config files to see what's available:
+
+```bash
+ls $NXF_HOME/assets/nf-core/demo/conf/
+```
+
+```console
+base.config  modules.config  test.config  test_full.config
+```
+
+<figure class="excalidraw">
+--8<-- "docs/en/docs/hello_nf-core/img/nfcore_config_files.excalidraw.svg"
+</figure>
+
+The three most important configuration files are:
+
+- **`conf/base.config`**: Defines resource labels (`process_low`, `process_medium`, `process_high`) that assign CPUs, memory, and time to processes. When you see a process using more resources than expected, this is where those defaults come from.
+- **`conf/modules.config`**: Sets per-process tool arguments (`ext.args`) and output publishing settings (`publishDir`). Open this file to see what arguments each tool receives by default.
+- **`conf/test.config`**: The test profile you used in section 2.1, which caps resources via `resourceLimits` and sets a test samplesheet. Activated with `-profile test`.
+
+There is also a `conf/test_full.config` for running with a full-sized test dataset, useful for benchmarking.
+
+The central `nextflow.config` loads all of the above and sets default parameter values.
+
+You do not need to modify any of these files directly.
+Instead, create your own config file and pass it with `-c`. Your values override the pipeline defaults.
+
+#### 3.4.1. Change resource allocation for a process
+
+The demo pipeline assigns resources using labels defined in `base.config`.
+For example, `FASTQC` uses the `process_medium` label, which allocates 6 CPUs and 36 GB of memory.
+
+The test profile caps resources via `resourceLimits`, but you can also override resources for specific processes.
+
+Create a file called `custom.config`:
+
+```groovy title="custom.config" linenums="1"
+process {
+    withName: 'FASTQC' {
+        cpus = 2
+        memory = 4.GB
+    }
+}
+```
+
+Run the pipeline with your custom config:
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-custom -c custom.config
+```
+
+The `-c` flag adds your config on top of the pipeline's built-in configuration.
+Your values take precedence for the processes you specify.
+
+#### 3.4.2. Override tool arguments with ext.args
+
+Some tool options are exposed as pipeline parameters. For example, `--skip_trim` controls whether `SEQTK_TRIM` runs at all.
+
+For tool options that are not exposed as parameters, nf-core modules use a convention called `ext.args` to pass arguments to the underlying tool through configuration.
+
+For example, the `FASTQC` module is configured with `ext.args = '--quiet'` by default (defined in `conf/modules.config`).
+The `SEQTK_TRIM` module has no default `ext.args`.
+
+To add a trimming argument to `SEQTK_TRIM`, update your `custom.config`:
+
+```groovy title="custom.config" linenums="1" hl_lines="5 6 7"
+process {
+    withName: 'FASTQC' {
+        cpus = 2
+        memory = 4.GB
+    }
+    withName: 'SEQTK_TRIM' {
+        ext.args = '-b 5'
+    }
+}
+```
+
+This tells `seqtk trimfq` to trim 5 bases from the beginning of each read in addition to quality trimming.
+
+Run the pipeline again with this config to see the effect:
+
+```bash
+nextflow run nf-core/demo -profile docker,test --outdir demo-results-extargs -c custom.config
+```
+
+To verify the argument was applied, find the `SEQTK_TRIM` work directory hash from the run output (e.g. `work/ab/cd1234...`) and check the `.command.sh` file inside it:
+
+```bash
+cat work/ab/cd1234/.command.sh
+```
+
+You should see `-b 5` in the `seqtk trimfq` command, confirming your `ext.args` override took effect.
+
+!!! note
+
+    The `ext.args` value completely replaces the default for that process.
+    If the default was `'--quiet'` and you set `ext.args = '--kmers 8'`, the `--quiet` flag is no longer applied.
+    To keep both, set `ext.args = '--quiet --kmers 8'`.
 
 ### Takeaway
 
-You know what are the main components of an nf-core pipeline and how the code is organized; where the main elements of configuration are located; and you're aware of what input validation is for.
+You know how to get help from an nf-core pipeline, set parameters and understand how they are validated, and customize configuration through config files.
 
 ### What's next?
 
-Take a break! That was a lot. When you're feeling refreshed and ready, move on to the next section to apply what you've learned to write an nf-core compatible pipeline.
+Take a break! When you're ready, move on to Part 2, where you will create your own nf-core compatible pipeline from scratch.
 
 !!! tip
 

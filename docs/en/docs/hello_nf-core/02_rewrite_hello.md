@@ -2,10 +2,10 @@
 
 In this second part of the Hello nf-core training course, we show you how to create an nf-core compatible version of the pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) beginners' course.
 
-You'll have noticed in the first section of the training that nf-core pipelines follow a fairly elaborate structure with a lot of accessory files.
+nf-core pipelines follow a standardized structure with many accessory files.
 Creating all that from scratch would be very tedious, so the nf-core community has developed tooling to do it from a template instead, to bootstrap the process.
 
-We are going to show you how to use this tooling to create a pipeline scaffold, then adapt existing 'regular' pipeline code onto the nf-core scaffold.
+We are going to show you how to use this tooling to create a pipeline scaffold, examine how nf-core pipeline code is organized, then adapt existing 'regular' pipeline code onto the nf-core scaffold.
 
 If you're not familiar with the Hello pipeline or you could use a reminder, see [this info page](../info/hello_pipeline.md).
 
@@ -142,13 +142,11 @@ tree core-hello
     ```
 
 That's a lot of files!
-
-Hopefully you'll recognize a lot of them as the same we came across when we explored the `nf-core/demo` pipeline structure.
-But don't worry if you're still feeling a little lost; we'll walk through the important parts together in the course of this training.
+Don't worry if you're feeling a little lost; we'll walk through the important parts shortly, and then step by step throughout the rest of the course.
 
 !!! note
 
-    One important difference compared to the `nf-core/demo` pipeline we examined in the first part of this training is that there is no `modules` directory.
+    You may notice that there is no `modules` directory.
     This is because we didn't elect to include any of the default nf-core modules.
 
 ### 1.2. Test that the scaffold is functional
@@ -227,7 +225,7 @@ Let's have a look at what is actually in the code.
 
 If you look inside the `main.nf` file, you'll see it imports a workflow called `HELLO` from `workflows/hello`.
 
-This is equivalent to the `workflows/demo.nf` workflow we encountered in Part 1, and serves as a placeholder workflow for our workflow of interest, with some nf-core functionality already in place.
+This serves as the placeholder for our analysis workflow, with some nf-core functionality already in place.
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="15 17 19 53"
 /*
@@ -315,11 +313,85 @@ These are optional features of Nextflow that make the workflow **composable**, m
     The [Workflows of Workflows](../side_quests/workflows_of_workflows.md) Side Quest explores workflow composition in much greater depth, including how to compose multiple workflows together and manage complex data flows between them. We're introducing composability here because it's a fundamental requirement of the nf-core template architecture, which uses nested workflows to organize pipeline initialization, the main analysis workflow, and completion tasks into separate, reusable components.
 
 We are going to need to plug the relevant logic from our workflow of interest into that structure.
-The first step for that is to make our original workflow composable.
+But first, it helps to see what a completed nf-core pipeline looks like. Comparing your empty scaffold to a real pipeline makes it easier to understand what you're building toward.
+
+### 1.4. Understand the nf-core pipeline code structure
+
+Your scaffold already has the same directory layout as a production nf-core pipeline.
+To see what it looks like when fully built out, browse the [nf-core/demo](https://github.com/nf-core/demo) pipeline on GitHub and compare it to your scaffold.
+
+The top-level directory of `nf-core/demo` contains:
+
+```console
+nf-core/demo
+├── assets
+├── CHANGELOG.md
+├── CITATIONS.md
+├── CODE_OF_CONDUCT.md
+├── conf
+├── docs
+├── LICENSE
+├── main.nf
+├── modules
+├── modules.json
+├── nextflow.config
+├── nextflow_schema.json
+├── nf-test.config
+├── README.md
+├── ro-crate-metadata.json
+├── subworkflows
+├── tests
+├── tower.yml
+└── workflows
+```
+
+At the top level there are accessory files (README, LICENSE, CITATIONS, etc.) that the nf-core website uses to generate pipeline documentation pages.
+The code itself is organized into a modular structure designed to maximize reuse.
+
+#### 1.4.1. Pipeline code components
+
+The relationships between the code components look like this for `nf-core/demo`:
+
+<figure class="excalidraw">
+    --8<-- "docs/en/docs/hello_nf-core/img/nf-core_demo_code_organization.svg"
+</figure>
+
+The key components are:
+
+- **`main.nf`**: The entrypoint script. When you run `nextflow run nf-core/demo`, Nextflow executes this file. It acts as a wrapper that calls the analysis workflow and housekeeping subworkflows.
+- **`workflows/demo.nf`**: The analysis workflow containing the central pipeline logic. This is the equivalent of the `workflows/hello.nf` in your scaffold.
+- **`modules/`**: Process definitions, organized by origin (`nf-core/` vs `local/`) and tool name.
+- **`subworkflows/`**: Reusable workflow fragments. In `nf-core/demo`, these are all housekeeping utilities (the `utils_` prefix). Your scaffold already contains these under `subworkflows/`. Larger pipelines also use analysis-specific subworkflows.
+
+The module directory shows how this organization works in practice:
+
+```console
+modules
+└── nf-core
+    ├── fastqc
+    │   ├── environment.yml
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    ├── multiqc
+    │   ├── environment.yml
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    └── seqtk
+        └── trim
+```
+
+Modules are organized by tool name within the `nf-core/` directory.
+Tools that belong to a toolkit (like `seqtk`) have an additional nesting level.
+Each module has its own `main.nf` containing the process definition, plus an `environment.yml` for software dependencies and a `meta.yml` for documentation.
+
+Your scaffold has the same structure — just without modules yet.
+Over the next sections, you will populate it by porting your Hello Nextflow code and later by adding nf-core community modules.
 
 ### Takeaway
 
-You now know how to create a pipeline scaffold using nf-core tools.
+You now know how to create a pipeline scaffold using nf-core tools and understand how nf-core pipeline code is organized.
 
 ### What's next?
 
