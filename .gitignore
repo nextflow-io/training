@@ -12,6 +12,9 @@ transcript-index
 __pycache__
 *.pyc
 
+# Gradle build artifacts
+.gradle/
+
 # Build outputs
 site/
 site_build/
