@@ -62,7 +62,7 @@ code .
 
 Bir ana iş akışı dosyası ve `samplesheet.csv` adlı bir örnek sayfası içeren bir `data` dizini bulacaksınız.
 
-```console title="Dizin içeriği"
+```console title="Directory contents"
 .
 ├── data
 │   └── samplesheet.csv
@@ -313,9 +313,9 @@ Tümör örnekleri için de filtrelenmiş bir kanal oluşturalım:
         ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
         ch_normal_samples
-            .view{'Normal örnek: ' + it}
+            .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'Tümör örnek: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 === "Önce"
@@ -338,19 +338,19 @@ nextflow run main.nf
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
-    Tümör örnek: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tümör örnek: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Normal örnek: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal örnek: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Normal örnek: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal örnek: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tümör örnek: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tümör örnek: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 Normal ve tümör örneklerini iki farklı kanala ayırdık ve çıktıda farklı şekilde etiketlemek için `view()`'a bir closure sağladık: `ch_tumor_samples.view{'Tümör örnek: ' + it}`.
 
-### Özet
+### Özetle
 
 Bu bölümde öğrendikleriniz:
 
@@ -387,14 +387,14 @@ nextflow run main.nf
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
-    Tümör örnek: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tümör örnek: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Normal örnek: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal örnek: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Normal örnek: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal örnek: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tümör örnek: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tümör örnek: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
 `id` alanının her meta map'teki ilk öğe olduğunu görebiliriz. `join`'in çalışması için her tuple'daki `id` alanını izole etmeliyiz. Bundan sonra, iki kanalı birleştirmek için `join` operatörünü kolayca kullanabiliriz.
@@ -413,9 +413,9 @@ nextflow run main.nf
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
         ch_normal_samples
-            .view{'Normal örnek: ' + it}
+            .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'Tümör örnek: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 === "Önce"
@@ -426,9 +426,9 @@ nextflow run main.nf
         ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
         ch_normal_samples
-            .view{'Normal örnek: ' + it}
+            .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'Tümör örnek: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 ```bash
@@ -442,14 +442,14 @@ nextflow run main.nf
 
     Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
 
-    Tümör örnek: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tümör örnek: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Normal örnek: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal örnek: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Tümör örnek: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tümör örnek: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-    Normal örnek: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal örnek: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
     ```
 
 Belki de ince bir fark, ancak her tuple'daki ilk öğenin `id` alanı olduğunu görmelisiniz.
@@ -484,9 +484,9 @@ Bir kez daha, birleştirilmiş çıktıları yazdırmak için `view` kullanacağ
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
         ch_normal_samples
-            .view{'Normal örnek: ' + it}
+            .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'Tümör örnek: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 ```bash
@@ -807,7 +807,7 @@ nextflow run main.nf
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
 
-### Özet
+### Özetle
 
 Bu bölümde öğrendikleriniz:
 
@@ -977,7 +977,7 @@ Verilerinizi doğru yapıya zorlamak için `map` kullanmak zor olabilir, ancak e
 
 Artık her örneği tüm genomik aralıklarda tekrarladık; paralel olarak işlenebilecek birden fazla bağımsız analiz birimi oluşturduk. Peki ya ilişkili örnekleri tekrar bir araya getirmek istersek? Bir sonraki bölümde, ortak özellikleri paylaşan örnekleri nasıl gruplayacağımızı öğreneceğiz.
 
-### Özet
+### Özetle
 
 Bu bölümde öğrendikleriniz:
 
@@ -1141,7 +1141,7 @@ Verilerimizin yapısının değiştiğini ve her kanal öğesinde dosyaların ar
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose), groupTuple'ın tersidir. Bir kanaldaki öğeleri açar ve düzleştirir. Yukarıda gerçekleştirdiğimiz gruplamayı geri almak için `transpose` eklemeyi deneyin!
 
-### Özet
+### Özetle
 
 Bu bölümde öğrendikleriniz:
 

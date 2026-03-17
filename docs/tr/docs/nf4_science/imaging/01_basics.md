@@ -19,7 +19,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 
 Konsol çıktınız şuna benzer görünmelidir:
 
-```console title="Çıktı" linenums="1"
+```console title="Output" linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
@@ -32,7 +32,7 @@ Tebrikler, ilk Nextflow workflow'unuzu çalıştırdınız!
 
 Buradaki en önemli çıktı son satırdır (satır 6):
 
-```console title="Çıktı" linenums="6"
+```console title="Output" linenums="6"
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 
@@ -83,7 +83,7 @@ Bu kafa karıştırıcı gelebilir, o yüzden pratikte bunun nasıl göründüğ
 
 Daha önce çalıştırdığımız workflow'un konsol çıktısına geri dönersek, şu satırımız vardı:
 
-```console title="Komut çıktısından alıntı" linenums="6"
+```console title="Excerpt of command output" linenums="6"
 [a3/7be2fa] sayHello | 1 of 1 ✔
 ```
 

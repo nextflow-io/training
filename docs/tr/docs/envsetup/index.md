@@ -10,6 +10,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+
 Öğrencilerin yazılım yönetimi ile zaman ve çaba harcamak yerine Nextflow öğrenmeye odaklanmalarını sağlayan tutarlı ve kapsamlı olarak test edilmiş bir ortam sağlamayı hedefliyoruz.
 Bu amaçla, tüm kurslarımızda çalışmak için gerekli tüm yazılımları, kod dosyalarını ve örnek verileri içeren konteynerize bir ortam geliştirdik.
 

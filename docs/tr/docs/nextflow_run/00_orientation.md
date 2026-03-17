@@ -13,16 +13,16 @@ Kurs boyunca çalışmak için bu talimatları paralel olarak açık tutmanız g
 
 ### Ortam temelleri
 
-Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılım, kod ve verileri içerir, böylece kendiniz hiçbir şey yüklemeniz gerekmez.
+Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılım, kod ve verileri içerir; böylece kendiniz hiçbir şey yüklemeniz gerekmez.
 
 Codespace, dosya sistemi gezgini, kod editörü ve terminal shell içeren bir VSCode arayüzüyle kurulmuştur.
-Kurs sırasında verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VScode arayüzünün bu üç bölümüne atıfta bulunur.
+Kurs sırasında verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunur.
 
 Bu kursu kendi başınıza çalışıyorsanız, daha fazla ayrıntı için [ortam temelleri](../envsetup/01_setup.md) ile tanışın.
 
 ### Versiyon gereksinimleri
 
-Bu eğitim, v2 sözdizimi ayrıştırıcısı ETKİNLEŞTİRİLMİŞ olarak Nextflow 25.10.2 veya üstü için tasarlanmıştır.
+Bu eğitim, v2 sözdizimi ayrıştırıcısı **ETKİNLEŞTİRİLMİŞ** olarak Nextflow 25.10.2 veya üstü için tasarlanmıştır.
 Yerel veya özel bir ortam kullanıyorsanız, [burada](../info/nxf_versions.md) belgelendiği gibi doğru ayarları kullandığınızdan emin olun.
 
 ## Çalışmaya hazırlanın
@@ -31,7 +31,7 @@ Codespace'iniz çalışmaya başladığında, eğitime dalmadan önce yapmanız 
 
 ### Çalışma dizinini ayarlayın
 
-Varsayılan olarak, codespace tüm eğitim kurslarının kökünde çalışma dizini ayarlanmış şekilde açılır, ancak bu kurs için `nextflow-run/` dizininde çalışacağız.
+Varsayılan olarak, codespace tüm eğitim kurslarının kökünde çalışma dizini ayarlanmış şekilde açılır; ancak bu kurs için `nextflow-run/` dizininde çalışacağız.
 
 Şimdi terminalde bu komutu çalıştırarak dizini değiştirin:
 
@@ -39,7 +39,7 @@ Varsayılan olarak, codespace tüm eğitim kurslarının kökünde çalışma di
 cd nextflow-run/
 ```
 
-VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz, böylece dosya gezgini kenar çubuğunda yalnızca ilgili dosyalar görünür:
+VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz; böylece dosya gezgini kenar çubuğunda yalnızca ilgili dosyalar görünür:
 
 ```bash
 code .
@@ -60,7 +60,7 @@ code .
 Bu dizinin içeriğini eğitim çalışma alanının sol tarafındaki dosya gezginini kullanarak keşfedebilirsiniz.
 Alternatif olarak, `tree` komutunu kullanabilirsiniz.
 
-Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanıyoruz, bazen netlik için küçük değişikliklerle.
+Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için `tree` çıktısını kullanıyoruz; bazen netlik için küçük değişikliklerle.
 
 Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:
 

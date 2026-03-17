@@ -173,7 +173,7 @@ Bunlar, bu kursun 3. Bölümünde bir Nextflow iş akışına sarmalayacağımı
 
 ---
 
-### Özet
+### Özetle
 
 {TOOL_A} ve {TOOL_B} komutlarını kendi konteynerlarında nasıl test edeceğinizi, {MULTI_SAMPLE_SUMMARY} dahil olmak üzere biliyorsunuz.
 

@@ -35,7 +35,7 @@ docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quot
 
 Çıktı:
 
-```console title="Çıktı"
+```console title="Output"
 Humans are allergic to change. They love to say, 'We've always done it
 this way.' I try to fight that. That's why I have a clock on my wall
 that runs counter-clockwise.
@@ -97,7 +97,7 @@ Oluşturma işlemi tamamlandıktan sonra, az önce oluşturduğunuz konteyner im
 docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 ```
 
-### Özet
+### Özetle
 
 Nextflow pipeline'larınızda kullanmak istediğiniz bir araç için konteyner imajı almanın iki farklı yolunu öğrendiniz: Seqera Containers'ı kullanmak ve konteyner imajını kendiniz oluşturmak.
 
@@ -180,7 +180,7 @@ workflow {
 
 Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.2.nf` dosyasında bulabilirsiniz.
 
-### Özet
+### Özetle
 
 Nextflow'da süreçleri çalıştırmak için konteynerleri nasıl kullanacağınızı ve pipeline'larınıza bazı dallanma mantığını nasıl ekleyeceğinizi biliyorsunuz!
 

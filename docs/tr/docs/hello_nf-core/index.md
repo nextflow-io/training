@@ -40,13 +40,13 @@ nf-core en iyi uygulamalarına göre pipeline geliştirmeye başlamak için gere
 
 Bu kurs, bilgileri kademeli olarak tanıtmak üzere yapılandırılmış, hedefe yönelik alıştırmalar içeren, uygulamalı bir şekilde tasarlanmıştır.
 
-Nextflow kullanılarak oluşturulmuş, küratörlüğü yapılmış bir bilimsel pipeline seti geliştirmek ve sürdürmek için bir topluluk çabası olan [**nf-core**](https://nf-co.re/)'un yanı sıra, açık geliştirmeyi, test etmeyi ve akran değerlendirmesini teşvik eden ilgili araçlar ve yönergelerle tanıştırılacaksınız ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
+Nextflow kullanılarak oluşturulmuş, özenle seçilmiş bir bilimsel pipeline koleksiyonu geliştirmek ve sürdürmek için bir topluluk girişimi olan [**nf-core**](https://nf-co.re/) ile tanışacaksınız. Bunun yanı sıra, açık geliştirmeyi, test etmeyi ve akran değerlendirmesini teşvik eden ilgili araçlar ve yönergelerle de tanışacaksınız ([Nat Biotechnol 38, 276–278 (2020)](https://www.nature.com/articles/s41587-020-0439-x), [Genome Biol 26, 228 (2025)](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03673-9)).
 
 nf-core topluluğu tarafından geliştirilen pipeline'lar modüler, ölçeklenebilir ve taşınabilir olacak şekilde tasarlanmıştır; bu da araştırmacıların kendi verilerini ve hesaplama kaynaklarını kullanarak bunları kolayca uyarlayıp çalıştırmalarına olanak tanır.
 Proje tarafından uygulanan en iyi uygulama yönergeleri, pipeline'ların sağlam, iyi belgelenmiş ve gerçek dünya veri setlerine karşı doğrulanmış olmasını sağlar.
 Bu, bilimsel analizlerin güvenilirliğini ve tekrarlanabilirliğini artırmaya yardımcı olur ve sonuçta araştırmacıların bilimsel keşiflerini hızlandırmasını sağlar.
 
-Bu kursta nf-core pipeline'ları hakkında bilmeniz gereken her şeyi ele almayacağız, çünkü nf-core, topluluk tarafından yıllar içinde geliştirilen birçok özellik ve konvansiyonu kapsar.
+Bu kursta nf-core pipeline'ları hakkında bilmeniz gereken her şeyi ele almayacağız; zira nf-core, topluluk tarafından yıllar içinde geliştirilen birçok özellik ve konvansiyonu kapsar.
 Bunun yerine, başlamanıza ve nf-core'un nasıl çalıştığını anlamanıza yardımcı olacak temel kavramlara odaklanacağız.
 
 ### Ders planı

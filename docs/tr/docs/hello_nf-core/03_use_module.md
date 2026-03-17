@@ -251,7 +251,7 @@ Ancak, yeni modülü gerçekten kullanmak için onu pipeline'ımıza aktarmamız
 
 Hatırlatma olarak, modül kurulum aracı bize kullanacağımız tam ifadeyi verdi:
 
-```groovy title="Kurulum komutu tarafından üretilen içe aktarma ifadesi"
+```groovy title="Import statement produced by install command"
 include { CAT_CAT } from '../modules/nf-core/cat/cat/main'
 ```
 
@@ -334,13 +334,13 @@ Bu, yeni modülü doğrudan yerine geçecek bir modül olarak kullanıp kullanam
 
 !!! note "Not"
 
-    CAT_CAT süreci, farklı sıkıştırma türleri, dosya uzantıları ve benzeri konularla ilgili oldukça akıllı bir işleme içerir; bunlar burada size göstermeye çalıştığımız şeyle doğrudan alakalı değil, bu yüzden çoğunu görmezden geleceğiz ve yalnızca önemli olan kısımlara odaklanacağız.
+    CAT_CAT süreci, farklı sıkıştırma türleri, dosya uzantıları ve benzerleri ile ilgili oldukça akıllı bir işleme içerir; bunlar burada size göstermeye çalıştığımız şeyle doğrudan alakalı değil, bu yüzden çoğunu görmezden geleceğiz ve yalnızca önemli olan kısımlara odaklanacağız.
 
 ### 2.1. İki modülün arayüzlerini karşılaştırma
 
 Hatırlatma olarak, `collectGreetings` modülümüzün arayüzü şöyle görünüyor:
 
-```groovy title="modules/local/collectGreetings.nf (alıntı)" linenums="1" hl_lines="6-7 10"
+```groovy title="modules/local/collectGreetings.nf (excerpt)" linenums="1" hl_lines="6-7 10"
 process collectGreetings {
 
     publishDir 'results', mode: 'copy'
@@ -362,7 +362,7 @@ Tamamlandığında, `collectGreetings` `outfile` etiketi ile yayınlanan tek bir
 
 Karşılaştırmalı olarak, `cat/cat` modülünün arayüzü daha karmaşıktır:
 
-```groovy title="modules/nf-core/cat/cat/main.nf (alıntı)" linenums="1" hl_lines="11 14"
+```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="11 14"
 process CAT_CAT {
     tag "$meta.id"
     label 'process_low'
@@ -416,19 +416,19 @@ Geleneksel olarak, bir nf-core metamap'i `meta` olarak adlandırılır ve çıkt
 
 Örneğin, tipik bir metadata map şöyle görünebilir:
 
-```groovy title="Örnek seviyesinde metamap örneği"
+```groovy title="Example of sample-level metamap"
 [id: 'sample1', single_end: false, strandedness: 'forward']
 ```
 
 Veya metadata'nın batch seviyesinde eklendiği bir durumda:
 
-```groovy title="Batch seviyesinde metamap örneği"
+```groovy title="Example of batch-level metamap"
 [id: 'batch1', date: '25.10.01']
 ```
 
 Şimdi bunu `CAT_CAT` süreci bağlamına koyalım; bu süreç girdi dosyalarının bir metamap ile bir demet halinde paketlenmesini bekler ve çıktı demetinin bir parçası olarak metamap'i de çıktılar.
 
-```groovy title="modules/nf-core/cat/cat/main.nf (alıntı)" linenums="1" hl_lines="2 5"
+```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="1" hl_lines="2 5"
 input:
 tuple val(meta), path(files_in)
 
@@ -442,7 +442,7 @@ Sonraki süreçler de bu metadata'ya kolayca erişebilir.
 Size `CAT_CAT` tarafından çıktılanan dosyanın metadata'nın bir parçası olan bir tanımlayıcıya göre adlandırılacağını söylediğimizi hatırlıyor musunuz?
 İlgili kod şudur:
 
-```groovy title="modules/nf-core/cat/cat/main.nf (alıntı)" linenums="35"
+```groovy title="modules/nf-core/cat/cat/main.nf (excerpt)" linenums="35"
 prefix   = task.ext.prefix ?: "${meta.id}${getFileSuffix(file_list[0])}"
 ```
 
@@ -450,7 +450,7 @@ Bu kabaca şu anlama gelir: eğer harici görev parametre sistemi (`task.ext`) a
 
 Bu modüle gelen girdi kanalının şöyle içeriklerle geldiğini hayal edebilirsiniz:
 
-```groovy title="Örnek girdi kanalı içeriği"
+```groovy title="Example input channel contents"
 ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
             [[id: 'batch2', date: '25.10.26'], ['file2A.txt', 'file2B.txt']],
             [[id: 'batch3', date: '25.11.14'], ['file3A.txt', 'file3B.txt']]]
@@ -458,7 +458,7 @@ ch_input = [[[id: 'batch1', date: '25.10.01'], ['file1A.txt', 'file1B.txt']],
 
 Ardından çıkan çıktı kanalı içeriği şöyle çıkar:
 
-```groovy title="Örnek çıktı kanalı içeriği"
+```groovy title="Example output channel contents"
 ch_input = [[[id: 'batch1', date: '25.10.01'], 'batch1.txt'],
             [[id: 'batch2', date: '25.10.26'], 'batch2.txt'],
             [[id: 'batch3', date: '25.11.14'], 'batch3.txt']]
@@ -510,14 +510,14 @@ Netlik adına, bunu parçalara ayıracağız ve her adımı ayrı ayrı ele alac
 
 Başka metadata'ya ihtiyacımız olmadığından, basit tutabilir ve şöyle bir şey kullanabiliriz:
 
-```groovy title="Sözdizimi örneği"
+```groovy title="Syntax example"
 def cat_meta = [id: 'test']
 ```
 
 Ancak `id` değerini sabit kodlamak istemiyoruz; `params.batch` parametresinin değerini kullanmak istiyoruz.
 Yani kod şöyle olur:
 
-```groovy title="Sözdizimi örneği"
+```groovy title="Syntax example"
 def cat_meta = [id: params.batch]
 ```
 

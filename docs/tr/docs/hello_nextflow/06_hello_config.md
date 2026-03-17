@@ -462,7 +462,7 @@ Bu durumlarda, bir parametre dosyası kullanmak, çalışma zamanında devasa ko
 Ayrıca parametre setlerini işbirlikçilere dağıtmayı veya örneğin bir yayın için destekleyici bilgi olarak sunmayı kolaylaştırır.
 Bu, çalışmanızı başkaları tarafından daha tekrarlanabilir hale getirir.
 
-### Özet
+### Özetle
 
 İş akışı girdilerini yönetmek için temel yapılandırma seçeneklerinden nasıl yararlanacağınızı biliyorsunuz.
 
@@ -1001,7 +1001,7 @@ Bu, çıktıları `config-output-mode/` dizinine yayınlar ve hepsi hala semboli
 
 Bu şekilde özelleştirebileceğiniz başka birçok seçenek vardır, ancak umarım bu size seçenek yelpazesi ve tercihlerinize uygun şekilde bunları etkili bir şekilde nasıl kullanacağınız konusunda bir fikir verir.
 
-### Özet
+### Özetle
 
 Çıktılarınızın yayınlandığı dizinlerin adlandırmasını ve yapısını, ayrıca iş akışı çıktı yayınlama modunu nasıl kontrol edeceğinizi biliyorsunuz.
 
@@ -1126,7 +1126,7 @@ Bu, gerekirse Conda ortamlarıyla çalıştırmaya hazır olduğumuz anlamına g
 
     Ve daha önce belirtildiği gibi, Nextflow birden fazla başka yazılım paketleme ve konteyner teknolojisini destekler; bu nedenle sadece bu ikisiyle sınırlı değilsiniz.
 
-### Özet
+### Özetle
 
 Her sürecin hangi yazılım paketini kullanması gerektiğini nasıl yapılandıracağınızı ve teknolojiler arasında nasıl geçiş yapacağınızı biliyorsunuz.
 
@@ -1212,7 +1212,7 @@ Ardından, çalışma zamanında Nextflow, yürütücü ayarına göre uygun ark
 
 Bu standartlaştırılmış sözdizimini bir sonraki bölümde ele alacağız.
 
-### Özet
+### Özetle
 
 Artık farklı türde bilgi işlem altyapılarını kullanmak için yürütücüyü nasıl değiştireceğinizi biliyorsunuz.
 
@@ -1390,7 +1390,7 @@ Ancak, bu sınırları aşan kaynak tahsisleriyle iş akışını çalıştırma
 
     Bu paylaşılan yapılandırmalar hem orada çalışan ve dolayısıyla kurumlarının yapılandırmasını kutudan çıkar çıkmaz kullanabilen insanlar hem de kendi altyapıları için bir yapılandırma geliştirmek isteyen insanlar için bir model olarak değerlidir.
 
-### Özet
+### Özetle
 
 Kaynak kullanımını değerlendirmek için bir profilleme raporu oluşturmayı ve tüm süreçler ve/veya bireysel süreçler için kaynak tahsislerini nasıl değiştireceğinizi, ayrıca HPC'de çalıştırmak için kaynak sınırlamalarını nasıl ayarlayacağınızı biliyorsunuz.
 
@@ -1722,7 +1722,7 @@ nextflow config -profile my_laptop,test
 
 Bu, birden fazla yapılandırma katmanı içeren karmaşık projeler için özellikle kullanışlı hale gelir.
 
-### Özet
+### Özetle
 
 Minimum güçlükle çalışma zamanında önceden ayarlanmış bir yapılandırmayı seçmek için profilleri nasıl kullanacağınızı biliyorsunuz.
 Daha genel olarak, iş akışı yürütmelerinizi farklı bilgi işlem platformlarına uyacak şekilde nasıl yapılandıracağınızı ve analizlerinizin tekrarlanabilirliğini nasıl artıracağınızı biliyorsunuz.

@@ -133,7 +133,7 @@ workflow {
     // Bir dize yolundan Path nesnesi oluştur
     myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
-    println "${myFile} sınıfı ${myFile.class}"
+    println "${myFile} is of class ${myFile.class}"
 }
 ```
 
@@ -157,7 +157,7 @@ nextflow run main.nf
 
     Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
 
-    data/patientA_rep1_normal_R1_001.fastq.gz sınıfı java.lang.String
+    data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String
     ```
 
 Gördüğünüz gibi, Nextflow yazdığımız dize yolunu aynen yazdırdı.
@@ -180,7 +180,7 @@ Workflow'umuzda, `file()` metodunu kullanarak `data/patientA_rep1_normal_R1_001.
         // Bir dize yolundan Path nesnesi oluştur
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        println "${myFile} sınıfı ${myFile.class}"
+        println "${myFile} is of class ${myFile.class}"
     ```
 
 === "Önce"
@@ -189,7 +189,7 @@ Workflow'umuzda, `file()` metodunu kullanarak `data/patientA_rep1_normal_R1_001.
         // Bir dize yolundan Path nesnesi oluştur
         myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
-        println "${myFile} sınıfı ${myFile.class}"
+        println "${myFile} is of class ${myFile.class}"
     ```
 
 Şimdi iş akışını tekrar çalıştırın:
@@ -205,7 +205,7 @@ nextflow run main.nf
 
     Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
-    /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz sınıfı class sun.nio.fs.UnixPath
+    /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath
     ```
 
 Bu sefer, girdi olarak sağladığımız göreli yol yerine tam mutlak yolu görüyorsunuz.
@@ -238,11 +238,11 @@ Yerleşik dosya özelliklerini yazdırmak için iş akışımızı güncelleyeli
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 === "Önce"
@@ -251,7 +251,7 @@ Yerleşik dosya özelliklerini yazdırmak için iş akışımızı güncelleyeli
         // Bir dize yolundan Path nesnesi oluştur
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
-        println "${myFile} sınıfı ${myFile.class}"
+        println "${myFile} is of class ${myFile.class}"
     ```
 
 İş akışını çalıştırın:
@@ -267,11 +267,11 @@ nextflow run main.nf
 
     Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
-    Dosya nesne sınıfı: sun.nio.fs.UnixPath
-    Dosya adı: patientA_rep1_normal_R1_001.fastq.gz
-    Basit ad: patientA_rep1_normal_R1_001
-    Uzantı: gz
-    Üst dizin: /workspaces/training/side-quests/working_with_files/data
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
     ```
 
 Çeşitli dosya özelliklerinin yukarıda konsola yazdırıldığını görüyorsunuz.
@@ -319,7 +319,7 @@ process COUNT_LINES {
     script:
     """
     set -o pipefail
-    echo "Dosya işleniyor: $input_file"
+    echo "Processing file: $input_file"
     gzip -dc $input_file | wc -l
     """
 }
@@ -347,11 +347,11 @@ Artık süreç iş akışında kullanılabilir olduğundan, girdi dosyası üzer
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
 
         // Dosyadaki satırları say
         COUNT_LINES(myFile)
@@ -364,11 +364,11 @@ Artık süreç iş akışında kullanılabilir olduğundan, girdi dosyası üzer
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 Şimdi iş akışını çalıştırın:
@@ -384,14 +384,14 @@ nextflow run main.nf
 
     Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414
 
-    Dosya nesne sınıfı: class sun.nio.fs.UnixPath
-    Dosya adı: patientA_rep1_normal_R1_001.fastq.gz
-    Basit ad: patientA_rep1_normal_R1_001
-    Uzantı: gz
-    Üst dizin: /workspaces/training/side-quests/working_with_files/data
+    File object class: class sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
     executor >  local (1)
     [e9/341c05] COUNT_LINES [100%] 1 of 1 ✔
-    Dosya işleniyor: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+    Processing file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
     40
     ```
 
@@ -425,7 +425,7 @@ Path'e özgü print ifadelerini yorumlamayı unutmadan iş akışında aşağıd
         myFile = 'data/patientA_rep1_normal_R1_001.fastq.gz'
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
+        println "File object class: ${myFile.class}"
         /*
         println "Dosya adı: ${myFile.name}"
         println "Basit ad: ${myFile.simpleName}"
@@ -444,11 +444,11 @@ Path'e özgü print ifadelerini yorumlamayı unutmadan iş akışında aşağıd
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
 
         // Dosyadaki satırları say
         COUNT_LINES(myFile)
@@ -546,18 +546,18 @@ nextflow run main.nf
     Command executed:
 
       set -o pipefail
-      echo "Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz"
+      echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"
       gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l
 
     Command exit status:
       1
 
     Command output:
-      Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz
+      Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
       0
 
     Command error:
-      Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz
+      Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
       gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
       0
 
@@ -577,13 +577,13 @@ En alakalı bölümler şunlardır:
 Command executed:
 
   set -o pipefail
-  echo "Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz"
+  echo "Processing file: data/patientA_rep1_normal_R1_001.fastq.gz"
   gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l
 ```
 
 ```console
 Command error:
-  Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz
+  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz
   gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory
   0
 ```
@@ -648,11 +648,11 @@ Bu sistemin temel gücü, herhangi bir pipeline mantığını değiştirmeden or
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 === "Önce"
@@ -662,11 +662,11 @@ Bu sistemin temel gücü, herhangi bir pipeline mantığını değiştirmeden or
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 İş akışını çalıştıralım:
@@ -682,14 +682,14 @@ nextflow run main.nf
 
     Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
 
-    Dosya nesne sınıfı: class nextflow.file.http.XPath
-    Dosya adı: patientA_rep1_normal_R1_001.fastq.gz
-    Basit ad: patientA_rep1_normal_R1_001
-    Uzantı: gz
-    Üst dizin: /nextflow-io/training/master/side-quests/working_with_files/data
+    File object class: class nextflow.file.http.XPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /nextflow-io/training/master/side-quests/working_with_files/data
     executor >  local (1)
     [8a/2ab7ca] COUNT_LINES [100%] 1 of 1 ✔
-    Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
     ```
 
@@ -732,7 +732,7 @@ Bu, Nextflow kullanarak yerel ve uzak veriler arasında geçiş yapmanın ne kad
 
     Bulut depolamayla glob desenlerini şu şekilde kullanabilirsiniz:
 
-    ```groovy title="Bulut depolama örnekleri (bu ortamda çalıştırılamaz)"
+    ```groovy title="Cloud storage examples (not runnable in this environment)"
     // Glob desenleriyle S3 - birden fazla dosyayla eşleşir
     ch_s3_files = channel.fromPath('s3://my-bucket/data/*.fastq.gz')
 
@@ -756,11 +756,11 @@ Bu yan görevin geri kalanında yerel örnek dosyalarımızı kullanmaya devam e
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 === "Önce"
@@ -770,11 +770,11 @@ Bu yan görevin geri kalanında yerel örnek dosyalarımızı kullanmaya devam e
         myFile = file('https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     ```
 
 ### Özet
@@ -795,9 +795,9 @@ Bu yan görevin geri kalanında yerel örnek dosyalarımızı kullanmaya devam e
 
 Bunu yapmanın naif bir yolu, `file()` metodunu [`channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of) ile şu şekilde birleştirmek olurdu:
 
-```groovy title="Sözdizimi örneği"
+```groovy title="Syntax example"
 ch_files = channel.of([file('data/patientA_rep1_normal_R1_001.fastq.gz')],
-                      [file('data/patientA_rep1_normal_R2_001.fastq.gz')])
+                      [file('data/patientA_rep1_normal_R1_001.fastq.gz')])
 ```
 
 Bu çalışır, ancak hantal.
@@ -818,7 +818,7 @@ Bu çalışır, ancak hantal.
     ```groovy title="main.nf" linenums="7" hl_lines="1-3"
         // channel.fromPath ile dosyaları yükle
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-        ch_files.view { myFile -> "Dosya bulundu: $myFile" }
+        ch_files.view { myFile -> "Found file: $myFile" }
 
         // Dosya özelliklerini yazdır
         /* Şimdilik bunları yorumlayın, daha sonra geri döneceğiz!
@@ -840,11 +840,11 @@ Bu çalışır, ancak hantal.
         myFile = file('data/patientA_rep1_normal_R1_001.fastq.gz')
 
         // Dosya özelliklerini yazdır
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
 
         // Dosyadaki satırları say
         COUNT_LINES(myFile)
@@ -865,7 +865,7 @@ nextflow run main.nf
 
     Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
 
-    Dosya bulundu: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
+    Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz
     ```
 
 Gördüğünüz gibi, dosya yolu kanalda `Path` türü nesne olarak yükleniyor.
@@ -885,11 +885,11 @@ Tam dosya özelliklerini yazdırmaya geri dönelim:
         // channel.fromPath ile dosyaları yükle
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
         ch_files.view { myFile ->
-            println "Dosya nesne sınıfı: ${myFile.class}"
-            println "Dosya adı: ${myFile.name}"
-            println "Basit ad: ${myFile.simpleName}"
-            println "Uzantı: ${myFile.extension}"
-            println "Üst dizin: ${myFile.parent}"
+            println "File object class: ${myFile.class}"
+            println "File name: ${myFile.name}"
+            println "Simple name: ${myFile.simpleName}"
+            println "Extension: ${myFile.extension}"
+            println "Parent directory: ${myFile.parent}"
         }
 
         // Dosyadaki satırları say
@@ -901,7 +901,7 @@ Tam dosya özelliklerini yazdırmaya geri dönelim:
     ```groovy title="main.nf" linenums="7" hl_lines="3"
         // channel.fromPath ile dosyaları yükle
         ch_files = channel.fromPath('data/patientA_rep1_normal_R1_001.fastq.gz')
-        ch_files.view { myFile -> "Dosya bulundu: $myFile" }
+        ch_files.view { myFile -> "Found file: $myFile" }
 
         // Dosyadaki satırları say
         // COUNT_LINES(ch_files)
@@ -924,12 +924,12 @@ nextflow run main.nf
 
     executor >  local (1)
     [9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔
-    Dosya nesne sınıfı: sun.nio.fs.UnixPath
-    Dosya adı: patientA_rep1_normal_R1_001.fastq.gz
-    Basit ad: patientA_rep1_normal_R1_001
-    Uzantı: gz
-    Üst dizin: /workspaces/training/side-quests/working_with_files/data
-    Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz
+    File object class: sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
     ```
 
@@ -993,20 +993,20 @@ nextflow run main.nf
 
     executor >  local (2)
     [3c/a65de5] COUNT_LINES (2) [100%] 2 of 2 ✔
-    Dosya nesne sınıfı: class sun.nio.fs.UnixPath
-    Dosya adı: patientA_rep1_normal_R1_001.fastq.gz
-    Basit ad: patientA_rep1_normal_R1_001
-    Uzantı: gz
-    Üst dizin: /workspaces/training/side-quests/working_with_files/data
-    Dosya nesne sınıfı: class sun.nio.fs.UnixPath
-    Dosya adı: patientA_rep1_normal_R2_001.fastq.gz
-    Basit ad: patientA_rep1_normal_R2_001
-    Uzantı: gz
-    Üst dizin: /workspaces/training/side-quests/working_with_files/data
-    Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz
+    File object class: class sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R1_001.fastq.gz
+    Simple name: patientA_rep1_normal_R1_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    File object class: class sun.nio.fs.UnixPath
+    File name: patientA_rep1_normal_R2_001.fastq.gz
+    Simple name: patientA_rep1_normal_R2_001
+    Extension: gz
+    Parent directory: /workspaces/training/side-quests/working_with_files/data
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
 
-    Dosya işleniyor: patientA_rep1_normal_R2_001.fastq.gz
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
     ```
 
@@ -1073,11 +1073,11 @@ Bu bilgiyi üç adımda almak için iş akışımızı değiştireceğiz:
         // channel.fromPath ile dosyaları yükle
         ch_files = channel.fromPath('data/patientA_rep1_normal_R*_001.fastq.gz')
         ch_files.view { myFile ->
-            println "Dosya nesne sınıfı: ${myFile.class}"
-            println "Dosya adı: ${myFile.name}"
-            println "Basit ad: ${myFile.simpleName}"
-            println "Uzantı: ${myFile.extension}"
-            println "Üst dizin: ${myFile.parent}"
+            println "File object class: ${myFile.class}"
+            println "File name: ${myFile.name}"
+            println "Simple name: ${myFile.simpleName}"
+            println "Extension: ${myFile.extension}"
+            println "Parent directory: ${myFile.parent}"
         }
     ```
 
@@ -1100,10 +1100,10 @@ nextflow run main.nf
     [e9/55774b] COUNT_LINES (2) [100%] 2 of 2 ✔
     [patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     [patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
-    Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
 
-    Dosya işleniyor: patientA_rep1_normal_R2_001.fastq.gz
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
     ```
 
@@ -1156,10 +1156,10 @@ nextflow run main.nf
     [e7/da2f4b] COUNT_LINES (2) [100%] 2 of 2 ✔
     [[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     [[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
-    Dosya işleniyor: patientA_rep1_normal_R2_001.fastq.gz
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
-    Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
     ```
 
@@ -1257,10 +1257,10 @@ nextflow run main.nf
     [1b/e7fb27] COUNT_LINES (1) [100%] 2 of 2 ✔
     [[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]
     [[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]
-    Dosya işleniyor: patientA_rep1_normal_R2_001.fastq.gz
+    Processing file: patientA_rep1_normal_R2_001.fastq.gz
     40
 
-    Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz
+    Processing file: patientA_rep1_normal_R1_001.fastq.gz
     40
     ```
 
@@ -1567,7 +1567,7 @@ Bu süreci iş akışında kullanmak için, workflow bloğundan önce bir modül
 
 Modül dosyasını açarak kodunu inceleyebilirsiniz:
 
-```groovy title="modules/analyze_reads.nf - süreç örneği" linenums="1"
+```groovy title="modules/analyze_reads.nf - process example" linenums="1"
 #!/usr/bin/env nextflow
 
 process ANALYZE_READS {
@@ -1583,13 +1583,13 @@ process ANALYZE_READS {
 
     script:
     """
-    echo "Örnek meta verisi: ${meta.id}" > ${meta.id}_stats.txt
-    echo "Replik: ${meta.replicate}" >> ${meta.id}_stats.txt
-    echo "Tür: ${meta.type}" >> ${meta.id}_stats.txt
-    echo "Okuma 1: ${files[0]}" >> ${meta.id}_stats.txt
-    echo "Okuma 2: ${files[1]}" >> ${meta.id}_stats.txt
-    echo "Okuma 1 boyutu: \$(gunzip -dc ${files[0]} | wc -l | awk '{print \$1/4}') okuma" >> ${meta.id}_stats.txt
-    echo "Okuma 2 boyutu: \$(gunzip -dc ${files[1]} | wc -l | awk '{print \$1/4}') okuma" >> ${meta.id}_stats.txt
+    echo "Sample metadata: ${meta.id}" > ${meta.id}_stats.txt
+    echo "Replicate: ${meta.replicate}" >> ${meta.id}_stats.txt
+    echo "Type: ${meta.type}" >> ${meta.id}_stats.txt
+    echo "Read 1: ${files[0]}" >> ${meta.id}_stats.txt
+    echo "Read 2: ${files[1]}" >> ${meta.id}_stats.txt
+    echo "Read 1 size: \$(gunzip -dc ${files[0]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
+    echo "Read 2 size: \$(gunzip -dc ${files[1]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
     """
 }
 ```
@@ -1731,13 +1731,13 @@ Bu süreç çıktılarını bir `results` dizinine yayımlamak üzere ayarlanmı
     ```
 
     ```txt title="patientA_stats.txt"
-    Örnek meta verisi: patientA
-    Replik: 1
-    Tür: normal
-    Okuma 1: patientA_rep1_normal_R1_001.fastq.gz
-    Okuma 2: patientA_rep1_normal_R2_001.fastq.gz
-    Okuma 1 boyutu: 10 okuma
-    Okuma 2 boyutu: 10 okuma
+    Sample metadata: patientA
+    Replicate: 1
+    Type: normal
+    Read 1: patientA_rep1_normal_R1_001.fastq.gz
+    Read 2: patientA_rep1_normal_R2_001.fastq.gz
+    Read 1 size: 10 reads
+    Read 2 size: 10 reads
     ```
 
 Süreç girdilerimizi aldı ve tasarlandığı gibi hasta meta verilerini içeren yeni bir dosya oluşturdu.
@@ -1972,11 +1972,11 @@ Bu teknikleri kendi çalışmanıza uygulamak, özellikle karmaşık adlandırma
 
     ```groovy
      ch_files.view { myFile ->
-        println "Dosya nesne sınıfı: ${myFile.class}"
-        println "Dosya adı: ${myFile.name}"
-        println "Basit ad: ${myFile.simpleName}"
-        println "Uzantı: ${myFile.extension}"
-        println "Üst dizin: ${myFile.parent}"
+        println "File object class: ${myFile.class}"
+        println "File name: ${myFile.name}"
+        println "Simple name: ${myFile.simpleName}"
+        println "Extension: ${myFile.extension}"
+        println "Parent directory: ${myFile.parent}"
     }
     ```
 

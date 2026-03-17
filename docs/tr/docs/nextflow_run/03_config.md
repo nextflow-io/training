@@ -350,7 +350,7 @@ Bu durumlarda, bir parametre dosyası kullanmak, devasa komut satırları yazmak
 Ayrıca parametre setlerini iş arkadaşlarına veya örneğin bir yayın için destekleyici bilgi olarak dağıtmayı kolaylaştırır.
 Bu, çalışmanızı başkaları tarafından daha tekrar üretilebilir hale getirir.
 
-### Özet
+### Özetle
 
 Workflow girdilerini yönetmek için temel yapılandırma seçeneklerinden nasıl yararlanacağınızı biliyorsunuz.
 
@@ -771,7 +771,7 @@ Hala hepsi düzgün kopyalar, symlink değil.
 
 Bu şekilde özelleştirebileceğiniz birçok başka seçenek var, ancak umarız bu size seçeneklerin kapsamı ve bunları tercihlerinize uygun şekilde etkili bir şekilde nasıl kullanacağınız hakkında bir fikir verir.
 
-### Özet
+### Özetle
 
 Çıktılarınızın yayınlandığı dizinlerin adlandırmasını ve yapısını ve workflow çıktı yayınlama modunu nasıl kontrol edeceğinizi biliyorsunuz.
 
@@ -867,7 +867,7 @@ nextflow run 3-main.nf --batch conda
 
 ??? success "Komut çıktısı"
 
-    ```console title="Çıktı"
+    ```console title="Output"
     N E X T F L O W   ~  version 25.10.2
 
     Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
@@ -900,7 +900,7 @@ Bu, gerekirse Conda ortamlarıyla çalıştırmaya hazır olduğumuz anlamına g
 
     Ve daha önce belirtildiği gibi, Nextflow birden fazla başka yazılım paketleme ve konteyner teknolojisini destekler, bu yüzden sadece bu ikisiyle sınırlı değilsiniz.
 
-### Özet
+### Özetle
 
 Her sürecin hangi yazılım paketini kullanması gerektiğini nasıl yapılandıracağınızı ve teknolojiler arasında nasıl geçiş yapacağınızı biliyorsunuz.
 
@@ -924,20 +924,20 @@ Nextflow başladığında, mevcut CPU'lara ve belleğe bakar.
 
 Yerel executor uygun ve verimlidir, ancak tek bir makineyle sınırlıdır. Çok büyük iş yükleri için, yerel makinenizin bir darboğaz olduğunu keşfedebilirsiniz; ya mevcut kaynaklardan daha fazlasını gerektiren tek bir göreviniz var ya da tek bir makinenin onları çalıştırmasını beklemenin çok uzun süreceği kadar çok göreviniz var.
 
-Nextflow, HPC scheduler'ları (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor ve diğerleri) ve bulut çalıştırma backend'leri (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes ve daha fazlası) dahil [birçok farklı çalıştırma backend'ini](https://www.nextflow.io/docs/latest/executor.html) destekler.
+Nextflow, HPC scheduler'ları (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor ve diğerleri) ve bulut çalıştırma backend'leri (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes ve daha fazlası) dahil [birçok farklı çalıştırma backend'ini](https://nextflow.io/docs/latest/executor.html) destekler.
 
 ### 4.1. Farklı bir backend'i hedefleme
 
 Executor seçimi `executor` adlı bir süreç yönergesiyle ayarlanır.
 Varsayılan olarak `local` olarak ayarlanmıştır, bu yüzden aşağıdaki yapılandırma ima edilir:
 
-```groovy title="Yerleşik yapılandırma"
+```groovy title="Built-in configuration"
 process {
     executor = 'local'
 }
 ```
 
-Executor'ı farklı bir backend'i hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklanan benzer sözdizimini kullanarak istediğiniz executor'ı belirtmeniz yeterlidir (tüm seçenekler için [Executors](https://www.nextflow.io/docs/latest/executor.html) belgesine bakın).
+Executor'ı farklı bir backend'i hedefleyecek şekilde ayarlamak için, kaynak tahsisleri için yukarıda açıklanan benzer sözdizimini kullanarak istediğiniz executor'ı belirtmeniz yeterlidir (tüm seçenekler için [Executors](https://nextflow.io/docs/latest/executor.html) belgesine bakın).
 
 ```groovy title="nextflow.config"
 process {
@@ -959,7 +959,7 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
 
     Örneğin, 8 CPU ve 4GB RAM gerektiren ve "my-science-work" kuyruğunda çalıştırılacak aynı iş, backend'e bağlı olarak farklı şekillerde ifade edilmelidir.
 
-    ```bash title="SLURM için yapılandırma / sbatch ile gönder"
+    ```bash title="Config for SLURM / submit using sbatch"
     #SBATCH -o /path/to/my/task/directory/my-task-1.log
     #SBATCH --no-requeue
     #SBATCH -c 8
@@ -967,7 +967,7 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
     #SBATCH -p my-science-work
     ```
 
-    ```bash title="PBS için yapılandırma / qsub ile gönder"
+    ```bash title="Config for PBS / submit using qsub"
     #PBS -o /path/to/my/task/directory/my-task-1.log
     #PBS -j oe
     #PBS -q my-science-work
@@ -975,7 +975,7 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
     #PBS -l mem=4gb
     ```
 
-    ```bash title="SGE için yapılandırma / qsub ile gönder"
+    ```bash title="Config for SGE / submit using qsub"
     #$ -o /path/to/my/task/directory/my-task-1.log
     #$ -j y
     #$ -terse
@@ -986,12 +986,12 @@ Ne yazık ki, bu sistemlerin her biri, bir işin nasıl tanımlanması ve ilgili
     ```
 
 Neyse ki, Nextflow tüm bunları basitleştirir.
-İlgili özellikleri, `cpus`, `memory` ve `queue` gibi (tüm kullanılabilir seçenekler için [Süreç yönergeleri](https://www.nextflow.io/docs/latest/reference/process.html#process-directives) belgesine bakın) yalnızca bir kez belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar.
+İlgili özellikleri, `cpus`, `memory` ve `queue` gibi (tüm kullanılabilir seçenekler için [Süreç yönergeleri](https://nextflow.io/docs/latest/reference/process.html#process-directives) belgesine bakın) yalnızca bir kez belirtebilmeniz için standartlaştırılmış bir sözdizimi sağlar.
 Ardından, çalışma zamanında, Nextflow executor ayarına göre uygun backend'e özgü betikleri oluşturmak için bu ayarları kullanacaktır.
 
 Bu standartlaştırılmış sözdizimini bir sonraki bölümde ele alacağız.
 
-### Özet
+### Özetle
 
 Artık farklı türde hesaplama altyapısı kullanmak için executor'ı nasıl değiştireceğinizi biliyorsunuz.
 
@@ -1013,7 +1013,7 @@ Nextflow'da kaynak tahsislerini ve sınırlamalarını değerlendirmeyi ve ifade
 Varsayılan olarak, Nextflow her süreç için tek bir CPU ve 2GB bellek kullanacaktır.
 İlgili süreç yönergeleri `cpus` ve `memory` olarak adlandırılır, bu yüzden aşağıdaki yapılandırma ima edilir:
 
-```groovy title="Yerleşik yapılandırma" linenums="1"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -1046,7 +1046,7 @@ Rapor, tarayıcınızda indirebileceğiniz ve açabileceğiniz bir html dosyası
 Kaynakları ayarlama fırsatlarını tanımlayıp tanımlayamayacağınızı görmek için rapora bakıp birkaç dakikanızı ayırın.
 Kullanım sonuçlarını tahsis edilenin yüzdesi olarak gösteren sekmelere tıkladığınızdan emin olun.
 
-Mevcut tüm özellikleri açıklayan [Raporlar](https://www.nextflow.io/docs/latest/reports.html) belgelerine bakın.
+Mevcut tüm özellikleri açıklayan [Raporlar](https://nextflow.io/docs/latest/reports.html) belgelerine bakın.
 
 ### 5.2. Tüm süreçler için kaynak tahsislerini ayarlama
 
@@ -1117,7 +1117,7 @@ Süreçleriniz farklı kaynak gereksinimlerine sahip olduğunda çok yararlıdı
 !!! tip "İpucu"
 
     Bu, kaynakları optimize etmek için yapabileceğiniz şeylerin sadece küçük bir tadımlığı.
-    Nextflow'un kendisi, kaynak sınırlamaları nedeniyle başarısız olan işleri yeniden denemek için gerçekten şık bir [dinamik yeniden deneme mantığı](https://www.nextflow.io/docs/latest/process.html#dynamic-task-resources) yerleşik olarak içerir.
+    Nextflow'un kendisi, kaynak sınırlamaları nedeniyle başarısız olan işleri yeniden denemek için gerçekten şık bir [dinamik yeniden deneme mantığı](https://nextflow.io/docs/latest/process.html#dynamic-task-resources) yerleşik olarak içerir.
     Ayrıca, Seqera Platform kaynak tahsislerinizi otomatik olarak optimize etmek için yapay zeka odaklı araçlar da sunmaktadır.
 
 ### 5.5. Kaynak sınırları ekleme
@@ -1127,7 +1127,7 @@ Hangi hesaplama executor'ını ve hesaplama altyapısını kullandığınıza ba
 
 İlgili sınırlamaları ayarlamak için `resourceLimits` yönergesini kullanabilirsiniz. Sözdizimi, tek başına bir süreç bloğunda olduğunda şöyle görünür:
 
-```groovy title="Sözdizimi örneği"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -1148,7 +1148,7 @@ Ancak, bu sınırları aşan kaynak tahsisleriyle workflow'u çalıştırmaya ç
 
     Bu paylaşılan yapılandırmalar hem orada çalışan ve bu nedenle kurumlarının yapılandırmasını hazır olarak kullanabilen insanlar için hem de kendi altyapıları için bir yapılandırma geliştirmek isteyen insanlar için bir model olarak değerlidir.
 
-### Özet
+### Özetle
 
 Kaynak kullanımını değerlendirmek için bir profilleme raporu oluşturmayı ve tüm süreçler ve/veya bireysel süreçler için kaynak tahsislerini nasıl değiştireceğinizi ve HPC'de çalıştırmak için kaynak sınırlamalarını nasıl ayarlayacağınızı biliyorsunuz.
 
@@ -1249,7 +1249,7 @@ Bunu bir parametre dosyası kullanmaya alternatif olarak düşünebilirsiniz.
 
 Bu bağlamda varsayılan değerleri ifade etmek için sözdizimi, `test` olarak adlandırdığımız bir profil için şöyle görünür:
 
-```groovy title="Sözdizimi örneği"
+```groovy title="Syntax example"
     test {
         params.<parameter1>
         params.<parameter2>
@@ -1292,7 +1292,7 @@ Teknik yapılandırma profilleri için olduğu gibi, istediğiniz herhangi bir a
 Uygun bir şekilde, profiller karşılıklı olarak dışlayıcı değildir, bu yüzden komut satırımızda `-profile <profile1>,<profile2>` sözdizimini kullanarak birden fazla profil belirtebiliriz (herhangi bir sayıda profil için).
 
 Aynı yapılandırma öğeleri için değerler ayarlayan ve aynı yapılandırma dosyasında tanımlanan profilleri birleştirirseniz, Nextflow hangi değeri en son okuduğunu kullanarak çakışmayı çözecektir (yani dosyada daha sonra gelen).
-Çakışan ayarlar farklı yapılandırma kaynaklarında ayarlanmışsa, varsayılan [öncelik sırası](https://www.nextflow.io/docs/latest/config.html#configuration-file) geçerlidir.
+Çakışan ayarlar farklı yapılandırma kaynaklarında ayarlanmışsa, varsayılan [öncelik sırası](https://www.nextflow.io/docs/latest/config.html) geçerlidir.
 
 Önceki komutumza test profilini eklemeyi deneyelim:
 
@@ -1453,7 +1453,7 @@ nextflow config -profile my_laptop,test
 
 Bu, birden fazla yapılandırma katmanı içeren karmaşık projeler için özellikle yararlı olur.
 
-### Özet
+### Özetle
 
 Çalışma zamanında minimum güçlükle önceden ayarlanmış bir yapılandırmayı seçmek için profilleri nasıl kullanacağınızı biliyorsunuz.
 Daha genel olarak, workflow çalıştırmalarınızı farklı hesaplama platformlarına uyacak şekilde ve analizlerinizin tekrar üretilebilirliğini artırmak için nasıl yapılandıracağınızı biliyorsunuz.
@@ -1537,7 +1537,7 @@ nextflow run nextflow-io/hello -r v1.3
 
 Tam versiyonları belirtmek tekrar üretilebilirlik için önemlidir.
 
-### Özet
+### Özetle
 
 Pipeline'ları doğrudan GitHub ve diğer uzak havuzlardan nasıl çalıştıracağınızı ve tekrar üretilebilirlik için versiyonları nasıl belirteceğinizi biliyorsunuz.
 
@@ -1549,7 +1549,7 @@ Nextflow pipeline'larını çalıştırmaya ve yönetmeye başlamak için bilmen
 Bu, bu kursu sonlandırıyor, ancak öğrenmeye devam etmek istiyorsanız, iki ana önerimiz var:
 
 - Kendi pipeline'larınızı geliştirmeyi daha derinlemesine incelemek istiyorsanız, bu kursla aynı genel ilerlemeyi kapsayan ancak kanallar ve operatörler hakkında çok daha ayrıntılı giden yeni başlayanlar için bir kurs olan [Hello Nextflow](../hello_nextflow/index.md)'a bakın.
-- Koda daha derinlemesine girmeden Nextflow pipeline'larını çalıştırmayı öğrenmeye devam etmek istiyorsanız, son derece popüler [nf-core](https://nf-co.re/) projesinden pipeline'ları bulmak ve çalıştırmak için araçları tanıtan [Hello nf-core](../hello_nf-core/index.md)'un ilk bölümüne bakın.
+- Koda daha derinlemesine girmeden Nextflow pipeline'larını çalıştırmayı öğrenmeye devam etmek istiyorsanız, son derece popüler [nf-core](../hello_nf-core/index.md) projesinden pipeline'ları bulmak ve çalıştırmak için araçları tanıtan [Hello nf-core](https://nf-co.re/)'un ilk bölümüne bakın.
 
 İyi eğlenceler!
 

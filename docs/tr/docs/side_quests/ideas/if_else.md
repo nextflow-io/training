@@ -78,7 +78,7 @@ workflow {
 
 Bu alıştırmanın çözümünü `containers/solutions/hello-containers-4.2.nf` dosyasında bulabilirsiniz.
 
-### Özet
+### Özetle
 
 Nextflow'da süreçleri çalıştırmak için konteynerlerin nasıl kullanılacağını ve pipeline'larınıza bazı dallanma mantığının nasıl ekleneceğini öğrendiniz!
 
