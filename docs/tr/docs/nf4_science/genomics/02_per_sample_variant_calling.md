@@ -1342,7 +1342,7 @@ Bu, daha öncekiyle aynı sonucu üretmelidir. Basit varyant çağırma iş akı
 
 Bir BAM dosyasını dizinlemek ve GATK kullanarak örnek başına varyant çağırma uygulamak için çok adımlı modüler bir iş akışı yapmayı biliyorsunuz.
 
-Daha genel olarak, genomik dosya formatlarının ve araç gereksinimlerinin özelliklerini dikkate alarak gerçek iş yapan basit bir genomik boru hattı oluşturmak için temel Nextflow bileşenlerini ve mantığını nasıl kullanacağınızı öğrendiniz.
+Daha genel olarak, genomik dosya formatlarının ve araç gereksinimlerinin özelliklerini dikkate alarak gerçek iş yapan basit bir genomik pipeline oluşturmak için temel Nextflow bileşenlerini ve mantığını nasıl kullanacağınızı öğrendiniz.
 
 ### Sırada ne var?
 

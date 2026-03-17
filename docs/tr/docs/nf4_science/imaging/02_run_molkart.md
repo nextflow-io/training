@@ -308,7 +308,7 @@ Her işlem satırı şunları gösterir:
 - **Girdi tanımlayıcısı**: Parantez içinde örnek adı
 - **İlerleme**: Tamamlanma yüzdesi ve sayısı (örneğin, `1 of 1 ✔`)
 
-### Özet
+### Özetle
 
 Bir nf-core pipeline'ını test verileri ile nasıl başlatacağınızı ve çalıştırma çıktısını nasıl yorumlayacağınızı biliyorsunuz.
 
@@ -430,7 +430,7 @@ Bu şunları gösterir:
 
     Bu raporlar, kaynak tahsisini optimize etmek ve performans sorunlarını gidermek için son derece kullanışlıdır.
 
-### Özet
+### Özetle
 
 Pipeline çıktılarını nasıl bulacağınızı, kalite kontrol raporlarını nasıl inceleyeceğinizi ve çalıştırma metriklerine nasıl erişeceğinizi biliyorsunuz.
 
@@ -488,7 +488,7 @@ Bölüm 1'de öğrendiğimiz gibi, eski çalıştırmalardan çalışma dizinler
 
 Ancak, büyük ara dosyalara sahip nf-core pipeline'ları için düzenli olarak temizlik yapmak özellikle önemlidir.
 
-### Özet
+### Özetle
 
 nf-core pipeline'larının çalışma dizinlerini nasıl düzenlediğini ve hata ayıklama için bireysel görevleri nasıl inceleyeceğinizi anlıyorsunuz.
 
@@ -556,7 +556,7 @@ Resume özellikle şu durumlarda değerlidir:
     Resume yalnızca girdi verilerini, pipeline kodunu veya parametreleri değiştirmemişseniz çalışır.
     Bunlardan herhangi birini değiştirirseniz, Nextflow etkilenen görevleri doğru bir şekilde yeniden çalıştıracaktır.
 
-### Özet
+### Özetle
 
 Başarılı görevleri tekrarlamadan pipeline'ları verimli bir şekilde yeniden çalıştırmak için `-resume` kullanmayı biliyorsunuz.
 

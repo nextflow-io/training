@@ -1,70 +1,70 @@
-# Bölüm 1: Yönteme genel bakış
+# Bölüm 1: Yönteme Genel Bakış
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-Varyant çağırma, bir genom dizisindeki varyasyonları referans genoma göre tanımlamayı amaçlayan bir genomik analiz yöntemidir.
-Burada, tüm genom dizileme verilerinde kısa germline varyantları, _yani_ SNP'ler ve indelleri çağırmak için tasarlanmış araçları ve yöntemleri kullanacağız.
+Varyant çağırma, bir genom dizisindeki varyasyonları referans genoma göre belirlemeyi amaçlayan bir genomik analiz yöntemidir.
+Burada, tüm genom dizileme verilerinde kısa germline varyantları, _yani_ SNP'ler ve indel'leri çağırmak için tasarlanmış araç ve yöntemleri kullanacağız.
 
-![GATK boru hattı](img/gatk-pipeline.png)
+![GATK pipeline](img/gatk-pipeline.png)
 
-Tam bir varyant çağırma boru hattı tipik olarak referansa haritalama (bazen genom hizalama olarak da adlandırılır) ve varyant filtreleme ve önceliklendirme dahil olmak üzere birçok adım içerir.
-Basitlik için, bu kursta sadece varyant çağırma kısmına odaklanacağız.
+Tam bir varyant çağırma pipeline'ı genellikle referansa haritalama (bazen genom hizalaması olarak da adlandırılır) ve varyant filtreleme ile önceliklendirme dahil olmak üzere pek çok adım içerir.
+Bu kursta işleri basit tutmak adına yalnızca varyant çağırma kısmına odaklanacağız.
 
 ### Yöntemler
 
-Size germline SNP'leri ve indelleri tanımlamak için tüm genom dizileme örneklerine varyant çağırma uygulamanın iki yolunu göstereceğiz.
-İlk olarak, her örnekten bağımsız olarak varyant çağıran basit bir **örnek başına yaklaşım** ile başlayacağız.
-Ardından, birden fazla örneği birlikte analiz ederek daha doğru ve bilgilendirici sonuçlar üreten daha sofistike bir **ortak çağırma yaklaşımı** göstereceğiz.
+Tüm genom dizileme örneklerinde germline SNP'leri ve indel'leri belirlemek için varyant çağırmayı uygulamanın iki yolunu göstereceğiz.
+Önce, her örnekten bağımsız olarak varyant çağıran basit bir **örnek başına yaklaşım** ile başlayacağız.
+Ardından, birden fazla örneği birlikte analiz ederek daha doğru ve bilgilendirici sonuçlar üreten daha gelişmiş bir **ortak çağırma yaklaşımını** göstereceğiz.
 
-Her iki yaklaşım için herhangi bir iş akışı kodu yazmaya dalmadan önce, komutları bazı test verileri üzerinde manuel olarak deneyeceğiz.
+Her iki yaklaşım için herhangi bir iş akışı kodu yazmaya başlamadan önce, komutları bazı test verileri üzerinde manuel olarak deneyeceğiz.
 
-### Veri seti
+### Veri Seti
 
-Aşağıdaki verileri ve ilgili kaynakları sağlıyoruz:
+Aşağıdaki veri ve ilgili kaynakları sağlıyoruz:
 
-- İnsan kromozom 20'sinin küçük bir bölgesinden (hg19/b37'den) oluşan **bir referans genom** ve yardımcı dosyaları (indeks ve dizi sözlüğü).
-- Bir aile üçlüsüne (anne, baba ve oğul) karşılık gelen **üç tüm genom dizileme örneği**; dosya boyutlarını küçük tutmak için kromozom 20'deki küçük bir veri dilimine indirgenmişlerdir.
-  Bu, referans genoma zaten haritalanmış Illumina kısa okuma dizileme verileridir ve [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) formatında (Binary Alignment Map, SAM'in sıkıştırılmış versiyonu, Sequence Alignment Map) sağlanmıştır.
-- **Bir genomik aralıklar listesi**, yani örneklerimizin varyant çağırmaya uygun verilere sahip olduğu genomdaki koordinatlar, BED formatında sağlanmıştır.
+- **Bir referans genomu**: İnsan kromozom 20'sinin küçük bir bölgesinden (hg19/b37) oluşan ve yardımcı dosyalarını (indeks ve dizi sözlüğü) içeren referans genomu.
+- **Üç tüm genom dizileme örneği**: Bir aile üçlüsüne (anne, baba ve oğul) karşılık gelen ve dosya boyutlarını küçük tutmak amacıyla kromozom 20 üzerinde küçük bir veri dilimine indirgenmiş örnekler.
+  Bu, referans genoma önceden haritalanmış Illumina kısa okuma dizileme verisidir ve [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) formatında (Binary Alignment Map; SAM yani Sequence Alignment Map'in sıkıştırılmış bir sürümü) sağlanmaktadır.
+- **Genomik aralıklar listesi**: Örneklerimizin varyant çağırmaya uygun veriye sahip olduğu genomdaki koordinatlar; BED formatında sağlanmaktadır.
 
 ### Yazılım
 
-İlgili iki ana araç, dizi hizalama dosyalarını manipüle etmek için yaygın olarak kullanılan bir araç seti olan [Samtools](https://www.htslib.org/) ve Broad Institute'da geliştirilen varyant keşfi için bir araç seti olan [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit)'dir.
+Kullanılan iki ana araç şunlardır: Dizi hizalama dosyalarını işlemek için yaygın olarak kullanılan bir araç seti olan [Samtools](https://www.htslib.org/) ve Broad Institute'ta geliştirilen varyant keşfi araçları seti olan [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit).
 
-Bu araçlar GitHub Codespaces ortamında yüklü değildir; bu nedenle bunları Seqera Containers servisi aracılığıyla alınan konteynerlar ile kullanacağız (bkz. [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+Bu araçlar GitHub Codespaces ortamında kurulu değildir; bu nedenle Seqera Containers hizmeti aracılığıyla alınan konteynerler üzerinden kullanacağız (bkz. [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! tip "İpucu"
 
-    `nf4-science/genomics` dizininde olduğunuzdan emin olun; böylece `pwd` yazdığınızda gösterilen yolun son kısmı `genomics` olsun.
+    `pwd` komutunu yazdığınızda gösterilen yolun son kısmının `genomics` olması için `nf4-science/genomics` dizininde olduğunuzdan emin olun.
 
 ---
 
-## 1. Örnek başına varyant çağırma
+## 1. Örnek Başına Varyant Çağırma
 
-Örnek başına varyant çağırma, her örneği bağımsız olarak işler: varyant çağırıcı, bir seferde bir örnek için dizileme verilerini inceler ve örneğin referanstan farklı olduğu konumları tanımlar.
+Örnek başına varyant çağırma, her örneği bağımsız olarak işler: varyant çağırıcı, bir seferde tek bir örneğin dizileme verilerini inceleyerek örneğin referanstan farklılaştığı konumları belirler.
 
 Bu bölümde, örnek başına varyant çağırma yaklaşımını oluşturan iki komutu test ediyoruz: Samtools ile bir BAM dosyasını indeksleme ve GATK HaplotypeCaller ile varyant çağırma.
-Bunlar, bu kursun 2. Bölümünde bir Nextflow iş akışına sarmalayacağımız komutlardır.
+Bu kursta Bölüm 2'de bir Nextflow iş akışına sarmalayacağımız komutlar bunlardır.
 
-1. [Samtools](https://www.htslib.org/) kullanarak bir BAM girdi dosyası için bir indeks dosyası oluşturun
-2. İndekslenmiş BAM dosyası üzerinde GATK HaplotypeCaller'ı çalıştırarak VCF (Variant Call Format) formatında örnek başına varyant çağrıları oluşturun
+1. [Samtools](https://www.htslib.org/) kullanarak bir BAM girdi dosyası için indeks dosyası oluşturma
+2. VCF (Variant Call Format) formatında örnek başına varyant çağrıları üretmek için indekslenmiş BAM dosyası üzerinde GATK HaplotypeCaller'ı çalıştırma
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
-İki komutu sadece bir örnek üzerinde test ederek başlıyoruz.
+Başlangıç olarak iki komutu yalnızca bir örnek üzerinde test ediyoruz.
 
-### 1.1. Samtools ile bir BAM girdi dosyasını indeksleyin
+### 1.1. Samtools ile BAM Girdi Dosyasını İndeksleme
 
-İndeks dosyaları, biyoinformatik dosya formatlarının yaygın bir özelliğidir; ana dosyanın yapısı hakkında bilgi içerirler ve GATK gibi araçların tüm dosyayı okumak zorunda kalmadan verilerin bir alt kümesine erişmesine olanak tanırlar.
-Bu, söz konusu dosyaların ne kadar büyük olabileceği göz önüne alındığında önemlidir.
+İndeks dosyaları, biyoinformatik dosya formatlarının yaygın bir özelliğidir; GATK gibi araçların tüm dosyayı okumak zorunda kalmadan verinin bir alt kümesine erişmesini sağlayan, ana dosyanın yapısına ilişkin bilgiler içerirler.
+Bu dosyaların ne kadar büyük olabileceği göz önüne alındığında bu özellik büyük önem taşır.
 
-BAM dosyaları genellikle indeks olmadan sağlanır; bu nedenle birçok analiz iş akışındaki ilk adım `samtools index` kullanarak bir tane oluşturmaktır.
+BAM dosyaları çoğunlukla indeks olmadan sağlanır; bu nedenle pek çok analiz iş akışının ilk adımı `samtools index` kullanarak bir indeks oluşturmaktır.
 
-Bir Samtools konteynerını çekeceğiz, etkileşimli olarak başlatacağız ve BAM dosyalarından biri üzerinde `samtools index` komutunu çalıştıracağız.
+Bir Samtools konteyneri indirip etkileşimli olarak başlatacak ve BAM dosyalarından biri üzerinde `samtools index` komutunu çalıştıracağız.
 
-#### 1.1.1. Samtools konteynerını çekin
+#### 1.1.1. Samtools Konteynerini İndirme
 
 Samtools konteyner imajını indirmek için `docker pull` komutunu çalıştırın:
 
@@ -95,13 +95,13 @@ docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
     community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
     ```
 
-Bu imajı daha önce indirmediyseniz, tamamlanması bir dakika sürebilir.
-Tamamlandığında, konteyner imajının yerel bir kopyasına sahip olursunuz.
+Bu imajı daha önce indirmediyseniz tamamlanması bir dakika sürebilir.
+İşlem tamamlandığında konteyner imajının yerel bir kopyasına sahip olursunuz.
 
-#### 1.1.2. Samtools konteynerını etkileşimli olarak başlatın
+#### 1.1.2. Samtools Konteynerini Etkileşimli Olarak Başlatma
 
-Konteynerı etkileşimli olarak çalıştırmak için `-it` bayraklarıyla `docker run` kullanın.
-`-v ./data:/data` seçeneği, yerel `data` dizinini konteynere bağlar; böylece araçlar girdi dosyalarına erişebilir.
+Konteyneri etkileşimli olarak çalıştırmak için `docker run` komutunu `-it` bayraklarıyla kullanın.
+`-v ./data:/data` seçeneği, araçların girdi dosyalarına erişebilmesi için yerel `data` dizinini konteynere bağlar.
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
@@ -113,9 +113,9 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
     (base) root@1409896f77b1:/tmp#
     ```
 
-İsteminizin `(base) root@a1b2c3d4e5f6:/tmp#` gibi bir şeye değiştiğini fark edeceksiniz; bu, artık konteyner içinde olduğunuzu gösterir.
+İstemcinizin `(base) root@a1b2c3d4e5f6:/tmp#` gibi bir şeye dönüştüğünü fark edeceksiniz; bu, artık konteynerin içinde olduğunuzu gösterir.
 
-Dizi veri dosyalarını `/data/bam` altında görebildiğinizi doğrulayın:
+`/data/bam` altındaki dizi verisi dosyalarını görebildiğinizi doğrulayın:
 
 ```bash
 ls /data/bam
@@ -127,20 +127,20 @@ ls /data/bam
     reads_father.bam  reads_mother.bam  reads_mother.bam.bai  reads_son.bam
     ```
 
-Bununla, ilk komutunuzu denemeye hazırsınız.
+Artık ilk komutu denemeye hazırsınız.
 
-#### 1.1.3. İndeksleme komutunu çalıştırın
+#### 1.1.3. İndeksleme Komutunu Çalıştırma
 
-[Samtools belgeleri](https://www.htslib.org/doc/samtools-index.html) bize bir BAM dosyasını indekslemek için çalıştırılacak komut satırını verir.
-Sadece girdi dosyasını sağlamamız gerekir; araç, girdi dosya adına `.bai` ekleyerek çıktı için otomatik olarak bir ad oluşturacaktır.
+[Samtools belgeleri](https://www.htslib.org/doc/samtools-index.html), bir BAM dosyasını indekslemek için çalıştırılacak komut satırını bize verir.
+Yalnızca girdi dosyasını sağlamamız yeterlidir; araç, girdi dosya adına `.bai` ekleyerek çıktı için otomatik olarak bir ad oluşturacaktır.
 
-Bir veri dosyası üzerinde `samtools index` komutunu çalıştırın:
+`samtools index` komutunu bir veri dosyası üzerinde çalıştırın:
 
 ```bash
 samtools index /data/bam/reads_mother.bam
 ```
 
-Komut terminalde herhangi bir çıktı üretmez, ancak artık orijinal BAM girdi dosyasıyla aynı dizinde `reads_mother.bam.bai` adlı bir dosya görmelisiniz.
+Komut terminalde herhangi bir çıktı üretmez; ancak artık orijinal BAM girdi dosyasıyla aynı dizinde `reads_mother.bam.bai` adlı bir dosya görmeniz gerekir.
 
 ??? abstract "Dizin içeriği"
 
@@ -154,23 +154,23 @@ Komut terminalde herhangi bir çıktı üretmez, ancak artık orijinal BAM girdi
 
 Bu, ilk adımın testini tamamlar.
 
-#### 1.1.4. Samtools konteynerından çıkın
+#### 1.1.4. Samtools Konteynerinden Çıkma
 
-Konteynerdan çıkmak için `exit` yazın.
+Konteynerden çıkmak için `exit` yazın.
 
 ```bash
 exit
 ```
 
-İsteminiz artık konteynerı başlatmadan önceki haline dönmüş olmalıdır.
+İstemciniz, konteyneri başlatmadan önceki haline dönmüş olmalıdır.
 
-### 1.2. GATK HaplotypeCaller ile varyant çağırın
+### 1.2. GATK HaplotypeCaller ile Varyant Çağırma
 
 Az önce indekslediğimiz BAM dosyası üzerinde `gatk HaplotypeCaller` komutunu çalıştırmak istiyoruz.
 
-#### 1.2.1. GATK konteynerını çekin
+#### 1.2.1. GATK Konteynerini İndirme
 
-İlk olarak, GATK konteyner imajını indirmek için `docker pull` komutunu çalıştıralım:
+Önce GATK konteyner imajını indirmek için `docker pull` komutunu çalıştıralım:
 
 ```bash
 docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
@@ -178,7 +178,7 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 
 ??? success "Komut çıktısı"
 
-    Bazı katmanlar `Already exists` gösterir; çünkü daha önce çektiğimiz Samtools konteyner imajıyla paylaşılırlar.
+    Bazı katmanlar, daha önce indirdiğimiz Samtools konteyner imajıyla paylaşıldığından `Already exists` olarak görünür.
 
     ```console
     4.5.0.0--730ee8817e436867: Pulling from library/gatk4
@@ -201,26 +201,26 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
     community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
     ```
 
-İki konteyner imajı katmanlarının çoğunu paylaştığından, bu işlem ilk çekimden daha hızlı olmalıdır.
+İki konteyner imajı katmanlarının büyük bölümünü paylaştığından bu işlem ilk indirmeden daha hızlı olacaktır.
 
-#### 1.2.2. GATK konteynerını etkileşimli olarak başlatın
+#### 1.2.2. GATK Konteynerini Etkileşimli Olarak Başlatma
 
-GATK konteynerını, Samtools için yaptığımız gibi veri dizini bağlı olarak etkileşimli olarak başlatın.
+Samtools için yaptığımız gibi, veri dizini bağlı şekilde GATK konteynerini etkileşimli olarak başlatın.
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-İsteminiz artık GATK konteynerı içinde olduğunuzu gösterecek şekilde değişir.
+İstemciniz, artık GATK konteynerinin içinde olduğunuzu gösterecek şekilde değişir.
 
-#### 1.2.3. Varyant çağırma komutunu çalıştırın
+#### 1.2.3. Varyant Çağırma Komutunu Çalıştırma
 
-[GATK belgeleri](https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller) bize bir BAM dosyası üzerinde varyant çağırma gerçekleştirmek için çalıştırılacak komut satırını verir.
+[GATK belgeleri](https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller), bir BAM dosyası üzerinde varyant çağırma işlemi gerçekleştirmek için çalıştırılacak komut satırını bize verir.
 
-BAM girdi dosyasını (`-I`) ve ayrıca referans genomu (`-R`), çıktı dosyası için bir ad (`-O`) ve analiz edilecek genomik aralıkların bir listesini (`-L`) sağlamamız gerekir.
+BAM girdi dosyasını (`-I`), referans genomunu (`-R`), çıktı dosyası için bir ad (`-O`) ve analiz edilecek genomik aralıkların listesini (`-L`) sağlamamız gerekir.
 
-Ancak, indeks dosyasının yolunu belirtmemize gerek yoktur; araç, yerleşik adlandırma ve birlikte bulunma kuralına dayanarak otomatik olarak aynı dizinde arayacaktır.
-Aynı şey referans genomun yardımcı dosyaları (indeks ve dizi sözlüğü dosyaları, `*.fai` ve `*.dict`) için de geçerlidir.
+Ancak indeks dosyasının yolunu belirtmemize gerek yoktur; araç, yerleşik adlandırma ve birlikte konumlandırma kuralına dayanarak onu aynı dizinde otomatik olarak arayacaktır.
+Aynı durum referans genomun yardımcı dosyaları (indeks ve dizi sözlüğü dosyaları, `*.fai` ve `*.dict`) için de geçerlidir.
 
 ```bash
 gatk HaplotypeCaller \
@@ -292,9 +292,9 @@ gatk HaplotypeCaller \
     Runtime.totalMemory()=203423744
     ```
 
-Günlük çıktısı çok ayrıntılıdır; bu nedenle yukarıdaki örnekte en ilgili satırları vurguladık.
+Günlük çıktısı oldukça ayrıntılıdır; bu nedenle yukarıdaki örnekte en ilgili satırları vurguladık.
 
-Çıktı dosyaları, `reads_mother.vcf` ve indeks dosyası `reads_mother.vcf.idx`, konteynerdeki çalışma dizininizin içinde oluşturulur.
+Çıktı dosyaları olan `reads_mother.vcf` ve indeks dosyası `reads_mother.vcf.idx`, konteynerdeki çalışma dizininizde oluşturulur.
 
 ??? abstract "Dizin içeriği"
 
@@ -302,14 +302,14 @@ Günlük çıktısı çok ayrıntılıdır; bu nedenle yukarıdaki örnekte en i
     conda.yml  hsperfdata_root  reads_mother.vcf  reads_mother.vcf.idx
     ```
 
-VCF dosyası, birazdan göreceğimiz gibi varyant çağrılarını içerir; indeks dosyası ise araçların tüm dosyayı yüklemeden veri alt kümelerini aramasına ve almasına olanak tanımak için BAM indeks dosyasıyla aynı işleve sahiptir.
+VCF dosyası varyant çağrılarını içerir; bunu birazdan göreceğiz. İndeks dosyası ise BAM indeks dosyasıyla aynı işlevi görür: araçların tüm dosyayı yüklemeden verinin alt kümelerini aramasına ve almasına olanak tanır.
 
-VCF bir metin formatı olduğundan ve bu küçük bir test dosyası olduğundan, içeriğini açmak ve görüntülemek için `cat reads_mother.vcf` komutunu çalıştırabilirsiniz.
-Dosyanın başlangıcına kadar yukarı kaydırırsanız, birçok satır meta veriden oluşan bir başlık ve ardından satır başına bir tane olmak üzere varyant çağrılarının bir listesini bulacaksınız.
+VCF metin tabanlı bir format olduğundan ve bu dosya küçük bir test dosyası olduğundan, içeriğini açıp görüntülemek için `cat reads_mother.vcf` komutunu çalıştırabilirsiniz.
+Dosyanın başına kadar geri dönerseniz, pek çok meta veri satırından oluşan bir başlık ve ardından her biri bir satırda yer alan varyant çağrılarının listesini bulacaksınız.
 
-??? abstract "Dosya içeriği (kısaltılmış)" hl_lines="26"
+??? abstract "Dosya içeriği (kısaltılmış)"
 
-    ```console title="reads_mother.vcf" linenums="1"
+    ```console title="reads_mother.vcf" linenums="1" hl_lines="26"
     ##fileformat=VCFv4.2
     ##FILTER=<ID=LowQual,Description="Low quality">
     ##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed">
@@ -351,13 +351,13 @@ Dosyanın başlangıcına kadar yukarı kaydırırsanız, birçok satır meta ve
     20_10037292_10066351    14156   .       T       C       183.64  .       AC=1;AF=0.500;AN=2;BaseQRankSum=0.703;DP=20;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.500;MQ=60.00;MQRankSum=0.000;QD=9.18;ReadPosRankSum=-0.193;SOR=1.034        GT:AD:DP:GQ:PL  0/1:12,8:20:99:191,0,319
     ```
 
-Yukarıdaki örnek çıktıda, takip eden tablo verilerinin sütunlarının adlarını veren son başlık satırını vurguladık.
-Her veri satırı, örneğin dizileme verilerinde tanımlanan olası bir varyantı tanımlar. VCF formatını yorumlama konusunda rehberlik için [bu yararlı makaleye](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/) bakın.
+Yukarıdaki örnek çıktıda, ardından gelen tablo verilerinin sütun adlarını veren son başlık satırını vurguladık.
+Her veri satırı, örneğin dizileme verilerinde tespit edilen olası bir varyantı tanımlar. VCF formatını yorumlamaya ilişkin rehberlik için [bu faydalı makaleye](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/) bakabilirsiniz.
 
-#### 1.2.4. Çıktı dosyalarını taşıyın
+#### 1.2.4. Çıktı Dosyalarını Taşıma
 
-Konteyner içinde kalan her şey gelecekteki çalışmalara erişilemez olacaktır.
-BAM indeks dosyası doğrudan bağlı dosya sistemindeki `/data/bam` dizininde oluşturuldu; ancak VCF dosyası ve indeksi oluşturulmadı, bu nedenle bu ikisini manuel olarak taşımamız gerekiyor.
+Konteynerin içinde kalan her şey gelecekteki çalışmalar için erişilemez olacaktır.
+BAM indeks dosyası doğrudan bağlı dosya sistemindeki `/data/bam` dizininde oluşturuldu; ancak VCF dosyası ve indeksi oluşturulmadı; bu nedenle bu iki dosyayı manuel olarak taşımamız gerekiyor.
 
 ```bash
 mkdir /data/vcf
@@ -366,7 +366,7 @@ mv reads_mother.vcf* /data/vcf
 
 ??? abstract "Dizin içeriği"
 
-    ```console
+    ```console hl_lines="5 13-15"
     data/
     ├── bam
     │   ├── reads_father.bam
@@ -384,76 +384,76 @@ mv reads_mother.vcf* /data/vcf
         └── reads_mother.vcf.idx
     ```
 
-Bu tamamlandığında, tüm dosyalar artık normal dosya sisteminizde erişilebilir.
+Bu işlem tamamlandığında tüm dosyalar normal dosya sisteminizde erişilebilir hale gelir.
 
-#### 1.2.5. GATK konteynerından çıkın
+#### 1.2.5. GATK Konteynerinden Çıkma
 
-Konteynerdan çıkmak için `exit` yazın.
+Konteynerden çıkmak için `exit` yazın.
 
 ```bash
 exit
 ```
 
-İsteminiz normale dönmüş olmalıdır.
+İstemciniz normale dönmüş olmalıdır.
 Bu, örnek başına varyant çağırma testini tamamlar.
 
-!!! example "Bunu bir iş akışı olarak yazın!"
+!!! example "Bir iş akışı olarak yazın!"
 
-    Bu analizi bir Nextflow iş akışı olarak uygulamaya başlamak isterseniz hemen [Bölüm 2](./02_per_sample_variant_calling.md)'ye geçebilirsiniz.
-    Bölüm 3'e geçmeden önce ikinci test turunu tamamlamak için geri dönmeniz yeterli.
+    Bu analizi bir Nextflow iş akışı olarak uygulamaya başlamak istiyorsanız doğrudan [Bölüm 2](./02_per_sample_variant_calling.md)'ye geçebilirsiniz.
+    Bölüm 3'e geçmeden önce ikinci test turunu tamamlamak için geri dönmeniz yeterli olacaktır.
 
 ---
 
-## 2. Bir kohort üzerinde ortak çağırma
+## 2. Bir Kohort Üzerinde Ortak Çağırma
 
-Az önce kullandığımız varyant çağırma yaklaşımı örnek başına varyant çağrıları üretir.
-Bu, her örnekten gelen varyantlara izole olarak bakmak için iyidir; ancak sınırlı bilgi verir.
-Varyant çağrılarının birden fazla örnek arasında nasıl farklılık gösterdiğine bakmak genellikle daha ilginçtir.
+Az önce kullandığımız varyant çağırma yaklaşımı, örnek başına varyant çağrıları üretir.
+Her örneğin varyantlarına ayrı ayrı bakmak için bu yeterlidir; ancak sınırlı bilgi sağlar.
+Varyant çağrılarının birden fazla örnek arasında nasıl farklılaştığına bakmak çoğunlukla daha ilgi çekicidir.
 GATK bu amaç için ortak varyant çağırma adı verilen alternatif bir yöntem sunar.
 
-Ortak varyant çağırma, her örnek için GVCF (Genomic VCF için) adı verilen özel bir varyant çıktısı türü oluşturmayı, ardından tüm örneklerden GVCF verilerini birleştirmeyi ve bir 'ortak genotipleme' istatistiksel analizi çalıştırmayı içerir.
+Ortak varyant çağırma; her örnek için GVCF (Genomic VCF) adı verilen özel bir varyant çıktısı oluşturmayı, ardından tüm örneklerin GVCF verilerini birleştirmeyi ve bir 'ortak genotipleme' istatistiksel analizi çalıştırmayı kapsar.
 
 ![Ortak analiz](img/joint-calling.png)
 
-Bir örneğin GVCF'sinin özel yanı, programın varyasyon kanıtı bulduğu konumlar değil, genomun hedeflenen alanındaki tüm konumlar hakkında dizi veri istatistiklerini özetleyen kayıtlar içermesidir.
-Bu, ortak genotipleme hesaplaması için kritiktir ([daha fazla okuma](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
+Bir örneğin GVCF'sini özel kılan şey, yalnızca programın varyasyon kanıtı bulduğu konumları değil, genomun hedeflenen alanındaki tüm konumlara ilişkin dizi verisi istatistiklerini özetleyen kayıtlar içermesidir.
+Bu, ortak genotipleme hesaplaması için kritik öneme sahiptir ([daha fazla okuma](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
 
-GVCF, az önce test ettiğimiz aynı araç olan GATK HaplotypeCaller tarafından ek bir parametre (`-ERC GVCF`) ile üretilir.
-GVCF'leri birleştirmek, örnek başına çağrıları bir veri deposuna (bir veritabanına benzer) birleştiren GATK GenomicsDBImport ile yapılır.
-Gerçek 'ortak genotipleme' analizi daha sonra GATK GenotypeGVCFs ile yapılır.
+GVCF, az önce test ettiğimiz araç olan GATK HaplotypeCaller tarafından ek bir parametre (`-ERC GVCF`) ile üretilir.
+GVCF'lerin birleştirilmesi, örnek başına çağrıları bir veri deposunda (veritabanına benzer şekilde) birleştiren GATK GenomicsDBImport ile yapılır.
+Asıl 'ortak genotipleme' analizi ise GATK GenotypeGVCFs ile gerçekleştirilir.
 
-Burada GVCF'ler oluşturmak ve ortak genotipleme çalıştırmak için gereken komutları test ediyoruz.
-Bunlar, bu kursun 3. Bölümünde bir Nextflow iş akışına sarmalayacağımız komutlardır.
+Burada GVCF'leri oluşturmak ve ortak genotipleme çalıştırmak için gereken komutları test ediyoruz.
+Bu kursta Bölüm 3'te bir Nextflow iş akışına sarmalayacağımız komutlar bunlardır.
 
-1. Samtools kullanarak her BAM girdi dosyası için bir indeks dosyası oluşturun
-2. Örnek başına genomik varyant çağrılarının bir GVCF'sini oluşturmak için her BAM girdi dosyası üzerinde GATK HaplotypeCaller'ı çalıştırın
-3. Tüm GVCF'leri toplayın ve bunları bir GenomicsDB veri deposunda birleştirin
-4. Kohort düzeyinde bir VCF üretmek için birleştirilmiş GVCF veri deposu üzerinde ortak genotipleme çalıştırın
+1. Samtools kullanarak her BAM girdi dosyası için indeks dosyası oluşturma
+2. Örnek başına genomik varyant çağrılarının GVCF'sini oluşturmak için her BAM girdi dosyası üzerinde GATK HaplotypeCaller'ı çalıştırma
+3. Tüm GVCF'leri toplayıp bir GenomicsDB veri deposunda birleştirme
+4. Kohort düzeyinde bir VCF üretmek için birleştirilmiş GVCF veri deposu üzerinde ortak genotipleme çalıştırma
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
-Şimdi üç BAM dosyasının tümünü indekslemekle başlayarak tüm bu komutları test etmemiz gerekiyor.
+Şimdi üç BAM dosyasının tamamını indekslemekten başlayarak bu komutların hepsini test etmemiz gerekiyor.
 
-### 2.1. Üç örneğin tümü için BAM dosyalarını indeksleyin
+### 2.1. Üç Örneğin Tamamı İçin BAM Dosyalarını İndeksleme
 
-Yukarıdaki ilk bölümde, sadece bir BAM dosyasını indeksledik.
-Şimdi GATK HaplotypeCaller'ın bunları işleyebilmesi için üç örneğin tümünü indekslememiz gerekiyor.
+Yukarıdaki ilk bölümde yalnızca bir BAM dosyasını indeksledik.
+Şimdi GATK HaplotypeCaller'ın bunları işleyebilmesi için üç örneğin tamamını indeklememiz gerekiyor.
 
-#### 2.1.1. Samtools konteynerını etkileşimli olarak başlatın
+#### 2.1.1. Samtools Konteynerini Etkileşimli Olarak Başlatma
 
-Samtools konteyner imajını zaten çektik; bu nedenle doğrudan başlatabiliriz:
+Samtools konteyner imajını zaten indirdik; bu nedenle doğrudan başlatabiliriz:
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
-İsteminiz, daha önce olduğu gibi veri dizini bağlı olarak konteyner içinde olduğunuzu gösterecek şekilde değişir.
+İstemciniz, daha önce olduğu gibi veri dizini bağlı şekilde konteynerin içinde olduğunuzu gösterecek şekilde değişir.
 
-#### 2.1.2. Üç örneğin tümü üzerinde indeksleme komutunu çalıştırın
+#### 2.1.2. İndeksleme Komutunu Üç Örneğin Tamamında Çalıştırma
 
-Üç BAM dosyasının her biri üzerinde indeksleme komutunu çalıştırın:
+İndeksleme komutunu üç BAM dosyasının her birinde çalıştırın:
 
 ```bash
 samtools index /data/bam/reads_mother.bam
@@ -473,38 +473,38 @@ samtools index /data/bam/reads_son.bam
     └── reads_son.bam.bai
     ```
 
-Bu, karşılık gelen BAM dosyalarıyla aynı dizinde indeks dosyalarını üretmelidir.
+Bu işlem, indeks dosyalarını ilgili BAM dosyalarıyla aynı dizinde oluşturmalıdır.
 
-#### 2.1.3. Samtools konteynerından çıkın
+#### 2.1.3. Samtools Konteynerinden Çıkma
 
-Konteynerdan çıkmak için `exit` yazın.
+Konteynerden çıkmak için `exit` yazın.
 
 ```bash
 exit
 ```
 
-İsteminiz normale dönmüş olmalıdır.
+İstemciniz normale dönmüş olmalıdır.
 
-### 2.2. Üç örneğin tümü için GVCF'ler oluşturun
+### 2.2. Üç Örneğin Tamamı İçin GVCF Oluşturma
 
-Ortak genotipleme adımını çalıştırmak için üç örneğin tümü için GVCF'lere ihtiyacımız var.
+Ortak genotipleme adımını çalıştırmak için üç örneğin tamamına ait GVCF'lere ihtiyacımız var.
 
-#### 2.2.1. GATK konteynerını etkileşimli olarak başlatın
+#### 2.2.1. GATK Konteynerini Etkileşimli Olarak Başlatma
 
-GATK konteyner imajını daha önce çektik; bu nedenle doğrudan başlatabiliriz:
+GATK konteyner imajını daha önce indirdik; bu nedenle doğrudan başlatabiliriz:
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-İsteminiz GATK konteynerı içinde olduğunuzu gösterecek şekilde değişir.
+İstemciniz, GATK konteynerinin içinde olduğunuzu gösterecek şekilde değişir.
 
-#### 2.2.2. GVCF seçeneğiyle varyant çağırma komutunu çalıştırın
+#### 2.2.2. GVCF Seçeneğiyle Varyant Çağırma Komutunu Çalıştırma
 
-Genomik bir VCF (GVCF) üretmek için, temel komuta `-ERC GVCF` seçeneğini ekliyoruz; bu da HaplotypeCaller'ın GVCF modunu açar.
+Genomik bir VCF (GVCF) üretmek için temel komuta `-ERC GVCF` seçeneğini ekliyoruz; bu seçenek HaplotypeCaller'ın GVCF modunu etkinleştirir.
 
-Ayrıca çıktı dosyası için dosya uzantısını `.vcf`'den `.g.vcf`'ye değiştiriyoruz.
-Bu teknik olarak bir gereklilik değildir; ancak güçlü bir şekilde önerilen bir kuraldır.
+Ayrıca çıktı dosyasının uzantısını `.vcf`'den `.g.vcf`'ye değiştiriyoruz.
+Bu teknik olarak zorunlu değildir; ancak güçlü biçimde önerilen bir kuraldır.
 
 ```bash
 gatk HaplotypeCaller \
@@ -579,7 +579,7 @@ gatk HaplotypeCaller \
     Runtime.totalMemory()=257949696
     ```
 
-Bu, konteynerdeki mevcut çalışma dizininde GVCF çıktı dosyası `reads_mother.g.vcf`'yi ve indeks dosyası `reads_mother.g.vcf.idx`'yi oluşturur.
+Bu işlem, konteynerdeki geçerli çalışma dizininde `reads_mother.g.vcf` GVCF çıktı dosyasını ve indeks dosyası olan `reads_mother.g.vcf.idx`'i oluşturur.
 
 ??? abstract "Dizin içeriği"
 
@@ -587,11 +587,11 @@ Bu, konteynerdeki mevcut çalışma dizininde GVCF çıktı dosyası `reads_moth
     conda.yml  hsperfdata_root  reads_mother.g.vcf  reads_mother.g.vcf.idx
     ```
 
-Dosya içeriğinin ilk 200 satırını görüntülemek için `head -200 reads_mother.g.vcf` komutunu çalıştırırsanız, 1. bölümde oluşturduğumuz eşdeğer VCF'den çok daha uzun olduğunu göreceksiniz; satırların çoğu da VCF'de gördüklerimizden oldukça farklı görünür.
+Dosya içeriğinin ilk 200 satırını görüntülemek için `head -200 reads_mother.g.vcf` komutunu çalıştırırsanız, dosyanın ilk bölümde oluşturduğumuz eşdeğer VCF'den çok daha uzun olduğunu ve satırların büyük bölümünün VCF'de gördüklerimizden oldukça farklı göründüğünü fark edeceksiniz.
 
-??? abstract "Dosya içeriği (kısaltılmış)" hl_lines="92 175 191 195"
+??? abstract "Dosya içeriği (kısaltılmış)"
 
-    ```console title="reads_mother.g.vcf" linenums="1"
+    ```console title="reads_mother.g.vcf" linenums="1" hl_lines="92 175 191 195"
     ##fileformat=VCFv4.2
     ##ALT=<ID=NON_REF,Description="Represents any possible alternative allele not already represented at this location by REF and ALT">
     ##FILTER=<ID=LowQual,Description="Low quality">
@@ -794,17 +794,17 @@ Dosya içeriğinin ilk 200 satırını görüntülemek için `head -200 reads_mo
     20_10037292_10066351	3537	.	A	<NON_REF>	.	.	END=3546	GT:DP:GQ:MIN_DP:PL	0/0:29:72:26:0,72,1080
     ```
 
-Bir kez daha son başlık satırını ve dosyadaki ilk üç 'gerçek' varyant çağrısını vurguladık.
+Son başlık satırını ve dosyadaki ilk üç 'gerçek' varyant çağrısını bir kez daha vurguladık.
 
-Varyant çağrı satırlarının aralarına serpiştirilmiş birçok varyant olmayan satırla karıştığını fark edeceksiniz; bunlar varyant çağırıcının varyasyon kanıtı bulmadığı varyant olmayan bölgeleri temsil eder.
-Yukarıda kısaca belirtildiği gibi, varyant çağırmanın GVCF modunun özel yanı budur: varyant çağırıcı, varyasyonun yokluğuna olan güven düzeyini tanımlayan bazı istatistikleri yakalar.
-Bu, iki çok farklı durumu ayırt etmeyi mümkün kılar: (1) örneğin homozigot-referans olduğunu gösteren iyi kaliteli veriler vardır ve (2) her iki şekilde de bir belirleme yapmak için yeterli iyi veri yoktur.
+Varyant çağrı satırlarının, varyant çağırıcının varyasyon kanıtı bulmadığı varyant olmayan bölgeleri temsil eden pek çok varyant dışı satırla iç içe geçtiğini fark edeceksiniz.
+Yukarıda kısaca belirtildiği gibi, GVCF modunun varyant çağırmayı özel kılan özelliği budur: varyant çağırıcı, varyasyon yokluğuna ilişkin güven düzeyini tanımlayan bazı istatistikleri kaydeder.
+Bu sayede iki çok farklı durum arasında ayrım yapmak mümkün olur: (1) örneğin homozigot-referans olduğunu gösteren kaliteli veriler mevcuttur ve (2) herhangi bir yönde karar vermek için yeterli kaliteli veri bulunmamaktadır.
 
-Bunun gibi bir GVCF'de, tipik olarak aralarına serpiştirilmiş daha az sayıda varyant kaydıyla birlikte bu tür varyant olmayan satırlar çoktur.
+Bunun gibi bir GVCF'de genellikle çok sayıda varyant dışı satır bulunur; bunların arasına daha az sayıda varyant kaydı serpiştirilmiştir.
 
-#### 2.2.3. Diğer iki örnek üzerinde işlemi tekrarlayın
+#### 2.2.3. İşlemi Diğer İki Örnek İçin Tekrarlama
 
-Şimdi aşağıdaki komutları birbiri ardına çalıştırarak kalan iki örnek için GVCF'ler oluşturalım.
+Şimdi aşağıdaki komutları birbiri ardına çalıştırarak kalan iki örnek için GVCF'leri oluşturalım.
 
 ```bash
 gatk HaplotypeCaller \
@@ -952,7 +952,7 @@ gatk HaplotypeCaller \
     Runtime.totalMemory()=226492416
     ```
 
-Bu tamamlandığında, mevcut dizininizde `.g.vcf` ile biten üç dosyanız (örnek başına bir tane) ve `.g.vcf.idx` ile biten ilgili indeks dosyalarınız olmalıdır.
+Bu işlem tamamlandığında, geçerli dizininizde `.g.vcf` ile biten üç dosya (her örnek için bir tane) ve `.g.vcf.idx` ile biten ilgili indeks dosyaları bulunmalıdır.
 
 ??? abstract "Dizin içeriği"
 
@@ -961,21 +961,21 @@ Bu tamamlandığında, mevcut dizininizde `.g.vcf` ile biten üç dosyanız (ör
     hsperfdata_root  reads_father.g.vcf.idx  reads_mother.g.vcf.idx  reads_son.g.vcf.idx
     ```
 
-Bu noktada, girdi örneklerimizin her biri için GVCF modunda varyant çağırdık.
-Ortak çağırmaya geçme zamanı.
+Bu noktada, girdi örneklerimizin her biri için GVCF modunda varyant çağrısı yaptık.
+Artık ortak çağırmaya geçme zamanı.
 
-Ama konteynerdan çıkmayın!
-Bir sonraki adımda aynı konteynerı kullanacağız.
+Ancak konteynerden çıkmayın!
+Bir sonraki adımda aynı konteyneri kullanacağız.
 
-### 2.3. Ortak genotipleme çalıştırın
+### 2.3. Ortak Genotiplemeyi Çalıştırma
 
-Artık tüm GVCF'lere sahip olduğumuza göre, bir örnek kohortu için varyant çağrıları oluşturmak için ortak genotipleme yaklaşımını deneyebiliriz.
-Tüm GVCF'lerden verileri bir veri deposunda birleştirmeyi ve ardından ortak çağrılan varyantların nihai VCF'sini oluşturmak için ortak genotipleme analizini çalıştırmayı içeren iki adımlı bir yöntemdir.
+Artık tüm GVCF'lere sahip olduğumuza göre, bir örnek kohortu için varyant çağrıları üretmek amacıyla ortak genotipleme yaklaşımını deneyebiliriz.
+Bu iki adımlı bir yöntemdir: tüm GVCF'lerin verilerini bir veri deposunda birleştirmek, ardından ortak çağrılan varyantların nihai VCF'ini oluşturmak için ortak genotipleme analizini çalıştırmak.
 
-#### 2.3.1. Tüm örnek başına GVCF'leri birleştirin
+#### 2.3.1. Örnek Başına Tüm GVCF'leri Birleştirme
 
-Bu ilk adım, tüm GVCF'lerden verileri bir GenomicsDB veri deposunda birleştirmek için GenomicsDBImport adlı başka bir GATK aracını kullanır.
-GenomicsDB veri deposu, varyant bilgisi için ara depolama görevi gören bir tür veritabanı formatıdır.
+Bu ilk adım, tüm GVCF'lerin verilerini bir GenomicsDB veri deposunda birleştirmek için GenomicsDBImport adlı başka bir GATK aracını kullanır.
+GenomicsDB veri deposu, varyant bilgileri için ara depolama görevi gören bir tür veritabanı formatıdır.
 
 ```bash
 gatk GenomicsDBImport \
@@ -1033,16 +1033,16 @@ gatk GenomicsDBImport \
     true
     ```
 
-Bu adımın çıktısı, birleştirilmiş varyant verilerini birden fazla farklı dosya biçiminde tutan daha fazla iç içe dizin içeren bir dizindir.
-Etrafında dolaşabilirsiniz; ancak bu veri deposu formatının doğrudan insanlar tarafından okunması amaçlanmadığını hızlıca göreceksiniz.
+Bu adımın çıktısı, birleştirilmiş varyant verilerini çeşitli farklı dosyalar biçiminde tutan iç içe geçmiş dizinler içeren bir dizinden oluşur.
+İçeriği inceleyebilirsiniz; ancak bu veri deposu formatının doğrudan insanlar tarafından okunması için tasarlanmadığını hemen göreceksiniz.
 
 !!! tip "İpucu"
 
-    GATK, gerektiğinde veri deposundan varyant çağrı verilerini incelemeyi ve çıkarmayı mümkün kılan araçlar içerir.
+    GATK, gerektiğinde veri deposundan varyant çağrısı verilerini incelemeyi ve çıkarmayı mümkün kılan araçlar içerir.
 
-#### 2.3.2. Ortak genotipleme analizini çalıştırın
+#### 2.3.2. Ortak Genotipleme Analizini Çalıştırma
 
-Bu ikinci adım, kohorttaki tüm örneklerde mevcut verilerin ışığında varyant istatistiklerini ve bireysel genotipleri yeniden hesaplamak için GenotypeGVCFs adlı başka bir GATK aracını kullanır.
+Bu ikinci adım, kohortdaki tüm örneklerde mevcut verileri göz önünde bulundurarak varyant istatistiklerini ve bireysel genotipleri yeniden hesaplamak için GenotypeGVCFs adlı başka bir GATK aracını kullanır.
 
 ```bash
 gatk GenotypeGVCFs \
@@ -1094,12 +1094,12 @@ gatk GenotypeGVCFs \
     Runtime.totalMemory()=203423744
     ```
 
-Bu, konteynerdeki mevcut çalışma dizininde VCF çıktı dosyası `family_trio.vcf`'yi ve indeksini `family_trio.vcf.idx`'yi oluşturur.
-Bu da makul derecede küçük bir dosyadır; bu nedenle dosya içeriğini görüntülemek için `cat family_trio.vcf` komutunu çalıştırabilir ve ilk birkaç varyant satırını bulmak için aşağı kaydırabilirsiniz.
+Bu işlem, konteynerdeki geçerli çalışma dizininde `family_trio.vcf` VCF çıktı dosyasını ve indeksi olan `family_trio.vcf.idx`'i oluşturur.
+Bu da makul ölçüde küçük bir dosyadır; dolayısıyla dosya içeriğini görüntülemek için `cat family_trio.vcf` komutunu çalıştırabilir ve ilk birkaç varyant satırını bulmak için aşağı kaydırabilirsiniz.
 
-??? abstract "Dosya içeriği (kısaltılmış)" hl_lines="39"
+??? abstract "Dosya içeriği (kısaltılmış)"
 
-    ```console title="family_trio.vcf" linenums="1"
+    ```console title="family_trio.vcf" linenums="1" hl_lines="39"
     ##fileformat=VCFv4.2
     ##ALT=<ID=NON_REF,Description="Represents any possible alternative allele not already represented at this location by REF and ALT">
     ##FILTER=<ID=LowQual,Description="Low quality">
@@ -1160,20 +1160,20 @@ Bu da makul derecede küçük bir dosyadır; bu nedenle dosya içeriğini görü
     20_10037292_10066351    14403   .       G       A       144.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=2.63;DP=116;ExcessHet=0.0000;FS=1.435;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=3.52;ReadPosRankSum=0.252;SOR=0.802  GT:AD:DP:GQ:PL  0/1:32,9:41:99:153,0,821        0/0:37,0:37:99:0,109,1169       0/0:37,0:37:99:0,99,1113
     ```
 
-Bir kez daha varyant çağrı verilerinin başlangıcını işaret eden son başlık satırını vurguladık.
+Varyant çağrısı verilerinin başlangıcını işaretleyen son başlık satırını bir kez daha vurguladık.
 
-Bu, daha önce oluşturduğumuz VCF'ye benzer görünüyor; ancak bu sefer üç örneğin tümü için genotip düzeyinde bilgiye sahibiz.
-Dosyadaki son üç sütun, vurgulanan başlık satırında gösterildiği gibi ID alanlarının alfabetik sırasına göre listelenen örnekler için genotip bloklarıdır.
+Bu, daha önce oluşturduğumuz VCF'e benzer görünür; ancak bu sefer üç örneğin tamamı için genotip düzeyinde bilgiye sahibiz.
+Dosyadaki son üç sütun, vurgulanan başlık satırında gösterildiği gibi ID alanlarının alfabetik sırasına göre listelenen örneklerin genotip bloklarıdır.
 
-Test aile üçlümüz için ilk varyant için çağrılan genotiplere bakarsak, babanın heterozigot-varyant (`0/1`) ve anne ile oğulun her ikisinin de homozigot-varyant (`1/1`) olduğunu görüyoruz.
+Test aile üçlümüz için çağrılan genotiplere ilk varyant açısından bakarsak, babanın heterozigot-varyant (`0/1`), anne ve oğulun ise her ikisinin de homozigot-varyant (`1/1`) olduğunu görürüz.
 
-Bu, sonuçta veri setinden çıkarmak istediğimiz bilgidir!
+Veri setinden çıkarmak istediğimiz bilgi türü nihayetinde budur!
 
-#### 2.3.3. Çıktı dosyalarını taşıyın
+#### 2.3.3. Çıktı Dosyalarını Taşıma
 
-Daha önce belirtildiği gibi, konteyner içinde kalan her şey gelecekteki çalışmalara erişilemez olacaktır.
-Konteynerdan çıkmadan önce, GVCF dosyalarını, nihai çok örnekli VCF'yi ve tüm indeks dosyalarını manuel olarak konteyner dışındaki dosya sistemine taşıyacağız.
-Bu şekilde, tüm bu işi otomatikleştirmek için iş akışımızı oluşturduğumuzda karşılaştırmak için bir şeyimiz olacak.
+Daha önce belirtildiği gibi, konteynerin içinde kalan her şey gelecekteki çalışmalar için erişilemez olacaktır.
+Konteynerden çıkmadan önce, GVCF dosyalarını, nihai çok örnekli VCF'i ve tüm indeks dosyalarını konteynerin dışındaki dosya sistemine manuel olarak taşıyacağız.
+Bu sayede tüm bu çalışmayı otomatikleştirmek için iş akışımızı oluştururken karşılaştıracak bir şeyimiz olacak.
 
 ```bash
 mv *.vcf* /data/vcf
@@ -1209,25 +1209,25 @@ mv *.vcf* /data/vcf
         └── reads_son.g.vcf.idx
     ```
 
-Bu tamamlandığında, tüm dosyalar artık normal dosya sisteminizde erişilebilir.
+Bu işlem tamamlandığında tüm dosyalar normal dosya sisteminizde erişilebilir hale gelir.
 
-#### 2.3.4. GATK konteynerından çıkın
+#### 2.3.4. GATK Konteynerinden Çıkma
 
-Konteynerdan çıkmak için `exit` yazın.
+Konteynerden çıkmak için `exit` yazın.
 
 ```bash
 exit
 ```
 
-İsteminiz normale dönmüş olmalıdır.
+İstemciniz normale dönmüş olmalıdır.
 Bu, ortak varyant çağırma komutlarının manuel testini tamamlar.
 
 ---
 
-### Özet
+### Özetle
 
-Samtools indeksleme ve GATK varyant çağırma komutlarını ilgili konteynerlarında nasıl test edeceğinizi biliyorsunuz; GVCF'ler oluşturmayı ve birden fazla örnek üzerinde ortak genotipleme çalıştırmayı da içerir.
+Samtools indeksleme ve GATK varyant çağırma komutlarını ilgili konteynerlerinde nasıl test edeceğinizi öğrendiniz; GVCF'lerin nasıl oluşturulacağını ve birden fazla örnek üzerinde ortak genotiplemenin nasıl çalıştırılacağını da bu kapsamda gördünüz.
 
 ### Sırada ne var?
 
-Bir mola verin, ardından aynı komutları konteynerlar kullanan iş akışlarına nasıl sarmalayacağınızı öğrenmek için [Bölüm 2](./02_per_sample_variant_calling.md)'ye geçin.
+Kısa bir mola verin, ardından aynı komutları konteynerleri kullanarak çalışmayı yürüten iş akışlarına nasıl saracağınızı öğrenmek için [Bölüm 2](./02_per_sample_variant_calling.md)'ye geçin.

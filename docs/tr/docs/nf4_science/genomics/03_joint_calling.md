@@ -240,7 +240,7 @@ Nextflow çıktısı öncekiyle aynı görünüyor, ancak `.g.vcf` dosyaları ve
 
 GVCF dosyalarından birini açıp içinde gezinirseniz, GATK HaplotypeCaller'ın istendiği gibi GVCF dosyaları ürettiğini doğrulayabilirsiniz.
 
-### Özet
+### Özetle
 
 Bir araç komutunun çıktı dosya adını değiştirdiğinizde, süreç `output:` bloğu ve yayınlama/çıktı yapılandırması eşleşecek şekilde güncellenmelidir.
 
@@ -275,7 +275,7 @@ gatk GenotypeGVCFs \
 ```
 
 İlk komut örnek başına GVCF'leri ve bir aralıklar dosyasını alır ve bir GenomicsDB veri deposu üretir.
-İkincisi bu veri deposunu, bir referans genomu alır ve nihai kohort düzeyinde VCF'yi üretir.
+İkincisi bu veri deposunu ve bir referans genomu alarak nihai kohort düzeyinde VCF'yi üretir.
 Konteyner URI'si HaplotypeCaller ile aynıdır: `community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867`.
 
 ### 2.1. Girdileri ayarlayın
@@ -701,7 +701,7 @@ Artık otomatik, tamamen tekrarlanabilir bir ortak varyant çağrı iş akışı
     Bir varyant çağrı setinin gerçek boyutu milyonlarca varyant olarak sayılır.
     Bu yüzden eğitim amaçları için yalnızca küçük veri alt kümeleri kullanıyoruz!
 
-### Özet
+### Özetle
 
 Bir kanaldan çıktıları toplamayı ve bunları başka bir sürece tek bir girdi olarak paketlemeyi biliyorsunuz.
 Ayrıca Groovy closure'ları kullanarak bir komut satırı oluşturmayı ve tek bir süreçte birden fazla komut çalıştırmayı biliyorsunuz.

@@ -30,7 +30,7 @@ Bu, kodumuzu daha paylaşılabilir, esnek ve bakımı kolay hale getirecek.
 
 ??? info "Bu bölümden nasıl başlanır"
 
-    Bu kursun bu bölümü, [Hello Nextflow](./index.md) kursunun 1-3. Bölümlerini tamamladığınızı varsayar, ancak o bölümlerde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
+    Bu kursun bu bölümü, [Hello Nextflow](./index.md) kursunun 1-3. Bölümlerini tamamladığınızı varsayar; ancak o bölümlerde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.
 
 ---
 
@@ -156,8 +156,8 @@ Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.
 
 Bir modülden süreç dahil etmenin sözdizimi oldukça basittir:
 
-```groovy title="Sözdizimi: include tanımı"
-include { <SÜREÇ_ADI> } from '<modül_yolu>'
+```groovy title="Syntax: include declaration"
+include { <PROCESS_NAME> } from '<path_to_module>'
 ```
 
 Bunu `params` bloğunun üstüne ekleyelim ve uygun şekilde dolduralım.
@@ -193,7 +193,7 @@ Süreç adını, `sayHello`, ve modül kodunu içeren dosyanın yolunu, `./modul
 
 ### 2.4. İş akışını çalıştırın
 
-İş akışını temelde daha önce olduğu gibi aynı kod ve girdilerle çalıştırıyoruz, bu yüzden `-resume` bayrağıyla çalıştıralım ve ne olduğunu görelim.
+İş akışını temelde daha önce olduğu gibi aynı kod ve girdilerle çalıştırıyoruz; bu yüzden `-resume` bayrağıyla çalıştıralım ve ne olduğunu görelim.
 
 ```bash
 nextflow run hello-modules.nf -resume
@@ -216,7 +216,7 @@ Yayınlanan çıktıları kontrol etmekten çekinmeyin.
 
 Nextflow, kod birden fazla dosyaya bölünmüş olsa bile yapılması gereken işin hâlâ aynı olduğunu fark etti.
 
-### Özet
+### Özetle
 
 Bir süreci yerel bir modüle nasıl çıkaracağınızı biliyorsunuz ve bunun iş akışının devam ettirilebilirliğini bozmadığını biliyorsunuz.
 
@@ -358,7 +358,7 @@ process collectGreetings {
     count_greetings = input_files.size()
     """
     cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-    echo 'Bu grupta ${count_greetings} selamlama vardı.' > '${batch_name}-report.txt'
+    echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
     """
 }
 ```
@@ -426,14 +426,14 @@ nextflow run hello-modules.nf -resume
 
 Bu hâlâ daha önce olduğu gibi aynı çıktıyı üretmelidir.
 
-### Özet
+### Özetle
 
 Bir iş akışında birden fazla süreci nasıl modülerleştireceğinizi biliyorsunuz.
 
 Tebrikler, tüm bu işi yaptınız ve pipeline'ın çalışma şeklinde kesinlikle hiçbir şey değişmedi!
 
 Şakayı bir kenara bırakırsak, artık kodunuz daha modüler ve bu süreçlerden birini çağıran başka bir pipeline yazmaya karar verirseniz, ilgili modülü kullanmak için yalnızca bir kısa `include` ifadesi yazmanız gerekiyor.
-Bu, kodu kopyala-yapıştır yapmaktan daha iyi çünkü daha sonra modülü geliştirmeye karar verirseniz, tüm pipeline'larınız bu iyileştirmeleri miras alacak.
+Bu, kodu kopyala-yapıştır yapmaktan daha iyi; çünkü daha sonra modülü geliştirmeye karar verirseniz, tüm pipeline'larınız bu iyileştirmeleri miras alacak.
 
 ### Sırada ne var?
 
@@ -452,7 +452,7 @@ Nextflow'da modül nedir?
 - [ ] Bir iş akışı tanımı
 - [ ] Bir kanal operatörü
 
-Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-sayhello-icin-bir-modul-olusturun)
+Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-create-a-module-for-sayhello)
 </quiz>
 
 <quiz>
@@ -462,7 +462,7 @@ Modül dosyaları için genellikle kullanılan konvansiyon nedir?
 - [x] Bir `modules/` dizininde
 - [ ] Bir `lib/` dizininde
 
-Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-modulleri-depolamak-icin-bir-dizin-olusturun)
+Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-create-a-directory-to-store-modules)
 </quiz>
 
 <quiz>
@@ -473,7 +473,7 @@ Bir modül kullanmak için doğru sözdizimi nedir?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-is-akisi-blogundan-once-bir-include-tanimi-ekleyin)
+Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 
 <quiz>

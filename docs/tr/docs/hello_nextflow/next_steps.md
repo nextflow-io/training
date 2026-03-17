@@ -17,14 +17,14 @@ Hello Nextflow eğitim kursunu tamamladığınız için tebrikler! 🎉
 ## Yolculuğunuz
 
 Sabit kodlanmış bir komut çalıştıran çok basit bir iş akışı ile başladınız.
-Altı bölüm boyunca, bu basit iş akışını kanallar, operatörler, konteynerler için yerleşik destek ve yapılandırma seçenekleri dahil olmak üzere Nextflow'un temel özelliklerini kullanan modüler çok adımlı bir boru hattına dönüştürdünüz.
+Altı bölüm boyunca, bu basit iş akışını kanallar, operatörler, konteynerler için yerleşik destek ve yapılandırma seçenekleri dahil olmak üzere Nextflow'un temel özelliklerini kullanan modüler çok adımlı bir pipeline'a dönüştürdünüz.
 
 ### Ne inşa ettiniz
 
 - Hello iş akışının son hali, metin selamlamaları içeren bir CSV dosyasını girdi olarak alır.
 - Dört adım, ayrı modül dosyalarında saklanan Nextflow süreçleri (`sayHello`, `convertToUpper`, `collectGreetings` ve `cowpy`) olarak uygulanmıştır.
-- Sonuçlar `results/` adlı bir dizine yayınlanır.
-- Boru hattının son çıktısı, büyük harfli selamlamaları söyleyen bir karakterin ASCII sanatını içeren düz metin dosyasıdır.
+- Sonuçlar `results/` adlı bir dizine yayımlanır.
+- Pipeline'ın son çıktısı, büyük harfli selamlamaları söyleyen bir karakterin ASCII sanatını içeren düz metin dosyasıdır.
 
 <figure class="excalidraw">
 --8<-- "docs/en/docs/hello_nextflow/img/hello_pipeline_complete.svg"
@@ -47,7 +47,7 @@ Bu uygulamalı kurs boyunca şunları öğrendiniz:
 - Nextflow tarafından oluşturulan çıktıları (sonuçlar) ve günlük dosyalarını bulma ve yorumlama
 - Temel sorunları giderme
 
-Artık Nextflow'da kendi boru hatlarınızı geliştirmeye başlamak için temel bilgilerle donatıldınız.
+Artık Nextflow'da kendi pipeline'larınızı geliştirmeye başlamak için temel bilgilerle donatıldınız.
 
 ## Becerilerinizi geliştirmek için sonraki adımlar
 

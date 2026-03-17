@@ -58,9 +58,9 @@ nextflow run ./molkart -params-file params.yaml --segmentation_method "stardist"
 
 Yukarıdaki satır, `segmentation_method`'u `stardist` olarak değiştirir ve `--outdir` adını `params.yaml` dosyasındaki parametreler yerine `stardist_results` olarak ayarlar.
 Ayrıca, `-resume` bayrağının önceki çalıştırmadaki ön işleme sonuçlarını yeniden kullanmamıza izin vererek zaman tasarrufu sağladığını görebilirsiniz.
-Bu kalıbı, boru hattının farklı varyasyonlarını hızlıca test etmek için kullanabilirsiniz.
+Bu kalıbı, pipeline'ın farklı varyasyonlarını hızlıca test etmek için kullanabilirsiniz.
 
-### Özet
+### Özetle
 
 Parametre dosyaları analizlerinizi tekrar üretilebilir ve paylaşımı kolay hale getirir.
 Gerçek analiz çalışmaları için bunları kullanın.
@@ -135,11 +135,11 @@ Son olarak, yerel dosya yollarına sahip örnek tablosuyla nf-core/molkart'ı bi
 
 Gördüğünüz gibi, Nextflow bu çalıştırmayı dosyalar Github'dan indirildiğinde olduğu gibi benzer şekilde yürütür. Bu, Nextflow'un harika özelliklerinden biridir; veri nerede bulunursa bulunsun, sizin için uygun şekilde hazırlar.
 
-### Özet
+### Özetle
 
 Örnek tabloları, dosya yollarıyla birlikte meta verilerinizi açıkça tanımlamanıza olanak tanıyan bir şekilde çok örnekli veri setlerini düzenler.
-Çoğu nf-core boru hattı bu kalıbı kullanır.
+Çoğu nf-core pipeline'ı bu kalıbı kullanır.
 
 ### Sırada ne var?
 
-Artık girdileri ele aldığımıza göre, Nextflow boru hatlarını farklı hesaplama ortamları için nasıl yapılandıracağımızı keşfedelim.
+Artık girdileri ele aldığımıza göre, Nextflow pipeline'larını farklı hesaplama ortamları için nasıl yapılandıracağımızı keşfedelim.
