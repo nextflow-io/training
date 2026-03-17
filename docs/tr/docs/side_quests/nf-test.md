@@ -78,7 +78,7 @@ code .
 
 Ana iş akışı dosyasını ve pipeline'a girdi içeren `greetings.csv` adlı bir CSV dosyası bulacaksınız.
 
-```console title="Dizin içeriği"
+```console title="Directory contents"
 .
 ├── greetings.csv
 └── main.nf
@@ -175,7 +175,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.
 nextflow run main.nf
 ```
 
-```console title="İş akışını çalıştırma sonucu"
+```console title="Result of running the workflow"
  N E X T F L O W   ~  version 24.10.2
 
 Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
@@ -243,7 +243,7 @@ Ayrıca bir yapılandırma dosyası taslağı içeren bir `tests` dizini oluştu
 nf-test generate pipeline main.nf
 ```
 
-```console title="Çıktı"
+```console title="Output"
 > nf-test generate pipeline main.nf
 
 Load source file '/workspaces/training/side-quests/nf-test/main.nf'
@@ -254,7 +254,7 @@ SUCCESS: Generated 1 test files.
 
 Bu, `tests` dizini içinde bir `main.nf.test` dosyası oluşturacaktır. Bu bizim pipeline seviyesi test dosyamızdır. `tree tests/` komutunu çalıştırırsanız şöyle bir şey görmelisiniz:
 
-```console title="Test dizini içeriği"
+```console title="Test directory contents"
 tests/
 ├── main.nf.test
 └── nextflow.config
@@ -328,7 +328,7 @@ Ne olduğunu görmek için testi çalıştıralım.
 nf-test test tests/main.nf.test
 ```
 
-```console title="nf-test pipeline başarısız"
+```console title="nf-test pipeline fail"
 > nf-test test tests/main.nf.test
 
 🚀 nf-test 0.9.3
@@ -379,7 +379,7 @@ then {
 
 nf-test'in pipeline'ın başarısız olduğunu nasıl bildirdiğine ve Nextflow'dan hata mesajını sağladığına dikkat edin:
 
-```console title="Hata"
+```console title="Error"
 ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/greetings.csv
 ```
 
@@ -412,11 +412,11 @@ Testte pipeline'ın köküne nasıl işaret edeceğimizi merak ediyor olabilirsi
 
 İşe yarayıp yaramadığını görmek için testi tekrar çalıştıralım.
 
-```bash title="nf-test pipeline başarılı"
+```bash title="nf-test pipeline pass"
 nf-test test tests/main.nf.test
 ```
 
-```console title="Pipeline başarılı"
+```console title="Pipeline passes"
 > nf-test test tests/main.nf.test
 
 🚀 nf-test 0.9.3
@@ -440,7 +440,7 @@ Varsayılan olarak, Nextflow çıktısı gizlidir, ancak nf-test'in kesinlikle i
 nf-test test tests/main.nf.test --verbose
 ```
 
-```console title="Pipeline tüm süreçleri çalıştırıyor"
+```console title="Pipeline runs all processes"
 > nf-test test tests/main.nf.test
 
 🚀 nf-test 0.9.3
@@ -513,11 +513,11 @@ Test adı artık gerçekte neyi doğruladığımızı daha iyi yansıtıyor; sad
 
 İşe yarayıp yaramadığını görmek için testi tekrar çalıştıralım.
 
-```bash title="nf-test pipeline başarılı"
+```bash title="nf-test pipeline pass"
 nf-test test tests/main.nf.test
 ```
 
-```console title="Pipeline onaylamalarla başarılı"
+```console title="Pipeline passes with assertions"
 🚀 nf-test 0.9.3
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
@@ -596,11 +596,11 @@ Testımıza çıktı dosyasının oluşturulduğunu kontrol etmek için bir onay
 
 İşe yarayıp yaramadığını görmek için testi tekrar çalıştırın.
 
-```bash title="nf-test pipeline başarılı"
+```bash title="nf-test pipeline pass"
 nf-test test tests/main.nf.test
 ```
 
-```console title="Pipeline dosya onaylamalarıyla başarılı"
+```console title="Pipeline passes with file assertions"
 > nf-test test tests/main.nf.test
 
 🚀 nf-test 0.9.3
@@ -621,7 +621,7 @@ Başarılı! Testler geçer çünkü pipeline başarıyla tamamlandı, doğru sa
 
 Bu sadece yüzey; pipeline'ın ayrıntılarını kontrol etmek için onaylamalar yazmaya devam edebiliriz, ancak şimdilik pipeline'ın içini test etmeye geçelim.
 
-### Özet
+### Özetle
 
 Bir pipeline için nf-test yazmayı biliyorsunuz.
 
@@ -645,7 +645,7 @@ Süreç için testler oluşturmak üzere `nf-test generate` komutunu tekrar kull
 nf-test generate process main.nf
 ```
 
-```console title="Çıktı"
+```console title="Output"
 > nf-test generate process main.nf
 
 Load source file '/workspaces/training/side-quests/nf-test/main.nf'
@@ -695,11 +695,11 @@ Daha önce olduğu gibi, test ayrıntılarıyla başlıyoruz, ardından `when` v
 
 İşe yarayıp yaramadığını görmek için testi çalıştıralım.
 
-```bash title="nf-test pipeline başarılı"
+```bash title="nf-test pipeline pass"
 nf-test test tests/main.sayhello.nf.test
 ```
 
-```console title="Süreç testi başarısız"
+```console title="Process test fails"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -781,7 +781,7 @@ Test başarısız oluyor çünkü `sayHello` süreci 1 girdi bildiriyor ancak 0 
 
 İşe yarayıp yaramadığını görmek için testi tekrar çalıştıralım.
 
-```console title="nf-test pipeline başarılı"
+```console title="nf-test pipeline pass"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -814,13 +814,13 @@ assert snapshot(process.out).match()
 
 Bu, nf-test'e `sayHello` sürecinin çıktısının bir snapshot'ını oluşturmasını söylüyor. Snapshot dosyasının içeriğine bir göz atalım.
 
-```console title="Snapshot dosyası içeriği"
+```console title="Snapshot file contents"
 code tests/main.sayhello.nf.test.snap
 ```
 
 Burada yazdırmayacağız, ancak süreç ve süreç çıktılarının ayrıntılarını içeren bir JSON dosyası görmelisiniz. Özellikle, şuna benzeyen bir satır görebiliriz:
 
-```json title="Snapshot dosyası içeriği"
+```json title="Snapshot file contents"
 "0": [
     "hello-output.txt:md5,b1946ac92492d2347c6235b4d2611184"
 ]
@@ -839,7 +839,7 @@ Gelecekteki geliştirme sırasında, kodda çıktının farklı olmasına neden 
 
 Testi tekrar çalıştırabiliriz ve testin geçmesi gerektiğini görebiliriz:
 
-```console title="snapshot ile nf-test süreci başarılı"
+```console title="nf-test process pass with snapshot"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -928,11 +928,11 @@ Bu yaklaşım:
 
 İşe yarayıp yaramadığını görmek için testi çalıştıralım.
 
-```bash title="nf-test pipeline başarılı"
+```bash title="nf-test pipeline pass"
 nf-test test tests/main.sayhello.nf.test
 ```
 
-```console title="Süreç testi başarılı"
+```console title="Process test fails"
 > nf-test test tests/main.sayhello.nf.test
 
 🚀 nf-test 0.9.3
@@ -1047,11 +1047,11 @@ Bu, `sayHello` sürecine benzer bir testtir, ancak `convertToUpper` sürecini te
 
 Ve testi çalıştırın!
 
-```bash title="nf-test pipeline başarılı"
+```bash title="nf-test pipeline pass"
 nf-test test tests/main.converttoupper.nf.test
 ```
 
-```console title="nf-test süreci convertToUpper başarılı"
+```console title="nf-test process convertToUpper pass"
 > nf-test test tests/main.converttoupper.nf.test
 
 🚀 nf-test 0.9.3
@@ -1074,11 +1074,11 @@ SUCCESS: Executed 1 tests in 1.764s
 
 Not: `tests/main.converttoupper.nf.test.snap` adresinde `convertToUpper` süreci için bir snapshot dosyası oluşturduk. Testi tekrar çalıştırırsak, nf-test'in tekrar geçtiğini görmeliyiz.
 
-```bash title="nf-test süreci convertToUpper başarılı"
+```bash title="nf-test process convertToUpper pass"
 nf-test test tests/main.converttoupper.nf.test
 ```
 
-```console title="nf-test süreci convertToUpper başarılı"
+```console title="nf-test process convertToUpper pass"
 > nf-test test tests/main.converttoupper.nf.test
 
 🚀 nf-test 0.9.3
@@ -1094,7 +1094,7 @@ Test Process convertToUpper
 SUCCESS: Executed 1 tests in 1.811s
 ```
 
-### Özet
+### Özetle
 
 Bir Nextflow süreci için test yazmayı ve çalıştırmayı biliyorsunuz.
 
@@ -1120,7 +1120,7 @@ nf-test test .
 
 Not: Her testi içerecek şekilde mevcut dizinimizden her şeyi çalıştırmak için sadece `.` kullanıyoruz!
 
-```console title="nf-test repo başarılı"
+```console title="nf-test repo pass"
 > nf-test test .
 
 🚀 nf-test 0.9.3

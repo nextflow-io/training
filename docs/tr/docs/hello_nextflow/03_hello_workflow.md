@@ -109,11 +109,11 @@ Bu amaçla, üç şey yapmamız gerekiyor:
 
 Selamlamaları büyük harfe dönüştürmek için, 'metin değiştirme' anlamına gelen `tr` adlı klasik bir UNIX aracını aşağıdaki sözdizimi ile kullanacağız:
 
-```bash title="Sözdizimi"
+```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
 ```
 
-Bu, aksanlı harfleri dikkate almayan çok basit bir metin değiştirme tek satırıdır, bu nedenle örneğin 'Holà' 'HOLà' olacaktır, ancak Nextflow kavramlarını göstermek için yeterince iyi bir iş çıkaracaktır ve önemli olan da budur.
+Bu, aksanlı harfleri dikkate almayan çok basit bir metin değiştirme tek satırıdır; örneğin 'Holà' 'HOLà' olacaktır. Ancak Nextflow kavramlarını göstermek için yeterince iyi bir iş çıkaracaktır ve önemli olan da budur.
 
 Test etmek için, `echo 'Hello World'` komutunu çalıştırabilir ve çıktısını `tr` komutuna yönlendirebiliriz:
 
@@ -358,7 +358,7 @@ Nextflow, bireysel girdi ve çıktı dosyalarını işleme ve bunları iki komut
 
 Bu, Nextflow kanallarının bu kadar güçlü olmasının nedenlerinden biridir: iş akışı adımlarını birbirine bağlamayla ilgili zahmetli işlerle ilgilenirler.
 
-### Özet
+### Özetle
 
 Bir adımın çıktısını bir sonraki adıma girdi olarak sağlayarak süreçleri nasıl zincirleme şeklinde bağlayacağınızı biliyorsunuz.
 
@@ -620,8 +620,8 @@ Kanal içeriklerinin önceki ve sonraki durumlarını görselleştirmek için bi
         collectGreetings(convertToUpper.out.collect())
 
         // isteğe bağlı view ifadeleri
-        convertToUpper.out.view { contents -> "collect öncesi: $contents" }
-        convertToUpper.out.collect().view { contents -> "collect sonrası: $contents" }
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     }
     ```
 
@@ -653,10 +653,10 @@ nextflow run hello-workflow.nf -resume
     [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
     [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
     [1e/83586c] collectGreetings   | 1 of 1 ✔
-    collect öncesi: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-    collect öncesi: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-    collect öncesi: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-    collect sonrası: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+    Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+    Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+    After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
     ```
 
 Başarıyla çalışıyor, ancak log çıktısı bundan biraz daha dağınık görünebilir (okunabilirlik için temizledik).
@@ -708,13 +708,13 @@ Bir sonraki bölüme geçmeden önce, konsol çıktısını karmaşıklaştırma
         collectGreetings(convertToUpper.out.collect())
 
         // isteğe bağlı view ifadeleri
-        convertToUpper.out.view { contents -> "collect öncesi: $contents" }
-        convertToUpper.out.collect().view { contents -> "collect sonrası: $contents" }
+        convertToUpper.out.view { contents -> "Before collect: $contents" }
+        convertToUpper.out.collect().view { contents -> "After collect: $contents" }
     ```
 
 Bu temelde 2.4.2 noktasının ters işlemidir.
 
-### Özet
+### Özetle
 
 Toplu süreç çağrılarından çıktıları nasıl toplayıp ortak bir analiz veya özetleme adımına besleyeceğinizi biliyorsunuz.
 
@@ -901,7 +901,7 @@ Başarıyla çalışıyor ve istenen çıktıyı üretiyor:
 
 Artık parametreyi uygun şekilde belirttiğimiz sürece, diğer girdi grupları üzerindeki sonraki çalıştırmalar önceki sonuçları bozmayacak.
 
-### Özet
+### Özetle
 
 Bir sürece birden fazla girdi nasıl ileteceğinizi biliyorsunuz.
 
@@ -948,7 +948,7 @@ Bu, `input_files` dizisindeki dosya sayısını almak için Nextflow'un yerleşi
         count_greetings = input_files.size()
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-        echo 'Bu grupta ${count_greetings} selamlama vardı.' > '${batch_name}-report.txt'
+        echo 'There were ${count_greetings} greetings in this batch.' > '${batch_name}-report.txt'
         """
     ```
 
@@ -1066,7 +1066,7 @@ Ama şimdilik, iş akışı düzeyindeki çıktıları güncellemeyi bitirelim.
 
 === "Önce"
 
-    ```groovy title="hello-workflow.nf" linenums="86"
+    ```groovy title="hello-workflow.nf" linenums="80"
     output {
         first_output {
             path 'hello_workflow'
@@ -1113,7 +1113,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 ??? abstract "Dosya içeriği"
 
     ```txt title="trio-report.txt"
-    Bu grupta 3 selamlama vardı.
+    There were 3 greetings in this batch.
     ```
 
 <figure class="excalidraw">
@@ -1122,7 +1122,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 
 CSV'ye daha fazla selamlama eklemekten ve ne olduğunu test etmekten çekinmeyin.
 
-### Özet
+### Özetle
 
 Bir sürecin birden fazla adlandırılmış çıktı yayınlamasını nasıl sağlayacağınızı ve bunları iş akışı düzeyinde uygun şekilde nasıl işleyeceğinizi biliyorsunuz.
 

@@ -14,7 +14,7 @@ Eğitim Koleksiyonlarımız, gelişmiş eğitim materyallerimiz ([Yan Görevler]
 
 Bu koleksiyonun sonunda şu konularda deneyim kazanmış olacaksınız:
 
-- **Karmaşık modüler iş akışı mimarileri** - Birden fazla iş akışını tutarlı boru hatlarında birleştirme
+- **Karmaşık modüler iş akışı mimarileri** - Birden fazla iş akışını tutarlı pipeline'larda birleştirme
 - **Kapsamlı test stratejileri** - İş akışlarınızın güvenilir ve bakımı kolay olmasını sağlama
 - **Meta veri yönetimi** - İş akışlarınız boyunca örneğe özgü meta verileri etkili bir şekilde işleme
 - **Gelişmiş veri işleme** - Verimli veri bölme ve gruplama desenlerini uygulama
@@ -23,7 +23,7 @@ Bu beceriler, gerçek dünya uygulamaları için sağlam, ölçeklenebilir ve ba
 
 ## Hedef kitle ve ön koşullar
 
-Bu koleksiyon, temel Nextflow eğitimini tamamlamış ve gelişmiş iş akışı desenleri, test stratejileri ve veri ile meta veri işleme tekniklerine daha derinlemesine dalmak isteyen kullanıcılar için tasarlanmıştır.
+Bu koleksiyon, temel Nextflow eğitimini tamamlamış ve gelişmiş iş akışı desenleri, test stratejileri ile veri ve meta veri işleme tekniklerine daha derinlemesine dalmak isteyen kullanıcılar için tasarlanmıştır.
 
 **Ön koşullar**
 
@@ -41,7 +41,7 @@ Bu koleksiyon, tamamlayıcı iş akışı mühendisliği konularını kapsayan d
 3. **[Meta Veri](../../side_quests/metadata)** - Nextflow kanallarındaki öğeler için meta veri işleme
 4. **[Bölme ve Gruplama](../../side_quests/splitting_and_grouping)** - Gelişmiş veri işleme desenleri
 
-Her Yan Görev bağımsızdır ve bağımsız kavramları kapsar, ancak konular arasında mantıksal bir ilerleme için yukarıda listelenen sırayla tamamlamanızı öneririz.
+Her Yan Görev bağımsızdır ve bağımsız kavramları kapsar; ancak konular arasında mantıksal bir ilerleme için yukarıda listelenen sırayla tamamlamanızı öneririz.
 
 ## Bu koleksiyonu nasıl kullanmalı
 

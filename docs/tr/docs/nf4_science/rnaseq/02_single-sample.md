@@ -500,7 +500,7 @@ ENCSR000COQ1_1_fastqc.html  ENCSR000COQ1_1_fastqc.zip
 
 Örnek için kalite kontrol raporları artık `fastqc/` alt dizininde yayınlanmıştır.
 
-### Özet
+### Özetle
 
 Bir süreç içeren bir modül oluşturmayı, onu bir iş akışına aktarmayı, bir girdi kanalıyla çağırmayı ve iş akışı düzeyinde çıktı bloğunu kullanarak sonuçları yayınlamayı biliyorsunuz.
 
@@ -762,7 +762,7 @@ ENCSR000COQ1_1_trimmed_fastqc.html           ENCSR000COQ1_1_trimmed.fq.gz
 
 Kırpma çıktıları ve kırpma sonrası kalite kontrol raporları artık `trimming/` alt dizinindedir.
 
-### Özet
+### Özetle
 
 Aynı girdi üzerinde bağımsız olarak çalışan ve birden fazla adlandırılmış çıktı üreten ikinci bir işleme adımını nasıl ekleyeceğinizi biliyorsunuz.
 
@@ -1111,7 +1111,7 @@ _İş akışını aynı anda birden fazla örneği kabul edecek şekilde değiş
 
 ---
 
-### Özet
+### Özetle
 
 Tek uçlu RNAseq örneklerini ayrı ayrı işlemek için tüm temel adımları nasıl saracağınızı biliyorsunuz.
 

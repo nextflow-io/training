@@ -153,9 +153,9 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 
 {VERIFY_OUTPUT_INSTRUCTIONS}
 
-### Özet
+### Özetle
 
-Bir süreç içeren bir modül oluşturmayı, bunu bir iş akışına içe aktarmayı, bir girdi kanalıyla çağırmayı ve sonuçları yayınlamayı biliyorsunuz.
+Bir süreç içeren bir modül oluşturmayı, bunu bir iş akışına içe aktarmayı, bir girdi kanalıyla çağırmayı ve sonuçları yayımlamayı biliyorsunuz.
 
 ### Sırada ne var?
 
@@ -195,7 +195,7 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 
 {VERIFY_OUTPUT_INSTRUCTIONS}
 
-### Özet
+### Özetle
 
 Süreç çıktılarını girdilere zincirlemeyi ve iş akışında yardımcı dosyaları işlemeyi biliyorsunuz.
 
@@ -226,7 +226,7 @@ nextflow run {DOMAIN_DIR}.nf -profile test
     {EXPECTED_OUTPUT_MULTIPLE_SAMPLES}
     ```
 
-### Özet
+### Özetle
 
 Birden fazla girdi örneği üzerinde örnek başına işlemeyi paralelleştirmek için Nextflow'un veri akışı paradigmasından nasıl yararlanacağınızı biliyorsunuz.
 
