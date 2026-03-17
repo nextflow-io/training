@@ -1047,10 +1047,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -1187,10 +1187,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2033,7 +2033,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -3548,10 +3548,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3688,10 +3688,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -4009,7 +4009,7 @@ Bu, kodun birden fazla kopyasını üretmeden süreç tanımlarını birden fazl
 <p>Bu, kodumuzu daha paylaşılabilir, esnek ve bakımı kolay hale getirecek.</p>
 <details class="info">
 <summary>Bu bölümden nasıl başlanır</summary>
-<p>Bu kursun bu bölümü, <a href="../">Hello Nextflow</a> kursunun 1-3. Bölümlerini tamamladığınızı varsayar, ancak o bölümlerde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.</p>
+<p>Bu kursun bu bölümü, <a href="../">Hello Nextflow</a> kursunun 1-3. Bölümlerini tamamladığınızı varsayar; ancak o bölümlerde ele alınan temel konulara hakimseniz, özel bir şey yapmadan buradan başlayabilirsiniz.</p>
 </details>
 <hr />
 <h2 id="0-isnma-hello-modulesnf-dosyasn-calstrn">0. Isınma: <code>hello-modules.nf</code> dosyasını çalıştırın<a class="headerlink" href="#0-isnma-hello-modulesnf-dosyasn-calstrn" title="Permanent link">&para;</a></h2>
@@ -4134,7 +4134,7 @@ Modül için bir dosya taslağı oluşturacağız, ilgili kodu kopyalayacağız 
 <p>Bu yapıldıktan sonra, süreç tanımını iş akışı dosyasından silin.</p>
 <h3 id="23-is-aks-blogundan-once-bir-include-tanm-ekleyin">2.3. İş akışı bloğundan önce bir include tanımı ekleyin<a class="headerlink" href="#23-is-aks-blogundan-once-bir-include-tanm-ekleyin" title="Permanent link">&para;</a></h3>
 <p>Bir modülden süreç dahil etmenin sözdizimi oldukça basittir:</p>
-<div class="highlight"><span class="filename">Sözdizimi: include tanımı</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">SÜREÇ_ADI</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;modül_yolu&gt;&#39;</span>
+<div class="highlight"><span class="filename">Syntax: include declaration</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">&lt;</span><span class="n">PROCESS_NAME</span><span class="o">&gt;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;&lt;path_to_module&gt;&#39;</span>
 </code></pre></div>
 <p>Bunu <code>params</code> bloğunun üstüne ekleyelim ve uygun şekilde dolduralım.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Sonra</label><label for="__tabbed_1_2">Önce</label></div>
@@ -4181,7 +4181,7 @@ Modül için bir dosya taslağı oluşturacağız, ilgili kodu kopyalayacağız 
 </div>
 <p>Süreç adını, <code>sayHello</code>, ve modül kodunu içeren dosyanın yolunu, <code>./modules/sayHello.nf</code>, doldurduğumuzu görüyorsunuz.</p>
 <h3 id="24-is-aksn-calstrn">2.4. İş akışını çalıştırın<a class="headerlink" href="#24-is-aksn-calstrn" title="Permanent link">&para;</a></h3>
-<p>İş akışını temelde daha önce olduğu gibi aynı kod ve girdilerle çalıştırıyoruz, bu yüzden <code>-resume</code> bayrağıyla çalıştıralım ve ne olduğunu görelim.</p>
+<p>İş akışını temelde daha önce olduğu gibi aynı kod ve girdilerle çalıştırıyoruz; bu yüzden <code>-resume</code> bayrağıyla çalıştıralım ve ne olduğunu görelim.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello-modules.nf<span class="w"> </span>-resume
 </code></pre></div>
 <details class="success">
@@ -4198,7 +4198,7 @@ Modül için bir dosya taslağı oluşturacağız, ilgili kodu kopyalayacağız 
 <p>Her şey önbelleklendiği için bu çok hızlı çalışmalıdır.
 Yayınlanan çıktıları kontrol etmekten çekinmeyin.</p>
 <p>Nextflow, kod birden fazla dosyaya bölünmüş olsa bile yapılması gereken işin hâlâ aynı olduğunu fark etti.</p>
-<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
 <p>Bir süreci yerel bir modüle nasıl çıkaracağınızı biliyorsunuz ve bunun iş akışının devam ettirilebilirliğini bozmadığını biliyorsunuz.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
 <p>Daha fazla modül yapmayı pratik edin.
@@ -4359,7 +4359,7 @@ Ama şimdilik sadece iki tane daha yapalım.</p>
 <a id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="w">    </span><span class="n">count_greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_files</span><span class="o">.</span><span class="na">size</span><span class="o">()</span>
 <a id="__codelineno-19-16" name="__codelineno-19-16"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
 <a id="__codelineno-19-17" name="__codelineno-19-17"></a><span class="s2">    cat ${input_files} &gt; &#39;COLLECTED-${batch_name}-output.txt&#39;</span>
-<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="s2">    echo &#39;Bu grupta ${count_greetings} selamlama vardı.&#39; &gt; &#39;${batch_name}-report.txt&#39;</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span class="s2">    echo &#39;There were ${count_greetings} greetings in this batch.&#39; &gt; &#39;${batch_name}-report.txt&#39;</span>
 <a id="__codelineno-19-19" name="__codelineno-19-19"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-19-20" name="__codelineno-19-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -4437,11 +4437,11 @@ Ama şimdilik sadece iki tane daha yapalım.</p>
 </code></pre></div>
 </details>
 <p>Bu hâlâ daha önce olduğu gibi aynı çıktıyı üretmelidir.</p>
-<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
 <p>Bir iş akışında birden fazla süreci nasıl modülerleştireceğinizi biliyorsunuz.</p>
 <p>Tebrikler, tüm bu işi yaptınız ve pipeline'ın çalışma şeklinde kesinlikle hiçbir şey değişmedi!</p>
 <p>Şakayı bir kenara bırakırsak, artık kodunuz daha modüler ve bu süreçlerden birini çağıran başka bir pipeline yazmaya karar verirseniz, ilgili modülü kullanmak için yalnızca bir kısa <code>include</code> ifadesi yazmanız gerekiyor.
-Bu, kodu kopyala-yapıştır yapmaktan daha iyi çünkü daha sonra modülü geliştirmeye karar verirseniz, tüm pipeline'larınız bu iyileştirmeleri miras alacak.</p>
+Bu, kodu kopyala-yapıştır yapmaktan daha iyi; çünkü daha sonra modülü geliştirmeye karar verirseniz, tüm pipeline'larınız bu iyileştirmeleri miras alacak.</p>
 <h3 id="srada-ne-var_1">Sırada ne var?<a class="headerlink" href="#srada-ne-var_1" title="Permanent link">&para;</a></h3>
 <p>İsterseniz kısa bir mola verin.</p>
 <p>Hazır olduğunuzda, yazılım bağımlılıklarını daha kullanışlı ve tekrarlanabilir bir şekilde yönetmek için konteynerleri nasıl kullanacağınızı öğrenmek üzere <a href="../05_hello_containers/"><strong>Bölüm 5: Hello Containers</strong></a>'a geçin.</p>
@@ -4455,7 +4455,7 @@ Nextflow'da modül nedir?
 - [ ] Bir iş akışı tanımı
 - [ ] Bir kanal operatörü
 
-Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-sayhello-icin-bir-modul-olusturun)
+Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-create-a-module-for-sayhello)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-0">
@@ -4469,7 +4469,7 @@ Daha fazla bilgi: [2. `sayHello()` için bir modül oluşturun](#2-sayhello-icin
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#2-sayhello-icin-bir-modul-olusturun">2. <code>sayHello()</code> için bir modül oluşturun</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#2-create-a-module-for-sayhello">2. <code>sayHello()</code> için bir modül oluşturun</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -4480,7 +4480,7 @@ Modül dosyaları için genellikle kullanılan konvansiyon nedir?
 - [x] Bir `modules/` dizininde
 - [ ] Bir `lib/` dizininde
 
-Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-modulleri-depolamak-icin-bir-dizin-olusturun)
+Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-create-a-directory-to-store-modules)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-1">
@@ -4494,7 +4494,7 @@ Daha fazla bilgi: [1. Modülleri depolamak için bir dizin oluşturun](#1-modull
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#1-modulleri-depolamak-icin-bir-dizin-olusturun">1. Modülleri depolamak için bir dizin oluşturun</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#1-create-a-directory-to-store-modules">1. Modülleri depolamak için bir dizin oluşturun</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source
@@ -4506,7 +4506,7 @@ Bir modül kullanmak için doğru sözdizimi nedir?
 - [x] `#!groovy include { SAYHELLO } from './modules/sayhello.nf'`
 - [ ] `#!groovy load { SAYHELLO } from './modules/sayhello.nf'`
 
-Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-is-akisi-blogundan-once-bir-include-tanimi-ekleyin)
+Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-add-an-include-declaration-before-the-workflow-block)
 </quiz>
 -->
 <div class="quiz" data-show-correct="true" data-auto-submit="true" data-disable-after-submit="true" id="quiz-2">
@@ -4520,7 +4520,7 @@ Daha fazla bilgi: [2.3. Bir include tanımı ekleyin](#23-is-akisi-blogundan-onc
         <div class="quiz-feedback hidden"></div>
 
     </form>
-    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-is-akisi-blogundan-once-bir-include-tanimi-ekleyin">2.3. Bir include tanımı ekleyin</a></p></section>
+    <section class="content hidden"><p>Daha fazla bilgi: <a href="#23-add-an-include-declaration-before-the-workflow-block">2.3. Bir include tanımı ekleyin</a></p></section>
 </div>
 
 <!-- mkdocs-quiz-source

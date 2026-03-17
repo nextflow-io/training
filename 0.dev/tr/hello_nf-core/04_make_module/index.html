@@ -1641,10 +1641,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -1817,10 +1817,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -1887,10 +1887,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozetle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2390,7 +2390,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -4165,10 +4165,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -4341,10 +4341,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -4411,10 +4411,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozetle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -5347,7 +5347,7 @@ Aşağıdaki değişiklikleri yapmamız gerekecek:</p>
 <h4 id="132-modulesconfig-dosyasnda-extargs-yaplandrma">1.3.2. <code>modules.config</code> dosyasında <code>ext.args</code>'ı yapılandırma<a class="headerlink" href="#132-modulesconfig-dosyasnda-extargs-yaplandrma" title="Permanent link">&para;</a></h4>
 <p>Artık <code>character</code> bildirimini modülden çıkardığımıza göre, onu <code>modules.config</code> yapılandırma dosyasındaki <code>ext.args</code>'a eklememiz gerekiyor.</p>
 <p>Özellikle, <code>process {}</code> bloğuna şu kod parçasını ekleyeceğiz:</p>
-<div class="highlight"><span class="filename">Eklenecek kod</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;COWPY&#39;</span><span class="w"> </span><span class="o">{</span>
+<div class="highlight"><span class="filename">Code to add</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nl">withName:</span><span class="w"> </span><span class="s1">&#39;COWPY&#39;</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="n">ext</span><span class="o">.</span><span class="na">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;-c ${params.character}&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="o">}</span>
 </code></pre></div>
@@ -5607,7 +5607,7 @@ Aşağıdaki değişiklikleri yapmamız gerekecek:</p>
 <h4 id="142-modulesconfig-dosyasnda-extprefixi-yaplandrma">1.4.2. <code>modules.config</code> dosyasında <code>ext.prefix</code>'i yapılandırma<a class="headerlink" href="#142-modulesconfig-dosyasnda-extprefixi-yaplandrma" title="Permanent link">&para;</a></h4>
 <p>Bu durumda mantıklı varsayılan bizim zevkimiz için yeterince ifade edici değil; daha önce olduğu gibi araç adını içeren <code>cowpy-&lt;id&gt;.txt</code> şeklinde özel bir adlandırma deseni kullanmak istiyoruz.</p>
 <p>Bunu, <code>ext.args</code> ile <code>character</code> parametresi için yaptığımız gibi <code>modules.config</code> dosyasında <code>ext.prefix</code>'i yapılandırarak yapacağız. Bu sefer <code>withName: 'COWPY' {}</code> bloğu zaten mevcut; sadece aşağıdaki satırı eklememiz gerekiyor:</p>
-<div class="highlight"><span class="filename">Eklenecek kod</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;cowpy-${meta.id}&quot;</span><span class="w"> </span><span class="o">}</span>
+<div class="highlight"><span class="filename">Code to add</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">ext</span><span class="o">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;cowpy-${meta.id}&quot;</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div>
 <p>Bu istediğimiz string'i oluşturacak.
 Bu sefer Nextflow'a <code>meta.id</code> değerini çalışma zamanında değerlendirmesini söylemek için bir kez daha küme parantezleri kullandığımıza dikkat edin.</p>
@@ -5728,7 +5728,7 @@ Tabii ki, yerel modüllerimizin her birine gidip <code>publishDir</code> yönerg
 <div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">Sonra</label><label for="__tabbed_12_2">Önce</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/modules/local/cowpy.nf (alıntı)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/modules/local/cowpy.nf (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
 <span class="normal"><a href="#__codelineno-41-2">2</a></span>
 <span class="normal"><a href="#__codelineno-41-3">3</a></span>
 <span class="normal"><a href="#__codelineno-41-4">4</a></span>
@@ -5740,7 +5740,7 @@ Tabii ki, yerel modüllerimizin her birine gidip <code>publishDir</code> yönerg
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/modules/local/cowpy.nf (alıntı)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1">1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/modules/local/cowpy.nf (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1">1</a></span>
 <span class="normal"><a href="#__codelineno-42-2">2</a></span>
 <span class="normal"><a href="#__codelineno-42-3">3</a></span>
 <span class="normal"><a href="#__codelineno-42-4">4</a></span>
@@ -5948,7 +5948,7 @@ Script bloğunda herhangi bir değişiklik gerekmez — sürüm, output bloğund
 <p>İş akışının topic channel bloğundaki <code>versions_file</code> dalı, henüz <code>topic: versions</code> kullanacak şekilde güncellenmemiş ve hâlâ script bloğunda <code>emit: versions</code> ile bir <code>versions.yml</code> dosyası yazan modülleri işlemek için mevcuttur.
 Her iki stil de geçiş sürecinde eş zamanlı olarak desteklenmektedir.</p>
 </div>
-<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
 <p>Artık yerel modülleri nf-core kurallarına uyacak şekilde nasıl uyarlayacağınızı biliyorsunuz:</p>
 <ul>
 <li>Modüllerinizi metadata demetlerini kabul edecek ve iletecek şekilde tasarlayın;</li>
@@ -6391,7 +6391,7 @@ Bölüm 1'deki manuel <code>COWPY</code> modülümüze bakarak onu rehber olarak
 </code></pre></div>
 </details>
 <p>Bu, daha öncekiyle aynı sonuçları üretir.</p>
-<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
 <p>Artık her şeyi sıfırdan yazmak yerine şablonlar kullanarak modülleri verimli bir şekilde oluşturmak için yerleşik nf-core araçlarını nasıl kullanacağınızı biliyorsunuz.</p>
 <h3 id="srada-ne-var_1">Sırada ne var?<a class="headerlink" href="#srada-ne-var_1" title="Permanent link">&para;</a></h3>
 <p>nf-core'a modül katkıda bulunmanın faydalarını ve ilgili ana adımları ve gereksinimleri öğrenin.</p>
@@ -6424,7 +6424,7 @@ Bölüm 1'deki manuel <code>COWPY</code> modülümüze bakarak onu rehber olarak
 <li><strong>Modül spesifikasyonları</strong>: <a href="https://nf-co.re/docs/guidelines/components/modules">Teknik gereksinimler ve yönergeler</a></li>
 <li><strong>Topluluk desteği</strong>: <a href="https://nf-co.re/join">nf-core Slack</a> — <code>#modules</code> kanalına katılın</li>
 </ul>
-<h3 id="ozet_2">Özet<a class="headerlink" href="#ozet_2" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_2">Özetle<a class="headerlink" href="#ozetle_2" title="Permanent link">&para;</a></h3>
 <p>Artık nf-core modülleri nasıl oluşturulacağını biliyorsunuz! Modülleri taşınabilir ve bakımı kolay kılan dört temel deseni öğrendiniz:</p>
 <ul>
 <li><strong>Metadata demetleri</strong> iş akışı boyunca metadata'yı iletir</li>

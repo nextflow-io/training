@@ -1461,10 +1461,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -1603,10 +1603,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2078,7 +2078,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -3645,10 +3645,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3787,10 +3787,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -4090,15 +4090,15 @@ Başarılı bir şekilde çalıştığını aşağıdaki komutu çalıştırarak
 <h3 id="01-dogrulama-neden-onemlidir">0.1. Doğrulama neden önemlidir<a class="headerlink" href="#01-dogrulama-neden-onemlidir" title="Permanent link">&para;</a></h3>
 <p>Pipeline'ınızı iki saat boyunca çalıştırdığınızı, ancak bir kullanıcının yanlış uzantılı bir dosya sağlaması nedeniyle çöktüğünü düşünün. Ya da saatlerce şifreli hataları ayıklamaya çalıştıktan sonra, bir parametrenin yanlış yazıldığını keşfettiğinizi. Girdi doğrulaması olmadan, bu senaryolar yaygındır.</p>
 <p>Bu örneği düşünün:</p>
-<div class="highlight"><span class="filename">Doğrulama olmadan</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
+<div class="highlight"><span class="filename">Without validation</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">...2 saat sonra...</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">...2 hours later...</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">ERROR ~ No such file: &#39;data.fq.gz&#39;</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">  Expected FASTQ format but received TXT</span>
 </code></pre></div>
 <p>Pipeline geçersiz girdileri kabul etti ve başarısız olmadan önce saatlerce çalıştı. Uygun doğrulama ile:</p>
-<div class="highlight"><span class="filename">Doğrulama ile</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
+<div class="highlight"><span class="filename">With validation</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>run<span class="w"> </span>my-pipeline<span class="w"> </span>--input<span class="w"> </span>data.txt<span class="w"> </span>--output<span class="w"> </span>results
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="go">ERROR ~ Validation of pipeline parameters failed!</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
@@ -4180,11 +4180,11 @@ nf-schema herhangi bir Nextflow iş akışıyla çalışsa da, tüm nf-core pipe
 </div>
 <h3 id="04-dogrulama-ne-zaman-gerceklesmelidir">0.4. Doğrulama ne zaman gerçekleşmelidir?<a class="headerlink" href="#04-dogrulama-ne-zaman-gerceklesmelidir" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>graph LR
-    A[Kullanıcı pipeline'ı çalıştırır] --&gt; B[Parametre doğrulaması]
-    B --&gt;|✓ Geçerli| C[Girdi verisi doğrulaması]
-    B --&gt;|✗ Geçersiz| D[Hata: Parametreleri düzeltin]
-    C --&gt;|✓ Geçerli| E[Pipeline çalışır]
-    C --&gt;|✗ Geçersiz| F[Hata: Girdi verisini düzeltin]</code></pre>
+    A[User runs pipeline] --&gt; B[Parameter validation]
+    B --&gt;|✓ Valid| C[Input data validation]
+    B --&gt;|✗ Invalid| D[Error: Fix parameters]
+    C --&gt;|✓ Valid| E[Pipeline executes]
+    C --&gt;|✗ Invalid| F[Error: Fix input data]</code></pre>
 <p>Doğrulama, herhangi bir pipeline süreci çalışmadan <strong>önce</strong> gerçekleşmeli; böylece hızlı geri bildirim sağlanır ve hesaplama süresi boşa harcanmaz.</p>
 <p>Şimdi bu ilkeleri uygulamaya koyalım; parametre doğrulamasıyla başlayarak.</p>
 <hr />
@@ -4243,7 +4243,7 @@ Girdi verisi şemasını yapılandırdıktan sonra bölüm 2'de bu ayarı kaldı
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
 </code></pre></div>
 <p>Parametre şeması gruplara ayrılmıştır. İşte <code>input_output_options</code> grubu:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (alıntı)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-8-10">10</a></span>
 <span class="normal"><a href="#__codelineno-8-11">11</a></span>
@@ -4356,7 +4356,7 @@ Bunun yerine, nf-core sizin için JSON Schema sözdizimini işleyen ve değişik
 <h3 id="14-degisiklikleri-dogrulayn">1.4. Değişiklikleri doğrulayın<a class="headerlink" href="#14-degisiklikleri-dogrulayn" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="s1">&#39;&quot;input_output_options&quot;&#39;</span><span class="w"> </span>nextflow_schema.json
 </code></pre></div>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (alıntı)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">core-hello/nextflow_schema.json (excerpt)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-13-10">10</a></span>
 <span class="normal"><a href="#__codelineno-13-11">11</a></span>
@@ -4437,7 +4437,7 @@ Bunun yerine, nf-core sizin için JSON Schema sözdizimini işleyen ve değişik
 </code></pre></div>
 </details>
 <p>Pipeline başarıyla çalışmalı ve <code>batch</code> parametresi artık doğrulanıyor.</p>
-<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
 <p>Etkileşimli <code>nf-core pipelines schema build</code> aracını kullanarak <code>nextflow_schema.json</code> dosyasına parametre eklemeyi öğrendiniz ve parametre doğrulamasını eylemde gördünüz.
 Web arayüzü sizin için tüm JSON Schema sözdizimini işleyerek, hataya açık manuel JSON düzenlemesi olmadan karmaşık parametre şemalarını yönetmeyi kolaylaştırır.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
@@ -4888,7 +4888,7 @@ Doğrulama çalıştığı için artık <code>--validate_params false</code> kul
 </ul>
 <p>Şema doğrulaması, pipeline çalışmadan önce girdi dosyalarının doğru yapıya sahip olduğundan emin olarak zaman kazandırır ve yürütme sırasında daha sonra kafa karıştırıcı hataları önler.</p>
 <p>İsterseniz, şemayı başka eğlenceli şekillerde ihlal eden başka selamlamalar girdi dosyaları oluşturarak bunu uygulayabilirsiniz.</p>
-<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
 <p>Hem parametre doğrulaması hem de girdi verisi doğrulamasını uyguladınız ve test ettiniz. Pipeline'ınız artık yürütmeden önce girdileri doğrulayarak hızlı geri bildirim ve net hata mesajları sağlıyor.</p>
 <div class="admonition tip">
 <p class="admonition-title">Daha fazla bilgi</p>

@@ -1555,7 +1555,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -2648,10 +2648,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2707,10 +2707,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2721,7 +2721,7 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
         Özet
@@ -3633,10 +3633,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3692,10 +3692,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3706,7 +3706,7 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
         Özet
@@ -4019,7 +4019,7 @@
 <ul>
 <li>Karmaşık pipeline'ları mantıksal, yeniden kullanılabilir birimlere ayırma</li>
 <li>Her workflow modülünü bağımsız olarak test etme</li>
-<li>Yeni pipeline'lar oluşturmak için workflow'ları birleştirme</li>
+<li>Yeni pipeline'lar oluşturmak için workflow'ları bir araya getirme</li>
 <li>Ortak workflow modüllerini farklı pipeline'lar arasında paylaşma</li>
 <li>Kodunuzu daha bakımı kolay ve anlaşılır hale getirme</li>
 </ul>
@@ -4044,12 +4044,12 @@
 </code></pre></div>
 <h4 id="materyalleri-inceleyin">Materyalleri inceleyin<a class="headerlink" href="#materyalleri-inceleyin" title="Permanent link">&para;</a></h4>
 <p>'Hello Nextflow'da öğrendiklerinizin üzerine inşa eden birkaç süreç tanımı içeren bir <code>modules</code> dizini bulacaksınız:</p>
-<div class="highlight"><span class="filename">Dizin içeriği</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">modules/</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── say_hello.nf             # Bir selamlama oluşturur (Hello Nextflow&#39;dan)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">├── say_hello_upper.nf       # Büyük harfe dönüştürür (Hello Nextflow&#39;dan)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">├── timestamp_greeting.nf    # Selamlamalara zaman damgası ekler</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">├── validate_name.nf         # Girdi isimlerini doğrular</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">└── reverse_text.nf          # Metin içeriğini tersine çevirir</span>
+<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">modules/</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── say_hello.nf             # Creates a greeting (from Hello Nextflow)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">├── say_hello_upper.nf       # Converts to uppercase (from Hello Nextflow)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">├── timestamp_greeting.nf    # Adds timestamps to greetings</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="go">├── validate_name.nf         # Validates input names</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="go">└── reverse_text.nf          # Reverses text content</span>
 </code></pre></div>
 <h4 id="gorevi-inceleyin">Görevi inceleyin<a class="headerlink" href="#gorevi-inceleyin" title="Permanent link">&para;</a></h4>
 <p>Göreviniz, bu modülleri iki ayrı workflow'da birleştirmek ve ardından bunları ana bir workflow'da compose etmektir:</p>
@@ -4072,7 +4072,7 @@
 <h2 id="1-greeting-workflowunu-olusturma">1. Greeting Workflow'unu Oluşturma<a class="headerlink" href="#1-greeting-workflowunu-olusturma" title="Permanent link">&para;</a></h2>
 <p>İsimleri doğrulayan ve zaman damgalı selamlamalar oluşturan bir workflow oluşturarak başlayalım.</p>
 <h3 id="11-workflow-yapsn-olusturma">1.1. Workflow yapısını oluşturma<a class="headerlink" href="#11-workflow-yapsn-olusturma" title="Permanent link">&para;</a></h3>
-<div class="highlight"><span class="filename">Workflow dizini ve dosyası oluşturma</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>workflows
+<div class="highlight"><span class="filename">Create workflow directory and file</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>workflows
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>touch<span class="w"> </span>workflows/greeting.nf
 </code></pre></div>
 <h3 id="12-ilk-altworkflow-kodunu-ekleme">1.2. İlk (alt)workflow kodunu ekleme<a class="headerlink" href="#12-ilk-altworkflow-kodunu-ekleme" title="Permanent link">&para;</a></h3>
@@ -4149,20 +4149,20 @@
 <a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/say_hello&#39;</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;../modules/timestamp_greeting&#39;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4"></a>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="hll"><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
-</span><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">        </span><span class="n">names_ch</span><span class="w">        </span><span class="c1">// İsimler içeren girdi kanalı</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="hll">
-</span><a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">    </span><span class="nl">main:</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">        </span><span class="c1">// Süreçleri zincirle: doğrula -&gt; selamlama oluştur -&gt; zaman damgası ekle</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="n">workflow</span><span class="w"> </span><span class="n">GREETING_WORKFLOW</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="hll"><span class="w">    </span><span class="nl">take:</span>
+</span><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="hll"><span class="w">        </span><span class="n">names_ch</span><span class="w">        </span><span class="c1">// İsimler içeren girdi kanalı</span>
+</span><a id="__codelineno-7-8" name="__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="hll"><span class="w">    </span><span class="nl">main:</span>
+</span><a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">        </span><span class="c1">// Süreçleri zincirle: doğrula -&gt; selamlama oluştur -&gt; zaman damgası ekle</span>
 <a id="__codelineno-7-11" name="__codelineno-7-11"></a><span class="w">        </span><span class="n">validated_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VALIDATE_NAME</span><span class="o">(</span><span class="n">names_ch</span><span class="o">)</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">        </span><span class="n">greetings_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SAY_HELLO</span><span class="o">(</span><span class="n">validated_ch</span><span class="o">)</span>
 <a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">        </span><span class="n">timestamped_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIMESTAMP_GREETING</span><span class="o">(</span><span class="n">greetings_ch</span><span class="o">)</span>
-<a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="hll">
-</span><a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="hll"><span class="w">    </span><span class="nl">emit:</span>
 </span><a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="hll"><span class="w">        </span><span class="n">greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">greetings_ch</span><span class="w">      </span><span class="c1">// Orijinal selamlamalar</span>
-</span><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="w">        </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w">  </span><span class="c1">// Zaman damgalı selamlamalar</span>
-<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="o">}</span>
+</span><a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="hll"><span class="w">        </span><span class="n">timestamped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timestamped_ch</span><span class="w">  </span><span class="c1">// Zaman damgalı selamlamalar</span>
+</span><a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Workflow'un artık adlandırıldığını ve <code>take:</code> ile <code>emit:</code> bloğuna sahip olduğunu görebilirsiniz; bunlar daha üst düzey bir workflow oluşturmak için kullanacağımız bağlantılardır.
 Workflow içeriği de <code>main:</code> bloğunun içine yerleştirilmiştir. Ayrıca <code>names_ch</code> girdi kanalı bildirimini kaldırdığımızı not edin; çünkü artık workflow'a argüman olarak geçiriliyor.</p>
@@ -4201,8 +4201,8 @@ Workflow içeriği de <code>main:</code> bloğunun içine yerleştirilmiştir. A
 <a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="n">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">&#39;Alice&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Bob&#39;</span><span class="o">,</span><span class="w"> </span><span class="s1">&#39;Charlie&#39;</span><span class="o">)</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">(</span><span class="n">names</span><span class="o">)</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6"></a>
-<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Orijinal: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Zaman damgalı: $it&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">greetings</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Original: $it&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Timestamped: $it&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu dosyadaki workflow girişinin adlandırılmamış olduğunu not edin; çünkü onu bir giriş workflow'u olarak kullanacağız.</p>
@@ -4226,7 +4226,7 @@ Workflow içeriği de <code>main:</code> bloğunun içine yerleştirilmiştir. A
 </code></pre></div>
 </details>
 <p>Çalışıyor! Adlandırılmış greeting workflow'unu, adlandırılmamış bir giriş <code>workflow</code> bloğuna sahip bir ana workflow'a sardık. Ana workflow, <code>GREETING_WORKFLOW</code> workflow'unu neredeyse (tam olarak değil) bir süreç gibi kullanıyor ve <code>names</code> kanalını argüman olarak geçiriyor.</p>
-<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
 <p>Bu bölümde birkaç önemli kavram öğrendiniz:</p>
 <ul>
 <li><strong>Adlandırılmış Workflow'lar</strong>: İçe aktarılabilen ve yeniden kullanılabilen adlandırılmış bir workflow (<code>GREETING_WORKFLOW</code>) oluşturma</li>
@@ -4315,8 +4315,8 @@ Workflow içeriği de <code>main:</code> bloğunun içine yerleştirilmiştir. A
 <a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">(</span><span class="n">GREETING_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">timestamped</span><span class="o">)</span>
 <a id="__codelineno-17-12" name="__codelineno-17-12"></a>
 <a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="c1">// Sonuçları görüntüle</span>
-<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">upper</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Büyük harf: $it&quot;</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reversed</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Tersine çevrilmiş: $it&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">upper</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Uppercase: $it&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">TRANSFORM_WORKFLOW</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reversed</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;Reversed: $it&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-17-16" name="__codelineno-17-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Tam pipeline'ı çalıştırın:</p>
@@ -4344,9 +4344,9 @@ Workflow içeriği de <code>main:</code> bloğunun içine yerleştirilmiştir. A
 <p>Tersine çevrilmiş dosyalardan birine bakarsanız, bunun selamlamanın büyük harfli versiyonunun tersine çevrilmiş hali olduğunu göreceksiniz:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>cat<span class="w"> </span>/workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt
 </code></pre></div>
-<div class="highlight"><span class="filename">Tersine çevrilmiş dosya içeriği</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">!ECILA ,OLLEH ]04:50:71 60-30-5202[</span>
+<div class="highlight"><span class="filename">Reversed file content</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">!ECILA ,OLLEH ]04:50:71 60-30-5202[</span>
 </code></pre></div>
-<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
 <p>Artık şunları yapan tam bir pipeline'ınız olmalı:</p>
 <ul>
 <li>İsimleri greeting workflow'u aracılığıyla işler</li>
@@ -4354,7 +4354,7 @@ Workflow içeriği de <code>main:</code> bloğunun içine yerleştirilmiştir. A
 <li>Selamlamaların hem büyük harfli hem de tersine çevrilmiş versiyonlarını üretir</li>
 </ul>
 <hr />
-<h2 id="ozet_2">Özet<a class="headerlink" href="#ozet_2" title="Permanent link">&para;</a></h2>
+<h2 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h2>
 <p>Bu yan görevde, daha küçük, yeniden kullanılabilir bileşenlerden karmaşık pipeline'lar oluşturmamıza olanak tanıyan Nextflow'daki güçlü workflow kompozisyonu kavramını keşfettik.</p>
 <p>Bu modüler yaklaşım, monolitik pipeline'lara göre çeşitli avantajlar sunar:</p>
 <ul>

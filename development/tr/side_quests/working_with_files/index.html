@@ -1555,7 +1555,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -4757,7 +4757,7 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="c1">// Bir dize yolundan Path nesnesi oluştur</span>
 <a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7"></a>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} sınıfı ${myFile.class}&quot;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} is of class ${myFile.class}&quot;</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Bu, workflow'unda tek bir dosya yoluna başvuran, ardından onu sınıfıyla birlikte konsola yazdıran (herhangi bir süreç olmadan) mini bir iş akışıdır.</p>
@@ -4775,7 +4775,7 @@ Bu, sonraki bölümlerde düz bir dize ile Path nesnesi arasındaki farkı göst
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">data/patientA_rep1_normal_R1_001.fastq.gz sınıfı java.lang.String</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="go">data/patientA_rep1_normal_R1_001.fastq.gz is of class java.lang.String</span>
 </code></pre></div>
 </details>
 <p>Gördüğünüz gibi, Nextflow yazdığımız dize yolunu aynen yazdırdı.</p>
@@ -4795,7 +4795,7 @@ Bu mantıklı, çünkü henüz Nextflow'a bunun bir dosyaya karşılık geldiği
 <span class="normal"><a href="#__codelineno-6-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="w">    </span><span class="c1">// Bir dize yolundan Path nesnesi oluştur</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-6-7" name="__codelineno-6-7"></a>
-<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} sınıfı ${myFile.class}&quot;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} is of class ${myFile.class}&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4805,7 +4805,7 @@ Bu mantıklı, çünkü henüz Nextflow'a bunun bir dosyaya karşılık geldiği
 <span class="normal"><a href="#__codelineno-7-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">    </span><span class="c1">// Bir dize yolundan Path nesnesi oluştur</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span>
 </span><a id="__codelineno-7-7" name="__codelineno-7-7"></a>
-<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} sınıfı ${myFile.class}&quot;</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} is of class ${myFile.class}&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4819,7 +4819,7 @@ Bu mantıklı, çünkü henüz Nextflow'a bunun bir dosyaya karşılık geldiği
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz sınıfı class sun.nio.fs.UnixPath</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="go">/workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz is of class class sun.nio.fs.UnixPath</span>
 </code></pre></div>
 </details>
 <p>Bu sefer, girdi olarak sağladığımız göreli yol yerine tam mutlak yolu görüyorsunuz.</p>
@@ -4854,11 +4854,11 @@ Daha sonra göreceğimiz gibi, uzak dosyalar farklı sınıf adlarına sahip ola
 <a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-10-7" name="__codelineno-10-7"></a>
 <a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="hll"><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-</span><a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+</span><a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+</span><a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+</span><a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+</span><a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4868,7 +4868,7 @@ Daha sonra göreceğimiz gibi, uzak dosyalar farklı sınıf adlarına sahip ola
 <span class="normal"><a href="#__codelineno-11-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">    </span><span class="c1">// Bir dize yolundan Path nesnesi oluştur</span>
 <a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-11-7" name="__codelineno-11-7"></a>
-<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} sınıfı ${myFile.class}&quot;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;${myFile} is of class ${myFile.class}&quot;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4882,11 +4882,11 @@ Daha sonra göreceğimiz gibi, uzak dosyalar farklı sınıf adlarına sahip ola
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">Dosya nesne sınıfı: sun.nio.fs.UnixPath</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">Dosya adı: patientA_rep1_normal_R1_001.fastq.gz</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">Basit ad: patientA_rep1_normal_R1_001</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">Uzantı: gz</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="go">Üst dizin: /workspaces/training/side-quests/working_with_files/data</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="go">File object class: sun.nio.fs.UnixPath</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="go">File name: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="go">Simple name: patientA_rep1_normal_R1_001</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="go">Extension: gz</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="go">Parent directory: /workspaces/training/side-quests/working_with_files/data</span>
 </code></pre></div>
 </details>
 <p>Çeşitli dosya özelliklerinin yukarıda konsola yazdırıldığını görüyorsunuz.</p>
@@ -4946,7 +4946,7 @@ Daha sonra göreceğimiz gibi, uzak dosyalar farklı sınıf adlarına sahip ola
 <a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
 <a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="s2">    set -o pipefail</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="s2">    echo &quot;Dosya işleniyor: $input_file&quot;</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="s2">    echo &quot;Processing file: $input_file&quot;</span>
 <a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="s2">    gzip -dc $input_file | wc -l</span>
 <a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="o">}</span>
@@ -4979,11 +4979,11 @@ Bu olmadan, yalnızca süreç yürütme durumunu görürsünüz, ancak betiğini
 <a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-17-9" name="__codelineno-17-9"></a>
 <a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-<a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 <a id="__codelineno-17-16" name="__codelineno-17-16"></a>
 <a id="__codelineno-17-17" name="__codelineno-17-17"></a><span class="hll"><span class="w">    </span><span class="c1">// Dosyadaki satırları say</span>
 </span><a id="__codelineno-17-18" name="__codelineno-17-18"></a><span class="hll"><span class="w">    </span><span class="n">COUNT_LINES</span><span class="o">(</span><span class="n">myFile</span><span class="o">)</span>
@@ -5002,11 +5002,11 @@ Bu olmadan, yalnızca süreç yürütme durumunu görürsünüz, ancak betiğini
 <a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-18-9" name="__codelineno-18-9"></a>
 <a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-</span><a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+</span><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+</span><a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+</span><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+</span><a id="__codelineno-18-15" name="__codelineno-18-15"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5020,14 +5020,14 @@ Bu olmadan, yalnızca süreç yürütme durumunu görürsünüz, ancak betiğini
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `main.nf` [cheeky_hypatia] DSL2 - revision: 281d13c414</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="go">Dosya nesne sınıfı: class sun.nio.fs.UnixPath</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="go">Dosya adı: patientA_rep1_normal_R1_001.fastq.gz</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="go">Basit ad: patientA_rep1_normal_R1_001</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="go">Uzantı: gz</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="go">Üst dizin: /workspaces/training/side-quests/working_with_files/data</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="go">File object class: class sun.nio.fs.UnixPath</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="go">File name: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="go">Simple name: patientA_rep1_normal_R1_001</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="go">Extension: gz</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="go">Parent directory: /workspaces/training/side-quests/working_with_files/data</span>
 <a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="go">[e9/341c05] COUNT_LINES [100%] 1 of 1 ✔</span>
-<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="go">Dosya işleniyor: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="go">Processing file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="go">40</span>
 </code></pre></div>
 </details>
@@ -5066,7 +5066,7 @@ Bu olmadan, yalnızca süreç yürütme durumunu görürsünüz, ancak betiğini
 <a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span>
 </span><a id="__codelineno-21-9" name="__codelineno-21-9"></a>
 <a id="__codelineno-21-10" name="__codelineno-21-10"></a><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
 <a id="__codelineno-21-12" name="__codelineno-21-12"></a><span class="hll"><span class="w">    </span><span class="cm">/*</span>
 </span><a id="__codelineno-21-13" name="__codelineno-21-13"></a><span class="hll"><span class="cm">    println &quot;Dosya adı: ${myFile.name}&quot;</span>
 </span><a id="__codelineno-21-14" name="__codelineno-21-14"></a><span class="hll"><span class="cm">    println &quot;Basit ad: ${myFile.simpleName}&quot;</span>
@@ -5094,11 +5094,11 @@ Bu olmadan, yalnızca süreç yürütme durumunu görürsünüz, ancak betiğini
 <a id="__codelineno-22-8" name="__codelineno-22-8"></a><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-22-9" name="__codelineno-22-9"></a>
 <a id="__codelineno-22-10" name="__codelineno-22-10"></a><span class="hll"><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-</span><a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-22-11" name="__codelineno-22-11"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+</span><a id="__codelineno-22-12" name="__codelineno-22-12"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+</span><a id="__codelineno-22-13" name="__codelineno-22-13"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+</span><a id="__codelineno-22-14" name="__codelineno-22-14"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+</span><a id="__codelineno-22-15" name="__codelineno-22-15"></a><span class="hll"><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 </span><a id="__codelineno-22-16" name="__codelineno-22-16"></a>
 <a id="__codelineno-22-17" name="__codelineno-22-17"></a><span class="w">    </span><span class="c1">// Dosyadaki satırları say</span>
 <a id="__codelineno-22-18" name="__codelineno-22-18"></a><span class="w">    </span><span class="n">COUNT_LINES</span><span class="o">(</span><span class="n">myFile</span><span class="o">)</span>
@@ -5190,18 +5190,18 @@ Süreçte <code>val</code> ile birleştirildiğinde, bu aşağıda gösterilen h
 <a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="go">Command executed:</span>
 <a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a>
 <a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a><span class="go">  set -o pipefail</span>
-<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="go">  echo &quot;Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz&quot;</span>
+<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="go">  echo &quot;Processing file: data/patientA_rep1_normal_R1_001.fastq.gz&quot;</span>
 <a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="go">  gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l</span>
 <a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a>
 <a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a><span class="go">Command exit status:</span>
 <a id="__codelineno-29-20" name="__codelineno-29-20" href="#__codelineno-29-20"></a><span class="go">  1</span>
 <a id="__codelineno-29-21" name="__codelineno-29-21" href="#__codelineno-29-21"></a>
 <a id="__codelineno-29-22" name="__codelineno-29-22" href="#__codelineno-29-22"></a><span class="go">Command output:</span>
-<a id="__codelineno-29-23" name="__codelineno-29-23" href="#__codelineno-29-23"></a><span class="go">  Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-29-23" name="__codelineno-29-23" href="#__codelineno-29-23"></a><span class="go">  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-29-24" name="__codelineno-29-24" href="#__codelineno-29-24"></a><span class="go">  0</span>
 <a id="__codelineno-29-25" name="__codelineno-29-25" href="#__codelineno-29-25"></a>
 <a id="__codelineno-29-26" name="__codelineno-29-26" href="#__codelineno-29-26"></a><span class="go">Command error:</span>
-<a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a><span class="go">  Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-29-27" name="__codelineno-29-27" href="#__codelineno-29-27"></a><span class="go">  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-29-28" name="__codelineno-29-28" href="#__codelineno-29-28"></a><span class="go">  gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory</span>
 <a id="__codelineno-29-29" name="__codelineno-29-29" href="#__codelineno-29-29"></a><span class="go">  0</span>
 <a id="__codelineno-29-30" name="__codelineno-29-30" href="#__codelineno-29-30"></a>
@@ -5218,11 +5218,11 @@ Süreçte <code>val</code> ile birleştirildiğinde, bu aşağıda gösterilen h
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">Command executed:</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go">  set -o pipefail</span>
-<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="go">  echo &quot;Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz&quot;</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="go">  echo &quot;Processing file: data/patientA_rep1_normal_R1_001.fastq.gz&quot;</span>
 <a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="go">  gzip -dc data/patientA_rep1_normal_R1_001.fastq.gz | wc -l</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="go">Command error:</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="go">  Dosya işleniyor: data/patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="go">  Processing file: data/patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="go">  gzip: data/patientA_rep1_normal_R1_001.fastq.gz: No such file or directory</span>
 <a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="go">  0</span>
 </code></pre></div>
@@ -5281,11 +5281,11 @@ Nextflow, kimlik doğrulama ve dosyaları doğru yere hazırlama, indirme veya y
 <a id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-32-4" name="__codelineno-32-4"></a>
 <a id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-<a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-<a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-<a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5301,11 +5301,11 @@ Nextflow, kimlik doğrulama ve dosyaları doğru yere hazırlama, indirme veya y
 <a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-33-4" name="__codelineno-33-4"></a>
 <a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-<a id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-<a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-33-9" name="__codelineno-33-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-<a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5319,14 +5319,14 @@ Nextflow, kimlik doğrulama ve dosyaları doğru yere hazırlama, indirme veya y
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">Launching `main.nf` [insane_swartz] DSL2 - revision: fff18abe6d</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>
-<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="go">Dosya nesne sınıfı: class nextflow.file.http.XPath</span>
-<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="go">Dosya adı: patientA_rep1_normal_R1_001.fastq.gz</span>
-<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="go">Basit ad: patientA_rep1_normal_R1_001</span>
-<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">Uzantı: gz</span>
-<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="go">Üst dizin: /nextflow-io/training/master/side-quests/working_with_files/data</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="go">File object class: class nextflow.file.http.XPath</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="go">File name: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="go">Simple name: patientA_rep1_normal_R1_001</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="go">Extension: gz</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="go">Parent directory: /nextflow-io/training/master/side-quests/working_with_files/data</span>
 <a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="go">[8a/2ab7ca] COUNT_LINES [100%] 1 of 1 ✔</span>
-<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="go">Processing file: patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="go">40</span>
 </code></pre></div>
 </details>
@@ -5358,7 +5358,7 @@ Bu nedenle, aynı dosyayı tekrar çalıştırır ve hazırlanmış dosyayı sil
 <p>Bu ilkenin tek önemli istisnası, HTTPS birden fazla dosyayı listeleyemediği için HTTPS ile glob desenleri veya dizin yolları kullanamamanızdır; bu nedenle tam dosya URL'lerini belirtmeniz gerekir.
 Ancak, blob depolama (<code>s3://</code>, <code>az://</code>, <code>gs://</code>) gibi diğer depolama protokolleri hem glob'ları hem de dizin yollarını kullanabilir.</p>
 <p>Bulut depolamayla glob desenlerini şu şekilde kullanabilirsiniz:</p>
-<div class="highlight"><span class="filename">Bulut depolama örnekleri (bu ortamda çalıştırılamaz)</span><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="c1">// Glob desenleriyle S3 - birden fazla dosyayla eşleşir</span>
+<div class="highlight"><span class="filename">Cloud storage examples (not runnable in this environment)</span><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="c1">// Glob desenleriyle S3 - birden fazla dosyayla eşleşir</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="n">ch_s3_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;s3://my-bucket/data/*.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>
 <a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="c1">// Glob desenleriyle Azure Blob Storage</span>
@@ -5386,11 +5386,11 @@ Ancak, blob depolama (<code>s3://</code>, <code>az://</code>, <code>gs://</code>
 <a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-38-4" name="__codelineno-38-4"></a>
 <a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-<a id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-<a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-<a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-<a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+<a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5406,11 +5406,11 @@ Ancak, blob depolama (<code>s3://</code>, <code>az://</code>, <code>gs://</code>
 <a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;https://raw.github.com/nextflow-io/training/master/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-39-4" name="__codelineno-39-4"></a>
 <a id="__codelineno-39-5" name="__codelineno-39-5"></a><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-<a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-<a id="__codelineno-39-7" name="__codelineno-39-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-<a id="__codelineno-39-8" name="__codelineno-39-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-39-9" name="__codelineno-39-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-<a id="__codelineno-39-10" name="__codelineno-39-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+<a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+<a id="__codelineno-39-7" name="__codelineno-39-7"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+<a id="__codelineno-39-8" name="__codelineno-39-8"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+<a id="__codelineno-39-9" name="__codelineno-39-9"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+<a id="__codelineno-39-10" name="__codelineno-39-10"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5429,8 +5429,8 @@ Ancak, blob depolama (<code>s3://</code>, <code>az://</code>, <code>gs://</code>
 <h2 id="3-frompath-kanal-factorysini-kullanma">3. <code>fromPath()</code> kanal factory'sini kullanma<a class="headerlink" href="#3-frompath-kanal-factorysini-kullanma" title="Permanent link">&para;</a></h2>
 <p>Şimdiye kadar tek seferde tek bir dosyayla çalışıyorduk, ancak Nextflow'da genellikle işlenecek birden fazla girdi dosyasıyla bir girdi kanalı oluşturmak isteyeceğiz.</p>
 <p>Bunu yapmanın naif bir yolu, <code>file()</code> metodunu <a href="https://www.nextflow.io/docs/latest/reference/channel.html#of"><code>channel.of()</code></a> ile şu şekilde birleştirmek olurdu:</p>
-<div class="highlight"><span class="filename">Sözdizimi örneği</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)],</span>
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">                      </span><span class="o">[</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R2_001.fastq.gz&#39;</span><span class="o">)])</span>
+<div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)],</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">                      </span><span class="o">[</span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)])</span>
 </code></pre></div>
 <p>Bu çalışır, ancak hantal.</p>
 <div class="admonition tip">
@@ -5462,7 +5462,7 @@ Ancak, blob depolama (<code>s3://</code>, <code>az://</code>, <code>gs://</code>
 <span class="normal"><a href="#__codelineno-41-20">20</a></span>
 <span class="normal"><a href="#__codelineno-41-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="hll"><span class="w">    </span><span class="c1">// channel.fromPath ile dosyaları yükle</span>
 </span><a id="__codelineno-41-8" name="__codelineno-41-8"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
-</span><a id="__codelineno-41-9" name="__codelineno-41-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Dosya bulundu: $myFile&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-41-9" name="__codelineno-41-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Found file: $myFile&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-41-10" name="__codelineno-41-10"></a>
 <a id="__codelineno-41-11" name="__codelineno-41-11"></a><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
 <a id="__codelineno-41-12" name="__codelineno-41-12"></a><span class="w">    </span><span class="cm">/* Şimdilik bunları yorumlayın, daha sonra geri döneceğiz!</span>
@@ -5493,11 +5493,11 @@ Ancak, blob depolama (<code>s3://</code>, <code>az://</code>, <code>gs://</code>
 </span><a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="hll"><span class="w">    </span><span class="n">myFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 </span><a id="__codelineno-42-9" name="__codelineno-42-9"></a>
 <a id="__codelineno-42-10" name="__codelineno-42-10"></a><span class="w">    </span><span class="c1">// Dosya özelliklerini yazdır</span>
-<a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-<a id="__codelineno-42-12" name="__codelineno-42-12"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-<a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-<a id="__codelineno-42-15" name="__codelineno-42-15"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+<a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+<a id="__codelineno-42-12" name="__codelineno-42-12"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+<a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+<a id="__codelineno-42-15" name="__codelineno-42-15"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 <a id="__codelineno-42-16" name="__codelineno-42-16"></a>
 <a id="__codelineno-42-17" name="__codelineno-42-17"></a><span class="w">    </span><span class="c1">// Dosyadaki satırları say</span>
 <a id="__codelineno-42-18" name="__codelineno-42-18"></a><span class="w">    </span><span class="n">COUNT_LINES</span><span class="o">(</span><span class="n">myFile</span><span class="o">)</span>
@@ -5515,7 +5515,7 @@ Ancak, blob depolama (<code>s3://</code>, <code>az://</code>, <code>gs://</code>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>
 <a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="go">Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583</span>
 <a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>
-<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="go">Dosya bulundu: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="go">Found file: /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz</span>
 </code></pre></div>
 </details>
 <p>Gördüğünüz gibi, dosya yolu kanalda <code>Path</code> türü nesne olarak yükleniyor.
@@ -5541,11 +5541,11 @@ Bu, <code>file()</code>'ın yapacağına benzer, ancak şimdi istersek daha fazl
 <span class="normal"><a href="#__codelineno-45-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-7" name="__codelineno-45-7"></a><span class="w">    </span><span class="c1">// channel.fromPath ile dosyaları yükle</span>
 <a id="__codelineno-45-8" name="__codelineno-45-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-45-9" name="__codelineno-45-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-</span><a id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-45-12" name="__codelineno-45-12"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-45-13" name="__codelineno-45-13"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-45-14" name="__codelineno-45-14"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+</span><a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+</span><a id="__codelineno-45-12" name="__codelineno-45-12"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+</span><a id="__codelineno-45-13" name="__codelineno-45-13"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+</span><a id="__codelineno-45-14" name="__codelineno-45-14"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 </span><a id="__codelineno-45-15" name="__codelineno-45-15"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span><a id="__codelineno-45-16" name="__codelineno-45-16"></a>
 <a id="__codelineno-45-17" name="__codelineno-45-17"></a><span class="w">    </span><span class="c1">// Dosyadaki satırları say</span>
@@ -5560,7 +5560,7 @@ Bu, <code>file()</code>'ın yapacağına benzer, ancak şimdi istersek daha fazl
 <span class="normal"><a href="#__codelineno-46-11">11</a></span>
 <span class="normal"><a href="#__codelineno-46-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-7" name="__codelineno-46-7"></a><span class="w">    </span><span class="c1">// channel.fromPath ile dosyaları yükle</span>
 <a id="__codelineno-46-8" name="__codelineno-46-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R1_001.fastq.gz&#39;</span><span class="o">)</span>
-<a id="__codelineno-46-9" name="__codelineno-46-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Dosya bulundu: $myFile&quot;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-46-9" name="__codelineno-46-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Found file: $myFile&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-46-10" name="__codelineno-46-10"></a>
 <a id="__codelineno-46-11" name="__codelineno-46-11"></a><span class="w">    </span><span class="c1">// Dosyadaki satırları say</span>
 <a id="__codelineno-46-12" name="__codelineno-46-12"></a><span class="w">    </span><span class="c1">// COUNT_LINES(ch_files)</span>
@@ -5580,12 +5580,12 @@ Bu, <code>file()</code>'ın yapacağına benzer, ancak şimdi istersek daha fazl
 <a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>
 <a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="go">executor &gt;  local (1)</span>
 <a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="go">[9d/6701a6] COUNT_LINES (1) [100%] 1 of 1 ✔</span>
-<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="go">Dosya nesne sınıfı: sun.nio.fs.UnixPath</span>
-<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a><span class="go">Dosya adı: patientA_rep1_normal_R1_001.fastq.gz</span>
-<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a><span class="go">Basit ad: patientA_rep1_normal_R1_001</span>
-<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a><span class="go">Uzantı: gz</span>
-<a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a><span class="go">Üst dizin: /workspaces/training/side-quests/working_with_files/data</span>
-<a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="go">File object class: sun.nio.fs.UnixPath</span>
+<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a><span class="go">File name: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a><span class="go">Simple name: patientA_rep1_normal_R1_001</span>
+<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a><span class="go">Extension: gz</span>
+<a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a><span class="go">Parent directory: /workspaces/training/side-quests/working_with_files/data</span>
+<a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a><span class="go">Processing file: patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-48-13" name="__codelineno-48-13" href="#__codelineno-48-13"></a><span class="go">40</span>
 </code></pre></div>
 </details>
@@ -5635,20 +5635,20 @@ Bu desenleri eşleştirme işlemine "globbing" veya "dosya adı genişletme" den
 <a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>
 <a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a><span class="go">executor &gt;  local (2)</span>
 <a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a><span class="go">[3c/a65de5] COUNT_LINES (2) [100%] 2 of 2 ✔</span>
-<a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a><span class="go">Dosya nesne sınıfı: class sun.nio.fs.UnixPath</span>
-<a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="go">Dosya adı: patientA_rep1_normal_R1_001.fastq.gz</span>
-<a id="__codelineno-54-9" name="__codelineno-54-9" href="#__codelineno-54-9"></a><span class="go">Basit ad: patientA_rep1_normal_R1_001</span>
-<a id="__codelineno-54-10" name="__codelineno-54-10" href="#__codelineno-54-10"></a><span class="go">Uzantı: gz</span>
-<a id="__codelineno-54-11" name="__codelineno-54-11" href="#__codelineno-54-11"></a><span class="go">Üst dizin: /workspaces/training/side-quests/working_with_files/data</span>
-<a id="__codelineno-54-12" name="__codelineno-54-12" href="#__codelineno-54-12"></a><span class="go">Dosya nesne sınıfı: class sun.nio.fs.UnixPath</span>
-<a id="__codelineno-54-13" name="__codelineno-54-13" href="#__codelineno-54-13"></a><span class="go">Dosya adı: patientA_rep1_normal_R2_001.fastq.gz</span>
-<a id="__codelineno-54-14" name="__codelineno-54-14" href="#__codelineno-54-14"></a><span class="go">Basit ad: patientA_rep1_normal_R2_001</span>
-<a id="__codelineno-54-15" name="__codelineno-54-15" href="#__codelineno-54-15"></a><span class="go">Uzantı: gz</span>
-<a id="__codelineno-54-16" name="__codelineno-54-16" href="#__codelineno-54-16"></a><span class="go">Üst dizin: /workspaces/training/side-quests/working_with_files/data</span>
-<a id="__codelineno-54-17" name="__codelineno-54-17" href="#__codelineno-54-17"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a><span class="go">File object class: class sun.nio.fs.UnixPath</span>
+<a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="go">File name: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-54-9" name="__codelineno-54-9" href="#__codelineno-54-9"></a><span class="go">Simple name: patientA_rep1_normal_R1_001</span>
+<a id="__codelineno-54-10" name="__codelineno-54-10" href="#__codelineno-54-10"></a><span class="go">Extension: gz</span>
+<a id="__codelineno-54-11" name="__codelineno-54-11" href="#__codelineno-54-11"></a><span class="go">Parent directory: /workspaces/training/side-quests/working_with_files/data</span>
+<a id="__codelineno-54-12" name="__codelineno-54-12" href="#__codelineno-54-12"></a><span class="go">File object class: class sun.nio.fs.UnixPath</span>
+<a id="__codelineno-54-13" name="__codelineno-54-13" href="#__codelineno-54-13"></a><span class="go">File name: patientA_rep1_normal_R2_001.fastq.gz</span>
+<a id="__codelineno-54-14" name="__codelineno-54-14" href="#__codelineno-54-14"></a><span class="go">Simple name: patientA_rep1_normal_R2_001</span>
+<a id="__codelineno-54-15" name="__codelineno-54-15" href="#__codelineno-54-15"></a><span class="go">Extension: gz</span>
+<a id="__codelineno-54-16" name="__codelineno-54-16" href="#__codelineno-54-16"></a><span class="go">Parent directory: /workspaces/training/side-quests/working_with_files/data</span>
+<a id="__codelineno-54-17" name="__codelineno-54-17" href="#__codelineno-54-17"></a><span class="go">Processing file: patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-54-18" name="__codelineno-54-18" href="#__codelineno-54-18"></a><span class="go">40</span>
 <a id="__codelineno-54-19" name="__codelineno-54-19" href="#__codelineno-54-19"></a>
-<a id="__codelineno-54-20" name="__codelineno-54-20" href="#__codelineno-54-20"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R2_001.fastq.gz</span>
+<a id="__codelineno-54-20" name="__codelineno-54-20" href="#__codelineno-54-20"></a><span class="go">Processing file: patientA_rep1_normal_R2_001.fastq.gz</span>
 <a id="__codelineno-54-21" name="__codelineno-54-21" href="#__codelineno-54-21"></a><span class="go">40</span>
 </code></pre></div>
 </details>
@@ -5717,11 +5717,11 @@ Bu elbette büyük bir "eğer"dir ve dosya adı yapısına güvenirken çok dikk
 <span class="normal"><a href="#__codelineno-56-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-56-7" name="__codelineno-56-7"></a><span class="w">    </span><span class="c1">// channel.fromPath ile dosyaları yükle</span>
 <a id="__codelineno-56-8" name="__codelineno-56-8"></a><span class="w">    </span><span class="n">ch_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">&#39;data/patientA_rep1_normal_R*_001.fastq.gz&#39;</span><span class="o">)</span>
 <a id="__codelineno-56-9" name="__codelineno-56-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-</span><a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-</span><a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-</span><a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-</span><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-</span><a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+</span><a id="__codelineno-56-10" name="__codelineno-56-10"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+</span><a id="__codelineno-56-11" name="__codelineno-56-11"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+</span><a id="__codelineno-56-12" name="__codelineno-56-12"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+</span><a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+</span><a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="hll"><span class="w">        </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 </span><a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="hll"><span class="w">    </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -5741,10 +5741,10 @@ Bu elbette büyük bir "eğer"dir ve dosya adı yapısına güvenirken çok dikk
 <a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="go">[e9/55774b] COUNT_LINES (2) [100%] 2 of 2 ✔</span>
 <a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a><span class="hll"><span class="go">[patientA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]</span>
 </span><a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a><span class="hll"><span class="go">[patientA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]</span>
-</span><a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz</span>
+</span><a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a><span class="go">Processing file: patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a><span class="go">40</span>
 <a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a>
-<a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R2_001.fastq.gz</span>
+<a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a><span class="go">Processing file: patientA_rep1_normal_R2_001.fastq.gz</span>
 <a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a><span class="go">40</span>
 </code></pre></div>
 </details>
@@ -5796,10 +5796,10 @@ Neyse ki, bu bileşenler orijinal dosya adında sadece alt çizgilerle ayrılmı
 <a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="go">[e7/da2f4b] COUNT_LINES (2) [100%] 2 of 2 ✔</span>
 <a id="__codelineno-62-7" name="__codelineno-62-7" href="#__codelineno-62-7"></a><span class="hll"><span class="go">[[patientA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]</span>
 </span><a id="__codelineno-62-8" name="__codelineno-62-8" href="#__codelineno-62-8"></a><span class="hll"><span class="go">[[patientA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]</span>
-</span><a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R2_001.fastq.gz</span>
+</span><a id="__codelineno-62-9" name="__codelineno-62-9" href="#__codelineno-62-9"></a><span class="go">Processing file: patientA_rep1_normal_R2_001.fastq.gz</span>
 <a id="__codelineno-62-10" name="__codelineno-62-10" href="#__codelineno-62-10"></a><span class="go">40</span>
 <a id="__codelineno-62-11" name="__codelineno-62-11" href="#__codelineno-62-11"></a>
-<a id="__codelineno-62-12" name="__codelineno-62-12" href="#__codelineno-62-12"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-62-12" name="__codelineno-62-12" href="#__codelineno-62-12"></a><span class="go">Processing file: patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-62-13" name="__codelineno-62-13" href="#__codelineno-62-13"></a><span class="go">40</span>
 </code></pre></div>
 </details>
@@ -5893,10 +5893,10 @@ Kullanması kolay ama okumak zor.</p>
 <a id="__codelineno-69-6" name="__codelineno-69-6" href="#__codelineno-69-6"></a><span class="go">[1b/e7fb27] COUNT_LINES (1) [100%] 2 of 2 ✔</span>
 <a id="__codelineno-69-7" name="__codelineno-69-7" href="#__codelineno-69-7"></a><span class="hll"><span class="go">[[id:patientA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R2_001.fastq.gz]</span>
 </span><a id="__codelineno-69-8" name="__codelineno-69-8" href="#__codelineno-69-8"></a><span class="hll"><span class="go">[[id:patientA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/patientA_rep1_normal_R1_001.fastq.gz]</span>
-</span><a id="__codelineno-69-9" name="__codelineno-69-9" href="#__codelineno-69-9"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R2_001.fastq.gz</span>
+</span><a id="__codelineno-69-9" name="__codelineno-69-9" href="#__codelineno-69-9"></a><span class="go">Processing file: patientA_rep1_normal_R2_001.fastq.gz</span>
 <a id="__codelineno-69-10" name="__codelineno-69-10" href="#__codelineno-69-10"></a><span class="go">40</span>
 <a id="__codelineno-69-11" name="__codelineno-69-11" href="#__codelineno-69-11"></a>
-<a id="__codelineno-69-12" name="__codelineno-69-12" href="#__codelineno-69-12"></a><span class="go">Dosya işleniyor: patientA_rep1_normal_R1_001.fastq.gz</span>
+<a id="__codelineno-69-12" name="__codelineno-69-12" href="#__codelineno-69-12"></a><span class="go">Processing file: patientA_rep1_normal_R1_001.fastq.gz</span>
 <a id="__codelineno-69-13" name="__codelineno-69-13" href="#__codelineno-69-13"></a><span class="go">40</span>
 </code></pre></div>
 </details>
@@ -6210,7 +6210,7 @@ Bu işlemin dizilim hizalaması, varyant çağırma veya bu veri türü için an
 </div>
 </div>
 <p>Modül dosyasını açarak kodunu inceleyebilirsiniz:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/analyze_reads.nf - süreç örneği</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-87-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/analyze_reads.nf - process example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-87-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-87-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-87-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-87-4"> 4</a></span>
@@ -6248,13 +6248,13 @@ Bu işlemin dizilim hizalaması, varyant çağırma veya bu veri türü için an
 <a id="__codelineno-87-13" name="__codelineno-87-13"></a>
 <a id="__codelineno-87-14" name="__codelineno-87-14"></a><span class="w">    </span><span class="nl">script:</span>
 <a id="__codelineno-87-15" name="__codelineno-87-15"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-87-16" name="__codelineno-87-16"></a><span class="s2">    echo &quot;Örnek meta verisi: ${meta.id}&quot; &gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-17" name="__codelineno-87-17"></a><span class="s2">    echo &quot;Replik: ${meta.replicate}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-18" name="__codelineno-87-18"></a><span class="s2">    echo &quot;Tür: ${meta.type}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-19" name="__codelineno-87-19"></a><span class="s2">    echo &quot;Okuma 1: ${files[0]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-20" name="__codelineno-87-20"></a><span class="s2">    echo &quot;Okuma 2: ${files[1]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-21" name="__codelineno-87-21"></a><span class="s2">    echo &quot;Okuma 1 boyutu: \$(gunzip -dc ${files[0]} | wc -l | awk &#39;{print \$1/4}&#39;) okuma&quot; &gt;&gt; ${meta.id}_stats.txt</span>
-<a id="__codelineno-87-22" name="__codelineno-87-22"></a><span class="s2">    echo &quot;Okuma 2 boyutu: \$(gunzip -dc ${files[1]} | wc -l | awk &#39;{print \$1/4}&#39;) okuma&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-16" name="__codelineno-87-16"></a><span class="s2">    echo &quot;Sample metadata: ${meta.id}&quot; &gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-17" name="__codelineno-87-17"></a><span class="s2">    echo &quot;Replicate: ${meta.replicate}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-18" name="__codelineno-87-18"></a><span class="s2">    echo &quot;Type: ${meta.type}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-19" name="__codelineno-87-19"></a><span class="s2">    echo &quot;Read 1: ${files[0]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-20" name="__codelineno-87-20"></a><span class="s2">    echo &quot;Read 2: ${files[1]}&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-21" name="__codelineno-87-21"></a><span class="s2">    echo &quot;Read 1 size: \$(gunzip -dc ${files[0]} | wc -l | awk &#39;{print \$1/4}&#39;) reads&quot; &gt;&gt; ${meta.id}_stats.txt</span>
+<a id="__codelineno-87-22" name="__codelineno-87-22"></a><span class="s2">    echo &quot;Read 2 size: \$(gunzip -dc ${files[1]} | wc -l | awk &#39;{print \$1/4}&#39;) reads&quot; &gt;&gt; ${meta.id}_stats.txt</span>
 <a id="__codelineno-87-23" name="__codelineno-87-23"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-87-24" name="__codelineno-87-24"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
@@ -6405,13 +6405,13 @@ Yeniden eşlenen içerikleri <code>ANALYZE_READS</code> sürecine beslemek için
 <a id="__codelineno-96-2" name="__codelineno-96-2" href="#__codelineno-96-2"></a><span class="go">└── patientA</span>
 <a id="__codelineno-96-3" name="__codelineno-96-3" href="#__codelineno-96-3"></a><span class="go">    └── patientA_stats.txt</span>
 </code></pre></div>
-<div class="highlight"><span class="filename">patientA_stats.txt</span><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>Örnek meta verisi: patientA
-<a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a>Replik: 1
-<a id="__codelineno-97-3" name="__codelineno-97-3" href="#__codelineno-97-3"></a>Tür: normal
-<a id="__codelineno-97-4" name="__codelineno-97-4" href="#__codelineno-97-4"></a>Okuma 1: patientA_rep1_normal_R1_001.fastq.gz
-<a id="__codelineno-97-5" name="__codelineno-97-5" href="#__codelineno-97-5"></a>Okuma 2: patientA_rep1_normal_R2_001.fastq.gz
-<a id="__codelineno-97-6" name="__codelineno-97-6" href="#__codelineno-97-6"></a>Okuma 1 boyutu: 10 okuma
-<a id="__codelineno-97-7" name="__codelineno-97-7" href="#__codelineno-97-7"></a>Okuma 2 boyutu: 10 okuma
+<div class="highlight"><span class="filename">patientA_stats.txt</span><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>Sample metadata: patientA
+<a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a>Replicate: 1
+<a id="__codelineno-97-3" name="__codelineno-97-3" href="#__codelineno-97-3"></a>Type: normal
+<a id="__codelineno-97-4" name="__codelineno-97-4" href="#__codelineno-97-4"></a>Read 1: patientA_rep1_normal_R1_001.fastq.gz
+<a id="__codelineno-97-5" name="__codelineno-97-5" href="#__codelineno-97-5"></a>Read 2: patientA_rep1_normal_R2_001.fastq.gz
+<a id="__codelineno-97-6" name="__codelineno-97-6" href="#__codelineno-97-6"></a>Read 1 size: 10 reads
+<a id="__codelineno-97-7" name="__codelineno-97-7" href="#__codelineno-97-7"></a>Read 2 size: 10 reads
 </code></pre></div>
 </details>
 <p>Süreç girdilerimizi aldı ve tasarlandığı gibi hasta meta verilerini içeren yeni bir dosya oluşturdu.
@@ -6612,11 +6612,11 @@ Bu hakkında daha fazla bilgiyi <a href="../metadata/">Meta veri ve meta map'ler
 <li>Dosya özelliklerini alma</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-117-1" name="__codelineno-117-1" href="#__codelineno-117-1"></a><span class="w"> </span><span class="n">ch_files</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myFile</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-117-2" name="__codelineno-117-2" href="#__codelineno-117-2"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya nesne sınıfı: ${myFile.class}&quot;</span>
-<a id="__codelineno-117-3" name="__codelineno-117-3" href="#__codelineno-117-3"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Dosya adı: ${myFile.name}&quot;</span>
-<a id="__codelineno-117-4" name="__codelineno-117-4" href="#__codelineno-117-4"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Basit ad: ${myFile.simpleName}&quot;</span>
-<a id="__codelineno-117-5" name="__codelineno-117-5" href="#__codelineno-117-5"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Uzantı: ${myFile.extension}&quot;</span>
-<a id="__codelineno-117-6" name="__codelineno-117-6" href="#__codelineno-117-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Üst dizin: ${myFile.parent}&quot;</span>
+<a id="__codelineno-117-2" name="__codelineno-117-2" href="#__codelineno-117-2"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File object class: ${myFile.class}&quot;</span>
+<a id="__codelineno-117-3" name="__codelineno-117-3" href="#__codelineno-117-3"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;File name: ${myFile.name}&quot;</span>
+<a id="__codelineno-117-4" name="__codelineno-117-4" href="#__codelineno-117-4"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Simple name: ${myFile.simpleName}&quot;</span>
+<a id="__codelineno-117-5" name="__codelineno-117-5" href="#__codelineno-117-5"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Extension: ${myFile.extension}&quot;</span>
+<a id="__codelineno-117-6" name="__codelineno-117-6" href="#__codelineno-117-6"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="s2">&quot;Parent directory: ${myFile.parent}&quot;</span>
 <a id="__codelineno-117-7" name="__codelineno-117-7" href="#__codelineno-117-7"></a><span class="o">}</span>
 </code></pre></div>
 </li>

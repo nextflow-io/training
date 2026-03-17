@@ -1551,7 +1551,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -3044,10 +3044,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3114,10 +3114,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3398,7 +3398,7 @@
 
 <h1 id="bolum-3-coklu-ornek-toplama">Bölüm 3: Çoklu örnek toplama<a class="headerlink" href="#bolum-3-coklu-ornek-toplama" title="Permanent link">&para;</a></h1>
 <p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> Yapay zeka destekli çeviri - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">daha fazla bilgi ve iyileştirme önerileri</a></span></p>
-<p>Bölüm 2'de, her örneği bağımsız olarak işleyen örnek başına bir işleme boru hattı oluşturdunuz.
+<p>Bölüm 2'de, her örneği bağımsız olarak işleyen örnek başına bir işleme pipeline'ı oluşturdunuz.
 Şimdi bunu genişleterek <a href="../01_method/">Bölüm 1</a>'de ele alınan çoklu örnek {AGGREGATION_METHOD} işlemini uygulayacağız.</p>
 <h2 id="gorev">Görev<a class="headerlink" href="#gorev" title="Permanent link">&para;</a></h2>
 <p>Kursun bu bölümünde, iş akışını aşağıdakileri yapacak şekilde genişleteceğiz:</p>
@@ -3414,7 +3414,7 @@
 <p>Bu bölüm doğrudan Bölüm 2'de üretilen iş akışı üzerine inşa edilmektedir.</p>
 <details class="info">
 <summary>Bu bölümden nasıl başlanır</summary>
-<p>Kursun bu bölümü, <a href="../02_single_sample/">Bölüm 2: Tek örnek işleme</a> bölümünü tamamladığınızı ve çalışan bir <code>{DOMAIN_DIR}.nf</code> boru hattınız olduğunu varsayar.</p>
+<p>Kursun bu bölümü, <a href="../02_single_sample/">Bölüm 2: Tek örnek işleme</a> bölümünü tamamladığınızı ve çalışan bir <code>{DOMAIN_DIR}.nf</code> pipeline'ınız olduğunu varsayar.</p>
 <p>Eğer Bölüm 2'yi tamamlamadıysanız veya bu bölüm için yeni başlamak istiyorsanız, Bölüm 2 çözümünü başlangıç noktanız olarak kullanabilirsiniz.
 <code>nf4-science/{DOMAIN_DIR}/</code> dizininin içinden şu komutları çalıştırın:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cp<span class="w"> </span>solutions/part2/<span class="o">{</span>DOMAIN_DIR<span class="o">}</span>-2.nf<span class="w"> </span><span class="o">{</span>DOMAIN_DIR<span class="o">}</span>.nf
@@ -3469,7 +3469,7 @@ Aşağıdaki komutu çalıştırarak başarıyla çalıştığını test edebili
 </code></pre></div>
 </details>
 <p>{VERIFY_OUTPUT_INSTRUCTIONS}</p>
-<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
 <p>Süreç komutlarını ve çıktılarını değiştirerek iş akışı davranışını nasıl uyarlayacağınızı biliyorsunuz.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
 <p>Çoklu örnek toplama adımını ekleyin.</p>
@@ -3490,8 +3490,8 @@ Aşağıdaki komutu çalıştırarak başarıyla çalıştığını test edebili
 </details>
 <p>{VERIFY_OUTPUT_INSTRUCTIONS}</p>
 <hr />
-<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
-<p>Örnekleri ayrı ayrı işleyen ve tüm örnekler genelinde sonuçları toplayan eksiksiz bir boru hattınız var.
+<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
+<p>Örnekleri ayrı ayrı işleyen ve tüm örnekler genelinde sonuçları toplayan eksiksiz bir pipeline'ınız var.
 Örnek başına çıktıları çoklu örnek analizi için toplamak üzere <code>collect()</code> gibi kanal operatörlerini nasıl kullanacağınızı biliyorsunuz.</p>
 <h3 id="srada-ne-var_1">Sırada ne var?<a class="headerlink" href="#srada-ne-var_1" title="Permanent link">&para;</a></h3>
 <p>Bu kursu tamamladığınız için tebrikler! Öğrendiklerinizi gözden geçirmek ve sonraki adımları keşfetmek için <a href="../next_steps/">kurs özetine</a> gidin.</p><style type="text/css">.quiz {

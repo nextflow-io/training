@@ -1868,7 +1868,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -3657,21 +3657,21 @@
 Kurs boyunca çalışmak için bu talimatları paralel olarak açık tutmanız gerekecektir.</p>
 <p><a href="https://codespaces.new/nextflow-io/training?quickstart=1&amp;ref=master"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
 <h3 id="ortam-temelleri">Ortam temelleri<a class="headerlink" href="#ortam-temelleri" title="Permanent link">&para;</a></h3>
-<p>Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılım, kod ve verileri içerir, böylece kendiniz hiçbir şey yüklemeniz gerekmez.</p>
+<p>Bu eğitim ortamı, eğitim kursunda çalışmak için gerekli tüm yazılım, kod ve verileri içerir; böylece kendiniz hiçbir şey yüklemeniz gerekmez.</p>
 <p>Codespace, dosya sistemi gezgini, kod editörü ve terminal shell içeren bir VSCode arayüzüyle kurulmuştur.
-Kurs sırasında verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VScode arayüzünün bu üç bölümüne atıfta bulunur.</p>
+Kurs sırasında verilen tüm talimatlar (örn. 'dosyayı açın', 'kodu düzenleyin' veya 'bu komutu çalıştırın') aksi belirtilmedikçe VSCode arayüzünün bu üç bölümüne atıfta bulunur.</p>
 <p>Bu kursu kendi başınıza çalışıyorsanız, daha fazla ayrıntı için <a href="../../envsetup/01_setup/">ortam temelleri</a> ile tanışın.</p>
 <h3 id="versiyon-gereksinimleri">Versiyon gereksinimleri<a class="headerlink" href="#versiyon-gereksinimleri" title="Permanent link">&para;</a></h3>
-<p>Bu eğitim, v2 sözdizimi ayrıştırıcısı ETKİNLEŞTİRİLMİŞ olarak Nextflow 25.10.2 veya üstü için tasarlanmıştır.
+<p>Bu eğitim, v2 sözdizimi ayrıştırıcısı <strong>ETKİNLEŞTİRİLMİŞ</strong> olarak Nextflow 25.10.2 veya üstü için tasarlanmıştır.
 Yerel veya özel bir ortam kullanıyorsanız, <a href="../../info/nxf_versions/">burada</a> belgelendiği gibi doğru ayarları kullandığınızdan emin olun.</p>
 <h2 id="calsmaya-hazrlann">Çalışmaya hazırlanın<a class="headerlink" href="#calsmaya-hazrlann" title="Permanent link">&para;</a></h2>
 <p>Codespace'iniz çalışmaya başladığında, eğitime dalmadan önce yapmanız gereken iki şey var: bu kursa özel çalışma dizininizi ayarlayın ve sağlanan materyallere göz atın.</p>
 <h3 id="calsma-dizinini-ayarlayn">Çalışma dizinini ayarlayın<a class="headerlink" href="#calsma-dizinini-ayarlayn" title="Permanent link">&para;</a></h3>
-<p>Varsayılan olarak, codespace tüm eğitim kurslarının kökünde çalışma dizini ayarlanmış şekilde açılır, ancak bu kurs için <code>nextflow-run/</code> dizininde çalışacağız.</p>
+<p>Varsayılan olarak, codespace tüm eğitim kurslarının kökünde çalışma dizini ayarlanmış şekilde açılır; ancak bu kurs için <code>nextflow-run/</code> dizininde çalışacağız.</p>
 <p>Şimdi terminalde bu komutu çalıştırarak dizini değiştirin:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>nextflow-run/
 </code></pre></div>
-<p>VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz, böylece dosya gezgini kenar çubuğunda yalnızca ilgili dosyalar görünür:</p>
+<p>VSCode'u bu dizine odaklanacak şekilde ayarlayabilirsiniz; böylece dosya gezgini kenar çubuğunda yalnızca ilgili dosyalar görünür:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>code<span class="w"> </span>.
 </code></pre></div>
 <div class="admonition tip">
@@ -3684,7 +3684,7 @@ Yerel veya özel bir ortam kullanıyorsanız, <a href="../../info/nxf_versions/"
 <h3 id="saglanan-materyalleri-kesfedin">Sağlanan materyalleri keşfedin<a class="headerlink" href="#saglanan-materyalleri-kesfedin" title="Permanent link">&para;</a></h3>
 <p>Bu dizinin içeriğini eğitim çalışma alanının sol tarafındaki dosya gezginini kullanarak keşfedebilirsiniz.
 Alternatif olarak, <code>tree</code> komutunu kullanabilirsiniz.</p>
-<p>Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için <code>tree</code> çıktısını kullanıyoruz, bazen netlik için küçük değişikliklerle.</p>
+<p>Kurs boyunca, dizin yapısını ve içeriğini okunabilir bir biçimde temsil etmek için <code>tree</code> çıktısını kullanıyoruz; bazen netlik için küçük değişikliklerle.</p>
 <p>Burada ikinci seviyeye kadar bir içindekiler tablosu oluşturuyoruz:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tree<span class="w"> </span>.<span class="w"> </span>-L<span class="w"> </span><span class="m">2</span>
 </code></pre></div>

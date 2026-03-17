@@ -1551,7 +1551,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -3004,7 +3004,7 @@
   <a href="#1-modulleri-depolamak-icin-bir-dizin-olusturun" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Modülleri Depolamak İçin Bir Dizin Oluşturun
+        1. Modülleri depolamak için bir dizin oluşturun
       
     </span>
   </a>
@@ -3013,7 +3013,7 @@
   <a href="#2-sayhello-icin-bir-modul-olusturun" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. sayHello() için Bir Modül Oluşturun
+        2. sayHello() için bir modül oluşturun
       
     </span>
   </a>
@@ -3022,7 +3022,7 @@
   <a href="#vs-code-ile-modullerde-gezinme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        VS Code ile Modüllerde Gezinme
+        VS Code ile modüllerde gezinme
       
     </span>
   </a>
@@ -3031,7 +3031,7 @@
   <a href="#44-is-aksn-calstrn" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4.4. İş Akışını Çalıştırın
+        4.4. İş akışını çalıştırın
       
     </span>
   </a>
@@ -3040,7 +3040,7 @@
   <a href="#nf-coremodules-hakknda-bir-not" class="md-nav__link">
     <span class="md-ellipsis">
       
-        nf-core/modules Hakkında Bir Not
+        nf-core/modules hakkında bir not
       
     </span>
   </a>
@@ -3324,41 +3324,41 @@
 <p>Transkriptte gösterilen bölüm numaraları yalnızca bilgi amaçlıdır ve materyallerdeki tüm bölüm numaralarını kapsamayabilir.</p>
 </div>
 <h2 id="hos-geldiniz">Hoş Geldiniz<a class="headerlink" href="#hos-geldiniz" title="Permanent link">&para;</a></h2>
-<p>Merhaba ve Hello Nextflow'un dördüncü bölümüne tekrar hoş geldiniz. Bu bölüm tamamen modüllerle ilgili ve kursun oldukça kısa bir bölümü. Aslında çok fazla kod yazmayacağız; bu bölüm daha çok boru hattımızdaki kodu nasıl organize ettiğimizle ilgili.</p>
-<p>Şimdiye kadar her şeyi tek bir dosyaya koyuyorduk; bu gayet iyi bir yaklaşım ve aslında eskiden Nextflow boru hatlarını bu şekilde oluştururduk.</p>
-<p>Ancak boru hattı büyüdükçe betik giderek uzuyor, gezinmesi ve bakımı giderek zorlaşıyor; üstelik kodu paylaşmak da pek mümkün olmuyor.</p>
-<p>Nextflow modülleri, süreçleri ana betikten çıkarmamıza ve ardından içe aktarmamıza olanak tanır. Bu sayede kod üzerinde gezinmek kolaylaşır ve modül kodunu farklı boru hatları arasında paylaşabilir hale geliriz.</p>
-<p>Belgelerin ana sayfasındaki bu küçük diyagram kavramı güzel bir şekilde gösteriyor. Tek bir büyük betik yerine, farklı modül betiklerinden bu ayrı modül dosyalarını dahil edeceğiz; her şey iş akışına çekilecek ama tamamen aynı şekilde çalışmaya devam edecek.</p>
-<p>Hadi GitHub Codespaces'e geçelim ve biraz etrafı inceleyelim. Daha önce olduğu gibi, çalışma alanımı biraz temizledim. Eski Nextflow dizinlerini, work dizinini ve benzerlerini kaldırdım. Ancak bu dosyalar hâlâ duruyorsa sorun değil.</p>
-<p>Hello Modules dosyasında çalışmaya başlayacağım; bu dosya temelde önceki bölümün sonunda bıraktığımız hâliyle aynı. Burada üç sürecimiz var. Birkaç params, iş akışı bloğu var; bu blokta üç süreci çalıştırıyor ve kanallarla birbirine bağlıyoruz. Ardından çıktı kanallarını yayımlıyoruz ve bu dosyaların nasıl yayımlanacağını belirten çıktı bloğumuz var.</p>
-<h2 id="1-modulleri-depolamak-icin-bir-dizin-olusturun">1. Modülleri Depolamak İçin Bir Dizin Oluşturun<a class="headerlink" href="#1-modulleri-depolamak-icin-bir-dizin-olusturun" title="Permanent link">&para;</a></h2>
-<p>Şimdi, dediğim gibi, çok fazla kod yazmayacak ya da düzenlemeyeceğiz. Sadece mevcut kodu taşıyacağız. Nextflow modül dosyaları genellikle tek bir süreç içerir ve kurallara göre bunları normalde <code>modules</code> adlı bir dizinde tutarız. Ancak bu dizine istediğiniz adı verebilirsiniz. Ben buradaki depomda bir <code>modules</code> dizini oluşturacağım ve ardından her süreç için ayrı bir dosya oluşturacağım. Yani yeni dosya oluşturuyorum: <code>sayHello.nf</code>.</p>
-<h2 id="2-sayhello-icin-bir-modul-olusturun">2. sayHello() için Bir Modül Oluşturun<a class="headerlink" href="#2-sayhello-icin-bir-modul-olusturun" title="Permanent link">&para;</a></h2>
+<p>Merhaba ve Hello Nextflow'un dördüncü bölümüne tekrar hoş geldiniz. Bu bölüm tamamen modüllerle ilgili ve kursun oldukça kısa bir bölümü. Aslında çok fazla kod yazmayacağız; bu bölüm daha çok pipeline'ımızdaki kodu nasıl organize ettiğimizle ilgili.</p>
+<p>Şimdiye kadar her şeyi tek bir dosyaya koyuyorduk. Bu gayet iyi bir yaklaşım ve aslında eskiden Nextflow pipeline'larını bu şekilde oluştururduk.</p>
+<p>Ancak pipeline büyüdükçe betik giderek uzuyor, gezinmesi ve bakımı giderek zorlaşıyor. Üstelik bu yaklaşımda kodu paylaşmak da pek mümkün olmuyor.</p>
+<p>Nextflow modülleri, süreçleri ana betikten çıkarıp içe aktarmamıza olanak tanır. Bu sayede kod üzerinde gezinmek kolaylaşır ve modül kodunu farklı pipeline'lar arasında paylaşabilir hale geliriz.</p>
+<p>Belgelerin ana sayfasındaki bu küçük diyagram kavramı güzel bir şekilde gösteriyor. Tek bir büyük betik yerine, farklı modül betiklerinden bu ayrı modül dosyalarını dahil edeceğiz; her şey iş akışına çekilecek, ancak tam olarak aynı şekilde çalışmaya devam edecek.</p>
+<p>Hadi GitHub Codespaces'e geçelim ve biraz inceleyelim. Daha önce olduğu gibi, çalışma alanımı biraz temizledim. Eski Nextflow dizinlerini, work dizinini ve benzerlerini kaldırdım. Ancak bu dosyalar hâlâ elinizde olsa da sorun değil.</p>
+<p>Hello Modules dosyasında çalışmaya başlayacağım; bu dosya temelde önceki bölümün sonunda bıraktığımız haliyle aynı. İçinde üç sürecimiz var. Birkaç parametre, iş akışı bloğu var; burada üç süreci çalıştırıyor ve kanallarla birbirine bağlıyoruz. Ardından çıktı kanallarını yayımlıyor ve çıktı bloğunda bu dosyaların nasıl yayımlanacağını belirtiyoruz.</p>
+<h2 id="1-modulleri-depolamak-icin-bir-dizin-olusturun">1. Modülleri depolamak için bir dizin oluşturun<a class="headerlink" href="#1-modulleri-depolamak-icin-bir-dizin-olusturun" title="Permanent link">&para;</a></h2>
+<p>Şimdi, dediğim gibi, çok fazla kod yazmayacak ya da düzenlemeyeceğiz. Sadece mevcut kodu taşıyacağız. Nextflow modül dosyaları genellikle tek bir süreç içerir ve kurala göre bunları <code>modules</code> adlı bir dizinde tutarız. Ancak bu dizine istediğiniz adı verebilirsiniz. Ben buradaki repository'mde bir <code>modules</code> dizini oluşturacağım ve ardından her süreç için ayrı bir dosya oluşturacağım. Yeni dosya oluşturuyorum: <code>sayHello.nf</code>.</p>
+<h2 id="2-sayhello-icin-bir-modul-olusturun">2. sayHello() için bir modül oluşturun<a class="headerlink" href="#2-sayhello-icin-bir-modul-olusturun" title="Permanent link">&para;</a></h2>
 <p>Şimdi sürecimi alacağım ve bu kodu seçip ana Hello Modules dosyasından kesip buraya yapıştıracağım.</p>
 <p>Tabii ki bu tek başına bir şey yapmaz. Ana betiğimiz hâlâ o sürece ihtiyaç duyuyor, dolayısıyla onu bir şekilde geri çekmemiz gerekiyor. Bunu <code>include</code> ifadesiyle yapıyoruz.</p>
-<p><code>include</code> yazıyorum, ardından süslü parantezler açıyorum ve sürecin adını yazıyorum. Sonra <code>from</code> diyorum ve göreli bir dosya yolu veriyorum. Bu betik nerede kayıtlıysa oradan göreli olduğu için <code>./</code> ile başlıyor. Yani <code>modules/sayHello.nf</code>.</p>
-<p>VS Code uzantısının burada oldukça yardımcı olduğuna dikkat edin. Bu dosyayı bulup bulamadığını ve içe aktarmaya çalıştığım süreci bulup bulamadığını bize söylüyor. Kasıtlı olarak bir yazım hatası yaparsam hemen bir hata veriyor ve içe aktarmaya çalıştığım süreci bulamadığını söylüyor. Bu nedenle karşılaştığınız hatalara dikkat edin.</p>
-<p>İşte bu kadar. Sürecimiz hâlâ burada. Aşağıda herhangi bir değişiklik yapmaya gerek yok. Süreç aynı ada sahip ve tamamen aynı şekilde çalıştırılıyor. Tek fark, sürecin gerçek kodu artık ayrı bir dosyada.</p>
-<p>Nextflow iş akışını yeniden çalıştırabiliriz; tamamen aynı şekilde çalışacak. Kursun bu bölümünün geri kalanı da temelde bu üç süreci kendi dosyalarına taşımaktan ibaret.</p>
-<p>Hadi şimdi bunu yapalım. İkinci süreç için hızlıca yeni bir modül dosyası oluşturacağım: <code>convertToUpper.nf</code>. O kodu kesip oraya yapıştıracağım. Ardından onu da dahil edeceğim.</p>
-<p>Sonra <code>collectGreetings.nf</code> için yeni bir dosya oluşturacağım. Onu da kesiyorum.</p>
-<p>Çok fazla kesip yapıştırma var.</p>
-<p>Şimdi ana iş akışı betiğimiz aniden çok daha kısa, çok daha anlaşılır ve okunması çok daha kolay bir hâle geldi.</p>
-<p>Projenin artık farklı dosyalarla nasıl şekillenmeye başladığını görebilirsiniz. İstediğimiz yerlerde ayrıntılara dalabilir, boru hattındaki belirli adımları çok daha kolay bulabilir ve boru hattının ne yaptığına dair hızlıca genel bir bakış elde edebiliriz.</p>
-<h2 id="vs-code-ile-modullerde-gezinme">VS Code ile Modüllerde Gezinme<a class="headerlink" href="#vs-code-ile-modullerde-gezinme" title="Permanent link">&para;</a></h2>
-<p>Tabii ki bunun dezavantajı şu: büyük bir boru hattınız varsa çok sayıda modül dosyanız olacak ve bunlar birden fazla alt dizinde ya da çeşitli yerlerde organize edilmiş olabilir. Yine de burada küçük bir ipucu vermek istiyorum. VS Code uzantısı, kod tabanınızda gezinme ve kod hakkında bilgi verme konusunda oldukça iyidir.</p>
-<p>VS Code'un bu süreci anladığını ve üzerine geldiğimde küçük bir özet gösterdiğini görebilirsiniz; böylece kaynak koda gitmek zorunda kalmadan girdilerin ve çıktıların ne olduğunu görebiliyorum; bunlar genellikle bir iş akışında kullanırken en önemli bilgilerdir.</p>
-<p>Ayrıca Mac'te Command tuşunu basılı tutup süreç adına tıklarsam dosyayı doğrudan açıyor. Gerçek dosya yollarını düşünmek zorunda kalmadan oraya atlayabiliyorum. Bu özellik her yerde çalışıyor; süreçlerin çağrıldığı yerlerde de kullanabiliyorum. Bu da işleri gerçekten hızlandırıyor.</p>
-<h2 id="44-is-aksn-calstrn">4.4. İş Akışını Çalıştırın<a class="headerlink" href="#44-is-aksn-calstrn" title="Permanent link">&para;</a></h2>
-<p>Tamam, boru hattının hâlâ beklediğimiz gibi çalışıp çalışmadığını kontrol edelim. Terminali açalım. <code>nextflow run hello modules</code> yazalım ve herhangi bir sorun olmadan çalışıp çalışmadığını görelim.</p>
-<p>Umarım tüm bunun amacı boru hattının temelde değişmemiş olması, dolayısıyla önceki çalıştırmadan farklı bir şey görmemeniz gerekiyor. Buradaki çıktı tamamen aynı görünüyor ve aynı dosyaların hepsinin bulunduğu <code>results</code> dizinimizi görebiliyoruz; bu harika. Değişiklik olmaması iyi bir şey.</p>
-<h2 id="nf-coremodules-hakknda-bir-not">nf-core/modules Hakkında Bir Not<a class="headerlink" href="#nf-coremodules-hakknda-bir-not" title="Permanent link">&para;</a></h2>
-<p>Konuyu kapatmadan önce, modüller söz konusu olduğunda iş birliğinin gücüne kısaca değinmek istiyorum. Bu dosyalar benim depomda duruyor, dolayısıyla üzerlerinde nasıl iş birliği yapabileceğimiz hemen anlaşılmıyor. Bunu yapmanın birçok farklı yolu var, ancak muhtemelen en büyük ve en iyi bilinen örnek nf-core'dur.</p>
-<p>nf-core web sitesine gidip kaynaklar ve modüller bölümüne bakarsanız, nf-core'un devasa bir modül kütüphanesine sahip olduğunu görebilirsiniz; bunu görüntülediğimde neredeyse 1700'e yakın modül var. Favori araçlarımdan herhangi birinin adını yazabilir, başka birinin bunun için zaten bir modül yazıp yazmadığını bulabilir ve tüm girdileri, çıktıları, yazılım container'larını ve diğer bilgileri içeren bu önceden yazılmış modül sürecini görebilirim. Yan tarafta ise bu tek paylaşılan süreci kaç farklı nf-core boru hattının kullandığını görebilirsiniz.</p>
-<p>Bu biraz aşırı bir örnek, ancak kodun gerçekten yeniden kullanıldığını görebiliyorsunuz. GitHub kaynağına tıklarsam, yaptığımız şeyle tamamen aynı. Sadece bir dosyadaki büyük bir süreç.</p>
-<p>nf-core tarafında, bu dosyaları paylaşmak ve farklı depolara aktarmak için bazı teknikler kullanıyoruz. Bununla ilgili daha fazla bilgi edinmek istiyorsanız, özellikle nf-core kullanımı ve nf-core ile geliştirme hakkındaki kursuma göz atın. Ancak kod yeniden kullanımı kavramının ne kadar güçlü olabileceği konusunda size bir fikir vermek istedim.</p>
+<p><code>include</code> yazıyorum, ardından süslü parantezler açıyorum ve sürecin adını yazıyorum. Sonra <code>from</code> diyorum ve göreli bir dosya yolu veriyorum. Bu betik nerede kayıtlıysa oradan göreli olduğu için <code>./</code> ile başlıyor: <code>modules/sayHello.nf</code>.</p>
+<p>VS Code eklentisinin burada oldukça yardımcı olduğuna dikkat edin. Bu dosyayı bulup bulamadığını ve adını verdiğim süreci içerip içermediğini bize söylüyor. Kasıtlı olarak bir yazım hatası yaparsam hemen hata veriyor ve içe aktarmaya çalıştığım süreci bulamadığını söylüyor. Bu nedenle karşılaştığınız hatalara dikkat edin.</p>
+<p>İşte bu kadar. Sürecimiz hâlâ burada. Aşağıda herhangi bir değişiklik yapmaya gerek yok. Süreç aynı ada sahip ve tam olarak aynı şekilde çalıştırılıyor. Tek fark, sürecin gerçek kodu artık ayrı bir dosyada.</p>
+<p>Nextflow iş akışını yeniden çalıştırabiliriz; tam olarak aynı şekilde çalışacak. Kursun bu bölümünün geri kalanı da temelde bu üç süreci kendi dosyalarına taşımaktan ibaret.</p>
+<p>Hadi şimdi yapalım. İkinci süreç için hızlıca yeni bir modül dosyası oluşturacağım: <code>convertToUpper.nf</code>. O kodu kesip oraya yapıştırıyorum. Ardından onu da dahil ediyorum. Harika.</p>
+<p>Şimdi <code>collectGreetings.nf</code> için yeni bir dosya oluşturuyorum. Onu da kesiyorum.</p>
+<p>Çok fazla kesme, kopyalama ve yapıştırma var.</p>
+<p>Artık ana iş akışı betiğimiz aniden çok daha kısa, çok daha anlaşılır ve okunması çok daha kolay bir hale geldi.</p>
+<p>Projenin artık farklı dosyalarla nasıl şekillendiğini görebilirsiniz. İstediğimiz yerlerde ayrıntılara dalabilir, pipeline'daki belirli adımları çok daha kolay bulabilir ve pipeline'ın ne yaptığına dair hızlıca genel bir bakış elde edebiliriz.</p>
+<h2 id="vs-code-ile-modullerde-gezinme">VS Code ile modüllerde gezinme<a class="headerlink" href="#vs-code-ile-modullerde-gezinme" title="Permanent link">&para;</a></h2>
+<p>Tabii ki bunun dezavantajı şu: büyük bir pipeline'ınız varsa çok sayıda modül dosyanız olacak ve bunlar birden fazla alt dizinde ya da çeşitli yerlerde organize edilmiş olabilir. Yine de burada küçük bir ipucu vermek istiyorum. VS Code eklentisi, kod tabanınızda gezinme ve kod hakkında bilgi verme konusunda oldukça iyidir.</p>
+<p>VS Code'un bu süreci anladığını ve üzerine geldiğimde küçük bir özet gösterdiğini görebilirsiniz. Böylece kaynak koda gitmek zorunda kalmadan girdilerin ve çıktıların ne olduğunu görebiliyorum; bunlar bir iş akışında kullanırken genellikle en önemli bilgilerdir.</p>
+<p>Ayrıca Mac'te Command tuşunu basılı tutup süreç adına tıklarsam dosyayı doğrudan açıyor. Gerçek dosya yollarını düşünmek zorunda kalmadan direkt oraya atlayabiliyorum. Bu özellik her yerde çalışıyor; süreçlerin çağrıldığı yerlerde de kullanabilirsiniz. Bu da işleri gerçekten hızlandırıyor.</p>
+<h2 id="44-is-aksn-calstrn">4.4. İş akışını çalıştırın<a class="headerlink" href="#44-is-aksn-calstrn" title="Permanent link">&para;</a></h2>
+<p>Tamam, pipeline'ın hâlâ beklediğimiz gibi çalışıp çalışmadığını kontrol edelim. Terminali açalım. <code>nextflow run hello modules</code> diyelim ve herhangi bir sorun olmadan çalışıp çalışmadığını görelim.</p>
+<p>Umarım tüm bunun amacı pipeline'ın temelde değişmemiş olması, dolayısıyla önceki çalıştırmadan gerçekten farklı bir şey görmemeniz gerekiyor. Buradaki çıktı tamamen aynı görünüyor ve aynı dosyaların hepsinin bulunduğu <code>results</code> dizinimizi görebiliyoruz. Harika. Değişiklik olmaması iyi bir şey.</p>
+<h2 id="nf-coremodules-hakknda-bir-not">nf-core/modules hakkında bir not<a class="headerlink" href="#nf-coremodules-hakknda-bir-not" title="Permanent link">&para;</a></h2>
+<p>Bitirmeden önce, modüller söz konusu olduğunda iş birliğinin gücüne kısaca değinmek istiyorum. Bu dosyalar benim repository'mde duruyor, dolayısıyla üzerlerinde nasıl iş birliği yapabileceğimiz hemen anlaşılmıyor. Bunu yapmanın birçok farklı yolu var, ancak muhtemelen en büyük ve en iyi bilinen örnek nf-core'dur.</p>
+<p>nf-core web sitesine gidip kaynaklar ve modüller bölümüne bakarsanız, nf-core'un devasa bir modül kütüphanesine sahip olduğunu görebilirsiniz; bunu görüntülediğimde neredeyse 1700'e yakın modül var. Favori araçlarımdan herhangi birinin adını yazabilir, başka birinin bunun için zaten bir modül yazıp yazmadığını bulabilir ve tüm girdileri, çıktıları, yazılım konteynerlerini ve diğer bilgileri içeren bu önceden yazılmış modül sürecini görebilirim. Yan tarafta ise bu tek paylaşılan süreci kaç farklı nf-core pipeline'ının kullandığını görebilirsiniz.</p>
+<p>Bu biraz aşırı bir örnek, ancak kodun gerçekten yeniden kullanıldığını görebilirsiniz. GitHub kaynağına tıklarsam, yaptığımız şeyle tamamen aynı. Sadece bir dosyadaki büyük bir süreç.</p>
+<p>nf-core tarafında, bu dosyaları paylaşmak ve farklı repository'lere aktarmak için bazı teknikler kullanıyoruz. Bununla ilgili daha fazla bilgi edinmek istiyorsanız, özellikle nf-core kullanımı ve nf-core ile geliştirme hakkındaki kursuma göz atın. Ancak kod yeniden kullanımı kavramının ne kadar güçlü olabileceği konusunda size bir fikir vermek istedim.</p>
 <h2 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h2>
-<p>Modüller için bu kadar. Kursun kısa bir bölümü olduğunu söylemiştim. Sınava bakın, her şeyi anladığınızdan ve her şeyin hâlâ düzgün çalıştığından emin olun. Bir sonraki videoda görüşürüz; o video tamamen yazılım container'larıyla ilgili. Çok teşekkürler.</p><style type="text/css">.quiz {
+<p>Modüller için bu kadar. Size kısa bir bölüm olduğunu söylemiştim. Sınava bakın, her şeyi anladığınızdan ve her şeyin hâlâ düzgün çalıştığından emin olun. Bir sonraki videoda görüşürüz; o video tamamen yazılım konteynerleriyle ilgili. Çok teşekkürler.</p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;

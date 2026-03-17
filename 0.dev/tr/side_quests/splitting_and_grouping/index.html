@@ -1555,7 +1555,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -2624,10 +2624,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2755,10 +2755,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2803,10 +2803,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozetle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2829,10 +2829,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ozet_3" class="md-nav__link">
+  <a href="#ozetle_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2843,7 +2843,7 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet_4" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
         Özet
@@ -3787,10 +3787,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3918,10 +3918,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3966,10 +3966,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozetle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3992,10 +3992,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ozet_3" class="md-nav__link">
+  <a href="#ozetle_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -4006,7 +4006,7 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet_4" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
         Özet
@@ -4349,7 +4349,7 @@ Bu, burada yoğun şekilde kullanacağımız <code>splitCsv</code> ile CSV dosya
 </code></pre></div>
 <h4 id="materyalleri-inceleyin">Materyalleri inceleyin<a class="headerlink" href="#materyalleri-inceleyin" title="Permanent link">&para;</a></h4>
 <p>Bir ana iş akışı dosyası ve <code>samplesheet.csv</code> adlı bir örnek sayfası içeren bir <code>data</code> dizini bulacaksınız.</p>
-<div class="highlight"><span class="filename">Dizin içeriği</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
+<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── data</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">│   └── samplesheet.csv</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="go">└── main.nf</span>
@@ -4592,9 +4592,9 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-18-9" name="__codelineno-18-9"></a><span class="hll"><span class="w">    </span><span class="n">ch_tumor_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_samples</span>
 </span><a id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;tumor&#39;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="hll"><span class="w">    </span><span class="n">ch_normal_samples</span>
-</span><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal örnek: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+</span><a id="__codelineno-18-12" name="__codelineno-18-12"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </span><a id="__codelineno-18-13" name="__codelineno-18-13"></a><span class="hll"><span class="w">    </span><span class="n">ch_tumor_samples</span>
-</span><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tümör örnek: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+</span><a id="__codelineno-18-14" name="__codelineno-18-14"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4617,18 +4617,18 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="go">Tümör örnek: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="go">Tümör örnek: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="go">Normal örnek: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]</span>
-<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="go">Normal örnek: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="go">Normal örnek: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="go">Normal örnek: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
-<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="go">Tümör örnek: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]</span>
-<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">Tümör örnek: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="go">Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="go">Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="go">Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="go">Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="go">Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="go">Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="go">Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
 <p>Normal ve tümör örneklerini iki farklı kanala ayırdık ve çıktıda farklı şekilde etiketlemek için <code>view()</code>'a bir closure sağladık: <code>ch_tumor_samples.view{'Tümör örnek: ' + it}</code>.</p>
-<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
 <p>Bu bölümde öğrendikleriniz:</p>
 <ul>
 <li><strong>Verileri filtreleme</strong>: <code>filter</code> ile verileri nasıl filtreleyeceğiniz</li>
@@ -4652,14 +4652,14 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
 <a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="go">Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b</span>
 <a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">Tümör örnek: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">Tümör örnek: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">Normal örnek: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">Normal örnek: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]</span>
-<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="go">Normal örnek: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]</span>
-<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="go">Normal örnek: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
-<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="go">Tümör örnek: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]</span>
-<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="go">Tümör örnek: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="go">Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="go">Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="go">Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="go">Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="go">Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="go">Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="go">Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="go">Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
 <p><code>id</code> alanının her meta map'teki ilk öğe olduğunu görebiliriz. <code>join</code>'in çalışması için her tuple'daki <code>id</code> alanını izole etmeliyiz. Bundan sonra, iki kanalı birleştirmek için <code>join</code> operatörünü kolayca kullanabiliriz.</p>
@@ -4684,9 +4684,9 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">        </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;tumor&#39;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="w">    </span><span class="n">ch_normal_samples</span>
-<a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal örnek: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+<a id="__codelineno-24-14" name="__codelineno-24-14"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 <a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="w">    </span><span class="n">ch_tumor_samples</span>
-<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tümör örnek: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+<a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -4702,9 +4702,9 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="w">    </span><span class="n">ch_tumor_samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ch_samples</span>
 <a id="__codelineno-25-10" name="__codelineno-25-10"></a><span class="w">        </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;tumor&#39;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-25-11" name="__codelineno-25-11"></a><span class="w">    </span><span class="n">ch_normal_samples</span>
-<a id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal örnek: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 <a id="__codelineno-25-13" name="__codelineno-25-13"></a><span class="w">    </span><span class="n">ch_tumor_samples</span>
-<a id="__codelineno-25-14" name="__codelineno-25-14"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tümör örnek: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -4717,14 +4717,14 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="go">Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
-<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="go">Tümör örnek: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="go">Tümör örnek: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="go">Normal örnek: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]</span>
-<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="go">Normal örnek: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]</span>
-<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="go">Tümör örnek: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]</span>
-<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="go">Tümör örnek: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
-<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="go">Normal örnek: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]</span>
-<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="go">Normal örnek: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="go">Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="go">Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="go">Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="go">Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="go">Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="go">Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="go">Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="go">Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]</span>
 </code></pre></div>
 </details>
 <p>Belki de ince bir fark, ancak her tuple'daki ilk öğenin <code>id</code> alanı olduğunu görmelisiniz.</p>
@@ -4770,9 +4770,9 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 <a id="__codelineno-29-11" name="__codelineno-29-11"></a><span class="w">        </span><span class="o">.</span><span class="na">filter</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;tumor&#39;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="hll"><span class="w">    </span><span class="n">ch_normal_samples</span>
-</span><a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal örnek: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+</span><a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Normal sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </span><a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="hll"><span class="w">    </span><span class="n">ch_tumor_samples</span>
-</span><a id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tümör örnek: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
+</span><a id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="s1">&#39;Tumor sample: &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">it</span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5087,7 +5087,7 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="go">[[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]</span>
 </code></pre></div>
 </details>
-<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
 <p>Bu bölümde öğrendikleriniz:</p>
 <ul>
 <li><strong>Tuple'ları manipüle etme</strong>: Bir tuple'daki bir alanı izole etmek için <code>map</code> nasıl kullanılır</li>
@@ -5241,7 +5241,7 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 </details>
 <p>Verilerinizi doğru yapıya zorlamak için <code>map</code> kullanmak zor olabilir, ancak etkili veri manipülasyonu için çok önemlidir.</p>
 <p>Artık her örneği tüm genomik aralıklarda tekrarladık; paralel olarak işlenebilecek birden fazla bağımsız analiz birimi oluşturduk. Peki ya ilişkili örnekleri tekrar bir araya getirmek istersek? Bir sonraki bölümde, ortak özellikleri paylaşan örnekleri nasıl gruplayacağımızı öğreneceğiz.</p>
-<h3 id="ozet_2">Özet<a class="headerlink" href="#ozet_2" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_2">Özetle<a class="headerlink" href="#ozetle_2" title="Permanent link">&para;</a></h3>
 <p>Bu bölümde öğrendikleriniz:</p>
 <ul>
 <li><strong>Örnekleri aralıklara yayma</strong>: Örnekleri aralıklara yaymak için <code>combine</code> nasıl kullanılır</li>
@@ -5432,7 +5432,7 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <p class="admonition-title">Not</p>
 <p><a href="https://www.nextflow.io/docs/latest/reference/operator.html#transpose"><code>transpose</code></a>, groupTuple'ın tersidir. Bir kanaldaki öğeleri açar ve düzleştirir. Yukarıda gerçekleştirdiğimiz gruplamayı geri almak için <code>transpose</code> eklemeyi deneyin!</p>
 </div>
-<h3 id="ozet_3">Özet<a class="headerlink" href="#ozet_3" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_3">Özetle<a class="headerlink" href="#ozetle_3" title="Permanent link">&para;</a></h3>
 <p>Bu bölümde öğrendikleriniz:</p>
 <ul>
 <li><strong>İlgili örnekleri gruplama</strong>: Örnekleri ortak özelliklere göre toplamak için <code>groupTuple</code> nasıl kullanılır</li>
@@ -5441,7 +5441,7 @@ Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebili
 <li><strong>Teknik replik işleme</strong>: Aynı deneysel koşulları paylaşan örnekler nasıl gruplandırılır</li>
 </ul>
 <hr />
-<h2 id="ozet_4">Özet<a class="headerlink" href="#ozet_4" title="Permanent link">&para;</a></h2>
+<h2 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h2>
 <p>Bu yan görevde, kanalları kullanarak verileri bölmeyi ve gruplamayı öğrendiniz.</p>
 <p>Verileri pipeline boyunca akarken değiştirerek, döngüler veya while ifadeleri kullanmadan ölçeklenebilir bir pipeline oluşturabilirsiniz; bu, daha geleneksel yaklaşımlara göre çeşitli avantajlar sunar:</p>
 <ul>

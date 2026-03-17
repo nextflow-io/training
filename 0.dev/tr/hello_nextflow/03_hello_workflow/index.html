@@ -1060,10 +1060,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -1258,10 +1258,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -1384,10 +1384,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozetle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -1510,10 +1510,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_3" class="md-nav__link">
+  <a href="#ozetle_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2384,7 +2384,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -3940,10 +3940,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -4138,10 +4138,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -4264,10 +4264,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozetle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -4390,10 +4390,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_3" class="md-nav__link">
+  <a href="#ozetle_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -4782,9 +4782,9 @@ Bu bölüm için, <code>results/hello_workflow/</code> altında.</p>
 </ul>
 <h3 id="11-buyuk-harf-donusumu-komutunu-tanmlayn-ve-terminalde-test-edin">1.1. Büyük harf dönüşümü komutunu tanımlayın ve terminalde test edin<a class="headerlink" href="#11-buyuk-harf-donusumu-komutunu-tanmlayn-ve-terminalde-test-edin" title="Permanent link">&para;</a></h3>
 <p>Selamlamaları büyük harfe dönüştürmek için, 'metin değiştirme' anlamına gelen <code>tr</code> adlı klasik bir UNIX aracını aşağıdaki sözdizimi ile kullanacağız:</p>
-<div class="highlight"><span class="filename">Sözdizimi</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tr<span class="w"> </span><span class="s1">&#39;[a-z]&#39;</span><span class="w"> </span><span class="s1">&#39;[A-Z]&#39;</span>
+<div class="highlight"><span class="filename">Syntax</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tr<span class="w"> </span><span class="s1">&#39;[a-z]&#39;</span><span class="w"> </span><span class="s1">&#39;[A-Z]&#39;</span>
 </code></pre></div>
-<p>Bu, aksanlı harfleri dikkate almayan çok basit bir metin değiştirme tek satırıdır, bu nedenle örneğin 'Holà' 'HOLà' olacaktır, ancak Nextflow kavramlarını göstermek için yeterince iyi bir iş çıkaracaktır ve önemli olan da budur.</p>
+<p>Bu, aksanlı harfleri dikkate almayan çok basit bir metin değiştirme tek satırıdır; örneğin 'Holà' 'HOLà' olacaktır. Ancak Nextflow kavramlarını göstermek için yeterince iyi bir iş çıkaracaktır ve önemli olan da budur.</p>
 <p>Test etmek için, <code>echo 'Hello World'</code> komutunu çalıştırabilir ve çıktısını <code>tr</code> komutuna yönlendirebiliriz:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;Hello World&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;[a-z]&#39;</span><span class="w"> </span><span class="s1">&#39;[A-Z]&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>UPPER-output.txt
 </code></pre></div>
@@ -5046,7 +5046,7 @@ Varsayılan olarak, burada yaptığımız gibi tek bir makinede çalışırken, 
 <p>Şimdi, devam etmeden önce, yaptığımız tek şeyin <code>sayHello</code>'nun çıktısını <code>convertToUpper</code>'ın girdisine bağlamak olduğunu ve iki sürecin seri olarak çalıştırılabildiğini düşünün.
 Nextflow, bireysel girdi ve çıktı dosyalarını işleme ve bunları iki komut arasında iletme zorlu işini bizim için yaptı.</p>
 <p>Bu, Nextflow kanallarının bu kadar güçlü olmasının nedenlerinden biridir: iş akışı adımlarını birbirine bağlamayla ilgili zahmetli işlerle ilgilenirler.</p>
-<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
 <p>Bir adımın çıktısını bir sonraki adıma girdi olarak sağlayarak süreçleri nasıl zincirleme şeklinde bağlayacağınızı biliyorsunuz.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
 <p>Toplu süreç çağrılarından çıktıları nasıl toplayıp tek bir sürece besleyeceğinizi öğrenin.</p>
@@ -5297,8 +5297,8 @@ Bunu doğrudan <code>collectGreetings()</code> süreç çağrısına bağlayabil
 <a id="__codelineno-34-74" name="__codelineno-34-74"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">())</span>
 <a id="__codelineno-34-75" name="__codelineno-34-75"></a>
 <a id="__codelineno-34-76" name="__codelineno-34-76"></a><span class="hll"><span class="w">    </span><span class="c1">// isteğe bağlı view ifadeleri</span>
-</span><a id="__codelineno-34-77" name="__codelineno-34-77"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;collect öncesi: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-34-78" name="__codelineno-34-78"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;collect sonrası: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-34-77" name="__codelineno-34-77"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before collect: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-34-78" name="__codelineno-34-78"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After collect: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
 </span><a id="__codelineno-34-79" name="__codelineno-34-79"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5326,10 +5326,10 @@ Bunu doğrudan <code>collectGreetings()</code> süreç çağrısına bağlayabil
 <a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="go">[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔</span>
 <a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="go">[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔</span>
 <a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a><span class="go">[1e/83586c] collectGreetings   | 1 of 1 ✔</span>
-<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="go">collect öncesi: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt</span>
-<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="go">collect öncesi: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt</span>
-<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="go">collect öncesi: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt</span>
-<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="go">collect sonrası: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]</span>
+<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="go">Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt</span>
+<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="go">Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt</span>
+<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="go">Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt</span>
+<a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="go">After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]</span>
 </code></pre></div>
 </details>
 <p>Başarıyla çalışıyor, ancak log çıktısı bundan biraz daha dağınık görünebilir (okunabilirlik için temizledik).</p>
@@ -5381,14 +5381,14 @@ Bu, öğelerin süreç çağrılarından geçme sırasının tutarlı olmasını
 <a id="__codelineno-40-74" name="__codelineno-40-74"></a><span class="w">    </span><span class="n">collectGreetings</span><span class="o">(</span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">())</span>
 <a id="__codelineno-40-75" name="__codelineno-40-75"></a>
 <a id="__codelineno-40-76" name="__codelineno-40-76"></a><span class="hll"><span class="w">    </span><span class="c1">// isteğe bağlı view ifadeleri</span>
-</span><a id="__codelineno-40-77" name="__codelineno-40-77"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;collect öncesi: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
-</span><a id="__codelineno-40-78" name="__codelineno-40-78"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;collect sonrası: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-40-77" name="__codelineno-40-77"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Before collect: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-40-78" name="__codelineno-40-78"></a><span class="hll"><span class="w">    </span><span class="n">convertToUpper</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">collect</span><span class="o">().</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;After collect: $contents&quot;</span><span class="w"> </span><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <p>Bu temelde 2.4.2 noktasının ters işlemidir.</p>
-<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
 <p>Toplu süreç çağrılarından çıktıları nasıl toplayıp ortak bir analiz veya özetleme adımına besleyeceğinizi biliyorsunuz.</p>
 <p>Özetlemek gerekirse, şu ana kadar oluşturduğunuz şey bu:</p>
 <figure class="excalidraw">
@@ -5574,7 +5574,7 @@ Hadi bunu bir <code>batch</code> parametresi tanımlamak için kullanalım (temb
 </code></pre></div>
 </details>
 <p>Artık parametreyi uygun şekilde belirttiğimiz sürece, diğer girdi grupları üzerindeki sonraki çalıştırmalar önceki sonuçları bozmayacak.</p>
-<h3 id="ozet_2">Özet<a class="headerlink" href="#ozet_2" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_2">Özetle<a class="headerlink" href="#ozetle_2" title="Permanent link">&para;</a></h3>
 <p>Bir sürece birden fazla girdi nasıl ileteceğinizi biliyorsunuz.</p>
 <h3 id="srada-ne-var_2">Sırada ne var?<a class="headerlink" href="#srada-ne-var_2" title="Permanent link">&para;</a></h3>
 <p>Birden fazla çıktıyı nasıl yayınlayıp uygun şekilde işleyeceğinizi öğrenin.</p>
@@ -5608,7 +5608,7 @@ Bu çıktı kanallarına isimler vermeyi seçebiliriz, bu da daha sonra bunlara 
 <a id="__codelineno-52-56" name="__codelineno-52-56"></a><span class="hll"><span class="w">    </span><span class="n">count_greetings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_files</span><span class="o">.</span><span class="na">size</span><span class="o">()</span>
 </span><a id="__codelineno-52-57" name="__codelineno-52-57"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
 <a id="__codelineno-52-58" name="__codelineno-52-58"></a><span class="s2">    cat ${input_files} &gt; &#39;COLLECTED-${batch_name}-output.txt&#39;</span>
-<a id="__codelineno-52-59" name="__codelineno-52-59"></a><span class="hll"><span class="s2">    echo &#39;Bu grupta ${count_greetings} selamlama vardı.&#39; &gt; &#39;${batch_name}-report.txt&#39;</span>
+<a id="__codelineno-52-59" name="__codelineno-52-59"></a><span class="hll"><span class="s2">    echo &#39;There were ${count_greetings} greetings in this batch.&#39; &gt; &#39;${batch_name}-report.txt&#39;</span>
 </span><a id="__codelineno-52-60" name="__codelineno-52-60"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 </div>
@@ -5744,33 +5744,33 @@ Bölüm 5'te (Konteynerler) pipeline'ımıza bir adım daha eklediğimizde, <cod
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-86">86</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello-workflow.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-80">80</a></span>
+<span class="normal"><a href="#__codelineno-59-81">81</a></span>
+<span class="normal"><a href="#__codelineno-59-82">82</a></span>
+<span class="normal"><a href="#__codelineno-59-83">83</a></span>
+<span class="normal"><a href="#__codelineno-59-84">84</a></span>
+<span class="normal"><a href="#__codelineno-59-85">85</a></span>
+<span class="normal"><a href="#__codelineno-59-86">86</a></span>
 <span class="normal"><a href="#__codelineno-59-87">87</a></span>
 <span class="normal"><a href="#__codelineno-59-88">88</a></span>
 <span class="normal"><a href="#__codelineno-59-89">89</a></span>
 <span class="normal"><a href="#__codelineno-59-90">90</a></span>
 <span class="normal"><a href="#__codelineno-59-91">91</a></span>
 <span class="normal"><a href="#__codelineno-59-92">92</a></span>
-<span class="normal"><a href="#__codelineno-59-93">93</a></span>
-<span class="normal"><a href="#__codelineno-59-94">94</a></span>
-<span class="normal"><a href="#__codelineno-59-95">95</a></span>
-<span class="normal"><a href="#__codelineno-59-96">96</a></span>
-<span class="normal"><a href="#__codelineno-59-97">97</a></span>
-<span class="normal"><a href="#__codelineno-59-98">98</a></span>
-<span class="normal"><a href="#__codelineno-59-99">99</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-86" name="__codelineno-59-86"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-59-87" name="__codelineno-59-87"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-59-88" name="__codelineno-59-88"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
-<a id="__codelineno-59-89" name="__codelineno-59-89"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-59-90" name="__codelineno-59-90"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-59-91" name="__codelineno-59-91"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-59-92" name="__codelineno-59-92"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
-<a id="__codelineno-59-93" name="__codelineno-59-93"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-59-94" name="__codelineno-59-94"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-59-95" name="__codelineno-59-95"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-59-96" name="__codelineno-59-96"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
-<a id="__codelineno-59-97" name="__codelineno-59-97"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
-<a id="__codelineno-59-98" name="__codelineno-59-98"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-59-99" name="__codelineno-59-99"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-59-93">93</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-80" name="__codelineno-59-80"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-59-81" name="__codelineno-59-81"></a><span class="w">    </span><span class="n">first_output</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-59-82" name="__codelineno-59-82"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
+<a id="__codelineno-59-83" name="__codelineno-59-83"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-59-84" name="__codelineno-59-84"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-59-85" name="__codelineno-59-85"></a><span class="w">    </span><span class="n">uppercased</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-59-86" name="__codelineno-59-86"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
+<a id="__codelineno-59-87" name="__codelineno-59-87"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-59-88" name="__codelineno-59-88"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-59-89" name="__codelineno-59-89"></a><span class="w">    </span><span class="n">collected</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-59-90" name="__codelineno-59-90"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;hello_workflow&#39;</span>
+<a id="__codelineno-59-91" name="__codelineno-59-91"></a><span class="w">        </span><span class="n">mode</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-59-92" name="__codelineno-59-92"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-59-93" name="__codelineno-59-93"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5797,7 +5797,7 @@ Sadece yeni çıktıyı eklememiz gerekiyor.</p>
 İş akışının işlenen selamlama sayısını doğru bir şekilde raporladığını doğrulamak için açın.</p>
 <details class="abstract">
 <summary>Dosya içeriği</summary>
-<div class="highlight"><span class="filename">trio-report.txt</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>Bu grupta 3 selamlama vardı.
+<div class="highlight"><span class="filename">trio-report.txt</span><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>There were 3 greetings in this batch.
 </code></pre></div>
 </details>
 <figure class="excalidraw">
@@ -5809,7 +5809,7 @@ Sadece yeni çıktıyı eklememiz gerekiyor.</p>
 </figure>
 
 <p>CSV'ye daha fazla selamlama eklemekten ve ne olduğunu test etmekten çekinmeyin.</p>
-<h3 id="ozet_3">Özet<a class="headerlink" href="#ozet_3" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_3">Özetle<a class="headerlink" href="#ozetle_3" title="Permanent link">&para;</a></h3>
 <p>Bir sürecin birden fazla adlandırılmış çıktı yayınlamasını nasıl sağlayacağınızı ve bunları iş akışı düzeyinde uygun şekilde nasıl işleyeceğinizi biliyorsunuz.</p>
 <p>Daha genel olarak, süreçleri yaygın yollarla birbirine bağlamayla ilgili temel ilkeleri anlıyorsunuz.</p>
 <h3 id="srada-ne-var_3">Sırada ne var?<a class="headerlink" href="#srada-ne-var_3" title="Permanent link">&para;</a></h3>

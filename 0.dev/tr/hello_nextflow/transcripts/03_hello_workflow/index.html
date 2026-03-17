@@ -1551,7 +1551,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -3091,10 +3091,10 @@
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet-ve-test" class="md-nav__link">
+  <a href="#ozetle-ve-test" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet ve test
+        Özetle ve test
       
     </span>
   </a>
@@ -3467,8 +3467,7 @@
 <p><code>path</code> diyoruz çünkü yine, istersek burada bir değişken yayımlayabiliriz <code>val</code> ile, ama <code>path</code> diyeceğiz. Ardından beklenen dosya adı. Burada vurgulanmadığına dikkat edin. Bunun nedeni tek tırnak kullanmam. Çift tırnak kullanmam gerekiyor.</p>
 <h2 id="412-rapor-dosyasn-yaymlayn-ve-cktlar-adlandrn">4.1.2. Rapor dosyasını yayımlayın ve çıktıları adlandırın<a class="headerlink" href="#412-rapor-dosyasn-yaymlayn-ve-cktlar-adlandrn" title="Permanent link">&para;</a></h2>
 <p>Tamam, bu harika. Artık bu çıktılara burada tıpkı burada yaptığım gibi erişebiliriz. Ama şimdi bu farklı nesnelerin bir dizisi; bu yüzden ilkini almak için <code>collectGreetings.out[0]</code> veya yeni raporumuz olan ikincisini almak için <code>[1]</code> yapabilirim.</p>
-<p>Ama bunu yapmayı pek sevmiyorum çünkü indeks saymayı karıştırmak oldukça kolay. Oturmuş çok fazla satır sayıyorsunuz, yeni bir çıktı ekliyorsunuz ve aniden her şey bozuluyor. Bu yüzden</p>
-<p>her şeyi isme göre referans vermek çok daha güzel. Bunu burada <code>emit</code> adlı özel bir anahtar ile yapabiliriz.</p>
+<p>Ama bunu yapmayı pek sevmiyorum çünkü indeks saymayı karıştırmak oldukça kolay. Oturmuş çok fazla satır sayıyorsunuz, yeni bir çıktı ekliyorsunuz ve aniden her şey bozuluyor. Bu yüzden her şeyi isme göre referans vermek çok daha güzel. Bunu burada <code>emit</code> adlı özel bir anahtar ile yapabiliriz.</p>
 <p>Buna istediğimiz her şeyi çağırabiliriz. <code>emit outfile</code> ve <code>emit reports</code> diyelim. Bunları tanımlarsanız - bunu bir ya da birçok üzerinde yapabilirsiniz, size kalmış - artık buraya gidip bunun yerine <code>.out.reports</code> yapabilir ve sadece isme göre çağırabilirim. Bu, kodunuzu okuduğunuzda anlamak çok daha kolay ve koddaki değişikliklere karşı daha güvenli.</p>
 <p>Buraya <code>.out.report</code> ekledim, ama aslında yayımlanan iki farklı çıktıya sahip olmam gerekiyor. Bu yüzden <code>collected</code> ve <code>report</code> gibi daha ilginç bir şey olarak yeniden adlandıracağım. Peki buna ne demiştim? <code>outfile</code> dedim, pardon. Yani burada emit adları <code>outfile</code> ve <code>report</code>. Çünkü iki farklı çıktı kanalı yayımlıyoruz ve bu yüzden publish bloğunda her ikisine de referans vermemiz gerekiyor.</p>
 <p>Ardından bunları output bloğunda da tanımlamamız gerekiyor. Yani bunu <code>collected</code> olarak yeniden adlandırdım ve yine <code>reports</code> için. Burada biraz ayrıntılı, ama yeni bir iş akışını okumaya geldiğinizde gerçekten yararlı; burada yan yana listelenen tüm farklı çıktıları, tüm farklı kanalları görmek. Bunu daha az ayrıntılı yapmanın yolları var; buna daha sonra değineceğiz.</p>
@@ -3476,7 +3475,7 @@
 <p>Umarım şimdi temelde daha önce olduğu gibi çalışmalı. Burada <code>replicate_two</code> adında yeni bir çıktı dosyası alacağız: <code>report</code>. Ve işte burada. Açıldı ve toplu işteki üç selamlama var diyor; beklediğimiz şey bu, yani mükemmel.</p>
 <p>Nextflow kodunda yürütüldüğünü kanıtlamak için work dizinine girersem - Bash script'inde değil - <code>cat work/command.sh</code>'a gidebilirim ve burada sadece bu string'i doğrudan yankıladığını göreceksiniz. <code>There were three greetings in this batch</code> ve bu değişken Nextflow tarafından interpolasyon yapıldı. <code>.command.sh</code> dosyasını yazmadan önce script bloğunda hesaplandı. Yani sonuç değişken hesaplaması, bu durumda compute ortamınızda yürütülmeden önce temelde buna hard coded edilmiş durumda.</p>
 <p>Böylece script bloğu ile onun üzerindeki herhangi bir şey arasındaki o ayrımı görebilirsiniz. Umarım bu mantıklı gelir.</p>
-<h2 id="ozet-ve-test">Özet ve test<a class="headerlink" href="#ozet-ve-test" title="Permanent link">&para;</a></h2>
+<h2 id="ozetle-ve-test">Özetle ve test<a class="headerlink" href="#ozetle-ve-test" title="Permanent link">&para;</a></h2>
 <p>Tamam, Hello Nextflow'un bu bölümünün sonu. Yani daha önce olduğu gibi, gidin ve testi kontrol edin. Bunu web sayfasında veya CLI'da yapın, bazı sorulardan geçin ve kapsadığımız materyalden bazılarını anladığınızı kontrol edin. Anlamadığınız herhangi bir şeyi vurgulayan bir şey olup olmadığına bakın. Çok fazla soru değil. Yapmak güzel ve kolay. Ya da bunu burada web sayfasında da yapabilirsiniz.</p>
 <p>Küçük bir mola verin, biraz dolaşın ve geri gelin; Hello Nextflow'un dördüncü bölümünde bize katılın. Orada modüllerden bahsedeceğiz. Çok teşekkür ederim.</p><style type="text/css">.quiz {
   border: 1px solid black;

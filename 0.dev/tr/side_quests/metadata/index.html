@@ -1555,7 +1555,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -4657,7 +4657,7 @@ Veri tablomuz CSV formatında olduğundan, bu iş <a href="https://www.nextflow.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>examples/map_demo.nf
 </code></pre></div>
 <p>Çıktıda görmeyi bekleyebileceğiniz şey:</p>
-<div class="highlight"><span class="filename">Çıktı</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="go">Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
@@ -4782,7 +4782,7 @@ Ayrıca süreç, betik bloğu tarafından gerekli olmayan değişkenleri sabit k
 </code></pre></div>
 <details class="success">
 <summary>Komut çıktısı</summary>
-<div class="highlight"><span class="filename">Meta map'i görüntüle</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
+<div class="highlight"><span class="filename">View meta map</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go"> N E X T F L O W   ~  version 25.10.2</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
@@ -4796,14 +4796,14 @@ Ayrıca süreç, betik bloğu tarafından gerekli olmayan değişkenleri sabit k
 </code></pre></div>
 </details>
 <p>Artık kanaldaki her öğe önce metadata map'i, sonra da karşılık gelen dosya nesnesini içerir:</p>
-<div class="highlight"><span class="filename">Örnek çıktı yapısı</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">[</span>
+<div class="highlight"><span class="filename">Example output structure</span><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="go">[</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="go">  [id:sampleA, character:squirrel],</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="go">  /workspaces/training/side-quests/metadata/data/bonjour.txt</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="go">]</span>
 </code></pre></div>
 <p>Sonuç olarak, veri tablosuna daha fazla sütun eklemek <code>meta</code> map'inde daha fazla metadata kullanılabilir hale getirecek; ancak kanal şeklini değiştirmeyecektir.
 Bu, metadata öğelerini girdi belirtimine sabit kodlamak zorunda kalmadan kanalı tüketen süreçler yazmamızı sağlar:</p>
-<div class="highlight"><span class="filename">Sözdizimi örneği</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="w">    </span><span class="nl">input:</span>
+<div class="highlight"><span class="filename">Syntax example</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">recording</span><span class="o">)</span>
 </code></pre></div>
 <p>Bu, Nextflow iş akışlarında metadata'yı organize etmek için yaygın olarak kullanılan bir kuraldır.</p>
@@ -5940,7 +5940,7 @@ Ancak istediğimiz çıktıların hiçbiri üretilmeyecektir.</p>
 <h2 id="ek-alstrma">Ek alıştırma<a class="headerlink" href="#ek-alstrma" title="Permanent link">&para;</a></h2>
 <p>Bir sürecin içinden meta map bilgilerini kullanma pratiği yapmak istiyorsanız, çıktıların nasıl adlandırıldığını ve/veya organize edildiğini özelleştirmek için meta map'ten <code>lang</code> ve <code>lang_group</code> gibi diğer bilgileri kullanmayı deneyin.</p>
 <p>Örneğin, bu sonucu üretmek için kodu değiştirmeyi deneyin:</p>
-<div class="highlight"><span class="filename">Results dizini içeriği</span><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a><span class="go">results/</span>
+<div class="highlight"><span class="filename">Results directory contents</span><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a><span class="go">results/</span>
 <a id="__codelineno-88-2" name="__codelineno-88-2" href="#__codelineno-88-2"></a><span class="go">├── germanic</span>
 <a id="__codelineno-88-3" name="__codelineno-88-3" href="#__codelineno-88-3"></a><span class="go">│   ├── de-guten_tag.txt</span>
 <a id="__codelineno-88-4" name="__codelineno-88-4" href="#__codelineno-88-4"></a><span class="go">│   ├── de-hallo.txt</span>

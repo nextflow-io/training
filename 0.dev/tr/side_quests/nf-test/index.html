@@ -1555,7 +1555,7 @@
   <span class="md-ellipsis">
     
   
-    Bölüm 1: Yönteme genel bakış
+    Bölüm 1: Yönteme Genel Bakış
   
 
     
@@ -2754,10 +2754,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2835,10 +2835,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -2886,7 +2886,7 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
         Özet
@@ -3736,10 +3736,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet" class="md-nav__link">
+  <a href="#ozetle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3817,10 +3817,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ozet_1" class="md-nav__link">
+  <a href="#ozetle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Özet
+        Özetle
       
     </span>
   </a>
@@ -3868,7 +3868,7 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#ozet_2" class="md-nav__link">
+  <a href="#ozet" class="md-nav__link">
     <span class="md-ellipsis">
       
         Özet
@@ -4225,7 +4225,7 @@
 </code></pre></div>
 <h4 id="materyalleri-gozden-gecirin">Materyalleri gözden geçirin<a class="headerlink" href="#materyalleri-gozden-gecirin" title="Permanent link">&para;</a></h4>
 <p>Ana iş akışı dosyasını ve pipeline'a girdi içeren <code>greetings.csv</code> adlı bir CSV dosyası bulacaksınız.</p>
-<div class="highlight"><span class="filename">Dizin içeriği</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
+<div class="highlight"><span class="filename">Directory contents</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="go">.</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="go">├── greetings.csv</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="go">└── main.nf</span>
 </code></pre></div>
@@ -4309,7 +4309,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <p>İş akışının beklendiği gibi çalıştığından emin olmak için çalıştıralım.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">İş akışını çalıştırma sonucu</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.2</span>
+<div class="highlight"><span class="filename">Result of running the workflow</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="go"> N E X T F L O W   ~  version 24.10.2</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="go">Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
@@ -4352,7 +4352,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <p><code>nf-test</code>, nf-test dosyalarını oluşturmak için bir dizi araçla birlikte gelir ve işin çoğunu bizim için yapar. Bunlar <code>generate</code> alt komutu altında gelir. Pipeline için bir test oluşturalım:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>nf-test<span class="w"> </span>generate<span class="w"> </span>pipeline<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Çıktı</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">&gt; nf-test generate pipeline main.nf</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="go">&gt; nf-test generate pipeline main.nf</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="go">Load source file &#39;/workspaces/training/side-quests/nf-test/main.nf&#39;</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="go">Wrote pipeline test file &#39;/workspaces/training/side-quests/nf-test/tests/main.nf.test</span>
@@ -4360,7 +4360,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="go">SUCCESS: Generated 1 test files.</span>
 </code></pre></div>
 <p>Bu, <code>tests</code> dizini içinde bir <code>main.nf.test</code> dosyası oluşturacaktır. Bu bizim pipeline seviyesi test dosyamızdır. <code>tree tests/</code> komutunu çalıştırırsanız şöyle bir şey görmelisiniz:</p>
-<div class="highlight"><span class="filename">Test dizini içeriği</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">tests/</span>
+<div class="highlight"><span class="filename">Test directory contents</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="go">tests/</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="go">├── main.nf.test</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="go">└── nextflow.config</span>
 </code></pre></div>
@@ -4420,7 +4420,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <p>Ne olduğunu görmek için testi çalıştıralım.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">nf-test pipeline başarısız</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
+<div class="highlight"><span class="filename">nf-test pipeline fail</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4465,7 +4465,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">}</span>
 </code></pre></div>
 <p>nf-test'in pipeline'ın başarısız olduğunu nasıl bildirdiğine ve Nextflow'dan hata mesajını sağladığına dikkat edin:</p>
-<div class="highlight"><span class="filename">Hata</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/greetings.csv</span>
+<div class="highlight"><span class="filename">Error</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/greetings.csv</span>
 </code></pre></div>
 <p>Peki sorun neydi? Pipeline'ın proje dizininde bir <code>greetings.csv</code> dosyası olduğunu hatırlayın. nf-test pipeline'ı çalıştırdığında bu dosyayı arayacaktır, ancak bulamaz. Dosya orada, ne oluyor? Yola bakarsak testin <code>./nf-test/tests/longHashString/</code> yolunda gerçekleştiğini görebiliriz. Tıpkı Nextflow gibi, nf-test de her şeyi izole tutmak için her test için yeni bir dizin oluşturur. Veri dosyası orada bulunmadığı için orijinal testteki dosyanın yolunu düzeltmeliyiz.</p>
 <p>Test dosyasına geri dönelim ve <code>when</code> bloğundaki dosyanın yolunu değiştirelim.</p>
@@ -4501,9 +4501,9 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </div>
 </div>
 <p>İşe yarayıp yaramadığını görmek için testi tekrar çalıştıralım.</p>
-<div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Pipeline başarılı</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
+<div class="highlight"><span class="filename">Pipeline passes</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4521,7 +4521,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <p>Varsayılan olarak, Nextflow çıktısı gizlidir, ancak nf-test'in kesinlikle iş akışını çalıştırdığına kendinizi ikna etmek için <code>--verbose</code> bayrağını kullanabilirsiniz:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test<span class="w"> </span>--verbose
 </code></pre></div>
-<div class="highlight"><span class="filename">Pipeline tüm süreçleri çalıştırıyor</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
+<div class="highlight"><span class="filename">Pipeline runs all processes</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4612,9 +4612,9 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </div>
 <p>Test adı artık gerçekte neyi doğruladığımızı daha iyi yansıtıyor; sadece pipeline'ın başarısız olmadan çalıştığını değil, aynı zamanda beklenen sayıda süreci çalıştırdığını.</p>
 <p>İşe yarayıp yaramadığını görmek için testi tekrar çalıştıralım.</p>
-<div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Pipeline onaylamalarla başarılı</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">🚀 nf-test 0.9.3</span>
+<div class="highlight"><span class="filename">Pipeline passes with assertions</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="go">https://www.nf-test.com</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="gp gp-VirtualEnv">(c)</span> <span class="go">2021 - 2024 Lukas Forer and Sebastian Schoenherr</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
@@ -4732,9 +4732,9 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </div>
 </div>
 <p>İşe yarayıp yaramadığını görmek için testi tekrar çalıştırın.</p>
-<div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Pipeline dosya onaylamalarıyla başarılı</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
+<div class="highlight"><span class="filename">Pipeline passes with file assertions</span><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="go">&gt; nf-test test tests/main.nf.test</span>
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4751,7 +4751,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </code></pre></div>
 <p>Başarılı! Testler geçer çünkü pipeline başarıyla tamamlandı, doğru sayıda süreç çalıştı ve çıktı dosyaları oluşturuldu. Bu aynı zamanda testleriniz için bilgilendirici adlar sağlamanın ne kadar yararlı olduğunu göstermelidir.</p>
 <p>Bu sadece yüzey; pipeline'ın ayrıntılarını kontrol etmek için onaylamalar yazmaya devam edebiliriz, ancak şimdilik pipeline'ın içini test etmeye geçelim.</p>
-<h3 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle">Özetle<a class="headerlink" href="#ozetle" title="Permanent link">&para;</a></h3>
 <p>Bir pipeline için nf-test yazmayı biliyorsunuz.</p>
 <h3 id="srada-ne-var">Sırada ne var?<a class="headerlink" href="#srada-ne-var" title="Permanent link">&para;</a></h3>
 <p>Bir Nextflow sürecini test etmeyi öğrenin.</p>
@@ -4763,7 +4763,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <p>Süreç için testler oluşturmak üzere <code>nf-test generate</code> komutunu tekrar kullanalım.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>nf-test<span class="w"> </span>generate<span class="w"> </span>process<span class="w"> </span>main.nf
 </code></pre></div>
-<div class="highlight"><span class="filename">Çıktı</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">&gt; nf-test generate process main.nf</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">&gt; nf-test generate process main.nf</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">Load source file &#39;/workspaces/training/side-quests/nf-test/main.nf&#39;</span>
 <a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="go">Wrote process test file &#39;/workspaces/training/side-quests/nf-test/tests/main.sayhello.nf.test</span>
@@ -4805,9 +4805,9 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </code></pre></div>
 <p>Daha önce olduğu gibi, test ayrıntılarıyla başlıyoruz, ardından <code>when</code> ve <code>then</code> blokları geliyor. Ancak, sürece girdileri tanımlamamıza izin veren ek bir <code>process</code> bloğumuz da var.</p>
 <p>İşe yarayıp yaramadığını görmek için testi çalıştıralım.</p>
-<div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Süreç testi başarısız</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">Process test fails</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4924,7 +4924,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </div>
 </div>
 <p>İşe yarayıp yaramadığını görmek için testi tekrar çalıştıralım.</p>
-<div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="go">https://www.nf-test.com</span>
@@ -4949,10 +4949,10 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <div class="highlight"><span class="filename">tests/main.sayhello.nf.test</span><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
 </code></pre></div>
 <p>Bu, nf-test'e <code>sayHello</code> sürecinin çıktısının bir snapshot'ını oluşturmasını söylüyor. Snapshot dosyasının içeriğine bir göz atalım.</p>
-<div class="highlight"><span class="filename">Snapshot dosyası içeriği</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">code tests/main.sayhello.nf.test.snap</span>
+<div class="highlight"><span class="filename">Snapshot file contents</span><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="go">code tests/main.sayhello.nf.test.snap</span>
 </code></pre></div>
 <p>Burada yazdırmayacağız, ancak süreç ve süreç çıktılarının ayrıntılarını içeren bir JSON dosyası görmelisiniz. Özellikle, şuna benzeyen bir satır görebiliriz:</p>
-<div class="highlight"><span class="filename">Snapshot dosyası içeriği</span><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<div class="highlight"><span class="filename">Snapshot file contents</span><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">    </span><span class="s2">&quot;hello-output.txt:md5,b1946ac92492d2347c6235b4d2611184&quot;</span>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="p">]</span>
 </code></pre></div>
@@ -4967,7 +4967,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <li>Beklenen bir değişiklikse (örn., araç iyileştirildi ve sonuçlar daha iyi) o zaman yeni çıktıyı eşleştirilecek referans olarak kabul etmek için snapshot'ı güncellememiz gerekecektir. nf-test bu amaç için bir <code>--update-snapshot</code> parametresine sahiptir.</li>
 </ul>
 <p>Testi tekrar çalıştırabiliriz ve testin geçmesi gerektiğini görebiliriz:</p>
-<div class="highlight"><span class="filename">snapshot ile nf-test süreci başarılı</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">nf-test process pass with snapshot</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5087,9 +5087,9 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <li>Daha karmaşık doğrulamalara izin verir (regex desenleri, sayısal karşılaştırmalar vb.)</li>
 </ul>
 <p>İşe yarayıp yaramadığını görmek için testi çalıştıralım.</p>
-<div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.sayhello.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">Süreç testi başarılı</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
+<div class="highlight"><span class="filename">Process test fails</span><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="go">&gt; nf-test test tests/main.sayhello.nf.test</span>
 <a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5234,9 +5234,9 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </div>
 </div>
 <p>Ve testi çalıştırın!</p>
-<div class="highlight"><span class="filename">nf-test pipeline başarılı</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
+<div class="highlight"><span class="filename">nf-test pipeline pass</span><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">nf-test süreci convertToUpper başarılı</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
+<div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>
 <a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5256,9 +5256,9 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a><span class="go">SUCCESS: Executed 1 tests in 1.764s</span>
 </code></pre></div>
 <p>Not: <code>tests/main.converttoupper.nf.test.snap</code> adresinde <code>convertToUpper</code> süreci için bir snapshot dosyası oluşturduk. Testi tekrar çalıştırırsak, nf-test'in tekrar geçtiğini görmeliyiz.</p>
-<div class="highlight"><span class="filename">nf-test süreci convertToUpper başarılı</span><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
+<div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/main.converttoupper.nf.test
 </code></pre></div>
-<div class="highlight"><span class="filename">nf-test süreci convertToUpper başarılı</span><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
+<div class="highlight"><span class="filename">nf-test process convertToUpper pass</span><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="go">&gt; nf-test test tests/main.converttoupper.nf.test</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>
 <a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5272,7 +5272,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a>
 <a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a><span class="go">SUCCESS: Executed 1 tests in 1.811s</span>
 </code></pre></div>
-<h3 id="ozet_1">Özet<a class="headerlink" href="#ozet_1" title="Permanent link">&para;</a></h3>
+<h3 id="ozetle_1">Özetle<a class="headerlink" href="#ozetle_1" title="Permanent link">&para;</a></h3>
 <p>Bir Nextflow süreci için test yazmayı ve çalıştırmayı biliyorsunuz.</p>
 <h3 id="srada-ne-var_1">Sırada ne var?<a class="headerlink" href="#srada-ne-var_1" title="Permanent link">&para;</a></h3>
 <p>Her şey için aynı anda testleri nasıl çalıştıracağınızı öğrenin!</p>
@@ -5285,7 +5285,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>.
 </code></pre></div>
 <p>Not: Her testi içerecek şekilde mevcut dizinimizden her şeyi çalıştırmak için sadece <code>.</code> kullanıyoruz!</p>
-<div class="highlight"><span class="filename">nf-test repo başarılı</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">&gt; nf-test test .</span>
+<div class="highlight"><span class="filename">nf-test repo pass</span><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="go">&gt; nf-test test .</span>
 <a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>
 <a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="go">🚀 nf-test 0.9.3</span>
 <a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a><span class="go">https://www.nf-test.com</span>
@@ -5310,7 +5310,7 @@ Tam iş akışı kodunu aşağıda görebilirsiniz.</p>
 </code></pre></div>
 <p>Buna bakın! Tek bir komutla her süreç için 1 ve tüm pipeline için 2 olmak üzere 4 test çalıştırdık. Büyük bir kod tabanında bunun ne kadar güçlü olduğunu hayal edin!</p>
 <hr />
-<h2 id="ozet_2">Özet<a class="headerlink" href="#ozet_2" title="Permanent link">&para;</a></h2>
+<h2 id="ozet">Özet<a class="headerlink" href="#ozet" title="Permanent link">&para;</a></h2>
 <p>Bu yan görevde, bireysel süreçler için testler oluşturmanın yanı sıra tüm pipeline için uçtan uca testler oluşturmak üzere nf-test'in özelliklerinden yararlanmayı öğrendiniz.
 Artık çıktı doğrulama için iki ana yaklaşımın, snapshot'ların ve doğrudan içerik onaylamalarının ve her birinin ne zaman kullanılacağının farkındasınız.
 Ayrıca testleri tek tek veya tüm bir proje için nasıl çalıştıracağınızı biliyorsunuz.</p>
