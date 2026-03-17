@@ -104,6 +104,14 @@ The workflow we'll be testing is a subset of the Hello workflow built in [Hello 
     In this side quest, we use an intermediate form of the Hello workflow that only contains the first two processes. <!-- TODO: change this to use the full finished workflow as suggested in https://github.com/nextflow-io/training/issues/735 -->
 
 The subset we'll be working with is composed of two processes: `sayHello` and `convertToUpper`.
+The following diagram shows how data flows through the workflow.
+
+<!-- prettier-ignore-start -->
+<figure class="excalidraw">
+--8<-- "docs/en/docs/side_quests/img/nf-test/workflow-data-flow.excalidraw.svg"
+</figure>
+<!-- prettier-ignore-end -->
+
 You can see the full workflow code below.
 
 ??? example "Workflow code"
@@ -384,6 +392,12 @@ ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-
 ```
 
 So what was the issue? Remember the pipeline has a greetings.csv file in the project directory. When nf-test runs the pipeline, it will look for this file, but it can't find it. The file is there, what's happening? Well, if we look at the path we can see the test is occurring in the path `./nf-test/tests/longHashString/`. Just like Nextflow, nf-test creates a new directory for each test to keep everything isolated. The data file is not located in there so we must correct the path to the file in the original test.
+
+<!-- prettier-ignore-start -->
+<figure class="excalidraw">
+--8<-- "docs/en/docs/side_quests/img/nf-test/test-execution-flow.excalidraw.svg"
+</figure>
+<!-- prettier-ignore-end -->
 
 Let's go back to the test file and change the path to the file in the `when` block.
 
@@ -693,6 +707,14 @@ nextflow_process {
 
 As before, we start with the test details, followed by the `when` and `then` blocks. However, we also have an additional `process` block which allows us to define the inputs to the process.
 
+The following diagram compares the structure of pipeline-level and process-level tests side by side.
+
+<!-- prettier-ignore-start -->
+<figure class="excalidraw">
+--8<-- "docs/en/docs/side_quests/img/nf-test/test-structure-anatomy.excalidraw.svg"
+</figure>
+<!-- prettier-ignore-end -->
+
 Let's run the test to see if it works.
 
 ```bash title="nf-test pipeline pass"
@@ -858,6 +880,12 @@ SUCCESS: Executed 1 tests in 1.685s
 Success! The test passes because the `sayHello` process ran successfully and the output matched the snapshot.
 
 ### 2.3. Alternative to Snapshots: Direct Content Assertions
+
+<!-- prettier-ignore-start -->
+<figure class="excalidraw">
+--8<-- "docs/en/docs/side_quests/img/nf-test/snapshot-vs-content.excalidraw.svg"
+</figure>
+<!-- prettier-ignore-end -->
 
 While snapshots are great for catching any changes in output, sometimes you want to verify specific content without being so strict about the entire file matching. For example:
 
@@ -1107,6 +1135,12 @@ Learn how to run tests for everything at once!
 Running nf-test on each component is fine, but laborious and error prone. Can't we just test everything at once?
 
 Yes we can!
+
+<!-- prettier-ignore-start -->
+<figure class="excalidraw">
+--8<-- "docs/en/docs/side_quests/img/nf-test/testing-strategy.excalidraw.svg"
+</figure>
+<!-- prettier-ignore-end -->
 
 Let's run nf-test on the entire repo.
 
