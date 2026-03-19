@@ -7,11 +7,11 @@ index_type: course
 additional_information:
   technical_requirements: true
   learning_objectives:
-    - Nextflow workflow'larının çalıştırılması ve yönetimi
+    - Nextflow iş akışlarının başlatılması ve çalıştırılmasının yönetilmesi
     - Çıktıların (sonuçlar) ve log dosyalarının bulunması ve yorumlanması
-    - Basit çok adımlı bir workflow'da temel Nextflow bileşenlerinin tanınması
+    - Basit çok adımlı bir iş akışında temel Nextflow bileşenlerinin tanınması
     - Pipeline çalıştırmasının HPC ve bulut dahil yaygın hesaplama platformlarında yapılandırılması
-    - Kod modülerliği ve yazılım konteynerları dahil, pipeline'ları FAIR yapan tekrar üretilebilirlik, taşınabilirlik ve kod yeniden kullanımı için en iyi uygulamaların özetlenmesi
+    - Kod modülerliği ve yazılım konteynerleri dahil, pipeline'ları FAIR yapan tekrar üretilebilirlik, taşınabilirlik ve kod yeniden kullanımı için en iyi uygulamaların özetlenmesi
   audience_prerequisites:
     - "**Hedef Kitle:** Bu kurs, Nextflow'a tamamen yeni başlayan ve mevcut pipeline'ları çalıştırmak isteyen öğrenciler için tasarlanmıştır."
     - "**Beceriler:** Komut satırı, temel betik yazma kavramları ve yaygın dosya formatları hakkında bir miktar bilgi sahibi olunduğu varsayılmaktadır."
@@ -20,17 +20,17 @@ additional_information:
 
 # Nextflow Run
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
-**Nextflow Run, tekrar üretilebilir ve ölçeklenebilir veri analizi workflow'larını çalıştırmaya yönelik uygulamalı bir giriştir.**
+**Nextflow Run, tekrar üretilebilir ve ölçeklenebilir veri analizi iş akışlarını çalıştırmaya yönelik uygulamalı bir girişdir.**
 
-Pratik örnekler ve rehberli alıştırmalar üzerinde çalışarak, pipeline'ları çalıştırma, dosyaları ve yazılım bağımlılıklarını yönetme, çalıştırmayı zahmetsizce paralelleştirme ve farklı hesaplama ortamlarında workflow'ları çalıştırma dahil olmak üzere Nextflow kullanmanın temellerini öğreneceksiniz.
+Pratik örnekler ve rehberli alıştırmalar üzerinde çalışarak, pipeline'ları çalıştırma, dosyaları ve yazılım bağımlılıklarını yönetme, çalıştırmayı zahmetsizce paralelleştirme ve farklı hesaplama ortamlarında iş akışlarını çalıştırma dahil olmak üzere Nextflow kullanmanın temellerini öğreneceksiniz.
 
-Workflow'ları Nextflow ile çalıştırmaya başlamak için gerekli becerileri ve özgüveni kazanacaksınız.
+İş akışlarını Nextflow ile çalıştırmaya başlamak için gerekli becerileri ve özgüveni kazanacaksınız.
 
 <!-- additional_information -->
 
-## Kurs genel bakış
+## Kurs genel bakışı
 
 ### Ne yapacaksınız
 
@@ -48,11 +48,11 @@ Bunu, Nextflow'da yazılmış pipeline'ları çalıştırmanın ve yönetmenin b
 
 | Kurs bölümü                                                  | Özet                                                                                                                              | Tahmini süre |
 | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| [Bölüm 1: Temel işlemleri çalıştırma](./01_basics.md)        | Basit bir workflow'un başlatılması ve çalıştırılmasının yönetilmesi                                                               | 30 dk        |
-| [Bölüm 2: Gerçek pipeline'ları çalıştırma](./02_pipeline.md) | Karmaşık girdilerin işlenmesi, çok adımlı workflow'ların çalıştırılması, konteynerların kullanılması ve zahmetsiz paralelleştirme | 60 dk        |
+| [Bölüm 1: Temel işlemleri çalıştırma](./01_basics.md)        | Basit bir iş akışının başlatılması ve çalıştırılmasının yönetilmesi                                                               | 30 dk        |
+| [Bölüm 2: Gerçek pipeline'ları çalıştırma](./02_pipeline.md) | Karmaşık girdilerin işlenmesi, çok adımlı iş akışlarının çalıştırılması, konteynerlerin kullanılması ve zahmetsiz paralelleştirme | 60 dk        |
 | [Bölüm 3: Çalıştırma yapılandırması](./03_config.md)         | Pipeline davranışının özelleştirilmesi ve farklı hesaplama ortamlarında kullanımın optimize edilmesi                              | 60 dk        |
 
-Bu kursun sonunda, bilimsel hesaplama ihtiyaçlarınız için tekrar üretilebilir workflow'ları çalıştırma yolculuğunuzdaki sonraki adımları atmaya hazır olacaksınız.
+Bu kursun sonunda, bilimsel hesaplama ihtiyaçlarınız için tekrar üretilebilir iş akışlarını çalıştırma yolculuğunuzdaki sonraki adımları atmaya hazır olacaksınız.
 
 Kursu almaya hazır mısınız?
 

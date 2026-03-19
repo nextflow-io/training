@@ -105,7 +105,7 @@ Genomik ve RNAseq kurslarında bulunan yaygın kalıplara dayanmaktadır.
 - Kod değişikliklerini göstermek için `hl_lines` ile **Önce/Sonra sekmeli kod blokları** kullanın
 - Daraltılabilir beklenen çıktı için `??? success "Komut çıktısı"` kullanın
 - Daraltılabilir dizin ağaçları için `??? abstract "Dizin içeriği"` kullanın
-- Her ana bölümü **Özet** ve **Sırada ne var?** alt bölümleriyle bitirin
+- Her ana bölümü **Özetle** ve **Sırada ne var?** alt bölümleriyle bitirin
 - Ana numaralı bölümleri ayırmak için `---` yatay çizgiler kullanın
 - Öğrencilerin doldurması için iskelet dosyaları (iş akışı + modüller) sağlayın
 - Çözümleri bölümlere göre düzenleyin (`solutions/part2/`, `solutions/part3/`)
