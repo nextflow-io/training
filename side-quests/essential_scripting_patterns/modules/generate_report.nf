@@ -1,7 +1,5 @@
 process GENERATE_REPORT {
 
-    publishDir 'results/reports', mode: 'copy'
-
     input:
     tuple val(meta), path(reads)
 
