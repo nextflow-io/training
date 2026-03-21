@@ -11,6 +11,37 @@ The target language for this translation is **Korean** (`ko`).
 - Preserve personality and humor where present (e.g., "그동안 차 한 잔을 준비하거나" for suggesting a tea break)
 - **Avoid run-on sentences**: Split long, complex sentences into shorter ones or use commas (,) appropriately to improve readability
 - **Natural phrasing**: When translating "introduce information", prefer "학습하다" (learn) or "다루다" (cover) instead of direct translation like "소개하다"
+  - **Avoid literal translations of English metaphors** such as "dive into", "jump into", or "dig into".
+  - Use neutral verbs instead, such as:
+    - 시작하다
+    - 진행하다
+    - 살펴보다
+    - 확인하다
+
+### Instructional Style
+
+Avoid literal translations of English instructional phrasing commonly used in tutorials.
+
+English documentation often uses phrases like:
+
+- "let’s run the workflow"
+- "now we will look at"
+- "next we will configure"
+
+In Korean technical documentation, prefer direct instructional forms such as:
+
+- 실행합니다
+- 확인합니다
+- 다음 단계에서는
+
+Example:
+
+- "Let's run the workflow."
+  → **워크플로를 실행합니다.**
+
+Not:
+
+- **워크플로를 실행해 보겠습니다.**
 
 ## 2. Translation Context Rules
 
@@ -25,6 +56,26 @@ For example:
 - In prose: "입력 채널이 파일을 받습니다..." (translate "channel" to "채널")
 - In code: `channel.fromPath('*.fastq')` (keep "channel" in English)
 - In comments: `// emit a greeting` → `// 인사말을 내보냅니다`
+
+### 2.1. Terminology Rules
+
+Use the following terminology mappings when translating technical documentation:
+
+- Translate **"configuration"** as **설정** in software contexts.
+  Avoid translating it as **구성** unless referring to system composition or architecture.
+- Translate **"argument"** as **인자** in programming contexts (e.g., command-line argument → 명령줄 인자).
+  Do not translate **"argument"** as **매개변수** in this context.
+- Translate **"helper"** as **보조** in software contexts (e.g., helper files → 보조 파일).
+  Do not translate **"helper"** as **도우미**.
+- Translate **"process call"** as **process 실행** in workflow execution contexts.
+  Do not translate **"process call"** as **process 호출**.
+- Translate **"regular output"** as **표준 출력 (stdout)**.
+  Do not translate **"regular output"** as **일반 출력**.
+- When referring to files produced by a program, translate **"wrote"** as **생성한**.
+  (e.g., "Nextflow wrote these files" → "Nextflow가 생성한 파일").
+  Do not translate **"wrote"** as **작성한**.
+- Translate **"parallel"** as **병렬** only in computing contexts (e.g., parallel execution).
+  For UI or reading contexts, use **함께**, **동시에**, or **나란히**.
 
 ## 3. Code Comments
 
@@ -52,6 +103,11 @@ For UI elements, consider including English in parentheses to help users match t
 
 - "**사이드바(Sidebar)**"
 - "**파일 탐색기(File Explorer)**"
+
+When translating UI instructions that refer to keyboard shortcuts:
+
+- Translate **"depending on your equipment"** as **사용 중인 운영체제에 따라** when referring to OS differences (e.g., Ctrl vs Cmd)
+- Avoid literal translations such as **장비에 따라**
 
 ## 6. Image Alt Text
 
@@ -150,8 +206,6 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | standalone                    | 단독                     | Not 독립 (political independence)                                       |
 | mini-course                   | 단기 과정                | Not 미니 과정 (too casual)                                              |
 | wrap                          | 적용하다                 | Not 래핑하다 (sounds like physical packaging)                           |
-| mini-course                   | 단기 과정                | Not 미니 과정 (too casual)                                              |
-| wrap                          | 적용하다                 | Not 래핑하다 (sounds like physical packaging)                           |
 | nested                        | 내포된                   | Not 중첩된 (sounds like 'overlapped')                                   |
 | training                      | 교육                     | Actual translation                                                      |
 | environment                   | 환경                     | Actual translation                                                      |
@@ -171,6 +225,8 @@ Note: Some terms use transliteration (음차) while others use actual Korean tra
 | lowercase                     | 소문자                   | Actual translation                                                      |
 | materials                     | 자료                     | Actual translation                                                      |
 | course                        | 과정                     | Actual translation                                                      |
+| configuration                 | 설정                     | Actual translation                                                      |
+| accessory                     | 부속                     | Actual translation (ex: accessory files)                                |
 | Nextflow command              | Nextflow 명령어          | Actual translation                                                      |
 | aggregate                     | 결합                     | Actual translation                                                      |
 | list of genomic intervals     | 유전체 구간 목록         | Actual translation                                                      |
