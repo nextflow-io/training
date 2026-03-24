@@ -18,7 +18,7 @@ Our training courses have a few additional requirements.
 In total, you will need to have the following software installed:
 
 - Bash or equivalent shell
-- [Java 11 (or later, up to 21)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- [Java 17 (or later, up to 25)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Conda](https://conda.io/) 4.5 (or later)
