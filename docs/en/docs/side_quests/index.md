@@ -28,16 +28,16 @@ Otherwise, select a side quest from the table below.
 
 ## Side Quests
 
-| Side Quest                                                                    | Time Estimate for Teaching |
-| ----------------------------------------------------------------------------- | -------------------------- |
-| [Nextflow development environment walkthrough](./dev_environment/)            | 45 mins                    |
-| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns/)       | 90 mins                    |
-| [Metadata in workflows](./metadata/)                                          | 45 mins                    |
-| [Splitting and Grouping](./splitting_and_grouping/)                           | 45 mins                    |
-| [Testing with nf-test](./nf_test/)                                            | 1 hour                     |
-| [Workflows of workflows](./workflows_of_workflows/)                           | 30 mins                    |
-| [Working with files](./working_with_files/)                                   | 45 mins                    |
-| [Debugging workflows](./debugging/)                                           | 1 hour                     |
+| Side Quest                                                               | Time Estimate for Teaching |
+| ------------------------------------------------------------------------ | -------------------------- |
+| [Nextflow development environment walkthrough](./dev_environment/)       | 45 mins                    |
+| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns/) | 90 mins                    |
+| [Metadata in workflows](./metadata/)                                     | 45 mins                    |
+| [Splitting and Grouping](./splitting_and_grouping/)                      | 45 mins                    |
+| [Testing with nf-test](./nf_test/)                                       | 1 hour                     |
+| [Workflows of workflows](./workflows_of_workflows/)                      | 30 mins                    |
+| [Working with files](./working_with_files/)                              | 45 mins                    |
+| [Debugging workflows](./debugging/)                                      | 1 hour                     |
 
 ## Multi-part courses
 

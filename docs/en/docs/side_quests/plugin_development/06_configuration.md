@@ -15,13 +15,13 @@ In this section, you'll do the same for your own plugin.
 
 **What you'll change:**
 
-| File                         | Change                                          |
-| ---------------------------- | ----------------------------------------------- |
-| `GreetingExtension.groovy`   | Read prefix/suffix config in `init()`           |
-| `GreetingFactory.groovy`     | Read config values to control observer creation |
-| `GreetingConfig.groovy`      | New file: formal `@ConfigScope` class           |
-| `build.gradle`               | Register the config class as an extension point |
-| `nextflow.config`            | Add a `#!groovy greeting {}` block to test it   |
+| File                       | Change                                          |
+| -------------------------- | ----------------------------------------------- |
+| `GreetingExtension.groovy` | Read prefix/suffix config in `init()`           |
+| `GreetingFactory.groovy`   | Read config values to control observer creation |
+| `GreetingConfig.groovy`    | New file: formal `@ConfigScope` class           |
+| `build.gradle`             | Register the config class as an extension point |
+| `nextflow.config`          | Add a `#!groovy greeting {}` block to test it   |
 
 !!! tip "Starting from here?"
 
