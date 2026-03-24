@@ -17,7 +17,8 @@ process SAY_HELLO {
 }
 
 workflow {
-    greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+    def samplesheet_list = samplesheetToList(params.input, 'greetings_schema.json')
+    greeting_ch = Channel.fromList(samplesheet_list)
         .map { row -> "${row[0]}_${randomString(8)}" }
     SAY_HELLO(greeting_ch)
     SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }

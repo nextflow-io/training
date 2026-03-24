@@ -8,6 +8,7 @@ include { decorateGreeting } from 'plugin/nf-greeting'
 params.input = 'greetings.csv'
 
 process SAY_HELLO {
+    publishDir 'results'
     input:
         val greeting
     output:

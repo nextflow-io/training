@@ -1,6 +1,7 @@
 # Part 4: Testing
 
-Unit tests verify your functions work correctly before you use them in pipelines.
+Plugins are standalone software that pipeline developers need to trust.
+Testing each feature independently, outside of a pipeline, ensures the plugin works correctly before anyone integrates it into a workflow.
 In this section, you'll write and run tests using the Spock testing framework.
 
 !!! tip "Starting from here?"
@@ -27,7 +28,7 @@ cd nf-greeting
 
 ## 1. Why test?
 
-A successful build means the code compiles, but not that it works correctly.
+A successful build means the code compiles, but doesn't check that it works as expected.
 Unit tests are small pieces of code that automatically check if your functions produce the right output for a given input.
 For example, a test might check that `#!groovy reverseGreeting("Hello")` returns `"olleH"`.
 
@@ -42,10 +43,10 @@ Tests are valuable because:
 ## 2. Understanding Spock tests
 
 The plugin template uses [Spock](https://spockframework.org/), a testing framework for Groovy.
-Spock is already configured in the project (via `build.gradle`), so you don't need to install anything.
+Spock is already configured in the project (via `build.gradle`), so you don't need to add anything.
 
 If you've used testing tools before (like `pytest` in Python or `testthat` in R), Spock fills the same role: you write small functions that call your code with known inputs and check the outputs.
-The difference is that Spock uses labelled blocks (`given:`, `expect:`, `when:`, `then:`) that read almost like plain English.
+The difference is that Spock uses labelled blocks (`given:`, `expect:`, `when:`, `then:`) that are similar to a Nextflow process or workflow.
 
 Here's the basic structure:
 
@@ -241,39 +242,12 @@ make test
 
         An empty string reversed is still an empty string.
 
-??? exercise "Test friendlyGreeting"
-
-    If you completed the `friendlyGreeting` exercise in Part 3, add tests for it.
-    Test both the default name and a custom name.
-
-    ??? solution
-
-        ```groovy
-        def 'should create friendly greeting with default name'() {
-            given:
-            def ext = new GreetingExtension()
-
-            expect:
-            ext.friendlyGreeting('Hello') == 'Hello, World!'
-        }
-
-        def 'should create friendly greeting with custom name'() {
-            given:
-            def ext = new GreetingExtension()
-
-            expect:
-            ext.friendlyGreeting('Hello', 'Alice') == 'Hello, Alice!'
-        }
-        ```
-
 ---
 
 ## 5. View the test report
 
 Gradle generates an HTML test report with detailed results for each test.
-
-Start a simple web server in the test report directory.
-The `pushd` command saves your current directory so you can return to it later:
+Start a web server in the report directory:
 
 ```bash
 pushd build/reports/tests/test
@@ -285,11 +259,9 @@ Click through to your test class to see individual test results:
 
 ![Test report showing all tests passed](./img/test_report.png)
 
-The report shows each test method, its duration, and whether it passed or failed.
-Both tests pass: `should reverse a greeting` and `should decorate a greeting` confirm that your custom functions produce the expected output.
-If a test were to fail, the report would show the expected vs. actual values, making it straightforward to identify the problem.
+The report shows each test method and whether it passed or failed.
 
-Press ++ctrl+c++ in the terminal to stop the server when you're done, then return to the previous directory with `popd`:
+Press ++ctrl+c++ to stop the server, then return to the previous directory:
 
 ```bash
 popd

@@ -40,6 +40,9 @@ The first argument is the plugin name, and the second is your organization name 
 
 ## 2. Examine the project structure
 
+A Nextflow plugin is a piece of Groovy software that runs inside Nextflow.
+It extends Nextflow's capabilities using well-defined integration points, which means it can work with Nextflow features like channels, processes, and configuration.
+
 Before writing any code, look at what the template generated so you know where things go.
 
 Change into the plugin directory:
@@ -89,6 +92,9 @@ You should see:
 ---
 
 ## 3. Explore the build configuration
+
+Gradle is a build tool that compiles code, runs tests, and packages software.
+The plugin template includes a Gradle wrapper (`./gradlew`) so you don't need Gradle installed separately.
 
 The build configuration tells Gradle how to compile your plugin and tells Nextflow how to load it.
 Two files matter most.
@@ -187,15 +193,12 @@ There are four source files, each with a distinct role:
 | `GreetingFactory.groovy`   | Creates observer instances when a workflow starts  | Part 5            |
 | `GreetingObserver.groovy`  | Runs code in response to workflow lifecycle events | Part 5            |
 
-You don't need to read these files now.
-Each one is introduced in detail in the parts listed above, when you first modify it.
+Each file is introduced in detail in the part listed above, when you first modify it.
+The key ones to be aware of:
 
-Here is how the components relate:
-
-`GreetingPlugin` is the entry point that Nextflow loads first.
-It registers two components: `GreetingExtension` and `GreetingFactory`.
-`GreetingExtension` provides the functions (marked with `@Function`) that workflows can call.
-`GreetingFactory` creates a `GreetingObserver` when a workflow starts, which responds to events like pipeline start and completion.
+- `GreetingPlugin` is the entry point that Nextflow loads
+- `GreetingExtension` provides the functions this plugin makes available to workflows
+- `GreetingObserver` runs alongside the pipeline and responds to events without requiring changes to pipeline code
 
 ```mermaid
 graph TD
@@ -224,9 +227,8 @@ Compile the plugin and install it locally:
 make assemble && make install
 ```
 
-The `make` command runs tasks defined in the project's `Makefile`.
-Here, `make assemble` compiles the plugin code and `make install` copies the result to `~/.nextflow/plugins/nf-greeting-0.1.0/`, where Nextflow looks for locally installed plugins.
-You don't need to understand how `make` works; just use it as shown.
+`make assemble` compiles the plugin code.
+`make install` copies it to your local Nextflow plugin directory, making it available to use.
 
 ??? example "Build output"
 
@@ -248,16 +250,8 @@ You don't need to understand how `make` works; just use it as shown.
     **The warnings are expected.**
 
     - **"Downloading gradle..."**: This only happens the first time. Subsequent builds are much faster.
-    - **"Deprecated Gradle features..."**: This warning comes from the plugin template, not your code. It's safe to ignore.
+    - **"Deprecated Gradle features..."**: This warning comes from the plugin template, not your code. It is safe to ignore.
     - **"BUILD SUCCESSFUL"**: This is what matters. Your plugin compiled without errors.
-
-??? info "What is `./gradlew`?"
-
-    The `./gradlew` script is the **Gradle wrapper**, a small script included with the project that automatically downloads and runs the correct version of Gradle.
-    (If you're unfamiliar with Gradle, see the [Java, Groovy, and Gradle primer](00_orientation.md#2-verify-java-installation) in the Orientation.)
-
-    This means you don't need Gradle installed on your system.
-    The `make` commands in the Makefile are shortcuts that call `./gradlew` for you.
 
 Go back to the pipeline directory:
 

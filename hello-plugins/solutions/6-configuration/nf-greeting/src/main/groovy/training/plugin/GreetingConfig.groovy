@@ -14,7 +14,6 @@ import nextflow.script.dsl.Description
  *         enabled = true
  *         prefix = '>>>'
  *         suffix = '<<<'
- *         taskCounter.verbose = false
  *     }
  */
 @ScopeName('greeting')
@@ -26,9 +25,6 @@ class GreetingConfig implements ConfigScope {
         this.enabled = opts.enabled as Boolean ?: true
         this.prefix = opts.prefix as String ?: '***'
         this.suffix = opts.suffix as String ?: '***'
-        if (opts.taskCounter instanceof Map) {
-            this.taskCounter = new TaskCounterConfig(opts.taskCounter as Map)
-        }
     }
 
     @ConfigOption
@@ -42,17 +38,4 @@ class GreetingConfig implements ConfigScope {
     @ConfigOption
     @Description('Suffix for decorated greetings')
     String suffix = '***'
-
-    TaskCounterConfig taskCounter = new TaskCounterConfig()
-
-    static class TaskCounterConfig implements ConfigScope {
-        TaskCounterConfig() {}
-        TaskCounterConfig(Map opts) {
-            this.verbose = opts.verbose as Boolean ?: true
-        }
-
-        @ConfigOption
-        @Description('Show per-task completion messages')
-        boolean verbose = true
-    }
 }

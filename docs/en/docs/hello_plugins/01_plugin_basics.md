@@ -95,7 +95,7 @@ Your output order and random strings will differ, and if you run the script agai
 
 #### 2.1.2. Configure the plugin
 
-Now let's replace the inline function with one from a plugin. Add this plugin to your `nextflow.config`:
+Replace the inline function with one from the plugin. Add this to your `nextflow.config`:
 
 ```groovy title="nextflow.config"
 // Configuration for plugin development exercises
@@ -176,7 +176,9 @@ Replace the inline `randomString` function with the plugin version:
     }
     ```
 
-The `include` statement replaces 7 lines of hand-written code with a single import from a tested, versioned plugin.
+The `include` statement imports `randomString` from a library that is proven, tested, and maintained by a broader pool of contributors who can spot and fix bugs.
+Instead of each pipeline maintaining its own copy of the function, every pipeline that uses the plugin gets the same vetted implementation.
+This reduces duplicated code and the maintenance burden that comes with it.
 The syntax `#!groovy include { function } from 'plugin/plugin-id'` is the same `include` used for Nextflow modules, with a `plugin/` prefix.
 You can see the [source code for `randomString`](https://github.com/nextflow-io/nf-hello/blob/e67bddebfa589c7ae51f41bf780c92068dc09e93/plugins/nf-hello/src/main/nextflow/hello/HelloExtension.groovy#L110) in the nf-hello repository on GitHub.
 
@@ -200,10 +202,7 @@ Pipeline complete! 👋
 
 The output still has random suffixes, but now `randomString` comes from the nf-hello plugin instead of inline code.
 The "Pipeline is starting!" and "Pipeline complete!" messages are new.
-They come from a feature called an observer.
-An observer is a piece of plugin code that responds to events like the pipeline starting and finishing.
-You'll learn more about observers in Part 5.
-This shows that a single plugin can provide both functions and observers.
+These come from the plugin's observer component, which you'll explore in Part 5.
 
 Nextflow downloads plugins automatically the first time they're used, so any pipeline that declares `nf-hello@0.5.0` gets the exact same tested `randomString` function without copying code between projects.
 
@@ -282,7 +281,7 @@ Replace the `splitCsv` input with `samplesheetToList`:
 
 === "After"
 
-    ```groovy title="hello.nf" hl_lines="4 20 21"
+    ```groovy title="hello.nf" hl_lines="4 20 21 22"
     #!/usr/bin/env nextflow
 
     include { randomString } from 'plugin/nf-hello'
@@ -302,7 +301,8 @@ Replace the `splitCsv` input with `samplesheetToList`:
     }
 
     workflow {
-        greeting_ch = Channel.fromList(samplesheetToList(params.input, 'greetings_schema.json'))
+        def samplesheet_list = samplesheetToList(params.input, 'greetings_schema.json')
+        greeting_ch = Channel.fromList(samplesheet_list)
             .map { row -> "${row[0]}_${randomString(8)}" }
         SAY_HELLO(greeting_ch)
         SAY_HELLO.out.view { result -> "Output: ${result.trim()}" }
@@ -338,7 +338,8 @@ Replace the `splitCsv` input with `samplesheetToList`:
     }
     ```
 
-Instead of `splitCsv` and a manual `map` to extract fields, `samplesheetToList` parses the CSV according to the schema.
+The custom `splitCsv` and `map` parsing code is replaced with `samplesheetToList`, a proven, tested function that also validates the samplesheet against the schema before the pipeline runs.
+This reduces the maintenance burden of hand-written parsing logic while improving the experience for pipeline users, who get clear error messages when their input does not match the expected format.
 Each row becomes a list of values in column order, so `row[0]` is the greeting and `row[1]` is the language.
 
 #### 2.2.4. Run it
@@ -425,7 +426,8 @@ This is the kind of early feedback that saves debugging time in real pipelines w
 #### 2.2.6. Configure validation behavior
 
 The warning about `lang` is useful, but you can control its severity through configuration.
-The nf-schema plugin defines a `validation` configuration scope with options that control how validation behaves.
+Plugins can include their own configuration scope(s) that control their behavior.
+The nf-schema plugin includes the configuration scope `validation`; by modifying the settings here you can change how nf-schema behaves.
 
 Add a `validation` block to `nextflow.config` to make unrecognized headers cause an error instead of a warning:
 
@@ -638,7 +640,6 @@ The plugin now uses GB-specific carbon intensity (163.92 gCO₂eq/kWh) instead o
 In Part 6, you'll create a configuration scope for your own plugin.
 
 This plugin works entirely through the observer mechanism, hooking into workflow lifecycle events to collect resource metrics and generate its report when the pipeline completes.
-No `include` statement is needed because it doesn't provide functions; it runs automatically once declared in the config.
 
 You've now tried function plugins (imported with `include`) and an observer plugin (activated through config alone).
 These are the two most common extension types, but as the table in section 1 shows, plugins can also add executors and filesystems.

@@ -22,7 +22,7 @@ Change into the plugin directory:
 cd nf-greeting
 ```
 
-The template created an extension file where plugin functions are defined.
+The template created a file called `GreetingExtension.groovy` where plugin functions are defined.
 Open it to see the starting point:
 
 ```bash
@@ -57,11 +57,11 @@ import nextflow.plugin.extension.PluginExtensionPoint
  * Implements a custom function which can be imported by
  * Nextflow scripts.
  */
-@CompileStatic                                         // (1)!
-class GreetingExtension extends PluginExtensionPoint { // (2)!
+@CompileStatic
+class GreetingExtension extends PluginExtensionPoint { // (1)!
 
     @Override
-    protected void init(Session session) {             // (3)!
+    protected void init(Session session) {             // (2)!
     }
 
     /**
@@ -69,7 +69,7 @@ class GreetingExtension extends PluginExtensionPoint { // (2)!
      *
      * @param target
      */
-    @Function                                          // (4)!
+    @Function                                          // (3)!
     void sayHello(String target) {
         println "Hello, ${target}!"
     }
@@ -77,32 +77,18 @@ class GreetingExtension extends PluginExtensionPoint { // (2)!
 }
 ```
 
-1. Tells Groovy to check types at compile time, catching errors earlier
-2. The class your extension builds on. Nextflow requires this to recognize your functions.
-3. Called when the plugin loads; use for initialization
-4. Makes this method callable from workflows via `include`
+1. The class your extension builds on. Nextflow requires this to recognize your functions.
+2. Called when the plugin loads; use for initialization
+3. Makes this method callable from workflows via `include`
 
 The template includes a sample `sayHello` function.
 The `@Function` annotation is what makes a method callable from Nextflow workflows.
 Without it, the method exists only inside the plugin code.
 
-??? info "Understanding the Groovy syntax"
-
-    If the code looks unfamiliar, here's a breakdown of the key elements:
-
-    **`package training.plugin`**: Declares which package (folder structure) this code belongs to.
-    This must match the directory structure.
-
-    **`import ...`**: Brings in code from other packages, similar to Python's `import` or R's `library()`.
-
-    **`@CompileStatic`**: An annotation (marked with `@`) that tells Groovy to check types at compile time.
-    This catches errors earlier.
-
-    **`class GreetingExtension extends PluginExtensionPoint`**: Defines a class that inherits from `PluginExtensionPoint`.
-    The `extends` keyword means "this class is a type of that class."
-
-    **`void`** means the method doesn't return a value.
-    Our functions use `String` as their return type because they return text.
+In Groovy (and Java), methods declare what type they return and what types their parameters are.
+For example, `String reverseGreeting(String greeting)` declares a method that takes a `String` parameter and returns a `String`.
+The keyword `void` means the method returns nothing, as with `sayHello` above.
+This is different from Python or R, where types are not declared explicitly.
 
 ---
 
@@ -180,25 +166,11 @@ Key parts of this function:
 
 ## 3. Build and install your plugin
 
-The plugin code must be compiled before Nextflow can use it.
-
-??? info "Why do we need to build?"
-
-    If you're used to scripting languages like Python, R, or even Nextflow's DSL, you might wonder why we need a "build" step.
-    In those languages, you write code and run it directly.
-
-    Nextflow plugins are written in Groovy, which runs on the Java Virtual Machine (JVM).
-    JVM languages need to be **compiled** before they can run.
-    The build tools handle all this automatically.
-    Run `make assemble` and let Gradle do the work.
-
-Build the plugin:
+Build and install the plugin:
 
 ```bash
 make assemble
 ```
-
-Install the plugin:
 
 ```bash
 make install
@@ -206,25 +178,9 @@ make install
 
 !!! tip "If the build fails"
 
-    Build errors usually point to a specific problem.
-    Common issues include:
-
-    - **Syntax errors**: A missing bracket, quote, or semicolon. The error message usually includes a line number.
-    - **Import errors**: A class name is misspelled or the import statement is missing.
-    - **Type errors**: You're passing the wrong type of data to a function.
-
-    Read the error message carefully.
-    It often tells you exactly what's wrong and where.
-    If you're stuck, compare your code character-by-character with the examples.
-
-??? warning "Common runtime issues"
-
-    Even if the build succeeds, you might encounter issues when running:
-
-    - **"Plugin not found"**: Did you run `make install`? The plugin must be installed locally before Nextflow can use it.
-    - **"Unknown function"**: Check that you've imported the function with `include { functionName } from 'plugin/nf-greeting'`.
-    - **Wrong directory**: Make sure you're in the right directory. Use `pwd` to check, and `cd ..` or `cd nf-greeting` as needed.
-    - **IDE showing errors**: The VS Code Nextflow extension may show warnings for plugin imports. If the build succeeds and Nextflow runs correctly, you can ignore these.
+    Read the error message carefully; it usually includes a line number and describes the problem.
+    Common causes are syntax errors (missing bracket or quote), misspelled class names, and type mismatches.
+    If you are stuck, compare your code character-by-character with the examples.
 
 ---
 
@@ -334,23 +290,6 @@ nextflow run greet.nf
 
 Your first custom plugin function is working in a real workflow.
 The same `include { ... } from 'plugin/...'` pattern you used with nf-hello and nf-schema in Part 1 works with your own plugin.
-
-??? exercise "Try a different transformation"
-
-    Change the `map` closure to pass a different string to `reverseGreeting`, like your own name.
-    No rebuild is needed since the plugin function is already installed; just edit `greet.nf` and rerun.
-
-    ??? solution
-
-        ```groovy
-        greeting_ch
-            .map { greeting -> reverseGreeting('Nextflow') }
-            .view { reversed -> "Reversed: $reversed" }
-        ```
-
-        ```console title="Output (partial)"
-        Reversed: wolftxeN
-        ```
 
 ---
 
@@ -528,34 +467,6 @@ nextflow run greet.nf
 
 Plugin functions work in both process scripts (like `decorateGreeting` inside `SAY_HELLO`) and workflow operations (like `reverseGreeting` in a `map`).
 
-??? exercise "Add a function with default parameters"
-
-    Add a third function, `friendlyGreeting`, that combines a greeting with a name.
-    Use a default parameter value so the name is optional.
-
-    ??? solution
-
-        Add this method after `decorateGreeting` in `GreetingExtension.groovy`:
-
-        ```groovy
-        /**
-         * Convert greeting to a friendly format with a name
-         */
-        @Function
-        String friendlyGreeting(String greeting, String name = 'World') {
-            return "${greeting}, ${name}!"
-        }
-        ```
-
-        The `String name = 'World'` syntax provides a default value, just like in Python.
-        Users can call `friendlyGreeting('Hello')` or `friendlyGreeting('Hello', 'Alice')`.
-
-        Build and install, then try it in a `map`:
-
-        ```bash
-        cd nf-greeting && make assemble && make install && cd ..
-        ```
-
 ---
 
 ## Takeaway
@@ -565,7 +476,6 @@ You learned that:
 - Functions are defined with the `@Function` annotation in `PluginExtensionPoint` subclasses
 - Plugin functions imported with `include` work identically whether from your own plugin or an existing one
 - Plugin functions work in both process scripts and workflow operations
-- Methods can accept parameters with default values
 
 ---
 

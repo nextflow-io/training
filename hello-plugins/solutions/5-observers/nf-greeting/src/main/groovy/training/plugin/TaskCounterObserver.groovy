@@ -2,6 +2,7 @@ package training.plugin
 
 import groovy.transform.CompileStatic
 import nextflow.processor.TaskHandler
+import java.nio.file.Path
 import nextflow.trace.TraceObserver
 import nextflow.trace.TraceRecord
 
@@ -17,6 +18,11 @@ class TaskCounterObserver implements TraceObserver {
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
         taskCount++
         println "📊 Tasks completed so far: ${taskCount}"
+    }
+
+    @Override
+    void onFilePublish(Path destination, Path source) {
+        println "📁 Published: ${destination.fileName}"
     }
 
     @Override
