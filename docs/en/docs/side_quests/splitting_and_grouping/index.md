@@ -29,7 +29,7 @@ Before taking on this side quest, you should:
 - Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators, working with files, meta data)
 
-**Optional:** We recommend completing the [Metadata in workflows](./metadata.md) side quest first.
+**Optional:** We recommend completing the [Metadata in workflows](../metadata/) side quest first.
 That covers the fundamentals of reading CSV files with `splitCsv` and creating meta maps, which we'll use heavily here.
 
 ---
@@ -133,7 +133,7 @@ workflow {
 
     Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
 
-If you completed the [Metadata in workflows](./metadata.md) side quest, you'll recognize this pattern. We'll use `splitCsv` to read the CSV and immediately structure the data with a meta map to separate metadata from file paths.
+If you completed the [Metadata in workflows](../metadata/) side quest, you'll recognize this pattern. We'll use `splitCsv` to read the CSV and immediately structure the data with a meta map to separate metadata from file paths.
 
 !!! info
 
@@ -656,7 +656,7 @@ To do so, first we define the closure as a new variable:
 
 We've defined the map transformation as a named variable that we can reuse.
 
-Note that we also convert the file path to a Path object using `file()` so that any process receiving this channel can handle the file correctly (for more information see [Working with files](./working_with_files.md)).
+Note that we also convert the file path to a Path object using `file()` so that any process receiving this channel can handle the file correctly (for more information see [Working with files](../working_with_files/)).
 
 Let's implement the closure in our workflow:
 
@@ -1166,7 +1166,7 @@ Mastering these channel operations will enable you to build flexible, scalable p
 
 ### Key patterns
 
-1.  **Creating structured input data:** Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](./metadata.md))
+1.  **Creating structured input data:** Starting from a CSV file with meta maps (building on patterns from [Metadata in workflows](../metadata/))
 
     ```groovy
     ch_samples = channel.fromPath("./data/samplesheet.csv")
@@ -1247,4 +1247,4 @@ Mastering these channel operations will enable you to build flexible, scalable p
 
 ## What's next?
 
-Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.

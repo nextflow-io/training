@@ -1,6 +1,6 @@
 # Summary
 
-You have completed the Hello Plugins training.
+You have completed the Plugin Development training.
 This page recaps what you built in each part, covers distribution, and provides guidance on where to go next.
 
 ---

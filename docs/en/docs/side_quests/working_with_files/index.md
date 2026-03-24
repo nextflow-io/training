@@ -1603,7 +1603,7 @@ process ANALYZE_READS {
 !!! note
 
     We are calling our metadata map `meta` by convention.
-    For a deeper dive into meta maps, see the [Metadata and meta maps](./metadata.md) side quest.
+    For a deeper dive into meta maps, see the [Metadata and meta maps](../metadata/) side quest.
 
 ### 6.2. Call the process in the workflow
 
@@ -1884,7 +1884,7 @@ There's a lot more you can do once you have your metadata loaded into a map like
 3. Split, join, and recombine data based on metadata values
 
 This pattern of keeping metadata explicit and attached to the data (rather than encoded in filenames) is a core best practice in Nextflow that enables building robust, maintainable analysis workflows.
-You can learn more about this in the [Metadata and meta maps](./metadata.md) side quest.
+You can learn more about this in the [Metadata and meta maps](../metadata/) side quest.
 
 ### Takeaway
 
@@ -2034,4 +2034,4 @@ Applying these techniques in your own work will enable you to build more efficie
 
 ## What's next?
 
-Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.

@@ -442,7 +442,7 @@ This `[meta, file]` tuple structure is a common pattern in Nextflow for passing 
 
 !!! note
 
-    **Maps and Metadata**: Maps are fundamental to working with metadata in Nextflow. For a more detailed explanation of working with metadata maps, see the [Working with metadata](./metadata.md) side quest.
+    **Maps and Metadata**: Maps are fundamental to working with metadata in Nextflow. For a more detailed explanation of working with metadata maps, see the [Working with metadata](../metadata/) side quest.
 
 Our workflow demonstrates the core pattern: **dataflow operations** (`workflow`, `channel.fromPath()`, `.splitCsv()`, `.map()`, `.view()`) orchestrate how data moves through the pipeline, while **scripting** (maps `[key: value]`, string methods, type conversions, ternary operators) inside the `.map()` closure handles the transformation of individual data items.
 
@@ -2458,4 +2458,4 @@ You'll benefit from practicing and expanding your skills in order to:
 
 ## What's next?
 
-Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.

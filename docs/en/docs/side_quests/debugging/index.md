@@ -21,7 +21,7 @@ Before taking on this side quest, you should:
 - Have completed the [Hello Nextflow](../hello_nextflow/README.md) tutorial or equivalent beginner's course.
 - Be comfortable using basic Nextflow concepts and mechanisms (processes, channels, operators)
 
-**Optional:** We recommend completing the [IDE Features for Nextflow Development](./ide_features.md) side quest first.
+**Optional:** We recommend completing the [IDE Features for Nextflow Development](../dev_environment/) side quest first.
 That covers comprehensive coverage of IDE features that support debugging (syntax highlighting, error detection, etc.), which we'll use heavily here.
 
 ---
@@ -2642,4 +2642,4 @@ For production workflows, consider:
 
 ## What's next?
 
-Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.

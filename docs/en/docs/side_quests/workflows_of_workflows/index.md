@@ -466,4 +466,4 @@ Applying these techniques in your own work will enable you to build more sophist
 
 ## What's next?
 
-Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.

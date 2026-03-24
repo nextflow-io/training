@@ -1,6 +1,6 @@
 # Next Steps
 
-Congratulations on completing the **Hello Plugins** training course and thank you for completing our survey.
+Congratulations on completing the **Plugin Development** training course and thank you for completing our survey.
 
 ---
 
@@ -47,6 +47,6 @@ If you build a useful plugin, consider sharing it with the community through the
 
 If you haven't already, check out our other training courses:
 
-- **[Hello Nextflow](../hello_nextflow/index.md)**: Foundational Nextflow concepts
-- **[Hello nf-core](../hello_nf-core/index.md)**: nf-core pipelines and best practices
-- **[Side Quests](../side_quests/index.md)**: Deep dives into specific topics
+- **[Hello Nextflow](../../hello_nextflow/index.md)**: Foundational Nextflow concepts
+- **[Hello nf-core](../../hello_nf-core/index.md)**: nf-core pipelines and best practices
+- **[Side Quests](../index.md)**: Deep dives into specific topics

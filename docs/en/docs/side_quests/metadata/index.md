@@ -530,7 +530,7 @@ This will prove useful in the next step.
     As you will have learned already, you can't rely on the order of items in channels to match results across them.
     Instead, you must use keys to associate data correctly, and meta maps provide an ideal structure for this purpose.
 
-    We explore this use case in detail in the [Splitting & Grouping](./splitting_and_grouping.md) side quest.
+    We explore this use case in detail in the [Splitting & Grouping](../splitting_and_grouping/) side quest.
 
 ### 2.3. Augment metadata with process outputs
 
@@ -1640,4 +1640,4 @@ Applying this pattern in your own work will enable you to build robust, maintain
 
 ## What's next?
 
-Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.

@@ -17,7 +17,7 @@ This page will help you set up your environment and navigate through the trainin
 
 ## 1. Open the training environment
 
-If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../envsetup/index.md).
+If you haven't yet done so, make sure to open the training environment as described in the [Environment Setup](../../envsetup/index.md).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -56,7 +56,7 @@ You should see Java 21 or later.
 ## 3. Move into the project directory
 
 ```bash
-cd hello-plugins
+cd side-quests/plugin_development
 ```
 
 ---
@@ -104,7 +104,7 @@ This training is organized into two tracks:
 
 - [ ] My codespace is running
 - [ ] Java is installed (for plugin development parts)
-- [ ] I'm in the `hello-plugins` directory
+- [ ] I'm in the `side-quests/plugin_development` directory
 
 ---
 

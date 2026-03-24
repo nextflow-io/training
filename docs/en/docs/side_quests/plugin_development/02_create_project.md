@@ -27,7 +27,7 @@ nextflow plugin create nf-greeting training
 ```
 
 ```console title="Output"
-Plugin created successfully at path: /workspaces/training/hello-plugins/nf-greeting
+Plugin created successfully at path: /workspaces/training/side-quests/plugin_development/nf-greeting
 ```
 
 The first argument is the plugin name, and the second is your organization name (used to organize the generated code into folders).

@@ -1,10 +1,10 @@
 ---
-title: Hello Plugins
+title: Plugin Development
 hide:
   - toc
 ---
 
-# Hello Plugins
+# Plugin Development
 
 Nextflow's plugin system allows you to extend the language with custom functions, monitoring hooks, execution backends, and more.
 Plugins enable the community to add features to Nextflow without modifying its core, making them ideal for sharing reusable functionality across pipelines.
@@ -19,8 +19,8 @@ No prior Java or Groovy experience is required.
 
 **Prerequisites**
 
-- A GitHub account OR a local installation as described [here](../envsetup/02_local).
-- Completed the [Hello Nextflow](../hello_nextflow/index.md) course or equivalent.
+- A GitHub account OR a local installation as described [here](../../envsetup/02_local).
+- Completed the [Hello Nextflow](../../hello_nextflow/index.md) course or equivalent.
 
 ## Learning objectives
 

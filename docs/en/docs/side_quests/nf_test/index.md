@@ -1193,4 +1193,4 @@ Check out the [nf-test documentation](https://www.nf-test.com/) for more advance
 
 ## What's next?
 
-Return to the [menu of Side Quests](./index.md) or click the button in the bottom right of the page to move on to the next topic in the list.
+Return to the [menu of Side Quests](../) or click the button in the bottom right of the page to move on to the next topic in the list.
