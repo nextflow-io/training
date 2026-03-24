@@ -46,8 +46,8 @@ Once your plugin is working locally, you can share it with others through the Ne
 
 Follow [semantic versioning](https://semver.org/) for your releases:
 
-| Version change             | When to use                       | Example                                    |
-| -------------------------- | --------------------------------- | ------------------------------------------ |
+| Version change            | When to use                       | Example                                    |
+| ------------------------- | --------------------------------- | ------------------------------------------ |
 | **MAJOR** (1.0.0 → 2.0.0) | Breaking changes                  | Removing a function, changing return types |
 | **MINOR** (1.0.0 → 1.1.0) | New features, backward compatible | Adding a new function                      |
 | **PATCH** (1.0.0 → 1.0.1) | Bug fixes, backward compatible    | Fixing a bug in existing function          |
