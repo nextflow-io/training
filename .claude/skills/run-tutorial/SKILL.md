@@ -384,6 +384,94 @@ Container name, Nextflow version, working directory
 
 ---
 
+## Multi-Part Modules
+
+Some training modules (e.g. `hello_plugins`) consist of multiple numbered parts where each part builds on the previous one's solution. These require special handling for parallel testing.
+
+### Structure
+
+Multi-part modules typically have:
+
+- Numbered lesson files: `01_plugin_basics.md`, `02_create_project.md`, etc.
+- A `solutions/` directory with one subdirectory per part: `solutions/1-plugin-basics/`, `solutions/2-create-project/`, etc.
+- Each part's "Starting from here?" tip copies the previous part's solution: `cp -r solutions/N-previous/* .`
+
+### Parallel Testing with Agents
+
+To test all parts simultaneously, launch one Agent per part with isolated working directories:
+
+#### 1. Set up the Docker container
+
+Follow `/docker-setup` (basic setup) once. All agents share the single `nf-training` container.
+
+#### 2. Create isolated directories
+
+Each part gets its own copy of the working files so agents do not interfere:
+
+```bash
+for i in 1 2 3 4 5 6; do
+  dir="<working-dir>/_test_part${i}"
+  mkdir -p "$dir"
+  # Copy base data files
+  cp <working-dir>/*.csv <working-dir>/*.json "$dir/"
+  cp <working-dir>/*.nf <working-dir>/*.config "$dir/"
+  cp -r <working-dir>/solutions "$dir/"
+done
+```
+
+Then copy each part's starting point (the previous part's solution):
+
+```bash
+for i in 2 3 4 5 6; do
+  prev=$((i-1))
+  dir="<working-dir>/_test_part${i}"
+  docker exec -w /workspaces/training nf-training bash -c "cp -r ${dir}/solutions/${prev}-*/* ${dir}/"
+done
+```
+
+Part 1 starts from scratch, so reset its files to the git HEAD versions.
+
+#### 3. Launch agents
+
+Launch one Agent per part, all in the background. Each agent's prompt must specify:
+
+- Its isolated container working directory: `/workspaces/training/<working-dir>/_test_partN`
+- Its isolated host directory for file edits: `<repo-root>/<working-dir>/_test_partN/`
+- The Docker exec pattern with all required env vars (`LANG`, `LC_ALL`, `NXF_SYNTAX_PARSER`)
+- Which lesson file to walk through
+- Which solution directory to compare against
+
+#### 4. Cleanup
+
+After all agents complete, remove the test directories:
+
+```bash
+rm -rf <working-dir>/_test_part*
+```
+
+### Why Isolation Matters
+
+Without isolation, parallel agents will:
+
+- Overwrite each other's files (each copies a different solution into the same location)
+- Compete for Gradle build locks in shared `nf-greeting/` directories
+- Produce interleaved Nextflow work directories
+- Generate unreliable pass/fail results
+
+### JVM Resource Limits
+
+Parallel execution works for tutorials that only run Nextflow (lightweight JVM usage).
+For tutorials involving Gradle builds (e.g. plugin development), multiple concurrent JVM processes in a single container often cause SIGSEGV crashes and Gradle daemon conflicts.
+
+In these cases, **run sequentially in a single agent** instead. Launch one agent with instructions to walk through all parts in order, resetting the working directory between each part by copying the appropriate solution.
+
+This is slower but reliable. A single sequential agent avoids:
+- Gradle daemon lock contention (`/root/.gradle/daemon/` is shared)
+- JVM memory pressure from concurrent builds
+- Non-deterministic crash/retry cycles
+
+---
+
 ## Special Cases
 
 ### Exercises

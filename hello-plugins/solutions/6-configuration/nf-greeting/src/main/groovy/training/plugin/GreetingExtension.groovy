@@ -29,8 +29,4 @@ class GreetingExtension extends PluginExtensionPoint {
         return "${prefix} ${greeting} ${suffix}"
     }
 
-    @Function
-    String friendlyGreeting(String greeting, String name = 'World') {
-        return "${greeting}, ${name}!"
-    }
 }

@@ -24,19 +24,4 @@ class GreetingExtensionTest extends Specification {
         ext.decorateGreeting('Hello') == '*** Hello ***'
     }
 
-    def 'should create friendly greeting with default name'() {
-        given:
-        def ext = new GreetingExtension()
-
-        expect:
-        ext.friendlyGreeting('Hello') == 'Hello, World!'
-    }
-
-    def 'should create friendly greeting with custom name'() {
-        given:
-        def ext = new GreetingExtension()
-
-        expect:
-        ext.friendlyGreeting('Hello', 'Alice') == 'Hello, Alice!'
-    }
 }
