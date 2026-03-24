@@ -1,16 +1,16 @@
 # Bölme ve Gruplama
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 Nextflow, verilerle esnek bir şekilde çalışmak için güçlü araçlar sağlar. Temel bir özellik, verileri farklı akışlara bölmek ve ardından ilişkili öğeleri tekrar birleştirmektir. Bu, özellikle analiz için sonuçları birleştirmeden önce farklı örnek türlerini ayrı ayrı işlemeniz gereken biyoinformatik iş akışlarında değerlidir.
 
 Bunu mektup sıralama gibi düşünün: mektupları varış yerine göre ayırırsınız, her yığını farklı şekilde işlersiniz, ardından aynı kişiye giden öğeleri yeniden birleştirirsiniz. Nextflow, bilimsel verilerle bunu başarmak için özel operatörler kullanır. Bu yaklaşım aynı zamanda dağıtık hesaplama ve biyoinformatik iş akışlarında yaygın olarak **scatter/gather** deseni olarak bilinir.
 
-Nextflow'un channel sistemi bu esnekliğin merkezindedir. Channel'lar iş akışınızın farklı bölümlerini bağlayarak verilerin analiziniz boyunca akmasını sağlar. Tek bir veri kaynağından birden fazla channel oluşturabilir, her channel'ı farklı şekilde işleyebilir ve gerektiğinde channel'ları tekrar birleştirebilirsiniz. Bu yaklaşım, karmaşık biyoinformatik analizlerin dallanma ve birleşme yollarını doğal olarak yansıtan iş akışları tasarlamanıza olanak tanır.
+Nextflow'un kanal sistemi bu esnekliğin merkezindedir. Kanallar, iş akışınızın farklı bölümlerini bağlayarak verilerin analiziniz boyunca akmasını sağlar. Tek bir veri kaynağından birden fazla kanal oluşturabilir, her kanalı farklı şekilde işleyebilir ve gerektiğinde kanalları tekrar birleştirebilirsiniz. Bu yaklaşım, karmaşık biyoinformatik analizlerin dallanma ve birleşme yollarını doğal olarak yansıtan iş akışları tasarlamanıza olanak tanır.
 
 ### Öğrenme hedefleri
 
-Bu yan görevde, Nextflow'un channel operatörlerini kullanarak verileri bölmeyi ve gruplamayı öğreneceksiniz.
+Bu yan görevde, Nextflow'un kanal operatörlerini kullanarak verileri bölmeyi ve gruplamayı öğreneceksiniz.
 Örnek bilgileri ve ilişkili veri dosyalarını içeren bir CSV dosyasıyla başlayacak, ardından bu verileri manipüle edip yeniden düzenleyeceğiz.
 
 Bu yan görevin sonunda, aşağıdaki teknikleri kullanarak veri akışlarını etkili bir şekilde ayırıp birleştirebileceksiniz:
@@ -20,7 +20,7 @@ Bu yan görevin sonunda, aşağıdaki teknikleri kullanarak veri akışlarını 
 - `join` ve `groupTuple` kullanarak ilişkili verileri birleştirme
 - Paralel işleme için `combine` ile veri kombinasyonları oluşturma
 - `subMap` ve tekilleştirme stratejileri kullanarak veri yapısını optimize etme
-- Channel yapılarını manipüle etmenize yardımcı olacak adlandırılmış closure'lar ile yeniden kullanılabilir fonksiyonlar oluşturma
+- Kanal yapılarını manipüle etmenize yardımcı olacak adlandırılmış closure'lar ile yeniden kullanılabilir fonksiyonlar oluşturma
 
 Bu beceriler, temiz ve bakımı kolay kod yapısını korurken birden fazla girdi dosyası ve farklı veri türlerini verimli bir şekilde işleyebilen iş akışları oluşturmanıza yardımcı olacaktır.
 
@@ -29,7 +29,7 @@ Bu beceriler, temiz ve bakımı kolay kod yapısını korurken birden fazla gird
 Bu yan göreve başlamadan önce:
 
 - [Hello Nextflow](../hello_nextflow/README.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.
-- Temel Nextflow kavramları ve mekanizmalarını (process'ler, channel'lar, operatörler, dosyalarla çalışma, meta veri) rahatça kullanabiliyor olmalısınız
+- Temel Nextflow kavramları ve mekanizmalarını (süreçler, kanallar, operatörler, dosyalarla çalışma, meta veri) rahatça kullanabiliyor olmalısınız.
 
 **İsteğe bağlı:** Önce [İş akışlarında meta veri](./metadata.md) yan görevini tamamlamanızı öneririz.
 Bu, burada yoğun şekilde kullanacağımız `splitCsv` ile CSV dosyalarını okuma ve meta map oluşturma temellerini kapsar.
@@ -60,9 +60,9 @@ code .
 
 #### Materyalleri inceleyin
 
-Bir ana workflow dosyası ve `samplesheet.csv` adlı bir örnek sayfası içeren bir `data` dizini bulacaksınız.
+Bir ana iş akışı dosyası ve `samplesheet.csv` adlı bir örnek sayfası içeren bir `data` dizini bulacaksınız.
 
-```console title="Dizin içeriği"
+```console title="Directory contents"
 .
 ├── data
 │   └── samplesheet.csv
@@ -92,14 +92,14 @@ Kanser analiziyle tanışık değilseniz, bunun karşılaştırmalı analizler g
 
 !!! note "Not"
 
-    Bu deneysel tasarıma aşina değilseniz endişelenmeyin, bu eğitimi anlamak için kritik değil.
+    Bu deneysel tasarıma aşina değilseniz endişelenmeyin; bu eğitimi anlamak için kritik değil.
 
 #### Görevi inceleyin
 
 Göreviniz şunları yapacak bir Nextflow iş akışı yazmaktır:
 
 1. Bir CSV dosyasından örnek verilerini **okuma** ve meta map'lerle yapılandırma
-2. Türe göre (normal vs tümör) örnekleri farklı channel'lara **ayırma**
+2. Türe göre (normal vs tümör) örnekleri farklı kanallara **ayırma**
 3. Hasta kimliği ve replik numarasına göre eşleşen tümör/normal çiftlerini **birleştirme**
 4. Paralel işleme için örnekleri genomik aralıklara **dağıtma**
 5. Aşağı akış analizi için ilişkili örnekleri tekrar **gruplama**
@@ -133,7 +133,7 @@ workflow {
 
 !!! note "Not"
 
-    Bu eğitim boyunca, Nextflow channel'ları olduklarını açıkça belirtmek için tüm channel değişkenleri için `ch_` önekini kullanacağız.
+    Bu eğitim boyunca, Nextflow kanalları olduklarını açıkça belirtmek için tüm kanal değişkenleri için `ch_` önekini kullanacağız.
 
 [İş akışlarında meta veri](./metadata.md) yan görevini tamamladıysanız, bu deseni tanıyacaksınız. Meta veriyi dosya yollarından ayırmak için CSV'yi okumak ve verileri hemen bir meta map ile yapılandırmak için `splitCsv` kullanacağız.
 
@@ -142,7 +142,7 @@ workflow {
     Bu eğitimde `map` olarak adlandırılan iki farklı kavramla karşılaşacağız:
 
     - **Veri yapısı**: Anahtar-değer çiftlerini saklayan Groovy map (diğer dillerdeki sözlükler/hash'ler ile eşdeğer)
-    - **Channel operatörü**: Bir channel'daki öğeleri dönüştüren `.map()` operatörü
+    - **Kanal operatörü**: Bir kanaldaki öğeleri dönüştüren `.map()` operatörü
 
     Bağlamda hangisini kastettiğimizi açıklayacağız, ancak Nextflow ile çalışırken bu ayrımı anlamak önemlidir.
 
@@ -188,7 +188,7 @@ nextflow run main.nf
     [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-Artık her öğenin bir `[meta, file]` tuple'ı olduğu bir channel'ımız var - meta veri dosya yollarından ayrılmış durumda. Bu yapı, meta veri alanlarına göre iş yükümüzü bölmemize ve gruplamamıza olanak tanır.
+Artık her öğenin bir `[meta, file]` tuple'ı olduğu bir kanalımız var; meta veri, dosya yollarından ayrılmış durumda. Bu yapı, meta veri alanlarına göre iş yükümüzü bölmemize ve gruplamamıza olanak tanır.
 
 ---
 
@@ -242,7 +242,7 @@ nextflow run main.nf
 
 Verileri başarıyla sadece normal örnekleri içerecek şekilde filtreledik. Bunun nasıl çalıştığını özetleyelim.
 
-`filter` operatörü, channel'daki her öğeye uygulanan bir closure alır. Closure `true` döndürürse, öğe dahil edilir; `false` döndürürse, öğe hariç tutulur.
+`filter` operatörü, kanaldaki her öğeye uygulanan bir closure alır. Closure `true` döndürürse öğe dahil edilir; `false` döndürürse öğe hariç tutulur.
 
 Bizim durumumuzda, sadece `meta.type == 'normal'` olan örnekleri tutmak istiyoruz. Closure, her örneğe başvurmak için `meta,file` tuple'ını kullanır, `meta.type` ile örnek türüne erişir ve `'normal'`'e eşit olup olmadığını kontrol eder.
 
@@ -252,9 +252,9 @@ Bu, yukarıda tanıttığımız tek closure ile gerçekleştirilir:
     .filter { meta, file -> meta.type == 'normal' }
 ```
 
-### 2.2. Ayrı filtrelenmiş channel'lar oluşturma
+### 2.2. Ayrı filtrelenmiş kanallar oluşturma
 
-Şu anda filtreyi doğrudan CSV'den oluşturulan channel'a uyguluyoruz, ancak bunu birden fazla şekilde filtrelemek istiyoruz, bu yüzden mantığı normal örnekler için ayrı bir filtrelenmiş channel oluşturmak üzere yeniden yazalım:
+Şu anda filtreyi doğrudan CSV'den oluşturulan kanala uyguluyoruz, ancak bunu birden fazla şekilde filtrelemek istiyoruz; bu yüzden mantığı normal örnekler için ayrı bir filtrelenmiş kanal oluşturmak üzere yeniden yazalım:
 
 === "Sonra"
 
@@ -301,9 +301,9 @@ nextflow run main.nf
     [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
     ```
 
-Verileri başarıyla filtreledik ve normal örnekler için ayrı bir channel oluşturduk.
+Verileri başarıyla filtreledik ve normal örnekler için ayrı bir kanal oluşturduk.
 
-Tümör örnekleri için de filtrelenmiş bir channel oluşturalım:
+Tümör örnekleri için de filtrelenmiş bir kanal oluşturalım:
 
 === "Sonra"
 
@@ -313,9 +313,9 @@ Tümör örnekleri için de filtrelenmiş bir channel oluşturalım:
         ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
         ch_normal_samples
-            .view{'Normal örnek: ' + it}
+            .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'Tümör örnek: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 === "Önce"
@@ -338,43 +338,43 @@ nextflow run main.nf
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
-    Tümör örnek: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tümör örnek: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Normal örnek: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal örnek: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Normal örnek: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal örnek: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tümör örnek: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tümör örnek: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-Normal ve tümör örneklerini iki farklı channel'a ayırdık ve çıktıda farklı şekilde etiketlemek için `view()`'a bir closure sağladık: `ch_tumor_samples.view{'Tümör örnek: ' + it}`.
+Normal ve tümör örneklerini iki farklı kanala ayırdık ve çıktıda farklı şekilde etiketlemek için `view()`'a bir closure sağladık: `ch_tumor_samples.view{'Tümör örnek: ' + it}`.
 
-### Özet
+### Özetle
 
 Bu bölümde öğrendikleriniz:
 
 - **Verileri filtreleme**: `filter` ile verileri nasıl filtreleyeceğiniz
-- **Verileri bölme**: Bir koşula göre verileri farklı channel'lara nasıl böleceğiniz
-- **Verileri görüntüleme**: `view` kullanarak verileri yazdırma ve farklı channel'lardan çıktıları nasıl etiketleyeceğiniz
+- **Verileri bölme**: Bir koşula göre verileri farklı kanallara nasıl böleceğiniz
+- **Verileri görüntüleme**: `view` kullanarak verileri yazdırma ve farklı kanallardan çıktıları nasıl etiketleyeceğiniz
 
-Artık normal ve tümör örneklerini iki farklı channel'a ayırdık. Şimdi normal ve tümör örneklerini `id` alanına göre birleştireceğiz.
+Artık normal ve tümör örneklerini iki farklı kanala ayırdık. Şimdi normal ve tümör örneklerini `id` alanına göre birleştireceğiz.
 
 ---
 
-## 3. Channel'ları tanımlayıcılara göre birleştirme
+## 3. Kanalları tanımlayıcılara göre birleştirme
 
-Önceki bölümde, normal ve tümör örneklerini iki farklı channel'a ayırdık. Bunlar türlerine göre belirli process'ler veya iş akışları kullanılarak bağımsız olarak işlenebilir. Ancak aynı hastadan normal ve tümör örneklerini karşılaştırmak istediğimizde ne olur? Bu noktada, örnekleri `id` alanına göre eşleştirerek tekrar birleştirmemiz gerekir.
+Önceki bölümde, normal ve tümör örneklerini iki farklı kanala ayırdık. Bunlar türlerine göre belirli süreçler veya iş akışları kullanılarak bağımsız olarak işlenebilir. Ancak aynı hastadan normal ve tümör örneklerini karşılaştırmak istediğimizde ne olur? Bu noktada, örnekleri `id` alanına göre eşleştirerek tekrar birleştirmemiz gerekir.
 
-Nextflow, channel'ları birleştirmek için birçok yöntem içerir, ancak bu durumda en uygun operatör [`join`](https://www.nextflow.io/docs/latest/operator.html#join)'dir. SQL'e aşinaysanız, birleştirme anahtarını ve gerçekleştirilecek birleştirme türünü belirttiğimiz `JOIN` işlemi gibi çalışır.
+Nextflow, kanalları birleştirmek için birçok yöntem içerir, ancak bu durumda en uygun operatör [`join`](https://www.nextflow.io/docs/latest/operator.html#join)'dir. SQL'e aşinaysanız, birleştirme anahtarını ve gerçekleştirilecek birleştirme türünü belirttiğimiz `JOIN` işlemi gibi çalışır.
 
 ### 3.1. Hasta kimliğine göre birleştirmek için `map` ve `join` kullanma
 
-[`join`](https://www.nextflow.io/docs/latest/operator.html#join) belgelerine bakarsak, varsayılan olarak her tuple'daki ilk öğeye göre iki channel'ı birleştirdiğini görebiliriz.
+[`join`](https://www.nextflow.io/docs/latest/operator.html#join) belgelerine bakarsak, varsayılan olarak her tuple'daki ilk öğeye göre iki kanalı birleştirdiğini görebiliriz.
 
 #### 3.1.1. Veri yapısını kontrol etme
 
-Konsol çıktısı hala mevcut değilse, veri yapımızı kontrol etmek ve `id` alanına göre birleştirmek için nasıl değiştirmemiz gerektiğini görmek için pipeline'ı çalıştıralım.
+Konsol çıktısı hala mevcut değilse, veri yapımızı kontrol etmek ve `id` alanına göre birleştirmek için nasıl değiştirmemiz gerektiğini görmek amacıyla pipeline'ı çalıştıralım.
 
 ```bash
 nextflow run main.nf
@@ -387,17 +387,17 @@ nextflow run main.nf
 
     Launching `main.nf` [maniac_boltzmann] DSL2 - revision: 3636b6576b
 
-    Tümör örnek: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tümör örnek: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Normal örnek: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal örnek: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Normal örnek: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal örnek: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
-    Tümör örnek: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tümör örnek: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [[id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [[id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Normal sample: [[id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Normal sample: [[id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Normal sample: [[id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [[id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [[id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-`id` alanının her meta map'teki ilk öğe olduğunu görebiliriz. `join`'in çalışması için her tuple'daki `id` alanını izole etmeliyiz. Bundan sonra, iki channel'ı birleştirmek için `join` operatörünü kolayca kullanabiliriz.
+`id` alanının her meta map'teki ilk öğe olduğunu görebiliriz. `join`'in çalışması için her tuple'daki `id` alanını izole etmeliyiz. Bundan sonra, iki kanalı birleştirmek için `join` operatörünü kolayca kullanabiliriz.
 
 #### 3.1.2. `id` alanını izole etme
 
@@ -413,9 +413,9 @@ nextflow run main.nf
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
         ch_normal_samples
-            .view{'Normal örnek: ' + it}
+            .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'Tümör örnek: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 === "Önce"
@@ -426,9 +426,9 @@ nextflow run main.nf
         ch_tumor_samples = ch_samples
             .filter { meta, file -> meta.type == 'tumor' }
         ch_normal_samples
-            .view{'Normal örnek: ' + it}
+            .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'Tümör örnek: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 ```bash
@@ -442,21 +442,21 @@ nextflow run main.nf
 
     Launching `main.nf` [mad_lagrange] DSL2 - revision: 9940b3f23d
 
-    Tümör örnek: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
-    Tümör örnek: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
-    Normal örnek: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
-    Normal örnek: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
-    Tümör örnek: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
-    Tümör örnek: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
-    Normal örnek: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
-    Normal örnek: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:1, type:tumor], patientA_rep1_tumor.bam]
+    Tumor sample: [patientA, [id:patientA, repeat:2, type:tumor], patientA_rep2_tumor.bam]
+    Normal sample: [patientA, [id:patientA, repeat:1, type:normal], patientA_rep1_normal.bam]
+    Normal sample: [patientA, [id:patientA, repeat:2, type:normal], patientA_rep2_normal.bam]
+    Tumor sample: [patientB, [id:patientB, repeat:1, type:tumor], patientB_rep1_tumor.bam]
+    Tumor sample: [patientC, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
+    Normal sample: [patientB, [id:patientB, repeat:1, type:normal], patientB_rep1_normal.bam]
+    Normal sample: [patientC, [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam]
     ```
 
 Belki de ince bir fark, ancak her tuple'daki ilk öğenin `id` alanı olduğunu görmelisiniz.
 
-#### 3.1.3. İki channel'ı birleştirme
+#### 3.1.3. İki kanalı birleştirme
 
-Artık `id` alanına göre iki channel'ı birleştirmek için `join` operatörünü kullanabiliriz.
+Artık `id` alanına göre iki kanalı birleştirmek için `join` operatörünü kullanabiliriz.
 
 Bir kez daha, birleştirilmiş çıktıları yazdırmak için `view` kullanacağız.
 
@@ -484,9 +484,9 @@ Bir kez daha, birleştirilmiş çıktıları yazdırmak için `view` kullanacağ
             .filter { meta, file -> meta.type == 'tumor' }
             .map { meta, file -> [meta.id, meta, file] }
         ch_normal_samples
-            .view{'Normal örnek: ' + it}
+            .view{'Normal sample: ' + it}
         ch_tumor_samples
-            .view{'Tümör örnek: ' + it}
+            .view{'Tumor sample: ' + it}
     ```
 
 ```bash
@@ -519,7 +519,7 @@ nextflow run main.nf
     `join` operatörü eşleşmeyen tuple'ları atacaktır. Bu örnekte, tüm örneklerin tümör ve normal için eşleştirildiğinden emin olduk, ancak bu doğru değilse eşleşmeyen tuple'ları tutmak için `remainder: true` parametresini kullanmanız gerekir. Daha fazla ayrıntı için [belgelere](https://www.nextflow.io/docs/latest/operator.html#join) bakın.
 
 Artık bir tuple'daki bir alanı izole etmek için `map`'i ve tuple'ları ilk alana göre birleştirmek için `join`'i nasıl kullanacağınızı biliyorsunuz.
-Bu bilgiyle, paylaşılan bir alana göre channel'ları başarıyla birleştirebilirsiniz.
+Bu bilgiyle, paylaşılan bir alana göre kanalları başarıyla birleştirebilirsiniz.
 
 Şimdi, birden fazla alanda birleştirmek istediğiniz durumu ele alacağız.
 
@@ -578,7 +578,7 @@ Farklı anahtarlarda birleştirmenin daha fazla yolunu keşfetmek istiyorsanız,
 
 ### 3.3. Yeni bir birleştirme anahtarı oluşturmak için `subMap` kullanma
 
-Önceki yaklaşım, birleştirme anahtarımızdaki alan adlarını kaybeder - `id` ve `repeat` alanları sadece bir değerler listesi haline gelir. Daha sonra erişim için alan adlarını korumak için [`subMap` metodunu](<https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)>) kullanabiliriz.
+Önceki yaklaşım, birleştirme anahtarımızdaki alan adlarını kaybeder; `id` ve `repeat` alanları sadece bir değerler listesi haline gelir. Daha sonra erişim için alan adlarını korumak amacıyla [`subMap` metodunu](<https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)>) kullanabiliriz.
 
 `subMap` metodu, bir map'ten yalnızca belirtilen anahtar-değer çiftlerini çıkarır. Burada birleştirme anahtarımızı oluşturmak için sadece `id` ve `repeat` alanlarını çıkaracağız.
 
@@ -621,13 +621,13 @@ nextflow run main.nf
     [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-Artık yalnızca `id` ve `repeat` alanlarını içeren değil, aynı zamanda alan adlarını koruyan yeni bir birleştirme anahtarımız var, böylece daha sonra bunlara `meta.id` ve `meta.repeat` gibi adla erişebiliriz.
+Artık yalnızca `id` ve `repeat` alanlarını içermekle kalmayıp alan adlarını da koruyan yeni bir birleştirme anahtarımız var; böylece daha sonra bunlara `meta.id` ve `meta.repeat` gibi adla erişebiliriz.
 
 ### 3.4. map'te adlandırılmış closure kullanma
 
 Çoğaltmayı önlemek ve hataları azaltmak için adlandırılmış bir closure kullanabiliriz. Adlandırılmış bir closure, birden fazla yerde çağırabileceğimiz yeniden kullanılabilir bir fonksiyon oluşturmamıza olanak tanır.
 
-Bunu yapmak için, önce closure'ı yeni bir değişken olarak tanımlarız:
+Bunu yapmak için önce closure'ı yeni bir değişken olarak tanımlarız:
 
 === "Sonra"
 
@@ -658,7 +658,7 @@ Bunu yapmak için, önce closure'ı yeni bir değişken olarak tanımlarız:
 
 Map dönüşümünü yeniden kullanabileceğimiz adlandırılmış bir değişken olarak tanımladık.
 
-Ayrıca dosya yolunu `file()` kullanarak bir Path nesnesine dönüştürdüğümüzü not edin, böylece bu channel'ı alan herhangi bir process dosyayı doğru şekilde işleyebilir (daha fazla bilgi için [Dosyalarla çalışma](./working_with_files.md)'ya bakın).
+Ayrıca dosya yolunu `file()` kullanarak bir Path nesnesine dönüştürdüğümüzü not edin; böylece bu kanalı alan herhangi bir süreç dosyayı doğru şekilde işleyebilir (daha fazla bilgi için [Dosyalarla çalışma](./working_with_files.md)'ya bakın).
 
 Closure'ı iş akışımızda uygulayalım:
 
@@ -708,7 +708,7 @@ nextflow run main.nf
     [[id:patientC, repeat:1], [id:patientC, repeat:1, type:normal], patientC_rep1_normal.bam, [id:patientC, repeat:1, type:tumor], patientC_rep1_tumor.bam]
     ```
 
-Adlandırılmış bir closure kullanmak, aynı dönüşümü birden fazla yerde yeniden kullanmamıza olanak tanır, hata riskini azaltır ve kodu daha okunabilir ve bakımı kolay hale getirir.
+Adlandırılmış bir closure kullanmak, aynı dönüşümü birden fazla yerde yeniden kullanmamıza olanak tanır; hata riskini azaltır ve kodu daha okunabilir ve bakımı kolay hale getirir.
 
 ### 3.5. Veri çoğaltmasını azaltma
 
@@ -735,7 +735,7 @@ Adlandırılmış bir closure kullanmak, aynı dönüşümü birden fazla yerde 
 ]
 ```
 
-`id` ve `repeat` alanları gruplama anahtarında mevcut olduğundan, çoğaltmayı önlemek için bunları her channel öğesinin geri kalanından kaldıralım. Bunu, yalnızca `type` alanıyla yeni bir map oluşturmak için `subMap` metodunu kullanarak yapabiliriz. Bu yaklaşım, veri yapımızdaki fazlalığı ortadan kaldırırken tüm gerekli bilgileri korumamıza olanak tanır.
+`id` ve `repeat` alanları gruplama anahtarında mevcut olduğundan, çoğaltmayı önlemek için bunları her kanal öğesinin geri kalanından kaldıralım. Bunu, yalnızca `type` alanıyla yeni bir map oluşturmak için `subMap` metodunu kullanarak yapabiliriz. Bu yaklaşım, veri yapımızdaki fazlalığı ortadan kaldırırken tüm gerekli bilgileri korumamıza olanak tanır.
 
 === "Sonra"
 
@@ -766,15 +766,15 @@ nextflow run main.nf
     [[id:patientC, repeat:1], [type:normal], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_normal.bam, [type:tumor], /workspaces/training/side-quests/splitting_and_grouping/patientC_rep1_tumor.bam]
     ```
 
-`id` ve `repeat` alanlarını gruplama anahtarında yalnızca bir kez belirttiğimizi ve örnek verisinde `type` alanına sahip olduğumuzu görebiliriz. Hiçbir bilgi kaybetmedik ama channel içeriklerimizi daha öz hale getirmeyi başardık.
+`id` ve `repeat` alanlarını gruplama anahtarında yalnızca bir kez belirttiğimizi ve örnek verisinde `type` alanına sahip olduğumuzu görebiliriz. Hiçbir bilgi kaybetmedik ama kanal içeriklerimizi daha öz hale getirmeyi başardık.
 
 ### 3.6. Gereksiz bilgileri kaldırma
 
-Yukarıda çoğaltılmış bilgileri kaldırdık, ancak channel'larımızda hala başka gereksiz bilgiler var.
+Yukarıda çoğaltılmış bilgileri kaldırdık, ancak kanallarımızda hala başka gereksiz bilgiler var.
 
-Başlangıçta, `filter` kullanarak normal ve tümör örneklerini ayırdık, ardından `id` ve `repeat` anahtarlarına göre birleştirdik. `join` operatörü tuple'ların birleştirildiği sırayı korur, bu nedenle bizim durumumuzda, normal örnekler sol tarafta ve tümör örnekleri sağ tarafta, ortaya çıkan channel bu yapıyı korur: `id, <normal öğeleri>, <tümör öğeleri>`.
+Başlangıçta, `filter` kullanarak normal ve tümör örneklerini ayırdık, ardından `id` ve `repeat` anahtarlarına göre birleştirdik. `join` operatörü tuple'ların birleştirildiği sırayı korur; bu nedenle bizim durumumuzda, normal örnekler sol tarafta ve tümör örnekleri sağ tarafta olmak üzere, ortaya çıkan kanal bu yapıyı korur: `id, <normal öğeleri>, <tümör öğeleri>`.
 
-Channel'ımızdaki her öğenin konumunu bildiğimiz için, `[type:normal]` ve `[type:tumor]` meta verilerini bırakarak yapıyı daha da basitleştirebiliriz.
+Kanaldaki her öğenin konumunu bildiğimiz için, `[type:normal]` ve `[type:tumor]` meta verilerini bırakarak yapıyı daha da basitleştirebiliriz.
 
 === "Sonra"
 
@@ -807,7 +807,7 @@ nextflow run main.nf
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam]
     ```
 
-### Özet
+### Özetle
 
 Bu bölümde öğrendikleriniz:
 
@@ -816,21 +816,21 @@ Bu bölümde öğrendikleriniz:
 - **Birleştirme anahtarları oluşturma**: Yeni bir birleştirme anahtarı oluşturmak için `subMap` nasıl kullanılır
 - **Adlandırılmış Closure'lar**: map'te adlandırılmış bir closure nasıl kullanılır
 - **Çoklu alan birleştirme**: Daha hassas eşleştirme için birden fazla alanda nasıl birleştirme yapılır
-- **Veri yapısı optimizasyonu**: Gereksiz bilgileri kaldırarak channel yapısı nasıl düzenlenir
+- **Veri yapısı optimizasyonu**: Gereksiz bilgileri kaldırarak kanal yapısı nasıl düzenlenir
 
 Artık bir örnek sayfasını bölebilen, normal ve tümör örneklerini filtreleyebilen, bunları örnek kimliği ve replik numarasına göre birleştirebilen ve sonuçları yazdırabilen bir iş akışınız var.
 
-Bu, bağımsız olarak işledikten sonra örnekleri veya diğer veri türlerini eşleştirmeniz gereken biyoinformatik iş akışlarında yaygın bir desendir, bu yüzden yararlı bir beceridir. Şimdi, bir örneği birden fazla kez tekrarlamaya bakacağız.
+Bu, bağımsız olarak işledikten sonra örnekleri veya diğer veri türlerini eşleştirmeniz gereken biyoinformatik iş akışlarında yaygın bir desendir; bu yüzden yararlı bir beceridir. Şimdi, bir örneği birden fazla kez tekrarlamaya bakacağız.
 
 ## 4. Örnekleri aralıklara yayma
 
 Biyoinformatik iş akışlarında temel bir desen, analizi genomik bölgelere dağıtmaktır. Örneğin, varyant çağırma, genomu aralıklara (kromozomlar veya daha küçük bölgeler gibi) bölerek paralelleştirilebilir. Bu paralelleştirme stratejisi, hesaplama yükünü birden fazla çekirdeğe veya düğüme dağıtarak pipeline verimliliğini önemli ölçüde artırır ve toplam yürütme süresini azaltır.
 
-Aşağıdaki bölümde, örnek verilerimizi birden fazla genomik aralığa nasıl dağıtacağımızı göstereceğiz. Her örneği her aralıkla eşleştireceğiz, bu da farklı genomik bölgelerin paralel işlenmesine olanak tanır. Bu, veri kümemizin boyutunu aralık sayısıyla çarpacak ve daha sonra bir araya getirilebilecek birden fazla bağımsız analiz birimi oluşturacaktır.
+Aşağıdaki bölümde, örnek verilerimizi birden fazla genomik aralığa nasıl dağıtacağımızı göstereceğiz. Her örneği her aralıkla eşleştireceğiz; bu, farklı genomik bölgelerin paralel işlenmesine olanak tanır. Bu işlem, veri kümemizin boyutunu aralık sayısıyla çarpacak ve daha sonra bir araya getirilebilecek birden fazla bağımsız analiz birimi oluşturacaktır.
 
 ### 4.1. `combine` kullanarak örnekleri aralıklara yayma
 
-Bir aralık channel'ı oluşturarak başlayalım. İşleri basit tutmak için, manuel olarak tanımlayacağımız sadece 3 aralık kullanacağız. Gerçek bir iş akışında, bunları bir dosya girdisinden okuyabilir veya hatta çok sayıda aralık dosyasıyla bir channel oluşturabilirsiniz.
+Bir aralık kanalı oluşturarak başlayalım. İşleri basit tutmak için, manuel olarak tanımlayacağımız sadece 3 aralık kullanacağız. Gerçek bir iş akışında, bunları bir dosya girdisinden okuyabilir veya hatta çok sayıda aralık dosyasıyla bir kanal oluşturabilirsiniz.
 
 === "Sonra"
 
@@ -846,7 +846,7 @@ Bir aralık channel'ı oluşturarak başlayalım. İşleri basit tutmak için, m
         ch_joined_samples.view()
     ```
 
-Şimdi hatırlayın, her örneği her aralık için tekrarlamak istiyoruz. Bu bazen örneklerin ve aralıkların Kartezyen çarpımı olarak adlandırılır. Bunu [`combine` operatörünü](https://www.nextflow.io/docs/latest/operator.html#combine) kullanarak başarabiliriz. Bu, channel 1'den her öğeyi alacak ve channel 2'deki her öğe için tekrarlayacaktır. İş akışımıza bir combine operatörü ekleyelim:
+Şimdi hatırlayın, her örneği her aralık için tekrarlamak istiyoruz. Bu bazen örneklerin ve aralıkların Kartezyen çarpımı olarak adlandırılır. Bunu [`combine` operatörünü](https://www.nextflow.io/docs/latest/operator.html#combine) kullanarak başarabiliriz. Bu, kanal 1'den her öğeyi alacak ve kanal 2'deki her öğe için tekrarlayacaktır. İş akışımıza bir combine operatörü ekleyelim:
 
 === "Sonra"
 
@@ -891,11 +891,11 @@ nextflow run main.nf
     [[id:patientC, repeat:1], patientC_rep1_normal.bam, patientC_rep1_tumor.bam, chr3]
     ```
 
-Başarılı! Her örneği 3 aralıklık listemizdeki her bir aralık için tekrarladık. Channel'ımızdaki öğe sayısını etkili bir şekilde üçe katladık.
+Başarılı! Her örneği 3 aralıklık listemizdeki her bir aralık için tekrarladık. Kanaldaki öğe sayısını etkili bir şekilde üçe katladık.
 
 Okumak biraz zor olsa da, bir sonraki bölümde düzenleyeceğiz.
 
-### 4.2. Channel'ı düzenleme
+### 4.2. Kanalı düzenleme
 
 Örnek verilerimizi daha kolay anlaşılır hale getirmek için `map` operatörünü kullanarak düzenleyip yeniden yapılandırabiliriz. Aralık dizesini ilk öğedeki birleştirme map'ine taşıyalım.
 
@@ -946,7 +946,7 @@ Son olarak, bunu üç öğeli bir tuple olarak döndürüyoruz: birleştirilmiş
             ]
 ```
 
-Tekrar çalıştıralım ve channel içeriklerini kontrol edelim:
+Tekrar çalıştıralım ve kanal içeriklerini kontrol edelim:
 
 ```bash
 nextflow run main.nf
@@ -975,26 +975,26 @@ nextflow run main.nf
 
 Verilerinizi doğru yapıya zorlamak için `map` kullanmak zor olabilir, ancak etkili veri manipülasyonu için çok önemlidir.
 
-Artık her örneği tüm genomik aralıklarda tekrarladık, paralel olarak işlenebilecek birden fazla bağımsız analiz birimi oluşturduk. Peki ya ilişkili örnekleri tekrar bir araya getirmek istersek? Bir sonraki bölümde, ortak özellikleri paylaşan örnekleri nasıl gruplayacağımızı öğreneceğiz.
+Artık her örneği tüm genomik aralıklarda tekrarladık; paralel olarak işlenebilecek birden fazla bağımsız analiz birimi oluşturduk. Peki ya ilişkili örnekleri tekrar bir araya getirmek istersek? Bir sonraki bölümde, ortak özellikleri paylaşan örnekleri nasıl gruplayacağımızı öğreneceğiz.
 
-### Özet
+### Özetle
 
 Bu bölümde öğrendikleriniz:
 
 - **Örnekleri aralıklara yayma**: Örnekleri aralıklara yaymak için `combine` nasıl kullanılır
 - **Kartezyen çarpımlar oluşturma**: Örneklerin ve aralıkların tüm kombinasyonları nasıl oluşturulur
-- **Channel yapısını düzenleme**: Daha iyi okunabilirlik için verileri yeniden yapılandırmak üzere `map` nasıl kullanılır
+- **Kanal yapısını düzenleme**: Daha iyi okunabilirlik için verileri yeniden yapılandırmak üzere `map` nasıl kullanılır
 - **Paralel işleme hazırlığı**: Dağıtık analiz için veriler nasıl ayarlanır
 
 ## 5. `groupTuple` kullanarak örnekleri toplama
 
 Önceki bölümlerde, bir girdi dosyasından verileri bölmeyi ve belirli alanlara göre filtrelemeyi (bizim durumumuzda normal ve tümör örnekleri) öğrendik. Ancak bu yalnızca tek bir birleştirme türünü kapsar. Ya örnekleri belirli bir özelliğe göre gruplamak istersek? Örneğin, eşleşen normal-tümör çiftlerini birleştirmek yerine, türlerine bakılmaksızın "sampleA"dan tüm örnekleri birlikte işlemek isteyebiliriz. Bu desen, verimlilik nedenleriyle ilişkili örnekleri ayrı ayrı işlemek ve sonunda sonuçları karşılaştırmak veya birleştirmek istediğiniz biyoinformatik iş akışlarında yaygındır.
 
-Nextflow bunu yapmak için yerleşik yöntemler içerir, bakacağımız ana yöntem `groupTuple`'dır.
+Nextflow bunu yapmak için yerleşik yöntemler içerir; bakacağımız ana yöntem `groupTuple`'dır.
 
-Aynı `id` ve `interval` alanlarına sahip tüm örneklerimizi gruplayarak başlayalım, bu teknik replikleri gruplamak istediğimiz ancak anlamlı olarak farklı örnekleri ayrı tutmak istediğimiz bir analizin tipik örneği olur.
+Aynı `id` ve `interval` alanlarına sahip tüm örneklerimizi gruplayarak başlayalım. Bu, teknik replikleri gruplamak istediğimiz ancak anlamlı olarak farklı örnekleri ayrı tutmak istediğimiz bir analizin tipik örneği olur.
 
-Bunu yapmak için, gruplama değişkenlerimizi izole etmek için ayırmalıyız.
+Bunu yapmak için, gruplama değişkenlerimizi izole etmek amacıyla bunları ayırmalıyız.
 
 İlk adım, önceki bölümde yaptığımıza benzer. Gruplama değişkenimizi tuple'ın ilk öğesi olarak izole etmeliyiz. Hatırlayın, ilk öğemiz şu anda `id`, `repeat` ve `interval` alanlarının bir map'i:
 
@@ -1006,7 +1006,7 @@ Bunu yapmak için, gruplama değişkenlerimizi izole etmek için ayırmalıyız.
 }
 ```
 
-`id` ve `interval` alanlarımızı map'ten izole etmek için daha önceki `subMap` metodunu yeniden kullanabiliriz. Daha önce olduğu gibi, her örnek için tuple'ın ilk öğesine `subMap` metodunu uygulamak için `map` operatörünü kullanacağız.
+`id` ve `interval` alanlarımızı map'ten izole etmek için daha önceki `subMap` metodunu yeniden kullanabiliriz. Daha önce olduğu gibi, her örnek için tuple'ın ilk öğesine `subMap` metodunu uygulamak amacıyla `map` operatörünü kullanacağız.
 
 === "Sonra"
 
@@ -1047,7 +1047,7 @@ Bunu yapmak için, gruplama değişkenlerimizi izole etmek için ayırmalıyız.
             .view()
     ```
 
-Channel içeriklerini kontrol etmek için tekrar çalıştıralım:
+Kanal içeriklerini kontrol etmek için tekrar çalıştıralım:
 
 ```bash
 nextflow run main.nf
@@ -1135,16 +1135,17 @@ nextflow run main.nf
     [[id:patientC, interval:chr3], [patientC_rep1_normal.bam], [patientC_rep1_tumor.bam]]
     ```
 
-Verilerimizin yapısının değiştiğini ve her channel öğesinde dosyaların artık `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]` gibi tuple'lar içinde yer aldığını not edin. Bunun nedeni, `groupTuple` kullandığımızda, Nextflow'un bir grubun her örneği için tekil dosyaları birleştirmesidir. Aşağı akışta verileri işlemeye çalışırken bunu hatırlamak önemlidir.
+Verilerimizin yapısının değiştiğini ve her kanal öğesinde dosyaların artık `[patientA_rep1_normal.bam, patientA_rep2_normal.bam]` gibi tuple'lar içinde yer aldığını not edin. Bunun nedeni, `groupTuple` kullandığımızda Nextflow'un bir grubun her örneği için tekil dosyaları birleştirmesidir. Aşağı akışta verileri işlemeye çalışırken bunu hatırlamak önemlidir.
 
 !!! note "Not"
 
-    [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) groupTuple'ın tersidir. Bir channel'daki öğeleri açar ve düzleştirir. Yukarıda gerçekleştirdiğimiz gruplamayı geri almak için `transpose` eklemeyi deneyin!
+    [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose), groupTuple'ın tersidir. Bir kanaldaki öğeleri açar ve düzleştirir. Yukarıda gerçekleştirdiğimiz gruplamayı geri almak için `transpose` eklemeyi deneyin!
 
-### Özet
+### Özetle
 
 Bu bölümde öğrendikleriniz:
 
+- **İlgili örnekleri gruplama**: Örnekleri ortak özelliklere göre toplamak için `groupTuple` nasıl kullanılır
 - **Gruplama anahtarlarını izole etme**: Gruplama için belirli alanları çıkarmak üzere `subMap` nasıl kullanılır
 - **Gruplanmış veri yapılarını işleme**: `groupTuple` tarafından oluşturulan iç içe yapıyla nasıl çalışılır
 - **Teknik replik işleme**: Aynı deneysel koşulları paylaşan örnekler nasıl gruplandırılır
@@ -1153,17 +1154,17 @@ Bu bölümde öğrendikleriniz:
 
 ## Özet
 
-Bu yan görevde, channel'ları kullanarak verileri bölmeyi ve gruplamayı öğrendiniz.
+Bu yan görevde, kanalları kullanarak verileri bölmeyi ve gruplamayı öğrendiniz.
 
 Verileri pipeline boyunca akarken değiştirerek, döngüler veya while ifadeleri kullanmadan ölçeklenebilir bir pipeline oluşturabilirsiniz; bu, daha geleneksel yaklaşımlara göre çeşitli avantajlar sunar:
 
 - Ek kod olmadan istediğimiz kadar çok veya az girdiyle ölçeklenebiliriz
 - Yineleme yerine verilerin pipeline boyunca akışını yönetmeye odaklanıyoruz
 - Gerektiği kadar karmaşık veya basit olabiliriz
-- Pipeline daha bildirimsel hale gelir, nasıl yapılacağı yerine ne yapılması gerektiğine odaklanır
+- Pipeline daha bildirimsel hale gelir; nasıl yapılacağı yerine ne yapılması gerektiğine odaklanır
 - Nextflow, bağımsız işlemleri paralel olarak çalıştırarak yürütmeyi bizim için optimize eder
 
-Bu channel işlemlerinde ustalaşmak, karmaşık veri ilişkilerini döngülere veya yinelemeli programlamaya başvurmadan ele alan esnek, ölçeklenebilir pipeline'lar oluşturmanıza olanak tanır ve Nextflow'un yürütmeyi optimize etmesine ve bağımsız işlemleri otomatik olarak paralelleştirmesine izin verir.
+Bu kanal işlemlerinde ustalaşmak, karmaşık veri ilişkilerini döngülere veya yinelemeli programlamaya başvurmadan ele alan esnek, ölçeklenebilir pipeline'lar oluşturmanıza olanak tanır ve Nextflow'un yürütmeyi optimize etmesine ve bağımsız işlemleri otomatik olarak paralelleştirmesine izin verir.
 
 ### Temel desenler
 
@@ -1177,7 +1178,7 @@ Bu channel işlemlerinde ustalaşmak, karmaşık veri ilişkilerini döngülere 
         }
     ```
 
-2.  **Verileri ayrı channel'lara bölme:** `type` alanına göre verileri bağımsız akışlara bölmek için `filter` kullandık
+2.  **Verileri ayrı kanallara bölme:** `type` alanına göre verileri bağımsız akışlara bölmek için `filter` kullandık
 
     ```groovy
     channel.filter { it.type == 'tumor' }
@@ -1185,7 +1186,7 @@ Bu channel işlemlerinde ustalaşmak, karmaşık veri ilişkilerini döngülere 
 
 3.  **Eşleşen örnekleri birleştirme:** `id` ve `repeat` alanlarına göre ilişkili örnekleri yeniden birleştirmek için `join` kullandık
 
-    - İki channel'ı anahtara göre birleştirme (tuple'ın ilk öğesi)
+    - İki kanalı anahtara göre birleştirme (tuple'ın ilk öğesi)
 
     ```groovy
     tumor_ch.join(normal_ch)
@@ -1215,7 +1216,7 @@ Bu channel işlemlerinde ustalaşmak, karmaşık veri ilişkilerini döngülere 
     samples_ch.combine(intervals_ch)
     ```
 
-5.  **Gruplama anahtarlarına göre toplama:** Her tuple'daki ilk öğeye göre gruplamak için `groupTuple` kullandık, böylece `id` ve `interval` alanlarını paylaşan örnekleri topladık ve teknik replikleri birleştirdik.
+5.  **Gruplama anahtarlarına göre toplama:** Her tuple'daki ilk öğeye göre gruplamak için `groupTuple` kullandık; böylece `id` ve `interval` alanlarını paylaşan örnekleri topladık ve teknik replikleri birleştirdik.
 
     ```groovy
     channel.groupTuple()

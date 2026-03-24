@@ -1,1 +1,1 @@
-Tüm kanal değişkenleri için `ch_` önekini kullanıyoruz, böylece bunların Nextflow kanalları olduğunu açıkça belirtmiş oluyoruz.
+`ch_` öneki, tüm kanal değişkenlerinin Nextflow kanalları olduğunu açıkça belirtmek için kullanılır.

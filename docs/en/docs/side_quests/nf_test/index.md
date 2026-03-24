@@ -389,26 +389,26 @@ Let's go back to the test file and change the path to the file in the `when` blo
 
 You may be wondering how we're going to point to the root of the pipeline in the test. Since this is a common situation, nf-test has a range of global variables that we can use to make our lives easier. You can find the full list [here](https://www.nf-test.com/docs/testcases/global_variables/) but in the meantime we'll use the `projectDir` variable, which means the root of the pipeline project.
 
-_Before:_
+=== "After"
 
-```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
-when {
-    params {
-        // define parameters here. Example:
-        // outdir = "tests/results"
+    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3"
+    when {
+        params {
+            input_file = "${projectDir}/greetings.csv"
+        }
     }
-}
-```
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="tests/main.nf.test" linenums="1" hl_lines="3"
-when {
-    params {
-        input_file = "${projectDir}/greetings.csv"
+    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
+    when {
+        params {
+            // define parameters here. Example:
+            // outdir = "tests/results"
+        }
     }
-}
-```
+    ```
 
 Let's run the test again to see if it works.
 
@@ -472,42 +472,42 @@ A simple check is to ensure our pipeline is running all the processes we expect 
 
 Let's add an assertion to our test to check the pipeline runs the expected number of processes. We'll also update our test name to better reflect what we're testing.
 
-**Before:**
+=== "After"
 
-```groovy title="tests/main.nf.test" linenums="1" hl_lines="1"
-    test("Should run without failures") {
+    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1 11"
+        test("Should run successfully with correct number of processes") {
 
-        when {
-            params {
-                input_file = "${projectDir}/greetings.csv"
+            when {
+                params {
+                    input_file = "${projectDir}/greetings.csv"
+                }
             }
-        }
 
-        then {
-            assert workflow.success
-        }
-
-    }
-```
-
-**After:**
-
-```groovy title="tests/main.nf.test" linenums="1" hl_lines="1 11"
-    test("Should run successfully with correct number of processes") {
-
-        when {
-            params {
-                input_file = "${projectDir}/greetings.csv"
+            then {
+                assert workflow.success
+                assert workflow.trace.tasks().size() == 6
             }
-        }
 
-        then {
-            assert workflow.success
-            assert workflow.trace.tasks().size() == 6
         }
+    ```
 
-    }
-```
+=== "Before"
+
+    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="1"
+        test("Should run without failures") {
+
+            when {
+                params {
+                    input_file = "${projectDir}/greetings.csv"
+                }
+            }
+
+            then {
+                assert workflow.success
+            }
+
+        }
+    ```
 
 The test name now better reflects what we're actually verifying - not just that the pipeline runs without failing, but that it runs the expected number of processes.
 
@@ -537,62 +537,62 @@ Success! The pipeline runs successfully and the test passes. Now we have began t
 
 Let's add an assertion to our test to check the output file was created. We'll add it as a separate test, with an informative name, to make the results easier to interpret.
 
-**Before:**
+=== "After"
 
-```groovy title="tests/main.nf.test" linenums="1" hl_lines="14"
-    test("Should run successfully with correct number of processes") {
+    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14-33"
+        test("Should run successfully with correct number of processes") {
 
-        when {
-            params {
-                input_file = "${projectDir}/greetings.csv"
+            when {
+                params {
+                    input_file = "${projectDir}/greetings.csv"
+                }
             }
-        }
 
-        then {
-            assert workflow.success
-            assert workflow.trace.tasks().size() == 6
-        }
-
-    }
-```
-
-**After:**
-
-```groovy title="tests/main.nf.test" linenums="1" hl_lines="14-33"
-    test("Should run successfully with correct number of processes") {
-
-        when {
-            params {
-                input_file = "${projectDir}/greetings.csv"
+            then {
+                assert workflow.success
+                assert workflow.trace.tasks().size() == 6
             }
+
         }
 
-        then {
-            assert workflow.success
-            assert workflow.trace.tasks().size() == 6
-        }
+        test("Should produce correct output files") {
 
-    }
-
-    test("Should produce correct output files") {
-
-        when {
-            params {
-                input_file = "${projectDir}/greetings.csv"
+            when {
+                params {
+                    input_file = "${projectDir}/greetings.csv"
+                }
             }
-        }
 
-        then {
-            assert file("$launchDir/results/Bonjour-output.txt").exists()
-            assert file("$launchDir/results/Hello-output.txt").exists()
-            assert file("$launchDir/results/Holà-output.txt").exists()
-            assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
-            assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-            assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
-        }
+            then {
+                assert file("$launchDir/results/Bonjour-output.txt").exists()
+                assert file("$launchDir/results/Hello-output.txt").exists()
+                assert file("$launchDir/results/Holà-output.txt").exists()
+                assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
+                assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
+                assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
+            }
 
-    }
-```
+        }
+    ```
+
+=== "Before"
+
+    ```groovy title="tests/main.nf.test" linenums="1" hl_lines="14"
+        test("Should run successfully with correct number of processes") {
+
+            when {
+                params {
+                    input_file = "${projectDir}/greetings.csv"
+                }
+            }
+
+            then {
+                assert workflow.success
+                assert workflow.trace.tasks().size() == 6
+            }
+
+        }
+    ```
 
 Run the test again to see if it works.
 
@@ -728,56 +728,56 @@ FAILURE: Executed 1 tests in 4.884s (1 failed)
 
 The test fails because the `sayHello` process declares 1 input but was called with 0 arguments. Let's fix that by adding an input to the process. Remember from [Hello Workflow](../hello_nextflow/03_hello_workflow.md) (and the warmup section above) that our `sayHello` process takes a single value input, which we will need to provide. We should also fix the test name to better reflect what we're testing.
 
-**Before:**
+=== "After"
 
-```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10 11"
-    test("Should run without failures") {
+    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10"
+        test("Should run without failures and produce correct output") {
 
-        when {
-            params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+            when {
+                params {
+                    // define parameters here. Example:
+                    // outdir = "tests/results"
+                }
+                process {
+                    """
+                    input[0] = "hello"
+                    """
+                }
             }
-            process {
-                """
-                // define inputs of the process here. Example:
-                // input[0] = file("test-file.txt")
-                """
+
+            then {
+                assert process.success
+                assert snapshot(process.out).match()
             }
+
         }
+    ```
 
-        then {
-            assert process.success
-            assert snapshot(process.out).match()
-        }
+=== "Before"
 
-    }
-```
+    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10 11"
+        test("Should run without failures") {
 
-**After:**
-
-```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10"
-    test("Should run without failures and produce correct output") {
-
-        when {
-            params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+            when {
+                params {
+                    // define parameters here. Example:
+                    // outdir = "tests/results"
+                }
+                process {
+                    """
+                    // define inputs of the process here. Example:
+                    // input[0] = file("test-file.txt")
+                    """
+                }
             }
-            process {
-                """
-                input[0] = "hello"
-                """
+
+            then {
+                assert process.success
+                assert snapshot(process.out).match()
             }
-        }
 
-        then {
-            assert process.success
-            assert snapshot(process.out).match()
         }
-
-    }
-```
+    ```
 
 Let's run the test again to see if it works.
 
@@ -867,55 +867,55 @@ While snapshots are great for catching any changes in output, sometimes you want
 
 Here's how we could modify our test to check specific content:
 
-**Before:**
+=== "After"
 
-```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 6 17"
-    test("Should run without failures and produce correct output") {
+    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 16 17"
+        test("Should run without failures and contain expected greeting") {
 
-        when {
-            params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+            when {
+                params {
+                    // define parameters here
+                }
+                process {
+                    """
+                    input[0] = "hello"
+                    """
+                }
             }
-            process {
-                """
-                input[0] = "hello"
-                """
+
+            then {
+                assert process.success
+                assert path(process.out[0][0]).readLines().contains('hello')
+                assert !path(process.out[0][0]).readLines().contains('HELLO')
             }
+
         }
+    ```
 
-        then {
-            assert process.success
-            assert snapshot(process.out).match()
-        }
+=== "Before"
 
-    }
-```
+    ```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 6 17"
+        test("Should run without failures and produce correct output") {
 
-**After:**
-
-```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 16 17"
-    test("Should run without failures and contain expected greeting") {
-
-        when {
-            params {
-                // define parameters here
+            when {
+                params {
+                    // define parameters here. Example:
+                    // outdir = "tests/results"
+                }
+                process {
+                    """
+                    input[0] = "hello"
+                    """
+                }
             }
-            process {
-                """
-                input[0] = "hello"
-                """
+
+            then {
+                assert process.success
+                assert snapshot(process.out).match()
             }
-        }
 
-        then {
-            assert process.success
-            assert path(process.out[0][0]).readLines().contains('hello')
-            assert !path(process.out[0][0]).readLines().contains('HELLO')
         }
-
-    }
-```
+    ```
 
 Note that nf-test sees the process outputs as a list of lists, so `process.out[0][0]` is fetching the first part of the first channel item (or 'emission') from this process.
 
@@ -994,56 +994,56 @@ We now need to supply a single input file to the convertToUpper process, which i
 
 For now, let's re-use the existing data/greetings.csv file using the example we used with the pipeline level test. As before, we can name the test to better reflect what we're testing, but this time let's leave it to 'snapshot' the content rather than checking for specific strings (as we did in the other process).
 
-**Before:**
+=== "After"
 
-```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10 11"
-    test("Should run without failures") {
+    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10"
+        test("Should run without failures and produce correct output") {
 
-        when {
-            params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+            when {
+                params {
+                    // define parameters here. Example:
+                    // outdir = "tests/results"
+                }
+                process {
+                    """
+                    input[0] = "${projectDir}/greetings.csv"
+                    """
+                }
             }
-            process {
-                """
-                // define inputs of the process here. Example:
-                // input[0] = file("test-file.txt")
-                """
+
+            then {
+                assert process.success
+                assert snapshot(process.out).match()
             }
+
         }
+    ```
 
-        then {
-            assert process.success
-            assert snapshot(process.out).match()
-        }
+=== "Before"
 
-    }
-```
+    ```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10 11"
+        test("Should run without failures") {
 
-**After:**
-
-```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10"
-    test("Should run without failures and produce correct output") {
-
-        when {
-            params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
+            when {
+                params {
+                    // define parameters here. Example:
+                    // outdir = "tests/results"
+                }
+                process {
+                    """
+                    // define inputs of the process here. Example:
+                    // input[0] = file("test-file.txt")
+                    """
+                }
             }
-            process {
-                """
-                input[0] = "${projectDir}/greetings.csv"
-                """
+
+            then {
+                assert process.success
+                assert snapshot(process.out).match()
             }
-        }
 
-        then {
-            assert process.success
-            assert snapshot(process.out).match()
         }
-
-    }
-```
+    ```
 
 And run the test!
 

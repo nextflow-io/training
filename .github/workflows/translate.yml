@@ -1,8 +1,9 @@
 name: Translate
 
 on:
+  # Translations are triggered manually by maintainers, typically ahead of a new release.
   # Automatic: when English content or prompts change
-  # Commented out to save API costs - run manually as needed
+  # [EDIT] Commented out to save API costs - run manually as needed
   # push:
   #   branches:
   #     - master
@@ -41,7 +42,7 @@ jobs:
       languages: ${{ steps.detect.outputs.languages }}
       has_work: ${{ steps.detect.outputs.has_work }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -70,7 +71,7 @@ jobs:
       matrix:
         language: ${{ fromJson(needs.detect.outputs.languages) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -89,7 +90,7 @@ jobs:
 
       - name: Upload translation artifacts
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: translation-${{ matrix.language }}
           path: docs/${{ matrix.language }}/docs/
@@ -98,7 +99,7 @@ jobs:
 
       - name: Upload translation log
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: log-${{ matrix.language }}
           path: _scripts/translate-${{ matrix.language }}.json
@@ -110,14 +111,14 @@ jobs:
     if: always() && needs.detect.outputs.has_work == 'true' && !cancelled()
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: ${{ github.sha }} # Use trigger SHA, not latest master (avoids workflow file conflicts)
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download all translation artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: translation-*
           path: artifacts/

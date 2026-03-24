@@ -12,19 +12,19 @@ Metadata, dosyalar ve deneysel koşullar hakkındaki önemli ayrıntıları taki
 Bunu bir kütüphane kataloğu gibi düşünün: kitaplar gerçek içeriği (ham veri) içerirken, katalog kartları her kitap hakkında temel bilgiler sağlar—ne zaman yayınlandığı, kimin yazdığı, nerede bulunacağı (metadata).
 Nextflow pipeline'larında metadata şunlar için kullanılabilir:
 
-- Dosyaya özgü bilgileri workflow boyunca takip etmek
-- Dosya özelliklerine göre process'leri yapılandırmak
+- Dosyaya özgü bilgileri iş akışı boyunca takip etmek
+- Dosya özelliklerine göre süreçleri yapılandırmak
 - İlgili dosyaları ortak analiz için gruplamak
 
 ### Öğrenme hedefleri
 
-Bu yan görevde, workflow'larda metadata'nın nasıl ele alınacağını keşfedeceğiz.
-Temel dosya bilgilerini içeren basit bir veri tablosundan (biyoinformatikte genellikle samplesheet olarak adlandırılır) başlayarak, şunları öğreneceksiniz:
+Bu yan görevde, iş akışlarında metadata'nın nasıl ele alınacağını keşfedeceğiz.
+Temel dosya bilgilerini içeren basit bir veri tablosundan (biyoinformatikte genellikle samplesheet olarak adlandırılır) başlayarak şunları öğreneceksiniz:
 
 - CSV dosyalarından dosya metadata'sını okuma ve ayrıştırma
 - Metadata map'lerini oluşturma ve manipüle etme
-- Workflow yürütme sırasında yeni metadata alanları ekleme
-- Process davranışını özelleştirmek için metadata kullanma
+- İş akışı yürütme sırasında yeni metadata alanları ekleme
+- Süreç davranışını özelleştirmek için metadata kullanma
 
 Bu beceriler, karmaşık dosya ilişkilerini ve işleme gereksinimlerini işleyebilen daha sağlam ve esnek pipeline'lar oluşturmanıza yardımcı olacaktır.
 
@@ -33,11 +33,11 @@ Bu beceriler, karmaşık dosya ilişkilerini ve işleme gereksinimlerini işleye
 Bu yan göreve başlamadan önce:
 
 - [Hello Nextflow](../hello_nextflow/README.md) eğitimini veya eşdeğer bir başlangıç kursunu tamamlamış olmalısınız.
-- Temel Nextflow kavramlarını ve mekanizmalarını (process'ler, channel'lar, operatörler) rahatça kullanabiliyor olmalısınız
+- Temel Nextflow kavramlarını ve mekanizmalarını (süreçler, kanallar, operatörler) rahatça kullanabiliyor olmalısınız.
 
 ---
 
-## 0. Başlangıç
+## 0. Başlarken
 
 #### Eğitim codespace'ini açın
 
@@ -61,7 +61,7 @@ code .
 
 #### Materyalleri inceleyin
 
-Bir ana workflow dosyası ve bir veri tablosu ile birkaç veri dosyası içeren bir `data` dizini bulacaksınız.
+Bir ana iş akışı dosyası ve bir veri tablosu ile birkaç veri dosyası içeren bir `data` dizini bulacaksınız.
 
 ??? abstract "Dizin içeriği"
 
@@ -80,12 +80,12 @@ Bir ana workflow dosyası ve bir veri tablosu ile birkaç veri dosyası içeren 
     └── nextflow.config
     ```
 
-`main.nf` dosyasındaki workflow, kademeli olarak tam işlevli bir workflow'a genişleteceğiniz bir taslaktır.
+`main.nf` dosyasındaki iş akışı, kademeli olarak tam işlevli bir iş akışına genişleteceğiniz bir taslaktır.
 
 Veri tablosu, veri dosyalarına giden yolları ve ilişkili bazı metadata'yı 3 sütunda düzenlenmiş şekilde listeler:
 
-- `id`: açıklayıcı, dosyaya verilen bir ID
-- `character`: bir karakter adı, daha sonra farklı yaratıklar çizmek için kullanacağız
+- `id`: açıklayıcı, dosyaya verilen bir kimlik
+- `character`: bir karakter adı; daha sonra farklı yaratıklar çizmek için kullanacağız
 - `data`: farklı dillerde selamlaşmalar içeren `.txt` dosyalarının yolları
 
 ```console title="datasheet.csv"
@@ -105,14 +105,14 @@ Ayrıca size `langid` adında konteynerleştirilmiş bir dil analiz aracı sağl
 
 #### Görevi inceleyin
 
-Meydan okumanız, şunları yapacak bir Nextflow workflow'u yazmaktır:
+Meydan okumanız, şunları yapacak bir Nextflow iş akışı yazmaktır:
 
 1. Her dosyadaki dili otomatik olarak **Tanımlama**
 2. Dosyaları dil ailesine göre **Gruplama** (Cermen dilleri vs Roman dilleri)
 3. Her dosya için dilini ve metadata'sına göre işlemeyi **Özelleştirme**
 4. Çıktıları dil grubuna göre **Organize etme**
 
-Bu, dosyaya özgü metadata'nın işleme kararlarını yönlendirdiği tipik bir workflow modelini temsil eder; tam olarak metadata map'lerinin zarif bir şekilde çözdüğü sorun türü.
+Bu, dosyaya özgü metadata'nın işleme kararlarını yönlendirdiği tipik bir iş akışı modelini temsil eder; tam olarak metadata map'lerinin zarif bir şekilde çözdüğü sorun türü.
 
 #### Hazırlık kontrol listesi
 
@@ -129,7 +129,7 @@ Tüm kutuları işaretleyebiliyorsanız, başlamaya hazırsınız.
 
 ## 1. Bir veri tablosundan metadata yükleme
 
-Başlangıç noktası olarak size verdiğimiz workflow taslağını incelemek için `main.nf` workflow dosyasını açın.
+Başlangıç noktası olarak size verdiğimiz iş akışı taslağını incelemek için `main.nf` dosyasını açın.
 
 ```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -141,15 +141,15 @@ workflow  {
 }
 ```
 
-Örnek veri tablosunu bir dosya olarak yüklemek için temel bir channel factory kurduğumuzu görebilirsiniz, ancak bu henüz dosyanın içeriğini okumayacaktır.
+Örnek veri tablosunu bir dosya olarak yüklemek için temel bir channel factory kurduğumuzu görebilirsiniz; ancak bu henüz dosyanın içeriğini okumayacaktır.
 Bunu ekleyerek başlayalım.
 
 ### 1.1. `splitCsv` ile içeriği okuma
 
 Dosya içeriğini minimal çabayla uygun şekilde ayrıştıracak bir operatör seçmemiz gerekiyor.
-Veri tablomuz CSV formatında olduğundan, bu iş [`splitCsv`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv) operatörü içindir, bu operatör dosyadaki her satırı channel'da bir öğe olarak yükler.
+Veri tablomuz CSV formatında olduğundan, bu iş [`splitCsv`](https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv) operatörü içindir; bu operatör dosyadaki her satırı kanalda bir öğe olarak yükler.
 
-Channel oluşturma koduna bir `splitCsv()` işlemi eklemek için aşağıdaki değişiklikleri yapın, artı dosyanın içeriğinin channel'a doğru şekilde yüklendiğini kontrol etmek için bir `view()` işlemi.
+Kanal oluşturma koduna bir `splitCsv()` işlemi eklemek için aşağıdaki değişiklikleri yapın. Ayrıca dosyanın içeriğinin kanala doğru şekilde yüklendiğini kontrol etmek için bir `view()` işlemi de ekleyin.
 
 === "Sonra"
 
@@ -176,7 +176,7 @@ Channel oluşturma koduna bir `splitCsv()` işlemi eklemek için aşağıdaki de
 Nextflow'a CSV dosyasının ilk satırını başlık satırı olarak okumasını söylemek için `header: true` seçeneğini kullandığımıza dikkat edin.
 
 Bundan ne çıktığını görelim mi?
-Workflow'u çalıştırın:
+İş akışını çalıştırın:
 
 ```bash
 nextflow run main.nf
@@ -207,13 +207,13 @@ Her map girişi veri tablomuzun bir sütununa karşılık gelir:
 - `recording`
 
 Bu harika! Belirli alanlara her dosyadan erişmeyi kolaylaştırıyor.
-Örneğin, dosya ID'sine `id` ile veya txt dosya yoluna `recording` ile erişebiliriz.
+Örneğin, dosya kimliğine `id` ile veya txt dosya yoluna `recording` ile erişebiliriz.
 
 ??? info "(İsteğe bağlı) Map'ler hakkında daha fazla bilgi"
 
-    Nextflow'un üzerine kurulu olduğu programlama dili olan Groovy'de, map, Python'daki dictionary'lere, JavaScript'teki object'lere veya Ruby'deki hash'lere benzer bir anahtar-değer veri yapısıdır.
+    Nextflow'un üzerine kurulu olduğu programlama dili olan Groovy'de, map; Python'daki dictionary'lere, JavaScript'teki object'lere veya Ruby'deki hash'lere benzer bir anahtar-değer veri yapısıdır.
 
-    İşte pratikte bir map'i nasıl tanımlayabileceğinizi ve içeriğine nasıl erişebileceğinizi gösteren çalıştırılabilir bir script:
+    İşte pratikte bir map'i nasıl tanımlayabileceğinizi ve içeriğine nasıl erişebileceğinizi gösteren çalıştırılabilir bir betik:
 
     ```groovy title="examples/map_demo.nf"
     #!/usr/bin/env nextflow
@@ -229,15 +229,15 @@ Bu harika! Belirli alanlara her dosyadan erişmeyi kolaylaştırıyor.
     println "character: ${my_map.character}"
     ```
 
-    Düzgün bir `workflow` bloğu olmasa bile, Nextflow bunu bir workflow gibi çalıştırabilir:
+    Düzgün bir `workflow` bloğu olmasa bile, Nextflow bunu bir iş akışı gibi çalıştırabilir:
 
     ```bash
     nextflow run examples/map_demo.nf
     ```
 
-    Ve çıktıda görmeyi bekleyebileceğiniz şey:
+    Çıktıda görmeyi bekleyebileceğiniz şey:
 
-    ```console title="Çıktı"
+    ```console title="Output"
      N E X T F L O W   ~  version 25.10.2
 
     Launching `map_demo.nf` [cheesy_plateau] DSL2 - revision: fae5b8496e
@@ -250,9 +250,9 @@ Bu harika! Belirli alanlara her dosyadan erişmeyi kolaylaştırıyor.
 ### 1.2. `map` ile belirli alanları seçme
 
 Diyelim ki veri tablosundan `character` sütununa erişmek ve yazdırmak istiyoruz.
-Channel'ımızdaki her öğe üzerinde yineleme yapmak ve map nesnesinden özellikle `character` girişini seçmek için Nextflow `map` operatörünü kullanabiliriz.
+Kanalımızdaki her öğe üzerinde yineleme yapmak ve map nesnesinden özellikle `character` girişini seçmek için Nextflow `map` operatörünü kullanabiliriz.
 
-Workflow'da aşağıdaki düzenlemeleri yapın:
+İş akışında aşağıdaki düzenlemeleri yapın:
 
 === "Sonra"
 
@@ -281,7 +281,7 @@ Workflow'da aşağıdaki düzenlemeleri yapın:
     }
     ```
 
-Şimdi workflow'u tekrar çalıştırın:
+Şimdi iş akışını tekrar çalıştırın:
 
 ```bash
 nextflow run main.nf
@@ -305,12 +305,12 @@ nextflow run main.nf
 
 Başarılı! Veri tablomuzdan türetilen map yapısından yararlanarak her satır için bireysel sütunlardan değerlere eriştik.
 
-Şimdi veri tablosunu başarıyla okuduk ve her satırdaki verilere erişimimiz var, pipeline mantığımızı uygulamaya başlayabiliriz.
+Veri tablosunu başarıyla okuduk ve her satırdaki verilere erişimimiz var; artık pipeline mantığımızı uygulamaya başlayabiliriz.
 
 ### 1.3. Metadata'yı bir 'meta map' olarak organize etme
 
-Workflow'un mevcut durumunda, girdi dosyaları (`recording` anahtarı altında) ve ilişkili metadata (`id`, `character`) hepsi aynı düzeydedir, sanki hepsi aynı büyük çantadalar.
-Pratik sonuç, bu channel'ı tüketen her process'in bu yapıyı göz önünde bulundurarak yapılandırılması gerektiğidir:
+İş akışının mevcut durumunda, girdi dosyaları (`recording` anahtarı altında) ve ilişkili metadata (`id`, `character`) hepsi aynı düzeydedir; sanki hepsi aynı büyük çantadadır.
+Bunun pratik sonucu, bu kanalı tüketen her sürecin bu yapıyı göz önünde bulundurarak yapılandırılması gerektiğidir:
 
 ```groovy
     input:
@@ -318,12 +318,12 @@ Pratik sonuç, bu channel'ı tüketen her process'in bu yapıyı göz önünde b
 ```
 
 Veri tablosundaki sütun sayısı değişmediği sürece bu iyidir.
-Ancak, veri tablosuna sadece bir sütun daha eklerseniz, channel'ın şekli artık process'in beklediğiyle eşleşmeyecek ve workflow hata üretecektir.
-Ayrıca process'i, script bloğu tarafından gerekli olmayan değişkenleri sabit kodlamak zorunda kalabileceğiniz için, biraz farklı girdi verilerine sahip olabilecek başkalarıyla paylaşmayı zorlaştırır.
+Ancak veri tablosuna sadece bir sütun daha eklerseniz, kanalın şekli artık sürecin beklediğiyle eşleşmeyecek ve iş akışı hata üretecektir.
+Ayrıca süreç, betik bloğu tarafından gerekli olmayan değişkenleri sabit kodlamak zorunda kalabileceğiniz için biraz farklı girdi verilerine sahip olabilecek başkalarıyla paylaşmayı zorlaştırır.
 
-Bu sorunu önlemek için, veri tablosunun kaç sütun içerdiğinden bağımsız olarak channel yapısını tutarlı tutmanın bir yolunu bulmamız gerekiyor.
+Bu sorunu önlemek için, veri tablosunun kaç sütun içerdiğinden bağımsız olarak kanal yapısını tutarlı tutmanın bir yolunu bulmamız gerekiyor.
 
-Bunu, tüm metadata'yı tuple içindeki bir öğede toplayarak yapabiliriz, buna metadata map veya daha basit ifadeyle 'meta map' diyeceğiz.
+Bunu, tüm metadata'yı tuple içindeki bir öğede toplayarak yapabiliriz; buna metadata map veya daha basit ifadeyle 'meta map' diyeceğiz.
 
 `map` işleminde aşağıdaki düzenlemeleri yapın:
 
@@ -349,9 +349,9 @@ Bunu, tüm metadata'yı tuple içindeki bir öğede toplayarak yapabiliriz, buna
             .view()
     ```
 
-Channel öğelerimizi, meta map ve karşılık gelen dosya nesnesi olmak üzere iki öğeden oluşan bir tuple olarak yeniden yapılandırdık.
+Kanal öğelerimizi, meta map ve karşılık gelen dosya nesnesi olmak üzere iki öğeden oluşan bir tuple olarak yeniden yapılandırdık.
 
-Workflow'u çalıştıralım:
+İş akışını çalıştıralım:
 
 ```bash
 nextflow run main.nf
@@ -359,7 +359,7 @@ nextflow run main.nf
 
 ??? success "Komut çıktısı"
 
-    ```console title="Meta map'i görüntüle"
+    ```console title="View meta map"
      N E X T F L O W   ~  version 25.10.2
 
     Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
@@ -373,30 +373,30 @@ nextflow run main.nf
     [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
     ```
 
-Şimdi, channel'daki her öğe önce metadata map'i, sonra da karşılık gelen dosya nesnesini içerir:
+Artık kanaldaki her öğe önce metadata map'i, sonra da karşılık gelen dosya nesnesini içerir:
 
-```console title="Örnek çıktı yapısı"
+```console title="Example output structure"
 [
   [id:sampleA, character:squirrel],
   /workspaces/training/side-quests/metadata/data/bonjour.txt
 ]
 ```
 
-Sonuç olarak, veri tablosuna daha fazla sütun eklemek `meta` map'inde daha fazla metadata kullanılabilir hale getirecek, ancak channel şeklini değiştirmeyecektir.
-Bu, metadata öğelerini girdi belirtimine sabit kodlamak zorunda kalmadan channel'ı tüketen process'ler yazmamızı sağlar:
+Sonuç olarak, veri tablosuna daha fazla sütun eklemek `meta` map'inde daha fazla metadata kullanılabilir hale getirecek; ancak kanal şeklini değiştirmeyecektir.
+Bu, metadata öğelerini girdi belirtimine sabit kodlamak zorunda kalmadan kanalı tüketen süreçler yazmamızı sağlar:
 
-```groovy title="Sözdizimi örneği"
+```groovy title="Syntax example"
     input:
     tuple val(meta), file(recording)
 ```
 
-Bu, Nextflow workflow'larında metadata'yı organize etmek için yaygın olarak kullanılan bir kuraldır.
+Bu, Nextflow iş akışlarında metadata'yı organize etmek için yaygın olarak kullanılan bir kuraldır.
 
-### Çıkarımlar
+### Özet
 
-Bu bölümde, şunları öğrendiniz:
+Bu bölümde şunları öğrendiniz:
 
-- **Metadata neden önemlidir:** Metadata'yı verinizle birlikte tutmak, workflow boyunca önemli dosya bilgilerini korur.
+- **Metadata neden önemlidir:** Metadata'yı verinizle birlikte tutmak, iş akışı boyunca önemli dosya bilgilerini korur.
 - **Veri tablolarını nasıl okuyacağınız:** Başlık bilgisine sahip CSV dosyalarını okumak ve satırları yapılandırılmış verilere dönüştürmek için `splitCsv` kullanımı
 - **Meta map nasıl oluşturulur:** Tuple yapısı `[ [id:value, ...], file ]` kullanarak metadata'yı dosya verisinden ayırma
 
@@ -407,13 +407,13 @@ Bu bölümde, şunları öğrendiniz:
 Artık metadata'mız yüklendiğine göre, onunla bir şeyler yapalım!
 
 Her yaratığın kayıt dosyasında bulunan dili tanımlamak için [`langid`](https://github.com/saffsd/langid.py) adlı bir araç kullanacağız.
-Araç bir dizi dil üzerinde önceden eğitilmiş olarak gelir ve bir metin parçası verildiğinde, `stdout`'a bir dil tahmini ve ilişkili bir olasılık puanı çıktısı verir.
+Araç bir dizi dil üzerinde önceden eğitilmiş olarak gelir; bir metin parçası verildiğinde `stdout`'a bir dil tahmini ve ilişkili bir olasılık puanı çıktısı verir.
 
-### 2.1. Process'i içe aktarın ve kodu inceleyin
+### 2.1. Süreci içe aktarın ve kodu inceleyin
 
-Size `langid` aracını saran `IDENTIFY_LANGUAGE` adlı önceden yazılmış bir process modülü sağlıyoruz, bu nedenle sadece workflow bloğundan önce bir include ifadesi eklemeniz gerekiyor.
+Size `langid` aracını saran `IDENTIFY_LANGUAGE` adlı önceden yazılmış bir süreç modülü sağlıyoruz; bu nedenle sadece iş akışı bloğundan önce bir include ifadesi eklemeniz gerekiyor.
 
-Workflow'da aşağıdaki düzenlemeyi yapın:
+İş akışında aşağıdaki düzenlemeyi yapın:
 
 === "Sonra"
 
@@ -456,18 +456,18 @@ process IDENTIFY_LANGUAGE {
 }
 ```
 
-Gördüğünüz gibi, girdi tanımı girdi channel'ımıza uyguladığımız aynı `tuple val(meta), path(file)` yapısını kullanıyor.
+Gördüğünüz gibi, girdi tanımı girdi kanalımıza uyguladığımız aynı `tuple val(meta), path(file)` yapısını kullanıyor.
 
-Çıktı tanımı, girdi yapısına benzer bir yapıya sahip bir tuple olarak yapılandırılmıştır, ancak üçüncü öğe olarak `stdout` da içerir.
+Çıktı tanımı, girdi yapısına benzer bir yapıya sahip bir tuple olarak yapılandırılmıştır; ancak üçüncü öğe olarak `stdout` da içerir.
 Bu `tuple val(meta), path(file), <output>` modeli, metadata'yı hem girdi verisiyle hem de çıktılarla ilişkili tutar ve pipeline boyunca akar.
 
-Burada Nextflow'un [`stdout`](https://www.nextflow.io/docs/latest/process.html#outputs) çıktı niteleyicisini kullandığımızı unutmayın çünkü araç çıktısını dosya yazmak yerine doğrudan konsola yazdırır; ve komut satırında olasılık puanını kaldırmak, yeni satır karakterlerini kaldırarak dizeyi temizlemek ve yalnızca dil tahminini döndürmek için `sed` kullanırız.
+Burada Nextflow'un [`stdout`](https://www.nextflow.io/docs/latest/process.html#outputs) çıktı niteleyicisini kullandığımızı unutmayın; çünkü araç çıktısını dosya yazmak yerine doğrudan konsola yazdırır. Komut satırında olasılık puanını kaldırmak, yeni satır karakterlerini kaldırarak dizeyi temizlemek ve yalnızca dil tahminini döndürmek için `sed` kullanırız.
 
 ### 2.2. `IDENTIFY_LANGUAGE`'e bir çağrı ekleyin
 
-Artık process workflow için kullanılabilir olduğuna göre, veri channel'ında çalıştırmak için `IDENTIFY_LANGUAGE` process'ine bir çağrı ekleyebiliriz.
+Artık süreç iş akışı için kullanılabilir olduğuna göre, veri kanalında çalıştırmak için `IDENTIFY_LANGUAGE` sürecine bir çağrı ekleyebiliriz.
 
-Workflow'da aşağıdaki düzenlemeleri yapın:
+İş akışında aşağıdaki düzenlemeleri yapın:
 
 === "Sonra"
 
@@ -494,9 +494,9 @@ Workflow'da aşağıdaki düzenlemeleri yapın:
             .view()
     ```
 
-Orijinal `.view()` işlemini channel oluşturmada kaldırdığımızı unutmayın.
+Orijinal `.view()` işlemini kanal oluşturmadan kaldırdığımıza dikkat edin.
 
-Artık workflow'u çalıştırabiliriz:
+Artık iş akışını çalıştırabiliriz:
 
 ```bash
 nextflow run main.nf
@@ -522,29 +522,29 @@ nextflow run main.nf
 
 Mükemmel! Şimdi her karakterin hangi dilde konuştuğuna dair bir tahminimiz var.
 
-Ve daha önce belirtildiği gibi, çıktıya girdi dosyasını ve meta map'i de dahil ettik, bu da her ikisinin de az önce ürettiğimiz yeni bilgiyle ilişkili kalması anlamına gelir.
+Daha önce belirtildiği gibi, çıktıya girdi dosyasını ve meta map'i de dahil ettik; bu da her ikisinin de az önce ürettiğimiz yeni bilgiyle ilişkili kalması anlamına gelir.
 Bu, bir sonraki adımda faydalı olacaktır.
 
 !!! note "Not"
 
     Daha genel olarak, meta map'i sonuçlarla ilişkili tutmanın bu modeli, aynı tanımlayıcıları paylaşan ilgili sonuçları ilişkilendirmeyi kolaylaştırır.
 
-    Zaten öğrenmiş olduğunuz gibi, sonuçları bunlar arasında eşleştirmek için channel'lardaki öğelerin sırasına güvenemezsiniz.
-    Bunun yerine, verileri doğru şekilde ilişkilendirmek için anahtarlar kullanmalısınız ve meta map'ler bu amaç için ideal bir yapı sağlar.
+    Zaten öğrenmiş olduğunuz gibi, sonuçları eşleştirmek için kanallardaki öğelerin sırasına güvenemezsiniz.
+    Bunun yerine, verileri doğru şekilde ilişkilendirmek için anahtarlar kullanmalısınız; meta map'ler bu amaç için ideal bir yapı sağlar.
 
     Bu kullanım senaryosunu [Splitting & Grouping](./splitting_and_grouping.md) yan görevinde ayrıntılı olarak inceliyoruz.
 
-### 2.3. Process çıktılarıyla metadata'yı genişletme
+### 2.3. Süreç çıktılarıyla metadata'yı genişletme
 
 Az önce ürettiğimiz sonuçların kendilerinin dosyaların içeriği hakkında bir metadata türü olduğu göz önüne alındığında, bunları meta map'imize eklemek faydalı olacaktır.
 
-Ancak, mevcut meta map'i yerinde değiştirmek istemiyoruz.
-Teknik bir bakış açısından, bunu yapmak _mümkündür_, ancak güvenli değildir.
+Ancak mevcut meta map'i yerinde değiştirmek istemiyoruz.
+Teknik bir bakış açısından bunu yapmak _mümkündür_, ancak güvenli değildir.
 
 Bu nedenle, bunun yerine `+` operatörünü (bir Groovy özelliği) kullanarak mevcut meta map'in içeriğini artı yeni bilgileri tutan yeni bir `lang: lang_id` anahtar-değer çiftini içeren yeni bir meta map oluşturacağız.
-Ve bunu eski map'i yenisiyle değiştirmek için bir [`map`](https://www.nextflow.io/docs/latest/operator.html#map) işlemiyle birleştireceğiz.
+Bunu eski map'i yenisiyle değiştirmek için bir [`map`](https://www.nextflow.io/docs/latest/operator.html#map) işlemiyle birleştireceğiz.
 
-Workflow'da yapmanız gereken düzenlemeler şunlardır:
+İş akışında yapmanız gereken düzenlemeler şunlardır:
 
 === "Sonra"
 
@@ -595,7 +595,7 @@ Workflow'da yapmanız gereken düzenlemeler şunlardır:
 
     **Peki zaten bir map'in parçası olmayan bir alan eklemeniz gerekirse ne olur?**
 
-    Diyelim ki `map1`'den tekrar başlıyorsunuz, ancak dil tahmini kendi map'inde değil (bir `map2` yok).
+    Diyelim ki `map1`'den tekrar başlıyorsunuz, ancak dil tahmini kendi map'inde değil (`map2` yok).
     Bunun yerine, `lang_id` adlı bir değişkende tutuluyor ve değerini (`'fr'`) `lang` anahtarıyla saklamak istediğinizi biliyorsunuz.
 
     Aslında şunu yapabilirsiniz:
@@ -604,7 +604,7 @@ Workflow'da yapmanız gereken düzenlemeler şunlardır:
     new_map = [map1 + [lang: lang_id]]
     ```
 
-    Burada, `[lang: new_info]` anında yeni bir adsız map oluşturur ve `map1 + ` `map1`'i yeni adsız map ile birleştirerek daha önce olduğu gibi aynı `new_map` içeriğini üretir.
+    Burada `[lang: new_info]` anında yeni bir adsız map oluşturur; `map1 + ` ise `map1`'i yeni adsız map ile birleştirerek daha önce olduğu gibi aynı `new_map` içeriğini üretir.
 
     Düzgün, değil mi?
 
@@ -636,11 +636,11 @@ Workflow'da yapmanız gereken düzenlemeler şunlardır:
     [id: 'sampleA', character: 'squirrel', lang: 'fr']
     ```
 
-    Umarım `map1`'i `meta` olarak değiştirirsek, bunun temelde workflow'umuzda meta map'imize dil tahminini eklemek için ihtiyacımız olan her şey olduğunu görebilirsiniz.
+    `map1`'i `meta` olarak değiştirirsek, bunun temelde iş akışımızda meta map'imize dil tahminini eklemek için ihtiyacımız olan her şey olduğunu görebilirsiniz.
 
     Bir şey dışında!
 
-    Workflow'umuz söz konusu olduğunda, **`meta, file, lang_id`'den oluşan tuple'da `file` nesnesinin varlığını da hesaba katmamız gerekir**.
+    İş akışımız söz konusu olduğunda, **`meta, file, lang_id`'den oluşan tuple'da `file` nesnesinin varlığını da hesaba katmamız gerekir**.
 
     Yani buradaki kod şöyle olur:
 
@@ -651,11 +651,11 @@ Workflow'da yapmanız gereken düzenlemeler şunlardır:
     ```
 
     `file`'ın `map` işleminde neden dolaştığını anlamakta zorlanıyorsanız, `[meta + [lang: lang_id], file]` yerine o satırın `[new_map, file]` olduğunu hayal edin.
-    Bu, basitçe `file`'ı tuple'daki ikinci pozisyondaki orijinal yerinde bıraktığımızı daha açık hale getirmelidir. Sadece `lang_id` değerini aldık ve onu birinci pozisyondaki map'e katladık.
+    Bu, `file`'ı tuple'daki ikinci pozisyondaki orijinal yerinde bıraktığımızı daha açık hale getirir. Sadece `lang_id` değerini aldık ve onu birinci pozisyondaki map'e kattık.
 
-    **Ve bu bizi `tuple val(meta), path(file)` channel yapısına geri getiriyor!**
+    **Ve bu bizi `tuple val(meta), path(file)` kanal yapısına geri getiriyor!**
 
-Bu kodun ne yaptığını anladığınızdan emin olduğunuzda, çalışıp çalışmadığını görmek için workflow'u çalıştırın:
+Bu kodun ne yaptığını anladığınızdan emin olduğunuzda, çalışıp çalışmadığını görmek için iş akışını çalıştırın:
 
 ```bash
 nextflow run main.nf -resume
@@ -679,20 +679,20 @@ nextflow run main.nf -resume
     ```
 
 Evet, bu kontrol edildi!
-Process'in çıktısını `meta, file, lang_id`'den düzgün bir şekilde yeniden düzenledik, böylece `lang_id` artık meta map'teki anahtarlardan biri ve channel'ın tuple'ları tekrar `meta, file` modeline uyuyor.
+Sürecin çıktısını `meta, file, lang_id`'den düzgün bir şekilde yeniden düzenledik; böylece `lang_id` artık meta map'teki anahtarlardan biri ve kanalın tuple'ları tekrar `meta, file` modeline uyuyor.
 
 <!-- TODO (future) subMap kullanarak bir anahtarın nasıl kaldırılacağını da göstermeli miyiz?! Veya bunu nerede bulacağımızı not edelim. -->
 
 ### 2.4. Koşullu ifadeler kullanarak bir dil grubu atama
 
-Artık dil tahminlerimiz olduğuna göre, yeni gruplamalar atamak için bilgileri kullanalım.
+Artık dil tahminlerimiz olduğuna göre, yeni gruplamalar atamak için bu bilgileri kullanalım.
 
 Örnek verilerimizde, karakterlerimiz tarafından kullanılan diller cermen dilleri (İngilizce, Almanca) ve roman dilleri (Fransızca, İspanyolca, İtalyanca) olarak gruplandırılabilir.
-Pipeline'da daha sonra bu sınıflandırmanın hazır bir şekilde mevcut olması faydalı olabilir, bu yüzden o bilgiyi meta map'e ekleyelim.
+Pipeline'da daha sonra bu sınıflandırmanın hazır bir şekilde mevcut olması faydalı olabilir; bu yüzden o bilgiyi meta map'e ekleyelim.
 
-Ve, iyi haber, bu map operatörünü kullanmaya mükemmel bir şekilde uyan bir başka durumdur!
+İyi haber: bu, `map` operatörünü kullanmaya mükemmel şekilde uyan bir başka durumdur!
 
-Özellikle, `lang_group` adında bir değişken tanımlayacağız, her veri parçası için `lang_group`'a hangi değerin atanacağını belirlemek için bazı basit koşullu mantık kullanacağız.
+Özellikle, `lang_group` adında bir değişken tanımlayacağız ve her veri parçası için `lang_group`'a hangi değerin atanacağını belirlemek için bazı basit koşullu mantık kullanacağız.
 
 Genel sözdizimi şöyle görünecek:
 
@@ -708,7 +708,7 @@ Genel sözdizimi şöyle görünecek:
 Gördüğünüz gibi bu, önceki adımda kullandığımız anında map birleştirme işlemine çok benziyor.
 Sadece koşullu ifadeleri yazmamız gerekiyor.
 
-İşte uygulamak istediğimiz koşullu mantık:
+Uygulamak istediğimiz koşullu mantık şudur:
 
 - Varsayılan değeri `'unknown'` olan `lang_group` adında bir değişken tanımlayın.
 - Eğer `lang` Almanca (`'de'`) veya İngilizce (`'en'`) ise, `lang_group`'u `germanic` olarak değiştirin.
@@ -720,7 +720,7 @@ Nextflow'da koşullu ifadeleri nasıl yazacağınızı zaten biliyorsanız kendi
 
     Map işlemi içinde `lang` değerine `meta.lang` ile erişebilirsiniz.
 
-Workflow'da aşağıdaki değişiklikleri yapmayı tamamlamalısınız:
+İş akışında aşağıdaki değişiklikleri yapmayı tamamlamalısınız:
 
 === "Sonra"
 
@@ -766,7 +766,7 @@ Workflow'da aşağıdaki değişiklikleri yapmayı tamamlamalısınız:
 
 <!-- TODO (future) Ek kaynaklar bölümünde ilgili belgelere not/bağlantılar ekle -->
 
-Hepsi mantıklı olduğunda, sonucu görmek için workflow'u tekrar çalıştırın:
+Hepsi mantıklı olduğunda, sonucu görmek için iş akışını tekrar çalıştırın:
 
 ```bash
 nextflow run main.nf -resume
@@ -789,31 +789,31 @@ nextflow run main.nf -resume
     [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
     ```
 
-Gördüğünüz gibi, channel öğeleri `[meta, file]` yapısını korur, ancak meta map artık bu yeni sınıflandırmayı içerir.
+Gördüğünüz gibi, kanal öğeleri `[meta, file]` yapısını korur; ancak meta map artık bu yeni sınıflandırmayı içerir.
 
-### Çıkarımlar
+### Özet
 
-Bu bölümde, nasıl yapılacağını öğrendiniz:
+Bu bölümde şunları öğrendiniz:
 
-- **Girdi metadata'sını çıktı channel'larına uygulama**: Metadata'yı bu şekilde kopyalamak, sonuçları daha sonra metadata içeriğine göre ilişkilendirmemize olanak tanır.
-- **Özel anahtarlar oluşturma**: Meta map'inizde iki yeni anahtar oluşturdunuz, bunları `meta + [new_key:value]` ile mevcut meta map'e birleştirerek. Biri bir process'ten hesaplanan bir değere, diğeri `map` operatöründe belirlediğiniz bir koşula dayalı olarak.
+- **Girdi metadata'sını çıktı kanallarına uygulama**: Metadata'yı bu şekilde kopyalamak, sonuçları daha sonra metadata içeriğine göre ilişkilendirmemize olanak tanır.
+- **Özel anahtarlar oluşturma**: Meta map'inizde iki yeni anahtar oluşturdunuz; bunları `meta + [new_key:value]` ile mevcut meta map'e birleştirerek. Biri bir süreçten hesaplanan bir değere, diğeri `map` operatöründe belirlediğiniz bir koşula dayalı olarak.
 
 Bunlar, pipeline boyunca ilerlerken yeni ve mevcut metadata'yı dosyalarla ilişkilendirmenize olanak tanır.
-Bir process'in parçası olarak metadata kullanmasanız bile, meta map'i bu şekilde veriyle ilişkili tutmak tüm ilgili bilgileri bir arada tutmayı kolaylaştırır.
+Bir sürecin parçası olarak metadata kullanmasanız bile, meta map'i bu şekilde veriyle ilişkili tutmak tüm ilgili bilgileri bir arada tutmayı kolaylaştırır.
 
 ---
 
-## 3. Bir process'te meta map bilgisini kullanma
+## 3. Bir süreçte meta map bilgisini kullanma
 
-Artık meta map'i nasıl oluşturup güncelleyeceğinizi bildiğinize göre, gerçekten eğlenceli kısma geçebiliriz: metadata'yı bir process'te gerçekten kullanma.
+Artık meta map'i nasıl oluşturup güncelleyeceğinizi bildiğinize göre, gerçekten eğlenceli kısma geçebiliriz: metadata'yı bir süreçte gerçekten kullanma.
 
-Daha spesifik olarak, workflow'umuza her hayvanı ASCII art olarak çizmek ve kaydedilen metni bir konuşma balonunda söyletmek için ikinci bir adım ekleyeceğiz.
+Daha spesifik olarak, iş akışımıza her hayvanı ASCII art olarak çizmek ve kaydedilen metni bir konuşma balonunda söyletmek için ikinci bir adım ekleyeceğiz.
 Bunu [`cowpy`](https://github.com/jeffbuttars/cowpy) adlı bir araç kullanarak yapacağız.
 
 ??? info "`cowpy` ne yapar?"
 
     `cowpy`, keyfi metin girdilerini eğlenceli bir şekilde görüntülemek için ASCII art üreten bir komut satırı aracıdır.
-    Tony Monroe'nun klasik [cowsay](https://en.wikipedia.org/wiki/Cowsay) aracının python implementasyonudur.
+    Tony Monroe'nun klasik [cowsay](https://en.wikipedia.org/wiki/Cowsay) aracının Python implementasyonudur.
 
     ```console
     cowpy "Hello Nextflow"
@@ -852,13 +852,13 @@ Bunu [`cowpy`](https://github.com/jeffbuttars/cowpy) adlı bir araç kullanarak 
     ```
 
 Hello Nextflow kursunu tamamladıysanız, bu aracı zaten çalışırken gördünüz.
-Eğer görmediyseniz, endişelenmeyin; ilerlerken bilmeniz gereken her şeyi ele alacağız.
+Görmediyseniz endişelenmeyin; ilerlerken bilmeniz gereken her şeyi ele alacağız.
 
-### 3.1. Process'i içe aktarın ve kodu inceleyin
+### 3.1. Süreci içe aktarın ve kodu inceleyin
 
-Size `cowpy` aracını saran `COWPY` adlı önceden yazılmış bir process modülü sağlıyoruz, bu nedenle sadece workflow bloğundan önce bir include ifadesi eklemeniz gerekiyor.
+Size `cowpy` aracını saran `COWPY` adlı önceden yazılmış bir süreç modülü sağlıyoruz; bu nedenle sadece iş akışı bloğundan önce bir include ifadesi eklemeniz gerekiyor.
 
-Workflow'da aşağıdaki düzenlemeyi yapın:
+İş akışında aşağıdaki düzenlemeyi yapın:
 
 === "Sonra"
 
@@ -907,34 +907,34 @@ process COWPY {
 }
 ```
 
-Gördüğünüz gibi, bu process şu anda bir girdi dosyası (görüntülenecek metni içeren) ve ASCII art'ta çizilmesi gereken karakteri belirten bir değer almak üzere tasarlanmıştır, genellikle workflow seviyesinde bir komut satırı parametresi ile sağlanır.
+Gördüğünüz gibi, bu süreç şu anda bir girdi dosyası (görüntülenecek metni içeren) ve ASCII art'ta çizilmesi gereken karakteri belirten bir değer almak üzere tasarlanmıştır; genellikle iş akışı seviyesinde bir komut satırı parametresi ile sağlanır.
 
 ### 3.2. Bir meta map alanını girdi olarak geçirme
 
 Hello Nextflow kursunda `cowpy` aracını kullandığımızda, nihai görüntüyü çizmek için hangi karakterin kullanılacağını belirlemek için bir komut satırı parametresi kullandık.
-Bu mantıklıydı, çünkü pipeline'ın her çalıştırması başına sadece bir görüntü oluşturuyorduk.
+Bu mantıklıydı; çünkü pipeline'ın her çalıştırması başına sadece bir görüntü oluşturuyorduk.
 
-Ancak, bu eğitimde, işlediğimiz her konu için uygun bir görüntü oluşturmak istiyoruz, bu nedenle bir komut satırı parametresi kullanmak çok sınırlayıcı olurdu.
+Ancak bu eğitimde, işlediğimiz her konu için uygun bir görüntü oluşturmak istiyoruz; bu nedenle bir komut satırı parametresi kullanmak çok sınırlayıcı olurdu.
 
 İyi haber: veri tablomuzda ve dolayısıyla meta map'imizde bir `character` sütunumuz var.
-Process'in her girdi için kullanması gereken karakteri ayarlamak için bunu kullanalım.
+Sürecin her girdi için kullanması gereken karakteri ayarlamak için bunu kullanalım.
 
-Bu amaçla, üç şey yapmamız gerekecek:
+Bu amaçla üç şey yapmamız gerekecek:
 
-1. Üzerinde daha rahat çalışabilmemiz için önceki process'ten çıkan çıktı channel'ına bir isim verin
+1. Üzerinde daha rahat çalışabilmemiz için önceki süreçten çıkan çıktı kanalına bir isim verin
 2. İlgilendiğimiz bilgilere nasıl erişeceğimizi belirleyin
-3. İkinci process'e bir çağrı ekleyin ve bilgiyi uygun şekilde besleyin
+3. İkinci sürece bir çağrı ekleyin ve bilgiyi uygun şekilde besleyin
 
 Başlayalım.
 
-#### 3.2.1. Önceki çıktı channel'ını adlandırma
+#### 3.2.1. Önceki çıktı kanalını adlandırma
 
-Önceki manipülasyonları doğrudan ilk process'in çıktı channel'ı üzerinde uyguladık, `IDENTIFY_LANGUAGE.out`.
-Bir sonraki process'e channel'ın içeriğini beslemek için (ve bunu açık ve kolay okunur bir şekilde yapmak için) ona kendi adını vermek istiyoruz, `ch_languages`.
+Önceki manipülasyonları doğrudan ilk sürecin çıktı kanalı üzerinde uyguladık: `IDENTIFY_LANGUAGE.out`.
+Bir sonraki sürece kanalın içeriğini beslemek için (ve bunu açık ve kolay okunur bir şekilde yapmak için) ona kendi adını vermek istiyoruz: `ch_languages`.
 
 Bunu [`set`](https://www.nextflow.io/docs/latest/reference/operator.html#set) operatörünü kullanarak yapabiliriz.
 
-Ana workflow'da, `.view()` operatörünü `.set { ch_languages }` ile değiştirin ve channel'a ismiyle başvurabileceğimizi test eden bir satır ekleyin.
+Ana iş akışında, `.view()` operatörünü `.set { ch_languages }` ile değiştirin ve kanala ismiyle başvurabildiğimizi test eden bir satır ekleyin.
 
 === "Sonra"
 
@@ -1010,18 +1010,18 @@ nextflow run main.nf
     [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/work/36/cca6a7dbfa26ac24f9329787a32e9d/ciao.txt]
     ```
 
-Bu, artık channel'a ismiyle başvurabileceğimizi doğruluyor.
+Bu, artık kanala ismiyle başvurabildiğimizi doğruluyor.
 
 #### 3.2.2. Dosya ve karakter metadata'sına erişim
 
-Modül koduna bakarak `COWPY` process'inin bir metin dosyası ve bir `character` değeri verilmesini beklediğini biliyoruz.
-`COWPY` process çağrısını yazmak için, channel'daki her öğeden karşılık gelen dosya nesnesini ve metadata'yı nasıl çıkaracağımızı bilmemiz gerekiyor.
+Modül koduna bakarak `COWPY` sürecinin bir metin dosyası ve bir `character` değeri verilmesini beklediğini biliyoruz.
+`COWPY` süreç çağrısını yazmak için, kanaldaki her öğeden karşılık gelen dosya nesnesini ve metadata'yı nasıl çıkaracağımızı bilmemiz gerekiyor.
 
 Genellikle olduğu gibi, bunu yapmanın en basit yolu bir `map` işlemi kullanmaktır.
 
-Channel'ımız `[meta, file]` olarak yapılandırılmış tuple'lar içerir, bu nedenle `file` nesnesine doğrudan erişebiliriz ve meta map içinde saklanan `character` değerine `meta.character` olarak başvurarak erişebiliriz.
+Kanalımız `[meta, file]` olarak yapılandırılmış tuple'lar içerir; bu nedenle `file` nesnesine doğrudan erişebiliriz ve meta map içinde saklanan `character` değerine `meta.character` olarak başvurarak erişebiliriz.
 
-Ana workflow'da, aşağıdaki kod değişikliklerini yapın:
+Ana iş akışında aşağıdaki kod değişikliklerini yapın:
 
 === "Sonra"
 
@@ -1038,7 +1038,7 @@ Ana workflow'da, aşağıdaki kod değişikliklerini yapın:
         ch_languages.view()
     ```
 
-`.view` işlemlerinin çıktısını daha okunabilir hale getirmek için closure'ları (örneğin `{ file -> "File: " + file }`) kullandığımızı unutmayın.
+`.view` işlemlerinin çıktısını daha okunabilir hale getirmek için closure'ları (örneğin `{ file -> "File: " + file }`) kullandığımıza dikkat edin.
 
 Bunu çalıştıralım:
 
@@ -1072,13 +1072,13 @@ nextflow run main.nf -resume
 
 _Dosya yolları ve karakter değerleri çıktınızda farklı bir sırayla gelebilir._
 
-Bu, channel'daki her öğe için dosyaya ve karaktere erişebildiğimizi doğruluyor.
+Bu, kanaldaki her öğe için dosyaya ve karaktere erişebildiğimizi doğruluyor.
 
-#### 3.2.3. `COWPY` process'ini çağırma
+#### 3.2.3. `COWPY` sürecini çağırma
 
-Şimdi hepsini bir araya getirelim ve gerçekten `ch_languages` channel'ında `COWPY` process'ini çağıralım.
+Şimdi hepsini bir araya getirelim ve gerçekten `ch_languages` kanalında `COWPY` sürecini çağıralım.
 
-Ana workflow'da, aşağıdaki kod değişikliklerini yapın:
+Ana iş akışında aşağıdaki kod değişikliklerini yapın:
 
 === "Sonra"
 
@@ -1098,10 +1098,10 @@ Ana workflow'da, aşağıdaki kod değişikliklerini yapın:
             .view()
     ```
 
-Sadece iki map işlemini (`.view()` ifadeleri hariç) process çağrısına girdi olarak kopyaladığımızı görüyorsunuz.
+Sadece iki map işlemini (`.view()` ifadeleri hariç) süreç çağrısına girdi olarak kopyaladığımızı görüyorsunuz.
 Aralarındaki virgülü unutmadığınızdan emin olun!
 
-Biraz hantal ama bir sonraki bölümde bunu nasıl iyileştireceğimizi göreceğiz.
+Biraz hantal; ancak bir sonraki bölümde bunu nasıl iyileştireceğimizi göreceğiz.
 
 Bunu çalıştıralım:
 
@@ -1155,17 +1155,17 @@ Results dizinine bakarsanız, her selamlaşmanın karşılık gelen karakter tar
 
 Bu, meta map'teki bilgileri pipeline'ın ikinci adımında komutu parametrelemek için kullanabildığimizi gösteriyor.
 
-Ancak, yukarıda belirtildiği gibi, ilgili kodun bir kısmı biraz hantaldı, çünkü metadata'yı hala workflow gövdesi bağlamındayken açmamız gerekti.
-Bu yaklaşım meta map'ten az sayıda alan kullanmak için iyi çalışır, ancak çok daha fazlasını kullanmak istesek kötü ölçeklenirdi.
+Ancak yukarıda belirtildiği gibi, ilgili kodun bir kısmı biraz hantaldı; çünkü metadata'yı hâlâ iş akışı gövdesi bağlamındayken açmamız gerekti.
+Bu yaklaşım meta map'ten az sayıda alan kullanmak için iyi çalışır; ancak çok daha fazlasını kullanmak istesek kötü ölçeklenirdi.
 
-`multiMap()` adlı başka bir operatör var ki bu biraz basitleştirmemize olanak tanır, ancak o zaman bile ideal değildir.
+`multiMap()` adlı başka bir operatör var ki bu biraz basitleştirmemize olanak tanır; ancak o zaman bile ideal değildir.
 
 ??? info "(İsteğe bağlı) `multiMap()` ile alternatif versiyon"
 
-    Merak ediyorsanız, hem `file` hem de `character`'ı çıkaran tek bir `map()` işlemi yazamadık, çünkü bu onları bir tuple olarak döndürürdü.
-    `file` ve `character` öğelerini process'e ayrı ayrı beslemek için iki ayrı `map()` işlemi yazmak zorunda kaldık.
+    Merak ediyorsanız, hem `file` hem de `character`'ı çıkaran tek bir `map()` işlemi yazamadık; çünkü bu onları bir tuple olarak döndürürdü.
+    `file` ve `character` öğelerini sürece ayrı ayrı beslemek için iki ayrı `map()` işlemi yazmak zorunda kaldık.
 
-    Teknik olarak bunu tek bir eşleme işlemiyle yapmanın başka bir yolu var, birden fazla channel yayınlayabilen `multiMap()` operatörünü kullanarak.
+    Teknik olarak bunu tek bir eşleme işlemiyle yapmanın başka bir yolu var: birden fazla kanal yayınlayabilen `multiMap()` operatörünü kullanarak.
     Örneğin, yukarıdaki `COWPY` çağrısını aşağıdaki kodla değiştirebilirsiniz:
 
     === "Sonra"
@@ -1192,23 +1192,23 @@ Bu yaklaşım meta map'ten az sayıda alan kullanmak için iyi çalışır, anca
 
     Bu tam olarak aynı sonucu üretir.
 
-Her iki durumda da, workflow seviyesinde açma işlemi yapmak zorunda olmak garip.
+Her iki durumda da, iş akışı seviyesinde açma işlemi yapmak zorunda olmak garip.
 
-Tüm meta map'i process'e besleyebilsek ve ihtiyacımız olanı orada seçebilsek daha iyi olurdu.
+Tüm meta map'i sürece besleyebilsek ve ihtiyacımız olanı orada seçebilsek daha iyi olurdu.
 
 ### 3.3. Tüm meta map'i geçirme ve kullanma
 
 Meta map'in amacı sonuçta tüm metadata'yı bir paket olarak birlikte geçirmektir.
-Yukarıda bunu yapamamamızın tek nedeni process'in bir meta map kabul edecek şekilde ayarlanmamış olmasıydı.
-Ancak process kodunu kontrol ettiğimiz için bunu değiştirebiliriz.
+Yukarıda bunu yapamamanın tek nedeni, sürecin bir meta map kabul edecek şekilde ayarlanmamış olmasıydı.
+Ancak süreç kodunu kontrol ettiğimiz için bunu değiştirebiliriz.
 
-Workflow'u basitleştirebilmemiz için `COWPY` process'ini ilk process'te kullandığımız `[meta, file]` tuple yapısını kabul edecek şekilde değiştirelim.
+İş akışını basitleştirebilmemiz için `COWPY` sürecini, ilk süreçte kullandığımız `[meta, file]` tuple yapısını kabul edecek şekilde değiştirelim.
 
-Bu amaçla, üç şey yapmamız gerekecek:
+Bu amaçla üç şey yapmamız gerekecek:
 
-1. `COWPY` process modülünün girdi tanımlarını değiştirmek
-2. Meta map'i kullanmak için process komutunu güncellemek
-3. Workflow gövdesindeki process çağrısını güncellemek
+1. `COWPY` süreç modülünün girdi tanımlarını değiştirmek
+2. Meta map'i kullanmak için süreç komutunu güncellemek
+3. İş akışı gövdesindeki süreç çağrısını güncellemek
 
 Hazır mısınız? Başlayalım!
 
@@ -1233,11 +1233,11 @@ Hazır mısınız? Başlayalım!
 
 Bu, eğitimde daha önce ele aldığımız `[meta, file]` tuple yapısını kullanmamızı sağlar.
 
-Eğitimi kısa tutmak için process çıktı tanımını meta map'i çıktılayacak şekilde güncellemediğimizi, ancak `IDENTIFY_LANGUAGE` process'inin modelini izleyerek bunu kendiniz bir alıştırma olarak yapmakta özgür olduğunuzu unutmayın.
+Eğitimi kısa tutmak için süreç çıktı tanımını meta map'i çıktılayacak şekilde güncellemediğimizi; ancak `IDENTIFY_LANGUAGE` sürecinin modelini izleyerek bunu kendiniz bir alıştırma olarak yapmakta özgür olduğunuzu unutmayın.
 
 #### 3.3.2. Meta map alanını kullanmak için komutu güncelleme
 
-Tüm meta map artık process içinde kullanılabilir, bu nedenle içerdiği bilgilere doğrudan komut bloğunun içinden başvurabiliriz.
+Tüm meta map artık süreç içinde kullanılabilir; bu nedenle içerdiği bilgilere doğrudan komut bloğunun içinden başvurabiliriz.
 
 `cowpy.nf` modül dosyasında aşağıdaki düzenlemeleri yapın:
 
@@ -1261,13 +1261,13 @@ Tüm meta map artık process içinde kullanılabilir, bu nedenle içerdiği bilg
 
 Daha önce bağımsız bir girdi olarak geçirilen `character` değerine yapılan referansı, `meta.character` kullanarak başvurduğumuz meta map'teki değerle değiştirdik.
 
-Şimdi process çağrısını buna göre güncelleyelim.
+Şimdi süreç çağrısını buna göre güncelleyelim.
 
-#### 3.3.3. Process çağrısını güncelleme ve çalıştırma
+#### 3.3.3. Süreç çağrısını güncelleme ve çalıştırma
 
-Process artık girdisinin `[meta, file]` tuple yapısını kullanmasını bekliyor, bu da önceki process'in çıktıladığı şey, bu nedenle `ch_languages` channel'ının tamamını `COWPY` process'ine basitçe geçirebiliriz.
+Süreç artık girdisinin `[meta, file]` tuple yapısını kullanmasını bekliyor; bu da önceki sürecin çıktıladığı şeydir. Bu nedenle `ch_languages` kanalının tamamını `COWPY` sürecine basitçe geçirebiliriz.
 
-Ana workflow'da aşağıdaki düzenlemeleri yapın:
+Ana iş akışında aşağıdaki düzenlemeleri yapın:
 
 === "Sonra"
 
@@ -1307,7 +1307,7 @@ nextflow run main.nf
     [25/9243df] process > COWPY (7)             [100%] 7 of 7 ✔
     ```
 
-Results dizinine bakarsanız, öncekiyle aynı çıktıları görmelisiniz, _yani_ her selamlaşmanın karşılık gelen karakter tarafından söylendiği ASCII art'ı içeren bireysel dosyalar.
+Results dizinine bakarsanız, öncekiyle aynı çıktıları görmelisiniz; _yani_ her selamlaşmanın karşılık gelen karakter tarafından söylendiği ASCII art'ı içeren bireysel dosyalar.
 
 ??? abstract "Dizin içeriği"
 
@@ -1324,17 +1324,17 @@ Results dizinine bakarsanız, öncekiyle aynı çıktıları görmelisiniz, _yan
 
 Bu, daha basit kodla öncekiyle aynı sonuçları üretir.
 
-Elbette, bu process kodunu değiştirebildiğinizi varsayar.
-Bazı durumlarda, değiştirme özgürlüğünüz olmayan mevcut process'lere güvenmek zorunda kalabilirsiniz, bu da seçeneklerinizi sınırlar.
-İyi haber, [nf-core](https://nf-co.re/) projesinden modüller kullanmayı planlıyorsanız, nf-core modüllerinin hepsinin standart olarak `[meta, file]` tuple yapısını kullanacak şekilde ayarlanmış olmasıdır.
+Elbette bu, süreç kodunu değiştirebildiğinizi varsayar.
+Bazı durumlarda, değiştirme özgürlüğünüz olmayan mevcut süreçlere güvenmek zorunda kalabilirsiniz; bu da seçeneklerinizi sınırlar.
+İyi haber: [nf-core](https://nf-co.re/) projesinden modüller kullanmayı planlıyorsanız, nf-core modüllerinin hepsinin standart olarak `[meta, file]` tuple yapısını kullanacak şekilde ayarlanmış olmasıdır.
 
 ### 3.4. Eksik gerekli girdilerde sorun giderme
 
-`character` değeri, `COWPY` process'inin başarılı bir şekilde çalışması için gereklidir.
+`character` değeri, `COWPY` sürecinin başarılı bir şekilde çalışması için gereklidir.
 Bir yapılandırma dosyasında bunun için varsayılan bir değer belirlemiyorsak, veri tablosunda bunun için bir değer SAĞLAMALIYIZ.
 
 **Sağlamazsak ne olur?**
-Bu, girdi veri tablosunun ne içerdiğine ve workflow'un hangi versiyonunu çalıştırdığımıza bağlıdır.
+Bu, girdi veri tablosunun ne içerdiğine ve iş akışının hangi versiyonunu çalıştırdığımıza bağlıdır.
 
 #### 3.4.1. Character sütunu var ama boş
 
@@ -1351,7 +1351,7 @@ sampleF,moose,/workspaces/training/side-quests/metadata/data/salut.txt
 sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 ```
 
-Yukarıda kullandığımız workflow'un her iki versiyonu için de, veri tablosu okunduğunda tüm girdiler için `character` anahtarı oluşturulacak, ancak `sampleA` için değer boş bir dize olacaktır.
+Yukarıda kullandığımız iş akışının her iki versiyonu için de, veri tablosu okunduğunda tüm girdiler için `character` anahtarı oluşturulacak; ancak `sampleA` için değer boş bir dize olacaktır.
 
 Bu bir hataya neden olacaktır.
 
@@ -1398,7 +1398,7 @@ Bu bir hataya neden olacaktır.
     -- Check '.nextflow.log' file for details
     ```
 
-Nextflow o örnek için `cowpy` komut satırını çalıştırdığında, `cowpy` komut satırında `${meta.character}` boş bir dizeyle doldurulur, bu nedenle `cowpy` aracı `-c` argümanı için değer sağlanmadığını söyleyen bir hata fırlatır.
+Nextflow o örnek için `cowpy` komut satırını çalıştırdığında, `${meta.character}` boş bir dizeyle doldurulur; bu nedenle `cowpy` aracı `-c` argümanı için değer sağlanmadığını söyleyen bir hata fırlatır.
 
 #### 3.4.2. Character sütunu veri tablosunda mevcut değil
 
@@ -1417,11 +1417,11 @@ sampleG,/workspaces/training/side-quests/metadata/data/ciao.txt
 
 Bu durumda veri tablosu okunduğunda `character` anahtarı hiç oluşturulmayacaktır.
 
-##### 3.4.2.1. Workflow seviyesinde erişilen değer
+##### 3.4.2.1. İş akışı seviyesinde erişilen değer
 
-Bölüm 3.2'de yazdığımız kodun versiyonunu kullanıyorsak, Nextflow `COWPY` process'ini çağırmadan ÖNCE meta map'teki `character` anahtarına erişmeye çalışacaktır.
+Bölüm 3.2'de yazdığımız kodun versiyonunu kullanıyorsak, Nextflow `COWPY` sürecini çağırmadan ÖNCE meta map'teki `character` anahtarına erişmeye çalışacaktır.
 
-Talimatla eşleşen öğe bulamayacak, bu nedenle `COWPY`'yi hiç çalıştırmayacaktır.
+Talimatla eşleşen öğe bulamayacak; bu nedenle `COWPY`'yi hiç çalıştırmayacaktır.
 
 ??? success "Komut çıktısı"
 
@@ -1435,14 +1435,14 @@ Talimatla eşleşen öğe bulamayacak, bu nedenle `COWPY`'yi hiç çalıştırma
     [-        ] process > COWPY                 -
     ```
 
-Nextflow açısından bakıldığında, bu workflow başarıyla çalıştırıldı!
-Ancak, istediğimiz çıktıların hiçbiri üretilmeyecektir.
+Nextflow açısından bakıldığında, bu iş akışı başarıyla çalıştırıldı!
+Ancak istediğimiz çıktıların hiçbiri üretilmeyecektir.
 
-##### 3.4.2.2. Process seviyesinde erişilen değer
+##### 3.4.2.2. Süreç seviyesinde erişilen değer
 
-Bölüm 3.3'teki versiyonu kullanıyorsak, Nextflow tüm meta map'i `COWPY` process'ine geçirecek ve komutu çalıştırmaya çalışacaktır.
+Bölüm 3.3'teki versiyonu kullanıyorsak, Nextflow tüm meta map'i `COWPY` sürecine geçirecek ve komutu çalıştırmaya çalışacaktır.
 
-Bu bir hataya neden olacaktır, ancak ilk durumla karşılaştırıldığında farklı bir hata.
+Bu bir hataya neden olacaktır; ancak ilk durumla karşılaştırıldığında farklı bir hata.
 
 ??? failure "Komut çıktısı"
 
@@ -1497,19 +1497,19 @@ Bu bir hataya neden olacaktır, ancak ilk durumla karşılaştırıldığında f
     -- Check '.nextflow.log' file for details
     ```
 
-Bu, `meta.character` mevcut olmadığı için olur, bu nedenle ona erişme girişimimiz `null` döndürür. Sonuç olarak, Nextflow komut satırına tam anlamıyla `null` yerleştirir, bu da tabii ki `cowpy` aracı tarafından tanınmaz.
+Bu, `meta.character` mevcut olmadığı için olur; bu nedenle ona erişme girişimimiz `null` döndürür. Sonuç olarak, Nextflow komut satırına tam anlamıyla `null` yerleştirir; bu da tabii ki `cowpy` aracı tarafından tanınmaz.
 
 #### 3.4.3. Çözümler
 
-Workflow yapılandırmasının bir parçası olarak varsayılan bir değer sağlamanın yanı sıra, bunu daha sağlam bir şekilde ele almak için yapabileceğimiz iki şey vardır:
+İş akışı yapılandırmasının bir parçası olarak varsayılan bir değer sağlamanın yanı sıra, bunu daha sağlam bir şekilde ele almak için yapabileceğimiz iki şey vardır:
 
-1. Veri tablosunun gerekli tüm bilgileri içerdiğinden emin olmak için workflow'unuza girdi doğrulaması uygulayın. Hello nf-core eğitim kursunda [girdi doğrulamasına giriş](../hello_nf-core/05_input_validation.md) bulabilirsiniz. <!-- TODO (future) pending a proper Validation side quest -->
+1. Veri tablosunun gerekli tüm bilgileri içerdiğinden emin olmak için iş akışınıza girdi doğrulaması uygulayın. Hello nf-core eğitim kursunda [girdi doğrulamasına giriş](../hello_nf-core/05_input_validation.md) bulabilirsiniz. <!-- TODO (future) pending a proper Validation side quest -->
 
-2. Process modülünüzü kullanan herkesin gerekli girdileri hemen tanımlayabilmesini sağlamak istiyorsanız, gerekli metadata özelliğini açık bir girdi haline de getirebilirsiniz.
+2. Süreç modülünüzü kullanan herkesin gerekli girdileri hemen tanımlayabilmesini sağlamak istiyorsanız, gerekli metadata özelliğini açık bir girdi haline de getirebilirsiniz.
 
 İşte bunun nasıl çalışacağının bir örneği.
 
-İlk olarak, process seviyesinde, girdi tanımını şu şekilde güncelleyin:
+İlk olarak, süreç seviyesinde girdi tanımını şu şekilde güncelleyin:
 
 === "Sonra"
 
@@ -1525,7 +1525,7 @@ Workflow yapılandırmasının bir parçası olarak varsayılan bir değer sağl
         tuple val(meta), path(input_file)
     ```
 
-Ardından, workflow seviyesinde, `character` özelliğini metadata'dan çıkarmak ve onu girdi tuple'ının açık bir bileşeni yapmak için bir eşleme işlemi kullanın:
+Ardından, iş akışı seviyesinde `character` özelliğini metadata'dan çıkarmak ve onu girdi tuple'ının açık bir bileşeni yapmak için bir eşleme işlemi kullanın:
 
 === "Sonra"
 
@@ -1539,27 +1539,27 @@ Ardından, workflow seviyesinde, `character` özelliğini metadata'dan çıkarma
         COWPY(ch_languages)
     ```
 
-Bu yaklaşımın `character`'ın gerekli olduğunu açıkça gösterme avantajı vardır ve process'in diğer bağlamlarda yeniden dağıtılmasını kolaylaştırır.
+Bu yaklaşımın `character`'ın gerekli olduğunu açıkça gösterme avantajı vardır ve sürecin diğer bağlamlarda yeniden kullanılmasını kolaylaştırır.
 
 Bu önemli bir tasarım ilkesini vurgular:
 
-**Meta map'i isteğe bağlı, açıklayıcı bilgiler için kullanın, ancak gerekli değerleri açık girdiler olarak çıkarın.**
+**Meta map'i isteğe bağlı, açıklayıcı bilgiler için kullanın; ancak gerekli değerleri açık girdiler olarak çıkarın.**
 
-Meta map, channel yapılarını temiz tutmak ve keyfi channel yapılarını önlemek için mükemmeldir, ancak bir process'te doğrudan referans verilen zorunlu öğeler için, bunları açık girdiler olarak çıkarmak daha sağlam ve bakımı kolay kod oluşturur.
+Meta map, kanal yapılarını temiz tutmak ve keyfi kanal yapılarını önlemek için mükemmeldir; ancak bir süreçte doğrudan referans verilen zorunlu öğeler için bunları açık girdiler olarak çıkarmak daha sağlam ve bakımı kolay kod oluşturur.
 
-### Çıkarımlar
+### Özet
 
-Bu bölümde, metadata'yı bir process'in yürütülmesini özelleştirmek için nasıl kullanacağınızı, hem workflow seviyesinde hem de process seviyesinde erişerek öğrendiniz.
+Bu bölümde, metadata'yı bir sürecin yürütülmesini özelleştirmek için nasıl kullanacağınızı; hem iş akışı seviyesinde hem de süreç seviyesinde erişerek öğrendiniz.
 
 ---
 
 ## Ek alıştırma
 
-Bir process'in içinden meta map bilgilerini kullanma pratiği yapmak istiyorsanız, çıktıların nasıl adlandırıldığını ve/veya organize edildiğini özelleştirmek için meta map'ten `lang` ve `lang_group` gibi diğer bilgileri kullanmayı deneyin.
+Bir sürecin içinden meta map bilgilerini kullanma pratiği yapmak istiyorsanız, çıktıların nasıl adlandırıldığını ve/veya organize edildiğini özelleştirmek için meta map'ten `lang` ve `lang_group` gibi diğer bilgileri kullanmayı deneyin.
 
 Örneğin, bu sonucu üretmek için kodu değiştirmeyi deneyin:
 
-```console title="Results dizini içeriği"
+```console title="Results directory contents"
 results/
 ├── germanic
 │   ├── de-guten_tag.txt
@@ -1580,16 +1580,16 @@ results/
 
 ## Özet
 
-Bu yan görevde, Nextflow workflow'larında metadata ile etkili bir şekilde nasıl çalışılacağını keşfettiniz.
+Bu yan görevde, Nextflow iş akışlarında metadata ile etkili bir şekilde nasıl çalışılacağını keşfettiniz.
 
-Metadata'yı açık ve veriye bağlı tutmanın bu modeli, Nextflow'ta temel bir en iyi uygulamadır ve dosya bilgilerini sabit kodlamaya göre çeşitli avantajlar sunar:
+Metadata'yı açık ve veriye bağlı tutmanın bu modeli, Nextflow'da temel bir en iyi uygulamadır ve dosya bilgilerini sabit kodlamaya göre çeşitli avantajlar sunar:
 
-- Dosya metadata'sı workflow boyunca dosyalarla ilişkili kalır
-- Process davranışı dosya başına özelleştirilebilir
+- Dosya metadata'sı iş akışı boyunca dosyalarla ilişkili kalır
+- Süreç davranışı dosya başına özelleştirilebilir
 - Çıktı organizasyonu dosya metadata'sını yansıtabilir
 - Dosya bilgileri pipeline yürütme sırasında genişletilebilir
 
-Bu modeli kendi çalışmanızda uygulamak, sağlam ve bakımı kolay biyoinformatik workflow'lar oluşturmanızı sağlayacaktır.
+Bu modeli kendi çalışmanızda uygulamak, sağlam ve bakımı kolay biyoinformatik iş akışları oluşturmanızı sağlayacaktır.
 
 ### Temel modeller
 
@@ -1603,9 +1603,9 @@ Bu modeli kendi çalışmanızda uygulamak, sağlam ve bakımı kolay biyoinform
       }
     ```
 
-2.  **Workflow Sırasında Metadata'yı Genişletme** Pipeline'ınız ilerledikçe process çıktıları ekleyerek ve koşullu mantıkla değerler türeterek metadata'nıza yeni bilgiler ekleme.
+2.  **İş Akışı Sırasında Metadata'yı Genişletme:** Pipeline'ınız ilerledikçe süreç çıktıları ekleyerek ve koşullu mantıkla değerler türeterek metadata'nıza yeni bilgiler ekleme.
 
-    - Process çıktısına dayalı yeni anahtarlar ekleme
+    - Süreç çıktısına dayalı yeni anahtarlar ekleme
 
     ```groovy
     .map { meta, file, lang ->
@@ -1627,7 +1627,7 @@ Bu modeli kendi çalışmanızda uygulamak, sağlam ve bakımı kolay biyoinform
     }
     ```
 
-3.  **Process Davranışını Özelleştirme:** Metadata'yı process içinde kullanma.
+3.  **Süreç Davranışını Özelleştirme:** Metadata'yı süreç içinde kullanma.
 
     ```groovy
     cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}

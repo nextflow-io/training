@@ -30,7 +30,7 @@ Bu araçlar GitHub Codespaces ortamında yüklü değildir, bu nedenle onları k
 
 !!! note "Not"
 
-    `nf4-science/{DOMAIN_DIR}` dizininde olduğunuzdan emin olun, böylece `pwd` yazdığınızda gösterilen yolun son kısmı `{DOMAIN_DIR}` olsun.
+    `nf4-science/{DOMAIN_DIR}` dizininde olduğunuzdan emin olun; böylece `pwd` yazdığınızda gösterilen yolun son kısmı `{DOMAIN_DIR}` olsun.
 
 ---
 
@@ -173,7 +173,7 @@ Bunlar, bu kursun 3. Bölümünde bir Nextflow iş akışına sarmalayacağımı
 
 ---
 
-### Özet
+### Özetle
 
 {TOOL_A} ve {TOOL_B} komutlarını kendi konteynerlarında nasıl test edeceğinizi, {MULTI_SAMPLE_SUMMARY} dahil olmak üzere biliyorsunuz.
 

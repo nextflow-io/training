@@ -8,7 +8,8 @@ hide:
 
 # Ortam seçenekleri
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay Zeka Destekli Çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } Yapay zeka destekli çeviri - [daha fazla bilgi ve iyileştirme önerileri](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+
 
 Öğrencilerin yazılım yönetimi ile zaman ve çaba harcamak yerine Nextflow öğrenmeye odaklanmalarını sağlayan tutarlı ve kapsamlı olarak test edilmiş bir ortam sağlamayı hedefliyoruz.
 Bu amaçla, tüm kurslarımızda çalışmak için gerekli tüm yazılımları, kod dosyalarını ve örnek verileri içeren konteynerize bir ortam geliştirdik.
@@ -17,21 +18,21 @@ Bu konteynerize ortam, Github Codespaces üzerinde hazır olarak veya Devcontain
 
 <div class="grid cards" markdown>
 
-- :material-cloud-outline:{ .lg .middle } **Github Codespaces**
+-   :material-cloud-outline:{ .lg .middle } __Github Codespaces__
 
-  ***
+    ---
 
-  GitHub Codespaces, buluttaki sanal makineler tarafından desteklenen, tüm araçlar ve veriler dahil önceden oluşturulmuş bir eğitim ortamı sağlamamıza olanak tanıyan web tabanlı bir hizmettir. Github hesabı olan herkes için ücretsiz olarak erişilebilir.
+    GitHub Codespaces, buluttaki sanal makineler tarafından desteklenen, tüm araçlar ve veriler dahil önceden oluşturulmuş bir eğitim ortamı sağlamamıza olanak tanıyan web tabanlı bir hizmettir. Github hesabı olan herkes için ücretsiz olarak erişilebilir.
 
-  [Github Codespaces kullanın :material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
+    [Github Codespaces kullanın :material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
 
-- :material-laptop:{ .lg .middle } **Yerel Devcontainer'lar**
+-   :material-laptop:{ .lg .middle } __Yerel Devcontainer'lar__
 
-  ***
+    ---
 
-  Devcontainer'lı VS Code, tüm eğitim araçları önceden yapılandırılmış, yerel olarak çalışan konteynerize bir geliştirme ortamı sağlar. Codespaces ile aynı önceden oluşturulmuş ortamı sunar ancak tamamen yerel donanımınızda çalışır.
+    Devcontainer'lı VS Code, tüm eğitim araçları önceden yapılandırılmış, yerel olarak çalışan konteynerize bir geliştirme ortamı sağlar. Codespaces ile aynı önceden oluşturulmuş ortamı sunar ancak tamamen yerel donanımınızda çalışır.
 
-  [Devcontainer'ları yerel olarak kullanın :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
+    [Devcontainer'ları yerel olarak kullanın :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
 
 </div>
 

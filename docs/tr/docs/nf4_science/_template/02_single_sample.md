@@ -72,7 +72,7 @@ Ana iş akışı dosyası `{DOMAIN_DIR}.nf`'de, `Pipeline parameters` bölümü 
      * Pipeline parameters
      */
     params {
-        // Primary input
+        // Birincil girdi
         {PRIMARY_PARAM_NAME}: Path
     }
     ```
@@ -84,10 +84,10 @@ Ana iş akışı dosyası `{DOMAIN_DIR}.nf`'de, `Pipeline parameters` bölümü 
      * Pipeline parameters
      */
 
-    // Primary input
+    // Birincil girdi
     ```
 
-Bu, CLI parametresini ayarlar, ancak geliştirme sırasında iş akışını her çalıştırdığımızda dosya yolunu yazmak istemiyoruz.
+Bu, CLI parametresini ayarlar; ancak geliştirme sırasında iş akışını her çalıştırdığımızda dosya yolunu yazmak istemiyoruz.
 Varsayılan bir değer sağlamak için birden fazla seçenek vardır; burada bir test profili kullanıyoruz.
 
 #### 1.1.2. `nextflow.config` dosyasında varsayılan değere sahip bir test profili oluşturun
@@ -153,9 +153,9 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 
 {VERIFY_OUTPUT_INSTRUCTIONS}
 
-### Özet
+### Özetle
 
-Bir süreç içeren bir modül oluşturmayı, bunu bir iş akışına içe aktarmayı, bir girdi kanalıyla çağırmayı ve sonuçları yayınlamayı biliyorsunuz.
+Bir süreç içeren bir modül oluşturmayı, bunu bir iş akışına içe aktarmayı, bir girdi kanalıyla çağırmayı ve sonuçları yayımlamayı biliyorsunuz.
 
 ### Sırada ne var?
 
@@ -195,7 +195,7 @@ nextflow run {DOMAIN_DIR}.nf -profile test
 
 {VERIFY_OUTPUT_INSTRUCTIONS}
 
-### Özet
+### Özetle
 
 Süreç çıktılarını girdilere zincirlemeyi ve iş akışında yardımcı dosyaları işlemeyi biliyorsunuz.
 
@@ -226,7 +226,7 @@ nextflow run {DOMAIN_DIR}.nf -profile test
     {EXPECTED_OUTPUT_MULTIPLE_SAMPLES}
     ```
 
-### Özet
+### Özetle
 
 Birden fazla girdi örneği üzerinde örnek başına işlemeyi paralelleştirmek için Nextflow'un veri akışı paradigmasından nasıl yararlanacağınızı biliyorsunuz.
 
