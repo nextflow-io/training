@@ -387,7 +387,7 @@ First, update `greet.nf` so the `SAY_HELLO` process publishes its output files:
 
 Add an `onFilePublish` method and the required import to `TaskCounterObserver.groovy`:
 
-```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 25-28"
+```groovy title="nf-greeting/src/main/groovy/training/plugin/TaskCounterObserver.groovy" linenums="1" hl_lines="5 23-26"
 package training.plugin
 
 import groovy.transform.CompileStatic
