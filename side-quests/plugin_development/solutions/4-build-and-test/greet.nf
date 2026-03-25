@@ -11,12 +11,12 @@ process SAY_HELLO {
     input:
         val greeting
     output:
-        stdout
+        path 'greeting.txt'
     script:
     // Use our custom plugin function to decorate the greeting
     def decorated = decorateGreeting(greeting)
     """
-    echo '$decorated'
+    echo '$decorated' > greeting.txt
     """
 }
 
@@ -30,5 +30,5 @@ workflow {
         .view { reversed -> "Reversed: $reversed" }
 
     SAY_HELLO(greeting_ch)
-    SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
+    SAY_HELLO.out.view { file -> "Decorated: ${file.text.trim()}" }
 }

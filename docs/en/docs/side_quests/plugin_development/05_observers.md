@@ -356,12 +356,12 @@ First, update `greet.nf` so the `SAY_HELLO` process publishes its output files:
         input:
             val greeting
         output:
-            stdout
+            path 'greeting.txt'
         script:
         // Use our custom plugin function to decorate the greeting
         def decorated = decorateGreeting(greeting)
         """
-        echo '$decorated'
+        echo '$decorated' > greeting.txt
         """
     }
     ```
@@ -373,12 +373,12 @@ First, update `greet.nf` so the `SAY_HELLO` process publishes its output files:
         input:
             val greeting
         output:
-            stdout
+            path 'greeting.txt'
         script:
         // Use our custom plugin function to decorate the greeting
         def decorated = decorateGreeting(greeting)
         """
-        echo '$decorated'
+        echo '$decorated' > greeting.txt
         """
     }
     ```
@@ -434,9 +434,9 @@ You should see "Published:" messages for each output file alongside the task cou
 ```console title="Output (partial)"
 ...
 📊 Tasks completed so far: 1
-📁 Published: .command.out
+📁 Published: greeting.txt
 📊 Tasks completed so far: 2
-📁 Published: .command.out
+📁 Published: greeting.txt
 ...
 📈 Final task count: 5
 Pipeline complete! 👋

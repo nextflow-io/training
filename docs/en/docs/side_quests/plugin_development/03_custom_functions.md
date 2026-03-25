@@ -364,7 +364,7 @@ Update `greet.nf` to also import and use `decorateGreeting`:
 
 === "After"
 
-    ```groovy title="greet.nf" hl_lines="4-6 16-17 19 33" linenums="1"
+    ```groovy title="greet.nf" hl_lines="4-6 14 16-17 19 33" linenums="1"
     #!/usr/bin/env nextflow
 
     include { samplesheetToList } from 'plugin/nf-schema'
@@ -378,12 +378,12 @@ Update `greet.nf` to also import and use `decorateGreeting`:
         input:
             val greeting
         output:
-            stdout
+            path 'greeting.txt'
         script:
         // Use our custom plugin function to decorate the greeting
         def decorated = decorateGreeting(greeting)  // (2)!
         """
-        echo '$decorated'
+        echo '$decorated' > greeting.txt
         """
     }
 
@@ -397,7 +397,7 @@ Update `greet.nf` to also import and use `decorateGreeting`:
             .view { reversed -> "Reversed: $reversed" }
 
         SAY_HELLO(greeting_ch)
-        SAY_HELLO.out.view { result -> "Decorated: ${result.trim()}" }
+        SAY_HELLO.out.view { file -> "Decorated: ${file.text.trim()}" }
     }
     ```
 
@@ -406,7 +406,7 @@ Update `greet.nf` to also import and use `decorateGreeting`:
 
 === "Before"
 
-    ```groovy title="greet.nf" linenums="1" hl_lines="4 15 28"
+    ```groovy title="greet.nf" linenums="1" hl_lines="4 12 15 28"
     #!/usr/bin/env nextflow
 
     include { samplesheetToList } from 'plugin/nf-schema'
