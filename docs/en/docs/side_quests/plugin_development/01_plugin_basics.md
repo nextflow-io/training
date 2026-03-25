@@ -509,7 +509,7 @@ Update `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint'
+        id 'nf-co2footprint@1.1.0'
     }
     ```
 
@@ -602,7 +602,7 @@ Add a `co2footprint` block to `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint'
+        id 'nf-co2footprint@1.1.0'
     }
 
     co2footprint {
@@ -616,7 +616,7 @@ Add a `co2footprint` block to `nextflow.config`:
     plugins {
         id 'nf-hello@0.5.0'
         id 'nf-schema@2.6.1'
-        id 'nf-co2footprint'
+        id 'nf-co2footprint@1.1.0'
     }
     ```
 
