@@ -17,4 +17,4 @@ side-quests/solutions/nf-core/**/*.yml
 hello-nf-core/solutions/core-hello-*/**
 
 # Ignore auto-generated license files in plugin solutions
-hello-plugins/**/COPYING
+side-quests/plugin_development/**/COPYING
