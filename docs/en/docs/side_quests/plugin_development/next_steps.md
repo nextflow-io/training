@@ -1,6 +1,6 @@
 # Next Steps
 
-Congratulations on completing the **Plugin Development** training course and thank you for completing our survey.
+Congratulations on completing the **Plugin Development** training course.
 
 ---
 

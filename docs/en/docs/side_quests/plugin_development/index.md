@@ -21,6 +21,9 @@ No prior Java or Groovy experience is required.
 
 - A GitHub account OR a local installation as described [here](../../envsetup/02_local).
 - Completed the [Hello Nextflow](../../hello_nextflow/index.md) course or equivalent.
+- Java 21 or later (included in the training environment; only needed for Parts 2-6).
+
+**Working directory:** `side-quests/plugin_development`
 
 ## Learning objectives
 
@@ -68,4 +71,4 @@ Read settings from `nextflow.config` to make your plugin customizable, then lear
 
 Ready to take the course?
 
-[Start learning :material-arrow-right:](00_orientation.md){ .md-button .md-button--primary }
+[Start learning :material-arrow-right:](01_plugin_basics.md){ .md-button .md-button--primary }
