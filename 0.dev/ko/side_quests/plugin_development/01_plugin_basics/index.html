@@ -47,7 +47,7 @@
     
     
       
-        <title>Part 1: Plugin Basics - training.nextflow.io</title>
+        <title>파트 1: 플러그인 기초 - training.nextflow.io</title>
       
     
     
@@ -157,7 +157,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-1-plugin-basics" class="md-skip">
+        <a href="#1" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -196,7 +196,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Part 1: Plugin Basics
+              파트 1: 플러그인 기초
             
           </span>
         </div>
@@ -2345,7 +2345,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    개발 환경
   
 
     
@@ -2373,7 +2373,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    필수 Nextflow 스크립팅 패턴
   
 
     
@@ -2401,7 +2401,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    메타데이터와 메타 맵
   
 
     
@@ -2429,7 +2429,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    분할 및 그룹화
   
 
     
@@ -2457,7 +2457,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    nf-test를 활용한 테스트
   
 
     
@@ -2485,7 +2485,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    워크플로우의 워크플로우
   
 
     
@@ -2513,7 +2513,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    파일 입력 처리
   
 
     
@@ -2541,7 +2541,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    워크플로우 디버깅
   
 
     
@@ -2582,7 +2582,7 @@
   <span class="md-ellipsis">
     
   
-    Plugin Development
+    플러그인 개발
   
 
     
@@ -2598,7 +2598,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Plugin Development
+    플러그인 개발
   
 
           </label>
@@ -2618,7 +2618,7 @@
   <span class="md-ellipsis">
     
   
-    Plugin Development
+    플러그인 개발
   
 
     
@@ -2655,7 +2655,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Plugin Basics
+    파트 1: 플러그인 기초
   
 
     
@@ -2673,7 +2673,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Plugin Basics
+    파트 1: 플러그인 기초
   
 
     
@@ -2693,43 +2693,43 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-how-plugins-work" class="md-nav__link">
+  <a href="#1_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. How plugins work
+        1. 플러그인 작동 방식
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-use-function-plugins" class="md-nav__link">
+  <a href="#2-function" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Use function plugins
+        2. Function 플러그인 사용
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Use function plugins">
+    <nav class="md-nav" aria-label="2. Function 플러그인 사용">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-nf-hello-replace-hand-written-code" class="md-nav__link">
+  <a href="#21-nf-hello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. nf-hello: replace hand-written code
+        2.1. nf-hello: 직접 작성한 코드 대체
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2.1. nf-hello: replace hand-written code">
+    <nav class="md-nav" aria-label="2.1. nf-hello: 직접 작성한 코드 대체">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#211-see-the-starting-point" class="md-nav__link">
+  <a href="#211" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.1. See the starting point
+        2.1.1. 시작 상태 확인
       
     </span>
   </a>
@@ -2737,10 +2737,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#212-configure-the-plugin" class="md-nav__link">
+  <a href="#212" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.2. Configure the plugin
+        2.1.2. 플러그인 설정
       
     </span>
   </a>
@@ -2748,10 +2748,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#213-use-the-plugin-function" class="md-nav__link">
+  <a href="#213" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.3. Use the plugin function
+        2.1.3. 플러그인 함수 사용
       
     </span>
   </a>
@@ -2759,10 +2759,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#214-run-it" class="md-nav__link">
+  <a href="#214" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.4. Run it
+        2.1.4. 실행
       
     </span>
   </a>
@@ -2775,22 +2775,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-nf-schema-validated-csv-parsing" class="md-nav__link">
+  <a href="#22-nf-schema-csv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. nf-schema: validated CSV parsing
+        2.2. nf-schema: 검증된 CSV 파싱
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2.2. nf-schema: validated CSV parsing">
+    <nav class="md-nav" aria-label="2.2. nf-schema: 검증된 CSV 파싱">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#221-look-at-the-schema" class="md-nav__link">
+  <a href="#221" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.1. Look at the schema
+        2.2.1. 스키마 확인
       
     </span>
   </a>
@@ -2798,10 +2798,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#222-add-nf-schema-to-the-config" class="md-nav__link">
+  <a href="#222-nf-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.2. Add nf-schema to the config
+        2.2.2. 설정에 nf-schema 추가
       
     </span>
   </a>
@@ -2809,10 +2809,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#223-update-hellonf-to-use-samplesheettolist" class="md-nav__link">
+  <a href="#223-samplesheettolist-hellonf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.3. Update hello.nf to use samplesheetToList
+        2.2.3. samplesheetToList를 사용하도록 hello.nf 업데이트
       
     </span>
   </a>
@@ -2820,10 +2820,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#224-run-it" class="md-nav__link">
+  <a href="#224" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.4. Run it
+        2.2.4. 실행
       
     </span>
   </a>
@@ -2831,10 +2831,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#225-see-validation-in-action" class="md-nav__link">
+  <a href="#225" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.5. See validation in action
+        2.2.5. 유효성 검사 동작 확인
       
     </span>
   </a>
@@ -2842,10 +2842,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#226-configure-validation-behavior" class="md-nav__link">
+  <a href="#226" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.6. Configure validation behavior
+        2.2.6. 유효성 검사 동작 설정
       
     </span>
   </a>
@@ -2861,22 +2861,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-use-an-observer-plugin-nf-co2footprint" class="md-nav__link">
+  <a href="#3-observer-nf-co2footprint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Use an observer plugin: nf-co2footprint
+        3. Observer 플러그인 사용: nf-co2footprint
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Use an observer plugin: nf-co2footprint">
+    <nav class="md-nav" aria-label="3. Observer 플러그인 사용: nf-co2footprint">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-add-nf-co2footprint-to-the-config" class="md-nav__link">
+  <a href="#31-nf-co2footprint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Add nf-co2footprint to the config
+        3.1. 설정에 nf-co2footprint 추가
       
     </span>
   </a>
@@ -2884,10 +2884,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-run-the-pipeline" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Run the pipeline
+        3.2. 파이프라인 실행
       
     </span>
   </a>
@@ -2895,10 +2895,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-view-the-report" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. View the report
+        3.3. 리포트 확인
       
     </span>
   </a>
@@ -2906,10 +2906,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-configure-the-plugin" class="md-nav__link">
+  <a href="#34" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Configure the plugin
+        3.4. 플러그인 설정
       
     </span>
   </a>
@@ -2920,37 +2920,37 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-discovering-plugins" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Discovering plugins
+        4. 플러그인 검색
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-prepare-for-plugin-development" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Prepare for plugin development
+        5. 플러그인 개발 준비
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 정리
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -3165,7 +3165,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Create a Plugin Project
+    파트 2: 플러그인 프로젝트 생성
   
 
     
@@ -3193,7 +3193,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Custom Functions
+    파트 3: 사용자 정의 함수
   
 
     
@@ -3221,7 +3221,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Testing
+    파트 4: 테스트
   
 
     
@@ -3249,7 +3249,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Trace Observers
+    파트 5: Trace Observer
   
 
     
@@ -3277,7 +3277,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Configuration
+    파트 6: 설정
   
 
     
@@ -3305,7 +3305,7 @@
   <span class="md-ellipsis">
     
   
-    Summary
+    요약
   
 
     
@@ -3333,7 +3333,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -3798,43 +3798,43 @@
   </label>
   <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
      <li class="md-nav__item">
-  <a href="#1-how-plugins-work" class="md-nav__link">
+  <a href="#1_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. How plugins work
+        1. 플러그인 작동 방식
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#2-use-function-plugins" class="md-nav__link">
+  <a href="#2-function" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Use function plugins
+        2. Function 플러그인 사용
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Use function plugins">
+    <nav class="md-nav" aria-label="2. Function 플러그인 사용">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-nf-hello-replace-hand-written-code" class="md-nav__link">
+  <a href="#21-nf-hello" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1. nf-hello: replace hand-written code
+        2.1. nf-hello: 직접 작성한 코드 대체
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2.1. nf-hello: replace hand-written code">
+    <nav class="md-nav" aria-label="2.1. nf-hello: 직접 작성한 코드 대체">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#211-see-the-starting-point" class="md-nav__link">
+  <a href="#211" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.1. See the starting point
+        2.1.1. 시작 상태 확인
       
     </span>
   </a>
@@ -3842,10 +3842,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#212-configure-the-plugin" class="md-nav__link">
+  <a href="#212" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.2. Configure the plugin
+        2.1.2. 플러그인 설정
       
     </span>
   </a>
@@ -3853,10 +3853,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#213-use-the-plugin-function" class="md-nav__link">
+  <a href="#213" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.3. Use the plugin function
+        2.1.3. 플러그인 함수 사용
       
     </span>
   </a>
@@ -3864,10 +3864,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#214-run-it" class="md-nav__link">
+  <a href="#214" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1.4. Run it
+        2.1.4. 실행
       
     </span>
   </a>
@@ -3880,22 +3880,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#22-nf-schema-validated-csv-parsing" class="md-nav__link">
+  <a href="#22-nf-schema-csv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2. nf-schema: validated CSV parsing
+        2.2. nf-schema: 검증된 CSV 파싱
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2.2. nf-schema: validated CSV parsing">
+    <nav class="md-nav" aria-label="2.2. nf-schema: 검증된 CSV 파싱">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#221-look-at-the-schema" class="md-nav__link">
+  <a href="#221" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.1. Look at the schema
+        2.2.1. 스키마 확인
       
     </span>
   </a>
@@ -3903,10 +3903,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#222-add-nf-schema-to-the-config" class="md-nav__link">
+  <a href="#222-nf-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.2. Add nf-schema to the config
+        2.2.2. 설정에 nf-schema 추가
       
     </span>
   </a>
@@ -3914,10 +3914,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#223-update-hellonf-to-use-samplesheettolist" class="md-nav__link">
+  <a href="#223-samplesheettolist-hellonf" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.3. Update hello.nf to use samplesheetToList
+        2.2.3. samplesheetToList를 사용하도록 hello.nf 업데이트
       
     </span>
   </a>
@@ -3925,10 +3925,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#224-run-it" class="md-nav__link">
+  <a href="#224" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.4. Run it
+        2.2.4. 실행
       
     </span>
   </a>
@@ -3936,10 +3936,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#225-see-validation-in-action" class="md-nav__link">
+  <a href="#225" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.5. See validation in action
+        2.2.5. 유효성 검사 동작 확인
       
     </span>
   </a>
@@ -3947,10 +3947,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#226-configure-validation-behavior" class="md-nav__link">
+  <a href="#226" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.2.6. Configure validation behavior
+        2.2.6. 유효성 검사 동작 설정
       
     </span>
   </a>
@@ -3966,22 +3966,22 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#3-use-an-observer-plugin-nf-co2footprint" class="md-nav__link">
+  <a href="#3-observer-nf-co2footprint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Use an observer plugin: nf-co2footprint
+        3. Observer 플러그인 사용: nf-co2footprint
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Use an observer plugin: nf-co2footprint">
+    <nav class="md-nav" aria-label="3. Observer 플러그인 사용: nf-co2footprint">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-add-nf-co2footprint-to-the-config" class="md-nav__link">
+  <a href="#31-nf-co2footprint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1. Add nf-co2footprint to the config
+        3.1. 설정에 nf-co2footprint 추가
       
     </span>
   </a>
@@ -3989,10 +3989,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-run-the-pipeline" class="md-nav__link">
+  <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2. Run the pipeline
+        3.2. 파이프라인 실행
       
     </span>
   </a>
@@ -4000,10 +4000,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-view-the-report" class="md-nav__link">
+  <a href="#33" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.3. View the report
+        3.3. 리포트 확인
       
     </span>
   </a>
@@ -4011,10 +4011,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-configure-the-plugin" class="md-nav__link">
+  <a href="#34" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.4. Configure the plugin
+        3.4. 플러그인 설정
       
     </span>
   </a>
@@ -4025,37 +4025,37 @@
     </nav>
   
 </li>  <li class="md-nav__item">
-  <a href="#4-discovering-plugins" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Discovering plugins
+        4. 플러그인 검색
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#5-prepare-for-plugin-development" class="md-nav__link">
+  <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Prepare for plugin development
+        5. 플러그인 개발 준비
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#takeaway" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Takeaway
+        핵심 정리
       
     </span>
   </a>
   
 </li>  <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What's next?
+        다음 단계
       
     </span>
   </a>
@@ -4318,61 +4318,56 @@
 </a>
  
 
-<h1 id="part-1-plugin-basics">Part 1: Plugin Basics<a class="headerlink" href="#part-1-plugin-basics" title="Permanent link">&para;</a></h1>
-<div class="admonition warning">
-<p class="admonition-title">Translation in Progress</p>
-<p>This page has not yet been translated into your language.
-You are viewing the original English content.</p>
-<p>Want to help? See our <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">translation guide</a>.</p>
-</div>
-<p>In this section, you'll learn how plugins extend Nextflow, then try three different plugins to see them in action.</p>
+<h1 id="1">파트 1: 플러그인 기초<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<p><span class="ai-translation-notice"><span class="twemoji ai-translation-notice-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z"/></svg></span> AI 지원 번역 - <a href="https://github.com/nextflow-io/training/blob/master/TRANSLATING.md">자세히 알아보기 및 개선 제안</a></span></p>
+<p>이 섹션에서는 플러그인이 Nextflow를 어떻게 확장하는지 학습한 후, 세 가지 플러그인을 직접 사용해 봅니다.</p>
 <hr />
-<h2 id="1-how-plugins-work">1. How plugins work<a class="headerlink" href="#1-how-plugins-work" title="Permanent link">&para;</a></h2>
-<p>Plugins extend Nextflow through several types of extension:</p>
+<h2 id="1_1">1. 플러그인 작동 방식<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
+<p>플러그인은 여러 유형의 확장을 통해 Nextflow를 확장합니다:</p>
 <table>
 <thead>
 <tr>
-<th>Extension Type</th>
-<th>What it does</th>
-<th>Example</th>
+<th>확장 유형</th>
+<th>기능</th>
+<th>예시</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Functions</td>
-<td>Add custom functions callable from workflows</td>
+<td>워크플로우에서 호출 가능한 사용자 정의 함수 추가</td>
 <td><code>samplesheetToList()</code></td>
 </tr>
 <tr>
 <td>Workflow monitors</td>
-<td>Respond to events like task completion</td>
-<td>Custom logging, Slack alerts</td>
+<td>작업 완료 등의 이벤트에 응답</td>
+<td>사용자 정의 로깅, Slack 알림</td>
 </tr>
 <tr>
 <td>Executors</td>
-<td>Add task execution backends</td>
+<td>작업 실행 백엔드 추가</td>
 <td>AWS Batch, Kubernetes</td>
 </tr>
 <tr>
 <td>Filesystems</td>
-<td>Add storage backends</td>
+<td>스토리지 백엔드 추가</td>
 <td>S3, Azure Blob</td>
 </tr>
 </tbody>
 </table>
-<p>Functions and workflow monitors (called "trace observers" in the Nextflow API) are the most common types for plugin authors.
-Executors and filesystems are typically created by platform vendors.</p>
-<p>The next exercises show you function plugins and an observer plugin, so you can see both types in action.</p>
+<p>Functions와 workflow monitors("trace observers"라고도 함)는 플러그인 개발자들이 가장 많이 사용하는 유형입니다.
+Executors와 filesystems는 일반적으로 플랫폼 벤더가 개발합니다.</p>
+<p>다음 실습에서는 function 플러그인과 observer 플러그인을 사용해 보며 두 유형을 직접 확인합니다.</p>
 <hr />
-<h2 id="2-use-function-plugins">2. Use function plugins<a class="headerlink" href="#2-use-function-plugins" title="Permanent link">&para;</a></h2>
-<p>Function plugins add callable functions that you import into your workflows.
-You'll try two: nf-hello (a simple example) and nf-schema (a widely-used real-world plugin).
-Both exercises modify the same <code>hello.nf</code> pipeline, so you can see how plugins enhance an existing workflow.</p>
-<h3 id="21-nf-hello-replace-hand-written-code">2.1. nf-hello: replace hand-written code<a class="headerlink" href="#21-nf-hello-replace-hand-written-code" title="Permanent link">&para;</a></h3>
-<p>The <a href="https://github.com/nextflow-io/nf-hello">nf-hello</a> plugin provides a <code>randomString</code> function that generates random strings.
-The pipeline already defines its own inline version of this function, which you'll replace with the one from the plugin.</p>
-<h4 id="211-see-the-starting-point">2.1.1. See the starting point<a class="headerlink" href="#211-see-the-starting-point" title="Permanent link">&para;</a></h4>
-<p>Look at the pipeline:</p>
+<h2 id="2-function">2. Function 플러그인 사용<a class="headerlink" href="#2-function" title="Permanent link">&para;</a></h2>
+<p>Function 플러그인은 워크플로우에 import하여 호출할 수 있는 함수를 제공합니다.
+nf-hello(간단한 예제)와 nf-schema(실제 환경에서 널리 사용되는 플러그인), 두 가지를 사용해 봅니다.
+두 실습 모두 동일한 <code>hello.nf</code> 파이프라인을 수정하므로, 플러그인이 기존 워크플로우를 어떻게 개선하는지 확인할 수 있습니다.</p>
+<h3 id="21-nf-hello">2.1. nf-hello: 직접 작성한 코드 대체<a class="headerlink" href="#21-nf-hello" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/nextflow-io/nf-hello">nf-hello</a> 플러그인은 무작위 문자열을 생성하는 <code>randomString</code> 함수를 제공합니다.
+파이프라인에는 이미 이 함수의 인라인 버전이 정의되어 있으며, 이를 플러그인의 함수로 교체합니다.</p>
+<h4 id="211">2.1.1. 시작 상태 확인<a class="headerlink" href="#211" title="Permanent link">&para;</a></h4>
+<p>파이프라인을 확인합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cat<span class="w"> </span>hello.nf
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
@@ -4380,7 +4375,7 @@ The pipeline already defines its own inline version of this function, which you'
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="cm">/**</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="cm"> * Generate a random alphanumeric string</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="cm"> * 무작위 영숫자 문자열 생성</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="cm"> */</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="kt">def</span><span class="w"> </span><span class="nf">randomString</span><span class="o">(</span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">..</span><span class="s1">&#39;z&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;A&#39;</span><span class="o">..</span><span class="s1">&#39;Z&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;0&#39;</span><span class="o">..</span><span class="s1">&#39;9&#39;</span><span class="o">)</span>
@@ -4407,8 +4402,8 @@ The pipeline already defines its own inline version of this function, which you'
 <a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="w">    </span><span class="n">SAY_HELLO</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;Output: ${result.trim()}&quot;</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="o">}</span>
 </code></pre></div>
-<p>The pipeline defines its own <code>randomString</code> function inline, then uses it to append a random ID to each greeting.</p>
-<p>Run it:</p>
+<p>파이프라인은 <code>randomString</code> 함수를 인라인으로 정의하고, 이를 사용하여 각 인사말에 무작위 ID를 추가합니다.</p>
+<p>실행합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="go">Output: Hello_aBcDeFgH</span>
@@ -4417,19 +4412,19 @@ The pipeline already defines its own inline version of this function, which you'
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="go">Output: Ciao_jLhGfEcB</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="go">Output: Hallo_tNwOiAuR</span>
 </code></pre></div>
-<p>Your output order and random strings will differ, and if you run the script again you'll get a different set of random greetings.</p>
-<h4 id="212-configure-the-plugin">2.1.2. Configure the plugin<a class="headerlink" href="#212-configure-the-plugin" title="Permanent link">&para;</a></h4>
-<p>Replace the inline function with one from the plugin. Add this to your <code>nextflow.config</code>:</p>
-<div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Configuration for plugin development exercises</span>
+<p>출력 순서와 무작위 문자열은 다를 수 있으며, 스크립트를 다시 실행하면 다른 무작위 인사말이 생성됩니다.</p>
+<h4 id="212">2.1.2. 플러그인 설정<a class="headerlink" href="#212" title="Permanent link">&para;</a></h4>
+<p>인라인 함수를 플러그인의 함수로 교체합니다. <code>nextflow.config</code>에 다음을 추가합니다:</p>
+<div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// 플러그인 개발 실습을 위한 설정</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-hello@0.5.0&#39;</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="o">}</span>
 </code></pre></div>
-<p>Plugins are declared in <code>nextflow.config</code> using the <code>plugins {}</code> block.
-Nextflow automatically downloads them from the <a href="https://registry.nextflow.io/">Nextflow Plugin Registry</a>, a central repository of community and official plugins.</p>
-<h4 id="213-use-the-plugin-function">2.1.3. Use the plugin function<a class="headerlink" href="#213-use-the-plugin-function" title="Permanent link">&para;</a></h4>
-<p>Replace the inline <code>randomString</code> function with the plugin version:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">After</label><label for="__tabbed_1_2">Before</label></div>
+<p>플러그인은 <code>nextflow.config</code>의 <code>plugins {}</code> 블록에 선언합니다.
+Nextflow는 커뮤니티 및 공식 플러그인의 중앙 저장소인 <a href="https://registry.nextflow.io/">Nextflow Plugin Registry</a>에서 플러그인을 자동으로 다운로드합니다.</p>
+<h4 id="213">2.1.3. 플러그인 함수 사용<a class="headerlink" href="#213" title="Permanent link">&para;</a></h4>
+<p>인라인 <code>randomString</code> 함수를 플러그인 버전으로 교체합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">후</label><label for="__tabbed_1_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">hello.nf</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
@@ -4464,7 +4459,7 @@ Nextflow automatically downloads them from the <a href="https://registry.nextflo
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;greetings.csv&#39;</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="hll"><span class="cm">/**</span>
-</span><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll"><span class="cm"> * Generate a random alphanumeric string</span>
+</span><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="hll"><span class="cm"> * 무작위 영숫자 문자열 생성</span>
 </span><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="hll"><span class="cm"> */</span>
 </span><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="hll"><span class="kt">def</span><span class="w"> </span><span class="nf">randomString</span><span class="o">(</span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 </span><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;a&#39;</span><span class="o">..</span><span class="s1">&#39;z&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;A&#39;</span><span class="o">..</span><span class="s1">&#39;Z&#39;</span><span class="o">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;0&#39;</span><span class="o">..</span><span class="s1">&#39;9&#39;</span><span class="o">)</span>
@@ -4494,12 +4489,12 @@ Nextflow automatically downloads them from the <a href="https://registry.nextflo
 </div>
 </div>
 </div>
-<p>The <code>include</code> statement imports <code>randomString</code> from a library that is proven, tested, and maintained by a broader pool of contributors who can spot and fix bugs.
-Instead of each pipeline maintaining its own copy of the function, every pipeline that uses the plugin gets the same vetted implementation.
-This reduces duplicated code and the maintenance burden that comes with it.
-The syntax <code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/plugin-id&#39;</span></code> is the same <code>include</code> used for Nextflow modules, with a <code>plugin/</code> prefix.
-You can see the <a href="https://github.com/nextflow-io/nf-hello/blob/e67bddebfa589c7ae51f41bf780c92068dc09e93/plugins/nf-hello/src/main/nextflow/hello/HelloExtension.groovy#L110">source code for <code>randomString</code></a> in the nf-hello repository on GitHub.</p>
-<h4 id="214-run-it">2.1.4. Run it<a class="headerlink" href="#214-run-it" title="Permanent link">&para;</a></h4>
+<p><code>include</code> 구문은 검증되고 테스트되었으며, 더 많은 기여자들이 버그를 발견하고 수정하는 라이브러리에서 <code>randomString</code>을 가져옵니다.
+각 파이프라인이 함수의 자체 복사본을 유지하는 대신, 플러그인을 사용하는 모든 파이프라인이 동일하게 검증된 구현을 사용합니다.
+이를 통해 코드 중복과 그에 따른 유지보수 부담이 줄어듭니다.
+<code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/plugin-id&#39;</span></code> 구문은 Nextflow 모듈에서 사용하는 <code>include</code>와 동일하며, <code>plugin/</code> 접두사가 붙습니다.
+nf-hello 저장소의 GitHub에서 <a href="https://github.com/nextflow-io/nf-hello/blob/e67bddebfa589c7ae51f41bf780c92068dc09e93/plugins/nf-hello/src/main/nextflow/hello/HelloExtension.groovy#L110"><code>randomString</code>의 소스 코드</a>를 확인할 수 있습니다.</p>
+<h4 id="214">2.1.4. 실행<a class="headerlink" href="#214" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="go">Pipeline is starting! 🚀</span>
@@ -4510,25 +4505,24 @@ You can see the <a href="https://github.com/nextflow-io/nf-hello/blob/e67bddebfa
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="go">Output: Hallo_tvrtuxtp</span>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="go">Pipeline complete! 👋</span>
 </code></pre></div>
-<p>(Your random strings will differ.)</p>
-<p>The output still has random suffixes, but now <code>randomString</code> comes from the nf-hello plugin instead of inline code.
-The "Pipeline is starting!" and "Pipeline complete!" messages are new.
-These come from the plugin's observer component, which you'll explore in Part 5.</p>
-<p>Nextflow downloads plugins automatically the first time they're used, so any pipeline that declares <code>nf-hello@0.5.0</code> gets the exact same tested <code>randomString</code> function without copying code between projects.</p>
-<p>You've now seen the three steps for using a function plugin: declare it in <code>nextflow.config</code>, import the function with <code>include</code>, and call it in your workflow.
-The next exercise applies these same steps to a real-world plugin.</p>
-<h3 id="22-nf-schema-validated-csv-parsing">2.2. nf-schema: validated CSV parsing<a class="headerlink" href="#22-nf-schema-validated-csv-parsing" title="Permanent link">&para;</a></h3>
-<p>The <a href="https://github.com/nextflow-io/nf-schema">nf-schema</a> plugin is one of the most widely-used Nextflow plugins.
-It provides <code>samplesheetToList</code>, a function that parses CSV/TSV files using a JSON schema that defines the expected columns and types.</p>
-<p>The pipeline currently reads <code>greetings.csv</code> using <code>splitCsv</code> and a manual <code>map</code>, but nf-schema can replace this with validated, schema-driven parsing.
-A JSON schema file (<code>greetings_schema.json</code>) is already provided in the exercise directory.</p>
+<p>(무작위 문자열은 다를 수 있습니다.)</p>
+<p>출력에는 여전히 무작위 접미사가 있지만, 이제 <code>randomString</code>은 인라인 코드 대신 nf-hello 플러그인에서 제공됩니다.
+"Pipeline is starting!"과 "Pipeline complete!" 메시지는 새로 추가된 것으로, 파트 5에서 살펴볼 플러그인의 observer 컴포넌트에서 출력됩니다.</p>
+<p>Nextflow는 플러그인을 처음 사용할 때 자동으로 다운로드하므로, <code>nf-hello@0.5.0</code>을 선언한 모든 파이프라인은 프로젝트 간에 코드를 복사하지 않고도 동일하게 테스트된 <code>randomString</code> 함수를 사용할 수 있습니다.</p>
+<p>이제 function 플러그인 사용의 세 단계를 확인했습니다: <code>nextflow.config</code>에 선언하고, <code>include</code>로 함수를 가져오고, 워크플로우에서 호출합니다.
+다음 실습에서는 동일한 단계를 실제 환경의 플러그인에 적용합니다.</p>
+<h3 id="22-nf-schema-csv">2.2. nf-schema: 검증된 CSV 파싱<a class="headerlink" href="#22-nf-schema-csv" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/nextflow-io/nf-schema">nf-schema</a> 플러그인은 가장 널리 사용되는 Nextflow 플러그인 중 하나입니다.
+예상 열과 유형을 정의하는 JSON 스키마를 사용하여 CSV/TSV 파일을 파싱하는 <code>samplesheetToList</code> 함수를 제공합니다.</p>
+<p>파이프라인은 현재 <code>splitCsv</code>와 수동 <code>map</code>을 사용하여 <code>greetings.csv</code>를 읽고 있지만, nf-schema를 사용하면 검증된 스키마 기반 파싱으로 대체할 수 있습니다.
+JSON 스키마 파일(<code>greetings_schema.json</code>)은 실습 디렉토리에 이미 제공되어 있습니다.</p>
 <details class="info">
-<summary>What is a schema?</summary>
-<p>A schema is a formal description of what valid data looks like.
-It defines things like which columns are expected, what type each value should be (string, number, etc.), and which fields are required.</p>
-<p>Think of it as a contract: if the input data doesn't match the schema, the tool can catch the problem early instead of letting it cause confusing errors later in the pipeline.</p>
+<summary>스키마란 무엇인가요?</summary>
+<p>스키마는 유효한 데이터의 형태를 공식적으로 정의한 것입니다.
+어떤 열이 필요한지, 각 값의 유형(문자열, 숫자 등)은 무엇인지, 어떤 필드가 필수인지 등을 정의합니다.</p>
+<p>일종의 계약으로 생각할 수 있습니다. 입력 데이터가 스키마와 일치하지 않으면, 파이프라인 후반부에서 혼란스러운 오류가 발생하기 전에 도구가 문제를 조기에 감지할 수 있습니다.</p>
 </details>
-<h4 id="221-look-at-the-schema">2.2.1. Look at the schema<a class="headerlink" href="#221-look-at-the-schema" title="Permanent link">&para;</a></h4>
+<h4 id="221">2.2.1. 스키마 확인<a class="headerlink" href="#221" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>cat<span class="w"> </span>greetings_schema.json
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
@@ -4550,11 +4544,11 @@ It defines things like which columns are expected, what type each value should b
 <a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="p">}</span>
 </code></pre></div>
-<p>The schema defines two columns (<code>greeting</code> and <code>language</code>) and marks <code>greeting</code> as required.
-If someone passes a CSV missing the <code>greeting</code> column, nf-schema catches the error before the pipeline runs.</p>
-<h4 id="222-add-nf-schema-to-the-config">2.2.2. Add nf-schema to the config<a class="headerlink" href="#222-add-nf-schema-to-the-config" title="Permanent link">&para;</a></h4>
-<p>Update <code>nextflow.config</code> to include both plugins:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">After</label><label for="__tabbed_2_2">Before</label></div>
+<p>스키마는 두 개의 열(<code>greeting</code>과 <code>language</code>)을 정의하고 <code>greeting</code>을 필수로 표시합니다.
+<code>greeting</code> 열이 없는 CSV를 전달하면, nf-schema가 파이프라인 실행 전에 오류를 감지합니다.</p>
+<h4 id="222-nf-schema">2.2.2. 설정에 nf-schema 추가<a class="headerlink" href="#222-nf-schema" title="Permanent link">&para;</a></h4>
+<p>두 플러그인을 모두 포함하도록 <code>nextflow.config</code>를 업데이트합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">후</label><label for="__tabbed_2_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
@@ -4571,9 +4565,9 @@ If someone passes a CSV missing the <code>greeting</code> column, nf-schema catc
 </div>
 </div>
 </div>
-<h4 id="223-update-hellonf-to-use-samplesheettolist">2.2.3. Update hello.nf to use samplesheetToList<a class="headerlink" href="#223-update-hellonf-to-use-samplesheettolist" title="Permanent link">&para;</a></h4>
-<p>Replace the <code>splitCsv</code> input with <code>samplesheetToList</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">After</label><label for="__tabbed_3_2">Before</label></div>
+<h4 id="223-samplesheettolist-hellonf">2.2.3. samplesheetToList를 사용하도록 hello.nf 업데이트<a class="headerlink" href="#223-samplesheettolist-hellonf" title="Permanent link">&para;</a></h4>
+<p><code>splitCsv</code> 입력을 <code>samplesheetToList</code>로 교체합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">후</label><label for="__tabbed_3_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">hello.nf</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
@@ -4632,10 +4626,10 @@ If someone passes a CSV missing the <code>greeting</code> column, nf-schema catc
 </div>
 </div>
 </div>
-<p>The custom <code>splitCsv</code> and <code>map</code> parsing code is replaced with <code>samplesheetToList</code>, a proven, tested function that also validates the samplesheet against the schema before the pipeline runs.
-This reduces the maintenance burden of hand-written parsing logic while improving the experience for pipeline users, who get clear error messages when their input does not match the expected format.
-Each row becomes a list of values in column order, so <code>row[0]</code> is the greeting and <code>row[1]</code> is the language.</p>
-<h4 id="224-run-it">2.2.4. Run it<a class="headerlink" href="#224-run-it" title="Permanent link">&para;</a></h4>
+<p>직접 작성한 <code>splitCsv</code>와 <code>map</code> 파싱 코드가 <code>samplesheetToList</code>로 교체되었습니다. 이 함수는 검증되고 테스트된 함수로, 파이프라인 실행 전에 스키마에 대한 샘플시트 유효성 검사도 수행합니다.
+직접 작성한 파싱 로직의 유지보수 부담을 줄이는 동시에, 입력이 예상 형식과 일치하지 않을 때 명확한 오류 메시지를 제공하여 파이프라인 사용자 경험을 개선합니다.
+각 행은 열 순서대로 값의 목록이 되므로, <code>row[0]</code>은 인사말이고 <code>row[1]</code>은 언어입니다.</p>
+<h4 id="224">2.2.4. 실행<a class="headerlink" href="#224" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="go">Pipeline is starting! 🚀</span>
@@ -4646,12 +4640,12 @@ Each row becomes a list of values in column order, so <code>row[0]</code> is the
 <a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="go">Output: Hallo_hsxwrjbh</span>
 <a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="go">Pipeline complete! 👋</span>
 </code></pre></div>
-<p>(Your random strings will differ.)</p>
-<p>The output is the same, but now the schema validates the CSV structure before the pipeline runs.
-In real pipelines with complex sample sheets and many columns, this kind of validation prevents errors that manual <code>splitCsv</code> + <code>map</code> would miss.</p>
-<h4 id="225-see-validation-in-action">2.2.5. See validation in action<a class="headerlink" href="#225-see-validation-in-action" title="Permanent link">&para;</a></h4>
-<p>To see what schema validation catches, try introducing errors into <code>greetings.csv</code>.</p>
-<p>Rename the required <code>greeting</code> column to <code>message</code>:</p>
+<p>(무작위 문자열은 다를 수 있습니다.)</p>
+<p>출력은 동일하지만, 이제 파이프라인 실행 전에 스키마가 CSV 구조를 검증합니다.
+복잡한 샘플시트와 많은 열을 가진 실제 파이프라인에서는 이러한 유효성 검사가 수동 <code>splitCsv</code> + <code>map</code>으로는 놓칠 수 있는 오류를 방지합니다.</p>
+<h4 id="225">2.2.5. 유효성 검사 동작 확인<a class="headerlink" href="#225" title="Permanent link">&para;</a></h4>
+<p>스키마 유효성 검사가 무엇을 감지하는지 확인하기 위해 <code>greetings.csv</code>에 오류를 도입해 봅니다.</p>
+<p>필수 열인 <code>greeting</code>의 이름을 <code>message</code>로 변경합니다:</p>
 <div class="highlight"><span class="filename">greetings.csv</span><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="hll">message,language
 </span><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>Hello,English
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>Bonjour,French
@@ -4659,7 +4653,7 @@ In real pipelines with complex sample sheets and many columns, this kind of vali
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>Ciao,Italian
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>Hallo,German
 </code></pre></div>
-<p>Run the pipeline:</p>
+<p>파이프라인을 실행합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="go">ERROR ~ Validation of samplesheet failed!</span>
@@ -4672,8 +4666,8 @@ In real pipelines with complex sample sheets and many columns, this kind of vali
 <a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="go">-&gt; Entry 4: Missing required field(s): greeting</span>
 <a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="go">-&gt; Entry 5: Missing required field(s): greeting</span>
 </code></pre></div>
-<p>The pipeline refuses to run because the schema requires a <code>greeting</code> column and can't find one.</p>
-<p>Now restore the required column but rename the optional <code>language</code> column to <code>lang</code>:</p>
+<p>스키마가 <code>greeting</code> 열을 요구하는데 찾을 수 없으므로 파이프라인 실행이 거부됩니다.</p>
+<p>이제 필수 열을 복원하고 선택적 열인 <code>language</code>의 이름을 <code>lang</code>으로 변경합니다:</p>
 <div class="highlight"><span class="filename">greetings.csv</span><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="hll">greeting,lang
 </span><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Hello,English
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Bonjour,French
@@ -4683,18 +4677,18 @@ In real pipelines with complex sample sheets and many columns, this kind of vali
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
 </code></pre></div>
-<p>This time the pipeline runs, but prints a warning:</p>
+<p>이번에는 파이프라인이 실행되지만 경고가 출력됩니다:</p>
 <div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="go">WARN: Found the following unidentified headers in greetings.csv:</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="go">	- lang</span>
 </code></pre></div>
-<p>Required columns cause hard errors; optional columns cause warnings.
-This is the kind of early feedback that saves debugging time in real pipelines with dozens of columns.</p>
-<h4 id="226-configure-validation-behavior">2.2.6. Configure validation behavior<a class="headerlink" href="#226-configure-validation-behavior" title="Permanent link">&para;</a></h4>
-<p>The warning about <code>lang</code> is useful, but you can control its severity through configuration.
-Plugins can include their own configuration scope(s) that control their behavior.
-The nf-schema plugin includes the configuration scope <code>validation</code>; by modifying the settings here you can change how nf-schema behaves.</p>
-<p>Add a <code>validation</code> block to <code>nextflow.config</code> to make unrecognized headers cause an error instead of a warning:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">After</label><label for="__tabbed_4_2">Before</label></div>
+<p>필수 열은 오류를 발생시키고, 선택적 열은 경고를 발생시킵니다.
+이러한 조기 피드백은 수십 개의 열이 있는 실제 파이프라인에서 디버깅 시간을 절약해 줍니다.</p>
+<h4 id="226">2.2.6. 유효성 검사 동작 설정<a class="headerlink" href="#226" title="Permanent link">&para;</a></h4>
+<p><code>lang</code>에 대한 경고는 유용하지만, 설정을 통해 심각도를 제어할 수 있습니다.
+플러그인은 동작을 제어하는 자체 설정 스코프를 포함할 수 있습니다.
+nf-schema 플러그인은 <code>validation</code> 설정 스코프를 포함하며, 여기서 설정을 수정하여 nf-schema의 동작을 변경할 수 있습니다.</p>
+<p>인식되지 않는 헤더가 경고 대신 오류를 발생시키도록 <code>nextflow.config</code>에 <code>validation</code> 블록을 추가합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">후</label><label for="__tabbed_4_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
@@ -4718,16 +4712,16 @@ The nf-schema plugin includes the configuration scope <code>validation</code>; b
 </div>
 </div>
 </div>
-<p>Run the pipeline again with the same <code>lang</code> column still in place:</p>
+<p><code>lang</code> 열이 그대로 있는 상태에서 파이프라인을 다시 실행합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
 </code></pre></div>
 <div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="go">Found the following unidentified headers in greetings.csv:</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="go">	- lang</span>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="go"> -- Check script &#39;hello.nf&#39; at line: 20 or see &#39;.nextflow.log&#39; file for more details</span>
 </code></pre></div>
-<p>The pipeline now fails instead of warning.
-The pipeline code didn't change; only the configuration did.</p>
-<p>Restore <code>greetings.csv</code> to its original state and remove the <code>validation</code> block before continuing:</p>
+<p>이제 파이프라인은 경고 대신 오류로 실패합니다.
+파이프라인 코드는 변경되지 않았으며, 설정만 변경되었습니다.</p>
+<p>계속하기 전에 <code>greetings.csv</code>를 원래 상태로 복원하고 <code>validation</code> 블록을 제거합니다:</p>
 <div class="highlight"><span class="filename">greetings.csv</span><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>greeting,language
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>Hello,English
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>Bonjour,French
@@ -4740,16 +4734,16 @@ The pipeline code didn't change; only the configuration did.</p>
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
 <a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="o">}</span>
 </code></pre></div>
-<p>Both nf-hello and nf-schema are function plugins: they provide functions that you import with <code>include</code> and call in your workflow code.
-The next exercise shows a different type of plugin that works without any <code>include</code> statements at all.</p>
+<p>nf-hello와 nf-schema는 모두 function 플러그인으로, <code>include</code>로 가져와 워크플로우 코드에서 호출하는 함수를 제공합니다.
+다음 실습에서는 <code>include</code> 구문 없이도 작동하는 다른 유형의 플러그인을 살펴봅니다.</p>
 <hr />
-<h2 id="3-use-an-observer-plugin-nf-co2footprint">3. Use an observer plugin: nf-co2footprint<a class="headerlink" href="#3-use-an-observer-plugin-nf-co2footprint" title="Permanent link">&para;</a></h2>
-<p>Not all plugins provide functions to import.
-The <a href="https://github.com/nextflow-io/nf-co2footprint">nf-co2footprint</a> plugin uses a <strong>trace observer</strong> to monitor your pipeline's resource usage and estimate its carbon footprint.
-You don't need to change any pipeline code; just add it to the config.</p>
-<h3 id="31-add-nf-co2footprint-to-the-config">3.1. Add nf-co2footprint to the config<a class="headerlink" href="#31-add-nf-co2footprint-to-the-config" title="Permanent link">&para;</a></h3>
-<p>Update <code>nextflow.config</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">After</label><label for="__tabbed_5_2">Before</label></div>
+<h2 id="3-observer-nf-co2footprint">3. Observer 플러그인 사용: nf-co2footprint<a class="headerlink" href="#3-observer-nf-co2footprint" title="Permanent link">&para;</a></h2>
+<p>모든 플러그인이 import할 함수를 제공하는 것은 아닙니다.
+<a href="https://github.com/nextflow-io/nf-co2footprint">nf-co2footprint</a> 플러그인은 <strong>trace observer</strong>를 사용하여 파이프라인의 리소스 사용량을 모니터링하고 탄소 발자국을 추정합니다.
+파이프라인 코드를 변경할 필요 없이 설정에 추가하기만 하면 됩니다.</p>
+<h3 id="31-nf-co2footprint">3.1. 설정에 nf-co2footprint 추가<a class="headerlink" href="#31-nf-co2footprint" title="Permanent link">&para;</a></h3>
+<p><code>nextflow.config</code>를 업데이트합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">후</label><label for="__tabbed_5_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
@@ -4768,11 +4762,11 @@ You don't need to change any pipeline code; just add it to the config.</p>
 </div>
 </div>
 </div>
-<h3 id="32-run-the-pipeline">3.2. Run the pipeline<a class="headerlink" href="#32-run-the-pipeline" title="Permanent link">&para;</a></h3>
+<h3 id="32">3.2. 파이프라인 실행<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
 </code></pre></div>
-<p>The plugin produces several INFO and WARN messages during execution.
-These are normal for a small example running on a local machine:</p>
+<p>플러그인은 실행 중에 여러 INFO 및 WARN 메시지를 출력합니다.
+로컬 머신에서 실행되는 소규모 예제에서는 정상적인 동작입니다:</p>
 <div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="go">nf-co2footprint plugin  ~  version 1.2.0</span>
 <a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="go">WARN - [nf-co2footprint] Target zone null not found. Attempting to retrieve carbon intensity for fallback zone GLOBAL.</span>
 <a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="go">INFO - [nf-co2footprint] Using fallback carbon intensity from GLOBAL from CI table: 480.0 gCO₂eq/kWh.</span>
@@ -4782,21 +4776,21 @@ These are normal for a small example running on a local machine:</p>
 <a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="go">WARN - [nf-co2footprint] No CPU model detected. Using default CPU power draw value (11.41 W).</span>
 <a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="go">WARN - [nf-co2footprint] 🔁 Requested memory is null for task 2. Using maximum consumed memory/`peak_rss` (0 GB) for CO₂e footprint computation.</span>
 </code></pre></div>
-<p>The warnings about zone, executor, CPU model, and memory appear because the plugin can't detect the full hardware details of a local training environment.
-In a production environment (e.g., an HPC cluster or cloud), these values would be available and the estimates more accurate.</p>
-<p>At the end, look for a line like:</p>
+<p>zone, executor, CPU 모델, 메모리에 대한 경고는 플러그인이 로컬 교육 환경의 전체 하드웨어 정보를 감지할 수 없기 때문에 나타납니다.
+프로덕션 환경(예: HPC 클러스터 또는 클라우드)에서는 이러한 값을 사용할 수 있어 추정치가 더 정확합니다.</p>
+<p>마지막에 다음과 같은 줄을 확인합니다:</p>
 <div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="go">🌱 The workflow run used 126.76 uWh of electricity, resulting in the release of 60.84 ug of CO₂ equivalents into the atmosphere.</span>
 </code></pre></div>
-<p>(Your numbers will differ.)</p>
-<h3 id="33-view-the-report">3.3. View the report<a class="headerlink" href="#33-view-the-report" title="Permanent link">&para;</a></h3>
-<p>The plugin generates output files in your working directory:</p>
+<p>(수치는 다를 수 있습니다.)</p>
+<h3 id="33">3.3. 리포트 확인<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p>플러그인은 작업 디렉토리에 출력 파일을 생성합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>ls<span class="w"> </span>co2footprint_*
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="go">co2footprint_report_&lt;timestamp&gt;.html</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="go">co2footprint_summary_&lt;timestamp&gt;.txt</span>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="go">co2footprint_trace_&lt;timestamp&gt;.txt</span>
 </code></pre></div>
-<p>Look at the summary:</p>
+<p>요약 파일을 확인합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>cat<span class="w"> </span>co2footprint_summary_*.txt
 </code></pre></div>
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="go">Total CO₂e footprint measures of this workflow run (including cached tasks):</span>
@@ -4809,15 +4803,15 @@ In a production environment (e.g., an HPC cluster or cloud), these values would 
 <a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="go">  - It takes one tree 0.17s to sequester the equivalent amount of CO₂ from the atmosphere</span>
 <a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="go">  - 1.22E-7 % of a flight from Paris to London</span>
 </code></pre></div>
-<p>(Your numbers will differ.)</p>
-<p>The first section shows the raw energy and emissions figures.
-The "Which equals" section puts those numbers in perspective by converting them to familiar equivalents.
-The summary also includes a section listing the plugin's configuration options and a citation to the <a href="https://doi.org/10.1002/advs.202100707">Green Algorithms</a> research paper that the calculation method is based on.</p>
-<h3 id="34-configure-the-plugin">3.4. Configure the plugin<a class="headerlink" href="#34-configure-the-plugin" title="Permanent link">&para;</a></h3>
-<p>The "Target zone null" warning from section 3.2 appeared because the plugin had no location configured.
-The nf-co2footprint plugin defines a <code>co2footprint</code> configuration scope where you can set your geographic location.</p>
-<p>Add a <code>co2footprint</code> block to <code>nextflow.config</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">After</label><label for="__tabbed_6_2">Before</label></div>
+<p>(수치는 다를 수 있습니다.)</p>
+<p>첫 번째 섹션은 원시 에너지 및 배출량 수치를 보여줍니다.
+"Which equals" 섹션은 이 수치를 친숙한 단위로 변환하여 맥락을 제공합니다.
+요약에는 플러그인의 설정 옵션 목록과 계산 방법의 기반이 되는 <a href="https://doi.org/10.1002/advs.202100707">Green Algorithms</a> 연구 논문 인용도 포함되어 있습니다.</p>
+<h3 id="34">3.4. 플러그인 설정<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
+<p>3.2절의 "Target zone null" 경고는 플러그인에 위치가 설정되지 않았기 때문에 나타났습니다.
+nf-co2footprint 플러그인은 지리적 위치를 설정할 수 있는 <code>co2footprint</code> 설정 스코프를 정의합니다.</p>
+<p><code>nextflow.config</code>에 <code>co2footprint</code> 블록을 추가합니다:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">후</label><label for="__tabbed_6_2">전</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
@@ -4842,64 +4836,64 @@ The nf-co2footprint plugin defines a <code>co2footprint</code> configuration sco
 </div>
 </div>
 <div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Use your own country code if you prefer (e.g., <code>'US'</code>, <code>'DE'</code>, <code>'FR'</code>).</p>
+<p class="admonition-title">팁</p>
+<p>원하는 경우 자신의 국가 코드를 사용하세요 (예: <code>'US'</code>, <code>'DE'</code>, <code>'FR'</code>).</p>
 </div>
-<p>Run the pipeline:</p>
+<p>파이프라인을 실행합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
 </code></pre></div>
 <div class="highlight"><span class="filename">Output (partial)</span><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="go">INFO - [nf-co2footprint] Using fallback carbon intensity from GB from CI table: 163.92 gCO₂eq/kWh.</span>
 </code></pre></div>
-<p>The zone warning is gone.
-The plugin now uses GB-specific carbon intensity (163.92 gCO₂eq/kWh) instead of the global fallback (480.0 gCO₂eq/kWh).</p>
+<p>zone 경고가 사라졌습니다.
+플러그인이 이제 전역 기본값(480.0 gCO₂eq/kWh) 대신 GB 특정 탄소 집약도(163.92 gCO₂eq/kWh)를 사용합니다.</p>
 <div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You may also see a <code>WARN: Unrecognized config option 'co2footprint.location'</code> message.
-This is cosmetic and can be safely ignored; the plugin still reads the value correctly.</p>
+<p class="admonition-title">참고</p>
+<p><code>WARN: Unrecognized config option 'co2footprint.location'</code> 메시지가 표시될 수도 있습니다.
+이는 외관상의 문제로 무시해도 됩니다. 플러그인은 여전히 값을 올바르게 읽습니다.</p>
 </div>
-<p>In Part 6, you'll create a configuration scope for your own plugin.</p>
-<p>This plugin works entirely through the observer mechanism, hooking into workflow lifecycle events to collect resource metrics and generate its report when the pipeline completes.</p>
-<p>You've now tried function plugins (imported with <code>include</code>) and an observer plugin (activated through config alone).
-These are the two most common extension types, but as the table in section 1 shows, plugins can also add executors and filesystems.</p>
+<p>파트 6에서는 자신만의 플러그인을 위한 설정 스코프를 만들어 봅니다.</p>
+<p>이 플러그인은 전적으로 observer 메커니즘을 통해 작동하며, 워크플로우 생명주기 이벤트에 연결하여 리소스 메트릭을 수집하고 파이프라인이 완료되면 리포트를 생성합니다.</p>
+<p>이제 function 플러그인(<code>include</code>로 가져오기)과 observer 플러그인(설정만으로 활성화)을 모두 사용해 보았습니다.
+이 두 가지가 가장 일반적인 확장 유형이지만, 섹션 1의 표에서 볼 수 있듯이 플러그인은 executor와 filesystem도 추가할 수 있습니다.</p>
 <hr />
-<h2 id="4-discovering-plugins">4. Discovering plugins<a class="headerlink" href="#4-discovering-plugins" title="Permanent link">&para;</a></h2>
-<p>The <a href="https://registry.nextflow.io/">Nextflow Plugin Registry</a> is the central hub for finding available plugins.</p>
-<p><img alt="The nf-hello plugin page on registry.nextflow.io" src="../img/plugin-registry-nf-hello.png" /></p>
-<p>Each plugin page shows its description, available versions, installation instructions, and links to documentation.</p>
+<h2 id="4">4. 플러그인 검색<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p><a href="https://registry.nextflow.io/">Nextflow Plugin Registry</a>는 사용 가능한 플러그인을 찾을 수 있는 중앙 허브입니다.</p>
+<p><img alt="registry.nextflow.io의 nf-hello 플러그인 페이지" src="../img/plugin-registry-nf-hello.png" /></p>
+<p>각 플러그인 페이지에는 설명, 사용 가능한 버전, 설치 방법, 문서 링크가 표시됩니다.</p>
 <hr />
-<h2 id="5-prepare-for-plugin-development">5. Prepare for plugin development<a class="headerlink" href="#5-prepare-for-plugin-development" title="Permanent link">&para;</a></h2>
-<p>The following sections (Parts 2-6) use a separate pipeline file, <code>greet.nf</code>, which relies on nf-schema but not nf-hello or nf-co2footprint.</p>
-<p>Update <code>nextflow.config</code> to keep only nf-schema:</p>
-<div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="c1">// Configuration for plugin development exercises</span>
+<h2 id="5">5. 플러그인 개발 준비<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>다음 섹션(파트 2-6)에서는 별도의 파이프라인 파일인 <code>greet.nf</code>를 사용합니다. 이 파일은 nf-schema에 의존하지만 nf-hello나 nf-co2footprint는 사용하지 않습니다.</p>
+<p>nf-schema만 유지하도록 <code>nextflow.config</code>를 업데이트합니다:</p>
+<div class="highlight"><span class="filename">nextflow.config</span><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="c1">// 플러그인 개발 실습을 위한 설정</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="n">plugins</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;nf-schema@2.6.1&#39;</span>
 <a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="o">}</span>
 </code></pre></div>
-<p>Remove the co2footprint output files:</p>
+<p>co2footprint 출력 파일을 삭제합니다:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>rm<span class="w"> </span>-f<span class="w"> </span>co2footprint_*
 </code></pre></div>
-<p>The <code>hello.nf</code> file retains your Part 1 work for reference; going forward, you'll work with <code>greet.nf</code>.</p>
+<p><code>hello.nf</code> 파일은 파트 1 작업 내용을 참조용으로 유지합니다. 이후에는 <code>greet.nf</code>로 작업합니다.</p>
 <hr />
-<h2 id="takeaway">Takeaway<a class="headerlink" href="#takeaway" title="Permanent link">&para;</a></h2>
-<p>You used three different plugins:</p>
+<h2 id="_1">핵심 정리<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>세 가지 플러그인을 사용해 보았습니다:</p>
 <ul>
-<li><strong>nf-hello</strong>: A function plugin providing <code>randomString</code>, imported with <code>include</code></li>
-<li><strong>nf-schema</strong>: A function plugin providing <code>samplesheetToList</code> for schema-validated CSV parsing</li>
-<li><strong>nf-co2footprint</strong>: An observer plugin that monitors resource usage automatically, with no <code>include</code> needed</li>
+<li><strong>nf-hello</strong>: <code>randomString</code>을 제공하는 function 플러그인으로, <code>include</code>로 가져옵니다</li>
+<li><strong>nf-schema</strong>: 스키마 검증 CSV 파싱을 위한 <code>samplesheetToList</code>를 제공하는 function 플러그인</li>
+<li><strong>nf-co2footprint</strong>: <code>include</code> 없이 리소스 사용량을 자동으로 모니터링하는 observer 플러그인</li>
 </ul>
-<p>Key patterns:</p>
+<p>주요 패턴:</p>
 <ul>
-<li>Plugins are declared in <code>nextflow.config</code> with <code class="highlight"><span class="n">plugins</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;plugin-name@version&#39;</span><span class="w"> </span><span class="o">}</span></code></li>
-<li>Function plugins require <code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/plugin-id&#39;</span></code></li>
-<li>Observer plugins work automatically once declared in the config</li>
-<li>Plugins can define configuration scopes (e.g., <code class="highlight"><span class="n">validation</span><span class="w"> </span><span class="o">{}</span></code>, <code class="highlight"><span class="n">co2footprint</span><span class="w"> </span><span class="o">{}</span></code>) to customize behavior</li>
-<li>The <a href="https://registry.nextflow.io/">Nextflow Plugin Registry</a> lists available plugins</li>
+<li>플러그인은 <code>nextflow.config</code>에 <code class="highlight"><span class="n">plugins</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="s1">&#39;plugin-name@version&#39;</span><span class="w"> </span><span class="o">}</span></code>으로 선언합니다</li>
+<li>Function 플러그인은 <code class="highlight"><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">&#39;plugin/plugin-id&#39;</span></code>가 필요합니다</li>
+<li>Observer 플러그인은 설정에 선언하면 자동으로 작동합니다</li>
+<li>플러그인은 동작을 맞춤화하기 위한 설정 스코프를 정의할 수 있습니다 (예: <code class="highlight"><span class="n">validation</span><span class="w"> </span><span class="o">{}</span></code>, <code class="highlight"><span class="n">co2footprint</span><span class="w"> </span><span class="o">{}</span></code>)</li>
+<li><a href="https://registry.nextflow.io/">Nextflow Plugin Registry</a>에서 사용 가능한 플러그인 목록을 확인할 수 있습니다</li>
 </ul>
 <hr />
-<h2 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
-<p>The following sections show you how to build your own plugin.
-If you're not interested in plugin development, you can stop here or skip ahead to the <a href="../summary/">Summary</a>.</p>
-<p><a class="md-button md-button--primary" href="../02_create_project/">Continue to Part 2 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
+<h2 id="_2">다음 단계<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>다음 섹션에서는 직접 플러그인을 만드는 방법을 살펴봅니다.
+플러그인 개발에 관심이 없다면 여기서 멈추거나 <a href="../summary/">요약</a>으로 건너뛸 수 있습니다.</p>
+<p><a class="md-button md-button--primary" href="../02_create_project/">파트 2로 계속 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg></span></a></p><style type="text/css">.quiz {
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem 0;
@@ -6597,7 +6591,7 @@ window.mkdocsQuizConfig = {
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="이전: Plugin Development">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="이전: 플러그인 개발">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -6607,20 +6601,20 @@ window.mkdocsQuizConfig = {
                 이전
               </span>
               <div class="md-ellipsis">
-                Plugin Development
+                플러그인 개발
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02_create_project/" class="md-footer__link md-footer__link--next" aria-label="다음: Part 2: Create a Plugin Project">
+          <a href="../02_create_project/" class="md-footer__link md-footer__link--next" aria-label="다음: 파트 2: 플러그인 프로젝트 생성">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                Part 2: Create a Plugin Project
+                파트 2: 플러그인 프로젝트 생성
               </div>
             </div>
             <div class="md-footer__button md-icon">

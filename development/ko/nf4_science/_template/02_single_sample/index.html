@@ -2339,7 +2339,7 @@
   <span class="md-ellipsis">
     
   
-    Development Environment
+    개발 환경
   
 
     
@@ -2367,7 +2367,7 @@
   <span class="md-ellipsis">
     
   
-    Essential Nextflow Scripting Patterns
+    필수 Nextflow 스크립팅 패턴
   
 
     
@@ -2395,7 +2395,7 @@
   <span class="md-ellipsis">
     
   
-    Metadata and meta maps
+    메타데이터와 메타 맵
   
 
     
@@ -2423,7 +2423,7 @@
   <span class="md-ellipsis">
     
   
-    Splitting and Grouping
+    분할 및 그룹화
   
 
     
@@ -2451,7 +2451,7 @@
   <span class="md-ellipsis">
     
   
-    Testing with nf-test
+    nf-test를 활용한 테스트
   
 
     
@@ -2479,7 +2479,7 @@
   <span class="md-ellipsis">
     
   
-    Workflows of Workflows
+    워크플로우의 워크플로우
   
 
     
@@ -2507,7 +2507,7 @@
   <span class="md-ellipsis">
     
   
-    File input processing
+    파일 입력 처리
   
 
     
@@ -2535,7 +2535,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Workflows
+    워크플로우 디버깅
   
 
     
@@ -2574,7 +2574,7 @@
   <span class="md-ellipsis">
     
   
-    Plugin Development
+    플러그인 개발
   
 
     
@@ -2590,7 +2590,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Plugin Development
+    플러그인 개발
   
 
           </label>
@@ -2610,7 +2610,7 @@
   <span class="md-ellipsis">
     
   
-    Plugin Development
+    플러그인 개발
   
 
     
@@ -2638,7 +2638,7 @@
   <span class="md-ellipsis">
     
   
-    Part 1: Plugin Basics
+    파트 1: 플러그인 기초
   
 
     
@@ -2666,7 +2666,7 @@
   <span class="md-ellipsis">
     
   
-    Part 2: Create a Plugin Project
+    파트 2: 플러그인 프로젝트 생성
   
 
     
@@ -2694,7 +2694,7 @@
   <span class="md-ellipsis">
     
   
-    Part 3: Custom Functions
+    파트 3: 사용자 정의 함수
   
 
     
@@ -2722,7 +2722,7 @@
   <span class="md-ellipsis">
     
   
-    Part 4: Testing
+    파트 4: 테스트
   
 
     
@@ -2750,7 +2750,7 @@
   <span class="md-ellipsis">
     
   
-    Part 5: Trace Observers
+    파트 5: Trace Observer
   
 
     
@@ -2778,7 +2778,7 @@
   <span class="md-ellipsis">
     
   
-    Part 6: Configuration
+    파트 6: 설정
   
 
     
@@ -2806,7 +2806,7 @@
   <span class="md-ellipsis">
     
   
-    Summary
+    요약
   
 
     
@@ -2834,7 +2834,7 @@
   <span class="md-ellipsis">
     
   
-    Next Steps
+    다음 단계
   
 
     
@@ -3845,7 +3845,7 @@
 <li><strong>{TOOL_A_ACTION}을 실행하는 단일 단계 워크플로우 작성.</strong>
    모듈 생성, 가져오기, 워크플로우에서 호출하는 방법을 다룹니다.</li>
 <li><strong>{TOOL_B_ACTION}을 실행하는 두 번째 프로세스 추가.</strong>
-   프로세스 출력을 입력으로 연결하고 보조 파일을 처리하는 방법을 소개합니다.</li>
+   프로세스 출력을 입력으로 연결하고 보조 파일을 처리하는 방법을 다룹니다.</li>
 <li><strong>여러 샘플에서 실행되도록 워크플로우 조정.</strong>
    병렬 실행을 다루고 관련 파일을 함께 유지하기 위한 튜플을 소개합니다.</li>
 <li><strong>입력 파일 배치를 포함하는 샘플시트를 받아들이도록 워크플로우 수정.</strong>
@@ -3883,7 +3883,7 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="cm"> */</span>
 <a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="hll"><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-</span><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="hll"><span class="w">    </span><span class="c1">// Primary input</span>
+</span><a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="hll"><span class="w">    </span><span class="c1">// 기본 입력</span>
 </span><a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="hll"><span class="w">    </span><span class="o">{</span><span class="n">PRIMARY_PARAM_NAME</span><span class="o">}:</span><span class="w"> </span><span class="n">Path</span>
 </span><a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="hll"><span class="o">}</span>
 </span></code></pre></div></td></tr></table></div>
@@ -3897,7 +3897,7 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="cm"> * Pipeline parameters</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="cm"> */</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="c1">// Primary input</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="c1">// 기본 입력</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
