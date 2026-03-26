@@ -88,7 +88,7 @@ Without it, the method exists only inside the plugin code.
 In Groovy (and Java), methods declare what type they return and what types their parameters are.
 For example, `String reverseGreeting(String greeting)` declares a method that takes a `String` parameter and returns a `String`.
 The keyword `void` means the method returns nothing, as with `sayHello` above.
-This is different from Python or R, where types are not declared explicitly.
+This is different from Python or R, where types do not need to be declared explicitly.
 
 ---
 
@@ -167,10 +167,6 @@ Key parts of this function:
 ## 3. Build and install your plugin
 
 Build and install the plugin:
-
-```bash
-make assemble
-```
 
 ```bash
 make install
@@ -357,7 +353,7 @@ This function uses Groovy string interpolation (`"*** ${greeting} ***"`) to embe
 Build, install, and update the workflow:
 
 ```bash
-cd nf-greeting && make assemble && make install && cd ..
+cd nf-greeting && make install && cd ..
 ```
 
 Update `greet.nf` to also import and use `decorateGreeting`:

@@ -145,7 +145,7 @@ The `decorateGreeting()` method then reads these fields each time it runs.
 Build and install:
 
 ```bash
-make assemble && make install && cd ..
+make install && cd ..
 ```
 
 Update `nextflow.config` to customize the decoration:
@@ -237,7 +237,7 @@ When the list is empty, no observers are created, so the plugin's lifecycle hook
 Rebuild and install the plugin:
 
 ```bash
-cd nf-greeting && make assemble && make install && cd ..
+cd nf-greeting && make install && cd ..
 ```
 
 Run the pipeline to confirm everything still works:
@@ -401,7 +401,7 @@ Note the difference between the factory and extension points registration:
 ### 3.3. Build and test
 
 ```bash
-cd nf-greeting && make assemble && make install && cd ..
+cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 

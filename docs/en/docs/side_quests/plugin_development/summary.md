@@ -88,9 +88,8 @@ Nextflow automatically downloads the plugin from the registry on first use.
 - [ ] Java 21+ installed
 - [ ] Create project with `nextflow plugin create <name> <org>`
 - [ ] Implement extension class with `@Function` methods
-- [ ] Build with `make assemble`
 - [ ] Write unit tests and run with `make test`
-- [ ] Install with `make install`
+- [ ] Build and install with `make install`
 - [ ] Optionally add `TraceObserver` implementations for workflow events
 - [ ] Optionally add `ConfigScope` for plugin configuration
 - [ ] Enable in `nextflow.config` with `plugins { id 'plugin-id' }`

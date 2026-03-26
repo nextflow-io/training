@@ -213,7 +213,7 @@ Edit `GreetingFactory.groovy` to add the new observer:
 ### 2.3. Build, install, and test
 
 ```bash
-cd nf-greeting && make assemble && make install && cd ..
+cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
@@ -294,7 +294,7 @@ In summary:
 Rebuild and test:
 
 ```bash
-cd nf-greeting && make assemble && make install && cd ..
+cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
@@ -425,7 +425,7 @@ class TaskCounterObserver implements TraceObserver {
 ### 3.3. Build and test
 
 ```bash
-cd nf-greeting && make assemble && make install && cd ..
+cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 

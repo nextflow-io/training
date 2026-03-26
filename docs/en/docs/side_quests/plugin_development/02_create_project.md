@@ -93,6 +93,9 @@ You should see:
 
 ## 3. Explore the build configuration
 
+A Nextflow plugin is Java-based software that must be compiled and packaged before Nextflow can use it.
+This requires a build tool.
+
 Gradle is a build tool that compiles code, runs tests, and packages software.
 The plugin template includes a Gradle wrapper (`./gradlew`) so you don't need Gradle installed separately.
 
@@ -224,11 +227,10 @@ The template includes working code out of the box, so you can build and run it r
 Compile the plugin and install it locally:
 
 ```bash
-make assemble && make install
+make install
 ```
 
-`make assemble` compiles the plugin code.
-`make install` copies it to your local Nextflow plugin directory, making it available to use.
+`make install` compiles the plugin code and copies it to your local Nextflow plugin directory, making it available to use.
 
 ??? example "Build output"
 
@@ -244,7 +246,7 @@ make assemble && make install
     Deprecated Gradle features were used in this build...
 
     BUILD SUCCESSFUL in 23s
-    4 actionable tasks: 4 executed
+    5 actionable tasks: 5 executed
     ```
 
     **The warnings are expected.**
@@ -322,7 +324,7 @@ You learned that:
 - The `nextflow plugin create` command generates a complete starter project
 - `build.gradle` configures plugin metadata, dependencies, and which classes provide features
 - The plugin has four main components: Plugin (entry point), Extension (functions), Factory (creates monitors), and Observer (responds to workflow events)
-- The development cycle is: edit code, `make assemble`, `make install`, run the pipeline
+- The development cycle is: edit code, `make install`, run the pipeline
 
 ---
 
