@@ -2415,7 +2415,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         ```
         **Fix:** Take the output from the previous process
         ```groovy linenums="88"
-        handleFiles(heavyProcess.out)
+        file_ch = handleFiles(heavy_ch)
         ```
 
         With that, the whole workflow should run.
@@ -2439,7 +2439,6 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         * Process with input/output mismatch
         */
         process processFiles {
-            publishDir "${params.output}/processed", mode: 'copy'
 
             input:
                 tuple val(sample_id), path(input_file)
@@ -2458,7 +2457,6 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         * Process with resource issues
         */
         process heavyProcess {
-            publishDir "${params.output}/heavy", mode: 'copy'
 
             time '100 s'
 
@@ -2481,7 +2479,6 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         * Process with file handling issues
         */
         process handleFiles {
-            publishDir "${params.output}/files", mode: 'copy'
 
             input:
                 path input_file
@@ -2501,7 +2498,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         * Main workflow with channel issues
         */
         workflow {
-
+            main:
             // Channel with incorrect usage
             input_ch = channel
                 .fromPath(params.input)
@@ -2512,7 +2509,24 @@ Now it's time to put the systematic debugging approach into practice. The workfl
 
             heavy_ch = heavyProcess(input_ch.map{it[0]})
 
-            handleFiles(heavyProcess.out)
+            file_ch = handleFiles(heavy_ch)
+
+            publish:
+            processed = processed_ch
+            heavy = heavy_ch
+            files = file_ch
+        }
+
+        output {
+            processed {
+                path 'processed'
+            }
+            heavy {
+                path 'heavy'
+            }
+            files {
+                path 'files'
+            }
         }
         ```
 

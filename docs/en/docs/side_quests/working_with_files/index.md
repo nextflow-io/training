@@ -1568,18 +1568,14 @@ Make the following edit to the workflow:
 You can open the module file to examine its code:
 
 ```groovy title="modules/analyze_reads.nf - process example" linenums="1"
-#!/usr/bin/env nextflow
-
 process ANALYZE_READS {
     tag { meta.id }
-
-    publishDir { "results/${meta.id}" }, mode: 'copy'
 
     input:
     tuple val(meta), path(files)
 
     output:
-    tuple val(meta.id), path("${meta.id}_stats.txt")
+    tuple val(meta), path("${meta.id}_stats.txt")
 
     script:
     """
@@ -1596,9 +1592,8 @@ process ANALYZE_READS {
 
 !!! note
 
-    The `tag` and `publishDir` directives use closure syntax (`{ ... }`) instead of string interpolation (`"${...}"`).
-    This is because these directives reference input variables (`meta`) that aren't available until runtime.
-    The closure syntax defers evaluation until the process actually runs.
+    The `tag` directive uses closure syntax (`{ ... }`) because it references input variables (`meta`) that aren't available until the process runs.
+    The closure defers evaluation until runtime.
 
 !!! note
 
@@ -1689,19 +1684,70 @@ Now let's actually call the `ANALYZE_READS` process on the `ch_samples` channel.
 
 In the main workflow, make the following code changes:
 
+1. Add a `main:` label at the top of the workflow block (before the existing channel code)
+2. Replace the temporary `.view()` call with the process call
+3. Add a `publish:` section to the workflow
+4. Add an `output {}` block after the workflow
+
 === "After"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5" hl_lines="2 5 7 14 17 18 20 21 24 25 26 27 28"
+    workflow {
+        main:
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_samples = ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           tuple(
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           )
+        }
+
         // Run the analysis
         ANALYZE_READS(ch_samples)
+
+        publish:
+        analysis_results = ANALYZE_READS.out
+    }
+
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.id}" }
+        }
+    }
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="5"
+    workflow {
+        // Load files with channel.fromFilePairs
+        ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
+        ch_files.map { id,  files ->
+           def (sample, replicate, type, readNum) = id.tokenize('_')
+           [
+               [
+                   id: sample,
+                   replicate: replicate.replace('rep', ''),
+                   type: type
+               ],
+               files
+           ]
+        }
+            .set { ch_samples }
+
         // Temporary: peek into ch_samples
         ch_samples.view()
+    }
     ```
+
+The `publish:` section declares which process outputs to publish, and the `output {}` block configures where and how they are published.
+The `path` closure in the `output {}` block receives each output element and determines the subdirectory structure. Here we use `meta.id` to organize results by patient.
 
 Let's run this:
 
@@ -1720,7 +1766,7 @@ nextflow run main.nf
     [b5/110360] process > ANALYZE_READS (patientA) [100%] 1 of 1 ✔
     ```
 
-This process is set up to publish its outputs to a `results` directory, so have a look in there.
+The outputs are published to a `results` directory, so have a look in there.
 
 ??? abstract "Directory and file contents"
 
@@ -1809,18 +1855,22 @@ We are overwriting the output file each time.
 
 Since we have access to the patient metadata, we can use it to make the published files unique by including differentiating metadata, either in the directory structure or in the filenames themselves.
 
-Make the following change to the workflow:
+Make the following change to the `output {}` block:
 
 === "After"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="3"
+    analysis_results {
+        path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+    }
     ```
 
 === "Before"
 
-    ```groovy title="modules/analyze_reads.nf" linenums="6"
-        publishDir { "results/${meta.id}" }, mode: 'copy'
+    ```groovy title="main.nf" hl_lines="3"
+    analysis_results {
+        path { meta, file -> "${meta.id}" }
+    }
     ```
 
 Here we show the option of using additional directory levels to account for sample types and replicates, but you could experiment with doing it at the filename level as well.
@@ -1888,7 +1938,7 @@ You can learn more about this in the [Metadata and meta maps](../metadata/) side
 
 ### Takeaway
 
-- The `publishDir` directive can organize outputs based on metadata values
+- The `output {}` block can organize outputs based on metadata values using dynamic path closures
 - Metadata in tuples enables structured organization of results
 - This approach creates maintainable workflows with clear data provenance
 - Processes can take tuples of metadata and files as input
@@ -1996,24 +2046,23 @@ Applying these techniques in your own work will enable you to build more efficie
     ch_pairs = channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
-6.  **Using File Operations in Processes:** We integrated file operations into Nextflow processes with proper input handling, using `publishDir` to organize outputs based on metadata.
+6.  **Using File Operations in Processes:** We integrated file operations into Nextflow processes with proper input handling, using the `output {}` block to organize outputs based on metadata.
 
     - Associate a meta map with the process inputs
 
     ```groovy
     ch_files = channel.fromFilePairs('data/patientA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_files.map { id,  files ->
+    ch_samples = ch_files.map { id,  files ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
-        [
+        tuple(
             [
                 id: sample,
                 replicate: replicate.replace('rep', ''),
                 type: type
             ],
-             files
-        ]
+            files
+        )
     }
-        .set { ch_samples }
 
     ANALYZE_READS(ch_samples)
     ```
@@ -2021,7 +2070,11 @@ Applying these techniques in your own work will enable you to build more efficie
     - Organize outputs based on metadata
 
     ```groovy
-    publishDir { "results/${meta.type}/${meta.id}/${meta.replicate}" }, mode: 'copy'
+    output {
+        analysis_results {
+            path { meta, file -> "${meta.type}/${meta.id}/${meta.replicate}" }
+        }
+    }
     ```
 
 ### Additional resources
