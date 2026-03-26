@@ -36,7 +36,7 @@ hide:
 
         :material-run-fast: Nextflow로 영상 데이터 파이프라인을 실행하는 방법을 배웁니다.
 
-    이 과정은 생물영상 파이프라인을 실행하고 구성하는 방법을 배우고자 하는 연구자를 위한 것입니다. 이 과정은 nf-core/molkart를 활용하여 모든 파이프라인에 적용 가능한 필수 Nextflow 사용 패턴을 보여줍니다.
+    이 과정은 생물영상 파이프라인을 실행하고 설정하는 방법을 배우고자 하는 연구자를 위한 것입니다. 이 과정은 nf-core/molkart를 활용하여 모든 파이프라인에 적용 가능한 필수 Nextflow 사용 패턴을 보여줍니다.
 
     [생물영상을 위한 Nextflow 교육 시작하기 :material-arrow-right:](imaging/){ .md-button .md-button--primary }
 

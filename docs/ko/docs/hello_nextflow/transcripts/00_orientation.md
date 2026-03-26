@@ -1,6 +1,6 @@
 # Orientation - 비디오 대본
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 사항 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/PIjOdFaYwWA?si=y8lAedhEHWaTV4zd&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -18,7 +18,7 @@
 
 모든 예제는 간단한 텍스트 처리를 다루므로, 특정 도메인 전문 지식 없이도 Nextflow 개념에 집중할 수 있습니다. 명령줄에 대한 기본적인 이해만 있으면 됩니다.
 
-Nextflow의 기본 사항을 다룰 예정입니다. 프로세스 작성, 여러 단계의 워크플로우로 연결, 컨테이너를 사용한 소프트웨어 의존성 관리, 다양한 컴퓨팅 환경을 위한 파이프라인 구성 등을 학습합니다. 과정을 마치면 처음부터 작동하는 파이프라인을 구축하게 됩니다.
+Nextflow의 기본 사항을 다룰 예정입니다. 프로세스 작성, 여러 단계의 워크플로우로 연결, 컨테이너를 사용한 소프트웨어 의존성 관리, 다양한 컴퓨팅 환경을 위한 파이프라인 설정 등을 학습합니다. 과정을 마치면 처음부터 작동하는 파이프라인을 구축하게 됩니다.
 
 이 과정은 파이프라인 *개발*에 중점을 둡니다. 코드에 깊이 들어가지 않고 기존 파이프라인을 *실행*하기만 원하신다면, 더 짧은 "Nextflow Run" 과정이 더 적합할 수 있습니다.
 
@@ -60,7 +60,7 @@ Nextflow for newcomers가 우리가 있는 곳입니다. 여기에는 두 개의
 
 Seqera Studios에서 잘 작동하도록 작업 중이므로 그것도 또 다른 옵션입니다. 하지만 지금 가장 일반적인 방법은 GitHub Codespaces를 사용하는 것입니다.
 
-Codespaces는 GitHub가 운영하는 원격 서버에 샌드박스 환경을 설정합니다. 일정량의 사용량은 무료이며, 일반적으로 교육에는 충분합니다. VS Code 인스턴스, 즉 저장소의 모든 파일에 액세스하고 Nextflow를 실행할 수 있는 IDE를 설정해줍니다. 우리는 Codespaces를 미리 구성했습니다. 따라서 필요한 모든 것이 있습니다.
+Codespaces는 GitHub가 운영하는 원격 서버에 샌드박스 환경을 설정합니다. 일정량의 사용량은 무료이며, 일반적으로 교육에는 충분합니다. VS Code 인스턴스, 즉 저장소의 모든 파일에 액세스하고 Nextflow를 실행할 수 있는 IDE를 설정해줍니다. 우리는 Codespaces를 미리 설정해두었습니다. 따라서 필요한 모든 것이 있습니다.
 
 이것의 장점은 Codespace를 설정하는 데 클릭 한 번이면 된다는 것입니다. 모든 사람에게 동일하며, 필수 구성 요소가 이미 설치되어 있으므로 빠르고 편리합니다.
 
@@ -94,15 +94,15 @@ Codespaces는 GitHub가 운영하는 원격 서버에 샌드박스 환경을 설
 
 먼저, AI 관련 채팅 사이드바가 있는데 필요하지 않습니다. 그래서 닫고 공간을 확보하겠습니다.
 
-왼쪽에는 Git 저장소의 모든 파일을 보여주는 파일 탐색기가 있으며, 이것이 우리가 만든 작업 공간입니다. 참고로, 이것들은 로컬 파일이 아닙니다. 이것은 모두 우리가 작업하고 있는 원격 서버에 있습니다. 로컬 파일을 드래그 앤 드롭할 수 있지만, 대부분 오늘은 그것에 대해 생각하지 않을 것입니다. 순전히 원격으로 작업할 것입니다.
+왼쪽에는 Git 저장소의 모든 파일을 보여주는 파일 탐색기(File Explorer)가 있으며, 이것이 우리가 만든 작업 공간입니다. 참고로, 이것들은 로컬 파일이 아닙니다. 이것은 모두 우리가 작업하고 있는 원격 서버에 있습니다. 로컬 파일을 드래그 앤 드롭할 수 있지만, 대부분 오늘은 그것에 대해 생각하지 않을 것입니다. 순전히 원격으로 작업할 것입니다.
 
 이 사이드바에는 다른 도구들도 있습니다. 예를 들어 검색입니다. 저장소의 모든 파일을 한 번에 검색할 수 있습니다. 교육 저장소에서 개발 작업을 한다면 Git을 사용한 소스 제어 통합과 디버깅 및 기타 작업을 할 수 있습니다.
 
-다른 것들은, 여기 위쪽에 메인 코드 편집 창이 있는데, 방금 readme의 미리보기를 로드했습니다. 이것은 교육 자료용입니다. 이 경우 markdown을 보고 있지만, 일반적으로 이것은 코드 편집기가 됩니다.
+다른 것들은, 여기 위쪽에 메인 편집기 창이 있는데, 방금 readme의 미리보기를 로드했습니다. 이것은 교육 자료용입니다. 이 경우 markdown을 보고 있지만, 일반적으로 이것은 코드 편집기가 됩니다.
 
 그리고 그 아래에는 모든 명령을 실행하고 Nextflow와 직접 상호작용할 터미널이 있습니다.
 
-Codespace의 모든 것이 사전 설치되어 있으므로 Nextflow 명령이 이미 있는 등입니다.
+Codespace의 모든 것이 사전 설치되어 있으므로 Nextflow 명령어가 이미 있는 등입니다.
 
 좋습니다. 여기까지 오면 거의 완료되어야 합니다. 이제 Nextflow 언어 서버를 다운로드했고 Nextflow 확장을 포함하여 VS Code에 일부 확장을 설정했으며, 이것이 유용할 것입니다. 그래서 닫을 수 있고 README.md도 닫을 수 있습니다.
 

@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 변이 호출(Variant calling)은 참조 게놈에 대비하여 게놈 서열의 변이를 식별하는 것을 목표로 하는 게놈 분석 방법입니다.
-여기서는 전체 게놈 시퀀싱 데이터에서 짧은 배선 변이(short germline variants), 즉 SNP와 indel을 호출하기 위해 설계된 도구와 방법을 사용합니다.
+여기서는 전체 게놈 시퀀싱 데이터에서 짧은 생식세포 변이(short germline variants), 즉 SNP와 indel을 호출하기 위해 설계된 도구와 방법을 사용합니다.
 
 ![GATK 파이프라인](img/gatk-pipeline.png)
 
@@ -12,26 +12,26 @@
 
 ### 방법론
 
-전체 게놈 시퀀싱 샘플에 변이 호출을 적용하여 배선 SNP와 indel을 식별하는 두 가지 방법을 보여드리겠습니다.
-먼저 각 샘플에서 독립적으로 변이를 호출하는 간단한 **샘플별 접근법**부터 시작하겠습니다.
-그런 다음 여러 샘플을 함께 분석하여 더 정확하고 유익한 결과를 생성하는 더 정교한 **공동 호출 접근법**을 보여드리겠습니다.
+전체 게놈 시퀀싱 샘플에 변이 호출을 적용하여 생식세포 SNP와 indel을 식별하는 두 가지 방법을 살펴보겠습니다.
+먼저 각 샘플에서 독립적으로 변이를 호출하는 간단한 **샘플별 접근법**부터 시작합니다.
+그런 다음 여러 샘플을 함께 분석하여 더 정확하고 유익한 결과를 생성하는 더 정교한 **공동 호출 접근법**을 살펴봅니다.
 
-두 접근법 모두에 대한 워크플로우 코드를 작성하기 전에, 먼저 일부 테스트 데이터에서 명령을 수동으로 실행해 보겠습니다.
+두 접근법 모두에 대한 워크플로우 코드를 작성하기 전에, 먼저 일부 테스트 데이터에서 명령을 수동으로 실행해 봅니다.
 
 ### 데이터셋
 
 다음 데이터와 관련 리소스를 제공합니다:
 
-- 인간 염색체 20(hg19/b37에서)의 작은 영역과 그 보조 파일(인덱스 및 서열 사전)로 구성된 **참조 게놈**.
+- 인간 염색체 20(hg19/b37에서)의 작은 영역과 그 부속 파일(인덱스 및 서열 사전)로 구성된 **참조 게놈**.
 - 가족 트리오(어머니, 아버지, 아들)에 해당하는 **세 개의 전체 게놈 시퀀싱 샘플**. 파일 크기를 작게 유지하기 위해 염색체 20의 작은 데이터 조각으로 부분집합화되었습니다.
   이것은 이미 참조 게놈에 매핑된 Illumina 단일 리드 시퀀싱 데이터로, [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) 형식(SAM(Sequence Alignment Map)의 압축 버전인 Binary Alignment Map)으로 제공됩니다.
-- 샘플에 변이 호출에 적합한 데이터가 있는 게놈 상의 좌표인 **게놈 간격 목록**, BED 형식으로 제공됩니다.
+- 샘플에 변이 호출에 적합한 데이터가 있는 게놈 상의 좌표인 **유전체 구간 목록**, BED 형식으로 제공됩니다.
 
 ### 소프트웨어
 
 관련된 두 가지 주요 도구는 서열 정렬 파일을 조작하는 데 널리 사용되는 툴킷인 [Samtools](https://www.htslib.org/)와, Broad Institute에서 개발한 변이 발견을 위한 도구 세트인 [GATK](https://gatk.broadinstitute.org/)(Genome Analysis Toolkit)입니다.
 
-이러한 도구는 GitHub Codespaces 환경에 설치되어 있지 않으므로 Seqera Containers 서비스를 통해 검색한 컨테이너를 통해 사용하겠습니다([Hello Containers](../../hello_nextflow/05_hello_containers.md) 참조).
+이러한 도구는 GitHub Codespaces 환경에 설치되어 있지 않으므로 Seqera Containers 서비스를 통해 검색한 컨테이너를 통해 사용합니다([Hello Containers](../../hello_nextflow/05_hello_containers.md) 참조).
 
 !!! tip "팁"
 
@@ -44,7 +44,7 @@
 샘플별 변이 호출은 각 샘플을 독립적으로 처리합니다. 변이 호출기는 한 번에 한 샘플의 시퀀싱 데이터를 검사하고 샘플이 참조와 다른 위치를 식별합니다.
 
 이 섹션에서는 샘플별 변이 호출 접근법을 구성하는 두 가지 명령을 테스트합니다: Samtools를 사용한 BAM 파일 인덱싱과 GATK HaplotypeCaller를 사용한 변이 호출.
-이것들이 이 과정의 파트 2에서 Nextflow 워크플로우로 적용할 명령입니다.
+이것들이 이 과정의 파트 2에서 Nextflow 워크플로우에 적용할 명령입니다.
 
 1. [Samtools](https://www.htslib.org/)를 사용하여 BAM 입력 파일에 대한 인덱스 파일 생성
 2. 인덱싱된 BAM 파일에서 GATK HaplotypeCaller를 실행하여 VCF(Variant Call Format)로 샘플별 변이 호출 생성
@@ -62,7 +62,7 @@
 
 BAM 파일은 종종 인덱스 없이 제공되므로, 많은 분석 워크플로우의 첫 번째 단계는 `samtools index`를 사용하여 인덱스를 생성하는 것입니다.
 
-Samtools 컨테이너를 가져와서 대화식으로 실행하고 BAM 파일 중 하나에서 `samtools index` 명령을 실행할 것입니다.
+Samtools 컨테이너를 가져와서 대화식으로 실행하고 BAM 파일 중 하나에서 `samtools index` 명령을 실행합니다.
 
 #### 1.1.1. Samtools 컨테이너 가져오기
 
@@ -166,7 +166,7 @@ exit
 
 ### 1.2. GATK HaplotypeCaller로 변이 호출
 
-방금 인덱싱한 BAM 파일에서 `gatk HaplotypeCaller` 명령을 실행하려고 합니다.
+방금 인덱싱한 BAM 파일에서 `gatk HaplotypeCaller` 명령을 실행합니다.
 
 #### 1.2.1. GATK 컨테이너 가져오기
 
@@ -217,10 +217,10 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 
 [GATK 문서](https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller)는 BAM 파일에서 변이 호출을 수행하기 위해 실행할 명령줄을 제공합니다.
 
-BAM 입력 파일(`-I`)과 참조 게놈(`-R`), 출력 파일 이름(`-O`), 분석할 게놈 간격 목록(`-L`)을 제공해야 합니다.
+BAM 입력 파일(`-I`)과 참조 게놈(`-R`), 출력 파일 이름(`-O`), 분석할 유전체 구간 목록(`-L`)을 제공해야 합니다.
 
 그러나 인덱스 파일의 경로를 지정할 필요는 없습니다. 도구는 확립된 명명 규칙과 공동 배치 규칙에 따라 같은 디렉토리에서 자동으로 찾습니다.
-참조 게놈의 보조 파일(인덱스 및 서열 사전 파일, `*.fai` 및 `*.dict`)에도 동일하게 적용됩니다.
+참조 게놈의 부속 파일(인덱스 및 서열 사전 파일, `*.fai` 및 `*.dict`)에도 동일하게 적용됩니다.
 
 ```bash
 gatk HaplotypeCaller \
@@ -423,7 +423,7 @@ GVCF를 결합하는 것은 GATK GenomicsDBImport로 수행되며, 이것은 샘
 실제 '공동 유전형 분석' 분석은 GATK GenotypeGVCFs로 수행됩니다.
 
 여기서는 GVCF를 생성하고 공동 유전형 분석을 실행하는 데 필요한 명령을 테스트합니다.
-이것들이 이 과정의 파트 3에서 Nextflow 워크플로우로 적용할 명령입니다.
+이것들이 이 과정의 파트 3에서 Nextflow 워크플로우에 적용할 명령입니다.
 
 1. Samtools를 사용하여 각 BAM 입력 파일에 대한 인덱스 파일 생성
 2. 각 BAM 입력 파일에서 GATK HaplotypeCaller를 실행하여 샘플별 게놈 변이 호출의 GVCF 생성
@@ -434,7 +434,7 @@ GVCF를 결합하는 것은 GATK GenomicsDBImport로 수행되며, 이것은 샘
 --8<-- "docs/en/docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
-이제 세 개의 BAM 파일을 모두 인덱싱하는 것부터 시작하여 이러한 모든 명령을 테스트해야 합니다.
+이제 세 개의 BAM 파일을 모두 인덱싱하는 것부터 시작하여 이러한 모든 명령을 테스트합니다.
 
 ### 2.1. 세 샘플 모두에 대한 BAM 파일 인덱싱
 
@@ -804,7 +804,7 @@ gatk HaplotypeCaller \
 
 #### 2.2.3. 나머지 두 샘플에서 프로세스 반복
 
-이제 아래 명령을 하나씩 실행하여 나머지 두 샘플에 대한 GVCF를 생성하겠습니다.
+이제 아래 명령을 하나씩 실행하여 나머지 두 샘플에 대한 GVCF를 생성합니다.
 
 ```bash
 gatk HaplotypeCaller \
@@ -1003,6 +1003,7 @@ gatk GenomicsDBImport \
     17:37:07.704 INFO  GenomicsDBImport - ------------------------------------------------------------
     17:37:07.706 INFO  GenomicsDBImport - HTSJDK Version: 4.1.0
     17:37:07.706 INFO  GenomicsDBImport - Picard Version: 3.1.1
+    17:37:```console
     17:37:07.707 INFO  GenomicsDBImport - Built for Spark Version: 3.5.0
     17:37:07.709 INFO  GenomicsDBImport - HTSJDK Defaults.COMPRESSION_LEVEL : 2
     17:37:07.709 INFO  GenomicsDBImport - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
@@ -1033,7 +1034,7 @@ gatk GenomicsDBImport \
     true
     ```
 
-이 단계의 출력은 사실상 여러 개의 다른 파일 형태로 결합된 변이 데이터를 담고 있는 추가 중첩 디렉토리 세트를 포함하는 디렉토리입니다.
+이 단계의 출력은 사실상 여러 개의 다른 파일 형태로 결합된 변이 데이터를 담고 있는 추가 내포된 디렉토리 세트를 포함하는 디렉토리입니다.
 둘러볼 수는 있지만 이 데이터 저장소 형식은 사람이 직접 읽도록 만들어지지 않았다는 것을 빠르게 알 수 있습니다.
 
 !!! tip "팁"
@@ -1172,7 +1173,7 @@ gatk GenotypeGVCFs \
 #### 2.3.3. 출력 파일 이동
 
 앞서 언급했듯이 컨테이너 내부에 남아 있는 모든 것은 향후 작업에서 접근할 수 없습니다.
-컨테이너를 종료하기 전에 GVCF 파일, 최종 다중 샘플 VCF 및 모든 인덱스 파일을 컨테이너 외부의 파일시스템으로 수동으로 이동하겠습니다.
+컨테이너를 종료하기 전에 GVCF 파일, 최종 다중 샘플 VCF 및 모든 인덱스 파일을 컨테이너 외부의 파일시스템으로 수동으로 이동합니다.
 그렇게 하면 이 모든 작업을 자동화하기 위해 워크플로우를 구축할 때 비교할 수 있는 것이 생깁니다.
 
 ```bash
@@ -1226,7 +1227,7 @@ exit
 
 ### 핵심 정리
 
-Samtools 인덱싱과 GATK 변이 호출 명령을 각각의 컨테이너에서 테스트하는 방법을 알게 되었습니다. 여기에는 GVCF를 생성하고 여러 샘플에 대해 공동 유전형 분석을 실행하는 방법도 포함됩니다.
+Samtools 인덱싱과 GATK 변이 호출 명령을 각각의 컨테이너에서 테스트하는 방법을 학습했습니다. 여기에는 GVCF를 생성하고 여러 샘플에 대해 공동 유전형 분석을 실행하는 방법도 포함됩니다.
 
 ### 다음 단계
 

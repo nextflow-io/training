@@ -12,7 +12,7 @@
 
 {DESCRIBE_THE_TWO_APPROACHES: single-sample and multi-sample/aggregation}
 
-워크플로우 코드를 작성하기 전에, 먼저 테스트 데이터에서 명령을 수동으로 실행해 보겠습니다.
+워크플로우 코드를 작성하기 전에, 먼저 테스트 데이터에서 명령을 수동으로 실행해 봅니다.
 
 ### 데이터셋
 
@@ -26,7 +26,7 @@
 
 주요 도구는 [{TOOL_A}]({TOOL_A_URL})와 [{TOOL_B}]({TOOL_B_URL})입니다.
 
-이러한 도구는 GitHub Codespaces 환경에 설치되어 있지 않으므로, 컨테이너를 통해 사용하겠습니다([Hello Containers](../../hello_nextflow/05_hello_containers.md) 참조).
+이러한 도구는 GitHub Codespaces 환경에 설치되어 있지 않으므로, 컨테이너를 통해 사용합니다([Hello Containers](../../hello_nextflow/05_hello_containers.md) 참조).
 
 !!! note "참고"
 
