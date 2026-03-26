@@ -10,6 +10,7 @@ hide:
 
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
+
 학습자가 소프트웨어 관리에 시간과 노력을 들이지 않고 Nextflow 학습에 집중할 수 있도록 일관되고 철저히 테스트된 환경을 제공하는 것을 목표로 합니다.
 이를 위해 모든 과정을 진행하는 데 필요한 모든 소프트웨어, 코드 파일 및 예제 데이터가 포함된 컨테이너화된 환경을 개발했습니다.
 
@@ -17,21 +18,21 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :material-cloud-outline:{ .lg .middle } **Github Codespaces**
+-   :material-cloud-outline:{ .lg .middle } __Github Codespaces__
 
-  ***
+    ---
 
-  GitHub Codespaces는 클라우드의 가상 머신에 의해 지원되는, 모든 도구와 데이터가 포함된 사전 구축된 교육 환경을 제공할 수 있는 웹 기반 서비스입니다. Github 계정이 있는 누구나 무료로 이용할 수 있습니다.
+    GitHub Codespaces는 클라우드의 가상 머신에 의해 지원되는, 모든 도구와 데이터가 포함된 사전 구축된 교육 환경을 제공할 수 있는 웹 기반 서비스입니다. Github 계정이 있는 누구나 무료로 이용할 수 있습니다.
 
-  [Github Codespaces 사용하기:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
+    [Github Codespaces 사용하기:material-arrow-right:](01_setup.md){ .md-button .md-button--primary .mt-1 }
 
-- :material-laptop:{ .lg .middle } **로컬 Devcontainers**
+-   :material-laptop:{ .lg .middle } __로컬 Devcontainers__
 
-  ***
+    ---
 
-  Devcontainers가 있는 VS Code는 모든 교육 도구가 사전 구성된 로컬 실행 컨테이너화된 개발 환경을 제공합니다. Codespaces와 동일한 사전 구축된 환경을 제공하지만 전적으로 로컬 하드웨어에서 실행됩니다.
+    Devcontainers가 있는 VS Code는 모든 교육 도구가 사전 설정된 로컬 실행 컨테이너화된 개발 환경을 제공합니다. Codespaces와 동일한 사전 구축된 환경을 제공하지만 전적으로 로컬 하드웨어에서 실행됩니다.
 
-  [로컬에서 Devcontainers 사용하기 :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
+    [로컬에서 Devcontainers 사용하기 :material-arrow-right:](03_devcontainer.md){ .md-button .md-button--primary .mt-1 }
 
 </div>
 

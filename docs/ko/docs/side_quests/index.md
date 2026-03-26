@@ -10,7 +10,7 @@ hide:
 
 이것은 특정 주제를 더 깊이 다루는 단독 교육 단기 과정 모음입니다. 순서에 관계없이 진행하실 수 있습니다.
 
-시작해 봅시다! 아래 "Open in GitHub Codespaces" 버튼을 클릭하여 교육 환경을 시작하시고(별도 탭에서 여는 것을 권장합니다), 로딩되는 동안 계속 읽어주십시오.
+시작합니다! 아래 "Open in GitHub Codespaces" 버튼을 클릭하여 교육 환경을 시작하시고(별도 탭에서 여는 것을 권장합니다), 로딩되는 동안 계속 읽어주십시오.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -30,15 +30,27 @@ hide:
 
 ## 사이드 퀘스트
 
-| 사이드 퀘스트                                                              | 교육 예상 시간 |
-| -------------------------------------------------------------------------- | -------------- |
-| [Nextflow development environment walkthrough](./ide_features.md)          | 45분           |
-| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns.md) | 90분           |
-| [Metadata in workflows](./metadata.md)                                     | 45분           |
-| [Splitting and Grouping](./splitting_and_grouping.md)                      | 45분           |
-| [Testing with nf-test](./nf-test.md)                                       | 1시간          |
-| [Workflows of workflows](./workflows_of_workflows.md)                      | 30분           |
-| [Working with files](./working_with_files.md)                              | 45분           |
-| [Debugging workflows](./debugging.md)                                      | 1시간          |
+| 사이드 퀘스트                                                            | 교육 예상 시간 |
+| ------------------------------------------------------------------------ | -------------- |
+| [Nextflow development environment walkthrough](./dev_environment/)       | 45분           |
+| [Essential Nextflow Scripting Patterns](./essential_scripting_patterns/) | 90분           |
+| [Metadata in workflows](./metadata/)                                     | 45분           |
+| [Splitting and Grouping](./splitting_and_grouping/)                      | 45분           |
+| [Testing with nf-test](./nf_test/)                                       | 1시간          |
+| [Workflows of workflows](./workflows_of_workflows/)                      | 30분           |
+| [Working with files](./working_with_files/)                              | 45분           |
+| [Debugging workflows](./debugging/)                                      | 1시간          |
+
+## 멀티파트 과정
+
+!!! exercise "Plugin Development"
+
+    !!! tip inline end ""
+
+        :material-run-fast: Nextflow 플러그인을 사용하고 빌드하는 방법을 학습합니다.
+
+    이 과정에서는 워크플로우에서 기존 플러그인을 사용하는 방법과 사용자 정의 함수, 워크플로우 모니터링, 설정 및 배포를 포함하여 처음부터 직접 플러그인을 빌드하는 방법을 다룹니다.
+
+    [Plugin Development 교육 시작하기 :material-arrow-right:](plugin_development/){ .md-button .md-button--primary }
 
 커뮤니티 포럼의 [Training 섹션](https://community.seqera.io/c/training/)에 게시하여 여기에서 다루고 싶은 다른 도메인 및 사용 사례를 알려주십시오.

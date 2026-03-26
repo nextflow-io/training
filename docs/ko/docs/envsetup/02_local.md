@@ -7,7 +7,7 @@
 여기서는 표준 POSIX 호환 시스템(노트북과 같은 개인용 머신 가정)에서 이를 수행하는 방법을 문서화했습니다.
 특정 시스템에 따라 일부 세부 사항이 다를 수 있다는 점에 유의하십시오.
 
-!!! tip
+!!! tip "팁"
 
     진행하기 전에 [Devcontainers 방식](03_devcontainer.md)을 고려해 보셨나요?
     수동 설치 없이 필요한 모든 도구와 의존성을 제공합니다.
@@ -20,7 +20,7 @@ Nextflow는 Java가 설치된 모든 POSIX 호환 시스템(Linux, macOS, Window
 총합적으로 다음 소프트웨어가 설치되어 있어야 합니다:
 
 - Bash 또는 동등한 셸
-- [Java 11 (또는 최대 21까지의 이후 버전)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- [Java 21 이상](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (Nextflow 실행에는 Java 11 이상으로 충분하지만, [플러그인 개발](../side_quests/plugin_development/index.md) 과정에는 Java 21이 필요합니다)
 - [Git](https://git-scm.com/)
 - [Docker](https://docs.docker.com/get-docker/)
 - [Conda](https://conda.io/) 4.5 (또는 이후 버전)
