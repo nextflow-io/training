@@ -217,6 +217,13 @@ cd nf-greeting && make install && cd ..
 nextflow run greet.nf -ansi-log false
 ```
 
+!!! tip "Why `-ansi-log false`?"
+
+    By default, Nextflow's ANSI progress display overwrites previous lines to show a clean, updating view of progress.
+    This means you'd only see the *final* task count, not the intermediate messages.
+
+    Using `-ansi-log false` disables this behavior and shows all output sequentially, which is essential when testing observers that print messages during execution.
+
 You should see "✓ Task completed!" printed five times (once per task), interleaved with the existing pipeline output:
 
 ```console title="Output (partial)"
@@ -329,13 +336,6 @@ nextflow run greet.nf -ansi-log false
     ```
 
     The counter messages are interleaved with task submissions because observers run as tasks complete.
-
-!!! tip "Why `-ansi-log false`?"
-
-    By default, Nextflow's ANSI progress display overwrites previous lines to show a clean, updating view of progress.
-    This means you'd only see the *final* task count, not the intermediate messages.
-
-    Using `-ansi-log false` disables this behavior and shows all output sequentially, which is essential when testing observers that print messages during execution.
 
 ---
 
