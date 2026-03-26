@@ -3,7 +3,7 @@
 <span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 대량 RNAseq 데이터를 처리하고 분석하는 여러 가지 유효한 방법이 있습니다.
-이 과정에서는 [Babraham Institute](https://www.babraham.ac.uk/)의 Simon Andrews 박사와 Laura Biggins 박사가 [여기](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf)에서 설명한 방법을 따릅니다.
+이 과정에서는 [Babraham Institute](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf)의 Simon Andrews 박사와 Laura Biggins 박사가 [여기](https://www.babraham.ac.uk/)에서 설명한 방법을 따릅니다.
 
 우리의 목표는 다음 처리 단계를 구현하는 워크플로우를 개발하는 것입니다: 대량 RNAseq 샘플의 리드에 대한 초기 품질 관리 실행, 리드에서 어댑터 서열 트리밍, 참조 게놈에 리드 정렬, 그리고 포괄적인 품질 관리(QC) 보고서 생성.
 
@@ -22,7 +22,7 @@
 먼저 하나의 샘플에 대해 QC, 트리밍 및 정렬 도구를 실행하는 **단일 샘플 처리**부터 시작합니다.
 그런 다음 여러 샘플에 대해 동일한 도구를 실행하고 집계된 품질 관리 보고서를 생성하는 **다중 샘플 처리**로 확장합니다.
 
-워크플로우 코드를 작성하기 전에 먼저 일부 테스트 데이터로 명령을 수동으로 시도해 보겠습니다.
+워크플로우 코드를 작성하기 전에 먼저 일부 테스트 데이터로 명령을 수동으로 시도해 봅니다.
 
 ### 데이터셋
 
@@ -61,11 +61,11 @@
 
 ### 1.1. QC 및 어댑터 트리밍
 
-먼저 예제 데이터 파일 중 하나에서 QC 및 트리밍 명령을 실행하려고 합니다.
+먼저 예제 데이터 파일 중 하나에서 QC 및 트리밍 명령을 실행합니다.
 
 #### 1.1.1. 컨테이너 가져오기
 
-`fastqc`와 `trim_galore`가 모두 설치된 컨테이너 이미지를 가져오겠습니다:
+`fastqc`와 `trim_galore`가 모두 설치된 컨테이너 이미지를 가져옵니다:
 
 ```bash
 docker pull community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18
@@ -185,7 +185,7 @@ HTML 보고서와 QC 메트릭이 포함된 ZIP 아카이브가 표시됩니다.
 
 #### 1.1.4. Trim Galore로 어댑터 서열 트리밍하기
 
-이제 Cutadapt 및 FastQC를 번들로 제공하는 `trim_galore`를 실행하여 어댑터 서열을 트리밍하고 트리밍 후 QC 메트릭을 수집해 보겠습니다.
+이제 Cutadapt 및 FastQC를 번들로 제공하는 `trim_galore`를 실행하여 어댑터 서열을 트리밍하고 트리밍 후 QC 메트릭을 수집합니다.
 위에서 언급했듯이 소프트웨어는 동일한 컨테이너에 포함되어 있으므로 변경할 필요가 없습니다.
 
 명령은 간단합니다. 트리밍이 완료된 후 QC 수집 단계를 자동으로 실행하도록 `--fastqc` 플래그를 추가하기만 하면 됩니다.
@@ -373,11 +373,11 @@ exit
 
 ### 1.2. 참조 게놈에 리드 정렬하기
 
-다음으로 트리밍된 RNAseq 리드를 참조 게놈에 정렬하는 정렬 명령을 실행하려고 합니다.
+다음으로 트리밍된 RNAseq 리드를 참조 게놈에 정렬하는 정렬 명령을 실행합니다.
 
 #### 1.2.1. 컨테이너 가져오기
 
-`hisat2`와 `samtools`가 설치된 컨테이너 이미지를 가져오겠습니다:
+`hisat2`와 `samtools`가 설치된 컨테이너 이미지를 가져옵니다:
 
 ```bash
 docker pull community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e
@@ -420,7 +420,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/hisat2_samtools:
 
 #### 1.2.3. 게놈 인덱스 파일 생성하기
 
-HISAT2는 게놈 참조가 매우 특정한 형식으로 제공되어야 하며 우리가 제공하는 `genome.fa` FASTA 파일만으로는 사용할 수 없으므로 이 기회에 관련 리소스를 생성하겠습니다.
+HISAT2는 게놈 참조가 매우 특정한 형식으로 제공되어야 하며 우리가 제공하는 `genome.fa` FASTA 파일만으로는 사용할 수 없으므로 이 기회에 관련 리소스를 생성합니다.
 
 ```bash
 hisat2-build /data/genome.fa genome_index
@@ -676,7 +676,7 @@ ls genome_index.*
     genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
     ```
 
-나중에 이러한 파일이 필요하며, 이를 생성하는 것은 일반적으로 워크플로우의 일부로 수행하고 싶지 않은 작업이므로 필요에 따라 쉽게 전달할 수 있는 게놈 인덱스 파일이 포함된 gzip 압축된 tarball을 생성하겠습니다.
+나중에 이러한 파일이 필요하며, 이를 생성하는 것은 일반적으로 워크플로우의 일부로 수행하고 싶지 않은 작업이므로 필요에 따라 쉽게 전달할 수 있는 게놈 인덱스 파일이 포함된 gzip 압축된 tarball을 생성합니다.
 
 ```bash
 tar -czvf /data/genome_index.tar.gz genome_index.*
@@ -732,7 +732,7 @@ ls ENCSR000COQ1_1*
 
 ??? abstract "디렉토리 내용"
 
-    ```console title="출력"
+    ```console title="Output"
     ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
     ```
 
@@ -959,7 +959,7 @@ MultiQC는 호환 가능한 QC 보고서를 찾기 위해 디렉토리를 검색
 
 #### 2.3.1. 컨테이너 가져오기
 
-`multiqc`가 설치된 컨테이너 이미지를 가져오겠습니다:
+`multiqc`가 설치된 컨테이너 이미지를 가져옵니다:
 
 ```bash
 docker pull community.wave.seqera.io/library/pip_multiqc:a3c26f6199d64b7c
@@ -1089,6 +1089,6 @@ exit
 
 각각의 컨테이너에서 FastQC, Trim Galore, HISAT2 및 MultiQC 명령을 실행하는 방법을 알게 되었습니다. 여기에는 여러 샘플을 처리하고 QC 보고서를 집계하는 방법이 포함됩니다.
 
-### 다음 단계는?
+### 다음 단계
 
-잠시 휴식을 취한 다음 [파트 2](./02_single-sample.md)로 이동하여 동일한 명령을 컨테이너를 사용하여 작업을 실행하는 워크플로우로 적용하는 방법을 배우십시오.
+잠시 휴식을 취한 다음 [파트 2](./02_single-sample.md)로 이동하여 동일한 명령을 컨테이너를 사용하여 작업을 실행하는 워크플로우로 적용하는 방법을 학습합니다.

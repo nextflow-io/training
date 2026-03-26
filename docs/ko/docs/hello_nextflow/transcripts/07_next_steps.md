@@ -1,6 +1,6 @@
 # 다음 단계 - 비디오 스크립트
 
-<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안하기](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
+<span class="ai-translation-notice">:material-information-outline:{ .ai-translation-notice-icon } AI 지원 번역 - [자세히 알아보기 및 개선 제안](https://github.com/nextflow-io/training/blob/master/TRANSLATING.md)</span>
 
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/wnmUAfDL01E?si=Lp8hS8RdaMwbp5j5&amp;list=PLPZ8WHdZGxmWKozQuzr27jyMGqp9kElVK&amp;cc_load_policy=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -40,7 +40,7 @@ Nextflow 사용을 확장함에 따라 Seqera Platform을 확인해 보세요. N
 
 Seqera Platform은 Batch Forge와 같은 기능으로 이러한 복잡한 클라우드 인프라 설정을 정말로 단순화합니다. Batch Forge는 환경을 자동으로 생성해 줍니다. 또한 관찰 가능성, 감사 로깅, 컴플라이언스에도 정말로 도움이 됩니다.
 
-Fusion과 같은 기술로 디스크 액세스와 데이터 전송을 최적화하여 파이프라인을 객관적으로 더 저렴하고 빠르게 실행할 수 있습니다. 또한 파이프라인 최적화를 통해 파이프라인의 구성이 가능한 한 최적으로 조정되도록 보장합니다.
+Fusion과 같은 기술로 디스크 액세스와 데이터 전송을 최적화하여 파이프라인을 객관적으로 더 저렴하고 빠르게 실행할 수 있습니다. 또한 파이프라인 최적화를 통해 파이프라인의 설정이 가능한 한 최적으로 조정되도록 보장합니다.
 
 파이프라인 실행 외에도 완전히 다른 기능들이 있습니다. 대화형 분석을 실행하고 사용자 정의 Docker 이미지에서 환경을 생성할 수 있는 Studios가 있습니다. 그리고 어디에 있든 다양한 파일 시스템을 탐색하는 데 도움이 되는 Data Explorer도 있습니다.
 
