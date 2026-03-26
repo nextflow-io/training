@@ -230,7 +230,7 @@ Compile the plugin and install it locally:
 make install
 ```
 
-`make install` compiles the plugin code and copies it to your local Nextflow plugin directory, making it available to use.
+`make install` compiles the plugin code and copies it to your local Nextflow plugin directory (`$NXF_HOME/plugins/`), making it available to use.
 
 ??? example "Build output"
 
