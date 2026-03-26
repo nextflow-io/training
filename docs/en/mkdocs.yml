@@ -64,14 +64,24 @@ nav:
   - Side Quests:
       - side_quests/index.md
       - side_quests/orientation.md
-      - side_quests/dev_environment.md
-      - side_quests/metadata.md
-      - side_quests/working_with_files.md
-      - side_quests/splitting_and_grouping.md
-      - side_quests/workflows_of_workflows.md
-      - side_quests/debugging.md
-      - side_quests/essential_scripting_patterns.md
-      - side_quests/nf-test.md
+      - side_quests/dev_environment/index.md
+      - side_quests/essential_scripting_patterns/index.md
+      - side_quests/metadata/index.md
+      - side_quests/splitting_and_grouping/index.md
+      - side_quests/nf_test/index.md
+      - side_quests/workflows_of_workflows/index.md
+      - side_quests/working_with_files/index.md
+      - side_quests/debugging/index.md
+      - Plugin Development:
+          - side_quests/plugin_development/index.md
+          - side_quests/plugin_development/01_plugin_basics.md
+          - side_quests/plugin_development/02_create_project.md
+          - side_quests/plugin_development/03_custom_functions.md
+          - side_quests/plugin_development/04_build_and_test.md
+          - side_quests/plugin_development/05_observers.md
+          - side_quests/plugin_development/06_configuration.md
+          - side_quests/plugin_development/summary.md
+          - side_quests/plugin_development/next_steps.md
   - Training Collections:
       - training_collections/index.md
       - training_collections/architects_toolkit_1.md
@@ -267,6 +277,7 @@ plugins:
         - nf4_science/rnaseq/*.md
         - nf4_science/imaging/*.md
         - side_quests/*.md
+        - side_quests/**/*.md
         - training_collections/index.md
         - training_collections/advanced_workflow_development/index.md
 
